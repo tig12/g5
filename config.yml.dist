@@ -1,0 +1,13 @@
+
+# Configuration directives used to retrieve Gauquelin data (5th edition) from cura.free.fr
+
+
+# Source directory
+# Absolute path to directory containing the html pages, as retrieved without modification from cura.free.fr
+source-dir: /path/to/html/pages
+
+
+# Output directory
+# Absolute path to directory containing the generated csv files
+dest-dir: /path/to/generated/csv/files
+

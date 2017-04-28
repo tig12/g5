@@ -1,0 +1,5 @@
+
+- Files sf*.php retrieved from http://components.symfony-project.org/yaml/
+2010-10-12 ; fabpot-yaml-da53851
+
+- Yaml.php : wrapper (façade) used
