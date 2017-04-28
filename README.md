@@ -21,15 +21,18 @@ The following remarks apply to all generated files
 - The first line contains field names ; other lines contain data.
 
 The following fields are common to several series :
-    NUM         | Original NUM record number coming from cura.free.fr
-    NAME        | 
-    DATE        | ISO 8601 of this form : YYYY-MM-DD HH:MM:SSsHH:MM (timezone offset is included)
-    PLACE       | 
-    COUNTRY     | ISO 3166 2 letters format
-    COD         | Administrative division (département in France ; equivalent of ADM2 in geonames.org)
-    LON         | In decimal degrees
-    LAT         | In decimal degrees
-    PROFESSION  | 
+
+|             |                                                                                         |
+|-------------|-----------------------------------------------------------------------------------------|
+| NUM         | Original NUM record number coming from cura.free.fr                                     |
+| NAME        |                                                                                         |
+| DATE        | ISO 8601 of this form : YYYY-MM-DD HH:MM:SSsHH:MM (timezone offset is included)         |
+| PLACE       |                                                                                         |
+| COUNTRY     | ISO 3166 2 letters format                                                               |
+| COD         | Administrative division (département in France ; equivalent of ADM2 in geonames.org)    |
+| LON         | In decimal degrees                                                                      |
+| LAT         | In decimal degrees                                                                      |
+| PROFESSION  |                                                                                         | 
 
 
 <h3>Series A</h3>
