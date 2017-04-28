@@ -26,7 +26,7 @@ Decision : use 902gdN.html (contain the same nb of names as in *y.html files)
 
 define('DS', DIRECTORY_SEPARATOR);
 
-require_once '../init/init.php';
+require_once '../src/init/init.php';
 
 use gauquelin5\Names;
 
@@ -38,6 +38,7 @@ try{
     }
     
     ksort($names);
+    echo "Number of ames in the different files\n";
     foreach($names as $k => $v){
         echo $k . ' : ' . count($v) . "\n";
     }

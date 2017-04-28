@@ -1,24 +1,20 @@
 
-This code permits to convert html pages containing Gauquelin data to csv files.
+This code converts Gauquelin data to csv files.  
+Concerns the version 5 of C.U.R.A Gauquelin archives, available at <a href="http://cura.free.fr/gauq/17archg.html">http://cura.free.fr/gauq/17archg.html</a>
 
-The html pages contain the 5th version of Gauquelin data, and were retrieved from <a href="http://cura.free.fr/gauq/17archg.html">http://cura.free.fr/gauq/17archg.html</a>, 2017-04-26, with the following command :
-<code>wget --mirror --wait 1 --page-requisites --cut-dirs=1 --relative --no-parent -A '902gd*.html' --no-host-directories http://cura.free.fr/gauq/17archg.html</code>
-
-This code has been tested on linux (ubuntu 14.4) with php 7.1
-
-File <code>htlm-raw.zip</code> contains the copy of the pages parsed by this code (further modifications of the pages may introduce bugs in the code).
+Code developed on linux (ubuntu 14.4) with php 7.1  
+Works with data retrieved on 2017-04-26
 
 <h2>usage</h2>
+- Copy the html pages containing the data on your local machine (you can use for example script <code>tools/get-data</code>)
 - Copy <code>config.yml.dist</code> to <code>config.yml</code> and adapt the values of <code>source-dir</code> and <code>ouptut-dir</code>
-- Go to the directory this <code>README</code> and run :
+- Go to the directory containing this <code>README</code> and run :
 <pre>php run.php</pre>
 - Follow the instructions
 
-<h2>Notes on the generated files</h2>
+<h2>Notes on the generated csv files</h2>
 
-The following remarks apply to all generated files
-
-- The first line contains field names ; other lines contain data.
+In all generated csv files, the first line contains field names ; other lines contain data.
 
 The following fields are common to several series :
 
@@ -35,7 +31,7 @@ The following fields are common to several series :
 | PROFESSION  |                                                                                         | 
 
 
-<h3>Series A</h3>
+<h3>Serie A</h3>
 
 
 

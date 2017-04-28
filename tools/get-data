@@ -1,0 +1,4 @@
+
+# download Gauquelin data on local machine
+
+wget --mirror --wait 1 --page-requisites --cut-dirs=1 --relative --no-parent -A '902gd*.html' --no-host-directories http://cura.free.fr/gauq/17archg.html
