@@ -3,7 +3,7 @@
     CLI (command line interface) management of Gauquelin 5 import
     
     @license    GPL
-    @copyright  jetheme.org
+    @copyright  Thierry Graff
     @history    2017-04-26 12:18:30+02:00, Thierry Graff : creation
 ********************************************************************************/
 

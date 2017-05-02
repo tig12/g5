@@ -55,11 +55,11 @@ class SerieD10{
             'NAME',
             'DATE',
             'PLACE',
-            'COUNTRY',
+            'COU',
             'COD',
             'LON',
             'LAT',
-            'PROFESSION',
+            'PRO',
         ];
         $csv = implode(Gauquelin5::CSV_SEP, $fieldnames) . "\n";
         $lines = explode("\n", $m[2]);
@@ -92,12 +92,12 @@ if($cur[6] == '-----'){
             // place
             $tmp = explode(',', $cur[10]);
             $new['PLACE'] = trim($tmp[0]);
-            $new['COUNTRY'] = self::COUNTRY;
+            $new['COU'] = self::COUNTRY;
             $new['COD'] = trim($tmp[1]);
             $new['LON'] = Gauquelin5::computeLg($cur[9]);
             $new['LAT'] = Gauquelin5::computeLat($cur[8]);
             // @todo link to geonames
-            $new['PROFESSION'] = self::compute_profession($cur[2]);
+            $new['PRO'] = self::compute_profession($cur[2]);
             $csv .= implode(Gauquelin5::CSV_SEP, $new) . "\n";
             $nb_stored ++;
         }

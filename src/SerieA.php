@@ -222,11 +222,11 @@ class SerieA{
             'NAME',
             'DATE',
             'PLACE',
-            'COUNTRY',
+            'COU',
             'COD',
             'LON',
             'LAT',
-            'PROFESSION',
+            'PRO',
         ];
         $csv = implode(Gauquelin5::CSV_SEP, $fieldnames) . "\n";
         foreach($res as $cur){
@@ -244,12 +244,12 @@ class SerieA{
             $new['DATE'] = "$day $hour$timezone";
             // place
             $new['PLACE'] = trim($cur['CITY']);
-            $new['COUNTRY'] = self::COUNTRIES[$cur['COU']];
+            $new['COU'] = self::COUNTRIES[$cur['COU']];
             $new['COD'] = trim($cur['COD']);
             $new['LON'] = Gauquelin5::computeLg($cur['LON']);
             $new['LAT'] = Gauquelin5::computeLat($cur['LAT']);
             // @todo link to geonames
-            $new['PROFESSION'] = self::compute_profession($serie, $cur['PRO'], $new['NUM']);
+            $new['PRO'] = self::compute_profession($serie, $cur['PRO'], $new['NUM']);
             $csv .= implode(Gauquelin5::CSV_SEP, $new) . "\n";
             $nb_stored ++;
         }

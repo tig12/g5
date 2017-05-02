@@ -41,7 +41,7 @@ class Gauquelin5{
         'D9c',
         'D10' => 'SerieD10',
         //
-        'E1',
+        'E1' => 'SerieE1_E3',
         //
         'E2',
         'E2a',
@@ -52,7 +52,7 @@ class Gauquelin5{
         'E2f',
         'E2g',
         //
-        'E3',
+        'E3' => 'SerieE1_E3',
         'F1',
         'F2',
     ];
