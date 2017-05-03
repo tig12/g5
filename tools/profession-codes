@@ -1,0 +1,59 @@
+#
+# File used to generate code related to profession
+# format : blank lines and lines starting by a # are ignored
+# other lines are treated like a csv 
+#
+
+
+# General categories
+AR;Artiste;Artist
+EX;Dirigeant;Executive
+JO;Journaliste;Journalist
+MI;Militaire;Military
+PH;Médecin;Physician
+PO;Politicien;Politician
+SC;Scientifique;Scientist
+SP;Sportif;Sport champion
+WR;Ecrivain;Writer
+XX;Divers;Various
+
+# sub-category - artists
+ACT;Acteur;Actor
+CAR;Réalisateur de dessins animés;Cartoonist
+CMB;Chef d'orchestre militaire;Conductor of military band
+DAN;Danseur;Dancer
+MUS;Musicien;Musician
+OPE;Chanteur d'opéra;Opera singer
+PAI;Peintre;Painter
+PHO;Photographe;Photographer
+
+# sub-category - sports
+ATH;Athlétisme;Athletism
+AUT;Auto-moto;Auto-moto
+AVI;Aviation;Aviation
+AVR;Aviron;Rowing
+BAS;Basketball;Basketball
+BIL;Billard;Billard
+BOX;Boxe;Boxing
+CAN;Canoë-kayak;Canoe-kayak
+CYC;Cyclisme;Cyclism
+ESC;Escrime;Fencing
+FOO;Football;Football
+GOL;Golf;Golf
+GYM;Gymnastique;Gymnastic
+HAL;Haltérophilie;Weightlifting
+HAN;Handball;Handball
+HOC;Hockey;Hockey
+LUT;Lutte;Wrestling
+MAR;Marche;Walking
+NAT;Natation;Swimming
+PEL;Pelote basque;Pelote basque
+RUG;Rugby et Jeu à XIII;Rugby and Rugby league
+SKI;Ski;Ski
+EQU;Equitation;Equestrian
+GLA;Sports de glace;Bobsleigh and Skating
+TEN;Tennis;Tennis
+TIR;Tir;Shooting
+VOI;Voile;Sailing
+VOL;Volley ball;Volley ball
+

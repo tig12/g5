@@ -20,15 +20,15 @@ class SerieD10{
         Associations between profession codes and profession names
     **/
     const PROFESSIONS = [
-        'SP' => 'Sport Champion',
-        'MI' => 'Military Man',
-        'AC' => 'Actor',
-        'PO' => 'Politician',
-        'EX' => 'Executive',
-        'WR' => 'Writer',
-        'SC' => 'Scientist',
-        'AR' => 'Artist',
-        'X'  => 'Various', 
+        'SP' => 'SP',
+        'MI' => 'MI',
+        'AC' => 'ACT',
+        'PO' => 'PO',
+        'EX' => 'EX',
+        'WR' => 'WR',
+        'SC' => 'SC',
+        'AR' => 'AR',
+        'X'  => 'XX', 
     ];
     
     // *****************************************

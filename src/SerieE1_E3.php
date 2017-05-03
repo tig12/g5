@@ -24,24 +24,24 @@ class SerieE1_E3{
     **/
     const PROFESSIONS = [
         'E1' => [
-            'PH' => 'Physician',
-            'MI' => 'Military Man',
-            'EX' => 'Top Executive',
-            'PH,EX' => 'Physician, Top Executive',
-            'MI,PH' => 'Military Man, Physician',
-            'MI,EX' => 'Military Man, Top Executive',
+            'PH' => 'PH',
+            'MI' => 'MI',
+            'EX' => 'EX',
+            'PH,EX' => 'PH+EX',
+            'MI,PH' => 'MI+PH',
+            'MI,EX' => 'MI+EX',
         ],
         'E3' => [
-            'PO' => 'Politician',
-            'JO' => 'Journalist',
-            'WR' => 'Writer',
-            'AC' => 'Actor', // [including Pop Singers]
-            'PAI' => 'Painter', // [including 1 sculptor]
-            'MUS' => 'Musician',
-            'OPE' => 'Opera Singer',
-            'CAR' => 'Cartoonist',
-            'DAN' => 'Dancer',
-            'PHO' => 'Photographer',
+            'PO' => 'PO',
+            'JO' => 'JO',
+            'WR' => 'WR',
+            'AC' => 'AC', // [including Pop Singers]
+            'PAI' => 'PAI', // [including 1 sculptor]
+            'MUS' => 'MUS',
+            'OPE' => 'OPE',
+            'CAR' => 'CAR',
+            'DAN' => 'DAN',
+            'PHO' => 'PHO',
         ],
     ];
     

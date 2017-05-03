@@ -15,16 +15,18 @@ use gauquelin5\init\Config;
 class SerieA{
     
     /**
-        Associations between profession codes and profession names for the different files of Series A
+        Associations between profession codes used in the cura html files
+        and profession codes used in the generated csv files
+        for the different files of Series A.
         These associations are used when no further details are provided
     **/
     const PROFESSIONS_NO_DETAILS = [
-        'A1' => ['C' => 'Sport Champion'],
-        'A2' => ['S' => 'Scientist'],
-        'A3' => ['M' => 'Military man'],
-        'A4' => ['P' => 'Painter', 'M' => 'Musician'],
-        'A5' => ['A' => 'Actor', 'PT' => 'Politician'],
-        'A6' => ['W' => 'Writer', 'J' => 'Journalist'], 
+        'A1' => ['C' => 'SP'],
+        'A2' => ['S' => 'SC'],
+        'A3' => ['M' => 'MI'],
+        'A4' => ['P' => 'PAI', 'M' => 'MUS'],
+        'A5' => ['A' => 'ACT', 'PT' => 'PO'],
+        'A6' => ['W' => 'WR', 'J' => 'JO'], 
     ];
     
     /** 
@@ -33,48 +35,48 @@ class SerieA{
     **/
     const PROFESSIONS_DETAILS = [
         'A1' => [
-            ['Athlétisme', 1, 86],
-            ['Auto-moto', 87, 122],
-            ['Avion (Aviation)', 123, 514],
-            ['Aviron (Rowing)', 515, 522],
-            ['Basketball', 523, 555],
-            ['Billard', 556, 564],
-            ['Boxe', 565, 768],
-            ['Canoe-kayak', 769, 769],
-            ['Cyclisme', 770, 1226],
-            ['Escrime (Fencing)', 1227, 1242],
-            ['Football', 1243, 1690],
-            ['Golf', 1691, 1698],
-            ['Gymnastique', 1699, 1710],
-            ['Haltérophilie (Weightlifting)', 1711, 1726],
-            ['Handball', 1727, 1730],
-            ['Hockey', 1731, 1741],
-            ['Lutte (Wrestling)', 1742, 1751],
-            ['Marche (Walking)', 1752, 1757],
-            ['Natation (Swimming)', 1758, 1784],
-            ['Pelote basque', 1785, 1802],
-            ['Rugby et Jeu à XIII', 1803, 2009],
-            ['Ski', 2010, 2026],
-            ['Sports équestres (Equestrian)', 2027, 2037],
-            ['Sports de glace (Bobsleigh and Skating)', 2038, 2040],
-            ['Tennis', 2041, 2075],
-            ['Tir (Shooting)', 2076, 2085],
-            ['Voile (Sailing)', 2086, 2088],
-            ['Volley ball', 2089, 2089],
+            ['ATH', 1, 86],
+            ['AUT', 87, 122],
+            ['AVI', 123, 514],
+            ['AVR', 515, 522],
+            ['BAS', 523, 555],
+            ['BIL', 556, 564],
+            ['BOX', 565, 768],
+            ['CAN', 769, 769],
+            ['CYC', 770, 1226],
+            ['ESC', 1227, 1242],
+            ['FOO', 1243, 1690],
+            ['GOL', 1691, 1698],
+            ['GYM', 1699, 1710],
+            ['HAL', 1711, 1726],
+            ['HAN', 1727, 1730],
+            ['HOC', 1731, 1741],
+            ['LUT', 1742, 1751],
+            ['MAR', 1752, 1757],
+            ['NAT', 1758, 1784],
+            ['PEL', 1785, 1802],
+            ['RUG', 1803, 2009],
+            ['SKI', 2010, 2026],
+            ['EQU', 2027, 2037],
+            ['GLA', 2038, 2040],
+            ['TEN', 2041, 2075],
+            ['TIR', 2076, 2085],
+            ['VOI', 2086, 2088],
+            ['VOL', 2089, 2089],
         ],
         'A2' => [
-            ['Physician', 1, 2552],
-            ['Scientist', 2553, 3647], 
+            ['PH', 1, 2552],
+            ['SC', 2553, 3647], 
         ],
         // nothing for A3
         'A4' => [
-            ['Painters, and some architects, engravers, sculptors, etc', 1, 1473],
-            ['Musician', 1474, 2339],
+            ['AR', 1, 1473],
+            ['MUS', 1474, 2339],
             ['Conductors of military band', 2340, 2722] 
         ],
         'A5' => [
-            ['Actor', 1, 1409],
-            ['Politician', 1410, 2412],
+            ['ACT', 1, 1409],
+            ['PO', 1410, 2412],
         ],
         // nothing for a6
     ];
