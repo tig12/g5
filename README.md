@@ -47,6 +47,12 @@ The following fields are common to several series :
         </td>
     </tr>
     <tr>
+        <td style="vertical-align:top;">PRO</td>
+        <td style="vertical-align:top;">
+            Profession code, see list below
+        </td>
+    </tr>
+    <tr>
         <td style="vertical-align:top;">DATE</td>
         <td style="vertical-align:top;">
             ISO 8601 of this form : YYYY-MM-DD HH:MM:SSsHH:MM (timezone offset is included)
@@ -81,12 +87,6 @@ The following fields are common to several series :
         <td style="vertical-align:top;">LAT</td>
         <td style="vertical-align:top;">
             Latitude in decimal degrees
-        </td>
-    </tr>
-    <tr>
-        <td style="vertical-align:top;">PRO</td>
-        <td style="vertical-align:top;">
-            Profession code, see list below
         </td>
     </tr>
 </table>

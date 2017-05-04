@@ -72,7 +72,7 @@ class SerieA{
         'A4' => [
             ['AR', 1, 1473],
             ['MUS', 1474, 2339],
-            ['Conductors of military band', 2340, 2722] 
+            ['CMB', 2340, 2722] 
         ],
         'A5' => [
             ['ACT', 1, 1409],
@@ -230,19 +230,20 @@ class SerieA{
         $fieldnames = [
             'NUM',
             'NAME',
+            'PRO',
             'DATE',
             'PLACE',
             'COU',
             'COD',
             'LON',
             'LAT',
-            'PRO',
         ];
         $csv = implode(Gauquelin5::CSV_SEP, $fieldnames) . "\n";
         foreach($res as $cur){
             $new = [];
             $new['NUM'] = trim($cur['NUM']);
             $new['NAME'] = trim($cur['NAME']);
+            $new['PRO'] = self::compute_profession($serie, $cur['PRO'], $new['NUM']);
             // date time
             $day = Gauquelin5::computeDay($cur);
             $hour = Gauquelin5::computeHour($cur);
@@ -260,10 +261,41 @@ class SerieA{
                 $new['COU'] = 'DZ';
                 $new['COD'] = '';
             }
+            else if($new['COU'] == 'FR' && $new['COD'] == 'MON'){
+                $new['COU'] = 'MC';
+                $new['COD'] = '';
+            }
+            else if($new['COU'] == 'FR' && $new['COD'] == 'BEL'){
+                $new['COU'] = 'BE';
+                $new['COD'] = '';
+            }
+            else if($new['COU'] == 'FR' && $new['COD'] == 'B'){
+                $new['COU'] = 'BE';
+                $new['COD'] = '';
+            }
+            else if($new['COU'] == 'FR' && $new['COD'] == 'SCHW'){
+                $new['COU'] = 'CH';
+                $new['COD'] = '';
+            }
+            else if($new['COU'] == 'FR' && $new['COD'] == 'G'){
+                $new['COU'] = 'DE';
+                $new['COD'] = '';
+            }
+            else if($new['COU'] == 'FR' && $new['COD'] == 'ESP'){
+                $new['COU'] = 'ES';
+                $new['COD'] = '';
+            }
+            else if($new['COU'] == 'FR' && $new['COD'] == 'I'){
+                $new['COU'] = 'IT';
+                $new['COD'] = '';
+            }
+            else if($new['COU'] == 'FR' && $new['COD'] == 'N'){
+                $new['COU'] = 'NL';
+                $new['COD'] = '';
+            }
             $new['LON'] = Gauquelin5::computeLg($cur['LON']);
-            $new['LAT'] = Gauquelin5::computeLat($cur['LAT']);
+            $new['LAT'] = Gauquelin5::computeLat($cur['LAT']);                             
             // @todo link to geonames
-            $new['PRO'] = self::compute_profession($serie, $cur['PRO'], $new['NUM']);
             $csv .= implode(Gauquelin5::CSV_SEP, $new) . "\n";
             $nb_stored ++;
         }
