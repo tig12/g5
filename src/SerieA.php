@@ -143,7 +143,8 @@ class SerieA{
         // 3 - merge res1 and res2
         //
         $res = []; // merge ok
-        $missing_in_names = [];
+        $n_ok = 0;
+        $missing_in_names = [];         //
         $doublons_same_nb = [];         // multiple persons born the same day ; same nb of persons in list 1 and list 2
         $doublons_different_nb = [];    // multiple persons born the same day ; different nb of persons in list 1 and list 2
         foreach($res1 as $day1 => $array1){
@@ -152,7 +153,7 @@ class SerieA{
                 foreach($array1 as $tmp){
                     $missing_in_names[] = implode("\t", $tmp);
                     // store in $res with fabricated name
-                    $tmp['NAME'] = "Gauquelin-$serie " . $tmp['NUM'];
+                    $tmp['NAME'] = self::compute_name($serie, $tmp['NUM']);
                     $res[] = $tmp;
                 }
                 continue;
@@ -163,7 +164,7 @@ class SerieA{
                 // but different nb of elements => ambiguity
                 // store in $res with fabricated name
                 foreach($array1 as $tmp){
-                    $tmp['NAME'] = "gauquelin-$serie " . $tmp['NUM'];
+                    $tmp['NAME'] = self::compute_name($serie, $tmp['NUM']);
                     $res[] = $tmp;
                 }
                 $new_doublon = [$file_serie => [], $file_names => []];
@@ -183,12 +184,13 @@ class SerieA{
                     $tmp = $array1[0];
                     $tmp['NAME'] = $array2[0]['name'];
                     $res[] = $tmp;
+                    $n_ok++;
                 }
                 else{
                     // more than one persons share the same birth date => ambiguity
                     // store in $res with fabricated name
                     foreach($array1 as $tmp){
-                        $tmp['NAME'] = "gauquelin-$serie " . $tmp['NUM'];
+                        $tmp['NAME'] = self::compute_name($serie, $tmp['NUM']);
                         $res[] = $tmp;
                     }
                     // fill $doublons_same_nb with all candidate lines
@@ -204,14 +206,20 @@ class SerieA{
             }
         }
         $res = \lib::sortByKey($res, 'NUM');
-        $report .= "nb in $file_serie : " . count($lines1) . "\nnb in $file_names : " . count($names) . "\n";
-        $report .= "Dates missing in $file_names : " . count($missing_in_names) . "\n";
+        $n1 = count($missing_in_names);
+        $n2 = count($doublons_same_nb);
+        $n3 = count($doublons_different_nb);
+        $n_bad = $n1 + $n2 + $n3;
+        $percent_ok = round($n_ok * 100 / count($lines1), 2);
+        $report .= "nb in list1 ($file_serie) : " . count($lines1) . " - nb in list2 ($file_names) : " . count($names) . "\n";
+        $report .= "case 1 : dates present in $file_serie and missing in $file_names : $n1\n";
         //$report .=  print_r($missing_in_names, true) . "\n";
-        $report .= "Date ambiguities with same nb : " . count($doublons_same_nb) . "\n";
+        $report .= "case 2 : date ambiguities with same nb : $n2\n";
         //$report .= print_r($doublons_same_nb, true) . "\n";
-        $report .= "Date ambiguities with different nb : " . count($doublons_different_nb) . "\n";
+        $report .= "case 3 : date ambiguities with different nb : $n3\n";
         //$report .= print_r($doublons_different_nb, true) . "\n";
-        $report .= "nb OK (match without ambiguity) : " . count($res) . "\n";
+        $report .= "total NOT ok : $n_bad\n";
+        $report .= "nb OK (match without ambiguity) : $n_ok ($percent_ok %)\n";
 //return $report;
         //
         // 4 - store result
@@ -240,7 +248,7 @@ class SerieA{
             $hour = Gauquelin5::computeHour($cur);
             $TZ = trim($cur['TZ']);
             if($TZ != 0 && $TZ != -1){
-                throw new Exception("timezone not handled : $TZ");
+                throw new \Exception("timezone not handled : $TZ");
             }
             $timezone = $TZ == 0 ? '+00:00' : '-01:00';
             $new['DATE'] = "$day $hour$timezone";
@@ -257,14 +265,13 @@ class SerieA{
         }
         $csvfile = Config::$data['dest-dir'] . DS . $serie . '.csv';
         file_put_contents($csvfile, $csv);
-        $report .= $nb_stored . " lines stored in $csvfile\n";
         return $report;
     }
     
     
     // ******************************************************
     /** 
-        Compute precise profession when possible
+        Computes precise profession when possible
         First compute not-detailed profession from $pro
         Then computes precise profession from $num, if possible
         Auxiliary of import()
@@ -282,6 +289,16 @@ class SerieA{
             }
         }
         return $res;
+    }
+    
+    
+    // ******************************************************
+    /** 
+        Computes missing names
+        Auxiliary of import()
+    **/
+    private static function compute_name($serie, $num){
+        return "Gauquelin-$serie-$num";
     }
     
     

@@ -5,9 +5,12 @@
     Utilities to match place names to geonames entities
     
     @license    GPL
-    @copyright  jetheme.org
+    @copyright  Thierry Graff
     @history    2014-01-21 05:50:27+01:00, Thierry Graff : Creation 
+    @history    2017-05-04 10:31:00+02:00, Thierry Graff : Adaptation for autonom use 
 ********************************************************************************/
+
+use gauquelin5\init\Config;
 
 class Geonames{
     
@@ -19,8 +22,14 @@ class Geonames{
     // ******************************************************
     public static function compute_dblink(){
         if(is_null(self::$dblink)){
-            $dbparams = Storage::get_dbparams('default', self::DBNAME);
-            self::$dblink = Storage::createDataDBLink('default', $dbparams);
+            $host = Config::$data['postgresql']['dbhost'];
+            $port = Config::$data['postgresql']['dbport'];
+            $user = Config::$data['postgresql']['dbuser'];
+            $password = Config::$data['postgresql']['dbpassword'];
+            $dbname = Config::$data['postgresql']['dbname'];
+            $dsn = "pgsql:host=$host;port=$port;user=$user;password=$password;dbname=$dbname";
+            self::$dblink = new PDO($dsn);
+            self::$dblink->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
     }
     
@@ -50,7 +59,13 @@ class Geonames{
         for($i=0; $i < count($fields['countries']); $i++){
             $schema = strtolower($fields['countries'][$i]);
             try{
-                $matches = self::$dblink->get("$schema.cities", array('fields'=>'geoid,name,slug,admin2_code,longitude,latitude,timezone', 'where'=>$where));
+                $query = "select geoid,name,slug,admin2_code,longitude,latitude,timezone from $schema.cities where $where";
+                $rst = self::$dblink->prepare($query);
+                $rst->execute();
+                if($rst->rowCount() == 0){
+                    return [];
+                }
+                return $rst->fetchAll(PDO::FETCH_ASSOC);
             }
             catch(Exception $e){
                 // silently pass the fact that a country is not available

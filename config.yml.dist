@@ -13,3 +13,12 @@ dest-dir: /path/to/generated/csv/files
 # Possible values : true or false
 geonames: false
 
+# postgresql parameters - useful onmly if geonames = true
+postgresql: 
+  dbhost: localhost
+  dbport: 5432
+  dbuser: my_postgres_user
+  dbpassword: my_postgres_password
+  dbname: my_postgres_database
+  dbname: geo
+

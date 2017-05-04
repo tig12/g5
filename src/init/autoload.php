@@ -1,4 +1,5 @@
 <?php
+
 /** 
     PSR-4 autoload for namespace gauquelin5
     
@@ -15,6 +16,25 @@ spl_autoload_register(
         $classname = str_replace('\\', DS, $classname);
         $filename = $root_dir . DS . $classname . '.php';
         require_once $filename;
+    }
+);
+
+/** 
+    Autoload for classes without namespace, located in lib/
+    
+    @history    2017-05-04 10:04:59+02:00, Thierry Graff : Creation 
+**/
+spl_autoload_register(
+    function ($classname){
+        $root_dir = dirname(__DIR__);
+        $filename = $root_dir . DS . 'lib' . DS . $classname . '.php';
+        if(is_file($filename)){
+            require_once $filename;
+        }
+        $filename = $root_dir . DS . 'lib' . DS . 'yaml' . DS . $classname . '.php';
+        if(is_file($filename)){
+            require_once $filename;
+        }
     }
 );
 

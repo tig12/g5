@@ -62,12 +62,12 @@ class SerieE1_E3{
         //
         // parse first list (with birth date and place)
         //
+        $res1 = [];
         $raw = Gauquelin5::readHtmlFile($serie);
         preg_match('#<pre>\s*(NUM.*?COD)\s*(.*?)\s*</pre>#sm', $raw, $m);
         if(count($m) != 3){
-            throw new Exception($serie . " - Unable to parse $file - first list");
+            throw new \Exception($serie . " - Unable to parse $file - first list");
         }
-        $res1 = [];
         $lines = explode("\n", $m[2]);
         // to fix typos : O are replaced by zero ; A by 3 ; S by 5, G by 6 ; B by 8
         $fix_names = ['0'=>'O', '3'=>'A', '5'=>'S', '6'=>'G', '8'=>'B'];
@@ -75,7 +75,7 @@ class SerieE1_E3{
             self::$n_total++;
             $new = [];
             $new['NUM'] = trim(substr($line, 0, 5));
-            $new['PRO'] = trim(substr($line, 8, 5));
+            $new['PRO'] = self::PROFESSIONS[$serie][trim(substr($line, 8, 5))];
             $new['NOTE'] = trim(substr($line, 14, 2)); // L * + -
             $name = trim(substr($line, 17, 30));
             $new['NAME'] = strtr($name, $fix_names);
@@ -100,12 +100,15 @@ class SerieE1_E3{
                 [$geoid, $lg, $lat] = ['2960316', '6.13', '49.61167'];
             }
             else{
-                [$geoid, $lg, $lat] = self::matchFrenchPlace($place_name, $dept);
+                [$geoid, $tmp_place_name, $lg, $lat] = self::matchFrenchPlace($place_name, $dept);
+                if($tmp_place_name != ''){
+                    $place_name = $tmp_place_name; // replace original name by geoid name (in general better spelled)
+                }
             }
             if($lg){ // if longitude is known
-                list($offset, $err) = \Timezones::offset_fr($date, $lg, $dept);
+                list($offset, $err) = \FrenchTimezone::offset_fr($date, $lg, $dept);
                 if($err){
-                    $report .= "$err\n";
+//                    $report .= "$err\n";
                     self::$n_missing_timezone++;
                 }
                 else{
@@ -118,24 +121,23 @@ class SerieE1_E3{
             $new['LAT'] = $lat;
             $new['COD'] = $dept;
             $new['COU'] = $country;
-echo "\n<pre>"; print_r($new); echo "</pre>"; exit;
+            $new['GEOID'] = $geoid;
             $res1[$new['NUM']] = $new;
         }
-exit;
         $report .= self::$n_total  . " lines parsed\n";
         $report .= self::$n_missing_places . " places not matched\n";
         $report .= self::$n_missing_timezone . " timezone offsets not computed\n";
         $remain = self::$n_total - self::$n_missing_places - self::$n_missing_timezone;
-        $report .= "<b>$remain persons stored precisely</b>\n";
+        $report .= "$remain persons stored precisely\n";
         //
         // parse the second list (with sectors)
         //
+        $res2 = [];
         preg_match('#<div id="contenu"><pre>\s*(NUM.*?NAME)\s*(.*?)\s*</pre>.*?<div id="contenu2"><pre>\s*(NUM.*?NAME)\s*(.*?)\s*</pre>#sm', $raw, $m);
         if(count($m) != 5){
-            throw new Exception($file_info . " - Unable to parse second list");
+            throw new \Exception($file_info . " - Unable to parse second list");
         }
         $raw = $m[2] . "\n" . $m[4];
-        $res2 = [];
         $lines = explode("\n", $raw);
         foreach($lines as $line){
             $current = [];
@@ -148,7 +150,7 @@ exit;
             if(strlen($tmp[1]) != 2 || strlen($tmp[2]) != 2 || strlen($tmp[3]) != 2 || strlen($tmp[4]) != 2 || strlen($tmp[5]) != 2){
                 if($num != '0517'){ // bug in the page for 517
                     echo "\n<pre>"; print_r($tmp); echo "</pre>";
-                    throw new Exception($file_info . " - list 2 - line not parsed <br/>$line");
+                    throw new \Exception($file_info . " - list 2 - line not parsed <br/>$line");
                 }
             }
             $current['MO'] = $tmp[1];
@@ -163,50 +165,47 @@ exit;
         // merge the 2 lists
         //
         if(count($res1) != count($res2)){
-            throw new Exception('The 2 lists are different : count($res1) = ' . count($res1) . ' ; count($res2) = ' . count($res2));
+            throw new \Exception('The 2 lists are different : count($res1) = ' . count($res1) . ' ; count($res2) = ' . count($res2));
         }
         foreach($res1 as $num1 => $fields1){
             if(!isset($res2[$num1])){
-                throw new Exception("<br/>missing $num1 in \$res2");
+                throw new \Exception("<br/>missing $num1 in \$res2");
             }
             // complete $res1 with sector names
-            $res1[$num1]['sectors'] = [
-                'MO' => $res2[$num1]['MO'],
-                'VE' => $res2[$num1]['VE'],
-                'MA' => $res2[$num1]['MA'],
-                'JU' => $res2[$num1]['JU'],
-                'SA' => $res2[$num1]['SA'],
-            ];
+            $res1[$num1]['MO'] = $res2[$num1]['MO'];
+            $res1[$num1]['VE'] = $res2[$num1]['VE'];
+            $res1[$num1]['MA'] = $res2[$num1]['MA'];
+            $res1[$num1]['JU'] = $res2[$num1]['JU'];
+            $res1[$num1]['SA'] = $res2[$num1]['SA'];
         }
-        try{
-            //
-            // Store res1 in destination table
-            //
-            Gauquelin5::$dblink->table_drop_if_exists($table);
-            Gauquelin5::$dblink->table_create($table);
-            $infosource = Gauquelin5::compute_default_infosource($params['serie'], $file_info);
-            $privacy = Gauquelin5::compute_default_privacy();
-            Gauquelin5::$dblink->beginTransaction();
-            Gauquelin5::$dblink->set($table, $infosource);
-            Gauquelin5::$dblink->set($table, $privacy);
-            $nb_stored_persons = 0;
-            foreach($res1 as $num => $fields){
-                $nb_stored_persons += Gauquelin5::$dblink->set($table, $fields); // HERE store person
-            }
-            $report .= "Stored $nb_stored_persons persons\n";
-            $report .= Gauquelin5::create_group(array_merge($params, ['table' => $table, 'count' => $nb_stored_persons]));
-            Gauquelin5::$dblink->commit();
-        }
-        catch(Exception $e){
-            $report .= "PROBLEM DURING IMPORT - database was NOT modified\n";
-            $report .= $e->getMessage() . "\n";
-            $report .= $e->getFile() . ' - ' . $e->getLine() . "\n";
-            $report .= $e->getTraceAsString() . "\n";
-            Gauquelin5::$dblink->rollback();
-        }
-        // fill slugindex
-        Gauquelin5::$dblink->index_entity_table($table);
         //
+        // store in destination csv file
+        //
+        $res1 = \lib::sortByKey($res1, 'NUM');
+        $fieldnames = [
+            'NUM',
+            'PRO',
+            'NOTE',
+            'NAME',
+            'DATE',
+            'PLACE',
+            'LON',
+            'LAT',
+            'COD',
+            'COU',
+            'GEOID',
+            'MO',
+            'VE',
+            'MA',
+            'JU',
+            'SA',
+        ];
+        $csv = implode(Gauquelin5::CSV_SEP, $fieldnames) . "\n";
+        foreach($res1 as $fields){
+            $csv .= implode(Gauquelin5::CSV_SEP, $fields) . "\n";
+        }
+        $csvfile = Config::$data['dest-dir'] . DS . $serie . '.csv';
+        file_put_contents($csvfile, $csv);
         return $report;
     }
     
@@ -217,9 +216,10 @@ exit;
         @param  $name string Name of a place
         @return array of 3 elements :
                     geoid (= geonames.org id)
+                    name
                     lg
                     lat
-                Or an array containing 3 empty strings for elements that could not be computed
+                Or an array containing 4 empty strings for elements that could not be computed
     **/
     public static function matchFrenchPlace($name, $dept){
         $name = preg_replace('/(.*?)\b[Ss]t\b(.*?)/', '$1saint$2', $name);
@@ -266,14 +266,15 @@ exit;
         ]);
         if($geonames){
             return [
-                $geonames['geoid'],
-                $geonames['lg'],
-                $geonames['lat'],
+                $geonames[0]['geoid'],
+                $geonames[0]['name'],
+                $geonames[0]['longitude'],
+                $geonames[0]['latitude'],
             ];
         }
         // not matched
         self::$n_missing_places++;
-        return ['', '', ''];
+        return ['', '', '', ''];
     }
     
     

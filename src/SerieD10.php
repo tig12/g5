@@ -44,7 +44,7 @@ class SerieD10{
         $file_serie = Gauquelin5::serie2filename($serie);
         preg_match('#<pre>\s*(NUM.*?CICO)\s*(.*?)\s*</pre>#sm', $raw, $m);
         if(count($m) != 3){
-            throw new \Exception("Unable to parse first list (without names) in " . $file_serie);
+            throw new \Exception("Unable to parse list in " . $file_serie);
         }
         $fieldnames = preg_split('/\s+/', $m[1]);
         $nb_stored = 0;

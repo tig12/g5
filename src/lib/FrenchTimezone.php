@@ -3,11 +3,12 @@
 // http://www.gnu.org/copyleft/gpl.html
 /********************************************************************************
     
-    Timezone matters that are not covered by php
+    Timezone matters specific to France that are not covered by php
     
     @license    GPL
-    @copyright  jetheme.org
+    @copyright  Thierry Graff
     @history    2017-01-03 00:09:55+01:00, Thierry Graff : Creation 
+    @history    2017-05-04 10:38:22+02:00, Thierry Graff : Adaptation for autonom use 
 ********************************************************************************/
 
 class FrenchTimezone{
@@ -49,21 +50,52 @@ class FrenchTimezone{
         if($date < '1891-03-15'){
             // hour = HLO, local hour at real sun
             $secs = 240 * $lg; // 240 = 3600 / 15 = nb of time seconds per longitude degrees
-            $hhmm = DateUtils::seconds2HHMMSS($secs, true);
+            $hhmm = self::seconds2HHMMSS($secs, true);
             $sign = $lg < 0 && $hhmm != '00:00' ? '-' : '+';
         }
         else{
             $tz = new DateTimeZone($zone);
             $dt = new DateTime($date);
             $offset = -$tz->getOffset($dt);
-            $hhmm = DateUtils::seconds2HHMMSS($offset, true);
+            $hhmm = self::seconds2HHMMSS($offset, true);
             $sign = $offset < 0 && $hhmm != '00:00' ? '-' : '+';
         }
         return [$sign . $hhmm, $err];
     }
     
     
+    // ******************************************************
+    /**
+        Converts a nb of seconds to a HH:MM:SS string
+        if the nb of second has a decimal part, it is included in the result (ex: 12:28:30.5847441)
+        If $secs < 0, its negative sign is ignored, treated as a positive number
+        @param  $sec a nb of seconds
+        @param  $roundToMinute boolean ; if true, a HH:MM string is returned
+    **/
+    private static function seconds2HHMMSS($sec, $roundToMinute=false){
+        $sec = abs($sec);
+        $h = floor($sec / 3600);
+        $remain = $sec - $h * 3600;
+        if($roundToMinute){
+            $m = round($remain / 60);
+            return self::addZeroes($h) . ':' . self::addZeroes($m);
+        }
+        $m = floor($remain / 60);
+        $s = $remain - $m * 60;
+        return self::addZeroes($h) . ':' . self::addZeroes($m) . ':' . self::addZeroes($s);
+    }
+    
+    
+    //***************************************************
+    /**
+        Formats a positive number, considered as a string.
+        Adds zeroes in front of $nb to get a string of length $size.
+        Ex : <code>addZeroes(92, 4)</code> returns "0092".
+    **/
+    private static function addZeroes($str, $size=2){
+        return str_pad($str, $size, '0', STR_PAD_LEFT);
+    }
+    
+    
 } // end class
-
-
 
