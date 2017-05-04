@@ -20,5 +20,4 @@ postgresql:
   dbuser: my_postgres_user
   dbpassword: my_postgres_password
   dbname: my_postgres_database
-  dbname: geo
 

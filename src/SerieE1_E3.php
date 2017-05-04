@@ -128,7 +128,8 @@ class SerieE1_E3{
         $report .= self::$n_missing_places . " places not matched\n";
         $report .= self::$n_missing_timezone . " timezone offsets not computed\n";
         $remain = self::$n_total - self::$n_missing_places - self::$n_missing_timezone;
-        $report .= "$remain persons stored precisely\n";
+        $percent = round($remain * 100 / self::$n_total, 2);
+        $report .= "$remain persons stored precisely ($percent %)\n";
         //
         // parse the second list (with sectors)
         //

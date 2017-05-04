@@ -91,6 +91,77 @@ class SerieA{
         'S' => 'CH',
     ];
     
+    /** 
+        Manual corrections : name matching added using lists published by Gauquelin in 1955
+        Asoociative array NUM => name
+    **/
+    const CORRECTIONS_1955 = [
+        'A2' => [
+            '13' => 'Arloing Fernand',
+            '36' => 'Bard Louis',
+            '44' => 'Baudoin Alphonse',
+            '51' => 'Bechamps Pierre',
+            '58' => 'Berard Leon',
+            '61' => 'Bergonie Jean',
+            '84' => 'Bonnet Amedee',
+            '85' => 'Boquel Andre',
+            '93' => 'Bougault Joseph',
+            '128' => 'Carlet Gaston',
+            '129' => 'Carnot Paul',
+            '131' => 'Castaigne Joseph',
+            '149' => 'Chassaignac Pierre',
+            '162' => 'Clémenceau Georges',
+            '167' => 'Colin Léon',
+            '181' => 'Couvelaire Alexandre',
+            '182' => 'Coyne Paul',
+            '200' => 'Delepine Marcel',
+            '206' => 'Demons Jean',
+            '212' => 'Desbouis Guy',
+            '216' => 'Deve Felix',
+            '230' => 'Dubar Louis',
+            '238' => 'Duguet Jean-Baptiste',
+            '241' => 'Dumas Georges',
+            '281' => 'Fredet Pierre',
+            '297' => 'Gerdy Joseph',
+            '310' => 'Goris Albert',
+            '311' => 'Gosset Antonin',
+            '350' => 'Hugounenq Louis',
+            '355' => 'Jacoulet Claude',
+            '360' => 'Jeambrau Emile',
+            '368' => 'Juillet Armand',
+            '372' => 'Kirmisson Edouard',
+            '375' => 'Labbe Marcel',
+            '431' => 'Lermoyez Marcel',
+            '451' => 'Longet Francois',
+            '466' => 'Mallat Antonin',
+            '469' => 'Manquat Alexandre',
+            '475' => 'Marion Jean',
+            '485' => 'Masson Claude',
+            '486' => 'Mathis Constant',
+            '491' => 'Mauricet Alphonse',
+            '499' => 'Merklen Prosper',
+            '504' => 'Meunier Henri',
+            '506' => 'Mignot Antoine',
+            '512' => 'Montprofit Jacques',
+            '544' => 'Ollivier Auguste',
+            '550' => 'Pamard Alfred',
+            '586' => 'Pitres Albert',
+            '615' => 'Ravaut Paul',
+            '620' => 'Regis Emmanuel',
+            '637' => 'Richet Charles',
+            '652' => 'Rouviere Henri',
+            '653' => 'Rouvillois Henri',
+            '655' => 'Sabrazes Jean',
+            '659' => 'Sartory Auguste',
+            '662' => 'Schwartz Edouard',
+            '682' => 'Spillmann Louis',
+            '706' => 'Teissier Joseph',
+            '699' => 'Thierry Auguste',
+            '712' => 'Trebuchet Adolphe',
+        ],
+    ];
+    
+    
     // *****************************************
     /** 
         Parses one file of serie A and stores it in a csv file
@@ -211,16 +282,16 @@ class SerieA{
         $n3 = count($doublons_different_nb);
         $n_bad = $n1 + $n2 + $n3;
         $percent_ok = round($n_ok * 100 / count($lines1), 2);
+        $do_report_full = true; // @todo put in config
         $report .= "nb in list1 ($file_serie) : " . count($lines1) . " - nb in list2 ($file_names) : " . count($names) . "\n";
         $report .= "case 1 : dates present in $file_serie and missing in $file_names : $n1\n";
-        //$report .=  print_r($missing_in_names, true) . "\n";
+        if($do_report_full) $report .=  print_r($missing_in_names, true) . "\n";
         $report .= "case 2 : date ambiguities with same nb : $n2\n";
-        //$report .= print_r($doublons_same_nb, true) . "\n";
+        if($do_report_full) $report .= print_r($doublons_same_nb, true) . "\n";
         $report .= "case 3 : date ambiguities with different nb : $n3\n";
-        //$report .= print_r($doublons_different_nb, true) . "\n";
+        if($do_report_full) $report .= print_r($doublons_different_nb, true) . "\n";
         $report .= "total NOT ok : $n_bad\n";
         $report .= "nb OK (match without ambiguity) : $n_ok ($percent_ok %)\n";
-//return $report;
         //
         // 4 - store result
         //
