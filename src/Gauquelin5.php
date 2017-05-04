@@ -124,9 +124,10 @@ class Gauquelin5{
     public static function computeLg($str){
         preg_match('/(\d+)(E|W) *?(\d+)/', $str, $m);
         if(count($m) != 4){
-            throw new Exception("Unable to parse longitude : <b>$str</b>");
+            throw new \Exception("Unable to parse longitude : <b>$str</b>");
         }
-        return ($m[1] + $m[3] / 60 ) * ($m[2] == 'E' ? 1 : -1);
+        $res = ($m[1] + $m[3] / 60 ) * ($m[2] == 'E' ? 1 : -1);
+        return round($res, 5);
     }
 
     
@@ -135,9 +136,10 @@ class Gauquelin5{
     public static function computeLat($str){
         preg_match('/(\d+)(N|S) *?(\d+)/', $str, $m);
         if(count($m) != 4){
-            throw new Exception("Unable to parse latitude : <b>$str</b>");
+            throw new \Exception("Unable to parse latitude : <b>$str</b>");
         }
-        return ($m[1] + $m[3] / 60 ) * ($m[2] == 'N' ? 1 : -1);
+        $res = ($m[1] + $m[3] / 60 ) * ($m[2] == 'N' ? 1 : -1);
+        return round($res, 5);
     }
 
 

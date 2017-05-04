@@ -256,6 +256,10 @@ class SerieA{
             $new['PLACE'] = trim($cur['CITY']);
             $new['COU'] = self::COUNTRIES[$cur['COU']];
             $new['COD'] = trim($cur['COD']);
+            if($new['COU'] == 'FR' && $new['COD'] == 'ALG'){
+                $new['COU'] = 'DZ';
+                $new['COD'] = '';
+            }
             $new['LON'] = Gauquelin5::computeLg($cur['LON']);
             $new['LAT'] = Gauquelin5::computeLat($cur['LAT']);
             // @todo link to geonames

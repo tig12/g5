@@ -21,6 +21,7 @@ In some files (like E1 and E3), timezone information is missing. The program tri
 To do this, you need to have postgres installed on your machine, run <code>geonames2postgres.py</code> for all the countries containing birth dates.  
 By default, this feature is disabled ; to enable it, edit <code>config.yml</code>, and put :
 <pre>geonames: true</pre>
+You also need to put the correct values in the <code>postgresql</code> section.
 
 <h2>Notes on the generated csv files</h2>
 
