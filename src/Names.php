@@ -47,7 +47,7 @@ class Names{
                 $res[$fields['FILE']][] = [
                     'day'   => Gauquelin5::computeDay($fields),
                     'pro'   => $fields['PRO'], // profession kept because sometimes useful (for ex in A4 and A5)
-                    'name'  => $fields['NAME'],
+                    'name'  => trim($fields['NAME']),
                 ];
             }
         }

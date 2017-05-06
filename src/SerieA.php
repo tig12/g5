@@ -94,9 +94,12 @@ class SerieA{
     /** 
         Manual corrections : name matching added using lists published by Gauquelin in 1955
         Asoociative array NUM => name
+        Name spelling is the exact spelling contained in gd902N.html
+        This exact spelling is used to remove ambiguities
     **/
     const CORRECTIONS_1955 = [
         'A2' => [
+            // from 576 académiciens de médecine 
             '13' => 'Arloing Fernand',
             '36' => 'Bard Louis',
             '44' => 'Baudoin Alphonse',
@@ -111,7 +114,7 @@ class SerieA{
             '131' => 'Castaigne Joseph',
             '149' => 'Chassaignac Pierre',
             '162' => 'Clémenceau Georges',
-            '167' => 'Colin Léon',
+            '167' => 'Colin Leon',
             '181' => 'Couvelaire Alexandre',
             '182' => 'Coyne Paul',
             '200' => 'Delepine Marcel',
@@ -119,7 +122,7 @@ class SerieA{
             '212' => 'Desbouis Guy',
             '216' => 'Deve Felix',
             '230' => 'Dubar Louis',
-            '238' => 'Duguet Jean-Baptiste',
+            '238' => 'Duguet Jean',
             '241' => 'Dumas Georges',
             '281' => 'Fredet Pierre',
             '297' => 'Gerdy Joseph',
@@ -139,7 +142,7 @@ class SerieA{
             '485' => 'Masson Claude',
             '486' => 'Mathis Constant',
             '491' => 'Mauricet Alphonse',
-            '499' => 'Merklen Prosper',
+            '499' => 'Merklen J',
             '504' => 'Meunier Henri',
             '506' => 'Mignot Antoine',
             '512' => 'Montprofit Jacques',
@@ -158,6 +161,52 @@ class SerieA{
             '706' => 'Teissier Joseph',
             '699' => 'Thierry Auguste',
             '712' => 'Trebuchet Adolphe',
+            // from 508 autres médecins notables
+            '757' => 'Aymard Jean',
+            '765' => 'Arraud Camille',
+            '776' => 'Badolle Albert',
+            '781' => 'Barbier Gaston',
+            '785' => 'Barrault Jouis',
+            '795' => 'Becart Auguste',
+            '803' => 'Berger Jean',
+            '804' => 'Bergeret Andre',
+            '810' => 'Bienvenu Georges',
+            '822' => 'Bonnefon Georges',
+            '827' => 'Boucher Humbert',
+            '836' => 'Bourret Marcel',
+            '792' => 'Beal Victor',
+            '841' => 'Brechot Adolphe',
+            '881' => 'Chapoy Rene',
+            '888' => 'Chaton Marcel',
+            '903' => 'Cornet Albert',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
+            '' => '',
         ],
     ];
     
@@ -179,13 +228,13 @@ class SerieA{
         //
         // 1 - parse first list (without names) - store by birth date to prepare matching
         //
+        $res1 = [];
         preg_match('#<pre>\s*(YEA.*?CITY)\s*(.*?)\s*</pre>#sm', $raw, $m);
         if(count($m) != 3){
             throw new \Exception("Unable to parse first list (without names) in " . $file_serie);
         }
         $fieldnames1 = explode(Gauquelin5::SEP, $m[1]);
         $lines1 = explode("\n", $m[2]);
-        $res1 = [];
         foreach($lines1 as $line1){
             $fields = explode(Gauquelin5::SEP, $line1);
             $tmp = [];
@@ -201,8 +250,8 @@ class SerieA{
         //
         // 2 - prepare names - store by birth date to prepare matching
         //
-        $names = Names::parse()[$serie];
         $res2 = [];
+        $names = Names::parse()[$serie];
         foreach($names as $fields){
             $day = $fields['day'];
             if(!isset($res2[$day])){
@@ -213,12 +262,16 @@ class SerieA{
         //
         // 3 - merge res1 and res2
         //
-        $res = []; // merge ok
+        $res = []; // contains correctly merged
         $n_ok = 0;
         $missing_in_names = [];         //
         $doublons_same_nb = [];         // multiple persons born the same day ; same nb of persons in list 1 and list 2
         $doublons_different_nb = [];    // multiple persons born the same day ; different nb of persons in list 1 and list 2
         foreach($res1 as $day1 => $array1){
+            if(isset(self::CORRECTIONS_1955[$serie])){
+                foreach($array1 as $tmp){
+                }
+            }
             if(!isset($res2[$day1])){
                 // date in list 1 and not in name list
                 foreach($array1 as $tmp){
@@ -277,12 +330,30 @@ class SerieA{
             }
         }
         $res = \lib::sortByKey($res, 'NUM');
+        //
+        // 1955 corrections
+        //
+        if(isset(self::CORRECTIONS_1955[$serie])){
+            $n = count($res);
+            for($i=0; $i < $n; $i++){
+                $NUM = $res[$i]['NUM'];
+                if(isset(self::CORRECTIONS_1955[$serie][$NUM])){
+//echo "correction $NUM with " . self::CORRECTIONS_1955[$serie][$NUM] . "\n";
+                    $res[$i]['NAME'] = self::CORRECTIONS_1955[$serie][$NUM];
+                }
+            }
+        }
+        //
+        // report
+        //
+        $do_report_full = false; // @todo put in config
         $n1 = count($missing_in_names);
         $n2 = count($doublons_same_nb);
         $n3 = count($doublons_different_nb);
-        $n_bad = $n1 + $n2 + $n3;
+        $n_correction_1955 = isset(self::CORRECTIONS_1955[$serie]) ? count(self::CORRECTIONS_1955[$serie]) : 0;
+        $n_bad = $n1 + $n2 + $n3 - $n_correction_1955;
+        $n_ok += $n_correction_1955;
         $percent_ok = round($n_ok * 100 / count($lines1), 2);
-        $do_report_full = true; // @todo put in config
         $report .= "nb in list1 ($file_serie) : " . count($lines1) . " - nb in list2 ($file_names) : " . count($names) . "\n";
         $report .= "case 1 : dates present in $file_serie and missing in $file_names : $n1\n";
         if($do_report_full) $report .=  print_r($missing_in_names, true) . "\n";
@@ -290,6 +361,7 @@ class SerieA{
         if($do_report_full) $report .= print_r($doublons_same_nb, true) . "\n";
         $report .= "case 3 : date ambiguities with different nb : $n3\n";
         if($do_report_full) $report .= print_r($doublons_different_nb, true) . "\n";
+        $report .= "Corrections from 1955 book : $n_correction_1955\n";
         $report .= "total NOT ok : $n_bad\n";
         $report .= "nb OK (match without ambiguity) : $n_ok ($percent_ok %)\n";
         //
