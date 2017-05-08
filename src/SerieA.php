@@ -216,7 +216,7 @@ class SerieA{
         Parses one file of serie A and stores it in a csv file
         Merge the original list (without names) with names contained in file 902gdN.html
         So merge is done using birthdate - Merging not complete because of doublons (persons born the same day)
-        @param  $serie  String identifying the serie ('A1')
+        @param  $serie  String identifying the serie (ex : 'A1')
         @return report
         @throws Exception if unable to parse
     **/
@@ -275,7 +275,10 @@ class SerieA{
             if(!isset($res2[$day1])){
                 // date in list 1 and not in name list
                 foreach($array1 as $tmp){
-                    $missing_in_names[] = implode("\t", $tmp);
+                    $missing_in_names[] = [
+                        'LINE' => implode("\t", $tmp),
+                        'NUM' => $tmp['NUM'],
+                    ];
                     // store in $res with fabricated name
                     $tmp['NAME'] = self::compute_name($serie, $tmp['NUM']);
                     $res[] = $tmp;
@@ -293,10 +296,16 @@ class SerieA{
                 }
                 $new_doublon = [$file_serie => [], $file_names => []];
                 foreach($array1 as $tmp){
-                    $new_doublon[$file_serie][] = implode("\t", $tmp);
+                    $new_doublon[$file_serie][] = [
+                        'LINE' => implode("\t", $tmp),
+                        'NUM' => $tmp['NUM'],
+                    ];
                 }
                 foreach($array2 as $tmp){
-                    $new_doublon[$file_names][] = implode("\t", $tmp);
+                    $new_doublon[$file_names][] = [
+                        'LINE' => implode("\t", $tmp),
+                        'NAME' => $tmp['name'],
+                    ];
                 }
                 $doublons_different_nb[] = $new_doublon;
                 continue;

@@ -28,6 +28,7 @@ class Gauquelin5{
         'A5' => 'SerieA',
         'A6' => 'SerieA',
         //
+        '1955' => 'Serie1955',
         'B1' => 'SerieB',
         'B2' => 'SerieB',
         'B3' => 'SerieB',

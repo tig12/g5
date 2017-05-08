@@ -15,6 +15,7 @@ $series = [
     'A4',
     'A5',
     'A6',
+    '1955',
     //
     'B',
     'B1',
@@ -52,8 +53,8 @@ usage :
     php {$argv[0]} <serie>
 with :
     <serie> = '{$series_str}'
-Exemples :
-    php {$argv[0]} A2        # will convert file 902gdA2.html to 902gdA2.csv
+Examples :
+    php {$argv[0]} A2        # will convert file 902gdA2.html to A2.csv
 Notes :
     - if serie = A, will compute series A1 to A6
     - if serie = B, will compute series B1 to B6
