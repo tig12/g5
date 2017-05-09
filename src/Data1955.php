@@ -1,7 +1,7 @@
 <?php
 /******************************************************************************
     Definition of groups used by Gauquelin in the book of 1955
-    Generated on 2017-05-09T00:07:19+02:00
+    Generated on 2017-05-09T22:56:49+02:00
     @license    GPL
 ********************************************************************************/
 
@@ -604,6 +604,17 @@ class Data1955{
             '132', // 1898-05-30 05:50:40+00:00 BORDEAUX - Cathala Louis
             '139', // 1883-06-13 15:50:16+00:00 CONDAT-EN-FENIE - Chabrol Etienne
             '140', // 1882-01-01 20:16:00+00:00 MENDE - Chalier Andre
+            '277', // 1899-06-05 04:00:00-01:00 PISTORF - Fontaine Rene
+            '303', // 1888-10-10 05:41:36+00:00 PRIVAS - Giraud Gaston
+            '420', // 1875-01-20 10:16:24+00:00 BREST - Le Lorier Victor
+            '439', // 1877-01-20 10:15:32+00:00 MONT-SAINT-PERE - Lhermitte Jean
+            '440', // 1882-01-04 01:45:40+00:00 TREIGNY - Lian Camille
+            '508', // 1885-05-20 04:50:16+00:00 CERNIN - Mondor Henri
+            '594', // 1889-05-25 17:00:36-01:00 MULHOUSE - Polonovsky Michel
+            '674', // 1880-12-26 07:48:00+00:00 ALGER - Sezary Albert
+            '690', // 1895-07-19 03:10:40+00:00 LILLE - Surmont Jean
+            '735', // 1879-09-26 05:37:24+00:00 INGRE - Vincent Clovis
+            '745', // 1875-03-14 11:51:28+00:00 VERSAILLES - Weill-Halle Benjamin
             '753', // 1885-06-05 00:39:28+00:00 BOURBONNE-LES-B - Abel Emile
             '754', // 1883-08-14 15:38:32+00:00 AIX-EN-PROVENCE - Abram Paul
             '755', // 1897-01-23 18:50:40+00:00 MARSEILLE - Acquaviva Eugene
@@ -745,6 +756,355 @@ class Data1955{
             '902', // 1891-12-13 02:20:40+00:00 VALENCIENNES - Cordier Pierre
             '903', // 1890-06-30 10:59:12+00:00 LE MANS - Gauquelin-A2-903
             '904', // 1875-02-26 00:50:48+00:00 AMIENS - Corret Pierre
+            '905', // 1896-03-19 03:50:40+00:00 NANCY - Gauquelin-A2-905
+            '906', // 1871-11-10 00:50:28+00:00 BOURGES - Gauquelin-A2-906
+            '908', // 1886-11-08 14:54:16+00:00 AZAS - Gauquelin-A2-908
+            '909', // 1877-07-12 04:51:28+00:00 ALBI - Coste Jules
+            '910', // 1882-10-19 02:39:28+00:00 DOULAINCOURT - Gauquelin-A2-910
+            '911', // 1901-01-06 05:20:40+00:00 FESCHES-LE-CHAT - Cottet Pierre
+            '912', // 1887-06-23 05:55:40+00:00 LE HAVRE - Coty Auguste
+            '913', // 1887-07-12 05:24:08+00:00 BOURG-EN-BRESSE - Couinaud Paul
+            '914', // 1891-10-24 08:50:40+00:00 ST-MAGNE - Courbin Pierre
+            '915', // 1863-01-24 02:02:16+00:00 AUCH - Cournet Jean
+            '916', // 1863-08-07 03:45:40+00:00 ST-JULIEN-DE-SA - Courtillier Leon
+            '917', // 1852-07-05 10:59:20+00:00 FONTAINEBLEAU - Coutan Ferdinand
+            '918', // 1899-12-12 10:50:40+00:00 LONGWY - Crehange Jean
+            '919', // 1874-07-16 13:18:56+00:00 ARQUES - Gauquelin-A2-919
+            '920', // 1871-05-11 15:42:28+00:00 ST-GERMAIN-LAVA - Crozet Joannes
+            '921', // 1901-07-24 23:30:00-01:00 BRUMATT - Damm Louis
+            '922', // 1901-08-25 02:50:40+00:00 SARS-POTERIE - Danhiez Pierre
+            '925', // 1873-11-22 01:40:40+00:00 CHAROLLES - Darbois Paul
+            '927', // 1881-07-31 13:47:24+00:00 GUERIGNY - Dariaux Andre
+            '928', // 1881-07-23 02:37:08+00:00 GRENOBLE - Debon Albert
+            '932', // 1884-10-24 21:17:40+00:00 BOURBOURG - Dehorter Leon
+            '933', // 1888-02-07 20:49:44+00:00 MONTCLAR - Dejean Charles
+            '934', // 1896-02-12 15:20:40+00:00 LE MANS - Delageniere Yves
+            '935', // 1883-07-18 05:46:00+00:00 MENDE - Delater Gabriel
+            '936', // 1888-04-11 23:41:04+00:00 DOM-LE-MESNIL - Gauquelin-A2-936
+            '938', // 1906-07-03 01:20:40+00:00 BORDEAUX - Delluc Paul
+            '939', // 1880-08-12 09:07:40+00:00 MARCOING - Gauquelin-A2-939
+            '940', // 1898-08-04 07:50:40+00:00 DAX - Delmas-Marsalet Paul
+            '941', // 1885-01-03 21:40:40+00:00 ST-JULIEN-DE-CI - Demole Louis
+            '942', // 1891-08-13 09:50:40+00:00 CAUMONT - Denoyelle Lucien
+            '943', // 1900-06-05 08:20:40+00:00 COMPIEGNE - Deruas Pierre
+            '944', // 1880-07-18 13:57:28+00:00 ARGUILLON - Gauquelin-A2-944
+            '945', // 1880-08-26 06:52:32+00:00 ST-BARD - Gauquelin-A2-945
+            '946', // 1892-08-14 08:50:40+00:00 HURIEL - Desmaroux Louis
+            '947', // 1876-12-03 11:47:40+00:00 LILLE - Desplats Rene
+            '948', // 1889-03-28 15:50:48+00:00 AMIENS - Dherissart Jean
+            '949', // 1897-08-21 09:50:40+00:00 ESPALY-ST-MARCEL - Digonnet Louis
+            '950', // 1890-01-20 17:24:16+00:00 CAHORS - Dillenseger Rene
+            '951', // 1888-04-26 01:57:12+00:00 TOURS - Diocles Louis
+            '952', // 1898-08-03 05:50:40+00:00 SELESTAT - Diss Marius
+            '953', // 1906-09-19 07:50:40+00:00 FOUGERES - Divet Henri
+            '954', // 1862-10-05 03:38:32+00:00 WASSELONNE - Dollinger Ferdinand
+            '955', // 1899-09-22 15:50:40+00:00 PARLEBOSQ - Dorbes Maurice
+            '956', // 1882-10-27 00:13:40+00:00 BRIENNE-LE-CHAT - Dournay Jean
+            '957', // 1890-07-02 22:42:32+00:00 PONT-FAVERGER - Resch Pierre
+            '960', // 1869-12-28 07:47:40+00:00 EONES - Ducamp Louis
+            '961', // 1860-03-09 01:59:40+00:00 LESCURRY - Duco Alexandre
+            '963', // 1899-06-08 08:50:40+00:00 TOULOUSE - Dulac Jean
+            '964', // 1882-02-11 00:42:28+00:00 ST-ETIENNE - Dumas Antoine
+            '965', // 1880-03-07 13:37:08+00:00 PONT-DE-CHERUY - Gauquelin-A2-965
+            '966', // 1884-11-10 05:35:00+00:00 ST-PONS - Gauquelin-A2-966
+            '967', // 1888-02-04 14:30:56+00:00 NICE - Duplay Marcel
+            '968', // 1902-11-20 15:50:40+00:00 CLERMONT FERRAND - Duranton Raoul
+            '969', // 1890-04-25 13:42:28+00:00 ST-GENEST-LERPT - Durupt Auguste
+            '970', // 1906-08-30 15:20:40+00:00 BOURESSE - Dussouil Rene
+            '971', // 1900-06-03 01:00:00-01:00 STRASBOURG - Eber Edgar
+            '972', // 1870-05-12 10:30:36+00:00 GUEBERSCHWILER - Ehret Henri
+            '973', // 1881-04-13 05:35:24+00:00 LURE - Ehringer Charles
+            '975', // 1904-03-09 00:50:40+00:00 BARCELONNETTE - Emperaire Roger
+            '976', // 1865-06-08 09:54:16+00:00 TOULOUSE - Escat Etienne
+            '977', // 1900-02-19 08:50:40+00:00 TALENCE - Gauquelin-A2-977
+            '978', // 1871-06-16 10:39:08+00:00 NANTUA - Etienne-Martin
+            '980', // 1894-07-26 23:20:40+00:00 STE BAZEILLE - Fabre Jean
+            '981', // 1895-03-20 03:20:40+00:00 ST-OMER - Faillie Robert
+            '982', // 1880-03-06 08:54:00+00:00 CHATEAUDUN - Fayolle Henri
+            '983', // 1871-12-05 19:44:28+00:00 LE PUY - Ferry Pierre
+            '984', // 1897-10-09 21:20:40+00:00 ARRAS - Fevre Marcel
+            '986', // 1898-03-27 12:20:40+00:00 FARGUIERS - Filachet Rene
+            '988', // 1890-07-24 13:28:40+00:00 LA TREMOUILLE - Fombeure Georges
+            '989', // 1877-11-05 07:42:28+00:00 ST-ETIENNE - Fontanilles Eugene
+            '991', // 1878-09-01 15:00:36-01:00 MASEVAUX - Forster Andre
+            '992', // 1893-07-21 04:20:40+00:00 FONTAINEBLEAU - Foucault Paul
+            '993', // 1889-01-21 12:19:20+00:00 CHERBOURG - Fouque Charles
+            '994', // 1885-02-05 00:53:40+00:00 ST-GIRONS - Fourcade Maurice
+            '995', // 1873-09-02 05:37:08+00:00 VIENNE - Gauquelin-A2-995
+            '996', // 1869-01-08 03:29:00+00:00 STRASBOURG - Freysz Maurice
+            '997', // 1895-05-06 17:50:40+00:00 NIEULLE-VIROUIL - Fumeau Pierre
+            '998', // 1878-05-24 11:39:52+00:00 DIJON - Galimard Joseph
+            '999', // 1900-06-25 14:50:40+00:00 ROUILLAC - Gallais Pierre
+            '1001', // 1861-11-04 10:45:32+00:00 SEBONCOURT - Gand Charles
+            '1002', // 1875-07-30 00:34:08+00:00 PUGET-S/ARGENT - Gauquelin-A2-1002
+            '1003', // 1888-08-03 14:40:24+00:00 VALENCE - Gaucherand Jules
+            '1005', // 1875-10-24 01:22:24+00:00 ORLEANS - Gaultier Rene
+            '1006', // 1893-02-07 14:50:40+00:00 CHENILLE - Gautier Jean
+            '1007', // 1887-05-04 08:36:00+00:00 GAP - Gerard Felix
+            '1008', // 1902-07-06 10:50:40+00:00 TOULOUSE - Geraud Louis
+            '1009', // 1898-07-28 10:50:40+00:00 EPINAL - Gerbaut Pierre
+            '1010', // 1904-06-07 15:50:40+00:00 ROUBAIX - Gernez Louis
+            '1011', // 1883-02-07 12:42:28+00:00 ST-ETIENNE - Gery Louis
+            '1012', // 1890-10-05 08:50:16+00:00 CHAUDES-AIGUES - Gauquelin-A2-1012
+            '1013', // 1897-02-05 11:50:40+00:00 VALENSOLE - Ginsburg Benjamin
+            '1014', // 1898-06-18 19:50:40+00:00 MONTPEZAT - Girard Ismael
+            '1015', // 1888-08-22 09:55:16+00:00 VERNEUIL - Giroux Rene
+            '1017', // 1880-09-30 07:40:40+00:00 BOURBON-LANCY - Glenard Roger
+            '1018', // 1875-07-05 00:40:40+00:00 ST-GEORGES-DE-R - Gonnet Charles
+            '1019', // 1891-01-11 09:01:28+00:00 CAEN - Gosselin Louis
+            '1020', // 1882-04-08 08:35:12+00:00 NANCY - Grandgerard Roger
+            '1021', // 1878-11-05 08:46:40+00:00 MONTLUCON - Gauquelin-A2-1021
+            '1023', // 1892-01-10 10:50:40+00:00 RIOM - Gauquelin-A2-1023
+            '1025', // 1853-08-05 09:52:24+00:00 ORLEANS - Greffier Paul
+            '1026', // 1902-06-05 19:05:40+00:00 VICHY - Grenaud Marcel
+            '1027', // 1875-02-10 05:57:28+00:00 VILLEREAL - Gauquelin-A2-1027
+            '1028', // 1866-12-20 15:30:56+00:00 NICE - Grinda Edouard
+            '1029', // 1899-02-06 20:20:40+00:00 MILLY-LA-FORET - Grognot Germain
+            '1030', // 1890-04-05 02:59:00-01:00 STRASBOURG - Gross Albert
+            '1031', // 1883-10-29 03:06:40+00:00 LA HAYE-DESCART - Guerithault Bernard
+            '1032', // 1884-09-22 09:44:28+00:00 AIGUILHE - Guichard Paul
+            '1033', // 1891-07-14 11:50:40+00:00 NANCY - Guillemin Andre
+            '1034', // 1874-04-25 23:26:04+00:00 VOUZIERS - Gauquelin-A2-1034
+            '1035', // 1881-09-04 10:04:40+00:00 COZES - Guimbellot Marcel
+            '1038', // 1876-11-19 07:29:00-01:00 STRASBOURG - Gunsett Auguste
+            '1039', // 1882-07-20 11:51:28+00:00 LABESSONNIE - Guy Maurice
+            '1040', // 1874-09-04 15:36:20+00:00 BASSE-GOULAINE - Guyard Georges
+            '1041', // 1876-12-18 13:46:40+00:00 ESENROLLES - Gauquelin-A2-1041
+            '1042', // 1869-08-24 11:35:16+00:00 LUTZELBOURG - Haller Prosper
+            '1043', // 1901-09-01 17:50:40+00:00 PAULHAN - Harant Herve
+            '1044', // 1877-02-03 11:47:40+00:00 GRAVELINES - Hautefeuille Jules
+            '1046', // 1901-07-04 09:50:40+00:00 LONS-LE-SAUNIER - Heitz Jean
+            '1047', // 1893-05-27 14:50:40+00:00 ORAN - Gauquelin-A2-1047
+            '1048', // 1880-01-10 21:35:12+00:00 NANCY - Herbier Paul
+            '1049', // 1892-12-19 19:50:40+00:00 LUNEVILLE - Hermann Henri
+            '1050', // 1885-04-29 00:50:28+00:00 BOURGES - Hervoche Charles
+            '1052', // 1883-05-28 13:46:00+00:00 FLORAC - Heymann Paul
+            '1053', // 1906-01-20 00:20:40+00:00 BOULOGNE-S-MER - Houzel Guy
+            '1056', // 1887-12-16 18:49:44+00:00 ST-AFFRIQUE - Gauquelin-A2-1056
+            '1057', // 1882-12-29 23:19:40+00:00 SAINTES - Jaulin Seutre Auguste
+            '1058', // 1901-07-21 01:50:40+00:00 PLAISANCE-DU-GE - Jaymes Bernard
+            '1059', // 1900-06-04 16:50:40+00:00 ROUEN - Jean Bernard
+            '1060', // 1891-01-05 16:43:40+00:00 TROYES - Jeannet Pierre
+            '1061', // 1894-07-11 04:50:40+00:00 BREIL - Jeudon Robert
+            '1062', // 1878-07-17 06:01:28+00:00 CONDE-S/NOIREAU - Jouvain Andre
+            '1064', // 1881-09-11 06:39:20+00:00 MAXEY-S/VAISE - Joyeux Charles
+            '1065', // 1899-08-14 10:20:40+00:00 ST-POL-DE-LEON - Jube Louis
+            '1067', // 1883-08-29 21:59:00-01:00 SAVERNE - Keller Raymond
+            '1068', // 1886-05-11 21:34:08+00:00 RUPT - Gauquelin-A2-1068
+            '1070', // 1897-09-14 03:50:40+00:00 BAR-LE-REGULIER - Lacomme Maurice
+            '1071', // 1887-09-18 09:32:00+00:00 ORAN - Lacronique Gaston
+            '1072', // 1901-09-09 02:50:40+00:00 NEUILLY - Laennec Theophile
+            '1073', // 1900-07-05 03:50:40+00:00 TULLE - La Farge Georges
+            '1074', // 1869-09-11 14:06:40+00:00 NERIS - Lafont Alexandre
+            '1075', // 1890-12-23 19:57:36+00:00 BORDEAUX - Lagrange Henri
+            '1076', // 1863-02-27 11:57:36+00:00 BAZAS - Lamarque Henri
+            '1077', // 1906-05-14 01:50:40+00:00 COMINES - Lamelin Pierre
+            '1078', // 1874-07-20 19:44:28+00:00 MIREVAL - Lamouraux Fernand
+            '1079', // 1874-08-20 14:04:20+00:00 AVRANCHES - Lance Marcel
+            '1081', // 1883-12-25 02:42:32+00:00 REIMS - Langlet Jean
+            '1082', // 1891-05-31 21:20:40+00:00 VITTEAUX - Larget Maurice
+            '1083', // 1883-11-21 05:50:16+00:00 CEZENS - La Roche Brisson Rene
+            '1084', // 1878-06-24 07:42:28+00:00 ST-ETIENNE - Gauquelin-A2-1084
+            '1085', // 1882-06-27 08:46:40+00:00 COURCAIS - Lasseur Philippe
+            '1086', // 1901-06-13 12:50:40+00:00 CHALONS-S/MARNE - Laurent Roger
+            '1088', // 1896-06-16 08:50:40+00:00 BONE - Layani Fernand
+            '1089', // 1878-01-02 10:16:24+00:00 ST-POL-DE-LEON - Lazennec Isidore
+            '1090', // 1880-09-24 05:59:40+00:00 FLERS-DE-LORNE - Gauquelin-A2-1090
+            '1091', // 1901-12-14 11:50:40+00:00 ST-MICHEL-EN-LH - Lebleu Albert
+            '1092', // 1891-08-20 08:50:40+00:00 MEDREAC - Le Branchu Rene
+            '1093', // 1910-01-19 13:50:40+00:00 BADEN - Le Corre Joseph
+            '1094', // 1897-06-15 02:50:40+00:00 CROUY - Lefevre Raymond
+            '1095', // 1900-08-18 22:50:40+00:00 LOCHES - Lefort Edmond
+            '1096', // 1900-04-23 16:50:40+00:00 BEGARD - Legac Paul
+            '1098', // 1881-05-05 10:16:24+00:00 QUIMPER - Le Gorgeu Victor
+            '1100', // 1892-01-10 17:50:40+00:00 AUBIGNY - Gauquelin-A2-1100
+            '1101', // 1879-10-26 08:41:00+00:00 ST-BRIEUC - Lemoine Francisque
+            '1102', // 1890-09-07 18:04:20+00:00 CHERBOURG - Lemperiere Jean
+            '1103', // 1863-06-19 21:16:24+00:00 ERGUE-GABERIC - Le Naour Pierre
+            '1104', // 1883-12-13 06:01:28+00:00 BAYONNE - Leon-Kindberg Michel
+            '1105', // 1892-05-17 19:50:40+00:00 BAIN-DE-BRETAGNE - Le Pennetier Francois
+            '1107', // 1882-08-19 00:47:40+00:00 ROUBAIX - Gauquelin-A2-1107
+            '1108', // 1894-03-22 07:50:40+00:00 NEVERS - Le Rasle Henri
+            '1109', // 1901-05-16 12:50:40+00:00 ROMAGNY - Leroy Denis
+            '1110', // 1861-04-22 01:55:40+00:00 LE HAVRE - Leroy Georges
+            '1111', // 1883-03-23 20:59:12+00:00 LE MANS - Lesieur Emile
+            '1112', // 1885-04-14 05:44:28+00:00 BEZIERS - Levere Raymond
+            '1113', // 1893-10-31 09:50:40+00:00 ORAN - Levy Maurice
+            '1114', // 1898-07-09 12:50:40+00:00 ST-ANDRE-DE-SAN - L'Heritier Georges
+            '1115', // 1877-12-13 11:12:28+00:00 ST-CHAMOND - Locard Edmond
+            '1116', // 1894-04-04 20:50:40+00:00 MONTSAUCHE - Gauquelin-A2-1116
+            '1117', // 1883-10-12 10:36:00+00:00 EMBRUN - Loppe Etienne
+            '1118', // 1890-02-01 05:47:40+00:00 CUNLHAT - Lossedat Maurice
+            '1120', // 1861-06-03 02:39:52+00:00 LAIGUES - Lucas Arthur
+            '1121', // 1895-09-10 23:20:40+00:00 DIJON - Gauquelin-A2-1121
+            '1122', // 1887-03-26 16:47:24+00:00 LUZY - Luquet Gabriel
+            '1123', // 1884-09-21 14:51:28+00:00 JOUY-EN-JOSAS - Lutembacher Rene
+            '1124', // 1890-11-18 06:48:56+00:00 BERCK-S-MER - Macquet Pierre
+            '1125', // 1880-01-18 09:44:28+00:00 LANGEAC - Malien Campsavy Georges
+            '1126', // 1865-09-01 16:41:04+00:00 ROCROY - Gauquelin-A2-1126
+            '1127', // 1883-02-28 02:42:36+00:00 UCHAUD - Margarot Jean
+            '1128', // 1899-05-03 10:50:40+00:00 PONT-AUDEMER - Marie Julien
+            '1129', // 1908-03-19 06:50:40+00:00 TOULOUSE - Marques Pierre
+            '1130', // 1879-05-27 03:06:40+00:00 BECHEREL - Marquis Eugene
+            '1131', // 1900-03-31 01:50:40+00:00 NANCY - Marsal Pierre
+            '1132', // 1875-03-07 07:35:12+00:00 MAXEVILLE - Martel Janville Thierry
+            '1133', // 1888-05-01 07:42:36+00:00 BESSEGUES - Martin Arthur
+            '1134', // 1888-03-07 06:44:28+00:00 BESSAN - Martin Henry
+            '1135', // 1900-09-10 10:20:40+00:00 ANGOULEME - Martinaud Georges
+            '1136', // 1897-11-11 03:20:40+00:00 NICE - Martiny Marcel
+            '1137', // 1889-06-22 03:31:28+00:00 HONFLEUR - Massart Raphael
+            '1138', // 1889-06-17 14:45:32+00:00 LAON - Masselin Guy
+            '1139', // 1900-02-27 05:00:00-01:00 SCHWEIGHAUSEN - Matter Willy
+            '1140', // 1887-07-26 19:01:28+00:00 BAYONNE - Maurel Gerard
+            '1141', // 1885-07-24 22:49:20+00:00 ELBEUF - Maurer Andre
+            '1142', // 1894-05-23 19:20:40+00:00 NANTES - Meeus Emile
+            '1143', // 1897-05-26 08:20:40+00:00 CHALONNES-S/LOI - Meignant Paul
+            '1144', // 1870-09-25 03:04:40+00:00 ST-GENIS-DE-SAI - Menciere Louis
+            '1145', // 1892-07-14 05:50:40+00:00 TOURS - Mercier-Cosse Armand
+            '1146', // 1886-02-07 17:51:28+00:00 CASTRES - Meurisse Henri
+            '1147', // 1886-03-23 04:05:52+00:00 DESANDANES - Meyer Henri
+            '1148', // 1891-12-28 03:50:40+00:00 ST-ETIENNE - Michel Andre
+            '1149', // 1873-05-18 10:02:08+00:00 SAUMUR - Mignon Maurice
+            '1150', // 1886-09-12 17:35:00+00:00 RIEZ - Gauquelin-A2-1150
+            '1151', // 1885-10-22 02:32:00+00:00 ORAN - Monbrun Albert
+            '1152', // 1874-08-22 20:02:08+00:00 ROCHEFORT-S/LOI - Mondain Charles
+            '1153', // 1906-07-25 19:50:40+00:00 AVIGNON - Montagard Georges
+            '1154', // 1872-12-04 02:40:40+00:00 CAUMONT - Montagard Leon
+            '1155', // 1886-11-13 10:45:40+00:00 BRIENON - Gauquelin-A2-1155
+            '1156', // 1897-02-04 15:50:40+00:00 ALBERVILLE - Gauquelin-A2-1156
+            '1157', // 1897-05-22 11:50:40+00:00 BOURBONNE-LES-B - Morel Max
+            '1158', // 1882-05-15 23:57:40+00:00 ST-PRIEST-BRAME - Gauquelin-A2-1158
+            '1159', // 1877-05-02 03:11:00+00:00 ST-BRIEUC - Morvan Jules
+            '1160', // 1895-08-29 07:50:40+00:00 NANTEUIL-EN-VAL - Mothe Bernard
+            '1162', // 1878-08-02 18:10:24+00:00 VALENCE - Mouriquand Emile
+            '1163', // 1871-03-30 18:17:40+00:00 PASLIERES - Mouton-Chapat Barthelemy
+            '1164', // 1887-03-07 01:35:32+00:00 SALLANCHES - Muraz Gaston
+            '1165', // 1868-10-27 22:47:40+00:00 ROUBAIX - Musin Edmond
+            '1166', // 1870-08-11 10:30:36+00:00 MULHOUSE - Mutterer Maurice
+            '1167', // 1886-12-31 18:29:12+00:00 VIBRAYE - Neau Henry
+            '1168', // 1879-06-15 11:44:28+00:00 MONTPELLIER - Negre Leopold
+            '1169', // 1908-10-16 13:50:40+00:00 MONTOIR-DE-BRET - Nicolas Henri
+            '1170', // 1885-04-19 05:37:24+00:00 ORLEANS - Gauquelin-A2-1170
+            '1171', // 1878-06-30 18:21:16+00:00 ST-CLOUD - Oppert Edouard
+            '1172', // 1876-01-12 07:02:08+00:00 ANGERS - Papin Edmond
+            '1173', // 1890-05-30 21:59:20+00:00 SEGONZAC - Papin Edouard
+            '1174', // 1894-07-05 17:50:40+00:00 PONS - Papin Marc
+            '1176', // 1883-04-27 13:55:40+00:00 DIEPPE - Parrel Gerard
+            '1177', // 1873-10-01 08:30:56+00:00 NICE - Gauquelin-A2-1177
+            '1178', // 1876-09-23 02:35:52+00:00 VUILLAFANS - Pasteur Felix
+            '1179', // 1889-12-26 18:46:40+00:00 ST-GERMAIN-DE-S - Paturet Georges
+            '1181', // 1871-06-21 17:39:20+00:00 DOMPIERRE-LES-B - Pechin Charles
+            '1182', // 1898-01-19 21:50:40+00:00 MEILLAC - Pelle Abel
+            '1183', // 1882-11-12 08:28:40+00:00 POITIERS - Perdoux Joseph
+            '1185', // 1879-07-10 21:29:00+00:00 BONE - Perret Albert
+            '1186', // 1875-05-21 03:34:08+00:00 RAMBERVILLIERS - Perrin Maurice
+            '1187', // 1895-09-19 17:50:40+00:00 MALO-LES-BAINS - Perrin Paul
+            '1188', // 1889-10-18 04:37:08+00:00 GRENOBLE - Perrin Robert
+            '1189', // 1864-10-27 08:52:24+00:00 ORLEANS - Petit Georges
+            '1190', // 1906-03-10 06:50:40+00:00 MONTCORNET - Petit Max
+            '1191', // 1899-01-12 17:50:40+00:00 CORTE - Petrignani Roger
+            '1192', // 1883-07-09 03:47:40+00:00 CHATELDON - Phelip J
+            '1194', // 1909-08-21 17:50:40+00:00 DIGOIN - Pierre Maurice
+            '1195', // 1900-08-17 12:20:40+00:00 VEZELISE - Pierson Antoine
+            '1196', // 1898-07-21 12:20:40+00:00 DANVOU - Pigache Andre
+            '1197', // 1886-04-29 15:16:24+00:00 LANDIVISIAU - Pilven Joseph
+            '1198', // 1873-09-22 09:37:08+00:00 LA TRONCHE - Gauquelin-A2-1198
+            '1199', // 1882-08-01 15:42:36+00:00 NIMES - Pironneau Pierre
+            '1200', // 1891-08-07 08:50:40+00:00 AMIENS - Playoust Yves
+            '1202', // 1881-12-02 17:51:40+00:00 COMPIEGNE - Poisonnier Max
+            '1203', // 1904-07-18 23:30:00-01:00 VIGY - Polu Raymond
+            '1204', // 1877-03-21 21:01:28+00:00 PAU - Pons Henri
+            '1205', // 1873-03-14 01:38:32+00:00 PENNES-MIRABEAU - Porcheron Louis
+            '1206', // 1883-10-01 07:36:40+00:00 CANCALE - Poree Francis
+            '1207', // 1908-03-04 05:50:40+00:00 CHATEAUBOURG - Poree Prudent
+            '1208', // 1895-09-22 08:30:00-01:00 MOOSCH - Prevot Maurice
+            '1209', // 1885-08-07 01:01:48+00:00 SAUZE-VAUSSAIS - Prieur Maurice
+            '1210', // 1877-08-06 14:51:40+00:00 GRANDVILLIERS - Queuille Adrien
+            '1211', // 1886-06-10 06:47:40+00:00 VERNET-LA-VAREN - Quiquandon Joseph
+            '1212', // 1883-06-12 08:21:28+00:00 RAMBOUILLET - Rabourdin Andre
+            '1213', // 1880-02-15 08:49:20+00:00 ST-GERMAIN-LAVA - Rajat Henri
+            '1214', // 1895-12-15 00:50:40+00:00 DIGNE - Raybaud Jean
+            '1215', // 1899-06-24 14:50:40+00:00 ST-CIRQ-LA-POPI - Redon Henri
+            '1217', // 1901-12-07 17:10:40+00:00 VALENCE - Regard Jean
+            '1218', // 1873-06-01 09:34:20+00:00 HAMBYE - Regnault Jules
+            '1219', // 1884-01-02 04:51:28+00:00 VERSAILLES - Rehm Pierre
+            '1220', // 1888-06-03 15:01:28+00:00 TAILLEVILLE - Gauquelin-A2-1220
+            '1221', // 1885-08-03 10:50:16+00:00 VELZIC - Revelliac Edouard
+            '1222', // 1901-10-23 10:22:40+00:00 PAVILLY - Reverse Bernard
+            '1223', // 1882-06-29 07:37:08+00:00 BOURGOIN - Rhenter Jean
+            '1224', // 1893-02-02 03:50:40+00:00 NIEPPE - Richard Armand
+            '1225', // 1876-09-09 01:44:28+00:00 CESSENON - Riche Vincent
+            '1226', // 1901-05-13 05:50:40+00:00 VILLIERS-S/MARN - Richier Jacques
+            '1228', // 1872-09-07 05:25:00+00:00 SARTENE - Roccaserra Vincent
+            '1229', // 1876-11-01 10:29:00-01:00 HUTTENHEIM - Rohmer Paul
+            '1232', // 1888-07-15 15:37:08+00:00 VIENNE - Rosset Marc
+            '1233', // 1888-04-27 16:49:20+00:00 MORET-S/LOING - Rouffiac Pierre
+            '1234', // 1890-08-25 02:52:56+00:00 RILHAC-EN-XAINT - Rouffiat Paul
+            '1235', // 1890-05-24 20:40:40+00:00 OULLINS - Rougy Mathieu
+            '1236', // 1875-05-02 21:35:40+00:00 LA ROCHE-S/YON - Rousseau-Decelle
+            '1237', // 1867-11-03 07:39:28+00:00 VILLARS-ST-MARC - Roussel Georges
+            '1238', // 1866-01-14 00:49:44+00:00 ST-AFFRIQUE - Roussy Alfred
+            '1239', // 1884-03-16 12:55:00+00:00 CUSSAC - Ruaud Ludovic
+            '1240', // 1880-04-04 07:50:48+00:00 VARENNES-EN-AMI - Ruin Georges
+            '1241', // 1886-06-16 20:59:00-01:00 OTTWILLER - Sackenreiter G
+            '1242', // 1887-01-30 16:35:52+00:00 BESANCON - Saintin Henri
+            '1243', // 1876-10-28 05:40:24+00:00 CHABEUIL - Sambuc Edouard
+            '1246', // 1881-04-26 21:03:00+00:00 MAYENNE - Sauve Louis
+            '1247', // 1869-07-06 09:54:40+00:00 MARCHENOIR - Gauquelin-A2-1247
+            '1251', // 1873-01-24 22:35:16-01:00 SARREGUEMINES - Schmitt Camille
+            '1252', // 1872-09-18 05:29:00-01:00 STRASBOURG - Schmitt Charles
+            '1253', // 1889-02-21 18:35:52+00:00 MONTBELIARD - Schwab Roger
+            '1254', // 1886-05-04 10:45:36-01:00 MULHOUSE - Schwartz-Wacker Alfred
+            '1257', // 1882-03-22 19:39:52+00:00 CHATILLON S-SEIN - Serbource Marcel
+            '1258', // 1902-03-15 10:50:40+00:00 ALGER - Sesini Marcel
+            '1261', // 1874-08-23 23:52:56+00:00 CHAMBOULIVE - Gauquelin-A2-1261
+            '1262', // 1878-07-09 07:51:28+00:00 LABRUGUIERE - Gauquelin-A2-1262
+            '1263', // 1895-05-13 04:50:40+00:00 ST-HILAIRE-DU-H - Simon Francis
+            '1264', // 1881-08-17 04:52:48+00:00 DOLE - Simonin Louis
+            '1265', // 1876-07-06 10:55:16+00:00 PONT-DE-L ARCHE - Sorel Francois
+            '1266', // 1871-05-25 07:51:40+00:00 ST-MALO - Sorre Auguste
+            '1267', // 1882-02-23 03:46:40+00:00 MOULINS-S-ALLIER - Sorrel Etienne
+            '1268', // 1883-09-21 20:44:28+00:00 NEFFIES - Soulayrol Georges
+            '1269', // 1890-04-29 21:15:36-01:00 MULHOUSE - Specklin Paul
+            '1270', // 1894-07-18 01:50:40+00:00 NICE - Sureau Maurice
+            '1271', // 1896-07-05 01:50:40+00:00 MAICHE - Gauquelin-A2-1271
+            '1274', // 1874-01-14 08:42:36+00:00 ST-HIPPOLYTE-DU - Teissonniere Maurice
+            '1276', // 1897-03-03 04:50:40+00:00 VILLENAUX-LA-GR - Thiolat Pierre
+            '1277', // 1905-03-20 18:50:40+00:00 LANHELIN - Tiollais Rene
+            '1278', // 1872-08-31 02:02:40+00:00 CLERMONT FERRAND - Tixier Felix
+            '1279', // 1878-12-06 08:54:40+00:00 DOLLUET - Tournay Auguste
+            '1280', // 1890-01-17 02:57:36+00:00 BEGLES - Tourvieille Labroue Maurice
+            '1281', // 1892-01-24 11:50:40+00:00 EPERNAY - Tramuset Rene
+            '1282', // 1906-01-22 03:50:40+00:00 ROUEN - Trumel Rene
+            '1283', // 1895-11-05 07:50:40+00:00 PONTOISE - Turpin Raymond
+            '1284', // 1880-10-09 11:34:08+00:00 TRANS-EN-PROVEN - Vadon Alfred
+            '1285', // 1896-11-18 10:50:40+00:00 NARBONNE - Vaisse Jean
+            '1286', // 1891-12-18 15:50:40+00:00 BAR-LE-DUC - Valade Roger
+            '1287', // 1872-10-17 09:47:40+00:00 PECQUENCOURT - Vallee Cyrille
+            '1288', // 1884-04-28 15:01:40+00:00 VICHY - Vallerix Andre
+            '1289', // 1903-06-28 11:50:40+00:00 ARMENTIERES - Vandevelde Gaston
+            '1290', // 1903-05-22 08:10:40+00:00 LE HAVRE - Vanier Jean
+            '1294', // 1884-03-28 19:53:16+00:00 BLANC - Veluet Maurice
+            '1295', // 1877-04-11 23:06:20+00:00 NANTES - Gauquelin-A2-1295
+            '1296', // 1891-07-31 02:20:40+00:00 BEAUCOURT - Vermelin Henri
+            '1297', // 1873-01-05 19:52:56+00:00 BRIVE - Vialle Fernand
+            '1298', // 1903-12-16 20:50:40+00:00 TOURS - Vialle Pierre
+            '1299', // 1887-01-11 04:34:08+00:00 FREJUS - Vian Louis
+            '1300', // 1884-07-09 09:35:24+00:00 SAULX - Gauquelin-A2-1300
+            '1301', // 1876-08-06 12:52:56+00:00 NAVES - Vidalin Gustave
+            '1302', // 1886-01-19 18:30:56+00:00 GOLFE-JUAN - Vidal-Revel Jean
+            '1303', // 1899-03-30 20:20:40+00:00 MONTBAZON - Viette Roger
+            '1304', // 1891-09-27 08:50:40+00:00 ALES - Vigne Paul
+            '1305', // 1884-07-15 09:45:40+00:00 GUILLON - Vignes Henri
+            '1306', // 1887-12-28 03:01:28+00:00 CAEN - Vigot Marcel
+            '1307', // 1896-07-31 20:20:40+00:00 AVIGNON - Vincenti Charles
+            '1309', // 1891-08-16 04:50:40+00:00 ORLEANS - Viollet Pierre
+            '1312', // 1905-12-19 17:50:40+00:00 LAMBALLE - Vulpian Paul
+            '1313', // 1903-12-15 09:50:40+00:00 CHALONS-S/MARNE - Waltrigny Hubert
+            '1315', // 1888-04-17 12:05:16-01:00 PETITE-ROSSELLE - Wilhelm Theodore
+            '1317', // 1905-09-01 12:15:00-01:00 ALGRANGE - Wiltzer Hubert
+            '1319', // 1903-11-29 08:00:00-01:00 SARRALBE - Wolgensinger Lucien
+            '1320', // 1903-07-27 12:00:00-01:00 STRASBOURG - Woringer Frederic
         ],
         '570SPO' => [
         ],

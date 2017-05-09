@@ -179,16 +179,51 @@ class SerieA{
             '881' => 'Chapoy Rene',
             '888' => 'Chaton Marcel',
             '903' => 'Cornet Albert',
-            '' => '',
-            '' => '',
-            '' => '',
-            '' => '',
-            '' => '',
-            '' => '',
-            '' => '',
-            '' => '',
-            '' => '',
-            '' => '',
+            '904' => 'Cornet Pierre',
+            '905' => 'Corret Pierre',
+            '906' => 'Cosse Francois',
+            '908' => 'Coste Jean',
+            '910' => 'Cottenot Paul',
+            '919' => 'Cresson Fortune',
+            '936' => 'Delattre Raoul',
+            '939' => 'Delobel Emile',
+            '944' => 'Descomps Paul',
+            '945' => 'Deslions Leon',
+            '965' => 'Dumas Dominique',
+            '966' => 'Dumas Eugene',
+            '977' => 'Estradere Jean',
+            '995' => 'Francais Henri',
+            '1002' => 'Garcin Joseph',
+            '1012' => 'Ginesty Albert',
+            '1021' => 'Grandjean Alexandre',
+            '1023' => 'Grasset Raymond',
+            '1027' => 'Grenier Cardenal Henri',
+            '1034' => 'Guillemin Joseph',
+            '1041' => 'Guyon Emile',
+            '1047' => 'Henry Jean',
+            '1056' => 'Jacob Gustave',
+            '1068' => 'Kuhn Robert',
+            '1084' => 'Lassabliere Pierre',
+            '1090' => 'Lebailly Charles',
+            '1100' => 'Lelong Marcel',
+            '1107' => 'Lepoutre Carlos',
+            '1116' => 'Lonjumeau Pierre',
+            '1121' => 'Lucy Andre',
+            '1126' => 'Manceaux Louis',
+            '1150' => 'Moiroud Pierre',
+            '1155' => 'Moreau Rene',
+            '1156' => 'Morel Jacques',
+            '1158' => 'Morlet Antonin',
+            '1170' => 'Nouel Jean',
+            '1177' => 'Paschetta Charles',
+            '1198' => 'Piollet Paul',
+            '1220' => 'Renard Leon',
+            '1247' => 'Savoire Camille',
+            '1261' => 'Sikora Pierre',
+            '1262' => 'Simon Clement',
+            '1271' => 'Taillard Fulbert',
+            '1295' => 'Verdier Pierre',
+            '1300' => 'Viard Marcel',
             '' => '',
             '' => '',
             '' => '',
@@ -260,13 +295,12 @@ class SerieA{
             $res2[$day][] = $fields;
         }
         //
-        // 3 - merge res1 and res2
+        // 3 - merge res1 and res2 (name list)
         //
-        $res = []; // contains correctly merged
-        $n_ok = 0;
-        $missing_in_names = [];         //
-        $doublons_same_nb = [];         // multiple persons born the same day ; same nb of persons in list 1 and list 2
-        $doublons_different_nb = [];    // multiple persons born the same day ; different nb of persons in list 1 and list 2
+        $n_ok = 0; $res = [];                   // contains correctly merged
+        $n1 = 0; $missing_in_names = [];        // date present in list 1 and not in name list
+        $n2 = 0; $doublons_same_nb = [];        // multiple persons born the same day ; same nb of persons in list 1 and name list
+        $n3 = 0; $doublons_different_nb = [];   // multiple persons born the same day ; different nb of persons in list 1 and name list
         foreach($res1 as $day1 => $array1){
             if(isset(self::CORRECTIONS_1955[$serie])){
                 foreach($array1 as $tmp){
@@ -275,6 +309,7 @@ class SerieA{
             if(!isset($res2[$day1])){
                 // date in list 1 and not in name list
                 foreach($array1 as $tmp){
+                    $n1++;
                     $missing_in_names[] = [
                         'LINE' => implode("\t", $tmp),
                         'NUM' => $tmp['NUM'],
@@ -291,6 +326,7 @@ class SerieA{
                 // but different nb of elements => ambiguity
                 // store in $res with fabricated name
                 foreach($array1 as $tmp){
+                    $n3++;
                     $tmp['NAME'] = self::compute_name($serie, $tmp['NUM']);
                     $res[] = $tmp;
                 }
@@ -323,16 +359,23 @@ class SerieA{
                     // more than one persons share the same birth date => ambiguity
                     // store in $res with fabricated name
                     foreach($array1 as $tmp){
+                        $n2++;
                         $tmp['NAME'] = self::compute_name($serie, $tmp['NUM']);
                         $res[] = $tmp;
                     }
                     // fill $doublons_same_nb with all candidate lines
                     $new_doublon = [$file_serie => [], $file_names => []];
                     foreach($array1 as $tmp){
-                        $new_doublon[$file_serie][] = implode("\t", $tmp);
+                        $new_doublon[$file_serie][] = [
+                            'LINE' => implode("\t", $tmp),
+                            'NUM' => $tmp['NUM'],
+                        ];
                     }
                     foreach($array2 as $tmp){
-                        $new_doublon[$file_names][] = implode("\t", $tmp);
+                        $new_doublon[$file_names][] = [
+                            'LINE' => implode("\t", $tmp),
+                            'NAME' => $tmp['name'],
+                        ];
                     }
                     $doublons_same_nb[] = $new_doublon;
                 }
@@ -343,36 +386,27 @@ class SerieA{
         // 1955 corrections
         //
         if(isset(self::CORRECTIONS_1955[$serie])){
-            $n = count($res);
-            for($i=0; $i < $n; $i++){
-                $NUM = $res[$i]['NUM'];
-                if(isset(self::CORRECTIONS_1955[$serie][$NUM])){
-//echo "correction $NUM with " . self::CORRECTIONS_1955[$serie][$NUM] . "\n";
-                    $res[$i]['NAME'] = self::CORRECTIONS_1955[$serie][$NUM];
-                }
-            }
+            [$n_ok_fix, $n1_fix, $n2_fix] = self::corrections1955($res, $missing_in_names, $doublons_same_nb, $serie, $file_serie, $file_names);
         }
         //
         // report
         //
         $do_report_full = false; // @todo put in config
-        $n1 = count($missing_in_names);
-        $n2 = count($doublons_same_nb);
-        $n3 = count($doublons_different_nb);
         $n_correction_1955 = isset(self::CORRECTIONS_1955[$serie]) ? count(self::CORRECTIONS_1955[$serie]) : 0;
-        $n_bad = $n1 + $n2 + $n3 - $n_correction_1955;
-        $n_ok += $n_correction_1955;
+        $n_bad = $n1 + $n2 + $n3 - $n1_fix - $n2_fix;
+        $n_good1 = count($res) - $n_bad;
+        $n_good2 = $n_ok + $n_ok_fix + $n1_fix + $n2_fix;
         $percent_ok = round($n_ok * 100 / count($lines1), 2);
         $report .= "nb in list1 ($file_serie) : " . count($lines1) . " - nb in list2 ($file_names) : " . count($names) . "\n";
-        $report .= "case 1 : dates present in $file_serie and missing in $file_names : $n1\n";
+        $report .= "case 1 : $n1 dates present in $file_serie and missing in $file_names - $n1_fix fixed by 1955\n";
         if($do_report_full) $report .=  print_r($missing_in_names, true) . "\n";
-        $report .= "case 2 : date ambiguities with same nb : $n2\n";
+        $report .= "case 2 : $n2 date ambiguities with same nb - $n2_fix fixed by 1955\n";
         if($do_report_full) $report .= print_r($doublons_same_nb, true) . "\n";
-        $report .= "case 3 : date ambiguities with different nb : $n3\n";
+        $report .= "case 3 : $n3 date ambiguities with different nb\n";
         if($do_report_full) $report .= print_r($doublons_different_nb, true) . "\n";
         $report .= "Corrections from 1955 book : $n_correction_1955\n";
         $report .= "total NOT ok : $n_bad\n";
-        $report .= "nb OK (match without ambiguity) : $n_ok ($percent_ok %)\n";
+        $report .= "nb OK (match without ambiguity) : $n_good1 $n_good2 ($percent_ok %)\n";
         //
         // 4 - store result
         //
@@ -489,6 +523,76 @@ class SerieA{
         return "Gauquelin-$serie-$num";
     }
     
+    
+    // ******************************************************
+    /**
+        Auxiliary of import
+        @return [$n_ok_fix, $n1_fix, $n2_fix]
+    **/
+    private static function corrections1955(&$res, &$missing_in_names, &$doublons_same_nb, $serie, $file_serie, $file_names){
+        $n_ok_fix = $n1_fix = $n2_fix = 0;
+        //
+        // directly fix the result with data of self::CORRECTIONS_1955
+        //
+        $n = count($res);
+        for($i=0; $i < $n; $i++){
+            $NUM = $res[$i]['NUM'];
+            if(isset(self::CORRECTIONS_1955[$serie][$NUM])){
+                $n_ok_fix++;
+                $res[$i]['NAME'] = self::CORRECTIONS_1955[$serie][$NUM];
+            }
+        }
+        // Remove cases in $missing_in_names solved by 1955
+        // useful only for report
+        for($i=0; $i < count($missing_in_names); $i++){
+            if(in_array($missing_in_names[$i]['NUM'], self::CORRECTIONS_1955[$serie])){
+                unset($missing_in_names[$i]);
+                $n1_fix++;
+            }
+        }
+        //
+        // Resolve doublons
+        //
+        $NUMS_1955 = array_keys(self::CORRECTIONS_1955[$serie]);
+        $N_DOUBLONS = count($doublons_same_nb);
+        for($i=0; $i < $N_DOUBLONS; $i++){
+            if(count($doublons_same_nb[$i][$file_serie]) != 2){
+                // resolution works only for doublons (not triplets or more elements)
+                continue;
+            }
+            $found = false;
+            if(in_array($doublons_same_nb[$i][$file_serie][0]['NUM'], $NUMS_1955)){
+                $NUM = $doublons_same_nb[$i][$file_serie][0]['NUM'];
+                $NAME = self::CORRECTIONS_1955[$serie][$NUM];
+                $found = 0;
+            }
+            else if(in_array($doublons_same_nb[$i][$file_serie][1]['NUM'], $NUMS_1955)){
+                $NUM = $doublons_same_nb[$i][$file_serie][1]['NUM'];
+                $NAME = self::CORRECTIONS_1955[$serie][$NUM];
+                $found = 1;
+            }
+            if($found !== false){
+                $n2_fix++;
+                $idx_num = ($found == 0 ? 1 : 0);
+                $idx_name = ($doublons_same_nb[$i][$file_names][0]['NAME'] == $NAME ? 1 : 0);
+                $new_num = $doublons_same_nb[$i][$file_serie][$idx_num]['NUM'];
+                $new_name = $doublons_same_nb[$i][$file_names][$idx_name]['NAME'];
+                // inject doublon resolution in $res
+                for($j=0; $j < count($res); $j++){
+                    if($res[$j]['NUM'] == $new_num){
+                        $res[$j]['NAME'] = $new_name;
+                        break;
+                    }
+                }
+                unset($doublons_same_nb[$i]); // useful only for report
+// echo "\n"; print_r($doublons_same_nb[$i]); echo "\n";
+// echo "NUM = $NUM\nNAME = $NAME\n";
+//echo "new num = $new_num - new name = $new_name\n";
+// break;
+            }
+        }
+        return [$n_ok_fix, $n1_fix, $n2_fix];
+    }
     
 }// end class    
 
