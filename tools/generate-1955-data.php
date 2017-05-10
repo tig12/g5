@@ -20,12 +20,12 @@ const GROUPS = [
     '508MED' => ['508 autres médecins notables', 'A2'],
     '570SPO' => ['570 sportifs', 'A1'],
     // below = not done yet
-    '676MIL' => ['676 militaires', 'ZZ'],
-    '906PEI' => ['906 peintres', 'ZZ'],
+    '676MIL' => ['676 militaires', 'A3'],
+    '906PEI' => ['906 peintres', 'A4'],
     '361PEI' => ['361 peintres mineurs', 'ZZ'],
-    '500ACT' => ['500 acteurs', 'ZZ'],
-    '494DEP' => ['494 députés', 'ZZ'],
-    '349SCI' => ["349 membres, associés et correspondants de l'académie des sciences", 'ZZ'],
+    '500ACT' => ['500 acteurs', 'A5'],
+    '494DEP' => ['494 députés', 'A5'],
+    '349SCI' => ["349 membres, associés et correspondants de l'académie des sciences", 'A2'],
     '884PRE' => ['884 prêtres', 'ZZ'],
 ];
 
@@ -54,12 +54,12 @@ class Serie1955Data{
         '576MED' => ["576 membres associés et correspondants de l'académie de médecine", 'A2'],
         '508MED' => ['508 autres médecins notables', 'A2'],
         '570SPO' => ['570 sportifs', 'A1'],
-        '676MIL' => ['676 militaires', 'ZZ'],
-        '906PEI' => ['906 peintres', 'ZZ'],
+        '676MIL' => ['676 militaires', 'A3'],
+        '906PEI' => ['906 peintres', 'A4'],
         '361PEI' => ['361 peintres mineurs', 'ZZ'],
-        '500ACT' => ['500 acteurs', 'ZZ'],
-        '494DEP' => ['494 députés', 'ZZ'],
-        '349SCI' => ["349 membres, associés et correspondants de l'académie des sciences", 'ZZ'],
+        '500ACT' => ['500 acteurs', 'A5'],
+        '494DEP' => ['494 députés', 'A5'],
+        '349SCI' => ["349 membres, associés et correspondants de l'académie des sciences", 'A2'],
         '884PRE' => ['884 prêtres', 'ZZ'],
     ];
     

@@ -303,6 +303,8 @@ class SerieA{
             '1271' => 'Taillard Fulbert',
             '1295' => 'Verdier Pierre',
             '1300' => 'Viard Marcel',
+            // from "349 membres, associés et correspondants de l'académie des sciences"
+            '' => '',
         ],
     ];
     
