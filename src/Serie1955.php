@@ -14,7 +14,7 @@
 namespace gauquelin5;
 
 use gauquelin5\Gauquelin5;
-use gauquelin5\Data1955;
+use gauquelin5\Serie1955Data;
 use gauquelin5\init\Config;
 
 class Serie1955{
@@ -27,9 +27,9 @@ class Serie1955{
         @throws Exception if unable to parse
     **/
     public static function import($serie){
-        $dest_dir = Config::$data['1955-dest-dir'];
-        foreach(Data1955::GROUPS as $groupCode => [$groupName, $serie]){
-            if(count(Data1955::DATA[$groupCode]) == 0){
+        $dest_dir = Config::$data['1955']['dest-dir'];
+        foreach(Serie1955Data::GROUPS as $groupCode => [$groupName, $serie]){
+            if(count(Serie1955Data::DATA[$groupCode]) == 0){
                 continue; // useful while developing, for groups not treated
             }
             echo "Generating 1955 group $groupCode : $groupName\n";
@@ -41,12 +41,16 @@ class Serie1955{
             for($i=1; $i < $N; $i++){
                 $fields = explode(Gauquelin5::CSV_SEP, $input[$i]);
                 $NUM = $fields[0]; // by convention, all generated csv file have NUM as first field
-                if(!in_array($NUM, Data1955::DATA[$groupCode])){
+                if(!in_array($NUM, Serie1955Data::DATA[$groupCode])){
                     continue;
                 }
                 $res[] = $fields;
             }
-            $res = \lib::sortByKey($res, 1); // sort by name
+            //
+            // sort $res
+            //
+            $sort_field = $groupCode == '570SPO' ? 0 : 1;
+            $res = \lib::sortByKey($res, $sort_field);
             echo '  ' . count($res) . " persons stored\n";
             // generate output
             $output = 'SERIE' . Gauquelin5::CSV_SEP . $input[0]; // field names
