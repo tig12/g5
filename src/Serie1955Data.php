@@ -1,7 +1,7 @@
 <?php
 /******************************************************************************
     Definition of groups used by Gauquelin in the book of 1955
-    Generated on 2017-05-10T23:48:06+02:00
+    Generated on 2017-05-12T05:47:23+02:00
     @license    GPL
 ********************************************************************************/
 
@@ -14,12 +14,12 @@ class Serie1955Data{
         '576MED' => ["576 membres associés et correspondants de l'académie de médecine", 'A2'],
         '508MED' => ['508 autres médecins notables', 'A2'],
         '570SPO' => ['570 sportifs', 'A1'],
-        '676MIL' => ['676 militaires', 'ZZ'],
-        '906PEI' => ['906 peintres', 'ZZ'],
+        '676MIL' => ['676 militaires', 'A3'],
+        '906PEI' => ['906 peintres', 'A4'],
         '361PEI' => ['361 peintres mineurs', 'ZZ'],
-        '500ACT' => ['500 acteurs', 'ZZ'],
-        '494DEP' => ['494 députés', 'ZZ'],
-        '349SCI' => ["349 membres, associés et correspondants de l'académie des sciences", 'ZZ'],
+        '500ACT' => ['500 acteurs', 'A5'],
+        '494DEP' => ['494 députés', 'A5'],
+        '349SCI' => ["349 membres, associés et correspondants de l'académie des sciences", 'A2'],
         '884PRE' => ['884 prêtres', 'ZZ'],
     ];
     
@@ -1683,6 +1683,283 @@ class Serie1955Data{
         '494DEP' => [
         ],
         '349SCI' => [
+            '2555', // 1855-09-27 06:29:00+00:00 STRASBOURG - Appeil Paul
+            '2556', // 1869-12-22 08:42:28+00:00 ROANNE - Auclair Noel
+            '2557', // 1848-02-14 21:40:40+00:00 CHALON S-SAONE - Baillaud Edouard
+            '2558', // 1802-09-30 00:44:28+00:00 MONTPELLIER - Balard Antoine
+            '2559', // 1848-03-02 06:47:24+00:00 LUZY - Barbier Francois
+            '2560', // 1879-04-01 12:41:04+00:00 MEZIERES - Barillon Emile
+            '2561', // 1851-04-21 06:47:40+00:00 LILLE - Barrois Charles
+            '2563', // 1841-04-06 20:39:52+00:00 RENEVE - Bassot Jean
+            '2564', // 1864-10-22 10:37:48+00:00 ANNOIRE - Bataillon Jean
+            '2565', // 1848-01-08 22:41:36+00:00 ANNONAY - Battandier Jules
+            '2567', // 1829-10-20 20:35:12+00:00 NANCY - Bazin Henri
+            '2571', // 1810-04-23 15:43:40+00:00 ERVY - Belgrand Marie
+            '2572', // 1844-11-29 07:44:28+00:00 MONTPELLIER - Benoit Justin
+            '2574', // 1840-03-23 01:35:12+00:00 NANCY - Bertin Louis
+            '2576', // 1845-09-17 18:35:12+00:00 LUNEVILLE - Bichat Ernest
+            '2578', // 1851-04-06 21:54:40+00:00 SISTELS - Bigourdin Guillaume
+            '2579', // 1808-09-15 22:42:32+00:00 FISMES - Billet Felix
+            '2580', // 1856-10-14 00:29:00+00:00 STRASBOURG - Binger Louis
+            '2581', // 1878-02-01 00:48:56+00:00 LOCON - Blaringhem Louis
+            '2582', // 1863-08-28 07:39:28+00:00 CHAUMONT - Blondel Andre
+            '2583', // 1849-07-03 18:35:12+00:00 NANCY - Blondlot Rene
+            '2584', // 1811-02-19 11:35:16+00:00 METZ - Boileau Pierre
+            '2585', // 1819-12-22 12:44:28+00:00 MONTPELLIER - Gauquelin-A2-2585
+            '2587', // 1871-01-07 03:49:44+00:00 ST AFFRIQUE - Gauquelin-A2-2587
+            '2588', // 1828-09-02 16:47:24+00:00 GUERIGNY - Gauquelin-A2-2588
+            '2589', // 1878-03-24 23:32:08+00:00 ANGERS - Bosler Jean
+            '2590', // 1889-10-13 11:40:56+00:00 LORIENT - Gauquelin-A2-2590
+            '2592', // 1827-05-29 04:47:40+00:00 THIERS - Bouquet Grye Anatole
+            '2593', // 1857-02-21 22:30:36+00:00 STE MARIE AUX M - Bourgeois Joseph
+            '2595', // 1846-01-12 16:49:44+00:00 NANT - Bouty Edmond
+            '2596', // 1856-04-09 05:37:48+00:00 ST LAURENT GRAN - Bouvier Louis
+            '2597', // 1844-10-23 09:50:48+00:00 AMIENS - Branly Edouard
+            '2598', // 1811-08-23 12:41:36+00:00 ANNONAY - Bravais Auguste
+            '2600', // 1822-10-09 21:37:08+00:00 VIENNE - Bresse Jacques
+            '2601', // 1872-04-01 00:48:56+00:00 COURRIERES - Breton Jules
+            '2602', // 1854-12-19 03:01:48+00:00 ST MARTIN LES M - Brillouin Marcel
+            '2604', // 1892-08-15 00:50:40+00:00 DIEPPE - Gauquelin-A2-2604
+            '2606', // 1822-03-22 22:06:20+00:00 NANTES - Bussy Louis
+            '2607', // 1885-08-12 13:38:32+00:00 MARSEILLE - Cabannes Jean
+            '2608', // 1832-09-21 10:39:52+00:00 CHATILLON S-SEIN - Cailletet Louis
+            '2609', // 1811-05-31 06:04:20+00:00 VALOGNES - Caligny Anatole
+            '2610', // 1852-09-20 14:59:20+00:00 ANGOULEME - Callandreau Pierre
+            '2611', // 1871-09-15 12:44:28+00:00 MONTAGNAC - Camichel Charles
+            '2612', // 1881-07-01 13:41:04+00:00 VOUZIERS - Caquot Albert
+            '2616', // 1868-09-05 09:47:40+00:00 BERGUES - Caullery Maurice
+            '2617', // 1822-01-18 05:40:24+00:00 LORIOL - Chancel Gustave
+            '2618', // 1839-05-01 09:35:52+00:00 BESANCON - Chardonnet Hilaire
+            '2619', // 1865-09-01 17:40:40+00:00 OULLINS - Gauquelin-A2-2619
+            '2620', // 1802-01-07 00:41:36+00:00 DESAIGNES - Chazallon Antoine
+            '2621', // 1882-08-15 19:40:40+00:00 VILLEFRANCHE - Gauquelin-A2-2621
+            '2622', // 1873-06-23 12:59:40+00:00 DOMFRONT - Chevalier Auguste
+            '2623', // 1810-08-15 22:35:16+00:00 ST QUIRIN - Chevandier Valdrome Eugene
+            '2626', // 1821-05-25 17:51:28+00:00 SOREZE - Clos Dominique
+            '2627', // 1852-11-28 03:51:28+00:00 GRAULHET - Colin Edouard
+            '2628', // 1880-11-01 06:34:08+00:00 BAINS LES BAINS - Gauquelin-A2-2628
+            '2629', // 1802-12-26 21:54:16+00:00 CAHORS - Combes Charles
+            '2630', // 1841-06-08 21:35:24+00:00 PORT S/SAONE - Considere Armand
+            '2631', // 1841-03-07 08:52:24+00:00 ORLEANS - Cornu Marie
+            '2632', // 1866-03-04 07:20:48+00:00 AMIENS - Cosserat Eugene
+            '2634', // 1869-10-09 08:56:08+00:00 BOURG-EN-BRESSE - Cotton Aime
+            '2635', // 1872-02-05 03:39:08+00:00 BOURG-EN-BRESSE - Cotton Emile
+            '2636', // 1833-12-03 15:48:20+00:00 PERPIGNAN - Crova Andre
+            '2639', // 1856-11-01 04:03:00+00:00 LA DOREE - Daniel Lucien
+            '2641', // 1842-08-15 00:42:36+00:00 NIMES - Gauquelin-A2-2641
+            '2646', // 1814-06-25 08:35:16+00:00 METZ - Daubree Gabriel
+            '2647', // 1801-01-08 15:37:08+00:00 GRENOBLE - Dausse Marie
+            '2648', // 1826-09-07 03:01:28+00:00 ESPELETTE - David Armand
+            '2649', // 1827-07-26 14:50:48+00:00 AMIENS - Debray Henri
+            '2651', // 1854-05-13 03:40:40+00:00 AVIGNON - Delage Yves
+            '2653', // 1817-02-03 16:35:16+00:00 METZ - Delesse Achille
+            '2655', // 1854-06-25 16:18:20+00:00 PERPIGNAN - Deperet Charles
+            '2656', // 1843-12-29 12:52:24+00:00 AILLANT S/MOUIL - Deprez Marcel
+            '2659', // 1800-12-30 14:54:40+00:00 VENDOME - Dessaignes Victor
+            '2660', // 1862-07-06 18:04:40+00:00 ETAULES - Deveaux Henri
+            '2661', // 1843-10-20 07:51:40+00:00 RENNES - Ditte Alfred
+            '2662', // 1804-08-25 08:42:36+00:00 VIGNAN - Dortet Tessan Urbain
+            '2663', // 1846-06-15 02:54:16+00:00 TOULOUSE - Douville Henri
+            '2664', // 1871-03-13 07:30:36-01:00 STE MARIE AUX M - Drach Jules
+            '2665', // 1811-10-27 21:14:28+00:00 PORTIRAGNES - Duchartre Pierre
+            '2668', // 1801-04-05 02:57:12+00:00 TOURS - Dujardin Felix
+            '2671', // 1816-10-15 05:10:56+00:00 PLOEMEUR - Gauquelin-A2-2671
+            '2672', // 1875-03-11 20:25:40+00:00 LE HAVRE - Durand-Vieil Georges
+            '2673', // 1810-08-07 11:55:16+00:00 BOISSY LAMBERVI - Duval-Jouve Joseph
+            '2674', // 1876-03-17 19:35:00+00:00 MISON - Esclangon Ernest
+            '2676', // 1823-12-21 15:49:44+00:00 ST LEONS - Fabre Jean
+            '2677', // 1867-06-11 00:38:32+00:00 MARSEILLE - Gauquelin-A2-2677
+            '2678', // 1856-10-16 20:38:32+00:00 MARSEILLE - Fabry Eugene
+            '2679', // 1862-04-20 21:38:32+00:00 MARSEILLE - Fabry Louis
+            '2681', // 1812-02-28 11:54:00+00:00 DREUX - Fave Ildephonse
+            '2684', // 1814-10-01 01:53:16+00:00 ST BENOIT DU SA - Faye Herve
+            '2685', // 1868-11-19 07:36:20+00:00 ST MICHEL DE MA - Ferrie Gustave
+            '2687', // 1852-10-03 01:47:40+00:00 BAILLEUIL - Flahault Charles
+            '2688', // 1836-06-08 00:21:28+00:00 RAMBOUILLET - Fliche Henri
+            '2689', // 1851-10-02 21:59:40+00:00 TARBES - Gauquelin-A2-2689
+            '2690', // 1870-07-16 16:51:28+00:00 CASTRES - Fosse Richard
+            '2691', // 1828-06-21 15:04:20+00:00 MORTAIN - Fouque Ferdinand
+            '2692', // 1801-05-15 16:29:00+00:00 STRASBOURG - Fournet Joseph
+            '2693', // 1842-05-23 03:54:16+00:00 TOULOUSE - Fournier Ernest
+            '2694', // 1828-11-14 00:53:40+00:00 FOIX - Freycinet Charles
+            '2695', // 1832-03-12 01:29:00+00:00 STRASBOURG - Friedel Charles
+            '2696', // 1865-07-19 10:30:36+00:00 MULHOUSE - Gauquelin-A2-2696
+            '2697', // 1849-04-24 04:54:16+00:00 ST BEAT - Gallieni Joseph
+            '2698', // 1800-05-15 00:44:28+00:00 SETE - Gambart Adolphe
+            '2700', // 1812-02-13 12:40:40+00:00 ORANGE - Gauquelin-A2-2700
+            '2702', // 1845-05-08 06:59:20+00:00 BOUEX - Gayon Ulysse
+            '2703', // 1816-08-21 06:29:00+00:00 STRASBOURG - Gerhardt Charles
+            '2704', // 1834-04-24 21:47:40+00:00 VALENCIENNES - Gernez Desire
+            '2707', // 1889-07-22 06:42:28+00:00 ST ETIENNE - Giraud Georges
+            '2708', // 1866-10-08 08:52:32+00:00 ST DIZIERS - Glangeaud Philippe
+            '2709', // 1879-10-11 21:35:12+00:00 BACCARAT - Godchot Marcel
+            '2710', // 1807-03-25 04:35:16+00:00 HAYANGE - Godron Alexandre
+            '2711', // 1856-05-23 17:39:08+00:00 MORNAY - Gonnesiat Francois
+            '2712', // 1858-05-21 18:54:16+00:00 LANZAC - Goursat Edouard
+            '2713', // 1854-02-19 12:41:36+00:00 VALS LES BAINS - Gouy Georges
+            '2714', // 1839-03-08 23:35:12+00:00 HOUDREVILLE - Gauquelin-A2-2714
+            '2717', // 1865-03-04 09:52:24+00:00 ORLEANS - Gauquelin-A2-2717
+            '2718', // 1871-05-06 23:04:20+00:00 CHERBOURG - Grignard Victor
+            '2719', // 1835-07-03 13:04:40+00:00 ROCHEFORT S-MER - Grimaux Edouard
+            '2720', // 1849-08-23 11:50:28+00:00 BOURGES - Grossouvre A
+            '2721', // 1861-12-27 07:40:40+00:00 AZE - Guichard Claude
+            '2722', // 1873-07-11 19:06:20+00:00 ST NAZAIRE - Guillet Leon
+            '2723', // 1885-06-09 15:37:48+00:00 LONS LE SAUNIER - Guyenot Emile
+            '2724', // 1843-12-25 18:49:20+00:00 FONTAINEBLEAU - Guyou Emile
+            '2725', // 1882-08-19 14:35:12+00:00 FLIREY - Gauquelin-A2-2725
+            '2726', // 1865-12-08 21:51:28+00:00 VERSAILLES - Hadamard Jacques
+            '2727', // 1844-10-30 05:25:40+00:00 ROUEN - Halphen Georges
+            '2728', // 1861-10-31 01:03:56+00:00 BOULOGNE S-MER - Hamy Maurice
+            '2729', // 1833-07-28 06:50:28+00:00 BOURGES - Haton Goupilliere Julien
+            '2730', // 1840-07-17 18:29:00+00:00 STRASBOURG - Hatt Philippe
+            '2731', // 1861-06-19 11:29:00+00:00 DRUSENHEIM - Haug Emile
+            '2732', // 1836-12-02 17:50:40+00:00 ETAMPES - Hautefeuille Paul
+            '2733', // 1812-06-12 12:45:40+00:00 VILLEFARGEAU - Hebert Edmond
+            '2735', // 1871-04-24 21:31:40+00:00 COMPIEGNE - Helbronner Paul
+            '2737', // 1815-08-21 04:30:36+00:00 LOGELBACH - Hirn Gustave
+            '2738', // 1873-01-22 10:45:40+00:00 STE COLUMBES S/ - Houard Clodomir
+            '2739', // 1829-03-23 03:55:40+00:00 ELBEUF - Houzeau Auguste
+            '2741', // 1861-12-01 06:35:12+00:00 BREMONCOURT - Imbeaux Edouard
+            '2742', // 1878-02-19 12:35:32+00:00 ANNEMASSE - Jacob Charles
+            '2744', // 1875-02-05 16:17:24+00:00 NEVERS - Javillier Maurice
+            '2746', // 1812-07-11 20:35:12+00:00 TOUL - Joly Nicolas
+            '2747', // 1820-07-03 02:40:40+00:00 CARPENTRAS - Jonquieres Ernest
+            '2748', // 1838-01-05 07:10:40+00:00 LYON - Jordan Camille
+            '2749', // 1861-02-27 04:34:08+00:00 EPINAL - Joubin Louis
+            '2750', // 1893-02-03 02:50:40+00:00 SIDI BEL ABBES - Julia Gaston
+            '2751', // 1866-11-26 00:09:00+00:00 DREUX - Gauquelin-A2-2751
+            '2754', // 1858-01-17 00:54:16+00:00 TOULOUSE - Koenigs Gabriel
+            '2755', // 1803-05-22 03:30:36+00:00 COLMAR - Kuhlmann Frederic
+            '2756', // 1863-02-04 02:40:40+00:00 MACON - Lacroix Alfred
+            '2757', // 1862-06-11 14:16:24+00:00 PONTHOU - Gauquelin-A2-2757
+            '2758', // 1814-12-20 17:36:20+00:00 NANTES - La Gournerie Jules
+            '2759', // 1834-04-09 00:39:20+00:00 BAR-LE-DUC - Laguerre Edmond
+            '2760', // 1816-12-25 05:54:16+00:00 TOULOUSE - Lallemand Alexandre
+            '2761', // 1857-03-07 18:39:20+00:00 ST AUBIN S/AIRE - Lallemand Charles
+            '2763', // 1839-12-30 05:50:28+00:00 BOURGES - Lapparent Albert
+            '2765', // 1864-11-23 18:51:28+00:00 POISSY - Laubeuf Maxime
+            '2766', // 1819-04-15 07:46:40+00:00 MOULINS - Laussedat Aime
+            '2768', // 1868-12-19 08:07:24+00:00 BOISCOMMUN - Lebeau Paul
+            '2769', // 1847-01-21 22:29:00+00:00 PECHELBRONN - Le Bel Achille
+            '2770', // 1875-06-28 06:51:40+00:00 BEAUVAIS - Lebesque Henri
+            '2771', // 1859-01-14 17:39:28+00:00 BLAISY - Lebeuf Auguste
+            '2775', // 1861-08-29 05:43:40+00:00 PINEY - Leclainche Emmanuel
+            '2776', // 1859-03-25 02:12:36+00:00 BAGNOLS S/CEZE - Leclerc Sablon Mathieu
+            '2777', // 1856-01-07 15:34:08+00:00 ST NABORD - Lecomte Henri
+            '2778', // 1802-04-28 18:47:40+00:00 AVESNES - Lecoq Henri
+            '2779', // 1838-04-18 20:59:20+00:00 COGNAC - Lecoq Bois Baudran Francois
+            '2780', // 1830-03-02 09:50:48+00:00 ABBEVILLE - Le Dieu Alfred
+            '2781', // 1866-09-07 01:57:12+00:00 LOCHES - Leger Louis
+            '2782', // 1898-06-11 10:50:40+00:00 LA SEYNE - Lejay Pierre
+            '2783', // 1841-01-16 18:45:40+00:00 TONNERRE - Lemoine Georges
+            '2786', // 1875-09-21 00:47:40+00:00 MARETZ - Leriche Maurice
+            '2787', // 1805-11-21 15:21:28+00:00 VERSAILLES - Gauquelin-A2-2787
+            '2788', // 1838-02-28 00:30:36+00:00 RIBEAUVILLE - Levy Maurice
+            '2790', // 1809-03-24 07:48:56+00:00 ST OMER - Liouville Joseph
+            '2791', // 1822-03-04 17:51:28+00:00 VERSAILLES - Lissajous Jules
+            '2792', // 1823-07-30 02:06:20+00:00 NANTES - Lory Charles
+            '2794', // 1870-07-10 13:51:28+00:00 POISSY - Lugeon Maurice
+            '2795', // 1864-10-05 00:35:52+00:00 BESANCON - Lumiere Louis
+            '2798', // 1872-11-26 20:39:52+00:00 AUXONNE - Maige Albert
+            '2799', // 1878-05-29 16:52:48+00:00 LONS LE SAUNIER - Gauquelin-A2-2799
+            '2800', // 1833-02-04 00:50:28+00:00 CHATEAUNEUF S/C - Mallard Ernest
+            '2801', // 1829-07-30 14:54:16+00:00 TOULOUSE - Manen Leopold
+            '2806', // 1820-01-18 20:40:40+00:00 CHALON S-SAONE - Mares Henri
+            '2807', // 1874-06-12 17:18:00+00:00 ALGER - Marguet Frederic
+            '2808', // 1846-10-10 09:38:32+00:00 AIX EN FROVENCE - Marion Fortune
+            '2811', // 1807-10-18 16:38:32+00:00 MARSEILLE - Matheron Philippe
+            '2812', // 1867-01-03 05:45:40+00:00 ST MAURICE AUX - Matignon Camille
+            '2813', // 1878-09-19 03:49:20+00:00 PROVINS - Mauguin Charles
+            '2814', // 1842-07-02 07:01:28+00:00 VAUDRY - Maupas Emile
+            '2815', // 1871-02-27 00:52:24+00:00 ORLEANS - Gauquelin-A2-2815
+            '2816', // 1809-03-07 01:35:52+00:00 MAICHE - Mauvais Victor
+            '2817', // 1809-09-04 03:36:20+00:00 CHAMBERY - Menabrea Louis
+            '2818', // 1835-11-12 04:40:40+00:00 CHALON S-SAONE - Meray Charles
+            '2820', // 1866-06-08 14:52:24+00:00 CHATILLON S/LOI - Molliard Marin
+            '2822', // 1876-04-28 23:30:56+00:00 NICE - Gauquelin-A2-2822
+            '2823', // 1864-01-01 08:57:12+00:00 ST LAURENT EN G - Moussu Gustave
+            '2824', // 1843-04-07 13:40:40+00:00 TOURNUS - Munier-Chalmas Ernest
+            '2825', // 1846-08-10 13:29:00+00:00 SOULTZ S/S FORE - Müntz Achille
+            '2826', // 1815-08-14 05:40:40+00:00 AUTUN - Naudin Charles
+            '2827', // 1839-10-04 06:55:40+00:00 LE HAVRE - Normand Augustin
+            '2828', // 1849-11-01 23:03:00+00:00 LAVAL - Oehlert Daniel
+            '2829', // 1822-05-19 02:48:56+00:00 ESTREE COUCHY - Pagnoul Aime
+            '2831', // 1802-02-11 22:30:36+00:00 RIBEAUVILLE - Parade Adolphe
+            '2832', // 1851-04-08 16:48:56+00:00 ARRAS - Parenty Henry
+            '2834', // 1880-07-04 18:03:56+00:00 ST POL - Gauquelin-A2-2834
+            '2835', // 1807-02-26 05:04:20+00:00 VALOGNES - Pelouze Jules
+            '2838', // 1873-05-19 00:57:36+00:00 BORDEAUX - Perez Charles
+            '2839', // 1833-12-06 12:59:40+00:00 TARBES - Perez Jean
+            '2840', // 1834-11-29 06:45:40+00:00 ST FARGEAU - Peron Alphonse
+            '2841', // 1833-04-18 09:42:36+00:00 VALLARAUGUE - Perrier Francois
+            '2842', // 1873-08-11 01:36:20+00:00 CHAMBERY - Perrier Bathie Henri
+            '2843', // 1872-10-28 04:44:28+00:00 MONTPELLIER - Perrier-Delon Georges
+            '2844', // 1870-09-30 19:17:40+00:00 LILLE - Perrin Jean
+            '2845', // 1845-12-19 06:54:40+00:00 ST LOUP - Perrotin Henri
+            '2847', // 1873-10-05 05:30:36-01:00 COLMAR - Peyerimhoff Paul
+            '2849', // 1844-12-21 13:29:00+00:00 STRASBOURG - Picard Alfred
+            '2850', // 1867-07-04 16:41:04+00:00 LA HARDOYE - Picart Luc
+            '2852', // 1812-05-17 13:44:28+00:00 BRIOUDE - Pissis Aime
+            '2853', // 1854-04-29 00:35:12+00:00 NANCY - Poincare Henri
+            '2854', // 1882-10-07 12:02:00+00:00 RIOM DES LANDES - Poisson Charles
+            '2856', // 1821-09-20 12:47:40+00:00 ISSOIRE - Pomel Auguste
+            '2858', // 1872-01-20 07:06:20+00:00 NANTES - Porcher Charles
+            '2860', // 1800-08-29 22:55:40+00:00 ROUEN - Pouchet Felix
+            '2863', // 1820-04-16 10:52:00+00:00 ARGENTEUIL - Puiseux Victor
+            '2865', // 1830-05-10 08:47:40+00:00 FOURNES - Raoult Francois
+            '2866', // 1863-05-10 09:37:08+00:00 ST ROMAIN DE JA - Gauquelin-A2-2866
+            '2867', // 1839-12-12 07:57:36+00:00 BORDEAUX - Rayet Georges
+            '2868', // 1829-02-13 15:44:28+00:00 MONTPELLIER - Reboul Edmond
+            '2869', // 1862-01-30 22:37:08+00:00 GRENOBLE - Recoura Albert
+            '2870', // 1828-01-27 16:34:08+00:00 PLOMBIERES - Resal Henri
+            '2871', // 1863-11-18 01:44:28+00:00 YSSINGEAUX - Richard Jules
+            '2872', // 1817-05-21 17:00:36+00:00 GUEBWILLER - Riggenbach Nicolas
+            '2873', // 1853-11-19 07:20:48+00:00 AMIENS - Riquier Charles
+            '2874', // 1820-10-17 14:44:28+00:00 MONTPELLIER - Roche Edouard
+            '2875', // 1812-08-10 20:35:16+00:00 METZ - Rolland Eugene
+            '2876', // 1832-08-18 00:42:36+00:00 SOMMIERES - Rouche Eugene
+            '2877', // 1899-11-07 18:05:40+00:00 BOURGES - Roy Maurice
+            '2878', // 1834-01-14 12:44:28+00:00 GANGES - Sabatier Armand
+            '2879', // 1854-11-05 16:50:36+00:00 CARCASSONNE - Sabatier Paul
+            '2880', // 1823-07-28 02:34:08+00:00 ST ZACHARIE - Saporta Gaston
+            '2881', // 1837-06-24 19:18:20+00:00 PERPIGNAN - Sarrau Emile
+            '2882', // 1861-05-12 18:02:08+00:00 ANGERS - Sauvageau Camille
+            '2885', // 1824-07-09 01:38:32+00:00 MARSEILLE - Schloesing Theophile
+            '2886', // 1839-01-31 11:50:48+00:00 VERBERIE - Sebert Hippolyte
+            '2887', // 1803-07-03 04:44:28+00:00 MONTPELLIER - Seguier Armand
+            '2888', // 1851-12-21 07:52:24+00:00 ORLEANS - Sejourne Paul
+            '2889', // 1808-09-06 02:54:00+00:00 BROUE - Senarmont Henri
+            '2890', // 1856-01-27 05:59:40+00:00 BARBACHEN - Senderens Jean
+            '2893', // 1826-06-04 17:35:52+00:00 BESANCON - Sire Georges
+            '2894', // 1825-01-10 07:39:28+00:00 LONGEAU - Sirodot Simon
+            '2895', // 1828-01-20 16:48:56+00:00 BRUAY - Souillart Cyrille
+            '2896', // 1837-08-31 22:31:48+00:00 ST PEZENNE - Gauquelin-A2-2896
+            '2897', // 1848-03-24 09:51:28+00:00 MANTES S/SEINE - Tannery Jules
+            '2899', // 1859-07-03 16:40:40+00:00 LYON - Termier Pierre
+            '2900', // 1831-01-30 08:35:16+00:00 METZ - Terquem Alfred
+            '2902', // 1886-06-26 13:39:28+00:00 LANGRES - Thiry Rene
+            '2904', // 1875-05-01 01:57:04+00:00 DOMME - Tilho Jean
+            '2905', // 1830-05-26 13:35:12+00:00 FLAVIGNY S/MOSE - Tisserand Eugene
+            '2906', // 1845-01-13 04:39:52+00:00 NUITS - Tisserand Felix
+            '2907', // 1853-07-12 00:36:20+00:00 CHAMBERY - Trabut Louis
+            '2908', // 1818-01-08 03:54:40+00:00 MONDOUBLEAU - Trecul Auguste
+            '2910', // 1814-10-12 15:47:40+00:00 DUNKERQUE - Tresca Henri
+            '2912', // 1815-09-12 19:57:12+00:00 AZAY LE RIDEAU - Tulasne Louis
+            '2915', // 1849-12-25 17:21:28+00:00 VERSAILLES - Vallier Emmanuel
+            '2916', // 1839-04-19 07:47:40+00:00 BAILLEUL - Van Thieghem Philippe
+            '2918', // 1854-07-08 06:40:40+00:00 AVIGNON - Vayssiere Albert
+            '2919', // 1806-07-05 08:39:52+00:00 BEAUNE - Verguette-Lamotte Alfred
+            '2921', // 1859-09-24 08:44:28+00:00 LAVERUNE - Viala Pierre
+            '2922', // 1850-03-16 08:37:08+00:00 VIENNE - Viguier Camille
+            '2925', // 1841-11-16 00:39:28+00:00 LANGRES - Violle Jules
+            '2926', // 1861-02-13 00:34:08+00:00 DOCELLES - Vuillemin Paul
+            '2927', // 1858-07-25 16:47:40+00:00 TRITH ST LEGER - Wallerant Frederic
+            '2928', // 1865-03-25 14:30:36+00:00 MULHOUSE - Weiss Pierre
+            '2929', // 1867-07-28 06:47:40+00:00 LILLE - Wintrebert Paul
+            '2930', // 1848-04-23 10:30:36+00:00 CERNAY - Witz Aime
+            '2931', // 1827-11-09 14:15:32+00:00 VORGES - Wolf Charles
+            '2932', // 1813-01-16 02:54:40+00:00 VENDOME - Yvon-Villarceau Antoine
+            '2933', // 1847-01-14 02:05:12+00:00 NANCY - Gauquelin-A2-2933
         ],
         '884PRE' => [
         ],
