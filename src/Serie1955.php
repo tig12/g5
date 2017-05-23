@@ -26,7 +26,7 @@ class Serie1955{
         @return report
         @throws Exception if unable to parse
     **/
-    public static function import($serie){
+    public static function cura2csv($serie){
         $dest_dir = Config::$data['1955']['dest-dir'];
         foreach(Serie1955Data::GROUPS as $groupCode => [$groupName, $serie]){
             if(count(Serie1955Data::DATA[$groupCode]) == 0){

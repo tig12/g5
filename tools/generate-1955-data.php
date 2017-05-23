@@ -19,7 +19,6 @@ const GROUPS = [
     '576MED' => ["576 membres associés et correspondants de l'académie de médecine", 'A2'],
     '508MED' => ['508 autres médecins notables', 'A2'],
     '570SPO' => ['570 sportifs', 'A1'],
-    // below = not done yet
     '676MIL' => ['676 militaires', 'A3'],
     '906PEI' => ['906 peintres', 'A4'],
     '361PEI' => ['361 peintres mineurs', 'ZZ'],
@@ -41,7 +40,7 @@ function generate($dir){
 <?php
 /******************************************************************************
     Definition of groups used by Gauquelin in the book of 1955
-    Generated on $date
+    Generated on $date by tools/generate-1955.php
     @license    GPL
 ********************************************************************************/
 

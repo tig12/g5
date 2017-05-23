@@ -240,7 +240,9 @@ class SerieA{
             '706' => 'Teissier Joseph',
             '699' => 'Thierry Auguste',
             '712' => 'Trebuchet Adolphe',
+            //
             // from 508 autres médecins notables
+            //
             '757' => 'Aymard Jean',
             '765' => 'Arraud Camille',
             '776' => 'Badolle Albert',
@@ -303,7 +305,9 @@ class SerieA{
             '1271' => 'Taillard Fulbert',
             '1295' => 'Verdier Pierre',
             '1300' => 'Viard Marcel',
+            //
             // from "349 membres, associés et correspondants de l'académie des sciences"
+            //
             '2585' => 'Bonnet Pierre',
             '2587' => 'Borel Emile',
             '2588' => 'Bornet Edouard',
@@ -344,7 +348,7 @@ class SerieA{
         @return report
         @throws Exception if unable to parse
     **/
-    public static function import($serie){
+    public static function cura2csv($serie){
         $report =  "--- Importing serie $serie\n";
         $raw = Gauquelin5::readHtmlFile($serie);
         $file_serie = Gauquelin5::serie2filename($serie);
@@ -386,15 +390,12 @@ class SerieA{
         //
         // 3 - merge res1 and res2 (name list)
         //
+        // variables used only for report
         $n_ok = 0; $res = [];                   // contains correctly merged
         $n1 = 0; $missing_in_names = [];        // date present in list 1 and not in name list
         $n2 = 0; $doublons_same_nb = [];        // multiple persons born the same day ; same nb of persons in list 1 and name list
         $n3 = 0; $doublons_different_nb = [];   // multiple persons born the same day ; different nb of persons in list 1 and name list
         foreach($res1 as $day1 => $array1){
-            if(isset(self::CORRECTIONS_1955[$serie])){
-                foreach($array1 as $tmp){
-                }
-            }
             if(!isset($res2[$day1])){
                 // date in list 1 and not in name list
                 foreach($array1 as $tmp){
@@ -482,10 +483,10 @@ class SerieA{
         //
         $do_report_full = false; // @todo put in config
         $n_correction_1955 = isset(self::CORRECTIONS_1955[$serie]) ? count(self::CORRECTIONS_1955[$serie]) : 0;
-        $n_bad = $n1 + $n2 + $n3 - $n1_fix - $n2_fix;
-        $n_good1 = count($res) - $n_bad;
-        $n_good2 = $n_ok + $n_ok_fix + $n1_fix + $n2_fix;
-        $percent_ok = round($n_ok * 100 / count($lines1), 2);
+        $n_bad = $n1 + $n2 + $n3 - $n_ok_fix - $n1_fix - $n2_fix;
+        $n_good = $n_ok + $n_ok_fix + $n1_fix + $n2_fix;
+        $percent_ok = round($n_good * 100 / count($lines1), 2);
+        $percent_not_ok = round($n_bad * 100 / count($lines1), 2);
         $report .= "nb in list1 ($file_serie) : " . count($lines1) . " - nb in list2 ($file_names) : " . count($names) . "\n";
         $report .= "case 1 : $n1 dates present in $file_serie and missing in $file_names - $n1_fix fixed by 1955\n";
         if($do_report_full) $report .=  print_r($missing_in_names, true) . "\n";
@@ -494,8 +495,9 @@ class SerieA{
         $report .= "case 3 : $n3 date ambiguities with different nb\n";
         if($do_report_full) $report .= print_r($doublons_different_nb, true) . "\n";
         $report .= "Corrections from 1955 book : $n_correction_1955\n";
-        $report .= "total NOT ok : $n_bad\n";
-        $report .= "nb OK (match without ambiguity) : $n_good1 $n_good2 ($percent_ok %)\n";
+        $report .= "nb OK (match without ambiguity) : $n_good ($percent_ok %)\n";
+        $report .= "nb NOT OK : $n_bad ($percent_not_ok %)\n";
+//echo "lines1 = " . count($lines1) . " - good = $n_good - bad = $n_bad\n";                                              
         //
         // 4 - store result
         //
@@ -530,44 +532,7 @@ class SerieA{
             $new['DATE'] = "$day $hour$timezone";
             // place
             $new['PLACE'] = trim($cur['CITY']);
-            $new['COU'] = self::COUNTRIES[$cur['COU']];
-            $new['COD'] = trim($cur['COD']);
-            if($new['COU'] == 'FR' && $new['COD'] == 'ALG'){
-                $new['COU'] = 'DZ';
-                $new['COD'] = '';
-            }
-            else if($new['COU'] == 'FR' && $new['COD'] == 'MON'){
-                $new['COU'] = 'MC';
-                $new['COD'] = '';
-            }
-            else if($new['COU'] == 'FR' && $new['COD'] == 'BEL'){
-                $new['COU'] = 'BE';
-                $new['COD'] = '';
-            }
-            else if($new['COU'] == 'FR' && $new['COD'] == 'B'){
-                $new['COU'] = 'BE';
-                $new['COD'] = '';
-            }
-            else if($new['COU'] == 'FR' && $new['COD'] == 'SCHW'){
-                $new['COU'] = 'CH';
-                $new['COD'] = '';
-            }
-            else if($new['COU'] == 'FR' && $new['COD'] == 'G'){
-                $new['COU'] = 'DE';
-                $new['COD'] = '';
-            }
-            else if($new['COU'] == 'FR' && $new['COD'] == 'ESP'){
-                $new['COU'] = 'ES';
-                $new['COD'] = '';
-            }
-            else if($new['COU'] == 'FR' && $new['COD'] == 'I'){
-                $new['COU'] = 'IT';
-                $new['COD'] = '';
-            }
-            else if($new['COU'] == 'FR' && $new['COD'] == 'N'){
-                $new['COU'] = 'NL';
-                $new['COD'] = '';
-            }
+            [$new['COU'], $new['COD']] = self::compute_country($cur['COU'], $cur['COD']);
             $new['LON'] = Gauquelin5::computeLg($cur['LON']);
             $new['LAT'] = Gauquelin5::computeLat($cur['LAT']);                             
             // @todo link to geonames
@@ -576,7 +541,92 @@ class SerieA{
         }
         $csvfile = Config::$data['dest-dir'] . DS . $serie . '.csv';
         file_put_contents($csvfile, $csv);
+        $report .= "Stored result in $csvfile\n";
         return $report;
+    }
+    
+    
+    // ******************************************************
+    /**
+        Auxiliary of import
+        @return [$n_ok_fix, $n1_fix, $n2_fix]
+    **/
+    private static function corrections1955(&$res, &$missing_in_names, &$doublons_same_nb, $serie, $file_serie, $file_names){
+        $n_ok_fix = $n1_fix = $n2_fix = 0;
+        //
+        // Remove cases in $missing_in_names solved by 1955
+        // useful only for report
+        //
+        for($i=0; $i < count($missing_in_names); $i++){
+            if(in_array($missing_in_names[$i]['NUM'], self::CORRECTIONS_1955[$serie])){
+                unset($missing_in_names[$i]);
+                $n1_fix++;
+            }
+        }
+        //
+        // Resolve doublons
+        //
+        $NUMS_1955 = array_keys(self::CORRECTIONS_1955[$serie]);
+        $N_DOUBLONS = count($doublons_same_nb);
+        for($i=0; $i < $N_DOUBLONS; $i++){
+            if(count($doublons_same_nb[$i][$file_serie]) != 2){
+                // resolution works only for doublons (not triplets or more elements)
+                continue;
+            }
+            $found = false;
+            if(in_array($doublons_same_nb[$i][$file_serie][0]['NUM'], $NUMS_1955)){
+                $NUM = $doublons_same_nb[$i][$file_serie][0]['NUM'];
+                $NAME = self::CORRECTIONS_1955[$serie][$NUM];
+                $found = 0;
+            }
+            else if(in_array($doublons_same_nb[$i][$file_serie][1]['NUM'], $NUMS_1955)){
+                $NUM = $doublons_same_nb[$i][$file_serie][1]['NUM'];
+                $NAME = self::CORRECTIONS_1955[$serie][$NUM];
+                $found = 1;
+            }
+            if($found !== false){
+                // resolve first
+                $idx_num = ($found === 0 ? 1 : 0);
+                $idx_name = ($doublons_same_nb[$i][$file_names][0]['NAME'] == $NAME ? 1 : 0); // HERE use of exact name spelling in self::CORRECTIONS_1955
+                $new_num1 = $doublons_same_nb[$i][$file_serie][$idx_num]['NUM'];
+                $new_name1 = $doublons_same_nb[$i][$file_names][$idx_name]['NAME'];
+                // inject doublon resolution in $res
+                for($j=0; $j < count($res); $j++){
+                    if($res[$j]['NUM'] == $new_num1){
+                        $res[$j]['NAME'] = $new_name1;
+                        break;
+                    }
+                }
+                // resolve second
+                $idx_num = ($idx_num == 0 ? 1 : 0);
+                $idx_name = ($idx_name == 0 ? 1 : 0);
+                $new_num2 = $doublons_same_nb[$i][$file_serie][$idx_num]['NUM'];
+                $new_name2 = $doublons_same_nb[$i][$file_names][$idx_name]['NAME'];
+                // inject doublon resolution in $res
+                for($j=0; $j < count($res); $j++){
+                    if($res[$j]['NUM'] == $new_num2){
+                        $res[$j]['NAME'] = $new_name2;
+                        break;
+                    }
+                }
+                $n2_fix += 2;
+                unset($doublons_same_nb[$i]); // useful only for report
+            }
+        }
+        //
+        // directly fix the result with data of self::CORRECTIONS_1955
+        // only for cases not solved by doublons
+        //
+        $n = count($res);
+        for($i=0; $i < $n; $i++){
+            $NUM = $res[$i]['NUM'];
+            // test on strpos done to avoid counting cases solved by doublons
+            if(isset(self::CORRECTIONS_1955[$serie][$NUM]) && strpos($res[$i]['NAME'], 'Gauquelin-') === 0){
+                $n_ok_fix++;
+                $res[$i]['NAME'] = self::CORRECTIONS_1955[$serie][$NUM];
+            }
+        }
+        return [$n_ok_fix, $n1_fix, $n2_fix];
     }
     
     
@@ -614,74 +664,52 @@ class SerieA{
     
     
     // ******************************************************
-    /**
-        Auxiliary of import
-        @return [$n_ok_fix, $n1_fix, $n2_fix]
+    /** 
+        Computes the ISO 3166 country code from fields COU and COD of cura files
+        Auxiliary of import()
     **/
-    private static function corrections1955(&$res, &$missing_in_names, &$doublons_same_nb, $serie, $file_serie, $file_names){
-        $n_ok_fix = $n1_fix = $n2_fix = 0;
-        //
-        // directly fix the result with data of self::CORRECTIONS_1955
-        //
-        $n = count($res);
-        for($i=0; $i < $n; $i++){
-            $NUM = $res[$i]['NUM'];
-            if(isset(self::CORRECTIONS_1955[$serie][$NUM])){
-                $n_ok_fix++;
-                $res[$i]['NAME'] = self::CORRECTIONS_1955[$serie][$NUM];
-            }
+    private static function compute_country($COU, $COD){
+        $COU = self::COUNTRIES[$COU];
+        $COD = trim($COD);
+        if($COU == 'FR' && $COD== 'ALG'){
+            $COU = 'DZ';
+            $COD= '';
         }
-        // Remove cases in $missing_in_names solved by 1955
-        // useful only for report
-        for($i=0; $i < count($missing_in_names); $i++){
-            if(in_array($missing_in_names[$i]['NUM'], self::CORRECTIONS_1955[$serie])){
-                unset($missing_in_names[$i]);
-                $n1_fix++;
-            }
+        else if($COU == 'FR' && $COD == 'MON'){
+            $COU = 'MC';
+            $COD= '';
         }
-        //
-        // Resolve doublons
-        //
-        $NUMS_1955 = array_keys(self::CORRECTIONS_1955[$serie]);
-        $N_DOUBLONS = count($doublons_same_nb);
-        for($i=0; $i < $N_DOUBLONS; $i++){
-            if(count($doublons_same_nb[$i][$file_serie]) != 2){
-                // resolution works only for doublons (not triplets or more elements)
-                continue;
-            }
-            $found = false;
-            if(in_array($doublons_same_nb[$i][$file_serie][0]['NUM'], $NUMS_1955)){
-                $NUM = $doublons_same_nb[$i][$file_serie][0]['NUM'];
-                $NAME = self::CORRECTIONS_1955[$serie][$NUM];
-                $found = 0;
-            }
-            else if(in_array($doublons_same_nb[$i][$file_serie][1]['NUM'], $NUMS_1955)){
-                $NUM = $doublons_same_nb[$i][$file_serie][1]['NUM'];
-                $NAME = self::CORRECTIONS_1955[$serie][$NUM];
-                $found = 1;
-            }
-            if($found !== false){
-                $n2_fix++;
-                $idx_num = ($found == 0 ? 1 : 0);
-                $idx_name = ($doublons_same_nb[$i][$file_names][0]['NAME'] == $NAME ? 1 : 0);
-                $new_num = $doublons_same_nb[$i][$file_serie][$idx_num]['NUM'];
-                $new_name = $doublons_same_nb[$i][$file_names][$idx_name]['NAME'];
-                // inject doublon resolution in $res
-                for($j=0; $j < count($res); $j++){
-                    if($res[$j]['NUM'] == $new_num){
-                        $res[$j]['NAME'] = $new_name;
-                        break;
-                    }
-                }
-                unset($doublons_same_nb[$i]); // useful only for report
-// echo "\n"; print_r($doublons_same_nb[$i]); echo "\n";
-// echo "NUM = $NUM\nNAME = $NAME\n";
-//echo "new num = $new_num - new name = $new_name\n";
-// break;
-            }
+        else if($COU == 'FR' && $COD == 'BEL'){
+            $COU = 'BE';
+            $COD= '';
         }
-        return [$n_ok_fix, $n1_fix, $n2_fix];
+        else if($COU == 'FR' && $COD == 'B'){
+            $COU = 'BE';
+            $COD= '';
+        }
+        else if($COU == 'FR' && $COD == 'SCHW'){
+            $COU = 'CH';
+            $COD= '';
+        }
+        else if($COU == 'FR' && $COD == 'G'){
+            $COU = 'DE';
+            $COD= '';
+        }
+        else if($COU == 'FR' && $COD == 'ESP'){
+            $COU = 'ES';
+            $COD= '';
+        }
+        else if($COU == 'FR' && $COD == 'I'){
+            $COU = 'IT';
+            $COD= '';
+        }
+        else if($COU == 'FR' && $COD == 'N'){
+            $COU = 'NL';
+            $COD= '';
+        }
+        return [$COU, $COD];
     }
+    
     
 }// end class    
 

@@ -63,9 +63,10 @@ class Gauquelin5{
         Unique entry point of this package
         Acts as a router to different action methods
         @param      $serie string representing a valid serie (as defined in run.php)
+        @param      $action string representing a valid action (as defined in run.php)
         @return     string a report
     **/
-    public static function import($serie){
+    public static function action($action, $serie){
         switch($serie){
         	case 'A' : 
         	    $series = ['A1', 'A2', 'A3', 'A4', 'A5', 'A6'];
@@ -80,7 +81,7 @@ class Gauquelin5{
         $report = '';
         foreach($series as $s){
             $classname = 'gauquelin5\\' . self::SERIES_CLASS[$s];
-            $report .= $classname::import($s);
+            $report .= $classname::$action($s);
         }
         return $report;
     }

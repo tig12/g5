@@ -53,7 +53,7 @@ class SerieE1_E3{
         @param  $serie Muste be 'E1' or 'E3'
         @return report
     **/
-    public static function import($serie){
+    public static function cura2csv($serie){
         self::$n_missing_places = 0;
         self::$n_missing_timezone = 0;
         self::$n_total = 0;
