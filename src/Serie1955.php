@@ -21,16 +21,16 @@ class Serie1955{
     
     // *****************************************
     /** 
-        Generates the 1955 files
-        @param  $serie  String musst be '1955'
+        Generates the 1955 files from "first-edited" csv files
+        @param  $serie  String must be '1955'
         @return report
         @throws Exception if unable to parse
     **/
-    public static function cura2csv($serie){
+    public static function cura_1955($serie){
         $dest_dir = Config::$data['1955']['dest-dir'];
         foreach(Serie1955Data::GROUPS as $groupCode => [$groupName, $serie]){
             if(count(Serie1955Data::DATA[$groupCode]) == 0){
-                continue; // useful while developing, for groups not treated
+                continue; // for groups not treated
             }
             echo "Generating 1955 group $groupCode : $groupName\n";
             $res = [];
@@ -49,7 +49,7 @@ class Serie1955{
             //
             // sort $res
             //
-            $sort_field = $groupCode == '570SPO' ? 0 : 1;
+            $sort_field = $groupCode == '570SPO' ? 0 : 1; // @todo read from config
             $res = \lib::sortByKey($res, $sort_field);
             echo '  ' . count($res) . " persons stored\n";
             // generate output

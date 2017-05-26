@@ -1,4 +1,4 @@
-<?php
+    <?php
 /********************************************************************************
     Importation of Gauquelin 5th edition ; code specific to series A
     matches first list and chronological order list
@@ -100,7 +100,7 @@ class SerieA{
             ]
         Name spelling is the exact spelling contained in gd902N.html
         This exact spelling is used to remove ambiguities
-        It is often different from 1955 spelling
+        It may differ from 1955 spelling
     **/
     const CORRECTIONS_1955 = [
         // coming from 570 sportifs
@@ -348,7 +348,7 @@ class SerieA{
         @return report
         @throws Exception if unable to parse
     **/
-    public static function cura2csv($serie){
+    public static function cura2raw($serie){
         $report =  "--- Importing serie $serie\n";
         $raw = Gauquelin5::readHtmlFile($serie);
         $file_serie = Gauquelin5::serie2filename($serie);
