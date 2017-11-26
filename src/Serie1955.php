@@ -53,7 +53,7 @@ class Serie1955{
             $res = \lib::sortByKey($res, $sort_field);
             echo '  ' . count($res) . " persons stored\n";
             // generate output
-            $output = 'SERIE' . Gauquelin5::CSV_SEP . $input[0]; // field names
+            $output = 'ORIGIN' . Gauquelin5::CSV_SEP . $input[0]; // field names
             foreach($res as $fields){
                 $output .= $serie . Gauquelin5::CSV_SEP . implode(Gauquelin5::CSV_SEP, $fields);
             }

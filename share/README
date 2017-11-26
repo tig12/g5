@@ -13,8 +13,8 @@ php run-gauquelin5.php A1
 (see setting "dest-dir" of config.yml)
 It contains lines with lots of unmatched names
 
-- copy A1.csv to the directory containing this readme
-The copy is done once, and the copy is used to correct
+- copy A1.csv to the directory containing this README
+The copy is done once, and the copy is used to do the human corrections
 
 - edit manually this copy of A1.csv to add corrections
 
