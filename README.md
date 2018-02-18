@@ -129,6 +129,7 @@ Here is a complete list of profession codes that is used in all generated files
 | NAT | Natation | Swimming | 
 | OPE | Chanteur d'opéra | Opera singer | 
 | PAI | Peintre | Painter | 
+| PAT | Patin à roulettes | Roller Skates | 
 | PEL | Pelote basque | Pelote basque | 
 | PH | Médecin | Physician | 
 | PHO | Photographe | Photographer | 
