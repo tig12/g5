@@ -55,7 +55,9 @@ switch($command){
 //
 
 // ******************************************************
-/**  **/
+/**
+    Generates a table of profession codes in markdown format (tested on github)
+**/
 function md_table(){
     $codes = read_input_file();
     ksort($codes);
@@ -70,7 +72,9 @@ function md_table(){
 
 
 // ******************************************************
-/**  **/
+/**
+    Generates a table of profession codes in html
+**/
 function html_table(){
     $codes = read_input_file();
     $res = '<style>.{:nth-child(even){background-color:#F8F8F8;}</style>';

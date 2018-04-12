@@ -29,6 +29,7 @@ class Gauquelin5{
         'A6' => 'SerieA',
         //
         '1955' => 'Serie1955',
+        //
         'B1' => 'SerieB',
         'B2' => 'SerieB',
         'B3' => 'SerieB',
@@ -62,8 +63,8 @@ class Gauquelin5{
     /** 
         Unique entry point of this package
         Acts as a router to different action methods
-        @param      $serie string representing a valid serie (as defined in run.php)
-        @param      $action string representing a valid action (as defined in run.php)
+        @param      $serie string representing a valid serie (as defined in run-gauquelin5.php)
+        @param      $action string representing a valid action (as defined in run-gauquelin5.php)
         @return     string a report
     **/
     public static function action($action, $serie){

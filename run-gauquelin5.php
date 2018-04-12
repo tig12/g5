@@ -11,23 +11,23 @@
     Association serie name => available actions for this serie
 **/
 $series_actions = [
-    'A'=> ['first', 'final'],
-    'A1'=> ['first', 'final'],
-    'A2'=> ['first', 'final'],
-    'A3'=> ['first', 'final'],
-    'A4'=> ['first', 'final'],
-    'A5'=> ['first', 'final'],
-    'A6'=> ['first', 'final'],
+    'A'=> ['cura2raw', 'final'],
+    'A1'=> ['cura2raw', 'final'],
+    'A2'=> ['cura2raw', 'final'],
+    'A3'=> ['cura2raw', 'final'],
+    'A4'=> ['cura2raw', 'final'],
+    'A5'=> ['cura2raw', 'final'],
+    'A6'=> ['cura2raw', 'final'],
     //
-    '1955'=> ['human2final'],
+    '1955'=> ['cura_1955'],
     //
-    'B'=> ['first'],
-    'B1'=> ['first'],
-    'B2'=> ['first'],
-    'B3'=> ['first'],
-    'B4'=> ['first'],
-    'B5'=> ['first'],
-    'B6'=> ['first'],
+    'B'=> ['cura2raw'],
+    'B1'=> ['cura2raw'],
+    'B2'=> ['cura2raw'],
+    'B3'=> ['cura2raw'],
+    'B4'=> ['cura2raw'],
+    'B5'=> ['cura2raw'],
+    'B6'=> ['cura2raw'],
     //
     'D6'=> [''],
     'D9a'=> [''],
@@ -35,7 +35,7 @@ $series_actions = [
     'D9c'=> [''],
     'D10'=> [''],
     //
-    'E1'=> ['first'],
+    'E1'=> ['cura2raw'],
     //
     'E2'=> [''],
     'E2a'=> [''],                                                                       
@@ -46,7 +46,7 @@ $series_actions = [
     'E2f'=> [''],
     'E2g'=> [''],
     //
-    'E3'=> ['first'],
+    'E3'=> ['cura2raw'],
     'F1'=> [''],
     'F2'=> [''],
 ];
@@ -60,8 +60,7 @@ with :
     <serie> = '{$series_str}'
     <action> depends on serie
 Examples :
-    php {$argv[0]} A2 first       # will convert file 902gdA2.html to A2.csv
-    php {$argv[0]} A2 manu2csv       # will convert manually edited version of A2.csv to A2.csv
+    php {$argv[0]} A2 cura2raw       # will convert file 902gdA2.html to A2.csv
 Notes :
     - if serie = A, will compute series A1 to A6
     - if serie = B, will compute series B1 to B6

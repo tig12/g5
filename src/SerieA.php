@@ -1,7 +1,10 @@
-    <?php
+<?php
 /********************************************************************************
-    Importation of Gauquelin 5th edition ; code specific to series A
-    matches first list and chronological order list
+    Importation of Gauquelin 5th edition ; code specific to series A.
+    Matches first list and chronological order list
+    
+    This code uses file 902gdN.html to retrieve the names, but this could have been done using only 902gdA*y.html files
+    (for example, 902gdA1y.html could have been used instead of using 902gdA1.html and 902gdN.html).
     
     @license    GPL
     @history    2017-04-27 10:53:23+02:00, Thierry Graff : creation
@@ -31,7 +34,7 @@ class SerieA{
     
     /** 
         More detailed professions
-        ex : in file 902gdA1y, profession of persons numbered between 1 and 86 is Athlétisme
+        ex : in file 902gdA1y, profession of persons numbered between 1 and 86 (inclusive) is Athlétisme
     **/
     const PROFESSIONS_DETAILS = [
         'A1' => [
@@ -497,7 +500,6 @@ class SerieA{
         $report .= "Corrections from 1955 book : $n_correction_1955\n";
         $report .= "nb OK (match without ambiguity) : $n_good ($percent_ok %)\n";
         $report .= "nb NOT OK : $n_bad ($percent_not_ok %)\n";
-//echo "lines1 = " . count($lines1) . " - good = $n_good - bad = $n_bad\n";                                              
         //
         // 4 - store result
         //

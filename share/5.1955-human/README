@@ -12,7 +12,7 @@ NUM	NAME PRO DATE PLACE	COU	COD	LON	LAT
 An exact copy of the informations coming from cura (ex A1.csv)
 
 
-FIRST55 LAST55 HOUR55 DATE55 PLACE55 NOTES55
+FIRST55	LAST55	HOUR55	DATE55	PLACE55	NOTES55	PRO55
 The values in 1955 paper edition, when different from cura values
 Columns filled by a human
 
