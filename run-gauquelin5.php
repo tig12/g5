@@ -2,6 +2,9 @@
 /********************************************************************************
     CLI (command line interface) management of Gauquelin 5 import
     
+    usage : php run-gauquelin5.php
+            and follow the instructions
+    
     @license    GPL
     @copyright  Thierry Graff
     @history    2017-04-26 12:18:30+02:00, Thierry Graff : creation
@@ -11,23 +14,23 @@
     Association serie name => available actions for this serie
 **/
 $series_actions = [
-    'A'=> ['cura2raw', 'final'],
-    'A1'=> ['cura2raw', 'final'],
-    'A2'=> ['cura2raw', 'final'],
-    'A3'=> ['cura2raw', 'final'],
-    'A4'=> ['cura2raw', 'final'],
-    'A5'=> ['cura2raw', 'final'],
-    'A6'=> ['cura2raw', 'final'],
+    'A'=> ['raw2exported', 'final'],
+    'A1'=> ['raw2exported', 'final'],
+    'A2'=> ['raw2exported', 'final'],
+    'A3'=> ['raw2exported', 'final'],
+    'A4'=> ['raw2exported', 'final'],
+    'A5'=> ['raw2exported', 'final'],
+    'A6'=> ['raw2exported', 'final'],
     //
-    '1955'=> ['cura_1955'],
+    '1955'=> ['modified21955'],
     //
-    'B'=> ['cura2raw'],
-    'B1'=> ['cura2raw'],
-    'B2'=> ['cura2raw'],
-    'B3'=> ['cura2raw'],
-    'B4'=> ['cura2raw'],
-    'B5'=> ['cura2raw'],
-    'B6'=> ['cura2raw'],
+    'B'=> ['raw2exported'],
+    'B1'=> ['raw2exported'],
+    'B2'=> ['raw2exported'],
+    'B3'=> ['raw2exported'],
+    'B4'=> ['raw2exported'],
+    'B5'=> ['raw2exported'],
+    'B6'=> ['raw2exported'],
     //
     'D6'=> [''],
     'D9a'=> [''],
@@ -35,7 +38,7 @@ $series_actions = [
     'D9c'=> [''],
     'D10'=> [''],
     //
-    'E1'=> ['cura2raw'],
+    'E1'=> ['raw2exported'],
     //
     'E2'=> [''],
     'E2a'=> [''],                                                                       
@@ -46,7 +49,7 @@ $series_actions = [
     'E2f'=> [''],
     'E2g'=> [''],
     //
-    'E3'=> ['cura2raw'],
+    'E3'=> ['raw2exported'],
     'F1'=> [''],
     'F2'=> [''],
 ];
@@ -60,7 +63,7 @@ with :
     <serie> = '{$series_str}'
     <action> depends on serie
 Examples :
-    php {$argv[0]} A2 cura2raw       # will convert file 902gdA2.html to A2.csv
+    php {$argv[0]} A2 raw2exported       # will convert file 1-cura-raw/902gdA2.html to 2-cura-exported/A2.csv
 Notes :
     - if serie = A, will compute series A1 to A6
     - if serie = B, will compute series B1 to B6

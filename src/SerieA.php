@@ -103,7 +103,7 @@ class SerieA{
             ]
         Name spelling is the exact spelling contained in gd902N.html
         This exact spelling is used to remove ambiguities
-        It may differ from 1955 spelling
+        It may differ from 1955 book spelling
     **/
     const CORRECTIONS_1955 = [
         // coming from 570 sportifs
@@ -344,14 +344,17 @@ class SerieA{
     
     // *****************************************
     /** 
-        Parses one file of serie A and stores it in a csv file
-        Merge the original list (without names) with names contained in file 902gdN.html
+        Parses one html cura file of serie A (locally stored in directory 1-cura-raw/)
+        and stores it in a csv file (in directory 2-cura-exported/)
+        
+        Merges the original list (without names) with names contained in file 902gdN.html
         So merge is done using birthdate - Merging not complete because of doublons (persons born the same day)
+        
         @param  $serie  String identifying the serie (ex : 'A1')
         @return report
         @throws Exception if unable to parse
     **/
-    public static function cura2raw($serie){
+    public static function raw2exported($serie){
         $report =  "--- Importing serie $serie\n";
         $raw = Gauquelin5::readHtmlFile($serie);
         $file_serie = Gauquelin5::serie2filename($serie);
@@ -481,6 +484,9 @@ class SerieA{
         if(isset(self::CORRECTIONS_1955[$serie])){
             [$n_ok_fix, $n1_fix, $n2_fix] = self::corrections1955($res, $missing_in_names, $doublons_same_nb, $serie, $file_serie, $file_names);
         }
+        else{
+            $n_ok_fix = $n1_fix = $n2_fix = 0;
+        }
         //
         // report
         //
@@ -541,7 +547,7 @@ class SerieA{
             $csv .= implode(Gauquelin5::CSV_SEP, $new) . "\n";
             $nb_stored ++;
         }
-        $csvfile = Config::$data['dest-dir'] . DS . $serie . '.csv';
+        $csvfile = Config::$data['dirs']['2-cura-exported'] . DS . $serie . '.csv';
         file_put_contents($csvfile, $csv);
         $report .= "Stored result in $csvfile\n";
         return $report;
@@ -558,6 +564,7 @@ class SerieA{
         //
         // Remove cases in $missing_in_names solved by 1955
         // useful only for report
+        // computes $n1_fix
         //
         for($i=0; $i < count($missing_in_names); $i++){
             if(in_array($missing_in_names[$i]['NUM'], self::CORRECTIONS_1955[$serie])){
@@ -567,6 +574,7 @@ class SerieA{
         }
         //
         // Resolve doublons
+        // computes $n2_fix
         //
         $NUMS_1955 = array_keys(self::CORRECTIONS_1955[$serie]);
         $N_DOUBLONS = count($doublons_same_nb);
@@ -618,6 +626,7 @@ class SerieA{
         //
         // directly fix the result with data of self::CORRECTIONS_1955
         // only for cases not solved by doublons
+        // computes $n_ok_fix
         //
         $n = count($res);
         for($i=0; $i < $n; $i++){

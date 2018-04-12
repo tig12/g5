@@ -11,7 +11,7 @@
 
 <img style="display:block; margin:1em;" src="serie-A1-sequence.svg" alt="" />
     
-File names or directories cited in this page are relative to gauquelin5 root directory (the directory containing <code>config.yml</code> and <code>run-gauquelin5.php</code>).
+<br>Absolute path to directories containing data (<code>1-cura-raw/</code> etc.) must be configured in <code>config.yml</code>.
 
 <style>
 .steps>li{margin-bottom:1em;}
@@ -21,18 +21,17 @@ File names or directories cited in this page are relative to gauquelin5 root dir
     <li>
         <b>Store cura.free.fr data on a local machine</b> (by program).
         <br>This can be done using the script <code>tools/get-data</code>.
-        <br>These data are stored somewhere on a local disk in a directory called <code>1.cura.free.fr/</code>.
-        <br>(Absolute path to this directory must be configured in <code>config.yml</code>).
+        <br>These data are stored somewhere on a local disk in a directory called <code>1-cura-raw/</code>.
     </li>
                                                                                                                                                 
     <li>
         <b>Extract data from html pages to generate csv files</b> (by program).
-        <br>This is done with the command <code>php run-gauquelin5.php A1 cura2raw</code>.
+        <br>This is done with the command <code>php run-gauquelin5.php A1 raw2exported</code>.
         <br>The code used to perform this step is not trivial, because 2 lists must be merged from cura.free.fr data :
         <br>- One list contains the data with complete information (birth date, hour, place, country, profession) WITHOUT names.
         <br>- One list contains the names and only birth date.
         <br>So the merge process leads to cases that are not solvable by program, and human corrections (using Gauquelin original 1955 book) were necessary to write this code.
-        <br>These data are stored in a directory called <code>2.first/</code> ; for serie A1, the file is <code>2.first/A1.csv</code>.
+        <br>These data are stored in a directory called <code>2-cura-exported/</code> ; for serie A1, the file is <code>2-cura-exported/A1.csv</code>.
         <br>Other corrections are done during this step :
         <ul>
             <li>Convert country codes to ISO 3166.</li>
@@ -40,38 +39,29 @@ File names or directories cited in this page are relative to gauquelin5 root dir
         </ul>
     </li>
     
-    <li>                                                     
+    <li>
         <b>Edit the csv files to associate cura data to Gauquelin 1955 original groups</b> (by human).
-        <br>File <code>2.first/A1.csv</code> is copied by a human to <code>3.first-human-A/A1.csv</code>.
+        <br>File <code>2-cura-exported/A1.csv</code> is copied by a human to <code>3-cura-modified/A1.csv</code>.
         <br>A new column ("1955") is added to this file ; this column is filled by a human with a code identifying Gauquelin 1955 groups.
         <br>Lines coming from the group "570 sportifs" were marked "570SPO".
     </li>
     
     <li>
         <b>Generate one file per original 1955 group</b> (by program).
-        <br>Column "1955" of csv files located in <code>3.first-human-A/</code> is used to generate on file per 1955 group.
-        <br>These files are generated in <code>4.1955/</code> using the command <code>php run-gauquelin5 1955 cura_1955</code>
-        <br>This generates for example <code>4.1955/570SPO.csv</code>
+        <br>Column "1955" of csv files located in <code>3-cura-modified/</code> is used to generate on file per 1955 group.
+        <br>These files are generated in <code>4-1955-generated/</code> using the command <code>php run-gauquelin5 1955 modified21955</code>
+        <br>This generates for example <code>4-1955-generated/570SPO.csv</code>
     </li>
     
     <li>
-        <b>Copy these files to directory <code>5.1955-human/</code></b> (by human).
+        <b>Copy these files to directory <code>5-1955-modified/</code></b> (by human).
     </li>
     
     <li>
-        <b>Correct the files located in <code>5.1955-human/</code> using Gauquelin 1955 book</b> (by human).
+        <b>Correct the files located in <code>5-1955-modified/</code> using Gauquelin 1955 book</b> (by human).
         <br>Files in this directory are corrected by human.
-        <br>The following columns are added : <pre>
-G55
-FIRST55
-LAST55
-HOUR55
-DATE55
-PLACE55
-NOTES55
-PRO55
-</pre>
-        They are filled when cura data differ from Gauquelin book.
+        <br>The following columns are added : <code>G55; FIRST55; LAST55; HOUR55; DATE55; PLACE55; NOTES55; PRO55</code>
+        <br>They are filled when cura data differ from Gauquelin book.
         <br>This step is easier when 2 persons are involved : one reading the book, the other correcting the file.
     </li>
     

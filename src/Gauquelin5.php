@@ -90,6 +90,8 @@ class Gauquelin5{
     
     // *****************************************
     /** 
+        Computes the name of a html file downloaded from cura.free.fr
+        and locally stored in directory 1-cura-raw (see absolute path of this directory in config.yml)
         @param  $serie : string like 'A1'
         @return filename, string like '902gdA1.html'
     **/
@@ -100,30 +102,38 @@ class Gauquelin5{
     
     // *****************************************
     /** 
+        Reads a html file downloaded from cura.free.fr
+        and locally stored in directory 1-cura-raw (see absolute path of this directory in config.yml)
         @param  $serie : string like 'A1'
     **/
     public static function readHtmlFile($serie){
-        $raw_file = Config::$data['source-dir'] . DS . self::serie2filename($serie);
+        $raw_file = Config::$data['dirs']['1-cura-raw'] . DS . self::serie2filename($serie);
         return utf8_encode(file_get_contents($raw_file));
     }
     
     
     // *****************************************
-    /** Converts the fields YEA, MON, DAY of a line in a YYYY-MM-DD date **/
+    /**
+        Converts the fields YEA, MON, DAY of a line in a YYYY-MM-DD date
+    **/
     public static function computeDay($array){
         return trim($array['YEA']) . '-' . sprintf('%02s', trim($array['MON'])) . '-' . sprintf('%02s', trim($array['DAY']));
     }
     
     
     // *****************************************
-    /** Converts the fields H, MN, SEC of a line in a HH:MM hour **/
+    /**
+        Converts the fields H, MN, SEC of a line in a HH:MM hour
+    **/
     public static function computeHour(&$array){
         return trim(sprintf('%02s', $array['H']) . ':' . sprintf('%02s', $array['MN']) . ':' . sprintf('%02s', $array['SEC']));
     }
     
     
     // *****************************************
-    /** Converts field LON in decimal degrees **/
+    /**
+        Converts field LON in decimal degrees
+    **/
     public static function computeLg($str){
         preg_match('/(\d+)(E|W) *?(\d+)/', $str, $m);
         if(count($m) != 4){
@@ -135,7 +145,9 @@ class Gauquelin5{
 
     
     // *****************************************
-    /** Converts field LAT in decimal degrees **/
+    /**
+        Converts field LAT in decimal degrees
+    **/
     public static function computeLat($str){
         preg_match('/(\d+)(N|S) *?(\d+)/', $str, $m);
         if(count($m) != 4){
