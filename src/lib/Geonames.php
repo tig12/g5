@@ -49,6 +49,7 @@ class Geonames{
                     - 'admin2_code' : administrative code, level 2 (ex : département in France)
                     - 'lg'          : longitude, decimal degrees
                     - 'lat'         : latitude, decimal degrees
+                    - 'timezone'    : textual timezone identifier (ex : "Europe/Paris")
     **/
     public static function match($fields){
         self::compute_dblink();
@@ -80,6 +81,7 @@ class Geonames{
                     'admin2-code'   => $matches[0]['admin2_code'],
                     'lg'            => $matches[0]['longitude'],
                     'lat'           => $matches[0]['latitude'],
+                    'timezone'      => $matches[0]['timezone'],
                 ];
             }
         }

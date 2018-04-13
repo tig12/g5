@@ -543,7 +543,6 @@ class SerieA{
             [$new['COU'], $new['COD']] = self::compute_country($cur['COU'], $cur['COD']);
             $new['LON'] = Gauquelin5::computeLg($cur['LON']);
             $new['LAT'] = Gauquelin5::computeLat($cur['LAT']);                             
-            // @todo link to geonames
             $csv .= implode(Gauquelin5::CSV_SEP, $new) . "\n";
             $nb_stored ++;
         }

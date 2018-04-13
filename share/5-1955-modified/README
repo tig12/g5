@@ -8,10 +8,14 @@ ORIGIN
 cura serie (ex A1) or G55 to indicate a person present in the paper edition, and not in cura site.
 
 NUM	NAME PRO DATE PLACE	COU	COD	LON	LAT
-An exact copy of the informations coming from cura (ex A1.csv)
+An exact copy of the informations coming from cura (ex 2-cura-exported/A1.csv)
 
 FIRST55	LAST55	HOUR55	DATE55	PLACE55	NOTES55	PRO55
 The values in 1955 paper edition, when different from cura values
 Columns filled by a human
 
-
+Rules followed for corrections
+------------------------------
+- When a field is different, write the value coming from the paper book in the corresponding column.
+- When a name contains more than 2 words separated by a space, fill FIRST55 and LAST55 columns
+  (so composed family names or given names can be computed without ambigiuty by program).

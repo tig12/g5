@@ -75,19 +75,89 @@ class Serie1955{
             $res = $firstline . "\n";
             $groupCode = str_replace('.csv', '', basename($file));
             $lines = file($file, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
-            // field names
-            $fieldnames = explode(',', $lines[0]);
-echo "\n<pre>"; print_r($fieldnames); echo "</pre>";
             array_shift($lines);
-            //$fieldnames = array_flip($fieldnames);
             foreach($lines as $line){
+                $cur = [];
                 $fields = explode(self::CSV_SEP_LIBREOFFICE, $line);
-echo "\n<pre>"; print_r($fields); echo "</pre>";
-break;
+                //
+                $cur['ORIGIN'] = $fields[1];
+                $cur['NUM'] = $fields[2];
+                // name
+                $tmp = explode(' ', $fields[3]);
+                if(count($tmp) != 2){
+                    // can happens for 2 cases :
+                    // - persons not in cura files and added by a human
+                    // - persons with composed last names
+                    // In both cases, FIRST55 and LAST55 should be filled
+                    if($fields[11] == '' || $fields[12] == ''){
+                        echo "ANOMALY ON NAMES - {$cur['NUM']} - LINE SKIPPED, MUST BE FIXED\n";
+                        continue;
+                    }
+                    else{
+                        $family = $fields[11];
+                        $given = $fields[12];
+                    }
+                }
+                else{
+                    [$family, $given] = explode(' ', $fields[3]);
+                    // If FIRST55 or LAST55 are filled, override cura value
+                    if($fields[11] != ''){
+                        $family = $fields[11];
+                    }
+                    if($fields[12] != ''){
+                        $given = $fields[12];
+                    }
+                }
+                $cur['FAMILYNAME'] = $family;
+                $cur['GIVENNAME'] = $given;
+                //
+                $cur['PRO'] = $fields[4];
+                // place processed before date to find timezone from geonames
+                // but date is put before the date in resulting line
+                $place = ($fields[15] != '' ? $fields[15] : $fields[6]);
+                $country = $fields[7];
+                $admin2 =  $fields[8];
+                // HERE try to match Geonames
+                $slug = \lib::slugify($place);
+                $geonames = \Geonames::match([
+                    'slug' => $slug,
+                    'countries' => [$country],
+                    'admin2-code' => $admin2,
+                ]);
+                if($geonames){
+echo "\n<pre>"; print_r($geonames); echo "</pre>"; exit;
+                }
+                else{
+                    echo "COULD NOT MATCH GEONAMES - {$cur['NUM']} - LINE SKIPPED, MUST BE FIXED\n";
+exit;
+                    continue;
+                }
+//echo "$family === $given\n";                                                                                     
+//echo "\n<pre>"; print_r($cur); echo "</pre>";
+//break;
             }
         }
     }
-    
+/* 
+    [0] => G55
+    [1] => ORIGIN
+    [2] => NUM
+    [3] => NAME
+    [4] => PRO
+    [5] => DATE
+    [6] => PLACE
+    [7] => COU
+    [8] => COD
+    [9] => LON
+    [10] => LAT
+    [11] => FIRST55
+    [12] => LAST55
+    [13] => HOUR55
+    [14] => DATE55
+    [15] => PLACE55
+    [16] => NOTES55
+    [17] => PRO55
+*/    
     
     // *****************************************
     /** 
