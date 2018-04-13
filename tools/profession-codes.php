@@ -1,6 +1,12 @@
 <?php
 /******************************************************************************
-    Code to generate stuff related to professions
+    Code to generate lists of profession codes and their names
+    
+    usage :
+    - Generate a markdown table :
+    php profession-codes.php md
+    - Genrate a html table
+    profession-codes.php html
     
     @license    GPL
     @copyright  Thierry Graff
@@ -10,8 +16,8 @@
 define('DS', DIRECTORY_SEPARATOR);
 
 $commands = [
-    'html-table',
-    'md-table',
+    'html',
+    'md',
 ];
 $commands_str = implode("' or '", $commands);
 
@@ -21,11 +27,7 @@ usage :
 with :
     <command> = '{$commands_str}'
 Exemples :
-    php {$argv[0]} md        # generates the markdown table used in README
-Notes :
-    - if command = A, will compute commands A1 to A6
-    - if command = B, will compute commands B1 to B6
-    - if command = E2, will compute commands E2a to E2g
+    php {$argv[0]} md        # generates the markdown table
 
 USAGE;
 
@@ -45,8 +47,8 @@ if(!in_array($command, $commands)){
 // run
 //
 switch($command){
-	case 'html-table' : html_table(); break;
-	case 'md-table' : md_table(); break;
+	case 'html' : html_table(); break;
+	case 'md' : md_table(); break;
 }
 
 
@@ -100,7 +102,7 @@ function html_table(){
     @return associative array profession code => [profession label fr, profession label en]
 **/
 function read_input_file(){
-    $lines = file(__DIR__ . DS . 'profession-codes');
+    $lines = file(dirname(__DIR__) . DS . 'share' . DS . 'profession-codes');
     $res = [];
     $check = [];
     foreach($lines as $line){

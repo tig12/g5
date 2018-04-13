@@ -37,6 +37,57 @@ class Serie1955{
         '349SCI' => ["349 membres, associés et correspondants de l'académie des sciences", 'A2'],
         '884PRE' => ['884 prêtres', 'ZZ'],
     ];
+
+    
+    // *****************************************
+    /** 
+        Generates the csv files in 6-1955-final/ from csv files located in 5-1955-modified/
+        See README in generated file for a meaning of generated fields
+        
+        Called by : php run-gauquelin5.php 1955 finalize
+        
+        @param  $serie  String must be '1955' - useless but kept for conformity with other classes
+        @return report
+        @throws Exception if unable to parse
+    **/
+    public static function finalize($serie){
+        $src_dir = Config::$data['dirs']['5-1955-modified'];
+        $dest_dir = Config::$data['dirs']['6-1955-final'];
+        $files = glob($src_dir . DS . '*.csv');
+        $generatedFields = [
+            'ORIGIN',
+            'NUM',
+            'FIRSTNAME',
+            'LASTNAME',
+            'PRO',
+            'DATE',
+            'PLACE',
+            'COU',
+            'ADM2',
+            'LON',
+            'LAT',
+        ];
+        if(Config::$data['dirs']['3-cura-modified']){
+            $generatedFields[] = 'GEONAMEID';
+        }
+        $firstline = implode(Gauquelin5::CSV_SEP, $generatedFields);
+        foreach($files as $file){
+            $res = $firstline . "\n";
+            $groupCode = str_replace('.csv', '', basename($file));
+            $lines = file($file, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
+            // field names
+            $fieldnames = explode(',', $lines[0]);
+echo "\n<pre>"; print_r($fieldnames); echo "</pre>";
+            array_shift($lines);
+            //$fieldnames = array_flip($fieldnames);
+            foreach($lines as $line){
+                $fields = explode(self::CSV_SEP_LIBREOFFICE, $line);
+echo "\n<pre>"; print_r($fields); echo "</pre>";
+break;
+            }
+        }
+    }
+    
     
     // *****************************************
     /** 
@@ -132,7 +183,6 @@ class Serie1955{
         }
         return $res;
     }
-
     
 }// end class    
 

@@ -28,7 +28,7 @@ class Names{
         if(!isset($m[2]) || count($m[2]) != 2){
             throw new \Exception("Unable to parse " . $filename);
         }
-        $fieldnames = explode(Gauquelin5::SEP, $m[1][0]);
+        $fieldnames = explode(Gauquelin5::HTML_SEP, $m[1][0]);
         if(count($fieldnames) != 6){
             throw new \Exception("Unable to parse " . $filename . " (there should be 6 fields per line)");
         }
@@ -36,7 +36,7 @@ class Names{
         for($i=0; $i < 2; $i++){
             $lines = explode("\n", $m[2][$i]);
             foreach($lines as $line){
-                $values = explode(Gauquelin5::SEP, $line);
+                $values = explode(Gauquelin5::HTML_SEP, $line);
                 $fields = [];
                 for($j=0; $j < 6; $j++){
                     $fields[$fieldnames[$j]] = $values[$j];

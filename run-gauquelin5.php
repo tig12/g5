@@ -14,15 +14,15 @@
     Association serie name => available actions for this serie
 **/
 $series_actions = [
-    'A'=> ['raw2exported', 'final'],
-    'A1'=> ['raw2exported', 'final'],
-    'A2'=> ['raw2exported', 'final'],
-    'A3'=> ['raw2exported', 'final'],
-    'A4'=> ['raw2exported', 'final'],
-    'A5'=> ['raw2exported', 'final'],
-    'A6'=> ['raw2exported', 'final'],
+    'A'=> ['raw2exported'],
+    'A1'=> ['raw2exported'],
+    'A2'=> ['raw2exported'],
+    'A3'=> ['raw2exported'],
+    'A4'=> ['raw2exported'],
+    'A5'=> ['raw2exported'],
+    'A6'=> ['raw2exported'],
     //
-    '1955'=> ['modified21955'],
+    '1955'=> ['modified21955', 'finalize'],
     //
     'B'=> ['raw2exported'],
     'B1'=> ['raw2exported'],

@@ -367,10 +367,10 @@ class SerieA{
         if(count($m) != 3){
             throw new \Exception("Unable to parse first list (without names) in " . $file_serie);
         }
-        $fieldnames1 = explode(Gauquelin5::SEP, $m[1]);
+        $fieldnames1 = explode(Gauquelin5::HTML_SEP, $m[1]);
         $lines1 = explode("\n", $m[2]);
         foreach($lines1 as $line1){
-            $fields = explode(Gauquelin5::SEP, $line1);
+            $fields = explode(Gauquelin5::HTML_SEP, $line1);
             $tmp = [];
             for($i=0; $i < count($fields); $i++){
                 $tmp[$fieldnames1[$i]] = $fields[$i]; // ex: $tmp['YEA'] = '1817'

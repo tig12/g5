@@ -13,7 +13,7 @@ use gauquelin5\init\Config;
 class Gauquelin5{
     
     /** Separator used in original (html) files **/
-    const SEP = "\t";
+    const HTML_SEP = "\t";
     
     /** Separator used in the generated (csv) files **/
     const CSV_SEP = ';';
