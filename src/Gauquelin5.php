@@ -123,7 +123,7 @@ class Gauquelin5{
     
     // *****************************************
     /**
-        Converts the fields H, MN, SEC of a line in a HH:MM hour
+        Converts the fields H, MN, SEC of a line in a HH:MM:SS hour
     **/
     public static function computeHour(&$array){
         return trim(sprintf('%02s', $array['H']) . ':' . sprintf('%02s', $array['MN']) . ':' . sprintf('%02s', $array['SEC']));
