@@ -53,6 +53,12 @@ class Geonames{
     **/
     public static function match($fields){
         self::compute_dblink();
+        if(substr($fields['slug'], 0, 3) == 'st-'){
+            $fields['slug'] = 'saint-' . substr($fields['slug'], 3);
+        }
+        else if(substr($fields['slug'], 0, 4) == 'ste-'){
+            $fields['slug'] = 'sainte-' . substr($fields['slug'], 4);
+        }
         $where = "slug='{$fields['slug']}'";
         if(isset($fields['admin2-code']) && $fields['admin2-code']){
             $where .= " and admin2_code='{$fields['admin2-code']}'";

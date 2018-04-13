@@ -75,7 +75,7 @@ class Serie1955{
             $res = $firstline . "\n";
             $groupCode = str_replace('.csv', '', basename($file));
             $lines = file($file, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
-            array_shift($lines);
+            array_shift($lines); // line containing field names
             foreach($lines as $line){
                 $cur = [];
                 $fields = explode(self::CSV_SEP_LIBREOFFICE, $line);
@@ -110,13 +110,42 @@ class Serie1955{
                 }
                 $cur['FAMILYNAME'] = $family;
                 $cur['GIVENNAME'] = $given;
-                //
-                $cur['PRO'] = $fields[4];
+                // profession
+                if($fields[20] != ''){
+                    $cur['PRO'] = $fields[20];
+                }
+                else{
+                    $cur['PRO'] = $fields[4];
+                }
                 // place processed before date to find timezone from geonames
                 // but date is put before the date in resulting line
-                $place = ($fields[15] != '' ? $fields[15] : $fields[6]);
-                $country = $fields[7];
-                $admin2 =  $fields[8];
+                if($fields[16] != ''){
+                    $place = $fields[16]; // priority to geonames
+                }
+                else if($fields[15] != ''){
+                    $place = $fields[15]; // then place manually entered
+                }
+                else{
+                    $place = $fields[6]; // then place manually entered
+                }
+                if($fields[18] != ''){
+                    $country = $fields[18];
+                }
+                else{
+                    $country = $fields[7];
+                }
+                if($fields[17] != ''){
+                    $admin2 = $fields[17];
+                }
+                else{
+                    $admin2 = $fields[8];
+                }
+                if($admin2 == 'NONE'){
+                    $admin2 = '';
+                }
+                if(strlen($admin2) == 1 && $country == 'FR'){
+                    $admin2 = '0' . $admin2; // because libreoffice "eats" the trailing 0
+                }
                 // HERE try to match Geonames
                 $slug = \lib::slugify($place);
                 $geonames = \Geonames::match([
@@ -125,19 +154,14 @@ class Serie1955{
                     'admin2-code' => $admin2,
                 ]);
                 if($geonames){
-echo "\n<pre>"; print_r($geonames); echo "</pre>"; exit;
                 }
                 else{
-                    echo "COULD NOT MATCH GEONAMES - {$cur['NUM']} - LINE SKIPPED, MUST BE FIXED\n";
-exit;
+                    echo "COULD NOT MATCH GEONAMES - {$cur['NUM']} - $slug $admin2 - LINE SKIPPED, MUST BE FIXED\n";
+//echo "\n<pre>"; print_r($geonames); echo "</pre>"; exit;
+if($cur['NUM'] != '814') $exit;
                     continue;
                 }
-//echo "$family === $given\n";                                                                                     
-//echo "\n<pre>"; print_r($cur); echo "</pre>";
-//break;
             }
-        }
-    }
 /* 
     [0] => G55
     [1] => ORIGIN
@@ -155,9 +179,14 @@ exit;
     [13] => HOUR55
     [14] => DATE55
     [15] => PLACE55
-    [16] => NOTES55
-    [17] => PRO55
-*/    
+    [16] => PLACE_GEO
+    [17] => COD_GEO
+    [18] => COU_GEO
+    [19] => NOTES55
+    [20] => PRO55
+*/
+        }
+    }
     
     // *****************************************
     /** 
