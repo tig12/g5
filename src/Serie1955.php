@@ -57,7 +57,7 @@ class Serie1955{
         $src_dir = Config::$data['dirs']['3-cura-modified'];
         $dest_dir = Config::$data['dirs']['4-1955-generated'];
         
-        $groups55 = self::loadGroups($src_dir);
+        $groups55 = self::loadGroups3($src_dir);
         
         foreach(self::GROUPS_1955 as $groupCode => [$groupName, $serie]){
             if(count($groups55[$groupCode]) == 0){
@@ -99,12 +99,13 @@ class Serie1955{
     // ******************************************************
     /**
         Loads the csv files located in 3-cura-modified/ in arrays
+        Auxiliary of self::modified21955()
         @param $src_dir String Directory called 3-cura-modified/ in config
         @return associative array :
                 group code => array containing the values of NUM in this group
                 group codes are keys of self::GROUPS_1955
     **/
-    private static function loadGroups($src_dir){
+    private static function loadGroups3($src_dir){
         $res = [];
         foreach(self::GROUPS_1955 as $groupCode => [$name, $serie]){
             $res[$groupCode] = [];
@@ -131,6 +132,7 @@ class Serie1955{
         }
         return $res;
     }
+
     
 }// end class    
 
