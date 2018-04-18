@@ -2,8 +2,8 @@
 
 <article>
     <header>
-        This page details the actions that permit to reconstruct original Gauquelin groups from data retrieved at http://cura.free.fr.
-        <br>The process is documented using the reconstitution of the group "570 sportifs" published in 1955 as an example.
+        This page details the actions that permit to reconstruct original 1955 Gauquelin groups from data retrieved from http://cura.free.fr.
+        <br>The process is documented using the reconstitution of the group "570 sportifs".
     </header>
 
 
@@ -12,6 +12,7 @@
 <img style="display:block; margin:1em;" src="serie-A1-sequence.svg" alt="" />
     
 <br>Absolute path to directories containing data (<code>1-cura-raw/</code> etc.) must be configured in <code>config.yml</code>.
+<br>References to other files are relative to <code>gauquelin5</code> root directory (the directory containing <code>config.yml</code>, <code>src</code>, <code>run-gauquelin5.php</code>).
 
 <style>
 .steps>li{margin-bottom:1em;}
@@ -27,7 +28,7 @@
     <li>
         <b>Extract data from html pages to generate csv files</b> (by program).
         <br>This is done with the command <code>php run-gauquelin5.php A1 raw2exported</code>.
-        <br>The code used to perform this step is not trivial, because 2 lists must be merged from cura.free.fr data :
+        <br>The code used to perform this step merges two lists from cura.free.fr data :
         <br>- One list contains the data with complete information (birth date, hour, place, country, profession) WITHOUT names.
         <br>- One list contains the names and only birth date.
         <br>So the merge process leads to cases that are not solvable by program, and human corrections (using Gauquelin original 1955 book) were necessary to write this code.
@@ -40,30 +41,42 @@
             <li>Hours are converted to <code>HH:MM:SS</code> format</li>
             <li>Express longitudes and latitudes in decimal degrees.</li>
         </ul>
+        Human corrections that complete the program for this step are located in <code>src/SerieA.php</code>.
     </li>
     
     <li>
         <b>Edit the csv files to associate cura data to Gauquelin 1955 original groups</b> (by human).
-        <br>File <code>2-cura-exported/A1.csv</code> is copied by a human to <code>3-cura-modified/A1.csv</code>.
+        <br>File <code>2-cura-exported/A1.csv</code> is copied by a human to <code>3-cura-marked/A1.csv</code>.
         <br>A new column ("1955") is added to this file ; this column is filled by a human with a code identifying Gauquelin 1955 groups.
-        <br>Lines coming from the group "570 sportifs" were marked "570SPO".
+        <br>Lines coming from the group "570 sportifs" were marked "570SPO" (list of abbreviations used can be found in <code>src/Serie1955.php</code>).
     </li>
     
     <li>
         <b>Generate one file per original 1955 group</b> (by program).
-        <br>Column "1955" of csv files located in <code>3-cura-modified/</code> is used to generate on file per 1955 group.
+        <br>Column "1955" of csv files located in <code>3-cura-marked/</code> is used to generate one file per 1955 group.
         <br>These files are generated in <code>4-1955-generated/</code> using the command <code>php run-gauquelin5 1955 modified21955</code>
         <br>This generates for example <code>4-1955-generated/570SPO.csv</code>
     </li>
     
     <li>
-        <b>Copy these files to directory <code>5-1955-modified/</code></b> (by human).
+        <b>Copy these files to directory <code>5-1955-cura-corrected/</code></b> (by human).
     </li>
     
     <li>
-        <b>Correct the files located in <code>5-1955-modified/</code> using Gauquelin 1955 book</b> (by human).
+        <b>Correct the files located in <code>5-1955-cura-corrected/</code></b> (by human).
         <br>Files in this directory are corrected by human.
-        <br>The following columns are added : <code>G55; FIRST55; LAST55; HOUR55; DATE55; PLACE55; NOTES55; PRO55</code>
+        <br>The following columns are added : <code>FIRST_C; LAST_C; HOUR_C; DATE_C; PLACE_C; NOTES_C; PRO_C</code> (suffix <code>_C</code> stands for "corrected").
+        <br>Corrections come from two sources :
+        <ul>
+            <li>
+                Comparison between cura data and original 1955 book.
+                <br>This leads to corrections on names, birth places, professions.
+                <br><b>In particular, legal birth times are restored</b> ; cura data contain times 
+            </li>
+            <li>
+                Matching geonames.org
+            </li>
+        </ul>
         <br>They are filled when cura data differ from Gauquelin book.
         <br>This step is easier when 2 persons are involved : one reading the book, the other correcting the file.
     </li>

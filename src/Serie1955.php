@@ -41,8 +41,8 @@ class Serie1955{
     
     // *****************************************
     /** 
-        Generates the csv files in 6-1955-final/ from csv files located in 5-1955-modified/
-        See README in generated file for a meaning of generated fields
+        Generates the csv files in 6-1955-final/ from csv files located in 5-1955-cura-corrected/
+        See 6-1955-final/README for a meaning of generated fields
         
         Called by : php run-gauquelin5.php 1955 finalize
         
@@ -50,8 +50,8 @@ class Serie1955{
         @return report
         @throws Exception if unable to parse
     **/
-    public static function finalize($serie){
-        $src_dir = Config::$data['dirs']['5-1955-modified'];
+    public static function corrected2final($serie){
+        $src_dir = Config::$data['dirs']['5-1955-cura-corrected'];
         $dest_dir = Config::$data['dirs']['6-1955-final'];
         $files = glob($src_dir . DS . '*.csv');
         $generatedFields = [
@@ -67,7 +67,7 @@ class Serie1955{
             'LON',
             'LAT',
         ];
-        if(Config::$data['dirs']['3-cura-modified']){
+        if(Config::$data['dirs']['3-cura-marked']){
             $generatedFields[] = 'GEONAMEID';
         }
         $firstline = implode(Gauquelin5::CSV_SEP, $generatedFields);
@@ -192,19 +192,19 @@ if($cur['NUM'] != '814') $exit;
     /** 
         Generates the 1955 files in 4-1955-generated/ from :
         - csv files located in 2-cura-exported/
-        - csv files located in 3-cura-modified/
+        - csv files located in 3-cura-marked/
         Takes an exact copy of files in 2-cura-exported
-        Uses files from 3-cura-modified to filter and dispatch in different resulting files
+        Uses files from 3-cura-marked to filter and dispatch in different resulting files
         Adds a column ORIGIN
         
-        Called by : php run-gauquelin5.php 1955 modified21955
+        Called by : php run-gauquelin5.php 1955 marked21955
         
         @param  $serie  String must be '1955' - useless but kept for conformity with other classes
         @return report
         @throws Exception if unable to parse
     **/
-    public static function modified21955($serie){
-        $src_dir = Config::$data['dirs']['3-cura-modified'];
+    public static function marked21955($serie){
+        $src_dir = Config::$data['dirs']['3-cura-marked'];
         $dest_dir = Config::$data['dirs']['4-1955-generated'];
         
         $groups55 = self::loadGroups3($src_dir);
@@ -248,9 +248,9 @@ if($cur['NUM'] != '814') $exit;
     
     // ******************************************************
     /**
-        Loads the csv files located in 3-cura-modified/ in arrays
-        Auxiliary of self::modified21955()
-        @param $src_dir String Directory called 3-cura-modified/ in config
+        Loads the csv files located in 3-cura-marked/ in arrays
+        Auxiliary of self::marked21955()
+        @param $src_dir String Directory called 3-cura-marked/ in config
         @return associative array :
                 group code => array containing the values of NUM in this group
                 group codes are keys of self::GROUPS_1955

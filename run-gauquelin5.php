@@ -22,7 +22,7 @@ $series_actions = [
     'A5'=> ['raw2exported'],
     'A6'=> ['raw2exported'],
     //
-    '1955'=> ['modified21955', 'finalize'],
+    '1955'=> ['marked21955', 'corrected2final'],
     //
     'B'=> ['raw2exported'],
     'B1'=> ['raw2exported'],
