@@ -155,7 +155,7 @@ class Serie1955{
                 }
                 else{
                     echo "COULD NOT MATCH GEONAMES - {$cur['NUM']} - $slug $admin2 - LINE SKIPPED, MUST BE FIXED\n";
-if($cur['NUM'] != '814' && $cur['NUM'] != '1252') exit;
+if(!in_array($cur['NUM'], ['814','1252', '1729', '1751', '2002'])) exit;
                     continue;
                 }
             }
