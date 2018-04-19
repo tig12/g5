@@ -76,6 +76,28 @@ class Serie1955{
             $groupCode = str_replace('.csv', '', basename($file));
             $lines = file($file, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
 //echo "\n<pre>"; print_r(explode(self::CSV_SEP_LIBREOFFICE, $lines[0])); echo "</pre>"; exit;
+/* 
+    [0] => G55
+    [1] => ORIGIN
+    [2] => NUM
+    [3] => NAME
+    [4] => PRO
+    [5] => DATE
+    [6] => PLACE
+    [7] => COU
+    [8] => COD
+    [9] => LON
+    [10] => LAT
+    [11] => FIRST_C
+    [12] => LAST_C
+    [13] => HOUR_C
+    [14] => DATE_C
+    [15] => PLACE_C
+    [16] => COD_C
+    [17] => COU_C
+    [18] => NOTES_C
+    [19] => PRO_C
+*/
             array_shift($lines); // line containing field names
             foreach($lines as $line){
                 $cur = [];
@@ -155,32 +177,14 @@ class Serie1955{
                 }
                 else{
                     echo "COULD NOT MATCH GEONAMES - {$cur['NUM']} - $slug $admin2 - LINE SKIPPED, MUST BE FIXED\n";
-if(!in_array($cur['NUM'], ['814','1252', '1729', '1751', '2002'])) exit;
+if(!in_array($cur['NUM'], ['1252', '1729', '1751', '2002'])) exit;
                     continue;
                 }
+                //
+                // day and time
+                //
+                
             }
-/* 
-    [0] => G55
-    [1] => ORIGIN
-    [2] => NUM
-    [3] => NAME
-    [4] => PRO
-    [5] => DATE
-    [6] => PLACE
-    [7] => COU
-    [8] => COD
-    [9] => LON
-    [10] => LAT
-    [11] => FIRST_C
-    [12] => LAST_C
-    [13] => HOUR_C
-    [14] => DATE_C
-    [15] => PLACE_C
-    [16] => COD_C
-    [17] => COU_C
-    [18] => NOTES_C
-    [19] => PRO_C
-*/
         }
     }
     
