@@ -30,6 +30,7 @@ postgresql:
 1955:
   
   # Sorting used in generated csv files
+  # used by Serie1955::marked21955()
   sort: 
     576MED: NAME
     508MED: NAME

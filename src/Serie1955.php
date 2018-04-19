@@ -75,6 +75,7 @@ class Serie1955{
             $res = $firstline . "\n";
             $groupCode = str_replace('.csv', '', basename($file));
             $lines = file($file, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
+//echo "\n<pre>"; print_r(explode(self::CSV_SEP_LIBREOFFICE, $lines[0])); echo "</pre>"; exit;
             array_shift($lines); // line containing field names
             foreach($lines as $line){
                 $cur = [];
@@ -85,10 +86,10 @@ class Serie1955{
                 // name
                 $tmp = explode(' ', $fields[3]);
                 if(count($tmp) != 2){
-                    // can happens for 2 cases :
+                    // can happen for 2 cases :
                     // - persons not in cura files and added by a human
                     // - persons with composed last names
-                    // In both cases, FIRST55 and LAST55 should be filled
+                    // In both cases, FIRST_C and LAST_C should be filled
                     if($fields[11] == '' || $fields[12] == ''){
                         echo "ANOMALY ON NAMES - {$cur['NUM']} - LINE SKIPPED, MUST BE FIXED\n";
                         continue;
@@ -100,7 +101,7 @@ class Serie1955{
                 }
                 else{
                     [$family, $given] = explode(' ', $fields[3]);
-                    // If FIRST55 or LAST55 are filled, override cura value
+                    // If FIRST_C or LAST_C are filled, override cura value
                     if($fields[11] != ''){
                         $family = $fields[11];
                     }
@@ -111,31 +112,28 @@ class Serie1955{
                 $cur['FAMILYNAME'] = $family;
                 $cur['GIVENNAME'] = $given;
                 // profession
-                if($fields[20] != ''){
-                    $cur['PRO'] = $fields[20];
+                if($fields[19] != ''){
+                    $cur['PRO'] = $fields[19];
                 }
                 else{
                     $cur['PRO'] = $fields[4];
                 }
                 // place processed before date to find timezone from geonames
-                // but date is put before the date in resulting line
-                if($fields[16] != ''){
-                    $place = $fields[16]; // priority to geonames
-                }
-                else if($fields[15] != ''){
-                    $place = $fields[15]; // then place manually entered
+                // but date is put before place in resulting line
+                if($fields[15] != ''){
+                    $place = $fields[15];
                 }
                 else{
-                    $place = $fields[6]; // then place manually entered
+                    $place = $fields[6];
                 }
-                if($fields[18] != ''){
-                    $country = $fields[18];
+                if($fields[17] != ''){
+                    $country = $fields[17];
                 }
                 else{
                     $country = $fields[7];
                 }
-                if($fields[17] != ''){
-                    $admin2 = $fields[17];
+                if($fields[16] != ''){
+                    $admin2 = $fields[16];
                 }
                 else{
                     $admin2 = $fields[8];
@@ -157,8 +155,7 @@ class Serie1955{
                 }
                 else{
                     echo "COULD NOT MATCH GEONAMES - {$cur['NUM']} - $slug $admin2 - LINE SKIPPED, MUST BE FIXED\n";
-//echo "\n<pre>"; print_r($geonames); echo "</pre>"; exit;
-if($cur['NUM'] != '814') $exit;
+if($cur['NUM'] != '814' && $cur['NUM'] != '1252') exit;
                     continue;
                 }
             }
@@ -174,16 +171,15 @@ if($cur['NUM'] != '814') $exit;
     [8] => COD
     [9] => LON
     [10] => LAT
-    [11] => FIRST55
-    [12] => LAST55
-    [13] => HOUR55
-    [14] => DATE55
-    [15] => PLACE55
-    [16] => PLACE_GEO
-    [17] => COD_GEO
-    [18] => COU_GEO
-    [19] => NOTES55
-    [20] => PRO55
+    [11] => FIRST_C
+    [12] => LAST_C
+    [13] => HOUR_C
+    [14] => DATE_C
+    [15] => PLACE_C
+    [16] => COD_C
+    [17] => COU_C
+    [18] => NOTES_C
+    [19] => PRO_C
 */
         }
     }
