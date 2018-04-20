@@ -75,7 +75,122 @@ class Serie1955{
             $res = $firstline . "\n";
             $groupCode = str_replace('.csv', '', basename($file));
             $lines = file($file, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
+            $fieldnames = explode(self::CSV_SEP_LIBREOFFICE, $lines[0]);
 //echo "\n<pre>"; print_r(explode(self::CSV_SEP_LIBREOFFICE, $lines[0])); echo "</pre>"; exit;
+            array_shift($lines); // line containing field names
+            foreach($lines as $line){
+                $new = [
+                    'ORIGIN' => '',
+                    'NUM' => '',
+                    'SLUG' => '',
+                    'FAMILYNAME' => '',
+                    'GIVENNAME' => '',
+                    'PRO' => '',
+                    'BIRTHDATE' => '',
+                    'BIRTHPLACE' => '',
+                    'COU' => '',
+                    'ADM2' => '',
+                    'GEOID' => '',
+                    'LG' => '',
+                    'LAT' => '',
+                    
+                ];
+                // turn $fields to be [ 'ORIGIN' => 'A1', 'NUM' => '6', 'NAME' => 'Bally Etienne', ...]
+// @todo externalize this code
+                $tmp = explode(self::CSV_SEP_LIBREOFFICE, $line);
+                foreach($fieldnames as $k => $v){
+                    $fields[$v] = $tmp[$k];
+                }
+                //
+                $new['ORIGIN'] = $fields['ORIGIN'];
+                $new['NUM'] = $fields['NUM'];
+                // name
+                $tmp = explode(' ', $fields['NAME']);
+                if(count($tmp) != 2){
+                    // can happen for 2 cases :
+                    // - persons not in cura files and added by a human
+                    // - persons with composed last names
+                    // In both cases, FIRST_C and LAST_C should be filled
+                    if($fields['FIRST_C'] == '' || $fields['LAST_C'] == ''){
+                        echo "ANOMALY ON NAMES - {$new['NUM']} - LINE SKIPPED, MUST BE FIXED\n";
+                        continue;
+                    }
+                    else{
+                        $family = $fields['FIRST_C'];
+                        $given = $fields['LAST_C'];
+                    }
+                }
+                else{
+                    [$family, $given] = explode(' ', $fields['NAME']); // ex 'Bally Etienne'
+                    // If FIRST_C or LAST_C are filled, override cura value
+                    if($fields['FIRST_C'] != ''){
+                        $family = $fields['FIRST_C'];
+                    }
+                    if($fields['LAST_C'] != ''){
+                        $given = $fields['LAST_C'];
+                    }
+                }
+                $new['FAMILYNAME'] = $family;
+                $new['GIVENNAME'] = $given;
+                // profession
+                if($fields['PRO_C'] != ''){
+                    $new['PRO'] = $fields['PRO_C'];
+                }
+                else{
+                    $new['PRO'] = $fields['PRO'];
+                }
+                //
+                // place
+                // processed before date to find timezone from geonames
+                // but date is put before place in resulting line
+                if($fields['PLACE_C'] != ''){
+                    $place = $fields['PLACE_C'];
+                }
+                else{
+                    $place = $fields['PLACE'];
+                }
+                if($fields['COU_C'] != ''){
+                    $country = $fields['COU_C'];
+                }
+                else{
+                    $country = $fields['COU'];
+                }
+                if($fields['COD_C'] != ''){
+                    $admin2 = $fields['COD_C'];
+                }
+                else{
+                    $admin2 = $fields['COD_C'];
+                }
+                if($admin2 == 'NONE'){
+                    $admin2 = '';
+                }
+                if(strlen($admin2) == 1 && $country == 'FR'){
+                    $admin2 = '0' . $admin2; // because libreoffice "eats" the trailing 0
+                }
+                // HERE try to match Geonames
+                $slug = \lib::slugify($place);
+                $geonames = \Geonames::match([
+                    'slug' => $slug,
+                    'countries' => [$country],
+                    'admin2-code' => $admin2,
+                ]);
+                if(!$geonames){
+                    echo "ERROR: COULD NOT MATCH GEONAMES - {$new['NUM']} - $slug $admin2 - LINE SKIPPED, MUST BE FIXED\n";
+                    continue;
+                }
+                $new['SLUG']        = $geonames['slug'];
+                $new['BIRTHPLACE']  = $geonames['name'];
+                $new['GEOID']       = $geonames['geoid'];
+                $new['LG']          = $geonames['longitude'];
+                $new['LAT']         = $geonames['latitude'];
+                $new['ADM2'] = $admin2;
+                $new['COU'] = $country;
+                //
+                // birth date
+                //
+                $dtu = TZUtils::spacetime2dtu($geonames['timezone'], $date);
+                
+                
 /* 
     [0] => G55
     [1] => ORIGIN
@@ -91,99 +206,42 @@ class Serie1955{
     [11] => FIRST_C
     [12] => LAST_C
     [13] => HOUR_C
-    [14] => DATE_C
+    [14] => DAY_C
     [15] => PLACE_C
     [16] => COD_C
     [17] => COU_C
     [18] => NOTES_C
     [19] => PRO_C
 */
-            array_shift($lines); // line containing field names
-            foreach($lines as $line){
-                $cur = [];
-                $fields = explode(self::CSV_SEP_LIBREOFFICE, $line);
-                //
-                $cur['ORIGIN'] = $fields[1];
-                $cur['NUM'] = $fields[2];
-                // name
-                $tmp = explode(' ', $fields[3]);
-                if(count($tmp) != 2){
-                    // can happen for 2 cases :
-                    // - persons not in cura files and added by a human
-                    // - persons with composed last names
-                    // In both cases, FIRST_C and LAST_C should be filled
-                    if($fields[11] == '' || $fields[12] == ''){
-                        echo "ANOMALY ON NAMES - {$cur['NUM']} - LINE SKIPPED, MUST BE FIXED\n";
-                        continue;
-                    }
-                    else{
-                        $family = $fields[11];
-                        $given = $fields[12];
-                    }
-                }
-                else{
-                    [$family, $given] = explode(' ', $fields[3]);
-                    // If FIRST_C or LAST_C are filled, override cura value
-                    if($fields[11] != ''){
-                        $family = $fields[11];
-                    }
-                    if($fields[12] != ''){
-                        $given = $fields[12];
-                    }
-                }
-                $cur['FAMILYNAME'] = $family;
-                $cur['GIVENNAME'] = $given;
-                // profession
-                if($fields[19] != ''){
-                    $cur['PRO'] = $fields[19];
-                }
-                else{
-                    $cur['PRO'] = $fields[4];
-                }
-                // place processed before date to find timezone from geonames
-                // but date is put before place in resulting line
-                if($fields[15] != ''){
-                    $place = $fields[15];
-                }
-                else{
-                    $place = $fields[6];
-                }
-                if($fields[17] != ''){
-                    $country = $fields[17];
-                }
-                else{
-                    $country = $fields[7];
-                }
-                if($fields[16] != ''){
-                    $admin2 = $fields[16];
-                }
-                else{
-                    $admin2 = $fields[8];
-                }
-                if($admin2 == 'NONE'){
-                    $admin2 = '';
-                }
-                if(strlen($admin2) == 1 && $country == 'FR'){
-                    $admin2 = '0' . $admin2; // because libreoffice "eats" the trailing 0
-                }
-                // HERE try to match Geonames
-                $slug = \lib::slugify($place);
-                $geonames = \Geonames::match([
-                    'slug' => $slug,
-                    'countries' => [$country],
-                    'admin2-code' => $admin2,
-                ]);
-                if($geonames){
-                }
-                else{
-                    echo "COULD NOT MATCH GEONAMES - {$cur['NUM']} - $slug $admin2 - LINE SKIPPED, MUST BE FIXED\n";
-if(!in_array($cur['NUM'], ['1252', '1729', '1751', '2002'])) exit;
-                    continue;
-                }
-                //
-                // day and time
-                //
-                
+/* 
+                $new = [
+                    //'ORIGIN' => '',
+                    //'NUM' => '',
+                    //'SLUG' => '',
+                    //'FAMILYNAME' => '',
+                    //'GIVENNAME' => '',
+                    //'PRO' => '',
+                    'BIRTHDATE' => '',
+                    //'BIRTHPLACE' => '',
+                    //'COU' => '',
+                    //'ADM2' => '',
+                    //'GEOID' => '',
+                    //'LG' => '',
+                    //'LAT' => '',
+                ];
+*/
+/* 
+echo "\n<pre>"; print_r($geonames); echo "</pre>"; exit;
+            [geoid] => 2970072
+            [name] => Vénissieux
+            [slug] => venissieux
+            [admin2_code] => 69
+            [longitude] => 4.87147
+            [latitude] => 45.70254
+            [timezone] => Europe/Paris
+*/
+
+                exit;
             }
         }
     }
