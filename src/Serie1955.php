@@ -101,6 +101,7 @@ class Serie1955{
                 foreach($fieldnames as $k => $v){
                     $fields[$v] = $tmp[$k];
                 }
+// end @todo externalize this code
                 //
                 $new['ORIGIN'] = $fields['ORIGIN'];
                 $new['NUM'] = $fields['NUM'];
@@ -178,73 +179,79 @@ class Serie1955{
                     echo "ERROR: COULD NOT MATCH GEONAMES - {$new['NUM']} - $slug $admin2 - LINE SKIPPED, MUST BE FIXED\n";
                     continue;
                 }
-                $new['SLUG']        = $geonames['slug'];
-                $new['BIRTHPLACE']  = $geonames['name'];
-                $new['GEOID']       = $geonames['geoid'];
-                $new['LG']          = $geonames['longitude'];
-                $new['LAT']         = $geonames['latitude'];
+                $new['SLUG']        = $geonames[0]['slug'];
+                $new['BIRTHPLACE']  = $geonames[0]['name'];
+                $new['GEOID']       = $geonames[0]['geoid'];
+                $new['LG']          = $geonames[0]['longitude'];
+                $new['LAT']         = $geonames[0]['latitude'];
                 $new['ADM2'] = $admin2;
                 $new['COU'] = $country;
                 //
                 // birth date
                 //
-                $dtu = TZUtils::spacetime2dtu($geonames['timezone'], $date);
-                
-                
-/* 
-    [0] => G55
-    [1] => ORIGIN
-    [2] => NUM
-    [3] => NAME
-    [4] => PRO
-    [5] => DATE
-    [6] => PLACE
-    [7] => COU
-    [8] => COD
-    [9] => LON
-    [10] => LAT
-    [11] => FIRST_C
-    [12] => LAST_C
-    [13] => HOUR_C
-    [14] => DAY_C
-    [15] => PLACE_C
-    [16] => COD_C
-    [17] => COU_C
-    [18] => NOTES_C
-    [19] => PRO_C
-*/
-/* 
-                $new = [
-                    //'ORIGIN' => '',
-                    //'NUM' => '',
-                    //'SLUG' => '',
-                    //'FAMILYNAME' => '',
-                    //'GIVENNAME' => '',
-                    //'PRO' => '',
-                    'BIRTHDATE' => '',
-                    //'BIRTHPLACE' => '',
-                    //'COU' => '',
-                    //'ADM2' => '',
-                    //'GEOID' => '',
-                    //'LG' => '',
-                    //'LAT' => '',
-                ];
-*/
-/* 
-echo "\n<pre>"; print_r($geonames); echo "</pre>"; exit;
-            [geoid] => 2970072
-            [name] => Vénissieux
-            [slug] => venissieux
-            [admin2_code] => 69
-            [longitude] => 4.87147
-            [latitude] => 45.70254
-            [timezone] => Europe/Paris
-*/
-
-                exit;
+                try{
+                    [$day, $hour] = self::computBirthDate($fields['DATE'], $fields['DAY_C'], $fields['HOUR_C']);
+                }
+                catch(\Exception $e){
+                    echo "ERROR: COULD NOT COMPUTE BIRTHDATE - {$new['NUM']} - $slug - LINE SKIPPED, MUST BE FIXED\n";
+                    echo $e->getMessage() . "\n";
+                    continue;
+                }
+                // dtu
+                $dtu = '';
+                if($country == 'FR'){
+                    $dtu = \FrenchTZ::offset_fr("$day $hour", $new['LG'], $new['ADM2']);
+                }
+                else{
+                //$geonames[0]['timezone'],
+                }
             }
         }
     }
+    
+    
+    // ******************************************************
+    /**
+        Auxiliary of self::corrected2final()
+        @param $date_cura   content of column DATE
+        @param $day_c       content of column DAY_C
+        @param $hour_c      content of column HOUR_C
+        @return Array containing day and hour in format [YYYY-MM-DD, HH:MM:SS]
+        @throws Exception
+                    - in case of incoherence between cura and corrected data
+                    - in case of incomplete data
+    **/
+    private static function computBirthDate($date_cura, $day_c, $hour_c){
+        if($day_c == '' && $hour_c == ''){
+            return $date_cura;
+        }
+        if($date_cura == ''){
+            if($day_c == ''){
+                throw new \Exception("Missing column DAY_C");
+            }                                                                                                         
+            if($hour_c == ''){
+                throw new \Exception("Missing column HOUR_C");
+            }
+        }
+        if(is_numeric($hour_c)){
+            $hour_c = str_pad($hour_c, 2, '0', STR_PAD_LEFT) . ':00:00';
+        }
+        //
+        $day = $hour;
+        if($date_cura != ''){
+            $day = substr($date_cura, 0, 10);
+            $hour = substr($date_cura, 11, 8);
+        }
+        // override with corrected values
+        if($day_c != ''){
+            $day = $day_c;
+        }
+        if($hour_c != ''){
+            $hour = $hour_c;
+        }
+        return [$day, $hour];
+    }
+    
     
     // *****************************************
     /** 

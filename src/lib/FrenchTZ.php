@@ -11,7 +11,7 @@
     @history    2017-05-04 10:38:22+02:00, Thierry Graff : Adaptation for autonom use 
 ********************************************************************************/
 
-class FrenchTimezone{
+class FrenchTZ{
     
     // ******************************************************
     /**
@@ -51,14 +51,14 @@ class FrenchTimezone{
             // hour = HLO, local hour at real sun
             $secs = 240 * $lg; // 240 = 3600 / 15 = nb of time seconds per longitude degrees
             $hhmm = self::seconds2HHMMSS($secs, true);
-            $sign = $lg < 0 && $hhmm != '00:00' ? '-' : '+';
+            $sign = ($lg < 0 && $hhmm != '00:00') ? '-' : '+';
         }
         else{
             $tz = new DateTimeZone($zone);
             $dt = new DateTime($date);
             $offset = -$tz->getOffset($dt);
             $hhmm = self::seconds2HHMMSS($offset, true);
-            $sign = $offset < 0 && $hhmm != '00:00' ? '-' : '+';
+            $sign = ($offset < 0 && $hhmm != '00:00') ? '-' : '+';
         }
         return [$sign . $hhmm, $err];
     }
