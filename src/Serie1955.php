@@ -200,11 +200,17 @@ class Serie1955{
                 // dtu
                 $dtu = '';
                 if($country == 'FR'){
-                    $dtu = \FrenchTZ::offset_fr("$day $hour", $new['LG'], $new['ADM2']);
+                    [$dtu, $err] = \TZ_fr::offset("$day $hour", $new['LG'], $new['ADM2']);
+                    if($err != ''){
+                        echo "ERROR: " . $e . " - LINE SKIPPED, MUST BE FIXED\n";
+                        continue;
+                    }
                 }
                 else{
-                //$geonames[0]['timezone'],
+                    $dtu = \TZ::offset("$day $hour", $geonames[0]['timezone']);
                 }
+echo "{$fields['NUM']} {$fields['DATE']} --> $day $hour$dtu\n";
+if(!isset($i)) $i = 0; $i++; if($i == 30)break;
             }
         }
     }
@@ -237,7 +243,7 @@ class Serie1955{
             $hour_c = str_pad($hour_c, 2, '0', STR_PAD_LEFT) . ':00:00';
         }
         //
-        $day = $hour;
+        $day = $hour = '';
         if($date_cura != ''){
             $day = substr($date_cura, 0, 10);
             $hour = substr($date_cura, 11, 8);
