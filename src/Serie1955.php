@@ -55,46 +55,28 @@ class Serie1955{
         $dest_dir = Config::$data['dirs']['6-1955-final'];
         $files = glob($src_dir . DS . '*.csv');
         $generatedFields = [
-            'ORIGIN',
-            'NUM',
-            'FIRSTNAME',
-            'LASTNAME',
-            'PRO',
-            'DATE',
-            'PLACE',
-            'COU',
-            'ADM2',
-            'LON',
-            'LAT',
+            'ORIGIN' => '',
+            'NUM' => '',
+            'FAMILYNAME' => '',
+            'GIVENNAME' => '',
+            'PRO' => '',
+            'BIRTHDATE' => '',
+            'BIRTHPLACE' => '',
+            'COU' => '',
+            'ADM2' => '',
+            'GEOID' => '',
+            'LG' => '',
+            'LAT' => '',
         ];
-        if(Config::$data['dirs']['3-cura-marked']){
-            $generatedFields[] = 'GEONAMEID';
-        }
-        $firstline = implode(Gauquelin5::CSV_SEP, $generatedFields);
+        $firstline = implode(Gauquelin5::CSV_SEP, array_keys($generatedFields));
         foreach($files as $file){
             $res = $firstline . "\n";
             $groupCode = str_replace('.csv', '', basename($file));
             $lines = file($file, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
             $fieldnames = explode(self::CSV_SEP_LIBREOFFICE, $lines[0]);
-//echo "\n<pre>"; print_r(explode(self::CSV_SEP_LIBREOFFICE, $lines[0])); echo "</pre>"; exit;
             array_shift($lines); // line containing field names
             foreach($lines as $line){
-                $new = [
-                    'ORIGIN' => '',
-                    'NUM' => '',
-                    'SLUG' => '',
-                    'FAMILYNAME' => '',
-                    'GIVENNAME' => '',
-                    'PRO' => '',
-                    'BIRTHDATE' => '',
-                    'BIRTHPLACE' => '',
-                    'COU' => '',
-                    'ADM2' => '',
-                    'GEOID' => '',
-                    'LG' => '',
-                    'LAT' => '',
-                    
-                ];
+                $new = $generatedFields;
                 // turn $fields to be [ 'ORIGIN' => 'A1', 'NUM' => '6', 'NAME' => 'Bally Etienne', ...]
 // @todo externalize this code
                 $tmp = explode(self::CSV_SEP_LIBREOFFICE, $line);
@@ -160,7 +142,7 @@ class Serie1955{
                     $admin2 = $fields['COD_C'];
                 }
                 else{
-                    $admin2 = $fields['COD_C'];
+                    $admin2 = $fields['COD'];
                 }
                 if($admin2 == 'NONE'){
                     $admin2 = '';
@@ -179,18 +161,17 @@ class Serie1955{
                     echo "ERROR: COULD NOT MATCH GEONAMES - {$new['NUM']} - $slug $admin2 - LINE SKIPPED, MUST BE FIXED\n";
                     continue;
                 }
-                $new['SLUG']        = $geonames[0]['slug'];
                 $new['BIRTHPLACE']  = $geonames[0]['name'];
                 $new['GEOID']       = $geonames[0]['geoid'];
                 $new['LG']          = $geonames[0]['longitude'];
                 $new['LAT']         = $geonames[0]['latitude'];
-                $new['ADM2'] = $admin2;
-                $new['COU'] = $country;
+                $new['ADM2']        = $admin2;
+                $new['COU']         = $country;
                 //
                 // birth date
                 //
                 try{
-                    [$day, $hour] = self::computBirthDate($fields['DATE'], $fields['DAY_C'], $fields['HOUR_C']);
+                    [$day, $hour] = self::computeBirthDate($fields['DATE'], $fields['DAY_C'], $fields['HOUR_C']);
                 }
                 catch(\Exception $e){
                     echo "ERROR: COULD NOT COMPUTE BIRTHDATE - {$new['NUM']} - $slug - LINE SKIPPED, MUST BE FIXED\n";
@@ -202,16 +183,22 @@ class Serie1955{
                 if($country == 'FR'){
                     [$dtu, $err] = \TZ_fr::offset("$day $hour", $new['LG'], $new['ADM2']);
                     if($err != ''){
-                        echo "ERROR: " . $e . " - LINE SKIPPED, MUST BE FIXED\n";
+                        echo "ERROR for {$new['NUM']} {$new['FAMILYNAME']} {$new['GIVENNAME']} : " . $err . " - LINE SKIPPED, MUST BE FIXED\n";
                         continue;
                     }
                 }
                 else{
                     $dtu = \TZ::offset("$day $hour", $geonames[0]['timezone']);
                 }
-echo "{$fields['NUM']} {$fields['DATE']} --> $day $hour$dtu\n";
-if(!isset($i)) $i = 0; $i++; if($i == 30)break;
+                $new['BIRTHDATE'] = "$day $hour$dtu";
+                // add new line to res
+                $res .= implode(Gauquelin5::CSV_SEP, $new) . "\n";
+// echo "{$fields['NUM']} {$fields['DATE']} --> {$new['BIRTHDATE']}\n";
+// if(!isset($i)) $i = 0; $i++; if($i == 30)break;
             }
+            // write output
+            $dest_file = $dest_dir . DS . $groupCode . '.csv';
+            file_put_contents($dest_file, $res);
         }
     }
     
@@ -227,7 +214,7 @@ if(!isset($i)) $i = 0; $i++; if($i == 30)break;
                     - in case of incoherence between cura and corrected data
                     - in case of incomplete data
     **/
-    private static function computBirthDate($date_cura, $day_c, $hour_c){
+    private static function computeBirthDate($date_cura, $day_c, $hour_c){
         if($day_c == '' && $hour_c == ''){
             return $date_cura;
         }
