@@ -2,22 +2,12 @@
 Numeric archeology : restore the original lists of persons used by Michel Gauquelin in 1955 to test astrology with statistics.  
 See <a href="">the history of statistical tests on astrology 1950s - 2010s</a>  
 
-There are 7 groups :
-
 To restore the 1955 lists, there are 2 sources of information :
 <ul>
     <li>The 1955 paper book, where all</li>
+    <li>Online C.U.R.A Gauquelin archives, available at <a href="http://cura.free.fr/gauq/17archg.html">http://cura.free.fr/gauq/17archg.html</a>  </li>
 </ul>
-Concerns the version 5 of C.U.R.A Gauquelin archives, available at <a href="http://cura.free.fr/gauq/17archg.html">http://cura.free.fr/gauq/17archg.html</a>  
 
-The lists of persons 
-
-Concerns the version 5 of C.U.R.A Gauquelin archives, available at <a href="http://cura.free.fr/gauq/17archg.html">http://cura.free.fr/gauq/17archg.html</a>  
-
-This code converts Gauquelin data to csv files.  
-
-
-Concerns the version 5 of C.U.R.A Gauquelin archives, available at <a href="http://cura.free.fr/gauq/17archg.html">http://cura.free.fr/gauq/17archg.html</a>  
 <b>Status</b> : work in progress - not ready for reliable use  
 Works with data retrieved on 2017-04-26  
 Code developed with php 7.1 ; tested on linux (ubuntu 14.4)  
