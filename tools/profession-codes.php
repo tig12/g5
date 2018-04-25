@@ -102,7 +102,7 @@ function html_table(){
     @return associative array profession code => [profession label fr, profession label en]
 **/
 function read_input_file(){
-    $lines = file(dirname(__DIR__) . DS . 'share' . DS . 'profession-codes');
+    $lines = file(dirname(__DIR__) . DS . 'share' . DS . 'profession-codes.csv');
     $res = [];
     $check = [];
     foreach($lines as $line){

@@ -1,5 +1,22 @@
 
+Numeric archeology : restore the original lists of persons used by Michel Gauquelin in 1955 to test astrology with statistics.  
+See <a href="">the history of statistical tests on astrology 1950s - 2010s</a>  
+
+There are 7 groups :
+
+To restore the 1955 lists, there are 2 sources of information :
+<ul>
+    <li>The 1955 paper book, where all</li>
+</ul>
+Concerns the version 5 of C.U.R.A Gauquelin archives, available at <a href="http://cura.free.fr/gauq/17archg.html">http://cura.free.fr/gauq/17archg.html</a>  
+
+The lists of persons 
+
+Concerns the version 5 of C.U.R.A Gauquelin archives, available at <a href="http://cura.free.fr/gauq/17archg.html">http://cura.free.fr/gauq/17archg.html</a>  
+
 This code converts Gauquelin data to csv files.  
+
+
 Concerns the version 5 of C.U.R.A Gauquelin archives, available at <a href="http://cura.free.fr/gauq/17archg.html">http://cura.free.fr/gauq/17archg.html</a>  
 <b>Status</b> : work in progress - not ready for reliable use  
 Works with data retrieved on 2017-04-26  
@@ -8,7 +25,7 @@ Released under the General Public Licence (v2 or later), available at <a href="h
 
 <h2>Usage</h2>
 
-- Copy the html pages containing the data on your local machine (you can use for example script <code><a href="https://github.com/tig12/gauquelin5/blob/master/tools/get-data">tools/get-data</a></code>)  
+- Copy the html pages containing the data on your local machine (you can use for example script <code><a href="blob/master/tools/get-data">tools/get-data</a></code>)  
 - Copy <code>config.yml.dist</code> to <code>config.yml</code> and adapt the values of <code>source-dir</code> and <code>ouptut-dir</code>  
 - Go to the directory containing this <code>README</code> and run :
 <pre>php run-gauquelin5.php</pre>
