@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Geonames.org integration | Gauquelin5</title>
+    <link href="static/style.css" rel="stylesheet" type="text/css">
+    <meta name="description" content="How to use geonames to spot Gauquelin data archives">
+    <meta name="robots" content="index,follow">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
+    <meta name="dcterms.rightsHolder" content="Thierry Graff">
+    <meta name="dcterms.dateCopyrighted" content="2018">
+</head>
+
+<body>
+
+<nav class="prevnext">
+    <a class="top" title="" href="index.html">&uarr;</a>
+</nav>
+
+
+<header>
+<h1>Geonames integration</h1>
+</header>
+
+
+<aside>
+</aside>
+
+<article>
+
+Geonames is used to "spot" the data, relate each place to a geonames.org id.
+<br>In some files (like E1 and E3), timezone information is missing. The program tries to associate the names of cities to places of geonames, to compute timezone.
+<br>
+<br>To do this, the program needs to have geonames data stored in a postgres database, as done by the program located at <a href="https://github.com/tig12/geonames2postgres">github.com/tig12/geonames2postgres</a>.  
+
+To do this, you need to :
+<ul>
+    <li>
+        have postgres installed on your machine,
+    </li>
+    <li>
+        in <code>config.yml</code>, put the correct values in the <code>postgresql</code> section,
+    </li>
+    <li>
+        in <code>config.yml</code>, enable this feature ; replace <code>false</code> by <code>true</code> in order to have :
+        <pre>geonames: true</pre>
+    </li>
+    <li>
+        run <code>geonames2postgres.py</code> for all the countries containing birth dates.
+        <br>For Gauquelin data needs :
+        <pre>
+# todo : exhaustive list of countries
+python import_geonames.py BE
+python import_geonames.py DE
+python import_geonames.py DZ
+python import_geonames.py FR
+python import_geonames.py IT
+python import_geonames.py NL
+python import_geonames.py US
+        </pre>
+    </li>
+</ul>
+
+</article>
+
+<footer>
+</footer>
+
+
+</body>
+</html>
