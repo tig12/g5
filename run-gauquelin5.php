@@ -100,7 +100,7 @@ require_once __DIR__ . DS . 'src' . DS . 'init' . DS . 'init.php';
 
 use gauquelin5\Gauquelin5;
 try{
-    echo Gauquelin5::action($action, $serie);
+    echo Gauquelin5::action($action, $serie); /// here run action ///
 }
 catch(Exception $e){
     echo 'Exception : ' . $e->getMessage() . "\n";
