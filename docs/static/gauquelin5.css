@@ -1,7 +1,19 @@
 
+body{
+    padding-top:0;
+    padding-left:0;
+}
+
+
 .aside-wrapper{
     padding:1.5rem;
     background:lightyellow;
+    border-right:1px solid grey;
 }
 
-aside.li{line-height:20px;}
+aside{
+}
+
+aside li{
+    line-height:1.5em;
+}

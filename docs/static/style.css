@@ -141,19 +141,35 @@ table.wikitable tr td code{
 .courier{font-family:"Courier New",Courier,monospace;}
 .dejavu{font-family:DejaVu,serif;}
 
+.bold{font-weight:bold;}
+
 .center{text-align:center;}
 
 .border{border:1px solid grey;}
 
 .margin{margin:1rem;}
+.margin0{margin:0;}
 .margin2{margin:2rem;}
-.margin-top{margin-top:1em;}
-.margin-left{margin-left:1em;}
+.margin-top{margin-top:1rem;}
+.margin-top0{margin-top:0;}
+.margin-left{margin-left:1rem;}
+.margin-left0{margin-left:0;}
+.margin-bottom{margin-bottom:1rem;}
+.margin-bottom0{margin-bottom:0;}
+.margin-right{margin-right:1rem;}
+.margin-right0{margin-right:0;}
 
 .padding{padding:1rem;}
+.padding0{padding:0;}
 .padding2{padding:2rem;}
-.padding-top{padding-top:1em;}
-.padding-left{padding-left:1em;}
+.padding-top{padding-top:1rem;}
+.padding-top0{padding-top:0;}
+.padding-left{padding-left:1rem;}
+.padding-left0{padding-left:0;}
+.padding-bottom{padding-bottom:1rem;}
+.padding-bottom0{padding-bottom:0;}
+.padding-right{padding-right:1em;}
+.padding-right0{padding-right:0;}
 
 .big1{font-size:1.1rem;}
 .big2{font-size:1.2rem;}
