@@ -23,7 +23,7 @@ class Serie1955{
     
     /**
         1955 groups ; format : group code => [name, serie]
-        serie is 'ZZ' for groups that can't be found in cura data
+        serie is 'NONE' for groups that can't be found in cura data
     **/
     const GROUPS_1955 = [
         '576MED' => ["576 membres associés et correspondants de l'académie de médecine", 'A2'],
@@ -31,11 +31,11 @@ class Serie1955{
         '570SPO' => ['570 sportifs', 'A1'],
         '676MIL' => ['676 militaires', 'A3'],
         '906PEI' => ['906 peintres', 'A4'],
-        '361PEI' => ['361 peintres mineurs', 'ZZ'],
+        '361PEI' => ['361 peintres mineurs', 'NONE'],
         '500ACT' => ['500 acteurs', 'A5'],
         '494DEP' => ['494 députés', 'A5'],
         '349SCI' => ["349 membres, associés et correspondants de l'académie des sciences", 'A2'],
-        '884PRE' => ['884 prêtres', 'ZZ'],
+        '884PRE' => ['884 prêtres', 'NONE'],
     ];
 
     

@@ -5,8 +5,8 @@
     usage :
     - Generate a markdown table :
     php profession-codes.php md
-    - Genrate a html table
-    profession-codes.php html
+    - Generate a html table
+    php profession-codes.php html
     
     @license    GPL
     @copyright  Thierry Graff
@@ -79,7 +79,7 @@ function md_table(){
 **/
 function html_table(){
     $codes = read_input_file();
-    $res = '<style>.{:nth-child(even){background-color:#F8F8F8;}</style>';
+    $res = '<style>.profession-codes{:nth-child(even){background-color:#F8F8F8;}</style>';
     $res .= "\n" . '<table class="profession-codes">';
     $res .= "\n<tr><th>Code</th><th>Label (fr)</th><th>Label (en)</th></tr>";
     foreach($codes as $code => $labels){

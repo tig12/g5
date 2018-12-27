@@ -1,16 +1,18 @@
 <?php
 /******************************************************************************
-    Code to generate lists of profession codes and their names
+    Code to generate lists of 1955 groups and their names
     
     usage :
     - Generate a markdown table :
-    php profession-codes.php md
-    - Genrate a html table
-    profession-codes.php html
+    php groups-1955.php md
+    - Generate a html table
+    php groups-1955.php html
     
     @license    GPL
     @copyright  Thierry Graff
     @history    2017-05-03 10:29:04+02:00, Thierry Graff : Creation
+    
+    @todo Almost identical to profession-codes.php, maybe merge the two files
 ********************************************************************************/
 
 define('DS', DIRECTORY_SEPARATOR);

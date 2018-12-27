@@ -18,7 +18,6 @@ class Gauquelin5{
     /** Separator used in the generated (csv) files **/
     const CSV_SEP = ';';
     
-    
     /** Associations between series and class names **/
     const SERIES_CLASS = [
         'A1' => 'SerieA',
@@ -37,26 +36,26 @@ class Gauquelin5{
         'B5' => 'SerieB',
         'B6' => 'SerieB',
         //
-        'D6'  => 'SerieD6',
-        'D9a',
-        'D9b',
-        'D9c',
+        'D6' => 'SerieD6',
+        'D9a' => '',
+        'D9b' => '',
+        'D9c' => '',
         'D10' => 'SerieD10',
         //
         'E1' => 'SerieE1_E3',
         //
-        'E2',
-        'E2a',
-        'E2b',
-        'E2c',
-        'E2d',
-        'E2e',
-        'E2f',
-        'E2g',
+        'E2' => '',
+        'E2a' => '',
+        'E2b' => '',
+        'E2c' => '',
+        'E2d' => '',
+        'E2e' => '',
+        'E2f' => '',
+        'E2g' => '',
         //
         'E3' => 'SerieE1_E3',
-        'F1',
-        'F2',
+        'F1' => '',
+        'F2' => '',
     ];
     
     // ******************************************************
@@ -105,6 +104,8 @@ class Gauquelin5{
         Reads a html file downloaded from cura.free.fr
         and locally stored in directory 1-cura-raw (see absolute path of this directory in config.yml)
         @param  $serie : string like 'A1'
+        
+        @todo This code is specific to cura.free.fr data source => should be in cura.free.fr importer
     **/
     public static function readHtmlFile($serie){
         $raw_file = Config::$data['dirs']['1-cura-raw'] . DS . self::serie2filename($serie);
