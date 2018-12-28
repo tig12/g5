@@ -9,8 +9,8 @@ dirs:
   3-cura-marked:            /path/to/data/3-cura-marked
   4-1955-generated:         /path/to/data/4-1955-generated
   5-1955-cura-corrected:    /path/to/data/5-1955-cura-corrected
-  6-1955-final:             /path/to/data/6-1955-final
-  6-cura-final:             /path/to/data/6-cura-final
+  9-1955-final:             /path/to/data/9-1955-final
+  9-cura-final:             /path/to/data/9-cura-final
 
 # Should the program try to match birth places with geonames.org data ?
 # Possible values : true or false

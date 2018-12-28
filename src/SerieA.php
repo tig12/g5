@@ -98,8 +98,10 @@ class SerieA{
         Manual corrections : name matching added using lists published by Gauquelin in 1955
         Asoociative array : [
                 serie => [
-                    NUM => name, ...
-                ], ...
+                    NUM => name,
+                    ...
+                ],
+                ...
             ]
         Name spelling is the exact spelling contained in gd902N.html
         This exact spelling is used to remove ambiguities
@@ -396,8 +398,9 @@ class SerieA{
         //
         // 3 - merge res1 and res2 (name list)
         //
+        $res = [];
         // variables used only for report
-        $n_ok = 0; $res = [];                   // contains correctly merged
+        $n_ok = 0;                                  // correctly merged
         $n1 = 0; $missing_in_names = [];        // date present in list 1 and not in name list
         $n2 = 0; $doublons_same_nb = [];        // multiple persons born the same day ; same nb of persons in list 1 and name list
         $n3 = 0; $doublons_different_nb = [];   // multiple persons born the same day ; different nb of persons in list 1 and name list

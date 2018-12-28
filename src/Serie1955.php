@@ -41,8 +41,8 @@ class Serie1955{
     
     // *****************************************
     /** 
-        Generates the csv files in 6-1955-final/ from csv files located in 5-1955-cura-corrected/
-        See 6-1955-final/README for a meaning of generated fields
+        Generates the csv files in 9-1955-final/ from csv files located in 5-1955-cura-corrected/
+        See 9-1955-final/README for a meaning of generated fields
         
         Called by : php run-gauquelin5.php 1955 finalize
         
@@ -52,7 +52,7 @@ class Serie1955{
     **/
     public static function corrected2final($serie){
         $src_dir = Config::$data['dirs']['5-1955-cura-corrected'];
-        $dest_dir = Config::$data['dirs']['6-1955-final'];
+        $dest_dir = Config::$data['dirs']['9-1955-final'];
         $files = glob($src_dir . DS . '*.csv');
         $generatedFields = [
             'ORIGIN' => '',
@@ -67,6 +67,7 @@ class Serie1955{
             'GEOID' => '',
             'LG' => '',
             'LAT' => '',
+//            'COMMENT' => '',
         ];
         $firstline = implode(Gauquelin5::CSV_SEP, array_keys($generatedFields));
         foreach($files as $file){
@@ -93,24 +94,24 @@ class Serie1955{
                     // can happen for 2 cases :
                     // - persons not in cura files and added by a human
                     // - persons with composed last names
-                    // In both cases, FIRST_C and LAST_C should be filled
-                    if($fields['FIRST_C'] == '' || $fields['LAST_C'] == ''){
+                    // In both cases, GIVEN_C and FAMILY_C should be filled
+                    if($fields['GIVEN_C'] == '' || $fields['FAMILY_C'] == ''){
                         echo "ANOMALY ON NAMES - {$new['NUM']} - LINE SKIPPED, MUST BE FIXED\n";
                         continue;
                     }
                     else{
-                        $family = $fields['FIRST_C'];
-                        $given = $fields['LAST_C'];
+                        $family = $fields['FAMILY_C'];
+                        $given = $fields['GIVEN_C'];
                     }
                 }
                 else{
                     [$family, $given] = explode(' ', $fields['NAME']); // ex 'Bally Etienne'
-                    // If FIRST_C or LAST_C are filled, override cura value
-                    if($fields['FIRST_C'] != ''){
-                        $family = $fields['FIRST_C'];
+                    // If GIVEN_C or FAMILY_C are filled, override cura value
+                    if($fields['FAMILY_C'] != ''){
+                        $family = $fields['FAMILY_C'];
                     }
-                    if($fields['LAST_C'] != ''){
-                        $given = $fields['LAST_C'];
+                    if($fields['GIVEN_C'] != ''){
+                        $given = $fields['GIVEN_C'];
                     }
                 }
                 $new['FAMILYNAME'] = $family;
@@ -183,6 +184,8 @@ class Serie1955{
                 if($country == 'FR'){
                     [$dtu, $err] = \TZ_fr::offset("$day $hour", $new['LG'], $new['ADM2']);
                     if($err != ''){
+                        // err something like :
+                        // Possible timezone offset error (dept 54) - check precise local conditions
                         echo "ERROR for {$new['NUM']} {$new['FAMILYNAME']} {$new['GIVENNAME']} : " . $err . " - LINE SKIPPED, MUST BE FIXED\n";
                         continue;
                     }
@@ -199,6 +202,7 @@ class Serie1955{
             // write output
             $dest_file = $dest_dir . DS . $groupCode . '.csv';
             file_put_contents($dest_file, $res);
+            echo "$dest_file generated\n";
         }
     }
     
@@ -216,9 +220,13 @@ class Serie1955{
     **/
     private static function computeBirthDate($date_cura, $day_c, $hour_c){
         if($day_c == '' && $hour_c == ''){
-            return $date_cura;
+            // no checks on $date_cura, supposed correct
+            $day = substr($date_cura, 0, 10);
+            $hour = substr($date_cura, 11, 8);
+            return [$day, $hour];
         }
         if($date_cura == ''){
+            // happens for some rows, present in Gauquelin book, and not in cura data (ex Jacques Lunnis)
             if($day_c == ''){
                 throw new \Exception("Missing column DAY_C");
             }                                                                                                         
@@ -227,14 +235,13 @@ class Serie1955{
             }
         }
         if(is_numeric($hour_c)){
+            // ex : convert '14' to '14:00:00'
+            // obliged to do that because of libre office automatic conversion
             $hour_c = str_pad($hour_c, 2, '0', STR_PAD_LEFT) . ':00:00';
         }
         //
-        $day = $hour = '';
-        if($date_cura != ''){
-            $day = substr($date_cura, 0, 10);
-            $hour = substr($date_cura, 11, 8);
-        }
+        $day = substr($date_cura, 0, 10);
+        $hour = substr($date_cura, 11, 8);
         // override with corrected values
         if($day_c != ''){
             $day = $day_c;

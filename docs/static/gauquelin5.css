@@ -3,12 +3,19 @@ body{
     padding-top:0;
     padding-left:0;
 }
-
+h1{
+    margin:1em 0;
+}
 
 .aside-wrapper{
     padding:1.5rem;
     background:lightyellow;
     border-right:1px solid grey;
+}
+
+.content{
+    width:80%;
+    margin-left:1em;
 }
 
 aside{

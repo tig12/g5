@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <title>Restore 1955 data | Gauquelin5</title>
     <link href="static/style.css" rel="stylesheet" type="text/css">
+    <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="Detailed description of the operations done to restore 1955 Gauquelin groups">
     <meta name="robots" content="index,follow">
     <meta name="description" content="">
@@ -20,6 +21,26 @@
 </nav>
 
 
+<div class="flex-wrap">
+
+<div class="aside-wrapper"><aside>
+    <ul>
+        <li class="padding-bottom bold"><a href="index.html">Gauquelin5 home</a></li>
+        <li><a href="gauquelin-data.html">Gauquelin data</a></li>
+        <li><a href="output-format.html">Output format</a></li>
+        <li><a href="precise-corrections.html">Precise corrections</a></li>
+        <li><a href="restore-1955.html">Restore 1955 groups</a></li>
+        <li><a href="geonames.html">Geonames.org</a></li>
+        <li><a href="profession-codes.html">Profession codes</a></li>
+        <li><a href="download.html">Download results</a></li>
+        <li><a href="questions.html">Questions</a></li>
+        <li class="padding-top bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>
+    </ul>
+</aside></div>
+
+
+<div class="content">
+
 <header>
 <h1>Restoring 1955 groups
 <div class="subtitle">Detailed steps</div>
@@ -33,8 +54,9 @@
 
 <article>
 
+<h2>Generation process</h2>
 
-<br>The following diagram illustrates this process :
+The following diagram illustrates this process :
 
 <img style="display:block; margin:1em;" src="img/serie-A1-sequence.jpg" alt="" />
     
@@ -92,7 +114,7 @@
     <li>
         <b>Correct the files located in <code>5-1955-cura-corrected/</code></b> (by human).
         <br>Files in this directory are corrected by human.
-        <br>The following columns are added : <code>FIRST_C; LAST_C; HOUR_C; DATE_C; PLACE_C; NOTES_C; PRO_C</code> (suffix <code>_C</code> stands for "corrected").
+        <br>The following columns are added : <code>GIVEN_C; FAMILY_C; HOUR_C; DATE_C; PLACE_C; NOTES_C; PRO_C</code> (suffix <code>_C</code> stands for "corrected").
         <br>Corrections come from two sources :
         <ul>
             <li>
@@ -113,10 +135,35 @@
         <br>
     </li>
     
-    
 </ol>
-    
+
+
+<h2>Execution results</h2>
+
+Currently, the program generates a group containing 555 persons.
+<br>13 persons are missing because the program refuses to generate a date with ambiguous timezone.
+<br>The following lines are concerned
+<pre>
+18 Bour Armand : Possible timezone offset error (german zone) : 1916-02-15 07:00:00 57
+81 Winter Paul : Possible timezone offset error (german zone) : 1906-02-06 14:00:00 68
+208 Nessler Eric : Possible timezone offset error (dept 54) - check precise local conditions : 1898-05-20 12:30:00 54
+552 Rudler Antoine : Possible timezone offset error (german zone) : 1905-05-21 03:00:00 68
+565 Angelmann Valentin : Possible timezone offset error (german zone) : 1910-03-07 19:45:00 68
+840 Laurent Marcel : Possible timezone offset error (german zone) : 1913-06-06 15:45:00 68
+895 Wambst Georges : Possible timezone offset error (dept 54) - check precise local conditions : 1902-07-21 22:00:00 54
+1322 Heisserer Oscar : Possible timezone offset error (german zone) : 1914-07-18 20:00:00 67
+1332 Korb Pierre : Possible timezone offset error (german zone) : 1908-04-20 07:30:00 68
+1396 Veinante Emile : Possible timezone offset error (german zone) : 1907-06-12 02:30:00 57
+1702 Krauss Alfred : Possible timezone offset error (german zone) : 1908-02-02 15:00:00 68
+1706 Schlindwein Antoine : Possible timezone offset error (german zone) : 1911-08-10 01:00:00 57
+2081 Genot Lucien : Possible timezone offset error (dept 54) - check precise local conditions : 1901-04-20 17:00:00 54
+</pre>
+
+
 </article> 
+
+</div><!-- end class="content" -->
+</div><!-- end class="flex-wrap" -->
 
 </body>
 </html>
