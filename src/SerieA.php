@@ -1,6 +1,7 @@
 <?php
 /********************************************************************************
-    Importation of Gauquelin 5th edition ; code specific to series A.
+    Importation of Gauquelin 5th edition.
+    Code specific to series A.
     Matches first list and chronological order list
     
     This code uses file 902gdN.html to retrieve the names, but this could have been done using only 902gdA*y.html files
@@ -350,7 +351,8 @@ class SerieA{
         and stores it in a csv file (in directory 2-cura-exported/)
         
         Merges the original list (without names) with names contained in file 902gdN.html
-        So merge is done using birthdate - Merging not complete because of doublons (persons born the same day)
+        So merge is done using birthdate.
+        Merge is not complete because of doublons (persons born the same day).
         
         @param  $serie  String identifying the serie (ex : 'A1')
         @return report
@@ -558,7 +560,7 @@ class SerieA{
     
     // ******************************************************
     /**
-        Auxiliary of import
+        Auxiliary of raw2exported()
         @return [$n_ok_fix, $n1_fix, $n2_fix]
     **/
     private static function corrections1955(&$res, &$missing_in_names, &$doublons_same_nb, $serie, $file_serie, $file_names){
@@ -648,7 +650,7 @@ class SerieA{
         Computes precise profession when possible
         First compute not-detailed profession from $pro
         Then computes precise profession from $num, if possible
-        Auxiliary of import()
+        Auxiliary of raw2exported()
     **/
     private static function compute_profession($serie, $pro, $num){
         $res = self::PROFESSIONS_NO_DETAILS[$serie][$pro];
@@ -669,7 +671,7 @@ class SerieA{
     // ******************************************************
     /** 
         Computes missing names
-        Auxiliary of import()
+        Auxiliary of raw2exported()
     **/
     private static function compute_name($serie, $num){
         return "Gauquelin-$serie-$num";
@@ -679,7 +681,7 @@ class SerieA{
     // ******************************************************
     /** 
         Computes the ISO 3166 country code from fields COU and COD of cura files
-        Auxiliary of import()
+        Auxiliary of raw2exported()
     **/
     private static function compute_country($COU, $COD){
         $COU = self::COUNTRIES[$COU];

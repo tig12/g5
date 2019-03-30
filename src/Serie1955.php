@@ -184,7 +184,7 @@ class Serie1955{
                 if($country == 'FR'){
                     [$dtu, $err] = \TZ_fr::offset("$day $hour", $new['LG'], $new['ADM2']);
                     if($err != ''){
-                        // err something like :
+                        // err is something like :
                         // Possible timezone offset error (dept 54) - check precise local conditions
                         echo "ERROR for {$new['NUM']} {$new['FAMILYNAME']} {$new['GIVENNAME']} : " . $err . " - LINE SKIPPED, MUST BE FIXED\n";
                         continue;
@@ -196,8 +196,6 @@ class Serie1955{
                 $new['BIRTHDATE'] = "$day $hour$dtu";
                 // add new line to res
                 $res .= implode(Gauquelin5::CSV_SEP, $new) . "\n";
-// echo "{$fields['NUM']} {$fields['DATE']} --> {$new['BIRTHDATE']}\n";
-// if(!isset($i)) $i = 0; $i++; if($i == 30)break;
             }
             // write output
             $dest_file = $dest_dir . DS . $groupCode . '.csv';

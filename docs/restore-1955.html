@@ -54,14 +54,12 @@
 
 <article>
 
-<h2>Generation process</h2>
-
 The following diagram illustrates this process :
 
-<img style="display:block; margin:1em;" src="img/serie-A1-sequence.jpg" alt="" />
+<img style="display:block; margin:1em; border:1px solid grey;" src="img/serie-A1-sequence.jpg" alt="" />
     
 <br>Absolute path to directories containing data (<code>1-cura-raw/</code> etc.) must be configured in <code>config.yml</code>.
-<br>References to other files are relative to <code>gauquelin5</code> root directory (the directory containing <code>config.yml</code>, <code>src</code>, <code>run-gauquelin5.php</code>).
+<br>References to other files are relative to <code>gauquelin5</code> root directory (the directory containing <code>config.yml</code> and <code>run-gauquelin5.php</code>).
 
 <style>
 .steps>li{margin-bottom:1em;}
@@ -131,7 +129,7 @@ The following diagram illustrates this process :
     </li>
     
     <li>
-        <b>Generate 1955 groups</b> (by program) - not yet implemented
+        <b>Generate 1955 groups</b> (by program)
         <br>
     </li>
     
@@ -139,25 +137,7 @@ The following diagram illustrates this process :
 
 
 <h2>Execution results</h2>
-
-Currently, the program generates a group containing 555 persons.
-<br>13 persons are missing because the program refuses to generate a date with ambiguous timezone.
-<br>The following lines are concerned
-<pre>
-18 Bour Armand : Possible timezone offset error (german zone) : 1916-02-15 07:00:00 57
-81 Winter Paul : Possible timezone offset error (german zone) : 1906-02-06 14:00:00 68
-208 Nessler Eric : Possible timezone offset error (dept 54) - check precise local conditions : 1898-05-20 12:30:00 54
-552 Rudler Antoine : Possible timezone offset error (german zone) : 1905-05-21 03:00:00 68
-565 Angelmann Valentin : Possible timezone offset error (german zone) : 1910-03-07 19:45:00 68
-840 Laurent Marcel : Possible timezone offset error (german zone) : 1913-06-06 15:45:00 68
-895 Wambst Georges : Possible timezone offset error (dept 54) - check precise local conditions : 1902-07-21 22:00:00 54
-1322 Heisserer Oscar : Possible timezone offset error (german zone) : 1914-07-18 20:00:00 67
-1332 Korb Pierre : Possible timezone offset error (german zone) : 1908-04-20 07:30:00 68
-1396 Veinante Emile : Possible timezone offset error (german zone) : 1907-06-12 02:30:00 57
-1702 Krauss Alfred : Possible timezone offset error (german zone) : 1908-02-02 15:00:00 68
-1706 Schlindwein Antoine : Possible timezone offset error (german zone) : 1911-08-10 01:00:00 57
-2081 Genot Lucien : Possible timezone offset error (dept 54) - check precise local conditions : 1901-04-20 17:00:00 54
-</pre>
+See <a href="download.html">Download page</a> for a list of points that should be solved before considering the result as reliable. 
 
 
 </article> 

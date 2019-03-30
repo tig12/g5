@@ -48,8 +48,10 @@
 <article>
 
 <div class="intro">
-The primary purpose of this program is to restore the original groups used by Michel Gauquelin in 1955 to perform statistical tests on astrology.
-<br>But this leads to write code that can also be used to generate a corrected version of cura.free.fr data.
+The primary purpose of this program is to restore the original groups used by Michel Gauquelin since 1955 to perform statistical tests on astrology. This is done using "Archives Gauquelin" version 5, available on <a href="http://cura.free.fr/gauq/17archg.html">cura.free.fr</a> web site.
+<br>This code was used to reconstitute the group of "570 sportifs", which was at the beginning of the "mars effect" polemics.
+<br>This code can also be used to generate a corrected version of cura.free.fr data.
+<br>If you are not interested by the details of the code, you can directly <a href="download.html">dowload the results</a>.
 </div>
 
 <!-- ********************************************************************************* -->
@@ -70,19 +72,16 @@ The primary purpose of this program is to restore the original groups used by Mi
         <pre>php run-gauquelin5.php</pre>
         it displays a message with possible values for <code>&lt;serie></code>.
         <br>
-        <br>If you run :
+        <br>If you run for example :
         <pre>php run-gauquelin5.php A1</pre>
         it displays a message with possible actions for serie A1.
+        <br>
+        <br>For example, to convert cura html files to csv and apply corrections:
+        <pre>php run-gauquelin5.php A1 raw2exported</pre>
+        it extracts the data from A1 html file, applies some corrections and generates a csv file.
     </li>
 </ul>
 
-
-<!-- ********************************************************************************* -->
-<h2>Apply corrections and convert html to csv</h2>
-
-Run for example :
-<pre>php run-gauquelin5.php A1 raw2exported</pre>
-it extracts the data from A1 html file, applies the corrections and generates a csv file.
 <br>Precise corrections depend on the serie ; see :
 <br>- <a href="precise-corrections.html">Detailed list of corrections</a> 
 <br>- <a href="output-format.html">Output format</a>
@@ -91,41 +90,8 @@ it extracts the data from A1 html file, applies the corrections and generates a 
 <h2>Restore original groups used by Gauquelin in 1955</h2>
 
 The reconstitution of the original groups is a more complex process, because it involves human checks. This has been entirely done for one group (570 sportifs).
-<br><a href="restore-1955.html">See page "Restoring 1955 groups"</a> for more details.
+<br>See page <a href="restore-1955.html">"Restoring 1955 groups"</a> for more details.
 
-<!-- ********************************************************************************* -->
-<h2>Matching geonames.org</h2>
-
- To do this, the program needs to have geonames data stored in a postgres database, as done by the program located at <a href="https://github.com/tig12/geonames2postgres">github.com/tig12/geonames2postgres</a>.  
-
-To do this, you need to :
-<ul>
-    <li>
-        have postgres installed on your machine,
-    </li>
-    <li>
-        in <code>config.yml</code>, put the correct values in the <code>postgresql</code> section,
-    </li>
-    <li>
-        in <code>config.yml</code>, enable this feature ; replace <code>false</code> by <code>true</code> in order to have :
-        <pre>geonames: true</pre>
-    </li>
-    <li>
-        run <code>geonames2postgres.py</code> for all the countries containing birth dates.
-        <br>For Gauquelin data needs :
-        <pre>
-# todo : exhaustive list of countries
-python import_geonames.py BE
-python import_geonames.py DE
-python import_geonames.py DZ
-python import_geonames.py FR
-python import_geonames.py IT
-python import_geonames.py MC
-python import_geonames.py NL
-python import_geonames.py US
-        </pre>
-    </li>
-</ul>
 
 </article>
 

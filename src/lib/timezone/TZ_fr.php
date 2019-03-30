@@ -17,7 +17,7 @@ class TZ_fr{
     /**
         Improves php computation of timezone for France.
         - Takes into account the fact that Alsace and a part of Lorraine were german between 1870 and 1918
-        - Takes into account that before 1891-03-15, local hour was used
+        - Takes into account the fact that before 1891-03-15, local hour was used
         BUT NOT EXACT :
         - some part of dept 54 was also german between 1871 and 1918
             => a precise computation should take into account the precise local situation

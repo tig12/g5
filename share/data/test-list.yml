@@ -1,0 +1,202 @@
+
+
+title: Statistical experiences on planetary effects since 1955
+history: 2017-05-20 12:53:41+02:00, Thierry Graff : Creation
+purpose: |
+  Elaborate an exhaustive list of sttistical experiences related to astrology since 1955
+
+sources:
+  TME:
+    name: The tenacious Mars Effect
+    author: Ertel
+
+events:
+  
+#####################################################
+# Gauquelin
+#####################################################
+  -
+    date: '1955'
+    title: Gauquelin first publication
+    author: Michel Gauquelin
+    N: 
+    sources:
+      - IA
+    comment: |
+      Extract from 1988-raising-the-hurdle-for-athletes-mars-effect :
+      First French. (E-G) The data were first published without planetary
+      sectors data, in an appendix to IA, 1955. The section was headed "570
+      sportifs" (the number of athletes actually listed was 568). The data were
+      again published, with planetary sectors, in A 1 (1 970), with one deletion (an
+      erroneous birth date; M. Gauquelin, personal communication, May 10,
+      1986)
+      
+    
+  -
+    date: '1960'
+    title: Gauquelin foreign replications 
+    authors: Michel Gauquelin, Françoise Gauquelin
+    N: 15000
+    publication: "Les Hommes et les Astres"
+    data: 
+      DE: 
+      IT: 
+      BE: 
+      NL: 
+    comment: |
+      New data from Germany, Italy, Belgium, Holland
+      Gauquelin analyzed a sample of 915 non-French European athletes
+      in his HA (1960) study. The data, however, were
+      included only in the A 1 collection (1970). Between 1960 and 1970, casual
+      data gathering for European athletes continued (N = 274). Subsample No. 2
+      increased in size to N = 1189
+    results: |
+      physicians and scientists : Mars, Jupiter, Saturn
+      Champions                 : Moon, Mars
+      Military men              : Moon, Mars, Jupiter
+      politicians               : Moon, Jupiter
+      actors                    : Jupiter
+      Painters                  : Mars, Saturn
+      
+  -
+    date: '1960'
+    title: Gauquelin foreign replication for sportives
+    authors: Michel Gauquelin, Françoise Gauquelin
+    N: 915
+    publication: "Les Hommes et les Astres"
+    data: 
+      DE: 
+      IT: 
+      BE: 
+      NL: 
+    comment: |
+      in his HA (1960) study. The data, however, were
+      included only in the A 1 collection (1970). Between 1960 and 1970, casual
+      data gathering for European athletes continued (N = 274). Subsample No. 2
+      increased in size to N = 1189
+    results: |
+      
+  -
+    date: '1970'
+    title: Gauquelin heredity experiments
+    authors: Michel Gauquelin, Françoise Gauquelin 
+    N: 24948
+    publications:
+      - L'Heredite Planetaire (Planete, Paris 1966, 226 pages)
+      - Astrology and Science 1970
+    data: | 
+      6372  birth data from a large Parisian hospital
+      10878 birth data from registry offices near the hospital
+      ----
+      24948 total individual birth data
+      15000 matchings of parents and their children
+    comment: |
+    
+  -
+    date: '1976'
+    title: Gauquelin Character traits
+    authors: Michel Gauquelin, Françoise Gauquelin
+    N: 52309
+    publication: "The Truth about Astrology", 1983
+    comment: |
+      During 1967-1977, with the help of Francoise and a dozen paid helpers
+      He had the help of Tom Shanks and the computer of Neil Michelsen's Astro Computing Service in San Diego.
+      By 1978 he had the results
+
+  -
+    date: '1976'
+    title: Gauquelin replication of heredity effect
+    authors: 
+    N: 18298
+    comment: |
+    
+  -
+    date: '1979'
+    title: replication
+    authors: Michel Gauquelin, Françoise Gauquelin
+    N: 432
+    source: The mars effect and the sport champions. A new replication on 432 famous europeans, LERRCP, scientific documents N°6
+    comment: |
+    
+  -
+    date: '1982'
+    title: replication
+    authors: Michel Gauquelin, Françoise Gauquelin
+    source: 
+    comment: |
+    
+  -                             
+    date: '1984'
+    title: Gauquelin new replication of heredity effect
+    authors: 
+    N: 33120
+    comment: |
+      A third replication in  with 33,120 parent-child comparisons showed no effect at all    
+    
+#####################################################
+# Skeptics
+# @source TME
+#####################################################
+  -
+    date: '1976'
+    title: Comité Para
+    authors: CP
+    source: TME
+    N: 535
+    comment: |
+    
+  -
+    date: '1980'
+    title: CSICOP
+    authors: 
+    N: 409
+    source: 
+    comment: |
+    
+  -
+    date: '1990'
+    title: CFEPP
+    authors: 
+    source: 
+    comment: |
+    
+    
+#####################################################
+# Ertel
+# @source TME
+#####################################################
+  -
+    date: '1988'
+    title: Ertel Eminence effect on athletes
+    author: Suibert Ertel
+    publication: Journal of Scientific Exploration. Vol. 2. No. 1. pp. 53 - 82. 1988
+    N: 4391
+    comment: |
+      Details in "Raising the Hurdle for the Athletes' Mars Effect", Ertel
+    results: |
+      iron will tend to be born under Mars,
+      expansives                under Jupiter,
+      introspectives            under Saturn
+      poetic temperaments       under the Moon
+    
+    
+  -
+    date: '1988'
+    authors: Ertel
+    source: Gauquelin, Is there really a mars effect ?
+    comment: |
+    
+  -
+    date: ''
+    title: 
+    authors: 
+    source: 
+    comment: |
+    
+  -
+    date: ''
+    title: 
+    authors: 
+    source: 
+    comment: |
+    
