@@ -38,7 +38,7 @@ try{
     }
     
     ksort($names);
-    echo "Number of ames in the different files\n";
+    echo "Number of names in the different files\n";
     foreach($names as $k => $v){
         echo $k . ' : ' . count($v) . "\n";
     }

@@ -58,7 +58,24 @@ switch($command){
 
 // ******************************************************
 /**
-    Generates a table of profession codes in markdown format (tested on github)
+    Generates a table of profession codes in html
+**/
+function html_table(){
+    $codes = read_input_file();
+    $res = '';
+    $res .= "\n" . '<table">';
+    $res .= "\n<tr><th>Code</th><th>Label (fr)</th><th>Label (en)</th></tr>";
+    foreach($codes as $code => $labels){
+        $res .= "\n<tr><td>$code</td><td>{$labels[0]}</td><td>{$labels[1]}</td></tr>";
+    }
+    $res .= "\n</table>";
+    echo $res . "\n";
+}
+
+
+// ******************************************************
+/**
+    Generates a table of profession codes in markdown format (tested on github.com)
 **/
 function md_table(){
     $codes = read_input_file();
@@ -69,23 +86,6 @@ function md_table(){
     foreach($codes as $code => $labels){
         $res .= "\n| $code | {$labels[0]} | {$labels[1]} | ";
     }
-    echo $res . "\n";
-}
-
-
-// ******************************************************
-/**
-    Generates a table of profession codes in html
-**/
-function html_table(){
-    $codes = read_input_file();
-    $res = '<style>.profession-codes{:nth-child(even){background-color:#F8F8F8;}</style>';
-    $res .= "\n" . '<table class="profession-codes">';
-    $res .= "\n<tr><th>Code</th><th>Label (fr)</th><th>Label (en)</th></tr>";
-    foreach($codes as $code => $labels){
-        $res .= "\n<tr><td>$code</td><td>{$labels[0]}</td><td>{$labels[1]}</td></tr>";
-    }
-    $res .= "\n</table>";
     echo $res . "\n";
 }
 

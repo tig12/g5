@@ -1,26 +1,58 @@
 
+@import "style.css";
+
 body{
     padding-top:0;
     padding-left:0;
-}
-h1{
-    margin:1em 0;
+    padding-bottom:1em;
 }
 
-.aside-wrapper{
-    padding:1.5rem;
-    background:lightyellow;
-    border-right:1px solid grey;
+/* ================ Site layout ================ */
+html{height:100%;}
+
+body{
+    display:flex;
+    flex-direction:column;
+    height:100%;
 }
 
-.content{
-    width:80%;
-    margin-left:1em;
+/* container and footer = direct children of body */
+.container{
+   flex: 1 0 auto;
+   display:flex;   
+   flex-flow:row wrap;
+}
+/* in the html, write .left sidebar after .main area */
+.container :nth-child(2) { order: 1; }
+.container :nth-child(1) { order: 2; }
+
+/* left and main = direct children of container */
+.left{
+    flex:1 1 15%;
+}
+.main{
+    flex:1 1 85%;
 }
 
-aside{
+/* ================ Design ================ */
+.main{
+    padding-right:.5rem;
+    padding-left:.5rem;
+    padding-bottom:1rem;
 }
 
-aside li{
-    line-height:1.5em;
+.left{
+    padding-top:2rem;
+    border-left:1px solid grey;
+    background:lightgoldenrodyellow;
+    font-size:.8rem;
+}
+.left ul{
+    padding-left:1rem;
+}
+.left>ul{
+    padding-left:0.5rem;
+}
+.left>ul>li{
+    padding-bottom:0.3rem;
 }

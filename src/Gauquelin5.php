@@ -92,7 +92,7 @@ class Gauquelin5{
         Computes the name of a html file downloaded from cura.free.fr
         and locally stored in directory 1-cura-raw (see absolute path of this directory in config.yml)
         @param  $serie : a string like 'A1'
-        @return filename, a string like '902gdA1.html'
+        @return filename, a string like '902gdA1y.html' or '902gdB1.html'
     **/
     public static function serie2filename($serie){
         return '902gd' . $serie . (substr($serie, 0, 1) == 'A' ? 'y' : '') . '.html';
@@ -104,6 +104,7 @@ class Gauquelin5{
         Reads a html file downloaded from cura.free.fr
         and locally stored in directory 1-cura-raw (see absolute path of this directory in config.yml)
         @param  $serie : string like 'A1'
+        @return The content of the file
         
         @todo This code is specific to cura.free.fr data source => should be in cura.free.fr importer
     **/

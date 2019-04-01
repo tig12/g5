@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>From scratch | Gauquelin5</title>
+    <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
+    <meta name="description" content="Configure and start using Gauquelin5 software">
+    <meta name="robots" content="index,follow">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
+    <meta name="dcterms.rightsHolder" content="Thierry Graff">
+    <meta name="dcterms.dateCopyrighted" content="2019">
+    <!-- 
+    tigsite:
+        history: 2019-04-01 00:20:27+02:00, Thierry Graff : Creation
+    -->
+</head>
+
+<body>
+<div class="container">
+
+<div class="main">
+
+<nav class="prevnext">
+    <a class="top" title="" href="index.html">&uarr;</a>
+    <a class="prev" title="" href="why-gauquelin5.html">&larr;</a>
+    <a class="next" title="" href=".html">&rarr;</a>
+</nav>
+
+<header>
+<h1>Gauquelin5 from scratch</h1>
+<div class="intro">Configure and start using Gauquelin5 software.</div>
+</header>
+
+<article>
+
+This software has been developed and tested under Linux (Ubuntu 18.4), using php 7.2.
+A priori, it should also work under Windows and Macintosh.
+<br>
+<br>It is used through the command line.
+
+<!-- ********************************************************************************* -->
+<h2>Installation</h2>
+Open a terminal and clone the repository on your local machine :
+<pre>git clone https://github.com/tig12/gauquelin5</pre>
+
+The important files and directories are :
+<pre>
+gauquelin5/
+    ├── config.yml.dist
+    ├── docs/
+    ├── run-gauquelin5.php
+    ├── share/
+    │   ├── 3-cura-marked/
+    │   ├── 5-1955-cura-corrected/
+    │   └── data/
+    ├── src/
+    └── tools/
+</pre>
+
+In the rest of this doc, directory <code>gauquelin5/</code> is refered as the <i>root directory</i>.
+
+<!-- ************************************* -->
+<h3>Configuration</h3>
+Create a file <code>config.yml</code> by copying <code>config.yml.dist</code> :
+<pre>cp config.yml.dist config.yml</pre>
+
+Edit <code>config.yml</code> and adapt the values.
+
+<!-- ********************************************************************************* -->
+<h2>Usage</h2>
+
+<pre>php run-gauquelin5</pre>
+will echo an error message :
+<pre>
+usage : 
+    php run-gauquelin5.php &lt;serie> &lt;action>
+with :
+    &lt;serie> = 'A' or 'A1' or 'A2' or 'A3' or 'A4' or 'A5' or 'A6' or '1955' or 'B' or 'B1' or 'B2' or 'B3' or 'B4' or 'B5' or 'B6' or 'D6' or 'D9a' or 'D9b' or 'D9c' or 'D10' or 'E1' or 'E2' or 'E2a' or 'E2b' or 'E2c' or 'E2d' or 'E2e' or 'E2f' or 'E2g' or 'E3' or 'F1' or 'F2'
+    &lt;action> depends on serie
+Examples :
+    php run-gauquelin5.php A2 raw2exported       # will convert file 1-cura-raw/902gdA2.html to 2-cura-exported/A2.csv
+Notes :
+    - if serie = A, will compute series A1 to A6
+    - if serie = B, will compute series B1 to B6
+    - if serie = E2, will compute series E2a to E2g
+</pre>
+
+
+</article>
+</div><!-- end class="main" -->
+
+
+<!-- ************************************* -->
+<aside class="left">
+</aside>
+
+</div><!-- end class="container" -->
+
+</body>
+</html>
+<!-- ************************************* -->
+<!-- ********************************************************************************* -->

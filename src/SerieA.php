@@ -36,6 +36,7 @@ class SerieA{
     /** 
         More detailed professions
         ex : in file 902gdA1y, profession of persons numbered between 1 and 86 (inclusive) is Athlétisme
+        This informations come from Gauquelin's book "L'influence des astres".
     **/
     const PROFESSIONS_DETAILS = [
         'A1' => [
@@ -362,7 +363,8 @@ class SerieA{
         $report =  "--- Importing serie $serie\n";
         $raw = Gauquelin5::readHtmlFile($serie);
         $file_serie = Gauquelin5::serie2filename($serie);
-        $file_names = Gauquelin5::serie2filename(Names::SERIE);
+        $file_names = Gauquelin5::serie2filename(Names::SERIE); // = 902gdN.html
+echo "file_serie = $file_serie\n"; echo "file_names = $file_names\n"; exit;
         //
         // 1 - parse first list (without names) - store by birth date to prepare matching
         //

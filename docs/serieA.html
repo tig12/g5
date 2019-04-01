@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Export cura | Gauquelin5</title>
+    <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
+    <meta name="description" content="Generate CSV files from cura.free.fr HTML files">
+    <meta name="robots" content="index,follow">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
+    <meta name="dcterms.rightsHolder" content="Thierry Graff">
+    <meta name="dcterms.dateCopyrighted" content="2018">
+</head>
+
+<body>
+<div class="container">
+
+<div class="main">
+
+<nav class="prevnext">
+    <a class="top" title="" href="index.html">&uarr;</a>
+</nav>
+
+
+<div class="flex-wrap">
+
+<div class="aside-wrapper"><aside>
+    <ul>
+        <li class="padding-bottom bold"><a href="index.html">Gauquelin5 home</a></li>
+        <li><a href="gauquelin-data.html">Gauquelin data</a></li>
+        <li><a href="output-format.html">Output format</a></li>
+        <li><a href="export-cura.html">Export CURA data</a></li>
+        <li><a href="restore-1955.html">Restore 1955 groups</a></li>
+        <li><a href="geonames.html">Geonames.org</a></li>
+        <li><a href="profession-codes.html">Profession codes</a></li>
+        <li><a href="download.html">Download results</a></li>
+        <li><a href="questions.html">Questions</a></li>
+        <li class="padding-top bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>
+    </ul>
+</aside></div>
+
+
+<div class="content">
+
+<header>
+<h1>Serie A</h1>
+<div class="intro">
+This page describes the first step of the generation : convert cura.free.fr html files to csv files. This is done by program including human corrections.
+</div>
+</header>
+
+<article>
+
+For all series, the following parts of <code>config.yml</code> are used :
+<pre>
+dirs:
+  1-cura-raw:               /path/to/data/1-cura.free.fr/html-2017-04-26
+  2-cura-exported:          /path/to/data/2-cura-exported
+</pre>
+
+The input data are located in directory specified by <code>1-cura-raw</code>.
+<br>The output data are located in directory specified by <code>2-cura-exported</code>.
+
+
+<!-- ********************************************************************************* -->
+<h2>cura.free.fr data</h2>
+
+
+
+<!-- ********************************************************************************* -->
+<h2>Restoring names</h2>
+
+The code described below is located in <code>src/SerieA.php</code>.
+<br>It concerns the extraction of data located in 6 files : <a href="http://cura.free.fr/gauq/902gdA1.html">902gdA1.html</a> to <a href="http://cura.free.fr/gauq/902gdA6.html">902gdA6.html</a>
+
+<!-- 
+On cura.free.fr, each file from serie A is available from two distinct pages : one without names (for example <a href="http://cura.free.fr/gauq/902gdA1.html">902gdA1.html</a>) and one with names included (for example <a href="http://cura.free.fr/gauq/902gdA1y.html">902gdA1y.html</a>).
+<br>- One list with precise birth data, but without names .
+<br>- Two lists with names, but without precise birth data ; these two lists are equivalent, but sorted differently.
+<br>An other page, <a href="http://cura.free.fr/gauq/902gdN.html">902gdN.html</a>, contains a list of all the names, for series A1, A2, A3, A4, A5, A6, D10, D6, E1, E3.
+<br>
+<br>I checked by program that lists with precise birth data from 902gdA1 ... 902gdA6 and from 902gdA1y ... 902gdA6y are equivalent, and that 902gdN contains all the names listed in 902gdA1y, ... 902gdA6y. 
+-->
+
+
+<!-- ************************************* -->
+<h3>Handling names</h3>
+In order to build a list containing both names and precise birth data, a problem must be solved, because there are two lists with different informations :
+<br>- One list with precise birth data, but without names, located in pages <code>902gdA1.html</code> to <code>902gdA6.html</code>, which looks like that :
+<pre>
+YEA	MON	DAY	PRO	NUM	COU	H	MN	SEC	TZ	LAT	LON	COD	CITY		
+
+1817	3	25	C	185	F	5	16	24	0	48N 0	4W 6	29	CONCARNEAU
+1827	5	28	C	414	I	20	8	0	-1	43N 0	13E 0	PG	TODI
+1854	8	4	C	349	I	17	32	0	-1	44N48	10E45	PR	PARMA
+1862	6	3	C	876	F	6	51	16	0	48N50	2E11	92	ASNIERES
+1862	9	12	C	445	I	11	0	0	-1	41N 0	15E 0	AV	AVELLINO
+1864	5	13	C	1226	G	14	23	0	-1	50N30	9E15	HESS	FRANKFURT/MAIN
+</pre>
+
+- One list with names, but without precise birth data, located in page <a href="http://cura.free.fr/gauq/902gdN.html">902gdN.html</a>, which looks like that :
+<pre>
+ YEA	MON	DAY	NAME
+
+ 1817	3	5	Lebris Jean
+ 1827	5	28	Menecali Abdon
+ 1854	8	4	Frassinetti Romeo
+ 1862	6	3	Rivierre Gaston
+ 1862	9	12	Petilli Giuseppe
+ 1864	5	13	Stein Louis
+</pre>
+
+At first sight, these two lists seem to correspond, but a check done by program show that they do not correspond exactly.
+<br>This program is located in <code>tools/check-serieA-names.php</code>
+<pre>php check-serieA-names.php</pre>
+<pre>
+Serie A1 - nb of elements : list1 : 2087 - list2 : 2082
+Serie A2 - nb of elements : list1 : 3643 - list2 : 3637
+Serie A3 - nb of elements : list1 : 3046 - list2 : 2963
+Serie A4 - nb of elements : list1 : 2720 - list2 : 1469
+Serie A5 - nb of elements : list1 : 2410 - list2 : 1400
+Serie A6 - nb of elements : list1 : 2026 - list2 : 1337
+</pre>
+
+<br>
+<br>The program must merge the two lists ; merge cannot be completely done by program, because there is not a unique identifier which would permit to perform the merge without ambiguity. The only way to merge is to use birth date. 
+
+
+</article>
+
+</div><!-- end class="content" -->
+</div><!-- end class="flex-wrap" -->
+
+</body>
+</html>

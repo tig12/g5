@@ -1,51 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>Geonames.org integration | Gauquelin5</title>
-    <link href="static/style.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <title>Geonames | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
-    <meta name="description" content="How to use geonames to spot Gauquelin data archives">
+    <meta name="description" content="Using geonames.org to relate Gauquelin data to a standard geographic frame">
     <meta name="robots" content="index,follow">
     <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
     <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
     <meta name="dcterms.rightsHolder" content="Thierry Graff">
     <meta name="dcterms.dateCopyrighted" content="2018">
+    <!-- 
+    tigsite:
+        history: 2018, Thierry Graff : Creation
+    -->
 </head>
 
 <body>
+<div class="container">
+
+<div class="main">
 
 <nav class="prevnext">
     <a class="top" title="" href="index.html">&uarr;</a>
+    <a class="prev" title="" href=".html">&larr;</a>
+    <a class="next" title="" href=".html">&rarr;</a>
 </nav>
 
-
-<div class="flex-wrap">
-
-<div class="aside-wrapper"><aside>
-    <ul>
-        <li class="padding-bottom bold"><a href="index.html">Gauquelin5 home</a></li>
-        <li><a href="gauquelin-data.html">Gauquelin data</a></li>
-        <li><a href="output-format.html">Output format</a></li>
-        <li><a href="precise-corrections.html">Precise corrections</a></li>
-        <li><a href="restore-1955.html">Restore 1955 groups</a></li>
-        <li><a href="geonames.html">Geonames.org</a></li>
-        <li><a href="profession-codes.html">Profession codes</a></li>
-        <li><a href="download.html">Download results</a></li>
-        <li><a href="questions.html">Questions</a></li>
-        <li class="padding-top bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>
-    </ul>
-</aside></div>
-
-
-<div class="content">
-
 <header>
-<h1>Geonames integration</h1>
+<h1>Integrating geonames.org</h1>
+<div class="intro"></div>
 </header>
 
 <article>
-
 Geonames is used to "spot" the data, relate each place to a geonames.org id.
 <br>In some files (like E1 and E3), timezone information is missing. The program tries to associate the names of cities to places of geonames, to compute timezone.
 <br>
@@ -77,12 +64,18 @@ python import_geonames.py NL
 python import_geonames.py US
         </pre>
     </li>
-</ul>
-
+</ul>       
 </article>
+</div><!-- end class="main" -->
 
-</div><!-- end class="content" -->
-</div><!-- end class="flex-wrap" -->
+
+<!-- ************************************* -->
+<aside class="left">
+</aside>
+
+</div><!-- end class="container" -->
 
 </body>
 </html>
+<!-- ************************************* -->
+<!-- ********************************************************************************* -->

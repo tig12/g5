@@ -11,7 +11,10 @@ use gauquelin5\Gauquelin5;
 
 class Names{
     
-    /** Name of the file containing names **/
+    /**
+        The "serie" corresponding to 902gdN.html
+        Only used by Gauquelin5::serie2filename() to compute the name of the file.
+    **/
     const SERIE = 'N';
     
     // ******************************************************
