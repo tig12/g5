@@ -4,7 +4,7 @@
 
 # Directories where the files are stored
 dirs:
-  1-cura-raw:               data/1-cura.free.fr
+  1-cura-raw:               data/1-cura-raw
   2-cura-exported:          data/2-cura-exported
   3-cura-marked:            data/3-cura-marked
   4-1955-generated:         data/4-1955-generated
