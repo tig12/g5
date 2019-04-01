@@ -364,7 +364,6 @@ class SerieA{
         $raw = Gauquelin5::readHtmlFile($serie);
         $file_serie = Gauquelin5::serie2filename($serie);
         $file_names = Gauquelin5::serie2filename(Names::SERIE); // = 902gdN.html
-echo "file_serie = $file_serie\n"; echo "file_names = $file_names\n"; exit;
         //
         // 1 - parse first list (without names) - store by birth date to prepare matching
         //
