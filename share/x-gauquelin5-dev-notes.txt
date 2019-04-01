@@ -1,0 +1,254 @@
+
+Series A
+-----------------
+
+- 1) typo in notice : "Rygby" instead of "Rugby"
+
+- 2) saw 2 errors while performing random checks :
+
+- Breguet Louis
+** in 902gdA1y :
+C	141	F	2	1	1880	11	50	40	0	48N50	2E20	75	PARIS 6E
+=> iso date = 1880-01-02 11:50:40+00:00
+** in civil registry :
+http://canadp-archivesenligne.paris.fr/archives_etat_civil/1860_1902_actes/index.php
+6e arrondissement - 02/01/1880 ; in viewer, p 6 /31 => Né le 2 janvier 1880 à 1h du matin
+From Traité de l'heure dans le monde, TU = HLO ; 2°20' = 00:09:20 => TU = 00:50:40
+=> iso date = 1880-01-02 00:50:40+00:00
+=> DIFFERENT HOURS
+
+- Lebris Jean
+** sur 902gdA1y :
+C	185	F	25	3	1817	5	16	24	0	48N 0	4W 6	29	CONCARNEAU
+=> date iso = 1817-03-25 05:16:24+00:00
+** in civil registry :
+http://mnesys-portail.archives-finistere.fr/?id=recherche_etat_civil
+registre  1 MI EC 53/10 Naissances, p 377 /559 => Né le 25 mars 1817 à 5h du matin
+From Traité de l'heure dans le monde, TU = HLO ;  4°6' = 00:16:24 => hour = 05:16:24
+=> iso date = 1817-03-25 05:16:24+00:00
+=> SAME HOURS
+
+=> in 902gdA1y.html, line :
+ 1817	3	5	Lebris Jean
+should be replaced by :
+ 1817	3	25	Lebris Jean
+
+- 3) Main problem : merge the list containing birth dates and the list containing names
+
+if we call list1 = list without name and list2 = list with names
+The purpose is to match persons in list1 and list2.
+The only common informations between list1 and list2 are DAY MON YEA (= birth date)
+4 possible cases :
+- 1 some dates are present in list1, and missing in list2
+- 2 for a given day, there are several persons in list1 and list2, but the same number in list1 and list2, matching is possible in theory but the program can't decide who is who.
+A human could match some cases (for ex if one is born in Italy and the other in France, we could use the names to guess who is french and who is italian).
+- 3 for a given day, there are different nb of persons in list1 and list2 => ??? seems to be incoherent
+- 4 for a given day, there is one element in list1 and one in list2 => OK, MATCHING IS POSSIBLE.
+
+Result of execution :
+--- Importing serie A1
+nb in list1 (902gdA1y.html) : 2087 - nb in list2 (902gdN.html) : 2082
+case 1 : dates present in 902gdA1y.html and missing in 902gdN.html : 20
+case 2 : date ambiguities with same nb : 101
+case 3 : date ambiguities with different nb : 2
+total NOT ok : 123
+nb OK (match without ambiguity) : 1855 (88.88 %)
+--- Importing serie A2
+nb in list1 (902gdA2y.html) : 3643 - nb in list2 (902gdN.html) : 3637
+case 1 : dates present in 902gdA2y.html and missing in 902gdN.html : 45
+case 2 : date ambiguities with same nb : 184
+case 3 : date ambiguities with different nb : 13
+total NOT ok : 242
+nb OK (match without ambiguity) : 3205 (87.98 %)
+--- Importing serie A3
+nb in list1 (902gdA3y.html) : 3046 - nb in list2 (902gdN.html) : 2963
+case 1 : dates present in 902gdA3y.html and missing in 902gdN.html : 122
+case 2 : date ambiguities with same nb : 124
+case 3 : date ambiguities with different nb : 17
+total NOT ok : 263
+nb OK (match without ambiguity) : 2640 (86.67 %)
+--- Importing serie A4
+nb in list1 (902gdA4y.html) : 2720 - nb in list2 (902gdN.html) : 2709
+case 1 : dates present in 902gdA4y.html and missing in 902gdN.html : 36
+case 2 : date ambiguities with same nb : 92
+case 3 : date ambiguities with different nb : 7
+total NOT ok : 135
+nb OK (match without ambiguity) : 2486 (91.4 %)
+--- Importing serie A5
+nb in list1 (902gdA5y.html) : 2410 - nb in list2 (902gdN.html) : 2398
+case 1 : dates present in 902gdA5y.html and missing in 902gdN.html : 34
+case 2 : date ambiguities with same nb : 92
+case 3 : date ambiguities with different nb : 3
+total NOT ok : 129
+nb OK (match without ambiguity) : 2184 (90.62 %)
+--- Importing serie A6
+nb in list1 (902gdA6y.html) : 2026 - nb in list2 (902gdN.html) : 1338
+case 1 : dates present in 902gdA6y.html and missing in 902gdN.html : 674
+case 2 : date ambiguities with same nb : 19
+case 3 : date ambiguities with different nb : 26
+total NOT ok : 719
+nb OK (match without ambiguity) : 1262 (62.29 %)
+
+- 4) Miscelaneous errors
+in 902gdA4.html, Missing place name in a line (Bordeaux)
+M	1752	F	29	9	1860	5	27	36	0	44N50	0W34	33	
+
+
+Series B and E2
+-----------------
+902gdB2.html
+Missing field NUM for record 8224
+	D	16	6	1923	9	0	0	3	0	48N50	2E20	75
+
+902gdE2c.html
+Missing field NUM for record 8224
+	S	18	05	1923	14	20	0	13	0	48N50	2E20	75
+
+902gdE2e.html
+Missing field NUM for record 8224
+	S	17	11	1927	16	0	0	02	0	48N50	2E20	75
+
+Serie D6
+-----------------
+2 lines miss longitude and latitude :
+493	Good Robert		    AC	21	5	1922	06:00	6h			Grosby, MN
+658	Jeter Robert		SP	9	5	1937	08:00	5h			Union, SC
+
+Some lines have longitude and latitude separated by spaces instead of tabs :
+112	Blanton Leonard		PO	10	4	1930	21:30	6h	35N11   88W10	Hardin County, TN	
+192	Caldwell Philip		EX	27	1	1920	08:00	5h	39N16   83W09	Bourneville, OH	
+409	Faver Dudley		MI	17	8	1916	15:00	6h	32N28   100W24	Sweatwater, TX	
+568	Hayes Elvin		SP	11	11	1945	22:00	6h	32N28   91W45	Rayville, LA	
+817!	Malden Karl		AC	22	3	1912	17:00	6h	41N35   87W20	Gary, IN
+935	Murphy William		EX	17	6	1907	10:00	6h	44N15   88W24   Appleton, WI		
+945	Neal Patricia		AC	20	1	1926	04:30	6h	36N40   84W03	Packard, KY	
+1033	Pitts William		MI	27	11	1919	06:00	8h	33N54   117W15  March Field, CA		
+1058	Ramsey Lloyd		MI	29	5	1918	07:00	5h	37N05   84W36   Somerset, KY		
+1066!	Reeves Steve		AC	21	1	1926	08:00	7h	48N11   106W38  Glasgow, MT
+1158	Shaffer Raymond		EX	6	4	1912	22:30	6h	37N59   94W49   Harding, KS		
+1218	Staiger John		EX	20	3	1910	19:00	6h	44N43   88W09   Chase, WI		
+1250	Sweeney Walter		SP	18	4	1941	09:20	5h	42N14   70W48   Cohasset, MA		
+
+Some lines have a "!" in the NUM, and the notice doesn't mention why :
+93!	Bergen Candice		AC	9	5	1946	21:52	8h	34N4	118W15	Los Angeles, CA
+411!	Feinstein Dianne	PO	22	6	1933	00:44	8h	37N47	122W25	San Francisco, CA
+669!	Jones Jack		AC	14	1	1938	02:48	8h	34N6	118W21	Hollywood, CA
+817!	Malden Karl		AC	22	3	1912	17:00	6h	41N35   87W20	Gary, IN
+963!	O'Neal Ryan		AC	20	4	1941	09:34	8h	34N4	118W15	Los Angeles, CA
+1066!	Reeves Steve		AC	21	1	1926	08:00	7h	48N11   106W38  Glasgow, MT
+1098!	Rose Peter		SP	14	4	1941	-----	5h	39N6	84W31	Cincinnati, OH
+
+One line doesn't have birth time :
+1098!	Rose Peter		SP	14	4	1941	-----	5h	39N6	84W31	Cincinnati, OH
+
+
+Series E1 and E3
+-----------------
+
+- 1) Main problem : compute the missing timezones
+
+Check the meaning of birth time in file E1 and E3
+The notice says : "H : Hour of birth (Birth certificate)"
+
+E1 : Checked civil registry for Abely Xavier :
+archives82.fr, Verdun-sur-Garonne, naissances 1890, p 10 / 34
+Birth hour mentionned = 08:00 ; same as birth hour of file E1
+
+E3 : Checked civil registry for Abel Jean-Baptiste :
+archives.var.fr, Toulon, rgistry 7E146_260 (birth 1863), p 60 / 518
+Birth hour mentionned = 14:00 ; same as birth hour of file E3
+
+Concluded that birth mentioned in files E1 and E3 are expressed in civil time
+(conclusion coherent with the notice)
+
+=> NEED TO COMPUTE TIMEZONE FOR EACH PERSON
+
+To do that, I tried this method :
+- match the fields CITY and CODE with places of geonames.org
+- geonames.org contains timezone information, which permits in general to compute the timezone
+
+Problem of place :
+This is not always possible because field CITY sometimes differs from names used in geonames.org
+- Some differences can be fixed by program (for example, replace "st" by "saint", or "/" by "sur"
+- But I'm stuck on other cases ; for example, "Asnières 75" can be matched using "Asnières-sur-Seine 92"
+
+Problem of timezone :
+I didn't try to compute when the case requires to know precise local conditions
+- dates between 1871-02-15 and  1918-11-11, for depts 67, 68, 57, 54 (parts of France that were german).
+- dates between 1940-02 and 1942-11 (existence of free and occupied zones)
+
+Result of execution :
+Importing E1
+2153 lines parsed
+271 places not matched
+79 timezone offsets not computed
+1803 persons stored precisely (83.74 %)
+
+Importing E3
+1539 lines parsed
+247 places not matched
+41 timezone offsets not computed
+1251 persons stored precisely (81.29 %)
+
+
+- 2) found small mistakes in the web pages :
+
+Serie E1 - page http://cura.free.fr/gauq/902gdE1.html :
+
+- error in saturn sector number for record 0517 (incoherent value : lt3) 
+0517	26 28 20 01 lt3	DANIAUD Jean
+
+- error in moon sector (value o8 probably to replace with 08, but didn't check)
+0560	o8 05 07 36 29	DELAY Maurice
+
+- some records contain numbers in their name (O are replaced by zero ; A by 3 ; S by 5, G by 6 ; B by 8)
+These typos are present in the first and second lists
+this happens for the following records :
+0483    EX       COURB0T Henri                   12    02    1902    20:00    Courchelettes             59
+0642    PH     + DUB0S René                      20    02    1901    10:00    St-Brice                  78
+0654    MI       DUD0GNON Martial                01    06    1900    22:00    Ambazac                   87
+0743    MI       FERRIERES de SAUVEB0EUF Guy     12    10    1919    22:00    Tours                     37
+0746    MI       FEUVRIER Ch3rles                29    01    1915    01:00    Damprichart               25
+0879    PH       G0DECHOT Roger                  15    12    1922    04:00    Nancy                     54
+0880    MI     * G0DEFROY Charles                29    12    1888    07:00    La Flèche                 72
+0881    PH     - G0DLEWSKI Guy                   20    04    1913    09:00    St-Mandé                  94
+0882    PH       G0DLEWSKI Jean                  08    08    1919    15:00    St-Mandé                  94
+0883    PH       G0DLEWSKI Stanislas             02    12    1919    23:30    Sorgues                   84
+0885    PH       G0LDE Alice (DUPUY)             10    08    1928    23:40    Corbeil-Essonnes          91
+0886    EX       G0MA Michel                     12    03    1932    23:30    Montcrabeau               47
+0887    MI       G0MBEAUD Jean                   29    06    1907    15:00    Billère                   66
+0888    EX       G0MEZ Francine (LE FOYER)       12    10    1932    01:40    Boulogne-Billt            92
+0890    PH       G0RET Pierre                    27    08    1907    11:00    Rosières-en-Santer        80
+0891    PH       G0SSEREZ Maurice                18    03    1911    08:00    Montpellier               34
+0892    PH       G0UDAL Gaston                   11    05    1910    06:00    Bagnac                    46
+0893    EX       G0UDARD Jean-Michel             13    11    1939    21:00    Montpellier               34
+0894    PH    +* G0UGEROT Henri                  02    07    1881    05:00    St-Ouen                   75
+0897    MI       G0UJON Pierre                   27    09    1910    06:00    Maisons-Lafitte           78
+0898    PH       G0UMAIN André                   16    06    1910    15:00    Pau                       64
+0899    PH     + G0UNELLE Hugues                 27    02    1903    03:30    Châteauroux               36
+0901    EX       G0UZE-RENAL Christine           30    12    1914    08:30    Mouchard                  39
+0998    MI     L HETTIER de B0ISLAMBERT Cl.      26    07    1906    12:00    Hérouvillette             14
+1119    MI     * LAB0UCHERE René                 13    02    1890    05:00    Paris 8ème                75
+1797    PH       R0BERT François                 15    09    1914    15:00    St-Avold                  57
+1801    PH       R0BLIN Jean                     24    06    1914    11:00    Guer                      56
+
+
+Serie E3 - page http://cura.free.fr/gauq/902gdE3.html :
+
+- in the second list, a space is missing between mars and jupiter sector nb, for record 0811 :
+0811	04 26 2104 08	IZARD Georges
+instead of :
+0811	04 26 21 04 08	IZARD Georges
+
+- the problem of numbers in the names happens for the following records :
+0309    PAI      CHARB0NNIER Pierre              24    08    1897    13:00    Vienne                    38   
+0383    JO       C0QUET James de                 16    07    1898    01:00    Bordeaux                  33   
+0488    AC       DESCRIERES Georges (BER6É-D.)   15    04    1930    09:00    Bordeaux                  33   
+0497    PO       DESTREMAU 8ernard               11    02    1917    17:30    Paris 16ème               75   
+0703    PO       GIAC0BBI François               19    07    1919    09:00    Venaco                    20   
+0784    PO       HERISS0N Charles                12    10    1831    10:00    Surgy                     58   
+0836    PO       J05PIN Lionel                   12    07    1937    23:10    Meudon                    92   
+1308    PO       RIB0T Alexandre                 03    02    1842    01:00    St-Omer                   62   
+1326    PO       R0BERT Pierre                   17    05    1875    23:30    Montbrison                42   
+
+

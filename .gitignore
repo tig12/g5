@@ -2,11 +2,11 @@
 # files marked for deletion
 z.*
 
-# files not yet in production
-z-*
-
 # files to keep only in local
 1.*
 
 config.yml
 
+data/*
+!data/3-cura-marked
+!data/5-1955-cura-corrected
