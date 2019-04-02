@@ -54,6 +54,18 @@ The following fields are common to several series :
         </td>
     </tr>
     <tr>
+        <td>C_APP</td>
+        <td>
+            Indicates if the data was corrected in the review "Astro-Psychological Problems".
+            <br>This field permits to express an information from cura.free.fr : 
+            <blockquote>
+            Also, in these series A (and for vol. D.10) I have added an exclamation point for the professionals whose birth data have been corrected from Astro-Psychological Problems, the Research Journal of Françoise, particularly in vols. 3.2, 3.3, 4.1, 4.2, 4.3, 5.1, 7.1, 7.2 and 10.2 (PG, 02-2009)
+            </blockquote>
+            Can be 'Y' (if the record was corrected in APP) or empty string (if the record was not corrected in APP).
+            <br>For corrected records, the exclamation point is removed from NUM.
+        </td>
+    </tr>
+    <tr>
         <td>NAME</td>
         <td>
             Person name when available.
@@ -76,14 +88,16 @@ The following fields are common to several series :
         <td>PRO</td>
         <td>
             Profession code, see <a href="profession-codes.html">this page</a>.
+            <br>When a person has more than one profession code, the codes are separated by "+".
+            Ex : PO+WR means that the person is identified as a politician and a writer.
         </td>
     </tr>
     <tr>
         <td>BIRTHDATE</td>
         <td>
             ISO 8601 of this form : YYYY-MM-DD HH:MM:SSsHH:MM (timezone offset is included)
-            <br>Example : <code>2017-05-03 09:26:00+02:00</code> :
-            <br>Legal time is <code>09:26:00</code>
+            <br>Example : <code>2017-05-03 09:30:00+02:00</code> :
+            <br>Legal time is <code>09:30:00</code>
             <br>timezone is +2 hours.
         </td>
     </tr>
