@@ -36,7 +36,7 @@ class SerieA{
     /** 
         More detailed professions
         ex : in file 902gdA1y, profession of persons numbered between 1 and 86 (inclusive) is Athlétisme
-        This informations come from Gauquelin's book "L'influence des astres".
+        These informations come from the notices of cura.free.fr.
     **/
     const PROFESSIONS_DETAILS = [
         'A1' => [
@@ -83,7 +83,7 @@ class SerieA{
             ['ACT', 1, 1409],
             ['PO', 1410, 2412],
         ],
-        // nothing for a6
+        // nothing for A6
     ];
 
     /** Mapping from country codes to iso3166 codes ; applies to all files of Series A **/

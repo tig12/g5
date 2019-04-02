@@ -23,6 +23,8 @@
 
 <nav class="prevnext">
     <a class="top" href="index.html">&uarr;</a>
+    <a class="prev" rel="prev" href="why.html">&larr;</a>
+    <a class="next" rel="next" href="0-from-scratch.html">&rarr;</a>
 </nav>
 
 <header>
@@ -36,40 +38,23 @@
 <article>
 The following diagram illustrates this process :
 
-<img style="display:block; margin:1em; border:1px solid grey;" src="img/serie-A1-sequence.jpg" alt="" />
+<img class="border margin" src="img/serie-A1-sequence.jpg" alt="" />
     
-<br>Absolute path to directories containing data (<code>1-cura-raw/</code> etc.) must be configured in <code>config.yml</code>.
-<br>References to other files are relative to <code>gauquelin5</code> root directory.
-
 
 <ol class="margin-top spaced">
     <li>
-        <b>Store cura.free.fr data on a local machine</b> (by program).
-        <br>This can be done using the script <code>tools/get-data</code>.
-        <br>These data are stored somewhere on a local disk in a directory called <code>1-cura-raw/</code>.
+        <b>Store cura.free.fr data on a local machine</b>
+        <br>See page <a href="1-cura-data.html">1 - Cura data</a>.
     </li>
                                                                                                                                                 
     <li>
-        <b>Extract data from html pages to generate csv files</b> (by program).
-        <br>This is done with the command <code>php run-gauquelin5.php A1 raw2exported</code>.
-        <br>The code used to perform this step merges two lists from cura.free.fr data :
-        <br>- One list contains the data with complete information (birth date, hour, place, country, profession) WITHOUT names.
-        <br>- One list contains the names and only birth dates.
-        <br>The merge process is done using birth dates, and this leads to cases that are not solvable by program ; human corrections (using Gauquelin original 1955 book) were necessary to write this code.
-        <br>These data are stored in a directory called <code>2-cura-exported/</code> ; for serie A1, the file is <code>2-cura-exported/A1.csv</code>.
-        <br>Other corrections are done during this step :
-        <ul>
-            <li>Convert country codes to ISO 3166.</li>
-            <li>Restore detailed professions (this information is in Gauquelin book but not in cura data).</li>
-            <li>Dates are converted to <code>YYYY-MM-DD</code> format.</li>
-            <li>Hours are converted to <code>HH:MM:SS</code> format</li>
-            <li>Express longitudes and latitudes in decimal degrees.</li>
-        </ul>
-        Human corrections that complete the program for this step are located in <code>src/SerieA.php</code>.
+        <b>Extract data from html pages to generate csv files</b>.
+        <br>This step also applies corrections.
+        <br>See page <a href="2.cura2csv.html">2 - Cura to csv</a>
     </li>
     
     <li>
-        <b>Edit the csv files to associate cura data to Gauquelin 1955 original groups</b> (by human).
+        <b>Edit the csv files to associate cura data to Gauquelin 1955 original groups</b>.
         <br>File <code>2-cura-exported/A1.csv</code> is copied by a human to <code>3-cura-marked/A1.csv</code>.
         <br>A new column ("1955") is added to this file ; this column is filled by a human with a code identifying Gauquelin 1955 groups.
         <br>Lines coming from the group "570 sportifs" were marked "570SPO" (list of abbreviations used can be found in <code>src/Serie1955.php</code>).
@@ -120,24 +105,24 @@ The following diagram illustrates this process :
 <aside class="left">
 <ul>
     <li class="bold"><a href="index.html">Gauquelin5 home</a></li>
-    <li><a href="why.html">Why ?</a></li>                                                                
-    <li><a href="0.from-scratch.html">0 - From scratch</a></li>
+    <li><a href="why.html">Why ?</a></li>
     <li class="bold"><a href="summary-chart.html">Summary chart</a></li>
+    <li><a href="0-from-scratch.html">0 - From scratch</a></li>
     <li>
-        <a href="1.cura-data.html">1 - Cura data</a>
+        <a href="1-cura-data.html">1 - Cura data</a>
     </li>
     <li>
-        <a href="2.cura2csv.html">2 - Cura to csv</a>
+        <a href="2-cura2csv.html">2 - Cura to csv</a>
         <ul>
-            <li><a href="2.serieA.html">Serie A</a></li>
-            <li><a href="2.serieD.html">Serie D</a></li>
-            <li><a href="2.serieD10.html">Serie D10</a></li>
-            <li><a href="2.serieA.html">Serie E1 E3</a></li>
-            <li><a href="2.serieF.html">Serie F</a></li>
+            <li><a href="2-serieA.html">Serie A</a></li>
+            <li><a href="2-serieD.html">Serie D</a></li>
+            <li><a href="2-serieD10.html">Serie D10</a></li>
+            <li><a href="2-serieA.html">Serie E1 E3</a></li>
+            <li><a href="2-serieF.html">Serie F</a></li>
         </ul>
     </li>
     <li>
-        <a href="3.mark.html">3 - Mark data</a>
+        <a href="3-mark.html">3 - Mark data</a>
     </li>
     <li>
         <a href="4-corrections-g55.html">4 - Corrections from G1955</a>
@@ -145,16 +130,16 @@ The following diagram illustrates this process :
     <li>
         9 - Results
         <ul>
-            <li><a href="9.gauquelin-orig.html">G 1955 original</a></li>
-            <li><a href="9.gauquelin-corr.html">G 1955 corrected</a></li>
+            <li><a href="9-gauquelin-orig.html">G 1955 original</a></li>
+            <li><a href="9-gauquelin-corr.html">G 1955 corrected</a></li>
             <li>
-                <a href="9.cura-corr.html">Cura corrected</a>
+                <a href="9-cura-corr.html">Cura corrected</a>
                 <ul>
-                    <li><a href="9.cura-corr-A.html">Serie A</a></li>
-                    <li><a href="9.cura-corr-D.html">Serie D</a></li>
-                    <li><a href="9.cura-corr-D10.html">Serie D10</a></li>
-                    <li><a href="9.cura-corr-A.html">Serie E1 E3</a></li>
-                    <li><a href="9.cura-corr-F.html">Serie F</a></li>
+                    <li><a href="9-cura-corr-A.html">Serie A</a></li>
+                    <li><a href="9-cura-corr-D.html">Serie D</a></li>
+                    <li><a href="9-cura-corr-D10.html">Serie D10</a></li>
+                    <li><a href="9-cura-corr-A.html">Serie E1 E3</a></li>
+                    <li><a href="9-cura-corr-F.html">Serie F</a></li>
                 </ul>
             </li>
         </ul>

@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title> | Gauquelin5</title>
+    <title>Cura to CSV | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
-    <meta name="description" content="">
+    <meta name="description" content="Convert cura.free.fr data to csv files">
     <meta name="robots" content="index,follow">
     <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
     <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
@@ -12,7 +12,7 @@
     <meta name="dcterms.dateCopyrighted" content="2019">
     <!-- 
     tigsite:
-        history: , Thierry Graff : Creation
+        history: 2019-04-02 03:53:45+02:00, Thierry Graff : Creation
     -->
 </head>
 
@@ -23,16 +23,40 @@
 
 <nav class="prevnext">
     <a class="top" href="index.html">&uarr;</a>
-    <a class="prev" rel="prev" href=".html">&larr;</a>
-    <a class="next" rel="next" href=".html">&rarr;</a>
+    <a class="prev" rel="prev" href="1-cura-data.html">&larr;</a>
+    <a class="next" rel="next" href="2-serieA.html">&rarr;</a>
 </nav>
 
 <header>
-<h1></h1>
-<div class="intro"></div>
+<h1>Cura to CSV</h1>
+<div class="intro">
+This step extracts data from html files and produces csv files.
+<br>Some corrections are applied to the data during the process. 
+</div>
 </header>
 
 <article>
+
+This step uses two entries of <code>config.yml</code> :
+<br>- It takes html pages located in a directory specified by entry <code>1-cura-raw</code> 
+<br>- It produces csv files located in a directory specified by entry <code>1-cura-exported</code>
+<br>
+<br>Some corrections are common to all series : 
+<ul class="spaced margin-top">
+    <li>
+        Country codes are converted to ISO 3166.
+    </li>
+    <li>
+        Dates and times are merged to be stored in ISO 8601 format <code>YYYY-MM-DD HH:MM:SSsHH:MM</code>.
+        <br>For example <code>1906-02-06 14:00:00-01:00</code> ; the string <code>-01:00</code> represents the timezone offset.
+        <br>Important : this step does not try to restore legal time and timezone. It just copies the information present on cura files.
+    </li>
+    <li>
+        Longitudes and latitudes are expressed in decimal degrees.
+    </li>
+</ul>
+
+
 </article>
 </div><!-- end class="main" -->
 

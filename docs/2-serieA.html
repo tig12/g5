@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Serie A | Gauquelin5</title>
+    <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
+    <meta name="description" content="">
+    <meta name="robots" content="index,follow">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
+    <meta name="dcterms.rightsHolder" content="Thierry Graff">
+    <meta name="dcterms.dateCopyrighted" content="2019">
+    <!-- 
+    tigsite:
+        history: 2019-04-02 03:53:45+02:00, Thierry Graff : Creation
+    -->
+</head>
+
+<body>
+<div class="container">
+
+<div class="main">
+
+<nav class="prevnext">
+    <a class="top" href="index.html">&uarr;</a>
+    <a class="prev" rel="prev" href="1-cura-data.html">&larr;</a>
+    <a class="next" rel="next" href=".html">&rarr;</a>
+</nav>
+
+<header>
+<h1>Serie A</h1>
+<div class="intro">
+This page describes the corrections done on files of serie A while converting html pages to csv files. 
+</div>
+</header>
+
+<article>
+
+The perform this conversion, run for example the command :
+<pre>php run-gauquelin5.php A1 raw2exported</pre>
+(will convert file A1)
+<br>
+or :
+<pre>php run-gauquelin5.php A raw2exported</pre>
+(will convert all files, from A1 to A6)
+<br>
+<br>The code that performs this step is located in <code>src/SerieA.php</code>
+
+
+<!-- ********************************************************************************* -->
+<h2>Profession codes</h2>
+In some files of serie A, the precise profession codes are not associated to the records. This is possible to associate each record to a precise profession code thanks to the notices that are present on cura.free.fr pages.
+<br>These informations were included to the program (see constant <code>PROFESSIONS_DETAILS</code> in the code) and in the resulting csv files, each record is associated to its precise profession.
+<br>
+<br>A list of profession codes used in the generated files is listed on <a href="output-format.html#profession-codes">this page</a>.
+
+
+<!-- ********************************************************************************* -->
+<h2>Names</h2>
+
+The purpose is to obtain records containing both precise birth data and the name of the person.
+<br>
+<br>To summarize, this can be partially done by program from cura.free.fr web pages ; some cases can be fixed by human using Gauquelin 1955 book. Other cases could be fixed using the original booklets "BIRTH AND PLANETARY DATA GATHERED SINCE 1949" published by Gauquelin. I don't have these booklets, and didn't include this information in current restoration.
+
+<!-- ************************************* -->
+<h3>Data of cura.free.fr</h3>
+
+On cura.free.fr, each file from serie A is available from two distinct pages :
+<ul class="simple">
+    <li>one without names (for example <a href="http://cura.free.fr/gauq/902gdA1.html">902gdA1.html</a>), sorted by NUM.</li>
+    <li>one with names included (for example <a href="http://cura.free.fr/gauq/902gdA1y.html">902gdA1y.html</a>), sorted by date.</li>
+</ul>
+I supposed (but didn't check by program) that these two lists are equivalent, and worked with pages containing names.
+<br>
+<br>A page with names contains 3 lists :
+<ul class="simple">
+    <li>One list with precise birth data, but without names.</li>
+    <li>Two lists with names, but without precise birth data ; these two lists are sorted differently. I supposed (but didn't check by program) that these two lists are equivalent.</li>
+</ul>
+
+<br>An other page, <a href="http://cura.free.fr/gauq/902gdN.html">902gdN.html</a>, contains a list of all the names, for series A1, A2, A3, A4, A5, A6, D6, D10, E1, E3.
+<br>
+<br>
+I used the pages containing the lists with names (ex : 902gdA1y.html).
+<br>In these pages, the list with precise birth data seems to correspond to the list with names in chronological order. But a check done by program (<code>tools/check-serieA-names.php</code>) shows that they differ, and can't be used for a simple merge.
+
+<!-- ************************************* -->
+<h3>Merge lists</h3>
+
+The program must merge the two lists. Unfortunately, these 2 lists don't share a common unique identifier which would permit to perform the merge without ambiguity. <br>These two lists have in common the birth day. That's what I used to perform the merge, but a given birth day can correspond to several persons. In this case, ambiguity remains, and can't be solved by program.
+<br>
+<br>To solve some ambiguities, I used Gauquelin 1955 book in an iterative process :
+<ul class="simple margin">
+    - Build two arrays with birth day as key.
+    - Merge the clear cases, with only one person for a given day.
+    - Print the ambiguous cases
+    - Look in Gauquelin 1955 book if the ambiguous persons are prensent.
+    - Inject the information in the program (see constant <code>CORRECTIONS_1955</code> in the code).
+    - Execute again.
+</ul>
+For the cases that could not be solved, a name like "Gauquelin-A1-1352" was built
+
+</article>
+</div><!-- end class="main" -->
+
+
+<!-- ************************************* -->
+<aside class="left">
+<ul>
+    <li class="bold"><a href="index.html">Gauquelin5 home</a></li>
+    <li><a href="why.html">Why ?</a></li>
+    <li class="bold"><a href="summary-chart.html">Summary chart</a></li>
+    <li><a href="0-from-scratch.html">0 - From scratch</a></li>
+    <li>
+        <a href="1-cura-data.html">1 - Cura data</a>
+    </li>
+    <li>
+        <a href="2-cura2csv.html">2 - Cura to csv</a>
+        <ul>
+            <li><a href="2-serieA.html">Serie A</a></li>
+            <li><a href="2-serieD.html">Serie D</a></li>
+            <li><a href="2-serieD10.html">Serie D10</a></li>
+            <li><a href="2-serieA.html">Serie E1 E3</a></li>
+            <li><a href="2-serieF.html">Serie F</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="3-mark.html">3 - Mark data</a>
+    </li>
+    <li>
+        <a href="4-corrections-g55.html">4 - Corrections from G1955</a>
+    </li>
+    <li>
+        9 - Results
+        <ul>
+            <li><a href="9-gauquelin-orig.html">G 1955 original</a></li>
+            <li><a href="9-gauquelin-corr.html">G 1955 corrected</a></li>
+            <li>
+                <a href="9-cura-corr.html">Cura corrected</a>
+                <ul>
+                    <li><a href="9-cura-corr-A.html">Serie A</a></li>
+                    <li><a href="9-cura-corr-D.html">Serie D</a></li>
+                    <li><a href="9-cura-corr-D10.html">Serie D10</a></li>
+                    <li><a href="9-cura-corr-A.html">Serie E1 E3</a></li>
+                    <li><a href="9-cura-corr-F.html">Serie F</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li><a href="geonames.html">Geonames.org</a></li>
+    <li><a href="output-format.html">Output format</a></li>
+    <li><a href="questions.html">Questions</a></li>
+    <li class="bold"><a href="download.html">Download results</a></li>
+    <li class="bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>
+</ul>
+</aside>
+
+</div><!-- end class="container" -->
+
+</body>
+</html>
+<!-- ************************************* -->
+<!-- ********************************************************************************* -->
