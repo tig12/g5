@@ -36,15 +36,12 @@ This page describes the corrections done on files of serie A while converting ht
 
 <article>
 
-The perform this conversion, run for example the command :
+To convert file A1, run :
 <pre>php run-gauquelin5.php A1 raw2exported</pre>
-(will convert file A1)
-<br>
-or :
+To convert all files, from A1 to A6), run :
 <pre>php run-gauquelin5.php A raw2exported</pre>
-(will convert all files, from A1 to A6)
-<br>
-<br>The code that performs this step is located in <code>src/SerieA.php</code>
+
+The code that performs this step is located in <code>src/SerieA.php</code>
 
 
 <!-- ********************************************************************************* -->
@@ -90,15 +87,63 @@ I used the pages containing the lists with names (ex : 902gdA1y.html).
 The program must merge the two lists. Unfortunately, these 2 lists don't share a common unique identifier which would permit to perform the merge without ambiguity. <br>These two lists have in common the birth day. That's what I used to perform the merge, but a given birth day can correspond to several persons. In this case, ambiguity remains, and can't be solved by program.
 <br>
 <br>To solve some ambiguities, I used Gauquelin 1955 book in an iterative process :
-<ul class="simple margin">
-    - Build two arrays with birth day as key.
-    - Merge the clear cases, with only one person for a given day.
-    - Print the ambiguous cases
-    - Look in Gauquelin 1955 book if the ambiguous persons are prensent.
-    - Inject the information in the program (see constant <code>CORRECTIONS_1955</code> in the code).
-    - Execute again.
+<ul class="simple">
+    <li>Build two arrays with birth day as key.</li>
+    <li>Merge the clear cases, with only one person for a given day.</li>
+    <li>Print the ambiguous cases.</li>
+    <li>Look in Gauquelin 1955 book if the ambiguous persons are present.</li>
+    <li>Inject the information in the program (see constant <code>CORRECTIONS_1955</code> in the code).</li>
+    <li>Execute again.</li>
 </ul>
-For the cases that could not be solved, a name like "Gauquelin-A1-1352" was built
+
+<br>To print or not the full list of ambiguous cases, <code>report-raw2exported</code> setting can be canged in <code>config.yml</code>.
+
+<br>
+<br>For the cases that could not be solved, a name like "Gauquelin-A1-1352" was built, using file name and NUM field.
+<br>
+<br>Current corrections were done for serie A1 and A2.
+<br>
+<br>The results of name matching are :
+
+<table class="wikitable margin">
+    <th>Serie</th><th>OK</th><th>Not OK</th>
+    <tr>
+        <td>A1</td>
+        <td>1968 (94.3 %)</td>
+        <td>119 (5.7 %)</td>
+    </tr>
+    <tr>
+        <td>A2</td>
+        <td>3436 (94.32 %)</td>
+        <td>207 (5.68 %)</td>
+    </tr>
+    <tr>
+        <td>A3</td>
+        <td>2640 (86.67 %)</td>
+        <td>406 (13.33 %)</td>
+    </tr>
+    <tr>
+        <td>A4</td>
+        <td>2486 (91.4 %)</td>
+        <td>234 (8.6 %)</td>
+    </tr>
+    <tr>
+        <td>A5</td>
+        <td>2184 (90.62 %)</td>
+        <td>226 (9.38 %)</td>
+    </tr>
+    <tr>
+        <td>A6</td>
+        <td>1262 (62.29 %)</td>
+        <td>764 (37.71 %)</td>
+    </tr>
+    <tr>
+        <td>TOTAL</td>
+        <td>13976 (87.72 %)</td>
+        <td>1956 (12.28 %)</td>
+    </tr>
+</table>
+
 
 </article>
 </div><!-- end class="main" -->
@@ -110,6 +155,7 @@ For the cases that could not be solved, a name like "Gauquelin-A1-1352" was buil
     <li class="bold"><a href="index.html">Gauquelin5 home</a></li>
     <li><a href="why.html">Why ?</a></li>
     <li class="bold"><a href="summary-chart.html">Summary chart</a></li>
+    <li class="bold"><a href="output-format.html">Output format</a></li>
     <li><a href="0-from-scratch.html">0 - From scratch</a></li>
     <li>
         <a href="1-cura-data.html">1 - Cura data</a>
@@ -148,7 +194,6 @@ For the cases that could not be solved, a name like "Gauquelin-A1-1352" was buil
         </ul>
     </li>
     <li><a href="geonames.html">Geonames.org</a></li>
-    <li><a href="output-format.html">Output format</a></li>
     <li><a href="questions.html">Questions</a></li>
     <li class="bold"><a href="download.html">Download results</a></li>
     <li class="bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>

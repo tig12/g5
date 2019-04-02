@@ -496,7 +496,7 @@ class SerieA{
         //
         // report
         //
-        $do_report_full = false; // @todo put in config
+        $report_type = Config::$data['report-raw2exported'][$serie];
         $n_correction_1955 = isset(self::CORRECTIONS_1955[$serie]) ? count(self::CORRECTIONS_1955[$serie]) : 0;
         $n_bad = $n1 + $n2 + $n3 - $n_ok_fix - $n1_fix - $n2_fix;
         $n_good = $n_ok + $n_ok_fix + $n1_fix + $n2_fix;
@@ -504,11 +504,17 @@ class SerieA{
         $percent_not_ok = round($n_bad * 100 / count($lines1), 2);
         $report .= "nb in list1 ($file_serie) : " . count($lines1) . " - nb in list2 ($file_names) : " . count($names) . "\n";
         $report .= "case 1 : $n1 dates present in $file_serie and missing in $file_names - $n1_fix fixed by 1955\n";
-        if($do_report_full) $report .=  print_r($missing_in_names, true) . "\n";
+        if($report_type == 'full'){
+            $report .=  print_r($missing_in_names, true) . "\n";
+        }
         $report .= "case 2 : $n2 date ambiguities with same nb - $n2_fix fixed by 1955\n";
-        if($do_report_full) $report .= print_r($doublons_same_nb, true) . "\n";
+        if($report_type == 'full'){
+            $report .= print_r($doublons_same_nb, true) . "\n";
+        }
         $report .= "case 3 : $n3 date ambiguities with different nb\n";
-        if($do_report_full) $report .= print_r($doublons_different_nb, true) . "\n";
+        if($report_type == 'full'){
+            $report .= print_r($doublons_different_nb, true) . "\n";
+        }
         $report .= "Corrections from 1955 book : $n_correction_1955\n";
         $report .= "nb OK (match without ambiguity) : $n_good ($percent_ok %)\n";
         $report .= "nb NOT OK : $n_bad ($percent_not_ok %)\n";
@@ -526,7 +532,7 @@ class SerieA{
             'PLACE',
             'COU',
             'COD',
-            'LON',
+            'LG',
             'LAT',
         ];
         $csv = implode(Gauquelin5::CSV_SEP, $fieldnames) . "\n";
@@ -547,7 +553,7 @@ class SerieA{
             // place
             $new['PLACE'] = trim($cur['CITY']);
             [$new['COU'], $new['COD']] = self::compute_country($cur['COU'], $cur['COD']);
-            $new['LON'] = Gauquelin5::computeLg($cur['LON']);
+            $new['LG'] = Gauquelin5::computeLg($cur['LON']);
             $new['LAT'] = Gauquelin5::computeLat($cur['LAT']);                             
             $csv .= implode(Gauquelin5::CSV_SEP, $new) . "\n";
             $nb_stored ++;

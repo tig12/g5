@@ -38,8 +38,9 @@ class SerieD10{
         @return report
         @throws Exception if unable to parse
     **/
-    public static function import($serie){
+    public static function raw2exported($serie){
         $report =  "--- Importing serie $serie\n";
+return $report;
         $raw = Gauquelin5::readHtmlFile($serie);
         $file_serie = Gauquelin5::serie2filename($serie);
         preg_match('#<pre>\s*(NUM.*?CICO)\s*(.*?)\s*</pre>#sm', $raw, $m);

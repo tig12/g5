@@ -10,50 +10,14 @@
     @history    2017-04-26 12:18:30+02:00, Thierry Graff : creation
 ********************************************************************************/
 
-/** 
-    Association serie name => available actions for this serie
-**/
-$series_actions = [
-    'A'=> ['raw2exported'],
-    'A1'=> ['raw2exported'],
-    'A2'=> ['raw2exported'],
-    'A3'=> ['raw2exported'],
-    'A4'=> ['raw2exported'],
-    'A5'=> ['raw2exported'],
-    'A6'=> ['raw2exported'],
-    //
-    '1955'=> ['marked21955', 'corrected2final'],
-    //
-    'B'=> ['raw2exported'],
-    'B1'=> ['raw2exported'],
-    'B2'=> ['raw2exported'],
-    'B3'=> ['raw2exported'],
-    'B4'=> ['raw2exported'],
-    'B5'=> ['raw2exported'],
-    'B6'=> ['raw2exported'],
-    //
-    'D6'=> [''],
-    'D9a'=> [''],
-    'D9b'=> [''],
-    'D9c'=> [''],
-    'D10'=> [''],
-    //
-    'E1'=> ['raw2exported'],
-    //
-    'E2'=> [''],
-    'E2a'=> [''],                                                                       
-    'E2b'=> [''],
-    'E2c'=> [''],
-    'E2d'=> [''],
-    'E2e'=> [''],
-    'E2f'=> [''],
-    'E2g'=> [''],
-    //
-    'E3'=> ['raw2exported'],
-    'F1'=> [''],
-    'F2'=> [''],
-];
-$series = array_keys($series_actions);
+define('DS', DIRECTORY_SEPARATOR);
+
+require_once __DIR__ . DS . 'src' . DS . 'init' . DS . 'init.php';
+
+use gauquelin5\Gauquelin5;
+
+
+$series = array_keys(Gauquelin5::SERIES_ACTIONS);
 $series_str = implode("' or '", $series);
 
 $USAGE = <<<USAGE
@@ -85,8 +49,14 @@ if(!in_array($serie, $series)){
 
 // check action
 $action = $argv[2];
-if(!in_array($action, $series_actions[$serie])){
-    echo "!!! INVALID ACTION FOR SERIE $serie !!! : - possible choices : '" . implode("' or '", $series_actions[$serie]) . "'\n";
+if(!in_array($action, Gauquelin5::SERIES_ACTIONS[$serie])){
+    echo "!!! INVALID ACTION FOR SERIE $serie !!! : ";
+    if(!empty(Gauquelin5::SERIES_ACTIONS[$serie])){
+        echo "- possible choices : '" . implode("' or '", Gauquelin5::SERIES_ACTIONS[$serie]) . "'\n";
+    }
+    else{
+        echo "There is no action implemented for this serie\n";
+    }
     exit;
 }
 
@@ -94,11 +64,6 @@ if(!in_array($action, $series_actions[$serie])){
 //
 // run
 //
-define('DS', DIRECTORY_SEPARATOR);
-
-require_once __DIR__ . DS . 'src' . DS . 'init' . DS . 'init.php';
-
-use gauquelin5\Gauquelin5;
 try{
     echo Gauquelin5::action($action, $serie); /// here run action ///
 }

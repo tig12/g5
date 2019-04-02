@@ -25,6 +25,18 @@ postgresql:
   dbname: pg_dbname
 
 #
+# Settings specific to step raw2exported
+# For each serie, possible values are 'full' or 'small'
+#
+report-raw2exported:
+  A1: small
+  A2: small
+  A3: small
+  A4: small
+  A5: small
+  A6: small
+
+#
 # Settings specific to 1955 groups
 #
 1955:
