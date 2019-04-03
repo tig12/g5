@@ -39,7 +39,7 @@ This step extracts data from html files and produces csv files.
 
 This step uses two entries of <code>config.yml</code> :
 <br>- It takes html pages located in a directory specified by entry <code>1-cura-raw</code> 
-<br>- It produces csv files located in a directory specified by entry <code>1-cura-exported</code>
+<br>- It produces csv files located in a directory specified by entry <code>2-cura-exported</code>
 <br>
 <br>Some corrections are common to all series : 
 <ul class="spaced margin-top">
@@ -56,11 +56,26 @@ This step uses two entries of <code>config.yml</code> :
     </li>
 </ul>
 
+
+<!-- ********************************************************************************* -->
 <h2>Serie A</h2>
 See <a href="2-serieA.html">this page</a>.
 
-<h2>Serie D10</h2>
 
+<!-- ********************************************************************************* -->
+<h2>Serie D10</h2>
+The code that performs this step is located in <code>src/SerieD10.php</code>
+<br>
+<br>To convert file D10, run :
+<pre>php run-gauquelin5.php D10 raw2exported</pre>
+
+<!-- ************************************* -->
+<h3>Names</h3>
+
+For this file, it was possible to split family names and given names
+
+<!-- ************************************* -->
+<h3>Particular cases</h3>
 There is one record without birth time that was excluded from the resulting file :
 <pre>1098!	Rose Peter		SP	14	4	1941	-----	5h	39N6	84W31	Cincinnati, OH</pre>
 
@@ -92,6 +107,19 @@ These 15 particular cases were fixed in the code, and included in the resulting 
 </div><!-- end class="main" -->
 
 
+<!-- ********************************************************************************* -->
+<h2>Series E1 E3</h2>
+The code that performs this step is located in <code>src/SerieE1E3.php</code>
+<br>
+<br>To perform the transformations, run :
+<pre>
+php run-gauquelin5.php E1 raw2exported
+php run-gauquelin5.php E3 raw2exported
+</pre>
+
+These two files share the same format and can be handled by the same code.
+
+
 <!-- ************************************* -->
 <aside class="left">
 <ul>
@@ -105,13 +133,11 @@ These 15 particular cases were fixed in the code, and included in the resulting 
     </li>
     <li>
         <a href="2-cura2csv.html">2 - Cura to csv</a>
-        <ul>
-            <li><a href="2-serieA.html">Serie A</a></li>
-            <li><a href="2-serieD.html">Serie D</a></li>
-            <li><a href="2-serieD10.html">Serie D10</a></li>
-            <li><a href="2-serieA.html">Serie E1 E3</a></li>
-            <li><a href="2-serieF.html">Serie F</a></li>
-        </ul>
+        <div class="padding-left">
+            <a href="2-serieA.html">A</a>
+            <a href="2-cura2csv.html#serie-d10">D10</a>
+            <a href="2-cura2csv.html#serie-e1-e3">E1 E3</a>
+        </div>
     </li>
     <li>
         <a href="3-mark.html">3 - Mark data</a>
@@ -126,13 +152,11 @@ These 15 particular cases were fixed in the code, and included in the resulting 
             <li><a href="9-gauquelin-corr.html">G 1955 corrected</a></li>
             <li>
                 <a href="9-cura-corr.html">Cura corrected</a>
-                <ul>
-                    <li><a href="9-cura-corr-A.html">Serie A</a></li>
-                    <li><a href="9-cura-corr-D.html">Serie D</a></li>
-                    <li><a href="9-cura-corr-D10.html">Serie D10</a></li>
-                    <li><a href="9-cura-corr-A.html">Serie E1 E3</a></li>
-                    <li><a href="9-cura-corr-F.html">Serie F</a></li>
-                </ul>
+                <div class="padding-left">
+                    <a href="9-cura-corr.html#serie-a">A</a>
+                    <a href="9-cura-corr.html#serie-d10">D10</a>
+                    <a href="9-cura-corr.html#serie-e1-e3">E1 E3</a>
+                </div>
             </li>
         </ul>
     </li>

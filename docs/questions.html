@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>Questions | Gauquelin5</title>
+    <meta charset="utf-8">
+    <title>TODO, questions | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
-    <meta name="description" content="Open questions asked to gauquelin5 users">
+    <meta name="description" content="Questions and todos for Gauquelin5 software">
     <meta name="robots" content="index,follow">
     <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
     <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
     <meta name="dcterms.rightsHolder" content="Thierry Graff">
-    <meta name="dcterms.dateCopyrighted" content="2018">
+    <meta name="dcterms.dateCopyrighted" content="2019">
+    <!-- 
+    tigsite:
+        history: , Thierry Graff : Creation
+    -->
 </head>
 
 <body>
@@ -19,50 +23,89 @@
 
 <nav class="prevnext">
     <a class="top" href="index.html">&uarr;</a>
+    <a class="prev" rel="prev" href=".html">&larr;</a>
+    <a class="next" rel="next" href=".html">&rarr;</a>
 </nav>
 
-
-<div class="flex-wrap">
-
-<div class="aside-wrapper"><aside>
-    <ul>
-        <li class="padding-bottom bold"><a href="index.html">Gauquelin5 home</a></li>
-        <li><a href="gauquelin-data.html">Gauquelin data</a></li>
-        <li><a href="output-format.html">Output format</a></li>
-        <li><a href="export-cura.html">Export CURA data</a></li>
-        <li><a href="restore-1955.html">Restore 1955 groups</a></li>
-        <li><a href="geonames.html">Geonames.org</a></li>
-        <li><a href="profession-codes.html">Profession codes</a></li>
-        <li><a href="download.html">Download results</a></li>
-        <li><a href="questions.html">Questions</a></li>
-        <li class="padding-top bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>
-    </ul>
-</aside></div>
-
-
-<div class="content">
-
 <header>
-<h1>Question to users</h1>
+<h1>Questions, TODO</h1>
+<div class="intro"></div>
 </header>
 
 <article>
 
-<ul>
+<ul class="spaced">
     <li>
-        <b><a href="profession-codes.html">Profession codes</a></b> were built arbitrarily, without trying to use a standard vocabulary.
-        <br>Maybe useful to find a reference list of profession codes.
+        <b><a href="output-format.html#profession-codes">Profession codes</a></b> were built arbitrarily, without trying to use a standard vocabulary.
+        <br>Maybe useful to use a standard reference list of profession codes.
     </li>
+    
     <li>
         <b>Longitudes and latitudes</b> are expressed in decimal degrees; which implies a loss or precision for values like <code>14.3333333</code>.
         <br>Maybe a "degree minut second" format would be better. 
     </li>
+    
+    <li>
+        Incorporate C_APP field to serie A (ex A1 1876).
+    </li>
+    
+    
 </ul>
 
 </article>
+</div><!-- end class="main" -->
 
-</div><!-- end class="content" -->
-</div><!-- end class="flex-wrap" -->
+
+<!-- ************************************* -->
+<aside class="left">
+<ul>
+    <li class="bold"><a href="index.html">Gauquelin5 home</a></li>
+    <li><a href="why.html">Why ?</a></li>
+    <li class="bold"><a href="summary-chart.html">Summary chart</a></li>
+    <li class="bold"><a href="output-format.html">Output format</a></li>
+    <li><a href="0-from-scratch.html">0 - From scratch</a></li>
+    <li>
+        <a href="1-cura-data.html">1 - Cura data</a>
+    </li>
+    <li>
+        <a href="2-cura2csv.html">2 - Cura to csv</a>
+        <div class="padding-left">
+            <a href="2-serieA.html">A</a>
+            <a href="2-cura2csv.html#serie-d10">D10</a>
+            <a href="2-cura2csv.html#serie-e1-e3">E1 E3</a>
+        </div>
+    </li>
+    <li>
+        <a href="3-mark.html">3 - Mark data</a>
+    </li>
+    <li>
+        <a href="4-corrections-g55.html">4 - Corrections from G1955</a>
+    </li>
+    <li>
+        9 - Results
+        <ul>
+            <li><a href="9-gauquelin-orig.html">G 1955 original</a></li>
+            <li><a href="9-gauquelin-corr.html">G 1955 corrected</a></li>
+            <li>
+                <a href="9-cura-corr.html">Cura corrected</a>
+                <div class="padding-left">
+                    <a href="9-cura-corr.html#serie-a">A</a>
+                    <a href="9-cura-corr.html#serie-d10">D10</a>
+                    <a href="9-cura-corr.html#serie-e1-e3">E1 E3</a>
+                </div>
+            </li>
+        </ul>
+    </li>
+    <li><a href="geonames.html">Geonames.org</a></li>
+    <li><a href="questions.html">Questions</a></li>
+    <li class="bold"><a href="download.html">Download results</a></li>
+    <li class="bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>
+</ul>
+</aside>
+
+</div><!-- end class="container" -->
 
 </body>
 </html>
+<!-- ************************************* -->
+<!-- ********************************************************************************* -->
