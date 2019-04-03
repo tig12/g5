@@ -79,12 +79,13 @@ I supposed (but didn't check by program) that these two lists are equivalent, an
 <br>
 <br>
 I used the pages containing the lists with names (ex : 902gdA1y.html).
-<br>In these pages, the list with precise birth data seems to correspond to the list with names in chronological order. But a check done by program (<code>tools/check-serieA-names.php</code>) shows that they differ, and can't be used for a simple merge.
+<br>In these pages, the list with precise birth data seems to correspond to the list with names in chronological order. But a check done by program (<code>tools/check-serieA-names.php</code>) shows that they differ (lists with name contain less persons), and can't be used for a simple merge.
 
 <!-- ************************************* -->
 <h3>Merge lists</h3>
 
-The program must merge the two lists. Unfortunately, these 2 lists don't share a common unique identifier which would permit to perform the merge without ambiguity. <br>These two lists have in common the birth day. That's what I used to perform the merge, but a given birth day can correspond to several persons. In this case, ambiguity remains, and can't be solved by program.
+The program must merge the two lists. Unfortunately, these 2 lists don't share a common unique identifier which would permit to merge without ambiguity.
+<br>These two lists have in common the birth day. That's what I used to perform the merge, but a given birth day can correspond to several persons. In this case, ambiguity remains, and can't be solved by program.
 <br>
 <br>To solve some ambiguities, I used Gauquelin 1955 book in an iterative process :
 <ul class="simple">
@@ -96,14 +97,14 @@ The program must merge the two lists. Unfortunately, these 2 lists don't share a
     <li>Execute again.</li>
 </ul>
 
-<br>To print or not the full list of ambiguous cases, <code>report-raw2exported</code> setting can be canged in <code>config.yml</code>.
+<br>To print or not the full list of ambiguous cases, <code>raw2exported - report</code> setting can be changed in <code>config.yml</code>.
 
 <br>
 <br>For the cases that could not be solved, a name like "Gauquelin-A1-1352" was built, using file name and NUM field.
 <br>
 <br>Current corrections were done for serie A1 and A2.
 <br>
-<br>The results of name matching are :
+<br>Current results of name matching are :
 
 <table class="wikitable margin">
     <th>Serie</th><th>OK</th><th>Not OK</th>

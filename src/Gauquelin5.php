@@ -98,6 +98,7 @@ class Gauquelin5{
         'E2g'=> [],
         //
         'E3'=> ['raw2exported'],
+        //
         'F1'=> [],
         'F2'=> [],
     ];

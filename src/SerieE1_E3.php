@@ -50,10 +50,11 @@ class SerieE1_E3{
     /** 
         Parses one file E1 or E3 and stores it in a csv file
         The resulting csv file contains informations of the 2 lists
-        @param  $serie Muste be 'E1' or 'E3'
+        @param  $serie Must be 'E1' or 'E3'
         @return report
     **/
-    public static function cura2csv($serie){
+    public static function raw2exported($serie){
+        $include_sectors = Config::$data['raw2exported']['add-planetary-sectors'][$serie];
         self::$n_missing_places = 0;
         self::$n_missing_timezone = 0;
         self::$n_total = 0;
@@ -84,44 +85,24 @@ class SerieE1_E3{
             $d = trim(substr($line, 49, 4));
             $h = trim(substr($line, 69, 9));
             $date = "$y-$m-$d $h";
-            $place_name = trim(substr($line, 78, 25));
-            $dept = trim(substr($line, 104));
-            // files E1 and E3 contain only births in France and Luxembourg
-            if($dept == 'LUX'){
-                $place_name = 'Luxembourg';
-                $country = 'LU';
-                $dept = '';
-            }
-            else{
-                $country = 'FR';
-            }
-            // match place to geonames
-            if($country == 'LUX'){
-                [$geoid, $lg, $lat] = ['2960316', '6.13', '49.61167'];
-            }
-            else{
-                [$geoid, $tmp_place_name, $lg, $lat] = self::matchFrenchPlace($place_name, $dept);
-                if($tmp_place_name != ''){
-                    $place_name = $tmp_place_name; // replace original name by geoid name (in general better spelled)
-                }
-            }
-            if($lg){ // if longitude is known
-                list($offset, $err) = \FrenchTimezone::offset_fr($date, $lg, $dept);
-                if($err){
-//                    $report .= "$err\n";
-                    self::$n_missing_timezone++;
-                }
-                else{
-                    $date .= $offset;
-                }
-            }
+            $CITY = trim(substr($line, 78, 25));
+            $COD = trim(substr($line, 104));
+//echo $new['NUM'] . "\n";
+            [$country, $adm2, $place_name, $geoid, $lg, $lat] = self::compute_geo($CITY, $COD, $date);
+if($country != 'FR'){
+    echo "$country, $adm2, $place_name, $geoid, $lg, $lat\n";
+}
+continue;
             $new['DATE'] = $date;
             $new['PLACE'] = $place_name;
-            $new['LON'] = $lg;
+            $new['LG'] = $lg;
             $new['LAT'] = $lat;
-            $new['COD'] = $dept;
+            $new['COD'] = $adm2;
             $new['COU'] = $country;
             $new['GEOID'] = $geoid;
+if($new['NUM'] == '0006'){
+echo "\n<pre>"; print_r($new); echo "</pre>\n"; exit;
+}
             $res1[$new['NUM']] = $new;
         }
         $report .= self::$n_total  . " lines parsed\n";
@@ -130,6 +111,7 @@ class SerieE1_E3{
         $remain = self::$n_total - self::$n_missing_places - self::$n_missing_timezone;
         $percent = round($remain * 100 / self::$n_total, 2);
         $report .= "$remain persons stored precisely ($percent %)\n";
+exit;
         //
         // parse the second list (with sectors)
         //
@@ -210,6 +192,61 @@ class SerieE1_E3{
         return $report;
     }
     
+    
+    // ******************************************************
+    /**
+        Computes the geographical informations of a record
+        Tries to match geonames.org
+        @param  $CITY   Content of column CITY in cura file
+        @param  $COD    Content of column COD in cura file = dept for France, adm2 for geonames
+        @param  $date   YYYY-MM-DD HH:MM
+        @return Array containing geographical information :
+                [$country, $adm2, $place_name, $geoid, $lg, $lat]
+                $geoid, $lg, $lat contain empty string if they can't be computed
+    **/
+    private static function compute_geo($CITY, $COD, $date){
+            $geoid = $lg = $lat = $adm2 = '';
+            $place_name = $CITY;
+            switch($COD){
+            	case 'ALG' : 
+                $country = 'DZ';
+            	break;
+            	case 'B' : 
+                $country = 'BE';
+            	break;
+            	case 'GER' : 
+                $country = 'DE';
+            	break;
+            	case 'LUX' : 
+                $country = 'LU';
+                $place_name = 'Luxembourg';
+                [$geoid, $lg, $lat] = ['2960316', '6.13', '49.61167'];
+            	break;
+            	case 'MAR' : 
+                $country = 'MA';
+            	break;
+            	default :
+                $country = 'FR';
+                $adm2 = $COD;
+                [$geoid, $tmp_place_name, $lg, $lat] = self::matchFrenchPlace($place_name, $COD);
+                if($tmp_place_name != ''){
+                    $place_name = $tmp_place_name; // replace original name by geoid name (in general better spelled)
+                }
+            	break;
+            }
+return [$country, $adm2, $place_name, $geoid, $lg, $lat];        
+            // match place to geonames
+            if($lg){ // if longitude is known
+                [$offset, $err] = \TZ_fr::offset($date, $lg, $COD);
+                if($err){
+//                    $report .= "$err\n";
+                    self::$n_missing_timezone++;
+                }
+                else{
+                    $date .= $offset;
+                }
+            }
+    }
     
     // ******************************************************
     /**

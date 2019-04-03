@@ -496,7 +496,7 @@ class SerieA{
         //
         // report
         //
-        $report_type = Config::$data['report-raw2exported'][$serie];
+        $report_type = Config::$data['raw2exported']['report'][$serie];
         $n_correction_1955 = isset(self::CORRECTIONS_1955[$serie]) ? count(self::CORRECTIONS_1955[$serie]) : 0;
         $n_bad = $n1 + $n2 + $n3 - $n_ok_fix - $n1_fix - $n2_fix;
         $n_good = $n_ok + $n_ok_fix + $n1_fix + $n2_fix;

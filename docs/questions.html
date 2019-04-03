@@ -34,6 +34,8 @@
 
 <article>
 
+<!-- ********************************************************************************* -->
+
 <ul class="spaced">
     <li>
         <b><a href="output-format.html#profession-codes">Profession codes</a></b> were built arbitrarily, without trying to use a standard vocabulary.
@@ -45,11 +47,20 @@
         <br>Maybe a "degree minut second" format would be better. 
     </li>
     
+</ul>
+
+<!-- ********************************************************************************* -->
+<h2>TODO</h2>
+<ul>
     <li>
         Incorporate C_APP field to serie A (ex A1 1876).
     </li>
     
-    
+    <li>
+        Generated times sometimes include seconds, which is meaningless because birth times are at most precise to the minut.
+        <br>Seconds were generated in the output because of serie A, where the birth time is modified to incorporate timezone information (which sometmes contains seconds).
+        <br>But seconds should be removed once the times of serie A are completely restored (omitting seconds respects ISO 8601).
+    </li>
 </ul>
 
 </article>
@@ -57,7 +68,7 @@
 
 
 <!-- ************************************* -->
-<aside class="left">
+<aside class="left">                                                                                                                                
 <ul>
     <li class="bold"><a href="index.html">Gauquelin5 home</a></li>
     <li><a href="why.html">Why ?</a></li>

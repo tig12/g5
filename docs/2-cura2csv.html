@@ -103,13 +103,12 @@ Two lines miss longitude and latitude :
 
 These 15 particular cases were fixed in the code, and included in the resulting file.
 
-</article>
-</div><!-- end class="main" -->
 
 
 <!-- ********************************************************************************* -->
 <h2>Series E1 E3</h2>
-The code that performs this step is located in <code>src/SerieE1E3.php</code>
+These two files share the same format and can be handled by the same code.
+<br>The code that performs this step is located in <code>src/SerieE1E3.php</code>
 <br>
 <br>To perform the transformations, run :
 <pre>
@@ -117,8 +116,23 @@ php run-gauquelin5.php E1 raw2exported
 php run-gauquelin5.php E3 raw2exported
 </pre>
 
-These two files share the same format and can be handled by the same code.
+<!-- ************************************* -->
+<h3>Place</h3>
+The main problem of files E1 and E3 is that the timezone offset is not given. It can be computed from the place and the date, which means that the place must be identified to be linked with a timezone. This is done through geonames.org and included in the resulting file. 
 
+
+<!-- ************************************* -->
+<h3>Names</h3>
+For the moment, names were not transformed. For some records, NAME column of cura files contains a mix of several several information : sometimes the maiden name of a woman, or the public pseudonym of a person. Clearing out the situation can't be done by program.
+
+<!-- ************************************* -->
+<h3>Planetary sectors</h3>
+By default, the program include columns with planetary sectors in the resulting files.
+<br>This behaviour can be modified through <code>add-planetary-sectors</code> of <code>config.yml</code>
+
+
+</article>
+</div><!-- end class="main" -->
 
 <!-- ************************************* -->
 <aside class="left">

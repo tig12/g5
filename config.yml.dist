@@ -26,16 +26,25 @@ postgresql:
 
 #
 # Settings specific to step raw2exported
-# For each serie, possible values are 'full' or 'small'
 #
-report-raw2exported:
-  A1: small
-  A2: small
-  A3: small
-  A4: small
-  A5: small
-  A6: small
-
+raw2exported:
+  
+  # Possible values : full or small
+  report:
+    A1: small
+    A2: small
+    A3: small
+    A4: small
+    A5: small
+    A6: small
+  
+  # Should the result include columns
+  # containing planetary sectors ?
+  # Possible values : true or false
+  add-planetary-sectors:
+    E1: true
+    E3: true
+    
 #
 # Settings specific to 1955 groups
 #
