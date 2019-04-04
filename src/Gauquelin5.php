@@ -80,7 +80,7 @@ class Gauquelin5{
         'B5'=> ['raw2exported'],
         'B6'=> ['raw2exported'],
         //
-        'D6'=> [],
+        'D6'=> ['raw2exported', 'computeGeo'],
         'D9a'=> [],
         'D9b'=> [],
         'D9c'=> [],
@@ -174,9 +174,19 @@ class Gauquelin5{
     // *****************************************
     /**
         Converts the fields H, MN, SEC of a line in a HH:MM:SS hour
+        @param  $array Associative array containing 3 fields : H, MN, SEC
     **/
-    public static function computeHour(&$array){
+    public static function computeHHMMSS($array){
         return trim(sprintf('%02s', $array['H']) . ':' . sprintf('%02s', $array['MN']) . ':' . sprintf('%02s', $array['SEC']));
+    }
+    
+    // *****************************************
+    /**
+        Converts the fields H, MN of a line in a HH:MM hour
+        @param  $array Associative array containing 2 fields : H, MN
+    **/
+    public static function computeHHMM($array){
+        return trim(sprintf('%02s', $array['H']) . ':' . sprintf('%02s', $array['MN']));
     }
     
     

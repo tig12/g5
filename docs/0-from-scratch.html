@@ -63,7 +63,7 @@ In the rest of this doc, directory <code>gauquelin5/</code> is refered as the <i
 <br>The files you need to know about are :
 <ul class="simple">
     <li><code>run-gauquelin5.php</code> is the entry point to use the program.</li>
-    <li><code>data/</code> contains the data manipulated by the program.</li>
+    <li><code>data/</code> contains the data generated and manipulated by the program.</li>
     <li><code>config.yml.dist</code> needs to be copied (see below)</li>
 </ul>
 
@@ -103,9 +103,11 @@ mkdir 9-1955-final
 mkdir 9-cura-final
 </pre>
 
+But you can use other locations if you specify different values for these directories in <code>config.yml</code>.
+
 <!-- ************************************* -->
-<h3>postgresql</h3>
-This is useful only if want to you use geoname, <a href="geonames.html">see this page</a> for details.
+<h3>geonames.org and postgresql</h3>
+To restore place names and timezones, the program uses geonames.org, <a href="geonames.html">see this page</a> for details.
 
 
 <!-- ********************************************************************************* -->
@@ -113,7 +115,7 @@ This is useful only if want to you use geoname, <a href="geonames.html">see this
 
 To check that the program works, type :
 <pre>php run-gauquelin5</pre>
-A message saying that youmust indicate the serie and the action is displayed.
+A message saying that you must indicate the serie and the action is displayed.
 <br>
 <br>Detailed usage will be detailed in the following pages.
 
@@ -137,8 +139,8 @@ A message saying that youmust indicate the serie and the action is displayed.
         <a href="2-cura2csv.html">2 - Cura to csv</a>
         <div class="padding-left">
             <a href="2-serieA.html">A</a>
-            <a href="2-cura2csv.html#serie-d6">D6</a>
-            <a href="2-cura2csv.html#serie-d10">D10</a>
+            <a href="2-serieD6.html">D6</a>
+            <a href="2-serieD10.html">D10</a>
             <a href="2-serieE1-E3.html">E1 E3</a>
         </div>
     </li>

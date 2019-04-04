@@ -55,7 +55,7 @@ class SerieE1_E3{
     **/
     public static function raw2exported($serie){
         if($serie != 'E1' && $serie != 'E3'){
-            throw new Exception("SerieE1_E3::raw2exported() - Bad value for parameter \$serie : $serie ; Must be 'E1' or 'E3'");
+            throw new Exception("SerieE1_E3::raw2exported() - Bad value for parameter \$serie : $serie ; must be 'E1' or 'E3'");
         }
         // config - todo : check validity of values put in config
         $report_type = Config::$data['raw2exported']['report'][$serie]; // 'full', 'small', 'tz' or 'geo'
@@ -100,7 +100,6 @@ class SerieE1_E3{
             $COD = trim(substr($line, 104));
             // match place to geonames
             [$country, $adm2, $place_name, $geoid, $lg, $lat] = self::compute_geo($CITY, $COD, $date);
-            
             if($lg == '' && $do_report_geo){
                 $report .= 'Geonames not matched for ' . $new['NUM'] . ' ' . $new['NAME'] . ' : ' . $CITY . ' ' . $COD . "\n";
             }
@@ -302,7 +301,7 @@ class SerieE1_E3{
 */
         $slug = \lib::slugify($name);
         // HERE call to Geonames to match
-        $geonames = \Geonames::match([
+        $geonames = \Geonames::matchFromSlug([
             'slug' => $slug,
             'countries' => ['FR'],
             'admin2-code' => $adm2,

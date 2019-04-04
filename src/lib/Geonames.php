@@ -36,22 +36,24 @@ class Geonames{
     
     // ******************************************************
     /**
-        Tries to match a place in geonames DB
+        Tries to match a place in geonames DB from the slug of a place
+        NB : slug = name transformed with no accent, no uppercase and any sprcial character replaced by '-'
         @param $fields The place to match ; associative array containing the fields :
             - slug          required ; string
             - countries     required ; array containing the iso codes of countries where to try the match
             - admin2-code   optional ; string
         @return false if match failed
                 or associative array containing these elements :
+                    - 'name'        : the name of the place
+                    - 'slug'        : slug of place name
                     - 'country'     : ISO country code
                     - 'geoid'       : geoname id of the place
-                    - 'slug'        : slug of place name
                     - 'admin2_code' : administrative code, level 2 (ex : département in France)
                     - 'lg'          : longitude, decimal degrees
                     - 'lat'         : latitude, decimal degrees
                     - 'timezone'    : textual timezone identifier (ex : "Europe/Paris")
     **/
-    public static function match($fields){
+    public static function matchFromSlug($fields){
         self::compute_dblink();
         if(substr($fields['slug'], 0, 3) == 'st-'){
             $fields['slug'] = 'saint-' . substr($fields['slug'], 3);
@@ -95,5 +97,68 @@ class Geonames{
     }
     
     
+    // ******************************************************
+    /**
+        Computes informations about a city using geonames.org web service.
+        @param  $username User name used to call geonames web service
+        @param  $lg Longitude, in decimal degrees
+        @param  $lat Latitude, in decimal degrees
+        @param  $need_timezone Boolean indicating if the timezone should also be returned
+        @return Associative array containing 2 elements :
+            'result' : The result if it could be computed
+                In case of success, contains an associative array with the fields :
+                - 'name' : name of the city
+                - 'geoid' : geonames id of the city
+                - 'country' : ISO 3166 country code of the city
+                - 'timezone' : Textual timezone identifier (ex : "Europe/Paris") - present only if $need_timezone = true
+                In case of failure, 'result' contains an empty array
+            'error'  : An error message if the result could not be computed
+                In case of success, 'error' is set to false.
+    **/
+    public static function cityFromLgLat($username, $lg, $lat, $need_timezone){
+        $res = ['result' => [], 'error' => false];
+        // first call, to get all infos except timezone
+        $url = "http://api.geonames.org/findNearbyPlaceNameJSON?lat=$lat&lng=$lg&username=$username";
+        $json = file_get_contents($url);
+        $data = json_decode($json);
+        if (! empty($data->status)) {
+            $res['error'] = $data->status->value.' - '.$data->status->message;
+            return $res;
+        }
+        if(!isset($data->geonames)){
+            $res['error'] = "Incoherent result : \n" . print_r($data, true);
+            return $res;
+        }
+        if(!is_array($data->geonames)){
+            $res['error'] = "Incoherent result : \n" . print_r($data, true);
+            return $res;
+        }
+        if(count($data->geonames) > 1){
+            $res['error'] = "Several possible results : \n" . print_r($data, true);
+            return $res;
+        }
+        // here, result is ok
+        $res['result']['name'] = $data->geonames[0]->name;
+        $res['result']['geoid'] = $data->geonames[0]->geonameId;
+        $res['result']['country'] = $data->geonames[0]->countryCode;
+        
+        if(!$need_timezone){
+            return $res;
+        }
+        // second call, for timezone
+        $url = "http://api.geonames.org/timezoneJSON?lat=$latitude&lng=$longitude&username=$username";
+        $json = file_get_contents($url);
+        $data = json_decode($json);
+        if (!empty($data->status)) {
+            $res['error'] = 'Unable to compute timezone : ' . $data->status->value.' - '.$data->status->message;
+            return $res;
+        }
+        if(!isset($data->timezoneId)){
+            $res['error'] = 'Unable to compute timezone';
+            return $res;
+        }
+        $res['result']['timezone'] = $data->timezoneId;
+        return $res;
+    }
 }// end class
 

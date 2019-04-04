@@ -548,7 +548,7 @@ class SerieA{
             $new['PRO'] = self::compute_profession($serie, $cur['PRO'], $new['NUM']);
             // date time
             $day = Gauquelin5::computeDay($cur);
-            $hour = Gauquelin5::computeHour($cur);
+            $hour = Gauquelin5::computeHHMMSS($cur);
             $TZ = trim($cur['TZ']);
             if($TZ != 0 && $TZ != -1){
                 throw new \Exception("timezone not handled : $TZ");

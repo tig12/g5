@@ -35,7 +35,7 @@
 <article>
 
 In all generated csv files, the first line contains field names ; other lines contain data.
-<br>The field separator used in csv file is <code>;</code>
+<br>The field separator used in csv file is <code>;</code> (semicolon).
 <br>Character encoding is UTF-8.
 
 <!-- ********************************************************************************* -->
@@ -69,7 +69,7 @@ The following fields are common to several series :
         <td>NAME</td>
         <td>
             Person name when available.
-            <br>When this field is present, it means that family name and given name have not been computed.
+            <br>If this field is present, it means that family name and given name have not been computed.
         </td>
     </tr>
     <tr>
@@ -87,24 +87,23 @@ The following fields are common to several series :
     <tr>
         <td>PRO</td>
         <td>
-            Profession code, see <a href="profession-codes.html">this page</a>.
+            Profession code, see below.
             <br>When a person has more than one profession code, the codes are separated by "+".
             Ex : PO+WR means that the person is identified as a politician and a writer.
         </td>
     </tr>
     <tr>
-        <td>BIRTHDATE</td>
+        <td>DATE</td>
         <td>
-            ISO 8601 of this form : YYYY-MM-DD HH:MM:SSsHH:MM (timezone offset is included)
+            Birth date ; ISO 8601 of this form : YYYY-MM-DD HH:MM:sHH:MM (timezone offset is included)
             <br>Example : <code>2017-05-03 09:30:00+02:00</code> :
-            <br>Legal time is <code>09:30:00</code>
-            <br>timezone is +2 hours.
+            <br>Legal time is <code>09:30:00</code> and timezone offset is +2 hours.
         </td>
     </tr>
     <tr>
-        <td>BIRTHPLACE</td>
+        <td>PLACE</td>
         <td>
-            Place name
+            Birth place name.
         </td>
     </tr>
     <tr>
@@ -220,8 +219,8 @@ Here is a complete list of profession codes, used in all generated files.
         <a href="2-cura2csv.html">2 - Cura to csv</a>
         <div class="padding-left">
             <a href="2-serieA.html">A</a>
-            <a href="2-cura2csv.html#serie-d6">D6</a>
-            <a href="2-cura2csv.html#serie-d10">D10</a>
+            <a href="2-serieD6.html">D6</a>
+            <a href="2-serieD10.html">D10</a>
             <a href="2-serieE1-E3.html">E1 E3</a>
         </div>
     </li>

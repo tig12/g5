@@ -12,11 +12,13 @@ dirs:
   9-1955-final:             data/9-1955-final
   9-cura-final:             data/9-cura-final
 
-# Should the program try to match birth places with geonames.org data ?
-# Possible values : true or false
-geonames: true
+# geoname.org parameters
+geonames:
+  # User name used to call geonames web service
+  # (you must change, 'demo' doesn't work)
+  username: demo
 
-# postgresql parameters - used only if geonames = true
+# postgresql parameters
 postgresql: 
   dbhost: localhost
   dbport: 5432

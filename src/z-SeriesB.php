@@ -80,7 +80,7 @@ class gq5_seriesB{
                 $new = [];
                 // t
                 $day = Gauquelin5::computeDay($cur);
-                $hour = Gauquelin5::computeHour($cur);
+                $hour = Gauquelin5::computeHHMMSS($cur);
                 $tz = trim($cur['TZ']) == 0 ? '+00:00' : '-01:00';
                 // slug, id
                 $num = trim($cur['NUM']);

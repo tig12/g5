@@ -1,10 +1,10 @@
 <?php
 /********************************************************************************
     Importation of Gauquelin 5th edition ; code specific to serie D10
-    matches first list and chronological order list
+    Merges first list and list containing planetary sectors
     
     @license    GPL
-    @history    2017-04-27 22:04:25+02:00, Thierry Graff : creation
+    @history    2019-04-04 14:23:10+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace gauquelin5;
 
@@ -39,6 +39,9 @@ class SerieD10{
         @throws Exception if unable to parse
     **/
     public static function raw2exported($serie){
+        if($serie != 'D10'){
+            throw new Exception("SerieD10::raw2exported() - Bad value for parameter \$serie : $serie ; must be 'D10'");
+        }
         $report =  "--- Importing serie $serie\n";
         $raw = Gauquelin5::readHtmlFile($serie);
         $file_serie = Gauquelin5::serie2filename($serie);
@@ -46,7 +49,6 @@ class SerieD10{
         if(count($m) != 3){
             throw new \Exception("Unable to parse list in " . $file_serie);
         }
-        $fieldnames = preg_split('/\s+/', $m[1]);
         $nb_stored = 0;
         $csv = '';
         // fields in the resulting csv

@@ -56,58 +56,14 @@ This step uses two entries of <code>config.yml</code> :
     </li>
 </ul>
 
+Each particular transformation is described in a page :
 
-<!-- ********************************************************************************* -->
-<h2>Serie A</h2>
-See <a href="2-serieA.html">this page</a>.
-
-
-<!-- ********************************************************************************* -->
-<h2>Serie D10</h2>
-The code that performs this step is located in <code>src/SerieD10.php</code>
-<br>
-<br>To convert file D10, run :
-<pre>php run-gauquelin5.php D10 raw2exported</pre>
-
-<!-- ************************************* -->
-<h3>Names</h3>
-
-For this file, it was possible to split family names and given names
-
-<!-- ************************************* -->
-<h3>Particular cases</h3>
-There is one record without birth time that was excluded from the resulting file :
-<pre>1098!	Rose Peter		SP	14	4	1941	-----	5h	39N6	84W31	Cincinnati, OH</pre>
-
-Two lines miss longitude and latitude :
-<pre>
-493	Good Robert		AC	21	5	1922	06:00	6h			Grosby, MN
-658	Jeter Robert		SP	9	5	1937	08:00	5h			Union, SC
-</pre>
-13 lines had to be fixed because of bad formatting (contain white spaces instead of tabs) :
-<pre>
-112	Blanton Leonard		PO	10	4	1930	21:30	6h	35N11   88W10	Hardin County, TN	
-192	Caldwell Philip		EX	27	1	1920	08:00	5h	39N16   83W09	Bourneville, OH	
-409	Faver Dudley		MI	17	8	1916	15:00	6h	32N28   100W24	Sweatwater, TX	
-568	Hayes Elvin		SP	11	11	1945	22:00	6h	32N28   91W45	Rayville, LA	
-817!	Malden Karl		AC	22	3	1912	17:00	6h	41N35   87W20	Gary, IN
-935	Murphy William		EX	17	6	1907	10:00	6h	44N15   88W24   Appleton, WI		
-945	Neal Patricia		AC	20	1	1926	04:30	6h	36N40   84W03	Packard, KY	
-1033	Pitts William		MI	27	11	1919	06:00	8h	33N54   117W15  March Field, CA		
-1058	Ramsey Lloyd		MI	29	5	1918	07:00	5h	37N05   84W36   Somerset, KY		
-1066!	Reeves Steve		AC	21	1	1926	08:00	7h	48N11   106W38  Glasgow, MT
-1158	Shaffer Raymond		EX	6	4	1912	22:30	6h	37N59   94W49   Harding, KS		
-1218	Staiger John		EX	20	3	1910	19:00	6h	44N43   88W09   Chase, WI		
-1250	Sweeney Walter		SP	18	4	1941	09:20	5h	42N14   70W48   Cohasset, MA		
-</pre>
-
-These 15 particular cases were fixed in the code, and included in the resulting file.
-
-
-<!-- ********************************************************************************* -->
-<h2>Series E1 E3</h2>
-
-See <a href="2-serieE1-E3.html">this page</a>.
+<ul class="spaced naked margin-top big2">
+    <li><a href="2-serieA.html">Serie A</a></li>
+    <li><a href="2-serieD6.html">File D6</a></li>
+    <li><a href="2-serieD10.html">File D10</a></li>
+    <li><a href="2-serieE1-E3.html">Files E1 and E3</a></li>
+</ul>
 
 </article>
 </div><!-- end class="main" -->
@@ -127,8 +83,8 @@ See <a href="2-serieE1-E3.html">this page</a>.
         <a href="2-cura2csv.html">2 - Cura to csv</a>
         <div class="padding-left">
             <a href="2-serieA.html">A</a>
-            <a href="2-cura2csv.html#serie-d6">D6</a>
-            <a href="2-cura2csv.html#serie-d10">D10</a>
+            <a href="2-serieD6.html">D6</a>
+            <a href="2-serieD10.html">D10</a>
             <a href="2-serieE1-E3.html">E1 E3</a>
         </div>
     </li>

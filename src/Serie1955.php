@@ -153,7 +153,7 @@ class Serie1955{
                 }
                 // HERE try to match Geonames
                 $slug = \lib::slugify($place);
-                $geonames = \Geonames::match([
+                $geonames = \Geonames::matchFromSlug([
                     'slug' => $slug,
                     'countries' => [$country],
                     'admin2-code' => $admin2,
