@@ -398,6 +398,11 @@ class SerieA{
             }
             $res2[$day][] = $fields;
         }
+        // Hack to fix error for Jean Lebris
+        if($serie == 'A1'){
+            $res2['1817-03-25'] = [['day' => '1817-03-25', 'pro' => 'SP', 'name' => 'Lebris Jean']];
+            unset($res2['1817-03-05']); // possible because this date is unique within the array.
+        }
         //
         // 3 - merge res1 and res2 (name list)
         //

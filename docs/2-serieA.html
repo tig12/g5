@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Serie A | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
-    <meta name="description" content="">
+    <meta name="description" content="Conversion of cura.free.fr html pages to csv files for serie A">
     <meta name="robots" content="index,follow">
     <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
     <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
@@ -23,8 +23,8 @@
 
 <nav class="prevnext">
     <a class="top" href="index.html">&uarr;</a>
-    <a class="prev" rel="prev" href="1-cura-data.html">&larr;</a>
-    <a class="next" rel="next" href=".html">&rarr;</a>
+    <a class="prev" rel="prev" href="2-cura2csv.html">&larr;</a>
+    <a class="next" rel="next" href="2-serieE1-E3.html">&rarr;</a>
 </nav>
 
 <header>
@@ -146,6 +146,29 @@ The program must merge the two lists. Unfortunately, these 2 lists don't share a
 </table>
 
 
+<!-- ********************************************************************************* -->
+<h2>Small errors</h2>
+
+<!-- ************************************* -->
+<h3>902gdA1y.html</h3>
+
+<ul class="spaced">
+    <li>
+        Incoherence between the two lists for one record :
+        <pre>1817	3	25	C	185	F	5	16	24	0	48N 0	4W 6	29	CONCARNEAU</pre>
+        and
+        <pre>1817	3	5	Lebris Jean</pre>
+        Checking <a href="http://mnesys-portail.archives-finistere.fr/?id=recherche_etat_civil">online civil registry</a> permits to solve the case :
+        <br>Registre  1 MI EC 53/10 Naissances, p 377 / 559 => Né le 25 mars 1817 à 5h du matin.
+        <br>From "Traité de l'heure dans le monde", TU = HLO ;  4°6' = 00:16:24 => hour = 05:16:24
+        <br>The first line is exact, second line must be replaced by
+        <pre>1817	3	25	Lebris Jean</pre>
+        This was fixed in the code.
+    </li>
+
+</ul>
+
+
 </article>
 </div><!-- end class="main" -->
 
@@ -165,8 +188,9 @@ The program must merge the two lists. Unfortunately, these 2 lists don't share a
         <a href="2-cura2csv.html">2 - Cura to csv</a>
         <div class="padding-left">
             <a href="2-serieA.html">A</a>
+            <a href="2-cura2csv.html#serie-d6">D6</a>
             <a href="2-cura2csv.html#serie-d10">D10</a>
-            <a href="2-cura2csv.html#serie-e1-e3">E1 E3</a>
+            <a href="2-serieE1-E3.html">E1 E3</a>
         </div>
     </li>
     <li>
@@ -184,15 +208,16 @@ The program must merge the two lists. Unfortunately, these 2 lists don't share a
                 <a href="9-cura-corr.html">Cura corrected</a>
                 <div class="padding-left">
                     <a href="9-cura-corr.html#serie-a">A</a>
+                    <a href="9-cura-corr.html#serie-d6">D6</a>
                     <a href="9-cura-corr.html#serie-d10">D10</a>
                     <a href="9-cura-corr.html#serie-e1-e3">E1 E3</a>
                 </div>
             </li>
         </ul>
+    <li class="bold"><a href="download.html">Download results</a></li>
     </li>
     <li><a href="geonames.html">Geonames.org</a></li>
     <li><a href="questions.html">Questions</a></li>
-    <li class="bold"><a href="download.html">Download results</a></li>
     <li class="bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>
 </ul>
 </aside>

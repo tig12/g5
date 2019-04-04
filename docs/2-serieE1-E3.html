@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Serie E1 E3 | Gauquelin5</title>
+    <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
+    <meta name="description" content="Conversion of cura.free.fr html pages to csv files for files E1 and E3">
+    <meta name="robots" content="index,follow">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
+    <meta name="dcterms.rightsHolder" content="Thierry Graff">
+    <meta name="dcterms.dateCopyrighted" content="2019">
+    <!-- 
+    tigsite:
+        history: 2019-04-02 03:53:45+02:00, Thierry Graff : Creation
+    -->
+</head>
+
+<body>
+<div class="container">
+
+<div class="main">
+
+<nav class="prevnext">
+    <a class="top" href="index.html">&uarr;</a>
+    <a class="prev" rel="prev" href="2-serieA.html">&larr;</a>
+    <a class="next" rel="next" href=".html">&rarr;</a>
+</nav>
+
+<header>
+<h1>E1 and E3</h1>
+<div class="intro">
+</div>
+</header>
+
+<article>
+
+Files <code>902gdE1.html</code> and <code>902gdE3.html</code> share the same format and can be handled by the same code.
+<br>The code that performs this step is located in <code>src/SerieE1E3.php</code>
+<br>
+<br>To perform the transformations, run :
+<pre>
+php run-gauquelin5.php E1 raw2exported
+php run-gauquelin5.php E3 raw2exported
+</pre>
+
+The output of the program can be tweaked using settings in <code>config.yml</code> ; see section <code>raw2exported - report</code> for full documentation.
+
+<!-- 
+Check the meaning of birth time in file E1 and E3
+The notice says : "H : Hour of birth (Birth certificate)"
+
+E1 : Checked civil registry for Abely Xavier :
+archives82.fr, Verdun-sur-Garonne, naissances 1890, p 10 / 34
+Birth hour mentionned = 08:00 ; same as birth hour of file E1
+
+E3 : Checked civil registry for Abel Jean-Baptiste :
+archives.var.fr, Toulon, rgistry 7E146_260 (birth 1863), p 60 / 518
+Birth hour mentionned = 14:00 ; same as birth hour of file E3
+
+Concluded that birth mentioned in files E1 and E3 are expressed in civil time
+(conclusion coherent with the notice)
+
+-->
+<!-- ********************************************************************************* -->
+<h2>Place</h2>
+The main problem of files E1 and E3 is that the timezone offset is not given. It can be computed from the place and the date, which means that the place must be identified to be linked with a timezone. This is done through geonames.org and included in the resulting file. 
+<br>
+<br>This gives partial results :
+
+<pre>php run-gauquelin5.php E1 raw2exported</pre>
+<pre>
+Importing E1
+2153 lines parsed
+267 places not matched
+346 timezone offsets not computed
+1540 persons stored precisely (71.53 %)
+</pre>
+
+<pre>php run-gauquelin5.php E3 raw2exported</pre>
+<pre>
+Importing E3
+1539 lines parsed
+224 places not matched
+266 timezone offsets not computed
+1049 persons stored precisely (68.16 %)
+</pre>
+
+The unmatched cases come from two reasons :
+<br>- Some place names are different from geonames ; can be fixed by completing the program in function <code>compute_geo()</code>, where it is possible to write the correspondance between cura names and geonames.org names.
+<br>- Timezone computation refuses to compute unclear cases : during WW1, some parts of France were sometimes french, sometimes german, and timezone computation refuses to handle these cases.
+
+
+<!-- ********************************************************************************* -->
+<h2>Names</h2>
+For the moment, names were not transformed. For some records, NAME column of cura files contains a mix of several several information : sometimes the maiden name of a woman, or the public pseudonym of a person. Clearing out the situation can't be done by program.
+
+
+<!-- ********************************************************************************* -->
+<h2>Planetary sectors</h2>
+By default, the program include columns with planetary sectors in the resulting files.
+
+
+<!-- ********************************************************************************* -->
+<h2>Small errors</h2>
+Cura files contain several typos.
+
+<!-- ************************************* -->
+<h3>902gdE1.html</h3>
+
+<ul class="spaced">
+    <li>
+        Error in saturn sector number
+        <pre>0517	26 28 20 01 lt3	DANIAUD Jean</pre>
+        Error not fixed yet.
+    </li>
+
+    <li>
+        Error in moon sector
+        <pre>0560	o8 05 07 36 29	DELAY Maurice</pre>
+        Value o8 probably to replace with 08, but didn't check.
+        <br>Error not fixed yet.
+    </li>
+
+    <li>
+        Typos in the names of 27 persons (O are replaced by zero ; A by 3 ; S by 5, G by 6 ; B by 8).
+        <br>These typos are present in both lists (list with birth data and list with sectors).
+        <br>These errors are corrected by the program.
+        <details>
+        <summary>Full list of typos</summary>
+<pre>
+0483    EX       COURB0T Henri                   12    02    1902    20:00    Courchelettes             59
+0642    PH     + DUB0S René                      20    02    1901    10:00    St-Brice                  78
+0654    MI       DUD0GNON Martial                01    06    1900    22:00    Ambazac                   87
+0743    MI       FERRIERES de SAUVEB0EUF Guy     12    10    1919    22:00    Tours                     37
+0746    MI       FEUVRIER Ch3rles                29    01    1915    01:00    Damprichart               25
+0879    PH       G0DECHOT Roger                  15    12    1922    04:00    Nancy                     54
+0880    MI     * G0DEFROY Charles                29    12    1888    07:00    La Flèche                 72
+0881    PH     - G0DLEWSKI Guy                   20    04    1913    09:00    St-Mandé                  94
+0882    PH       G0DLEWSKI Jean                  08    08    1919    15:00    St-Mandé                  94
+0883    PH       G0DLEWSKI Stanislas             02    12    1919    23:30    Sorgues                   84
+0885    PH       G0LDE Alice (DUPUY)             10    08    1928    23:40    Corbeil-Essonnes          91
+0886    EX       G0MA Michel                     12    03    1932    23:30    Montcrabeau               47
+0887    MI       G0MBEAUD Jean                   29    06    1907    15:00    Billère                   66
+0888    EX       G0MEZ Francine (LE FOYER)       12    10    1932    01:40    Boulogne-Billt            92
+0890    PH       G0RET Pierre                    27    08    1907    11:00    Rosières-en-Santer        80
+0891    PH       G0SSEREZ Maurice                18    03    1911    08:00    Montpellier               34
+0892    PH       G0UDAL Gaston                   11    05    1910    06:00    Bagnac                    46
+0893    EX       G0UDARD Jean-Michel             13    11    1939    21:00    Montpellier               34
+0894    PH    +* G0UGEROT Henri                  02    07    1881    05:00    St-Ouen                   75
+0897    MI       G0UJON Pierre                   27    09    1910    06:00    Maisons-Lafitte           78
+0898    PH       G0UMAIN André                   16    06    1910    15:00    Pau                       64
+0899    PH     + G0UNELLE Hugues                 27    02    1903    03:30    Châteauroux               36
+0901    EX       G0UZE-RENAL Christine           30    12    1914    08:30    Mouchard                  39
+0998    MI     L HETTIER de B0ISLAMBERT Cl.      26    07    1906    12:00    Hérouvillette             14
+1119    MI     * LAB0UCHERE René                 13    02    1890    05:00    Paris 8ème                75
+1797    PH       R0BERT François                 15    09    1914    15:00    St-Avold                  57
+1801    PH       R0BLIN Jean                     24    06    1914    11:00    Guer                      56
+</pre>
+        </details>
+    </li>
+</ul>
+
+
+<!-- ************************************* -->
+<h3>902gdE3.html</h3>
+
+<ul class="spaced">
+    <li>
+        A space is missing between mars and jupiter sector nb for record 0811 :
+        <pre>0811	04 26 2104 08	IZARD Georges</pre>
+        Error fixed.
+    </li>
+
+    <li>
+        The same type of typo as in E1 file occur for 9 records.
+        <br>These errors are corrected by the program.
+        <details>
+        <summary>Full list of typos</summary>
+<pre>
+0309    PAI      CHARB0NNIER Pierre              24    08    1897    13:00    Vienne                    38   
+0383    JO       C0QUET James de                 16    07    1898    01:00    Bordeaux                  33   
+0488    AC       DESCRIERES Georges (BER6É-D.)   15    04    1930    09:00    Bordeaux                  33   
+0497    PO       DESTREMAU 8ernard               11    02    1917    17:30    Paris 16ème               75   
+0703    PO       GIAC0BBI François               19    07    1919    09:00    Venaco                    20   
+0784    PO       HERISS0N Charles                12    10    1831    10:00    Surgy                     58   
+0836    PO       J05PIN Lionel                   12    07    1937    23:10    Meudon                    92   
+1308    PO       RIB0T Alexandre                 03    02    1842    01:00    St-Omer                   62   
+1326    PO       R0BERT Pierre                   17    05    1875    23:30    Montbrison                42   
+</pre>
+        </details>
+    </li>
+</ul>
+
+</article>
+</div><!-- end class="main" -->
+
+<!-- ************************************* -->
+<aside class="left">
+<ul>
+    <li class="bold"><a href="index.html">Gauquelin5 home</a></li>
+    <li><a href="why.html">Why ?</a></li>
+    <li class="bold"><a href="summary-chart.html">Summary chart</a></li>
+    <li class="bold"><a href="output-format.html">Output format</a></li>
+    <li><a href="0-from-scratch.html">0 - From scratch</a></li>
+    <li>
+        <a href="1-cura-data.html">1 - Cura data</a>
+    </li>
+    <li>
+        <a href="2-cura2csv.html">2 - Cura to csv</a>
+        <div class="padding-left">
+            <a href="2-serieA.html">A</a>
+            <a href="2-cura2csv.html#serie-d6">D6</a>
+            <a href="2-cura2csv.html#serie-d10">D10</a>
+            <a href="2-serieE1-E3.html">E1 E3</a>
+        </div>
+    </li>
+    <li>
+        <a href="3-mark.html">3 - Mark data</a>
+    </li>
+    <li>
+        <a href="4-corrections-g55.html">4 - Corrections from G1955</a>
+    </li>
+    <li>
+        9 - Results
+        <ul>
+            <li><a href="9-gauquelin-orig.html">G 1955 original</a></li>
+            <li><a href="9-gauquelin-corr.html">G 1955 corrected</a></li>
+            <li>
+                <a href="9-cura-corr.html">Cura corrected</a>
+                <div class="padding-left">
+                    <a href="9-cura-corr.html#serie-a">A</a>
+                    <a href="9-cura-corr.html#serie-d6">D6</a>
+                    <a href="9-cura-corr.html#serie-d10">D10</a>
+                    <a href="9-cura-corr.html#serie-e1-e3">E1 E3</a>
+                </div>
+            </li>
+        </ul>
+    <li class="bold"><a href="download.html">Download results</a></li>
+    </li>
+    <li><a href="geonames.html">Geonames.org</a></li>
+    <li><a href="questions.html">Questions</a></li>
+    <li class="bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>
+</ul>
+</aside>
+
+</div><!-- end class="container" -->
+
+</body>
+</html>
+<!-- ************************************* -->
+<!-- ********************************************************************************* -->
