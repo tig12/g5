@@ -116,9 +116,35 @@ php run-gauquelin5.php E1 raw2exported
 php run-gauquelin5.php E3 raw2exported
 </pre>
 
+The output of the program can be tweaked using settings in <code>config.yml</code> ; see section <code>raw2exported - report</code> for full documentation.
+
 <!-- ************************************* -->
 <h3>Place</h3>
 The main problem of files E1 and E3 is that the timezone offset is not given. It can be computed from the place and the date, which means that the place must be identified to be linked with a timezone. This is done through geonames.org and included in the resulting file. 
+<br>
+<br>This gives partial results :
+
+<pre>php run-gauquelin5.php E1 raw2exported</pre>
+<pre>
+Importing E1
+2153 lines parsed
+267 places not matched
+346 timezone offsets not computed
+1540 persons stored precisely (71.53 %)
+</pre>
+
+<pre>php run-gauquelin5.php E3 raw2exported</pre>
+<pre>
+Importing E3
+1539 lines parsed
+224 places not matched
+266 timezone offsets not computed
+1049 persons stored precisely (68.16 %)
+</pre>
+
+The unmatched cases come from two reasons :
+<br>- Some place names are different from geonames ; can be fixed by completing the program in function <code>compute_geo()</code>, where it is possible to write the correspondance between cura names and geonames.org names.
+<br>- Timezone computation refuses to compute unclear cases : during WW1, some parts of France were sometimes french, sometimes german, and timezone computation refuses to handle these cases.
 
 
 <!-- ************************************* -->
@@ -128,7 +154,6 @@ For the moment, names were not transformed. For some records, NAME column of cur
 <!-- ************************************* -->
 <h3>Planetary sectors</h3>
 By default, the program include columns with planetary sectors in the resulting files.
-<br>This behaviour can be modified through <code>add-planetary-sectors</code> of <code>config.yml</code>
 
 
 </article>

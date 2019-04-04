@@ -54,7 +54,18 @@ class SerieE1_E3{
         @return report
     **/
     public static function raw2exported($serie){
-        $include_sectors = Config::$data['raw2exported']['add-planetary-sectors'][$serie];
+        if($serie != 'E1' && $serie != 'E3'){
+            throw new Exception("SerieE1_E3::raw2exported() - Bad value for parameter \$serie : $serie ; Must be 'E1' or 'E3'");
+        }
+        // config - todo : check validity of values put in config
+        $report_type = Config::$data['raw2exported']['report'][$serie]; // 'full', 'small', 'tz' or 'geo'
+        $do_report_geo = $do_report_tz = false;
+        if($report_type == 'full' || $report_type == 'geo'){
+            $do_report_geo = true;
+        }
+        if($report_type == 'full' || $report_type == 'tz'){
+            $do_report_tz = true;
+        }
         self::$n_missing_places = 0;
         self::$n_missing_timezone = 0;
         self::$n_total = 0;
@@ -87,12 +98,29 @@ class SerieE1_E3{
             $date = "$y-$m-$d $h";
             $CITY = trim(substr($line, 78, 25));
             $COD = trim(substr($line, 104));
-//echo $new['NUM'] . "\n";
+            // match place to geonames
             [$country, $adm2, $place_name, $geoid, $lg, $lat] = self::compute_geo($CITY, $COD, $date);
-if($country != 'FR'){
-    echo "$country, $adm2, $place_name, $geoid, $lg, $lat\n";
-}
-continue;
+            
+            if($lg == '' && $do_report_geo){
+                $report .= 'Geonames not matched for ' . $new['NUM'] . ' ' . $new['NAME'] . ' : ' . $CITY . ' ' . $COD . "\n";
+            }
+            // compute timezone
+            if($lg != ''){
+                [$offset, $err] = \TZ_fr::offset($date, $lg, $COD);
+                if($err){
+                    self::$n_missing_timezone++;
+                    if($do_report_tz){
+                        $report .=  'TZ not computed for ' . $new['NUM'] . ' ' . $new['NAME'] . ' : ' . $err . "\n";
+                    }
+                }
+                else{
+                    $date .= $offset;
+                }
+            }
+            else{
+                self::$n_missing_timezone++;
+            }
+            // Fill res
             $new['DATE'] = $date;
             $new['PLACE'] = $place_name;
             $new['LG'] = $lg;
@@ -100,9 +128,6 @@ continue;
             $new['COD'] = $adm2;
             $new['COU'] = $country;
             $new['GEOID'] = $geoid;
-if($new['NUM'] == '0006'){
-echo "\n<pre>"; print_r($new); echo "</pre>\n"; exit;
-}
             $res1[$new['NUM']] = $new;
         }
         $report .= self::$n_total  . " lines parsed\n";
@@ -111,7 +136,6 @@ echo "\n<pre>"; print_r($new); echo "</pre>\n"; exit;
         $remain = self::$n_total - self::$n_missing_places - self::$n_missing_timezone;
         $percent = round($remain * 100 / self::$n_total, 2);
         $report .= "$remain persons stored precisely ($percent %)\n";
-exit;
         //
         // parse the second list (with sectors)
         //
@@ -187,7 +211,7 @@ exit;
         foreach($res1 as $fields){
             $csv .= implode(Gauquelin5::CSV_SEP, $fields) . "\n";
         }
-        $csvfile = Config::$data['dest-dir'] . DS . $serie . '.csv';
+        $csvfile = Config::$data['dirs']['2-cura-exported'] . DS . $serie . '.csv';
         file_put_contents($csvfile, $csv);
         return $report;
     }
@@ -199,77 +223,58 @@ exit;
         Tries to match geonames.org
         @param  $CITY   Content of column CITY in cura file
         @param  $COD    Content of column COD in cura file = dept for France, adm2 for geonames
-        @param  $date   YYYY-MM-DD HH:MM
-        @return Array containing geographical information :
-                [$country, $adm2, $place_name, $geoid, $lg, $lat]
-                $geoid, $lg, $lat contain empty string if they can't be computed
-    **/
-    private static function compute_geo($CITY, $COD, $date){
-            $geoid = $lg = $lat = $adm2 = '';
-            $place_name = $CITY;
-            switch($COD){
-            	case 'ALG' : 
-                $country = 'DZ';
-            	break;
-            	case 'B' : 
-                $country = 'BE';
-            	break;
-            	case 'GER' : 
-                $country = 'DE';
-            	break;
-            	case 'LUX' : 
-                $country = 'LU';
-                $place_name = 'Luxembourg';
-                [$geoid, $lg, $lat] = ['2960316', '6.13', '49.61167'];
-            	break;
-            	case 'MAR' : 
-                $country = 'MA';
-            	break;
-            	default :
-                $country = 'FR';
-                $adm2 = $COD;
-                [$geoid, $tmp_place_name, $lg, $lat] = self::matchFrenchPlace($place_name, $COD);
-                if($tmp_place_name != ''){
-                    $place_name = $tmp_place_name; // replace original name by geoid name (in general better spelled)
-                }
-            	break;
-            }
-return [$country, $adm2, $place_name, $geoid, $lg, $lat];        
-            // match place to geonames
-            if($lg){ // if longitude is known
-                [$offset, $err] = \TZ_fr::offset($date, $lg, $COD);
-                if($err){
-//                    $report .= "$err\n";
-                    self::$n_missing_timezone++;
-                }
-                else{
-                    $date .= $offset;
-                }
-            }
-    }
-    
-    // ******************************************************
-    /**
-        Auxiliary function of import()
-        @param  $name string Name of a place
-        @return array of 3 elements :
-                    geoid (= geonames.org id)
-                    name
+        @return Array containing 6 geographical information :
+                    country
+                    adm2
+                    place name
+                    geoid
                     lg
                     lat
-                Or an array containing 4 empty strings for elements that could not be computed
+                $geoid, $lg, $lat contain empty string if they can't be computed
     **/
-    public static function matchFrenchPlace($name, $dept){
+    private static function compute_geo($CITY, $COD){
+        // Not France - manual matching
+        switch($COD){
+            case 'ALG' : 
+                switch($CITY){
+                    case 'Alger - Algérie' : return ['DZ', '', 'Alger', '2507480', '3.08746', '36.73225']; break;
+                    case 'Blida - Algérie' : return ['DZ', '', 'Blida', '2503769', '2.8277', '36.47004']; break;
+                    case 'Constantine - Algérie' : return ['DZ', '', 'Constantine', '2501152', '6.61472', '36.365']; break;
+                    case 'Oran - Algérie' : return ['DZ', '', 'Oran', '2485926', '-0.63588', '35.69906']; break;
+                }
+            break;
+            case 'B' : 
+                switch($CITY){
+                    case 'Anvers - Belgique' : return ['BE', '', 'Antwerpen', '2803138', '4.40346', '51.21989']; break;
+                    case 'Bruxelles - Belgique' : return ['BE', '', 'Bruxelles', '2800866', '4.34878', '50.85045']; break;
+                    case 'Laeken-Bruxelles - Belg' : return ['BE', '', 'Laeken', '2793656', '4.34844', '50.87585']; break;
+                    case 'Mouscron - Belgique' : return ['BE', '', 'Mouscron', '2790595', '3.20639', '50.74497']; break;
+                }
+            break;
+            case 'GER' : 
+                return ['DE', '', 'Koblenz', '2886946', '7.57884', '50.35357'];
+            break;                                               
+            case 'LUX' : 
+                return ['LU', '', 'Luxembourg', '2960316', '6.13', '49.61167'];
+            break;
+            case 'MAR' : 
+                return ['MA', '061', 'Meknès', '2542715', '-5.54727', '33.89352'];
+            break;
+        }
+        // France - $COD is département
+        $name = $CITY;
+        $adm2 = $COD;
+        // Adapt name for common cases
         $name = preg_replace('/(.*?)\b[Ss]t\b(.*?)/', '$1saint$2', $name);
-        // loss of information "arrondissement"
-        $name = preg_replace('/(.*?) \d+ème/', '$1', $name);
-        $name = str_replace(' 1er', '', $name);
+        $name = preg_replace('/(.*?) \d+ème/', '$1', $name); // loss of information "arrondissement"
+        $name = str_replace(' 1er', '', $name); // loss of information "arrondissement"
         $name = str_replace('/', ' sur ', $name);
         // particular cases handed manually
         // => convert names as spelled in files E1 and E3 to the corresponding names in geonames
+        // Adapt département when it has changed since Gauquelin epoch
         if($name == 'Asnières'){
             $name = 'Asnières-sur-Seine';
-            $dept = '92';
+            $adm2 = '92';
         }
         else if($name == 'Gaillac-sur-Tarn'){
             $name = 'Gaillac';
@@ -277,21 +282,21 @@ return [$country, $adm2, $place_name, $geoid, $lg, $lat];
         else if($name == 'Chalons sur Marne'){
             $name = 'Châlons-en-Champagne';
         }
-        else if($name == 'Vielmur' && $dept == '81'){
+        else if($name == 'Vielmur' && $adm2 == '81'){
             $name = 'Vielmur-sur-Agout';
         }
-        else if($name == 'saint Maur' && $dept == '94'){
+        else if($name == 'saint Maur' && $adm2 == '94'){
             $name = 'Saint-Maur-des-Fossés';
         }
-        else if($name == 'Soisy sous Montmoren' && $dept == '78'){
+        else if($name == 'Soisy sous Montmoren' && $adm2 == '78'){
             $name = 'Soisy-sous-Montmorency';
-            $dept = '95';
+            $adm2 = '95';
         }
-        else if($name == 'Romans' && $dept == '26'){
+        else if($name == 'Romans' && $adm2 == '26'){
             $name = 'Romans-sur-Isère';
         }
 /* 
-        else if($name == '' && $dept == ''){
+        else if($name == '' && $adm2 == ''){
             $name = '';
         }
 */
@@ -300,19 +305,28 @@ return [$country, $adm2, $place_name, $geoid, $lg, $lat];
         $geonames = \Geonames::match([
             'slug' => $slug,
             'countries' => ['FR'],
-            'admin2-code' => $dept,
+            'admin2-code' => $adm2,
         ]);
         if($geonames){
             return [
-                $geonames[0]['geoid'],
+                'FR', 
+                $adm2,
                 $geonames[0]['name'],
+                $geonames[0]['geoid'],
                 $geonames[0]['longitude'],
                 $geonames[0]['latitude'],
             ];
         }
         // not matched
         self::$n_missing_places++;
-        return ['', '', '', ''];
+        return [
+                'FR', 
+                $adm2,
+                $name,
+                '',
+                '',
+                '',
+        ];
     }
     
     
