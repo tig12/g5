@@ -113,6 +113,7 @@ class Geonames{
                 - 'timezone' : Textual timezone identifier (ex : "Europe/Paris") - present only if $need_timezone = true
                 In case of failure, 'result' contains an empty array
             'error'  : An error message if the result could not be computed
+                or gives incoherent results
                 In case of success, 'error' is set to false.
     **/
     public static function cityFromLgLat($username, $lg, $lat, $need_timezone){
@@ -137,6 +138,10 @@ class Geonames{
             $res['error'] = "Several possible results : \n" . print_r($data, true);
             return $res;
         }
+        // if($data->geonames[0]->fcode != 'PPL'){
+        //     $res['error'] = "The result is not a populated place : \n" . print_r($data, true);
+        //     return $res;
+        // }
         // here, result is ok
         $res['result']['name'] = $data->geonames[0]->name;
         $res['result']['geoid'] = $data->geonames[0]->geonameId;
@@ -146,7 +151,7 @@ class Geonames{
             return $res;
         }
         // second call, for timezone
-        $url = "http://api.geonames.org/timezoneJSON?lat=$latitude&lng=$longitude&username=$username";
+        $url = "http://api.geonames.org/timezoneJSON?lat=$lat&lng=$lg&username=$username";
         $json = file_get_contents($url);
         $data = json_decode($json);
         if (!empty($data->status)) {

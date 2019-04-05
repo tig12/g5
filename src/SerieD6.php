@@ -11,6 +11,23 @@ namespace gauquelin5;
 use gauquelin5\Gauquelin5;
 use gauquelin5\init\Config;
 
+/* 
+Orihuela ES
+356 Ruiz Bernardo
+Array
+(
+    [result] => Array
+        (
+            [name] => Falcon
+            [geoid] => 2496813
+            [country] => DZ
+        )
+
+    [error] => Unable to compute timezone
+)
+*/
+
+
 class SerieD6{
     
         /** Fields in the resulting csv **/
@@ -20,11 +37,12 @@ class SerieD6{
             'DATE',
             'PLACE',
             'COU',
+            'GEOID',
             'LG',
             'LAT',
         ];
     
-        /** String written to  **/
+        /** String written in field PLACE to indicate that a call to geonames webservice failed **/
         const FAILURE_MARK = 'XXX';
     
     // *****************************************
@@ -59,6 +77,7 @@ class SerieD6{
             $new['DATE'] = "$day $hour";
             $new['PLACE'] = '';
             $new['COU'] = '';
+            $new['GEOID'] = '';
             $new['LG'] = Gauquelin5::computeLg($cur[8]);
             $new['LAT'] = Gauquelin5::computeLat($cur[7]);
             $csv .= implode(Gauquelin5::CSV_SEP, $new) . "\n";
@@ -85,19 +104,64 @@ class SerieD6{
             // load csv file
             $raw = file_get_contents($csvfile);
             $lines = explode("\n", $raw);
+            $newinfo = false; // true if a new geo inf has already been written
             foreach($lines as $line){
-                $fields = explode(Gauquelin5::CSV_SEP, $line);
-                if($fields[0] == 'NUM'){
-                    $res .= $line . "\n"; // first line
+                if($newinfo){
+                    // copy the rest of the csv file 
+                    $res .= $line . "\n";
                     continue;
                 }
-                if($fields[3] == '' && $fields[3] != self::FAILURE_MARK){
-                    // PLACE is empty, so call geonames.org
+                $fields = explode(Gauquelin5::CSV_SEP, $line);
+                if(!isset($fields[3])){
+                    break 2; // ===== HERE break enclosing while(true) =====
                 }
+                if($fields[0] == 'NUM'){
+                    // first line
+                    $res .= $line . "\n";
+                    continue;
+                }
+                if($fields[3] != ''){
+                    // line already completed with geo informations
+                    $res .= $line . "\n";
+                    continue;
+                }
+                // here a new line is treated
+                // failure or success, a new information goes in the file
+                $newinfo = true;
+                $lg = $fields[6];
+                $lat = $fields[7];
+                $geonames = \Geonames::cityFromLgLat(Config::$data['geonames']['username'], $lg, $lat, true);
+                if($geonames['error']){                       
+                    echo $fields[0] . ' ' . $fields[1] . ' ' . print_r($geonames, true) . "\n";
+                    $fields[3] = self::FAILURE_MARK;
+                    $res .= implode(Gauquelin5::CSV_SEP, $fields) . "\n";
+                    continue;
+                }
+                // here call to Geonames::cityFromLgLat() was sucessful
+                echo $fields[0] . ' ' . $fields[1] . " : write geo info\n";
+                $dtu = \TZ::offset($fields[3], $geonames['result']['timezone']);
+                $fields[2] .= $dtu;
+                $fields[3] = $geonames['result']['name'];
+                $fields[4] = $geonames['result']['country'];
+                $fields[5] = $geonames['result']['geoid'];
+                $res .= implode(Gauquelin5::CSV_SEP, $fields) . "\n";
+                // 0 'NUM', 1 'NAME', 2 'DATE', 3 'PLACE', 4 'COU', 5 'GEOID', 6 'LG', 7 'LAT'
             }
-break;
-        }
+            // Write back the csv 
+            file_put_contents($csvfile, $res);
+            dosleep(1.5); // keep cool with geonames.org ws
+        } // end whle true
     }
     
     
 }// end class    
+
+// ******************************************************
+/** 
+    like sleep() but parameter is a nb of seconds, and it prints a message
+**/
+function dosleep($x){
+    echo "dosleep($x) ";
+    usleep($x * 1000000);
+    echo " - end sleep\n";
+}

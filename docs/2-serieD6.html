@@ -39,7 +39,6 @@ The code that performs this step is located in <code>src/SerieD6.php</code>
 <br>Restoration process is done in two steps because it involves calls to geonames.org web service.
 
 <ul class="margin-top spaced">
-
     <li>
         The first step copies and reformat the informations of <code>902gdD6.html</code> to a csv file in directory <code>2-cura-exported</code>.
         <br>This is done running :
@@ -47,20 +46,35 @@ The code that performs this step is located in <code>src/SerieD6.php</code>
     </li>
     
     <li>
-        The second step computes place name, country code and timezone offset and can be stopped and started again without calling geonames.org web service for records that have already been computed.
+        The second step computes place name, country code and timezone offset.
+        <br>It can be stopped and started again without re-calling geonames.org web service for records that have already been computed.
         <br>This is done running :
         <pre>php run-gauquelin5.php D6 computeGeo</pre>
         For each record, the program loads the csv file, looks at the first record missing geo information, calls the web service, computes the informations and writes again the csv file on disk.
     </li>
 </ul>
 
+Restoration process worked for all records except for <code>356 Ruiz Bernardo</code>. This records was completed manually after execution.
+
 
 <!-- ********************************************************************************* -->
 <h2>Small errors</h2>
 
 <ul class="spaced">
-    <li>Notice of page <code>902gdD6.html</code> says the file contains 450 persons, but it contains in fact 449 (NUM 234 is missing).</li>
+    <li>
+        Notice of page <code>902gdD6.html</code> says the file contains 450 persons, but it contains in fact 449 (NUM 234 is missing).
+    </li>
+    
+    <li>
+        For record <code>356 Ruiz Bernardo</code>, a check on <a href="https://en.wikipedia.org/wiki/Bernardo_Ruiz">wikipedia</a> shows that he is born in Orihuela, ES, which shows that there is an error inura file (latitude should be <code>38N05</code> instead of <code>36N05</code>).
+    </li>
+    
+    <li>
+        Once geographical restoration is done, it's possible to check the longitudes and latitudes of cura file.
+        <br>This shows that the coordinates are expressed by removing the seconds, and not rounded to the nearest minute, which generates a loss of precision. For example, latitude of <code>356 Ruiz Bernardo</code> is <code>00W56</code> and the real value is <code>0°56'49''</code>.
+    </li>
 </ul>
+
 
 </article>
 </div><!-- end class="main" -->
