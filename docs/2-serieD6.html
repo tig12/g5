@@ -66,7 +66,7 @@ Restoration process worked for all records except for <code>356 Ruiz Bernardo</c
     </li>
     
     <li>
-        For record <code>356 Ruiz Bernardo</code>, a check on <a href="https://en.wikipedia.org/wiki/Bernardo_Ruiz">wikipedia</a> shows that he is born in Orihuela, ES, which shows that there is an error inura file (latitude should be <code>38N05</code> instead of <code>36N05</code>).
+        For record <code>356 Ruiz Bernardo</code>, a check on <a href="https://en.wikipedia.org/wiki/Bernardo_Ruiz">wikipedia</a> shows that he is born in Orihuela, ES, which shows that there is an error in cura file (latitude should be <code>38N05</code> instead of <code>36N05</code>).
     </li>
     
     <li>
@@ -74,6 +74,27 @@ Restoration process worked for all records except for <code>356 Ruiz Bernardo</c
         <br>This shows that the coordinates are expressed by removing the seconds, and not rounded to the nearest minute, which generates a loss of precision. For example, latitude of <code>356 Ruiz Bernardo</code> is <code>00W56</code> and the real value is <code>0°56'49''</code>.
     </li>
 </ul>
+
+
+<!-- ********************************************************************************* -->
+<h2>Tests</h2>
+<div class="flex-wrap">
+<pre>
+Felice GIMONDI, born 29 SEP 1942, 18:10, in Sedrina (It)
+Luis OCAÑA, born 9 JUN 1945, 21:30, in Priego (Sp)
+Bernard THEVENET, born 10 JAN 1948, 12:00, in St Julien de Civry (Fr)
+Lucien VAN IMPE, born 20 OCT 1946, 4:30, in Mere (Bel)
+Joop (Gerardus) ZOETEMELK, born 3 DEC 1946, 17:15, in The Hague (Ne)
+</pre>
+<pre>
+179;Gimondi Felice;1942-09-29 18:10+02:00;Bergamo;IT;3182164;9.66667;45.7
+310;Ocana Luis;1945-06-09 21:30+02:00;Priego;ES;3112841;-2.31667;40.43333
+397;Thevenet Bernard;1948-01-10 12:00+02:00;Changy;FR;3026931;4.23333;46.43333
+403;Van Impe Lucien;1946-10-20 04:30+02:00;Cauwenberg;BE;2800617;3.96667;50.91667
+432;Zoetemelk Gerardus;1946-12-03 17:15+02:00;Bomen- en Bloemenbuurt;NL;11525080;4.26667;52.08333
+</pre>
+</div><!-- end class="flex-wrap" -->
+
 
 
 </article>
