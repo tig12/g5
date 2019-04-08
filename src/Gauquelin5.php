@@ -62,31 +62,31 @@ class Gauquelin5{
         Association serie name => available actions for this serie
     **/
     const SERIES_ACTIONS = [
-        'A'=> ['raw2exported'],
-        'A1'=> ['raw2exported'],
-        'A2'=> ['raw2exported'],
-        'A3'=> ['raw2exported'],
-        'A4'=> ['raw2exported'],
-        'A5'=> ['raw2exported'],
-        'A6'=> ['raw2exported'],
+        'A'=> ['raw2csv', 'generateCorrected'],
+        'A1'=> ['raw2csv', 'generateCorrected'],
+        'A2'=> ['raw2csv', 'generateCorrected'],
+        'A3'=> ['raw2csv', 'generateCorrected'],
+        'A4'=> ['raw2csv', 'generateCorrected'],
+        'A5'=> ['raw2csv', 'generateCorrected'],
+        'A6'=> ['raw2csv', 'generateCorrected'],
         //
-        '1955'=> ['marked21955', 'corrected2final'],
+        '1955'=> ['marked2generated', 'generateOriginal', 'generateCorrected'],
         //
-        'B'=> ['raw2exported'],
-        'B1'=> ['raw2exported'],
-        'B2'=> ['raw2exported'],
-        'B3'=> ['raw2exported'],
-        'B4'=> ['raw2exported'],
-        'B5'=> ['raw2exported'],
-        'B6'=> ['raw2exported'],
+        'B'=> [],
+        'B1'=> [],
+        'B2'=> [],
+        'B3'=> [],
+        'B4'=> [],
+        'B5'=> [],
+        'B6'=> [],
         //
-        'D6'=> ['raw2exported', 'computeGeo'],
+        'D6'=> ['raw2csv', 'computeGeo', 'generateCorrected'],
         'D9a'=> [],
         'D9b'=> [],
         'D9c'=> [],
-        'D10'=> ['raw2exported'],
+        'D10'=> ['raw2csv', 'generateCorrected'],
         //
-        'E1'=> ['raw2exported'],
+        'E1'=> ['raw2csv', 'generateCorrected'],
         //
         'E2'=> [],
         'E2a'=> [],                                                                       
@@ -97,7 +97,7 @@ class Gauquelin5{
         'E2f'=> [],
         'E2g'=> [],
         //
-        'E3'=> ['raw2exported'],
+        'E3'=> ['raw2csv', 'generateCorrected'],
         //
         'F1'=> [],
         'F2'=> [],

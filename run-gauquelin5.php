@@ -27,7 +27,7 @@ with :
     <serie> = '{$series_str}'
     <action> depends on serie
 Examples :
-    php {$argv[0]} A2 raw2exported       # will convert file 1-cura-raw/902gdA2.html to 2-cura-exported/A2.csv
+    php {$argv[0]} A2 raw2csv       # will convert file 1-cura-raw/902gdA2.html to 2-cura-csv/A2.csv
 Notes :
     - if serie = A, will compute series A1 to A6
     - if serie = B, will compute series B1 to B6

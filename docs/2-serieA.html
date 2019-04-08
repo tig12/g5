@@ -37,9 +37,9 @@ This page describes the corrections done on files of serie A while converting ht
 <article>
 
 To convert file A1, run :
-<pre>php run-gauquelin5.php A1 raw2exported</pre>
+<pre>php run-gauquelin5.php A1 raw2csv</pre>
 To convert all files, from A1 to A6, run :
-<pre>php run-gauquelin5.php A raw2exported</pre>
+<pre>php run-gauquelin5.php A raw2csv</pre>
 
 The code that performs this step is located in <code>src/SerieA.php</code>
 
@@ -97,7 +97,7 @@ The program must merge the two lists. Unfortunately, these 2 lists don't share a
     <li>Execute again.</li>
 </ul>
 
-<br>To print or not the full list of ambiguous cases, <code>raw2exported - report</code> setting can be changed in <code>config.yml</code>.
+<br>To print or not the full list of ambiguous cases, <code>raw2csv - report</code> setting can be changed in <code>config.yml</code>.
 
 <br>
 <br>For the cases that could not be solved, a name like "Gauquelin-A1-1352" was built, using file name and NUM field.
@@ -197,25 +197,12 @@ The program must merge the two lists. Unfortunately, these 2 lists don't share a
         <a href="3-mark.html">3 - Mark data</a>
     </li>
     <li>
-        <a href="4-corrections-g55.html">4 - Corrections from G1955</a>
+        <a href="4-1955-corrections.html">4 - Corrections from G1955</a>
     </li>
     <li>
-        9 - Results
-        <ul>
-            <li><a href="9-gauquelin-orig.html">G 1955 original</a></li>
-            <li><a href="9-gauquelin-corr.html">G 1955 corrected</a></li>
-            <li>
-                <a href="9-cura-corr.html">Cura corrected</a>
-                <div class="padding-left">
-                    <a href="9-cura-corr.html#serie-a">A</a>
-                    <a href="9-cura-corr.html#serie-d6">D6</a>
-                    <a href="9-cura-corr.html#serie-d10">D10</a>
-                    <a href="9-cura-corr.html#serie-e1-e3">E1 E3</a>
-                </div>
-            </li>
-        </ul>
-    <li class="bold"><a href="https://larzac.info/gauquelin5">Download results</a></li>
+        <a href="9-results.html">9 - Results</a>
     </li>
+    <li class="bold"><a href="https://larzac.info/gauquelin5">Download results</a></li>
     <li><a href="geonames.html">Geonames.org</a></li>
     <li><a href="questions.html">Questions</a></li>
     <li class="bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>

@@ -349,7 +349,7 @@ class SerieA{
     // *****************************************
     /** 
         Parses one html cura file of serie A (locally stored in directory 1-cura-raw/)
-        and stores it in a csv file (in directory 2-cura-exported/)
+        and stores it in a csv file (in directory 2-cura-csv/)
         
         Merges the original list (without names) with names contained in file 902gdN.html
         So merge is done using birthdate.
@@ -359,7 +359,7 @@ class SerieA{
         @return report
         @throws Exception if unable to parse
     **/
-    public static function raw2exported($serie){
+    public static function raw2csv($serie){
         $report =  "--- Importing serie $serie\n";
         $raw = Gauquelin5::readHtmlFile($serie);
         $file_serie = Gauquelin5::serie2filename($serie);
@@ -501,7 +501,7 @@ class SerieA{
         //
         // report
         //
-        $report_type = Config::$data['raw2exported']['report'][$serie];
+        $report_type = Config::$data['raw2csv']['report'][$serie];
         $n_correction_1955 = isset(self::CORRECTIONS_1955[$serie]) ? count(self::CORRECTIONS_1955[$serie]) : 0;
         $n_bad = $n1 + $n2 + $n3 - $n_ok_fix - $n1_fix - $n2_fix;
         $n_good = $n_ok + $n_ok_fix + $n1_fix + $n2_fix;
@@ -563,7 +563,7 @@ class SerieA{
             $csv .= implode(Gauquelin5::CSV_SEP, $new) . "\n";
             $nb_stored ++;
         }
-        $csvfile = Config::$data['dirs']['2-cura-exported'] . DS . $serie . '.csv';
+        $csvfile = Config::$data['dirs']['2-cura-csv'] . DS . $serie . '.csv';
         file_put_contents($csvfile, $csv);
         $report .= "Stored result in $csvfile\n";
         return $report;
@@ -572,7 +572,7 @@ class SerieA{
     
     // ******************************************************
     /**
-        Auxiliary of raw2exported()
+        Auxiliary of raw2csv()
         @return [$n_ok_fix, $n1_fix, $n2_fix]
     **/
     private static function corrections1955(&$res, &$missing_in_names, &$doublons_same_nb, $serie, $file_serie, $file_names){
@@ -662,7 +662,7 @@ class SerieA{
         Computes precise profession when possible
         First compute not-detailed profession from $pro
         Then computes precise profession from $num, if possible
-        Auxiliary of raw2exported()
+        Auxiliary of raw2csv()
     **/
     private static function compute_profession($serie, $pro, $num){
         $res = self::PROFESSIONS_NO_DETAILS[$serie][$pro];
@@ -683,7 +683,7 @@ class SerieA{
     // ******************************************************
     /** 
         Computes missing names
-        Auxiliary of raw2exported()
+        Auxiliary of raw2csv()
     **/
     private static function compute_name($serie, $num){
         return "Gauquelin-$serie-$num";
@@ -693,7 +693,7 @@ class SerieA{
     // ******************************************************
     /** 
         Computes the ISO 3166 country code from fields COU and COD of cura files
-        Auxiliary of raw2exported()
+        Auxiliary of raw2csv()
     **/
     private static function compute_country($COU, $COD){
         $COU = self::COUNTRIES[$COU];

@@ -30,69 +30,67 @@
 <header>
 <h1>Summary chart</h1>
 <div class="intro">
-    This page details the actions that permit to reconstruct original 1955 Gauquelin groups from data retrieved from <a href="http://cura.free.fr/gauq/17archg.html">cura.free.fr</a>.
-    <br>The process is documented using the reconstitution of the group "570 sportifs".
+    This page summarizes the transformations done on files. The process is illustrated using the reconstitution of the group "570 sportifs" from file A1.
+    <br>The particularity of this process is that it mixes transformations done by programs and by humans.
 </div>
 </header>
 
 <article>
+
+For the program's point of view, things are quite basic : it just takes file(s) in input, operates computations, and generates other files. The program doesn't have the notions of data source, intermediate files, downloadable files. This knowledge is folded in the structure of directory <code>data/</code>.
+<br>To organize this directory, these rules were adopted :
+<ul class="simple spaced margin-top">
+    <li>Each transformation goes from one directory to an other ; different states of a file are not mixed in a single directory.</li>
+    <li>
+        Very important : <b>Never ever generate a file in a directory containing files edited by humans</b>.
+        <br>This permits to avoid accidental destruction of human corrections. When a generated file needs to be edited, it must be copied by a human in a directory containing only edited files.
+    </li>
+    <li>
+        In edited files, only use the edited fields. For example, to generate data in <code>9-1955-corrected</code>, step <code>edited2corrected()</code> takes the  fields that were not modified in <code>5-1955-edited</code> from <code>2-cura-csv</code>.
+        <br>This permits to have new versions of generated files without needing to update the edited files to integrate the updates.
+        <br>Files edited by human are copied once for all, and not modified anymore by a program.
+    </li>
+</ul>
+
 The following diagram illustrates this process :
 
-<img class="border margin" src="img/serie-A1-sequence.jpg" alt="" />
-    
+<img class="border margin padding" src="img/serie-A1-sequence.jpg" alt="Transformations of files, from A1 to G55 original and corrected">
+
 
 <ol class="margin-top spaced">
     <li>
         <b>Store cura.free.fr data on a local machine</b>
-        <br>See page <a href="1-cura-data.html">1 - Cura data</a>.
+        <br>See <a href="1-cura-data.html">1 - Cura data</a>.
     </li>
                                                                                                                                                 
     <li>
         <b>Extract data from html pages to generate csv files</b>.
         <br>This step also applies corrections.
-        <br>See page <a href="2.cura2csv.html">2 - Cura to csv</a>
+        <br>See <a href="2.cura2csv.html">2 - Cura to csv</a>
     </li>
     
     <li>
         <b>Edit the csv files to associate cura data to Gauquelin 1955 original groups</b>.
-        <br>File <code>2-cura-exported/A1.csv</code> is copied by a human to <code>3-cura-marked/A1.csv</code>.
-        <br>A new column ("1955") is added to this file ; this column is filled by a human with a code identifying Gauquelin 1955 groups.
-        <br>Lines coming from the group "570 sportifs" were marked "570SPO" (list of abbreviations used can be found in <code>src/Serie1955.php</code>).
+        <br>File <code>2-cura-csv/A1.csv</code> is copied by a human to <code>3-cura-marked/A1.csv</code>.
+        <br>This file id edited ; see <a href="3-mark.html">3 - Mark data</a>.
     </li>
     
     <li>
         <b>Generate one file per original 1955 group</b> (by program).
-        <br>Column "1955" of csv files located in <code>3-cura-marked/</code> is used to generate one file per 1955 group.
-        <br>These files are generated in <code>4-1955-generated/</code> using the command <code>php run-gauquelin5 1955 modified21955</code>
-        <br>This generates for example <code>4-1955-generated/570SPO.csv</code>
     </li>
     
     <li>
-        <b>Copy these files to directory <code>5-1955-cura-corrected/</code></b> (by human).
+        <b>Copy these files to directory <code>5-1955-edited/</code></b> (by human).
     </li>
     
     <li>
-        <b>Correct the files located in <code>5-1955-cura-corrected/</code></b> (by human).
-        <br>Files in this directory are corrected by human.
-        <br>The following columns are added : <code>GIVEN_C; FAMILY_C; HOUR_C; DATE_C; PLACE_C; NOTES_C; PRO_C</code> (suffix <code>_C</code> stands for "corrected").
-        <br>Corrections come from two sources :
-        <ul>
-            <li>
-                Comparison between cura data and original 1955 book.
-                <br>This leads to corrections on names, birth places, professions.
-                <br><b>In particular, legal birth times are restored</b> ; cura data contain times 
-            </li>
-            <li>
-                Matching geonames.org
-            </li>
-        </ul>
-        <br>They are filled when cura data differ from Gauquelin book.
-        <br>This step is easier when 2 persons are involved : one reading the book, the other correcting the file.
+        <b>Correct the files located in <code>5-1955-edited/</code></b> (by human).
+        <br>See <a href="4-corrections-G55.html">4 - Corrections from Gauquelin 1955</a>
     </li>
     
     <li>
-        <b>Generate 1955 groups</b> (by program)
-        <br>
+        <b>Generate downloadable file</b> (by program)
+        <br>See <a href="9-results.html">9 - results</a>
     </li>
     
 </ol>
@@ -125,25 +123,12 @@ The following diagram illustrates this process :
         <a href="3-mark.html">3 - Mark data</a>
     </li>
     <li>
-        <a href="4-corrections-g55.html">4 - Corrections from G1955</a>
+        <a href="4-1955-corrections.html">4 - Corrections from G1955</a>
     </li>
     <li>
-        9 - Results
-        <ul>
-            <li><a href="9-gauquelin-orig.html">G 1955 original</a></li>
-            <li><a href="9-gauquelin-corr.html">G 1955 corrected</a></li>
-            <li>
-                <a href="9-cura-corr.html">Cura corrected</a>
-                <div class="padding-left">
-                    <a href="9-cura-corr.html#serie-a">A</a>
-                    <a href="9-cura-corr.html#serie-d6">D6</a>
-                    <a href="9-cura-corr.html#serie-d10">D10</a>
-                    <a href="9-cura-corr.html#serie-e1-e3">E1 E3</a>
-                </div>
-            </li>
-        </ul>
-    <li class="bold"><a href="https://larzac.info/gauquelin5">Download results</a></li>
+        <a href="9-results.html">9 - Results</a>
     </li>
+    <li class="bold"><a href="https://larzac.info/gauquelin5">Download results</a></li>
     <li><a href="geonames.html">Geonames.org</a></li>
     <li><a href="questions.html">Questions</a></li>
     <li class="bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>

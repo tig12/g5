@@ -24,7 +24,7 @@
 <nav class="prevnext">
     <a class="top" href="index.html">&uarr;</a>
     <a class="prev" rel="prev" href="2-serieD10.html">&larr;</a>
-    <a class="next" rel="next" href=".html">&rarr;</a>
+    <a class="next" rel="next" href="3-mark.html">&rarr;</a>
 </nav>
 
 <header>
@@ -40,11 +40,11 @@ Files <code>902gdE1.html</code> and <code>902gdE3.html</code> share the same for
 <br>
 <br>To perform the transformations, run :
 <pre>
-php run-gauquelin5.php E1 raw2exported
-php run-gauquelin5.php E3 raw2exported
+php run-gauquelin5.php E1 raw2csv
+php run-gauquelin5.php E3 raw2csv
 </pre>
 
-The output of the program can be tweaked using settings in <code>config.yml</code> ; see section <code>raw2exported - report</code> for full documentation.
+The output of the program can be tweaked using settings in <code>config.yml</code> ; see section <code>raw2csv - report</code> for full documentation.
 
 <!-- 
 Check the meaning of birth time in file E1 and E3
@@ -67,7 +67,7 @@ The main problem of files E1 and E3 is that the timezone offset is not given. It
 <br>
 <br>This gives partial results :
 
-<pre>php run-gauquelin5.php E1 raw2exported</pre>
+<pre>php run-gauquelin5.php E1 raw2csv</pre>
 <pre>
 Importing E1
 2153 lines parsed
@@ -76,7 +76,7 @@ Importing E1
 1540 persons stored precisely (71.53 %)
 </pre>
 
-<pre>php run-gauquelin5.php E3 raw2exported</pre>
+<pre>php run-gauquelin5.php E3 raw2csv</pre>
 <pre>
 Importing E3
 1539 lines parsed
@@ -218,25 +218,12 @@ Cura files contain several typos.
         <a href="3-mark.html">3 - Mark data</a>
     </li>
     <li>
-        <a href="4-corrections-g55.html">4 - Corrections from G1955</a>
+        <a href="4-1955-corrections.html">4 - Corrections from G1955</a>
     </li>
     <li>
-        9 - Results
-        <ul>
-            <li><a href="9-gauquelin-orig.html">G 1955 original</a></li>
-            <li><a href="9-gauquelin-corr.html">G 1955 corrected</a></li>
-            <li>
-                <a href="9-cura-corr.html">Cura corrected</a>
-                <div class="padding-left">
-                    <a href="9-cura-corr.html#serie-a">A</a>
-                    <a href="9-cura-corr.html#serie-d6">D6</a>
-                    <a href="9-cura-corr.html#serie-d10">D10</a>
-                    <a href="9-cura-corr.html#serie-e1-e3">E1 E3</a>
-                </div>
-            </li>
-        </ul>
-    <li class="bold"><a href="https://larzac.info/gauquelin5">Download results</a></li>
+        <a href="9-results.html">9 - Results</a>
     </li>
+    <li class="bold"><a href="https://larzac.info/gauquelin5">Download results</a></li>
     <li><a href="geonames.html">Geonames.org</a></li>
     <li><a href="questions.html">Questions</a></li>
     <li class="bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>

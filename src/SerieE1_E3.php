@@ -53,12 +53,12 @@ class SerieE1_E3{
         @param  $serie Must be 'E1' or 'E3'
         @return report
     **/
-    public static function raw2exported($serie){
+    public static function raw2csv($serie){
         if($serie != 'E1' && $serie != 'E3'){
-            throw new Exception("SerieE1_E3::raw2exported() - Bad value for parameter \$serie : $serie ; must be 'E1' or 'E3'");
+            throw new Exception("SerieE1_E3::raw2csv() - Bad value for parameter \$serie : $serie ; must be 'E1' or 'E3'");
         }
         // config - todo : check validity of values put in config
-        $report_type = Config::$data['raw2exported']['report'][$serie]; // 'full', 'small', 'tz' or 'geo'
+        $report_type = Config::$data['raw2csv']['report'][$serie]; // 'full', 'small', 'tz' or 'geo'
         $do_report_geo = $do_report_tz = false;
         if($report_type == 'full' || $report_type == 'geo'){
             $do_report_geo = true;
@@ -210,7 +210,7 @@ class SerieE1_E3{
         foreach($res1 as $fields){
             $csv .= implode(Gauquelin5::CSV_SEP, $fields) . "\n";
         }
-        $csvfile = Config::$data['dirs']['2-cura-exported'] . DS . $serie . '.csv';
+        $csvfile = Config::$data['dirs']['2-cura-csv'] . DS . $serie . '.csv';
         file_put_contents($csvfile, $csv);
         return $report;
     }
@@ -328,6 +328,19 @@ class SerieE1_E3{
         ];
     }
     
+    
+    // ******************************************************
+    /**
+        Parses one file E1 or E3 and stores it in a csv file
+        The resulting csv file contains informations of the 2 lists
+        @param  $serie Must be 'E1' or 'E3'
+        @return report
+    **/
+    public static function generateCorrected($serie){
+        if($serie != 'E1' && $serie != 'E3'){
+            throw new Exception("SerieE1_E3::raw2csv() - Bad value for parameter \$serie : $serie ; must be 'E1' or 'E3'");
+        }
+    }
     
 }// end class    
 

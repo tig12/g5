@@ -38,9 +38,9 @@ class SerieD10{
         @return report
         @throws Exception if unable to parse
     **/
-    public static function raw2exported($serie){
+    public static function raw2csv($serie){
         if($serie != 'D10'){
-            throw new Exception("SerieD10::raw2exported() - Bad value for parameter \$serie : $serie ; must be 'D10'");
+            throw new Exception("SerieD10::raw2csv() - Bad value for parameter \$serie : $serie ; must be 'D10'");
         }
         $report =  "--- Importing serie $serie\n";
         $raw = Gauquelin5::readHtmlFile($serie);
@@ -174,7 +174,7 @@ class SerieD10{
             $csv .= implode(Gauquelin5::CSV_SEP, $new) . "\n";
             $nb_stored ++;
         }
-        $csvfile = Config::$data['dirs']['2-cura-exported'] . DS . $serie . '.csv';
+        $csvfile = Config::$data['dirs']['2-cura-csv'] . DS . $serie . '.csv';
         file_put_contents($csvfile, $csv);
         $report .= $nb_stored . " lines stored in $csvfile\n";
         return $report;

@@ -42,9 +42,9 @@ The code that performs this step is located in <code>src/SerieD6.php</code>
 
 <ul class="margin-top spaced">
     <li>
-        The first step copies and reformat the informations of <code>902gdD6.html</code> to a csv file in directory <code>2-cura-exported</code>.
+        The first step copies and reformat the informations of <code>902gdD6.html</code> to a csv file in directory <code>2-cura-csv</code>.
         <br>This is done running :
-        <pre>php run-gauquelin5.php D6 raw2exported</pre>
+        <pre>php run-gauquelin5.php D6 raw2csv</pre>
     </li>
     
     <li>
@@ -69,7 +69,7 @@ The code that performs this step is located in <code>src/SerieD6.php</code>
     
     <li>
         For record <code>356 Ruiz Bernardo</code>, a check on <a href="https://en.wikipedia.org/wiki/Bernardo_Ruiz">wikipedia</a> shows that he is born in Orihuela, ES, which shows that there is an error in cura file (latitude should be <code>38N05</code> instead of <code>36N05</code>).
-        <br>This was corrected manually in the resuting file. The correction was added to step <code>raw2exported()</code> in order to take it into account in case of a new execution.
+        <br>This was corrected manually in the resuting file. The correction was added to step <code>raw2csv()</code> in order to take it into account in case of a new execution.
     </li>
     
     <!-- 
@@ -211,25 +211,12 @@ But this process has the interest to restore the country, giving the ability to 
         <a href="3-mark.html">3 - Mark data</a>
     </li>
     <li>
-        <a href="4-corrections-g55.html">4 - Corrections from G1955</a>
+        <a href="4-1955-corrections.html">4 - Corrections from G1955</a>
     </li>
     <li>
-        9 - Results
-        <ul>
-            <li><a href="9-gauquelin-orig.html">G 1955 original</a></li>
-            <li><a href="9-gauquelin-corr.html">G 1955 corrected</a></li>
-            <li>
-                <a href="9-cura-corr.html">Cura corrected</a>
-                <div class="padding-left">
-                    <a href="9-cura-corr.html#serie-a">A</a>
-                    <a href="9-cura-corr.html#serie-d6">D6</a>
-                    <a href="9-cura-corr.html#serie-d10">D10</a>
-                    <a href="9-cura-corr.html#serie-e1-e3">E1 E3</a>
-                </div>
-            </li>
-        </ul>
-    <li class="bold"><a href="https://larzac.info/gauquelin5">Download results</a></li>
+        <a href="9-results.html">9 - Results</a>
     </li>
+    <li class="bold"><a href="https://larzac.info/gauquelin5">Download results</a></li>
     <li><a href="geonames.html">Geonames.org</a></li>
     <li><a href="questions.html">Questions</a></li>
     <li class="bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>
