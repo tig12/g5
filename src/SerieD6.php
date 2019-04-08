@@ -11,23 +11,6 @@ namespace gauquelin5;
 use gauquelin5\Gauquelin5;
 use gauquelin5\init\Config;
 
-/* 
-Orihuela ES
-356 Ruiz Bernardo
-Array
-(
-    [result] => Array
-        (
-            [name] => Falcon
-            [geoid] => 2496813
-            [country] => DZ
-        )
-
-    [error] => Unable to compute timezone
-)
-*/
-
-
 class SerieD6{
     
         /** Fields in the resulting csv **/
@@ -58,6 +41,11 @@ class SerieD6{
         }
         $report =  "--- Importing serie $serie\n";
         $raw = Gauquelin5::readHtmlFile($serie);
+        // Fix an error on a latitude in cura file
+        $raw = str_replace(
+            '356	8	1	1925	11	0	0	36N05	00W56	Ruiz Bernardo',
+            '356	8	1	1925	11	0	0	38N05	00W56	Ruiz Bernardo',
+            $raw);
         $file_serie = Gauquelin5::serie2filename($serie);
         preg_match('#<pre>.*?(NUM.*?NAME)\s*(.*?)\s*</pre>#sm', $raw, $m);
         if(count($m) != 3){
