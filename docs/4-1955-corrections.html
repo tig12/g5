@@ -29,11 +29,63 @@
 
 <header>
 <h1>1955 corrections</h1>
-<div class="intro"></div>
+<div class="intro">
+This step is time-consuming : for each record of the original groups, compare the values of fields with values of cura data and note the original values when they differ.
+<br>This step is illustrated with the restoration of group "570 sportifs" from file A1.
+</div>
 </header>
 
 <article>
+
+<!-- ********************************************************************************* -->
+<h2>Prepare edited files</h2>
+
+Once the records of the original groups have been identified in <a href="3-mark.html">previous step</a>, the first thing to do is to generate the files which will be edited by humans. This is a two-step process :
+
+<ol class="spaced margin-top">
+    <li>
+        Generate files containing only the records of the original groups.
+        <br>This is done with command
+        <pre>php run-gauquelin5.php 1955 marked2generated</pre>
+        This will extract information from files in <code>3-cura-marked/</code> to generate files in <code>4-1955-generated/</code>.
+        <br>In <code>config.yml</code>, the setting <code>1955 - sort</code> permits to specify which field is used to sort the generated file (obtaining a file as convenient as possible for human edition is important).
+    </li>
+    
+    <li>
+        To avoid accidental erasure of human modification, the files of <code>4-1955-generated/</code> must be copied to <code>5-1955-edited/</code>
+        <br>For example :
+        <pre>cp data/4-1955-generated/570SPO.csv data/5-1955-edited/</pre>
+    </li>
+</ol>
+
+At this stage, the file hierarchy looks like that :
+<pre>
+data
+    ├── 1-cura-raw
+    ├── 2-cura-csv
+    ├── 3-cura-marked
+    │   ├── A1.csv
+    │   └── A2.csv
+    ├── 4-1955-generated
+    │   ├── 349SCI.csv
+    │   ├── 508MED.csv
+    │   ├── 570SPO.csv
+    │   └── 576MED.csv
+    ├── <b>5-1955-edited</b>
+    │   └── <b>570SPO.csv</b>
+    ├── 9-1955-final
+    └── 9-cura-final
+</pre>
+
+
+<!-- ********************************************************************************* -->
+<h2>Human corrections</h2>
+
+
+
 </article>
+
+
 </div><!-- end class="main" -->
 
 

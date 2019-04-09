@@ -29,10 +29,30 @@
 
 <header>
 <h1>Mark data</h1>
-<div class="intro"></div>
+<div class="intro">
+The purpose of this step is to associate records of cura files to historical groups. This implies human modifications of files.
+</div>
 </header>
 
 <article>
+This step comes after the generation of cura files located in <code>2-cura-csv</code>.
+<br>The first thing to do is to copy the files that need to be marked in <code>3-cura-marked</code>.
+<br>
+<br>For example :
+<pre>cp data/2-cura-csv/A1.csv data/3-cura-marked/</pre>
+The human edition will be done on file <code>data/3-cura-marked/A1.csv</code>
+
+<!-- ********************************************************************************* -->
+<h2>Edition</h2>
+In the edited file, a new column "<code>1955</code>" is added.
+<br>In this column a human fills the <i>group codes</i>.
+<br>Group codes are listed in file <code>share/groups-1955.csv</code> ; they are also in constant <code>GROUPS_1955</code> of class <code>src/Serie1955.php</code>.
+<br>
+<br>The human edition consists in looking in the original lists, and for each record, put the group code in column 1955.
+<br>The edition looks like that :
+<img class="border margin" src="img/3-mark.jpg" alt="Edition of A1.csv to mark 1955 groups">
+
+This step only concerns identification of the records. Restoration of the original data will be done in <a href="4-1955-corrections.html">next step</a>.
 </article>
 </div><!-- end class="main" -->
 
