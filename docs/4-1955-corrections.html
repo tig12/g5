@@ -81,7 +81,54 @@ data
 <!-- ********************************************************************************* -->
 <h2>Human corrections</h2>
 
+This is the long part of the work : note the differences between Gauquelin 1955 book and cura data.
+<br>Once a file has been copied to <code>5-1955-edited/</code>, columns where the corrections will be written are manually added.
+<br>These column are named with a prefix <code>C_</code> (C for Correction).
+<ul>
+    <li><b>GIVEN_C</b> : Given name</li>
+    <li><b>FAMILY_C</b> : Family name</li>
+    <li><b>HOUR_C</b> : Hour HH:MM</li>
+    <li><b>DAY_C</b> : Day YYYY-MM-DD</li>
+    <li><b>PLACE_C</b> : Name of place (Exact spelling of geonames.org)</li>
+    <li><b>COD_C</b> : COD in cura vocabulary = ADM2 in geonames = département for France</li>
+    <li><b>COU_C</b> : ISO 3166 country code</li>
+    <li><b>PRO_C</b> : Profession code</li>
+    <li><b>NOTES_C</b> : Free notes</li>
+</ul>
+The column are filled only when the values read in the book differ from the values retrieved from cura file.
+<br>This step is easier when two persons work together : one reads the book, the other writes the corrections
+<br>
+<br>Some records were present in Gauquelin book and not in cura file ; in this case, the field <code>ORIGIN</code> is noted <code>G55</code>.
 
+
+<!-- ********************************************************************************* -->
+<h2>Generate results</h2>
+
+These edited files are used to generate files in three directories :
+
+<ul class = "spaced margin top">
+    <li>
+        <div class="bold">9-1955-original</div>
+        If a field has a corrected value, it will be retained.
+        <br>The not-corrected fields will be taken from corresponding cura file in directory <code>2-cura-csv</code>. 
+        <br>Generation done with the command
+        <pre>php run-gauquelin5.php 1955 generateOriginal</pre>
+    </li>
+    <li>
+        <div class="bold">9-1955-corrected</div>
+        Same as generation of <code>9-1955-original</code>, but the corrected values of <code>DAY_C</code> and <code>HOUR_C</code> are ignored.
+        <br>This is done under the hypothesis that cura data contain less errors than Gauquelin 1955 book.
+        <br>This hypothesis must be checked with careful tests
+        <br>Generation done with the command
+        <pre>php run-gauquelin5.php 1955 generateCorrected</pre>
+    </li>
+    <li>
+        <div class="bold">9-cura-corrected</div>
+        Same as generation of <code>9-1955-corrected</code>, but for all the records of files located in <code>2-cura-csv</code>.
+        <br>Generation done with the command
+        <pre>php run-gauquelin5.php A1 generateCorrected</pre>
+    </li>
+</ul>
 
 </article>
 
@@ -120,7 +167,7 @@ data
     </li>
     <li class="bold"><a href="https://larzac.info/gauquelin5">Download results</a></li>
     <li><a href="geonames.html">Geonames.org</a></li>
-    <li><a href="questions.html">Questions</a></li>
+    <!-- <li><a href="questions.html">Questions</a></li> -->
     <li class="bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>
 </ul>
 </aside>

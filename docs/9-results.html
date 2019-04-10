@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title> | Gauquelin5</title>
+    <title>Results | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="Recapitulation of the characteristics of downloadable files produced by gauquelin5">
     <meta name="robots" content="index,follow">
@@ -31,10 +31,64 @@
 
 <header>
 <h1>Results</h1>
-<div class="intro"></div>
+<div class="intro">
+Here is a description of the characteristics of <a href="https://larzac.info/gauquelin5/">the downloadable files</a>
+</div>
 </header>
 
 <article>
+
+Downloadable files are currently in an intermediate state : some corrections are correctly integrated, but some corrections are missing, and many characteristics should be carefully checked before considering them as ready for a reliable use.
+<br>
+<br>Most files are the result of step "2 - cura to csv", except for file A1, which integrates the corrections done during the restoration of 1955 group "570 sportifs"
+<br>
+<br>This page lists the things than need to be bettered, and does not list the things that are already done (date formatting etc.).
+
+<!-- ********************************************************************************* -->
+<h2>Serie A</h2>
+Notable advances can still be done :
+<ul class="simple">
+    <li>
+        Use reverse geocoding to compute timezone offset and restore original birth time, as written in the birth certificate.
+    </li>
+    <li>
+        Compute given name and family name for many records that contain only two strings separated by a whitespace.
+    </li>
+</ul>
+
+<br>
+
+
+<!-- ********************************************************************************* -->
+<h2>File D6</h2>
+<ul class="simple">
+    <li>
+        Restoration of birth cities with reverse geocoding is not satisfying due to the lack of precision of longitudes and latitudes.
+    </li>
+</ul>
+
+
+<!-- ********************************************************************************* -->
+<h2>File D10</h2>
+<ul class="simple">
+    <li>
+        Association of birth cities to geonames.org id needs to be done. Maybe possible by program as birth cities are given. This is a bit problematic because cura file contains approximate spelling of city names, but use of approximate string matching (like Levenstein) may be feasible.
+    </li>
+</ul>
+
+
+<!-- ********************************************************************************* -->
+<h2>Files E1 E3</h2>
+<ul class="simple">
+    <li>
+        Misses association of birth cities to geonames.org id needs to be done. The problem is similar to D10.
+    </li>
+    <li>
+        Precise given and family names can be tried even for strings that contain more than one whitespace, using the fact that given names are uppercased in cura file.
+    </li>
+</ul>
+
+
 </article>
 </div><!-- end class="main" -->
 
@@ -70,7 +124,7 @@
     </li>
     <li class="bold"><a href="https://larzac.info/gauquelin5">Download results</a></li>
     <li><a href="geonames.html">Geonames.org</a></li>
-    <li><a href="questions.html">Questions</a></li>
+    <!-- <li><a href="questions.html">Questions</a></li> -->
     <li class="bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>
 </ul>
 </aside>

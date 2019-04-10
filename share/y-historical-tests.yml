@@ -9,7 +9,12 @@ sources:
   TME:
     name: The tenacious Mars Effect
     author: Ertel
+    date: 1996
 
+  ME:
+    name: The Mars Effect
+    author: Benski & al.
+    date: 1996
 events:
   
 #####################################################
@@ -17,7 +22,7 @@ events:
 #####################################################
   -
     date: '1955'
-    title: Gauquelin first publication
+    title: Gauquelin 1950
     author: Michel Gauquelin
     N: 
     sources:
@@ -94,6 +99,17 @@ events:
     
   -
     date: '1976'
+    title: Compité Para
+    authors: 
+    N: 535
+    publication: 
+    sources:
+      - ME p 7
+    comment: |
+      Sport champions
+    
+  -
+    date: '1976'
     title: Gauquelin Character traits
     authors: Michel Gauquelin, Françoise Gauquelin
     N: 52309
@@ -146,17 +162,20 @@ events:
     comment: |
     
   -
-    date: '1980'
-    title: CSICOP
-    authors: 
-    N: 409
-    source: 
+    date: '1979'
+    title: 
+    authors: CSICOP
+    N: 408
+    sources:
+      - ME p 8
     comment: |
+      N = 408 or 409 ?
     
   -
-    date: '1990'
+    date: '1996'
     title: CFEPP
-    authors: 
+    authors: Benski et al.
+    N: 1066
     source: 
     comment: |
     
