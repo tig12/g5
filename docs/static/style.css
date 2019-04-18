@@ -26,7 +26,7 @@ pre{
 }
 pre.normal{background:none;}
 code.color{background:lightgrey;}
-.pre{white-space:pre;}
+.pre{white-space:pre-wrap;}
 
 img{display: block; background:white;}
 
