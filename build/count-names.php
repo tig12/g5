@@ -2,7 +2,10 @@
 /** 
     Count the names present in 902gdN.html
     
-    Used to decide if the names should be taken from this file or from *y.html files
+    Usage : run from gauquelin5 root directory :
+    php build/count-names.php
+    
+    Used to decide if the names should be taken from each file or from *y.html files
     
     @license    GPL
     @history    2017-04-27 11:16:42+02:00, Thierry Graff : creation
@@ -22,13 +25,14 @@ E1 : 2153
 E3 : 1539
 
 Decision : use 902gdN.html (contain the same nb of names as in *y.html files)
+because it permits to write only one parsing for all files.
 */
 
 define('DS', DIRECTORY_SEPARATOR);
 
-require_once '../src/init/init.php';
+require_once 'src/init/init.php';
 
-use gauquelin5\Names;
+use gauquelin5\model\cura\Names;
 
 try{
     $names = Names::parse();

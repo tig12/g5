@@ -9,7 +9,7 @@
     @license    GPL
     @history    2017-05-02 04:32:44+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace gauquelin5;
+namespace gauquelin5\model\cura;
 
 use gauquelin5\Gauquelin5;
 use gauquelin5\init\Config;
@@ -75,7 +75,7 @@ class SerieE1_E3{
         // parse first list (with birth date and place)
         //
         $res1 = [];
-        $raw = Gauquelin5::readHtmlFile($serie);
+        $raw = Cura::readHtmlFile($serie);
         preg_match('#<pre>\s*(NUM.*?COD)\s*(.*?)\s*</pre>#sm', $raw, $m);
         if(count($m) != 3){
             throw new \Exception($serie . " - Unable to parse $file - first list");

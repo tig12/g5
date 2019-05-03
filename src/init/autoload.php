@@ -1,7 +1,7 @@
 <?php
 
 /** 
-    PSR-4 autoload for namespace gauquelin5
+    PSR-4 autoload for namespace "gauquelin5"
     
     @history    2017-04-27 09:46:32+02:00, Thierry Graff : Creation 
 **/

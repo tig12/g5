@@ -3,17 +3,18 @@
     Importation of Gauquelin 5th edition.
     Code specific to series A.
     Matches first list and chronological order list
-    
+                                   
     This code uses file 902gdN.html to retrieve the names, but this could have been done using only 902gdA*y.html files
     (for example, 902gdA1y.html could have been used instead of using 902gdA1.html and 902gdN.html).
     
     @license    GPL
     @history    2017-04-27 10:53:23+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace gauquelin5;
+namespace gauquelin5\model\cura;
 
 use gauquelin5\Gauquelin5;
-use gauquelin5\Names;
+use gauquelin5\model\cura\Cura;
+use gauquelin5\model\cura\Names;
 use gauquelin5\init\Config;
 
 class SerieA{
@@ -348,7 +349,7 @@ class SerieA{
     
     // *****************************************
     /** 
-        Parses one html cura file of serie A (locally stored in directory 1-cura-raw/)
+        Parses one html cura file of serie A (locally stored in directory data/raw/cura.free.fr)
         and stores it in a csv file (in directory 2-cura-csv/)
         
         Merges the original list (without names) with names contained in file 902gdN.html
@@ -360,10 +361,10 @@ class SerieA{
         @throws Exception if unable to parse
     **/
     public static function raw2csv($serie){
-        $report =  "--- Importing serie $serie\n";
-        $raw = Gauquelin5::readHtmlFile($serie);
-        $file_serie = Gauquelin5::serie2filename($serie);
-        $file_names = Gauquelin5::serie2filename(Names::SERIE); // = 902gdN.html
+        $report =  "--- Importing serie $serie ---\n";
+        $raw = Cura::readHtmlFile($serie);
+        $file_serie = Cura::subject2filename($serie);
+        $file_names = Cura::subject2filename(Names::SERIE); // = 902gdN.html
         //
         // 1 - parse first list (without names) - store by birth date to prepare matching
         //
@@ -372,15 +373,15 @@ class SerieA{
         if(count($m) != 3){
             throw new \Exception("Unable to parse first list (without names) in " . $file_serie);
         }
-        $fieldnames1 = explode(Gauquelin5::HTML_SEP, $m[1]);
+        $fieldnames1 = explode(Cura::HTML_SEP, $m[1]);
         $lines1 = explode("\n", $m[2]);
         foreach($lines1 as $line1){
-            $fields = explode(Gauquelin5::HTML_SEP, $line1);
+            $fields = explode(Cura::HTML_SEP, $line1);
             $tmp = [];
             for($i=0; $i < count($fields); $i++){
                 $tmp[$fieldnames1[$i]] = $fields[$i]; // ex: $tmp['YEA'] = '1817'
             }
-            $day = Gauquelin5::computeDay($tmp);
+            $day = Cura::computeDay($tmp);
             if(!isset($res1[$day])){
                 $res1[$day] = [];
             }
@@ -547,8 +548,8 @@ class SerieA{
             $new['NAME'] = trim($cur['NAME']);
             $new['PRO'] = self::compute_profession($serie, $cur['PRO'], $new['NUM']);
             // date time
-            $day = Gauquelin5::computeDay($cur);
-            $hour = Gauquelin5::computeHHMMSS($cur);
+            $day = Cura::computeDay($cur);
+            $hour = Cura::computeHHMMSS($cur);
             $TZ = trim($cur['TZ']);
             if($TZ != 0 && $TZ != -1){
                 throw new \Exception("timezone not handled : $TZ");
@@ -558,8 +559,8 @@ class SerieA{
             // place
             $new['PLACE'] = trim($cur['CITY']);
             [$new['COU'], $new['COD']] = self::compute_country($cur['COU'], $cur['COD']);
-            $new['LG'] = Gauquelin5::computeLg($cur['LON']);
-            $new['LAT'] = Gauquelin5::computeLat($cur['LAT']);                             
+            $new['LG'] = Cura::computeLg($cur['LON']);
+            $new['LAT'] = Cura::computeLat($cur['LAT']);                             
             $csv .= implode(Gauquelin5::CSV_SEP, $new) . "\n";
             $nb_stored ++;
         }
@@ -692,7 +693,7 @@ class SerieA{
     
     // ******************************************************
     /** 
-        Computes the ISO 3166 country code from fields COU and COD of cura files
+        Computes the ISO 3166 country code from fields COU and COD of cura files.
         Auxiliary of raw2csv()
     **/
     private static function compute_country($COU, $COD){

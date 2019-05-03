@@ -6,7 +6,7 @@
     @license    GPL
     @history    2017-04-27 22:04:25+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace gauquelin5;
+namespace gauquelin5\model\cura;
 
 use gauquelin5\Gauquelin5;
 use gauquelin5\init\Config;
@@ -40,13 +40,13 @@ class SerieD6{
             throw new Exception("SerieD6::raw2csv() - Bad value for parameter \$serie : $serie ; must be 'D6'");
         }
         $report =  "--- Importing serie $serie\n";
-        $raw = Gauquelin5::readHtmlFile($serie);
+        $raw = Cura::readHtmlFile($serie);
         // Fix an error on a latitude in cura file
         $raw = str_replace(
             '356	8	1	1925	11	0	0	36N05	00W56	Ruiz Bernardo',
             '356	8	1	1925	11	0	0	38N05	00W56	Ruiz Bernardo',
             $raw);
-        $file_serie = Gauquelin5::serie2filename($serie);
+        $file_serie = Cura::subject2filename($serie);
         preg_match('#<pre>.*?(NUM.*?NAME)\s*(.*?)\s*</pre>#sm', $raw, $m);
         if(count($m) != 3){
             throw new \Exception("Unable to parse list in " . $file_serie);
@@ -60,14 +60,14 @@ class SerieD6{
             $new = [];
             $new['NUM'] = trim($cur[0]);
             $new['NAME'] = trim($cur[9]);
-            $day = Gauquelin5::computeDay(['DAY' => $cur[1], 'MON' => $cur[2], 'YEA' => $cur[3]]);
-            $hour = Gauquelin5::computeHHMM(['H' => $cur[4], 'MN' => $cur[5]]);
+            $day = Cura::computeDay(['DAY' => $cur[1], 'MON' => $cur[2], 'YEA' => $cur[3]]);
+            $hour = Cura::computeHHMM(['H' => $cur[4], 'MN' => $cur[5]]);
             $new['DATE'] = "$day $hour";
             $new['PLACE'] = '';
             $new['COU'] = '';
             $new['GEOID'] = '';
-            $new['LG'] = Gauquelin5::computeLg($cur[8]);
-            $new['LAT'] = Gauquelin5::computeLat($cur[7]);
+            $new['LG'] = Cura::computeLg($cur[8]);
+            $new['LAT'] = Cura::computeLat($cur[7]);
             $csv .= implode(Gauquelin5::CSV_SEP, $new) . "\n";
             $nb_stored ++;
         }

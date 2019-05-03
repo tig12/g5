@@ -3,10 +3,10 @@
     Importation of Gauquelin 5th edition ; code specific to serie D10
     Merges first list and list containing planetary sectors
     
-    @license    GPL
+    @license    GPL                  
     @history    2019-04-04 14:23:10+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace gauquelin5;
+namespace gauquelin5\model\cura;
 
 use gauquelin5\Gauquelin5;
 use gauquelin5\init\Config;
@@ -43,8 +43,8 @@ class SerieD10{
             throw new Exception("SerieD10::raw2csv() - Bad value for parameter \$serie : $serie ; must be 'D10'");
         }
         $report =  "--- Importing serie $serie\n";
-        $raw = Gauquelin5::readHtmlFile($serie);
-        $file_serie = Gauquelin5::serie2filename($serie);
+        $raw = Cura::readHtmlFile($serie);
+        $file_serie = Cura::subject2filename($serie);
         preg_match('#<pre>\s*(NUM.*?CICO)\s*(.*?)\s*</pre>#sm', $raw, $m);
         if(count($m) != 3){
             throw new \Exception("Unable to parse list in " . $file_serie);
@@ -154,7 +154,7 @@ class SerieD10{
             [$new['NUM'], $new['C_APP']] = self::compute_corr_app(trim($cur[0]));
             [$new['FAMILYNAME'], $new['GIVENNAME']] = self::compute_name(trim($cur[1]));
             // date time
-            $day = Gauquelin5::computeDay(['DAY' => $cur[3], 'MON' => $cur[4], 'YEA' => $cur[5]]);
+            $day = Cura::computeDay(['DAY' => $cur[3], 'MON' => $cur[4], 'YEA' => $cur[5]]);
             $hour = $cur[6];
             // timezone
             $tmp = explode('h', trim($cur[7]));
@@ -167,8 +167,8 @@ class SerieD10{
             $new['PLACE'] = trim($tmp[0]);
             $new['COU'] = self::COUNTRY;
             $new['COD'] = trim($tmp[1]);
-            $new['LG'] = Gauquelin5::computeLg($cur[9]);
-            $new['LAT'] = Gauquelin5::computeLat($cur[8]);
+            $new['LG'] = Cura::computeLg($cur[9]);
+            $new['LAT'] = Cura::computeLat($cur[8]);
             // @todo link to geonames
             $new['PRO'] = self::compute_profession($cur[2]);
             $csv .= implode(Gauquelin5::CSV_SEP, $new) . "\n";
