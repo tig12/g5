@@ -14,6 +14,8 @@ dirs:
   9-cura-corrected:        data/9-cura-corrected
 
 # geoname.org parameters
+# see http://www.geonames.org/login
+# and http://www.geonames.org/manageaccount
 geonames:
   # User name used to call geonames web service
   # (you must change, 'demo' doesn't work)

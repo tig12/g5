@@ -158,7 +158,13 @@ class Gauquelin5{
     **/
     public static function readHtmlFile($serie){
         $raw_file = Config::$data['dirs']['1-cura-raw'] . DS . self::serie2filename($serie);
-        return utf8_encode(file_get_contents($raw_file));
+        $tmp = @file_get_contents($raw_file);
+        if(!$tmp){
+            echo "ERROR : Unable to read file $raw_file\n";
+            echo "Check that config.yml indicates a correct path\n";
+            exit;
+        }
+        return utf8_encode($tmp);
     }
     
     

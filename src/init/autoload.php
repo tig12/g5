@@ -20,7 +20,7 @@ spl_autoload_register(
 );
 
 /** 
-    Autoload for classes without namespace, located in lib/ abd subdirectories
+    Autoload for classes without namespace, located in lib/ and subdirectories
     
     @history    2017-05-04 10:04:59+02:00, Thierry Graff : Creation 
 **/
@@ -28,11 +28,6 @@ spl_autoload_register(
     function ($classname){
         $root_dir = dirname(__DIR__);
         $filename = $root_dir . DS . 'lib' . DS . $classname . '.php';
-        if(is_file($filename)){
-            require_once $filename;
-            return;
-        }
-        $filename = $root_dir . DS . 'lib' . DS . 'yaml' . DS . $classname . '.php';
         if(is_file($filename)){
             require_once $filename;
             return;
