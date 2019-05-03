@@ -8,5 +8,4 @@ z.*
 config.yml
 
 data/*
-!data/3-cura-marked
-!data/5-1955-cura-corrected
+!data/edited
