@@ -6,14 +6,64 @@
     @license    GPL
     @history    2017-04-27 10:41:02+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace gauquelin5;
+namespace g5;
 
-use gauquelin5\init\Config;
+use g5\init\Config;
 
 class Gauquelin5{
     
-    /** Separator used in the generated (csv) files **/
+    /**
+        Separator used in the generated (csv) files.
+        Maybe put in config.
+    **/
     const CSV_SEP = ';';
+                                                                                                                     
+    /** 
+        Associations between subjects and packages containing code to handle them.
+    **/
+    const SUBJECT_PACKAGE = [
+        'A' => 'gauquelin5\subjects\cura\serieA',
+        'A1' => 'gauquelin5\subjects\cura\serieA',
+        'A2' => 'gauquelin5\subjects\cura\serieA',
+        'A3' => 'gauquelin5\subjects\cura\serieA',
+        'A4' => 'gauquelin5\subjects\cura\serieA',
+        'A5' => 'gauquelin5\subjects\cura\serieA',
+        'A6' => 'gauquelin5\subjects\cura\serieA',
+        'G55' => 'gauquelin5\subjects\g1955',
+        'B' => 'gauquelin5\subjects\cura\serieB',
+        'B1' => 'gauquelin5\subjects\cura\serieB',
+        'B2' => 'gauquelin5\subjects\cura\serieB',
+        'B3' => 'gauquelin5\subjects\cura\serieB',
+        'B4' => 'gauquelin5\subjects\cura\serieB',
+        'B5' => 'gauquelin5\subjects\cura\serieB',
+        'B6' => 'gauquelin5\subjects\cura\serieB',
+        //
+        'D6' => 'gauquelin5\subjects\cura\fileD6',
+        'D9a' => '',
+        'D9b' => '',
+        'D9c' => '',
+        'D10' => 'gauquelin5\subjects\cura\fileD10',
+        //
+        'E1' => 'gauquelin5\subjects\cura\filesE1_E3',
+        //
+        'E2' => '',
+        'E2a' => '',
+        'E2b' => '',
+        'E2c' => '',
+        'E2d' => '',
+        'E2e' => '',
+        'E2f' => '',
+        'E2g' => '',
+        //
+        'E3' => 'gauquelin5\subjects\cura\filesE1_E3',
+        'F1' => '',
+        'F2' => '',
+    ];
+    
+    
+    //
+    /// old constants
+    //
     
     /** Associations between series and class names **/
     const SERIES_CLASS = [
@@ -104,11 +154,12 @@ class Gauquelin5{
     /** 
         Unique entry point of this package
         Acts as a router to different action methods
-        @param      $serie string representing a valid serie (as defined in run-gauquelin5.php)
-        @param      $action string representing a valid action (as defined in run-gauquelin5.php)
+        @param      $serie String representing a valid serie (as defined in run-gauquelin5.php)
+        @param      $action String representing a valid action (as defined in run-gauquelin5.php)
         @return     string a report
     **/
     public static function action($action, $serie){
+        // convert $serie to an array
         switch($serie){
         	case 'A' : 
         	    $series = ['A1', 'A2', 'A3', 'A4', 'A5', 'A6'];

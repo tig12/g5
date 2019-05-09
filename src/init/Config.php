@@ -4,7 +4,7 @@
     Config available via Config::$data
     @history    2017-04-27 09:49:02+02:00, Thierry Graff : Creation
 **/
-namespace gauquelin5\init;
+namespace g5\init;
 
 class Config{
     

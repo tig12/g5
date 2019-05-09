@@ -1,7 +1,7 @@
 <?php
 /********************************************************************************
     Importation of Gauquelin 5th edition.
-    Code specific to series A.
+    Code specific to serie A.
     Matches first list and chronological order list
                                    
     This code uses file 902gdN.html to retrieve the names, but this could have been done using only 902gdA*y.html files
@@ -10,19 +10,18 @@
     @license    GPL
     @history    2017-04-27 10:53:23+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace gauquelin5\model\cura;
+namespace g5\transform\cura\A;
 
-use gauquelin5\Gauquelin5;
-use gauquelin5\model\cura\Cura;
-use gauquelin5\model\cura\Names;
-use gauquelin5\init\Config;
+use g5\init\Config;
+use g5\transform\cura\Cura;
+use g5\transform\cura\Names;
 
-class SerieA{
+class cura2csv{
     
     /**
         Associations between profession codes used in the cura html files
         and profession codes used in the generated csv files
-        for the different files of Series A.
+        for the different files of serie A.
         These associations are used when no further details are provided
     **/
     const PROFESSIONS_NO_DETAILS = [
@@ -87,7 +86,7 @@ class SerieA{
         // nothing for A6
     ];
 
-    /** Mapping from country codes to iso3166 codes ; applies to all files of Series A **/
+    /** Mapping from country codes to iso3166 codes ; applies to all files of serie A **/
     const COUNTRIES = [
         'F' => 'FR',
         'I' => 'IT',
@@ -98,7 +97,7 @@ class SerieA{
     ];
     
     /** 
-        Manual corrections : name matching added using lists published by Gauquelin in 1955
+        Manual corrections : name matching added using lists published by Gauquelin in 1955.
         Asoociative array : [
                 serie => [
                     NUM => name,
@@ -106,9 +105,9 @@ class SerieA{
                 ],
                 ...
             ]
-        Name spelling is the exact spelling contained in gd902N.html
-        This exact spelling is used to remove ambiguities
-        It may differ from 1955 book spelling
+        Name spelling is the exact spelling contained in gd902N.html.
+        This exact spelling is used to solve ambiguities.
+        It may differ from 1955 book spelling.
     **/
     const CORRECTIONS_1955 = [
         // coming from 570 sportifs
@@ -350,20 +349,20 @@ class SerieA{
     // *****************************************
     /** 
         Parses one html cura file of serie A (locally stored in directory data/raw/cura.free.fr)
-        and stores it in a csv file (in directory 2-cura-csv/)
+        and stores it in a csv file (in directory 5-cura-csv/)
         
         Merges the original list (without names) with names contained in file 902gdN.html
         So merge is done using birthdate.
         Merge is not complete because of doublons (persons born the same day).
         
-        @param  $serie  String identifying the serie (ex : 'A1')
+        @param  $subject  String identifying what is processed (ex : 'A1')
         @return report
         @throws Exception if unable to parse
     **/
-    public static function raw2csv($serie){
-        $report =  "--- Importing serie $serie ---\n";
-        $raw = Cura::readHtmlFile($serie);
-        $file_serie = Cura::subject2filename($serie);
+    public static function action($subject){
+        $report =  "--- Importing serie $subject ---\n";
+        $raw = Cura::readHtmlFile($subject);
+        $file_subject = Cura::subject2filename($subject);
         $file_names = Cura::subject2filename(Names::SERIE); // = 902gdN.html
         //
         // 1 - parse first list (without names) - store by birth date to prepare matching
@@ -371,7 +370,7 @@ class SerieA{
         $res1 = [];
         preg_match('#<pre>\s*(YEA.*?CITY)\s*(.*?)\s*</pre>#sm', $raw, $m);
         if(count($m) != 3){
-            throw new \Exception("Unable to parse first list (without names) in " . $file_serie);
+            throw new \Exception("Unable to parse first list (without names) in " . $file_subject);
         }
         $fieldnames1 = explode(Cura::HTML_SEP, $m[1]);
         $lines1 = explode("\n", $m[2]);
@@ -391,7 +390,7 @@ class SerieA{
         // 2 - prepare names - store by birth date to prepare matching
         //
         $res2 = [];
-        $names = Names::parse()[$serie];
+        $names = Names::parse()[$subject];
         foreach($names as $fields){
             $day = $fields['day'];
             if(!isset($res2[$day])){
@@ -400,7 +399,7 @@ class SerieA{
             $res2[$day][] = $fields;
         }
         // Hack to fix error for Jean Lebris
-        if($serie == 'A1'){
+        if($subject == 'A1'){
             $res2['1817-03-25'] = [['day' => '1817-03-25', 'pro' => 'SP', 'name' => 'Lebris Jean']];
             unset($res2['1817-03-05']); // possible because this date is unique within the array.
         }
@@ -423,7 +422,7 @@ class SerieA{
                         'NUM' => $tmp['NUM'],
                     ];
                     // store in $res with fabricated name
-                    $tmp['NAME'] = self::compute_name($serie, $tmp['NUM']);
+                    $tmp['NAME'] = self::compute_name($subject, $tmp['NUM']);
                     $res[] = $tmp;
                 }
                 continue;
@@ -435,12 +434,12 @@ class SerieA{
                 // store in $res with fabricated name
                 foreach($array1 as $tmp){
                     $n3++;
-                    $tmp['NAME'] = self::compute_name($serie, $tmp['NUM']);
+                    $tmp['NAME'] = self::compute_name($subject, $tmp['NUM']);
                     $res[] = $tmp;
                 }
-                $new_doublon = [$file_serie => [], $file_names => []];
+                $new_doublon = [$file_subject => [], $file_names => []];
                 foreach($array1 as $tmp){
-                    $new_doublon[$file_serie][] = [
+                    $new_doublon[$file_subject][] = [
                         'LINE' => implode("\t", $tmp),
                         'NUM' => $tmp['NUM'],
                     ];
@@ -468,13 +467,13 @@ class SerieA{
                     // store in $res with fabricated name
                     foreach($array1 as $tmp){
                         $n2++;
-                        $tmp['NAME'] = self::compute_name($serie, $tmp['NUM']);
+                        $tmp['NAME'] = self::compute_name($subject, $tmp['NUM']);
                         $res[] = $tmp;
                     }
                     // fill $doublons_same_nb with all candidate lines
-                    $new_doublon = [$file_serie => [], $file_names => []];
+                    $new_doublon = [$file_subject => [], $file_names => []];
                     foreach($array1 as $tmp){
-                        $new_doublon[$file_serie][] = [
+                        $new_doublon[$file_subject][] = [
                             'LINE' => implode("\t", $tmp),
                             'NUM' => $tmp['NUM'],
                         ];
@@ -493,8 +492,8 @@ class SerieA{
         //
         // 1955 corrections
         //
-        if(isset(self::CORRECTIONS_1955[$serie])){
-            [$n_ok_fix, $n1_fix, $n2_fix] = self::corrections1955($res, $missing_in_names, $doublons_same_nb, $serie, $file_serie, $file_names);
+        if(isset(self::CORRECTIONS_1955[$subject])){
+            [$n_ok_fix, $n1_fix, $n2_fix] = self::corrections1955($res, $missing_in_names, $doublons_same_nb, $subject, $file_subject, $file_names);
         }
         else{
             $n_ok_fix = $n1_fix = $n2_fix = 0;
@@ -502,14 +501,14 @@ class SerieA{
         //
         // report
         //
-        $report_type = Config::$data['raw2csv']['report'][$serie];
-        $n_correction_1955 = isset(self::CORRECTIONS_1955[$serie]) ? count(self::CORRECTIONS_1955[$serie]) : 0;
+        $report_type = Config::$data['raw2csv']['report'][$subject];
+        $n_correction_1955 = isset(self::CORRECTIONS_1955[$subject]) ? count(self::CORRECTIONS_1955[$subject]) : 0;
         $n_bad = $n1 + $n2 + $n3 - $n_ok_fix - $n1_fix - $n2_fix;
         $n_good = $n_ok + $n_ok_fix + $n1_fix + $n2_fix;
         $percent_ok = round($n_good * 100 / count($lines1), 2);
         $percent_not_ok = round($n_bad * 100 / count($lines1), 2);
-        $report .= "nb in list1 ($file_serie) : " . count($lines1) . " - nb in list2 ($file_names) : " . count($names) . "\n";
-        $report .= "case 1 : $n1 dates present in $file_serie and missing in $file_names - $n1_fix fixed by 1955\n";
+        $report .= "nb in list1 ($file_subject) : " . count($lines1) . " - nb in list2 ($file_names) : " . count($names) . "\n";
+        $report .= "case 1 : $n1 dates present in $file_subject and missing in $file_names - $n1_fix fixed by 1955\n";
         if($report_type == 'full'){
             $report .=  print_r($missing_in_names, true) . "\n";
         }
@@ -541,12 +540,12 @@ class SerieA{
             'LG',
             'LAT',
         ];
-        $csv = implode(Gauquelin5::CSV_SEP, $fieldnames) . "\n";
+        $csv = implode(Config::$data['CSV_SEP'], $fieldnames) . "\n";
         foreach($res as $cur){
             $new = [];
             $new['NUM'] = trim($cur['NUM']);
             $new['NAME'] = trim($cur['NAME']);
-            $new['PRO'] = self::compute_profession($serie, $cur['PRO'], $new['NUM']);
+            $new['PRO'] = self::compute_profession($subject, $cur['PRO'], $new['NUM']);
             // date time
             $day = Cura::computeDay($cur);
             $hour = Cura::computeHHMMSS($cur);
@@ -561,10 +560,10 @@ class SerieA{
             [$new['COU'], $new['COD']] = self::compute_country($cur['COU'], $cur['COD']);
             $new['LG'] = Cura::computeLg($cur['LON']);
             $new['LAT'] = Cura::computeLat($cur['LAT']);                             
-            $csv .= implode(Gauquelin5::CSV_SEP, $new) . "\n";
+            $csv .= implode(Config::$data['CSV_SEP'], $new) . "\n";
             $nb_stored ++;
         }
-        $csvfile = Config::$data['dirs']['2-cura-csv'] . DS . $serie . '.csv';
+        $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $subject . '.csv';
         file_put_contents($csvfile, $csv);
         $report .= "Stored result in $csvfile\n";
         return $report;
@@ -576,7 +575,7 @@ class SerieA{
         Auxiliary of raw2csv()
         @return [$n_ok_fix, $n1_fix, $n2_fix]
     **/
-    private static function corrections1955(&$res, &$missing_in_names, &$doublons_same_nb, $serie, $file_serie, $file_names){
+    private static function corrections1955(&$res, &$missing_in_names, &$doublons_same_nb, $subject, $file_subject, $file_names){
         $n_ok_fix = $n1_fix = $n2_fix = 0;
         //
         // Remove cases in $missing_in_names solved by 1955
@@ -584,7 +583,7 @@ class SerieA{
         // computes $n1_fix
         //
         for($i=0; $i < count($missing_in_names); $i++){
-            if(in_array($missing_in_names[$i]['NUM'], self::CORRECTIONS_1955[$serie])){
+            if(in_array($missing_in_names[$i]['NUM'], self::CORRECTIONS_1955[$subject])){
                 unset($missing_in_names[$i]);
                 $n1_fix++;
             }
@@ -593,29 +592,29 @@ class SerieA{
         // Resolve doublons
         // computes $n2_fix
         //
-        $NUMS_1955 = array_keys(self::CORRECTIONS_1955[$serie]);
+        $NUMS_1955 = array_keys(self::CORRECTIONS_1955[$subject]);
         $N_DOUBLONS = count($doublons_same_nb);
         for($i=0; $i < $N_DOUBLONS; $i++){
-            if(count($doublons_same_nb[$i][$file_serie]) != 2){
+            if(count($doublons_same_nb[$i][$file_subject]) != 2){
                 // resolution works only for doublons (not triplets or more elements)
                 continue;
             }
             $found = false;
-            if(in_array($doublons_same_nb[$i][$file_serie][0]['NUM'], $NUMS_1955)){
-                $NUM = $doublons_same_nb[$i][$file_serie][0]['NUM'];
-                $NAME = self::CORRECTIONS_1955[$serie][$NUM];
+            if(in_array($doublons_same_nb[$i][$file_subject][0]['NUM'], $NUMS_1955)){
+                $NUM = $doublons_same_nb[$i][$file_subject][0]['NUM'];
+                $NAME = self::CORRECTIONS_1955[$subject][$NUM];
                 $found = 0;
             }
-            else if(in_array($doublons_same_nb[$i][$file_serie][1]['NUM'], $NUMS_1955)){
-                $NUM = $doublons_same_nb[$i][$file_serie][1]['NUM'];
-                $NAME = self::CORRECTIONS_1955[$serie][$NUM];
+            else if(in_array($doublons_same_nb[$i][$file_subject][1]['NUM'], $NUMS_1955)){
+                $NUM = $doublons_same_nb[$i][$file_subject][1]['NUM'];
+                $NAME = self::CORRECTIONS_1955[$subject][$NUM];
                 $found = 1;
             }
             if($found !== false){
                 // resolve first
                 $idx_num = ($found === 0 ? 1 : 0);
                 $idx_name = ($doublons_same_nb[$i][$file_names][0]['NAME'] == $NAME ? 1 : 0); // HERE use of exact name spelling in self::CORRECTIONS_1955
-                $new_num1 = $doublons_same_nb[$i][$file_serie][$idx_num]['NUM'];
+                $new_num1 = $doublons_same_nb[$i][$file_subject][$idx_num]['NUM'];
                 $new_name1 = $doublons_same_nb[$i][$file_names][$idx_name]['NAME'];
                 // inject doublon resolution in $res
                 for($j=0; $j < count($res); $j++){
@@ -627,7 +626,7 @@ class SerieA{
                 // resolve second
                 $idx_num = ($idx_num == 0 ? 1 : 0);
                 $idx_name = ($idx_name == 0 ? 1 : 0);
-                $new_num2 = $doublons_same_nb[$i][$file_serie][$idx_num]['NUM'];
+                $new_num2 = $doublons_same_nb[$i][$file_subject][$idx_num]['NUM'];
                 $new_name2 = $doublons_same_nb[$i][$file_names][$idx_name]['NAME'];
                 // inject doublon resolution in $res
                 for($j=0; $j < count($res); $j++){
@@ -649,9 +648,9 @@ class SerieA{
         for($i=0; $i < $n; $i++){
             $NUM = $res[$i]['NUM'];
             // test on strpos done to avoid counting cases solved by doublons
-            if(isset(self::CORRECTIONS_1955[$serie][$NUM]) && strpos($res[$i]['NAME'], 'Gauquelin-') === 0){
+            if(isset(self::CORRECTIONS_1955[$subject][$NUM]) && strpos($res[$i]['NAME'], 'Gauquelin-') === 0){
                 $n_ok_fix++;
-                $res[$i]['NAME'] = self::CORRECTIONS_1955[$serie][$NUM];
+                $res[$i]['NAME'] = self::CORRECTIONS_1955[$subject][$NUM];
             }
         }
         return [$n_ok_fix, $n1_fix, $n2_fix];
@@ -665,10 +664,10 @@ class SerieA{
         Then computes precise profession from $num, if possible
         Auxiliary of raw2csv()
     **/
-    private static function compute_profession($serie, $pro, $num){
-        $res = self::PROFESSIONS_NO_DETAILS[$serie][$pro];
-        if(isset(self::PROFESSIONS_DETAILS[$serie])){
-            $tmp = self::PROFESSIONS_DETAILS[$serie];
+    private static function compute_profession($subject, $pro, $num){
+        $res = self::PROFESSIONS_NO_DETAILS[$subject][$pro];
+        if(isset(self::PROFESSIONS_DETAILS[$subject])){
+            $tmp = self::PROFESSIONS_DETAILS[$subject];
             foreach($tmp as $elts){
                 // $elts looks like that : ['Athlétisme', 1, 86],
                 if($num >= $elts[1] && $num <= $elts[2]){
@@ -686,8 +685,8 @@ class SerieA{
         Computes missing names
         Auxiliary of raw2csv()
     **/
-    private static function compute_name($serie, $num){
-        return "Gauquelin-$serie-$num";
+    private static function compute_name($subject, $num){
+        return "Gauquelin-$subject-$num";
     }
     
     

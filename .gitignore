@@ -8,4 +8,4 @@ z.*
 config.yml
 
 data/*
-!data/edited
+!data/3-edited

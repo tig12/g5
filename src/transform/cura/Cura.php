@@ -1,13 +1,14 @@
 <?php
 /********************************************************************************
-    Code common to all cura files.
+    Utilities for classes of subpackages.
     
     @license    GPL
-    @history    2019-05-03 17:18:33+02:00, Thierry Graff : creation from a split of class Gauquelin5
+    @history    2017-04-27 10:41:02+02:00, Thierry Graff : creation
+    @history    2019-05-09 01:34:14+02:00, Thierry Graff : refactor
 ********************************************************************************/
-namespace gauquelin5\model\cura;
+namespace g5\transform\cura;
 
-use gauquelin5\init\Config;
+use g5\init\Config;
 
 class Cura{
     

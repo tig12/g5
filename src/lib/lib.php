@@ -7,10 +7,21 @@
     @history    2007-10-25 21:58, Thierry Graff : Creation
 ********************************************************************************/
 class lib{
+
+    
+    // ******************************************************
+    /** 
+        like sleep() but parameter is a nb of seconds, and it prints a message
+    **/
+    public static function dosleep($x){
+        echo "dosleep($x) ";
+        usleep($x * 1000000);
+        echo " - end sleep\n";
+    }
+    
     
     /** Auxiliary variable of sortByKey(), for usort(). */
     private static $sortByKey_keyname;
-    
     
     //***************************************************
     /**

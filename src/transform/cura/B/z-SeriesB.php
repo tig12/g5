@@ -8,11 +8,10 @@
     @copyright  jetheme.org
     @history    2014-01-11 00:17:29+01:00, Thierry Graff : creation
 ********************************************************************************/
-namespace gauquelin5\model\cura;
+namespace g5\transform\cura;
 
-use gauquelin5\init\Config;
-use gauquelin5\Gauquelin5;
-use gauquelin5\model\cura\Cura;
+use g5\init\Config;
+use g5\transform\cura\Cura;
 
 class SerieB{
     

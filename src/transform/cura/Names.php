@@ -5,10 +5,9 @@
     @license    GPL
     @history    2017-04-27 11:16:42+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace gauquelin5\model\cura;
+namespace g5\transform\cura;
 
-use gauquelin5\Gauquelin5;
-use gauquelin5\model\cura\Cura;
+use g5\transform\cura\Cura;
 
 class Names{
     

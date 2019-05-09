@@ -9,10 +9,9 @@
     @license    GPL
     @history    2017-05-02 04:32:44+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace gauquelin5\model\cura;
+namespace g5\transform\cura;
 
-use gauquelin5\Gauquelin5;
-use gauquelin5\init\Config;
+use g5\init\Config;
 
 class SerieE1_E3{
     
@@ -206,11 +205,11 @@ class SerieE1_E3{
             'JU',
             'SA',
         ];
-        $csv = implode(Gauquelin5::CSV_SEP, $fieldnames) . "\n";
+        $csv = implode(Config::$data['CSV_SEP'], $fieldnames) . "\n";
         foreach($res1 as $fields){
-            $csv .= implode(Gauquelin5::CSV_SEP, $fields) . "\n";
+            $csv .= implode(Config::$data['CSV_SEP'], $fields) . "\n";
         }
-        $csvfile = Config::$data['dirs']['2-cura-csv'] . DS . $serie . '.csv';
+        $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $serie . '.csv';
         file_put_contents($csvfile, $csv);
         return $report;
     }

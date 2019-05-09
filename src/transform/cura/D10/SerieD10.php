@@ -6,10 +6,9 @@
     @license    GPL                  
     @history    2019-04-04 14:23:10+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace gauquelin5\model\cura;
+namespace g5\transform\cura;
 
-use gauquelin5\Gauquelin5;
-use gauquelin5\init\Config;
+use g5\init\Config;
 
 class SerieD10{
     
@@ -65,7 +64,7 @@ class SerieD10{
             'LAT',
             'PRO',
         ];
-        $csv = implode(Gauquelin5::CSV_SEP, $fieldnames) . "\n";
+        $csv = implode(Config::$data['CSV_SEP'], $fieldnames) . "\n";
         // Fix problems in cura data
         $m[2] = preg_replace(
             "/112.*?Hardin County,\s+TN/",
@@ -171,10 +170,10 @@ class SerieD10{
             $new['LAT'] = Cura::computeLat($cur[8]);
             // @todo link to geonames
             $new['PRO'] = self::compute_profession($cur[2]);
-            $csv .= implode(Gauquelin5::CSV_SEP, $new) . "\n";
+            $csv .= implode(Config::$data['CSV_SEP'], $new) . "\n";
             $nb_stored ++;
         }
-        $csvfile = Config::$data['dirs']['2-cura-csv'] . DS . $serie . '.csv';
+        $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $serie . '.csv';
         file_put_contents($csvfile, $csv);
         $report .= $nb_stored . " lines stored in $csvfile\n";
         return $report;

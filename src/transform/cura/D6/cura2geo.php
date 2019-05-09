@@ -1,17 +1,24 @@
 <?php
 /********************************************************************************
-    Importation of Gauquelin 5th edition ; code specific to serie D10
-    matches first list and chronological order list
+    Add missing geographic informations to 5-tmp/cura-csv/D6.csv.
+    Uses geonames.org web service.
+    
+    This code operates on file 5-tmp/geonames/D6.csv
+    And then transfers the data in 5-tmp/cura-csv/D6.csv
+    This is done to prevent accidental erasure of previous calls to geonames ws : 
+        - call cura2csv
+        - call cura2geo
+        - call cura2csv again => all previous geo information erased
     
     @license    GPL
     @history    2017-04-27 22:04:25+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace gauquelin5\model\cura;
+namespace g5\transform\cura\D6;
 
-use gauquelin5\Gauquelin5;
-use gauquelin5\init\Config;
+use g5\init\Config;
+use g5\transform\cura\Cura;
 
-class SerieD6{
+class cura2Geo{
     
         /** Fields in the resulting csv **/
         private static $fieldnames = [
@@ -28,69 +35,27 @@ class SerieD6{
         /** String written in field PLACE to indicate that a call to geonames webservice failed **/
         const FAILURE_MARK = 'XXX';
     
-    // *****************************************
-    /** 
-        Parses file D6 and stores it in a csv file
-        @param  $serie  String identifying the serie (must be 'D6')
-        @return report
-        @throws Exception if unable to parse
-    **/
-    public static function raw2csv($serie){
-        if($serie != 'D6'){
-            throw new Exception("SerieD6::raw2csv() - Bad value for parameter \$serie : $serie ; must be 'D6'");
-        }
-        $report =  "--- Importing serie $serie\n";
-        $raw = Cura::readHtmlFile($serie);
-        // Fix an error on a latitude in cura file
-        $raw = str_replace(
-            '356	8	1	1925	11	0	0	36N05	00W56	Ruiz Bernardo',
-            '356	8	1	1925	11	0	0	38N05	00W56	Ruiz Bernardo',
-            $raw);
-        $file_serie = Cura::subject2filename($serie);
-        preg_match('#<pre>.*?(NUM.*?NAME)\s*(.*?)\s*</pre>#sm', $raw, $m);
-        if(count($m) != 3){
-            throw new \Exception("Unable to parse list in " . $file_serie);
-        }
-        $nb_stored = 0;
-        $csv = '';
-        $csv = implode(Gauquelin5::CSV_SEP, self::$fieldnames) . "\n";
-        $lines = explode("\n", $m[2]);
-        foreach($lines as $line){
-            $cur = preg_split('/\t+/', $line);
-            $new = [];
-            $new['NUM'] = trim($cur[0]);
-            $new['NAME'] = trim($cur[9]);
-            $day = Cura::computeDay(['DAY' => $cur[1], 'MON' => $cur[2], 'YEA' => $cur[3]]);
-            $hour = Cura::computeHHMM(['H' => $cur[4], 'MN' => $cur[5]]);
-            $new['DATE'] = "$day $hour";
-            $new['PLACE'] = '';
-            $new['COU'] = '';
-            $new['GEOID'] = '';
-            $new['LG'] = Cura::computeLg($cur[8]);
-            $new['LAT'] = Cura::computeLat($cur[7]);
-            $csv .= implode(Gauquelin5::CSV_SEP, $new) . "\n";
-            $nb_stored ++;
-        }
-        $csvfile = Config::$data['dirs']['2-cura-csv'] . DS . $serie . '.csv';
-        file_put_contents($csvfile, $csv);
-        $report .= $nb_stored . " lines stored in $csvfile\n";
-        return $report;
-    }
-    
-    
+        
     // ******************************************************
-    /** Add missing geographic informations to D6.csv **/
-    public static function computeGeo($serie){
+    /**
+        Add missing geographic informations to 5-tmp/cura-csv/D6.csv.
+    **/
+    public static function action($serie){
         if($serie != 'D6'){
             throw new Exception("SerieD6::raw2csv() - Bad value for parameter \$serie : $serie ; must be 'D6'");
         }
         $report =  "--- Computing geographic information for $serie\n";
-        $csvfile = Config::$data['dirs']['2-cura-csv'] . DS . $serie . '.csv';
+        $inputFile = Config::$data['dirs']['5-cura-csv'] . DS . $serie . '.csv';
+        $outputFile = Config::$data['dirs']['5-geonames'] . DS . $serie . '.csv';
+        
+        if(!is_file($inputFile)){
+        
+        }
         
         while(true){
             $res = '';
             // load csv file
-            $raw = file_get_contents($csvfile);
+            $raw = file_get_contents($inputFile);
             $lines = explode("\n", $raw);
             $newinfo = false; // true if a new geo inf has already been written
             foreach($lines as $line){
@@ -99,7 +64,7 @@ class SerieD6{
                     $res .= $line . "\n";
                     continue;
                 }
-                $fields = explode(Gauquelin5::CSV_SEP, $line);
+                $fields = explode(Config::$data['CSV_SEP'], $line);
                 if(!isset($fields[3])){
                     break 2; // ===== HERE break enclosing while(true) =====
                 }
@@ -122,7 +87,7 @@ class SerieD6{
                 if($geonames['error']){                       
                     echo $fields[0] . ' ' . $fields[1] . ' ' . print_r($geonames, true) . "\n";
                     $fields[3] = self::FAILURE_MARK;
-                    $res .= implode(Gauquelin5::CSV_SEP, $fields) . "\n";
+                    $res .= implode(Config::$data['CSV_SEP'], $fields) . "\n";
                     continue;
                 }
                 // here call to Geonames::cityFromLgLat() was sucessful
@@ -132,24 +97,13 @@ class SerieD6{
                 $fields[3] = $geonames['result']['name'];
                 $fields[4] = $geonames['result']['country'];
                 $fields[5] = $geonames['result']['geoid'];
-                $res .= implode(Gauquelin5::CSV_SEP, $fields) . "\n";
+                $res .= implode(Config::$data['CSV_SEP'], $fields) . "\n";
                 // 0 'NUM', 1 'NAME', 2 'DATE', 3 'PLACE', 4 'COU', 5 'GEOID', 6 'LG', 7 'LAT'
             }
             // Write back the csv 
-            file_put_contents($csvfile, $res);
-            dosleep(1.5); // keep cool with geonames.org ws
+            file_put_contents($inputFile, $res);
+            \lib::dosleep(1.5); // keep cool with geonames.org ws
         } // end whle true
     }
     
-    
 }// end class    
-
-// ******************************************************
-/** 
-    like sleep() but parameter is a nb of seconds, and it prints a message
-**/
-function dosleep($x){
-    echo "dosleep($x) ";
-    usleep($x * 1000000);
-    echo " - end sleep\n";
-}
