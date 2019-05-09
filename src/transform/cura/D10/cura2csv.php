@@ -1,16 +1,16 @@
 <?php
 /********************************************************************************
-    Importation of Gauquelin 5th edition ; code specific to serie D10
-    Merges first list and list containing planetary sectors
+    Converts file 1-raw/cura.free.fr/902gdD10.html to 5-tmp/cura-csv/D10.csv
     
     @license    GPL                  
     @history    2019-04-04 14:23:10+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace g5\transform\cura;
+namespace g5\transform\cura\D10;
 
 use g5\init\Config;
+use g5\transform\cura\Cura;
 
-class SerieD10{
+class cura2csv{
     
     /** ISO 3166 code (all data share the same country) **/
     const COUNTRY = 'US';
@@ -33,17 +33,14 @@ class SerieD10{
     // *****************************************
     /** 
         Parses file D10 and stores it in a csv file
-        @param  $serie  String identifying the serie (must be 'D10')
         @return report
         @throws Exception if unable to parse
     **/
-    public static function raw2csv($serie){
-        if($serie != 'D10'){
-            throw new Exception("SerieD10::raw2csv() - Bad value for parameter \$serie : $serie ; must be 'D10'");
-        }
-        $report =  "--- Importing serie $serie\n";
-        $raw = Cura::readHtmlFile($serie);
-        $file_serie = Cura::subject2filename($serie);
+    public static function action(){
+        $subject = 'D10';
+        $report =  "--- Importing serie $subject ---\n";
+        $raw = Cura::readHtmlFile($subject);
+        $file_serie = Cura::subject2filename($subject);
         preg_match('#<pre>\s*(NUM.*?CICO)\s*(.*?)\s*</pre>#sm', $raw, $m);
         if(count($m) != 3){
             throw new \Exception("Unable to parse list in " . $file_serie);
@@ -173,7 +170,7 @@ class SerieD10{
             $csv .= implode(Config::$data['CSV_SEP'], $new) . "\n";
             $nb_stored ++;
         }
-        $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $serie . '.csv';
+        $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $subject . '.csv';
         file_put_contents($csvfile, $csv);
         $report .= $nb_stored . " lines stored in $csvfile\n";
         return $report;

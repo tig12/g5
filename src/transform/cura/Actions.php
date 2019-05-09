@@ -49,7 +49,7 @@ class Actions{
     
     // ******************************************************
     /**
-        Conversion from files of 1-raw/cura to 5-tmp/cura-csv
+        Conversion from files of 1-raw/cura.free.fr to 5-tmp/cura-csv
         Checks parameters and delegates to the correct class.
         @param  $args   Array of parameters, may be empty.
         @return $report String describing the result of execution.
@@ -93,11 +93,27 @@ class Actions{
             	    $class = 'g5\transform\cura\E1_E3\cura2csv';
                 break;
             }
-            $report .= $class::action($subject);
+            if($subject == 'D6' || $subject == 'D10'){
+                $report .= $class::action();
+            }
+            else{
+                $report .= $class::action($subject);
+            }
         }
         return $report;
     }
     
-    
+    // ******************************************************
+    /**
+    **/
+    public static function cura2geo($args){
+        if(count($args) != 1){
+            return "ERROR : cura2geo accepts only one parameter (" . count($args) . " given)\n";
+        }
+        if($args[0] != 'D6'){
+            return "ERROR : invalid parameter '{$args[0]}' - cura2geo can only be executed on file D6.\n";
+        }
+        return \g5\transform\cura\D6\cura2geo::action();
+    }
     
 }// end class

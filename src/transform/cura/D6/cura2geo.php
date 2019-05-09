@@ -1,14 +1,18 @@
 <?php
 /********************************************************************************
     Add missing geographic informations to 5-tmp/cura-csv/D6.csv.
-    Uses geonames.org web service.
+    Uses geonames.org web service (ws).
     
-    This code operates on file 5-tmp/geonames/D6.csv
-    And then transfers the data in 5-tmp/cura-csv/D6.csv
+    This code operates on file   5-tmp/geonames/D6.csv
+    And then copies this file to 5-tmp/cura-csv/D6.csv
     This is done to prevent accidental erasure of previous calls to geonames ws : 
         - call cura2csv
         - call cura2geo
         - call cura2csv again => all previous geo information erased
+    
+    This code can be interrupted in the middle of execution and be called several times.
+    Previous calls to geonames.org ws are stored in 5-tmp/geonames/D6.csv.
+    So a new call will use these results and not repeat previous calls to geonames.org ws.
     
     @license    GPL
     @history    2017-04-27 22:04:25+02:00, Thierry Graff : creation
@@ -20,44 +24,35 @@ use g5\transform\cura\Cura;
 
 class cura2Geo{
     
-        /** Fields in the resulting csv **/
-        private static $fieldnames = [
-            'NUM',
-            'NAME',
-            'DATE',
-            'PLACE',
-            'COU',
-            'GEOID',
-            'LG',
-            'LAT',
-        ];
-    
         /** String written in field PLACE to indicate that a call to geonames webservice failed **/
         const FAILURE_MARK = 'XXX';
     
         
     // ******************************************************
     /**
-        Add missing geographic informations to 5-tmp/cura-csv/D6.csv.
+        Add missing geographic informations to 5-tmp/geonames/D6.csv and 5-tmp/cura-csv/D6.csv.
     **/
-    public static function action($serie){
-        if($serie != 'D6'){
-            throw new Exception("SerieD6::raw2csv() - Bad value for parameter \$serie : $serie ; must be 'D6'");
+    public static function action(){
+        $subject = 'D6';
+        $report =  "--- Computing geographic information for $subject ---\n";
+        $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $subject . '.csv';
+        $geofile = Config::$data['dirs']['5-geonames'] . DS . $subject . '.csv';
+        
+        if(!is_file($csvfile)){
+            $report .= "Missing file $csvfile\n";
+            $report .= "You must run first : php run.php cura2csv D6\n";
         }
-        $report =  "--- Computing geographic information for $serie\n";
-        $inputFile = Config::$data['dirs']['5-cura-csv'] . DS . $serie . '.csv';
-        $outputFile = Config::$data['dirs']['5-geonames'] . DS . $serie . '.csv';
         
-        if(!is_file($inputFile)){
-        
+        if(!is_file($geofile)){
+            copy($csvfile, $geofile);
         }
         
         while(true){
             $res = '';
             // load csv file
-            $raw = file_get_contents($inputFile);
+            $raw = file_get_contents($geofile);
             $lines = explode("\n", $raw);
-            $newinfo = false; // true if a new geo inf has already been written
+            $newinfo = false; // true if a new geo info has been written in previous iteration
             foreach($lines as $line){
                 if($newinfo){
                     // copy the rest of the csv file 
@@ -85,13 +80,13 @@ class cura2Geo{
                 $lat = $fields[7];
                 $geonames = \Geonames::cityFromLgLat(Config::$data['geonames']['username'], $lg, $lat, true);
                 if($geonames['error']){                       
-                    echo $fields[0] . ' ' . $fields[1] . ' ' . print_r($geonames, true) . "\n";
+                    $report .= $fields[0] . ' ' . $fields[1] . ' ' . print_r($geonames, true) . "\n";
                     $fields[3] = self::FAILURE_MARK;
                     $res .= implode(Config::$data['CSV_SEP'], $fields) . "\n";
                     continue;
                 }
                 // here call to Geonames::cityFromLgLat() was sucessful
-                echo $fields[0] . ' ' . $fields[1] . " : write geo info\n";
+                $report .= $fields[0] . ' ' . $fields[1] . " : write geo info\n";
                 $dtu = \TZ::offset($fields[3], $geonames['result']['timezone']);
                 $fields[2] .= $dtu;
                 $fields[3] = $geonames['result']['name'];
@@ -101,9 +96,13 @@ class cura2Geo{
                 // 0 'NUM', 1 'NAME', 2 'DATE', 3 'PLACE', 4 'COU', 5 'GEOID', 6 'LG', 7 'LAT'
             }
             // Write back the csv 
-            file_put_contents($inputFile, $res);
+            file_put_contents($geofile, $res); // file in 5-tmp/geonames
+            copy($geofile, $csvfile); // copy results back in 5-tmp/cura-csv/
             \lib::dosleep(1.5); // keep cool with geonames.org ws
         } // end whle true
+        copy($geofile, $csvfile); // useful if current execution retrieves 0 information
+        $report .=  "Geographic information computed\n";
+        return $report;
     }
     
 }// end class    

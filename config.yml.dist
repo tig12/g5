@@ -12,7 +12,7 @@ dirs:
   #
   5-cura-csv:           data/5-tmp/cura-csv
   5-g55-generated:      data/5-tmp/g55-generated
-  5-geonames            data/5-tmp/geonames
+  5-geonames:           data/5-tmp/geonames
   #
   9-g55-original:       data/9-output/history/1955-gauquelin/g55-original
   9-cura-corrected:     data/9-output/datasets/cura-corrected

@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Importation of Gauquelin 5th edition ; code specific to serie D10
+    Importation of Gauquelin 5th edition ; code specific to file D10
     matches first list and chronological order list
     
     @license    GPL
@@ -13,48 +13,33 @@ use g5\transform\cura\Cura;
 
 class cura2csv{
     
-        /** Fields in the resulting csv **/
-        private static $fieldnames = [
-            'NUM',
-            'NAME',
-            'DATE',
-            'PLACE',
-            'COU',
-            'GEOID',
-            'LG',
-            'LAT',
-        ];
-    
         /** String written in field PLACE to indicate that a call to geonames webservice failed **/
         const FAILURE_MARK = 'XXX';
     
     // *****************************************
     /** 
         Parses file D6 and stores it in a csv file
-        @param  $serie  String identifying the serie (must be 'D6')
         @return report
         @throws Exception if unable to parse
     **/
-    public static function action($serie){
-die("WARNING : D6 import not done because it will erase geonames information.\nFIX THE CODE and start again\n");
-        if($serie != 'D6'){
-            throw new Exception("SerieD6::raw2csv() - Bad value for parameter \$serie : $serie ; must be 'D6'");
-        }
-        $report =  "--- Importing serie $serie\n";
-        $raw = Cura::readHtmlFile($serie);
+    public static function action(){
+        $subject = 'D6';
+            
+        $report =  "--- Importing serie $subject ---\n";
+        $raw = Cura::readHtmlFile($subject);
         // Fix an error on a latitude in cura file
         $raw = str_replace(
             '356	8	1	1925	11	0	0	36N05	00W56	Ruiz Bernardo',
             '356	8	1	1925	11	0	0	38N05	00W56	Ruiz Bernardo',
             $raw);
-        $file_serie = Cura::subject2filename($serie);
+        $file_serie = Cura::subject2filename($subject);
         preg_match('#<pre>.*?(NUM.*?NAME)\s*(.*?)\s*</pre>#sm', $raw, $m);
         if(count($m) != 3){
             throw new \Exception("Unable to parse list in " . $file_serie);
         }
         $nb_stored = 0;
         $csv = '';
-        $csv = implode(Config::$data['CSV_SEP'], self::$fieldnames) . "\n";
+        $csv = implode(Config::$data['CSV_SEP'], D6::FIELDNAMES) . "\n";
         $lines = explode("\n", $m[2]);
         foreach($lines as $line){
             $cur = preg_split('/\t+/', $line);
@@ -72,7 +57,7 @@ die("WARNING : D6 import not done because it will erase geonames information.\nF
             $csv .= implode(Config::$data['CSV_SEP'], $new) . "\n";
             $nb_stored ++;
         }
-        $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $serie . '.csv';
+        $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $subject . '.csv';
         file_put_contents($csvfile, $csv);
         $report .= $nb_stored . " lines stored in $csvfile\n";
         return $report;

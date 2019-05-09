@@ -9,11 +9,12 @@
     @license    GPL
     @history    2017-05-02 04:32:44+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace g5\transform\cura;
+namespace g5\transform\cura\E1_E3;
 
 use g5\init\Config;
+use g5\transform\cura\Cura;
 
-class SerieE1_E3{
+class cura2csv{
     
     private static $n_missing_places = 0;
     private static $n_missing_timezone = 0;
@@ -49,15 +50,15 @@ class SerieE1_E3{
     /** 
         Parses one file E1 or E3 and stores it in a csv file
         The resulting csv file contains informations of the 2 lists
-        @param  $serie Must be 'E1' or 'E3'
+        @param  $subject Must be 'E1' or 'E3'
         @return report
     **/
-    public static function raw2csv($serie){
-        if($serie != 'E1' && $serie != 'E3'){
-            throw new Exception("SerieE1_E3::raw2csv() - Bad value for parameter \$serie : $serie ; must be 'E1' or 'E3'");
+    public static function action($subject){
+        if($subject != 'E1' && $subject != 'E3'){
+            throw new Exception("Bad value for parameter \$subject : $subject ; must be 'E1' or 'E3'");
         }
         // config - todo : check validity of values put in config
-        $report_type = Config::$data['raw2csv']['report'][$serie]; // 'full', 'small', 'tz' or 'geo'
+        $report_type = Config::$data['raw2csv']['report'][$subject]; // 'full', 'small', 'tz' or 'geo'
         $do_report_geo = $do_report_tz = false;
         if($report_type == 'full' || $report_type == 'geo'){
             $do_report_geo = true;
@@ -69,15 +70,15 @@ class SerieE1_E3{
         self::$n_missing_timezone = 0;
         self::$n_total = 0;
         $report = '';
-        $report .= "Importing $serie\n";
+        $report .= "Importing $subject\n";
         //
         // parse first list (with birth date and place)
         //
         $res1 = [];
-        $raw = Cura::readHtmlFile($serie);
+        $raw = Cura::readHtmlFile($subject);
         preg_match('#<pre>\s*(NUM.*?COD)\s*(.*?)\s*</pre>#sm', $raw, $m);
         if(count($m) != 3){
-            throw new \Exception($serie . " - Unable to parse $file - first list");
+            throw new \Exception($subject . " - Unable to parse $file - first list");
         }
         $lines = explode("\n", $m[2]);
         // to fix typos : O are replaced by zero ; A by 3 ; S by 5, G by 6 ; B by 8
@@ -86,7 +87,7 @@ class SerieE1_E3{
             self::$n_total++;
             $new = [];
             $new['NUM'] = trim(substr($line, 0, 5));
-            $new['PRO'] = self::PROFESSIONS[$serie][trim(substr($line, 8, 5))];
+            $new['PRO'] = self::PROFESSIONS[$subject][trim(substr($line, 8, 5))];
             $new['NOTE'] = trim(substr($line, 14, 2)); // L * + -
             $name = trim(substr($line, 17, 30));
             $new['NAME'] = strtr($name, $fix_names);
@@ -209,7 +210,7 @@ class SerieE1_E3{
         foreach($res1 as $fields){
             $csv .= implode(Config::$data['CSV_SEP'], $fields) . "\n";
         }
-        $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $serie . '.csv';
+        $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $subject . '.csv';
         file_put_contents($csvfile, $csv);
         return $report;
     }
@@ -326,20 +327,5 @@ class SerieE1_E3{
                 '',
         ];
     }
-    
-    
-    // ******************************************************
-    /**
-        Parses one file E1 or E3 and stores it in a csv file
-        The resulting csv file contains informations of the 2 lists
-        @param  $serie Must be 'E1' or 'E3'
-        @return report
-    **/
-    public static function generateCorrected($serie){
-        if($serie != 'E1' && $serie != 'E3'){
-            throw new Exception("SerieE1_E3::raw2csv() - Bad value for parameter \$serie : $serie ; must be 'E1' or 'E3'");
-        }
-    }
-    
-}// end class    
 
+}// end class    
