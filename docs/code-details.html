@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title> | Gauquelin5</title>
+    <title>Code details | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="">
     <meta name="robots" content="index,follow">
@@ -12,7 +12,7 @@
     <meta name="dcterms.dateCopyrighted" content="2019">
     <!-- 
     tigsite:
-        history: , Thierry Graff : Creation
+        history: 2019-05-10 09:06:39+02:00, Thierry Graff : Creation
     -->
 </head>
 
@@ -23,16 +23,22 @@
 
 <nav class="prevnext">
     <a class="top" href="index.html">&uarr;</a>
-    <a class="prev" rel="prev" href=".html">&larr;</a>
-    <a class="next" rel="next" href=".html">&rarr;</a>
 </nav>
 
 <header>
-<h1></h1>
+<h1>Code details</h1>
 <div class="intro"></div>
 </header>
 
 <article>
+
+<!-- ********************************************************************************* -->
+<h2>Convention</h2>
+The code is packaged ; main package name is <code>g5</code>. Code is PSR-4 (package hierarchy correspond to directory hierarchy, like in java). Top-level package (<code>g5</code>) is located in <code>src/</code>.
+<br>
+<br>The program deals with the notion of <strong>data source</strong>. Each data source corresponds to a sub-package of <code>g5\transform</code>.
+<br>Each data source must have a class named <code>Actions</code>. For example, package <code>g5\transform\cura</code> must have a class <code>g5\transform\cura\Actions</code>. This class must implement interface <code>g5\Datasource</code>.
+
 </article>
 </div><!-- end class="main" -->
 

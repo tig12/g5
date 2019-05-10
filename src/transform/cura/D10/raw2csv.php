@@ -10,7 +10,7 @@ namespace g5\transform\cura\D10;
 use g5\init\Config;
 use g5\transform\cura\Cura;
 
-class cura2csv{
+class raw2csv{
     
     /** ISO 3166 code (all data share the same country) **/
     const COUNTRY = 'US';

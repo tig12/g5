@@ -14,7 +14,7 @@ namespace g5\transform\cura\E1_E3;
 use g5\init\Config;
 use g5\transform\cura\Cura;
 
-class cura2csv{
+class raw2csv{
     
     private static $n_missing_places = 0;
     private static $n_missing_timezone = 0;

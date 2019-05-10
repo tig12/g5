@@ -8,7 +8,7 @@
     @history    2017-05-08 23:39:19+02:00, Thierry Graff : creation
     @history    2019-04-08 15:24:04+02:00, Thierry Graff : Start generation of 2 versions : original and corrected
 ********************************************************************************/
-namespace g5\transform\g1955;
+namespace g5\transform\g55;
 
 use g5\init\Config;
 

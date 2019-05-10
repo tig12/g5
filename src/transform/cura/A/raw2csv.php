@@ -16,7 +16,7 @@ use g5\init\Config;
 use g5\transform\cura\Cura;
 use g5\transform\cura\Names;
 
-class cura2csv{
+class raw2csv{
     
     /**
         Associations between profession codes used in the cura html files

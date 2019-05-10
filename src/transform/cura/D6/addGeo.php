@@ -6,9 +6,9 @@
     This code operates on file   5-tmp/geonames/D6.csv
     And then copies this file to 5-tmp/cura-csv/D6.csv
     This is done to prevent accidental erasure of previous calls to geonames ws : 
-        - call cura2csv
-        - call cura2geo
-        - call cura2csv again => all previous geo information erased
+        - call raw2csv
+        - call addGeo
+        - call raw2csv again => all previous geo information erased
     
     This code can be interrupted in the middle of execution and be called several times.
     Previous calls to geonames.org ws are stored in 5-tmp/geonames/D6.csv.
@@ -22,7 +22,7 @@ namespace g5\transform\cura\D6;
 use g5\init\Config;
 use g5\transform\cura\Cura;
 
-class cura2Geo{
+class addGeo{
     
         /** String written in field PLACE to indicate that a call to geonames webservice failed **/
         const FAILURE_MARK = 'XXX';
@@ -40,7 +40,7 @@ class cura2Geo{
         
         if(!is_file($csvfile)){
             $report .= "Missing file $csvfile\n";
-            $report .= "You must run first : php run.php cura2csv D6\n";
+            $report .= "You must run first : php run.php raw2csv D6\n";
         }
         
         if(!is_file($geofile)){

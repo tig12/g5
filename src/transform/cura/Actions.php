@@ -1,15 +1,16 @@
 <?php
 /********************************************************************************
-    Router to the different actions of this data source.
+    Façade for this transformation.
     
     @license    GPL
-    @history    2019-05-03 17:18:33+02:00, Thierry Graff : creation from a split of class Gauquelin5
+    @history    2017-04-27 10:41:02+02:00, Thierry Graff : creation
+    @history    2019-05-09 01:34:14+02:00, Thierry Graff : refactor
 ********************************************************************************/
 namespace g5\transform\cura;
 
-use g5\init\Config;
+use g5\Datasource;
 
-class Actions{
+class Actions implements Datasource{
     
     /** 
         Possible values of parameter indicating the subject to process.
@@ -22,10 +23,44 @@ class Actions{
     ];
     
     // ******************************************************
+    /**
+        @return A list of possible actions for this data source.
+    **/
+    public static function getActions(){
+        return [
+            'raw2csv',
+            'addGeo',
+            'marked2g55',
+        ];
+    }
+    
+    // ******************************************************
+    /**
+        Routes an action to the appropriate code.
+        @return report : string describing the result of execution.
+    **/
+    public static function action($action, $params=[]){
+        switch($action){
+        	case 'raw2csv' :
+        	    return self::raw2csv($params);
+            break;
+        	case 'addGeo' :
+        	    return self::addGeo($params);
+            break;
+        	case 'marked2g55' :
+        	    return self::marked2g55($params);
+            break;
+        	default:
+        	    throw new Exception("Invalid action : $action");
+            break;
+        }
+    }
+    
+    // ******************************************************
     /** 
         Converts the parameter to an array of subjects.
         Useful for parameters like 'A' which means everything from A1 to A6.
-        Does not perform check on $param - check must be done before calling this function.
+        Does not perform check on $param.
         @return Array containing subjects.
     **/
     private static function computeSubjects($param){
@@ -51,25 +86,24 @@ class Actions{
     /**
         Conversion from files of 1-raw/cura.free.fr to 5-tmp/cura-csv
         Checks parameters and delegates to the correct class.
-        @param  $args   Array of parameters, may be empty.
-        @return $report String describing the result of execution.
+        @return report : string describing the result of execution.
     **/
-    public static function cura2csv($args){
+    private static function raw2csv($params){
         $error_report = "    Possible values : " . implode(', ', self::SUBJECTS_POSSIBLES) . "\n"
                       . "    'A' indicates that all files from A1 to A6 will be processed.";
-        if(count($args) == 0){
-            return "cura2csv requires a parameter indicating what you want to process.\n" . $error_report;
+        if(count($params) == 0){
+            return "raw2csv requires a parameter indicating what you want to process.\n" . $error_report;
         }
-        if(count($args) > 1){
-            return "cura2csv requires a unique parameter indicating what you want to process.\n"
-                . "Invalid parameters : " . implode(', ', array_slice($args, 1)) . "\n"
+        if(count($params) > 1){
+            return "raw2csv requires a unique parameter indicating what you want to process.\n"
+                . "Invalid parameters : " . implode(', ', array_slice($params, 1)) . "\n"
                 . $error_report;
         }
-        if(!in_array($args[0], self::SUBJECTS_POSSIBLES)){
-            return "Invalid parameter '{$args[0]}'\n" . $error_report;
+        if(!in_array($params[0], self::SUBJECTS_POSSIBLES)){
+            return "Invalid parameter '{$params[0]}'\n" . $error_report;
         }
         // OK, the subject is valid.
-        $subjects = self::computeSubjects($args[0]);
+        $subjects = self::computeSubjects($params[0]);
         // Delegate to the class that will do the job
         $report = '';
         foreach($subjects as $subject){
@@ -80,17 +114,17 @@ class Actions{
             	case 'A4' : 
             	case 'A5' : 
             	case 'A6' : 
-            	    $class = 'g5\transform\cura\A\cura2csv';
+            	    $class = 'g5\transform\cura\A\raw2csv';
                 break;
             	case 'D6' :
-            	    $class = 'g5\transform\cura\D6\cura2csv';
+            	    $class = 'g5\transform\cura\D6\raw2csv';
                 break;
             	case 'D10' :
-            	    $class = 'g5\transform\cura\D10\cura2csv';
+            	    $class = 'g5\transform\cura\D10\raw2csv';
                 break;
             	case 'E1' :
             	case 'E3' :
-            	    $class = 'g5\transform\cura\E1_E3\cura2csv';
+            	    $class = 'g5\transform\cura\E1_E3\raw2csv';
                 break;
             }
             if($subject == 'D6' || $subject == 'D10'){
@@ -105,15 +139,18 @@ class Actions{
     
     // ******************************************************
     /**
+        @return report : string describing the result of execution.
+        Add geonames.org information to a file.
+        Checks parameters and delegates to the correct class.
     **/
-    public static function cura2geo($args){
-        if(count($args) != 1){
-            return "ERROR : cura2geo accepts only one parameter (" . count($args) . " given)\n";
+    private static function addGeo($params){
+        if(count($params) != 1){
+            return "ERROR : addGeo accepts only one parameter (" . count($params) . " given)\n";
         }
-        if($args[0] != 'D6'){
-            return "ERROR : invalid parameter '{$args[0]}' - cura2geo can only be executed on file D6.\n";
+        if($params[0] != 'D6'){
+            return "ERROR : invalid parameter '{$params[0]}' - addGeo can only be executed on file D6.\n";
         }
-        return \g5\transform\cura\D6\cura2geo::action();
+        return \g5\transform\cura\D6\addGeo::action();
     }
     
 }// end class

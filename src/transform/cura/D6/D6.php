@@ -1,6 +1,7 @@
 <?php
 /********************************************************************************
-    Contains code common to several D6 classes
+    Contains code common to several D6 classes.
+    
     @license    GPL
     @history    2019-05-09 13:54:56+02:00, Thierry Graff : creation from a split of cura2geo
 ********************************************************************************/

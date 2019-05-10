@@ -1,10 +1,9 @@
 <?php
 /********************************************************************************
-    Utilities for classes of subpackages.
+    Constants and utilities shared by several classes of this package.
     
     @license    GPL
-    @history    2017-04-27 10:41:02+02:00, Thierry Graff : creation
-    @history    2019-05-09 01:34:14+02:00, Thierry Graff : refactor
+    @history    2019-05-10 09:57:43+02:00, Thierry Graff : creation from a split
 ********************************************************************************/
 namespace g5\transform\cura;
 

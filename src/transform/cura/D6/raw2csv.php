@@ -11,7 +11,7 @@ namespace g5\transform\cura\D6;
 use g5\init\Config;
 use g5\transform\cura\Cura;
 
-class cura2csv{
+class raw2csv{
     
         /** String written in field PLACE to indicate that a call to geonames webservice failed **/
         const FAILURE_MARK = 'XXX';
