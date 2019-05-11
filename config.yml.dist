@@ -6,6 +6,7 @@
 # Absolute paths or paths relative to gauquelin5 root directory
 dirs:
   1-cura-raw:           data/1-raw/cura.free.fr
+  1-newalch-raw:        data/1-raw/newalchemypress.com
   #
   3-cura-marked:        data/3-edited/cura-marked
   3-g55-edited:         data/3-edited/g55-edited
