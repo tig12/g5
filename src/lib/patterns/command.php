@@ -7,6 +7,6 @@
 
 interface command{
     
-    public execute($params=[]);
+    public execute($params=[]): string;
     
 }// end interface

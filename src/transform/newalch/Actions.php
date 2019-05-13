@@ -25,6 +25,7 @@ class Actions implements Datasource{
     public static function getActions(){
         return [
             'raw2csv',
+            'extract',
         ];
     }
     
@@ -37,6 +38,9 @@ class Actions implements Datasource{
         switch($action){
         	case 'raw2csv' :
         	    return self::raw2csv($params);
+            break;
+        	case 'extract' :
+        	    return ertel4391\extract::action($params);
             break;
         	default:
         	    throw new Exception("Invalid action : $action");

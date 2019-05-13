@@ -19,7 +19,7 @@ class raw2csv{
         Mapping between country code used in the file (field NATION)
         and ISO 3166 country code.
     **/
-    const NATION_COU = [
+    const NATION_CY = [
         'USA' => 'US',
         'FRA' => 'FR',
         'ITA' => 'IT',
@@ -28,6 +28,42 @@ class raw2csv{
         'SCO' => 'GB', // Scotland ; loss of information
         'NET' => 'NL',
         'LUX' => 'LU',
+        'SPA' => 'ES',
+    ];
+    
+        
+    const OUTPUT_COLUMNS = [
+        'QUEL',
+        'F_NAME',
+        'G_NAME',
+        'DATE',
+        'SPORT',
+        'IG',
+        'CY',
+        'ZITRANG',
+        'ZITSUM',
+        'ZITATE',
+        'ZITSUM_OD',
+        'MARS',
+        'MA_',
+        'MA12',
+        'G_NR',
+        'PARA_NR',
+        'CFEPNR',
+        'CSINR',
+        'G55',
+        'SEX',
+        'PUBL',
+        'PHAS_',
+        'AUFAB',
+        'NIENCORR',
+        'KURTZ',
+        'GQBECORR',
+        'CHRISNAME',
+        'TAGMON',
+        'ENG',
+        'EXTEND',
+        'NIENHUYS',
     ];
     
     // *****************************************
@@ -38,12 +74,15 @@ class raw2csv{
         @throws Exception if unable to parse
     **/
     public static function action(){
+        
+        $output = implode(Config::$data['CSV_SEP'], self::OUTPUT_COLUMNS) . "\n";
+        
         $lines = file(Config::$data['dirs']['1-newalch-raw'] . DS . '3a_sports-utf8.txt');
-echo trim($lines[4]) . "\n";
+//echo trim($lines[4]) . "\n";
         $fieldnames = preg_split('/\s+/', trim($lines[4]));
         $N = count($lines);
-        //for($i=6; $i < $N-3; $i++){
-for($i=6; $i < 8; $i++){
+        for($i=6; $i < $N-3; $i++){
+//for($i=6; $i < 8; $i++){
             $line = ltrim($lines[$i]);
             if($line == ''){
                 continue;
@@ -55,9 +94,9 @@ for($i=6; $i < 8; $i++){
             $cur[$fieldnames[$j++]] = trim(substr($line, 9, 3));
             $cur[$fieldnames[$j++]] = trim(substr($line, 12, 19));
             $cur[$fieldnames[$j++]] = trim(substr($line, 31, 21));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 52, 10));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 63, 5));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 69, 4));
+            $cur[$fieldnames[$j++]] = trim(substr($line, 52, 11)); // date
+            $cur[$fieldnames[$j++]] = trim(substr($line, 63, 6)); // hour
+            $cur[$fieldnames[$j++]] = trim(substr($line, 69, 9));
             $cur[$fieldnames[$j++]] = trim(substr($line, 78, 8));
             $cur[$fieldnames[$j++]] = trim(substr($line, 86, 7));
             $cur[$fieldnames[$j++]] = trim(substr($line, 93, 7));
@@ -90,16 +129,21 @@ for($i=6; $i < 8; $i++){
 QUEL     NR NAME               VORNAME              GEBDATUM   STUND SPORTART INDGRUP NATION ZITRANG ZITSUM ZITATE    ZITSUM_OD MARS MA_ MA12  G_NR PARA_NR CFEPNR CSINR GAUQ1955 MF PUBL  PHAS_  AUFAB NIENCORR KURTZ GQBECORR CHRISNAME TAGMON ENG EXTEND NIENHUYS L
 G:A01    12 Acconcia           Italo                20.04.1925  2,50 FOOT     G       ITA          1      0                   0   26   1    9  1407                                  P    10,900 -7,700                                 0 20.04.
 */
-            
-            
+if(strlen($cur['GEBDATUM']) == 9){
+    echo $cur['GEBDATUM'] . " - " . $cur['STUND'] . ' - ' . $cur['NAME'] . " " . $cur['VORNAME'] . "\n";
+}
+continue;
             $new = [];
             $new['QUEL'] = $cur['QUEL'];
             $new['F_NAME'] = $cur['NAME'];
             $new['G_NAME'] = $cur['VORNAME'];
             $new['DATE'] = self::compute_date($cur['GEBDATUM'], $cur['STUND']);
-            $new['PRO'] = self::compute_profession($cur['SPORTART']);
-            $new['IG'] = $cur['INDGRUP'];
-            $new['COU'] = self::NATION_COU[$cur['NATION']];
+if($new['DATE'] === false){
+    echo $new['F_NAME'] . " " . $new['G_NAME'] . " " . $cur['GEBDATUM'] . " " . $cur['STUND'] . "\n";
+}
+            $new['SPORT'] = self::compute_profession($cur['SPORTART']);
+            $new['IG'] = $cur['INDGRUP']; // useless here, should be associated to profession
+            $new['CY'] = self::NATION_CY[$cur['NATION']];
             $new['ZITRANG'] = $cur['ZITRANG'];
             $new['ZITSUM'] = $cur['ZITSUM'];
             $new['ZITATE'] = $cur['ZITATE'];
@@ -124,11 +168,15 @@ G:A01    12 Acconcia           Italo                20.04.1925  2,50 FOOT     G 
             $new['ENG'] = $cur['ENG'];
             $new['EXTEND'] = $cur['EXTEND'];
             $new['NIENHUYS'] = $cur['NIENHUYS'];
-            
-            echo $line . "\n";
+//            echo $line . "\n";
             //echo 'NI = ' . $cur['NIENHUYS'] . "\n";
-            echo "\n<pre>"; print_r($cur); echo "</pre>\n";
+            //echo "\n<pre>"; print_r($cur); echo "</pre>\n";
+            $output .= implode(Config::$data['CSV_SEP'], $new) . "\n";
         }
+        
+        $outfile = Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::CSV_FILE;
+//        file_put_contents($outfile, $output);
+        return "$outfile generated\n";
         
     }
     
@@ -145,6 +193,18 @@ G:A01    12 Acconcia           Italo                20.04.1925  2,50 FOOT     G 
         }
         $date .= ' ';
         $tmp = explode(',', $hour);
+        if(count($tmp) == 1){
+            $date .= ':' . str_pad ($hour , 2, '0', STR_PAD_LEFT) . ':00';
+        }
+        else{
+            $date .= ':' . str_pad ($tmp[0] , 2, '0', STR_PAD_LEFT);
+            $min = $tmp[1] * 60; // convert decimal part of hour to minutes
+if(!is_numeric($tmp[1])){
+return false;
+}
+            $date .= ':' . str_pad ($tmp[1] , 2, '0', STR_PAD_LEFT);
+        }
+        return $date;
     }
     
     

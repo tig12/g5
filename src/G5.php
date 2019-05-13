@@ -1,6 +1,7 @@
 <?php
 /********************************************************************************
     General code related to Gauquelin5 usage
+    
     @license    GPL
     @history    2017-04-27 10:41:02+02:00, Thierry Graff : creation
     @history    2019-05-10 08:22:01+02:00, Thierry Graff : new version
