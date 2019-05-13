@@ -13,10 +13,11 @@
 namespace g5\transform\cura\A;
 
 use g5\init\Config;
+use g5\patterns\Command;
 use g5\transform\cura\Cura;
 use g5\transform\cura\Names;
 
-class raw2csv{
+class raw2csv implements Command{
     
     /**
         Associations between profession codes used in the cura html files
@@ -347,6 +348,7 @@ class raw2csv{
     
     
     // *****************************************
+    // Implementation of Command
     /** 
         Parses one html cura file of serie A (locally stored in directory data/raw/cura.free.fr)
         and stores it in a csv file (in directory 5-cura-csv/)
@@ -355,11 +357,13 @@ class raw2csv{
         So merge is done using birthdate.
         Merge is not complete because of doublons (persons born the same day).
         
-        @param  $subject  String identifying what is processed (ex : 'A1')
+        @param  $params Array containing one element :a string identifying what is processed (ex : 'A1')
         @return report
         @throws Exception if unable to parse
     **/
-    public static function action($subject){
+    public static function execute($params=[]): string{
+echo "\n<pre>"; print_r($params); echo "</pre>\n"; exit;
+        $subject = $params[0];
         $report =  "--- Importing serie $subject ---\n";
         $raw = Cura::readHtmlFile($subject);
         $file_subject = Cura::subject2filename($subject);

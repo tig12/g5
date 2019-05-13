@@ -19,42 +19,55 @@ use g5\G5;
 //
 // parameter checking
 //
-$datasources = G5::getDatasources();
-$datasources_str = implode(", ", $datasources);
+$datasets = G5::getDatasets();
+$datasets_str = implode(", ", $datasets);
 
 $USAGE = <<<USAGE
-usage : 
-    php {$argv[0]} <datasource> <action> [parameters]
+Usage : 
+    php {$argv[0]} <dataset> <datafile> <action> [parameters]
 with :
-    <datasource> can be : {$datasources_str}
-    <action> = action depending on the datasource
-    [parameters] optional list of parameters depending on datasource and action
+    <dataset> can be : {$datasets_str}
+    <datafile> : the precise file(s) within the dataset.
+    <action> = action done on data ; available actions depend on dataset and datafile.
+    [parameters] optional list of parameters depending on action.
 Example :
-    php {$argv[0]} cura raw2csv A2
+    php {$argv[0]} cura A2 raw2csv
 
 USAGE;
 
-if(count($argv) < 3){
-    echo "WRONG USAGE - need at list 2 arguments\n";
+
+if(count($argv) < 4){
+    echo "WRONG USAGE - need at least 3 arguments\n";
     die($USAGE);
 }
 
-$datasource = $argv[1];
-$action = $argv[2];
+$dataset = $argv[1];
+$datafile = $argv[2];
+$action = $argv[3];
 
-// check datasource
-if(!in_array($datasource, $datasources)){
-    echo "WRONG USAGE - invalid datasource : $datasource\n";
-    die($USAGE);
+// check dataset
+$datasets = G5::getDatasets();
+$datasets_str = implode(", ", $datasets);
+if(!in_array($dataset, $datasets)){
+    echo "WRONG USAGE - invalid dataset : $dataset\n";
+    echo "Possible datasets : $datasets_str\n";
+    exit;
 }
 
+// check datafile
+$datafiles = G5::getDatafiles($dataset);
+$datafiles_str = implode(", ", $datafiles);
+if(!in_array($datafile, $datafiles)){
+    echo "WRONG USAGE - invalid datafile : $datafile\n";
+    echo "Possible datafiles for $dataset : $datafiles_str\n";
+    exit;
+}
 // check action
-$actions = G5::getActions($datasource);
+$actions = G5::getActions($dataset, $datafile);
 $actions_str = implode(", ", $actions);
-
 if(!in_array($action, $actions)){
     echo "WRONG USAGE - invalid action : $action\n";
-    echo "Possible actions for $datasource : $actions_str\n";
+    echo "Possible actions for $dataset, datafile $datafile : $actions_str\n";
     exit;
 }
 
@@ -62,9 +75,10 @@ if(!in_array($action, $actions)){
 // run
 //
 try{
-    $params = array_slice($argv, 3);
-    $class = "g5\\transform\\$datasource\\Actions";
-    $report = $class::action($action, $params);
+    $params = array_slice($argv, 4);
+    $class = G5::getActionClass($dataset, $datafile, $action);
+    array_unshift($params, $action);
+    $report = $class::execute($params);
     echo "$report\n";
 }
 catch(Exception $e){

@@ -27,18 +27,47 @@
 
 <header>
 <h1>Code details</h1>
-<div class="intro"></div>
+<div class="intro"></div>                                                                         
 </header>
 
 <article>
 
-<!-- ********************************************************************************* -->
-<h2>Convention</h2>
-The code is packaged ; main package name is <code>g5</code>. Code is PSR-4 (package hierarchy correspond to directory hierarchy, like in java). Top-level package (<code>g5</code>) is located in <code>src/</code>.
-<br>
-<br>The program deals with the notion of <strong>data source</strong>. Each data source corresponds to a sub-package of <code>g5\transform</code>.
-<br>Each data source must have a class named <code>Actions</code>. For example, package <code>g5\transform\cura</code> must have a class <code>g5\transform\cura\Actions</code>. This class must implement interface <code>g5\Datasource</code>.
+The code is namespaced ; main namespace name is <code>g5</code>.
+<br>Code is PSR-4 (namespace hierarchy corresponds to directory hierarchy, like in java).
+<br>Top-level namespace (<code>g5</code>) is located in <code>src/</code>.
+<br>This code does not use objects, only static methods and instances.
 
+<!-- ********************************************************************************* -->
+<h2>Convention for CLI</h2>
+The command line interface (CLI) is handled by <code>run.php</code>. To interpret the parameters typed by the user, a convention is used : 
+<br>
+<br>The program uses the notions of <strong>data set</strong> (like cura.free.fr, newalchemypress.com), <strong>data file</strong> within a data set (like file A2) and <strong>action</strong> (like <code>raw2csv</code>, which means "convert raw file to csv file").
+<br>Each data set corresponds to a sub-package of <code>g5\transform</code>. Each data file corresponds to a sub package of dataset's package.
+<br>For example, code operating on file <a href="https://newalchemypress.com/gauquelin/gauquelin_docs/3a_sports.txt">3a_sports.txt</a> from newalchemypress.com is located in package <code>g5\transform\newalch\ertel4391</code>.
+<br>
+<br>When the user types a command, the CLI checks, in this order :
+<ul class="simple">
+    <li>Does this dataset have a class <code>Actions</code> ? If yes, the parameters are passed to the <code>execute()</code> method of this class.</li>
+    <li>
+        If not, CLI tries to find a class <code>g5\transform\dataset\datafile\action</code> and call its method <code>execute()</code>
+    </li>
+</ul>
+
+In both cases, the CLI doesn't know anything else about the classes. It only selects the right code to call and passes the parameters.
+<br>
+<br>Examples :
+<ul class="margin-bottom">
+    <li>
+        <code>php run.php cura A raw2csv</code> : the code sees that there is a class <code>g5\transform\cura\Actions</code>, so this class is called.
+    </li>
+    <li>
+        <code>php run.php newalch ertel4391 extract profession</code> : there is no class <code>g5\transform\newalch\Actions</code>, so class <code>g5\transform\newalch\ertel4391\extract</code> will be called, and one parameter, <code>profession</code> will be passed to the method <code>execute()</code>.
+    </li>
+</ul>
+
+Implementation of this convention can be found in the package hierarchy, and in the code of class <code>g5\G5</code>
+<br>
+<br>This mechanism permits to add new datasets and new datafiles automatically handled by the system, if class <code>Actions</code> is not present in the dataset's namespace. And permits to implement more sophisticated mechanisms for some datasets like cura.
 </article>
 </div><!-- end class="main" -->
 

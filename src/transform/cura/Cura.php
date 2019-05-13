@@ -39,9 +39,9 @@ class Cura{
         $raw_file = Config::$data['dirs']['1-cura-raw'] . DS . self::subject2filename($serie);
         $tmp = @file_get_contents($raw_file);
         if(!$tmp){
-            echo "ERROR : Unable to read file $raw_file\n";
-            echo "Check that config.yml indicates a correct path\n";
-            exit;
+            $msg = "ERROR : Unable to read file $raw_file\n"
+                . "Check that config.yml indicates a correct path\n";
+            throw new \Exception($msg);
         }
         return utf8_encode($tmp);
     }
