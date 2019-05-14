@@ -1,6 +1,8 @@
 <?php
 /********************************************************************************
     Auxiliary code for run.php, Gauquelin5 CLI frontend.
+    Provides a generic implementation for namespaces without Router implementation,
+    but which respect the convention described in docs/code-details.html.
     
     @license    GPL
     @history    2017-04-27 10:41:02+02:00, Thierry Graff : creation
@@ -8,7 +10,7 @@
 ********************************************************************************/
 namespace g5;
 
-//use g5\init\Config;
+//use g5\patterns\Command;
 
 class G5{
     
@@ -23,13 +25,14 @@ class G5{
     
     
     // ******************************************************
+    // Simulates implementation of Router 
     /**
         Returns the possible datafiles for a given dataset.
         @todo maybe use reflection if some sub-directories of datasets do not correspond to a datafile sub-package.
     **/
     public static function getDatafiles($dataset){
-        // if class Actions exists, delegate
-        $class = "g5\\transform\\$dataset\\Actions";
+        // if the dataset has an implementation of interface Dataset, delegate
+        $class = self::datasetRouterClassname($dataset);
         if(class_exists($class)){
             return $class::getDatafiles();
         }
@@ -41,15 +44,16 @@ class G5{
     
     
     // ******************************************************
+    // Simulates implementation of Router 
     /**
-        Returns the possible actions for the datafile of a dataset.
+        Returns the possible commands for the datafile of a dataset.
         @return Array of strings containing the possible actions.
     **/
-    public static function getActions($dataset, $datafile){
+    public static function getCommands($dataset, $datafile){
         // if class Actions exists, delegate
-        $class = "g5\\transform\\$dataset\\Actions";
+        $class = self::datasetRouterClassname($dataset);
         if(class_exists($class)){
-            return $class::getActions($datafile);
+            return $class::getCommands($datafile);
         }
         // else return the classes located in the datafile's class directory
         // as the code is psr4, possible to list php files without using reflection.
@@ -67,25 +71,23 @@ class G5{
     /**
         Returns the fully qualified name of a class that will be called for a given triple (dataset, datafile, action).
         Implementation of convention described in docs/code-details.html
-        @return String The class name.
+        @return Array with 2 elements :
+                    - Boolean Indicates if the returned class implements Router or Command
+                    - String The class name.
         @throws Exception if the convention is not correctly coded.
         @todo check that the class implements interface Command.
     **/
-    public static function getActionClass($dataset, $datafile, $action){
-        // look if class Actions exists
-        $class = false;
-        $tested = "g5\\transform\\$dataset\\Actions";
-        if(class_exists($tested)){
-            $class = $tested;
+    public static function getCommandClass($dataset, $datafile, $action){
+        // look if class implementing Command exists for the dataset
+        $class = self::datasetCommandClassname($dataset);
+        if(class_exists($class)){
+            return [true, $class];
         }
+        // Class for dataset doesn't exist, use default 
         // look if a class corresponding to this action exists
-        $tested = "g5\\transform\\$dataset\\$datafile\\$action";
-        if(class_exists($tested)){
-            $class = $tested;
-        }
-        // @todo Add test for interface Command.
-        if($class){
-            return $class;
+        $class = "g5\\transform\\$dataset\\$datafile\\$action";
+        if(class_exists($class)){
+            return [false, $class];
         }
         // class not found
         $msg = "BUG : incorrect implementation of command.\n"
@@ -93,6 +95,28 @@ class G5{
             . "  Datafile : $datafile\n"
             . "  Action : $action\n";
         throw new Exception($msg);
+    }
+    
+    
+    // ******************************************************
+    /** 
+        Returns the class name of a dataset's class implementing Dataset interface.
+        Uses the convention described in docs/code-details.html.
+        Auxiliary of self::getDatafiles() and self::getActionClass().
+    **/
+    private static function datasetRouterClassname($dataset){
+        return implode("\\", ['g5', 'transform', $dataset, ucFirst($dataset) . 'Router']);
+    }
+    
+    
+    // ******************************************************
+    /** 
+        Returns the class name of a dataset's class implementing Command interface.
+        Uses the convention described in docs/code-details.html.
+        Auxiliary of self::getCommandClass().
+    **/
+    private static function datasetCommandClassname($dataset){
+        return implode("\\", ['g5', 'transform', $dataset, ucFirst($dataset) . 'Command']);
     }
     
     

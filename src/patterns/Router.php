@@ -1,13 +1,14 @@
 <?php
 /******************************************************************************
-    Interface definition for Command pattern
+    Interface definition for dataset command router
+    See doc/code-details.html
     
     @license    GPL
     @history    2019-05-13 15:09:10+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\patterns;
 
-interface Dataset{
+interface Router{
     
     /**
         Returns an array containing the possible datafiles processed by the dataset.
@@ -16,8 +17,8 @@ interface Dataset{
     public static function getDatafiles(): array;
     
     /**
-        @return An array of possible actions for this data source.
+        @return An array of possible commands for this data source.
     **/
-    public static function getActions($datafile): array;
-        
+    public static function getCommands($datafile): array;
+    
 }// end interface

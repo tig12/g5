@@ -63,7 +63,7 @@ if(!in_array($datafile, $datafiles)){
     exit;
 }
 // check action
-$actions = G5::getActions($dataset, $datafile);
+$actions = G5::getCommands($dataset, $datafile);
 $actions_str = implode(", ", $actions);
 if(!in_array($action, $actions)){
     echo "WRONG USAGE - invalid action : $action\n";
@@ -76,8 +76,12 @@ if(!in_array($action, $actions)){
 //
 try{
     $params = array_slice($argv, 4);
-    $class = G5::getActionClass($dataset, $datafile, $action);
-    array_unshift($params, $action);
+    [$isRouter, $class] = G5::getCommandClass($dataset, $datafile, $action);
+    if($isRouter){
+        // transmit action and datafile to the router
+        array_unshift($params, $action);
+        array_unshift($params, $datafile);
+    }
     $report = $class::execute($params);
     echo "$report\n";
 }

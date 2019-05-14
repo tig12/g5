@@ -9,9 +9,10 @@
 namespace g5\transform\cura\D6;
 
 use g5\init\Config;
+use g5\patterns\Command;
 use g5\transform\cura\Cura;
 
-class raw2csv{
+class raw2csv implements Command{
     
         /** String written in field PLACE to indicate that a call to geonames webservice failed **/
         const FAILURE_MARK = 'XXX';
@@ -22,7 +23,7 @@ class raw2csv{
         @return report
         @throws Exception if unable to parse
     **/
-    public static function action(){
+    public static function execute($params=[]): string{
         $subject = 'D6';
             
         $report =  "--- Importing serie $subject ---\n";
@@ -32,7 +33,7 @@ class raw2csv{
             '356	8	1	1925	11	0	0	36N05	00W56	Ruiz Bernardo',
             '356	8	1	1925	11	0	0	38N05	00W56	Ruiz Bernardo',
             $raw);
-        $file_serie = Cura::subject2filename($subject);
+        $file_serie = Cura::rawFilename($subject);
         preg_match('#<pre>.*?(NUM.*?NAME)\s*(.*?)\s*</pre>#sm', $raw, $m);
         if(count($m) != 3){
             throw new \Exception("Unable to parse list in " . $file_serie);

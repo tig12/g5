@@ -11,11 +11,10 @@ use g5\transform\cura\Cura;
 
 class Names{
     
-    /**
-        The "serie" corresponding to 902gdN.html
-        Only used by Cura::subject2filename() to compute the name of the file.
-    **/
-    const SERIE = 'N';
+    // ******************************************************
+    public static function rawFilename(){
+        return '902gdN.html';
+    }
     
     // ******************************************************
     /**
@@ -24,8 +23,8 @@ class Names{
         @throws Exception if unable to parse
     **/
     public static function parse(){
-        $filename = Cura::subject2filename(self::SERIE);
-        $raw = Cura::readHtmlFile(self::SERIE);
+        $filename =self::rawFilename();
+        $raw = Cura::readHtmlFile('N');
         preg_match_all('#<pre>\s*(DAY.*?NAME)\s*(.*?)\s*</pre>#sm', $raw, $m);
         // check that the lines are present
         if(!isset($m[2]) || count($m[2]) != 2){

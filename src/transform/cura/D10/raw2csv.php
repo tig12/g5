@@ -8,9 +8,10 @@
 namespace g5\transform\cura\D10;
 
 use g5\init\Config;
+use g5\patterns\Command;
 use g5\transform\cura\Cura;
 
-class raw2csv{
+class raw2csv implements Command{
     
     /** ISO 3166 code (all data share the same country) **/
     const COUNTRY = 'US';
@@ -36,11 +37,11 @@ class raw2csv{
         @return report
         @throws Exception if unable to parse
     **/
-    public static function action(){
+    public static function execute($params=[]): string{
         $subject = 'D10';
         $report =  "--- Importing serie $subject ---\n";
         $raw = Cura::readHtmlFile($subject);
-        $file_serie = Cura::subject2filename($subject);
+        $file_serie = Cura::rawFilename($subject);
         preg_match('#<pre>\s*(NUM.*?CICO)\s*(.*?)\s*</pre>#sm', $raw, $m);
         if(count($m) != 3){
             throw new \Exception("Unable to parse list in " . $file_serie);

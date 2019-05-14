@@ -12,9 +12,10 @@
 namespace g5\transform\cura\E1_E3;
 
 use g5\init\Config;
+use g5\patterns\Command;
 use g5\transform\cura\Cura;
 
-class raw2csv{
+class raw2csv implements Command{
     
     private static $n_missing_places = 0;
     private static $n_missing_timezone = 0;
@@ -53,7 +54,8 @@ class raw2csv{
         @param  $subject Must be 'E1' or 'E3'
         @return report
     **/
-    public static function action($subject){
+    public static function execute($params=[]): string{
+        $subject = $params[0];
         if($subject != 'E1' && $subject != 'E3'){
             throw new Exception("Bad value for parameter \$subject : $subject ; must be 'E1' or 'E3'");
         }

@@ -14,6 +14,33 @@ class Cura{
     /** Separator used in original (html) files **/
     const HTML_SEP = "\t";
     
+    /** 
+        Possible values of parameter indicating the subject to process.
+    **/
+    const DATAFILES_POSSIBLES = [
+        'A', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6',
+        // 'B', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6',
+        'D6', 'D10',
+        'E1', 'E3',
+    ];
+    
+    /** 
+        Associations between datafile in the user's vocabulary and the sub-namespace that hadnles it
+    **/
+    const DATAFILES_SUBNAMESPACE = [
+        'A' => 'A',
+        'A1' => 'A',
+        'A2' => 'A',
+        'A3' => 'A',
+        'A4' => 'A',
+        'A5' => 'A',
+        'A6' => 'A',
+        'D6' => 'D6',
+        'D10' => 'D10',
+        'E1' => 'E1_E3',
+        'E3' => 'E3_E3',
+    ];
+    
     // *****************************************
     /** 
         Computes the name of a html file downloaded from cura.free.fr
@@ -21,10 +48,9 @@ class Cura{
         @param  $serie : a string like 'A1'
         @return filename, a string like '902gdA1y.html' or '902gdB1.html'
     **/
-    public static function subject2filename($serie){
+    public static function rawFilename($serie){
         return '902gd' . $serie . (substr($serie, 0, 1) == 'A' ? 'y' : '') . '.html';
     }
-    
     
     // *****************************************
     /** 
@@ -36,7 +62,7 @@ class Cura{
         @todo This code is specific to cura.free.fr data source => should be in cura.free.fr importer
     **/
     public static function readHtmlFile($serie){
-        $raw_file = Config::$data['dirs']['1-cura-raw'] . DS . self::subject2filename($serie);
+        $raw_file = Config::$data['dirs']['1-cura-raw'] . DS . self::rawFilename($serie);
         $tmp = @file_get_contents($raw_file);
         if(!$tmp){
             $msg = "ERROR : Unable to read file $raw_file\n"
@@ -46,7 +72,6 @@ class Cura{
         return utf8_encode($tmp);
     }
     
-    
     // *****************************************
     /**
         Converts the fields YEA, MON, DAY of a line in a YYYY-MM-DD date
@@ -54,7 +79,6 @@ class Cura{
     public static function computeDay($array){
         return trim($array['YEA']) . '-' . sprintf('%02s', trim($array['MON'])) . '-' . sprintf('%02s', trim($array['DAY']));
     }
-    
     
     // *****************************************
     /**
@@ -74,7 +98,6 @@ class Cura{
         return trim(sprintf('%02s', $array['H']) . ':' . sprintf('%02s', $array['MN']));
     }
     
-    
     // *****************************************
     /**
         Converts field LON in decimal degrees
@@ -88,7 +111,6 @@ class Cura{
         return round($res, 5);
     }
 
-    
     // *****************************************
     /**
         Converts field LAT in decimal degrees

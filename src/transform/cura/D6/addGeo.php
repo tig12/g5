@@ -20,9 +20,10 @@
 namespace g5\transform\cura\D6;
 
 use g5\init\Config;
+use g5\patterns\Command;
 use g5\transform\cura\Cura;
 
-class addGeo{
+class addGeo implements Command{
     
         /** String written in field PLACE to indicate that a call to geonames webservice failed **/
         const FAILURE_MARK = 'XXX';
@@ -32,7 +33,7 @@ class addGeo{
     /**
         Add missing geographic informations to 5-tmp/geonames/D6.csv and 5-tmp/cura-csv/D6.csv.
     **/
-    public static function action(){
+    public static function execute($params=[]): string{
         $subject = 'D6';
         $report =  "--- Computing geographic information for $subject ---\n";
         $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $subject . '.csv';

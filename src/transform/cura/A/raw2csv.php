@@ -357,17 +357,17 @@ class raw2csv implements Command{
         So merge is done using birthdate.
         Merge is not complete because of doublons (persons born the same day).
         
-        @param  $params Array containing one element :a string identifying what is processed (ex : 'A1')
-        @return report
+        @param  $params Array containing one element : a string identifying what is processed (ex : 'A1')
+        @return String report
         @throws Exception if unable to parse
     **/
     public static function execute($params=[]): string{
-echo "\n<pre>"; print_r($params); echo "</pre>\n"; exit;
+// echo "\nraw2csv::execute : "; print_r($params); echo "</pre>\n"; exit;
         $subject = $params[0];
         $report =  "--- Importing serie $subject ---\n";
         $raw = Cura::readHtmlFile($subject);
-        $file_subject = Cura::subject2filename($subject);
-        $file_names = Cura::subject2filename(Names::SERIE); // = 902gdN.html
+        $file_subject = Cura::rawFilename($subject);
+        $file_names = Names::rawFilename(); // = 902gdN.html
         //
         // 1 - parse first list (without names) - store by birth date to prepare matching
         //
