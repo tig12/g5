@@ -10,8 +10,6 @@
 ********************************************************************************/
 namespace g5;
 
-//use g5\patterns\Command;
-
 class G5{
     
     // ******************************************************
@@ -31,15 +29,16 @@ class G5{
         @todo maybe use reflection if some sub-directories of datasets do not correspond to a datafile sub-package.
     **/
     public static function getDatafiles($dataset){
-        // if the dataset has an implementation of interface Dataset, delegate
-        $class = self::datasetRouterClassname($dataset);
-        if(class_exists($class)){
+        // if the dataset has an implementation of interface Router, delegate
+        $file = self::datasetRouterFilename($dataset);
+        if(file_exists($file)){
+            $class = self::datasetRouterClassname($dataset);
             return $class::getDatafiles();
         }
         // else return the directories located in the dataset's class directory
         // as the code is psr4, possible to list php files without using reflection.
         $dir = implode(DS, [__DIR__, 'transform', $dataset]);
-        return glob($dir);
+        return array_map('basename', glob($dir . DS . '*', GLOB_ONLYDIR));
     }
     
     
@@ -50,22 +49,26 @@ class G5{
         @return Array of strings containing the possible actions.
     **/
     public static function getCommands($dataset, $datafile){
-        // if class Actions exists, delegate
-        $class = self::datasetRouterClassname($dataset);
-        if(class_exists($class)){
+        // if the dataset has an implementation of interface Router, delegate
+        $file = self::datasetRouterFilename($dataset);
+        if(file_exists($file)){
+            $class = self::datasetRouterClassname($dataset);
             return $class::getCommands($datafile);
         }
         // else return the classes located in the datafile's class directory
         // as the code is psr4, possible to list php files without using reflection.
         $dir = implode(DS, [__DIR__, 'transform', $dataset, $datafile]);
-        $tmp = glob($dir . DS . '*.php', GLOB_ONLYDIR);
+        $tmp = glob($dir . DS . '*.php');;
         $res = [];
         foreach($tmp as $file){
-            $res[] = basename($file, '.php');
+            $basename = basename($file, '.php');
+            $class = new \ReflectionClass("g5\\transform\\$dataset\\$datafile\\$basename");
+            if($class->implementsInterface("g5\\patterns\\Command")){
+                $res[] = $basename;
+            }
         }
         return $res;
     }
-    
     
     // ******************************************************
     /**
@@ -79,8 +82,9 @@ class G5{
     **/
     public static function getCommandClass($dataset, $datafile, $action){
         // look if class implementing Command exists for the dataset
-        $class = self::datasetCommandClassname($dataset);
-        if(class_exists($class)){
+        $file = self::datasetCommandFilename($dataset);
+        if(file_exists($file)){
+            $class = self::datasetCommandClassname($dataset);
             return [true, $class];
         }
         // Class for dataset doesn't exist, use default 
@@ -100,23 +104,37 @@ class G5{
     
     // ******************************************************
     /** 
-        Returns the class name of a dataset's class implementing Dataset interface.
-        Uses the convention described in docs/code-details.html.
+        Returns the class name of a dataset's class implementing Router interface.
         Auxiliary of self::getDatafiles() and self::getActionClass().
     **/
     private static function datasetRouterClassname($dataset){
         return implode("\\", ['g5', 'transform', $dataset, ucFirst($dataset) . 'Router']);
+    }
+
+    /** 
+        Returns the absolute filename of a dataset's class implementing Router interface.
+        Auxiliary of self::getDatafiles() and self::getActionClass().
+    **/
+    private static function datasetRouterFilename($dataset){
+        return implode(DS, [__DIR__, 'transform', $dataset, ucFirst($dataset) . 'Router' . '.php']);
     }
     
     
     // ******************************************************
     /** 
         Returns the class name of a dataset's class implementing Command interface.
-        Uses the convention described in docs/code-details.html.
         Auxiliary of self::getCommandClass().
     **/
     private static function datasetCommandClassname($dataset){
         return implode("\\", ['g5', 'transform', $dataset, ucFirst($dataset) . 'Command']);
+    }
+    
+    /** 
+        Returns the absolute path of a dataset's class implementing Command interface.
+        Auxiliary of self::getCommandClass().
+    **/
+    private static function datasetCommandFilename($dataset){
+        return implode(DS, [__DIR__, 'transform', $dataset, ucFirst($dataset) . 'Command' . '.php']);
     }
     
     

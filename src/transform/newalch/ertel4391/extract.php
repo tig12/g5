@@ -7,17 +7,33 @@
 namespace g5\transform\newalch\ertel4391;
 
 use g5\init\Config;
+use g5\patterns\Command;
 
-class extract{
+class extract implements Command {
     
     // *****************************************
     /** 
+        Routes to the different actions, based on $param
+        @param $param Array containing one element (a string)
+                Can be : 'sports', 
     **/
-    public static function action($params){
-        switch($params[1]){
+    public static function execute($params=[]): string{
+        $possibleParams = ['sports'];
+        $possibleParams_str = implode(', ', $possibleParams);
+        if(count($params) != 1){
+            $msg = "PARAMETER MISSING in g5\\transform\\newalch\\ertel4391.execute(\$params)\n"
+                . "Possible parameters ; " . $possibleParams_str;
+            return $msg;
+        }
+        switch($params[0]){
         	case 'sports' :
         	    return self::extract_sports();
         	break;
+            default:
+            $msg = "INVALID PARAMETER in g5\\transform\\newalch\\ertel4391.execute(\$params)\n"
+                . "Possible parameters : " . $possibleParams_str;
+            return $msg;
+            break;
         }
     }
     

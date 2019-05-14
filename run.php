@@ -23,6 +23,7 @@ $datasets = G5::getDatasets();
 $datasets_str = implode(", ", $datasets);
 
 $USAGE = <<<USAGE
+-------
 Usage : 
     php {$argv[0]} <dataset> <datafile> <action> [parameters]
 with :
@@ -32,44 +33,66 @@ with :
     [parameters] optional list of parameters depending on action.
 Example :
     php {$argv[0]} cura A2 raw2csv
+-------
 
 USAGE;
 
-
-if(count($argv) < 4){
+// check dataset
+if(count($argv) < 2){
     echo "WRONG USAGE - need at least 3 arguments\n";
     die($USAGE);
 }
-
-$dataset = $argv[1];
-$datafile = $argv[2];
-$action = $argv[3];
-
-// check dataset
-$datasets = G5::getDatasets();
-$datasets_str = implode(", ", $datasets);
-if(!in_array($dataset, $datasets)){
-    echo "WRONG USAGE - invalid dataset : $dataset\n";
-    echo "Possible datasets : $datasets_str\n";
-    exit;
+else{
+    $dataset = $argv[1];
+    $datasets = G5::getDatasets();
+    $datasets_str = implode(", ", $datasets);
+    if(!in_array($dataset, $datasets)){
+        echo $USAGE;
+        echo "WRONG USAGE - INVALID DATASET : $dataset\n";
+        echo "Possible datasets : $datasets_str\n";
+        exit;
+    }
 }
+// here, dataset is valid
 
 // check datafile
 $datafiles = G5::getDatafiles($dataset);
 $datafiles_str = implode(", ", $datafiles);
-if(!in_array($datafile, $datafiles)){
-    echo "WRONG USAGE - invalid datafile : $datafile\n";
-    echo "Possible datafiles for $dataset : $datafiles_str\n";
+if(count($argv) < 3){
+    echo "WRONG USAGE - need at least 3 arguments\n";
+    echo $USAGE;
+    echo "Possible datafiles for dataset $dataset : $datafiles_str\n";
     exit;
 }
+else{
+    $datafile = $argv[2];
+    if(!in_array($datafile, $datafiles)){
+        echo $USAGE;
+        echo "WRONG USAGE - INVALID DATAFILE : $datafile\n";
+        echo "Possible datafiles for dataset $dataset : $datafiles_str\n";
+        exit;
+    }
+}
+// here, datafile is valid
+
 // check action
 $actions = G5::getCommands($dataset, $datafile);
 $actions_str = implode(", ", $actions);
-if(!in_array($action, $actions)){
-    echo "WRONG USAGE - invalid action : $action\n";
-    echo "Possible actions for $dataset, datafile $datafile : $actions_str\n";
+if(count($argv) < 4){
+    echo "WRONG USAGE - need at least 3 arguments\n";
+    echo $USAGE;
+    echo "Possible actions for $dataset - $datafile : $actions_str\n";
     exit;
 }
+else{
+    $action = $argv[3];
+    if(!in_array($action, $actions)){                  
+        echo "WRONG USAGE - invalid action : $action\n";
+        echo "Possible actions for $dataset - $datafile : $actions_str\n";
+        exit;
+    }
+}
+// here, action is valid
 
 //
 // run

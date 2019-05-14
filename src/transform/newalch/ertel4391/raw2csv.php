@@ -12,8 +12,9 @@
 namespace g5\transform\newalch\ertel4391;
 
 use g5\init\Config;
+use g5\patterns\Command;
 
-class raw2csv{
+class raw2csv implements Command{
     
     /**
         Mapping between country code used in the file (field NATION)
@@ -73,7 +74,7 @@ class raw2csv{
         @return report
         @throws Exception if unable to parse
     **/
-    public static function action(){
+    public static function execute($params=[]): string{
         
         $output = implode(Config::$data['CSV_SEP'], self::OUTPUT_COLUMNS) . "\n";
         
