@@ -29,7 +29,7 @@ class lib{
     **/
     public static function csvAssociative($filename, $delimiter=';'){
         $lines = @file($filename, FILE_IGNORE_NEW_LINES);
-        if(!$lines ){
+        if(!$lines){
             return false;
         }
         $n = count($lines);

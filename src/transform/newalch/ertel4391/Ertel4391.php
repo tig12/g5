@@ -10,6 +10,6 @@ namespace g5\transform\newalch\ertel4391;
 class Ertel4391{
     
     /** Name of the csv file in 5-tmp/newalch-csv **/
-    const CSV_FILE = '4391SPO.csv';
+    const TMP_CSV_FILE = '4391SPO.csv';
     
 }// end class

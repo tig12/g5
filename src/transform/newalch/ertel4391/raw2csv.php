@@ -1,9 +1,14 @@
 <?php
 /********************************************************************************
-    Converts file 3a_sports-utf8.txt to a csv
+    Parses file 1-raw/newalchemypress.com/3a_sports-utf8.csv
+    and stores it to 5-tmp/newalch/4391SPO.csv
+    
+    3a_sports-utf8.csv is a modified version of file 3a_sports-utf8.txt
     This file was retrieved in april 2019 from
     https://newalchemypress.com/gauquelin/gauquelin_docs/3a_sports.txt
-    And then converted to utf-8.
+    Modifications done on the original file are detailed in
+    1-raw/newalchemypress.com/3a_sports-utf8-README
+    
     The file contains 4391 sportsmen used by Ertel
     
     @license    GPL
@@ -17,7 +22,7 @@ use g5\patterns\Command;
 class raw2csv implements Command{
     
     /**
-        Mapping between country code used in the file (field NATION)
+        Mapping between country code used in the file (field NATION)       
         and ISO 3166 country code.
     **/
     const NATION_CY = [
@@ -35,6 +40,7 @@ class raw2csv implements Command{
         
     const OUTPUT_COLUMNS = [
         'QUEL',
+        'NR',
         'F_NAME',
         'G_NAME',
         'DATE',
@@ -69,8 +75,9 @@ class raw2csv implements Command{
     
     // *****************************************
     /** 
-        Parses file 1-raw/newalchemypress.com/3a_sports-utf8.txt
+        Parses file 1-raw/newalchemypress.com/3a_sports-utf8.csv
         and stores it to 5-tmp/newalch/4391SPO.csv
+        @param $params empty array
         @return report
         @throws Exception if unable to parse
     **/
@@ -78,107 +85,56 @@ class raw2csv implements Command{
         
         $output = implode(Config::$data['CSV_SEP'], self::OUTPUT_COLUMNS) . "\n";
         
-        $lines = file(Config::$data['dirs']['1-newalch-raw'] . DS . '3a_sports-utf8.txt');
-//echo trim($lines[4]) . "\n";
-        $fieldnames = preg_split('/\s+/', trim($lines[4]));
-        $N = count($lines);
-        for($i=6; $i < $N-3; $i++){
-//for($i=6; $i < 8; $i++){
-            $line = ltrim($lines[$i]);
-            if($line == ''){
-                continue;
+        $records = \lib::csvAssociative(Config::$data['dirs']['1-newalch-raw'] . DS . '3a_sports-utf8.csv');
+        $N = count($records);
+        for($i=1; $i < $N; $i++){
+            if($i%2 == 0){
+                continue; // every other line is empty
             }
-            // split the line by fixed width
-            $j = 0;
-            $cur = [];
-            $cur[$fieldnames[$j++]] = trim(substr($line, 0, 9));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 9, 3));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 12, 19));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 31, 21));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 52, 11)); // date
-            $cur[$fieldnames[$j++]] = trim(substr($line, 63, 6)); // hour
-            $cur[$fieldnames[$j++]] = trim(substr($line, 69, 9));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 78, 8));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 86, 7));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 93, 7));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 101, 6));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 108, 6));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 115, 12));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 128, 4));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 133, 3));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 137, 4));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 142, 5));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 148, 7));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 156, 6));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 163, 5));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 169, 8));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 178, 2));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 181, 4));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 186, 6));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 193, 6));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 200, 8));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 209, 5));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 215, 8));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 224, 9));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 234, 6));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 241, 3));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 245, 6));
-            $cur[$fieldnames[$j++]] = trim(substr($line, 252, 8));
-            // Column 'L' dropped because contains nothing for all lines in newalch file
-            // $cur[$fieldnames[$j++]] = trim(substr($line, 261, 1));
-/*
-QUEL     NR NAME               VORNAME              GEBDATUM   STUND SPORTART INDGRUP NATION ZITRANG ZITSUM ZITATE    ZITSUM_OD MARS MA_ MA12  G_NR PARA_NR CFEPNR CSINR GAUQ1955 MF PUBL  PHAS_  AUFAB NIENCORR KURTZ GQBECORR CHRISNAME TAGMON ENG EXTEND NIENHUYS L
-G:A01    12 Acconcia           Italo                20.04.1925  2,50 FOOT     G       ITA          1      0                   0   26   1    9  1407                                  P    10,900 -7,700                                 0 20.04.
-*/
-if(strlen($cur['GEBDATUM']) == 9){
-    echo $cur['GEBDATUM'] . " - " . $cur['STUND'] . ' - ' . $cur['NAME'] . " " . $cur['VORNAME'] . "\n";
-}
-continue;
+            $record = $records[$i];
             $new = [];
-            $new['QUEL'] = $cur['QUEL'];
-            $new['F_NAME'] = $cur['NAME'];
-            $new['G_NAME'] = $cur['VORNAME'];
-            $new['DATE'] = self::compute_date($cur['GEBDATUM'], $cur['STUND']);
-if($new['DATE'] === false){
-    echo $new['F_NAME'] . " " . $new['G_NAME'] . " " . $cur['GEBDATUM'] . " " . $cur['STUND'] . "\n";
-}
-            $new['SPORT'] = self::compute_profession($cur['SPORTART']);
-            $new['IG'] = $cur['INDGRUP']; // useless here, should be associated to profession
-            $new['CY'] = self::NATION_CY[$cur['NATION']];
-            $new['ZITRANG'] = $cur['ZITRANG'];
-            $new['ZITSUM'] = $cur['ZITSUM'];
-            $new['ZITATE'] = $cur['ZITATE'];
-            $new['ZITSUM_OD'] = $cur['ZITSUM_OD'];
-            $new['MARS'] = $cur['MARS'];
-            $new['MA_'] = $cur['MA_'];
-            $new['MA12'] = $cur['MA12'];
-            $new['G_NR'] = $cur['G_NR'];
-            $new['PARA_NR'] = $cur['PARA_NR'];
-            $new['CFEPNR'] = $cur['CFEPNR'];
-            $new['CSINR'] = $cur['CSINR'];
-            $new['G55'] = $cur['GAUQ1955'];
-            $new['SEX'] = $cur['MF'];
-            $new['PUBL'] = $cur['PUBL'];
-            $new['PHAS_'] = $cur['PHAS_'];
-            $new['AUFAB'] = $cur['AUFAB'];
-            $new['NIENCORR'] = $cur['NIENCORR'];
-            $new['KURTZ'] = $cur['KURTZ'];
-            $new['GQBECORR'] = $cur['GQBECORR'];
-            $new['CHRISNAME'] = $cur['CHRISNAME'];
-            $new['TAGMON'] = $cur['TAGMON'];
-            $new['ENG'] = $cur['ENG'];
-            $new['EXTEND'] = $cur['EXTEND'];
-            $new['NIENHUYS'] = $cur['NIENHUYS'];
+            $new['QUEL'] = trim($record[' QUEL']);
+            $new['NR'] = trim($record['  NR']);
+            $new['F_NAME'] = trim($record['NAME']);
+            $new['G_NAME'] = trim($record['VORNAME']);
+            $new['DATE'] = self::compute_date($record);
+            $new['SPORT'] = self::compute_profession(trim($record['SPORTART']));
+            $new['IG'] = trim($record['INDGRUP']); // useless here, should be associated to profession
+            $new['CY'] = self::NATION_CY[trim($record['NATION'])];
+            $new['ZITRANG'] = trim($record['ZITRANG']);
+            $new['ZITSUM'] = trim($record['ZITSUM']);
+            $new['ZITATE'] = trim($record['ZITATE']);
+            $new['ZITSUM_OD'] = trim($record['ZITSUM_OD']);
+            $new['MARS'] = trim($record['MARS']);
+            $new['MA_'] = trim($record['MA_']);
+            $new['MA12'] = trim($record['MA12']);
+            $new['G_NR'] = trim($record['G_NR']);
+            $new['PARA_NR'] = trim($record['PARA_NR']);
+            $new['CFEPNR'] = trim($record['CFEPNR']);
+            $new['CSINR'] = trim($record['CSINR']);
+            $new['G55'] = trim($record['GAUQ1955']);
+            $new['SEX'] = trim($record['MF']);
+            $new['PUBL'] = trim($record['PUBL']);
+            $new['PHAS_'] = trim($record[' PHAS_']);
+            $new['AUFAB'] = trim($record[' AUFAB']);
+            $new['NIENCORR'] = trim($record['NIENCORR']);
+            $new['KURTZ'] = trim($record['KURTZ']);
+            $new['GQBECORR'] = trim($record['GQBECORR']);
+            $new['CHRISNAME'] = trim($record['CHRISNAME']);
+            $new['TAGMON'] = trim($record['TAGMON']);
+            $new['ENG'] = trim($record['ENG']);
+            $new['EXTEND'] = trim($record['EXTEND']);
+            $new['NIENHUYS'] = trim($record['NIENHUYS']);
+//echo "\n<pre>"; print_r($new); echo "</pre>\n"; exit;
 //            echo $line . "\n";
-            //echo 'NI = ' . $cur['NIENHUYS'] . "\n";
-            //echo "\n<pre>"; print_r($cur); echo "</pre>\n";
+            //echo 'NI = ' . trim($record['NIENHUYS'] . "\n";
+            //echo "\n<pre>"; print_r(trim($record); echo "</pre>\n";
             $output .= implode(Config::$data['CSV_SEP'], $new) . "\n";
         }
         
-        $outfile = Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::CSV_FILE;
-//        file_put_contents($outfile, $output);
+        $outfile = Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE;
+        file_put_contents($outfile, $output);
         return "$outfile generated\n";
-        
     }
     
     
@@ -186,7 +142,8 @@ if($new['DATE'] === false){
     /**
         Auxiliary of raw2csv()
     **/
-    private static function compute_date($day, $hour){
+    private static function compute_date(&$record){
+    [$day, $hour] = [trim($record['GEBDATUM']), trim($record['STUND'])];
         $tmp = explode('.', $day);
         $date = $tmp[2] . '-' . $tmp[1] . '-' . $tmp[0];
         if($hour == ''){
@@ -195,15 +152,17 @@ if($new['DATE'] === false){
         $date .= ' ';
         $tmp = explode(',', $hour);
         if(count($tmp) == 1){
-            $date .= ':' . str_pad ($hour , 2, '0', STR_PAD_LEFT) . ':00';
+            $date .= str_pad ($hour , 2, '0', STR_PAD_LEFT) . ':00';
         }
         else{
-            $date .= ':' . str_pad ($tmp[0] , 2, '0', STR_PAD_LEFT);
-            $min = $tmp[1] * 60; // convert decimal part of hour to minutes
-if(!is_numeric($tmp[1])){
-return false;
-}
-            $date .= ':' . str_pad ($tmp[1] , 2, '0', STR_PAD_LEFT);
+            $date .= str_pad ($tmp[0] , 2, '0', STR_PAD_LEFT);
+            $min = $tmp[1];
+            if(strlen($min) == 1 && $min < 10){
+                $min *= 10; // dirty patch because libre office truncated trailing zeroes
+//echo $record[' QUEL'] . ' ' . $record[' NR'] . ' ' . $record['NAME'] . ' ' . $record['VORNAME'] . ' ' . "'$hour' '$day'\n";
+            }
+            $min = round($min * 0.6); // convert decimal part of hour to minutes
+            $date .= ':' . str_pad ($min , 2, '0', STR_PAD_LEFT);
         }
         return $date;
     }
