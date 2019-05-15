@@ -14,12 +14,16 @@ use g5\patterns\Command;
 
 class examine implements Command {
     
+    /** 
+        Possible values of the command, for ex :
+        php run.php newalch ertel4391 examine eminence
+    **/
     const POSSIBLE_PARAMS = [
         'sport',
         'quel',
         'date',
         'eminence',
-        'links',
+        'ids',
     ];
     
     // *****************************************
@@ -40,7 +44,7 @@ class examine implements Command {
         	case 'quel': self::examine_quel(); break;
         	case 'date': self::examine_date(); break;
         	case 'eminence': self::examine_eminence(); break;
-        	case 'links': self::examine_links(); break;
+        	case 'ids': self::examine_ids(); break;
         	default:
             $msg = "INVALID PARAMETER in g5\\transform\\newalch\\ertel4391.execute(\$params)\n"
                 . "Possible parameters : " . $possibleParams_str;
@@ -57,24 +61,31 @@ class examine implements Command {
     **/
     public static function examine_sport(){
         $rows = \lib::csvAssociative(Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE);
-        $res = []; // assoc array sport => IG
+        $res = []; // assoc array keys = sport codes ; values = [IG, n]
         foreach($rows as $row){
-            if(!isset($res[$row['SPORT']])){
-                $res[$row['SPORT']] = $row['IG'];
+            $sport = $row['SPORT'];
+            if(!isset($res[$sport])){
+                $res[$sport] = [
+                    'IG' => $row['IG'],
+                    'n' => 0,
+                ];
             }
-            else{
-                if($res[$row['SPORT']] != $row['IG']){
-                    echo "Incoherent association sport / IG, line " . $row['F_NAME'] . ' ' . $row['G_NAME']
-                        . ' : ' . $row['SPORT'] . ' ' . $row['IG'] . "\n";
-                }
+            $res[$sport]['n'] ++;
+            // coherence check
+            if($res[$sport]['IG'] != $row['IG']){
+                echo "Incoherent association sport / IG, line " . $row['F_NAME'] . ' ' . $row['G_NAME']
+                    . ' : ' . $sport . ' ' . $row['IG'] . "\n";
             }
-            if(strlen($row['SPORT']) == 3){
-                echo $row['SPORT'] . ' ' . $row['NR'] . ' ' . $row['F_NAME']
+            if(strlen($sport) == 3){
+                echo $sport . ' ' . $row['NR'] . ' ' . $row['F_NAME']
                         . ' ' . $row['G_NAME'] . ' ' . $row['IG'] . "\n";
             }
         }
+        // print
         ksort($res);
-        print_r($res);
+        foreach($res as $sport => $details){
+            echo "{$details['IG']} $sport : {$details['n']}\n";
+        }
     }
     
     // ******************************************************
@@ -136,10 +147,36 @@ class examine implements Command {
     **/
     public static function examine_eminence(){
         $rows = \lib::csvAssociative(Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE);
-        $ranks = []; // assoc array rank => nb records with this rank
-        
+        $ranks = []; // assoc array rank => nb records with this rank (ZITRANG)
+        $sums = []; // assoc array sums => nb records with this sum (ZITSUM)
+        $sources = []; // assoc array sources => nb of records found in this source
         foreach($rows as $row){
+            if(!isset($ranks[$row['ZITRANG']])){
+                $ranks[$row['ZITRANG']] = 0;
+            }
+            $ranks[$row['ZITRANG']]++;
+            //
+            if(!isset($sums[$row['ZITSUM']])){
+                $sums[$row['ZITSUM']] = 0;
+            }
+            $sums[$row['ZITSUM']]++;
+            //
+            for($i=0; $i < strlen($row['ZITATE']); $i++){
+                $char = substr($row['ZITATE'], $i, 1);
+                if(!isset($sources[$char])){
+                    $sources[$char] = 0;
+                }
+                $sources[$char]++;
+            }
         }
+        ksort($ranks);
+        ksort($sums);
+        ksort($sources);
+        echo "\n"; print_r($ranks); echo "\n";
+        echo "\n"; print_r($sums); echo "\n";
+        echo "\n"; print_r($sources); echo "\n";
+        arsort($sources);
+        echo "\n"; print_r($sources); echo "\n";
     }
     
     // ******************************************************
@@ -147,10 +184,45 @@ class examine implements Command {
         Look at links to other data sets
         Columns : G_NR PARA_NR CFEPNR CSINR G55
     **/
-    public static function examine_eminence(){
+    public static function examine_ids(){
         $rows = \lib::csvAssociative(Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE);
-        
+        $N = 0;
+        $res = [
+            'Gauquelin' => 0,
+            'Gauquelin 1955' => 0,
+            'Comité Para' => 0,
+            'CSICOP' => 0,
+            'CFEPP' => 0,
+        ];
         foreach($rows as $row){
+            $N++;
+            if(trim($row['G_NR']) != ''){
+                $res['Gauquelin']++;
+            }
+            if(trim($row['G55']) != ''){
+                $res['Gauquelin 1955']++;
+            }
+            if(trim($row['PARA_NR']) != ''){
+                $res['Comité Para']++;
+            }
+            if(trim($row['CSINR']) != ''){
+                $res['CSICOP']++;
+            }
+            if(trim($row['CFEPNR']) != ''){
+                $res['CFEPP']++;
+            }
         }
+        $p = []; // percentages
+        $p['Gauquelin'] = round($res['Gauquelin'] * 100 / $N, 2);
+        $p['Gauquelin 1955'] = round($res['Gauquelin 1955'] * 100 / $N, 2);
+        $p['Comité Para'] = round($res['Comité Para'] * 100 / $N, 2);
+        $p['CSICOP'] = round($res['CSICOP'] * 100 / $N, 2);
+        $p['CFEPP'] = round($res['CFEPP'] * 100 / $N, 2);
+        echo "Total : $N\n";
+        foreach($res as $k => $v){
+            echo "$k \t: $v ({$p[$k]} %)\n";
+        }
+        
+        
     }
 }// end class
