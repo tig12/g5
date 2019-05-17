@@ -98,7 +98,7 @@ class G5{
             . "  Dataset : $dataset\n"
             . "  Datafile : $datafile\n"
             . "  Action : $action\n";
-        throw new Exception($msg);
+        throw new \Exception($msg);
     }
     
     

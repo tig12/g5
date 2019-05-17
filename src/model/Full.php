@@ -22,7 +22,7 @@ class Full{
     **/
     public static function getDirectory($birthdate){
         if(preg_match(self::PDATE, $birthdate) != 1){
-            throw new Exception("Invalid date : $birthdate"); 
+            throw new \Exception("Invalid date : $birthdate"); 
         }
         $y = substr($birthdate, 0, 4);
         //$subdir = floor($y / 10) * 10; // one subdir per decade

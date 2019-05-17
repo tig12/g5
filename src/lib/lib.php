@@ -22,12 +22,31 @@ class lib{
     
     /**
         Fills a csv file to an array of associative arrays
-        The first line of the array is considered as the header, containing the field names
+        The first line of the array is considered as the header, containing the field names.
+        All lines are upposed to have the same number of fields (no check is done).
         @param      $filename Absolute path to the csv file
         @param      $delimiter field delimiter (one character only).
         @return      false or associative array
     **/
     public static function csvAssociative($filename, $delimiter=';'){
+        $res = [];
+        if (($handle = fopen($filename, "r")) !== FALSE) {
+            $fieldnames = fgetcsv($handle, 0, $delimiter);
+            $N = count($fieldnames);
+            while (($data = fgetcsv($handle, 0, $delimiter)) !== false){
+                $tmp = [];
+                for ($c=0; $c < $N; $c++) {
+                    $tmp[$fieldnames[$c]] = $data[$c];
+                }
+                $res[] = $tmp;
+            }
+            fclose($handle);
+        }
+        return $res;
+    }
+    
+    /* 
+    public static function z_csvAssociative_OLD($filename, $delimiter=';'){
         $lines = @file($filename, FILE_IGNORE_NEW_LINES);
         if(!$lines){
             return false;
@@ -46,6 +65,7 @@ class lib{
         }
         return $res;
     }
+    */
     
     
     /** Auxiliary variable of sortByKey(), for usort(). */

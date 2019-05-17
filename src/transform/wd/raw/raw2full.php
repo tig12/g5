@@ -9,7 +9,7 @@ namespace g5\transform\wd\raw;
 use g5\init\Config;
 use g5\patterns\Command;
 use g5\model\Full;
-use g5\transform\wd\WD;
+use g5\transform\wd\Wikidata;
 
 class raw2full implements Command{
     
@@ -20,7 +20,6 @@ class raw2full implements Command{
     **/
     const EMPTY_RES = [
         'name' => '',
-        'slug' => '',
         'family-name' => '',
         'given-name' => '',
         'gender' => '',
@@ -36,42 +35,80 @@ class raw2full implements Command{
     
     // *****************************************
     /** 
-        Store the content of a wd csv file to yaml files of 5-tmp/full
+        Store the content of one or several csv file to yaml files of 5-tmp/full
         @param $params array with one element :
             relative path from dirs/1-wd-raw of config.yml to the csv file to import, without .csv extension.
             Ex : if the value dirs/1-wd-raw is data/1-raw/wikidata.org
-            and the csv file to import is data/1-raw/wikidata.org/science/math.csv
-            Then the parameter must be "science/math".
+            and the csv file to import is data/1-raw/wikidata.org/science/maths.csv
+            Then the parameter must be "science/maths".
         @return report
     **/
     public static function execute($params=[]): string{
         
+        $USAGE = "WRONG USAGE of g5\\transform\\wd\\raw.execute(\$params)\n"
+            . "This command needs one parameter expressing one of the following :\n"
+            . "- The csv file to import.\n"
+            . "    Ex : if the csv file to import is data/1-raw/wikidata.org/science/maths.csv\n"
+            . "    then the parameter must be \"science/maths\".\n"
+            . "- The directory to import :\n"
+            . "    Ex : if the parameter is \"sport\", it will import all files of directory data/1-raw/wikidata.org/sport.\n"
+            . "- ALL : this will import all files of all sub-directories of data/1-raw/wikidata.org/.\n";
         if(count($params) != 1){
-            return "WRONG USAGE of g5\\transform\\wd\\raw.execute(\$params)\n"
-                . "This command needs one parameter expressing the csv file to import.\n"
-                . "Ex : if the csv file to import is data/1-raw/wikidata.org/science/math.csv\n"
-                . "then the parameter must be \"science/math\".\n";
+            return $USAGE;
         }
         $param = $params[0];
-        $infile = Config::$data['dirs']['1-wd-raw'] . DS . $param . '.csv';
-        if(!file_exists($infile)){
-            return "WRONG USAGE : There is no csv file corresponding to parameter \"$param\".\n"
-                . "(Trying to open $infile)";
+        if($param == 'ALL'){
+            $dirname = Config::$data['dirs']['1-wd-raw'];
+            $files = glob($dirname . DS . '*' . DS . '*.csv');
+            foreach($files as $filename){
+                self::importOneFile($filename);
+            }
+            return '';
         }
+        else{
+            $dirname = Config::$data['dirs']['1-wd-raw'] . DS . $param;
+            if(is_dir($dirname)){
+                $files = glob($dirname . DS . '*.csv');
+                foreach($files as $filename){
+                    self::importOneFile($filename);
+                }
+                return '';
+            }
+            else{
+                $filename = Config::$data['dirs']['1-wd-raw'] . DS . $param . '.csv';
+                if(file_exists($filename)){
+                    self::importOneFile($filename);
+                    return '';
+                }
+                else{
+                    return $USAGE . "\n"
+                        . "Nothing corresponds to $param";
+                }
+            }
+        }
+    }
+    
+    // ******************************************************
+    /**
+        Auxiliary of execute()
+    **/
+    private static function importOneFile($filename){
         
-        $rows = \lib::csvAssociative($infile, WD::RAW_CSV_SEP);
+        echo "Importing $filename ... \n";
+        
+        $rows = \lib::csvAssociative($filename, Wikidata::RAW_CSV_SEP);
         
         // group rows by wikipedia id, because of doublons
         $assoc = [];
         foreach($rows as $row){
-            $id = WD::getId($row['person']);
+            $id = Wikidata::getId($row['person']);
             if(!isset($assoc[$id])){
                 $assoc[$id] = [];
             }
             $assoc[$id][] = $row;
         }
         unset($rows);
-        
+
         // now each element of $rows contain one person
         $nStored = 0;
         foreach($assoc as $id => $rows){
@@ -93,7 +130,7 @@ class raw2full implements Command{
             switch($row['genderLabel']){
             	case 'male': $new['gender'] = 'M'; break;
             	case 'female': $new['gender'] = 'F'; break;
-                default: $new['gender'] = $row['genderLabel'];
+                default: $new['gender'] = $row['genderLabel']; break;
             }
             // ids
             $row['ids'] = [];
@@ -103,13 +140,10 @@ class raw2full implements Command{
                 $new['ids']['mactutor'] = $row['macTutor'];
             }
             // occupations
-if(!is_array($row['occupation'])){
-echo "\n<pre>"; print_r($row); echo "</pre>\n"; exit;
-}
             for($i=0; $i < count($row['occupation']); $i++){
                 $new['occupations'][] = [
                     'name' => $row['occupationLabel'][$i],
-                    'id-wikidata' => WD::getId($row['occupation'][$i]),
+                    'id-wikidata' => Wikidata::getId($row['occupation'][$i]),
                 ];
             }
             // birth death
@@ -133,8 +167,8 @@ echo "\n<pre>"; print_r($row); echo "</pre>\n"; exit;
                 $new['death']['cause'] = $row['deathcauseLabel'];
             }
             // values specific to wikidata
-            $new['data-sources']['wikidata']['id-birthplace'] = WD::getId($row['birthplace']);
-            $new['data-sources']['wikidata']['id-deathplace'] = WD::getId($row['deathplace']);
+            $new['data-sources']['wikidata']['id-birthplace'] = Wikidata::getId($row['birthplace']);
+            $new['data-sources']['wikidata']['id-deathplace'] = Wikidata::getId($row['deathplace']);
             $new['data-sources']['wikidata']['link-count'] = $row['linkcount'];
             if(count($row['ambiguities']) != 0){
                 $new['data-sources']['wikidata']['ambiguities'] = $row['ambiguities'];
@@ -147,22 +181,17 @@ echo "\n<pre>"; print_r($row); echo "</pre>\n"; exit;
             if(!is_dir($dir)){
                 mkdir($dir, 0755, true);
             }
-//print_r($new); echo "\n";
             $yaml = yaml_emit($new);
             file_put_contents($filename, $yaml);
             $nStored++;
-//echo "slug = $slug\n";
-//echo "$filename\n";
-//echo "\n"; print_r($yaml); echo "\n";
-//break;
         }
-        return "Import of $param done - stored $nStored persons";
+        echo "done - stored $nStored persons\n";
     }
     
     
     // ******************************************************
     /**
-        Auxiliary of raw2full()
+        Auxiliary of importOneFile()
     **/
     private static function birthDeath(
         $date,
@@ -187,7 +216,7 @@ echo "\n<pre>"; print_r($row); echo "</pre>\n"; exit;
         $res['place']['name'] = $placeLabel;
         $res['place']['country'] = $iso3166;
         $res['place']['id-geonames'] = $geonamesid;
-        [$res['place']['lg'], $res['place']['lat']] = WD::parseLgLat($coords);
+        [$res['place']['lg'], $res['place']['lat']] = Wikidata::parseLgLat($coords);
         
         
         return $res;
@@ -196,7 +225,7 @@ echo "\n<pre>"; print_r($row); echo "</pre>\n"; exit;
     // ******************************************************
     /**
         Tries to isolate family name and given name.
-        Auxiliary of raw2full()
+        Auxiliary of importOneFile()
         @return Array with two elements containing family name and given name
                 Contains empty string in case of ambiguity.
     **/
@@ -212,7 +241,7 @@ echo "\n<pre>"; print_r($row); echo "</pre>\n"; exit;
             }
             else{
                 // don't try clever guess
-echo "NAME PROBLEM - $full - $family\n";
+                // echo "NAME PROBLEM - $full - $family\n"; // TODO log ?
                 return ['', ''];
             }
         }
@@ -221,7 +250,7 @@ echo "NAME PROBLEM - $full - $family\n";
     
     // ******************************************************
     /**
-        Auxiliary of raw2full()
+        Auxiliary of importOneFile()
         @param $rows Rows coming from wikidata - so each row is an associative array without recursion
         @return Assoc array with a scalar value for each field, except for occupation and occupationLabel
                 Multiple values for other fields are stored in $res['ambiguities']
@@ -241,7 +270,7 @@ echo "NAME PROBLEM - $full - $family\n";
         $res = [];
         $res['ambiguities'] = [];
         foreach($res2 as $k => $v){
-            if(count($v) == 1){
+            if(count($v) == 1 && $k != 'occupation' && $k != 'occupationLabel'){
                 $res[$k] = $v[0];
             }
             else{

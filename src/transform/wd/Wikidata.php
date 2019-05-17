@@ -8,7 +8,7 @@
 ********************************************************************************/
 namespace g5\transform\wd;
 
-class WD{
+class Wikidata{
     
     /** Separator used in raw wikidata files **/
     const RAW_CSV_SEP = ',';

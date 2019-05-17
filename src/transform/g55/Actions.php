@@ -32,7 +32,7 @@ class Actions implements Datasource{
         	    return corrected2new::action();
             break;
         	default:
-        	    throw new Exception("Invalid action : $action");
+        	    throw new \Exception("Invalid action : $action");
             break;
         }
     }

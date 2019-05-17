@@ -57,7 +57,7 @@ class raw2csv implements Command{
     public static function execute($params=[]): string{
         $subject = $params[0];
         if($subject != 'E1' && $subject != 'E3'){
-            throw new Exception("Bad value for parameter \$subject : $subject ; must be 'E1' or 'E3'");
+            throw new \Exception("Bad value for parameter \$subject : $subject ; must be 'E1' or 'E3'");
         }
         // config - todo : check validity of values put in config
         $report_type = Config::$data['raw2csv']['report'][$subject]; // 'full', 'small', 'tz' or 'geo'
