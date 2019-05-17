@@ -7,6 +7,7 @@
 dirs:
   1-cura-raw:           data/1-raw/cura.free.fr
   1-newalch-raw:        data/1-raw/newalchemypress.com
+  1-wd-raw:             data/1-raw/wikidata.org
   #
   3-cura-marked:        data/3-edited/cura-marked
   3-g55-edited:         data/3-edited/g55-edited
@@ -15,6 +16,7 @@ dirs:
   5-g55-generated:      data/5-tmp/g55-generated
   5-newalch-csv:        data/5-tmp/newalch-csv
   5-geonames:           data/5-tmp/geonames
+  5-full:               data/5-tmp/full
   #
   9-g55-original:       data/9-output/history/1955-gauquelin/g55-original
   9-cura-corrected:     data/9-output/datasets/cura-corrected
