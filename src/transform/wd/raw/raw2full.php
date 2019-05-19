@@ -19,6 +19,8 @@ class raw2full implements Command{
         Contains ony commmon fields.
     **/
     const EMPTY_RES = [
+        'slug' => '',
+        'filename' => '',
         'name' => '',
         'family-name' => '',
         'given-name' => '',
@@ -57,6 +59,8 @@ class raw2full implements Command{
             return $USAGE;
         }
         $param = $params[0];
+        
+        // convert all files in all directories
         if($param == 'ALL'){
             $dirname = Config::$data['dirs']['1-wd-raw'];
             $files = glob($dirname . DS . '*' . DS . '*.csv');
@@ -65,31 +69,33 @@ class raw2full implements Command{
             }
             return '';
         }
+        
+        // convert all files in one directory
+        $dirname = Config::$data['dirs']['1-wd-raw'] . DS . $param;
+        if(is_dir($dirname)){
+            $files = glob($dirname . DS . '*.csv');
+            foreach($files as $filename){
+                self::importOneFile($filename);
+            }
+            return '';
+        }
+        
+        // convert one file
+        $filename = Config::$data['dirs']['1-wd-raw'] . DS . $param . '.csv';
+        if(file_exists($filename)){
+            self::importOneFile($filename);
+            return '';
+        }
         else{
-            $dirname = Config::$data['dirs']['1-wd-raw'] . DS . $param;
-            if(is_dir($dirname)){
-                $files = glob($dirname . DS . '*.csv');
-                foreach($files as $filename){
-                    self::importOneFile($filename);
-                }
-                return '';
-            }
-            else{
-                $filename = Config::$data['dirs']['1-wd-raw'] . DS . $param . '.csv';
-                if(file_exists($filename)){
-                    self::importOneFile($filename);
-                    return '';
-                }
-                else{
-                    return $USAGE . "\n"
-                        . "Nothing corresponds to $param";
-                }
-            }
+            return $USAGE . "\n"
+                . "Nothing corresponds to $param";
         }
     }
     
     // ******************************************************
     /**
+        Store the persons of one csv file.
+        Each person is stored in a yaml file.
         Auxiliary of execute()
     **/
     private static function importOneFile($infile){
@@ -108,7 +114,10 @@ class raw2full implements Command{
             $assoc[$id][] = $row;
         }
         unset($rows);
-
+        
+        //
+        // Strore each row in a yaml file
+        //
         // now each element of $rows contain one person
         $nStored = 0;
         foreach($assoc as $id => $rows){
@@ -174,16 +183,23 @@ class raw2full implements Command{
                 $new['data-sources']['wikidata']['ambiguities'] = $row['ambiguities'];
             }
             
+            // slug
+            $new['slug'] = Full::personSlug($new['name'], $new['family-name'], $new['given-name'], $new['birth']['date']);
+            //
             // output
-            $slug = \lib::slugify($new['name']);
+            //
             try{
                 $dir = Full::getDirectory($new['birth']['date']);
             }
             catch(\Exception $e){
-                echo "Invalid date for {$new['name']} : {$new['birth']['date']} - in file $infile - record not stored\n";
-                continue;
+                $dir = Config::$data['dirs']['5-full'] . DS . 'fixme';
+                // $outfile = $dir . DS . $new['slug'] . '.yml';
+                echo "INVALID DATE in $infile for {$new['name']} : {$new['birth']['date']}\n";
+                echo "      Stored in $dir\n";
+                //continue;
             }
-            $outfile = $dir . DS . $slug . '.yml';
+            $outfile = $dir . DS . $new['slug'] . '.yml';
+            $new['filename'] = $outfile;
             if(!is_dir($dir)){
                 mkdir($dir, 0755, true);
             }

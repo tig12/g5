@@ -51,8 +51,10 @@ class CuraCommand implements Command{
         	case 'ertel2csv':
         	    return \g5\transform\cura\A\ertel2csv::execute($params); // HERE $params passed
             break;
+            case 'csv2full':
+                return \g5\transform\cura\A\csv2full::execute($params); // HERE $params passed
         	default:
-        	    throw new \Exception("Invalid action : $action");
+        	    return "g5\transform\cura\CuraCommand - Invalid action : $action";
             break;
         }
     }

@@ -87,7 +87,7 @@ if(count($argv) < 4){
 else{
     $action = $argv[3];
     if(!in_array($action, $actions)){                  
-        echo "WRONG USAGE - invalid action : $action\n";
+        echo "WRONG USAGE - INVALID ACTION : $action\n";
         echo "Possible actions for $dataset - $datafile : $actions_str\n";
         exit;
     }

@@ -15,7 +15,10 @@ spl_autoload_register(
         $classname = str_replace($namespace . '\\', '', $full_classname);
         $classname = str_replace('\\', DS, $classname);
         $filename = $root_dir . DS . $classname . '.php';
-        require_once $filename;
+        $ok = include_once($filename);
+        if(!$ok){
+            throw new \Exception("AUTOLOAD FAILS");
+        }
     }
 );
 
