@@ -31,20 +31,25 @@ class CuraCommand implements Command{
                 . "Parameters given : " . print_r($params, true) . "\n";
             throw new \Exception($msg);
         }
+        $cde_args = $params;
         $datafile = $params[0];
         $command = $params[1];
-        array_shift($params);
-        array_shift($params);
+         // $cde_args = params without datafile and command
+        array_shift($cde_args);
+        array_shift($cde_args);
         
         switch($command){
-        	case 'raw2csv' :
-        	    return self::raw2csv($datafile, $params);
+        	case 'raw2csv':
+        	    return self::raw2csv($datafile, $cde_args);
             break;
-        	case 'addGeo' :
-        	    return self::addGeo($datafile, $params);
+        	case 'addGeo':
+        	    return self::addGeo($datafile, $cde_args);
             break;
-        	case 'marked2g55' :
-        	    return self::marked2g55($datafile, $params);
+        	case 'marked2g55':
+        	    return self::marked2g55($datafile, $cde_args);
+            break;
+        	case 'ertel2csv':
+        	    return \g5\transform\cura\A\ertel2csv::execute($params); // HERE $params passed
             break;
         	default:
         	    throw new \Exception("Invalid action : $action");

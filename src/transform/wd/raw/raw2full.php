@@ -92,11 +92,11 @@ class raw2full implements Command{
     /**
         Auxiliary of execute()
     **/
-    private static function importOneFile($filename){
+    private static function importOneFile($infile){
         
-        echo "Importing $filename ... \n";
+        echo "Importing $infile ... \n";
         
-        $rows = \lib::csvAssociative($filename, Wikidata::RAW_CSV_SEP);
+        $rows = \lib::csvAssociative($infile, Wikidata::RAW_CSV_SEP);
         
         // group rows by wikipedia id, because of doublons
         $assoc = [];
@@ -176,13 +176,19 @@ class raw2full implements Command{
             
             // output
             $slug = \lib::slugify($new['name']);
-            $dir = Full::getDirectory($new['birth']['date']);
-            $filename = $dir . DS . $slug . '.yml';
+            try{
+                $dir = Full::getDirectory($new['birth']['date']);
+            }
+            catch(\Exception $e){
+                echo "Invalid date for {$new['name']} : {$new['birth']['date']} - in file $infile - record not stored\n";
+                continue;
+            }
+            $outfile = $dir . DS . $slug . '.yml';
             if(!is_dir($dir)){
                 mkdir($dir, 0755, true);
             }
             $yaml = yaml_emit($new);
-            file_put_contents($filename, $yaml);
+            file_put_contents($outfile, $yaml);
             $nStored++;
         }
         echo "done - stored $nStored persons\n";

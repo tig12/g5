@@ -106,7 +106,7 @@ try{
         array_unshift($params, $datafile);
     }
     $report = $class::execute($params);
-    echo "$report\n";
+    echo "$report";
 }
 catch(Exception $e){
     echo 'Exception : ' . $e->getMessage() . "\n";

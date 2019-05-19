@@ -41,8 +41,8 @@ class raw2csv implements Command{
     const OUTPUT_COLUMNS = [
         'QUEL',
         'NR',
-        'F_NAME',
-        'G_NAME',
+        'FNAME',
+        'GNAME',
         'DATE',
         'SPORT',
         'IG',
@@ -95,8 +95,8 @@ class raw2csv implements Command{
             $new = [];
             $new['QUEL'] = trim($record[' QUEL']);
             $new['NR'] = trim($record['  NR']);
-            $new['F_NAME'] = trim($record['NAME']);
-            $new['G_NAME'] = trim($record['VORNAME']);
+            $new['FNAME'] = trim($record['NAME']);
+            $new['GNAME'] = trim($record['VORNAME']);
             $new['DATE'] = self::compute_date($record);
             $new['SPORT'] = self::compute_profession(trim($record['SPORTART']));
             $new['IG'] = trim($record['INDGRUP']); // useless here, should be associated to profession

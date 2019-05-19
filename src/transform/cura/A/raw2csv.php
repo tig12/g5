@@ -362,7 +362,6 @@ class raw2csv implements Command{
         @throws Exception if unable to parse
     **/
     public static function execute($params=[]): string{
-// echo "\nraw2csv::execute : "; print_r($params); echo "</pre>\n"; exit;
         $subject = $params[0];
         $report =  "--- Importing serie $subject ---\n";
         $raw = Cura::readHtmlFile($subject);
@@ -426,7 +425,7 @@ class raw2csv implements Command{
                         'NUM' => $tmp['NUM'],
                     ];
                     // store in $res with fabricated name
-                    $tmp['NAME'] = self::compute_name($subject, $tmp['NUM']);
+                    $tmp['FNAME'] = self::compute_replacement_name($subject, $tmp['NUM']);
                     $res[] = $tmp;
                 }
                 continue;
@@ -438,7 +437,7 @@ class raw2csv implements Command{
                 // store in $res with fabricated name
                 foreach($array1 as $tmp){
                     $n3++;
-                    $tmp['NAME'] = self::compute_name($subject, $tmp['NUM']);
+                    $tmp['FNAME'] = self::compute_replacement_name($subject, $tmp['NUM']);
                     $res[] = $tmp;
                 }
                 $new_doublon = [$file_subject => [], $file_names => []];
@@ -451,7 +450,7 @@ class raw2csv implements Command{
                 foreach($array2 as $tmp){
                     $new_doublon[$file_names][] = [
                         'LINE' => implode("\t", $tmp),
-                        'NAME' => $tmp['name'],
+                        'FNAME' => $tmp['name'],
                     ];
                 }
                 $doublons_different_nb[] = $new_doublon;
@@ -462,7 +461,7 @@ class raw2csv implements Command{
                 if(count($array1) == 1){
                     // OK no ambiguity => add to res
                     $tmp = $array1[0];
-                    $tmp['NAME'] = $array2[0]['name'];
+                    $tmp['FNAME'] = $array2[0]['name'];
                     $res[] = $tmp;
                     $n_ok++;
                 }
@@ -471,7 +470,7 @@ class raw2csv implements Command{
                     // store in $res with fabricated name
                     foreach($array1 as $tmp){
                         $n2++;
-                        $tmp['NAME'] = self::compute_name($subject, $tmp['NUM']);
+                        $tmp['FNAME'] = self::compute_replacement_name($subject, $tmp['NUM']);
                         $res[] = $tmp;
                     }
                     // fill $doublons_same_nb with all candidate lines
@@ -485,7 +484,7 @@ class raw2csv implements Command{
                     foreach($array2 as $tmp){
                         $new_doublon[$file_names][] = [
                             'LINE' => implode("\t", $tmp),
-                            'NAME' => $tmp['name'],
+                            'FNAME' => $tmp['name'],
                         ];
                     }
                     $doublons_same_nb[] = $new_doublon;
@@ -501,6 +500,19 @@ class raw2csv implements Command{
         }
         else{
             $n_ok_fix = $n1_fix = $n2_fix = 0;
+        }
+        //
+        // fill FNAME when possible
+        //
+        // untill now, only FNAME has been filled
+        // fill FNAME for trivial cases
+        foreach(array_keys($res) as $k){
+            [$res[$k]['FNAME'], $res[$k]['GNAME']] = self::compute_family_given($res[$k]['FNAME']);
+            // to check if there is a regular pattern for all rows
+            // result : no
+            // if($res[$k]['FNAME'] == '' && substr($res[$k]['GNAME'], 0, 11) != 'Gauquelin-A'){
+            //     echo $res[$k]['GNAME'] . "\n";
+            // }
         }
         //
         // report
@@ -535,7 +547,8 @@ class raw2csv implements Command{
         // fields in the resulting csv
         $fieldnames = [
             'NUM',
-            'NAME',
+            'FNAME',
+            'GNAME',
             'PRO',
             'DATE',
             'PLACE',
@@ -548,7 +561,8 @@ class raw2csv implements Command{
         foreach($res as $cur){
             $new = [];
             $new['NUM'] = trim($cur['NUM']);
-            $new['NAME'] = trim($cur['NAME']);
+            $new['FNAME'] = trim($cur['FNAME']);
+            $new['GNAME'] = trim($cur['GNAME']);
             $new['PRO'] = self::compute_profession($subject, $cur['PRO'], $new['NUM']);
             // date time
             $day = Cura::computeDay($cur);
@@ -563,7 +577,7 @@ class raw2csv implements Command{
             $new['PLACE'] = trim($cur['CITY']);
             [$new['COU'], $new['COD']] = self::compute_country($cur['COU'], $cur['COD']);
             $new['LG'] = Cura::computeLg($cur['LON']);
-            $new['LAT'] = Cura::computeLat($cur['LAT']);                             
+            $new['LAT'] = Cura::computeLat($cur['LAT']);
             $csv .= implode(Config::$data['CSV_SEP'], $new) . "\n";
             $nb_stored ++;
         }
@@ -573,6 +587,25 @@ class raw2csv implements Command{
         return $report;
     }
     
+    
+    // ******************************************************
+    /**
+        If a string contains two words separated by a space,
+        explodes it to split family name from given name.
+        @return Array with 2 strings : family and given.
+    **/
+    private static function compute_family_given($str){
+        $gname = '';
+        $tmp = explode(' ', $str);
+        if(count($tmp) == 2){
+            $fname = $tmp[0];
+            $gname = $tmp[1];
+        }
+        else{
+            $fname = $str;
+        }
+        return [$fname, $gname];
+    }
     
     // ******************************************************
     /**
@@ -617,13 +650,13 @@ class raw2csv implements Command{
             if($found !== false){
                 // resolve first
                 $idx_num = ($found === 0 ? 1 : 0);
-                $idx_name = ($doublons_same_nb[$i][$file_names][0]['NAME'] == $NAME ? 1 : 0); // HERE use of exact name spelling in self::CORRECTIONS_1955
+                $idx_name = ($doublons_same_nb[$i][$file_names][0]['FNAME'] == $NAME ? 1 : 0); // HERE use of exact name spelling in self::CORRECTIONS_1955
                 $new_num1 = $doublons_same_nb[$i][$file_subject][$idx_num]['NUM'];
-                $new_name1 = $doublons_same_nb[$i][$file_names][$idx_name]['NAME'];
+                $new_name1 = $doublons_same_nb[$i][$file_names][$idx_name]['FNAME'];
                 // inject doublon resolution in $res
                 for($j=0; $j < count($res); $j++){
                     if($res[$j]['NUM'] == $new_num1){
-                        $res[$j]['NAME'] = $new_name1;
+                        $res[$j]['FNAME'] = $new_name1;
                         break;
                     }
                 }
@@ -631,11 +664,11 @@ class raw2csv implements Command{
                 $idx_num = ($idx_num == 0 ? 1 : 0);
                 $idx_name = ($idx_name == 0 ? 1 : 0);
                 $new_num2 = $doublons_same_nb[$i][$file_subject][$idx_num]['NUM'];
-                $new_name2 = $doublons_same_nb[$i][$file_names][$idx_name]['NAME'];
+                $new_name2 = $doublons_same_nb[$i][$file_names][$idx_name]['FNAME'];
                 // inject doublon resolution in $res
                 for($j=0; $j < count($res); $j++){
                     if($res[$j]['NUM'] == $new_num2){
-                        $res[$j]['NAME'] = $new_name2;
+                        $res[$j]['FNAME'] = $new_name2;
                         break;
                     }
                 }
@@ -652,9 +685,9 @@ class raw2csv implements Command{
         for($i=0; $i < $n; $i++){
             $NUM = $res[$i]['NUM'];
             // test on strpos done to avoid counting cases solved by doublons
-            if(isset(self::CORRECTIONS_1955[$subject][$NUM]) && strpos($res[$i]['NAME'], 'Gauquelin-') === 0){
+            if(isset(self::CORRECTIONS_1955[$subject][$NUM]) && strpos($res[$i]['FNAME'], 'Gauquelin-') === 0){
                 $n_ok_fix++;
-                $res[$i]['NAME'] = self::CORRECTIONS_1955[$subject][$NUM];
+                $res[$i]['FNAME'] = self::CORRECTIONS_1955[$subject][$NUM];
             }
         }
         return [$n_ok_fix, $n1_fix, $n2_fix];
@@ -688,8 +721,9 @@ class raw2csv implements Command{
     /** 
         Computes missing names
         Auxiliary of raw2csv()
+        @return A string like 'Gauquelin-A1-243'
     **/
-    private static function compute_name($subject, $num){
+    private static function compute_replacement_name($subject, $num){
         return "Gauquelin-$subject-$num";
     }
     
