@@ -28,18 +28,19 @@ class csv2full implements Command{
         
         $report = '';
         
-        $curaRows = \lib::csvAssociative(Config::$data['dirs']['5-cura-csv'] . DS . 'A1.csv');
+        $curaRows = \lib::csvAssociative(Config::$data['dirs']['5-cura-csv'] . DS . 'A2.csv');
         
         $nTotal = count($curaRows);
         $nMatch = 0;
         foreach($curaRows as $row){
             $full = Full::matchArray($row);
             if(!$full){
+//echo $row['NUM'] . ' ' . $row['GNAME'] . ' ' . $row['FNAME'] . ' ' . $row['PRO'] . "\n";
                 // @todo self::handleNotMatched();
                 continue;
             }
-//echo $full['name'] . "\n";
             $nMatch++;
+//if($nMatch == 20) break;
 //echo "\n<pre>"; print_r($full); echo "</pre>\n"; exit;
         }
 

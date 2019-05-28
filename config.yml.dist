@@ -59,21 +59,21 @@ raw2csv:
     E3: small
     
 #
-# Settings specific to 1955 groups
+# Settings specific to Gauquelin 1955 groups
 #
-1955:
+g55:
   
   # Sorting used in generated csv files
   # used by Serie1955::marked2generated()
   sort: 
-    576MED: NAME
-    508MED: NAME
+    576MED: FNAME
+    508MED: FNAME
     570SPO: NUM
-    676MIL: NAME
-    906PEI: NAME
-    361PEI: NAME
-    500ACT: NAME
-    494DEP: NAME
-    349SCI: NAME
-    884PRE: NAME
+    676MIL: FNAME
+    906PEI: FNAME
+    361PEI: FNAME
+    500ACT: FNAME
+    494DEP: FNAME
+    349SCI: FNAME
+    884PRE: FNAME
   

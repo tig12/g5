@@ -17,7 +17,7 @@ spl_autoload_register(
         $filename = $root_dir . DS . $classname . '.php';
         $ok = include_once($filename);
         if(!$ok){
-            throw new \Exception("AUTOLOAD FAILS");
+            throw new \Exception("AUTOLOAD FAILS for class $full_classname");
         }
     }
 );

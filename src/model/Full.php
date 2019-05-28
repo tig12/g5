@@ -79,6 +79,8 @@ class Full{
     
     // ******************************************************
     /**
+        Tries to match an array representing a person expressed in 5-tmp/ vocabulary to a person of 5-tmp/full
+        
         @param $
         @return false or an assoc array containing 2 elements :
                 'filename'  : path to the matched yaml file
@@ -102,14 +104,44 @@ class Full{
         $filename = self::getFile($name, $fname, $gname, $date);
         $dir = self::getDirectory($date);
 //echo "$dir\n";
-        // try match by filename
+        //
+        // match by exact filename
+        //
         $candidates = glob($dir . DS . "*$date*");
         if(in_array($filename, $candidates)){
             return yaml_parse(file_get_contents($filename));
         }
+        //
+        // try to match if only one file of full has same birth date
+        //
+        if(count($candidates) == 1){
+            $cand = $candidates[0];
+            $yaml = yaml_parse(file_get_contents($cand));
+            if($a['COU'] == $yaml['birth']['place']['country']){
+                $d = \lib::distance(
+                    $a['LG'],
+                    $a['LAT'],
+                    $yaml['birth']['place']['lg'],
+                    $yaml['birth']['place']['lat']
+                );
+                if($d < 50){
+echo "\n$filename\n";
+echo "$cand\n";
+echo "d = $d\n";
+                }
+//exit;
+            }
+// echo "\n"; print_r($a); echo "\n";
+// echo "\n"; print_r($yaml); echo "\n";
+//exit;
+        }
+// echo "$filename\n";
+// echo "\n"; print_r($candidates); echo "\n";
+// exit;        
+        
+        
+        
         return false;
-//echo "$filename\n";
-//echo "\n"; print_r($candidates); echo "\n";
     }
     
 }// end class
