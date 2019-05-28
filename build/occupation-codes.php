@@ -11,6 +11,7 @@
     @license    GPL
     @copyright  Thierry Graff
     @history    2017-05-03 10:29:04+02:00, Thierry Graff : Creation
+    @history    2019-05-28 16:06:12+02:00, Thierry Graff : Replace csv version by yaml
 ********************************************************************************/
 
 define('DS', DIRECTORY_SEPARATOR);
@@ -61,15 +62,48 @@ switch($command){
     Generates a table of profession codes in html
 **/
 function html_table(){
-    $codes = read_input_file();
+    $codes = read_input_file();    
     $res = '';
-    $res .= "\n" . '<table">';
-    $res .= "\n<tr><th>Code</th><th>Label (fr)</th><th>Label (en)</th></tr>";
-    foreach($codes as $code => $labels){
-        $res .= "\n<tr><td>$code</td><td>{$labels[0]}</td><td>{$labels[1]}</td></tr>";
+    // General codes
+    $res .= "\n<!-- ************************************* -->\n";
+    $res .= "<h3>General codes</h3>\n";
+    $res .= "<table class=\"wikitable margin\">\n";
+    $res .= "<tr><th>Code</th><th>Label (fr)</th><th>Label (en)</th></tr>\n";
+    foreach($codes as $code => $record){
+        $belongs = belongs_to($record);
+        if(!empty($belongs)){
+            continue;
+        }
+        $res .= "<tr><td>$code</td><td>{$record['fr']}</td><td>{$record['en']}</td></tr>\n";
     }
-    $res .= "\n</table>";
-    echo $res . "\n";
+    $res .= "</table>\n";
+    // Artists
+    $res .= "\n<!-- ************************************* -->\n";
+    $res .= "<h3>Artists</h3>\n";
+    $res .= "<table class=\"wikitable margin\">\n";
+    $res .= "<tr><th>Code</th><th>Label (fr)</th><th>Label (en)</th></tr>\n";
+    foreach($codes as $code => $record){
+        $belongs = belongs_to($record);
+        if(!in_array('AR', $belongs)){
+            continue;
+        }
+        $res .= "<tr><td>$code</td><td>{$record['fr']}</td><td>{$record['en']}</td></tr>\n";
+    }
+    $res .= "</table>\n";
+    // Sportsmen
+    $res .= "\n<!-- ************************************* -->\n";
+    $res .= "<h3>Sports</h3>\n";
+    $res .= "<table class=\"wikitable margin\">\n";
+    $res .= "<tr><th>Code</th><th>Label (fr)</th><th>Label (en)</th></tr>\n";
+    foreach($codes as $code => $record){
+        $belongs = belongs_to($record);
+        if(!in_array('SP', $belongs)){
+            continue;
+        }
+        $res .= "<tr><td>$code</td><td>{$record['fr']}</td><td>{$record['en']}</td></tr>\n";
+    }
+    $res .= "</table>\n";
+    echo $res;
 }
 
 
@@ -99,24 +133,20 @@ function md_table(){
     Loads file profession-codes
     If a code appears more than once, the program exits with an error message
     Otherwise, file supposed correct, no check done
-    @return associative array profession code => [profession label fr, profession label en]
+    @return associative array profession code => content of this record
 **/
 function read_input_file(){
-    $lines = file(dirname(__DIR__) . DS . 'share' . DS . 'profession-codes.csv');
+    $records = yaml_parse_file(dirname(__DIR__) . DS . 'share' . DS . 'occupation-codes.yml');
+    
     $res = [];
     $check = [];
-    foreach($lines as $line){
-        $line = trim($line);
-        if($line == '' || substr($line, 0, 1) == '#'){
-            continue;
-        }
-        $cur = explode(';', $line);
-        $code = $cur[0];
+    foreach($records as $rec){
+        $code = $rec['code'];
         if(!isset($check[$code])){
             $check[$code] = 0;
         }
         $check[$code]++;
-        $res[$code] = [$cur[1], $cur[2]];
+        $res[$code] = $rec;
     }
     // check doublons
     foreach($check as $code => $n){
@@ -125,6 +155,15 @@ function read_input_file(){
         }
     }
     //
+    ksort($res);
     return $res;
 }
 
+
+// ******************************************************
+/**
+    @param $record One element of the yaml file, representing an occupation
+**/
+ function belongs_to($record){
+     return $record['belongs-to'] ?? [];
+}

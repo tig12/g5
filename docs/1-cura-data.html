@@ -44,45 +44,6 @@ The first step to work on the data is to download the html pages containing the 
 <br>They must be stored with the same name as in cura.free.fr (ex : <code>902gdA1y.html</code>).
 
 
-<!-- ********************************************************************************* -->
-<h2>Issues</h2>
-
-<!-- ************************************* -->
-<h3>The problem of time</h3>
-
-Here, "legal time" means "the time that can be read on the birth certificate".
-<br>In cura.free.fr, times are not presented in a uniform way. Cura files can be divided in two groups :
-<ul>
-    <li>
-        <div class="bold">Files with all informations available to compute astrological charts</div>
-        <ul class="simple">
-            <li>
-            In files of series A, B, D9, F, NH the legal time is transformed, and a corresponding timezone offset is given.
-            </li>
-            <li>In file D10, the legal time is given with the timezone offset.</li>
-        </ul>
-    </li>
-    
-    <li>
-        <div class="bold">Files with missing informations</div>
-        <ul>
-            <li>
-                In files E1 and E3, legal time is given with place name.
-                <br>Place name must be linked to a standard geographical frame in order to compute the timezone offset.
-            </li>
-            <li>
-                In file D6, longitude and latitude are given without place name and country code. Reverse geocoding is necessary to find the country and compute timezone offset.
-            </li>
-        </ul>
-    </li>
-</ul>
-
-
-<br>I think the presentation done in series A, B, D9, F, NH is bad, because it mixes two distinct informations (legal time and timezone offset) in one data (the birth time).
-<br>This complicates the verification process : to check a birth hour on a civil registry, one first need to deal with the timezone offset problem.
-<br>So whenever possible, I restored the legal time with the corresponding timezone offset.
-<br>The concerned files contain in their notice <cite class="inline">Birthtime is converted to standard time, either for zone 0 (= GMT) or -1 (= CET)</cite>
-
 </article>
 </div><!-- end class="main" -->
 
@@ -117,6 +78,7 @@ Here, "legal time" means "the time that can be read on the birth certificate".
         <a href="9-results.html">9 - Results</a>
     </li>
     <li class="bold"><a href="https://larzac.info/gauquelin5">Download results</a></li>
+    <li><a href="time.html">Expressing time</a></li>
     <li><a href="geonames.html">Geonames.org</a></li>
     <li><a href="code-details.html">Code details</a></li>
     <!-- <li><a href="questions.html">Questions</a></li> -->

@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Geonames | Gauquelin5</title>
+    <title>Time | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
-    <meta name="description" content="Using geonames.org to relate Gauquelin data to a standard geographic frame">
+    <meta name="description" content="">
     <meta name="robots" content="index,follow">
     <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
     <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
     <meta name="dcterms.rightsHolder" content="Thierry Graff">
-    <meta name="dcterms.dateCopyrighted" content="2018">
+    <meta name="dcterms.dateCopyrighted" content="2019">
     <!-- 
     tigsite:
-        history: 2018, Thierry Graff : Creation
+        history: 2019-05-28 11:46:11+02:00, Thierry Graff : Creation
     -->
 </head>
 
@@ -23,46 +23,47 @@
 
 <nav class="prevnext">
     <a class="top" href="index.html">&uarr;</a>
-    <!-- 
     <a class="prev" rel="prev" href=".html">&larr;</a>
     <a class="next" rel="next" href=".html">&rarr;</a>
-    -->
 </nav>
 
 <header>
-<h1>Integrating geonames.org</h1>
-<div class="intro"></div>
+<h1>Expressing time</h1>
+<div class="intro">
+This page deals with a small but important detail : the way to express times.
+<br>
+</div>
 </header>
 
 <article>
-Geonames is used to relate places to a geonames.org id, which permits to compute longitude and latitude.
-<br>In some files (like E1 and E3), timezone information is missing. The program tries to associate the names of cities to places of geonames, to compute timezone.
+In this page, "legal time" means "the time that can be read on the birth certificate".
 <br>
-<br>To do this, the program needs to have geonames data stored in a postgres database, as done by the program located at <a href="https://github.com/tig12/geonames2postgres">github.com/tig12/geonames2postgres</a>.  
-<br>You need to :
-<ul>
-    <li>
-        have postgres installed on your machine,
-    </li>
-    <li>
-        in <code>config.yml</code>, put the correct values in the <code>postgresql</code> section,
-    </li>
-    <li>
-        run <code>geonames2postgres.py</code> for all the countries containing birth dates.
-        <br>Gauquelin data needs :
+<br>In some files (for example series series A, B, D9, F, NH of cura.free.fr), birth time is provided like that :
 <pre>
-python geonames2postgres.py BE
-python geonames2postgres.py DE
-python geonames2postgres.py DZ
-python geonames2postgres.py FR
-python geonames2postgres.py IT
-python geonames2postgres.py LU
-python geonames2postgres.py MA
-python geonames2postgres.py NL
-python geonames2postgres.py US
+
+YEA	MON	DAY	PRO	NUM	COU	H	MN	SEC	TZ	LAT	LON	COD	CITY		
+(...)
+1862	6	3	C	876	F	6	51	16	0	48N50	2E11	92	ASNIERES
 </pre>
-    </li>
+
+It means that birth time is <code>06:51:16</code> and that timezone offset is 0.
+<br>The value <code>06:51:16</code> is the result of a computation : legal time + timezone offset.
+<br>This is coherent with the notice found in the concerned files :
+<cite class="margin05">Birthtime is converted to standard time, either for zone 0 (= GMT) or -1 (= CET)</cite>
+
+I think that expressing times this way is a very bad idea because it mixes two distinct informations :
+<ul>
+    <li>The legal time, as it can be read in civil registries.</li>
+    <li>The timezone offset.</li>
 </ul>
+
+It's a problem, because if one wants to check the data, it's impossible to check legal time without worrying about timezone offset.
+<br>Doing like that generates a loss of information. If the data is not correct, does it come from an error on legal time or on timezone offset ?
+<br>
+<br>Using ISO 8601 format, this date would be expressed <code><b>1862-06-03 06:51:16+00:00</b></code>
+<br>Restoration process computes birth time to 7 AM and timezone offset to 8' 44''.
+<br>So this date should be expressed <code><b>1862-06-03 07:00-00:08:44</b></code>
+
 
 </article>
 </div><!-- end class="main" -->
