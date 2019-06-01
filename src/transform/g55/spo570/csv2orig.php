@@ -40,7 +40,7 @@ class csv2orig implements Command {
             'NUM' => '',
             'FAMILYNAME' => '',
             'GIVENNAME' => '',
-            'PRO' => '',
+            'OCCU' => '',
             'BIRTHDATE' => '',
             'BIRTHPLACE' => '',
             'COU' => '',
@@ -99,10 +99,10 @@ class csv2orig implements Command {
                 $new['GIVENNAME'] = $given;
                 // profession
                 if($fields['PRO_C'] != ''){
-                    $new['PRO'] = $fields['PRO_C'];
+                    $new['OCCU'] = $fields['OCCU_C'];
                 }
                 else{
-                    $new['PRO'] = $fields['PRO'];
+                    $new['OCCU'] = $fields['OCCU'];
                 }
                 //
                 // place

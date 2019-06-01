@@ -89,7 +89,7 @@ class raw2csv implements Command{
             self::$n_total++;
             $new = [];
             $new['NUM'] = trim(substr($line, 0, 5));
-            $new['PRO'] = self::PROFESSIONS[$subject][trim(substr($line, 8, 5))];
+            $new['OCCU'] = self::PROFESSIONS[$subject][trim(substr($line, 8, 5))];
             $new['NOTE'] = trim(substr($line, 14, 2)); // L * + -
             $name = trim(substr($line, 17, 30));
             $new['NAME'] = strtr($name, $fix_names);
@@ -192,7 +192,7 @@ class raw2csv implements Command{
         $res1 = \lib::sortByKey($res1, 'NUM');
         $fieldnames = [
             'NUM',
-            'PRO',
+            'OCCU',
             'NOTE',
             'NAME',
             'DATE',

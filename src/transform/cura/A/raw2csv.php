@@ -505,7 +505,8 @@ class raw2csv implements Command{
         // fill FNAME when possible
         //
         // untill now, only FNAME has been filled
-        // fill FNAME for trivial cases
+        // fill also GNAME for trivial cases
+        // (when FNAME contains two strings separated by a white space)
         foreach(array_keys($res) as $k){
             [$res[$k]['FNAME'], $res[$k]['GNAME']] = self::compute_family_given($res[$k]['FNAME']);
             // to check if there is a regular pattern for all rows
@@ -549,7 +550,7 @@ class raw2csv implements Command{
             'NUM',
             'FNAME',
             'GNAME',
-            'PRO',
+            'OCCU',
             'DATE',
             'PLACE',
             'COU',
@@ -563,7 +564,7 @@ class raw2csv implements Command{
             $new['NUM'] = trim($cur['NUM']);
             $new['FNAME'] = trim($cur['FNAME']);
             $new['GNAME'] = trim($cur['GNAME']);
-            $new['PRO'] = self::compute_profession($subject, $cur['PRO'], $new['NUM']);
+            $new['OCCU'] = self::compute_profession($subject, $cur['OCCU'], $new['NUM']);
             // date time
             $day = Cura::computeDay($cur);
             $hour = Cura::computeHHMMSS($cur);
@@ -590,25 +591,6 @@ class raw2csv implements Command{
     
     // ******************************************************
     /**
-        If a string contains two words separated by a space,
-        explodes it to split family name from given name.
-        @return Array with 2 strings : family and given.
-    **/
-    private static function compute_family_given($str){
-        $gname = '';
-        $tmp = explode(' ', $str);
-        if(count($tmp) == 2){
-            $fname = $tmp[0];
-            $gname = $tmp[1];
-        }
-        else{
-            $fname = $str;
-        }
-        return [$fname, $gname];
-    }
-    
-    // ******************************************************
-    /**
         Auxiliary of raw2csv()
         @return [$n_ok_fix, $n1_fix, $n2_fix]
     **/
@@ -632,7 +614,7 @@ class raw2csv implements Command{
         $NUMS_1955 = array_keys(self::CORRECTIONS_1955[$subject]);
         $N_DOUBLONS = count($doublons_same_nb);
         for($i=0; $i < $N_DOUBLONS; $i++){
-            if(count($doublons_same_nb[$i][$file_subject]) != 2){
+            if(count($doublons_same_nb[$i][$file_subject]) != 2){                
                 // resolution works only for doublons (not triplets or more elements)
                 continue;
             }
@@ -727,6 +709,25 @@ class raw2csv implements Command{
         return "Gauquelin-$subject-$num";
     }
     
+    
+    // ******************************************************
+    /**
+        If a string contains two words separated by a space,
+        explodes it to split family name from given name.
+        @return Array with 2 strings : family and given.
+    **/
+    private static function compute_family_given($str){
+        $gname = '';
+        $tmp = explode(' ', $str);
+        if(count($tmp) == 2){
+            $fname = $tmp[0];
+            $gname = $tmp[1];
+        }
+        else{
+            $fname = $str;
+        }
+        return [$fname, $gname];
+    }
     
     // ******************************************************
     /** 

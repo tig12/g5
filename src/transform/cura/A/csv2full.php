@@ -35,7 +35,7 @@ class csv2full implements Command{
         foreach($curaRows as $row){
             $full = Full::matchArray($row);
             if(!$full){
-//echo $row['NUM'] . ' ' . $row['GNAME'] . ' ' . $row['FNAME'] . ' ' . $row['PRO'] . "\n";
+//echo $row['NUM'] . ' ' . $row['GNAME'] . ' ' . $row['FNAME'] . ' ' . $row['OCCU'] . "\n";
                 // @todo self::handleNotMatched();
                 continue;
             }

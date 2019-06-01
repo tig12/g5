@@ -60,7 +60,7 @@ class raw2csv implements Command{
             'COD',
             'LG',
             'LAT',
-            'PRO',
+            'OCCU',
         ];
         $csv = implode(Config::$data['CSV_SEP'], $fieldnames) . "\n";
         // Fix problems in cura data

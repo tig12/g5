@@ -48,7 +48,7 @@ class Names{
                 }
                 $res[$fields['FILE']][] = [
                     'day'   => Cura::computeDay($fields),
-                    'pro'   => $fields['PRO'], // profession kept because sometimes useful (for ex in A4 and A5)
+                    'pro'   => $fields['OCCU'], // profession kept because sometimes useful (for ex in A4 and A5)
                     'name'  => trim($fields['NAME']),
                 ];
             }
