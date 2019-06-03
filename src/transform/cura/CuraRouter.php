@@ -1,14 +1,9 @@
 <?php
 /********************************************************************************
-    Implementation of Command and Dataset interfaces for cura dataset.
-    This class is needed because user's vocabulary is different from vocabulary used by the code :
-    - User can say 'A' to designate all files of serie A.
-    - User can say 'E1' or 'E3', and this is handled by sub-package 'E1_E3'.
-    So a translation from user's vocabulary to this package's organisation is necessary.
+    Utilities to route commands in the cura package.
     
     @license    GPL
-    @history    2017-04-27 10:41:02+02:00, Thierry Graff : creation
-    @history    2019-05-09 01:34:14+02:00, Thierry Graff : refactor
+    @history    2019-05-09 01:34:14+02:00, Thierry Graff : Creation from refactoring
 ********************************************************************************/
 namespace g5\transform\cura;
 
@@ -21,6 +16,7 @@ class CuraRouter implements Router{
         Converts the datafile parameter in the user vocabulary to an array of datafiles known by this package.
         Useful for parameters like 'A' which means everything from A1 to A6.
         Does not perform check on $userParam.
+        @param $userParam The data file as expressed by the user.
         @return Array containing subjects.
     **/
     public static function computeDatafiles($userParam){

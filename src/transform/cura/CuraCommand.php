@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Implementation of Command and Dataset interfaces for cura dataset.
+    Implementation of Command interface for cura dataset.
     This class is needed because user's vocabulary is different from vocabulary used by the code :
     - User can say 'A' to designate all files of serie A.
     - User can say 'E1' or 'E3', and this is handled by sub-package 'E1_E3'.
@@ -42,6 +42,11 @@ class CuraCommand implements Command{
         	case 'raw2csv':
         	    return self::raw2csv($datafile, $cde_args);
             break;
+        	case 'restoreTime':
+        	    $class = "g5\\transform\\cura\\" . Cura::DATAFILES_SUBNAMESPACE[$datafile] . '\restoreTime';
+        	    array_unshift($cde_args, $datafile);
+        	    return $class::execute($cde_args);
+            break;
         	case 'addGeo':
         	    return self::addGeo($datafile, $cde_args);
             break;
@@ -52,6 +57,7 @@ class CuraCommand implements Command{
         	    return \g5\transform\cura\A\ertel2csv::execute($params); // HERE $params passed
             break;
             case 'csv2full':
+                // HERE tmp code
                 return \g5\transform\cura\A\csv2full::execute($params); // HERE $params passed
         	default:
         	    return "g5\transform\cura\CuraCommand - Invalid action : $action";

@@ -11,7 +11,7 @@ use g5\init\Config;
 
 class Cura{
     
-    /** Separator used in original (html) files **/
+    /** Separator used in raw (html) files **/
     const HTML_SEP = "\t";
     
     /** 
@@ -25,7 +25,9 @@ class Cura{
     ];
     
     /** 
-        Associations between datafile in the user's vocabulary and the sub-namespace that hadnles it
+        Associations between datafile in the user's vocabulary and the sub-namespace that handles it.
+        (sub-namespace of g5\transform\cura).
+        @todo Put this constant in CuraRouter ?
     **/
     const DATAFILES_SUBNAMESPACE = [
         'A' => 'A',

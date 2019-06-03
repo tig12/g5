@@ -41,12 +41,12 @@ class examine implements Command {
         $possibleParams_str = implode(', ', self::POSSIBLE_PARAMS);
         if(count($params) != 1){
             return "PARAMETER MISSING in g5\\transform\\newalch\\ertel4391.execute(\$params)\n"
-                . "Possible parameters : " . $possibleParams_str;
+                . "Possible parameters : $possibleParams_str\n";
         }
         $param = $params[0];
         if(!in_array($param, self::POSSIBLE_PARAMS)){
             return "INVALID PARAMETER in g5\\transform\\newalch\\ertel4391.execute(\$params)\n"
-                . "Possible parameters : " . $possibleParams_str;
+                . "Possible parameters : $possibleParams_str\n";
         }
         $method = 'examine_' . $param;
         self::$method();
@@ -273,9 +273,9 @@ class examine implements Command {
             return;
         }
         echo "<table class=\"wikitable margin\">\n";
-        echo "    <tr><th>MARS</th><th>MA_</th><th>MA12</th></tr>\n";
+        echo "    <tr><th>MARS</th><th>MA12</th><th>MA_</th></tr>\n";
         foreach($res as $s36 => $value){
-            echo "    <tr></tr><td>$s36</td><td>{$value['MA_'][0]}</td><td>{$value['MA12'][0]}</td>\n";
+            echo "    <tr></tr><td>$s36</td><td>{$value['MA12'][0]}</td><td>{$value['MA_'][0]}</td>\n";
         }
         echo "    </tr>\n</table>\n";
     }

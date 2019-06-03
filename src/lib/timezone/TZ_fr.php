@@ -26,6 +26,7 @@ class TZ_fr{
             => a precise computation should take into account the precise local situation
         @param  $date ISO 8601 date
         @param  $lg longitude in decimal degrees
+        @param  $dept Département ("75" for Paris, "01" for Ain etc.)
         @return array with 2 elements : 
                 - the timezone offset, format sHH:MM (ex : '-01:00' ; '+00:23')
                 - an error message (empty string if no ambiguity)
@@ -50,7 +51,7 @@ class TZ_fr{
         if($date < '1891-03-15'){
             // hour = HLO, local hour at real sun
             $secs = 240 * $lg; // 240 = 3600 / 15 = nb of time seconds per longitude degrees
-            $hhmm = TZ::seconds2HHMMSS($secs, true);
+            $hhmm = TZ::seconds2HHMMSS($secs, false);
             $sign = ($lg < 0 && $hhmm != '00:00') ? '-' : '+';
             $offset = $sign . $hhmm;
         }

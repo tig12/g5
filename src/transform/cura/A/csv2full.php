@@ -2,7 +2,9 @@
 /********************************************************************************
     Transfers files in 5-tmp/cura-csv/ to 5-tmp/full
     
-    @pre        5-tmp/cura-csv/ must be poplated and ready to be transfered.
+    WARNING - code not yet integrated to restoration process.
+    
+    @pre        5-tmp/cura-csv/ must be populated and ready to be transfered.
     
     @license    GPL
     @history    2019-05-19 18:53:29+02:00, Thierry Graff : creation

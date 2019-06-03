@@ -1,7 +1,7 @@
 <?php
 /******************************************************************************
     Interface definition for dataset command router
-    See doc/code-details.html
+    See docs/code-details.html
     
     @license    GPL
     @history    2019-05-13 15:09:10+02:00, Thierry Graff : Creation

@@ -553,8 +553,8 @@ class raw2csv implements Command{
             'OCCU',
             'DATE',
             'PLACE',
-            'COU',
-            'COD',
+            'CY',
+            'C2',
             'LG',
             'LAT',
         ];
@@ -564,7 +564,7 @@ class raw2csv implements Command{
             $new['NUM'] = trim($cur['NUM']);
             $new['FNAME'] = trim($cur['FNAME']);
             $new['GNAME'] = trim($cur['GNAME']);
-            $new['OCCU'] = self::compute_profession($subject, $cur['OCCU'], $new['NUM']);
+            $new['OCCU'] = self::compute_profession($subject, $cur['PRO'], $new['NUM']);
             // date time
             $day = Cura::computeDay($cur);
             $hour = Cura::computeHHMMSS($cur);
@@ -576,7 +576,7 @@ class raw2csv implements Command{
             $new['DATE'] = "$day $hour$timezone";
             // place
             $new['PLACE'] = trim($cur['CITY']);
-            [$new['COU'], $new['COD']] = self::compute_country($cur['COU'], $cur['COD']);
+            [$new['CY'], $new['C2']] = self::compute_country($cur['COU'], $cur['COD']);
             $new['LG'] = Cura::computeLg($cur['LON']);
             $new['LAT'] = Cura::computeLat($cur['LAT']);
             $csv .= implode(Config::$data['CSV_SEP'], $new) . "\n";

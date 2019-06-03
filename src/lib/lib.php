@@ -235,4 +235,26 @@ class lib{
         );
     }
 
+    // ******************************************************
+    // from jetheme/model/spacetime/DateUtils
+    /**
+        Converts a HH:MM string (like 12:34) to the number of minutes it represents
+        $str can be preceeded by a - (minus sign)
+        The separator between hour and minutes can be any non-numeric character
+        @param $str The string to parse
+        @return The nb of minutes or false
+    **/
+    public static function HHMM2minutes($str){
+        $pattern = '/([+-]?)(\d{1,2})\D(\d{1,2})/';
+        preg_match($pattern, $str, $m);
+        if(count($m) != 4){
+            return false;
+        }
+        $res = 60 * $m[2] + $m[3];
+        if($m[1] == '-') $res = -$res;
+        return $res;
+    }
+    
+    
+
 }// end class
