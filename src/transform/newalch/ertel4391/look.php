@@ -16,7 +16,7 @@ namespace g5\transform\newalch\ertel4391;
 use g5\init\Config;
 use g5\patterns\Command;
 
-class examine implements Command {
+class look implements Command {
     
     /** 
         Possible values of the command, for ex :
@@ -72,12 +72,12 @@ class examine implements Command {
             $res[$sport]['n'] ++;
             // coherence check
             if($res[$sport]['IG'] != $row['IG']){
-                echo "Incoherent association sport / IG, line " . $row['F_NAME'] . ' ' . $row['G_NAME']
+                echo "Incoherent association sport / IG, line " . $row['FNAME'] . ' ' . $row['GNAME']
                     . ' : ' . $sport . ' ' . $row['IG'] . "\n";
             }
             if(strlen($sport) == 3){
-                echo $sport . ' ' . $row['NR'] . ' ' . $row['F_NAME']
-                        . ' ' . $row['G_NAME'] . ' ' . $row['IG'] . "\n";
+                echo $sport . ' ' . $row['NR'] . ' ' . $row['FNAME']
+                        . ' ' . $row['GNAME'] . ' ' . $row['IG'] . "\n";
             }
         }
         // print
@@ -128,7 +128,7 @@ class examine implements Command {
                 $nWith++;
             }
             else{
-                echo 'BUG in date : ' . $row['NR'] . ' ' . $row['F_NAME'] . ' ' . $row['G_NAME'] . ' : ' . $row['DATE'] . "\n";
+                echo 'BUG in date : ' . $row['NR'] . ' ' . $row['FNAME'] . ' ' . $row['GNAME'] . ' : ' . $row['DATE'] . "\n";
             }
         }
         // percent
@@ -272,12 +272,22 @@ class examine implements Command {
         if(!$one_to_one){
             return;
         }
-        echo "<table class=\"wikitable margin\">\n";
-        echo "    <tr><th>MARS</th><th>MA12</th><th>MA_</th></tr>\n";
+        echo "<table class=\"wikitable margin center\">\n";
+        echo "    <tr><th>MARS</th><th>MA12</th><th>MA_<br>(importance)</th></tr>\n";
         foreach($res as $s36 => $value){
-            echo "    <tr></tr><td>$s36</td><td>{$value['MA12'][0]}</td><td>{$value['MA_'][0]}</td>\n";
+            $s12 = $value['MA12'][0];
+            $ipt = $value['MA_'][0]; // importance
+            $tr = '<tr>';
+            if($s36 == 9 || $s36 == 36){
+                $tr = '<tr class="bold">';
+            }
+            echo "    $tr"
+                . "<td>$s36</td>"
+                . "<td>$s12</td>"
+                . ($ipt == 2 ? "<td class=\"bold\">$ipt</td>" : "<td>$ipt</td>")
+                . "</tr>\n";
         }
-        echo "    </tr>\n</table>\n";
+        echo "</table>\n";
     }
     
 }// end class

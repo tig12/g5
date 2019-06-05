@@ -1,9 +1,15 @@
 <?php
-
 /** 
-    PSR-4 autoload for namespace "g5"
+    Unique autoload code to include
+    Contains PSR-4 autoload for namespace "g5" and autoload for vendor code.
     
     @history    2017-04-27 09:46:32+02:00, Thierry Graff : Creation 
+**/
+
+require_once dirname(__DIR__) . DS . 'vendor' . DS . 'tiglib' . DS . '1.0' . DS . 'autoload.php';
+
+/** 
+    Autoload for g5 namespace
 **/
 spl_autoload_register(
     function ($full_classname){
@@ -22,6 +28,7 @@ spl_autoload_register(
     }
 );
 
+//////////////////// @todo remove ///////////////////////////
 /** 
     Autoload for classes without namespace, located in lib/ and subdirectories
     

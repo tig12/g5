@@ -1,0 +1,10 @@
+
+#
+# File used to generate code related to profession
+#
+
+-
+  name: art
+  code: AR
+  children: ACT, CAR, CMB, DAN, MUS, OPE, PAI, PHO 
+  
