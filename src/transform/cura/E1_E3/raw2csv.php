@@ -121,7 +121,7 @@ class raw2csv implements Command{
             else{
                 self::$n_missing_timezone++;
             }
-            // Fill res
+            // fill res
             $new['DATE'] = $date;
             $new['PLACE'] = $place_name;
             $new['LG'] = $lg;
@@ -197,10 +197,10 @@ class raw2csv implements Command{
             'NAME',
             'DATE',
             'PLACE',
-            'LON',
+            'LG',
             'LAT',
-            'COD',
-            'COU',
+            'C2',
+            'CY',
             'GEOID',
             'MO',
             'VE',

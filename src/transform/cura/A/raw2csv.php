@@ -14,6 +14,8 @@ namespace g5\transform\cura\A;
 
 use g5\init\Config;
 use g5\patterns\Command;
+use g5\model\Names as ModelNames;
+use g5\model\Names_fr;
 use g5\transform\cura\Cura;
 use g5\transform\cura\Names;
 
@@ -502,18 +504,15 @@ class raw2csv implements Command{
             $n_ok_fix = $n1_fix = $n2_fix = 0;
         }
         //
-        // fill FNAME when possible
+        // fill GNAME when possible
         //
         // untill now, only FNAME has been filled
         // fill also GNAME for trivial cases
         // (when FNAME contains two strings separated by a white space)
         foreach(array_keys($res) as $k){
-            [$res[$k]['FNAME'], $res[$k]['GNAME']] = self::compute_family_given($res[$k]['FNAME']);
-            // to check if there is a regular pattern for all rows
-            // result : no
-            // if($res[$k]['FNAME'] == '' && substr($res[$k]['GNAME'], 0, 11) != 'Gauquelin-A'){
-            //     echo $res[$k]['GNAME'] . "\n";
-            // }
+            [$res[$k]['FNAME'], $res[$k]['GNAME']] = ModelNames::familyGiven($res[$k]['FNAME']);
+            // correct accents
+            $res[$k]['GNAME'] = Names_fr::accentGiven($res[$k]['GNAME']);
         }
         //
         // report
@@ -709,25 +708,6 @@ class raw2csv implements Command{
         return "Gauquelin-$subject-$num";
     }
     
-    
-    // ******************************************************
-    /**
-        If a string contains two words separated by a space,
-        explodes it to split family name from given name.
-        @return Array with 2 strings : family and given.
-    **/
-    private static function compute_family_given($str){
-        $gname = '';
-        $tmp = explode(' ', $str);
-        if(count($tmp) == 2){
-            $fname = $tmp[0];
-            $gname = $tmp[1];
-        }
-        else{
-            $fname = $str;
-        }
-        return [$fname, $gname];
-    }
     
     // ******************************************************
     /** 

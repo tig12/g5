@@ -52,12 +52,12 @@ class raw2csv implements Command{
         $fieldnames = [
             'NUM',
             'C_APP',
-            'FAMILYNAME',
-            'GIVENNAME',
+            'FNAME',
+            'GNAME',
             'DATE',
             'PLACE',
-            'COU',
-            'COD',
+            'CY',
+            'C2',
             'LG',
             'LAT',
             'OCCU',
@@ -149,7 +149,7 @@ class raw2csv implements Command{
             }
             $new = [];
             [$new['NUM'], $new['C_APP']] = self::compute_corr_app(trim($cur[0]));
-            [$new['FAMILYNAME'], $new['GIVENNAME']] = self::compute_name(trim($cur[1]));
+            [$new['FNAME'], $new['GNAME']] = self::compute_name(trim($cur[1]));
             // date time
             $day = Cura::computeDay(['DAY' => $cur[3], 'MON' => $cur[4], 'YEA' => $cur[5]]);
             $hour = $cur[6];
@@ -162,8 +162,8 @@ class raw2csv implements Command{
             // place
             $tmp = explode(',', $cur[10]);
             $new['PLACE'] = trim($tmp[0]);
-            $new['COU'] = self::COUNTRY;
-            $new['COD'] = trim($tmp[1]);
+            $new['CY'] = self::COUNTRY;
+            $new['C2'] = trim($tmp[1]);
             $new['LG'] = Cura::computeLg($cur[9]);
             $new['LAT'] = Cura::computeLat($cur[8]);
             // @todo link to geonames
