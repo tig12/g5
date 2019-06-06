@@ -126,8 +126,8 @@ class raw2csv implements Command{
             $new['PLACE'] = $place_name;
             $new['LG'] = $lg;
             $new['LAT'] = $lat;
-            $new['COD'] = $adm2;
-            $new['COU'] = $country;
+            $new['C2'] = $adm2;
+            $new['CY'] = $country;
             $new['GEOID'] = $geoid;
             $res1[$new['NUM']] = $new;
         }
@@ -223,7 +223,10 @@ class raw2csv implements Command{
         Computes the geographical informations of a record
         Tries to match geonames.org
         @param  $CITY   Content of column CITY in cura file
-        @param  $COD    Content of column COD in cura file = dept for France, adm2 for geonames
+        @param  $COD    Content of column COD in cura file
+                        = dept for France
+                        = adm2 for geonames
+                        = C2 in 5-tmp/ files.
         @return Array containing 6 geographical information :
                     country
                     adm2
