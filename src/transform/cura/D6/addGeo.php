@@ -19,7 +19,8 @@
 ********************************************************************************/
 namespace g5\transform\cura\D6;
 
-use g5\init\Config;
+use g5\G5;
+use g5\Config;
 use g5\patterns\Command;
 use g5\transform\cura\Cura;
 
@@ -60,7 +61,7 @@ class addGeo implements Command{
                     $res .= $line . "\n";
                     continue;
                 }
-                $fields = explode(Config::$data['CSV_SEP'], $line);
+                $fields = explode(G5::CSV_SEP, $line);
                 if(!isset($fields[3])){
                     break 2; // ===== HERE break enclosing while(true) =====
                 }
@@ -83,7 +84,7 @@ class addGeo implements Command{
                 if($geonames['error']){                       
                     $report .= $fields[0] . ' ' . $fields[1] . ' ' . print_r($geonames, true) . "\n";
                     $fields[3] = self::FAILURE_MARK;
-                    $res .= implode(Config::$data['CSV_SEP'], $fields) . "\n";
+                    $res .= implode(G5::CSV_SEP, $fields) . "\n";
                     continue;
                 }
                 // here call to Geonames::cityFromLgLat() was sucessful
@@ -93,14 +94,14 @@ class addGeo implements Command{
                 $fields[3] = $geonames['result']['name'];
                 $fields[4] = $geonames['result']['country'];
                 $fields[5] = $geonames['result']['geoid'];
-                $res .= implode(Config::$data['CSV_SEP'], $fields) . "\n";
-                // 0 'NUM', 1 'NAME', 2 'DATE', 3 'PLACE', 4 'COU', 5 'GEOID', 6 'LG', 7 'LAT'
+                $res .= implode(G5::CSV_SEP, $fields) . "\n";
+                // 0 'NUM', 1 'NAME', 2 'DATE', 3 'PLACE', 4 'CY', 5 'GEOID', 6 'LG', 7 'LAT'
             }
             // Write back the csv 
             file_put_contents($geofile, $res); // file in 5-tmp/geonames
             copy($geofile, $csvfile); // copy results back in 5-tmp/cura-csv/
             \lib::dosleep(1.5); // keep cool with geonames.org ws
-        } // end whle true
+        } // end while true
         copy($geofile, $csvfile); // useful if current execution retrieves 0 information
         $report .=  "Geographic information computed\n";
         return $report;

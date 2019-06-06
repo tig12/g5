@@ -16,7 +16,8 @@
 ********************************************************************************/
 namespace g5\transform\newalch\ertel4391;
 
-use g5\init\Config;
+use g5\G5;
+use g5\Config;
 use g5\patterns\Command;
 
 class raw2csv implements Command{
@@ -83,7 +84,7 @@ class raw2csv implements Command{
     **/
     public static function execute($params=[]): string{
         
-        $output = implode(Config::$data['CSV_SEP'], self::OUTPUT_COLUMNS) . "\n";
+        $output = implode(G5::CSV_SEP, self::OUTPUT_COLUMNS) . "\n";
         
         $records = \lib::csvAssociative(Config::$data['dirs']['1-newalch-raw'] . DS . '3a_sports-utf8.csv');
         $N = count($records);
@@ -129,7 +130,7 @@ class raw2csv implements Command{
 //            echo $line . "\n";
             //echo 'NI = ' . trim($record['NIENHUYS'] . "\n";
             //echo "\n<pre>"; print_r(trim($record); echo "</pre>\n";
-            $output .= implode(Config::$data['CSV_SEP'], $new) . "\n";
+            $output .= implode(G5::CSV_SEP, $new) . "\n";
         }
         
         $outfile = Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE;

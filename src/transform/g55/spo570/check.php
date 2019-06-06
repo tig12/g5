@@ -7,7 +7,7 @@
 ********************************************************************************/
 namespace g5\transform\g55\spo570;
 
-use g5\init\Config;
+use g5\Config;
 use g5\patterns\Command;
 
 class check implements Command {

@@ -11,7 +11,8 @@
 ********************************************************************************/
 namespace g5\transform\cura\E1_E3;
 
-use g5\init\Config;
+use g5\G5;
+use g5\Config;
 use g5\patterns\Command;
 use g5\transform\cura\Cura;
 
@@ -208,9 +209,9 @@ class raw2csv implements Command{
             'JU',
             'SA',
         ];
-        $csv = implode(Config::$data['CSV_SEP'], $fieldnames) . "\n";
+        $csv = implode(G5::CSV_SEP, $fieldnames) . "\n";
         foreach($res1 as $fields){
-            $csv .= implode(Config::$data['CSV_SEP'], $fields) . "\n";
+            $csv .= implode(G5::CSV_SEP, $fields) . "\n";
         }
         $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $subject . '.csv';
         file_put_contents($csvfile, $csv);

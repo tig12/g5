@@ -6,7 +6,7 @@
 ********************************************************************************/
 namespace g5\model;
 
-use g5\init\Config;
+use g5\Config;
 
 class Full{
     

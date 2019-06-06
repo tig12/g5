@@ -10,7 +10,7 @@
 ********************************************************************************/
 namespace g5\transform\g55;
 
-use g5\init\Config;
+use g5\Config;
 
 class G55{
     

@@ -12,7 +12,8 @@
 ********************************************************************************/
 namespace g5\transform\cura\A;
 
-use g5\init\Config;
+use g5\G5;
+use g5\Config;
 use g5\patterns\Command;
 use g5\model\Names as ModelNames;
 use g5\model\Names_fr;
@@ -557,7 +558,7 @@ class raw2csv implements Command{
             'LG',
             'LAT',
         ];
-        $csv = implode(Config::$data['CSV_SEP'], $fieldnames) . "\n";
+        $csv = implode(G5::CSV_SEP, $fieldnames) . "\n";
         foreach($res as $cur){
             $new = [];
             $new['NUM'] = trim($cur['NUM']);
@@ -578,7 +579,7 @@ class raw2csv implements Command{
             [$new['CY'], $new['C2']] = self::compute_country($cur['COU'], $cur['COD']);
             $new['LG'] = Cura::computeLg($cur['LON']);
             $new['LAT'] = Cura::computeLat($cur['LAT']);
-            $csv .= implode(Config::$data['CSV_SEP'], $new) . "\n";
+            $csv .= implode(G5::CSV_SEP, $new) . "\n";
             $nb_stored ++;
         }
         $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $subject . '.csv';

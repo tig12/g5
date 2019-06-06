@@ -16,7 +16,8 @@
 ********************************************************************************/
 namespace g5\transform\newalch\ertel4391;
 
-use g5\init\Config;
+use g5\G5;
+use g5\Config;
 use g5\patterns\Command;
 
 class z_raw2csv_txt implements Command{
@@ -81,7 +82,7 @@ class z_raw2csv_txt implements Command{
     **/
     public static function execute($params=[]): string{
         
-        $output = implode(Config::$data['CSV_SEP'], self::OUTPUT_COLUMNS) . "\n";
+        $output = implode(G5::CSV_SEP, self::OUTPUT_COLUMNS) . "\n";
         
         $lines = file(Config::$data['dirs']['1-newalch-raw'] . DS . '3a_sports-utf8.txt');
 //echo trim($lines[4]) . "\n";
@@ -177,7 +178,7 @@ if($new['DATE'] === false){
 //            echo $line . "\n";
             //echo 'NI = ' . $cur['NIENHUYS'] . "\n";
             //echo "\n<pre>"; print_r($cur); echo "</pre>\n";
-            $output .= implode(Config::$data['CSV_SEP'], $new) . "\n";
+            $output .= implode(G5::CSV_SEP, $new) . "\n";
         }
         
         $outfile = Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::CSV_FILE;

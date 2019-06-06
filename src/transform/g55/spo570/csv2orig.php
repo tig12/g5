@@ -7,7 +7,8 @@
 ********************************************************************************/
 namespace g5\transform\g55\spo570;
 
-use g5\init\Config;
+use g5\G5;
+use g5\Config;
 use g5\patterns\Command;
 
 class csv2orig implements Command {
@@ -50,7 +51,7 @@ class csv2orig implements Command {
             'LAT' => '',
 //            'COMMENT' => '',
         ];
-        $firstline = implode(Config::$data['CSV_SEP'], array_keys($generatedFields));
+        $firstline = implode(G5::CSV_SEP, array_keys($generatedFields));
         foreach($files as $file){
             $res = $firstline . "\n";
             $groupCode = str_replace('.csv', '', basename($file));
@@ -176,7 +177,7 @@ class csv2orig implements Command {
                 }
                 $new['BIRTHDATE'] = "$day $hour$dtu";
                 // add new line to res
-                $res .= implode(Config::$data['CSV_SEP'], $new) . "\n";
+                $res .= implode(G5::CSV_SEP, $new) . "\n";
             }
             // write output
             $dest_file = $dest_dir . DS . $groupCode . '.csv';

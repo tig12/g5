@@ -1,10 +1,13 @@
 <?php
-/** 
-    Manages config.yml
-    Config available via Config::$data
+/********************************************************************************
+    Holds config.yml information
+    
+    Config values available via Config::$data
+    
+    @license    GPL
     @history    2017-04-27 09:49:02+02:00, Thierry Graff : Creation
-**/
-namespace g5\init;
+********************************************************************************/
+namespace g5;
 
 class Config{
     
@@ -16,7 +19,7 @@ class Config{
     
     // ******************************************************
     public static function init(){
-        $filename = dirname(dirname(__DIR__)) . DS . 'config.yml';
+        $filename = dirname(__DIR__) . DS . 'config.yml';
         if(!is_file($filename)){
             echo "Unable to read configuration file : $filename.\n";
             echo "Create this file and try again.\n";

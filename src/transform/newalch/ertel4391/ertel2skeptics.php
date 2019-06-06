@@ -19,7 +19,8 @@
 ********************************************************************************/
 namespace g5\transform\newalch\ertel4391;
 
-use g5\init\Config;
+use g5\G5;
+use g5\Config;
 use g5\patterns\Command;
 
 class ertel2skeptics implements Command {
@@ -137,11 +138,10 @@ class ertel2skeptics implements Command {
         @return     A string expressing $a to be stored in a csv file
     **/
     private static function array2csv($a){
-        $sep = Config::$data['CSV_SEP'];
         $keys = array_keys($a[0]);
-        $res = implode($sep, $keys) . "\n";
+        $res = implode(G5::CSV_SEP, $keys) . "\n";
         foreach($a as $row){
-            $res .= implode($sep, $row) . "\n";
+            $res .= implode(G5::CSV_SEP, $row) . "\n";
         }
         return $res;
     }

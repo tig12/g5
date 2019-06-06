@@ -13,7 +13,7 @@
 ********************************************************************************/
 namespace g5\transform\newalch\ertel4391;
 
-use g5\init\Config;
+use g5\Config;
 use g5\patterns\Command;
 
 class look implements Command {

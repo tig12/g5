@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Importation of Gauquelin 5th edition ; code specific to file D10
+    Importation of Gauquelin 5th edition ; code specific to file D6
     matches first list and chronological order list
     
     @license    GPL
@@ -8,7 +8,8 @@
 ********************************************************************************/
 namespace g5\transform\cura\D6;
 
-use g5\init\Config;
+use g5\G5;
+use g5\Config;
 use g5\patterns\Command;
 use g5\transform\cura\Cura;
 
@@ -26,7 +27,7 @@ class raw2csv implements Command{
     public static function execute($params=[]): string{
         $subject = 'D6';
             
-        $report =  "--- Importing serie $subject ---\n";
+        $report =  "--- Importing $subject ---\n";
         $raw = Cura::readHtmlFile($subject);
         // Fix an error on a latitude in cura file
         $raw = str_replace(
@@ -40,7 +41,7 @@ class raw2csv implements Command{
         }
         $nb_stored = 0;
         $csv = '';
-        $csv = implode(Config::$data['CSV_SEP'], D6::FIELDNAMES) . "\n";
+        $csv = implode(G5::CSV_SEP, D6::FIELDNAMES) . "\n";
         $lines = explode("\n", $m[2]);
         foreach($lines as $line){
             $cur = preg_split('/\t+/', $line);
@@ -51,11 +52,11 @@ class raw2csv implements Command{
             $hour = Cura::computeHHMM(['H' => $cur[4], 'MN' => $cur[5]]);
             $new['DATE'] = "$day $hour";
             $new['PLACE'] = '';
-            $new['COU'] = '';
+            $new['CY'] = '';
             $new['GEOID'] = '';
             $new['LG'] = Cura::computeLg($cur[8]);
             $new['LAT'] = Cura::computeLat($cur[7]);
-            $csv .= implode(Config::$data['CSV_SEP'], $new) . "\n";
+            $csv .= implode(G5::CSV_SEP, $new) . "\n";
             $nb_stored ++;
         }
         $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $subject . '.csv';

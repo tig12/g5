@@ -11,7 +11,7 @@
 ********************************************************************************/
 namespace g5\transform\cura\A;
 
-use g5\init\Config;
+use g5\Config;
 use g5\patterns\Command;
 use g5\model\Full;
 //use g5\transform\cura\Cura;

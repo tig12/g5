@@ -7,7 +7,8 @@
 ********************************************************************************/
 namespace g5\transform\cura\D10;
 
-use g5\init\Config;
+use g5\G5;
+use g5\Config;
 use g5\patterns\Command;
 use g5\transform\cura\Cura;
 
@@ -62,7 +63,7 @@ class raw2csv implements Command{
             'LAT',
             'OCCU',
         ];
-        $csv = implode(Config::$data['CSV_SEP'], $fieldnames) . "\n";
+        $csv = implode(G5::CSV_SEP, $fieldnames) . "\n";
         // Fix problems in cura data
         $m[2] = preg_replace(
             "/112.*?Hardin County,\s+TN/",
@@ -168,7 +169,7 @@ class raw2csv implements Command{
             $new['LAT'] = Cura::computeLat($cur[8]);
             // @todo link to geonames
             $new['PRO'] = self::compute_profession($cur[2]);
-            $csv .= implode(Config::$data['CSV_SEP'], $new) . "\n";
+            $csv .= implode(G5::CSV_SEP, $new) . "\n";
             $nb_stored ++;
         }
         $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $subject . '.csv';

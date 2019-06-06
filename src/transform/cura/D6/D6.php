@@ -15,7 +15,7 @@ class D6{
         'NAME',
         'DATE',
         'PLACE',
-        'COU',
+        'CY',
         'GEOID',
         'LG',
         'LAT',

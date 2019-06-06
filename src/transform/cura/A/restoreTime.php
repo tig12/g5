@@ -12,7 +12,8 @@
 ********************************************************************************/
 namespace g5\transform\cura\A;
 
-use g5\init\Config;
+use g5\G5;
+use g5\Config;
 use g5\patterns\Command;
 use tiglib\time\HHMM2minutes;
 use g5\model\Full;
@@ -54,7 +55,7 @@ class restoreTime implements Command{
         $rows1 = \lib::csvAssociative(Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv');
         $keys1 = array_keys($rows1[0]);
         $keys2 = ['NUM', 'FNAME', 'GNAME', 'OCCU', 'DATE', 'DATE_C', 'PLACE', 'CY', 'C2', 'LG', 'LAT'];
-        $res .= implode(Config::$data['CSV_SEP'], $keys2) . "\n";
+        $res .= implode(G5::CSV_SEP, $keys2) . "\n";
         
 $i = 0;
         foreach($rows1 as $row1){
@@ -71,14 +72,14 @@ echo "\n" . 'DATE = ' . $row1['CY'] . ' - ' . $row1['DATE'] . "\n";
             if($row1['CY'] != 'FR'){
                 // no restoration for foreign countries
                 // @todo implement
-                $res .= implode(Config::$data['CSV_SEP'], $row2);
+                $res .= implode(G5::CSV_SEP, $row2);
                 continue;
             }
             [$dtu2, $err] = \TZ_fr::offset($row1['DATE'], $row1['LG'], $row1['C2']);
             if($err != ''){
                 // no restoration
                 // @todo log or add error retransmission ?
-                $res .= implode(Config::$data['CSV_SEP'], $row2);
+                $res .= implode(G5::CSV_SEP, $row2);
                 continue;
             }
             $dtu1 = substr($row1['DATE'], -6);

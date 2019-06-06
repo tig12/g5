@@ -10,7 +10,7 @@
     @history    2017-05-04 10:31:00+02:00, Thierry Graff : Adaptation for autonom use 
 ********************************************************************************/
 
-use g5\init\Config;
+use g5\Config;
 
 class Geonames{
     

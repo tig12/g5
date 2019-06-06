@@ -5,7 +5,7 @@
 
 require_once __DIR__ . DS . 'autoload.php';
 
-use g5\init\Config;
+use g5\Config;
 
 Config::init();
 

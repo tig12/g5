@@ -13,7 +13,8 @@
 ********************************************************************************/
 namespace g5\transform\cura\A;
 
-use g5\init\Config;
+use g5\G5;
+use g5\Config;
 use g5\patterns\Command;
 //use g5\transform\cura\Cura;
 
@@ -82,7 +83,7 @@ class ertel2csv implements Command{
         
         // Update mode - modify A1.csv
         if($param == 'update'){
-            $res = implode(Config::$data['CSV_SEP'], array_keys($curaRows[0])) . "\n";
+            $res = implode(G5::CSV_SEP, array_keys($curaRows[0])) . "\n";
             $missingNums = array_keys($curaMissing);
             foreach($curaRows as $row){
                 $NUM = $row['NUM'];
@@ -90,11 +91,11 @@ class ertel2csv implements Command{
                     $tmp = $curaMissing[$NUM];
                     $tmp['FNAME'] = $ertelA1[$NUM]['FNAME'];
                     $tmp['GNAME'] = $ertelA1[$NUM]['GNAME'];
-                    $res .= implode(Config::$data['CSV_SEP'], $tmp) . "\n";
+                    $res .= implode(G5::CSV_SEP, $tmp) . "\n";
                     $nCorrected++;
                 }
                 else{
-                    $res .= implode(Config::$data['CSV_SEP'], $row) . "\n";
+                    $res .= implode(G5::CSV_SEP, $row) . "\n";
                 }
             }
             $outfile = Config::$data['dirs']['5-cura-csv'] . DS . 'A1.csv';

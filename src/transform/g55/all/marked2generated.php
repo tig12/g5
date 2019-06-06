@@ -17,7 +17,8 @@
 ********************************************************************************/
 namespace g5\transform\g55\all;
 
-use g5\init\Config;
+use g5\G5;
+use g5\Config;
 use g5\patterns\Command;
 use g5\transform\g55\G55;
 
@@ -86,9 +87,9 @@ class marked2generated implements Command {
         
         $input = file($file_csv);
         $N = count($input);
-        $fieldnames = explode(Config::$data['CSV_SEP'], $input[0]);
+        $fieldnames = explode(G5::CSV_SEP, $input[0]);
         for($i=1; $i < $N; $i++){
-            $fields = explode(Config::$data['CSV_SEP'], $input[$i]);
+            $fields = explode(G5::CSV_SEP, $input[$i]);
             $NUM = $fields[0]; // by convention, all generated csv file of 5-cura-csv have NUM as first field
             if(in_array($NUM, $marked)){
                 $res[] = $fields;
@@ -103,9 +104,9 @@ class marked2generated implements Command {
         $res = \lib::sortByKey($res, $sort_field);
         $report .= '  ' . count($res) . " persons stored\n";
         // generate output
-        $output = 'ORIGIN' . Config::$data['CSV_SEP'] . $input[0]; // field names
+        $output = 'ORIGIN' . G5::CSV_SEP . $input[0]; // field names
         foreach($res as $fields){
-            $output .= $groupCode . Config::$data['CSV_SEP'] . implode(Config::$data['CSV_SEP'], $fields);
+            $output .= $groupCode . G5::CSV_SEP . implode(G5::CSV_SEP, $fields);
         }
         file_put_contents($file_output, $output);
         return $report;

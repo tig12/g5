@@ -10,7 +10,7 @@
 ********************************************************************************/
 namespace g5\transform\cura;
 
-use g5\init\Config;
+use g5\Config;
 use g5\transform\cura\Cura;
 
 class SerieB{

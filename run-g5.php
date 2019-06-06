@@ -1,4 +1,4 @@
-<?php
+    <?php
 /********************************************************************************
     CLI (command line interface) of Gauquelin5 program
     
@@ -14,12 +14,12 @@ define('DS', DIRECTORY_SEPARATOR);
 
 require_once __DIR__ . DS . 'src' . DS . 'init' . DS . 'init.php';
 
-use g5\G5;
+use g5\Run;
 
 //
 // parameter checking
 //
-$datasets = G5::getDatasets();
+$datasets = Run::getDatasets();
 $datasets_str = implode(", ", $datasets);
 
 $USAGE = <<<USAGE
@@ -40,11 +40,13 @@ USAGE;
 // check dataset
 if(count($argv) < 2){
     echo "WRONG USAGE - need at least 3 arguments\n";
-    die($USAGE);
+    echo $USAGE;
+    echo "Try with one of these datasets : $datasets_str\n";
+    exit;
 }
 else{
     $dataset = $argv[1];
-    $datasets = G5::getDatasets();
+    $datasets = Run::getDatasets();
     $datasets_str = implode(", ", $datasets);
     if(!in_array($dataset, $datasets)){
         echo $USAGE;
@@ -56,7 +58,7 @@ else{
 // here, dataset is valid
 
 // check datafile
-$datafiles = G5::getDatafiles($dataset);
+$datafiles = Run::getDatafiles($dataset);
 $datafiles_str = implode(", ", $datafiles);
 if(count($argv) < 3){
     echo "WRONG USAGE - need at least 3 arguments\n";
@@ -76,7 +78,7 @@ else{
 // here, datafile is valid
 
 // check action
-$actions = G5::getCommands($dataset, $datafile);
+$actions = Run::getCommands($dataset, $datafile);
 $actions_str = implode(", ", $actions);
 if(count($argv) < 4){
     echo "WRONG USAGE - need at least 3 arguments\n";
@@ -99,7 +101,7 @@ else{
 //
 try{
     $params = array_slice($argv, 4);
-    [$isRouter, $class] = G5::getCommandClass($dataset, $datafile, $action);
+    [$isRouter, $class] = Run::getCommandClass($dataset, $datafile, $action);
     if($isRouter){
         // transmit action and datafile to the router
         array_unshift($params, $action);
