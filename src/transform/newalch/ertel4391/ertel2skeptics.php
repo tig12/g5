@@ -27,7 +27,7 @@ class ertel2skeptics implements Command {
     
     /** 
         Possible values of the command, for ex :
-        php run.php newalch ertel4391 ertel2skeptics cfepp
+        php run-g5.php newalch ertel4391 ertel2skeptics cfepp
     **/
     const POSSIBLE_PARAMS = [
         'ALL',

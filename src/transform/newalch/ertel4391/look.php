@@ -20,7 +20,7 @@ class look implements Command {
     
     /** 
         Possible values of the command, for ex :
-        php run.php newalch ertel4391 examine eminence
+        php run-g5.php newalch ertel4391 examine eminence
     **/
     const POSSIBLE_PARAMS = [
         'sport',

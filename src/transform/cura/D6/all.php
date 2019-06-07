@@ -15,7 +15,7 @@ class all implements Command{
     // *****************************************
     // Implementation of Command
     /** 
-        Called by : php run.php cura D6 all
+        Called by : php run-g5.php cura D6 all
         @param $params  array with 2 elements : datafile and command
         @return         Empty string ; echoes the commands' reports
     **/

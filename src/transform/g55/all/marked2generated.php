@@ -10,7 +10,7 @@
     Adds a column ORIGIN
 
     Called with :
-    php run.php g55 all marked2generated
+    php run-g5.php g55 all marked2generated
     
     @license    GPL
     @history    2019-05-26 00:51:46+02:00, Thierry Graff : Creation
@@ -35,7 +35,7 @@ class marked2generated implements Command {
         Uses files from 3-cura-marked to filter and dispatch in different resulting files in g55-generated
         Adds a column ORIGIN
         
-        Called by : php run.php g55 <filenamme> marked2generated
+        Called by : php run-g5.php g55 <filenamme> marked2generated
 // @todo Change this convention
         <filename> can be 'ALL' or one of G55::GROUPS for example '570SPO'
 // end @todo        

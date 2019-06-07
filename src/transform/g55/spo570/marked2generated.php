@@ -2,7 +2,7 @@
 /********************************************************************************
     Alias to g5\transform\g55\all\marked2generated
     Called with :
-    php run.php g55 spo570 marked2generated
+    php run-g5.php g55 spo570 marked2generated
     
     @license    GPL
     @history    2019-05-28 00:56:51+02:00, Thierry Graff : Creation

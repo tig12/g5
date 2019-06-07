@@ -26,7 +26,7 @@ class restoreTime implements Command{
     // *****************************************
     // Implementation of Command
     /** 
-        Called by : php run.php cura A restoreTime
+        Called by : php run-g5.php cura A restoreTime
         
         @param $params array containing one element : the datafile to process.
         @return String report

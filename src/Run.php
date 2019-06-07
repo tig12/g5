@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Auxiliary code for run.php, Gauquelin5 CLI frontend.
+    Auxiliary code for run-g5.php, Gauquelin5 CLI frontend.
     Provides a generic implementation for namespaces without Router implementation,
     but which respect the convention described in docs/code-details.html.
     

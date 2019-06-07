@@ -23,7 +23,7 @@ class csv2full implements Command{
     // *****************************************
     // Implementation of Command
     /** 
-        Called by : php run.php cura A1 csv2full
+        Called by : php run-g5.php cura A1 csv2full
         @param $params array
     **/
     public static function execute($params=[]): string{

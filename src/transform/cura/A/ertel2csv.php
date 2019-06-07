@@ -25,7 +25,7 @@ class ertel2csv implements Command{
     // *****************************************
     // Implementation of Command
     /** 
-        Called by : php run.php cura A1 ertel2csv [update|echo]
+        Called by : php run-g5.php cura A1 ertel2csv [update|echo]
         @param $params array that must contain 3 elements :
                        - datafile : must be 'A1'
                        - command : useless
@@ -33,7 +33,7 @@ class ertel2csv implements Command{
     **/
     public static function execute($params=[]): string{
         
-        $ex_msg = "php run.php cura A1 ertel2csv update\n";
+        $ex_msg = "php run-g5.php cura A1 ertel2csv update\n";
         $err_msg = "WRONG USAGE - ertel2csv needs one parameter. Can be 'update' (modify cura file) or 'echo' (echo detailed names)\nex : $ex_msg";
         
         if(count($params) != 3){
