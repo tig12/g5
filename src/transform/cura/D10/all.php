@@ -25,7 +25,7 @@ class all implements Command{
             return "INVALID PARAMETER : " . $params[2] . " - all doesn't need this parameter\n";
         }
         
-        echo "\n=== execute raw2csv ===\n";
+        echo "\n=== execute raw2csv on D10 ===\n";
         echo raw2csv::execute($params);
         
         return '';

@@ -32,6 +32,10 @@ class CuraCommand implements Command{
         $datafile = $params[0];
         $command = $params[1];
         
+        if($datafile == 'all' && $command == 'all'){
+            return \g5\transform\cura\all\all::execute($params);
+        }
+        
         $datafiles = CuraRouter::computeDatafiles($datafile);
         
         foreach($datafiles as $dtfile){

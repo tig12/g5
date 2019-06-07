@@ -25,10 +25,10 @@ class all implements Command{
             return "INVALID PARAMETER : " . $params[2] . " - all doesn't need this parameter\n";
         }
         
-        echo "\n=== execute raw2csv ===\n";
+        echo "\n=== execute raw2csv on D6 ===\n";
         echo raw2csv::execute($params);
         
-        echo "\n=== execute addGeo ===\n";
+        echo "\n=== execute addGeo on D6 ===\n";
         echo addGeo::execute($params);
         
         return '';

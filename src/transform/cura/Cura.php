@@ -18,6 +18,7 @@ class Cura{
         Possible values of parameter indicating the subject to process.
     **/
     const DATAFILES_POSSIBLES = [
+        'all',
         'A', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6',
         // 'B', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6',
         'D6', 'D10',
@@ -31,6 +32,7 @@ class Cura{
         @todo Put this constant in CuraRouter ?
     **/
     const DATAFILES_SUBNAMESPACE = [
+        'all' => 'all',
         'A' => 'A',
         'A1' => 'A',
         'A2' => 'A',

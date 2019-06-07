@@ -21,6 +21,9 @@ class CuraRouter implements Router{
     **/
     public static function computeDatafiles($userParam){
         switch($userParam){
+        	case 'all' : 
+        	    return ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'D6', 'D10', 'E1', 'E3'];
+        	break;
         	case 'A' : 
         	    return ['A1', 'A2', 'A3', 'A4', 'A5', 'A6'];
         	break;
