@@ -1,6 +1,7 @@
 <?php
 /********************************************************************************
-    Converts file 1-raw/cura.free.fr/902gdD10.html to 5-tmp/cura-csv/D10.csv
+    Imports file 1-raw/cura.free.fr/902gdD10.html to 5-tmp/cura-csv/D10.csv
+    1398 Data of Successful Americans
     
     @license    GPL                  
     @history    2019-04-04 14:23:10+02:00, Thierry Graff : creation

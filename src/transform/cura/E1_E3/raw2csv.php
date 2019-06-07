@@ -1,10 +1,10 @@
 <?php
 /********************************************************************************
-    Importation of Gauquelin 5th edition ; code specific to series E1 and E3
-    
-    @todo   information about arrondissement (Paris and Lyon) is not imported => add it to imported data
-    @todo   matching to geonames is not complete
-    @todo   informations preceeding the name, like L - + *, are not imported
+    Importation of cura files E1 and E3
+    E1 : 2154 New French Physicians, Army Leaders, Top Executives
+    E3 : 1540 New French Writers, Artists, Actors, Politicians & Journalists
+
+    @todo   information about arrondissement (Paris and Lyon) is not imported
     
     @license    GPL
     @history    2017-05-02 04:32:44+02:00, Thierry Graff : creation
@@ -14,6 +14,7 @@ namespace g5\transform\cura\E1_E3;
 use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
+use g5\model\Names;
 use g5\transform\cura\Cura;
 
 class raw2csv implements Command{
@@ -37,7 +38,7 @@ class raw2csv implements Command{
             'PO' => 'PO',
             'JO' => 'JO',
             'WR' => 'WR',
-            'AC' => 'AC', // [including Pop Singers]
+            'AC' => 'AC',   // [including Pop Singers]
             'PAI' => 'PAI', // [including 1 sculptor]
             'MUS' => 'MUS',
             'OPE' => 'OPE',
@@ -93,7 +94,7 @@ class raw2csv implements Command{
             $new['OCCU'] = self::PROFESSIONS[$subject][trim(substr($line, 8, 5))];
             $new['NOTE'] = trim(substr($line, 14, 2)); // L * + -
             $name = trim(substr($line, 17, 30));
-            $new['NAME'] = strtr($name, $fix_names);
+            [$new['FNAME'], $new['GNAME']] = Names::familyGiven(strtr($name, $fix_names));
             $y = trim(substr($line, 61, 6));
             $m = trim(substr($line, 55, 4));
             $d = trim(substr($line, 49, 4));
@@ -195,7 +196,8 @@ class raw2csv implements Command{
             'NUM',
             'OCCU',
             'NOTE',
-            'NAME',
+            'FNAME',
+            'GNAME',
             'DATE',
             'PLACE',
             'LG',

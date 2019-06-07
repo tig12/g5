@@ -1,7 +1,6 @@
 <?php
 /********************************************************************************
-    Parses file 1-raw/newalchemypress.com/3a_sports-utf8.csv
-    and stores it to 5-tmp/newalch/4391SPO.csv
+    Imports 1-raw/newalchemypress.com/3a_sports-utf8.csv to 5-tmp/newalch/4391SPO.csv
     
     3a_sports-utf8.csv is a modified version of file 3a_sports-utf8.txt
     This file was retrieved in april 2019 from

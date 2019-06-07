@@ -505,12 +505,10 @@ class raw2csv implements Command{
             $n_ok_fix = $n1_fix = $n2_fix = 0;
         }
         //
-        // fill GNAME when possible
+        // FNAME, GNAME
         //
-        // untill now, only FNAME has been filled
-        // fill also GNAME for trivial cases
-        // (when FNAME contains two strings separated by a white space)
         foreach(array_keys($res) as $k){
+            // try to separate FNAME and GNAME
             [$res[$k]['FNAME'], $res[$k]['GNAME']] = ModelNames::familyGiven($res[$k]['FNAME']);
             // correct accents
             $res[$k]['GNAME'] = Names_fr::accentGiven($res[$k]['GNAME']);

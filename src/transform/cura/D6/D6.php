@@ -12,7 +12,8 @@ class D6{
     /** Fields of 5-tmp/cura-csv/D6.csv **/
     const FIELDNAMES = [
         'NUM',
-        'NAME',
+        'FNAME',
+        'GNAME',
         'DATE',
         'PLACE',
         'CY',

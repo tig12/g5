@@ -116,7 +116,7 @@ class Run{
         Auxiliary of self::getDatafiles() and self::getActionClass().
     **/
     private static function datasetRouterFilename($dataset){
-        return implode(DS, [__DIR__, 'transform', $dataset, ucFirst($dataset) . 'Router' . '.php']);
+        return implode(DS, [__DIR__, 'transform', $dataset, ucFirst($dataset) . 'Router.php']);
     }
     
     

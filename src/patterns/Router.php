@@ -17,7 +17,7 @@ interface Router{
     public static function getDatafiles(): array;
     
     /**
-        @return An array of possible commands for this data source.
+        @return An array of possible commands for this datafile.
     **/
     public static function getCommands($datafile): array;
     

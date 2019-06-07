@@ -9,7 +9,7 @@ namespace g5;
 class G5{
     
     /** 
-        Separator for all csv files of data/5-tmp and data/3-edited
+        Separator for all csv files of data/5-tmp/ and data/3-edited/
     **/
     const CSV_SEP = ';';
     

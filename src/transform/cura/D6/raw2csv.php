@@ -1,7 +1,9 @@
 <?php
 /********************************************************************************
-    Importation of Gauquelin 5th edition ; code specific to file D6
-    matches first list and chronological order list
+    Importation of cura file D6
+    450 New famous European Sports Champions
+    
+    Matches first list and chronological order list
     
     @license    GPL
     @history    2017-04-27 22:04:25+02:00, Thierry Graff : creation
@@ -11,6 +13,7 @@ namespace g5\transform\cura\D6;
 use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
+use g5\model\Names;
 use g5\transform\cura\Cura;
 
 class raw2csv implements Command{
@@ -25,16 +28,16 @@ class raw2csv implements Command{
         @throws Exception if unable to parse
     **/
     public static function execute($params=[]): string{
-        $subject = 'D6';
+        $datafile = 'D6';
             
-        $report =  "--- Importing $subject ---\n";
-        $raw = Cura::readHtmlFile($subject);
+        $report =  "--- Importing $datafile ---\n";
+        $raw = Cura::readHtmlFile($datafile);
         // Fix an error on a latitude in cura file
         $raw = str_replace(
             '356	8	1	1925	11	0	0	36N05	00W56	Ruiz Bernardo',
             '356	8	1	1925	11	0	0	38N05	00W56	Ruiz Bernardo',
             $raw);
-        $file_serie = Cura::rawFilename($subject);
+        $file_serie = Cura::rawFilename($datafile);
         preg_match('#<pre>.*?(NUM.*?NAME)\s*(.*?)\s*</pre>#sm', $raw, $m);
         if(count($m) != 3){
             throw new \Exception("Unable to parse list in " . $file_serie);
@@ -47,7 +50,7 @@ class raw2csv implements Command{
             $cur = preg_split('/\t+/', $line);
             $new = [];
             $new['NUM'] = trim($cur[0]);
-            $new['NAME'] = trim($cur[9]);
+            [$new['FNAME'], $new['GNAME']] = Names::familyGiven(trim($cur[9]));
             $day = Cura::computeDay(['DAY' => $cur[1], 'MON' => $cur[2], 'YEA' => $cur[3]]);
             $hour = Cura::computeHHMM(['H' => $cur[4], 'MN' => $cur[5]]);
             $new['DATE'] = "$day $hour";
@@ -59,7 +62,7 @@ class raw2csv implements Command{
             $csv .= implode(G5::CSV_SEP, $new) . "\n";
             $nb_stored ++;
         }
-        $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $subject . '.csv';
+        $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv';
         file_put_contents($csvfile, $csv);
         $report .= $nb_stored . " lines stored in $csvfile\n";
         return $report;
