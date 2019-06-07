@@ -197,26 +197,7 @@ class raw2csv implements Command{
         // store in destination csv file
         //
         $res1 = \lib::sortByKey($res1, 'NUM');
-        $fieldnames = [
-            'NUM',
-            'OCCU',
-            'NOTE',
-            'FNAME',
-            'GNAME',
-            'DATE',
-            'PLACE',
-            'LG',
-            'LAT',
-            'C2',
-            'CY',
-            'GEOID',
-            'MO',
-            'VE',
-            'MA',
-            'JU',
-            'SA',
-        ];
-        $csv = implode(G5::CSV_SEP, $fieldnames) . "\n";
+        $csv = implode(G5::CSV_SEP, E1_E3::FIELDNAMES) . "\n";
         foreach($res1 as $fields){
             $csv .= implode(G5::CSV_SEP, $fields) . "\n";
         }

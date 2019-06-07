@@ -56,20 +56,7 @@ class raw2csv implements Command{
         $nb_stored = 0;
         $csv = '';
         // fields in the resulting csv
-        $fieldnames = [
-            'NUM',
-            'C_APP',
-            'FNAME',
-            'GNAME',
-            'DATE',
-            'PLACE',
-            'CY',
-            'C2',
-            'LG',
-            'LAT',
-            'OCCU',
-        ];
-        $csv = implode(G5::CSV_SEP, $fieldnames) . "\n";
+        $csv = implode(G5::CSV_SEP, D10::FIELDNAMES) . "\n";
         // Fix problems in cura data
         $m[2] = preg_replace(
             "/112.*?Hardin County,\s+TN/",

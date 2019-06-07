@@ -26,7 +26,7 @@ class lib{
         All lines are upposed to have the same number of fields (no check is done).
         @param      $filename Absolute path to the csv file
         @param      $delimiter field delimiter (one character only).
-        @return      false or associative array
+        @return     false or associative array
     **/
     public static function csvAssociative($filename, $delimiter=';'){
         $res = [];
