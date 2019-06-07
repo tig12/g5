@@ -370,10 +370,10 @@ class raw2csv implements Command{
             return "INVALID PARAMETER : " . $params[2] . " - raw2csv doesn't need this parameter\n";
         }
         
-        $subject = $params[0];
-        $report =  "--- Importing serie $subject ---\n";
-        $raw = Cura::readHtmlFile($subject);
-        $file_subject = Cura::rawFilename($subject);
+        $datafile = $params[0];
+        $report =  "--- Importing file $datafile ---\n";
+        $raw = Cura::readHtmlFile($datafile);
+        $file_datafile = Cura::rawFilename($datafile);
         $file_names = CuraNames::rawFilename(); // = 902gdN.html
         //
         // 1 - parse first list (without names) - store by birth date to prepare matching
@@ -381,7 +381,7 @@ class raw2csv implements Command{
         $res1 = [];
         preg_match('#<pre>\s*(YEA.*?CITY)\s*(.*?)\s*</pre>#sm', $raw, $m);
         if(count($m) != 3){
-            throw new \Exception("Unable to parse first list (without names) in " . $file_subject);
+            throw new \Exception("Unable to parse first list (without names) in " . $file_datafile);
         }
         $fieldnames1 = explode(Cura::HTML_SEP, $m[1]);
         $lines1 = explode("\n", $m[2]);
@@ -401,7 +401,7 @@ class raw2csv implements Command{
         // 2 - prepare names - store by birth date to prepare matching
         //
         $res2 = [];
-        $names = CuraNames::parse()[$subject];
+        $names = CuraNames::parse()[$datafile];
         foreach($names as $fields){
             $day = $fields['day'];
             if(!isset($res2[$day])){
@@ -410,7 +410,7 @@ class raw2csv implements Command{
             $res2[$day][] = $fields;
         }
         // Hack to fix error for Jean Lebris
-        if($subject == 'A1'){
+        if($datafile == 'A1'){
             $res2['1817-03-25'] = [['day' => '1817-03-25', 'pro' => 'SP', 'name' => 'Lebris Jean']];
             unset($res2['1817-03-05']); // possible because this date is unique within the array.
         }
@@ -433,7 +433,7 @@ class raw2csv implements Command{
                         'NUM' => $tmp['NUM'],
                     ];
                     // store in $res with fabricated name
-                    $tmp['FNAME'] = self::compute_replacement_name($subject, $tmp['NUM']);
+                    $tmp['FNAME'] = self::compute_replacement_name($datafile, $tmp['NUM']);
                     $res[] = $tmp;
                 }
                 continue;
@@ -445,12 +445,12 @@ class raw2csv implements Command{
                 // store in $res with fabricated name
                 foreach($array1 as $tmp){
                     $n3++;
-                    $tmp['FNAME'] = self::compute_replacement_name($subject, $tmp['NUM']);
+                    $tmp['FNAME'] = self::compute_replacement_name($datafile, $tmp['NUM']);
                     $res[] = $tmp;
                 }
-                $new_doublon = [$file_subject => [], $file_names => []];
+                $new_doublon = [$file_datafile => [], $file_names => []];
                 foreach($array1 as $tmp){
-                    $new_doublon[$file_subject][] = [
+                    $new_doublon[$file_datafile][] = [
                         'LINE' => implode("\t", $tmp),
                         'NUM' => $tmp['NUM'],
                     ];
@@ -478,13 +478,13 @@ class raw2csv implements Command{
                     // store in $res with fabricated name
                     foreach($array1 as $tmp){
                         $n2++;
-                        $tmp['FNAME'] = self::compute_replacement_name($subject, $tmp['NUM']);
+                        $tmp['FNAME'] = self::compute_replacement_name($datafile, $tmp['NUM']);
                         $res[] = $tmp;
                     }
                     // fill $doublons_same_nb with all candidate lines
-                    $new_doublon = [$file_subject => [], $file_names => []];
+                    $new_doublon = [$file_datafile => [], $file_names => []];
                     foreach($array1 as $tmp){
-                        $new_doublon[$file_subject][] = [
+                        $new_doublon[$file_datafile][] = [
                             'LINE' => implode("\t", $tmp),
                             'NUM' => $tmp['NUM'],
                         ];
@@ -503,8 +503,8 @@ class raw2csv implements Command{
         //
         // 1955 corrections
         //
-        if(isset(self::CORRECTIONS_1955[$subject])){
-            [$n_ok_fix, $n1_fix, $n2_fix] = self::corrections1955($res, $missing_in_names, $doublons_same_nb, $subject, $file_subject, $file_names);
+        if(isset(self::CORRECTIONS_1955[$datafile])){
+            [$n_ok_fix, $n1_fix, $n2_fix] = self::corrections1955($res, $missing_in_names, $doublons_same_nb, $datafile, $file_datafile, $file_names);
         }
         else{
             $n_ok_fix = $n1_fix = $n2_fix = 0;
@@ -521,14 +521,14 @@ class raw2csv implements Command{
         //
         // report
         //
-        $report_type = Config::$data['raw2csv']['report'][$subject];
-        $n_correction_1955 = isset(self::CORRECTIONS_1955[$subject]) ? count(self::CORRECTIONS_1955[$subject]) : 0;
+        $report_type = Config::$data['raw2csv']['report'][$datafile];
+        $n_correction_1955 = isset(self::CORRECTIONS_1955[$datafile]) ? count(self::CORRECTIONS_1955[$datafile]) : 0;
         $n_bad = $n1 + $n2 + $n3 - $n_ok_fix - $n1_fix - $n2_fix;
         $n_good = $n_ok + $n_ok_fix + $n1_fix + $n2_fix;
         $percent_ok = round($n_good * 100 / count($lines1), 2);
         $percent_not_ok = round($n_bad * 100 / count($lines1), 2);
-        $report .= "nb in list1 ($file_subject) : " . count($lines1) . " - nb in list2 ($file_names) : " . count($names) . "\n";
-        $report .= "case 1 : $n1 dates present in $file_subject and missing in $file_names - $n1_fix fixed by 1955\n";
+        $report .= "nb in list1 ($file_datafile) : " . count($lines1) . " - nb in list2 ($file_names) : " . count($names) . "\n";
+        $report .= "case 1 : $n1 dates present in $file_datafile and missing in $file_names - $n1_fix fixed by 1955\n";
         if($report_type == 'full'){
             $report .=  print_r($missing_in_names, true) . "\n";
         }
@@ -567,7 +567,7 @@ class raw2csv implements Command{
             $new['NUM'] = trim($cur['NUM']);
             $new['FNAME'] = trim($cur['FNAME']);
             $new['GNAME'] = trim($cur['GNAME']);
-            $new['OCCU'] = self::compute_profession($subject, $cur['PRO'], $new['NUM']);
+            $new['OCCU'] = self::compute_profession($datafile, $cur['PRO'], $new['NUM']);
             // date time
             $day = Cura::computeDay($cur);
             $hour = Cura::computeHHMMSS($cur);
@@ -585,7 +585,7 @@ class raw2csv implements Command{
             $csv .= implode(G5::CSV_SEP, $new) . "\n";
             $nb_stored ++;
         }
-        $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $subject . '.csv';
+        $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv';
         file_put_contents($csvfile, $csv);
         $report .= "Stored result in $csvfile\n";
         return $report;
@@ -597,7 +597,7 @@ class raw2csv implements Command{
         Auxiliary of raw2csv()
         @return [$n_ok_fix, $n1_fix, $n2_fix]
     **/
-    private static function corrections1955(&$res, &$missing_in_names, &$doublons_same_nb, $subject, $file_subject, $file_names){
+    private static function corrections1955(&$res, &$missing_in_names, &$doublons_same_nb, $datafile, $file_datafile, $file_names){
         $n_ok_fix = $n1_fix = $n2_fix = 0;
         //
         // Remove cases in $missing_in_names solved by 1955
@@ -605,7 +605,7 @@ class raw2csv implements Command{
         // computes $n1_fix
         //
         for($i=0; $i < count($missing_in_names); $i++){
-            if(in_array($missing_in_names[$i]['NUM'], self::CORRECTIONS_1955[$subject])){
+            if(in_array($missing_in_names[$i]['NUM'], self::CORRECTIONS_1955[$datafile])){
                 unset($missing_in_names[$i]);
                 $n1_fix++;
             }
@@ -614,29 +614,29 @@ class raw2csv implements Command{
         // Resolve doublons
         // computes $n2_fix
         //
-        $NUMS_1955 = array_keys(self::CORRECTIONS_1955[$subject]);
+        $NUMS_1955 = array_keys(self::CORRECTIONS_1955[$datafile]);
         $N_DOUBLONS = count($doublons_same_nb);
         for($i=0; $i < $N_DOUBLONS; $i++){
-            if(count($doublons_same_nb[$i][$file_subject]) != 2){                
+            if(count($doublons_same_nb[$i][$file_datafile]) != 2){                
                 // resolution works only for doublons (not triplets or more elements)
                 continue;
             }
             $found = false;
-            if(in_array($doublons_same_nb[$i][$file_subject][0]['NUM'], $NUMS_1955)){
-                $NUM = $doublons_same_nb[$i][$file_subject][0]['NUM'];
-                $NAME = self::CORRECTIONS_1955[$subject][$NUM];
+            if(in_array($doublons_same_nb[$i][$file_datafile][0]['NUM'], $NUMS_1955)){
+                $NUM = $doublons_same_nb[$i][$file_datafile][0]['NUM'];
+                $NAME = self::CORRECTIONS_1955[$datafile][$NUM];
                 $found = 0;
             }
-            else if(in_array($doublons_same_nb[$i][$file_subject][1]['NUM'], $NUMS_1955)){
-                $NUM = $doublons_same_nb[$i][$file_subject][1]['NUM'];
-                $NAME = self::CORRECTIONS_1955[$subject][$NUM];
+            else if(in_array($doublons_same_nb[$i][$file_datafile][1]['NUM'], $NUMS_1955)){
+                $NUM = $doublons_same_nb[$i][$file_datafile][1]['NUM'];
+                $NAME = self::CORRECTIONS_1955[$datafile][$NUM];
                 $found = 1;
             }
             if($found !== false){
                 // resolve first
                 $idx_num = ($found === 0 ? 1 : 0);
                 $idx_name = ($doublons_same_nb[$i][$file_names][0]['FNAME'] == $NAME ? 1 : 0); // HERE use of exact name spelling in self::CORRECTIONS_1955
-                $new_num1 = $doublons_same_nb[$i][$file_subject][$idx_num]['NUM'];
+                $new_num1 = $doublons_same_nb[$i][$file_datafile][$idx_num]['NUM'];
                 $new_name1 = $doublons_same_nb[$i][$file_names][$idx_name]['FNAME'];
                 // inject doublon resolution in $res
                 for($j=0; $j < count($res); $j++){
@@ -648,7 +648,7 @@ class raw2csv implements Command{
                 // resolve second
                 $idx_num = ($idx_num == 0 ? 1 : 0);
                 $idx_name = ($idx_name == 0 ? 1 : 0);
-                $new_num2 = $doublons_same_nb[$i][$file_subject][$idx_num]['NUM'];
+                $new_num2 = $doublons_same_nb[$i][$file_datafile][$idx_num]['NUM'];
                 $new_name2 = $doublons_same_nb[$i][$file_names][$idx_name]['FNAME'];
                 // inject doublon resolution in $res
                 for($j=0; $j < count($res); $j++){
@@ -670,9 +670,9 @@ class raw2csv implements Command{
         for($i=0; $i < $n; $i++){
             $NUM = $res[$i]['NUM'];
             // test on strpos done to avoid counting cases solved by doublons
-            if(isset(self::CORRECTIONS_1955[$subject][$NUM]) && strpos($res[$i]['FNAME'], 'Gauquelin-') === 0){
+            if(isset(self::CORRECTIONS_1955[$datafile][$NUM]) && strpos($res[$i]['FNAME'], 'Gauquelin-') === 0){
                 $n_ok_fix++;
-                $res[$i]['FNAME'] = self::CORRECTIONS_1955[$subject][$NUM];
+                $res[$i]['FNAME'] = self::CORRECTIONS_1955[$datafile][$NUM];
             }
         }
         return [$n_ok_fix, $n1_fix, $n2_fix];
@@ -686,10 +686,10 @@ class raw2csv implements Command{
         Then computes precise profession from $num, if possible
         Auxiliary of raw2csv()
     **/
-    private static function compute_profession($subject, $pro, $num){
-        $res = self::PROFESSIONS_NO_DETAILS[$subject][$pro];
-        if(isset(self::PROFESSIONS_DETAILS[$subject])){
-            $tmp = self::PROFESSIONS_DETAILS[$subject];
+    private static function compute_profession($datafile, $pro, $num){
+        $res = self::PROFESSIONS_NO_DETAILS[$datafile][$pro];
+        if(isset(self::PROFESSIONS_DETAILS[$datafile])){
+            $tmp = self::PROFESSIONS_DETAILS[$datafile];
             foreach($tmp as $elts){
                 // $elts looks like that : ['Athlétisme', 1, 86],
                 if($num >= $elts[1] && $num <= $elts[2]){
@@ -708,8 +708,8 @@ class raw2csv implements Command{
         Auxiliary of raw2csv()
         @return A string like 'Gauquelin-A1-243'
     **/
-    private static function compute_replacement_name($subject, $num){
-        return "Gauquelin-$subject-$num";
+    private static function compute_replacement_name($datafile, $num){
+        return "Gauquelin-$datafile-$num";
     }
     
     

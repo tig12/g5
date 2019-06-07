@@ -1,4 +1,4 @@
-    <?php
+<?php
 /********************************************************************************
     CLI (command line interface) of Gauquelin5 program
     

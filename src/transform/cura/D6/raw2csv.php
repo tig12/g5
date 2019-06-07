@@ -30,7 +30,7 @@ class raw2csv implements Command{
     public static function execute($params=[]): string{
         
         if(count($params) > 2){
-            return "INVALID PARAMETER : " . $params[2] . " - raw2csv dosen't need this parameter\n";
+            return "INVALID PARAMETER : " . $params[2] . " - raw2csv doesn't need this parameter\n";
         }
         
         $datafile = 'D6';
