@@ -35,6 +35,11 @@ class addGeo implements Command{
         Add missing geographic informations to 5-tmp/geonames/D6.csv and 5-tmp/cura-csv/D6.csv.
     **/
     public static function execute($params=[]): string{
+        
+        if(count($params) > 2){
+            return "INVALID PARAMETER : " . $params[2] . " - addGeo doesn't need this parameter\n";
+        }
+        
         $subject = 'D6';
         $report =  "--- Computing geographic information for $subject ---\n";
         $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $subject . '.csv';
@@ -46,7 +51,7 @@ class addGeo implements Command{
         }
         
         if(!is_file($geofile)){
-            copy($csvfile, $geofile);
+            copy($csvfile, $geofile); // at first exec only
         }
         
         while(true){

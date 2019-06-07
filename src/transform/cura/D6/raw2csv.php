@@ -28,6 +28,11 @@ class raw2csv implements Command{
         @throws Exception if unable to parse
     **/
     public static function execute($params=[]): string{
+        
+        if(count($params) > 2){
+            return "INVALID PARAMETER : " . $params[2] . " - raw2csv dosen't need this parameter\n";
+        }
+        
         $datafile = 'D6';
             
         $report =  "--- Importing $datafile ---\n";

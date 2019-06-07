@@ -24,6 +24,7 @@ class Cura{
         'E1', 'E3',
     ];
     
+    
     /** 
         Associations between datafile in the user's vocabulary and the sub-namespace that handles it.
         (sub-namespace of g5\transform\cura).
@@ -40,7 +41,7 @@ class Cura{
         'D6' => 'D6',
         'D10' => 'D10',
         'E1' => 'E1_E3',
-        'E3' => 'E3_E3',
+        'E3' => 'E1_E3',
     ];
     
     // *****************************************

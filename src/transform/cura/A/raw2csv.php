@@ -15,10 +15,10 @@ namespace g5\transform\cura\A;
 use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
-use g5\model\Names as ModelNames;
+use g5\model\Names;
 use g5\model\Names_fr;
 use g5\transform\cura\Cura;
-use g5\transform\cura\Names;
+use g5\transform\cura\CuraNames;
 
 class raw2csv implements Command{
     
@@ -365,11 +365,16 @@ class raw2csv implements Command{
         @throws Exception if unable to parse
     **/
     public static function execute($params=[]): string{
+        
+        if(count($params) > 2){
+            return "INVALID PARAMETER : " . $params[2] . " - raw2csv doesn't need this parameter\n";
+        }
+        
         $subject = $params[0];
         $report =  "--- Importing serie $subject ---\n";
         $raw = Cura::readHtmlFile($subject);
         $file_subject = Cura::rawFilename($subject);
-        $file_names = Names::rawFilename(); // = 902gdN.html
+        $file_names = CuraNames::rawFilename(); // = 902gdN.html
         //
         // 1 - parse first list (without names) - store by birth date to prepare matching
         //
@@ -396,7 +401,7 @@ class raw2csv implements Command{
         // 2 - prepare names - store by birth date to prepare matching
         //
         $res2 = [];
-        $names = Names::parse()[$subject];
+        $names = CuraNames::parse()[$subject];
         foreach($names as $fields){
             $day = $fields['day'];
             if(!isset($res2[$day])){
@@ -509,7 +514,7 @@ class raw2csv implements Command{
         //
         foreach(array_keys($res) as $k){
             // try to separate FNAME and GNAME
-            [$res[$k]['FNAME'], $res[$k]['GNAME']] = ModelNames::familyGiven($res[$k]['FNAME']);
+            [$res[$k]['FNAME'], $res[$k]['GNAME']] = Names::familyGiven($res[$k]['FNAME']);
             // correct accents
             $res[$k]['GNAME'] = Names_fr::accentGiven($res[$k]['GNAME']);
         }

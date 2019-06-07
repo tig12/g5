@@ -9,7 +9,7 @@ namespace g5\transform\cura;
 
 use g5\transform\cura\Cura;
 
-class Names{
+class CuraNames{
     
     // ******************************************************
     public static function rawFilename(){

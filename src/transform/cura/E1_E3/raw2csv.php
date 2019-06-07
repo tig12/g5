@@ -53,16 +53,21 @@ class raw2csv implements Command{
     /** 
         Parses one file E1 or E3 and stores it in a csv file
         The resulting csv file contains informations of the 2 lists
-        @param  $subject Must be 'E1' or 'E3'
+        @param  $datafile Must be 'E1' or 'E3'
         @return report
     **/
     public static function execute($params=[]): string{
-        $subject = $params[0];
-        if($subject != 'E1' && $subject != 'E3'){
-            throw new \Exception("Bad value for parameter \$subject : $subject ; must be 'E1' or 'E3'");
+        
+        if(count($params) > 2){
+            return "INVALID PARAMETER : " . $params[2] . " - raw2csv doesn't need this parameter\n";
+        }
+        
+        $datafile = $params[0];
+        if($datafile != 'E1' && $datafile != 'E3'){
+            throw new \Exception("Bad value for parameter \$datafile : $datafile ; must be 'E1' or 'E3'");
         }
         // config - todo : check validity of values put in config
-        $report_type = Config::$data['raw2csv']['report'][$subject]; // 'full', 'small', 'tz' or 'geo'
+        $report_type = Config::$data['raw2csv']['report'][$datafile]; // 'full', 'small', 'tz' or 'geo'
         $do_report_geo = $do_report_tz = false;
         if($report_type == 'full' || $report_type == 'geo'){
             $do_report_geo = true;
@@ -74,15 +79,15 @@ class raw2csv implements Command{
         self::$n_missing_timezone = 0;
         self::$n_total = 0;
         $report = '';
-        $report .= "Importing $subject\n";
+        $report .= "Importing $datafile\n";
         //
         // parse first list (with birth date and place)
         //
         $res1 = [];
-        $raw = Cura::readHtmlFile($subject);
+        $raw = Cura::readHtmlFile($datafile);
         preg_match('#<pre>\s*(NUM.*?COD)\s*(.*?)\s*</pre>#sm', $raw, $m);
         if(count($m) != 3){
-            throw new \Exception($subject . " - Unable to parse $file - first list");
+            throw new \Exception($datafile . " - Unable to parse $file - first list");
         }
         $lines = explode("\n", $m[2]);
         // to fix typos : O are replaced by zero ; A by 3 ; S by 5, G by 6 ; B by 8
@@ -91,7 +96,7 @@ class raw2csv implements Command{
             self::$n_total++;
             $new = [];
             $new['NUM'] = trim(substr($line, 0, 5));
-            $new['OCCU'] = self::PROFESSIONS[$subject][trim(substr($line, 8, 5))];
+            $new['OCCU'] = self::PROFESSIONS[$datafile][trim(substr($line, 8, 5))];
             $new['NOTE'] = trim(substr($line, 14, 2)); // L * + -
             $name = trim(substr($line, 17, 30));
             [$new['FNAME'], $new['GNAME']] = Names::familyGiven(strtr($name, $fix_names));
@@ -215,7 +220,7 @@ class raw2csv implements Command{
         foreach($res1 as $fields){
             $csv .= implode(G5::CSV_SEP, $fields) . "\n";
         }
-        $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $subject . '.csv';
+        $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv';
         file_put_contents($csvfile, $csv);
         return $report;
     }

@@ -40,6 +40,11 @@ class raw2csv implements Command{
         @throws Exception if unable to parse
     **/
     public static function execute($params=[]): string{
+        
+        if(count($params) > 2){
+            return "INVALID PARAMETER : " . $params[2] . " - raw2csv doesn't need this parameter\n";
+        }
+        
         $subject = 'D10';
         $report =  "--- Importing serie $subject ---\n";
         $raw = Cura::readHtmlFile($subject);

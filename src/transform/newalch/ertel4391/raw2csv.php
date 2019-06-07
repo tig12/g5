@@ -83,6 +83,10 @@ class raw2csv implements Command{
     **/
     public static function execute($params=[]): string{
         
+        if(count($params) > 2){
+            return "INVALID PARAMETER : " . $params[2] . " - raw2csv doesn't need this parameter\n";
+        }
+        
         $output = implode(G5::CSV_SEP, self::OUTPUT_COLUMNS) . "\n";
         
         $records = \lib::csvAssociative(Config::$data['dirs']['1-newalch-raw'] . DS . '3a_sports-utf8.csv');

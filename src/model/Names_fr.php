@@ -15,7 +15,6 @@ class Names_fr{
         'Dieudonne' => 'Dieudonné',
         'Felix' => 'Félix',
         'Eugene' => 'Eugène',
-        'Jose' => 'José',
         'Leon' => 'Léon',
         'Rene' => 'René',
         'Stephane' => 'Stéphane',
