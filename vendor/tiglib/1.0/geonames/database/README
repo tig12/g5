@@ -1,0 +1,2 @@
+This code uses geonames.org data stored in a postgresql database, as described in
+https://github.com/tig12/geonames2postgres

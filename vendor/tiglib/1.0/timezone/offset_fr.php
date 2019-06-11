@@ -1,17 +1,17 @@
-<?php 
-// Software released under the General Public License (version 3 or later), available at
-// http://www.gnu.org/copyleft/gpl.html
-/********************************************************************************
-    
-    Timezone matters specific to France that are not covered by php
-    
+<?php
+/******************************************************************************
+    Improves php computation of timezone for France.
+
     @license    GPL
-    @copyright  Thierry Graff
     @history    2017-01-03 00:09:55+01:00, Thierry Graff : Creation 
     @history    2017-05-04 10:38:22+02:00, Thierry Graff : Adaptation for autonom use 
+    @history    2019-06-11 10:41:23+02:00, Thierry Graff : Integration to tiglib
 ********************************************************************************/
+namespace tiglib\timezone;
 
-class TZ_fr{
+use tiglib\time\seconds2HHMMSS;
+
+class offset_fr{
     
     // ******************************************************
     /**
@@ -33,15 +33,14 @@ class TZ_fr{
         @todo   Implementation of computation taking into account the precise local situation
                 would need also a latitude parameter
     **/
-    public static function offset($date, $lg, $dept){
+    public static function compute($date, $lg, $dept){
         $err = '';
-        $zone = 'Europe/Paris';
-        if($date < '1918-11-11' && $date > '1871-02-15'){
+        if($date > '1871-02-15' && $date < '1918-11-11'){
             if(in_array($dept, [67, 68, 57])){
-                $zone = 'Europe/Berlin';
+                //$zone = 'Europe/Berlin';
                 $err = "Possible timezone offset error (german zone) : $date $dept";
             }
-            if($dept == '54'){
+            else if($dept == '54'){
                 $err = "Possible timezone offset error (dept 54) - check precise local conditions : $date $dept";
             }
         }
@@ -51,16 +50,16 @@ class TZ_fr{
         if($date < '1891-03-15'){
             // hour = HLO, local hour at real sun
             $secs = 240 * $lg; // 240 = 3600 / 15 = nb of time seconds per longitude degrees
-            $hhmm = TZ::seconds2HHMMSS($secs, false);
+            $hhmm = seconds2HHMMSS::compute($secs, false);
             $sign = ($lg < 0 && $hhmm != '00:00') ? '-' : '+';
             $offset = $sign . $hhmm;
         }
         else{
-            $offset = TZ::offset($date, $zone);
+            $offset = offset::compute($date, 'Europe/Paris');
         }
+        
         return [$offset, $err];
     }
 
     
-} // end class
-
+}// end class

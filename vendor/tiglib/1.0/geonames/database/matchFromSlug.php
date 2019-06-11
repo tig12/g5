@@ -1,43 +1,20 @@
-<?php 
-// Software released under the General Public License (version 3 or later), available at
-// http://www.gnu.org/copyleft/gpl.html
-/********************************************************************************
-    Utilities to match place names to geonames entities
-    
+<?php
+/******************************************************************************
+    Tries to match a place in geonames DB from the slug of a place.
+
     @license    GPL
-    @copyright  Thierry Graff
-    @history    2014-01-21 05:50:27+01:00, Thierry Graff : Creation 
-    @history    2017-05-04 10:31:00+02:00, Thierry Graff : Adaptation for autonom use 
+    @history    2019-06-11 11:22:33+02:00, Thierry Graff : Creation from existing code
 ********************************************************************************/
+namespace tiglib\geonames\database;
 
-use g5\Config;
-
-class Geonames{
-    
-    /** path to the db containing geonames data **/
-    const DBNAME = 'jth_collective/geo';
-    
-    private static $dblink = null;
+class matchFromSlug{
     
     // ******************************************************
-    public static function compute_dblink(){
-        if(is_null(self::$dblink)){
-            $host = Config::$data['postgresql']['dbhost'];
-            $port = Config::$data['postgresql']['dbport'];
-            $user = Config::$data['postgresql']['dbuser'];
-            $password = Config::$data['postgresql']['dbpassword'];
-            $dbname = Config::$data['postgresql']['dbname'];
-            $dsn = "pgsql:host=$host;port=$port;user=$user;password=$password;dbname=$dbname";
-            self::$dblink = new PDO($dsn);
-            self::$dblink->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        }
-    }
-    
-    
-    // ******************************************************
-    /**
-        Tries to match a place in geonames DB from the slug of a place
+    /**                                                                    
+        Tries to match a place in geonames DB from the slug of a place.
         NB : slug = name transformed with no accent, no uppercase and any sprcial character replaced by '-'
+        
+        @param $pdo     A valid PDO link to the database that contains geonames data.
         @param $fields The place to match ; associative array containing the fields :
             - slug          required ; string
             - countries     required ; array containing the iso codes of countries where to try the match
@@ -48,13 +25,13 @@ class Geonames{
                     - 'slug'        : slug of place name
                     - 'country'     : ISO country code
                     - 'geoid'       : geoname id of the place
-                    - 'admin2_code' : administrative code, level 2 (ex : département in France)
+                    - 'admin2_code' : administrative code, level 2 (département in France ; state in USA)
                     - 'lg'          : longitude, decimal degrees
                     - 'lat'         : latitude, decimal degrees
                     - 'timezone'    : textual timezone identifier (ex : "Europe/Paris")
     **/
-    public static function matchFromSlug($fields){
-        self::compute_dblink();
+    public static function compute($pdo, $fields){
+        
         if(substr($fields['slug'], 0, 3) == 'st-'){
             $fields['slug'] = 'saint-' . substr($fields['slug'], 3);
         }
@@ -65,16 +42,17 @@ class Geonames{
         if(isset($fields['admin2-code']) && $fields['admin2-code']){
             $where .= " and admin2_code='{$fields['admin2-code']}'";
         }
+        
         for($i=0; $i < count($fields['countries']); $i++){
             $schema = strtolower($fields['countries'][$i]);
             try{
                 $query = "select geoid,name,slug,admin2_code,longitude,latitude,timezone from $schema.cities where $where";
-                $rst = self::$dblink->prepare($query);
+                $rst = $pdo->prepare($query);
                 $rst->execute();
                 if($rst->rowCount() == 0){
                     return [];
                 }
-                return $rst->fetchAll(PDO::FETCH_ASSOC);
+                return $rst->fetchAll(\PDO::FETCH_ASSOC);
             }
             catch(Exception $e){
                 // silently pass the fact that a country is not available
@@ -96,6 +74,4 @@ class Geonames{
         return false;
     }
     
-    
 }// end class
-

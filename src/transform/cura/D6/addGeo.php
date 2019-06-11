@@ -25,7 +25,8 @@ use g5\patterns\Command;
 use g5\transform\cura\Cura;
 use tiglib\misc\dosleep;
 use tiglib\arrays\csvAssociative;
-use tiglib\geonames\wsCityFromLgLat;
+use tiglib\geonames\webservice\cityFromLgLat;
+use tiglib\timezone\offset;
 
 class addGeo implements Command{
     
@@ -89,7 +90,7 @@ class addGeo implements Command{
                 $lg = $fields[6];
                 $lat = $fields[7];
                 // HERE call to geonames web service
-                $geonames = wsCityFromLgLat::compute(Config::$data['geonames']['username'], $lg, $lat, true);
+                $geonames = cityFromLgLat::compute(Config::$data['geonames']['username'], $lg, $lat, true);
                 if($geonames['error']){                       
                     $report .= $fields[0] . ' ' . $fields[1] . ' ' . print_r($geonames, true) . "\n";
                     $fields[3] = self::FAILURE_MARK;
@@ -98,7 +99,7 @@ class addGeo implements Command{
                 }
                 // here call to geonames web service was sucessful
                 $report .= $fields[0] . ' ' . $fields[1] . " : write geo info\n";
-                $dtu = \TZ::offset($fields[3], $geonames['result']['timezone']);
+                $dtu = offset::compute($fields[3], $geonames['result']['timezone']);
                 $fields[2] .= $dtu;
                 $fields[3] = $geonames['result']['name'];
                 $fields[4] = $geonames['result']['country'];

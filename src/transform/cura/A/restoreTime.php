@@ -19,6 +19,7 @@ use g5\model\Full;
 use g5\transform\cura\CuraRouter;
 use tiglib\time\HHMM2minutes;
 use tiglib\arrays\csvAssociative;
+use tiglib\timezone\offset_fr;
 
 class restoreTime implements Command{
     
@@ -76,7 +77,7 @@ echo "\n" . 'DATE = ' . $row1['CY'] . ' - ' . $row1['DATE'] . "\n";
                 $res .= implode(G5::CSV_SEP, $row2);
                 continue;
             }
-            [$dtu2, $err] = \TZ_fr::offset($row1['DATE'], $row1['LG'], $row1['C2']);
+            [$dtu2, $err] = offset_fr::compute($row1['DATE'], $row1['LG'], $row1['C2']);
             if($err != ''){
                 // no restoration
                 // @todo log or add error retransmission ?

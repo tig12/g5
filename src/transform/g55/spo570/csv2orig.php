@@ -11,6 +11,8 @@ use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
 use tiglib\strings\slugify;
+use tiglib\timezone\offset;
+use tiglib\timezone\offset_fr;
 
 class csv2orig implements Command {
     
@@ -165,7 +167,7 @@ class csv2orig implements Command {
                 // dtu
                 $dtu = '';
                 if($country == 'FR'){
-                    [$dtu, $err] = \TZ_fr::offset("$day $hour", $new['LG'], $new['ADM2']);
+                    [$dtu, $err] = offset_fr::compute("$day $hour", $new['LG'], $new['ADM2']);
                     if($err != ''){
                         // err is something like :
                         // Possible timezone offset error (dept 54) - check precise local conditions
@@ -174,7 +176,7 @@ class csv2orig implements Command {
                     }
                 }
                 else{
-                    $dtu = \TZ::offset("$day $hour", $geonames[0]['timezone']);
+                    $dtu = offset::compute("$day $hour", $geonames[0]['timezone']);
                 }
                 $new['BIRTHDATE'] = "$day $hour$dtu";
                 // add new line to res

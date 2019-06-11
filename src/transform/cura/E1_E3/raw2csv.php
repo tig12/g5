@@ -15,9 +15,12 @@ use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
 use g5\model\Names;
+use g5\model\Geonames;
 use g5\transform\cura\Cura;
 use tiglib\arrays\sortByKey;
 use tiglib\strings\slugify;
+use tiglib\timezone\offset_fr;
+use tiglib\geonames\database\matchFromSlug;
 
 class raw2csv implements Command{
     
@@ -116,7 +119,7 @@ class raw2csv implements Command{
             }
             // compute timezone
             if($lg != ''){
-                [$offset, $err] = \TZ_fr::offset($date, $lg, $COD);
+                [$offset, $err] = offset_fr::compute($date, $lg, $COD);
                 if($err){
                     self::$n_missing_timezone++;
                     if($do_report_tz){
@@ -297,7 +300,8 @@ class raw2csv implements Command{
 */
         $slug = slugify::execute($name);
         // HERE call to Geonames to match
-        $geonames = \Geonames::matchFromSlug([
+        $pdo = Geonames::compute_dblink();
+        $geonames = matchFromSlug::compute($pdo, [
             'slug' => $slug,
             'countries' => ['FR'],
             'admin2-code' => $adm2,

@@ -3,11 +3,11 @@
     Computes informations about a city using geonames.org web service.
 
     @license    GPL
-    @history    2019-06-11 09:58:55+02:00, Thierry Graff : Creation from old code.
+    @history    2019-06-11 09:58:55+02:00, Thierry Graff : Creation from existing code.
 ********************************************************************************/
-namespace tiglib\geonames;
+namespace tiglib\geonames\webservice;
 
-class wsCityFromLgLat{
+class cityFromLgLat{
     
     /** URL of geonames.org web service **/
     const URL = 'http://api.geonames.org/findNearbyPlaceNameJSON';
@@ -71,7 +71,7 @@ class wsCityFromLgLat{
             return $res;
         }
         // second call, for timezone
-        $url = "http://api.geonames.org/timezoneJSON?lat=$lat&lng=$lg&username=$username";
+        $url = self::URL . "?lat=$lat&lng=$lg&username=$username";
         $json = file_get_contents($url);
         $data = json_decode($json);
         if (!empty($data->status)) {
