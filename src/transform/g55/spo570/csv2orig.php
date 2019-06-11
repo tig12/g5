@@ -137,7 +137,7 @@ class csv2orig implements Command {
                     $admin2 = '0' . $admin2; // because libreoffice "eats" the trailing 0
                 }
                 // HERE try to match Geonames
-                $slug = slugify::execute($place);
+                $slug = slugify::compute($place);
                 $geonames = \Geonames::matchFromSlug([
                     'slug' => $slug,
                     'countries' => [$country],

@@ -501,7 +501,7 @@ class raw2csv implements Command{
                 }
             }
         }
-        $res = sortByKey::execute($res, 'NUM');
+        $res = sortByKey::compute($res, 'NUM');
         //
         // 1955 corrections
         //

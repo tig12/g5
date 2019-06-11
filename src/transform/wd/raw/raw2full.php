@@ -103,7 +103,7 @@ class raw2full implements Command{
         
         echo "Importing $infile ... \n";
         
-        $rows = csvAssociative::execute($infile, Wikidata::RAW_CSV_SEP);
+        $rows = csvAssociative::compute($infile, Wikidata::RAW_CSV_SEP);
         
         // group rows by wikipedia id, because of doublons
         $assoc = [];

@@ -50,8 +50,8 @@ class ertel2csv implements Command{
         
         $report = '';
         
-        $curaRows = csvAssociative::execute(Config::$data['dirs']['5-cura-csv'] . DS . 'A1.csv');
-        $erteRows = csvAssociative::execute(Config::$data['dirs']['5-newalch-csv'] . DS . '4391SPO.csv');
+        $curaRows = csvAssociative::compute(Config::$data['dirs']['5-cura-csv'] . DS . 'A1.csv');
+        $erteRows = csvAssociative::compute(Config::$data['dirs']['5-newalch-csv'] . DS . '4391SPO.csv');
         
         // build $cura_missing and $cura_all
         // assoc arrays with NUM as key

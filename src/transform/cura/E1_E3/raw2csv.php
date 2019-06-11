@@ -201,7 +201,7 @@ class raw2csv implements Command{
         //                                          
         // store in destination csv file
         //
-        $res1 = sortByKey::execute($res1, 'NUM');
+        $res1 = sortByKey::compute($res1, 'NUM');
         $csv = implode(G5::CSV_SEP, E1_E3::FIELDNAMES) . "\n";
         foreach($res1 as $fields){
             $csv .= implode(G5::CSV_SEP, $fields) . "\n";
@@ -298,7 +298,7 @@ class raw2csv implements Command{
             $name = '';
         }
 */
-        $slug = slugify::execute($name);
+        $slug = slugify::compute($name);
         // HERE call to Geonames to match
         $pdo = Geonames::compute_dblink();
         $geonames = matchFromSlug::compute($pdo, [

@@ -49,7 +49,7 @@ class count implements Command{
         
         foreach($datafiles as $datafile){
             $file = $dir . DS . $datafile . '.csv';
-            $rows = csvAssociative::execute($file);
+            $rows = csvAssociative::compute($file);
             foreach($rows as $row){
 //echo "\n<pre>"; print_r($row); echo "</pre>\n"; exit;
                 $N[$datafile]++;

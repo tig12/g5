@@ -3,7 +3,7 @@
     Add missing geographic informations to 5-tmp/cura-csv/D6.csv.
     Uses geonames.org web service.
     
-    This code operates on file   5-tmp/geonames/D6.csv
+    This code operates on file 5-tmp/geonames/D6.csv
     And then copies info from this file to 5-tmp/cura-csv/D6.csv
     This is done to prevent accidental erasure of previous calls to geonames web service : 
         - call raw2csv
@@ -130,8 +130,8 @@ class addGeo implements Command{
         
     **/
     private static function geo2csv($geofile, $csvfile){
-        $geo = csvAssociative::execute($geofile);
-        $csv = csvAssociative::execute($csvfile);
+        $geo = csvAssociative::compute($geofile);
+        $csv = csvAssociative::compute($csvfile);
         // $geonum = $geo, but keys are NUM
         $geonum = [];
         foreach($geo as $record){

@@ -23,7 +23,7 @@ class Ertel4391{
                 Each element contains an associative array (keys = field names).
     **/
     public static function loadFile(){
-        return csvAssociative::execute(Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE);
+        return csvAssociative::compute(Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE);
     }                                                                                              
     
 }// end class

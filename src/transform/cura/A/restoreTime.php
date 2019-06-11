@@ -54,7 +54,7 @@ class restoreTime implements Command{
     public static function computeOneFile($datafile){
         $report = '';
         $res = '';
-        $rows1 = csvAssociative::execute(Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv');
+        $rows1 = csvAssociative::compute(Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv');
         $keys1 = array_keys($rows1[0]);
         $keys2 = ['NUM', 'FNAME', 'GNAME', 'OCCU', 'DATE', 'DATE_C', 'PLACE', 'CY', 'C2', 'LG', 'LAT'];
         $res .= implode(G5::CSV_SEP, $keys2) . "\n";

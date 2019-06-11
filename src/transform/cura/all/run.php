@@ -9,6 +9,7 @@ namespace g5\transform\cura\all;
 
 use g5\Config;
 use g5\patterns\Command;
+use g5\transform\cura\CuraRouter;
 use g5\transform\cura\A\all as allA;
 use g5\transform\cura\D6\all as allD6;
 use g5\transform\cura\D10\all as allD10;
@@ -30,8 +31,7 @@ class run implements Command{
             return "INVALID PARAMETER : " . $params[2] . " - all doesn't need this parameter\n";
         }
         
-// @todo use instead CuraRouter::computeDatafiles('A')
-        $datafilesA = ['A1', 'A2', 'A3', 'A4', 'A5', 'A6'];
+        $datafilesA = CuraRouter::computeDatafiles('A');
         foreach($datafilesA as $datafile){
             $params[0] = $datafile;                                                 
             allA::execute($params);

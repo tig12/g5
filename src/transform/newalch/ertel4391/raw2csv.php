@@ -90,7 +90,7 @@ class raw2csv implements Command{
         
         $output = implode(G5::CSV_SEP, self::OUTPUT_COLUMNS) . "\n";
         
-        $records = csvAssociative::execute(Config::$data['dirs']['1-newalch-raw'] . DS . '3a_sports-utf8.csv');
+        $records = csvAssociative::compute(Config::$data['dirs']['1-newalch-raw'] . DS . '3a_sports-utf8.csv');
         $N = count($records);
         for($i=1; $i < $N; $i++){
             if($i%2 == 0){

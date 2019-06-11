@@ -27,7 +27,7 @@ class Names{
         else{
             $fname = $str;
         }
-        return [$fname, $gname];
+        return [ucfirst($fname), ucfirst($gname)];
     }
     
     

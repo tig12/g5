@@ -61,16 +61,16 @@ class Full{
         $slug = '';
         $bd = substr($birthdate, 0, 10);
         if($fname && $gname){
-            return slugify::execute("$fname-$gname-$bd");
+            return slugify::compute("$fname-$gname-$bd");
         }
         if($name){
-            return slugify::execute("$name-$bd");
+            return slugify::compute("$name-$bd");
         }
         if($fname){
-            return slugify::execute("$fname-$bd");
+            return slugify::compute("$fname-$bd");
         }
         if($gname){
-            return slugify::execute("$fname-$bd");
+            return slugify::compute("$fname-$bd");
         }
         else{
             throw new \Exception("CANNOT COMPUTE SLUG :\n    name = $name\n    fname = $fname\n    gname = $gname\n    birthdate = $birthdate");

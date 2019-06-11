@@ -18,7 +18,7 @@ class csvAssociative{
         @param      $delimiter field delimiter (one character only).
         @return     false or associative array
     **/
-    public static function execute($filename, $delimiter=';'){
+    public static function compute($filename, $delimiter=';'){
         $res = [];
         if (($handle = fopen($filename, "r")) !== FALSE) {
             $fieldnames = fgetcsv($handle, 0, $delimiter);

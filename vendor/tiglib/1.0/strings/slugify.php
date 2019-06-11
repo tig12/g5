@@ -19,7 +19,7 @@ class slugify{
         @param  $charset    Can be 'utf8' or 'iso-8859-1'
         @return The transformed string
     **/
-    public static function execute($str, $replace='-', $charset='utf8') {
+    public static function compute($str, $replace='-', $charset='utf8') {
         if($charset == 'utf8') $str = utf8_decode($str);
         $str = self::convert_high_ascii($str);  ## convert high-ASCII chars to 7bit.
         $str = strtolower($str);                ## lower-case.

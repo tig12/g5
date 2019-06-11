@@ -77,14 +77,14 @@ class ertel2skeptics implements Command {
         }
         
         // initialize self::$curaA1
-        $tmp = csvAssociative::execute(Config::$data['dirs']['5-cura-csv'] . DS . 'A1.csv');
+        $tmp = csvAssociative::compute(Config::$data['dirs']['5-cura-csv'] . DS . 'A1.csv');
         foreach($tmp as $row){
             self::$curaA1[$row['NUM']] = $row;
         }
         
         // build arrays
         $cp = $csicop = $cfepp = [];
-        $rows = csvAssociative::execute(Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE);
+        $rows = csvAssociative::compute(Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE);
         foreach($rows as $row){
             $NUM = $row['G_NR'];
             if($docp && $row['PARA_NR']){

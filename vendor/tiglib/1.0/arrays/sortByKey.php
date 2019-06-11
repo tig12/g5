@@ -40,7 +40,7 @@ class sortByKey{
         @param      $keyname Name of the key used to sort
         @return     The sorted array
     **/
-    public static function execute($array, $keyname){
+    public static function compute($array, $keyname){
         self::$sortByKey_keyname = $keyname;
         usort($array, ['tiglib\\arrays\\sortByKey', 'sortByKey_aux']);
         return $array;
@@ -48,7 +48,7 @@ class sortByKey{
     
     
     //***************************************************
-    /** Auxiliary function of execute(), for usort(). **/
+    /** Auxiliary function of compute(), for usort(). **/
     private static function sortByKey_aux($a, $b){
         if ($a[self::$sortByKey_keyname] == $b[self::$sortByKey_keyname]) return 0;
         return $a[self::$sortByKey_keyname] < $b[self::$sortByKey_keyname] ? -1 : 1;

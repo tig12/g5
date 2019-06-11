@@ -17,6 +17,7 @@ class D6{
         'DATE',
         'PLACE',
         'CY',
+        'C2',
         'GEOID',
         'LG',
         'LAT',

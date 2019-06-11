@@ -102,7 +102,7 @@ class marked2generated implements Command {
         // here simplification : files in 5-tmp/cura-csv/
         // have first field = NUM and second field = FNAME
         $sort_field = (Config::$data['g55']['sort'][$groupCode] == 'NUM' ? 0 : 1);
-        $res = sortByKey::execute($res, $sort_field);
+        $res = sortByKey::compute($res, $sort_field);
         $report .= '  ' . count($res) . " persons stored\n";
         // generate output
         $output = 'ORIGIN' . G5::CSV_SEP . $input[0]; // field names

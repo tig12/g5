@@ -30,7 +30,7 @@ class csv2full implements Command{
         
         $report = '';
         
-        $curaRows = csvAssociative::execute(Config::$data['dirs']['5-cura-csv'] . DS . 'A2.csv');
+        $curaRows = csvAssociative::compute(Config::$data['dirs']['5-cura-csv'] . DS . 'A2.csv');
         
         $nTotal = count($curaRows);
         $nMatch = 0;
