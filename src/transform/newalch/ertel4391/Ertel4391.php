@@ -7,9 +7,23 @@
 ********************************************************************************/
 namespace g5\transform\newalch\ertel4391;
 
+use g5\Config;
+use tiglib\arrays\csvAssociative;
+
 class Ertel4391{
     
     /** Name of the csv file in 5-tmp/newalch-csv **/
     const TMP_CSV_FILE = '4391SPO.csv';
+    
+    
+    // ******************************************************
+    /**
+        Loads Ertel 4391 csv file.
+        @return Regular array
+                Each element contains an associative array (keys = field names).
+    **/
+    public static function loadFile(){
+        return csvAssociative::execute(Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE);
+    }                                                                                              
     
 }// end class

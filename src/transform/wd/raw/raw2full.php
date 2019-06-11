@@ -10,6 +10,7 @@ use g5\Config;
 use g5\patterns\Command;
 use g5\model\Full;
 use g5\transform\wd\Wikidata;
+use tiglib\arrays\csvAssociative;
 
 class raw2full implements Command{
     
@@ -102,7 +103,7 @@ class raw2full implements Command{
         
         echo "Importing $infile ... \n";
         
-        $rows = \lib::csvAssociative($infile, Wikidata::RAW_CSV_SEP);
+        $rows = csvAssociative::execute($infile, Wikidata::RAW_CSV_SEP);
         
         // group rows by wikipedia id, because of doublons
         $assoc = [];

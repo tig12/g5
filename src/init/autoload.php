@@ -6,7 +6,7 @@
     @history    2017-04-27 09:46:32+02:00, Thierry Graff : Creation 
 **/
 
-require_once dirname(__DIR__) . DS . 'vendor' . DS . 'tiglib' . DS . '1.0' . DS . 'autoload.php';
+require_once dirname(dirname(__DIR__)) . DS . 'vendor' . DS . 'tiglib' . DS . '1.0' . DS . 'autoload.php';
 
 /** 
     Autoload for g5 namespace

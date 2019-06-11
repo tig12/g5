@@ -13,7 +13,6 @@
 ********************************************************************************/
 namespace g5\transform\newalch\ertel4391;
 
-use g5\Config;
 use g5\patterns\Command;
 
 class look implements Command {
@@ -59,7 +58,7 @@ class look implements Command {
         Look at SPORT and IG columns.
     **/
     private static function examine_sport(){
-        $rows = \lib::csvAssociative(Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE);
+        $rows = Ertel4391::loadFile();
         $res = []; // assoc array keys = sport codes ; values = [IG, n]
         foreach($rows as $row){
             $sport = $row['SPORT'];
@@ -92,7 +91,7 @@ class look implements Command {
         Look at QUEL column.
     **/
     private static function examine_quel(){
-        $rows = \lib::csvAssociative(Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE);
+        $rows = Ertel4391::loadFile();
         $res = []; // assoc codes => nb of records with this code
         foreach($rows as $row){
             if(!isset($res[$row['QUEL']])){
@@ -109,7 +108,7 @@ class look implements Command {
         Look at DATE column.
     **/
     private static function examine_date(){
-        $rows = \lib::csvAssociative(Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE);
+        $rows = Ertel4391::loadFile();
         $N = 0;             // total nb lines
         $nWith = 0;         // nb lines with birth time
         $nWithout = 0;      // nb lines without birth time
@@ -145,7 +144,7 @@ class look implements Command {
         Look at eminence columns : ZITRANG ZITSUM ZITATE ZITSUM_OD
     **/
     private static function examine_eminence(){
-        $rows = \lib::csvAssociative(Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE);
+        $rows = Ertel4391::loadFile();
         $ranks = []; // assoc array rank => nb records with this rank (ZITRANG)
         $sums = []; // assoc array sums => nb records with this sum (ZITSUM)
         $sources = []; // assoc array sources => nb of records found in this source
@@ -184,7 +183,7 @@ class look implements Command {
         Columns : G_NR PARA_NR CFEPNR CSINR G55
     **/
     private static function examine_ids(){
-        $rows = \lib::csvAssociative(Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE);
+        $rows = Ertel4391::loadFile();
         $N = 0;
         $res = [
             'G_NR' => 0,
@@ -241,7 +240,7 @@ class look implements Command {
         Tests if there is a one to one correspondance between the values of the 3 columns
     **/
     private static function examine_mars(){
-        $rows = \lib::csvAssociative(Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE);
+        $rows = Ertel4391::loadFile();
         $N = 0;
         $res = [];
         for($i=1; $i <= 36; $i++){

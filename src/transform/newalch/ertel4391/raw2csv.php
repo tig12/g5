@@ -18,6 +18,7 @@ namespace g5\transform\newalch\ertel4391;
 use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
+use tiglib\arrays\csvAssociative;
 
 class raw2csv implements Command{
     
@@ -89,7 +90,7 @@ class raw2csv implements Command{
         
         $output = implode(G5::CSV_SEP, self::OUTPUT_COLUMNS) . "\n";
         
-        $records = \lib::csvAssociative(Config::$data['dirs']['1-newalch-raw'] . DS . '3a_sports-utf8.csv');
+        $records = csvAssociative::execute(Config::$data['dirs']['1-newalch-raw'] . DS . '3a_sports-utf8.csv');
         $N = count($records);
         for($i=1; $i < $N; $i++){
             if($i%2 == 0){

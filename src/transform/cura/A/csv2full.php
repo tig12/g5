@@ -14,7 +14,7 @@ namespace g5\transform\cura\A;
 use g5\Config;
 use g5\patterns\Command;
 use g5\model\Full;
-//use g5\transform\cura\Cura;
+use tiglib\arrays\csvAssociative;
 
 class csv2full implements Command{
     
@@ -30,7 +30,7 @@ class csv2full implements Command{
         
         $report = '';
         
-        $curaRows = \lib::csvAssociative(Config::$data['dirs']['5-cura-csv'] . DS . 'A2.csv');
+        $curaRows = csvAssociative::execute(Config::$data['dirs']['5-cura-csv'] . DS . 'A2.csv');
         
         $nTotal = count($curaRows);
         $nMatch = 0;

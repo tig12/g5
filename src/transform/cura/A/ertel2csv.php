@@ -16,7 +16,7 @@ namespace g5\transform\cura\A;
 use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
-//use g5\transform\cura\Cura;
+use tiglib\arrays\csvAssociative;
 
 class ertel2csv implements Command{
     
@@ -50,8 +50,8 @@ class ertel2csv implements Command{
         
         $report = '';
         
-        $curaRows = \lib::csvAssociative(Config::$data['dirs']['5-cura-csv'] . DS . 'A1.csv');
-        $erteRows = \lib::csvAssociative(Config::$data['dirs']['5-newalch-csv'] . DS . '4391SPO.csv');
+        $curaRows = csvAssociative::execute(Config::$data['dirs']['5-cura-csv'] . DS . 'A1.csv');
+        $erteRows = csvAssociative::execute(Config::$data['dirs']['5-newalch-csv'] . DS . '4391SPO.csv');
         
         // build $cura_missing and $cura_all
         // assoc arrays with NUM as key

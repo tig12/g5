@@ -23,6 +23,9 @@ use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
 use g5\transform\cura\Cura;
+use tiglib\misc\dosleep;
+use tiglib\arrays\csvAssociative;
+use tiglib\geonames\wsCityFromLgLat;
 
 class addGeo implements Command{
     
@@ -85,15 +88,15 @@ class addGeo implements Command{
                 $newinfo = true;
                 $lg = $fields[6];
                 $lat = $fields[7];
-                // HERE call to geonames web service, in \Geonames::cityFromLgLat()
-                $geonames = \Geonames::cityFromLgLat(Config::$data['geonames']['username'], $lg, $lat, true);
+                // HERE call to geonames web service
+                $geonames = wsCityFromLgLat::compute(Config::$data['geonames']['username'], $lg, $lat, true);
                 if($geonames['error']){                       
                     $report .= $fields[0] . ' ' . $fields[1] . ' ' . print_r($geonames, true) . "\n";
                     $fields[3] = self::FAILURE_MARK;
                     $res_geo .= implode(G5::CSV_SEP, $fields) . "\n";
                     continue;
                 }
-                // here call to Geonames::cityFromLgLat() was sucessful
+                // here call to geonames web service was sucessful
                 $report .= $fields[0] . ' ' . $fields[1] . " : write geo info\n";
                 $dtu = \TZ::offset($fields[3], $geonames['result']['timezone']);
                 $fields[2] .= $dtu;
@@ -106,7 +109,7 @@ class addGeo implements Command{
             // Write back the csv 
             file_put_contents($geofile, $res_geo); // file in 5-tmp/geonames
             self::geo2csv($geofile, $csvfile); // copy results back in 5-tmp/cura-csv/
-            \lib::dosleep(1.5); // keep cool with geonames.org web service
+            dosleep::execute(1.5); // keep cool with geonames.org web service
         } // end while true
         
         // new execution of geo2csv is necessary
@@ -126,8 +129,8 @@ class addGeo implements Command{
         
     **/
     private static function geo2csv($geofile, $csvfile){
-        $geo = \lib::csvAssociative($geofile);
-        $csv = \lib::csvAssociative($csvfile);
+        $geo = csvAssociative::execute($geofile);
+        $csv = csvAssociative::execute($csvfile);
         // $geonum = $geo, but keys are NUM
         $geonum = [];
         foreach($geo as $record){

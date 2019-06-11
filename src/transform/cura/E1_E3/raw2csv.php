@@ -16,6 +16,8 @@ use g5\Config;
 use g5\patterns\Command;
 use g5\model\Names;
 use g5\transform\cura\Cura;
+use tiglib\arrays\sortByKey;
+use tiglib\strings\slugify;
 
 class raw2csv implements Command{
     
@@ -193,10 +195,10 @@ class raw2csv implements Command{
             $res1[$num1]['JU'] = $res2[$num1]['JU'];
             $res1[$num1]['SA'] = $res2[$num1]['SA'];
         }
-        //
+        //                                          
         // store in destination csv file
         //
-        $res1 = \lib::sortByKey($res1, 'NUM');
+        $res1 = sortByKey::execute($res1, 'NUM');
         $csv = implode(G5::CSV_SEP, E1_E3::FIELDNAMES) . "\n";
         foreach($res1 as $fields){
             $csv .= implode(G5::CSV_SEP, $fields) . "\n";
@@ -293,7 +295,7 @@ class raw2csv implements Command{
             $name = '';
         }
 */
-        $slug = \lib::slugify($name);
+        $slug = slugify::execute($name);
         // HERE call to Geonames to match
         $geonames = \Geonames::matchFromSlug([
             'slug' => $slug,

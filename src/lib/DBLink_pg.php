@@ -1,7 +1,4 @@
 <?php 
-// Software released under the General Public License (version 3 or later), available at
-// http://www.gnu.org/copyleft/gpl.html
-
 /********************************************************************************
     Posgres implementation of {@link DBLink} 
     
@@ -9,8 +6,6 @@
     @copyright  jetheme.org
     @history    2013-10-02 21:00:34+02:00, Thierry Graff : Creation
     
-file:///home/thierry/dev/jetheme/beta/share/apidoc/storage/DBLink.class.html#det_methods_get_list
-
     @todo         SET client_encoding to 'utf-8';
 ********************************************************************************/
 

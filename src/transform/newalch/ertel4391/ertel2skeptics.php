@@ -22,7 +22,8 @@ namespace g5\transform\newalch\ertel4391;
 use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
-
+use tiglib\arrays\csvAssociative;
+                                     
 class ertel2skeptics implements Command {
     
     /** 
@@ -76,14 +77,14 @@ class ertel2skeptics implements Command {
         }
         
         // initialize self::$curaA1
-        $tmp = \lib::csvAssociative(Config::$data['dirs']['5-cura-csv'] . DS . 'A1.csv');
+        $tmp = csvAssociative::execute(Config::$data['dirs']['5-cura-csv'] . DS . 'A1.csv');
         foreach($tmp as $row){
             self::$curaA1[$row['NUM']] = $row;
         }
         
         // build arrays
         $cp = $csicop = $cfepp = [];
-        $rows = \lib::csvAssociative(Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE);
+        $rows = csvAssociative::execute(Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE);
         foreach($rows as $row){
             $NUM = $row['G_NR'];
             if($docp && $row['PARA_NR']){

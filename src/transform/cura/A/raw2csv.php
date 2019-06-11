@@ -19,6 +19,8 @@ use g5\model\Names;
 use g5\model\Names_fr;
 use g5\transform\cura\Cura;
 use g5\transform\cura\CuraNames;
+use tiglib\arrays\sortByKey;
+
 
 class raw2csv implements Command{
     
@@ -499,7 +501,7 @@ class raw2csv implements Command{
                 }
             }
         }
-        $res = \lib::sortByKey($res, 'NUM');
+        $res = sortByKey::execute($res, 'NUM');
         //
         // 1955 corrections
         //

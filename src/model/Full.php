@@ -7,6 +7,7 @@
 namespace g5\model;
 
 use g5\Config;
+use tiglib\strings\slugify;
 
 class Full{
     
@@ -60,16 +61,16 @@ class Full{
         $slug = '';
         $bd = substr($birthdate, 0, 10);
         if($fname && $gname){
-            return \lib::slugify("$fname-$gname-$bd");
+            return slugify::execute("$fname-$gname-$bd");
         }
         if($name){
-            return \lib::slugify("$name-$bd");
+            return slugify::execute("$name-$bd");
         }
         if($fname){
-            return \lib::slugify("$fname-$bd");
+            return slugify::execute("$fname-$bd");
         }
         if($gname){
-            return \lib::slugify("$fname-$bd");
+            return slugify::execute("$fname-$bd");
         }
         else{
             throw new \Exception("CANNOT COMPUTE SLUG :\n    name = $name\n    fname = $fname\n    gname = $gname\n    birthdate = $birthdate");

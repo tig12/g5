@@ -10,6 +10,7 @@ namespace g5\transform\g55\spo570;
 use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
+use tiglib\strings\slugify;
 
 class csv2orig implements Command {
     
@@ -134,7 +135,7 @@ class csv2orig implements Command {
                     $admin2 = '0' . $admin2; // because libreoffice "eats" the trailing 0
                 }
                 // HERE try to match Geonames
-                $slug = \lib::slugify($place);
+                $slug = slugify::execute($place);
                 $geonames = \Geonames::matchFromSlug([
                     'slug' => $slug,
                     'countries' => [$country],
