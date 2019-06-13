@@ -18,11 +18,11 @@ class Ertel4391{
     
     // ******************************************************
     /**
-        Loads Ertel 4391 csv file.
+        Loads file 5-tmp/newalch-csv/4391SPO.csv.
         @return Regular array
                 Each element contains an associative array (keys = field names).
     **/
-    public static function loadFile(){
+    public static function loadTmpFile(){
         return csvAssociative::compute(Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE);
     }                                                                                              
     

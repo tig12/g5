@@ -30,12 +30,14 @@ class restoreTime implements Command{
     /** 
         Called by : php run-g5.php cura A restoreTime
         
-        @param $params array containing one element : the datafile to process.
+        @param $params array containing two elements :
+                       - the datafile to process.
+                       - 'restoreTime' (useless)
         @return String report
     **/
     public static function execute($params=[]): string{
-        if(count($params) != 1){
-            return "WRONG USAGE : restoreTime must be called with only one parameter\n";
+        if(count($params) > 2){
+            return "WRONG USAGE : useless parameter fot restoreTime {$params[2]}\n";
         }
         $datafiles = CuraRouter::computeDatafiles($params[0]);
         $report = '';
