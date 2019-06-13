@@ -1,11 +1,11 @@
 <?php
 /********************************************************************************
-    Restores timezone information to cura files.
+    Restores legal time and timezone information to cura files.
     Tries to extract timezone offset from date to restore legal time as written in registries.
     Adds a field "DATE_C" to 5-tmp/cura-csv files
     (DATE_C = date corrected)
     
-    @pre        raw2csv must have been executed (5-tmp/cura-csv/ must exist).
+    @pre        raw2csv must have been executed.
     
     @license    GPL
     @history    2019-06-01 03:46:23+02:00, Thierry Graff : creation
@@ -17,27 +17,27 @@ use g5\Config;
 use g5\patterns\Command;
 use g5\model\Full;
 use g5\transform\cura\CuraRouter;
-use tiglib\time\HHMM2minutes;
+use tiglib\time\HHMMSS2seconds;
 use tiglib\arrays\csvAssociative;
 use tiglib\timezone\offset_fr;
 
-class restoreTime implements Command{
+class legalTime implements Command{
     
     const POSSIBLE_PARAM = ['update', 'echo'];
     
     // *****************************************
     // Implementation of Command
     /** 
-        Called by : php run-g5.php cura A restoreTime
+        Called by : php run-g5.php cura A legalTime
         
         @param $params array containing two elements :
                        - the datafile to process.
-                       - 'restoreTime' (useless)
+                       - 'legalTime' (useless)
         @return String report
     **/
     public static function execute($params=[]): string{
         if(count($params) > 2){
-            return "WRONG USAGE : useless parameter fot restoreTime {$params[2]}\n";
+            return "WRONG USAGE : useless parameter for legalTime {$params[2]}\n";
         }
         $datafiles = CuraRouter::computeDatafiles($params[0]);
         $report = '';
@@ -53,7 +53,7 @@ class restoreTime implements Command{
         @param $datafile String like 'A1', 'A2' ... 'A6'
         @return String report
     **/
-    public static function computeOneFile($datafile){
+    private static function computeOneFile($datafile){
         $report = '';
         $res = '';
         $rows1 = csvAssociative::compute(Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv');
@@ -87,23 +87,22 @@ echo "\n" . 'DATE = ' . $row1['CY'] . ' - ' . $row1['DATE'] . "\n";
                 continue;
             }
             $dtu1 = substr($row1['DATE'], -6);
-            $dtu1minuts = HHMM2minutes::compute($dtu1);
-            $dtu2minuts = HHMM2minutes::compute($dtu2);
-var_dump($dtu2minuts);
-            $delta = $dtu1minuts - $dtu2minuts;
+            $dtu1seconds = HHMMSS2seconds::compute($dtu1);
+            $dtu2seconds = HHMMSS2seconds::compute($dtu2);
+            $delta = $dtu1seconds - $dtu2seconds;
             $abs = abs($delta);
-echo "old = $dtu1 $dtu1minuts\n";
-echo "new = $dtu2 $dtu2minuts\n";
+echo "old = $dtu1 ; $dtu1seconds\n";
+echo "new = $dtu2 ; $dtu2seconds\n";
 echo "delta = $delta\n";
             if($dtu2 != $dtu1){
                 // DATE_C = DATE with hour and dtu modified
                 $t = new \DateTime($row1['DATE']);
-                $interval = new \DateInterval('PT' . $abs . 'M');
+                $interval = new \DateInterval('PT' . $abs . 'S');
                 if($delta > 0){
-                    $t->add($interval);
+                    $t->sub($interval);
                 }
                 else{
-                    $t->sub($interval);
+                    $t->add($interval);
                 }
                 $row2['DATE_C'] = $t->format('Y-m-d H:i') . $dtu2;
             }

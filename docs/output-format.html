@@ -38,7 +38,6 @@ Here are the field names used in files of <code>data/5-tmp/</code>
 <br>In the csv files, the first line contains field names ; other lines contain data.
 <br>The field separator used in csv file is <code>;</code> (semicolon).
 <br>Character encoding is UTF-8.
-<br>More details in <a href="">/gauquelin5/download/README</a>.
 
 <!-- ********************************************************************************* -->
 <h2>CSV fields</h2>
@@ -117,10 +116,19 @@ Some csv files contain fields not listed here, in this case fields are documente
     <tr>
         <td>DATE</td>
         <td>
-            Birth date ; ISO 8601 of this form : YYYY-MM-DD HH:MM:sHH:MM (timezone offset is included ; s means "sign" + or -).
-            <br>Example : <code>2017-05-03 09:30:00+02:00</code> :
+            Birth date ; ISO 8601 of this form : <code>YYYY-MM-DD HH:MM:SSsHH:MM</code> (timezone offset is included ; s means "sign" + or -).
+            <br>Example : <code>2017-05-03 09:30:00+02:00</code>
             <br>Legal time is <code>09:30:00</code> and timezone offset is +2 hours.
             <br>For records with no birth time, format is <code>YYYY-MM-DD</code>
+        </td>
+    </tr>
+    <tr>
+        <td>DATE_C</td>
+        <td>
+            Corrected date : if this column is not empty, it means that legal time and timezone offset could be restored.
+            <br>The need for a restoration of dates is detailed in page <a href="time.html">Expressing time</a>.
+            <br>Format of this column is <code>YYYY-MM-DD HH:MMsHH:MM:SS</code>.
+            <br>It differs from column DATE : time does not contain seconds information, but timezone offset contains seconds.
         </td>
     </tr>
     
