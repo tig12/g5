@@ -1,14 +1,14 @@
 <?php
 /********************************************************************************
-    Imports 1-raw/newalchemypress.com/3a_sports-utf8.csv to 5-tmp/newalch/4391SPO.csv
+    Imports 1-raw/newalchemypress.com/03-ertel/3a_sports-utf8.csv to 5-tmp/newalch/4391SPO.csv
     
     3a_sports-utf8.csv is a modified version of file 3a_sports-utf8.txt
     This file was retrieved in april 2019 from
     https://newalchemypress.com/gauquelin/gauquelin_docs/3a_sports.txt
     Modifications done on the original file are detailed in
-    1-raw/newalchemypress.com/3a_sports-utf8-README
+    1-raw/newalchemypress.com/03-ertel/3a_sports-utf8-README
     
-    The file contains 4391 sportsmen used by Ertel
+    The file contains 4391 (in fact 4384) sportsmen used by Ertel
     
     @license    GPL
     @history    2019-05-10 12:19:50+02:00, Thierry Graff : creation
@@ -90,7 +90,7 @@ class raw2csv implements Command{
         
         $output = implode(G5::CSV_SEP, self::OUTPUT_COLUMNS) . "\n";
         
-        $records = csvAssociative::compute(Config::$data['dirs']['1-newalch-raw'] . DS . '3a_sports-utf8.csv');
+        $records = csvAssociative::compute(Config::$data['dirs']['1-newalch-raw'] . DS . '03-ertel' . DS . '3a_sports-utf8.csv');
         $N = count($records);
         for($i=1; $i < $N; $i++){
             if($i%2 == 0){
