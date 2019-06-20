@@ -2,8 +2,7 @@
 /********************************************************************************
     Restores legal time and timezone information to cura files.
     Tries to extract timezone offset from date to restore legal time as written in registries.
-    Adds a field "DATE_C" to 5-tmp/cura-csv files
-    (DATE_C = date corrected)
+    Adds a field "DATE_C" (DATE_C = date corrected) to 5-tmp/cura-csv files (overwrites files).
     
     @pre        raw2csv must have been executed.
     
@@ -36,6 +35,7 @@ class legalTime implements Command{
         @return String report
     **/
     public static function execute($params=[]): string{
+
         if(count($params) > 2){
             return "WRONG USAGE : useless parameter for legalTime {$params[2]}\n";
         }
@@ -56,16 +56,20 @@ class legalTime implements Command{
     private static function computeOneFile($datafile){
         $report = '';
         $res = '';
-        $rows1 = csvAssociative::compute(Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv');
+        $filename = Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv';
+        $rows1 = csvAssociative::compute($filename);
         $keys1 = array_keys($rows1[0]);
         $keys2 = ['NUM', 'FNAME', 'GNAME', 'OCCU', 'DATE', 'DATE_C', 'PLACE', 'CY', 'C2', 'LG', 'LAT'];
+        
         $res .= implode(G5::CSV_SEP, $keys2) . "\n";
         
-$i = 0;
+        $n_total = $n_corrected = 0;
+        
         foreach($rows1 as $row1){
-            // initialize $newrow
+            // $row2 = $row1 corrected
+            // initialize $row2 = $row1 with DATE_C added after column DATE
+            $n_total++;
             $row2 = [];
-echo "\n" . 'DATE = ' . $row1['CY'] . ' - ' . $row1['DATE'] . "\n";
             foreach($keys1 as $k){
                 $row2[$k] = $row1[$k];
                 if($k == 'DATE'){
@@ -76,44 +80,58 @@ echo "\n" . 'DATE = ' . $row1['CY'] . ' - ' . $row1['DATE'] . "\n";
             if($row1['CY'] != 'FR'){
                 // no restoration for foreign countries
                 // @todo implement
-                $res .= implode(G5::CSV_SEP, $row2);
+                $res .= implode(G5::CSV_SEP, $row2) . "\n";
                 continue;
             }
-            [$dtu2, $err] = offset_fr::compute($row1['DATE'], $row1['LG'], $row1['C2']);
+            
+            [$offset2, $err, $case] = offset_fr::compute($row1['DATE'], $row1['LG'], $row1['C2'], 'HH:MM:SS');
+
             if($err != ''){
                 // no restoration
                 // @todo log or add error retransmission ?
-                $res .= implode(G5::CSV_SEP, $row2);
+                $res .= implode(G5::CSV_SEP, $row2) . "\n";
                 continue;
             }
-            $dtu1 = substr($row1['DATE'], -6);
-            $dtu1seconds = HHMMSS2seconds::compute($dtu1);
-            $dtu2seconds = HHMMSS2seconds::compute($dtu2);
-            $delta = $dtu1seconds - $dtu2seconds;
+            // if t1 = $row1['DATE'] and t2 = searched date = $row2['DATE_C'] :
+            // ut1 = t1 - offset1 ; ut2 = t2 - offset2
+            // ut1 = ut2
+            // => t1 - offset1 = t2 - offset2
+            // => t2 = t1 + offset2 - offset1 = t1 + delta
+            $offset1 = substr($row1['DATE'], -6);
+            $offset1seconds = HHMMSS2seconds::compute($offset1);
+            $offset2seconds = HHMMSS2seconds::compute($offset2);
+            $delta = $offset2seconds - $offset1seconds;
             $abs = abs($delta);
-echo "old = $dtu1 ; $dtu1seconds\n";
-echo "new = $dtu2 ; $dtu2seconds\n";
-echo "delta = $delta\n";
-            if($dtu2 != $dtu1){
-                // DATE_C = DATE with hour and dtu modified
+//            if($offset2 != $offset1){
+            if($abs != 0){
+                // DATE_C = DATE with hour and offset modified
                 $t = new \DateTime($row1['DATE']);
                 $interval = new \DateInterval('PT' . $abs . 'S');
                 if($delta > 0){
-                    $t->sub($interval);
-                }
-                else{
                     $t->add($interval);
                 }
-                $row2['DATE_C'] = $t->format('Y-m-d H:i') . $dtu2;
+                else{
+                    $t->sub($interval);
+                }
+                // if $offset2 ends with ':00', can be safely removed
+                if(substr($offset2, -3) == ':00'){
+                    $offset2 = substr($offset2, 0, -3);
+                }
+                $row2['DATE_C'] = $t->format('Y-m-d H:i') . $offset2;
             }
             else{
-                // DATE_C = DATE
-                $row2['DATE_C'] = substr($row2['DATE'], 0, 16) . $dtu2;
+                // Here $offset1 = $offset2
+                // As $offset1 is always 0h or -1h, it means that birth time does not include seconds
+                // due to longitude computation => seconds can be removed from birth time
+                // Can also be removed from offset (because it is 0h or -1h)
+                $row2['DATE_C'] = substr($row2['DATE'], 0, 16) . substr($offset2, 0, -3);
             }
-echo 'DATE_C = ' . $row2['DATE_C'] . "\n";
-echo "\n<pre>"; print_r($row2); echo "</pre>\n";
-$i++; if($i > 1)break;
+            $n_corrected++;
+            $res .= implode(G5::CSV_SEP, $row2) . "\n";
         }
+        file_put_contents($filename, $res);
+        $p = round($n_corrected * 100 / $n_total, 2);
+        $report .= "$datafile : restored $n_corrected / $n_total dates ($p %)\n";
         return $report;
     }
 }// end class
