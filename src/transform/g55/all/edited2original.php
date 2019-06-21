@@ -1,7 +1,7 @@
 <?php
 /********************************************************************************
-    Generates data/9-output/history/1955-gauquelin/g55-original
-    from 
+    Generates a file in 9-g55-original
+    from corresponding files in 3-g55-edited and 5-cura-csv
     
     @license    GPL
     @history    2019-05-26 00:48:47+02:00, Thierry Graff : Creation
@@ -19,7 +19,9 @@ class edited2original implements Command {
     
     // *****************************************
     /** 
-        @param $param Array containing one element (a string)
+        @param $params Array containing 2 elements :
+                       - the group to generate (like '570SPO')
+                       - the name of this command (useless here)
         @return report
     **/
     public static function execute($params=[]): string{
@@ -28,14 +30,15 @@ echo "\n<pre>"; print_r($params); echo "</pre>\n"; exit;
     
     // *****************************************
     /** 
-        Generates the csv files in 9-g55-original/ from csv files located in 3-g55-edited/
+        Generates file in 9-g55-original/ from csv files located in 3-g55-edited/
         See 9-g55-original/README for a meaning of generated fields
         
-        Called by : php run-gauquelin5.php 1955 finalize
+        Called by : php run-g5.php g55 <filename> edited2original
         
-        @param  $serie  String must be '1955' - useless but kept for conformity with other classes
+        @param $params Array containing 2 elements :
+                       - the group to generate (like '570SPO')
+                       - the name of this command (useless here)
         @return report
-        @throws Exception if unable to parse
     **/
     public static function generateOriginal($serie){
         $src_dir = Config::$data['dirs']['3-g55-edited'];

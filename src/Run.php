@@ -62,9 +62,14 @@ class Run{
         $res = [];
         foreach($tmp as $file){
             $basename = basename($file, '.php');
-            $class = new \ReflectionClass("g5\\transform\\$dataset\\$datafile\\$basename");
-            if($class->implementsInterface("g5\\patterns\\Command")){
-                $res[] = $basename;
+            try{
+                $class = new \ReflectionClass("g5\\transform\\$dataset\\$datafile\\$basename");
+                if($class->implementsInterface("g5\\patterns\\Command")){
+                    $res[] = $basename;
+                }
+            }
+            catch(\Exception $e){
+                // silently ignore php files present in the directory, but containing errors
             }
         }
         return $res;
