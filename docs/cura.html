@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Cura data | Gauquelin5</title>
+    <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
+    <meta name="description" content="Main issues that should be addressed to build a better version of cura.free.fr data">
+    <meta name="robots" content="index,follow">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
+    <meta name="dcterms.rightsHolder" content="Thierry Graff">
+    <meta name="dcterms.dateCopyrighted" content="2019">
+    <!-- 
+    tigsite:
+        history: 2019-04-01 17:28:25+02:00, Thierry Graff : Creation
+    -->
+</head>
+
+<body>
+<div class="container">
+
+<div class="main">
+
+<nav class="prevnext">
+    <a class="top" href="index.html">&uarr;</a>
+    <a class="prev" rel="prev" href="output-format.html">&larr;</a>
+    <a class="next" rel="next" href="cura-A.html">&rarr;</a>
+</nav>
+
+<header>
+<h1>Cura data</h1>
+</header>
+
+<article>
+
+Gauquelin data published on <a href="http://cura.free.fr/gauq/17archg.html">cura.free.fr</a> are available as html web pages.
+
+<!-- ********************************************************************************* -->
+<h2>Download cura data</h2>
+
+The first step to work on the data is to download the html pages containing the data on your local machine.
+<br>You can use the script <code>build/get-cura</code>, or download the files one by one.
+<br>The important thing is that the html files must be all stored in the same directory, specified in <code>config.yml</code> by entry <code>dirs / 1-cura-raw</code>.
+<br>They must be stored with the same name as in cura.free.fr (ex : <code>902gdA1y.html</code>).
+
+
+<!-- ********************************************************************************* -->
+<h2>Working on cura data</h2>
+
+If you type :
+<pre>php run-g5.php cura</pre>
+the program tells you the possible values of datafiles for cura dataset : 
+<pre>Possible datafiles for dataset cura : all, A, A1, A2, A3, A4, A5, A6, D6, D10, E1, E3</pre>
+
+<code>all</code> will operate on all cura files.
+<br><code>A</code> will operate on all files of serie A.
+<br>Other values will operate on a single file.
+
+<!-- ********************************************************************************* -->
+<h2>Generate CSV files</h2>
+
+Next step is to extract data from html files and produce csv files.
+<br>This step uses two entries of <code>config.yml</code> :
+<br>- It takes html pages located in a directory specified by entry <code>1-cura-raw</code> 
+<br>- It produces csv files located in a directory specified by entry <code>5-cura-csv</code>
+<br>
+<br>This is done for example with the command :
+<pre>php run-g5.php cura D6 raw2csv</pre>
+
+During this step, some corrections are applied to the data.
+<br>Some corrections are common to all files : 
+<ul>
+    <li>
+        Country codes are converted to ISO 3166.
+    </li>
+    <li>
+        Dates and times are merged to be stored in ISO 8601 format <code>YYYY-MM-DD HH:MM:SSsHH:MM</code>.
+        <br>For example <code>1906-02-06 14:00:00-01:00</code> ; the string <code>-01:00</code> represents the timezone offset.
+    </li>
+    <li>
+        Longitudes and latitudes are expressed in decimal degrees.
+    </li>
+    <li>
+        Occupation codes are computed.
+    </li>
+    <li>
+        Family and given names are computed when possible.
+    </li>
+</ul>
+
+<!-- ********************************************************************************* -->
+<h2>Apply supplementary transformations</h2>
+
+Other transformations can be performed. These transformations modify the files located in <code>5-cura-csv</code>.
+<br>The precise list of tranformations depend on the concerned file, but for all file, a transformation called <code>all</code> will perform all the transformations on a given file.
+<br>For example,
+<pre>php run-g5.php cura A4 all</pre>
+executes the available transformations on file A4, <code>raw2csv</code> included.
+<br>
+<br>Precise transformations are described in the following pages :
+<ul class="spaced naked margin-top big2">
+    <li><a href="cura-A.html">Serie A</a></li>
+    <li><a href="cura-D6.html">File D6</a></li>
+    <li><a href="cura-D10.html">File D10</a></li>
+    <li><a href="cura-E1-E3.html">Files E1 and E3</a></li>
+</ul>
+
+
+</article>
+</div><!-- end class="main" -->
+
+
+<!-- ************************************* -->
+<aside class="left">                                                                                                                                              
+<ul>
+    <li class="bold"><a href="index.html">Gauquelin5 home</a></li>
+    <li class="bold"><a href="program-usage.html">Program usage</a></li>
+    <li class="bold"><a href="output-format.html">Output format</a></li>
+    
+    <li>
+        <a href="cura.html">Cura data</a>                                                           
+        <ul>
+            <li>
+                Html to csv
+                <div class="padding-left">
+                    <a href="cura-A.html">A</a>
+                    <a href="cura-D6.html">D6</a>
+                    <a href="cura-D10.html">D10</a>
+                    <a href="cura-E1-E3.html">E1 E3</a>
+                </div>
+            </li>
+            <li><a href="cura-results.html">Results</a></li>
+        </ul>
+    </li>
+    
+    <li>
+        <a href="g55.html">Gauquelin 1955</a>
+    </li>
+    
+    <li>
+        <a href="newalch.html">Newalchemypress data</a>
+        <ul>
+            <li><a href="newalch-ertel4391.html">Ertel 4391</a></li>
+        </ul>
+    </li>
+    
+    <li><a href="time.html">Expressing time</a></li>
+    <li><a href="geonames.html">Geonames.org</a></li>
+    <li><a href="wikidata.html">Wikidata.org</a></li>
+    <li><a href="code-details.html">Code details</a></li>
+    <!-- <li><a href="questions.html">Questions</a></li> -->
+    <li><a href="next.html">What's next</a></li>
+    <li class="bold"><a href="https://larzac.info/gauquelin5">Download</a></li>
+    <li class="bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>
+</ul>
+</aside>
+
+</div><!-- end class="container" -->
+
+</body>
+</html>
+<!-- ************************************* -->
+<!-- ********************************************************************************* -->
