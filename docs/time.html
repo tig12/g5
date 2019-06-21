@@ -49,15 +49,17 @@ YEA	MON	DAY	PRO	NUM	COU	H	MN	SEC	TZ	LAT	LON	COD	CITY
 1909	3	14	C	798	F	4	50	40	0	48N 0	4W 6	29	PLEYBEN
 </pre>
 This means that birth time is <code><b>04:50:40</b></code> and that timezone offset = 0.
-<br>A scan of Gauquelins' LERRCP publication shows that the same record was given in a different form :
+<br>
+<br>This can be compared with a scan of Gauquelins' LERRCP publication provided in cura.free.fr ; it shows that the same record was given in a different form :
 <img class="margin05 border" src="img/A1-798.jpg" alt="Record A1-798 of Gauquelins' LERRCP">
 This means that birth time is <code><b>05:00:00</b></code>, and timezone offset is not provided.
 <br>
-<br>Cura's value <code>04:50:40</code> is the result of a computation : legal time + timezone offset.
+<br>Cura's value <code>04:50:40</code> is the result of a computation : legal time - timezone offset.
 <br>This is coherent with the notice found in <a href="http://cura.free.fr/gauq/902gdA1y.html">page about file A1</a> :
 <cite class="margin05">Birthtime is converted to standard time, either for zone 0 (= GMT) or -1 (= CET)</cite>
 
-The way birth times are expressed in cura site adds information (the timezone offset). It's cool because the information can be directly used to compute birth chart. But expressing times this way should be avoided because two distinct informations are mixed in one field :
+The way birth times are expressed in cura site adds information (the timezone offset). It's cool because the information can be directly used to compute birth chart. 
+<br><b>But expressing times this way should be avoided</b> because two distinct informations are mixed in one field :
 <ul>
     <li>The legal time, as it can be read in civil registries.</li>
     <li>The timezone offset.</li>
@@ -66,28 +68,46 @@ The way birth times are expressed in cura site adds information (the timezone of
 It's a problem, because if one wants to check the data, it's impossible to check legal time without worrying about timezone offset.
 <br>Doing like that generates a loss of information. If the data is not correct, does it come from an error on legal time or on timezone offset computation ?
 <br>
-<br>This problem occurs in all files of series A, B, F, NH, and in file D9 of cura.free.fr.
+<br>This problem occurs in all files of series A, B, F, NH, and in files D9a, D9b, D9c of cura.free.fr.
+<br>
+<br>Files D6, D10, E1, E3 contain legal time, so this problem does not occur. This advantage comes with an inconvenient : timezone offset is not provided, and needs to be computed to permit birth chart computation.
 
 
 <!-- ********************************************************************************* -->
 <h2>A solution</h2>
 
 Using ISO 8601 format in the A1-798 example, CURA date would be expressed as <code><b>1909-03-14 04:50:40+00:00</b></code>
-<br>Comparison between CURA and LERRCP permits to deduce that timezone offset is <code>-9' 40''</code>. 
+<br>Comparison between CURA and LERRCP permits to deduce that timezone offset is <code>9' 40''</code>. 
 <br>
-<br>A solution is to express this date as <code><b>1909-03-14 05:00-00:09:40</b></code>.
+<br>A solution is to express this date as <code><b>1909-03-14 05:00+00:09:40</b></code>.
 <br>The advantages are :
 <ul>
     <li>Legal time is provided without any modification, allowing verification on civil registries.</li>
     <li>Timezone offset is given, allowing UT (Universal Time) computation.</li>
     <li>Birth time can be expressed without specifying seconds.</li>
 </ul>
-This solution also has an inconvenient : it obliges to express the timezone offset in the form <code>sHH:MM:SS</code> ; this form does not respect ISO 8601 standard, which does not permit to express seconds for the timezone offset. This point is not certain, as part of ISO 8601 standard is not available for free.
+
+<br>This solution has an inconvenient : it obliges to express the timezone offset in the form <code>sHH:MM:SS</code> ; this form does not respect ISO 8601 standard, which does not permit to express seconds for the timezone offset (this point is not certain, as part of ISO 8601 standard is not available for free).
 
 <!-- ************************************* -->
 <h3>Gauquelin5 integration</h3>
-Restoration process includes the restoration of legal time and the choice was made to express timezone offset like above, even if this does not strictly respect ISO 8601.
-
+The choice was made to express timezone offset like above, even if this does not strictly respect ISO 8601.
+<br>For the files concerned by current code (data of famous people), restoration only needs to be done for files of serie A.
+<br>This is done by :
+<pre>php run-g5.php cura A legalTime</pre>
+This adds a column <code>DATE_C</code> (= date corrected) to the files.
+<br>Current code performs restoration only for persons born in France, excluding all cases that can't be fixed by program without ambiguity (ambiguity comes from world wars 1 and 2, for parts of France that were invaded by Germany ; precise timezone offset depend on local conditions).
+<br>
+<br>Restoration rates are low :
+<pre>
+A1 : restored 1029 / 2087 dates (49.31 %)
+A2 : restored 1614 / 3643 dates (44.3 %)
+A3 : restored 1003 / 3046 dates (32.93 %)
+A4 : restored 2333 / 2720 dates (85.77 %)
+A5 : restored 882 / 2410 dates (36.6 %)
+A6 : restored 776 / 2026 dates (38.3 %)
+</pre>
+This could be bettered by developing restoration for foreign countries.
 </article>
 </div><!-- end class="main" -->
 

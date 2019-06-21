@@ -15,6 +15,7 @@ class all implements Command{
     // *****************************************
     // Implementation of Command
     /** 
+    Performs all actions to build file(s) of data/5-tmp/cura-csv/A*.csv
         Called by : php run-g5.php cura A1 all     # A1 or A, A2 ... A6
         @param $params  array with 2 elements : datafile and command
         @return         Empty string ; echoes the commands' reports
@@ -24,7 +25,7 @@ class all implements Command{
         if(count($params) > 2){
             return "INVALID PARAMETER : " . $params[2] . " - all doesn't need this parameter\n";
         }
-        
+                                                                                                                                                          
         $datafile = $params[0];
         
         echo "\n=== execute raw2csv on $datafile ===\n";
@@ -36,6 +37,9 @@ class all implements Command{
             $params_ertel2csv[] = 'update';
             echo ertel2csv::execute($params_ertel2csv);
         }
+        
+        echo "\n=== execute legalTime on $datafile ===\n";
+        echo legalTime::execute($params);
         
         return '';
     }
