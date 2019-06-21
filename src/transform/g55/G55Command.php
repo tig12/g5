@@ -1,20 +1,24 @@
 <?php
 /********************************************************************************
-    Implementation of Command interface for cura dataset.
+    Implementation of Command interface for g55 (Gauquelin 1955) dataset.
     This class is needed because user's vocabulary is different from generic mechanism :
-    - User can say 'A' to designate all files of serie A.
-    - User can say 'E1' or 'E3', and this is handled by sub-package 'E1_E3'.
-    So a translation from user's vocabulary to this package's organisation is necessary.
-    
+    User types something like : php run-g5.php g55 570SPO marked2generated
+    This means :
+        dataset = g55
+        datafile = 570SPO
+        action = marked2generated
+    This would oblige to have one sub-package per datafile,
+    which would be stupid as actions are the same for all datafiles.
+    So all actions were put in sub-package 'all'
+
     @license    GPL
-    @history    2017-04-27 10:41:02+02:00, Thierry Graff : creation
-    @history    2019-05-09 01:34:14+02:00, Thierry Graff : refactor
+    @history    2019-06-21 09:35:47+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace g5\transform\cura;
+namespace g5\transform\g55;
 
 use g5\patterns\Command;
 
-class CuraCommand implements Command{
+class G55Command implements Command{
 
     // ******************************************************
     /**
@@ -26,20 +30,21 @@ class CuraCommand implements Command{
         @return report : string describing the result of execution.
     **/
     public static function execute($params=[]): string{
-        
         $report = '';
         
         $datafile = $params[0];
         $command = $params[1];
         
+/* 
         if($datafile == 'all' && $command == 'all'){
-            return \g5\transform\cura\all\all::execute($params);
+            return \g5\transform\g55\all\all::execute($params);
         }
+*/
         
-        $datafiles = CuraRouter::computeDatafiles($datafile);
+        $datafiles = G55Router::computeDatafiles($datafile);
         
         foreach($datafiles as $dtfile){
-            $class = "g5\\transform\\cura\\" . Cura::DATAFILES_SUBNAMESPACE[$datafile] . '\\' . $command;
+            $class = "g5\\transform\\g55\\all\\$command";
             $params[0] = $dtfile;
             $report .= $class::execute($params);
         }

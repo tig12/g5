@@ -62,12 +62,12 @@ raw2csv:
     E3: small
     
 #
-# Settings specific to Gauquelin 1955 groups
+# Settings specific to Gauquelin 1955 code
 #
 g55:
   
   # Sorting used in generated csv files
-  # used by Serie1955::marked2generated()
+  # used by g5\transform\g55\all\marked2generated
   sort: 
     576MED: FNAME
     508MED: FNAME

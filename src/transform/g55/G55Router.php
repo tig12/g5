@@ -3,18 +3,18 @@
     Utilities to route commands in the cura package.
     
     @license    GPL
-    @history    2019-05-09 01:34:14+02:00, Thierry Graff : Creation from refactoring
+    @history    2019-06-21 09:36:03+02:00, Thierry Graff : Creation from refactoring
 ********************************************************************************/
-namespace g5\transform\cura;
+namespace g5\transform\g55;
 
 use g5\patterns\Router;
 
-class CuraRouter implements Router{
+class G55Router implements Router{
     
     // ******************************************************
     /** 
         Converts the datafile parameter in the user vocabulary to an array of datafiles known by this package.
-        Useful for parameters like 'A' which means everything from A1 to A6.
+        Useful for 'all' which means every G55 group.
         Does not perform check on $userParam.
         @param $userParam The data file as expressed by the user.
         @return Array containing datafiles.
@@ -22,20 +22,10 @@ class CuraRouter implements Router{
     public static function computeDatafiles($userParam){
         switch($userParam){
         	case 'all' : 
-        	    return ['all'];
-        	    //return ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'D6', 'D10', 'E1', 'E3'];
+        	    $tmp = G55::DATAFILES_POSSIBLES;
+        	    array_shift($tmp); // remove 'all'
+        	    return $tmp;
         	break;
-        	case 'A' : 
-        	    return ['A1', 'A2', 'A3', 'A4', 'A5', 'A6'];
-        	break;
-        	/* 
-        	case 'B' : 
-        	    return ['B1', 'B2', 'B3', 'B4', 'B5', 'B6'];
-        	break;
-        	case 'E2' : 
-        	    return ['E2a', 'E2b', 'E2c', 'E2d', 'E2e', 'E2f', 'E2g'];
-        	break;
-        	*/
             default:
                 return [$userParam];
             break;
@@ -50,7 +40,7 @@ class CuraRouter implements Router{
         @return Array of strings
     **/
     public static function getDatafiles(): array{
-        return Cura::DATAFILES_POSSIBLES;
+        return G55::DATAFILES_POSSIBLES;
     }
     
     
@@ -60,12 +50,12 @@ class CuraRouter implements Router{
         @return A list of possible actions for a given datafile.
     **/
     public static function getCommands($datafile): array{
-        $subnamespace = Cura::DATAFILES_SUBNAMESPACE[$datafile];
-        $tmp = glob(__DIR__ . DS . $subnamespace . DS . '*.php');
+        // All datafiles share the same possible commands, that are located in 'all' sub-package 
+        $tmp = glob(__DIR__ . DS . 'all' . DS . '*.php');
         $res = [];
         foreach($tmp as $file){
             $basename = basename($file, '.php');
-            $class = new \ReflectionClass("g5\\transform\\cura\\$subnamespace\\$basename");
+            $class = new \ReflectionClass("g5\\transform\\g55\\all\\$basename");
             if($class->implementsInterface("g5\\patterns\\Command")){
                 $res[] = $basename;
             }

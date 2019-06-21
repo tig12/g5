@@ -35,6 +35,21 @@ class G55{
         '884PRE' => ['884 prêtres', 'NONE'],
     ];
 
+    /** 
+        Possible values for 'datafile' parameter when calling run-g5.php
+    **/
+    const DATAFILES_POSSIBLES = [
+        'all',
+        '576MED',
+        '508MED',
+        '570SPO',
+        '676MIL',
+        '906PEI',
+        '500ACT',
+        '494DEP',
+        '349SCI',
+    ];
+    
     /**  Matching between place names used in the edited files and geonames.org corresponding names **/
     const GEONAMES_PLACES = [
         'Alger' => 'Algiers',

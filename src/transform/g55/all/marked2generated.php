@@ -9,8 +9,8 @@
     Uses files from 3-edited/cura-marked/ to filter and dispatch in different resulting files in g55-generated
     Adds a column ORIGIN
 
-    Called with :
-    php run-g5.php g55 all marked2generated
+    Called by : php run-g5.php g55 <filenamme> marked2generated
+    <filename> can be one of G55::DATAFILES_POSSIBLES ; for example '570SPO'
     
     @license    GPL
     @history    2019-05-26 00:51:46+02:00, Thierry Graff : Creation
@@ -27,63 +27,32 @@ class marked2generated implements Command {
     
     // *****************************************
     /** 
-        Generates the files in 5-tmp/g55-generated/
-        from files in
-        - 3-edited/cura-marked/
-        and
-        - 5-tmp/cura-csv/
-        Takes an exact copy of files in 5-cura-csv
-        Uses files from 3-cura-marked to filter and dispatch in different resulting files in g55-generated
-        Adds a column ORIGIN
-        
-        Called by : php run-g5.php g55 <filenamme> marked2generated
-// @todo Change this convention
-        <filename> can be 'ALL' or one of G55::GROUPS for example '570SPO'
-// end @todo        
-        @param $param String, can be 'all' or one of G55::GROUPS for example '570SPO'
+        @param $params Array containing 2 elements :
+                       - the group to generate (like '570SPO')
+                       - the name of this command (useless here)
         @return report
-        @throws Exception if unable to parse
     **/
     public static function execute($params=[]): string{
-        $groups = array_keys(G55::GROUPS);
-        $msg = "Invalid call to g5\\transform\\g55\\all\\marked2generated\n"
-            . "Possible value for parameter : ALL, " . implode(', ', array_keys(G55::GROUPS)) . "\n";
-        if(empty($params)){
-            $params = $groups;
-        }
-        else if(!in_array($params, $groups)){
-            return $msg;
-        }
-        else{
-            $params = [$params];
-        }
-        $report = '';
-        foreach($params as $group){
-            $report .= self::processOneGroup($group);
-        }
-        return $report;
-    }
-    
-    // *****************************************
-    /** 
-        Auxiliary of self::execute()
-        This function assumes that $groupCode is valid - no check done.
-    **/
-    private static function processOneGroup($groupCode){
+        
+        // no check on $params because this is done in G55Command
         
         $report = '';
         
-        $cura_serie = G55::GROUPS[$groupCode][1]; // A1, A2 etc.
-        $file_marked = Config::$data['dirs']['3-cura-marked'] . DS . $cura_serie . '.csv';
-        $file_csv = Config::$data['dirs']['5-cura-csv'] . DS . $cura_serie . '.csv';
+        $groupCode = $params[0];
+        
+        $cura_file = G55::GROUPS[$groupCode][1]; // A1, A2 etc.
+        $file_marked = Config::$data['dirs']['3-cura-marked'] . DS . $cura_file . '.csv';
+        $file_csv = Config::$data['dirs']['5-cura-csv'] . DS . $cura_file . '.csv';
         $file_output = Config::$data['dirs']['5-g55-generated'] . DS . $groupCode . '.csv';
 
+        $report .= "Generating 1955 group $groupCode : ";
+        
         $marked = self::loadMarked($file_marked, $groupCode);
         if($marked === false){
-            return "$groupCode not marked yet - File not generated\n";
+            $report .=  "$groupCode not marked yet - File not generated\n";
+            return $report;
         }
         
-        $report .= "Generating 1955 group $groupCode :\n";
         $res = [];
         
         $input = file($file_csv);
@@ -107,7 +76,7 @@ class marked2generated implements Command {
         // generate output
         $output = 'ORIGIN' . G5::CSV_SEP . $input[0]; // field names
         foreach($res as $fields){
-            $output .= $groupCode . G5::CSV_SEP . implode(G5::CSV_SEP, $fields);
+            $output .= $cura_file . G5::CSV_SEP . implode(G5::CSV_SEP, $fields);
         }
         file_put_contents($file_output, $output);
         return $report;
@@ -117,7 +86,7 @@ class marked2generated implements Command {
     // ******************************************************
     /**
         Loads one csv file located in 3-edited/cura-marked/
-        Auxiliary of self::processOneGroup()
+        Auxiliary of self::execute()
         @param $filename    String file name located in 3-edited/cura-marked/
         @param $groupCode   String identifying a Gauquelin 1955 group, like "570SPO"
         @return false or a regular array containing the NUM of marked records

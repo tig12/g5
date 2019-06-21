@@ -1,25 +1,24 @@
 <?php
 /********************************************************************************
-    Alias to g5\transform\g55\all\marked2generated
-    Called with :
-    php run-g5.php g55 spo570 marked2generated
+    Generates 9-output/gauquelin55/corrected/570SPO.csv
     
     @license    GPL
-    @history    2019-05-28 00:56:51+02:00, Thierry Graff : Creation
+    @history    2019-05-26 00:41:36+02:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\transform\g55\spo570;
+namespace g5\transform\g55\all;
 
 use g5\Config;
 use g5\patterns\Command;
 
-class marked2generated implements Command {
+class edited2corrected implements Command {
     
     // *****************************************
     /** 
+        @param $param Array containing one element (a string)
         @return report
     **/
     public static function execute($params=[]): string{
-        return \g5\transform\g55\all\marked2generated::execute('570SPO');
     }
     
 }// end class
+                                                                   

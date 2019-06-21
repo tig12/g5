@@ -11,7 +11,7 @@
     @license    GPL
     @history    2019-05-26 00:33:22+02:00, Thierry Graff : addition to new structure
 ********************************************************************************/
-namespace g5\transform\g55\spo570;
+namespace g5\transform\g55\all;
 
 use g5\Config;
 use g5\patterns\Command;

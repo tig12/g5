@@ -1,11 +1,12 @@
 <?php
 /********************************************************************************
-    Generates 9-output/gauquelin55/original/570SPO.csv
+    Generates data/9-output/history/1955-gauquelin/g55-original
+    from 
     
     @license    GPL
     @history    2019-05-26 00:48:47+02:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\transform\g55\spo570;
+namespace g5\transform\g55\all;
 
 use g5\G5;
 use g5\Config;
@@ -14,7 +15,7 @@ use tiglib\strings\slugify;
 use tiglib\timezone\offset;
 use tiglib\timezone\offset_fr;
 
-class csv2orig implements Command {
+class edited2original implements Command {
     
     // *****************************************
     /** 
@@ -22,6 +23,7 @@ class csv2orig implements Command {
         @return report
     **/
     public static function execute($params=[]): string{
+echo "\n<pre>"; print_r($params); echo "</pre>\n"; exit;
     }
     
     // *****************************************

@@ -5,7 +5,7 @@
     @license    GPL
     @history    2019-05-26 01:32:18+02:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\transform\g55\spo570;
+namespace g5\transform\g55\all;
 
 use g5\Config;
 use g5\patterns\Command;
