@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Mark data | Gauquelin5</title>
+    <title>Newalchemypress data | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
-    <meta name="description" content="Details the way Gauquelin 1955 groups are identified in cura.free.fr files">
+    <meta name="description" content="newalchemypress.com.">
     <meta name="robots" content="index,follow">
     <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
     <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
@@ -12,7 +12,7 @@
     <meta name="dcterms.dateCopyrighted" content="2019">
     <!-- 
     tigsite:
-        history: 2019-04-08 23:31:57+02:00, Thierry Graff : Creation
+        history: , Thierry Graff : Creation
     -->
 </head>
 
@@ -23,36 +23,24 @@
 
 <nav class="prevnext">
     <a class="top" href="index.html">&uarr;</a>
-    <a class="prev" rel="prev" href="2-serieE1-E3.html">&larr;</a>
-    <a class="next" rel="next" href="4-1955-corrections.html">&rarr;</a>
+    <a class="prev" rel="prev" href="g55.html">&larr;</a>
+    <a class="next" rel="next" href="newalch-ertel4391.html">&rarr;</a>
 </nav>
 
 <header>
-<h1>Mark data</h1>
+<h1>Newalchemypress data</h1>
 <div class="intro">
-The purpose of this step is to associate records of cura files to historical groups. This implies human modifications of files.
+<a href="https://newalchemypress.com/gauquelin/">Newalchemypress.com</a> web site contains several data sets that complement <a href="http://cura.free.fr/gauq/17archg.html">cura.free.fr</a>. The integration of these data to gauquelin5 program is for the moment very limited.
 </div>
 </header>
 
 <article>
-This step comes after the generation of cura files located in <code>2-cura-csv</code>.
-<br>The first thing to do is to copy the files that need to be marked in <code>3-cura-marked</code>.
-<br>
-<br>For example :
-<pre>cp data/2-cura-csv/A1.csv data/3-cura-marked/</pre>
-The human edition will be done on file <code>data/3-cura-marked/A1.csv</code>
 
-<!-- ********************************************************************************* -->
-<h2>Edition</h2>
-In the edited file, a new column "<code>1955</code>" is added.
-<br>In this column a human fills the <i>group codes</i>.
-<br>Group codes are listed in file <code>share/groups-1955.csv</code> ; they are also in constant <code>GROUPS_1955</code> of class <code>src/Serie1955.php</code>.
+This web site contains in particular a file sent by Suitbert Ertel, which was used to fix missing names in file A1.
+<br>Gauquelin5 program was used to look at the content of this file (<a href="">see page on Ertel 4391</a>).
 <br>
-<br>The human edition consists in looking in the original lists, and for each record, put the group code in column 1955.
-<br>The edition looks like that :
-<img class="border margin" src="img/3-mark.jpg" alt="Edition of A1.csv to mark 1955 groups">
+<br>But the file contains other files, in particular a file containing Arno Müller's work on physicists, that could be used to complement and check file A2.
 
-This step only concerns identification of the records. Restoration of the original data will be done in <a href="4-1955-corrections.html">next step</a>.
 </article>
 </div><!-- end class="main" -->
 

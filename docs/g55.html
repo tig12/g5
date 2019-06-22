@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Summary chart | Gauquelin5</title>
+    <title>Gauquelin 1955 restoration | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="Recapitulation of the transformations operated on data by Gauquelin5 software">
     <meta name="robots" content="index,follow">
@@ -23,77 +23,180 @@
 
 <nav class="prevnext">
     <a class="top" href="index.html">&uarr;</a>
-    <a class="prev" rel="prev" href="why.html">&larr;</a>
-    <a class="next" rel="next" href="output-format.html">&rarr;</a>
+    <a class="prev" rel="prev" href="cura.html">&larr;</a>
+    <a class="next" rel="next" href="newalch.html">&rarr;</a>
 </nav>
 
 <header>
-<h1>Summary chart</h1>
+<h1>Gauquelin 1955 restoration</h1>
 <div class="intro">
-    This page summarizes the transformations done on files. The process is illustrated using the reconstitution of the group "570 sportifs" from file A1.
+    This page details the process used to reconstitute the groups presented in Michel Gauquelin's book of 1955, "Les hommes et les astres".
     <br>The particularity of this process is that it mixes transformations done by programs and by humans.
+    <br>Restoration has only been done entirely for the group "570 sportifs" from file A1.
 </div>
 </header>
 
 <article>
 
-For the program's point of view, things are quite basic : it just takes file(s) in input, operates computations, and generates other files. The program doesn't have the notions of data source, intermediate files, downloadable files. This knowledge is folded in the structure of directory <code>data/</code>.
-<br>To organize this directory, these rules were adopted :
-<ul class="simple spaced margin-top">
-    <li>Each transformation goes from one directory to an other ; different states of a file are not mixed in a single directory.</li>
-    <li>
-        Very important : <b>Never ever generate a file in a directory containing files edited by humans</b>.
-        <br>This permits to avoid accidental destruction of human corrections. When a generated file needs to be edited, it must be copied by a human in a directory containing only edited files.
-    </li>
-    <li>
-        In edited files, only use the edited fields. For example, to generate data in <code>9-1955-corrected</code>, step <code>edited2corrected()</code> takes the  fields that were not modified in <code>5-1955-edited</code> from <code>2-cura-csv</code>.
-        <br>This permits to have new versions of generated files without needing to update the edited files to integrate the updates.
-        <br>Files edited by human are copied once for all, and not modified anymore by a program.
-    </li>
-</ul>
+<!-- ********************************************************************************* -->
+<h2>Restoration process</h2>
 
 The following diagram illustrates this process :
 
-<img class="border margin padding" src="img/serie-A1-sequence.jpg" alt="Transformations of files, from A1 to G55 original and corrected">
+<img class="border margin padding" src="img/570spo-restore.jpg" alt="Transformations of files, from A1 to G55 original and corrected">
 
+Note : the directory names used in this page relate to the corresponding entries of <code>config.yml</code>.
+<br>For example, the default value of <code>1-cura-raw</code> directory is <code>data/1-raw/cura.free.fr/</code>
 
 <ol class="margin-top spaced">
     <li>
-        <b>Store cura.free.fr data on a local machine</b>
-        <br>See <a href="1-cura-data.html">1 - Cura data</a>.
+        <b>Store cura.free.fr data on a local machine</b>. By human or program.
+        <br>See <a href="cura.html">page about Cura</a>.
+        <br>Raw files are in <code>1-cura-raw</code> directory.
     </li>
                                                                                                                                                 
     <li>
-        <b>Extract data from html pages to generate csv files</b>.
+        <b>Extract data from html pages to generate csv files</b>. By program.
         <br>This step also applies corrections.
-        <br>See <a href="2.cura2csv.html">2 - Cura to csv</a>
+        <br>See <a href="cura-A.html">page about corrections done to files of serie A</a>.
+        <br>Generated csv files are in <code>5-cura-csv/</code> directory.
     </li>
     
     <li>
-        <b>Edit the csv files to associate cura data to Gauquelin 1955 original groups</b>.
-        <br>File <code>2-cura-csv/A1.csv</code> is copied by a human to <code>3-cura-marked/A1.csv</code>.
-        <br>This file id edited ; see <a href="3-mark.html">3 - Mark data</a>.
+        <b>Copy the generated file to a directory dedicated to human modifications.</b> By human.
+        <br>Files are copied from <code>5-cura-csv/</code> to <code>3-cura-marked/</code>.
     </li>
     
     <li>
-        <b>Generate one file per original 1955 group</b> (by program).
+        <b>Associate cura data to Gauquelin 1955 original groups.</b> By human.
+        <br>The files of <code>3-cura-marked/</code> are modified : 
+        <ul>
+            <li>A new column "<code>1955</code>" is created.</li>
+            <li>This column is filled with Gauquelin 1955 group codes, (the list is in class <code>src/g5/transform/g55/G55.php</code>).</li>
+        </ul>
+        
+        <br>Edition looks like that :
+        <img src="img/570spo-mark.jpg" alt="Associate cura records with Gauquelin 1955 groups">
     </li>
     
     <li>
-        <b>Copy these files to directory <code>5-1955-edited/</code></b> (by human).
+        <b>Generate one file per original 1955 group.</b> By program.
+        <pre>php run-g5.php g55 570SPO marked2generated</pre>
+        This extracts the rows marked with "570SPO" from <code>3-cura-marked/A1.csv</code> to generate <code>5-g55-generated/570SPO.csv</code>
+        <br>This step uses a setting from <code>config.yml</code> (<code>g55 / sort</code>). This is necessary because in the next step, the generated files are compared to Gauquelin 1955 book. To make this easier, the generated files must be sorted like in the book, and this sorting is not the same for all groups.
     </li>
     
     <li>
-        <b>Correct the files located in <code>5-1955-edited/</code></b> (by human).
-        <br>See <a href="4-corrections-G55.html">4 - Corrections from Gauquelin 1955</a>
+        <b>Copy these files to directory <code>3-g55-edited/</code></b> By human.
+        <br>Files of <code>5-g55-generated/</code> must then be copied to <code>3-g55-edited/</code>, a directory dedicated to human modifications.        
     </li>
     
     <li>
-        <b>Generate downloadable file</b> (by program)
-        <br>See <a href="9-results.html">9 - results</a>
+        <b>Edit the files located in <code>3-g55-edited/</code></b> (by human).
+        <br>This is the long part of the work : note the differences between Gauquelin 1955 book and cura data.
+        <br>Once a file has been copied to <code>3-g55-edited/</code>, columns where the corrections will be written are manually added.
+        <br>These column are named with a postfix <code>_55</code>.
+        
+        <ul>
+            <li><b>GIVEN_55</b> : Given name</li>
+            <li><b>FAMILY_55</b> : Family name</li>
+            <li><b>HOUR_55</b> : Hour HH:MM</li>
+            <li><b>DAY_55</b> : Day YYYY-MM-DD</li>
+            <li><b>PLACE_55</b> : Name of place (Exact spelling of geonames.org)</li>
+            <li><b>C2_55</b> : COD in cura vocabulary = ADM2 in geonames = département for France</li>
+            <li><b>CY_55</b> : ISO 3166 country code</li>
+            <li><b>OCCU_55</b> : Occupation code</li>
+            <li><b>NOTES_55</b> : Free notes</li>
+        </ul>
+        The column are filled only when the values read in the book differ from the values retrieved from cura file.
+        <br>This step is easier when two persons work together : one reads the book, the other writes the corrections
+        <br>
+        <br>In step 5, the program added a column <code>ORIGIN</code>, filled with the code of cura file (for <code>570SPO.csv</code>, this column is filled with value <code>A1</code>).
+        <br>Some records are present in Gauquelin book and not in cura file ; in this case, the field <code>ORIGIN</code> is noted <code>G55</code>.
+
+    </li>
+    
+    <li>
+        <b>Generate downloadable files</b> (by program)
+        <br>todo
     </li>
     
 </ol>
+
+<!-- ********************************************************************************* -->
+<h2>Exploitation</h2>
+
+Apart from generating downloadable files, Gauquelin 1955 restoration is used to complete and check cura files of serie A.
+<br>This is done with command 
+<pre>php run-g5.php cura A1 g552csv</pre>
+
+
+<!-- ************************************* -->
+<table class="wikitable margin">
+    <tr><th>FAMILY</th><th>GIVEN</th><th>DAY</th><th>HOUR</th><th>PLACE</th><th>C2</th><th>CY</th><th>OCCU</th><th>NOTES</th>
+    <tr>
+        <td>Lunnis</td>
+        <td>Jacques</td>
+        <td>1923-05-27</td>
+        <td>16:30:00</td>
+        <td>Pierrecourt</td>
+        <td>76</td>
+        <td>FR</td>
+        <td>ATH</td>
+        <td>Seine Inférieure</td>
+    <tr>
+    <tr>
+        <td>Dupré </td>
+        <td>Victor</td>
+        <td>1884-03-11</td>
+        <td>1</td>
+        <td>Roanne</td>
+        <td>42</td>
+        <td>FR</td>
+        <td>CYC</td>
+        <td></td>
+    <tr>
+    <tr>
+        <td>Vignal</td>
+        <td>René</td>
+        <td>1928-08-12</td>
+        <td>20:30:00</td>
+        <td>Béziers</td>
+        <td>34</td>
+        <td>FR</td>
+        <td>FOO</td>
+        <td></td>
+    <tr>
+    <tr>
+        <td>Yvonne</td>
+        <td>Jeanne</td>
+        <td>1910-07-14</td>
+        <td>01:00:00</td>
+        <td>Paris</td>
+        <td>75</td>
+        <td>FR</td>
+        <td></td>
+        <td>Paris 18e</td>
+    <tr>
+</table>
+
+
+<!-- ************************************* -->
+<h3>Names</h3>
+
+
+<ul class="spaced">
+    <li>
+        2 records have different occupations : "natation" (swimming) in cura data, and "patin à roulettes" (roller skate) in Gauquelin book :
+        <br>1783 Legendre René 1899-10-21
+        <br>1784 Robert Raoul 1912-01-06
+    </li>
+    
+    <!-- 
+    2079	Felbaco Pierre => Felbacq (G55 is right)
+    http://ffmjscd77.free.fr/medaill%E9s_version_livret.pdf
+    -->
+</ul>
 
 </article>
 </div><!-- end class="main" -->

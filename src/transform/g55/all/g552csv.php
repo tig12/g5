@@ -1,8 +1,9 @@
 <?php
 /********************************************************************************
-    Code modifying files of 5-cura-csv/ using files of 3-g55-edited
+    Code analyzing files of 3-g55-edited
+    and modifying files of 5-cura-csv/ using files of 3-g55-edited
     
-    Example of use : php run-g5.php cura A1 g552csv date
+    Example of use : php run-g5.php g55 570SPO g552csv date
 
     
     @pre        5-cura-csv/A1.csv must exist in its best possible state.
@@ -18,7 +19,7 @@
     @license    GPL
     @history    2019-05-26 00:33:22+02:00, Thierry Graff : addition to new structure
 ********************************************************************************/
-namespace g5\transform\cura\A;
+namespace g5\transform\g55\all;
 
 use g5\Config;
 use g5\patterns\Command;
@@ -45,7 +46,7 @@ class g552csv implements Command {
                        - the name of the action to perform
         @return report
     **/
-    public static function execute($params=[]): string{ 
+    public static function execute($params=[]): string{
         $possibleParams_str = implode(', ', self::POSSIBLE_PARAMS);
         $msg = "PARAMETER MISSING in g5\\transform\\cura\\A\\g552csv\n"
              . "Possible values for parameter : $possibleParams_str\n";
@@ -58,8 +59,7 @@ class g552csv implements Command {
         }
         $method = 'execute_' . $param;
         
-        self::$method($params[0]);
-        return '';
+        return self::$method($params[0]);
         
     }
     
@@ -116,30 +116,33 @@ class g552csv implements Command {
     
     // ******************************************************
     /**
-        Lists the records that are not present in cura file
-        These records have 'G55' as origin
-        @param $
+        Lists the records that are not present in cura file.
+        This function is only informative, does not participate to any build process.
+        In files of 3-g55-edited, these records have their ORIGIN field set to 'G55'.
     **/
-    private static function execute_nocura($g55file){
-        $g55rows = self::loadG55($g55file);
+    private static function execute_nocura($g55File): string{
+        $res = '';
+        $res .= "<table class=\"wikitable margin\">\n";
+        $res .= "    <tr><th>FAMILY</th><th>GIVEN</th><th>DAY</th><th>HOUR</th><th>PLACE</th><th>C2</th><th>CY</th><th>OCCU</th><th>NOTES</th>\n";
+        $g55rows = self::loadG55($g55File);
         foreach($g55rows as $row){
             if($row['ORIGIN'] == 'G55'){
                 // all informations coming from paper book are stored in _55 columns
-                // columns storing original information are then useless.
-                unset($row['G55']);
-                unset($row['ORIGIN']);
-                unset($row['NUM']); 
-                unset($row['NAME']); 
-                unset($row['OCCU']); 
-                unset($row['DATE']); 
-                unset($row['PLACE']); 
-                unset($row['CY']); 
-                unset($row['C2']); 
-                unset($row['LON']); 
-                unset($row['LAT']); 
-                echo "\n"; print_r($row); echo "\n";
+                $res .= "    <tr>\n";
+                $res .= "        <td>{$row['FAMILY_55']}</td>\n";
+                $res .= "        <td>{$row['GIVEN_55']}</td>\n";
+                $res .= "        <td>{$row['DAY_55']}</td>\n";
+                $res .= "        <td>{$row['HOUR_55']}</td>\n";
+                $res .= "        <td>{$row['PLACE_55']}</td>\n";
+                $res .= "        <td>{$row['C2_55']}</td>\n";
+                $res .= "        <td>{$row['CY_55']}</td>\n";
+                $res .= "        <td>{$row['OCCU_55']}</td>\n";
+                $res .= "        <td>{$row['NOTES_55']}</td>\n";                                    
+                $res .= "    <tr>\n";
             }
         }
+        $res .= "</table>\n";
+        return $res;
     }
     
     
@@ -147,9 +150,9 @@ class g552csv implements Command {
     /**
         Echoes the lines where G55 name is different from cura.
     **/
-    private static function execute_name($g55file){
+    private static function execute_name($g55File){
         
-        [$origin, $g55Rows, $curaRows] = self::prepare_analysis($g55file);
+        [$origin, $g55Rows, $curaRows] = self::prepare_analysis($g55File);
         $n = 0;
         foreach($g55Rows as $NUM => $g55Row){
             $fnameCura = $curaRows[$NUM]['FNAME'];
@@ -172,9 +175,9 @@ class g552csv implements Command {
     /**
         Echoes the lines where G55 date (day or time) is different from cura.
     **/
-    private static function execute_date($g55file){
+    private static function execute_date($g55File){
         
-        [$origin, $g55Rows, $curaRows] = self::prepare_analysis($g55file);
+        [$origin, $g55Rows, $curaRows] = self::prepare_analysis($g55File);
         $n = 0;
         foreach($g55Rows as $NUM => $g55Row){
             $dateCura = $curaRows[$NUM]['DATE'];
