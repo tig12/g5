@@ -157,6 +157,12 @@
   belongs-to:
     - SP
 -
+  code: FEM
+  fr: Sports féminins
+  en: Female sports
+  belongs-to:
+    - SP
+-
   code: FOO
   fr: Football
   en: Football
