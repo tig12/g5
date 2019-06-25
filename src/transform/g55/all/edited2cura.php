@@ -145,7 +145,8 @@ class edited2cura implements Command {
     /**
         Action depending on the 4th parameter :
         - if "list", echoes the lines where G55 name is different from cura.
-        - if "update", injects the values of G55 columns "FAMILY_55" and "GIVEN_55" in corresponding cura file of 5-cura-csv.
+        - if "update", injects the values of G55 columns "FAMILY_55" and "GIVEN_55"
+          in corresponding columns of cura file, in 5-cura-csv.
         @param  $params Array containing 4 strings transmitted by execute() :
                 - The G55 file to process
                 - "edited2cura" (useless here)
@@ -191,7 +192,6 @@ class edited2cura implements Command {
                     if($gname55 != ''){
                         $curaFull[$NUM]['GNAME'] = $gname55;
                     }
-//echo "modif $NUM {$curaFull[$NUM]['FNAME']} * {$curaFull[$NUM]['GNAME']}\n";
                 }
                 $N++;
             }
@@ -214,9 +214,73 @@ class edited2cura implements Command {
     
     // ******************************************************
     /**
+        Action depending on the 4th parameter :
+        - if "list", echoes the lines where G55 place name is different from cura.
+        - if "update", injects the values of G55 column "PLACE_55"
+          in corresponding column of cura file, in 5-cura-csv.
+        @param  $params Array containing 4 strings transmitted by execute() :
+                - The G55 file to process
+                - "edited2cura" (useless here)
+                - "place" (useless here)
+                - "list" or "update"
+    **/
+    private static function execute_place($params): string{
+        if(count($params) < 4){
+            return "WRONG USAGE - This command needs an other parameter\n"
+                 . "- \"list\" : lists place name differences between cura and Gauquelin 55.\n"
+                 . "- \"update\" : updates Cura file with Gauquelin 55 values.\n";
+        }
+        if(count($params) > 4){
+            return "WRONG USAGE - Useless parameter \"{$params[4]}\".\n";
+        }
+        
+        $g55File = $params[0];
+        $action = $params[3];
+        
+        [$origin, $g55Rows, $curaRows] = self::prepare($g55File);
+        
+        if($action == 'update'){
+            $curaFull = self::loadCuraNum($origin);
+        }
+        $report = '';
+        $N = 0;
+        foreach($g55Rows as $NUM => $g55Row){
+            $placeCura = $curaRows[$NUM]['PLACE'];
+            $place55 = $g55Row['PLACE_55'];
+            if($place55 != '' && $place55 != $placeCura){
+                if($action == 'list'){
+                  $report .= "$NUM $placeCura \t| $place55\n";
+                }
+                else{
+                    if($place55 != ''){
+                        $curaFull[$NUM]['PLACE'] = $place55;
+                    }
+                }
+                $N++;
+            }
+        }                              
+        $report .= "$N differences on place name between $g55File and $origin\n";
+        
+        if($action == 'update'){
+            $newCura = implode(G5::CSV_SEP, array_keys($curaFull[1])) . "\n";
+            foreach($curaFull as $row){
+                $newCura .= implode(G5::CSV_SEP, $row) . "\n";
+            }
+            $filename = Config::$data['dirs']['5-cura-csv'] . DS . $origin . '.csv';
+            file_put_contents($filename, $newCura);
+            $report .= "Differences injected in $filename\n";
+        }
+        
+        return $report;
+    }
+    
+    
+    // ******************************************************
+    /**
         Echoes the lines where G55 date (day or time) is different from cura.
     **/
     private static function execute_date($g55File): string{
+// not finished
         
         [$origin, $g55Rows, $curaRows] = self::prepare($g55File);
         $N = 0;
@@ -239,8 +303,16 @@ class edited2cura implements Command {
         Lists the records that are not present in cura file.
         This function is only informative, does not participate to any build process.
         In files of 3-g55-edited, these records have their ORIGIN field set to 'G55'.
+        @param  $params Array containing 3 strings transmitted by execute() :
+                - The G55 file to process
+                - "edited2cura" (useless here)
+                - "nocura" (useless here)
     **/
-    private static function execute_nocura($g55File): string{
+    private static function execute_nocura($params): string{
+        if(count($params) > 3){
+            return "WRONG USAGE - Useless parameter \"{$params[3]}\".\n";
+        }
+        $g55File = $params[0];
         $res = '';
         $res .= "<table class=\"wikitable margin\">\n";
         $res .= "    <tr><th>FAMILY</th><th>GIVEN</th><th>DAY</th><th>HOUR</th><th>PLACE</th><th>C2</th><th>CY</th><th>OCCU</th><th>NOTES</th>\n";
@@ -270,8 +342,16 @@ class edited2cura implements Command {
     /**
         Lists the records where occupation codes in G55 groups differ from Cura groups.
         This function is only informative, does not participate to any build process.
+        @param  $params Array containing 3 strings transmitted by execute() :
+                - The G55 file to process
+                - "edited2cura" (useless here)
+                - "occupation" (useless here)
     **/
-    private static function execute_occupation($g55File): string{
+    private static function execute_occupation($params): string{
+        if(count($params) > 3){
+            return "WRONG USAGE - Useless parameter \"{$params[3]}\".\n";
+        }
+        $g55File = $params[0];
         $res = '';
         $res .= "<table class=\"wikitable margin\">\n";
         $res .= "    <tr><th>NUM</th><th>FAMILY</th><th>GIVEN</th><th>DATE</th><th>PLACE</th><th>OCCU<br>G55</th><th>OCCU<br>Cura</th>\n";
