@@ -30,6 +30,7 @@ class G55Command implements Command{
         @return report : string describing the result of execution.
     **/
     public static function execute($params=[]): string{
+echo "\n<pre>"; print_r($params); echo "</pre>\n"; exit;
         $report = '';
         
         $datafile = $params[0];

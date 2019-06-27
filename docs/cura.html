@@ -29,6 +29,11 @@
 
 <header>
 <h1>Cura data</h1>
+<div class="intro">
+<!-- 
+C.U.R.A. Gauquelin archives published on cura.free.fr have the merit to exist, but before being exploitable, they need to be extracted from web pages and corrected. So the purpose is to build a ready-to-use, user-friendly version of these data.
+ -->
+</div>
 </header>
 
 <article>
@@ -55,14 +60,18 @@ the program tells you the possible values of datafiles for cura dataset :
 <code>all</code> will operate on all cura files.
 <br><code>A</code> will operate on all files of serie A.
 <br>Other values will operate on a single file.
+<br>
+The command :
+<pre>php run-g5.php cura all run</pre>
+performs all the steps for all cura datafiles.
 
 <!-- ********************************************************************************* -->
-<h2>Generate CSV files</h2>
-
-Next step is to extract data from html files and produce csv files.
+<h2>cura2csv</h2>
+For all cura datafiles, the first transformation is <code>cura2csv</code>
+<br>It extracts data from html files and produces csv files.
 <br>This step uses two entries of <code>config.yml</code> :
-<br>- It takes html pages located in a directory specified by entry <code>1-cura-raw</code> 
-<br>- It produces csv files located in a directory specified by entry <code>5-cura-csv</code>
+<br>- It takes html pages located in a directory specified by entry <code>1-cura-raw/</code> 
+<br>- It produces csv files located in a directory specified by entry <code>5-cura-csv/</code>
 <br>
 <br>This is done for example with the command :
 <pre>php run-g5.php cura D6 raw2csv</pre>
@@ -89,10 +98,10 @@ During this step, some corrections are applied to the data.
 </ul>
 
 <!-- ********************************************************************************* -->
-<h2>Apply supplementary transformations</h2>
+<h2>Other transformations</h2>
 
-Other transformations can be performed. These transformations modify the files located in <code>5-cura-csv</code>.
-<br>The precise list of tranformations depend on the concerned file, but for all file, a transformation called <code>all</code> will perform all the transformations on a given file.
+After <code>cura2csv</code>, other transformations are performed. They modify the files located in <code>5-cura-csv</code>.
+<br>The precise list of tranformations depend on the concerned file, but for all files, a transformation called <code>all</code> will perform all the transformations on a given file.
 <br>For example,
 <pre>php run-g5.php cura A4 all</pre>
 executes the available transformations on file A4, <code>raw2csv</code> included.
@@ -114,8 +123,8 @@ executes the available transformations on file A4, <code>raw2csv</code> included
 <aside class="left">                                                                                                                                              
 <ul>
     <li class="bold"><a href="index.html">Gauquelin5 home</a></li>
-    <li class="bold"><a href="program-usage.html">Program usage</a></li>
-    <li class="bold"><a href="output-format.html">Output format</a></li>
+    <li><a href="program-usage.html">Program usage</a></li>
+    <li><a href="output-format.html">Output format</a></li>
     
     <li>
         <a href="cura.html">Cura data</a>                                                           
@@ -151,8 +160,8 @@ executes the available transformations on file A4, <code>raw2csv</code> included
     <li><a href="geonames.html">Geonames.org</a></li>
     <li><a href="wikidata.html">Wikidata.org</a></li>
     <li><a href="code-details.html">Code details</a></li>
+    <li><a href="next.html">Next</a></li>
     <!-- <li><a href="questions.html">Questions</a></li> -->
-    <li><a href="next.html">What's next</a></li>
     <li class="bold"><a href="https://larzac.info/gauquelin5">Download</a></li>
     <li class="bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>
 </ul>

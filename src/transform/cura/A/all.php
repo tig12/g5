@@ -9,6 +9,7 @@ namespace g5\transform\cura\A;
 
 use g5\Config;
 use g5\patterns\Command;
+use g5\transform\g55\all\edited2cura;
 
 class all implements Command{
     
@@ -28,7 +29,7 @@ class all implements Command{
                                                                                                                                                           
         $datafile = $params[0];
         
-        echo "\n=== execute raw2csv on $datafile ===\n";
+        echo "\n=== Execute raw2csv on $datafile ===\n";
         echo raw2csv::execute($params);
         
         if($datafile == 'A1'){
@@ -36,9 +37,22 @@ class all implements Command{
             $params_ertel2csv = $params;
             $params_ertel2csv[] = 'update';
             echo ertel2csv::execute($params_ertel2csv);
+            
+            echo "\n=== Correct place names on A1 from Gauquelin 1955 570SPO ===\n";
+            $params_edited2cura = [
+                '570SPO',
+                'edited2cura',
+                'place',
+                'update',
+            ];
+            echo edited2cura::execute($params_edited2cura);
+            
+            echo "\n=== Correct family and given names on A1 from Gauquelin 1955 570SPO ===\n";
+            $params_edited2cura[2] = 'name';
+            echo edited2cura::execute($params_edited2cura);
         }
         
-        echo "\n=== execute legalTime on $datafile ===\n";
+        echo "\n=== Execute legalTime on $datafile ===\n";
         echo legalTime::execute($params);
         
         return '';

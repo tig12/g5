@@ -30,23 +30,31 @@
 <header>
 <h1>Cura - serie A</h1>
 <div class="intro">
-This page describes the corrections done on files A1 to A6 while converting html pages to csv files. 
+This page describes the corrections done on files A1 to A6 while converting html pages to csv files.
+<br>The main problems with these files are :
+<ul>
+    <li>Reconstitute the names.</li>
+    <li>Restore legal birth times.</li>
+</ul>
 </div>
 </header>
 
 <article>
 
-To convert file A1, run :
-<pre>php run-gauquelin5.php A1 raw2csv</pre>
-To convert all files, from A1 to A6, run :
-<pre>php run-gauquelin5.php A raw2csv</pre>
-
-The code that performs this step is located in <code>src/SerieA.php</code>
-
+The full set of transformations can be executed with the command :
+<pre>php run-g5.php cura A all</pre>
+This is equivalent to :
+<pre>
+php run-g5.php cura A raw2csv
+php run-g5.php cura A1 ertel2csv update             # only for A1
+php run-g5.php g55 570SPO edited2csv place update   # only for A1
+php run-g5.php g55 570SPO edited2csv name update    # only for A1
+php run-g5.php cura A legalTime
+</pre>
 
 <!-- ********************************************************************************* -->
 <h2>Profession codes</h2>
-In some files of serie A, the precise profession codes are not associated to the records. This is possible to associate each record to a precise profession code thanks to the notices that are present on cura.free.fr pages.
+In some files of serie A, the precise profession codes are not associated to the records. This is possible thanks to the notices that are present on cura.free.fr pages.
 <br>These informations were included to the program (see constant <code>PROFESSIONS_DETAILS</code> in the code) and in the resulting csv files, each record is associated to its precise profession.
 <br>
 <br>A list of profession codes used in the generated files is listed on <a href="output-format.html#profession-codes">this page</a>.
@@ -161,7 +169,7 @@ The program must merge the two lists. Unfortunately, these 2 lists don't share a
         Checking <a href="http://mnesys-portail.archives-finistere.fr/?id=recherche_etat_civil">online civil registry</a> permits to solve the case :
         <br>Registre  1 MI EC 53/10 Naissances, p 377 / 559 => Né le 25 mars 1817 à 5h du matin.
         <br>From "Traité de l'heure dans le monde", TU = HLO ;  4°6' = 00:16:24 => hour = 05:16:24
-        <br>The first line is exact, second line must be replaced by
+        <br>The first line is exact, the second line must be replaced by
         <pre>1817	3	25	Lebris Jean</pre>
         This was fixed in the code.
     </li>
@@ -177,8 +185,8 @@ The program must merge the two lists. Unfortunately, these 2 lists don't share a
 <aside class="left">                                                                                                                                              
 <ul>
     <li class="bold"><a href="index.html">Gauquelin5 home</a></li>
-    <li class="bold"><a href="program-usage.html">Program usage</a></li>
-    <li class="bold"><a href="output-format.html">Output format</a></li>
+    <li><a href="program-usage.html">Program usage</a></li>
+    <li><a href="output-format.html">Output format</a></li>
     
     <li>
         <a href="cura.html">Cura data</a>                                                           
@@ -214,8 +222,8 @@ The program must merge the two lists. Unfortunately, these 2 lists don't share a
     <li><a href="geonames.html">Geonames.org</a></li>
     <li><a href="wikidata.html">Wikidata.org</a></li>
     <li><a href="code-details.html">Code details</a></li>
+    <li><a href="next.html">Next</a></li>
     <!-- <li><a href="questions.html">Questions</a></li> -->
-    <li><a href="next.html">What's next</a></li>
     <li class="bold"><a href="https://larzac.info/gauquelin5">Download</a></li>
     <li class="bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>
 </ul>

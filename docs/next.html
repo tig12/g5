@@ -12,7 +12,7 @@
     <meta name="dcterms.dateCopyrighted" content="2019">
     <!-- 
     tigsite:
-        history: , Thierry Graff : Creation
+        history: 2019-06-27 15:04:38+02:00, Thierry Graff : Creation
     -->
 </head>
 
@@ -23,32 +23,30 @@
 
 <nav class="prevnext">
     <a class="top" href="index.html">&uarr;</a>
-    <a class="prev" rel="prev" href=".html">&larr;</a>
-    <a class="next" rel="next" href=".html">&rarr;</a>
 </nav>
 
 <header>
-<h1>Next</h1>
-<div class="intro">Here are possible future developments to better the quality of output data</div>
+<h1>Gauquelin5 - next</h1>
+<div class="intro">
+This page exposes possible future developments to better generated data.
+</div>
 </header>
 
 <article>
 
+This diagram shows how the structure of <code>data/</code> directory may evolve.
+<br>Zones with a yellow background represent existing directories in the current state of the code.
 
-<ul>
-    <li>
-        <div class="bold">Wikidata integration</div>
-        Link Gauquelin data to semantic web using wikidata.org. Test code was written to prepare this step, <a href="wikidata.html">see wikidata.org page</a>.
-    </li>
-    
-    <li>
-        <div class="bold">Timezone computation</div>
-        Better dtu restoration ; develop code that handles edge cases not provided by programming languages.
-    </li>
-</ul>
+<img class="border margin padding" src="img/g5-flow.jpg" alt="Gauquelin5 summary flow">
+
+<!-- ********************************************************************************* -->
+<h2>Wikidata integration</h2>
+In order to link Gauquelin and related data with the semantic web, the purpose is to associate to each record its corresponding wikidata id.
+<br>Writing code that guarantees that it does not introduce wrong matching is not easy because orthograph in names may vary and there can be errors on birth dates.
 
 
-
+<!-- ********************************************************************************* -->
+<h2>Adding eminence indicators</h2>
 
 </article>
 </div><!-- end class="main" -->
@@ -58,8 +56,8 @@
 <aside class="left">                                                                                                                                              
 <ul>
     <li class="bold"><a href="index.html">Gauquelin5 home</a></li>
-    <li class="bold"><a href="program-usage.html">Program usage</a></li>
-    <li class="bold"><a href="output-format.html">Output format</a></li>
+    <li><a href="program-usage.html">Program usage</a></li>
+    <li><a href="output-format.html">Output format</a></li>
     
     <li>
         <a href="cura.html">Cura data</a>                                                           
@@ -95,8 +93,8 @@
     <li><a href="geonames.html">Geonames.org</a></li>
     <li><a href="wikidata.html">Wikidata.org</a></li>
     <li><a href="code-details.html">Code details</a></li>
+    <li><a href="next.html">Next</a></li>
     <!-- <li><a href="questions.html">Questions</a></li> -->
-    <li><a href="next.html">What's next</a></li>
     <li class="bold"><a href="https://larzac.info/gauquelin5">Download</a></li>
     <li class="bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>
 </ul>
