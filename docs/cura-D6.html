@@ -30,16 +30,22 @@
 <header>
 <h1>Cura - file D6</h1>
 <div class="intro">
-The main problem of page <code>902gdD6.html</code> is that it contains neither place name nor country. So it is impossible to compute timezone offset without restoration. Birth place restoration is done using reverse geocoding. This permits to compute places, but not always the exact birth place. This restoration needs to be bettered.
+The main problem of page <code>902gdD6.html</code> is that it contains neither place name nor country. So it is impossible to compute timezone offset without computation. Country restoration is done using reverse geocoding. This also permits to compute place names, but does not always give the exact birth place. This restoration needs to be bettered, birth place restoration is currently not included in the resulting file.
 </div>
 </header>
 
 <article>
 
-The code that performs this step is located in <code>src/SerieD6.php</code>
-<br>
-<br>Restoration process is done in two steps because it involves calls to geonames.org web service.
+The full set of transformations can be executed with the command :  
+<pre>php run-g5.php cura D6 all</pre>
+This is equivalent to :
+<pre>
+php run-g5.php cura D6 raw2csv
+php run-g5.php cura A legalTime
+</pre>
 
+<!-- ********************************************************************************* -->
+<h2>raw2csv</h2>
 <ul class="margin-top spaced">
     <li>
         The first step copies and reformat the informations of <code>902gdD6.html</code> to a csv file in directory <code>2-cura-csv</code>.

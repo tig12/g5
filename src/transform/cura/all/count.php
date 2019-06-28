@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Look at presence of different fields in csv files of data/5-tmp.
+    Look at presence of different fields in csv files of 5-cura-csv/.
     
     @license    GPL
     @history    2019-06-07 22:29:12+02:00, Thierry Graff : creation

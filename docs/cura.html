@@ -85,6 +85,7 @@ During this step, some corrections are applied to the data.
     <li>
         Dates and times are merged to be stored in ISO 8601 format <code>YYYY-MM-DD HH:MM:SSsHH:MM</code>.
         <br>For example <code>1906-02-06 14:00:00-01:00</code> ; the string <code>-01:00</code> represents the timezone offset.
+        <br>In this step, dates are not modified ; if needed, legal time restoration is done in a separate step.
     </li>
     <li>
         Longitudes and latitudes are expressed in decimal degrees.
@@ -101,7 +102,7 @@ During this step, some corrections are applied to the data.
 <h2>Other transformations</h2>
 
 After <code>cura2csv</code>, other transformations are performed. They modify the files located in <code>5-cura-csv</code>.
-<br>The precise list of tranformations depend on the concerned file, but for all files, a transformation called <code>all</code> will perform all the transformations on a given file.
+<br>The precise list of tranformations depends on the concerned file, but for all files, a transformation called <code>all</code> will perform all the transformations on a given file.
 <br>For example,
 <pre>php run-g5.php cura A4 all</pre>
 executes the available transformations on file A4, <code>raw2csv</code> included.

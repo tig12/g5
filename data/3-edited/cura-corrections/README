@@ -1,0 +1,3 @@
+This directory contains human corrections that should be applied to files of 5-cura-csv/
+
+Each yaml file contains a list of associations field name => value

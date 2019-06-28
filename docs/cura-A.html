@@ -41,7 +41,7 @@ This page describes the corrections done on files A1 to A6 while converting html
 
 <article>
 
-The full set of transformations can be executed with the command :
+The full set of transformations can be executed with the command :  
 <pre>php run-g5.php cura A all</pre>
 This is equivalent to :
 <pre>
@@ -53,22 +53,24 @@ php run-g5.php cura A legalTime
 </pre>
 
 <!-- ********************************************************************************* -->
-<h2>Profession codes</h2>
+<h2>raw2csv</h2>
+
+<!-- ************************************* -->
+<h3>Profession codes</h3>
 In some files of serie A, the precise profession codes are not associated to the records. This is possible thanks to the notices that are present on cura.free.fr pages.
 <br>These informations were included to the program (see constant <code>PROFESSIONS_DETAILS</code> in the code) and in the resulting csv files, each record is associated to its precise profession.
 <br>
 <br>A list of profession codes used in the generated files is listed on <a href="output-format.html#profession-codes">this page</a>.
 
 
-<!-- ********************************************************************************* -->
-<h2>Names</h2>
-
+<!-- ************************************* -->
+<h3>Names</h3>
 The purpose is to obtain records containing both precise birth data and the name of the person.
 <br>
 <br>To summarize, this can be partially done by program from cura.free.fr web pages ; some cases can be fixed by human using Gauquelin 1955 book. Other cases could be fixed using the original booklets "BIRTH AND PLANETARY DATA GATHERED SINCE 1949" published by Gauquelin. I don't have these booklets, and didn't include this information in current restoration.
 
-<!-- ************************************* -->
-<h3>Data of cura.free.fr</h3>
+<!-- ****************** -->
+<h4>Data of cura.free.fr</h4>
 
 On cura.free.fr, each file from serie A is available from two distinct pages :
 <ul class="simple">
@@ -89,8 +91,8 @@ I supposed (but didn't check by program) that these two lists are equivalent, an
 I used the pages containing the lists with names (ex : 902gdA1y.html).
 <br>In these pages, the list with precise birth data seems to correspond to the list with names in chronological order. But a check done by program (<code>tools/check-serieA-names.php</code>) shows that they differ (lists with name contain less persons), and can't be used for a simple merge.
 
-<!-- ************************************* -->
-<h3>Merge lists</h3>
+<!-- ****************** -->
+<h4>Merge lists</h4>
 
 The program must merge the two lists. Unfortunately, these 2 lists don't share a common unique identifier which would permit to merge without ambiguity.
 <br>These two lists have in common the birth day. That's what I used to perform the merge, but a given birth day can correspond to several persons. In this case, ambiguity remains, and can't be solved by program.
@@ -154,15 +156,15 @@ The program must merge the two lists. Unfortunately, these 2 lists don't share a
 </table>
 
 
-<!-- ********************************************************************************* -->
-<h2>Small errors</h2>
-
 <!-- ************************************* -->
-<h3>902gdA1y.html</h3>
+<h3>Small errors</h3>
+
+<!-- ****************** -->
+<h4>902gdA1y.html</h4>
 
 <ul class="spaced">
     <li>
-        Incoherence between the two lists for one record :
+        in page <code>902gdA1y.html</code>, there is an incoherence between the two lists for one record :
         <pre>1817	3	25	C	185	F	5	16	24	0	48N 0	4W 6	29	CONCARNEAU</pre>
         and
         <pre>1817	3	5	Lebris Jean</pre>
@@ -171,11 +173,31 @@ The program must merge the two lists. Unfortunately, these 2 lists don't share a
         <br>From "Traité de l'heure dans le monde", TU = HLO ;  4°6' = 00:16:24 => hour = 05:16:24
         <br>The first line is exact, the second line must be replaced by
         <pre>1817	3	25	Lebris Jean</pre>
-        This was fixed in the code.
+        This fix was included in the code of <code>raw2csv</code>.
     </li>
-
 </ul>
 
+
+<!-- ********************************************************************************* -->
+<h2>ertel2csv</h2>
+For file A1, the file containing Ertel's list of sportsmen is used to compute the names that <code>raw2csv</code> couldn't compute,
+<br>This leads to a restoration of names of 100 % for file A1 ; see <a href="newalch-ertel4391.html">page on Ertel 4391</a>, paragraph "Fix cura A1 names".
+
+
+<!-- ********************************************************************************* -->
+<h2>g55 edited2csv</h2>
+The restoration of 1955 group "570 sportifs" is used to better family and given names as well as place names.
+<br>This step must be performed after <code>ertel2csv</code>, as name spelling in Gauquelin 1955 book is better.
+
+
+<!-- ********************************************************************************* -->
+<h2>legalTime</h2>
+This step partially fixes the problem described in <a href="time.html">the page about time</a>.
+<br>Legal birth time is done only for France, for cases that cannot generate ambiguity.
+<br>This can be bettered by implementing non- ambiguous cases for other countries present in A files.
+
+
+<!-- ********************************************************************************* -->
 
 </article>
 </div><!-- end class="main" -->

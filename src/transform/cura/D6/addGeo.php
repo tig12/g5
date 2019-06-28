@@ -1,10 +1,10 @@
 <?php
 /********************************************************************************
-    Add missing geographic informations to 5-tmp/cura-csv/D6.csv.
+    Add missing geographic informations to 5-cura-csv/D6.csv.
     Uses geonames.org web service.
     
-    This code operates on file 5-tmp/geonames/D6.csv
-    And then copies info from this file to 5-tmp/cura-csv/D6.csv
+    This code operates on file 5-geonames/D6.csv
+    And then copies info from this file to 5-cura-csv/D6.csv
     This is done to prevent accidental erasure of previous calls to geonames web service : 
         - call raw2csv
         - call addGeo
