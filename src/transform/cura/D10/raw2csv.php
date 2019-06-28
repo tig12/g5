@@ -57,7 +57,7 @@ class raw2csv implements Command{
         $csv = '';
         // fields in the resulting csv
         $csv = implode(G5::CSV_SEP, D10::FIELDNAMES) . "\n";
-        // Fix problems in cura data
+        // Fix problems of whitespace + missing lg lat in cura html page
         $m[2] = preg_replace(
             "/112.*?Hardin County,\s+TN/",
             "112\tBlanton Leonard\tPO\t10\t4\t1930\t21:30\t6h\t35N11\t88W10\tHardin County, TN",     

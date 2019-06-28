@@ -30,22 +30,21 @@
 <header>
 <h1>Cura - file D10</h1>
 <div class="intro">
+This file is almost perfect : it contains name, legal birth time, timezone offset, birth place, so importing it is just a matter of formatting.
+<br>For sportsmen, precise sport code is not specified and couldn't be computed.
+<br>Page <code>902gdD10.html</code> also contains a list of charcter traits that is not handled by the program.
 </div>
 </header>
 
 <article>
-The code that performs this step is located in <code>src/SerieD10.php</code>
-<br>
-<br>To convert file D10, run :
-<pre>php run-gauquelin5.php D10 raw2csv</pre>
+
+<br>D10 import contains only one step, so
+<pre>php run-g5.php cura D10 all</pre>
+is equivalent to
+<pre>php run-g5.php cura D10 raw2csv</pre>
 
 <!-- ********************************************************************************* -->
-<h2>Names</h2>
-
-For this file, it was possible to split family names and given names
-
-<!-- ********************************************************************************* -->
-<h2>Particular cases</h2>
+<h2>Small errors</h2>
 There is one record without birth time that was excluded from the resulting file :
 <pre>1098!	Rose Peter		SP	14	4	1941	-----	5h	39N6	84W31	Cincinnati, OH</pre>
 
@@ -54,7 +53,9 @@ Two lines miss longitude and latitude :
 493	Good Robert		AC	21	5	1922	06:00	6h			Grosby, MN
 658	Jeter Robert		SP	9	5	1937	08:00	5h			Union, SC
 </pre>
-13 lines had to be fixed because of bad formatting (contain white spaces instead of tabs) :
+These lines were fixed in the code of <code>raw2csv</code> and included in the resulting file.
+<br>
+<br>13 lines had to be fixed because of bad formatting (contain white spaces instead of tabs) :
 <pre>
 112	Blanton Leonard		PO	10	4	1930	21:30	6h	35N11   88W10	Hardin County, TN	
 192	Caldwell Philip		EX	27	1	1920	08:00	5h	39N16   83W09	Bourneville, OH	
@@ -70,8 +71,7 @@ Two lines miss longitude and latitude :
 1218	Staiger John		EX	20	3	1910	19:00	6h	44N43   88W09   Chase, WI		
 1250	Sweeney Walter		SP	18	4	1941	09:20	5h	42N14   70W48   Cohasset, MA		
 </pre>
-
-These 15 particular cases were fixed in the code, and included in the resulting file.
+These lines were also fixed in the code of <code>raw2csv</code> and included in the resulting file.
 
 </article>
 </div><!-- end class="main" -->

@@ -36,7 +36,7 @@ class addGeo implements Command{
         
     // ******************************************************
     /**
-        Add missing geographic informations to 5-tmp/geonames/D6.csv and 5-tmp/cura-csv/D6.csv.
+        Add missing geographic informations to 5-geonames/D6.csv and 5-tmp/cura-csv/D6.csv.
     **/
     public static function execute($params=[]): string{
         
@@ -108,8 +108,8 @@ class addGeo implements Command{
                 // 0 'NUM', 1 'NAME', 2 'DATE', 3 'PLACE', 4 'CY', 5 'GEOID', 6 'LG', 7 'LAT'
             }
             // Write back the csv 
-            file_put_contents($geofile, $res_geo); // file in 5-tmp/geonames
-            self::geo2csv($geofile, $csvfile); // copy results back in 5-tmp/cura-csv/
+            file_put_contents($geofile, $res_geo); // file in 5-geonames
+            self::geo2csv($geofile, $csvfile); // copy results back in 5-cura-csv/
             dosleep::execute(1.5); // keep cool with geonames.org web service
         } // end while true
         
@@ -123,10 +123,10 @@ class addGeo implements Command{
     
     // ******************************************************
     /**
-        Transfers geo informations from 5-tmp/geonames/D6.csv to 5-tmp/cura-csv/D6.csv
+        Transfers geo informations from 5-geonames/D6.csv to 5-cura-csv/D6.csv
         Replaces copy($geofile, $csvfile) to transfer only relevant columns.
-        This function became necessary when modifs in raw2csv rendered 5-tmp/geonames/D6.csv column names obsolete
-        and not compatible with new version of 5-tmp/cura-csv/D6.csv
+        This function became necessary when modifs in raw2csv rendered 5-geonames/D6.csv column names obsolete
+        and not compatible with new version of 5-cura-csv/D6.csv
         
     **/
     private static function geo2csv($geofile, $csvfile){

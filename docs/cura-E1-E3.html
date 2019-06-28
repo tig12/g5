@@ -30,20 +30,21 @@
 <header>
 <h1>Cura - files E1 and E3</h1>
 <div class="intro">
+Files <code>902gdE1.html</code> and <code>902gdE3.html</code> share the same format and can be handled by the same code.
+<br>Each page contains two lists, one with birth data and one with the position of the Moon, Venus, Mars, Jupiter and Saturn in the 36 Gauquelin Sectors. These two lists can be merged easily, and planetary positions are included in the resulting file.
 </div>
 </header>
 
 <article>
 
-Files <code>902gdE1.html</code> and <code>902gdE3.html</code> share the same format and can be handled by the same code.
-<br>The code that performs this step is located in <code>src/SerieE1_E3.php</code>
-<br>
-<br>To perform the transformations, run :
-<pre>
-php run-gauquelin5.php E1 raw2csv
-php run-gauquelin5.php E3 raw2csv
-</pre>
+<br>E1 and E3 import contains only one step, so
+<pre>php run-g5.php cura E1 all</pre>
+is equivalent to
+<pre>php run-g5.php cura E1 raw2csv</pre>
+(identic for E3)
 
+<br>
+<br>
 The output of the program can be tweaked using settings in <code>config.yml</code> ; see section <code>raw2csv - report</code> for full documentation.
 
 <!-- 
@@ -67,7 +68,7 @@ The main problem of files E1 and E3 is that the timezone offset is not given. It
 <br>
 <br>This gives partial results :
 
-<pre>php run-gauquelin5.php E1 raw2csv</pre>
+<pre>php run-g5.php cura E1 raw2csv</pre>
 <pre>
 Importing E1
 2153 lines parsed
@@ -76,7 +77,7 @@ Importing E1
 1540 persons stored precisely (71.53 %)
 </pre>
 
-<pre>php run-gauquelin5.php E3 raw2csv</pre>
+<pre>php run-g5.php cura E3 raw2csv</pre>
 <pre>
 Importing E3
 1539 lines parsed

@@ -30,7 +30,8 @@
 <header>
 <h1>Cura - file D6</h1>
 <div class="intro">
-The main problem of page <code>902gdD6.html</code> is that it contains neither place name nor country. So it is impossible to compute timezone offset without computation. Country restoration is done using reverse geocoding. This also permits to compute place names, but does not always give the exact birth place. This restoration needs to be bettered, birth place restoration is currently not included in the resulting file.
+The main problem of page <code>902gdD6.html</code> is that it contains neither place name nor country. So it is impossible to compute timezone offset without restoration. Country restoration is done using reverse geocoding. This also permits to compute place names, but does not always give the exact birth place. This restoration needs to be bettered, birth place restoration is currently not included in the resulting file.
+<br>Computation of timezone offset is also possible but hasn't been coded yet.
 </div>
 </header>
 
@@ -41,41 +42,26 @@ The full set of transformations can be executed with the command :
 This is equivalent to :
 <pre>
 php run-g5.php cura D6 raw2csv
-php run-g5.php cura A legalTime
+php run-g5.php cura D6 addGeo
 </pre>
 
 <!-- ********************************************************************************* -->
 <h2>raw2csv</h2>
-<ul class="margin-top spaced">
-    <li>
-        The first step copies and reformat the informations of <code>902gdD6.html</code> to a csv file in directory <code>2-cura-csv</code>.
-        <br>This is done running :
-        <pre>php run-gauquelin5.php D6 raw2csv</pre>
-    </li>
-    
-    <li>
-        The second step computes place name, country code and timezone offset.
-        <br>It can be stopped and started again without re-calling geonames.org web service for records that have already been computed.
-        <br>This is done running :
-        <pre>php run-gauquelin5.php D6 computeGeo</pre>
-        For each record, the program loads the csv file, looks at the first record missing geo information, calls the web service, computes the informations and writes again the csv file on disk. So it is possible to stop execution without loosing the information retrieved from geonames.org.
-        <br>Reverse geocoding gave a result for all records except for <code>356 Ruiz Bernardo</code> (see below).
-    </li>
-</ul>
-
-
-
-<!-- ********************************************************************************* -->
-<h2>Small errors</h2>
+This step copies and reformat the informations of <code>902gdD6.html</code> to a csv file in directory <code>2-cura-csv</code>.
 
 <ul class="spaced">
     <li>
         Notice of page <code>902gdD6.html</code> says the file contains 450 persons, but it contains in fact 449 (NUM 234 is missing).
+        <br>So the generated file contains 449 persons.
     </li>
     
     <li>
         For record <code>356 Ruiz Bernardo</code>, a check on <a href="https://en.wikipedia.org/wiki/Bernardo_Ruiz">wikipedia</a> shows that he is born in Orihuela, ES, which shows that there is an error in cura file (latitude should be <code>38N05</code> instead of <code>36N05</code>).
         <br>This was corrected manually in the resuting file. The correction was added to step <code>raw2csv()</code> in order to take it into account in case of a new execution.
+    </li>
+    
+    <li>
+        Fixes on names are also included in <code>raw2csv</code> code.
     </li>
     
     <!-- 
@@ -88,7 +74,23 @@ php run-g5.php cura A legalTime
 
 
 <!-- ********************************************************************************* -->
-<h2>Tests</h2>
+<h2>addGeo</h2>
+
+The second step computes country code and might be bettered to also compute place nameplace name.
+<br>The principle is to call geonames.org web service to perform reverse geocoding (compute place from longitude and latitude).
+<br>In practice, a new directory was added in config : <code>5-geonames</code>, located by default in <code>data/5-tmp/geonames</code>.
+<br>For each row of D6, <code>addGeo</code> :
+<ul>
+    <li>Checks in <code>5-geonames/D6.csv</code> if geocoding was already computed.</li>
+    <li>If not, it calls geonames.org web service, add informations to <code>5-geonames/D6.csv</code> and rewrites this updated file on disk.</li>
+    <li>Transfers the informations of <code>5-geonames/D6.csv</code> to <code>5-tmp/D6.csv</code></li>
+</ul>
+
+Rewriting <code>5-geonames/D6.csv</code> after each call to geonames.org permits to stop the execution and start it again without re-calling geonames.org web service for records that have already been computed.
+<br>Reverse geocoding gave a result for all records except for <code>356 Ruiz Bernardo</code> (see correction above).
+
+<!-- ************************************* -->
+<h3>Tests</h3>
 
 The purpose is to check the cities given by geonames.org web service.
 Some examples are given in <code>902gdD6.html</code>, which permit a first estimation.
@@ -121,7 +123,7 @@ Joop (Gerardus) ZOETEMELK, born 3 DEC 1946, 17:15, in The Hague (Ne)
 
 All cities but one differ !
 <table class="wikitable margin">
-    <tr><th>Person</th><th>City given<br> by cura</th><th>City obtained<br> from geonames.org</th><th>Comment</th></tr>
+    <tr><th>Person</th><th>City given<br> by cura</th><th>City obtained<br> from geonames.org</th><th>Comments</th></tr>
     <tr>
         <td>Felice GIMONDI</td>
         <td>Sedrina</td>
@@ -185,8 +187,12 @@ From these examples, it seems that
     <li>Coordinates contained in cura files are not precise enough to reach the good birth place using geonames.org reverse geocoding.</li>
 </ul>
 But this process has the interest to restore the country, giving the ability to compute the timezone offset.
-<br>That's why these imperfect results were kept in the generated files.
-<br>But a better restoration process needs to be found.
+
+
+<!-- ********************************************************************************* -->
+<!-- 
+<h2>offset</h2>
+-->
 
 
 </article>
