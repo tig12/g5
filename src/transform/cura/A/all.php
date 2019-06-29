@@ -18,7 +18,9 @@ class all implements Command{
     /** 
     Performs all actions to build file(s) of data/5-tmp/cura-csv/A*.csv
         Called by : php run-g5.php cura A1 all     # A1 or A, A2 ... A6
-        @param $params  array with 2 elements : datafile and command
+        @param $params  array with 2 elements :
+                        - the datafile (ex "A1")
+                        - the command : "run"
         @return         Empty string ; echoes the commands' reports
     **/
     public static function execute($params=[]): string{
@@ -30,7 +32,9 @@ class all implements Command{
         $datafile = $params[0];
         
         echo "\n=== Execute raw2csv on $datafile ===\n";
-        echo raw2csv::execute($params);
+        $params_raw2csv = $params;
+        $params_raw2csv[] = 'small';
+        echo raw2csv::execute($params_raw2csv);
         
         if($datafile == 'A1'){
             echo "\n=== execute ertel2csv on $datafile ===\n";

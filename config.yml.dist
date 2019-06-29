@@ -39,27 +39,6 @@ postgresql:
   dbuser: pg_username
   dbpassword: pg_password
   dbname: pg_dbname
-
-#
-# Settings specific to step raw2csv
-#
-raw2csv:
-  
-  report:
-    # For serie A, possible values = full or small
-    A1: small
-    A2: small
-    A3: small
-    A4: small
-    A5: small
-    A6: small
-    # For serie E, possible values = full, small, tz, geo
-    # tz : echoes the records for which timezone information is missing
-    # geo : echoes the records for which geonames matching couldn't be done
-    # full : equivalent to tz and geo
-    # small : echoes only global results
-    E1: small
-    E3: small
     
 #
 # Settings specific to Gauquelin 1955 code

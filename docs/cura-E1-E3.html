@@ -37,15 +37,29 @@ Files <code>902gdE1.html</code> and <code>902gdE3.html</code> share the same for
 
 <article>
 
-<br>E1 and E3 import contains only one step, so
-<pre>php run-g5.php cura E1 all</pre>
-is equivalent to
-<pre>php run-g5.php cura E1 raw2csv</pre>
-(identic for E3)
+To import these files, do :
+<pre>
+php run-g5.php cura E3 all
+php run-g5.php cura E1 all
+</pre>
+As E1 and E3 import contains only one step, this is equivalent to :
+<pre>
+php run-g5.php cura E1 raw2csv small
+php run-g5.php cura E3 raw2csv small
+</pre>
 
-<br>
-<br>
-The output of the program can be tweaked using settings in <code>config.yml</code> ; see section <code>raw2csv - report</code> for full documentation.
+<!-- ********************************************************************************* -->
+<h2>raw2csv</h2>
+
+This command needs a parameter to indicate what it should print :
+<pre>php run-g5.php cura E1 raw2csv</pre>
+<pre>
+MISSING PARAMETER : raw2csv needs a parameter to specify which output it displays. Can be :
+  small : echoes only global results
+  tz : echoes the records for which timezone information is missing
+  geo : echoes the records for which geonames matching couldn't be done
+  full : equivalent to tz and geo
+</pre>
 
 <!-- 
 Check the meaning of birth time in file E1 and E3
@@ -62,8 +76,8 @@ Birth hour mentionned = 14:00 ; same as birth hour of file E3
 Concluded that birth mentioned in files E1 and E3 are expressed in civil time
 (conclusion coherent with the notice)
 -->
-<!-- ********************************************************************************* -->
-<h2>Place</h2>
+<!-- ************************************* -->
+<h3>Place</h3>
 The main problem of files E1 and E3 is that the timezone offset is not given. It can be computed from the place and the date, which means that the place must be identified to be linked with a timezone. This is done through geonames.org and included in the resulting file. 
 <br>
 <br>This gives partial results :
@@ -91,22 +105,22 @@ The unmatched cases come from two reasons :
 <br>- Timezone computation refuses to compute unclear cases : during WW1, some parts of France were sometimes french, sometimes german, and timezone computation refuses to handle these cases.
 
 
-<!-- ********************************************************************************* -->
-<h2>Names</h2>
-For the moment, names were not transformed. For some records, NAME column of cura files contains a mix of several several information : sometimes the maiden name of a woman, or the public pseudonym of a person. Clearing out the situation can't be done by program.
+<!-- ************************************* -->
+<h3>Names</h3>
+For the moment, names were not transformed. For some records, NAME column of cura files contains a mix of several information : sometimes the maiden name of a woman, or the public pseudonym of a person. Clearing out the situation can't be done by program.
 
-
-<!-- ********************************************************************************* -->
-<h2>Planetary sectors</h2>
-By default, the program include columns with planetary sectors in the resulting files.
-
-
-<!-- ********************************************************************************* -->
-<h2>Small errors</h2>
-Cura files contain several typos.
 
 <!-- ************************************* -->
-<h3>902gdE1.html</h3>
+<h3>Planetary sectors</h3>
+The program include columns with planetary sectors in the resulting files.
+
+
+<!-- ************************************* -->
+<h3>Small errors</h3>
+Cura files contain several typos.
+
+<!-- ****************** -->
+<h4>Errors in 902gdE1.html</h4>
 
 <ul class="spaced">
     <li>
@@ -125,7 +139,7 @@ Cura files contain several typos.
     <li>
         Typos in the names of 27 persons (O are replaced by zero ; A by 3 ; S by 5, G by 6 ; B by 8).
         <br>These typos are present in both lists (list with birth data and list with sectors).
-        <br>These errors are corrected by the program.
+        <br>These errors are fixed in <code>raw2csv</code> code.
         <details>
         <summary>Full list of typos</summary>
 <pre>
@@ -162,8 +176,8 @@ Cura files contain several typos.
 </ul>
 
 
-<!-- ************************************* -->
-<h3>902gdE3.html</h3>
+<!-- ****************** -->
+<h4>Errors in 902gdE3.html</h4>
 
 <ul class="spaced">
     <li>
@@ -199,7 +213,7 @@ Cura files contain several typos.
 <aside class="left">                                                                                                                                              
 <ul>
     <li class="bold"><a href="index.html">Gauquelin5 home</a></li>
-    <li><a href="program-usage.html">Program usage</a></li>
+    <li><a href="usage.html">Program usage</a></li>
     <li><a href="output-format.html">Output format</a></li>
     
     <li>

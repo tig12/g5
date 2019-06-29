@@ -27,8 +27,10 @@ class all implements Command{
             return "INVALID PARAMETER : " . $params[2] . " - all doesn't need this parameter\n";
         }
         
+        $params_raw2csv = $params;
+        $params_raw2csv[] = 'small';
         echo "\n=== execute raw2csv on {$params[0]} ===\n";
-        echo raw2csv::execute($params);
+        echo raw2csv::execute($params_raw2csv);
         
         return '';
     }

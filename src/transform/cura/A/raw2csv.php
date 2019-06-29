@@ -362,17 +362,31 @@ class raw2csv implements Command{
         So merge is done using birthdate.
         Merge is not complete because of doublons (persons born the same day).
         
-        @param  $params Array containing one element : a string identifying what is processed (ex : 'A1')
+        @param  $params Array containing 3 elements :
+                        - a string identifying what is processed (ex : 'A1')
+                        - "raw2csv" (useless here)
+                        - The report type. Can be "small" or "full"
         @return String report
         @throws Exception if unable to parse
     **/
     public static function execute($params=[]): string{
         
-        if(count($params) > 2){
-            return "INVALID PARAMETER : " . $params[2] . " - raw2csv doesn't need this parameter\n";
+        if(count($params) > 3){
+            return "INVALID PARAMETER : " . $params[3] . " - raw2csv doesn't need this parameter\n";
+        }
+        $msg = "raw2csv needs a parameter to specify which output it displays. Can be :\n"
+             . "  small : echoes only global results\n"
+             . "  full : prints the details of problematic rows\n";
+        if(count($params) < 3){
+            return "MISSING PARAMETER : $msg";
+        }
+        if(!in_array($params[2], ['small', 'full'])){
+            return "INVALID PARAMETER : $msg";
         }
         
+        $report_type = $params[2];
         $datafile = $params[0];
+        
         $report =  "--- Importing file $datafile ---\n";
         $raw = Cura::readHtmlFile($datafile);
         $file_datafile = Cura::rawFilename($datafile);
@@ -523,7 +537,6 @@ class raw2csv implements Command{
         //
         // report
         //
-        $report_type = Config::$data['raw2csv']['report'][$datafile];
         $n_correction_1955 = isset(self::CORRECTIONS_1955[$datafile]) ? count(self::CORRECTIONS_1955[$datafile]) : 0;
         $n_bad = $n1 + $n2 + $n3 - $n_ok_fix - $n1_fix - $n2_fix;
         $n_good = $n_ok + $n_ok_fix + $n1_fix + $n2_fix;

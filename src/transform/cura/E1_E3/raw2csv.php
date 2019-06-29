@@ -58,21 +58,31 @@ class raw2csv implements Command{
     /** 
         Parses one file E1 or E3 and stores it in a csv file
         The resulting csv file contains informations of the 2 lists
-        @param  $datafile Must be 'E1' or 'E3'
+        @param  $params Array containing 3 elements :
+                        - a string identifying what is processed (ex : 'E1')
+                        - "raw2csv" (useless here)
+                        - The report type. Can be "small", "full", "tz" or "geo"
         @return report
     **/
     public static function execute($params=[]): string{
         
-        if(count($params) > 2){
-            return "INVALID PARAMETER : " . $params[2] . " - raw2csv doesn't need this parameter\n";
+        if(count($params) > 3){
+            return "INVALID PARAMETER : " . $params[3] . " - raw2csv doesn't need this parameter\n";
         }
-        
+        $msg = "raw2csv needs a parameter to specify which output it displays. Can be :\n"
+             . "  small : echoes only global results\n"
+             . "  tz : echoes the records for which timezone information is missing\n"
+             . "  geo : echoes the records for which geonames matching couldn't be done\n"
+             . "  full : equivalent to tz and geo\n";
+        if(count($params) < 3){
+            return "MISSING PARAMETER : $msg";
+        }
+        if(!in_array($params[2], ['small', 'full', 'tz', 'geo'])){
+            return "INVALID PARAMETER : $msg";
+        }
+        $report_type = $params[2];
         $datafile = $params[0];
-        if($datafile != 'E1' && $datafile != 'E3'){
-            throw new \Exception("Bad value for parameter \$datafile : $datafile ; must be 'E1' or 'E3'");
-        }
-        // config - todo : check validity of values put in config
-        $report_type = Config::$data['raw2csv']['report'][$datafile]; // 'full', 'small', 'tz' or 'geo'
+
         $do_report_geo = $do_report_tz = false;
         if($report_type == 'full' || $report_type == 'geo'){
             $do_report_geo = true;
@@ -95,7 +105,7 @@ class raw2csv implements Command{
             throw new \Exception($datafile . " - Unable to parse $file - first list");
         }
         $lines = explode("\n", $m[2]);
-        // to fix typos : O are replaced by zero ; A by 3 ; S by 5, G by 6 ; B by 8
+        // to fix typos : in the html, O are replaced by zero ; A by 3 ; S by 5, G by 6 ; B by 8
         $fix_names = ['0'=>'O', '3'=>'A', '5'=>'S', '6'=>'G', '8'=>'B'];
         foreach($lines as $line){
             self::$n_total++;
@@ -115,7 +125,7 @@ class raw2csv implements Command{
             // match place to geonames
             [$country, $adm2, $place_name, $geoid, $lg, $lat] = self::compute_geo($CITY, $COD, $date);
             if($lg == '' && $do_report_geo){
-                $report .= 'Geonames not matched for ' . $new['NUM'] . ' ' . $new['NAME'] . ' : ' . $CITY . ' ' . $COD . "\n";
+                $report .= 'Geonames not matched for ' . $new['NUM'] . ' ' . $new['FNAME'] . ' ' . $new['GNAME'] . ' : ' . $CITY . ' ' . $COD . "\n";
             }
             // compute timezone
             if($lg != ''){
@@ -123,7 +133,7 @@ class raw2csv implements Command{
                 if($err){
                     self::$n_missing_timezone++;
                     if($do_report_tz){
-                        $report .=  'TZ not computed for ' . $new['NUM'] . ' ' . $new['NAME'] . ' : ' . $err . "\n";
+                        $report .=  'TZ not computed for ' . $new['NUM'] . ' ' . $new['FNAME'] . ' ' . $new['GNAME'] . ' : ' . $err . "\n";
                     }
                 }
                 else{

@@ -45,7 +45,7 @@ The full set of transformations can be executed with the command :
 <pre>php run-g5.php cura A all</pre>
 This is equivalent to :
 <pre>
-php run-g5.php cura A raw2csv
+php run-g5.php cura A raw2csv small
 php run-g5.php cura A1 ertel2csv update             # only for A1
 php run-g5.php g55 570SPO edited2csv place update   # only for A1
 php run-g5.php g55 570SPO edited2csv name update    # only for A1
@@ -54,6 +54,14 @@ php run-g5.php cura A legalTime
 
 <!-- ********************************************************************************* -->
 <h2>raw2csv</h2>
+
+This command needs a parameter to indicate what it should print :
+<pre>php run-g5.php cura A raw2csv</pre>
+<pre>
+MISSING PARAMETER : raw2csv needs a parameter to specify which output it displays. Can be :
+  small : echoes only global results
+  full : prints the details of problematic rows
+</pre>
 
 <!-- ************************************* -->
 <h3>Profession codes</h3>
@@ -67,7 +75,7 @@ In some files of serie A, the precise profession codes are not associated to the
 <h3>Names</h3>
 The purpose is to obtain records containing both precise birth data and the name of the person.
 <br>
-<br>To summarize, this can be partially done by program from cura.free.fr web pages ; some cases can be fixed by human using Gauquelin 1955 book. Other cases could be fixed using the original booklets "BIRTH AND PLANETARY DATA GATHERED SINCE 1949" published by Gauquelin. I don't have these booklets, and didn't include this information in current restoration.
+<br>To summarize, this can be partially done by program from cura.free.fr web pages ; some cases can be fixed by human using Gauquelin 1955 book. Other cases could be fixed using the original booklets "BIRTH AND PLANETARY DATA GATHERED SINCE 1949" published by Gauquelin, but I don't have these booklets.
 
 <!-- ****************** -->
 <h4>Data of cura.free.fr</h4>
@@ -209,7 +217,7 @@ This step partially fixes the problem described in <a href="time.html">the page 
 <aside class="left">                                                                                                                                              
 <ul>
     <li class="bold"><a href="index.html">Gauquelin5 home</a></li>
-    <li><a href="program-usage.html">Program usage</a></li>
+    <li><a href="usage.html">Program usage</a></li>
     <li><a href="output-format.html">Output format</a></li>
     
     <li>
