@@ -68,9 +68,12 @@ class marked2generated implements Command {
         //
         // sort $res
         //
+        // $sort_field : necessary because "570 sportif" is listed by sport in Gauquelin book
+        // Other fields are sorted alphabetically
+        // $sort_field permits to have a convenient list to compare with the book.
         // here simplification : files in 5-tmp/cura-csv/
         // have first field = NUM and second field = FNAME
-        $sort_field = (Config::$data['g55']['sort'][$groupCode] == 'NUM' ? 0 : 1);
+        $sort_field = ($groupCode == '570SPO' ? 0 : 1);
         $res = sortByKey::compute($res, $sort_field);
         $report .= '  ' . count($res) . " persons stored\n";
         // generate output

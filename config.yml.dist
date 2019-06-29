@@ -25,6 +25,7 @@ dirs:
   9-cura-corrected:     data/9-output/datasets/cura-corrected
 
 # geoname.org parameters
+# only useful for the steps which call geonames.org web service
 # see http://www.geonames.org/login
 # and http://www.geonames.org/manageaccount
 geonames:
@@ -33,6 +34,7 @@ geonames:
   username: demo
 
 # postgresql parameters
+# only useful for the steps which use geonames.org data stored in a local database 
 postgresql: 
   dbhost: localhost
   dbport: 5432
@@ -40,22 +42,3 @@ postgresql:
   dbpassword: pg_password
   dbname: pg_dbname
     
-#
-# Settings specific to Gauquelin 1955 code
-#
-g55:
-  
-  # Sorting used in generated csv files
-  # used by g5\transform\g55\all\marked2generated
-  sort: 
-    576MED: FNAME
-    508MED: FNAME
-    570SPO: NUM
-    676MIL: FNAME
-    906PEI: FNAME
-    361PEI: FNAME
-    500ACT: FNAME
-    494DEP: FNAME
-    349SCI: FNAME
-    884PRE: FNAME
-  
