@@ -21,11 +21,11 @@
 ********************************************************************************/
 namespace g5\transform\g55\all;
 
-use g5\G5;
 use g5\Config;
+use g5\G5;
+use g5\transform\cura\Cura;
 use g5\patterns\Command;
 use g5\transform\g55\G55;
-use tiglib\arrays\csvAssociative;
 
 class edited2cura implements Command {
     
@@ -37,7 +37,7 @@ class edited2cura implements Command {
         'date',
         'name',
         'nocura',
-        'occupation',
+        'occu',
         'place',
     ];
     
@@ -51,7 +51,7 @@ class edited2cura implements Command {
                        - other parameters transmitted to the function implementing the command.
         @return report
     **/
-    public static function execute  ($params=[]): string{
+    public static function execute($params=[]): string{
         $possibleParams_str = implode(', ', self::POSSIBLE_PARAMS);
         if(count($params) < 3){
             return  "PARAMETER MISSING in g5\\transform\\cura\\A\\edited2cura\n"
@@ -66,81 +66,7 @@ class edited2cura implements Command {
         
         return self::$method($params);
     }
-    
-    // ******************************************************
-    /**
-        Auxiliary function
-        @return    Regular array containing the edited file in 3-g55-edited/
-    **/
-    private static function loadG55($file){
-        return csvAssociative::compute(Config::$data['dirs']['3-g55-edited'] . DS . $file . '.csv', G55::CSV_SEP_LIBREOFFICE);
-    }
 
-    // ******************************************************
-    /**
-        Auxiliary function
-        @return    Regular array containing the cura file in 5-cura-csv/
-    **/
-    private static function loadCura($file){
-        return csvAssociative::compute(Config::$data['dirs']['5-cura-csv'] . DS . $file . '.csv');
-    }
-
-    // ******************************************************
-    /**
-        Auxiliary function
-        @return    Associative array containing the cura file in 5-cura-csv/ ; keys = cura ids (NUM)
-    **/
-    private static function loadCuraNum($file){
-        $curaRows1 = self::loadCura($file);
-        $res = [];
-        foreach($curaRows1 as $row){
-            $res[$row['NUM']] = $row;
-        }
-        return $res;
-    }
-
-    // ******************************************************
-    /**
-        Auxiliary function
-        @return Array with 3 elements :
-                - A string identifying the cura file correspônding to the G55 group (like 'A1')
-                - An assoc. array containing the G55 data ; keys = cura ids (NUM)
-                - An assoc. array containing the cura data ; keys = cura ids (NUM)
-    **/
-    private static function prepare($g55file){
-        $g55Rows1 = self::loadG55($g55file);
-        
-        // find the corresponding cura file
-        // For a given G55 group, there is only one cura file
-        // It corresponds to the first origin different from 'G55'
-        foreach($g55Rows1 as $row){
-            if($row['ORIGIN'] != 'G55'){
-                $origin = $row['ORIGIN'];
-                break;
-            }
-        }
-        
-        $g55Rows = [];
-        foreach($g55Rows1 as $row){
-            if($row['ORIGIN'] != $origin){
-                continue;
-            }
-            $g55Rows[$row['NUM']] = $row;
-        }
-        
-        //$curaRows1 = csvAssociative::compute(Config::$data['dirs']['5-cura-csv'] . DS . $origin . '.csv');
-        $curaRows1 = self::loadCura($origin);
-        $curaRows = [];
-        foreach($curaRows1 as $row){
-            if(isset($g55Rows[$row['NUM']])){
-                $curaRows[$row['NUM']] = $row;
-            }
-        }
-        return [$origin, $g55Rows, $curaRows];;
-    }
-    
-    
-    
     // ******************************************************
     /**
         Action depending on the 4th parameter :
@@ -163,13 +89,13 @@ class edited2cura implements Command {
             return "WRONG USAGE - Useless parameter \"{$params[4]}\".\n";
         }
         
-        $g55File = $params[0];
+        $g55Group = $params[0];
         $action = $params[3];
         
-        [$origin, $g55Rows, $curaRows] = self::prepare($g55File);
+        [$origin, $g55Rows, $curaRows] = G55::prepare($g55Group);
         
         if($action == 'update'){
-            $curaFull = self::loadCuraNum($origin);
+            $curaFull = Cura::loadTmpCsv_num($origin);
         }
         $report = '';
         $N = 0;
@@ -196,7 +122,7 @@ class edited2cura implements Command {
                 $N++;
             }
         }                              
-        $report .= "$N differences on names between $g55File and $origin\n";
+        $report .= "$N differences on names between $g55Group and $origin\n";
         
         if($action == 'update'){
             $newCura = implode(G5::CSV_SEP, array_keys($curaFull[1])) . "\n";
@@ -234,13 +160,13 @@ class edited2cura implements Command {
             return "WRONG USAGE - Useless parameter \"{$params[4]}\".\n";
         }
         
-        $g55File = $params[0];
+        $g55Group = $params[0];
         $action = $params[3];
         
-        [$origin, $g55Rows, $curaRows] = self::prepare($g55File);
+        [$origin, $g55Rows, $curaRows] = G55::prepare($g55Group);
         
         if($action == 'update'){
-            $curaFull = self::loadCuraNum($origin);
+            $curaFull = Cura::loadTmpCsv_num($origin);
         }
         $report = '';
         $N = 0;
@@ -259,7 +185,7 @@ class edited2cura implements Command {
                 $N++;
             }
         }                              
-        $report .= "$N differences on place name between $g55File and $origin\n";
+        $report .= "$N differences on place name between $g55Group and $origin\n";
         
         if($action == 'update'){
             $newCura = implode(G5::CSV_SEP, array_keys($curaFull[1])) . "\n";
@@ -297,8 +223,8 @@ class edited2cura implements Command {
             return "WRONG USAGE - Useless parameter \"{$params[3]}\".\n";
         }
         
-        $g55File = $params[0];
-        [$origin, $g55Rows, $curaRows] = self::prepare($g55File);
+        $g55Group = $params[0];
+        [$origin, $g55Rows, $curaRows] = G55::prepare($g55Group);
         
         $report_hour = $report_day = '';
         $N_hour = $N_day = 0;
@@ -345,11 +271,11 @@ class edited2cura implements Command {
         if(count($params) > 3){
             return "WRONG USAGE - Useless parameter \"{$params[3]}\".\n";
         }
-        $g55File = $params[0];
+        $g55Group = $params[0];
         $res = '';
         $res .= "<table class=\"wikitable margin\">\n";
-        $res .= "    <tr><th>FAMILY</th><th>GIVEN</th><th>DAY</th><th>HOUR</th><th>PLACE</th><th>C2</th><th>CY</th><th>OCCU</th><th>NOTES</th>\n";
-        $g55rows = self::loadG55($g55File);
+        $res .= "    <tr><th>FAMILY</th><th>GIVEN</th><th>DAY</th><th>HOUR</th><th>PLACE</th><th>CY</th><th>C2</th><th>OCCU</th><th>NOTES</th>\n";
+        $g55rows = G55::loadG55Edited($g55Group);
         foreach($g55rows as $row){
             if($row['ORIGIN'] == 'G55'){
                 // all informations coming from paper book are stored in _55 columns
@@ -359,8 +285,8 @@ class edited2cura implements Command {
                 $res .= "        <td>{$row['DAY_55']}</td>\n";
                 $res .= "        <td>{$row['HOUR_55']}</td>\n";
                 $res .= "        <td>{$row['PLACE_55']}</td>\n";
-                $res .= "        <td>{$row['C2_55']}</td>\n";
                 $res .= "        <td>{$row['CY_55']}</td>\n";
+                $res .= "        <td>{$row['C2_55']}</td>\n";
                 $res .= "        <td>{$row['OCCU_55']}</td>\n";
                 $res .= "        <td>{$row['NOTES_55']}</td>\n";                                    
                 $res .= "    <tr>\n";
@@ -380,20 +306,20 @@ class edited2cura implements Command {
                 - "edited2cura" (useless here)
                 - "occupation" (useless here)
     **/
-    private static function execute_occupation($params): string{
+    private static function execute_occu($params): string{
         if(count($params) > 3){
             return "WRONG USAGE - Useless parameter \"{$params[3]}\".\n";
         }
-        $g55File = $params[0];
+        $g55Group = $params[0];
         $res = '';
         $res .= "<table class=\"wikitable margin\">\n";
         $res .= "    <tr><th>NUM</th><th>FAMILY</th><th>GIVEN</th><th>DATE</th><th>PLACE</th><th>OCCU<br>G55</th><th>OCCU<br>Cura</th>\n";
-        [$origin, $g55Rows, $curaRows] = self::prepare($g55File);
+        [$origin, $g55Rows, $curaRows] = G55::prepare($g55Group);
         $N = 0;
         foreach($g55Rows as $g55Row){
             $NUM = $g55Row['NUM'];
             if($g55Row['OCCU_55'] != ''){
-                $res .= "    <tr>\n";
+                $res .= '    ' . ($g55Row['OCCU_55'] == 'FEM' ? '<tr>' : '<tr class="bold">') . "\n";
                 $res .= "        <td>$NUM</td>\n";
                 $res .= "        <td>{$curaRows[$NUM]['FNAME']}</td>\n";
                 $res .= "        <td>{$curaRows[$NUM]['GNAME']}</td>\n";

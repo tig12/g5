@@ -31,17 +31,26 @@ class all implements Command{
                                                                                                                                                           
         $datafile = $params[0];
         
+        // php run-g5.php cura A raw2csv small
         echo "\n=== Execute raw2csv on $datafile ===\n";
         $params_raw2csv = $params;
         $params_raw2csv[] = 'small';
         echo raw2csv::execute($params_raw2csv);
         
         if($datafile == 'A1'){
+            // php run-g5.php cura A1 ertel2csv update
             echo "\n=== execute ertel2csv on $datafile ===\n";
             $params_ertel2csv = $params;
             $params_ertel2csv[] = 'update';
             echo ertel2csv::execute($params_ertel2csv);
-            
+        }
+        
+        // php run-g5.php cura A legalTime
+        echo "\n=== Execute legalTime on $datafile ===\n";
+        echo legalTime::execute($params);
+        
+        if($datafile == 'A1'){
+            // php run-g5.php g55 570SPO edited2csv place update
             echo "\n=== Correct place names on A1 from Gauquelin 1955 570SPO ===\n";
             $params_edited2cura = [
                 '570SPO',
@@ -51,13 +60,11 @@ class all implements Command{
             ];
             echo edited2cura::execute($params_edited2cura);
             
+            // php run-g5.php g55 570SPO edited2csv name update
             echo "\n=== Correct family and given names on A1 from Gauquelin 1955 570SPO ===\n";
             $params_edited2cura[2] = 'name';
             echo edited2cura::execute($params_edited2cura);
         }
-        
-        echo "\n=== Execute legalTime on $datafile ===\n";
-        echo legalTime::execute($params);
         
         return '';
     }

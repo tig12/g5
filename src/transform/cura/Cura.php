@@ -8,6 +8,7 @@
 namespace g5\transform\cura;
 
 use g5\Config;
+use tiglib\arrays\csvAssociative;
 
 class Cura{
     
@@ -37,7 +38,7 @@ class Cura{
         'A1' => 'A',
         'A2' => 'A',
         'A3' => 'A',
-        'A4' => 'A',
+        'A4' => 'A',                                                                             
         'A5' => 'A',
         'A6' => 'A',
         'D6' => 'D6',
@@ -45,6 +46,32 @@ class Cura{
         'E1' => 'E1_E3',
         'E3' => 'E1_E3',
     ];
+    
+    
+    // ******************************************************
+    /**
+        Auxiliary function
+        @param  $serie : a string like 'A1'
+        @return    Regular array containing the cura file in 5-cura-csv/
+    **/
+    public static function loadTmpCsv($serie){
+        return csvAssociative::compute(Config::$data['dirs']['5-cura-csv'] . DS . $serie . '.csv');
+    }
+
+    // ******************************************************
+    /**
+        Auxiliary function
+        @param  $serie : a string like 'A1'
+        @return    Associative array containing the cura file in 5-cura-csv/ ; keys = cura ids (NUM)
+    **/
+    public static function loadTmpCsv_num($serie){
+        $curaRows1 = self::loadCura($serie);
+        $res = [];
+        foreach($curaRows1 as $row){
+            $res[$row['NUM']] = $row;
+        }
+        return $res;
+    }
     
     // *****************************************
     /** 

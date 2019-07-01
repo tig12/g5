@@ -15,18 +15,7 @@ use tiglib\strings\slugify;
 use tiglib\timezone\offset;
 use tiglib\timezone\offset_fr;
 
-class edited2original implements Command {
-    
-    // *****************************************
-    /** 
-        @param $params Array containing 2 elements :
-                       - the group to generate (like '570SPO')
-                       - the name of this command (useless here)
-        @return report
-    **/
-    public static function execute($params=[]): string{
-echo "\n<pre>"; print_r($params); echo "</pre>\n"; exit;
-    }
+class genOrig implements Command {
     
     // *****************************************
     /** 
@@ -40,20 +29,20 @@ echo "\n<pre>"; print_r($params); echo "</pre>\n"; exit;
                        - the name of this command (useless here)
         @return report
     **/
-    public static function generateOriginal($serie){
+    public static function execute($params=[]): string{
         $src_dir = Config::$data['dirs']['3-g55-edited'];
         $dest_dir = Config::$data['dirs']['9-g55-original'];
         $files = glob($src_dir . DS . '*.csv');
         $generatedFields = [
-            'ORIGIN' => '',
+            'ORIG' => '',
             'NUM' => '',
-            'FAMILYNAME' => '',
-            'GIVENNAME' => '',
+            'FNAME' => '',
+            'GNAME' => '',
             'OCCU' => '',
-            'BIRTHDATE' => '',
-            'BIRTHPLACE' => '',
-            'COU' => '',
-            'ADM2' => '',
+            'DATE' => '',
+            'PLACE' => '',
+            'CY' => '',
+            'C2' => '',
             'GEOID' => '',
             'LG' => '',
             'LAT' => '',
