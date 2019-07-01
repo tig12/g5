@@ -53,7 +53,9 @@ The corrections use the columns added for human corrections of files in <code>3-
 The command
 <pre>php run-g5.php g55 570SPO edited2cura name list</pre>
 lists the differences between names of Cura A files and Gauquelin 1955 groups.
-<br>Random checks, comparing the names with wikipedia and other sources, show that Gauquelin names are globally better than Cura names (but Gauquelin 1955 names also contain errors - these are handled by the <code>finalize-csv</code> step of cura csv generation, see <a href="cura-A.html">the page about serie A</a>).
+<br>Random checks, comparing the names with wikipedia and other sources, show that Gauquelin names are globally better than Cura names (but Gauquelin 1955 names also contain errors.
+<!--  - these are handled by the <code>finalize-csv</code> step of cura csv generation, see <a href="cura-A.html">the page about serie A</a>) -->
+
 
 <pre>php run-g5.php g55 570SPO edited2cura name update</pre>
 is used to copy the contents of columns <code>GIVEN_55</code> and <code>FAMILY_55</code> to the files of <code>5-cura-csv/</code>.
@@ -74,7 +76,36 @@ This step is informative only, does not modify files of <code>3-g55-edited/</cod
 <br>The command
 <pre>php run-g5.php g55 570SPO edited2cura date</pre>
 lists the differences between dates of Cura A files and Gauquelin 1955 groups.
-<br>This permits to check the step <code>legalTime</code> of Cura restoration ; see <a href="cura-A.html">the page about serie A</a> for details.
+<br>This command doesn't consider timezone offset, only compares days and hours.
+
+<ul class="spaced margin-top">
+    <li>
+        Some lines can be explained by legal time restoration in serie A.
+    </li>
+    <li>
+        Some lines may indicate a bug in the code of restoration :
+<pre>
+                                     cura  | g55
+883 CYC 1884-04-07 Seres Georges     21:04 | 21:00
+1934 RUG 1890-04-22 Lerou Roger      22:55 | 23:00
+2044 TEN 1886-12-12 Blanchy François 08:55 | 09:00
+2083 TIR 1876-05-29 Parmentier André 03:55 | 04:00
+</pre>
+    </li>
+    <li>
+        Some lines show real differences between Cura files and Gauquelin 1955 book :
+<pre>
+                                 cura  | g55
+different hours :
+688 BOX 1904-05-29 Thil Marcel   22:00 | 07:00
+different days :
+36 ATH El Mabrouk Mohamed   1928-10-27 | 1928-10-17
+595 BOX Cuillieres René     1929-07-22 | 1929-07-12
+1976 RUG Puig-Aubert Henri  1924-03-24 | 1925-03-24
+1999 RUG Terreau Maurice    1923-01-03 | 1923-01-30
+</pre>
+    </li>
+</ul>
 
 <!-- ********************************************************************************* -->
 <h2>Informations about the group "570 sportifs"</h2>

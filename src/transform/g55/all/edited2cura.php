@@ -51,7 +51,7 @@ class edited2cura implements Command {
                        - other parameters transmitted to the function implementing the command.
         @return report
     **/
-    public static function execute($params=[]): string{
+    public static function execute  ($params=[]): string{
         $possibleParams_str = implode(', ', self::POSSIBLE_PARAMS);
         if(count($params) < 3){
             return  "PARAMETER MISSING in g5\\transform\\cura\\A\\edited2cura\n"
@@ -278,23 +278,56 @@ class edited2cura implements Command {
     // ******************************************************
     /**
         Echoes the lines where G55 date (day or time) is different from cura.
-    **/
-    private static function execute_date($g55File): string{
-// not finished
+        @param  $params Array containing 3 strings transmitted by execute() :
+                - The G55 file to process
+                - "edited2cura" (useless here)
+                - "date" (useless here)
+        Results : real differences in hour between cura and g55 for :
+                                         cura  | g55
+        688 BOX 1904-05-29 Thil Marcel : 22:00 | 07:00
+        4 different days :
+        36 ATH El Mabrouk Mohamed : 1928-10-27 | 1928-10-17
+        595 BOX Cuillieres René :   1929-07-22 | 1929-07-12
+        1976 RUG Puig-Aubert Henri  1924-03-24 | 1925-03-24
+        1999 RUG Terreau Maurice : 1923-01-03  | 1923-01-30
         
+    **/
+    private static function execute_date($params): string{
+        if(count($params) > 3){
+            return "WRONG USAGE - Useless parameter \"{$params[3]}\".\n";
+        }
+        
+        $g55File = $params[0];
         [$origin, $g55Rows, $curaRows] = self::prepare($g55File);
-        $N = 0;
+        
+        $report_hour = $report_day = '';
+        $N_hour = $N_day = 0;
         foreach($g55Rows as $NUM => $g55Row){
-            $dateCura = $curaRows[$NUM]['DATE'];
-            $dateCura_c = $curaRows[$NUM]['DATE_C'];
+            $name = $curaRows[$NUM]['FNAME'] . ' ' . $curaRows[$NUM]['GNAME'];
+            $occu = $curaRows[$NUM]['OCCU'];
+            $compare_cura = $curaRows[$NUM]['DATE_C'] == '' ? $curaRows[$NUM]['DATE'] : $curaRows[$NUM]['DATE_C'];
+            $day_cura = substr($compare_cura, 0, 10);
+            $hour_cura = substr($compare_cura, 11, 5); // hour without timezone info
             $day55 = $g55Row['DAY_55'];
             $hour55 = $g55Row['HOUR_55'];
-            if($day55 != '' || $hour55 != ''){
-                echo "$NUM $dateCura * $dateCura_c \t| $day55 * $hour55\n";
-                $N++;
+            // correct the automatic formatting of libreoffice
+            if(is_numeric($hour55)){
+                $hour55 = str_pad ($hour55 , 2, '0', STR_PAD_LEFT) . ':00';
+            }
+            if(strlen($hour55) == 8){
+                $hour55 = substr($hour55, 0, 5); // remove seconds (:00) added by libreoffice
+            }                                                                                                                       
+            if($day55 != ''){
+                $report_day .= "$NUM $occu $name : $day_cura | $day55\n";
+                $N_day++;
+            }
+            if($hour55 != '' && $hour55 != $hour_cura){
+                $report_hour .= "$NUM $occu $day_cura $name : $hour_cura | $hour55\n";
+                $N_hour++;
             }
         }
-        echo "N = $N\n";
+        return "$N_hour different hours :\n" . $report_hour
+             . "$N_day different days :\n" . $report_day;
     }
     
     

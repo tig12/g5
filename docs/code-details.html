@@ -35,22 +35,37 @@
 The code is namespaced ; main namespace name is <code>g5</code>.
 <br>Code is PSR-4 (namespace hierarchy corresponds to directory hierarchy, like in java).
 <br>Top-level namespace (<code>g5</code>) is located in <code>src/</code>.
-<br>This code does not use objects, only static methods and instances.
+<br>This code does not use objects, only static methods and variables.
+<br>
+<br>All transformations on data are done in package <code>g5\transform</code>.
 
 <!-- ********************************************************************************* -->
-<h2>Convention for CLI</h2>
-The command line interface (CLI) is handled by <code>run.php</code>. To interpret the parameters typed by the user, a convention is used : 
+<h2>Association CLI - executed code</h2>
+
+The command line interface (CLI) is handled by <code>run-g5.php</code>. To interpret the parameters typed by the user, a convention is used : 
 <br>
 <br>The program uses the notions of 
-<br><b>data set</b> (like <code>cura</code> for cura.free.fr, <code>newalch</code> for newalchemypress.com), <b>data file</b> within a data set (like file A2) and <b>action</b> (like <code>raw2csv</code>, which means "convert raw file to csv file").
-<br>Each data set corresponds to a sub-package of <code>g5\transform</code>. Each data file corresponds to a sub package of dataset's package.
+<ul>
+    <li><b>data set</b> (like <code>cura</code> for cura.free.fr, <code>newalch</code> for newalchemypress.com),</li>
+    <li><b>data file</b> within a data set (like file A2),</li>
+    <li><b>action</b> (like <code>raw2csv</code>, which means "convert raw file to csv file").</li>
+</ul>
+
+<br>Each data set corresponds to a sub-package of <code>g5\transform</code>.
+<br>Each datafile corresponds to a sub-package of dataset's package.
 <br>For example, code operating on file <a href="https://newalchemypress.com/gauquelin/gauquelin_docs/3a_sports.txt">3a_sports.txt</a> from newalchemypress.com is located in package <code>g5\transform\newalch\ertel4391</code>.
 <br>
 <br>When the user types a command, the CLI checks, in this order :
-<ul class="simple">
-    <li>Does this dataset have a class implementing interface <code>Command</code> ? If yes, the parameters are passed to the <code>execute()</code> method of this class.</li>
+<ul>
     <li>
-        If not, CLI tries to find a class <code>g5\transform\dataset\datafile\action</code> and call its method <code>execute()</code>
+        Does this dataset have a class implementing interface <code>Command</code> ? If yes, the parameters are passed to the <code>execute()</code> method of this class.
+        <br>Dataset's command takes the control and can re-interpret parameters and makes a custom dispatch to command(s) of sub-packages.
+        <br>cura and g5 datasets use this mechanism.
+    </li>
+    <li>
+        If not, CLI tries to find a class <code>g5\transform\dataset\datafile\action</code> and call its method <code>execute()</code>.
+        <br>This is the default mechanism which permits to add new datasets and new datafiles automatically handled by the system, if no class implementing <code>Command</code> is present in the dataset's namespace.
+        
     </li>
 </ul>
 
@@ -66,13 +81,8 @@ The command line interface (CLI) is handled by <code>run.php</code>. To interpre
     </li>
 </ul>
 
-Implementation of this convention can be found in the package hierarchy, and in the code of class <code>g5\G5</code>
-<br>
-<br>This mechanism permits 
-<ul class="simple">
-    <li>To add new datasets and new datafiles automatically handled by the system, if no class implementing <code>Command</code> is present in the dataset's namespace.</li>
-    <li>To implement more sophisticated mechanisms for some datasets like cura.</li>
-</ul>
+Implementation of this convention can be found in the package hierarchy, and in the code of class <code>g5\Run</code>
+
 </article>
 </div><!-- end class="main" -->
 
