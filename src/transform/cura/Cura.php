@@ -50,6 +50,15 @@ class Cura{
     
     // ******************************************************
     /**
+        Returns an id like "A1-654", unique id of a record among cura files.
+        Used to fill ORIG field in output files.
+    **/
+    public static function orig($curaFile, $NUM){
+        return "$curaFile-$NUM";
+    }
+    
+    // ******************************************************
+    /**
         Auxiliary function
         @param  $serie : a string like 'A1'
         @return    Regular array containing the cura file in 5-cura-csv/

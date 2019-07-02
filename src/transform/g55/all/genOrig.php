@@ -1,25 +1,41 @@
 <?php
 /********************************************************************************
-    Generates a file in 9-g55-original
-    from corresponding files in 3-g55-edited and 5-cura-csv
+    Generates a file in 9-g55-original/
+    from corresponding files in 3-g55-edited/ and 5-cura-csv/
     
     @license    GPL
     @history    2019-05-26 00:48:47+02:00, Thierry Graff : Creation
+    @history    2019-07-01 23:39:53+02:00, Thierry Graff : New version
 ********************************************************************************/
 namespace g5\transform\g55\all;
 
 use g5\G5;
 use g5\Config;
+use g5\transform\g55\G55;
+use g5\transform\cura\Cura;
 use g5\patterns\Command;
-use tiglib\strings\slugify;
-use tiglib\timezone\offset;
-use tiglib\timezone\offset_fr;
+use g5\model\Libreoffice;
 
 class genOrig implements Command {
     
+    const GEN_FIELDS = [
+        'ORIG',
+        'FNAME',
+        'GNAME',
+        'OCCU',
+        'DATE',
+        'PLACE',
+        'CY',
+        'C2',
+        //'GEOID',
+        'LG',
+        'LAT',
+        // 'COMMENT',
+    ];
+    
     // *****************************************
     /** 
-        Generates file in 9-g55-original/ from csv files located in 3-g55-edited/
+        Generates files in 9-g55-original/ from csv files located in 3-g55-edited/
         See 9-g55-original/README for a meaning of generated fields
         
         Called by : php run-g5.php g55 <filename> edited2original
@@ -30,157 +46,73 @@ class genOrig implements Command {
         @return report
     **/
     public static function execute($params=[]): string{
-        $src_dir = Config::$data['dirs']['3-g55-edited'];
-        $dest_dir = Config::$data['dirs']['9-g55-original'];
-        $files = glob($src_dir . DS . '*.csv');
-        $generatedFields = [
-            'ORIG' => '',
-            'NUM' => '',
-            'FNAME' => '',
-            'GNAME' => '',
-            'OCCU' => '',
-            'DATE' => '',
-            'PLACE' => '',
-            'CY' => '',
-            'C2' => '',
-            'GEOID' => '',
-            'LG' => '',
-            'LAT' => '',
-//            'COMMENT' => '',
-        ];
-        $firstline = implode(G5::CSV_SEP, array_keys($generatedFields));
-        foreach($files as $file){
-            $res = $firstline . "\n";
-            $groupCode = str_replace('.csv', '', basename($file));
-            $lines = file($file, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
-            $fieldnames = explode(self::CSV_SEP_LIBREOFFICE, $lines[0]);
-            array_shift($lines); // line containing field names
-            foreach($lines as $line){
-                $new = $generatedFields;
-                // turn $fields to be [ 'ORIGIN' => 'A1', 'NUM' => '6', 'NAME' => 'Bally Etienne', ...]
-// @todo externalize this code
-                $tmp = explode(self::CSV_SEP_LIBREOFFICE, $line);
-                foreach($fieldnames as $k => $v){
-                    $fields[$v] = $tmp[$k];
-                }
-// end @todo externalize this code
-                //
-                $new['ORIGIN'] = $fields['ORIGIN'];
-                $new['NUM'] = $fields['NUM'];
-                // name
-                $tmp = explode(' ', $fields['NAME']);
-                if(count($tmp) != 2){
-                    // can happen for 2 cases :
-                    // - persons not in cura files and added by a human
-                    // - persons with composed last names
-                    // In both cases, GIVEN_C and FAMILY_C should be filled
-                    if($fields['GIVEN_C'] == '' || $fields['FAMILY_C'] == ''){
-                        echo "ANOMALY ON NAMES - {$new['NUM']} - LINE SKIPPED, MUST BE FIXED\n";
-                        continue;
-                    }
-                    else{
-                        $family = $fields['FAMILY_C'];
-                        $given = $fields['GIVEN_C'];
-                    }
-                }
-                else{
-                    [$family, $given] = explode(' ', $fields['NAME']); // ex 'Bally Etienne'
-                    // If GIVEN_C or FAMILY_C are filled, override cura value
-                    if($fields['FAMILY_C'] != ''){
-                        $family = $fields['FAMILY_C'];
-                    }
-                    if($fields['GIVEN_C'] != ''){
-                        $given = $fields['GIVEN_C'];
-                    }
-                }
-                $new['FAMILYNAME'] = $family;
-                $new['GIVENNAME'] = $given;
-                // profession
-                if($fields['PRO_C'] != ''){
-                    $new['OCCU'] = $fields['OCCU_C'];
-                }
-                else{
-                    $new['OCCU'] = $fields['OCCU'];
-                }
-                //
-                // place
-                // processed before date to find timezone from geonames
-                // but date is put before place in resulting line
-                if($fields['PLACE_C'] != ''){
-                    $place = $fields['PLACE_C'];
-                }
-                else{
-                    $place = $fields['PLACE'];
-                }
-                if($fields['COU_C'] != ''){
-                    $country = $fields['COU_C'];
-                }
-                else{
-                    $country = $fields['COU'];
-                }
-                if($fields['COD_C'] != ''){
-                    $admin2 = $fields['COD_C'];
-                }
-                else{
-                    $admin2 = $fields['COD'];
-                }
-                if($admin2 == 'NONE'){
-                    $admin2 = '';
-                }
-                if(strlen($admin2) == 1 && $country == 'FR'){
-                    $admin2 = '0' . $admin2; // because libreoffice "eats" the trailing 0
-                }
-                // HERE try to match Geonames
-                $slug = slugify::compute($place);
-                $geonames = \Geonames::matchFromSlug([
-                    'slug' => $slug,
-                    'countries' => [$country],
-                    'admin2-code' => $admin2,
-                ]);
-                if(!$geonames){
-                    echo "ERROR: COULD NOT MATCH GEONAMES - {$new['NUM']} - $slug $admin2 - LINE SKIPPED, MUST BE FIXED\n";
-                    continue;
-                }
-                $new['BIRTHPLACE']  = $geonames[0]['name'];
-                $new['GEOID']       = $geonames[0]['geoid'];
-                $new['LG']          = $geonames[0]['longitude'];
-                $new['LAT']         = $geonames[0]['latitude'];
-                $new['ADM2']        = $admin2;
-                $new['COU']         = $country;
-                //
-                // birth date
-                //
-                try{
-                    [$day, $hour] = self::computeBirthDate($fields['DATE'], $fields['DAY_C'], $fields['HOUR_C']);
-                }
-                catch(\Exception $e){
-                    echo "ERROR: COULD NOT COMPUTE BIRTHDATE - {$new['NUM']} - $slug - LINE SKIPPED, MUST BE FIXED\n";
-                    echo $e->getMessage() . "\n";
-                    continue;
-                }
-                // dtu
-                $dtu = '';
-                if($country == 'FR'){
-                    [$dtu, $err] = offset_fr::compute("$day $hour", $new['LG'], $new['ADM2']);
-                    if($err != ''){
-                        // err is something like :
-                        // Possible timezone offset error (dept 54) - check precise local conditions
-                        echo "ERROR for {$new['NUM']} {$new['FAMILYNAME']} {$new['GIVENNAME']} : " . $err . " - LINE SKIPPED, MUST BE FIXED\n";
-                        continue;
-                    }
-                }
-                else{
-                    $dtu = offset::compute("$day $hour", $geonames[0]['timezone']);
-                }
-                $new['BIRTHDATE'] = "$day $hour$dtu";
-                // add new line to res
-                $res .= implode(G5::CSV_SEP, $new) . "\n";
-            }
-            // write output
-            $dest_file = $dest_dir . DS . $groupCode . '.csv';
-            file_put_contents($dest_file, $res);
-            echo "$dest_file generated\n";
+        if(count($params) > 2){
+            return "WRONG USAGE - Useless parameter \"{$params[2]}\".\n";
         }
+        
+        $g55Group = $params[0];
+        [$origin, $g55Rows, $curaRows] = G55::prepare($g55Group);
+        
+        $res = implode(self::GEN_FIELDS, G5::CSV_SEP) . "\n";
+        $report = '';
+        
+        foreach($g55Rows as $NUM => $g55Row){
+            $curaRow =& $curaRows[$NUM];
+// echo "\n"; print_r($curaRow); echo "\n";
+// echo "\n"; print_r($g55Row); echo "\n";
+            $new = [];
+            $new['ORIG'] = Cura::orig($origin, $NUM);
+            $new['FNAME'] = $g55Row['FAMILY_55'] != '' ? $g55Row['FAMILY_55'] : $curaRow['FNAME'];
+            $new['GNAME'] = $g55Row['GIVEN_55'] != '' ? $g55Row['GIVEN_55'] : $curaRow['GNAME'];
+            $new['OCCU'] = $g55Row['OCCU_55'] != '' ? $g55Row['OCCU_55'] : $curaRow['OCCU'];
+            
+            // date
+            $d55 = $g55Row['DAY_55'];
+            $h55 = Libreoffice::fix_hour($g55Row['HOUR_55']);
+            
+//$curaRows[$NUM]['DATE_C'] = '1917-04-11 14:20+01:00';
+//echo "curaRows[$NUM]['DATE_C'] = " . $curaRows[$NUM]['DATE_C'] . "\n";
+            $dcura = substr($curaRows[$NUM]['DATE'], 0, 10);
+            if($curaRows[$NUM]['DATE_C'] != ''){ // 1937-09-17 18:00+01:00 or 1889-08-13 12:30+00:09:20
+                $hcura = substr($curaRows[$NUM]['DATE_C'], 11, 5);
+                $tzcura = substr($curaRows[$NUM]['DATE_C'], 16);
+// echo "hcura = $hcura\n";
+// echo "dcura = $dcura\n";
+// echo "tzcura = $tzcura\n";
+            }
+            else{ // 1937-09-17 17:00:00+00:00
+                $hcura = substr($curaRows[$NUM]['DATE'], 11, 8);
+                $tzcura = substr($curaRows[$NUM]['DATE'], 19);
+                if(substr($tzcura, -3) == ':00'){
+                    $tzcura = substr($tzcura, 0, -3);
+                }
+            }                                                                                                                    
+            $new['DATE'] = '';
+            $new['DATE'] .= $d55 != '' ? $d55 : $dcura;
+            $new['DATE'] .= ' ';
+            $new['DATE'] .= $h55 != '' ? $h55 : $hcura;
+            $new['DATE'] .= $tzcura;
+            
+            $new['PLACE'] = $g55Row['PLACE_55'] != '' ? $g55Row['PLACE_55'] : $curaRow['PLACE'];
+            $new['CY'] = $g55Row['CY_55'] != '' ? $g55Row['CY_55'] : $curaRow['CY'];
+            if($g55Row['C2_55'] == 'NONE'){
+                $new['C2'] = '';
+            }
+            else{
+                $new['C2'] = $g55Row['C2_55'] != '' ? $g55Row['C2_55'] : $curaRow['C2'];
+            }
+            
+            //$new['GEOID'] = $curaRow[''];
+            $new['LG'] = $curaRow['LG'];
+            $new['LAT'] = $curaRow['LAT'];
+            
+            $res .= implode($new, G5::CSV_SEP) . "\n";
+//echo "$res\n"; exit;
+        }
+        $filename = Config::$data['dirs']['9-g55-original'] . DS . $g55Group . '.csv';
+        file_put_contents($filename, $res);
+        $report .= "Wrote $filename\n";
+        return $report;
     }
     
     

@@ -38,9 +38,10 @@
 
 <article>
 
-Restoration of the group "570 sportifs" is used as an example in this page.
-<br>
-<br>The following diagram illustrates this process :
+<!-- ********************************************************************************* -->
+<h2>Process</h2>
+
+Restoration has been entirely done for the group "570 sportifs" (570SPO), which is used as an example to illustrate the process.
 
 <img class="border margin padding" src="img/570spo-restore.jpg" alt="Transformations of files, from A1 to G55 original and corrected">
 
@@ -116,7 +117,31 @@ Note : the directory names used in this page relate to the corresponding entries
     
     <li>
         <b>Generate downloadable files</b> (by program)
-        <br>todo
+        <br>Only 570SPO for the moment.
+        <br>There are two versions of each 1955 group, an original and a corrected version.
+        <ul class="spaced margin-top">
+            <li>
+                <div class="bold">Original groups</div>
+                Original groups  are meant to reproduce as exactly as possible the historical version of the groups.
+                <br>They are built using data from <code>3-g55-edited/</code> and <code>5-cura-csv/</code>.
+                <br>For a given field, if a value in corresponding <code>*_55</code> column exists in a <code>3-g55-edited/</code> file, it is retained. Otherwise, the value is taken from <code>5-cura-csv/</code>.
+                <br>
+                <br>The generation is done with the command
+                <pre>php run-g5.php g55 570SPO genOrig</pre>
+                It produces a file in a directory specified by <code>9-g55-original/</code> in <code>config.yml</code>.
+            </li>
+            
+            <li>
+                <div class="bold">Corrected groups</div>
+                Corrected groups are meant to integrate all the corrections on the data.
+                <br>They are built mainly using data from <code>5-cura-csv/</code>.
+                The data present only in Gauquelin book and not in Cura files (field <code>ORIG</code> = g55) are also added.
+                <br>
+                <br>The generation is done with the command
+                <pre>php run-g5.php g55 570SPO genCorr</pre>
+                It produces a file in a directory specified by <code>9-g55-corrected/</code> in <code>config.yml</code>.
+            </li>
+        </ul>
     </li>
     
 </ol>
@@ -153,7 +178,7 @@ Note : the directory names used in this page relate to the corresponding entries
         Gauquelin 1955
         <ul>
             <li><a href="g55-restore.html">Restoration</a></li>
-            <li><a href="g55-curadiff.html">Difference with Cura</a></li>
+            <li><a href="g55-curadiff.html">Differences with Cura</a></li>
         </ul>
     </li>
     

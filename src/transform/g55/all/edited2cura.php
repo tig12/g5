@@ -1,7 +1,7 @@
 <?php
 /********************************************************************************
     Code analyzing files of 3-g55-edited
-    and modifying files of 5-cura-csv/ using files of 3-g55-edited
+    and modifying files of 5-cura-csv/ using files of 3-g55-edited/
     
     Example of use : php run-g5.php g55 570SPO edited2cura date
 
@@ -204,6 +204,7 @@ class edited2cura implements Command {
     // ******************************************************
     /**
         Echoes the lines where G55 date (day or time) is different from cura.
+        Informative only
         @param  $params Array containing 3 strings transmitted by execute() :
                 - The G55 file to process
                 - "edited2cura" (useless here)
@@ -260,6 +261,7 @@ class edited2cura implements Command {
     // ******************************************************
     /**
         Lists the records that are not present in cura file.
+        Informative only
         This function is only informative, does not participate to any build process.
         In files of 3-g55-edited, these records have their ORIGIN field set to 'G55'.
         @param  $params Array containing 3 strings transmitted by execute() :
@@ -300,7 +302,7 @@ class edited2cura implements Command {
     // ******************************************************
     /**
         Lists the records where occupation codes in G55 groups differ from Cura groups.
-        This function is only informative, does not participate to any build process.
+        Informative only
         @param  $params Array containing 3 strings transmitted by execute() :
                 - The G55 file to process
                 - "edited2cura" (useless here)
@@ -334,7 +336,6 @@ class edited2cura implements Command {
         $res .= "</table>\n";
         $res .= "$N different occupation codes\n";
         return $res;
-        
     }
     
     
