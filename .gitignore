@@ -6,3 +6,5 @@ config.yml
 
 data/*
 !data/3-edited
+
+.~lock.*

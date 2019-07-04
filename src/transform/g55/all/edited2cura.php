@@ -24,8 +24,9 @@ namespace g5\transform\g55\all;
 use g5\Config;
 use g5\G5;
 use g5\transform\cura\Cura;
-use g5\patterns\Command;
 use g5\transform\g55\G55;
+use g5\patterns\Command;
+use g5\model\Libreoffice;
 
 class edited2cura implements Command {
     
@@ -89,21 +90,21 @@ class edited2cura implements Command {
             return "WRONG USAGE - Useless parameter \"{$params[4]}\".\n";
         }
         
-        $g55Group = $params[0];
+        $g55group = $params[0];
         $action = $params[3];
         
-        [$origin, $g55Rows, $curaRows] = G55::prepare($g55Group);
+        [$origin, $g55rows, $curarows] = G55::prepareCuraMatch($g55group);
         
         if($action == 'update'){
             $curaFull = Cura::loadTmpCsv_num($origin);
         }
         $report = '';
         $N = 0;
-        foreach($g55Rows as $NUM => $g55Row){
-            $fnameCura = $curaRows[$NUM]['FNAME'];
-            $fname55 = $g55Row['FAMILY_55'];
-            $gnameCura = $curaRows[$NUM]['GNAME'];
-            $gname55 = $g55Row['GIVEN_55'];
+        foreach($g55rows as $NUM => $g55row){
+            $fnameCura = $curarows[$NUM]['FNAME'];
+            $fname55 = $g55row['FAMILY_55'];
+            $gnameCura = $curarows[$NUM]['GNAME'];
+            $gname55 = $g55row['GIVEN_55'];
             if(
                 ($fname55 != '' && $fname55 != $fnameCura)
              || ($gname55 != '' && $gname55 != $gnameCura)
@@ -122,7 +123,7 @@ class edited2cura implements Command {
                 $N++;
             }
         }                              
-        $report .= "$N differences on names between $g55Group and $origin\n";
+        $report .= "$N differences on names between $g55group and $origin\n";
         
         if($action == 'update'){
             $newCura = implode(G5::CSV_SEP, array_keys($curaFull[1])) . "\n";
@@ -160,19 +161,19 @@ class edited2cura implements Command {
             return "WRONG USAGE - Useless parameter \"{$params[4]}\".\n";
         }
         
-        $g55Group = $params[0];
+        $g55group = $params[0];
         $action = $params[3];
         
-        [$origin, $g55Rows, $curaRows] = G55::prepare($g55Group);
+        [$origin, $g55rows, $curarows] = G55::prepareCuraMatch($g55group);
         
         if($action == 'update'){
             $curaFull = Cura::loadTmpCsv_num($origin);
         }
         $report = '';
         $N = 0;
-        foreach($g55Rows as $NUM => $g55Row){
-            $placeCura = $curaRows[$NUM]['PLACE'];
-            $place55 = $g55Row['PLACE_55'];
+        foreach($g55rows as $NUM => $g55row){
+            $placeCura = $curarows[$NUM]['PLACE'];
+            $place55 = $g55row['PLACE_55'];
             if($place55 != '' && $place55 != $placeCura){
                 if($action == 'list'){
                   $report .= "$NUM $placeCura \t| $place55\n";
@@ -185,7 +186,7 @@ class edited2cura implements Command {
                 $N++;
             }
         }                              
-        $report .= "$N differences on place name between $g55Group and $origin\n";
+        $report .= "$N differences on place name between $g55group and $origin\n";
         
         if($action == 'update'){
             $newCura = implode(G5::CSV_SEP, array_keys($curaFull[1])) . "\n";
@@ -224,26 +225,28 @@ class edited2cura implements Command {
             return "WRONG USAGE - Useless parameter \"{$params[3]}\".\n";
         }
         
-        $g55Group = $params[0];
-        [$origin, $g55Rows, $curaRows] = G55::prepare($g55Group);
-        
+        $g55group = $params[0];
+        [$origin, $g55rows, $curarows] = G55::prepareCuraMatch($g55group);
+                                                                                  
         $report_hour = $report_day = '';
         $N_hour = $N_day = 0;
-        foreach($g55Rows as $NUM => $g55Row){
-            $name = $curaRows[$NUM]['FNAME'] . ' ' . $curaRows[$NUM]['GNAME'];
-            $occu = $curaRows[$NUM]['OCCU'];
-            $compare_cura = $curaRows[$NUM]['DATE_C'] == '' ? $curaRows[$NUM]['DATE'] : $curaRows[$NUM]['DATE_C'];
+        foreach($g55rows as $NUM => $g55row){
+            $name = $curarows[$NUM]['FNAME'] . ' ' . $curarows[$NUM]['GNAME'];
+            $occu = $curarows[$NUM]['OCCU'];
+            $compare_cura = $curarows[$NUM]['DATE_C'] == '' ? $curarows[$NUM]['DATE'] : $curarows[$NUM]['DATE_C'];
             $day_cura = substr($compare_cura, 0, 10);
             $hour_cura = substr($compare_cura, 11, 5); // hour without timezone info
-            $day55 = $g55Row['DAY_55'];
-            $hour55 = $g55Row['HOUR_55'];
-            // correct the automatic formatting of libreoffice
+            $day55 = $g55row['DAY_55'];
+            $hour55 = Libreoffice::fix_hour($g55row['HOUR_55']);
+            /*
+            $hour55 = $g55row['HOUR_55'];
             if(is_numeric($hour55)){
                 $hour55 = str_pad ($hour55 , 2, '0', STR_PAD_LEFT) . ':00';
             }
             if(strlen($hour55) == 8){
                 $hour55 = substr($hour55, 0, 5); // remove seconds (:00) added by libreoffice
             }                                                                                                                       
+            */
             if($day55 != ''){
                 $report_day .= "$NUM $occu $name : $day_cura | $day55\n";
                 $N_day++;
@@ -273,11 +276,11 @@ class edited2cura implements Command {
         if(count($params) > 3){
             return "WRONG USAGE - Useless parameter \"{$params[3]}\".\n";
         }
-        $g55Group = $params[0];
+        $g55group = $params[0];
         $res = '';
         $res .= "<table class=\"wikitable margin\">\n";
         $res .= "    <tr><th>FAMILY</th><th>GIVEN</th><th>DAY</th><th>HOUR</th><th>PLACE</th><th>CY</th><th>C2</th><th>OCCU</th><th>NOTES</th>\n";
-        $g55rows = G55::loadG55Edited($g55Group);
+        $g55rows = G55::loadG55Edited($g55group);
         foreach($g55rows as $row){
             if($row['ORIGIN'] == 'G55'){
                 // all informations coming from paper book are stored in _55 columns
@@ -312,23 +315,23 @@ class edited2cura implements Command {
         if(count($params) > 3){
             return "WRONG USAGE - Useless parameter \"{$params[3]}\".\n";
         }
-        $g55Group = $params[0];
+        $g55group = $params[0];
         $res = '';
         $res .= "<table class=\"wikitable margin\">\n";
         $res .= "    <tr><th>NUM</th><th>FAMILY</th><th>GIVEN</th><th>DATE</th><th>PLACE</th><th>OCCU<br>G55</th><th>OCCU<br>Cura</th>\n";
-        [$origin, $g55Rows, $curaRows] = G55::prepare($g55Group);
+        [$origin, $g55rows, $curarows] = G55::prepareCuraMatch($g55group);
         $N = 0;
-        foreach($g55Rows as $g55Row){
-            $NUM = $g55Row['NUM'];
-            if($g55Row['OCCU_55'] != ''){
-                $res .= '    ' . ($g55Row['OCCU_55'] == 'FEM' ? '<tr>' : '<tr class="bold">') . "\n";
+        foreach($g55rows as $g55row){
+            $NUM = $g55row['NUM'];
+            if($g55row['OCCU_55'] != ''){
+                $res .= '    ' . ($g55row['OCCU_55'] == 'FEM' ? '<tr>' : '<tr class="bold">') . "\n";
                 $res .= "        <td>$NUM</td>\n";
-                $res .= "        <td>{$curaRows[$NUM]['FNAME']}</td>\n";
-                $res .= "        <td>{$curaRows[$NUM]['GNAME']}</td>\n";
-                $res .= "        <td>{$curaRows[$NUM]['DATE']}</td>\n";
-                $res .= "        <td>{$curaRows[$NUM]['PLACE']}</td>\n";
-                $res .= "        <td>{$curaRows[$NUM]['OCCU']}</td>\n";
-                $res .= "        <td>{$g55Row['OCCU_55']}</td>\n";
+                $res .= "        <td>{$curarows[$NUM]['FNAME']}</td>\n";
+                $res .= "        <td>{$curarows[$NUM]['GNAME']}</td>\n";
+                $res .= "        <td>{$curarows[$NUM]['DATE']}</td>\n";
+                $res .= "        <td>{$curarows[$NUM]['PLACE']}</td>\n";
+                $res .= "        <td>{$curarows[$NUM]['OCCU']}</td>\n";
+                $res .= "        <td>{$g55row['OCCU_55']}</td>\n";
                 $res .= "    <tr>\n";
                 $N++;
             }

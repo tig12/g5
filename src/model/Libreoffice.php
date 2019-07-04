@@ -18,8 +18,9 @@ class Libreoffice{
         if(is_numeric($str)){
             return str_pad ($str , 2, '0', STR_PAD_LEFT) . ':00';
         }
+        // remove seconds (:00) added by libreoffice
         if(strlen($str) == 8){
-            return substr($str, 0, 5); // remove seconds (:00) added by libreoffice
+            return substr($str, 0, 5);
         }
     }
     

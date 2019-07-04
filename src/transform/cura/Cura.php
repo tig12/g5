@@ -26,6 +26,22 @@ class Cura{
         'E1', 'E3',
     ];
     
+    /** Names of the columns in files of 5-cura-csv/ **/
+    const TMP_CSV_COLUMNS = [
+            'NUM',
+            'FNAME',
+            'GNAME',
+            'OCCU',
+            'DATE',
+            'PLACE',
+            'CY',
+            'C2',
+            'LG',
+            'LAT',
+            'GEOID',
+            'NOTES',
+        ];
+
     
     /** 
         Associations between datafile in the user's vocabulary and the sub-namespace that handles it.
@@ -74,8 +90,8 @@ class Cura{
         @return    Associative array containing the cura file in 5-cura-csv/ ; keys = cura ids (NUM)
     **/
     public static function loadTmpCsv_num($serie){
-        $curaRows1 = self::loadCura($serie);
-        $res = [];
+        $curaRows1 = self::loadTmpCsv($serie);
+        $res = [];              
         foreach($curaRows1 as $row){
             $res[$row['NUM']] = $row;
         }

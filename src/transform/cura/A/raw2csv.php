@@ -435,7 +435,7 @@ class raw2csv implements Command{
         //
         $res = [];
         // variables used only for report
-        $n_ok = 0;                                  // correctly merged
+        $n_ok = 0;                              // correctly merged
         $n1 = 0; $missing_in_names = [];        // date present in list 1 and not in name list
         $n2 = 0; $doublons_same_nb = [];        // multiple persons born the same day ; same nb of persons in list 1 and name list
         $n3 = 0; $doublons_different_nb = [];   // multiple persons born the same day ; different nb of persons in list 1 and name list
@@ -564,19 +564,7 @@ class raw2csv implements Command{
         $nb_stored = 0;
         $csv = '';
         // fields in the resulting csv
-        $fieldnames = [
-            'NUM',
-            'FNAME',
-            'GNAME',
-            'OCCU',
-            'DATE',
-            'PLACE',
-            'CY',
-            'C2',
-            'LG',
-            'LAT',
-        ];
-        $csv = implode(G5::CSV_SEP, $fieldnames) . "\n";
+        $csv = implode(G5::CSV_SEP, Cura::TMP_CSV_COLUMNS) . "\n";
         foreach($res as $cur){
             $new = [];
             $new['NUM'] = trim($cur['NUM']);
@@ -597,6 +585,8 @@ class raw2csv implements Command{
             [$new['CY'], $new['C2']] = self::compute_country($cur['COU'], $cur['COD']);
             $new['LG'] = Cura::computeLg($cur['LON']);
             $new['LAT'] = Cura::computeLat($cur['LAT']);
+            $new['GEOID'] = '';
+            $new['NOTES'] = '';
             $csv .= implode(G5::CSV_SEP, $new) . "\n";
             $nb_stored ++;
         }

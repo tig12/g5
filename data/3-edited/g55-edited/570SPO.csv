@@ -17,7 +17,7 @@
 ,"A1",51,"Lalanne Jean","ATH","1914-08-28 10:00:00+00:00","GERDE","FR",65,"0.08333","43.23333",,,10,,,,,,
 ,"A1",52,"Legrain Pierre","ATH","1920-02-18 09:00:00+00:00","THUMERIES","FR",59,"3.08333","50.65",,,10,,,,,,
 ,"A1",54,"Lewden Pierre","ATH","1901-02-21 22:50:40+00:00","LIBOURNE","FR",33,"-0.56667","44.83333",,,23,,,,,,
-,"G55",,,,,,,,,,"Jacques","Lunnis","16:30:00","1923-05-27","Pierrecourt",76,"FR","ATH","Seine Inférieure"
+,"G55",1,,,,,,,,,"Jacques","Lunnis","16:30:00","1923-05-27","Pierrecourt",76,"FR","ATH","Seine Inférieure"
 ,"A1",57,"Manaire Emile","ATH","1920-03-31 01:00:00+00:00","LABRIGUE","FR",6,"7.26667","43.7",,,2,,"La Brigue",,,,
 ,"A1",60,"Marie Andre","ATH","1925-10-14 06:30:00+00:00","CAPDAIL","FR",6,"7.26667","43.7","André",,"06:30:00",,"Cap d'Ail",,,,
 ,"A1",64,"Noel Jules","ATH","1903-01-27 10:50:40+00:00","NORRENTFONTES","FR",62,"2.76667","50.3",,,11,,"Norrent-Fontes",,,,
@@ -232,7 +232,7 @@
 ,"A1",805,"Deprez Louis","CYC","1921-01-06 23:00:00+00:00","LILLIERS","FR",62,"2.76667","50.3",,,,,"Lillers",,,,
 ,"A1",807,"Diot Emile","CYC","1912-07-03 15:00:00+00:00","OSMERY","FR",18,"2.38333","47.08333",,,,,,,,,
 ,"A1",808,"Dorgebray Robert","CYC","1915-10-16 09:00:00+00:00","NESLES-LA-VALLEE","FR",95,2,49,,,,,,,,,
-,"G55",,,,,,,,,,"Victor","Dupré ",1,"1884-03-11","Roanne",42,"FR","CYC",
+,"G55",2,,,,,,,,,"Victor","Dupré ",1,"1884-03-11","Roanne",42,"FR","CYC",
 ,"A1",811,"Dupont Jacques","CYC","1928-06-19 09:00:00+00:00","LEZAT","FR",9,"1.58333","42.96667",,,10,,"Lézat-sur-Lèze",,,,
 ,"A1",812,"Dussault Marcel","CYC","1926-05-14 02:30:00+00:00","LA CHATRE","FR",36,"1.68333","46.81667",,,"03:30:00",,,,,,
 ,"A1",813,"Faucheux Lucien","CYC","1899-08-26 05:50:40+00:00","KREMLIN-BICETRE","FR",94,"2.48333","48.78333",,,6,,"Le Kremlin-Bicêtre",,,,
@@ -390,7 +390,7 @@
 ,"A1",1394,"Vandooren Jules","FOO","1908-12-30 21:05:40+00:00","ARMENTIERES","FR",59,"3.08333","50.65",,,"21:15:00",,"Armentières",,,,
 ,"A1",1396,"Veinante Emile","FOO","1907-06-12 02:30:00-01:00","SABLON","FR",57,"6.18333","49.11667",,,,,"Metz",,,,
 ,"A1",1397,"Verriest Georges","FOO","1909-07-15 05:35:40+00:00","ROUBAIX","FR",59,"3.08333","50.65",,,"05:45:00",,,,,,
-,"G55",,,,,,,,,,"René","Vignal","20:30:00","1928-08-12","Béziers",34,"FR","FOO",
+,"G55",3,,,,,,,,,"René","Vignal","20:30:00","1928-08-12","Béziers",34,"FR","FOO",
 ,"A1",1404,"Zatelli Mario","FOO","1912-12-21 13:00:00+00:00","SETIF","DZ",,"3.75","36.16667",,,,,"Sétif",,,,
 ,"A1",1691,"Bagneux-Faudoas Francois","GOL","1903-01-16 15:50:40+00:00","PARIGNE","FR",35,"-1.66667","48.11667","François","De Bagneux-Faudoas",16,,"Parigné",,,,
 ,"A1",1692,"Boulart Philippe","GOL","1918-08-29 19:00:00+00:00","BORDEAUX","FR",33,"-0.56667","44.83333",,,20,,,,,,
@@ -534,7 +534,7 @@
 ,"A1",2034,"Jousseaume Andre","EQU","1894-07-27 08:00:40+00:00","YVRE-L'EVEQUE","FR",72,"0.2","48.01667","André",,"08:10:00",,,,,,
 ,"A1",2035,"Lesage Xavier","EQU","1885-10-25 08:19:20+00:00","MORET","FR",77,"2.66667","48.55",,,"08:30:00",,"Moret-sur-Loing",,,,"in fact Moret-Loing-et-Orvanne (since 2017)"
 ,"A1",2036,"Maupeou D'Ableiges Pierre","EQU","1910-06-07 19:35:40+00:00","GRAY","FR",70,"6.15","47.61667","Pierre","Maupeou D'Ableiges","19:45",,,,,,
-,"A1",2037,"Royer-Dupre Henry","EQU","1876-09-09 15:24:00+00:00","CHARTRES","FR",28,"1.5","48.45","Henri-Cl","Royer (de)",15:30:00,,,,,,
+,"A1",2037,"Royer-Dupre Henry","EQU","1876-09-09 15:24:00+00:00","CHARTRES","FR",28,"1.5","48.45","Henri-Cl","Royer (de)","15:30:00",,,,,,
 ,"A1",2042,"Bernard Alain","TEN","1902-08-25 08:50:40+00:00","VAL-ANDRE","FR",22,"-2.75","48.51667",,,9,,"Pléneuf-Val-André",,,,
 ,"A1",2043,"Bernard Marcel","TEN","1914-05-18 20:00:00+00:00","LA MADELEINE","FR",59,"3.08333","50.65",,,,,,,,,
 ,"A1",2044,"Blanchy Francois","TEN","1886-12-12 08:57:36+00:00","BORDEAUX","FR",33,"-0.56667","44.83333",,,9,,,,,,
@@ -566,4 +566,4 @@
 ,"A1",2085,"Touchard Roger","TIR","1909-03-21 15:20:40+00:00","ST-CYR-D-S","FR",27,"1.18333","49.01667",,,"15:30:00",,"Saint-Cyr-de-Salerne",,,,
 ,"A1",2086,"Gerbault Alain","VOI","1893-11-17 10:50:40+00:00","LAVAL","FR",53,"-0.75","48.06667",,,11,,,,,,
 ,"A1",2088,"Tiriau Roger","VOI","1928-10-22 09:30:00+00:00","NANTES","FR",44,"-1.58333","47.21667",,,,,,,,,
-,"G55",,,,,,,,,,"Jeanne","Yvonne","01:00:00","1910-07-14","Paris",75,"FR","FEM","Paris 18e - https://fr.wikipedia.org/wiki/Yvonne_Jeanne"
+,"G55",4,,,,,,,,,"Jeanne","Yvonne","01:00:00","1910-07-14","Paris",75,"FR","FEM","Paris 18e - https://fr.wikipedia.org/wiki/Yvonne_Jeanne"
