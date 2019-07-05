@@ -566,7 +566,7 @@ class raw2csv implements Command{
         // fields in the resulting csv
         $csv = implode(G5::CSV_SEP, Cura::TMP_CSV_COLUMNS) . "\n";
         foreach($res as $cur){
-            $new = [];
+            $new = array_fill_keys(Cura::TMP_CSV_COLUMNS, '');
             $new['NUM'] = trim($cur['NUM']);
             $new['FNAME'] = trim($cur['FNAME']);
             $new['GNAME'] = trim($cur['GNAME']);

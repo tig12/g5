@@ -15,6 +15,7 @@ use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
 use g5\model\Full;
+use g5\transform\cura\Cura;
 use g5\transform\cura\CuraRouter;
 use tiglib\time\HHMMSS2seconds;
 use tiglib\arrays\csvAssociative;
@@ -54,29 +55,19 @@ class legalTime implements Command{
         @return String report
     **/
     private static function computeOneFile($datafile){
+        
         $report = '';
-        $res = '';
+        $res = implode(G5::CSV_SEP, Cura::TMP_CSV_COLUMNS) . "\n";
+        
         $filename = Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv';
         $rows1 = csvAssociative::compute($filename);
-        $keys1 = array_keys($rows1[0]);
-        $keys2 = ['NUM', 'FNAME', 'GNAME', 'OCCU', 'DATE', 'DATE_C', 'PLACE', 'CY', 'C2', 'LG', 'LAT'];
         
-        $res .= implode(G5::CSV_SEP, $keys2) . "\n";
-        
-        $n_total = $n_corrected = 0;
+        $N = $nCorrected = 0;
         
         foreach($rows1 as $row1){
-            // $row2 = $row1 corrected
-            // initialize $row2 = $row1 with DATE_C added after column DATE
-            $n_total++;
-            $row2 = [];
-            foreach($keys1 as $k){
-                $row2[$k] = $row1[$k];
-                if($k == 'DATE'){
-                    $row2['DATE_C'] = '';
-                }
-            }
-            
+            $N++;
+            $row2 = $row1;
+                        
             if($row1['CY'] != 'FR'){
                 // no restoration for foreign countries
                 // @todo implement
@@ -126,12 +117,12 @@ class legalTime implements Command{
                 // Can also be removed from offset (because it is 0h or -1h)
                 $row2['DATE_C'] = substr($row2['DATE'], 0, 16) . substr($offset2, 0, -3);
             }
-            $n_corrected++;
+            $nCorrected++;
             $res .= implode(G5::CSV_SEP, $row2) . "\n";
         }
         file_put_contents($filename, $res);
-        $p = round($n_corrected * 100 / $n_total, 2);
-        $report .= "$datafile : restored $n_corrected / $n_total dates ($p %)\n";
+        $p = round($nCorrected * 100 / $N, 2);
+        $report .= "$datafile : restored $nCorrected / $N dates ($p %)\n";
         return $report;
     }
 }// end class

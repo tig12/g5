@@ -39,7 +39,7 @@ class all implements Command{
         
         if($datafile == 'A1'){
             // php run-g5.php cura A1 ertel2csv update
-            echo "\n=== execute ertel2csv on $datafile ===\n";
+            echo "\n=== Execute ertel2csv on $datafile ===\n";
             $params_ertel2csv = $params;
             $params_ertel2csv[] = 'update';
             echo ertel2csv::execute($params_ertel2csv);
@@ -65,6 +65,12 @@ class all implements Command{
             $params_edited2cura[2] = 'name';
             echo edited2cura::execute($params_edited2cura);
         }
+        
+        // php run-g5.php cura A1 addGeo small
+        echo "\n=== Execute addGeo on $datafile ===\n";
+        $params_addGeo = $params;
+        $params_addGeo[] = 'small';
+        echo addGeo::execute($params_addGeo);
         
         return '';
     }

@@ -33,6 +33,7 @@ class Cura{
             'GNAME',
             'OCCU',
             'DATE',
+            'DATE_C',
             'PLACE',
             'CY',
             'C2',

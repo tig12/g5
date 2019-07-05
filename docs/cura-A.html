@@ -48,8 +48,9 @@ This is equivalent to :
 php run-g5.php cura A raw2csv small
 php run-g5.php cura A1 ertel2csv update             # only for A1
 php run-g5.php cura A legalTime
-php run-g5.php g55 570SPO edited2csv place update   # only for A1
-php run-g5.php g55 570SPO edited2csv name update    # only for A1
+php run-g5.php g55 570SPO edited2cura place update   # only for A1
+php run-g5.php g55 570SPO edited2cura name update    # only for A1
+php run-g5.php cura A addGeo small
 </pre>
 
 <!-- ********************************************************************************* -->
@@ -65,7 +66,7 @@ MISSING PARAMETER : raw2csv needs a parameter to specify which output it display
 
 <!-- ************************************* -->
 <h3>Profession codes</h3>
-In some files of serie A, the precise profession codes are not associated to the records. This is possible thanks to the notices that are present on cura.free.fr pages.
+In some files of serie A, the precise profession codes are not associated to the records. This is possible to fix thanks to the notices that are present on cura.free.fr pages.
 <br>These informations were included to the program (see constant <code>PROFESSIONS_DETAILS</code> in the code) and in the resulting csv files, each record is associated to its precise profession.
 <br>
 <br>A list of profession codes used in the generated files is listed on <a href="output-format.html#profession-codes">this page</a>.
