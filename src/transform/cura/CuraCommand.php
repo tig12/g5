@@ -32,14 +32,16 @@ class CuraCommand implements Command{
         $datafile = $params[0];
         $command = $params[1];
         
-        if($datafile == 'all' && $command == 'all'){
-            return \g5\transform\cura\all\all::execute($params);
-        }
-        
         $datafiles = CuraRouter::computeDatafiles($datafile);
         
         foreach($datafiles as $dtfile){
-            $class = "g5\\transform\\cura\\" . Cura::DATAFILES_SUBNAMESPACE[$datafile] . '\\' . $command;
+            // csv2dl is available for all datafiles, and implemented in subpackage all.
+            if($command == 'csv2dl'){
+                $class = "g5\\transform\\cura\\all\\csv2dl";
+            }
+            else{
+                $class = "g5\\transform\\cura\\" . Cura::DATAFILES_SUBNAMESPACE[$datafile] . '\\' . $command;
+            }
             $params[0] = $dtfile;
             $report .= $class::execute($params);
         }

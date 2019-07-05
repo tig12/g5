@@ -69,29 +69,33 @@ class Cura{
     /**
         Returns an id like "A1-654", unique id of a record among cura files.
         Used to fill ORIG field in output files.
+        @param $datafile    String like 'A1'
+        @param $NUM         Value of field NUM of a record within $datafile
     **/
-    public static function orig($curaFile, $NUM){
-        return "$curaFile-$NUM";
+    public static function orig($datafile, $NUM){
+        return "$datafile-$NUM";
     }
     
     // ******************************************************
     /**
-        Auxiliary function
-        @param  $serie : a string like 'A1'
-        @return    Regular array containing the cura file in 5-cura-csv/
+                       - the datafile to process.
+                       - 'legalTime' (useless)
+
+        @param  $datafile : a string like 'A1'
+        @return     Regular array containing the cura file in 5-cura-csv/
     **/
-    public static function loadTmpCsv($serie){
-        return csvAssociative::compute(Config::$data['dirs']['5-cura-csv'] . DS . $serie . '.csv');
+    public static function loadTmpCsv($datafile){
+        return csvAssociative::compute(Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv');
     }
 
     // ******************************************************
     /**
         Auxiliary function
-        @param  $serie : a string like 'A1'
+        @param  $datafile : a string like 'A1'
         @return    Associative array containing the cura file in 5-cura-csv/ ; keys = cura ids (NUM)
     **/
-    public static function loadTmpCsv_num($serie){
-        $curaRows1 = self::loadTmpCsv($serie);
+    public static function loadTmpCsv_num($datafile){
+        $curaRows1 = self::loadTmpCsv($datafile);
         $res = [];              
         foreach($curaRows1 as $row){
             $res[$row['NUM']] = $row;
@@ -103,24 +107,24 @@ class Cura{
     /** 
         Computes the name of a html file downloaded from cura.free.fr
         and locally stored in directory data/raw/cura.free.fr (see absolute path of this directory in config.yml)
-        @param  $serie : a string like 'A1'
+        @param  $datafile : a string like 'A1'
         @return filename, a string like '902gdA1y.html' or '902gdB1.html'
     **/
-    public static function rawFilename($serie){
-        return '902gd' . $serie . (substr($serie, 0, 1) == 'A' ? 'y' : '') . '.html';
+    public static function rawFilename($datafile){
+        return '902gd' . $datafile . (substr($datafile, 0, 1) == 'A' ? 'y' : '') . '.html';
     }
     
     // *****************************************
     /** 
         Reads a html file downloaded from cura.free.fr
         and locally stored in directory data/raw/cura.free.fr (see absolute path of this directory in config.yml)
-        @param  $serie : string like 'A1'
+        @param  $datafile : string like 'A1'
         @return The content of the file
         
         @todo This code is specific to cura.free.fr data source => should be in cura.free.fr importer
     **/
-    public static function readHtmlFile($serie){
-        $raw_file = Config::$data['dirs']['1-cura-raw'] . DS . self::rawFilename($serie);
+    public static function readHtmlFile($datafile){
+        $raw_file = Config::$data['dirs']['1-cura-raw'] . DS . self::rawFilename($datafile);
         $tmp = @file_get_contents($raw_file);
         if(!$tmp){
             $msg = "ERROR : Unable to read file $raw_file\n"

@@ -22,8 +22,7 @@ class CuraRouter implements Router{
     public static function computeDatafiles($userParam){
         switch($userParam){
         	case 'all' : 
-        	    return ['all'];
-        	    //return ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'D6', 'D10', 'E1', 'E3'];
+        	    return ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'D6', 'D10', 'E1', 'E3'];
         	break;
         	case 'A' : 
         	    return ['A1', 'A2', 'A3', 'A4', 'A5', 'A6'];
@@ -72,9 +71,13 @@ class CuraRouter implements Router{
                 }
             }
             catch(\Exception $e){
-                // silently ignore php files present in the directory, but containing errors
+                // silently ignore php files present in the directory,
+                // not implementing Command, or containing errors.
             }
         }
+        
+        // csv2dl is available for all datafiles, and implemented in subpackage all.
+        $res[] = 'csv2dl';
         return $res;
     }
     

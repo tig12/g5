@@ -28,7 +28,7 @@ class legalTime implements Command{
     // *****************************************
     // Implementation of Command
     /** 
-        Called by : php run-g5.php cura A legalTime
+        Called by : php run-g5.php cura <datafile> legalTime
         
         @param $params array containing two elements :
                        - the datafile to process.
@@ -36,25 +36,11 @@ class legalTime implements Command{
         @return String report
     **/
     public static function execute($params=[]): string{
-
+        
         if(count($params) > 2){
             return "WRONG USAGE : useless parameter for legalTime {$params[2]}\n";
         }
-        $datafiles = CuraRouter::computeDatafiles($params[0]);
-        $report = '';
-        foreach($datafiles as $datafile){
-            $report .= self::computeOneFile($datafile);
-        }
-        return $report;
-    }
-    
-    
-    // ******************************************************
-    /**
-        @param $datafile String like 'A1', 'A2' ... 'A6'
-        @return String report
-    **/
-    private static function computeOneFile($datafile){
+        $datafile = $params[0];
         
         $report = '';
         $res = implode(G5::CSV_SEP, Cura::TMP_CSV_COLUMNS) . "\n";
@@ -122,8 +108,10 @@ class legalTime implements Command{
         }
         file_put_contents($filename, $res);
         $p = round($nCorrected * 100 / $N, 2);
-        $report .= "$datafile : restored $nCorrected / $N dates ($p %)\n";
+        $miss = $N - $nCorrected;
+        $report .= "$datafile : restored $nCorrected / $N dates ($p %) - miss $miss\n";
         return $report;
     }
+    
 }// end class
 

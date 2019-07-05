@@ -57,13 +57,25 @@ If you type :
 the program tells you the possible values of datafiles for cura dataset : 
 <pre>Possible datafiles for dataset cura : all, A, A1, A2, A3, A4, A5, A6, D6, D10, E1, E3</pre>
 
-<code>all</code> will operate on all cura files.
-<br><code>A</code> will operate on all files of serie A.
-<br>Other values will operate on a single file.
+<ul>
+    <li><code>all</code> will operate on all cura files.</li>
+    <li><code>A</code> will operate on all files of serie A.</li>
+    <li>Other values will operate on a single file.</li>
+</ul>
+
+<br>The precise list of tranformations depends on the concerned file, but for all files, the first transformation is <code>cura2csv</code>, and the last one is <code>csv2dl</code> (see below).
 <br>
-The command :
+<br>
+For all datafiles, a transformation called <code>all</code> will perform all the transformations on a given file.
+<br>For example,
+<pre>php run-g5.php cura A4 all</pre>
+executes the available transformations on file A4, <code>raw2csv</code> and <code>csv2dl</code> included.
+
+
+<br>
+<br>One command performs all the steps for all cura datafiles :
 <pre>php run-g5.php cura all run</pre>
-performs all the steps for all cura datafiles.
+
 
 <!-- ********************************************************************************* -->
 <h2>cura2csv</h2>
@@ -101,11 +113,7 @@ During this step, some corrections are applied to the data.
 <!-- ********************************************************************************* -->
 <h2>Other transformations</h2>
 
-After <code>cura2csv</code>, other transformations are performed. They modify the files located in <code>5-cura-csv</code>.
-<br>The precise list of tranformations depends on the concerned file, but for all files, a transformation called <code>all</code> will perform all the transformations on a given file.
-<br>For example,
-<pre>php run-g5.php cura A4 all</pre>
-executes the available transformations on file A4, <code>raw2csv</code> included.
+Other transformations (between <code>raw2csv</code> and <code>csv2dl</code>) modify the files located in <code>5-cura-csv/</code>.
 <br>
 <br>Precise transformations are described in the following pages :
 <ul class="spaced naked margin-top big2">
@@ -114,6 +122,12 @@ executes the available transformations on file A4, <code>raw2csv</code> included
     <li><a href="cura-D10.html">File D10</a></li>
     <li><a href="cura-E1-E3.html">Files E1 and E3</a></li>
 </ul>
+
+<!-- ********************************************************************************* -->
+<h2>csv2dl</h2>
+For all cura files, the last step is to copy the csv file in <code>5-cura-csv/</code> to the directory containing downloadable files : <code>9-cura/</code>.
+<br>This is done by step <code>csv2dl</code>. This step only copies the file from a directory to an other, and does nothing else.
+<br>This step is bound to be suppressed, when wikidata integration is developed.
 
 
 </article>

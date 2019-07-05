@@ -21,8 +21,8 @@ dirs:
   5-csicop:             data/5-tmp/csicop
   5-cfepp:              data/5-tmp/cfepp
   #
+  9-cura:               data/9-output/datasets/cura
   9-g55-original:       data/9-output/history/1955-gauquelin/g55-original
-  9-cura-corrected:     data/9-output/datasets/cura-corrected
 
 # geoname.org parameters
 # only useful for the steps which call geonames.org web service
