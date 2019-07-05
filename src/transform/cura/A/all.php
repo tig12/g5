@@ -10,6 +10,7 @@ namespace g5\transform\cura\A;
 use g5\Config;
 use g5\patterns\Command;
 use g5\transform\g55\all\edited2cura;
+use g5\transform\cura\all\csv2dl;
 
 class all implements Command{
     
@@ -66,11 +67,15 @@ class all implements Command{
             echo edited2cura::execute($params_edited2cura);
         }
         
-        // php run-g5.php cura A1 addGeo small
+        // php run-g5.php cura A addGeo small
         echo "\n=== Execute addGeo on $datafile ===\n";
         $params_addGeo = $params;
         $params_addGeo[] = 'small';
         echo addGeo::execute($params_addGeo);
+        
+        // php run-g5.php cura A csv2dl
+        echo "\n=== Execute csv2dl on $datafile ===\n";
+        echo csv2dl::execute($params);
         
         return '';
     }

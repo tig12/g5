@@ -9,6 +9,7 @@ namespace g5\transform\cura\D10;
 
 use g5\Config;
 use g5\patterns\Command;
+use g5\transform\cura\all\csv2dl;
 
 class all implements Command{
     
@@ -27,6 +28,9 @@ class all implements Command{
         
         echo "\n=== execute raw2csv on D10 ===\n";
         echo raw2csv::execute($params);
+        
+        echo "\n=== Execute csv2dl on D10 ===\n";
+        echo csv2dl::execute($params);
         
         return '';
     }

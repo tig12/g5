@@ -9,6 +9,7 @@ namespace g5\transform\cura\D6;
 
 use g5\Config;
 use g5\patterns\Command;
+use g5\transform\cura\all\csv2dl;
 
 class all implements Command{
     
@@ -30,6 +31,9 @@ class all implements Command{
         
         echo "\n=== execute addGeo on D6 ===\n";
         echo addGeo::execute($params);
+        
+        echo "\n=== Execute csv2dl on D6 ===\n";
+        echo csv2dl::execute($params);
         
         return '';
     }

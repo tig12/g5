@@ -9,6 +9,7 @@ namespace g5\transform\cura\E1_E3;
 
 use g5\Config;
 use g5\patterns\Command;
+use g5\transform\cura\all\csv2dl;
 
 class all implements Command{
     
@@ -27,10 +28,15 @@ class all implements Command{
             return "INVALID PARAMETER : " . $params[2] . " - all doesn't need this parameter\n";
         }
         
+        $datafile = $params[0];
+        
         $params_raw2csv = $params;
         $params_raw2csv[] = 'small';
-        echo "\n=== execute raw2csv on {$params[0]} ===\n";
+        echo "\n=== execute raw2csv on $datafile ===\n";
         echo raw2csv::execute($params_raw2csv);
+        
+        echo "\n=== Execute csv2dl on $datafile ===\n";
+        echo csv2dl::execute($params);
         
         return '';
     }

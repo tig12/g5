@@ -34,6 +34,13 @@ class CuraCommand implements Command{
         
         $datafiles = CuraRouter::computeDatafiles($datafile);
         
+        // count is particular, because it is executed once even if the datafile represents several datafiles.
+        // So does not loop on datafiles.
+        if($command == 'count'){
+            $class = "g5\\transform\\cura\\" . Cura::DATAFILES_SUBNAMESPACE[$datafile] . '\\count';
+            return $class::execute($params);
+        }
+        
         foreach($datafiles as $dtfile){
             // csv2dl is available for all datafiles, and implemented in subpackage all.
             if($command == 'csv2dl'){
