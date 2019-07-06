@@ -35,13 +35,7 @@ class count implements Command{
         $datafiles = CuraRouter::computeDatafiles('A');
         $dir = Config::$data['dirs']['5-cura-csv'];
         
-        // associative arrays holding the counts
-        // keys = datafiles ; values = counts
-        $N = $nNAME
-           = $nDATE_C
-           = $nGEOID
-           = array_fill_keys($datafiles, 0);
-        $pNAME = $pDATE_C = $pGEOID = 0;
+        $N = $nNAME = $nDATE_C = $nGEOID = array_fill_keys($datafiles, 0);
         $missNAME = $missDATE_C = $missGEOID = 0;
         
         foreach($datafiles as $datafile){
@@ -85,7 +79,6 @@ class count implements Command{
             $res .= '<td>' . $N[$datafile] . '</td>';
             //
             $p = $nNAME[$datafile] * 100 / $N[$datafile];
-            $pNAME += $p;
             $miss = $N[$datafile] - $nNAME[$datafile];
             $missNAME += $miss;
             $res .= '<td>' . $nNAME[$datafile] . '</td>';
@@ -93,7 +86,6 @@ class count implements Command{
             $res .= '<td>' . round($p, 2) . ' %</td>';
             //
             $p = $nDATE_C[$datafile] * 100 / $N[$datafile];
-            $pDATE_C += $p;
             $miss = $N[$datafile] - $nDATE_C[$datafile];
             $missDATE_C += $miss;
             $res .= '<td>' . $nDATE_C[$datafile] . '</td>';
@@ -101,7 +93,6 @@ class count implements Command{
             $res .= '<td>' . round($p, 2) . ' %</td>';
             //
             $p = $nGEOID[$datafile] * 100 / $N[$datafile];
-            $pGEOID += $p;
             $miss = $N[$datafile] - $nGEOID[$datafile];
             $missGEOID += $miss;
             $res .= '<td>' . $nGEOID[$datafile] . '</td>';
@@ -111,22 +102,26 @@ class count implements Command{
             $res .= '</tr>' . "\n";
         }
         //
-        $pNAME = $pNAME / count($datafiles);
-        $pDATE_C = $pDATE_C / count($datafiles);
-        $pGEOID = $pGEOID / count($datafiles);
+        $totalAll = array_sum($N);
+        $totalNAME = array_sum($nNAME);
+        $totalDATE_C = array_sum($nNAME);
+        $totalGEOID = array_sum($nGEOID);
+        $pNAME = $totalNAME * 100 / $totalAll;
+        $pDATE_C = $totalDATE_C * 100 / $totalAll;
+        $pGEOID = $totalGEOID * 100 / $totalAll;
         $res .= '<tr>';
         $res .= '<td>TOTAL</td>';
-        $res .= '<td>' . array_sum($N) . '</td>';
+        $res .= '<td>' . $totalAll . '</td>';
         //
-        $res .= '<td>' . array_sum($nNAME) . '</td>';
+        $res .= '<td>' . $totalNAME . '</td>';
         $res .= '<td>' . $missNAME . '</td>';
         $res .= '<td>' . round($pNAME, 2) . ' %</td>';
         //
-        $res .= '<td>' . array_sum($nDATE_C) . '</td>';
+        $res .= '<td>' . $totalDATE_C . '</td>';
         $res .= '<td>' . $missDATE_C . '</td>';
         $res .= '<td>' . round($pDATE_C, 2) . ' %</td>';
         //
-        $res .= '<td>' . array_sum($nGEOID) . '</td>';
+        $res .= '<td>' . $totalGEOID . '</td>';
         $res .= '<td>' . $missGEOID . '</td>';
         $res .= '<td>' . round($pGEOID, 2) . ' %</td>';
         $res .= '</tr>' . "\n";
