@@ -84,8 +84,8 @@ class raw2csv implements Command{
     **/
     public static function execute($params=[]): string{
         
-        if(count($params) > 2){
-            return "INVALID PARAMETER : " . $params[2] . " - raw2csv doesn't need this parameter\n";
+        if(count($params) > 0){
+            return "INVALID PARAMETER : " . $params[0] . " - raw2csv doesn't need this parameter\n";
         }
         
         $output = implode(G5::CSV_SEP, self::OUTPUT_COLUMNS) . "\n";
@@ -130,10 +130,6 @@ class raw2csv implements Command{
             $new['ENG'] = trim($record['ENG']);
             $new['EXTEND'] = trim($record['EXTEND']);
             $new['NIENHUYS'] = trim($record['NIENHUYS']);
-//echo "\n<pre>"; print_r($new); echo "</pre>\n"; exit;
-//            echo $line . "\n";
-            //echo 'NI = ' . trim($record['NIENHUYS'] . "\n";
-            //echo "\n<pre>"; print_r(trim($record); echo "</pre>\n";
             $output .= implode(G5::CSV_SEP, $new) . "\n";
         }
         
@@ -164,7 +160,6 @@ class raw2csv implements Command{
             $min = $tmp[1];
             if(strlen($min) == 1 && $min < 10){
                 $min *= 10; // dirty patch because libre office truncated trailing zeroes
-//echo $record[' QUEL'] . ' ' . $record[' NR'] . ' ' . $record['NAME'] . ' ' . $record['VORNAME'] . ' ' . "'$hour' '$day'\n";
             }
             $min = round($min * 0.6); // convert decimal part of hour to minutes
             $date .= ':' . str_pad ($min , 2, '0', STR_PAD_LEFT);
