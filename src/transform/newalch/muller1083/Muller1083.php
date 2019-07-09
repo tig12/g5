@@ -9,12 +9,14 @@ namespace g5\transform\newalch\muller1083;
 
 use g5\Config;
 use tiglib\arrays\csvAssociative;
+use tiglib\strings\encode2utf8;
 
 class Muller1083{
     
-    /** Name of the csv file in 5-tmp/newalch-csv **/
+    /** Name of the csv file in 5-newalch-csv/ **/
     const TMP_CSV_FILE = '1083MED.csv';
     
+    /** Columns of TMP_CSV_FILE **/
     const TMP_CSV_COLUMNS = [
         'NR',
         'SAMPLE',
@@ -50,7 +52,17 @@ class Muller1083{
         'NIENMA',
         'NIENJU',
         'NIENSA',
+        'NOTES'
     ];
+    
+    
+    // ******************************************************
+    /**
+        @param $
+    **/
+    public static function raw_filename(){
+        return Config::$data['dirs']['1-newalch-raw'] . DS . '05-muller-medics' . DS . '5a_muller-medics-utf8.txt';
+    }
     
     
     // ******************************************************
