@@ -1,12 +1,12 @@
 <?php
 /********************************************************************************
-    Uses 5-tmp/newalch/4391SPO.csv to compute missing names in 5-tmp/cura-csv/A1.csv
+    Uses 5-newalch-csv/4391SPO.csv to compute missing names in 5-cura-csv/A1.csv
     
-    Works only for file A1
+    Operates only for file A1
     
-    @pre        5-tmp/cura-csv/A1.csv must exist.
+    @pre        5-cura-csv/A1.csv must exist.
                 So src/transform/cura/A/raw2csv.php must have been executed before.
-    @pre        5-tmp/newalch/4391SPO.csv must exist.
+    @pre        5-newalch-csv/4391SPO.csv must exist.
                 So src/transform/newalch/ertel4391/raw2csv.php must have been executed before.
     @license    GPL
     @history    2019-05-18 07:06:41+02:00, Thierry Graff : creation
@@ -20,7 +20,10 @@ use tiglib\arrays\csvAssociative;
 
 class ertel2csv implements Command{
     
-    const POSSIBLE_PARAM = ['update', 'echo'];
+    const POSSIBLE_PARAM = [
+        'update',
+        'echo'
+    ];
     
     // *****************************************
     // Implementation of Command
@@ -34,7 +37,10 @@ class ertel2csv implements Command{
     public static function execute($params=[]): string{
         
         $ex_msg = "php run-g5.php cura A1 ertel2csv update\n";
-        $err_msg = "WRONG USAGE - ertel2csv needs one parameter. Can be 'update' (modify cura file) or 'echo' (echo detailed names)\nex : $ex_msg";
+        $err_msg = "WRONG USAGE - ertel2csv needs one parameter. Can be :\n"
+                 . "  update : modify cura file\n"
+                 . "  echo : echo detailed names\n"
+                 . "ex : $ex_msg";
         
         if(count($params) != 3){
             return $err_msg;

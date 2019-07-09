@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Wikidata | Gauquelin5</title>
+    <title>Müller 1083 | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="">
     <meta name="robots" content="index,follow">
@@ -12,7 +12,7 @@
     <meta name="dcterms.dateCopyrighted" content="2019">
     <!-- 
     tigsite:
-        history: , Thierry Graff : Creation
+        history: 2019-07-09 16:39:51+02:00, Thierry Graff : Creation
     -->
 </head>
 
@@ -23,52 +23,61 @@
 
 <nav class="prevnext">
     <a class="top" href="index.html">&uarr;</a>
+    <a class="prev" rel="prev" href="newalch-ertel4391.html">&larr;</a>
 </nav>
 
 <header>
-<h1>Wikidata integration</h1>
+<h1>
+Müller 1083
+<div class="subtitle">(1083 physicists)</div>
+</h1>
 <div class="intro">
-An important feature of "good data" is the ability to connect them to other datasets. This permits to check, eventually correct them, and provides means to build new datasets. Current page explores the possibility to connect Gauquelin data with <a href="https://www.wikidata.org">wikidata.org</a>. From wikidata, it's possible to link with other standard ids (ISNI, VIAF etc.).
-<br>Matching wikidata with Gauquelin data has not (yet) been coded ; this page only explains how to retrieve relevant data from wikidata.org locally.
+This file has a particular historical interset, as it was used for the first replication of a Gauquelin planetary effect completely independantly from Gauquelin.
+<br>An other interest of this file is the quality of its data. In particular, person and place names are generally more precise than in file A2.
+<br>It contains records from Cura files A2 and E3.
+
 </div>
 </header>
 
 <article>
-
 <!-- ********************************************************************************* -->
-<h2>Summary</h2>
-I started to try <a href="https://query.wikidata.org/">Wikidata Query Service</a>, learning rudiments of sparql for the occasion.
-<br>I started to retrieve professional groups and wrote code to see if it can be matched with Gauquelin data, and had very bad matching rates. This could be bettered with more elaborate matching procedures. For example, to match a french person, the name should be matched with french label.
-<br>So I wrote queries to get more information, and quickly faced "time out" problems.
-<br>I didn't try very hard on query optimization and looked if I could install wikidata on my machine, but I was scared by the 38 Gb bz2 file to download the data.
-<br>Then I saw that it was possible to download the entities one by one, obtaining json files. This gives a solution :
+<h2>Integration to gauquelin5</h2>
+
+Very few work has been done on this file for the moment.
+<br>It could be used to 
 <ul>
-    <li>
-        Use query service to build csv files containing the wikidata ids of persons belonging to different professional groups. Asking just the id (and eventually a label) doesn't time out.
-    </li>
-    <li>
-        Download the entities that are stored in these csv files to get one json per person.
-    </li>
+    <li>Check legal time restoration in A2.</li>
+    <li>Better place names in A2 (then better matching to geonames).</li>
+    <li>Better names in A2</li>
+    <li>And it brings new persons not present in Cura files.</li>
 </ul>
 
-These json files contain all the informations available about entities ; they can be used to try to write the matching between Gauquelin and wikidata.
+<!-- ************************************* -->
+<h3>Generate csv</h3>
+The first step is to generate the file <b><code>5-newalch-csv/1083MED.csv</code></b> :
+<pre>php run-g5.php newalch ertel4391 raw2csv</pre>
 
+<!-- ************************************* -->
+<h3>Fix cura A2 names</h3>
 
-<!-- ********************************************************************************* -->
-<h2>Get occupation codes</h2>
+<pre>
+php run-g5.php cura A2 muller2csv 
+WRONG USAGE - muller2csv needs one parameter. Can be :
+  update : modify cura file
+  echo : echo detailed names
+ex : php run-g5.php cura A2 muller2csv update
+</pre>
 
+<pre>
+php run-g5.php cura A2 muller2csv update
+</pre>
+<pre>
+Nb missing names in cura A2 : 207
+Müller 1083 contains : 739 lines from A2
+Nb corrections : 12
+</pre>
 
-<!-- ********************************************************************************* -->
-<h2>Try elaborate queries</h2>
-
-
-<!-- ********************************************************************************* -->
-<h2>Use minimal queries</h2>
-
-
-<!-- ********************************************************************************* -->
-<h2>Download json</h2>
-
+Only 12, the result is quite disapointing.
 
 </article>
 </div><!-- end class="main" -->

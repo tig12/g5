@@ -46,6 +46,14 @@ class all implements Command{
             echo ertel2csv::execute($params_ertel2csv);
         }
         
+        if($datafile == 'A2'){
+            // php run-g5.php cura A2 muller2csv update
+            echo "\n=== Execute muller2csv on $datafile ===\n";
+            $params_muller2csv = $params;
+            $params_muller2csv[] = 'update';
+            echo ertel2csv::execute($params_muller2csv);
+        }
+        
         // php run-g5.php cura A legalTime
         echo "\n=== Execute legalTime on $datafile ===\n";
         echo legalTime::execute($params);
