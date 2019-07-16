@@ -1,9 +1,11 @@
+config.yml
 
 # files marked for deletion
 z.*
 
-config.yml
+1.admin
 
+# don't version data/ but version data/3-edited
 data/*
 !data/3-edited
 
