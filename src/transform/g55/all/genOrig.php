@@ -38,7 +38,7 @@ class genOrig implements Command {
         Generates files in 9-g55-original/ from csv files located in 3-g55-edited/
         See 9-g55-original/README for a meaning of generated fields
         
-        Called by : php run-g5.php g55 <filename> edited2original
+        Called by : php run-g5.php g55 <filename> genOrig
         
         @param $params Array containing 2 elements :
                        - the group to generate (like '570SPO')

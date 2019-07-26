@@ -1,10 +1,8 @@
 <?php
 /********************************************************************************
-    Code analyzing files of 3-g55-edited
-    and modifying files of 5-cura-csv/ using files of 3-g55-edited/
+    Code modifying files of 5-cura-csv/ using files of 3-g55-edited/
     
     Example of use : php run-g5.php g55 570SPO edited2cura date
-
     
     @pre        5-cura-csv/A1.csv must exist in its best possible state.
                 So src/transform/cura/A/raw2csv.php must have been executed before.
@@ -45,7 +43,7 @@ class edited2cura implements Command {
     // *****************************************
     /** 
         @param $params Array containing 3 or more strings :
-                       - the group to analyze (like '570SPO')
+                       - the group to process (like '570SPO')
                          this parameter has already been checked in class G5::Run
                        - the name of this command ("execute", useless here)
                        - the name of the action to perform
@@ -318,7 +316,7 @@ class edited2cura implements Command {
         $g55group = $params[0];
         $res = '';
         $res .= "<table class=\"wikitable margin\">\n";
-        $res .= "    <tr><th>NUM</th><th>FAMILY</th><th>GIVEN</th><th>DATE</th><th>PLACE</th><th>OCCU<br>G55</th><th>OCCU<br>Cura</th>\n";
+        $res .= "    <tr><th>NUM</th><th>FAMILY</th><th>GIVEN</th><th>DATE</th><th>PLACE</th><th>OCCU<br>Cura</th><th>OCCU<br>G55</th>\n";
         [$origin, $g55rows, $curarows] = G55::prepareCuraMatch($g55group);
         $N = 0;
         foreach($g55rows as $g55row){
