@@ -10,6 +10,7 @@ namespace g5\transform\cura\A;
 use g5\Config;
 use g5\patterns\Command;
 use g5\transform\g55\all\edited2cura;
+use g5\transform\cura\all\tweaked2csv;
 use g5\transform\cura\all\csv2dl;
 
 class all implements Command{
@@ -37,6 +38,10 @@ class all implements Command{
         $params_raw2csv = $params;
         $params_raw2csv[] = 'small';
         echo raw2csv::execute($params_raw2csv);
+        
+        // php run-g5.php cura A tweaked2csv small
+        echo "\n=== Execute tweaked2csv on $datafile ===\n";
+        echo tweaked2csv::execute($params);
         
         if($datafile == 'A1'){
             // php run-g5.php cura A1 ertel2csv update

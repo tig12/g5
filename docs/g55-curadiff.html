@@ -121,7 +121,7 @@ lists the differences between dates of Cura A files and Gauquelin 1955 groups.
 <pre>
                                  cura  | g55
 different hours :
-688 BOX 1904-05-29 Thil Marcel   22:00 | 07:00
+688 BOX Thil Marcel 1904-05-29   22:00 | 07:00
 different days :
 36 ATH El Mabrouk Mohamed   1928-10-27 | 1928-10-17
 595 BOX Cuillieres René     1929-07-22 | 1929-07-12
@@ -134,28 +134,33 @@ different days :
 Out of these 5 differences, Marcel Thil can be checked using online civil registries. The other are too recent, but some can be checked from the web.
 <ul class="spaced margin-top">
     <li>
-        <code>1904-05-29 Thil Marcel</code>
+        <code>688 BOX Thil Marcel 1904-05-29</code>
         <br><a href="https://en.wikipedia.org/wiki/Marcel_Thil">English Wikipedia</a> gives a different date (1904-05-25), but <a href="https://fr.wikipedia.org/wiki/Marcel_Thil">french wikipedia</a> gives the same date (1904-05-29).
         <br>Birth certificate is available online : <a href="http://archives.haute-marne.fr/viewer/series/AD52_Edepot_stdizierE01702_01/">Registres paroissiaux et d'état civil - collection communale SAINT-DIZIER</a>, p 36 / 88. It says "vingt neuf mai à dix heures du soir" ; <a href="img/birth-certificates/1904-05-29-thil-marcel.jpg">see image</a>.
-        <br>Cura is then correct.
+        <br>Cura is then correct, both for day and time.
+        <br>Fix not needed
     </li>
     <li>
         <code>36 ATH El Mabrouk Mohamed</code>
         <br>Can be found on web pages (for example <a href="https://fr.wikipedia.org/wiki/Patrick_El_Mabrouk">wikipedia</a> or <a href="http://www.racingpast.ca/bob-phillips.php?id=46">racingpast.ca</a>) as Patrick El Mabrouk, and the birthdate (1928-10-10) differs from Cura and G55.
-        <br>Not present in CFEPP (paper) book. 
+        <br>Not present in CFEPP paper book.
+        <br>Not fixed - waiting for a reliable source.
     </li>
     <li>
         <code>595 BOX Cuillieres René</code>
-        <br>Couldn't find it neither on the web nor in CFEPP (paper) book.
+        <br>Couldn't find it neither on the web nor in CFEPP paper book.
+        <br>Not fixed - waiting for a reliable source.
     </li>
     <li>
         <code>1976 RUG Puig-Aubert Henri</code>
         <br>Can be found on <a href="https://en.wikipedia.org/wiki/Puig_Aubert">wikipedia</a> ; the date corresponds to G55 (1925-03-24).
+        <br>Not fixed - waiting for a reliable source.
     </li>
     <li>
         <code>1999 RUG Terreau Maurice</code>
         <br>Can be found on web pages (for example <a href="https://fr.wikipedia.org/wiki/Maurice_Terreau">wikipedia</a>) ; the date corresponds to G55 (1923-01-30).
-        <br>Also present in CFEPP file from <a href="https://newalchemypress.com/gauquelin/research4.php">newalchemypress.com</a> ; the date also corresponds to G55.
+        <br>Also present in CFEPP paper book ; the date and time correspond to G55.
+        <br>Fix included in <code>3-cura-tweaked/A1.yml</code>
     </li>
 </ul>
 

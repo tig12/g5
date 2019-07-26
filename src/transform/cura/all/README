@@ -1,1 +1,5 @@
 Code operating on all cura files
+
+To add a new command available for all cura files :
+- Add the command in CuraRouter::getCommands()
+- Handle the command in CuraCommand::execute()

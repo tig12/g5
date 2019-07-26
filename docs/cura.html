@@ -63,7 +63,10 @@ the program tells you the possible values of datafiles for cura dataset :
     <li>Other values will operate on a single file.</li>
 </ul>
 
-<br>The precise list of tranformations depends on the concerned file, but for all files, the first transformation is <code>cura2csv</code>, and the last one is <code>csv2dl</code> (see below).
+<br>The precise list of transformations depends on the concerned file, but for all files, 
+<br>- the first transformation is <code>raw2csv</code>,
+<br>- the second transformation is <code>tweaked2csv</code>
+<br>- the last transformation is <code>csv2dl</code> (see below).
 <br>
 <br>
 For all datafiles, a transformation called <code>all</code> will perform all the transformations on a given file.
@@ -78,8 +81,8 @@ executes the available transformations on file A4, <code>raw2csv</code> and <cod
 
 
 <!-- ********************************************************************************* -->
-<h2>cura2csv</h2>
-For all cura datafiles, the first transformation is <code>cura2csv</code>
+<h2>raw2csv</h2>
+For all cura datafiles, the first transformation is <code>raw2csv</code>
 <br>It extracts data from html files and produces csv files.
 <br>This step uses two entries of <code>config.yml</code> :
 <br>- It takes html pages located in a directory specified by entry <code>1-cura-raw/</code> 
@@ -109,6 +112,17 @@ During this step, some corrections are applied to the data.
         Family and given names are computed when possible.
     </li>
 </ul>
+
+
+<!-- ********************************************************************************* -->
+<h2>tweaked2csv</h2>
+
+This step transfers information from files of <code>3-cura-tweaked/</code> to files of <code>5-cura-csv/</code>.
+<br>Directory <code>3-cura-tweaked/</code> contains yaml files with human corrections on particular records.
+<br>
+<br>WARNING : this step must be done at an early stage.
+<br>For example, for serie A, if a date or a time is modified in <code>3-cura-tweaked/</code>, the step <code>tweaked2csv</code> should be done before step <code>legalTime</code>.
+
 
 <!-- ********************************************************************************* -->
 <h2>Other transformations</h2>

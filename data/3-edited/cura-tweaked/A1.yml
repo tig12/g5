@@ -1,4 +1,7 @@
 
+
+# human corrections
+
 -
   NUM: 223
   FNAME: de Saint-Exupery
@@ -35,8 +38,8 @@
   
 -
   NUM: 336
-  FNAME: Denti Pirajno Salvatore
-  GNAME:                   
+  FNAME: Denti Pirajno
+  GNAME: Salvatore
   notes:
     -
   
@@ -87,7 +90,7 @@
   FNAME: Negrone Cambiaso Carina
   GNAME: 
   notes:
-    -
+    -                                
   
 -
   NUM: 432
@@ -118,11 +121,10 @@
     -
   
 -
-  NUM: 
-  FNAME: 
-  GNAME: 
+  NUM: 1999
+  DATE: '1923-01-30 02:00:00+00:00'
   notes:
-    -
+    - Fix a date error in cura file A1 ; 1923-01-30 conform to G55, wikipedia and CFEPP
   
 -
   NUM: 
