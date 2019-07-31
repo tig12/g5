@@ -10,6 +10,7 @@
 namespace tiglib\timezone;
 
 use tiglib\time\seconds2HHMMSS;
+use soniakeys\meeus\eqtime;
 
 class offset_fr{
     
@@ -32,13 +33,13 @@ class offset_fr{
         
         @return array with 3 elements : 
                 - the timezone offset, format sHH:MM (ex : '-01:00' ; '+00:23') 
-                or empty string if unable to compute.
+                  or empty string if unable to compute.
                 - an error message ; empty string if offset could be computed without ambiguity.
                 - an integer indicating the kind of computation involved (see code, variable $case).
                 
         @todo   Implementation of computation taking into account the precise local situation
                 would need also a latitude parameter
-        @todo   Consider time equation for dates < 1891-03-15
+        @todo   Consider equation of time for dates < 1891-03-15
     **/
     public static function compute($date, $lg, $dept, $format='HH:MM'){
         if($format != 'HH:MM' && $format != 'HH:MM:SS'){
@@ -65,7 +66,7 @@ class offset_fr{
                 $case = 2;
                 //$zone = 'Europe/Berlin';
                 // @todo Possible to compute
-                $err = "Possible timezone offset error (german zone 1871-1918 ; dept 67, 68) : $date $dept";
+                $err = "Possible timezone offset error (german zone 1871 - 1918 ; dept 67, 68) : $date $dept";
             }
         }                                                         
         if($date >= '1940-02' && $date <= '1942-11'){
@@ -80,7 +81,7 @@ class offset_fr{
         if($date < '1891-03-15'){
             $case = 4;
             // hour = HLO, local hour at real sun
-            // HLOM = HLO + E ******** Here should consider time equation ********
+            // HLOM = HLO + E ******** Here should consider equation of time ********
             // HLOM = UT + Lg
             // offset = LT - UT
             // => offset = Lg
