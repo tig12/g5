@@ -10,6 +10,7 @@ dirs:
   1-wd-raw:             data/1-raw/wikidata.org
   #
   3-cura-marked:        data/3-edited/cura-marked
+  3-cura-tweaked:       data/3-edited/cura-tweaked
   3-g55-edited:         data/3-edited/g55-edited
   #
   5-cura-csv:           data/5-tmp/cura-csv

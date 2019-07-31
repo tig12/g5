@@ -8,7 +8,9 @@
 **/
 
 // autoload for vendor code
-require_once dirname(dirname(__DIR__)) . DS . 'vendor' . DS . 'tiglib' . DS . '1.0' . DS . 'autoload.php';
+$src_dir = dirname(dirname(__DIR__));
+require_once implode(DS, [$src_dir, 'vendor', 'tig12', 'tiglib', 'autoload.php']);
+//require_once dirname(dirname(__DIR__)) . DS . 'vendor' . DS . 'soniakeys' . DS . 'autoload.php';
 
 /** 
     Autoload for g5 namespace

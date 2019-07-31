@@ -58,26 +58,20 @@ This step copies and reformat the informations of <code>902gdD6.html</code> to a
     
     <li>
         For record <code>356 Ruiz Bernardo</code>, a check on <a href="https://en.wikipedia.org/wiki/Bernardo_Ruiz">wikipedia</a> shows that he is born in Orihuela, ES, which shows that there is an error in cura file (latitude should be <code>38N05</code> instead of <code>36N05</code>).
-        <br>This was corrected manually in the resuting file. The correction was added to step <code>raw2csv()</code> in order to take it into account in case of a new execution.
+        <br>The correction was added to step <code>raw2csv()</code>.
     </li>
     
     <li>
         Fixes on names are also included in <code>raw2csv</code> code.
     </li>
     
-    <!-- 
-    <li>
-        Once geographical restoration is done, it's possible to check the longitudes and latitudes of cura file.
-        <br>This shows that longitudes and latitudes are expressed by removing the seconds, and not rounded to the nearest minute, which generates a loss of precision. <br>For example, latitude of <code>356 Ruiz Bernardo</code> is <code>00W56</code> and the real value is <code>0°56'49''</code> - a value of <code>00W57</code> in cura file would have been more precise.
-    </li>
-    -->
 </ul>
 
 
 <!-- ********************************************************************************* -->
 <h2>addGeo</h2>
 
-The second step computes country code and might be bettered to also compute place nameplace name.
+The second step computes country code and might be bettered to also compute place name.
 <br>The principle is to call geonames.org web service to perform reverse geocoding (compute place from longitude and latitude).
 <br>In practice, a new directory was added in config : <code>5-geonames</code>, located by default in <code>data/5-tmp/geonames</code>.
 <br>For each row of D6, <code>addGeo</code> :
@@ -89,6 +83,8 @@ The second step computes country code and might be bettered to also compute plac
 
 Rewriting <code>5-geonames/D6.csv</code> after each call to geonames.org permits to stop the execution and start it again without re-calling geonames.org web service for records that have already been computed.
 <br>Reverse geocoding gave a result for all records except for <code>356 Ruiz Bernardo</code> (see correction above).
+<br>
+<br>The fix on Bernardo Ruiz shows that longitudes and latitudes are expressed by removing the seconds, and not rounded to the nearest minute, which generates a loss of precision : latitude of <code>356 Ruiz Bernardo</code> is <code>00W56</code> and the real value is <code>0°56'49''</code> - a value of <code>00W57</code> in cura file would have been more precise.
 
 <!-- ************************************* -->
 <h3>Tests</h3>
@@ -187,7 +183,7 @@ From these examples, it seems that
     <li>Birth places given in cura file correspond to wikipedia.</li>
     <li>Coordinates contained in cura files are not precise enough to reach the good birth place using geonames.org reverse geocoding.</li>
 </ul>
-But this process has the interest to restore the country, giving the ability to compute the timezone offset.
+But step <code>addGeo</code> has the interest to restore the country, giving the ability to compute the timezone offset.
 
 
 <!-- ********************************************************************************* -->
