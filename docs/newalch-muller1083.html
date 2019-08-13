@@ -40,8 +40,19 @@ This file has a particular historical interset, as it was used for the first rep
 </header>
 
 <article>
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#1-integration-to-gauquelin5">Integration to gauquelin5</a>
+            <ul>
+                <li><a href="#1-1-generate-csv">Generate csv</a></li>
+                <li><a href="#1-2-fix-cura-a2-names">Fix cura A2 names</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
 <!-- ********************************************************************************* -->
-<h2>Integration to gauquelin5</h2>
+<h2><a name="1-integration-to-gauquelin5">Integration to gauquelin5</a></h2>
 
 Very few work has been done on this file for the moment.
 <br>It could be used to 
@@ -53,12 +64,12 @@ Very few work has been done on this file for the moment.
 </ul>
 
 <!-- ************************************* -->
-<h3>Generate csv</h3>
+<h3><a name="1-1-generate-csv">Generate csv</a></h3>
 The first step is to generate the file <b><code>5-newalch-csv/1083MED.csv</code></b> :
 <pre>php run-g5.php newalch ertel4391 raw2csv</pre>
 
 <!-- ************************************* -->
-<h3>Fix cura A2 names</h3>
+<h3><a name="1-2-fix-cura-a2-names">Fix cura A2 names</a></h3>
 
 <pre>
 php run-g5.php cura A2 muller2csv 

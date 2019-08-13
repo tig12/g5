@@ -193,7 +193,7 @@ class raw2full implements Command{
                 $dir = Full::getDirectory($new['birth']['date']);
             }
             catch(\Exception $e){
-                $dir = Config::$data['dirs']['5-full'] . DS . 'fixme';
+                $dir = Config::$data['dirs']['7-full'] . DS . 'fixme';
                 // $outfile = $dir . DS . $new['slug'] . '.yml';
                 echo "INVALID DATE in $infile for {$new['name']} : {$new['birth']['date']}\n";
                 echo "      Stored in $dir\n";

@@ -36,6 +36,20 @@ The main problem of page <code>902gdD6.html</code> is that it contains neither p
 </header>
 
 <article>
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#1-raw2csv">raw2csv</a>
+        </li>
+        <li>
+            <a href="#2-addgeo">addGeo</a>
+            <ul>
+                <li><a href="#2-1-tests">Tests</a></li>
+                <li><a href="#2-2-temporary-conclusion">Temporary conclusion</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
 
 The full set of transformations can be executed with the command :  
 <pre>php run-g5.php cura D6 all</pre>
@@ -47,7 +61,7 @@ php run-g5.php cura D6 csv2dl
 </pre>
 
 <!-- ********************************************************************************* -->
-<h2>raw2csv</h2>
+<h2><a name="1-raw2csv">raw2csv</a></h2>
 This step copies and reformat the informations of <code>902gdD6.html</code> to a csv file in directory <code>2-cura-csv</code>.
 
 <ul class="spaced">
@@ -69,7 +83,7 @@ This step copies and reformat the informations of <code>902gdD6.html</code> to a
 
 
 <!-- ********************************************************************************* -->
-<h2>addGeo</h2>
+<h2><a name="2-addgeo">addGeo</a></h2>
 
 The second step computes country code and might be bettered to also compute place name.
 <br>The principle is to call geonames.org web service to perform reverse geocoding (compute place from longitude and latitude).
@@ -87,7 +101,7 @@ Rewriting <code>5-geonames/D6.csv</code> after each call to geonames.org permits
 <br>The fix on Bernardo Ruiz shows that longitudes and latitudes are expressed by removing the seconds, and not rounded to the nearest minute, which generates a loss of precision : latitude of <code>356 Ruiz Bernardo</code> is <code>00W56</code> and the real value is <code>0°56'49''</code> - a value of <code>00W57</code> in cura file would have been more precise.
 
 <!-- ************************************* -->
-<h3>Tests</h3>
+<h3><a name="2-1-tests">Tests</a></h3>
 
 The purpose is to check the cities given by geonames.org web service.
 Some examples are given in <code>902gdD6.html</code>, which permit a first estimation.
@@ -177,7 +191,7 @@ All cities but one differ !
 </table>
 
 <!-- ************************************* -->
-<h3>Temporary conclusion</h3>
+<h3><a name="2-2-temporary-conclusion">Temporary conclusion</a></h3>
 From these examples, it seems that
 <ul class="simple">
     <li>Birth places given in cura file correspond to wikipedia.</li>

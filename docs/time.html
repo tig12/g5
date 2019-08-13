@@ -33,11 +33,24 @@ This page deals with a small but important detail : how to store times.
 </header>
 
 <article>
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#1-the-problem">The problem</a>
+        </li>
+        <li>
+            <a href="#2-a-solution">A solution</a>
+            <ul>
+                <li><a href="#2-1-gauquelin5-integration">Gauquelin5 integration</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
 
 In this page, "legal time" means "the time that can be read on the birth certificate".
 
 <!-- ********************************************************************************* -->
-<h2>The problem</h2>
+<h2><a name="1-the-problem">The problem</a></h2>
 
 Gauquelin data available on cura.free.fr are sometimes given in a format that generates a problem.
 <br>For example, record n° 798 of file A1 is given like this in cura.free.fr :
@@ -72,7 +85,7 @@ It's a problem, because if one wants to check the data, it's impossible to check
 
 
 <!-- ********************************************************************************* -->
-<h2>A solution</h2>
+<h2><a name="2-a-solution">A solution</a></h2>
 
 Using ISO 8601 format in the A1-798 example, CURA date would be expressed as <code><b>1909-03-14 04:50:40+00:00</b></code>
 <br>Comparison between CURA and LERRCP permits to deduce that timezone offset is <code>9' 40''</code>. 
@@ -88,7 +101,7 @@ Using ISO 8601 format in the A1-798 example, CURA date would be expressed as <co
 <br>This solution has an inconvenient : it obliges to express the timezone offset in the form <code>sHH:MM:SS</code> ; this form does not respect ISO 8601 standard, which does not permit to express seconds for the timezone offset (this point is not certain, as part of ISO 8601 standard is not available for free).
 
 <!-- ************************************* -->
-<h3>Gauquelin5 integration</h3>
+<h3><a name="2-1-gauquelin5-integration">Gauquelin5 integration</a></h3>
 The choice was made to express timezone offset like above, even if this does not strictly respect ISO 8601.
 <br>For the files concerned by current code (data of famous people), restoration only needs to be done for files of serie A.
 <br>This is done by :

@@ -14,6 +14,16 @@ class Full{
     /** Pattern to check birth date. **/
     const PDATE = '/\d{4}-\d{2}-\d{2}/';
     
+    public static $DIR_ALL;
+    
+    // ******************************************************
+    /**
+        @param $
+    **/
+    public static function init(){
+        self::$DIR_ALL = Config::$data['dirs']['7-full'] . DS . 'all';
+    }
+    
     // ******************************************************
     /**
         Returns the path to sub-directory of 5-tmp/full corresponding too $birthdate
@@ -25,10 +35,11 @@ class Full{
         if(preg_match(self::PDATE, $birthdate) != 1){
             throw new \Exception("Invalid date : $birthdate"); 
         }
-        //$subdir = substr($birthdate, 0, 10); // YYYY-MM-DD
-        $subdir = substr($birthdate, 0, 4); // YYYY
+        //$subdir = substr($birthdate, 0, 10); // one subdir per day
+        //$subdir = substr($birthdate, 0, 7); // one subdir per month
+        $subdir = substr($birthdate, 0, 4); // one subdir per year
         //$subdir = floor($y / 10) * 10; // one subdir per decade
-        return Config::$data['dirs']['5-full'] . DS . $subdir;
+        return self::$DIR_ALL . DS . $subdir;
     }
     /* 
         // test

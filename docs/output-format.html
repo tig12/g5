@@ -33,6 +33,21 @@
 </header>
 
 <article>
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#1-csv-fields">CSV fields</a>
+        </li>
+        <li>
+            <a href="#2-occupation-codes">Occupation codes</a>
+            <ul>
+                <li><a href="#2-1-general-codes">General codes</a></li>
+                <li><a href="#2-2-artists">Artists</a></li>
+                <li><a href="#2-3-sports">Sports</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
 
 Here are the field names used in files of <code>data/5-tmp/</code>
 <br>In the csv files, the first line contains field names ; other lines contain data.
@@ -40,7 +55,7 @@ Here are the field names used in files of <code>data/5-tmp/</code>
 <br>Character encoding is UTF-8.
 
 <!-- ********************************************************************************* -->
-<h2>CSV fields</h2>
+<h2><a name="1-csv-fields">CSV fields</a></h2>
 
 Some csv files contain fields not listed here, in this case fields are documented in the README file of the csv directory.
 
@@ -221,7 +236,7 @@ Some csv files contain fields not listed here, in this case fields are documente
 </table>
 
 <!-- ********************************************************************************* -->
-<h2>Occupation codes</h2>
+<h2><a name="2-occupation-codes">Occupation codes</a></h2>
 I didn't find a convenient standard for occupation codes, so I built arbitrary codes.
 <br>Here is a complete list of occupations codes, used in all generated files.
 <br>
@@ -231,7 +246,7 @@ I didn't find a convenient standard for occupation codes, so I built arbitrary c
 <br>Note : these lists were generated from <code>share/yaml/data/groups/gauquelin-occupations.yml</code> by <code>tools/occupation-codes.php</code>.
 
 <!-- ************************************* -->
-<h3>General codes</h3>
+<h3><a name="2-1-general-codes">General codes</a></h3>
 <table class="wikitable margin">
 <tr><th>Code</th><th>Label (fr)</th><th>Label (en)</th></tr>
 <tr><td>AR</td><td>Artiste</td><td>Artist</td></tr>
@@ -247,7 +262,7 @@ I didn't find a convenient standard for occupation codes, so I built arbitrary c
 </table>
 
 <!-- ************************************* -->
-<h3>Artists</h3>
+<h3><a name="2-2-artists">Artists</a></h3>
 <table class="wikitable margin">
 <tr><th>Code</th><th>Label (fr)</th><th>Label (en)</th></tr>
 <tr><td>ACT</td><td>Acteur</td><td>Actor</td></tr>
@@ -261,7 +276,7 @@ I didn't find a convenient standard for occupation codes, so I built arbitrary c
 </table>
 
 <!-- ************************************* -->
-<h3>Sports</h3>
+<h3><a name="2-3-sports">Sports</a></h3>
 <table class="wikitable margin">
 <tr><th>Code</th><th>Label (fr)</th><th>Label (en)</th></tr>
 <tr><td>ATH</td><td>Athlétisme</td><td>Athletism</td></tr>

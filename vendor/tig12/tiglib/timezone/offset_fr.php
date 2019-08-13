@@ -10,7 +10,7 @@
 namespace tiglib\timezone;
 
 use tiglib\time\seconds2HHMMSS;
-use soniakeys\meeus\eqtime;
+use soniakeys\meeus\eqtime\eqtime;
 
 class offset_fr{
     
@@ -80,15 +80,17 @@ class offset_fr{
         
         if($date < '1891-03-15'){
             $case = 4;
-            // hour = HLO, local hour at real sun
-            // HLOM = HLO + E ******** Here should consider equation of time ********
-            // HLOM = UT + Lg
-            // offset = LT - UT
-            // => offset = Lg
-            $secs = 240 * $lg; // 240 = 24 * 3600 / 360 = nb of time seconds per longitude degree
-            $hhmmss = $format == 'HH:MM' ? seconds2HHMMSS::compute($secs, true) : seconds2HHMMSS::compute($secs);
-            //$sign = ($lg < 0 && $hhmmss != '00:00') ? '-' : '+';
-            $sign = ($lg >= 0) ? '+' : '-';
+            // From "Traité de l'heure dans le monde" :
+            // legal hour HL = HLO, local hour at real sun
+            // and UT = HLO - Lg - E (E = equation of time)
+            // offset = HL - UT
+            //        = HLO - (HLO - Lg - E)
+            //        = Lg + E
+            $lg_seconds = 240 * $lg; // 240 = 24 * 3600 / 360 = nb of time seconds per longitude degree
+            $eqtime_seconds = eqtime::compute(substr($date, 0, 10));
+            $offset_seconds = $lg_seconds + $eqtime_seconds;
+            $hhmmss = $format == 'HH:MM' ? seconds2HHMMSS::compute($offset_seconds, true) : seconds2HHMMSS::compute($offset_seconds);
+            $sign = ($offset_seconds < 0 && $hhmmss != '00:00') ? '-' : '+';
             $offset = $sign . $hhmmss;
         }
         else{

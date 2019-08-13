@@ -2,7 +2,7 @@
 /********************************************************************************
     Transfers files of 5-cura-csv/ to 9-cura/
     
-    TEMPORARY CODE - files of 5-cura-csv/ will first be stored in 5-full/
+    TEMPORARY CODE - files of 5-cura-csv/ will first be stored in 7-full/
     
     @pre        5-cura-csv/ must be populated and ready to be transfered.
     

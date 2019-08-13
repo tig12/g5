@@ -33,6 +33,30 @@
 </header>
 
 <article>
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#1-installation">Installation</a>
+            <ul>
+                <li><a href="#1-1-directory-structure">Directory structure</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#2-configuration">Configuration</a>
+            <ul>
+                <li><a href="#2-1-dirs">dirs</a></li>
+                <li><a href="#2-2-geonames-org-and-postgresql">geonames.org and postgresql</a></li>
+                <li><a href="#2-3-other-directives">Other directives</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#3-data-directory">Data directory</a>
+        </li>
+        <li>
+            <a href="#4-usage">Usage</a>
+        </li>
+    </ul>
+</nav>
 
 This software has been developed and tested under Linux (Ubuntu 18.4), using php 7.2.
 A priori, it should also work under Windows and Macintosh.
@@ -40,7 +64,7 @@ A priori, it should also work under Windows and Macintosh.
 <br>It is used through the command line.
 
 <!-- ********************************************************************************* -->
-<h2>Installation</h2>
+<h2><a name="1-installation">Installation</a></h2>
 Open a terminal and clone the repository on your local machine :
 <pre>git clone https://github.com/tig12/gauquelin5</pre>
 
@@ -49,7 +73,7 @@ PECL extension "yaml" must be installed.
 <pre>sudo apt install php-yaml</pre>
 For other systems, see <a href="https://www.php.net/manual/en/install.pecl.php">php manual</a>.
 
-<h3>Directory structure</h3>
+<h3><a name="1-1-directory-structure">Directory structure</a></h3>
 The important files and directories are :
 <pre>
 gauquelin5/
@@ -78,14 +102,14 @@ In the rest of this doc, directory <code>gauquelin5/</code> is called the <b><i>
 </ul>
 
 <!-- ********************************************************************************* -->
-<h2>Configuration</h2>
+<h2><a name="2-configuration">Configuration</a></h2>
 Create a file <code>config.yml</code> by copying <code>config.yml.dist</code> :
 <pre>cp config.yml.dist config.yml</pre>
 
 Edit <code>config.yml</code> and adapt some values :
 
 <!-- ************************************* -->
-<h3>dirs</h3>
+<h3><a name="2-1-dirs">dirs</a></h3>
 This directive permits to specify the different directories used by the program to store the data it manipulates.
 <br>The values can contain either absolute paths or paths relative to root directory.
 <br>Default values are all relative to root directory :
@@ -103,16 +127,12 @@ If you look at <code>data/</code> directory, you will see that it contains only 
 
 
 <!-- ************************************* -->
-<h3>geonames.org and postgresql</h3>
+<h3><a name="2-2-geonames-org-and-postgresql">geonames.org and postgresql</a></h3>
 To restore place names and timezones, the program uses geonames.org ; these two sections are related to geonames, <a href="geonames.html">see this page</a> for details.
-
-<!-- ************************************* -->
-<h3>Other directives</h3>
-<code>config.yml</code> contains other directives, specific to particular steps of the program. These directives are explained in the pages corresponding to these steps.
 
 
 <!-- ********************************************************************************* -->
-<h2>Data directory</h2>
+<h2><a name="3-data-directory">Data directory</a></h2>
 
 <code>data/3-edited</code> is the only data that are versioned with the program.
 <br>You can retrieve the other data in your local machine with the command :
@@ -128,7 +148,7 @@ or download one by one the files you need on your local machine.
 <br>Data located in <code>data/5-tmp</code> can be safely erased by new program execution.
 
 <!-- ********************************************************************************* -->
-<h2>Gauquelin5 usage</h2>
+<h2><a name="4-usage">Usage</a></h2>
 
 To check that the program works, type :
 <pre>php run-g5.php</pre>

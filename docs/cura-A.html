@@ -40,6 +40,37 @@ This page describes the corrections done on files A1 to A6 while converting html
 </header>
 
 <article>
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#1-raw2csv">raw2csv</a>
+            <ul>
+                <li><a href="#1-1-profession-codes">Profession codes</a></li>
+                <li><a href="#1-2-names">Names</a></li>
+                <li><a href="#1-3-small-errors">Small errors</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#2-tweaked2csv">tweaked2csv</a>
+        </li>
+        <li>
+            <a href="#3-ertel2csv">ertel2csv</a>
+        </li>
+        <li>
+            <a href="#4-legaltime">legalTime</a>
+        </li>
+        <li>
+            <a href="#5-g55-edited2csv">g55 edited2csv</a>
+            <ul>
+                <li><a href="#5-1-names">Names</a></li>
+                <li><a href="#5-2-places">Places</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#6-addgeo">addGeo</a>
+        </li>
+    </ul>
+</nav>
 
 The full set of transformations can be executed with the command :  
 <pre>php run-g5.php cura A all</pre>
@@ -61,7 +92,7 @@ Each command can be done on individual files ; for example :
 executes <code>raw2csv</code> on file A3 only.
 
 <!-- ********************************************************************************* -->
-<h2>raw2csv</h2>
+<h2><a name="1-raw2csv">raw2csv</a></h2>
 
 This command needs a parameter to indicate what it should print :
 <pre>php run-g5.php cura A raw2csv</pre>
@@ -72,7 +103,7 @@ MISSING PARAMETER : raw2csv needs a parameter to specify which output it display
 </pre>
 
 <!-- ************************************* -->
-<h3>Profession codes</h3>
+<h3><a name="1-1-profession-codes">Profession codes</a></h3>
 In some files of serie A, the precise profession codes are not associated to the records. This is possible to fix thanks to the notices that are present on cura.free.fr pages.
 <br>These informations were included to the program (see constant <code>PROFESSIONS_DETAILS</code> in the code) and in the resulting csv files, each record is associated to its precise profession.
 <br>
@@ -80,7 +111,7 @@ In some files of serie A, the precise profession codes are not associated to the
 
 
 <!-- ************************************* -->
-<h3>Names</h3>
+<h3><a name="5-1-names">Names</a></h3>
 The purpose is to obtain records containing both precise birth data and the name of the person.
 <br>
 <br>To summarize, this can be partially done by program from cura.free.fr web pages ; some cases can be fixed by human using Gauquelin 1955 book. Other cases could be fixed using the original booklets "BIRTH AND PLANETARY DATA GATHERED SINCE 1949" published by Gauquelin, but I don't have these booklets.
@@ -171,7 +202,7 @@ The program must merge the two lists. Unfortunately, these 2 lists don't share a
 This matching could be bettered for some cases, using other information sources ; see <a href="cura-results.html">Cura results</a>.
 
 <!-- ************************************* -->
-<h3>Small errors</h3>
+<h3><a name="1-3-small-errors">Small errors</a></h3>
 
 <!-- ****************** -->
 <h4>902gdA1y.html</h4>
@@ -206,17 +237,17 @@ This information is removed from the generated files because I couldn't find its
 
 
 <!-- ********************************************************************************* -->
-<h2>tweaked2csv</h2>
+<h2><a name="2-tweaked2csv">tweaked2csv</a></h2>
 See the description of this step in <a href="cura.html">page Cura data</a>.
 
 <!-- ********************************************************************************* -->
-<h2>ertel2csv</h2>
+<h2><a name="3-ertel2csv">ertel2csv</a></h2>
 For file A1, the file containing Ertel's list of sportsmen is used to compute the names that <code>raw2csv</code> couldn't compute,
 <br>This leads to a restoration of names of 100 % for file A1 ; see <a href="newalch-ertel4391.html">page on Ertel 4391</a>, paragraph "Fix cura A1 names".
 
 
 <!-- ********************************************************************************* -->
-<h2>legalTime</h2>
+<h2><a name="4-legaltime">legalTime</a></h2>
 This step partially fixes the problem described in <a href="time.html">the page about time</a>.
 <br>Legal birth time is done only for France, for cases that cannot generate ambiguity.
 <br>Ambiguities come from world wars 1 and 2, when some parts of France were invaded by Germany, and precise local conditions need to be examined to determine the timezone offset.
@@ -225,7 +256,7 @@ This step partially fixes the problem described in <a href="time.html">the page 
 
 
 <!-- ********************************************************************************* -->
-<h2>g55 edited2csv</h2>
+<h2><a name="5-g55-edited2csv">g55 edited2csv</a></h2>
 
 The restoration of 1955 group "570 sportifs" is used to better family and given names as well as place names in file A1.
 <br>This step must be performed after <code>ertel2csv</code>, as name spelling in Gauquelin 1955 book is better, and after <code>legalTime</code>.
@@ -233,7 +264,7 @@ The restoration of 1955 group "570 sportifs" is used to better family and given 
 <br>The corrections use the columns added for human corrections of files in <code>3-g55-edited/</code> (these column names end with <code>_55</code>). Other columns of these files are not used. The reason is that once a file located in <code>3-g55-edited/</code> is edited by a human, it is never updated by program again. So the columns generated by program may contain obsolete information (in fact they do, because the file <code>3-g55-edited/570SPO.csv</code> was generated before writing commands that add corrections).
 
 <!-- ************************************* -->
-<h3>Names</h3>
+<h3><a name="5-1-names">Names</a></h3>
 
 The command
 <pre>php run-g5.php g55 570SPO edited2cura name list</pre>
@@ -248,7 +279,7 @@ is used to copy the contents of columns <code>GIVEN_55</code> and <code>FAMILY_5
 <br>This command updates 59 names in file <code>A1</code>.
 
 <!-- ************************************* -->
-<h3>Places</h3>
+<h3><a name="5-2-places">Places</a></h3>
 Gauquelin 1955 place names are generally better than Cura places.
 
 <br>This works like names :
@@ -257,7 +288,7 @@ Gauquelin 1955 place names are generally better than Cura places.
 
 
 <!-- ********************************************************************************* -->
-<h2>addGeo</h2>
+<h2><a name="6-addgeo">addGeo</a></h2>
 This command needs a parameter to indicate what it should print :
 <pre>php run-g5.php cura A1 addGeo</pre>
 <pre>

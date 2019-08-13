@@ -35,12 +35,24 @@ This is done by comparing files of <code>3-g55-edited/</code> and files of <code
 </header>
 
 <article>
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#1-570-sportifs-a1">"570 sportifs" - A1</a>
+            <ul>
+                <li><a href="#1-1-missing-records-in-a1">Missing records in A1</a></li>
+                <li><a href="#1-2-different-dates">Different dates</a></li>
+                <li><a href="#1-3-different-occupation-codes">Different occupation codes</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
 
 <!-- ********************************************************************************* -->
-<h2>"570 sportifs" - A1</h2>
+<h2><a name="1-570-sportifs-a1">"570 sportifs" - A1</a></h2>
 
 <!-- ************************************* -->
-<h3>Missing records in A1</h3>
+<h3><a name="1-1-missing-records-in-a1">Missing records in A1</a></h3>
 The command
 <pre>php run-g5.php g55 570SPO edited2cura nocura</pre>
 generates the following table containing the records that are present in 1955 original group, but absent from file A1.
@@ -96,7 +108,7 @@ generates the following table containing the records that are present in 1955 or
 Both Ertel and Nienhuys say that one record was suppressed from the group 570 sportifs, but do not indicate which record, which might be one of these.
 
 <!-- ************************************* -->
-<h3>Different dates</h3>
+<h3><a name="1-2-different-dates">Different dates</a></h3>
 The command
 <pre>php run-g5.php g55 570SPO edited2cura date</pre>
 lists the differences between dates of Cura A files and Gauquelin 1955 groups.
@@ -167,7 +179,7 @@ Marcel Thil can be checked using online civil registries. Other dates are too re
 
 
 <!-- ************************************* -->
-<h3>Different occupation codes</h3>
+<h3><a name="1-3-different-occupation-codes">Different occupation codes</a></h3>
 The command
 <pre>php run-g5.php g55 570SPO edited2cura occu</pre>
 generates the following table containing the differences for occupation codes between 1955 original group and Cura file A1.

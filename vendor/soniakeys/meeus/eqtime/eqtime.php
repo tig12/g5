@@ -9,7 +9,19 @@
 ********************************************************************************/
 namespace soniakeys\meeus\eqtime;
 
-eqtime::compute('2014-07-30');
+/* 
+echo "883 CYC 1884-04-07 Seres Georges     21:04 | 21:00 -> ";
+echo eqtime::compute('1884-04-07') . "\n";
+
+echo "1934 RUG 1890-04-22 Lerou Roger      22:55 | 23:00 -> ";
+echo eqtime::compute('1890-04-22') . "\n";
+                                                                                               
+echo "2044 TEN 1886-12-12 Blanchy François 08:55 | 09:00 -> ";
+echo eqtime::compute('1886-12-12') . "\n";
+
+echo "2083 TIR 1876-05-29 Parmentier André 03:55 | 04:00 -> ";
+echo eqtime::compute('1876-05-29') . "\n";
+*/
 
 class eqtime {
     
@@ -17,8 +29,8 @@ class eqtime {
     /**
         Computes the equation of time for a given date
         @param $date YYYY-MM-DD
-        @return Value of the equation of time, in decimal minutes of time (3.5 means 3 minutes 30 seconds)
-        
+        @return Value of the equation of time, in decimal seconds of time
+                ex : 125.3 means 2 minutes + 5.3 seconds
     **/
     public static function compute($date){
         $tmp = explode('-', $date);
@@ -26,10 +38,14 @@ class eqtime {
             throw new \Exception("Invalid date : $date");
         }
         [$y, $m, $d] = $tmp;
-        exec("go run eqtime.go $y $m $d", $gores);
+        //$gofile = __DIR__ . DIRECTORY_SEPARATOR . 'eqtime.go';
+        //exec("go run $gofile $y $m $d", $gores);
+        // alternative way, if go code is compiled :
         // go build eqtime.go
-        // exec("./eqtime $y $m $d", $gores);
-        return = (double)$gores[0];
+        $execfile = __DIR__ . DIRECTORY_SEPARATOR . 'eqtime';
+        exec("$execfile $y $m $d", $gores);
+//        echo "\n"; print_r($gores); echo "\n";;
+        return (double)$gores[0];
     }
     
     
