@@ -1,0 +1,139 @@
+
+https://www.wikidata.org/wiki/Wikidata:SPARQL_tutorial
+
+#  (note: everything after a ‘#’ is a comment and ignored by WDQS.)
+
+For simple WDQS triples, items should be prefixed with wd:, and properties with wdt:
+
+For every variable ?foo in your query, you now also have a variable ?fooLabel, which contains the label of the item behind ?foo
+SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }
+SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+SERVICE wikibase:label { bd:serviceParam wikibase:language "en,fr". }
+
+-----------------
+To know what a property is :
+https://www.wikidata.org/wiki/Property:P25
+instance of (P31)
+subclass of (P279)
+applies to part (P518)
+
+-----------------
+Use ";"
+  ?child wdt:P22 wd:Q1339.
+  ?child wdt:P25 wd:Q57487.
+equivalent to 
+  ?child wdt:P22 wd:Q1339;
+         wdt:P25 wd:Q57487.
+
+Use ","
+  ?child wdt:P22 wd:Q1339;
+         wdt:P25 wd:Q57487;
+         wdt:P106 wd:Q36834;
+         wdt:P106 wd:Q486748.
+equivalent to
+  ?child wdt:P22 wd:Q1339;
+         wdt:P25 wd:Q57487;
+         wdt:P106 wd:Q36834, wd:Q486748.
+
+-----------------
+Anonymous intermediate variable :         
+  wd:Q1339 wdt:P40 ?child.
+  ?child wdt:P40 ?grandChild.
+equivalent to 
+  wd:Q1339 wdt:P40 [ wdt:P40 ?grandChild ].
+(if we don't care to ?child variable)
+
+-----------------
+natural language      example                                  SPARQL     example
+sentence               Juliet loves Romeo.                      period      juliet loves romeo.
+conjunction (clause)   Romeo loves Juliet and kills himself.   semicolon   romeo loves juliet; kills romeo.
+conjunction (noun)     Romeo kills Tybalt and himself.         comma      romeo kills tybalt, romeo.
+relative clause        Juliet loves someone who kills Tybalt.  brackets    juliet loves [ kills tybalt ].
+
+Property paths
+-----------------
+
+    ?sub wdt:P279 wd:Q838948.
+    ?work wdt:P31 ?sub.
+equivalent to
+    ?work wdt:P31 [wdt:P279 wd:Q838948].
+equivalent to
+    ?work wdt:P31/wdt:P279
+
+    ?work wdt:P31/wdt:P279*
+means : there’s one “instance of” and then any number of “subclass of” statements between the item and the class. 
+
+    ?item wdt:P31 ?temp1.
+    ?temp1 wdt:P279 ?temp2.
+    ?temp2 wdt:P279 ?class.
+equivalent to
+    ?item wdt:P31 [ wdt:P279 [ wdt:P279 ?class ] ].
+equivalent to
+    ?item wdt:P31/wdt:P279/wdt:P279 ?class.
+
+    ?item wdt:P31/wdt:P279* ?class.
+# means:
+    ?item wdt:P31 ?class
+# or
+    ?item wdt:P31/wdt:P279 ?class
+# or
+    ?item wdt:P31/wdt:P279/wdt:P279 ?class
+# or
+    ?item wdt:P31/wdt:P279/wdt:P279/wdt:P279 ?class
+# etc.
+
+?a something* ?b means that ?b might also just be ?a directly, with no path elements between them at all. 
+
+A plus (+) is similar to an asterisk, but means “one or more of this element”
+
+  wd:Q1339 wdt:P40+ ?descendant.    # P40 = child
+
+A question mark (?) is similar to an asterisk or a plus, but means “zero or one of this element”. 
+
+You can separate path elements with a vertical bar (|) instead of a forward slash; this means “either-or”
+
+You can also group path elements with parentheses (()), and freely combine all these syntax elements (/|*+?).
+
+Another way to find all descendants of Bach is :
+  ?descendant (wdt:P22|wdt:P25)+ wd:Q1339.  # :P22 = father ; #P25 = mother
+
+Qualifiers
+-----------------
+wdt: points directly to the object of the statement.
+p:, points not to the object, but to a statement node. This node then is the subject of other triples
+ps: (for property statement) points to the statement object
+pq: (property qualifier) to qualifiers
+prov:wasDerivedFrom points to reference nodes
+
+wd:Q12418 p:P186 ?statement1.    # Mona Lisa: material used: ?statement1
+?statement1 ps:P186 wd:Q296955.  # value: oil paint
+
+wd:Q12418 p:P186 ?statement2.    # Mona Lisa: material used: ?statement2
+?statement2 ps:P186 wd:Q291034.  # value: poplar wood
+?statement2 pq:P518 wd:Q861259.  # qualifier: applies to part: painting surface
+
+wd:Q12418 p:P186 ?statement3.    # Mona Lisa: material used: ?statement3
+?statement3 ps:P186 wd:Q287.     # value: wood
+?statement3 pq:P518 wd:Q1737943. # qualifier: applies to part: stretcher bar
+?statement3 pq:P580 1951.        # qualifier: start time: 1951 (pseudo-syntax)
+
+
+ORDER and LIMIT
+-----------------
+ORDER BY DESC(?population)
+LIMIT 10 
+
+
+OPTIONAL
+-----------------
+
+
+COUNT
+-----------------
+# count nb of humans
+SELECT (COUNT(?item) AS ?count)
+WHERE {
+    ?item wdt:P31/wdt:P279* wd:Q5  . 
+}
+
+

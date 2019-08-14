@@ -30,6 +30,7 @@
 <div class="intro">
 An important feature of "good data" is the ability to connect them to other datasets. This permits to check, eventually correct them, and provides means to build new datasets. Current page explores the possibility to connect Gauquelin data with <a href="https://www.wikidata.org">wikidata.org</a>. From wikidata, it's possible to link with other standard ids (ISNI, VIAF etc.).
 <br>Matching wikidata with Gauquelin data has not (yet) been coded ; this page only explains how to retrieve relevant data from wikidata.org locally.
+<br>
 </div>
 </header>
 
@@ -56,7 +57,7 @@ An important feature of "good data" is the ability to connect them to other data
 
 <!-- ********************************************************************************* -->
 <h2><a name="1-summary">Summary</a></h2>
-I started to try <a href="https://query.wikidata.org/">Wikidata Query Service</a>, learning rudiments of sparql for the occasion.
+I tried <a href="https://query.wikidata.org/">Wikidata Query Service</a> (WDQS), learning rudiments of sparql for the occasion (see <a href="https://github.com/tig12/gauquelin5/tree/master/share/wikidata.org/wikidata-sparql-tuto.txt">wikidata-sparql-tuto.txt</a>).
 <br>I started to retrieve professional groups and wrote code to see if it can be matched with Gauquelin data, and had very bad matching rates. This could be bettered with more elaborate matching procedures. For example, to match a french person, the name should be matched with french label.
 <br>So I wrote queries to get more information, and quickly faced "time out" problems.
 <br>I didn't try very hard on query optimization and looked if I could install wikidata on my machine, but I was scared by the 38 Gb bz2 file to download the data.
@@ -72,21 +73,95 @@ I started to try <a href="https://query.wikidata.org/">Wikidata Query Service</a
 
 These json files contain all the informations available about entities ; they can be used to try to write the matching between Gauquelin and wikidata.
 
+<!-- ************************************* -->
+<h3>In practice</h3>
+Some sparql queries used to retrieve wikidata data are in <a href="https://github.com/tig12/gauquelin5/tree/master/share/wikidata.org">github.com/tig12/gauquelin5/tree/master/share/wikidata.org</a>
+<br>The csv files retrieved using WDQS are stored in <code>data/1-raw/wikidata.org</code> - This directory can be set using <code>1-wd-raw</code> entry of <code>config.yml</code>.
+
+
 
 <!-- ********************************************************************************* -->
 <h2><a name="2-get-occupation-codes">Get occupation codes</a></h2>
-
+This was done using <code>profession Q28640</code> (which is a subclass of <code>occupation Q12737077</code>).
+<br>
+<br>Examples of queries which give lists of occupation codes, stored in <code>1-wd-raw/professions/</code> :
+<pre>
+# Lists of professions - professions1.csv
+# ----------------------------------------------------------------------
+SELECT ?profession ?professionLabel
+WHERE{
+    ?profession wdt:P31 wd:Q28640.
+	SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+ORDER BY (?professionLabel)
+</pre>
+<pre>
+# List of subclasses of scientist - scientist-subclasses.csv
+# ----------------------------------------------------------------------
+SELECT ?scientist ?scientistLabel
+WHERE{
+    ?scientist wdt:P279 wd:Q901.
+	SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+ORDER BY (?scientistLabel)
+</pre>
 
 <!-- ********************************************************************************* -->
 <h2><a name="3-try-elaborate-queries">Try elaborate queries</a></h2>
+
+Previous step generates csv files containing profession (or occupation) codes. It is then possible to build one query per occupation code to retrieve the persons associated with this occupation, stored in <code>1-wd-raw/professionals/</code>.
+<br>
+<br>Example of query to try to retrieve mathematicians (Q170790) with information about each person :
+
+<pre>
+SELECT DISTINCT ?person ?personLabel ?familynameLabel ?linkcount ?isni ?macTutor ?birthdate ?birthplace ?birthplaceLabel ?birthiso3166 ?birthgeonamesid ?birthcoords ?deathdate ?deathplace ?deathplaceLabel ?deathiso3166 ?deathgeonamesid ?deathcoords ?deathcause ?deathcauseLabel WHERE {
+    ?person ?P31 wd:Q170790;
+        wdt:P734 ?familyname;
+        # wdt:P735 ?givenname;
+        wdt:P569 ?birthdate;
+        wdt:P19 ?birthplace;
+        wikibase:sitelinks ?linkcount .
+    OPTIONAL { ?person wdt:P1563 ?macTutor } .
+    OPTIONAL { ?person wdt:P213 ?isni } .
+    # birth
+    ?birthplace wdt:P625 ?birthcoords .
+    OPTIONAL { ?birthplace wdt:P1566 ?birthgeonamesid } .
+    OPTIONAL { ?birthplace wdt:P17 ?birthcountry }.
+    OPTIONAL { ?birthcountry wdt:P297 ?birthiso3166 }.
+    # death
+    OPTIONAL { ?person wdt:P570 ?deathdate } .
+    OPTIONAL { ?person wdt:P20 ?deathplace } .
+    OPTIONAL { ?deathplace wdt:P625 ?deathcoords }.
+    OPTIONAL { ?deathplace wdt:P1566 ?deathgeonamesid } .
+    OPTIONAL { ?deathplace wdt:P17 ?deathcountry }.
+    OPTIONAL { ?deathcountry wdt:P297 ?deathiso3166 }.
+    OPTIONAL { ?person wdt:P509 ?deathcause }.
+    #
+    SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+ORDER BY DESC(?linkcount)
+</pre>
+
+This kind of query sometimes gives result for soe profession codes, but often times out.
 
 
 <!-- ********************************************************************************* -->
 <h2><a name="4-use-minimal-queries">Use minimal queries</a></h2>
 
+To circumvent time out, it is possible to write minimal queries, that will retrieve only the ids of the persons assoiated with a given profession code :
+
+<pre>SELECT DISTINCT ?person ?personLabel
+WHERE {
+    ?person ?P31 wd:Q170790;
+    SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+</pre>
 
 <!-- ********************************************************************************* -->
-<h2><a name="5-download-json">Download json</a></h2>
+<h2><a name="5-download-json">Download individual json</a></h2>
+Csv files generated by previous queries contain ids of persons, and these ids can be used to retrieve one by one json files containing the full informations about each person, using the per item access to wikidata.
+<br>For example, <a href="http://www.wikidata.org/wiki/Special:EntityData/Q41390.json">wikidata.org/wiki/Special:EntityData/Q41390.json</a> contains informations about Kurt Gödel.
+
 
 
 </article>

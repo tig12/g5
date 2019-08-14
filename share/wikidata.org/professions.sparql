@@ -1,0 +1,88 @@
+
+
+professions/ contains the results of the following queries
+
+profession Q28640
+subclass of
+occupation Q12737077
+
+============================ science ============================
+
+Lists of professions - professions1.csv
+----------------------------------------------------------------------
+SELECT ?profession ?professionLabel
+WHERE{
+    ?profession wdt:P31 wd:Q28640.
+	SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+ORDER BY (?professionLabel)
+
+List of subclasses of scientist - scientist-subclasses.csv
+----------------------------------------------------------------------
+SELECT ?scientist ?scientistLabel
+WHERE{
+    ?scientist wdt:P279 wd:Q901.
+	SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+ORDER BY (?scientistLabel)
+
+
+============================ art ============================
+List of subclasses of artist - artist-subclasses.csv
+----------------------------------------------------------------------
+SELECT ?artist ?artistLabel
+WHERE{
+    ?artist wdt:P279 wd:Q483501.
+	SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+ORDER BY (?artistLabel)
+
+
+============================ sport ============================
+
+List of subclasses, sub-subclasse of athletes - sport-subclasses.csv
+----------------------------------------------------------------------
+SELECT ?sport ?sportLabel
+WHERE{
+    ?sport wdt:P279+ wd:Q2066131.
+	SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+ORDER BY (?sportLabel)
+
+List of subclasses of athletes - athlets1.csv
+----------------------------------------------------------------------
+SELECT ?sport ?sportLabel
+WHERE{
+    ?sport wdt:P279 wd:Q2066131.
+	SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+ORDER BY (?sportLabel)
+
+Instances of "type of sport" - sports3.csv
+----------------------------------------------------------------------
+SELECT ?sport ?sportLabel
+WHERE{
+    ?sport wdt:P31 wd:Q31629.
+	SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+ORDER BY (?sportLabel)
+
+Instances of "sport" - sports2.csv
+----------------------------------------------------------------------
+SELECT ?sport ?sportLabel
+WHERE{
+    ?sport wdt:P31 wd:Q349.
+	SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+ORDER BY (?sportLabel)
+
+List of subclasses of sport - sports1.csv
+----------------------------------------------------------------------
+SELECT ?sport ?sportLabel
+WHERE{
+    ?sport wdt:P279 wd:Q349.
+	SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+ORDER BY (?sportLabel)
+
+

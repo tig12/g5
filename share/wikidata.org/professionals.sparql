@@ -1,0 +1,83 @@
+
+
+sparql query used to generate files of professionals/
+
+Replace Q170790 (mathematician) by profession code
+
+TODO
+-------------------
+why
+    ?person ?P31 wd:Q170790;
+and not
+    ?person wdt:P31 wd:Q170790;
+
+Retrieves only person ids
+-------------------
+SELECT DISTINCT ?person ?personLabel
+WHERE {
+    ?person ?P31 wd:Q937857;
+    SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+
+
+Retrieves only dead persons 
+-------------------
+SELECT DISTINCT ?person ?personLabel ?familynameLabel ?genderLabel ?occupation ?occupationLabel ?linkcount ?isni ?macTutor ?birthdate ?birthplace ?birthplaceLabel ?birthiso3166 ?birthgeonamesid ?birthcoords ?deathdate ?deathplace ?deathplaceLabel ?deathiso3166 ?deathgeonamesid ?deathcoords ?deathcause ?deathcauseLabel WHERE {
+    ?person ?P31 wd:Q170790;
+        wdt:P734 ?familyname;
+        wdt:P21 ?gender;
+        wdt:P106 ?occupation;
+        # wdt:P735 ?givenname;
+        wdt:P569 ?birthdate;
+        wdt:P19 ?birthplace;
+        wdt:P570 ?deathdate;
+        wdt:P20 ?deathplace;
+        wikibase:sitelinks ?linkcount .
+    # OPTIONAL { ?person wdt:P1563 ?macTutor } .
+    OPTIONAL { ?person wdt:P213 ?isni } .
+    # birth
+    ?birthplace wdt:P625 ?birthcoords .
+    OPTIONAL { ?birthplace wdt:P1566 ?birthgeonamesid } .
+    OPTIONAL { ?birthplace wdt:P17 ?birthcountry }.
+    OPTIONAL { ?birthcountry wdt:P297 ?birthiso3166 }.
+    # death
+    ?deathplace wdt:P625 ?deathcoords .
+    OPTIONAL { ?deathplace wdt:P1566 ?deathgeonamesid } .
+    OPTIONAL { ?deathplace wdt:P17 ?deathcountry }.
+    OPTIONAL { ?deathcountry wdt:P297 ?deathiso3166 }.
+    OPTIONAL { ?person wdt:P509 ?deathcause }.
+    #
+    SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+ORDER BY DESC(?linkcount)
+#LIMIT 10
+
+Query that would also return living persons (making death information optional)
+But query time out
+-------------------
+SELECT DISTINCT ?person ?personLabel ?familynameLabel ?linkcount ?isni ?macTutor ?birthdate ?birthplace ?birthplaceLabel ?birthiso3166 ?birthgeonamesid ?birthcoords ?deathdate ?deathplace ?deathplaceLabel ?deathiso3166 ?deathgeonamesid ?deathcoords ?deathcause ?deathcauseLabel WHERE {
+    ?person ?P31 wd:Q170790;
+        wdt:P734 ?familyname;
+        # wdt:P735 ?givenname;
+        wdt:P569 ?birthdate;
+        wdt:P19 ?birthplace;
+        wikibase:sitelinks ?linkcount .
+    OPTIONAL { ?person wdt:P1563 ?macTutor } .
+    OPTIONAL { ?person wdt:P213 ?isni } .
+    # birth
+    ?birthplace wdt:P625 ?birthcoords .
+    OPTIONAL { ?birthplace wdt:P1566 ?birthgeonamesid } .
+    OPTIONAL { ?birthplace wdt:P17 ?birthcountry }.
+    OPTIONAL { ?birthcountry wdt:P297 ?birthiso3166 }.
+    # death
+    OPTIONAL { ?person wdt:P570 ?deathdate } .
+    OPTIONAL { ?person wdt:P20 ?deathplace } .
+    OPTIONAL { ?deathplace wdt:P625 ?deathcoords }.
+    OPTIONAL { ?deathplace wdt:P1566 ?deathgeonamesid } .
+    OPTIONAL { ?deathplace wdt:P17 ?deathcountry }.
+    OPTIONAL { ?deathcountry wdt:P297 ?deathiso3166 }.
+    OPTIONAL { ?person wdt:P509 ?deathcause }.
+    #
+    SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+ORDER BY DESC(?linkcount)
