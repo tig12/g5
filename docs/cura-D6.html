@@ -39,10 +39,10 @@ The main problem of page <code>902gdD6.html</code> is that it contains neither p
 <nav class="toc">
     <ul>
         <li>
-            <a href="#1-raw2csv">raw2csv</a>
+            <a href="#raw2csv">raw2csv</a>
         </li>
         <li>
-            <a href="#2-addgeo">addGeo</a>
+            <a href="#addgeo">addGeo</a>
             <ul>
                 <li><a href="#2-1-tests">Tests</a></li>
                 <li><a href="#2-2-temporary-conclusion">Temporary conclusion</a></li>
@@ -50,6 +50,11 @@ The main problem of page <code>902gdD6.html</code> is that it contains neither p
         </li>
     </ul>
 </nav>
+
+
+
+
+
 
 The full set of transformations can be executed with the command :  
 <pre>php run-g5.php cura D6 all</pre>
@@ -61,7 +66,7 @@ php run-g5.php cura D6 csv2dl
 </pre>
 
 <!-- ********************************************************************************* -->
-<h2><a name="1-raw2csv">raw2csv</a></h2>
+<h2><a name="raw2csv">raw2csv</a></h2>
 This step copies and reformat the informations of <code>902gdD6.html</code> to a csv file in directory <code>2-cura-csv</code>.
 
 <ul class="spaced">
@@ -83,7 +88,7 @@ This step copies and reformat the informations of <code>902gdD6.html</code> to a
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="2-addgeo">addGeo</a></h2>
+<h2><a name="addgeo">addGeo</a></h2>
 
 The second step computes country code and might be bettered to also compute place name.
 <br>The principle is to call geonames.org web service to perform reverse geocoding (compute place from longitude and latitude).
@@ -213,7 +218,8 @@ But step <code>addGeo</code> has the interest to restore the country, giving the
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
 <ul>
-    <li class="bold"><a href="index.html">Gauquelin5 home</a></li>
+    <li class="bold"><a href="https://github.com/tig12/gauquelin5">Gauquelin5 code</a></li>
+    <li class="bold"><a href="index.html">Gauquelin5 Doc</a></li>
     <li><a href="organisation.html">Organisation</a></li>
     <li><a href="usage.html">Program usage</a></li>
     <li><a href="output-format.html">Output format</a></li>
@@ -271,8 +277,6 @@ But step <code>addGeo</code> has the interest to restore the country, giving the
     
     <li class="bold"><a href="https://larzac.info/gauquelin5">Download</a></li>
     
-    <li class="bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>
-
 </ul>
 </aside>
 
@@ -282,3 +286,5 @@ But step <code>addGeo</code> has the interest to restore the country, giving the
 </html>
 <!-- ************************************* -->
 <!-- ********************************************************************************* -->
+** -->
+** -->

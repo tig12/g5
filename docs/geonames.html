@@ -37,16 +37,21 @@ The purpose is to relate places to a geonames.org id. The program uses two ways 
 <nav class="toc">
     <ul>
         <li>
-            <a href="#1-local-database">Local database</a>
+            <a href="#local-database">Local database</a>
         </li>
         <li>
-            <a href="#2-geonames-web-service">Geonames web service</a>
+            <a href="#geonames-web-service">Geonames web service</a>
         </li>
     </ul>
 </nav>
 
+
+
+
+
+
 <!-- ********************************************************************************* -->
-<h2><a name="1-local-database">Local database</a></h2>
+<h2><a name="local-database">Local database</a></h2>
 
 The program uses geonames data stored in a local postgres database, as done by the program located at <a href="https://github.com/tig12/geonames2postgres">github.com/tig12/geonames2postgres</a>.  
 <br>You need to :
@@ -83,7 +88,7 @@ The interest of a solution with data stored in a local database comes from the p
 <br>Better matching rates could be obtained using approximate string matching (like Levenstein), but this may need human validation to prevent wrong associations.
 
 <!-- ********************************************************************************* -->
-<h2><a name="2-geonames-web-service">Geonames web service</a></h2>
+<h2><a name="geonames-web-service">Geonames web service</a></h2>
 This has been used for file D6, which doesn't contain place name. The question asked to the web service is "given a longitude and a latitude, give me a place name (reverse geocoding). This gives very poor results for place names, but was useful to restore the country, see <a href="cura-D6.html">page on file D6</a>.
 <br>
 <br>Here also, approximate matching could be tried to get better results.
@@ -98,7 +103,8 @@ This has been used for file D6, which doesn't contain place name. The question a
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
 <ul>
-    <li class="bold"><a href="index.html">Gauquelin5 home</a></li>
+    <li class="bold"><a href="https://github.com/tig12/gauquelin5">Gauquelin5 code</a></li>
+    <li class="bold"><a href="index.html">Gauquelin5 Doc</a></li>
     <li><a href="organisation.html">Organisation</a></li>
     <li><a href="usage.html">Program usage</a></li>
     <li><a href="output-format.html">Output format</a></li>
@@ -156,8 +162,6 @@ This has been used for file D6, which doesn't contain place name. The question a
     
     <li class="bold"><a href="https://larzac.info/gauquelin5">Download</a></li>
     
-    <li class="bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>
-
 </ul>
 </aside>
 
@@ -167,3 +171,5 @@ This has been used for file D6, which doesn't contain place name. The question a
 </html>
 <!-- ************************************* -->
 <!-- ********************************************************************************* -->
+** -->
+** -->

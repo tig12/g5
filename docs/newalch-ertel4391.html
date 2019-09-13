@@ -58,52 +58,56 @@ Its integration to Gauquelin5 is limited to A1 name restoration. The rest is dra
 <nav class="toc">
     <ul>
         <li>
-            <a href="#1-integration-to-gauquelin5">Integration to gauquelin5</a>
+            <a href="#integration-to-gauquelin5">Integration to gauquelin5</a>
             <ul>
                 <li><a href="#1-1-generate-csv">Generate csv</a></li>
                 <li><a href="#1-2-fix-cura-a1-names">Fix cura A1 names</a></li>
             </ul>
         </li>
         <li>
-            <a href="#2-draft-code">Draft code</a>
+            <a href="#draft-code">Draft code</a>
             <ul>
                 <li><a href="#2-1-looking-at-the-file">Looking at the file</a></li>
                 <li><a href="#2-2-generate-skeptics-files">Generate skeptics' files</a></li>
             </ul>
         </li>
         <li>
-            <a href="#3-ertel-4391-generalities">Ertel 4391 generalities</a>
+            <a href="#ertel-4391-generalities">Ertel 4391 generalities</a>
             <ul>
                 <li><a href="#3-1-an-incomplete-file">An incomplete file</a></li>
                 <li><a href="#3-2-approximate-correspondances">Approximate correspondances</a></li>
             </ul>
         </li>
         <li>
-            <a href="#4-column">Column </a>
+            <a href="#column">Column </a>
         </li>
         <li>
-            <a href="#5-birth-dates">Birth dates</a>
+            <a href="#birth-dates">Birth dates</a>
         </li>
         <li>
-            <a href="#6-eminence">Eminence</a>
+            <a href="#eminence">Eminence</a>
             <ul>
                 <li><a href="#6-1-data-sources-for-citation-count">Data sources for citation count</a></li>
             </ul>
         </li>
         <li>
-            <a href="#7-links-to-other-datasets">Links to other datasets</a>
+            <a href="#links-to-other-datasets">Links to other datasets</a>
         </li>
         <li>
-            <a href="#8-sport-codes">Sport codes</a>
+            <a href="#sport-codes">Sport codes</a>
         </li>
         <li>
-            <a href="#9-mars-sectors">Mars sectors</a>
+            <a href="#mars-sectors">Mars sectors</a>
         </li>
     </ul>
 </nav>
 
+
+
+
+
 <!-- ********************************************************************************* -->
-<h2><a name="1-integration-to-gauquelin5">Integration to gauquelin5</a></h2>
+<h2><a name="integration-to-gauquelin5">Integration to gauquelin5</a></h2>
 
 <!-- ************************************* -->
 <h3><a name="1-1-generate-csv">Generate csv</a></h3>
@@ -141,7 +145,7 @@ Nb corrections : 118
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="2-draft-code">Draft code</a></h2>
+<h2><a name="draft-code">Draft code</a></h2>
 
 <!-- ************************************* -->
 <h3><a name="2-1-looking-at-the-file">Looking at the file</a></h3>
@@ -174,7 +178,7 @@ CFEPPP : 922 records saved - stored in data/5-tmp/cfepp/925-from-ertel.csv
 </pre>
 
 <!-- ********************************************************************************* -->
-<h2><a name="3-ertel-4391-generalities">Ertel 4391 generalities</a></h2>
+<h2><a name="ertel-4391-generalities">Ertel 4391 generalities</a></h2>
 
 From newalchemypress.com :
 <blockquote>
@@ -209,7 +213,7 @@ The information extracted from this file can be matched globally to other inform
 </ul>
 
 <!-- ********************************************************************************* -->
-<h2><a name="4-column">Column </a></h2>
+<h2><a name="column">Column </a></h2>
 <pre>php run-g5.php newalch ertel4391 look quel</pre>
 This column seems to indicate the origin of the record. 
 <br>Here are the codes of this column and the number of associated records.
@@ -236,7 +240,7 @@ This column seems to indicate the origin of the record.
 <br>I don't understand yet the other codes (<code>GCPAR</code> maybe refers to Comité Para).
 
 <!-- ********************************************************************************* -->
-<h2><a name="5-birth-dates">Birth dates</a></h2>
+<h2><a name="birth-dates">Birth dates</a></h2>
 <pre>php run-g5.php newalch ertel4391 look date</pre>
 <pre>
 BUG in date : 46 Albani Peppino : -  -
@@ -247,7 +251,7 @@ N without birth time from Gauquelin LERRCP : 802
 </pre>
 
 <!-- ********************************************************************************* -->
-<h2><a name="6-eminence">Eminence</a></h2>
+<h2><a name="eminence">Eminence</a></h2>
 <pre>php run-g5.php newalch ertel4391 look eminence</pre>
 Columns <code>ZITRANG ZITSUM ZITATE ZITSUM_OD</code> deal with eminence.
 <ul>
@@ -342,7 +346,7 @@ This can be precisely matched with <i>[Ertel 88]</i> : in Table 2, he lists 18 s
 <br>I checked, there is an exact matching between column <code>ZITATE</code> and Ertel's list.
 
 <!-- ********************************************************************************* -->
-<h2><a name="7-links-to-other-datasets">Links to other datasets</a></h2>
+<h2><a name="links-to-other-datasets">Links to other datasets</a></h2>
 <pre>php run-g5.php newalch ertel4391 look ids</pre>
 One of the interest of this file is the presence of columns indicating the ids of the records in other data sets.
 <br>The information is contained in the following columns :
@@ -367,7 +371,7 @@ CFEPP 	         CFEPNR    : 925 (21.1 %)
 </pre>
 
 <!-- ********************************************************************************* -->
-<h2><a name="8-sport-codes">Sport codes</a></h2>
+<h2><a name="sport-codes">Sport codes</a></h2>
 <pre>php run-g5.php newalch ertel4391 look sport</pre>
 Two columns are related to the sport of the persons : <code>SPORTART</code> and <code>INDGRUP</code>.
 <br><code>INDGRUP</code> contains 'I' or 'G', indicating if this is an individual or collective sport.
@@ -428,7 +432,7 @@ Only one is composed by 3 letters (<code>TRA</code>), and this looks like a mist
 <br>
 
 <!-- ********************************************************************************* -->
-<h2><a name="9-mars-sectors">Mars sectors</a></h2>
+<h2><a name="mars-sectors">Mars sectors</a></h2>
 Concerned columns are 
 <ul>
     <li><code>MARS</code> contains the sectors when the circle is divided in 36.</li>
@@ -493,7 +497,8 @@ Concerned columns are
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
 <ul>
-    <li class="bold"><a href="index.html">Gauquelin5 home</a></li>
+    <li class="bold"><a href="https://github.com/tig12/gauquelin5">Gauquelin5 code</a></li>
+    <li class="bold"><a href="index.html">Gauquelin5 Doc</a></li>
     <li><a href="organisation.html">Organisation</a></li>
     <li><a href="usage.html">Program usage</a></li>
     <li><a href="output-format.html">Output format</a></li>
@@ -551,8 +556,6 @@ Concerned columns are
     
     <li class="bold"><a href="https://larzac.info/gauquelin5">Download</a></li>
     
-    <li class="bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>
-
 </ul>
 </aside>
 
@@ -562,3 +565,4 @@ Concerned columns are
 </html>
 <!-- ************************************* -->
 <!-- ********************************************************************************* -->
+****************************** -->

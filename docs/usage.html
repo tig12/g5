@@ -36,27 +36,30 @@
 <nav class="toc">
     <ul>
         <li>
-            <a href="#1-installation">Installation</a>
+            <a href="#installation">Installation</a>
             <ul>
                 <li><a href="#1-1-directory-structure">Directory structure</a></li>
             </ul>
         </li>
         <li>
-            <a href="#2-configuration">Configuration</a>
+            <a href="#configuration">Configuration</a>
             <ul>
                 <li><a href="#2-1-dirs">dirs</a></li>
                 <li><a href="#2-2-geonames-org-and-postgresql">geonames.org and postgresql</a></li>
-                <li><a href="#2-3-other-directives">Other directives</a></li>
             </ul>
         </li>
         <li>
-            <a href="#3-data-directory">Data directory</a>
+            <a href="#data-directory">Data directory</a>
         </li>
         <li>
-            <a href="#4-usage">Usage</a>
+            <a href="#usage">Usage</a>
         </li>
     </ul>
 </nav>
+
+
+
+
 
 This software has been developed and tested under Linux (Ubuntu 18.4), using php 7.2.
 A priori, it should also work under Windows and Macintosh.
@@ -64,7 +67,7 @@ A priori, it should also work under Windows and Macintosh.
 <br>It is used through the command line.
 
 <!-- ********************************************************************************* -->
-<h2><a name="1-installation">Installation</a></h2>
+<h2><a name="installation">Installation</a></h2>
 Open a terminal and clone the repository on your local machine :
 <pre>git clone https://github.com/tig12/gauquelin5</pre>
 
@@ -102,7 +105,7 @@ In the rest of this doc, directory <code>gauquelin5/</code> is called the <b><i>
 </ul>
 
 <!-- ********************************************************************************* -->
-<h2><a name="2-configuration">Configuration</a></h2>
+<h2><a name="configuration">Configuration</a></h2>
 Create a file <code>config.yml</code> by copying <code>config.yml.dist</code> :
 <pre>cp config.yml.dist config.yml</pre>
 
@@ -132,7 +135,7 @@ To restore place names and timezones, the program uses geonames.org ; these two 
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="3-data-directory">Data directory</a></h2>
+<h2><a name="data-directory">Data directory</a></h2>
 
 <code>data/3-edited</code> is the only data that are versioned with the program.
 <br>You can retrieve the other data in your local machine with the command :
@@ -148,7 +151,7 @@ or download one by one the files you need on your local machine.
 <br>Data located in <code>data/5-tmp</code> can be safely erased by new program execution.
 
 <!-- ********************************************************************************* -->
-<h2><a name="4-usage">Usage</a></h2>
+<h2><a name="usage">Usage</a></h2>
 
 To check that the program works, type :
 <pre>php run-g5.php</pre>
@@ -212,7 +215,8 @@ This does a real transformation (converts A3 raw html file to a csv file).
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
 <ul>
-    <li class="bold"><a href="index.html">Gauquelin5 home</a></li>
+    <li class="bold"><a href="https://github.com/tig12/gauquelin5">Gauquelin5 code</a></li>
+    <li class="bold"><a href="index.html">Gauquelin5 Doc</a></li>
     <li><a href="organisation.html">Organisation</a></li>
     <li><a href="usage.html">Program usage</a></li>
     <li><a href="output-format.html">Output format</a></li>
@@ -270,8 +274,6 @@ This does a real transformation (converts A3 raw html file to a csv file).
     
     <li class="bold"><a href="https://larzac.info/gauquelin5">Download</a></li>
     
-    <li class="bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>
-
 </ul>
 </aside>
 
@@ -281,3 +283,5 @@ This does a real transformation (converts A3 raw html file to a csv file).
 </html>
 <!-- ************************************* -->
 <!-- ********************************************************************************* -->
+************************************************************************ -->
+********** -->

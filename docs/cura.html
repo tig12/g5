@@ -40,30 +40,35 @@ C.U.R.A. Gauquelin archives published on cura.free.fr have the merit to exist, b
 <nav class="toc">
     <ul>
         <li>
-            <a href="#1-download-cura-data">Download cura data</a>
+            <a href="#download-cura-data">Download cura data</a>
         </li>
         <li>
-            <a href="#2-working-on-cura-data">Working on cura data</a>
+            <a href="#working-on-cura-data">Working on cura data</a>
         </li>
         <li>
-            <a href="#3-raw2csv">raw2csv</a>
+            <a href="#raw2csv">raw2csv</a>
         </li>
         <li>
-            <a href="#4-tweaked2csv">tweaked2csv</a>
+            <a href="#tweaked2csv">tweaked2csv</a>
         </li>
         <li>
-            <a href="#5-other-transformations">Other transformations</a>
+            <a href="#other-transformations">Other transformations</a>
         </li>
         <li>
-            <a href="#6-csv2dl">csv2dl</a>
+            <a href="#csv2dl">csv2dl</a>
         </li>
     </ul>
 </nav>
 
+
+
+
+
+
 Gauquelin data published on <a href="http://cura.free.fr/gauq/17archg.html">cura.free.fr</a> are available as html web pages.
 
 <!-- ********************************************************************************* -->
-<h2><a name="1-download-cura-data">Download cura data</a></h2>
+<h2><a name="download-cura-data">Download cura data</a></h2>
 
 The first step to work on the data is to download the html pages containing the data on your local machine.
 <br>You can use the script <code>build/get-cura</code>, or download the files one by one.
@@ -72,7 +77,7 @@ The first step to work on the data is to download the html pages containing the 
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="2-working-on-cura-data">Working on cura data</a></h2>
+<h2><a name="working-on-cura-data">Working on cura data</a></h2>
 
 If you type :
 <pre>php run-g5.php cura</pre>
@@ -103,7 +108,7 @@ executes the available transformations on file A4, <code>raw2csv</code> and <cod
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="3-raw2csv">raw2csv</a></h2>
+<h2><a name="raw2csv">raw2csv</a></h2>
 For all cura datafiles, the first transformation is <code>raw2csv</code>
 <br>It extracts data from html files and produces csv files.
 <br>This step uses two entries of <code>config.yml</code> :
@@ -137,7 +142,7 @@ During this step, some corrections are applied to the data.
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="4-tweaked2csv">tweaked2csv</a></h2>
+<h2><a name="tweaked2csv">tweaked2csv</a></h2>
 
 This step transfers information from files of <code>3-cura-tweaked/</code> to files of <code>5-cura-csv/</code>.
 <br>Directory <code>3-cura-tweaked/</code> contains yaml files with human corrections on particular records.
@@ -147,7 +152,7 @@ This step transfers information from files of <code>3-cura-tweaked/</code> to fi
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="5-other-transformations">Other transformations</a></h2>
+<h2><a name="other-transformations">Other transformations</a></h2>
 
 Other transformations (between <code>raw2csv</code> and <code>csv2dl</code>) modify the files located in <code>5-cura-csv/</code>.
 <br>
@@ -160,7 +165,7 @@ Other transformations (between <code>raw2csv</code> and <code>csv2dl</code>) mod
 </ul>
 
 <!-- ********************************************************************************* -->
-<h2><a name="6-csv2dl">csv2dl</a></h2>
+<h2><a name="csv2dl">csv2dl</a></h2>
 For all cura files, the last step is to copy the csv file in <code>5-cura-csv/</code> to the directory containing downloadable files : <code>9-cura/</code>.
 <br>This is done by step <code>csv2dl</code>. This step only copies the file from a directory to an other, and does nothing else.
 <br>This step is bound to be suppressed, when wikidata integration is developed.
@@ -173,7 +178,8 @@ For all cura files, the last step is to copy the csv file in <code>5-cura-csv/</
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
 <ul>
-    <li class="bold"><a href="index.html">Gauquelin5 home</a></li>
+    <li class="bold"><a href="https://github.com/tig12/gauquelin5">Gauquelin5 code</a></li>
+    <li class="bold"><a href="index.html">Gauquelin5 Doc</a></li>
     <li><a href="organisation.html">Organisation</a></li>
     <li><a href="usage.html">Program usage</a></li>
     <li><a href="output-format.html">Output format</a></li>
@@ -231,8 +237,6 @@ For all cura files, the last step is to copy the csv file in <code>5-cura-csv/</
     
     <li class="bold"><a href="https://larzac.info/gauquelin5">Download</a></li>
     
-    <li class="bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>
-
 </ul>
 </aside>
 
@@ -242,3 +246,5 @@ For all cura files, the last step is to copy the csv file in <code>5-cura-csv/</
 </html>
 <!-- ************************************* -->
 <!-- ********************************************************************************* -->
+****************** -->
+****************** -->

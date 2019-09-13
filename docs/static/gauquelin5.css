@@ -62,3 +62,7 @@ h1{
 .left>ul>li{
     padding-bottom:0.3rem;
 }
+
+.toc{
+    margin-bottom:1em;
+}

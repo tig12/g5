@@ -43,7 +43,7 @@ This page describes the corrections done on files A1 to A6 while converting html
 <nav class="toc">
     <ul>
         <li>
-            <a href="#1-raw2csv">raw2csv</a>
+            <a href="#raw2csv">raw2csv</a>
             <ul>
                 <li><a href="#1-1-profession-codes">Profession codes</a></li>
                 <li><a href="#1-2-names">Names</a></li>
@@ -51,26 +51,31 @@ This page describes the corrections done on files A1 to A6 while converting html
             </ul>
         </li>
         <li>
-            <a href="#2-tweaked2csv">tweaked2csv</a>
+            <a href="#tweaked2csv">tweaked2csv</a>
         </li>
         <li>
-            <a href="#3-ertel2csv">ertel2csv</a>
+            <a href="#ertel2csv">ertel2csv</a>
         </li>
         <li>
-            <a href="#4-legaltime">legalTime</a>
+            <a href="#legaltime">legalTime</a>
         </li>
         <li>
-            <a href="#5-g55-edited2csv">g55 edited2csv</a>
+            <a href="#g55-edited2csv">g55 edited2csv</a>
             <ul>
                 <li><a href="#5-1-names">Names</a></li>
                 <li><a href="#5-2-places">Places</a></li>
             </ul>
         </li>
         <li>
-            <a href="#6-addgeo">addGeo</a>
+            <a href="#addgeo">addGeo</a>
         </li>
     </ul>
 </nav>
+
+
+
+
+
 
 The full set of transformations can be executed with the command :  
 <pre>php run-g5.php cura A all</pre>
@@ -92,7 +97,7 @@ Each command can be done on individual files ; for example :
 executes <code>raw2csv</code> on file A3 only.
 
 <!-- ********************************************************************************* -->
-<h2><a name="1-raw2csv">raw2csv</a></h2>
+<h2><a name="raw2csv">raw2csv</a></h2>
 
 This command needs a parameter to indicate what it should print :
 <pre>php run-g5.php cura A raw2csv</pre>
@@ -237,17 +242,17 @@ This information is removed from the generated files because I couldn't find its
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="2-tweaked2csv">tweaked2csv</a></h2>
+<h2><a name="tweaked2csv">tweaked2csv</a></h2>
 See the description of this step in <a href="cura.html">page Cura data</a>.
 
 <!-- ********************************************************************************* -->
-<h2><a name="3-ertel2csv">ertel2csv</a></h2>
+<h2><a name="ertel2csv">ertel2csv</a></h2>
 For file A1, the file containing Ertel's list of sportsmen is used to compute the names that <code>raw2csv</code> couldn't compute,
 <br>This leads to a restoration of names of 100 % for file A1 ; see <a href="newalch-ertel4391.html">page on Ertel 4391</a>, paragraph "Fix cura A1 names".
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="4-legaltime">legalTime</a></h2>
+<h2><a name="legaltime">legalTime</a></h2>
 This step partially fixes the problem described in <a href="time.html">the page about time</a>.
 <br>Legal birth time is done only for France, for cases that cannot generate ambiguity.
 <br>Ambiguities come from world wars 1 and 2, when some parts of France were invaded by Germany, and precise local conditions need to be examined to determine the timezone offset.
@@ -256,7 +261,7 @@ This step partially fixes the problem described in <a href="time.html">the page 
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="5-g55-edited2csv">g55 edited2csv</a></h2>
+<h2><a name="g55-edited2csv">g55 edited2csv</a></h2>
 
 The restoration of 1955 group "570 sportifs" is used to better family and given names as well as place names in file A1.
 <br>This step must be performed after <code>ertel2csv</code>, as name spelling in Gauquelin 1955 book is better, and after <code>legalTime</code>.
@@ -288,7 +293,7 @@ Gauquelin 1955 place names are generally better than Cura places.
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="6-addgeo">addGeo</a></h2>
+<h2><a name="addgeo">addGeo</a></h2>
 This command needs a parameter to indicate what it should print :
 <pre>php run-g5.php cura A1 addGeo</pre>
 <pre>
@@ -308,7 +313,8 @@ It modifies records of <code>5-cura-csv/</code> only if there is a unique match 
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
 <ul>
-    <li class="bold"><a href="index.html">Gauquelin5 home</a></li>
+    <li class="bold"><a href="https://github.com/tig12/gauquelin5">Gauquelin5 code</a></li>
+    <li class="bold"><a href="index.html">Gauquelin5 Doc</a></li>
     <li><a href="organisation.html">Organisation</a></li>
     <li><a href="usage.html">Program usage</a></li>
     <li><a href="output-format.html">Output format</a></li>
@@ -366,8 +372,6 @@ It modifies records of <code>5-cura-csv/</code> only if there is a unique match 
     
     <li class="bold"><a href="https://larzac.info/gauquelin5">Download</a></li>
     
-    <li class="bold"><a href="https://github.com/tig12/gauquelin5">Github repo</a></li>
-
 </ul>
 </aside>
 
@@ -377,3 +381,5 @@ It modifies records of <code>5-cura-csv/</code> only if there is a unique match 
 </html>
 <!-- ************************************* -->
 <!-- ********************************************************************************* -->
+****************** -->
+****************** -->
