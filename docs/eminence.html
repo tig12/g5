@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Eminence ranking | Gauquelin5</title>
+    <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
+    <meta name="description" content="">
+    <meta name="robots" content="index,follow">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
+    <meta name="dcterms.rightsHolder" content="Thierry Graff">
+    <meta name="dcterms.dateCopyrighted" content="2019">
+    <!-- 
+    tigsite:
+        history: 2019-09-18 02:17:35+02:00, Thierry Graff : Creation
+    -->
+</head>
+
+<body>
+<div class="container">
+
+<div class="main">
+
+<nav class="prevnext">
+    <a class="top" href="index.html">&uarr;</a>
+    <a class="prev" rel="prev" href=".html">&larr;</a>
+    <a class="next" rel="next" href=".html">&rarr;</a>
+</nav>
+
+<header>
+<h1>Building eminence ranking</h1>
+<div class="intro">
+The question is : how to sort the lists of professionals by eminence ?
+<br>More precisely : divide the lists in sub-groups of <b>eminence rank</b>.
+<br>How to reach a concensus on this process ?
+<br>There are many ways to obtain indications about the eminence of a person :
+<ul>
+    <li>
+        Some seem to be purely mechanical, "objective", like Ertel's citation count.
+    </li>
+    <li>
+        Eminence ranking can also be done by humans, producing "subjective" eminence ranking. For example a specialist of a sport can produce a ranking, say "these persons are the top of this disciplin - and here are the good but not outstanding".
+    </li>
+</ul>
+In both cases, human intelligence is necessary to rank a person. Ranking is a subjective process, obtaining a consensus is then a delicate question.
+<br>This question is not solved here ; this page contains considerations about ranking.
+</div>
+</header>
+
+<article>
+
+<!-- ********************************************************************************* -->
+<h2>Eminence indicators</h2>
+<!--
+<img src="img/eminence-indicators.jpg" alt="Eminence indicators">
+-->                      
+<img class="border margin padding" src="img/eminence-indicators.jpg" alt="Gauquelin5 summary flow">
+
+The problem is to take a group of persons and associate each of them to an eminence rank. The number of possible distinct ranks is an arbitrary number that must be choosen (Ertel uses 5). In this page, it will be called <code><b>NRanks</b></code>
+<br>
+<br>To do this, there are multiple informations at disposition : citation counts, presence in lists, medals, membership...
+<br>In this page, each information is called an <b>eminence indicator</b>.
+
+<!-- ************************************* -->
+<h3>Each professional group is a particular case</h3>
+A difficulty comes from the fact that each discipline (professional group) has its own sources of information.
+<br>For example, for sportsmen, eminence indicators can come from Olympic Games or world or continental or national championships results, or from the number of selections in international competitions. The precise list of indicators varies from sport to sport. Each sport has its own reference competitions, its own reference books or web sites that can be used as indicators. For example, the "Baseball Hall of Fame" is probably a source to use to ranks baseball players, but has no meaning for other sports.
+
+<!-- ************************************* -->
+<h3>Divide by periods</h3>
+An other point to consider is that, for a given discipline, the eminence indicators that can be used vary with time. For example, Nobel prizes are only relevant for persons active since the beginning of the 20th century. In order to compare what is comparable, the history of each discipline must be divided in coherent periods of time. Major events like world wars can probably be used as period boundaries for most of the disciplines. 
+
+<!-- ************************************* -->
+<h3>National bias</h3>
+When trying to rank persons of a given discipline, care must be taken to avoid national bias. For example, if citation count is based on a list of books or web sites, if a particular country is over-represented, there is a risk to over-rate persons of this country.
+
+<!-- ************************************* -->
+<h3>Indicators may not be reliable</h3>
+<a href="https://en.wikipedia.org/wiki/Nobel_Prize">Wikipedia page about Nobel Prize</a> gives examples of important writers who were not awarded, as less important one recieved the prize for litterature. Political and national bias exist in these kinds of lists.
+
+
+<!-- ********************************************************************************* -->
+<h2>Objective indicators</h2>
+An "objective" indicator is an indicator that can be computed. These indicators seem to be objective but are in fact subkective.
+<br>
+<br>There are plenty of information sources that can be used for a particular professional group. So far, I've seen two kinds of objective indicators :
+
+<ul class="spaced margin-top">
+    <li>
+        <b>Citation count</b> and derivates. These indicators permit to sort the persons of a group.
+    </li>
+    <li>
+        <b>Presence in lists</b>, like lists of awards, medals, prizes. 
+    </li>
+</ul>
+
+
+<!-- ************************************* -->
+<h3>Examples of citation count</h3>
+
+<h4>Books</h4>
+This was done by Suitbert Ertel. Given a list of books, established in advance, count the number of times a person is cited, and use this to build a ranking. Ertel's work could be for example reproduced and extended by Google Books.
+<br>Here, the arbitrary part is the choice of the list of books. 
+
+<h4>Web sites</h4>
+This can be done from web sites which contain biographies of persons of given professional groups, like Wikipedia. Eminence indicators can be built counting hypertext links pointing to the pages of the different persons of a group.
+<br>Here are two examples that permit to rank mathematicians :
+<ul>
+    <li>
+        Part of the data available on Wikipedia can be retrieved using <b>Wikidata</b>. One of the fields that Wikidata offers is called <b>linkcount</b>, which is the number of pages pointing to a given page that can be used to rank persons. See <a href="wikidata.html">this page about Wikidata</a> for more details.
+    </li>
+    <li>
+        The <a href="https://www-history.mcs.st-andrews.ac.uk/index.html">MacTutor History of Mathematics archive</a> is a site containing biographies of mathematicians. This site does not provide a service similar to Wikidata, but it's possible to use classical data mining technics to extract data from the site and obtain a sorted list. This was done by a program published on <a href="https://github.com/tig12/mactutor-by-links">github.com/tig12/mactutor-by-links</a>.
+    </li>
+</ul>
+
+<h4>Search engines</h4>
+A similar work can be done counting the number of times a given person has been searched for, and the number of clics to a page concerning this person. This could be done for example using Google Trends API (Application Programing Interface). Google Trends does not give the absolute numbers of queries concerning a person, but permits to compare the numbers related to two or more persons.
+
+
+<!-- ********************************************************************************* -->
+<h2>Subjective ranking</h2>
+Any person who knows a subject is able to give a list of most famous people in that occupation.
+<br>Depending on the knowledge of the person, these provide
+
+
+<!-- ********************************************************************************* -->
+<h2>Consensus</h2>
+For each professional group, a synthesis of the all the rankings concerning it must be done.
+
+<!-- ********************************************************************************* -->
+<h2>Need for a protocol</h2>
+The most delicate point is to obtain a consensus on the ranking process in order to obtain data usable for scientific experiments.
+
+
+<!-- ************************************* -->
+<h3>Individual indicators</h3>
+Each indicator is a particular case. For example :
+<br>- If a person has a Nobel prize, (s)he sould be in top-level rank (rank n° 1).
+<br>- A list of persons sorted by wikidata interlinks can be used to build a ranking.
+<br>
+<br>Eminence indicators seem to share common characteristics :
+<ul>
+    <li>
+        <b>Data</b>
+        <br>These are objective facts ; for example, there are lists containing Nobel Prize awards.
+    </li>
+    <li>
+        <b>Rules</b>, instructions which permit to perform associations between a person and its eminence rank.
+        <br>These are subjective. They are concieved by humans and executed by computers. A human decision <i>interprets the data</i> to build an eminence indicator. For example decide that if a person has a Nobel Prize, (s)he should be put in rank n° 1.
+        <br>These rules are the most important things in eminence rank building because it is their implentations which produce associations between a person and its eminence rank.
+        <br>These rules are sensible because they demand a consensus.
+    </li>
+</ul>
+
+<!-- ************************************* -->
+<h3>Global indicator</h3>
+For each professional group, there are several indicators. The way these indicators interact to build the ranking is also a sensible point which needs a consensus.
+
+
+
+
+</article>
+</div><!-- end class="main" -->
+
+
+<!-- ************************************* -->
+<aside class="left">                                                                                                                                              
+<ul>
+    <li class="bold"><a href="index.html">g5 Doc</a></li>
+    <li class="bold"><a href="https://github.com/tig12/gauquelin5">g5 code</a></li>
+    <li><a href="organisation.html">Organisation</a></li>
+    <li><a href="usage.html">Program usage</a></li>
+    <li><a href="output-format.html">Output format</a></li>
+    
+    <li>
+        <a href="cura.html">Cura data</a>                                                           
+        <ul>
+            <li>
+                Html to csv
+                <div class="padding-left">
+                    <a href="cura-A.html">A</a>
+                    <a href="cura-D6.html">D6</a>
+                    <a href="cura-D10.html">D10</a>
+                    <a href="cura-E1-E3.html">E1 E3</a>
+                </div>
+            </li>
+            <li><a href="cura-results.html">Results</a></li>        
+        </ul>
+    </li>
+    
+    <li>
+        Gauquelin 1955
+        <ul>
+            <li><a href="g55-restore.html">Restoration</a></li>
+            <li><a href="g55-curadiff.html">Differences with Cura</a></li>
+        </ul>
+    </li>
+    
+    <li>
+        <a href="newalch.html">Newalchemypress data</a>
+        <ul>
+            <li><a href="newalch-ertel4391.html">Ertel 4391</a></li>
+            <li><a href="newalch-muller1083.html">Müller 1083</a></li>
+        </ul>
+    </li>
+    
+    <!-- 
+    <li class="margin-top05 margin-bottom05"><a href="eminence.html">Eminence ranking</a></li>
+    -->
+    
+    <li><a href="time.html">Expressing time</a></li>
+    
+    <li><a href="geonames.html">Geonames.org</a></li>
+    
+    <li><a href="wikidata.html">Wikidata.org</a></li>
+    
+    <li><a href="code-details.html">Code details</a></li>
+    
+    <!-- <li><a href="next.html">Next</a></li> -->
+    
+    <!-- <li><a href="questions.html">Questions</a></li> -->
+    
+    <li>
+        Doc
+        <ul>
+            <li><a href="historical-tests.html">Historical tests</a></li>
+        </ul>
+    </li>
+    
+    <li class="bold"><a href="https://larzac.info/gauquelin5">Download</a></li>
+    
+</ul>
+</aside>
+
+</div><!-- end class="container" -->
+
+</body>
+</html>
+<!-- ************************************* -->
+<!-- ********************************************************************************* -->
