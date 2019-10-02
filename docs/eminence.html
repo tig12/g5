@@ -87,53 +87,60 @@ An "objective" indicator is an indicator that can be computed. These indicators 
 
 <ul class="spaced margin-top">
     <li>
-        <b>Citation count</b> and derivates. These indicators permit to sort the persons of a group.
+        <b>Sorting indicators</b>, which permit to build sorted lists of persons, like citation count and derivates.
     </li>
     <li>
-        <b>Presence in lists</b>, like lists of awards, medals, prizes. 
+        <b>Non-sorting indicators</b>, like lists of awards, medals, prizes. These provide information about eminence, but rules must be established to interpret the presence of a person in a given list.
     </li>
 </ul>
 
 
 <!-- ************************************* -->
-<h3>Examples of citation count</h3>
+<h3>Examples of sorting indicators</h3>
 
 <h4>Books</h4>
 This was done by Suitbert Ertel. Given a list of books, established in advance, count the number of times a person is cited, and use this to build a ranking. Ertel's work could be for example reproduced and extended by Google Books.
-<br>Here, the arbitrary part is the choice of the list of books. 
+<br>Here, the arbitrary part lies in the choice of the list of books. 
 
-<h4>Web sites</h4>
-This can be done from web sites which contain biographies of persons of given professional groups, like Wikipedia. Eminence indicators can be built counting hypertext links pointing to the pages of the different persons of a group.
+<h4>Link count</h4>
+This can be done from web sites which contain biographies of persons of given professional groups, like Wikipedia. Eminence indicators can be built counting hypertext links pointing to the pages of the different persons of a group. The principle is the same as in citation counts from books.
 <br>Here are two examples that permit to rank mathematicians :
 <ul>
     <li>
-        Part of the data available on Wikipedia can be retrieved using <b>Wikidata</b>. One of the fields that Wikidata offers is called <b>linkcount</b>, which is the number of pages pointing to a given page that can be used to rank persons. See <a href="wikidata.html">this page about Wikidata</a> for more details.
+        Part of the data available on Wikipedia can be retrieved using <b>Wikidata</b>. One of the fields that Wikidata offers is called <b>linkcount</b>, which is the number of pages pointing to a given page ; this can be used to rank persons. See <a href="wikidata.html">the page about Wikidata</a> for details.
     </li>
     <li>
-        The <a href="https://www-history.mcs.st-andrews.ac.uk/index.html">MacTutor History of Mathematics archive</a> is a site containing biographies of mathematicians. This site does not provide a service similar to Wikidata, but it's possible to use classical data mining technics to extract data from the site and obtain a sorted list. This was done by a program published on <a href="https://github.com/tig12/mactutor-by-links">github.com/tig12/mactutor-by-links</a>.
+        The <a href="https://www-history.mcs.st-andrews.ac.uk/index.html">MacTutor History of Mathematics archive</a> is a site containing biographies of mathematicians. This site does not provide a service similar to Wikidata, but it's possible to use classical data mining technics to extract data from the site and build a sorted list. This was done by a program published on <a href="https://github.com/tig12/mactutor-by-links">github.com/tig12/mactutor-by-links</a>.
     </li>
 </ul>
+Here, the arbitrary part also lies in the choice of the sites retained to build the indicators. 
 
 <h4>Search engines</h4>
-A similar work can be done counting the number of times a given person has been searched for, and the number of clics to a page concerning this person. This could be done for example using Google Trends API (Application Programing Interface). Google Trends does not give the absolute numbers of queries concerning a person, but permits to compare the numbers related to two or more persons.
+A similar work can be done counting the number of times a given person has been searched for, and the number of clics to a page concerning this person. This could be done for example using Google Trends API (Application Programing Interface). Google Trends does not give the absolute numbers of queries concerning a person, but permits to compare the numbers related to two or more persons, which is sufficient to sort the persons.
+<br>This method seems to contain less arbitrariness than the previous methods.
 
 
 <!-- ********************************************************************************* -->
 <h2>Subjective ranking</h2>
-Any person who knows a subject is able to give a list of most famous people in that occupation.
-<br>Depending on the knowledge of the person, these provide
+Any person who knows a subject is able to give a list of most famous people in that occupation. Specialists of a given disciplin (like historians of sport) can provide more precise indications and propose a ranking.
+<br>This process is entirely subjective, it depends only on the opinion of the persons who build the lists, and in the choice of the persons used to perform the rankings.
 
 
 <!-- ********************************************************************************* -->
-<h2>Consensus</h2>
-For each professional group, a synthesis of the all the rankings concerning it must be done.
-
-<!-- ********************************************************************************* -->
-<h2>Need for a protocol</h2>
-The most delicate point is to obtain a consensus on the ranking process in order to obtain data usable for scientific experiments.
-
+<h2>Building a consensus</h2>
+The problem seems delicate :
+<ul class="simple">
+    <li>
+        There is a wide variety of information at disposition. For a given group, a synthesis must be built to summarize and obtain one global ranking.
+    </li>
+    <li>
+        Almost all indicators contain a arbitrary or subjective part.
+    </li>
+    <li>Each indicator is possibly biased.</li>
+</ul>
 
 <!-- ************************************* -->
+<!--
 <h3>Individual indicators</h3>
 Each indicator is a particular case. For example :
 <br>- If a person has a Nobel prize, (s)he sould be in top-level rank (rank n° 1).
@@ -152,13 +159,7 @@ Each indicator is a particular case. For example :
         <br>These rules are sensible because they demand a consensus.
     </li>
 </ul>
-
-<!-- ************************************* -->
-<h3>Global indicator</h3>
-For each professional group, there are several indicators. The way these indicators interact to build the ranking is also a sensible point which needs a consensus.
-
-
-
+ -->
 
 </article>
 </div><!-- end class="main" -->
