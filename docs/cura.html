@@ -30,9 +30,7 @@
 <header>
 <h1>Cura data</h1>
 <div class="intro">
-<!-- 
-C.U.R.A. Gauquelin archives published on cura.free.fr have the merit to exist, but before being exploitable, they need to be extracted from web pages and corrected. So the purpose is to build a ready-to-use, user-friendly version of these data.
- -->
+The code working on Cura data is located in <code>src/transform/cura/</code>.
 </div>
 </header>
 
@@ -59,13 +57,6 @@ C.U.R.A. Gauquelin archives published on cura.free.fr have the merit to exist, b
         </li>
     </ul>
 </nav>
-
-
-
-
-
-
-
 
 
 Gauquelin data published on <a href="http://cura.free.fr/gauq/17archg.html">cura.free.fr</a> are available as html web pages.
@@ -171,6 +162,7 @@ Other transformations (between <code>raw2csv</code> and <code>csv2dl</code>) mod
 <h2><a name="csv2dl">csv2dl</a></h2>
 For all cura files, the last step is to copy the csv file in <code>5-cura-csv/</code> to the directory containing downloadable files : <code>9-cura/</code>.
 <br>This is done by step <code>csv2dl</code>. This step only copies the file from a directory to an other, and does nothing else.
+<br>
 <br>This step is bound to be suppressed, when wikidata integration is developed.
 
 

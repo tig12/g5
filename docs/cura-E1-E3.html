@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Serie E1 E3 | Gauquelin5</title>
+    <title>E1 E3 | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="Conversion of cura.free.fr html pages to csv for files E1 and E3">
     <meta name="robots" content="index,follow">
@@ -43,18 +43,13 @@ Files <code>902gdE1.html</code> and <code>902gdE3.html</code> share the same for
             <ul>
                 <li><a href="#1-1-place">Place</a></li>
                 <li><a href="#1-2-names">Names</a></li>
-                <li><a href="#1-3-planetary-sectors">Planetary sectors</a></li>
-                <li><a href="#1-4-small-errors">Small errors</a></li>
+                <li><a href="#1-3-notes">Notes</a></li>
+                <li><a href="#1-4-planetary-sectors">Planetary sectors</a></li>
+                <li><a href="#1-5-small-errors">Small errors</a></li>
             </ul>
         </li>
     </ul>
 </nav>
-
-
-
-
-
-
 
 
 
@@ -78,7 +73,7 @@ This command needs a parameter to indicate what it should print :
 <pre>php run-g5.php cura E1 raw2csv</pre>
 <pre>
 MISSING PARAMETER : raw2csv needs a parameter to specify which output it displays. Can be :
-  small : echoes only global results
+  small : echoes only global report
   tz : echoes the records for which timezone information is missing
   geo : echoes the records for which geonames matching couldn't be done
   full : equivalent to tz and geo
@@ -134,12 +129,17 @@ For the moment, names were not transformed. For some records, NAME column of cur
 
 
 <!-- ************************************* -->
-<h3><a name="1-3-planetary-sectors">Planetary sectors</a></h3>
-The program include columns with planetary sectors in the resulting files.
-
+<h3><a name="1-3-notes">Notes</a></h3>
+Some field contain supplementary information, written before the name in Cura files : + - * or L. Their meaning is explained on Cura pages.
+<br>These informations are included in the generated files in column <code>NOTE</code>.
 
 <!-- ************************************* -->
-<h3><a name="1-4-small-errors">Small errors</a></h3>
+<h3><a name="1-4-planetary-sectors">Planetary sectors</a></h3>
+Cura pages contain two lists : one with birth data and one with planetary sectors. These two lists can be merged without ambiguity, using field <code>NUM</code>.
+<br>Planetary sectors are included in the generated files.
+
+<!-- ************************************* -->
+<h3><a name="1-5-small-errors">Small errors</a></h3>
 Cura files contain several typos.
 
 <!-- ****************** -->

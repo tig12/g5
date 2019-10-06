@@ -70,7 +70,7 @@ class raw2csv implements Command{
             return "INVALID PARAMETER : " . $params[3] . " - raw2csv doesn't need this parameter\n";
         }
         $msg = "raw2csv needs a parameter to specify which output it displays. Can be :\n"
-             . "  small : echoes only global results\n"
+             . "  small : echoes only global report\n"
              . "  tz : echoes the records for which timezone information is missing\n"
              . "  geo : echoes the records for which geonames matching couldn't be done\n"
              . "  full : equivalent to tz and geo\n";

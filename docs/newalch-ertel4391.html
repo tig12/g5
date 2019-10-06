@@ -60,12 +60,11 @@ Its integration to Gauquelin5 is limited to A1 name restoration. The rest is dra
         <li>
             <a href="#ertel-4391-generalities">Ertel 4391 generalities</a>
             <ul>
-                <li><a href="#1-1-an-incomplete-file">An incomplete file</a></li>
-                <li><a href="#1-2-approximate-correspondances">Approximate correspondances</a></li>
+                <li><a href="#1-1-an-incomplete-and-approximate-file">An incomplete and approximate file</a></li>
             </ul>
         </li>
         <li>
-            <a href="#integration-to-gauquelin5">Integration to gauquelin5</a>
+            <a href="#integration-to-g5">Integration to g5</a>
             <ul>
                 <li><a href="#2-1-generate-csv">Generate csv</a></li>
                 <li><a href="#2-2-fix-cura-a1-names">Fix cura A1 names</a></li>
@@ -104,6 +103,8 @@ Its integration to Gauquelin5 is limited to A1 name restoration. The rest is dra
 
 
 
+
+
 <!-- ********************************************************************************* -->
 <h2><a name="ertel-4391-generalities">Ertel 4391 generalities</a></h2>
 
@@ -126,21 +127,33 @@ This file is precious for data restoration because records are associated with t
 </ul>
 
 <!-- ************************************* -->
-<h3><a name="1-1-an-incomplete-file">An incomplete file</a></h3>
+<h3><a name="1-1-an-incomplete-and-approximate-file">An incomplete and approximate file</a></h3>
 
-One very strange feature of this file : many records don't contain birth time. Surprising because among the missing dates (~800) are records published by Gauquelin (LERRCP series), so known by Ertel. As noted by newalchemypress.com, birth places, longitudes and latitudes are not given. <!-- newalchemypress seems to say that this means that Ertel's work is not reliable (or maybe I don't understand the commentary in page <a href="https://newalchemypress.com/gauquelin/research3.php">research3.php</a>). --> It may be a truncated or draft or imcomplete version of Ertel's file, or Ertel was maybe using complementary files to perform his computations.
-<br>Using only information present in this file does not permit to recompute mars positions, but permits to reproduce eminence curves, as mars sector positions are given.
-
-<!-- ************************************* -->
-<h3><a name="1-2-approximate-correspondances">Approximate correspondances</a></h3>
-The information extracted from this file can be matched globally to other information sources, but not exactly.
+One very strange feature of this file : many records don't contain birth time. Surprising because among the missing dates (~800) are records published by Gauquelin (LERRCP series), so known by Ertel. As noted by newalchemypress.com, birth places, longitudes and latitudes are not given.
+<br>
+<br>The information extracted from this file can be matched globally to other information sources, but not exactly.
 <br>For example,
-<ul class="simple">
-    <li>After parsing, the file contains 4384 records ; 7 records are missing to reach 4391.</li>
+<ul>
+    <li>The file contains 4384 records ; 7 records are missing to reach 4391.</li>
+    <li>The file contains 553 records from Gauquelin 1955 list (instead of 568).</li>
+    <li>The file contains 611 records from Comité Para (instead of 535).</li>
+    <li>The file contains 192 records from CSICOP (instead of 408).</li>
+    <li>The file contains 925 records from CFEPP (instead of 1 066).</li>
 </ul>
 
+<!-- newalchemypress seems to say that this means that Ertel's work is not reliable (or maybe I don't understand the commentary in page <a href="https://newalchemypress.com/gauquelin/research3.php">research3.php</a>). -->
+<br>Several hypothesis can be done to explain this :
+<ul>
+    <li>g5 code analyzing the file contains bugs.</li>
+    <li>This file is a truncated or draft or imcomplete version of Ertel's data, or Ertel was using complementary files to perform his computations.</li>
+    <li>Ertel work is based on low-quality data, and its reliability should be questioned.</li>
+</ul>
+
+<br>Using only information present is this file, it is not possible to compute mars sectors, but it is possible to reproduce Ertel's famous curves on eminence effect.
+
+
 <!-- ********************************************************************************* -->
-<h2><a name="integration-to-gauquelin5">Integration to gauquelin5</a></h2>
+<h2><a name="integration-to-g5">Integration to g5</a></h2>
 
 <!-- ************************************* -->
 <h3><a name="2-1-generate-csv">Generate csv</a></h3>
@@ -569,4 +582,3 @@ Concerned columns are
 </html>
 <!-- ************************************* -->
 <!-- ********************************************************************************* -->
-********************************************************************** -->

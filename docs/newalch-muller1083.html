@@ -32,8 +32,8 @@ Müller 1083
 <div class="subtitle">(1083 physicists)</div>
 </h1>
 <div class="intro">
-This file has a particular historical interset, as it was used for the first replication of a Gauquelin planetary effect completely independantly from Gauquelin.
-<br>An other interest of this file is the quality of its data. In particular, person and place names are generally more precise than in file A2.
+This file has a particular historical interest, as it was used for the first replication of a Gauquelin planetary effect completely independantly from Gauquelin.
+<br>An other interest of this file is the quality of its data. In particular, person and place names are generally more precise than in Cura file A2.
 <br>It contains records from Cura files A2 and E3.
 
 </div>
@@ -43,7 +43,7 @@ This file has a particular historical interset, as it was used for the first rep
 <nav class="toc">
     <ul>
         <li>
-            <a href="#integration-to-gauquelin5">Integration to gauquelin5</a>
+            <a href="#integration-to-g5">Integration to g5</a>
             <ul>
                 <li><a href="#1-1-generate-csv">Generate csv</a></li>
                 <li><a href="#1-2-fix-cura-a2-names">Fix cura A2 names</a></li>
@@ -53,19 +53,14 @@ This file has a particular historical interset, as it was used for the first rep
 </nav>
 
 
-
-
-
-
-
 <!-- ********************************************************************************* -->
-<h2><a name="integration-to-gauquelin5">Integration to gauquelin5</a></h2>
+<h2><a name="integration-to-g5">Integration to g5</a></h2>
 
 Very few work has been done on this file for the moment.
 <br>It could be used to 
 <ul>
     <li>Check legal time restoration in A2.</li>
-    <li>Better place names in A2 (then better matching to geonames).</li>
+    <li>Better place names in A2 (which would then permit better matching to geonames).</li>
     <li>Better names in A2</li>
     <li>And it brings new persons not present in Cura files.</li>
 </ul>
@@ -73,22 +68,20 @@ Very few work has been done on this file for the moment.
 <!-- ************************************* -->
 <h3><a name="1-1-generate-csv">Generate csv</a></h3>
 The first step is to generate the file <b><code>5-newalch-csv/1083MED.csv</code></b> :
-<pre>php run-g5.php newalch ertel4391 raw2csv</pre>
+<pre>php run-g5.php newalch muller1083 raw2csv</pre>
 
 <!-- ************************************* -->
 <h3><a name="1-2-fix-cura-a2-names">Fix cura A2 names</a></h3>
 
+<pre>php run-g5.php cura A2 muller2csv</pre>
 <pre>
-php run-g5.php cura A2 muller2csv 
 WRONG USAGE - muller2csv needs one parameter. Can be :
   update : modify cura file
   echo : echo detailed names
 ex : php run-g5.php cura A2 muller2csv update
 </pre>
 
-<pre>
-php run-g5.php cura A2 muller2csv update
-</pre>
+<pre>php run-g5.php cura A2 muller2csv update</pre>
 <pre>
 Nb missing names in cura A2 : 207
 Müller 1083 contains : 739 lines from A2
