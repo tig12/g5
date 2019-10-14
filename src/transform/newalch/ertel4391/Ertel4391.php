@@ -12,13 +12,13 @@ use tiglib\arrays\csvAssociative;
 
 class Ertel4391{
     
-    /** Name of the csv file in 5-tmp/newalch-csv **/
+    /** Name of the csv file in 5-newalch-csv **/
     const TMP_CSV_FILE = '4391SPO.csv';
     
     
     // ******************************************************
     /**
-        Loads file 5-tmp/newalch-csv/4391SPO.csv.
+        Loads file 5-newalch-csv/4391SPO.csv.
         @return Regular array
                 Each element contains an associative array (keys = field names).
     **/

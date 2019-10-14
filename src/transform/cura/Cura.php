@@ -78,11 +78,9 @@ class Cura{
     
     // ******************************************************
     /**
-                       - the datafile to process.
-                       - 'legalTime' (useless)
-
+        Loads a cura file of 5-cura-csv/
         @param  $datafile : a string like 'A1'
-        @return     Regular array containing the cura file in 5-cura-csv/
+        @return Regular array containing the persons' data
     **/
     public static function loadTmpCsv($datafile){
         return csvAssociative::compute(Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv');

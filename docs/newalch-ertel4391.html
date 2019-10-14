@@ -98,13 +98,6 @@ Its integration to Gauquelin5 is limited to A1 name restoration. The rest is dra
     </ul>
 </nav>
 
-
-
-
-
-
-
-
 <!-- ********************************************************************************* -->
 <h2><a name="ertel-4391-generalities">Ertel 4391 generalities</a></h2>
 
@@ -202,24 +195,19 @@ CSICOP : 190 records saved - stored in data/5-tmp/csicop/190-from-ertel.csv
 CFEPPP : 922 records saved - stored in data/5-tmp/cfepp/925-from-ertel.csv
 </pre>
 
-<!-- ********************************************************************************* -->
-<hr class="margin">
-<div class="margin">
-<b>NOTE</b> : the rest of this page contains notes resulting from a first superficial look at this file. The code was written to try to understand the content of the file.
-<br>I don't understand all the columns, so consider the informations about the file as suppositions, there are probably mistakes.
-</div>
-<hr class="margin">
-<!-- ********************************************************************************* -->
-
 
 <!-- ********************************************************************************* -->
 <h2><a name="looking-at-the-file">Looking at the file</a></h2>
-With class <code>src/transform/newalch/ertel4391/look.php</code> :
+<b>NOTE</b> : the rest of this page contains notes resulting from a first superficial look at this file. The code was written to try to understand the content of the file.
+<br>I don't understand all the columns, so consider the informations about the file as suppositions, there are probably mistakes.
+<br>
+<br>With class <code>src/transform/newalch/ertel4391/look.php</code> :
 <pre>
 php run-g5.php newalch ertel4391 look 
 PARAMETER MISSING in g5\transform\newalch\ertel4391\look
 Possible values for parameter : sport, quel, date, eminence, ids, mars
 </pre>
+For example :
 <pre>
 php run-g5.php newalch ertel4391 look sport
 </pre>

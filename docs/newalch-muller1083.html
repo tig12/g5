@@ -62,7 +62,6 @@ Very few work has been done on this file for the moment.
 <ul>
     <li>Check legal time restoration in A2.</li>
     <li>Better place names in A2 (which would then permit better matching to geonames).</li>
-    <li>Better names in A2</li>
     <li>And it brings new persons not present in Cura files.</li>
 </ul>
 
@@ -91,6 +90,61 @@ Nb corrections : 12
 
 Only 12, the result is quite disapointing.
 
+
+<!-- ********************************************************************************* -->
+<h2><a name="looking-at-the-file">Looking at the file</a></h2>
+<b>NOTE</b> : the rest of this page contains notes resulting from a first superficial look at this file. The code was written to try to understand the content of the file.
+<br>I don't understand all the columns, so consider the informations about the file as suppositions, there are probably mistakes.
+<br>
+<br>With class <code>src/transform/newalch/muller1083/look.php</code> :
+<pre>
+php run-g5.php newalch muller1083 look 
+PARAMETER MISSING in g5\transform\newalch\muller1083\look
+Possible values for parameter : muller1083
+</pre>
+For example :
+<pre>
+php run-g5.php newalch muller1083 look sample
+</pre>
+
+
+<!-- ********************************************************************************* -->
+<h2>Column SAMPLE</h2>
+
+This column seems to indicate the origin of the record.
+<br>Here are the codes of this column and the number of associated records. 
+
+<pre>php run-g5.php newalch muller1083 look sample</pre>
+
+<pre>
+[GAUQ_NUR] => 168
+[MUERGAUQ] => 612
+[MUERGAUQ-d] => 79
+[MUER_NUR] => 224
+</pre>
+Remarks from newalchemypress.com give indications :
+<blockquote>
+Only for those in Michel's original group born in Paris (168) was Müller unable to re-check their birth data (...) This new total of Academie members had 224 not in MG's original sample.
+</blockquote>
+So <code>GAUQ_NUR</code> should correspond to people born in Paris, but there is a contradiction, as some records marked with <code>GAUQ_NUR</code> are not born in Paris.
+<br>
+<br><code>MUER_NUR</code> is easier to understand and corresponds to Newalchemypress remark : all records marked with <code>MUER_NUR</code> have an empty value in column <code>GNR</code>.
+
+
+<!-- ********************************************************************************* -->
+<h2>Column GNR</h2>
+Maybe means "Gauquelin Number Record".
+<br>Values starting by SA2 correspond to Cura file A2 (SA may mean "Serie A") ; for example SA232 corresponds to record NUM 32 in file A2.
+<br>Values starting by ND1 correspond to Cura file E1 (ND1 may mean "New Data 1") ; for example ND1204 corresponds to record NUM 204 in file E1.
+<br>
+<br>This command counts the records associated to Gauquelin files :
+<pre>php run-g5.php newalch muller1083 look gnr</pre>
+<pre>
+A2 	: 765
+E1 	: 94
+EMPTY 	: 224
+Sum = 1083
+</pre>
 </article>
 </div><!-- end class="main" -->
 

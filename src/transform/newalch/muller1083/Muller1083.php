@@ -8,6 +8,9 @@
 namespace g5\transform\newalch\muller1083;
 
 use g5\Config;
+use g5\transform\cura\Cura;
+
+
 use tiglib\arrays\csvAssociative;
 use tiglib\strings\encode2utf8;
 
@@ -67,7 +70,7 @@ class Muller1083{
     
     // ******************************************************
     /**
-        Loads file 5-tmp/newalch-csv/1083MED.csv.
+        Loads file 5-newalch-csv/1083MED.csv.
         @return Regular array
                 Each element contains an associative array (keys = field names).
     **/
