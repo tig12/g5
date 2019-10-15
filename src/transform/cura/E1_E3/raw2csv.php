@@ -3,6 +3,9 @@
     Importation of cura files E1 and E3
     E1 : 2154 New French Physicians, Army Leaders, Top Executives
     E3 : 1540 New French Writers, Artists, Actors, Politicians & Journalists
+    
+    NOTE : Leading zeroes are removed from NUM in the resulting csv file.
+    This is done at the end of the function - all computations are done using original NUMs (with leading zeroes).
 
     @todo   information about arrondissement (Paris and Lyon) is not imported
     
@@ -214,6 +217,8 @@ class raw2csv implements Command{
         $res1 = sortByKey::compute($res1, 'NUM');
         $csv = implode(G5::CSV_SEP, E1_E3::FIELDNAMES) . "\n";
         foreach($res1 as $fields){
+            // HERE modify NUM
+            $fields['NUM'] = ltrim($fields['NUM'], 0);
             $csv .= implode(G5::CSV_SEP, $fields) . "\n";
         }
         $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv';

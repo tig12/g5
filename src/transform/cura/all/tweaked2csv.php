@@ -69,6 +69,10 @@ class tweaked2csv implements Command{
                     if($k == 'notes'){
                         continue;
                     }
+                    if(!in_array($k, Cura::TMP_CSV_COLUMNS)){
+                        $report .= "WARNING : invalid key '$k' for NUM = $NUM in file $yamlfile - ignoring value\n";
+                        continue;
+                    }
                     $row[$k] = $v; // HERE update cura with tweaked value
                 }
             }
@@ -78,7 +82,8 @@ class tweaked2csv implements Command{
         $curafile = Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv';
         file_put_contents($curafile, $res);
         
-        return "Updated the content of $curafile with tweaks of $yamlfile\n";
+        $report .= "Updated the content of $curafile with tweaks of $yamlfile\n";
+        return $report;
     }
     
 }// end class    

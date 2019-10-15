@@ -47,11 +47,21 @@ This page deals with the file <a href="https://newalchemypress.com/gauquelin/gau
             <a href="#integration-to-g5">Integration to g5</a>
             <ul>
                 <li><a href="#1-1-generate-csv">Generate csv</a></li>
-                <li><a href="#1-2-fix-cura-a2-names">Fix cura A2 names</a></li>
+                <li><a href="#1-2-restore-cura-a2-names">Restore cura A2 names</a></li>
             </ul>
+        </li>
+        <li>
+            <a href="#looking-at-the-file">Looking at the file</a>
+        </li>
+        <li>
+            <a href="#column-sample">Column SAMPLE</a>
+        </li>
+        <li>
+            <a href="#column-gnr">Column GNR</a>
         </li>
     </ul>
 </nav>
+
 
 
 <!-- ********************************************************************************* -->
@@ -71,7 +81,99 @@ The first step is to generate the file <b><code>5-newalch-csv/1083MED.csv</code>
 <pre>php run-g5.php newalch muller1083 raw2csv</pre>
 
 <!-- ************************************* -->
-<h3><a name="1-2-fix-cura-a2-names">Fix cura A2 names</a></h3>
+<h3>Fix individual errors</h3>
+The step <a href="#fix-gnr">fixGnr</a> permitted to identify 4 differences by comparing Müller's file with A2 and E1, in field <code>DATE</code> :
+
+<table class="wikitable margin">
+    <tr><th colspan="3">Müller</th><th colspan="4">Gauquelin (Cura)</th></tr>
+    <tr><th>NR</th><th>Name</th><th>Date</th><th>File</th><th>NUM</th><th>Name</th><th>Date</th></tr>
+    <tr class="bold">
+        <td>342</td>
+        <td>Fabre Jean</td>
+        <td>1864-06-08</td>
+        <td>A2</td>
+        <td>255</td>
+        <td>Fabre Jean</td>
+        <td>1874-06-08</td>
+    </tr>
+    <tr>
+        <td colspan="7">
+            Checking online civil regisrty permit to conclude that the error comes from file A2.
+            <br>Jean Fabre is born in 1864, in Lyon, 4th arrondissement.
+            <br>See <a href="http://www.fondsenligne.archives-lyon.fr/ark:/18811/1ded0b19dbac4877e601a9e738afb55a">Table décennale</a> and <a href="http://www.fondsenligne.archives-lyon.fr/ark:/18811/bddfe6804cf29397f08eeaa8b53fae05">birth certificate</a> : Lyon 4e Naissances - 2E10360 - p 56 / 129.
+            <br>Birth certificate also permits to check that Müller's hour (04:00) is correct.
+        </td>
+    </tr>
+    <tr class="bold">
+        <td>484</td>
+        <td>Heuyer Georges Jean-baptiste</td>
+        <td>1884-01-30</td>
+        <td>A2</td>
+        <td>1051</td>
+        <td>Heuyer Georges</td>
+        <td>1884-07-30</td>
+    </tr>
+    <tr>
+        <td colspan="7">
+            Checking online civil regisrty permit to conclude that the error comes from file A2.
+            <br>Heuyer Georges Jean-baptiste is born 1884-01-30.
+            <br>See birth certificate on registry 8 Mi 4969 (NMD 1883-1892) , Pacy-sur-Eure, p 55 / 585.
+            <br>Birth certificate also permits to check that Müller's hour (20:30) is correct.
+        </td>
+    </tr>
+    <tr class="bold">
+        <td>743</td>
+        <td>Morice André Marie Gustave Emile Etienne</td>
+        <td>1890-07-31</td>
+        <td>E1</td>
+        <td>1520</td>
+        <td>MORICE André</td>
+        <td>1891-07-31</td>
+    </tr>
+    <tr>
+        <td colspan="7">
+            Checking online civil regisrty permit to conclude that the error comes from file E1.
+            <br>Morice André Marie Gustave Emile Etienne is born 1890-07-31.
+            <br>See birth certificate on registry Etat-civil de Caen, Naissances 1890, p 141 / 251.
+            <br>Birth certificate also permits to check that Müller's hour (15:00) is correct.
+        </td>
+    </tr>
+    <tr class="bold">
+        <td>914</td>
+        <td>Rocher Henri Gaston Louis</td>
+        <td>1876-05-28</td> 
+        <td>E1</td>
+        <td>1806</td>
+        <td>ROCHER Louis</td>
+        <td>1876-05-27</td>
+    </tr>
+    <tr>
+        <td colspan="7">
+            Checking online civil regisrty permit to conclude that the error comes from file E1.
+            <br>Morice André Marie Gustave Emile Etienne is born 1876-05-28.
+            <br>See birth certificate on <a href="https://archives.gironde.fr/ark:/25651/vta3126b44c9df23bf5">registry 4 E 1548</a>, p 99 / 274.
+            <br>Birth certificate also permits to check that Müller's hour (16:00) is correct.
+        </td>
+    </tr>
+</table>
+
+
+<!-- ********************************************************************************* -->
+<h2>Fix GNR</h2>
+A first execution of 
+<pre>php run-g5.php newalch muller1083 look a2names</pre>
+(see below) showed abnormal differences for some names. This led to identify an error on column <code>GNR</code> : it is truncated, so GNRs superior to 999 are erroneous.
+<br>To identify lines to fix, the command :
+<pre>php run-g5.php newalch muller1083 look gnr_doubles</pre>
+prints the list of records sharing the same GNR values. This permits to identify 68 lines to fix.
+
+<br>To be relevant, this must be done on a version of A2 where step <code>muller2csv</code> has not been executed.
+
+
+
+
+<!-- ************************************* -->
+<h3><a name="1-2-restore-cura-a2-names">Restore cura A2 names</a></h3>
 
 <pre>php run-g5.php cura A2 muller2csv</pre>
 <pre>
@@ -109,7 +211,7 @@ php run-g5.php newalch muller1083 look sample
 
 
 <!-- ********************************************************************************* -->
-<h2>Column SAMPLE</h2>
+<h2><a name="column-sample">Column SAMPLE</a></h2>
 
 This column seems to indicate the origin of the record.
 <br>Here are the codes of this column and the number of associated records. 
@@ -132,7 +234,7 @@ So <code>GAUQ_NUR</code> should correspond to people born in Paris, but there is
 
 
 <!-- ********************************************************************************* -->
-<h2>Column GNR</h2>
+<h2><a name="column-gnr">Column GNR</a></h2>
 Maybe means "Gauquelin Number Record".
 <br>Values starting by SA2 correspond to Cura file A2 (SA may mean "Serie A") ; for example SA232 corresponds to record NUM 32 in file A2.
 <br>Values starting by ND1 correspond to Cura file E1 (ND1 may mean "New Data 1") ; for example ND1204 corresponds to record NUM 204 in file E1.
@@ -145,9 +247,19 @@ E1 	: 94
 EMPTY 	: 224
 Sum = 1083
 </pre>
+
+
+<!-- ********************************************************************************* -->
+<h2>Comparing with A2 names</h2>
+The command :
+<pre>php run-g5.php newalch muller1083 look a2names</pre>
+prints side by side family and given names of records present both in Müller's file and file A2.
+<br>In general, there are small differences, showing that Müller's names are better.
+
+
+
 </article>
 </div><!-- end class="main" -->
-
 
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
@@ -190,9 +302,7 @@ Sum = 1083
         </ul>
     </li>
     
-    <!-- 
     <li class="margin-top05 margin-bottom05"><a href="eminence.html">Eminence ranking</a></li>
-    -->
     
     <li><a href="time.html">Expressing time</a></li>
     

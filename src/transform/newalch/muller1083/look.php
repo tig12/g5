@@ -14,6 +14,7 @@
 namespace g5\transform\newalch\muller1083;
 
 use g5\patterns\Command;
+use g5\transform\cura\Cura;
 
 class look implements Command {
     
@@ -22,8 +23,10 @@ class look implements Command {
         php run-g5.php newalch ertel4391 look eminence
     **/
     const POSSIBLE_PARAMS = [
-        'sample',
+        'a2names',
         'gnr',
+        'gnr_doubles',
+        'sample',
     ];
     
     // *****************************************
@@ -66,6 +69,7 @@ class look implements Command {
         echo "\n"; print_r($res); echo "\n";
     }
     
+    
     // ******************************************************
     /**
         Look at GNR column.
@@ -79,8 +83,8 @@ class look implements Command {
             'EMPTY' => 0,
         ];
         foreach($rows as $row){
-            $gnr = $row['GNR'];
             if($gnr == ''){
+                $gnr = $row['GNR'];
                 $res['EMPTY']++;
             }
             else if(substr($gnr, 0, 3) == 'SA2'){
@@ -102,9 +106,81 @@ class look implements Command {
     
     // ******************************************************
     /**
-        Prints side by side the names coming from Müller and Gauquelin A2 and E1
+        Prints duplicate GNR values
+    **/
+    public static function look_gnr_doubles(){
+        $rows = Muller1083::loadTmpFile();
+        $res = [];
+        foreach($rows as $row){
+            $gnr = $row['GNR'];
+            if($gnr == ''){
+                continue;
+            }
+            if(!isset($res[$gnr])){
+                $res[$gnr] = [];
+            }
+            $res[$gnr][] = [
+                'NR' => $row['NR'],
+                'FNAME' => $row['FNAME'],
+                'GNAME' => $row['GNAME'],
+                'DATE' => $row['DATE'],
+            ];
+        }
+        $nDup = 0;
+        foreach($res as $gnr => $val){
+            if(count($val) == 1){
+                continue; // no duplicates, ok
+            }
+            foreach($val as $duplicate){
+                $nDup++;
+                echo "$gnr {$duplicate['NR']} {$duplicate['FNAME']} | {$duplicate['GNAME']} | {$duplicate['DATE']}\n";
+            }
+            echo "\n";
+        }
+        echo "---------\nN duplicates = $nDup\n";
+    }
+    
+    
+    // ******************************************************
+    /**
+        Prints side by side the names coming from Müller and Gauquelin A2
         @param $
     **/
-    public static function look_gnames(){
+    public static function look_a2names(){
+        $muller = $a2 = []; // assoc arrays ; keys = Gauquelin's NUM
+        // build names from Muller file
+        $rows = Muller1083::loadTmpFile();
+        foreach($rows as $row){
+            $gnr = $row['GNR'];
+            if(substr($gnr, 0, 3) == 'SA2'){
+                $NUM = substr($gnr, 3);
+                $muller[$NUM] = [
+                    'FNAME' => $row['FNAME'],
+                    'GNAME' => $row['GNAME'],
+                    'NR' => $row['NR'],
+                ];
+            }
+        }
+        ksort($muller);
+        // build names from A2
+        $rows = Cura::loadTmpCsv('A2');
+        foreach($rows as $row){
+            $NUM = $row['NUM'];
+            if(isset($muller[$NUM])){
+                $a2[$NUM] = [
+                    'FNAME' => $row['FNAME'],
+                    'GNAME' => $row['GNAME'],
+                ];
+            }
+        }
+        // print
+        foreach($muller as $NUM => $val){
+            if($val['FNAME'] == $a2[$NUM]['FNAME']){
+                continue;
+            }
+            echo $NUM . ' ' . $val['FNAME'] . ' | ' . $val['GNAME'] . ' ' . $val['NR'] . "\n";
+            echo $NUM . ' ' . $a2[$NUM]['FNAME'] . ' | ' . $a2[$NUM]['GNAME'] . "\n";
+            echo "\n";
+        }
     }
 }// end class

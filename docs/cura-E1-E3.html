@@ -30,7 +30,12 @@
 <header>
 <h1>Cura - files E1 and E3</h1>
 <div class="intro">
-Files <code>902gdE1.html</code> and <code>902gdE3.html</code> share the same format and can be handled by the same code.
+Accoding to cura.free.fr :
+<div class="padding-left">
+E1 contains 2154 French Physicians, Military Men and Executives
+<br>E3 contains 1540 New French Writers, Artists, Actors, Politicians and Journalists
+</div>
+<br>Files <code>902gdE1.html</code> and <code>902gdE3.html</code> share the same format and can be handled by the same code.
 <br>Each page contains two lists, one with birth data and one with the position of the Moon, Venus, Mars, Jupiter and Saturn in the 36 Gauquelin Sectors. These two lists can be merged easily, and planetary positions are included in the resulting file.
 </div>
 </header>
@@ -50,8 +55,6 @@ Files <code>902gdE1.html</code> and <code>902gdE3.html</code> share the same for
         </li>
     </ul>
 </nav>
-
-
 
 To import these files, do :
 <pre>
@@ -78,6 +81,12 @@ MISSING PARAMETER : raw2csv needs a parameter to specify which output it display
   geo : echoes the records for which geonames matching couldn't be done
   full : equivalent to tz and geo
 </pre>
+
+<!-- ************************************* -->
+<h3>NUM</h3>
+<b>IMPORTANT</b> : files E1 and E3 differ from other Cura files because records between 1 and 999 are prefixed with zeroes.
+<br>To obtain coherent NUM among generated  csvfiles, <b>these zeroes were removed to form the NUM of generated files</b>.
+<br>This is done in step <code>cura2csv</code>.
 
 <!-- 
 Check the meaning of birth time in file E1 and E3
@@ -273,9 +282,7 @@ Cura files contain several typos.
         </ul>
     </li>
     
-    <!-- 
     <li class="margin-top05 margin-bottom05"><a href="eminence.html">Eminence ranking</a></li>
-    -->
     
     <li><a href="time.html">Expressing time</a></li>
     

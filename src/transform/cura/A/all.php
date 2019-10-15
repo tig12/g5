@@ -56,7 +56,7 @@ class all implements Command{
             echo "\n=== Execute muller2csv on $datafile ===\n";
             $params_muller2csv = $params;
             $params_muller2csv[] = 'update';
-            echo ertel2csv::execute($params_muller2csv);
+            echo muller2csv::execute($params_muller2csv);
         }
         
         // php run-g5.php cura A legalTime

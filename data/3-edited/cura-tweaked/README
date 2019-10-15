@@ -1,3 +1,20 @@
 This directory contains human corrections that should be applied to files of 5-cura-csv/
 
-Each yaml file contains a list of associations field name => value
+Each yaml file contains a list of associations key: value
+
+An element of the list looks ike this :
+
+-
+  NUM: 
+  FNAME: 
+  GNAME: 
+  notes:
+    -
+  
+Each element must contain at least a key NUM
+If field NUM is not present, the record is not processed.
+If field NUM is empty, the record is not processed.
+Other keys must be names of fields in the files of 5-cura-csv.
+If a key is invalid, a warning is issued and the value is ignored.
+There is one exception : a field can contain a key noted "notes" (lowercase), ignored while processing.
+
