@@ -33,9 +33,8 @@ Müller 1083
 </h1>
 <div class="intro">
 This page deals with the file <a href="https://newalchemypress.com/gauquelin/gauquelin_docs/5a_muller_medics.txt">5muller_medics.txt</a> downloaded from <a href="https://newalchemypress.com/gauquelin/research5.php">newalchemypress.com</a>.
-<!-- <br>This file has a particular historical interest, as it concerns the first replication of a Gauquelin planetary effect completely independantly from Gauquelin. -->
-<br>This file is interesting because it contains good quality data. In particular, person and place names are generally more precise than Cura file A2.
-<br>It contains records from Cura files A2 and E3.
+<br>Newalchemypress says that this file concerns one of the two independant replications of a Gauquelin planetary effect by Arno Müller.
+<br>An interesting file because it contains good quality data : full copy of birth certificate name with accents, separation of family and given names, legal hour, timezone offset indications. It contains data from files A2 and E3.  and can be use to correct them.
 
 </div>
 </header>
@@ -83,7 +82,13 @@ The first step is to generate the file <b><code>5-newalch-csv/1083MED.csv</code>
 <!-- ************************************* -->
 <h3>Fix 4 dates in A2 and E1</h3>
 The step <a href="#fix-gnr">fixGnr</a> permitted to identify 4 differences by comparing Müller's file with A2 and E1, in field <code>DATE</code>.
-<br>Müller file contains no errors, the fixes were included in <a href="tweak2csv.html">step tweak2csv</a> of files A2 and E1.
+<br>After check, all the errors came from A2 and E1.
+<br>These errors are corrected in in <a href="tweak2csv.html">step tweak2csv</a> of files A2 and E1, writting corrections in yaml files of <code>3-cura-tweaked/</code>.
+<br>To fix, execute :
+<pre>
+php run-g5.php cura A2 tweak2csv
+php run-g5.php cura E1 tweak2csv
+</pre>
 
 <table class="wikitable margin">
     <tr><th colspan="3">Müller</th><th colspan="4">Gauquelin (Cura)</th></tr>
@@ -158,31 +163,42 @@ The step <a href="#fix-gnr">fixGnr</a> permitted to identify 4 differences by co
     </tr>
 </table>
 
-<br>To permit restoration of these 4 records in step <code>fixGnr</code>, the commands 
-<pre>
-php run-g5.php cura A2 tweak2csv
-php run-g5.php cura E1 tweak2csv
-</pre>
-must have been issued before <code>fixGnr</code>.
 
+<h2>Rest of the page is obsolete or incomplete</h2>
 
 <!-- ************************************* -->
 <h3>Fix GNR</h3>
 A first execution of 
 <pre>php run-g5.php newalch muller1083 look a2names</pre>
-(see below) showed abnormal differences for some names. This led to identify an error on column <code>GNR</code> : it is truncated, so GNRs superior to 999 are erroneous.
-<br>To identify lines to fix, the command :
-<pre>php run-g5.php newalch muller1083 look gnr_doubles</pre>
-prints the list of records sharing the same GNR values. This permits to identify 68 lines to fix.
+(see below) showed abnormal differences for some names. This led to identify an error on <code>GNR</code>. 
 
-<br>To be relevant, this must be done on a version of A2 where step <code>muller2csv</code> has not been executed.
+<div class="bold padding05">Column <code>GNR</code> is truncated, so GNRs superior to 999 are erroneous.</div>
+
+To identify lines to fix, the command :
+<pre>php run-g5.php newalch muller1083 look gnr_doubles</pre>
+prints the list of records sharing the same GNR values. This permits to identify <b>68 lines to fix</b>.
+
+<h4>Execute</h4>
+These commands must have been issued before :
+<pre>
+php run-g5.php cura A2 raw2csv small
+php run-g5.php cura E1 raw2csv small
+php run-g5.php newalch muller1083 raw2csv
+php run-g5.php cura A2 tweak2csv
+php run-g5.php cura E1 tweak2csv
+</pre>
+
+
+Then
+<pre>php run-g5.php newalch muller1083 fixGnr report</pre>
+
 
 
 
 
 <!-- ************************************* -->
 <h3><a name="1-2-restore-cura-a2-names">Restore cura A2 names</a></h3>
-
+<div class="bold">obsolete</div>
 <pre>php run-g5.php cura A2 muller2csv</pre>
 <pre>
 WRONG USAGE - muller2csv needs one parameter. Can be :

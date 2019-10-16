@@ -8,7 +8,7 @@
 -
   NUM: 255
   DATE: '1864-06-08 03:40:40+00:00'
-  NOTES: legal time = 04:00 (Müller 1083MED 342)
+  NOTES: 4th arrondissement - legal time = 04:00 (Müller 1083MED 342) 
   build-notes:
     - 2019-10-15 22:59:02+02:00 Fixed DATE with record 342
   

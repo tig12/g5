@@ -16,6 +16,7 @@ class fixGnr implements Command {
     const POSSIBLE_PARAMS = [
         'update' => "Updates file MUL1083MED and echoes minimal report",
         'report' => "Echoes a full list of modifications without modifying anything",
+        'check' => "Execute after fix2gnr. Compares the dates with A2 E1 to check if everything was fixed",
     ];
     
     // *****************************************
@@ -42,6 +43,10 @@ class fixGnr implements Command {
         if(!in_array($param, array_keys(self::POSSIBLE_PARAMS))){
             return "INVALID PARAMETER in g5\\transform\\newalch\\muller1083\\fixGnr\n"
                 . "Possible values for parameter :\n$possibleParams_str\n";
+        }
+        
+        if($param == 'check'){
+            return self::check();
         }
         
         $report = '';
@@ -99,7 +104,6 @@ class fixGnr implements Command {
             // As correction is built using birth day, an ambiguity would possibly introduce wrong matching 
             // Result : no ambiguity ; in practice this check is useless.
             $dates_muller = [];
-// echo "GNR = $GNR\n";
             foreach($muller as $rec){
                 $date = substr($rec['DATE'], 0, 10); // compare only days
                 if(in_array($date, $dates_muller)){
@@ -113,15 +117,11 @@ class fixGnr implements Command {
             foreach($muller as $rec_muller){
                 $NR = $rec_muller['NR'];
                 $date_muller = substr($rec_muller['DATE'], 0, 10);
-// echo "\n<pre>"; print_r($rec_muller); echo "</pre>\n";
-// echo "date_muller = '$date_muller'\n";
                 $candidates = [];
                 $curaTests = []; // only useful to log NO MATCHING case
                 foreach($targetNUMs as $targetNUM){
-//echo "\n<pre>"; print_r($curaFile); echo "</pre>\n"; exit;
                     $date_cura = substr($curaFile[$targetNUM]['DATE'], 0, 10);
                     $curaTests[$targetNUM] = $date_cura;
-//echo "targetNUM $targetNUM - date_cura = '$date_cura'\n";
                     if($date_muller == $date_cura){
                         $candidates[] = $targetNUM;
                     }
@@ -144,7 +144,6 @@ class fixGnr implements Command {
                     $report .= "    Possible matches in cura $curaFilename : " . implode($candidates, ', ') . "\n";
                     continue;
                 }
-//echo "\n<pre>"; print_r($candidates); echo "</pre>\n";
                 // found a unique match
                 $corrections[$NR] = $curaPrefix . $candidates[0];
             }
@@ -165,7 +164,7 @@ class fixGnr implements Command {
             $report .= "$destFile was updated\n";
             $report .= "$nCorr GNR were corrected\n";
         }
-        else{
+        else if($param == 'report'){
             $report .= "This function will modify the following records of 1083MED.csv :\n";
             $report .= "  NR\t | Corrected GNR\n";
             foreach($corrections as $NR => $correction){
@@ -175,7 +174,8 @@ class fixGnr implements Command {
         }
         
         if($nomatch){
-            $report .= "=== Some corrections do not match ===\n";
+            $report .= "===   Some corrections do not match   ===\n";
+            $report .= "===        I Refuse to fix GNR        ===\n";
             $report .= "  First apply tweak2csv to A2 and E1 : \n";
             $report .= "  php run-g5.php cura A2 tweak2csv\n";
             $report .= "  php run-g5.php cura E1 tweak2csv\n";
@@ -199,6 +199,46 @@ class fixGnr implements Command {
             $res[] = $x10 + $i;
         }
         return $res;
+    }
+    
+    // ******************************************************
+    /**
+        Implements php run-g5.php newalch muller1083 fixGnr check
+    **/
+    private static function check(){
+        $ndiff = $ncommon = 0;
+        $a2s = Cura::loadTmpCsv_num('A2');
+        $e1s = Cura::loadTmpCsv_num('E1');
+        $MullerCsv = Muller1083::loadTmpFile();
+        foreach($MullerCsv as $mulrow){
+            $GNR = $mulrow['GNR'];
+            $curaPrefix = substr($GNR, 0, 3); // SA2 or ND1
+            if($curaPrefix == ''){
+                continue;
+            }
+            $ncommon++;
+            if($curaPrefix == 'SA2'){
+                $curaFile =& $a2s;
+                $curaFilename = 'A2';
+            }
+            else{
+                $curaFile =& $e1s;
+                $curaFilename = 'E1';
+            }
+            $NUM = substr($GNR, 3);
+            $date_m = substr(trim($mulrow['DATE']), 0, 10);
+            $curarow = $curaFile[$NUM];
+            $date_g = substr(trim($curarow['DATE']), 0, 10);
+            if($date_g != $date_m){
+                $ndiff++;
+                echo "Difference\n";
+                echo "  Muller $date_m NR = {$mulrow['NR']} | {$mulrow['FNAME']} {$mulrow['GNAME']} \n";
+                echo "  $curaFilename\t $date_g NUM = $NUM | {$curarow['FNAME']} {$curarow['GNAME']}\n";
+            }
+        }
+        echo "nb common (A2 + E1) : $ncommon\n";
+        echo "nb differences (A2 + E1) : $ndiff\n";
+        return '';
     }
     
     
