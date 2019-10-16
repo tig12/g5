@@ -16,12 +16,15 @@ use g5\G5;
 use g5\patterns\Command;
 use g5\transform\cura\Cura;
 
-class tweaked2csv implements Command{
+class tweak2csv implements Command{
+    
+    /** Key not processed by this command ; used in yaml files **/
+    const BUILD_NOTES = 'build-notes';
     
     // *****************************************
     // Implementation of Command
     /** 
-        Called by : php run-g5.php cura <datafile> tweaked2csv
+        Called by : php run-g5.php cura <datafile> tweak2csv
         @param $params array containing two strings :
                        - the datafile to process (like "A1").
                        - The name of this command (useless here)
@@ -37,7 +40,7 @@ class tweaked2csv implements Command{
         
         if(!is_file($yamlfile)){
             return "Missing file $yamlfile\n"
-                 . "tweaked2csv did not modify anything.\n";
+                 . "tweak2csv did not modify anything.\n";
         }
         
         // load tweaks in an assoc arrray (keys = NUM)
@@ -54,22 +57,24 @@ class tweaked2csv implements Command{
             unset($record['NUM']);
             if(isset($tweaks[$NUM])){
                 return "WARNING - duplicate entry for NUM = $NUM in $yamlfile\n"
-                     . "tweaked2csv did not modify anything.\n"
+                     . "tweak2csv did not modify anything.\n"
                      . "Fix $yamlfile and start again.\n";
             }
             $tweaks[$NUM] = $record;
         }
-                                                                                                                                          
+        
         $cura = Cura::loadTmpCsv_num($datafile);
-        $res = implode(G5::CSV_SEP, Cura::TMP_CSV_COLUMNS) . "\n";
+        
+        $keys = array_keys(current($cura));
+        $res = implode(G5::CSV_SEP, $keys) . "\n";
         
         foreach($cura as $NUM => $row){
             if(isset($tweaks[$NUM])){
                 foreach($tweaks[$NUM] as $k => $v){
-                    if($k == 'notes'){
+                    if($k == self::BUILD_NOTES){
                         continue;
                     }
-                    if(!in_array($k, Cura::TMP_CSV_COLUMNS)){
+                    if(!in_array($k, $keys)){
                         $report .= "WARNING : invalid key '$k' for NUM = $NUM in file $yamlfile - ignoring value\n";
                         continue;
                     }

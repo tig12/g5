@@ -81,8 +81,9 @@ The first step is to generate the file <b><code>5-newalch-csv/1083MED.csv</code>
 <pre>php run-g5.php newalch muller1083 raw2csv</pre>
 
 <!-- ************************************* -->
-<h3>Fix individual errors</h3>
-The step <a href="#fix-gnr">fixGnr</a> permitted to identify 4 differences by comparing Müller's file with A2 and E1, in field <code>DATE</code> :
+<h3>Fix 4 dates in A2 and E1</h3>
+The step <a href="#fix-gnr">fixGnr</a> permitted to identify 4 differences by comparing Müller's file with A2 and E1, in field <code>DATE</code>.
+<br>Müller file contains no errors, the fixes were included in <a href="tweak2csv.html">step tweak2csv</a> of files A2 and E1.
 
 <table class="wikitable margin">
     <tr><th colspan="3">Müller</th><th colspan="4">Gauquelin (Cura)</th></tr>
@@ -148,7 +149,7 @@ The step <a href="#fix-gnr">fixGnr</a> permitted to identify 4 differences by co
         <td>1876-05-27</td>
     </tr>
     <tr>
-        <td colspan="7">
+        <td class="padding2" colspan="7">
             Checking online civil regisrty permit to conclude that the error comes from file E1.
             <br>Morice André Marie Gustave Emile Etienne is born 1876-05-28.
             <br>See birth certificate on <a href="https://archives.gironde.fr/ark:/25651/vta3126b44c9df23bf5">registry 4 E 1548</a>, p 99 / 274.
@@ -157,9 +158,16 @@ The step <a href="#fix-gnr">fixGnr</a> permitted to identify 4 differences by co
     </tr>
 </table>
 
+<br>To permit restoration of these 4 records in step <code>fixGnr</code>, the commands 
+<pre>
+php run-g5.php cura A2 tweak2csv
+php run-g5.php cura E1 tweak2csv
+</pre>
+must have been issued before <code>fixGnr</code>.
 
-<!-- ********************************************************************************* -->
-<h2>Fix GNR</h2>
+
+<!-- ************************************* -->
+<h3>Fix GNR</h3>
 A first execution of 
 <pre>php run-g5.php newalch muller1083 look a2names</pre>
 (see below) showed abnormal differences for some names. This led to identify an error on column <code>GNR</code> : it is truncated, so GNRs superior to 999 are erroneous.
@@ -250,7 +258,7 @@ Sum = 1083
 
 
 <!-- ********************************************************************************* -->
-<h2>Comparing with A2 names</h2>
+<h2>Comparing with A2 and E1 names</h2>
 The command :
 <pre>php run-g5.php newalch muller1083 look a2names</pre>
 prints side by side family and given names of records present both in Müller's file and file A2.
@@ -264,51 +272,71 @@ prints side by side family and given names of records present both in Müller's 
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
 <ul>
-    <li class="bold"><a href="index.html">g5 Doc</a></li>
-    <li class="bold"><a href="https://github.com/tig12/gauquelin5">g5 code</a></li>
+    <li class="bold big1"><a href="index.html">g5 Doc</a></li>
+    <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">g5 code</a></li>
     <li><a href="organisation.html">Organisation</a></li>
     <li><a href="usage.html">Program usage</a></li>
-    <li><a href="output-format.html">Output format</a></li>
     
     <li>
-        <a href="cura.html">Cura data</a>                                                           
+        <span class="big1">1 - Restore</span>
         <ul>
+            <li><a href="output-format.html">Output format</a></li>
+            
+            <li><a href="cura.html">Cura data</a></li>
+            
             <li>
-                Html to csv
-                <div class="padding-left">
+                <ul>
                     <a href="cura-A.html">A</a>
                     <a href="cura-D6.html">D6</a>
                     <a href="cura-D10.html">D10</a>
                     <a href="cura-E1-E3.html">E1 E3</a>
-                </div>
+                <li><a href="cura-results.html">Results</a></li>
+                </ul>
             </li>
-            <li><a href="cura-results.html">Results</a></li>        
+            
+            <li>
+                Gauquelin 1955
+                <ul>
+                    <li><a href="g55-restore.html">Restoration</a></li>
+                    <li><a href="g55-curadiff.html">Differences with Cura</a></li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="newalch.html">Newalchemypress data</a>
+                <ul>
+                    <li><a href="newalch-ertel4391.html">Ertel 4391</a></li>
+                    <li><a href="newalch-muller1083.html">Müller 1083</a></li>
+                </ul>
+            </li>
+            
+            <li><a href="time.html">Expressing time</a></li>
+            
+            <li>
+                Steps
+                <ul>
+                    <li><a href="tweak2csv.html">tweak2csv</a></li>
+                </ul>
+            </li>
+            
         </ul>
     </li>
     
     <li>
-        Gauquelin 1955
+        <span class="big1">2 - Build new data</span>
         <ul>
-            <li><a href="g55-restore.html">Restoration</a></li>
-            <li><a href="g55-curadiff.html">Differences with Cura</a></li>
+            <li><a href="geonames.html">Geonames.org</a></li>
+            <li><a href="wikidata.html">Wikidata.org</a></li>
         </ul>
     </li>
-    
+        
     <li>
-        <a href="newalch.html">Newalchemypress data</a>
+        <span class="big1">3 - Eminence</span>
         <ul>
-            <li><a href="newalch-ertel4391.html">Ertel 4391</a></li>
-            <li><a href="newalch-muller1083.html">Müller 1083</a></li>
+            <li><a href="eminence.html">Eminence ranking</a></li>
         </ul>
     </li>
     
-    <li class="margin-top05 margin-bottom05"><a href="eminence.html">Eminence ranking</a></li>
-    
-    <li><a href="time.html">Expressing time</a></li>
-    
-    <li><a href="geonames.html">Geonames.org</a></li>
-    
-    <li><a href="wikidata.html">Wikidata.org</a></li>
     
     <li><a href="code-details.html">Code details</a></li>
     
@@ -323,7 +351,7 @@ prints side by side family and given names of records present both in Müller's 
         </ul>
     </li>
     
-    <li class="bold"><a href="https://larzac.info/gauquelin5">Download results</a></li>
+    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
     
 </ul>
 </aside>

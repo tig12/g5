@@ -28,6 +28,7 @@ class E1_E3{
             'MA',
             'JU',
             'SA',
+            'NOTES',
     ];
     
 }// end class    

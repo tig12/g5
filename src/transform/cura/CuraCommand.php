@@ -46,8 +46,8 @@ class CuraCommand implements Command{
             if($command == 'csv2dl'){
                 $class = "g5\\transform\\cura\\all\\csv2dl";
             }
-            else if($command == 'tweaked2csv'){
-                $class = "g5\\transform\\cura\\all\\tweaked2csv";
+            else if($command == 'tweak2csv'){
+                $class = "g5\\transform\\cura\\all\\tweak2csv";
             }
             else{
                 $class = "g5\\transform\\cura\\" . Cura::DATAFILES_SUBNAMESPACE[$datafile] . '\\' . $command;

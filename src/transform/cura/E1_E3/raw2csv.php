@@ -210,6 +210,7 @@ class raw2csv implements Command{
             $res1[$num1]['MA'] = $res2[$num1]['MA'];
             $res1[$num1]['JU'] = $res2[$num1]['JU'];
             $res1[$num1]['SA'] = $res2[$num1]['SA'];
+            $res1[$num1]['NOTES'] = '';
         }
         //                                          
         // store in destination csv file

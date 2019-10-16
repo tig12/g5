@@ -67,5 +67,5 @@ h1{
     margin-bottom:1em;
 }
 
-table.alternate tr:nth-child(even) {background: #ffc}
+table.alternate tr:nth-child(even) {background: #eee}
 table.alternate tr:nth-child(odd) {background: #ddd}
