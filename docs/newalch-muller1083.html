@@ -34,7 +34,7 @@ Müller 1083
 <div class="intro">
 This page deals with the file <a href="https://newalchemypress.com/gauquelin/gauquelin_docs/5a_muller_medics.txt">5muller_medics.txt</a> downloaded from <a href="https://newalchemypress.com/gauquelin/research5.php">newalchemypress.com</a>.
 <br>Newalchemypress says that this file concerns one of the two independant replications of a Gauquelin planetary effect by Arno Müller.
-<br>An interesting file because it contains good quality data : full copy of birth certificate name with accents, separation of family and given names, legal hour, timezone offset indications. It contains data from files A2 and E3.  and can be use to correct them.
+<br>An interesting file because it contains good quality data : full copy of birth certificate name with accents (not always), separation of family and given names, legal hour, timezone offset indications. It contains data from files A2 and E3.  and can be use to correct them.
 
 </div>
 </header>
@@ -46,7 +46,9 @@ This page deals with the file <a href="https://newalchemypress.com/gauquelin/gau
             <a href="#integration-to-g5">Integration to g5</a>
             <ul>
                 <li><a href="#1-1-generate-csv">Generate csv</a></li>
-                <li><a href="#1-2-restore-cura-a2-names">Restore cura A2 names</a></li>
+                <li><a href="#1-2-tweak2csv">tweak2csv</a></li>
+                <li><a href="#1-3-fix-gnr">Fix GNR</a></li>
+                <li><a href="#1-4-restore-cura-names">Restore cura names</a></li>
             </ul>
         </li>
         <li>
@@ -58,10 +60,14 @@ This page deals with the file <a href="https://newalchemypress.com/gauquelin/gau
         <li>
             <a href="#column-gnr">Column GNR</a>
         </li>
+        <li>
+            <a href="#comparing-with-cura-names">Comparing with Cura names</a>
+        </li>
+        <li>
+            <a href="#nobilities">Nobilities</a>
+        </li>
     </ul>
 </nav>
-
-
 
 <!-- ********************************************************************************* -->
 <h2><a name="integration-to-g5">Integration to g5</a></h2>
@@ -79,6 +85,7 @@ More work can be done on this file. It could be used to :
 This is equivalent to :
 <pre>
 php run-g5.php newalch muller1083 raw2csv
+php run-g5.php newalch muller1083 tweak2csv
 php run-g5.php newalch muller1083 fixGnr update
 </pre>
 
@@ -88,7 +95,12 @@ The first step is to generate the file <b><code>5-newalch-csv/1083MED.csv</code>
 <pre>php run-g5.php newalch muller1083 raw2csv</pre>
 
 <!-- ************************************* -->
-<h3>Fix GNR</h3>
+<h3><a name="1-2-tweak2csv">tweak2csv</a></h3>
+This step applies corrections, see page <a href="tweak2csv.html">tweak2csv</a>.
+<br>Used to fix errors in the names of noble persons (<a href="#nobilities">see below</a>).
+
+<!-- ************************************* -->
+<h3><a name="1-3-fix-gnr">Fix GNR</a></h3>
 Looking at the file with
 <pre>php run-g5.php newalch muller1083 look</pre>
 (see <a href="#looking-at-the-file">below</a>) showed abnormal differences for some names. This led to identify errors on <code>GNR</code> :
@@ -120,7 +132,7 @@ To correct GNR <code>newalch-csv/1083MED.csw</code>, run
 It modifies 87 records.
 
 <!-- ************************************* -->
-<h3><a name="1-2-restore-cura-a2-names">Restore cura names</a></h3>
+<h3><a name="1-4-restore-cura-names">Restore cura names</a></h3>
 
 
 <!-- ********************************************************************************* -->
@@ -181,15 +193,31 @@ Total 	: 1083
 
 
 <!-- ********************************************************************************* -->
-<h2>Comparing with Cura names</h2>
+<h2><a name="comparing-with-cura-names">Comparing with Cura names</a></h2>
 The command :
 <pre>php run-g5.php newalch muller1083 look curanames</pre>
 prints side by side family and given names of records present both in Müller's file and file A2.
+<br>
+<br>This must be exectuted after having executed <a href="#1-3-fix-gnr">step fixGnr</a> to see all names.
+
+<br>This shows that Müller's names are better.
+It also shows that spelling of noble persons contain mistakes for noble persons (<a href="#nobilities">see below</a>).
 
 
-<br>In general, there are small differences, showing that Müller's names are better.
+<!-- ********************************************************************************* -->
+<h2><a name="nobilities">Nobilities</a></h2>
+Listing names shows small errors in columns <code>FNAME</code> and <code>GNAME</code> of noble persons.
+<ul>
+    <li>Sometimes the nobility is included in the given name (it is part of the family name).</li>
+    <li>The nobility is uppercased (it should be lowercased).</li>
+</ul>
 
+The command :
+<pre>php run-g5.php newalch muller1083 look nobilities simple</pre>
+lists the noble persons of the file.
 
+<pre>php run-g5.php newalch muller1083 look nobilities yaml</pre>
+prints the same list in a YAML format. This was used to include corrections in step <a href="#1-2-tweak2csv">tweak2csv</a>.
 
 </article>
 </div><!-- end class="main" -->

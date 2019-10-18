@@ -29,17 +29,18 @@
 
 <header>
 <h1>Step tweak2csv</h1>
-<div class="intro"></div>
+<div class="intro">
+Some errors are better fixed by human edition. This happens for particular cases that can't be fixed by program, or when it's faster to edit a fix than write a program.
+<br>To handle such cases, YAML files were written in sub-directories of <code>data/3-edited/</code>. These files are processed by step <code>tweak2csv</code>.
+<br>These YAML files are versioned with the program.
+</div>
 </header>
 
 <article>
-
-This step transfers information from files of <code>3-cura-tweaked/</code> to files of <code>5-cura-csv/</code>.
-<br>Directory <code>3-cura-tweaked/</code> contains yaml files with human corrections on particular records.
-<br>
-<br>WARNING : this step must be done at an early stage.
+WARNING : this step must be done at an early stage.
 <br>For example, for serie A, if a date or a time is modified in <code>3-cura-tweaked/</code>, the step <code>tweak2csv</code> should be done before step <code>legalTime</code>.
-
+<br>
+<br>So this step is executed just after step <code>raw2csv</code>.
 
 </article>
 </div><!-- end class="main" -->

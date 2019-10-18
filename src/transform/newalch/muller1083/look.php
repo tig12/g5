@@ -25,14 +25,17 @@ class look implements Command {
     const POSSIBLE_PARAMS = [
         'curanames',
         'gnr',
+        'nobilities',
         'sample',
     ];
     
     // *****************************************
     /** 
         Routes to the different actions, based on $param
-        @param $param Array containing one element (a string)
-                      Must be one of self::POSSIBLE_PARAMS
+        @param $params Array
+                       First element indicates which method execute ; must be one of self::POSSIBLE_PARAMS
+                       Other elements are transmitted to the called method.
+                       (Called methods are responsible to handle their params).
     **/
     public static function execute($params=[]): string{
         $possibleParams_str = implode(', ', self::POSSIBLE_PARAMS);
@@ -46,8 +49,13 @@ class look implements Command {
                 . "Possible values for parameter : $possibleParams_str\n";
         }
         $method = 'look_' . $param;
-        self::$method();
-        return '';
+        
+        if(count($params) > 1){
+            array_shift($params);
+            self::$method($params);
+        }
+        
+        return self::$method();
     }
     
     
@@ -68,6 +76,7 @@ class look implements Command {
         foreach($res as $k => $v){
             echo "$k\t: $v\n";
         }
+        return '';
     }
     
     
@@ -103,48 +112,85 @@ class look implements Command {
         }
         echo "A2 + E1 : " . ($res['A2'] + $res['A2']) . "\n";
         echo "Total \t: " . array_sum($res) . "\n";
+        return '';
     }
     
     
     // ******************************************************
     /**
-        @param $
+        Must be executed after fixGnr
     **/
-    public static function look_curanames(){
-        $muller = $a2 = []; // assoc arrays ; keys = Gauquelin's NUM
-        // build names from Muller file
-        $rows = Muller1083::loadTmpFile();
-        foreach($rows as $row){
-            $gnr = $row['GNR'];
-            if(substr($gnr, 0, 3) == 'SA2'){
-                $NUM = substr($gnr, 3);
-                $muller[$NUM] = [
-                    'FNAME' => $row['FNAME'],
-                    'GNAME' => $row['GNAME'],
-                    'NR' => $row['NR'],
-                ];
-            }
-        }
-        ksort($muller);
-        // build names from A2
-        $rows = Cura::loadTmpCsv('A2');
-        foreach($rows as $row){
-            $NUM = $row['NUM'];
-            if(isset($muller[$NUM])){
-                $a2[$NUM] = [
-                    'FNAME' => $row['FNAME'],
-                    'GNAME' => $row['GNAME'],
-                ];
-            }
-        }
-        // print
-        foreach($muller as $NUM => $val){
-            if($val['FNAME'] == $a2[$NUM]['FNAME']){
+    private static function look_curanames(){
+        $a2s = Cura::loadTmpCsv_num('A2'); // keys = NUM
+        $e1s = Cura::loadTmpCsv_num('E1'); // keys = NUM
+        $MullerCsv = Muller1083::loadTmpFile_nr(); // keys = NR
+        
+        foreach($MullerCsv as $NR => $mulrow){
+            $GNR = $mulrow['GNR'];
+            if($GNR == ''){
                 continue;
             }
-            echo $NUM . ' ' . $val['FNAME'] . ' | ' . $val['GNAME'] . ' ' . $val['NR'] . "\n";
-            echo $NUM . ' ' . $a2[$NUM]['FNAME'] . ' | ' . $a2[$NUM]['GNAME'] . "\n";
+            
+            $curaPrefix = substr($GNR, 0, 3); // SA2 or ND1
+            if($curaPrefix == 'SA2'){                                                                  
+                $curaFile =& $a2s;
+                $curaFilename = 'A2';
+            }
+            else{
+                $curaFile =& $e1s;
+                $curaFilename = 'E1';
+            }
+            
+            $NUM = substr($mulrow['GNR'], 3);
+            $curarow =& $curaFile[$NUM];
+            echo "Müller NR $NR {$mulrow['FNAME']}\t| {$mulrow['GNAME']}\n";
+            echo "$curaFilename    NUM $NUM {$curarow['FNAME']}\t| {$curarow['GNAME']}\n";
             echo "\n";
         }
+        return '';        
     }
+    
+    
+    // ******************************************************
+     /**
+         Prints the records with a word "De" or "de" in the family or given name.
+         @param     $params Array with one element which must contain a string, which can take the values :
+                    - "simple" : simply prints the names of noble persons.
+                    - "yaml" : in this case, prints the noble persons in a yaml format, to be copied in 5-newalch-tweaked/1083MED.yml
+     **/
+     private static function look_nobilities($params=[]){
+        $msg = "This function needs one parameter to indicate the format. Can be \n"
+        . "  simple : displays the noble persons\n"
+        . "  yaml : displays the noble persons in a yaml format\n"
+        . "         (to be copied and edited in 5-newalch-tweaked/1083MED.yml)\n";
+        if(count($params) != 1){
+            return $msg;
+        }
+        $format = $params[0];
+        if(!in_array($format, ['simple', 'yaml'])){
+            return $msg;
+        }
+        
+        $MullerCsv = Muller1083::loadTmpFile_nr(); // keys = NR
+        $p = '/\b[Dd]e\b/';
+        $n = 0;
+        foreach($MullerCsv as $NR => $mulrow){
+            if(preg_match($p, $mulrow['FNAME']) !== 0 || preg_match($p, $mulrow['GNAME']) !== 0){
+                $n++;
+                if($format == 'simple'){
+                    echo "$NR {$mulrow['FNAME']}| {$mulrow['GNAME']}\n";
+                }
+                else{
+                    echo "-\n";
+                    echo "  NR: $NR\n";
+                    echo "  FNAME: {$mulrow['FNAME']}\n";
+                    echo "  GNAME: {$mulrow['GNAME']}\n";
+                    echo "\n";
+                }
+            }
+        }
+        echo "$n records concern noble persons.\n";
+        return '';
+     } 
+    
 }// end class

@@ -47,9 +47,10 @@ class fixGnr implements Command {
         
         $report = '';
         
-        $a2s = Cura::loadTmpCsv_num('A2'); // assoc arrays, keys = NUM
-        $e1s = Cura::loadTmpCsv_num('E1');
-        $MullerCsv = Muller1083::loadTmpFile_nr();
+        // assoc arrays
+        $a2s = Cura::loadTmpCsv_num('A2'); // keys = NUM
+        $e1s = Cura::loadTmpCsv_num('E1'); // keys = NUM
+        $MullerCsv = Muller1083::loadTmpFile_nr(); // keys = NR
         $maxNUM_A2 = 3647;
         $maxNUM_E1 = 2154;
         
