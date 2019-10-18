@@ -21,7 +21,7 @@ class csv2dl implements Command{
     /** 
         Called by : php run-g5.php newalch all csv2dl
         Copies all files of 5-newalch-csv/ to 9-newalch/
-        WARNING : the mechanism differs from cura (cura is more elaborate with CuraCommand and router).
+        WARNING : the mechanism differs from cura (cura is more elaborate with CuraCommand and CuraRouter).
         @param $params array containing two strings :
                        - the datafile to process (like "A1").
                        - The name of this command (useless here)

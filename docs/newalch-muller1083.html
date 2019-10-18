@@ -96,7 +96,7 @@ The first step is to generate the file <b><code>5-newalch-csv/1083MED.csv</code>
 
 <!-- ************************************* -->
 <h3><a name="1-2-tweak2csv">tweak2csv</a></h3>
-This step applies corrections, see page <a href="tweak2csv.html">tweak2csv</a>.
+This step applies corrections from file <code>data/3-edited/newalch-tweaked/1083MED.yml</code>, see page <a href="tweak2csv.html">tweak2csv</a>.
 <br>Used to fix errors in the names of noble persons (<a href="#nobilities">see below</a>).
 
 <!-- ************************************* -->
@@ -137,18 +137,12 @@ It modifies 87 records.
 
 <!-- ********************************************************************************* -->
 <h2><a name="looking-at-the-file">Looking at the file</a></h2>
-<b>NOTE</b> : the rest of this page contains notes resulting from a first superficial look at this file. The code was written to try to understand the content of the file.
-<br>I don't understand all the columns, so consider the informations about the file as suppositions, there are probably mistakes.
-<br>
-<br>With class <code>src/transform/newalch/muller1083/look.php</code> :
+
+With class <code>src/transform/newalch/muller1083/look.php</code> :
+<pre>php run-g5.php newalch muller1083 look</pre>
 <pre>
-php run-g5.php newalch muller1083 look 
 PARAMETER MISSING in g5\transform\newalch\muller1083\look
-Possible values for parameter : muller1083
-</pre>
-For example :
-<pre>
-php run-g5.php newalch muller1083 look sample
+Possible values for parameter : curanames, gnr, nobilities, sample
 </pre>
 
 
@@ -212,12 +206,13 @@ Listing names shows small errors in columns <code>FNAME</code> and <code>GNAME</
     <li>The nobility is uppercased (it should be lowercased).</li>
 </ul>
 
-The command :
+<br>The command
 <pre>php run-g5.php newalch muller1083 look nobilities simple</pre>
 lists the noble persons of the file.
-
+<br>
+<br>The command
 <pre>php run-g5.php newalch muller1083 look nobilities yaml</pre>
-prints the same list in a YAML format. This was used to include corrections in step <a href="#1-2-tweak2csv">tweak2csv</a>.
+prints the same list in a YAML format. This was used to copy the output in file <code>data/3-edited/newalch-tweaked/1083MED.yml</code> ; the corrections are handled by step <a href="#1-2-tweak2csv">tweak2csv</a>.
 
 </article>
 </div><!-- end class="main" -->

@@ -98,9 +98,6 @@ Its integration to Gauquelin5 is limited to A1 name restoration. The rest is dra
     </ul>
 </nav>
 
-
-
-
 <!-- ********************************************************************************* -->
 <h2><a name="ertel-4391-generalities">Ertel 4391 generalities</a></h2>
 
@@ -159,8 +156,9 @@ The first step is to generate the file <b><code>5-newalch-csv/4391SPO.csv</code>
 <!-- ************************************* -->
 <h3><a name="2-2-fix-cura-a1-names">Fix cura A1 names</a></h3>
 Fixes 100% of the remaining name problems in A1.
+
+<pre>php run-g5.php cura A1 ertel2csv</pre>
 <pre>
-php run-g5.php cura A1 ertel2csv
 WRONG USAGE - ertel2csv needs one parameter. Can be :
   update : modify cura file
   echo : echo detailed names
