@@ -66,13 +66,21 @@ This page deals with the file <a href="https://newalchemypress.com/gauquelin/gau
 <!-- ********************************************************************************* -->
 <h2><a name="integration-to-g5">Integration to g5</a></h2>
 
-Very few work has been done on this file for the moment.
-<br>It could be used to 
+More work can be done on this file. It could be used to :
 <ul>
     <li>Check legal time restoration in A2.</li>
     <li>Better place names in A2 (which would then permit better matching to geonames).</li>
     <li>And it brings new persons not present in Cura files.</li>
 </ul>
+
+<br>The full set of transformations can be executed with the command : 
+<pre>php run-g5.php newalch muller1083 all</pre>
+
+This is equivalent to :
+<pre>
+php run-g5.php newalch muller1083 raw2csv
+php run-g5.php newalch muller1083 fixGnr update
+</pre>
 
 <!-- ************************************* -->
 <h3><a name="1-1-generate-csv">Generate csv</a></h3>
@@ -80,141 +88,39 @@ The first step is to generate the file <b><code>5-newalch-csv/1083MED.csv</code>
 <pre>php run-g5.php newalch muller1083 raw2csv</pre>
 
 <!-- ************************************* -->
-<h3>Fix 4 dates in A2 and E1</h3>
-The step <a href="#fix-gnr">fixGnr</a> permitted to identify 4 differences by comparing Müller's file with A2 and E1, in field <code>DATE</code>.
-<br>After check, all the errors came from A2 and E1.
-<br>These errors are corrected in in <a href="tweak2csv.html">step tweak2csv</a> of files A2 and E1, writting corrections in yaml files of <code>3-cura-tweaked/</code>.
-<br>To fix, execute :
-<pre>
-php run-g5.php cura A2 tweak2csv
-php run-g5.php cura E1 tweak2csv
-</pre>
-
-<table class="wikitable margin">
-    <tr><th colspan="3">Müller</th><th colspan="4">Gauquelin (Cura)</th></tr>
-    <tr><th>NR</th><th>Name</th><th>Date</th><th>File</th><th>NUM</th><th>Name</th><th>Date</th></tr>
-    <tr class="bold">
-        <td>342</td>
-        <td>Fabre Jean</td>
-        <td>1864-06-08</td>
-        <td>A2</td>
-        <td>255</td>
-        <td>Fabre Jean</td>
-        <td>1874-06-08</td>
-    </tr>
-    <tr>
-        <td colspan="7">
-            Checking online civil regisrty permit to conclude that the error comes from file A2.
-            <br>Jean Fabre is born in 1864, in Lyon, 4th arrondissement.
-            <br>See <a href="http://www.fondsenligne.archives-lyon.fr/ark:/18811/1ded0b19dbac4877e601a9e738afb55a">Table décennale</a> and <a href="http://www.fondsenligne.archives-lyon.fr/ark:/18811/bddfe6804cf29397f08eeaa8b53fae05">birth certificate</a> : Lyon 4e Naissances - 2E10360 - p 56 / 129.
-            <br>Birth certificate also permits to check that Müller's hour (04:00) is correct.
-        </td>
-    </tr>
-    <tr class="bold">
-        <td>484</td>
-        <td>Heuyer Georges Jean-baptiste</td>
-        <td>1884-01-30</td>
-        <td>A2</td>
-        <td>1051</td>
-        <td>Heuyer Georges</td>
-        <td>1884-07-30</td>
-    </tr>
-    <tr>
-        <td colspan="7">
-            Checking online civil regisrty permit to conclude that the error comes from file A2.
-            <br>Heuyer Georges Jean-baptiste is born 1884-01-30.
-            <br>See birth certificate on registry 8 Mi 4969 (NMD 1883-1892) , Pacy-sur-Eure, p 55 / 585.
-            <br>Birth certificate also permits to check that Müller's hour (20:30) is correct.
-        </td>
-    </tr>
-    <tr class="bold">
-        <td>743</td>
-        <td>Morice André Marie Gustave Emile Etienne</td>
-        <td>1890-07-31</td>
-        <td>E1</td>
-        <td>1520</td>
-        <td>MORICE André</td>
-        <td>1891-07-31</td>
-    </tr>
-    <tr>
-        <td colspan="7">
-            Checking online civil regisrty permit to conclude that the error comes from file E1.
-            <br>Morice André Marie Gustave Emile Etienne is born 1890-07-31.
-            <br>See birth certificate on registry Etat-civil de Caen, Naissances 1890, p 141 / 251.
-            <br>Birth certificate also permits to check that Müller's hour (15:00) is correct.
-        </td>
-    </tr>
-    <tr class="bold">
-        <td>914</td>
-        <td>Rocher Henri Gaston Louis</td>
-        <td>1876-05-28</td> 
-        <td>E1</td>
-        <td>1806</td>
-        <td>ROCHER Louis</td>
-        <td>1876-05-27</td>
-    </tr>
-    <tr>
-        <td class="padding2" colspan="7">
-            Checking online civil regisrty permit to conclude that the error comes from file E1.
-            <br>Morice André Marie Gustave Emile Etienne is born 1876-05-28.
-            <br>See birth certificate on <a href="https://archives.gironde.fr/ark:/25651/vta3126b44c9df23bf5">registry 4 E 1548</a>, p 99 / 274.
-            <br>Birth certificate also permits to check that Müller's hour (16:00) is correct.
-        </td>
-    </tr>
-</table>
-
-
-<h2>Rest of the page is obsolete or incomplete</h2>
-
-<!-- ************************************* -->
 <h3>Fix GNR</h3>
-A first execution of 
-<pre>php run-g5.php newalch muller1083 look a2names</pre>
-(see below) showed abnormal differences for some names. This led to identify an error on <code>GNR</code>. 
+Looking at the file with
+<pre>php run-g5.php newalch muller1083 look</pre>
+(see <a href="#looking-at-the-file">below</a>) showed abnormal differences for some names. This led to identify errors on <code>GNR</code> :
 
-<div class="bold padding05">Column <code>GNR</code> is truncated, so GNRs superior to 999 are erroneous.</div>
+<div class="bold padding05">
+Column <code>GNR</code> is truncated, so GNRs superior to 99 are possibly erroneous.
+<br>Step <code>fixGnr</code> showed that 87 records had a wrong GNR.
+</div>
 
-To identify lines to fix, the command :
-<pre>php run-g5.php newalch muller1083 look gnr_doubles</pre>
-prints the list of records sharing the same GNR values. This permits to identify <b>68 lines to fix</b>.
+The command
 
-<h4>Execute</h4>
-These commands must have been issued before :
-<pre>
-php run-g5.php cura A2 raw2csv small
-php run-g5.php cura E1 raw2csv small
-php run-g5.php newalch muller1083 raw2csv
-php run-g5.php cura A2 tweak2csv
-php run-g5.php cura E1 tweak2csv
-</pre>
-
-
-Then
 <pre>php run-g5.php newalch muller1083 fixGnr report</pre>
 
+lists the GNRs to fix with the corresponding values of dates and names in A2 and E1.
+<br>This step is necessary, to check that the fix does not introduce wrong associations (this is not the case).
+<details class="margin">
+    <summary>Details</summary>
+    <br>For each GNR > 99, the code builds a list af possible matches in Cura files (for example, A code 103 in Müller's file could correspond to 103, 1030, 1031 ... 1039.
+    <br>To choose the right match, the code uses field DATE (in fact, it uses only the day).
+    <br>But cura files contain errors in DATE field.
+    <br>The improbable situation could have occured : among the 11 candidates, the good one contains an error in DATE, and an other candidate has Müller's date.
+    <br>In this case, the code would have generated a mistake. So report with human check is necessary.
+</details>
 
+To correct GNR <code>newalch-csv/1083MED.csw</code>, run
 
+<pre>php run-g5.php newalch muller1083 fixGnr update</pre>
 
+It modifies 87 records.
 
 <!-- ************************************* -->
-<h3><a name="1-2-restore-cura-a2-names">Restore cura A2 names</a></h3>
-<div class="bold">obsolete</div>
-<pre>php run-g5.php cura A2 muller2csv</pre>
-<pre>
-WRONG USAGE - muller2csv needs one parameter. Can be :
-  update : modify cura file
-  echo : echo detailed names
-ex : php run-g5.php cura A2 muller2csv update
-</pre>
-
-<pre>php run-g5.php cura A2 muller2csv update</pre>
-<pre>
-Nb missing names in cura A2 : 207
-Müller 1083 contains : 739 lines from A2
-Nb corrections : 12
-</pre>
-
-Only 12, the result is quite disapointing.
+<h3><a name="1-2-restore-cura-a2-names">Restore cura names</a></h3>
 
 
 <!-- ********************************************************************************* -->
@@ -243,10 +149,10 @@ This column seems to indicate the origin of the record.
 <pre>php run-g5.php newalch muller1083 look sample</pre>
 
 <pre>
-[GAUQ_NUR] => 168
-[MUERGAUQ] => 612
-[MUERGAUQ-d] => 79
-[MUER_NUR] => 224
+GAUQ_NUR 	: 168
+MUERGAUQ 	: 612
+MUERGAUQ-d 	: 79
+MUER_NUR 	: 224
 </pre>
 Remarks from newalchemypress.com give indications :
 <blockquote>
@@ -266,18 +172,21 @@ Maybe means "Gauquelin Number Record".
 <br>This command counts the records associated to Gauquelin files :
 <pre>php run-g5.php newalch muller1083 look gnr</pre>
 <pre>
+EMPTY 	: 224
 A2 	: 765
 E1 	: 94
-EMPTY 	: 224
-Sum = 1083
+A2 + E1 : 1530
+Total 	: 1083
 </pre>
 
 
 <!-- ********************************************************************************* -->
-<h2>Comparing with A2 and E1 names</h2>
+<h2>Comparing with Cura names</h2>
 The command :
-<pre>php run-g5.php newalch muller1083 look a2names</pre>
+<pre>php run-g5.php newalch muller1083 look curanames</pre>
 prints side by side family and given names of records present both in Müller's file and file A2.
+
+
 <br>In general, there are small differences, showing that Müller's names are better.
 
 

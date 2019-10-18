@@ -1,9 +1,9 @@
 <?php
 /********************************************************************************
-    Performs all actions to build file(s) of data/5-tmp/cura-csv/A*.csv
+    Performs all actions to build file(s) of 5-cura-csv/A*.csv
     
     @license    GPL
-    @history    2019-06-07 08:55:40+02:00, Thierry Graff : creation
+    @history    2019-06-07 08:55:40+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\transform\cura\A;
 
@@ -18,7 +18,7 @@ class all implements Command{
     // *****************************************
     // Implementation of Command
     /** 
-    Performs all actions to build file(s) of data/5-tmp/cura-csv/A*.csv
+        Performs all actions to build file(s) of 5-cura-csv/A*.csv
         Called by : php run-g5.php cura A1 all     # A1 or A, A2 ... A6
         @param $params  array with 2 elements :
                         - the datafile (ex "A1")

@@ -1,9 +1,10 @@
 <?php
 /********************************************************************************
-    Builds Muller1083::GNR_FIX
+    Fixes the problem of truncated GNR in 5-newalch-csv/1083MED.csv
     
     @license    GPL
-    @history    2019-10-15 01:24:44+02:00, Thierry Graff : creation
+    @history    2019-10-15 01:24:44+02:00, Thierry Graff : Creation
+    @history    2019-10-16 23:31:44+02:00, Thierry Graff : New version, using date differences instead of GNR doublons
 ********************************************************************************/
 namespace g5\transform\newalch\muller1083;
 
@@ -14,14 +15,13 @@ use g5\transform\cura\Cura;
 class fixGnr implements Command {
     
     const POSSIBLE_PARAMS = [
-        'update' => "Updates file MUL1083MED and echoes minimal report",
-        'report' => "Echoes a full list of modifications without modifying anything",
-        'check' => "Execute after fix2gnr. Compares the dates with A2 E1 to check if everything was fixed",
+        'update' => "Updates column GNR of file 5-newalch-csv/1083MED.csv",
+        'report' => "Echoes a full list of GNR corrections without modifying 5-newalch-csv/1083MED.csv",
     ];
     
     // *****************************************
     /** 
-        Routes to the different actions, based on $param
+        Fixes the problem of truncated GNR
         @param $param Array containing one element (a string)
                       Must be one of self::POSSIBLE_PARAMS
     **/
@@ -45,48 +45,53 @@ class fixGnr implements Command {
                 . "Possible values for parameter :\n$possibleParams_str\n";
         }
         
-        if($param == 'check'){
-            return self::check();
-        }
-        
         $report = '';
-        $corrections = [];
-        $nomatch = false;
         
-        // assoc arrays, keys = NUM
-        $a2s = Cura::loadTmpCsv_num('A2');
+        $a2s = Cura::loadTmpCsv_num('A2'); // assoc arrays, keys = NUM
         $e1s = Cura::loadTmpCsv_num('E1');
+        $MullerCsv = Muller1083::loadTmpFile_nr();
+        $maxNUM_A2 = 3647;
+        $maxNUM_E1 = 2154;
         
-        $MullerCsv = Muller1083::loadTmpFile();
+        // Corrections that will be applied to GNR
+        // key = NR ; value = corrected GNR
+        // Among these 22 corrections, only 3 will be applied
+        // Other corrections permit to fix a date error, but are not real corrections.
+        $corrections = [
+            '157' => 'SA2117',
+            '193' => 'SA2144',
+            '235' => 'SA2175',
+            '251' => 'SA2186',
+            '252' => 'SA2187',
+            '320' => 'SA2237',
+            '329' => 'SA2243',
+            '332' => 'SA2245',
+            '342' => 'SA2255',
+            '366' => 'SA2271',
+            '374' => 'SA2278',
+            '387' => 'SA2287',
+            '429' => 'SA2311',
+            '482' => 'SA2345',
+            '484' => 'SA21051', // Differs from SA2105
+            '485' => 'SA2347',
+            '490' => 'SA2349',
+            '492' => 'SA2351',
+            '499' => 'SA2356',
+            '500' => 'SA2357',
+            '743' => 'ND11520', // differs from ND1152
+            '914' => 'ND11806', // differs from ND1180
+        ];
         
-        // Build an array containing duplicate values of GNR in 1083MED.csv
-        $mullers = [];
+        $ambiguous = false;
         
-        $tmp = [];
-        foreach($MullerCsv as $row){
-            $gnr = $row['GNR'];
-            if($gnr == ''){
+        foreach($MullerCsv as $NR => $mulrow){
+            if(isset($corrections[$NR])){
                 continue;
             }
-            if(!isset($tmp[$gnr])){
-                $tmp[$gnr] = [];
+            $GNR = $mulrow['GNR'];
+            if($GNR == ''){
+                continue;
             }
-            $tmp[$gnr][] = [
-                'NR' => $row['NR'],
-                'FNAME' => $row['FNAME'],
-                'GNAME' => $row['GNAME'],
-                'DATE' => $row['DATE'],
-            ];
-        }
-        // keep only duplicates
-        foreach($tmp as $gnr => $val){
-            if(count($val) == 1){
-                continue; // no duplicates, ok
-            }
-            $mullers[$gnr] = $val;
-        }
-        
-        foreach($mullers as $GNR => $muller){
             $curaPrefix = substr($GNR, 0, 3); // SA2 or ND1
             if($curaPrefix == 'SA2'){
                 $curaFile =& $a2s;
@@ -98,89 +103,113 @@ class fixGnr implements Command {
             }
             
             $NUM_muller = substr($GNR, 3);
-            $targetNUMs = self::targetNums($NUM_muller);
             
-            // Check if ambiguity on birth day in muller records
-            // As correction is built using birth day, an ambiguity would possibly introduce wrong matching 
-            // Result : no ambiguity ; in practice this check is useless.
-            $dates_muller = [];
-            foreach($muller as $rec){
-                $date = substr($rec['DATE'], 0, 10); // compare only days
-                if(in_array($date, $dates_muller)){
-                    $report .= "DUPLICATE DATE IN MULLER : GNR = $GNR - DATE = $date\n";
-                    $report .= "Case not fixed\n";
-                    continue 2; // next muller record
-                }
-                $dates_muller[] = $date;
+            if($NUM_muller < 100){
+                continue; // not truncated => no correction needed
             }
             
-            foreach($muller as $rec_muller){
-                $NR = $rec_muller['NR'];
-                $date_muller = substr($rec_muller['DATE'], 0, 10);
-                $candidates = [];
-                $curaTests = []; // only useful to log NO MATCHING case
-                foreach($targetNUMs as $targetNUM){
-                    $date_cura = substr($curaFile[$targetNUM]['DATE'], 0, 10);
-                    $curaTests[$targetNUM] = $date_cura;
-                    if($date_muller == $date_cura){
-                        $candidates[] = $targetNUM;
-                    }
+            $max = ($curaFilename == 'A2' ? $maxNUM_A2 : $maxNUM_E1);
+            $targetNUMs = self::targetNums($NUM_muller, $max);
+            
+            if(count($targetNUMs) == 1 && $targetNUMs[0] == $NUM_muller){
+                continue;
+            }
+            
+            $date_muller = substr($mulrow['DATE'], 0, 10);
+            $candidates = [];
+            $curaTests = []; // only useful to log NO MATCHING case
+            foreach($targetNUMs as $targetNUM){
+                if(!isset($curaFile[$targetNUM])){
+                    continue; // happens for ex because A2 2652 doesn't exist
                 }
-                if(count($candidates) == 0){
-                    // This happens if corrections tweak2csv are not applied to A2 and E1 before executing fixGnr
-                    $nomatch = true;
-                    $report .= "NO MATCHING for Muller NR = $NR - GNR = $GNR\n";
-                    $report .= "    Muller : $date_muller | {$rec_muller['FNAME']} | {$rec_muller['GNAME']}\n";
-                    $report .= "    Possible Cura $curaFilename :\n";
-                    foreach($curaTests as $k => $v){
-                        $report .= "        $k : $v | {$curaFile[$k]['FNAME']} | {$curaFile[$k]['GNAME']}\n";
-                    }
-                    continue;
+                $date_cura = substr($curaFile[$targetNUM]['DATE'], 0, 10);
+                if($date_muller == $date_cura){
+                    $candidates[] = $targetNUM;
                 }
-                if(count($candidates) > 1){
-                    // If several Gauquelin candidates have the same date
-                    // Does not occur, in practice this test is useless
-                    $report .= "AMBIGUITY for Muller NR = $NR - GNR = $GNR\n";
-                    $report .= "    Possible matches in cura $curaFilename : " . implode($candidates, ', ') . "\n";
-                    continue;
+                $curaTests[$targetNUM] = $date_cura;
+            }
+            if(count($candidates) == 0){
+                $ambiguous = true;
+                // This test happens if the case is not included in $corrections initialization
+                // This display was used to build $corrections
+                $report .= "NO MATCHING for Muller NR = $NR - GNR = $GNR\n";
+                $report .= "Probable fix, to add in the initialization of \$corrections : \n";
+                $report .= "            '$NR' => '$GNR',\n";
+                $report .= "Details :\n";
+                $report .= "    Muller : $date_muller | {$mulrow['FNAME']} | {$mulrow['GNAME']}\n";
+                $report .= "    Possible Cura $curaFilename :\n";
+                foreach($curaTests as $k => $v){
+                    $report .= "        $k : $v | {$curaFile[$k]['FNAME']} | {$curaFile[$k]['GNAME']}\n";
                 }
-                // found a unique match
+                continue;
+            }
+            else if(count($candidates) > 1){
+                // If several Gauquelin candidates have the same date
+                // Does not occur, so in practice this test is useless
+                $report .= "AMBIGUITY for Muller NR = $NR - GNR = $GNR\n";
+                $report .= "    Possible matches in cura $curaFilename : " . implode($candidates, ', ') . "\n";
+                continue;
+            }
+            // count($candidates) = 1
+            if($candidates[0] != $NUM_muller){
                 $corrections[$NR] = $curaPrefix . $candidates[0];
             }
         }
         
-        $nCorr = count($corrections);
-        if($param == 'update' && !$nomatch){
-            $res = implode(G5::CSV_SEP, array_keys($MullerCsv[0])) . "\n";
-            foreach($MullerCsv as $row){
-                $new = $row;
-                if(isset($corrections[$row['NR']])){
-                    $new['GNR'] = $corrections[$row['NR']];
-                }
-                $res .= implode(G5::CSV_SEP, $new) . "\n";
+        // Filter corrections to eliminate useless corrections
+        // added in the initializations of $corrections to handle date problems
+        foreach($MullerCsv as $NR => $mulrow){
+            $GNR = $mulrow['GNR'];
+            if(!isset($corrections[$NR])){
+                continue;
             }
-            $destFile = Muller1083::tmp_csv_filename();
-            file_put_contents($destFile, $res);// HERE modify 1083MED.csv
-            $report .= "$destFile was updated\n";
-            $report .= "$nCorr GNR were corrected\n";
-        }
-        else if($param == 'report'){
-            $report .= "This function will modify the following records of 1083MED.csv :\n";
-            $report .= "  NR\t | Corrected GNR\n";
-            foreach($corrections as $NR => $correction){
-                $report .= "  $NR\t | $correction\n";
+            if($corrections[$NR] == $GNR){
+                unset($corrections[$NR]);
             }
-            $report .= "Total : $nCorr GNR need correction\n";
         }
         
-        if($nomatch){
-            $report .= "===   Some corrections do not match   ===\n";
-            $report .= "===        I Refuse to fix GNR        ===\n";
-            $report .= "  First apply tweak2csv to A2 and E1 : \n";
-            $report .= "  php run-g5.php cura A2 tweak2csv\n";
-            $report .= "  php run-g5.php cura E1 tweak2csv\n";
-            $report .= "  Then you can re-execute fixGnr\n";
+        $nCorr = count($corrections);
+        
+        if($param == 'report'){
+            $report .= "This function will modify the following records of 1083MED.csv :\n";
+            foreach($corrections as $NR => $newGNR){
+                if(substr($newGNR, 0, 3) == 'SA2'){
+                    $curaFile =& $a2s;
+                }
+                else{
+                    $curaFile =& $e1s;
+                }
+                $NUM = substr($newGNR, 3);
+                $date = substr($MullerCsv[$NR]['DATE'], 0, 10);
+                $report .= "Muller : NR $NR - GNR {$MullerCsv[$NR]['GNR']} -\t $date | {$MullerCsv[$NR]['FNAME']} | {$MullerCsv[$NR]['GNAME']}\n";
+                $date = substr($curaFile[$NUM]['DATE'], 0, 10);
+                $report .= "Corrected : $newGNR - in Cura :\t $date | {$curaFile[$NUM]['FNAME']} | {$curaFile[$NUM]['GNAME']}\n";
+                $report .= "\n";
+            }
+            $report .= "Total : $nCorr GNR will be corrected\n";
+            return $report;
         }
+        
+        if($ambiguous){
+            $report .= "GNR corrections can't be applied.\n";
+            $report .= "First fix in the code the NO MATCHING cases in the initialisation of \$corrections\n";
+            $report .= "Nothing was modified.\n";
+            return $report;
+        }
+        
+        // update 1083MED.csv
+        $res = implode(G5::CSV_SEP, array_keys($MullerCsv[1])) . "\n";
+        foreach($MullerCsv as $NR => $row){
+            $new = $row;
+            if(isset($corrections[$NR])){
+                $new['GNR'] = $corrections[$NR];
+            }
+            $res .= implode(G5::CSV_SEP, $new) . "\n";
+        }
+        $destFile = Muller1083::tmp_csv_filename();
+        file_put_contents($destFile, $res);// HERE update 1083MED.csv
+        $report .= "Updated $destFile\n";
+        $report .= "$nCorr GNR were corrected\n";
         
         return $report;
     }
@@ -192,54 +221,17 @@ class fixGnr implements Command {
         ex : $NUM = 103 => returns [103, 1030, 1031 ... 1039]
         @param $NUM Muller NUM, computed from GNR
     **/
-    private static function targetNums($NUM){
+    private static function targetNums($NUM, $max){
         $res = [$NUM];
         $x10 = $NUM * 10;
         for($i=0; $i < 10; $i++){
+            $n = $x10 + $i;
+            if($n > $max){
+                break;
+            }
             $res[] = $x10 + $i;
         }
         return $res;
     }
-    
-    // ******************************************************
-    /**
-        Implements php run-g5.php newalch muller1083 fixGnr check
-    **/
-    private static function check(){
-        $ndiff = $ncommon = 0;
-        $a2s = Cura::loadTmpCsv_num('A2');
-        $e1s = Cura::loadTmpCsv_num('E1');
-        $MullerCsv = Muller1083::loadTmpFile();
-        foreach($MullerCsv as $mulrow){
-            $GNR = $mulrow['GNR'];
-            $curaPrefix = substr($GNR, 0, 3); // SA2 or ND1
-            if($curaPrefix == ''){
-                continue;
-            }
-            $ncommon++;
-            if($curaPrefix == 'SA2'){
-                $curaFile =& $a2s;
-                $curaFilename = 'A2';
-            }
-            else{
-                $curaFile =& $e1s;
-                $curaFilename = 'E1';
-            }
-            $NUM = substr($GNR, 3);
-            $date_m = substr(trim($mulrow['DATE']), 0, 10);
-            $curarow = $curaFile[$NUM];
-            $date_g = substr(trim($curarow['DATE']), 0, 10);
-            if($date_g != $date_m){
-                $ndiff++;
-                echo "Difference\n";
-                echo "  Muller $date_m NR = {$mulrow['NR']} | {$mulrow['FNAME']} {$mulrow['GNAME']} \n";
-                echo "  $curaFilename\t $date_g NUM = $NUM | {$curarow['FNAME']} {$curarow['GNAME']}\n";
-            }
-        }
-        echo "nb common (A2 + E1) : $ncommon\n";
-        echo "nb differences (A2 + E1) : $ndiff\n";
-        return '';
-    }
-    
     
 }// end class

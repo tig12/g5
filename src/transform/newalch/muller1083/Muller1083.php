@@ -58,7 +58,6 @@ class Muller1083{
         'NOTES'
     ];
     
-    
     // ******************************************************
     /**
         @return Path to the raw file coming from newalch
@@ -66,7 +65,6 @@ class Muller1083{
     public static function raw_filename(){
         return Config::$data['dirs']['1-newalch-raw'] . DS . '05-muller-medics' . DS . '5a_muller-medics-utf8.txt';
     }
-    
     
     // ******************************************************
     /**
@@ -76,15 +74,28 @@ class Muller1083{
         return Config::$data['dirs']['5-newalch-csv'] . DS . self::TMP_CSV_FILE;
     }
     
-    
     // ******************************************************
     /**
-        Loads file 5-newalch-csv/1083MED.csv.
+        Loads file 5-newalch-csv/1083MED.csv in a regular array
         @return Regular array
                 Each element contains an associative array (keys = field names).
     **/
     public static function loadTmpFile(){
         return csvAssociative::compute(self::tmp_csv_filename());
     }                                                                                              
+    
+    // ******************************************************
+    /**
+        Loads file 5-newalch-csv/1083MED.csv in an asssociative array ; keys = NR
+        @return     Associative array containing 1083MED.csv ; keys = NR
+    **/
+    public static function loadTmpFile_nr(){
+        $rows1 = self::loadTmpFile();
+        $res = [];              
+        foreach($rows1 as $row){
+            $res[$row['NR']] = $row;
+        }
+        return $res;
+    }
     
 }// end class

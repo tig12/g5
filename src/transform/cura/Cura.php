@@ -78,7 +78,7 @@ class Cura{
     
     // ******************************************************
     /**
-        Loads a cura file of 5-cura-csv/
+        Loads a cura file of 5-cura-csv/ in a regular array
         @param  $datafile : a string like 'A1'
         @return Regular array containing the persons' data
     **/
@@ -88,9 +88,9 @@ class Cura{
 
     // ******************************************************
     /**
-        Auxiliary function
-        @param  $datafile : a string like 'A1'
-        @return    Associative array containing the cura file in 5-cura-csv/ ; keys = cura ids (NUM)
+        Loads a cura file of 5-cura-csv/ in an asssociative array ; keys = cura ids (NUM)
+        @param      $datafile : a string like 'A1'
+        @return     Associative array containing the cura file in 5-cura-csv/ ; keys = cura ids (NUM)
     **/
     public static function loadTmpCsv_num($datafile){
         $curaRows1 = self::loadTmpCsv($datafile);

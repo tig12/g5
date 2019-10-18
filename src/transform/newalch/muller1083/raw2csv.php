@@ -1,6 +1,8 @@
 <?php
 /********************************************************************************
     Imports 1-newalch-raw/05-muller-medics/5a_muller-medics-utf8.txt to 5-newalch-csv/1083MED.csv
+    
+    @todo Handle C2 (départements)
         
     @license    GPL
     @history    2019-07-06 12:21:23+02:00, Thierry Graff : creation
@@ -100,7 +102,7 @@ class raw2csv implements Command{
         $outfile = Config::$data['dirs']['5-newalch-csv'] . DS . Muller1083::TMP_CSV_FILE;
         file_put_contents($outfile, $res);
         
-        return "Importing Müller 183 - $nRecords records\n$outfile generated\n";
+        return "Generated $outfile\nStored $nRecords records\n";
     }
     
     

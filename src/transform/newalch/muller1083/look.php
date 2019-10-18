@@ -23,9 +23,8 @@ class look implements Command {
         php run-g5.php newalch ertel4391 look eminence
     **/
     const POSSIBLE_PARAMS = [
-        'a2names',
+        'curanames',
         'gnr',
-        'gnr_doubles',
         'sample',
     ];
     
@@ -66,7 +65,9 @@ class look implements Command {
             $res[$row['SAMPLE']] ++;
         }
         ksort($res);
-        echo "\n"; print_r($res); echo "\n";
+        foreach($res as $k => $v){
+            echo "$k\t: $v\n";
+        }
     }
     
     
@@ -78,13 +79,13 @@ class look implements Command {
     private static function look_gnr(){
         $rows = Muller1083::loadTmpFile();
         $res = [
+            'EMPTY' => 0,
             'A2' => 0,
             'E1' => 0,
-            'EMPTY' => 0,
         ];
         foreach($rows as $row){
+            $gnr = $row['GNR'];
             if($gnr == ''){
-                $gnr = $row['GNR'];
                 $res['EMPTY']++;
             }
             else if(substr($gnr, 0, 3) == 'SA2'){
@@ -100,53 +101,16 @@ class look implements Command {
         foreach($res as $k => $v){
             echo "$k \t: $v\n";
         }
-        echo "Sum = " . array_sum($res) . "\n";
+        echo "A2 + E1 : " . ($res['A2'] + $res['A2']) . "\n";
+        echo "Total \t: " . array_sum($res) . "\n";
     }
     
     
     // ******************************************************
     /**
-        Prints duplicate GNR values
-    **/
-    public static function look_gnr_doubles(){
-        $rows = Muller1083::loadTmpFile();
-        $res = [];
-        foreach($rows as $row){
-            $gnr = $row['GNR'];
-            if($gnr == ''){
-                continue;
-            }
-            if(!isset($res[$gnr])){
-                $res[$gnr] = [];
-            }
-            $res[$gnr][] = [
-                'NR' => $row['NR'],
-                'FNAME' => $row['FNAME'],
-                'GNAME' => $row['GNAME'],
-                'DATE' => $row['DATE'],
-            ];
-        }
-        $nDup = 0;
-        foreach($res as $gnr => $val){
-            if(count($val) == 1){
-                continue; // no duplicates, ok
-            }
-            foreach($val as $duplicate){
-                $nDup++;
-                echo "$gnr {$duplicate['NR']} {$duplicate['FNAME']} | {$duplicate['GNAME']} | {$duplicate['DATE']}\n";
-            }
-            echo "\n";
-        }
-        echo "---------\nN duplicates = $nDup\n";
-    }
-    
-    
-    // ******************************************************
-    /**
-        Prints side by side the names coming from Müller and Gauquelin A2
         @param $
     **/
-    public static function look_a2names(){
+    public static function look_curanames(){
         $muller = $a2 = []; // assoc arrays ; keys = Gauquelin's NUM
         // build names from Muller file
         $rows = Muller1083::loadTmpFile();
