@@ -20,9 +20,10 @@ class look implements Command {
     
     /** 
         Possible values of the command, for ex :
-        php run-g5.php newalch ertel4391 look eminence
+        php run-g5.php newalch muller1083 look gnr
     **/
     const POSSIBLE_PARAMS = [
+        'curadates',
         'curanames',
         'gnr',
         'nobilities',
@@ -48,11 +49,12 @@ class look implements Command {
             return "INVALID PARAMETER in g5\\transform\\newalch\\muller1083\\look\n"
                 . "Possible values for parameter : $possibleParams_str\n";
         }
+        
         $method = 'look_' . $param;
         
         if(count($params) > 1){
             array_shift($params);
-            self::$method($params);
+            return self::$method($params);
         }
         
         return self::$method();
@@ -156,7 +158,7 @@ class look implements Command {
          Prints the records with a word "De" or "de" in the family or given name.
          @param     $params Array with one element which must contain a string, which can take the values :
                     - "simple" : simply prints the names of noble persons.
-                    - "yaml" : in this case, prints the noble persons in a yaml format, to be copied in 5-newalch-tweaked/1083MED.yml
+                    - "yaml" : prints the noble persons in a yaml format, to be copied in 5-newalch-tweaked/1083MED.yml
      **/
      private static function look_nobilities($params=[]){
         $msg = "This function needs one parameter to indicate the format. Can be \n"
@@ -192,5 +194,84 @@ class look implements Command {
         echo "$n records concern noble persons.\n";
         return '';
      } 
+    
+    // ******************************************************
+    /**
+        Must be executed after fixGnr
+    **/
+    private static function look_curadates(){
+        $a2s = Cura::loadTmpCsv_num('A2'); // keys = NUM
+        $e1s = Cura::loadTmpCsv_num('E1'); // keys = NUM
+        $MullerCsv = Muller1083::loadTmpFile_nr(); // keys = NR
+        
+        $equalA2 = $diffA2 = $totalA2 = 0;
+        $equalE1 = $diffE1 = $totalE1 = 0;
+        
+        foreach($MullerCsv as $NR => $mulrow){
+            $GNR = $mulrow['GNR'];
+            if($GNR == ''){
+                continue;
+            }
+            
+            $curaPrefix = substr($GNR, 0, 3); // SA2 or ND1
+            if($curaPrefix == 'SA2'){                                                                  
+                $curaFile =& $a2s;
+                $curaFilename = 'A2';
+            }
+            else{
+                $curaFile =& $e1s;
+                $curaFilename = 'E1';                                
+            }
+            
+            $NUM = substr($mulrow['GNR'], 3);
+            $curarow =& $curaFile[$NUM];
+            $mulday = substr($mulrow['DATE'], 0, 10);
+            $curaday = substr($curarow['DATE'], 0, 10);
+            
+            if($curaFilename == 'A2'){
+                $totalA2++;
+                if($mulday == $curaday){
+                    $equalA2++;
+                    continue;
+                }
+                else{
+                    $diffA2++;                                          
+                }
+            }
+            else{
+                $totalE1++;
+                if($mulday == $curaday){
+                    $equalE1++;
+                    continue;
+                }
+                else{
+                    $diffE1++;
+                }
+            }
+            
+            $NUM = str_pad($NUM, 4);
+            $NR = str_pad($NR, 4);
+            echo "Müller NR $NR $mulday\t| {$mulrow['FNAME']}\t| {$mulrow['GNAME']}\n";
+            echo "$curaFilename    NUM $NUM $curaday\t| {$curarow['FNAME']}\t| {$curarow['GNAME']}\n";
+            echo "\n";
+        }
+        $total = $totalA2 + $totalE1;
+        $equal = $equalA2 + $equalE1;
+        $diff = $diffA2 + $diffE1;
+        $pEqA2 = round(100 * $equalA2 / $totalA2, 2);
+        $pDiffA2 = 100 - $pEqA2;
+        $pEqE1 = round(100 * $equalE1 / $totalE1, 2);
+        $pDiffE1 = 100 - $pEqE1;
+        $pEq = round(100 * $equal / $total, 2);
+        $pDiff = 100 - $pEq;
+        echo "Compare dates Müller / A2 E1\n";
+        echo "        | Equal         | Different  | Total\n";
+        echo "--------------------------------------------\n";
+        echo "A2      | $equalA2 ($pEqA2 %) | $diffA2 ($pDiffA2 %)| $totalA2\n";
+        echo "E1      | $equalE1  ($pEqE1 %) | $diffE1  ($pDiffE1 %)| $totalE1\n";
+        echo "A2 + E1 | $equal ($pEq %) | $diff ($pDiff %)| $total\n";
+        return '';
+    }
+    
     
 }// end class

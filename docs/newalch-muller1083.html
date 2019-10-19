@@ -134,6 +134,23 @@ It modifies 87 records.
 <!-- ************************************* -->
 <h3><a name="1-4-restore-cura-names">Restore cura names</a></h3>
 
+<pre>php run-g5.php cura A2 muller2csv</pre>
+<pre>
+WRONG USAGE - muller2csv needs one parameter. Can be :
+  update : modify cura file
+  echo : echo detailed names
+ex : php run-g5.php cura A2 muller2csv update
+</pre>
+
+<pre>php run-g5.php cura A2 muller2csv update</pre>
+<pre>
+Nb missing names in cura A2 : 207
+Müller 1083 contains : 739 lines from A2
+Nb corrections : 12
+</pre>
+
+Only 12, the result is quite disapointing.
+
 
 <!-- ********************************************************************************* -->
 <h2><a name="looking-at-the-file">Looking at the file</a></h2>
@@ -206,14 +223,47 @@ Listing names shows small errors in columns <code>FNAME</code> and <code>GNAME</
     <li>The nobility is uppercased (it should be lowercased).</li>
 </ul>
 
-<br>The command
+<br>To list the noble persons of the file.
 <pre>php run-g5.php newalch muller1083 look nobilities simple</pre>
-lists the noble persons of the file.
-<br>
-<br>The command
+
+<pre>
+61 de Barthez| Antoine Charles Ernest
+152 de Brun| Hippolyte Marie Antoine
+(...)
+1044 de Vernejoul| Robert
+16 records concern noble persons.
+</pre>
+
+The command :
 <pre>php run-g5.php newalch muller1083 look nobilities yaml</pre>
 prints the same list in a YAML format. This was used to copy the output in file <code>data/3-edited/newalch-tweaked/1083MED.yml</code> ; the corrections are handled by step <a href="#1-2-tweak2csv">tweak2csv</a>.
 
+
+<!-- ********************************************************************************* -->
+<h2>Comparing with Cura dates</h2>
+
+The command
+<pre>php run-g5.php newalch muller1083 look curadates</pre>
+displays the differences between Müller's dates and A2 and E3.
+
+<pre>
+Müller NR 31   1904-04-06	| Aubry	| Maurice Charles Louis
+E1    NUM 45   1899-04-06	| AUBRY Maurice Charles	| 
+
+Müller NR 107  1808-02-04	| Blondlot	| Nicolas
+A2    NUM 80   1808-02-05	| Blondlot	| Nicolas
+
+(... displays 39 differences)
+
+Compare dates Müller / A2 E1
+        | Equal         | Different  | Total
+--------------------------------------------
+A2      | 730 (95.42 %) | 35 (4.58 %)| 765
+E1      | 90  (95.74 %) | 4  (4.26 %)| 94
+A2 + E1 | 820 (95.46 %) | 39 (4.54 %)| 859
+</pre>
+
+displays the list of different dates ant total.
 </article>
 </div><!-- end class="main" -->
 
