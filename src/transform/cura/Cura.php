@@ -78,6 +78,15 @@ class Cura{
     
     // ******************************************************
     /**
+        Returns the name of a file in 5-cura-csv/
+        @param  $datafile : a string like 'A1'
+    **/
+    public static function tmpFilename($datafile){
+        return Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv';
+    }
+    
+    // ******************************************************
+    /**
         Loads a cura file of 5-cura-csv/ in a regular array
         @param  $datafile : a string like 'A1'
         @return Regular array containing the persons' data

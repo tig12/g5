@@ -12,6 +12,7 @@ namespace g5\transform\newalch\muller1083;
 use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
+use g5\model\Names_fr;
 use tiglib\arrays\csvAssociative;
 
 class raw2csv implements Command{
@@ -28,7 +29,7 @@ class raw2csv implements Command{
     public static function execute($params=[]): string{
         
         if(count($params) > 0){
-            return "INVALID PARAMETER : " . $params[0] . " - don't need this parameter\n";
+            return "INVALID PARAMETER : " . $params[0] . " - parameter not needed\n";
         }
         
         $raw = file_get_contents(Muller1083::raw_filename());
@@ -52,6 +53,7 @@ class raw2csv implements Command{
             $new['GNR'] = trim(mb_substr($line, 16, 6));
             $new['CODE'] = trim(mb_substr($line, 32, 1));
             [$new['FNAME'], $new['GNAME']] = self::compute_names(trim(mb_substr($line, 34, 51)));
+            $new['GNAME'] = self::fixGname($new['GNAME']);
             $tmp = explode('.', trim(mb_substr($line, 85, 10)));
             $new['DATE'] = $tmp[2] . '-' . $tmp[1] . '-' . $tmp[0];
             $new['DATE'] .= ' ' . str_replace('.', ':', mb_substr($line, 101, 5));
@@ -111,17 +113,36 @@ class raw2csv implements Command{
         @return Array with 2 elements : family name and given name
 
     **/
-    public static function compute_names($str){
+    private static function compute_names($str){
         $giv = $fam = '';
         $pos = mb_strpos($str, '(');
         $fam = ucWords(mb_strtolower(trim(mb_substr($str, 0, $pos-1))));
         $giv = ucWords(mb_strtolower(mb_substr($str, $pos + 1)));
-        // should also uppercase letters following '-'
+        // uppercase letters following '-'
+        $giv = str_replace('Jean-baptiste', 'Jean-Baptiste', $giv);
+        $giv = str_replace('Jean-louis', 'Jean-Louis', $giv);
+        $giv = str_replace('Jean-albert', 'Jean-Albert', $giv);
+        $giv = str_replace('André-romain', 'André-Romain', $giv);
+        // fix specific typos
+        $giv = str_replace('Emi1e', 'Emile', $giv);
+        $giv = str_replace('(elie', 'Elie', $giv);
         $giv = str_replace([')', '.'], '', $giv);
         return [$fam, $giv];
     }
     
-    
+    // ******************************************************
+    /**
+        Restore missing accents in field GNAME
+        @return $gname with accent
+    **/
+    private static function fixGname($gname){
+        $parts = explode(' ', $gname);
+        $fixed = [];
+        foreach($parts as $part){                                         
+            $fixed[] = Names_fr::accentGiven($part);
+        }
+        return implode(' ', $fixed);
+    }
     
     // ******************************************************
     /**
@@ -135,7 +156,7 @@ class raw2csv implements Command{
                 - department code (C2)
                 - a string to add to field NOTE
     **/
-    public static function compute_place($str){
+    private static function compute_place($str){
         $place = $dept = $note = '';
         $pos = mb_strpos($str, '(');
         if($pos === false){

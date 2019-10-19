@@ -12,25 +12,30 @@ class Names_fr{
     /** Used by accentGiven() **/
     private static $accentGiven = [
         'Aime'      => 'Aimé',
+        'Arsene'    => 'Arsène',
         'Amedee'    => 'Amédée',
         'Andre'     => 'André',
+        'Benoit'    => 'Benoît',
         'Celestin'  => 'Célestin',
         'Cesar'     => 'César',
         'Clement'   => 'Clément',
         'Desire'    => 'Désiré',           
         'Dieudonne' => 'Dieudonné',
         'Eugene'    => 'Eugène',
+        'Eusebe'    => 'Eusèbe',
         'Felix'     => 'Félix',
         'Francois'  => 'François',
         'Frederic'  => 'Frédéric',
         'Gerard'    => 'Gérard',
         'Gisele'    => 'Gisèle',
         'Honore'    => 'Honoré',
+        'Jérome'    => 'Jérôme',
         'Joel'      => 'Joël',
         'Jose'      => 'José',
         'Leon'      => 'Léon',
         'Noel'      => 'Noël',
         'Raphael'   => 'Raphaël',
+        'Raphaél'   => 'Raphaël',
         'Regis'     => 'Régis',
         'Remi'      => 'Rémi',
         'Remy'      => 'Rémy',
@@ -49,6 +54,7 @@ class Names_fr{
         foreach(self::$accentGiven as $k => $v){
             if($str == $k){
                 $str = $v;
+                break;
             }
         }
         return $str;
