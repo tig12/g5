@@ -18,15 +18,13 @@ class fixCura implements Command {
         Routes to fix_names() or fix_dates()
         @param $params Array containing 3 strings
                        Param 1 must be 'A2' or 'E1'
-                       Param 2 must be 'names' or 'dates'
+                       Param 2 must be 'names' or 'days'
                        Param 3 must be 'report' or 'update'
-'names' => "Copies the values of columns FNAME and GNAME to corresponding records of A2 and E1",
-'dates' => "Copies the day part of column DATE to corresponding records of A2 and E1",
     **/
     public static function execute($params=[]): string{
         
         $possible1 = ['A2', 'E1'];
-        $possible2 = ['names', 'dates'];
+        $possible2 = ['names', 'days'];
         $possible3 = ['report', 'update'];
         $msg1 = "'" . implode($possible1, "', '") . "'";
         $msg2 = "'" . implode($possible2, "', '") . "'";
@@ -58,14 +56,14 @@ class fixCura implements Command {
     
     
     // ******************************************************
-    /**
-    **/
     private static function fix_names($file, $action){
         $report = '';
         
         $curaFile = Cura::loadTmpCsv_num($file); // keys = NUM
         
         $mulPrefix = ($file == 'A2' ? 'SA2' : 'ND1');
+        
+        // $mulFile contains only records common with A2 and E1
         $tmp = Muller1083::loadTmpFile();
         $mulFile = []; // keys = NUM
         foreach($tmp as $mulrow){
@@ -112,22 +110,74 @@ class fixCura implements Command {
         else{
             $destFile = Cura::tmpFilename($file);
             file_put_contents($destFile, $res);
-            $report .= "$N lines modified in $destFile\n";
+            $report .= "$N records modified in $destFile\n";
+            $report .= "$nRestoredNames unknown names restored in $file\n";
         }
         return $report;
         
     }
     
     // ******************************************************
-    /**
-    **/
-    private static function fix_dates($file, $action){
-return "ok fix_dates($file, $action)";
+    private static function fix_days($file, $action){
         $report = '';
-        // assoc arrays
-        $a2s = Cura::loadTmpCsv_num('A2'); // keys = NUM
-        $e1s = Cura::loadTmpCsv_num('E1'); // keys = NUM
-        $MullerCsv = Muller1083::loadTmpFile_nr(); // keys = NR
+        
+        $curaFile = Cura::loadTmpCsv_num($file); // keys = NUM
+        
+        $mulPrefix = ($file == 'A2' ? 'SA2' : 'ND1');
+        
+        // $mulFile contains only records common with A2 and E1
+        $tmp = Muller1083::loadTmpFile();
+        $mulFile = []; // keys = NUM
+        foreach($tmp as $mulrow){
+            $gnr = $mulrow['GNR'];
+            if(substr($mulrow['GNR'], 0, 3) == $mulPrefix){
+                $mulFile[substr($mulrow['GNR'], 3)] = $mulrow;
+            }
+        }
+        
+        if($action == 'update'){
+            $res = implode(G5::CSV_SEP, array_keys(current($curaFile))) . "\n";
+        }
+        
+        $nDateFixed = 0;
+        foreach($curaFile as $NUM => $curarow){
+            if(!isset($mulFile[$NUM])){
+                if($action == 'update'){
+                    $res .= implode(G5::CSV_SEP, $curarow) . "\n";
+                }
+                continue;
+            }
+            $mulrow =& $mulFile[$NUM];
+            $mulday = substr($mulrow['DATE'], 0, 10);
+            $curaday = substr($curarow['DATE'], 0, 10);
+            
+            $new = $curarow;
+            
+            if($mulday != $curaday){
+                $nDateFixed++;
+                // just replace the day, keep hour unchanged
+                $new['DATE'] = $mulday . substr($curarow['DATE'], 10);
+                if($action == 'report'){
+                    $report .= "\n$file    NUM $NUM\t {$curarow['DATE']} {$curarow['FNAME']}\t| {$curarow['GNAME']}\n";
+                    $report .= "Müller NR {$mulrow['NR']}\t {$mulrow['DATE']}\t   {$mulrow['FNAME']}\t| {$mulrow['GNAME']}\n";
+                    $report .= "Correction       {$new['DATE']}\n";
+                }
+            }
+            
+            if($action == 'update'){
+                $res .= implode(G5::CSV_SEP, $new) . "\n";
+            }
+        }
+        
+        if($action == 'report'){
+            $report .= "An execution with 'update' will modify $nDateFixed records\n";
+        }
+        else{
+            $destFile = Cura::tmpFilename($file);
+            file_put_contents($destFile, $res);
+            $report .= "$nDateFixed records modified in $destFile\n";
+        }
+        return $report;
     }
     
 } // end class
