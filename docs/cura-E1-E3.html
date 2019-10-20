@@ -54,8 +54,13 @@ E1 contains 2154 French Physicians, Military Men and Executives
                 <li><a href="#1-6-small-errors">Small errors</a></li>
             </ul>
         </li>
+        <li>
+            <a href="#use-muller-1083">Use Müller 1083</a>
+        </li>
     </ul>
 </nav>
+
+
 
 
 
@@ -69,6 +74,7 @@ This is equivalent to :
 <pre>
 php run-g5.php cura E1 raw2csv small
 php run-g5.php cura E3 raw2csv small
+php run-g5.php newalch muller1083 fixCura E1 names update   # only for E1
 php run-g5.php cura E1 csv2dl
 php run-g5.php cura E3 csv2dl
 </pre>
@@ -241,6 +247,12 @@ Cura files contain several typos.
         </details>
     </li>
 </ul>
+
+<!-- ********************************************************************************* -->
+<h2><a name="use-muller-1083">Use Müller 1083</a></h2>
+
+Arno Müller's file of 1083 medical doctors is used to better names and birth days in E1.
+<br>See <a href="newalch-muller1083.html#integration-to-g5">page on Müller 1083</a>, paragraphs "Fix Cura names" and "Fix Cura days".
 
 </article>
 </div><!-- end class="main" -->

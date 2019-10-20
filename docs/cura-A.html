@@ -60,7 +60,10 @@ A1 contains 2088 sports champions
             </ul>
         </li>
         <li>
-            <a href="#ertel2csv">ertel2csv</a>
+            <a href="#use-ertel-4391">Use Ertel 4391</a>
+        </li>
+        <li>
+            <a href="#use-muller-1083">Use Müller 1083</a>
         </li>
         <li>
             <a href="#legaltime">legalTime</a>
@@ -68,8 +71,8 @@ A1 contains 2088 sports champions
         <li>
             <a href="#g55-edited2csv">g55 edited2csv</a>
             <ul>
-                <li><a href="#4-1-names">Names</a></li>
-                <li><a href="#4-2-places">Places</a></li>
+                <li><a href="#5-1-names">Names</a></li>
+                <li><a href="#5-2-places">Places</a></li>
             </ul>
         </li>
         <li>
@@ -81,17 +84,28 @@ A1 contains 2088 sports champions
 
 
 
-The full set of transformations can be executed with the command :  
+The restoration of A2 and E1 uses Arno Müller's file 1083 MED ; restoration of A1 uses Ertel's file 4091SPO.
+<br>Generation of these files must be done BEFORE restoration process of A1, A2 and E1.
+<br>Before working on Cura files, the following commands must have been issued :
+<pre>
+php run-g5.php newalch ertel4391 raw2csv
+php run-g5.php newalch muller1083 all
+</pre>
+
+See pages <a href="newalch-ertel4391.html">Ertel 4391</a> and <a href="newalch-muller1083.html">Müller 1083</a> for details.
+
+<br>
+<br>Once this is done, the full set of transformations for all Cura files can be executed with the command :  
 <pre>php run-g5.php cura A all</pre>
 This is equivalent to :
 <pre>
 php run-g5.php cura A raw2csv small
 php run-g5.php cura A tweak2csv
-php run-g5.php cura A1 ertel2csv update              # only for A1
-php run-g5.php cura A2 muller2csv update             # only for A2
+php run-g5.php cura A1 ertel2csv update                     # only for A1
+php run-g5.php newalch muller1083 fixCura A2 names update   # only for A2
 php run-g5.php cura A legalTime
-php run-g5.php g55 570SPO edited2cura place update   # only for A1
-php run-g5.php g55 570SPO edited2cura name update    # only for A1
+php run-g5.php g55 570SPO edited2cura place update          # only for A1
+php run-g5.php g55 570SPO edited2cura name update           # only for A1
 php run-g5.php cura A addGeo small
 php run-g5.php cura A csv2dl
 </pre>
@@ -120,7 +134,7 @@ In some files of serie A, the precise profession codes are not associated to the
 
 
 <!-- ************************************* -->
-<h3><a name="4-1-names">Names</a></h3>
+<h3><a name="5-1-names">Names</a></h3>
 The purpose is to obtain records containing both precise birth data and the name of the person.
 <br>
 <br>To summarize, this can be partially done by program from cura.free.fr web pages ; some cases can be fixed by human using Gauquelin 1955 book ; some cases can be fixed using newalchemypress.com data. Other cases could be fixed using the original booklets "BIRTH AND PLANETARY DATA GATHERED SINCE 1949" published by Gauquelin, but I don't have these booklets.
@@ -246,13 +260,17 @@ This information is removed from the generated files because I couldn't find its
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="ertel2csv">ertel2csv</a></h2>
+<h2><a name="use-ertel-4391">Use Ertel 4391</a></h2>
 
-For file A1, the file containing Ertel's list of sportsmen is used to compute the names that <code>raw2csv</code> couldn't compute,
-<br>This leads to a restoration of names of 100 % for file A1 ; see <a href="newalch-ertel4391.html#integration-to-g5">page on Ertel 4391</a>, paragraph "Fix cura A1 names".
-<br>
-<br>For file A2, the same is done with Amrno Müller's file containing 1083 physicists.
-<br>This perrmits to fix only 12 unknown names in A2. See <a href="newalch-muller1083.html#integration-to-g5">Page on Müller 1083</a>, paragraph "Fix Cura names".
+For A1, the file containing Ertel's list of sportsmen is used to compute the names that <code>raw2csv</code> couldn't compute,
+<br>This leads to a 100 % restoration of unidentified names in A1 ; see <a href="newalch-ertel4391.html#integration-to-g5">page on Ertel 4391</a>, paragraph "Fix cura A1 names".
+<br>NB : <code>raw2csv</code> leaves 118 names unidentified and this step restores 117. This is because one name is handled by <code>tweak2csv</code>.
+
+<!-- ********************************************************************************* -->
+<h2><a name="use-muller-1083">Use Müller 1083</a></h2>
+
+Arno Müller's file of 1083 medical doctors is used to better names and birth days in A2.
+<br>This permits to fix only 12 unidentified names in A2. See <a href="newalch-muller1083.html#integration-to-g5">page on Müller 1083</a>, paragraphs "Fix Cura names" and "Fix Cura days".
 
 
 <!-- ********************************************************************************* -->
@@ -273,7 +291,7 @@ The restoration of 1955 group "570 sportifs" is used to better family and given 
 <br>The corrections use the columns added for human corrections of files in <code>3-g55-edited/</code> (these column names end with <code>_55</code>). Other columns of these files are not used. The reason is that once a file located in <code>3-g55-edited/</code> is edited by a human, it is never updated by program again. So the columns generated by program may contain obsolete information (in fact they do, because the file <code>3-g55-edited/570SPO.csv</code> was generated before writing commands that add corrections).
 
 <!-- ************************************* -->
-<h3><a name="4-1-names">Names</a></h3>
+<h3><a name="5-1-names">Names</a></h3>
 
 The command
 <pre>php run-g5.php g55 570SPO edited2cura name list</pre>
@@ -288,7 +306,7 @@ is used to copy the contents of columns <code>GIVEN_55</code> and <code>FAMILY_5
 <br>This command updates 59 names in file <code>A1</code>.
 
 <!-- ************************************* -->
-<h3><a name="4-2-places">Places</a></h3>
+<h3><a name="5-2-places">Places</a></h3>
 Gauquelin 1955 place names are generally better than Cura places.
 
 <br>This works like names :
