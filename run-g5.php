@@ -63,7 +63,9 @@ $datafiles_str = implode(", ", $datafiles);
 if(count($argv) < 3){
     echo "WRONG USAGE - need at least 3 arguments\n";
     echo $USAGE;
+    echo "\n";
     echo "Possible datafiles for dataset $dataset : $datafiles_str\n";
+    echo "\n";
     exit;
 }
 else{
@@ -71,7 +73,9 @@ else{
     if(!in_array($datafile, $datafiles)){
         echo $USAGE;
         echo "WRONG USAGE - INVALID DATAFILE : $datafile\n";
+        echo "\n";
         echo "Possible datafiles for dataset $dataset : $datafiles_str\n";
+        echo "\n";
         exit;
     }
 }
@@ -83,14 +87,18 @@ $actions_str = implode(", ", $actions);
 if(count($argv) < 4){
     echo "WRONG USAGE - need at least 3 arguments\n";
     echo $USAGE;
+    echo "\n";
     echo "Possible actions for $dataset - $datafile : $actions_str\n";
+    echo "\n";
     exit;
 }
 else{
     $action = $argv[3];
     if(!in_array($action, $actions)){                  
         echo "WRONG USAGE - INVALID ACTION : $action\n";
+        echo "\n";
         echo "Possible actions for $dataset - $datafile : $actions_str\n";
+        echo "\n";
         exit;
     }
 }

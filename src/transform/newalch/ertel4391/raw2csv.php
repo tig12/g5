@@ -92,6 +92,7 @@ class raw2csv implements Command{
         
         $records = csvAssociative::compute(Config::$data['dirs']['1-newalch-raw'] . DS . '03-ertel' . DS . '3a_sports-utf8.csv');
         $N = count($records);
+        $nStored = 0;
         for($i=1; $i < $N; $i++){
             if($i%2 == 0){
                 continue; // every other line is empty
@@ -131,11 +132,13 @@ class raw2csv implements Command{
             $new['EXTEND'] = trim($record['EXTEND']);
             $new['NIENHUYS'] = trim($record['NIENHUYS']);
             $output .= implode(G5::CSV_SEP, $new) . "\n";
+            $nStored++;
         }
         
         $outfile = Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE;
         file_put_contents($outfile, $output);
-        return "$outfile generated\n";
+        return "$outfile generated\n"
+             . "$nStored records stored\n";
     }
     
     
