@@ -55,24 +55,27 @@ A1 contains 2088 sports champions
             <a href="#raw2csv">raw2csv</a>
             <ul>
                 <li><a href="#1-1-profession-codes">Profession codes</a></li>
-                <li><a href="#1-2-names">Names</a></li>
+                <li><a href="#1-2-name-restoration">Name restoration</a></li>
                 <li><a href="#1-3-small-errors">Small errors</a></li>
             </ul>
         </li>
         <li>
-            <a href="#use-ertel-4391">Use Ertel 4391</a>
+            <a href="#tweak2csv">tweak2csv</a>
         </li>
         <li>
-            <a href="#use-muller-1083">Use Müller 1083</a>
+            <a href="#better-a1-names-with-ertel4391">Better A1 names with ertel4391</a>
+        </li>
+        <li>
+            <a href="#better-a2-days-and-names-with-muller1083">Better A2 days and names with muller1083</a>
         </li>
         <li>
             <a href="#legaltime">legalTime</a>
         </li>
         <li>
-            <a href="#g55-edited2csv">g55 edited2csv</a>
+            <a href="#better-a1-names-and-place-with-gauquelin-1955">Better A1 names and place with Gauquelin 1955</a>
             <ul>
-                <li><a href="#5-1-names">Names</a></li>
-                <li><a href="#5-2-places">Places</a></li>
+                <li><a href="#6-1-names">Names</a></li>
+                <li><a href="#6-2-places">Places</a></li>
             </ul>
         </li>
         <li>
@@ -80,6 +83,8 @@ A1 contains 2088 sports champions
         </li>
     </ul>
 </nav>
+
+
 
 
 
@@ -102,11 +107,12 @@ This is equivalent to :
 <pre>
 php run-g5.php cura A raw2csv small
 php run-g5.php cura A tweak2csv
-php run-g5.php cura A1 ertel2csv update                     # only for A1
-php run-g5.php newalch muller1083 fixCura A2 names update   # only for A2
+php run-g5.php newalch ertel4391 fixA1 update
+php run-g5.php newalch muller1083 fixCura A2 names update
+php run-g5.php newalch muller1083 fixCura A2 days update
 php run-g5.php cura A legalTime
-php run-g5.php g55 570SPO edited2cura place update          # only for A1
-php run-g5.php g55 570SPO edited2cura name update           # only for A1
+php run-g5.php g55 570SPO edited2cura place update
+php run-g5.php g55 570SPO edited2cura name update
 php run-g5.php cura A addGeo small
 php run-g5.php cura A csv2dl
 </pre>
@@ -114,6 +120,13 @@ php run-g5.php cura A csv2dl
 Each command can be done on individual files ; for example :
 <pre>php run-g5.php cura A3 raw2csv small</pre>
 executes <code>raw2csv</code> on file A3 only.
+<br>
+<br>On cura.free.fr, each file from serie A is available from two distinct pages :
+<ul class="simple">
+    <li>one without names (for example <a href="http://cura.free.fr/gauq/902gdA1.html">902gdA1.html</a>), sorted by NUM.</li>
+    <li>one with names included (for example <a href="http://cura.free.fr/gauq/902gdA1y.html">902gdA1y.html</a>), sorted by date.</li>
+</ul>
+Pages containing names were used.
 
 <!-- ********************************************************************************* -->
 <h2><a name="raw2csv">raw2csv</a></h2>
@@ -129,58 +142,43 @@ MISSING PARAMETER : raw2csv needs a parameter to specify which output it display
 <!-- ************************************* -->
 <h3><a name="1-1-profession-codes">Profession codes</a></h3>
 In some files of serie A, the precise profession codes are not associated to the records. This is possible to fix thanks to the notices that are present on cura.free.fr pages.
-<br>These informations were included to the program (see constant <code>PROFESSIONS_DETAILS</code> in the code) and in the resulting csv files, each record is associated to its precise profession.
+<br>These informations were included to the program (see constant <code>PROFESSIONS_DETAILS</code> in <code>rax2csv</code> code) and in the resulting csv files, each record is associated to its precise profession.
 <br>
-<br>A list of profession codes used in the generated files is listed on <a href="output-format.html#profession-codes">this page</a>.
+<br><a href="output-format.html#occupation-codes">Page "output format"</a> contains a list of profession codes used in the generated files.
 
 
 <!-- ************************************* -->
-<h3><a name="5-1-names">Names</a></h3>
+<h3><a name="1-2-name-restoration">Name restoration</a></h3>
 The purpose is to obtain records containing both precise birth data and the name of the person.
+<br>To summarize, this can be partially done by program from cura.free.fr web pages ; some cases can be fixed by human using Gauquelin 1955 book.
+<br><code>raw2csv</code> matching could be bettered for some cases, using newalchemypress.com data. See below, paragraphs <a href="#use-ertel-4391">Use Ertel 4391</a> and <a href="#use-muller-1083">Use Müller 1083</a>.
 <br>
-<br>To summarize, this can be partially done by program from cura.free.fr web pages ; some cases can be fixed by human using Gauquelin 1955 book ; some cases can be fixed using newalchemypress.com data. Other cases could be fixed using the original booklets "BIRTH AND PLANETARY DATA GATHERED SINCE 1949" published by Gauquelin, but I don't have these booklets.
-
-<!-- ****************** -->
-<h4>Data of cura.free.fr</h4>
-
-On cura.free.fr, each file from serie A is available from two distinct pages :
-<ul class="simple">
-    <li>one without names (for example <a href="http://cura.free.fr/gauq/902gdA1.html">902gdA1.html</a>), sorted by NUM.</li>
-    <li>one with names included (for example <a href="http://cura.free.fr/gauq/902gdA1y.html">902gdA1y.html</a>), sorted by date.</li>
-</ul>
-I supposed (but didn't check by program) that these two lists are equivalent, and worked with pages containing names.
-<br>
-<br>A page with names contains 3 lists :
+<br>Page of serie A contain 3 lists :
 <ul class="simple">
     <li>One list with precise birth data, but without names.</li>
     <li>Two lists with names, but without precise birth data ; these two lists are sorted differently. I supposed (but didn't check by program) that these two lists are equivalent.</li>
 </ul>
 
-<br>An other page, <a href="http://cura.free.fr/gauq/902gdN.html">902gdN.html</a>, contains a list of all the names, for series A1, A2, A3, A4, A5, A6, D6, D10, E1, E3.
-<br>
-<br>
-I used the pages containing the lists with names (ex : 902gdA1y.html).
-<br>In these pages, the list with precise birth data seems to correspond to the list with names in chronological order. But a check done by program (<code>tools/check-serieA-names.php</code>) shows that they differ (lists with name contain less persons), and can't be used for a simple merge.
+A check done by program (<code>build/check-serieA-names.php</code>) shows that list with precise birth data differ from lists with names (lists with names contain less persons), and can't be used for a simple merge.
 
 <!-- ****************** -->
 <h4>Merge lists</h4>
 
 The program must merge the two lists. Unfortunately, these 2 lists don't share a common unique identifier which would permit to merge without ambiguity.
-<br>These two lists have in common the birth day. That's what I used to perform the merge, but a given birth day can correspond to several persons. In this case, ambiguity remains, and can't be solved by program.
+<br>These two lists have in common the birth day. This was used to perform the merge, but a given birth day can correspond to several persons. In this case, ambiguity remains, and can't be solved by program.
 <br>
-<br>To solve some ambiguities, I used Gauquelin 1955 book in an iterative process :
+<br>To solve some ambiguities, Gauquelin 1955 book was used in an iterative process :
 <ul class="simple">
     <li>Build two arrays with birth day as key.</li>
     <li>Merge the clear cases, with only one person for a given day.</li>
     <li>Print the ambiguous cases.</li>
     <li>Look in Gauquelin 1955 book if the ambiguous persons are present.</li>
-    <li>Inject the information in the program (see constant <code>CORRECTIONS_1955</code> in the code).</li>
+    <li>Inject the information in the program (see constant <code>CORRECTIONS_1955</code> in <code>rax2csv</code> code).</li>
     <li>Execute again.</li>
 </ul>
-
-<br>For the cases that could not be solved, a name like "Gauquelin-A1-1352" was built, using file name and NUM field.
+Corrections using Gauquelin 1955 are currently done for files A1 and A2.
 <br>
-<br>Current corrections were done for serie A1 and A2.
+<br>For the cases that could not be solved, a name like "Gauquelin-A1-1352" was built, using file name and NUM field.
 <br>
 <br>The results of this name matching are :
 
@@ -223,7 +221,6 @@ The program must merge the two lists. Unfortunately, these 2 lists don't share a
     </tr>
 </table>
 
-This matching could be bettered for some cases, using other information sources ; see <a href="cura-results.html">Cura results</a>.
 
 <!-- ************************************* -->
 <h3><a name="1-3-small-errors">Small errors</a></h3>
@@ -257,42 +254,74 @@ A4 : 159 320 439 1350 1443 1480 2136 2312
 A5 : 1435 1557 1813 1829 2349 
 A6 : 15 139 148 225 232 265 448 574 622 668 718 727 737 738  
 </pre>
-This information is removed from the generated files because I couldn't find its meaning.
+This information was not included in the generated files because I couldn't find its meaning.
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="use-ertel-4391">Use Ertel 4391</a></h2>
+<h2><a name="tweak2csv">tweak2csv</a></h2>
 
-For A1, the file containing Ertel's list of sportsmen is used to compute the names that <code>raw2csv</code> couldn't compute,
-<br>This leads to a 100 % restoration of unidentified names in A1 ; see <a href="newalch-ertel4391.html#integration-to-g5">page on Ertel 4391</a>, paragraph "Fix cura A1 names".
-<br>NB : <code>raw2csv</code> leaves 118 names unidentified and this step restores 117. This is because one name is handled by <code>tweak2csv</code>.
+<pre>php run-g5.php cura A tweak2csv</pre>
+Contains human fixes, see <a href="tweak2csv.html">page tweak2csv</a>.
+<br>Informations of these yaml files could be used directly by <code>raw2csv</code>, but for the moment it is performed after.
+
 
 <!-- ********************************************************************************* -->
-<h2><a name="use-muller-1083">Use Müller 1083</a></h2>
+<h2><a name="better-a1-names-with-ertel4391">Better A1 names with ertel4391</a></h2>
+The command :
+<pre>php run-g5.php newalch ertel4391 fixA1 update</pre>
+permits to restore 100 % of names not identified by step <code>raw2csv</code> in A1.
+<br>See <a href="newalch-ertel4391.html#integration-to-g5">page on Ertel 4391</a>, paragraph "Fix cura A1 names".
+<br>
+<br>NB : <code>raw2csv</code> leaves 118 names unidentified and this step restores 117. This is because one name is handled by step <code>tweak2csv</code>.
+
+<!-- ********************************************************************************* -->
+<h2><a name="better-a2-days-and-names-with-muller1083">Better A2 days and names with muller1083</a></h2>
 
 Arno Müller's file of 1083 medical doctors is used to better names and birth days in A2.
-<br>This permits to fix only 12 unidentified names in A2. See <a href="newalch-muller1083.html#integration-to-g5">page on Müller 1083</a>, paragraphs "Fix Cura names" and "Fix Cura days".
+<br>This permits to fix only 12 unidentified names in A2.
+<br>See <a href="newalch-muller1083.html#integration-to-g5">page on Müller 1083</a>, paragraphs "Fix Cura names" and "Fix Cura days".
 
 
 <!-- ********************************************************************************* -->
 <h2><a name="legaltime">legalTime</a></h2>
-This step partially fixes the problem described in <a href="time.html">the page about time</a>.
-<br>Legal birth time is done only for France, for cases that cannot generate ambiguity.
-<br>Ambiguities come from world wars 1 and 2, when some parts of France were invaded by Germany, and precise local conditions need to be examined to determine the timezone offset.
+
+<div><div class="inline-block border margin padding">This step is bugged and incomplete</div></div>
+
+The command :
+<pre>php run-g5.php cura A legalTime</pre>
+adds a column <code>DATE_C</code> (= date corrected) to the generated files.
+<br>Example for record A2-1 (Joseph Jean Abadie), 
+<br><code>DATE = 1873-12-15 15:59:40+00:00</code> : information from cura.free.fr unchanged
+<br><code>DATE_C = 1873-12-15 16:04+00:05:03</code> : time is modified and timezone offset (+00:05:03) is added.
 <br>
-<br>This can be bettered by implementing non-ambiguous cases for other countries present in A files.
+<br>Here a bug appears, the legal birth time is probably 16:00, not 16:03. For dates prior to 1891-03-15, timezone offset computation involves longitude and equation of time.
+
+<br>
+<br>Restoration rates are low :
+<pre>
+A1 : restored 1029 / 2087 dates (49.31 %)
+A2 : restored 1614 / 3643 dates (44.3 %)
+A3 : restored 1003 / 3046 dates (32.93 %)
+A4 : restored 2333 / 2720 dates (85.77 %)
+A5 : restored 882 / 2410 dates (36.6 %)
+A6 : restored 776 / 2026 dates (38.3 %)
+</pre>
+
+Current code performs restoration only for persons born in France, excluding all cases that can't be fixed by program without ambiguity (ambiguity comes from world wars 1 and 2, for parts of France that were invaded by Germany ; precise timezone offset depend on local conditions).
+
+This can be bettered by implementing non-ambiguous cases for other countries present in A files.
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="g55-edited2csv">g55 edited2csv</a></h2>
+<h2><a name="better-a1-names-and-place-with-gauquelin-1955">Better A1 names and place with Gauquelin 1955</a></h2>
 
 The restoration of 1955 group "570 sportifs" is used to better family and given names as well as place names in file A1.
-<br>This step must be performed after <code>ertel2csv</code>, as name spelling in Gauquelin 1955 book is better, and after <code>legalTime</code>.
+<br>This step must be performed after <code>newalch ertel4391 fixA1</code>, as name spelling in Gauquelin 1955 book is better, and after <code>legalTime</code>.
 <br>
 <br>The corrections use the columns added for human corrections of files in <code>3-g55-edited/</code> (these column names end with <code>_55</code>). Other columns of these files are not used. The reason is that once a file located in <code>3-g55-edited/</code> is edited by a human, it is never updated by program again. So the columns generated by program may contain obsolete information (in fact they do, because the file <code>3-g55-edited/570SPO.csv</code> was generated before writing commands that add corrections).
 
 <!-- ************************************* -->
-<h3><a name="5-1-names">Names</a></h3>
+<h3><a name="6-1-names">Names</a></h3>
 
 The command
 <pre>php run-g5.php g55 570SPO edited2cura name list</pre>
@@ -307,7 +336,7 @@ is used to copy the contents of columns <code>GIVEN_55</code> and <code>FAMILY_5
 <br>This command updates 59 names in file <code>A1</code>.
 
 <!-- ************************************* -->
-<h3><a name="5-2-places">Places</a></h3>
+<h3><a name="6-2-places">Places</a></h3>
 Gauquelin 1955 place names are generally better than Cura places.
 
 <br>This works like names :
@@ -426,4 +455,3 @@ It modifies records of <code>5-cura-csv/</code> only if there is a unique match 
 </html>
 <!-- ************************************* -->
 <!-- ********************************************************************************* -->
-******************************************************************** -->

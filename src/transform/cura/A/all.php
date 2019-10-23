@@ -9,9 +9,11 @@ namespace g5\transform\cura\A;
 
 use g5\Config;
 use g5\patterns\Command;
-use g5\transform\g55\all\edited2cura;
 use g5\transform\cura\all\tweak2csv;
 use g5\transform\cura\all\csv2dl;
+use g5\transform\g55\all\edited2cura;
+use g5\transform\newalch\ertel4391\fixA1;
+use g5\transform\newalch\muller1083\fixCura;
 
 class all implements Command{
     
@@ -33,61 +35,44 @@ class all implements Command{
                                                                                                                                                           
         $datafile = $params[0];
         
-        // php run-g5.php cura A raw2csv small
-        echo "\n=== Execute raw2csv on $datafile ===\n";
+        echo "\n=== php run-g5.php cura $datafile raw2csv small ===\n";
         $params_raw2csv = $params;
         $params_raw2csv[] = 'small';
         echo raw2csv::execute($params_raw2csv);
         
-        // php run-g5.php cura A tweak2csv small
-        echo "\n=== Execute tweak2csv on $datafile ===\n";
+        echo "\n=== php run-g5.php cura $datafile tweak2csv small ===\n";
         echo tweak2csv::execute($params);
         
         if($datafile == 'A1'){
-            // php run-g5.php cura A1 ertel2csv update
-            echo "\n=== Execute ertel2csv on $datafile ===\n";
-            $params_ertel2csv = $params;
-            $params_ertel2csv[] = 'update';
-            echo ertel2csv::execute($params_ertel2csv);
+            echo "\n=== php run-g5.php newalch ertel4391 fixA1 update ===\n";
+            echo fixA1::execute(['update']);
         }
         
         if($datafile == 'A2'){
-            // php run-g5.php cura A2 muller2csv update
-            echo "\n=== Execute muller2csv on $datafile ===\n";
-            $params_muller2csv = $params;
-            $params_muller2csv[] = 'update';
-            echo muller2csv::execute($params_muller2csv);
+            echo "\n=== php run-g5.php newalch muller1083 fixCura A2 names update ===\n";
+            echo fixCura::execute(['A2', 'names', 'update']);
+            echo "\n=== php run-g5.php newalch muller1083 fixCura A2 days update ===\n";
+            echo fixCura::execute(['A2', 'days', 'update']);
         }
         
-        // php run-g5.php cura A legalTime
-        echo "\n=== Execute legalTime on $datafile ===\n";
+        echo "\n=== php run-g5.php cura $datafile legalTime ===\n";
         echo legalTime::execute($params);
         
         if($datafile == 'A1'){
-            // php run-g5.php g55 570SPO edited2csv place update
-            echo "\n=== Correct place names on A1 from Gauquelin 1955 570SPO ===\n";
-            $params_edited2cura = [
-                '570SPO',
-                'edited2cura',
-                'place',
-                'update',
-            ];
-            echo edited2cura::execute($params_edited2cura);
+            echo "\n=== php run-g5.php g55 570SPO edited2csv place update ===\n";
+            echo edited2cura::execute([ '570SPO', 'edited2cura', 'place', 'update', ]);
             
-            // php run-g5.php g55 570SPO edited2csv name update
-            echo "\n=== Correct family and given names on A1 from Gauquelin 1955 570SPO ===\n";
-            $params_edited2cura[2] = 'name';
-            echo edited2cura::execute($params_edited2cura);
+            echo "\n=== php run-g5.php g55 570SPO edited2csv name update ===\n";
+            echo edited2cura::execute([ '570SPO', 'edited2cura', 'name', 'update', ]);
         }
         
-        // php run-g5.php cura A addGeo small
-        echo "\n=== Execute addGeo on $datafile ===\n";
+        // 
+        echo "\n=== php run-g5.php cura $datafile addGeo small ===\n";
         $params_addGeo = $params;
         $params_addGeo[] = 'small';
         echo addGeo::execute($params_addGeo);
         
-        // php run-g5.php cura A csv2dl
-        echo "\n=== Execute csv2dl on $datafile ===\n";
+        echo "\n=== php run-g5.php cura $datafile csv2dl ===\n";
         echo csv2dl::execute($params);
         
         return '';

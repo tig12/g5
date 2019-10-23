@@ -32,8 +32,9 @@ code.color{background:lightgrey;}
 img{display: block; background:white;}
 
 ul.spaced>li,ol.spaced>li{padding-bottom:0.8rem;}
-ul.naked>li,ol.naked>li{list-style-type:none;}
 ul.simple{list-style-type: '- ';}
+ul.naked>li,ol.naked>li{list-style-type:none;}
+li.naked{list-style-type:none;}
 
 table.border{border-collapse:collapse;}
 table.border td{border: 1px solid #a2a9b1;}

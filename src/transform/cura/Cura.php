@@ -26,7 +26,13 @@ class Cura{
         'E1', 'E3',
     ];
     
-    /** Names of the columns in files of 5-cura-csv/ **/
+    /**
+        Names of the columns in files of 5-cura-csv/
+        @todo Problem with this constant :
+              It corresponds to fields of serie A
+              For example, different for E1 E3
+              So should not be in class Cura, but in class cura\A\A
+    **/
     const TMP_CSV_COLUMNS = [
             'NUM',
             'FNAME',
