@@ -45,7 +45,7 @@ class marked2generated implements Command {
         $file_csv = Config::$data['dirs']['5-cura-csv'] . DS . $cura_file . '.csv';
         $file_output = Config::$data['dirs']['5-g55-generated'] . DS . $groupCode . '.csv';
 
-        $report .= "Generating 1955 group $groupCode : ";
+        $report .= "Generating $file_output";
         
         $marked = self::loadMarked($file_marked, $groupCode);
         if($marked === false){
@@ -75,7 +75,7 @@ class marked2generated implements Command {
         // have first field = NUM and second field = FNAME
         $sort_field = ($groupCode == '570SPO' ? 0 : 1);
         $res = sortByKey::compute($res, $sort_field);
-        $report .= '  ' . count($res) . " persons stored\n";
+        $report .= ' - ' . count($res) . " persons stored\n";
         // generate output
         $output = 'ORIGIN' . G5::CSV_SEP . $input[0]; // field names
         foreach($res as $fields){
