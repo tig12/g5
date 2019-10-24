@@ -65,10 +65,20 @@ class G55{
         @return     Regular array containing the edited file in 3-g55-edited/
     **/
     public static function loadG55Edited($g55group){
-        return csvAssociative::compute(Config::$data['dirs']['3-g55-edited'] . DS . $g55group . '.csv', G55::CSV_SEP_LIBREOFFICE);
+        return csvAssociative::compute(self::editedFilename($g55group), G55::CSV_SEP_LIBREOFFICE);
     }
 
-        
+    // ******************************************************
+    /** Temporary fix to protect the use of prepareCuraMatch() **/
+    public static function editedFileExists($g55group){
+        return file_exists(self::editedFilename($g55group));
+    }
+    
+    // ******************************************************
+    public static function editedFilename($g55group){
+        return Config::$data['dirs']['3-g55-edited'] . DS . $g55group . '.csv';
+    }
+    
     // ******************************************************
     /**
         Auxiliary function
@@ -83,6 +93,9 @@ class G55{
                 - $curarows :
                   Assoc. array containing the cura data ; keys = cura ids (NUM)
                   Comes from 5-cura-csv/
+      @todo     Bad code organization : if loadG55Edited() can't open the edited file, prepareCuraMatch()
+                is not protected.
+                Temp fix : added editedFileExists(), that calling code must call before calling prepareCuraMatch()
     **/
     public static function prepareCuraMatch($g55group){
         $g55rows1 = self::loadG55Edited($g55group);

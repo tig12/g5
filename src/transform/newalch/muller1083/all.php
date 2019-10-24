@@ -24,16 +24,13 @@ class all implements Command {
             return "USELESS PARAMETER in g5\\transform\\newalch\\muller1083\\all : {$params[0]}\n";
         }
         
-        // php run-g5.php newalch muller1083 raw2csv
-        echo "\n=== Execute raw2csv ===\n";
+        echo "\n=== php run-g5.php newalch muller1083 raw2csv ===\n";
         echo raw2csv::execute();
         
-        // php run-g5.php newalch muller1083 fixGnr update
-        echo "\n=== Execute fixGnr ===\n";
+        echo "\n=== php run-g5.php newalch muller1083 fixGnr update ===\n";
         echo fixGnr::execute(['update']);
         
-        // php run-g5.php newalch muller1083 export dl
-        echo "\n=== Execute export ===\n";
+        echo "\n=== php run-g5.php newalch muller1083 export dl ===\n";
         echo export::execute(['dl']);
 
         

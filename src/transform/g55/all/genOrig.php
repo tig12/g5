@@ -51,10 +51,18 @@ class genOrig implements Command {
         }
         
         $g55group = $params[0];
+        
+        $report = '';
+        $report .= "\n=== php run-g5.php newalch muller1083 raw2csv ===\n";
+        
+        if(!G55::editedFileExists($g55group)){
+            $report .= "Cannot compute $g55group because " . G55::editedFilename($g55group) . " does not exist\n";
+            return $report;
+        }
+        
         [$origin, $g55rows, $curarows] = G55::prepareCuraMatch($g55group);
         
         $res = implode(self::GEN_FIELDS, G5::CSV_SEP) . "\n";
-        $report = '';
         
         // for restoration, don't loop on $g55rows because they don't contain ORIGIN=G55
         $g55full = G55::loadG55Edited($g55group);

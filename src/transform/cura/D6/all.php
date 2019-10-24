@@ -26,13 +26,13 @@ class all implements Command{
             return "INVALID PARAMETER : " . $params[2] . " - all doesn't need this parameter\n";
         }
         
-        echo "\n=== execute raw2csv on D6 ===\n";
+        echo "\n=== php run-g5.php cura D6 raw2csv ===\n";
         echo raw2csv::execute($params);
         
-        echo "\n=== execute addGeo on D6 ===\n";
+        echo "\n=== php run-g5.php cura D6 addGeo ===\n";
         echo addGeo::execute($params);
         
-        echo "\n=== Execute csv2dl on D6 ===\n";
+        echo "\n=== php run-g5.php cura D6 csv2dl ===\n";
         echo csv2dl::execute($params);
         
         return '';

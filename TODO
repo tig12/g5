@@ -1,0 +1,72 @@
+
+- Refactor g55 commands : "all" is useless
+
+- Write command export for g55
+
+- G55::prepareCuraMatch not designed correctly
+
+- rename raw2csv to export
+
+- tweak2csv : include nb of modified records in report
+
+- fix nobilities in cura files
+
+- in all cura code, use Cura::tmpFilename()
+
+- rename Cura::loadTmpCsv() to load5csv() - same in newalch and other datasets
+    Harmonize also raw_filename(), tmp_csv_filename()
+    
+    
+- Refactor generated filenames : G55570SPO, GQA1, ERT4384SPO, MUL1083MED ?
+    adapt doc of 1083MED
+
+- Harmonize POSSIBLE_PARAMS in commands ; use model of muller1083/fixGnr (key val pairs)
+  Harmonize messages for wrong parameters
+
+- Harmonize generated fields in files of 5-cura-csv/
+    Cura A differ from E1 E3
+    => A list of common fields, then particular fields, then field NOTES ?
+
+- Add field LEGAL_TIME or LEGTIME in 5-cura-csv
+    => inject Müller 1083MED in A2 and E1
+    => Use to test legal time restoration on serie A
+
+- share/ hierarchy
+
+- profession-codes.csv : add wd codes + Ertel codes.
+
+- A : legal time restoration for other countries.
+
+- D6 D10 E1 E3 : compute timezone
+
+- put style.css in conformity with tigsite
+
+- D6 addGeo : add also C2
+
+- E1 notice : "NUM : Number (from 1 to 2145 ; 11 items have been added but n. 285 & n. 1155 are omitted)"
+why ?
+
+- in E3, 47 persons were already published under an other id (marked with *).
+=> identify these records
+
+
+- check birth in A1
+from command
+php run-g5.php g55 570SPO edited2cura date
+
+883 CYC 1884-04-07 Seres Georges : 21:04 | 21:00
+Equation of time problem in legal time restoration ?
+
+1761 NAT 1927-11-11 Casteur Odette : 22:53 | 23:53
+Strange to have birth time with minutes in 1927
+
+883 CYC 1884-04-07 Seres Georges : 21:04 | 21:00
+1934 RUG 1890-04-22 Lerou Roger : 22:55 | 23:00
+2044 TEN 1886-12-12 Blanchy François : 08:55 | 09:00
+2083 TIR 1876-05-29 Parmentier André : 03:55 | 04:00
+Bug in legal time restoration ?
+
+- In 570SPO generated :
+A1-81	Winter	Paul	ATH	1906-02-06 14:00-01	RIBEAUVILLE	FR	68	7.35	48.08333
+Why tz offset misses ':00' ?
+

@@ -32,10 +32,10 @@ class all implements Command{
         
         $params_raw2csv = $params;
         $params_raw2csv[] = 'small';
-        echo "\n=== execute raw2csv on $datafile ===\n";
+        echo "\n=== php run-g5.php cura $datafile raw2csv ===\n";
         echo raw2csv::execute($params_raw2csv);
         
-        echo "\n=== Execute csv2dl on $datafile ===\n";
+        echo "\n=== php run-g5.php cura $datafile csv2dl ===\n";
         echo csv2dl::execute($params);
         
         return '';

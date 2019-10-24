@@ -56,7 +56,6 @@ class export implements Command {
         $outfile = Config::$data['dirs']['9-newalch'] . DS . Muller1083::TMP_CSV_FILE;
         copy($infile, $outfile);
         return "Copied $infile to $outfile\n";
-        
     }
     
     

@@ -5,9 +5,9 @@
     Example of use : php run-g5.php g55 570SPO edited2cura date
     
     @pre        5-cura-csv/A1.csv must exist in its best possible state.
-                So src/transform/cura/A/raw2csv.php must have been executed before.
-                   src/transform/cura/A/ertel2csv.php must have been executed before.
-                   src/transform/cura/A/legalTime.php must have been executed before.
+                To be clean, execute before
+                php run-g5.php cura A1 all
+                
     @pre        3-g55-edited/570SPO.csv must exist.
     
     To add a new function : 
@@ -90,6 +90,10 @@ class edited2cura implements Command {
         
         $g55group = $params[0];
         $action = $params[3];
+        
+        if(!G55::editedFileExists($g55group)){
+            return "Cannot compute $g55group because " . G55::editedFilename($g55group) . " does not exist\n";
+        }
         
         [$origin, $g55rows, $curarows] = G55::prepareCuraMatch($g55group);
         
