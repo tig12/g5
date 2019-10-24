@@ -30,7 +30,7 @@ class genOrig implements Command {
         //'GEOID',
         'LG',
         'LAT',
-        // 'COMMENT',
+        'NOTES',
     ];
     
     // *****************************************
@@ -81,6 +81,7 @@ class genOrig implements Command {
                 //$new['GEOID'] = $curaRow[''];                                     
                 $new['LG'] = ''; //$curaRow['LG_55'];
                 $new['LAT'] = ''; //$curaRow['LAT_55'];
+                $new['NOTES'] = '';
                 $res .= implode($new, G5::CSV_SEP) . "\n";
                 continue;
             }
@@ -123,6 +124,7 @@ class genOrig implements Command {
             //$new['GEOID'] = $curaRow[''];
             $new['LG'] = $curaRow['LG'];
             $new['LAT'] = $curaRow['LAT'];
+            $new['NOTES'] = $curaRow['NOTES'];
             
             $res .= implode($new, G5::CSV_SEP) . "\n";
         }
