@@ -38,7 +38,7 @@ class raw2full implements Command{
     
     // *****************************************
     /** 
-        Store the content of one or several csv file to yaml files of 5-tmp/full
+        Store the content of one or several csv file to yaml files of 7-full
         @param $params array with one element :
             relative path from dirs/1-wd-raw of config.yml to the csv file to import, without .csv extension.
             Ex : if the value dirs/1-wd-raw is data/1-raw/wikidata.org
@@ -186,6 +186,7 @@ class raw2full implements Command{
             
             // slug
             $new['slug'] = Full::personSlug($new['name'], $new['family-name'], $new['given-name'], $new['birth']['date']);
+echo "\n<pre>"; print_r($new); echo "</pre>\n"; exit;
             //
             // output
             //
