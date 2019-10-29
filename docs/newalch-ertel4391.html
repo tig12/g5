@@ -133,8 +133,8 @@ One very strange feature of this file : many records don't contain birth time. S
     <li>The file contains 4384 records ; 7 records are missing to reach 4391.</li>
     <li>The file contains 553 records from Gauquelin 1955 list (instead of 568).</li>
     <li>The file contains 611 records from Comité Para (instead of 535).</li>
-    <li>The file contains 192 records from CSICOP (instead of 408).</li>
-    <li>The file contains 925 records from CFEPP (instead of 1 066).</li>
+    <li>The file contains 190 records from CSICOP (instead of 408).</li>
+    <li>The file contains 922 records from CFEPP (instead of 1 066).</li>
 </ul>
 
 <!-- newalchemypress seems to say that this means that Ertel's work is not reliable (or maybe I don't understand the commentary in page <a href="https://newalchemypress.com/gauquelin/research3.php">research3.php</a>). -->
@@ -142,10 +142,10 @@ One very strange feature of this file : many records don't contain birth time. S
 <ul>
     <li>g5 code analyzing the file contains bugs.</li>
     <li>This file is a truncated or draft or imcomplete version of Ertel's data, or Ertel was using complementary files to perform his computations.</li>
-    <li>Ertel work is based on low-quality data, and its reliability should be questioned.</li>
+    <li>Ertel work is based on low-quality data.</li>
 </ul>
 
-<br>Using only information present is this file, it is not possible to compute mars sectors, but it is possible to reproduce Ertel's famous curves on eminence effect.
+<br>Information present is this file does not permit to compute mars sectors, but permits to reproduce Ertel's famous curves on eminence effect.
 
 
 <!-- ********************************************************************************* -->
@@ -155,6 +155,17 @@ One very strange feature of this file : many records don't contain birth time. S
 <h3><a name="2-1-generate-csv">Generate csv</a></h3>
 The first step is to generate the file <b><code>5-newalch-csv/4391SPO.csv</code></b> :
 <pre>php run-g5.php newalch ertel4391 raw2csv</pre>
+
+NOTE : this code doesn't run on <code>3a_sports.txt</code> as downloaded from newalchemypress.org. Being unable to handle the character encoding of the file by program, I manually converted it to utf8 :
+<ul>
+    <li>Opened <code>3a_sports.txt</code> in libreoffice writer with encoding DOS/OS2-865/Nordique</li>
+    <li>Then exported as xhtml</li>
+    <li>Opened the xhtml file in firefox</li>
+    <li>Select all and copy</li>
+    <li>Paste in an empty txt file : <code>3a_sport-utf8.txt</code></li>
+    <li>Save</li>
+</ul>
+
 
 <!-- ************************************* -->
 <h3><a name="2-2-fix-cura-a1-names">Fix cura A1 names</a></h3>
@@ -235,11 +246,11 @@ This column seems to indicate the origin of the record.
 
 <code>G:A01</code>, <code>G:D06</code>, <code>G:D10</code> refer to series <code>A1</code>, <code>D6</code> and <code>D10</code> of Gauquelins' LERRCP publications.
 <br><code>*G:D10</code> looks like a typo and probably means <code>D10</code> (I checked, the 2 records are present in D10 file).
-<br>Some suppositions can be found in <i>[KNS 97]</i> p 25 :
+<br>Some suppositions can be found in <b>[KNS 97]</b> p 25 :
 <br><code>GMINV</code> means Gauquelin MINor Velo.
 <br><code>GMIND</code> means Gauquelin MINor Dictionary
 <br>
-<br>I don't understand yet the other codes (<code>GCPAR</code> maybe refers to Comité Para).
+<br>I don't understand yet the other codes (<code>GCPAR</code> may refer to Comité Para).
 
 <!-- ********************************************************************************* -->
 <h2><a name="birth-dates">Birth dates</a></h2>
@@ -251,6 +262,7 @@ N with birth time : 2086 (47.58 %)
 N without birth time : 2297 (52.4 %)
 N without birth time from Gauquelin LERRCP : 802
 </pre>
+Among the 802 missing times coming from Gauquelin, 3 come from A1 and 799 from D6 and D10.
 
 <!-- ********************************************************************************* -->
 <h2><a name="eminence">Eminence</a></h2>
@@ -344,7 +356,7 @@ Columns <code>ZITRANG ZITSUM ZITATE ZITSUM_OD</code> deal with eminence.
 
 </div><!-- end class="flex-wrap" -->
 
-This can be precisely matched with <i>[Ertel 88]</i> : in Table 2, he lists 18 sources. Appendix 3 provides a more detailed list of 21 sources, <i>with their codes</i>. 4 sources have code <code>O</code>, which makes 18 codes.
+This can be precisely matched with <b>[Ertel 88]</b> : in Table 2, he lists 18 sources. Appendix 3 provides a more detailed list of 21 sources, <i>with their codes</i>. 4 sources have code <code>O</code>, which makes 18 codes.
 <br>I checked, there is an exact matching between column <code>ZITATE</code> and Ertel's list.
 
 <!-- ********************************************************************************* -->
@@ -446,7 +458,11 @@ Concerned columns are
 
 <br>Combinig these informations with eminence rank, it should be possible to reproduce Ertel's famous curves of 1988.
 <br>
-<br>The table lists the different values found in the 3 columns.
+<br>Command :
+<pre>php run-g5.php newalch ertel4391 look mars</pre>
+generates the following table.
+<br>
+<br>This table lists the different values found in the 3 columns.
 <br>Interesting because it shows the difference between 12 and 36 sectors systems :
 <br>In 36-sectors system, sector 9 and 36 are also considered as important, and they are outside sectors 1 and 4 of 12-sectors system.
 <br>This shows that 12-sectors system does not catch all the information about the observed statistical effect.

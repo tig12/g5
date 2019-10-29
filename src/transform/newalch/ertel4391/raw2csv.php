@@ -1,14 +1,9 @@
 <?php
 /********************************************************************************
-    Imports 1-raw/newalchemypress.com/03-ertel/3a_sports-utf8.csv to 5-tmp/newalch/4391SPO.csv
-    
-    3a_sports-utf8.csv is a modified version of file 3a_sports-utf8.txt
+    Converts file 3a_sports-utf8.txt to a csv
     This file was retrieved in april 2019 from
     https://newalchemypress.com/gauquelin/gauquelin_docs/3a_sports.txt
-    Modifications done on the original file are detailed in
-    1-raw/newalchemypress.com/03-ertel/3a_sports-utf8-README
-    
-    The file contains 4391 (in fact 4384) sportsmen used by Ertel
+    The file contains 4387 sportsmen used by Ertel
     
     @license    GPL
     @history    2019-05-10 12:19:50+02:00, Thierry Graff : creation
@@ -18,12 +13,11 @@ namespace g5\transform\newalch\ertel4391;
 use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
-use tiglib\arrays\csvAssociative;
 
 class raw2csv implements Command{
     
     /**
-        Mapping between country code used in the file (field NATION)       
+        Mapping between country code used in the file (field NATION)
         and ISO 3166 country code.
     **/
     const NATION_CY = [
@@ -39,115 +33,78 @@ class raw2csv implements Command{
     ];
     
         
-    const OUTPUT_COLUMNS = [
-        'QUEL',
-        'NR',
-        'FNAME',
-        'GNAME',
-        'DATE',
-        'SPORT',
-        'IG',
-        'CY',
-        'ZITRANG',
-        'ZITSUM',
-        'ZITATE',
-        'ZITSUM_OD',
-        'MARS',
-        'MA_',
-        'MA12',
-        'G_NR',
-        'PARA_NR',
-        'CFEPNR',
-        'CSINR',
-        'G55',
-        'SEX',
-        'PUBL',
-        'PHAS_',
-        'AUFAB',
-        'NIENCORR',
-        'KURTZ',
-        'GQBECORR',
-        'CHRISNAME',
-        'TAGMON',
-        'ENG',
-        'EXTEND',
-        'NIENHUYS',
-    ];
-    
     // *****************************************
     /** 
-        Parses file 1-raw/newalchemypress.com/3a_sports-utf8.csv
+        Parses file 1-raw/newalchemypress.com/3a_sports-utf8.txt
         and stores it to 5-tmp/newalch/4391SPO.csv
-        @param $params empty array
         @return report
         @throws Exception if unable to parse
     **/
     public static function execute($params=[]): string{
         
-        if(count($params) > 0){
-            return "INVALID PARAMETER : " . $params[0] . " - raw2csv doesn't need this parameter\n";
-        }
+        $lines = file(Config::$data['dirs']['1-newalch-raw'] . DS . '03-ertel' . DS . '3a_sports-utf8.txt');
+        $output = '';
         
-        $output = implode(G5::CSV_SEP, self::OUTPUT_COLUMNS) . "\n";
-        
-        $records = csvAssociative::compute(Config::$data['dirs']['1-newalch-raw'] . DS . '03-ertel' . DS . '3a_sports-utf8.csv');
-        $N = count($records);
-        $nStored = 0;
-        for($i=1; $i < $N; $i++){
-            if($i%2 == 0){
-                continue; // every other line is empty
+        $N = count($lines);
+        for($i=6; $i < $N-3; $i++){
+            $line = $lines[$i];
+            if(trim($line) == ''){
+                continue;
             }
-            $record = $records[$i];
             $new = [];
-            $new['QUEL'] = trim($record[' QUEL']);
-            $new['NR'] = trim($record['  NR']);
-            $new['FNAME'] = trim($record['NAME']);
-            $new['GNAME'] = trim($record['VORNAME']);
-            $new['DATE'] = self::compute_date($record);
-            $new['SPORT'] = self::compute_profession(trim($record['SPORTART']));
-            $new['IG'] = trim($record['INDGRUP']); // useless here, should be associated to profession
-            $new['CY'] = self::NATION_CY[trim($record['NATION'])];
-            $new['ZITRANG'] = trim($record['ZITRANG']);
-            $new['ZITSUM'] = trim($record['ZITSUM']);
-            $new['ZITATE'] = trim($record['ZITATE']);
-            $new['ZITSUM_OD'] = trim($record['ZITSUM_OD']);
-            $new['MARS'] = trim($record['MARS']);
-            $new['MA_'] = trim($record['MA_']);
-            $new['MA12'] = trim($record['MA12']);
-            $new['G_NR'] = trim($record['G_NR']);
-            $new['PARA_NR'] = trim($record['PARA_NR']);
-            $new['CFEPNR'] = trim($record['CFEPNR']);
-            $new['CSINR'] = trim($record['CSINR']);
-            $new['G55'] = trim($record['GAUQ1955']);
-            $new['SEX'] = trim($record['MF']);
-            $new['PUBL'] = trim($record['PUBL']);
-            $new['PHAS_'] = trim($record[' PHAS_']);
-            $new['AUFAB'] = trim($record[' AUFAB']);
-            $new['NIENCORR'] = trim($record['NIENCORR']);
-            $new['KURTZ'] = trim($record['KURTZ']);
-            $new['GQBECORR'] = trim($record['GQBECORR']);
-            $new['CHRISNAME'] = trim($record['CHRISNAME']);
-            $new['TAGMON'] = trim($record['TAGMON']);
-            $new['ENG'] = trim($record['ENG']);
-            $new['EXTEND'] = trim($record['EXTEND']);
-            $new['NIENHUYS'] = trim($record['NIENHUYS']);
+            $new['QUEL']        = trim(mb_substr($line, 0, 6));
+            $new['NR']          = trim(mb_substr($line, 7, 6));
+            $new['FNAME']       = trim(mb_substr($line, 13, 19));
+            $new['GNAME']       = trim(mb_substr($line, 32, 21));
+            $date               = trim(mb_substr($line, 53, 11));
+            $hour               = trim(mb_substr($line, 64, 6));
+            $new['DATE'] = self::compute_date($date, $hour);
+            $new['SPORT']       = trim(mb_substr($line, 70, 6));
+            $new['IG']          = trim(mb_substr($line, 79, 1));
+            $country            = trim(mb_substr($line, 87, 3));
+            $new['CY'] = self::NATION_CY[$country];
+            $new['ZITRANG']     = trim(mb_substr($line, 100, 1));
+            $new['ZITSUM']      = trim(mb_substr($line, 107, 1));
+            $new['ZITATE']      = trim(mb_substr($line, 109, 16));
+            $new['ZITSUM_OD']   = trim(mb_substr($line, 127, 1));
+            $new['MARS']        = trim(mb_substr($line, 131, 2));
+            $new['MA_']         = trim(mb_substr($line, 136, 1));
+            $new['MA12']        = trim(mb_substr($line, 140, 2));
+            $new['G_NR']        = trim(mb_substr($line, 144, 4));
+            $new['PARA_NR']     = trim(mb_substr($line, 149, 5));
+            $new['CFEPNR']      = trim(mb_substr($line, 157, 6));
+            $new['CSINR']       = trim(mb_substr($line, 164, 5));
+            $new['G55']         = trim(mb_substr($line, 170, 1));
+            $gender             = trim(mb_substr($line, 179, 1));
+            $new['G'] = ($gender == 'F' ? 'F' : 'M');
+            $new['PUBL']        = trim(mb_substr($line, 182, 1));
+            $new['PHAS_']       = trim(mb_substr($line, 187, 6));
+            $new['AUFAB']       = trim(mb_substr($line, 194, 6));
+            $new['NIENCORR']    = trim(mb_substr($line, 201, 8));
+            $new['KURTZ']       = trim(mb_substr($line, 210, 5));
+            $new['GQBECORR']    = trim(mb_substr($line, 216, 8));
+            $new['CHRISNAME']   = trim(mb_substr($line, 233, 1));
+            $new['TAGMON']      = trim(mb_substr($line, 235, 6));
+            $new['ENG']         = trim(mb_substr($line, 244, 1));
+            $new['EXTEND']      = trim(mb_substr($line, 251, 3));
+            $new['NIENHUYS']    = trim(mb_substr($line, 260, 6));
+            // Column 'L' dropped because contains nothing for all lines in newalch file
             $output .= implode(G5::CSV_SEP, $new) . "\n";
-            $nStored++;
         }
-        
+        $output = implode(G5::CSV_SEP, array_keys($new)) . "\n" . $output;
+
         $outfile = Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE;
         file_put_contents($outfile, $output);
-        return "$outfile generated\n"
-             . "$nStored records stored\n";
+        return "$outfile generated\n";
+        
     }
     
     
     // ******************************************************
     /**
-        Auxiliary of raw2csv()
+        Auxiliary of execute()
     **/
-    private static function compute_date(&$record){
-    [$day, $hour] = [trim($record['GEBDATUM']), trim($record['STUND'])];
+    private static function compute_date($day, $hour){
         $tmp = explode('.', $day);
         $date = $tmp[2] . '-' . $tmp[1] . '-' . $tmp[0];
         if($hour == ''){
@@ -156,27 +113,15 @@ class raw2csv implements Command{
         $date .= ' ';
         $tmp = explode(',', $hour);
         if(count($tmp) == 1){
-            $date .= str_pad ($hour , 2, '0', STR_PAD_LEFT) . ':00';
+            $date .= str_pad($hour , 2, '0', STR_PAD_LEFT) . ':00';
         }
         else{
-            $date .= str_pad ($tmp[0] , 2, '0', STR_PAD_LEFT);
-            $min = $tmp[1];
-            if(strlen($min) == 1 && $min < 10){
-                $min *= 10; // dirty patch because libre office truncated trailing zeroes
-            }
-            $min = round($min * 0.6); // convert decimal part of hour to minutes
-            $date .= ':' . str_pad ($min , 2, '0', STR_PAD_LEFT);
+            $date .= str_pad($tmp[0] , 2, '0', STR_PAD_LEFT);
+            $min = round($tmp[1] * 0.6); // convert decimal part of hour to minutes
+            $date .= ':' . str_pad($min , 2, '0', STR_PAD_LEFT);
         }
         return $date;
     }
     
-    
-    // ******************************************************
-    /**
-        Auxiliary of raw2csv()
-    **/
-    public static function compute_profession($str){
-        return $str; // todo
-    }
     
 }// end class    

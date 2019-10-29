@@ -6,7 +6,7 @@
     
     To add a new function : 
         - add entry in POSSIBLE_PARAMS
-        - implement a method named "examine_<entry>"
+        - implement a method named "look_<entry>"
     
     @license    GPL
     @history    2019-05-11 18:58:50+02:00, Thierry Graff : creation
@@ -47,7 +47,7 @@ class look implements Command {
             return "INVALID PARAMETER in g5\\transform\\newalch\\ertel4391\\look\n"
                 . "Possible values for parameter : $possibleParams_str\n";
         }
-        $method = 'examine_' . $param;
+        $method = 'look_' . $param;
         self::$method();
         return '';
     }
@@ -57,7 +57,7 @@ class look implements Command {
     /**
         Look at SPORT and IG columns.
     **/
-    private static function examine_sport(){
+    private static function look_sport(){
         $rows = Ertel4391::loadTmpFile();
         $res = []; // assoc array keys = sport codes ; values = [IG, n]
         foreach($rows as $row){
@@ -90,7 +90,7 @@ class look implements Command {
     /**
         Look at QUEL column.
     **/
-    private static function examine_quel(){
+    private static function look_quel(){
         $rows = Ertel4391::loadTmpFile();
         $res = []; // assoc codes => nb of records with this code
         foreach($rows as $row){
@@ -107,7 +107,7 @@ class look implements Command {
     /**
         Look at DATE column.
     **/
-    private static function examine_date(){
+    private static function look_date(){
         $rows = Ertel4391::loadTmpFile();
         $N = 0;             // total nb lines
         $nWith = 0;         // nb lines with birth time
@@ -143,7 +143,7 @@ class look implements Command {
     /**
         Look at eminence columns : ZITRANG ZITSUM ZITATE ZITSUM_OD
     **/
-    private static function examine_eminence(){
+    private static function look_eminence(){
         $rows = Ertel4391::loadTmpFile();
         $ranks = []; // assoc array rank => nb records with this rank (ZITRANG)
         $sums = []; // assoc array sums => nb records with this sum (ZITSUM)
@@ -182,7 +182,7 @@ class look implements Command {
         Look at links to other data sets
         Columns : G_NR PARA_NR CFEPNR CSINR G55
     **/
-    private static function examine_ids(){
+    private static function look_ids(){
         $rows = Ertel4391::loadTmpFile();
         $N = 0;
         $res = [
@@ -239,7 +239,7 @@ class look implements Command {
         Columns : MARS, MA_, MA12
         Tests if there is a one to one correspondance between the values of the 3 columns
     **/
-    private static function examine_mars(){
+    private static function look_mars(){
         $rows = Ertel4391::loadTmpFile();
         $N = 0;
         $res = [];

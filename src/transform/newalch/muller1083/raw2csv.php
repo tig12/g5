@@ -39,7 +39,6 @@ class raw2csv implements Command{
         $res = implode(G5::CSV_SEP, Muller1083::TMP_CSV_COLUMNS) . "\n";
         $nRecords = 0;
         
-//        for($i=5; $i < 100; $i++){
         for($i=5; $i < $N-3; $i++){
             if($i%2 == 1){
                 continue;
