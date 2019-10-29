@@ -48,13 +48,15 @@ This is done by comparing files of <code>3-g55-edited/</code> and files of <code
     </ul>
 </nav>
 
-
-
-
-
-
 <!-- ********************************************************************************* -->
 <h2><a name="570-sportifs-a1">"570 sportifs" - A1</a></h2>
+
+Summary :
+<ul>
+    <li>"570 sportifs" contains 4 records not present in A1.</li>
+    <li>"570 sportifs" contains at least 2 erroneous dates and one erroneous time.</li>
+    <li>2 dates couln't be checked due to lack of reliable information source.</li>
+</ul>
 
 <!-- ************************************* -->
 <h3><a name="1-1-missing-records-in-a1">Missing records in A1</a></h3>
@@ -114,10 +116,12 @@ Both Ertel and Nienhuys say that one record was suppressed from the group 570 sp
 
 <!-- ************************************* -->
 <h3><a name="1-2-different-dates">Different dates</a></h3>
-The command
+The command (informative only)
 <pre>php run-g5.php g55 570SPO edited2cura date</pre>
 lists the differences between dates of Cura A files and Gauquelin 1955 groups.
 <br>This command doesn't consider timezone offset, only compares days and hours.
+<br>
+<br>Warning : Current execution of this command gives now different results because some corrections were included in <code>3-cura-tweaked/A1.yml</code>.
 
 <ul class="spaced margin-top">
     <li>
@@ -132,19 +136,23 @@ lists the differences between dates of Cura A files and Gauquelin 1955 groups.
 2044 TEN 1886-12-12 Blanchy François 08:55 | 09:00
 2083 TIR 1876-05-29 Parmentier André 03:55 | 04:00
 </pre>
-Missing equation of time ?
+Bug in equation of time ?
     </li>
     <li>
         <b>Some lines show real differences between Cura files and Gauquelin 1955 book</b> :                                               
 <pre>
-                                 cura  | g55
 different hours :
+                                 cura  | g55
 688 BOX Thil Marcel 1904-05-29   22:00 | 07:00
+
 different days :
-36 ATH El Mabrouk Mohamed   1928-10-27 | 1928-10-17
-595 BOX Cuillieres René     1929-07-22 | 1929-07-12
-1976 RUG Puig-Aubert Henri  1924-03-24 | 1925-03-24
-1999 RUG Terreau Maurice    1923-01-03 | 1923-01-30
+                                    cura | G55
+36   ATH El Mabrouk Mohamed : 1928-10-27 | 1928-10-17
+589  BOX Clavel Michel      : 1931-03-13 | 1931-03-12
+595  BOX Cuillieres René    : 1929-07-22 | 1929-07-12
+1277 FOO Cheuva André       : 1908-05-30 | 1908-05-10
+1976 RUG Puig-Aubert Henri  : 1924-03-24 | 1925-03-24
+1999 RUG Terreau Maurice    : 1923-01-30 | 1923-01-30
 </pre>
     </li>
 </ul>
@@ -165,9 +173,21 @@ Marcel Thil can be checked using online civil registries. Other dates are too re
         <br>Not fixed - waiting for a reliable source.
     </li>
     <li>
+        <code>589  BOX Clavel Michel</code>
+        <br>Can be found on web pages (example <a href="https://boxrec.com/en/proboxer/110650">boxrec.com</a>, <a href="https://fightstat.com/boxer/michel-clavel-19530207.html">fightstat.com</a>, <a href="https://www.astro.com/astro-databank/Clavel,_Michel">astro.com</a>), indicating G55 value (1931-03-12).
+        <br>A priori, cura is erroneous, G55 is OK.
+        <br>Fixed in <code>3-cura-tweaked/A1.yml</code>.
+    </li>
+    <li>
         <code>595 BOX Cuillieres René</code>
-        <br>Couldn't find it neither on the web nor in CFEPP paper book.
+        <br>Couldn't find it neither on a web site independant from Gauquelin data nor in CFEPP paper book.
         <br>Not fixed - waiting for a reliable source.
+    </li>
+    <li>
+        <code>1277 FOO Cheuva André</code>
+        <br>Birth certificate is available online : <a href="https://archivesdepartementales.lenord.fr/?id=recherche_etat_civil_detail&doc=accounts%2Fmnesys_ad59%2Fdatas%2Fir%2FEtat%20civil%2FFRAD059_MI_A_Z_2011_07_01%2Exml&page_ref=595959&unittitle=%20HELLEMMES-LILLE%20N%20/%20[1907-1909]&unitid=&unitdate=1907-1909">HELLEMMES-LILLE N / [1907-1909]</a>, p 115 / 237. Date is "aujourd'hui, trente mai, à quatre heures du matin".
+        <br>Cura is OK ; G55 is erroneous.
+        <br>Fix not needed
     </li>
     <li>
         <code>1976 RUG Puig-Aubert Henri</code>
@@ -178,6 +198,7 @@ Marcel Thil can be checked using online civil registries. Other dates are too re
         <code>1999 RUG Terreau Maurice</code>
         <br>Can be found on web pages (for example <a href="https://fr.wikipedia.org/wiki/Maurice_Terreau">wikipedia</a>) ; the date corresponds to G55 (1923-01-30).
         <br>Also present in CFEPP paper book ; the date and time correspond to G55.
+        <br>A priori, cura is erroneous, G55 is OK. 
         <br>Fixed in <code>3-cura-tweaked/A1.yml</code>
     </li>
 </ul>

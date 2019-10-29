@@ -10,6 +10,8 @@
                 
     @pre        3-g55-edited/570SPO.csv must exist.
     
+    @todo       Vocabulary problem : date is only informative, and should be handled by a "look" command
+    
     To add a new function : 
         - add entry in POSSIBLE_PARAMS
         - implement a method named "execute_<entry>"
@@ -25,6 +27,7 @@ use g5\transform\cura\Cura;
 use g5\transform\g55\G55;
 use g5\patterns\Command;
 use g5\model\Libreoffice;
+use tiglib\strings\mb_str_pad;
 
 class edited2cura implements Command {
     
@@ -230,7 +233,8 @@ class edited2cura implements Command {
         $g55group = $params[0];
         [$origin, $g55rows, $curarows] = G55::prepareCuraMatch($g55group);
                                                                                   
-        $report_hour = $report_day = '';
+        $report_hour = "                                                 cura | G55\n";
+        $report_day = "                                    cura | G55\n";
         $N_hour = $N_day = 0;
         foreach($g55rows as $NUM => $g55row){
             $name = $curarows[$NUM]['FNAME'] . ' ' . $curarows[$NUM]['GNAME'];
@@ -240,27 +244,19 @@ class edited2cura implements Command {
             $hour_cura = substr($compare_cura, 11, 5); // hour without timezone info
             $day55 = $g55row['DAY_55'];
             $hour55 = Libreoffice::fix_hour($g55row['HOUR_55']);
-            /*
-            $hour55 = $g55row['HOUR_55'];
-            if(is_numeric($hour55)){
-                $hour55 = str_pad ($hour55 , 2, '0', STR_PAD_LEFT) . ':00';
-            }
-            if(strlen($hour55) == 8){
-                $hour55 = substr($hour55, 0, 5); // remove seconds (:00) added by libreoffice
-            }                                                                                                                       
-            */
-            if($day55 != ''){
-                $report_day .= "$NUM $occu $name : $day_cura | $day55\n";
+            if($day55 != '' && $day55 != $day_cura){
+                $report_day .= str_pad($NUM, 4) . " $occu " . mb_str_pad::execute($name, 18) . " : $day_cura | $day55\n";
                 $N_day++;
             }
             if($hour55 != '' && $hour55 != $hour_cura){
-                $report_hour .= "$NUM $occu $day_cura $name : $hour_cura | $hour55\n";
+                $report_hour .= str_pad($NUM, 4) . " $occu $day_cura " . mb_str_pad::execute($name, 25) . " : $hour_cura | $hour55\n";
                 $N_hour++;
             }
         }
         return "$N_hour different hours :\n" . $report_hour
              . "$N_day different days :\n" . $report_day;
     }
+    
     
     
     // ******************************************************

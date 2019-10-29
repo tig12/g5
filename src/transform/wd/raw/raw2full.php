@@ -66,13 +66,15 @@ class raw2full implements Command{
             $dirname = Config::$data['dirs']['1-wd-raw'];
             $files = glob($dirname . DS . '*' . DS . '*.csv');
             foreach($files as $filename){
-                self::importOneFile($filename);
+echo "$filename\n";
+//                self::importOneFile($filename);
             }
             return '';
         }
-        
+exit;
         // convert all files in one directory
         $dirname = Config::$data['dirs']['1-wd-raw'] . DS . $param;
+
         if(is_dir($dirname)){
             $files = glob($dirname . DS . '*.csv');
             foreach($files as $filename){
@@ -186,7 +188,7 @@ class raw2full implements Command{
             
             // slug
             $new['slug'] = Full::personSlug($new['name'], $new['family-name'], $new['given-name'], $new['birth']['date']);
-echo "\n<pre>"; print_r($new); echo "</pre>\n"; exit;
+//echo "\n<pre>"; print_r($new); echo "</pre>\n"; exit;
             //
             // output
             //

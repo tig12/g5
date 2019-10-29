@@ -124,17 +124,23 @@
     -
   
 -
-  NUM: 1999
-  DATE: '1923-01-30 02:00:00+00:00'
-  build-notes:
-    - Fix a date error in cura file A1 ; 1923-01-30 conform to G55, wikipedia and CFEPP
+  NUM: 589
+  DATE: '1931-03-12 00:00:00+00:00'
+  build-notes: |
+    Warning, fix of birth day not based on birth certificate.
+    Birth day conform with
+    https://boxrec.com/en/proboxer/110650
+    https://fightstat.com/boxer/michel-clavel-19530207.html
+    https://www.astro.com/astro-databank/Clavel,_Michel
   
 -
-  NUM: 
-  FNAME: 
-  GNAME: 
-  build-notes:
-    -
+  NUM: 1999
+  DATE: '1923-01-30 02:00:00+00:00'
+  build-notes: |
+    Warning, fix of birth day not based on birth certificate.
+    Birth day conform with
+    CFEPP book
+    https://fr.wikipedia.org/wiki/Maurice_Terreau
   
 -
   NUM: 
