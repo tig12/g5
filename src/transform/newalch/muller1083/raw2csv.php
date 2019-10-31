@@ -32,7 +32,10 @@ class raw2csv implements Command{
             return "INVALID PARAMETER : " . $params[0] . " - parameter not needed\n";
         }
         
-        $raw = file_get_contents(Muller1083::raw_filename());
+        $raw = @file_get_contents(Muller1083::raw_filename());
+        if($raw === false){
+            return "Missing file " . Muller1083::raw_filename() . "\n";
+        }
         $lines = explode("\n", $raw);
         $N = count($lines);
         

@@ -1,14 +1,15 @@
 
 
-professions/ contains the results of the following queries
+profession-lists/ contains the results of the following queries
 
 profession Q28640
 subclass of
 occupation Q12737077
 
-============================ science ============================
+Q482980 Author
+Q36180 Writer, subclass of author
 
-Lists of professions - professions1.csv
+Lists of professions - all-professions.csv
 ----------------------------------------------------------------------
 SELECT ?profession ?professionLabel
 WHERE{
@@ -17,25 +18,39 @@ WHERE{
 }
 ORDER BY (?professionLabel)
 
+
+
+============================ science ============================
 List of subclasses of scientist - scientist-subclasses.csv
 ----------------------------------------------------------------------
-SELECT ?scientist ?scientistLabel
+SELECT ?occupation ?occupationLabel
 WHERE{
-    ?scientist wdt:P279 wd:Q901.
+    ?occupation wdt:P279 wd:Q901.
 	SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
 }
-ORDER BY (?scientistLabel)
+ORDER BY (?occupationLabel)
 
 
 ============================ art ============================
 List of subclasses of artist - artist-subclasses.csv
 ----------------------------------------------------------------------
-SELECT ?artist ?artistLabel
+SELECT ?occupation ?occupationLabel
 WHERE{
-    ?artist wdt:P279 wd:Q483501.
+    ?occupation wdt:P279 wd:Q483501.
 	SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
 }
-ORDER BY (?artistLabel)
+ORDER BY (?occupationLabel)
+
+
+============================ military ============================
+List of subclasses of military personnel - military-subclasses.csv
+----------------------------------------------------------------------
+SELECT ?occupation ?occupationLabel
+WHERE{
+    ?occupation wdt:P279 wd:Q47064.
+	SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+ORDER BY (?occupationLabel)
 
 
 ============================ sport ============================
@@ -49,7 +64,7 @@ WHERE{
 }
 ORDER BY (?sportLabel)
 
-List of subclasses of athletes - athlets1.csv
+List of subclasses of athletes - athlet-subclasses.csv
 ----------------------------------------------------------------------
 SELECT ?sport ?sportLabel
 WHERE{

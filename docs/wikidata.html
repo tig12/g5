@@ -44,7 +44,13 @@ An important feature of "good data" is the ability to connect them to other data
             </ul>
         </li>
         <li>
-            <a href="#get-occupation-codes">Get occupation codes</a>
+            <a href="#step-1-get-occupation-codes">Step 1 - Get occupation codes</a>
+        </li>
+        <li>
+            <a href="#step-2-retrieve-lists-of-persons">Step 2 - Retrieve lists of persons</a>
+        </li>
+        <li>
+            <a href="#step-3-retrieve-persons-one-by-one">Step 3 - Retrieve persons one by one</a>
         </li>
         <li>
             <a href="#try-elaborate-queries">Try elaborate queries</a>
@@ -61,59 +67,60 @@ An important feature of "good data" is the ability to connect them to other data
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- ********************************************************************************* -->
 <h2><a name="summary">Summary</a></h2>
-I tried <a href="https://query.wikidata.org/">Wikidata Query Service</a> (WDQS), learning rudiments of sparql for the occasion (see <a href="https://github.com/tig12/gauquelin5/tree/master/share/wikidata.org/wikidata-sparql-tuto.txt">wikidata-sparql-tuto.txt</a>).
-<br>I started to retrieve professional groups and wrote code to see if it can be matched with Gauquelin data, and had very bad matching rates. This could be bettered with more elaborate matching procedures. For example, to match a french person, the name should be matched with french label.
-<br>So I wrote queries to get more information, and quickly faced "time out" problems.
-<br>I didn't try very hard on query optimization and looked if I could install wikidata on my machine, but I was scared by the 38 Gb bz2 file to download the data.
-<br>Then I saw that it was possible to download the entities one by one, obtaining json files. This gives a solution :
+
+Wikidata can be queried through <a href="https://query.wikidata.org/">Wikidata Query Service</a> (WDQS), using SPARQL query language. This service permits to retrieve lists of persons.
+<br>Manual tests to retrieve lists of persons of a given professional group showed that full details of the persons can't be obtained because WDQS "times out" for queries that ask too many informations about persons. But to match Gauquelin data with Wikidata, g5 program needs full details of the persons.
+<br>Tests also showed that queries asking minimal informations about persons (their Wikidata id and their name) don't time out.
+<br>
+<br>One solution could have been to retrieve the list of all humans and query them one by one. But the query to retrieve all humans at once times out.
+<pre>
+SELECT ?human ?humanLabel 
+WHERE {
+  ?human wdt:P31 wd:Q5 .
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en" . }
+}
+</pre>
+
+An other solution would be to install WDQS on a local machine, but this solution is quite heavy and was not explored (the compressed file containing data is 38 GB).
+<br>
+<br>The solution used involves several steps :
+
 <ul>
     <li>
-        Use query service to build csv files containing the wikidata ids of persons belonging to different professional groups. Asking just the id (and eventually a label) doesn't time out.
+        <b>Step 1</b> : store list of occupation codes in <code>1-wd-raw/all-professions.csv</code>.
     </li>
     <li>
-        Download the entities that are stored in these csv files to get one json per person.
+        <b>Step 2</b> : use these lists of profession codes to store lists of persons in <code>1-wd-raw/person-lists/</code> - uses json format.
+    </li>
+    <li>
+        <b>Step 3</b> : use these lists of persons to store detailed persons in <code>1-wd-raw/persons/</code> - uses json format.
+        <br>This directory is split in multiple sub-directories to avoid having too many files in a single directory.
     </li>
 </ul>
 
-These json files contain all the informations available about entities ; they can be used to try to write the matching between Gauquelin and wikidata.
-
 <!-- ************************************* -->
 <h3><a name="1-1-in-practice">In practice</a></h3>
-Some sparql queries used to retrieve wikidata data are in <a href="https://github.com/tig12/gauquelin5/tree/master/share/wikidata.org">github.com/tig12/gauquelin5/tree/master/share/wikidata.org</a>
-<br>The csv files retrieved using WDQS are stored in <code>data/1-raw/wikidata.org</code> - This directory can be set using <code>1-wd-raw</code> entry of <code>config.yml</code>.
+<!-- 
+Some sparql queries used to retrieve wikidata data are in directory <a href="https://github.com/tig12/gauquelin5/tree/master/share/wikidata.org">share/wikidata.org/</a>
+-->
+
+The files retrieved using WDQS are stored in <code>data/1-raw/wikidata.org</code> - This directory can be set using <code>1-wd-raw</code> entry of <code>config.yml</code>.
+<br>
+<br>This directory is organized like this :
+<pre>
+todo
+</pre>
 
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="get-occupation-codes">Get occupation codes</a></h2>
-This was done using <code>profession Q28640</code> (which is a subclass of <code>occupation Q12737077</code>).
-<br>
-<br>Examples of queries which give lists of occupation codes, stored in <code>1-wd-raw/professions/</code> :
+<h2><a name="step-1-get-occupation-codes">Step 1 - Get occupation codes</a></h2>
+
+The wikidata entity used as a starting point is <code>profession Q28640</code><!--  (which is a subclass of <code>occupation Q12737077</code>) -->.
+<br>The list of profession codes can be obtained with this query :
 <pre>
-# Lists of professions - professions1.csv
-# ----------------------------------------------------------------------
 SELECT ?profession ?professionLabel
 WHERE{
     ?profession wdt:P31 wd:Q28640.
@@ -121,16 +128,32 @@ WHERE{
 }
 ORDER BY (?professionLabel)
 </pre>
-<pre>
-# List of subclasses of scientist - scientist-subclasses.csv
-# ----------------------------------------------------------------------
-SELECT ?scientist ?scientistLabel
-WHERE{
-    ?scientist wdt:P279 wd:Q901.
-	SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
-}
-ORDER BY (?scientistLabel)
-</pre>
+
+This gives more than 6000 profession codes.
+<br>This query must be done by a human using <a href="https://query.wikidata.org/">the web interface of the WDQS</a>, and download the result as a csv stored in <code>1-wd-raw/all-professions.csv</code>.
+
+
+<!-- ********************************************************************************* -->
+<h2><a name="step-2-retrieve-lists-of-persons">Step 2 - Retrieve lists of persons</a></h2>
+
+Using file <code>all-professions.csv</code>, this step stores the lists of persons for each profession code.
+<br>It stores downloaded files in <code>1-wd-raw/person-lists</code>. This directory is split into multiple subdirectories to avoid too large number of files in a single directory.
+<br>
+<br>Before starting, directory <code>1-wd-raw/person-lists</code> must be created manually.
+<br>
+<br>Then files can be downloaded with the command :
+<pre>php run-g5.php wd harvest lists</pre>
+This command can be stopped and issued several times, it doesn't download files already downloaded.
+
+
+<!-- ********************************************************************************* -->
+<h2><a name="step-3-retrieve-persons-one-by-one">Step 3 - Retrieve persons one by one</a></h2>
+
+<pre>php run-g5.php wd harvest persons</pre>
+
+<hr class="margin">
+The rest of this page contains old doc and is bound to be changed
+<hr class="margin">
 
 <!-- ********************************************************************************* -->
 <h2><a name="try-elaborate-queries">Try elaborate queries</a></h2>

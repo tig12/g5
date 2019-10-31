@@ -1,6 +1,10 @@
 
 https://www.wikidata.org/wiki/Wikidata:SPARQL_tutorial
 
+To issue queries by program :
+https://www.mediawiki.org/wiki/Wikidata_Query_Service/User_Manual#SPARQL_endpoint
+
+
 #  (note: everything after a ‘#’ is a comment and ignored by WDQS.)
 
 For simple WDQS triples, items should be prefixed with wd:, and properties with wdt:
@@ -44,10 +48,10 @@ equivalent to
 (if we don't care to ?child variable)
 
 -----------------
-natural language      example                                  SPARQL     example
-sentence               Juliet loves Romeo.                      period      juliet loves romeo.
+natural language      example                                  SPARQL      example
+sentence               Juliet loves Romeo.                     period      juliet loves romeo.
 conjunction (clause)   Romeo loves Juliet and kills himself.   semicolon   romeo loves juliet; kills romeo.
-conjunction (noun)     Romeo kills Tybalt and himself.         comma      romeo kills tybalt, romeo.
+conjunction (noun)     Romeo kills Tybalt and himself.         comma       romeo kills tybalt, romeo.
 relative clause        Juliet loves someone who kills Tybalt.  brackets    juliet loves [ kills tybalt ].
 
 Property paths

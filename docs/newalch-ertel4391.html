@@ -66,9 +66,10 @@ Its integration to Gauquelin5 is limited to A1 name restoration. The rest is dra
         <li>
             <a href="#integration-to-g5">Integration to g5</a>
             <ul>
-                <li><a href="#2-1-generate-csv">Generate csv</a></li>
-                <li><a href="#2-2-fix-cura-a1-names">Fix cura A1 names</a></li>
-                <li><a href="#2-3-generate-skeptics-files-draft-code">Generate skeptics' files - Draft code</a></li>
+                <li><a href="#2-1-download-raw-file">Download raw file</a></li>
+                <li><a href="#2-2-generate-csv">Generate csv</a></li>
+                <li><a href="#2-3-fix-cura-a1-names">Fix cura A1 names</a></li>
+                <li><a href="#2-4-generate-skeptics-files-draft-code">Generate skeptics' files - Draft code</a></li>
             </ul>
         </li>
         <li>
@@ -97,6 +98,9 @@ Its integration to Gauquelin5 is limited to A1 name restoration. The rest is dra
         </li>
     </ul>
 </nav>
+
+
+
 
 
 
@@ -152,23 +156,28 @@ One very strange feature of this file : many records don't contain birth time. S
 <h2><a name="integration-to-g5">Integration to g5</a></h2>
 
 <!-- ************************************* -->
-<h3><a name="2-1-generate-csv">Generate csv</a></h3>
-The first step is to generate the file <b><code>5-newalch-csv/4391SPO.csv</code></b> :
-<pre>php run-g5.php newalch ertel4391 raw2csv</pre>
-
-NOTE : this code doesn't run on <code>3a_sports.txt</code> as downloaded from newalchemypress.org. Being unable to handle the character encoding of the file by program, I manually converted it to utf8 :
+<h3><a name="2-1-download-raw-file">Download raw file</a></h3>
+In the directory specified by <code>1-newalch-raw</code> in <code>config.yml</code>, create a sub-directory called <code>03-ertel/</code> and download file <a href="https://newalchemypress.com/gauquelin/gauquelin_docs/3a_sports.txt">3a_sports.txt</a> in it.
+<br>
+<br>The code doesn't run on <code>3a_sports.txt</code> as downloaded from newalchemypress.org. Being unable to handle the character encoding of the file by program, it must be first manually converted to utf8. Here is what I did :
 <ul>
-    <li>Opened <code>3a_sports.txt</code> in libreoffice writer with encoding DOS/OS2-865/Nordique</li>
+    <li>Opened <code>3a_sports.txt</code> in Libreoffice writer with encoding DOS/OS2-865/Nordique</li>
     <li>Then exported as xhtml</li>
-    <li>Opened the xhtml file in firefox</li>
+    <li>Opened the xhtml file in Firefox</li>
     <li>Select all and copy</li>
     <li>Paste in an empty txt file : <code>3a_sport-utf8.txt</code></li>
     <li>Save</li>
 </ul>
 
+If <code>1-newalch-raw/</code> has the default value of <code>data/1-raw/newalchemypress.org/</code>, then the program will work on <b><code>data/1-raw/newalchemypress.com/03-ertel/3a_sports-utf8.txt</code></b> (exact spelling must be respected).
 
 <!-- ************************************* -->
-<h3><a name="2-2-fix-cura-a1-names">Fix cura A1 names</a></h3>
+<h3><a name="2-2-generate-csv">Generate csv</a></h3>
+The first step is to generate the file <b><code>5-newalch-csv/4391SPO.csv</code></b> :
+<pre>php run-g5.php newalch ertel4391 raw2csv</pre>
+
+<!-- ************************************* -->
+<h3><a name="2-3-fix-cura-a1-names">Fix cura A1 names</a></h3>
 Fixes 100% of the remaining unidentified names in A1.
 
 <pre>php run-g5.php newalch ertel4391 fixA1</pre>
@@ -186,7 +195,7 @@ Nb corrections : 117
 </pre>
 
 <!-- ************************************* -->
-<h3><a name="2-3-generate-skeptics-files-draft-code">Generate skeptics' files - Draft code</a></h3>
+<h3><a name="2-4-generate-skeptics-files-draft-code">Generate skeptics' files - Draft code</a></h3>
 Doesn't work well for the moment ; in 4391SPO.csv, the associations between lines and skeptic ids are sometimes wrong or missing.
 <br>Can come from a problem in 4391SPO.csv, a misunderstanding of column meanings or a bug in the code.
 
@@ -210,7 +219,7 @@ CFEPPP : 922 records saved - stored in data/5-tmp/cfepp/925-from-ertel.csv
 
 <!-- ********************************************************************************* -->
 <h2><a name="looking-at-the-file">Looking at the file</a></h2>
-<b>NOTE</b> : the rest of this page contains notes resulting from a first superficial look at this file. The code was written to try to understand the content of the file.
+<b>NOTE</b> : the following code was written to try to understand the content of the file.
 <br>I don't understand all the columns, so consider the informations about the file as suppositions, there are probably mistakes.
 <br>
 <br>With class <code>src/transform/newalch/ertel4391/look.php</code> :

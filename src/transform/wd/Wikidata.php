@@ -8,6 +8,8 @@
 ********************************************************************************/
 namespace g5\transform\wd;
 
+use g5\Config;
+
 class Wikidata{
     
     /** Separator used in raw wikidata files **/
@@ -25,6 +27,25 @@ class Wikidata{
         return str_replace(self::BASE_URL, '', $field);
     }
     
+    // ******************************************************
+    /**
+        Computes the directory where files containing person lists are stored
+        This directory contains 26 sub-directories (a ... z)
+    **/
+    public static function getRawPersonListBaseDir(){
+        return Config::$data['dirs']['1-wd-raw'] . DS . 'person-lists';;
+    }
+    
+    // ******************************************************
+    /**
+        Computes the directory where a file containing person lists is stored
+        @param  $slug   Slug of the person
+                        Ex : "otto-reigbert" or "q63079819"
+    **/
+    public static function getRawPersonListDir($slug){
+        $initial = substr($slug, 0, 1);
+        return self::getRawPersonListBaseDir() . DS . $initial;
+    }
     
     // ******************************************************
     /**

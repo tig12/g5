@@ -42,7 +42,12 @@ class raw2csv implements Command{
     **/
     public static function execute($params=[]): string{
         
-        $lines = file(Config::$data['dirs']['1-newalch-raw'] . DS . '03-ertel' . DS . '3a_sports-utf8.txt');
+        $filename = Config::$data['dirs']['1-newalch-raw'] . DS . '03-ertel' . DS . '3a_sports-utf8.txt';
+        if(!is_file($filename)){
+            return "Missing file $filename\n";
+        }
+        
+        $lines = file($filename);
         $output = '';
         
         $N = count($lines);

@@ -1,4 +1,6 @@
 
+- handle all cases of unexisting raw files (cura)
+
 - Refactor g55 commands : "all" is useless
 
 - Write command export for g55

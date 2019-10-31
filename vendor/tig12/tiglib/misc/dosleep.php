@@ -6,7 +6,7 @@
     @history    2019-06-11 06:37:11+02:00, Thierry Graff : Creation
 ********************************************************************************/
 
-namespace tiglib;
+namespace tiglib\misc;
 
 class dosleep{
     

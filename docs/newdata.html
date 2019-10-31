@@ -30,8 +30,8 @@
 <header>
 <h1>Building new data</h1>
 <div class="intro">
-    Data about famous persons need to be merged in a single database, related to a <a href="#viaf">VIAF identifier</a>.
-    <br>This is done in directory <code>7-tmp/</code> ;
+    Data about famous persons need to be merged to share a common identifier, like VIAF or Wikidata.
+    <br>This page shows preparatory code written to test the process.
 </div>
 </header>
 
@@ -39,13 +39,7 @@
 <nav class="toc">
     <ul>
         <li>
-            <a href="#gathering-data">Gathering data</a>
-        </li>
-        <li>
-            <a href="#merging-data">Merging data</a>
-            <ul>
-                <li><a href="#2-1-using-a-global-identifier">Using a global identifier</a></li>
-            </ul>
+            <a href="#directory-7-full">Directory 7-full/</a>
         </li>
     </ul>
 </nav>
@@ -53,17 +47,14 @@
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="gathering-data">Gathering data</a></h2>
-The first step of g5 program was to restore data used by Gauquelin and followers to perform statistical tests on astrology, to use them as a basis to build new data sets. To build new data sets, external data should be gathered 
+<h2><a name="directory-7-full">Directory 7-full/</a></h2>
 
+Data computed in the "restore" phase of the program, located in directories <code>1-raw/</code> and <code>5-tmp/</code>, are merged in an other temporary directory, <code>7-tmp/</code>.
+<br>This directory integrates both historical data (Gauquelin and followers) and external data (Wikidata and data used for eminence indicators).
 
-<!-- ********************************************************************************* -->
-<h2><a name="merging-data">Merging data</a></h2>
+<img class="border margin padding" src="img/7-full.jpg" alt="">
 
-
-<!-- ************************************* -->
-<h3><a name="2-1-using-a-global-identifier">Using a global identifier</a></h3>
-
+Wikidata is used as a common basis to perform the merge.
 
 </article>
 </div><!-- end class="main" -->
