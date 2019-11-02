@@ -15,16 +15,32 @@ class Wikidata{
     /** Separator used in raw wikidata files **/
     const RAW_CSV_SEP = ',';
     
-    const BASE_URL = 'http://www.wikidata.org/entity/';
-    
-    const PATTERN_LG_LAT = '/Point\((.*?) (.*?)\)/';
+    /** Base url to query WDQS **/
+    const QUERY_URL = 'https://query.wikidata.org/sparql?format=json&query=';
 
+//    const BASE_URL = 'http://www.wikidata.org/entity/';
+    
+//    const PATTERN_LG_LAT = '/Point\((.*?) (.*?)\)/';
+    
+    /** 
+        List of profession codes used as departure points for wikidata retrieval.
+    **/
+    const OCCUPATION_SEEDS = [
+        'Q2066131'  => 'athlete',
+        'Q901'      => 'scientist',
+        'Q39631'    => 'physician',
+        'Q189290'   => 'military-officer',
+        'Q483501'   => 'artist',
+        'Q82955'    => 'politician',
+        'Q482980'   => 'author',
+    ];
+    
     // ******************************************************
     /**
-        Computes a wikidata id from a url by removing the BASE_URL part.
+        Computes the directory where files containing profession lists are stored
     **/
-    public static function getId($field){
-        return str_replace(self::BASE_URL, '', $field);
+    public static function getRawProfessionListDir(){
+        return Config::$data['dirs']['1-wd-raw'] . DS . 'profession-lists';
     }
     
     // ******************************************************
@@ -33,33 +49,32 @@ class Wikidata{
         This directory contains 26 sub-directories (a ... z)
     **/
     public static function getRawPersonListBaseDir(){
-        return Config::$data['dirs']['1-wd-raw'] . DS . 'person-lists';;
+        return Config::$data['dirs']['1-wd-raw'] . DS . 'person-lists';
     }
     
     // ******************************************************
     /**
-        Computes the directory where a file containing person lists is stored
-        @param  $slug   Slug of the person
-                        Ex : "otto-reigbert" or "q63079819"
+        Queries WDQS
+        @param  $query Query to issue, not url encoded.
+        @return Array with 2 elements :
+                - The http response code
+                - The result of the query ; contains false if response code != 200
     **/
-    public static function getRawPersonListDir($slug){
-        $initial = substr($slug, 0, 1);
-        return self::getRawPersonListBaseDir() . DS . $initial;
-    }
-    
-    // ******************************************************
-    /**
-        Parses a string containing latitude and logitude, as returned by wikidata.
-        @param $coords a string like "Point(5.85528 59.3461)" (lg first ; lat second)
-        @return Array with two elements : longitude and latitude (in this order).
-                If can't be computed, returns an array with two empty strings.
-    **/
-    public static function parseLgLat($coords){
-        preg_match(self::PATTERN_LG_LAT, $coords, $m);
-        if(count($m) == 3){
-            return [$m[1], $m[2]];
-        }
-        return ['', ''];
+    public static function query($query){
+        $url = self::QUERY_URL . urlencode($query);
+        $ch = curl_init();
+        curl_setopt( $ch, CURLOPT_URL,  $url);
+        curl_setopt( $ch, CURLOPT_POST, false );
+        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+        curl_setopt( $ch , CURLOPT_HTTPHEADER, [
+            "Content-Type: application/x-www-form-urlencoded",
+            "Accept: application/sparql-results+json"
+        ]);
+        curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0');
+        $result = curl_exec($ch);
+        $respCode = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+        curl_close($ch);
+        return [$respCode, $result];
     }
     
 }// end class

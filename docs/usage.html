@@ -61,11 +61,6 @@
 </nav>
 
 
-
-
-
-
-
 This software has been developed and tested under Linux. A priori, it should also work under Windows and Macintosh.
 <br>
 <br>It is used through the command line.
@@ -79,17 +74,19 @@ PECL extension "yaml" must be installed.
 <br>On debian-based systems :
 <pre>sudo apt install php-yaml</pre>
 For other systems, see <a href="https://www.php.net/manual/en/install.pecl.php">php manual</a>.
-
-<!-- 
-sudo apt install php-curl
--->
-
 <br>
 <br>Geonames.org matching uses a postgresql database filled with python code, <a href="geonames.html">see page geonames</a>.
 <br>
 <br>Equation of time computation uses <a href="https://github.com/soniakeys/meeus">github.com/soniakeys/meeus</a>, written in the go programming language.
 <br>So you must have go installed on your machine and run :
 <pre>go get github.com/soniakeys/meeus</pre>
+
+Wikidata retrieval also needs curl and sqlite3 PECL extensions :
+<pre>
+sudo apt install php-curl
+sudo apt install php-sqlite3
+</pre>
+This is not necessary for data restoration, only to retrieve wikidata on local machine.
 
 <!-- ************************************* -->
 <h3><a name="1-1-directory-structure">Directory structure</a></h3>
@@ -102,6 +99,7 @@ gauquelin5/
     │   ├── 1-raw/
     │   ├── 3-edited/
     │   ├── 5-tmp/
+    │   ├── 7-full/
     │   └── 9-output/
     ├── docs/
     ├── run-g5.php

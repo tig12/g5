@@ -56,13 +56,14 @@ relative clause        Juliet loves someone who kills Tybalt.  brackets    julie
 
 Property paths
 -----------------
-
-    ?sub wdt:P279 wd:Q838948.
+work is an instance of sub
+sub is a subclass of wd:Q838948 (work of art)
     ?work wdt:P31 ?sub.
+    ?sub wdt:P279 wd:Q838948.
 equivalent to
     ?work wdt:P31 [wdt:P279 wd:Q838948].
 equivalent to
-    ?work wdt:P31/wdt:P279
+    ?work wdt:P31/wdt:P279 wd:Q838948.
 
     ?work wdt:P31/wdt:P279*
 means : there’s one “instance of” and then any number of “subclass of” statements between the item and the class. 
@@ -140,4 +141,10 @@ WHERE {
     ?item wdt:P31/wdt:P279* wd:Q5  . 
 }
 
+# nb of humans stored in wd
+# 5 489 138
+SELECT (COUNT(?human) AS ?count)
+WHERE {
+  ?human wdt:P31 wd:Q5
+}
 
