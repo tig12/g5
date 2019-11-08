@@ -131,8 +131,6 @@ This is done with command
 <pre>php run-g5.php wd harvest occus</pre>
 It uses as departure point the list of profession codes stored in <code>Wikidata::OCCUPATION_SEEDS</code> (artist ... scientist).
 <br>It stores its result in directory <code>1-wd-raw/profession-lists/</code>
-<br>
-<br>Before starting, directory <code>1-wd-raw/profession-lists</code> must be created manually.
 
 
 <!-- ********************************************************************************* -->
@@ -141,9 +139,7 @@ It uses as departure point the list of profession codes stored in <code>Wikidata
 Using the files stored in <code>1-wd-raw/profession-lists/</code>, this step stores the lists of persons for each profession code.
 <br>It stores downloaded json files in sub-directories of <code>1-wd-raw/person-lists</code>.
 <br>
-<br>Before starting, directory <code>1-wd-raw/person-lists</code> must be created manually.
-<br>
-<br>Then files can be downloaded with the command :
+<br>The files are downloaded with the command :
 <pre>php run-g5.php wd harvest personLists</pre>
 This command can be stopped and issued several times, it doesn't download files already downloaded.
 <br>

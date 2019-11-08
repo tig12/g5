@@ -30,8 +30,8 @@ class personLists implements Command{
         
         $baseDestDir = Wikidata::getRawPersonListBaseDir();
         if(!is_dir($baseDestDir)){
-            return "Directory does not exist : $baseDestDir\n"
-                 . "You must create it before executing this command\n";
+            echo "Created $baseDestDir\n";
+            mkdir($baseDestDir);
         }
         
         $q1 = 'SELECT DISTINCT ?person ?personLabel WHERE { ?person ?P31 wd:';

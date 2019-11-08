@@ -18,8 +18,6 @@ class Wikidata{
     /** Base url to query WDQS **/
     const QUERY_URL = 'https://query.wikidata.org/sparql?format=json&query=';
 
-//    const BASE_URL = 'http://www.wikidata.org/entity/';
-    
 //    const PATTERN_LG_LAT = '/Point\((.*?) (.*?)\)/';
     
     /** 
@@ -46,10 +44,38 @@ class Wikidata{
     // ******************************************************
     /**
         Computes the directory where files containing person lists are stored
-        This directory contains 26 sub-directories (a ... z)
     **/
     public static function getRawPersonListBaseDir(){
         return Config::$data['dirs']['1-wd-raw'] . DS . 'person-lists';
+    }
+    
+    // ******************************************************
+    /**
+        Computes the directory where files containing full person data are stored
+    **/
+    public static function getRawPersonBaseDir(){
+        return Config::$data['dirs']['1-wd-raw'] . DS . 'persons';
+    }
+    
+    // ******************************************************
+    /**
+        Computes the directory where a raw person is stored.
+        @param  $bdate can be false or a string formatted YYYY-MM-DD
+    **/
+    public static function computeRawPersonDir($id, $slug, $bdate){
+        if($bdate === false){
+            return self::getRawPersonBaseDir() . DS . 'no-date';
+        }
+        [$y, $m, $d] = explode('-', $bdate);
+        return self::getRawPersonBaseDir() . DS . $y . DS . $m;
+    }
+    
+    // ******************************************************
+    /**
+        Computes the file name where a raw person is stored.
+    **/
+    public static function computeRawPersonFilename($id, $slug, $bdate){
+        return self::computeRawPersonDir($id, $slug, $bdate) . DS . "$id-$slug.json";
     }
     
     // ******************************************************

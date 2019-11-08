@@ -1,4 +1,6 @@
 
+db dump : https://dumps.wikimedia.org/wikidatawiki/entities/
+
 https://www.wikidata.org/wiki/Wikidata:SPARQL_tutorial
 
 To issue queries by program :

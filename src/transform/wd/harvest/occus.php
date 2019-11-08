@@ -28,8 +28,8 @@ class occus implements Command{
         
         $destDir = Wikidata::getRawProfessionListDir();
         if(!is_dir($destDir)){
-            return "Directory does not exist : $destDir\n"
-                 . "You must create it before executing this command\n";
+            echo "Created $destDir\n";
+            mkdir($destDir);
         }
         
         $q1 = 'SELECT ?occupation ?occupationLabel WHERE{ ?occupation wdt:P279 wd:';
