@@ -17,6 +17,7 @@
 </head>
 
 <body>
+
 <div class="container">
 
 <div class="main">
@@ -55,6 +56,7 @@ Its integration to Gauquelin5 is limited to A1 name restoration. The rest is dra
 </header>
 
 <article>
+
 <nav class="toc">
     <ul>
         <li>
@@ -67,16 +69,19 @@ Its integration to Gauquelin5 is limited to A1 name restoration. The rest is dra
             <a href="#integration-to-g5">Integration to g5</a>
             <ul>
                 <li><a href="#2-1-download-raw-file">Download raw file</a></li>
-                <li><a href="#2-2-generate-csv">Generate csv</a></li>
+                <li><a href="#2-2-raw2csv">raw2csv</a></li>
                 <li><a href="#2-3-fix-cura-a1-names">Fix cura A1 names</a></li>
-                <li><a href="#2-4-generate-skeptics-files-draft-code">Generate skeptics' files - Draft code</a></li>
+                <li><a href="#2-4-generate-skeptics-files">Generate skeptics' files</a></li>
             </ul>
         </li>
         <li>
             <a href="#looking-at-the-file">Looking at the file</a>
         </li>
         <li>
-            <a href="#column-quel">Column QUEL</a>
+            <a href="#links-to-other-datasets">Links to other datasets</a>
+        </li>
+        <li>
+            <a href="#column-quel-origin">Column QUEL (origin)</a>
         </li>
         <li>
             <a href="#birth-dates">Birth dates</a>
@@ -84,11 +89,8 @@ Its integration to Gauquelin5 is limited to A1 name restoration. The rest is dra
         <li>
             <a href="#eminence">Eminence</a>
             <ul>
-                <li><a href="#6-1-data-sources-for-citation-count">Data sources for citation count</a></li>
+                <li><a href="#7-1-data-sources-for-citation-count">Data sources for citation count</a></li>
             </ul>
-        </li>
-        <li>
-            <a href="#links-to-other-datasets">Links to other datasets</a>
         </li>
         <li>
             <a href="#sport-codes">Sport codes</a>
@@ -98,12 +100,6 @@ Its integration to Gauquelin5 is limited to A1 name restoration. The rest is dra
         </li>
     </ul>
 </nav>
-
-
-
-
-
-
 
 <!-- ********************************************************************************* -->
 <h2><a name="ertel-4391-generalities">Ertel 4391 generalities</a></h2>
@@ -178,7 +174,7 @@ In the directory specified by <code>1-newalch-raw</code> in <code>config.yml</co
 If <code>1-newalch-raw/</code> has the default value of <code>data/1-raw/newalchemypress.org/</code>, then the program will work on <b><code>data/1-raw/newalchemypress.com/03-ertel/3a_sports-utf8.txt</code></b> (exact spelling must be respected).
 
 <!-- ************************************* -->
-<h3><a name="2-2-generate-csv">raw2csv</a></h3>
+<h3><a name="2-2-raw2csv">raw2csv</a></h3>
 The first step is to generate the file <b><code>5-newalch-csv/4391SPO.csv</code></b> :
 <pre>php run-g5.php newalch ertel4391 raw2csv</pre>
 This step copies the contents of <code>3a_sports-utf8.txt</code> to <code>4391SPO.csv</code> with the following modifications ;
@@ -234,7 +230,7 @@ Nb corrections : 117
 </pre>
 
 <!-- ************************************* -->
-<h3><a name="2-4-generate-skeptics-files-draft-code">Generate skeptics' files</a></h3>
+<h3><a name="2-4-generate-skeptics-files">Generate skeptics' files</a></h3>
 Draft code ; in <code>4391SPO.csv</code>, the associations between lines and skeptic ids are sometimes wrong or missing.
 <br>Can come from a problem in <code>4391SPO.csv</code>, a misunderstanding of column meanings or a bug in the code.
 
@@ -324,7 +320,7 @@ CFEPP 	         CFEPNR    : 925 (21.1 %)
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="column-quel">Column QUEL (record origin)</a></h2>
+<h2><a name="column-quel-origin">Column QUEL (origin)</a></h2>
 <pre>php run-g5.php newalch ertel4391 look quel</pre>
 This column seems to indicate the origin of the records. 
 <br>Here are the codes of this column and the number of associated records.
@@ -407,7 +403,7 @@ Columns <code>ZITRANG ZITSUM ZITATE ZITSUM_OD</code> deal with eminence.
 </div><!-- end class="flex-wrap" -->
 
 <!-- ************************************* -->
-<h3><a name="6-1-data-sources-for-citation-count">Data sources for citation count</a></h3>
+<h3><a name="7-1-data-sources-for-citation-count">Data sources for citation count</a></h3>
 18 distinct sources can be extracted from column <code>ZITATE</code> :
 <br>These lists associate the source code with the number of records found in this source.
 
