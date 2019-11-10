@@ -29,7 +29,7 @@
 <h1>Wikidata integration</h1>
 <div class="intro">
 An important feature of "good data" is the ability to connect them to other datasets. This permits to check, eventually correct them, and provides means to build new datasets. Current page explores the possibility to connect Gauquelin data with <a href="https://www.wikidata.org">wikidata.org</a>. From wikidata, it's possible to link with other standard ids (ISNI, VIAF etc.).
-<br>Matching wikidata with Gauquelin data has not (yet) been coded ; this page only explains how to retrieve relevant data from wikidata.org locally.
+<br>Matching wikidata with Gauquelin data has not (yet) been coded ; this page only explores the possibilities to retrieve relevant data from wikidata.org locally.
 <br>
 </div>
 </header>
@@ -69,16 +69,58 @@ An important feature of "good data" is the ability to connect them to other data
 <h2><a name="summary">Summary</a></h2>
 
 Wikidata can be queried through <a href="https://query.wikidata.org/">Wikidata Query Service</a> (WDQS), using SPARQL query language. This service permits to retrieve lists of persons.
-<br>Manual tests to retrieve lists of persons of a given professional group showed that full details of the persons can't be obtained because WDQS "times out" for queries that ask too many informations about persons. But to match Gauquelin data with Wikidata, g5 program needs full details of the persons.
+<br>Manual tests to retrieve lists of persons of a given professional group showed that full details of the persons can't be obtained because WDQS "times out" for queries that ask too many informations about persons.
+
+<details class="margin05">
+    <summary>Details : example of a query which times out</summary>
+    Query to retrieve mathematicians (Q170790) with information about each person :
+<pre>
+SELECT DISTINCT ?person ?personLabel ?familynameLabel ?givennameLabel ?linkcount ?isni ?macTutor ?birthdate ?birthplace
+                ?birthplaceLabel ?birthiso3166 ?birthgeonamesid ?birthcoords ?deathdate ?deathplace ?deathplaceLabel
+                ?deathiso3166 ?deathgeonamesid ?deathcoords ?deathcause ?deathcauseLabel WHERE {
+    ?person ?P31 wd:Q170790;
+        wdt:P734 ?familyname;
+        wdt:P735 ?givenname;
+        wdt:P569 ?birthdate;
+        wdt:P19 ?birthplace;
+        wikibase:sitelinks ?linkcount .
+    OPTIONAL { ?person wdt:P1563 ?macTutor } .
+    OPTIONAL { ?person wdt:P213 ?isni } .
+    # birth
+    ?birthplace wdt:P625 ?birthcoords .
+    OPTIONAL { ?birthplace wdt:P1566 ?birthgeonamesid } .
+    OPTIONAL { ?birthplace wdt:P17 ?birthcountry }.
+    OPTIONAL { ?birthcountry wdt:P297 ?birthiso3166 }.
+    # death
+    OPTIONAL { ?person wdt:P570 ?deathdate } .
+    OPTIONAL { ?person wdt:P20 ?deathplace } .
+    OPTIONAL { ?deathplace wdt:P625 ?deathcoords }.
+    OPTIONAL { ?deathplace wdt:P1566 ?deathgeonamesid } .
+    OPTIONAL { ?deathplace wdt:P17 ?deathcountry }.
+    OPTIONAL { ?deathcountry wdt:P297 ?deathiso3166 }.
+    OPTIONAL { ?person wdt:P509 ?deathcause }.
+    #
+    SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+ORDER BY DESC(?linkcount)
+</pre>
+</details>
+
+But to match Gauquelin data with Wikidata, g5 program needs full details of the persons.
+<br>
 <br>Tests also showed that queries asking minimal informations about persons (their Wikidata id and their name) don't time out.
 <br>
-<br>One solution could have been to retrieve the list of all humans and query them one by one. This query retrieve all humans ids (query asking also labels times out) :
+<br>Several solutions were tested :
+<ol class="spaced margin">
+    
+    <li>
+Retrieve the list of all humans and query them one by one. This query retrieve all humans ids (query asking also labels times out) :
 <pre>SELECT ?human WHERE { ?human wdt:P31 wd:Q5 }</pre>
-This gives 5 489 277 records (execution 2019-11-01). This is far too much : full data for a single human is around 100 Kb (json format), which would give more than 500 Gb of data (uncompressed).
-<br>
-<br>An other solution would be to install WDQS on a local machine, but this solution is quite heavy and was not explored (the compressed file containing data is 38 GB).
-<br>
-<br>An other solution would be to retrieve the list of occupation codes to retrieve only humans with a profession code. First step of this process was coded, with the folllowing query as departure point :
+This gives 5 489 277 records (execution 2019-11-01). This is too much : full data for a single human is around 100 Kb (json format), which would give more than 500 Gb of data (uncompressed).
+    </li>
+    
+    <li>
+Retrieve the list of occupation codes to retrieve only humans with a profession code. First step of this process was coded, with the folllowing query as departure point :
 <pre>
 SELECT ?profession ?professionLabel
 WHERE{
@@ -88,8 +130,10 @@ WHERE{
 ORDER BY (?professionLabel)
 </pre>
 This gave more than 6000 profession codes, leading to 2 647 452 person ids, which is still too much.
-<br>
-<br>Finally, the adopted solution was to start from a subset of profession codes that corespond to Gauquelin data :
+    </li>
+    
+    <li>
+Start from a subset of profession codes that corespond to Gauquelin data :
 
 <table class="wikitable margin">
     <tr><th>Wikidata id</th><th>Profession</th></tr>
@@ -105,65 +149,18 @@ This gave more than 6000 profession codes, leading to 2 647 452 person ids, whic
 <br>
 <br>This solution involves 3 steps :
 <ul>
-    <li>
-        <b>Step 1</b> : store list of profession codes in <code>1-wd-raw/profession-lists</code>.
-    </li>
-    <li>
-        <b>Step 2</b> : use these lists of profession codes to store lists of persons in <code>1-wd-raw/person-lists/</code>.
-    </li>
-    <li>
-        <b>Step 3</b> : use these lists of persons to store detailed persons in <code>1-wd-raw/persons/</code>.
-    </li>
+    <li><b>Step 1</b> : store list of profession codes.</li>
+    <li><b>Step 2</b> : use these lists of profession codes to store lists of persons.</li>
+    <li><b>Step 3</b> : use these lists of persons to store detailed persons.</li>
 </ul>
-
-<!-- ************************************* -->
-<h3><a name="1-1-in-practice">In practice</a></h3>
-The files retrieved using WDQS are stored in <code>data/1-raw/wikidata.org</code> - This directory can be set using <code>1-wd-raw</code> entry of <code>config.yml</code>.
-<br>
-<br>This directory is organized like this :
-<pre>
-todo
-</pre>
-
-<!-- ********************************************************************************* -->
-<h2><a name="step-1-get-profession-codes">Step 1 - Get profession codes</a></h2>
-This is done with command 
-<pre>php run-g5.php wd harvest occus</pre>
-It uses as departure point the list of profession codes stored in <code>Wikidata::OCCUPATION_SEEDS</code> (artist ... scientist).
-<br>It stores its result in directory <code>1-wd-raw/profession-lists/</code>
-
-
-<!-- ********************************************************************************* -->
-<h2><a name="step-2-retrieve-lists-of-persons">Step 2 - Retrieve lists of persons</a></h2>
-
-Using the files stored in <code>1-wd-raw/profession-lists/</code>, this step stores the lists of persons for each profession code.
-<br>It stores downloaded json files in sub-directories of <code>1-wd-raw/person-lists</code>.
-<br>
-<br>The files are downloaded with the command :
-<pre>php run-g5.php wd harvest personLists</pre>
-This command can be stopped and issued several times, it doesn't download files already downloaded.
-<br>
-<br>An execution of this command on 2019-11-02 gave 592 profession codes containing 790 394 person ids, using 560 Mb.
-
-<!-- ********************************************************************************* -->
-<h2><a name="step-3-retrieve-persons-one-by-one">Step 3 - Retrieve persons one by one</a></h2>
-
-The program must permit to execute this step in several execution ; 800 000 is too big to write simple code that will check all the persons already retrieved at each execution. So a mechanism using a sqlite database was written to assist person retrieval. 
-<br>
-<br>This operation is done in two steps :
-<pre>php run-g5.php wd harvest persons prepare</pre>
-Builds the sqlite database and stores the person ids.
-<br>It contains one table with two columns :
-<ul>
-    <li><code>id</code> : id of the person to download.</li>
-    <li><code>done</code> : boolean indicating if the person has already been downloaded or not.</li>
-</ul>
-
-After doublon removal, it shows that previous step has retrieved <b>765 937</b> ids (doublons are due to the fact that one person can be associated to several occupation codes).
-
-Then the command
-<pre>php run-g5.php wd harvest persons dl</pre>
-downloads the persons one by one. The command can be executed, stoped and started again and again. It uses the sqlite database to know which persons remain to retrieve.
+<br>Preparatory code executed on 2019-11-02 gave 592 profession codes containing 790 394 person ids, which would imply to download around 70 Gb on local machine.
+    </li>
+    
+    <li>
+    Download the full dump from <a href="https://dumps.wikimedia.org/wikidatawiki/entities/">dumps.wikimedia.org/wikidatawiki/entities/</a> on a local machine ; on 2019-11-09, file <code>latest-all.json.bz2</code> was 43 Gb.
+    </li>
+    
+</ol>
 
 </article>
 </div><!-- end class="main" -->

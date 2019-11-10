@@ -41,12 +41,12 @@ class look implements Command {
     public static function execute($params=[]): string{
         $possibleParams_str = implode(', ', self::POSSIBLE_PARAMS);
         if(count($params) == 0){
-            return "PARAMETER MISSING in g5\\transform\\newalch\\muller1083\\look\n"
+            return "PARAMETER MISSING\n"
                 . "Possible values for parameter : $possibleParams_str\n";
         }
         $param = $params[0];
         if(!in_array($param, self::POSSIBLE_PARAMS)){
-            return "INVALID PARAMETER in g5\\transform\\newalch\\muller1083\\look\n"
+            return "INVALID PARAMETER\n"
                 . "Possible values for parameter : $possibleParams_str\n";
         }
         

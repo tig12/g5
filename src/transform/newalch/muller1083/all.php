@@ -21,7 +21,7 @@ class all implements Command {
     public static function execute($params=[]): string{
         
         if(count($params) > 0){
-            return "USELESS PARAMETER in g5\\transform\\newalch\\muller1083\\all : {$params[0]}\n";
+            return "USELESS PARAMETER : {$params[0]}\n";
         }
         
         echo "\n=== php run-g5.php newalch muller1083 raw2csv ===\n";

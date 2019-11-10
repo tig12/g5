@@ -1,5 +1,5 @@
 #
-# Configuration directives used to correct Gauquelin data (5th edition) from cura.free.fr
+# Configuration for https://github.com/tig12/gauquelin5
 #
 
 # Directories where the files are stored
@@ -28,6 +28,9 @@ dirs:
   9-newalch:            data/9-output/datasets/newalchemypress
   9-g55-original:       data/9-output/history/1955-gauquelin/g55-original
   9-g55-corrected:      data/9-output/history/1955-gauquelin/g55-corrected
+  9-cpara:              data/9-output/history/1976-cpara
+  9-cfepp:              data/9-output/history/1996-cfepp
+  9-csicop:             data/9-output/history/1979-csicop
 
 # geoname.org parameters
 # only useful for the steps which call geonames.org web service

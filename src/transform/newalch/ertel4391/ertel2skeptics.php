@@ -1,18 +1,10 @@
 <?php
 /********************************************************************************
-    Computes groups of Comité Para, CSICOP, CFEPP
-    Ids come from 4391SPO.csv and other fields from A1.csv
+    Computes groups of Comité Para, CSICOP, CFEPP from 4391SPO.csv
     Input files :
-    - 5-tmp/newalch-csv/4391SPO.csv
-    - 5-tmp/cura-csv/A1.csv
-    Output files :
-    - 5-tmp/cp/611-from-ertel.csv
-    - 5-tmp/csicop/190-from-ertel.csv
-    - 5-tmp/cfepp/925-from-ertel.csv
-    
-    To add a new function : 
-        - add entry in POSSIBLE_PARAMS
-        - implement a method named "examine_<entry>"
+        - 5-tmp/newalch-csv/4391SPO.csv
+        - 5-tmp/cura-csv/A1.csv
+    Output files : see POSSIBLE_PARAMS
     
     @license    GPL
     @history    2019-06-05 23:25:56+02:00, Thierry Graff : creation
@@ -31,10 +23,12 @@ class ertel2skeptics implements Command {
         php run-g5.php newalch ertel4391 ertel2skeptics cfepp
     **/
     const POSSIBLE_PARAMS = [
-        'ALL',
-        'cp',
-        'cfepp',
-        'csicop',
+        'all' => 'Generate all skeptic files',
+        'cpara' => 'Generate 5-cpara/535-cpara.csv',
+        'cpara-full' => 'Generate 5-cpara/611-cpara-full.csv',
+        'cpara-lowers' => 'Generate 5-cpara/76-cpara-lowers.csv',
+        'cfepp' => 'Generate 5-cfepp/190-cfepp.csv',
+        'csicop' => 'Generate 5-csicop/925-csicop.csv',
     ];
     
     /** 
@@ -54,24 +48,29 @@ class ertel2skeptics implements Command {
         
         $report = '';
         
-        $possibleParams_str = implode(', ', self::POSSIBLE_PARAMS);
+        $possibleParams_str = ''; 
+        foreach(self::POSSIBLE_PARAMS as $k => $v){
+            $possibleParams_str .= '  ' . str_pad($k, 12) . " : $v\n";
+        }
         if(count($params) == 0){
-            return "PARAMETER MISSING in g5\\transform\\newalch\\ertel4391\\ertel2skeptics\n"
-                . "Possible values for parameter : $possibleParams_str\n";
+            return "PARAMETER MISSING\n"
+                . "Possible values for parameter :\n$possibleParams_str\n";
         }
         $param = $params[0];
-        if(!in_array($param, self::POSSIBLE_PARAMS)){
-            return "INVALID PARAMETER in g5\\transform\\newalch\\ertel4391\\ertel2skeptics\n"
-                . "Possible values for parameter : $possibleParams_str\n";
+        if(!in_array($param, array_keys(self::POSSIBLE_PARAMS))){
+            return "INVALID PARAMETER\n"
+                . "Possible values for parameter :\n$possibleParams_str\n";
         }
         
         // init $do* vars
-        $docp = $docsicop = $docfepp = false;
-        if($param == 'ALL'){
-            $docp = $docsicop = $docfepp = true;
+        $docp = $docpfull = $docplowers = $docsicop = $docfepp = false;
+        if($param == 'all'){
+            $docp = $docpfull = $docplowers = $docsicop = $docfepp = true;
         }
         else{
-            if($param == 'cp') $docp = true;
+            if($param == 'cpara') $docp = true;
+            if($param == 'cpara-full') $docpfull = true;
+            if($param == 'cpara-lowers') $docplowers = true;
             if($param == 'csicop') $docsicop = true;
             if($param == 'cfepp') $docfepp = true;
         }
@@ -83,53 +82,59 @@ class ertel2skeptics implements Command {
         }
         
         // build arrays
-        $cp = $csicop = $cfepp = [];
+        $cp = $cpfull = $cplowers = $csicop = $cfepp = [];
         $rows = csvAssociative::compute(Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE);
         foreach($rows as $row){
             $NUM = $row['G_NR'];
-            if($docp && $row['PARA_NR']){
-                $cp[] = self::fill_line('CP_ID', $row['PARA_NR'], $NUM);
+            if(($docp || $docpfull || $docplowers) && $row['PARA_NR']){
+                $cpfull[] = $row;
+                if($row['QUEL'] == 'GCPAR'){
+                    $cplowers[] = $row;
+                }
+                else{
+                    $cp[] = $row;
+                }
             }
             if($docsicop && $row['CSINR']){
-                $csicop[] = self::fill_line('CSI_ID', $row['CSINR'], $NUM);
+                $csicop[] = $row;
             }
             if($docfepp && $row['CFEPNR']){
-                $cfepp[] = self::fill_line('CFE_ID', $row['CFEPNR'], $NUM);
+                $cfepp[] = $row;
             }
         }
         
         // output
         if($docp){
             $res = self::array2csv($cp);
-            $out = Config::$data['dirs']['5-cp'] . DS . '611-from-ertel.csv';
+            $out = Config::$data['dirs']['5-cpara'] . DS . '535-cpara.csv';
             file_put_contents($out, $res);
-            echo "CP : " . count($cp) . " records saved - stored in $out\n";
+            $report .= "CPARA : " . count($cp) . " records saved - stored in $out\n";
+        }
+        if($docpfull){
+            $res = self::array2csv($cpfull);
+            $out = Config::$data['dirs']['5-cpara'] . DS . '611-cpara-full.csv';
+            file_put_contents($out, $res);
+            $report .= "CPARA full : " . count($cpfull) . " records saved - stored in $out\n";
+        }
+        if($docplowers){
+            $res = self::array2csv($cplowers);
+            $out = Config::$data['dirs']['5-cpara'] . DS . '76-cpara-lowers.csv';
+            file_put_contents($out, $res);
+            $report .= "CPARA lowers : " . count($cplowers) . " records saved - stored in $out\n";
         }
         if($docsicop){
             $res = self::array2csv($csicop);
-            $out = Config::$data['dirs']['5-csicop'] . DS . '190-from-ertel.csv';
+            $out = Config::$data['dirs']['5-csicop'] . DS . '190-csicop.csv';
             file_put_contents($out, $res);
-            echo "CSICOP : " . count($csicop) . " records saved - stored in $out\n";
+            $report .= "CSICOP : " . count($csicop) . " records saved - stored in $out\n";
         }
         if($docfepp){
             $res = self::array2csv($cfepp);
-            $out = Config::$data['dirs']['5-cfepp'] . DS . '925-from-ertel.csv';
+            $out = Config::$data['dirs']['5-cfepp'] . DS . '925-cfepp.csv';
             file_put_contents($out, $res);
-            echo "CFEPPP : " . count($cfepp) . " records saved - stored in $out\n";
+            $report .= "CFEPPP : " . count($cfepp) . " records saved - stored in $out\n";
         }
-        return '';
-    }
-    
-    
-    // ******************************************************
-    /**
-        @param $key     Name of the key of $res where the skeptics' id is stored.
-        @param $value   Value stored in $key
-        @param $NUM     Gauquelin id, field NUM of cura files.
-        @return         Assoc array = to a record of A1.csv with one more field added as first key
-    **/
-    private static function fill_line($key, $value, $NUM){
-        return [$key => $value] + self::$curaA1[$NUM];
+        return $report;
     }
     
     

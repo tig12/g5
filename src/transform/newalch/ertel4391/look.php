@@ -28,6 +28,7 @@ class look implements Command {
         'eminence',
         'ids',
         'mars',
+        'cp',
     ];
     
     // *****************************************
@@ -39,12 +40,12 @@ class look implements Command {
     public static function execute($params=[]): string{
         $possibleParams_str = implode(', ', self::POSSIBLE_PARAMS);
         if(count($params) == 0){
-            return "PARAMETER MISSING in g5\\transform\\newalch\\ertel4391\\look\n"
+            return "PARAMETER MISSING\n"
                 . "Possible values for parameter : $possibleParams_str\n";
         }
         $param = $params[0];
         if(!in_array($param, self::POSSIBLE_PARAMS)){
-            return "INVALID PARAMETER in g5\\transform\\newalch\\ertel4391\\look\n"
+            return "INVALID PARAMETER\n"
                 . "Possible values for parameter : $possibleParams_str\n";
         }
         $method = 'look_' . $param;
@@ -287,6 +288,26 @@ class look implements Command {
                 . "</tr>\n";
         }
         echo "</table>\n";
+    }
+    
+    // ******************************************************
+    /**
+        Look at records where QUEL = "GCPAR".
+        Result :
+        0 GCPAR without PARA_NR
+    **/
+    private static function look_cp(){
+        $rows = Ertel4391::loadTmpFile();
+        $nMiss = 0;
+        foreach($rows as $row){
+            if($row['QUEL'] != 'GCPAR'){
+                continue;
+            }
+            if($row['PARA_NR'] == ''){
+                $nMiss++;
+            }
+        }
+        echo "$nMiss GCPAR without PARA_NR\n";
     }
     
 }// end class

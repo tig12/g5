@@ -54,10 +54,14 @@ class raw2csv implements Command{
         for($i=6; $i < $N-3; $i++){
             $line = $lines[$i];
             if(trim($line) == ''){
-                continue;
+                continue;                                                                                                   
             }
             $new = [];
+            $new['GNUM']        = '';
             $new['QUEL']        = trim(mb_substr($line, 0, 6));
+            if($new['QUEL'] == '*G:D10'){
+                $new['QUEL'] = 'G:D10';
+            }
             $new['NR']          = trim(mb_substr($line, 7, 6));
             $new['FNAME']       = trim(mb_substr($line, 13, 19));
             $new['GNAME']       = trim(mb_substr($line, 32, 21));
@@ -94,6 +98,8 @@ class raw2csv implements Command{
             $new['EXTEND']      = trim(mb_substr($line, 251, 3));
             $new['NIENHUYS']    = trim(mb_substr($line, 260, 6));
             // Column 'L' dropped because contains nothing for all lines in newalch file
+            $new['GNUM'] = self::compute_GNUM($new);
+            
             $output .= implode(G5::CSV_SEP, $new) . "\n";
         }
         $output = implode(G5::CSV_SEP, array_keys($new)) . "\n" . $output;
@@ -102,6 +108,27 @@ class raw2csv implements Command{
         file_put_contents($outfile, $output);
         return "$outfile generated\n";
         
+    }
+    
+    
+    // ******************************************************
+    /**
+        Auxiliary of execute()
+        Computes field GNUM, string like "A1-123"
+    **/
+    private static function compute_GNUM(&$new){
+        if(substr($new['QUEL'], 0, 2) != 'G:'){
+            return '';
+        }
+        $GNUM = '';
+        $rest = substr($new['QUEL'], 2);
+        switch($rest){
+        	case 'A01': $GNUM = 'A1'; break;
+        	case 'D06': $GNUM = 'D6'; break;
+        	case 'D10': $GNUM = 'D10'; break;
+        }
+        $GNUM .= '-' . $new['G_NR'];
+        return $GNUM;
     }
     
     

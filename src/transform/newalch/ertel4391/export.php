@@ -26,19 +26,19 @@ class export implements Command {
         
         $possibleParams_str = '';
         foreach(self::POSSIBLE_PARAMS as $k => $v){
-            $possibleParams_str .= "  '- $k' : $v\n";
+            $possibleParams_str .= "  $k : $v\n";
         }
         if(count($params) == 0){
-            return "PARAMETER MISSING in g5\\transform\\newalch\\muller1083\\fixGnr - This function needs one parameter\n"
+            return "PARAMETER MISSING - This function needs one parameter\n"
                 . "Possible values for parameter :\n$possibleParams_str\n";
         }
         if(count($params) > 1){
-            return "USELESS PARAMETER in g5\\transform\\newalch\\muller1083\\fixGnr : {$params[1]}\n"
+            return "USELESS PARAMETER : {$params[1]}\n"
                 . "Possible values for parameter :\n$possibleParams_str\n";
         }
         $param = $params[0];
         if(!in_array($param, array_keys(self::POSSIBLE_PARAMS))){
-            return "INVALID PARAMETER in g5\\transform\\newalch\\muller1083\\fixGnr\n"
+            return "INVALID PARAMETER : $param\n"
                 . "Possible values for parameter :\n$possibleParams_str\n";
         }
         
@@ -52,11 +52,31 @@ class export implements Command {
         Exports to 9-output/
     **/
     private static function export_dl(){
-        $infile = Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE;
-        $outfile = Config::$data['dirs']['9-newalch'] . DS . Ertel4391::TMP_CSV_FILE;
-        copy($infile, $outfile);
-        return "Copied $infile to $outfile\n";
-        
+        $report = '';
+        $gen = [
+            Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE =>
+            Config::$data['dirs']['9-newalch'] . DS . Ertel4391::TMP_CSV_FILE,
+            
+            Config::$data['dirs']['5-cpara'] . DS . '535-cpara.csv' =>
+            Config::$data['dirs']['9-cpara'] . DS . '535-cpara.csv',
+            
+            Config::$data['dirs']['5-cpara'] . DS . '611-cpara-full.csv'=>
+            Config::$data['dirs']['9-cpara'] . DS . '611-cpara-full.csv',
+            
+            Config::$data['dirs']['5-cpara'] . DS . '76-cpara-lowers.csv'=>
+            Config::$data['dirs']['9-cpara'] . DS . '76-cpara-lowers.csv',
+            
+            Config::$data['dirs']['5-csicop'] . DS . '190-csicop.csv'=>
+            Config::$data['dirs']['9-csicop'] . DS . '190-csicop.csv',
+            
+            Config::$data['dirs']['5-cfepp'] . DS . '925-cfepp.csv'=>
+            Config::$data['dirs']['9-cfepp'] . DS . '925-cfepp.csv',
+        ];
+        foreach($gen as $in => $out){
+            copy($in, $out);
+            $report .= "Copied $in to $out\n";
+        }
+        return $report;
     }
     
     

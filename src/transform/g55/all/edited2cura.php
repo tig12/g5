@@ -56,12 +56,12 @@ class edited2cura implements Command {
     public static function execute($params=[]): string{
         $possibleParams_str = implode(', ', self::POSSIBLE_PARAMS);
         if(count($params) < 3){
-            return  "PARAMETER MISSING in g5\\transform\\cura\\A\\edited2cura\n"
+            return  "PARAMETER MISSING\n"
                   . "Possible values for parameter : $possibleParams_str\n";
         }
         $param = $params[2];
         if(!in_array($param, self::POSSIBLE_PARAMS)){
-            return  "INVALID PARAMETER '$param' in g5\\transform\\cura\\A\\edited2cura\n"
+            return  "INVALID PARAMETER '$param'\n"
                   . "Possible values for parameter : $possibleParams_str\n";
         }
         $method = 'execute_' . $param;

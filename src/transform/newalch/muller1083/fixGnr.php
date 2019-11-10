@@ -32,16 +32,16 @@ class fixGnr implements Command {
             $possibleParams_str .= "  '$k' : $v\n";
         }
         if(count($params) == 0){
-            return "PARAMETER MISSING in g5\\transform\\newalch\\muller1083\\fixGnr - This function needs one parameter\n"
+            return "PARAMETER MISSING\n"
                 . "Possible values for parameter :\n$possibleParams_str\n";
         }
         if(count($params) > 1){
-            return "USELESS PARAMETER in g5\\transform\\newalch\\muller1083\\fixGnr : {$params[1]}\n"
+            return "USELESS PARAMETER : {$params[1]}\n"
                 . "Possible values for parameter :\n$possibleParams_str\n";
         }
         $param = $params[0];
         if(!in_array($param, array_keys(self::POSSIBLE_PARAMS))){
-            return "INVALID PARAMETER in g5\\transform\\newalch\\muller1083\\fixGnr\n"
+            return "INVALID PARAMETER\n"
                 . "Possible values for parameter :\n$possibleParams_str\n";
         }
         
