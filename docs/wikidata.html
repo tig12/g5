@@ -35,38 +35,8 @@ An important feature of "good data" is the ability to connect them to other data
 </header>
 
 <article>
-<nav class="toc">
-    <ul>
-        <li>
-            <a href="#summary">Summary</a>
-            <ul>
-                <li><a href="#1-1-in-practice">In practice</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#step-1-get-occupation-codes">Step 1 - Get occupation codes</a>
-        </li>
-        <li>
-            <a href="#step-2-retrieve-lists-of-persons">Step 2 - Retrieve lists of persons</a>
-        </li>
-        <li>
-            <a href="#step-3-retrieve-persons-one-by-one">Step 3 - Retrieve persons one by one</a>
-        </li>
-        <li>
-            <a href="#try-elaborate-queries">Try elaborate queries</a>
-        </li>
-        <li>
-            <a href="#use-minimal-queries">Use minimal queries</a>
-        </li>
-        <li>
-            <a href="#download-individual-json">Download individual json</a>
-        </li>
-    </ul>
-</nav>
-
 
 <!-- ********************************************************************************* -->
-<h2><a name="summary">Summary</a></h2>
 
 Wikidata can be queried through <a href="https://query.wikidata.org/">Wikidata Query Service</a> (WDQS), using SPARQL query language. This service permits to retrieve lists of persons.
 <br>Manual tests to retrieve lists of persons of a given professional group showed that full details of the persons can't be obtained because WDQS "times out" for queries that ask too many informations about persons.
@@ -109,6 +79,7 @@ ORDER BY DESC(?linkcount)
 But to match Gauquelin data with Wikidata, g5 program needs full details of the persons.
 <br>
 <br>Tests also showed that queries asking minimal informations about persons (their Wikidata id and their name) don't time out.
+<br>Combine with the fact that Wikidata permits to retrieve full informations about a single entity 
 <br>
 <br>Several solutions were tested :
 <ol class="spaced margin">
@@ -220,7 +191,7 @@ Start from a subset of profession codes that corespond to Gauquelin data :
     </li>
     
     <li>
-        <span class="big1">2 - Build new data</span>
+        <span class="big1"><a href="newdata.html">2 - Build new data</a></span>
         <ul>
             <li><a href="geonames.html">Geonames.org</a></li>
             <li><a href="wikidata.html">Wikidata.org</a></li>
