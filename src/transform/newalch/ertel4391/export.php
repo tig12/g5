@@ -66,8 +66,8 @@ class export implements Command {
             Config::$data['dirs']['5-cpara'] . DS . '76-cpara-lowers.csv'=>
             Config::$data['dirs']['9-cpara'] . DS . '76-cpara-lowers.csv',
             
-            Config::$data['dirs']['5-csicop'] . DS . '190-csicop.csv'=>
-            Config::$data['dirs']['9-csicop'] . DS . '190-csicop.csv',
+            Config::$data['dirs']['5-csicop'] . DS . '192-csicop.csv'=>
+            Config::$data['dirs']['9-csicop'] . DS . '192-csicop.csv',
             
             Config::$data['dirs']['5-cfepp'] . DS . '925-cfepp.csv'=>
             Config::$data['dirs']['9-cfepp'] . DS . '925-cfepp.csv',

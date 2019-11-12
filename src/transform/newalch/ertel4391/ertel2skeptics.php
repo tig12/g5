@@ -27,8 +27,8 @@ class ertel2skeptics implements Command {
         'cpara' => 'Generate 5-cpara/535-cpara.csv',
         'cpara-full' => 'Generate 5-cpara/611-cpara-full.csv',
         'cpara-lowers' => 'Generate 5-cpara/76-cpara-lowers.csv',
-        'cfepp' => 'Generate 5-cfepp/190-cfepp.csv',
-        'csicop' => 'Generate 5-csicop/925-csicop.csv',
+        'cfepp' => 'Generate 5-cfepp/925-cfepp.csv',
+        'csicop' => 'Generate 5-csicop/192-csicop.csv',
     ];
     
     /** 
@@ -86,7 +86,7 @@ class ertel2skeptics implements Command {
         $rows = csvAssociative::compute(Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE);
         foreach($rows as $row){
             $NUM = $row['G_NR'];
-            if(($docp || $docpfull || $docplowers) && $row['PARA_NR']){
+            if(($docp || $docpfull || $docplowers) && $row['PARA_NR'] != ''){
                 $cpfull[] = $row;
                 if($row['QUEL'] == 'GCPAR'){
                     $cplowers[] = $row;
@@ -95,10 +95,10 @@ class ertel2skeptics implements Command {
                     $cp[] = $row;
                 }
             }
-            if($docsicop && $row['CSINR']){
+            if($docsicop && $row['CSINR'] != ''){
                 $csicop[] = $row;
             }
-            if($docfepp && $row['CFEPNR']){
+            if($docfepp && $row['CFEPNR'] != ''){
                 $cfepp[] = $row;
             }
         }
@@ -124,7 +124,7 @@ class ertel2skeptics implements Command {
         }
         if($docsicop){
             $res = self::array2csv($csicop);
-            $out = Config::$data['dirs']['5-csicop'] . DS . '190-csicop.csv';
+            $out = Config::$data['dirs']['5-csicop'] . DS . '192-csicop.csv';
             file_put_contents($out, $res);
             $report .= "CSICOP : " . count($csicop) . " records saved - stored in $out\n";
         }
