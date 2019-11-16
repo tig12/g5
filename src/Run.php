@@ -58,7 +58,7 @@ class Run{
         // else return the classes located in the datafile's class directory
         // as the code is psr4, possible to list php files without using reflection.
         $dir = implode(DS, [__DIR__, 'transform', $dataset, $datafile]);
-        $tmp = glob($dir . DS . '*.php');;
+        $tmp = glob($dir . DS . '*.php');
         $res = [];
         foreach($tmp as $file){
             $basename = basename($file, '.php');
@@ -70,6 +70,7 @@ class Run{
             }
             catch(\Exception $e){
                 // silently ignore php files present in the directory, but containing errors
+                // echo "ERR new \\ReflectionClass(\\"g5\\transform\\$dataset\\$datafile\\$basename\\") \n" . $e->getMessage() . "\n";
             }
         }
         return $res;
