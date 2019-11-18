@@ -1,11 +1,9 @@
 <?php
 /********************************************************************************
     Importation of 1-si-raw/si42-p62-65.txt
-    to 5-csicop/408-csicop-si42.csv
+    to  5-csicop/408-csicop-si42.csv (all records)
+    and 5-csicop/181-csicop-si42.csv (records marked "SC")
     
-    List originally published in
-    Skeptical Inquier VOL IV NO. 2 WINTER 1979-80, p 60 - 63.
-                                   
     @license    GPL
     @history    2019-11-16, Thierry Graff : Creation
 ********************************************************************************/
@@ -28,13 +26,14 @@ class raw2csv implements Command{
         }
         
         $infile = SI42::raw_filename();
+        $outfile_181 = SI42::tmp_filename_181();                 
         $outfile = SI42::tmp_filename();
         
         $report =  "--- Importing file $infile ---\n";
         
-        $res = implode(G5::CSV_SEP, SI42::TMP_FIELDS) . "\n";
+        $res = $res_181 = implode(G5::CSV_SEP, SI42::TMP_FIELDS) . "\n";
         $lines = file($infile);
-        $n = 0;
+        $n = $n_181  = 0;
         foreach($lines as $line){
             $line = trim($line);
             if($line == ''){
@@ -48,11 +47,16 @@ class raw2csv implements Command{
             $new['SC'] = trim(substr($line, 55));
             $n++;
             $res .= implode(G5::CSV_SEP, $new) . "\n";
+            if($new['SC'] != ''){
+                $n_181++;
+                $res_181 .= implode(G5::CSV_SEP, $new) . "\n";
+            }
         }
         
+        file_put_contents($outfile_181, $res_181);
+        $report .= "Generated $outfile_181 - $n_181 records stored\n";
         file_put_contents($outfile, $res);
-        $report .= "Generated $outfile\n";
-        $report .= "$n records stored\n";
+        $report .= "Generated $outfile - $n records stored\n";
         return $report;
     }
     
