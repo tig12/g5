@@ -30,15 +30,43 @@
 <header>
 <h1>
 CSICOP 1979
-<div class="subtitle">408 sportsmen</div>
+<div class="subtitle">408 U.S. sportsmen</div>
 </h1>
 <div class="intro">
-This page deals with the restoration of CSICOP test (USA 1979).
+This page deals with the (partial) restoration of the CSICOP test (USA 1979). An important information to restore is the "canvasses" : this group was created in 3 steps, called canvasses in litterature.
 
 </div>
 </header>
-Jury du titre professionnel "Développeur.se web / web mobile" RNCP 5927
+
 <article>
+
+<!-- ********************************************************************************* -->
+<h2>Information sources</h2>
+Informations used to compute this group can be found in several places.
+
+<ul class="spaced margin-top">
+    <li>
+        <b>Skeptical Inquier VOL IV NO. 2 WINTER 1979-80, p 60 - 63</b> : in the article "Response to the Gauquelins" (Paul Kurtz, Marvin Zelen, and George Abell), the appendix contains the list of 408 names, with birth date (not time), state, mars sector.
+        <br>This list is available on <a href="https://skepticalinquirer.org/1980/01/response_to_the_gauquelins/">skepticalinquirer.org</a>.
+    </li>
+    <li>
+        <b>Skeptical Inquier VOL IV NO. 2 WINTER 1979-80, p 41</b> : in the article "Star U.S. Sportsmen Display the Mars Effect - A comment on the Kurtz-Zelen-Abell experiment" (Michel and Francoise Gauquelin), appendix I contains the list of 108 sportsmen gathered in canvas 1.
+    </li>
+    <li>
+        <b>The tenacious Mars Effect, p SE-19 to SE-31</b> permits to understand the link between this group and Gauquelin data published on cura.free.fr.
+    </li>
+</ul>
+
+<!-- ********************************************************************************* -->
+<h2>Restoration process</h2>
+The command :
+<pre>php run-g5.php csicop si42 all</pre>
+This is equivalent to 
+<pre>
+php run-g5.php csicop si42 raw2csv
+php run-g5.php csicop si42 addCanvas1
+
+</pre>
 
 <!--          
 Contains the list of sportsmen contained in

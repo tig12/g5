@@ -46,14 +46,27 @@ class addCanvas1 implements Command{
             foreach($c1rows as $candidate){
                 if($candidate == $fname || $candidate == $name){
                     $found = true;
-                    $n++;
                     $matched[] = $candidate;
                     break;
                 }
             }
+            if($fname == 'Mann' && $row['C2'] == 'CA'){
+                // particular case that could not be solved by adding given name in si42-p41.txt
+                // because there are 2 Mann R. One is from Utah, one from Califormnia
+                // First canvas included the Mann from Utah
+                $found = false;
+            }
+            if($fname == 'Taylor' && $row['MA12'] == '8'){
+                // particular case that could not be solved by adding given name in si42-p41.txt
+                // because there are 2 Taylor B. from New Jersey
+                // First canvas included the Taylor with mars sector = 3
+                $found = false;
+            }
+            
             $new = $row;
             if($found){
                 $new['CANVAS'] = '1';
+                $n++;
             }
             else{
                 $new['CANVAS'] = '';
