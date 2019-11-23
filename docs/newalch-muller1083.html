@@ -35,7 +35,7 @@ Müller 1083
 This page deals with the file <a href="https://newalchemypress.com/gauquelin/gauquelin_docs/5a_muller_medics.txt">5muller_medics.txt</a> downloaded from <a href="https://newalchemypress.com/gauquelin/research5.php">newalchemypress.com</a>.
 <br>It was used to :
 <ul>
-    <li>Fix column GNR and build a modified version : <a href="https://larzac.info/gauquelin5/datasets/newalchemypress/1083MED.csv">1083MED.csv</a>.</li>
+    <li>Fix column GNR and build a modified version : <a href="https://larzac.info/gauquelin5/9-output/datasets/newalchemypress/1083MED.csv">1083MED.csv</a>.</li>
     <li>correct names and birth days in files A2 and E1</li>
 </ul>
 
@@ -108,20 +108,18 @@ Newalchemypress says that this file concerns one of the two independant replicat
 
 <!-- ************************************* -->
 <h3><a name="2-1-download-raw-file">Download raw file</a></h3>
-In the directory specified by <code>1-newalch-raw</code> in <code>config.yml</code>, create a sub-directory called <code>05-muller-medics/</code> and download file <a href="https://newalchemypress.com/gauquelin/gauquelin_docs/5a_muller_medics.txt">5muller_medics.txt</a> in it.
+In the directory specified by <code>1-newalch-raw</code> in <code>config.yml</code>,
+<br>- create a sub-directory called <code>05-muller-medics/</code>
+<br>- download file <a href="https://larzac.info/gauquelin5/1-raw/newalchemypress.com/05-muller-medics/5a_muller-medics-utf8.txt">5a_muller-medics-utf8.txt</a> in it (an UTF-8 version of <code>5a_muller-medics.txt</code>).
 <br>
-<br>The code doesn't run on <code>5a_muller-medics.txt</code> as downloaded from newalchemypress.org. Being unable to handle the character encoding of the file by program, it must be first manually converted to utf8. Here is what I did :
-<ul>
-    <li>Opened <code>5a_muller-medics.txt</code> in Libreoffice writer with encoding DOS/OS2-865/Nordique</li>
-    <li>Then exported as xhtml</li>
-    <li>Opened the xhtml file in Firefox</li>
-    <li>Select all and copy</li>                                
-    <li>Paste in an empty txt file : <code>5a_muller-medics-utf8.txt</code></li>
-    <li>Save</li>
-</ul>
-
-If <code>1-newalch-raw/</code> has the default value of <code>data/1-raw/newalchemypress.org/</code>, then the program will work on <b><code>data/1-raw/newalchemypress.com/05-muller-medics/5a_muller-medics-utf8.txt</code></b> (exact spelling must be respected).
-
+<br>With default value of <code>1-newalch-raw</code> :
+<pre>
+data
+└── 1-raw
+    └── newalchemypress.com
+        └── 05-muller-medics
+            └── 5a_muller-medics-utf8.txt
+</pre>
 
 <!-- ************************************* -->
 <h3><a name="2-2-full-execution">Full execution</a></h3>

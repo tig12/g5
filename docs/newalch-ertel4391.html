@@ -51,7 +51,6 @@ This page deals with the file <a href="https://newalchemypress.com/gauquelin/gau
         Permits to fix missing names of cura A1.
     </li>
 </ul>
-Its integration to Gauquelin5 is limited to A1 name restoration. The rest is draft and preparatory code.
 </div>
 </header>
 
@@ -131,13 +130,14 @@ This file is precious for data restoration because records are associated with t
 
 One very strange feature of this file : many records don't contain birth time. Surprising because among the missing dates (~800) are records published by Gauquelin (LERRCP series), so known by Ertel. As noted by newalchemypress.com, birth places, longitudes and latitudes are not given.
 <br>
-<br>The information extracted from this file can be matched globally to other information sources, but not exactly.
-<br>For example,
+<br>At first impression, records are missing, for example :
 <ul>
     <li>The file contains 4384 records ; 7 records are missing to reach 4391.</li>
     <li>The file contains 553 records from Gauquelin 1955 list (instead of 568).</li>
-    <li>The file contains 190 records from CSICOP (instead of 408).</li>
+    <!-- 
+    <li>The file contains 192 records from CSICOP (instead of 408).</li>
     <li>The file contains 922 records from CFEPP (instead of 1 066).</li>
+    -->
 </ul>
 
 <!--
@@ -159,19 +159,18 @@ One very strange feature of this file : many records don't contain birth time. S
 
 <!-- ************************************* -->
 <h3><a name="2-1-download-raw-file">Download raw file</a></h3>
-In the directory specified by <code>1-newalch-raw</code> in <code>config.yml</code>, create a sub-directory called <code>03-ertel/</code> and download file <a href="https://newalchemypress.com/gauquelin/gauquelin_docs/3a_sports.txt">3a_sports.txt</a> in it.
+In the directory specified by <code>1-newalch-raw</code> in <code>config.yml</code>,
+<br>- create a sub-directory called <code>03-ertel/</code>
+<br>- download file <a href="https://larzac.info/gauquelin5/1-raw/newalchemypress.com/03-ertel/3a_sports-utf8.txt">3a_sports-utf8.txt</a> in it (an UTF-8 version of <code>3a_sports.txt</code>).
 <br>
-<br>The code doesn't run on <code>3a_sports.txt</code> as downloaded from newalchemypress.org. Being unable to handle the character encoding of the file by program, it must be first manually converted to utf8. Here is what I did :
-<ul>
-    <li>Opened <code>3a_sports.txt</code> in Libreoffice writer with encoding DOS/OS2-865/Nordique</li>
-    <li>Then exported as xhtml</li>
-    <li>Opened the xhtml file in Firefox</li>
-    <li>Select all and copy</li>
-    <li>Paste in an empty txt file : <code>3a_sport-utf8.txt</code></li>
-    <li>Save</li>
-</ul>
-
-If <code>1-newalch-raw/</code> has the default value of <code>data/1-raw/newalchemypress.org/</code>, then the program will work on <b><code>data/1-raw/newalchemypress.com/03-ertel/3a_sports-utf8.txt</code></b> (exact spelling must be respected).
+<br>With default value of <code>1-newalch-raw</code> :
+<pre>
+data/
+└── 1-raw
+    └── newalchemypress.com
+        └── 03-ertel
+            └── 3a_sports-utf8.txt
+</pre>
 
 <!-- ************************************* -->
 <h3><a name="2-2-raw2csv">raw2csv</a></h3>
@@ -244,8 +243,8 @@ Possible values for parameter :
   cpara        : Generate 5-cpara/535-cpara.csv
   cpara-full   : Generate 5-cpara/611-cpara-full.csv
   cpara-lowers : Generate 5-cpara/76-cpara-lowers.csv
-  cfepp        : Generate 5-cfepp/190-cfepp.csv
-  csicop       : Generate 5-csicop/925-csicop.csv
+  cfepp        : Generate 5-cfepp/925-cfepp.csv
+  csicop       : Generate 5-csicop/192-csicop.csv
 </pre>
 
 <pre>
@@ -255,8 +254,8 @@ php run-g5.php newalch ertel4391 ertel2skeptics all
 CPARA : 535 records saved - stored in data/5-tmp/cpara/535-cpara.csv
 CPARA full : 611 records saved - stored in data/5-tmp/cpara/611-cpara-full.csv
 CPARA lowers : 76 records saved - stored in data/5-tmp/cpara/76-cpara-lowers.csv
-CSICOP : 190 records saved - stored in data/5-tmp/csicop/190-csicop.csv
-CFEPPP : 922 records saved - stored in data/5-tmp/cfepp/925-cfepp.csv
+CSICOP : 192 records saved - stored in data/5-tmp/csicop/192-csicop.csv
+CFEPPP : 925 records saved - stored in data/5-tmp/cfepp/925-cfepp.csv
 </pre>
 
 <!-- ******************** -->
