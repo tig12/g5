@@ -80,6 +80,7 @@ class addCanvas1 implements Command{
         }
         $outfile = $infile;
         file_put_contents($outfile, $res);
+        // Here the report MUST display 128 ; more => remains doublons
         $report .=  "$n records were marked as canvas 1\n";
         return $report;
     }

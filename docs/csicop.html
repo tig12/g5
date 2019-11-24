@@ -33,8 +33,7 @@ CSICOP 1979
 <div class="subtitle">408 U.S. sportsmen</div>
 </h1>
 <div class="intro">
-This page deals with the (partial) restoration of the CSICOP test (USA 1979). An important information to restore is the "canvasses" : this group was created in 3 steps, called canvasses in litterature.
-
+This page deals with the (partial) restoration of the CSICOP test (USA 1979).
 </div>
 </header>
 
@@ -47,13 +46,13 @@ Informations used to compute this group can be found in several places.
 <ul class="spaced margin-top">
     <li>
         <b>Skeptical Inquier VOL IV NO. 2 WINTER 1979-80, p 60 - 63</b> : in the article "Response to the Gauquelins" (Paul Kurtz, Marvin Zelen, and George Abell), the appendix contains the list of 408 names, with birth date (not time), state, mars sector.
-        <br>This list is available on <a href="https://skepticalinquirer.org/1980/01/response_to_the_gauquelins/">skepticalinquirer.org</a>.
+        <br>This PDF is on <a href="https://skepticalinquirer.org/1980/01/response_to_the_gauquelins/">skepticalinquirer.org/1980/01/response_to_the_gauquelins</a>.
     </li>
     <li>
         <b>Skeptical Inquier VOL IV NO. 2 WINTER 1979-80, p 41</b> : in the article "Star U.S. Sportsmen Display the Mars Effect - A comment on the Kurtz-Zelen-Abell experiment" (Michel and Francoise Gauquelin), appendix I contains the list of 108 sportsmen gathered in canvas 1.
     </li>
     <li>
-        <b>The tenacious Mars Effect, p SE-19 to SE-31</b> permits to understand the link between this group and Gauquelin data published on cura.free.fr.
+        <b>The tenacious Mars Effect, p SE-19 to SE-31</b> permits to understand the 192 records of CSICOP present in Gauquelin D10.
     </li>
 </ul>
 
@@ -61,19 +60,101 @@ Informations used to compute this group can be found in several places.
 <h2>Restoration process</h2>
 The command :
 <pre>php run-g5.php csicop si42 all</pre>
-generates file <code>9-output/history/1979-csicop/408SPO.csv</code>.
+generates file <code>9-output/history/1979-csicop/csicop-408SPO.csv</code>.
 <br>
 <br>This is equivalent to 
 <pre>
 php run-g5.php csicop si42 raw2csv
 php run-g5.php csicop si42 addCanvas1
 php run-g5.php csicop si42 addErtel
+php run-g5.php csicop si42 addD10
 php run-g5.php csicop si42 export
 </pre>
 
 <!-- ************************************* -->
 <h3>raw2csv</h3>
-The PDF (SI42 p 60 - 63) was converted to a text file and formatted 
+
+<pre>php run-g5.php csicop si42 raw2csv</pre>
+
+INPUT :
+<ul>
+    <li>
+        <a href="https://larzac.info/gauquelin5/1-raw/skepticalinquirer.org/si42/si42-p60-63.txt">data/1-raw/skepticalinquirer.org/si42/si42-p60-63.txt</a>
+        <br>(408 US sportsmen - transcription of the PDF, p 60 - 63)
+    </li>
+</ul>
+
+OUTPUT :
+<ul>
+    <li>
+        data/5-tmp/csicop/408-csicop-si42.csv
+        <br>(all records)
+    </li>
+    <li>
+        data/5-tmp/csicop/181-csicop-si42.csv
+        <br>(records marked "SC" = Sport Champion, cf KZA article)
+    </li>
+</ul>
+
+Generated files contain fields :
+<br>FNAME    GNAME   DATE   C2  MA12    SC
+
+
+<!-- ************************************* -->
+<h3>addCanvas1</h3>
+<ul>
+    <li>
+        Adds field CANVAS to 5-csicop/408-csicop-si42.csv                      
+    </li>
+    <li>
+        Fills CANVAS with value "1" for 128 records
+    </li>
+</ul>
+
+<pre>php run-g5.php csicop si42 addCanvas1</pre>
+
+INPUT :
+<ul>
+    <li>
+        data/5-tmp/csicop/408-csicop-si42.csv
+    </li>
+    <li>
+        <a href="https://larzac.info/gauquelin5/1-raw/skepticalinquirer.org/si42/si42-p41.txt">data/1-raw/skepticalinquirer.org/si42/si42-p41.txt</a>
+        <br>(128 US sportsmen - transcription of the PDF, p 41)
+    </li>
+</ul>
+
+<!-- ************************************* -->
+<h3>addErtel</h3>
+<pre>php run-g5.php csicop si42 addErtel</pre>
+INPUT :
+<ul>
+    <li>
+        data/5-tmp/csicop/408-csicop-si42.csv
+    </li>
+    <li>
+        <a href="https://larzac.info/gauquelin5/9-output/history/1979-csicop/192-csicop-ertel.csv">data/9-output/history/1979-csicop/192-csicop-ertel.csv</a>
+        <br>192 common records between 408 CSICOP and Gauquelin D10 ; from Ertel4391.
+    </li>
+</ul>
+
+In Ertel4391, 2 records have field <code>CSINR = 0</code>.
+
+<table class="wikitable margin">
+    <tr><th>Ertel and D10</th><th>CSICOP</th></tr>
+    <tr>
+        <td>D10-726 Kono Tom (Tomio) 1930-07-27</td>
+        <td>Kotz J. 1919-03-27</td>
+    </tr>
+    <tr>
+        <td>D10-894 Miller John L. 1947-04-29</td>
+        <td></td>
+    </tr>
+</table>
+
+<!-- ************************************* -->
+<h3>addD10</h3>
+<pre>php run-g5.php csicop si42 addD10</pre>
 
 <!--
 Contains the list of sportsmen contained in
@@ -194,13 +275,13 @@ study.
     <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">g5 code</a></li>
     <li><a href="organisation.html">Organisation</a></li>
     <li><a href="usage.html">Program usage</a></li>
+    <li><a href="output-format.html">Output format</a></li>
     
     <li>
         <span class="big1">1 - Restore</span>
         <ul>
-            <li><a href="output-format.html">Output format</a></li>
             
-            <li><a href="cura.html">Cura data</a></li>
+            <li><a href="cura.html">cura.free.fr</a></li>
             
             <li>
                 <ul>
@@ -213,6 +294,15 @@ study.
             </li>
             
             <li>
+                <a href="newalch.html">newalchemypress.com</a>
+                <ul>
+                    <li><a href="newalch-ertel4391.html">Ertel 4391 SPO</a></li>
+                    <li><a href="newalch-muller1083.html">Müller 1083 MED</a></li>
+                </ul>
+            </li>
+            
+            
+            <li>
                 <a href="g55.html">Gauquelin 1955</a>
                 <ul>
                     <li><a href="g55-restore.html">Restoration</a></li>
@@ -221,20 +311,7 @@ study.
             </li>
             
             <li>
-                <a href="newalch.html">Newalchemypress data</a>
-                <ul>
-                    <li><a href="newalch-ertel4391.html">Ertel 4391</a></li>
-                    <li><a href="newalch-muller1083.html">Müller 1083</a></li>
-                </ul>
-            </li>
-            
-            <li><a href="time.html">Expressing time</a></li>
-            
-            <li>
-                Steps
-                <ul>
-                    <li><a href="tweak2csv.html">tweak2csv</a></li>
-                </ul>
+                <a href="csicop.html">CSICOP 1979</a>
             </li>
             
         </ul>
@@ -257,6 +334,8 @@ study.
     
     
     <li><a href="code-details.html">Code details</a></li>
+    <li><a href="time.html">Expressing time</a></li>
+    <li><a href="tweak2csv.html">tweak2csv</a></li>
     
     <!-- <li><a href="next.html">Next</a></li> -->
     

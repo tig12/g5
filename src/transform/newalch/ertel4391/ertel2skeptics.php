@@ -24,11 +24,11 @@ class ertel2skeptics implements Command {
     **/
     const POSSIBLE_PARAMS = [
         'all' => 'Generate all skeptic files',
-        'cpara' => 'Generate 5-cpara/535-cpara.csv',
-        'cpara-full' => 'Generate 5-cpara/611-cpara-full.csv',
-        'cpara-lowers' => 'Generate 5-cpara/76-cpara-lowers.csv',
-        'cfepp' => 'Generate 5-cfepp/925-cfepp.csv',
-        'csicop' => 'Generate 5-csicop/192-csicop.csv',
+        'cpara' => 'Generate 5-cpara/535-cpara-ertel.csv',
+        'cpara-full' => 'Generate 5-cpara/611-cpara-full-ertel.csv',
+        'cpara-lowers' => 'Generate 5-cpara/76-cpara-lowers-ertel.csv',
+        'cfepp' => 'Generate 5-cfepp/925-cfepp-ertel.csv',
+        'csicop' => 'Generate 5-csicop/192-csicop-ertel.csv',
     ];
     
     /** 
@@ -106,31 +106,31 @@ class ertel2skeptics implements Command {
         // output
         if($docp){
             $res = self::array2csv($cp);
-            $out = Config::$data['dirs']['5-cpara'] . DS . '535-cpara.csv';
+            $out = Config::$data['dirs']['5-cpara'] . DS . '535-cpara-ertel.csv';
             file_put_contents($out, $res);
             $report .= "CPARA : " . count($cp) . " records saved - stored in $out\n";
         }
         if($docpfull){
             $res = self::array2csv($cpfull);
-            $out = Config::$data['dirs']['5-cpara'] . DS . '611-cpara-full.csv';
+            $out = Config::$data['dirs']['5-cpara'] . DS . '611-cpara-full-ertel.csv';
             file_put_contents($out, $res);
             $report .= "CPARA full : " . count($cpfull) . " records saved - stored in $out\n";
         }
         if($docplowers){
             $res = self::array2csv($cplowers);
-            $out = Config::$data['dirs']['5-cpara'] . DS . '76-cpara-lowers.csv';
+            $out = Config::$data['dirs']['5-cpara'] . DS . '76-cpara-lowers-ertel.csv';
             file_put_contents($out, $res);
             $report .= "CPARA lowers : " . count($cplowers) . " records saved - stored in $out\n";
         }
         if($docsicop){
             $res = self::array2csv($csicop);
-            $out = Config::$data['dirs']['5-csicop'] . DS . '192-csicop.csv';
+            $out = Config::$data['dirs']['5-csicop'] . DS . '192-csicop-ertel.csv';
             file_put_contents($out, $res);
             $report .= "CSICOP : " . count($csicop) . " records saved - stored in $out\n";
         }
         if($docfepp){
             $res = self::array2csv($cfepp);
-            $out = Config::$data['dirs']['5-cfepp'] . DS . '925-cfepp.csv';
+            $out = Config::$data['dirs']['5-cfepp'] . DS . '925-cfepp-ertel.csv';
             file_put_contents($out, $res);
             $report .= "CFEPPP : " . count($cfepp) . " records saved - stored in $out\n";
         }

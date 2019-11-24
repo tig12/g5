@@ -2,9 +2,9 @@
 /********************************************************************************
     
     @license    GPL
-    @history    2019-10-23 23:54:51+02:00, Thierry Graff : Creation
+    @history    2019-11-24 02:52:44+01:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\transform\newalch\ertel4391;
+namespace g5\transform\csicop\si42;
 
 use g5\G5;
 use g5\Config;
@@ -54,23 +54,16 @@ class export implements Command {
     private static function export_dl(){
         $report = '';
         $gen = [
-            Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE =>
-            Config::$data['dirs']['9-newalch'] . DS . Ertel4391::TMP_CSV_FILE,
             
-            Config::$data['dirs']['5-cpara'] . DS . '535-cpara-ertel.csv' =>
-            Config::$data['dirs']['9-cpara'] . DS . '535-cpara-ertel.csv',
+            Config::$data['dirs']['5-csicop'] . DS . '181-csicop-si42.csv'=>
+            Config::$data['dirs']['9-csicop'] . DS . '181-csicop-si42.csv',
             
-            Config::$data['dirs']['5-cpara'] . DS . '611-cpara-full-ertel.csv'=>
-            Config::$data['dirs']['9-cpara'] . DS . '611-cpara-full-ertel.csv',
+            Config::$data['dirs']['5-csicop'] . DS . '408-csicop-si42.csv'=>
+            Config::$data['dirs']['9-csicop'] . DS . '408-csicop-si42.csv',
             
-            Config::$data['dirs']['5-cpara'] . DS . '76-cpara-lowers-ertel.csv'=>
-            Config::$data['dirs']['9-cpara'] . DS . '76-cpara-lowers-ertel.csv',
+            //Config::$data['dirs']['5-csicop'] . DS . 'CSICOP-408.csv'=>
+            //Config::$data['dirs']['9-csicop'] . DS . 'CSICOP-408.csv',
             
-            Config::$data['dirs']['5-csicop'] . DS . '192-csicop-ertel.csv'=>
-            Config::$data['dirs']['9-csicop'] . DS . '192-csicop-ertel.csv',
-            
-            Config::$data['dirs']['5-cfepp'] . DS . '925-cfepp-ertel.csv'=>
-            Config::$data['dirs']['9-cfepp'] . DS . '925-cfepp-ertel.csv',
         ];
         foreach($gen as $in => $out){
             copy($in, $out);

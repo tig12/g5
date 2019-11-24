@@ -7,7 +7,7 @@
 
 - G55::prepareCuraMatch not designed correctly
 
-- rename raw2csv to export
+- Harmonize all exports, use transform/csicop/si42/export.php code
 
 - tweak2csv : include nb of modified records in report
 

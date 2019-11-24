@@ -14,7 +14,7 @@ namespace g5\transform\cura\all;
 use g5\Config;
 use g5\patterns\Command;
 
-class csv2dl implements Command{
+class export implements Command{
     
     // *****************************************
     // Implementation of Command

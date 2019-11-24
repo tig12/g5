@@ -77,8 +77,11 @@ class CuraRouter implements Router{
         }
         
         // csv2dl is available for all datafiles, and implemented in subpackage all.
-        $res[] = 'csv2dl';
-        $res[] = 'tweak2csv';
+        if($datafile != 'all'){
+            $res[] = 'export';
+            $res[] = 'tweak2csv';
+            sort($res);
+        }
         return $res;
     }
     
