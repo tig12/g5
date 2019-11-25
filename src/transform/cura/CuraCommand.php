@@ -42,9 +42,9 @@ class CuraCommand implements Command{
         }
         
         foreach($datafiles as $dtfile){
-            // csv2dl is available for all datafiles, and implemented in subpackage all.
-            if($command == 'csv2dl'){
-                $class = "g5\\transform\\cura\\all\\csv2dl";
+            // export is available for all datafiles, and implemented in subpackage all.
+            if($command == 'export'){
+                $class = "g5\\transform\\cura\\all\\export";
             }
             else if($command == 'tweak2csv'){
                 $class = "g5\\transform\\cura\\all\\tweak2csv";

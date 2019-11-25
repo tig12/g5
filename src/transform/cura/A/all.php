@@ -10,7 +10,7 @@ namespace g5\transform\cura\A;
 use g5\Config;
 use g5\patterns\Command;
 use g5\transform\cura\all\tweak2csv;
-use g5\transform\cura\all\csv2dl;
+use g5\transform\cura\all\export;
 use g5\transform\g55\all\edited2cura;
 use g5\transform\newalch\ertel4391\fixA1;
 use g5\transform\newalch\muller1083\fixCura;
@@ -72,8 +72,8 @@ class all implements Command{
         $params_addGeo[] = 'small';
         echo addGeo::execute($params_addGeo);
         
-        echo "\n=== php run-g5.php cura $datafile csv2dl ===\n";
-        echo csv2dl::execute($params);
+        echo "\n=== php run-g5.php cura $datafile export ===\n";
+        echo export::execute($params);
         
         return '';
     }

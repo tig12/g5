@@ -19,7 +19,7 @@ class export implements Command{
     // *****************************************
     // Implementation of Command
     /** 
-        Called by : php run-g5.php cura <datafile> csv2dl
+        Called by : php run-g5.php cura <datafile> export
         @param $params array containing two strings :
                        - the datafile to process (like "A1").
                        - The name of this command (useless here)

@@ -9,7 +9,7 @@ namespace g5\transform\cura\D10;
 
 use g5\Config;
 use g5\patterns\Command;
-use g5\transform\cura\all\csv2dl;
+use g5\transform\cura\all\export;
 
 class all implements Command{
     
@@ -29,8 +29,8 @@ class all implements Command{
         echo "\n=== php run-g5.php cura D10 raw2csv ===\n";
         echo raw2csv::execute($params);
         
-        echo "\n=== php run-g5.php cura D10 csv2dl ===\n";
-        echo csv2dl::execute($params);
+        echo "\n=== php run-g5.php cura D10 export ===\n";
+        echo export::execute($params);
         
         return '';
     }

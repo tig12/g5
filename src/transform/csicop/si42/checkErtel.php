@@ -9,6 +9,7 @@ namespace g5\transform\csicop\si42;
 use g5\G5;
 use g5\patterns\Command;
 use g5\transform\newalch\ertel4391\Ertel4391;
+use g5\transform\cura\Cura;
 use tiglib\arrays\csvAssociative;
 
 class checkErtel implements Command{
@@ -56,62 +57,44 @@ class checkErtel implements Command{
         $ertel = Ertel4391::loadTmpFile();
         $si42file = SI42::tmp_filename();
         $si42 = csvAssociative::compute($si42file);
+        $d10 = Cura::loadTmpCsv_num('D10');
         
         $report =  "Check dates Ertel4391 / $si42file\n";
         
         $nDates = 0;
         foreach($ertel as $rowE){
+
             $CSINR = $rowE['CSINR'];
             if($CSINR == '' || $CSINR == '0'){
                 continue;
             }
+            
             $GNUM = $rowE['GNUM'];
-            $NR = $rowE['NR'];
+            $NUM = substr($GNUM, 4); // remove 'D10-'
+            $i42 = $CSINR - 1;
+            $rowS = $si42[$i42];
+            $rowD10 = $d10[$NUM];
+            
+            $NR    = $rowE['NR'];
             $DATEE = $rowE['DATE'];
             $CSINR = $rowE['CSINR'];
             $nameE = $rowE['FNAME'] . ' ' . $rowE['GNAME'];
             
-            $rowS = $si42[$CSINR - 1];
             $nameS = $rowS['FNAME'] . ' ' . $rowS['GNAME'];
             $DATES = $rowS['DATE'];
             
-            if($DATEE != $DATES){
-                $nDates++;
-                $report .= "\n$DATEE $nameE $CSINR\n$DATES $nameS\n";
-            }
-        }
-        $report .= "$nDates differences\n";
-        return $report;
-    }
-    
-    // ******************************************************
-    private static function check_missing(){
-        $ertel = Ertel4391::loadTmpFile();
-        $si42file = SI42::tmp_filename();
-        $si42 = csvAssociative::compute($si42file);
-        
-        $report =  "Check missing Ertel4391 / $si42file\n";
-        
-        $nMiss = 0;
-        foreach($ertel as $rowE){
-            $CSINR = $rowE['CSINR'];
-            if($CSINR == '' || $CSINR == '0'){
-                continue;
-            }
-            $GNUM = $rowE['GNUM'];
-            $NR = $rowE['NR'];
-            $DATEE = $rowE['DATE'];
-            $CSINR = $rowE['CSINR'];
-            $nameE = $rowE['FNAME'] . ' ' . $rowE['GNAME'];
-            
-            $rowS = $si42[$CSINR - 1];
-            $nameS = $rowS['FNAME'] . ' ' . $rowS['GNAME'];
-            $DATES = $rowS['DATE'];
+            $nameD10 = $rowD10['FNAME'] . ' ' . $rowD10['GNAME'];
+            $DATED10 = $rowD10['DATE'];
             
             if($DATEE != $DATES){
                 $nDates++;
-                $report .= "\n$DATEE $nameE $CSINR\n$DATES $nameS\n";
+                $report .= "\n"
+                         . "si42  $DATES $nameS i42 = $i42\n"
+                         . "ertel $DATEE $nameE CSINR = $CSINR\n"
+                         . "D10   $DATED10 $nameD10 NUM = $NUM\n";
             }
+            
+//echo "\n<pre>"; print_r($rowE); echo "</pre>\n"; exit;
         }
         $report .= "$nDates differences\n";
         return $report;

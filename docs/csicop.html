@@ -126,6 +126,11 @@ INPUT :
 
 <!-- ************************************* -->
 <h3>addErtel</h3>
+
+Adds to <code>408-csicop-si42.csv</code> Ertel 4391 informations.
+
+<br>In Ertel 4391, field <code>CSINR</code> correspond to the position of the record in file <code>408-csicop-si42.csv</code>.
+
 <pre>php run-g5.php csicop si42 addErtel</pre>
 INPUT :
 <ul>
@@ -134,23 +139,109 @@ INPUT :
     </li>
     <li>
         <a href="https://larzac.info/gauquelin5/9-output/history/1979-csicop/192-csicop-ertel.csv">data/9-output/history/1979-csicop/192-csicop-ertel.csv</a>
-        <br>192 common records between 408 CSICOP and Gauquelin D10 ; from Ertel4391.
+        <br>from Ertel4391, 192 common records between 408 CSICOP and Gauquelin D10
     </li>
 </ul>
+<br>
+RESULTS :
 
-In Ertel4391, 2 records have field <code>CSINR = 0</code>.
+<ul class="spaced bordered">
 
-<table class="wikitable margin">
-    <tr><th>Ertel and D10</th><th>CSICOP</th></tr>
-    <tr>
-        <td>D10-726 Kono Tom (Tomio) 1930-07-27</td>
-        <td>Kotz J. 1919-03-27</td>
-    </tr>
-    <tr>
-        <td>D10-894 Miller John L. 1947-04-29</td>
-        <td></td>
-    </tr>
-</table>
+    <li>
+        Adds new fields to 190 rows of <code>408-csicop-si42.csv</code>
+    </li>
+    
+    <li>
+        2 records miss to reach 192 records from D10.
+        <br>In Ertel 4391, 2 rows have field <code>CSINR = 0</code>.                                                                                                
+        <ul>
+            <li>D10-726 <b>Kono Tom (Tomio)</b> 1930-07-27</li>
+            <li>D10-894 <b>Miller John L.</b> 1947-04-29</li>
+        </ul>
+        These records correspond to D10, but do not match to any SCICOP record.
+        <br>Needs explanation.
+    </li>
+    
+    <li>
+        16 Ertel dates differ from Skeptical Inquier dates.
+        <br>This can be checked with command
+        <pre>php run-g5.php csicop si42 checkErtel date</pre>
+        
+        <details>
+            <summary>Date details</summary>
+            <pre>
+si42  1933-12-09 Campbell M. i42 = 50
+ertel 1933-09-12 Campbell Milton CSINR = 51
+D10   1933-09-12 15:22-04:00 Campbell Milton NUM = 196
+
+si42  1948-10-28 Cowens D. i42 = 71
+ertel 1948-10-25 Cowens David W. CSINR = 72
+D10   1944-09-15 08:50-05:00 Cowen Ronald NUM = 271
+
+si42  1947-01-12 Dempsey T. i42 = 89
+ertel 1947-01-21 Dempsey Tom CSINR = 90
+D10   1956-04-21 06:57-08:00 Demont Richard NUM = 324
+
+si42  1952-02-22 Johnson K. i42 = 180
+ertel 1913-08-21 Johnson Cornelius CSINR = 181
+D10   1913-08-21 02:20-08:00 Johnson Cornelius NUM = 661
+
+si42  1935-06-24 Kramer R. i42 = 211
+ertel 1921-08-01 Kramer John A. CSINR = 212
+D10   1921-08-01 01:45-08:00 Kramer John NUM = 731
+
+si42  1930-12-11 O'Brien J. i42 = 265
+ertel 1940-09-15 Olsen Merlin Jay CSINR = 266
+D10   1909-06-09 05:00-06:00 Oelman Robert NUM = 969
+
+si42  1948-04-29 Otis J. i42 = 268
+ertel 1938-01-05 Otto James Edwin CSINR = 269
+D10   1938-01-05 20:26-06:00 Otto James NUM = 978
+
+si42  1938-01-05 Otto J i42 = 269
+ertel 1943-05-02 Owen Nancy CSINR = 270
+D10   1915-10-30 09:15-06:00 Owen Nancy NUM = 981
+
+si42  1943-05-02 Owen N. i42 = 270
+ertel 1945-08-07 Page Alan Cedric CSINR = 271
+D10   1945-08-07 20:23-04:00 Page Alan NUM = 986
+
+si42  1922-07-04 Pollard J i42 = 282
+ertel 1922-07-09 Pollard James CSINR = 283
+D10   1922-07-09 22:50-08:00 Pollard James NUM = 1039
+
+si42  1942-04-14 Rose P. i42 = 298
+ertel 1942-04-12 Rose Peter Ed. CSINR = 299
+D10      NUM = 1098
+
+si42  1935-12-29 Thurston F. i42 = 359
+ertel 1933-12-29 Thurston Frederick C. CSINR = 360
+D10   1933-12-29 15:00-06:00 Thurston Frederick NUM = 1278
+
+si42  1945-03-05 Volk R. i42 = 372
+ertel 1945-03-15 Volk Richard R. CSINR = 373
+D10   1945-03-15 01:24-05:00 Volk Richard NUM = 1309
+
+si42  1918-08-30 Williams T. i42 = 395
+ertel 1938-06-15 Williams Billy Leo CSINR = 396
+D10   1936-11-04 00:21-05:00 Williams Charles NUM = 1360
+
+si42  1938-06-15 Williams B. i42 = 393
+ertel 1953-08-23 Williams Randy CSINR = 394
+D10   1953-08-23 03:29-07:00 Williams Randy NUM = 1366
+
+si42  1953-08-23 Williams R. i42 = 394
+ertel 1918-08-30 Williams Theodore Samuel CSINR = 395
+D10   1918-08-30 12:20-07:00 Williams Theodore NUM = 1370
+16 differences
+            </pre>
+        </details>
+        Corrections of the 3 last dates were introduced in <code>AddErtel</code> code.
+    </li>
+    
+    <li>Makes appear 1 wrong GNR in Ertel 4391 : Dempsey Tom is not D10-324 but D10-325</li>
+</ul>
+
 
 <!-- ************************************* -->
 <h3>addD10</h3>

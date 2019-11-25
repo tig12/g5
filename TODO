@@ -1,4 +1,6 @@
 
+- D10 raw2csv - don't skip record 1098 Rose Peter - see if following steps are affected.
+
 - handle all cases of unexisting raw files (cura)
 
 - Refactor g55 commands : "all" is useless
