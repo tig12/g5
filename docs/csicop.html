@@ -34,6 +34,8 @@ CSICOP 1979
 </h1>
 <div class="intro">
 This page deals with the (partial) restoration of the CSICOP test (USA 1979).
+<br>There are 3 sub-groups to restore, corresponding to the 3 "canvasses" gathered to reach 408 persons (128 + 198 + 82).
+<br>Work in progress ; <a href="https://larzac.info/gauquelin5/9-output/history/1979-csicop/">generated data</a> are still approximative.
 </div>
 </header>
 
@@ -56,6 +58,12 @@ Informations used to compute this group can be found in several places.
     </li>
 </ul>
 
+
+<!-- ************************************* -->
+<h3>Missing information</h3>
+It is probably possible to compute more information from Ertel 4391, but more precise data source is needed for a satisfying reconstruction (distinct canvasses with birth times and places).
+
+
 <!-- ********************************************************************************* -->
 <h2>Restoration process</h2>
 The command :
@@ -67,8 +75,8 @@ generates file <code>9-output/history/1979-csicop/csicop-408SPO.csv</code>.
 php run-g5.php csicop si42 raw2csv
 php run-g5.php csicop si42 addCanvas1
 php run-g5.php csicop si42 addErtel
-php run-g5.php csicop si42 addD10
-php run-g5.php csicop si42 export
+# php run-g5.php csicop si42 addD10
+# php run-g5.php csicop si42 export
 </pre>
 
 <!-- ************************************* -->
@@ -139,7 +147,7 @@ INPUT :
     </li>
     <li>
         <a href="https://larzac.info/gauquelin5/9-output/history/1979-csicop/192-csicop-ertel.csv">data/9-output/history/1979-csicop/192-csicop-ertel.csv</a>
-        <br>from Ertel4391, 192 common records between 408 CSICOP and Gauquelin D10
+        <br>(from Ertel4391, 192 common records between 408 CSICOP and Gauquelin D10)
     </li>
 </ul>
 <br>
@@ -239,7 +247,7 @@ D10   1918-08-30 12:20-07:00 Williams Theodore NUM = 1370
         Corrections of the 3 last dates were introduced in <code>AddErtel</code> code.
     </li>
     
-    <li>Makes appear 1 wrong GNR in Ertel 4391 : Dempsey Tom is not D10-324 but D10-325</li>
+    <li>Makes appear 1 wrong GNR in Ertel 4391 : <b>Dempsey Tom</b> is not D10-324 but D10-325</li>
 </ul>
 
 

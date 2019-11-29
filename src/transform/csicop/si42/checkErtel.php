@@ -71,7 +71,18 @@ class checkErtel implements Command{
             
             $GNUM = $rowE['GNUM'];
             $NUM = substr($GNUM, 4); // remove 'D10-'
-            $i42 = $CSINR - 1;
+            if($CSINR == '394'){
+                $i42 = 394; // Williams R.
+            }
+            else if($CSINR == '395'){
+                $i42 = 395; // Williams T.
+            }
+            else if($CSINR == '396'){
+                $i42 = 393; // Williams B.
+            }
+            else{
+                $i42 = $CSINR - 1;
+            }
             $rowS = $si42[$i42];
             $rowD10 = $d10[$NUM];
             
@@ -84,7 +95,7 @@ class checkErtel implements Command{
             $DATES = $rowS['DATE'];
             
             $nameD10 = $rowD10['FNAME'] . ' ' . $rowD10['GNAME'];
-            $DATED10 = $rowD10['DATE'];
+            $DATED10 = substr($rowD10['DATE'], 0, 10);
             
             if($DATEE != $DATES){
                 $nDates++;
