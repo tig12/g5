@@ -1,0 +1,91 @@
+
+#######################
+#Female scientists with most number of sitelinks (but not English Wikipedia)
+#added before 2016-10
+
+#Female scientists with most number of sitelinks (but not English Wikipedia)
+PREFIX schema: <http://schema.org/>
+
+SELECT ?item ?itemLabel (COUNT(DISTINCT ?sitelink) AS ?linkcount) WHERE {
+    ?item wdt:P31 wd:Q5 .
+    ?item wdt:P106 wd:Q170790 .
+    ?item wdt:P19 ?place.
+    ?sitelink schema:about ?item .
+  FILTER NOT EXISTS {
+    ?article schema:about ?item .
+    ?article schema:inLanguage "en" .
+    ?article schema:isPartOf <https://en.wikipedia.org/>
+  }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en,de,es,ar,fr" }
+}
+GROUP BY ?item ?itemLabel
+ORDER BY DESC(?linkcount)
+
+
+
+
+
+#######################
+List of mathematicians
+
+SELECT ?item ?itemLabel ?bdate ?placename ?country ?coord
+WHERE
+{
+  BIND(wd:Q142 AS ?country)
+  ?item wdt:P31 wd:Q5 .
+  ?item wdt:P106 wd:Q170790 .   # mathematician
+#  ?item wdt:P106 wd:Q11063 .    # astronomer
+#  ?item wdt:P106 wd:Q169470 .   # physicist
+
+  ?item wdt:P569 ?bdate.
+  ?item wdt:P19 ?place.
+  ?place wdt:P625 ?coord.
+  ?place wdt:P1448 ?placename.
+  ?place wdt:P17 ?country.
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en,de,es,ar,fr" }
+}
+
+#######################
+# mathematicians by sitelink - not working
+
+SELECT ?item ?itemLabel ?bdate ?placename ?country ?coord (COUNT(DISTINCT ?sitelink) AS ?linkcount) WHERE {
+  ?item wdt:P31 wd:Q5 .
+  ?item wdt:P106 wd:Q170790 .
+  ?item wdt:P19 ?place.
+  ?item wdt:P569 ?bdate.
+  ?place wdt:P625 ?coord.
+  ?place wdt:P1448 ?placename.
+  ?place wdt:P17 ?country.
+  ?sitelink schema:about ?item .
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en,de,es,ar,fr" }
+}
+GROUP BY ?item ?itemLabel
+ORDER BY DESC(?linkcount)
+
+#######################
+# US presidents and spouse
+
+SELECT ?p ?pLabel ?p_bdate ?w ?wLabel ?w_bdate WHERE {
+  BIND(wd:Q30 AS ?country)
+  ?country (p:P6/ps:P6) ?p.
+  ?p wdt:P569 ?p_bdate.
+  ?p wdt:P26 ?w.
+  ?w wdt:P569 ?w_bdate.
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+
+
+#######################
+# Nobel Prize winners
+
+SELECT DISTINCT ?personLabel ?bdate ?placename ?country ?coord WHERE {
+  ?person wdt:P166/wdt:P279* wd:Q7191 .
+  ?person wdt:P569 ?bdate.
+  ?person wdt:P19 ?place.
+  ?place wdt:P625 ?coord.
+  ?place wdt:P1448 ?placename.
+  ?place wdt:P17 ?country.                  
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "en" .
+  }
+}
