@@ -29,7 +29,10 @@
 
 <header>
 <h1>Output format</h1>
-<div class="intro"></div>
+<div class="intro">
+This page describes the format of intermediate files stored in <code>5-tmp/</code> (csv files).
+<br>This format is compatible with <a href="newdata.html">format used for <code>9-output/new</code></a> (yaml files).
+</div>
 </header>
 
 <article>
@@ -49,35 +52,16 @@
     </ul>
 </nav>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Here are the field names used in files of <code>data/5-tmp/</code>
 <br>In the csv files, the first line contains field names ; other lines contain data.
 <br>The field separator used in csv file is <code>;</code> (semicolon).
 <br>Character encoding is UTF-8.
 
 <!-- ********************************************************************************* -->
-<h2><a name="csv-fields">CSV fields</a></h2>
+<h2><a name="csv-fields">Common fields</a></h2>
 
-Some csv files contain fields that are not listed here, in this case, these fields are documented in the README files accompanying the generated files.
+Some csv files contain fields that are not listed here
+<br>In this case, these fields are documented in the README files accompanying the generated files.
 
 <table class="wikitable margin">
 
@@ -86,13 +70,44 @@ Some csv files contain fields that are not listed here, in this case, these fiel
         <th>Comments</th>
     </tr>
     
+    <!-- ************************************* -->
+    <tr><td colspan="2"><div class="big3 bold padding05">Ids</div></td></tr>
+    
     <tr>
-        <td>NUM</td>
+        <td>GQID</td>
         <td>
-            <b>Unique identifier</b> of a record in a given context.
-            <br>Corresponds to NUM in cura.free.fr files.
+            <b>Gauquelin id</b>
+            <br>This id looks like <code>A2-721</code> ; built using Cura file name and field <b>NUM</b> of <a href="cura.html">cura.free.fr files</a>.
+            <br>Corresponds to fields <b>QUEL</b> and <b>GNR</b> of <a href="newalch-ertel4391.html">Ertel 4391</a> raw file.
         </td>
     </tr>
+    
+    <tr>
+        <td>ERID</td>
+        <td>
+            <b>Ertel id</b>
+            <br>Corresponds to field <b>NR</b> of <a href="newalch-ertel4391.html">file Ertel 4391</a>.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>MUID</td>
+        <td>
+            <b>Müller id</b>
+            <br>Corresponds to field <b>NR</b> of <a href="newalch-muller1083.html">file Müller 1083</a>.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>CSID</td>
+        <td>
+            <b>CSICOP id</b>
+            <br>Corresponds to field <b>CSINR</b> of <a href="newalch-ertel4391.html">file Ertel 4391</a>.
+        </td>
+    </tr>
+    
+    <!-- ************************************* -->
+    <tr><td colspan="2"><div class="big3 bold padding05">Names</div></td></tr>
     
     <tr>
         <td>FNAME</td>
@@ -108,97 +123,45 @@ Some csv files contain fields that are not listed here, in this case, these fiel
         </td>
     </tr>
     
-    <tr>
-        <td>G</td>
-        <td>
-            <b>Gender</b>
-            <br><code>F</code> or <code>M</code> in general.
-            <br>Currently not handled by the program.
-        </td>
-    </tr>
-    
-    <tr>
-        <td>OCCU</td>
-        <td>
-            <b>Occupation code</b>
-            <br>Corresponds to field <code>PRO</code> in cura files.
-            <br>When a person has more than one occupation code, the codes are separated by "+".
-            Ex : PO+WR means that the person is identified as a politician and a writer.
-            <br>See below for a full list of codes.
-        </td>
-    </tr>
-    
-    <tr>
-        <td>NOTES</td>
-        <td>
-            <b>Free notes</b>
-            <br>Only when useful.
-            In files of serie A, E1, E3
-
-        </td>
-    </tr>
-    
     <!-- ************************************* -->
-    <tr>
-        <td colspan="2">
-            <div class="big3 bold padding">Dates and places</div>
-            If a file contains only birth data, <code>DATE</code> and <code>PLACE</code> are related to birth.
-            <br>If a file contains birth and death data,
-            <ul class="simple">
-                <li><code>BDATE</code> and <code>BPLACE</code> are related to birth.</li>
-                <li><code>DDATE</code> and <code>DPLACE</code> are related to death.</li>
-            </ul>
-            The program currently only deals with birth information and uses only <code>DATE</code> and <code>PLACE</code>.
-        </td>
-    </tr>
+    <tr><td colspan="2"><div class="big3 bold padding05">Dates</div></td></tr>
     
     <tr>
         <td>DATE</td>
         <td>
-            Birth date ; ISO 8601 of this form : <code>YYYY-MM-DD HH:MM:SSsHH:MM</code> (timezone offset is included ; s means "sign" + or -).
-            <br>Example : <code>2017-05-03 09:30:00+02:00</code>
-            <br>Time is <code>09:30:00</code> and timezone offset is +2 hours.
-            <br>For records with no birth time, format is <code>YYYY-MM-DD</code>
+            <b>Legal date</b> = date and time as written in the birth certificate.
+            <br>Format ISO 8601 of this form : <code>YYYY-MM-DD HH:MM</code>.
+            <br>Example : <code>2017-05-03 09:30</code>.
+            <br>Timezone offset is not included ; hour precision is minute (seconds omited).
         </td>
     </tr>
+    
     <tr>
-        <td>DATE_C</td>
+        <td>TZ</td>
         <td>
-            Corrected date : if this column is not empty, it means that legal time and timezone offset could be restored.
-            <br>The need for a restoration of dates is detailed in page <a href="time.html">Expressing time</a>.
-            <br>Format of this column is <code>YYYY-MM-DD HH:MMsHH:MM:SS</code>.
-            <br>It differs from column DATE : time does not contain seconds information, but timezone offset contains seconds.
+            <b>Timezone offset</b>.
+            <br>Format <code>sHH:MM:SS</code>, where s is the sign (+ or -).
+            <br>Examples : <code>+01:00:00</code> ; <code>-08:30:00</code>.
+            <br>Negative for places west of Greenwhich, positive for places east.
         </td>
     </tr>
+    
+    <tr>
+        <td>DATE_UT</td>
+        <td>
+            Date and time converted to universal time.
+            <br>This field is in theory useless, as it can be computed from <code>DATE</code> and <code>TZ</code>.
+            <br>Its presence is necessary because Cura files are sometimes expressed in UT. This problem is detailed in page <a href="time.html">Expressing time</a>.
+        </td>
+    </tr>
+    
+    <!-- ************************************* -->
+    <tr><td colspan="2"><div class="big3 bold padding05">Geographical information</div></td></tr>
     
     <tr>
         <td>PLACE</td>
         <td>
             Birth place name.
-        </td>
-    </tr>
-    
-    <tr>
-        <td>BDATE</td>
-        <td>Birth date ; same format as DATE</td>
-    </tr>
-    <tr>
-        <td>BPLACE</td>
-        <td>Birth place name.</td>
-    </tr>
-    <tr>
-        <td>DDATE</td>
-        <td>Death date ; same format as DATE</td>
-    </tr>
-    <tr>
-        <td>DPLACE</td>
-        <td>Death place name.</td>
-    </tr>
-    
-    <!-- ************************************* -->
-    <tr>
-        <td colspan="2">
-            <div class="big3 bold padding">Geographical information</div>
         </td>
     </tr>
     
@@ -238,6 +201,37 @@ Some csv files contain fields that are not listed here, in this case, these fiel
         <td>LAT</td>
         <td>
             <b>Latitude</b> in decimal degrees.
+        </td>
+    </tr>
+    
+    <!-- ************************************* -->
+    <tr><td colspan="2"><div class="big3 bold padding05">Other fields</div></td></tr>
+    <tr>
+        <td>G</td>
+        <td>
+            <b>Gender</b>
+            <br><code>F</code> or <code>M</code> in general.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>OCCU</td>
+        <td>
+            <b>Occupation code</b>
+            <br>Corresponds to field <code>PRO</code> in cura files.
+            <br>When a person has more than one occupation code, the codes are separated by "+".
+            Ex : PO+WR means that the person is identified as a politician and a writer.
+            <br>See below for a full list of codes.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>NOTES</td>
+        <td>
+            <b>Free notes</b>
+            <br>Only when useful.
+            In files of serie A, E1, E3
+
         </td>
     </tr>
     
