@@ -136,17 +136,19 @@ class raw2csv implements Command{
         $lines = explode("\n", $m[2]);
         foreach($lines as $line){
             $cur = preg_split('/\t+/', $line);
-            if($cur[6] == '-----'){
-                // skip one line without birth time
-                // 1098!	Rose Peter		SP	14	4	1941	-----	5h	39N6	84W31	Cincinnati, OH
-                continue;
-            }
             $new = [];
             [$new['NUM'], $new['C_APP']] = self::compute_corr_app(trim($cur[0]));
             [$new['FNAME'], $new['GNAME']] = self::compute_name(trim($cur[1]));
             // date time
             $day = Cura::computeDay(['DAY' => $cur[3], 'MON' => $cur[4], 'YEA' => $cur[5]]);
-            $hour = $cur[6];
+            if($cur[6] == '-----'){
+                // Concerns one line without birth time
+                // 1098!	Rose Peter		SP	14	4	1941	-----	5h	39N6	84W31	Cincinnati, OH
+                $hour = '     ';
+            }
+            else{
+                $hour = $cur[6];
+            }
             // timezone
             $tmp = explode('h', trim($cur[7]));
             $h =  str_pad($tmp[0] , 2, '0', STR_PAD_LEFT);
