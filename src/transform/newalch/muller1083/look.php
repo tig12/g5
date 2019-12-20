@@ -25,6 +25,7 @@ class look implements Command {
     const POSSIBLE_PARAMS = [
         'curadates',
         'curanames',
+        'fields',
         'gnr',
         'nobilities',
         'sample',
@@ -63,22 +64,53 @@ class look implements Command {
     
     // ******************************************************
     /**
+        Returns a html table with the fields.
+    **/
+    private static function look_fields(){
+        $res = "<table class=\"wikitable margin\">\n";
+        $res .= "    <tr><th>Field</th><th>Meaning</th></tr>\n";
+        foreach(Muller1083::RAW_COLUMNS as $k => $v){
+            $res .= "    <tr><td>$k</td><td>$v</td></tr>\n";
+        }
+        $res .= "</table>\n";
+        return $res;
+    }
+    
+    
+    // ******************************************************
+    /**
         Look at SAMPLE column.
     **/
-    private static function look_sample(){
+    private static function look_sample($params=[]){
+        $output = $params[0] ?? 'text';
         $rows = Muller1083::loadTmpFile();
-        $res = []; // assoc codes => nb of records with this code
+        $data = []; // assoc codes => nb of records with this code
         foreach($rows as $row){
-            if(!isset($res[$row['SAMPLE']])){
-                $res[$row['SAMPLE']] = 0;
+            if(!isset($data[$row['SAMPLE']])){
+                $data[$row['SAMPLE']] = 0;
             }
-            $res[$row['SAMPLE']] ++;
+            $data[$row['SAMPLE']] ++;
         }
-        ksort($res);
-        foreach($res as $k => $v){
-            echo "$k\t: $v\n";
+        ksort($data);
+        $res = '';
+        switch($output){
+        case 'text': 
+            $res .= "SAMPLE\t\tN\tCODE\n";
+            $res .= "-----------------------------\n";
+            foreach($data as $k => $v){
+                $res .=  "$k\t$v\t" . Muller1083::SAMPLE_CODE[$k] . "\n";
+            }
+        break;
+        case 'table': 
+            $res = "<table class=\"wikitable margin\">\n";
+            $res .= "    <tr><th>GNR</th><th>CODE</th><th>Nb</th></tr>\n";
+            foreach($data as $k => $v){
+                $res .= "    <tr><td>$k</td><td>" . Muller1083::SAMPLE_CODE[$k] . "</td><td>$v</td></tr>\n";
+            }
+            $res .= "</table>\n";
+        break;
         }
-        return '';
+        return $res;
     }
     
     
@@ -112,7 +144,7 @@ class look implements Command {
         foreach($res as $k => $v){
             echo "$k \t: $v\n";
         }
-        echo "A2 + E1 : " . ($res['A2'] + $res['A2']) . "\n";
+        echo "A2 + E1 : " . ($res['A2'] + $res['E1']) . "\n";
         echo "Total \t: " . array_sum($res) . "\n";
         return '';
     }

@@ -326,7 +326,7 @@ for E1 :
 
 <!-- ********************************************************************************* -->
 <hr class="margin">
-<center>The rest of this page concerns preparatory code, not part of any transformation process.</center>
+<center>The rest of this page is not part of any data transformation process.</center>
 <hr class="margin">
 
 <!-- ********************************************************************************* -->
@@ -336,32 +336,90 @@ With class <code>src/transform/newalch/muller1083/look.php</code> :
 <pre>php run-g5.php newalch muller1083 look</pre>
 <pre>
 PARAMETER MISSING in g5\transform\newalch\muller1083\look
-Possible values for parameter : curadates, curanames, gnr, nobilities, sample
+Possible values for parameter : curadates, curanames, fields, gnr, nobilities, sample
 </pre>
 
+
+<!-- ********************************************************************************* -->
+<h2>Fields</h2>
+<pre>php run-g5.php newalch muller1083 look fields</pre>
+Partial comprehension so far.
+<table class="wikitable margin">
+    <tr><th>Field</th><th>Meaning</th></tr>
+    <tr><td>NR</td><td>Müller id, from 1 to 1083</td></tr>
+    <tr><td>SAMPLE</td><td>Origin of the record</td></tr>
+    <tr><td>GNR</td><td>Gauquelin NUM in A2 or E1</td></tr>
+    <tr><td>CODE</td><td></td></tr>
+    <tr><td>NAME</td><td>Family and given name</td></tr>
+    <tr><td>GEBDATUM</td><td>Birth day</td></tr>
+    <tr><td>JAHR</td><td>Birth year</td></tr>
+    <tr><td>GEBZEIT</td><td></td></tr>
+    <tr><td>GEBORT</td><td></td></tr>
+    <tr><td>LAENGE</td><td></td></tr>
+    <tr><td>BREITE</td><td></td></tr>
+    <tr><td>MODE</td><td></td></tr>
+    <tr><td>KORR</td><td></td></tr>
+    <tr><td>ELECTDAT</td><td>Date of election in Académie de médecine</td></tr>
+    <tr><td>ELECTAGE</td><td>Age of election</td></tr>
+    <tr><td>STBDATUM</td><td></td></tr>
+    <tr><td>SONNE</td><td></td></tr>
+    <tr><td>MOND</td><td></td></tr>
+    <tr><td>VENUS</td><td></td></tr>
+    <tr><td>MARS</td><td></td></tr>
+    <tr><td>JUPITER</td><td></td></tr>
+    <tr><td>SATURN</td><td></td></tr>
+    <tr><td>SO_</td><td></td></tr>
+    <tr><td>MO_</td><td></td></tr>
+    <tr><td>VE_</td><td></td></tr>
+    <tr><td>MA_</td><td></td></tr>
+    <tr><td>JU_</td><td></td></tr>
+    <tr><td>SA_</td><td></td></tr>
+    <tr><td>PHAS_</td><td></td></tr>
+    <tr><td>AUFAB</td><td></td></tr>
+    <tr><td>NIENMO</td><td></td></tr>
+    <tr><td>NIENVE</td><td></td></tr>
+    <tr><td>NIENMA</td><td></td></tr>
+</table>
 
 <!-- ********************************************************************************* -->
 <h2><a name="column-sample">Column SAMPLE</a></h2>
 
 This column seems to indicate the origin of the record.
-<br>Here are the codes of this column and the number of associated records. 
-
+<br>
 <pre>php run-g5.php newalch muller1083 look sample</pre>
+for html output :
+<pre>php run-g5.php newalch muller1083 look sample table</pre>
 
-<pre>
-GAUQ_NUR 	: 168
-MUERGAUQ 	: 612
-MUERGAUQ-d 	: 79
-MUER_NUR 	: 224
-</pre>
-Remarks from newalchemypress.com give indications :
+<table class="wikitable margin">
+    <tr><th>GNR</th><th>CODE</th><th>Nb</th></tr>
+    <tr><td>GAUQ_NUR</td><td>4</td><td>168</td></tr>
+    <tr><td>MUERGAUQ</td><td>3</td><td>612</td></tr>
+    <tr><td>MUERGAUQ-d</td><td>2</td><td>79</td></tr>
+    <tr><td>MUER_NUR</td><td>1</td><td>224</td></tr>
+</table>
+Indications from newalchemypress.com :
 <blockquote>
 Only for those in Michel's original group born in Paris (168) was Müller unable to re-check their birth data (...) This new total of Academie members had 224 not in MG's original sample.
 </blockquote>
-So <code>GAUQ_NUR</code> should correspond to people born in Paris, but there is a contradiction, as some records marked with <code>GAUQ_NUR</code> are not born in Paris.
-<br>
-<br><code>MUER_NUR</code> is easier to understand and corresponds to Newalchemypress remark : all records marked with <code>MUER_NUR</code> have an empty value in column <code>GNR</code>.
 
+<h3>GAUQ_NUR</h3>
+<table class="wikitable">
+    <tr><td>GAUQ_NUR total</td><td>168</td></tr>
+    <tr><td>GAUQ_NUR not born in Paris</td><td>59</td></tr>
+    <tr><td>GAUQ_NUR born in Paris</td><td>109</td></tr>
+    <tr><td>Total born in Paris</td><td>110 (1 marked MUER_NUR)</td></tr>
+</table>
+
+Does not correspond to Newalchemypress.
+
+<h3>MUER_NUR</h3>
+<code>MUER_NUR</code> is easier to understand and corresponds to Newalchemypress remark : all records marked with <code>MUER_NUR</code> have an empty value in column <code>GNR</code>, unknown in Gauquelin data.
+
+<h3>MUERGAUQ-d</h3>
+All have a <code>GNR</code>.
+
+<h3>MUER_NUR</h3>
+?
 
 <!-- ********************************************************************************* -->
 <h2><a name="column-gnr">Column GNR</a></h2>
@@ -375,7 +433,7 @@ Maybe means "Gauquelin Number Record".
 EMPTY 	: 224
 A2 	: 765
 E1 	: 94
-A2 + E1 : 1530
+A2 + E1 : 859
 Total 	: 1083
 </pre>
 

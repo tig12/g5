@@ -19,6 +19,54 @@ class Muller1083{
     /** Name of the csv file in 5-newalch-csv/ **/
     const TMP_CSV_FILE = '1083MED.csv';
     
+    /**
+        Columns of raw file 5a_muller_medics.txt
+        associated with their meanings
+    **/
+    const RAW_COLUMNS = [
+        'NR'        => 'Müller id, from 1 to 1083',
+        'SAMPLE'    => 'Origin of the record',
+        'GNR'       => 'Gauquelin NUM in A2 or E1',
+        'CODE'      => '',
+        'NAME'      => 'Family and given name',
+        'GEBDATUM'  => 'Birth day',
+        'JAHR'      => 'Birth year',
+        'GEBZEIT'   => '',
+        'GEBORT'    => '',
+        'LAENGE'    => '',
+        'BREITE'    => '',
+        'MODE'      => '',
+        'KORR'      => '',
+        'ELECTDAT'  => 'Date of election in Académie de médecine',
+        'ELECTAGE'  => 'Age of election',
+        'STBDATUM'  => '',
+        'SONNE'     => '',
+        'MOND'      => '',
+        'VENUS'     => '',
+        'MARS'      => '',
+        'JUPITER'   => '',
+        'SATURN'    => '',
+        'SO_'       => '',
+        'MO_'       => '',
+        'VE_'       => '',
+        'MA_'       => '',
+        'JU_'       => '',
+        'SA_'       => '',
+        'PHAS_'     => '',
+        'AUFAB'     => '',
+        'NIENMO'    => '',
+        'NIENVE'    => '',
+        'NIENMA'    => '',
+    ];
+    
+    const SAMPLE_CODE = [
+            'GAUQ_NUR'   => '4',
+            'MUERGAUQ'   => '3',
+            'MUERGAUQ-d' => '2',
+            'MUER_NUR'   => '1',
+        ];
+    
+    
     /** Columns of TMP_CSV_FILE **/
     const TMP_CSV_COLUMNS = [
         'NR',

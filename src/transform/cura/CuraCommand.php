@@ -7,8 +7,8 @@
     So a translation from user's vocabulary to this package's organisation is necessary.
     
     @license    GPL
-    @history    2017-04-27 10:41:02+02:00, Thierry Graff : creation
-    @history    2019-05-09 01:34:14+02:00, Thierry Graff : refactor
+    @history    2017-04-27 10:41:02+02:00, Thierry Graff : Creation
+    @history    2019-05-09 01:34:14+02:00, Thierry Graff : Refactor
 ********************************************************************************/
 namespace g5\transform\cura;
 
@@ -46,6 +46,7 @@ class CuraCommand implements Command{
             if($command == 'export'){
                 $class = "g5\\transform\\cura\\all\\export";
             }
+            // tweak2csv is available for all datafiles, and implemented in subpackage all.
             else if($command == 'tweak2csv'){
                 $class = "g5\\transform\\cura\\all\\tweak2csv";
             }
