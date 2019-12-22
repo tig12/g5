@@ -84,14 +84,12 @@ class look implements Command {
     private static function look_sample($params=[]){
         $output = $params[0] ?? 'text';
         $rows = Muller1083::loadTmpFile();
-        $data = []; // assoc codes => nb of records with this code
+        // assoc SAMPLE => nb of records with this code
+        $data = array_fill_keys(array_keys(Muller1083::SAMPLE_CODE), 0); 
         foreach($rows as $row){
-            if(!isset($data[$row['SAMPLE']])){
-                $data[$row['SAMPLE']] = 0;
-            }
             $data[$row['SAMPLE']] ++;
         }
-        ksort($data);
+//        ksort($data);
         $res = '';
         switch($output){
         case 'text': 
@@ -103,9 +101,9 @@ class look implements Command {
         break;
         case 'table': 
             $res = "<table class=\"wikitable margin\">\n";
-            $res .= "    <tr><th>GNR</th><th>CODE</th><th>Nb</th></tr>\n";
+            $res .= "    <tr><th>SAMPLE</th><th>CODE</th><th>Nb</th><th>GNR ?</th></tr>\n";
             foreach($data as $k => $v){
-                $res .= "    <tr><td>$k</td><td>" . Muller1083::SAMPLE_CODE[$k] . "</td><td>$v</td></tr>\n";
+                $res .= "    <tr><td>$k</td><td>" . Muller1083::SAMPLE_CODE[$k] . "</td><td>$v</td><td>" . Muller1083::SAMPLE_GNR[$k] . "</td></tr>\n";
             }
             $res .= "</table>\n";
         break;

@@ -34,17 +34,20 @@ This program operates on data used to perform statistical tests on astrology. Th
 <br>The assertions of Gauquelin and followers are :
 <ul class="simple">
     <li>we can observe anomalies in the repartition of some planets in the births of famous people ;</li>
-    <li>the anomalies are more important for very eminent people.</li>
+    <li>the anomalies are more important for very eminent people ;</li>
+    <li>these statistical anomalies can be observed only for natural births, the effect disappear for induced deliveries. For this reason, studies are limited to births before 1950.</li>
 </ul>
 One particular effect (the repartition of Mars in the births of sportsmen) gave rise to very long polemics without any consensual conclusion.
 <br>
 <br>The purpose of Gauquelin5 program is to build new groups in order to reproduce the tests :
-<ul class="simple">
+<ol class="simple margin-bottom">
     <li>gather the historical data, check them, correct them, connect them to other datasets ;</li>
     <li>use the historical datasets to build new groups, corrected and more exhaustive ;</li>
     <li>Build new eminence indicators and sort famous persons by eminence rank, to obtain ranked data that can make consensus.</li>
-</ul>
+</ol>
 
+Note that g5 is not concerned by data analysis (performing statistical tests), it only deals with production of data sets.
+<br>
 <br>Current code is far from these goals ; it contains steps to gather some historical data and correct them. Written code needs tests and debug, this is a work in progress.
 <br>It currently uses the following data sources :
 <ul>
@@ -52,7 +55,7 @@ One particular effect (the repartition of Mars in the births of sportsmen) gave 
         Data gathered by Michel et Françoise Gauquelin (serie A, files D6, D10, E1, E3), from <a href="http://cura.free.fr/gauq/17archg.html">cura.free.fr</a> C.U.R.A Gauquelin archives version 5 ; N = 15 932
     </li>
     <li>
-        Suitbert Ertel and Arno Müller data, from <a href="https://newalchemypress.com/gauquelin/">newalchemypress.com</a>
+        Suitbert Ertel, Arno Müller and CFEPP data, from <a href="https://newalchemypress.com/gauquelin/">newalchemypress.com</a>
     </li>
     <li>Gauquelin 1955 (paper) book "Les hommes et les astres"</li>
 </ul>
@@ -80,7 +83,7 @@ There are several reasons to care about the data used to perform statistical tes
 <ul class="spaced margin-top">
     <li>
         <div class="bold">Scientific interest</div>
-        The "mars effect" polemic lasted for several decades and ended with the Ertel versus Nienhuys arguments, who reached radically opposed opinions. The question to know if these statistical anomalies exist out of human bias is still open. Data collected by Gauquelin and others can serve as a basis to build new groups and execute new tests and see if a consensus can emerge.
+        The "mars effect" polemic lasted for several decades and ended with the Ertel versus Nienhuys arguments, who reached radically opposed opinions. History is so confused that the question to know if these statistical anomalies exist out of human bias is finally still open. Data collected by Gauquelin and others can serve as a basis to build new groups and execute new tests and see if a consensus can emerge.
     </li>
     
     <li>
@@ -98,9 +101,9 @@ There are several reasons to care about the data used to perform statistical tes
 
 <!-- ********************************************************************************* -->
 <h2>Current implementation</h2>
-This software is globally still at an immature stage. It brings corrections to Cura an Newalchemypress data but does not produce yet reliable data (legal time, timezone offset and place identification need test and debug).
-<br>A log system is missing, to be able to track individual transformations done to each record.
-<br>Most of the code concerns data restoration ; preparatory code exists for new group building and eminence ranking.
+This software is still at an immature stage. It brings corrections to Cura an Newalchemypress data but does not produce yet reliable data (in particular legal time, timezone offset and place identification need test and debug).
+<br>Current code mainly concerns step 1 (data restoration) ; preparatory code exists for new group building and eminence ranking.
+<br>Most of current code can be seen as draft code, bound to be deeply refactored during step 2 implementation (building new groups). This is necessary as current code miss an important property : the ability to trace every transformation done on every field of every record of the resulting data.
 
 
 <!-- ********************************************************************************* -->
@@ -182,9 +185,9 @@ The name "Gauquelin5" comes from the main source of information, "Archives Gauqu
                 </ul>
             </li>
             
-            <li>
-                <a href="csicop.html">CSICOP 1979</a>
-            </li>
+            <li><a href="comite-para.html">Comité Para 1976</a></li>
+            <li><a href="csicop.html">CSICOP 1979</a></li>
+            <li><a href="cfepp.html">CFEPP 1996</a></li>
             
         </ul>
     </li>
@@ -192,8 +195,11 @@ The name "Gauquelin5" comes from the main source of information, "Archives Gauqu
     <li>
         <span class="big1"><a href="newdata.html">2 - Build new data</a></span>
         <ul>
-            <li><a href="geonames.html">Geonames.org</a></li>
+            <li><a href="data-model.html">Data model</a></li>
+            <li><a href="check.html">Check data</a></li>
+            <li><a href="merge.html">Merge data</a></li>
             <li><a href="wikidata.html">Wikidata.org</a></li>
+            <li><a href="geonames.html">Geonames.org</a></li>
         </ul>
     </li>
         

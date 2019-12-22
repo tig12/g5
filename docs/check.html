@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Check data | Gauquelin5</title>
+    <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
+    <meta name="description" content="">
+    <meta name="robots" content="index,follow">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
+    <meta name="dcterms.rightsHolder" content="Thierry Graff">
+    <meta name="dcterms.dateCopyrighted" content="2019">
+    <!-- 
+    tigsite:
+        history: 2019-12-21 00:37:11+01:00, Thierry Graff : Creation
+    -->
+</head>
+
+<body>
+<div class="container">
+
+<div class="main">
+
+<nav class="prevnext">
+    <a class="top" href="index.html">&uarr;</a>
+    <a class="prev" rel="prev" href="merge.html">&larr;</a>
+    <!-- 
+    <a class="next" rel="next" href=".html">&rarr;</a>
+    -->
+</nav>
+
+<header>
+<h1>Check data</h1>
+<div class="intro">
+The only reliable information sources are the civil registries. Any other source may contain errors (in practice they do).
+<br>Building a corpus of reliable data is out of the scope of g5 program, but the development of the program implies verifications using online civil registries, to solve particular cases.
+<br>So here are some considerations about data verification.
+</div>
+</header>
+
+<article>
+
+
+<!-- ********************************************************************************* -->
+<h2>Reliable data</h2>
+In the context of g5 program, a data is considered as reliable if :
+<ol class="margin-bottom">
+    <li>
+        It has been checked against a birth certificate.
+        <br>Note the difference between a birth certificate (BC - the original official document containing birth information) and Birth Record (BR - a copy of a birth certificate sent by an officer). BR cannot be considered as reliable because copy of the original document may contain errors. For example, the officer can indicate registration date / time instead of birth date / time.
+    </li>
+    <li>
+        The check on BC can be verified by data users. This means that the check should be precisely documented. In particular, users should be able to access to the original document.
+    </li>
+    <li>
+        The check on BC has been at leat confirmed by an other person.
+    </li>
+</ol>
+
+Under these strict conditions, none of the data currrently handled by g5 can be considered as reliable. But data verifications done during g5 development follow rules compatible with this definition of reliable data.
+
+<!-- ********************************************************************************* -->
+<h2>Verification process</h2>
+
+In practice, data are checked only for France, using online civil registries. This permits to check birth dates and times for persons born in France more that ~120 years ago (and after 1860 for persons born in Paris).
+<br>
+<br>For each verification, the image is downloaded on local machine, and informations permitting to easily go back to the online document are recorded in a yaml file expressed in a standard syntax (see example below). These yaml files are used for genealogical purposes and contain more information that necessary for g5 purpose.
+<br>
+<br>Whatever the syntax you use, the following informations are necessary :
+<ul>
+    <li>Country</li>
+    <li>Département (C2 in Gauquelin5 vocabulary)</li>
+    <li>City</li>
+    <li>Arrondissement, for Paris, Lyon, Marseille (arrondissement = part of a city). This is very important because without it, it's very difficult to find the registry.</li>
+    <li>Name of the registry</li>
+    <li>Page where the birth certificate is located within the registry. This is very important, because finding the right page may be a long process.</li>
+    <li>Ideally, the url directly pointing to the page. Some départements provide a way to copy the "permalink" of a document, which may be different from the url of the page displayed by the web browser.</li>
+</ul>
+
+<h3>Image download</h3>
+This is systematically done during g5 development. Some départements provide a link to download current page, some don't. When they don't, image retrieval is done with screen capture. This can be particularily long because sometimes several captures are necessary to get the whole certificate with a sufficient level of detail. In this case, the image is reconstituted assembling the different parts.
+
+
+
+<!-- ********************************************************************************* -->
+<h2>Example</h2>
+
+<style>
+#proto div{
+    margin:0.5em;
+}
+</style>
+
+<div id="proto" class="flex-wrap margin-top">
+
+<div>
+<a href="img/birth-certificates/1811-10-25-evariste-galois.jpg">
+    <img class="border" src="img/birth-certificates/1811-10-25-evariste-galois-small.jpg" alt="Evariste Galois - Birth certificate">
+</a>
+</div>
+
+<div class="">
+<textarea readonly rows="59" cols="100">
+document:
+  type: acte de naissance
+  source:
+    pays: FR
+    dept: 92
+    commune: Bourg-la-Reine
+    nom: 1811 E_NUM_BRG38
+    web: 
+      url: http://consultation.archives.hauts-de-seine.net/mdr/index.php/docnumViewer/calculHierarchieDocNum/398088/367506:396213:398074:398075:398088/720/1280
+      page: 5 / 7
+    notes:
+      - Image reconstituée à partir de copies d'écran
+      - Aller sur http://consultation.archives.hauts-de-seine.net/mdr/index.php/rechercheTheme/requeteConstructor/3/2/A/398075/Naissances
+        
+  recup:
+    personne: Thierry Graff
+    date: '2019-12-21 02:29:53+01:00'
+
+acte:
+  numéro: 
+  numéro-feuillet: 4
+  date: '1811-10-26 13:00'
+  lieu: Bourg-la-Reine
+  
+personnes:
+  
+  ###### officier ##########
+  - 
+    rôle: officier
+    nom: 
+    fonction: Maire de Bourg-la-Reine faisant fonctions d'officier public de l'état-civil
+    sexe: M
+    
+  ###### acteur ##########
+  - 
+    rôle: acteur
+    nom: Evariste Galois
+    prénom: Evariste
+    sexe: M
+    domicile: Bourg-la-Reine
+    naissance: 
+      date: '1811-10-25 01:00'
+      lieu: Bourg-la-Reine
+      lieu-precis: 
+    père: Nicolas Gabriel Galois
+    mère: Adelaïde Marie Demante
+
+  ###### parents ##########
+  - 
+    rôle: comparant
+    nom: Nicolas Gabriel Galois
+    prénom: Nicolas Gabriel
+    age: 36
+    sexe: M
+    profession: Directeur d'un pensionnat de l'université impériale
+    domicile: Bourg-la-Reine
+    domicile-precis: 
+    relations:
+      -
+        avec: Adelaïde Marie Demante
+    
+  - 
+    nom: Adelaïde Marie Demante
+    prénom: Adelaïde Marie
+    age: 
+    sexe: F
+    profession: 
+    domicile: 
+    domicile-precis: 
+    père: Thomas François Demante
+
+  ###### témoins ##########
+  - 
+    rôle: témoin
+    nom: Thomas François Demante
+    prénom: Thomas François
+    age: 59
+    sexe: M
+    profession: Président du tribunal civil
+    domicile: 
+    domicile-precis: 
+    note: Président du tribunal civil séant à Louvière, département de l'Eure
+    
+  - 
+    rôle: témoin
+    nom: Pierre Ambroise Gandu
+    prénom: Pierre Ambroise
+    age: 53
+    sexe: M
+    profession: Maître d'écriture
+    domicile: Bourg-la-Reine
+    domicile-precis: 
+</textarea>
+</div>
+
+</div><!-- end class="flex-wrap" -->
+
+</article>
+</div><!-- end class="main" -->
+
+
+<!-- ************************************* -->
+<aside class="left">                                                                                                                                              
+<ul>
+    <li class="bold big1"><a href="index.html">g5 Doc</a></li>
+    <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">g5 code</a></li>
+    <li><a href="organisation.html">Organisation</a></li>
+    <li><a href="usage.html">Program usage</a></li>
+    <li><a href="output-format.html">Output format</a></li>
+    
+    <li>
+        <span class="big1">1 - Restore</span>
+        <ul>
+            
+            <li><a href="cura.html">cura.free.fr</a></li>
+            
+            <li>
+                <ul>
+                    <a href="cura-A.html">A</a>
+                    <a href="cura-D6.html">D6</a>
+                    <a href="cura-D10.html">D10</a>
+                    <a href="cura-E1-E3.html">E1 E3</a>
+                <li><a href="cura-results.html">Results</a></li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="newalch.html">newalchemypress.com</a>
+                <ul>
+                    <li><a href="newalch-ertel4391.html">Ertel 4391 SPO</a></li>
+                    <li><a href="newalch-muller1083.html">Müller 1083 MED</a></li>
+                </ul>
+            </li>
+            
+            
+            <li>
+                <a href="g55.html">Gauquelin 1955</a>
+                <ul>
+                    <li><a href="g55-restore.html">Restoration</a></li>
+                    <li><a href="g55-curadiff.html">Differences with Cura</a></li>
+                </ul>
+            </li>
+            
+            <li><a href="comite-para.html">Comité Para 1976</a></li>
+            <li><a href="csicop.html">CSICOP 1979</a></li>
+            <li><a href="cfepp.html">CFEPP 1996</a></li>
+            
+        </ul>
+    </li>
+    
+    <li>
+        <span class="big1"><a href="newdata.html">2 - Build new data</a></span>
+        <ul>
+            <li><a href="data-model.html">Data model</a></li>
+            <li><a href="check.html">Check data</a></li>
+            <li><a href="merge.html">Merge data</a></li>
+            <li><a href="wikidata.html">Wikidata.org</a></li>
+            <li><a href="geonames.html">Geonames.org</a></li>
+        </ul>
+    </li>
+        
+    <li>
+        <span class="big1">3 - Eminence</span>
+        <ul>
+            <li><a href="eminence.html">Eminence ranking</a></li>
+        </ul>
+    </li>
+    
+    
+    <li><a href="code-details.html">Code details</a></li>
+    <li><a href="time.html">Expressing time</a></li>
+    <li><a href="tweak2csv.html">tweak2csv</a></li>
+    
+    <!-- <li><a href="next.html">Next</a></li> -->
+    
+    <!-- <li><a href="questions.html">Questions</a></li> -->
+    
+    <li>
+        Doc
+        <ul>
+            <li><a href="historical-tests.html">List of historical tests</a></li>
+        </ul>
+    </li>
+    
+    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
+    
+</ul>
+</aside>
+
+</div><!-- end class="container" -->
+
+</body>
+</html>
+<!-- ************************************* -->
+<!-- ********************************************************************************* -->

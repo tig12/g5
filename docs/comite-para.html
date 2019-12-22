@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>D10 | Gauquelin5</title>
+    <title>Comité Para 1976 | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
-    <meta name="description" content="Conversion of cura.free.fr html pages to csv for file D10">
+    <meta name="description" content="">
     <meta name="robots" content="index,follow">
     <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
     <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
@@ -12,7 +12,7 @@
     <meta name="dcterms.dateCopyrighted" content="2019">
     <!-- 
     tigsite:
-        history: 2019-04-02 03:53:45+02:00, Thierry Graff : Creation
+        history: , Thierry Graff : Creation
     -->
 </head>
 
@@ -23,64 +23,21 @@
 
 <nav class="prevnext">
     <a class="top" href="index.html">&uarr;</a>
-    <a class="prev" rel="prev" href="cura-D6.html">&larr;</a>
-    <a class="next" rel="next" href="cura-E1-E3.html">&rarr;</a>
+    <!-- 
+    <a class="prev" rel="prev" href=".html">&larr;</a>
+    <a class="next" rel="next" href=".html">&rarr;</a>
+    -->
 </nav>
 
 <header>
-<h1>Cura - file D10</h1>
-<div class="intro">
-Accoding to cura.free.fr :
-<div class="padding-left">
-D10 contains 1398 data of successful Americans
-</div>
-<br>This file is almost perfect : it contains name, legal birth time, timezone offset, birth place, so importing it is just a matter of formatting.
-<br>For sportsmen, precise sport code is not specified and couldn't be computed.
-<br>Page <code>902gdD10.html</code> also contains a list of character traits that is not handled by the program.
-</div>
+<h1>Comité Para 1976</h1>
+<div class="intro">535 Sportsmen</div>
 </header>
 
 <article>
-
-<pre>php run-g5.php cura D10 all</pre>
-is equivalent to
-<pre>
-php run-g5.php cura D10 raw2csv
-php run-g5.php cura D10 export
-</pre>
-
-<!-- ********************************************************************************* -->
-<h2>Small errors</h2>
-There is one record without birth time that was excluded from the resulting file :
-<pre>1098!	Rose Peter		SP	14	4	1941	-----	5h	39N6	84W31	Cincinnati, OH</pre>
-
-Two lines miss longitude and latitude :
-<pre>
-493	Good Robert		AC	21	5	1922	06:00	6h			Grosby, MN
-658	Jeter Robert		SP	9	5	1937	08:00	5h			Union, SC
-</pre>
-These lines were fixed in the code of <code>raw2csv</code> and included in the resulting file.
-<br>
-<br>13 lines had to be fixed because of bad formatting (contain white spaces instead of tabs) :
-<pre>
-112	Blanton Leonard		PO	10	4	1930	21:30	6h	35N11   88W10	Hardin County, TN	
-192	Caldwell Philip		EX	27	1	1920	08:00	5h	39N16   83W09	Bourneville, OH	
-409	Faver Dudley		MI	17	8	1916	15:00	6h	32N28   100W24	Sweatwater, TX	
-568	Hayes Elvin		SP	11	11	1945	22:00	6h	32N28   91W45	Rayville, LA	
-817!	Malden Karl		AC	22	3	1912	17:00	6h	41N35   87W20	Gary, IN
-935	Murphy William		EX	17	6	1907	10:00	6h	44N15   88W24   Appleton, WI		
-945	Neal Patricia		AC	20	1	1926	04:30	6h	36N40   84W03	Packard, KY	
-1033	Pitts William		MI	27	11	1919	06:00	8h	33N54   117W15  March Field, CA		
-1058	Ramsey Lloyd		MI	29	5	1918	07:00	5h	37N05   84W36   Somerset, KY		
-1066!	Reeves Steve		AC	21	1	1926	08:00	7h	48N11   106W38  Glasgow, MT
-1158	Shaffer Raymond		EX	6	4	1912	22:30	6h	37N59   94W49   Harding, KS		
-1218	Staiger John		EX	20	3	1910	19:00	6h	44N43   88W09   Chase, WI		
-1250	Sweeney Walter		SP	18	4	1941	09:20	5h	42N14   70W48   Cohasset, MA		
-</pre>
-These lines were fixed in the code of <code>raw2csv</code> and included in the resulting file.
-
 </article>
 </div><!-- end class="main" -->
+
 
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              

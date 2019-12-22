@@ -1,0 +1,88 @@
+document:
+  type: acte de naissance
+  source:
+    pays: FR
+    dept: 92
+    commune: Bourg-la-Reine
+    nom: 1811 E_NUM_BRG38
+    web: 
+      url: http://consultation.archives.hauts-de-seine.net/mdr/index.php/docnumViewer/calculHierarchieDocNum/398088/367506:396213:398074:398075:398088/720/1280
+      page: 5 / 7
+    notes:
+      - Image reconstituée à partir de copies d'écran
+      - Aller sur http://consultation.archives.hauts-de-seine.net/mdr/index.php/rechercheTheme/requeteConstructor/3/2/A/398075/Naissances
+        
+  recup:
+    personne: Thierry Graff
+    date: '2019-12-21 02:29:53+01:00'
+
+acte:
+  numéro: 
+  numéro-feuillet: 4
+  date: '1811-10-26 13:00'
+  lieu: Bourg-la-Reine
+  
+personnes:
+  
+  ###### officier ##########
+  - 
+    rôle: officier
+    nom: 
+    fonction: Maire de Bourg-la-Reine faisant fonctions d'officier public de l'état-civil
+    sexe: M
+    
+  ###### acteur ##########
+  - 
+    rôle: acteur
+    nom: Evariste Galois
+    sexe: M
+    domicile: Bourg-la-Reine
+    naissance: 
+      date: '1811-10-25 01:00'
+      lieu: Bourg-la-Reine
+      lieu-precis: 
+    père: Nicolas Gabriel Galois
+    mère: Adelaïde Marie Demante
+
+  ###### parents ##########
+  - 
+    rôle: comparant
+    nom: Nicolas Gabriel Galois
+    age: 36
+    sexe: M
+    profession: Directeur d'un pensionnat de l'université impériale
+    domicile: Bourg-la-Reine
+    domicile-precis: 
+    relations:
+      -
+        avec: Adelaïde Marie Demante
+    
+  - 
+    nom: Adelaïde Marie Demante
+    age: 
+    sexe: F
+    profession: 
+    domicile: 
+    domicile-precis: 
+    père: Thomas François Demante
+
+  ###### témoins ##########
+  - 
+    rôle: témoin
+    nom: Thomas François Demante
+    age: 59
+    sexe: M
+    profession: Président du tribunal civil
+    domicile: 
+    domicile-precis: 
+    note: Président du tribunal civil séant à Louvière, département de l'Eure
+    
+  - 
+    rôle: témoin
+    nom: Pierre Ambroise Gandu
+    age: 53
+    sexe: M
+    profession: Maître d'écriture
+    domicile: Bourg-la-Reine
+    domicile-precis: 
+

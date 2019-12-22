@@ -60,11 +60,17 @@ class Muller1083{
     ];
     
     const SAMPLE_CODE = [
-            'GAUQ_NUR'   => '4',
-            'MUERGAUQ'   => '3',
-            'MUERGAUQ-d' => '2',
             'MUER_NUR'   => '1',
-        ];
+            'MUERGAUQ-d' => '2',
+            'MUERGAUQ'   => '3',
+            'GAUQ_NUR'   => '4',                    
+    ];
+    const SAMPLE_GNR = [
+            'MUER_NUR'   => 'N',
+            'MUERGAUQ-d' => 'Y',
+            'MUERGAUQ'   => 'Y',
+            'GAUQ_NUR'   => 'Y',
+    ];
     
     
     /** Columns of TMP_CSV_FILE **/
