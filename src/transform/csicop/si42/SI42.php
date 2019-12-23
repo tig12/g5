@@ -17,7 +17,7 @@ class SI42{
         Field names of tmp_filename() for step raw2csv.
         Other fields complete this list in following transformations.
     **/
-    CONST TMP_FIELDS = [
+    const TMP_FIELDS = [
         'FNAME',
         'GNAME',
         'DATE',
@@ -28,12 +28,12 @@ class SI42{
     
     /** Raw file containing 408 records **/
     public static function raw_filename(){
-        return Config::$data['dirs']['1-si-raw'] . DS . 'si42' . DS . 'si42-p60-63.txt';
+        return Config::$data['dirs']['1-si-raw'] . DS . 'si42-p60-63.txt';
     }
     
     /** Raw file containing 128 records of canvas 1 **/
     public static function raw_filename_canvas1(){
-        return Config::$data['dirs']['1-si-raw'] . DS . 'si42' . DS . 'si42-p41.txt';
+        return Config::$data['dirs']['1-si-raw'] . DS . 'si42-p41.txt';
     }
     
     /** Tmp file name with 408 records **/

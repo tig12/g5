@@ -33,7 +33,7 @@ class raw2csv implements Command{
         
         $res = $res_181 = implode(G5::CSV_SEP, SI42::TMP_FIELDS) . "\n";
         $lines = file($infile);
-        $n = $n_181  = 0;
+        $n = $n_181 = 0;
         foreach($lines as $line){
             $line = trim($line);
             if($line == ''){
