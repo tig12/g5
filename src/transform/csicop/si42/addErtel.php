@@ -53,7 +53,6 @@ class addErtel implements Command{
             
             $rowS = $si42[$CSINR - 1];
             
-            
             $nameS = $rowS['FNAME'] . ' ' . $rowS['GNAME'];
             $DATES = $rowS['DATE'];
             

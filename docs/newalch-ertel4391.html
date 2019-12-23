@@ -39,7 +39,7 @@ This page deals with the file <a href="https://newalchemypress.com/gauquelin/gau
 <br>This file brings new informations :
 <ul class="simple">
     <li>
-        It contains ids of cura.free.fr, comité para, CSICOP, CFEPP - so it should possible to reconstitute these groups and match the different groups without ambiguity.
+        It contains ids of cura.free.fr, Comité para, CSICOP, CFEPP - so it should possible to reconstitute these groups and match the different groups without ambiguity.
     </li>
     <li>
         It should permit to reconstitute parts of Ertel's work.
@@ -48,7 +48,7 @@ This page deals with the file <a href="https://newalchemypress.com/gauquelin/gau
         It contains eminence information, with the precise source list permitting to reproduce eminence tests.
     </li>
     <li>
-        Permits to fix missing names of cura A1.
+        Permits to fix all missing names of Cura A1.
     </li>
 </ul>
 </div>
@@ -107,9 +107,8 @@ From newalchemypress.com :
 <blockquote>
 In the last year of his life, Professor Ertel kindly sent his main data-collection, of the 4,391 sports champion.
 </blockquote>
-This file is precious for data restoration because records are associated with their identifiers in the different groups dealing with the mars effect story : Gauquelin LERRCP series, CP, CSICOP, CFEPP. So it can be used to compute original lists or to check other restoration processes.
-<br>
-<br>I also found information about this file in these places :
+
+I also found information about this file in these places :
 <ul class="spaced margin-top">
     <li>
         "Raising the Hurdle for the Athletes' Mars Effect: Association Co-Varies With Eminence" by Suibert Ertel, published in <i>Journal of Scientific Exploration. Vol. 2. No. 1. pp. 53-82. 1988</i>, available on <a href="http://www.scientificexploration.org/journal/volume-2-number-1-1988">scientificexploration.org</a> web site.
@@ -130,12 +129,19 @@ This file is precious for data restoration because records are associated with t
 
 One very strange feature of this file : many records don't contain birth time. Surprising because among the missing dates (~800) are records published by Gauquelin (LERRCP series), so known by Ertel. As noted by newalchemypress.com, birth places, longitudes and latitudes are not given.
 <br>
-<br>At first impression, records are missing, for example :
+<br>Analysis of this file shows several errors and omissions, for example :
 <ul>
     <li>The file contains 4384 records ; 7 records are missing to reach 4391.</li>
     <li>The file contains 553 records from Gauquelin 1955 list (instead of 568).</li>
+    <li>
+        In <b>[TME]</b>, Ertel talks about 192 records common to CSICOP and Gauquelin (file D10).
+        <br>In the file, 192 records have a CSICOP id, but only 190 match.
+    </li>
+    <li>
+        26 associations with file D10 are erroneous (out of 349 - error rate 7.45 %).
+        <br>Fixed in step <code>raw2csv</code>.
+    </li>
     <!-- 
-    <li>The file contains 192 records from CSICOP (instead of 408).</li>
     <li>The file contains 922 records from CFEPP (instead of 1 066).</li>
     -->
 </ul>
@@ -227,6 +233,8 @@ Nb missing names in cura A1 : 117
 Ertel 4391 contains : 2084 lines from A1
 Nb corrections : 117
 </pre>
+
+This step is included in the restoration process of file A1, not part of Ertel4391 process.
 
 <!-- ************************************* -->
 <h3><a name="2-4-generate-skeptics-files">Generate skeptics' files</a></h3>

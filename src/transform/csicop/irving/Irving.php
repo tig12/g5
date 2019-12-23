@@ -7,7 +7,9 @@
 ********************************************************************************/
 namespace g5\transform\csicop\irving;
 
+use g5\G5;
 use g5\Config;
+use tiglib\arrays\csvAssociative;
 
 class Irving{
     
@@ -39,6 +41,20 @@ class Irving{
     /** Generated file in 5-tmp **/
     public static function tmp_filename(){
         return Config::$data['dirs']['5-csicop'] . DS . '408-csicop-irving.csv';
+    }
+    
+    
+    // ******************************************************
+    /**
+        Loads 5-ciscop/408-csicop-irving.csv in an asssociative array ; keys = CSID
+    **/
+    public static function loadTmpCsv_csid(){
+        $csv = csvAssociative::compute(self::tmp_filename(), G5::CSV_SEP);
+        $res = [];              
+        foreach($csv as $row){
+            $res[$row['CSID']] = $row;
+        }
+        return $res;
     }
     
 }// end class

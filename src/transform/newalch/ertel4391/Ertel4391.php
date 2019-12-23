@@ -18,12 +18,33 @@ class Ertel4391{
     
     // ******************************************************
     /**
+        @return Path to the csv file stored in 5-newalch-csv
+    **/
+    public static function tmp_csv_filename(){
+        return Config::$data['dirs']['5-newalch-csv'] . DS . self::TMP_CSV_FILE;
+    }
+    
+    // ******************************************************
+    /**
         Loads file 5-newalch-csv/4391SPO.csv.
         @return Regular array
                 Each element contains an associative array (keys = field names).
     **/
     public static function loadTmpFile(){
-        return csvAssociative::compute(Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE);
+        return csvAssociative::compute(self::tmp_csv_filename());
     }                                                                                              
+    
+    // ******************************************************
+    /**
+        Loads file 5-newalch-csv/4391SPO.csv in an asssociative array ; keys = NR
+    **/
+    public static function loadTmpFile_nr(){
+        $rows1 = self::loadTmpFile();
+        $res = [];              
+        foreach($rows1 as $row){
+            $res[$row['NR']] = $row;
+        }
+        return $res;
+    }
     
 }// end class

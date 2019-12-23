@@ -11,15 +11,12 @@
 ********************************************************************************/
 namespace g5\transform\cura\all;
 
-use g5\Config;
 use g5\G5;
+use g5\Config;
 use g5\patterns\Command;
 use g5\transform\cura\Cura;
 
 class tweak2csv implements Command{
-    
-    /** Key not processed by this command ; used in yaml files **/
-    const BUILD_NOTES = 'build-notes';
     
     // *****************************************
     // Implementation of Command
@@ -71,7 +68,7 @@ class tweak2csv implements Command{
         foreach($cura as $NUM => $row){
             if(isset($tweaks[$NUM])){
                 foreach($tweaks[$NUM] as $k => $v){
-                    if($k == self::BUILD_NOTES){
+                    if($k == G5::TWEAK_BUILD_NOTES){
                         continue;
                     }
                     if(!in_array($k, $keys)){

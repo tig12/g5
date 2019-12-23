@@ -39,13 +39,14 @@ class raw2csv implements Command{
             if($line == ''){
                 continue;
             }
+            $n++;
             $new = [];
+            $new['CSID'] = $n;
             [$new['FNAME'], $new['GNAME']] = self::parseName(substr($line, 0, 29));
             $new['DATE'] = self::parseDate(substr($line, 30, 10));
             $new['C2'] = substr($line, 40, 2);
             $new['MA12'] = trim(substr($line, 51, 2));
             $new['SC'] = trim(substr($line, 55));
-            $n++;
             $res .= implode(G5::CSV_SEP, $new) . "\n";
             if($new['SC'] != ''){
                 $n_181++;

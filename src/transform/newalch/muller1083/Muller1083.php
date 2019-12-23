@@ -141,7 +141,6 @@ class Muller1083{
     // ******************************************************
     /**
         Loads file 5-newalch-csv/1083MED.csv in an asssociative array ; keys = NR
-        @return     Associative array containing 1083MED.csv ; keys = NR
     **/
     public static function loadTmpFile_nr(){
         $rows1 = self::loadTmpFile();

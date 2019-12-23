@@ -70,6 +70,7 @@ class checkErtel implements Command{
             }
             
             $GNUM = $rowE['GNUM'];
+//////// These tweaks must be removed - handled in tweak.csv /////////////////////
             $NUM = substr($GNUM, 4); // remove 'D10-'
             if($CSINR == '394'){
                 $i42 = 394; // Williams R.

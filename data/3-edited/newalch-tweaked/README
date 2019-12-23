@@ -13,7 +13,7 @@ An element of the list looks like this :
   NR: 123
   FNAME: A value
   DATE: '2019-10-15 23:16:50+02:00' 
-  notes:
+  build-notes:
     - here free notes
   
 Each element must contain at least a key NR

@@ -11,7 +11,6 @@ namespace g5\transform\csicop\irving;
 use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
-use tiglib\arrays\csvAssociative;
 
 class raw2csv implements Command{
     

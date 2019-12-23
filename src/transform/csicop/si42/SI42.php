@@ -18,6 +18,7 @@ class SI42{
         Other fields complete this list in following transformations.
     **/
     const TMP_FIELDS = [
+        'CSID',
         'FNAME',
         'GNAME',
         'DATE',

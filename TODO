@@ -1,7 +1,7 @@
 
-- D10 raw2csv - don't skip record 1098 Rose Peter - see if following steps are affected.
+- Use Ertel 4391 to have more precise sport codes in D10
 
-- handle all cases of unexisting raw files (cura)
+- cura : handle all cases of unexisting raw files
 
 - Refactor g55 commands : "all" is useless
 
@@ -11,6 +11,8 @@
 
 - Harmonize all exports, use transform/csicop/si42/export.php code
 
+- tweak2csv : code should be factorized, available to all datafiles
+              (cura, 1083MED, 4391SPO)
 - tweak2csv : include nb of modified records in report
 
 - fix nobilities in cura files
@@ -19,7 +21,6 @@
 
 - rename Cura::loadTmpCsv() to load5csv() - same in newalch and other datasets
     Harmonize also raw_filename(), tmp_csv_filename()
-    
     
 - Refactor generated filenames : G55570SPO, GQA1, ERT4384SPO, MUL1083MED ?
     adapt doc of 1083MED
@@ -35,7 +36,7 @@
     => inject Müller 1083MED in A2 and E1
     => Use to test legal time restoration on serie A
 
-- share/ hierarchy
+- share/ hierarchy is a big mess
 
 - profession-codes.csv : add wd codes + Ertel codes.
 
