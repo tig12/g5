@@ -20,8 +20,8 @@ class look implements Command{
         php run-g5.php newalch muller1083 look gnr
     **/
     const POSSIBLE_PARAMS = [
-        'date' => 'Compare dates between Irving and Ertel, SI42, Gauquelin',
-        'si42' => 'Compare with file SI42',
+        'ertel' => 'Compare Irving and Ertel',
+        'si42'  => 'Compare with file SI42',
     ];
     
     // *****************************************
@@ -58,36 +58,69 @@ class look implements Command{
     }
     
     // ******************************************************
-    /** 
-        Compares Irving dates with Ertel4391, SI42 an D10
-        File    | Ids
-        --------+-----
-        Irving  | CSID
-        SI42    | CSID
-        Ertel   | CSID GQID
-        D10     | GQID
+    /**
+        Shows the differences of dates between Irving and SI42.
+        Differences on dates is done by look_date(), but the purpose of this function
+        was to fix the differences of ids between SI42 and Irving.
+        The output of this function was used to build Irving::IRVING_SI42
     **/
-    private static function look_date(){
+    private static function look_si42(){
+        $si42 = csvAssociative::compute(SI42::tmp_filename(), G5::CSV_SEP);
+        $irving = Irving::loadTmpCsv_csid();
+        
+        $report = '';
+        $nDiff = 0;
+        foreach($si42 as $srow){
+            $sdate = $srow['DATE'];
+            $irow = $irving[$srow['CSID']];
+            $idate = substr($irow['DATE'], 0, 10);
+            if($idate != $sdate){
+                $report .= "irving {$irow['CSID']} $idate {$irow['C2']} {$irow['FNAME']} {$irow['GNAME']}\n";
+                $report .= "si42   {$srow['CSID']} $sdate {$srow['C2']} {$srow['FNAME']} {$srow['GNAME']}\n";
+                $report .= "\n";
+                $nDiff++;
+            }
+        }
+        $report .= "$nDiff differences\n";
+        
+        return $report;
+    }
+    
+    // ******************************************************
+    /** 
+        Compares Irving dates with Ertel4391
+    **/
+    private static function look_ertel(){
+        
+        $report = '';
         
         $irving = Irving::loadTmpCsv_csid();
-        $d10 = Cura::loadTmpCsv_num('D10');
         $ertel = Ertel4391::loadTmpFile();
-        $ertel_csid = [];
-        $ertel_gqid = [];
-        foreach($ertel as $row){
-            $CSID = $row['CSINR'];
+        $nOK = $nDiff = 0;
+        foreach($ertel as $erow){
+            $CSID = $erow['CSINR'];
             if($CSID == '' || $CSID == 0){
                 continue;
             }
-            $ertel_csid[$CSID] = $row;
-            $ertel_gqid[$row['G_NR']] = $row;
+            $nOK++;
+            $irow = $irving[$CSID];
+            $dateI = substr($irow['DATE'], 0, 10);
+            $nameI = $irow['FNAME'] . ' ' . $irow['GNAME'];
+            $dateE = $erow['DATE'];
+            $nameE = $erow['FNAME'] . ' ' . $erow['GNAME'];
+            if($dateI != $dateE){
+                $nDiff++;
+                $report .= "CSICOP $CSID = Ertel {$erow['NR']}\n";
+                $report .= "Irving $dateI $nameI\n";
+                $report .= "Ertel  $dateE $nameE\n";
+                $report .= "\n";
+            }
         }
-        $si42 = csvAssociative::compute(SI42::tmp_filename(), G5::CSV_SEP);
-        foreach($si42 as $row){
-            $si42_csid[$row['CSID']] = $row;
-        }
+        $report .= "$nOK records match dates\n";
+        $report .= "$nDiff Irving dates different from Ertel 4391\n";
+        return $report;
         
-        $nOK = $nDiffS = $nDiffE = $nDiffG = 0; // nb of different dates between Irving and other files
+        $nOK = $nDiffE = $nDiffG = 0; // nb of different dates between Irving and other files
         $n = 0;
         $report = '';
         foreach($irving as $CSID => $irow){
@@ -95,29 +128,27 @@ class look implements Command{
             if(!isset($ertel_csid[$CSID])){
                 continue;
             }
+//if($CSID == 171) die("\n<br>die here " . __FILE__ . ' - line ' . __LINE__ . "\n");
             $n++;
             $CSID = $irow['CSID'];
             $dateI = substr($irow['DATE'], 0, 10);
             $nameI = $irow['FNAME'] . ' ' . $irow['GNAME'];
-            $dateS = $si42_csid[$CSID]['DATE'];
-            $nameS = $si42_csid[$CSID]['FNAME'] . ' ' . $si42_csid[$CSID]['GNAME'];
             $dateE = $ertel_csid[$CSID]['DATE'];
             $nameE = $ertel_csid[$CSID]['FNAME'] . ' ' . $ertel_csid[$CSID]['GNAME'];
             $NUM = str_replace('D10-', '', $ertel_csid[$CSID]['GNUM']);
             $dateG = substr($d10[$NUM]['DATE'], 0, 10);
             $nameG = $d10[$NUM]['FNAME'] . ' ' . $d10[$NUM]['GNAME'];
-            $diffS = $dateI != $dateS;
+            
             $diffE = $dateI != $dateE;
             $diffG = $dateI != $dateG;
+            
             //if(true){
-            if($diffE || $diffS || $diffG){
+            if($diffE || $diffG){
                 $report .= "CSICOP $CSID = Ertel {$ertel_csid[$CSID]['NR']} = D10 $NUM\n";
                 $report .= "Irving $dateI $nameI\n";
-                $report .= "SI42   $dateS $nameS\n";
                 $report .= "Ertel  $dateE $nameE\n";
                 $report .= "D10    $dateG $nameG\n";
                 $report .= "\n";
-                if($diffS) $nDiffS++;
                 if($diffE) $nDiffE++;
                 if($diffG) $nDiffG++;
             }
@@ -128,33 +159,10 @@ class look implements Command{
         $report .= "------------------\n";
         $report .= "$n records analyzed\n";
         $report .= "$nOK records match dates in the 4 files\n";
-        $report .= "$nDiffS Irving dates different from S.I. 4.2\n";
         $report .= "$nDiffE Irving dates different from Ertel 4391\n";
         $report .= "$nDiffG Irving dates different from D10\n";
         
         return $report;
     }
     
-    // ******************************************************
-    /**
-        @param $
-    **/
-    private static function look_si42(){
-        $si42 = csvAssociative::compute(SI42::tmp_filename(), G5::CSV_SEP);
-        $irving = Irving::loadTmpCsv_csid();
-        
-        $report = '';
-        foreach($si42 as $srow){
-            $irow = $irving[$srow['CSID']];
-            $idate = substr($irow['DATE'], 0, 10);
-            $sdate = $srow['DATE'];
-            if($idate != $sdate){
-                $report .= "si42   {$srow['CSID']} $sdate {$srow['C2']} {$srow['FNAME']} {$srow['GNAME']}\n";
-                $report .= "irving {$irow['CSID']} $idate {$irow['C2']} {$irow['FNAME']} {$irow['GNAME']}\n";
-                $report .= "\n";
-            }
-        }
-        
-        return $report;
-    }
 }// end class

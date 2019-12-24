@@ -1,8 +1,8 @@
 #
-# Human corrections to file 1083MED
+# Human corrections to file 4391SPO
 # Fields sorted by NR
 # 
-# 2019-10-18 15:53:48+02:00, Thierry Graff : Creation
+# 2019-12-23, Thierry Graff : Creation
 #
 
 -
@@ -81,6 +81,20 @@
   build-notes: seen while comparing with CSICOP dates
 
 -
+  NR: 2220
+  CSINR: 180
+  build-notes: |
+    Original value of CSINR = 181
+    Modif done to adapt to CSICOP change of ids
+    Does not originate from an error in Ertel's file
+  
+-
+  NR: 2291
+  CSINR: 211
+  build-notes: |
+    Original value = 181
+    Error in Ertel's file
+-
   NR: 2410
   GNUM: D10-753
   build-notes: seen while comparing with CSICOP dates
@@ -133,4 +147,54 @@
 -
   NR: 3086
   GNUM: D10-972
-  build-notes: seen while comparing with CSICOP dates
+  CSINR: 267
+  build-notes: |
+    GNUM error seen while comparing with CSICOP dates
+    Original value of CSINR = 266
+    Modif done to adapt to CSICOP change of ids
+    Does not originate from an error in Ertel's file
+    
+-
+  NR: 3106
+  CSINR: 270
+  build-notes: |
+    Original value of CSINR = 269
+    Modif done to adapt to CSICOP change of ids
+    Does not originate from an error in Ertel's file
+    
+-
+  NR: 3112
+  CSINR: 271
+  build-notes: |
+    Original value of CSINR = 270
+    Modif done to adapt to CSICOP change of ids
+    Does not originate from an error in Ertel's file
+    
+-
+  NR: 3121
+  CSINR: 272
+  build-notes: |
+    Original value of CSINR = 271
+    Error in Ertel's file
+    
+-
+  NR: 4326
+  CSINR: 394
+  build-notes: |
+    Original value of CSINR = 396
+    Error in Ertel's file
+    
+-
+  NR: 4327
+  CSINR: 395
+  build-notes: |
+    Original value of CSINR = 394
+    Error in Ertel's file
+    
+-
+  NR: 4328
+  CSINR: 396
+  build-notes: |
+    Original value of CSINR = 395
+    Error in Ertel's file
+    

@@ -1,6 +1,7 @@
 <?php
 /******************************************************************************
-    File sent by Kenneth Irving
+    File containing 408 sportsmen from CSICOP test.
+    Sent by Kenneth Irving, originally coming from Dennis Rawlins
     
     @license    GPL
     @history    2019-12-23 00:38:32+01:00, Thierry Graff : Creation
@@ -31,6 +32,31 @@ class Irving{
         'SPORT',
         'MA36',
         'CANVAS',
+    ];
+    
+    /** 
+        Modifications done on ids during raw2csv step.
+        Purpose of these modifs is to have the same ids in SI42 and Irving.
+        SI42 order was prefered to Irving because :
+            - alphabetical order is respected
+            - SI42 is the only known published group
+        Format : Irving id => SI42 id.
+        This correspondance is only used in raw2csv.
+        After this step, Irving ids and SI42 ids are identical.
+    **/
+    const IRVING_SI42 = [
+        180 => 181,
+        181 => 180,
+        211 => 210,
+        210 => 211,
+        266 => 267,
+        267 => 268,
+        268 => 269,
+        269 => 270,
+        270 => 271,
+        271 => 266,
+        354 => 355,
+        355 => 354,
     ];
     
     /** Irving's raw file **/

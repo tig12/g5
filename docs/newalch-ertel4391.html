@@ -136,6 +136,11 @@ One very strange feature of this file : many records don't contain birth time. S
     <li>
         In <b>[TME]</b>, Ertel talks about 192 records common to CSICOP and Gauquelin (file D10).
         <br>In the file, 192 records have a CSICOP id, but only 190 match.
+        <br>Not fixed.
+    </li>
+    <li>
+        5 associations with CSICOP file are erroneous (out of 190 - error rate 2.63 %).
+        <br>Fixed in step <code>raw2csv</code>.
     </li>
     <li>
         26 associations with file D10 are erroneous (out of 349 - error rate 7.45 %).
@@ -311,7 +316,7 @@ An interest of this file is the presence of columns indicating the ids of the re
     <li><code>G_NR</code> : id in Gauquelin's LERRCP (A1 D6 D10)</li>
     <li><code>PARA_NR</code> : id in Comité Para test</li>
     <li><code>CFEPNR</code> : id in CFEPP test</li>
-    <li><code>CSINR</code> : id in CSICOP</li>
+    <li><code>CSINR</code> : id in CSICOP test</li>
     <li><code>G55</code> : Presence in Gauquelin 1955 experience</li>
 </ul>
 This lists the number of records associated to the external datasets.
@@ -325,6 +330,22 @@ CSICOP           CSINR 	   : 192 (4.38 %)
 CFEPP 	         CFEPNR    : 925 (21.1 %)
 </pre>
 
+<!-- ************************************* -->
+<h3>Links to CSICOP</h3>
+Date comparisons done to <a href="csicop.html">build CSICOP test</a> showed errors in Ertel's file.
+<br>Two records have a <code>CSINR</code> = 0 ; they correspond to existing records in file D10, but are absent from CSICOP file.
+<table class="wikitable margin">
+    <tr><th>Ertel Id</th><th>Gauquelin id</th><th>Person</th></tr>
+    <tr><td>2285</td><td>D10-726</td><td>Kono Tom (Tomio) 1930-07-27</td></tr>
+    <tr><td>2873</td><td>D10-894</td><td>Miller John L. 1947-04-29</td></tr>
+</table>
+
+Ertel file also contains 5 wrong associations to CSICOP, fixed in step <code>tweak2csv</code> (see file <code>3-edited/newalch-tweaked/4391SPO.yml</code> for the details).
+
+<!-- ************************************* -->
+<!-- 
+<h3>Links to D10</h3>
+-->
 
 <!-- ********************************************************************************* -->
 <h2><a name="column-quel-origin">Column QUEL (origin)</a></h2>
