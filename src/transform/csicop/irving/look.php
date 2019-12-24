@@ -102,7 +102,6 @@ class look implements Command{
             if($CSID == '' || $CSID == 0){
                 continue;
             }
-            $nOK++;
             $irow = $irving[$CSID];
             $dateI = substr($irow['DATE'], 0, 10);
             $nameI = $irow['FNAME'] . ' ' . $irow['GNAME'];
@@ -115,53 +114,12 @@ class look implements Command{
                 $report .= "Ertel  $dateE $nameE\n";
                 $report .= "\n";
             }
-        }
-        $report .= "$nOK records match dates\n";
-        $report .= "$nDiff Irving dates different from Ertel 4391\n";
-        return $report;
-        
-        $nOK = $nDiffE = $nDiffG = 0; // nb of different dates between Irving and other files
-        $n = 0;
-        $report = '';
-        foreach($irving as $CSID => $irow){
-            // test on Ertel because it links with D10
-            if(!isset($ertel_csid[$CSID])){
-                continue;
-            }
-//if($CSID == 171) die("\n<br>die here " . __FILE__ . ' - line ' . __LINE__ . "\n");
-            $n++;
-            $CSID = $irow['CSID'];
-            $dateI = substr($irow['DATE'], 0, 10);
-            $nameI = $irow['FNAME'] . ' ' . $irow['GNAME'];
-            $dateE = $ertel_csid[$CSID]['DATE'];
-            $nameE = $ertel_csid[$CSID]['FNAME'] . ' ' . $ertel_csid[$CSID]['GNAME'];
-            $NUM = str_replace('D10-', '', $ertel_csid[$CSID]['GNUM']);
-            $dateG = substr($d10[$NUM]['DATE'], 0, 10);
-            $nameG = $d10[$NUM]['FNAME'] . ' ' . $d10[$NUM]['GNAME'];
-            
-            $diffE = $dateI != $dateE;
-            $diffG = $dateI != $dateG;
-            
-            //if(true){
-            if($diffE || $diffG){
-                $report .= "CSICOP $CSID = Ertel {$ertel_csid[$CSID]['NR']} = D10 $NUM\n";
-                $report .= "Irving $dateI $nameI\n";
-                $report .= "Ertel  $dateE $nameE\n";
-                $report .= "D10    $dateG $nameG\n";
-                $report .= "\n";
-                if($diffE) $nDiffE++;
-                if($diffG) $nDiffG++;
-            }
             else{
                 $nOK++;
             }
         }
-        $report .= "------------------\n";
-        $report .= "$n records analyzed\n";
-        $report .= "$nOK records match dates in the 4 files\n";
-        $report .= "$nDiffE Irving dates different from Ertel 4391\n";
-        $report .= "$nDiffG Irving dates different from D10\n";
-        
+        $report .= "$nOK records match dates\n";
+        $report .= "$nDiff Irving dates different from Ertel 4391\n";
         return $report;
     }
     

@@ -60,9 +60,10 @@ class raw2csv implements Command{
             $min = str_pad($fields[7] , 2, '0', STR_PAD_LEFT);
             $new['DATE'] = "$day $h:$min";
             $new['TZ'] = $fields[9];
-            $new['C2'] = $fields[10];
             $new['LG'] = -self::lgLat($fields[11], $fields[12]);
             $new['LAT'] = self::lgLat($fields[13], $fields[14]);
+            $new['C2'] = $fields[10];
+            $new['CY'] = 'US';
             $new['SPORT'] = $fields[15];
             $new['MA36'] = $fields[16];
             $new['CANVAS'] = trim($fields[17]);
@@ -83,7 +84,7 @@ class raw2csv implements Command{
     
     // ******************************************************
     /**
-        @param $
+        Auxiliary of execute()
     **/
     private static function lgLat($deg, $min){
         return $deg + round(($min / 60), 5);
