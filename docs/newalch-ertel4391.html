@@ -68,9 +68,10 @@ This page deals with the file <a href="https://newalchemypress.com/gauquelin/gau
             <a href="#integration-to-g5">Integration to g5</a>
             <ul>
                 <li><a href="#2-1-download-raw-file">Download raw file</a></li>
-                <li><a href="#2-2-raw2csv">raw2csv</a></li>
-                <li><a href="#2-3-fix-cura-a1-names">Fix cura A1 names</a></li>
-                <li><a href="#2-4-generate-skeptics-files">Generate skeptics' files</a></li>
+                <li><a href="#2-2-full-execution">Full execution</a></li>
+                <li><a href="#2-3-raw2csv">raw2csv</a></li>
+                <li><a href="#2-4-fix-cura-a1-names">Fix cura A1 names</a></li>
+                <li><a href="#2-5-generate-skeptics-files">Generate skeptics' files</a></li>
             </ul>
         </li>
         <li>
@@ -80,7 +81,7 @@ This page deals with the file <a href="https://newalchemypress.com/gauquelin/gau
             <a href="#links-to-other-datasets">Links to other datasets</a>
         </li>
         <li>
-            <a href="#column-quel-origin">Column QUEL (origin)</a>
+            <a href="#ertel-s-subsamples">Ertel's subsamples</a>
         </li>
         <li>
             <a href="#birth-dates">Birth dates</a>
@@ -99,6 +100,7 @@ This page deals with the file <a href="https://newalchemypress.com/gauquelin/gau
         </li>
     </ul>
 </nav>
+
 
 <!-- ********************************************************************************* -->
 <h2><a name="ertel-4391-generalities">Ertel 4391 generalities</a></h2>
@@ -184,7 +186,7 @@ data/
 </pre>
 
 <!-- ************************************* -->
-<h3>Full execution</h3>
+<h3><a name="2-2-full-execution">Full execution</a></h3>
 
 The full set of transformations can be executed with the command :
 
@@ -199,7 +201,7 @@ php run-g5.php newalch ertel4391 export dl
 </pre>
 
 <!-- ************************************* -->
-<h3><a name="2-2-raw2csv">raw2csv</a></h3>
+<h3><a name="2-3-raw2csv">raw2csv</a></h3>
 The first step is to generate the file <b><code>5-newalch-csv/4391SPO.csv</code></b> :
 <pre>php run-g5.php newalch ertel4391 raw2csv</pre>
 This step copies the contents of <code>3a_sports-utf8.txt</code> to <code>4391SPO.csv</code> with the following modifications ;
@@ -236,8 +238,8 @@ This step copies the contents of <code>3a_sports-utf8.txt</code> to <code>4391SP
 Other columns are copied as is.
 
 <!-- ************************************* -->
-<h3><a name="2-3-fix-cura-a1-names">Fix cura A1 names</a></h3>
-This step is included in the restoration process of file A1, not part of Ertel4391 process.
+<h3><a name="2-4-fix-cura-a1-names">Fix cura A1 names</a></h3>
+This step is included in the restoration process of file A1, not part of Ertel 4391 process.
 <br>
 <br>Fixes 100% of the remaining unidentified names in A1.
 
@@ -256,7 +258,7 @@ Nb corrections : 117
 </pre>
 
 <!-- ************************************* -->
-<h3><a name="2-4-generate-skeptics-files">Generate skeptics' files</a></h3>
+<h3><a name="2-5-generate-skeptics-files">Generate skeptics' files</a></h3>
 Draft code ; in <code>4391SPO.csv</code>, the associations between lines and skeptic ids are sometimes wrong or missing.
 <br>Can come from a problem in <code>4391SPO.csv</code>, a misunderstanding of column meanings or a bug in the code.
 
@@ -302,12 +304,24 @@ In <code>4391SPO.csv</code>, 611 records have a <code>PARA_NR</code> value.
     <li>76 records have column <code>QUEL</code> = <code>GCPAR</code> ; they have birth day but not birth time.</li>
 </ul>
 
+<!-- ************************************* -->
+<h4>Links to CSICOP</h4>
+Date comparisons done to <a href="csicop.html">build CSICOP test</a> showed errors in Ertel's file.
+<br>Two records have a <code>CSINR</code> = 0 ; they correspond to existing records in file D10, but are absent from CSICOP file.
+<table class="wikitable margin">
+    <tr><th>Ertel Id</th><th>Gauquelin id</th><th>Person</th></tr>
+    <tr><td>2285</td><td>D10-726</td><td>Kono Tom (Tomio) 1930-07-27</td></tr>
+    <tr><td>2873</td><td>D10-894</td><td>Miller John L. 1947-04-29</td></tr>
+</table>
+
+Ertel file also contains 5 wrong associations to CSICOP, fixed in step <code>tweak2csv</code> (see file <code>3-edited/newalch-tweaked/4391SPO.yml</code> for   details).
+
+
 <!-- ********************************************************************************* -->
 <h2><a name="looking-at-the-file">Looking at the file</a></h2>
 <b>NOTE</b> : the following code was written to try to understand the content of the file.
 <br>I don't understand all the columns, so consider the informations about the file as suppositions, there are probably mistakes.
-<br>
-<br>With class <code>src/transform/newalch/ertel4391/look.php</code> :
+
 <pre>
 php run-g5.php newalch ertel4391 look 
 PARAMETER MISSING in g5\transform\newalch\ertel4391\look
@@ -318,10 +332,9 @@ For example :
 php run-g5.php newalch ertel4391 look sport
 </pre>
 
-
 <!-- ********************************************************************************* -->
 <h2><a name="links-to-other-datasets">Links to other datasets</a></h2>
-<pre>php run-g5.php newalch ertel4391 look ids</pre>
+
 An interest of this file is the presence of columns indicating the ids of the records in other data sets.
 <br>The information is contained in the following columns :
 <ul>
@@ -333,9 +346,11 @@ An interest of this file is the presence of columns indicating the ids of the re
     <li><code>CSINR</code> : id in CSICOP test</li>
     <li><code>G55</code> : Presence in Gauquelin 1955 experience</li>
 </ul>
-This lists the number of records associated to the external datasets.
-<br>
-<br>Here are the number of records related to other data sets :
+
+<pre>php run-g5.php newalch ertel4391 look ids</pre>
+
+lists the number of records associated to the external datasets :
+
 <pre>
 Gauquelin        G_NR 	   : 4384 (100 %)
 Gauquelin 1955 	 G55       : 553 (12.61 %)
@@ -344,33 +359,14 @@ CSICOP           CSINR 	   : 192 (4.38 %)
 CFEPP 	         CFEPNR    : 925 (21.1 %)
 </pre>
 
-<!-- ************************************* -->
-<h3>Links to CSICOP</h3>
-Date comparisons done to <a href="csicop.html">build CSICOP test</a> showed errors in Ertel's file.
-<br>Two records have a <code>CSINR</code> = 0 ; they correspond to existing records in file D10, but are absent from CSICOP file.
-<table class="wikitable margin">
-    <tr><th>Ertel Id</th><th>Gauquelin id</th><th>Person</th></tr>
-    <tr><td>2285</td><td>D10-726</td><td>Kono Tom (Tomio) 1930-07-27</td></tr>
-    <tr><td>2873</td><td>D10-894</td><td>Miller John L. 1947-04-29</td></tr>
-</table>
+Column <code>QUEL</code> seems to indicate the origin of the records.
 
-Ertel file also contains 5 wrong associations to CSICOP, fixed in step <code>tweak2csv</code> (see file <code>3-edited/newalch-tweaked/4391SPO.yml</code> for the details).
-
-<!-- ************************************* -->
-<!-- 
-<h3>Links to D10</h3>
--->
-
-<!-- ********************************************************************************* -->
-<h2><a name="column-quel-origin">Column QUEL (origin)</a></h2>
 <pre>php run-g5.php newalch ertel4391 look quel</pre>
-This column seems to indicate the origin of the records. 
-<br>Here are the codes of this column and the number of associated records.
+gives the different values of <code>QUEL</code> and corresponding number of records :
 <pre>
-[*G:D10] => 2
 [G:A01] => 2087
 [G:D06] => 450
-[G:D10] => 349
+[G:D10] => 351
 [GCPAR] => 76
 [GMIND] => 453
 [GMING] => 115
@@ -380,72 +376,185 @@ This column seems to indicate the origin of the records.
 [G_ADD] => 202
 </pre>
 
-<code>G:A01</code>, <code>G:D06</code>, <code>G:D10</code> refer to series <code>A1</code>, <code>D6</code> and <code>D10</code> of Gauquelins' LERRCP publications.
-<br><code>*G:D10</code> looks like a typo and probably means <code>D10</code> (I checked, the 2 records are present in D10 file).
-<br>
-<br><code>GCPAR</code> seems to refer to the records called "Para-lowers" by Ertel.
-<br>
-<br>Some suppositions can be found in <b>[KNS 97]</b> p 25 :
-<br><code>GMINV</code> means Gauquelin MINor Velo.
-<br><code>GMIND</code> means Gauquelin MINor Dictionary
-<br>
-<br>I don't understand yet the other codes.
-
 <!-- ********************************************************************************* -->
-<h2><a name="birth-dates">Birth dates</a></h2>
-<pre>php run-g5.php newalch ertel4391 look date</pre>
-<pre>
-BUG in date : 46 Albani Peppino : -  -
-N total : 4384
-N with birth time : 2086 (47.58 %)
-N without birth time : 2297 (52.4 %)
-N without birth time from Gauquelin LERRCP : 802
-</pre>
-Among the 802 missing times coming from Gauquelin, 3 come from A1 and 799 from D6 and D10.
+<h2><a name="ertel-s-subsamples">Ertel's subsamples</a></h2>
 
-<!-- ********************************************************************************* -->
-<h2><a name="eminence">Eminence</a></h2>
-<pre>php run-g5.php newalch ertel4391 look eminence</pre>
-Columns <code>ZITRANG ZITSUM ZITATE ZITSUM_OD</code> deal with eminence.
+Combining the output of the two previous commands permits a partial reconstitution of Table 1 given in [Ertel 88], p 59.
+<br>This table and accompanying notes describes the samples used by Ertel to build his pool of 4391 records.
+<br>
+<br>Notes :
 <ul>
-    <li><code>ZITRANG</code> is the eminence rank (1 - 6).</li>
-    <li><code>ZITSUM</code> is the number of citations.</li>
-    <li><code>ZITATE</code> is the list of sources where the person is cited.</li>
-    <li><code>ZITSUM_OD</code> : I don't know - Equals to <code>ZITSUM</code> or <code>ZITSUM - 1</code></li>
+    <li>
+        In columns N<sub>QUEL</sub> and N<sub>Id</sub>, the numbers in bold are the numbers counted by program in Ertel 4391 file.
+        <br>Numbers in parentheses are the numbers given in [Ertel 88].
+    </li>
 </ul>
 
-<br>Here are ranks and citation counts, associated with the number of records.
-<div class="flex-wrap margin-top">
-<div>
-<center><b>Ranks</b></center>
-<pre>
-[1] => 2242
-[2] => 1108
-[3] => 549
-[4] => 251
-[5] => 101
-[6] => 133
-</pre>
-</div>
 
-<div>
-<center><b>Counts</b></center>
-<pre>
-[0] => 2242
-[1] => 1108
-[2] => 549
-[3] => 251
-[4] => 101
-[5] => 75
-[6] => 37
-[7] => 18
-[8] => 3
-</pre>
-</div>
-</div><!-- end class="flex-wrap" -->
+<style>
+    #table1 td:nth-child(3), td:nth-child(5){white-space:pre;}
+</style>
+<table id="table1" class="wikitable margin">
+    <tr><th>QUEL</th><th>N<sub>QUEL</sub></th><th>Id</th><th>N<sub>Id</sub></th><th>Ertel sample</th><th>Comments</th></tr>
+    
+    <tr>
+        <td rowspan="4">G:A01</td>
+        <td rowspan="4">2087</td>
+        <td colspan="3"></td>
+        <td>
+            G:A01 records come from <a href="cura-A.html">file A1</a>.
+            <br>Cura file contains 2087 records, corresponds to number given by Ertel.
+        </td>
+    </tr>
+    <tr>
+        <td>G55</td>
+        <td><b>553</b><br>(567)</td>
+        <td>1 - First French</td>
+        <td>
+            <a href="g55.html">Gauquelin 1955 restoration</a> finds 564 G55 records present in Cura file A1. 
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><b>999</b><br>(1189)</td>
+        <td>2 - First European</td>
+        <td>
+            From [Ertel 88] :
+            <ul>
+                <li>915 non-french athletes used for Gauquelin 1960 european replication</li>
+                <li>274 casual data gathering</li>
+            </ul>
+            This is supposed to give a total of 1189 records.
+            <br>Observed number in Ertel file is 2087 - 553 - 535 = 999 records.
+        </td>
+    </tr>
+    <tr>
+        <td>PARA_NR</td>
+        <td><b>535</b><br>(535)</td>
+        <td>6 - Para champions</td>
+        <td>
+            Corresponds to the list published by Comité Para for its 1976 test.
+            <br>These are records with a QUEL = PARA_NR, and GCPAR empty.
+            <br>535 + 76 = 611 ; numbers given in [Ertel 88] correspond to the content of the file.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>GCPAR</td>
+        <td><b>76</b><br>(76)</td>
+        <td>PARA_NR</td>
+        <td>76</td>
+        <td>7 - Para lowers</td>
+        <td>
+            These 76 are part of a group of 241 soccer players gathered for the Comité Para test (1976).
+            <br>They were not retained in Comité Para experiment because considered less eminent and remained unpublished.
+            <br>They were copied by Ertel when he visited Gauquelin laboratory.
+            <br>Ertel copied only 76 because it was for only 76 out of 241 (ranks 1-76) that mars sector was computed.
+            <br>In file Ertel 4391, the 76 have sport = FOOT and country = BE.
+        </td>
+    </tr>
+    
+    <tr>
+        <td rowspan="3">G:D10<br>*G:D10</td>
+        <td rowspan="3"><b>351</b><br>(351)</td>
+        <td colspan="3"></td>
+        <td>
+            G:D10 records come from <a href="cura-D10.html">file D10</a>
+            <br>Cura file contains 352 sportsmen, not 351.
+            <br>(Code <code>*G:D10</code> is a typo concerning 2 records, present in D10 Cura file)
+        </td>
+    </tr>
+    <tr>
+        <td>CSINR</td>
+        <td><b>192</b><br>(192)</td>
+        <td>8 - CSICOP-U.S.</td>
+        <td>
+            Out of the 408 (Ertel cites 409) CSICOP records, Ertel uses only 192 also gathered by Gauquelin for his 1979 US test because mars 36 sector information was not available for CSICOP data.
+            <br>In file Ertel 4391, 2 records don't match D10, leading to 190 effective matches.
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><b>159</b><br>(158)</td>
+        <td>12 - GAUQ-U.S.</td>
+        <td>
+            Remaining sportsmen of D10, not already included in CSICOP test.
+            <br>159 = 351 - 192
+        </td>
+    </tr>
+    
+    <tr>
+        <td>GMINI</td>
+        <td colspan="3"><b>599</b><br>(600)</td>
+        <td>3 - Italian football</td>
+        <td>
+            Unpublished by Gauquelin (not famous enough), copied manually by Ertel.
+            <br>In file Ertel 4391, all records marked GMINV are marked sport = FOOT and country = IT.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>GMING</td>
+        <td colspan="3"><b>115</b><br>(117)</td>
+        <td>4 - German various</td>
+        <td>
+            In file Ertel 4391, all records marked GMING have country = DE.
+            <br>Possible meaning : Gauquelin MINor German
+        </td>
+    </tr>
+    
+    <tr>
+        <td>G_ADD</td>
+        <td colspan="3"><b>202</b><br>(204)</td>
+        <td>5 - French occasionals</td>
+        <td>
+            Copied manually by Ertel in Gauquelin's laboratory.
+            <br>Considered as "low-low-ranking" by Gauquelin.
+        </td>
+    </tr>
+    <tr>
+        <td>G:D06</td>
+        <td colspan="3"><b>450</b><br>(450)</td>
+        <td>9 - Second European</td>
+        <td>
+            G:D6 records come from <a href="cura-D6.html">file D6</a>.
+            <br>Cura file contains 449 sportsmen, not 450.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>GMINV</td>
+        <td colspan="3"><b>24</b><br>(24)</td>
+        <td>10 - Italian cyclists</td>
+        <td>
+            Copied manually by Ertel in Gauquelin's laboratory.
+            <br>In file Ertel 4391, all records marked GMINV are marked sport = CYCL and country = IT.
+            <br>Supposition from [KNS 97] p 25 : <code>GMINV</code> could mean Gauquelin MINor Vélo
+        </td>
+    </tr>
+    
+    <tr>
+        <td>GMIND</td>
+        <td colspan="3"><b>453</b><br>(455)</td>
+        <td>11 - Lower French</td>
+        <td>
+            Copied manually by Ertel in Gauquelin's laboratory. 
+            <br>Supposition from [KNS 97] p 25 : <code>GMIND</code> could mean Gauquelin MINor Dictionary
+        </td>
+    </tr>
+    
+    <tr>
+        <td>G_79F</td>
+        <td colspan="3"><b>27</b><br>(27)</td>
+        <td>13 - Plus special</td>
+        <td>
+            Supplementary data sent by Gauquelin to Ertel after his visit in Paris.
+        </td>
+    </tr>
+</table>
 
-<!-- ************************************* -->
-<h3><a name="7-1-data-sources-for-citation-count">Data sources for citation count</a></h3>
+<!-- ********************************************************************************* -->
+<h2><a name="7-1-data-sources-for-citation-count">Data sources</a></h2>
 18 distinct sources can be extracted from column <code>ZITATE</code> :
 <br>These lists associate the source code with the number of records found in this source.
 
@@ -498,6 +607,62 @@ Columns <code>ZITRANG ZITSUM ZITATE ZITSUM_OD</code> deal with eminence.
 This can be precisely matched with <b>[Ertel 88]</b> : in Table 2, he lists 18 sources. Appendix 3 provides a more detailed list of 21 sources, <i>with their codes</i>. 4 sources have code <code>O</code>, which makes 18 codes.
 <br>I checked, there is an exact matching between column <code>ZITATE</code> and Ertel's list.
 
+
+
+<!-- ********************************************************************************* -->
+<h2><a name="birth-dates">Birth dates</a></h2>
+<pre>php run-g5.php newalch ertel4391 look date</pre>
+<pre>
+BUG in date : 46 Albani Peppino : -  -
+N total : 4384
+N with birth time : 2086 (47.58 %)
+N without birth time : 2297 (52.4 %)
+N without birth time from Gauquelin LERRCP : 802
+</pre>
+Among the 802 missing times coming from Gauquelin, 3 come from A1 and 799 from D6 and D10.
+
+
+<!-- ********************************************************************************* -->
+<h2><a name="eminence">Eminence</a></h2>
+<pre>php run-g5.php newalch ertel4391 look eminence</pre>
+Columns <code>ZITRANG ZITSUM ZITATE ZITSUM_OD</code> deal with eminence.
+<ul>
+    <li><code>ZITRANG</code> is the eminence rank (1 - 6).</li>
+    <li><code>ZITSUM</code> is the number of citations.</li>
+    <li><code>ZITATE</code> is the list of sources where the person is cited.</li>
+    <li><code>ZITSUM_OD</code> : I don't know - Equals to <code>ZITSUM</code> or <code>ZITSUM - 1</code></li>
+</ul>
+
+<br>Here are ranks and citation counts, associated with the number of records.
+<div class="flex-wrap margin-top">
+<div>
+<center><b>Ranks</b></center>
+<pre>
+[1] => 2242
+[2] => 1108
+[3] => 549
+[4] => 251
+[5] => 101
+[6] => 133
+</pre>
+</div>
+
+<div>
+<center><b>Counts</b></center>
+<pre>
+[0] => 2242
+[1] => 1108
+[2] => 549
+[3] => 251
+[4] => 101
+[5] => 75
+[6] => 37
+[7] => 18
+[8] => 3
+</pre>
+</div>
+</div><!-- end class="flex-wrap" -->
+
 <!-- ********************************************************************************* -->
 <h2><a name="sport-codes">Sport codes</a></h2>
 <pre>php run-g5.php newalch ertel4391 look sport</pre>
@@ -514,6 +679,7 @@ Incoherent association sport / IG, line Windal Claude : HOCK I
 
 Sport codes are mostly composed by 4 letters.
 <br>This list shows the IG column, and the number of records associated with each sport :
+<div class="flex-wrap">
 <pre>
 I AIRP : 396
 I ALPI : 9
@@ -535,6 +701,9 @@ I GYMN : 24
 G HAND : 12
 G HOCK : 21
 I HORS : 22
+</pre>
+
+<pre>
 I ICES : 16
 I JUDO : 5
 I MOTO : 4
@@ -556,6 +725,8 @@ I WEIG : 25
 I WRES : 19
 I YACH : 11
 </pre>
+</div><!-- end class="flex-wrap" -->
+
 Only one is composed by 3 letters (<code>TRA</code>), and this looks like a mistake. It corresponds to Charles Young (<a href="https://en.wikipedia.org/wiki/Charle_Young">wikipedia page</a>), and his sport is american football.
 <br>
 
@@ -582,6 +753,30 @@ generates the following table.
 <br>This shows that 12-sectors system does not catch all the information about the observed statistical effect.
 <br>This argument is used to say that using 36-sectors system is more efficient to observe the effects.
 
+<div class="flex-wrap">
+
+<table class="wikitable margin center">
+    <tr><th>MARS</th><th>MA12</th><th>MA_<br>(importance)</th></tr>
+    <tr><td>19</td><td>7</td><td>1</td></tr>
+    <tr><td>20</td><td>7</td><td>1</td></tr>
+    <tr><td>21</td><td>7</td><td>1</td></tr>
+    <tr><td>22</td><td>8</td><td>0</td></tr>
+    <tr><td>23</td><td>8</td><td>0</td></tr>
+    <tr><td>24</td><td>8</td><td>0</td></tr>
+    <tr><td>25</td><td>9</td><td>0</td></tr>
+    <tr><td>26</td><td>9</td><td>1</td></tr>
+    <tr><td>27</td><td>9</td><td>1</td></tr>
+    <tr><td>28</td><td>10</td><td>1</td></tr>
+    <tr><td>29</td><td>10</td><td>1</td></tr>
+    <tr><td>30</td><td>10</td><td>1</td></tr>
+    <tr><td>31</td><td>11</td><td>1</td></tr>
+    <tr><td>32</td><td>11</td><td>0</td></tr>
+    <tr><td>33</td><td>11</td><td>0</td></tr>
+    <tr><td>34</td><td>12</td><td>0</td></tr>
+    <tr><td>35</td><td>12</td><td>1</td></tr>
+    <tr class="bold"><td>36</td><td>12</td><td class="bold">2</td></tr>
+</table>
+
 <table class="wikitable margin center">
     <tr><th>MARS</th><th>MA12</th><th>MA_<br>(importance)</th></tr>
     <tr><td>1</td><td>1</td><td class="bold">2</td></tr>
@@ -602,25 +797,9 @@ generates the following table.
     <tr><td>16</td><td>6</td><td>0</td></tr>
     <tr><td>17</td><td>6</td><td>0</td></tr>
     <tr><td>18</td><td>6</td><td>1</td></tr>
-    <tr><td>19</td><td>7</td><td>1</td></tr>
-    <tr><td>20</td><td>7</td><td>1</td></tr>
-    <tr><td>21</td><td>7</td><td>1</td></tr>
-    <tr><td>22</td><td>8</td><td>0</td></tr>
-    <tr><td>23</td><td>8</td><td>0</td></tr>
-    <tr><td>24</td><td>8</td><td>0</td></tr>
-    <tr><td>25</td><td>9</td><td>0</td></tr>
-    <tr><td>26</td><td>9</td><td>1</td></tr>
-    <tr><td>27</td><td>9</td><td>1</td></tr>
-    <tr><td>28</td><td>10</td><td>1</td></tr>
-    <tr><td>29</td><td>10</td><td>1</td></tr>
-    <tr><td>30</td><td>10</td><td>1</td></tr>
-    <tr><td>31</td><td>11</td><td>1</td></tr>
-    <tr><td>32</td><td>11</td><td>0</td></tr>
-    <tr><td>33</td><td>11</td><td>0</td></tr>
-    <tr><td>34</td><td>12</td><td>0</td></tr>
-    <tr><td>35</td><td>12</td><td>1</td></tr>
-    <tr class="bold"><td>36</td><td>12</td><td class="bold">2</td></tr>
 </table>
+
+</div><!-- end class="flex-wrap" -->
 
 </article>
 </div><!-- end class="main" -->
