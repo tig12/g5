@@ -379,14 +379,20 @@ gives the different values of <code>QUEL</code> and corresponding number of reco
 <!-- ********************************************************************************* -->
 <h2><a name="ertel-s-subsamples">Ertel's subsamples</a></h2>
 
-Combining the output of the two previous commands permits a partial reconstitution of Table 1 given in [Ertel 88], p 59.
-<br>This table and accompanying notes describes the samples used by Ertel to build his pool of 4391 records.
+Combining the output of the two previous commands permits a reconstitution of Table 1 given in [Ertel 88], p 59.
+<br>This table and accompanying notes describe the samples used by Ertel to build his pool of 4391 records.
 <br>
 <br>Notes :
 <ul>
     <li>
         In columns N<sub>QUEL</sub> and N<sub>Id</sub>, the numbers in bold are the numbers counted by program in Ertel 4391 file.
         <br>Numbers in parentheses are the numbers given in [Ertel 88].
+    </li>
+    <li>
+        Sum of numbers computed by program :
+        <br>553 + 1202 + 332 + 76 + 192 + 159 + 599 + 115 + 202 + 450 + 24 + 453 + 27 = 4384
+        <br>Sum of [Ertel 88] numbers : 
+        <br>567 + 1189 + 332 + 76 + 192 + 158 + 600 + 117 + 204 + 450 + 24 + 455 + 27 = 4391
     </li>
 </ul>
 
@@ -416,7 +422,7 @@ Combining the output of the two previous commands permits a partial reconstituti
     </tr>
     <tr>
         <td></td>
-        <td><b>999</b><br>(1189)</td>
+        <td><b>1202</b><br>(1189)</td>
         <td>2 - First European</td>
         <td>
             From [Ertel 88] :
@@ -424,8 +430,10 @@ Combining the output of the two previous commands permits a partial reconstituti
                 <li>915 non-french athletes used for Gauquelin 1960 european replication</li>
                 <li>274 casual data gathering</li>
             </ul>
-            This is supposed to give a total of 1189 records.
-            <br>Observed number in Ertel file is 2087 - 553 - 535 = 999 records.
+            Total of 915 + 214 = 1189 records.
+            <br>In file Ertel 4391 :
+            <br>this cannot be computed using only QUEL, G55 and PARA_NR : among the 535 Para champions, the 203 athletes cannot be distinguished from the 332 new records (because Gauquelin 1960 groups are lost). Computing this number needs an extrnal information, given from Ertel note about sample 6 (the fact that 535 = 203 overlap + 332 new).
+            <br>Corresponding number is 2087 - 553 - 332 = 1202 records.
         </td>
     </tr>
     <tr>
@@ -436,6 +444,7 @@ Combining the output of the two previous commands permits a partial reconstituti
             Corresponds to the list published by Comité Para for its 1976 test.
             <br>These are records with a QUEL = PARA_NR, and GCPAR empty.
             <br>535 + 76 = 611 ; numbers given in [Ertel 88] correspond to the content of the file.
+            <br>[Ertel 88] : "Since Gauquelin had already 203 athletes from the Para smaple in his earlier studies (1955, 1960), only 332 are gained".
         </td>
     </tr>
     
