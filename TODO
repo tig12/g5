@@ -9,7 +9,7 @@
 
 - G55::prepareCuraMatch not designed correctly
 
-- Harmonize all exports, use transform/csicop/si42/export.php code
+- Harmonize all exports, use commands/csicop/si42/export.php code
 
 - tweak2csv : code should be factorized, available to all datafiles
               (cura, 1083MED, 4391SPO)

@@ -1,0 +1,31 @@
+
+
+name:   # usual, current name
+g:      # gender
+fname:  # family name
+gname:  # given name
+full-name:  # As written in the birth certificate
+fame-name:
+nickname:
+nobility:
+
+occus: []
+
+birth:
+  date:     # exact date of the birth certificate
+  tz:       # timezone offset
+  date-ut:  # for dates like cura...
+  place:
+    name:
+    c2:
+    cy:
+    geoid:
+    lg:
+    lat:
+
+sources: []
+  
+ids: []
+  
+history: []
+  

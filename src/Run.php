@@ -15,10 +15,10 @@ class Run{
     // ******************************************************
     /**
         Returns a list of data sets known by the program
-        = list of sub-directories of transform/
+        = list of sub-directories of commands/
     **/
     public static function getDatasets(){
-        return array_map('basename', glob(implode(DS, [__DIR__, 'transform', '*']), GLOB_ONLYDIR));
+        return array_map('basename', glob(implode(DS, [__DIR__, 'commands', '*']), GLOB_ONLYDIR));
     }
     
     
@@ -37,7 +37,7 @@ class Run{
         }
         // else return the directories located in the dataset's class directory
         // as the code is psr4, possible to list php files without using reflection.
-        $dir = implode(DS, [__DIR__, 'transform', $dataset]);
+        $dir = implode(DS, [__DIR__, 'commands', $dataset]);
         return array_map('basename', glob($dir . DS . '*', GLOB_ONLYDIR));
     }
     
@@ -57,20 +57,20 @@ class Run{
         }
         // else return the classes located in the datafile's class directory
         // as the code is psr4, possible to list php files without using reflection.
-        $dir = implode(DS, [__DIR__, 'transform', $dataset, $datafile]);
+        $dir = implode(DS, [__DIR__, 'commands', $dataset, $datafile]);
         $tmp = glob($dir . DS . '*.php');
         $res = [];
         foreach($tmp as $file){
             $basename = basename($file, '.php');
             try{
-                $class = new \ReflectionClass("g5\\transform\\$dataset\\$datafile\\$basename");
+                $class = new \ReflectionClass("g5\\commands\\$dataset\\$datafile\\$basename");
                 if($class->implementsInterface("g5\\patterns\\Command")){
                     $res[] = $basename;
                 }
             }
             catch(\Exception $e){
                 // silently ignore php files present in the directory, but containing errors
-                // echo "ERR new \\ReflectionClass(\\"g5\\transform\\$dataset\\$datafile\\$basename\\") \n" . $e->getMessage() . "\n";
+                // echo "ERR new \\ReflectionClass(\\"g5\\commands\\$dataset\\$datafile\\$basename\\") \n" . $e->getMessage() . "\n";
             }
         }
         return $res;
@@ -95,7 +95,7 @@ class Run{
         }
         // Class for dataset doesn't exist, use default 
         // look if a class corresponding to this action exists
-        $class = "g5\\transform\\$dataset\\$datafile\\$action";
+        $class = "g5\\commands\\$dataset\\$datafile\\$action";
         if(class_exists($class)){
             return [false, $class];
         }
@@ -114,7 +114,7 @@ class Run{
         Auxiliary of self::getDatafiles() and self::getActionClass().
     **/
     private static function datasetRouterClassname($dataset){
-        return implode("\\", ['g5', 'transform', $dataset, ucFirst($dataset) . 'Router']);
+        return implode("\\", ['g5', 'commands', $dataset, ucFirst($dataset) . 'Router']);
     }
 
     /** 
@@ -122,7 +122,7 @@ class Run{
         Auxiliary of self::getDatafiles() and self::getActionClass().
     **/
     private static function datasetRouterFilename($dataset){
-        return implode(DS, [__DIR__, 'transform', $dataset, ucFirst($dataset) . 'Router.php']);
+        return implode(DS, [__DIR__, 'commands', $dataset, ucFirst($dataset) . 'Router.php']);
     }
     
     
@@ -132,7 +132,7 @@ class Run{
         Auxiliary of self::getCommandClass().
     **/
     private static function datasetCommandClassname($dataset){
-        return implode("\\", ['g5', 'transform', $dataset, ucFirst($dataset) . 'Command']);
+        return implode("\\", ['g5', 'commands', $dataset, ucFirst($dataset) . 'Command']);
     }
     
     /** 
@@ -140,7 +140,7 @@ class Run{
         Auxiliary of self::getCommandClass().
     **/
     private static function datasetCommandFilename($dataset){
-        return implode(DS, [__DIR__, 'transform', $dataset, ucFirst($dataset) . 'Command' . '.php']);
+        return implode(DS, [__DIR__, 'commands', $dataset, ucFirst($dataset) . 'Command' . '.php']);
     }
     
     
