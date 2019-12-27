@@ -389,21 +389,27 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <br>Numbers in parentheses are the numbers given in [Ertel 88].
     </li>
     <li>
-        Sum of numbers computed by program :
-        <br>553 + 1202 + 332 + 76 + 192 + 159 + 599 + 115 + 202 + 450 + 24 + 453 + 27 = 4384
-        <br>Sum of [Ertel 88] numbers : 
-        <br>567 + 1189 + 332 + 76 + 192 + 158 + 600 + 117 + 204 + 450 + 24 + 455 + 27 = 4391
+        Check that numbers match :
+        <br>Sum of Ertel 4391 = 553 + 1202 + 332 + 76 + 192 + 159 + 599 + 115 + 202 + 450 + 24 + 453 + 27 = 4384
+        <br>Sum of [Ertel 88] numbers = 567 + 1189 + 332 + 76 + 192 + 158 + 600 + 117 + 204 + 450 + 24 + 455 + 27 = 4391
     </li>
+    <li>Brings <b>1828 new records</b></li>
 </ul>
 
 
 <style>
-    #table1 td:nth-child(3), td:nth-child(5){white-space:pre;}
+    #table1 td:nth-child(5), td:nth-child(7){white-space:pre;}
 </style>
 <table id="table1" class="wikitable margin">
-    <tr><th>QUEL</th><th>N<sub>QUEL</sub></th><th>Id</th><th>N<sub>Id</sub></th><th>Ertel sample</th><th>Comments</th></tr>
+    <tr>
+        <th title="Nb of new records">New</th>
+        <th title="Published / Unpublished">P</th>
+        <th>QUEL</th><th>N<sub>QUEL</sub></th><th>Id</th><th>N<sub>Id</sub></th><th>Ertel sample</th><th>Comments</th>
+    </tr>
     
     <tr>
+        <td></td>
+        <td></td>
         <td rowspan="4">G:A01</td>
         <td rowspan="4">2087</td>
         <td colspan="3"></td>
@@ -413,6 +419,8 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         </td>
     </tr>
     <tr>
+        <td>0</td>
+        <td>P</td>
         <td>G55</td>
         <td><b>553</b><br>(567)</td>
         <td>1 - First French</td>
@@ -421,6 +429,8 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         </td>
     </tr>
     <tr>
+        <td>0</td>
+        <td>P</td>
         <td></td>
         <td><b>1202</b><br>(1189)</td>
         <td>2 - First European</td>
@@ -432,38 +442,42 @@ Combining the output of the two previous commands permits a reconstitution of Ta
             </ul>
             Total of 915 + 214 = 1189 records.
             <br>In file Ertel 4391 :
-            <br>this cannot be computed using only QUEL, G55 and PARA_NR : among the 535 Para champions, the 203 athletes cannot be distinguished from the 332 new records (because Gauquelin 1960 groups are lost). Computing this number needs an extrnal information, given from Ertel note about sample 6 (the fact that 535 = 203 overlap + 332 new).
+            <br>Records where QUEL = G:A01 and G55 empty and PARA_NR empty.
             <br>Corresponding number is 2087 - 553 - 332 = 1202 records.
         </td>
     </tr>
     <tr>
+        <td>332</td>
+        <td>P</td>
         <td>PARA_NR</td>
         <td><b>535</b><br>(535)</td>
         <td>6 - Para champions</td>
         <td>
-            Corresponds to the list published by Comité Para for its 1976 test.
-            <br>These are records with a QUEL = PARA_NR, and GCPAR empty.
-            <br>535 + 76 = 611 ; numbers given in [Ertel 88] correspond to the content of the file.
+            Records with QUEL = G:A01 and PARA_NR = number from 1 to 535.
             <br>[Ertel 88] : "Since Gauquelin had already 203 athletes from the Para smaple in his earlier studies (1955, 1960), only 332 are gained".
+            <br>List published by Comité Para for its 1976 test.
         </td>
     </tr>
     
     <tr>
+        <td>76</td>
+        <td>U</td>
         <td>GCPAR</td>
         <td><b>76</b><br>(76)</td>
         <td>PARA_NR</td>
         <td>76</td>
         <td>7 - Para lowers</td>
         <td>
-            These 76 are part of a group of 241 soccer players gathered for the Comité Para test (1976).
-            <br>They were not retained in Comité Para experiment because considered less eminent and remained unpublished.
-            <br>They were copied by Ertel when he visited Gauquelin laboratory.
+            Records with QUEL = GCPAR and PARA_NR = string from *1 to *76
+            <br>535 + 76 = 611 ; numbers given in [Ertel 88] correspond to the content of the file.
+            <br>[Ertel 88] : These 76 are part of a group of 241 soccer players gathered for the Comité Para test (1976). They were not retained in Comité Para experiment because considered less eminent and remained unpublished. They were copied by Ertel when he visited Gauquelin laboratory.
             <br>Ertel copied only 76 because it was for only 76 out of 241 (ranks 1-76) that mars sector was computed.
-            <br>In file Ertel 4391, the 76 have sport = FOOT and country = BE.
         </td>
     </tr>
     
     <tr>
+        <td></td>
+        <td></td>
         <td rowspan="3">G:D10<br>*G:D10</td>
         <td rowspan="3"><b>351</b><br>(351)</td>
         <td colspan="3"></td>
@@ -474,6 +488,8 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         </td>
     </tr>
     <tr>
+        <td>0</td>
+        <td>P</td>
         <td>CSINR</td>
         <td><b>192</b><br>(192)</td>
         <td>8 - CSICOP-U.S.</td>
@@ -483,6 +499,8 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         </td>
     </tr>
     <tr>
+        <td>0</td>
+        <td>P</td>
         <td></td>
         <td><b>159</b><br>(158)</td>
         <td>12 - GAUQ-U.S.</td>
@@ -493,6 +511,8 @@ Combining the output of the two previous commands permits a reconstitution of Ta
     </tr>
     
     <tr>
+        <td>599</td>
+        <td>U</td>
         <td>GMINI</td>
         <td colspan="3"><b>599</b><br>(600)</td>
         <td>3 - Italian football</td>
@@ -503,6 +523,8 @@ Combining the output of the two previous commands permits a reconstitution of Ta
     </tr>
     
     <tr>
+        <td>115</td>
+        <td>U</td>
         <td>GMING</td>
         <td colspan="3"><b>115</b><br>(117)</td>
         <td>4 - German various</td>
@@ -513,6 +535,8 @@ Combining the output of the two previous commands permits a reconstitution of Ta
     </tr>
     
     <tr>
+        <td>202</td>
+        <td>U</td>
         <td>G_ADD</td>
         <td colspan="3"><b>202</b><br>(204)</td>
         <td>5 - French occasionals</td>
@@ -522,16 +546,21 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         </td>
     </tr>
     <tr>
+        <td>0</td>
+        <td>P</td>
         <td>G:D06</td>
         <td colspan="3"><b>450</b><br>(450)</td>
         <td>9 - Second European</td>
         <td>
             G:D6 records come from <a href="cura-D6.html">file D6</a>.
             <br>Cura file contains 449 sportsmen, not 450.
+            <br>=> TODO : check
         </td>
     </tr>
     
     <tr>
+        <td>24</td>
+        <td>U</td>
         <td>GMINV</td>
         <td colspan="3"><b>24</b><br>(24)</td>
         <td>10 - Italian cyclists</td>
@@ -543,6 +572,8 @@ Combining the output of the two previous commands permits a reconstitution of Ta
     </tr>
     
     <tr>
+        <td>453</td>
+        <td>U</td>
         <td>GMIND</td>
         <td colspan="3"><b>453</b><br>(455)</td>
         <td>11 - Lower French</td>
@@ -553,6 +584,8 @@ Combining the output of the two previous commands permits a reconstitution of Ta
     </tr>
     
     <tr>
+        <td>27</td>
+        <td>U</td>
         <td>G_79F</td>
         <td colspan="3"><b>27</b><br>(27)</td>
         <td>13 - Plus special</td>
@@ -560,6 +593,15 @@ Combining the output of the two previous commands permits a reconstitution of Ta
             Supplementary data sent by Gauquelin to Ertel after his visit in Paris.
         </td>
     </tr>
+    
+    <tr>
+        <td colspan="8" class="bold big11">TOTAL</td>
+    </tr>
+    
+    <tr>
+        <td>1828</td>
+    </tr>
+    
 </table>
 
 <!-- ********************************************************************************* -->

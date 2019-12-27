@@ -53,13 +53,14 @@ class raw2csv implements Command{
                  . '-' . str_pad($fields[4] , 2, '0', STR_PAD_LEFT)
                  . '-' . str_pad($fields[3] , 2, '0', STR_PAD_LEFT);
             $h = $fields[6];
-            if($fields[8] == 'P'){
+            if($fields[8] == 'P' || $fields[8] == 'P1'){
+                // consider P1 because 2 records are bugged
                 $h += 12;
             }
             $h = str_pad($h , 2, '0', STR_PAD_LEFT);
             $min = str_pad($fields[7] , 2, '0', STR_PAD_LEFT);
             $new['DATE'] = "$day $h:$min";
-            $new['TZ'] = $fields[9];
+            $new['TZ'] = self::tz($fields[9]);
             $new['LG'] = -self::lgLat($fields[11], $fields[12]);
             $new['LAT'] = self::lgLat($fields[13], $fields[14]);
             $new['C2'] = $fields[10];
@@ -88,6 +89,20 @@ class raw2csv implements Command{
     **/
     private static function lgLat($deg, $min){
         return $deg + round(($min / 60), 5);
+    }
+    
+    // ******************************************************
+    /**
+        Auxiliary of execute()
+        Computes the timezone offset
+    **/
+    private static function tz($str){
+        if($str == '0,5'){
+            // bug for 2 records
+            return '-10:30';
+        }
+        // all other records contain integer offsets
+        return '-' . str_pad($str , 2, '0', STR_PAD_LEFT) . ':00';
     }
     
 }// end class
