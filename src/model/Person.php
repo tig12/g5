@@ -17,17 +17,17 @@ class Person{
     public $data = [];
     
     // ******************************************************
-    /**
-        Returns a new Person object.
-    **/
-    public static function new(&$data=[], &$params=[]){
+    /** Returns an empty object of type Person. **/
+    public static function newEmpty(){
+        return yaml_parse(file_get_contents(__DIR__ . DS . 'Person.yml'));
+    }
+    
+    /** Returns an object of type Person. **/
+    public static function new($uid, $load=false){
         $p = new Person();
-        if(!isset($data['name']) && !isset($data['birth']['date'])){
-            // empty person
-            $p->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Person.yml'));
-        }
-        else{
-            // read from yaml file
+        $p->uid = $uid;
+        if($load){
+            $p->load();
         }
         return $p;
     }
@@ -51,7 +51,10 @@ class Person{
     }
     
     /** Name of the file where a person is stored in 7-full **/
-    public function filename(): string {
+    public function filename($fullPath=false): string {
+        if($fullPath){
+            return $this->dirname() . Full::SEP . $this->slug() . '.yml';
+        }
         return $this->slug() . '.yml';
     }
     
@@ -73,6 +76,12 @@ class Person{
             $date = $this->data['birth']['date-ut']; // for cura A
         }
         return substr($date, 0, 10);
+    }
+    
+    // ******************************************************
+    public function load(){
+//echo $this->filename(true) . "\n"; exit;
+        $this->data = yaml_parse(file_get_contents($this->filename(true)));
     }
     
     // ******************************************************

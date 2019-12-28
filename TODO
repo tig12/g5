@@ -1,4 +1,6 @@
 
+- Config::$data['dirs']['9-*'] are useless because 9-output/ hierarchy is the same as 7-full/groups/
+
 - Use Ertel 4391 to have more precise sport codes in D10
 
 - cura : handle all cases of unexisting raw files

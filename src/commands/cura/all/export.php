@@ -13,6 +13,10 @@ namespace g5\commands\cura\all;
 
 use g5\Config;
 use g5\patterns\Command;
+use g5\commands\cura\Cura;
+use g5\model\Full;
+use g5\model\Group;
+use g5\model\Person;
 
 class export implements Command{
     
@@ -29,11 +33,24 @@ class export implements Command{
         if(count($params) > 2){
             return "WRONG USAGE : useless parameter : {$params[2]}\n";
         }
+        
+        $report = '';
+        
         $datafile = $params[0];
-        $infile = Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv';
+        $uid = Cura::UID . Full::SEP . $datafile;
+        $g = Group::new($uid, true);
+        foreach($g->data as $puid){
+echo "in export : $puid\n";
+            $p = Person::new($puid, true);
+echo "\n"; print_r($p); echo "\n";
+exit;
+        }
+        
+        
         $outfile = Config::$data['dirs']['9-cura'] . DS . $datafile . '.csv';
-        copy($infile, $outfile);
-        return "Copied $infile to $outfile\n";
+        
+        $g->export();
+        return "Exported $uid to $outfile\n";
     }
     
 }// end class    
