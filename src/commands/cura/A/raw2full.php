@@ -12,6 +12,7 @@ namespace g5\commands\cura\A;
 
 use g5\G5;
 use g5\model\Person;
+use g5\model\Group;
 use g5\Config;
 use g5\patterns\Command;
 use g5\model\Names;
@@ -216,26 +217,32 @@ class raw2full implements Command{
         $n_good = $n_ok + $n_ok_fix + $n1_fix + $n2_fix;
         $percent_ok = round($n_good * 100 / count($lines1), 2);
         $percent_not_ok = round($n_bad * 100 / count($lines1), 2);
-        $report .= "nb in list1 ($file_datafile) : " . count($lines1) . " - nb in list2 ($file_names) : " . count($names) . "\n";
-        $report .= "case 1 : $n1 dates present in $file_datafile and missing in $file_names - $n1_fix fixed by 1955\n";
         if($report_type == 'full'){
+            $report .= "nb in list1 ($file_datafile) : " . count($lines1) . " - nb in list2 ($file_names) : " . count($names) . "\n";
+            $report .= "case 1 : $n1 dates present in $file_datafile and missing in $file_names - $n1_fix fixed by 1955\n";
             $report .=  print_r($missing_in_names, true) . "\n";
-        }
-        $report .= "case 2 : $n2 date ambiguities with same nb - $n2_fix fixed by 1955\n";
-        if($report_type == 'full'){
+            $report .= "case 2 : $n2 date ambiguities with same nb - $n2_fix fixed by 1955\n";
             $report .= print_r($doublons_same_nb, true) . "\n";
-        }
-        $report .= "case 3 : $n3 date ambiguities with different nb\n";
-        if($report_type == 'full'){
+            $report .= "case 3 : $n3 date ambiguities with different nb\n";
             $report .= print_r($doublons_different_nb, true) . "\n";
         }
+        $n = $n_bad + $n_good;
         $report .= "Corrections from 1955 book : $n_correction_1955\n";
-        $report .= "nb OK (match without ambiguity) : $n_good ($percent_ok %)\n";
-        $report .= "nb NOT OK : $n_bad ($percent_not_ok %)\n";
+        $report .= "names : nb match = $n_good / $n ($percent_ok %)\n";
+        $report .= "    nb NOT match = $n_bad / $n ($percent_not_ok %)\n";
         //
         // 4 - store result
         //
         $nb_stored = 0;
+        
+        $g = Group::new(Cura::UID . '/' . $datafile);
+/* 
+echo $g->uid() . "\n";
+echo $g->slug() . "\n";
+echo $g->dirname() . "\n";
+echo $g->filename() . "\n";
+exit;
+*/
         foreach($res as $cur){
             
             $p = Person::new();
@@ -272,9 +279,12 @@ class raw2full implements Command{
             
             $p->update($new);
             $p->save();
-exit;
             $nb_stored ++;
+            $g->add($p->uid());
+//break;
         }
+        $g->save();
+        $report .= "Strored $nb_stored records\n";
         return $report;
     }
     

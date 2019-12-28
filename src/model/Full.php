@@ -12,10 +12,12 @@ use tiglib\strings\slugify;
 Full::init();
 class Full{
     
-    /** Pattern to check birth date. **/
-    const PDATE = '/\d{4}-\d{2}-\d{2}/';
+    const SEP = '/';
     
     public static $DIR;
+    
+    /** Pattern to check birth date. **/
+    const PDATE = '/\d{4}-\d{2}-\d{2}/';
     
     // ******************************************************
     /**

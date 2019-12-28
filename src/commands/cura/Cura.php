@@ -12,6 +12,8 @@ use tiglib\arrays\csvAssociative;
 
 class Cura{
     
+    const UID = 'groups/datasets/cura';
+    
     const IDSOURCE = 'cura';
     
     /** Separator used in raw (html) files **/
