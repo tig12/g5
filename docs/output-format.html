@@ -30,8 +30,8 @@
 <header>
 <h1>Output format</h1>
 <div class="intro">
-This page describes the format of intermediate files stored in <code>5-tmp/</code> (csv files).
-<br>This format is compatible with <a href="newdata.html">format used for <code>9-output/new</code></a> (yaml files).
+This page describes the format of generated csv files.
+<br>Note : corresponds to the usage of <a href="full.html">7-full</a>, under development ; most <a href="https://larzac.info/gauquelin5">output files</a> still use <a href="z-output-format-bck.html">previous syntax</a>, used when working with <code>5-tmp</code>.
 </div>
 </header>
 
@@ -77,7 +77,7 @@ Some csv files contain fields that are not listed here
         <td>GQID</td>
         <td>
             <b>Gauquelin id</b>
-            <br>This id looks like <code>A2-721</code> ; built using Cura file name and field <b>NUM</b> of <a href="cura.html">cura.free.fr files</a>.
+            <br>Looks like <code>A2-721</code> ; built using Cura file name and field <b>NUM</b> of <a href="cura.html">cura.free.fr files</a>.
             <br>Corresponds to fields <b>QUEL</b> and <b>GNR</b> of <a href="newalch-ertel4391.html">Ertel 4391</a> raw file.
         </td>
     </tr>
@@ -106,8 +106,23 @@ Some csv files contain fields that are not listed here
         </td>
     </tr>
     
+    <tr>
+        <td>WDID</td>
+        <td>
+            <b>Wikidata id</b>
+            <br>Looks like <code>Q41390</code>.
+        </td>
+    </tr>
+    
     <!-- ************************************* -->
     <tr><td colspan="2"><div class="big3 bold padding05">Names</div></td></tr>
+    
+    <tr>
+        <td>NAME</td>
+        <td>
+            <b>Name currently used</b>.
+        </td>
+    </tr>
     
     <tr>
         <td>FNAME</td>
@@ -147,7 +162,7 @@ Some csv files contain fields that are not listed here
     </tr>
     
     <tr>
-        <td>DATE_UT</td>
+        <td>DATE-UT</td>
         <td>
             Date and time converted to universal time.
             <br>This field is in theory useless, as it can be computed from <code>DATE</code> and <code>TZ</code>.

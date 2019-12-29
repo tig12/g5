@@ -83,7 +83,8 @@ There are several reasons to care about the data used to perform statistical tes
 <ul class="spaced margin-top">
     <li>
         <div class="bold">Scientific interest</div>
-        The "mars effect" polemic lasted for several decades and ended with the Ertel versus Nienhuys arguments, who reached radically opposed opinions. History is so confused that the question to know if these statistical anomalies exist out of human bias is finally still open. Data collected by Gauquelin and others can serve as a basis to build new groups and execute new tests and see if a consensus can emerge.
+        The "mars effect" polemic lasted for several decades and ended with the Ertel versus Nienhuys arguments, who reached radically opposed opinions. History is so confused that the question to know if these statistical anomalies exist out of human bias is still open. Data collected by Gauquelin and others can serve as a basis to build new groups and execute new tests. Internet permits to build larger and more reliable groups.
+        
     </li>
     
     <li>
@@ -102,9 +103,9 @@ There are several reasons to care about the data used to perform statistical tes
 <!-- ********************************************************************************* -->
 <h2>Current implementation</h2>
 This software is still at an immature stage. It brings corrections to Cura an Newalchemypress data but does not produce yet reliable data (in particular legal time, timezone offset and place identification need test and debug).
-<br>Current code mainly concerns step 1 (data restoration) ; preparatory code exists for new group building and eminence ranking.
-<br>Most of current code can be seen as draft code, bound to be deeply refactored during step 2 implementation (building new groups). This is necessary as current code miss an important property : the ability to trace every transformation done on every field of every record of the resulting data.
-
+<br>Current code mainly concerns step 1 (data restoration) ; step 2 (merge data and build new groups) implementation has begun, see <a href="full.html">7-full</a>.
+<br>
+<br>But in the process of building data usable to do science, this program doesn't adress an important issue : <b>the reliability of data</b>. This problem is adressed in <a href="check.html">page Check data</a>.
 
 <!-- ********************************************************************************* -->
 <h2>About this program</h2>
@@ -132,12 +133,18 @@ The name "Gauquelin5" comes from the main source of information, "Archives Gauqu
     <li>Names of months, weekdays, languages etc. are not capitalized.</li>
     <li>The characters ; : ? ! are preceeded and followed by a white space.</li>
     <li>White space is used as separator for large numbers (for example one million is written <i>1 000 000</i> instead of <i>1,000,000</i>).</li>
+    <li>Marriage is written mariage.</li>
 </ul>
 
 <br>This software has a slow development pace because I do that on my spare time.
 <br>
 <br>Repository created by Thierry Graff in 2017.
-<br>Sponsored by Pôle Emploi.
+<!-- 
+<h4>Sponsors</h4>
+<ul>
+    <li><br>2017 - 2019 : Pôle Emploi.</li>
+</ul>
+-->
 
 </article>
 </div><!-- end class="main" -->

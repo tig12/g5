@@ -247,12 +247,15 @@ Corrections using Gauquelin 1955 are currently done for files A1 and A2.
         <pre>1817	3	25	C	185	F	5	16	24	0	48N 0	4W 6	29	CONCARNEAU</pre>
         and
         <pre>1817	3	5	Lebris Jean</pre>
-        <a href="img/acts/lebris-jean-1817-03-25.jpg">Birth certificate</a> permits to solve the case. Found on <a href="http://mnesys-portail.archives-finistere.fr/?id=recherche_etat_civil">online civil registry</a> :
-        <br>Registre  1 MI EC 53/10 Naissances, p 377 / 559 => Né le 25 mars 1817 à 5h du matin.
+        <a href="img/acts/lebris-jean-1817-03-25.jpg">Birth certificate</a> permits to solve the case.
+        <br><a href="http://mnesys-portail.archives-finistere.fr/?id=recherche_etat_civil">Online civil registry</a> :
+        Registre  1 MI EC 53/10 Naissances, p 377 / 559 => "Né ce jour en cette ville à cinq heures du matin"
+        <br>=> date = <code>1817-03-25 05:00</code>
+        <br>Check if it matches UT time given by Cura :
         <br>From "Traité de l'heure dans le monde", TU = HLO ;  4°6' = 00:16:24 => hour = 05:16:24
-        <br>The first line is exact, the second line must be replaced by
+        <br>OK => The first line is exact, the second line must be replaced by
         <pre>1817	3	25	Lebris Jean</pre>
-        This fix is included in the code of <code>raw2csv</code>.
+        This fix is included in the code of <code>raw2full</code>.
     </li>
 </ul>
 
@@ -268,6 +271,7 @@ A5 : 1435 1557 1813 1829 2349
 A6 : 15 139 148 225 232 265 448 574 622 668 718 727 737 738  
 </pre>
 This information was not included in the generated files because I couldn't find its meaning.
+<div class="todo">TODO : Include this information</div>
 
 
 <!-- ********************************************************************************* -->
