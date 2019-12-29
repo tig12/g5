@@ -16,87 +16,83 @@ class Person{
     
     public $data = [];
     
-    // ******************************************************
-    /** Returns an empty object of type Person. **/
-    public static function newEmpty(){
-        return yaml_parse(file_get_contents(__DIR__ . DS . 'Person.yml'));
-    }
+    // *********************** new *******************************
     
     /** Returns an object of type Person. **/
-    public static function new($uid, $load=false){
+    public static function new($uid){
         $p = new Person();
         $p->uid = $uid;
-        if($load){
-            $p->load();
-        }
+        $p->load();
         return $p;
     }
     
-    // ******************************************************
+    /** Returns an empty object of type Person. **/
+    public static function newEmpty(){
+        $p = new Person();
+        // initialize data from yaml template
+        $p->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Person.yml'));
+        return $p;
+    }
+    
+    // ************************ id ******************************
     /**
         Unique id in g5 database.
-        Corresponds to the path where it is stored in 7-full/
+        Corresponds to the relative path where it is stored in 7-full/
         ex : persons/1905/02/05/lantier-pierre
              lost/fistule-hibere
     **/
     public function uid(){
-        [$y, $m, $d] = explode('-', $this->dateClean());
-        return implode(Full::SEP, ['persons', $y, $m, $d, $this->slug()]);
+        if($this->uid != ''){
+            return $this->uid;
+        }
+        $slug = $this->slug();
+        $date = $this->birthday();
+        if($date == ''){
+            return implode(Full::SEP, ['persons', 'lost', $slug]);
+        }
+        [$y, $m, $d] = explode('-', $date);
+        return implode(Full::SEP, ['persons', $y, $m, $d, $slug]);
     }
     
     public function slug(): string {
         return slugify::compute($this->data['name']);
-        //$bd = substr($this->dateClean(), 0, 10);
-        //return slugify::compute("$name-$bd");
+        //return slugify::compute($this->data['name'] . '-' . $this->birthday());
     }
     
-    /** Name of the file where a person is stored in 7-full **/
-    public function filename($fullPath=false): string {
-        if($fullPath){
-            return $this->dirname() . Full::SEP . $this->slug() . '.yml';
-        }
-        return $this->slug() . '.yml';
-    }
-    
-    /** Returns the path to sub-directory of 7-full/ **/
-    public function dirname($full=true): string {
-        if(preg_match(Full::PDATE, $this->dateClean()) != 1){
-            return $full ? Full::$DIR . Full::SEP . 'lost' : 'lost';
-        }
-        return $full ? Full::$DIR . Full::SEP . $this->uid() : $this->uid();
-    }
-    
-    // ******************************************************
-    /** Date trimmed and (en théorie) present **/
-    private function dateClean(){
+    /** @return YYYY-MM-DD or '' **/
+    private function birthday(){
         if(isset($this->data['birth']['date'])){
-            $date = $this->data['birth']['date'];
+            return substr($this->data['birth']['date'], 0, 10);
         }
         else if(isset($this->data['birth']['date-ut'])){
-            $date = $this->data['birth']['date-ut']; // for cura A
+            // for cura A
+            return substr($this->data['birth']['date-ut'], 0, 10);
         }
-        return substr($date, 0, 10);
+        return '';
     }
     
-    // ******************************************************
+    // *********************** file system *******************************
+    
+    public function path($full=true): string {
+        $res = $full ? Full::$DIR . Full::SEP : '';
+        $res .= $this->uid() . '.yml';
+        return str_replace(Full::SEP, DS, $res);
+    }
+    
     public function load(){
-//echo $this->filename(true) . "\n"; exit;
-        $this->data = yaml_parse(file_get_contents($this->filename(true)));
+        $this->data = yaml_parse(file_get_contents($this->path()));
     }
     
-    // ******************************************************
     public function save(){
-        $dir = str_replace(Full::SEP, DS, self::dirname());
+        $path = $this->path();
+        $dir = dirname($path);
         if(!is_dir($dir)){
             mkdir($dir, 0755, true);
         }
-        $filename = $this->filename();
-        $file = $dir . DS . $filename;
-        $yaml = yaml_emit($this->data);
-        file_put_contents($file, $yaml);
+        file_put_contents($path, yaml_emit($this->data)); // echo "___ file_put_contents $path\n";
     }
     
-    // ******************************************************
+    // *********************** fields *******************************
     
     public function addId($source, $id){
         $this->data['ids'][$source] = $id;
@@ -114,37 +110,24 @@ class Person{
         }
     }
     
-    public function addHistory($source, $data){
+    public function setOrigin($source, $data){
+        $this->data['origin'] = [
+            'source' => $source,
+            'values' => $data,
+        ];
+    }
+    
+    public function addHistory($command, $source, $data){
         $this->data['history'][] = [
+            'command' => $command,
             'source' => $source,
             'values' => $data,
         ];
     }
     
     public function update($replace){
+        //$this->addHistory();
         $this->data = array_replace_recursive($this->data, $replace);
     }
     
-    
-    /* 
-    public function slugOLD($name, $fname, $gname, $birthdate): string {
-        $slug = '';
-        $bd = substr($birthdate, 0, 10);
-        if($fname && $gname){
-            return slugify::compute("$fname-$gname-$bd");
-        }
-        if($name){
-            return slugify::compute("$name-$bd");
-        }
-        if($fname){
-            return slugify::compute("$fname-$bd");
-        }
-        if($gname){
-            return slugify::compute("$fname-$bd");
-        }
-        else{
-            throw new \Exception("CANNOT COMPUTE SLUG :\n    name = $name\n    fname = $fname\n    gname = $gname\n    birthdate = $birthdate");
-        }
-    }
-    */
 }// end class

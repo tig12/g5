@@ -38,18 +38,49 @@ class export implements Command{
         
         $datafile = $params[0];
         $uid = Cura::UID . Full::SEP . $datafile;
-        $g = Group::new($uid, true);
-        foreach($g->data as $puid){
-echo "in export : $puid\n";
-            $p = Person::new($puid, true);
-echo "\n"; print_r($p); echo "\n";
-exit;
-        }
-        
+        $g = Group::new($uid);
         
         $outfile = Config::$data['dirs']['9-cura'] . DS . $datafile . '.csv';
         
-        $g->export();
+        $csvFields = [
+            'GID',
+            'FNAME',
+            'GNAME',
+            'OCCU',
+            'DATE',
+            'DATE-UT',
+            'PLACE',
+            'C2',
+            'C3',
+            'CY',
+            'LG',
+            'LAT',
+            'GEOID'
+        ];
+        
+        $map = [
+            'ids.cura' => 'GID',
+            'fname' => 'FNAME',
+            'gname' => 'GNAME',
+            //'occus.0' => 'OCCU',
+            'birth.date' => 'DATE',
+            'birth.date-ut' => 'DATE-UT',
+            'birth.place.name' => 'PLACE',
+            'birth.place.c2' => 'C2',
+            'birth.place.c3' => 'C3',
+            'birth.place.cy' => 'CY',
+            'birth.place.lg' => 'LG',
+            'birth.place.lat' => 'LAT',
+            'birth.place.geoid' => 'GEOID',
+        ];
+        
+        $fmap = [
+            'OCCU' => function($p){
+                return implode('+', $p->data['occus']);
+            },
+        ];
+        
+        $g->exportCsv($outfile, $csvFields, $map, $fmap);
         return "Exported $uid to $outfile\n";
     }
     

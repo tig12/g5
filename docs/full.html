@@ -31,33 +31,18 @@
 </nav>
 
 <header>
-<h1>Building new data</h1>
+<h1>7-full/</h1>
 <div class="intro">
-    Data about famous persons need to be merged to share a common identifier, like VIAF or Wikidata.
-    <br>This page deals with preparatory code written to test the process.
+    Data about famous persons need to be merged to share a common identifiers like VIAF, ISNI, BNF, Wikidata...
+    <br>This is done in a directory, by default <code>data/7-full/</code>.
 </div>
 </header>
 
 <article>
-<nav class="toc">
-    <ul>
-        <li>
-            <a href="#directory-7-full">Directory 7-full/</a>
-        </li>
-    </ul>
-</nav>
-
-
-
-<!-- ********************************************************************************* -->
-<h2><a name="directory-7-full">Directory 7-full/</a></h2>
-
-Data computed in the "restore" phase of the program, located in directories <code>1-raw/</code>, <code>3-edited/</code> and <code>5-tmp/</code> are merged in an other temporary directory, <code>7-tmp/</code>.
-<br>This directory integrates both historical data (Gauquelin and followers) and external data (Wikidata and data used for eminence indicators).
 
 <img class="border margin padding" src="img/7-full.jpg" alt="">
 
-In <code>7-full/</code>, each person is stored in a yaml file containing all the informations found in data sources.
+In <code>7-full/</code>, each person is stored in one yaml file.
 
 
 </article>
@@ -114,8 +99,9 @@ In <code>7-full/</code>, each person is stored in a yaml file containing all the
     </li>
     
     <li>
-        <span class="big1"><a href="newdata.html">2 - Build new data</a></span>
+        <span class="big1">2 - Build new data</span>
         <ul>
+            <li><a href="full.html">7-full/</a></li>
             <li><a href="data-model.html">Data model</a></li>
             <li><a href="check.html">Check data</a></li>
             <li><a href="merge.html">Merge data</a></li>

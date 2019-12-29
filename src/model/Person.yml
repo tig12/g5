@@ -14,18 +14,21 @@ occus: []
 birth:
   date:     # exact date of the birth certificate
   tz:       # timezone offset
-  date-ut:  # for dates like cura...
+  date-ut:  # for dates like cura
   place:
     name:
     c2:
+    c3:
     cy:
     geoid:
     lg:
     lat:
 
-sources: []
-  
 ids: []
   
+sources: []
+  
 history: []
+
+origin:
   

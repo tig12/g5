@@ -229,33 +229,29 @@ class raw2full implements Command{
         $n = $n_bad + $n_good;
         $report .= "Corrections from 1955 book : $n_correction_1955\n";
         $report .= "names : nb match = $n_good / $n ($percent_ok %)\n";
-        $report .= "    nb NOT match = $n_bad / $n ($percent_not_ok %)\n";
+        $report .= "    nb NOT match = $n_bad ($percent_not_ok %)\n";
         //
         // 4 - store result
         //
         $nb_stored = 0;
+        $g = Group::newEmpty(Cura::UID . '/' . $datafile);
         
-        $g = Group::new(Cura::UID . '/' . $datafile);
-/* 
-echo $g->uid() . "\n";
-echo $g->slug() . "\n";
-echo $g->dirname() . "\n";
-echo $g->filename() . "\n";
-exit;
-*/
         foreach($res as $cur){
             
-            $p = Person::new();
+            foreach(array_keys($cur) as $k){ $cur[$k] = trim($cur[$k]); }
             
-            $p->addSource(Cura::IDSOURCE);
-            //$p->addHistory(Cura::IDSOURCE, $cur);
+            $p = Person::newEmpty();
             
-            $NUM = trim($cur['NUM']);
+            $p->addSource($datafile);
+            
+            $p->setOrigin($datafile, $cur);
+
+            $NUM = $cur['NUM'];
             $p->addId(Cura::IDSOURCE, Cura::gqid($datafile, $NUM));
             
             $new = [];
-            $new['fname'] = trim($cur['FNAME']);
-            $new['gname'] = trim($cur['GNAME']);
+            $new['fname'] = $cur['FNAME'];
+            $new['gname'] = $cur['GNAME'];
             $new['name'] = trim($new['gname'] . ' ' . $new['fname']);
             /////// HERE put wikidata ocuupation id ///////////
             $p->addOccu(A::compute_profession($datafile, $cur['PRO'], $NUM));
@@ -271,19 +267,22 @@ exit;
             $new['birth'] = [];
             $new['birth']['date-ut'] = "$day $hour$timezone"; // HERE not storing in date but in date-ut
             // place
-            $new['birth']['place'] = trim($cur['CITY']);
-            [$new['birth']['cy'], $new['birth']['c2']] = A::compute_country($cur['COU'], $cur['COD']);
-            $new['birth']['lg'] = Cura::computeLg($cur['LON']);
-            $new['birth']['lat'] = Cura::computeLat($cur['LAT']);
-            $new['birth']['geoid'] = '';
+            $new['birth']['place']['name'] = $cur['CITY'];
+            [$new['birth']['place']['cy'], $new['birth']['c2']] = A::compute_country($cur['COU'], $cur['COD']);
+            $new['birth']['place']['lg'] = Cura::computeLg($cur['LON']);
+            $new['birth']['place']['lat'] = Cura::computeLat($cur['LAT']);
+            
+            // log command exec in the person yaml
+            $p->addHistory("cura $datafile raw2csv", $datafile, $new);
             
             $p->update($new);
-            $p->save();
+            $p->save(); // HERE save to disk
             $nb_stored ++;
             $g->add($p->uid());
+//echo "\n"; print_r($p->data); echo "\n";
 //break;
         }
-        $g->save();
+        $g->save(); // HERE save to disk
         $report .= "Strored $nb_stored records\n";
         return $report;
     }
