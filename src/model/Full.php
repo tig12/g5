@@ -14,6 +14,7 @@ class Full{
     
     const SEP = '/';
     
+    /** Path pointing to 7-full **/
     public static $DIR;
     
     /** Pattern to check birth date. **/

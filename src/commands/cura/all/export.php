@@ -1,13 +1,12 @@
 <?php
 /********************************************************************************
-    Transfers files of 5-cura-csv/ to 9-cura/
+    Transfers files of 7-full/ to 9-cura/
     
-    TEMPORARY CODE - files of 5-cura-csv/ will first be stored in 7-full/
-    
-    @pre        5-cura-csv/ must be populated and ready to be transfered.
+    @pre        7-full/ must be populated and ready to be transfered.
     
     @license    GPL
     @history    2019-07-05 13:48:39+02:00, Thierry Graff : creation
+    @history    2019-12-28, Thierry Graff : port from using 5-tmp to 7-full
 ********************************************************************************/
 namespace g5\commands\cura\all;
 

@@ -4,9 +4,10 @@ name:   # usual, current name
 g:      # gender
 fname:  # family name
 gname:  # given name
-full-name:  # As written in the birth certificate
-fame-name:
+official-name:  # As written in the birth certificate
+alternative-names: []
 nickname:
+fame-name:
 nobility:
 
 occus: []
@@ -30,5 +31,5 @@ sources: []
   
 history: []
 
-origin:
+raw: []
   

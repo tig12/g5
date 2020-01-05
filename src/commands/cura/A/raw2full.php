@@ -244,7 +244,7 @@ class raw2full implements Command{
             
             $p->addSource($datafile);
             
-            $p->setOrigin($datafile, $cur);
+            $p->addRaw($datafile, $cur);
 
             $NUM = $cur['NUM'];
             $p->addId(Cura::IDSOURCE, Cura::gqid($datafile, $NUM));
@@ -253,7 +253,7 @@ class raw2full implements Command{
             $new['fname'] = $cur['FNAME'];
             $new['gname'] = $cur['GNAME'];
             $new['name'] = trim($new['gname'] . ' ' . $new['fname']);
-            /////// HERE put wikidata ocuupation id ///////////
+            /////// HERE put wikidata occupation id ///////////
             $p->addOccu(A::compute_profession($datafile, $cur['PRO'], $NUM));
             // date time
             $day = Cura::computeDay($cur);

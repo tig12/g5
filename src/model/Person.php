@@ -19,7 +19,7 @@ class Person{
     // *********************** new *******************************
     
     /** Returns an object of type Person. **/
-    public static function new($uid){
+    public static function new($uid): Person {
         $p = new Person();
         $p->uid = $uid;
         $p->load();
@@ -27,7 +27,7 @@ class Person{
     }
     
     /** Returns an empty object of type Person. **/
-    public static function newEmpty(){
+    public static function newEmpty(): Person {
         $p = new Person();
         // initialize data from yaml template
         $p->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Person.yml'));
@@ -41,7 +41,7 @@ class Person{
         ex : persons/1905/02/05/lantier-pierre
              lost/fistule-hibere
     **/
-    public function uid(){
+    public function uid() : string {
         if($this->uid != ''){
             return $this->uid;
         }
@@ -60,7 +60,7 @@ class Person{
     }
     
     /** @return YYYY-MM-DD or '' **/
-    private function birthday(){
+    private function birthday(): string {
         if(isset($this->data['birth']['date'])){
             return substr($this->data['birth']['date'], 0, 10);
         }
@@ -98,31 +98,29 @@ class Person{
         $this->data['ids'][$source] = $id;
     }
     
-    public function addSource($source){
-        if(!in_array($source, $this->data['sources'])){
-            $this->data['sources'][] = $source;
-        }
-    }
-    
     public function addOccu($occu){
         if(!in_array($occu, $this->data['occus'])){
             $this->data['occus'][] = $occu;
         }
     }
     
-    public function setOrigin($source, $data){
-        $this->data['origin'] = [
-            'source' => $source,
-            'values' => $data,
-        ];
+    public function addSource($source){
+        if(!in_array($source, $this->data['sources'])){
+            $this->data['sources'][] = $source;
+        }
     }
     
     public function addHistory($command, $source, $data){
         $this->data['history'][] = [
-            'command' => $command,
-            'source' => $source,
-            'values' => $data,
-        ];
+            'date'      => date('c'),
+            'command'   => $command,
+            'source'    => $source,
+            'values'    => $data,
+        ];                                       
+    }
+    
+    public function addRaw($source, $data){
+        $this->data['raw'][$source] = $data;
     }
     
     public function update($replace){
