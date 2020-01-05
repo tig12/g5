@@ -35,6 +35,13 @@ An important feature of "good data" is the ability to connect them to other data
 </header>
 
 <article>
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#"></a>
+        </li>
+    </ul>
+</nav>
 
 <!-- ********************************************************************************* -->
 
@@ -77,17 +84,23 @@ ORDER BY DESC(?linkcount)
 </details>
 
 But to match Gauquelin data with Wikidata, g5 program needs full details of the persons.
-<br>
-<br>Tests also showed that queries asking minimal informations about persons (their Wikidata id and their name) don't time out.
-<br>Combine with the fact that Wikidata permits to retrieve full informations about a single entity 
-<br>
+<br>This can be achieved because :
+<ul>
+    <li>
+        Wikidata permits to retrieve full informations about a person, thrgough urls like <a href="https://www.wikidata.org/wiki/Special:EntityData/Q6256830.json">https://www.wikidata.org/wiki/Special:EntityData/Q6256830.json</a>.
+    </li>
+    <li>
+        Tests showed that queries asking minimal informations about persons (their Wikidata id and their name) don't time out.
+    </li>
+</ul>
+
 <br>Several solutions were tested :
 <ol class="spaced margin">
     
     <li>
-Retrieve the list of all humans and query them one by one. This query retrieve all humans ids (query asking also labels times out) :
+Retrieve the list of all humans and query them one by one. This query retrieves all humans ids (query asking also labels times out) :
 <pre>SELECT ?human WHERE { ?human wdt:P31 wd:Q5 }</pre>
-This gives 5 489 277 records (execution 2019-11-01). This is too much : full data for a single human is around 100 Kb (json format), which would give more than 500 Gb of data (uncompressed).
+This gives 5 489 277 records (execution 2019-11-01). This is too much : full data for a single human is around 100 Kb (json format), which would give more than 500 Gb of data (uncompressed) to download.
     </li>
     
     <li>

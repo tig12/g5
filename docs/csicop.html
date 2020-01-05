@@ -40,9 +40,28 @@ This page deals with the (partial) restoration of the CSICOP test (USA 1979).
 </header>
 
 <article>
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#information-sources">Information sources</a>
+            <ul>
+                <li><a href="#1-1-missing-information">Missing information</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#restoration-process">Restoration process</a>
+            <ul>
+                <li><a href="#2-1-raw2csv">raw2csv</a></li>
+                <li><a href="#2-2-addcanvas1">addCanvas1</a></li>
+                <li><a href="#2-3-addertel">addErtel</a></li>
+                <li><a href="#2-4-addd10">addD10</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
 
 <!-- ********************************************************************************* -->
-<h2>Information sources</h2>
+<h2><a name="information-sources">Information sources</a></h2>
 Informations used to compute this group can be found in several places.
 
 <ul class="spaced margin-top">
@@ -60,12 +79,12 @@ Informations used to compute this group can be found in several places.
 
 
 <!-- ************************************* -->
-<h3>Missing information</h3>
+<h3><a name="1-1-missing-information">Missing information</a></h3>
 It is probably possible to compute more information from Ertel 4391, but more precise data source is needed for a satisfying reconstruction (distinct canvasses with birth times and places).
 
 
 <!-- ********************************************************************************* -->
-<h2>Restoration process</h2>
+<h2><a name="restoration-process">Restoration process</a></h2>
 The command :
 <pre>php run-g5.php csicop si42 all</pre>
 generates file <code>9-output/history/1979-csicop/csicop-408SPO.csv</code>.
@@ -80,7 +99,7 @@ php run-g5.php csicop si42 addErtel
 </pre>
 
 <!-- ************************************* -->
-<h3>raw2csv</h3>
+<h3><a name="2-1-raw2csv">raw2csv</a></h3>
 
 <pre>php run-g5.php csicop si42 raw2csv</pre>
 
@@ -109,7 +128,7 @@ Generated files contain fields :
 
 
 <!-- ************************************* -->
-<h3>addCanvas1</h3>
+<h3><a name="2-2-addcanvas1">addCanvas1</a></h3>
 <ul>
     <li>
         Adds field CANVAS to 5-csicop/408-csicop-si42.csv                      
@@ -133,7 +152,7 @@ INPUT :
 </ul>
 
 <!-- ************************************* -->
-<h3>addErtel</h3>
+<h3><a name="2-3-addertel">addErtel</a></h3>
 
 Adds to <code>408-csicop-si42.csv</code> Ertel 4391 informations.
 
@@ -252,7 +271,7 @@ D10   1918-08-30 12:20-07:00 Williams Theodore NUM = 1370
 
 
 <!-- ************************************* -->
-<h3>addD10</h3>
+<h3><a name="2-4-addd10">addD10</a></h3>
 <pre>php run-g5.php csicop si42 addD10</pre>
 
 <!--
