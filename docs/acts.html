@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Check data | Gauquelin5</title>
+    <title>Acts | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="">
     <meta name="robots" content="index,follow">
@@ -30,59 +30,29 @@
 </nav>
 
 <header>
-<h1>Check data</h1>
+<h1>Acts</h1>
 <div class="intro">
-The only reliable information sources are the civil registries. Any other source may contain errors (in practice they do).
-<br>Building a corpus of reliable data is out of the scope of g5 program, but the development of the program implies verifications using online civil registries to solve particular cases.
+Acts are scans of the original documents.
+<br>Mainly Birth certificates - actes de naissance, décès, mariages.
+<br>Each act is accompanied by a yaml file containing its transcription, <a href="#example">see example</a>
+<br>Acts of the civil registries are the only reliable information sources. Any other source may contain errors (in practice they do).
+<br>Acts are stored in directory <code>7-tmp/acts/</code>.
 </div>
 </header>
 
 <article>
-<nav class="toc">
-    <ul>
-        <li>
-            <a href="#reliable-data">Reliable data</a>
-        </li>
-        <li>
-            <a href="#verification-process-for-birth">Verification process for birth</a>
-            <ul>
-                <li><a href="#2-1-image-download">Image download</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#example">Example</a>
-        </li>
-    </ul>
-</nav>
+
+During the development of g5, very few persons are matched to birth certificate. This happens when 2 sources disagree on birth date or time, birth certificates give a reliable answer.
+<br>
+<br>Currently, data are checked only for France. All the original acts (birth, death, mariage) between ~1790 and ~1920 can be viewed online. 5 generations with birth times.
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="reliable-data">Reliable data</a></h2>
-In the context of g5 program, a data is considered reliable if :
-<ol class="margin-bottom">
-    <li>
-        It has been checked against a legal act.
-        <br>Note the difference between a birth certificate (BC - the original official document containing birth information) and Birth Record (BR - a copy of a birth certificate sent by an officer). BR cannot be considered as reliable because copy of the original document may contain errors. For example, the officer can indicate registration date / time instead of birth date / time.
-    </li>
-    <li>
-        Information can be verified by data users. Users should be able to access to the original document and check their transcription.
-    </li>
-    <li>
-        Transcription of the act has been at least checked and confirmed by two persons.
-    </li>
-</ol>
+<h2>Verifying french data</h2>
 
-Under these strict conditions, none of the data currrently handled by g5 can be considered as reliable. But data verifications done during g5 development follow rules compatible with this definition of reliable data.
-
-<!-- ********************************************************************************* -->
-<h2><a name="verification-process-for-birth">Verification process for birth</a></h2>
-
-Currently, data are checked only for France. All the original acts (birth, death, mariage) between ~1790 and ~1920 (and after 1860 for persons born in Paris) can be viewed online.
+For each verification, the image is downloaded on local machine, and informations to easily go to the online act are recorded in a yaml file expressed in a syntax which can be used to match g5 data by program.
 <br>
-<br>For each verification, the image is downloaded on local machine, and informations to easily go to the online act are recorded in a yaml file expressed in a syntax which can be used to match g5 data by program.
-
-<br>
-<br>Whatever syntax you use, the following informations are necessary :
+<br>The following informations are necessary :
 <br>(in parentheses, corresponding fieldname in g5 vocabulary).
 <ul>
     <li>Country (birth.place.cy)</li>
@@ -98,6 +68,46 @@ Currently, data are checked only for France. All the original acts (birth, death
 
 <h3><a name="2-1-image-download">Image download</a></h3>
 This is systematically done during g5 development. Some départements provide a link to download current page, some don't. When they don't, image retrieval is done with screen capture. This can be particularily long because sometimes several captures are necessary to get the whole certificate with enough details. In this case, the image is reconstituted assembling the different parts.
+
+
+<!-- ********************************************************************************* -->
+<h2>Directory layout</h2>
+
+In g5, they are organized to match directory <code>persons/</code>
+<pre>
+acts/
+    └── birth
+        └── 1811
+            └── 10
+                └── 25
+                    └── galois-evariste
+                        ├── birth.jpg
+                        └── birth.yml
+</pre>
+
+But naturally, acts appear to be organized like this :
+<pre>
+acts/                                          
+    ├── BE
+    ├── CH
+    ├── DE
+    ├── DZ
+    ├── FR
+    │   ├── 01
+    │   ├── 92
+    │   │   └── bourg-la-reine
+    │   │       └── 1811
+    │   │           └── E_NUM_BRG38
+    │   │               └── galois-evariste-1811-10-25
+    │   └── 99
+    ├── IT
+    ├── LU
+    ├── MA
+    ├── MC
+    ├── NL
+    └── US
+</pre>
+
 
 
 
@@ -236,6 +246,8 @@ personnes:
     <li>
         <span class="big1">1 - Restore</span>
         <ul>
+        
+            <li><a href="historical-tests.html">Historical tests</a></li>
             
             <li><a href="cura.html">cura.free.fr</a></li>
             
@@ -276,10 +288,10 @@ personnes:
     <li>
         <span class="big1">2 - Build new data</span>
         <ul>
-            <li><a href="full.html">7-full/</a></li>
             <li><a href="data-model.html">Data model</a></li>
-            <li><a href="check.html">Check data</a></li>
-            <li><a href="merge.html">Merge data</a></li>
+            <li><a href="full.html">7-full</a></li>
+            <li><a href="acts.html">Acts</a></li>
+            <li><a href="merge.html">Merge</a></li>
             <li><a href="wikidata.html">Wikidata.org</a></li>
             <li><a href="geonames.html">Geonames.org</a></li>
         </ul>
@@ -302,14 +314,7 @@ personnes:
     <!-- <li><a href="next.html">Next</a></li> -->
     
     <!-- <li><a href="questions.html">Questions</a></li> -->
-    
-    <li>
-        Doc
-        <ul>
-            <li><a href="historical-tests.html">List of historical tests</a></li>
-        </ul>
-    </li>
-    
+
     <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
     
 </ul>

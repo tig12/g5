@@ -80,7 +80,7 @@ Given a group of persons, the purpose is to group them by eminence rank. To buil
 
 <img class="border margin padding" src="img/eminence/eminence1.jpg" alt="Eminence indicator">
 
-Some indicators provide an <b>ordering</b>, that can be converted to a rank :
+Some indicators provide an <b>ordering</b>, which can be converted to a rank :
 
 <img class="border margin padding" src="img/eminence/eminence-sort.jpg" alt="Sort converted to eminence indicator">
 
@@ -169,24 +169,23 @@ Mathematicians will be used (ranking sportsmen is more complex).
 <!-- ************************************* -->
 <h3><a name="3-1-polls-human-opinion">Polls (human opinion)</a></h3>
 Ask living mathematicians, historians of science who are the important mathematicians for them.
-<br>It can also be done with mathematicians of the past, through autobiographies or other sources.
-<br>Example : in Récoltes et semailles", Grothendieck cites Galois and Riemann.
+<br>It can also be done with mathematicians of the past, through autobiographies, interviews or other sources.
+<br>Examples : in Récoltes et semailles", Grothendieck cites Galois and Riemann ; in an interview, Jean-Pierre Serre cites André Weil as his model.
 <br>This could work like a page rank, where the opinion of eminent persons have stronger weight.
 
 <!-- ************************************* -->
 <h3><a name="3-2-citation-count-global">Citation count - global</a></h3>
 This was done by Suitbert Ertel.
-<br>Given a list of books, established in advance.
-<br>Count the number of books where a person is cited, and use this to build a ranking.
+<br>Given a list of books, established in advance, count the number of books where a person is cited, and use this to build a ranking.
 <br>Here, one indicator is built from a list of books.
 <br>Ertel's work could be for example reproduced, checked and extended to other disciplines by Google Books.
 
 <!-- ************************************* -->
 <h3><a name="3-3-citation-count-local">Citation count - local</a></h3>
 Take a book about history of mathematics, and count the number of times mathematicians are cited.
-<br>For example, Gauss will probably appear in several chapters
+<br>For example, Gauss will probably appear in several chapters.
 <br>Here, one indicator is built from one book.
-<br>This also could be done by Google books.
+<br>This could also be done by Google books.
 
 <!-- ************************************* -->
 <h3><a name="3-4-link-count">Link count</a></h3>
@@ -194,10 +193,10 @@ In web sites containing biographies of persons of given professional groups, lik
 <br>Here are two examples that permit to rank mathematicians :
 <ul>
     <li>
-        Part of the data available on Wikipedia can be retrieved using <b>Wikidata</b>. One of the fields that Wikidata offers is called <b>linkcount</b>, which is the number of pages pointing to a given page ; this can be used to rank persons. See <a href="wikidata.html">the page about Wikidata</a> for details.
+        Part of the data available on Wikipedia can be retrieved using <b>Wikidata</b>. One of the fields that Wikidata provides is called <b>linkcount</b>, which is the number of pages pointing to a given page ; this can be used to rank persons. See <a href="wikidata.html">the page about Wikidata</a> for details.
     </li>
     <li>
-        The <a href="https://www-history.mcs.st-andrews.ac.uk/index.html">MacTutor History of Mathematics archive</a> is a site containing biographies of mathematicians. This site does not provide a service similar to Wikidata, but it's possible to extract data from the site and build a sorted list. This was done by a program published on <a href="https://github.com/tig12/mactutor-by-links">github.com/tig12/mactutor-by-links</a>.
+        The <a href="https://www-history.mcs.st-andrews.ac.uk/index.html">MacTutor History of Mathematics archive</a> is a site containing biographies of mathematicians. It is possible to extract data from the site and build a sorted list. This was done by a program published on <a href="https://github.com/tig12/mactutor-by-links">github.com/tig12/mactutor-by-links</a>.
     </li>
 </ul>
 
@@ -264,7 +263,7 @@ Here the problem is to compute <code>GLOBAL</code> column ; function : <code>sev
 <br>The criterions to combine the indicators cannot be decided by programers or experimenters (data users, who perform the statistical tests). They must be given by persons who know the studied domain (mathematicians, historians of science for example).
 <br>
 
-<br>There may exist contradictions between indicators, and some indicators may not be reliable. But if indicators are meaningful, and if the indicators correctly reflect eminence, they should globally says the same thing.
+<br>There may exist contradictions between indicators, and some indicators may not be reliable. But if eminence is meaningful, and if the indicators correctly reflect eminence, they should globally says the same thing.
 <br>The following situation could be reached :
 
 <img class="margin border padding" src="img/eminence/global-rank.jpg" alt="Global eminence ranking">
@@ -295,6 +294,8 @@ g<sub>1</sub> ... g<sub>5</sub> represent groups of persons.
     <li>
         <span class="big1">1 - Restore</span>
         <ul>
+        
+            <li><a href="historical-tests.html">Historical tests</a></li>
             
             <li><a href="cura.html">cura.free.fr</a></li>
             
@@ -335,10 +336,10 @@ g<sub>1</sub> ... g<sub>5</sub> represent groups of persons.
     <li>
         <span class="big1">2 - Build new data</span>
         <ul>
-            <li><a href="full.html">7-full/</a></li>
             <li><a href="data-model.html">Data model</a></li>
-            <li><a href="check.html">Check data</a></li>
-            <li><a href="merge.html">Merge data</a></li>
+            <li><a href="full.html">7-full</a></li>
+            <li><a href="acts.html">Acts</a></li>
+            <li><a href="merge.html">Merge</a></li>
             <li><a href="wikidata.html">Wikidata.org</a></li>
             <li><a href="geonames.html">Geonames.org</a></li>
         </ul>
@@ -361,14 +362,7 @@ g<sub>1</sub> ... g<sub>5</sub> represent groups of persons.
     <!-- <li><a href="next.html">Next</a></li> -->
     
     <!-- <li><a href="questions.html">Questions</a></li> -->
-    
-    <li>
-        Doc
-        <ul>
-            <li><a href="historical-tests.html">List of historical tests</a></li>
-        </ul>
-    </li>
-    
+
     <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
     
 </ul>

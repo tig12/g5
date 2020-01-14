@@ -389,18 +389,25 @@ Combining the output of the two previous commands permits a reconstitution of Ta
 <br>Notes :
 <ul>
     <li>
-        In columns N<sub>QUEL</sub> and N<sub>Id</sub>, the numbers in bold are the numbers counted by program in Ertel 4391 file.
-        <br>Numbers in parentheses are the numbers given in [Ertel 88].
+        <b>New</b> indicates the number of new records brought by this file, not present in Cura or skeptics' files.
+        <br>This file brings <b>1828 new records</b>.
     </li>
     <li>
-        Check that numbers match :
-        <br>Sum of Ertel 4391 = 553 + 1202 + 332 + 76 + 192 + 159 + 599 + 115 + 202 + 450 + 24 + 453 + 27 = 4384
-        <br>Sum of [Ertel 88] numbers = 567 + 1189 + 332 + 76 + 192 + 158 + 600 + 117 + 204 + 450 + 24 + 455 + 27 = 4391
+        <b>P</b> : Published / Unpublished
     </li>
-    <li>Brings <b>1828 new records</b></li>
+    <li>
+        <b>QUEL</b> : value of column <code>QUEL</code> in the orginal file.
+    </li>
+    <li>
+        <b>Id</b> : Name of the column concerning the sample in the original file.
+    </li>
+    <li>
+        In columns N<sub>QUEL</sub> and N<sub>Id</sub>
+        <br>- the numbers in bold - ex <b>553</b> - are the numbers counted by program in Ertel 4391 file.
+        <br>- the numbers in parentheses - ex (567) - are the numbers given in [Ertel 88].
+    </li>
 </ul>
 <br>
-<b>New</b> : Nb of new records - <b>P</b> : Published / Unpublished
 
 <style>
     #table1 td:nth-child(5), td:nth-child(7){white-space:pre;}
@@ -440,15 +447,15 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <td><b>1202</b><br>(1189)</td>
         <td>2 - First European</td>
         <td>
-            From [Ertel 88] :
+            Records where QUEL = G:A01 and G55 empty and PARA_NR empty. Corresponding number is 2087 - 553 - 332 = 1202 records.
+            <br>
+            <br>From [Ertel 88] :
             <ul>
                 <li>915 non-french athletes used for Gauquelin 1960 european replication</li>
                 <li>274 casual data gathering</li>
             </ul>
             Total of 915 + 214 = 1189 records.
             <br>In file Ertel 4391 :
-            <br>Records where QUEL = G:A01 and G55 empty and PARA_NR empty.
-            <br>Corresponding number is 2087 - 553 - 332 = 1202 records.
         </td>
     </tr>
     <tr>
@@ -475,7 +482,8 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <td>
             Records with QUEL = GCPAR and PARA_NR = string from *1 to *76
             <br>535 + 76 = 611 ; numbers given in [Ertel 88] correspond to the content of the file.
-            <br>[Ertel 88] : These 76 are part of a group of 241 soccer players gathered for the Comité Para test (1976). They were not retained in Comité Para experiment because considered less eminent and remained unpublished. They were copied by Ertel when he visited Gauquelin laboratory.
+            <br>
+            <br>From [Ertel 88] : These 76 are part of a group of 241 soccer players gathered for the Comité Para test (1976). They were not retained in Comité Para experiment because considered less eminent and remained unpublished. They were copied by Ertel when he visited Gauquelin laboratory.
             <br>Ertel copied only 76 because it was for only 76 out of 241 (ranks 1-76) that mars sector was computed.
         </td>
     </tr>
@@ -608,6 +616,12 @@ Combining the output of the two previous commands permits a reconstitution of Ta
     </tr>
     
 </table>
+
+Check that numbers match :
+<br>Counted in file Ertel 4391 = 553 + 1202 + 332 + 76 + 192 + 159 + 599 + 115 + 202 + 450 + 24 + 453 + 27 = 4384
+<br>Numbers coming from [Ertel 88] = 567 + 1189 + 332 + 76 + 192 + 158 + 600 + 117 + 204 + 450 + 24 + 455 + 27 = 4391
+<br>Totals match, which is an indication that sample restoration is correct.
+
 
 <!-- ********************************************************************************* -->
 <h2><a name="data-sources">Data sources</a></h2>
@@ -873,6 +887,8 @@ generates the following table.
     <li>
         <span class="big1">1 - Restore</span>
         <ul>
+        
+            <li><a href="historical-tests.html">Historical tests</a></li>
             
             <li><a href="cura.html">cura.free.fr</a></li>
             
@@ -913,10 +929,10 @@ generates the following table.
     <li>
         <span class="big1">2 - Build new data</span>
         <ul>
-            <li><a href="full.html">7-full/</a></li>
             <li><a href="data-model.html">Data model</a></li>
-            <li><a href="check.html">Check data</a></li>
-            <li><a href="merge.html">Merge data</a></li>
+            <li><a href="full.html">7-full</a></li>
+            <li><a href="acts.html">Acts</a></li>
+            <li><a href="merge.html">Merge</a></li>
             <li><a href="wikidata.html">Wikidata.org</a></li>
             <li><a href="geonames.html">Geonames.org</a></li>
         </ul>
@@ -939,14 +955,7 @@ generates the following table.
     <!-- <li><a href="next.html">Next</a></li> -->
     
     <!-- <li><a href="questions.html">Questions</a></li> -->
-    
-    <li>
-        Doc
-        <ul>
-            <li><a href="historical-tests.html">List of historical tests</a></li>
-        </ul>
-    </li>
-    
+
     <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
     
 </ul>
@@ -958,4 +967,3 @@ generates the following table.
 </html>
 <!-- ************************************* -->
 <!-- ********************************************************************************* -->
-******************************************************************************** -->

@@ -24,6 +24,8 @@ pre{
     margin:1rem;
     background:lightgrey;
     padding:.5rem;
+    border-radius:5px;
+    border:1px solid #717a9f;
 }
 pre.normal{background:none;}
 code.color{background:lightgrey;}

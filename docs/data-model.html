@@ -33,16 +33,126 @@
 </header>
 
 <article>
-<nav class="toc">
-    <ul>
-        <li>
-            <a href="#"></a>
-        </li>
-    </ul>
-</nav>
+
+<img class="margin padding border" src="img/data-model.jpg" alt="">
+
+<ul class="spaced">
+    <li>
+        <div class="bold">Data</div>
+        Defined as a set of key-value pairs.
+        <br>Field name => field value
+        <textarea class="block margin05" cols="20" rows="8">YEA: "1873"
+MON: "12"
+DAY: "15"
+PRO: S
+NUM: "1"
+COU: F
+H: "15"
+MN: "59"
+SEC: "40"
+TZ: "0"
+LAT: 43N14
+LON: 0E 5
+COD: "65"
+CITY: TARBES
+FNAME: Abadie
+GNAME: Joseph</textarea>
+(example from file A2)
+<br>
+<br>Precise data like that are related to 1 source and participate to build 1 person.
+    </li>
+    <li>
+        <div class="bold">Person</div>
+        Here, persons are famous people who are studied.
+        <br>A person is built from 1 - n documents (sources or acts).
+        <br>It can belong to 0 - n groups.
+    </li>
+    <li>
+        <div class="bold">Group</div>
+        A group is a set of persons, ex :
+        <br>sportsmen, painters... linked to 1-n data source
+        <br>A1, A2, SI42... linked to 1 datasource.
+    </li>
+    <li>
+        <div class="bold">Source</div>
+        Information source
+        <br>Can be a file from the web, a book, review, result of a program execution...
+        <br>To follow the construction of a data, many sources are involved.
+        <br>Ex for file A1 :
+        <ul class="simple">
+            <li>Original documents gathered by Gauqueli</li>
+            <li>Lists established by Gauquelin</li>
+            <li>Book published by Gauquelin in 1970</li>
+            <li>First computerized version</li>
+            <li>Transformations done on the data, from Gauquelin to editorial process of cura.free.fr.</li>
+            <li>Transformations done by g5 to produce downloadable file (and possible bugs).</li>
+        </ul>
+    </li>
+    <li>
+        <div class="bold">Act</div>
+        Acts are scans of the original documents.
+        <br>Mainly Birth certificates - actes de naissance, décès, mariages.
+        <br>Each act is accompanied by a yaml file containing its transcription, <a href="acts.html#example">see example</a>
+    </li>
+</ul>
+
+
+<!-- ********************************************************************************* -->
+<h2>Data</h2>
+Data :
+<ul>
+    <li>source</li>
+    <li>date</li>
+    <li>trust</li>
+    <li>values</li>
+</ul>
+<!-- ************************************* -->
+<h3>trust</h3>
+Level of reliability of an information.
+Integer from 1 to 4
+<ul class="spaced margin-top">
+    <li>
+        <div class="bold">1 - reliable, Birth Certificate (BC)</div>
+        - Original document available and verifiable by anyone.
+        <br>- Transcription approved by 2 persons or more.
+    </li>
+    <li>
+        <div class="bold">2 - better than nothing, Birth Record (BR)</div>
+        (= copy of the BC by an officer - may contain mistakes)
+        <br>- Original document available and verifiable by anyone.
+        <br>- Transcription approved by 2 persons or more.
+    </li>
+    <li>
+        <div class="bold">3 - to check</div>
+        Data à priori serious (cura, newalchemypress, astrodatabank) but containing errors.
+        <br>Need to be matched against BC.
+    </li>
+    <li>
+        <div class="bold">4 - the rest</div>
+        Data without birth time or grabbed from the web (wikidata, web sites).
+    </li>
+</ul>
+
+Most data handled by g5 are level 3.
+
+<!-- ********************************************************************************* -->
+<h2>Source</h2>
+Source:
+<ul class="margin-bottom">
+    <li>id</li>
+    <li>parents</li>
+    <li>data</li>
+    <li>persons</li>
+    <li>groups</li>
+</ul>
+
+Sources are built by humans, filling yaml files in <code>7-full/sources/</code>.
+
+
+<!-- ************************************* -->
+<!-- ********************************************************************************* -->
 </article>
 </div><!-- end class="main" -->
-
 
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
@@ -56,6 +166,8 @@
     <li>
         <span class="big1">1 - Restore</span>
         <ul>
+        
+            <li><a href="historical-tests.html">Historical tests</a></li>
             
             <li><a href="cura.html">cura.free.fr</a></li>
             
@@ -96,10 +208,10 @@
     <li>
         <span class="big1">2 - Build new data</span>
         <ul>
-            <li><a href="full.html">7-full/</a></li>
             <li><a href="data-model.html">Data model</a></li>
-            <li><a href="check.html">Check data</a></li>
-            <li><a href="merge.html">Merge data</a></li>
+            <li><a href="full.html">7-full</a></li>
+            <li><a href="acts.html">Acts</a></li>
+            <li><a href="merge.html">Merge</a></li>
             <li><a href="wikidata.html">Wikidata.org</a></li>
             <li><a href="geonames.html">Geonames.org</a></li>
         </ul>
@@ -122,14 +234,7 @@
     <!-- <li><a href="next.html">Next</a></li> -->
     
     <!-- <li><a href="questions.html">Questions</a></li> -->
-    
-    <li>
-        Doc
-        <ul>
-            <li><a href="historical-tests.html">List of historical tests</a></li>
-        </ul>
-    </li>
-    
+
     <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
     
 </ul>
