@@ -98,6 +98,11 @@ data/1-raw/cura.free.fr
     └── 902gdN.html
 </pre>
 
+Note : the following instruction downloads all data files of cura.free.fr in current directory, but g5 doesn't need all files.
+<pre>
+wget --mirror --wait 1 --page-requisites --cut-dirs=1 --relative --no-parent -A '902gd*.html' --no-host-directories http://cura.free.fr/gauq/17archg.html
+</pre>
+
 
 <!-- ********************************************************************************* -->
 <h2><a name="working-on-cura-data">Working on cura data</a></h2>
