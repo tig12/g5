@@ -32,25 +32,24 @@
 <header>
 <h1>Acts</h1>
 <div class="intro">
-Acts are scans of the original documents.
-<br>Mainly Birth certificates - actes de naissance, décès, mariages.
-<br>Each act is accompanied by a yaml file containing its transcription, <a href="#example">see example</a>
-<br>Acts of the civil registries are the only reliable information sources. Any other source may contain errors (in practice they do).
-<br>Acts are stored in directory <code>7-tmp/acts/</code>.
+Acts are scans of the original documents, mainly birth certificates (BC). These are the only reliable information sources, and every g5 data should be checked against a BC. Very few persons are currently matched, this is done only when 2 sources disagree on birth date or time.
+<br>For g5 development, each act is accompanied by a yaml file containing its transcription, <a href="#example">see example</a>
+<br>Acts are stored in directory <code><b>8-acts/</b></code>.
 </div>
 </header>
 
 <article>
 
-During the development of g5, very few persons are matched to birth certificate. This happens when 2 sources disagree on birth date or time, birth certificates give a reliable answer.
-<br>
-<br>Currently, data are checked only for France. All the original acts (birth, death, mariage) between ~1790 and ~1920 can be viewed online. 5 generations with birth times.
-
 
 <!-- ********************************************************************************* -->
 <h2>Verifying french data</h2>
 
-For each verification, the image is downloaded on local machine, and informations to easily go to the online act are recorded in a yaml file expressed in a syntax which can be used to match g5 data by program.
+Currently, data are checked only for France. All acts since 1792 have times indicated. These data untill ~1920 can be viewed online : naissance, décès, mariage (birth, death, mariage) ; 5 generations, around 200 millions of acts with times (source <a href="http://www.filae.com/ressources/etat-civil-numerise-dou-viennent-les-donnees/">filae.com</a>).
+<br>To see original acts, type on a search engine for example "archives 45" (or maybe "Archives 45 France") to see the <i>archives départementales du Loiret</i> (département n° 45).
+
+<!-- ************************************* -->
+<h3>Retrieval process</h3>
+For each verification, the image is downloaded on local machine, and informations to easily go back to the online act are recorded in a yaml file expressed in a syntax which can be used to match g5 data by program.
 <br>
 <br>The following informations are necessary :
 <br>(in parentheses, corresponding fieldname in g5 vocabulary).
@@ -66,6 +65,7 @@ For each verification, the image is downloaded on local machine, and information
     <li>If possible the url directly pointing to the page. Some départements provide a way to copy the "permalink" of a document, which may be different from the url of the page displayed by the web browser.</li>
 </ul>
 
+<!-- ************************************* -->
 <h3><a name="2-1-image-download">Image download</a></h3>
 This is systematically done during g5 development. Some départements provide a link to download current page, some don't. When they don't, image retrieval is done with screen capture. This can be particularily long because sometimes several captures are necessary to get the whole certificate with enough details. In this case, the image is reconstituted assembling the different parts.
 
@@ -73,21 +73,9 @@ This is systematically done during g5 development. Some départements provide a 
 <!-- ********************************************************************************* -->
 <h2>Directory layout</h2>
 
-In g5, they are organized to match directory <code>persons/</code>
+Acts are organized like this :
 <pre>
-acts/
-    └── birth
-        └── 1811
-            └── 10
-                └── 25
-                    └── galois-evariste
-                        ├── birth.jpg
-                        └── birth.yml
-</pre>
-
-But naturally, acts appear to be organized like this :
-<pre>
-acts/                                          
+8-acts/                                          
     ├── BE
     ├── CH
     ├── DE
@@ -99,6 +87,8 @@ acts/
     │   │       └── 1811
     │   │           └── E_NUM_BRG38
     │   │               └── galois-evariste-1811-10-25
+    │   │                   ├── naissance.jpg
+    │   │                   └── naissance.yml
     │   └── 99
     ├── IT
     ├── LU
@@ -108,14 +98,21 @@ acts/
     └── US
 </pre>
 
-
-
+<!-- 
+<pre>
+acts/
+    └── birth
+        └── 1811
+            └── 10
+                └── 25
+                    └── galois-evariste
+                        ├── birth.jpg
+                        └── birth.yml
+</pre>
+-->
 
 <!-- ********************************************************************************* -->
 <h2><a name="example">Example</a></h2>
-
-Need for a wiki where acts and their transcription can be viewed side by side, so users can build little by little a reliable database.
-
 
 <style>
 #proto div{
@@ -176,7 +173,6 @@ personnes:
     naissance: 
       date: '1811-10-25 01:00'
       lieu: Bourg-la-Reine
-      lieu-precis: 
     père: Nicolas Gabriel Galois
     mère: Adelaïde Marie Demante
 
@@ -189,7 +185,6 @@ personnes:
     sexe: M
     profession: Directeur d'un pensionnat de l'université impériale
     domicile: Bourg-la-Reine
-    domicile-precis: 
     relations:
       -
         avec: Adelaïde Marie Demante
@@ -197,11 +192,7 @@ personnes:
   - 
     nom: Adelaïde Marie Demante
     prénom: Adelaïde Marie
-    age: 
     sexe: F
-    profession: 
-    domicile: 
-    domicile-precis: 
     père: Thomas François Demante
 
   ###### témoins ##########
@@ -212,8 +203,6 @@ personnes:
     age: 59
     sexe: M
     profession: Président du tribunal civil
-    domicile: 
-    domicile-precis: 
     note: Président du tribunal civil séant à Louvière, département de l'Eure
     
   - 
@@ -224,12 +213,37 @@ personnes:
     sexe: M
     profession: Maître d'écriture
     domicile: Bourg-la-Reine
-    domicile-precis: 
 </textarea>
 </div>
 
 </div><!-- end class="flex-wrap" -->
 
+<!-- ********************************************************************************* -->
+<h2>Transcription syntax</h2>
+The syntax used to transcribe the acts comes from genealogy software. YAML files are written using french vocabulary, and are translated to a reference vocabulary (close to english) understood by code parsing the yaml files.
+
+<!-- ********************************************************************************* -->
+<h2>Rules used for transcription</h2>
+<ul>
+    <li>
+        <b>All</b> information present in a document is transferred in the transcription.
+        <br>If an information doesn't fit in a predefined field understood by the syntax, a field <code>notes</code> is added.
+    </li>
+    <li>
+        The transcription may contain information deduced from the act. For example, the document says that a witness, Thomas François Demante, is <i>le grand-père maternel de l'enfant</i> (maternel grandfather of the child). The transcription contains the indication that Thomas François Demante is the father of Adelaïde Marie Demante :
+        <pre>
+- 
+  nom: Adelaïde Marie Demante
+  prénom: Adelaïde Marie
+  sexe: F
+  <b>père: Thomas François Demante</b>
+        </pre>
+    </li>
+</ul>
+
+<!-- ********************************************************************************* -->
+<h2>Gauquelin5 integration</h2>
+Not done yet ; will be handled by code in <code>commands/full/add/acts.php</code>, to transfer information from <code>8-acts/</code> to files of <code>7-full/person/</code>
 </article>
 </div><!-- end class="main" -->
 

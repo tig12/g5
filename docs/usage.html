@@ -83,11 +83,11 @@ For other systems, see <a href="https://www.php.net/manual/en/install.pecl.php">
 <pre>go get github.com/soniakeys/meeus</pre>
 
 Wikidata retrieval also needs curl and sqlite3 PECL extensions :
+<br>This is not necessary for data restoration, only to retrieve wikidata on local machine.
 <pre>
 sudo apt install php-curl
 sudo apt install php-sqlite3
 </pre>
-This is not necessary for data restoration, only to retrieve wikidata on local machine.
 
 <!-- ************************************* -->
 <h3><a name="1-1-directory-structure">Directory structure</a></h3>
@@ -139,13 +139,14 @@ dirs:
 </pre>
 
 If you look at <code>data/</code> directory, you will see that it contains only one sub-directory : <code>3-edited/</code>.
-<br>This is because this directory contains human corrections, <i>and is versioned with the program</i>.
-<br>A rule is that the program never generates data in <code>data/3-edited</code> ; if a generated file needs human corrections, it is copied manually to <code>data/3-edited</code> directory.
+<br>This is because this directory contains human corrections, <i>and is versioned with the program</i>. A rule is that the program never generates data in <code>data/3-edited</code> ; if a generated file needs human corrections, it is copied manually to <code>data/3-edited/</code> directory.
 <br>
-<br>The other <code>data/</code> sub-directories contain 
+<br>
+Other sub-directories of <code>data/</code>, are not versioned, ignored by git.
+<br>On a machine with default config, the other <code>data/</code> sub-directories are :
 <ul>
     <li>1-raw : data copied from the internet</li>
-    <li>5-tmp, 7-full : intermediate data used by program</li>
+    <li>5-tmp, 7-full, 8-acts : intermediate data used by program</li>
     <li>9-output : downloadable data</li>
 </ul>
 These files are not versioned and must be downloaded separately.
@@ -219,7 +220,7 @@ This does a real transformation (converts A3 raw html file to a csv file).
 
 <!-- ********************************************************************************* -->
 <h2><a name="complete-execution">Complete execution</a></h2>
-Commands issued to go from raw data to downloadable data.
+To generate downloadable data from scratch :
 
 <pre>
 php run-g5.php newalch ertel4391 all
