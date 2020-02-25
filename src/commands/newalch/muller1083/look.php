@@ -15,6 +15,7 @@ namespace g5\commands\newalch\muller1083;
 
 use g5\patterns\Command;
 use g5\commands\cura\Cura;
+use tiglib\arrays\sortByKey;
 
 class look implements Command {
     
@@ -28,6 +29,7 @@ class look implements Command {
         'fields',
         'gnr',
         'nobilities',
+        'paris',
         'sample',
     ];
     
@@ -73,6 +75,37 @@ class look implements Command {
             $res .= "    <tr><td>$k</td><td>$v</td></tr>\n";
         }
         $res .= "</table>\n";
+        return $res;
+    }
+    
+    
+    // ******************************************************
+    /**
+        Look at records born in Paris.
+    **/
+    private static function look_paris($params=[]){
+        $data = [];
+        $N = $N1870 = 0;
+        $rows = Muller1083::loadTmpFile();
+        foreach($rows as $row){
+            if($row['PLACE'] != 'Paris'){
+                continue;
+            }
+            $data[] = $row;
+            $N++;
+            if($row['DATE'] < '1860'){
+                $N1870++;
+            }
+        }
+        $data = sortByKey::compute($data, 'DATE');
+        $res = "DATE             NUM\tNAME\n";
+        $res .= "------------------------------------------------\n";
+        foreach($data as $row){
+            $res .= $row['DATE'] . ' ' . $row['NR'] . "\t" . $row['GNAME'] . ' ' . $row['FNAME'] . "\n";
+        }
+        $res .= "---\n";
+        $res .= "Total : $N\n";
+        $res .= "Born before 1860 : $N1870\n";
         return $res;
     }
     

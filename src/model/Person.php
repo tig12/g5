@@ -54,8 +54,12 @@ class Person{
         return implode(Full::SEP, ['persons', $y, $m, $d, $slug]);
     }
     
+    /**
+        A string like hendrix-jimi
+        composed by family name and given name
+    **/
     public function slug(): string {
-        return slugify::compute($this->data['name']);
+        return slugify::compute($this->data['fname'] . '-' . $this->data['gname']);
         //return slugify::compute($this->data['name'] . '-' . $this->birthday());
     }
     

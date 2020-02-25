@@ -1,22 +1,24 @@
 
-
 name:
   usual:
-  given:
-  family:
+    given:
+    family:
   spouse:
   official: # As written in the birth certificate
+    family:
+    given:
   nobility:
   fame: # stage, scene
-  nickname:
+  nicknames: []
   alternative: []
 
+# occupation codes
 occus: []
 
 birth:
   date:     # exact date of the birth certificate
   tz:       # timezone offset
-  date-ut:  # for dates like cura
+  date-ut:  # for dates like cura A
   place:
     name:
     c2:
