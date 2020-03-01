@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>CSICOP 1979 | Gauquelin5</title>
+    <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
+    <meta name="description" content="">
+    <meta name="robots" content="index,follow">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
+    <meta name="dcterms.rightsHolder" content="Thierry Graff">
+    <meta name="dcterms.dateCopyrighted" content="2019">
+    <!-- 
+    tigsite:
+        history: , Thierry Graff : Creation
+    -->
+</head>
+
+<body>
+<div class="container">
+
+<div class="main">
+
+<nav class="prevnext">
+    <a class="top" href="index.html">&uarr;</a>
+    <a class="prev" rel="prev" href=".html">&larr;</a>
+    <a class="next" rel="next" href=".html">&rarr;</a>
+</nav>
+
+<header>
+<h1>
+CSICOP 1979
+<div class="subtitle">408 U.S. sportsmen</div>
+</h1>
+<div class="intro">
+This page deals with the (partial) restoration of the CSICOP test (USA 1979).
+<br>There are 3 sub-groups to restore, corresponding to the 3 "canvasses" gathered to reach 408 persons (128 + 198 + 82).
+<br>Data sources :
+<ul>
+    <li><code>irving</code> : file <a href="rawlins-ertel-data.csv">rawlins-ertel-data.csv</a> (N = 408) sent by <a href="">Kenneth Irving</a></li>
+    <li><code>si42</code> : lists coming from Skeptical Inquier VOL IV NO. 2 WINTER 1979-80</li>
+    <li>Cura file D10 brings corrections (190 common records)</li>
+</ul>
+Generated data : <a href="https://larzac.info/gauquelin5/9-output/history/1979-csicop/">9-output/history/1979-csicop/</a>
+</div>
+</header>
+
+<article>
+
+
+<!-- ********************************************************************************* -->
+<h2><a name="information-sources">Information sources</a></h2>
+Informations used to compute this group can be found in several places.
+
+<ul class="spaced margin-top">
+    <li>
+        <b>Irving file</b> is the main file of this restoration.
+        <br>Precise informations about this file are in the <a href="README">README file</a>. They include comments by Kenneth Irving (KI).
+        <br>Extract from README : <i>This is the original raw data, which shows Rawlins' listing of name, date, time, plus his sector calculation for each. along with the batch number.</i>
+        
+    </li>
+    <li>
+        <b>Skeptical Inquier VOL IV NO. 2 WINTER 1979-80, p 60 - 63</b> : in the article "Response to the Gauquelins" (Paul Kurtz, Marvin Zelen, and George Abell), the appendix contains the list of 408 names, with birth date (not time), state, mars sector.
+        <br>This PDF is on <a href="https://skepticalinquirer.org/1980/01/response_to_the_gauquelins/">skepticalinquirer.org/1980/01/response_to_the_gauquelins</a>.
+    </li>
+    <li>
+        <b>Skeptical Inquier VOL IV NO. 2 WINTER 1979-80, p 41</b> : in the article "Star U.S. Sportsmen Display the Mars Effect - A comment on the Kurtz-Zelen-Abell experiment" (Michel and Francoise Gauquelin), appendix I contains the list of 108 sportsmen gathered in canvas 1.
+    </li>
+    <li>
+        <b>The tenacious Mars Effect, p SE-19 to SE-31</b> permits to understand the 192 records of CSICOP present in Gauquelin D10.
+        <br>Note : Ertel takls about 192 records, but g5 code finds 190 matches.
+    </li>
+</ul>
+
+
+<!-- ********************************************************************************* -->
+<h2><a name="restoration-process">Restoration process</a></h2>
+The command :
+<pre>php run-g5.php csicop irving all</pre>
+equivalent to 
+<pre>
+php run-g5.php csicop irving raw2csv
+php run-g5.php csicop irving addD10
+# php run-g5.php csicop irving addsi42
+# php run-g5.php csicop irving export
+</pre>
+
+Generates file <code><a href="https://larzac.info/gauquelin5/">9-output/history/1979-csicop/408-csicop-irving.csv</a></code>.
+
+
+<!-- ************************************* -->
+<h3><a name="2-1-raw2csv">raw2csv</a></h3>
+
+<pre>php run-g5.php csicop irving raw2csv</pre>
+
+The original file looks like that :
+<pre>
+Satz#  NAME   VORNAME      GEBDAT      GEBZEIT  AMPM  ZEITZONE  GEBORT  LO1  LO2  LA1  LA2  SPORTART  MARS  BATCH
+1      Aaron  Henry Louis  5  2  1934  8  25    P     6         AL      88   3    30   41   BASE      21    1                                            
+</pre>
+
+The generated file looks like that :
+<pre>
+CSID GQID   FNAME GNAME         DATE             TZ     PLACE  LG     LAT      CY C2 SPORT  MA36 CANVAS
+1    D10-2  Aaron Henry Louis   1934-02-05 20:25 -06:00 Mobile -88.05 30.68333 US AL BASE   21   1
+</pre>
+
+
+
+<!-- ********************************************************************************* -->
+<!-- ********************************************************************************* -->
+<hr class="margin-top2">
+<hr>
+<h1>&darr; Obsolete doc &darr;</h1>
+<hr>
+<hr>
+<!-- ********************************************************************************* -->
+<!-- ********************************************************************************* -->
+
+<!-- ************************************* -->
+<h3><a name="2-1-raw2csv">raw2csv</a></h3>
+
+<pre>php run-g5.php csicop irving raw2csv</pre>
+
+INPUT :
+<ul>
+    <li>
+        <a href="https://larzac.info/gauquelin5/1-raw/skepticalinquirer.org/si42/si42-p60-63.txt">data/1-raw/skepticalinquirer.org/si42/si42-p60-63.txt</a>
+        <br>(408 US sportsmen - transcription of the PDF, p 60 - 63)
+    </li>
+</ul>
+
+OUTPUT :
+<ul>
+    <li>
+        data/5-tmp/csicop/408-csicop-si42.csv
+        <br>(all records)
+    </li>
+    <li>
+        data/5-tmp/csicop/181-csicop-si42.csv
+        <br>(records marked "SC" = Sport Champion, cf KZA article)
+    </li>
+</ul>
+
+Generated files contain fields :
+<br>FNAME    GNAME   DATE   C2  MA12    SC
+
+
+<!-- ************************************* -->
+<h3><a name="2-2-addcanvas1">addCanvas1</a></h3>
+<ul>
+    <li>
+        Adds field CANVAS to 5-csicop/408-csicop-si42.csv                      
+    </li>
+    <li>
+        Fills CANVAS with value "1" for 128 records
+    </li>
+</ul>
+
+<pre>php run-g5.php csicop si42 addCanvas1</pre>
+
+INPUT :
+<ul>
+    <li>
+        data/5-tmp/csicop/408-csicop-si42.csv
+    </li>
+    <li>
+        <a href="https://larzac.info/gauquelin5/1-raw/skepticalinquirer.org/si42/si42-p41.txt">data/1-raw/skepticalinquirer.org/si42/si42-p41.txt</a>
+        <br>(128 US sportsmen - transcription of the PDF, p 41)
+    </li>
+</ul>
+
+<!-- ************************************* -->
+<h3><a name="2-3-addertel">addErtel</a></h3>
+
+Adds to <code>408-csicop-si42.csv</code> Ertel 4391 informations.
+
+<br>In Ertel 4391, field <code>CSINR</code> correspond to the position of the record in file <code>408-csicop-si42.csv</code>.
+
+<pre>php run-g5.php csicop si42 addErtel</pre>
+INPUT :
+<ul>
+    <li>
+        data/5-tmp/csicop/408-csicop-si42.csv
+    </li>
+    <li>
+        <a href="https://larzac.info/gauquelin5/9-output/history/1979-csicop/192-csicop-ertel.csv">data/9-output/history/1979-csicop/192-csicop-ertel.csv</a>
+        <br>(from Ertel4391, 192 common records between 408 CSICOP and Gauquelin D10)
+    </li>
+</ul>
+<br>
+RESULTS :
+
+<ul class="spaced bordered">
+
+    <li>
+        Adds new fields to 190 rows of <code>408-csicop-si42.csv</code>
+    </li>
+    
+    <li>
+        2 records miss to reach 192 records from D10.
+        <br>In Ertel 4391, 2 rows have field <code>CSINR = 0</code>.                                                                                                
+        <ul>
+            <li>D10-726 <b>Kono Tom (Tomio)</b> 1930-07-27</li>
+            <li>D10-894 <b>Miller John L.</b> 1947-04-29</li>
+        </ul>
+        These records correspond to D10, but do not match to any SCICOP record.
+        <br>Needs explanation.
+    </li>
+    
+    <li>
+        16 Ertel dates differ from Skeptical Inquier dates.
+        <br>This can be checked with command
+        <pre>php run-g5.php csicop si42 checkErtel date</pre>
+        
+        <details>
+            <summary>Date details</summary>
+            <pre>
+si42  1933-12-09 Campbell M. i42 = 50
+ertel 1933-09-12 Campbell Milton CSINR = 51
+D10   1933-09-12 15:22-04:00 Campbell Milton NUM = 196
+
+si42  1948-10-28 Cowens D. i42 = 71
+ertel 1948-10-25 Cowens David W. CSINR = 72
+D10   1944-09-15 08:50-05:00 Cowen Ronald NUM = 271
+
+si42  1947-01-12 Dempsey T. i42 = 89
+ertel 1947-01-21 Dempsey Tom CSINR = 90
+D10   1956-04-21 06:57-08:00 Demont Richard NUM = 324
+
+si42  1952-02-22 Johnson K. i42 = 180
+ertel 1913-08-21 Johnson Cornelius CSINR = 181
+D10   1913-08-21 02:20-08:00 Johnson Cornelius NUM = 661
+
+si42  1935-06-24 Kramer R. i42 = 211
+ertel 1921-08-01 Kramer John A. CSINR = 212
+D10   1921-08-01 01:45-08:00 Kramer John NUM = 731
+
+si42  1930-12-11 O'Brien J. i42 = 265
+ertel 1940-09-15 Olsen Merlin Jay CSINR = 266
+D10   1909-06-09 05:00-06:00 Oelman Robert NUM = 969
+
+si42  1948-04-29 Otis J. i42 = 268
+ertel 1938-01-05 Otto James Edwin CSINR = 269
+D10   1938-01-05 20:26-06:00 Otto James NUM = 978
+
+si42  1938-01-05 Otto J i42 = 269
+ertel 1943-05-02 Owen Nancy CSINR = 270
+D10   1915-10-30 09:15-06:00 Owen Nancy NUM = 981
+
+si42  1943-05-02 Owen N. i42 = 270
+ertel 1945-08-07 Page Alan Cedric CSINR = 271
+D10   1945-08-07 20:23-04:00 Page Alan NUM = 986
+
+si42  1922-07-04 Pollard J i42 = 282
+ertel 1922-07-09 Pollard James CSINR = 283
+D10   1922-07-09 22:50-08:00 Pollard James NUM = 1039
+
+si42  1942-04-14 Rose P. i42 = 298
+ertel 1942-04-12 Rose Peter Ed. CSINR = 299
+D10      NUM = 1098
+
+si42  1935-12-29 Thurston F. i42 = 359
+ertel 1933-12-29 Thurston Frederick C. CSINR = 360
+D10   1933-12-29 15:00-06:00 Thurston Frederick NUM = 1278
+
+si42  1945-03-05 Volk R. i42 = 372
+ertel 1945-03-15 Volk Richard R. CSINR = 373
+D10   1945-03-15 01:24-05:00 Volk Richard NUM = 1309
+
+si42  1918-08-30 Williams T. i42 = 395
+ertel 1938-06-15 Williams Billy Leo CSINR = 396
+D10   1936-11-04 00:21-05:00 Williams Charles NUM = 1360
+
+si42  1938-06-15 Williams B. i42 = 393
+ertel 1953-08-23 Williams Randy CSINR = 394
+D10   1953-08-23 03:29-07:00 Williams Randy NUM = 1366
+
+si42  1953-08-23 Williams R. i42 = 394
+ertel 1918-08-30 Williams Theodore Samuel CSINR = 395
+D10   1918-08-30 12:20-07:00 Williams Theodore NUM = 1370
+16 differences
+            </pre>
+        </details>
+        Corrections of the 3 last dates were introduced in <code>AddErtel</code> code.
+    </li>
+    
+    <li>Makes appear 1 wrong GNR in Ertel 4391 : <b>Dempsey Tom</b> is not D10-324 but D10-325</li>
+</ul>
+
+
+<!-- ************************************* -->
+<h3><a name="2-4-addd10">addD10</a></h3>
+<pre>php run-g5.php csicop si42 addD10</pre>
+
+<!--
+Contains the list of sportsmen contained in
+Skeptical Inquier VOL IV NO. 2 WINTER 1979-80, p 60 - 63 (p 62 - 65 of the pdf).
+Provided in the article
+Response to the Gauquelins
+Paul Kurtz, Marvin Zelen, and George Abell
+https://skepticalinquirer.org/1980/01/response_to_the_gauquelins/
+
+Looking file data/5-tmp/csicop/408-csicop-si42.csv
+--- States ---
+  AL : 20
+  AZ : 2
+  CA : 60
+  CO : 7
+  DE : 1
+  HI : 2
+  KS : 25
+  KY : 35
+  MA : 9
+  MN : 17
+  MT : 2
+  NC : 25
+  ND : 3
+  NH : 1
+  NJ : 38
+  NV : 1
+  OH : 73
+  OR : 17
+  SC : 14
+  UT : 15
+  VA : 16
+  WI : 25
+--- Dates ---
+Min max : 1879-07-31 - 1954-08-21
+Extreme dates :
+1879-07-31  1892-05-29  1950-01-27  1950-02-06  1950-02-10  1950-02-26  1950-04-05  1950-04-15  1950-06-10  1950-08-05  1950-08-07  1950-08-15  1950-10-20  1950-10-25  1950-10-30  1950-10-30  1950-11-04  1950-11-24  1951-01-25  1951-02-05  1951-04-07  1951-05-04  1951-06-09  1951-07-11  1951-09-25  1951-11-02  1951-11-24  1952-02-22  1952-02-24  1952-03-03  1952-08-16  1952-11-05  1952-12-12  1953-08-23  1953-12-06  1953-12-29  1954-08-21
+35 dates > 1950
+
+
+
+
+Results of the U.S. Test of the "Mars Effect" Are Negative
+Paul Kurtz, Marvin Zelen, and George Abell
+Skeptical Inquier VOL IV NO. 2 WINTER 1979-80
+p 21
+
+Canvas 1
+-----------
+We selected all 340 American champions listed in the Lincoln
+Library of Sports Champions (Frontier Press, 1974). We also selected 218
+names from Who's Who in Football (Arlington House, 1974), primarily,
+but not exclusively, the players who made the All-Star or All-Pro teams,
+and 47 All-Star players from Who's Who in Basketball (Arlington House,
+1973). Thus our first proposed sample was composed of a total of 605
+sports champions. This total was reduced by 41 names for which birth data
+were not available in the directories, leaving a total of 564 names.
+
+the actual selection of the champions
+was made by two neutral researchers, Frank Dolce and Germain Harnden
+
+Twenty-one states refused to send us information, on the basis of the
+Privacy Act, and five states, plus the District of Columbia and Puerto
+Rico, did not reply. Five states had no champions in them, and one state
+did not respond to our original request until six months later (those data
+were included in our second sample). Nevertheless, 18 states waived the
+rule and sent information, from which we compiled data on 128
+champions.
+
+We felt that the sample was too
+small and M. Gauquelin agreed with this judgment.
+
+Canvas 2
+-----------
+Accordingly, we decided to expand the sample by requesting
+information on more champions from those states that responded to our
+first canvass. We selected the remaining champions who resided in those
+states and who are listed in Who's Who in Football(330 names) and Who's
+Who in Basketball (145 names). This list included many All-Star and All-
+Pro players in basketball and football not included in the first sample.
+Since we had no idea initially of how much information would be
+forthcoming, not all the All-Star and All-Pro players were selected in the
+first sample. We also added the names of champions listed in Who's Who
+in Track and Field (Arlington, 1973), which contains 111 names of
+American champions from those states, and in Who's Who in Boxing
+(Arlington, 1974), which contains 92 such champions. We sent requests for
+data on these champions to the 18 cooperative states, but received replies
+and birth information from only 14 of them. Even those 14 states did not
+have records of 186 of the champions. In all, our second canvass yielded
+data on 197 additional champions.
+
+
+Canvas 3
+-----------
+In a third canvass we wrote to those states initially refusing
+information, and from all states we requested data on athletes listed in the
+directories but whose names had been omitted in the first and second
+canvasses. Three additional states subsequently responded to our second
+and third inquiries. The final number of states providing information was
+22. From those cooperating states, we requested information on 682. (See
+Table 1.) Thus the total sample that resulted from all three canvasses
+contains 408 names, a number we deemed large enough for a preliminary
+study.
+
+-->
+
+
+
+
+</article>
+</div><!-- end class="main" -->
+
+
+<!-- ************************************* -->
+<aside class="left">                                                                                                                                              
+<ul>
+    <li class="bold big1"><a href="index.html">g5 Doc</a></li>
+    <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">g5 code</a></li>
+    <li><a href="organisation.html">Organisation</a></li>
+    <li><a href="usage.html">Program usage</a></li>
+    <li><a href="output-format.html">Output format</a></li>
+    
+    <li>
+        <span class="big1">1 - Restore</span>
+        <ul>
+        
+            <li><a href="historical-tests.html">Historical tests</a></li>
+            
+            <li><a href="cura.html">cura.free.fr</a></li>
+            
+            <li>
+                <ul>
+                    <a href="cura-A.html">A</a>
+                    <a href="cura-D6.html">D6</a>
+                    <a href="cura-D10.html">D10</a>
+                    <a href="cura-E1-E3.html">E1 E3</a>
+                <li><a href="cura-results.html">Results</a></li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="newalch.html">newalchemypress.com</a>
+                <ul>
+                    <li><a href="newalch-ertel4391.html">Ertel 4391 SPO</a></li>
+                    <li><a href="newalch-muller1083.html">Müller 1083 MED</a></li>
+                </ul>
+            </li>
+            
+            
+            <li>
+                <a href="g55.html">Gauquelin 1955</a>
+                <ul>
+                    <li><a href="g55-restore.html">Restoration</a></li>
+                    <li><a href="g55-curadiff.html">Differences with Cura</a></li>
+                </ul>
+            </li>
+            
+            <li><a href="comite-para.html">Comité Para 1976</a></li>
+            <li><a href="csicop.html">CSICOP 1979</a></li>
+            <li><a href="cfepp.html">CFEPP 1996</a></li>
+            <li><a href="todo-data.html">Data TODO</a></li>
+        </ul>
+    </li>
+    
+    <li>
+        <span class="big1">2 - Build new data</span>
+        <ul>
+            <li><a href="data-model.html">Data model</a></li>
+            <li><a href="full.html">7-full</a></li>
+            <li><a href="acts.html">Acts</a></li>
+            <li><a href="merge.html">Merge</a></li>
+            <li><a href="wikidata.html">Wikidata.org</a></li>
+            <li><a href="geonames.html">Geonames.org</a></li>
+        </ul>
+    </li>
+        
+    <li>
+        <span class="big1">3 - Eminence</span>
+        <ul>
+            <li><a href="eminence.html">Eminence ranking</a></li>
+            <!-- 
+            <li><a href="maths.html">Mathemeticians</a></li>
+            -->
+        </ul>
+    </li>
+    
+    <li><a href="code-details.html">Code details</a></li>
+    <li><a href="time.html">Expressing time</a></li>
+    <li><a href="tweak2csv.html">tweak2csv</a></li>
+    
+    <!-- <li><a href="next.html">Next</a></li> -->
+    
+    <!-- <li><a href="questions.html">Questions</a></li> -->
+
+    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
+    
+</ul>
+</aside>
+
+</div><!-- end class="container" -->
+
+</body>
+</html>
+<!-- ************************************* -->
+<!-- ********************************************************************************* -->
