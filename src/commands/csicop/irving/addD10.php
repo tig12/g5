@@ -30,7 +30,7 @@ class addD10 implements Command{
         $report =  "--- Add column GQID and PLACE to $infile ---\n";
         
         // Add a key GQID between CSID and FNAME
-        // code ok if $infile has fieds described in Irving::TMP_FIELDS
+        // code works if $infile has fieds described in Irving::TMP_FIELDS
         // (this is the case after raw2csv)
         
         $keys = [];

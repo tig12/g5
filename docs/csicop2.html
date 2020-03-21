@@ -33,15 +33,17 @@ CSICOP 1979
 <div class="subtitle">408 U.S. sportsmen</div>
 </h1>
 <div class="intro">
-This page deals with the (partial) restoration of the CSICOP test (USA 1979).
-<br>There are 3 sub-groups to restore, corresponding to the 3 "canvasses" gathered to reach 408 persons (128 + 198 + 82).
+This page deals with the restoration of the CSICOP test (USA 1979).
+<br>There are 3 sub-groups to restore, corresponding to the 3 "canvasses" gathered to reach 408 persons (128 + 198 + 82), corresponding to 3 steps of data collection by CSICOP.
 <br>Data sources :
 <ul>
-    <li><code>irving</code> : file <a href="rawlins-ertel-data.csv">rawlins-ertel-data.csv</a> (N = 408) sent by <a href="">Kenneth Irving</a></li>
+    <li>
+        <code>irving</code> : file <a href="https://larzac.info/gauquelin5/1-raw/csicop/irving/rawlins-ertel-data.csv">rawlins-ertel-data.csv</a> (N = 408), kindly sent by <a href="http://www.planetos.info">Kenneth Irving</a> (this file was previously unpublished).
+    </li>
     <li><code>si42</code> : lists coming from Skeptical Inquier VOL IV NO. 2 WINTER 1979-80</li>
     <li>Cura file D10 brings corrections (190 common records)</li>
 </ul>
-Generated data : <a href="https://larzac.info/gauquelin5/9-output/history/1979-csicop/">9-output/history/1979-csicop/</a>
+Generated data : <a href="https://larzac.info/gauquelin5/9-output/history/1979-csicop/408-csicop.csv">9-output/history/1979-csicop/408-csicop.csv</a>
 </div>
 </header>
 
@@ -55,9 +57,10 @@ Informations used to compute this group can be found in several places.
 <ul class="spaced margin-top">
     <li>
         <b>Irving file</b> is the main file of this restoration.
-        <br>Precise informations about this file are in the <a href="README">README file</a>. They include comments by Kenneth Irving (KI).
+        <br>Precise informations about this file are in the <a href="https://larzac.info/gauquelin5/9-output/history/1979-csicop/README">README file</a>. They include comments by Kenneth Irving (KI).
         <br>Extract from README : <i>This is the original raw data, which shows Rawlins' listing of name, date, time, plus his sector calculation for each. along with the batch number.</i>
-        
+        <br>An interest of this file is the presence of a column "BATCH", which correspond to the "canvasses".
+        <br>This file contains longitude and latittude, but not birth place name.
     </li>
     <li>
         <b>Skeptical Inquier VOL IV NO. 2 WINTER 1979-80, p 60 - 63</b> : in the article "Response to the Gauquelins" (Paul Kurtz, Marvin Zelen, and George Abell), the appendix contains the list of 408 names, with birth date (not time), state, mars sector.
@@ -65,12 +68,106 @@ Informations used to compute this group can be found in several places.
     </li>
     <li>
         <b>Skeptical Inquier VOL IV NO. 2 WINTER 1979-80, p 41</b> : in the article "Star U.S. Sportsmen Display the Mars Effect - A comment on the Kurtz-Zelen-Abell experiment" (Michel and Francoise Gauquelin), appendix I contains the list of 108 sportsmen gathered in canvas 1.
+        <br>This PDF is on <a href="https://skepticalinquirer.org/1980/01/star_us_sportsmen_display_the_mars_effect/">skepticalinquirer.org/1980/01/star_us_sportsmen_display_the_mars_effect/</a>
     </li>
     <li>
         <b>The tenacious Mars Effect, p SE-19 to SE-31</b> permits to understand the 192 records of CSICOP present in Gauquelin D10.
-        <br>Note : Ertel takls about 192 records, but g5 code finds 190 matches.
+        <br>The match between CSICOP group and D10 can be done thanks to <a href="newalch-ertel4391.html">Ertel's file of 4391 sportsmen</a>.
+        <br>Note : Ertel talks about 192 records, but g5 code finds 190 matches.
     </li>
 </ul>
+
+<!-- ********************************************************************************* -->
+<h2>Preparatory work</h2>
+
+<!-- ************************************* -->
+<h3>si42</h3>
+A previous attempt to restore this group was done using Skeptical Inquier vol IV NO. 2 (named here <code>si42</code>) - see <a href="csicop-si42.html">page CSICOP SI42</a>.
+<br>The command
+<pre>php run-g5.php csicop irving look si42</pre>
+permits to compare Irving dates with si42.
+<br>This shows two kinds of differences :
+<ul>
+    <li>
+        Different ids : some records were numbered differently. The decision was made to keep numbers used in <code>si42</code>, for two reasons :
+        <ul>
+            <li>Skeptical Inquier list is the only (known) published list.</li>
+            <li>This list respects alphabetical order (which is not the case in Irving file).</li>
+        </ul>
+        This concerns 12 records ; the correspondance is expressed in constant <code>IRVING_SI42</code> of class <code>g5\commands\csicop\irving\Irving</code>.
+        <br>This matching is included in the code of step <code>raw2csv</code>.
+    </li>
+    <li>
+        Different dates : 11 records have different dates.
+        <details>
+            <summary>See details</summary>
+            <pre>php run-g5.php csicop irving look si42</pre>
+            <pre>
+irving 72 1948-10-25 KY Cowens David W
+si42   72 1948-10-28 KY Cowens D.
+
+irving 171 1919-02-16 KY Huber Lee
+si42   171 1919-02-06 KY Huber L.
+
+irving 227 1949-08-22 CA Love Stan
+si42   227 1949-09-22 CA Love S.
+
+irving 231 1945-08-28 OH Lynch James
+si42   231 1945-09-28 OH Lynch J.
+
+irving 252 1938-04-17 NJ Merz Curtis
+si42   252 1928-04-17 NJ Merx C.
+
+irving 283 1922-07-09 CA Pollard James
+si42   283 1922-07-04 CA Pollard J
+
+irving 286 1926-11-12 OH Ratterman George
+si42   286 1936-11-12 OH Ratterman G.
+
+irving 332 1939-07-31 VA Snead Norman
+si42   332 1879-07-31 VA Snead N.
+
+irving 360 1933-12-29 WI Thurston Frederick C
+si42   360 1935-12-29 WI Thurston F.
+
+irving 373 1945-03-15 OH Volk Richard R
+si42   373 1945-03-05 OH Volk R.
+
+irving 400 1917-07-09 OR Wintermute Urgel
+si42   400 1917-07-19 OR Wintermute U.
+
+11 differences
+            </pre>
+        </details>
+        The only way to solve these cases is to check in civil registries ; this was not done, and dates coming from Irving file were kept.
+    </li>
+</ul>
+
+<!-- ************************************* -->
+<h3>Ertel 4391</h3>
+The decision to keep Skeptical Inquier's numbers lead to bring corrections in Ertel 4391 file, included in step <code>tweak2csv</code> of this file.
+<br>Once these corrections done, a comparison on dates shows 3 differences between Ertel and Irving file.
+<details class="margin-top">
+    <summary>See details</summary>
+    <pre>php run-g5.php csicop irving look ertel</pre>
+    <pre>
+CSICOP 51 = Ertel 805
+Irving 1933-12-09 Campbell Milton
+Ertel  1933-09-12 Campbell Milton
+
+CSICOP 90 = Ertel 1350
+Irving 1947-01-12 Dempsey Tom
+Ertel  1947-01-21 Dempsey Tom
+
+CSICOP 299 = Ertel 3571
+Irving 1942-04-14 Rose Peter Ed
+Ertel  1942-04-12 Rose Peter Ed.
+
+187 records match dates
+3 Irving dates different from Ertel 4391
+    </pre>
+</details>
+Here also, the only way to be sure is to see the birth certificates. This was not done, and dates were not changed.
 
 
 <!-- ********************************************************************************* -->
@@ -81,11 +178,10 @@ equivalent to
 <pre>
 php run-g5.php csicop irving raw2csv
 php run-g5.php csicop irving addD10
-# php run-g5.php csicop irving addsi42
-# php run-g5.php csicop irving export
-</pre>
+php run-g5.php csicop irving export
+</pre>                                                                                                             
 
-Generates file <code><a href="https://larzac.info/gauquelin5/">9-output/history/1979-csicop/408-csicop-irving.csv</a></code>.
+Generates file <code><a href="https://larzac.info/gauquelin5/9-output/history/1979-csicop/408-csicop.csv">9-output/history/1979-csicop/408-csicop.csv</a></code>.
 
 
 <!-- ************************************* -->
@@ -106,192 +202,10 @@ CSID GQID   FNAME GNAME         DATE             TZ     PLACE  LG     LAT      C
 </pre>
 
 
-
-<!-- ********************************************************************************* -->
-<!-- ********************************************************************************* -->
-<hr class="margin-top2">
-<hr>
-<h1>&darr; Obsolete doc &darr;</h1>
-<hr>
-<hr>
-<!-- ********************************************************************************* -->
-<!-- ********************************************************************************* -->
-
-<!-- ************************************* -->
-<h3><a name="2-1-raw2csv">raw2csv</a></h3>
-
-<pre>php run-g5.php csicop irving raw2csv</pre>
-
-INPUT :
-<ul>
-    <li>
-        <a href="https://larzac.info/gauquelin5/1-raw/skepticalinquirer.org/si42/si42-p60-63.txt">data/1-raw/skepticalinquirer.org/si42/si42-p60-63.txt</a>
-        <br>(408 US sportsmen - transcription of the PDF, p 60 - 63)
-    </li>
-</ul>
-
-OUTPUT :
-<ul>
-    <li>
-        data/5-tmp/csicop/408-csicop-si42.csv
-        <br>(all records)
-    </li>
-    <li>
-        data/5-tmp/csicop/181-csicop-si42.csv
-        <br>(records marked "SC" = Sport Champion, cf KZA article)
-    </li>
-</ul>
-
-Generated files contain fields :
-<br>FNAME    GNAME   DATE   C2  MA12    SC
-
-
-<!-- ************************************* -->
-<h3><a name="2-2-addcanvas1">addCanvas1</a></h3>
-<ul>
-    <li>
-        Adds field CANVAS to 5-csicop/408-csicop-si42.csv                      
-    </li>
-    <li>
-        Fills CANVAS with value "1" for 128 records
-    </li>
-</ul>
-
-<pre>php run-g5.php csicop si42 addCanvas1</pre>
-
-INPUT :
-<ul>
-    <li>
-        data/5-tmp/csicop/408-csicop-si42.csv
-    </li>
-    <li>
-        <a href="https://larzac.info/gauquelin5/1-raw/skepticalinquirer.org/si42/si42-p41.txt">data/1-raw/skepticalinquirer.org/si42/si42-p41.txt</a>
-        <br>(128 US sportsmen - transcription of the PDF, p 41)
-    </li>
-</ul>
-
-<!-- ************************************* -->
-<h3><a name="2-3-addertel">addErtel</a></h3>
-
-Adds to <code>408-csicop-si42.csv</code> Ertel 4391 informations.
-
-<br>In Ertel 4391, field <code>CSINR</code> correspond to the position of the record in file <code>408-csicop-si42.csv</code>.
-
-<pre>php run-g5.php csicop si42 addErtel</pre>
-INPUT :
-<ul>
-    <li>
-        data/5-tmp/csicop/408-csicop-si42.csv
-    </li>
-    <li>
-        <a href="https://larzac.info/gauquelin5/9-output/history/1979-csicop/192-csicop-ertel.csv">data/9-output/history/1979-csicop/192-csicop-ertel.csv</a>
-        <br>(from Ertel4391, 192 common records between 408 CSICOP and Gauquelin D10)
-    </li>
-</ul>
-<br>
-RESULTS :
-
-<ul class="spaced bordered">
-
-    <li>
-        Adds new fields to 190 rows of <code>408-csicop-si42.csv</code>
-    </li>
-    
-    <li>
-        2 records miss to reach 192 records from D10.
-        <br>In Ertel 4391, 2 rows have field <code>CSINR = 0</code>.                                                                                                
-        <ul>
-            <li>D10-726 <b>Kono Tom (Tomio)</b> 1930-07-27</li>
-            <li>D10-894 <b>Miller John L.</b> 1947-04-29</li>
-        </ul>
-        These records correspond to D10, but do not match to any SCICOP record.
-        <br>Needs explanation.
-    </li>
-    
-    <li>
-        16 Ertel dates differ from Skeptical Inquier dates.
-        <br>This can be checked with command
-        <pre>php run-g5.php csicop si42 checkErtel date</pre>
-        
-        <details>
-            <summary>Date details</summary>
-            <pre>
-si42  1933-12-09 Campbell M. i42 = 50
-ertel 1933-09-12 Campbell Milton CSINR = 51
-D10   1933-09-12 15:22-04:00 Campbell Milton NUM = 196
-
-si42  1948-10-28 Cowens D. i42 = 71
-ertel 1948-10-25 Cowens David W. CSINR = 72
-D10   1944-09-15 08:50-05:00 Cowen Ronald NUM = 271
-
-si42  1947-01-12 Dempsey T. i42 = 89
-ertel 1947-01-21 Dempsey Tom CSINR = 90
-D10   1956-04-21 06:57-08:00 Demont Richard NUM = 324
-
-si42  1952-02-22 Johnson K. i42 = 180
-ertel 1913-08-21 Johnson Cornelius CSINR = 181
-D10   1913-08-21 02:20-08:00 Johnson Cornelius NUM = 661
-
-si42  1935-06-24 Kramer R. i42 = 211
-ertel 1921-08-01 Kramer John A. CSINR = 212
-D10   1921-08-01 01:45-08:00 Kramer John NUM = 731
-
-si42  1930-12-11 O'Brien J. i42 = 265
-ertel 1940-09-15 Olsen Merlin Jay CSINR = 266
-D10   1909-06-09 05:00-06:00 Oelman Robert NUM = 969
-
-si42  1948-04-29 Otis J. i42 = 268
-ertel 1938-01-05 Otto James Edwin CSINR = 269
-D10   1938-01-05 20:26-06:00 Otto James NUM = 978
-
-si42  1938-01-05 Otto J i42 = 269
-ertel 1943-05-02 Owen Nancy CSINR = 270
-D10   1915-10-30 09:15-06:00 Owen Nancy NUM = 981
-
-si42  1943-05-02 Owen N. i42 = 270
-ertel 1945-08-07 Page Alan Cedric CSINR = 271
-D10   1945-08-07 20:23-04:00 Page Alan NUM = 986
-
-si42  1922-07-04 Pollard J i42 = 282
-ertel 1922-07-09 Pollard James CSINR = 283
-D10   1922-07-09 22:50-08:00 Pollard James NUM = 1039
-
-si42  1942-04-14 Rose P. i42 = 298
-ertel 1942-04-12 Rose Peter Ed. CSINR = 299
-D10      NUM = 1098
-
-si42  1935-12-29 Thurston F. i42 = 359
-ertel 1933-12-29 Thurston Frederick C. CSINR = 360
-D10   1933-12-29 15:00-06:00 Thurston Frederick NUM = 1278
-
-si42  1945-03-05 Volk R. i42 = 372
-ertel 1945-03-15 Volk Richard R. CSINR = 373
-D10   1945-03-15 01:24-05:00 Volk Richard NUM = 1309
-
-si42  1918-08-30 Williams T. i42 = 395
-ertel 1938-06-15 Williams Billy Leo CSINR = 396
-D10   1936-11-04 00:21-05:00 Williams Charles NUM = 1360
-
-si42  1938-06-15 Williams B. i42 = 393
-ertel 1953-08-23 Williams Randy CSINR = 394
-D10   1953-08-23 03:29-07:00 Williams Randy NUM = 1366
-
-si42  1953-08-23 Williams R. i42 = 394
-ertel 1918-08-30 Williams Theodore Samuel CSINR = 395
-D10   1918-08-30 12:20-07:00 Williams Theodore NUM = 1370
-16 differences
-            </pre>
-        </details>
-        Corrections of the 3 last dates were introduced in <code>AddErtel</code> code.
-    </li>
-    
-    <li>Makes appear 1 wrong GNR in Ertel 4391 : <b>Dempsey Tom</b> is not D10-324 but D10-325</li>
-</ul>
-
-
 <!-- ************************************* -->
 <h3><a name="2-4-addd10">addD10</a></h3>
-<pre>php run-g5.php csicop si42 addD10</pre>
+<pre>php run-g5.php csicop irving addD10</pre>
+Adds field <code>PLACE</code> to 190 records.
 
 <!--
 Contains the list of sportsmen contained in
@@ -452,7 +366,7 @@ study.
             <li><a href="comite-para.html">Comité Para 1976</a></li>
             <li><a href="csicop.html">CSICOP 1979</a></li>
             <li><a href="cfepp.html">CFEPP 1996</a></li>
-            <li><a href="todo-data.html">Data TODO</a></li>
+            <!-- <li><a href="todo-data.html">Data TODO</a></li> -->
         </ul>
     </li>
     

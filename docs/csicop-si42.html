@@ -31,34 +31,36 @@
 <h1>
 CSICOP 1979
 <div class="subtitle">408 U.S. sportsmen</div>
+<div class="subtitle">First restoration attempt</div>
 </h1>
 <div class="intro">
-This page deals with the (partial) restoration of the CSICOP test (USA 1979).
-<br>There are 3 sub-groups to restore, corresponding to the 3 "canvasses" gathered to reach 408 persons (128 + 198 + 82).
-<br>Work in progress ; <a href="https://larzac.info/gauquelin5/9-output/history/1979-csicop/">generated data</a> are still approximative.
+This page deals with the work done on the CSICOP test (USA 1979), using data published in "The Skeptical Inquier", VOL IV NO. 2 WINTER 1979-80.
+<br>Skeptical Inquier data are incomplete : given names not present ; family names sometimes ambiguous ; no birth time ; neither place name nor longitude / latitude. This is logically impossible to generate precise data.
+<br>Fortunately, Kenneth Irving sent me an other file (unpublished so far), with more precise information, permitting a much better restoration. Irving's file then became the main file for CSICOP restoration ; see <a href="csicop2.html">main CSICOP page</a> for details.
+<br>
+<br>But work done on Skeptical Inquier's data was not totally useless :
+<ul>                                                                                                               
+    <li>
+        The ids used in the Skeptical Inquier's list were kept as a reference to identify CSICOP records, for two reasons :
+        <ul>
+            <li>Skeptical Inquier list is the only (known) published list.</li>
+            <li>This list respects alphabetical order (which is not the case in Irving file).</li>
+        </ul>
+    </li>
+    <li>
+        This permitted to fix some ids in Irving file.
+    </li>
+    <li>
+        It also permitted to fix <a href="newalch-ertel4391.html">Ertel 4391 file</a> (column <code>CSINR</code>), which contains references to CSICOP records. 
+    </li>
+    <li>It permitted to identify differences in dates that need explanation.</li>
+</ul>
+
+<br>Once again, see <a href="csicop2.html">main CSICOP page</a> for a more precise restoration.
 </div>
 </header>
 
 <article>
-<nav class="toc">
-    <ul>
-        <li>
-            <a href="#information-sources">Information sources</a>
-            <ul>
-                <li><a href="#1-1-missing-information">Missing information</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#restoration-process">Restoration process</a>
-            <ul>
-                <li><a href="#2-1-raw2csv">raw2csv</a></li>
-                <li><a href="#2-2-addcanvas1">addCanvas1</a></li>
-                <li><a href="#2-3-addertel">addErtel</a></li>
-                <li><a href="#2-4-addd10">addD10</a></li>
-            </ul>
-        </li>
-    </ul>
-</nav>
 
 <!-- ********************************************************************************* -->
 <h2><a name="information-sources">Information sources</a></h2>
@@ -71,23 +73,23 @@ Informations used to compute this group can be found in several places.
     </li>
     <li>
         <b>Skeptical Inquier VOL IV NO. 2 WINTER 1979-80, p 41</b> : in the article "Star U.S. Sportsmen Display the Mars Effect - A comment on the Kurtz-Zelen-Abell experiment" (Michel and Francoise Gauquelin), appendix I contains the list of 108 sportsmen gathered in canvas 1.
+        <br>This PDF is on <a href="https://skepticalinquirer.org/1980/01/star_us_sportsmen_display_the_mars_effect/">skepticalinquirer.org/1980/01/star_us_sportsmen_display_the_mars_effect/</a>
     </li>
     <li>
         <b>The tenacious Mars Effect, p SE-19 to SE-31</b> permits to understand the 192 records of CSICOP present in Gauquelin D10.
     </li>
 </ul>
 
-
-<!-- ************************************* -->
-<h3><a name="1-1-missing-information">Missing information</a></h3>
-It is probably possible to compute more information from Ertel 4391, but more precise data source is needed for a satisfying reconstruction (distinct canvasses with birth times and places).
-
+<!-- ********************************************************************************* -->
+<h2>Preparatory work</h2>
+The PDF files downloaded from skepticalinquirer.org cannot be directly exploited by program. Text files were built from the PDF ; these files can be downloaded from <a href="https://larzac.info/gauquelin5/1-raw/csicop/si42/">larzac.info/gauquelin5/1-raw/csicop/si42/</a>.
+<br>The README file in this directory details the way PDF files were transformed to text files.
 
 <!-- ********************************************************************************* -->
 <h2><a name="restoration-process">Restoration process</a></h2>
 The command :
 <pre>php run-g5.php csicop si42 all</pre>
-generates file <code>9-output/history/1979-csicop/csicop-408SPO.csv</code>.
+generates file <a href="https://larzac.info/gauquelin5/9-output/history/1979-csicop/408-csicop-si42.csv">9-output/history/1979-csicop/408-csicop-si42.csv</a>
 <br>
 <br>This is equivalent to 
 <pre>
@@ -154,9 +156,9 @@ INPUT :
 <!-- ************************************* -->
 <h3><a name="2-3-addertel">addErtel</a></h3>
 
-Adds to <code>408-csicop-si42.csv</code> Ertel 4391 informations.
+Adds to <code>408-csicop-si42.csv</code> informations coming from file <a href="newalch-ertel4391.html">Ertel 4391</a>.
 
-<br>In Ertel 4391, field <code>CSINR</code> correspond to the position of the record in file <code>408-csicop-si42.csv</code>.
+<br>In Ertel 4391, field <code>CSINR</code> corresponds to the position of the record in file <code>408-csicop-si42.csv</code>.
 
 <pre>php run-g5.php csicop si42 addErtel</pre>
 INPUT :
@@ -294,9 +296,6 @@ Extreme dates :
 1879-07-31  1892-05-29  1950-01-27  1950-02-06  1950-02-10  1950-02-26  1950-04-05  1950-04-15  1950-06-10  1950-08-05  1950-08-07  1950-08-15  1950-10-20  1950-10-25  1950-10-30  1950-10-30  1950-11-04  1950-11-24  1951-01-25  1951-02-05  1951-04-07  1951-05-04  1951-06-09  1951-07-11  1951-09-25  1951-11-02  1951-11-24  1952-02-22  1952-02-24  1952-03-03  1952-08-16  1952-11-05  1952-12-12  1953-08-23  1953-12-06  1953-12-29  1954-08-21
 35 dates > 1950
 
-
-
-
 Results of the U.S. Test of the "Mars Effect" Are Negative
 Paul Kurtz, Marvin Zelen, and George Abell
 Skeptical Inquier VOL IV NO. 2 WINTER 1979-80
@@ -360,9 +359,6 @@ contains 408 names, a number we deemed large enough for a preliminary
 study.
 
 -->
-
-
-
 
 </article>
 </div><!-- end class="main" -->

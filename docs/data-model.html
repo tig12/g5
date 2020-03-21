@@ -29,12 +29,16 @@
 
 <header>
 <h1>Data model</h1>
-<div class="intro"></div>
+<div class="intro">
+<code>7-full/</code> contains these notions : document, source, data, person, group.
+</div>
 </header>
 
 <article>
 
+<!-- 
 <img class="margin padding border" src="img/data-model.jpg" alt="">
+-->
 
 <ul class="spaced">
     <li>
@@ -74,25 +78,30 @@ GNAME: Joseph</textarea>
         <br>A1, A2, SI42... linked to 1 datasource.
     </li>
     <li>
-        <div class="bold">Source</div>
-        Information source
-        <br>Can be a file from the web, a book, review, result of a program execution...
-        <br>To follow the construction of a data, many sources are involved.
-        <br>Ex for file A1 :
-        <ul class="simple">
-            <li>Original documents gathered by Gauqueli</li>
-            <li>Lists established by Gauquelin</li>
-            <li>Book published by Gauquelin in 1970</li>
-            <li>First computerized version</li>
-            <li>Transformations done on the data, from Gauquelin to editorial process of cura.free.fr.</li>
-            <li>Transformations done by g5 to produce downloadable file (and possible bugs).</li>
+        <div class="big2 bold">Documents</div>
+        <ul>
+            <li>
+                <div class="bold">Source</div>
+                Information source
+                <br>Can be a file from the web, a book, review, result of a program execution...
+                <br>To follow the construction of a data, many sources are involved.
+                <br>Ex for file A1 :
+                <ul class="simple">
+                    <li>Original documents gathered by Gauquelin</li>
+                    <li>Lists established by Gauquelin</li>
+                    <li>Book published by Gauquelin in 1970</li>
+                    <li>First computerized version</li>
+                    <li>Transformations done on the data, from Gauquelin to editorial process of cura.free.fr.</li>
+                    <li>Transformations done by g5 to produce downloadable file (and possible bugs).</li>
+                </ul>
+            </li>
+            <li>
+                <div class="bold">Act</div>
+                Acts are scans of the original documents.
+                <br>Mainly Birth certificates - actes de naissance, décès, mariages.
+                <br>Each act is accompanied by a yaml file containing its transcription, <a href="acts.html#example">see example</a>
+            </li>
         </ul>
-    </li>
-    <li>
-        <div class="bold">Act</div>
-        Acts are scans of the original documents.
-        <br>Mainly Birth certificates - actes de naissance, décès, mariages.
-        <br>Each act is accompanied by a yaml file containing its transcription, <a href="acts.html#example">see example</a>
     </li>
 </ul>
 
@@ -201,7 +210,7 @@ Sources are built by humans, filling yaml files in <code>7-full/sources/</code>.
             <li><a href="comite-para.html">Comité Para 1976</a></li>
             <li><a href="csicop.html">CSICOP 1979</a></li>
             <li><a href="cfepp.html">CFEPP 1996</a></li>
-            <li><a href="todo-data.html">Data TODO</a></li>
+            <!-- <li><a href="todo-data.html">Data TODO</a></li> -->
         </ul>
     </li>
     

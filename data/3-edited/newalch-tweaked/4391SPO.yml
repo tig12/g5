@@ -8,7 +8,9 @@
 -
   NR: 136
   GNUM: D10-38 
-  build-notes: seen while comparing with CSICOP dates
+  build-notes: |
+    seen while comparing with CSICOP dates
+    with command : php run-g5.php csicop si42 checkErtel date
 
 -
   NR: 148

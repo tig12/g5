@@ -70,7 +70,6 @@ class Irving{
         return Config::$data['dirs']['5-csicop'] . DS . '408-csicop-irving.csv';
     }
     
-    
     // ******************************************************
     /**
         Loads 5-ciscop/408-csicop-irving.csv in an asssociative array ; keys = CSID

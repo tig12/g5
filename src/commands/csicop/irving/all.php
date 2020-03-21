@@ -30,7 +30,7 @@ class all implements Command {
         echo "\n=== php run-g5.php csicop irving addD10 ===\n";
         echo addD10::execute();
         
-        //echo "\n=== php run-g5.php newalch ertel4391 export dl ===\n";
+        //echo "\n=== php run-g5.php csicop irving export dl ===\n";
         //echo export::execute(['dl']);
 
         return '';
