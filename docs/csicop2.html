@@ -35,15 +35,9 @@ CSICOP 1979
 <div class="intro">
 This page deals with the restoration of the CSICOP test (USA 1979).
 <br>There are 3 sub-groups to restore, corresponding to the 3 "canvasses" gathered to reach 408 persons (128 + 198 + 82), corresponding to 3 steps of data collection by CSICOP.
-<br>Data sources :
-<ul>
-    <li>
-        <code>irving</code> : file <a href="https://larzac.info/gauquelin5/1-raw/csicop/irving/rawlins-ertel-data.csv">rawlins-ertel-data.csv</a> (N = 408), kindly sent by <a href="http://www.planetos.info">Kenneth Irving</a> (this file was previously unpublished).
-    </li>
-    <li><code>si42</code> : lists coming from Skeptical Inquier VOL IV NO. 2 WINTER 1979-80</li>
-    <li>Cura file D10 brings corrections (190 common records)</li>
-</ul>
-Generated data : <a href="https://larzac.info/gauquelin5/9-output/history/1979-csicop/408-csicop.csv">9-output/history/1979-csicop/408-csicop.csv</a>
+<br>Main information source for this restoration is a file : <a href="https://larzac.info/gauquelin5/1-raw/csicop/irving/rawlins-ertel-data.csv">rawlins-ertel-data.csv</a> (N = 408), kindly sent by <a href="http://www.planetos.info">Kenneth Irving</a> (this file was previously unpublished).
+<br>Lists coming from Skeptical Inquier VOL IV NO. 2 WINTER 1979-80 and Cura file D10 were also used to bring corrections to Irving's file.
+<br>Generated data : <a href="https://larzac.info/gauquelin5/9-output/history/1979-csicop/408-csicop.csv">9-output/history/1979-csicop/408-csicop.csv</a>
 </div>
 </header>
 
@@ -57,7 +51,7 @@ Informations used to compute this group can be found in several places.
 <ul class="spaced margin-top">
     <li>
         <b>Irving file</b> is the main file of this restoration.
-        <br>Precise informations about this file are in the <a href="https://larzac.info/gauquelin5/9-output/history/1979-csicop/README">README file</a>. They include comments by Kenneth Irving (KI).
+        <br>Precise informations about this file are in the <a href="https://larzac.info/gauquelin5/1-raw/csicop/irving/README">README file</a>. They include comments by Kenneth Irving (KI).
         <br>Extract from README : <i>This is the original raw data, which shows Rawlins' listing of name, date, time, plus his sector calculation for each. along with the batch number.</i>
         <br>An interest of this file is the presence of a column "BATCH", which correspond to the "canvasses".
         <br>This file contains longitude and latittude, but not birth place name.
@@ -92,7 +86,7 @@ permits to compare Irving dates with si42.
         Different ids : some records were numbered differently. The decision was made to keep numbers used in <code>si42</code>, for two reasons :
         <ul>
             <li>Skeptical Inquier list is the only (known) published list.</li>
-            <li>This list respects alphabetical order (which is not the case in Irving file).</li>
+            <li>This list respects alphabetical order.</li>
         </ul>
         This concerns 12 records ; the correspondance is expressed in constant <code>IRVING_SI42</code> of class <code>g5\commands\csicop\irving\Irving</code>.
         <br>This matching is included in the code of step <code>raw2csv</code>.
