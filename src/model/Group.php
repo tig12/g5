@@ -47,7 +47,7 @@ class Group{
     }
     
     public function slug(): string {
-        $tmp = explode(Full::SEP, $this->uid);
+        $tmp = explode(G5DB::SEP, $this->uid);
         return $tmp[count($tmp)-1];
     }
     
@@ -60,9 +60,9 @@ class Group{
     // *********************** file system *******************************
     
     public function path($full=true): string {
-        $res = $full ? Full::$DIR . Full::SEP : '';
+        $res = $full ? G5DB::$DIR . G5DB::SEP : '';
         $res .= $this->uid() . '.txt';
-        return str_replace(Full::SEP, DS, $res);
+        return str_replace(G5DB::SEP, DS, $res);
     }
     
     public function load(){

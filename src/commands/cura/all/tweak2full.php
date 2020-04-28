@@ -7,16 +7,16 @@
     For example, if a date or a time is modified, should be done before step "legalTime"
     
     @license    GPL
-    @history    2019-07-26 16:58:21+02:00, Thierry Graff : creation
+    @history    2020-01-21 20:51:27+01:00, Thierry Graff : creation from raw2csv
 ********************************************************************************/
-namespace g5\transform\cura\all;
+namespace g5\commands\cura\all;
 
 use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
-use g5\transform\cura\Cura;
+use g5\commands\cura\Cura;
 
-class tweak2csv implements Command{
+class tweak2full implements Command{
     
     // *****************************************
     // Implementation of Command
@@ -59,6 +59,7 @@ class tweak2csv implements Command{
             }
             $tweaks[$NUM] = $record;
         }
+        
         
         $cura = Cura::loadTmpCsv_num($datafile);
         

@@ -11,6 +11,7 @@
 namespace g5\commands\cura\A;
 
 use g5\G5;
+//use g5\model\Source;
 use g5\model\Person;
 use g5\model\Group;
 use g5\Config;
@@ -28,8 +29,7 @@ class raw2full implements Command{
     // Implementation of Command
     /** 
         Parses one html cura file of serie A (locally stored in directory data/raw/cura.free.fr)
-        Stores each person of the file in distinct yaml files, in 7-full/
-        and stores it in a csv file (in directory 5-cura-csv/)
+        Stores each person of the file in a distinct yaml files, in 7-full/persons/
         
         Merges the original list (without names) with names contained in file 902gdN.html
         Merge is done using birthdate.
@@ -250,9 +250,9 @@ class raw2full implements Command{
             $p->addId(Cura::IDSOURCE, Cura::gqid($datafile, $NUM));
             
             $new = [];
-            $new['fname'] = $cur['FNAME'];
-            $new['gname'] = $cur['GNAME'];
-            $new['name'] = trim($new['gname'] . ' ' . $new['fname']);
+            $new['name']['family'] = $cur['FNAME'];
+            $new['name']['given'] = $cur['GNAME'];
+            $new['name']['usual'] = trim($new['name']['given'] . ' ' . $new['name']['family']);
             /////// HERE put wikidata occupation id ///////////
             $p->addOccu(A::compute_profession($datafile, $cur['PRO'], $NUM));
             // date time
@@ -276,14 +276,21 @@ class raw2full implements Command{
             $p->addHistory("cura $datafile raw2csv", $datafile, $new);
             
             $p->update($new);
+            
+            $p->data['uid'] = $p->uid();
+            $p->data['slug'] = $p->slug();
+            $p->data['dir'] = $p->dir();
+            $p->data['file'] = $p->file();
+            
             $p->save(); // HERE save to disk
+            $report .= "Wrote ".$p->file()."\n";
             $nb_stored ++;
             $g->add($p->uid());
 //echo "\n"; print_r($p->data); echo "\n";
-//break;
+break;
         }
-        $g->save(); // HERE save to disk
-        $report .= "Strored $nb_stored records\n";
+//        $g->save(); // HERE save to disk
+        $report .= "Stored $nb_stored records\n";
         return $report;
     }
     

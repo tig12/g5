@@ -1,8 +1,17 @@
 
+uid: 
+slug:
+dir: 
+file:
+
+trust:
+
+ids: []
+
 name:
   usual:
-    given:
-    family:
+  given:
+  family:
   spouse:
   official: # As written in the birth certificate
     family:
@@ -16,6 +25,19 @@ name:
 occus: []
 
 birth:
+  date:     # exact date (day and hour) of the birth certificate
+  tz:       # timezone offset
+  date-ut:  # for dates like cura A
+  place:
+    name:
+    c2:
+    c3:
+    cy:
+    geoid:
+    lg:
+    lat:
+      
+death:
   date:     # exact date of the birth certificate
   tz:       # timezone offset
   date-ut:  # for dates like cura A
@@ -27,12 +49,9 @@ birth:
     geoid:
     lg:
     lat:
-                                                                                                                                                       
-ids: []
-  
+                                                                                                                                                         
 sources: []
   
 history: []
 
 raw: []
-  

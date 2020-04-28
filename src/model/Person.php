@@ -38,32 +38,39 @@ class Person{
     /**
         Unique id in g5 database.
         Corresponds to the relative path where it is stored in 7-full/
-        ex : persons/1905/02/05/lantier-pierre
-             lost/fistule-hibere
+        ex : persons/1811/10/25/galois-evariste-1811-10-25
     **/
     public function uid() : string {
         if($this->uid != ''){
             return $this->uid;
         }
-        $slug = $this->slug();
+        $slug = $this->slug($short=true);                        
         $date = $this->birthday();
         if($date == ''){
-            return implode(Full::SEP, ['persons', 'lost', $slug]);
+            return implode(G5DB::SEP, ['lost', 'persons', $slug]);
         }
         [$y, $m, $d] = explode('-', $date);
-        return implode(Full::SEP, ['persons', $y, $m, $d, $slug]);
+        return implode(G5DB::SEP, ['persons', $y, $m, $d, $slug]);
     }
     
     /**
-        A string like hendrix-jimi
-        composed by family name and given name
+        A string which can be used in an url
+        ex:
+        if $short = false : galois-evariste-1811-10-25
+        if $short = true  : galois-evariste
     **/
-    public function slug(): string {
-        return slugify::compute($this->data['fname'] . '-' . $this->data['gname']);
-        //return slugify::compute($this->data['name'] . '-' . $this->birthday());
+    public function slug($short=false): string {
+        if($short){            
+            // galois-evariste
+            return slugify::compute($this->data['name']['family'] . '-' . $this->data['name']['given']);
+        }
+        // galois-evariste-1811-10-25
+        return slugify::compute($this->data['name']['family'] . '-' . $this->data['name']['given'] . '-' . $this->birthday());
     }
     
-    /** @return YYYY-MM-DD or '' **/
+    /**
+        @return YYYY-MM-DD or ''
+    **/
     private function birthday(): string {
         if(isset($this->data['birth']['date'])){
             return substr($this->data['birth']['date'], 0, 10);
@@ -77,23 +84,35 @@ class Person{
     
     // *********************** file system *******************************
     
-    public function path($full=true): string {
-        $res = $full ? Full::$DIR . Full::SEP : '';
-        $res .= $this->uid() . '.yml';
-        return str_replace(Full::SEP, DS, $res);
+    /** 
+        Absolute or relative path to the directory containing person's data
+        ex: /path/to/g5data/7-full/persons/1811/10/25/galois-evariste-1811-10-25
+        @param $full if false, return path relative in 7-full/
+    **/
+    public function dir($full=true): string {
+        $res = $full ? G5DB::$DIR . G5DB::SEP : '';
+        $res .= $this->uid();
+        return str_replace(G5DB::SEP, DS, $res);
+    }
+    
+    /** 
+        Absolute or relative path to the main yaml file reprensenting the person
+        ex: /path/to/g5data/7-full/persons/1811/10/25/galois-evariste/galois-evariste-1811-10-25.yml
+        @param $full see {@link path()}
+    **/
+    public function file($full=true): string {
+        return $this->dir($full) . DS . $this->slug() . '.yml';
     }
     
     public function load(){
-        $this->data = yaml_parse(file_get_contents($this->path()));
+        $this->data = yaml_parse(file_get_contents($this->file()));
     }
     
     public function save(){
-        $path = $this->path();
-        $dir = dirname($path);
-        if(!is_dir($dir)){
-            mkdir($dir, 0755, true);
+        if(!is_dir($this->dir())){
+            mkdir($this->dir(), 0755, true);
         }
-        file_put_contents($path, yaml_emit($this->data)); // echo "___ file_put_contents $path\n";
+        file_put_contents($this->file(), yaml_emit($this->data)); // echo "___ file_put_contents $path\n";
     }
     
     // *********************** fields *******************************
