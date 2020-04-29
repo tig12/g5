@@ -26,10 +26,12 @@ class Person{
         return $p;
     }
     
-    /** Returns an empty object of type Person. **/
+    /**
+        Returns an empty object of type Person.
+        Initialized with Person.yml
+    **/
     public static function newEmpty(): Person {
         $p = new Person();
-        // initialize data from yaml template
         $p->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Person.yml'));
         return $p;
     }

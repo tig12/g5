@@ -283,13 +283,13 @@ class raw2full implements Command{
             $p->data['file'] = $p->file();
             
             $p->save(); // HERE save to disk
-            $report .= "Wrote ".$p->file()."\n";
+            //$report .= "Wrote ".$p->file()."\n";
             $nb_stored ++;
             $g->add($p->uid());
 //echo "\n"; print_r($p->data); echo "\n";
-break;
         }
-//        $g->save(); // HERE save to disk
+        $g->save(); // HERE save to disk
+        //$report .= "Wrote ".$g->file()."\n";
         $report .= "Stored $nb_stored records\n";
         return $report;
     }
