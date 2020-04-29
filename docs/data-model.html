@@ -23,8 +23,8 @@
 
 <nav class="prevnext">
     <a class="top" href="index.html">&uarr;</a>
-    <a class="prev" rel="prev" href="newdata.html">&larr;</a>
-    <a class="next" rel="next" href="merge.html">&rarr;</a>
+    <a class="prev" rel="prev" href="full.html">&larr;</a>
+    <a class="next" rel="next" href="acts.html">&rarr;</a>
 </nav>
 
 <header>
@@ -76,8 +76,16 @@ Read :
 
 <!-- ********************************************************************************* -->
 <h2>Syntax</h2>
-
-
+The definitions of the fields are expressed in yaml files located with the source code of the model
+<pre>
+src/model/
+    ├── Group.php
+    ├── Group.yml
+    ├── Person.php
+    ├── Person.yml
+    ├── Source.php
+    └── Source.yml
+</pre>
 
 <!-- ************************************* -->
 <h3>Common fields</h3>
@@ -88,13 +96,77 @@ Read :
         <br>Relects the path where the entity is stored
         <br>ex: 
     </li>
-    
-    
-    <li>source</li>
-    <li>date</li>
-    <li>trust</li>
-    <li>values</li>
+    <li>
+        <div class="bold">slug</div>
+    </li>
+    <li>
+        <div class="bold">file</div>
+    </li>
+    <li>
+        <div class="bold">sources</div>
+    </li>
 </ul>
+
+<!-- ************************************* -->
+<h3>Person</h3>
+<textarea readonly class="block margin padding" rows="55" cols="70">
+uid: 
+slug:
+dir: 
+file:
+
+trust:
+
+ids: []
+
+name:
+  usual:
+  given:
+  family:
+  spouse:
+  official: # As written in the birth certificate
+    family:
+    given:
+  nobility:
+  fame: # stage, scene
+  nicknames: []
+  alternative: []
+
+# occupation codes
+occus: []
+
+birth:
+  date:     # exact date (day and hour) of the birth certificate
+  tz:       # timezone offset
+  date-ut:  # for dates like cura A
+  place:
+    name:
+    c2:
+    c3:
+    cy:
+    geoid:
+    lg:
+    lat:
+      
+death:
+  date:     # exact date of the birth certificate
+  tz:       # timezone offset
+  date-ut:  # for dates like cura A
+  place:
+    name:
+    c2:
+    c3:
+    cy:
+    geoid:
+    lg:
+    lat:
+                                                                                                                                                         
+sources: []
+  
+history: []
+
+raw: []
+</textarea>
 
 
     <!-- 
@@ -252,9 +324,10 @@ Sources are built by humans, filling yaml files in <code>7-full/sources/</code>.
     <li>
         <span class="big1">2 - Build new data</span>
         <ul>
-            <li><a href="data-model.html">Data model</a></li>
             <li><a href="full.html">7-full</a></li>
+            <li><a href="data-model.html">Data model</a></li>
             <li><a href="acts.html">Acts</a></li>
+            <li><a href="check.html">Check</a></li>
             <li><a href="merge.html">Merge</a></li>
             <li><a href="wikidata.html">Wikidata.org</a></li>
             <li><a href="geonames.html">Geonames.org</a></li>

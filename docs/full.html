@@ -141,70 +141,6 @@ data
 (This may change, with one directory per person, instead of one file)
 <br>
 <br>Example <code>data/7-full/persons/1937/09/17/alard-pierre/alard-pierre-1937-09-17.yml</code> (the first record of file A1) :
-<textarea readonly class="block margin padding" rows="60" cols="70">
----
-name: Pierre Alard
-occus:
-- ATH
-birth:
-  date: ~
-  tz: ~
-  date-ut: "1937-09-17 17:00:00+00:00"
-  place:
-    name: BORDEAUX
-    c2: ~
-    c3: ~
-    cy: FR
-    geoid: ~
-    lg: -0.566670
-    lat: 44.833330
-  c2: "33"
-ids:
-  cura: A1-1
-sources:
-- A1
-history:
-- date: "2020-04-29T00:09:06+02:00"
-  command: cura A1 raw2csv
-  source: A1
-  values:
-    fname: Alard
-    gname: Pierre
-    name: Pierre Alard
-    birth:
-      date-ut: "1937-09-17 17:00:00+00:00"
-      place:
-        name: BORDEAUX
-        cy: FR
-        lg: -0.566670
-        lat: 44.833330
-      c2: "33"
-raw:
-  A1:
-    YEA: "1937"
-    MON: "9"
-    DAY: "17"
-    PRO: C
-    NUM: "1"
-    COU: F
-    H: "17"
-    MN: "0"
-    SEC: "0"
-    TZ: "0"
-    LAT: 44N50
-    LON: 0W34
-    COD: "33"
-    CITY: BORDEAUX
-    FNAME: Alard
-    GNAME: Pierre
-fname: Alard
-gname: Pierre
-uid: persons/1937/09/17/alard-pierre
-slug: alard-pierre-1937-09-17
-dir: data/7-full/persons/1937/09/17/alard-pierre
-file: data/7-full/persons/1937/09/17/alard-pierre/alard-pierre-1937-09-17.yml
-...
-</textarea>
 
 A Person is an associative array using a syntax described in <a href="data-model.html">data model</a>.
 <br>It contains 4 administrative fields :
@@ -367,9 +303,10 @@ class Group{
     <li>
         <span class="big1">2 - Build new data</span>
         <ul>
-            <li><a href="data-model.html">Data model</a></li>
             <li><a href="full.html">7-full</a></li>
+            <li><a href="data-model.html">Data model</a></li>
             <li><a href="acts.html">Acts</a></li>
+            <li><a href="check.html">Check</a></li>
             <li><a href="merge.html">Merge</a></li>
             <li><a href="wikidata.html">Wikidata.org</a></li>
             <li><a href="geonames.html">Geonames.org</a></li>
