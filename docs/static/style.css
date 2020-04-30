@@ -27,7 +27,13 @@ pre{
     border-radius:5px;
     border:1px solid #717a9f;
 }
-pre.normal{background:none;}
+pre.normal{
+    background:none;
+    border:none;
+    margin:0;
+    margin-left:1em;
+    padding:0;
+}
 code.color{background:lightgrey;}
 .pre{white-space:pre-wrap;}
 
@@ -164,8 +170,13 @@ table.wikitable tr td code{
 
 /* ================ Style shortcuts ================ */
 
+.whitespace-nowrap{white-space:nowrap;}
+.whitespace-pre{white-space:pre;}
+
 .clear-left{clear:left;}
 .float-left{float:left;}
+.clear-right{clear:right;}
+.float-right{float:right;}
 
 .inline{display:inline;}
 .inline-block{display:inline-block;}

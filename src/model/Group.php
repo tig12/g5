@@ -14,7 +14,7 @@ use g5\G5;
 
 class Group{
     
-    public $uid;
+    public $uid = '';
     
     /** Elements of the group. Array of strings - contains data uids **/
     public $data = [];
@@ -59,14 +59,14 @@ class Group{
     
     // *********************** file system *******************************
     
-    public function path($full=true): string {
+    public function file($full=true): string {
         $res = $full ? G5DB::$DIR . G5DB::SEP : '';
         $res .= $this->uid() . '.txt';
         return str_replace(G5DB::SEP, DS, $res);
     }
     
     public function load(){
-        $path = $this->path();
+        $path = $this->file();
         if(!is_file($path)){
             throw new \Exception(
                 "IMPOSSIBLE TO LOAD GROUP - file not exist: $path\n"
@@ -76,8 +76,12 @@ class Group{
         $this->data = file($path,  FILE_IGNORE_NEW_LINES);
     }
     
+    /** 
+        Writes a txt file on disk
+        with one person slug per line 
+    **/
     public function save(){
-        $path = $this->path();
+        $path = $this->file();
         $dir = dirname($path);
         if(!is_dir($dir)){
             mkdir($dir, 0755, true);
@@ -87,12 +91,21 @@ class Group{
         foreach($this->data as $elt){
             $dump .= $elt . "\n";
         }
-        file_put_contents($path, $dump);// echo "___ file_put_contents $path\n";
+        file_put_contents($path, $dump);
+        // echo "___ file_put_contents $path\n"; // @todo log
     }
     
     /** 
-         @param $csvFields = ['GID', 'FNAME', 'GNAME', 'OCCU', '...', 'GEOID']
-        @param $map = [
+        Generates a csv
+            first line contains field names
+            other lines contain data
+        @param $csvFile 
+        @param $csvFields
+            Names of the fields of the generated csv
+            Are written in this order in the csv
+            $csvFields = ['GID', 'FNAME', 'GNAME', 'OCCU', '...', 'GEOID']
+        @param $map
+            $map = [
                 'ids.cura' => 'GID',
                 'fname' => 'FNAME',
                 'gname' => 'GNAME',
@@ -100,14 +113,19 @@ class Group{
                 'birth.place.geoid' => 'GEOID',
             ];
         
-        $fmap = [
-            'OCCU' => function($p){
-                return implode('+', $p->data['occus']);
-            },
-        ];
+        @param $fmap Assoc array
+                    key = field name in generated csv
+                    value = function computing this field's value to write in the csv
+                             parameter : a person
+                             return : the value of the csv field
+                    $fmap = [
+                        'OCCU' => function($p){
+                            return implode('+', $p->data['occus']);
+                        },
+                    ];
         
     **/
-    public function exportCsv($file, $csvFields, $map=[], $fmap=[]){
+    public function exportCsv($csvFile, $csvFields, $map=[], $fmap=[]){
         
         $csv = implode(G5::CSV_SEP, $csvFields) . "\n";
         
@@ -131,17 +149,11 @@ class Group{
             foreach($fmap as $csvKey => $function){
                 $new[$csvKey] = $function($p);
             }
-//echo "\n<pre>"; print_r($new); echo "</pre>\n";        
             $csv .= implode(G5::CSV_SEP, $new) . "\n";
-            
-//echo "\n"; print_r($p->data); echo "\n";
-//echo "\n"; print_r($new); echo "\n";
-//break;
         }
-//$file = 'data/9-output/datasets/cura/A1-new.csv';
-//echo "$file\n";
-//exit;
-        file_put_contents($file, $csv);// echo "___ file_put_contents $file\n";
+        
+        file_put_contents($csvFile, $csv);
+        // echo "___ file_put_contents $csvFile\n"; // @todo 
     }
     
 }// end class

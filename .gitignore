@@ -1,9 +1,10 @@
+
 config.yml
+bin
+1.local
 
 # files marked for deletion
 z.*
-
-1.local
 
 # don't version data/ but version data/3-edited
 data/*

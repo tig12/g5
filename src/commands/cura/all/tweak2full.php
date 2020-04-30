@@ -1,7 +1,7 @@
 <?php
 /********************************************************************************
-    Transfers information from 3-cura-tweaked/ to 5-cura-csv/
-    Updates a file of 5-cura-csv/ with the values found in the yaml file.
+    Transfers information from 3-cura-tweaked/ to 7-full/persons/
+    Updates yaml files already created
     
     WARNING : this step must be done at an early stage.
     For example, if a date or a time is modified, should be done before step "legalTime"

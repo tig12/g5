@@ -36,7 +36,7 @@ class export implements Command{
         $report = '';
         
         $datafile = $params[0];
-        $uid = Cura::UID . G5DB::SEP . $datafile;
+        $uid = Cura::UID_GROUP . G5DB::SEP . $datafile;
         $g = Group::new($uid);
         
         $outfile = Config::$data['dirs']['9-cura'] . DS . $datafile . '.csv';
@@ -80,6 +80,7 @@ class export implements Command{
         ];
         
         $g->exportCsv($outfile, $csvFields, $map, $fmap);
+        
         return "Exported $uid to $outfile\n";
     }
     

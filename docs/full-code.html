@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Merge data | Gauquelin5</title>
+    <title>g5 database API | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="">
     <meta name="robots" content="index,follow">
@@ -12,7 +12,7 @@
     <meta name="dcterms.dateCopyrighted" content="2019">
     <!-- 
     tigsite:
-        history: , Thierry Graff : Creation
+        history: 2019-10-21 16:04:43+02:00, Thierry Graff : Creation
     -->
 </head>
 
@@ -22,26 +22,77 @@
 <div class="main">
 
 <nav class="prevnext">
+
     <a class="top" href="index.html">&uarr;</a>
-    <a class="prev" rel="prev" href="check.html">&larr;</a>
-    <!-- 
-    <a class="next" rel="next" href=".html">&rarr;</a>
-    -->
+    <a class="prev" rel="prev" href="full.html">&larr;</a>
+    <a class="next" rel="next" href="data-model.html">&rarr;</a>
 </nav>
 
 <header>
-<h1>Merge data</h1>
-<div class="intro"></div>
+<h1>g5 database API</h1>
+<div class="intro">
+</div>
 </header>
 
 <article>
-<nav class="toc">
-    <ul>
-        <li>
-            <a href="#"></a>
-        </li>
-    </ul>
-</nav>
+
+<br><code>7-full/</code> is managed by classes of src/model
+<pre>
+class Full{
+    const SEP = '/';
+    public static $DIR; // Path pointing to 7-full/
+}
+</pre>
+
+<pre>
+class Person{
+    public $uid = '';
+    public $data = [];
+    
+    public static function new($uid): Person
+    public static function newEmpty(): Person
+    
+    public function uid(): string
+    public function slug(): string
+    
+    // file system
+    public function dir($full=true): string 
+    public function file($full=true): string 
+    public function load()
+    public function save()
+    
+    // fields
+    public function addId($source, $id)
+    public function addSource($source)
+    public function addOccu($occu)
+    public function setOrigin($source, $data)
+    public function addHistory($command, $source, $data)
+    public function update($replace)
+}
+</pre>
+
+<pre>
+class Group{
+    public $uid = '';
+    public $data = [];
+
+    public static function new($uid): Group
+    public static function newEmpty($uid=''): Group
+
+    public function uid(): string
+    public function slug(): string 
+    
+    // file system
+    public function file($full=true): string 
+    public function load()
+    public function save()
+    public function exportCsv($file, $csvFields, $map=[], $fmap=[])
+    
+    // fields
+    public function add($entry)
+}
+</pre>
+
 </article>
 </div><!-- end class="main" -->
 

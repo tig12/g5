@@ -12,7 +12,11 @@ use tiglib\arrays\csvAssociative;
 
 class Cura{
     
-    const UID = 'groups/datasets/cura';
+    const UID_GROUP = 'groups/datasets/cura';
+    
+    const UID_SOURCE = 'sources/cura';
+    
+    const TRUST_LEVEL = 3;
     
     const IDSOURCE = 'cura';
     

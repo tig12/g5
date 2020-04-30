@@ -14,6 +14,7 @@ use g5\G5;
 //use g5\model\Source;
 use g5\model\Person;
 use g5\model\Group;
+use g5\model\Source;
 use g5\Config;
 use g5\patterns\Command;
 use g5\model\Names;
@@ -231,11 +232,12 @@ class raw2full implements Command{
         $report .= "names : nb match = $n_good / $n ($percent_ok %)\n";
         $report .= "    nb NOT match = $n_bad ($percent_not_ok %)\n";
         //
-        // 4 - store result
+        // 4 - store result in 7-full
+        // create 1 source, 1 group, N persons
         //
         $nb_stored = 0;
-        $g = Group::newEmpty(Cura::UID . '/' . $datafile);
-        
+        $g = Group::newEmpty(Cura::UID_GROUP . '/' . $datafile);
+        $source = Source::newEmpty();
         foreach($res as $cur){
             
             foreach(array_keys($cur) as $k){ $cur[$k] = trim($cur[$k]); }
@@ -247,6 +249,7 @@ class raw2full implements Command{
             $p->addRaw($datafile, $cur);
 
             $NUM = $cur['NUM'];
+            
             $p->addId(Cura::IDSOURCE, Cura::gqid($datafile, $NUM));
             
             $new = [];
@@ -272,7 +275,7 @@ class raw2full implements Command{
             $new['birth']['place']['lg'] = Cura::computeLg($cur['LON']);
             $new['birth']['place']['lat'] = Cura::computeLat($cur['LAT']);
             
-            // log command exec in the person yaml
+            // log command effect on data in the person yaml
             $p->addHistory("cura $datafile raw2csv", $datafile, $new);
             
             $p->update($new);
@@ -283,13 +286,13 @@ class raw2full implements Command{
             $p->data['file'] = $p->file();
             
             $p->save(); // HERE save to disk
-            //$report .= "Wrote ".$p->file()."\n";
+            $report .= "Wrote ".$p->file()."\n";
             $nb_stored ++;
             $g->add($p->uid());
-//echo "\n"; print_r($p->data); echo "\n";
+break;
         }
         $g->save(); // HERE save to disk
-        //$report .= "Wrote ".$g->file()."\n";
+        $report .= "Wrote ".$g->file()."\n";
         $report .= "Stored $nb_stored records\n";
         return $report;
     }
