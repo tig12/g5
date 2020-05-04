@@ -14,9 +14,6 @@ use g5\G5;
 
 class Group{
     
-    public $uid = '';
-    
-    /** Elements of the group. Array of strings - contains data uids **/
     public $data = [];
     
     // *********************** new *******************************
@@ -26,7 +23,7 @@ class Group{
     **/
     public static function new($uid){
         $g = new Group();
-        $g->uid = $uid;
+        $g->data['uid'] = $uid;
         $g->load();
         return $g;
     }
@@ -35,7 +32,7 @@ class Group{
     public static function newEmpty($uid=''){
         $g = new Group();
         if($uid != ''){
-            $g->uid = $uid;
+            $g->data['uid'] = $uid;
         }
         return $g;
     }
@@ -43,11 +40,11 @@ class Group{
     // ************************ id ******************************
 
     public function uid(){
-        return $this->uid;
+        return $this->data['uid'];
     }
     
     public function slug(): string {
-        $tmp = explode(G5DB::SEP, $this->uid);
+        $tmp = explode(G5DB::SEP, $this->uid());
         return $tmp[count($tmp)-1];
     }
     
@@ -70,7 +67,7 @@ class Group{
         if(!is_file($path)){
             throw new \Exception(
                 "IMPOSSIBLE TO LOAD GROUP - file not exist: $path\n"
-              . "Execute raw2full to build the group first\n"
+              . "Execute raw2full() to build the group first\n"
             );
         }
         $this->data = file($path,  FILE_IGNORE_NEW_LINES);

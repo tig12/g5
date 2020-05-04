@@ -8,17 +8,25 @@
 namespace g5\commands\cura;
 
 use g5\Config;
+use g5\model\G5DB;
+use g5\model\Source;
 use tiglib\arrays\csvAssociative;
 
 class Cura{
     
-    const UID_GROUP = 'groups/datasets/cura';
+    /** uid when cura is used to create a group **/
+    const UID_PREFIX_GROUP = 'group' . G5DB::SEP . 'datasets' . G5DB::SEP . 'cura';
     
-    const UID_SOURCE = 'sources/cura';
+    /** uid when cura is used to create a source **/
+    const UID_PREFIX_SOURCE = 'source' . G5DB::SEP . 'cura';
     
+    /** Slug of the source cura **/
+    const SOURCE_SLUG = 'cura';
+    
+    /**
+        @see trust levels https://tig12.github.io/gauquelin5/check.html
+    **/
     const TRUST_LEVEL = 3;
-    
-    const IDSOURCE = 'cura';
     
     /** Separator used in raw (html) files **/
     const HTML_SEP = "\t";
@@ -78,6 +86,27 @@ class Cura{
         'E3' => 'E1_E3',
     ];
     
+    
+    // ================================= source management =================================
+    
+    // ******************************************************
+    /** Returns a source for cura **/
+    public static function getSource(): Source {
+        $source = Source::newEmpty();
+        $uid = UID_PREFIX_SOURCE . G5DB::SEP . self::SOURCE_SLUG;
+        $file = str_replace(G5DB::SEP, DS, $uid) . '.yml';
+        $source->data = [
+            'uid' => $uid,
+            'slug' => self::SOURCE_SLUG,
+            'file' => $file,
+            'name' => "CURA",
+            'description': "Web site cura.free.fr",
+        ];
+        return $source;
+    }
+    
+    
+    // ================================= Code used by import =================================
     
     // ******************************************************
     /**

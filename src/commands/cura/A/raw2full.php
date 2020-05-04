@@ -231,13 +231,23 @@ class raw2full implements Command{
         $report .= "Corrections from 1955 book : $n_correction_1955\n";
         $report .= "names : nb match = $n_good / $n ($percent_ok %)\n";
         $report .= "    nb NOT match = $n_bad ($percent_not_ok %)\n";
+        
         //
         // 4 - store result in 7-full
         // create 1 source, 1 group, N persons
         //
-        $nb_stored = 0;
-        $g = Group::newEmpty(Cura::UID_GROUP . '/' . $datafile);
+        // "cura" source
+        $source = Cura::getSource();
+        if(!is_file($source->file())){
+            $source-> save();
+        }
+        // source corresponding to this file
         $source = Source::newEmpty();
+        $source->data['uid'] = UID_PREFIX_SOURCE . G5DB::SEP . $datafile; // source/cura/A1
+        $source->data['file'] = G5DB::$DIR . DS . str_replace(G5DB::SEP, DS, $source->data['uid']) . '.yml'; // /path/to/full/source/cura/A1.yml
+        // group
+        $g = Group::newEmpty(Cura::UID_PREFIX_GROUP . G5DB::SEP . $datafile);
+        $nb_stored = 0;
         foreach($res as $cur){
             
             foreach(array_keys($cur) as $k){ $cur[$k] = trim($cur[$k]); }
@@ -286,7 +296,7 @@ class raw2full implements Command{
             $p->data['file'] = $p->file();
             
             $p->save(); // HERE save to disk
-            $report .= "Wrote ".$p->file()."\n";
+$report .= "Wrote ".$p->file()."\n";
             $nb_stored ++;
             $g->add($p->uid());
 break;

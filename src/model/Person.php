@@ -12,8 +12,6 @@ use tiglib\strings\slugify;
 
 class Person{
     
-    public $uid = '';
-    
     public $data = [];
     
     // *********************** new *******************************
@@ -21,7 +19,7 @@ class Person{
     /** Returns an object of type Person. **/
     public static function new($uid): Person {
         $p = new Person();
-        $p->uid = $uid;
+        $p->data['uid'] = $uid;
         $p->load();
         return $p;
     }
@@ -39,12 +37,12 @@ class Person{
     // ************************ id ******************************
     /**
         Unique id in g5 database.
-        Corresponds to the relative path where it is stored in 7-full/
-        ex : persons/1811/10/25/galois-evariste-1811-10-25
+        Corresponds to the relative path to the directory where the person is stored in 7-full/
+        ex : persons/1811/10/25/galois-evariste
     **/
     public function uid() : string {
-        if($this->uid != ''){
-            return $this->uid;
+        if($this->data['uid'] != ''){
+            return $this->data['uid'];
         }
         $slug = $this->slug($short=true);                        
         $date = $this->birthday();

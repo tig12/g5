@@ -101,32 +101,19 @@ File <code>Person.yml</code> contains an empty person with all its fields empty.
 persons/1876/05/29/parmentier-andre
 groups/datasets/cura/A1
 sources/web/cura/A1</pre>
-        <code>uid</code> is used to build the path where the entity is stored on disk - see <code>file</code> and <code>dir</code>.
+    </li>
+    
+    <li>
+        <div class="bold">file</div>
+        Path to the file where the entity is stored.
+        <br><code>uid</code> is used to build <code>file</code>.
         <br>ex:
         <pre class="normal">
 persons/1876/05/29/parmentier-andre/parmentier-andre-1876-05-29.yml
 groups/datasets/cura/A1.txt
 sources/web/cura/A1.yml</pre>
     </li>
-    
-    <li>
-        <div class="bold">slug</div>
-        String that can be used in a url.
-        <br>ex:
-        <pre class="normal">
-parmentier-andre-1876-05-29
-cura-A1</pre>
-    </li>
-    
-    <li>
-        <div class="bold">file</div>
-        Path to the file where the entity is stored.
-    </li>
-    
-    <li>
-        <div class="bold">sources</div>
-        A list of source ids (see below).
-    </li>
+    The relation between <code>uid</code> and <code>file</code> is specific to each type of entity.
 </ul>
 
 

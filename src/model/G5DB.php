@@ -13,6 +13,7 @@ G5DB::init();
 
 class G5DB{
     
+    /** Separator used to build uid **/
     const SEP = '/';
     
     /** Path pointing to 7-full **/

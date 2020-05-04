@@ -36,7 +36,7 @@ class export implements Command{
         $report = '';
         
         $datafile = $params[0];
-        $uid = Cura::UID_GROUP . G5DB::SEP . $datafile;
+        $uid = Cura::UID_PREFIX_GROUP . G5DB::SEP . $datafile;
         $g = Group::new($uid);
         
         $outfile = Config::$data['dirs']['9-cura'] . DS . $datafile . '.csv';

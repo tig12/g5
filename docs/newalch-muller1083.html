@@ -335,14 +335,14 @@ The file contains 110 persons born in Paris, which need to be checked (see Newal
 
 <h4>Fix arrondissement</h4>
 All people in Müller's file are noted Paris 1er arrondissement, which is not correct.
-There is a way to find the arrondissement : check in Cura file A2 and find the corresponding person, using birth date ; the arrondissement is noted.
+There is a way to find the arrondissement : check in Cura file A2 and find the corresponding person, using birth date ; the arrondissement is noted in A2.
 <br>Once the arrondissement is found, it's possible to check in the online registries.
 
 <h4>Check dates and times</h4>
-Checking is possible using online archives, but there is one important restriction : part of the Paris archives were destroyed in 1871 (events known as "La commune de Paris", some acts and their backups were burnt), and acts prior to 1860 were lost. Partial reconstitutions of the acts could be done. Online data prior to 1860 contain birth day but no time. There may exist other reconstitutions containing birth times, but I don't know where (maybe present on sites demanding registration and / or pay, like familysearch.org or filae.com). So I don't know where the birth times of persons born in Paris before 1860 come from.
+Checking is possible using online archives, but there is one important restriction : part of the Paris archives were destroyed in 1871 (events known as "La commune de Paris", some acts and their backups were burnt), and acts prior to 1860 were lost. Partial reconstitutions of the acts could be done. Online data prior to 1860 contain birth day but no time. There may exist other reconstitutions containing birth times, but I don't know where (maybe present on sites demanding registration and / or pay, like familysearch.org or filae.com). So I don't know where Gauquelin found the birth times of persons born in Paris before 1860.
 
 <pre>php run-g5.php newalch muller1083 look paris</pre>
-Shows that there are 70 persons born before 1860 ; only possible to check 40 persons.
+Shows that there are 70 persons born before 1860 ; only possible to check 110 - 70 = 40 persons.
 <br>7 have been checked so far, one error was found :
 <pre>
 Balthazard Victor 1872-01-01 09:00
@@ -360,7 +360,8 @@ ERROR IN BIRTH TIME : 21:00 ("neuf heures du soir"), not 09:00
 
 <!-- ********************************************************************************* -->
 <hr class="margin">
-<center>The rest of this page is not part of any data transformation process.</center>
+<center>The rest of this page concerns preparatory code
+<br>and is not part of any data transformation process.</center>
 <hr class="margin">
 <!-- ********************************************************************************* -->
 
@@ -484,7 +485,7 @@ prints side by side family and given names of records present both in Müller's 
 <br>This must be exectuted after having executed <a href="#1-3-fix-gnr">step fixGnr</a> to see all names.
 
 <br>This shows that Müller's names are better.
-It also shows that spelling of noble persons contain mistakes for noble persons (<a href="#nobilities">see below</a>).
+It also shows that spelling of name contain mistakes for noble persons (<a href="#nobilities">see below</a>).
 
 
 <!-- ********************************************************************************* -->

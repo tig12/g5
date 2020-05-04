@@ -30,9 +30,8 @@
 <header>
 <h1>Acts</h1>
 <div class="intro">
-Acts are scans of the original documents, mainly birth certificates (BC). These are the only reliable information sources, and every g5 data should be checked against a BC. Very few persons are currently matched, this is done only when 2 sources disagree on birth date or time.
-<br>For g5 development, each act is accompanied by a yaml file containing its transcription, <a href="#example">see example</a>
-<br>Acts are stored in directory <code><b>8-acts/</b></code>.
+Acts are the original documents, birth certificates (BC). These are the only reliable information sources, and every g5 data should be checked against a BC. Very few persons are currently verified. When a verification is done during g5 development, the act is downloaded locally and a partial transcription is written.
+<br>Acts are stored in directory <code><b><a href="https://larzac.info/gauquelin5/8-acts">8-acts/</a></b></code>.
 </div>
 </header>
 
@@ -40,17 +39,17 @@ Acts are scans of the original documents, mainly birth certificates (BC). These 
 
 
 <!-- ********************************************************************************* -->
-<h2>Verifying french data</h2>
+<h2>About french data</h2>
 
-Currently, data are checked only for France. All acts since 1792 have times indicated. These data untill ~1920 can be viewed online : naissance, décès, mariage (birth, death, mariage) ; 5 generations, around 200 millions of acts with times (source <a href="http://www.filae.com/ressources/etat-civil-numerise-dou-viennent-les-donnees/">filae.com</a>).
-<!-- 
+Currently, data are checked only for France. All acts since 1792 have times indicated. Scans of the original documents until ~1920 can be viewed online for free. This makes 5 generations, around 200 millions of acts (birth, death, mariage) with times (source <a href="http://www.filae.com/ressources/etat-civil-numerise-dou-viennent-les-donnees/">filae.com</a>).
+<br>Here lies potential data to test planetary heredity at large scale, but this is out of the scope of g5 program. 
 <br>
 <br>
-If you want to see original acts, type on a search engine for example "archives 45" (or maybe "Archives 45 France") to see the <i>archives départementales du Loiret</i> (département n° 45).
--->
+If you want to see original acts, type on a search engine for example "archives 45" (or maybe "Archives 45 France") to see the <i>archives départementales du Loiret</i> (Loiret is département n° 45).
 
-<!-- ************************************* -->
-<h3>Retrieval process</h3>
+
+<!-- ********************************************************************************* -->
+<h2>Retrieval process</h2>
 For each verification, the image is downloaded on local machine, and informations to easily go back to the online act are recorded in a yaml file expressed in a syntax which can be used to match g5 data by program.
 <br>
 <br>The following informations are necessary :
@@ -75,45 +74,17 @@ This is systematically done during g5 development. Some départements provide a 
 <!-- ********************************************************************************* -->
 <h2>Directory layout</h2>
 
-Acts are organized like this :
+Acts are organized chronologically like <code>7-full/person/</code> :
 <pre>
-8-acts/                                          
-    ├── BE
-    ├── CH
-    ├── DE
-    ├── DZ
-    ├── FR
-    │   ├── 01
-    │  ...
-    │   ├── 92
-    │   │   └── bourg-la-reine
-    │   │       └── 1811
-    │   │           └── E_NUM_BRG38
-    │   │               └── galois-evariste-1811-10-25
-    │   │                   ├── naissance.jpg
-    │   │                   └── naissance.yml
-    │  ...
-    │   └── 99
-    ├── IT
-    ├── LU
-    ├── MA
-    ├── MC
-    ├── NL
-    └── US
-</pre>
-
-<!-- 
-<pre>
-acts/
+8-acts
     └── birth
         └── 1811
             └── 10
                 └── 25
-                    └── galois-evariste
-                        ├── birth.jpg
-                        └── birth.yml
+                    └── galois-evariste-1811-10-25
+                        ├── naissance.jpg
+                        └── naissance.yml
 </pre>
--->
 
 <!-- ********************************************************************************* -->
 <h2><a name="example">Example</a></h2>
@@ -223,31 +194,13 @@ personnes:
 </div><!-- end class="flex-wrap" -->
 
 <!-- ********************************************************************************* -->
-<h2>Transcription syntax</h2>
-The syntax used to transcribe the acts comes from genealogy software. YAML files are written using french vocabulary, and are translated to a reference vocabulary (close to english) understood by code parsing the yaml files.
-
-<!-- ********************************************************************************* -->
-<h2>Rules used for transcription</h2>
-<ul>
-    <li>
-        <b>All</b> information present in a document is transferred in the transcription.
-        <br>If an information doesn't fit in a predefined field understood by the syntax, a field <code>notes</code> is added.
-    </li>
-    <li>
-        The transcription may contain information deduced from the act. For example, the document says that a witness, Thomas François Demante, is <i>le grand-père maternel de l'enfant</i> (maternel grandfather of the child). The transcription contains the indication that Thomas François Demante is the father of Adelaïde Marie Demante :
-        <pre>
-- 
-  nom: Adelaïde Marie Demante
-  prénom: Adelaïde Marie
-  sexe: F
-  <b>père: Thomas François Demante</b>
-        </pre>
-    </li>
-</ul>
+<h2>Acts syntax</h2>
+The syntax used to transcribe the acts comes from an unpublished genealogy software. YAML files are written using french vocabulary, and are translated to a reference vocabulary (close to english) understood by code parsing the yaml files.
 
 <!-- ********************************************************************************* -->
 <h2>Gauquelin5 integration</h2>
-Not done yet ; will be handled by code in <code>commands/full/add/acts.php</code>, to transfer information from <code>8-acts/</code> to files of <code>7-full/person/</code>
+Not done yet ; code transfering information from <code>8-acts/</code> to files of <code>7-full/person/</code> needs to be written.
+
 </article>
 </div><!-- end class="main" -->
 

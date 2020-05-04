@@ -4,9 +4,11 @@ slug:
 dir: 
 file:
 
-trust:
-
+sources: []
+  
 ids: []
+
+trust:
 
 name:
   usual:
@@ -49,9 +51,7 @@ death:
     geoid:
     lg:
     lat:
-                                                                                                                                                         
-sources: []
-  
+
 raw: []
 
 history: []

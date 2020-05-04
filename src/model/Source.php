@@ -12,8 +12,6 @@ use tiglib\strings\slugify;
 
 class Source{
     
-    public $uid = '';
-    
     public $data = [];
     
     // *********************** new *******************************
@@ -21,7 +19,7 @@ class Source{
     /** Returns an object of type Source. **/
     public static function new($uid): Source {
         $p = new Source();
-        $p->uid = $uid;
+        $p->data['uid'] = $uid;
         $p->load();
         return $p;
     }
@@ -31,46 +29,31 @@ class Source{
         Initialized with Source.yml
     **/
     public static function newEmpty(): Source {
-        $p = new Source();
-        $p->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Source.yml'));
-        return $p;
+        $s = new Source();
+        $s->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Source.yml'));
+        return $s;
     }
     
-    // ************************ id ******************************
+    // ************************ uid ******************************
     /**
-        Unique id in g5 database.
+        Returns the uid, unique id in g5 database.
         Corresponds to the relative path where it is stored in 7-full/
-        ex : persons/1811/10/25/galois-evariste-1811-10-25
+        ex : source/cura/A1
     **/
     public function uid() : string {
-        if($this->uid != ''){
-            return $this->uid;
-        }
-        return implode(G5DB::SEP, ['sources', $slug]);
+        return $this->data['uid'];
     }
     
-    /**
-        A string which can be used in an url
-        ex:
-        if $short = false : galois-evariste-1811-10-25
-        if $short = true  : galois-evariste
-    **/
-    public function slug($short=false): string {
-        if($short){            
-            // galois-evariste
-            return slugify::compute($this->data['name']['family'] . '-' . $this->data['name']['given']);
-        }
-        // galois-evariste-1811-10-25
-        return slugify::compute($this->data['name']['family'] . '-' . $this->data['name']['given'] . '-' . $this->birthday());
-    }
+    // *********************** file system *******************************
     
     /** 
-        Absolute or relative path to the main yaml file reprensenting the person
-        ex: /path/to/g5data/7-full/persons/1811/10/25/galois-evariste/galois-evariste-1811-10-25.yml
-        @param $full see {@link path()}
+        Absolute or relative path to the main yaml file contianing source informations.
+        ex: /path/to/g5data/7-full/source/cura/A1.yml
+        @param $full if false, return path relative in 7-full/
     **/
     public function file($full=true): string {
-        return $this->dir($full) . DS . $this->slug() . '.yml';
+        $res = $full ? G5DB::$DIR . G5DB::SEP : '';
+        return str_replace(G5DB::SEP, DS, $this->uid()) . '.yml';
     }
     
     public function load(){
@@ -78,10 +61,12 @@ class Source{
     }
     
     public function save(){
-        if(!is_dir($this->dir())){
-            mkdir($this->dir(), 0755, true);
+        $file = $this->file();
+        $dir = dirname($file);
+        if(!is_dir($dir)){
+            mkdir($dir, 0755, true);
         }
-        file_put_contents($this->file(), yaml_emit($this->data)); // echo "___ file_put_contents $path\n";
+        file_put_contents($file, yaml_emit($this->data)); // echo "___ file_put_contents $file\n";
     }
     
     // *********************** fields *******************************
