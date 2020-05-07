@@ -30,7 +30,8 @@
 <header>
 <h1>Acts</h1>
 <div class="intro">
-Acts are the original documents, birth certificates (BC). These are the only reliable information sources, and every g5 data should be checked against a BC. Very few persons are currently verified. When a verification is done during g5 development, the act is downloaded locally and a partial transcription is written.
+Acts are the original documents, birth certificates (BC). These are the only reliable information sources, and every g5 data should be checked against a BC. Few birth times have been verified to resolve questions raised by g5 development.
+<br>This page describes the verification process and the integration of acts in g5.
 <br>Acts are stored in directory <code><b><a href="https://larzac.info/gauquelin5/8-acts">8-acts/</a></b></code>.
 </div>
 </header>
@@ -50,7 +51,12 @@ If you want to see original acts, type on a search engine for example "archives 
 
 <!-- ********************************************************************************* -->
 <h2>Retrieval process</h2>
-For each verification, the image is downloaded on local machine, and informations to easily go back to the online act are recorded in a yaml file expressed in a syntax which can be used to match g5 data by program.
+For each verification,
+<ul>
+    <li>the image </li>
+</ul>
+
+the image is downloaded on local machine, and informations to easily go back to the online act are recorded in a yaml file expressed in a syntax which can be used to match g5 data by program.
 <br>
 <br>The following informations are necessary :
 <br>(in parentheses, corresponding fieldname in g5 vocabulary).
@@ -196,6 +202,7 @@ personnes:
 <!-- ********************************************************************************* -->
 <h2>Acts syntax</h2>
 The syntax used to transcribe the acts comes from an unpublished genealogy software. YAML files are written using french vocabulary, and are translated to a reference vocabulary (close to english) understood by code parsing the yaml files.
+<br>This syntax is adapted to act transcription and contains informations useless for g5 development.
 
 <!-- ********************************************************************************* -->
 <h2>Gauquelin5 integration</h2>

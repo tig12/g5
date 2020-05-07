@@ -100,7 +100,7 @@ class Cura{
             'slug' => self::SOURCE_SLUG,
             'file' => $file,
             'name' => "CURA",
-            'description': "Web site cura.free.fr",
+            'description' => "Web site cura.free.fr",
         ];
         return $source;
     }
