@@ -1,4 +1,6 @@
 
+- docs/output-format.html : replace GQID MUID ERID CSID... by LOCALID
+
 - Config::$data['dirs']['9-*'] are useless because 9-output/ hierarchy is the same as 7-full/groups/
 
 - Use Ertel 4391 to have more precise sport codes in D10
@@ -57,6 +59,8 @@ why ?
 => identify these records
 
 
+
+---- BUG -----
 - check birth in A1
 from command
 php run-g5.php g55 570SPO edited2cura date
