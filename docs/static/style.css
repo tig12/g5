@@ -118,6 +118,7 @@ h4{
 .prevnext a.top{top:0px; right:40px;}
 .prevnext a.prev{top:25px; right:75px;}
 .prevnext a.next{top:25px; right:5px;}
+.prevnext a.topage{top:33px; right:35px; color:#ccccff; font-size:1.1rem;}
 
 /* table of content */
 .toc{font-family:Arial,Helvetica,sans-serif;}

@@ -11,6 +11,7 @@
 namespace g5\commands\cura\A;
 
 use g5\G5;
+use g5\model\G5DB;
 //use g5\model\Source;
 use g5\model\Person;
 use g5\model\Group;

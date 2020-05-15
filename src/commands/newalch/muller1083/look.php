@@ -98,10 +98,10 @@ class look implements Command {
             }
         }
         $data = sortByKey::compute($data, 'DATE');
-        $res = "DATE             NUM\tNAME\n";
+        $res = "DATE             NR\tGNR\tNAME\n";
         $res .= "------------------------------------------------\n";
         foreach($data as $row){
-            $res .= $row['DATE'] . ' ' . $row['NR'] . "\t" . $row['GNAME'] . ' ' . $row['FNAME'] . "\n";
+            $res .= $row['DATE'] . ' ' . $row['NR'] . "\t" .  $row['GNR'] . "\t" . $row['GNAME'] . ' ' . $row['FNAME'] . "\n";
         }
         $res .= "---\n";
         $res .= "Total : $N\n";

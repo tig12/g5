@@ -358,6 +358,54 @@ ERROR IN BIRTH TIME : 21:00 ("neuf heures du soir"), not 09:00
     <li>Check the remaining records.</li>
 </ul>
 
+<!-- 
+Verification process
+C3 = arrondissement
+1860-06-04 05:00 916	SA2646	Georges Eugène Henri Roger              C3 = 9 ; acte 1016
+1860-06-16 10:30 465	SA2335	Henri Albert Charles Antoine Hartmann   C3 = ???
+1860-07-24 09:30 5	    SA24	Emile Charles Achard                    C3 = 9
+1860-08-27 02:00 1034	SA2726	Louis Henri Vaquez                      C3 = 3
+1862-08-02 04:00 557	SA2393	Jean Paul Langlois                      C3 = ???
+1863-02-08 03:00 585	SA2427	Paul Louis Le Noir                      C3 = ???
+1863-07-30 02:30 697	SA2487	Placide Mauclaire                       C3 = ???
+1863-10-22 12:00 893	SA2628	Louis Pierre Renon                      C3 = ???
+1863-11-02 05:00 145	SA2109	Elie André Broca                        C3 = 6
+1867-05-17 10:00 90	    SA267	Gabriel Emile Bertrand                  C3 = 5
+1867-07-11 01:00 954	SA2670	Emile Eugène Joseph Sergent             C3 = ???
+1869-03-10 03:00 822	SA2574	Auguste Pettit                          C3 = ???
+1869-03-31 19:00 218	SA2161	Henri Charles Jules Claude              C3 = ???
+1869-05-06 01:00 149	SA2112	Georges Brouardel                       C3 = 
+1869-10-17 17:00 148	SA2111	Denis Brocq-rousseu                     C3 = 
+1871-03-05 08:00 784	SA2545	Louis Marie Arsène Ombrédanne           C3 = 
+1871-09-26 12:00 1083	SA2752	Adolphe Zimmern                         C3 = 
+1871-12-18 01:00 222	SA2163	Antonin Pierre Clerc                    C3 = 
+1871-12-28 11:00 772	SA2538	Pierre André Alexandre Nobécourt        C3 = 
+1872-01-01 09:00 47	    SA232	Victor Balthazard                       C3 = 
+1872-05-19 05:00 84	    SA263	Léon Bernard                            C3 = 
+1872-06-26 04:30 141	SA2105	Pierre Breteau                          C3 = 
+1873-02-03 21:00 835	SA2584	Pierre Ernest Pinoy                     C3 = 
+1873-02-12 12:00 306	SA2225	Charles Alfred Henri Dopter             C3 = 
+1873-09-19 03:00 766	SA2533	Maurice Nicloux                         C3 = 
+1874-06-24 19:30 337	SA2249	Pierre Alfred Duval                     C3 = 
+1874-09-29 05:00 250	SA2185	Louis Edouard Octave Crouzon            C3 = 
+1875-07-30 03:00 608	SA2424	André Alfred Lemierre                   C3 = 
+1875-11-09 11:15 702	SA2492	André Mayer                             C3 = 
+1875-12-27 23:00 643	SA2448	Maurice René Marie Loeper               C3 = 
+1876-03-05 10:00 299	SA2220	Charles Joseph Antoine Dhéré            C3 = 
+1876-09-17 12:00 979	SA2691	Louis Jacques Tanon                     C3 = 
+1876-12-05 13:00 615	SA2429	Jean Camille Raphaël Lépine             C3 = 
+1877-03-10 08:00 151	SA2114	Emile Joseph Alexandre Brumpt           C3 = 
+1877-06-17 20:00 875	SA2614	Edme Francis Marie Rathery              C3 = 
+1877-12-07 03:00 1052	SA2733	Maurice Villaret                        C3 = 
+1881-01-15 01:00 844	SA2593	Albert Policard                         C3 = 
+1883-02-21 11:45 68	    SA249	Pierre Louis Jean Bazy                  C3 = 
+1884-06-30 11:00 322	SA2239	Georges Duhamel                         C3 = 
+1904-03-25 13:00 610	ND1126	Jean Lenegre                            C3 = 
+
+
+-->
+
+
 <!-- ********************************************************************************* -->
 <hr class="margin">
 <center>The rest of this page concerns preparatory code
@@ -373,8 +421,8 @@ With class <code>src/commands/newalch/muller1083/look.php</code> :
 <pre>php run-g5.php newalch muller1083 look</pre>
 <pre>
 PARAMETER MISSING in g5\transform\newalch\muller1083\look
-Possible values for parameter : curadates, curanames, fields, gnr, nobilities, sample
-</pre>
+Possible values for parameter : curadates, curanames, fields, gnr, nobilities, paris, sample
+    </pre>
 
 
 <!-- ********************************************************************************* -->
