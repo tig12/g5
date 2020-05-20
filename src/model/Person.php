@@ -112,7 +112,12 @@ class Person{
         if(!is_dir($this->dir())){
             mkdir($this->dir(), 0755, true);
         }
-        file_put_contents($this->file(), yaml_emit($this->data)); // echo "___ file_put_contents $path\n";
+        $this->data['uid'] = $this->uid();
+        $this->data['slug'] = $this->slug();
+        $this->data['dir'] = $this->dir();
+        $this->data['file'] = $this->file();
+        file_put_contents($this->file(), yaml_emit($this->data));
+        // echo "___ file_put_contents " . $this->file() . "\n";
     }
     
     // *********************** fields *******************************

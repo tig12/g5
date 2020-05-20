@@ -23,7 +23,9 @@
 
 <div class="main">
 
+<a name="topage"></a>
 <nav class="prevnext">
+    <a class="topage" rel="" href="#topage">&#10148;</a>
     <a class="top" href="index.html">&uarr;</a>
     <a class="prev" rel="prev" href="organisation.html">&larr;</a>
     <a class="next" rel="next" href="output-format.html">&rarr;</a>
@@ -76,9 +78,9 @@ PECL extension "yaml" must be installed.
 <pre>sudo apt install php-yaml</pre>
 For other systems, see <a href="https://www.php.net/manual/en/install.pecl.php">php manual</a>.
 <br>
-<br>Geonames.org matching uses a postgresql database filled with python code, <a href="geonames.html">see page geonames</a>.
+<br>Geonames.org matching uses a postgresql database filled with python code, <a href="geonames.html">see page geonames</a> (only useful for some commands).
 <br>
-<br>Equation of time computation uses <a href="https://github.com/soniakeys/meeus">github.com/soniakeys/meeus</a>, written in the go programming language.
+<br>Equation of time computation uses <a href="https://github.com/soniakeys/meeus">github.com/soniakeys/meeus</a>, written in the go programming language (only useful for some commands).
 <br>So you must have go installed on your machine and run :
 <pre>go get github.com/soniakeys/meeus</pre>
 
@@ -292,8 +294,16 @@ php run-g5.php g55 all genOrig
     <li>
         <span class="big1">2 - Build new data</span>
         <ul>
-            <li><a href="full.html">7-full</a> - <a href="full-code.html">Code</a></li>
-            <li><a href="data-model.html">Data model</a></li>
+            <li><a href="full.html">7-full</a></li>                                       
+            <li>
+                <a href="db5.html">G5 database db5</a>
+                <ul>
+                    <li><a href="db5-source.html">Source</a></li>
+                    <li><a href="db5-person.html">Person</a></li>
+                    <li><a href="db5-group.html">Group</a></li>
+                    <li><a href="db5-api.html">API</a></li>
+                </ul>
+            </li>
             <li><a href="acts.html">Acts</a></li>
             <li><a href="check.html">Check</a></li>
             <li><a href="merge.html">Merge</a></li>

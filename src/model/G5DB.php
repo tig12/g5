@@ -19,12 +19,31 @@ class G5DB{
     /** Path pointing to 7-full **/
     public static $DIR;
     
-    /** Pattern to check birth date. **/
+    /** Path pointing to 7-full/index **/
+    public static $DIR_INDEX;
+    
+    /** Path pointing to 7-full/group **/
+    public static $DIR_GROUP;
+    
+    /** Path pointing to 7-full/person **/
+    public static $DIR_PERSON;
+    
+    /** Path pointing to 7-full/source **/
+    public static $DIR_SOURCE;
+    
+    /**
+        Pattern to check a date.
+        @todo put elsewhere ?
+    **/
     const PDATE = '/\d{4}-\d{2}-\d{2}/';
     
     // ******************************************************
     public static function init(){
         self::$DIR = Config::$data['dirs']['7-full'];
+        self::$DIR_INDEX = self::$DIR . DS . 'index';
+        self::$DIR_GROUP = self::$DIR . DS . 'group';
+        self::$DIR_PERSON = self::$DIR . DS . 'person';
+        self::$DIR_SOURCE = self::$DIR . DS . 'source';
     }
     
 }// end class

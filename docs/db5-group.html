@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>g5 database API | Gauquelin5</title>
+    <title>Group | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="">
     <meta name="robots" content="index,follow">
@@ -12,7 +12,7 @@
     <meta name="dcterms.dateCopyrighted" content="2019">
     <!-- 
     tigsite:
-        history: 2019-10-21 16:04:43+02:00, Thierry Graff : Creation
+        history: 2020-05-18 12:48:32+02:00, Thierry Graff : Creation
     -->
 </head>
 
@@ -21,79 +21,45 @@
 
 <div class="main">
 
+<a name="topage"></a>
 <nav class="prevnext">
-
+    <a class="topage" rel="" href="#topage">&#10148;</a>
     <a class="top" href="index.html">&uarr;</a>
-    <a class="prev" rel="prev" href="full.html">&larr;</a>
-    <a class="next" rel="next" href="data-model.html">&rarr;</a>
+    <a class="prev" rel="prev" href="db5-person.html">&larr;</a>
+    <a class="next" rel="next" href="acts.html">&rarr;</a>
 </nav>
 
 <header>
-<h1>g5 database API</h1>
+<h1>Group</h1>
 <div class="intro">
+This page describes the <code>Group</code> data type of <a href="db5.html">g5 database</a>.
 </div>
 </header>
 
 <article>
 
-<br><code>7-full/</code> is managed by classes of src/model
-<pre>
-class Full{
-    const SEP = '/';
-    public static $DIR; // Path pointing to 7-full/
-}
+Groups are built by program filling text files in <code>7-full/group/</code>.
+
+<!-- ********************************************************************************* -->
+<h2>YAML template</h2>
+
+The structure of a group is given by <code>src/model/Group.yml</code>
+
+
+        <br>ex: <code>7-full/groups/datasets/cura/A2.txt</code>
+        <pre>
+persons/1873/12/15/joseph-abadie
+persons/1876/08/12/jules-abadie
+persons/1864/03/10/jacques-abelous
+...
 </pre>
+<br>Each line is the <b>uid</b> of a person member of the groups, see <a href="db5.html">data model</a>.
 
-<pre>
-class Person{
-    public $data = [];
-    
-    public static function new($uid): Person
-    public static function newEmpty(): Person
-    
-    public function uid(): string
-    public function slug(): string
-    
-    // file system
-    public function dir($full=true): string 
-    public function file($full=true): string 
-    public function load()
-    public function save()
-    
-    // fields
-    public function addId($source, $id)
-    public function addSource($source)
-    public function addOccu($occu)
-    public function setOrigin($source, $data)
-    public function addHistory($command, $source, $data)
-    public function update($replace)
-}
-</pre>
-
-<pre>
-class Group{
-    public $data = [];
-
-    public static function new($uid): Group
-    public static function newEmpty($uid=''): Group
-
-    public function uid(): string
-    public function slug(): string 
-    
-    // file system
-    public function file($full=true): string 
-    public function load()
-    public function save()
-    public function exportCsv($file, $csvFields, $map=[], $fmap=[])
-    
-    // fields
-    public function add($entry)
-}
-</pre>
+<!-- ********************************************************************************* -->
+<h2>Group uid</h2>
 
 </article>
 </div><!-- end class="main" -->
-
 
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
@@ -149,8 +115,16 @@ class Group{
     <li>
         <span class="big1">2 - Build new data</span>
         <ul>
-            <li><a href="full.html">7-full</a> - <a href="full-code.html">Code</a></li>
-            <li><a href="data-model.html">Data model</a></li>
+            <li><a href="full.html">7-full</a></li>                                       
+            <li>
+                <a href="db5.html">G5 database db5</a>
+                <ul>
+                    <li><a href="db5-source.html">Source</a></li>
+                    <li><a href="db5-person.html">Person</a></li>
+                    <li><a href="db5-group.html">Group</a></li>
+                    <li><a href="db5-api.html">API</a></li>
+                </ul>
+            </li>
             <li><a href="acts.html">Acts</a></li>
             <li><a href="check.html">Check</a></li>
             <li><a href="merge.html">Merge</a></li>

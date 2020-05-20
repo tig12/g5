@@ -1,8 +1,25 @@
+document:
+  history: []
 
 uid: 
-slug:
-file:
+id: 
+type: 
 
-# contents
-name:
+### source stuff ###
+source:
+  parent:
+  notes: |
+
+### content ###
+name: 
+author: 
+date: 
+N: 
 description: 
+  
+citations: []
+
+publisher: 
+
+publications: []
+

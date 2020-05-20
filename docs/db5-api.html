@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Data Todo | Gauquelin5</title>
+    <title>g5 database API | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="">
     <meta name="robots" content="index,follow">
@@ -12,7 +12,7 @@
     <meta name="dcterms.dateCopyrighted" content="2019">
     <!-- 
     tigsite:
-        history: , Thierry Graff : Creation
+        history: 2019-10-21 16:04:43+02:00, Thierry Graff : Creation
     -->
 </head>
 
@@ -24,70 +24,96 @@
 <a name="topage"></a>
 <nav class="prevnext">
     <a class="topage" rel="" href="#topage">&#10148;</a>
+
     <a class="top" href="index.html">&uarr;</a>
-    <a class="prev" rel="prev" href=".html">&larr;</a>
-    <a class="next" rel="next" href=".html">&rarr;</a>
+    <a class="prev" rel="prev" href="full.html">&larr;</a>
+    <a class="next" rel="next" href="db5.html">&rarr;</a>
 </nav>
 
 <header>
-<h1>Data Todo</h1>
+<h1>g5 database API</h1>
 <div class="intro">
-This page lists data not yet handled by g5.
 </div>
 </header>
 
 <article>
 
-<table class="wikitable margin">
-    <tr>
-        <td>Müller 1083 medics</td>
-        <td>
-            <ul>
-                <li>Restore Paris arondissements using files A2 and E1</li>
-                <li>Check on civil registries records born in Paris (Müller checked french records, except for Paris).</li>
-            </ul>
-        </td>
-    </tr>
-    
-    <tr>
-        <td>Müller 402 italian writers</td>
-        <td>
-            <ul>
-                <li>Scan the 100 supplementary to reach 502</li>
-            </ul>
-        </td>
-    </tr>
-    
-    <tr>
-        <td>Eminence grade for file A4</td>
-        <td>
-            From Ertel 1987 eminence tests on painters.
-            <br>Not found on the web, maybe present in Ertel's professional archives.
-        </td>
-    </tr>
-    
-    <tr>
-        <td>1955 group of 361 minor painters</td>
-        <td>
-            Published on paper book "Les hommes et les astres", not found on the web.
-            <br>From Ertel 1987 eminence tests on painters.
-            <br>Not found on the web, maybe present in Ertel's professional archives.
-        </td>
-    </tr>
-    
-    <tr>
-        <td>Gauquelin 1955 group of 884 priests</td>
-        <td>
-            Published on paper book "Les hommes et les astres", not found on the web.
-        </td>
-    </tr>
-    
-</table>
+<br><code>7-full/</code> is managed by classes of src/model
+<pre>
+class Full{
+    const SEP = '/';
+    public static $DIR; // Path pointing to 7-full/
+}
+</pre>
 
+<pre>
+class Source {
+    public static function new($uid): Source
+    public static function newEmpty(): Source
+    
+    public function uid() : string                         
+    public function id() : string
+    
+    // file system
+    public function file($full=true): string
+    public function load()
+    public function save()
+    
+    // indexes
+    public static function reindexIdUid()
+}
+</pre>
 
+<pre>
+class Person {
+    public $data = [];
+    
+    public static function new($uid): Person
+    public static function newEmpty(): Person
+    
+    public function uid(): string
+    public function slug(): string
+    
+    // file system
+    public function dir($full=true): string 
+    public function file($full=true): string 
+    public function load()
+    public function save()
+    
+    // fields
+    public function addId($source, $id)
+    public function addSource($source)
+    public function addOccu($occu)
+    public function setOrigin($source, $data)
+    public function addHistory($command, $source, $data)
+    public function update($replace)
+}
+</pre>
+
+<pre>
+class Group {
+    public $data = [];
+
+    public static function new($uid): Group
+    public static function newEmpty($uid=''): Group
+
+    public function uid(): string
+    public function slug(): string 
+    
+    // file system
+    public function file($full=true): string 
+    public function load()
+    public function save()
+    public function exportCsv($file, $csvFields, $map=[], $fmap=[])
+    
+    // fields
+    public function add($entry)
+}
+</pre>
 
 </article>
 </div><!-- end class="main" -->
+
 
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              

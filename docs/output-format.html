@@ -21,7 +21,9 @@
 
 <div class="main">
 
+<a name="topage"></a>
 <nav class="prevnext">
+    <a class="topage" rel="" href="#topage">&#10148;</a>
     <a class="top" href="index.html">&uarr;</a>
     <a class="prev" rel="prev" href="usage.html">&larr;</a>
     <a class="next" rel="next" href="cura.html">&rarr;</a>
@@ -30,8 +32,8 @@
 <header>
 <h1>Output format</h1>
 <div class="intro">
-This page describes the format of generated csv files.
-<br>Note : corresponds to the usage of <a href="full.html">7-full</a>, under development ; most <a href="https://larzac.info/gauquelin5">output files</a> still use <a href="z-output-format-bck.html">previous syntax</a>, used when working with <code>5-tmp</code>.
+This page describes the format used to generate the csv files of <a href="https://larzac.info/gauquelin5">downloadable results</a>.
+<br>A big change in generaion process is under preparation. This will lead to changes in the output format. new output format is described <a href="z-output-format-new.html">here</a>
 </div>
 </header>
 
@@ -39,7 +41,7 @@ This page describes the format of generated csv files.
 <nav class="toc">
     <ul>
         <li>
-            <a href="#common-fields">Common fields</a>
+            <a href="#csv-fields">CSV fields</a>
         </li>
         <li>
             <a href="#occupation-codes">Occupation codes</a>
@@ -52,17 +54,15 @@ This page describes the format of generated csv files.
     </ul>
 </nav>
 
-
-Here are the field names used in files of <code>data/5-tmp/</code>
+Here are the field names used in files of <code>data/5-tmp/</code> and <code>data/9-output/</code>
 <br>In the csv files, the first line contains field names ; other lines contain data.
 <br>The field separator used in csv file is <code>;</code> (semicolon).
 <br>Character encoding is UTF-8.
 
 <!-- ********************************************************************************* -->
-<h2><a name="common-fields">Common fields</a></h2>
+<h2><a name="csv-fields">CSV fields</a></h2>
 
-Some csv files contain fields that are not listed here
-<br>In this case, these fields are documented in the README files accompanying the generated files.
+Some csv files contain fields that are not listed here, in this case, these fields are documented in the README files accompanying the generated files.
 
 <table class="wikitable margin">
 
@@ -71,59 +71,11 @@ Some csv files contain fields that are not listed here
         <th>Comments</th>
     </tr>
     
-    <!-- ************************************* -->
-    <tr><td colspan="2"><div class="big3 bold padding05">Ids</div></td></tr>
-    
-    <tr><td colspan="2"><b>TODO</b> rename all these fields <code>LOCALID</code></td></tr>
-    
     <tr>
-        <td>GQID</td>
+        <td>NUM</td>
         <td>
-            <b>Gauquelin id</b>
-            <br>Looks like <code>A2-721</code> ; built using Cura file name and field <b>NUM</b> of <a href="cura.html">cura.free.fr files</a>.
-            <br>Corresponds to fields <b>QUEL</b> and <b>GNR</b> of <a href="newalch-ertel4391.html">Ertel 4391</a> raw file.
-        </td>
-    </tr>
-    
-    <tr>
-        <td>ERID</td>
-        <td>
-            <b>Ertel id</b>
-            <br>Corresponds to field <b>NR</b> of <a href="newalch-ertel4391.html">file Ertel 4391</a>.
-        </td>
-    </tr>
-    
-    <tr>
-        <td>MUID</td>
-        <td>
-            <b>Müller id</b>
-            <br>Corresponds to field <b>NR</b> of <a href="newalch-muller1083.html">file Müller 1083</a>.
-        </td>
-    </tr>
-    
-    <tr>
-        <td>CSID</td>
-        <td>
-            <b>CSICOP id</b>
-            <br>Corresponds to field <b>CSINR</b> of <a href="newalch-ertel4391.html">file Ertel 4391</a>.
-        </td>
-    </tr>
-    
-    <tr>
-        <td>WDID</td>
-        <td>
-            <b>Wikidata id</b>
-            <br>Looks like <code>Q41390</code>.
-        </td>
-    </tr>
-    
-    <!-- ************************************* -->
-    <tr><td colspan="2"><div class="big3 bold padding05">Names</div></td></tr>
-    
-    <tr>
-        <td>NAME</td>
-        <td>
-            <b>Name currently used</b>.
+            <b>Unique identifier</b> of a record in a given context.
+            <br>Corresponds to NUM in cura.free.fr files.
         </td>
     </tr>
     
@@ -141,45 +93,97 @@ Some csv files contain fields that are not listed here
         </td>
     </tr>
     
+    <tr>
+        <td>G</td>
+        <td>
+            <b>Gender</b>
+            <br><code>F</code> or <code>M</code> in general.
+            <br>Currently not handled by the program.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>OCCU</td>
+        <td>
+            <b>Occupation code</b>
+            <br>Corresponds to field <code>PRO</code> in cura files.
+            <br>When a person has more than one occupation code, the codes are separated by "+".
+            Ex : PO+WR means that the person is identified as a politician and a writer.
+            <br>See below for a full list of codes.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>NOTES</td>
+        <td>
+            <b>Free notes</b>
+            <br>Only when useful.
+            In files of serie A, E1, E3
+
+        </td>
+    </tr>
+    
     <!-- ************************************* -->
-    <tr><td colspan="2"><div class="big3 bold padding05">Dates</div></td></tr>
+    <tr>
+        <td colspan="2">
+            <div class="big3 bold padding">Dates and places</div>
+            If a file contains only birth data, <code>DATE</code> and <code>PLACE</code> are related to birth.
+            <br>If a file contains birth and death data,
+            <ul class="simple">
+                <li><code>BDATE</code> and <code>BPLACE</code> are related to birth.</li>
+                <li><code>DDATE</code> and <code>DPLACE</code> are related to death.</li>
+            </ul>
+            The program currently only deals with birth information and uses only <code>DATE</code> and <code>PLACE</code>.
+        </td>
+    </tr>
     
     <tr>
         <td>DATE</td>
         <td>
-            <b>Legal date</b> = date and time as written in the birth certificate.
-            <br>Format ISO 8601 of this form : <code>YYYY-MM-DD HH:MM</code>.
-            <br>Example : <code>2017-05-03 09:30</code>.
-            <br>Timezone offset is not included ; hour precision is minute (seconds omited).
+            Birth date ; ISO 8601 of this form : <code>YYYY-MM-DD HH:MM:SSsHH:MM</code> (timezone offset is included ; s means "sign" + or -).
+            <br>Example : <code>2017-05-03 09:30:00+02:00</code>
+            <br>Time is <code>09:30:00</code> and timezone offset is +2 hours.
+            <br>For records with no birth time, format is <code>YYYY-MM-DD</code>
         </td>
     </tr>
-    
     <tr>
-        <td>TZ</td>
+        <td>DATE_C</td>
         <td>
-            <b>Timezone offset</b>.
-            <br>Format <code>sHH:MM:SS</code>, where s is the sign (+ or -).
-            <br>Examples : <code>+01:00:00</code> ; <code>-08:30:00</code>.
-            <br>Negative for places west of Greenwhich, positive for places east.
+            Corrected date : if this column is not empty, it means that legal time and timezone offset could be restored.
+            <br>The need for a restoration of dates is detailed in page <a href="time.html">Expressing time</a>.
+            <br>Format of this column is <code>YYYY-MM-DD HH:MMsHH:MM:SS</code>.
+            <br>It differs from column DATE : time does not contain seconds information, but timezone offset contains seconds.
         </td>
     </tr>
-    
-    <tr>
-        <td>DATE-UT</td>
-        <td>
-            Date and time converted to universal time.
-            <br>This field is in theory useless, as it can be computed from <code>DATE</code> and <code>TZ</code>.
-            <br>Its presence is necessary because Cura files are sometimes expressed in UT. This problem is detailed in page <a href="time.html">Expressing time</a>.
-        </td>
-    </tr>
-    
-    <!-- ************************************* -->
-    <tr><td colspan="2"><div class="big3 bold padding05">Geographical information</div></td></tr>
     
     <tr>
         <td>PLACE</td>
         <td>
             Birth place name.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>BDATE</td>
+        <td>Birth date ; same format as DATE</td>
+    </tr>
+    <tr>
+        <td>BPLACE</td>
+        <td>Birth place name.</td>
+    </tr>
+    <tr>
+        <td>DDATE</td>
+        <td>Death date ; same format as DATE</td>
+    </tr>
+    <tr>
+        <td>DPLACE</td>
+        <td>Death place name.</td>
+    </tr>
+    
+    <!-- ************************************* -->
+    <tr>
+        <td colspan="2">
+            <div class="big3 bold padding">Geographical information</div>
         </td>
     </tr>
     
@@ -202,16 +206,6 @@ Some csv files contain fields that are not listed here
     </tr>
     
     <tr>
-        <td>C3</td>
-        <td>
-            <b>Administrative division level 3</b>
-            <br>Used for arrondissements (Paris, Lyon, Marseille) = division of a big city in different parts.
-            <br>Does NOT correspond to ADM3 in geonames.org ; in geonames.org, different arrondissements are modeled as different PLACE, and have different geonames id.
-            <br>=> change g5 ?
-        </td>
-    </tr>
-    
-    <tr>
         <td>GEOID</td>
         <td>
             <b>geonames.org unique identifier</b> of the place.
@@ -229,37 +223,6 @@ Some csv files contain fields that are not listed here
         <td>LAT</td>
         <td>
             <b>Latitude</b> in decimal degrees.
-        </td>
-    </tr>
-    
-    <!-- ************************************* -->
-    <tr><td colspan="2"><div class="big3 bold padding05">Other fields</div></td></tr>
-    <tr>
-        <td>G</td>
-        <td>
-            <b>Gender</b>
-            <br><code>F</code> or <code>M</code> in general.
-        </td>
-    </tr>
-    
-    <tr>
-        <td>OCCU</td>
-        <td>
-            <b>Occupation code</b>
-            <br>Corresponds to field <code>PRO</code> in cura files.
-            <br>When a person has more than one occupation code, the codes are separated by "+".
-            Ex : PO+WR means that the person is identified as a politician and a writer.
-            <br>See below for a full list of codes.
-        </td>
-    </tr>
-    
-    <tr>
-        <td>NOTES</td>
-        <td>
-            <b>Free notes</b>
-            <br>Only when useful.
-            In files of serie A, E1, E3
-
         </td>
     </tr>
     
@@ -400,8 +363,16 @@ Note : code <code>FEM</code> was introduced to restore Gauquelin 1955 original l
     <li>
         <span class="big1">2 - Build new data</span>
         <ul>
-            <li><a href="full.html">7-full</a> - <a href="full-code.html">Code</a></li>
-            <li><a href="data-model.html">Data model</a></li>
+            <li><a href="full.html">7-full</a></li>                                       
+            <li>
+                <a href="db5.html">G5 database db5</a>
+                <ul>
+                    <li><a href="db5-source.html">Source</a></li>
+                    <li><a href="db5-person.html">Person</a></li>
+                    <li><a href="db5-group.html">Group</a></li>
+                    <li><a href="db5-api.html">API</a></li>
+                </ul>
+            </li>
             <li><a href="acts.html">Acts</a></li>
             <li><a href="check.html">Check</a></li>
             <li><a href="merge.html">Merge</a></li>

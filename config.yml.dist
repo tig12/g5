@@ -5,6 +5,7 @@
 # Directories where the files are stored
 # Absolute paths or paths relative to gauquelin5 root directory
 dirs:
+  1-raw:                data/1-raw
   1-cura-raw:           data/1-raw/cura.free.fr
   1-newalch-raw:        data/1-raw/newalchemypress.com
   1-wd-raw:             data/1-raw/wikidata.org

@@ -63,9 +63,133 @@ h1{
     padding-bottom:0.3rem;
 }
 
-.toc{
-    margin-bottom:1em;
+cite{
+    font-family:DejaVu,serif;
+    display:block;
+    margin:1rem;
+}
+blockquote{
+    display:block;
+    border:1px solid grey;
+    padding:5px;
+    margin:1rem;
+    font-family:DejaVu,serif;
+    background:#fee;
 }
 
-table.alternate tr:nth-child(even) {background: #eee}
-table.alternate tr:nth-child(odd) {background: #ddd}
+.formula{
+    padding:0.5em;
+    font-family:"Courier New",Courier,monospace;
+    border:1px solid grey;
+    display:inline-block;
+}
+
+/* ================ Site layout ================ */
+.flex-wrap{
+    display:flex;
+    flex-wrap:wrap;
+}
+aside li{list-style:none;}
+
+/* ================ Headings ================ */
+h1{
+    width:100%;
+    margin:auto;
+    text-align:center;
+    font-size:2.5rem;
+    font-weight:bold;
+    padding:0.3rem;
+    margin-bottom:1rem;
+}
+h1 .subtitle{font-size:0.8em;}
+h2{
+    font-size:2rem;
+    margin:1rem 0;
+}
+h3{
+    font-size:1.5rem;
+    margin:1rem 0;
+}
+h4{
+    margin:.7rem 0;
+}
+
+
+/* ================ Navigation ================ */
+.prevnext{
+    font-family:DejaVu,serif;
+    position:fixed; top:0px; right:0px;
+    margin:1rem;
+    width:75px; height:40px
+}
+.prevnext a{
+    display:inline-block;
+    position:fixed;
+    width:40px; height:40px;
+    text-decoration:none;
+    font-weight:bolder;
+    font-size:2rem;
+}
+.prevnext a.index{top:0px; right:10px; font-size:0.5rem;}
+.prevnext a.top{top:0px; right:40px;}
+.prevnext a.prev{top:25px; right:75px;}
+.prevnext a.next{top:25px; right:5px;}
+.prevnext a.topage{
+    top:15px; right:38px; color:#black; font-size:1.1rem;
+    transform:rotate(-90deg);
+}
+
+/* table of content */
+.toc{
+    font-family:Arial,Helvetica,sans-serif;
+    margin-bottom:1em;
+}
+.toc ul{list-style-type:none;}
+.toc{padding:0;}
+.toc>ul>li>a{font-weight:bold;}
+
+
+
+/* ================ Particular elements ================ */
+.warning{
+    width:50%;
+    padding:.5rem;
+    margin:.5rem;
+    background:gold;
+    border:1px solid grey;
+}
+
+.intro{
+    font-size:1.4rem;
+    margin:1rem 0 1rem 2rem;
+}
+
+.exo{
+    font-size:1rem;
+    border:1px solid grey;
+    padding:0.6rem 1rem;;
+    background:lightyellow;
+    margin:1rem;
+}
+.exo ul{margin:0;}
+
+table.wikitable{
+    border-collapse:collapse;
+}
+table.wikitable > tr > th, table.wikitable > * > tr > th {
+    /* background-color: #eaecf0; */
+    background-color: lightblue;
+    text-align: center;
+    vertical-align:top;
+}
+table.wikitable > tr > th, table.wikitable > tr > td, table.wikitable > * > tr > th, table.wikitable > * > tr > td {
+    border: 1px solid #a2a9b1;
+    padding: 0.2rem 0.4rem;
+    vertical-align:top;
+}
+table.wikitable tr td code{
+    background:none;
+}
+
+
+

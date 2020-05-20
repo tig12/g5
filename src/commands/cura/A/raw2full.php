@@ -266,7 +266,6 @@ class raw2full implements Command{
             $new = [];
             $new['name']['family'] = $cur['FNAME'];
             $new['name']['given'] = $cur['GNAME'];
-            $new['name']['usual'] = trim($new['name']['given'] . ' ' . $new['name']['family']);
             /////// HERE put wikidata occupation id ///////////
             $p->addOccu(A::compute_profession($datafile, $cur['PRO'], $NUM));
             // date time
@@ -287,15 +286,9 @@ class raw2full implements Command{
             $new['birth']['place']['lat'] = Cura::computeLat($cur['LAT']);
             
             // log command effect on data in the person yaml
-            $p->addHistory("cura $datafile raw2csv", $datafile, $new);
+            $p->addHistory("cura $datafile raw2full", $datafile, $new);
             
             $p->update($new);
-            
-            $p->data['uid'] = $p->uid();
-            $p->data['slug'] = $p->slug();
-            $p->data['dir'] = $p->dir();
-            $p->data['file'] = $p->file();
-            
             $p->save(); // HERE save to disk
 $report .= "Wrote ".$p->file()."\n";
             $nb_stored ++;
