@@ -11,7 +11,7 @@
 namespace g5\commands\cura\A;
 
 use g5\G5;
-use g5\model\G5DB;
+use g5\model\DB5;
 //use g5\model\Source;
 use g5\model\Person;
 use g5\model\Group;
@@ -244,10 +244,10 @@ class raw2full implements Command{
         }
         // source corresponding to this file
         $source = Source::newEmpty();
-        $source->data['uid'] = UID_PREFIX_SOURCE . G5DB::SEP . $datafile; // source/cura/A1
-        $source->data['file'] = G5DB::$DIR . DS . str_replace(G5DB::SEP, DS, $source->data['uid']) . '.yml'; // /path/to/full/source/cura/A1.yml
+        $source->data['uid'] = UID_PREFIX_SOURCE . DB5::SEP . $datafile; // source/cura/A1
+        $source->data['file'] = DB5::$DIR . DS . str_replace(DB5::SEP, DS, $source->data['uid']) . '.yml'; // /path/to/full/source/cura/A1.yml
         // group
-        $g = Group::newEmpty(Cura::UID_PREFIX_GROUP . G5DB::SEP . $datafile);
+        $g = Group::newEmpty(Cura::UID_PREFIX_GROUP . DB5::SEP . $datafile);
         $nb_stored = 0;
         foreach($res as $cur){
             

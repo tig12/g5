@@ -9,11 +9,11 @@ namespace g5\model;
 use g5\Config;
 use tiglib\strings\slugify;
 
-G5DB::init();
+DB5::init();
 
-class G5DB{
+class DB5{
     
-    /** Separator used to build uid **/
+    /** Separator used to build uids **/
     const SEP = '/';
     
     /** Path pointing to 7-full **/

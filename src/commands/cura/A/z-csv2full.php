@@ -35,7 +35,7 @@ class csv2full implements Command{
         $nTotal = count($curaRows);
         $nMatch = 0;
         foreach($curaRows as $row){
-            $full = G5DB::matchArray($row);
+            $full = DB5::matchArray($row);
             if(!$full){
 //echo $row['NUM'] . ' ' . $row['GNAME'] . ' ' . $row['FNAME'] . ' ' . $row['OCCU'] . "\n";
                 // @todo self::handleNotMatched();

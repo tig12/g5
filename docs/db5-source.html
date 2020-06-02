@@ -74,41 +74,51 @@ publications: []
 
 <!-- ********************************************************************************* -->
 <h2>Source uid</h2>
+Like all entities of db5, a source is characteized by an <code>uid</code>, unique within g5 db.
+<br>A source <code>uid</code> reflects the path of the yaml file containing informations about the source : 
+<br>Source with uid = <code>muller402 source/web/newalch/muller402</code>
+<br>is stored in <code>data/7-full/source/web/newalch/muller402.yml</code>
 
 <!-- ********************************************************************************* -->
 <h2>Source id</h2>
-Like all entities of g5 db, a source is characteized by an <code>uid</code>, unique within g5 db.
 <br>Sources have a supplementary identifier, named <code>id</code>. the <code>id</code> of a source is unique within g5 sources. It can be seen as a shortcut, a simpler way to refer to a source
-<br>Ex : books published by Arno Müller between 1991 and 1994
+<br>Ex : booklets published by Arno Müller between 1991 and 1994
 <ul>
-    <li><code>uid = source/history/muller/Astro-Forschungs-Daten</code></li>
+    <li><code>uid = source/booklet/Astro-Forschungs-Daten</code></li>
     <li><code>id = AFD</code></li>
 </ul>
-<code>uid</code> must refelect the path of the yaml representing the source ; <code>id</code> doesn't have this requirement.
+TODO : page with source / uid matching
 <br>ids are case-sensitive.
 <br>
-<br>The associations between source ids and uids are maintained using file <code>index/source/id-uid</code>.
+<br>The associations between source ids and uids are maintained using file <code><b>index/source/id-uid.txt</b></code>.
+<br>Contains lines with &lt;id> &lt;space> &lt;uid>
+<br>ex: 
+<pre>
+AFD source/booklet/Astro-Forschungs-Daten
+muller402 source/web/newalch/muller402
+</pre>
 
 <!-- ********************************************************************************* -->
 <h2>Source type</h2>
 <b>type</b> : the type of the source.
-<br>Source type may be ommited in the yaml definition of the source because it relies on a convention :
-<br>directory <code>7-full/source</code> is organized by source type.
-<br>So source type is given by the direct subdirectory of <code>7-full/source</code> containing the yaml file of the source.
 <br>Source type currently used :
 <ul>
     <li>article</li>
     <li>book</li>
     <li>booklet</li>
-    <li>history</li>
+    <li>file</li>
     <li>organization</li>
     <li>periodical</li>
+    <li>unpublished</li>
     <li>web</li>
 </ul>
-Note that this choice has a consequence : sources related to a given topic are located in different directories on the disk.
+
+Directory <code>7-full/source</code> is organized by source type.
+<br>This has a consequence : sources related to a given topic are located in different directories on the disk.
 <br>For example, Arno Müller's experiment on 402 italian writers relate to these sources :
 <ul>
     <li><code>source/booklet/Astro-Forschungs-Daten</code></li>
+    <li><code>source/web/newalch/muller402</code></li>
 </ul>
 
 <!-- ********************************************************************************* -->

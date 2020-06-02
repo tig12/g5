@@ -16,7 +16,10 @@ class Person{
     
     // *********************** new *******************************
     
-    /** Returns an object of type Person. **/
+    /**
+        Returns an object of type Person from its uid.
+        @param $uid     String like person/1876/05/29/parmentier-andre
+    **/
     public static function new($uid): Person {
         $p = new Person();
         $p->data['uid'] = $uid;
@@ -47,10 +50,10 @@ class Person{
         $slug = $this->slug($short=true);                        
         $date = $this->birthday();
         if($date == ''){
-            return implode(G5DB::SEP, ['lost', 'persons', $slug]);
+            return implode(DB5::SEP, ['lost', 'persons', $slug]);
         }
         [$y, $m, $d] = explode('-', $date);
-        return implode(G5DB::SEP, ['persons', $y, $m, $d, $slug]);
+        return implode(DB5::SEP, ['persons', $y, $m, $d, $slug]);
     }
     
     /**
@@ -90,9 +93,9 @@ class Person{
         @param $full if false, return path relative in 7-full/
     **/
     public function dir($full=true): string {
-        $res = $full ? G5DB::$DIR . G5DB::SEP : '';
+        $res = $full ? DB5::$DIR . DB5::SEP : '';
         $res .= $this->uid();
-        return str_replace(G5DB::SEP, DS, $res);
+        return str_replace(DB5::SEP, DS, $res);
     }
     
     /** 

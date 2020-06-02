@@ -9,7 +9,7 @@
 namespace g5\commands\newalch\muller402;
 
 use g5\Config;
-use g5\model\G5DB;
+use g5\model\DB5;
 use g5\model\Source;
 use g5\model\SourceI;
 
@@ -22,14 +22,20 @@ class Muller402 implements SourceI{
     /** id in g5 db when this class represents a source **/
     const ID_SOURCE = 'muller402';
     
+    /** id of raw file https://newalchemypress.com/gauquelin/gauquelin_docs/5a_muller_medics.txt **/
+    const ID_SOURCE_RAW = 'muller402';
+    
     /** uid in g5 db when this class represents a source **/
-    const UID_SOURCE = 'source' . G5DB::SEP . 'web' . G5DB::SEP . 'newalch' .  G5DB::SEP . 'muller402';
+    const UID_SOURCE = 'source' . DB5::SEP . 'web' . DB5::SEP . 'newalch' .  DB5::SEP . 'muller402';
+    //const UID_SOURCE = implode( DB5::SEP, ['source', 'web', 'newalch', 'muller402']);
     
     /** 
         Path to raw file, relative to data/1-raw from config.yml
         data/1-raw/newalchemypress.com/05-muller-writers/5muller_writers.csv
     **/
     const RAW_PATH = 'newalchemypress.com' . DS . '05-muller-writers' . DS . '5muller_writers.csv';
+    
+    /** Separator used in the raw csv file **/
     const RAW_SEP = ';';
     
     /** Name of the csv file in 9-output/ **/

@@ -18,8 +18,8 @@ class Group{
     
     // *********************** new *******************************
     /**
-        Create an object of type Group.
-        @param $uid     String like groups/datasets/cura/A1
+        Create an object of type Group from its uid.
+        @param $uid     String like group/web/cura/A1
     **/
     public static function new($uid){
         $g = new Group();
@@ -44,7 +44,7 @@ class Group{
     }
     
     public function slug(): string {
-        $tmp = explode(G5DB::SEP, $this->uid());
+        $tmp = explode(DB5::SEP, $this->uid());
         return $tmp[count($tmp)-1];
     }
     
@@ -57,9 +57,9 @@ class Group{
     // *********************** file system *******************************
     
     public function file($full=true): string {
-        $res = $full ? G5DB::$DIR . G5DB::SEP : '';
+        $res = $full ? DB5::$DIR . DB5::SEP : '';
         $res .= $this->uid() . '.txt';
-        return str_replace(G5DB::SEP, DS, $res);
+        return str_replace(DB5::SEP, DS, $res);
     }
     
     public function load(){

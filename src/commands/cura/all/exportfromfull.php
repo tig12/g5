@@ -13,7 +13,7 @@
 namespace g5\commands\cura\all;
 
 use g5\Config;
-use g5\model\G5DB;
+use g5\model\DB5;
 use g5\patterns\Command;
 use g5\commands\cura\Cura;
 use g5\model\Full;
@@ -39,7 +39,7 @@ class exportfromfull implements Command{
         $report = '';
         
         $datafile = $params[0];
-        $uid = Cura::UID_PREFIX_GROUP . G5DB::SEP . $datafile;
+        $uid = Cura::UID_PREFIX_GROUP . DB5::SEP . $datafile;
         $g = Group::new($uid);
         
         $outfile = Config::$data['dirs']['9-cura'] . DS . $datafile . '.csv';

@@ -8,17 +8,17 @@
 namespace g5\commands\cura;
 
 use g5\Config;
-use g5\model\G5DB;
+use g5\model\DB5;
 use g5\model\Source;
 use tiglib\arrays\csvAssociative;
 
 class Cura{
     
     /** uid when cura is used to create a group **/
-    const UID_PREFIX_GROUP = 'group' . G5DB::SEP . 'datasets' . G5DB::SEP . 'cura';
+    const UID_PREFIX_GROUP = 'group' . DB5::SEP . 'datasets' . DB5::SEP . 'cura';
     
     /** uid when cura is used to create a source **/
-    const UID_PREFIX_SOURCE = 'source' . G5DB::SEP . 'cura';
+    const UID_PREFIX_SOURCE = 'source' . DB5::SEP . 'cura';
     
     /** Slug of the source cura **/
     const SOURCE_SLUG = 'cura';
@@ -93,8 +93,8 @@ class Cura{
     /** Returns a source for cura **/
     public static function getSource(): Source {
         $source = Source::newEmpty();
-        $uid = UID_PREFIX_SOURCE . G5DB::SEP . self::SOURCE_SLUG;
-        $file = str_replace(G5DB::SEP, DS, $uid) . '.yml';
+        $uid = UID_PREFIX_SOURCE . DB5::SEP . self::SOURCE_SLUG;
+        $file = str_replace(DB5::SEP, DS, $uid) . '.yml';
         $source->data = [
             'uid' => $uid,
             'slug' => self::SOURCE_SLUG,

@@ -8,7 +8,7 @@
 namespace g5\commands\newalch\muller402;
 
 use g5\G5;
-use g5\model\G5DB;
+use g5\model\DB5;
 //use g5\model\Source;
 use g5\model\Person;
 use g5\model\Group;
@@ -37,7 +37,6 @@ class raw2full implements Command{
     public static function execute($params=[]): string{
         $report =  '';
         
-Source::reindexIdUid(); exit;
         //$source = Muller402::source();
         
         //$pname = '/(\d+M)\s*(.*?)\,\s*(.*?)\s*/';
@@ -61,7 +60,7 @@ echo "\n<pre>"; print_r($fields); echo "</pre>\n";
             $new['birth']['place']['name'] = $m[1];
             $new['birth']['c2'] = $m[2];
             $new['birth']['place']['cy'] = 'IT';
-            $new['birth']['place']['lg'] = -$fields[9]; // minus sign, correction from raw here
+            $new['birth']['place']['lg'] = -(int)$fields[9]; // minus sign, correction from raw here
             $new['birth']['place']['lat'] = $fields[8];
 echo "\n<pre>"; print_r($new); echo "</pre>\n";
             
@@ -73,13 +72,14 @@ exit;
         
         //
         // 4 - store result in 7-full
-        // create 1 source, 1 group, N persons
+// create 1 source, 1 group, N persons
+        // create 1 group, N persons
         //
         // "cura" source
-        $source->data['uid'] = UID_PREFIX_SOURCE . G5DB::SEP . $datafile; // source/cura/A1
-        $source->data['file'] = G5DB::$DIR . DS . str_replace(G5DB::SEP, DS, $source->data['uid']) . '.yml'; // /path/to/full/source/cura/A1.yml
+        // $source->data['uid'] = UID_PREFIX_SOURCE . DB5::SEP . $datafile; // source/cura/A1
+        // $source->data['file'] = DB5::$DIR . DS . str_replace(DB5::SEP, DS, $source->data['uid']) . '.yml'; // /path/to/full/source/cura/A1.yml
         // group
-        $g = Group::newEmpty(Cura::UID_PREFIX_GROUP . G5DB::SEP . $datafile);
+        $g = Group::newEmpty(Cura::UID_PREFIX_GROUP . DB5::SEP . $datafile);
         $nb_stored = 0;
         foreach($res as $cur){
             

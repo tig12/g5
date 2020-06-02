@@ -8,7 +8,7 @@ namespace g5\commands\wd\raw;
 
 use g5\Config;
 use g5\patterns\Command;
-use g5\model\G5DB;
+use g5\model\DB5;
 use g5\commands\wd\Wikidata;
 use tiglib\arrays\csvAssociative;
 
@@ -187,13 +187,13 @@ exit;
             }
             
             // slug
-            $new['slug'] = G5DB::personSlug($new['name'], $new['family-name'], $new['given-name'], $new['birth']['date']);
+            $new['slug'] = DB5::personSlug($new['name'], $new['family-name'], $new['given-name'], $new['birth']['date']);
 //echo "\n<pre>"; print_r($new); echo "</pre>\n"; exit;
             //
             // output
             //
             try{
-                $dir = G5DB::getDirectory($new['birth']['date']);
+                $dir = DB5::getDirectory($new['birth']['date']);
             }
             catch(\Exception $e){
                 $dir = Config::$data['dirs']['7-full'] . DS . 'fixme';

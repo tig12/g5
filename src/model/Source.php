@@ -8,7 +8,7 @@
 namespace g5\model;
 
 use g5\Config;
-use g5\model\G5DB;
+use g5\model\DB5;
 use tiglib\strings\slugify;
 use tiglib\filesystem\globRecursive;
 
@@ -18,13 +18,16 @@ class Source{
     public $data = [];
     
     /** 
-        Relative path within G5DB::$DIR_INDEX to the file maintaining associations between source ids and uids
+        Relative path within DB5::$DIR_INDEX to the file maintaining associations between source ids and uids
     **/
     const INDEX_ID_UID = 'source/id-uid.txt';
     
     // *********************** new *******************************
     
-    /** Returns an object of type Source. **/
+    /**
+        Returns an object of type Source from its uid.
+        @param $uid     String like source/web/cura/A1
+    **/
     public static function new($uid): Source {
         $s = new Source();
         $s->data['uid'] = $uid;
@@ -60,8 +63,8 @@ class Source{
         @param $full if false, return path relative in 7-full/
     **/
     public function file($full=true): string {
-        $res = $full ? G5DB::$DIR . G5DB::SEP : '';
-        $res .= str_replace(G5DB::SEP, DS, $this->uid()) . '.yml';
+        $res = $full ? DB5::$DIR . DB5::SEP : '';
+        $res .= str_replace(DB5::SEP, DS, $this->uid()) . '.yml';
         return $res;
     }
     
@@ -81,17 +84,18 @@ class Source{
     // *********************** fields *******************************
     
     // *********************** index *******************************
-    // ******************************************************
+    
     /**
         Rewrites index/source/id-uid.txt
-        
+        @return Report
     **/
-    public static function reindexIdUid(){
-        $files = globRecursive::execute(G5DB::$DIR_SOURCE . DS . '*.yml');
+    public static function reindexIdUid(): string{
+        $files = globRecursive::execute(DB5::$DIR_SOURCE . DS . '*.yml');
         $lines = [];
         foreach($files as $file){
-            if($file == 'Source'){
-                continue; // empty source to copy to create a new source
+            if($file == DB5::$DIR_SOURCE . DS . 'Source.yml'){
+                // Source.yml : empty source to copy to create a new source
+                continue;
             }
             // yaml parse issues a warning if a yaml file is empty
             $data = yaml_parse(file_get_contents($file));
@@ -100,10 +104,14 @@ class Source{
             }
         }
         $res = '';
+        $n = 0;
         foreach($lines as $k => $v){
             $res .= "$k $v\n";
+            $n++;
         }
-        file_put_contents(G5DB::$DIR_INDEX . DS . self::INDEX_ID_UID, $res);
+        $outfile = DB5::$DIR_INDEX . DS . self::INDEX_ID_UID;
+        file_put_contents($outfile, $res);
+        return "Updated $outfile (wrote $n lines)\n";
     }
     
 } // end class
