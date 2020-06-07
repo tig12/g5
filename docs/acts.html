@@ -35,57 +35,105 @@ Acts
 </h1>
 
 <div class="intro">
-For persons born in 19th and early 20th centuries, we don't know the exact birth time. The most precise we can hope is to have a certificate from the hospital (HC). In practice, we have birth certificates (BC) from the civil registries, which are often rounded to the hour.
-<br>BC are not ideal but produce data usable by statistical tests. In g5 context, a birth time conform to an available and verifiable BC is considered as reliable.
-<br>Ideally, every g5 data should be checked against a BC. Few birth times have been verified to resolve questions raised by g5 development.
-<br>These acts are stored in directory <code><b><a href="https://larzac.info/gauquelin5/8-acts">8-acts/</a></b></code>.
+The big part of the job is to achieve <b>data reliability</b>. For persons born before world war 2, we don't know the exact birth time. The most precise we can hope is to have a certificate from the <b>hospital</b> (HC). In practice, we have <b>birth certificates</b> (BC) from the civil registries, which are often rounded to the hour.
+<br>BC are not ideal but usable by statistical tests.
+<br>So in g5 context, a birth time is considered reliable if :
+<ul>
+    <li>It is related to an <b>available and verifiable BC</b>.</li>
+    <li>The transcription of the act has been written and validated by 2 persons or more.</li>
+</ul>
+<br>
+Currently very few birth times have been verified, only to resolve questions raised by g5 development.
+<br>
+<br>You can check these acts in directory <code><b><a href="https://larzac.info/gauquelin5/8-acts">8-acts/</a></b></code>.
 </div>
 </header>
 
 <article>
 
 
+<!-- ************************************* -->
+<h2>Trust - data reliability</h2>
+Trust = level of reliability of an information.
+<br>These levels are defined in g5:
+<ul class="spaced margin-top">
+    <li>
+        <div class="bold">1 - Hospital Certificate (HC)</div>
+        - Original document available and verifiable by anyone.
+        <br>- Transcription approved by 2 persons or more.
+    </li>
+    <li>
+        <div class="bold">2 - Birth Certificate (BC)</div>
+        - Original document available and verifiable by anyone.
+        <br>- Transcription approved by 2 persons or more.
+    </li>
+    <li>
+        <div class="bold">3 - Birth Record (BR)</div>
+        (= copy of the BC by an officer - may contain mistakes)
+        <br>- Original document available and verifiable by anyone.
+        <br>- Transcription approved by 2 persons or more.
+    </li>
+    <li>
+        <div class="bold">4 - to check</div>
+        Data à priori serious (cura, newalchemypress, astrodatabank) but containing errors.
+        <br>Need to be matched against BC.
+    </li>
+    <li>
+        <div class="bold">5 - the rest</div>
+        Data without birth time or grabbed from the web (wikidata, web sites).
+    </li>
+</ul>
+
+Most data handled by g5 are level 4, very few are level 2.
+<br>
+<br>Precision is indicative, and can be for example 2.5 if only one person has checked the BC. Not really level 2 but better than 3.
+
+<!-- ************************************* -->
+<h3>G5 integration</h3>
+Currently a trust level is associated to a person. A more precise model is needed, to be able to associate a distinct trust to each field.
+<br>When a person is imported in <code>7-full</code>, it takes the trust of its source.
+
+
 <!-- ********************************************************************************* -->
 <h2>About french data</h2>
 
-Currently, data are checked only for France. All acts since 1792 have times indicated. Scans of the original documents until ~1920 can be viewed online for free. This makes 5 generations, around 200 millions of acts (birth, death, mariage) with times (source <a href="http://www.filae.com/ressources/etat-civil-numerise-dou-viennent-les-donnees/">filae.com</a>).
-<br>Here lies potential data to test planetary heredity at large scale, but this is out of the scope of g5 program. 
+In France, all acts since 1792 have times indicated. Scans of the original documents until ~1920 can be viewed online for free. This makes 5 generations, around 200 millions of acts (birth, death, mariage) with times (source <a href="http://www.filae.com/ressources/etat-civil-numerise-dou-viennent-les-donnees/">filae.com</a>).
+<br>Here lies potential data to test planetary heredity at large scale, but not (yet ?) in the scope of g5 program. 
 <br>
-<br>
-If you want to see original acts, type on a search engine for example "archives 45" (or maybe "Archives 45 France") to see the <i>archives départementales du Loiret</i> (Loiret is département n° 45).
+<br>If you want to see original acts, type on a search engine for example "archives 45" (or maybe "Archives 45 France") to see the <i>archives départementales du Loiret</i> (Loiret is département n° 45).
 
 
 <!-- ********************************************************************************* -->
 <h2>Retrieval process</h2>
-For each verification,
-<ul>
-    <li>the image </li>
-</ul>
 
-the image is downloaded on local machine, and informations to easily go back to the online act are recorded in a yaml file expressed in a syntax which can be used to match g5 data by program.
-<br>
+An act consists of 2 documents :
+<ul>
+    <li>The image of the scan of the original document</li>
+    <li>
+        A yaml file with structured informations containing
+        <ul>
+            <li>The way to easily go back to the document published by the administration.</li>
+            <li>A transcription of the act</li>
+        </ul>
+        This yaml file is expressed in a precisely defined syntax which can be used to inject these informations in g5 database by program.
+    </li>
+</ul>
 <br>The following informations are necessary :
-<br>(in parentheses, corresponding fieldname in g5 vocabulary).
+<br>(in parentheses, corresponding fieldname in g5 vocabulary of entity Person).
 <ul>
     <li>Country (birth.place.cy)</li>
     <li>Département (birth.place.c2)</li>
     <li>City (birth.place.name)</li>
     <li>Arrondissement (birth.place.c3), for Paris, Lyon, Marseille (arrondissement = part of a city).
-    <br>Important because without it, it's very difficult to find the registry.</li>
+        <br>Important because without it, it's very difficult to find the registry.</li>
     <li>Name of the registry</li>
     <li>Page number where the birth certificate is located within the registry.
-    <br>Important because finding the right page may be a long process.</li>
+        <br>Important because finding the right page may be a long process.</li>
     <li>If possible the url directly pointing to the page. Some départements provide a way to copy the "permalink" of a document, which may be different from the url of the page displayed by the web browser.</li>
 </ul>
 
 <!-- ************************************* -->
-<h3><a name="2-1-image-download">Image download</a></h3>
-This is systematically done during g5 development. Some départements provide a link to download current page, some don't. When they don't, image retrieval is done with screen capture. This can be particularily long because sometimes several captures are necessary to get the whole certificate with enough details. In this case, the image is reconstituted assembling the different parts.
-
-
-<!-- ********************************************************************************* -->
-<h2>Directory layout</h2>
-
+<h3>Directory layout</h3>
 Acts are organized chronologically like <code>7-full/person/</code> :
 <pre>
 8-acts
@@ -97,6 +145,12 @@ Acts are organized chronologically like <code>7-full/person/</code> :
                         ├── naissance.jpg
                         └── naissance.yml
 </pre>
+
+<!-- ************************************* -->
+<h3><a name="2-1-image-download">Image download</a></h3>
+Some départements provide a link to download current page, some don't. When they don't, image retrieval is done with screen capture. This can be particularily long because sometimes several captures are necessary to get the whole certificate with enough details. In this case, the image is reconstituted assembling the different parts.
+
+
 
 <!-- ********************************************************************************* -->
 <h2><a name="example">Example</a></h2>

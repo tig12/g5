@@ -31,7 +31,7 @@
 <h1>Gauquelin5<br>( g5 )</h1>
 
 <div class="intro">
-The purpose of this program is to build data useable to perform statistical tests on astrology (with birth times and timezone offset). These tests, initiated in the 1950s by Michel Gauquelin, followed 3 main directions : tests on professional groups, tests on heredity, and tests on character traits. This program mainly deals with the data used to build professional groups. 
+The purpose of this program is to build data usable to perform statistical tests on astrology (with birth times and timezone offset). These tests, initiated in the 1950s by Michel Gauquelin, followed 3 main directions : tests on professional groups, tests on heredity, and tests on character traits. This program mainly deals with the data used to build <b>professional groups</b>, gather birth times of famous people, and sort them by eminence. 
 <br>The assertions of Gauquelin and followers are :
 <ul class="simple">
     <li>we can observe anomalies in the repartition of some planets in the births of famous people ;</li>
@@ -42,41 +42,35 @@ One particular effect (the repartition of Mars in the births of sportsmen, calle
 <br>
 <br>The main orientations of Gauquelin5 program are :
 <ol class="simple margin-bottom">
-    <li>Gather the historical data, check them, correct them, and merge them in a single database.</li>
+    <li>Gather the <a href="historical-tests.html">historical data</a>, check them, correct them, and merge them in a single database.</li>
     <li>Connect the historical data to standard datasets like wikidata and complete birth times to build larger groups.</li>
     <li>Build new eminence indicators and sort famous persons by eminence rank.</li>
 </ol>
 
-Note that g5 is not concerned by data analysis (performing statistical tests), it only deals with restoration and production of data.
-<br>
-<br>Current code is far from these goals ; it contains steps to gather some historical data and correct them. Written code needs tests and debug, this is a work in progress.
-<br>It currently uses the following data sources :
-<ul>
-    <li>
-        Data gathered by Michel et Françoise Gauquelin (serie A, files D6, D10, E1, E3), from <a href="http://cura.free.fr/gauq/17archg.html">cura.free.fr</a> C.U.R.A Gauquelin archives version 5 ; N = 15 932
-    </li>
-    <li>
-        Suitbert Ertel, Arno Müller and CFEPP data, from <a href="https://newalchemypress.com/gauquelin/">newalchemypress.com</a>
-    </li>
-    <li>Gauquelin 1955 (paper) book "Les hommes et les astres"</li>
-    <li>CSICOP data, previously unpublished</li>
+Note that g5 is not concerned by data analysis (performing statistical tests), it only deals with documentation, restoration and production of data.
+
+<div class="bold">limitation</div>
+
+<style>
+ul.prime{
+    padding-top:1rem;
+    list-style:none;
+    font-size:1.5rem;
+}
+ul.prime li{
+    padding-top:.25rem;
+}
+</style>
+<ul class="prime">
+    <li><a href="https://larzac.info/gauquelin5"><b>Download resulting data</b></a></li>
+    <li><a href="historical-tests.html">List of historical tests</a></li>
+    <li><a href="full.html">Current dev, to merge historical data</a></li>
 </ul>
 
-<br>You can <a href="https://larzac.info/gauquelin5">download generated data</a>, partially restored.
 </div>
 </header>
 
 <article>
-
-<!-- 
-<ol>
-    <li>Provide corrected versions of existing datasets,</li>
-    <li>Restore the groups used in the historical tests when possible,</li>
-    <li>Link these data with other datasets, like <a href="https://www.wikidata.org">wikidata.org</a>.</li>
-    <li>Build new datasets, more complete and more precise, using web data available today.</li>
-    <li>Build new eminence indicators.</li>
-</ol>
--->
 
 <!-- ********************************************************************************* -->
 <h2>Why Gauquelin5 ?</h2>
@@ -84,30 +78,37 @@ There are several reasons to care about the data used to perform statistical tes
 
 <ul class="spaced margin-top">
     <li>
-        <div class="bold">Scientific interest</div>
-        The "mars effect" polemic lasted for several decades and ended with the Ertel versus Nienhuys arguments, who reached radically opposed opinions. History is so confused that the question to know if these statistical anomalies exist out of human bias is still open. Data collected by Gauquelin and others can serve as a basis to build new groups and execute new tests. Internet permits to build larger and more reliable groups.
-        
+        <div class="bold">Political</div>
+        Gauquelin claimed to have observed a phenomenon. The scientific community remains silent and delegates the job to skeptic groups whose purpose was to prove that the phenomenon did not exists. Skeptic tests were slow, opaque and at least for CSICOP fraudulous. Skeptics talked in the name of science and betrayed its values : honesty, observation.
+        <br>Academic community has been unable to create the conditions to verify, maybe open data and free software can do that.
+        <br>Finally, a great injustice was done to Michel and Françoise Gauquelin who produced a huge work with an impeccable rigor.
+    </li>
+    <li>
+        <div class="bold">Scientific</div>
+        Finally, the question to know if these statistical anomalies exist out of human bias is still open.
+        <br>Internet provides data to check all Gauquelin assertions : professional, heredity, traits and much more semantic. With larger and more reliable groups, it"s today possible to observe Gauquelin claims and know if they are valid or not.
     </li>
     
     <li>
-        <div class="bold">Historical interest</div>
-        Gauquelin and related data are the main material used to perform the astrological tests. So anyone who wants to study the details of this aspect of recent history needs the data. As this is a highly polemic topic, the data permit to check the claims of the historical protagonists.
+        <div class="bold">Historical</div>
+        Gauquelin and related data are the main material used to perform the astrological tests. So anyone who wants to study the details of this aspect of history need the data. As this is a highly polemic topic, the data permit to check the claims of the historical protagonists.
     </li>
     
     <li>
-        <div class="bold">Technical interest</div>
-        These data are interesting because they contain birth time. And birth times are generally neglected in the semantic web. Take for example wikidata.org : birth dates are set to <code>00:00:00</code>. There is no way to make the difference between "this is a date with no time information" and "this is a date with time = 00:00:00" (maybe there is a way, but I didn't find it).
-        <br>Gauquelin data permit to better other data sets.
+        <div class="bold">Technical</div>
+        These data are interesting because they contain birth time. And birth times are generally neglected in the web. Take for example <a href="wikidata.html">wikidata</a> : birth dates are set to <code>00:00:00</code>. There is no way to make the difference between "this is a date with no time information" and "this is a date with time = 00:00:00" (maybe there is a way, but I didn't find it).
     </li>
 </ul>
 
 
 <!-- ********************************************************************************* -->
 <h2>Current implementation</h2>
-This software is still at an immature stage. It brings corrections to Cura an Newalchemypress data but does not produce yet reliable data (in particular legal time, timezone offset and place identification need test and debug).
-<br>Current code mainly concerns step 1 (data restoration) ; step 2 (merge data and build new groups) implementation has begun, see <a href="full.html">7-full</a>.
+
+Still at step 1, data restoration ; for the moment, input files are converted to csv files.
+<br>Does not produce yet reliable data (in particular legal time, timezone offset and place identification need test and debug).
+<br>Current dev : import the historical data in a common database, <a href="full.html">7-full</a>.
 <br>
-<br>In the process of building data usable to do science, this program doesn't adress an important issue : <b>the reliability of data</b>. This problem is adressed in <a href="acts.html">page Check data</a>.
+<br>Current work does not address an important issue : <b>the reliability of data</b>. See <a href="acts.html">page Check data</a>.
 
 <!-- ********************************************************************************* -->
 <h2>About this program</h2>
@@ -134,7 +135,7 @@ The name "Gauquelin5" comes from the main source of information, "Archives Gauqu
 <ul>
     <li>Names of months, weekdays, languages etc. are not capitalized.</li>
     <li>The characters ; : ? ! are preceeded and followed by a white space.</li>
-    <li>White space is used as separator for large numbers (for example one million is written <i>1 000 000</i> instead of <i>1,000,000</i>).</li>
+    <li>White space is used as separator for large numbers (for example one million is written <i>1 000 000</i>).</li>
     <li>Marriage is written mariage, address is written adress.</li>
 </ul>
 
@@ -148,6 +149,24 @@ The name "Gauquelin5" comes from the main source of information, "Archives Gauqu
     <li><br>2017 - 2019 : Pôle Emploi.</li>
 </ul>
 -->
+
+
+
+<!-- 
+<br>
+<br>It currently uses the following data sources :
+<ul>
+    <li>
+        Data gathered by Michel et Françoise Gauquelin (serie A, files D6, D10, E1, E3), from <a href="http://cura.free.fr/gauq/17archg.html">cura.free.fr</a> C.U.R.A Gauquelin archives version 5 ; N = 15 932
+    </li>
+    <li>
+        Suitbert Ertel, Arno Müller and CFEPP data, from <a href="https://newalchemypress.com/gauquelin/">newalchemypress.com</a>
+    </li>
+    <li>Gauquelin 1955 (paper) book "Les hommes et les astres"</li>
+    <li>CSICOP data provided by Kenneth Irving, previously unpublished</li>
+</ul>
+-->
+
 
 </article>
 </div><!-- end class="main" -->
