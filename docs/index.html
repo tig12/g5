@@ -31,7 +31,7 @@
 <h1>Gauquelin5<br>( g5 )</h1>
 
 <div class="intro">
-The purpose of this program is to build data usable to perform statistical tests on astrology (with birth times and timezone offset). These tests, initiated in the 1950s by Michel Gauquelin, followed 3 main directions : tests on professional groups, tests on heredity, and tests on character traits. This program mainly deals with the data used to build <b>professional groups</b>, gather birth times of famous people, and sort them by eminence. 
+The purpose of this program is to build data usable to perform statistical tests on astrology (with birth times and timezone offset). These tests, initiated in the 1950s by Michel Gauquelin, followed 3 main directions : tests on professional groups, tests on heredity, and tests on character traits. This program mainly deals with the data used to build <b>professional groups</b>.
 <br>The assertions of Gauquelin and followers are :
 <ul class="simple">
     <li>we can observe anomalies in the repartition of some planets in the births of famous people ;</li>
@@ -49,8 +49,6 @@ One particular effect (the repartition of Mars in the births of sportsmen, calle
 
 Note that g5 is not concerned by data analysis (performing statistical tests), it only deals with documentation, restoration and production of data.
 
-<div class="bold">limitation</div>
-
 <style>
 ul.prime{
     padding-top:1rem;
@@ -64,7 +62,7 @@ ul.prime li{
 <ul class="prime">
     <li><a href="https://larzac.info/gauquelin5"><b>Download resulting data</b></a></li>
     <li><a href="historical-tests.html">List of historical tests</a></li>
-    <li><a href="full.html">Current dev, to merge historical data</a></li>
+    <li><a href="full.html">Current dev, merging historical data</a></li>
 </ul>
 
 </div>
@@ -79,20 +77,18 @@ There are several reasons to care about the data used to perform statistical tes
 <ul class="spaced margin-top">
     <li>
         <div class="bold">Political</div>
-        Gauquelin claimed to have observed a phenomenon. The scientific community remains silent and delegates the job to skeptic groups whose purpose was to prove that the phenomenon did not exists. Skeptic tests were slow, opaque and at least for CSICOP fraudulous. Skeptics talked in the name of science and betrayed its values : honesty, observation.
-        <br>Academic community has been unable to create the conditions to verify, maybe open data and free software can do that.
-        <br>Finally, a great injustice was done to Michel and Françoise Gauquelin who produced a huge work with an impeccable rigor.
+        Gauquelin claimed to have observed a phenomenon. The scientific community remained silent and delegated the job to skeptic groups whose purpose was to prove that the phenomenon does not exist. Skeptic tests were slow, opaque and possibly fraudulent. Skeptics talked in the name of science and betrayed its most basic values, like honesty.
+        <br>Academic community has been unable to create the conditions to verify Gauquelin claims ; open data and free software will maybe be able to do that.
     </li>
     <li>
         <div class="bold">Scientific</div>
         Finally, the question to know if these statistical anomalies exist out of human bias is still open.
-        <br>Internet provides data to check all Gauquelin assertions : professional, heredity, traits and much more semantic. With larger and more reliable groups, it"s today possible to observe Gauquelin claims and know if they are valid or not.
+        <br>Internet provides data to check all Gauquelin assertions : professional, heredity, traits and much more semantic. With larger and more reliable groups, it's today possible to check Gauquelin claims.
     </li>
     
     <li>
         <div class="bold">Historical</div>
-        Gauquelin and related data are the main material used to perform the astrological tests. So anyone who wants to study the details of this aspect of history need the data. As this is a highly polemic topic, the data permit to check the claims of the historical protagonists.
-    </li>
+        Gauquelin and related data are the main materials used to perform the astrological tests. Data are then important for historians of science.
     
     <li>
         <div class="bold">Technical</div>
@@ -104,11 +100,21 @@ There are several reasons to care about the data used to perform statistical tes
 <!-- ********************************************************************************* -->
 <h2>Current implementation</h2>
 
-Still at step 1, data restoration ; for the moment, input files are converted to csv files.
-<br>Does not produce yet reliable data (in particular legal time, timezone offset and place identification need test and debug).
-<br>Current dev : import the historical data in a common database, <a href="full.html">7-full</a>.
+G5 currently uses the following data sources :
+<ul>
+    <li>
+        Data gathered by Michel et Françoise Gauquelin (serie A, files D6, D10, E1, E3), from <a href="http://cura.free.fr/gauq/17archg.html">cura.free.fr</a> C.U.R.A Gauquelin archives version 5 ; N = 15 932
+    </li>
+    <li>
+        Suitbert Ertel, Arno Müller and CFEPP data, from <a href="https://newalchemypress.com/gauquelin/">newalchemypress.com</a>
+    </li>
+    <li>Gauquelin 1955 (paper) book "Les hommes et les astres"</li>
+    <li>CSICOP data provided by Kenneth Irving, previously unpublished</li>
+</ul>
+
+It brings corrections to these data and produces csv files expressed in a common syntax ; generated data can't be considered yet as reliable (in particular legal time, timezone offset and place identification need test and debug).
 <br>
-<br>Current work does not address an important issue : <b>the reliability of data</b>. See <a href="acts.html">page Check data</a>.
+<br>Current dev : merge the historical data in a common database, see <a href="full.html">7-full</a>.
 
 <!-- ********************************************************************************* -->
 <h2>About this program</h2>
@@ -149,24 +155,6 @@ The name "Gauquelin5" comes from the main source of information, "Archives Gauqu
     <li><br>2017 - 2019 : Pôle Emploi.</li>
 </ul>
 -->
-
-
-
-<!-- 
-<br>
-<br>It currently uses the following data sources :
-<ul>
-    <li>
-        Data gathered by Michel et Françoise Gauquelin (serie A, files D6, D10, E1, E3), from <a href="http://cura.free.fr/gauq/17archg.html">cura.free.fr</a> C.U.R.A Gauquelin archives version 5 ; N = 15 932
-    </li>
-    <li>
-        Suitbert Ertel, Arno Müller and CFEPP data, from <a href="https://newalchemypress.com/gauquelin/">newalchemypress.com</a>
-    </li>
-    <li>Gauquelin 1955 (paper) book "Les hommes et les astres"</li>
-    <li>CSICOP data provided by Kenneth Irving, previously unpublished</li>
-</ul>
--->
-
 
 </article>
 </div><!-- end class="main" -->
