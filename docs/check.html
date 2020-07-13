@@ -25,8 +25,10 @@
 <nav class="prevnext">
     <a class="topage" rel="" href="#topage">&#10148;</a>
     <a class="top" href="index.html">&uarr;</a>
-    <a class="prev" rel="prev" href="acts.html">&larr;</a>
-    <a class="next" rel="next" href="merge.html">&rarr;</a>
+    <!-- 
+    <a class="prev" rel="prev" href=".html">&larr;</a>
+    -->
+    <a class="next" rel="next" href="acts.html">&rarr;</a>
 </nav>
 
 <header>
@@ -36,13 +38,61 @@ Check data
 </h1>
 
 <div class="intro">
-Data need to be checked against official documents to be considered as reliable, see page <a href="act.html">Acts</a>.
-<br>Checking the data is a huge work because it involves human work of transcription and verification.
+The big part of the job is to achieve <b>data reliability</b>. Ideally, every information stored in g5 database should be checked against an official document. This is a huge work because it involves human work of transcription and verification.
+<br>For persons born before world war 2, we don't know the exact birth time. The most precise we can hope is to have a certificate from the <b>hospital</b> (HC). In practice, we have <b>birth certificates</b> (BC) from the civil registries, which are often rounded to the hour.
+<br>BC are not ideal but usable by statistical tests.
+<br>So in g5 context, a birth time is considered reliable if :
+<ul>
+    <li>It is related to an <b>available and verifiable BC</b>.</li>
+    <li>The transcription of the act has been written and validated by 2 persons or more.</li>
+</ul>
+<br>
+Currently very few birth times have been verified, only to resolve questions raised by g5 development. Integration of BCs in g5 is described in page <a href="acts.html">Acts</a>.
 </div>
 </header>
 
 <article>
 
+<!-- ********************************************************************************* -->
+<h2>Trust - data reliability</h2>
+Trust = level of reliability of an information.
+<br>Five levels of reliability are defined in g5 :
+<ul class="spaced margin-top">
+    <li>
+        <div class="bold">1 - Hospital Certificate (HC)</div>
+        - Original document available and verifiable by anyone.
+        <br>- Transcription approved by 2 persons or more.
+    </li>
+    <li>
+        <div class="bold">2 - Birth Certificate (BC)</div>
+        - Original document available and verifiable by anyone.
+        <br>- Transcription approved by 2 persons or more.
+    </li>
+    <li>
+        <div class="bold">3 - Birth Record (BR)</div>
+        (= copy of the BC by an officer - may contain mistakes)
+        <br>- Original document available and verifiable by anyone.
+        <br>- Transcription approved by 2 persons or more.
+    </li>
+    <li>
+        <div class="bold">4 - to check</div>
+        Data à priori serious (cura, newalchemypress, astrodatabank) but containing errors.
+        <br>Need to be matched against BC.
+    </li>
+    <li>
+        <div class="bold">5 - the rest</div>
+        Data without birth time or grabbed from the web (wikidata, web sites).
+    </li>
+</ul>
+
+Most data handled by g5 are level 4, very few are level 2.
+<br>
+<br>Precision is indicative, and can be for example 2.5 if only one person has checked the BC. Not really level 2 but better than 3.
+
+<!-- ********************************************************************************* -->
+<h2>G5 integration</h2>
+Currently a trust level is associated to a person. A more precise model is needed, to be able to associate a distinct trust to each field.
+<br>When a person is imported in <code>7-full</code>, it takes the trust of its source.
 
 
 </article>
@@ -54,6 +104,8 @@ Data need to be checked against official documents to be considered as reliable,
 <ul>
     <li class="bold big1"><a href="index.html">g5 Doc</a></li>
     <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">g5 code</a></li>
+    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
+    
     <li><a href="organisation.html">Organisation</a></li>
     <li><a href="usage.html">Program usage</a></li>
     <li><a href="output-format.html">Output format</a></li>
@@ -113,9 +165,8 @@ Data need to be checked against official documents to be considered as reliable,
                     <li><a href="db5-api.html">API</a></li>
                 </ul>
             </li>
-            <li><a href="acts.html">Acts</a></li>
             <li><a href="check.html">Check</a></li>
-            <li><a href="merge.html">Merge</a></li>
+            <li><a href="acts.html">Acts</a></li>
             <li><a href="wikidata.html">Wikidata.org</a></li>
             <li><a href="geonames.html">Geonames.org</a></li>
         </ul>
@@ -139,8 +190,6 @@ Data need to be checked against official documents to be considered as reliable,
     
     <!-- <li><a href="questions.html">Questions</a></li> -->
 
-    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
-    
 </ul>
 </aside>
 

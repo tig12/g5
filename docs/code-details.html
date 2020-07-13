@@ -41,50 +41,16 @@
     </ul>
 </nav>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 The code is namespaced ; main namespace name is <code>g5</code>.
 <br>Code is PSR-4 (namespace hierarchy corresponds to directory hierarchy, like in java).
 <br>Top-level namespace (<code>g5</code>) is located in <code>src/</code>.
-<br>This code does not use objects, only static methods and variables.
 <br>
-<br>All transformations on data are done in package <code>g5\transform</code>.
+<br>All transformations on data are done in package <code>g5\commands</code>.
 
 <!-- ********************************************************************************* -->
 <h2><a name="association-cli-executed-code">Association CLI - executed code</a></h2>
 
-The command line interface (CLI) is handled by <code>run-g5.php</code>. To interpret the parameters typed by the user, a convention is used : 
-<br>
+The command line interface (CLI) is handled by <code>run-g5.php</code>. To interpret the parameters typed by the user, a convention is used.
 <br>The program uses the notions of 
 <ul>
     <li><b>data set</b> (like <code>cura</code> for cura.free.fr, <code>newalch</code> for newalchemypress.com),</li>
@@ -92,33 +58,34 @@ The command line interface (CLI) is handled by <code>run-g5.php</code>. To inter
     <li><b>action</b> (like <code>raw2csv</code>, which means "convert raw file to csv file").</li>
 </ul>
 
-<br>Each data set corresponds to a sub-package of <code>g5\transform</code>.
+<br>Each data set corresponds to a sub-package of <code>g5\commands</code>.
 <br>Each datafile corresponds to a sub-package of dataset's package.
-<br>For example, code operating on file <a href="https://newalchemypress.com/gauquelin/gauquelin_docs/3a_sports.txt">3a_sports.txt</a> from newalchemypress.com is located in package <code>g5\transform\newalch\ertel4391</code>.
+<br>Each action corresponds to a class located in this sub-package.
+<br>For example, code operating on file <a href="https://newalchemypress.com/gauquelin/gauquelin_docs/3a_sports.txt">3a_sports.txt</a> from newalchemypress.com is located in package <code>g5\commands\newalch\ertel4391</code>.
 <br>
 <br>When the user types a command, the CLI checks, in this order :
 <ul>
     <li>
-        Does this dataset have a class implementing interface <code>Command</code> ? If yes, the parameters are passed to the <code>execute()</code> method of this class.
+        Does this dataset have a class implementing interface <code>g5\patterns\Command</code> ? If yes, the parameters are passed to the <code>execute()</code> method of this class.
         <br>Dataset's command takes the control and can re-interpret parameters and makes a custom dispatch to command(s) of sub-packages.
         <br>cura and g5 datasets use this mechanism.
     </li>
     <li>
-        If not, CLI tries to find a class <code>g5\transform\dataset\datafile\action</code> and call its method <code>execute()</code>.
+        If not, CLI tries to find a class <code>g5\commands\dataset\datafile\action</code> and call its method <code>execute()</code>.
         <br>This is the default mechanism which permits to add new datasets and new datafiles automatically handled by the system, if no class implementing <code>Command</code> is present in the dataset's namespace.
         
     </li>
 </ul>
 
-<br>In both cases, the CLI doesn't know anything else about the class that will execute. It only selects the right code to call and passes the parameters.
+<br>In both cases, the CLI doesn't know anything else about the class that will execute. It only selects the right code to call and passes the parameters (a <i>Command</i> design pattern is used).
 <br>
 <br>Examples :
 <ul class="margin-bottom">
     <li>
-        <code>php run-g5.php cura A raw2csv</code> : the code sees that there is a class <code>g5\transform\cura\CuraCommand</code>, so this class is called.
+        <code>php run-g5.php cura A raw2csv</code> : the code sees that there is a class <code>g5\commands\cura\CuraCommand</code>, so this class is called.
     </li>
     <li>
-        <code>php run-g5.php newalch ertel4391 extract profession</code> : there is no class implementing <code>Command</code> in package <code>g5\transform\newalch</code>, so class <code>g5\transform\newalch\ertel4391\extract</code> will be called, and one parameter, <code>profession</code> will be passed to the method <code>execute()</code>.
+        <code>php run-g5.php newalch ertel4391 look profession</code> : there is no class implementing <code>Command</code> in package <code>g5\commands\newalch</code>, so class <code>g5\commands\newalch\ertel4391\look</code> will be called, and one parameter, <code>profession</code> will be passed to the method <code>execute()</code>.
     </li>
 </ul>
 
@@ -133,6 +100,8 @@ Implementation of this convention can be found in the package hierarchy, and in 
 <ul>
     <li class="bold big1"><a href="index.html">g5 Doc</a></li>
     <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">g5 code</a></li>
+    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
+    
     <li><a href="organisation.html">Organisation</a></li>
     <li><a href="usage.html">Program usage</a></li>
     <li><a href="output-format.html">Output format</a></li>
@@ -192,9 +161,8 @@ Implementation of this convention can be found in the package hierarchy, and in 
                     <li><a href="db5-api.html">API</a></li>
                 </ul>
             </li>
-            <li><a href="acts.html">Acts</a></li>
             <li><a href="check.html">Check</a></li>
-            <li><a href="merge.html">Merge</a></li>
+            <li><a href="acts.html">Acts</a></li>
             <li><a href="wikidata.html">Wikidata.org</a></li>
             <li><a href="geonames.html">Geonames.org</a></li>
         </ul>
@@ -218,8 +186,6 @@ Implementation of this convention can be found in the package hierarchy, and in 
     
     <!-- <li><a href="questions.html">Questions</a></li> -->
 
-    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
-    
 </ul>
 </aside>
 

@@ -45,7 +45,7 @@ class Muller402 implements SourceI{
     const OUTPUT_COLUMNS = [
     ];
     
-    // ISource implementation
+    // SourceI implementation
     public static function source(): Source{
         return Source::new(self::UID_SOURCE);
     }
