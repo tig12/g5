@@ -24,9 +24,10 @@ class Cura{
     const SOURCE_SLUG = 'cura';
     
     /**
-        @see trust levels https://tig12.github.io/gauquelin5/check.html
+        Trust level for data coming from Cura
+        @see https://tig12.github.io/gauquelin5/check.html
     **/
-    const TRUST_LEVEL = 3;
+    const TRUST_LEVEL = 4;
     
     /** Separator used in raw (html) files **/
     const HTML_SEP = "\t";

@@ -155,8 +155,14 @@ class Person{
     }
     
     public function update($replace){
+        // call to addHistory() is left to client code
+        // Decision could be made to call addHistory() here to impose to trace all modifications
         //$this->addHistory();
         $this->data = array_replace_recursive($this->data, $replace);
+        if($this->data['uid'] == ''){
+            $this->data['uid'] = $this->uid();
+        }
+        
     }
     
 }// end class

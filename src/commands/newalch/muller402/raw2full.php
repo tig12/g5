@@ -8,79 +8,94 @@
 namespace g5\commands\newalch\muller402;
 
 use g5\G5;
-use g5\model\DB5;
-//use g5\model\Source;
-use g5\model\Person;
-use g5\model\Group;
-use g5\model\Source;
 use g5\Config;
 use g5\patterns\Command;
+use g5\model\DB5;
+use g5\model\Person;
+use g5\model\Group;
+//use g5\model\Source;
+use g5\commands\newalch\Newalch;
 use tiglib\arrays\sortByKey;
-
+use tiglib\time\seconds2HHMMSS;
 
 class raw2full implements Command{
     
     // *****************************************
     // Implementation of Command
     /** 
-        Parses one html cura file of serie A (locally stored in directory data/raw/cura.free.fr)
-        Stores each person of the file in a distinct yaml files, in 7-full/persons/
-        
-        Merges the original list (without names) with names contained in file 902gdN.html
-        Merge is done using birthdate.
-        Merge is not complete because of doublons (persons born the same day).
-        
+        Loads 5muller_writers.csv to g5 db.
+        Considers that persons contained in raw file don't already exist in g5 db
+        => doesn't check for doublons.
+        @pre    YAML file conrresponfing to Müller 402 must exist in g5 db.
         @param  $params empty Array
         @return String report
-        @throws Exception if unable to parse
     **/
     public static function execute($params=[]): string{
-        $report =  '';
         
-        //$source = Muller402::source();
+        $report =  "Importing " . Muller402::rawFilename() . "\n";
         
-        //$pname = '/(\d+M)\s*(.*?)\,\s*(.*?)\s*/';
+        // Check source existence
+        try{
+            $source = Muller402::source();
+        }
+        catch(\Exception $e){
+            return "UNABLE TO RUN COMMAND: " . $e->getMessage() . "\n";
+        }
+        $idSource = Muller402::ID_SOURCE;
+        
+        // create group
+        $g = Group::newEmpty(Newalch::UID_PREFIX_GROUP . DB5::SEP . Muller402::ID_SOURCE);
+        
         $pname = '/(\d+M)\s*(.*)\s*/';
         $pplace = '/(.*?) ([A-Z]{2})/';
         
+        $nb_stored = 0;
         $raw = Muller402::loadRawFile();
         foreach($raw as $line){
+            $p = Person::newEmpty();
+            $p->addSource($idSource);
+            
             $new = [];
             $fields = explode(Muller402::RAW_SEP, $line);
-echo "\n<pre>"; print_r($fields); echo "</pre>\n";
+            
+            $p->addRaw($idSource, $fields);
+            
+            $p->addOccu('WRI'); /////// HERE put wikidata occupation id ///////////
+            
             preg_match($pname, $fields[0], $m);
-            $new['ids']['muller402'] = $m[1];
+            $p->addId($idSource, $m[1]);
             $tmp = explode(',', $m[2]);
-//echo "\n<pre>"; print_r($tmp); echo "</pre>\n";
             $new['name']['family'] = $tmp[0];
             $new['name']['given'] = trim($tmp[1]);
+            $new['name']['usual'] = $new['name']['given'] . ' ' . $new['name']['family'];
             $new['birth']['date'] = $fields[1].'-'.$fields[2].'-'.$fields[3].' '.$fields[4].':'.$fields[5];
-            $new['birth']['tz'] = $fields[6]; // TODO convert to HH:MM
             preg_match($pplace, $fields[7], $m);
             $new['birth']['place']['name'] = $m[1];
-            $new['birth']['c2'] = $m[2];
+            $new['birth']['place']['c2'] = $m[2];
             $new['birth']['place']['cy'] = 'IT';
             $new['birth']['place']['lg'] = -(int)$fields[9]; // minus sign, correction from raw here
             $new['birth']['place']['lat'] = $fields[8];
-echo "\n<pre>"; print_r($new); echo "</pre>\n";
+            $new['birth']['tz'] = self::compute_offset($fields[6], $new['birth']['place']['lg']);
+            
+            // log command effect on data in the person yaml
+            $p->addHistory("newalch muller402 raw2full", $idSource, $new);
+            
+            $p->update($new);
+echo "\nnew : "; print_r($p);
             
 break;
+            $p->save(); // HERE save to disk
+$report .= "Wrote ".$p->file()."\n";
+            $nb_stored ++;
+            $g->add($p->uid());
         }
         
 exit;
+// @todo remove following code, kept to end dev of current function
         $report .= "--- Importing file $datafile ---\n";
         
         //
         // 4 - store result in 7-full
-// create 1 source, 1 group, N persons
-        // create 1 group, N persons
-        //
-        // "cura" source
-        // $source->data['uid'] = UID_PREFIX_SOURCE . DB5::SEP . $datafile; // source/cura/A1
-        // $source->data['file'] = DB5::$DIR . DS . str_replace(DB5::SEP, DS, $source->data['uid']) . '.yml'; // /path/to/full/source/cura/A1.yml
-        // group
-        $g = Group::newEmpty(Cura::UID_PREFIX_GROUP . DB5::SEP . $datafile);
-        $nb_stored = 0;
         foreach($res as $cur){
             
             foreach(array_keys($cur) as $k){ $cur[$k] = trim($cur[$k]); }
@@ -135,6 +150,38 @@ break;
         return $report;
     }
     
+    
+    // ******************************************************
+    /**
+        Conversion of TZ offset found in newalch file to standard sHH:MM offset.
+        WARNING : possible mistake for "-0.6" :
+            0.6*60 = 36
+            "Problèmes de l'heure résolus pour le monde entier", Françoise Schneider-Gauquelin indicates 00:37
+            Current implementation uses Gauquelin, but needs to be confirmed
+        @param $offset  timezone offset as specified in newalch file
+        @param $lg      longitude, as previously computed
+    **/
+    private static function compute_offset($offset, $lg){
+        switch($offset){
+        	case '-1': 
+        	    return '+01:00';
+        	break;
+        	case '-0.83': 
+        	    return '+00:50';
+        	break;
+        	case '-0.6': 
+        	    return '+00:37';
+        	break;
+        	case 'LMT': 
+        	    // happens for 5 records
+        	    // convert longitude to HH:MM:SS
+        	    $sec = $lg * 240; // 240 = 24 * 3600 / 360
+        	    return '+' . seconds2HHMMSS::compute($sec);
+        	break;
+            default:
+                throw new \Exception("Timezone offset not handled in Muller402 : $offset");
+        }
+    }
     
 }// end class    
 

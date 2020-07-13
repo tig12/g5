@@ -1,6 +1,9 @@
 <?php
 /******************************************************************************
-
+    
+    An object of type Source represents a source in g5 db.
+    This class also contains generic methods for source management.
+    
     @license    GPL
     @history    2020-04-30 16:59:43+02:00, Thierry Graff : Creation
 ********************************************************************************/
@@ -26,7 +29,9 @@ class Source{
     
     /**
         Returns an object of type Source from its uid.
+        The source is initialized using its yaml file (see load()).
         @param $uid     String like source/web/cura/A1
+        @throws Exception if $uid does not correspond to a yaml file.
     **/
     public static function new($uid): Source {
         $s = new Source();
@@ -68,7 +73,14 @@ class Source{
         return $res;
     }
     
+    /** 
+        Fills $this->data from this source's yaml file
+        @throws Exception if yaml file corresponding to source's uid.
+    **/
     public function load(){
+        if(!is_file($this->file())){
+            throw new \Exception("File " . $this->file() . " does not exist");
+        }
         $this->data = yaml_parse(file_get_contents($this->file()));
     }
     

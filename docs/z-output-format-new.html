@@ -163,6 +163,12 @@ Some csv files contain fields that are not listed here
             <br>Seconds can be omitted
             <br>Ex: <code>+01:00</code> ; <code>-08:30</code>.
             <br>Negative for places west of Greenwhich, positive for places east.
+            <br>
+            <br>WARNING : this offset corresponds to the standard definition of timezone offset, but some books (like "Problèmes de l'heure résolus pour le monde entier", Françoise Schneider-Gauquelin) indicate opposite offset.
+            <br>For the offset used in g5,
+            <br>legal time = UTC + offset
+            <br>or
+            <br>UTC = legal time - offset
         </td>
     </tr>
     
@@ -209,7 +215,6 @@ Some csv files contain fields that are not listed here
             <b>Administrative division level 3</b>
             <br>Used for arrondissements (Paris, Lyon, Marseille) = division of a big city in different parts.
             <br>Does NOT correspond to ADM3 in geonames.org ; in geonames.org, different arrondissements are modeled as different PLACE, and have different geonames id.
-            <br>=> change g5 ?
         </td>
     </tr>
     

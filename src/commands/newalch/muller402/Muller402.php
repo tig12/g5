@@ -22,9 +22,6 @@ class Muller402 implements SourceI{
     /** id in g5 db when this class represents a source **/
     const ID_SOURCE = 'muller402';
     
-    /** id of raw file https://newalchemypress.com/gauquelin/gauquelin_docs/5a_muller_medics.txt **/
-    const ID_SOURCE_RAW = 'muller402';
-    
     /** uid in g5 db when this class represents a source **/
     const UID_SOURCE = 'source' . DB5::SEP . 'web' . DB5::SEP . 'newalch' .  DB5::SEP . 'muller402';
     //const UID_SOURCE = implode( DB5::SEP, ['source', 'web', 'newalch', 'muller402']);
@@ -64,7 +61,6 @@ class Muller402 implements SourceI{
                 Each element contains a regular array
     **/
     public static function loadRawFile(){
-        //return file_get_contents(self::rawFilename());
         return file(self::rawFilename());
     }                                                                                              
     
