@@ -1,7 +1,7 @@
 <?php
 /******************************************************************************
     Regular array containing person paths (strings)
-        ex of persons/1864/12/16/machin-pierre
+    ex of persons/1864/12/16/machin-pierre
     
     @license    GPL
     @history    2019-12-27 23:20:16+01:00, Thierry Graff : Creation
@@ -31,6 +31,7 @@ class Group{
     /** Returns an empty object of type Group. **/
     public static function newEmpty($uid=''){
         $g = new Group();
+        $g->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Group.yml'));
         if($uid != ''){
             $g->data['uid'] = $uid;
         }
@@ -51,7 +52,7 @@ class Group{
     // *********************** fields *******************************
     
     public function add($entry){
-        $this->data[] = $entry;
+        $this->data['members'][] = $entry;
     }
     
     // *********************** file system *******************************
@@ -62,20 +63,20 @@ class Group{
         return str_replace(DB5::SEP, DS, $res);
     }
     
+    /** Read from disk **/
     public function load(){
         $path = $this->file();
         if(!is_file($path)){
             throw new \Exception(
-                "IMPOSSIBLE TO LOAD GROUP - file not exist: $path\n"
-              . "Execute raw2full() to build the group first\n"
+                "IMPOSSIBLE TO LOAD GROUP - file does not exist: $path\n"
             );
         }
-        $this->data = file($path,  FILE_IGNORE_NEW_LINES);
+        $this->data['members'] = file($path,  FILE_IGNORE_NEW_LINES);
     }
     
     /** 
-        Writes a txt file on disk
-        with one person slug per line 
+        Write on disk
+        => Text file with one person slug per line 
     **/
     public function save(){
         $path = $this->file();
@@ -85,7 +86,7 @@ class Group{
         }
         $dump = '';
         // not sorted, keep the order decided by client code 
-        foreach($this->data as $elt){
+        foreach($this->data['members'] as $elt){
             $dump .= $elt . "\n";
         }
         file_put_contents($path, $dump);
@@ -128,7 +129,7 @@ class Group{
         
         $emptyNew = array_fill_keys($csvFields, '');
         
-        foreach($this->data as $puid){
+        foreach($this->data['members'] as $puid){
             $p = Person::new($puid);
             $new = $emptyNew;
             // transfer infos from $p->data to $new

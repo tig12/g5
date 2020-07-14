@@ -1,7 +1,7 @@
 <?php
 /******************************************************************************
-    Code common to muller402
     Arno Müller 402 italian writers
+    Code common to muller402
     
     @license    GPL
     @history    2020-05-15 ~22h30+02:00, Thierry Graff : Creation
@@ -24,7 +24,8 @@ class Muller402 implements SourceI{
     
     /** uid in g5 db when this class represents a source **/
     const UID_SOURCE = 'source' . DB5::SEP . 'web' . DB5::SEP . 'newalch' .  DB5::SEP . 'muller402';
-    //const UID_SOURCE = implode( DB5::SEP, ['source', 'web', 'newalch', 'muller402']);
+    
+    const TRUST = DB5::TRUST_CHECK;
     
     /** 
         Path to raw file, relative to data/1-raw from config.yml

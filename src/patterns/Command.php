@@ -13,6 +13,7 @@ interface Command{
         Do something
         @return report : string describing the result of execution.
     **/
-    public static function execute($params=[]): string;
+    //public static function execute($params=[]): string;
+    public static function execute($params=[]);
     
 } // end interface

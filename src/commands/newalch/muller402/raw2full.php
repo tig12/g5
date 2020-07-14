@@ -46,7 +46,7 @@ class raw2full implements Command{
         // create group
         $g = Group::newEmpty(Newalch::UID_PREFIX_GROUP . DB5::SEP . Muller402::ID_SOURCE);
         
-        $pname = '/(\d+M)\s*(.*)\s*/';
+        $pname = '/(\d+)([MFK])\s*(.*)\s*/';
         $pplace = '/(.*?) ([A-Z]{2})/';
         
         $nb_stored = 0;
@@ -56,18 +56,49 @@ class raw2full implements Command{
             $p->addSource($idSource);
             
             $new = [];
+            $new['trust'] = Muller402::TRUST;
+            
             $fields = explode(Muller402::RAW_SEP, $line);
-            
             $p->addRaw($idSource, $fields);
-            
             $p->addOccu('WRI'); /////// HERE put wikidata occupation id ///////////
             
             preg_match($pname, $fields[0], $m);
-            $p->addId($idSource, $m[1]);
-            $tmp = explode(',', $m[2]);
-            $new['name']['family'] = $tmp[0];
-            $new['name']['given'] = trim($tmp[1]);
-            $new['name']['usual'] = $new['name']['given'] . ' ' . $new['name']['family'];
+            if(count($m) != 4){
+                // doesn't happen anymore - @todo remove
+                echo "\n"; print_r($m); echo "\n";
+                echo "\n<pre>"; print_r($fields); echo "</pre>\n"; exit;
+            }
+            
+            $sex = $m[2];
+            if($sex != 'M' && $sex != 'F'){
+                // happens only for 478K Villaruel, Giuseppe
+                // Comparision with scan of original Müller's AFD shows it's a OCR error
+                // => included here, not in tweaks
+                //echo "\n"; print_r($fields); echo "\n";
+                $sex='M';
+            }
+            
+            $mullerId = $m[1] . $sex;
+            $p->addId($idSource, $mullerId);
+            
+            
+            $nameFields = explode(',', $m[3]);
+            if(count($nameFields) != 2){
+                // echo "\n<pre>"; print_r($nameFields); echo "</pre>\n";           
+                // echo "\n<pre>"; print_r($fields); echo "</pre>\n"; continue;
+                // temporary fixes - @todo should be verified and included in tweaks
+                if($mullerId == '310M' || $mullerId == '387M'){
+                    $new['name']['family'] = $nameFields[0];
+                    $new['name']['given'] = '';
+                    $new['name']['usual'] = $new['name']['family'];
+                }
+            }
+            else{
+                // normal case, should not be in a else after corrections of temporary fixes
+                $new['name']['family'] = $nameFields[0];
+                $new['name']['given'] = trim($nameFields[1]);
+                $new['name']['usual'] = $new['name']['given'] . ' ' . $new['name']['family'];
+            }
             $new['birth']['date'] = $fields[1].'-'.$fields[2].'-'.$fields[3].' '.$fields[4].':'.$fields[5];
             preg_match($pplace, $fields[7], $m);
             $new['birth']['place']['name'] = $m[1];
@@ -81,70 +112,15 @@ class raw2full implements Command{
             $p->addHistory("newalch muller402 raw2full", $idSource, $new);
             
             $p->update($new);
-echo "\nnew : "; print_r($p);
-            
-break;
-            $p->save(); // HERE save to disk
-$report .= "Wrote ".$p->file()."\n";
+            //$p->clean();
+//echo "\np : "; print_r($p);
             $nb_stored ++;
             $g->add($p->uid());
-        }
-        
-exit;
-// @todo remove following code, kept to end dev of current function
-        $report .= "--- Importing file $datafile ---\n";
-        
-        //
-        // 4 - store result in 7-full
-        foreach($res as $cur){
-            
-            foreach(array_keys($cur) as $k){ $cur[$k] = trim($cur[$k]); }
-            
-            $p = Person::newEmpty();
-            
-            $p->addSource($datafile);
-            
-            $p->addRaw($datafile, $cur);
-
-            $NUM = $cur['NUM'];
-            
-            $p->addId(Cura::IDSOURCE, Cura::gqid($datafile, $NUM));
-            
-            $new = [];
-            $new['name']['family'] = $cur['FNAME'];
-            $new['name']['given'] = $cur['GNAME'];
-            $new['name']['usual'] = trim($new['name']['given'] . ' ' . $new['name']['family']);
-            /////// HERE put wikidata occupation id ///////////
-            $p->addOccu(A::compute_profession($datafile, $cur['PRO'], $NUM));
-            // date time
-            $day = Cura::computeDay($cur);
-            $hour = Cura::computeHHMMSS($cur);
-            $TZ = trim($cur['TZ']);
-            if($TZ != 0 && $TZ != -1){
-                throw new \Exception("timezone not handled : $TZ");
-            }
-            // TZ computation specific to A cura files - conform to Cura Notice
-            $timezone = $TZ == 0 ? '+00:00' : '-01:00';
-            $new['birth'] = [];
-            $new['birth']['date-ut'] = "$day $hour$timezone"; // HERE not storing in date but in date-ut
-            // place
-            $new['birth']['place']['name'] = $cur['CITY'];
-            [$new['birth']['place']['cy'], $new['birth']['c2']] = A::compute_country($cur['COU'], $cur['COD']);
-            $new['birth']['place']['lg'] = Cura::computeLg($cur['LON']);
-            $new['birth']['place']['lat'] = Cura::computeLat($cur['LAT']);
-            
-            // log command effect on data in the person yaml
-            $p->addHistory("cura $datafile raw2full", $datafile, $new);
-            
-            $p->update($new);
-            
-            $p->save(); // HERE save to disk
-$report .= "Wrote ".$p->file()."\n";
-            $nb_stored ++;
-            $g->add($p->uid());
-break;
+//            $p->save(); // HERE save to disk
+//break;
         }
         $g->save(); // HERE save to disk
+//echo "\ng : "; print_r($g);
         $report .= "Wrote ".$g->file()."\n";
         $report .= "Stored $nb_stored records\n";
         return $report;
@@ -162,21 +138,25 @@ break;
         @param $lg      longitude, as previously computed
     **/
     private static function compute_offset($offset, $lg){
+        if($offset == 'LMT'){ 
+            // happens for 5 records
+            // convert longitude to HH:MM:SS
+            $sec = $lg * 240; // 240 = 24 * 3600 / 360
+            return '+' . seconds2HHMMSS::compute($sec);
+        }
+        $offset = (int)$offset;
         switch($offset){
-        	case '-1': 
+        	case 0: 
+        	    return '+00:00';
+        	break;
+        	case -1: 
         	    return '+01:00';
         	break;
-        	case '-0.83': 
+        	case -0.83: 
         	    return '+00:50';
         	break;
-        	case '-0.6': 
+        	case -0.6: 
         	    return '+00:37';
-        	break;
-        	case 'LMT': 
-        	    // happens for 5 records
-        	    // convert longitude to HH:MM:SS
-        	    $sec = $lg * 240; // 240 = 24 * 3600 / 360
-        	    return '+' . seconds2HHMMSS::compute($sec);
         	break;
             default:
                 throw new \Exception("Timezone offset not handled in Muller402 : $offset");

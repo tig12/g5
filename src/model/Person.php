@@ -7,8 +7,9 @@
 
 namespace g5\model;
 
-use g5\Config;                                                      
+use g5\Config;
 use tiglib\strings\slugify;
+//use tiglib\arrays\cleanEmptyKeys;
 
 class Person{
     
@@ -41,7 +42,7 @@ class Person{
     /**
         Unique id in g5 database.
         Corresponds to the relative path to the directory where the person is stored in 7-full/
-        ex : persons/1811/10/25/galois-evariste
+        ex : person/1811/10/25/galois-evariste
     **/
     public function uid() : string {
         if($this->data['uid'] != ''){
@@ -50,10 +51,10 @@ class Person{
         $slug = $this->slug($short=true);                        
         $date = $this->birthday();
         if($date == ''){
-            return implode(DB5::SEP, ['lost', 'persons', $slug]);
+            return implode(DB5::SEP, ['lost', 'person', $slug]);
         }
         [$y, $m, $d] = explode('-', $date);
-        return implode(DB5::SEP, ['persons', $y, $m, $d, $slug]);
+        return implode(DB5::SEP, ['person', $y, $m, $d, $slug]);
     }
     
     /**
@@ -89,7 +90,7 @@ class Person{
     
     /** 
         Absolute or relative path to the directory containing person's data
-        ex: /path/to/g5data/7-full/persons/1811/10/25/galois-evariste-1811-10-25
+        ex: /path/to/g5data/7-full/person/1811/10/25/galois-evariste-1811-10-25
         @param $full if false, return path relative in 7-full/
     **/
     public function dir($full=true): string {
@@ -100,30 +101,51 @@ class Person{
     
     /** 
         Absolute or relative path to the main yaml file reprensenting the person
-        ex: /path/to/g5data/7-full/persons/1811/10/25/galois-evariste/galois-evariste-1811-10-25.yml
+        ex: /path/to/g5data/7-full/person/1811/10/25/galois-evariste/galois-evariste-1811-10-25.yml
         @param $full see {@link path()}
     **/
     public function file($full=true): string {
         return $this->dir($full) . DS . $this->slug() . '.yml';
     }
     
+    /** Read from disk **/
     public function load(){
         $this->data = yaml_parse(file_get_contents($this->file()));
     }
     
+    /** Write to disk **/
     public function save(){
         if(!is_dir($this->dir())){
             mkdir($this->dir(), 0755, true);
         }
         $this->data['uid'] = $this->uid();
         $this->data['slug'] = $this->slug();
-        $this->data['dir'] = $this->dir();
-        $this->data['file'] = $this->file();
+        //$this->data['file'] = $this->file();
+//        $this->clean();
         file_put_contents($this->file(), yaml_emit($this->data));
-        // echo "___ file_put_contents " . $this->file() . "\n";
+//echo "___ file_put_contents " . $this->file() . "\n";
     }
     
-    // *********************** fields *******************************
+    // *********************** get *******************************
+    public function simple($format=[]){
+        // remove ?
+    }
+    
+    // *********************** update fields *******************************
+    
+    public function clean(){
+        cleanEmptyKeys::compute($this->data);
+    }
+    
+    public function update($replace){
+        // calling addHistory() before calling update() is left to client code
+        // Decision could be made to call addHistory() here to impose to trace all modifications
+        //$this->addHistory();
+        $this->data = array_replace_recursive($this->data, $replace);
+        if($this->data['uid'] == ''){
+            $this->data['uid'] = $this->uid();
+        }
+    }
     
     public function addId($source, $id){
         $this->data['ids'][$source] = $id;
@@ -132,7 +154,7 @@ class Person{
     public function addOccu($occu){
         if(!in_array($occu, $this->data['occus'])){
             $this->data['occus'][] = $occu;
-        }
+        }                                                                     
     }
     
     public function addSource($source){
@@ -154,15 +176,5 @@ class Person{
         $this->data['raw'][$source] = $data;
     }
     
-    public function update($replace){
-        // call to addHistory() is left to client code
-        // Decision could be made to call addHistory() here to impose to trace all modifications
-        //$this->addHistory();
-        $this->data = array_replace_recursive($this->data, $replace);
-        if($this->data['uid'] == ''){
-            $this->data['uid'] = $this->uid();
-        }
-        
-    }
     
 }// end class

@@ -13,23 +13,22 @@ DB5::init();
 
 class DB5{
     
+    // Trust levels, see https://tig12.github.io/gauquelin5/check.html
+    const TRUST_HC = 1;                                                                  
+    const TRUST_BC = 2;
+    const TRUST_BC_CHECK = 2.5;
+    const TRUST_BR = 3;
+    const TRUST_CHECK = 4;
+    const TRUST_REST = 5;
+    
     /** Separator used to build uids **/
     const SEP = '/';
     
-    /** Path pointing to 7-full **/
-    public static $DIR;
-    
-    /** Path pointing to 7-full/index **/
-    public static $DIR_INDEX;
-    
-    /** Path pointing to 7-full/group **/
-    public static $DIR_GROUP;
-    
-    /** Path pointing to 7-full/person **/
-    public static $DIR_PERSON;
-    
-    /** Path pointing to 7-full/source **/
-    public static $DIR_SOURCE;
+    /** Path pointing to 7-full **/ public static $DIR; 
+    /** Path pointing to 7-full/index **/ public static $DIR_INDEX; 
+    /** Path pointing to 7-full/group **/ public static $DIR_GROUP;
+    /** Path pointing to 7-full/person **/ public static $DIR_PERSON;
+    /** Path pointing to 7-full/source **/ public static $DIR_SOURCE;
     
     /**
         Pattern to check a date.
