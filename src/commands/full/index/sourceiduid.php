@@ -2,7 +2,7 @@
 /******************************************************************************
     Rebuilds
     
-    data/7-full/index/source/id-uid.txt
+    data/7-full/tmp/index/source/id-uid.txt
     
     @license    GPL
     @history    2020-06-03 01:24:09+02:00, Thierry Graff : Creation
