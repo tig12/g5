@@ -19,13 +19,15 @@ use tiglib\arrays\csvAssociative;
 
 class Muller402 implements SourceI{
     
+    const TRUST = DB5::TRUST_CHECK;
+    
     /** id in g5 db when this class represents a source **/
     const ID_SOURCE = 'muller402';
     
     /** uid in g5 db when this class represents a source **/
     const UID_SOURCE = 'source' . DB5::SEP . 'web' . DB5::SEP . 'newalch' .  DB5::SEP . 'muller402';
     
-    const TRUST = DB5::TRUST_CHECK;
+    const UID_GROUP_PREFIX = 'group' . DB5::SEP . 'datasets' . DB5::SEP . 'newalch' .  DB5::SEP . 'muller402';
     
     /** 
         Path to raw file, relative to data/1-raw from config.yml

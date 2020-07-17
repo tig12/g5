@@ -1,3 +1,20 @@
+document:
+  history: []
+
+# unique within db5
 uid: 
+
+# unique within groups
+id: 
+
+name:
+
+description: |
+  
+N: 
+
+source:
+  parent:
+  notes: |
 
 members: []

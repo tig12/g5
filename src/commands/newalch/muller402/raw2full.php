@@ -63,18 +63,12 @@ class raw2full implements Command{
             $p->addOccu('WRI'); /////// HERE put wikidata occupation id ///////////
             
             preg_match($pname, $fields[0], $m);
-            if(count($m) != 4){
-                // doesn't happen anymore - @todo remove
-                echo "\n"; print_r($m); echo "\n";
-                echo "\n<pre>"; print_r($fields); echo "</pre>\n"; exit;
-            }
             
             $sex = $m[2];
             if($sex != 'M' && $sex != 'F'){
                 // happens only for 478K Villaruel, Giuseppe
                 // Comparision with scan of original Müller's AFD shows it's a OCR error
                 // => included here, not in tweaks
-                //echo "\n"; print_r($fields); echo "\n";
                 $sex='M';
             }
             
@@ -83,29 +77,37 @@ class raw2full implements Command{
             
             
             $nameFields = explode(',', $m[3]);
-            if(count($nameFields) != 2){
+            if(count($nameFields) == 2){
+                // normal case
+                $new['name']['family'] = $nameFields[0];
+                $new['name']['given'] = trim($nameFields[1]);
+                $new['name']['usual'] = $new['name']['given'] . ' ' . $new['name']['family'];
+            }
+            else{
+                // temporary fixes
+                // @todo should be verified and included in tweaks
                 // echo "\n<pre>"; print_r($nameFields); echo "</pre>\n";           
                 // echo "\n<pre>"; print_r($fields); echo "</pre>\n"; continue;
-                // temporary fixes - @todo should be verified and included in tweaks
                 if($mullerId == '310M' || $mullerId == '387M'){
                     $new['name']['family'] = $nameFields[0];
                     $new['name']['given'] = '';
                     $new['name']['usual'] = $new['name']['family'];
                 }
             }
-            else{
-                // normal case, should not be in a else after corrections of temporary fixes
-                $new['name']['family'] = $nameFields[0];
-                $new['name']['given'] = trim($nameFields[1]);
-                $new['name']['usual'] = $new['name']['given'] . ' ' . $new['name']['family'];
+            
+            $new['sex'] = $sex;
+            
+            $new['birth']['date'] = $fields[1].'-'.$fields[2].'-'.$fields[3];
+            if($fields[4] != '' && $fields[5] != ''){
+                $new['birth']['date'] .= ' '.$fields[4].':'.$fields[5];
             }
-            $new['birth']['date'] = $fields[1].'-'.$fields[2].'-'.$fields[3].' '.$fields[4].':'.$fields[5];
+            $new['birth']['tz'] = '';
             preg_match($pplace, $fields[7], $m);
             $new['birth']['place']['name'] = $m[1];
             $new['birth']['place']['c2'] = $m[2];
             $new['birth']['place']['cy'] = 'IT';
-            $new['birth']['place']['lg'] = -(int)$fields[9]; // minus sign, correction from raw here
-            $new['birth']['place']['lat'] = $fields[8];
+            $new['birth']['place']['lg'] = self::lglat(-(int)$fields[9]); // minus sign, correction from raw here
+            $new['birth']['place']['lat'] = self::lglat($fields[8]);
             $new['birth']['tz'] = self::compute_offset($fields[6], $new['birth']['place']['lg']);
             
             // log command effect on data in the person yaml
@@ -113,10 +115,9 @@ class raw2full implements Command{
             
             $p->update($new);
             //$p->clean();
-//echo "\np : "; print_r($p);
             $nb_stored ++;
+            $p->save(); // HERE save to disk
             $g->add($p->uid());
-//            $p->save(); // HERE save to disk
 //break;
         }
         $g->save(); // HERE save to disk
@@ -126,6 +127,14 @@ class raw2full implements Command{
         return $report;
     }
     
+    
+    // ******************************************************
+    /**
+        @param $
+    **/
+    private static function lglat(string $str): string {
+        return str_replace(',', '.', $str);
+    }
     
     // ******************************************************
     /**

@@ -59,11 +59,15 @@ class Group{
     
     public function file($full=true): string {
         $res = $full ? DB5::$DIR . DB5::SEP : '';
+        $res .= 'tmp/'; // WARNING HACK
         $res .= $this->uid() . '.txt';
         return str_replace(DB5::SEP, DS, $res);
     }
     
-    /** Read from disk **/
+    /**
+        Read from disk
+        txt files in 7-full/tmp/group
+    **/
     public function load(){
         $path = $this->file();
         if(!is_file($path)){
@@ -94,7 +98,7 @@ class Group{
     }
     
     /** 
-        Generates a csv
+        Generates a csv from its members
             first line contains field names
             other lines contain data
         @param $csvFile 
@@ -121,9 +125,12 @@ class Group{
                             return implode('+', $p->data['occus']);
                         },
                     ];
+        @param $filters Regular array of functions returning a boolean
+                        If one of these functions returns false on a group member,
+                        export() skips the record.
         
     **/
-    public function exportCsv($csvFile, $csvFields, $map=[], $fmap=[]){
+    public function exportCsv($csvFile, $csvFields, $map=[], $fmap=[], $filters=[]){
         
         $csv = implode(G5::CSV_SEP, $csvFields) . "\n";
         
@@ -131,8 +138,16 @@ class Group{
         
         foreach($this->data['members'] as $puid){
             $p = Person::new($puid);
+            // filters
+            foreach($filters as $function){
+                echo $p->slug() . "\n";
+                echo ($function($p) ? 'true' : 'false') . "\n";
+                if(!$function($p)){
+                    continue 2;
+                }
+            }
             $new = $emptyNew;
-            // transfer infos from $p->data to $new
+            // map
             foreach($map as $personKey => $csvKey){
                 $pks = explode('.', $personKey); // @todo put '.' in a constant
                 $data = null;
@@ -144,6 +159,7 @@ class Group{
                 }
                 $new[$csvKey] = $data;
             }
+            // fmap
             foreach($fmap as $csvKey => $function){
                 $new[$csvKey] = $function($p);
             }

@@ -24,11 +24,11 @@ class DB5{
     /** Separator used to build uids **/
     const SEP = '/';
     
-    /** Path pointing to 7-full **/ public static $DIR; 
-    /** Path pointing to 7-full/tmp/index **/ public static $DIR_INDEX; 
-    /** Path pointing to 7-full/group **/ public static $DIR_GROUP;
-    /** Path pointing to 7-full/person **/ public static $DIR_PERSON;
-    /** Path pointing to 7-full/source **/ public static $DIR_SOURCE;
+    /** Path pointing to 7-full **/             public static $DIR; 
+    /** Path pointing to 7-full/tmp/index **/   public static $DIR_INDEX; 
+    /** Path pointing to 7-full/group **/       public static $DIR_GROUP;
+    /** Path pointing to 7-full/person **/      public static $DIR_PERSON;
+    /** Path pointing to 7-full/source **/      public static $DIR_SOURCE;
     
     /**
         Pattern to check a date.

@@ -45,31 +45,53 @@ class Person{
         ex : person/1811/10/25/galois-evariste
     **/
     public function uid() : string {
-        if($this->data['uid'] != ''){
+        if($this->data['uid']){
             return $this->data['uid'];
         }
-        $slug = $this->slug($short=true);                        
+        // Build the uid from slug
+        $slug = $this->slug(true);                        
         $date = $this->birthday();
         if($date == ''){
-            return implode(DB5::SEP, ['lost', 'person', $slug]);
+            return implode(DB5::SEP, ['tmp', 'lost', 'person', $slug]);
         }
         [$y, $m, $d] = explode('-', $date);
         return implode(DB5::SEP, ['person', $y, $m, $d, $slug]);
     }
     
     /**
-        A string which can be used in an url
+        A string which can be used in a url
         ex:
         if $short = false : galois-evariste-1811-10-25
         if $short = true  : galois-evariste
+        @pre    The person must have a valid uid
     **/
     public function slug($short=false): string {
-        if($short){            
-            // galois-evariste
-            return slugify::compute($this->data['name']['family'] . '-' . $this->data['name']['given']);
+        if($this->data['uid']){
+            // ex of uid : person/1898/05/22/acito-alfredo
+            preg_match('#person/(\d{4})/(\d{2})/(\d{2})/(.*)#', $this->uid(), $m);
+            if(count($m) != 5){
+                throw new Exception("INVALID PERSON UID : " . $this->uid());
+            }
+            if($short){
+                return $m[4];
+            }
+            return $m[4] . '-' . $m[1] . '-' . $m[2] . '-' . $m[3];
         }
-        // galois-evariste-1811-10-25
-        return slugify::compute($this->data['name']['family'] . '-' . $this->data['name']['given'] . '-' . $this->birthday());
+        else if($this->data['name']['family']){
+            $name = $this->data['name']['family'] . (isset($this->data['name']['given']) ? ' ' . $this->data['name']['given'] : '');
+            if($short){
+                // galois-evariste
+                return slugify::compute($name);
+            }
+            if($this->birthday()){
+                // galois-evariste-1811-10-25
+                return slugify::compute($name . '-' . $this->birthday());
+            }
+            return slugify::compute($name);
+        }
+        else{
+            throw new Exception("Person->slug() computation impossible - needs either uid or family name");
+        }
     }
     
     /**
@@ -123,7 +145,8 @@ class Person{
         //$this->data['file'] = $this->file();
 //        $this->clean();
         file_put_contents($this->file(), yaml_emit($this->data));
-//echo "___ file_put_contents " . $this->file() . "\n";
+        // @todo log diwk write
+        // echo "write on disk " . $this->file() . "\n";
     }
     
     // *********************** get *******************************
@@ -142,6 +165,7 @@ class Person{
         // Decision could be made to call addHistory() here to impose to trace all modifications
         //$this->addHistory();
         $this->data = array_replace_recursive($this->data, $replace);
+//echo "\n<pre>"; print_r($this); echo "</pre>\n"; exit;
         if($this->data['uid'] == ''){
             $this->data['uid'] = $this->uid();
         }

@@ -9,9 +9,18 @@ namespace g5\commands\newalch;
 
 use g5\model\DB5;
 
+Newalch::init();
+
 class Newalch{
     
     /** uid when newalch is used to create a group **/
     const UID_PREFIX_GROUP = 'group' . DB5::SEP . 'datasets' . DB5::SEP . 'newalch';
+    
+    /** Path where groups members are stored **/
+    public static $STORAGE_PATH;
+    
+    public static function init(){
+        self::$STORAGE_PATH = DB5::$DIR . DS . 'tmp' . DS . 'group' . DS . 'datasets' . DS . 'newalch'; 
+    }
     
 }// end class
