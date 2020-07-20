@@ -101,6 +101,14 @@ class raw2full implements Command{
             if($fields[4] != '' && $fields[5] != ''){
                 $new['birth']['date'] .= ' '.$fields[4].':'.$fields[5];
             }
+            
+            //
+            // keep only records with complete birth time (at least YYYY-MM-DD HH:MM)
+            //
+            if(strlen($new['birth']['date']) < 16){
+                continue;
+            }
+            
             $new['birth']['tz'] = '';
             preg_match($pplace, $fields[7], $m);
             $new['birth']['place']['name'] = $m[1];
@@ -120,8 +128,8 @@ class raw2full implements Command{
             $g->add($p->uid());
 //break;
         }
+echo "\ng : "; print_r($g); exit;
         $g->save(); // HERE save to disk
-//echo "\ng : "; print_r($g);
         $report .= "Wrote ".$g->file()."\n";
         $report .= "Stored $nb_stored records\n";
         return $report;

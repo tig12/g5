@@ -22,7 +22,7 @@ class export implements Command{
     // *****************************************
     // Implementation of Command
     /** 
-        Called by : php run-g5.php cura <datafile> export
+        Called by : php run-g5.php newalch muller402 export
         @param $params empty array 
         @return Report
     **/

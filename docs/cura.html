@@ -26,13 +26,14 @@
     <a class="topage" rel="" href="#topage">&#10148;</a>
     <a class="top" href="index.html">&uarr;</a>
     <a class="prev" rel="prev" href="output-format.html">&larr;</a>
-    <a class="next" rel="next" href="cura-A.html">&rarr;</a>
+    <a class="next" rel="next" href="cura-A.html">&rarr;</a>                                                                        
 </nav>
 
 <header>
 <h1>Cura data</h1>
 <div class="intro">
-The code working on Cura data is located in <code>src/commands/cura/</code>.
+Gauquelin5 program handles a subset of the data published on <a href="http://cura.free.fr/gauq/17archg.html">cura.free.fr</a>, only persons with names, famous persons.
+<br>The code working on Cura data is located in <code>src/commands/cura/</code>.
 </div>
 </header>
 
@@ -62,9 +63,24 @@ The code working on Cura data is located in <code>src/commands/cura/</code>.
 
 
 
+<!-- ********************************************************************************* -->
+<h2>Cura data with names</h2>
+<ul>
+    <li>A1 : 2088 sports champions</li>
+    <li>A2 : 3644 scientists and medical doctors</li>
+    <li>A3 : 3047 military men</li>
+    <li>A4 : 1473 painters and 1249 French musicians</li>
+    <li>A5 : 1409 actors and 1003 politicians</li>
+    <li>A6 : 2027 writers and journalists</li>
+    <li>D6 : 450 New famous European Sports Champions</li>
+    <li>D10 : 1398 data of successful Americans</li>
+    <li>E1 : 2154 French Physicians, Military Men and Executives</li>
+    <li>E3 : 1540 New French Writers, Artists, Actors, Politicians and Journalists</li>
+    <!-- 2088+3644+3047+1473+1409+2027+450+1398+2154+1540 -->
+</ul>
 
-
-Gauquelin data published on <a href="http://cura.free.fr/gauq/17archg.html">cura.free.fr</a> are available as html web pages.
+<br>Total of <span class="bold big2">19 230</span> birth dates with times.
+<br>Numbers given by Cura.
 
 <!-- ********************************************************************************* -->
 <h2><a name="download-cura-data">Download cura data</a></h2>
@@ -193,8 +209,6 @@ Other transformations (between <code>raw2csv</code> and <code>export</code>) mod
 <h2><a name="export">export</a></h2>
 For all cura files, the last step is to copy the csv file in <code>5-cura-csv/</code> to the directory containing downloadable files : <code>9-cura/</code>.
 <br>This is done by step <code>export</code>. This step only copies the file from a directory to an other, and does nothing else.
-<br>
-<br>This step is bound to be suppressed, when wikidata integration is developed.
 
 
 </article>
