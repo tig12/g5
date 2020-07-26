@@ -79,8 +79,7 @@ class legalTime implements Command{
             $offset2seconds = HHMMSS2seconds::compute($offset2);
             $delta = $offset2seconds - $offset1seconds;
             $abs = abs($delta);
-//            if($offset2 != $offset1){
-            if($abs != 0){
+            if($abs != 0){ // $offset2 != $offset1
                 // DATE_C = DATE with hour and offset modified
                 $t = new \DateTime($row1['DATE']);
                 $interval = new \DateInterval('PT' . $abs . 'S');

@@ -43,6 +43,27 @@ class Cura{
         'E1', 'E3',
     ];
     
+    /** 
+        For documentation purpose only
+        For each line :
+            - nb of records claimed bu Cura
+            - label on Cura web site
+            - explanation of the difference between Cura and g5 numbers
+    **/
+    const CURA_CLAIMS = [
+    'A1' => [2088, '2088 sports champions', 'Y, see <a href="http://cura.free.fr/gauq/902gdA1y.html">Cura web site</a>'],
+    'A2' => [3644, '3644 scientists and medical doctors', 'Y, see <a href="http://cura.free.fr/gauq/902gdA2y.html">Cura web site</a>'],
+    'A3' => [3047, '3047 military men', 'N'],
+    'A4' => [2722, '1473 painters and 1249 French musicians', 'N'],
+    'A5' => [2412, '1409 actors and 1003 politicians', 'N'],
+    'A6' => [2027, '2027 writers and journalists', 'N'],
+    'D6' => [450,  '450 New famous European Sports Champions', 'N'],
+    'D10' => [1398, '1398 data of successful Americans', 'N'],
+    'E1' => [2154, '2154 French Physicians, Military Men and Executives', 'N'],
+    'E3' => [1540, '1540 New French Writers, Artists, Actors, Politicians and Journalists', 'N'],
+    ];
+    
+    
     /**
         Names of the columns in files of 5-cura-csv/
         @todo Problem with this constant :

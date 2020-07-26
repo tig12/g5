@@ -75,6 +75,8 @@ table.alternate tr:nth-child(odd) {background: #ddd}
 
 .center{text-align:center;}
 .justify{text-align:justify;}
+.right{text-align:right;}
+.left{text-align:left;}                     
 
 .vertical-align-top{vertical-align:top;}
 .vertical-align-middle{vertical-align:middle;}

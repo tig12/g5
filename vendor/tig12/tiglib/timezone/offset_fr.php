@@ -1,6 +1,15 @@
 <?php
 /******************************************************************************
-    Improves php computation of timezone for France.
+    Computation of timezone offset for France.
+    - Takes into account the fact that Alsace and a part of Lorraine were german between 1870 and 1918
+    - Takes into account the fact that before 1891-03-15, local hour was used
+    BUT NOT EXACT :
+    - some part of dept 54 was also german between 1871 and 1918
+        => a precise computation should take into account the precise local situation
+    - Some parts of depts 06, 04, 26, 74, 73 were not french before 1860
+    - Between 1940-02 and 1942-11, France was divided in 2 zones (occupied and free)
+        => a precise computation should take into account the precise local situation
+    Computations are based on "Traité de l'heure dans le monde", 5th edition, 1990
 
     @license    GPL
     @history    2017-01-03 00:09:55+01:00, Thierry Graff : Creation 
@@ -16,20 +25,11 @@ class offset_fr{
     
     // ******************************************************
     /**
-        Improves php computation of timezone offset for France.
-        - Takes into account the fact that Alsace and a part of Lorraine were german between 1870 and 1918
-        - Takes into account the fact that before 1891-03-15, local hour was used
-        BUT NOT EXACT :
-        - some part of dept 54 was also german between 1871 and 1918
-            => a precise computation should take into account the precise local situation
-        - Some parts of depts 06, 04, 26, 74, 73 were not french before 1860
-        - Between 1940-02 and 1942-11, France was divided in 2 zones (occupied and free)
-            => a precise computation should take into account the precise local situation
-        Computations are based on "Traité de l'heure dans le monde", 5th edition, 1990
-        @param  $date ISO 8601 date
-        @param  $lg longitude in decimal degrees
-        @param  $dept Département ("75" for Paris, "01" for Ain etc.)
-        @param  $format Can be 'HH:MM' or 'HH:MM:SS'
+        Computation of timezone offset for France.
+        @param  $date   ISO 8601 HH:MM or HH:MM:SS
+        @param  $lg     longitude in decimal degrees
+        @param  $dept   Département ("75" for Paris, "01" for Ain etc.)
+        @param  $format Format of the returned offset - Can be 'HH:MM' or 'HH:MM:SS'
         
         @return array with 3 elements : 
                 - the timezone offset, format sHH:MM (ex : '-01:00' ; '+00:23') 
@@ -37,7 +37,7 @@ class offset_fr{
                 - an error message ; empty string if offset could be computed without ambiguity.
                 - an integer indicating the kind of computation involved (see code, variable $case).
                 
-        @todo   Implementation of computation taking into account the precise local situation
+        @todo   Implementation of computation taking into account the precise local situations
                 would need also a latitude parameter
         @todo   Consider equation of time for dates < 1891-03-15
     **/

@@ -32,7 +32,7 @@
 <header>
 <h1>Cura data</h1>
 <div class="intro">
-Gauquelin5 program handles a subset of the data published on <a href="http://cura.free.fr/gauq/17archg.html">cura.free.fr</a>, only persons with names, famous persons.
+Gauquelin5 program handles a subset of the data published on <a href="http://cura.free.fr/gauq/17archg.html">cura.free.fr</a> : only persons with known names (famous persons).
 <br>The code working on Cura data is located in <code>src/commands/cura/</code>.
 </div>
 </header>
@@ -65,22 +65,26 @@ Gauquelin5 program handles a subset of the data published on <a href="http://cur
 
 <!-- ********************************************************************************* -->
 <h2>Cura data with names</h2>
-<ul>
-    <li>A1 : 2088 sports champions</li>
-    <li>A2 : 3644 scientists and medical doctors</li>
-    <li>A3 : 3047 military men</li>
-    <li>A4 : 1473 painters and 1249 French musicians</li>
-    <li>A5 : 1409 actors and 1003 politicians</li>
-    <li>A6 : 2027 writers and journalists</li>
-    <li>D6 : 450 New famous European Sports Champions</li>
-    <li>D10 : 1398 data of successful Americans</li>
-    <li>E1 : 2154 French Physicians, Military Men and Executives</li>
-    <li>E3 : 1540 New French Writers, Artists, Actors, Politicians and Journalists</li>
-    <!-- 2088+3644+3047+1473+1409+2027+450+1398+2154+1540 -->
-</ul>
 
-<br>Total of <span class="bold big2">19 230</span> birth dates with times.
-<br>Numbers given by Cura.
+Comparison between numbers claimed on Cura web site and numbers found by g5 :
+
+<table class="count-A wikitable margin">
+<tr><th>File</th><th>Cura claims</th><th>N <sub>Cura</sub></th><th>N <sub>g5</sub></th><th>&Delta;</th><th>Explanation</th></tr>
+<tr><td>A1</td><td>2088 sports champions</td><td class="right">2 088</td><td class="right bold">2 087</td><td>1</td><td>Y, see <a href="http://cura.free.fr/gauq/902gdA1y.html">Cura web site</a></td></tr>
+<tr><td>A2</td><td>3644 scientists and medical doctors</td><td class="right">3 644</td><td class="right bold">3 643</td><td>1</td><td>Y, see <a href="http://cura.free.fr/gauq/902gdA2y.html">Cura web site</a></td></tr>
+<tr><td>A3</td><td>3047 military men</td><td class="right">3 047</td><td class="right bold">3 046</td><td>1</td><td>N</td></tr>
+<tr><td>A4</td><td>1473 painters and 1249 French musicians</td><td class="right">2 722</td><td class="right bold">2 720</td><td>2</td><td>N</td></tr>
+<tr><td>A5</td><td>1409 actors and 1003 politicians</td><td class="right">2 412</td><td class="right bold">2 410</td><td>2</td><td>N</td></tr>
+<tr><td>A6</td><td>2027 writers and journalists</td><td class="right">2 027</td><td class="right bold">2 026</td><td>1</td><td>N</td></tr>
+<tr><td>D6</td><td>450 New famous European Sports Champions</td><td class="right">450</td><td class="right bold">449</td><td>1</td><td>N</td></tr>
+<tr><td>D10</td><td>1398 data of successful Americans</td><td class="right">1 398</td><td class="right bold">1 396</td><td>2</td><td>N</td></tr>
+<tr><td>E1</td><td>2154 French Physicians, Military Men and Executives</td><td class="right">2 154</td><td class="right bold">2 153</td><td>1</td><td>N</td></tr>
+<tr><td>E3</td><td>1540 New French Writers, Artists, Actors, Politicians and Journalists</td><td class="right">1 540</td><td class="right bold">1 539</td><td>1</td><td>N</td></tr>
+<tr class="big2"><td colspan="2" class="right">TOTAL</td><td class="right">21 482</td><td class="right bold">21 469</td></tr>
+</table>
+
+&Delta; column = N <sub>Cura</sub> - N <sub>g5</sub>, difference between number of records claimed by Cura and and numbers found by g5.
+<br>Most of these differences have no known explanation, it looks like mistakes on Cura web site.
 
 <!-- ********************************************************************************* -->
 <h2><a name="download-cura-data">Download cura data</a></h2>
