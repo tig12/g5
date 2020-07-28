@@ -1,0 +1,19 @@
+
+Timezone offset computation
+
+PHP uses "Olson database"
+https://www.iana.org/time-zones
+This handles cases when the tz offset is the same for a whole country.
+Code of this package contains computations for periods when offset computation depends on local conditions.
+
+Code is based on 2 books
+- THM : "Traité de l'heure dans le monde", (Gabriel, Guy Trédaniel éditeur), 5th edition, 1990
+- FG  : "Problèmes de l'heure résolus pour le monde entier" (Françoise Gauquelin, Guy Trédaniel éditeur), 1991
+
+Referred as THM and FG in the comments.
+
+Computations return offsets conform to ISO 8601 and Olson database :
+(LT = legal time)
+TU = LT - offset
+or LT = TU + offset
+This is the opposite of offsets given in both books (called DTU in THM).

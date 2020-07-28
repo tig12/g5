@@ -45,7 +45,7 @@ WORK IN PROGRESS
 <!-- ********************************************************************************* -->
 <h2>Origin</h2>
 Data available from <a href="https://newalchemypress.com/gauquelin/gauquelin_docs/5muller_writers.xlsx">5muller_writers.xlsx</a> from <a href="https://newalchemypress.com/gauquelin/research5.php">newalchemypress.com</a>.
-<br>It is an electronic version of Müller's <i>Astro-Forschungs-Daten</i> (AFD).
+<br>This file is an electronic version of Müller's <i>Astro-Forschungs-Daten</i> (AFD).
 
 <!-- ************************************* -->
 <h3>Publication</h3>
@@ -63,6 +63,7 @@ Data available from <a href="https://newalchemypress.com/gauquelin/gauquelin_doc
     <li>The Tenacious Mars Effect, KI 37</li>
     <li><a href="http://cura.free.fr/cura2/903bdn1.html">cura.free.fr 903bdn1.html</a></li>
     <li><a href="https://newalchemypress.com/gauquelin/research5.php">newalchemypress.com research5.php</a></li>
+    <li>Book "The Gauquelin effect, reloaded", by Nick Kollerstrom, 2019, New Alchemy Press, p. 125</li>
 </ul>
 
 <!-- ************************************* -->
@@ -83,6 +84,595 @@ php run-g5.php newalch muller402 addA6
 
 <!-- ************************************* -->
 <h3>addA6</h3>
+Cura A6 file contains 194 italian writers : NUM 31 (Guillaume Apolinaire) and from NUM 814 to 1006
+<br>One writer (NUM 31, Guillaume Apolinaire) is present in A6 but not in M402.
+<br>This makes <b>193</b> common records between A6 and M402.
+<br>Müller 402 then brings 402 - 193 = <b>209</b> new birth times.
+
+<style>tr.spacer{height:2px} .diff{background:lightyellow;}</style>
+<table class="wikitable margin">
+    <tr><th></th><th>Id</th><th>Family name</th><th>Given name</th><th>Birth date</th><th>Birth place</th><th>C2</th></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>814</td><td>Acquaviva</td><td>Cosimo</td><td class="diff">1884-08-20 13:40:04-01:00</td><td>Taranto</td><td>TA</td></tr>
+    <tr><th>M402</th><td>2</td><td>Acquaviva</td><td>Cosimo</td><td class="diff">1884-08-20 13:30 +00:00</td><td>Taranto</td><td>TA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>815</td><td>Adami</td><td>Giuseppe</td><td class="diff">1878-02-04 04:25:04-01:00</td><td>Verona</td><td class="diff">VR</td></tr>
+    <tr><th>M402</th><td>3</td><td>Adami</td><td>Giuseppe</td><td class="diff">1878-02-04 04:15 +00:00</td><td>Verona</td><td class="diff">VE</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>816</td><td>Alessio</td><td>Luigi</td><td class="diff">1902-05-08 19:00:00-01:00</td><td class="diff">CARAMAGNA</td><td>CN</td></tr>
+    <tr><th>M402</th><td>6</td><td>Alessio</td><td>Luigi</td><td class="diff">1902-05-08 19:00 +01:00</td><td class="diff">Caramagna</td><td>CN</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>817</td><td>Alliney</td><td>Giulio</td><td class="diff">1908-05-02 04:00:00-01:00</td><td>Cantello</td><td>VA</td></tr>
+    <tr><th>M402</th><td>7</td><td>Alliney</td><td>Giulio</td><td class="diff">1908-05-02 04:00 +01:00</td><td>Cantello</td><td>VA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>818</td><td>Aniante</td><td>Antonio</td><td class="diff">1900-01-02 09:00:00-01:00</td><td>Viagrande</td><td>CT</td></tr>
+    <tr><th>M402</th><td>15</td><td>Aniante</td><td>Antonio</td><td class="diff">1900-01-02 09:00 +01:00</td><td>Viagrande</td><td>CT</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>819</td><td>Ardau</td><td>Giuseppe</td><td class="diff">1889-03-10 13:10:04-01:00</td><td>Cagliari</td><td>CA</td></tr>
+    <tr><th>M402</th><td>21</td><td>Ardau</td><td>Giuseppe</td><td class="diff">1889-03-10 01:00 +00:00</td><td>Cagliari</td><td>CA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>820</td><td>Bacchelli</td><td>Riccardo</td><td class="diff">1891-04-19 12:10:04-01:00</td><td>Bologna</td><td>BO</td></tr>
+    <tr><th>M402</th><td>26</td><td>Bacchelli</td><td>Riccardo</td><td class="diff">1891-04-19 12:00 +00:00</td><td>Bologna</td><td>BO</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>821</td><td>Baganzani</td><td>Sandro</td><td class="diff">1889-02-08 15:10:04-01:00</td><td>Verona</td><td class="diff">VR</td></tr>
+    <tr><th>M402</th><td>29</td><td>Baganzani</td><td>Sandro</td><td class="diff">1889-02-08 15:00 +00:00</td><td>Verona</td><td class="diff">VE</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>822</td><td>Barbantini</td><td>Nino</td><td class="diff">1884-07-05 06:40:04-01:00</td><td>Ferrara</td><td>FE</td></tr>
+    <tr><th>M402</th><td>31</td><td>Barbantini</td><td>Nino</td><td class="diff">1884-07-05 06:30 +00:00</td><td>Ferrara</td><td>FE</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>823</td><td>Barbarani</td><td>Berto</td><td class="diff">1872-12-03 02:40:04-01:00</td><td>Verona</td><td class="diff">VR</td></tr>
+    <tr><th>M402</th><td>32</td><td>Barbarani</td><td>Berto</td><td class="diff">1872-12-03 02:30 +00:00</td><td>Verona</td><td class="diff">VE</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>824</td><td>Barbaro</td><td>Umberto</td><td class="diff">1902-01-03 19:30:00-01:00</td><td>Acireale</td><td>CT</td></tr>
+    <tr><th>M402</th><td>33</td><td>Barbaro</td><td>Umberto</td><td class="diff">1902-01-03 19:30 +01:00</td><td>Acireale</td><td>CT</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>825</td><td>Bargellini</td><td>Piero</td><td class="diff">1897-08-05 03:45:00-01:00</td><td>Firenze</td><td>FI</td></tr>
+    <tr><th>M402</th><td>34</td><td>Bargellini</td><td>Piero</td><td class="diff">1897-08-05 03:45 +01:00</td><td>Firenze</td><td>FI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>826</td><td>Benelli</td><td>Sem</td><td class="diff">1877-08-12 07:40:04-01:00</td><td class="diff">PRATO IN TOSCAN</td><td>FI</td></tr>
+    <tr><th>M402</th><td>40</td><td>Benelli</td><td>Sem</td><td class="diff">1877-08-12 07:30 +00:00</td><td class="diff">Prate</td><td>FI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>827</td><td>Berrini</td><td>Nino</td><td class="diff">1880-07-02 15:10:04-01:00</td><td>Cuneo</td><td>CN</td></tr>
+    <tr><th>M402</th><td>48</td><td>Berrini</td><td>Nino</td><td class="diff">1880-07-02 15:00 +00:00</td><td>Cuneo</td><td>CN</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>828</td><td>Betocchi</td><td>Carlo</td><td class="diff">1899-01-23 08:05:00-01:00</td><td class="diff">TORINO</td><td>TO</td></tr>
+    <tr><th>M402</th><td>51</td><td>Betocchi</td><td>Carlo</td><td class="diff">1899-01-23 08:05 +01:00</td><td class="diff">Torino</td><td>TO</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>829</td><td>Betti</td><td>Ugo</td><td class="diff">1892-02-04 04:12:04-01:00</td><td>Camerino</td><td>MC</td></tr>
+    <tr><th>M402</th><td>52</td><td>Betti</td><td>Ugo</td><td class="diff">1892-02-04 04:02 +00:00</td><td>Camerino</td><td>MC</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>830</td><td>Bevilacqua</td><td>Giuseppe</td><td class="diff">1891-07-16 15:40:04-01:00</td><td>Vicenza</td><td>VI</td></tr>
+    <tr><th>M402</th><td>53</td><td>Bevilacqua</td><td>Giuseppe</td><td class="diff">1891-07-16 15:30 +00:00</td><td>Vicenza</td><td>VI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>831</td><td>Bigiaretti</td><td>Libero</td><td class="diff">1905-05-16 06:00:00-01:00</td><td>Matelica</td><td>MC</td></tr>
+    <tr><th>M402</th><td>54</td><td>Bigiaretti</td><td>Libero</td><td class="diff">1905-05-16 06:00 +01:00</td><td>Matelica</td><td>MC</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>832</td><td>Bolla</td><td class="diff">Nino</td><td class="diff">1896-05-21 10:00:00-01:00</td><td>Saluzzo</td><td>CN</td></tr>
+    <tr><th>M402</th><td>61</td><td>Bolla</td><td class="diff">Giovanni</td><td class="diff">1896-05-21 10:00 +01:00</td><td>Saluzzo</td><td>CN</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>833</td><td>Bonardi</td><td>Edoardo</td><td class="diff">1896-03-21 07:15:00-01:00</td><td>Lucca</td><td>LU</td></tr>
+    <tr><th>M402</th><td>62</td><td>Bonardi</td><td>Edoardo</td><td class="diff">1896-03-21 07:15 +01:00</td><td>Lucca</td><td>LU</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>834</td><td>Bonelli</td><td>Luigi</td><td class="diff">1892-07-18 01:10:04-01:00</td><td>Siena</td><td>SI</td></tr>
+    <tr><th>M402</th><td>63</td><td>Bonelli</td><td>Luigi</td><td class="diff">1892-07-18 01:00 +00:00</td><td>Siena</td><td>SI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>835</td><td>Bongiovanni</td><td class="diff">Giametto</td><td class="diff">1890-11-08 22:40:04-01:00</td><td>Dosolo</td><td>MN</td></tr>
+    <tr><th>M402</th><td>64</td><td>Bongiovanni</td><td class="diff">Giannetto</td><td class="diff">1890-11-08 22:30 +00:00</td><td>Dosolo</td><td>MN</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>836</td><td>Bonsanti</td><td>Alessandro</td><td class="diff">1904-11-25 03:30:00-01:00</td><td>Firenze</td><td>FI</td></tr>
+    <tr><th>M402</th><td>65</td><td>Bonsanti</td><td>Alessandro</td><td class="diff">1904-11-25 03:30 +01:00</td><td>Firenze</td><td>FI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>837</td><td>Bontempelli</td><td>Massimo</td><td class="diff">1878-05-12 00:40:04-01:00</td><td>Como</td><td>CO</td></tr>
+    <tr><th>M402</th><td>66</td><td>Bontempelli</td><td>Massimo</td><td class="diff">1878-05-12 12:00 +00:00</td><td>Como</td><td>CO</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>838</td><td>Brancati</td><td>Vitaliano</td><td class="diff">1907-07-24 20:00:00-01:00</td><td>Pachino</td><td>SR</td></tr>
+    <tr><th>M402</th><td>70</td><td>Brancati</td><td>Vitaliano</td><td class="diff">1907-07-24 20:00 +01:00</td><td>Pachino</td><td>SR</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>839</td><td>Brunelli</td><td>Bruno</td><td class="diff">1885-12-07 06:10:04-01:00</td><td>Padova</td><td>PD</td></tr>
+    <tr><th>M402</th><td>75</td><td>Brunelli</td><td>Bruno</td><td class="diff">1885-12-07 06:00 +00:00</td><td>Padova</td><td>PD</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>840</td><td>Burrascano</td><td class="diff">Nino</td><td class="diff">1884-01-01 06:10:04-01:00</td><td>Castroreale</td><td class="diff">ME</td></tr>
+    <tr><th>M402</th><td>76</td><td>Burrascano</td><td class="diff">Nine</td><td class="diff">1884-01-01 06:00 +00:00</td><td>Castroreale</td><td class="diff">HE</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>841</td><td>Busetto</td><td>Andrea</td><td class="diff">1888-08-09 12:10:04-01:00</td><td>Venezia</td><td>VE</td></tr>
+    <tr><th>M402</th><td>77</td><td>Busetto</td><td>Andrea</td><td class="diff">1888-08-09 23:59 +00:00</td><td>Venezia</td><td>VE</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>842</td><td>Caja</td><td>Alessandro</td><td class="diff">1871-01-19 22:10:04-01:00</td><td>Avola</td><td>SR</td></tr>
+    <tr><th>M402</th><td>81</td><td>Caja</td><td>Alessandro</td><td class="diff">1871-01-19 22:00 +00:00</td><td>Avola</td><td>SR</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>843</td><td>Calitri</td><td>Antonio</td><td class="diff">1875-06-07 12:55:04-01:00</td><td>Panni</td><td>FG</td></tr>
+    <tr><th>M402</th><td>82</td><td>Calitri</td><td>Antonio</td><td class="diff">1875-06-07 00:46 +00:00</td><td>Panni</td><td>FG</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>844</td><td>Capitini</td><td>Aldo</td><td class="diff">1899-12-23 23:00:00-01:00</td><td>Perugia</td><td>PG</td></tr>
+    <tr><th>M402</th><td>92</td><td>Capitini</td><td>Aldo</td><td class="diff">1899-12-23 23:00 +01:00</td><td>Perugia</td><td>PG</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>845</td><td>Capruzzi</td><td>Vincenzo</td><td class="diff">1895-07-30 06:00:00-01:00</td><td>Bari</td><td>BA</td></tr>
+    <tr><th>M402</th><td>94</td><td>Capruzzi</td><td>Vincenzo</td><td class="diff">1895-07-30 06:00 +01:00</td><td>Bari</td><td>BA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>846</td><td>Cardone</td><td class="diff">Domenico</td><td class="diff">1902-01-21 15:15:00-01:00</td><td>Palmi</td><td>RC</td></tr>
+    <tr><th>M402</th><td>96</td><td>Cardone</td><td class="diff">Domenico Antonio</td><td class="diff">1902-01-21 15:15 +01:00</td><td>Palmi</td><td>RC</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>847</td><td>Carletti</td><td>Ercole</td><td class="diff">1877-11-06 21:40:04-01:00</td><td>Udine</td><td>UD</td></tr>
+    <tr><th>M402</th><td>97</td><td>Carletti</td><td>Ercole</td><td class="diff">1877-11-06 21:30 +00:00</td><td>Udine</td><td>UD</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>848</td><td>Cartella</td><td class="diff">Giuseppe</td><td class="diff">1885-09-01 03:10:04-01:00</td><td>Messina</td><td>ME</td></tr>
+    <tr><th>M402</th><td>100</td><td>Cartella</td><td class="diff">Gelardi Giuseppe</td><td class="diff">1885-09-01 03:00 +00:00</td><td>Messina</td><td>ME</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>849</td><td>Casella</td><td class="diff">Alberto</td><td class="diff">1891-11-01 09:10:04-01:00</td><td class="diff">PRATO</td><td>FI</td></tr>
+    <tr><th>M402</th><td>101</td><td>Casella</td><td class="diff">Alberta</td><td class="diff">1891-11-01 09:00 +00:00</td><td class="diff">Prate</td><td>FI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>850</td><td>Cavacchioli</td><td>Enrico</td><td class="diff">1885-03-15 09:25:04-01:00</td><td>Pozzallo</td><td>RG</td></tr>
+    <tr><th>M402</th><td>103</td><td>Cavacchioli</td><td>Enrico</td><td class="diff">1885-03-15 09:15 +00:00</td><td>Pozzallo</td><td>RG</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>851</td><td class="diff">Cavaliere</td><td class="diff">Alberto</td><td class="diff">1897-10-19 05:30:00-01:00</td><td>Cittanova</td><td>RC</td></tr>
+    <tr><th>M402</th><td>105</td><td class="diff">Cavaliers</td><td class="diff">Alberta</td><td class="diff">1897-10-19 05:30 +01:00</td><td>Cittanova</td><td>RC</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>852</td><td>Cecchi</td><td>Emilio</td><td class="diff">1884-07-04 21:10:04-01:00</td><td>Firenze</td><td>FI</td></tr>
+    <tr><th>M402</th><td>107</td><td>Cecchi</td><td>Emilio</td><td class="diff">1884-07-14 13:00 +00:00</td><td>Firenze</td><td>FI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>853</td><td>Chiapparini</td><td>Giovanni</td><td class="diff">1886-01-15 07:10:04-01:00</td><td>Faenza</td><td>RA</td></tr>
+    <tr><th>M402</th><td>112</td><td>Chiapparini</td><td>Giovanni</td><td class="diff">1886-01-15 07:00 +00:00</td><td>Faenza</td><td>RA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>854</td><td>Chini</td><td>Mario</td><td class="diff">1876-07-29 04:10:04-01:00</td><td class="diff">BORGO SAN LOREN</td><td>FI</td></tr>
+    <tr><th>M402</th><td>115</td><td>Chini</td><td>Mario</td><td class="diff">1876-07-21 04:20 +00:00</td><td class="diff">Borgo s. Lorenzo</td><td>FI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>855</td><td>Cinti</td><td>Decio</td><td class="diff">1878-08-10 12:40:04-01:00</td><td class="diff">FORLI</td><td>FO</td></tr>
+    <tr><th>M402</th><td>120</td><td>Cinti</td><td>Decio</td><td class="diff">1878-08-10 12:30 +00:00</td><td class="diff">Forli</td><td>FO</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>856</td><td>Cittadini</td><td>Armando</td><td class="diff">1882-06-12 07:40:04-01:00</td><td>Assisi</td><td>PG</td></tr>
+    <tr><th>M402</th><td>122</td><td>Cittadini</td><td>Armando</td><td class="diff">1882-06-12 07:30 +00:00</td><td>Assisi</td><td>PG</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>857</td><td>Comisso</td><td>Giovanni</td><td class="diff">1895-10-03 20:20:00-01:00</td><td>Treviso</td><td>TV</td></tr>
+    <tr><th>M402</th><td>126</td><td>Comisso</td><td>Giovanni</td><td class="diff">1895-10-03 20:20 +01:00</td><td>Treviso</td><td>TV</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>858</td><td>Conti</td><td class="diff">Guido</td><td class="diff">1906-06-29 03:30:00-01:00</td><td>Legnano</td><td>MI</td></tr>
+    <tr><th>M402</th><td>127</td><td>Conti</td><td class="diff">Guide</td><td class="diff">1906-06-29 03:30 +01:00</td><td>Legnano</td><td>MI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>859</td><td>Contu</td><td>Raffaele</td><td class="diff">1895-03-18 03:30:00-01:00</td><td class="diff">TORTOLI</td><td>NU</td></tr>
+    <tr><th>M402</th><td>128</td><td>Contu</td><td>Raffaele</td><td class="diff">1895-03-18 03:30 +01:00</td><td class="diff">Tortoli</td><td>NU</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>860</td><td class="diff">Correa D'Oliveira Emmanuele</td><td class="diff"></td><td class="diff">1887-05-12 16:35:04-01:00</td><td>Pisa</td><td>PI</td></tr>
+    <tr><th>M402</th><td>133</td><td class="diff">Correa d'Oliveira</td><td class="diff">Emanuele</td><td class="diff">1887-05-12 12:25 +00:00</td><td>Pisa</td><td>PI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>861</td><td>Cozzani</td><td>Ettore</td><td class="diff">1884-01-03 15:40:04-01:00</td><td>La Spezia</td><td>SP</td></tr>
+    <tr><th>M402</th><td>136</td><td>Cozzani</td><td>Ettore</td><td class="diff">1884-01-03 15:30 +00:00</td><td>La Spezia</td><td>SP</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>862</td><td>Croce</td><td>Benedetto</td><td class="diff">1866-02-25 14:06:00-01:00</td><td>Pescasseroli</td><td>AQ</td></tr>
+    <tr><th>M402</th><td>140</td><td>Croce</td><td>Benedetto</td><td class="diff">1866-02-25 14:00 +00:52:00</td><td>Pescasseroli</td><td>AQ</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>863</td><td>D'Aloisio</td><td>Nicola</td><td class="diff">1883-12-17 16:40:04-01:00</td><td>Vasto</td><td>CH</td></tr>
+    <tr><th>M402</th><td>145</td><td>D'Aloisio</td><td>Nicola</td><td class="diff">1883-12-17 16:30 +00:00</td><td>Vasto</td><td>CH</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>864</td><td>D'Annunzio</td><td>Gabriele</td><td class="diff">1863-03-12 08:02:00-01:00</td><td>Pescara</td><td>PE</td></tr>
+    <tr><th>M402</th><td>147</td><td>D'Annunzio</td><td>Gabriele</td><td class="diff">1863-03-12 08:00 +00:56:00</td><td>Pescara</td><td>PE</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>865</td><td>D'Aronco</td><td>Gianfranco</td><td class="diff">1920-10-19 02:00:00-01:00</td><td>Udine</td><td>UD</td></tr>
+    <tr><th>M402</th><td>148</td><td>D'Aronco</td><td>Gianfranco</td><td class="diff">1920-10-19 02:00 +01:00</td><td>Udine</td><td>UD</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>866</td><td>Delcroix</td><td>Carlo</td><td class="diff">1896-08-22 01:00:00-01:00</td><td>Firenze</td><td>FI</td></tr>
+    <tr><th>M402</th><td>156</td><td>Delcroix</td><td>Carlo</td><td class="diff">1896-08-22 01:00 +01:00</td><td>Firenze</td><td>FI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>867</td><td>Delfini</td><td>Antonio</td><td class="diff">1907-06-10 11:40:00-01:00</td><td>Modena</td><td>MO</td></tr>
+    <tr><th>M402</th><td>157</td><td>Delfini</td><td>Antonio</td><td class="diff">1907-06-10 11:44 +01:00</td><td>Modena</td><td>MO</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>868</td><td>De Libero</td><td>Libero</td><td class="diff">1906-09-11 01:10:00-01:00</td><td>Fondi</td><td>LT</td></tr>
+    <tr><th>M402</th><td>158</td><td>De Libero</td><td>Libero</td><td class="diff">1903-09-11 01:10 +01:00</td><td>Fondi</td><td>LT</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>869</td><td class="diff">Della Massea Angelo</td><td class="diff"></td><td class="diff">1892-12-17 08:10:04-01:00</td><td>Baschi</td><td>TR</td></tr>
+    <tr><th>M402</th><td>159</td><td class="diff">Della Massea</td><td class="diff">Angelo</td><td class="diff">1893-12-17 08:00 +01:00</td><td>Baschi</td><td>TR</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>870</td><td>De Maria</td><td>Federico</td><td class="diff">1883-07-21 07:40:04-01:00</td><td>Palermo</td><td>PA</td></tr>
+    <tr><th>M402</th><td>162</td><td>De Maria</td><td>Federico</td><td class="diff">1883-07-21 13:30 +00:00</td><td>Palermo</td><td>PA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>871</td><td>De Stefani</td><td>Alessandro</td><td class="diff">1891-01-02 08:40:04-01:00</td><td class="diff">CIVIDALE DEL FR</td><td>UD</td></tr>
+    <tr><th>M402</th><td>169</td><td>De Stefani</td><td>Alessandro</td><td class="diff">1891-01-02 08:30 +00:00</td><td class="diff">Cividale del Fr</td><td>UD</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>872</td><td>Donati</td><td>Umberto</td><td class="diff">1884-11-22 07:10:04-01:00</td><td>Gualdo Tadino</td><td>PG</td></tr>
+    <tr><th>M402</th><td>175</td><td>Donati</td><td>Umberto</td><td class="diff">1884-11-22 07:00 +00:00</td><td>Gualdo Tadino</td><td>PG</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>873</td><td>D'Orsi</td><td>Libero</td><td class="diff">1888-03-30 16:25:04-01:00</td><td class="diff">CASTELLAMARE DI</td><td>NA</td></tr>
+    <tr><th>M402</th><td>149</td><td>D'Orsi</td><td>Libero</td><td class="diff">1888-03-30 16:15 +00:00</td><td class="diff">Castellamare</td><td>NA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>874</td><td>Ermacora</td><td class="diff">Ghino</td><td class="diff">1894-08-30 11:00:00-01:00</td><td>Tarcento</td><td>UD</td></tr>
+    <tr><th>M402</th><td>178</td><td>Ermacora</td><td class="diff">Chine</td><td class="diff">1894-08-30 11:00 +01:00</td><td>Tarcento</td><td>UD</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>875</td><td>Fabbri</td><td>Casimiro</td><td class="diff">1907-03-06 05:15:00-01:00</td><td>Ferrara</td><td>FE</td></tr>
+    <tr><th>M402</th><td>180</td><td>Fabbri</td><td>Casimiro</td><td class="diff">1907-03-06 05:15 +01:00</td><td>Ferrara</td><td>FE</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>876</td><td>Fabietti</td><td>Ettore</td><td class="diff">1876-12-20 18:25:04-01:00</td><td>Cetona</td><td>SI</td></tr>
+    <tr><th>M402</th><td>182</td><td>Fabietti</td><td>Ettore</td><td class="diff">1876-12-20 18:15 +00:00</td><td>Cetona</td><td>SI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>877</td><td>Faleschini</td><td>Antonio</td><td class="diff">1897-11-11 11:00:00-01:00</td><td>Osoppo</td><td>UD</td></tr>
+    <tr><th>M402</th><td>183</td><td>Faleschini</td><td>Antonio</td><td class="diff">1897-11-11 11:00 +01:00</td><td>Osoppo</td><td>UD</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>878</td><td class="diff">Gauquelin-A6-878</td><td class="diff"></td><td class="diff">1901-10-12 13:30:00-01:00</td><td>Frattamaggiore</td><td>NA</td></tr>
+    <tr><th>M402</th><td>184</td><td class="diff">Falqui</td><td class="diff">Enrico</td><td class="diff">1901-10-12 13:30 +01:00</td><td>Frattamaggiore</td><td>NA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>879</td><td>Fanelli</td><td class="diff">Giuseppe</td><td class="diff">1893-08-31 18:40:04-01:00</td><td>Giovinazzo</td><td>BA</td></tr>
+    <tr><th>M402</th><td>185</td><td>Fanelli</td><td class="diff">Giuseppe Attilio</td><td class="diff">1893-08-31 18:30 +00:00</td><td>Giovinazzo</td><td>BA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>880</td><td>Fantucci</td><td class="diff">Antonio</td><td class="diff">1900-10-26 02:00:00-01:00</td><td class="diff">DOVADOLA</td><td>FO</td></tr>
+    <tr><th>M402</th><td>186</td><td>Fantucci</td><td class="diff">Antonio Filiberto</td><td class="diff">1900-10-26 02:00 +01:00</td><td class="diff">Dovadola</td><td>FO</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>881</td><td>Federici</td><td>Mario</td><td class="diff">1900-06-03 06:30:00-01:00</td><td>L'Aquila</td><td>AQ</td></tr>
+    <tr><th>M402</th><td>189</td><td>Federici</td><td>Mario</td><td class="diff">1900-06-03 06:30 +01:00</td><td>L'Aquila</td><td>AQ</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>882</td><td>Fiumi</td><td>Lionello</td><td class="diff">1894-04-12 22:45:00-01:00</td><td>Rovereto</td><td>TN</td></tr>
+    <tr><th>M402</th><td>191</td><td>Fiumi</td><td>Lionello</td><td class="diff">1894-04-12 22:45 +01:00</td><td>Rovereto</td><td>TN</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>883</td><td class="diff">Flore</td><td>Francesco</td><td class="diff">1891-10-27 06:10:04-01:00</td><td>Colle Sannita</td><td>BN</td></tr>
+    <tr><th>M402</th><td>193</td><td class="diff">Flora</td><td>Francesco</td><td class="diff">1891-10-27 06:00 +00:00</td><td>Colle Sannita</td><td>BN</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>884</td><td class="diff">Foa'</td><td>Vittorio</td><td class="diff">1910-09-18 23:30:00-01:00</td><td class="diff">TORINO</td><td>TO</td></tr>
+    <tr><th>M402</th><td>194</td><td class="diff">Foa</td><td>Vittorio</td><td class="diff">1910-09-18 23:30 +01:00</td><td class="diff">Torino</td><td>TO</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>885</td><td>Folicaldi</td><td>Alceo</td><td class="diff">1900-02-07 12:00:00-01:00</td><td class="diff">LUGO DI ROMAGNA</td><td>RA</td></tr>
+    <tr><th>M402</th><td>195</td><td>Folicaldi</td><td>Alceo</td><td class="diff">1900-02-07 12:00 +01:00</td><td class="diff">Lugo</td><td>RA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>886</td><td>Foresi</td><td>Sandro</td><td class="diff">1878-04-18 15:10:04-01:00</td><td>Portoferraio</td><td>LI</td></tr>
+    <tr><th>M402</th><td>196</td><td>Foresi</td><td>Sandro</td><td class="diff">1878-04-18 15:00 +00:00</td><td>Portoferraio</td><td>LI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>887</td><td>Forzano</td><td>Giovacchino</td><td class="diff">1883-11-19 11:10:04-01:00</td><td class="diff">BORGO S.LORENZO</td><td>FI</td></tr>
+    <tr><th>M402</th><td>199</td><td>Forzano</td><td>Giovacchino</td><td class="diff">1883-11-19 11:00 +00:00</td><td class="diff">Borgo s. Lorenzo</td><td>FI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>888</td><td>Gabrielli</td><td>Aldo</td><td class="diff">1898-04-21 00:30:00-01:00</td><td>Ripatransone</td><td>AP</td></tr>
+    <tr><th>M402</th><td>206</td><td>Gabrielli</td><td>Aldo</td><td class="diff">1898-04-21 00:30 +01:00</td><td>Ripatransone</td><td>AP</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>889</td><td>Galeazzi</td><td class="diff">Antonio</td><td class="diff">1891-10-30 08:10:04-01:00</td><td>Nocera Umbra</td><td>PG</td></tr>
+    <tr><th>M402</th><td>210</td><td>Galeazzi</td><td class="diff">Antonio Galeazzo</td><td class="diff">1891-10-30 08:00 +00:00</td><td>Nocera Umbra</td><td>PG</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>890</td><td>Gastaldi</td><td>Mario</td><td class="diff">1902-08-28 18:50:00-01:00</td><td class="diff">BEDIZZOLE DI BR</td><td>BS</td></tr>
+    <tr><th>M402</th><td>216</td><td>Gastaldi</td><td>Mario</td><td class="diff">1903-08-28 18:50 +01:00</td><td class="diff">Bedizzole di Br</td><td>BS</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>891</td><td>Gherardi</td><td>Gherardo</td><td class="diff">1891-07-02 20:40:04-01:00</td><td class="diff">CAPANNE</td><td>BO</td></tr>
+    <tr><th>M402</th><td>222</td><td>Gherardi</td><td>Gherardo</td><td class="diff">1891-07-02 20:30 +00:00</td><td class="diff">Granaglione</td><td>BO</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>892</td><td>Gherardini</td><td>Amedeo</td><td class="diff">1871-12-06 04:10:04-01:00</td><td>Lendinara</td><td>RO</td></tr>
+    <tr><th>M402</th><td>223</td><td>Gherardini</td><td>Amedeo</td><td class="diff">1871-12-06 04:00 +00:00</td><td>Lendinara</td><td>RO</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>893</td><td>Ghisalberti</td><td>Mario</td><td class="diff">1902-09-11 11:00:00-01:00</td><td>Venezia</td><td>VE</td></tr>
+    <tr><th>M402</th><td>225</td><td>Ghisalberti</td><td>Mario</td><td class="diff">1902-09-11 11:00 +01:00</td><td>Venezia</td><td>VE</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>894</td><td>Giannini</td><td>Guglielmo</td><td class="diff">1891-10-14 23:14:04-01:00</td><td>Pozzuoli</td><td>NA</td></tr>
+    <tr><th>M402</th><td>226</td><td>Giannini</td><td>Guglielmo</td><td class="diff">1891-10-14 23:04 +00:00</td><td>Pozzuoli</td><td>NA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>895</td><td>Giordana</td><td class="diff">Tullio</td><td class="diff">1877-07-15 21:10:04-01:00</td><td>Crema</td><td>CR</td></tr>
+    <tr><th>M402</th><td>229</td><td>Giordana</td><td class="diff">Carlo</td><td class="diff">1877-07-05 21:00 +00:00</td><td>Crema</td><td>CR</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>896</td><td>Gotta</td><td>Salvatore</td><td class="diff">1887-05-18 15:50:04-01:00</td><td>Montalto Dora</td><td>TO</td></tr>
+    <tr><th>M402</th><td>234</td><td>Gotta</td><td>Salvatore</td><td class="diff">1887-05-18 15:40 +00:00</td><td>Montalto Dora</td><td>TO</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>897</td><td>Govoni</td><td>Corrado</td><td class="diff">1884-10-29 07:40:04-01:00</td><td>Tamara</td><td>FE</td></tr>
+    <tr><th>M402</th><td>236</td><td>Govoni</td><td>Corrado</td><td class="diff">1884-10-29 07:30 +00:00</td><td>Tamara</td><td>FE</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>898</td><td>Grassi-Bertazzi</td><td>Giambattista</td><td class="diff">1867-12-25 05:10:04-01:00</td><td>Acireale</td><td>CT</td></tr>
+    <tr><th>M402</th><td>239</td><td>Grassi-Bertazzi</td><td>Giambattista</td><td class="diff">1867-12-25 05:00 +00:00</td><td>Acireale</td><td>CT</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>899</td><td>Grossi</td><td class="diff">E</td><td class="diff">1898-07-13 23:45:00-01:00</td><td class="diff">VILLALATINA</td><td>FR</td></tr>
+    <tr><th>M402</th><td>241</td><td>Grossi</td><td class="diff">E.A.</td><td class="diff">1898-07-13 23:45 +01:00</td><td class="diff">Villalatina</td><td>FR</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>900</td><td>Jacono</td><td>Antonio</td><td class="diff">1900-07-24 13:15:00-01:00</td><td>Comiso</td><td>RG</td></tr>
+    <tr><th>M402</th><td>247</td><td>Jacono</td><td>Antonio</td><td class="diff">1900-07-24 13:15 +01:00</td><td>Comiso</td><td>RG</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>901</td><td>Lelli</td><td>Renato</td><td class="diff">1899-08-02 07:00:00-01:00</td><td>Bologna</td><td>BO</td></tr>
+    <tr><th>M402</th><td>251</td><td>Lelli</td><td>Renato</td><td class="diff">1899-08-02 07:00 +01:00</td><td>Bologna</td><td>BO</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>902</td><td>Leoni</td><td class="diff">Giulio</td><td class="diff">1902-08-24 22:05:00-01:00</td><td>Ostiglia</td><td>MN</td></tr>
+    <tr><th>M402</th><td>252</td><td>Leoni</td><td class="diff">Giulio Davide</td><td class="diff">1902-08-24 22:05 +01:00</td><td>Ostiglia</td><td>MN</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>903</td><td>Lipparini</td><td>Giuseppe</td><td class="diff">1877-09-02 14:55:04-01:00</td><td>Bologna</td><td>BO</td></tr>
+    <tr><th>M402</th><td>255</td><td>Lipparini</td><td>Giuseppe</td><td class="diff">1877-09-02 14:45 +00:00</td><td>Bologna</td><td>BO</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>904</td><td>Lisi</td><td>Nicola</td><td class="diff">1893-04-11 02:40:04-01:00</td><td>Scarperia</td><td>FI</td></tr>
+    <tr><th>M402</th><td>256</td><td>Lisi</td><td>Nicola</td><td class="diff">1893-04-11 02:30 +00:00</td><td>Scarperia</td><td>FI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>905</td><td>Lombardi</td><td>Antonio</td><td class="diff">1898-12-15 03:00:00-01:00</td><td>Catanzaro</td><td>CZ</td></tr>
+    <tr><th>M402</th><td>258</td><td>Lombardi</td><td>Antonio</td><td class="diff">1898-12-15 03:00 +01:00</td><td>Catanzaro</td><td>CZ</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>906</td><td>Luisi</td><td>Mariano</td><td class="diff">1891-10-18 18:10:04-01:00</td><td>Casalbuono</td><td>SA</td></tr>
+    <tr><th>M402</th><td>261</td><td>Luisi</td><td>Mariano</td><td class="diff">1891-10-18 18:45 +00:00</td><td>Casalbuono</td><td>SA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>907</td><td>Luongo</td><td>Giuseppe</td><td class="diff">1896-12-05 18:07:00-01:00</td><td>Ustica</td><td>PA</td></tr>
+    <tr><th>M402</th><td>262</td><td>Luongo</td><td>Giuseppe</td><td class="diff">1896-12-05 18:07 +01:00</td><td>Ustica</td><td>PA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>908</td><td>Lusini</td><td>Aldo</td><td class="diff">1899-06-08 03:30:00-01:00</td><td>Siena</td><td>SI</td></tr>
+    <tr><th>M402</th><td>263</td><td>Lusini</td><td>Aldo</td><td class="diff">1899-06-08 03:30 +01:00</td><td>Siena</td><td>SI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>909</td><td>Malaparte</td><td>Curzio</td><td class="diff">1898-06-09 23:00:00-01:00</td><td class="diff">PRATO</td><td>FI</td></tr>
+    <tr><th>M402</th><td>267</td><td>Malaparte</td><td>Curzio</td><td class="diff">1898-06-09 23:00 +01:00</td><td class="diff">Prate</td><td>FI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>910</td><td>Malpassuti</td><td>Vittorio</td><td class="diff">1889-09-22 01:10:04-01:00</td><td class="diff">CARBONARA SCRIV</td><td>AL</td></tr>
+    <tr><th>M402</th><td>268</td><td>Malpassuti</td><td>Vittorio</td><td class="diff">1889-09-22 01:00 +00:00</td><td class="diff">Carbonara Scriv</td><td>AL</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>911</td><td>Marchetti</td><td>Aroldo</td><td class="diff">1908-05-21 17:00:00-01:00</td><td>Ancona</td><td>AN</td></tr>
+    <tr><th>M402</th><td>272</td><td>Marchetti</td><td>Aroldo</td><td class="diff">1908-05-21 17:00 +01:00</td><td>Ancona</td><td>AN</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>912</td><td>Marescotti</td><td class="diff">Ercole</td><td class="diff">1866-05-16 15:54:00-01:00</td><td class="diff">CUCCARO MONFERR</td><td>AL</td></tr>
+    <tr><th>M402</th><td>273</td><td>Marescotti</td><td class="diff">Ercole Arturo</td><td class="diff">1866-05-16 15:30 +00:36:00</td><td class="diff">Cuccaro Monferr</td><td>AL</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>913</td><td>Marini</td><td>Giuseppe</td><td class="diff">1875-05-03 17:22:04-01:00</td><td>Tagliacozzo</td><td>AQ</td></tr>
+    <tr><th>M402</th><td>275</td><td>Marini</td><td>Giuseppe</td><td class="diff">1875-05-03 17:12 +00:00</td><td>Tagliacozzo</td><td>AQ</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>914</td><td>Meano</td><td>Cesare</td><td class="diff">1899-12-22 04:30:00-01:00</td><td class="diff">TORINO</td><td>TO</td></tr>
+    <tr><th>M402</th><td>283</td><td>Meano</td><td>Cesare</td><td class="diff">1899-12-22 04:30 +01:00</td><td class="diff">Torino</td><td>TO</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>915</td><td>Melotti</td><td class="diff">Rosolino</td><td class="diff">1900-04-11 19:30:00-01:00</td><td class="diff">LODI</td><td>MI</td></tr>
+    <tr><th>M402</th><td>286</td><td>Melotti</td><td class="diff">Rosolino Antonio</td><td class="diff">1900-04-11 19:30 +01:00</td><td class="diff">Lodi</td><td>MI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>916</td><td>Meoni</td><td>Armando</td><td class="diff">1894-01-18 12:00:00-01:00</td><td class="diff">PRATO</td><td>FI</td></tr>
+    <tr><th>M402</th><td>288</td><td>Meoni</td><td>Armando</td><td class="diff">1894-01-18 12:00 +01:00</td><td class="diff">Prate</td><td>FI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>917</td><td>Migliore</td><td>Benedetto</td><td class="diff">1892-02-03 04:40:04-01:00</td><td>Trapani</td><td>TP</td></tr>
+    <tr><th>M402</th><td>290</td><td>Migliore</td><td>Benedetto</td><td class="diff">1892-02-03 16:30 +00:00</td><td>Trapani</td><td>TP</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>918</td><td class="diff">Montano</td><td>Lorenzo</td><td class="diff">1893-04-19 12:20:04-01:00</td><td>Verona</td><td class="diff">VR</td></tr>
+    <tr><th>M402</th><td>296</td><td class="diff">Montana</td><td>Lorenzo</td><td class="diff">1893-04-19 12:10 +00:00</td><td>Verona</td><td class="diff">VE</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>919</td><td>Morandi</td><td>Rodolfo</td><td class="diff">1902-07-30 09:15:00-01:00</td><td>Milano</td><td>MI</td></tr>
+    <tr><th>M402</th><td>298</td><td>Morandi</td><td>Rodolfo</td><td class="diff">1902-07-30 09:15 +01:00</td><td>Milano</td><td>MI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>920</td><td>Morbelli</td><td>Riccardo</td><td class="diff">1907-02-02 21:30:00-01:00</td><td>Orsara Bormida</td><td>AL</td></tr>
+    <tr><th>M402</th><td>300</td><td>Morbelli</td><td>Riccardo</td><td class="diff">1907-02-02 21:30 +01:00</td><td>Orsara Bormida</td><td>AL</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>921</td><td>Motta</td><td>Luigi</td><td class="diff">1881-07-11 10:20:04-01:00</td><td>Bussolengo</td><td>VR</td></tr>
+    <tr><th>M402</th><td>305</td><td>Motta</td><td>Luigi</td><td class="diff">1881-07-11 10:10 +00:00</td><td>Bussolengo</td><td>VR</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>922</td><td class="diff">Napolitano Gian Gaspare</td><td class="diff"></td><td class="diff">1907-05-30 10:30:00-01:00</td><td>Palermo</td><td>PA</td></tr>
+    <tr><th>M402</th><td>308</td><td class="diff">Napolitano</td><td class="diff">Gian Gaspare</td><td class="diff">1907-05-30 10:30 +01:00</td><td>Palermo</td><td>PA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>923</td><td class="diff">Nasalli-Rocca</td><td class="diff">Angelo</td><td class="diff">1897-07-17 23:20:00-01:00</td><td>Piacenza</td><td>PC</td></tr>
+    <tr><th>M402</th><td>310</td><td class="diff">Nasalli-Rocca di Corneliano</td><td class="diff"></td><td class="diff">1897-07-17 23:20 +01:00</td><td>Piacenza</td><td>PC</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>924</td><td>Nitti</td><td class="diff">Francesco</td><td class="diff">1868-07-19 13:10:04-01:00</td><td>Melfi</td><td>PZ</td></tr>
+    <tr><th>M402</th><td>315</td><td>Nitti</td><td class="diff">Francesco Saverio</td><td class="diff">1868-07-19 13:00 +00:00</td><td>Melfi</td><td>PZ</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>925</td><td>Nosari</td><td>Adone</td><td class="diff">1875-09-03 21:10:04-01:00</td><td>Suzzara</td><td>MN</td></tr>
+    <tr><th>M402</th><td>316</td><td>Nosari</td><td>Adone</td><td class="diff">1875-09-03 21:00 +00:00</td><td>Suzzara</td><td>MN</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>926</td><td>Operti</td><td class="diff">Piero</td><td class="diff">1896-02-11 06:00:00-01:00</td><td>Bra</td><td>CN</td></tr>
+    <tr><th>M402</th><td>317</td><td>Operti</td><td class="diff">Pier</td><td class="diff">1896-02-11 06:00 +01:00</td><td>Bra</td><td>CN</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>927</td><td>Orsini</td><td>Giovanni</td><td class="diff">1886-01-20 22:10:04-01:00</td><td>Livorno</td><td>LI</td></tr>
+    <tr><th>M402</th><td>319</td><td>Orsini</td><td>Giovanni</td><td class="diff">1886-01-20 22:00 +00:00</td><td>Livorno</td><td>LI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>928</td><td>Orsini</td><td>Luigi</td><td class="diff">1873-11-13 20:40:04-01:00</td><td>Imola</td><td>BO</td></tr>
+    <tr><th>M402</th><td>320</td><td>Orsini</td><td>Luigi</td><td class="diff">1873-11-13 08:30 +00:00</td><td>Imola</td><td>BO</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>929</td><td>Palazzi</td><td>Fernando</td><td class="diff">1884-06-21 10:25:04-01:00</td><td>Arcevia</td><td>AN</td></tr>
+    <tr><th>M402</th><td>325</td><td>Palazzi</td><td>Fernando</td><td class="diff">1884-06-21 10:15 +00:00</td><td>Arcevia</td><td>AN</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>930</td><td>Palmieri</td><td>Enzo</td><td class="diff">1893-02-27 10:00:04-01:00</td><td>Dugenta</td><td>BN</td></tr>
+    <tr><th>M402</th><td>327</td><td>Palmieri</td><td>Enzo</td><td class="diff">1893-02-27 09:50 +00:00</td><td>Dugenta</td><td>BN</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>931</td><td>Pancrazi</td><td>Pietro</td><td class="diff">1893-02-19 13:10:04-01:00</td><td>Cortona</td><td>AR</td></tr>
+    <tr><th>M402</th><td>328</td><td>Pancrazi</td><td>Pietro</td><td class="diff">1893-02-19 13:00 +00:00</td><td>Cortona</td><td>AR</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>932</td><td class="diff">Gauquelin-A6-932</td><td class="diff"></td><td class="diff">1877-02-21 17:40:04-01:00</td><td>Vasto</td><td>CH</td></tr>
+    <tr><th>M402</th><td>329</td><td class="diff">Pantini</td><td class="diff">Romualdo</td><td class="diff">1877-02-21 17:30 +00:00</td><td>Vasto</td><td>CH</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>933</td><td>Parisi</td><td>Vittorio</td><td class="diff">1900-09-04 11:00:00-01:00</td><td class="diff">Palmi</td><td>RC</td></tr>
+    <tr><th>M402</th><td>331</td><td>Parisi</td><td>Vittorio</td><td class="diff">1900-09-04 11:00 +01:00</td><td class="diff">Palmi Calabria</td><td>RC</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>934</td><td>Pastorino</td><td>Carlo</td><td class="diff">1887-07-17 05:10:04-01:00</td><td>Masone</td><td>GE</td></tr>
+    <tr><th>M402</th><td>334</td><td>Pastorino</td><td>Carlo</td><td class="diff">1887-07-17 05:00 +00:00</td><td>Masone</td><td>GE</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>935</td><td>Pattarozzi</td><td>Gaetano</td><td class="diff">1914-01-22 20:00:00-01:00</td><td>Cagliari</td><td>CA</td></tr>
+    <tr><th>M402</th><td>336</td><td>Pattarozzi</td><td>Gaetano</td><td class="diff">1914-01-22 20:00 +01:00</td><td>Cagliari</td><td>CA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>936</td><td>Pecchio</td><td>Giuseppe</td><td class="diff">1879-05-11 02:10:04-01:00</td><td class="diff">TORINO</td><td>TO</td></tr>
+    <tr><th>M402</th><td>338</td><td>Pecchio</td><td>Giuseppe</td><td class="diff">1879-05-11 02:00 +00:00</td><td class="diff">Torino</td><td>TO</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>937</td><td>Peritore</td><td class="diff">Giuseppe</td><td class="diff">1897-07-06 07:30:00-01:00</td><td>Licata</td><td>AG</td></tr>
+    <tr><th>M402</th><td>342</td><td>Peritore</td><td class="diff">Giuseppe Angelo</td><td class="diff">1897-07-06 07:30 +01:00</td><td>Licata</td><td>AG</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>938</td><td>Perri</td><td>Francesco</td><td class="diff">1885-07-15 11:40:04-01:00</td><td>Careri</td><td>RC</td></tr>
+    <tr><th>M402</th><td>343</td><td>Perri</td><td>Francesco</td><td class="diff">1885-07-15 11:30 +00:00</td><td>Careri</td><td>RC</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>939</td><td class="diff">Gauquelin-A6-939</td><td class="diff"></td><td class="diff">1898-06-04 02:00:00-01:00</td><td>Parma</td><td>PR</td></tr>
+    <tr><th>M402</th><td>347</td><td class="diff">Pezzani</td><td class="diff">Renzo</td><td class="diff">1898-06-04 02:00 +01:00</td><td>Parma</td><td>PR</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>940</td><td>Piccolo</td><td>Francesco</td><td class="diff">1892-02-25 03:12:04-01:00</td><td>Lucera</td><td>FG</td></tr>
+    <tr><th>M402</th><td>350</td><td>Piccolo</td><td>Francesco</td><td class="diff">1892-02-25 03:00 +00:00</td><td>Lucera</td><td>FG</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>941</td><td>Prepositi</td><td class="diff">Clemente</td><td class="diff">1886-02-08 06:15:04-01:00</td><td>Atri</td><td>TE</td></tr>
+    <tr><th>M402</th><td>362</td><td>Prepositi</td><td class="diff">Clementine</td><td class="diff">1882-02-08 06:05 +00:00</td><td>Atri</td><td>TE</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>942</td><td>Prezzolini</td><td>Giuseppe</td><td class="diff">1882-01-27 03:10:04-01:00</td><td>Perugia</td><td>PG</td></tr>
+    <tr><th>M402</th><td>363</td><td>Prezzolini</td><td>Giuseppe</td><td class="diff">1882-01-27 03:00 +00:00</td><td>Perugia</td><td>PG</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>943</td><td>Profeta</td><td>Ottavio</td><td class="diff">1896-10-10 16:00:00-01:00</td><td>Aidone</td><td>EN</td></tr>
+    <tr><th>M402</th><td>364</td><td>Profeta</td><td>Ottavio</td><td class="diff">1890-10-10 16:00 +00:00</td><td>Aidone</td><td>EN</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>944</td><td>Puccini</td><td>Mario</td><td class="diff">1887-07-29 20:10:04-01:00</td><td>Senigallia</td><td>AN</td></tr>
+    <tr><th>M402</th><td>365</td><td>Puccini</td><td>Mario</td><td class="diff">1887-07-29 12:20 +00:00</td><td>Senigallia</td><td>AN</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>945</td><td>Raymondi</td><td>Raimondo</td><td class="diff">1870-10-10 08:10:04-01:00</td><td>Scerni</td><td class="diff">CH</td></tr>
+    <tr><th>M402</th><td>369</td><td>Raymondi</td><td>Raimondo</td><td class="diff">1870-10-10 08:00 +00:00</td><td>Scerni</td><td class="diff">CR</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>946</td><td>Rebecchi</td><td>Umberto</td><td class="diff">1879-10-31 12:00:04-01:00</td><td>Podenzano</td><td>PC</td></tr>
+    <tr><th>M402</th><td>370</td><td>Rebecchi</td><td>Umberto</td><td class="diff">1879-10-31 11:50 +00:00</td><td>Podenzano</td><td>PC</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>947</td><td>Repaci</td><td>Leonida</td><td class="diff">1898-04-24 17:00:00-01:00</td><td class="diff">PALMI CALABRIA</td><td>RC</td></tr>
+    <tr><th>M402</th><td>371</td><td>Repaci</td><td>Leonida</td><td class="diff">1898-04-23 17:00 +01:00</td><td class="diff">Palmi Calabria</td><td>RC</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>948</td><td>Rigotti</td><td>Giuseppe</td><td class="diff">1899-09-15 17:00:00-01:00</td><td>Bogogno</td><td>NO</td></tr>
+    <tr><th>M402</th><td>374</td><td>Rigotti</td><td>Giuseppe</td><td class="diff">1899-09-15 17:00 +01:00</td><td>Bogogno</td><td>NO</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>949</td><td>Rivalta</td><td>Camillo</td><td class="diff">1876-05-04 10:10:04-01:00</td><td>Faenza</td><td>RA</td></tr>
+    <tr><th>M402</th><td>376</td><td>Rivalta</td><td>Camillo</td><td class="diff">1876-05-04 10:00 +00:00</td><td>Faenza</td><td>RA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>950</td><td class="diff">Gauquelin-A6-950</td><td class="diff"></td><td class="diff">1893-01-20 22:30:04-01:00</td><td class="diff">ZEME LOMELLINA</td><td>PV</td></tr>
+    <tr><th>M402</th><td>377</td><td class="diff">Robecchi-Brivio</td><td class="diff">Erminio</td><td class="diff">1893-01-20 22:20 +00:00</td><td class="diff">Zeme Lomellina</td><td>PV</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>951</td><td>Rosati</td><td class="diff">Giuseppe</td><td class="diff">1874-02-28 04:40:04-01:00</td><td>Valentano</td><td>VT</td></tr>
+    <tr><th>M402</th><td>381</td><td>Rosati</td><td class="diff">Guiseppe</td><td class="diff">1874-02-28 04:30 +00:00</td><td>Valentano</td><td>VT</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>952</td><td>Rossi</td><td class="diff">Vittorio</td><td class="diff">1898-01-08 04:00:00-01:00</td><td class="diff">S. MARGHERITA L</td><td>GE</td></tr>
+    <tr><th>M402</th><td>386</td><td>Rossi</td><td class="diff">Vittorio G.</td><td class="diff">1898-01-08 04:00 +01:00</td><td class="diff">Santa Margherita</td><td>GE</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>953</td><td class="diff">Rosso S Secondo Piermaria</td><td></td><td class="diff">1887-11-30 13:10:04-01:00</td><td>Caltanissetta</td><td>CL</td></tr>
+    <tr><th>M402</th><td>387</td><td class="diff">Rosso di s.Secondo Piermaria</td><td></td><td class="diff">1889-11-30 13:00 +00:00</td><td>Caltanissetta</td><td>CL</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>954</td><td>Ruggi</td><td>Lorenzo</td><td class="diff">1883-04-07 11:55:04-01:00</td><td>Bologna</td><td>BO</td></tr>
+    <tr><th>M402</th><td>391</td><td>Ruggi</td><td>Lorenzo</td><td class="diff">1883-04-07 11:45 +00:00</td><td>Bologna</td><td>BO</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>955</td><td>Sacchetti</td><td>Renzo</td><td class="diff">1872-12-19 04:10:04-01:00</td><td class="diff">MONTECHIARO D'A</td><td>AT</td></tr>
+    <tr><th>M402</th><td>396</td><td>Sacchetti</td><td>Renzo</td><td class="diff">1872-12-19 04:00 +00:00</td><td class="diff">Montechiaro d'a</td><td>AT</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>956</td><td>Salmoiraghi</td><td>Pietro</td><td class="diff">1911-09-06 20:00:00-01:00</td><td>Gallarate</td><td>VA</td></tr>
+    <tr><th>M402</th><td>397</td><td>Salmoiraghi</td><td>Pietro</td><td class="diff">1911-09-06 20:00 +01:00</td><td>Gallarate</td><td>VA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>957</td><td>Salvaneschi</td><td class="diff">Nino</td><td class="diff">1886-12-03 04:40:04-01:00</td><td>Pavia</td><td>PV</td></tr>
+    <tr><th>M402</th><td>399</td><td>Salvaneschi</td><td class="diff">Giovanni</td><td class="diff">1886-12-03 04:30 +00:00</td><td>Pavia</td><td>PV</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>958</td><td>Saponaro</td><td>Michele</td><td class="diff">1885-01-02 07:15:04-01:00</td><td class="diff">S.CESARIO DI LE</td><td>LE</td></tr>
+    <tr><th>M402</th><td>402</td><td>Saponaro</td><td>Michele</td><td class="diff">1885-01-02 07:05 +00:00</td><td class="diff">S.cesario di Le</td><td>LE</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>959</td><td class="diff">Gauquelin-A6-959</td><td class="diff"></td><td class="diff">1890-01-10 08:10:04-01:00</td><td>Massa Lombarda</td><td>RA</td></tr>
+    <tr><th>M402</th><td>403</td><td class="diff">Sapori</td><td class="diff">Francesco</td><td class="diff">1890-01-10 08:00 +00:00</td><td>Massa Lombarda</td><td>RA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>960</td><td class="diff">Salvarese</td><td class="diff">Nino</td><td class="diff">1882-09-11 04:10:04-01:00</td><td>Enna</td><td>EN</td></tr>
+    <tr><th>M402</th><td>405</td><td class="diff">Savarese</td><td class="diff">Nine</td><td class="diff">1882-09-11 04:00 +00:00</td><td>Enna</td><td>EN</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>961</td><td>Savarino</td><td class="diff">Santi</td><td class="diff">1886-04-14 16:00:04-01:00</td><td>Partinico</td><td>PA</td></tr>
+    <tr><th>M402</th><td>406</td><td>Savarino</td><td class="diff">santi</td><td class="diff">1886-04-14 15:50 +00:00</td><td>Partinico</td><td>PA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>962</td><td>Sboto</td><td>Edoardo</td><td class="diff">1888-05-30 05:10:04-01:00</td><td>Catania</td><td>CT</td></tr>
+    <tr><th>M402</th><td>407</td><td>Sboto</td><td>Edoardo</td><td class="diff">1888-04-30 05:00 +00:00</td><td>Catania</td><td>CT</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>963</td><td class="diff">Schiliro'</td><td>Vincenzo</td><td class="diff">1883-01-06 11:10:04-01:00</td><td>Bronte</td><td>CT</td></tr>
+    <tr><th>M402</th><td>412</td><td class="diff">Schiliro</td><td>Vincenzo</td><td class="diff">1883-01-06 11:00 +00:00</td><td>Bronte</td><td>CT</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>964</td><td class="diff">Segre</td><td class="diff">Dino</td><td class="diff">1893-05-09 03:10:04-01:00</td><td class="diff">TORINO</td><td>TO</td></tr>
+    <tr><th>M402</th><td>413</td><td class="diff">Segrè</td><td class="diff">Dine</td><td class="diff">1893-05-09 03:00 +00:00</td><td class="diff">Torino</td><td>TO</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>965</td><td>Sigillino</td><td>Franco</td><td class="diff">1903-08-12 01:20:00-01:00</td><td>Grassano</td><td>MT</td></tr>
+    <tr><th>M402</th><td>422</td><td>Sigillino</td><td>Franco</td><td class="diff">1903-08-12 01:20 +01:00</td><td>Grassano</td><td>MT</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>966</td><td>Sigillino</td><td>Niccolo</td><td class="diff">1901-09-01 11:50:00-01:00</td><td>Grassano</td><td>MT</td></tr>
+    <tr><th>M402</th><td>423</td><td>Sigillino</td><td>Niccolo</td><td class="diff">1901-09-01 11:50 +01:00</td><td>Grassano</td><td>MT</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>967</td><td>Sillani</td><td>Tomaso</td><td class="diff">1888-03-25 11:20:04-01:00</td><td>Otricoli</td><td>TR</td></tr>
+    <tr><th>M402</th><td>424</td><td>Sillani</td><td>Tomaso</td><td class="diff">1888-03-25 11:10 +00:00</td><td>Otricoli</td><td>TR</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>968</td><td>Silone</td><td>Ignazio</td><td class="diff">1900-05-01 02:00:00-01:00</td><td class="diff">PESCINA DE MARS</td><td>AQ</td></tr>
+    <tr><th>M402</th><td>425</td><td>Silone</td><td>Ignazio</td><td class="diff">1900-05-01 02:00 +01:00</td><td class="diff">Pescina</td><td>AQ</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>969</td><td>Simoni</td><td>Renato</td><td class="diff">1875-09-05 13:10:04-01:00</td><td>Verona</td><td class="diff">VR</td></tr>
+    <tr><th>M402</th><td>427</td><td>Simoni</td><td>Renato</td><td class="diff">1875-09-05 13:00 +00:00</td><td>Verona</td><td class="diff">VE</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>970</td><td>Smith</td><td>Tomaso</td><td class="diff">1886-06-15 19:25:04-01:00</td><td>Bagni di Lucca</td><td>LU</td></tr>
+    <tr><th>M402</th><td>428</td><td>Smith</td><td>Tomaso</td><td class="diff">1886-06-15 19:15 +00:00</td><td>Bagni di Lucca</td><td>LU</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>971</td><td>Sobrero</td><td>Mario</td><td class="diff">1883-07-10 18:10:04-01:00</td><td class="diff">TORINO</td><td>TO</td></tr>
+    <tr><th>M402</th><td>429</td><td>Sobrero</td><td>Mario</td><td class="diff">1883-07-10 18:00 +00:00</td><td class="diff">Torino</td><td>TO</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>972</td><td>Soffici</td><td>Ardengo</td><td class="diff">1879-04-07 21:40:04-01:00</td><td class="diff">RIGNANO SULL'AR</td><td>FI</td></tr>
+    <tr><th>M402</th><td>430</td><td>Soffici</td><td>Ardengo</td><td class="diff">1879-04-07 21:30 +00:00</td><td class="diff">Rignano Sull'ar</td><td>FI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>973</td><td>Solari</td><td>Pietro</td><td class="diff">1895-07-11 17:00:00-01:00</td><td>Bagnoli Irpino</td><td>AV</td></tr>
+    <tr><th>M402</th><td>431</td><td>Solari</td><td>Pietro</td><td class="diff">1895-07-11 17:00 +01:00</td><td>Bagnoli Irpino</td><td>AV</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>974</td><td>Somare</td><td>Enrico</td><td class="diff">1892-10-13 11:10:04-01:00</td><td class="diff">TRAVEDONA MONAT</td><td>VA</td></tr>
+    <tr><th>M402</th><td>432</td><td>Somare</td><td>Enrico</td><td class="diff">1892-10-13 11:00 +00:00</td><td class="diff">Travedona Monat</td><td>VA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>975</td><td>Spagnol</td><td class="diff">Tito</td><td class="diff">1895-05-13 01:10:00-01:00</td><td>Vittorio Veneto</td><td>TV</td></tr>
+    <tr><th>M402</th><td>434</td><td>Spagnol</td><td class="diff">Antonio</td><td class="diff">1895-05-13 01:10 +01:00</td><td>Vittorio Veneto</td><td>TV</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>976</td><td>Spellanzon</td><td>Cesare</td><td class="diff">1884-02-14 10:55:04-01:00</td><td>Venezia</td><td>VE</td></tr>
+    <tr><th>M402</th><td>436</td><td>Spellanzon</td><td>Cesare</td><td class="diff">1884-02-14 10:45 +00:00</td><td>Venezia</td><td>VE</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>977</td><td class="diff">Gauquelin-A6-977</td><td class="diff"></td><td class="diff">1900-03-15 06:40:00-01:00</td><td>L'Aquila</td><td>AQ</td></tr>
+    <tr><th>M402</th><td>437</td><td class="diff">Speranza</td><td class="diff">Mario</td><td class="diff">1900-03-15 06:40 +01:00</td><td>L'Aquila</td><td>AQ</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>978</td><td>Spirito</td><td>Ugo</td><td class="diff">1896-09-09 11:00:00-01:00</td><td>Arezzo</td><td>AR</td></tr>
+    <tr><th>M402</th><td>438</td><td>Spirito</td><td>Ugo</td><td class="diff">1896-09-09 11:00 +01:00</td><td>Arezzo</td><td>AR</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>979</td><td>Stefanini</td><td>Luigi</td><td class="diff">1891-11-03 03:10:04-01:00</td><td>Treviso</td><td>TV</td></tr>
+    <tr><th>M402</th><td>440</td><td>Stefanini</td><td>Luigi</td><td class="diff">1891-11-03 03:00 +00:00</td><td>Treviso</td><td>TV</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>980</td><td>Sturzo</td><td>Luigi</td><td class="diff">1871-11-26 09:40:04-01:00</td><td>Caltagirone</td><td>CT</td></tr>
+    <tr><th>M402</th><td>441</td><td>Sturzo</td><td>Luigi</td><td class="diff">1871-11-26 09:30 +00:00</td><td>Caltagirone</td><td>CT</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>981</td><td>Tegani</td><td>Ulderico</td><td class="diff">1877-05-11 20:10:04-01:00</td><td>Parma</td><td>PR</td></tr>
+    <tr><th>M402</th><td>445</td><td>Tegani</td><td>Ulderico</td><td class="diff">1877-05-11 20:00 +00:00</td><td>Parma</td><td>PR</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>982</td><td>Tieri</td><td>Vincenzo</td><td class="diff">1895-11-28 22:05:00-01:00</td><td class="diff">CORIGLIANO CALA</td><td>CS</td></tr>
+    <tr><th>M402</th><td>447</td><td>Tieri</td><td>Vincenzo</td><td class="diff">1895-11-28 22:05 +01:00</td><td class="diff">Corigliano Cala</td><td>CS</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>983</td><td class="diff">Gauquelin-A6-983</td><td class="diff"></td><td class="diff">1891-03-07 17:10:04-01:00</td><td>Fontecchio</td><td>AQ</td></tr>
+    <tr><th>M402</th><td>449</td><td class="diff">Titta</td><td class="diff">Rosa Giovanni</td><td class="diff">1891-03-07 17:00 +00:00</td><td>Fontecchio</td><td>AQ</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>984</td><td>Tofanelli</td><td>Arturo</td><td class="diff">1908-05-10 21:00:00-01:00</td><td>Cerreto Guidi</td><td>FI</td></tr>
+    <tr><th>M402</th><td>450</td><td>Tofanelli</td><td>Arturo</td><td class="diff">1908-05-10 21:00 +01:00</td><td>Cerreto Guidi</td><td>FI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>985</td><td class="diff">Gauquelin-A6-985</td><td class="diff"></td><td class="diff">1899-12-21 14:00:00-01:00</td><td class="diff">FANO</td><td>PS</td></tr>
+    <tr><th>M402</th><td>452</td><td class="diff">Tombari</td><td class="diff">Fabio</td><td class="diff">1899-12-21 14:00 +01:00</td><td class="diff">Fano</td><td>PS</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>986</td><td>Traglia</td><td>Gustavo</td><td class="diff">1898-05-01 04:30:00-01:00</td><td>Ancona</td><td>AN</td></tr>
+    <tr><th>M402</th><td>455</td><td>Traglia</td><td>Gustavo</td><td class="diff">1898-05-01 04:30 +01:00</td><td>Ancona</td><td>AN</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>987</td><td>Traxler</td><td>Augusto</td><td class="diff">1905-06-09 00:35:00-01:00</td><td>Fauglia</td><td>PI</td></tr>
+    <tr><th>M402</th><td>456</td><td>Traxler</td><td>Augusto</td><td class="diff">1905-06-09 00:35 +01:00</td><td>Fauglia</td><td>PI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>988</td><td>Treves</td><td>Paolo</td><td class="diff">1908-07-27 20:40:00-01:00</td><td>Milano</td><td>MI</td></tr>
+    <tr><th>M402</th><td>457</td><td>Treves</td><td>Paolo</td><td class="diff">1908-07-27 20:40 +01:00</td><td>Milano</td><td>MI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>989</td><td class="diff">Gauquelin-A6-989</td><td class="diff"></td><td class="diff">1892-08-14 00:10:04-01:00</td><td>Cupramontana</td><td>AN</td></tr>
+    <tr><th>M402</th><td>461</td><td class="diff">Umani</td><td class="diff">Giorgio</td><td class="diff">1892-08-14 00:00 +00:00</td><td>Cupramontana</td><td>AN</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>990</td><td>Valeri</td><td>Diego</td><td class="diff">1887-01-25 17:10:04-01:00</td><td>Piove di Sacco</td><td>PD</td></tr>
+    <tr><th>M402</th><td>466</td><td>Valeri</td><td>Diego</td><td class="diff">1887-01-25 17:00 +00:00</td><td>Piove di Sacco</td><td>PD</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>991</td><td>Varagnolo</td><td>Domenico</td><td class="diff">1882-08-10 01:10:04-01:00</td><td>Venezia</td><td>VE</td></tr>
+    <tr><th>M402</th><td>471</td><td>Varagnolo</td><td>Domenico</td><td class="diff">1882-08-10 01:00 +00:00</td><td>Venezia</td><td>VE</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>992</td><td>Varaldo</td><td>Alessandro</td><td class="diff">1876-01-25 02:40:04-01:00</td><td>Ventimiglia</td><td>IM</td></tr>
+    <tr><th>M402</th><td>472</td><td>Varaldo</td><td>Alessandro</td><td class="diff">1876-01-25 02:30 +00:00</td><td>Ventimiglia</td><td>IM</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>993</td><td>Veneziani</td><td>Carlo</td><td class="diff">1882-06-14 11:35:04-01:00</td><td>Leporano</td><td>TA</td></tr>
+    <tr><th>M402</th><td>473</td><td>Veneziani</td><td>Carlo</td><td class="diff">1882-06-14 11:25 +00:00</td><td>Leporano</td><td>TA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>994</td><td class="diff">Gauquelin-A6-994</td><td class="diff"></td><td class="diff">1898-02-06 05:30:00-01:00</td><td>Milano</td><td>MI</td></tr>
+    <tr><th>M402</th><td>474</td><td class="diff">Vergani</td><td class="diff">Orio</td><td class="diff">1898-02-06 05:30 +01:00</td><td>Milano</td><td>MI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>995</td><td>Vernieri</td><td>Nicola</td><td class="diff">1893-04-20 02:30:04-01:00</td><td>Albanella</td><td>SA</td></tr>
+    <tr><th>M402</th><td>475</td><td>Vernieri</td><td>Nicola</td><td class="diff">1893-04-20 02:20 +00:00</td><td>Albanella</td><td>SA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>996</td><td class="diff">Gauquelin-A6-996</td><td class="diff"></td><td class="diff">1889-10-26 16:40:04-01:00</td><td>Catania</td><td>CT</td></tr>
+    <tr><th>M402</th><td>478</td><td class="diff">Villaruel</td><td class="diff">Giuseppe</td><td class="diff">1889-10-26 16:30 +00:00</td><td>Catania</td><td>CT</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>997</td><td>Viola</td><td class="diff">Cesare</td><td class="diff">1886-11-16 22:30:04-01:00</td><td>Taranto</td><td>TA</td></tr>
+    <tr><th>M402</th><td>481</td><td>Viola</td><td class="diff">Cesare Giulio</td><td class="diff">1886-11-16 22:20 +00:00</td><td>Taranto</td><td>TA</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>998</td><td>Viviani</td><td class="diff">Alberto</td><td class="diff">1894-07-11 04:30:00-01:00</td><td>Firenze</td><td>FI</td></tr>
+    <tr><th>M402</th><td>485</td><td>Viviani</td><td class="diff">Alberta</td><td class="diff">1894-07-11 04:30 +01:00</td><td>Firenze</td><td>FI</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>999</td><td>Zamboni</td><td>Armando</td><td class="diff">1896-09-29 12:30:00-01:00</td><td class="diff">REGGIO EMILIA</td><td>RE</td></tr>
+    <tr><th>M402</th><td>489</td><td>Zamboni</td><td>Armando</td><td class="diff">1896-09-29 12:30 +01:00</td><td class="diff">Reggio Emilia</td><td>RE</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>1000</td><td>Zannoni</td><td>Ugo</td><td class="diff">1892-03-30 18:20:04-01:00</td><td class="diff">Dolcè</td><td>VR</td></tr>
+    <tr><th>M402</th><td>492</td><td>Zannoni</td><td>Ugo</td><td class="diff">1892-03-30 18:10 +00:00</td><td class="diff">Doles</td><td>VR</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>1001</td><td>Zappa</td><td>Paolo</td><td class="diff">1899-09-10 12:00:00-01:00</td><td class="diff">CASTAGNOLE MONF</td><td>AT</td></tr>
+    <tr><th>M402</th><td>493</td><td>Zappa</td><td>Paolo</td><td class="diff">1899-09-10 12:00 +01:00</td><td class="diff">Castagnole Monf</td><td>AT</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>1002</td><td>Zardi</td><td>Federico</td><td class="diff">1912-10-25 15:00:00-01:00</td><td>Bologna</td><td>BO</td></tr>
+    <tr><th>M402</th><td>494</td><td>Zardi</td><td>Federico</td><td class="diff">1912-10-25 15:00 +01:00</td><td>Bologna</td><td>BO</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>1003</td><td>Zerbinati</td><td>Umberto</td><td class="diff">1885-10-17 02:40:04-01:00</td><td class="diff">VALEGGIO SUL MI</td><td>VR</td></tr>
+    <tr><th>M402</th><td>496</td><td>Zerbinati</td><td>Umberto</td><td class="diff">1885-10-17 02:30 +00:00</td><td class="diff">Valeggio Sul Mi</td><td>VR</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>1004</td><td>Zorzi</td><td>Guglielmo</td><td class="diff">1879-02-01 12:40:04-01:00</td><td>Bologna</td><td>BO</td></tr>
+    <tr><th>M402</th><td>499</td><td>Zorzi</td><td>Guglielmo</td><td class="diff">1879-02-01 12:30 +00:00</td><td>Bologna</td><td>BO</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>1005</td><td>Zucca</td><td>Giuseppe</td><td class="diff">1887-05-01 03:40:04-01:00</td><td>Messina</td><td>ME</td></tr>
+    <tr><th>M402</th><td>500</td><td>Zucca</td><td>Giuseppe</td><td class="diff">1887-05-01 15:30 +00:00</td><td>Messina</td><td>ME</td></tr>
+    <tr class="spacer"><td colspan="7"></td></tr>
+    <tr><th>A6</th><td>1006</td><td>Zuccarini</td><td>Oliviero</td><td class="diff">1883-08-23 04:10:04-01:00</td><td>Cupramontana</td><td>AN</td></tr>
+    <tr><th>M402</th><td>502</td><td>Zuccarini</td><td>Oliviero</td><td class="diff">1883-08-23 04:00 +00:00</td><td>Cupramontana</td><td>AN</td></tr>
+</table>
+
 
 <!-- ********************************************************************************* -->
 <h2>Bulk notes</h2>
@@ -112,6 +702,9 @@ php run-g5.php newalch muller402 addA6
     <li>
         1889-10-26
         1908-05-20
+    </li>
+    <li>
+        Typo in 23 Arrighini ·Ambrogio
     </li>
 </ul>
 

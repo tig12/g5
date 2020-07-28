@@ -28,7 +28,7 @@ class offset_fr{
         Computation of timezone offset for France.
         @param  $date   ISO 8601 HH:MM or HH:MM:SS
         @param  $lg     longitude in decimal degrees
-        @param  $dept   Département ("75" for Paris, "01" for Ain etc.)
+        @param  $c2     Département ("75" for Paris, "01" for Ain etc.)
         @param  $format Format of the returned offset - Can be 'HH:MM' or 'HH:MM:SS'
         
         @return array with 3 elements : 
@@ -41,7 +41,7 @@ class offset_fr{
                 would need also a latitude parameter
         @todo   Consider equation of time for dates < 1891-03-15
     **/
-    public static function compute($date, $lg, $dept, $format='HH:MM'){
+    public static function compute($date, $lg, $c2, $format='HH:MM'){
         if($format != 'HH:MM' && $format != 'HH:MM:SS'){
             throw new Exception("Invalid \$format parameter : $format - Must be 'HH:MM' or 'HH:MM:SS'");
         }
@@ -58,15 +58,15 @@ class offset_fr{
             54 et 57 : un tiers de la Meurthe (les arrondissements de Sarrebourg et Château-Salins)
             88 : Vosges (la vallée de la Bruche, de Schirmeck à Saales).             
             */
-            if(in_array($dept, [54, 57, 88])){
+            if(in_array($c2, [54, 57, 88])){
                 $case = 1;
-                $err = "Possible timezone offset error (german zone 1871 - 1918 ; dept 54, 57, 88) : $date $dept";
+                $err = "Possible timezone offset error (german zone 1871 - 1918 ; dept 54, 57, 88) : $date $c2";
             }
-            else if(in_array($dept, [67, 68])){
+            else if(in_array($c2, [67, 68])){
                 $case = 2;
                 //$zone = 'Europe/Berlin';
                 // @todo Possible to compute
-                $err = "Possible timezone offset error (german zone 1871 - 1918 ; dept 67, 68) : $date $dept";
+                $err = "Possible timezone offset error (german zone 1871 - 1918 ; dept 67, 68) : $date $c2";
             }
         }                                                         
         if($date >= '1940-02' && $date <= '1942-11'){

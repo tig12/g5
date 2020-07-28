@@ -41,6 +41,7 @@ class export implements Command{
         $outfile = Config::$data['dirs']['9-newalch'] . DS . $filename;
         
         $csvFields = [
+            'MUID',
             'FNAME',
             'GNAME',
             'OCCU',
@@ -54,6 +55,7 @@ class export implements Command{
         ];
         
         $map = [
+            'ids.muller402' => 'MUID',
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
             'birth.date' => 'DATE',

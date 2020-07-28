@@ -140,8 +140,8 @@ class Group{
             $p = Person::new($puid);
             // filters
             foreach($filters as $function){
-                echo $p->slug() . "\n";
-                echo ($function($p) ? 'true' : 'false') . "\n";
+                //echo $p->slug() . "\n";
+                //echo ($function($p) ? 'true' : 'false') . "\n";
                 if(!$function($p)){
                     continue 2;
                 }

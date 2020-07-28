@@ -72,9 +72,8 @@ class raw2full implements Command{
                 $sex='M';
             }
             
-            $mullerId = $m[1] . $sex;
+            $mullerId = $m[1];
             $p->addId($idSource, $mullerId);
-            
             
             $nameFields = explode(',', $m[3]);
             if(count($nameFields) == 2){
@@ -88,7 +87,7 @@ class raw2full implements Command{
                 // @todo should be verified and included in tweaks
                 // echo "\n<pre>"; print_r($nameFields); echo "</pre>\n";           
                 // echo "\n<pre>"; print_r($fields); echo "</pre>\n"; continue;
-                if($mullerId == '310M' || $mullerId == '387M'){
+                if($mullerId == '310' || $mullerId == '387'){
                     $new['name']['family'] = $nameFields[0];
                     $new['name']['given'] = '';
                     $new['name']['usual'] = $new['name']['family'];
@@ -128,7 +127,7 @@ class raw2full implements Command{
             $g->add($p->uid());
 //break;
         }
-echo "\ng : "; print_r($g); exit;
+//echo "\ng : "; print_r($g); exit;
         $g->save(); // HERE save to disk
         $report .= "Wrote ".$g->file()."\n";
         $report .= "Stored $nb_stored records\n";
