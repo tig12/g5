@@ -36,6 +36,7 @@ dirs:
   9-cpara:              data/9-output/history/1976-cpara
   9-cfepp:              data/9-output/history/1996-cfepp
   9-csicop:             data/9-output/history/1979-csicop
+  9-muller402:          data/9-output/history/1991-muller
 
 # geoname.org parameters
 # only useful for the steps which call geonames.org web service

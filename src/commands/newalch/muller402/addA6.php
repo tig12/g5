@@ -252,7 +252,7 @@ class addA6 implements Command{
         $report .= "</tr>\n";
         $diff = ' class="diff"';
         foreach($match as $line){
-            $date402 = $line['M402']->data['birth']['date'] . ' ' . $line['M402']->data['birth']['tz'];
+            $date402 = $line['M402']->data['birth']['date'] . $line['M402']->data['birth']['tz'];
             $diff_fname = ($line['A6']['FNAME'] != $line['M402']->data['name']['family'] ? $diff :'');
             $diff_gname = ($line['A6']['GNAME'] != $line['M402']->data['name']['given'] ? $diff :'');
             $diff_date = ($line['A6']['DATE'] != $date402 ? $diff :'');

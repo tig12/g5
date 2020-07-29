@@ -38,12 +38,8 @@ class Muller402 implements SourceI{
     /** Separator used in the raw csv file **/
     const RAW_SEP = ';';
     
-    /** Name of the csv file in 9-output/ **/
-    const OUT_CSV_FILE = 'muller402WRI.csv';
-    
-    /** Columns of file in 9-output/ **/
-    const OUTPUT_COLUMNS = [
-    ];
+    /** Name of the csv file containing Müller 402 group in 9-output/ **/
+    const OUTPUT_CSV_FILE = '402-it-writers-muller.csv';
     
     // SourceI implementation
     public static function source(): Source{

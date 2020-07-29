@@ -67,8 +67,7 @@ class raw2full implements Command{
             $sex = $m[2];
             if($sex != 'M' && $sex != 'F'){
                 // happens only for 478K Villaruel, Giuseppe
-                // Comparision with scan of original Müller's AFD shows it's a OCR error
-                // => included here, not in tweaks
+                // Comparision with scan of original Müller's AFD shows it's an OCR error
                 $sex='M';
             }
             
@@ -80,19 +79,19 @@ class raw2full implements Command{
                 // normal case
                 $new['name']['family'] = $nameFields[0];
                 $new['name']['given'] = trim($nameFields[1]);
-                $new['name']['usual'] = $new['name']['given'] . ' ' . $new['name']['family'];
             }
             else{
-                // temporary fixes
-                // @todo should be verified and included in tweaks
-                // echo "\n<pre>"; print_r($nameFields); echo "</pre>\n";           
-                // echo "\n<pre>"; print_r($fields); echo "</pre>\n"; continue;
+                // empty given names
+                // @todo should be verified by human and included in tweaks
                 if($mullerId == '310' || $mullerId == '387'){
                     $new['name']['family'] = $nameFields[0];
                     $new['name']['given'] = '';
-                    $new['name']['usual'] = $new['name']['family'];
                 }
             }
+            if($mullerId == '23'){
+                $new['name']['given'] = 'Ambrogio'; // OCR error
+            }
+            $new['name']['usual'] = $new['name']['family'];
             
             $new['sex'] = $sex;
             
@@ -112,6 +111,19 @@ class raw2full implements Command{
             preg_match($pplace, $fields[7], $m);
             $new['birth']['place']['name'] = $m[1];
             $new['birth']['place']['c2'] = $m[2];
+            // Fix C2
+            if($new['birth']['place']['name'] == 'Verona'){
+                // systematic error in M402 file
+                $new['birth']['place']['c2'] = 'VR';
+            }
+            if($mullerId == '76'){
+                $new['birth']['place']['c2'] = 'ME'; // OCR error
+            }
+            if($mullerId == '369'){
+                $new['birth']['place']['c2'] = 'CH'; // OCR error
+            }
+                
+            
             $new['birth']['place']['cy'] = 'IT';
             $new['birth']['place']['lg'] = self::lglat(-(int)$fields[9]); // minus sign, correction from raw here
             $new['birth']['place']['lat'] = self::lglat($fields[8]);
@@ -125,11 +137,9 @@ class raw2full implements Command{
             $nb_stored ++;
             $p->save(); // HERE save to disk
             $g->add($p->uid());
-//break;
         }
-//echo "\ng : "; print_r($g); exit;
         $g->save(); // HERE save to disk
-        $report .= "Wrote ".$g->file()."\n";
+        $report .= "Wrote Müller402 group in ".$g->file()."\n";
         $report .= "Stored $nb_stored records\n";
         return $report;
     }

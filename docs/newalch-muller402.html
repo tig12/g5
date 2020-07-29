@@ -46,6 +46,8 @@ WORK IN PROGRESS
 <h2>Origin</h2>
 Data available from <a href="https://newalchemypress.com/gauquelin/gauquelin_docs/5muller_writers.xlsx">5muller_writers.xlsx</a> from <a href="https://newalchemypress.com/gauquelin/research5.php">newalchemypress.com</a>.
 <br>This file is an electronic version of Müller's <i>Astro-Forschungs-Daten</i> (AFD).
+<br>The scans of the original document were kindly sent by newalchemypress.com.
+
 
 <!-- ************************************* -->
 <h3>Publication</h3>
@@ -74,6 +76,8 @@ Data available from <a href="https://newalchemypress.com/gauquelin/gauquelin_doc
 <!-- ********************************************************************************* -->
 <h2>g5 integration</h2>
 
+
+
 <pre>
 php run-g5.php newalch muller402 raw2full
 php run-g5.php newalch muller402 addA6
@@ -81,11 +85,22 @@ php run-g5.php newalch muller402 addA6
 
 <!-- ************************************* -->
 <h3>raw2full</h3>
+Includes several fixes :
+<ul class="spaced">
+    <li>
+        Some OCR (image to text conversion) errors could be corrected, comparing data with the scans of the original document.
+        These fixes can be seen in the code of class <code>g5\commands\newalch\muller402\raw2full</code>
+    </li>
+    <li>
+        Province code (C2) set to VR for Verona (instead of VE) ; the error concerns 5 records ; seems to come from Müller.
+    </li>
+</ul>
 
 <!-- ************************************* -->
 <h3>addA6</h3>
-Cura A6 file contains 194 italian writers : NUM 31 (Guillaume Apolinaire) and from NUM 814 to 1006
-<br>One writer (NUM 31, Guillaume Apolinaire) is present in A6 but not in M402.
+Cura A6 file contains 194 italian writers : NUM 31 (Guillaume Apollinaire) and from NUM 814 to 1006
+<br>One writer (NUM 31, Guillaume Apollinaire) is present in A6 but not in M402.
+<br>
 <br>This makes <b>193</b> common records between A6 and M402.
 <br>Müller 402 then brings 402 - 193 = <b>209</b> new birth times.
 
@@ -96,8 +111,8 @@ Cura A6 file contains 194 italian writers : NUM 31 (Guillaume Apolinaire) and fr
     <tr><th>A6</th><td>814</td><td>Acquaviva</td><td>Cosimo</td><td class="diff">1884-08-20 13:40:04-01:00</td><td>Taranto</td><td>TA</td></tr>
     <tr><th>M402</th><td>2</td><td>Acquaviva</td><td>Cosimo</td><td class="diff">1884-08-20 13:30 +00:00</td><td>Taranto</td><td>TA</td></tr>
     <tr class="spacer"><td colspan="7"></td></tr>
-    <tr><th>A6</th><td>815</td><td>Adami</td><td>Giuseppe</td><td class="diff">1878-02-04 04:25:04-01:00</td><td>Verona</td><td class="diff">VR</td></tr>
-    <tr><th>M402</th><td>3</td><td>Adami</td><td>Giuseppe</td><td class="diff">1878-02-04 04:15 +00:00</td><td>Verona</td><td class="diff">VE</td></tr>
+    <tr><th>A6</th><td>815</td><td>Adami</td><td>Giuseppe</td><td class="diff">1878-02-04 04:25:04-01:00</td><td>Verona</td><td>VR</td></tr>
+    <tr><th>M402</th><td>3</td><td>Adami</td><td>Giuseppe</td><td class="diff">1878-02-04 04:15 +00:00</td><td>Verona</td><td>VR</td></tr>
     <tr class="spacer"><td colspan="7"></td></tr>
     <tr><th>A6</th><td>816</td><td>Alessio</td><td>Luigi</td><td class="diff">1902-05-08 19:00:00-01:00</td><td class="diff">CARAMAGNA</td><td>CN</td></tr>
     <tr><th>M402</th><td>6</td><td>Alessio</td><td>Luigi</td><td class="diff">1902-05-08 19:00 +01:00</td><td class="diff">Caramagna</td><td>CN</td></tr>
@@ -114,14 +129,14 @@ Cura A6 file contains 194 italian writers : NUM 31 (Guillaume Apolinaire) and fr
     <tr><th>A6</th><td>820</td><td>Bacchelli</td><td>Riccardo</td><td class="diff">1891-04-19 12:10:04-01:00</td><td>Bologna</td><td>BO</td></tr>
     <tr><th>M402</th><td>26</td><td>Bacchelli</td><td>Riccardo</td><td class="diff">1891-04-19 12:00 +00:00</td><td>Bologna</td><td>BO</td></tr>
     <tr class="spacer"><td colspan="7"></td></tr>
-    <tr><th>A6</th><td>821</td><td>Baganzani</td><td>Sandro</td><td class="diff">1889-02-08 15:10:04-01:00</td><td>Verona</td><td class="diff">VR</td></tr>
-    <tr><th>M402</th><td>29</td><td>Baganzani</td><td>Sandro</td><td class="diff">1889-02-08 15:00 +00:00</td><td>Verona</td><td class="diff">VE</td></tr>
+    <tr><th>A6</th><td>821</td><td>Baganzani</td><td>Sandro</td><td class="diff">1889-02-08 15:10:04-01:00</td><td>Verona</td><td>VR</td></tr>
+    <tr><th>M402</th><td>29</td><td>Baganzani</td><td>Sandro</td><td class="diff">1889-02-08 15:00 +00:00</td><td>Verona</td><td>VR</td></tr>
     <tr class="spacer"><td colspan="7"></td></tr>
     <tr><th>A6</th><td>822</td><td>Barbantini</td><td>Nino</td><td class="diff">1884-07-05 06:40:04-01:00</td><td>Ferrara</td><td>FE</td></tr>
     <tr><th>M402</th><td>31</td><td>Barbantini</td><td>Nino</td><td class="diff">1884-07-05 06:30 +00:00</td><td>Ferrara</td><td>FE</td></tr>
     <tr class="spacer"><td colspan="7"></td></tr>
-    <tr><th>A6</th><td>823</td><td>Barbarani</td><td>Berto</td><td class="diff">1872-12-03 02:40:04-01:00</td><td>Verona</td><td class="diff">VR</td></tr>
-    <tr><th>M402</th><td>32</td><td>Barbarani</td><td>Berto</td><td class="diff">1872-12-03 02:30 +00:00</td><td>Verona</td><td class="diff">VE</td></tr>
+    <tr><th>A6</th><td>823</td><td>Barbarani</td><td>Berto</td><td class="diff">1872-12-03 02:40:04-01:00</td><td>Verona</td><td>VR</td></tr>
+    <tr><th>M402</th><td>32</td><td>Barbarani</td><td>Berto</td><td class="diff">1872-12-03 02:30 +00:00</td><td>Verona</td><td>VR</td></tr>
     <tr class="spacer"><td colspan="7"></td></tr>
     <tr><th>A6</th><td>824</td><td>Barbaro</td><td>Umberto</td><td class="diff">1902-01-03 19:30:00-01:00</td><td>Acireale</td><td>CT</td></tr>
     <tr><th>M402</th><td>33</td><td>Barbaro</td><td>Umberto</td><td class="diff">1902-01-03 19:30 +01:00</td><td>Acireale</td><td>CT</td></tr>
@@ -171,8 +186,8 @@ Cura A6 file contains 194 italian writers : NUM 31 (Guillaume Apolinaire) and fr
     <tr><th>A6</th><td>839</td><td>Brunelli</td><td>Bruno</td><td class="diff">1885-12-07 06:10:04-01:00</td><td>Padova</td><td>PD</td></tr>
     <tr><th>M402</th><td>75</td><td>Brunelli</td><td>Bruno</td><td class="diff">1885-12-07 06:00 +00:00</td><td>Padova</td><td>PD</td></tr>
     <tr class="spacer"><td colspan="7"></td></tr>
-    <tr><th>A6</th><td>840</td><td>Burrascano</td><td class="diff">Nino</td><td class="diff">1884-01-01 06:10:04-01:00</td><td>Castroreale</td><td class="diff">ME</td></tr>
-    <tr><th>M402</th><td>76</td><td>Burrascano</td><td class="diff">Nine</td><td class="diff">1884-01-01 06:00 +00:00</td><td>Castroreale</td><td class="diff">HE</td></tr>
+    <tr><th>A6</th><td>840</td><td>Burrascano</td><td class="diff">Nino</td><td class="diff">1884-01-01 06:10:04-01:00</td><td>Castroreale</td><td>ME</td></tr>
+    <tr><th>M402</th><td>76</td><td>Burrascano</td><td class="diff">Nine</td><td class="diff">1884-01-01 06:00 +00:00</td><td>Castroreale</td><td>ME</td></tr>
     <tr class="spacer"><td colspan="7"></td></tr>
     <tr><th>A6</th><td>841</td><td>Busetto</td><td>Andrea</td><td class="diff">1888-08-09 12:10:04-01:00</td><td>Venezia</td><td>VE</td></tr>
     <tr><th>M402</th><td>77</td><td>Busetto</td><td>Andrea</td><td class="diff">1888-08-09 23:59 +00:00</td><td>Venezia</td><td>VE</td></tr>
@@ -405,8 +420,8 @@ Cura A6 file contains 194 italian writers : NUM 31 (Guillaume Apolinaire) and fr
     <tr><th>A6</th><td>917</td><td>Migliore</td><td>Benedetto</td><td class="diff">1892-02-03 04:40:04-01:00</td><td>Trapani</td><td>TP</td></tr>
     <tr><th>M402</th><td>290</td><td>Migliore</td><td>Benedetto</td><td class="diff">1892-02-03 16:30 +00:00</td><td>Trapani</td><td>TP</td></tr>
     <tr class="spacer"><td colspan="7"></td></tr>
-    <tr><th>A6</th><td>918</td><td class="diff">Montano</td><td>Lorenzo</td><td class="diff">1893-04-19 12:20:04-01:00</td><td>Verona</td><td class="diff">VR</td></tr>
-    <tr><th>M402</th><td>296</td><td class="diff">Montana</td><td>Lorenzo</td><td class="diff">1893-04-19 12:10 +00:00</td><td>Verona</td><td class="diff">VE</td></tr>
+    <tr><th>A6</th><td>918</td><td class="diff">Montano</td><td>Lorenzo</td><td class="diff">1893-04-19 12:20:04-01:00</td><td>Verona</td><td>VR</td></tr>
+    <tr><th>M402</th><td>296</td><td class="diff">Montana</td><td>Lorenzo</td><td class="diff">1893-04-19 12:10 +00:00</td><td>Verona</td><td>VR</td></tr>
     <tr class="spacer"><td colspan="7"></td></tr>
     <tr><th>A6</th><td>919</td><td>Morandi</td><td>Rodolfo</td><td class="diff">1902-07-30 09:15:00-01:00</td><td>Milano</td><td>MI</td></tr>
     <tr><th>M402</th><td>298</td><td>Morandi</td><td>Rodolfo</td><td class="diff">1902-07-30 09:15 +01:00</td><td>Milano</td><td>MI</td></tr>
@@ -486,8 +501,8 @@ Cura A6 file contains 194 italian writers : NUM 31 (Guillaume Apolinaire) and fr
     <tr><th>A6</th><td>944</td><td>Puccini</td><td>Mario</td><td class="diff">1887-07-29 20:10:04-01:00</td><td>Senigallia</td><td>AN</td></tr>
     <tr><th>M402</th><td>365</td><td>Puccini</td><td>Mario</td><td class="diff">1887-07-29 12:20 +00:00</td><td>Senigallia</td><td>AN</td></tr>
     <tr class="spacer"><td colspan="7"></td></tr>
-    <tr><th>A6</th><td>945</td><td>Raymondi</td><td>Raimondo</td><td class="diff">1870-10-10 08:10:04-01:00</td><td>Scerni</td><td class="diff">CH</td></tr>
-    <tr><th>M402</th><td>369</td><td>Raymondi</td><td>Raimondo</td><td class="diff">1870-10-10 08:00 +00:00</td><td>Scerni</td><td class="diff">CR</td></tr>
+    <tr><th>A6</th><td>945</td><td>Raymondi</td><td>Raimondo</td><td class="diff">1870-10-10 08:10:04-01:00</td><td>Scerni</td><td>CH</td></tr>
+    <tr><th>M402</th><td>369</td><td>Raymondi</td><td>Raimondo</td><td class="diff">1870-10-10 08:00 +00:00</td><td>Scerni</td><td>CH</td></tr>
     <tr class="spacer"><td colspan="7"></td></tr>
     <tr><th>A6</th><td>946</td><td>Rebecchi</td><td>Umberto</td><td class="diff">1879-10-31 12:00:04-01:00</td><td>Podenzano</td><td>PC</td></tr>
     <tr><th>M402</th><td>370</td><td>Rebecchi</td><td>Umberto</td><td class="diff">1879-10-31 11:50 +00:00</td><td>Podenzano</td><td>PC</td></tr>
@@ -558,8 +573,8 @@ Cura A6 file contains 194 italian writers : NUM 31 (Guillaume Apolinaire) and fr
     <tr><th>A6</th><td>968</td><td>Silone</td><td>Ignazio</td><td class="diff">1900-05-01 02:00:00-01:00</td><td class="diff">PESCINA DE MARS</td><td>AQ</td></tr>
     <tr><th>M402</th><td>425</td><td>Silone</td><td>Ignazio</td><td class="diff">1900-05-01 02:00 +01:00</td><td class="diff">Pescina</td><td>AQ</td></tr>
     <tr class="spacer"><td colspan="7"></td></tr>
-    <tr><th>A6</th><td>969</td><td>Simoni</td><td>Renato</td><td class="diff">1875-09-05 13:10:04-01:00</td><td>Verona</td><td class="diff">VR</td></tr>
-    <tr><th>M402</th><td>427</td><td>Simoni</td><td>Renato</td><td class="diff">1875-09-05 13:00 +00:00</td><td>Verona</td><td class="diff">VE</td></tr>
+    <tr><th>A6</th><td>969</td><td>Simoni</td><td>Renato</td><td class="diff">1875-09-05 13:10:04-01:00</td><td>Verona</td><td>VR</td></tr>
+    <tr><th>M402</th><td>427</td><td>Simoni</td><td>Renato</td><td class="diff">1875-09-05 13:00 +00:00</td><td>Verona</td><td>VR</td></tr>
     <tr class="spacer"><td colspan="7"></td></tr>
     <tr><th>A6</th><td>970</td><td>Smith</td><td>Tomaso</td><td class="diff">1886-06-15 19:25:04-01:00</td><td>Bagni di Lucca</td><td>LU</td></tr>
     <tr><th>M402</th><td>428</td><td>Smith</td><td>Tomaso</td><td class="diff">1886-06-15 19:15 +00:00</td><td>Bagni di Lucca</td><td>LU</td></tr>
@@ -679,39 +694,23 @@ Cura A6 file contains 194 italian writers : NUM 31 (Guillaume Apolinaire) and fr
 
 <ul>
     <li>
-        Missing given name for 310M Nasalli-Rocca di Corneliano 1897-07-17 Piacenza PC
+        Possible date error for 310M Nasalli-Rocca di Corneliano 1897-07-17 Piacenza PC
         <br>=> Equal or different from <a href="https://en.wikipedia.org/wiki/Giovanni_Nasalli_Rocca_di_Corneliano">wikipedia</a> 1872-08-27 Piacenza ?
-        <br>Error in date ?
     </li>
     <li>
-        Missing given name for 387M Rosso di s.Secondo Piermaria 1889-11-30 Caltanissetta CL
+        Possible date error for 387M Rosso di s.Secondo Piermaria 1889-11-30 Caltanissetta CL
         <br>=> <a href="https://en.wikipedia.org/wiki/Pier_Maria_Rosso_di_San_Secondo">wikipedia</a> Pier Maria Rosso di San Secondo 1887-11-30
-        <br>Error in date (1887 not 1889) ?
+        <br>(1887 not 1889) ?
     </li>
     <li>
-        Error on code 478K Villaruel Giuseppe 1889
-        <br>Comparision with scan of original Müller's AFD shows it's an OCR error.
-        <br>=> code = 478M
-        <br>Check on internet shows an other possible error : <a href="https://books.google.fr/books?id=b6gUSKQyCdUC&pg=PA198&lpg=PA198&dq=Villaruel+Giuseppe+1889&source=bl&ots=bW22k9fUAh&sig=ACfU3U3O71hfjiozFaxU4JaLyt25EvgspA&hl=en&sa=X&ved=2ahUKEwj2y9Wr2MzqAhWLzYUKHYFEDOQQ6AEwA3oECC0QAQ#v=onepage&q=Villaruel%20Giuseppe%201889&f=false">
+        Possible error on 478M Villaruel Giuseppe 1889 : <a href="https://books.google.fr/books?id=b6gUSKQyCdUC&pg=PA198&lpg=PA198&dq=Villaruel+Giuseppe+1889&source=bl&ots=bW22k9fUAh&sig=ACfU3U3O71hfjiozFaxU4JaLyt25EvgspA&hl=en&sa=X&ved=2ahUKEwj2y9Wr2MzqAhWLzYUKHYFEDOQQ6AEwA3oECC0QAQ#v=onepage&q=Villaruel%20Giuseppe%201889&f=false">
         Selection of Modern Italian Poetry in Translation By Roberta L. Payne
         </a>
         <br>p 199 : Villaroel Giuseppe 1889
         <br>=> Error in family name (o instead of u) ?
         <br>(TODO book usable for eminence grading ?)
     </li>
-    <li>
-        1889-10-26
-        1908-05-20
-    </li>
-    <li>
-        Typo in 23 Arrighini ·Ambrogio
-    </li>
 </ul>
-
-
-
-<!-- ********************************************************************************* -->
-<h2>To check</h2>
 
 
 </article>

@@ -36,9 +36,7 @@ class export implements Command{
         $uid = Muller402::UID_GROUP_PREFIX;
         $g = Group::new($uid);
         
-        $filename = '402-it-writers.csv';
-        
-        $outfile = Config::$data['dirs']['9-newalch'] . DS . $filename;
+        $outfile = Config::$data['dirs']['9-muller402'] . DS . Muller402::OUTPUT_CSV_FILE;
         
         $csvFields = [
             'MUID',
