@@ -30,16 +30,24 @@ class Muller402 implements SourceI{
     const UID_GROUP_PREFIX = 'group' . DB5::SEP . 'datasets' . DB5::SEP . 'newalch' .  DB5::SEP . 'muller402';
     
     /** 
-        Path to raw file, relative to data/1-raw from config.yml
+        Path to directory containing raw data, relative to data/1-newalch-raw from config.yml
+        With default value :
+        data/1-raw/newalchemypress.com/05-muller-writers/
+    **/
+    const RAW_DIR = '05-muller-writers';
+    
+    /** 
+        Name of newalchemypress.com raw file
+        With default value :
         data/1-raw/newalchemypress.com/05-muller-writers/5muller_writers.csv
     **/
-    const RAW_PATH = 'newalchemypress.com' . DS . '05-muller-writers' . DS . '5muller_writers.csv';
+    const NEWALCH_RAW_FILE = '5muller_writers.csv';
     
     /** Separator used in the raw csv file **/
     const RAW_SEP = ';';
     
     /** Name of the csv file containing Müller 402 group in 9-output/ **/
-    const OUTPUT_CSV_FILE = '402-it-writers-muller.csv';
+    const OUTPUT_CSV_FILE = 'muller-402-it-writers.csv';
     
     // SourceI implementation
     public static function source(): Source{
@@ -48,10 +56,10 @@ class Muller402 implements SourceI{
     
     // ******************************************************
     /**
-        @return Path to the raw file coming from newalch
+        @return Path to the raw file 5muller_writers.csv coming from newalch
     **/
     public static function rawFilename(){
-        return Config::$data['dirs']['1-raw'] . DS . self::RAW_PATH;
+        return Config::$data['dirs']['1-newalch-raw'] . DS . self::RAW_DIR . DS . self::NEWALCH_RAW_FILE;
     }
     
     /**
