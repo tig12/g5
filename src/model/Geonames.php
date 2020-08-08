@@ -20,11 +20,11 @@ class Geonames{
     // ******************************************************
     public static function compute_dblink(){
         if(is_null(self::$dblink)){
-            $host = Config::$data['postgresql']['dbhost'];
-            $port = Config::$data['postgresql']['dbport'];
-            $user = Config::$data['postgresql']['dbuser'];
-            $password = Config::$data['postgresql']['dbpassword'];
-            $dbname = Config::$data['postgresql']['dbname'];
+            $host = Config::$data['geonames']['postgresql']['dbhost'];
+            $port = Config::$data['geonames']['postgresql']['dbport'];
+            $user = Config::$data['geonames']['postgresql']['dbuser'];
+            $password = Config::$data['geonames']['postgresql']['dbpassword'];
+            $dbname = Config::$data['geonames']['postgresql']['dbname'];
             $dsn = "pgsql:host=$host;port=$port;user=$user;password=$password;dbname=$dbname";
             self::$dblink = new \PDO($dsn);
             self::$dblink->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);

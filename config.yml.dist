@@ -47,12 +47,12 @@ geonames:
   # (you must change, 'demo' doesn't work)
   username: demo
 
-# postgresql parameters
-# only useful for the steps which use geonames.org data stored in a local database 
-postgresql: 
-  dbhost: localhost
-  dbport: 5432
-  dbuser: pg_username
-  dbpassword: pg_password
-  dbname: pg_dbname
+  # postgresql parameters
+  # only useful for the steps which use geonames.org data stored in a local database 
+  postgresql: 
+    dbhost: localhost
+    dbport: 5432
+    dbuser: pg_username
+    dbpassword: pg_password
+    dbname: pg_dbname
     
