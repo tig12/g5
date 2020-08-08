@@ -18,10 +18,13 @@ class Cura{
     const UID_PREFIX_GROUP = 'group' . DB5::SEP . 'datasets' . DB5::SEP . 'cura';
     
     /** uid when cura is used to create a source **/
-    const UID_PREFIX_SOURCE = 'source' . DB5::SEP . 'cura';
+    const UID_PREFIX_SOURCE = 'source' . DB5::SEP . 'web' . DB5::SEP . 'cura';
+    
+    /** id in g5 db when this class represents a source **/
+    const ID_SOURCE = 'cura';
     
     /** Slug of the source cura **/
-    const SOURCE_SLUG = 'cura';
+    const SOURCE_SLUG = 'cura'; // useless ?
     
     /**
         Trust level for data coming from Cura
@@ -115,7 +118,7 @@ class Cura{
     /** Returns a source for cura **/
     public static function getSource(): Source {
         $source = Source::newEmpty();
-        $uid = UID_PREFIX_SOURCE . DB5::SEP . self::SOURCE_SLUG;
+        $uid = Cura::UID_PREFIX_SOURCE . DB5::SEP . self::ID_SOURCE;
         $file = str_replace(DB5::SEP, DS, $uid) . '.yml';
         $source->data = [
             'uid' => $uid,

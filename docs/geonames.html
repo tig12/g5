@@ -47,37 +47,6 @@ The purpose is to relate places to a geonames.org id. The program uses two ways 
     </ul>
 </nav>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- ********************************************************************************* -->
 <h2><a name="local-database">Local database</a></h2>
 
@@ -110,7 +79,13 @@ python geonames2postgres.py US
 </ul>
 
 The interest of a solution with data stored in a local database comes from the possibility to make lots of requests without worrying about the limitations of distant calls.
-<br>For the moment, this has been used to try a quite restrictive matching : the country, the C2 (département for France) and the "slug" must be exactly the same (the slug is a name with all letters lowercased, accents removed and all non alpha-numeric characters converted to hyphen ; the slug of Saint-Jean de Védas is saint-jean-de-vedas). This gives low matching rates but prevents accidental association to wrong geonames ids.
+<br>For the moment, this has been used to try a quite restrictive matching :
+<ul>
+    <li>CY (country code) must be exactly the same.</li>
+    <li>C2 (département in France, State in the USA, Province in Italy...) must be exactly the same.</li>
+    <li>The "slug" must be exactly the same (the slug is a name with all letters lowercased, accents removed and all non alpha-numeric characters converted to hyphen ; eg the slug of Saint-Jean de Védas is saint-jean-de-vedas).</li>
+</ul>
+This gives low matching rates but prevents accidental association to wrong geonames ids.
 <br>This is used in serie A, E1 and E3 (step <code>addGeo</code>).
 <br>
 <br>Better matching rates could be obtained using approximate string matching (like Levenstein), but this may need human validation to prevent wrong associations.

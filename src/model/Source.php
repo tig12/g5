@@ -105,10 +105,6 @@ class Source{
         $files = globRecursive::execute(DB5::$DIR_SOURCE . DS . '*.yml');
         $lines = [];
         foreach($files as $file){
-            if($file == DB5::$DIR_SOURCE . DS . 'Source.yml'){
-                // Source.yml : empty source to copy to create a new source
-                continue;
-            }
             // yaml parse issues a warning if a yaml file is empty
             $data = yaml_parse(file_get_contents($file));
             if(isset($data['id']) && isset($data['uid'])){

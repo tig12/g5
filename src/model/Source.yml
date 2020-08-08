@@ -7,7 +7,7 @@ type:
 
 ### source stuff ###
 source:
-  parent:
+  parents: []
   notes: |
 
 ### content ###

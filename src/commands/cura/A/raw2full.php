@@ -242,10 +242,13 @@ class raw2full implements Command{
         if(!is_file($source->file())){
             $source-> save();
         }
-        // source corresponding to this file
+        // source corresponding to current A file
         $source = Source::newEmpty();
-        $source->data['uid'] = UID_PREFIX_SOURCE . DB5::SEP . $datafile; // source/cura/A1
+        $source->data['uid'] = Cura::UID_PREFIX_SOURCE . DB5::SEP . $datafile; // source/cura/A1
+        $source->data['id'] = $datafile; // A1
         $source->data['file'] = DB5::$DIR . DS . str_replace(DB5::SEP, DS, $source->data['uid']) . '.yml'; // /path/to/full/source/cura/A1.yml
+        $source->data['source']['parents'][] = Cura::ID_SOURCE;
+echo "\n<pre>"; print_r($source->data); echo "</pre>\n"; exit;
         // group
         $g = Group::newEmpty(Cura::UID_PREFIX_GROUP . DB5::SEP . $datafile);
         $nb_stored = 0;
@@ -253,6 +256,8 @@ class raw2full implements Command{
             
             foreach(array_keys($cur) as $k){ $cur[$k] = trim($cur[$k]); }
             
+            // Here build an empty person because cura data are imported first
+            // => If person already exists, erases it
             $p = Person::newEmpty();
             
             $p->addSource($datafile);
@@ -261,12 +266,13 @@ class raw2full implements Command{
 
             $NUM = $cur['NUM'];
             
-            $p->addId(Cura::IDSOURCE, Cura::gqid($datafile, $NUM));
+            $p->addId(Cura::ID_SOURCE, Cura::gqid($datafile, $NUM));
             
             $new = [];
+            $new['trust'] = Cura::TRUST_LEVEL;
             $new['name']['family'] = $cur['FNAME'];
             $new['name']['given'] = $cur['GNAME'];
-            /////// HERE put wikidata occupation id ///////////
+            /////// TODO put wikidata occupation id ///////////
             $p->addOccu(A::compute_profession($datafile, $cur['PRO'], $NUM));
             // date time
             $day = Cura::computeDay($cur);
@@ -285,15 +291,16 @@ class raw2full implements Command{
             $new['birth']['place']['lg'] = Cura::computeLg($cur['LON']);
             $new['birth']['place']['lat'] = Cura::computeLat($cur['LAT']);
             
+            $p->update($new);
+
             // log command effect on data in the person yaml
             $p->addHistory("cura $datafile raw2full", $datafile, $new);
             
-            $p->update($new);
             $p->save(); // HERE save to disk
-$report .= "Wrote ".$p->file()."\n";
+//$report .= "Wrote ".$p->file()."\n";
             $nb_stored ++;
             $g->add($p->uid());
-break;
+//break;
         }
         $g->save(); // HERE save to disk
         $report .= "Wrote ".$g->file()."\n";
