@@ -6,8 +6,9 @@ bin
 # files marked for deletion
 z.*
 
-# don't version data/ but version data/3-edited
+# don't version data/ but version data/edited and data/raw
 data/*
-!data/3-edited
+!data/edited
+!data/raw
 
 .~lock.*

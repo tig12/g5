@@ -1,12 +1,21 @@
+#
+# Describes the structure of a Person
+# Used to create an empty person
+#
 
-uid: 
+id: 
+
 slug:
 
 sources: []
   
-ids: []
+# key / value pairs
+# key = source slug ; value = local id in the given source
+ids_in_sources: []
 
 trust:
+
+sex:
 
 name:
   usual:
@@ -20,8 +29,6 @@ name:
   fame: # stage, scene
   nicknames: []
   alternative: []
-
-sex:
 
 # occupation codes
 occus: []

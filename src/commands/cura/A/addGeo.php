@@ -61,7 +61,7 @@ class addGeo implements Command{
         
         $report = '';
         $rows = Cura::loadTmpCsv($datafile);
-        $res = implode(G5::CSV_SEP, Cura::TMP_CSV_COLUMNS) . "\n";
+        $res = implode(G5::CSV_SEP, A::OUTPUT_CSV_COLUMNS) . "\n";
         
         $N = $ok = 0;
         

@@ -63,7 +63,7 @@ class raw2full implements Command{
         $datafile = $params[0];
         
         $report =  "--- Importing file $datafile ---\n";
-        $raw = Cura::readHtmlFile($datafile);
+        $raw = Cura::readRawHtmlFile($datafile);
         $file_datafile = Cura::rawFilename($datafile);
         $file_names = CuraNames::rawFilename(); // = 902gdN.html
         //
@@ -237,37 +237,37 @@ class raw2full implements Command{
         // 4 - store result in 7-full
         // create 1 source, 1 group, N persons
         //
-        // "cura" source
-        $source = Cura::getSource();
-        if(!is_file($source->file())){
-            $source-> save();
-        }
+        // source corresponding to CURA - insert if does not already exist
+        $curaSource = Cura::getSource();
+        $test = Source::getBySlug($curaSource->data['slug']);
+        $curaSource->data['id'] = ( empty($test->data) ? Source::insert($curaSource) : $test->data['id'] );
         // source corresponding to current A file
-        $source = Source::newEmpty();
-        $source->data['uid'] = Cura::UID_PREFIX_SOURCE . DB5::SEP . $datafile; // source/cura/A1
-        $source->data['id'] = $datafile; // A1
-        $source->data['file'] = DB5::$DIR . DS . str_replace(DB5::SEP, DS, $source->data['uid']) . '.yml'; // /path/to/full/source/cura/A1.yml
-        $source->data['source']['parents'][] = Cura::ID_SOURCE;
-echo "\n<pre>"; print_r($source->data); echo "</pre>\n"; exit;
+        $source = new Source();
+        $source->data['slug'] = $datafile; // ex A1
+        $source->data['name'] = "CURA file $datafile";
+        $source->data['description'] = Cura::CURA_URLS[$datafile] . "\nDescribed by Cura as " . Cura::CURA_CLAIMS[$datafile][1];
+        $source->data['source']['parents'][] = $curaSource->data['slug'];
+        $source->data['id'] = Source::insert($source);
         // group
-        $g = Group::newEmpty(Cura::UID_PREFIX_GROUP . DB5::SEP . $datafile);
+        $g = new Group();
+        $g->data['slug'] = $datafile;
+        $g->data['sources'][] = $source->data['slug'];
+        $g->data['name'] = $datafile;
+        //$g->data['description'] = '';
+        
         $nb_stored = 0;
         foreach($res as $cur){
-            
-            foreach(array_keys($cur) as $k){ $cur[$k] = trim($cur[$k]); }
-            
-            // Here build an empty person because cura data are imported first
+            foreach(array_keys($cur) as $k){
+                $cur[$k] = trim($cur[$k]);
+            }
+            // Here build an empty person because cura data are the first to be imported
             // => If person already exists, erases it
-            $p = Person::newEmpty();
-            
+            $p = new Person();
             $p->addSource($datafile);
-            
             $p->addRaw($datafile, $cur);
-
             $NUM = $cur['NUM'];
-            
-            $p->addId(Cura::ID_SOURCE, Cura::gqid($datafile, $NUM));
-            
+            $p->addIdInSource($datafile, $NUM);
+            // here, do not modify directly $p->datato permit a call to addHistory()
             $new = [];
             $new['trust'] = Cura::TRUST_LEVEL;
             $new['name']['family'] = $cur['FNAME'];
@@ -282,7 +282,8 @@ echo "\n<pre>"; print_r($source->data); echo "</pre>\n"; exit;
                 throw new \Exception("timezone not handled : $TZ");
             }
             // TZ computation specific to A cura files - conform to Cura Notice
-            $timezone = $TZ == 0 ? '+00:00' : '-01:00';
+            // note that when $TZ = -1, +01:00 is stored
+            $timezone = $TZ == 0 ? '+00:00' : '+01:00';
             $new['birth'] = [];
             $new['birth']['date-ut'] = "$day $hour$timezone"; // HERE not storing in date but in date-ut
             // place
@@ -290,20 +291,16 @@ echo "\n<pre>"; print_r($source->data); echo "</pre>\n"; exit;
             [$new['birth']['place']['cy'], $new['birth']['c2']] = A::compute_country($cur['COU'], $cur['COD']);
             $new['birth']['place']['lg'] = Cura::computeLg($cur['LON']);
             $new['birth']['place']['lat'] = Cura::computeLat($cur['LAT']);
-            
-            $p->update($new);
-
+            $p->updateFields($new);
+            $p->computeSlug();
             // log command effect on data in the person yaml
             $p->addHistory("cura $datafile raw2full", $datafile, $new);
-            
-            $p->save(); // HERE save to disk
-//$report .= "Wrote ".$p->file()."\n";
+            $p->data['id'] = Person::insert($p); // HERE storage
             $nb_stored ++;
-            $g->add($p->uid());
-//break;
+            $g->addMember($p->data['id']);
+break;
         }
-        $g->save(); // HERE save to disk
-        $report .= "Wrote ".$g->file()."\n";
+        $g->data['id'] = Group::insert($g); // HERE storage
         $report .= "Stored $nb_stored records\n";
         return $report;
     }

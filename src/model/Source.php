@@ -16,110 +16,80 @@ use tiglib\strings\slugify;
 use tiglib\filesystem\globRecursive;
 
 
-class Source{
+class Source {
     
+    /** Structure described by src/model/Source.yml **/
     public $data = [];
     
-    /** 
-        Relative path within DB5::$DIR_INDEX to the file maintaining associations between source ids and uids
-    **/
-    const INDEX_ID_UID = 'source/id-uid.txt';
+    public function __construct(){
+        $this->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Source.yml'));
+    }
     
-    // *********************** new *******************************
+    // *********************** Storage *******************************
     
-    /**
-        Returns an object of type Source from its uid.
-        The source is initialized using its yaml file (see load()).
-        @param $uid     String like source/web/cura/A1
-        @throws Exception if $uid does not correspond to a yaml file.
-    **/
-    public static function new($uid): Source {
+    /** Creates an object of type Source from storage, using its id. **/
+    public static function get($id): Source {
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare("select * from source where id=?");
+        $stmt->execute([$id]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if($res === false || count($res) == 0){
+            return new Source();
+        }
+        $res['source'] = json_decode($res['source'], true);
         $s = new Source();
-        $s->data['uid'] = $uid;
-        $s->load();
+        $s->data = $res;
+        return $s;
+    }
+    
+    /** Creates an object of type Source from storage, using its slug. **/
+    public static function getBySlug($slug): Source {
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare("select * from source where slug=?");
+        $stmt->execute([$slug]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if($res === false || count($res) == 0){
+            return new Source();
+        }
+        $res['source'] = json_decode($res['source'], true);
+        $s = new Source();
+        $s->data = $res;
         return $s;
     }
     
     /**
-        Returns an empty object of type Source.
-        Initialized with Source.yml
+        Inserts a new source in storage.
+        @return The id of the inserted row
+        @throws \Exception if trying to insert a duplicate slug
     **/
-    public static function newEmpty(): Source {
-        $s = new Source();
-        $s->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Source.yml'));
-        return $s;
+    public static function insert(Source $s): int{
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare("insert into source(slug,name,description,source) values(?,?,?,?) returning id");
+        $stmt->execute([
+            $s->data['slug'],
+            $s->data['name'],
+            $s->data['description'],
+            json_encode($s->data['source']),
+        ]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $res['id'];
     }
-    
-    // ************************ uid ******************************
-    /**
-        Returns the uid, unique id in g5 database.
-        Corresponds to the relative path where it is stored in 7-full/
-        ex : source/web/cura/A1 corresponds to source/web/cura/A1.yml
-    **/
-    public function uid() : string {
-        return $this->data['uid'];
-    }
-    
-    // *********************** file system *******************************
-    
-    /** 
-        Absolute or relative path to the main yaml file contianing source informations.
-        ex: /path/to/g5data/7-full/source/cura/A1.yml
-        @param $full if false, return path relative in 7-full/
-    **/
-    public function file($full=true): string {
-        $res = $full ? DB5::$DIR . DB5::SEP : '';
-        $res .= str_replace(DB5::SEP, DS, $this->uid()) . '.yml';
-        return $res;
-    }
-    
-    /** 
-        Fills $this->data from this source's yaml file
-        @throws Exception if yaml file corresponding to source's uid.
-    **/
-    public function load(){
-        if(!is_file($this->file())){
-            throw new \Exception("File " . $this->file() . " does not exist");
-        }
-        $this->data = yaml_parse(file_get_contents($this->file()));
-    }
-    
-    public function save(){
-        $file = $this->file();
-        $dir = dirname($file);
-        if(!is_dir($dir)){
-            mkdir($dir, 0755, true);
-        }
-        file_put_contents($file, yaml_emit($this->data)); // echo "___ file_put_contents $file\n";
-    }
-    
-    // *********************** fields *******************************
-    
-    // *********************** index *******************************
     
     /**
-        Rewrites index/source/id-uid.txt
-        @return Report
+        Updates a source in storage.
+        @throws \Exception if trying to update an unexisting id
     **/
-    public static function reindexIdUid(): string{
-        $files = globRecursive::execute(DB5::$DIR_SOURCE . DS . '*.yml');
-        $lines = [];
-        foreach($files as $file){
-            // yaml parse issues a warning if a yaml file is empty
-            $data = yaml_parse(file_get_contents($file));
-            if(isset($data['id']) && isset($data['uid'])){
-                $lines[$data['id']] = $data['uid'];
-            }
-        }
-        $res = '';
-        $n = 0;
-        foreach($lines as $k => $v){
-            $res .= "$k $v\n";
-            $n++;
-        }
-        $outfile = DB5::$DIR_INDEX . DS . self::INDEX_ID_UID;
-        file_put_contents($outfile, $res);
-        return "Updated $outfile (wrote $n lines)\n";
+    public static function update(Source $s) {
+        $stmt = $dblink->prepare("update source set slug=?,name=?,description=?,source=? where id=?");
+        $stmt->execute([
+            $s->data['slug'],
+            $s->data['name'],
+            $s->data['description'],
+            json_encode($s->data['source']),
+            $s->data['id'],
+        ]);
     }
+    
+    // *********************** Fields *******************************
     
 } // end class

@@ -16,86 +16,94 @@ class Group{
     
     public $data = [];
     
-    // *********************** new *******************************
-    /**
-        Create an object of type Group from its uid.
-        @param $uid     String like group/web/cura/A1
-    **/
-    public static function new($uid){
-        $g = new Group();
-        $g->data['uid'] = $uid;
-        $g->load();
-        return $g;
+    public function __construct(){
+        $this->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Group.yml'));
     }
     
-    /** Returns an empty object of type Group. **/
-    public static function newEmpty($uid=''){
-        $g = new Group();
-        $g->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Group.yml'));
-        if($uid != ''){
-            $g->data['uid'] = $uid;
+    // *********************** Storage *******************************
+    
+    /** Creates an object of type Group from storage, using its id. **/
+    public static function get($id): Group{
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare("select * from groop where id=?");
+        $stmt->execute([$id]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if($res === false || count($res) == 0){
+            return new Group();
         }
+        $res['sources'] = json_decode($res['sources'], true);
+        $g = new Group();
+        $g->data = $res;
         return $g;
     }
     
-    // ************************ id ******************************
-
-    public function uid(){
-        return $this->data['uid'];
+    /** Creates an object of type Group from storage, using its slug. **/
+    public static function getBySlug($slug): Group{
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare("select * from groop where slug=?");
+        $stmt->execute([$slug]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if($res === false || count($res) == 0){
+            return new Group();
+        }
+        $res['sources'] = json_decode($res['sources'], true);
+        $g = new Group();
+        $g->data = $res;
+        return $g;
     }
     
-    public function slug(): string {
-        $tmp = explode(DB5::SEP, $this->uid());
-        return $tmp[count($tmp)-1];
+    /**
+        Inserts a new group in storage.
+        @return The id of the inserted row
+        @throws \Exception if trying to insert a duplicate slug
+    **/
+    public static function insert(Group $g): int{
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare("insert into groop(slug,name,description,sources) values(?,?,?,?) returning id");
+        $stmt->execute([
+            $g->data['slug'],
+            $g->data['name'],
+            $g->data['description'],
+            json_encode($g->data['sources']),
+        ]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $g->data['id'] = $res['id'];
+        // members                                                                                     
+        $stmt = $dblink->prepare("insert into person_group(id_person,id_group) values(?,?)");
+        foreach($g->data['members'] as $pid){
+            $stmt->execute([$pid, $g->data['id']]);
+        }
+        return $g->data['id'];
     }
     
-    // *********************** fields *******************************
+    /**
+        Updates a group in storage.
+        @throws \Exception if trying to update an unexisting id
+    **/
+    public static function update(Group $g) {
+        $stmt = $dblink->prepare("update groop set slug=?,name=?,description=?,sources=? where id=?");
+        $stmt->execute([
+            $g->data['slug'],
+            $g->data['name'],
+            $g->data['description'],
+            json_encode($g->data['sources']),
+            $g->data['id'],
+        ]);
+        // members                                                                                     
+        $dblink->exec("delete from person_group where id_group='" . $dblink->quote($g->data['id']) . "'");
+        $stmt = $dblink->prepare("insert into person_group(id_person,id_group) values(?,?)");
+        foreach($g->data['members'] as $pid){
+            $stmt->execute([$pid, $g->data['id']]);
+        }
+    }
     
-    public function add($entry){
+    // *********************** Fields *******************************
+    
+    public function addMember($entry){
         $this->data['members'][] = $entry;
     }
     
-    // *********************** file system *******************************
-    
-    public function file($full=true): string {
-        $res = $full ? DB5::$DIR . DB5::SEP : '';
-        $res .= 'tmp/'; // WARNING HACK
-        $res .= $this->uid() . '.txt';
-        return str_replace(DB5::SEP, DS, $res);
-    }
-    
-    /**
-        Read from disk
-        txt files in 7-full/tmp/group
-    **/
-    public function load(){
-        $path = $this->file();
-        if(!is_file($path)){
-            throw new \Exception(
-                "IMPOSSIBLE TO LOAD GROUP - file does not exist: $path\n"
-            );
-        }
-        $this->data['members'] = file($path,  FILE_IGNORE_NEW_LINES);
-    }
-    
-    /** 
-        Write on disk
-        => Text file with one person slug per line 
-    **/
-    public function save(){
-        $path = $this->file();
-        $dir = dirname($path);
-        if(!is_dir($dir)){
-            mkdir($dir, 0755, true);
-        }
-        $dump = '';
-        // not sorted, keep the order decided by client code 
-        foreach($this->data['members'] as $elt){
-            $dump .= $elt . "\n";
-        }
-        file_put_contents($path, $dump);
-        // echo "___ file_put_contents $path\n"; // @todo log
-    }
+    // *********************** Export *******************************
     
     /** 
         Generates a csv from its members

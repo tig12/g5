@@ -80,7 +80,7 @@ class raw2csv implements Command{
         $datafile = 'D6';
             
         $report =  "--- Importing $datafile ---\n";
-        $raw = Cura::readHtmlFile($datafile);
+        $raw = Cura::readRawHtmlFile($datafile);
         // Fix an error on a latitude in cura file
         $raw = str_replace(
             '356	8	1	1925	11	0	0	36N05	00W56	Ruiz Bernardo',

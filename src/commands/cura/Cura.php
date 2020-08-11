@@ -14,17 +14,11 @@ use tiglib\arrays\csvAssociative;
 
 class Cura{
     
-    /** uid when cura is used to create a group **/
-    const UID_PREFIX_GROUP = 'group' . DB5::SEP . 'datasets' . DB5::SEP . 'cura';
-    
-    /** uid when cura is used to create a source **/
-    const UID_PREFIX_SOURCE = 'source' . DB5::SEP . 'web' . DB5::SEP . 'cura';
-    
-    /** id in g5 db when this class represents a source **/
-    const ID_SOURCE = 'cura';
-    
-    /** Slug of the source cura **/
-    const SOURCE_SLUG = 'cura'; // useless ?
+    /**
+        Path to the yaml file containing the characteristics of the source.
+        Path relative to dirs / edited
+    **/
+    const SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'cura.yml';
     
     /**
         Trust level for data coming from Cura
@@ -49,46 +43,42 @@ class Cura{
     /** 
         For documentation purpose only
         For each line :
-            - nb of records claimed bu Cura
+            - nb of records claimed by Cura
             - label on Cura web site
             - explanation of the difference between Cura and g5 numbers
     **/
     const CURA_CLAIMS = [
-    'A1' => [2088, '2088 sports champions', 'Y, see <a href="http://cura.free.fr/gauq/902gdA1y.html">Cura web site</a>'],
-    'A2' => [3644, '3644 scientists and medical doctors', 'Y, see <a href="http://cura.free.fr/gauq/902gdA2y.html">Cura web site</a>'],
-    'A3' => [3047, '3047 military men', 'N'],
-    'A4' => [2722, '1473 painters and 1249 French musicians', 'N'],
-    'A5' => [2412, '1409 actors and 1003 politicians', 'N'],
-    'A6' => [2027, '2027 writers and journalists', 'N'],
-    'D6' => [450,  '450 New famous European Sports Champions', 'N'],
-    'D10' => [1398, '1398 data of successful Americans', 'N'],
-    'E1' => [2154, '2154 French Physicians, Military Men and Executives', 'N'],
-    'E3' => [1540, '1540 New French Writers, Artists, Actors, Politicians and Journalists', 'N'],
+        'A1' =>  [2088, '2088 sports champions', 'Y, see <a href="http://cura.free.fr/gauq/902gdA1y.html">Cura web site</a>'],
+        'A2' =>  [3644, '3644 scientists and medical doctors', 'Y, see <a href="http://cura.free.fr/gauq/902gdA2y.html">Cura web site</a>'],
+        'A3' =>  [3047, '3047 military men', 'N'],
+        'A4' =>  [2722, '1473 painters and 1249 French musicians', 'N'],
+        'A5' =>  [2412, '1409 actors and 1003 politicians', 'N'],
+        'A6' =>  [2027, '2027 writers and journalists', 'N'],
+        'D6' =>  [450,  '450 New famous European Sports Champions', 'N'],
+        'D10' => [1398, '1398 data of successful Americans', 'N'],
+        'E1' =>  [2154, '2154 French Physicians, Military Men and Executives', 'N'],
+        'E3' =>  [1540, '1540 New French Writers, Artists, Actors, Politicians and Journalists', 'N'],
     ];
     
     
-    /**
-        Names of the columns in files of 5-cura-csv/
-        @todo Problem with this constant :
-              It corresponds to fields of serie A
-              For example, different for E1 E3
-              So should not be in class Cura, but in class cura\A\A
+    /** 
+        For documentation purpose only
+        URLs of the raw files in Cura web site
     **/
-    const TMP_CSV_COLUMNS = [
-            'NUM',
-            'FNAME',
-            'GNAME',
-            'OCCU',
-            'DATE',
-            'DATE_C',
-            'PLACE',
-            'CY',
-            'C2',
-            'LG',
-            'LAT',
-            'GEOID',
-            'NOTES',
-        ];
+    const CURA_URLS = [
+        'A1' =>  'http://cura.free.fr/gauq/902gdA1y.html',
+        'A2' =>  'http://cura.free.fr/gauq/902gdA2y.html',
+        'A3' =>  'http://cura.free.fr/gauq/902gdA3y.html',
+        'A4' =>  'http://cura.free.fr/gauq/902gdA4y.html',
+        'A5' =>  'http://cura.free.fr/gauq/902gdA5y.html',
+        'A6' =>  'http://cura.free.fr/gauq/902gdA6y.html',
+        'D6' =>  'http://cura.free.fr/gauq/902gdD6.html',
+        'D10' => 'http://cura.free.fr/gauq/902gdD10.html',
+        'E1' =>  'http://cura.free.fr/gauq/902gdE1.html',
+        'E3' =>  'http://cura.free.fr/gauq/902gdE3.html',
+    ];
+    
+    
 
     
     /** 
@@ -112,28 +102,6 @@ class Cura{
     ];
     
     
-    // ================================= source management =================================
-    
-    // ******************************************************
-    /** Returns a source for cura **/
-    public static function getSource(): Source {
-        $source = Source::newEmpty();
-        $uid = Cura::UID_PREFIX_SOURCE . DB5::SEP . self::ID_SOURCE;
-        $file = str_replace(DB5::SEP, DS, $uid) . '.yml';
-        $source->data = [
-            'uid' => $uid,
-            'slug' => self::SOURCE_SLUG,
-            'file' => $file,
-            'name' => "CURA",
-            'description' => "Web site cura.free.fr",
-        ];
-        return $source;
-    }
-    
-    
-    // ================================= Code used by import =================================
-    
-    // ******************************************************
     /**
         Returns a Gauquelin id, like "A1-654"
         Unique id of a record among cura files.
@@ -144,30 +112,43 @@ class Cura{
         return "$datafile-$NUM";
     }
     
-    // ******************************************************
+    // *********************** Source management ***********************
+    
+    /** Returns a Source object for cura web site. **/
+    public static function getSource(): Source {
+        $s = new Source();
+        $ymlfile = Config::$data['dirs']['edited'] . DS . self::SOURCE_DEFINITION;
+        $s->data = yaml_parse(file_get_contents($ymlfile));
+        return $s;
+    }
+    
+    
+    // *********************** Raw files manipulation ***********************
+    
     /**
         Returns the name of a file in 5-cura-csv/
-        @param  $datafile : a string like 'A1'
+        @param  $datafile : a string like 'A1'    
+TODO suppress
     **/
     public static function tmpFilename($datafile){
         return Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv';
     }
     
-    // ******************************************************
     /**
         Loads a cura file of 5-cura-csv/ in a regular array
         @param  $datafile : a string like 'A1'
         @return Regular array containing the persons' data
+TODO suppress
     **/
     public static function loadTmpCsv($datafile){
         return csvAssociative::compute(Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv');
     }
 
-    // ******************************************************
     /**
         Loads a cura file of 5-cura-csv/ in an asssociative array ; keys = cura ids (NUM)
         @param      $datafile : a string like 'A1'
         @return     Associative array containing the cura file in 5-cura-csv/ ; keys = cura ids (NUM)
+TODO suppress
     **/
     public static function loadTmpCsv_num($datafile){
         $curaRows1 = self::loadTmpCsv($datafile);
@@ -178,7 +159,13 @@ class Cura{
         return $res;
     }
     
-    // *****************************************
+    /** 
+        Computes the name of the directory where raw cura files are stored
+    **/
+    public static function rawDirname(){
+        return Config::$data['dirs']['raw'] . DS . 'cura.free.fr';
+    }
+    
     /** 
         Computes the name of a html file downloaded from cura.free.fr
         and locally stored in directory data/raw/cura.free.fr (see absolute path of this directory in config.yml)
@@ -189,17 +176,14 @@ class Cura{
         return '902gd' . $datafile . (substr($datafile, 0, 1) == 'A' ? 'y' : '') . '.html';
     }
     
-    // *****************************************
     /** 
         Reads a html file downloaded from cura.free.fr
         and locally stored in directory data/raw/cura.free.fr (see absolute path of this directory in config.yml)
         @param  $datafile : string like 'A1'
         @return The content of the file
-        
-        @todo This code is specific to cura.free.fr data source => should be in cura.free.fr importer
     **/
-    public static function readHtmlFile($datafile){
-        $raw_file = Config::$data['dirs']['1-cura-raw'] . DS . self::rawFilename($datafile);
+    public static function readRawHtmlFile($datafile){
+        $raw_file = self::rawDirname() . DS . self::rawFilename($datafile);
         $tmp = @file_get_contents($raw_file);
         if(!$tmp){
             $msg = "ERROR : Unable to read file $raw_file\n"
@@ -209,7 +193,8 @@ class Cura{
         return utf8_encode($tmp);
     }
     
-    // *****************************************
+    // *********************** Time / space functions ***********************
+    
     /**
         Converts the fields YEA, MON, DAY of a line in a YYYY-MM-DD date
     **/
@@ -217,7 +202,6 @@ class Cura{
         return trim($array['YEA']) . '-' . sprintf('%02s', trim($array['MON'])) . '-' . sprintf('%02s', trim($array['DAY']));
     }
     
-    // *****************************************
     /**
         Converts the fields H, MN, SEC of a line in a HH:MM:SS hour
         @param  $array Associative array containing 3 fields : H, MN, SEC
@@ -226,7 +210,6 @@ class Cura{
         return trim(sprintf('%02s', $array['H']) . ':' . sprintf('%02s', $array['MN']) . ':' . sprintf('%02s', $array['SEC']));
     }
     
-    // *****************************************
     /**
         Converts the fields H, MN of a line in a HH:MM hour
         @param  $array Associative array containing 2 fields : H, MN
@@ -235,7 +218,6 @@ class Cura{
         return trim(sprintf('%02s', $array['H']) . ':' . sprintf('%02s', $array['MN']));
     }
     
-    // *****************************************
     /**
         Converts field LON in decimal degrees
     **/
@@ -248,7 +230,6 @@ class Cura{
         return round($res, 5);
     }
 
-    // *****************************************
     /**
         Converts field LAT in decimal degrees
     **/

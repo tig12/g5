@@ -1,0 +1,15 @@
+
+document:
+  history:
+    - 2020-05-18 16:20:21+02:00: Thierry Graff, creation
+
+name: cura.free.fr
+slug: cura
+description: |
+  Web site http://cura.free.fr
+  C.U.R.A.
+  Centre Universitaire de Recherche en Astrologie
+  The International Astrology Research Center
+  Created by Patrice Guinard in 1999
+source:
+  parents: []

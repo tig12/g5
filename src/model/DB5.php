@@ -7,9 +7,6 @@
 namespace g5\model;
 
 use g5\Config;
-use tiglib\strings\slugify;
-
-DB5::init();
 
 class DB5{
     
@@ -24,25 +21,27 @@ class DB5{
     /** Separator used to build uids **/
     const SEP = '/';
     
-    /** Path pointing to 7-full **/             public static $DIR; 
-    /** Path pointing to 7-full/tmp/index **/   public static $DIR_INDEX; 
-    /** Path pointing to 7-full/group **/       public static $DIR_GROUP;
-    /** Path pointing to 7-full/person **/      public static $DIR_PERSON;
-    /** Path pointing to 7-full/source **/      public static $DIR_SOURCE;
-    
     /**
         Pattern to check a date.
         @todo put elsewhere ?
     **/
     const PDATE = '/\d{4}-\d{2}-\d{2}/';
     
-    // ******************************************************
-    public static function init(){
-        self::$DIR = Config::$data['dirs']['7-full'];
-        self::$DIR_INDEX = self::$DIR . DS . 'tmp' . DS . 'index';
-        self::$DIR_GROUP = self::$DIR . DS . 'group';
-        self::$DIR_PERSON = self::$DIR . DS . 'person';
-        self::$DIR_SOURCE = self::$DIR . DS . 'source';
+    private static $dblink = null;
+    
+    /** Connection to g5 database **/
+    public static function getDblink(){
+        if(is_null(self::$dblink)) {
+            $host = Config::$data['db5']['postgresql']['dbhost'];
+            $port = Config::$data['db5']['postgresql']['dbport'];
+            $user = Config::$data['db5']['postgresql']['dbuser'];
+            $password = Config::$data['db5']['postgresql']['dbpassword'];
+            $dbname = Config::$data['db5']['postgresql']['dbname'];
+            $dsn = "pgsql:host=$host;port=$port;user=$user;password=$password;dbname=$dbname";
+            self::$dblink = new \PDO($dsn);
+            self::$dblink->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        }
+        return self::$dblink;
     }
     
 }// end class

@@ -388,7 +388,7 @@ class raw2csv implements Command{
         $datafile = $params[0];
         
         $report =  "--- Importing file $datafile ---\n";
-        $raw = Cura::readHtmlFile($datafile);
+        $raw = Cura::readRawHtmlFile($datafile);
         $file_datafile = Cura::rawFilename($datafile);
         $file_names = CuraNames::rawFilename(); // = 902gdN.html
         //
@@ -564,9 +564,9 @@ class raw2csv implements Command{
         $nb_stored = 0;
         $csv = '';
         // fields in the resulting csv
-        $csv = implode(G5::CSV_SEP, Cura::TMP_CSV_COLUMNS) . "\n";
+        $csv = implode(G5::CSV_SEP, A::OUTPUT_CSV_COLUMNS) . "\n";
         foreach($res as $cur){
-            $new = array_fill_keys(Cura::TMP_CSV_COLUMNS, '');
+            $new = array_fill_keys(A::OUTPUT_CSV_COLUMNS, '');
             $new['NUM'] = trim($cur['NUM']);
             $new['FNAME'] = trim($cur['FNAME']);
             $new['GNAME'] = trim($cur['GNAME']);

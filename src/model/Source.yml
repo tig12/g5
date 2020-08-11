@@ -1,25 +1,16 @@
-document:
-  history: []
+#
+# Describes the structure of a Source
+# Used to create an empty source
+#
 
-uid: 
 id: 
-type: 
 
-### source stuff ###
-source:
-  parents: []
-  notes: |
+slug:
 
-### content ###
 name: 
-author: 
-date: 
-N: 
-description: 
+
+description: |
+
+source:
+  parents: [] # list of source slugs
   
-citations: []
-
-publisher: 
-
-publications: []
-

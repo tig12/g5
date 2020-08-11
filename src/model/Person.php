@@ -7,90 +7,154 @@
 
 namespace g5\model;
 
-use g5\Config;
 use tiglib\strings\slugify;
-//use tiglib\arrays\cleanEmptyKeys;
 
-class Person{
+class Person {
     
     public $data = [];
     
-    // *********************** new *******************************
+    public function __construct(){
+        $this->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Person.yml'));
+    }
     
-    /**
-        Returns an object of type Person from its uid.
-        @param $uid     String like person/1876/05/29/parmentier-andre
-    **/
-    public static function new($uid): Person {
+    // *********************** Storage *******************************
+    
+    /** Creates an object of type Person from storage, using its id. **/
+    public static function get($id): Person{
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare("select * from person where id=?");
+        $stmt->execute([$id]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if($res === false || count($res) == 0){
+            return new Person();
+        }
+        $res['sources'] = json_decode($res['sources'], true);
+        $res['ids_in_sources'] = json_decode($res['ids_in_sources'], true);
+        $res['name'] = json_decode($res['name'], true);
+        $res['occus'] = json_decode($res['occus'], true);
+        $res['birth'] = json_decode($res['birth'], true);
+        $res['death'] = json_decode($res['death'], true);
+        $res['raw'] = json_decode($res['raw'], true);
+        $res['history'] = json_decode($res['history'], true);
         $p = new Person();
-        $p->data['uid'] = $uid;
-        $p->load();
+        $p->data = $res;
+        return $p;
+    }
+    
+    /** Creates an object of type Person from storage, using its slug. **/
+    public static function getBySlug($slug): Person{
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare("select * from person where slug=?");
+        $stmt->execute([$slug]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if($res === false || count($res) == 0){
+            return new Person();
+        }
+        $res['sources'] = json_decode($res['sources'], true);
+        $res['ids_in_sources'] = json_decode($res['ids_in_sources'], true);
+        $res['name'] = json_decode($res['name'], true);
+        $res['occus'] = json_decode($res['occus'], true);
+        $res['birth'] = json_decode($res['birth'], true);
+        $res['death'] = json_decode($res['death'], true);
+        $res['raw'] = json_decode($res['raw'], true);
+        $res['history'] = json_decode($res['history'], true);
+        $p = new Person();
+        $p->data = $res;
         return $p;
     }
     
     /**
-        Returns an empty object of type Person.
-        Initialized with Person.yml
+        Inserts a new person in storage.
+        @return The id of the inserted row
+        @throws \Exception if trying to insert a duplicate slug
     **/
-    public static function newEmpty(): Person {
-        $p = new Person();
-        $p->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Person.yml'));
-        return $p;
+    public static function insert(Person $p): int{
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare("insert into person(
+            slug,
+            sources,
+            ids_in_sources,
+            trust,
+            sex,
+            name,
+            occus,
+            birth,
+            death,
+            raw,
+            history
+            )values(?,?,?,?,?,?,?,?,?,?,?) returning id");
+        $stmt->execute([
+            $p->data['slug'],
+            json_encode($p->data['sources']),
+            json_encode($p->data['ids_in_sources']),
+            $p->data['trust'],
+            $p->data['sex'],
+            json_encode($p->data['name']),
+            json_encode($p->data['occus']),
+            json_encode($p->data['birth']),
+            json_encode($p->data['death']),
+            json_encode($p->data['raw']),
+            json_encode($p->data['history']),
+        ]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $res['id'];
+    }
+
+    /**
+        Updates a person in storage.
+        @throws \Exception if trying to update an unexisting id
+    **/
+    public static function update(Person $p) {
+        $stmt = $dblink->prepare("update person set
+            slug=?,
+            sources=?,
+            ids_in_sources=?,
+            trust=?,
+            sex=?,
+            name=?,
+            occus=?,
+            birth=?,
+            death=?,
+            raw=?,
+            history=?      
+            where id=?");
+        $stmt->execute([
+            $p->data['slug'],
+            json_encode($p->data['sources']),
+            json_encode($p->data['ids_in_sources']),
+            $p->data['trust'],
+            $p->data['sex'],
+            json_encode($p->data['name']),
+            json_encode($p->data['occus']),
+            json_encode($p->data['birth']),
+            json_encode($p->data['death']),
+            json_encode($p->data['raw']),
+            json_encode($p->data['history']),
+            $p->data['id'],
+        ]);
     }
     
-    // ************************ id ******************************
-    /**
-        Unique id in g5 database.
-        Corresponds to the relative path to the directory where the person is stored in 7-full/
-        ex : person/1811/10/25/galois-evariste
-    **/
-    public function uid() : string {
-        if($this->data['uid']){
-            return $this->data['uid'];
-        }
-        // Build the uid from slug
-        $slug = $this->slug(true);                        
-        $date = $this->birthday();
-        if($date == ''){
-            return implode(DB5::SEP, ['tmp', 'lost', 'person', $slug]);
-        }
-        [$y, $m, $d] = explode('-', $date);
-        return implode(DB5::SEP, ['person', $y, $m, $d, $slug]);
-    }
+    // *********************** Fields *******************************
     
     /**
-        A string which can be used in a url
-        ex:
-        if $short = false : galois-evariste-1811-10-25
-        if $short = true  : galois-evariste
-        @pre    The person must have a valid uid
+        Computes the slug of a person.
+        ex :
+            - galois-evariste-1811-10-25 for a person with a known birth time.
+            - galois-evariste for a person without a known birth time.
+        throws \Exception if the person id computation impossible (the person has no family name).
     **/
-    public function slug($short=false): string {
-        if($this->data['uid']){
-            // ex of uid : person/1898/05/22/acito-alfredo
-            preg_match('#person/(\d{4})/(\d{2})/(\d{2})/(.*)#', $this->uid(), $m);
-            if(count($m) != 5){
-                throw new Exception("INVALID PERSON UID : " . $this->uid());
-            }
-            if($short){
-                return $m[4];
-            }
-            return $m[4] . '-' . $m[1] . '-' . $m[2] . '-' . $m[3];
+    public function computeSlug() {
+        if(!$this->data['name']['family']){
+            throw new Exception("Person->computeSlug() impossible - needs family name");
         }
-        else if($this->data['name']['family']){
-            $name = $this->data['name']['family'] . (isset($this->data['name']['given']) ? ' ' . $this->data['name']['given'] : '');
-            if($short){
-                // galois-evariste
-                return slugify::compute($name);
-            }
-            if($this->birthday()){
-                // galois-evariste-1811-10-25
-                return slugify::compute($name . '-' . $this->birthday());
-            }
-            return slugify::compute($name);
+        $name = $this->data['name']['family'] . (isset($this->data['name']['given']) ? ' ' . $this->data['name']['given'] : '');
+        if($this->birthday()){
+            // galois-evariste-1811-10-25
+            $this->data['slug'] = slugify::compute($name . '-' . $this->birthday());
         }
         else{
-            throw new Exception("Person->slug() computation impossible - needs either uid or family name");
+            // galois-evariste
+            $this->data['slug'] = slugify::compute($name);
         }
     }
     
@@ -108,71 +172,16 @@ class Person{
         return '';
     }
     
-    // *********************** file system *******************************
-    
-    /** 
-        Absolute or relative path to the directory containing person's data
-        ex: /path/to/g5data/7-full/person/1811/10/25/galois-evariste-1811-10-25
-        @param $full if false, return path relative in 7-full/
-    **/
-    public function dir($full=true): string {
-        $res = $full ? DB5::$DIR . DB5::SEP : '';
-        $res .= $this->uid();
-        return str_replace(DB5::SEP, DS, $res);
-    }
-    
-    /** 
-        Absolute or relative path to the main yaml file reprensenting the person
-        ex: /path/to/g5data/7-full/person/1811/10/25/galois-evariste/galois-evariste-1811-10-25.yml
-        @param $full see {@link path()}
-    **/
-    public function file($full=true): string {
-        return $this->dir($full) . DS . $this->slug() . '.yml';
-    }
-    
-    /** Read from disk **/
-    public function load(){
-        $this->data = yaml_parse(file_get_contents($this->file()));
-    }
-    
-    /** Write to disk **/
-    public function save(){
-        if(!is_dir($this->dir())){
-            mkdir($this->dir(), 0755, true);
-        }
-        $this->data['uid'] = $this->uid();
-        $this->data['slug'] = $this->slug();
-        //$this->data['file'] = $this->file();
-//        $this->clean();
-        file_put_contents($this->file(), yaml_emit($this->data));
-        // @todo log diwk write
-        // echo "write on disk " . $this->file() . "\n";
-    }
-    
-    // *********************** get *******************************
-    public function simple($format=[]){
-        // remove ?
-    }
-    
     // *********************** update fields *******************************
     
-    public function clean(){
-        cleanEmptyKeys::compute($this->data);
-    }
-    
-    public function update($replace){
+    public function updateFields($replace){
         // calling addHistory() before calling update() is left to client code
         // Decision could be made to call addHistory() here to impose to trace all modifications
-        //$this->addHistory();
         $this->data = array_replace_recursive($this->data, $replace);
-//echo "\n<pre>"; print_r($this); echo "</pre>\n"; exit;
-        if($this->data['uid'] == ''){
-            $this->data['uid'] = $this->uid();
-        }
     }
     
-    public function addId($source, $id){
-        $this->data['ids'][$source] = $id;
+    public function addIdInSource($source, $id){
+        $this->data['ids_in_sources'][$source] = $id;
     }
     
     public function addOccu($occu){

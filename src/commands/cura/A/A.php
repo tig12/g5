@@ -10,6 +10,26 @@ namespace g5\commands\cura\A;
 class A{
     
     /**
+        Names of the columns in generated csv files
+        used by default by export
+    **/
+    const OUTPUT_CSV_COLUMNS = [
+        'NUM',
+        'FNAME',
+        'GNAME',
+        'OCCU',
+        'DATE-UT',
+        'DATE',
+        'PLACE',
+        'CY',
+        'C2',
+        'LG',
+        'LAT',
+        'GEOID',
+        'NOTES',
+    ];
+    
+    /**
         Associations between profession codes used in the cura html files
         and profession codes used in the generated csv files
         for the different files of serie A.
@@ -340,8 +360,8 @@ class A{
     /** 
         @return String like 'Gauquelin-A1-243'
     **/
-    public static function compute_replacement_name($datafile, $num){
-        return "Gauquelin-$datafile-$num";
+    public static function compute_replacement_name($datafile, $NUM){
+        return "Gauquelin-$datafile-$NUM";
     }
     
     // ******************************************************

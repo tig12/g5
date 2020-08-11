@@ -47,7 +47,7 @@ class raw2csv implements Command{
         
         $subject = 'D10';
         $report =  "--- Importing serie $subject ---\n";
-        $raw = Cura::readHtmlFile($subject);
+        $raw = Cura::readRawHtmlFile($subject);
         $file_serie = Cura::rawFilename($subject);
         preg_match('#<pre>\s*(NUM.*?CICO)\s*(.*?)\s*</pre>#sm', $raw, $m);
         if(count($m) != 3){

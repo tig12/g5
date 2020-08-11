@@ -1,20 +1,16 @@
-document:
-  history: []
+#
+# Describes the structure of a Group
+# Used to create an empty group
+#
 
-# unique within db5
-uid: 
-
-# unique within groups
 id: 
+
+slug:
 
 name:
 
 description: |
   
-N: 
+sources: []
 
-source:
-  parent:
-  notes: |
-
-members: []
+members: [] # list of person slugs
