@@ -125,40 +125,6 @@ class Cura{
     
     // *********************** Raw files manipulation ***********************
     
-    /**
-        Returns the name of a file in 5-cura-csv/
-        @param  $datafile : a string like 'A1'    
-TODO suppress
-    **/
-    public static function tmpFilename($datafile){
-        return Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv';
-    }
-    
-    /**
-        Loads a cura file of 5-cura-csv/ in a regular array
-        @param  $datafile : a string like 'A1'
-        @return Regular array containing the persons' data
-TODO suppress
-    **/
-    public static function loadTmpCsv($datafile){
-        return csvAssociative::compute(Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv');
-    }
-
-    /**
-        Loads a cura file of 5-cura-csv/ in an asssociative array ; keys = cura ids (NUM)
-        @param      $datafile : a string like 'A1'
-        @return     Associative array containing the cura file in 5-cura-csv/ ; keys = cura ids (NUM)
-TODO suppress
-    **/
-    public static function loadTmpCsv_num($datafile){
-        $curaRows1 = self::loadTmpCsv($datafile);
-        $res = [];              
-        foreach($curaRows1 as $row){
-            $res[$row['NUM']] = $row;
-        }
-        return $res;
-    }
-    
     /** 
         Computes the name of the directory where raw cura files are stored
     **/

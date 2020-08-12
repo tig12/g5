@@ -47,8 +47,8 @@ class CuraCommand implements Command{
                 $class = "g5\\commands\\cura\\all\\export";
             }
             // tweak2csv is available for all datafiles, and implemented in subpackage all.
-            else if($command == 'tweak2csv'){
-                $class = "g5\\commands\\cura\\all\\tweak2csv";
+            else if($command == 'tweak2db'){
+                $class = "g5\\commands\\cura\\all\\tweak2db";
             }
             else{
                 $class = "g5\\commands\\cura\\" . Cura::DATAFILES_SUBNAMESPACE[$datafile] . '\\' . $command;

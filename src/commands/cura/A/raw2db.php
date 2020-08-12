@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Import cura A files to 7-full/
+    Import cura A files to g5 database
                                    
     This code uses file 902gdN.html to retrieve the names, but this could have been done using only 902gdA*y.html files
     (for example, 902gdA1y.html could have been used instead of using 902gdA1y.html and 902gdN.html).
@@ -25,7 +25,7 @@ use g5\commands\cura\CuraNames;
 use tiglib\arrays\sortByKey;
 
 
-class raw2full implements Command{
+class raw2db implements Command{
     
     // *****************************************
     // Implementation of Command
@@ -242,6 +242,7 @@ class raw2full implements Command{
         $test = Source::getBySlug($curaSource->data['slug']);
         $curaSource->data['id'] = ( empty($test->data) ? Source::insert($curaSource) : $test->data['id'] );
         // source corresponding to current A file
+        $source = Source::getBySlug($datafile);
         $source = new Source();
         $source->data['slug'] = $datafile; // ex A1
         $source->data['name'] = "CURA file $datafile";
@@ -267,7 +268,8 @@ class raw2full implements Command{
             $p->addRaw($datafile, $cur);
             $NUM = $cur['NUM'];
             $p->addIdInSource($datafile, $NUM);
-            // here, do not modify directly $p->datato permit a call to addHistory()
+            // here, do not modify directly $p->data to permit a call to addHistory()
+            // containing only new data
             $new = [];
             $new['trust'] = Cura::TRUST_LEVEL;
             $new['name']['family'] = $cur['FNAME'];
@@ -298,7 +300,6 @@ class raw2full implements Command{
             $p->data['id'] = Person::insert($p); // HERE storage
             $nb_stored ++;
             $g->addMember($p->data['id']);
-break;
         }
         $g->data['id'] = Group::insert($g); // HERE storage
         $report .= "Stored $nb_stored records\n";

@@ -28,17 +28,7 @@ class Person {
         if($res === false || count($res) == 0){
             return new Person();
         }
-        $res['sources'] = json_decode($res['sources'], true);
-        $res['ids_in_sources'] = json_decode($res['ids_in_sources'], true);
-        $res['name'] = json_decode($res['name'], true);
-        $res['occus'] = json_decode($res['occus'], true);
-        $res['birth'] = json_decode($res['birth'], true);
-        $res['death'] = json_decode($res['death'], true);
-        $res['raw'] = json_decode($res['raw'], true);
-        $res['history'] = json_decode($res['history'], true);
-        $p = new Person();
-        $p->data = $res;
-        return $p;
+        return row2person($res);
     }
     
     /** Creates an object of type Person from storage, using its slug. **/
@@ -50,18 +40,27 @@ class Person {
         if($res === false || count($res) == 0){
             return new Person();
         }
-        $res['sources'] = json_decode($res['sources'], true);
-        $res['ids_in_sources'] = json_decode($res['ids_in_sources'], true);
-        $res['name'] = json_decode($res['name'], true);
-        $res['occus'] = json_decode($res['occus'], true);
-        $res['birth'] = json_decode($res['birth'], true);
-        $res['death'] = json_decode($res['death'], true);
-        $res['raw'] = json_decode($res['raw'], true);
-        $res['history'] = json_decode($res['history'], true);
+        return row2person($res);
+    }
+    
+    /**
+        Converts a row of table person to an object of type Person
+        @param $row Assoc array, row of table person
+    **/
+    public static function row2person($row){
+        $row['sources'] = json_decode($row['sources'], true);
+        $row['ids_in_sources'] = json_decode($row['ids_in_sources'], true);
+        $row['name'] = json_decode($row['name'], true);
+        $row['occus'] = json_decode($row['occus'], true);
+        $row['birth'] = json_decode($row['birth'], true);
+        $row['death'] = json_decode($row['death'], true);
+        $row['raw'] = json_decode($row['raw'], true);
+        $row['history'] = json_decode($row['history'], true);
         $p = new Person();
-        $p->data = $res;
+        $p->data = $row;
         return $p;
     }
+    
     
     /**
         Inserts a new person in storage.
@@ -105,6 +104,7 @@ class Person {
         @throws \Exception if trying to update an unexisting id
     **/
     public static function update(Person $p) {
+        $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("update person set
             slug=?,
             sources=?,

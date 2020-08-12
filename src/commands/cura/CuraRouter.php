@@ -79,7 +79,7 @@ class CuraRouter implements Router{
         // commands available for all datafiles, and implemented in subpackage all.
         if($datafile != 'all'){
             $res[] = 'export';
-            $res[] = 'tweak2csv';
+            $res[] = 'tweak2db';
             sort($res);
         }
         return $res;

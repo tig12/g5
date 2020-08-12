@@ -1,20 +1,34 @@
 <?php
 /********************************************************************************
-    Transfers files of 5-cura-csv/ to 9-cura/
+    Transfers files of 7-full/ to 9-cura/
     
-    TEMPORARY CODE - files of 5-cura-csv/ will first be stored in 7-full/
+    EXPERIMENTAL - no correct integration yet
     
-    @pre        5-cura-csv/ must be populated and ready to be transfered.
+    @pre        7-full/ must be populated and ready to be transfered.
     
     @license    GPL
     @history    2019-07-05 13:48:39+02:00, Thierry Graff : creation
+    @history    2019-12-28,                Thierry Graff : export using 7-full instead of 5-tmp
+    @history    2020-08-12 08:58:19+02:00, Thierry Graff : export using g5 db instead of 7-full
 ********************************************************************************/
 namespace g5\commands\cura\all;
 
 use g5\Config;
+use g5\model\DB5;
 use g5\patterns\Command;
+use g5\commands\cura\Cura;
+use g5\model\Full;
+use g5\model\Group;
+use g5\model\Person;
 
 class export implements Command{
+    
+    /**
+        Directory where the generated files are stored
+        Relative to config.yml dirs / output
+    **/
+    const OUTPUT_DIR = 'datasets' . DS . 'cura';
+    
     
     // *****************************************
     // Implementation of Command
@@ -29,11 +43,54 @@ class export implements Command{
         if(count($params) > 2){
             return "WRONG USAGE : useless parameter : {$params[2]}\n";
         }
+        
+        $report = '';
+        
         $datafile = $params[0];
-        $infile = Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv';
-        $outfile = Config::$data['dirs']['9-cura'] . DS . $datafile . '.csv';
-        copy($infile, $outfile);
-        return "Copied $infile to $outfile\n";
+        
+        $g = Group::getBySlug($datafile);
+
+        $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . $datafile . '.csv';
+        
+        $csvFields = [
+            'GID',
+            'FNAME',
+            'GNAME',
+            'OCCU',
+            'DATE',
+            'DATE-UT',
+            'PLACE',
+            'C2',
+            'C3',
+            'CY',
+            'LG',
+            'LAT',
+            'GEOID'
+        ];
+        
+        $map = [
+            'ids_in_sources.cura' => 'GID',
+            'name.family' => 'FNAME',
+            'name.given' => 'GNAME',
+            //'occus.0' => 'OCCU',
+            'birth.date' => 'DATE',
+            'birth.date-ut' => 'DATE-UT',
+            'birth.place.name' => 'PLACE',
+            'birth.place.c2' => 'C2',
+            'birth.place.c3' => 'C3',
+            'birth.place.cy' => 'CY',
+            'birth.place.lg' => 'LG',
+            'birth.place.lat' => 'LAT',
+            'birth.place.geoid' => 'GEOID',
+        ];
+        
+        $fmap = [
+            'OCCU' => function($p){
+                return implode('+', $p->data['occus']);
+            },
+        ];
+        
+        return $g->exportCsv($outfile, $csvFields, $map, $fmap);
     }
     
 }// end class    

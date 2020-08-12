@@ -81,6 +81,7 @@ class Group{
         @throws \Exception if trying to update an unexisting id
     **/
     public static function update(Group $g) {
+        $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("update groop set slug=?,name=?,description=?,sources=? where id=?");
         $stmt->execute([
             $g->data['slug'],
@@ -101,6 +102,24 @@ class Group{
     
     public function addMember($entry){
         $this->data['members'][] = $entry;
+    }
+    
+    /** 
+        Loads a group from storage and fills members with objects of type Person
+        @param $slug
+    **/
+    public static function loadWithMembers($slug){
+        $g = Group::getBySlug($slug);
+        $gid = $g->data['id'];
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare("select * from person where id in(select id_person from person_group where id_group=?)");
+        $stmt->execute([$gid]);
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $res = [];
+        foreach($rows as $row){
+            $res[] = Person::row2person($row);
+        }
+        return $res;
     }
     
     // *********************** Export *******************************
@@ -136,20 +155,20 @@ class Group{
         @param $filters Regular array of functions returning a boolean
                         If one of these functions returns false on a group member,
                         export() skips the record.
+        @return Report
         
     **/
-    public function exportCsv($csvFile, $csvFields, $map=[], $fmap=[], $filters=[]){
+    public function exportCsv($csvFile, $csvFields, $map=[], $fmap=[], $filters=[]): string {
         
         $csv = implode(G5::CSV_SEP, $csvFields) . "\n";
         
         $emptyNew = array_fill_keys($csvFields, '');
         
-        foreach($this->data['members'] as $puid){
-            $p = Person::new($puid);
+        $members = self::loadWithMembers($this->data['slug']);
+        
+        foreach($members as $p){
             // filters
             foreach($filters as $function){
-                //echo $p->slug() . "\n";
-                //echo ($function($p) ? 'true' : 'false') . "\n";
                 if(!$function($p)){
                     continue 2;
                 }
@@ -157,7 +176,7 @@ class Group{
             $new = $emptyNew;
             // map
             foreach($map as $personKey => $csvKey){
-                $pks = explode('.', $personKey); // @todo put '.' in a constant
+                $pks = explode('.', $personKey);
                 $data = null;
                 foreach($pks as $pk){
                     if(!isset($p->data[$pk])){
@@ -172,10 +191,18 @@ class Group{
                 $new[$csvKey] = $function($p);
             }
             $csv .= implode(G5::CSV_SEP, $new) . "\n";
+break;
         }
         
+        $report = '';
+        $dir = dirname($csvFile);
+        if(!is_dir($dir)){
+            mkdir($dir, 0777, true);
+            $report .= "Created directory $dir\n";
+        }
         file_put_contents($csvFile, $csv);
-        // echo "___ file_put_contents $csvFile\n"; // @todo 
+        $report .= "Generated file $csvFile \n";
+        return $report;
     }
     
 }// end class
