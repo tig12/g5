@@ -1,14 +1,29 @@
 #
 # Human corrections to file A1
+# Mainly used to fix composed names no fixable by program without ambiguity.
 # Fields sorted by NUM
 # 
 # 2019, Thierry Graff : Creation
 #
 
 -
-  NUM: 223
-  FNAME: de Saint-Exupery
-  GNAME: Antoine
+  NUM: 
+  FNAME: 
+  GNAME: 
+  build-notes:
+    
+-
+  NUM: 112
+  FNAME: Lurani Cernuschi
+  GNAME: Giovanni
+  build-notes:
+  
+-
+  NUM: 197
+  FNAME: Marin la Meslée
+  GNAME: Edmond
+  build-notes:
+    - https://en.wikipedia.org/wiki/Edmond_Marin_la_Mesl%C3%A9e
   
 -
   NUM: 214
@@ -18,6 +33,11 @@
     - https://fr.wikipedia.org/wiki/Georges_Pelletier-Doisy
   
 -
+  NUM: 223
+  FNAME: de Saint-Exupery
+  GNAME: Antoine
+  
+-
   NUM: 268   
   FNAME: Beonio Brocchieri
   GNAME: Vittorio
@@ -25,6 +45,13 @@
     - https://www.wikidata.org/wiki/Q4015296
     - Appears as a journalist and historian in wikidata, listed as an aviator in Gauquelin
   
+-
+  NUM: 295
+  FNAME: Carafa d'Andria
+  GNAME: Fiammetta
+  build-notes:
+    - http://www.famiglienobilinapolitane.it/Genealogie/Carafa%20d%27Andria.htm
+    
 -
   NUM: 298
   FNAME: Casagrande 
@@ -124,6 +151,12 @@
     -
   
 -
+  NUM: 513
+  FNAME: Van Den Boorn
+  GNAME: Charles
+  build-notes:
+    
+-
   NUM: 589
   DATE: '1931-03-12 00:00:00+00:00'
   build-notes: |
@@ -134,6 +167,62 @@
     https://www.astro.com/astro-databank/Clavel,_Michel
   
 -
+  NUM: 1152            
+  FNAME: Van Den Berghe
+  GNAME: René
+  build-notes:
+    
+-
+  NUM: 1154
+  FNAME: Van Den Bossche
+  GNAME: Martin
+  build-notes:
+    
+-
+  NUM: 1211
+  FNAME: Van Der Borgh
+  GNAME: Joseph
+  build-notes:
+    
+-
+  NUM: 1212
+  FNAME: Van Der Brekel
+  GNAME: Petrus
+  build-notes:
+    
+-
+  NUM: 1636
+  FNAME: Chaves d'Aguilar
+  GNAME: Freddy
+  build-notes:
+
+-
+  NUM: 1651
+  FNAME: Hoydonckx
+  GNAME: Nicolas Huibrecht
+  build-notes:
+    - https://en.wikipedia.org/wiki/Nicolas_Hoydonckx
+
+-
+  NUM: 1677
+  FNAME: Van Den Berg
+  GNAME: Paul
+  build-notes:
+    
+-
+  NUM: 1678
+  FNAME: Van Der Auwera
+  GNAME: Jean
+  build-notes:
+    
+-
+  NUM: 1789                                                 
+  FNAME: Chiquito de Cambo
+  GNAME: Joseph
+  build-notes:
+    - https://fr.wikipedia.org/wiki/Joseph_Apesteguy
+    - see wikipedia, Chiquito de Cambo is a nickname
+-
   NUM: 1999
   DATE: '1923-01-30 02:00:00+00:00'
   build-notes: |
@@ -141,3 +230,5 @@
     Birth day conform with
     CFEPP book
     https://fr.wikipedia.org/wiki/Maurice_Terreau
+
+### todo 2032, 2033, 2036, 2053, 2077, 2082

@@ -106,9 +106,9 @@ class Group{
     
     /** 
         Loads a group from storage and fills members with objects of type Person
-        @param $slug
+        @param $slug Group slug
     **/
-    public static function loadWithMembers($slug){
+    public static function computeMembers($slug){
         $g = Group::getBySlug($slug);
         $gid = $g->data['id'];
         $dblink = DB5::getDbLink();
@@ -125,19 +125,24 @@ class Group{
     // *********************** Export *******************************
     
     /** 
-        Generates a csv from its members
+        Generates a csv from its members (of type Person)
             first line contains field names
             other lines contain data
-        @param $csvFile 
+        @param $csvFile     Path to the generated file
         @param $csvFields
             Names of the fields of the generated csv
             Are written in this order in the csv
+            ex:
             $csvFields = ['GID', 'FNAME', 'GNAME', 'OCCU', '...', 'GEOID']
         @param $map
+            Correspondance between person fields and csv fields
+            For person fields, dot (.) is used to express multi-dimensional arrays
+            For example, 'name.family' refers to $person['name']['family']
+            Same syntax is used for regular arrays : 'occus.0' refers to $person[occus][0]
+            ex:
             $map = [
-                'ids.cura' => 'GID',
-                'fname' => 'FNAME',
-                'gname' => 'GNAME',
+                'name.family' => 'FNAME',
+                'name.given' => 'GNAME',
                 // ...
                 'birth.place.geoid' => 'GEOID',
             ];
@@ -147,25 +152,34 @@ class Group{
                     value = function computing this field's value to write in the csv
                              parameter : a person
                              return : the value of the csv field
+                    ex: 
                     $fmap = [
                         'OCCU' => function($p){
                             return implode('+', $p->data['occus']);
                         },
                     ];
-        @param $filters Regular array of functions returning a boolean
+        @param $sort    function used to sort the group's members.
+                        if $sort = false, members are not sorted.
+        @param $filters Regular array of functions returning a boolean.
                         If one of these functions returns false on a group member,
                         export() skips the record.
         @return Report
         
     **/
-    public function exportCsv($csvFile, $csvFields, $map=[], $fmap=[], $filters=[]): string {
+    public function exportCsv($csvFile, $csvFields, $map=[], $fmap=[], $sort=false, $filters=[]): string {
         
         $csv = implode(G5::CSV_SEP, $csvFields) . "\n";
         
         $emptyNew = array_fill_keys($csvFields, '');
         
-        $members = self::loadWithMembers($this->data['slug']);
+        $members = self::computeMembers($this->data['slug']);
+        if($sort !== false){
+            usort($members, $sort);
+        }
         
+        $report = '';
+
+        $N = 0;
         foreach($members as $p){
             // filters
             foreach($filters as $function){
@@ -175,13 +189,10 @@ class Group{
             }
             $new = $emptyNew;
             // map
-            foreach($map as $personKey => $csvKey){
+            foreach($map as $personKey => $csvKey){          
                 $pks = explode('.', $personKey);
                 $data = null;
                 foreach($pks as $pk){
-                    if(!isset($p->data[$pk])){
-                        // means an incoherence of data
-                    }
                     $data = is_null($data) ? $p->data[$pk] : $data[$pk];
                 }
                 $new[$csvKey] = $data;
@@ -191,17 +202,16 @@ class Group{
                 $new[$csvKey] = $function($p);
             }
             $csv .= implode(G5::CSV_SEP, $new) . "\n";
-break;
+            $N++;
         }
         
-        $report = '';
         $dir = dirname($csvFile);
         if(!is_dir($dir)){
             mkdir($dir, 0777, true);
             $report .= "Created directory $dir\n";
         }
         file_put_contents($csvFile, $csv);
-        $report .= "Generated file $csvFile \n";
+        $report .= "Generated $N lines in file $csvFile\n";
         return $report;
     }
     

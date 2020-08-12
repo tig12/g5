@@ -62,7 +62,7 @@ class tweak2db implements Command{
         }
         
         // load data from db - build associative array with NUM as key
-        $tmp = Group::loadWithMembers($datafile); // $datafile is the group slug
+        $tmp = Group::computeMembers($datafile); // $datafile is the group slug
         $cura = [];
         foreach($tmp as $p){
             $cura[$p->data['ids_in_sources'][$datafile]] = $p;

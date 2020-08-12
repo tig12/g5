@@ -69,10 +69,9 @@ class export implements Command{
         ];
         
         $map = [
-            'ids_in_sources.cura' => 'GID',
+            'ids_in_sources.' . $datafile => 'GID',
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
-            //'occus.0' => 'OCCU',
             'birth.date' => 'DATE',
             'birth.date-ut' => 'DATE-UT',
             'birth.place.name' => 'PLACE',
@@ -85,12 +84,25 @@ class export implements Command{
         ];
         
         $fmap = [
+            'GID' => function($p){
+                global $datafile;
+                return Cura::gqid($datafile, $p->data['ids_in_sources'][$datafile]);
+            },
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);
             },
         ];
         
-        return $g->exportCsv($outfile, $csvFields, $map, $fmap);
+        $sort = function($a, $b){
+            global $datafile;
+            if($a->data['ids_in_sources'][$datafile] == $b->data['ids_in_sources'][$datafile]){
+                return 0;
+            }
+            return ($a->data['ids_in_sources'][$datafile] < $b->data['ids_in_sources'][$datafile]) ? -1 : 1;
+        };
+        
+        
+        return $g->exportCsv($outfile, $csvFields, $map, $fmap, $sort);
     }
     
 }// end class    

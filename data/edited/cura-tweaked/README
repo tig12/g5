@@ -1,7 +1,7 @@
 
 
-This directory contains human corrections that should be applied to files of 5-cura-csv/
-Original files come from http://cura.free.fr/gauq/17archg.html ; stored in 1-cura-raw
+This directory contains human corrections that should be applied to database persons
+Original files come from http://cura.free.fr/gauq/17archg.html ; stored in data/raw/cura.free.fr
 Then converted to csv by step raw2csv
 Then these yaml corrections are applied
 
@@ -15,14 +15,21 @@ An element of the list looks like this :
   DATE: '2019-10-15 23:16:50+02:00' 
   notes:
     - here free notes
-  
+
 Each element must contain at least a key NUM
 If field NUM is not present, the record is not processed.
 If field NUM is empty, the record is not processed.
-Other keys must be names of fields in the files of 5-cura-csv/ (case sensitive).
-
-If a key is invalid, a warning is issued and the value is ignored.
+Other keys must use the vocabulary described in
+https://tig12.github.io/gauquelin5/output-format.html
 One exception : key "build-notes" (lowercase) is ignored while processing.
+
+WARNING : a limited subset of this vocabulary is implemented.
+If new fields are needed, the code of src/commands/cura/all/tweaks2db.php must be modified.
+Fields currently implemented :
+FNAME
+GNAME
+DATE
+C3
 
 Dates should be surrounded by quotes (don't know for sure, but in case)
 
