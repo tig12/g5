@@ -8,35 +8,50 @@
 namespace g5\commands\newalch\ertel4391;
 
 use g5\Config;
+use g5\model\SourceI;
+use g5\model\Source;
 use tiglib\arrays\csvAssociative;
 
-class Ertel4391{
+class Ertel4391 implements SourceI {
     
-    /** Name of the csv file in 5-newalch-csv **/
-    const TMP_CSV_FILE = '4391SPO.csv';
-    
-    
-    // ******************************************************
     /**
-        @return Path to the csv file stored in 5-newalch-csv
+        Path to the yaml file containing the characteristics of the source.
+        Relative to directory specified in config.yml by dirs / edited
     **/
-    public static function tmp_csv_filename(){
-        return Config::$data['dirs']['5-newalch-csv'] . DS . self::TMP_CSV_FILE;
+    const RAW_SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch' . DS . '3a_sports.yml';
+    
+    // ************************ Source ******************************
+    
+    /**
+        Returns a Source object for the raw file used for Ertel43991.
+    **/
+    public static function getSource(): Source {
+        return Source::getSource(Config::$data['dirs']['edited'] . DS . self::RAW_SOURCE_DEFINITION);
+    }
+
+    // ************************ Temporary file ******************************
+    
+    /** Path to the temporary csv file used to work on this group. **/
+    public static function tmpFilename(){
+        return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', '4391SPO.csv']);
     }
     
-    // ******************************************************
+    /** Path to the temporary csv file keeping exact copy of the raw file. **/
+    public static function tmpRawFilename(){
+        return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', '4391SPO-raw.csv']);
+    }
+    
     /**
-        Loads file 5-newalch-csv/4391SPO.csv.
+        Loads temporary file
         @return Regular array
                 Each element contains an associative array (keys = field names).
     **/
     public static function loadTmpFile(){
-        return csvAssociative::compute(self::tmp_csv_filename());
+        return csvAssociative::compute(self::tmpFilename());
     }                                                                                              
     
-    // ******************************************************
     /**
-        Loads file 5-newalch-csv/4391SPO.csv in an asssociative array ; keys = NR
+        Loads file temporary file in an asssociative array ; keys = NR
     **/
     public static function loadTmpFile_nr(){
         $rows1 = self::loadTmpFile();

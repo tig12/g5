@@ -8,15 +8,14 @@
 namespace g5\commands\cura;
 
 use g5\Config;
-use g5\model\DB5;
+use g5\model\SourceI;
 use g5\model\Source;
-use tiglib\arrays\csvAssociative;
 
-class Cura{
+class Cura implements SourceI {
     
     /**
         Path to the yaml file containing the characteristics of the source.
-        Path relative to dirs / edited
+        Relative to directory specified in config.yml by dirs / edited
     **/
     const SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'cura.yml';
     
@@ -60,7 +59,6 @@ class Cura{
         'E3' =>  [1540, '1540 New French Writers, Artists, Actors, Politicians and Journalists', 'N'],
     ];
     
-    
     /** 
         For documentation purpose only
         URLs of the raw files in Cura web site
@@ -77,9 +75,6 @@ class Cura{
         'E1' =>  'http://cura.free.fr/gauq/902gdE1.html',
         'E3' =>  'http://cura.free.fr/gauq/902gdE3.html',
     ];
-    
-    
-
     
     /** 
         Associations between datafile in the user's vocabulary and the sub-namespace that handles it.
@@ -101,7 +96,6 @@ class Cura{
         'E3' => 'E1_E3',
     ];
     
-    
     /**
         Returns a Gauquelin id, like "A1-654"
         Unique id of a record among cura files.
@@ -116,10 +110,7 @@ class Cura{
     
     /** Returns a Source object for cura web site. **/
     public static function getSource(): Source {
-        $s = new Source();
-        $ymlfile = Config::$data['dirs']['edited'] . DS . self::SOURCE_DEFINITION;
-        $s->data = yaml_parse(file_get_contents($ymlfile));
-        return $s;
+        return Source::getSource(Config::$data['dirs']['edited'] . DS . self::SOURCE_DEFINITION);           
     }
     
     

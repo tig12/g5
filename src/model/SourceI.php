@@ -9,12 +9,12 @@
 
 namespace g5\model;
 
-interface SourceI{
+interface SourceI {
     
     /** 
         Returns a Source object
         @throws Exception if the source cannot be built.
     **/
-    public static function source(): Source;
+    public static function getSource(): Source;
     
 }// end class

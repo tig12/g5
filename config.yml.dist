@@ -8,6 +8,7 @@ dirs:
   raw:    data/raw
   edited: data/edited
   output: data/output
+  tmp:    data/tmp
 
 
 # g5 database

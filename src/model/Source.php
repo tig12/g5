@@ -19,11 +19,23 @@ use tiglib\filesystem\globRecursive;
 class Source {
     
     /** Structure described by src/model/Source.yml **/
-    public $data = [];
+    public $data = [];                                              
     
     public function __construct(){
         $this->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Source.yml'));
     }
+    
+    // *********************** SourceI *******************************
+    /** 
+        Provides an implementation usable by classes implementing the SourceI interface.
+        Would be implemented in java as a default method of SourceI, but php7 does not allow that.
+    **/
+    public static function getSource($yamlFile): Source {
+        $s = new Source();
+        $s->data = yaml_parse(file_get_contents($yamlfile));
+        return $s;
+    }
+    
     
     // *********************** Storage *******************************
     

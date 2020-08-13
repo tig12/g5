@@ -12,7 +12,7 @@ use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
 
-class tweak2csv implements Command{
+class tweak2tmp implements Command{
     
     // *****************************************
     // Implementation of Command
@@ -26,7 +26,7 @@ class tweak2csv implements Command{
             return "WRONG USAGE : useless parameter : {$params[2]}\n";
         }
         $report = '';
-        $yamlfile = Config::$data['dirs']['3-newalch-tweaked'] . DS . '4391SPO.yml';
+        $yamlfile = Config::$data['dirs']['edited'] . DS . 'newalch-tweaked' . DS . '4391SPO.yml';
         
         // load tweaks in an assoc arrray (keys = NR)
         $yaml = yaml_parse(file_get_contents($yamlfile));
@@ -71,7 +71,7 @@ class tweak2csv implements Command{
             $res .= implode(G5::CSV_SEP, $row) . "\n";
         }
         
-        $targetFile = Ertel4391::tmp_csv_filename();
+        $targetFile = Ertel4391::tmpFilename();
         file_put_contents($targetFile, $res);
         
         $report .= "Updated $N records of $targetFile\n    with tweaks of $yamlfile\n";

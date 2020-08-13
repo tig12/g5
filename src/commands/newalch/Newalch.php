@@ -4,23 +4,43 @@
     
     @license    GPL
     @history    2020-07-13 17:15:37+02:00, Thierry Graff : creation
+    @history    2020-08-12 19:46:54+02:00, Thierry Graff : adaptation for g5 database
 ********************************************************************************/
 namespace g5\commands\newalch;
 
-use g5\model\DB5;
+use g5\Config;
+use g5\model\SourceI;
+use g5\model\Source;
 
-Newalch::init();
-
-class Newalch{
+class Newalch implements SourceI {
     
-    /** uid when newalch is used to create a group **/
-    const UID_PREFIX_GROUP = 'group' . DB5::SEP . 'datasets' . DB5::SEP . 'newalch';
+    /**
+        Path to the yaml file containing the characteristics of the source.
+        Relative to directory specified in config.yml by dirs / edited
+    **/
+    const SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch.yml';
     
-    /** Path where groups members are stored **/
-    public static $STORAGE_PATH;
+    /**
+        Trust level for data coming from newalchemypress.com
+        @see https://tig12.github.io/gauquelin5/check.html
+    **/
+    const TRUST_LEVEL = 4;
     
-    public static function init(){
-        self::$STORAGE_PATH = DB5::$DIR . DS . 'tmp' . DS . 'group' . DS . 'datasets' . DS . 'newalch'; 
+    // *********************** Raw files manipulation ***********************
+    
+    /** 
+        Computes the name of the directory where raw cura files are stored
+    **/
+    public static function rawDirname(){
+        return Config::$data['dirs']['raw'] . DS . 'newalchemypress.com';
     }
+    
+    // *********************** Source management ***********************
+    
+    /** Returns a Source object for newalchemypress web site. **/
+    public static function getSource(): Source {
+        return Source::getSource(Config::$data['dirs']['edited'] . DS . self::SOURCE_DEFINITION);
+    }
+    
     
 }// end class

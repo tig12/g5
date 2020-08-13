@@ -1,10 +1,6 @@
 <?php
 /********************************************************************************
-    Transfers files of 7-full/ to 9-cura/
-    
-    EXPERIMENTAL - no correct integration yet
-    
-    @pre        7-full/ must be populated and ready to be transfered.
+    Generates csv files in data/output
     
     @license    GPL
     @history    2019-07-05 13:48:39+02:00, Thierry Graff : creation
@@ -25,7 +21,7 @@ class export implements Command{
     
     /**
         Directory where the generated files are stored
-        Relative to config.yml dirs / output
+        Relative to directory specified in config.yml by dirs / output
     **/
     const OUTPUT_DIR = 'datasets' . DS . 'cura';
     

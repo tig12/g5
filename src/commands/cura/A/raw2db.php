@@ -239,10 +239,13 @@ class raw2db implements Command{
         //
         // source corresponding to CURA - insert if does not already exist
         $curaSource = Cura::getSource();
-        $test = Source::getBySlug($curaSource->data['slug']);
-        $curaSource->data['id'] = ( empty($test->data) ? Source::insert($curaSource) : $test->data['id'] );
+        try{
+            Source::insert($curaSource);
+        }
+        catch(\Exception $e){
+            // already inserted, do nothing
+        }
         // source corresponding to current A file
-        $source = Source::getBySlug($datafile);
         $source = new Source();
         $source->data['slug'] = $datafile; // ex A1
         $source->data['name'] = "CURA file $datafile";

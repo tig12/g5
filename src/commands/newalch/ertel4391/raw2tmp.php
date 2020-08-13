@@ -5,16 +5,23 @@
     https://newalchemypress.com/gauquelin/gauquelin_docs/3a_sports.txt
     The file contains 4387 sportsmen used by Ertel
     
+    Generates 2 files :
+        - data/tmp/newalch/4391SPO.csv, to work on the file
+        - data/tmp/newalch/4391SPO-raw.csv, to keep an exact copy of of the original fields
+    The unique utility of 4391SPO-raw.csv is to fill the field "raw" of persons in db
+    
     @license    GPL
     @history    2019-05-10 12:19:50+02:00, Thierry Graff : creation
+    @history    2020-08-12 19:20:17+02:00, Thierry Graff : add generation of 4391SPO-raw.csv
 ********************************************************************************/
 namespace g5\commands\newalch\ertel4391;
 
 use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
+use g5\commands\newalch\Newalch;
 
-class raw2csv implements Command{
+class raw2tmp implements Command{
     
     /**
         Mapping between country code used in the file (field NATION)
@@ -26,7 +33,7 @@ class raw2csv implements Command{
         'ITA' => 'IT',
         'BEL' => 'BE',
         'GER' => 'DE',
-        'SCO' => 'GB', // Scotland ; loss of information
+        'SCO' => 'GB',
         'NET' => 'NL',
         'LUX' => 'LU',
         'SPA' => 'ES',
@@ -34,23 +41,23 @@ class raw2csv implements Command{
     
         
     // *****************************************
+    // Implementation of Command
     /** 
-        Parses file 1-raw/newalchemypress.com/3a_sports-utf8.txt
-        and stores it to 5-tmp/newalch/4391SPO.csv
+        Imports file data/raw/newalchemypress.com/03-ertel/3a_sports-utf8.txt to g5 tamporary files.
         @return report
-        @throws Exception if unable to parse
     **/
-    public static function execute($params=[]): string{
+    public static function execute($params=[]): string {
         
-        $filename = Config::$data['dirs']['1-newalch-raw'] . DS . '03-ertel' . DS . '3a_sports-utf8.txt';
+        $filename = Newalch::rawDirname() . DS . '03-ertel' . DS . '3a_sports-utf8.txt';
         if(!is_file($filename)){
             return "Missing file $filename\n";
         }
         
         $lines = file($filename);
-        $output = '';
+        $output = $output_raw = '';
         
         $N = count($lines);
+        $nRes = 0;
         for($i=6; $i < $N-3; $i++){
             $line = $lines[$i];
             if(trim($line) == ''){
@@ -72,6 +79,7 @@ class raw2csv implements Command{
             $new['IG']          = trim(mb_substr($line, 79, 1));
             $country            = trim(mb_substr($line, 87, 3));
             $new['CY'] = self::NATION_CY[$country];
+            $new['C2'] = ($country == 'SCO' ? 'SCT' : ''); // SCT = geonames code for Scotland
             $new['ZITRANG']     = trim(mb_substr($line, 100, 1));
             $new['ZITSUM']      = trim(mb_substr($line, 107, 1));
             $new['ZITATE']      = trim(mb_substr($line, 109, 16));
@@ -85,7 +93,7 @@ class raw2csv implements Command{
             $new['CSINR']       = trim(mb_substr($line, 164, 5));
             $new['G55']         = trim(mb_substr($line, 170, 1));
             $gender             = trim(mb_substr($line, 179, 1));
-            $new['G'] = ($gender == 'F' ? 'F' : 'M');
+            $new['SEX'] = ($gender == 'F' ? 'F' : 'M');
             $new['PUBL']        = trim(mb_substr($line, 182, 1));
             $new['PHAS_']       = trim(mb_substr($line, 187, 6));
             $new['AUFAB']       = trim(mb_substr($line, 194, 6));
@@ -100,14 +108,59 @@ class raw2csv implements Command{
             // Column 'L' dropped because contains nothing for all lines in newalch file
             $new['GNUM'] = self::compute_GNUM($new);
             
-            $output .= implode(G5::CSV_SEP, $new) . "\n";
+            // build a raw record, exact copy of the original file
+            $raw = [
+                'QUEL' => $new['QUEL'],
+                'NR' => $new['NR'],
+                'NAME' => $new['FNAME'],
+                'VORNAME' => $new['GNAME'],
+                'GEBDATUM' => $date,
+                'STUND' => $hour,
+                'SPORTART' => $new['SPORT'],
+                'INDGRUP' => $new['IG'],
+                'NATION' => $country,
+                'ZITRANG' => $new['ZITRANG'],
+                'ZITSUM' => $new['ZITSUM'],
+                'ZITATE' => $new['ZITATE'],
+                'ZITSUM_OD' => $new['ZITSUM_OD'],
+                'MARS' => $new['MARS'],
+                'MA_' => $new['MA_'],
+                'MA12' => $new['MA12'],
+                'G_NR' => $new['G_NR'],
+                'PARA_NR' => $new['PARA_NR'],
+                'CFEPNR' => $new['CFEPNR'],
+                'CSINR' => $new['CSINR'],
+                'GAUQ1955' => $new['G55'],
+                'MF' => $gender,
+                'PUBL' => $new['PUBL'],
+                'PHAS_' => $new['PHAS_'],
+                'AUFAB' => $new['AUFAB'],
+                'NIENCORR' => $new['NIENCORR'],
+                'KURTZ' => $new['KURTZ'],
+                'GQBECORR' => $new['GQBECORR'],
+                'CHRISNAME' => $new['CHRISNAME'],
+                'TAGMON' => $new['TAGMON'],
+                'ENG' => $new['ENG'],
+                'EXTEND' => $new['EXTEND'],
+                'NIENHUYS' => $new['NIENHUYS'],
+                'L' => '',
+            ];
+            $nRes++;
+            $output .= implode(G5::CSV_SEP, $new) . "\n";          
+            $output_raw .= implode(G5::CSV_SEP, $raw) . "\n";
         }
-        $output = implode(G5::CSV_SEP, array_keys($new)) . "\n" . $output;
+        $output = implode(G5::CSV_SEP, array_keys($new)) . "\n" . $output;       
+        $output_raw = implode(G5::CSV_SEP, array_keys($raw)) . "\n" . $output_raw;
 
-        $outfile = Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE;
+        $report = '';                         
+        $outfile = Ertel4391::tmpFilename();
         file_put_contents($outfile, $output);
-        return "$outfile generated\n";
+        $report .= "$outfile generated ($nRes lines)\n";
         
+        $outfile = Ertel4391::tmpRawFilename();
+        file_put_contents($outfile, $output_raw);
+        $report .= "$outfile generated ($nRes lines)\n";
+        return $report;
     }
     
     
