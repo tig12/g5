@@ -12,7 +12,7 @@ use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
 
-class tweak2csv implements Command{
+class tweak2tmp implements Command{
     
     // *****************************************
     // Implementation of Command
@@ -26,7 +26,7 @@ class tweak2csv implements Command{
             return "WRONG USAGE : useless parameter : {$params[2]}\n";
         }
         $report = '';
-        $yamlfile = Config::$data['dirs']['3-newalch-tweaked'] . DS . '1083MED.yml';
+        $yamlfile = Config::$data['dirs']['edited'] . DS . 'newalch-tweaked' . DS . '1083MED.yml';
         
         // load tweaks in an assoc arrray (keys = NR)
         $yaml = yaml_parse(file_get_contents($yamlfile));
@@ -48,12 +48,12 @@ class tweak2csv implements Command{
             $tweaks[$NR] = $record;
         }
         
-        $cura = Muller1083::loadTmpFile_nr();
+        $target = Muller1083::loadTmpFile_nr();
         
-        $keys = array_keys(current($cura));
+        $keys = array_keys(current($target));
         $res = implode(G5::CSV_SEP, $keys) . "\n";
-        
-        foreach($cura as $NR => $row){
+        $N = 0;
+        foreach($target as $NR => $row){
             if(isset($tweaks[$NR])){
                 foreach($tweaks[$NR] as $k => $v){
                     if($k == G5::TWEAK_BUILD_NOTES){
@@ -65,14 +65,15 @@ class tweak2csv implements Command{
                     }
                     $row[$k] = $v; // HERE update file with tweaked value
                 }
+                $N++;
             }
             $res .= implode(G5::CSV_SEP, $row) . "\n";
         }
         
-        $curafile = Config::$data['dirs']['5-newalch-csv'] . DS . '1083MED.csv';
-        file_put_contents($curafile, $res);
-        
-        $report .= "Updated the content of 1083MED.csv with tweaks of $yamlfile\n";
+        $targetFile = Muller1083::tmpFilename();
+        file_put_contents($targetFile, $res);
+                                             
+        $report .= "Updated $N records of $targetFile\nwith tweaks of $yamlfile\n";
         return $report;
     }
     

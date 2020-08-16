@@ -52,7 +52,6 @@ class tweak2tmp implements Command{
         
         $keys = array_keys(current($target));
         $res = implode(G5::CSV_SEP, $keys) . "\n";
-        
         $N = 0;
         foreach($target as $NR => $row){
             if(isset($tweaks[$NR])){
