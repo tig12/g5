@@ -562,7 +562,6 @@ class raw2csv implements Command{
         // 4 - store result
         //
         $nb_stored = 0;
-        $csv = '';
         // fields in the resulting csv
         $csv = implode(G5::CSV_SEP, Cura::TMP_CSV_COLUMNS) . "\n";
         foreach($res as $cur){
