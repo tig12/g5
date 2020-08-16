@@ -11,6 +11,25 @@ use g5\patterns\Router;
 
 class CuraRouter implements Router{
     
+    /** 
+        Associations between datafile in the user's vocabulary and the sub-namespace that handles it.
+        (sub-namespace of g5\commands\cura).
+    **/
+    const DATAFILES_SUBNAMESPACE = [
+        'all' => 'all',
+        'A' => 'A',
+        'A1' => 'A',
+        'A2' => 'A',
+        'A3' => 'A',
+        'A4' => 'A',                                                                             
+        'A5' => 'A',
+        'A6' => 'A',
+        'D6' => 'D6',
+        'D10' => 'D10',
+        'E1' => 'E1_E3',
+        'E3' => 'E1_E3',
+    ];
+    
     // ******************************************************
     /** 
         Converts the datafile parameter in the user vocabulary to an array of datafiles known by this package.
@@ -46,10 +65,17 @@ class CuraRouter implements Router{
     // Implementation of Router
     /**
         Returns an array containing the possible datafiles processed by the dataset.
+        (= possible values of parameter indicating the subject to process)
         @return Array of strings
     **/
     public static function getDatafiles(): array{
-        return Cura::DATAFILES_POSSIBLES;
+        return [
+            'all',
+            'A', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6',
+            // 'B', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6',
+            'D6', 'D10',
+            'E1', 'E3',
+        ];
     }
     
     
@@ -59,7 +85,7 @@ class CuraRouter implements Router{
         @return A list of possible actions for a given datafile.
     **/
     public static function getCommands($datafile): array{
-        $subnamespace = Cura::DATAFILES_SUBNAMESPACE[$datafile];
+        $subnamespace = self::DATAFILES_SUBNAMESPACE[$datafile];
         $tmp = glob(__DIR__ . DS . $subnamespace . DS . '*.php');
         $res = [];
         foreach($tmp as $file){
@@ -79,7 +105,7 @@ class CuraRouter implements Router{
         // commands available for all datafiles, and implemented in subpackage all.
         if($datafile != 'all'){
             $res[] = 'export';
-            $res[] = 'tweak2db';
+            $res[] = 'tweak2tmp';
             sort($res);
         }
         return $res;

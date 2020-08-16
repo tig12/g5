@@ -37,7 +37,7 @@ class CuraCommand implements Command{
         // count is particular, because it is executed once even if the datafile represents several datafiles.
         // So does not loop on datafiles.
         if($command == 'count'){
-            $class = "g5\\commands\\cura\\" . Cura::DATAFILES_SUBNAMESPACE[$datafile] . '\\count';
+            $class = "g5\\commands\\cura\\" . CuraRouter::DATAFILES_SUBNAMESPACE[$datafile] . '\\count';
             return $class::execute($params);
         }
         
@@ -47,11 +47,11 @@ class CuraCommand implements Command{
                 $class = "g5\\commands\\cura\\all\\export";
             }
             // tweak2csv is available for all datafiles, and implemented in subpackage all.
-            else if($command == 'tweak2db'){
-                $class = "g5\\commands\\cura\\all\\tweak2db";
+            else if($command == 'tweak2tmp'){
+                $class = "g5\\commands\\cura\\all\\tweak2tmp";
             }
             else{
-                $class = "g5\\commands\\cura\\" . Cura::DATAFILES_SUBNAMESPACE[$datafile] . '\\' . $command;
+                $class = "g5\\commands\\cura\\" . CuraRouter::DATAFILES_SUBNAMESPACE[$datafile] . '\\' . $command;
             }
             $params[0] = $dtfile;
             $report .= $class::execute($params);

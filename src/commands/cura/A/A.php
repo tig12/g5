@@ -7,13 +7,55 @@
 ********************************************************************************/
 namespace g5\commands\cura\A;
 
+use g5\commands\cura\Cura;
+
 class A{
     
     /**
-        Names of the columns in generated csv files
-        used by default by export
+        Names of the columns of raw A files (cura html pages)
     **/
-    const OUTPUT_CSV_COLUMNS = [
+    const RAW_FIELDS = [
+        'YEA',
+        'MON',
+        'DAY',
+        'PRO',
+        'NUM',
+        'COU',
+        'H',
+        'MN',
+        'SEC',
+        'TZ',
+        'LAT',
+        'LON',
+        'COD',
+        'CITY',
+    ];
+    
+    /**
+        Names of the columns of A files in data/tmp/cura
+    **/
+    const TMP_FIELDS = [
+        'NUM',
+        'FNAME',
+        'GNAME',
+        'OCCU',
+        'DATE',
+        'DATE-UT',
+        'PLACE',
+        'CY',
+        'C2',
+        'C3',
+        'LG',
+        'LAT',
+        'GEOID',
+        'NOTES',
+    ];
+    
+    /**
+        Names of the columns of generated csv files
+        used by default by export.
+    **/
+    const OUTPUT_FIELDS = [
         'NUM',
         'FNAME',
         'GNAME',
@@ -361,7 +403,7 @@ class A{
         @return String like 'Gauquelin-A1-243'
     **/
     public static function compute_replacement_name($datafile, $NUM){
-        return "Gauquelin-$datafile-$NUM";
+        return 'Gauquelin-' . Cura::gqid($datafile, $NUM);
     }
     
     // ******************************************************

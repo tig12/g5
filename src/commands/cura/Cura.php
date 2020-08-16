@@ -10,6 +10,7 @@ namespace g5\commands\cura;
 use g5\Config;
 use g5\model\SourceI;
 use g5\model\Source;
+use tiglib\arrays\csvAssociative;
 
 class Cura implements SourceI {
     
@@ -27,17 +28,6 @@ class Cura implements SourceI {
     
     /** Separator used in raw (html) files **/
     const HTML_SEP = "\t";
-    
-    /** 
-        Possible values of parameter indicating the subject to process.
-    **/
-    const DATAFILES_POSSIBLES = [
-        'all',
-        'A', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6',
-        // 'B', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6',
-        'D6', 'D10',
-        'E1', 'E3',
-    ];
     
     /** 
         For documentation purpose only
@@ -76,26 +66,6 @@ class Cura implements SourceI {
         'E3' =>  'http://cura.free.fr/gauq/902gdE3.html',
     ];
     
-    /** 
-        Associations between datafile in the user's vocabulary and the sub-namespace that handles it.
-        (sub-namespace of g5\commands\cura).
-        @todo Put this constant in CuraRouter ?
-    **/
-    const DATAFILES_SUBNAMESPACE = [
-        'all' => 'all',
-        'A' => 'A',
-        'A1' => 'A',
-        'A2' => 'A',
-        'A3' => 'A',
-        'A4' => 'A',                                                                             
-        'A5' => 'A',
-        'A6' => 'A',
-        'D6' => 'D6',
-        'D10' => 'D10',
-        'E1' => 'E1_E3',
-        'E3' => 'E1_E3',
-    ];
-    
     /**
         Returns a Gauquelin id, like "A1-654"
         Unique id of a record among cura files.
@@ -113,7 +83,6 @@ class Cura implements SourceI {
         return Source::getSource(Config::$data['dirs']['edited'] . DS . self::SOURCE_DEFINITION);           
     }
     
-    
     // *********************** Raw files manipulation ***********************
     
     /** 
@@ -125,7 +94,7 @@ class Cura implements SourceI {
     
     /** 
         Computes the name of a html file downloaded from cura.free.fr
-        and locally stored in directory data/raw/cura.free.fr (see absolute path of this directory in config.yml)
+        and locally stored in directory data/raw/cura.free.fr
         @param  $datafile : a string like 'A1'
         @return filename, a string like '902gdA1y.html' or '902gdB1.html'
     **/
@@ -135,19 +104,52 @@ class Cura implements SourceI {
     
     /** 
         Reads a html file downloaded from cura.free.fr
-        and locally stored in directory data/raw/cura.free.fr (see absolute path of this directory in config.yml)
+        and locally stored in directory data/raw/cura.free.fr
         @param  $datafile : string like 'A1'
         @return The content of the file
     **/
-    public static function readRawHtmlFile($datafile){
-        $raw_file = self::rawDirname() . DS . self::rawFilename($datafile);
-        $tmp = @file_get_contents($raw_file);
+    public static function loadRawFile($datafile){
+        $rawFile = self::rawDirname() . DS . self::rawFilename($datafile);
+        $tmp = @file_get_contents($rawFile);
         if(!$tmp){
-            $msg = "ERROR : Unable to read file $raw_file\n"
+            $msg = "ERROR : Unable to read file $rawFile\n"
                 . "Check that config.yml indicates a correct path\n";
             throw new \Exception($msg);
         }
         return utf8_encode($tmp);
+    }
+    
+    // *********************** Tmp files manipulation ***********************
+    
+    /**
+        Returns the name of a file in data/tmp/cura
+        @param  $datafile : a string like 'A1'
+    **/
+    public static function tmpFilename($datafile){
+        return Config::$data['dirs']['tmp'] . DS . 'cura' . DS . $datafile . '.csv';
+    }
+    
+    /**
+        Loads a cura file of data/tmp/cura in a regular array
+        @param  $datafile : a string like 'A1'
+        @return Regular array containing the persons' data
+    **/
+    public static function loadTmpFile($datafile){
+        return csvAssociative::compute(self::tmpFilename($datafile));
+    }
+
+    /**
+        Loads a cura file of data/tmp/cura in an asssociative array ; keys = cura ids (NUM)
+        @param      $datafile : a string like 'A1'
+        @return     Associative array containing the cura file in data/tmp/cura ; keys = cura ids (NUM)
+    **/
+    public static function loadTmpFile_num($datafile){
+        $curaRows1 = self::loadTmpFile($datafile);
+        $res = [];              
+        foreach($curaRows1 as $row){
+            $res[$row['NUM']] = $row;
+        }
+        return $res;
     }
     
     // *********************** Time / space functions ***********************

@@ -60,8 +60,8 @@ class addGeo implements Command{
         self::$pdo_geonames = Geonames::compute_dblink();
         
         $report = '';
-        $rows = Cura::loadTmpCsv($datafile);
-        $res = implode(G5::CSV_SEP, A::OUTPUT_CSV_COLUMNS) . "\n";
+        $rows = Cura::loadTmpFile($datafile);
+        $res = implode(G5::CSV_SEP, A::OUTPUT_FIELDS) . "\n";
         
         $N = $ok = 0;
         

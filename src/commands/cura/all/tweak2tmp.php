@@ -1,23 +1,24 @@
 <?php
 /********************************************************************************
-    Transfers information from data/edited/cura-tweaked/ to g5 db
+    Transfers information from data/edited/cura-tweaked/ to data/tmp/cura/
+    Updates a file of data/tmp/cura/ with the values found in the yaml file containing tweaks.
     
-    WARNING : this step must be done at an early stage.
+    WARNING : this step must be done just after step raw2tmp.
     For example, if a date or a time is modified, should be done before step "legalTime"
     
     @license    GPL
     @history    2019-07-26 16:58:21+02:00, Thierry Graff : creation
-    @history    2020-08-11 14:50:35+02:00, Thierry Graff : adaptation to g5 db
 ********************************************************************************/
 namespace g5\commands\cura\all;
 
+use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
 use g5\commands\cura\Cura;
 use g5\model\Group;
 use g5\model\Person;
 
-class tweak2db implements Command{
+class tweak2tmp implements Command{
     
     // *****************************************
     // Implementation of Command
@@ -61,40 +62,31 @@ class tweak2db implements Command{
             $tweaks[$NUM] = $record;
         }
         
-        // load data from db - build associative array with NUM as key
-        $tmp = Group::computeMembers($datafile); // $datafile is the group slug
-        $cura = [];
-        foreach($tmp as $p){
-            $cura[$p->data['ids_in_sources'][$datafile]] = $p;
+        // modify file in data/tmp/cura
+        
+        $cura = Cura::loadTmpFile_num($datafile);
+        $keys = array_keys(current($cura));
+        $res = implode(G5::CSV_SEP, $keys) . "\n";
+        $nUpdated = 0;
+        foreach($cura as $NUM => $row){
+            if(isset($tweaks[$NUM])){
+                foreach($tweaks[$NUM] as $k => $v){
+                    if($k == G5::TWEAK_BUILD_NOTES){
+                        continue;
+                    }
+                    if(!in_array($k, $keys)){
+                        $report .= "WARNING : invalid key '$k' for NUM = $NUM in file $yamlfile - ignoring value\n";
+                        continue;
+                    }
+                    $row[$k] = $v; // HERE update cura with tweaked value
+                }
+                $nUpdated++;
+            }
+            $res .= implode(G5::CSV_SEP, $row) . "\n";
         }
         
-        $nUpdated = 0;
-        foreach($tweaks as $NUM => $tweak){
-            $recomputeSlug = false;
-            if($NUM == ''){
-                continue;
-            }
-            if(isset($tweak['FNAME'])){
-                $cura[$NUM]->data['name']['family'] = trim($tweak['FNAME']);
-                $recomputeSlug = true;
-            }
-            if(isset($tweak['GNAME'])){
-                $cura[$NUM]->data['name']['given'] = trim($tweak['GNAME']);
-                $recomputeSlug = true;
-            }
-            if(isset($tweak['DATE'])){
-                $cura[$NUM]->data['birth']['date'] = trim($tweak['DATE']);
-                $recomputeSlug = true;
-            }
-            if(isset($tweak['C3'])){
-                $cura[$NUM]->data['birth']['place']['c3'] = trim($tweak['C3']);
-            }
-            if($recomputeSlug){
-                $cura[$NUM]->computeSlug();
-            }
-            $nUpdated++;
-            Person::update($cura[$NUM]);
-        }
+        $curafile = Cura::tmpFilename($datafile);
+        file_put_contents($curafile, $res);
         $report .= "Updated $nUpdated persons with tweaks of $tweaksFile\n";
         return $report;
     }

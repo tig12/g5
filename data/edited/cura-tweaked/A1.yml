@@ -61,100 +61,73 @@
   
 -
   NUM: 322
-  FNAME: Cornaggia Medici
+  FNAME: Cornaggia Medici                                                           
   GNAME: Alfonso
-  build-notes:
-    -
   
 -
   NUM: 336
   FNAME: Denti Pirajno
-  GNAME: Salvatore
-  build-notes:
-    -
+  GNAME: Salvatore                                                                  
   
 -
   NUM: 344
   FNAME: Ferretti di C.
   GNAME: Piero
-  build-notes:
-    -
   
 -
   NUM: 363
   FNAME: Gilbert Ewinckel                 
   GNAME: Igino
-  build-notes:
-    -
   
 -
   NUM: 370 
   FNAME: Grassi Fonseca
   GNAME: Amilcare
-  build-notes:
-    -
   
 -
   NUM: 373
   FNAME: Graziani del Borgo
   GNAME: Carlo
-  build-notes:
-    -
   
 -
   NUM: 375
   FNAME: Guerritore Revello
   GNAME: Carlo
-  build-notes:
-    -
   
 -
   NUM: 378
   FNAME: Keller Kellerer
   GNAME: Guido
-  build-notes:
-    -
   
 -
   NUM: 427
   FNAME: Negrone Cambiaso
   GNAME: Carina
-  build-notes:
-    -                                
   
 -
   NUM: 432
   FNAME: Novellis Coarazze
   GNAME: Alberto
-  build-notes:
-    -
   
 -
   NUM: 478
   FNAME: Scalpinelli Leguigna
   GNAME: Pietro
-  build-notes:
-    -
   
 -
   NUM: 482
   FNAME: Sibilla Massiera
   GNAME: Giulio
-  build-notes:
-    -
   
 -
   NUM: 505
   FNAME: Visconti Modrone
   GNAME: Marcello
-  build-notes:
-    -
   
 -
   NUM: 513
   FNAME: Van Den Boorn
-  GNAME: Charles
-  build-notes:
+  GNAME: Charles                                                                    
     
 -
   NUM: 589
@@ -170,31 +143,26 @@
   NUM: 1152            
   FNAME: Van Den Berghe
   GNAME: René
-  build-notes:
     
 -
   NUM: 1154
   FNAME: Van Den Bossche
   GNAME: Martin
-  build-notes:
     
 -
   NUM: 1211
   FNAME: Van Der Borgh
   GNAME: Joseph
-  build-notes:
     
 -
   NUM: 1212
   FNAME: Van Der Brekel
   GNAME: Petrus
-  build-notes:
     
 -
   NUM: 1636
   FNAME: Chaves d'Aguilar
   GNAME: Freddy
-  build-notes:
 
 -
   NUM: 1651
@@ -207,13 +175,11 @@
   NUM: 1677
   FNAME: Van Den Berg
   GNAME: Paul
-  build-notes:
     
 -
   NUM: 1678
   FNAME: Van Der Auwera
   GNAME: Jean
-  build-notes:
     
 -
   NUM: 1789                                                 
@@ -230,5 +196,34 @@
     Birth day conform with
     CFEPP book
     https://fr.wikipedia.org/wiki/Maurice_Terreau
-
-### todo 2032, 2033, 2036, 2053, 2077, 2082
+    
+-
+  NUM: 2032
+  FNAME: Gudin De Vallerin
+  GNAME: Maurice
+  
+-
+  NUM: 2033
+  FNAME: Jonquieres Oriola
+  GNAME: Pierre
+  
+-
+  NUM: 2036
+  FNAME: Maupeou D'Ableiges
+  GNAME: Pierre
+  
+-
+  NUM: 2053
+  FNAME: Ducos Haille
+  GNAME: Jean
+  
+-
+  NUM: 2077
+  FNAME: Coquelin Lisle
+  GNAME: Pierre
+  
+-
+  NUM: 2082
+  FNAME: Martinez Hoz
+  GNAME: Gaston
+  

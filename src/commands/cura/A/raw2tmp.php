@@ -1,7 +1,7 @@
 <?php
 /********************************************************************************
-    Import cura A files to g5 database
-                                   
+    Import cura A files to csv file in data/tmp/cura
+    
     This code uses file 902gdN.html to retrieve the names, but this could have been done using only 902gdA*y.html files
     (for example, 902gdA1y.html could have been used instead of using 902gdA1y.html and 902gdN.html).
     
@@ -25,7 +25,7 @@ use g5\commands\cura\CuraNames;
 use tiglib\arrays\sortByKey;
 
 
-class raw2db implements Command{
+class raw2tmp implements Command {
     
     // *****************************************
     // Implementation of Command
@@ -63,7 +63,7 @@ class raw2db implements Command{
         $datafile = $params[0];
         
         $report =  "--- Importing file $datafile ---\n";
-        $raw = Cura::readRawHtmlFile($datafile);
+        $raw = Cura::loadRawFile($datafile);
         $file_datafile = Cura::rawFilename($datafile);
         $file_names = CuraNames::rawFilename(); // = 902gdN.html
         //
@@ -105,7 +105,7 @@ class raw2db implements Command{
         // put here because useful to merge the lists 
         if($datafile == 'A1'){
             $res2['1817-03-25'] = [['day' => '1817-03-25', 'pro' => 'SP', 'name' => 'Lebris Jean']];
-            unset($res2['1817-03-05']); // possible because this date is unique within the array.
+            unset($res2['1817-03-05']); // possible because this date is unique within $res2.
         }
         //
         // 3 - merge res1 and res2 (name list)
@@ -234,51 +234,18 @@ class raw2db implements Command{
         $report .= "    nb NOT match = $n_bad ($percent_not_ok %)\n";
         
         //
-        // 4 - store result in 7-full
-        // create 1 source, 1 group, N persons
+        // 4 - store result in data/tmp
         //
-        // source corresponding to CURA - insert if does not already exist
-        $curaSource = Cura::getSource();
-        try{
-            Source::insert($curaSource);
-        }
-        catch(\Exception $e){
-            // already inserted, do nothing
-        }
-        // source corresponding to current A file
-        $source = new Source();
-        $source->data['slug'] = $datafile; // ex A1
-        $source->data['name'] = "CURA file $datafile";
-        $source->data['description'] = Cura::CURA_URLS[$datafile] . "\nDescribed by Cura as " . Cura::CURA_CLAIMS[$datafile][1];
-        $source->data['source']['parents'][] = $curaSource->data['slug'];
-        $source->data['id'] = Source::insert($source);
-        // group
-        $g = new Group();
-        $g->data['slug'] = $datafile;
-        $g->data['sources'][] = $source->data['slug'];
-        $g->data['name'] = $datafile;
-        //$g->data['description'] = '';
-        
-        $nb_stored = 0;
+        $nbStored = 0;
+        $csv = implode(G5::CSV_SEP, A::TMP_FIELDS) . "\n";
+        $csv_raw = '';
         foreach($res as $cur){
-            foreach(array_keys($cur) as $k){
-                $cur[$k] = trim($cur[$k]);
-            }
-            // Here build an empty person because cura data are the first to be imported
-            // => If person already exists, erases it
-            $p = new Person();
-            $p->addSource($datafile);
-            $p->addRaw($datafile, $cur);
-            $NUM = $cur['NUM'];
-            $p->addIdInSource($datafile, $NUM);
-            // here, do not modify directly $p->data to permit a call to addHistory()
-            // containing only new data
-            $new = [];
-            $new['trust'] = Cura::TRUST_LEVEL;
-            $new['name']['family'] = $cur['FNAME'];
-            $new['name']['given'] = $cur['GNAME'];
+            $new = array_fill_keys(A::TMP_FIELDS, '');
+            $new['NUM'] = trim($cur['NUM']);
+            $new['FNAME'] = trim($cur['FNAME']);
+            $new['GNAME'] = trim($cur['GNAME']);
             /////// TODO put wikidata occupation id ///////////
-            $p->addOccu(A::compute_profession($datafile, $cur['PRO'], $NUM));
+            $new['OCCU'] = A::compute_profession($datafile, $cur['PRO'], $new['NUM']);
             // date time
             $day = Cura::computeDay($cur);
             $hour = Cura::computeHHMMSS($cur);
@@ -286,26 +253,26 @@ class raw2db implements Command{
             if($TZ != 0 && $TZ != -1){
                 throw new \Exception("timezone not handled : $TZ");
             }
-            // TZ computation specific to A cura files - conform to Cura Notice
             // note that when $TZ = -1, +01:00 is stored
             $timezone = $TZ == 0 ? '+00:00' : '+01:00';
-            $new['birth'] = [];
-            $new['birth']['date-ut'] = "$day $hour$timezone"; // HERE not storing in date but in date-ut
+            $new['DATE'] = "$day $hour$timezone";
             // place
-            $new['birth']['place']['name'] = $cur['CITY'];
-            [$new['birth']['place']['cy'], $new['birth']['c2']] = A::compute_country($cur['COU'], $cur['COD']);
-            $new['birth']['place']['lg'] = Cura::computeLg($cur['LON']);
-            $new['birth']['place']['lat'] = Cura::computeLat($cur['LAT']);
-            $p->updateFields($new);
-            $p->computeSlug();
-            // log command effect on data in the person yaml
-            $p->addHistory("cura $datafile raw2full", $datafile, $new);
-            $p->data['id'] = Person::insert($p); // HERE storage
-            $nb_stored ++;
-            $g->addMember($p->data['id']);
+            $new['PLACE'] = trim($cur['CITY']);
+            [$new['CY'], $new['C2']] = A::compute_country($cur['COU'], $cur['COD']);
+            $new['LG'] = Cura::computeLg($cur['LON']);
+            $new['LAT'] = Cura::computeLat($cur['LAT']);
+            $new['GEOID'] = '';
+            $new['NOTES'] = '';
+            $csv .= implode(G5::CSV_SEP, $new) . "\n";
+            $nbStored ++;
         }
-        $g->data['id'] = Group::insert($g); // HERE storage
-        $report .= "Stored $nb_stored records\n";
+        $csvfile = Cura::tmpFilename($datafile);
+        $dir = dirname($csvfile);
+        if(!is_dir($dir)){
+            mkdir($dir, 0755, true);
+        }
+        file_put_contents($csvfile, $csv);
+        $report .= "Stored $nbStored lines in $csvfile\n";
         return $report;
     }
     

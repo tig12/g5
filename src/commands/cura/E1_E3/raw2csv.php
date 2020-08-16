@@ -102,7 +102,7 @@ class raw2csv implements Command{
         // parse first list (with birth date and place)
         //
         $res1 = [];
-        $raw = Cura::readRawHtmlFile($datafile);
+        $raw = Cura::loadRawFile($datafile);
         preg_match('#<pre>\s*(NUM.*?COD)\s*(.*?)\s*</pre>#sm', $raw, $m);
         if(count($m) != 3){
             throw new \Exception($datafile . " - Unable to parse $file - first list");
