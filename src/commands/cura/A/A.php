@@ -65,6 +65,7 @@ class A{
         'PLACE',
         'CY',
         'C2',
+        'C3',
         'LG',
         'LAT',
         'GEOID',

@@ -1,6 +1,9 @@
 <?php
 /********************************************************************************
     Import cura A files to csv file in data/tmp/cura
+    For each A file, 2 files are generated :
+    - An.csv (ex A1.csv) - includes corrections
+    - An-raw.csv (ex A1-raw.csv) - without corrections, to keep a trace of the original raw values
     
     This code uses file 902gdN.html to retrieve the names, but this could have been done using only 902gdA*y.html files
     (for example, 902gdA1y.html could have been used instead of using 902gdA1y.html and 902gdN.html).
@@ -63,18 +66,21 @@ class raw2tmp implements Command {
         $datafile = $params[0];
         
         $report =  "--- Importing file $datafile ---\n";
-        $raw = Cura::loadRawFile($datafile);
+        $html = Cura::loadRawFile($datafile);
         $file_datafile = Cura::rawFilename($datafile);
         $file_names = CuraNames::rawFilename(); // = 902gdN.html
         //
         // 1 - parse first list (without names) - store by birth date to prepare matching
         //
+        // $raw is used to keep trace of an exact copy of the raw fields
+        // assoc array, keys = NUM
+        $raw = [];
         $res1 = [];
-        preg_match('#<pre>\s*(YEA.*?CITY)\s*(.*?)\s*</pre>#sm', $raw, $m);
+        preg_match('#<pre>\s*(YEA.*?CITY)\s*(.*?)\s*</pre>#sm', $html, $m);
         if(count($m) != 3){
             throw new \Exception("Unable to parse first list (without names) in " . $file_datafile);
         }
-        $fieldnames1 = explode(Cura::HTML_SEP, $m[1]);
+        $fieldnames1 = explode(Cura::HTML_SEP, $m[1]); // exactly equal to A::RAW_FIELDS
         $lines1 = explode("\n", $m[2]);
         foreach($lines1 as $line1){
             $fields = explode(Cura::HTML_SEP, $line1);
@@ -87,6 +93,7 @@ class raw2tmp implements Command {
                 $res1[$day] = [];
             }
             $res1[$day][] = $tmp;
+            $raw[$tmp['NUM']] = $tmp;
         }
         //
         // 2 - prepare names - store by birth date to prepare matching
@@ -108,7 +115,7 @@ class raw2tmp implements Command {
             unset($res2['1817-03-05']); // possible because this date is unique within $res2.
         }
         //
-        // 3 - merge res1 and res2 (name list)
+        // 3 - merge res1 and res2
         //
         $res = [];
         // variables used only for report
@@ -234,11 +241,11 @@ class raw2tmp implements Command {
         $report .= "    nb NOT match = $n_bad ($percent_not_ok %)\n";
         
         //
-        // 4 - store result in data/tmp
+        // 4 - Generate result and store in data/tmp
         //
         $nbStored = 0;
         $csv = implode(G5::CSV_SEP, A::TMP_FIELDS) . "\n";
-        $csv_raw = '';
+        $csv_raw = implode(G5::CSV_SEP, A::RAW_FIELDS) . "\n";
         foreach($res as $cur){
             $new = array_fill_keys(A::TMP_FIELDS, '');
             $new['NUM'] = trim($cur['NUM']);
@@ -264,6 +271,7 @@ class raw2tmp implements Command {
             $new['GEOID'] = '';
             $new['NOTES'] = '';
             $csv .= implode(G5::CSV_SEP, $new) . "\n";
+            $csv_raw .= implode(G5::CSV_SEP, $raw[$new['NUM']]) . "\n";
             $nbStored ++;
         }
         $csvfile = Cura::tmpFilename($datafile);
@@ -273,6 +281,11 @@ class raw2tmp implements Command {
         }
         file_put_contents($csvfile, $csv);
         $report .= "Stored $nbStored lines in $csvfile\n";
+        // second file keeping a trace of the original values
+        $csvfile = Cura::tmpRawFilename($datafile);
+        file_put_contents($csvfile, $csv_raw);
+        $report .= "Stored $nbStored lines in $csvfile\n";
+        
         return $report;
     }
     

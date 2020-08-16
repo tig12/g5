@@ -61,7 +61,7 @@ class addGeo implements Command{
         
         $report = '';
         $rows = Cura::loadTmpFile($datafile);
-        $res = implode(G5::CSV_SEP, A::OUTPUT_FIELDS) . "\n";
+        $res = implode(G5::CSV_SEP, A::TMP_FIELDS) . "\n";
         
         $N = $ok = 0;
         
@@ -73,7 +73,7 @@ class addGeo implements Command{
                 // continue;
             // }
             if($row['CY'] == 'FR'){
-                [$new['PLACE'], $new['NOTES']] = self::correct_place_fr($new['PLACE']);
+                [$new['PLACE'], $new['C3']] = self::correct_place_fr($new['PLACE']);
             }
             
             $slug = slugify::compute($new['PLACE']);
@@ -115,7 +115,7 @@ class addGeo implements Command{
         }
         $report .= "$datafile : geonames ok = $ok ($p %) - miss $miss\n";
         
-        $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv';
+        $csvfile = Cura::tmpFilename($datafile);
         file_put_contents($csvfile, $res);
         
         return $report;
@@ -127,35 +127,30 @@ class addGeo implements Command{
         Auxiliary of execute();
         Not handled :
             Mouthiers-Hte-P
-        @return Array with 2 elements : place and notes.
+        @return Array with 2 elements : place and C3 (admin level 3 = arrondissement).
+            C3 filled only for Paris and Lyon
     **/
     private static function correct_place_fr($str){
-        $place = $notes = '';
+        $place = $C3 = '';
         
         if(strtoupper($str) != $str){
             // cura files contain only uppercased place names
-            // => place name already corrected
-            return [$str,$notes];
+            // => place name already corrected (by tweak2tmp step)
+            return [$str,$C3];
         }
         
         $str = ucWords(strtolower($str), " -'/\t\r\n\f\v"); // delim = default + "-", "'" and "/"
         
         $parts = explode(' ', $str);
-        
-        // Paris
-        // Potential bug for Paris-l'Hôpital - not present in cura files
-        if($parts[0] == 'Paris'){
-            if(count($parts) != 1){
-                $notes = $str; // ex "Paris 14e"
+              
+        // Paris and Lyon, sometimes arrondissement is present
+        // Would bug for Paris-l'Hôpital - not present in cura files
+        if(in_array($parts[0], ['Paris', 'Lyon'])){
+            preg_match('/(.*?) (\d+)/', $str, $m);
+            if(count($m) == 3){
+                return [$m[1], $m[2]]; // C3 found
             }
-            return ['Paris', $notes];
-        }
-        // Lyon
-        if($parts[0] == 'Lyon'){
-            if(count($parts) != 1){
-                $notes = $str; // ex "Lyon 14e"
-            }
-            return ['Lyon', $notes];
+            return [$str, '']; // no C3
         }
         
         $lowers = ['Le', 'La', 'Les', 'Du', 'De', 'Des', 'Sur', 'En'];
@@ -227,7 +222,7 @@ class addGeo implements Command{
             ]);
             // Saint-Loup/Semouse
         }
-        return [$place, $notes];
+        return [$place, $C3];
     }
     
 }// end class    

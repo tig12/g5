@@ -124,9 +124,17 @@ class Cura implements SourceI {
     /**
         Returns the name of a file in data/tmp/cura
         @param  $datafile : a string like 'A1'
-    **/
+    **/                                                                                          
     public static function tmpFilename($datafile){
         return Config::$data['dirs']['tmp'] . DS . 'cura' . DS . $datafile . '.csv';
+    }
+    
+    /**
+        Returns the name of a file in data/tmp/cura used to keep trace of the original raw values
+        @param  $datafile : a string like 'A1'
+    **/
+    public static function tmpRawFilename($datafile){
+        return Config::$data['dirs']['tmp'] . DS . 'cura' . DS . $datafile . '-raw.csv';
     }
     
     /**
