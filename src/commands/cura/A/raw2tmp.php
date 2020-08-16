@@ -274,6 +274,7 @@ class raw2tmp implements Command {
             $csv_raw .= implode(G5::CSV_SEP, $raw[$new['NUM']]) . "\n";
             $nbStored ++;
         }
+        
         $csvfile = Cura::tmpFilename($datafile);
         $dir = dirname($csvfile);
         if(!is_dir($dir)){

@@ -64,9 +64,9 @@ class tweak2tmp implements Command{
                         $report .= "WARNING : invalid key '$k' for NR = $NR in file $yamlfile - ignoring value\n";
                         continue;
                     }
-                    $N++;
                     $row[$k] = $v; // HERE update file with tweaked value
                 }
+                $N++;
             }
             $res .= implode(G5::CSV_SEP, $row) . "\n";
         }
@@ -74,7 +74,7 @@ class tweak2tmp implements Command{
         $targetFile = Ertel4391::tmpFilename();
         file_put_contents($targetFile, $res);
         
-        $report .= "Updated $N records of $targetFile\n    with tweaks of $yamlfile\n";
+        $report .= "Updated $N records of $targetFile\nwith tweaks of $yamlfile\n";
         return $report;
     }
     

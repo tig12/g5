@@ -1,0 +1,14 @@
+
+5a_muller-medics-utf8.txt is an UTF-8 version of
+https://newalchemypress.com/gauquelin/gauquelin_docs/5a_muller_medics.txt
+
+Conversion steps :
+
+Opened 5a_muller-medics.txt in Libreoffice writer with encoding DOS/OS2-865/Nordique
+Then exported as xhtml
+Opened the xhtml file in Firefox
+Select all and copy
+Paste in an empty txt file : 5a_muller-medics-utf8.txt
+Save
+
+There is probably a better way to do this...

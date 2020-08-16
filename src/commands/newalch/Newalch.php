@@ -26,6 +26,13 @@ class Newalch implements SourceI {
     **/
     const TRUST_LEVEL = 4;
     
+    // *********************** Source management ***********************
+    
+    /** Returns a Source object for newalchemypress web site. **/
+    public static function getSource(): Source {
+        return Source::getSource(Config::$data['dirs']['edited'] . DS . self::SOURCE_DEFINITION);
+    }
+    
     // *********************** Raw files manipulation ***********************
     
     /** 
@@ -35,12 +42,4 @@ class Newalch implements SourceI {
         return Config::$data['dirs']['raw'] . DS . 'newalchemypress.com';
     }
     
-    // *********************** Source management ***********************
-    
-    /** Returns a Source object for newalchemypress web site. **/
-    public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['edited'] . DS . self::SOURCE_DEFINITION);
-    }
-    
-    
-}// end class
+} // end class

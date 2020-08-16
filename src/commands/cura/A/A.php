@@ -11,9 +11,7 @@ use g5\commands\cura\Cura;
 
 class A{
     
-    /**
-        Names of the columns of raw A files (cura html pages)
-    **/
+    /** Names of the columns of raw A files (cura html pages) **/
     const RAW_FIELDS = [
         'YEA',
         'MON',
@@ -31,9 +29,7 @@ class A{
         'CITY',
     ];
     
-    /**
-        Names of the columns of A files in data/tmp/cura
-    **/
+    /** Names of the columns of A files in data/tmp/cura **/
     const TMP_FIELDS = [
         'NUM',
         'FNAME',
@@ -51,10 +47,7 @@ class A{
         'NOTES',
     ];
     
-    /**
-        Names of the columns of generated csv files
-        used by default by export.
-    **/
+    /** Names of the columns of generated csv files used by default by export. **/
     const OUTPUT_FIELDS = [
         'NUM',
         'FNAME',

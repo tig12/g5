@@ -15,43 +15,51 @@ use tiglib\arrays\csvAssociative;
 class Ertel4391 implements SourceI {
     
     /**
-        Path to the yaml file containing the characteristics of the source.
+        Path to the yaml file containing the characteristics of the source describing file 3a_sports.txt.
         Relative to directory specified in config.yml by dirs / edited
     **/
     const RAW_SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch' . DS . '3a_sports.yml';
     
-    // ************************ Source ******************************
+    // *********************** Source management ***********************
     
     /**
-        Returns a Source object for the raw file used for Ertel43991.
+        Returns a Source object for the raw file used for Ertel4391.
     **/
     public static function getSource(): Source {
         return Source::getSource(Config::$data['dirs']['edited'] . DS . self::RAW_SOURCE_DEFINITION);
     }
 
-    // ************************ Temporary file ******************************
+    // *********************** Raw file manipulation ***********************
+    
+    /**
+        @return Path to the raw file coming from newalch
+    **/
+    public static function rawFilename(){
+        return Newalch::rawDirname() . DS . '03-ertel' . DS . '5a_muller-medics-utf8.txt';
+    }
+    
+    // *********************** Tmp files manipulation ***********************
     
     /** Path to the temporary csv file used to work on this group. **/
     public static function tmpFilename(){
         return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', '4391SPO.csv']);
     }
     
-    /** Path to the temporary csv file keeping exact copy of the raw file. **/
+    /** Path to the temporary csv file keeping an exact copy of the raw file. **/
     public static function tmpRawFilename(){
         return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', '4391SPO-raw.csv']);
     }
     
     /**
-        Loads temporary file
-        @return Regular array
-                Each element contains an associative array (keys = field names).
+        Loads the temporary file in a regular array
+        Each element contains an associative array (keys = field names).
     **/
     public static function loadTmpFile(){
         return csvAssociative::compute(self::tmpFilename());
     }                                                                                              
     
     /**
-        Loads file temporary file in an asssociative array ; keys = NR
+        Loads the file temporary file in an asssociative array ; keys = NR
     **/
     public static function loadTmpFile_nr(){
         $rows1 = self::loadTmpFile();

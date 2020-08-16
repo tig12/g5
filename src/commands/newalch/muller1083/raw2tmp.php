@@ -1,6 +1,8 @@
 <?php
 /********************************************************************************
-    Imports 1-newalch-raw/05-muller-medics/5a_muller-medics-utf8.txt to 5-newalch-csv/1083MED.csv
+    Imports data/raw/newalchemypress.com/05-muller-medics/5a_muller-medics-utf8.txt
+    to  data/tmp/newalch/1083MED.csv
+    and data/tmp/newalch/1083MED-raw.csv
     
     @todo Handle C2 (départements)
         
@@ -15,14 +17,13 @@ use g5\patterns\Command;
 use g5\model\Names_fr;
 use tiglib\arrays\csvAssociative;
 
-class raw2csv implements Command{
+class raw2tmp implements Command {
     
     public static $depts;
     
     // *****************************************
     /** 
-        Parses file 1-raw/newalchemypress.com/3a_sports-utf8.csv
-        and stores it to 5-tmp/newalch/4391SPO.csv
+        Imports file raw/newalchemypress.com/3a_sports-utf8.csv to tmp/newalch/
         @param $params empty array
         @return report
     **/
@@ -32,16 +33,18 @@ class raw2csv implements Command{
             return "INVALID PARAMETER : " . $params[0] . " - parameter not needed\n";
         }
         
-        $raw = @file_get_contents(Muller1083::raw_filename());
-        if($raw === false){
-            return "Missing file " . Muller1083::raw_filename() . "\n";
+        $filename = Muller1083::rawFilename();                  
+        if(!is_file($filename)){
+            return "ERROR : Missing file $filename\n";
         }
+        $raw = file_get_contents($filename);
         $lines = explode("\n", $raw);
         $N = count($lines);
         
-        $res = implode(G5::CSV_SEP, Muller1083::TMP_CSV_COLUMNS) . "\n";
-        $nRecords = 0;
+        $res = implode(G5::CSV_SEP, Muller1083::TMP_FIELDS) . "\n";
+        $res_raw = implode(G5::CSV_SEP, array_keys(Muller1083::RAW_FIELDS)) . "\n";
         
+        $nRecords = 0;
         for($i=5; $i < $N-3; $i++){
             if($i%2 == 1){
                 continue;
@@ -49,29 +52,37 @@ class raw2csv implements Command{
             $nRecords++;
             
             $line  = trim($lines[$i]);
-            $new = array_fill_keys(Muller1083::TMP_CSV_COLUMNS, '');
+            $new = array_fill_keys(Muller1083::TMP_FIELDS, '');
             $new['NR'] = trim(mb_substr($line, 0, 5));
             $new['SAMPLE'] = trim(mb_substr($line, 5, 11));
             $new['GNR'] = trim(mb_substr($line, 16, 6));
             $new['CODE'] = trim(mb_substr($line, 32, 1));
-            [$new['FNAME'], $new['GNAME']] = self::compute_names(trim(mb_substr($line, 34, 51)));
+            // name
+            $NAME = trim(mb_substr($line, 34, 51));
+            [$new['FNAME'], $new['GNAME']] = self::compute_names($NAME);
             $new['GNAME'] = self::fixGname($new['GNAME']);
-            $tmp = explode('.', trim(mb_substr($line, 85, 10)));
-            $new['DATE'] = $tmp[2] . '-' . $tmp[1] . '-' . $tmp[0];
-            $new['DATE'] .= ' ' . str_replace('.', ':', mb_substr($line, 101, 5));
+            // date
+            $GEBDATUM = trim(mb_substr($line, 85, 10));
+            $DATE = explode('.', $GEBDATUM);
+            $GEBZEIT = mb_substr($line, 101, 5);
+            $JAHR = trim(mb_substr($line, 96, 4));
+            $new['DATE'] = $DATE[2] . '-' . $DATE[1] . '-' . $DATE[0];
+            $new['DATE'] .= ' ' . str_replace('.', ':', $GEBZEIT);
             // place
-            [$new['PLACE'], $new['C2'], $new['NOTES']]
-                = self::compute_place(trim(mb_substr($line, 110, 36)));
-            
-            $new['LG'] = self::compute_lgLat(trim(mb_substr($line, 146, 8)));
-            $new['LAT'] = self::compute_lgLat(trim(mb_substr($line, 156, 7)));
+            $GEBORT = trim(mb_substr($line, 110, 36));
+            [$new['PLACE'], $new['C2']] = self::compute_place($GEBORT);
+            // lg lat
+            $LAENGE = trim(mb_substr($line, 146, 8));
+            $BREITE = trim(mb_substr($line, 156, 8));
+            $new['LG'] = self::compute_lgLat($LAENGE);
+            $new['LAT'] = self::compute_lgLat($BREITE);
             
             $new['MODE'] = trim(mb_substr($line, 168, 3));
             $new['KORR'] = trim(mb_substr($line, 173, 5));
             
             $new['ELECTDAT'] = trim(mb_substr($line, 184, 10));
             $new['STBDATUM'] = trim(mb_substr($line, 204, 10));
-            // ELECTAGE not done (duplicate information, can be recomputed)
+            $ELECTAGE = trim(mb_substr($line, 199, 4));
             
             // here are 14 fields present in all lines and not containing spaces, so shorthcut.
             [
@@ -97,16 +108,61 @@ class raw2csv implements Command{
             $new['NIENMA'] = trim(mb_substr($line, 309, 1));
             $new['NIENJU'] = trim(mb_substr($line, 316, 1));
             $new['NIENSA'] = trim(mb_substr($line, 323, 1));
-            // GEBJAHR not done (duplicate information)
-            // GEBMONAT not done (duplicate information)
-            // GEBTAG not done (duplicate information)
-            $res .= implode(G5::CSV_SEP, $new) . "\n";
-        }
+            // record with exact raw values
+            $new_raw = [
+                'NR'        => $new['NR'],
+                'SAMPLE'    => $new['SAMPLE'],
+                'GNR'       => $new['GNR'],
+                'CODE'      => $new['CODE'],
+                'NAME'      => $NAME,
+                'GEBDATUM'  => $GEBDATUM,
+                'JAHR'      => $JAHR,
+                'GEBZEIT'   => $GEBZEIT,
+                'GEBORT'    => $GEBORT,
+                'LAENGE'    => $LAENGE,
+                'BREITE'    => $BREITE,
+                'MODE'      => $new['MODE'],
+                'KORR'      => $new['KORR'],
+                'ELECTDAT'  => $new['ELECTDAT'],
+                'ELECTAGE'  => $ELECTAGE,
+                'STBDATUM'  => $new['STBDATUM'],
+                'SONNE'     => $new['SONNE'],
+                'MOND'      => $new['MOND'],
+                'VENUS'     => $new['VENUS'],
+                'MARS'      => $new['MARS'],
+                'JUPITER'   => $new['JUPITER'],
+                'SATURN'    => $new['SATURN'],
+                'SO_'       => $new['SO_'],
+                'MO_'       => $new['MO_'],
+                'VE_'       => $new['VE_'],
+                'MA_'       => $new['MA_'],
+                'JU_'       => $new['JU_'],
+                'SA_'       => $new['SA_'],
+                'PHAS_'     => $new['PHAS_'],
+                'AUFAB'     => $new['AUFAB'],
+                'NIENMO'    => $new['NIENMO'],
+                'NIENVE'    => $new['NIENVE'],
+                'NIENMA'    => $new['NIENMA'],
+                'NIENJU'    => $new['NIENJU'],
+                'NIENSA'    => $new['NIENSA'],
+            ];
             
-        $outfile = Config::$data['dirs']['5-newalch-csv'] . DS . Muller1083::TMP_CSV_FILE;
-        file_put_contents($outfile, $res);
+            $res .= implode(G5::CSV_SEP, $new) . "\n";
+echo "\n<pre>"; print_r($new_raw); echo "</pre>\n"; exit;
+            $res_raw .= implode(G5::CSV_SEP, $new_raw) . "\n";
+break;
+        }
         
-        return "Generated $outfile\nStored $nRecords records\n";
+        $report = '';
+        $outfile = Muller1083::tmpFilename();
+        file_put_contents($outfile, $res);
+        $report .=  "Generated $outfile ($nRecords records)\n";
+        
+        $outfile = Muller1083::tmpRawFilename();
+        file_put_contents($outfile, $res_raw);
+        $report .=  "Generated $outfile ($nRecords records)\n";
+        
+        return $report;
     }
     
     
@@ -153,26 +209,25 @@ class raw2csv implements Command{
         - Département is sometimes missing
         - Département is sometime not complete (no closing parenthesis).
         - The string inside parenthesis sometimes specifies the arrondissement, for Paris
-        @return Array with 3 elements :
+        Note : arrondissement is ignored because erroneous
+        @return Array with 2 elements :
                 - place name
                 - department code (C2)
-                - a string to add to field NOTE
     **/
     private static function compute_place($str){
-        $place = $dept = $note = '';
+        $place = $dept = '';
         $pos = mb_strpos($str, '(');
         if($pos === false){
             $place = trim($str);
-            return [$place, $dept, $note];
+            return [$place, $dept];
         }
         $place = trim(mb_substr($str, 0, $pos)); // could be $pos-1
         $dept = mb_substr($str, $pos + 1);
         $dept = str_replace(')', '', $dept);
         if($place == 'Paris'){
-            $note = 'Paris ' . mb_strtolower($dept);
             $dept = 'Paris';
         }
-        return [$place, $dept, $note];
+        return [$place, $dept];
     }
     
     // ******************************************************

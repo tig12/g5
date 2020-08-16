@@ -43,14 +43,14 @@ class raw2tmp implements Command{
     // *****************************************
     // Implementation of Command
     /** 
-        Imports file data/raw/newalchemypress.com/03-ertel/3a_sports-utf8.txt to g5 tamporary files.
+        Imports file data/raw/newalchemypress.com/03-ertel/3a_sports-utf8.txt to data/tmp/newalch.
         @return report
     **/
     public static function execute($params=[]): string {
         
-        $filename = Newalch::rawDirname() . DS . '03-ertel' . DS . '3a_sports-utf8.txt';
+        $filename = Ertel4391::rawFilename();
         if(!is_file($filename)){
-            return "Missing file $filename\n";
+            return "ERROR : Missing file $filename\n";
         }
         
         $lines = file($filename);
@@ -154,12 +154,16 @@ class raw2tmp implements Command{
 
         $report = '';                         
         $outfile = Ertel4391::tmpFilename();
+        $dir = dirname($outfile);
+        if(!is_dir($dir)){
+            mkdir($dir, 0755, true);
+        }
         file_put_contents($outfile, $output);
         $report .= "$outfile generated ($nRes lines)\n";
-        
+        // second file keeping a trace of the original values
         $outfile = Ertel4391::tmpRawFilename();
         file_put_contents($outfile, $output_raw);
-        $report .= "$outfile generated ($nRes lines)\n";
+        $report .= "Generated $outfile ($nRes lines)\n";
         return $report;
     }
     
