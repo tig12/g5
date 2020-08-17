@@ -17,7 +17,7 @@ use tiglib\strings\slugify;
 use tiglib\geonames\database\matchFromSlug;
 
 
-class addGeo implements Command{
+class addGeo implements Command {
     
     private static $pdo_geonames;
 

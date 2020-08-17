@@ -13,7 +13,7 @@ use g5\commands\newalch\ertel4391\Ertel4391;
 use g5\commands\csicop\si42\SI42;
 use tiglib\arrays\csvAssociative;
 
-class look implements Command{ 
+class look implements Command { 
     
     /** 
         Possible values of the command, for ex :

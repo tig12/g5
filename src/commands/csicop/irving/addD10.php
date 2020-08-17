@@ -13,7 +13,7 @@ use g5\patterns\Command;
 use g5\commands\cura\Cura;
 use g5\commands\newalch\ertel4391\Ertel4391;
 
-class addD10 implements Command{
+class addD10 implements Command {
 
     // *****************************************
     /** 

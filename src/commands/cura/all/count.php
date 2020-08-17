@@ -14,7 +14,7 @@ use g5\commands\cura\Cura;
 use g5\commands\cura\CuraRouter;
 use tiglib\arrays\csvAssociative;
 
-class count implements Command{
+class count implements Command {
     
     // *****************************************
     // Implementation of Command

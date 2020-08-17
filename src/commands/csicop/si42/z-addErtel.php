@@ -14,7 +14,7 @@ use g5\patterns\Command;
 use g5\commands\newalch\ertel4391\Ertel4391;
 use tiglib\arrays\csvAssociative;
 
-class addErtel implements Command{
+class addErtel implements Command {
     
     // *****************************************
     /** 

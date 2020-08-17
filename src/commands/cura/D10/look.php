@@ -13,7 +13,7 @@ use g5\patterns\Command;
 use tiglib\arrays\csvAssociative;
 use g5\commands\cura\Cura;
 
-class look implements Command{
+class look implements Command {
     
     /** 
         Possible values of the command, for ex :

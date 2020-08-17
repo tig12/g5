@@ -68,18 +68,20 @@ class raw2tmp implements Command {
     // *****************************************
     /** 
         Parses file D6 and stores it in a csv file
+        @param $params Useless here (consumed by CuraCommand)
+                       Contains 2 elements : 'D6' and 'raw2tmp'
         @return report
         @throws Exception if unable to parse
     **/
     public static function execute($params=[]): string{
         
         if(count($params) > 2){
-            return "INVALID PARAMETER : " . $params[2] . " - raw2csv doesn't need this parameter\n";
+            return "INVALID PARAMETER : " . $params[2] . " - raw2tmp doesn't need this parameter\n";
         }
         
         $datafile = 'D6';
             
-        $report =  "--- Importing $datafile ---\n";
+        $report =  "--- $datafile raw2tmp ---\n";
         $raw = Cura::loadRawFile($datafile);
         // Fix an error on a latitude in cura file
         $raw = str_replace(

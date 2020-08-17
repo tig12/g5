@@ -18,12 +18,12 @@ use g5\commands\cura\Cura;
 use g5\model\Group;
 use g5\model\Person;
 
-class tweak2tmp implements Command{
+class tweak2tmp implements Command {
     
     // *****************************************
     // Implementation of Command
     /** 
-        Called by : php run-g5.php cura <datafile> tweak2csv
+        Called by : php run-g5.php cura <datafile> tweak2tmp
         @param $params array containing two strings :
                        - the datafile to process (like "A1").
                        - The name of this command (useless here)
@@ -33,13 +33,14 @@ class tweak2tmp implements Command{
         if(count($params) > 2){
             return "WRONG USAGE : useless parameter : {$params[2]}\n";
         }
-        $report = '';
         $datafile = $params[0];
         $tweaksFile = Config::$data['dirs']['edited'] . DS . 'cura-tweaked' . DS . $datafile . '.yml';
         
+        $report = "--- $datafile tweak2tmp ---\n";
+        
         if(!is_file($tweaksFile)){
-            return "Missing file $tweaksFile\n"
-                 . "tweak2csv did not modify anything.\n";
+            $report .= "Missing file $tweaksFile - tweak2tmp did not modify anything.\n";
+            return $report;
         }
         
         // load tweaks in an assoc arrray (keys = NUM)
@@ -55,9 +56,10 @@ class tweak2tmp implements Command{
             }
             unset($record['NUM']);
             if(isset($tweaks[$NUM])){
-                return "WARNING - duplicate entry for NUM = $NUM in $tweaksFile\n"
-                     . "tweak2csv did not modify anything.\n"
+                $report .= "WARNING - duplicate entry for NUM = $NUM in $tweaksFile\n"
+                     . "tweak2tmp did not modify anything.\n"
                      . "Fix $tweaksFile and start again.\n";
+                 return $report;
             }
             $tweaks[$NUM] = $record;
         }
@@ -87,7 +89,7 @@ class tweak2tmp implements Command{
         
         $curafile = Cura::tmpFilename($datafile);
         file_put_contents($curafile, $res);
-        $report .= "Updated $nUpdated records of $curafile\n with tweaks of $tweaksFile\n";
+        $report .= "Updated $nUpdated records of $curafile with $tweaksFile\n";
         return $report;
     }
     

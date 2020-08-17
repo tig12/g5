@@ -15,7 +15,7 @@ use g5\model\Full;
 use g5\model\Group;
 use g5\model\Person;
 
-class addA6 implements Command{
+class addA6 implements Command {
     
     const POSSIBLE_PARAMS = [
         'list' => "Echoes a list of matchins A6 / M402 reocrds",

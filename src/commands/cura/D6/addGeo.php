@@ -29,7 +29,7 @@ use tiglib\arrays\csvAssociative;
 use tiglib\geonames\webservice\cityFromLgLat;
 use tiglib\timezone\offset;
 
-class addGeo implements Command{
+class addGeo implements Command {
     
         /** String written in field PLACE to indicate that a call to geonames webservice failed **/
         const FAILURE_MARK = 'XXX';

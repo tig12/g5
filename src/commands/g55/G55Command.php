@@ -18,7 +18,7 @@ namespace g5\commands\g55;
 
 use g5\patterns\Command;
 
-class G55Command implements Command{
+class G55Command implements Command {
 
     // ******************************************************
     /**

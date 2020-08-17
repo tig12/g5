@@ -21,7 +21,7 @@ use g5\Config;
 use g5\patterns\Command;
 use g5\commands\newalch\Newalch;
 
-class raw2tmp implements Command{
+class raw2tmp implements Command {
     
     /**
         Mapping between country code used in the file (field NATION)
@@ -44,6 +44,7 @@ class raw2tmp implements Command{
     // Implementation of Command
     /** 
         Imports file data/raw/newalchemypress.com/03-ertel/3a_sports-utf8.txt to data/tmp/newalch.
+        @param $params  Empty array
         @return report
     **/
     public static function execute($params=[]): string {
@@ -152,7 +153,7 @@ class raw2tmp implements Command{
         $output = implode(G5::CSV_SEP, array_keys($new)) . "\n" . $output;       
         $output_raw = implode(G5::CSV_SEP, array_keys($raw)) . "\n" . $output_raw;
 
-        $report = '';                         
+        $report = "--- Ertel4391 raw2tmp ---\n";
         $outfile = Ertel4391::tmpFilename();
         $dir = dirname($outfile);
         if(!is_dir($dir)){

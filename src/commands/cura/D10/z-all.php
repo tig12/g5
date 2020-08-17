@@ -11,7 +11,7 @@ use g5\Config;
 use g5\patterns\Command;
 use g5\commands\cura\all\export;
 
-class all implements Command{
+class all implements Command {
     
     // *****************************************
     // Implementation of Command

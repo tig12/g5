@@ -63,7 +63,7 @@ class raw2tmp implements Command {
         The resulting csv file contains informations of the 2 lists
         @param  $params Array containing 3 elements :
                         - a string identifying what is processed (ex : 'E1')
-                        - "raw2csv" (useless here)
+                        - "raw2tmp" (useless here)
                         - The report type. Can be "small", "full", "tz" or "geo"
         @return report
     **/
@@ -97,7 +97,7 @@ class raw2tmp implements Command {
         self::$n_missing_timezone = 0;
         self::$n_total = 0;
         $report = '';
-        $report .= "Importing $datafile\n";
+        $report .= "--- $datafile raw2tmp ---\n";
         //
         // parse first list (with birth date and place)
         //

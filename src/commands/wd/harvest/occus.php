@@ -13,7 +13,7 @@ use g5\patterns\Command;
 use g5\commands\wd\Wikidata;
 use tiglib\misc\dosleep;
 
-class occus implements Command{
+class occus implements Command {
     
     // *****************************************
     /** 

@@ -12,7 +12,7 @@ use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
 
-class import100 implements Command{
+class import100 implements Command {
     
     // *****************************************
     // Implementation of Command

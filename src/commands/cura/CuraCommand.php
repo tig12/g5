@@ -14,7 +14,7 @@ namespace g5\commands\cura;
 
 use g5\patterns\Command;
 
-class CuraCommand implements Command{
+class CuraCommand implements Command {
 
     // ******************************************************
     /**

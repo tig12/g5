@@ -18,7 +18,7 @@ use g5\commands\newalch\Newalch;
 use tiglib\arrays\sortByKey;
 use tiglib\time\seconds2HHMMSS;
 
-class raw2full implements Command{
+class raw2full implements Command {
     
     // *****************************************
     // Implementation of Command

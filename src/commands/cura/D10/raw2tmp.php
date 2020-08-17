@@ -12,7 +12,7 @@ use g5\G5;
 use g5\patterns\Command;
 use g5\commands\cura\Cura;
 
-class raw2tmp implements Command{
+class raw2tmp implements Command {
     
     /** ISO 3166 code (all data share the same country) **/
     const COUNTRY = 'US';
@@ -35,6 +35,7 @@ class raw2tmp implements Command{
     // *****************************************
     /** 
         Parses file D10 and stores it in a csv file
+        @param  $params Useless here - ['D10', 'raw2tmp']
         @return report
         @throws Exception if unable to parse
     **/
@@ -44,7 +45,7 @@ class raw2tmp implements Command{
             return "INVALID PARAMETER : " . $params[2] . " - raw2tmp doesn't need this parameter\n";
         }
         
-        $report =  "--- Importing file D10 ---\n";
+        $report =  "--- D10 raw2tmp ---\n";
         $raw = Cura::loadRawFile('D10');
         $file_serie = Cura::rawFilename('D10');
         preg_match('#<pre>\s*(NUM.*?CICO)\s*(.*?)\s*</pre>#sm', $raw, $m);

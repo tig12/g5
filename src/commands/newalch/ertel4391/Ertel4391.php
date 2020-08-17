@@ -11,6 +11,7 @@ use g5\Config;
 use g5\model\SourceI;
 use g5\model\Source;
 use tiglib\arrays\csvAssociative;
+use g5\commands\newalch\Newalch;
 
 class Ertel4391 implements SourceI {
     
@@ -35,7 +36,7 @@ class Ertel4391 implements SourceI {
         @return Path to the raw file coming from newalch
     **/
     public static function rawFilename(){
-        return Newalch::rawDirname() . DS . '03-ertel' . DS . '5a_muller-medics-utf8.txt';
+        return Newalch::rawDirname() . DS . '03-ertel' . DS . '3a_sports-utf8.txt';
     }
     
     // *********************** Tmp files manipulation ***********************

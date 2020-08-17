@@ -21,7 +21,7 @@ use tiglib\time\HHMMSS2seconds;
 use tiglib\arrays\csvAssociative;
 use tiglib\timezone\offset_fr;
 
-class legalTime implements Command{
+class legalTime implements Command {
     
     const POSSIBLE_PARAM = ['update', 'echo'];
     

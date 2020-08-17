@@ -12,7 +12,7 @@ use g5\model\DB5;
 use g5\commands\wd\Wikidata;
 use tiglib\arrays\csvAssociative;
 
-class raw2full implements Command{
+class raw2full implements Command {
     
     /** 
         Template for resulting person.

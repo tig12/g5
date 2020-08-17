@@ -42,7 +42,7 @@ class raw2tmp implements Command {
         
         @param  $params Array containing 3 elements :
                         - a string identifying what is processed (ex : 'A1')
-                        - "raw2full" (useless here)
+                        - "raw2tmp" (useless here)
                         - The report type. Can be "small" or "full"
         @return String report
         @throws Exception if unable to parse
@@ -65,7 +65,7 @@ class raw2tmp implements Command {
         $report_type = $params[2];
         $datafile = $params[0];
         
-        $report =  "--- Importing file $datafile ---\n";
+        $report =  "--- $datafile raw2tmp ---\n";
         $html = Cura::loadRawFile($datafile);
         $file_datafile = Cura::rawFilename($datafile);
         $file_names = CuraNames::rawFilename(); // = 902gdN.html

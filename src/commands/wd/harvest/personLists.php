@@ -15,7 +15,7 @@ use g5\commands\wd\Wikidata;
 use tiglib\strings\slugify;
 use tiglib\misc\dosleep;
 
-class personLists implements Command{
+class personLists implements Command {
     
     // *****************************************
     /** 

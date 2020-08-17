@@ -9,14 +9,12 @@ namespace g5\commands\cura\A;
 
 use g5\Config;
 use g5\patterns\Command;
-use g5\commands\cura\all\tweak2csv;
-//use g5\commands\cura\all\exportfromfull;
-use g5\commands\cura\all\export;
+use g5\commands\cura\all\tweak2db;
 use g5\commands\g55\all\edited2cura;
 use g5\commands\newalch\ertel4391\fixA1;
 use g5\commands\newalch\muller1083\fixCura;
 
-class all implements Command{
+class all implements Command {
     
     // *****************************************
     // Implementation of Command
@@ -36,13 +34,13 @@ class all implements Command{
                                                                                                                                                           
         $datafile = $params[0];
         
-        echo "\n=== php run-g5.php cura $datafile raw2csv small ===\n";
-        $params_raw2csv = $params;
-        $params_raw2csv[] = 'small';
-        echo raw2csv::execute($params_raw2csv);
+        echo "\n=== php run-g5.php cura $datafile raw2tmp small ===\n";
+        $params_raw2tmp = $params;
+        $params_raw2tmp[] = 'small';
+        echo raw2tmp::execute($params_raw2tmp);
         
-        echo "\n=== php run-g5.php cura $datafile tweak2csv small ===\n";
-        echo tweak2csv::execute($params);
+        echo "\n=== php run-g5.php cura $datafile tweak2db small ===\n";
+        echo tweak2db::execute($params);
         
         if($datafile == 'A1'){
             echo "\n=== php run-g5.php newalch ertel4391 fixA1 update ===\n";

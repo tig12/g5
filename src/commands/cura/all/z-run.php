@@ -16,7 +16,7 @@ use g5\commands\cura\D10\all as allD10;
 use g5\commands\cura\E1_E3\all as allE1_E3;
 
 
-class run implements Command{
+class run implements Command {
     
     // *****************************************
     // Implementation of Command

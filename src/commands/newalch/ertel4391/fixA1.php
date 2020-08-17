@@ -18,7 +18,7 @@ use g5\Config;
 use g5\patterns\Command;
 use tiglib\arrays\csvAssociative;
 
-class fixA1 implements Command{
+class fixA1 implements Command {
     
     // *****************************************
     // Implementation of Command

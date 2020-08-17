@@ -12,7 +12,7 @@ use g5\commands\cura\Cura;
 use tiglib\arrays\csvAssociative;
 use g5\commands\acts\Acts;
 
-class dirs implements Command{ 
+class dirs implements Command { 
     
     /** 
         Possible values of the command, for ex :

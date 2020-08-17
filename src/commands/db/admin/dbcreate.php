@@ -7,13 +7,13 @@
     @license    GPL
     @history    2020-08-08 17:22:57+02:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\commands\admin\db5;
+namespace g5\commands\db\admin;
 
 use g5\patterns\Command;
 use g5\Config;
 use g5\model\DB5;
 
-class dbcreate implements Command{
+class dbcreate implements Command {
     
     // *****************************************
     // Implementation of Command

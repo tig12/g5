@@ -17,7 +17,7 @@ use g5\model\Full;
 use g5\model\Group;
 use g5\model\Person;
 
-class export implements Command{
+class export implements Command {
     
     // *****************************************
     // Implementation of Command
