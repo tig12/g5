@@ -17,7 +17,7 @@ class Irving{
     const RAW_CSV_SEP = ';';
     
     /**
-        Field names of tmp_filename() for step raw2csv.
+        Field names of tmpFilename() for step raw2csv.
         Other fields complete this list in following transformations.
     **/
     const TMP_FIELDS = [
@@ -42,7 +42,7 @@ class Irving{
             - alphabetical order is respected
             - SI42 is the only known published group
         Format : Irving id => SI42 id.
-        This correspondance is only used in raw2csv.
+        This correspondance is only used in raw2tmp.
         After this step, Irving ids and SI42 ids are identical.
     **/
     const IRVING_SI42 = [
@@ -60,22 +60,23 @@ class Irving{
         355 => 354,
     ];
     
-    /** Irving's raw file **/
-    public static function raw_filename(){
-        return Config::$data['dirs']['1-irving-raw'] . DS . 'rawlins-ertel-data.csv';
+    // *********************** Raw files manipulation ***********************
+    
+    /** Path to Irving's raw file **/
+    public static function rawFilename(){
+        return implode(DS, [Config::$data['dirs']['raw'], 'csicop', 'irving', 'rawlins-ertel-data.csv']);
     }
     
-    /** Generated file in 5-tmp **/
-    public static function tmp_filename(){
-        return Config::$data['dirs']['5-csicop'] . DS . '408-csicop-irving.csv';
+    // *********************** Tmp files manipulation ***********************
+    
+    /** Temporary file in data/tmp/csicop/irving/ **/
+    public static function tmpFilename(){
+        return implode(DS, [Config::$data['dirs']['tmp'], 'csicop', 'irving', '408-csicop-irving.csv']);
     }
     
-    // ******************************************************
-    /**
-        Loads 5-ciscop/408-csicop-irving.csv in an asssociative array ; keys = CSID
-    **/
-    public static function loadTmpCsv_csid(){
-        $csv = csvAssociative::compute(self::tmp_filename(), G5::CSV_SEP);
+    /** Loads data/tmp/csicop/irving/408-csicop-irving.csv in an asssociative array ; keys = CSID **/
+    public static function loadTmpFile_csid(){
+        $csv = csvAssociative::compute(self::tmpFilename(), G5::CSV_SEP);
         $res = [];              
         foreach($csv as $row){
             $res[$row['CSID']] = $row;

@@ -1,7 +1,7 @@
 <?php
 /********************************************************************************
-    Importation of 1-irving/rawlins-ertel-data.csv
-    to  5-csicop/408-csicop-irving.csv
+    Importation of data/raw/irving/rawlins-ertel-data.csv
+    to  data/tmp/csicop/408-csicop-irving.csv
     
     @license    GPL
     @history    2019-12-23 00:38:49+01:00, Thierry Graff : Creation
@@ -12,7 +12,7 @@ use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
 
-class raw2csv implements Command{
+class raw2tmp implements Command {
 
     // *****************************************
     /** 
@@ -24,8 +24,8 @@ class raw2csv implements Command{
             return "USELESS PARAMETER : " . $params[0] . "\n";
         }
         
-        $infile = Irving::raw_filename();
-        $outfile = Irving::tmp_filename();
+        $infile = Irving::rawFilename();
+        $outfile = Irving::tmpFilename();
         
         $report =  "--- Importing file $infile ---\n";
         
@@ -78,20 +78,20 @@ class raw2csv implements Command{
         foreach($res as $row){
             $output .= implode(G5::CSV_SEP, $row) . "\n";
         }
+        $dir = dirname($outfile);
+        if(!is_dir($dir)){
+            mkdir($dir, 0755, true);
+        }
         file_put_contents($outfile, $output);
-        $report .= "Generated $outfile - $n records stored\n";
+        $report .= "Stored $n records in $outfile\n";
         return $report;
     }
     
-    // ******************************************************
-    /**
-        Auxiliary of execute()
-    **/
+    /** Auxiliary of execute() **/
     private static function lgLat($deg, $min){
         return $deg + round(($min / 60), 5);
     }
     
-    // ******************************************************
     /**
         Auxiliary of execute()
         Computes the timezone offset

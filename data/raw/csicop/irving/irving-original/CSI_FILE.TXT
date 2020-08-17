@@ -1,0 +1,84 @@
+CSICOP subjects showing a difference of +/- 1 sector or more
+when data is calculated as given in original Ertel file:
+
+Abramowicz  Daniel
+Adams  Pete
+Ashe  Arthur
+Barry  Richard
+Bradds  Gary
+Bragg  Don
+Budd  Frank
+Button  Richard T
+Charles  John/C
+Concannon  John
+Courtney  Tom
+Cunningham  Sam
+Davenport  Willie
+Demarco  Robert A
+Doll  Robert
+Eller  Carl
+Finkel  Henry
+Fosbury  Dick
+Frazier  Joe
+Gianelli  John
+Gilliam  John R
+Gillingham  Gale
+Gordon  Richard/F
+Hairston  Harold
+Harder  Marlin
+Harris  Archie
+Haskins  Clem
+Hawkins  Benjamin
+Heinsohn  Thomas
+Holland  Terry
+Hudson  Lou
+Jackson  Phil
+Jennings  James
+Jones  Clinton
+Jones  Larry
+Kiick  James
+Kimball  Toby
+King  Ron
+Koffenberger  Ed
+Kramer  Gerald
+Kramer  Ronald
+Lanier  Willie W
+Lewis  Sherman
+Liquori  Martin
+Lynch  James
+Mack  Thomas L
+Maham  Larry
+Mandic  John
+Mandich  Jim
+Mitchell  Lydell
+Morin  Milt
+Murro  Mark
+Nash  Charles
+Nelson  Albert
+Owen  Nancy
+Page  Alan Cedric
+Palazzi  Togo
+Peoples  Woodrow
+Redman  Rick
+Regner  Thomas
+Robinson  Richard D
+Rose  Peter Ed
+Sayers  Gale Eugene
+Scott  Jacob
+Silliman  Mike
+Sime  Dave
+Smith  John Walton
+Taylor  Brian
+Taylor  Bruce L
+Theismann  Joseph
+Timberlake  Robert
+Verga  Robert
+Volk  Richard R
+Vukovich  William
+Warfield  Paul D
+Werkman  Nick
+Wilcox  David
+Willard  Kenneth A
+Williams  Randy
+Williams  Theodore Samuel
+Wottle  Dave

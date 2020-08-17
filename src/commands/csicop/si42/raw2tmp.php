@@ -1,8 +1,8 @@
 <?php
 /********************************************************************************
-    Importation of 1-si-raw/si42-p62-65.txt
-    to  5-csicop/408-csicop-si42.csv (all records)
-    and 5-csicop/181-csicop-si42.csv (records marked "SC")
+    Importation of data/raw/ciscop/si42/si42-p62-65.txt
+    to  data/tmp/ciscop/si42/408-csicop-si42.csv (all records)
+    and data/raw/ciscop/si42/181-csicop-si42.csv (records marked "SC")
     
     @license    GPL
     @history    2019-11-16, Thierry Graff : Creation
@@ -13,7 +13,7 @@ use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
 
-class raw2csv implements Command{
+class raw2tmp implements Command {
     
     // *****************************************
     /** 
@@ -25,9 +25,9 @@ class raw2csv implements Command{
             return "USELESS PARAMETER : " . $params[0] . "\n";
         }
         
-        $infile = SI42::raw_filename();
-        $outfile_181 = SI42::tmp_filename_181();                 
-        $outfile = SI42::tmp_filename();
+        $infile = SI42::rawFilename();
+        $outfile_181 = SI42::tmpFilename_181();                 
+        $outfile = SI42::tmpFilename();
         
         $report =  "--- Importing file $infile ---\n";
         
@@ -54,10 +54,19 @@ class raw2csv implements Command{
             }
         }
         
+        $dir = dirname($outfile_181);
+        if(!is_dir($dir)){
+            mkdir($dir, 0755, true);
+        }
         file_put_contents($outfile_181, $res_181);
-        $report .= "Generated $outfile_181 - $n_181 records stored\n";
+        $report .= "Generated $n_181 records in $outfile_181\n";
+        
+        $dir = dirname($outfile);
+        if(!is_dir($dir)){
+            mkdir($dir, 0755, true);
+        }
         file_put_contents($outfile, $res);
-        $report .= "Generated $outfile - $n records stored\n";
+        $report .= "Generated $n records in $outfile\n";
         return $report;
     }
     

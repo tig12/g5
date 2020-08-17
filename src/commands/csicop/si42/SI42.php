@@ -14,37 +14,41 @@ use g5\Config;
 class SI42{
     
     /**
-        Field names of tmp_filename() for step raw2csv.
+        Field names of tmpFilename() for step raw2csv.
         Other fields complete this list in following transformations.
     **/
     const TMP_FIELDS = [
         'CSID',
         'FNAME',
         'GNAME',
-        'DATE',
+        'DATE',                                                                                                          
         'C2',
         'MA12', // mars, 12 sectors
         'SC',   // selected champion, 181 records
     ];
     
+    // *********************** Raw files manipulation ***********************
+    
     /** Raw file containing 408 records **/
-    public static function raw_filename(){
-        return Config::$data['dirs']['1-si-raw'] . DS . 'si42-p60-63.txt';
+    public static function rawFilename(){
+        return implode(DS, [Config::$data['dirs']['raw'], 'csicop', 'si42', 'si42-p60-63.txt']);
     }
     
     /** Raw file containing 128 records of canvas 1 **/
-    public static function raw_filename_canvas1(){
-        return Config::$data['dirs']['1-si-raw'] . DS . 'si42-p41.txt';
+    public static function rawFilename_canvas1(){
+        return implode(DS, [Config::$data['dirs']['raw'], 'csicop', 'si42', 'si42-p41.txt']);
     }
     
+    // *********************** Tmp files manipulation ***********************
+    
     /** Tmp file name with 408 records **/
-    public static function tmp_filename(){
-        return Config::$data['dirs']['5-csicop'] . DS . '408-csicop-si42.csv';
+    public static function tmpFilename(){
+        return implode(DS, [Config::$data['dirs']['tmp'], 'csicop', 'si42', '408-csicop-si42.csv']);
     }
     
     /** Tmp file containing only records marked SC **/
-    public static function tmp_filename_181(){
-        return Config::$data['dirs']['5-csicop'] . DS . '181-csicop-si42.csv';
+    public static function tmpFilename_181(){
+        return implode(DS, [Config::$data['dirs']['tmp'], 'csicop', 'si42', '181-csicop-si42.csv']);
     }
     
 }// end class

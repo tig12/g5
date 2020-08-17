@@ -21,7 +21,7 @@ class look implements Command{
             return "USELESS PARAMETER : " . $params[0] . "\n";
         }
         
-        $infile = SI42::tmp_filename();
+        $infile = SI42::tmpFilename();
         
         $report =  "Looking file $infile\n";
         $rows = csvAssociative::compute($infile);
@@ -52,7 +52,6 @@ class look implements Command{
             }
             $states[$state]++;
         }
-//echo "\n<pre>"; print_r($states); echo "</pre>\n"; exit;
         ksort($states);
         sort($datesExtreme);
         
@@ -69,7 +68,6 @@ class look implements Command{
         $report .= "\n$n50 dates > 1950\n";
         return $report;
     }
-    
     
 }// end class    
 

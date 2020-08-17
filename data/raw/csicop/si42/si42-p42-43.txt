@@ -1,0 +1,89 @@
+Name                  Mars      OC    NSP     LL
+AARON                    7              x      x
+ALLEN                   12                     x
+ASHE                     6              x      x
+BARNES                   4       x
+BARRY                    2              x      x
+BIFFLE                   4       x
+BLANCHARD                4                     x
+BRAGG                   12       x
+BROWN R.S.               7                     x
+BUDGE                    1              x      x
+BUTTON                   3       x      x      x
+CAMPBELL                 4       x
+CARPENTER                4       x
+CASPER                   1              x      x
+CHADWICK                 7                     x
+CLAY                     4              x      x
+COUNSILMAN               1                     x
+COURTNEY                 8       x
+COWENS                  10              x      x
+CRONIN                  10                     x
+CSONKA                  12                     x
+DAVENPORT               11       x             x
+DAVIS G.                10                     x
+DAVIS O.                 3       x
+DAWSON                   5                     x
+DEMPSEY                 10                     x
+D1LLARD                  1       x
+ELLER                    8                     x
+FOSBURY                  4       x      x      x
+FRAZIER                  8              x      x
+GABRIEL                  8                     x
+GAGNE                   10                     x
+GIBSON                   1              x      x
+GROZA L.                12                     x
+HAVLICEK                 1              x      x
+HIRSCH                   8                     x
+HORNUNG                 12              x      x
+JOHNSON C.               2       x
+JURGENSEN                2              x      x
+KILMER                   5                     x
+KING                     3       x
+KRAMER G.                5                     x
+KRAMER J.               11              x      x
+LEE                     10       x             x
+LEMON                    2                     x
+LOLICH                   7                     x
+LUCAS                    9                     x
+MAHAN                    1                     x
+MANN                     6                     x
+MARIS                    5              x      x
+MAYS                     5              x      x
+McADOO                   8              x
+McCOVEY                  2                     x
+N1CKLAUS                 8              x      x
+OLSEN                   10                     x
+OTTO                     6                     x
+OWEN                     7                     x
+PAGE                     9              x      x
+PATTERSON                8              x      x
+PATTON                  12       x
+PETTY                   10              x      x
+RIGBY                    5                     x
+ROSE                    10              x      x
+RYUN                     6              x      x
+SAYERS                  11              x      x
+SCHOLLANDER              1       x             x
+SCHUL                    9       x
+SPITZ                   11       x      x      x
+STARR                    4              x      x
+STAUBACH                 8              x      x
+STEINKRAUS               5                     x
+TARKENTON                7              x      x
+UNSELD                   7                     x
+VUKOVICH                 1                     x
+WALTON                   7                     x
+WARD                     9                     x
+WARFIELD                 3                     x
+WARMERDAM                9                     x
+WERNER                   7                     x
+WHITE                    2                     x
+WILHELM                  7                     x
+WILLIAMS B.              9                     x
+WILLIAMS R.             11       x
+WILLIAMS T.              1              x      x
+WILLS                    8              x      x
+WOTTLE                   2       x
+WYNN                    11                     x
+YARBOROUGH               4                     x

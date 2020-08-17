@@ -1,6 +1,7 @@
 <?php
 /********************************************************************************
-    Comparison betweensi42 and Ertel4391
+    Comparison between si42 and Ertel4391
+    
     @license    GPL
     @history    2019-11-24 05:10:54+01:00, Thierry Graff : Creation
 ********************************************************************************/
@@ -12,7 +13,7 @@ use g5\commands\newalch\ertel4391\Ertel4391;
 use g5\commands\cura\Cura;
 use tiglib\arrays\csvAssociative;
 
-class checkErtel implements Command{
+class checkErtel implements Command {
     
     /** 
         Possible values of the command, for ex :
@@ -55,9 +56,9 @@ class checkErtel implements Command{
     // ******************************************************
     private static function check_date(){
         $ertel = Ertel4391::loadTmpFile();
-        $si42file = SI42::tmp_filename();
+        $si42file = SI42::tmpFilename();
         $si42 = csvAssociative::compute($si42file);
-        $d10 = Cura::loadTmpCsv_num('D10');
+        $d10 = Cura::loadTmpFile_num('D10');
         
         $report =  "Check dates Ertel4391 / $si42file\n";
         
@@ -106,7 +107,6 @@ class checkErtel implements Command{
                          . "D10   $DATED10 $nameD10 NUM = $NUM\n";
             }
             
-//echo "\n<pre>"; print_r($rowE); echo "</pre>\n"; exit;
         }
         $report .= "$nDates differences\n";
         return $report;

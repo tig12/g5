@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Adds field CANVAS to 5-csicop/408-csicop-si42.csv
+    Adds field CANVAS to data/tmp/csicop/si42/408-csicop-si42.csv
     Fills CANVAS with value "1" for 128 records, listed in si42-p41.txt
     
     @license    GPL
@@ -12,11 +12,11 @@ use g5\G5;
 use g5\patterns\Command;
 use tiglib\arrays\csvAssociative;
 
-class addCanvas1 implements Command{
+class addCanvas1 implements Command {
     
     // *****************************************
     /** 
-        WARNING Execution of this command lead to modify SI42::raw_filename_canvas1() :
+        WARNING Execution of this command lead to modify SI42::rawFilename_canvas1() :
         Changed "Brown, R.S." to "Brown, R." - A priori ok, state and mars sector correspond
     
         @param  $params Empty array
@@ -27,8 +27,11 @@ class addCanvas1 implements Command{
             return "USELESS PARAMETER : " . $params[0] . "\n";
         }
         
-        $infile = SI42::tmp_filename();
-        $c1file = SI42::raw_filename_canvas1();
+        $infile = SI42::tmpFilename();
+        if(!is_file($infile)){
+            return "ERROR : file $infile does not exist - run import and start again\n";
+        }
+        $c1file = SI42::rawFilename_canvas1();
         
         $report =  "Add column CANVAS to $infile\n";
         

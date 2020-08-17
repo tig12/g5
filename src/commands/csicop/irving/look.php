@@ -65,8 +65,11 @@ class look implements Command{
         The output of this function was used to build Irving::IRVING_SI42
     **/
     private static function look_si42(){
-        $si42 = csvAssociative::compute(SI42::tmp_filename(), G5::CSV_SEP);
-        $irving = Irving::loadTmpCsv_csid();
+        $si42 = csvAssociative::compute(SI42::tmpFilename(), G5::CSV_SEP);
+        $irving = @Irving::loadTmpFile_csid();
+        if(empty($irving)){
+            return "ERROR : Missing file " . Irving::tmpFilename() . "\nFirst execute : php run-g5.php csicop irving raw2tmp\n";
+        }
         
         $report = '';
         $nDiff = 0;
@@ -87,15 +90,19 @@ class look implements Command{
     }
     
     // ******************************************************
-    /** 
-        Compares Irving dates with Ertel4391
-    **/
+    /**  Compares Irving dates with Ertel4391 **/
     private static function look_ertel(){
         
         $report = '';
         
-        $irving = Irving::loadTmpCsv_csid();
-        $ertel = Ertel4391::loadTmpFile();
+        $irving = @Irving::loadTmpFile_csid();
+        if(empty($irving)){
+            return "ERROR : Missing file " . Irving::tmpFilename() . "\nFirst execute : php run-g5.php csicop irving raw2tmp\n";
+        }
+        $ertel = @Ertel4391::loadTmpFile();
+        if(empty($ertel)){
+            return "ERROR : Missing file " . Ertel4391::tmpFilename() . "\nFirst import this file\n";
+        }
         $nOK = $nDiff = 0;
         foreach($ertel as $erow){
             $CSID = $erow['CSINR'];

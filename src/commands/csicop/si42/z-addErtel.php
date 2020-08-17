@@ -27,7 +27,7 @@ class addErtel implements Command{
         }
         
         $ertel = Ertel4391::loadTmpFile();
-        $si42file = SI42::tmp_filename();
+        $si42file = SI42::tmpFilename();
         $si42 = csvAssociative::compute($si42file);
         
         $report =  "Add Ertel4391 to $si42file\n";

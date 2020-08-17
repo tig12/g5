@@ -25,7 +25,7 @@ class addD10 implements Command{
             return "USELESS PARAMETER : " . $params[0] . "\n";
         }
         
-        $infile = Irving::tmp_filename();
+        $infile = Irving::tmpFilename();
         
         $report =  "--- Add column GQID and PLACE to $infile ---\n";
         
