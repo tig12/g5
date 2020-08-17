@@ -1,9 +1,11 @@
 <?php
 /********************************************************************************
-    Import cura A files to 7-full/
+    Import data/raw/newalchemypress.com/05-muller-writers/5muller_writers.csv
+    to data/tmp/newalch/muller-402-it-writers.csv
     
     @license    GPL
     @history    2020-05-15 22:38:58+02:00, Thierry Graff : Creation
+    @history    2020-08-17 23:36:30+02:00, Thierry Graff : Conert from raw2full to raw2tmp
 ********************************************************************************/
 namespace g5\commands\newalch\muller402;
 
@@ -11,9 +13,6 @@ use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
 use g5\model\DB5;
-use g5\model\Person;
-use g5\model\Group;
-//use g5\model\Source;
 use g5\commands\newalch\Newalch;
 use tiglib\arrays\sortByKey;
 use tiglib\time\seconds2HHMMSS;
@@ -23,28 +22,12 @@ class raw2full implements Command {
     // *****************************************
     // Implementation of Command
     /** 
-        Loads 5muller_writers.csv to g5 db.
-        Considers that persons contained in raw file don't already exist in g5 db
-        => doesn't check for doublons.
-        @pre    YAML file conrresponfing to Müller 402 must exist in g5 db.
-        @param  $params empty Array
+        @param  $params empty array
         @return String report
     **/
     public static function execute($params=[]): string{
         
-        $report =  "Importing " . Muller402::rawFilename() . "\n";
-        
-        // Check source existence
-        try{
-            $source = Muller402::source();
-        }
-        catch(\Exception $e){
-            return "UNABLE TO RUN COMMAND: " . $e->getMessage() . "\n";
-        }
-        $idSource = Muller402::ID_SOURCE;
-        
-        // create group
-        $g = Group::newEmpty(Newalch::UID_PREFIX_GROUP . DB5::SEP . Muller402::ID_SOURCE);
+        $report =  "--- muller402 raw2tmp ---\n";
         
         $pname = '/(\d+)([MFK])\s*(.*)\s*/';
         $pplace = '/(.*?) ([A-Z]{2})/';
@@ -52,12 +35,6 @@ class raw2full implements Command {
         $nb_stored = 0;
         $raw = Muller402::loadRawFile();
         foreach($raw as $line){
-            $p = Person::newEmpty();
-            $p->addSource($idSource);
-            
-            $new = [];
-            $new['trust'] = Muller402::TRUST;
-            
             $fields = explode(Muller402::RAW_SEP, $line);
             $p->addRaw($idSource, $fields);
             $p->addOccu('WRI'); /////// HERE put wikidata occupation id ///////////
@@ -145,15 +122,10 @@ class raw2full implements Command {
     }
     
     
-    // ******************************************************
-    /**
-        @param $
-    **/
     private static function lglat(string $str): string {
         return str_replace(',', '.', $str);
     }
     
-    // ******************************************************
     /**
         Conversion of TZ offset found in newalch file to standard sHH:MM offset.
         WARNING : possible mistake for "-0.6" :

@@ -29,7 +29,7 @@ class raw2tmp implements Command {
         $outfile_181 = SI42::tmpFilename_181();                 
         $outfile = SI42::tmpFilename();
         
-        $report =  "--- Importing file $infile ---\n";
+        $report =  "--- CSICOP si42 raw2tmp ---\n";
         
         $res = $res_181 = implode(G5::CSV_SEP, SI42::TMP_FIELDS) . "\n";
         $lines = file($infile);

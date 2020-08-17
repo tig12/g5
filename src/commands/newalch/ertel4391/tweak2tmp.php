@@ -25,7 +25,7 @@ class tweak2tmp implements Command {
         if(count($params) > 0){
             return "WRONG USAGE : useless parameter : {$params[2]}\n";
         }
-        $report = '';
+        $report = "--- Ertel4391 tweak2tmp ---";
         $yamlfile = Config::$data['dirs']['edited'] . DS . 'newalch-tweaked' . DS . '4391SPO.yml';
         
         // load tweaks in an assoc arrray (keys = NR)
@@ -73,7 +73,7 @@ class tweak2tmp implements Command {
         $targetFile = Ertel4391::tmpFilename();
         file_put_contents($targetFile, $res);
         
-        $report .= "Updated $N records of $targetFile\n  with tweaks of $yamlfile\n";
+        $report .= "Updated $N records of $targetFile with $yamlfile\n";
         return $report;
     }
     

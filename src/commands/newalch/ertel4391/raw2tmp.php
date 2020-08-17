@@ -54,6 +54,8 @@ class raw2tmp implements Command {
             return "ERROR : Missing file $filename\n";
         }
         
+        $report = "--- Ertel4391 raw2tmp ---\n";
+        
         $lines = file($filename);
         $output = $output_raw = '';
         
@@ -153,7 +155,6 @@ class raw2tmp implements Command {
         $output = implode(G5::CSV_SEP, array_keys($new)) . "\n" . $output;       
         $output_raw = implode(G5::CSV_SEP, array_keys($raw)) . "\n" . $output_raw;
 
-        $report = "--- Ertel4391 raw2tmp ---\n";
         $outfile = Ertel4391::tmpFilename();
         $dir = dirname($outfile);
         if(!is_dir($dir)){

@@ -1,0 +1,29 @@
+
+See https://tig12.github.io/gauquelin5/newalch-muller402.html for more details
+
+1 - 5muller_writers.xlsx
+is a copy of
+https://newalchemypress.com/gauquelin/gauquelin_docs/5muller_writers.xlsx
+
+2 - 5muller_writers.csv
+is built from 5muller_writers.xlsx :
+
+5muller_writers.xlsx contains 2 sheets :
+- MuErtel402Italians(SolarFire) : contains legal birth time and dtu.
+- MuErtel402Italians(JigSaw) : contains UT time and dtu
+
+Select MuErtel402Italians(SolarFire)
+Save as csv (UTF8 separated by ;)
+=> generates 5muller_writers.csv
+
+fields in 5muller_writers.csv :
+ID
+FNAME
+GNAME
+DATE
+TZ
+PLACE
+CY
+C2
+LG
+LAT

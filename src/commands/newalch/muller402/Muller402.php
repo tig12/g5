@@ -17,71 +17,71 @@ use g5\model\SourceI;
 use tiglib\arrays\csvAssociative;
 //use tiglib\strings\encode2utf8;
 
-class Muller402 implements SourceI{
+class Muller402 implements SourceI {
     
     const TRUST = DB5::TRUST_CHECK;
     
-    /** id in g5 db when this class represents a source **/
-    const ID_SOURCE = 'muller402';
-    
-    /** uid in g5 db when this class represents a source **/
-    const UID_SOURCE = 'source' . DB5::SEP . 'web' . DB5::SEP . 'newalch' .  DB5::SEP . 'muller402';
-    
-    const UID_GROUP_PREFIX = 'group' . DB5::SEP . 'datasets' . DB5::SEP . 'newalch' .  DB5::SEP . 'muller402';
-    
-    /** 
-        Path to directory containing raw data, relative to data/1-newalch-raw from config.yml
-        With default value :
-        data/1-raw/newalchemypress.com/05-muller-writers/
+    /**
+        Path to the yaml file containing the characteristics of the source.
+        Relative to directory specified in config.yml by dirs / edited
     **/
-    const RAW_DIR = '05-muller-writers';
-    
-    /** 
-        Name of newalchemypress.com raw file
-        With default value :
-        data/1-raw/newalchemypress.com/05-muller-writers/5muller_writers.csv
-    **/
-    const NEWALCH_RAW_FILE = '5muller_writers.csv';
-    
+    const SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'cura' . DS . '5muller_writers.yml';
+
     /** Separator used in the raw csv file **/
     const RAW_SEP = ';';
     
-    /** Name of the csv file containing Müller 402 group in 9-output/ **/
-    const OUTPUT_CSV_FILE = 'muller-402-it-writers.csv';
+    /** Names of the columns of raw file 5muller_writers.csv **/
+    const RAW_FIELDS = [
+        'ID',
+        'FNAME',
+        'GNAME',
+        'DATE',
+        'TZ',
+        'PLACE',
+        'CY',
+        'C2',
+        'LG',
+        'LAT ',
+    ];
     
     // SourceI implementation
     public static function source(): Source{
         return Source::new(self::UID_SOURCE);
+    }                                                                                         
+    
+    // *********************** Source management ***********************
+    
+    /** Returns a Source object for 5muller_writers.xlsx. **/
+    public static function getSource(): Source {
+        return Source::getSource(Config::$data['dirs']['edited'] . DS . self::SOURCE_DEFINITION);
     }
     
-    // ******************************************************
+    // *********************** Raw files manipulation ***********************
+    
     /**
         @return Path to the raw file 5muller_writers.csv coming from newalch
     **/
     public static function rawFilename(){
-        return Config::$data['dirs']['1-newalch-raw'] . DS . self::RAW_DIR . DS . self::NEWALCH_RAW_FILE;
+        return implode(DS, [Config::$data['dirs']['raw'], 'newalchemypress.com', '05-muller-writers', '5muller_writers.csv']);
     }
     
-    /**
-        Loads csv file in a regular array
-        @return Regular array
-                Each element contains a regular array
-    **/
+    /** Loads csv file in a regular array **/
     public static function loadRawFile(){
         return file(self::rawFilename());
     }                                                                                              
+                                                                                         
+    // *********************** Tmp files manipulation ***********************
     
     /**
-        @return Path to the csv file stored in 5-newalch-csv
+        @return Path to the csv file stored in data/tmp/newalch/
     **/
-    public static function outputFilename(){
-        return Config::$data['dirs']['5-newalch-csv'] . DS . self::TMP_CSV_FILE;
+    public static function tmpFilename(){
+        return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', 'muller-402-it-writers.csv']);
     }
     
     /**
         Loads file in a regular array
-        @return Regular array
-                Each element contains an associative array (keys = field names).
+        @return Regular array ; each element contains an associative array (keys = field names).
     **/
     public static function loadOutputFile(){
         return csvAssociative::compute(self::tmp_csv_filename());

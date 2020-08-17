@@ -21,6 +21,10 @@ use g5\commands\cura\E1_E3\raw2tmp as raw2tmpE1E3;
 use g5\commands\cura\all\tweak2tmp as tweak2tmpCura;
 use g5\commands\newalch\ertel4391\raw2tmp as raw2tmpErtel4391;
 use g5\commands\newalch\ertel4391\tweak2tmp as tweak2tmpErtel4391;
+use g5\commands\csicop\si42\raw2tmp as raw2tmpSi42;
+use g5\commands\csicop\si42\addCanvas1;
+use g5\commands\csicop\irving\raw2tmp as raw2tmpIrving;
+
 
 class history implements Command {
     
@@ -55,9 +59,11 @@ class history implements Command {
         foreach($datafiles as $datafile){
 //            echo tweak2tmpCura::execute([$datafile, 'tweak2tmp']);
         }
-        echo raw2tmpErtel4391::execute([]);
-//        echo tweak2tmpErtel4391::execute([$datafile, 'tweak2tmp']);
-        
+//        echo raw2tmpErtel4391::execute([]);
+//        echo tweak2tmpErtel4391::execute([]);
+//        echo raw2tmpSi42::execute([]);
+//        echo addCanvas1::execute([]);    
+        echo raw2tmpIrving::execute([]);
         return '';
     }
     
