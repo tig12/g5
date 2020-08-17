@@ -9,8 +9,8 @@ namespace g5\commands\cura\E1_E3;
 
 class E1_E3{
     
-    /** Fields of 5-tmp/cura-csv/E1.csv and E3.csv **/
-    const FIELDNAMES = [
+    /** Fields of data/tmp/cura-csv/E1.csv and E3.csv **/
+    const TMP_FIELDS = [
             'NUM',
             'OCCU',
             'NOTE',
@@ -18,10 +18,11 @@ class E1_E3{
             'GNAME',
             'DATE',
             'PLACE',
+            'CY',
+            'C2',
+            'C3',
             'LG',
             'LAT',
-            'C2',
-            'CY',
             'GEOID',
             'MO',
             'VE',

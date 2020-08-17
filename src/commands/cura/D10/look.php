@@ -11,6 +11,7 @@ namespace g5\commands\cura\D10;
 use g5\Config;
 use g5\patterns\Command;
 use tiglib\arrays\csvAssociative;
+use g5\commands\cura\Cura;
 
 class look implements Command{
     
@@ -54,9 +55,12 @@ class look implements Command{
         Counts the records of different occupation codes.
     **/
     public static function look_occu(){
-        $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . 'D10.csv';
+        $csvfile = Cura::tmpFilename('D10');
         $res = [];
-        $records = csvAssociative::compute($csvfile);
+        $records = @csvAssociative::compute($csvfile);
+        if(empty($records)){
+            return "ERROR : missing file $csvfile\nTo build D10.csv, execute : php run-g5.php cura D10 raw2tmp\n";
+        }
         foreach($records as $record){
             $occu = $record['OCCU'];
             if(!isset($res[$occu])){

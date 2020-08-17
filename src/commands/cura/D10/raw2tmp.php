@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Imports file 1-raw/cura.free.fr/902gdD10.html to 5-tmp/cura-csv/D10.csv
+    Imports file data/raw/cura.free.fr/902gdD10.html to data/tmp/cura/D10.csv
     1398 Data of Successful Americans
     
     @license    GPL                  
@@ -9,11 +9,10 @@
 namespace g5\commands\cura\D10;
 
 use g5\G5;
-use g5\Config;
 use g5\patterns\Command;
 use g5\commands\cura\Cura;
 
-class raw2csv implements Command{
+class raw2tmp implements Command{
     
     /** ISO 3166 code (all data share the same country) **/
     const COUNTRY = 'US';
@@ -42,13 +41,12 @@ class raw2csv implements Command{
     public static function execute($params=[]): string{
         
         if(count($params) > 2){
-            return "INVALID PARAMETER : " . $params[2] . " - raw2csv doesn't need this parameter\n";
+            return "INVALID PARAMETER : " . $params[2] . " - raw2tmp doesn't need this parameter\n";
         }
         
-        $subject = 'D10';
-        $report =  "--- Importing serie $subject ---\n";
-        $raw = Cura::loadRawFile($subject);
-        $file_serie = Cura::rawFilename($subject);
+        $report =  "--- Importing file D10 ---\n";
+        $raw = Cura::loadRawFile('D10');
+        $file_serie = Cura::rawFilename('D10');
         preg_match('#<pre>\s*(NUM.*?CICO)\s*(.*?)\s*</pre>#sm', $raw, $m);
         if(count($m) != 3){
             throw new \Exception("Unable to parse list in " . $file_serie);
@@ -56,7 +54,7 @@ class raw2csv implements Command{
         $nb_stored = 0;
         $csv = '';
         // fields in the resulting csv
-        $csv = implode(G5::CSV_SEP, D10::FIELDNAMES) . "\n";
+        $csv = implode(G5::CSV_SEP, D10::TMP_FIELDS) . "\n";
         // Fix problems of whitespace + missing lg lat in cura html page
         $m[2] = preg_replace(
             "/112.*?Hardin County,\s+TN/",
@@ -133,10 +131,11 @@ class raw2csv implements Command{
             "1250\tSweeney Walter\tSP\t18\t4\t1941\t09:20\t5h\t42N14\t70W48\tCohasset, MA",
             $m[2]
         );
+        $emptyNew = array_fill_keys(D10::TMP_FIELDS, '');
         $lines = explode("\n", $m[2]);
         foreach($lines as $line){
             $cur = preg_split('/\t+/', $line);
-            $new = [];
+            $new = $emptyNew;
             [$new['NUM'], $new['C_APP']] = self::compute_corr_app(trim($cur[0]));
             [$new['FNAME'], $new['GNAME']] = self::compute_name(trim($cur[1]));
             // date time
@@ -163,11 +162,11 @@ class raw2csv implements Command{
             $new['LG'] = Cura::computeLg($cur[9]);
             $new['LAT'] = Cura::computeLat($cur[8]);
             // @todo link to geonames
-            $new['PRO'] = self::compute_profession($cur[2]);
+            $new['OCCU'] = self::compute_profession($cur[2]);
             $csv .= implode(G5::CSV_SEP, $new) . "\n";
             $nb_stored ++;
         }
-        $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $subject . '.csv';
+        $csvfile = Cura::tmpFilename('D10');
         file_put_contents($csvfile, $csv);
         $report .= $nb_stored . " lines stored in $csvfile\n";
         return $report;

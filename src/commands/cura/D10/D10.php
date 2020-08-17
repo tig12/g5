@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Contains code common to several D6 classes.
+    Contains code common to several D10 classes.
     
     @license    GPL
     @history    2019-05-09 13:54:56+02:00, Thierry Graff : creation from a split of cura2geo
@@ -9,10 +9,9 @@ namespace g5\commands\cura\D10;
 
 class D10{
     
-    /** Fields of 5-tmp/cura-csv/D10.csv **/
-    const FIELDNAMES = [
+    /** Fields of data/tmp/cura/D10.csv **/
+    const TMP_FIELDS = [
         'NUM',
-        'C_APP',
         'FNAME',
         'GNAME',
         'DATE',
@@ -22,6 +21,7 @@ class D10{
         'LG',
         'LAT',
         'OCCU',
+        'C_APP',
     ];
     
 }// end class    
