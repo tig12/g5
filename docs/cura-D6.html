@@ -57,43 +57,27 @@ D6 contains 450 New famous European Sports Champions
     </ul>
 </nav>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 The full set of transformations can be executed with the command :  
 <pre>php run-g5.php cura D6 all</pre>
 This is equivalent to :
 <pre>
-php run-g5.php cura D6 raw2csv
+php run-g5.php cura D6 raw2tmp
 php run-g5.php cura D6 addGeo
 php run-g5.php cura D6 export
 </pre>
 
 <!-- ********************************************************************************* -->
-<h2><a name="raw2csv">raw2csv</a></h2>
-This step copies and reformat the informations of <code>902gdD6.html</code> to a csv file in directory <code>2-cura-csv</code>.
+<h2>Preparatory code</h2>
+Cura file contains 32 names that can't be easily split to family / given names by program. To handle these cases, the command 
+<pre>php run-g5.php cura D6 look emptyGiven</pre>
+was used to build array <code>$NAMES_CORRECTIONS</code> of <code>raw2tmp</code>.
+<br>One case could not be fixed : <code>115 Crossalexander 1919-06-16 15:30</code>
 
-<ul class="spaced">
+<!-- ********************************************************************************* -->
+<h2><a name="raw2csv">raw2csv</a></h2>
+This step copies and reformat the informations of <code>902gdD6.html</code> to a csv file in directory <code>data/tmp/cura</code>.
+
+<ul class="spaced margin-top">
     <li>
         Notice of page <code>902gdD6.html</code> says the file contains 450 persons, but it contains in fact 449 (NUM 234 is missing).
         <br>So the generated file contains 449 persons.
@@ -232,10 +216,12 @@ But step <code>addGeo</code> has the interest to restore the country, giving the
 
 
 <!-- ********************************************************************************* -->
-<!-- 
-<h2>offset</h2>
--->
+<h2>TODO</h2>
 
+<ul>
+    <li>Check / debug addGeo step to be able to re-execute it</li>
+    <li>Compute timezone offset for all records of D6</li>
+</ul>
 
 </article>
 </div><!-- end class="main" -->
@@ -340,5 +326,3 @@ But step <code>addGeo</code> has the interest to restore the country, giving the
 
 </body>
 </html>
-<!-- ************************************* -->
-<!-- ********************************************************************************* -->

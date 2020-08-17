@@ -9,8 +9,8 @@ namespace g5\commands\cura\D6;
 
 class D6{
     
-    /** Fields of 5-tmp/cura-csv/D6.csv **/
-    const FIELDNAMES = [
+    /** Fields of data/tmp/cura/D6.csv **/
+    const TMP_FIELDS = [
         'NUM',
         'FNAME',
         'GNAME',

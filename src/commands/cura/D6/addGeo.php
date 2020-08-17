@@ -1,17 +1,17 @@
 <?php
 /********************************************************************************
-    Add missing geographic informations to 5-cura-csv/D6.csv.
+    Add missing geographic informations to data/tmp/cura/D6.csv.
     Uses geonames.org web service.
     
-    This code operates on file 5-geonames/D6.csv
-    And then copies info from this file to 5-cura-csv/D6.csv
+    This code operates on file data/tmp/geonames/D6.csv
+    And then copies info from this file to data/tmp/cura/D6.csv
     This is done to prevent accidental erasure of previous calls to geonames web service : 
         - call raw2csv
         - call addGeo
         - call raw2csv again => all previous geo information erased
     
     This code can be interrupted in the middle of execution and be called several times.
-    Previous calls to geonames.org web service are stored in 5-tmp/geonames/D6.csv.
+    Previous calls to geonames.org web service are stored in data/tmp/geonames/D6.csv.
     So a new call will use these results and not repeat previous calls to geonames.org web service.
     
     @license    GPL
@@ -23,6 +23,7 @@ use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
 use g5\commands\cura\Cura;
+use g5\model\Geonames;
 use tiglib\misc\dosleep;
 use tiglib\arrays\csvAssociative;
 use tiglib\geonames\webservice\cityFromLgLat;
@@ -46,12 +47,12 @@ class addGeo implements Command{
         
         $datafile = 'D6';
         $report =  "--- Computing geographic information for $datafile ---\n";
-        $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv';
-        $geofile = Config::$data['dirs']['5-geonames'] . DS . $datafile . '.csv';
+        $csvfile = Cura::tmpFilename($datafile);
+        $geofile = Geonames::$TMP_SERVICE_DIR . DS . $datafile . '.csv';
         
         if(!is_file($csvfile)){
             $report .= "Missing file $csvfile\n";
-            $report .= "You must run first : php run-g5.php cura D6 raw2csv\n";
+            $report .= "You must run first : php run-g5.php cura D6 raw2tmp\n";
         }
         
         if(!is_file($geofile)){
@@ -60,8 +61,8 @@ class addGeo implements Command{
         
         while(true){
             $res_geo = '';
-            // load csv file in 5-tmp/geonames
-            $raw_geo = file_get_contents($geofile);
+            // load csv file in data/tmp/geonames
+            $raw_geo = trim(file_get_contents($geofile));
             $lines_geo = explode("\n", $raw_geo);
             $newinfo = false; // true if a new geo info has been written in previous iteration
             foreach($lines_geo as $line_geo){
@@ -97,7 +98,7 @@ class addGeo implements Command{
                     $res_geo .= implode(G5::CSV_SEP, $fields) . "\n";
                     continue;
                 }
-                // here call to geonames web service was sucessful
+                // call to geonames web service was sucessful
                 $report .= $fields[0] . ' ' . $fields[1] . " : write geo info\n";
                 $dtu = offset::compute($fields[3], $geonames['result']['timezone']);
                 $fields[2] .= $dtu;
@@ -108,8 +109,8 @@ class addGeo implements Command{
                 // 0 'NUM', 1 'NAME', 2 'DATE', 3 'PLACE', 4 'CY', 5 'GEOID', 6 'LG', 7 'LAT'
             }
             // Write back the csv 
-            file_put_contents($geofile, $res_geo); // file in 5-geonames
-            self::geo2csv($geofile, $csvfile); // copy results back in 5-cura-csv/
+            file_put_contents($geofile, $res_geo); // file in data/tmp/geonames/
+            self::geo2csv($geofile, $csvfile); // copy results back in data/tmp/cura/
             dosleep::execute(1.5); // keep cool with geonames.org web service
         } // end while true
         
@@ -122,11 +123,11 @@ class addGeo implements Command{
     
     
     // ******************************************************
-    /**
-        Transfers geo informations from 5-geonames/D6.csv to 5-cura-csv/D6.csv
+    /**                                    
+        Transfers geo informations from data/tmp/geonames/D6.csv to data/tmp/cura-csv/D6.csv
         Replaces copy($geofile, $csvfile) to transfer only relevant columns.
-        This function became necessary when modifs in raw2csv rendered 5-geonames/D6.csv column names obsolete
-        and not compatible with new version of 5-cura-csv/D6.csv
+        This function became necessary when modifs in raw2tmp rendered data/tmp/geonames/D6.csv column names obsolete
+        and not compatible with new version of data/tmp/cura/D6.csv
         
     **/
     private static function geo2csv($geofile, $csvfile){

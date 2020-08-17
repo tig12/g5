@@ -8,11 +8,11 @@
 ********************************************************************************/
 namespace g5\commands\cura\D6;
 
-use g5\Config;
 use g5\patterns\Command;
 use tiglib\arrays\csvAssociative;
+use g5\commands\cura\Cura;
 
-class build implements Command{
+class look implements Command {
     
     /** 
         Possible values of the command, for ex :
@@ -21,6 +21,7 @@ class build implements Command{
     const POSSIBLE_PARAMS = [
         'emptyGiven',
     ];
+    
     // *****************************************
     // Implementation of Command
     /** 
@@ -47,13 +48,13 @@ class build implements Command{
     // ******************************************************
     /**
         Lists the rows without given name.
-        It has been used to build raw2csv::$NAMES_CORRECTIONS
+        It has been used to build raw2tmp::$NAMES_CORRECTIONS
     **/
     public static function execute_emptyGiven(): string{
-        $csvFile = Config::$data['dirs']['5-cura-csv'] . DS . 'D6.csv';
+        $csvFile = Cura::tmpFilename('D6');
         if(!is_file($csvFile)){
             return "Missing file $csvFile\n"
-                . "You must run first : php run-g5.php cura D6 raw2csv\n";
+                . "You must run first : php run-g5.php cura D6 raw2tmp\n";
         }
         $res = '';
         $rows = csvAssociative::compute($csvFile);

@@ -17,7 +17,7 @@ use g5\model\Names;
 use g5\model\Names_fr;
 use g5\commands\cura\Cura;
 
-class raw2csv implements Command{
+class raw2tmp implements Command {
     
     /** String written in field PLACE to indicate that a call to geonames webservice failed **/
     const FAILURE_MARK = 'XXX';
@@ -93,7 +93,7 @@ class raw2csv implements Command{
         }
         $nb_stored = 0;
         $csv = '';
-        $csv = implode(G5::CSV_SEP, D6::FIELDNAMES) . "\n";
+        $csv = implode(G5::CSV_SEP, D6::TMP_FIELDS) . "\n";
         $lines = explode("\n", $m[2]);
         foreach($lines as $line){
             $cur = preg_split('/\t+/', $line);
@@ -118,7 +118,7 @@ class raw2csv implements Command{
             $csv .= implode(G5::CSV_SEP, $new) . "\n";
             $nb_stored ++;
         }
-        $csvfile = Config::$data['dirs']['5-cura-csv'] . DS . $datafile . '.csv';
+        $csvfile = Cura::tmpFilename($datafile);
         file_put_contents($csvfile, $csv);
         $report .= $nb_stored . " lines stored in $csvfile\n";
         return $report;

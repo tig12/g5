@@ -1,6 +1,6 @@
 <?php 
 /********************************************************************************
-    Utilities to connect to geonames database.
+    Utilities to use geonames.org.
     
     @license    GPL
     @copyright  Thierry Graff
@@ -10,12 +10,23 @@ namespace g5\model;
 
 use g5\Config;
 
-class Geonames{
+Geonames::init();
+
+class Geonames {
     
-    /**
-        Variable to cache the link to database.
-    **/
+    /** Variable to cache the link to database. **/
     private static $dblink = null;
+    
+    /**  Directory where calls to geonames web service are cached **/
+    public static $TMP_SERVICE_DIR;
+    
+    // ******************************************************
+    /**
+        @param $
+    **/
+    public static function init(){
+        self::$TMP_SERVICE_DIR = Config::$data['dirs']['tmp'] . DS . 'geonames';
+    }
     
     // ******************************************************
     public static function compute_dblink(){
