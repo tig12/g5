@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Fixes the problem of truncated GNR in 5-newalch-csv/1083MED.csv
+    Fixes the problem of truncated GNR in data/tmp/newalch/1083MED.csv
     
     @license    GPL
     @history    2019-10-15 01:24:44+02:00, Thierry Graff : Creation
@@ -15,8 +15,8 @@ use g5\commands\cura\Cura;
 class fixGnr implements Command {
     
     const POSSIBLE_PARAMS = [
-        'update' => "Updates column GNR of file 5-newalch-csv/1083MED.csv",
-        'report' => "Echoes a full list of GNR corrections without modifying 5-newalch-csv/1083MED.csv",
+        'update' => "Updates column GNR of file data/tmp/newalch/1083MED.csv",
+        'report' => "Echoes a full list of GNR corrections without modifying data/tmp/newalch/1083MED.csv",
     ];
     
     // *****************************************
@@ -48,8 +48,16 @@ class fixGnr implements Command {
         $report = '';
         
         // assoc arrays
-        $a2s = Cura::loadTmpCsv_num('A2'); // keys = NUM
-        $e1s = Cura::loadTmpCsv_num('E1'); // keys = NUM
+        $a2s = @Cura::loadTmpFile_num('A2'); // keys = NUM
+        if(empty($a2s)){
+            return "File data/tmp/cura/A2.csv doesn't exist\n"
+                . "Build this file before executing fixGnr \n";
+        }
+        $e1s = @Cura::loadTmpFile_num('E1'); // keys = NUM
+        if(empty($e1s)){
+            return "File data/tmp/cura/E1.csv doesn't exist\n"
+                . "Build this file before executing fixGnr \n";
+        }
         $MullerCsv = Muller1083::loadTmpFile_nr(); // keys = NR
         $maxNUM_A2 = 3647;
         $maxNUM_E1 = 2154;
@@ -207,7 +215,7 @@ class fixGnr implements Command {
             }
             $res .= implode(G5::CSV_SEP, $new) . "\n";
         }
-        $destFile = Muller1083::tmp_csv_filename();
+        $destFile = Muller1083::tmpFilename();
         file_put_contents($destFile, $res);// HERE update 1083MED.csv
         $report .= "Updated $destFile\n";
         $report .= "$nCorr GNR were corrected\n";

@@ -71,7 +71,7 @@ class look implements Command {
     private static function look_fields(){
         $res = "<table class=\"wikitable margin\">\n";
         $res .= "    <tr><th>Field</th><th>Meaning</th></tr>\n";
-        foreach(Muller1083::RAW_COLUMNS as $k => $v){
+        foreach(Muller1083::RAW_FIELDS as $k => $v){
             $res .= "    <tr><td>$k</td><td>$v</td></tr>\n";
         }
         $res .= "</table>\n";
@@ -186,8 +186,8 @@ class look implements Command {
         Must be executed after fixGnr
     **/
     private static function look_curanames(){
-        $a2s = Cura::loadTmpCsv_num('A2'); // keys = NUM
-        $e1s = Cura::loadTmpCsv_num('E1'); // keys = NUM
+        $a2s = Cura::loadTmpFile_num('A2'); // keys = NUM
+        $e1s = Cura::loadTmpFile_num('E1'); // keys = NUM
         $MullerCsv = Muller1083::loadTmpFile_nr(); // keys = NR
         
         foreach($MullerCsv as $NR => $mulrow){
@@ -263,8 +263,8 @@ class look implements Command {
         Must be executed after fixGnr
     **/
     private static function look_curadates(){
-        $a2s = Cura::loadTmpCsv_num('A2'); // keys = NUM
-        $e1s = Cura::loadTmpCsv_num('E1'); // keys = NUM
+        $a2s = Cura::loadTmpFile_num('A2'); // keys = NUM
+        $e1s = Cura::loadTmpFile_num('E1'); // keys = NUM
         $MullerCsv = Muller1083::loadTmpFile_nr(); // keys = NR
         
         $equalA2 = $diffA2 = $totalA2 = 0;

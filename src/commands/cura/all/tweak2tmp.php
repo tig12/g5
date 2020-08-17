@@ -87,7 +87,7 @@ class tweak2tmp implements Command{
         
         $curafile = Cura::tmpFilename($datafile);
         file_put_contents($curafile, $res);
-        $report .= "Updated $nUpdated persons with tweaks of $tweaksFile\n";
+        $report .= "Updated $nUpdated records of $curafile\n with tweaks of $tweaksFile\n";
         return $report;
     }
     

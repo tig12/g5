@@ -73,7 +73,7 @@ class tweak2tmp implements Command{
         $targetFile = Ertel4391::tmpFilename();
         file_put_contents($targetFile, $res);
         
-        $report .= "Updated $N records of $targetFile\nwith tweaks of $yamlfile\n";
+        $report .= "Updated $N records of $targetFile\n  with tweaks of $yamlfile\n";
         return $report;
     }
     
