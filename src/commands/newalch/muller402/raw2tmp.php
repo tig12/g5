@@ -12,12 +12,11 @@ namespace g5\commands\newalch\muller402;
 use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
-use g5\model\DB5;
 use g5\commands\newalch\Newalch;
 use tiglib\arrays\sortByKey;
 use tiglib\time\seconds2HHMMSS;
 
-class raw2full implements Command {
+class raw2tmp implements Command {
     
     // *****************************************
     // Implementation of Command
@@ -32,92 +31,83 @@ class raw2full implements Command {
         $pname = '/(\d+)([MFK])\s*(.*)\s*/';
         $pplace = '/(.*?) ([A-Z]{2})/';
         
-        $nb_stored = 0;
+        $emptyNew = array_fill_keys(Muller402::TMP_FIELDS, '');
+        $res = implode(G5::CSV_SEP, Muller402::TMP_FIELDS) . "\n";
+        $N = 0;
         $raw = Muller402::loadRawFile();
         foreach($raw as $line){
             $fields = explode(Muller402::RAW_SEP, $line);
-            $p->addRaw($idSource, $fields);
-            $p->addOccu('WRI'); /////// HERE put wikidata occupation id ///////////
-            
+            $new = $emptyNew;
+            $new['OCCU'] = 'WRI'; /////// HERE put wikidata occupation id ///////////
             preg_match($pname, $fields[0], $m);
-            
             $sex = $m[2];
             if($sex != 'M' && $sex != 'F'){
                 // happens only for 478K Villaruel, Giuseppe
                 // Comparision with scan of original Müller's AFD shows it's an OCR error
                 $sex='M';
             }
-            
+            $new['SEX'] = $sex;
             $mullerId = $m[1];
-            $p->addId($idSource, $mullerId);
+            $new['MUID'] = $mullerId;
             
             $nameFields = explode(',', $m[3]);
             if(count($nameFields) == 2){
                 // normal case
-                $new['name']['family'] = $nameFields[0];
-                $new['name']['given'] = trim($nameFields[1]);
+                $new['FNAME'] = $nameFields[0];
+                $new['GNAME'] = trim($nameFields[1]);
             }
             else{
                 // empty given names
                 // @todo should be verified by human and included in tweaks
                 if($mullerId == '310' || $mullerId == '387'){
-                    $new['name']['family'] = $nameFields[0];
-                    $new['name']['given'] = '';
+                    $new['FNAME'] = $nameFields[0];
+                    $new['GNAME'] = '';
                 }
             }
             if($mullerId == '23'){
-                $new['name']['given'] = 'Ambrogio'; // OCR error
+                $new['GNAME'] = 'Ambrogio'; // OCR error
             }
-            $new['name']['usual'] = $new['name']['family'];
             
-            $new['sex'] = $sex;
-            
-            $new['birth']['date'] = $fields[1].'-'.$fields[2].'-'.$fields[3];
+            $new['DATE'] = $fields[1].'-'.$fields[2].'-'.$fields[3];
             if($fields[4] != '' && $fields[5] != ''){
-                $new['birth']['date'] .= ' '.$fields[4].':'.$fields[5];
+                $new['DATE'] .= ' '.$fields[4].':'.$fields[5];
             }
             
             //
             // keep only records with complete birth time (at least YYYY-MM-DD HH:MM)
             //
-            if(strlen($new['birth']['date']) < 16){
+            if(strlen($new['DATE']) < 16){
                 continue;
             }
             
-            $new['birth']['tz'] = '';
             preg_match($pplace, $fields[7], $m);
-            $new['birth']['place']['name'] = $m[1];
-            $new['birth']['place']['c2'] = $m[2];
+            $new['PLACE'] = $m[1];
+            $new['C2'] = $m[2];
             // Fix C2
-            if($new['birth']['place']['name'] == 'Verona'){
+            if($new['PLACE'] == 'Verona'){
                 // systematic error in M402 file
-                $new['birth']['place']['c2'] = 'VR';
+                $new['C2'] = 'VR';
             }
             if($mullerId == '76'){
-                $new['birth']['place']['c2'] = 'ME'; // OCR error
+                $new['C2'] = 'ME'; // OCR error
             }
             if($mullerId == '369'){
-                $new['birth']['place']['c2'] = 'CH'; // OCR error
+                $new['C2'] = 'CH'; // OCR error
             }
-                
-            
-            $new['birth']['place']['cy'] = 'IT';
-            $new['birth']['place']['lg'] = self::lglat(-(int)$fields[9]); // minus sign, correction from raw here
-            $new['birth']['place']['lat'] = self::lglat($fields[8]);
-            $new['birth']['tz'] = self::compute_offset($fields[6], $new['birth']['place']['lg']);
-            
-            // log command effect on data in the person yaml
-            $p->addHistory("newalch muller402 raw2full", $idSource, $new);
-            
-            $p->update($new);
-            //$p->clean();
-            $nb_stored ++;
-            $p->save(); // HERE save to disk
-            $g->add($p->uid());
+            $new['CY'] = 'IT';
+            $new['LG'] = self::lglat(-(int)$fields[9]); // minus sign, correction from raw here
+            $new['LAT'] = self::lglat($fields[8]);
+            $new['TZO'] = self::compute_offset($fields[6], $new['LG']);
+            $res .= implode(G5::CSV_SEP, $new) . "\n";
+            $N++;
         }
-        $g->save(); // HERE save to disk
-        $report .= "Wrote Müller402 group in ".$g->file()."\n";
-        $report .= "Stored $nb_stored records\n";
+        $outfile = Muller402::tmpFilename();
+        $dir = dirname($outfile);
+        if(!is_dir($dir)){
+            mkdir($dir, 0755, true);
+        }
+        file_put_contents($outfile, $res);
+        $report .= "Stored $N records in $outfile\n";
         return $report;
     }
     
@@ -130,7 +120,8 @@ class raw2full implements Command {
         Conversion of TZ offset found in newalch file to standard sHH:MM offset.
         WARNING : possible mistake for "-0.6" :
             0.6*60 = 36
-            "Problèmes de l'heure résolus pour le monde entier", Françoise Schneider-Gauquelin indicates 00:37
+            "Problèmes de l'heure résolus pour le monde entier",
+            Françoise Schneider-Gauquelin (p 288) indicates 00:37
             Current implementation uses Gauquelin, but needs to be confirmed
         @param $offset  timezone offset as specified in newalch file
         @param $lg      longitude, as previously computed
@@ -142,18 +133,20 @@ class raw2full implements Command {
             $sec = $lg * 240; // 240 = 24 * 3600 / 360
             return '+' . seconds2HHMMSS::compute($sec);
         }
-        $offset = (int)$offset;
         switch($offset){
-        	case 0: 
-        	    return '+00:00';
-        	break;
-        	case -1: 
+        	case '-1': 
         	    return '+01:00';
         	break;
-        	case -0.83: 
+        	case '-0,83': 
         	    return '+00:50';
         	break;
-        	case -0.6: 
+        	case '-0,88': 
+        	    // Converting geonames.org longitude for Palermo (13°20'08") gives 00:53:34
+        	    // Gauquelin says 00:54
+        	    // Gabriel says 00:53:28
+        	    return '+00:54';
+        	break;
+        	case '-0,6': 
         	    return '+00:37';
         	break;
             default:

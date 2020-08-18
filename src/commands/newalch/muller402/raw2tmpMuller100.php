@@ -1,7 +1,7 @@
 <?php
 /********************************************************************************
     
-    Imports in a csv file the second Müller's list containing 100 persons without birth times.
+    Imports in data/tmp/newalch/ the second Müller's list containing 100 persons without birth times.
     
     @license    GPL
     @history    2020-08-01 02:49:29+02:00, Thierry Graff : Creation
@@ -12,13 +12,13 @@ use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
 
-class import100 implements Command {
+class raw2tmpMuller100 implements Command {
     
     // *****************************************
     // Implementation of Command
     /** 
-        Converts data/1-raw/newalchemypress.com/05-muller-writers/afd1-100-writers/muller-100-it-writers.txt
-        to data/1-raw/newalchemypress.com/05-muller-writers/100-writers/muller-100-it-writers.csv
+        Converts data/raw/newalchemypress.com/05-muller-writers/muller-100-it-writers.txt
+        to data/raw/newalchemypress.com/05-muller-writers/muller-100-it-writers.csv
         @param  $params empty Array
         @return String report
     **/
@@ -41,26 +41,12 @@ class import100 implements Command {
             . '/';
         
         // TODO put in Muller402 constants
-        $infile = Config::$data['dirs']['1-newalch-raw'] . DS . Muller402::RAW_DIR . DS . 'afd1-100-writers' . DS . 'muller-100-it-writers.txt';
+        $infile = Muller100::rawFilename();
         $lines = file($infile);
         
-        $csvFields = [
-            'MUID',
-            'FNAME',
-            'GNAME',
-            'SEX',
-            'DATE',
-            'TZ',
-            'PLACE',
-            'C2',
-            'CY',
-            'LG',
-            'LAT',
-            'OCCU',
-            'OPUS',
-            'LEN',
-        ];
-        $res = implode(G5::CSV_SEP, $csvFields) . "\n";
+        $csvFields = Muller100::TMP_FIELDS;
+        $res = implode(G5::CSV_SEP, Muller100::TMP_FIELDS) . "\n";
+        $N = 0;
         foreach($lines as $line){
             if(trim($line) == ''){
                 continue;
@@ -86,11 +72,16 @@ class import100 implements Command {
             $cur[] = $m['OPUS'];
             $cur[] = $m['LEN'];
             $res .= implode(G5::CSV_SEP, $cur) . "\n";
+            $N++;
         }
-        $report =  "Importing $infile \n";
-        $outfile = Config::$data['dirs']['9-muller402'] . DS . 'muller-100-it-writers.csv';
+        $report =  "--- muller100 raw2tmp ---\n";
+        $outfile = Muller100::tmpFilename();
+        $dir = dirname($outfile);
+        if(!is_dir($dir)){
+            mkdir($dir, 0755, true);
+        }
         file_put_contents($outfile, $res);
-        $report =  "Wrote $outfile \n";
+        $report .= "Wrote $N lines in $outfile \n";
         return $report;
     }
     

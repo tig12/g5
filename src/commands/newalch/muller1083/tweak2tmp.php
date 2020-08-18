@@ -25,7 +25,7 @@ class tweak2tmp implements Command {
         if(count($params) > 0){
             return "WRONG USAGE : useless parameter : {$params[2]}\n";
         }
-        $report = '';
+        $report = "--- muller1083 tweak2tmp ---\n";
         $yamlfile = Config::$data['dirs']['edited'] . DS . 'newalch-tweaked' . DS . '1083MED.yml';
         
         // load tweaks in an assoc arrray (keys = NR)
@@ -73,7 +73,7 @@ class tweak2tmp implements Command {
         $targetFile = Muller1083::tmpFilename();
         file_put_contents($targetFile, $res);
                                              
-        $report .= "Updated $N records of $targetFile\n  with tweaks of $yamlfile\n";
+        $report .= "Updated $N records of $targetFile\n";
         return $report;
     }
     

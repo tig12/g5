@@ -161,11 +161,7 @@ class raw2tmp implements Command {
             mkdir($dir, 0755, true);
         }
         file_put_contents($outfile, $output);
-        $report .= "$outfile generated ($nRes lines)\n";
-        // second file keeping a trace of the original values
-        $outfile = Ertel4391::tmpRawFilename();
-        file_put_contents($outfile, $output_raw);
-        $report .= "Generated $outfile ($nRes lines)\n";
+        $report .=  "Generated $nRes records in $outfile\n";
         return $report;
     }
     

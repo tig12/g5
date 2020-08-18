@@ -315,14 +315,18 @@ DEPT_STR;
             $res_raw .= implode(G5::CSV_SEP, $new_raw) . "\n";
         }
         
-        $report = '';
+        $report = "--- muller1083 raw2tmp ---\n";
         $outfile = Muller1083::tmpFilename();
+        $dir = dirname($outfile);
+        if(!is_dir($dir)){
+            mkdir($dir, 0755, true);
+        }
         file_put_contents($outfile, $res);
-        $report .=  "Generated $outfile ($nRecords records)\n";
+        $report .=  "Generated $nRecords records in $outfile\n";
         
         $outfile = Muller1083::tmpRawFilename();
         file_put_contents($outfile, $res_raw);
-        $report .=  "Generated $outfile ($nRecords records)\n";
+        $report .=  "Generated $nRecords records in $outfile\n";
         
         return $report;
     }

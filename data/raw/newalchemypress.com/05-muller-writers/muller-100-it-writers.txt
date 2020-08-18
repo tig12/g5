@@ -1,0 +1,100 @@
+5M Alessi, Rino                     30.04.1885 -0.83 Cervia                 RA 44 N 24 012 E 15 2 12 06
+9M Allori, Claudio                  16.03.1898 -1.00 Napoli                 NA 40 N 54 014 E  0 3  8 05
+10M Altavilla, Corrado              06.11.1897 -1.00 Aversa                 CE 41 N  6 014 E 30 3  0 02
+16M Anton, Edoardo                  07.01.1910 -1.00 Roma                   RM 41 N 54 012 E 30 1  0 04
+17M Apollonio, Umbro                20.04.1911 -1.00 Trieste                TS 45 N 36 014 E  0 2  4 03
+19M Araldi, Vinicio                 19.12.1914 -1.00 Roma                   RM 41 N 54 012 E 30 3  6 03
+20M Arcieri, Giovanni               24.06.1898 -1.00 Castrovillari          CS 39 N 18 016 E 30 3 10 07
+24M Baccari, Carlo                  22.10.1878 -0.83 Cassino                FR 41 N 36 013 E 15 2  6 02
+25M Baccelli, Alfredo               10.09.1863   LMT Roma                   RM 41 N 54 012 E 30 2  2 12
+28M Bacino, Ezio                    22.06.1913 -1.00 Roma                   RM 41 N 54 012 E 30 3  2 03
+30M Baldini, Antonio                10.10.1889 -0.83 Roma                   RM 41 N 54 012 E 30 2 16 06
+41M Benincasa, Regolo               03.07.1895 -1.00 Roma                   RM 41 N 54 012 E 30 1 10 05
+44M Bernard, Carlo                  13.10.1909 -1.00 Napoli                 NA 40 N 54 014 E  0 3  4 03
+50M Bertocchi, Nino                 09.07.1900 -1.00 Bologna                BO 44 N 30 011 E  0 3  0 03
+60M Bocelli, Arnaldo                01.06.1900 -1.00 Roma                   RM 41 N 54 012 E 30 3  3 03
+68M Borretti, Mario                 28.11.1905 -1.00 Cosenza                CS 39 N 18 016 E 30 2  5 05
+71M Brancoli, Guido                 04.05.1886 -0.83 Roma                   RM 41 N 54 012 E 30 2  6 02
+78M Buzzi, Paolo                    15.02.1874 -0.83 Milano                 MI 45 N 30 0 9 E 15 3 27 08
+85M Campanile, Achille              28.09.1900 -1.00 Roma                   RM 41 N 54 012 E 30 2 17 10
+86M Camuncoli, Ezio                 19.02.1895 -1.00 Rimini                 FO 44 N 12 012 E 30 3  7 05
+87M Cangiullo, Francesco            27.01.1888 -0.83 Napoli                 NA 40 N 54 014 E  0 4 16 07
+89M Cannavo, Letterio               22.02.1903 -1.00 Messina                ME 38 N  0 015 E 30 3  5 08
+93M Caprin, Giulio                  22.03.1880 -0.83 Trieste                TS 45 N 36 014 E  0 3 21 08
+98M Carli, Decio                    24.11.1892 -0.83 Napoli                 NA 40 N 54 014 E  0 2  7 03
+102M Castellano, Giovanni           06.02.1878 -0.83 Pomarico               MT 40 N 36 016 E 45 2 13 05
+104M Cavalcabo, M.F. Claudio        02.10.1889 -0.83 Borgotaro              PR 44 N 48 010 E 45 2  0 04
+108M Celentano, Nicola              23.12.1902 -1.00 Napoli                 NA 40 N 54 014 E  0 3  3 03
+113M Chiappelli, Fredi              24.01.1911 -1.00 Firenze                FI 43 N 42 011 E 30 2  2 03
+114M Chiarini, Luigi                20.06.1900 -1.00 Roma                   RM 41 N 54 012 E 30 3  5 04
+116M Ciàceri, Benedetto             03.03.1902 -1.00 Modica                 RG 37 N  0 014 E 45 2  4 03
+118M Cibelli, Enrico                02.01.1899 -1.00 Napoli                 NA 40 N 54 014 E  0 2  0 05
+124M Colantuoni, Alberto            25.04.1880 -0.83 Trieste                TS 45 N 36 014 E  0 2  0 06
+129M Coppola, Francesco             27.09.1878 -0.83 Napoli                 NA 40 N 54 014 E  0 3  5 04
+131M Coro, Francesco                03.10.1882 -0.83 Venezia                VE 45 N 30 012 E 30 3 12 07
+132M Corradini, Bruno               09.06.1892 -0.83 Ravenna                RA 44 N 24 012 E 15 2  4 02
+135M Coselschi, Eugenio             13.09.1890 -0.83 Bagno a Ripoli         FI 43 N 42 011 E 30 3  5 06
+141M Cutolo, Alessandro             28.03.1899 -1.00 Napoli                 NA 40 N 54 014 E  0 3 21 09
+142M D'Agostino Orsini d.C., Paolo  24.12.1897 -1.00 Napoli                 NA 40 N 54 014 E  0 3 11 06
+146M D'Amico, Silvio                03.02.1887 -0.83 Roma                   RM 41 N 54 012 E 30 3 17 10
+163M De Maria, Ugo                  28.12.1875 -0.83 Alfonsine              RA 44 N 24 012 E 15 3 12 06
+170M De Toti, Toti                  15.01.1925 -1.00 Padova                 PD 45 N 24 012 E 15 3  3 03
+172M Di Giovanni, Alessio           01.10.1872 -0.88 Valplatani             AG 37 N 12 013 E 30 4  6 04
+174M Disertori, Benvenuto           17.02.1887 -0.83 Trento                 TN 46 N  0 012 E  0 3  2 07
+176M Doria, Gino                    26.10.1888 -0.83 Napoli                 NA 40 N 54 014 E  0 2 12 05
+179M Evola, Giulio                  19.05.1898 -1.00 Roma                   RM 41 N 54 012 E 30 2  7 04
+190M Ferrieri, Enzo                 07.12.1893 -1.00 Milano                 MI 45 N 30 0 9 E 15 1  5 03
+192M Flamma, Ario                   28.11.1882 -0.88 Caltanissetta          CL 37 N 30 014 E  0 2  1 02
+202M Franelli, Carlo                21.03.1870 -0.83 Trieste                TS 45 N 36 014 E  0 2  5 03
+203M Fratta-Cavalcabo-M., Claudio   02.10.1884 -0.83 Parma                  PR 44 N 48 010 E 45 3  0 03
+208M Gaeta, Giovanni                05.05.1884 -0.83 Napoli                 NA 40 N 54 014 E  0 4 15 07
+209M Galdieri, Michele              19.11.1902 -1.00 Napoli                 NA 40 N 54 014 E  0 5  0 05
+211M Galeota, Umberto               23.12.1892 -0.83 Napoli                 NA 40 N 54 014 E  0 2 12 06
+212M Gallian, Marcello              06.04.1902 -1.00 Roma                   RM 41 N 54 012 E 30 3  5 02
+230M Girardini, Emilio              28.10.1858   LMT Udine                  UD 46 N  0 013 E 30 2  4 04
+231M Giulini, Stoppani Gino         20.06.1894 -1.00 Lodi                   MI 45 N 30 0 9 E 15 3  3 03
+233M Giusso, Lorenzo                25.06.1900 -1.00 Napoli                 NA 40 N 54 014 E  0 3 12 05
+237M Gramantieri, Tullo             24.03.1898 -1.00 Roma                   RM 41 N 54 012 E 30 3  5 05
+248M Jandolo, Augusto               25.05.1873 -0.83 Roma                   RM 41 N 54 012 E 30 3 12 07
+249M Janni, Alfonso                 09.05.1897 -1.00 Pescara                PE 42 N 24 014 E 30 2  5 03
+250M Lanza, Giuseppe                01.01.1900 -1.00 Valguarnera            EN 37 N 30 014 E 15 3  6 04
+257F Lombardi Colini, Pia           18.04.1903 -1.00 Napoli                 NA 40 N 54 014 E  0 3  0 03
+270M Mannucci, Remo                 07.04.1897 -1.00 Roma                   RM 41 N 54 012 E 30 2  6 03
+271M Manzari, Nicola                14.11.1911 -1.00 Bari                   BA 41 N 12 017 E  0 1  4 03
+284M Mele, Eugenio                  18.07.1875 -0.83 Napoli                 NA 40 N 54 014 E  0 2  0 03
+289M Metz, Vittorio                 14.07.1904 -1.00 Roma                   RM 41 N 54 012 E 30 3  4 03
+291M Milanesi, Guido                10.12.1875 -0.83 Roma                   RM 41 N 54 012 E 30 2 32 08
+292M Miserocchi, Manlio             09.08.1898 -1.00 Ravenna                RA 44 N 24 012 E 15 3  7 04
+294M Momigliano, Eucardio           18.10.1888 -0.83 Monesiglio             CN 44 N 24 0 7 E 15 3 13 06
+299M Moravia, Alberto               28.11.1907 -1.00 Roma                   RM 41 N 54 012 E 30 2  9 03
+302M Mormino, Pietro                27.02.1907 -1.00 Palermo                PA 38 N  0 013 E 30 2  0 03
+306M Mucci, Emidio                  22.07.1886 -0.83 Roma                   RM 41 N 54 012 E 30 2 11 04
+307M Mucci, Renato                  14.10.1893 -0.83 Roma                   RM 41 N 54 012 E 30 2 10 06
+311M Nebbia, Ugo                    16.03.1882 -0.83 Perugia                PG 43 N  0 013 E  0 2 16 05
+313M Nicolai, Raniero               05.10.1893 -0.83 Roma                   RM 41 N 54 012 E 30 3  7 08
+318M Orano, M. Emanuele             21.03.1886 -0.83 Roma                   RM 41 N 54 012 E 30 2  8 05
+324M Palazzeschi, Aldo              02.02.1885 -0.83 Firenze                FI 43 N 42 011 E 30 2 10 03
+332M Pascucci, Tullio               21.08.1901 -1.00 Camporotondo           MC 43 N 24 013 E 15 2  3 03
+335M Patri, Angelo                  26.11.1876 -0.83 Salerno                SA 40 N 42 015 E 15 3  0 02
+337M Pea, Enrico                    29.10.1881 -0.83 Serravezza             LU 43 N 42 011 E  0 4  8 02
+352M Pietrobono, Luigi              26.12.1863   LMT Alatri                 FR 41 N 36 013 E 15 3  4 04
+354M Pirandello, Stefano            14.06.1895 -1.00 Roma                   RM 41 N 54 012 E 30 2 10 04
+359M Portal, Emanuele               28.12.1874 -0.88 Palermo                PA 38 N  0 013 E 30 2  6 04
+375M Rippo, Renato                  14.03.1908 -1.00 Napoli                 NA 40 N 54 014 E  0 2  4 04
+379M Romano, Armando                02.06.1889 -0.83 Lecce                  LE 40 N 24 018 E 45 3  0 03
+390M Ruberti, Guido                 10.08.1885 -0.83 Roma                   RM 41 N 54 012 E 30 3  7 04
+394M Saba, Umberto                  09.03.1883 -0.83 Trieste                TS 45 N 36 014 E  0 2  9 03
+395M Sacchetti, Enrico              28.02.1877 -0.83 Roma                   RM 41 N 54 012 E 30 3  4 03
+417M Sertori, Mario                 29.01.1894 -1.00 Benevento              BN 41 N 18 015 E  0 3  6 05
+435M Sparito, Giosuè                04.04.1899 -1.00 Militello in Val       CT 37 N 30 015 E  0 4 13 06
+446M Terra, Dino                    13.10.1904 -1.00 Roma                   RM 41 N 54 012 E 30 3 11 03
+451M Tolomei, Ettore                16.08.1865   LMT Rovereto               TN 46 N  0 012 E  0 2  0 06
+458M Trilussa (Salustri, Carlo A.)  26.09.1873 -0.83 Roma                   RM 41 N 54 012 E 30 4 22 07
+462M Urbani, Giuseppe               02.06.1888 -0.83 Roma                   RM 41 N 54 012 E 30 3  8 03
+477M Vigolo, Giorgio                03.12.1894 -1.00 Roma                   RM 41 N 54 012 E 30 3  6 03
+480M Vinciguerra, Mario             07.01.1887 -0.83 Napoli                 NA 40 N 54 014 E  0 3 10 05
+484M Vittorini, Elio                27.07.1908 -1.00 Siracusa               SR 37 N  0 015 E 30 2  7 04
+486M Weidlich, Carlo                20.09.1900 -1.00 Napoli                 NA 40 N 54 014 E  0 3 16 05
+487M Weidlich, Emilio               11.10.1903 -1.00 Napoli                 NA 40 N 54 014 E  0 4  4 04
+490M Zanfrognini, Pietro            08.05.1885 -0.83 Staggia Modenese       MO 44 N 36 011 E 15 2  9 04
+498M Zoccoli, Ettore                20.03.1872 -0.83 Modena                 MO 44 N 36 011 E 15 2  6 05

@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Matches Müller 402 to Cura A6
+    Adds Gauquelin (A6) id to Müller 402
     
     @license    GPL
     @history    2020-07-18 01:45:49+02:00, Thierry Graff : Creation
@@ -8,18 +8,10 @@
 namespace g5\commands\newalch\muller402;
 
 use g5\Config;
-use g5\model\DB5;
 use g5\patterns\Command;
 use g5\commands\cura\Cura;
-use g5\model\Full;
-use g5\model\Group;
-use g5\model\Person;
 
-class addA6 implements Command {
-    
-    const POSSIBLE_PARAMS = [
-        'list' => "Echoes a list of matchins A6 / M402 reocrds",
-    ];
+class lookA6 implements Command {
     
     /** 
         Assoc array NUM in A6 => ID in M402
@@ -69,38 +61,27 @@ class addA6 implements Command {
     // *****************************************
     // Implementation of Command
     /** 
-        Called by : php run-g5.php newalch muller402 addA6
+        Called by : php run-g5.php newalch muller402 lookA6
         @param $params empty array 
         @return Report
     **/
     public static function execute($params=[]): string{
         
-        $possibleParams_str = '';
-        foreach(self::POSSIBLE_PARAMS as $k => $v){
-            $possibleParams_str .= "  '$k' : $v\n";
-        }
-        
-        if(count($params) != 1){
-            return "WRONG USAGE : this command takes one parameter\nPossible parameters : $possibleParams_str";
-        }                                                                                                                  
-        $param = $params[0];
-        if(!in_array($param, array_keys(self::POSSIBLE_PARAMS))){
-            return "INVALID PARAMETER\n"
-                . "Possible values for parameter :\n$possibleParams_str\n";
+        if(count($params) != 0){
+            return "WRONG USAGE : this command does not take parameter\n";
         }
         
         $m402_days = []; // Assoc array, keys = birth days
         $m402_ids = []; // Assoc array, keys = M402 ids - used to fill match from self::MATCHING
-        $uid = Muller402::UID_GROUP_PREFIX;
-        $g = Group::new($uid);
-        foreach($g->data['members'] as $puid){
-            $p = Person::new($puid);
-            $day = substr($p->data['birth']['date'], 0, 10);
+        
+        $lines = Muller402::loadTmpFile();
+        foreach($lines as $line){
+            $day = substr($line['DATE'], 0, 10);
             if(!isset($m402_days[$day])){
                 $m402_days[$day] = [];
             }
-            $m402_days[$day][] = $p;
-            $m402_ids[$p->data['ids']['muller402']] = $p;
+            $m402_days[$day][] = $line;
+            $m402_ids[$line['MUID']] = $line;
         }
         
         // one birth day in A6 corresponds to one in M402
@@ -115,9 +96,10 @@ class addA6 implements Command {
         $na6 = 0;
         
         // loop on a6, try to match muller402
-        $a6 = Cura::loadTmpCsv('A6');
+        $a6 = Cura::loadTmpFile('A6');
         $matching_keys = array_keys(self::MATCHING);
         foreach($a6 as $a6row){
+            $a6row['PLACE'] = ucWords(strtolower($a6row['PLACE']));
             if($a6row['CY'] != 'IT'){
                 continue;
             }
@@ -129,7 +111,6 @@ class addA6 implements Command {
             // no match
             if(!isset($m402_days[$dayA6])){
                 
-                
                 if(in_array($a6row['NUM'], $matching_keys)){
                     // uses self::MATCHING to remove nomatch
                     $match[] = [
@@ -138,8 +119,6 @@ class addA6 implements Command {
                     ];
                     continue;
                 }
-                
-                
                 $nomatch[] = $a6row;
                 continue;
             }
@@ -172,16 +151,13 @@ class addA6 implements Command {
         //
         // report
         //
-        $report = '';
-        $report .= "A6 contains $na6 italian writers\n";
-        
-        if($param == 'list'){
-            $report .= self::list($match);
-        }
-        
+        $report = "A6 contains $na6 italian writers\n";
+        $report .= self::list($match);
         return $report;
         
+        //
         // Following code is now useless
+        //
         // was used to build self::MATCHING from $ambiguous and $nomatch
         // can be removed, kept in case
         if(count($ambiguous) != 0){
@@ -252,12 +228,12 @@ class addA6 implements Command {
         $report .= "</tr>\n";
         $diff = ' class="diff"';
         foreach($match as $line){
-            $date402 = $line['M402']->data['birth']['date'] . $line['M402']->data['birth']['tz'];
-            $diff_fname = ($line['A6']['FNAME'] != $line['M402']->data['name']['family'] ? $diff :'');
-            $diff_gname = ($line['A6']['GNAME'] != $line['M402']->data['name']['given'] ? $diff :'');
+            $date402 = $line['M402']['DATE'] . $line['M402']['TZO'];
+            $diff_fname = ($line['A6']['FNAME'] != $line['M402']['FNAME'] ? $diff :'');
+            $diff_gname = ($line['A6']['GNAME'] != $line['M402']['GNAME'] ? $diff :'');
             $diff_date = ($line['A6']['DATE'] != $date402 ? $diff :'');
-            $diff_place = ($line['A6']['PLACE'] != $line['M402']->data['birth']['place']['name'] ? $diff :'');
-            $diff_a2 = ($line['A6']['C2'] != $line['M402']->data['birth']['place']['c2'] ? $diff :'');
+            $diff_place = ($line['A6']['PLACE'] != $line['M402']['PLACE'] ? $diff :'');
+            $diff_a2 = ($line['A6']['C2'] != $line['M402']['C2'] ? $diff :'');
             $report .= '    <tr class="spacer"><td colspan="7"></td></tr>' . "\n";
             $report .= '    <tr>'
                 . '<th>A6</th>'
@@ -270,12 +246,12 @@ class addA6 implements Command {
                 . "</tr>\n";
             $report .= '    <tr>'
                 . '<th>M402</th>'
-                . "<td>" . $line['M402']->data['ids']['muller402'] . '</td>'
-                . "<td$diff_fname>" . $line['M402']->data['name']['family'] . '</td>'
-                . "<td$diff_gname>" . $line['M402']->data['name']['given'] . '</td>'
-                . "<td$diff_date>" . $line['M402']->data['birth']['date'] . ' ' . $line['M402']->data['birth']['tz'] . '</td>'
-                . "<td$diff_place>" . $line['M402']->data['birth']['place']['name'] . '</td>'
-                . "<td$diff_a2>" . $line['M402']->data['birth']['place']['c2'] . '</td>'
+                . "<td>" . $line['M402']['MUID'] . '</td>'
+                . "<td$diff_fname>" . $line['M402']['FNAME'] . '</td>'
+                . "<td$diff_gname>" . $line['M402']['GNAME'] . '</td>'
+                . "<td$diff_date>" . $line['M402']['DATE'] . ' ' . $line['M402']['TZO'] . '</td>'
+                . "<td$diff_place>" . $line['M402']['PLACE'] . '</td>'
+                . "<td$diff_a2>" . $line['M402']['C2'] . '</td>'
                 . "</tr>\n";
         }
         $report .= "</table>\n";
