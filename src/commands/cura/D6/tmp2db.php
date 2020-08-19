@@ -1,11 +1,11 @@
 <?php
 /********************************************************************************
-    Loads files data/tmp/cura/A*.csv and A-raw.csv in database.
+    Loads files data/tmp/cura/D6.csv and D6-raw.csv in database.
     
     @license    GPL
-    @history    2020-08-19 05:23:25+02:00, Thierry Graff : creation
+    @history    2020-08-19 18:16:35+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace g5\commands\cura\A;
+namespace g5\commands\cura\D6;
 
 use g5\patterns\Command;
 use g5\DB5;
@@ -15,21 +15,21 @@ use g5\model\Person;
 use g5\commands\cura\Cura;
 
 class tmp2db implements Command {
-    
+                                                                                          
     // *****************************************
     // Implementation of Command
     /**
         @param  $params Array containing 2 elements :
-                        - a string identifying what is processed (ex : 'A1')
+                        - "D6" (useless here)
                         - "tmp2db" (useless here)
     **/
     public static function execute($params=[]): string {
-        
         if(count($params) > 2){
             return "USELESS PARAMETER : " . $params[2] . "\n";
         }
         $datafile = $params[0];
-        $report = "--- $datafile tmp2db ---\n";
+        
+        $report = "--- D6 tmp2db ---\n";
         
         // source corresponding to CURA - insert if does not already exist
         $curaSource = Cura::getSource();
@@ -40,26 +40,26 @@ class tmp2db implements Command {
             // already inserted, do nothing
         }
         
-        // source corresponding to current A file
-        $source = Source::getBySlug($datafile);
+        // source corresponding to D6 file
+        $source = Source::getBySlug('D6');
         if($source->isEmpty()){
             $source = new Source();
-            $source->data['slug'] = $datafile; // ex A1
-            $source->data['name'] = "CURA file $datafile";
-            $source->data['description'] = Cura::CURA_URLS[$datafile] . "\nDescribed by Cura as " . Cura::CURA_CLAIMS[$datafile][2];
+            $source->data['slug'] = 'D6';
+            $source->data['name'] = "CURA file D6";
+            $source->data['description'] = Cura::CURA_URLS['D6'] . "\nDescribed by Cura as " . Cura::CURA_CLAIMS['D6'][2];
             $source->data['source']['parents'][] = $curaSource->data['slug'];
             $source->data['id'] = $source->insert();
         }
         
         // group
-        $g = Group::getBySlug($datafile);
+        $g = Group::getBySlug('D6');
         if($g->isEmpty()){
             $g = new Group();
-            $g->data['slug'] = $datafile;
+            $g->data['slug'] = 'D6';
             $g->data['sources'][] = $source->data['slug'];
-            $g->data['name'] = "Cura $datafile";
-            $g->data['description'] = "According to Cura : " . Cura::CURA_CLAIMS[$datafile][2] . ".\n"
-                . "In practice, contains " . Cura::CURA_CLAIMS[$datafile][1] . " persons.";
+            $g->data['name'] = "Cura 'D6'";
+            $g->data['description'] = "According to Cura : " . Cura::CURA_CLAIMS['D6'][2] . ".\n"
+                . "In practice, contains " . Cura::CURA_CLAIMS['D6'][1] . " persons.";
             $g->data['id'] = $g->insert();
         }
         else{
@@ -69,8 +69,8 @@ class tmp2db implements Command {
         
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
-        $lines = Cura::loadTmpFile($datafile);
-        $linesRaw = Cura::loadTmpRawFile($datafile);
+        $lines = Cura::loadTmpFile('D6');
+        $linesRaw = Cura::loadTmpRawFile('D6');
         $nStored = 0;
         $N = count($lines);
         for($i=0; $i < $N; $i++){
@@ -79,8 +79,8 @@ class tmp2db implements Command {
             // Here build an empty person because cura data are the first to be imported
             $p = new Person();
             $p->addSource($source->data['slug']);
-            $p->addRaw($datafile, $line);
-            //$p->addIdInSource($curaSource->data['slug'], Cura::gqId($datafile, $line['NUM']));
+            $p->addRaw('D6', $line);
+            //$p->addIdInSource($curaSource->data['slug'], Cura::gqId('D6', $line['NUM']));
             $p->addIdInSource($source->data['slug'], $line['NUM']);
             // here, do not modify directly $p->data to permit a call to addHistory()
             // containing only new data
@@ -88,19 +88,22 @@ class tmp2db implements Command {
             $new['trust'] = Cura::TRUST_LEVEL;
             $new['name']['family'] = $line['FNAME'];
             $new['name']['given'] = $line['GNAME'];
-            $new['occus'] = [$line['OCCU']];
+            $new['occus'] = ['SP']; // sportsman - TODO change with geoid code
             $new['birth'] = [];
-            $new['birth']['date-ut'] = $line['DATE-UT'];
-            $new['birth']['place']['name'] = $line['PLACE'];
-            $new['birth']['place']['c2'] = $line['C2'];
-            $new['birth']['place']['c3'] = $line['C3'];
+            $new['birth']['date'] = $line['DATE'];
+            // the following line could be uncommented
+            // if a way is found to fill tmp file with these infos
+            // attempt with addGeo failed so far
+            //$new['birth']['place']['name'] = $line['PLACE'];
+            //$new['birth']['place']['c2'] = $line['C2'];
+            //$new['birth']['place']['c3'] = $line['C3'];
             $new['birth']['place']['cy'] = $line['CY'];
             $new['birth']['place']['lg'] = $line['LG'];
             $new['birth']['place']['lat'] = $line['LAT'];
             $p->updateFields($new);
             $p->computeSlug();
             // log command effect on data in the person yaml
-            $p->addHistory("cura $datafile tmp2db", $source->data['slug'], $new);
+            $p->addHistory("cura D6 tmp2db", $source->data['slug'], $new);
             $p->addRaw($source->data['slug'], $lineRaw);
             try{
                 $p->data['id'] = $p->insert(); // HERE storage

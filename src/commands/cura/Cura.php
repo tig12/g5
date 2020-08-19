@@ -122,7 +122,7 @@ class Cura implements SourceI {
     // *********************** Tmp files manipulation ***********************
     
     /**
-        Returns the name of a file in data/tmp/cura
+        Returns the name of a tmp file, eg. data/tmp/cura/A1.csv
         @param  $datafile : a string like 'A1'
     **/                                                                                          
     public static function tmpFilename($datafile){
@@ -130,26 +130,19 @@ class Cura implements SourceI {
     }
     
     /**
-        Returns the name of a file in data/tmp/cura used to keep trace of the original raw values
+        Loads a tmp file in a regular array
+        Each element contains the person fields in an assoc. array
         @param  $datafile : a string like 'A1'
-    **/
-    public static function tmpRawFilename($datafile){
-        return Config::$data['dirs']['tmp'] . DS . 'cura' . DS . $datafile . '-raw.csv';
-    }
-    
-    /**
-        Loads a cura file of data/tmp/cura in a regular array
-        @param  $datafile : a string like 'A1'
-        @return Regular array containing the persons' data
     **/
     public static function loadTmpFile($datafile){
         return csvAssociative::compute(self::tmpFilename($datafile));
     }
 
     /**
-        Loads a cura file of data/tmp/cura in an asssociative array ; keys = cura ids (NUM)
+        Loads a tmp file in an asssociative array.
+            keys = cura ids (NUM)
+            values = assoc array containing the fields
         @param      $datafile : a string like 'A1'
-        @return     Associative array containing the cura file in data/tmp/cura ; keys = cura ids (NUM)
     **/
     public static function loadTmpFile_num($datafile){
         $curaRows1 = self::loadTmpFile($datafile);
@@ -160,6 +153,24 @@ class Cura implements SourceI {
         return $res;
     }
     
+    /**
+        Returns the name of a "tmp raw file", eg. data/tmp/cura/A1.csv
+        (files used to keep trace of the original raw values).
+        @param  $datafile : a string like 'A1'
+    **/
+    public static function tmpRawFilename($datafile){
+        return Config::$data['dirs']['tmp'] . DS . 'cura' . DS . $datafile . '-raw.csv';
+    }
+    
+    /**
+        Loads a "tmp raw file" in a regular array
+        Each element contains the person fields in an assoc. array
+        @param  $datafile : a string like 'A1'
+    **/
+    public static function loadTmpRawFile($datafile){
+        return csvAssociative::compute(self::tmpRawFilename($datafile));
+    }
+
     // *********************** Time / space functions ***********************
     
     /**

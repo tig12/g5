@@ -30,6 +30,7 @@ use g5\commands\csicop\si42\raw2tmp             as raw2tmpSi42;
 use g5\commands\csicop\si42\addCanvas1          as addCanvas1Si42;
 use g5\commands\csicop\irving\raw2tmp           as raw2tmpIrving;
 
+use g5\commands\cura\A\tmp2db                   as tmp2dbA;
 
 class history implements Command {
     
@@ -70,6 +71,9 @@ class history implements Command {
         //
 //        echo dbcreate::execute([]);
         
+        $filesCura = CuraRouter::computeDatafiles('all');
+        $filesCuraA = CuraRouter::computeDatafiles('A');
+        
         //
         //  1 - Create tmp files from raw data
         //
@@ -78,16 +82,15 @@ class history implements Command {
             echo "***********************\n";
             echo "*** Build tmp files ***\n";
             echo "***********************\n";
-            $datafiles = CuraRouter::computeDatafiles('A');
-            foreach($datafiles as $datafile){
+            foreach($filesCuraA as $datafile){
                 echo raw2tmpA::execute([$datafile, 'raw2tmp', 'small']);
             }
             echo raw2tmpD6::execute(['D6', 'raw2tmp']);
+            //echo raw2tmpD6::execute(['D6', 'addGeo']); => addGeo needs to be fixed
             echo raw2tmpD10::execute(['D10', 'raw2tmp']);
             echo raw2tmpE1E3::execute(['E1', 'raw2tmp', 'small']);
             echo raw2tmpE1E3::execute(['E3', 'raw2tmp', 'small']);
-            $datafiles = CuraRouter::computeDatafiles('all');
-            foreach($datafiles as $datafile){
+            foreach($filesCura as $datafile){
                 echo tweak2tmpCura::execute([$datafile, 'tweak2tmp']);
             }
             echo raw2tmpErtel4391::execute([]);
@@ -109,6 +112,9 @@ class history implements Command {
             echo "***********************\n";
             echo "***  Fill database  ***\n";
             echo "***********************\n";
+            foreach($filesCuraA as $datafile){
+                echo tmp2dbA::execute([$datafile, 'tmp2db']);
+            }
         }
         
         return '';

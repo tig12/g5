@@ -138,11 +138,25 @@ class Person {
     // *********************** Fields *******************************
     
     /**
+        @throws \Exception if the person id computation impossible (the person has no family name).
+    **/
+    public function getIdFromSlug($slug) {
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare("select id from person where slug=?");
+        $stmt->execute([$slug]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if($res === false || count($res) == 0){
+            throw new \Exception("Trying to get a person with unexisting slug : $slug");
+        }
+        return $res['id'];
+    }
+    
+    /**
         Computes the slug of a person.
         ex :
             - galois-evariste-1811-10-25 for a person with a known birth time.
             - galois-evariste for a person without a known birth time.
-        throws \Exception if the person id computation impossible (the person has no family name).
+        @throws \Exception if the person id computation impossible (the person has no family name).
     **/
     public function computeSlug() {
         if(!$this->data['name']['family']){
@@ -175,9 +189,12 @@ class Person {
     
     // *********************** update fields *******************************
     
+    /** 
+        Replaces $this->data with fields present in $replace.
+        Fields of $this->data not present in $replace are not modified.
+        @param $replace Assoc. array with the same structure as $this->data
+    **/
     public function updateFields($replace){
-        // calling addHistory() before calling update() is left to client code
-        // Decision could be made to call addHistory() here to impose to trace all modifications
         $this->data = array_replace_recursive($this->data, $replace);
     }
     

@@ -70,12 +70,21 @@ class Group{
         ]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         $this->data['id'] = $res['id'];
-        // members                                                                                     
+        // members
+        $this->insertMembers();
+        //
+        return $this->data['id'];
+    }
+    
+    /**
+        Inserts a the associations between a group and its members in storage.
+    **/
+    public function insertMembers() {
+        $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("insert into person_groop(id_person,id_group) values(?,?)");
         foreach($this->data['members'] as $pid){
             $stmt->execute([$pid, $this->data['id']]);
         }
-        return $this->data['id'];
     }
     
     /**
@@ -96,7 +105,7 @@ class Group{
     }
     
     /**
-        Updates the members of a group in storage.
+        Updates the associations between the group and its members in storage.
         @throws \Exception if trying to update an unexisting group
     **/
     public function updateMembers() {
@@ -109,7 +118,7 @@ class Group{
     }
     
     /**
-        Deletes the persons that are members of a group in storage.
+        Deletes the associations between group and persons (doesn't delete the persons).
         @throws \Exception if trying to delete members of an unexisting group
     **/
     public function deleteMembers() {
