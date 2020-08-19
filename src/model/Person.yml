@@ -37,7 +37,7 @@ birth:
   date:     # exact date (day and hour) of the birth certificate
   tzo:      # timezone offset
   date-ut:  # for dates like cura A
-  note:     # eg LMT
+  note:     # eg "LMT"
   place:
     name:
     c2:
@@ -51,6 +51,7 @@ death:
   date:     # exact date of the birth certificate
   tz:       # timezone offset
   date-ut:  # for dates like cura A
+  note:     # eg "LMT"
   place:
     name:
     c2:

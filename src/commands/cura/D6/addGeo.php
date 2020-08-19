@@ -14,6 +14,8 @@
     Previous calls to geonames.org web service are stored in data/tmp/geonames/D6.csv.
     So a new call will use these results and not repeat previous calls to geonames.org web service.
     
+    WARNING - The code needs to be debugged (I must confess that I don't understand my own code...)
+    
     @license    GPL
     @history    2017-04-27 22:04:25+02:00, Thierry Graff : creation
 ********************************************************************************/
@@ -111,7 +113,7 @@ class addGeo implements Command {
             // Write back the csv 
             file_put_contents($geofile, $res_geo); // file in data/tmp/geonames/
             self::geo2csv($geofile, $csvfile); // copy results back in data/tmp/cura/
-            dosleep::execute(0.1); // keep cool with geonames.org web service
+            dosleep::execute(1.5); // keep cool with geonames.org web service
         } // end while true
         
         // new execution of geo2csv is necessary

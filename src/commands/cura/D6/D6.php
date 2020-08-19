@@ -9,6 +9,21 @@ namespace g5\commands\cura\D6;
 
 class D6{
     
+    
+    /** Fields of data/tmp/cura/D6.csv **/
+    const RAW_FIELDS = [
+        'NUM',
+        'DAY',
+        'MON',
+        'YEA',
+        'H',
+        'MN',
+        'SEC',
+        'LAT',
+        'LON',
+        'NAME',
+    ];
+
     /** Fields of data/tmp/cura/D6.csv **/
     const TMP_FIELDS = [
         'NUM',
