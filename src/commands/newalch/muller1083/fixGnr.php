@@ -105,10 +105,12 @@ class fixGnr implements Command {
             if($curaPrefix == 'SA2'){
                 $curaFile =& $a2s;
                 $curaFilename = 'A2';
+                $curaDateField = 'DATE-UT';
             }
             else{
                 $curaFile =& $e1s;
-                $curaFilename = 'E1';
+                $curaFilename = 'E1'; 
+                $curaDateField = 'DATE';
             }
             
             $NUM_muller = substr($GNR, 3);
@@ -131,7 +133,7 @@ class fixGnr implements Command {
                 if(!isset($curaFile[$targetNUM])){
                     continue; // happens for ex because A2 2652 doesn't exist
                 }
-                $date_cura = substr($curaFile[$targetNUM]['DATE'], 0, 10);
+                $date_cura = substr($curaFile[$targetNUM][$curaDateField], 0, 10);
                 if($date_muller == $date_cura){
                     $candidates[] = $targetNUM;
                 }
@@ -191,7 +193,10 @@ class fixGnr implements Command {
                 $NUM = substr($newGNR, 3);
                 $date = substr($MullerCsv[$NR]['DATE'], 0, 10);
                 $report .= "Muller : NR $NR - GNR {$MullerCsv[$NR]['GNR']} -\t $date | {$MullerCsv[$NR]['FNAME']} | {$MullerCsv[$NR]['GNAME']}\n";
-                $date = substr($curaFile[$NUM]['DATE'], 0, 10);
+                
+                $date = isset($curaFile[$NUM]['DATE'])
+                    ? substr($curaFile[$NUM]['DATE'], 0, 10) // in E1
+                    : substr($curaFile[$NUM]['DATE-UT'], 0, 10); // in A2
                 $report .= "Corrected : $newGNR - in Cura :\t $date | {$curaFile[$NUM]['FNAME']} | {$curaFile[$NUM]['GNAME']}\n";
                 $report .= "\n";
             }

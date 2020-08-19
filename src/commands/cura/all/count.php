@@ -29,7 +29,7 @@ class count implements Command {
     public static function execute($params=[]): string{
         
         if(count($params) > 2){
-            return "INVALID PARAMETER : " . $params[2] . " - csvcount doesn't need this parameter\n";
+            return "USELESS PARAMETER : " . $params[2] . "\n";
         }
         
         $datafiles = CuraRouter::computeDatafiles('all');
@@ -62,11 +62,11 @@ class count implements Command {
             $delta = Cura::CURA_CLAIMS[$datafile][0] - $N[$datafile];
             $res .= '<tr>';
             $res .= '<td>' . $datafile . '</td>';
-            $res .= '<td>' . Cura::CURA_CLAIMS[$datafile][1] . '</td>';
+            $res .= '<td>' . Cura::CURA_CLAIMS[$datafile][2] . '</td>';
             $res .= '<td class="right">' . number_format(Cura::CURA_CLAIMS[$datafile][0], 0, '.', ' ') . '</td>';
             $res .= '<td class="right bold">' . number_format($N[$datafile], 0, '.', ' ') . '</td>';
             $res .= '<td>' . $delta . '</td>';
-            $res .= '<td>' . Cura::CURA_CLAIMS[$datafile][2] . '</td>';
+            $res .= '<td>' . Cura::CURA_CLAIMS[$datafile][3] . '</td>';
             $res .= '</tr>' . "\n";
         }
         

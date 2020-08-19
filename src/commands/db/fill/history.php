@@ -75,6 +75,9 @@ class history implements Command {
         //
         
         if($param == 'tmp' || $param == 'all'){
+            echo "***********************\n";
+            echo "*** Build tmp files ***\n";
+            echo "***********************\n";
             $datafiles = CuraRouter::computeDatafiles('A');
             foreach($datafiles as $datafile){
                 echo raw2tmpA::execute([$datafile, 'raw2tmp', 'small']);
@@ -102,7 +105,10 @@ class history implements Command {
         //
         //  2 - Import tmp files to db
         //
-        if($param == 'tmp' || $param == 'db'){
+        if($param == 'db' || $param == 'all'){
+            echo "***********************\n";
+            echo "***  Fill database  ***\n";
+            echo "***********************\n";
         }
         
         return '';

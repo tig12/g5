@@ -35,7 +35,6 @@ class A{
         'FNAME',
         'GNAME',
         'OCCU',
-        'DATE',
         'DATE-UT',
         'PLACE',
         'CY',
@@ -55,6 +54,7 @@ class A{
         'OCCU',
         'DATE-UT',
         'DATE',
+        'TZO',
         'PLACE',
         'CY',
         'C2',
@@ -62,7 +62,6 @@ class A{
         'LG',
         'LAT',
         'GEOID',
-        'NOTES',
     ];
     
     /**
@@ -392,83 +391,4 @@ class A{
         ],
     ];
 
-    // ******************************************************
-    /** 
-        @return String like 'Gauquelin-A1-243'
-    **/
-    public static function compute_replacement_name($datafile, $NUM){
-        return 'Gauquelin-' . Cura::gqid($datafile, $NUM);
-    }
-    
-    // ******************************************************
-    /** 
-        Computes precise profession when possible
-        First compute not-detailed profession from $pro
-        Then computes precise profession from $num, if possible
-        Auxiliary of raw2csv()
-    **/
-    public static function compute_profession($datafile, $pro, $num){
-        $res = self::PROFESSIONS_NO_DETAILS[$datafile][$pro];
-        if(isset(self::PROFESSIONS_DETAILS[$datafile])){
-            $tmp = self::PROFESSIONS_DETAILS[$datafile];
-            foreach($tmp as $elts){
-                // $elts looks like that : ['Athlétisme', 1, 86],
-                if($num >= $elts[1] && $num <= $elts[2]){
-                    $res = $elts[0];
-                    break;
-                }
-            }
-        }
-        return $res;
-    }
-    
-    
-    // ******************************************************
-    /** 
-        Computes the ISO 3166 country code from fields COU and COD of cura files.
-        Auxiliary of raw2csv()
-    **/
-    public static function compute_country($COU, $COD){
-        $COU = self::COUNTRIES[$COU];
-        $COD = trim($COD);
-        if($COU == 'FR' && $COD== 'ALG'){
-            $COU = 'DZ';
-            $COD= '';
-        }
-        else if($COU == 'FR' && $COD == 'MON'){
-            $COU = 'MC';
-            $COD= '';
-        }
-        else if($COU == 'FR' && $COD == 'BEL'){
-            $COU = 'BE';
-            $COD= '';
-        }
-        else if($COU == 'FR' && $COD == 'B'){
-            $COU = 'BE';
-            $COD= '';
-        }
-        else if($COU == 'FR' && $COD == 'SCHW'){
-            $COU = 'CH';
-            $COD= '';
-        }
-        else if($COU == 'FR' && $COD == 'G'){
-            $COU = 'DE';
-            $COD= '';
-        }
-        else if($COU == 'FR' && $COD == 'ESP'){
-            $COU = 'ES';
-            $COD= '';
-        }
-        else if($COU == 'FR' && $COD == 'I'){
-            $COU = 'IT';
-            $COD= '';
-        }
-        else if($COU == 'FR' && $COD == 'N'){
-            $COU = 'NL';
-            $COD= '';
-        }
-        return [$COU, $COD];
-    }
-    
-    
 }// end class    

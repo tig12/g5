@@ -17,7 +17,7 @@ class Person {
         $this->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Person.yml'));
     }
     
-    // *********************** Storage *******************************
+    // *********************** Get *******************************
     
     /** Creates an object of type Person from storage, using its id. **/
     public static function get($id): Person{
@@ -61,13 +61,14 @@ class Person {
         return $p;
     }
     
+    // *********************** CRUD *******************************
     
     /**
         Inserts a new person in storage.
         @return The id of the inserted row
         @throws \Exception if trying to insert a duplicate slug
     **/
-    public static function insert(Person $p): int{
+    public function insert(): int{
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("insert into person(
             slug,
@@ -83,17 +84,17 @@ class Person {
             history
             )values(?,?,?,?,?,?,?,?,?,?,?) returning id");
         $stmt->execute([
-            $p->data['slug'],
-            json_encode($p->data['sources']),
-            json_encode($p->data['ids_in_sources']),
-            $p->data['trust'],
-            $p->data['sex'],
-            json_encode($p->data['name']),
-            json_encode($p->data['occus']),
-            json_encode($p->data['birth']),
-            json_encode($p->data['death']),
-            json_encode($p->data['raw']),
-            json_encode($p->data['history']),
+            $this->data['slug'],
+            json_encode($this->data['sources']),
+            json_encode($this->data['ids_in_sources']),
+            $this->data['trust'],
+            $this->data['sex'],
+            json_encode($this->data['name']),
+            json_encode($this->data['occus']),
+            json_encode($this->data['birth']),
+            json_encode($this->data['death']),
+            json_encode($this->data['raw']),
+            json_encode($this->data['history']),
         ]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         return $res['id'];
@@ -103,7 +104,7 @@ class Person {
         Updates a person in storage.
         @throws \Exception if trying to update an unexisting id
     **/
-    public static function update(Person $p) {
+    public function update() {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("update person set
             slug=?,
@@ -119,18 +120,18 @@ class Person {
             history=?      
             where id=?");
         $stmt->execute([
-            $p->data['slug'],
-            json_encode($p->data['sources']),
-            json_encode($p->data['ids_in_sources']),
-            $p->data['trust'],
-            $p->data['sex'],
-            json_encode($p->data['name']),
-            json_encode($p->data['occus']),
-            json_encode($p->data['birth']),
-            json_encode($p->data['death']),
-            json_encode($p->data['raw']),
-            json_encode($p->data['history']),
-            $p->data['id'],
+            $this->data['slug'],
+            json_encode($this->data['sources']),
+            json_encode($this->data['ids_in_sources']),
+            $this->data['trust'],
+            $this->data['sex'],
+            json_encode($this->data['name']),
+            json_encode($this->data['occus']),
+            json_encode($this->data['birth']),
+            json_encode($this->data['death']),
+            json_encode($this->data['raw']),
+            json_encode($this->data['history']),
+            $this->data['id'],
         ]);
     }
     

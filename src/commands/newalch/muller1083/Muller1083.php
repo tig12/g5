@@ -17,7 +17,7 @@ class Muller1083 {
     
     /**
         Path to the yaml file containing the characteristics of the source describing file 5a_muller_medics.txt.
-        Relative to directory specified in config.yml by dirs / edited
+        Relative to directory specified in config.yml by dirs / db
     **/
     const RAW_SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch' . DS . '5a_muller_medics.yml';
     

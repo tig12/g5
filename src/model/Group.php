@@ -20,7 +20,7 @@ class Group{
         $this->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Group.yml'));
     }
     
-    // *********************** Storage *******************************
+    // *********************** Get *******************************
     
     /** Creates an object of type Group from storage, using its id. **/
     public static function get($id): Group{
@@ -52,53 +52,76 @@ class Group{
         return $g;
     }
     
+    // *********************** CRUD *******************************
+    
     /**
-        Inserts a new group in storage.
+        Inserts a group in storage.
         @return The id of the inserted row
         @throws \Exception if trying to insert a duplicate slug
     **/
-    public static function insert(Group $g): int{
+    public function insert(): int{
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("insert into groop(slug,name,description,sources) values(?,?,?,?) returning id");
         $stmt->execute([
-            $g->data['slug'],
-            $g->data['name'],
-            $g->data['description'],
-            json_encode($g->data['sources']),
+            $this->data['slug'],
+            $this->data['name'],
+            $this->data['description'],
+            json_encode($this->data['sources']),
         ]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
-        $g->data['id'] = $res['id'];
+        $this->data['id'] = $res['id'];
         // members                                                                                     
-        $stmt = $dblink->prepare("insert into person_group(id_person,id_group) values(?,?)");
-        foreach($g->data['members'] as $pid){
-            $stmt->execute([$pid, $g->data['id']]);
+        $stmt = $dblink->prepare("insert into person_groop(id_person,id_group) values(?,?)");
+        foreach($this->data['members'] as $pid){
+            $stmt->execute([$pid, $this->data['id']]);
         }
-        return $g->data['id'];
+        return $this->data['id'];
     }
     
     /**
         Updates a group in storage.
-        @throws \Exception if trying to update an unexisting id
+        @throws \Exception if trying to update an unexisting group
     **/
-    public static function update(Group $g) {
+    public function update() {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("update groop set slug=?,name=?,description=?,sources=? where id=?");
         $stmt->execute([
-            $g->data['slug'],
-            $g->data['name'],
-            $g->data['description'],
-            json_encode($g->data['sources']),
-            $g->data['id'],
+            $this->data['slug'],
+            $this->data['name'],
+            $this->data['description'],
+            json_encode($this->data['sources']),
+            $this->data['id'],
         ]);
-        // members                                                                                     
-        $dblink->exec("delete from person_group where id_group='" . $dblink->quote($g->data['id']) . "'");
-        $stmt = $dblink->prepare("insert into person_group(id_person,id_group) values(?,?)");
-        foreach($g->data['members'] as $pid){
-            $stmt->execute([$pid, $g->data['id']]);
+        $this->updateMembers();
+    }
+    
+    /**
+        Updates the members of a group in storage.
+        @throws \Exception if trying to update an unexisting group
+    **/
+    public function updateMembers() {
+        $dblink = DB5::getDbLink();
+        $dblink->exec("delete from person_groop where id_group='" . $dblink->quote($this->data['id']) . "'");
+        $stmt = $dblink->prepare("insert into person_groop(id_person,id_group) values(?,?)");
+        foreach($this->data['members'] as $pid){
+            $stmt->execute([$pid, $this->data['id']]);
         }
     }
     
+    /**
+        Deletes the persons that are members of a group in storage.
+        @throws \Exception if trying to delete members of an unexisting group
+    **/
+    public function deleteMembers() {
+        $dblink = DB5::getDbLink();
+        $dblink->exec("delete from person_groop where id_group=" . $dblink->quote($this->data['id']));
+    }
+    
     // *********************** Fields *******************************
+    
+    public function isEmpty(): bool {
+        return $this->data['id'] == '';
+    }
     
     public function addMember($entry){
         $this->data['members'][] = $entry;
@@ -112,7 +135,7 @@ class Group{
         $g = Group::getBySlug($slug);
         $gid = $g->data['id'];
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("select * from person where id in(select id_person from person_group where id_group=?)");
+        $stmt = $dblink->prepare("select * from person where id in(select id_person from person_groop where id_group=?)");
         $stmt->execute([$gid]);
         $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         $res = [];

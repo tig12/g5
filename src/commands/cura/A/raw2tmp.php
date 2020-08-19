@@ -127,7 +127,7 @@ class raw2tmp implements Command {
                         'NUM' => $tmp['NUM'],
                     ];
                     // store in $res with fabricated name
-                    $tmp['FNAME'] = A::compute_replacement_name($datafile, $tmp['NUM']);
+                    $tmp['FNAME'] = self::computeReplacementName($datafile, $tmp['NUM']);
                     $res[] = $tmp;
                 }
                 continue;
@@ -139,7 +139,7 @@ class raw2tmp implements Command {
                 // store in $res with fabricated name
                 foreach($array1 as $tmp){
                     $n3++;
-                    $tmp['FNAME'] = A::compute_replacement_name($datafile, $tmp['NUM']);
+                    $tmp['FNAME'] = self::computeReplacementName($datafile, $tmp['NUM']);
                     $res[] = $tmp;
                 }
                 $new_doublon = [$file_datafile => [], $file_names => []];
@@ -172,7 +172,7 @@ class raw2tmp implements Command {
                     // store in $res with fabricated name
                     foreach($array1 as $tmp){
                         $n2++;
-                        $tmp['FNAME'] = A::compute_replacement_name($datafile, $tmp['NUM']);
+                        $tmp['FNAME'] = self::computeReplacementName($datafile, $tmp['NUM']);
                         $res[] = $tmp;
                     }
                     // fill $doublons_same_nb with all candidate lines
@@ -246,20 +246,28 @@ class raw2tmp implements Command {
             $new['FNAME'] = trim($cur['FNAME']);
             $new['GNAME'] = trim($cur['GNAME']);
             /////// TODO put wikidata occupation id ///////////
-            $new['OCCU'] = A::compute_profession($datafile, $cur['PRO'], $new['NUM']);
+            $new['OCCU'] = self::computeProfession($datafile, $cur['PRO'], $new['NUM']);
             // date time
             $day = Cura::computeDay($cur);
             $hour = Cura::computeHHMMSS($cur);
+            $date = "$day $hour";
             $TZ = trim($cur['TZ']);
             if($TZ != 0 && $TZ != -1){
-                throw new \Exception("timezone not handled : $TZ");
+                throw new \Exception("timezone not handled : $TZ"); // does not occur
             }
-            // note that when $TZ = -1, +01:00 is stored
-            $timezone = $TZ == 0 ? '+00:00' : '+01:00';
-            $new['DATE'] = "$day $hour$timezone";
+            if($TZ == 0){
+                $new['DATE-UT'] = "$day $hour";
+            }
+            else{
+                // convert all dates to UT
+                $dt = new \DateTime($date);
+                $interval = new \DateInterval('PT1H'); // 1 hour
+                $dt->sub($interval);
+                $new['DATE-UT'] = $dt->format('Y-m-d H:i:s');
+            }
             // place
-            $new['PLACE'] = trim($cur['CITY']);
-            [$new['CY'], $new['C2']] = A::compute_country($cur['COU'], $cur['COD']);
+            [$new['PLACE'], $new['C3']] = self::computePlace($cur['CITY']);
+            [$new['CY'], $new['C2']] = self::computeCountry($cur['COU'], $cur['COD']);
             $new['LG'] = Cura::computeLg($cur['LON']);
             $new['LAT'] = Cura::computeLat($cur['LAT']);
             $new['GEOID'] = '';
@@ -284,6 +292,89 @@ class raw2tmp implements Command {
         return $report;
     }
     
+    // ******************************************************
+    /**  @return String like 'Gauquelin-A1-243' **/
+    private static function computeReplacementName($datafile, $NUM){
+        return 'Gauquelin-' . Cura::gqid($datafile, $NUM);
+    }
+    
+    // ******************************************************
+    /** 
+        Computes precise profession when possible
+        First compute not-detailed profession from $pro
+        Then computes precise profession from $num, if possible
+    **/
+    private static function computeProfession($datafile, $pro, $num){
+        $res = A::PROFESSIONS_NO_DETAILS[$datafile][$pro];
+        if(isset(A::PROFESSIONS_DETAILS[$datafile])){
+            $tmp = A::PROFESSIONS_DETAILS[$datafile];
+            foreach($tmp as $elts){
+                // $elts looks like that : ['Athlétisme', 1, 86],
+                if($num >= $elts[1] && $num <= $elts[2]){
+                    $res = $elts[0];
+                    break;
+                }
+            }
+        }
+        return $res;
+    }
+    
+    // ******************************************************
+    /** Computes place name and C3 (arrondissement) for Paris and Lyon **/
+    private static function computePlace($str){
+        $str = trim($str);
+        preg_match('/(.*?) (\d+).*/', $str, $m);
+        if(count($m) > 0){
+            // Paris, Lyon
+            return [$m[1], $m[2]];
+        }
+        // most common case case
+        return [$str, ''];
+    }
+    
+    // ******************************************************
+    /**  Computes the ISO 3166 country code from fields COU and COD of cura files. **/
+    private static function computeCountry($COU, $COD){
+        $COU = A::COUNTRIES[$COU];
+        $COD = trim($COD);
+        if($COU == 'FR' && $COD== 'ALG'){
+            $COU = 'DZ';
+            $COD= '';
+        }
+        else if($COU == 'FR' && $COD == 'MON'){
+            $COU = 'MC';
+            $COD= '';
+        }
+        else if($COU == 'FR' && $COD == 'BEL'){
+            $COU = 'BE';
+            $COD= '';
+        }
+        else if($COU == 'FR' && $COD == 'B'){
+            $COU = 'BE';
+            $COD= '';
+        }
+        else if($COU == 'FR' && $COD == 'SCHW'){
+            $COU = 'CH';
+            $COD= '';
+        }
+        else if($COU == 'FR' && $COD == 'G'){
+            $COU = 'DE';
+            $COD= '';
+        }
+        else if($COU == 'FR' && $COD == 'ESP'){
+            $COU = 'ES';
+            $COD= '';
+        }
+        else if($COU == 'FR' && $COD == 'I'){
+            $COU = 'IT';
+            $COD= '';
+        }
+        else if($COU == 'FR' && $COD == 'N'){
+            $COU = 'NL';
+            $COD= '';
+        }
+        return [$COU, $COD];
+    }
     
     // ******************************************************
     /**

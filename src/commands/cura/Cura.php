@@ -16,7 +16,7 @@ class Cura implements SourceI {
     
     /**
         Path to the yaml file containing the characteristics of the source.
-        Relative to directory specified in config.yml by dirs / edited
+        Relative to directory specified in config.yml by dirs / db
     **/
     const SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'cura.yml';
     
@@ -30,23 +30,23 @@ class Cura implements SourceI {
     const HTML_SEP = "\t";
     
     /** 
-        For documentation purpose only
         For each line :
             - nb of records claimed by Cura
+            - nb of records stored by g5
             - label on Cura web site
             - explanation of the difference between Cura and g5 numbers
     **/
     const CURA_CLAIMS = [
-        'A1' =>  [2088, '2088 sports champions', 'Y, see <a href="http://cura.free.fr/gauq/902gdA1y.html">Cura web site</a>'],
-        'A2' =>  [3644, '3644 scientists and medical doctors', 'Y, see <a href="http://cura.free.fr/gauq/902gdA2y.html">Cura web site</a>'],
-        'A3' =>  [3047, '3047 military men', 'N'],
-        'A4' =>  [2722, '1473 painters and 1249 French musicians', 'N'],
-        'A5' =>  [2412, '1409 actors and 1003 politicians', 'N'],
-        'A6' =>  [2027, '2027 writers and journalists', 'N'],
-        'D6' =>  [450,  '450 New famous European Sports Champions', 'N'],
-        'D10' => [1398, '1398 data of successful Americans', 'N'],
-        'E1' =>  [2154, '2154 French Physicians, Military Men and Executives', 'N'],
-        'E3' =>  [1540, '1540 New French Writers, Artists, Actors, Politicians and Journalists', 'N'],
+        'A1' =>  [2088, 2087, '2088 sports champions', 'Y, see <a href="http://cura.free.fr/gauq/902gdA1y.html">Cura web site</a>'],
+        'A2' =>  [3644, 3643, '3644 scientists and medical doctors', 'Y, see <a href="http://cura.free.fr/gauq/902gdA2y.html">Cura web site</a>'],
+        'A3' =>  [3047, 3046, '3047 military men', 'N'],
+        'A4' =>  [2722, 2720, '1473 painters and 1249 French musicians', 'N'],
+        'A5' =>  [2412, 2410, '1409 actors and 1003 politicians', 'N'],
+        'A6' =>  [2027, 2026, '2027 writers and journalists', 'N'],
+        'D6' =>  [450,  449, '450 New famous European Sports Champions', 'N'],
+        'D10' => [1398, 1396, '1398 data of successful Americans', 'N'],
+        'E1' =>  [2154, 2153, '2154 French Physicians, Military Men and Executives', 'N'],
+        'E3' =>  [1540, 1539, '1540 New French Writers, Artists, Actors, Politicians and Journalists', 'N'],
     ];
     
     /** 

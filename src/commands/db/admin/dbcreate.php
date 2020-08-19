@@ -27,7 +27,7 @@ class dbcreate implements Command {
             'person',
             'groop',
             'source',
-            'person_group',
+            'person_groop',
         ];
         $dblink = DB5::getDblink();
         foreach($tables as $table){

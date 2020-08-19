@@ -16,7 +16,7 @@ class Newalch implements SourceI {
     
     /**
         Path to the yaml file containing the characteristics of the source.
-        Relative to directory specified in config.yml by dirs / edited
+        Relative to directory specified in config.yml by dirs / db
     **/
     const SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch.yml';
     

@@ -25,7 +25,7 @@ name:
   official: # As written in the birth certificate
     family:
     given:
-  nobility:
+  nobility: # de d' di del
   fame: # stage, scene
   nicknames: []
   alternative: []
@@ -35,8 +35,9 @@ occus: []
 
 birth:
   date:     # exact date (day and hour) of the birth certificate
-  tz:       # timezone offset
+  tzo:      # timezone offset
   date-ut:  # for dates like cura A
+  note:     # eg LMT
   place:
     name:
     c2:
