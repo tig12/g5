@@ -45,7 +45,7 @@ class fixGnr implements Command {
                 . "Possible values for parameter :\n$possibleParams_str\n";
         }
         
-        $report = '';
+        $report = "--- muller1083 fixGnr ---\n";
         
         // assoc arrays
         $a2s = @Cura::loadTmpFile_num('A2'); // keys = NUM
@@ -217,8 +217,7 @@ class fixGnr implements Command {
         }
         $destFile = Muller1083::tmpFilename();
         file_put_contents($destFile, $res);// HERE update 1083MED.csv
-        $report .= "Updated $destFile\n";
-        $report .= "$nCorr GNR were corrected\n";
+        $report .= "Corrected $nCorr GNR in $destFile\n";
         
         return $report;
     }

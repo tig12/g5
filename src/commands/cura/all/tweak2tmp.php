@@ -34,7 +34,7 @@ class tweak2tmp implements Command {
             return "WRONG USAGE : useless parameter : {$params[2]}\n";
         }
         $datafile = $params[0];
-        $tweaksFile = Config::$data['dirs']['edited'] . DS . 'cura-tweaked' . DS . $datafile . '.yml';
+        $tweaksFile = Config::$data['dirs']['build'] . DS . 'cura-tweaked' . DS . $datafile . '.yml';
         
         $report = "--- $datafile tweak2tmp ---\n";
         

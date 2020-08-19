@@ -27,7 +27,7 @@ class Ertel4391 implements SourceI {
         Returns a Source object for the raw file used for Ertel4391.
     **/
     public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['edited'] . DS . self::RAW_SOURCE_DEFINITION);
+        return Source::getSource(Config::$data['dirs']['db'] . DS . self::RAW_SOURCE_DEFINITION);
     }
 
     // *********************** Raw file manipulation ***********************

@@ -6,7 +6,8 @@
 # Absolute paths or paths relative to gauquelin5 root directory
 dirs:
   raw:    data/raw
-  edited: data/edited
+  build:  data/build
+  db:     data/db
   output: data/output
   tmp:    data/tmp
 

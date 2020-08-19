@@ -118,7 +118,7 @@ class Muller1083 {
         Returns a Source object for the raw file used for Muller1083.
     **/
     public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['edited'] . DS . self::RAW_SOURCE_DEFINITION);
+        return Source::getSource(Config::$data['dirs']['db'] . DS . self::RAW_SOURCE_DEFINITION);
     }
 
     // *********************** Raw file manipulation ***********************

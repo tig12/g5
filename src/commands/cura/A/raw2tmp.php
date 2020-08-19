@@ -15,18 +15,12 @@ namespace g5\commands\cura\A;
 
 use g5\G5;
 use g5\model\DB5;
-//use g5\model\Source;
-use g5\model\Person;
-use g5\model\Group;
-use g5\model\Source;
-use g5\Config;
 use g5\patterns\Command;
-use g5\model\Names;
-use g5\model\Names_fr;
 use g5\commands\cura\Cura;
 use g5\commands\cura\CuraNames;
 use tiglib\arrays\sortByKey;
-
+use g5\model\Names;
+use g5\model\Names_fr;
 
 class raw2tmp implements Command {
     
@@ -50,9 +44,9 @@ class raw2tmp implements Command {
     public static function execute($params=[]): string{
         
         if(count($params) > 3){
-            return "INVALID PARAMETER : " . $params[3] . " - raw2full doesn't need this parameter\n";
+            return "USELESS PARAMETER : " . $params[3] . "\n";
         }
-        $msg = "raw2full needs a parameter to specify which output it displays. Can be :\n"
+        $msg = "raw2tmp needs a parameter to specify which output it displays. Can be :\n"
              . "  small : echoes only global results\n"
              . "  full : prints the details of problematic rows\n";
         if(count($params) < 3){
@@ -293,7 +287,7 @@ class raw2tmp implements Command {
     
     // ******************************************************
     /**
-        Auxiliary of raw2full()
+        Auxiliary of raw2tmp()
         @return [$n_ok_fix, $n1_fix, $n2_fix]
     **/
     private static function corrections1955(&$res, &$missing_in_names, &$doublons_same_nb, $datafile, $file_datafile, $file_names){

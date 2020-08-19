@@ -80,7 +80,7 @@ class Cura implements SourceI {
     
     /** Returns a Source object for cura web site. **/
     public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['edited'] . DS . self::SOURCE_DEFINITION);           
+        return Source::getSource(Config::$data['dirs']['db'] . DS . self::SOURCE_DEFINITION);           
     }
     
     // *********************** Raw files manipulation ***********************
