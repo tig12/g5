@@ -10,7 +10,7 @@ namespace g5\commands\cura\D6;
 class D6{
     
     
-    /** Fields of data/tmp/cura/D6.csv **/
+    /** Fields of data/raw/cura/D6.csv **/
     const RAW_FIELDS = [
         'NUM',
         'DAY',

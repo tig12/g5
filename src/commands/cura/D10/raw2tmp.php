@@ -18,7 +18,7 @@ class raw2tmp implements Command {
     const COUNTRY = 'US';
     
     /**
-        Associations between profession codes and profession names
+        Associations between Cura profession codes and g5 profession codes
     **/
     const PROFESSIONS = [
         'SP' => 'SP',
@@ -47,93 +47,97 @@ class raw2tmp implements Command {
         
         $report =  "--- D10 raw2tmp ---\n";
         $raw = Cura::loadRawFile('D10');
-        $file_serie = Cura::rawFilename('D10');
-        preg_match('#<pre>\s*(NUM.*?CICO)\s*(.*?)\s*</pre>#sm', $raw, $m);
-        if(count($m) != 3){
-            throw new \Exception("Unable to parse list in " . $file_serie);
+        preg_match('#<pre>\s*(NUM.*?CICO)\s*(.*?)\s*</pre>#sm', $raw, $matches);
+        if(count($matches) != 3){
+            throw new \Exception("Unable to parse list in " . Cura::rawFilename('D10'));
         }
-        $nb_stored = 0;
-        $csv = '';
-        // fields in the resulting csv
-        $csv = implode(G5::CSV_SEP, D10::TMP_FIELDS) . "\n";
-        // Fix problems of whitespace + missing lg lat in cura html page
-        $m[2] = preg_replace(
+        // $matches[2] contains all interesting lines
+        // Fix problems of whitespace + missing lg lat (NUM 493) in cura html page
+        $matches[2] = preg_replace(
             "/112.*?Hardin County,\s+TN/",
             "112\tBlanton Leonard\tPO\t10\t4\t1930\t21:30\t6h\t35N11\t88W10\tHardin County, TN",     
-            $m[2]
+            $matches[2]
         );
-        $m[2] = preg_replace(
+        $matches[2] = preg_replace(
             "/192.*?Bourneville,\s+OH/",
             "192\tCaldwell Philip\tEX\t27\t1\t1920\t08:00\t5h\t39N16\t83W09\tBourneville, OH",
-            $m[2]
+            $matches[2]
         );
-        $m[2] = preg_replace(
+        $matches[2] = preg_replace(
             "/409.*?Sweatwater,\s+TX/",
             "409\tFaver Dudley\tMI\t17\t8\t1916\t15:00\t6h\t32N28\t100W24\tSweatwater, TX",
-            $m[2]                                                               
+            $matches[2]                                                               
         );
-        $m[2] = preg_replace(
+        $matches[2] = preg_replace( // here add lg lat
             "/493.*?Grosby,\s+MN/",
             "493\tGood Robert\tAC\t21\t5\t1922\t06:00\t6h\t46N27\t94W10\tGrosby, MN",
-            $m[2]
+            $matches[2]
         );
-        $m[2] = preg_replace(
+        $matches[2] = preg_replace(
             "/568.*?Rayville,\s+LA/",
             "568\tHayes Elvin\tSP\t11\t11\t1945\t22:00\t6h\t32N28\t91W45\tRayville, LA",
-            $m[2]
+            $matches[2]
         );
-        $m[2] = preg_replace(
+        $matches[2] = preg_replace(
             "/658.*?Union,\s+SC/",
             "658\tJeter Robert\tSP\t9\t5\t1937\t08:00\t5h\t34N43\t81W37\tUnion, SC",
-            $m[2]
+            $matches[2]
         );
-        $m[2] = preg_replace(
+        $matches[2] = preg_replace(
             "/817.*?Gary,\s+IN/",
             "817!\tMalden Karl\tAC\t22\t3\t1912\t17:00\t6h\t41N35\t87W20\tGary, IN",
-            $m[2]
+            $matches[2]
         );
-        $m[2] = preg_replace(
+        $matches[2] = preg_replace(
             "/935.*?Appleton,\s+WI/",
             "935\tMurphy William\tEX\t17\t6\t1907\t10:00\t6h\t44N15\t88W24\tAppleton, WI",
-            $m[2]
+            $matches[2]
         );
-        $m[2] = preg_replace(
+        $matches[2] = preg_replace(
             "/945.*?Packard,\s+KY/",
             "945\tNeal Patricia\tAC\t20\t1\t1926\t04:30\t6h\t36N40\t84W03\tPackard, KY",
-            $m[2]
+            $matches[2]
         );
-        $m[2] = preg_replace(
+        $matches[2] = preg_replace(
             "/1033.*?Field,\s+CA/",
             "1033\tPitts William\tMI\t27\t11\t1919\t06:00\t8h\t33N54\t117W15\tMarch Field, CA",
-            $m[2]
+            $matches[2]
         );
-        $m[2] = preg_replace(
+        $matches[2] = preg_replace(
             "/1058.*?Somerset,\s+KY/",
             "1058\tRamsey Lloyd\tMI\t29\t5\t1918\t07:00\t5h\t37N05\t84W36\tSomerset, KY",
-            $m[2]
+            $matches[2]
         );
-        $m[2] = preg_replace(
+        $matches[2] = preg_replace(
             "/1066.*?Glasgow,\s+MT/",
             "1066!\tReeves Steve\tAC\t21\t1\t1926\t08:00\t7h\t48N11\t106W38\tGlasgow, MT",
-            $m[2]
+            $matches[2]
         );
-        $m[2] = preg_replace(
+        $matches[2] = preg_replace(
             "/1158.*?Harding,\s+KS/",
             "1158\tShaffer Raymond\tEX\t6\t4\t1912\t22:30\t6h\t37N59\t94W49\tHarding, KS",
-            $m[2]
+            $matches[2]
         );
-        $m[2] = preg_replace(
+        $matches[2] = preg_replace(
             "/1218.*?Chase,\s+WI/",
             "1218\tStaiger John\tEX\t20\t3\t1910\t19:00\t6h\t44N43\t88W09\tChase, WI",
-            $m[2]
+            $matches[2]
         );
-        $m[2] = preg_replace(
+        $matches[2] = preg_replace(
             "/1250.*?Cohasset,\s+MA/",
             "1250\tSweeney Walter\tSP\t18\t4\t1941\t09:20\t5h\t42N14\t70W48\tCohasset, MA",
-            $m[2]
+            $matches[2]
         );
+        
+        // fields in the resulting csv
+        $csv = implode(G5::CSV_SEP, D10::TMP_FIELDS) . "\n";
         $emptyNew = array_fill_keys(D10::TMP_FIELDS, '');
-        $lines = explode("\n", $m[2]);
+        
+        $csvRaw = implode(G5::CSV_SEP, D10::RAW_FIELDS) . "\n";
+        $emptyNewRaw = array_fill_keys(D10::RAW_FIELDS, '');
+        
+        $nb_stored = 0;
+        $lines = explode("\n", $matches[2]);
         foreach($lines as $line){
             $cur = preg_split('/\t+/', $line);
             $new = $emptyNew;
@@ -149,12 +153,12 @@ class raw2tmp implements Command {
             else{
                 $hour = $cur[6];
             }
+            $new['DATE'] = "$day $hour";
             // timezone
             $tmp = explode('h', trim($cur[7]));
             $h =  str_pad($tmp[0] , 2, '0', STR_PAD_LEFT);
             $m =  str_pad ($tmp[1] , 2, '0');
-            $timezone = '-' . $h . ':' . $m;
-            $new['DATE'] = "$day $hour$timezone";
+            $new['TZO'] = '-' . $h . ':' . $m;
             // place
             $tmp = explode(',', $cur[10]);
             $new['PLACE'] = trim($tmp[0]);
@@ -165,11 +169,37 @@ class raw2tmp implements Command {
             // @todo link to geonames
             $new['OCCU'] = self::compute_profession($cur[2]);
             $csv .= implode(G5::CSV_SEP, $new) . "\n";
+            // $raw, to keep an exact trace of original values
+            $newRaw = $emptyNewRaw;
+            $newRaw['NUM'] = $cur[0];
+            $newRaw['NAME'] = $cur[1];
+            $newRaw['PRO'] = $cur[2];
+            $newRaw['DAY'] = $cur[3];
+            $newRaw['MON'] = $cur[4];
+            $newRaw['YEA'] = $cur[5];
+            $newRaw['H'] = $cur[6];
+            $newRaw['TZ'] = $cur[7];
+            if($new['NUM'] != '493'){
+                $newRaw['LAT'] = $cur[8];
+                $newRaw['LON'] = $cur[9];
+            }
+            else{
+                $newRaw['LAT'] = '';
+                $newRaw['LON'] = '';
+            }
+            $newRaw['CICO'] = $cur[10];
+            $csvRaw .= implode(G5::CSV_SEP, $newRaw) . "\n";
+            //
             $nb_stored ++;
         }
         $csvfile = Cura::tmpFilename('D10');
         file_put_contents($csvfile, $csv);
         $report .= $nb_stored . " lines stored in $csvfile\n";
+        
+        $csvfile = Cura::tmpRawFilename('D10');
+        file_put_contents($csvfile, $csvRaw);
+        $report .= $nb_stored . " lines stored in $csvfile\n";
+        
         return $report;
     }
     

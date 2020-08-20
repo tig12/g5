@@ -9,12 +9,30 @@ namespace g5\commands\cura\D10;
 
 class D10{
     
+
+
+    /** Fields of data/raw/cura/D10.csv **/
+    const RAW_FIELDS = [
+        'NUM',
+        'NAME',
+        'PRO',
+        'DAY',
+        'MON',
+        'YEA',
+        'H',
+        'TZ',
+        'LAT',
+        'LON',
+        'CICO',
+    ];
+
     /** Fields of data/tmp/cura/D10.csv **/
     const TMP_FIELDS = [
         'NUM',
         'FNAME',
         'GNAME',
         'DATE',
+        'TZO',
         'PLACE',
         'CY',
         'C2',
