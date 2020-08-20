@@ -38,7 +38,7 @@ class raw2tmp implements Command {
         foreach($raw as $line){
             $fields = explode(Muller402::RAW_SEP, $line);
             $new = $emptyNew;
-            $new['OCCU'] = 'WRI'; /////// HERE put wikidata occupation id ///////////
+            $new['OCCU'] = 'WR'; /////// HERE put wikidata occupation id ///////////
             preg_match($pname, $fields[0], $m);
             $sex = $m[2];
             if($sex != 'M' && $sex != 'F'){

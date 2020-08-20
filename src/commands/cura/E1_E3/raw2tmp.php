@@ -30,32 +30,6 @@ class raw2tmp implements Command {
     private static $n_missing_places = 0;
     private static $n_missing_timezone = 0;
     private static $n_total = 0;
-    /**
-        Associations between profession codes and profession names for the files of E1 and E3
-    **/
-    const PROFESSIONS = [
-        'E1' => [
-            'PH' => 'PH',
-            'MI' => 'MI',
-            'EX' => 'EX',
-            'PH,EX' => 'PH+EX',
-            'MI,PH' => 'MI+PH',
-            'MI,EX' => 'MI+EX',
-        ],
-        'E3' => [
-            'PO' => 'PO',
-            'JO' => 'JO',
-            'WR' => 'WR',
-            'AC' => 'AC',   // [including Pop Singers]
-            'PAI' => 'PAI', // [including 1 sculptor]
-            'MUS' => 'MUS',
-            'OPE' => 'OPE',
-            'CAR' => 'CAR',
-            'DAN' => 'DAN',
-            'PHO' => 'PHO',
-        ],
-    ];
-    
 
     // ******************************************************
     /** 
@@ -110,13 +84,18 @@ class raw2tmp implements Command {
         // to fix typos : in the html, O are replaced by zero ; A by 3 ; S by 5, G by 6 ; B by 8
         $fix_names = ['0'=>'O', '3'=>'A', '5'=>'S', '6'=>'G', '8'=>'B'];
         
+        // to keep trace of original values
+        $emptyNewRaw = array_fill_keys(E1_E3::RAW_FIELDS, '');
+        $res1Raw = []; // needed to sort $csvRaw by NUM
+        
         $emptyNew = array_fill_keys(E1_E3::TMP_FIELDS, '');
         $lines = explode("\n", $m[2]);
         foreach($lines as $line){
             self::$n_total++;
             $new = $emptyNew;
             $new['NUM'] = trim(substr($line, 0, 5));
-            $new['OCCU'] = self::PROFESSIONS[$datafile][trim(substr($line, 8, 5))];
+            $pro = trim(substr($line, 8, 5));
+            $new['OCCU'] = E1_E3::PROFESSIONS[$datafile][$pro];
             $new['NOTE'] = trim(substr($line, 14, 2)); // L * + -
             $name = trim(substr($line, 17, 30));
             [$new['FNAME'], $new['GNAME']] = Names::familyGiven(strtr($name, $fix_names));
@@ -126,6 +105,7 @@ class raw2tmp implements Command {
             $d = trim(substr($line, 49, 4));
             $h = trim(substr($line, 69, 9));
             $date = "$y-$m-$d $h";
+            $new['DATE'] = $date;
             $CITY = trim(substr($line, 78, 25));
             $COD = trim(substr($line, 104));
             // match place to geonames
@@ -134,6 +114,7 @@ class raw2tmp implements Command {
                 $report .= 'Geonames not matched for ' . $new['NUM'] . ' ' . $new['FNAME'] . ' ' . $new['GNAME'] . ' : ' . $CITY . ' ' . $COD . "\n";
             }
             // compute timezone
+            $new['TZO'] = '';
             if($lg != ''){
                 [$offset, $err] = offset_fr::compute($date, $lg, $COD);
                 if($err){
@@ -143,14 +124,13 @@ class raw2tmp implements Command {
                     }
                 }
                 else{
-                    $date .= $offset;
+                    $new['TZO'] = $offset;
                 }
             }
             else{
                 self::$n_missing_timezone++;
             }
             // fill res
-            $new['DATE'] = $date;
             $new['PLACE'] = $place_name;
             $new['LG'] = $lg;
             $new['LAT'] = $lat;
@@ -159,6 +139,19 @@ class raw2tmp implements Command {
             $new['CY'] = $country;
             $new['GEOID'] = $geoid;
             $res1[$new['NUM']] = $new;
+            // fill raw, to keep trace of original values
+            $newRaw = $emptyNewRaw;
+            $newRaw['NUM'] = $new['NUM'];
+            $newRaw['PRO'] = $pro;
+            $newRaw['NAME'] = $name;
+            $newRaw['NOTE'] = $new['NOTE'];
+            $newRaw['DAY'] = $d;
+            $newRaw['MON'] = $m;
+            $newRaw['YEA'] = $y;
+            $newRaw['H'] = $h;
+            $newRaw['CITY'] = $CITY;
+            $newRaw['COD'] = $COD;
+            $res1Raw[$new['NUM']] = $newRaw;
         }
         $report .= self::$n_total  . " lines parsed\n";
         $report .= self::$n_missing_places . " places not matched\n";
@@ -226,9 +219,22 @@ class raw2tmp implements Command {
             $fields['NUM'] = ltrim($fields['NUM'], 0);
             $csv .= implode(G5::CSV_SEP, $fields) . "\n";
         }
+        
         $outfile = Cura::tmpFilename($datafile);
         file_put_contents($outfile, $csv);
         $report .= "Stored " . self::$n_total . " lines in $outfile\n";
+        
+        // file used to keep trace of original data
+        $res1Raw = sortByKey::compute($res1Raw, 'NUM');
+        $csvRaw = implode(G5::CSV_SEP, E1_E3::RAW_FIELDS) . "\n";
+        foreach($res1Raw as $fields){
+            $csvRaw .= implode(G5::CSV_SEP, $fields) . "\n";
+        }
+        
+        $outfile = Cura::tmpRawFilename($datafile);
+        file_put_contents($outfile, $csvRaw);
+        $report .= "Stored " . self::$n_total . " lines in $outfile\n";
+        
         return $report;
     }
     

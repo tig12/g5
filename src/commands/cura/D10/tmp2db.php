@@ -56,7 +56,7 @@ class tmp2db implements Command {
             $g = new Group();
             $g->data['slug'] = 'D10';
             $g->data['sources'][] = $source->data['slug'];
-            $g->data['name'] = "Cura 'D10'";
+            $g->data['name'] = "Cura D10";
             $g->data['description'] = "According to Cura : " . Cura::CURA_CLAIMS['D10'][2] . ".\n"
                 . "In practice, contains " . Cura::CURA_CLAIMS['D10'][1] . " persons.";
             $g->data['id'] = $g->insert();
@@ -78,8 +78,6 @@ class tmp2db implements Command {
             // Here build an empty person because cura data are the first to be imported
             $p = new Person();
             $p->addSource($source->data['slug']);
-            $p->addRaw('D10', $line);
-            //$p->addIdInSource($curaSource->data['slug'], Cura::gqId('D10', $line['NUM']));
             $p->addIdInSource($source->data['slug'], $line['NUM']);
             // here, do not modify directly $p->data to permit a call to addHistory()
             // containing only new data

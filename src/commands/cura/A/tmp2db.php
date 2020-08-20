@@ -79,8 +79,6 @@ class tmp2db implements Command {
             // Here build an empty person because cura data are the first to be imported
             $p = new Person();
             $p->addSource($source->data['slug']);
-            $p->addRaw($datafile, $line);
-            //$p->addIdInSource($curaSource->data['slug'], Cura::gqId($datafile, $line['NUM']));
             $p->addIdInSource($source->data['slug'], $line['NUM']);
             // here, do not modify directly $p->data to permit a call to addHistory()
             // containing only new data
