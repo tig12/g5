@@ -195,6 +195,7 @@ class Person {
     }
     
     /**
+        Computes the birth day from date or date-ut
         @return YYYY-MM-DD or ''
     **/
     private function birthday(): string {

@@ -117,12 +117,12 @@ class history implements Command {
             echo "***  Fill database  ***\n";
             echo "***********************\n";
             foreach($filesCuraA as $datafile){
-                echo tmp2dbA::execute([$datafile, 'tmp2db']);
+                echo tmp2dbA::execute([$datafile, 'tmp2db', 'small']);
             }
-            echo tmp2dbD6::execute(['D6', 'tmp2db']);
-            echo tmp2dbD10::execute(['D10', 'tmp2db']);
-            echo tmp2dbE1E3::execute(['E1', 'tmp2db']);
-            echo tmp2dbE1E3::execute(['E3', 'tmp2db']);
+            echo tmp2dbD6::execute(['D6', 'tmp2db', 'small']);
+            echo tmp2dbD10::execute(['D10', 'tmp2db', 'small']);
+            echo tmp2dbE1E3::execute(['E1', 'tmp2db', 'small']);
+            echo tmp2dbE1E3::execute(['E3', 'tmp2db', 'small']);
             //echo tmp2dbMuller1083::execute([]);
         }
         

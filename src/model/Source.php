@@ -39,13 +39,13 @@ class Source {
     // *********************** Get *******************************
     
     /** Creates an object of type Source from storage, using its id. **/
-    public static function get($id): Source {
+    public static function get($id): ?Source {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("select * from source where id=?");
         $stmt->execute([$id]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         if($res === false || count($res) == 0){
-            return new Source();
+            return null;
         }
         $res['source'] = json_decode($res['source'], true);
         $s = new Source();
@@ -54,13 +54,13 @@ class Source {
     }
     
     /** Creates an object of type Source from storage, using its slug. **/
-    public static function getBySlug($slug): Source {
+    public static function getBySlug($slug): ?Source {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("select * from source where slug=?");
         $stmt->execute([$slug]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         if($res === false || count($res) == 0){
-            return new Source();
+            return null;
         }
         $res['source'] = json_decode($res['source'], true);
         $s = new Source();
@@ -105,8 +105,5 @@ class Source {
     
     // *********************** Fields *******************************
     
-    public function isEmpty(): bool {
-        return $this->data['id'] == '';
-    }
     
 } // end class

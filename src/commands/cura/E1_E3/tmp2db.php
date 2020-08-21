@@ -42,7 +42,7 @@ class tmp2db implements Command {
         
         // source corresponding to E1 / E3 file
         $source = Source::getBySlug($datafile);
-        if($source->isEmpty()){
+        if(is_null($source)){
             $source = new Source();
             $source->data['slug'] = $datafile;
             $source->data['name'] = "CURA file $datafile";
@@ -53,7 +53,7 @@ class tmp2db implements Command {
         
         // group
         $g = Group::getBySlug($datafile);
-        if($g->isEmpty()){
+        if(is_null($g)){
             $g = new Group();
             $g->data['slug'] = $datafile;
             $g->data['sources'][] = $source->data['slug'];

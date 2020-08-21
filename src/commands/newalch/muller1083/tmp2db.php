@@ -39,7 +39,7 @@ class tmp2db implements Command {
         
         // group
         $g = Group::getBySlug(Muller1083::GROUP_SLUG);
-        if($g->isEmpty()){
+        if(is_null($g)){
             $g = new Group();
             $g->data['slug'] = Muller1083::GROUP_SLUG;
             $g->data['sources'][] = $source->data['slug'];

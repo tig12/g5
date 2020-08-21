@@ -23,13 +23,13 @@ class Group{
     // *********************** Get *******************************
     
     /** Creates an object of type Group from storage, using its id. **/
-    public static function get($id): Group{
+    public static function get($id): ?Group{
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("select * from groop where id=?");
         $stmt->execute([$id]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         if($res === false || count($res) == 0){
-            return new Group();
+            return null;
         }
         $res['sources'] = json_decode($res['sources'], true);
         $g = new Group();
@@ -38,13 +38,13 @@ class Group{
     }
     
     /** Creates an object of type Group from storage, using its slug. **/
-    public static function getBySlug($slug): Group{
+    public static function getBySlug($slug): ?Group{
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("select * from groop where slug=?");
         $stmt->execute([$slug]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         if($res === false || count($res) == 0){
-            return new Group();
+            return null;
         }
         $res['sources'] = json_decode($res['sources'], true);
         $g = new Group();
@@ -128,10 +128,6 @@ class Group{
     
     // *********************** Fields *******************************
     
-    public function isEmpty(): bool {
-        return $this->data['id'] == '';
-    }
-    
     public function addMember($entry){
         $this->data['members'][] = $entry;
     }
@@ -140,12 +136,10 @@ class Group{
         Loads a group from storage and fills members with objects of type Person
         @param $slug Group slug
     **/
-    public static function computeMembers($slug){
-        $g = Group::getBySlug($slug);
-        $gid = $g->data['id'];
+    public function computeMembers(){
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("select * from person where id in(select id_person from person_groop where id_group=?)");
-        $stmt->execute([$gid]);
+        $stmt->execute([$this->data['id']]);
         $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         $res = [];
         foreach($rows as $row){

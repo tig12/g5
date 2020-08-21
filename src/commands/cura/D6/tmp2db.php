@@ -27,8 +27,9 @@ class tmp2db implements Command {
         if(count($params) > 2){
             return "USELESS PARAMETER : " . $params[2] . "\n";
         }
+        $datafile = 'D6';
         
-        $report = "--- D6 tmp2db ---\n";
+        $report = "--- $datafile tmp2db ---\n";
         
         // source corresponding to CURA - insert if does not already exist
         $curaSource = Cura::getSource();
@@ -40,25 +41,25 @@ class tmp2db implements Command {
         }
         
         // source corresponding to D6 file
-        $source = Source::getBySlug('D6');
-        if($source->isEmpty()){
+        $source = Source::getBySlug($datafile);
+        if(is_null($source)){
             $source = new Source();
-            $source->data['slug'] = 'D6';
-            $source->data['name'] = "CURA file D6";
-            $source->data['description'] = Cura::CURA_URLS['D6'] . "\nDescribed by Cura as " . Cura::CURA_CLAIMS['D6'][2];
+            $source->data['slug'] = $datafile;
+            $source->data['name'] = "CURA file $datafile";
+            $source->data['description'] = Cura::CURA_URLS[$datafile] . "\nDescribed by Cura as " . Cura::CURA_CLAIMS[$datafile][2];
             $source->data['source']['parents'][] = $curaSource->data['slug'];
             $source->data['id'] = $source->insert();
         }
         
         // group
-        $g = Group::getBySlug('D6');
-        if($g->isEmpty()){
+        $g = Group::getBySlug($datafile);
+        if(is_null($g)){
             $g = new Group();
-            $g->data['slug'] = 'D6';
+            $g->data['slug'] = $datafile;
             $g->data['sources'][] = $source->data['slug'];
-            $g->data['name'] = "Cura 'D6'";
-            $g->data['description'] = "According to Cura : " . Cura::CURA_CLAIMS['D6'][2] . ".\n"
-                . "In practice, contains " . Cura::CURA_CLAIMS['D6'][1] . " persons.";
+            $g->data['name'] = "Cura $datafile";
+            $g->data['description'] = "According to Cura : " . Cura::CURA_CLAIMS[$datafile][2] . ".\n"
+                . "In practice, contains " . Cura::CURA_CLAIMS[$datafile][1] . " persons.";
             $g->data['id'] = $g->insert();
         }
         else{
@@ -67,8 +68,8 @@ class tmp2db implements Command {
         
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
-        $lines = Cura::loadTmpFile('D6');
-        $linesRaw = Cura::loadTmpRawFile('D6');
+        $lines = Cura::loadTmpFile($datafile);
+        $linesRaw = Cura::loadTmpRawFile($datafile);
         $nStored = 0;
         $N = count($lines);
         for($i=0; $i < $N; $i++){
@@ -77,7 +78,7 @@ class tmp2db implements Command {
             // Here build an empty person because cura data are the first to be imported
             $p = new Person();
             $p->addSource($source->data['slug']);
-            $p->addIdInSource($curaSource->data['slug'], Cura::gqId('D6', $line['NUM']));
+            $p->addIdInSource($curaSource->data['slug'], Cura::gqId($datafile, $line['NUM']));
             $p->addIdInSource($source->data['slug'], $line['NUM']);
             $new = [];
             $new['trust'] = Cura::TRUST_LEVEL;
@@ -91,7 +92,7 @@ class tmp2db implements Command {
             $new['birth']['place']['lat'] = $line['LAT'];
             $p->updateFields($new);
             $p->computeSlug();
-            $p->addHistory("cura D6 tmp2db", $source->data['slug'], $new);
+            $p->addHistory("cura $datafile tmp2db", $source->data['slug'], $new);
             $p->addRaw($source->data['slug'], $lineRaw);
             try{
                 $p->data['id'] = $p->insert();

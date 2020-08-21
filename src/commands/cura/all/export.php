@@ -45,6 +45,7 @@ class export implements Command {
         $datafile = $params[0];
         
         $g = Group::getBySlug($datafile);
+        $g-> computeMembers();
 
         $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . $datafile . '.csv';
         
@@ -96,7 +97,6 @@ class export implements Command {
             }
             return ($a->data['ids_in_sources'][$datafile] < $b->data['ids_in_sources'][$datafile]) ? -1 : 1;
         };
-        
         
         return $g->exportCsv($outfile, $csvFields, $map, $fmap, $sort);
     }

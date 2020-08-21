@@ -46,7 +46,7 @@ class raw2tmp implements Command {
         if(count($params) > 3){
             return "USELESS PARAMETER : " . $params[3] . "\n";
         }
-        $msg = "raw2tmp needs a parameter to specify which output it displays. Can be :\n"
+        $msg = "This command needs a parameter to specify which output it displays. Can be :\n"
              . "  small : echoes only global results\n"
              . "  full : prints the details of problematic rows\n";
         if(count($params) < 3){
