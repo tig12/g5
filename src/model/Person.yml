@@ -61,7 +61,7 @@ death:
     lg:
     lat:
 
-notes: | # free notes
+notes: [] # array of free notes
 
 raw: []
 

@@ -224,7 +224,6 @@ DEPT_STR;
             // name
             $NAME = trim(mb_substr($line, 34, 51));
             [$new['FNAME'], $new['GNAME']] = self::compute_names($NAME);
-            $new['GNAME'] = self::fixGname($new['GNAME']);
             // date
             $GEBDATUM = trim(mb_substr($line, 85, 10));
             $DATE = explode('.', $GEBDATUM);
@@ -340,32 +339,21 @@ DEPT_STR;
     private static function compute_names($str){
         $giv = $fam = '';
         $pos = mb_strpos($str, '(');
-        $fam = ucWords(mb_strtolower(trim(mb_substr($str, 0, $pos-1))));
-        $giv = ucWords(mb_strtolower(mb_substr($str, $pos + 1)));
-        // uppercase letters following '-'
-        $giv = str_replace('Jean-baptiste', 'Jean-Baptiste', $giv);
-        $giv = str_replace('Jean-louis', 'Jean-Louis', $giv);
-        $giv = str_replace('Jean-albert', 'Jean-Albert', $giv);
-        $giv = str_replace('André-romain', 'André-Romain', $giv);
+        // $delimiter param in ucwords adds '-' to default chars
+        $fam = ucWords(mb_strtolower(trim(mb_substr($str, 0, $pos-1))), " \t\r\n\f\v-");
+        $giv = ucWords(mb_strtolower(mb_substr($str, $pos + 1)), " \t\r\n\f\v-");
         // fix specific typos
         $giv = str_replace('Emi1e', 'Emile', $giv);
         $giv = str_replace('(elie', 'Elie', $giv);
         $giv = str_replace([')', '.'], '', $giv);
-        return [$fam, $giv];
-    }
-    
-    // ******************************************************
-    /**
-        Restore missing accents in field GNAME
-        @return $gname with accent
-    **/
-    private static function fixGname($gname){
-        $parts = explode(' ', $gname);
+        // correct accents
+        $parts = explode(' ', $giv);
         $fixed = [];
         foreach($parts as $part){                                         
             $fixed[] = Names_fr::accentGiven($part);
         }
-        return implode(' ', $fixed);
+        $giv = implode(' ', $fixed);
+        return [$fam, $giv];
     }
     
     // ******************************************************

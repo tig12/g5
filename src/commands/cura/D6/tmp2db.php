@@ -62,8 +62,7 @@ class tmp2db implements Command {
             $g->data['id'] = $g->insert();
         }
         else{
-            // because Cura is imported before any other data
-            $g->deleteMembers();
+            $g->deleteMembers(); // only deletes asssociations between group and members
         }
         
         // both arrays share the same order of elements,
@@ -78,9 +77,8 @@ class tmp2db implements Command {
             // Here build an empty person because cura data are the first to be imported
             $p = new Person();
             $p->addSource($source->data['slug']);
+            $p->addIdInSource($curaSource->data['slug'], Cura::gqId('D6', $line['NUM']));
             $p->addIdInSource($source->data['slug'], $line['NUM']);
-            // here, do not modify directly $p->data to permit a call to addHistory()
-            // containing only new data
             $new = [];
             $new['trust'] = Cura::TRUST_LEVEL;
             $new['name']['family'] = $line['FNAME'];
@@ -88,32 +86,25 @@ class tmp2db implements Command {
             $new['occus'] = ['SP']; // sportsman - TODO change with geoid code
             $new['birth'] = [];
             $new['birth']['date'] = $line['DATE'];
-            // the following line could be uncommented
-            // if a way is found to fill tmp file with these infos
-            // attempt with addGeo failed so far
-            //$new['birth']['place']['name'] = $line['PLACE'];
-            //$new['birth']['place']['c2'] = $line['C2'];
-            //$new['birth']['place']['c3'] = $line['C3'];
             $new['birth']['place']['cy'] = $line['CY'];
             $new['birth']['place']['lg'] = $line['LG'];
             $new['birth']['place']['lat'] = $line['LAT'];
             $p->updateFields($new);
             $p->computeSlug();
-            // log command effect on data in the person yaml
             $p->addHistory("cura D6 tmp2db", $source->data['slug'], $new);
             $p->addRaw($source->data['slug'], $lineRaw);
             try{
-                $p->data['id'] = $p->insert(); // HERE storage
+                $p->data['id'] = $p->insert();
             }
             catch(\Exception $e){
-                $p->update();
                 $p->data['id'] = $p->getIdFromSlug($p->data['slug']);
+                $p->update();
             }
             $nStored ++;
             $g->addMember($p->data['id']);
         }
         try{
-            $g->data['id'] = $g->insert(); // HERE storage
+            $g->data['id'] = $g->insert();
         }
         catch(\Exception $e){
             // group already exists

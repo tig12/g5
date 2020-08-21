@@ -17,3 +17,5 @@ create table person (
     history         jsonb not null
 );
 create index person_slug_idx on person(slug);
+
+create index person_cura_gin_idx on person using gin ((ids_in_sources -> 'cura') jsonb_path_ops);

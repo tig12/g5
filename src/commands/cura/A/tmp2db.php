@@ -63,8 +63,7 @@ class tmp2db implements Command {
             $g->data['id'] = $g->insert();
         }
         else{
-            // because Cura is imported before any other data
-            $g->deleteMembers();
+            $g->deleteMembers(); // only deletes asssociations between group and members
         }
         
         // both arrays share the same order of elements,
@@ -73,15 +72,15 @@ class tmp2db implements Command {
         $linesRaw = Cura::loadTmpRawFile($datafile);
         $nStored = 0;
         $N = count($lines);
+        $t1 = microtime(true);
         for($i=0; $i < $N; $i++){
             $line = $lines[$i];
             $lineRaw = $linesRaw[$i];
             // Here build an empty person because cura data are the first to be imported
             $p = new Person();
             $p->addSource($source->data['slug']);
+            $p->addIdInSource($curaSource->data['slug'], Cura::gqId($datafile, $line['NUM']));
             $p->addIdInSource($source->data['slug'], $line['NUM']);
-            // here, do not modify directly $p->data to permit a call to addHistory()
-            // containing only new data
             $new = [];
             $new['trust'] = Cura::TRUST_LEVEL;
             $new['name']['family'] = $line['FNAME'];
@@ -97,27 +96,30 @@ class tmp2db implements Command {
             $new['birth']['place']['lat'] = $line['LAT'];
             $p->updateFields($new);
             $p->computeSlug();
-            // log command effect on data in the person yaml
             $p->addHistory("cura $datafile tmp2db", $source->data['slug'], $new);
             $p->addRaw($source->data['slug'], $lineRaw);
+            // Storage
             try{
-                $p->data['id'] = $p->insert(); // HERE storage
+                $p->data['id'] = $p->insert();
             }
             catch(\Exception $e){
-                $p->update();
+                // person already exists
                 $p->data['id'] = $p->getIdFromSlug($p->data['slug']);
+                $p->update();
             }
             $nStored ++;
             $g->addMember($p->data['id']);
         }
+        $t2 = microtime(true);
         try{
-            $g->data['id'] = $g->insert(); // HERE storage
+            $g->data['id'] = $g->insert();
         }
         catch(\Exception $e){
             // group already exists
             $g->insertMembers();
         }
-        $report .= "Stored $nStored persons in database\n";
+        $dt = $t2 - $t1;
+        $report .= "Stored $nStored persons in database ($dt s)\n";
         return $report;
     }
         

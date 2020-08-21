@@ -17,32 +17,6 @@ class Person {
         $this->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Person.yml'));
     }
     
-    // *********************** Get *******************************
-    
-    /** Creates an object of type Person from storage, using its id. **/
-    public static function get($id): Person{
-        $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("select * from person where id=?");
-        $stmt->execute([$id]);
-        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
-        if($res === false || count($res) == 0){
-            return new Person();
-        }
-        return row2person($res);
-    }
-    
-    /** Creates an object of type Person from storage, using its slug. **/
-    public static function getBySlug($slug): Person{
-        $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("select * from person where slug=?");
-        $stmt->execute([$slug]);
-        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
-        if($res === false || count($res) == 0){
-            return new Person();
-        }
-        return row2person($res);
-    }
-    
     /**
         Converts a row of table person to an object of type Person
         @param $row Assoc array, row of table person
@@ -50,7 +24,7 @@ class Person {
     public static function row2person($row){
         $row['sources'] = json_decode($row['sources'], true);
         $row['ids_in_sources'] = json_decode($row['ids_in_sources'], true);
-        $row['name'] = json_decode($row['name'], true);
+        $row['name'] = json_decode($row['name'], true);                             
         $row['occus'] = json_decode($row['occus'], true);
         $row['birth'] = json_decode($row['birth'], true);
         $row['death'] = json_decode($row['death'], true);
@@ -59,6 +33,52 @@ class Person {
         $p = new Person();
         $p->data = $row;
         return $p;
+    }
+    
+    // *********************** Get *******************************
+    
+    /** Creates an object of type Person from storage, using its id. **/
+    public static function get($id): ?Person{
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare("select * from person where id=?");
+        $stmt->execute([$id]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if($res === false || count($res) == 0){
+            return null;
+        }
+        return self::row2person($res);
+    }
+    
+    /** Creates an object of type Person from storage, using its slug. **/
+    public static function getBySlug($slug): ?Person{
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare("select * from person where slug=?");
+        $stmt->execute([$slug]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if($res === false || count($res) == 0){
+            return null;
+        }
+        return self::row2person($res);
+    }
+    
+    /** Creates an object of type Person from storage,
+        using its id for a given source.
+        Ex : to get a person whose id in source with slug A1 is 254, call
+        getBySourceId('A1', '254')
+        @param  $source     Slug of the source
+        @param  $idInSource Local id of the person within this source 
+    **/
+    public static function getBySourceId($source, $idInSource): ?Person {
+        $dblink = DB5::getDbLink();
+        //$stmt = $dblink->prepare("select * from person where ids_in_sources @> '{\"?\": \"?\"}'");
+        //$stmt->execute([$source, $idInSource]);
+        $stmt = $dblink->prepare("select * from person where ids_in_sources @> '{\"$source\": \"$idInSource\"}'");
+        $stmt->execute([]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if($res === false || count($res) == 0){
+            return null;
+        }
+        return self::row2person($res);
     }
     
     // *********************** CRUD *******************************
@@ -118,7 +138,8 @@ class Person {
             death=?,
             raw=?,
             history=?      
-            where id=?");
+            where id=?
+            ");
         $stmt->execute([
             $this->data['slug'],
             json_encode($this->data['sources']),
@@ -205,7 +226,7 @@ class Person {
     public function addOccu($occu){
         if(!in_array($occu, $this->data['occus'])){
             $this->data['occus'][] = $occu;
-        }                                                                     
+        }                              
     }
     
     public function addSource($source){
@@ -220,7 +241,11 @@ class Person {
             'command'   => $command,
             'source'    => $source,
             'values'    => $data,
-        ];                                       
+        ];
+    }
+    
+    public function addNote($note){
+        $this->data['notes'][] = $note;
     }
     
     public function addRaw($source, $data){

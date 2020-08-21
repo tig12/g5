@@ -8,18 +8,23 @@
 namespace g5\commands\newalch\muller1083;
 
 use g5\Config;
-use g5\commands\newalch\Newalch;
-
+use g5\model\SourceI;
+use g5\model\Source;
 use tiglib\arrays\csvAssociative;
 use tiglib\strings\encode2utf8;
+use g5\commands\newalch\Newalch;
+use g5\commands\cura\Cura;
 
-class Muller1083 {
+class Muller1083 implements SourceI {
     
     /**
         Path to the yaml file containing the characteristics of the source describing file 5a_muller_medics.txt.
         Relative to directory specified in config.yml by dirs / db
     **/
     const RAW_SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch' . DS . '5a_muller_medics.yml';
+    
+    /** Slug of the group in db **/
+    const GROUP_SLUG = 'muller1083med';
     
     /** Names of the columns of raw file 5a_muller_medics.txt **/
     const RAW_FIELDS = [
@@ -66,6 +71,7 @@ class Muller1083 {
         'SAMPLE',
         'GNR',
         'CODE',
+        'NOB', // nobility
         'FNAME',
         'GNAME',
         'DATE',
@@ -137,11 +143,6 @@ class Muller1083 {
         return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', '1083MED.csv']);
     }
     
-    /** Path to the temporary csv file keeping an exact copy of the raw file. **/
-    public static function tmpRawFilename(){
-        return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', '1083MED-raw.csv']);
-    }
-                         
     /**
         Loads the temporary file in a regular array
         Each element contains an associative array (keys = field names).
@@ -162,4 +163,30 @@ class Muller1083 {
         return $res;
     }
     
+    // *********************** Tmp raw files manipulation ***********************
+    
+    /**
+        Returns the name of the "tmp raw file", eg. data/tmp/newalch/1083MED-raw.csv
+        (file used to keep trace of the original raw values).
+    **/
+    public static function tmpRawFilename(){
+        return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', '1083MED-raw.csv']);
+    }
+    
+    /** Loads the "tmp raw file" in a regular array **/
+    public static function loadTmpRawFile(){
+        return csvAssociative::compute(self::tmpRawFilename());
+    }
+    
+    // ******************************************************
+    /**
+        @param  $gnr String like "SA22" or "ND129"
+    **/
+    public static function gnr2cura($GNR){
+        $curaPrefix = substr($GNR, 0, 3); // SA2 or ND1
+        $curaFilename = ($curaPrefix == 'SA2' ? 'A2' : 'E1');
+        $NUM = substr($GNR, 3);
+        return Cura::gqid($curaFilename, $NUM);
+    }
+
 }// end class

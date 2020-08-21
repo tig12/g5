@@ -153,8 +153,10 @@ class Cura implements SourceI {
         return $res;
     }
     
+    // *********************** Tmp raw files manipulation ***********************
+    
     /**
-        Returns the name of a "tmp raw file", eg. data/tmp/cura/A1.csv
+        Returns the name of a "tmp raw file", eg. data/tmp/cura/A1-raw.csv
         (files used to keep trace of the original raw values).
         @param  $datafile : a string like 'A1'
     **/

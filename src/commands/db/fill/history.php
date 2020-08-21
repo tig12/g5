@@ -34,6 +34,7 @@ use g5\commands\cura\A\tmp2db                   as tmp2dbA;
 use g5\commands\cura\D6\tmp2db                  as tmp2dbD6;
 use g5\commands\cura\D10\tmp2db                 as tmp2dbD10;
 use g5\commands\cura\E1_E3\tmp2db               as tmp2dbE1E3;
+use g5\commands\newalch\muller1083\tmp2db       as tmp2dbMuller1083;
 
 class history implements Command {
     
@@ -122,6 +123,7 @@ class history implements Command {
             echo tmp2dbD10::execute(['D10', 'tmp2db']);
             echo tmp2dbE1E3::execute(['E1', 'tmp2db']);
             echo tmp2dbE1E3::execute(['E3', 'tmp2db']);
+            //echo tmp2dbMuller1083::execute([]);
         }
         
         return '';
