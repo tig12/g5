@@ -29,6 +29,7 @@ class D6{
         'NUM',
         'FNAME',
         'GNAME',
+        'OCCU',
         'DATE',
         'PLACE',
         'CY',

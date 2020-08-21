@@ -28,7 +28,6 @@ class raw2tmp implements Command {
     // Implementation of Command
     /** 
         Parses one html cura file of serie A (locally stored in directory data/raw/cura.free.fr)
-        Stores each person of the file in a distinct yaml files, in 7-full/persons/
         
         Merges the original list (without names) with names contained in file 902gdN.html
         Merge is done using birthdate.

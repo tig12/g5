@@ -1,6 +1,8 @@
 <?php
 /********************************************************************************
     Loads files data/tmp/cura/A*.csv and A-raw.csv in database.
+    Must be exectued in alphabetical order (first A1, then A2 ... A6)
+    to respect the defition of Gauquelin id (see https://tig12.github.io/gauquelin5/cura.html)
     
     @license    GPL
     @history    2020-08-19 05:23:25+02:00, Thierry Graff : creation
@@ -25,7 +27,7 @@ class tmp2db implements Command {
     // Implementation of Command
     /**
         @param  $params Array containing 3 elements :
-                        - a string identifying what is processed (ex : 'A1')
+                        - a string identifying what is processed (ex : "A1")
                         - "tmp2db" (useless here)
                         - the type of report ; see REPORT_TYPE
     **/
@@ -47,6 +49,7 @@ class tmp2db implements Command {
         }
         
         $datafile = $params[0];
+        
         $report = "--- $datafile tmp2db ---\n";
         
         // source corresponding to CURA - insert if does not already exist
@@ -99,7 +102,6 @@ class tmp2db implements Command {
             $test = new Person();
             $test->data['name']['family'] = $line['FNAME'];
             $test->data['name']['given'] = $line['GNAME'];
-            $test->data['birth'] = [];
             $test->data['birth']['date-ut'] = $line['DATE-UT'];
             $test->computeSlug();
             $curaId = Cura::gqId($datafile, $line['NUM']);

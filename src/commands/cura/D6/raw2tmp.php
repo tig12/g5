@@ -106,6 +106,7 @@ class raw2tmp implements Command {
             $cur = preg_split('/\t+/', $line);
             $new = $emptyNew;
             $new['NUM'] = trim($cur[0]);
+            //
             [$new['FNAME'], $new['GNAME']] = Names::familyGiven(trim($cur[9]));
             if($new['GNAME'] == ''){
                 [$new['FNAME'], $new['GNAME']] = Names_fr::fixJean($new['FNAME']);
@@ -113,6 +114,9 @@ class raw2tmp implements Command {
             if($new['GNAME'] == '' && isset(self::$NAMES_CORRECTIONS[$new['NUM']])){
                 [$new['FNAME'], $new['GNAME']] = self::$NAMES_CORRECTIONS[$new['NUM']];
             }
+            //
+            $new['OCCU'] = 'SP';
+            //
             $day = Cura::computeDay(['DAY' => $cur[1], 'MON' => $cur[2], 'YEA' => $cur[3]]);
             $hour = Cura::computeHHMM(['H' => $cur[4], 'MN' => $cur[5]]);
             $new['DATE'] = "$day $hour";
