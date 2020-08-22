@@ -19,7 +19,7 @@ use g5\commands\cura\Cura;
 class tmp2db implements Command {
     
     const REPORT_TYPE = [
-        'small' => 'Echoes the number of inserted rows',
+        'small' => 'Echoes the number of inserted / updated rows',
         'full'  => 'Echoes the details of duplicate entries',
     ];
     

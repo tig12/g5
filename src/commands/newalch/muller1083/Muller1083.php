@@ -181,12 +181,13 @@ class Muller1083 implements SourceI {
     // ******************************************************
     /**
         @param  $gnr String like "SA22" or "ND129"
+        @return Array with 2 elements : cura file and NUM
     **/
     public static function gnr2cura($GNR){
         $curaPrefix = substr($GNR, 0, 3); // SA2 or ND1
         $curaFilename = ($curaPrefix == 'SA2' ? 'A2' : 'E1');
         $NUM = substr($GNR, 3);
-        return Cura::gqid($curaFilename, $NUM);
+        return [$curaFilename, $NUM];
     }
 
 }// end class

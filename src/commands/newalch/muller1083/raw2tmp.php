@@ -337,6 +337,7 @@ DEPT_STR;
 
     **/
     private static function compute_names($str){
+        // NOB (nobility) is handled by tweak2raw
         $giv = $fam = '';
         $pos = mb_strpos($str, '(');
         // $delimiter param in ucwords adds '-' to default chars

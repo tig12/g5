@@ -22,7 +22,10 @@ class Group{
     
     // *********************** Get *******************************
     
-    /** Creates an object of type Group from storage, using its id. **/
+    /**
+        Creates an object of type Group from storage, using its id.
+        Does not compute the members
+    **/
     public static function get($id): ?Group{
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("select * from groop where id=?");
@@ -34,10 +37,14 @@ class Group{
         $res['sources'] = json_decode($res['sources'], true);
         $g = new Group();
         $g->data = $res;
+        $g->data['members'] = [];
         return $g;
     }
     
-    /** Creates an object of type Group from storage, using its slug. **/
+    /**
+        Creates an object of type Group from storage, using its slug.
+        Does not compute the members
+    **/
     public static function getBySlug($slug): ?Group{
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("select * from groop where slug=?");
@@ -49,6 +56,7 @@ class Group{
         $res['sources'] = json_decode($res['sources'], true);
         $g = new Group();
         $g->data = $res;
+        $g->data['members'] = [];
         return $g;
     }
     
@@ -124,6 +132,7 @@ class Group{
     public function deleteMembers() {
         $dblink = DB5::getDbLink();
         $dblink->exec("delete from person_groop where id_group=" . $dblink->quote($this->data['id']));
+        $this->data['members'] = [];
     }
     
     // *********************** Fields *******************************
@@ -141,11 +150,10 @@ class Group{
         $stmt = $dblink->prepare("select * from person where id in(select id_person from person_groop where id_group=?)");
         $stmt->execute([$this->data['id']]);
         $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        $res = [];
+        $this->data['members'] = [];
         foreach($rows as $row){
-            $res[] = Person::row2person($row);
+            $this->data['members'][] = Person::row2person($row);
         }
-        return $res;
     }
     
     // *********************** Export *******************************
