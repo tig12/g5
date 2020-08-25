@@ -113,7 +113,7 @@ class tmp2db implements Command {
                 $p->addHistory("cura muller1083 tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);
                 $nInsert++;
-continue;
+//continue;
                 $p->data['id'] = $p->insert(); // Storage
             }
             else{
@@ -128,8 +128,10 @@ continue;
                 }
                 if($p->data['name']['family'] == "Gauquelin-$curaId"){
                     $nRestoredNames++;
-                    $namesReport .= "\nCura NUM $curaId\t {$p->data['name']['family']}\n";
-                    $namesReport .= "Müller NR {$line['NR']}\t {$line['FNAME']} - {$line['GNAME']}\n";
+                    if($reportType == 'full'){
+                        $namesReport .= "\nCura NUM $curaId\t {$p->data['name']['family']}\n";
+                        $namesReport .= "Müller NR {$line['NR']}\t {$line['FNAME']} - {$line['GNAME']}\n";
+                    }
                 }
                 // if Cura and Müller have different birth day
                 $mulday = substr($line['DATE'], 0, 10);
@@ -143,14 +145,10 @@ continue;
                 if($mulday != $curaday){
                     $nDiffDates++;
                     $new['notes'][] = "TO CHECK - Cura and Müller have different birth day";
-                    $datesReport .= "\nCura $curaId\t $curaday {$p->data['name']['family']} - {$p->data['name']['given']}\n";
-                    $datesReport .= "Müller NR {$line['NR']}\t $mulday {$line['FNAME']} - {$line['GNAME']}\n";
-// echo "\n"; print_r($line); echo "\n";
-// echo "\n"; print_r($p); echo "\n";
-// echo "mulday $mulday\n";
-// echo "curaday $curaday\n";
-// echo "$datesReport\n";
-// exit;
+                    if($reportType == 'full'){
+                        $datesReport .= "\nCura $curaId\t $curaday {$p->data['name']['family']} - {$p->data['name']['given']}\n";
+                        $datesReport .= "Müller NR {$line['NR']}\t $mulday {$line['FNAME']} - {$line['GNAME']}\n";
+                    }
                 }
                 // update fields that are more precise in muller1083
                 $new['birth']['date'] = $line['DATE']; // Cura contains only date-ut
@@ -171,7 +169,7 @@ continue;
                 $p->addHistory("cura muller1083 tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);                 
                 $nUpdate++;
-continue;
+//continue;
                 $p->update(); // Storage
             }
             $g->addMember($p->data['id']);
@@ -186,12 +184,13 @@ continue;
         }
         $dt = $t2 - $t1;
         if($reportType == 'full'){
-            //$report .= "=== Names fixed ===\n" . $namesReport;
+            $report .= "=== Names fixed ===\n" . $namesReport;
             $report .= "\n=== Dates fixed ===\n" . $datesReport;
             $report .= "============\n";
         }
-        $report .= "Inserted $nInsert, updated $nUpdate persons in database ($dt s)\n";
-        $report .= "$nDiffDates different dates - $nRestoredNames names restored in A2\n";
+        $report .= "$nInsert persons inserted, $nUpdate updated ($dt s)\n";
+        $report .= "$nDiffDates dates differ from A2 and E1\n";
+        $report .= "$nRestoredNames names restored in A2\n";
         return $report;
     }
         

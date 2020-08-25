@@ -104,6 +104,7 @@ class raw2tmp implements Command {
         $outfile = Muller402::tmpFilename();
         $dir = dirname($outfile);
         if(!is_dir($dir)){
+            $report .= "Created directory $dir\n";
             mkdir($dir, 0755, true);
         }
         file_put_contents($outfile, $res);

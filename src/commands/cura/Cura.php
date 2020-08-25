@@ -146,7 +146,7 @@ class Cura implements SourceI {
     **/
     public static function loadTmpFile_num($datafile){
         $curaRows1 = self::loadTmpFile($datafile);
-        $res = [];              
+        $res = [];
         foreach($curaRows1 as $row){
             $res[$row['NUM']] = $row;
         }

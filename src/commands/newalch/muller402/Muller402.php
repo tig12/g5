@@ -78,11 +78,25 @@ class Muller402 implements SourceI {
     }
     
     /**
-        Loads file in a regular array
-        @return Regular array ; each element contains an associative array (keys = field names).
+        Loads the tmp file in a regular array
+        @return Regular array ; each element is an assoc array containing the fields
     **/
     public static function loadTmpFile(){
         return csvAssociative::compute(self::tmpFilename());
+    }                                                                                              
+    
+    /**
+        Loads the tmp file in an asssociative array.
+            keys = Müller ids (MUID)
+            values = assoc array containing the fields
+    **/
+    public static function loadTmpFile_id(){
+        $rows1 = csvAssociative::compute(self::tmpFilename());
+        $res = [];
+        foreach($rows1 as $row){
+            $res[$row['MUID']] = $row;
+        }
+        return $res;
     }                                                                                              
     
 }// end class

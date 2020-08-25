@@ -1,24 +1,45 @@
 <?php
 /********************************************************************************
-    Adds Gauquelin (A6) id to Müller 402
+    Adds Gauquelin A6 NUM in column GQID tmp/newalch/muller-402-it-writers.csv
+    using tmp/cura/A6.csv
+    Must be executed before import in database.
     
     @license    GPL
     @history    2020-07-18 01:45:49+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\newalch\muller402;
 
-use g5\Config;
+use g5\G5;
 use g5\patterns\Command;
 use g5\commands\cura\Cura;
 
-class lookA6 implements Command {
+class addA6 implements Command {
+    
+    /** Possible value for parameter 1 **/
+    const POSSIBLE_PARAMS = [
+        'update' => "Updates column GQID of file data/tmp/newalch/muller-402-it-writers.csv",
+        'report' => "Echoes a html table to compare muller-402-it-writers.csv and A6.csv",
+    ];
+    
+    /** 
+        Assoc array NUM in A6 => ID in M402
+        Manual additions to handle journalists
+        WARNING - this may lead to erroneous information
+        see https://tig12.github.io/gauquelin5/newalch-muller402.html
+    **/
+    const A6_M402_JO = [
+        1354 => 1,
+        1489 => 150,
+        1568 => 235,
+        1578 => 242,
+    ];
     
     /** 
         Assoc array NUM in A6 => ID in M402
         Array built after a first execution, using $ambiguous and $nomatch
         Introduction of this array makes $ambiguous empty
     **/
-    const MATCHING = [
+    const A6_M402 = [
         //
         // === from $ambiguous ===
         //
@@ -31,14 +52,18 @@ class lookA6 implements Command {
         //
         // === from $nomatch ===
         //
+        // Bontempelli Massimo Como CO 1878-05-11
+        837 => 66,
         // Cecchi Emilio Firenze FI 1884-07-04
         852 => 107,
         // Chini Mario BORGO SAN LOREN FI 1876-07-29
         854 => 115,
         // De Libero Libero Fondi LT 1906-09-11
-        858 => 158,
-        // Della Massea Angelo  Baschi TR 1892-12-17
+        868 => 158,
+        // Della Massea Angelo Baschi TR 1892-12-17
         869 => 159,
+        // Gabrielli Aldo Ripatransone AP 1898-04-21
+        888 => 206,
         // Gastaldi Mario BEDIZZOLE DI BR BS 1902-08-28
         890 => 216,
         // Giordana Tullio Crema CR 1877-07-15
@@ -49,39 +74,54 @@ class lookA6 implements Command {
         943 => 364,
         // Repaci Leonida PALMI CALABRIA RC 1898-04-24
         947 => 371,
-        // Rosso S Secondo Piermaria  Caltanissetta CL 1887-11-30
+        // Rosso S Secondo Piermaria Caltanissetta CL 1887-11-30
         953 => 387,
         // Sboto Edoardo Catania CT 1888-05-30
         962 => 407,
-        // De Libero Libero Fondi LT 1906-09-11
-        868 => 158,
+        // Traxler Augusto Fauglia PI 1905-06-09
+        987 => 456,
+        // Umani Giorgio 1892-08-14 Cupramontana AN
+        989 => 461,
     ];
     
     
     // *****************************************
     // Implementation of Command
     /** 
-        Called by : php run-g5.php newalch muller402 lookA6
-        @param $params empty array 
+        @param $param Array containing one element (a string)
+                      Must be one of self::POSSIBLE_PARAMS
         @return Report
     **/
     public static function execute($params=[]): string{
         
-        if(count($params) != 0){
-            return "WRONG USAGE : this command does not take parameter\n";
+        $possibleParams_str = '';
+        foreach(self::POSSIBLE_PARAMS as $k => $v){
+            $possibleParams_str .= "  '$k' : $v\n";
+        }
+        if(count($params) == 0){
+            return "PARAMETER MISSING\n"
+                . "Possible values for parameter :\n$possibleParams_str\n";
+        }
+        if(count($params) > 1){
+            return "USELESS PARAMETER : {$params[1]}\n"
+                . "Possible values for parameter :\n$possibleParams_str\n";
+        }
+        $reportType = $params[0];
+        if(!in_array($reportType, array_keys(self::POSSIBLE_PARAMS))){
+            return "INVALID PARAMETER\n"
+                . "Possible values for parameter :\n$possibleParams_str\n";
         }
         
+        $report =  "--- muller402 addA6 ---\n";                                                                     
+
+        $m402_ids = Muller402::loadTmpFile_id(); // Assoc array, keys = Müller id
         $m402_days = []; // Assoc array, keys = birth days
-        $m402_ids = []; // Assoc array, keys = M402 ids - used to fill match from self::MATCHING
-        
-        $lines = Muller402::loadTmpFile();
-        foreach($lines as $line){
-            $day = substr($line['DATE'], 0, 10);
+        foreach($m402_ids as $row402){
+            $day = substr($row402['DATE'], 0, 10);
             if(!isset($m402_days[$day])){
                 $m402_days[$day] = [];
             }
-            $m402_days[$day][] = $line;
-            $m402_ids[$line['MUID']] = $line;
+            $m402_days[$day][] = $row402;
         }
         
         // one birth day in A6 corresponds to one in M402
@@ -96,26 +136,27 @@ class lookA6 implements Command {
         $na6 = 0;
         
         // loop on a6, try to match muller402
-        $a6 = Cura::loadTmpFile('A6');
-        $matching_keys = array_keys(self::MATCHING);
+        $a6 = Cura::loadTmpFile_num('A6');
+        $matchingA6NUMs = array_keys(self::A6_M402);
         foreach($a6 as $a6row){
-            $a6row['PLACE'] = ucWords(strtolower($a6row['PLACE']));
             if($a6row['CY'] != 'IT'){
                 continue;
             }
             if($a6row['OCCU'] != 'WR'){
                 continue; // skips JO journalists
+                // NOTE : commenting previous line leads to incorrect matches
+                // (some journalists of A6 have the same birth date as Muller 402 writers)
+                // but shows 4 possible matches - see self::A6_M402_JO comments
             }
             $na6++;
-            $dayA6 = substr($a6row['DATE'], 0, 10);
+            $dayA6 = substr($a6row['DATE-UT'], 0, 10);
             // no match
             if(!isset($m402_days[$dayA6])){
-                
-                if(in_array($a6row['NUM'], $matching_keys)){
-                    // uses self::MATCHING to remove nomatch
+                if(in_array($a6row['NUM'], $matchingA6NUMs)){
+                    // uses self::A6_M402 to remove nomatch
                     $match[] = [
                         'A6' => $a6row,
-                        'M402' => $m402_ids[self::MATCHING[$a6row['NUM']]],
+                        'M402' => $m402_ids[self::A6_M402[$a6row['NUM']]],
                     ];
                     continue;
                 }
@@ -124,19 +165,19 @@ class lookA6 implements Command {
             }
             // ambiguous
             if(count($m402_days[$dayA6]) != 1){
-                if(in_array($a6row['NUM'], $matching_keys)){
-                    // uses self::MATCHING to remove ambiguities
+                if(in_array($a6row['NUM'], $matchingA6NUMs)){
+                    // uses self::A6_M402 to remove ambiguities
                     $match[] = [
                         'A6' => $a6row,
-                        'M402' => $m402_ids[self::MATCHING[$a6row['NUM']]],
+                        'M402' => $m402_ids[self::A6_M402[$a6row['NUM']]],
                     ];
                     continue;
                 }
-                // was useful at first execution to build self::MATCHING
+                // was useful at first execution to build self::A6_M402
                 $cur = [];
                 $cur['A6'] = $a6row;
                 $cur['M402'] = [];
-                foreach($m402_days[$dayA6] as $person){
+                foreach($m402_days[$dayA6] as $person){                                
                     $cur['M402'][] = $person;
                 }
                 $ambiguous[] = $cur;
@@ -149,19 +190,11 @@ class lookA6 implements Command {
             ];
         }
         //
-        // report
+        // This test was positive at first execution, used to build self::A6_M402 from $ambiguous and $nomatch
+        // could be removed, kept in case
         //
-        $report = "A6 contains $na6 italian writers\n";
-        $report .= self::list($match);
-        return $report;
-        
-        //
-        // Following code is now useless
-        //
-        // was used to build self::MATCHING from $ambiguous and $nomatch
-        // can be removed, kept in case
         if(count($ambiguous) != 0){
-            // contained 3 entries when self::MATCHING was not there
+            // contained 3 entries when self::A6_M402 was not there
             $report .= "AMBIGUITIES\n";
             foreach($ambiguous as $amb){
                 $report .= "\nA6 : " . implode(' ', [
@@ -170,40 +203,85 @@ class lookA6 implements Command {
                         $amb['A6']['GNAME'],
                         $amb['A6']['PLACE'],
                         $amb['A6']['C2'],
-                        $amb['A6']['DATE'],
+                        $amb['A6']['DATE-UT'],
                 ]) . "\n";
                 $report .= 'M402 : ';
                 foreach($amb['M402'] as $m402){
                     $report .= "\n    " . implode('  ', [
-                            $m402->data['ids']['muller402'],
-                            $m402->data['name']['family'],
-                            $m402->data['name']['given'],
-                            $m402->data['birth']['place']['name'],
-                            $m402->data['birth']['place']['c2'],
-                            $m402->data['birth']['date'],
+                            $m402['MUID'],
+                            $m402['FNAME'],
+                            $m402['GNAME'],
+                            $m402['PLACE'],
+                            $m402['C2'],
+                            $m402['DATE'],
                     ]);
                 }
             }
+            if(true){
+                $report .= "== NO MATCH (in A6 but not in m402)\n";
+                foreach($nomatch as $row){
+                    $report .= implode("\t", [
+                        $row['NUM'],
+                        $row['FNAME'],
+                        $row['GNAME'],
+                        $row['PLACE'],
+                        $row['C2'],
+                        $row['DATE-UT'],
+                    ]) . "\n";
+                }
+            }
+            $report .= "nb IT WR in cura A6 = $na6\n";
+            $report .= "match : " . count($match) . "\n";
+            $report .= "no match : " . count($nomatch) . "\n";
+            return $report;
         }
+        
+        // Add journalists
         if(true){
-            $report .= "== NO MATCH (in A6 but not in m402)\n";
-            foreach($nomatch as $row){
-                $report .= implode("\t", [
-                    $row['NUM'],
-                    $row['FNAME'],
-                    $row['GNAME'],
-                    $row['PLACE'],
-                    $row['C2'],
-                    $row['DATE'],
-                ]) . "\n";
+            foreach(self::A6_M402_JO as $NUM => $MUID){
+                $match[] = [
+                    'A6' => $a6[$NUM],
+                    'M402' => $m402_ids[$MUID],
+                ];
             }
         }
         
-        $report .= "nb IT WR in cura A6 = $na6\n";
-        $report .= "match : " . count($match) . "\n";
-        $report .= "no match : " . count($nomatch) . "\n";
-        return $report;
+        //
+        // report
+        //
+        $nMatch = count($match);
+        $nNomatch = count($nomatch);
+        if($reportType == 'report'){
+            $report .= self::list($match);
+            $report .= "A6 contains $na6 italian writers ; $nMatch matches ; $nNomatch nomatch (Appolinaire)\n";
+            return $report;
+        }
+        //
+        // update
+        //
+        $match2 = [];
+        foreach($match as $m){
+            $NUM = $m['A6']['NUM'];
+            $MUID = $m['M402']['MUID'];
+            $match2[$MUID] = $NUM;
+        }
         
+        $res = implode(G5::CSV_SEP, Muller402::TMP_FIELDS) . "\n";
+        $rows = Muller402::loadTmpFile();
+        $nUpdate = 0;
+        foreach($rows as $row){
+            $MUID = $row['MUID'];
+            if(isset($match2[$MUID])){
+                $row['GQID'] = Cura::gqid('A6', $match2[$MUID]);
+                $nUpdate++;
+            }
+            $res .= implode(G5::CSV_SEP, $row) . "\n";
+        }
+        $outfile = Muller402::tmpFilename();
+        file_put_contents($outfile, $res);
+        // $report .= "$nMatch matches ; $nNomatch nomatch\n";
+        $report .= "Updated GQID to $nUpdate lines of $outfile\n";
+        return $report;
     }
     
     
@@ -228,11 +306,15 @@ class lookA6 implements Command {
         $report .= "</tr>\n";
         $diff = ' class="diff"';
         foreach($match as $line){
-            $date402 = $line['M402']['DATE'] . $line['M402']['TZO'];
+            // clean
+            $placeA6 = ucWords(strtolower($line['A6']['PLACE']));
+            $dateA6 = substr($line['A6']['DATE-UT'], 0, 10);
+            $date402 = substr($line['M402']['DATE'], 0, 10);
+            //
             $diff_fname = ($line['A6']['FNAME'] != $line['M402']['FNAME'] ? $diff :'');
             $diff_gname = ($line['A6']['GNAME'] != $line['M402']['GNAME'] ? $diff :'');
-            $diff_date = ($line['A6']['DATE'] != $date402 ? $diff :'');
-            $diff_place = ($line['A6']['PLACE'] != $line['M402']['PLACE'] ? $diff :'');
+            $diff_date = ($dateA6 != $date402 ? $diff :'');
+            $diff_place = (strtolower($placeA6) != strtolower($line['M402']['PLACE']) ? $diff :'');
             $diff_a2 = ($line['A6']['C2'] != $line['M402']['C2'] ? $diff :'');
             $report .= '    <tr class="spacer"><td colspan="7"></td></tr>' . "\n";
             $report .= '    <tr>'
@@ -240,8 +322,8 @@ class lookA6 implements Command {
                 . "<td>" . $line['A6']['NUM'] . '</td>'
                 . "<td$diff_fname>" . $line['A6']['FNAME'] . '</td>'
                 . "<td$diff_gname>" . $line['A6']['GNAME'] . '</td>'
-                . "<td$diff_date>" . $line['A6']['DATE'] . '</td>'
-                . "<td$diff_place>" . $line['A6']['PLACE'] . '</td>'
+                . "<td$diff_date>" . $line['A6']['DATE-UT'] . '</td>'
+                . "<td$diff_place>" . $placeA6 . '</td>'
                 . "<td$diff_a2>" . $line['A6']['C2'] . '</td>'
                 . "</tr>\n";
             $report .= '    <tr>'

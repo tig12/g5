@@ -25,6 +25,7 @@ use g5\commands\newalch\muller1083\raw2tmp      as raw2tmpMuller1083;
 use g5\commands\newalch\muller1083\tweak2tmp    as tweak2tmpMuller1083;
 use g5\commands\newalch\muller1083\fixGnr       as fixGnrMuller1083;
 use g5\commands\newalch\muller402\raw2tmp       as raw2tmpMuller402;
+use g5\commands\newalch\muller402\addA6         as addA6Muller402;
 use g5\commands\newalch\muller402\raw2tmpMuller100;
 use g5\commands\csicop\si42\raw2tmp             as raw2tmpSi42;
 use g5\commands\csicop\si42\addCanvas1          as addCanvas1Si42;
@@ -70,10 +71,6 @@ class history implements Command {
             return "INVALID PARAMETER\n"
                 . "Possible values for parameter :\n$possibleParams_str\n";
         }
-        //
-        //  Create tables in database
-        //
-//        echo dbcreate::execute([]);
         
         $filesCura = CuraRouter::computeDatafiles('all');
         $filesCuraA = CuraRouter::computeDatafiles('A');
@@ -81,7 +78,6 @@ class history implements Command {
         //
         //  1 - Create tmp files from raw data
         //
-        
         if($param == 'tmp' || $param == 'all'){
             echo "***********************\n";
             echo "*** Build tmp files ***\n";
@@ -106,6 +102,7 @@ class history implements Command {
             echo addCanvas1Si42::execute([]);
             echo raw2tmpIrving::execute([]);
             echo raw2tmpMuller402::execute([]);
+            echo addA6Muller402::execute(['update']);
             echo raw2tmpMuller100::execute([]);
         }
         
@@ -116,6 +113,7 @@ class history implements Command {
             echo "***********************\n";
             echo "***  Fill database  ***\n";
             echo "***********************\n";
+            echo dbcreate::execute([]);
             foreach($filesCuraA as $datafile){
                 echo tmp2dbA::execute([$datafile, 'tmp2db', 'small']);
             }
