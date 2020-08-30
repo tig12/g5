@@ -16,7 +16,12 @@ class Group{
     
     public $data = [];
     
+    /** Boolean indicating if members have already been computed **/
+    public $membersComputed;
+    
+    
     public function __construct(){
+        $this->membersComputed = false;
         $this->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Group.yml'));
     }
     
@@ -85,7 +90,7 @@ class Group{
     }
     
     /**
-        Inserts a the associations between a group and its members in storage.
+        Inserts a the associations between a group and its members in storage (does not insert the persons).
     **/
     public function insertMembers() {
         $dblink = DB5::getDbLink();
@@ -142,10 +147,13 @@ class Group{
     }
     
     /** 
-        Loads a group from storage and fills members with objects of type Person
-        @param $slug Group slug
+        Fills members with objects of type Person
+        @param $force If true, members computation will be done even if it was already done.
     **/
-    public function computeMembers(){
+    public function computeMembers(bool $force=false){
+        if($force === false && $this->membersComputed === true){
+            return;
+        }
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("select * from person where id in(select id_person from person_groop where id_group=?)");
         $stmt->execute([$this->data['id']]);
@@ -153,6 +161,7 @@ class Group{
         $this->data['members'] = [];
         foreach($rows as $row){
             $this->data['members'][] = Person::row2person($row);
+            $this->membersComputed = true;
         }
     }
     
@@ -206,15 +215,16 @@ class Group{
         
         $emptyNew = array_fill_keys($csvFields, '');
         
-        $members = self::computeMembers($this->data['slug']);
+        $this->computeMembers();
+        
         if($sort !== false){
-            usort($members, $sort);
+            usort($this->data['members'], $sort);
         }
         
         $report = '';
 
         $N = 0;
-        foreach($members as $p){
+        foreach($this->data['members'] as $p){
             // filters
             foreach($filters as $function){
                 if(!$function($p)){

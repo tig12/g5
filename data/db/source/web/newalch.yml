@@ -1,0 +1,11 @@
+
+document:
+  history:
+    - 2020-08-11 08:15:11+02:00: Thierry Graff, creation
+
+name: newalchemypress.com
+slug: newalch
+description: |
+  Web site https://newalchemypress.com/
+source:
+  parents: []

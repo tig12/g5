@@ -8,12 +8,13 @@ id:
 slug:
 
 sources: []
-  
+
+trust:
+trust-details: []
+
 # key / value pairs
 # key = source slug ; value = local id in the given source
 ids_in_sources: []
-
-trust:
 
 sex:
 

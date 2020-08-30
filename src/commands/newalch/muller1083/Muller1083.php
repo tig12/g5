@@ -26,7 +26,10 @@ class Muller1083 implements SourceI {
     /** Slug of the group in db **/
     const GROUP_SLUG = 'muller1083med';
     
-    /** Names of the columns of raw file 5a_muller_medics.txt **/
+    /**
+        Names of the columns of raw file 5a_muller_medics.txt
+        and their meanings (when known).
+    **/
     const RAW_FIELDS = [
         'NR'        => 'Müller id, from 1 to 1083',
         'SAMPLE'    => 'Origin of the record',

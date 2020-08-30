@@ -136,7 +136,7 @@ function md_table(){
     @return associative array profession code => content of this record
 **/
 function read_input_file(){
-    $records = yaml_parse_file(dirname(__DIR__) . DS . 'share' . DS . 'occupation-codes.yml');
+    $records = yaml_parse_file(implode(DS, [dirname(__DIR__), 'data', 'db', 'occu.yml']));
     
     $res = [];
     $check = [];

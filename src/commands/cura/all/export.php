@@ -90,6 +90,7 @@ class export implements Command {
             },
         ];
         
+        // sorts by id within the $datafile
         $sort = function($a, $b){
             global $datafile;
             if($a->data['ids_in_sources'][$datafile] == $b->data['ids_in_sources'][$datafile]){

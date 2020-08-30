@@ -7,7 +7,7 @@
     @license    GPL
     @history    2020-08-08 17:22:57+02:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\commands\db\admin;
+namespace g5\commands\db\build;
 
 use g5\patterns\Command;
 use g5\Config;

@@ -61,9 +61,10 @@ class Person {
         return self::row2person($res);
     }
     
-    /** Creates an object of type Person from storage,
+    /**
+        Creates an object of type Person from storage,
         using its id for a given source.
-        Ex : to get a person whose id in source with slug A1 is 254, call
+        Ex : to get a person whose id in source A1 is 254, call
         getBySourceId('A1', '254')
         @param  $source     Slug of the source
         @param  $idInSource Local id of the person within this source 
@@ -80,6 +81,26 @@ class Person {
         }
         return self::row2person($res);
     }
+    
+    /**
+        Returns an array of Persons with given occupation codes.
+        @param $occus Array of occupation codes
+    **/
+    public static function getByOccu($occus){     
+        $dblink = DB5::getDbLink();
+        $query = "select * from person where ";
+        $parts = [];
+        foreach($occus as $occu){
+            $parts[] .= "'[\"$occu\"]' <@ occus";
+        }
+        $query .= implode(' or ', $parts);
+        $res = [];
+        foreach($dblink->query($query) as $row){
+            $res[] = self::row2person($row);
+        }
+        return $res;
+    }
+    
     
     // *********************** CRUD *******************************
     
