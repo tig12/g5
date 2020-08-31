@@ -10,10 +10,18 @@ namespace g5\commands\db\export;
 
 use g5\patterns\Command;
 use g5\Config;
+use g5\commands\newalch\Newalch;
 use g5\model\{Person,Group,Occupation};
 
 class occu implements Command {
     
+    /** 
+        Supplementary parameters that are not hadled by CLI interface
+    **/
+    const PARAMS = [
+        // if true the generated file name will be prefixed by the number of records
+        'prefix_with_number' => true,
+    ];
     
     // *****************************************
     // Implementation of Command
@@ -51,7 +59,7 @@ class occu implements Command {
         $g->membersComputed = true;
         
         $csvFields = [
-            'GID',
+            'GQID',
             'MUID',
             'FNAME',
             'GNAME',
@@ -91,14 +99,8 @@ class occu implements Command {
                 return $p->data['ids_in_sources']['cura'] ?? '';
             },
             'MUID' => function($p){
-                // tmp hack, TODO rewrite
-                if(isset($p->data['ids_in_sources']['5a_muller_medics'])){
-                    return '1083-' . $p->data['ids_in_sources']['5a_muller_medics'];
-                }
-                if(isset($p->data['ids_in_sources']['5muller_writers'])){
-                    return '402-' . $p->data['ids_in_sources']['5muller_writers'];
-                }
-                return '';
+                // TODO refactor, this should be called in raw2tmp or tmp2db of newalch files.
+                return Newalch::ids_in_sources2muId($p->data['ids_in_sources']);
             },
         ];
         
@@ -110,7 +112,19 @@ class occu implements Command {
             return $nameA <=> $nameB;
         };
         
+        if(self::PARAMS['prefix_with_number']){
+            $outfile = self::prefix_with_number($outfile, count($persons));
+        }
+        
         return $g->exportCsv($outfile, $csvFields, $map, $fmap, $sort);
+    }
+    
+    
+    // ************************* Auxiliary functions *****************************
+    private static function prefix_with_number($filename, $N){
+        $dir = dirname($filename);
+        $base = basename($filename);
+        return $dir . DS . "$N-$base";
     }
     
     

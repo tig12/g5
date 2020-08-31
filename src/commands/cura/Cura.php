@@ -66,9 +66,11 @@ class Cura implements SourceI {
         'E3' =>  'http://cura.free.fr/gauq/902gdE3.html',
     ];
     
+    // *********************** Person ids ***********************
     /**
-        Returns a Gauquelin id, like "A1-654"
-        Unique id of a record among cura files.
+        Returns a unique Gauquelin id, like "A1-654"
+        Unique id of a record among birth dates published by Gauquelin's LERRCP.
+        See https://tig12.github.io/gauquelin5/cura.html for precise definition.
         @param $datafile    String like 'A1'
         @param $NUM         Value of field NUM of a record within $datafile
     **/
