@@ -1,6 +1,9 @@
 <?php
 /********************************************************************************
-    Add fields GQID and PLACE to  5-csicop/408-csicop-irving.csv
+    Add fields GQID to data/tmp/csicop/irving/408-csicop-irving.csv
+    
+    Uses Ertel file (after correctionn on field CSID) to build the correspondance
+    See https://tig12.github.io/gauquelin5/csicop.html
     
     @license    GPL
     @history    2019-12-24 09:51:10+01:00, Thierry Graff : Creation
@@ -27,25 +30,10 @@ class addD10 implements Command {
         
         $infile = Irving::tmpFilename();
         
-        $report =  "--- Add column GQID and PLACE to $infile ---\n";
+        $report =  "--- csicop irving addD10 ---\n";
         
-        // Add a key GQID between CSID and FNAME
-        // code works if $infile has fieds described in Irving::TMP_FIELDS
-        // (this is the case after raw2csv)
-        
-        $keys = [];
-        foreach(Irving::TMP_FIELDS as $k){
-            $keys[] = $k;
-            if($k == 'CSID'){
-                $keys[] = 'GQID';
-            }
-            if($k == 'TZ'){
-                $keys[] = 'PLACE';
-            }
-        }
-        
-        $irving = Irving::loadTmpCsv_csid();
-        $d10 = Cura::loadTmpCsv_num('D10');
+        $irving = Irving::loadTmpFile_csid();
+        $d10 = Cura::loadTmpFile_num('D10');
         $ertel = Ertel4391::loadTmpFile();
         $ertel_csid = [];
         $ertel_gqid = [];
@@ -58,23 +46,17 @@ class addD10 implements Command {
             $ertel_gqid[$row['G_NR']] = $row;
         }
         
-        $output = implode(G5::CSV_SEP, $keys) . "\n";
-        
+        $output = implode(G5::CSV_SEP, Irving::TMP_FIELDS) . "\n";
         $nModif = 0;
         foreach($irving as $CSID => $irow){
-            $GQID = $PLACE = '';
+            $GQID = '';
             if(isset($ertel_csid[$CSID])){
                 $nModif++;
                 $GQID = $ertel_csid[$CSID]['GNUM'];
                 $NUM = str_replace('D10-', '', $GQID);
-                $PLACE = $d10[$NUM]['PLACE'];
             }
-            $new = array_fill_keys($keys, '');
-            foreach($irow as $k => $v){
-                $new[$k] = $v;
-            }
+            $new = $irow;
             $new['GQID'] = $GQID;
-            $new['PLACE'] = $PLACE;
             $output .= implode(G5::CSV_SEP, $new) . "\n";
         }
         

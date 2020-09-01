@@ -99,7 +99,7 @@
 -
   code: ATH
   fr: Athlétisme
-  en: Athletism
+  en: Track and field
   belongs-to:
     - SP
 -
@@ -226,6 +226,12 @@
   code: PEL
   fr: Pelote basque
   en: Pelote basque
+  belongs-to:
+    - SP
+-
+  code: ROD
+  fr: Rodéo
+  en: Rodeo
   belongs-to:
     - SP
 -

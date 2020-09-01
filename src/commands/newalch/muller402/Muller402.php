@@ -79,12 +79,12 @@ class Muller402 implements SourceI {
         return implode(DS, [Config::$data['dirs']['raw'], 'newalchemypress.com', '05-muller-writers', '5muller_writers.csv']);
     }
     
-    /** Loads csv file in a regular array **/
+    /** Loads 5muller_writers.csv in a regular array **/
     public static function loadRawFile(){
         return file(self::rawFilename(), FILE_IGNORE_NEW_LINES);
     }                                                                                              
                                                                                          
-    // *********************** Tmp files manipulation ***********************
+    // *********************** Tmp file manipulation ***********************
     
     /**
         @return Path to the csv file stored in data/tmp/newalch/
@@ -115,7 +115,7 @@ class Muller402 implements SourceI {
         return $res;
     }                                                                                              
     
-    // *********************** Tmp raw files manipulation ***********************
+    // *********************** Tmp raw file manipulation ***********************
     
     /**
         Returns the name of a "tmp raw file", data/tmp/newalch/muller-402-it-writers-raw.csv

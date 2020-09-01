@@ -16,16 +16,33 @@ class Irving{
     
     const RAW_CSV_SEP = ';';
     
-    /**
-        Field names of tmpFilename() for step raw2csv.
-        Other fields complete this list in following transformations.
-    **/
+    /** Field names of data/raw/csicop/irving/rawlins-ertel-data.csv **/
+    const RAW_FIELDS = [
+        'Satz#',
+        'NAME',
+        'VORNAME',
+        'GEBDAT',
+        'GEBZEIT',
+        'AMPM',
+        'ZEITZONE',
+        'GEBORT',
+        'LO1',
+        'LO2',
+        'LA1',
+        'LA2',
+        'SPORTART',
+        'MARS',
+        'BATCH',
+    ];
+    
+    /** Field names of data/tmp/csicop/irving/408-csicop-irving.csv **/
     const TMP_FIELDS = [
         'CSID',
+        'GQID',
         'FNAME',
         'GNAME',
         'DATE',
-        'TZ',
+        'TZO',
         'LG',
         'LAT',
         'C2',
@@ -36,7 +53,7 @@ class Irving{
     ];
     
     /** 
-        Modifications done on ids during raw2csv step.
+        Modifications done on ids during raw2tmp step.
         Purpose of these modifs is to have the same ids in SI42 and Irving.
         SI42 order was prefered to Irving because :
             - alphabetical order is respected
@@ -60,11 +77,44 @@ class Irving{
         355 => 354,
     ];
     
+    /** 
+        Mapping between codes used in Irving file and g5 codes
+    **/
+    const SPORT_IRVING_G5 = [
+        'AUTO' => 'AUT',
+        'BASE' => 'BOX',
+        'BASK' => 'BAS',
+        'BOXI' => 'BOX',
+        'FOOT' => 'FOO',
+        'GOLF' => 'GOL',
+        'GYMN' => 'GYM',
+        'HORS' => 'EQU',
+        'ICES' => 'GLA',
+        // Gauquelin AUT refers to "Auto moto"
+        // The code MOTO refers to one record
+        // A check on wikipedia shows that the discipline was in fact auto
+        // https://fr.wikipedia.org/wiki/Cale_Yarborough
+        // Associating MOTO to AUT then does not imply loss of information 
+        'MOTO' => 'AUT',
+        'RODE' => 'ROD',
+        'SKII' => 'SKI',
+        'SWIM' => 'NAT',
+        'TENN' => 'TEN',
+        'TRAC' => 'ATH',
+        'VOLL' => 'VOL',
+        'WRES' => 'LUT',
+    ];
+    
     // *********************** Raw files manipulation ***********************
     
     /** Path to Irving's raw file **/
     public static function rawFilename(){
         return implode(DS, [Config::$data['dirs']['raw'], 'csicop', 'irving', 'rawlins-ertel-data.csv']);
+    }
+    
+    /** Loads rawlins-ertel-data.csv in a regular array **/
+    public static function loadRawFile(){
+        return file(self::rawFilename(), FILE_IGNORE_NEW_LINES);
     }
     
     // *********************** Tmp files manipulation ***********************
@@ -84,4 +134,23 @@ class Irving{
         return $res;
     }
     
+    // *********************** Tmp raw file manipulation ***********************
+    
+    /**
+        Returns the name of a "tmp raw file", data/tmp/newalch/muller-402-it-writers-raw.csv
+        (files used to keep trace of the original raw values).
+        @param  $datafile : a string like 'A1'
+    **/
+    public static function tmpRawFilename(){
+        return implode(DS, [Config::$data['dirs']['tmp'], 'csicop', 'irving', '408-csicop-irving-raw.csv']);
+    }
+    
+    /**
+        Loads a "tmp raw file" in a regular array
+        Each element contains the person fields in an assoc. array
+    **/
+    public static function loadTmpRawFile(){
+        return csvAssociative::compute(self::tmpRawFilename());
+    }                                           
+
 }// end class
