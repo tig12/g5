@@ -33,6 +33,7 @@ class raw2tmp implements Command {
         
         $emptyNew = array_fill_keys(Muller402::TMP_FIELDS, '');
         $res = implode(G5::CSV_SEP, Muller402::TMP_FIELDS) . "\n";
+        $resRaw = implode(G5::CSV_SEP, Muller402::RAW_FIELDS) . "\n"; // keep trace of original raw fields
         $N = 0;
         $raw = Muller402::loadRawFile();
         foreach($raw as $line){
@@ -99,8 +100,10 @@ class raw2tmp implements Command {
             $new['LAT'] = self::lglat($fields[8]);
             $new['TZO'] = self::compute_offset($fields[6], $new['LG']);
             $res .= implode(G5::CSV_SEP, $new) . "\n";
+            $resRaw .= implode(G5::CSV_SEP, $fields) . "\n";
             $N++;
         }
+        
         $outfile = Muller402::tmpFilename();
         $dir = dirname($outfile);
         if(!is_dir($dir)){
@@ -108,6 +111,10 @@ class raw2tmp implements Command {
             mkdir($dir, 0755, true);
         }
         file_put_contents($outfile, $res);
+        $report .= "Stored $N records in $outfile\n";
+        //
+        $outfile = Muller402::tmpRawFilename();
+        file_put_contents($outfile, $resRaw);
         $report .= "Stored $N records in $outfile\n";
         return $report;
     }

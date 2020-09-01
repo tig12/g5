@@ -337,7 +337,8 @@ DEPT_STR;
 
     **/
     private static function compute_names($str){
-        // NOB (nobility) is handled by tweak2raw
+        // NOB (nobiliary-particle) is not handled
+        // missing a clear rule for Italy
         $giv = $fam = '';
         $pos = mb_strpos($str, '(');
         // $delimiter param in ucwords adds '-' to default chars

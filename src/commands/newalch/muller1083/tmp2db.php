@@ -94,7 +94,7 @@ class tmp2db implements Command {
                 $new['trust'] = Newalch::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
-                $new['name']['nobility'] = $line['NOB'];
+                $new['name']['nobiliary-particle'] = $line['NOB'];
                 // Müller name considered as = to full name copied from birth certificate
                 $new['name']['official']['given'] = $line['GNAME'];
                 $new['occus'] = ['PH']; // TODO put wikidata code
@@ -110,10 +110,9 @@ class tmp2db implements Command {
                 $p->addIdInSource($source->data['slug'], $line['NR']);
                 $p->updateFields($new);
                 $p->computeSlug();
-                $p->addHistory("cura muller1083 tmp2db", $source->data['slug'], $new);
+                $p->addHistory("newalch muller1083 tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);
                 $nInsert++;
-//continue;
                 $p->data['id'] = $p->insert(); // Storage
             }
             else{
@@ -145,6 +144,7 @@ class tmp2db implements Command {
                 if($mulday != $curaday){
                     $nDiffDates++;
                     $new['notes'][] = "TO CHECK - Cura and Müller have different birth day";
+                    $new['to-check'] = true;
                     if($reportType == 'full'){
                         $datesReport .= "\nCura $curaId\t $curaday {$p->data['name']['family']} - {$p->data['name']['given']}\n";
                         $datesReport .= "Müller NR {$line['NR']}\t $mulday {$line['FNAME']} - {$line['GNAME']}\n";
@@ -153,13 +153,14 @@ class tmp2db implements Command {
                 // update fields that are more precise in muller1083
                 $new['birth']['date'] = $line['DATE']; // Cura contains only date-ut
                 $new['birth']['place']['name'] = $line['PLACE'];
-                $new['name']['nobility'] = $line['NOB'];
+                $new['name']['nobiliary-particle'] = $line['NOB'];
                 $new['name']['family'] = $line['FNAME'];
                 if($p->data['name']['given'] == ''){
                     // happens with names like Gauquelin-A1-258
                     $new['name']['given'] = $line['GNAME'];
                 }
                 // Müller name considered as = to full name copied from birth certificate
+                // (Gauquelin name considered as current name)
                 $new['name']['official']['given'] = $line['GNAME'];
                 //
                 $p->addSource($source->data['slug']);
@@ -169,7 +170,6 @@ class tmp2db implements Command {
                 $p->addHistory("cura muller1083 tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);                 
                 $nUpdate++;
-//continue;
                 $p->update(); // Storage
             }
             $g->addMember($p->data['id']);

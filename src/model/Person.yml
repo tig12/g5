@@ -7,11 +7,11 @@ id:
 
 slug:
 
-sources: []
-
 trust:
 trust-details: []
+to-check:         # true or false - related to field "notes"
 
+sources: []
 # key / value pairs
 # key = source slug ; value = local id in the given source
 ids_in_sources: []
@@ -23,11 +23,11 @@ name:
   given:
   family:
   spouse:
-  official: # As written in the birth certificate
+  official:                 # As written in the birth certificate
     family:
     given:
-  nobility: # de d' di del
-  fame: # stage, scene
+  nobiliary-particle: false # de d' di del von...
+  fame:                     # stage, scene
   nicknames: []
   alternative: []
 
@@ -62,7 +62,7 @@ death:
     lg:
     lat:
 
-notes: [] # array of free notes
+notes: []   # array of free notes
 
 raw: []
 

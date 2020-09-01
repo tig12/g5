@@ -24,7 +24,7 @@ class Muller1083 implements SourceI {
     const RAW_SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch' . DS . '5a_muller_medics.yml';
     
     /** Slug of the group in db **/
-    const GROUP_SLUG = 'muller1083med';
+    const GROUP_SLUG = 'muller1083medics';
     
     /**
         Names of the columns of raw file 5a_muller_medics.txt
@@ -74,7 +74,7 @@ class Muller1083 implements SourceI {
         'SAMPLE',
         'GNR',
         'CODE',
-        'NOB', // nobility
+        'NOB', // nobiliary-particle
         'FNAME',
         'GNAME',
         'DATE',

@@ -103,7 +103,7 @@ class history implements Command {
             echo raw2tmpIrving::execute([]);
             echo raw2tmpMuller402::execute([]);
             echo addA6Muller402::execute(['update']);
-            echo raw2tmpMuller100::execute([]);
+//            echo raw2tmpMuller100::execute([]);
         }
         
         //
@@ -121,7 +121,8 @@ class history implements Command {
             echo tmp2dbD10::execute(['D10', 'tmp2db', 'small']);
             echo tmp2dbE1E3::execute(['E1', 'tmp2db', 'small']);
             echo tmp2dbE1E3::execute(['E3', 'tmp2db', 'small']);
-            //echo tmp2dbMuller1083::execute([]);
+            echo tmp2dbMuller1083::execute(['small']);
+//            echo tmp2dbMuller402::execute(['small']);
         }
         
         return '';

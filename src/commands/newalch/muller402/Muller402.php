@@ -13,9 +13,7 @@ use g5\model\DB5;
 use g5\model\Source;
 use g5\model\SourceI;
 
-
 use tiglib\arrays\csvAssociative;
-//use tiglib\strings\encode2utf8;
 
 class Muller402 implements SourceI {
     
@@ -25,12 +23,29 @@ class Muller402 implements SourceI {
         Path to the yaml file containing the characteristics of the source.
         Relative to directory specified in config.yml by dirs / db
     **/
-    const SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch' . DS . '100-it-writers.yml';
+    const SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch' . DS . '5muller_writers.yml';
+
+    /** Slug of the group in db **/
+    const GROUP_SLUG = 'muller402writers';
 
     /** Separator used in the raw csv file **/
     const RAW_SEP = ';';
     
     /** Names of the columns of raw file 5muller_writers.csv **/
+    const RAW_FIELDS = [
+        'NAME',
+        'YEAR',
+        'MONTH',
+        'DAY',
+        'HOUR',
+        'MIN',
+        'TZO',
+        'PLACE',
+        'LAT',
+        'LG',
+    ];
+    
+    /** Names of the columns of raw file data/tmp/newalch/muller-402-it-writers.csv **/
     const TMP_FIELDS = [
         'MUID',
         'GQID',
@@ -65,7 +80,7 @@ class Muller402 implements SourceI {
     
     /** Loads csv file in a regular array **/
     public static function loadRawFile(){
-        return file(self::rawFilename());
+        return file(self::rawFilename(), FILE_IGNORE_NEW_LINES);
     }                                                                                              
                                                                                          
     // *********************** Tmp files manipulation ***********************
@@ -99,4 +114,23 @@ class Muller402 implements SourceI {
         return $res;
     }                                                                                              
     
+    // *********************** Tmp raw files manipulation ***********************
+    
+    /**
+        Returns the name of a "tmp raw file", data/tmp/newalch/muller-402-it-writers-raw.csv
+        (files used to keep trace of the original raw values).
+        @param  $datafile : a string like 'A1'
+    **/
+    public static function tmpRawFilename(){
+        return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', 'muller-402-it-writers-raw.csv']);
+    }
+    
+    /**
+        Loads a "tmp raw file" in a regular array
+        Each element contains the person fields in an assoc. array
+    **/
+    public static function loadTmpRawFile(){
+        return csvAssociative::compute(self::tmpRawFilename());
+    }
+
 }// end class
