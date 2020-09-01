@@ -77,7 +77,7 @@ class tweak2tmp implements Command {
                         continue;
                     }
                     if(!in_array($k, $keys)){
-                        $report .= "WARNING : invalid key '$k' for NUM = $NUM in file $yamlfile - ignoring value\n";
+                        $report .= "WARNING : invalid key '$k' for NUM = $NUM in file $tweaksFile - ignoring value\n";
                         continue;
                     }
                     $row[$k] = $v; // HERE update cura with tweaked value

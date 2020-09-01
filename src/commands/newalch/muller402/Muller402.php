@@ -54,6 +54,7 @@ class Muller402 implements SourceI {
         'SEX',
         'DATE',
         'TZO',
+        'LMT',
         'PLACE',
         'CY',
         'C2',

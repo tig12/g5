@@ -25,6 +25,7 @@ use g5\commands\newalch\muller1083\raw2tmp      as raw2tmpMuller1083;
 use g5\commands\newalch\muller1083\tweak2tmp    as tweak2tmpMuller1083;
 use g5\commands\newalch\muller1083\fixGnr       as fixGnrMuller1083;
 use g5\commands\newalch\muller402\raw2tmp       as raw2tmpMuller402;
+use g5\commands\newalch\muller402\tweak2tmp     as tweak2tmpMuller402;
 use g5\commands\newalch\muller402\addA6         as addA6Muller402;
 use g5\commands\newalch\muller402\raw2tmpMuller100;
 use g5\commands\csicop\si42\raw2tmp             as raw2tmpSi42;
@@ -102,6 +103,7 @@ class history implements Command {
             echo addCanvas1Si42::execute([]);
             echo raw2tmpIrving::execute([]);
             echo raw2tmpMuller402::execute([]);
+            echo tweak2tmpMuller402::execute([]);
             echo addA6Muller402::execute(['update']);
 //            echo raw2tmpMuller100::execute([]);
         }
@@ -122,7 +124,7 @@ class history implements Command {
             echo tmp2dbE1E3::execute(['E1', 'tmp2db', 'small']);
             echo tmp2dbE1E3::execute(['E3', 'tmp2db', 'small']);
             echo tmp2dbMuller1083::execute(['small']);
-//            echo tmp2dbMuller402::execute(['small']);
+            echo tmp2dbMuller402::execute(['small']);
         }
         
         return '';

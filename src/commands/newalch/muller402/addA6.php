@@ -280,7 +280,7 @@ class addA6 implements Command {
         $outfile = Muller402::tmpFilename();
         file_put_contents($outfile, $res);
         // $report .= "$nMatch matches ; $nNomatch nomatch\n";
-        $report .= "Updated GQID to $nUpdate lines of $outfile\n";
+        $report .= "Updated GQID in $nUpdate lines of $outfile\n";
         return $report;
     }
     

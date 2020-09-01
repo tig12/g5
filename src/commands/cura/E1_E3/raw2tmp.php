@@ -153,9 +153,9 @@ class raw2tmp implements Command {
             $newRaw['COD'] = $COD;
             $res1Raw[$new['NUM']] = $newRaw;
         }
-        $report .= self::$n_total  . " lines parsed\n";
-        $report .= self::$n_missing_places . " places not matched\n";
-        $report .= self::$n_missing_timezone . " timezone offsets not computed\n";
+        $report .= self::$n_total  . " lines parsed";
+        $report .= ' - ' . self::$n_missing_places . " places not matched";
+        $report .= ' - ' . self::$n_missing_timezone . " TZO not computed\n";
         $remain = self::$n_total - self::$n_missing_places - self::$n_missing_timezone;
         $percent = round($remain * 100 / self::$n_total, 2);
         $report .= "$remain persons stored precisely ($percent %)\n";

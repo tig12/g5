@@ -97,7 +97,6 @@ class tmp2db implements Command {
                 $new['name']['nobiliary-particle'] = $line['NOB'];
                 // Müller name considered as = to full name copied from birth certificate
                 $new['name']['official']['given'] = $line['GNAME'];
-                $new['occus'] = ['PH']; // TODO put wikidata code
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['place']['name'] = $line['PLACE'];
@@ -106,6 +105,7 @@ class tmp2db implements Command {
                 $new['birth']['place']['lg'] = $line['LG'];
                 $new['birth']['place']['lat'] = $line['LAT'];
                 //
+                $p->addOccu('PH');
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NR']);
                 $p->updateFields($new);
@@ -163,6 +163,7 @@ class tmp2db implements Command {
                 // (Gauquelin name considered as current name)
                 $new['name']['official']['given'] = $line['GNAME'];
                 //
+                $p->addOccu('PH');
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NR']);
                 $p->updateFields($new);
@@ -189,8 +190,8 @@ class tmp2db implements Command {
             $report .= "============\n";
         }
         $report .= "$nInsert persons inserted, $nUpdate updated ($dt s)\n";
-        $report .= "$nDiffDates dates differ from A2 and E1\n";
-        $report .= "$nRestoredNames names restored in A2\n";
+        $report .= "$nDiffDates dates differ from A2 and E1";
+        $report .= " - $nRestoredNames names restored in A2\n";
         return $report;
     }
         

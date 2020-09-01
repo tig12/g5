@@ -85,7 +85,7 @@ class tmp2db implements Command {
         $N = count($lines);
         $t1 = microtime(true);
         for($i=0; $i < $N; $i++){
-            $line = $lines[$i];                                                                        
+            $line = $lines[$i];
             $lineRaw = $linesRaw[$i];
             if($line['GQID'] == ''){
                 // Person not in Gauquelin data
@@ -95,19 +95,17 @@ class tmp2db implements Command {
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
                 $new['sex'] = $line['SEX'];
-                $new['occus'] = $line['OCCU'];
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['tzo'] = $line['TZO'];
-                if($lineRaw['TZO'] == 'LMT'){
-                    $new['birth']['note'] = 'LMT';
-                }
+                $new['birth']['note'] = $line['LMT'];
                 $new['birth']['place']['name'] = $line['PLACE'];
                 $new['birth']['place']['c2'] = $line['C2'];
                 $new['birth']['place']['cy'] = $line['CY'];
                 $new['birth']['place']['lg'] = $line['LG'];
                 $new['birth']['place']['lat'] = $line['LAT'];
                 //
+                $p->addOccu($line['OCCU']);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['MUID']);
                 $p->updateFields($new);
@@ -150,12 +148,11 @@ class tmp2db implements Command {
                 // update fields that are more precise in muller402
                 $new['birth']['date'] = $line['DATE']; // Cura contains only date-ut
                 $new['birth']['tzo'] = $line['TZO'];
-                if($lineRaw['TZO'] == 'LMT'){
-                    $new['birth']['note'] = 'LMT';
-                }
+                $new['birth']['note'] = $line['LMT'];
                 $new['birth']['place']['name'] = $line['PLACE'];
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
+                $p->addOccu($line['OCCU']);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['MUID']);
                 $p->updateFields($new);
@@ -182,8 +179,8 @@ class tmp2db implements Command {
             $report .= "============\n";
         }
         $report .= "$nInsert persons inserted, $nUpdate updated ($dt s)\n";
-        $report .= "$nDiffDates dates differ from A6\n";
-        $report .= "$nRestoredNames names restored in A6\n";
+        $report .= "$nDiffDates dates differ from A6";
+        $report .= " - $nRestoredNames names restored in A6\n";
         return $report;
     }
         

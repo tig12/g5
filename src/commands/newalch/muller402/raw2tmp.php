@@ -99,6 +99,9 @@ class raw2tmp implements Command {
             $new['LG'] = self::lglat(-(int)$fields[9]); // minus sign, correction from raw here
             $new['LAT'] = self::lglat($fields[8]);
             $new['TZO'] = self::compute_offset($fields[6], $new['LG']);
+            if($fields[6] == 'LMT'){
+                $new['LMT'] = 'LMT';
+            }
             $res .= implode(G5::CSV_SEP, $new) . "\n";
             $resRaw .= implode(G5::CSV_SEP, $fields) . "\n";
             $N++;
