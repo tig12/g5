@@ -62,7 +62,6 @@ ul.prime li{
 <ul class="prime">
     <li><a href="https://larzac.info/gauquelin5"><b>Download resulting data</b></a></li>
     <li><a href="historical-tests.html">List of historical tests</a></li>
-    <li>Current dev : import <a href="newalch-muller402.html">Arno Müller's group of 402 writers</a>, using this to <a href="full.html">merge historical data</a></li>
 </ul>
 
 <br>
@@ -108,21 +107,22 @@ There are several reasons to care about the data used to perform statistical tes
 <!-- ********************************************************************************* -->
 <h2>Current implementation</h2>
 
-G5 currently uses the following data sources :
+Most code already developed concern step 1 of g5 (restoration of historical data).
+<br>G5 currently uses the following data sources :
 <ul>
     <li>
         Data gathered by Michel et Françoise Gauquelin (serie A, files D6, D10, E1, E3), from <a href="http://cura.free.fr/gauq/17archg.html">cura.free.fr</a> C.U.R.A Gauquelin archives version 5 ; N = 21 469
     </li>
     <li>
-        Suitbert Ertel, Arno Müller and CFEPP data, from <a href="https://newalchemypress.com/gauquelin/">newalchemypress.com</a>
+        Suitbert Ertel and Arno Müller data, from <a href="https://newalchemypress.com/gauquelin/">newalchemypress.com</a>
     </li>
     <li>Gauquelin 1955 (paper) book "Les hommes et les astres"</li>
-    <li>CSICOP data provided by Kenneth Irving, previously unpublished</li>
+    <li>CSICOP data sent by Kenneth Irving, previously unpublished</li>
+    <li>Scans of Arno Müller's Astro-Forschungs-Daten sent by newalchemypress.com</li>
 </ul>
 
-It brings corrections to these data and produces csv files expressed in a common syntax ; generated data can't be considered yet as reliable (in particular legal time, timezone offset and place identification need test and debug).
-<br>
-<br>Current development : build a common database to merge the historical data ; see <a href="full.html">7-full</a>.
+Data are corrected and imported in a common database, currently containing 21 892 persons.
+<br>Generated data can't be considered yet as reliable (in particular legal time, timezone offset and place identification need test and debug).
 
 <!-- ********************************************************************************* -->
 <h2>About this program</h2>
@@ -153,7 +153,7 @@ The name "Gauquelin5" comes from the main source of information, "Archives Gauqu
     <li>Marriage is written mariage, address is written adress.</li>
 </ul>
 
-<br>This software has a slow development pace because I do that on my spare time.
+<br>This software has a slow development pace because I do it on my spare time.
 <br>
 <br>Repository created by Thierry Graff in 2017.
 <!-- 
