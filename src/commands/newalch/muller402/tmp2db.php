@@ -139,7 +139,7 @@ class tmp2db implements Command {
                 if($mulday != $curaday){
                     $nDiffDates++;
                     $new['to-check'] = true;
-                    $new['notes'][] = "TO CHECK - Cura and Müller have different birth day";
+                    $new['notes'][] = "CHECK birth day : $curaId $curaday / Muller402 {$line['MUID']} $mulday";
                     if($reportType == 'full'){
                         $datesReport .= "\nCura\t $curaId\t $curaday {$p->data['name']['family']} - {$p->data['name']['given']}\n";
                         $datesReport .= "Müller\t {$line['MUID']}\t $mulday {$line['FNAME']} - {$line['GNAME']}\n";

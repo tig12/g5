@@ -22,14 +22,20 @@ class Person {
         @param $row Assoc array, row of table person
     **/
     public static function row2person($row){
+        $row['to-check'] = $row['to_check'];
+        unset($row['to_check']);
         $row['sources'] = json_decode($row['sources'], true);
-        $row['ids_in_sources'] = json_decode($row['ids_in_sources'], true);
+        $row['ids-in-sources'] = json_decode($row['ids_in_sources'], true);
+        unset($row['ids_in_sources']);
+        $row['trust-details'] = json_decode($row['trust_details'], true);
+        unset($row['trust_details']);
         $row['name'] = json_decode($row['name'], true);                             
         $row['occus'] = json_decode($row['occus'], true);
         $row['birth'] = json_decode($row['birth'], true);
         $row['death'] = json_decode($row['death'], true);
         $row['raw'] = json_decode($row['raw'], true);
         $row['history'] = json_decode($row['history'], true);
+        $row['notes'] = json_decode($row['notes'], true);
         $p = new Person();
         $p->data = $row;
         return $p;
@@ -113,22 +119,27 @@ class Person {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("insert into person(
             slug,
+            to_check,
             sources,
             ids_in_sources,
             trust,
+            trust_details,
             sex,
             name,
             occus,
             birth,
             death,
             raw,
-            history
-            )values(?,?,?,?,?,?,?,?,?,?,?) returning id");
+            history,
+            notes
+            )values(?,?,?,?,?,?,?,?,?,?,?,?,?,?) returning id");
         $stmt->execute([
             $this->data['slug'],
+            $this->data['to-check'],
             json_encode($this->data['sources']),
-            json_encode($this->data['ids_in_sources']),
+            json_encode($this->data['ids-in-sources']),
             $this->data['trust'],
+            json_encode($this->data['trust-details']),
             $this->data['sex'],
             json_encode($this->data['name']),
             json_encode($this->data['occus']),
@@ -136,6 +147,7 @@ class Person {
             json_encode($this->data['death']),
             json_encode($this->data['raw']),
             json_encode($this->data['history']),
+            json_encode($this->data['notes']),
         ]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         return $res['id'];
@@ -149,23 +161,28 @@ class Person {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("update person set
             slug=?,
+            to_check=?,
             sources=?,
             ids_in_sources=?,
             trust=?,
+            trust_details=?,
             sex=?,
             name=?,
             occus=?,
             birth=?,
             death=?,
             raw=?,
-            history=?      
+            history=?,
+            notes=?
             where id=?
             ");
         $stmt->execute([
             $this->data['slug'],
+            $this->data['to-check'],
             json_encode($this->data['sources']),
-            json_encode($this->data['ids_in_sources']),
+            json_encode($this->data['ids-in-sources']),
             $this->data['trust'],
+            json_encode($this->data['trust-details']),
             $this->data['sex'],
             json_encode($this->data['name']),
             json_encode($this->data['occus']),
@@ -173,6 +190,7 @@ class Person {
             json_encode($this->data['death']),
             json_encode($this->data['raw']),
             json_encode($this->data['history']),
+            json_encode($this->data['notes']),
             $this->data['id'],
         ]);
     }
@@ -242,7 +260,7 @@ class Person {
     }
     
     public function addIdInSource($source, $id){
-        $this->data['ids_in_sources'][$source] = $id;
+        $this->data['ids-in-sources'][$source] = $id;
     }
     
     public function addOccu($occu){

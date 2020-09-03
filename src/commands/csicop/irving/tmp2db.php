@@ -18,17 +18,37 @@ use g5\commands\cura\Cura;
 
 class tmp2db implements Command {
     
+    const REPORT_TYPE = [
+        'small' => 'Echoes the number of inserted / updated rows',
+        'full'  => 'Lists details of date differences from D10',
+    ];
+    
     // *****************************************
     // Implementation of Command
     /**
         @param  $params Empty array
     **/
     public static function execute($params=[]): string {
-        if(count($params) > 0){
-            return "USELESS PARAMETER : " . $params[0] . "\n";
+        if(count($params) > 1){
+            return "USELESS PARAMETER : " . $params[1] . "\n";
+        }
+        $msg = '';
+        foreach(self::REPORT_TYPE as $k => $v){
+            $msg .= "  $k : $v\n";
+        }
+        if(count($params) != 1){
+            return "WRONG USAGE - This command needs a parameter to specify which output it displays. Can be :\n" . $msg;
+        }
+        $reportType = $params[0];
+        if(!in_array($reportType, array_keys(self::REPORT_TYPE))){
+            return "INVALID PARAMETER : $reportType - Possible values :\n" . $msg;
         }
 
-        $report = "--- csicop irving tmp2db ---\n";
+        $report = "--- csicop irving tmp2db ---\n";     
+        
+        if($reportType == 'full'){
+            $datesReport = '';
+        }
         
         // source corresponding to rawlins-ertel-data.csv - insert if does not already exist
         $source = Irving::getSource();
@@ -106,7 +126,11 @@ class tmp2db implements Command {
                 if($csiday != $curaday){
                     $nDiffDates++;
                     $new['to-check'] = true;
-                    $new['notes'][] = "TO CHECK - Cura D10 and Csicop Irving have different birth day";
+                    $new['notes'][] = "CHECK birth day : $curaId $curaday / CSID {$line['CSID']} $csiday";
+                    if($reportType == 'full'){
+                        $datesReport .= "\nCura $curaId\t $curaday {$p->data['name']['family']} - {$p->data['name']['given']}\n";
+                        $datesReport .= "Irving CSID {$line['CSID']}\t $csiday {$line['FNAME']} - {$line['GNAME']}\n";
+                    }
                 }
                 $p->addOccu($line['SPORT']);
                 $p->addSource($source->data['slug']);
@@ -129,6 +153,10 @@ class tmp2db implements Command {
             $g->insertMembers();
         }
         $dt = $t2 - $t1;
+        if($reportType == 'full'){
+            $report .= "\n=== Dates different from D10 ===\n" . $datesReport;
+            $report .= "============\n";
+        }
         $report .= "$nInsert persons inserted, $nUpdate updated ($dt s)\n";
         $report .= "$nDiffDates dates differ from D10\n";
         return $report;

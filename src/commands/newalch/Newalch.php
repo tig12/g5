@@ -50,7 +50,7 @@ class Newalch implements SourceI {
     }
     
     /**
-        Convenience method to find Müller id from Person's ids_in_source field
+        Convenience method to find Müller id from Person's ids-in-source field
     **/
     public static function ids_in_sources2muId($ids_in_sources){
         if(isset($ids_in_sources['5muller_writers'])){

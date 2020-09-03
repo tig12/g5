@@ -7,9 +7,10 @@ id:
 
 slug:
 
+to-check:         # true or false - related to field "notes"
+
 trust:
 trust-details: []
-to-check:         # true or false - related to field "notes"
 
 sources: []
 # key / value pairs

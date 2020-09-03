@@ -135,7 +135,7 @@ class tmp2db implements Command {
                 // if Cura and Müller have different birth day
                 $mulday = substr($line['DATE'], 0, 10);
                 // from A2, stored in field 'date-ut' ; from E1, stored in field 'date'
-                if(isset($p->data['ids_in_sources']['A2'])){
+                if(isset($p->data['ids-in-sources']['A2'])){
                     $curaday = substr($p->data['birth']['date-ut'], 0, 10);
                 }
                 else{
@@ -143,7 +143,7 @@ class tmp2db implements Command {
                 }
                 if($mulday != $curaday){
                     $nDiffDates++;
-                    $new['notes'][] = "TO CHECK - Cura and Müller have different birth day";
+                    $new['notes'][] = "CHECK birth day : $curaId $curaday / Muller1083 {$line['NR']} $mulday";
                     $new['to-check'] = true;
                     if($reportType == 'full'){
                         $datesReport .= "\nCura $curaId\t $curaday {$p->data['name']['family']} - {$p->data['name']['given']}\n";

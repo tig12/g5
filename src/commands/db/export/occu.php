@@ -96,11 +96,11 @@ class occu implements Command {
                 return implode('+', $p->data['occus']);
             },
             'GID' => function($p){
-                return $p->data['ids_in_sources']['cura'] ?? '';
+                return $p->data['ids-in-sources']['cura'] ?? '';
             },
             'MUID' => function($p){
                 // TODO refactor, this should be called in raw2tmp or tmp2db of newalch files.
-                return Newalch::ids_in_sources2muId($p->data['ids_in_sources']);
+                return Newalch::ids_in_sources2muId($p->data['ids-in-sources']);
             },
         ];
         

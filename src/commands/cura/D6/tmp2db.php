@@ -127,7 +127,7 @@ class tmp2db implements Command {
                 // does not addIdInSource($curaSource) to respect the definition of Gauquelin id
                 $p->update(); // Storage
                 if($reportType == 'full'){
-                    $report .= "Duplicate {$test->data['slug']} : {$p->data['ids_in_sources']['cura']} = $curaId\n";
+                    $report .= "Duplicate {$test->data['slug']} : {$p->data['ids-in-sources']['cura']} = $curaId\n";
                 }
                 $nDuplicates++;
             }

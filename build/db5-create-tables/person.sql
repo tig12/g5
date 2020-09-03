@@ -4,9 +4,11 @@
 create table person (
     id              serial primary key,
     slug            varchar(255) unique not null,
+    to_check        boolean default false,
     sources         jsonb not null,
     ids_in_sources  jsonb not null,
-    trust           varchar(255) not null,
+    trust           varchar(255) not null,                                                           
+    trust_details   jsonb not null,
     sex             char(1),
     name            jsonb not null,
     occus           jsonb not null,
@@ -14,7 +16,8 @@ create table person (
     death           jsonb not null,
     -- admin fields
     raw             jsonb not null,
-    history         jsonb not null
+    history         jsonb not null,
+    notes           jsonb
 );
 create index person_slug_idx on person(slug);
 
