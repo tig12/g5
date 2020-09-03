@@ -10,14 +10,13 @@ namespace g5\commands\newalch\muller402;
 
 use g5\Config;
 use g5\model\DB5;
-use g5\model\Source;
-use g5\model\SourceI;
+use g5\model\{Source, SourceI};
 
 use tiglib\arrays\csvAssociative;
 
 class Muller402 implements SourceI {
     
-    const TRUST = DB5::TRUST_CHECK;
+    // TRUST_LEVEL not defined, using value of class Newalch
     
     /**
         Path to the yaml file containing the characteristics of the source.

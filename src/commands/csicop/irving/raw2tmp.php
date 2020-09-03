@@ -56,7 +56,7 @@ class raw2tmp implements Command {
                  . '-' . str_pad($fields[3] , 2, '0', STR_PAD_LEFT);
             $h = $fields[6];
             if($fields[8] == 'P' || $fields[8] == 'P1'){
-                // consider P1 because 2 records are bugged
+                // consider P1 because 2 records are bugged (121 and 295, see self::tz())
                 $h += 12;
             }
             $h = str_pad($h , 2, '0', STR_PAD_LEFT);
@@ -132,7 +132,9 @@ class raw2tmp implements Command {
     **/
     private static function tz($str){
         if($str == '0,5'){
-            // bug for 2 records
+            // bug for 2 records :
+            // 121 Fujii Paul Takashi 1940-07-06
+            // 295 Rocha Ephraim 1923-09-18
             return '-10:30';
         }
         // all other records contain integer offsets

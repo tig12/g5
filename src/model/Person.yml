@@ -14,7 +14,7 @@ to-check:         # true or false - related to field "notes"
 sources: []
 # key / value pairs
 # key = source slug ; value = local id in the given source
-ids_in_sources: []
+ids-in-sources: []
 
 sex:
 

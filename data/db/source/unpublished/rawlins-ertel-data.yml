@@ -1,0 +1,13 @@
+
+document:
+  history:
+    - 2020-09-01 17:56:19+02:00: Thierry Graff, creation
+
+name: rawlins-ertel-data.csv
+slug: rawlins-ertel-data
+description: |
+  CSV version of a file sent by Kenneth Irving on 2019-12-14.
+  The original file was named CSICOP.DOC and contained exactly the same content as the csv file
+source:
+  parents: []
+  

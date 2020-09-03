@@ -1,10 +1,10 @@
 <?php
 /********************************************************************************
     Loads files data/tmp/newalch/muller-402-it-writers.csv and muller-402-it-writers-raw.csv in database.
-    Affects records imported from A6
+    Affects records imported from A1
     
     @license    GPL
-    @history    2020-08-25 18:18:41+02:00, Thierry Graff : creation
+    @history    2020-09-02 00:36:52+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\csicop\irving;
 
@@ -18,41 +18,20 @@ use g5\commands\cura\Cura;
 
 class tmp2db implements Command {
     
-    const REPORT_TYPE = [
-        'small' => 'Echoes the number of inserted / updated rows',
-        'full'  => 'Lists details of names and dates restoration on A6',
-    ];
-    
     // *****************************************
     // Implementation of Command
     /**
-        @param  $params Array containing 1 element : the type of report ; see REPORT_TYPE
+        @param  $params Empty array
     **/
     public static function execute($params=[]): string {
-        if(count($params) > 1){
-            return "USELESS PARAMETER : " . $params[1] . "\n";
+        if(count($params) > 0){
+            return "USELESS PARAMETER : " . $params[0] . "\n";
         }
-        $msg = '';
-        foreach(self::REPORT_TYPE as $k => $v){
-            $msg .= "  $k : $v\n";
-        }
-        if(count($params) != 1){
-            return "WRONG USAGE - This command needs a parameter to specify which output it displays. Can be :\n" . $msg;
-        }
-        $reportType = $params[0];
-        if(!in_array($reportType, array_keys(self::REPORT_TYPE))){
-            return "INVALID PARAMETER : $reportType - Possible values :\n" . $msg;
-        }
+
+        $report = "--- csicop irving tmp2db ---\n";
         
-        $report = "--- Muller1083 tmp2db ---\n";
-        
-        if($reportType == 'full'){
-            $namesReport = '';
-            $datesReport = '';
-        }
-                                             
-        // source corresponding to 5a_muller_medics - insert if does not already exist
-        $source = Muller402::getSource();
+        // source corresponding to rawlins-ertel-data.csv - insert if does not already exist
+        $source = Irving::getSource();
         try{
             $source->insert();
         }
@@ -61,13 +40,13 @@ class tmp2db implements Command {
         }
         
         // group
-        $g = Group::getBySlug(Muller402::GROUP_SLUG);
+        $g = Group::getBySlug(Irving::GROUP_SLUG);
         if(is_null($g)){
             $g = new Group();
-            $g->data['slug'] = Muller402::GROUP_SLUG;
+            $g->data['slug'] = Irving::GROUP_SLUG;
             $g->data['sources'][] = $source->data['slug'];
-            $g->data['name'] = "Müller 402 Italian writers";
-            $g->data['description'] = "402 Italian writers, gathered by Arno Müller";
+            $g->data['name'] = "CSICOP";
+            $g->data['description'] = "CSICOP";
             $g->data['id'] = $g->insert();
         }
         else{
@@ -76,12 +55,11 @@ class tmp2db implements Command {
         
         $nInsert = 0;
         $nUpdate = 0;
-        $nRestoredNames = 0;
         $nDiffDates = 0;
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
-        $lines = Muller402::loadTmpFile();
-        $linesRaw = Muller402::loadTmpRawFile();
+        $lines = Irving::loadTmpFile();
+        $linesRaw = Irving::loadTmpRawFile();
         $N = count($lines);
         $t1 = microtime(true);
         for($i=0; $i < $N; $i++){
@@ -91,32 +69,29 @@ class tmp2db implements Command {
                 // Person not in Gauquelin data
                 $p = new Person();
                 $new = [];
-                $new['trust'] = Newalch::TRUST_LEVEL;
+                $new['trust'] = Irving::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
-                $new['sex'] = $line['SEX'];
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['tzo'] = $line['TZO'];
-                $new['birth']['note'] = $line['LMT'];
-                $new['birth']['place']['name'] = $line['PLACE'];
                 $new['birth']['place']['c2'] = $line['C2'];
                 $new['birth']['place']['cy'] = $line['CY'];
                 $new['birth']['place']['lg'] = $line['LG'];
                 $new['birth']['place']['lat'] = $line['LAT'];
                 //
-                $p->addOccu($line['OCCU']);
+                $p->addOccu($line['SPORT']);
                 $p->addSource($source->data['slug']);
-                $p->addIdInSource($source->data['slug'], $line['MUID']);
+                $p->addIdInSource($source->data['slug'], $line['CSID']);
                 $p->updateFields($new);
                 $p->computeSlug();
-                $p->addHistory("newalch muller402 tmp2db", $source->data['slug'], $new);
+                $p->addHistory("newalch irving tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);
                 $nInsert++;
                 $p->data['id'] = $p->insert(); // Storage
             }
             else{
-                // Person already in A6
+                // Person already in D10
                 $new = [];
                 $new['notes'] = [];
                 [$curaFile, $NUM] = explode('-', $line['GQID']);
@@ -125,39 +100,20 @@ class tmp2db implements Command {
                 if(is_null($p)){
                     throw new \Exception("$curaId : try to update an unexisting person");
                 }
-                if($p->data['name']['family'] == "Gauquelin-$curaId"){
-                    $nRestoredNames++;
-                    if($reportType == 'full'){
-                        $namesReport .= "\nCura\t $curaId\t {$p->data['name']['family']}\n";
-                        $namesReport .= "Müller\t {$line['MUID']}\t {$line['FNAME']} - {$line['GNAME']}\n";
-                    }
-                }
-                // if Cura and Müller have different birth day
-                $mulday = substr($line['DATE'], 0, 10);
-                // in E6, stored in field 'date-ut'
-                $curaday = substr($p->data['birth']['date-ut'], 0, 10);
-                if($mulday != $curaday){
+                // if Cura and csicop have different birth day
+                $csiday = substr($line['DATE'], 0, 10);
+                $curaday = substr($p->data['birth']['date'], 0, 10);
+                if($csiday != $curaday){
                     $nDiffDates++;
                     $new['to-check'] = true;
-                    $new['notes'][] = "TO CHECK - Cura and Müller have different birth day";
-                    if($reportType == 'full'){
-                        $datesReport .= "\nCura\t $curaId\t $curaday {$p->data['name']['family']} - {$p->data['name']['given']}\n";
-                        $datesReport .= "Müller\t {$line['MUID']}\t $mulday {$line['FNAME']} - {$line['GNAME']}\n";
-                    }
+                    $new['notes'][] = "TO CHECK - Cura D10 and Csicop Irving have different birth day";
                 }
-                // update fields that are more precise in muller402
-                $new['birth']['date'] = $line['DATE']; // Cura contains only date-ut
-                $new['birth']['tzo'] = $line['TZO'];
-                $new['birth']['note'] = $line['LMT'];
-                $new['birth']['place']['name'] = $line['PLACE'];
-                $new['name']['family'] = $line['FNAME'];
-                $new['name']['given'] = $line['GNAME'];
-                $p->addOccu($line['OCCU']);
+                $p->addOccu($line['SPORT']);
                 $p->addSource($source->data['slug']);
-                $p->addIdInSource($source->data['slug'], $line['MUID']);
+                $p->addIdInSource($source->data['slug'], $line['CSID']);
                 $p->updateFields($new);
                 $p->computeSlug();
-                $p->addHistory("cura muller402 tmp2db", $source->data['slug'], $new);
+                $p->addHistory("cura irving tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);                 
                 $nUpdate++;
                 $p->update(); // Storage
@@ -173,14 +129,8 @@ class tmp2db implements Command {
             $g->insertMembers();
         }
         $dt = $t2 - $t1;
-        if($reportType == 'full'){
-            $report .= "=== Names fixed ===\n" . $namesReport;
-            $report .= "\n=== Dates fixed ===\n" . $datesReport;
-            $report .= "============\n";
-        }
         $report .= "$nInsert persons inserted, $nUpdate updated ($dt s)\n";
-        $report .= "$nDiffDates dates differ from A6";
-        $report .= " - $nRestoredNames names restored in A6\n";
+        $report .= "$nDiffDates dates differ from D10\n";
         return $report;
     }
         

@@ -39,7 +39,11 @@ class addD10 implements Command {
         $ertel_gqid = [];
         foreach($ertel as $row){
             $CSID = $row['CSINR'];
-            if($CSID == '' || $CSID == 0){
+            // Fix Ertel file (records in Csicop without CSID)
+            if($row['NR'] == 2872){
+                $CSID = 254; // Miller Freddie 1911-04-03
+            }
+            else if($CSID == '' || $CSID == 0){
                 continue;
             }
             $ertel_csid[$CSID] = $row;

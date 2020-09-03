@@ -9,6 +9,7 @@ namespace g5\commands\cura\D6;
 
 class D6{
     
+    // TRUST_LEVEL not defined, using value of class Cura
     
     /** Fields of data/raw/cura/D6.csv **/
     const RAW_FIELDS = [

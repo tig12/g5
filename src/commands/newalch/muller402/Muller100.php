@@ -18,7 +18,7 @@ use tiglib\arrays\csvAssociative;
 
 class Muller100 implements SourceI {
     
-    const TRUST = DB5::TRUST_CHECK;
+    // TRUST_LEVEL not defined, using value of class Newalch
     
     /**
         Path to the yaml file containing the characteristics of the source.

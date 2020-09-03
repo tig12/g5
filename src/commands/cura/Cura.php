@@ -21,7 +21,7 @@ class Cura implements SourceI {
     const SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'cura.yml';
     
     /**
-        Trust level for data coming from Cura
+        Default trust level for data coming from Cura
         @see https://tig12.github.io/gauquelin5/check.html
     **/
     const TRUST_LEVEL = 4;

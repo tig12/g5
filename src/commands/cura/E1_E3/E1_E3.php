@@ -9,6 +9,8 @@ namespace g5\commands\cura\E1_E3;
 
 class E1_E3{
     
+    // TRUST_LEVEL not defined, using value of class Cura
+    
     /** Fields of data/raw/cura/E1.csv and E3.csv **/
     const RAW_FIELDS = [
         'NUM',

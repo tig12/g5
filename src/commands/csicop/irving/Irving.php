@@ -11,9 +11,26 @@ namespace g5\commands\csicop\irving;
 use g5\G5;
 use g5\Config;
 use tiglib\arrays\csvAssociative;
+use g5\model\DB5;
+use g5\model\{Source, SourceI};
 
-class Irving{
+class Irving implements SourceI {
     
+    /**                                            
+        Default trust level associated to the persons of this group
+        @see https://tig12.github.io/gauquelin5/check.html
+    **/
+    const TRUST_LEVEL = DB5::TRUST_CHECK;
+    
+    /**
+        Path to the yaml file containing the characteristics of the source.
+        Relative to directory specified in config.yml by dirs / db
+    **/
+    const SOURCE_DEFINITION = 'source' . DS . 'unpublished' . DS . 'rawlins-ertel-data.yml';
+
+    /** Slug of the group in db **/
+    const GROUP_SLUG = 'csicop';
+
     const RAW_CSV_SEP = ';';
     
     /** Field names of data/raw/csicop/irving/rawlins-ertel-data.csv **/
@@ -105,6 +122,13 @@ class Irving{
         'WRES' => 'LUT',
     ];
     
+    // *********************** Source management ***********************
+    
+    /** Returns a Source object for 5muller_writers.xlsx. **/
+    public static function getSource(): Source {
+        return Source::getSource(Config::$data['dirs']['db'] . DS . self::SOURCE_DEFINITION);
+    }
+    
     // *********************** Raw files manipulation ***********************
     
     /** Path to Irving's raw file **/
@@ -124,9 +148,14 @@ class Irving{
         return implode(DS, [Config::$data['dirs']['tmp'], 'csicop', 'irving', '408-csicop-irving.csv']);
     }
     
+    /** Loads data/tmp/csicop/irving/408-csicop-irving.csv in a regular array **/
+    public static function loadTmpFile(){
+        return csvAssociative::compute(self::tmpFilename(), G5::CSV_SEP);
+    }
+    
     /** Loads data/tmp/csicop/irving/408-csicop-irving.csv in an asssociative array ; keys = CSID **/
     public static function loadTmpFile_csid(){
-        $csv = csvAssociative::compute(self::tmpFilename(), G5::CSV_SEP);
+        $csv = self::loadTmpFile();
         $res = [];              
         foreach($csv as $row){
             $res[$row['CSID']] = $row;
