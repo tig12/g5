@@ -17,6 +17,7 @@ class CuraRouter implements Router{
     **/
     const DATAFILES_SUBNAMESPACE = [
         'all' => 'all',
+        'look' => 'look',
         'A' => 'A',
         'A1' => 'A',
         'A2' => 'A',
@@ -71,6 +72,7 @@ class CuraRouter implements Router{
     public static function getDatafiles(): array{
         return [
             'all',
+            'look',
             'A', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6',
             // 'B', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6',
             'D6', 'D10',
@@ -103,7 +105,7 @@ class CuraRouter implements Router{
         }
         
         // commands available for all datafiles, and implemented in subpackage all.
-        if($datafile != 'all'){
+        if($datafile != 'all' && $datafile != 'look'){
             $res[] = 'export';
             $res[] = 'tweak2tmp';
             sort($res);

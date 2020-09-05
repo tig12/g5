@@ -27,14 +27,14 @@ class look implements Command {
     // *****************************************
     // Implementation of Command
     /** 
-        Called by : php run-g5.php cura A count
-        So : php run-g5.php cura A look count
-        Is the same as : php run-g5.php cura A1 count
+        Called by       : php run-g5.php cura A count
+        So              : php run-g5.php cura A look count
+        Is the same as  : php run-g5.php cura A1 count
         @param $params  array with 3 elements :
                         - the datafile to process (ex A1) 
                         - name of this command (useless here) 
                         - the action to perform
-        @return         Empty string ; echoes the commands' reports
+        @return         String containing the html tables with the comparisons
     **/
     public static function execute($params=[]): string {
         if(count($params) > 3){

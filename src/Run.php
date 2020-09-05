@@ -12,13 +12,29 @@ namespace g5;
 
 class Run{
     
+    /** 
+        Returns the sub-directories that can be used to map a parameter in g5 CLI interface.
+        Ex : if $dir = src/commands, returns all subdirs that don't start with 'z.'
+    **/
+    private static function getSubdirs($dir){
+        $res = [];
+        $subdirs = array_map('basename', glob($dir . DS . '*', GLOB_ONLYDIR));
+        foreach($subdirs as $subdir){
+            // files / directories starting by z. are not versioned (draft or obsolete)
+            if(strpos($subdir, 'z.') !== 0){
+                $res[] = $subdir;
+            }
+        }
+        return $res;
+    }
+    
     // ******************************************************
     /**
         Returns a list of data sets known by the program
         = list of sub-directories of commands/
     **/
     public static function getDatasets(){
-        return array_map('basename', glob(implode(DS, [__DIR__, 'commands', '*']), GLOB_ONLYDIR));
+        return self::getSubdirs(__DIR__ . DS . 'commands');
     }
     
     
@@ -38,7 +54,7 @@ class Run{
         // else return the directories located in the dataset's class directory
         // as the code is psr4, possible to list php files without using reflection.
         $dir = implode(DS, [__DIR__, 'commands', $dataset]);
-        return array_map('basename', glob($dir . DS . '*', GLOB_ONLYDIR));
+        return self::getSubdirs($dir);
     }
     
     

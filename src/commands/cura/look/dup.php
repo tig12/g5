@@ -6,14 +6,14 @@
     @license    GPL
     @history    2020-09-03 14:01:29+02:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\commands\db\look;
+namespace g5\commands\cura\look;
 
 use g5\patterns\Command;
 use g5\commands\cura\CuraRouter;
 use g5\model\DB5;
 use g5\model\Person;
 
-class curadup implements Command {
+class dup implements Command {
     
     // *****************************************
     // Implementation of Command
@@ -59,7 +59,7 @@ class curadup implements Command {
             else if(count($dup) == 3){
                 $N3++;
             }
-            else if(count($dup) > 3){
+            else {
                 $N4++;
             }
             $p =& $persons[$dup[0]]; // $dup[0] = Gauquelin id
