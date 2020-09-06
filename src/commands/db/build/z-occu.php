@@ -3,6 +3,8 @@
     
     Builds occupation codes from wikidata
     
+    DRAFT CODE - UNFINISHED, NOT USED YET
+    
     @license    GPL
     @history    2020-08-27 00:29:07+02:00, Thierry Graff : Creation
 ********************************************************************************/

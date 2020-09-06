@@ -17,7 +17,7 @@ class Ertel4391 implements SourceI {
     
     /**
         Path to the yaml file containing the characteristics of the source describing file 3a_sports.txt.
-        Relative to directory specified in config.yml by dirs / db
+        Relative to directory specified in config.yml by dirs / build
     **/
     const RAW_SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch' . DS . '3a_sports.yml';
     
@@ -27,7 +27,7 @@ class Ertel4391 implements SourceI {
         Returns a Source object for the raw file used for Ertel4391.
     **/
     public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['db'] . DS . self::RAW_SOURCE_DEFINITION);
+        return Source::getSource(Config::$data['dirs']['build'] . DS . self::RAW_SOURCE_DEFINITION);
     }
 
     // *********************** Raw file manipulation ***********************

@@ -44,7 +44,7 @@ class tmp2db implements Command {
             return "INVALID PARAMETER : $reportType - Possible values :\n" . $msg;
         }
         
-        $report = "--- Muller1083 tmp2db ---\n";
+        $report = "--- Muller402 tmp2db ---\n";
         
         if($reportType == 'full'){
             $namesReport = '';

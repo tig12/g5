@@ -13,6 +13,7 @@ namespace g5\commands\db\look;
 
 use g5\patterns\Command;
 use g5\Config;
+use g5\model\Occupation;
 
 class occu implements Command {
     
@@ -84,8 +85,7 @@ class occu implements Command {
         @return associative array profession code => content of this record
     **/
     private static function readInputFile(){
-        $records = yaml_parse_file(Config::$data['dirs']['db'] . DS . 'occu.yml');
-        
+        $records = yaml_parse_file(Occupation::getDefinitionFile());
         $res = [];
         $check = [];
         foreach($records as $rec){

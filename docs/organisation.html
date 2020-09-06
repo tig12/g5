@@ -57,14 +57,12 @@ gauquelin5
     │   └── tmp        
     ├── docs
     ├── src
-    ├── share
     └── vendor
 </pre>
 
 <ul>
     <li><code>docs/</code> contains current documentation</li>
     <li><code>src/</code> and <code>vendor/</code> contain the code which processes data.</li>
-    <li><code>share/</code> is a messy directory bound to disappear</li>
     <li>
         <code>data/</code> is the interesting directory for this page.
     </li>
@@ -96,7 +94,7 @@ Data manipulated by the program are divided in 3 distinct groups :
 
 Directories <code>data/raw</code>, <code>data/build</code> and <code>data/db</code> (in bold on the directory structure) <b>are versioned with the program</b>.
 <br>
-<br>The flow : <code><b>raw data --> intermediate data --> database</b></code> has been used until now because it's easier to test and debug, but a direct import from raw data to database could be used in the future.
+<br>The flow : <code><b>raw data --> intermediate data --> database</b></code> has been used so far because it's easier to test and debugit separates code which corrects data and code which merges), but a direct import from raw data to database could be used in the future.
 
 <br>
 <br>All data are stored in a common database (the program uses postgresql).

@@ -20,7 +20,7 @@ class Muller402 implements SourceI {
     
     /**
         Path to the yaml file containing the characteristics of the source.
-        Relative to directory specified in config.yml by dirs / db
+        Relative to directory specified in config.yml by dirs / build
     **/
     const SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch' . DS . '5muller_writers.yml';
 
@@ -66,7 +66,7 @@ class Muller402 implements SourceI {
     
     /** Returns a Source object for 5muller_writers.xlsx. **/
     public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['db'] . DS . self::SOURCE_DEFINITION);
+        return Source::getSource(Config::$data['dirs']['build'] . DS . self::SOURCE_DEFINITION);
     }
     
     // *********************** Raw files manipulation ***********************

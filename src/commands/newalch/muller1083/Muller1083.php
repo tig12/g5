@@ -19,7 +19,7 @@ class Muller1083 implements SourceI {
     
     /**
         Path to the yaml file containing the characteristics of the source describing file 5a_muller_medics.txt.
-        Relative to directory specified in config.yml by dirs / db
+        Relative to directory specified in config.yml by dirs / build
     **/
     const RAW_SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch' . DS . '5a_muller_medics.yml';
     
@@ -127,7 +127,7 @@ class Muller1083 implements SourceI {
         Returns a Source object for the raw file used for Muller1083.
     **/
     public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['db'] . DS . self::RAW_SOURCE_DEFINITION);
+        return Source::getSource(Config::$data['dirs']['build'] . DS . self::RAW_SOURCE_DEFINITION);
     }
 
     // *********************** Raw file manipulation ***********************

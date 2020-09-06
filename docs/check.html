@@ -47,7 +47,7 @@ The big part of the job is to achieve <b>data reliability</b>. Ideally, every in
     <li>The transcription act has been <b>approved by 2 persons or more</b>.</li>
 </ul>
 
-<br>Integration of BCs in g5 is <a href=""><a href="https://larzac.info/gauquelin5/8-acts">data/8-acts/</a></a>, see page <a href="acts.html">Acts</a>.
+<br>Integration of BCs in g5 is <a href=""><a href="https://larzac.info/gauquelin5/8-acts">data/acts/</a></a>, see page <a href="acts.html">Acts</a>.
 <br>Currently very few birth times have been verified, only to resolve questions raised by g5 development. 
 </div>
 </header>
@@ -86,13 +86,30 @@ Trust = level of reliability of an information.
     </li>
 </ul>
 
-<br>Precision are constants of class <code>g5\model\DB5</code> and can be for example 2.5 if only one person has checked the BC. Not really level 2 but better than 3.
-Most data handled by g5 are level 4, very few are level 2.5.
+<br>Precision are constants of class <code>g5\model\DB5</code>
+<br>
+<br>One supplementary level was introduced : <b>2.5</b>, meaning that one person has checked the BC, but the information has not been confirmed by a second person. Not really level 2 but better than 3.
+<br>
+<br>Most data handled by g5 are level 4, very few are level 2.5.
+
 
 <!-- ********************************************************************************* -->
 <h2>G5 integration</h2>
-Currently a trust level is associated to a person. A more precise model is needed, to be able to associate a distinct trust to each field.
-<br>When a person is imported in <code>7-full</code>, it takes the trust of its source.
+
+Persons have 2 fields to express reliability :
+<ul>
+    <li>
+        <code><b>trust</b></code> permits to specify the default trust level of the person.
+    </li>
+    <li>
+        <code><b>trust-details</b></code> is an array associating specific fields and trust level.
+    </li>
+</ul>
+
+<br>This model permits to indicate separately the reliability of each field.
+<br>Ex : a person has <code>trust = 4</code> and <code>trust-details = {"name.fame": 2.5}</code> means that all fields are trust level 4, but one field, <code>person.data['name']['official']</code> is level 2.5.
+
+<br>When a person is imported in database, it takes by default the trust of its source.
 
 
 </article>

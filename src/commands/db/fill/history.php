@@ -14,24 +14,31 @@ use g5\patterns\Command;
 use g5\commands\db\build\dbcreate;
 use g5\commands\cura\CuraRouter;
 
+// raw2tmp
 use g5\commands\cura\A\raw2tmp                  as raw2tmpA;
 use g5\commands\cura\D6\raw2tmp                 as raw2tmpD6;
 use g5\commands\cura\D10\raw2tmp                as raw2tmpD10;
 use g5\commands\cura\E1_E3\raw2tmp              as raw2tmpE1E3;
 use g5\commands\cura\all\tweak2tmp              as tweak2tmpCura;
+
 use g5\commands\newalch\ertel4391\raw2tmp       as raw2tmpErtel4391;
 use g5\commands\newalch\ertel4391\tweak2tmp     as tweak2tmpErtel4391;
+
 use g5\commands\newalch\muller1083\raw2tmp      as raw2tmpMuller1083;
 use g5\commands\newalch\muller1083\tweak2tmp    as tweak2tmpMuller1083;
 use g5\commands\newalch\muller1083\fixGnr       as fixGnrMuller1083;
+
 use g5\commands\newalch\muller402\raw2tmp       as raw2tmpMuller402;
 use g5\commands\newalch\muller402\tweak2tmp     as tweak2tmpMuller402;
 use g5\commands\newalch\muller402\addA6         as addA6Muller402;
 use g5\commands\newalch\muller402\raw2tmpMuller100;
+
 use g5\commands\csicop\si42\raw2tmp             as raw2tmpSi42;
 use g5\commands\csicop\si42\addCanvas1          as addCanvas1Si42;
 use g5\commands\csicop\irving\raw2tmp           as raw2tmpIrving;
+use g5\commands\csicop\irving\addD10            as addD10Irving;
 
+// tmp2db
 use g5\commands\cura\A\tmp2db                   as tmp2dbA;
 use g5\commands\cura\D6\tmp2db                  as tmp2dbD6;
 use g5\commands\cura\D10\tmp2db                 as tmp2dbD10;
@@ -96,14 +103,19 @@ class history implements Command {
             foreach($filesCura as $datafile){
                 echo tweak2tmpCura::execute([$datafile, 'tweak2tmp']);
             }
+            
             echo raw2tmpErtel4391::execute([]);
             echo tweak2tmpErtel4391::execute([]);
+            
             echo raw2tmpMuller1083::execute([]);
             echo tweak2tmpMuller1083::execute([]);
             echo fixGnrMuller1083::execute(['update']);
+            
             echo raw2tmpSi42::execute([]);                                   
             echo addCanvas1Si42::execute([]);
             echo raw2tmpIrving::execute([]);
+            echo addD10Irving::execute([]);
+            
             echo raw2tmpMuller402::execute([]);
             echo tweak2tmpMuller402::execute([]);
             echo addA6Muller402::execute(['update']);
