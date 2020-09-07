@@ -39,7 +39,7 @@ class G55Router implements Router{
         Returns an array containing the possible datafiles processed by the dataset.
         @return Array of strings
     **/
-    public static function getDatafiles(): array{
+    public static function getArgs2(): array{
         return G55::DATAFILES_POSSIBLES;
     }
     
@@ -49,7 +49,7 @@ class G55Router implements Router{
     /**
         @return A list of possible actions for a given datafile.
     **/
-    public static function getCommands($datafile): array{
+    public static function getArgs3($datafile): array{
         // All datafiles share the same possible commands, that are located in 'all' sub-package 
         $tmp = glob(__DIR__ . DS . 'all' . DS . '*.php');
         $res = [];

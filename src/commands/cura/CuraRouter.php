@@ -69,7 +69,7 @@ class CuraRouter implements Router{
         (= possible values of parameter indicating the subject to process)
         @return Array of strings
     **/
-    public static function getDatafiles(): array{
+    public static function getArgs2(): array{
         return [
             'all',
             'look',
@@ -86,7 +86,7 @@ class CuraRouter implements Router{
     /**
         @return A list of possible actions for a given datafile.
     **/
-    public static function getCommands($datafile): array{
+    public static function getArgs3($datafile): array{
         $subnamespace = self::DATAFILES_SUBNAMESPACE[$datafile];
         $tmp = glob(__DIR__ . DS . $subnamespace . DS . '*.php');
         $res = [];

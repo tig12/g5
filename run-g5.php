@@ -19,101 +19,96 @@ use g5\Run;
 //
 // parameter checking
 //
-$datasets = Run::getDatasets();
-$datasets_str = implode(", ", $datasets);
+$args1 = Run::getArgs1();
+$args1_str = implode(", ", $args1);
 
 $USAGE = <<<USAGE
--------
+-------                                                                                               
 Usage : 
-    php {$argv[0]} <dataset> <datafile> <action> [parameters]
-with :
-    <dataset> can be : {$datasets_str}
-    <datafile> : the precise file(s) within the dataset.
-    <action> = action done on data ; available actions depend on dataset and datafile.
-    [parameters] optional list of parameters depending on action.
+    php {$argv[0]} <argument1> <argument2> <argument3> [optional arguments]
 Example :
     php {$argv[0]} cura A2 raw2csv
 -------
 
 USAGE;
 
-// check dataset
+// check arg1
 if(count($argv) < 2){
-    echo "WRONG USAGE - need at least 3 arguments\n";
+    echo "WRONG USAGE - run-g5.php needs at least 3 arguments\n";
     echo $USAGE;
-    echo "Try with one of these datasets : $datasets_str\n";
+    echo "Possible values for argument1 : $args1_str\n";
     exit;
 }
 else{
-    $dataset = $argv[1];
-    $datasets = Run::getDatasets();
-    $datasets_str = implode(", ", $datasets);
-    if(!in_array($dataset, $datasets)){
+    $arg1 = $argv[1];
+    $args1 = Run::getArgs1();
+    $args1_str = implode(", ", $args1);
+    if(!in_array($arg1, $args1)){
         echo $USAGE;
-        echo "WRONG USAGE - INVALID DATASET : $dataset\n";
-        echo "Possible datasets : $datasets_str\n";
+        echo "WRONG USAGE - INVALID DATASET : $arg1\n";
+        echo "Possible argument1 : $args1_str\n";
         exit;
     }
 }
-// here, dataset is valid
+// here, arg1 is valid
 
-// check datafile
-$datafiles = Run::getDatafiles($dataset);
-$datafiles_str = implode(", ", $datafiles);
+// check arg2
+$arg2s = Run::getArgs2($arg1);
+$arg2s_str = implode(", ", $arg2s);
 if(count($argv) < 3){
-    echo "WRONG USAGE - need at least 3 arguments\n";
+    echo "WRONG USAGE - run-g5.php needs at least 3 arguments\n";
     echo $USAGE;
     echo "\n";
-    echo "Possible datafiles for dataset $dataset : $datafiles_str\n";
+    echo "Possible argument2 for argument1 = $arg1 : $arg2s_str\n";
     echo "\n";
     exit;
 }
 else{
-    $datafile = $argv[2];
-    if(!in_array($datafile, $datafiles)){
+    $arg2 = $argv[2];
+    if(!in_array($arg2, $arg2s)){
         echo $USAGE;
-        echo "WRONG USAGE - INVALID DATAFILE : $datafile\n";
+        echo "WRONG USAGE - INVALID DATAFILE : $arg2\n";
         echo "\n";
-        echo "Possible datafiles for dataset $dataset : $datafiles_str\n";
+        echo "Possible argument2 for argument1 = $arg1 : $arg2s_str\n";
         echo "\n";
         exit;
     }
 }
-// here, datafile is valid
+// here, arg2 is valid
 
-// check action
-$actions = Run::getCommands($dataset, $datafile);
-$actions_str = implode(", ", $actions);
+// check arg3
+$arg3s = Run::getArgs3($arg1, $arg2);
+$arg3s_str = implode(", ", $arg3s);
 if(count($argv) < 4){
-    echo "WRONG USAGE - need at least 3 arguments\n";
+    echo "WRONG USAGE - run-g5.php needs at least 3 arguments\n";
     echo $USAGE;
     echo "\n";
-    echo "Possible actions for $dataset - $datafile : $actions_str\n";
+    echo "Possible argument3 for $arg1 / $arg2 : $arg3s_str\n";
     echo "\n";
     exit;
 }
 else{
-    $action = $argv[3];
-    if(!in_array($action, $actions)){                  
-        echo "WRONG USAGE - INVALID ACTION : $action\n";
+    $arg3 = $argv[3];
+    if(!in_array($arg3, $arg3s)){                  
+        echo "WRONG USAGE - INVALID ACTION : $arg3\n";
         echo "\n";
-        echo "Possible actions for $dataset - $datafile : $actions_str\n";
+        echo "Possible argument3 for $arg1 / $arg2 : $arg3s_str\n";
         echo "\n";
         exit;
     }
 }
-// here, action is valid
+// here, arg3 is valid
 
 //
 // run
 //
 try{
     $params = array_slice($argv, 4);
-    [$isRouter, $class] = Run::getCommandClass($dataset, $datafile, $action);
+    [$isRouter, $class] = Run::getCommandClass($arg1, $arg2, $arg3);
     if($isRouter){
-        // transmit action and datafile to the router
-        array_unshift($params, $action);
-        array_unshift($params, $datafile);
+        // transmit arg3 and arg2 to the router
+        array_unshift($params, $arg3);
+        array_unshift($params, $arg2);
     }
     $report = $class::execute($params);
     echo "$report";

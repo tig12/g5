@@ -33,7 +33,7 @@ class Run{
         Returns a list of data sets known by the program
         = list of sub-directories of commands/
     **/
-    public static function getDatasets(){
+    public static function getArgs1(){
         return self::getSubdirs(__DIR__ . DS . 'commands');
     }
     
@@ -41,19 +41,19 @@ class Run{
     // ******************************************************
     // Simulates implementation of Router 
     /**
-        Returns the possible datafiles for a given dataset.
-        @todo maybe use reflection if some sub-directories of datasets do not correspond to a datafile sub-package.
+        Returns the possible arg2 for a given arg1.
+        @todo maybe use reflection if some sub-directories of arg1s do not correspond to a arg2 sub-package.
     **/
-    public static function getDatafiles($dataset){
-        // if the dataset has an implementation of interface Router, delegate
-        $file = self::datasetRouterFilename($dataset);
+    public static function getArgs2($arg1){
+        // if the arg1 has an implementation of interface Router, delegate
+        $file = self::arg1RouterFilename($arg1);
         if(file_exists($file)){
-            $class = self::datasetRouterClassname($dataset);
-            return $class::getDatafiles();
+            $class = self::arg1RouterClassname($arg1);
+            return $class::getArgs2();
         }
-        // else return the directories located in the dataset's class directory
+        // else return the directories located in the arg1's class directory
         // as the code is psr4, possible to list php files without using reflection.
-        $dir = implode(DS, [__DIR__, 'commands', $dataset]);
+        $dir = implode(DS, [__DIR__, 'commands', $arg1]);
         return self::getSubdirs($dir);
     }
     
@@ -61,32 +61,32 @@ class Run{
     // ******************************************************
     // Simulates implementation of Router 
     /**
-        Returns the possible commands for the datafile of a dataset.
-        @return Array of strings containing the possible actions.
+        Returns the possible commands for the arg2 of a arg1.
+        @return Array of strings containing the possible args3.
     **/
-    public static function getCommands($dataset, $datafile){
-        // if the dataset has an implementation of interface Router, delegate
-        $file = self::datasetRouterFilename($dataset);
+    public static function getArgs3($arg1, $arg2){
+        // if the arg1 has an implementation of interface Router, delegate
+        $file = self::arg1RouterFilename($arg1);
         if(file_exists($file)){
-            $class = self::datasetRouterClassname($dataset);
-            return $class::getCommands($datafile);
+            $class = self::arg1RouterClassname($arg1);
+            return $class::getArgs3($arg2);
         }
-        // else return the classes located in the datafile's class directory
+        // else return the classes located in the arg2's class directory
         // as the code is psr4, possible to list php files without using reflection.
-        $dir = implode(DS, [__DIR__, 'commands', $dataset, $datafile]);
+        $dir = implode(DS, [__DIR__, 'commands', $arg1, $arg2]);
         $tmp = glob($dir . DS . '*.php');
         $res = [];
         foreach($tmp as $file){
             $basename = basename($file, '.php');
             try{
-                $class = new \ReflectionClass("g5\\commands\\$dataset\\$datafile\\$basename");
+                $class = new \ReflectionClass("g5\\commands\\$arg1\\$arg2\\$basename");
                 if($class->implementsInterface("g5\\patterns\\Command")){
                     $res[] = $basename;
                 }
             }
             catch(\Exception $e){
                 // silently ignore php files present in the directory, but containing errors
-                // echo "ERR new \\ReflectionClass(\\"g5\\commands\\$dataset\\$datafile\\$basename\\") \n" . $e->getMessage() . "\n";
+                // echo "ERR new \\ReflectionClass(\\"g5\\commands\\$arg1\\$arg2\\$basename\\") \n" . $e->getMessage() . "\n";
             }
         }
         return $res;
@@ -94,7 +94,7 @@ class Run{
     
     // ******************************************************
     /**
-        Returns the fully qualified name of a class that will be called for a given triple (dataset, datafile, action).
+        Returns the fully qualified name of a class that will be called for a given triple (arg1, arg2, arg3).
         Implementation of convention described in docs/code-details.html
         @return Array with 2 elements :
                     - Boolean Indicates if the returned class implements Router or Command
@@ -102,61 +102,61 @@ class Run{
         @throws Exception if the convention is not correctly coded.
         @todo check that the class implements interface Command.
     **/
-    public static function getCommandClass($dataset, $datafile, $action){
-        // look if class implementing Command exists for the dataset
-        $file = self::datasetCommandFilename($dataset);
+    public static function getCommandClass($arg1, $arg2, $arg3){
+        // look if class implementing Command exists for the arg1
+        $file = self::arg1CommandFilename($arg1);
         if(file_exists($file)){
-            $class = self::datasetCommandClassname($dataset);
+            $class = self::arg1CommandClassname($arg1);
             return [true, $class];
         }
-        // Class for dataset doesn't exist, use default 
-        // look if a class corresponding to this action exists
-        $class = "g5\\commands\\$dataset\\$datafile\\$action";
+        // Class for arg1 doesn't exist, use default 
+        // look if a class corresponding to this arg3 exists
+        $class = "g5\\commands\\$arg1\\$arg2\\$arg3";
         if(class_exists($class)){
             return [false, $class];
         }
         // class not found
         $msg = "BUG : incorrect implementation of command.\n"
-            . "  Dataset : $dataset\n"
-            . "  Datafile : $datafile\n"
-            . "  Action : $action\n";
+            . "  Dataset : $arg1\n"
+            . "  Datafile : $arg2\n"
+            . "  Action : $arg3\n";
         throw new \Exception($msg);
     }
     
     
     // ******************************************************
     /** 
-        Returns the class name of a dataset's class implementing Router interface.
-        Auxiliary of self::getDatafiles() and self::getActionClass().
+        Returns the class name of a arg1's class implementing Router interface.
+        Auxiliary of self::getArgs2() and self::getActionClass().
     **/
-    private static function datasetRouterClassname($dataset){
-        return implode("\\", ['g5', 'commands', $dataset, ucFirst($dataset) . 'Router']);
+    private static function arg1RouterClassname($arg1){
+        return implode("\\", ['g5', 'commands', $arg1, ucFirst($arg1) . 'Router']);
     }
 
     /** 
-        Returns the absolute filename of a dataset's class implementing Router interface.
-        Auxiliary of self::getDatafiles() and self::getActionClass().
+        Returns the absolute filename of a arg1's class implementing Router interface.
+        Auxiliary of self::getArgs2() and self::getActionClass().
     **/
-    private static function datasetRouterFilename($dataset){
-        return implode(DS, [__DIR__, 'commands', $dataset, ucFirst($dataset) . 'Router.php']);
+    private static function arg1RouterFilename($arg1){
+        return implode(DS, [__DIR__, 'commands', $arg1, ucFirst($arg1) . 'Router.php']);
     }
     
     
     // ******************************************************
     /** 
-        Returns the class name of a dataset's class implementing Command interface.
+        Returns the class name of a arg1's class implementing Command interface.
         Auxiliary of self::getCommandClass().
     **/
-    private static function datasetCommandClassname($dataset){
-        return implode("\\", ['g5', 'commands', $dataset, ucFirst($dataset) . 'Command']);
+    private static function arg1CommandClassname($arg1){
+        return implode("\\", ['g5', 'commands', $arg1, ucFirst($arg1) . 'Command']);
     }
     
     /** 
-        Returns the absolute path of a dataset's class implementing Command interface.
+        Returns the absolute path of a arg1's class implementing Command interface.
         Auxiliary of self::getCommandClass().
     **/
-    private static function datasetCommandFilename($dataset){
-        return implode(DS, [__DIR__, 'commands', $dataset, ucFirst($dataset) . 'Command' . '.php']);
+    private static function arg1CommandFilename($arg1){
+        return implode(DS, [__DIR__, 'commands', $arg1, ucFirst($arg1) . 'Command' . '.php']);
     }
     
     
