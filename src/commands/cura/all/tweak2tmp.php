@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Transfers information from data/edited/cura-tweaked/ to data/tmp/cura/
+    Transfers information from data/build/cura-tweak/ to data/tmp/cura/
     Updates a file of data/tmp/cura/ with the values found in the yaml file containing tweaks.
     
     WARNING : this step must be done just after step raw2tmp.
@@ -34,7 +34,7 @@ class tweak2tmp implements Command {
             return "WRONG USAGE : useless parameter : {$params[2]}\n";
         }
         $datafile = $params[0];
-        $tweaksFile = Config::$data['dirs']['build'] . DS . 'cura-tweaked' . DS . $datafile . '.yml';
+        $tweaksFile = Config::$data['dirs']['build'] . DS . 'cura-tweak' . DS . $datafile . '.yml';
         
         $report = "--- $datafile tweak2tmp ---\n";
         

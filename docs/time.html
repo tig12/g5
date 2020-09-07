@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Expressing time | Gauquelin5</title>
+    <title>Time and timezone | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="">
     <meta name="robots" content="index,follow">
@@ -28,9 +28,8 @@
 </nav>
 
 <header>
-<h1>Expressing time</h1>
+<h1>Time and timezone</h1>
 <div class="intro">
-This page deals with a small but important detail : how to store times.
 </div>
 </header>
 
@@ -45,18 +44,6 @@ This page deals with a small but important detail : how to store times.
         </li>
     </ul>
 </nav>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 In this page, "legal time" means "the time that can be read on the birth certificate".
@@ -84,40 +71,141 @@ This means that birth time is <code><b>05:00:00</b></code>, and timezone offset 
 <cite class="margin05">Birthtime is converted to standard time, either for zone 0 (= GMT) or -1 (= CET)</cite>
 
 The way birth times are expressed in cura site adds information (the timezone offset). It's cool because the information can be directly used to compute birth chart. 
-<br>But <b>expressing times this way should be avoided</b> because two distinct informations are mixed in one field :
+<br>But <b>expressing times this way is a bad practice and should be avoided</b> because two distinct informations are mixed in one field :
 <ul>
     <li>The legal time, as it can be read in civil registries.</li>
     <li>The timezone offset.</li>
 </ul>
 
 It's a problem, because if one wants to check the data, it's impossible to check legal time without worrying about timezone offset.
-<br><b>Doing like that generates a loss of information</b>. If the data is not correct, does it come from an error on legal time or on timezone offset computation ?
 <br>
-<br>Files D6, D10, E1, E3 contain legal time, so this problem does not occur. This advantage comes with an inconvenient : timezone offset is not provided, and needs to be computed to permit birth chart computation.
+<br><b>Doing like that generates a loss of information</b>.
+<br>If the data is not correct, it is not possible to answer to the question : does it come from an error on legal time or on timezone offset computation ?
 
 
 <!-- ********************************************************************************* -->
 <h2><a name="format-used-in-g5">Format used in g5</a></h2>
 
-The purpose is to provide both legal time and timezone offset in a format that can be easily exploited by program.
-<br>
-<br>In the A1-798 example, date provided by CURA can be formatted using ISO 8601 format as <code><b>1909-03-14 04:50:40+00:00</b></code>.
-<br>Comparison between CURA and LERRCP permits to deduce that timezone offset is <code>9' 40''</code>. 
-<br>
-<br>1 - A solution is to express this date as <code><b>1909-03-14 05:00+00:09:40</b></code>.
-<br>This solution has an inconvenient : it obliges to express the timezone offset in the form <code>sHH:MM:SS</code> ; this form does not respect ISO 8601 standard, which does not permit to express seconds for the timezone offset (this point is not certain, as parts of ISO 8601 standard is not available for free).
-<br>
-<br>2 - An other solution is to use two fields, one with birth date (<code><b>1909-03-14 05:00</b></code>) and one with timezone offset (<code><b>+00:09:40</b></code>).
-<br>
-<br>3 - In file <a href="newalch-muller1083.html">Müller 1083</a>, Arno Müller uses 3 columns : 
-<ul>
-    <li><code>GEBDATUM</code> : legal time conform to birth certificate</li>
-    <li><code>MODE</code> : contains "LMT" (local mean time) or nothing.</li>
-    <li><code>KORR</code> : contains timezone offset for non LMT records.</li>
+In g5 database, dates are stored using 2 distinct fields :
+<ul class="spaced margin-top">
+    <li>
+        One field to store date and time if present. It respects ISO 8601 format and can be one of :
+        <br>- <code>YYYY-MM-DD HH:MM</code> if time is known.
+        <br>- <code>YYYY-MM-DD</code> if time is not known.
+    </li>
+    <li>
+        One field to store timezone offset. The format can be :
+        <br>- <code>sHH:MM</code> when precision of a minute is sufficient.
+        <br>- <code>sHH:MM:SS</code> when precision of a second is needed.
+    </li>
 </ul>
-The information is not ambiguous, but obliges data users to compute the "LMT" information.
+
+
+<!-- ********************************************************************************* -->
+<h2>Expressing timezone offset</h2>
+
+Notations :
+<div class="margin-left">
+LT = legal time
+<br>TZO = timezone offset
+<br>UT = universal time
+</div>
+
+<br>A surprising feature of historical data is that <b>neither Gauquelin nor Müller respect the ISO 8601 definition of timezone offset</b>. They always indicate the opposite value. The same problem occurs in the 2 books used to compute timezone offset (see below).
+<br>This is not a blocking bug as it's finally just a matter of convention.
+
+<table class="wikitable margin">
+    <tr>
+        <th>Meaning for Gauquelin and Müller</th>
+    </tr>
+    <tr>
+        <td>
+            <code>LT + TZO = UT</code>
+            <br>If LT is known, add the TZO to obtain UT
+        </td>
+    </tr>
+    <tr>
+        <th>Meaning for g5</th>
+    </tr>
+    <tr>
+        <td>
+            <code>UT + TZO = LT</code>
+            <br>if UT is known, add TZO to obtain LT
+            <br>
+            <br>This is equivalent to 
+            <br><code>LT - TZO = UT</code>
+            <br>If LT is known, substract the TZO to obtain UT
+        </td>
+    </tr>
+</table>
+
+Example : the first record of file D10 : Aaron Harold, born 1921-06-21 07:00
+<br>Gauquelin gives TZO = 6h
+<br>g5 gives TZO = -6h
 <br>
-<br>For Gauquelin5, solution 1 was adopted, even if this does not strictly respect ISO 8601.
+<br>To find UT :
+<br>From Gauquelin value : UT = 07:00 + 6h = 13:00
+<br>From g5 value : UT = 07:00 - (-6h) = 13:00
+<br>
+<br>The results are equivalent. 
+
+
+<!-- ********************************************************************************* -->
+<h2>Timezone offset computation</h2>
+
+This is a delicate and important problem.
+<br>Important because TZO is necessary to compute a chart, and delicate because information sources are sometimes contradictory.
+<br>
+<br>The reference is the "Olson database", used by operating systems and programming languages (<a href="https://www.iana.org/time-zones">https://www.iana.org/time-zones</a>).
+<br>
+<br>This handles simple cases when the offset is defined for a whole time zone at a given time.
+<br>For these cases, it's possible to compute the offset without ambiguity :
+<br><code>(date, time zone identifier) --> offset</code>.
+<br>
+<br>But things are sometimes more complex :
+<ul>
+    <li>In the 19th century, local time was used, so longitude is also needed for the computation.</li>
+    <li>In some periods of history, the offset depends on political events, and precise local conditions need to be known. This happens for example in France or Italy during world war 2.</li>
+</ul>
+
+<br>To handle these cases, I have 2 books
+<ul>
+    <li>FG  : "Problèmes de l'heure résolus pour le monde entier" (Françoise Gauquelin, Guy Trédaniel éditeur), 1991</li>
+    <li>THM : "Traité de l'heure dans le monde", (Gabriel, Guy Trédaniel éditeur), 5th edition, 1990</li>
+</ul>
+
+<!-- ************************************* -->
+<h3>g5 integration</h3>
+
+Time zone computation is a weak point of current implementation :
+<ul>
+    <li>My understanding of Olson database is too superficial to be sure of its meaning.</li>
+    <li>When 2 sources contradict, each case should be solved in a documented way.</li>
+</ul>
+
+<br>As a consequence, offset computation in g5 is partial and should not be considered as reliable yet.
+<br>
+<br>Persons have 3 fields to express a date and its timezone :
+<br>- <code>birth.date</code> : the legal time
+<br>- <code>birth.date-ut</code> : UT
+<br>- <code>birth.tzo</code> : the timezone offset
+<br>
+<br>With (see above) : <code>date-ut + tzo = date</code>
+
+<!-- ************************************* -->
+<h3>Examples of contradictions</h3>
+<ul>
+    <li>
+        For Italy, both books say that offset is 1h for the whole country since 1893-11-01.
+        <br>Olson database says 1901-12-13
+    </li>
+    <li>
+        For France or Italy, FG says that "local time" is local <b>mean</b> time.
+        <br>THM talks about local <b>real</b> time.
+        <br>The difference between real and mean local time is the equation of time.
+    </li>
+</ul>
+
 </article>
 </div><!-- end class="main" -->
 
@@ -181,7 +269,7 @@ The information is not ambiguous, but obliges data users to compute the "LMT" in
         <ul>
             <li><a href="full.html">7-full</a></li>                                       
             <li>
-                <a href="db5.html">G5 database db5</a>
+                <a href="db5.html">G5 database</a>
                 <ul>
                     <li><a href="db5-source.html">Source</a></li>
                     <li><a href="db5-person.html">Person</a></li>
@@ -206,9 +294,14 @@ The information is not ambiguous, but obliges data users to compute the "LMT" in
         </ul>
     </li>
     
-    <li><a href="code-details.html">Code details</a></li>
-    <li><a href="time.html">Expressing time</a></li>
-    <li><a href="tweak2csv.html">tweak2csv</a></li>
+    <li>
+        <span class="big1">Details</span>
+        <ul>
+            <li><a href="time.html">Time and timezone</a></li>
+            <li><a href="tweak2csv.html">tweak2csv</a></li>
+            <li><a href="code-details.html">Code details</a></li>
+        </ul>
+    </li>
     
     <!-- <li><a href="next.html">Next</a></li> -->
     

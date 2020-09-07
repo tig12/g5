@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Transfers information from 3-newalch-tweaked/ to 5-newalch-csv/
+    Transfers information from data/build/newalch-tweak/ to data/tmp/newalch/
     Updates the file 4391SPO.csv with the values found in the yaml file.
     
     @license    GPL
@@ -26,7 +26,7 @@ class tweak2tmp implements Command {
             return "WRONG USAGE : useless parameter : {$params[2]}\n";
         }
         $report = "--- Ertel4391 tweak2tmp ---\n";
-        $yamlfile = Config::$data['dirs']['build'] . DS . 'newalch-tweaked' . DS . '4391SPO.yml';
+        $yamlfile = Config::$data['dirs']['build'] . DS . 'newalch-tweak' . DS . '4391SPO.yml';
         
         // load tweaks in an assoc arrray (keys = NR)
         $yaml = yaml_parse(file_get_contents($yamlfile));

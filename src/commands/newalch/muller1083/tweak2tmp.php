@@ -1,6 +1,7 @@
 <?php
 /********************************************************************************
-    Transfers information from 3-newalch-tweaked/ to 5-newalch-csv/
+    Transfers information from data/build/newalch-tweak/
+    to data/tmp/newalch-/
     Updates the file 1083MED.csv with the values found in the yaml file.
     
     @license    GPL
@@ -26,7 +27,7 @@ class tweak2tmp implements Command {
             return "WRONG USAGE : useless parameter : {$params[2]}\n";
         }
         $report = "--- muller1083 tweak2tmp ---\n";
-        $yamlfile = Config::$data['dirs']['build'] . DS . 'newalch-tweaked' . DS . '1083MED.yml';
+        $yamlfile = Config::$data['dirs']['build'] . DS . 'newalch-tweak' . DS . '1083MED.yml';
         
         // load tweaks in an assoc arrray (keys = NR)
         $yaml = yaml_parse(file_get_contents($yamlfile));

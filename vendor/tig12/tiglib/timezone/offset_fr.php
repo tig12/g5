@@ -23,6 +23,20 @@ use soniakeys\meeus\eqtime\eqtime;
 
 class offset_fr{
     
+    // return codes and messages
+    const CASE_1871_1918_LORRAINE = 1;
+    const MSG_1871_1918_LORRAINE = 'Possible TZ offset error (german zone 1871 - 1918 ; dept 54, 57, 88)';
+    
+    const CASE_1871_1918_ALSACE = 2;
+    const MSG_1871_1918_ALSACE = 'Possible TZ offset error (german zone 1871 - 1918 ; dept 67, 68)';
+    
+    const CASE_WW2 = 3;
+    const MSG_WW2 = 'Possible timezone offset error (german occupation WW2)';
+    
+    const CASE_BEFORE_1891 = 4;
+    
+    const CASE_PHP_DEFAULT = 5;
+    
     // ******************************************************
     /**
         Computation of timezone offset for France.
@@ -59,19 +73,19 @@ class offset_fr{
             88 : Vosges (la vallée de la Bruche, de Schirmeck à Saales).             
             */
             if(in_array($c2, [54, 57, 88])){
-                $case = 1;
-                $err = "Possible timezone offset error (german zone 1871 - 1918 ; dept 54, 57, 88) : $date $c2";
+                $case = self::CASE_1871_1918_LORRAINE;
+                $err = self::MSG_1871_1918_LORRAINE . " - dept $c2 - $date";
             }
             else if(in_array($c2, [67, 68])){
-                $case = 2;
+                $case = self::CASE_1871_1918_ALSACE;
                 //$zone = 'Europe/Berlin';
                 // @todo Possible to compute
-                $err = "Possible timezone offset error (german zone 1871 - 1918 ; dept 67, 68) : $date $c2";
+                $err = self::MSG_1871_1918_ALSACE . " - dept $c2 - $date";
             }
         }                                                         
         if($date >= '1940-02' && $date <= '1942-11'){
-            $case = 3;
-            $err = "Possible timezone offset error (german occupation WW2) : $date";
+            $case = self::CASE_WW2;
+            $err = self::MSG_WW2 . " : $date";
         }
         
         if($err != ''){
@@ -79,7 +93,7 @@ class offset_fr{
         }
         
         if($date < '1891-03-15'){
-            $case = 4;
+            $case = self::CASE_BEFORE_1891;
             // From "Traité de l'heure dans le monde" :
             // legal hour HL = HLO, local hour at real sun
             // and UT = HLO - Lg - E (E = equation of time)
@@ -94,7 +108,7 @@ class offset_fr{
             $offset = $sign . $hhmmss;
         }
         else{
-            $case = 5;
+            $case = CASE_PHP_DEFAULT;
             $offset = offset::compute($date, 'Europe/Paris', $format);
         }
         

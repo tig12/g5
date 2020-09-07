@@ -24,7 +24,7 @@ class offset{
         
         @param  $date   ISO 8601 date, like '2018-04-22' or '2018-04-22 12:00:00'
                         In fact, this parameter can be any string accepted by php class DateTime constructor.
-        @param  $zone   A zone identifier, like 'Europe/Paris'                                   
+        @param  $zone   A zone identifier, like 'Europe/Paris'
         @param  $format Format of the returned offset
                         Can be 'HH:MM' or 'HH:MM:SS'
         

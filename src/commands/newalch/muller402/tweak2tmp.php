@@ -1,7 +1,7 @@
 <?php
 /********************************************************************************
     Transfers information from
-    data/edited/newalch-tweaked/muller-402-it-writers.yml
+    data/build/newalch-tweak/muller-402-it-writers.yml
     to
     tmp/newalch/muller-402-it-writers.csv
     Updates the csv file with the values found in the yaml file.
@@ -28,7 +28,7 @@ class tweak2tmp implements Command {
             return "WRONG USAGE : useless parameter : {$params[2]}\n";
         }
         $report = "--- muller402 tweak2tmp ---\n";
-        $yamlfile = Config::$data['dirs']['build'] . DS . 'newalch-tweaked' . DS . 'muller-402-it-writers.yml';
+        $yamlfile = Config::$data['dirs']['build'] . DS . 'newalch-tweak' . DS . 'muller-402-it-writers.yml';
         
         // load tweaks in an assoc arrray (keys = MUID)
         $yaml = yaml_parse(file_get_contents($yamlfile));

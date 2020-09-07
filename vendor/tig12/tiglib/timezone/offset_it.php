@@ -4,6 +4,7 @@
     Sources : THM p 130 and FG p 288 (see README)
     
     WARNING, this computation may be erroneous :
+    
     - THM and FG (see README) differ from Olson database used by php, which can be seen with this php code :
         $tz = new DateTimeZone('Europe/Rome');
         print_r($tz->getTransitions());
@@ -11,11 +12,13 @@
     Both books make this transition start at 1893-11-01
     Other transitions seem to correspond (I didn't make an exhaustive check)
     This implementation conforms to THM and FG, not to Olson database
+    
     - For dates prior to 1893-11-01,
     THM says "HLO", (heure locale au soleil vrai) => apparent solar time (AST)
     FG says "heure locale", which means local mean time (LMT)
     We have LMT = AST + E (E = equation of time).
     This implementation conforms to FG (doesn't take E into account).
+    
     - For dates between 1866 and 1893,
     FG  says that the period starts at 1866-09-22
     THM says that the period starts at 1866-11-15
