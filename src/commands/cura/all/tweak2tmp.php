@@ -39,7 +39,7 @@ class tweak2tmp implements Command {
         $report = "--- $datafile tweak2tmp ---\n";
         
         if(!is_file($tweaksFile)){
-            $report .= "Missing file $tweaksFile - tweak2tmp did not modify anything.\n";
+            $report .= "Missing file $tweaksFile - nothing was modified.\n";
             return $report;
         }
         

@@ -108,7 +108,7 @@ class offset_fr{
             $offset = $sign . $hhmmss;
         }
         else{
-            $case = CASE_PHP_DEFAULT;
+            $case = self::CASE_PHP_DEFAULT;
             $offset = offset::compute($date, 'Europe/Paris', $format);
         }
         

@@ -5,9 +5,6 @@
 # Directories where data files are stored
 # Absolute paths or paths relative to gauquelin5 root directory
 dirs:
-  raw:    data/raw
-  build:  data/build
-  db:     data/db
   output: data/output
   tmp:    data/tmp
   # Auxiliary files - versioned in an other git repository

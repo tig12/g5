@@ -22,7 +22,7 @@ class dbcreate implements Command {
     **/
     public static function execute($params=[]): string {
         $report = '';
-        $dir_sql = dirname(dirname(dirname(dirname(__DIR__)))) . DS . 'build' . DS . 'db5-create-tables';
+        $dir_sql = implode(DS, [Config::$data['dirs']['ROOT'], 'src', 'model', 'db-create-tables']);
         $tables = [
             'person',
             'groop',

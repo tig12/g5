@@ -31,6 +31,14 @@ class Config{
             echo "Check syntax and try again\n";
             exit;
         }
+        // for convenience in certain cases
+        self::$data['dirs']['ROOT'] = dirname(__DIR__);
+        // Add entries in self::$data['dirs']
+        // This is done to avoid to refactor the code.
+        // Previously these directory needed to be configured
+        // Now it's useless because some data are versioned, and have a imposed location.
+        self::$data['dirs']['raw'] = 'data/raw';
+        self::$data['dirs']['build'] = 'data/build';
     }
     
     

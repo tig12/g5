@@ -1,8 +1,8 @@
 <?php
 /********************************************************************************
-    Generates stats about csv files of 5-cura-csv/.
+    Generates informations about Cura A files.
     
-    This command is informative only - does not perform any transformation on files
+    Informative only - does not perform any transformation on files
     
     @license    GPL
     @history    2019-06-07 22:29:12+02:00, Thierry Graff : creation
@@ -17,8 +17,7 @@ use tiglib\arrays\csvAssociative;
 class look implements Command {
     
     /** 
-        Possible values of the command, for ex :
-        php run-g5.php newalch ertel4391 look eminence
+        Possible values of the command
     **/
     const POSSIBLE_PARAMS = [
         'count',
@@ -53,8 +52,7 @@ class look implements Command {
         $method = 'look_' . $param;
         return self::$method();
     }
-        
-    // ******************************************************
+    
     /**
         Counts records in data/tmp/cura files.
     **/
@@ -75,7 +73,7 @@ class look implements Command {
                 if(substr($row['FNAME'], 0, 11) != 'Gauquelin-A'){
                     $nNAME[$datafile]++;
                 }
-                if($row['DATE']){
+                if($row['DATE-UT']){
                     $nDATE[$datafile]++;
                 }
                 if($row['GEOID']){

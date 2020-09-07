@@ -70,49 +70,76 @@ This software has been developed and tested under Linux. A priori, it should als
 
 <!-- ********************************************************************************* -->
 <h2><a name="installation">Installation</a></h2>
-Open a terminal and clone the repository on your local machine :
-<pre>git clone https://github.com/tig12/gauquelin5</pre>
 
-PECL extension "yaml" must be installed.
-<br>On debian-based systems :
-<pre>sudo apt install php-yaml</pre>
-For other systems, see <a href="https://www.php.net/manual/en/install.pecl.php">php manual</a>.
-<br>
-<br>Geonames.org matching uses a postgresql database filled with python code, <a href="geonames.html">see page geonames</a> (only useful for some commands).
-<br>
-<br>Equation of time computation uses <a href="https://github.com/soniakeys/meeus">github.com/soniakeys/meeus</a>, written in the go programming language (only useful for some commands).
-<br>So you must have go installed on your machine and run :
-<pre>go get github.com/soniakeys/meeus</pre>
+<ol class="spaced">
+    <li>
+        Open a terminal and clone the repository on your local machine :
+        <pre>git clone https://github.com/tig12/gauquelin5</pre>
+        (or <a href="https://github.com/tig12/gauquelin5/archive/master.zip">download the code</a>).
+    </li>
+    
+    <li>
+        Install php (version 7.2 or higher) on your machine.
+    </li>
+    
+    <li>
+        Install PECL extension "yaml".
+        <br>On debian-based systems :
+        <pre>sudo apt install php-yaml</pre>
+        For other systems, see <a href="https://www.php.net/manual/en/install.pecl.php">php manual</a>.
+    </li>
+    
+    <li>
+        Install postgresql on your machine (see below for configuration).
+    </li>
+</ol>
 
-Wikidata retrieval also needs curl and sqlite3 PECL extensions :
-<br>This is not necessary for data restoration, only to retrieve wikidata on local machine.
-<pre>
+<!-- ************************************* -->
+<h3>Optional steps</h3>
+
+<ul class="spaced">
+    <li>
+        Geonames.org matching uses a postgresql database filled with python code, <a href="geonames.html">see page geonames</a> (only useful for some commands).
+    </li>
+
+<!-- 
+    <li>
+        Equation of time computation uses <a href="https://github.com/soniakeys/meeus">github.com/soniakeys/meeus</a>, written in the go programming language (only useful for some commands).
+        <br>So you must have go installed on your machine and run :
+        <pre>go get github.com/soniakeys/meeus</pre>
+    </li>
+-->
+
+    <li>
+        Wikidata retrieval also needs curl and sqlite3 PECL extensions :
+        <br>This is not necessary for data restoration, only to retrieve wikidata on local machine.
+        <pre>
 sudo apt install php-curl
 sudo apt install php-sqlite3
-</pre>
+        </pre>
+    </li>
+
+</ul>
 
 <!-- ************************************* -->
 <h3><a name="1-1-directory-structure">Directory structure</a></h3>
 The important files and directories are :
 <pre>
 gauquelin5/
-    ├── build/
     ├── config.yml.dist
     ├── data/
-    │   ├── 1-raw/
-    │   ├── 3-edited/
-    │   ├── 5-tmp/
-    │   ├── 7-full/
-    │   └── 9-output/
+    │   ├── build/
+    │   ├── output/
+    │   ├── raw/
+    │   └── tmp/
     ├── docs/
     ├── run-g5.php
-    ├── share/
     ├── src/
     └── vendor/
 </pre>
 
 In the rest of this doc, directory <code>gauquelin5/</code> is called the <b><i>root directory</i></b>.
-<br>If not specified, all the commands issued to run the program are done from the root directory.
+<br>All the commands issued to run the program are done from the root directory.
 <br>
 <br>The files you need to know about are :
 <ul class="simple">
