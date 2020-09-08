@@ -33,7 +33,7 @@ class count implements Command {
         }
         
         $datafiles = CuraRouter::computeDatafiles('all');
-        $dir = Config::$data['dirs']['5-cura-csv'];
+        $dir = Cura::tmpDirname();
         
         $N = array_fill_keys($datafiles, 0);
 
@@ -52,6 +52,7 @@ class count implements Command {
         $res .= '<table class="count-A wikitable margin">' . "\n";
         $res .= '<tr>'
              . '<th>File</th>'
+             . '<th>Date</th>'
              . '<th>Cura claims</th>'
              . '<th>N <sub>Cura</sub></th>'
              . '<th>N <sub>g5</sub></th>'
@@ -61,7 +62,9 @@ class count implements Command {
         foreach($datafiles as $datafile){
             $delta = Cura::CURA_CLAIMS[$datafile][0] - $N[$datafile];
             $res .= '<tr>';
-            $res .= '<td>' . $datafile . '</td>';
+            $href = Cura::CURA_URLS[$datafile];
+            $res .= '<td><a href="' . $href . '">' . $datafile . '</a></td>';
+            $res .= '<td>' . Cura::CURA_PUBLICATION_DATE[$datafile] . '</td>';
             $res .= '<td>' . Cura::CURA_CLAIMS[$datafile][2] . '</td>';
             $res .= '<td class="right">' . number_format(Cura::CURA_CLAIMS[$datafile][0], 0, '.', ' ') . '</td>';
             $res .= '<td class="right bold">' . number_format($N[$datafile], 0, '.', ' ') . '</td>';
@@ -71,7 +74,7 @@ class count implements Command {
         }
         
         $res .= '<tr class="big2">';
-        $res .= '<td colspan="2" class="right">TOTAL</td>';
+        $res .= '<td colspan="3" class="right">TOTAL</td>';
         $res .= '<td class="right">' . number_format($totalCura, 0, '.', ' ') . '</td>';
         $res .= '<td class="right bold">' . number_format($totalG5, 0, '.', ' ') . '</td>';
         $res .= '</tr>' . "\n";

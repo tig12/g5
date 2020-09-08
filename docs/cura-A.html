@@ -32,6 +32,13 @@
 <header>
 <h1>Cura - serie A</h1>
 <div class="intro">
+This page describes the corrections done on files A1 to A6 while importing cura.free.fr html pages.
+<br>The main problems with these files are :
+<ul>
+    <li>Reconstitute the names.</li>
+    <li>Restore legal birth times.</li>
+</ul>
+<!--
 Accoding to cura.free.fr :
 <div class="padding-left">
 A1 contains 2088 sports champions
@@ -41,18 +48,11 @@ A1 contains 2088 sports champions
 <br>A5 contains 1409 actors and 1003 politicians
 <br>A6 contains 2027 writers and journalists
 </div>
-<!--
 2088+3644+3047+2722+2412+2027
 2087+3643+3046+2720+2410+2026
 -->
 Total of 15 940 persons ; removing duplicate enties, the total imported by g5 is <span class="bold">15 790</span>.
 
-<br>This page describes the corrections done on files A1 to A6 while converting html pages to csv files.
-<br>The main problems with these files are :
-<ul>
-    <li>Reconstitute the names.</li>
-    <li>Restore legal birth times.</li>
-</ul>
 </div>
 </header>
 
@@ -101,10 +101,6 @@ Total of 15 940 persons ; removing duplicate enties, the total imported by g5 is
     </ul>
 </nav>
 
-<!-- ********************************************************************************* -->
-<h2><a name="before-starting">Before starting</a></h2>
-
-Raw files must have been downloaded, see <a href="cura.html#download-cura-data">Cura page</a>.
 
 <!-- ************************************* -->
 <h3><a name="1-1-prepare-ertel-and-muller">Prepare Ertel and Müller</a></h3>
@@ -275,7 +271,7 @@ A5 : 1435 1557 1813 1829 2349
 A6 : 15 139 148 225 232 265 448 574 622 668 718 727 737 738  
 </pre>
 This is not present in pages including names (for example present in <a href="http://cura.free.fr/gauq/902gdA1.html">902gdA1.html</a> but not in <a href="http://cura.free.fr/gauq/902gdA1y.html">902gdA1y.html</a>).
-<br>The explanation is given in <a href="http://cura.free.fr/gauq/17archg.html">main Cura page</a> : they correspond to records containing errors in the original publoication (LERRCP), and corrected in Françoise Gauquelin's journal <i>Astro-Psychological Problems</i>.
+<br>The explanation is given in <a href="http://cura.free.fr/gauq/17archg.html">main Cura page</a> : they correspond to records containing errors in the original publication (LERRCP), and corrected in Françoise Gauquelin's journal <i>Astro-Psychological Problems</i>.
 <br>This information was not included in the generated files.
 
 
@@ -283,7 +279,7 @@ This is not present in pages including names (for example present in <a href="ht
 <h2><a name="tweak2csv">tweak2csv</a></h2>
 
 <pre>php run-g5.php cura A tweak2csv</pre>
-Contains human fixes, see <a href="tweak2csv.html">page tweak2csv</a>.
+Contains human fixes, see <a href="tweak2tmp.html">page tweak2tmp</a>.
 <br>Informations of these yaml files could be used directly by <code>raw2csv</code>, but for the moment it is performed after.
 
 
@@ -474,7 +470,7 @@ It modifies records of <code>5-cura-csv/</code> only if there is a unique match 
         <span class="big1">Details</span>
         <ul>
             <li><a href="time.html">Time and timezone</a></li>
-            <li><a href="tweak2csv.html">tweak2csv</a></li>
+            <li><a href="tweak2tmp.html">tweak2tmp</a></li>
             <li><a href="code-details.html">Code details</a></li>
         </ul>
     </li>

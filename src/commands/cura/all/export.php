@@ -25,6 +25,10 @@ class export implements Command {
     **/
     const OUTPUT_DIR = 'datasets' . DS . 'cura';
     
+    /** 
+        Trick to access to $datafile within $fmap and $sort function
+    **/
+    private static $datafile;
     
     // *****************************************
     // Implementation of Command
@@ -80,10 +84,11 @@ class export implements Command {
             'birth.place.geoid' => 'GEOID',
         ];
         
+        self::$datafile = $datafile; // trick for $fmap and $sort
+        
         $fmap = [
             'GID' => function($p){
-                global $datafile;
-                return Cura::gqid($datafile, $p->data['ids-in-sources'][$datafile]);
+                return Cura::gqid(self::$datafile, $p->data['ids-in-sources'][self::$datafile]);
             },
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);
@@ -92,11 +97,7 @@ class export implements Command {
         
         // sorts by id within the $datafile
         $sort = function($a, $b){
-            global $datafile;
-            if($a->$p->data['ids-in-sources'][$datafile] == $b->$p->data['ids-in-sources'][$datafile]){
-                return 0;
-            }
-            return ($a->$p->data['ids-in-sources'][$datafile] < $b->$p->data['ids-in-sources'][$datafile]) ? -1 : 1;
+             return $a->data['ids-in-sources'][self::$datafile] <=> $b->data['ids-in-sources'][self::$datafile];
         };
         
         return $g->exportCsv($outfile, $csvFields, $map, $fmap, $sort);

@@ -25,15 +25,17 @@
 <nav class="prevnext">
     <a class="topage" rel="" href="#topage">&#10148;</a>
     <a class="top" href="index.html">&uarr;</a>
+    <!-- 
     <a class="prev" rel="prev" href=".html">&larr;</a>
     <a class="next" rel="next" href=".html">&rarr;</a>
+    -->
 </nav>
 
 <header>
 <h1>Step tweak2csv</h1>
 <div class="intro">
 Some errors are better fixed by human edition. This happens for particular cases that can't be fixed by program, or when it's faster to edit a fix than write a program.
-<br>To handle such cases, YAML files were written in sub-directories of <code>data/3-edited/</code>. These files are processed by step <code>tweak2csv</code>.
+<br>To handle such cases, YAML files were written in sub-directories of <code>data/build/</code>. These files are processed by step <code>tweak2tmp</code>.
 <br>These YAML files are versioned with the program.
 </div>
 </header>
@@ -42,8 +44,9 @@ Some errors are better fixed by human edition. This happens for particular cases
 WARNING : this step must be done at an early stage.
 <br>For example, for serie A, if a date or a time is modified in <code>3-cura-tweaked/</code>, the step <code>tweak2csv</code> should be done before step <code>legalTime</code>.
 <br>
-<br>So this step is executed just after step <code>raw2csv</code>.
-
+<br>So this step is always executed just after step <code>raw2tmp</code>.
+<br>
+<br>Precise format of the YAML files containing tweaks depend on the specific files.
 </article>
 </div><!-- end class="main" -->
 
@@ -136,7 +139,7 @@ WARNING : this step must be done at an early stage.
         <span class="big1">Details</span>
         <ul>
             <li><a href="time.html">Time and timezone</a></li>
-            <li><a href="tweak2csv.html">tweak2csv</a></li>
+            <li><a href="tweak2tmp.html">tweak2tmp</a></li>
             <li><a href="code-details.html">Code details</a></li>
         </ul>
     </li>

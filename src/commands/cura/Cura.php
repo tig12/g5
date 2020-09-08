@@ -66,6 +66,24 @@ class Cura implements SourceI {
         'E3' =>  'http://cura.free.fr/gauq/902gdE3.html',
     ];
     
+    /** 
+        Dates of publication of the different cura files.
+        Source http://cura.free.fr/gauq/902gdG.html
+        For documentation purpose only.
+    **/
+    const CURA_PUBLICATION_DATE = [
+        'A1' =>  '1970-04',
+        'A2' =>  '1970-05',
+        'A3' =>  '1970-07',
+        'A4' =>  '1970-11',
+        'A5' =>  '1970-12',
+        'A6' =>  '1971-03',
+        'D6' =>  '1979-09',
+        'D10' => '1982-01',
+        'E1' =>  '1984',
+        'E3' =>  '1984',
+    ];
+    
     // *********************** Person ids ***********************
     /**
         Returns a unique Gauquelin id, like "A1-654"
@@ -126,9 +144,17 @@ class Cura implements SourceI {
     /**
         Returns the name of a tmp file, eg. data/tmp/cura/A1.csv
         @param  $datafile : a string like 'A1'
-    **/                                                                                          
+    **/
+    public static function tmpDirname(){
+        return Config::$data['dirs']['tmp'] . DS . 'cura';
+    }
+    
+    /**
+        Returns the name of a tmp file, eg. data/tmp/cura/A1.csv
+        @param  $datafile : a string like 'A1'
+    **/
     public static function tmpFilename($datafile){
-        return Config::$data['dirs']['tmp'] . DS . 'cura' . DS . $datafile . '.csv';
+        return self::tmpDirname() . DS . $datafile . '.csv';
     }
     
     /**

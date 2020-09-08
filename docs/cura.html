@@ -64,70 +64,75 @@ Gauquelin5 program handles a subset of the data published on <a href="http://cur
     </ul>
 </nav>
 
-
-
 <!-- ********************************************************************************* -->
 <h2>Cura data with names</h2>
 
-Comparison between numbers claimed on Cura web site and numbers found by g5 :
+The command
+<pre>php run-g5.php cura all count</pre>
+generates a comparison between numbers claimed on Cura web site and numbers found by g5 :
 
 <table class="count-A wikitable margin">
-<tr><th>File</th><th>Cura claims</th><th>N <sub>Cura</sub></th><th>N <sub>g5</sub></th><th>&Delta;</th><th>Explanation</th></tr>
-<tr><td>A1</td><td>2088 sports champions</td><td class="right">2 088</td><td class="right bold">2 087</td><td>1</td><td>Y, see <a href="http://cura.free.fr/gauq/902gdA1y.html">Cura web site</a></td></tr>
-<tr><td>A2</td><td>3644 scientists and medical doctors</td><td class="right">3 644</td><td class="right bold">3 643</td><td>1</td><td>Y, see <a href="http://cura.free.fr/gauq/902gdA2y.html">Cura web site</a></td></tr>
-<tr><td>A3</td><td>3047 military men</td><td class="right">3 047</td><td class="right bold">3 046</td><td>1</td><td>N</td></tr>
-<tr><td>A4</td><td>1473 painters and 1249 French musicians</td><td class="right">2 722</td><td class="right bold">2 720</td><td>2</td><td>N</td></tr>
-<tr><td>A5</td><td>1409 actors and 1003 politicians</td><td class="right">2 412</td><td class="right bold">2 410</td><td>2</td><td>N</td></tr>
-<tr><td>A6</td><td>2027 writers and journalists</td><td class="right">2 027</td><td class="right bold">2 026</td><td>1</td><td>N</td></tr>
-<tr><td>D6</td><td>450 New famous European Sports Champions</td><td class="right">450</td><td class="right bold">449</td><td>1</td><td>N</td></tr>
-<tr><td>D10</td><td>1398 data of successful Americans</td><td class="right">1 398</td><td class="right bold">1 396</td><td>2</td><td>N</td></tr>
-<tr><td>E1</td><td>2154 French Physicians, Military Men and Executives</td><td class="right">2 154</td><td class="right bold">2 153</td><td>1</td><td>N</td></tr>
-<tr><td>E3</td><td>1540 New French Writers, Artists, Actors, Politicians and Journalists</td><td class="right">1 540</td><td class="right bold">1 539</td><td>1</td><td>N</td></tr>
-<tr class="big2"><td colspan="2" class="right">TOTAL</td><td class="right">21 482</td><td class="right">21 469</td></tr>
-<tr class="big2"><td colspan="3" class="right">TOTAL without duplicate records</td><td class="right bold">21 249</td></tr>
+<tr><th>File</th><th>Date</th><th>Cura claims</th><th>N <sub>Cura</sub></th><th>N <sub>g5</sub></th><th>&Delta;</th><th>Explanation</th></tr>
+<tr><td><a href="http://cura.free.fr/gauq/902gdA1y.html">A1</a></td><td>1970-04</td><td>2088 sports champions</td><td class="right">2 088</td><td class="right bold">2 087</td><td>1</td><td>Y, see <a href="http://cura.free.fr/gauq/902gdA1y.html">Cura web site</a></td></tr>
+<tr><td><a href="http://cura.free.fr/gauq/902gdA2y.html">A2</a></td><td>1970-05</td><td>3644 scientists and medical doctors</td><td class="right">3 644</td><td class="right bold">3 643</td><td>1</td><td>Y, see <a href="http://cura.free.fr/gauq/902gdA2y.html">Cura web site</a></td></tr>
+<tr><td><a href="http://cura.free.fr/gauq/902gdA3y.html">A3</a></td><td>1970-07</td><td>3047 military men</td><td class="right">3 047</td><td class="right bold">3 046</td><td>1</td><td>N</td></tr>
+<tr><td><a href="http://cura.free.fr/gauq/902gdA4y.html">A4</a></td><td>1970-11</td><td>1473 painters and 1249 French musicians</td><td class="right">2 722</td><td class="right bold">2 720</td><td>2</td><td>N</td></tr>
+<tr><td><a href="http://cura.free.fr/gauq/902gdA5y.html">A5</a></td><td>1970-12</td><td>1409 actors and 1003 politicians</td><td class="right">2 412</td><td class="right bold">2 410</td><td>2</td><td>N</td></tr>
+<tr><td><a href="http://cura.free.fr/gauq/902gdA6y.html">A6</a></td><td>1971-03</td><td>2027 writers and journalists</td><td class="right">2 027</td><td class="right bold">2 026</td><td>1</td><td>N</td></tr>
+<tr><td><a href="http://cura.free.fr/gauq/902gdD6.html">D6</a></td><td>1979-09</td><td>450 New famous European Sports Champions</td><td class="right">450</td><td class="right bold">449</td><td>1</td><td>N</td></tr>
+<tr><td><a href="http://cura.free.fr/gauq/902gdD10.html">D10</a></td><td>1982-01</td><td>1398 data of successful Americans</td><td class="right">1 398</td><td class="right bold">1 396</td><td>2</td><td>N</td></tr>
+<tr><td><a href="http://cura.free.fr/gauq/902gdE1.html">E1</a></td><td>1984</td><td>2154 French Physicians, Military Men and Executives</td><td class="right">2 154</td><td class="right bold">2 153</td><td>1</td><td>N</td></tr>
+<tr><td><a href="http://cura.free.fr/gauq/902gdE3.html">E3</a></td><td>1984</td><td>1540 New French Writers, Artists, Actors, Politicians and Journalists</td><td class="right">1 540</td><td class="right bold">1 539</td><td>1</td><td>N</td></tr>
+<tr class="big2"><td colspan="3" class="right">TOTAL</td><td class="right">21 482</td><td class="right bold">21 469</td></tr>
 </table>
 
 &Delta; = N <sub>Cura</sub> - N <sub>g5</sub>, difference between number of records claimed by Cura and and numbers found by g5.
 <br>Most of these differences have no known explanation, it looks like mistakes on Cura web site.
+<br>
+<br>Cura.free.fr contain two other pages with birth dates : <a href="http://cura.free.fr/cura2/903bdn1.html">Données de Naissance du CURA 1 (455 Birth Data)</a> and <a href="http://cura.free.fr/cura2/904bdn2.html">Données de Naissance du CURA 2 (41 Birth Data)</a>, not yet included in g5 database.
+
 
 <!-- ********************************************************************************* -->
-<h2><a name="download-cura-data">Download cura data</a></h2>
+<h2>Gauquelin unique id</h2>
 
-Html pages of <a href="http://cura.free.fr/gauq/17archg.html">cura.free.fr</a> must be downloaded on your local machine, in a directory specified by <code>1-cura-raw</code> in <code>config.yml</code>.
-<br>The default value for this directory is <code>data/1-raw/cura.free.fr/</code>
-<br>The following files must be stored in this directory :
-<a class="padding-right" href="http://cura.free.fr/gauq/902gdA1y.html">902gdA1y.html</a>
-<a class="padding-right" href="http://cura.free.fr/gauq/902gdA2y.html">902gdA2y.html</a>
-<a class="padding-right" href="http://cura.free.fr/gauq/902gdA3y.html">902gdA3y.html</a>
-<a class="padding-right" href="http://cura.free.fr/gauq/902gdA4y.html">902gdA4y.html</a>
-<a class="padding-right" href="http://cura.free.fr/gauq/902gdA5y.html">902gdA5y.html</a>
-<a class="padding-right" href="http://cura.free.fr/gauq/902gdA6y.html">902gdA6y.html</a>
-<a class="padding-right" href="http://cura.free.fr/gauq/902gdD6.html">902gdD6.html</a>
-<a class="padding-right" href="http://cura.free.fr/gauq/902gdD10.html">902gdD10.html</a>
-<a class="padding-right" href="http://cura.free.fr/gauq/902gdE1.html">902gdE1.html</a>
-<a class="padding-right" href="http://cura.free.fr/gauq/902gdE3.html">902gdE3.html</a>
-<a class="padding-right" href="http://cura.free.fr/gauq/902gdN.html">902gdN.html</a>
+Each person in g5 database has a unique id formed by its "slug", and several local ids, only unique within a source (see <a href="db5.html">page on database</a>).
+<br>Applied to Cura data, each person is at least related to 2 sources : one source called "cura" and one source related to its file of origin (ex "A1").
+<br>This gives at least 2 local ids for each person :
+<ul>
+    <li>One id referring to its file of origin, using its field NUM of Cura file.</li>
+    <li>
+        One id referring to "cura" source. This one is called the "<b>Gauquelin unique id</b>" (abbreviated GQID).
+        <br>It is built concatenating the id of its file of origin and its NUM within this file.
+        <br>Ex : for the first record of file A1 (Pierre Alard 1937-09-17), its GQID is <code>A1-1</code>.
+    </li>
+</ul>
+
+<br>For duplicate values (listed in several Cura files), the file where it was first published is retained to build its GQID - this corresponds to the alphabetical order of file names (A1 was published before A2 etc. - see <a href="http://cura.free.fr/gauq/902gdG.html">Cura web site</a>).
 <br>
-<br>The html files must be stored with the same name as in cura.free.fr ; local files should look like this :
-<pre>
-data/1-raw/cura.free.fr
-    ├── 902gdA1y.html
-    ├── 902gdA2y.html
-    ├── 902gdA3y.html
-    ├── 902gdA4y.html
-    ├── 902gdA5y.html
-    ├── 902gdA6y.html
-    ├── 902gdD10.html
-    ├── 902gdD6.html
-    ├── 902gdE1.html
-    ├── 902gdE3.html
-    └── 902gdN.html
-</pre>
+<br>Example : 
+<br>Louis Geraud 1902-07-06 is NUM 2054 in file A1 and NUM 1008 in file A2.
+<br>Its g5 unique id is <code>geraud-louis-1902-07-06</code>
+<br>Its local ids are :
 
-Note : the following instruction downloads all data files of cura.free.fr in current directory, but g5 doesn't need all files.
-<pre>
-wget --mirror --wait 1 --page-requisites --cut-dirs=1 --relative --no-parent -A '902gd*.html' --no-host-directories http://cura.free.fr/gauq/17archg.html
-</pre>
+<table class="wikitable margin">
+    <tr>
+        <th>Source</th>
+        <th>Id</th>
+    </tr>
+    <tr>
+        <td>cura</td>
+        <td><b>A1-2054</b></td>
+    </tr>
+    <tr>
+        <td>A1</td>
+        <td>2054</td>
+    </tr>
+    <tr>
+        <td>A2</td>
+        <td>1008</td>
+    </tr>
+</table>
+The GID of this person is <code>A1-2054</code>.
 
 
 <!-- ********************************************************************************* -->
@@ -145,43 +150,27 @@ the program tells you the possible values of datafiles for cura dataset :
 </ul>
 
 <br>The precise list of transformations depends on the concerned file, but for all files, 
-<br>- the first transformation is <code>raw2csv</code>,
-<br>- the second transformation is <code>tweak2csv</code>
-<br>- the last transformation is <code>export</code> (see below).
-<br>
-<br>
-For all datafiles, a transformation called <code>all</code> will perform all the transformations on a given file.
-<br>For example,
-<pre>php run-g5.php cura A4 all</pre>
-executes the available transformations on file A4, <code>raw2csv</code> and <code>export</code> included.
+<br>- the first transformation is <code>raw2tmp</code>,
+<br>- the second transformation is <code>tweak2tmp</code>
+<br>- the last transformation is <code>tmp2db</code>.
 
-
-<br>
-<br>One command performs all the steps for all cura datafiles :
-<pre>php run-g5.php cura all run</pre>
-
-
-<!-- ********************************************************************************* -->
-<h2><a name="raw2csv">raw2csv</a></h2>
-For all cura datafiles, the first transformation is <code>raw2csv</code>
-<br>It extracts data from html files and produces csv files.
-<br>This step uses two entries of <code>config.yml</code> :
-<br>- It takes html pages located in a directory specified by entry <code>1-cura-raw/</code> 
-<br>- It produces csv files located in a directory specified by entry <code>5-cura-csv/</code>
+<!-- ************************************* -->
+<h3>raw2tmp</h3>
+For all cura datafiles, the first transformation is <code>raw2tmp</code>
+<br>It extracts data from html files located in <code>data/raw/cura.free.fr</code> and produces csv files located by default in <code>data/tmp/cura</code> (tmp dir can be modified in <code>config.yml</code>).
 <br>
 <br>This is done for example with the command :
-<pre>php run-g5.php cura D6 raw2csv</pre>
+<pre>php run-g5.php cura D6 raw2tmp</pre>
 
 During this step, some corrections are applied to the data.
 <br>Some corrections are common to all files : 
 <ul>
     <li>
-        Country codes are converted to ISO 3166.
+        Country codes are converted to ISO 3166.                                                                                                
     </li>
     <li>
-        Dates and times are merged to be stored in ISO 8601 format <code>YYYY-MM-DD HH:MM:SSsHH:MM</code>.
-        <br>For example <code>1906-02-06 14:00:00-01:00</code> ; the string <code>-01:00</code> represents the timezone offset.
-        <br>In this step, dates are not modified ; if needed, legal time restoration is done in a separate step.
+        Dates and times are merged to be stored in ISO 8601 format <code>YYYY-MM-DD HH:MM:SS</code>.
+        <br>In this step, dates are not modified ; if needed, legal time restoration (for A files) is done in a separate step.
     </li>
     <li>
         Longitudes and latitudes are expressed in decimal degrees.
@@ -194,16 +183,14 @@ During this step, some corrections are applied to the data.
     </li>
 </ul>
 
-<!-- ********************************************************************************* -->
-<h2><a name="tweak2csv">tweak2csv</a></h2>
-This is done after <code>raw2csv</code>, see <a href="tweak2csv.html">page tweak2csv</a>.
-<br>Used for A2 to include errors shown by comparison with <a href="newalch-muller1083.html">Müller's file 1083MED</a>.
+<!-- ************************************* -->
+<h3>tweak2tmp</h3>
+This is done after <code>tweak2tmp</code>, see <a href="tweak2tmp.html">page tweak2tmp</a>.
 
+<!-- ************************************* -->
+<h3>Other transformations</h3>
 
-<!-- ********************************************************************************* -->
-<h2><a name="other-transformations">Other transformations</a></h2>
-
-Other transformations (between <code>raw2csv</code> and <code>export</code>) modify the files located in <code>5-cura-csv/</code>.
+Other transformations (between <code>raw2tmp</code> and <code>tmp2db</code>) may modify the files located in <code>data/tmp/cura</code>.
 <br>
 <br>Precise transformations are described in the following pages :
 <ul class="spaced naked margin-top big2">
@@ -213,10 +200,12 @@ Other transformations (between <code>raw2csv</code> and <code>export</code>) mod
     <li><a href="cura-E1-E3.html">Files E1 and E3</a></li>
 </ul>
 
-<!-- ********************************************************************************* -->
-<h2><a name="export">export</a></h2>
-For all cura files, the last step is to copy the csv file in <code>5-cura-csv/</code> to the directory containing downloadable files : <code>9-cura/</code>.
-<br>This is done by step <code>export</code>. This step only copies the file from a directory to an other, and does nothing else.
+<!-- ************************************* -->
+<h3>Export to csv</h3>
+Done with 
+<pre>php run-g5.php cura &lt;datafile> export</pre>
+where <code>&lt;datafile></code> can be any value understood by cura (A, A1 ... E3)
+
 
 <!-- ********************************************************************************* -->
 <h2>Duplicates</h2>
@@ -1194,7 +1183,7 @@ generates the following table containing the duplicates.
         <span class="big1">Details</span>
         <ul>
             <li><a href="time.html">Time and timezone</a></li>
-            <li><a href="tweak2csv.html">tweak2csv</a></li>
+            <li><a href="tweak2tmp.html">tweak2tmp</a></li>
             <li><a href="code-details.html">Code details</a></li>
         </ul>
     </li>
