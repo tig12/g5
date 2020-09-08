@@ -35,15 +35,17 @@ Gauquelin5 database
 <div class="subtitle">db5</div>
 </h1>
 <div class="intro">
-Gauquelin5 program generates data organized in a database containing these notions : <a href="db5-source.html"><b>source</b></a>, <a href="db5-person.html"><b>person</b></a>, <a href="db5-group.html"><b>group</b></a>.
-<br>This database is referred as <b>db5</b> in the code and in this documentation.
-<br>It is implemented as yaml and text files stored in <code>7-full/</code> 
+Gauquelin5 database contains the notions of <a href="db5-source.html"><b>Source</b></a>, <a href="db5-person.html"><b>Person</b></a>, <a href="db5-group.html"><b>Group</b></a>.
 </div>
 </header>
 
 <article>
 
-<img class="border margin padding" src="img/g5-db-model.svg" alt="">
+The flow is :
+<img class="border margin padding" src="img/db5-flow.svg" alt="">
+
+Data model :
+<img class="border margin padding" src="img/db5-model.svg" alt="">
 
 <div class="small8">
 Read :
@@ -202,9 +204,20 @@ GNAME: Joseph</textarea>
     <li><a href="organisation.html">Organisation</a></li>
     <li><a href="usage.html">Program usage</a></li>
     <li><a href="output-format.html">Output format</a></li>
+    <li>
+        <a href="db5.html">G5 database</a>
+        <!-- 
+        <ul>
+            <li><a href="db5-source.html">Source</a></li>
+            <li><a href="db5-person.html">Person</a></li>
+            <li><a href="db5-group.html">Group</a></li>
+            <li><a href="db5-api.html">API</a></li>
+        </ul>
+        -->
+    </li>
     
     <li>
-        <span class="big1">1 - Restore</span>
+        <span class="big1">1 - Restore</span>                            
         <ul>
         
             <li><a href="historical-tests.html"><b>Historical tests</b></a></li>
@@ -249,16 +262,7 @@ GNAME: Joseph</textarea>
     <li>
         <span class="big1">2 - Build new data</span>
         <ul>
-            <li><a href="full.html">7-full</a></li>                                       
-            <li>
-                <a href="db5.html">G5 database</a>
-                <ul>
-                    <li><a href="db5-source.html">Source</a></li>
-                    <li><a href="db5-person.html">Person</a></li>
-                    <li><a href="db5-group.html">Group</a></li>
-                    <li><a href="db5-api.html">API</a></li>
-                </ul>
-            </li>
+            <!-- <li><a href="full.html">7-full</a></li> -->
             <li><a href="check.html">Check</a></li>
             <li><a href="acts.html">Acts</a></li>
             <li><a href="wikidata.html">Wikidata.org</a></li>

@@ -41,12 +41,35 @@ Some errors are better fixed by human edition. This happens for particular cases
 </header>
 
 <article>
-WARNING : this step must be done at an early stage.
-<br>For example, for serie A, if a date or a time is modified in <code>3-cura-tweaked/</code>, the step <code>tweak2csv</code> should be done before step <code>legalTime</code>.
-<br>
+This step must be executed at an early stage.
+<br>For example, for serie A, if a date or a time is modified in <code>data/build/cura-tweak/</code>, the step <code>tweak2tmp</code> must be executed before step <code>legalTime</code>.
 <br>So this step is always executed just after step <code>raw2tmp</code>.
+
+<!-- ************************************* -->
+<h3>Example</h3>
+
+Extract of <code>data/build/cura-tweak/A1.csv</code>
+<pre>
+-
+  NUM: 112
+  FNAME: Lurani Cernuschi
+  GNAME: Giovanni
+  
+-
+  NUM: 197
+  FNAME: Marin la Meslée
+  GNAME: Edmond
+  build-notes:
+    - https://en.wikipedia.org/wiki/Edmond_Marin_la_Mesl%C3%A9e
+</pre>
+
+The tweaks are applied to temporary files, and the format of a temporary file depend on the related raw file.
+<br>So the precise vocabulary of each YAML file containing tweaks depend on the field names used in the related temporary file, and specific code is needed.
 <br>
-<br>Precise format of the YAML files containing tweaks depend on the specific files.
+<br>For all tweak files, one field, <code>build-notes</code> is not processed and can be used to add free notes justifying the tweak.
+
+
+
 </article>
 </div><!-- end class="main" -->
 
@@ -61,9 +84,20 @@ WARNING : this step must be done at an early stage.
     <li><a href="organisation.html">Organisation</a></li>
     <li><a href="usage.html">Program usage</a></li>
     <li><a href="output-format.html">Output format</a></li>
+    <li>
+        <a href="db5.html">G5 database</a>
+        <!-- 
+        <ul>
+            <li><a href="db5-source.html">Source</a></li>
+            <li><a href="db5-person.html">Person</a></li>
+            <li><a href="db5-group.html">Group</a></li>
+            <li><a href="db5-api.html">API</a></li>
+        </ul>
+        -->
+    </li>
     
     <li>
-        <span class="big1">1 - Restore</span>
+        <span class="big1">1 - Restore</span>                            
         <ul>
         
             <li><a href="historical-tests.html"><b>Historical tests</b></a></li>
@@ -108,16 +142,7 @@ WARNING : this step must be done at an early stage.
     <li>
         <span class="big1">2 - Build new data</span>
         <ul>
-            <li><a href="full.html">7-full</a></li>                                       
-            <li>
-                <a href="db5.html">G5 database</a>
-                <ul>
-                    <li><a href="db5-source.html">Source</a></li>
-                    <li><a href="db5-person.html">Person</a></li>
-                    <li><a href="db5-group.html">Group</a></li>
-                    <li><a href="db5-api.html">API</a></li>
-                </ul>
-            </li>
+            <!-- <li><a href="full.html">7-full</a></li> -->
             <li><a href="check.html">Check</a></li>
             <li><a href="acts.html">Acts</a></li>
             <li><a href="wikidata.html">Wikidata.org</a></li>
