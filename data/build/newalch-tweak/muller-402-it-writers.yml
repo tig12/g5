@@ -1,0 +1,27 @@
+#
+# Human corrections to data/tmp/newalch/muller-402-it-writers.csv
+# Fields sorted by MUID
+# 
+# 2020-09-01 04:51:17+02:00, Thierry Graff : Creation
+#
+
+
+-
+  # Bacci Baccio Maria 1888-01-08
+  MUID: 27
+  GQID: A4-1142
+
+-
+  # Beonio Brocchieri Vittorio 1902-05-04
+  MUID: 42
+  GQID: A1-268
+
+-
+  MUID: 387
+  FNAME: Rosso di San Secondo
+  GNAME: Pier Maria
+
+-
+  # Tallarico Giuseppe 1880-04-28
+  MUID: 443
+  GQID: A2-1595

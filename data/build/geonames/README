@@ -1,0 +1,4 @@
+
+This directory is bound to be removed.
+Contains results of calls to geonames web service used by step computeGeo on cura D6.
+This step doesn't work correctly and the file D6.csv is only used to restore country code.

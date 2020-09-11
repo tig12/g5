@@ -1,0 +1,45 @@
+
+
+This directory contains human corrections that should be applied to files of 5-newalch-csv/
+Original files come from https://newalchemypress.com/gauquelin/ ; stored in 1-newalch-raw
+Then converted to csv by step raw2csv
+Then these yaml corrections are applied
+
+Each yaml file contains a list of associations key: value
+
+An element of the list looks like this :
+
+-
+  NR: 123
+  FNAME: A value
+  DATE: '2019-10-15 23:16:50+02:00' 
+  build-notes:
+    - here free notes
+  
+Each element must contain at least a key NR
+If field NR is not present, the record is not processed.
+If field NR is empty, the record is not processed.
+Other keys must be names of fields in the files of 5-newalch-csv/ (case sensitive).
+
+If a key is invalid, a warning is issued and the value is ignored.
+One exception : key "build-notes" (lowercase) is ignored while processing.
+
+Dates should be surrounded by quotes (don't know for sure, but in case)
+
+As empty NR are ignored, a file can safely contain empty models like that :
+
+-
+  NR: 
+  FNAME: 
+  DATE: ''
+  build-notes:
+    -
+  
+As YAML syntax allows free formatted fields, build notes can also be like this :
+-
+  NR: 
+  FNAME: 
+  DATE: ''
+  build-notes: |
+    Build notes can be multiline
+    as long as tabulation is respected

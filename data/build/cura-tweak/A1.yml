@@ -1,0 +1,224 @@
+#
+# Human corrections to file A1
+# Mainly used to fix composed names not fixable by program without ambiguity.
+# Fields sorted by NUM
+# 
+# 2019, Thierry Graff : Creation
+#
+
+-
+  NUM: 112
+  FNAME: Lurani Cernuschi
+  GNAME: Giovanni
+  build-notes:
+  
+-
+  NUM: 197
+  FNAME: Marin la Meslée
+  GNAME: Edmond
+  build-notes:
+    - https://en.wikipedia.org/wiki/Edmond_Marin_la_Mesl%C3%A9e
+  
+-
+  NUM: 214
+  FNAME: Pelletier-Doisy
+  GNAME: Georges
+  build-notes:
+    - https://fr.wikipedia.org/wiki/Georges_Pelletier-Doisy
+  
+-
+  NUM: 223
+  FNAME: de Saint-Exupery
+  GNAME: Antoine
+  
+-
+  NUM: 268   
+  FNAME: Beonio Brocchieri
+  GNAME: Vittorio
+  build-notes:
+    - https://www.wikidata.org/wiki/Q4015296
+    - Appears as a journalist and historian in wikidata, listed as an aviator in Gauquelin
+  
+-
+  NUM: 295
+  FNAME: Carafa d'Andria
+  GNAME: Fiammetta
+  build-notes:
+    - http://www.famiglienobilinapolitane.it/Genealogie/Carafa%20d%27Andria.htm
+    
+-
+  NUM: 298
+  FNAME: Casagrande 
+  GNAME: Eugenio
+  build-notes:
+    -  Eugenio Casagrande, conte di Villaviera
+  
+-
+  NUM: 322
+  FNAME: Cornaggia Medici                                                           
+  GNAME: Alfonso
+  
+-
+  NUM: 336
+  FNAME: Denti Pirajno
+  GNAME: Salvatore                                                                  
+  
+-
+  NUM: 344
+  FNAME: Ferretti di C.
+  GNAME: Piero
+  
+-
+  NUM: 363
+  FNAME: Gilbert Ewinckel                 
+  GNAME: Igino
+  
+-
+  NUM: 370 
+  FNAME: Grassi Fonseca
+  GNAME: Amilcare
+  
+-
+  NUM: 373
+  FNAME: Graziani del Borgo
+  GNAME: Carlo
+  
+-
+  NUM: 375
+  FNAME: Guerritore Revello
+  GNAME: Carlo
+  
+-
+  NUM: 378
+  FNAME: Keller Kellerer
+  GNAME: Guido
+  
+-
+  NUM: 427
+  FNAME: Negrone Cambiaso
+  GNAME: Carina
+  
+-
+  NUM: 432
+  FNAME: Novellis Coarazze
+  GNAME: Alberto
+  
+-
+  NUM: 478
+  FNAME: Scalpinelli Leguigna
+  GNAME: Pietro
+  
+-
+  NUM: 482
+  FNAME: Sibilla Massiera
+  GNAME: Giulio
+  
+-
+  NUM: 505
+  FNAME: Visconti Modrone
+  GNAME: Marcello
+  
+-
+  NUM: 513
+  FNAME: Van Den Boorn
+  GNAME: Charles                                                                    
+    
+-
+  NUM: 589
+  DATE-UT: '1931-03-12 00:00:00'
+  build-notes: |
+    Warning, fix of birth day not based on birth certificate.
+    Only modified the day, kept cura hour
+    Birth day conform with
+    https://boxrec.com/en/proboxer/110650
+    https://fightstat.com/boxer/michel-clavel-19530207.html
+    https://www.astro.com/astro-databank/Clavel,_Michel
+-
+  NUM: 1152            
+  FNAME: Van Den Berghe
+  GNAME: René
+    
+-
+  NUM: 1154
+  FNAME: Van Den Bossche
+  GNAME: Martin
+    
+-
+  NUM: 1211
+  FNAME: Van Der Borgh
+  GNAME: Joseph
+    
+-
+  NUM: 1212
+  FNAME: Van Der Brekel
+  GNAME: Petrus
+    
+-
+  NUM: 1636
+  FNAME: Chaves d'Aguilar
+  GNAME: Freddy
+
+-
+  NUM: 1651
+  FNAME: Hoydonckx
+  GNAME: Nicolas Huibrecht
+  build-notes:
+    - https://en.wikipedia.org/wiki/Nicolas_Hoydonckx
+
+-
+  NUM: 1677
+  FNAME: Van Den Berg
+  GNAME: Paul
+    
+-
+  NUM: 1678
+  FNAME: Van Der Auwera
+  GNAME: Jean
+    
+-
+  NUM: 1789                                                 
+  FNAME: Chiquito de Cambo
+  GNAME: Joseph
+  build-notes:
+    - https://fr.wikipedia.org/wiki/Joseph_Apesteguy
+    - see wikipedia, Chiquito de Cambo is a nickname
+-
+  NUM: 1999
+  DATE-UT: '1923-01-30 02:00:00'
+  build-notes: |
+    Warning, fix of birth day not based on birth certificate.
+    Only modified the day, kept cura hour
+    Birth day conform with
+    CFEPP book
+    https://fr.wikipedia.org/wiki/Maurice_Terreau
+    
+-
+  NUM: 2032
+  FNAME: Gudin De Vallerin
+  GNAME: Maurice
+  
+-
+  NUM: 2033
+  FNAME: Jonquieres Oriola
+  GNAME: Pierre
+  
+-
+  NUM: 2036
+  FNAME: Maupeou D'Ableiges
+  GNAME: Pierre
+  
+-
+  NUM: 2053
+  FNAME: Ducos Haille
+  GNAME: Jean
+  
+-
+  NUM: 2077
+  FNAME: Coquelin Lisle
+  GNAME: Pierre
+  
+-
+  NUM: 2082
+  FNAME: Martinez Hoz
+  GNAME: Gaston
+  

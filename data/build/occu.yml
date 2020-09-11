@@ -1,0 +1,284 @@
+
+#
+# Contains the occupation (profession) codes manipulated by g5
+#
+
+# General categories
+-
+  code: AR
+  fr: Artiste
+  en: Artist
+-
+  code: EX
+  fr: Dirigeant
+  en: Executive
+-
+  code: JO
+  fr: Journaliste
+  en: Journalist
+-
+  code: MI
+  fr: Militaire
+  en: Military
+-
+  code: PH
+  fr: Médecin
+  en: Physician
+-
+  code: PO
+  fr: Politicien
+  en: Politician
+-
+  code: SC
+  fr: Scientifique
+  en: Scientist
+-
+  code: SP
+  fr: Sportif
+  en: Sport champion
+-
+  code: WR
+  fr: Ecrivain
+  en: Writer
+-
+  code: XX
+  fr: Divers
+  en: Various
+
+# sub-categories - artists
+-
+  code: ACT
+  fr: Acteur
+  en: Actor
+  belongs-to:
+    - AR
+-
+  code: CAR
+  fr: Réalisateur de dessins animés
+  en: Cartoonist
+  belongs-to:
+    - AR
+-
+  code: CMB
+  fr: Chef d'orchestre militaire
+  en: Conductor of military band
+  belongs-to:
+    - AR
+-
+  code: DAN
+  fr: Danseur
+  en: Dancer
+  belongs-to:
+    - AR
+-
+  code: MUS
+  fr: Musicien
+  en: Musician
+  belongs-to:
+    - AR
+-
+  code: OPE
+  fr: Chanteur d'opéra
+  en: Opera singer
+  belongs-to:
+    - AR
+-
+  code: PAI
+  fr: Peintre
+  en: Painter
+  belongs-to:
+    - AR
+-
+  code: PHO
+  fr: Photographe
+  en: Photographer
+  belongs-to:
+    - AR
+
+# sub-categories - sports
+-
+  code: ATH
+  fr: Athlétisme
+  en: Track and field
+  belongs-to:
+    - SP
+-
+  code: AUT
+  fr: Auto-moto
+  en: Auto-moto
+  belongs-to:
+    - SP
+-
+  code: AVI
+  fr: Aviation
+  en: Aviation
+  belongs-to:
+    - SP
+-
+  code: AVR
+  fr: Aviron
+  en: Rowing
+  belongs-to:
+    - SP
+-
+  code: BAS
+  fr: Basketball
+  en: Basketball
+  belongs-to:
+    - SP
+-
+  code: BIL
+  fr: Billard
+  en: Billard
+  belongs-to:
+    - SP
+-
+  code: BOX
+  fr: Boxe
+  en: Boxing
+  belongs-to:
+    - SP
+-
+  code: CAN
+  fr: Canoë-kayak
+  en: Canoe-kayak
+  belongs-to:
+    - SP
+-
+  code: CYC
+  fr: Cyclisme
+  en: Cyclism
+  belongs-to:
+    - SP
+-
+  code: ESC
+  fr: Escrime
+  en: Fencing
+  belongs-to:
+    - SP
+-
+  code: FEM
+  fr: Sports féminins
+  en: Female sports
+  belongs-to:
+    - SP
+-
+  code: FOO
+  fr: Football
+  en: Football
+  belongs-to:
+    - SP
+-
+  code: GOL
+  fr: Golf
+  en: Golf
+  belongs-to:
+    - SP
+-
+  code: GYM
+  fr: Gymnastique
+  en: Gymnastic
+  belongs-to:
+    - SP
+-
+  code: HAL
+  fr: Haltérophilie
+  en: Weightlifting
+  belongs-to:
+    - SP
+-
+  code: HAN
+  fr: Handball
+  en: Handball
+  belongs-to:
+    - SP
+-
+  code: HOC
+  fr: Hockey
+  en: Hockey
+  belongs-to:
+    - SP
+-
+  code: LUT
+  fr: Lutte
+  en: Wrestling
+  belongs-to:
+    - SP
+-
+  code: MAR
+  fr: Marche
+  en: Walking
+  belongs-to:
+    - SP
+-
+  code: NAT
+  fr: Natation
+  en: Swimming
+  belongs-to:
+    - SP
+-
+  code: PAT
+  fr: Patin à roulettes
+  en: roller skate
+  belongs-to:
+    - SP
+-
+  code: PEL
+  fr: Pelote basque
+  en: Pelote basque
+  belongs-to:
+    - SP
+-
+  code: ROD
+  fr: Rodéo
+  en: Rodeo
+  belongs-to:
+    - SP
+-
+  code: RUG
+  fr: Rugby et Jeu à XIII
+  en: Rugby and Rugby league
+  belongs-to:
+    - SP
+-
+  code: SKI
+  fr: Ski
+  en: Ski
+  belongs-to:
+    - SP
+-
+  code: EQU
+  fr: Equitation
+  en: Equestrian
+  belongs-to:
+    - SP
+-
+  code: GLA
+  fr: Sports de glace
+  en: Bobsleigh and Skating
+  belongs-to:
+    - SP
+-
+  code: TEN
+  fr: Tennis
+  en: Tennis
+  belongs-to:
+    - SP
+-
+  code: TIR
+  fr: Tir
+  en: Shooting
+  belongs-to:
+    - SP
+-
+  code: VOI
+  fr: Voile
+  en: Sailing
+  belongs-to:
+    - SP
+-
+  code: VOL
+  fr: Volley ball
+  en: Volley ball
+  belongs-to:
+    - SP

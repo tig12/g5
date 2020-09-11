@@ -1,0 +1,24 @@
+#
+# Human corrections to file A2
+# Fields sorted by NUM
+# 
+# 2019-10-15 22:32:20+02:00, Thierry Graff : Creation
+#
+
+-
+  NUM: 255
+  DATE-UT: '1864-06-08 03:40:40'
+  C3: 4
+  build-notes: |
+    2019-10-15 22:59:02+02:00 Fixed DATE-UT with record Müller 1083MED 342
+    Only modified the day, kept cura hour
+    legal time = 04:00 (Müller 1083MED 342)
+  
+-
+  NUM: 1051
+  DATE-UT: '1884-01-30 20:25:16'
+  build-notes: |
+    2019-10-15 23:02:33+02:00 Fixed DATE-UT with record Müller 1083MED 484
+    Only modified the day, kept cura hour
+    legal time = 20:30 (Müller 1083MED 484)
+  

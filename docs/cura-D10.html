@@ -32,24 +32,22 @@
 <header>
 <h1>Cura - file D10</h1>
 <div class="intro">
-Accoding to cura.free.fr :
-<div class="padding-left">
-D10 contains 1398 data of successful Americans
-</div>
-<br>This file is almost perfect : it contains name, legal birth time, timezone offset, birth place, so importing it is just a matter of formatting.
+This file is almost perfect : it contains name, legal birth time, timezone offset, birth place, so importing it is just a matter of formatting.
 <br>For sportsmen, precise sport code is not specified and couldn't be computed.
-<br>Page <code>902gdD10.html</code> also contains a list of character traits that is not handled by the program.
+<br>Page <a href="http://cura.free.fr/gauq/902gdD10.html">902gdD10.html</a> also contains a list of character traits that is not handled by the program.
+<br>Accoding to cura.free.fr : <i>D10 contains 1398 data of successful Americans</i> but only 1397 were found in the file.
 </div>
 </header>
 
 <article>
 
-<pre>php run-g5.php cura D10 all</pre>
-is equivalent to
+Importing raw file in database is done with following commands:
 <pre>
-php run-g5.php cura D10 raw2csv
-php run-g5.php cura D10 export
+php run-g5.php cura D10 raw2tmp
+php run-g5.php cura D10 tmp2db
 </pre>
+
+Step <code>raw2tmp</code> contains only minor fixes.
 
 <!-- ********************************************************************************* -->
 <h2>Small errors</h2>
@@ -61,7 +59,7 @@ Two lines miss longitude and latitude :
 493	Good Robert		AC	21	5	1922	06:00	6h			Grosby, MN
 658	Jeter Robert		SP	9	5	1937	08:00	5h			Union, SC
 </pre>
-These lines were fixed in the code of <code>raw2csv</code> and included in the resulting file.
+These lines were fixed in the code of <code>raw2tmp</code> and included in the resulting file.
 <br>
 <br>13 lines had to be fixed because of bad formatting (contain white spaces instead of tabs) :
 <pre>
@@ -79,7 +77,14 @@ These lines were fixed in the code of <code>raw2csv</code> and included in the r
 1218	Staiger John		EX	20	3	1910	19:00	6h	44N43   88W09   Chase, WI		
 1250	Sweeney Walter		SP	18	4	1941	09:20	5h	42N14   70W48   Cohasset, MA		
 </pre>
-These lines were fixed in the code of <code>raw2csv</code> and included in the resulting file.
+These lines were fixed in the code of <code>raw2tmp</code> and included in the resulting file.
+
+
+<!-- ********************************************************************************* -->
+<h2>TODO</h2>
+<ul>
+    <li>Re-include Rose Peter if she can be identified without ambiguity.</li>
+</ul>
 
 </article>
 </div><!-- end class="main" -->
@@ -87,10 +92,8 @@ These lines were fixed in the code of <code>raw2csv</code> and included in the r
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
 <ul>
-    <li class="bold big1">
-        <a href="index.html">Home</a>
-        <br><a href="https://github.com/tig12/gauquelin5">Code</a>
-    </li>
+    <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">Code repository</a></li>
+    <li class="bold big1"><a href="index.html">Home</a></li>
     
     <li><a href="usage.html">Program usage</a></li>
     <li><a href="organisation.html">Organisation</a></li>
@@ -113,7 +116,6 @@ These lines were fixed in the code of <code>raw2csv</code> and included in the r
                     <a href="cura-D6.html">D6</a>
                     <a href="cura-D10.html">D10</a>
                     <a href="cura-E1-E3.html">E1 E3</a>
-                <li><a href="cura-results.html">Results</a></li>
                 </ul>
             </li>
             

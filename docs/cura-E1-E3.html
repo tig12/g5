@@ -26,19 +26,21 @@
     <a class="topage" rel="" href="#topage">&#10148;</a>
     <a class="top" href="index.html">&uarr;</a>
     <a class="prev" rel="prev" href="cura-D10.html">&larr;</a>
-    <a class="next" rel="next" href="cura-results.html">&rarr;</a>
+    <a class="next" rel="next" href="newalch.html">&rarr;</a>
 </nav>
 
 <header>
 <h1>Cura - files E1 and E3</h1>
 <div class="intro">
-Accoding to cura.free.fr :
-<div class="padding-left">
-E1 contains 2154 French Physicians, Military Men and Executives
-<br>E3 contains 1540 New French Writers, Artists, Actors, Politicians and Journalists
-</div>
-<br>Files <code>902gdE1.html</code> and <code>902gdE3.html</code> share the same format and can be handled by the same code.
+Pages <a href="http://cura.free.fr/gauq/902gdE1.html">902gdE1.html</a> and <a href="http://cura.free.fr/gauq/902gdE3.html">902gdE3.html</a> share the same format and can be handled by the same code.
 <br>Each page contains two lists, one with birth data and one with the position of the Moon, Venus, Mars, Jupiter and Saturn in the 36 Gauquelin Sectors. These two lists can be merged easily, and planetary positions are included in the resulting file.
+<br>
+According to cura.free.fr :
+<div class="padding-left">
+<i>E1 contains 2154 French Physicians, Military Men and Executives</i> ; 2153 were found.
+<br><i>E3 contains 1540 New French Writers, Artists, Actors, Politicians and Journalists</i> ; 1539 were found.
+</div>
+
 </div>
 </header>
 
@@ -46,7 +48,7 @@ E1 contains 2154 French Physicians, Military Men and Executives
 <nav class="toc">
     <ul>
         <li>
-            <a href="#raw2csv">raw2csv</a>
+            <a href="#raw2tmp">raw2tmp</a>
             <ul>
                 <li><a href="#1-1-num">NUM</a></li>
                 <li><a href="#1-2-place">Place</a></li>
@@ -65,49 +67,22 @@ E1 contains 2154 French Physicians, Military Men and Executives
     </ul>
 </nav>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-To import these files, do :
+Importing raw files in database is done with following commands:
 <pre>
-php run-g5.php cura E3 all
-php run-g5.php cura E1 all
-</pre>
-This is equivalent to :
-<pre>
-php run-g5.php cura E1 raw2csv small
-php run-g5.php cura E3 raw2csv small
+php run-g5.php cura E1 raw2tmp small
+php run-g5.php cura E3 raw2tmp small
 php run-g5.php newalch muller1083 fixCura E1 names update   # only for E1
-php run-g5.php cura E1 export
-php run-g5.php cura E3 export
+php run-g5.php cura E1 tmp2db
+php run-g5.php cura E3 tmp2db
 </pre>
 
 <!-- ********************************************************************************* -->
-<h2><a name="raw2csv">raw2csv</a></h2>
+<h2><a name="raw2tmp">raw2tmp</a></h2>
 
 This command needs a parameter to indicate what it should print :
-<pre>php run-g5.php cura E1 raw2csv</pre>
+<pre>php run-g5.php cura E1 raw2tmp</pre>
 <pre>
-MISSING PARAMETER : raw2csv needs a parameter to specify which output it displays. Can be :
+MISSING PARAMETER : raw2tmp needs a parameter to specify which output it displays. Can be :
   small : echoes only global report
   tz : echoes the records for which timezone information is missing
   geo : echoes the records for which geonames matching couldn't be done
@@ -141,7 +116,7 @@ The main problem of files E1 and E3 is that the timezone offset is not given. It
 <br>
 <br>This gives partial results :
 
-<pre>php run-g5.php cura E1 raw2csv</pre>
+<pre>php run-g5.php cura E1 raw2tmp</pre>
 <pre>
 Importing E1
 2153 lines parsed
@@ -150,7 +125,7 @@ Importing E1
 1540 persons stored precisely (71.53 %)
 </pre>
 
-<pre>php run-g5.php cura E3 raw2csv</pre>
+<pre>php run-g5.php cura E3 raw2tmp</pre>
 <pre>
 Importing E3
 1539 lines parsed
@@ -204,9 +179,7 @@ Cura files contain several typos.
     <li>
         Typos in the names of 27 persons (O are replaced by zero ; A by 3 ; S by 5, G by 6 ; B by 8).
         <br>These typos are present in both lists (list with birth data and list with sectors).
-        <br>These errors are fixed in <code>raw2csv</code> code.
-        <details>
-        <summary>Full list of typos</summary>
+        <br>These errors are fixed in <code>raw2tmp</code> code.
 <pre>
 0483    EX       COURB0T Henri                   12    02    1902    20:00    Courchelettes             59
 0642    PH     + DUB0S René                      20    02    1901    10:00    St-Brice                  78
@@ -236,7 +209,6 @@ Cura files contain several typos.
 1797    PH       R0BERT François                 15    09    1914    15:00    St-Avold                  57
 1801    PH       R0BLIN Jean                     24    06    1914    11:00    Guer                      56
 </pre>
-        </details>
     </li>
 </ul>
 
@@ -254,8 +226,6 @@ Cura files contain several typos.
     <li>
         The same type of typo found in E1 file occurs for 9 records.
         <br>These errors are corrected by the program.
-        <details>
-        <summary>Full list of typos</summary>
 <pre>
 0309    PAI      CHARB0NNIER Pierre              24    08    1897    13:00    Vienne                    38   
 0383    JO       C0QUET James de                 16    07    1898    01:00    Bordeaux                  33   
@@ -267,9 +237,14 @@ Cura files contain several typos.
 1308    PO       RIB0T Alexandre                 03    02    1842    01:00    St-Omer                   62   
 1326    PO       R0BERT Pierre                   17    05    1875    23:30    Montbrison                42   
 </pre>
-        </details>
     </li>
 </ul>
+
+<div class="warning block">
+    Following doc is obslolete
+    <br>E1 names are fixed during the import of Müller's 1083 physicians.
+</div>
+
 
 <!-- ********************************************************************************* -->
 <h2><a name="use-muller-1083">Use Müller 1083</a></h2>
@@ -291,10 +266,8 @@ Arno Müller's file of 1083 medical doctors is used to better names and birth da
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
 <ul>
-    <li class="bold big1">
-        <a href="index.html">Home</a>
-        <br><a href="https://github.com/tig12/gauquelin5">Code</a>
-    </li>
+    <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">Code repository</a></li>
+    <li class="bold big1"><a href="index.html">Home</a></li>
     
     <li><a href="usage.html">Program usage</a></li>
     <li><a href="organisation.html">Organisation</a></li>
@@ -317,7 +290,6 @@ Arno Müller's file of 1083 medical doctors is used to better names and birth da
                     <a href="cura-D6.html">D6</a>
                     <a href="cura-D10.html">D10</a>
                     <a href="cura-E1-E3.html">E1 E3</a>
-                <li><a href="cura-results.html">Results</a></li>
                 </ul>
             </li>
             
@@ -387,5 +359,3 @@ Arno Müller's file of 1083 medical doctors is used to better names and birth da
 
 </body>
 </html>
-<!-- ************************************* -->
-<!-- ********************************************************************************* -->

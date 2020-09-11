@@ -1,0 +1,117 @@
+#
+# Human corrections to file 1083MED
+# Mainly used to fix nobility
+# Fields sorted by NR
+# 
+# 2019-10-18 15:53:48+02:00, Thierry Graff : Creation
+#
+
+-
+  NR: 25
+  NOB: d'
+  FNAME: Arsonval
+  GNAME: Jacques Arsène
+  
+-
+  NR: 27
+  NOB: d'
+  FNAME: Astros
+  GNAME: Marie Henri Léon
+  
+-
+  NR: 61
+  NOB: de
+  FNAME: Barthez
+  GNAME: Antoine Charles Ernest
+
+-
+  NR: 152
+  NOB: de
+  FNAME: Brun
+  GNAME: Hippolyte Marie Antoine
+
+-
+  NR: 323
+  FNAME: Dujarric de La Rivere
+  GNAME: Auguste René
+
+-
+  NR: 363
+  NOB: de
+  FNAME: Fleury
+  GNAME: Maurice
+
+-
+  NR: 376
+  NOB: de
+  FNAME: Fourmestraux
+  GNAME: Jacques Marie
+
+-
+  NR: 431
+  FNAME: Gounelle de Pontanel
+  GNAME: Hugues François H
+
+-
+  NR: 443
+  FNAME: Guéneau de Mussy
+  GNAME: Henry François
+
+-
+  NR: 510
+  FNAME: Jobert
+  GNAME: Antoine Joseph
+  build-notes:
+    - https://data.bnf.fr/12356711/antoine-joseph_jobert/
+
+-
+  NR: 533
+  NOB: de
+  FNAME: Lacaze-duthiers
+  GNAME: Félix Joseph Henri
+
+-
+  NR: 561
+  NOB: de
+  FNAME: Lapersonne
+  GNAME: Félix Joseph
+
+-
+  NR: 575
+  NOB: de
+  FNAME: Lavergne
+  GNAME: Octave Marcel Marie Paulin
+
+-
+  NR: 586
+  NOB: le
+  FNAME: Roy de Méricourt
+  GNAME: Alfred
+
+-
+  NR: 612
+  NOB: de
+  FNAME: Léobardy
+  GNAME: Joseph
+
+-
+  NR: 862
+  FNAME: Quatrefages de Bréau
+  GNAME: Jean Louis Armand
+
+-
+  NR: 872
+  NOB: de
+  FNAME: Ranse
+  GNAME: Félix Henri
+
+-
+  NR: 1000
+  FNAME: Thomas de Closmadeuc
+  GNAME: Gustave Auguste
+
+-
+  NR: 1044
+  NOB: de
+  FNAME: Vernejoul
+  GNAME: Robert
