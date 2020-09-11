@@ -14,8 +14,6 @@
     Previous calls to geonames.org web service are stored in data/tmp/geonames/D6.csv.
     So a new call will use these results and not repeat previous calls to geonames.org web service.
     
-    WARNING - The code needs to be debugged (I must confess that I don't understand my own code...)
-    
     @license    GPL
     @history    2017-04-27 22:04:25+02:00, Thierry Graff : creation
 ********************************************************************************/
@@ -49,6 +47,29 @@ class addGeo implements Command {
         
         $datafile = 'D6';
         $report =  "--- $datafile addGeo ---\n";
+        
+        //
+        // TEMP CODE
+        //
+        // Fills CY in data/tmp/cura/D6.csv 
+        // from data/build/geonames/D6.csv
+        $rows = Cura::loadTmpFile_num($datafile);
+        $rowsGeo = csvAssociative::compute('data/build/geonames/D6.csv');
+        $res = implode(G5::CSV_SEP, D6::TMP_FIELDS) . "\n";
+        foreach($rowsGeo as $rowGeo){
+            $NUM = $rowGeo['NUM'];
+            $new = $rows[$NUM];
+            $new['CY'] = $rowGeo['CY'];
+            $res .= implode(G5::CSV_SEP, $new) . "\n";
+        }
+        $outfile = Cura::tmpFilename($datafile);
+        file_put_contents($outfile, $res);
+        $report .= "Added CY to $outfile\n";
+        return $report;
+        //
+        // END TEMP CODE
+        //
+        
         $csvfile = Cura::tmpFilename($datafile);
         $geofile = Geonames::$TMP_SERVICE_DIR . DS . $datafile . '.csv';
         

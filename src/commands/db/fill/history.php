@@ -17,6 +17,7 @@ use g5\commands\cura\CuraRouter;
 // raw2tmp
 use g5\commands\cura\A\raw2tmp                  as raw2tmpA;
 use g5\commands\cura\D6\raw2tmp                 as raw2tmpD6;
+use g5\commands\cura\D6\addGeo                  as addGeoD6;
 use g5\commands\cura\D10\raw2tmp                as raw2tmpD10;
 use g5\commands\cura\E1_E3\raw2tmp              as raw2tmpE1E3;
 use g5\commands\cura\all\tweak2tmp              as tweak2tmpCura;
@@ -96,7 +97,7 @@ class history implements Command {
                 echo raw2tmpA::execute([$datafile, 'raw2tmp', 'small']);
             }
             echo raw2tmpD6::execute(['D6', 'raw2tmp']);
-            //echo raw2tmpD6::execute(['D6', 'addGeo']); => addGeo needs to be fixed
+            echo addGeoD6::execute(['D6', 'addGeo']); // tmp code - addGeo needs to be fixed
             echo raw2tmpD10::execute(['D10', 'raw2tmp']);
             echo raw2tmpE1E3::execute(['E1', 'raw2tmp', 'small']);
             echo raw2tmpE1E3::execute(['E3', 'raw2tmp', 'small']);

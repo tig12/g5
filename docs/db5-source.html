@@ -37,11 +37,27 @@ This page describes the <code>Source</code> data type of <a href="db5.html">g5 d
 </header>
 
 <article>
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#yaml-template">YAML template</a>
+        </li>
+        <li>
+            <a href="#source-uid">Source uid</a>
+        </li>
+        <li>
+            <a href="#source-id">Source id</a>
+        </li>
+        <li>
+            <a href="#source-type">Source type</a>
+        </li>
+    </ul>
+</nav>
 
 Sources are built by humans filling yaml files in <code>7-full/sources/</code>.
 
 <!-- ********************************************************************************* -->
-<h2>YAML template</h2>
+<h2><a name="yaml-template">YAML template</a></h2>
 
 The structure of a source is given by <code>src/model/Source.yml</code>
 
@@ -73,14 +89,14 @@ publications: []
 </pre>
 
 <!-- ********************************************************************************* -->
-<h2>Source uid</h2>
+<h2><a name="source-uid">Source uid</a></h2>
 Like all entities of db5, a source is characteized by an <code>uid</code>, unique within g5 db.
 <br>A source <code>uid</code> reflects the path of the yaml file containing informations about the source : 
 <br>Source with uid = <code>muller402 source/web/newalch/muller402</code>
 <br>is stored in <code>data/7-full/source/web/newalch/muller402.yml</code>
 
 <!-- ********************************************************************************* -->
-<h2>Source id</h2>
+<h2><a name="source-id">Source id</a></h2>
 <br>Sources have a supplementary identifier, named <code>id</code>. the <code>id</code> of a source is unique within g5 sources. It can be seen as a shortcut, a simpler way to refer to a source
 <br>Ex : booklets published by Arno Müller between 1991 and 1994
 <ul>
@@ -99,7 +115,7 @@ muller402 source/web/newalch/muller402
 </pre>
 
 <!-- ********************************************************************************* -->
-<h2>Source type</h2>
+<h2><a name="source-type">Source type</a></h2>
 <b>type</b> : the type of the source.
 <br>Source type currently used :
 <ul>
@@ -193,24 +209,17 @@ GNAME: Joseph</textarea>
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
 <ul>
-    <li class="bold big1"><a href="index.html">g5 Doc</a></li>
-    <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">g5 code</a></li>
-    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
-    
-    <li><a href="organisation.html">Organisation</a></li>
-    <li><a href="usage.html">Program usage</a></li>
-    <li><a href="output-format.html">Output format</a></li>
-    <li>
-        <a href="db5.html">G5 database</a>
-        <!-- 
-        <ul>
-            <li><a href="db5-source.html">Source</a></li>
-            <li><a href="db5-person.html">Person</a></li>
-            <li><a href="db5-group.html">Group</a></li>
-            <li><a href="db5-api.html">API</a></li>
-        </ul>
-        -->
+    <li class="bold big1">
+        <a href="index.html">Home</a>
+        <br><a href="https://github.com/tig12/gauquelin5">Code</a>
     </li>
+    
+    <li><a href="usage.html">Program usage</a></li>
+    <li><a href="organisation.html">Organisation</a></li>
+    <li><a href="db5.html">G5 database</a></li>
+    <li><a href="output-format.html">Output format</a></li>
+    
+    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
     
     <li>
         <span class="big1">1 - Restore</span>                            

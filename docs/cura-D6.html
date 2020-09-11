@@ -45,17 +45,24 @@ D6 contains 450 New famous European Sports Champions
 <nav class="toc">
     <ul>
         <li>
+            <a href="#preparatory-code">Preparatory code</a>
+        </li>
+        <li>
             <a href="#raw2csv">raw2csv</a>
         </li>
         <li>
             <a href="#addgeo">addGeo</a>
             <ul>
-                <li><a href="#2-1-tests">Tests</a></li>
-                <li><a href="#2-2-temporary-conclusion">Temporary conclusion</a></li>
+                <li><a href="#3-1-tests">Tests</a></li>
+                <li><a href="#3-2-temporary-conclusion">Temporary conclusion</a></li>
             </ul>
+        </li>
+        <li>
+            <a href="#todo">TODO</a>
         </li>
     </ul>
 </nav>
+
 
 The full set of transformations can be executed with the command :  
 <pre>php run-g5.php cura D6 all</pre>
@@ -67,7 +74,7 @@ php run-g5.php cura D6 export
 </pre>
 
 <!-- ********************************************************************************* -->
-<h2>Preparatory code</h2>
+<h2><a name="preparatory-code">Preparatory code</a></h2>
 Cura file contains 32 names that can't be easily split to family / given names by program. To handle these cases, the command 
 <pre>php run-g5.php cura D6 look emptyGiven</pre>
 was used to build array <code>$NAMES_CORRECTIONS</code> of <code>raw2tmp</code>.
@@ -114,7 +121,7 @@ Rewriting <code>5-geonames/D6.csv</code> after each call to geonames.org permits
 <br>The fix on Bernardo Ruiz shows that longitudes and latitudes are expressed by removing the seconds, and not rounded to the nearest minute, which generates a loss of precision : latitude of <code>356 Ruiz Bernardo</code> is <code>00W56</code> and the real value is <code>0°56'49''</code> - a value of <code>00W57</code> in cura file would have been more precise.
 
 <!-- ************************************* -->
-<h3><a name="2-1-tests">Tests</a></h3>
+<h3><a name="3-1-tests">Tests</a></h3>
 
 The purpose is to check the cities given by geonames.org web service.
 Some examples are given in <code>902gdD6.html</code>, which permit a first estimation.
@@ -146,6 +153,8 @@ Joop (Gerardus) ZOETEMELK, born 3 DEC 1946, 17:15, in The Hague (Ne)
 </div><!-- end class="flex-wrap" -->
 
 All cities but one differ !
+<br>A few records were analyzed to understand this difference :
+
 <table class="wikitable margin">
     <tr><th>Person</th><th>City given<br> by cura</th><th>City obtained<br> from geonames.org</th><th>Comments</th></tr>
     <tr>
@@ -204,22 +213,28 @@ All cities but one differ !
 </table>
 
 <!-- ************************************* -->
-<h3><a name="2-2-temporary-conclusion">Temporary conclusion</a></h3>
+<h3><a name="3-2-temporary-conclusion">Temporary conclusion</a></h3>
 From these examples, it seems that
 <ul class="simple margin-bottom">
-    <li>Birth places given in cura file correspond to wikipedia.</li>
-    <li>Coordinates contained in cura files are not precise enough to reach the good birth place using geonames.org reverse geocoding.</li>
+    <li>Birth places given in Cura file correspond to wikipedia.</li>
+    <li>Coordinates contained in Cura files are not precise enough to reach the good birth place using geonames.org reverse geocoding.</li>
 </ul>
 
 But step <code>addGeo</code> has the interest to restore the country, giving the ability to compute the timezone offset.
 <br>Current implementation uses this step to restore country, but does not keep birth place.
 
+<div class="warning block">
+    Current code does not use anymore Geonames web service.
+    <br>Result of previous calls to geonames web service was put copied to
+    <br><code>data/build/geonames/D6.csv</code>
+    <br><code>addGeo</code>contains temporary code using this file to restore country code.
+</div>
+
 
 <!-- ********************************************************************************* -->
-<h2>TODO</h2>
+<h2><a name="todo">TODO</a></h2>
 
 <ul>
-    <li>In step raw2tmp, generate also data/tmp/cura/D6-raw.csv</li>
     <li>Check / debug addGeo step to be able to re-execute it</li>
     <li>Compute timezone offset for all records of D6</li>
 </ul>
@@ -231,24 +246,17 @@ But step <code>addGeo</code> has the interest to restore the country, giving the
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
 <ul>
-    <li class="bold big1"><a href="index.html">g5 Doc</a></li>
-    <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">g5 code</a></li>
-    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
-    
-    <li><a href="organisation.html">Organisation</a></li>
-    <li><a href="usage.html">Program usage</a></li>
-    <li><a href="output-format.html">Output format</a></li>
-    <li>
-        <a href="db5.html">G5 database</a>
-        <!-- 
-        <ul>
-            <li><a href="db5-source.html">Source</a></li>
-            <li><a href="db5-person.html">Person</a></li>
-            <li><a href="db5-group.html">Group</a></li>
-            <li><a href="db5-api.html">API</a></li>
-        </ul>
-        -->
+    <li class="bold big1">
+        <a href="index.html">Home</a>
+        <br><a href="https://github.com/tig12/gauquelin5">Code</a>
     </li>
+    
+    <li><a href="usage.html">Program usage</a></li>
+    <li><a href="organisation.html">Organisation</a></li>
+    <li><a href="db5.html">G5 database</a></li>
+    <li><a href="output-format.html">Output format</a></li>
+    
+    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
     
     <li>
         <span class="big1">1 - Restore</span>                            

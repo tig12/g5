@@ -43,10 +43,33 @@ Acts are official documents containing informations handled by g5 database. Acts
 </header>
 
 <article>
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#about-french-data">About french data</a>
+        </li>
+        <li>
+            <a href="#retrieval-process">Retrieval process</a>
+            <ul>
+                <li><a href="#2-1-directory-layout">Directory layout</a></li>
+                <li><a href="#2-2-image-download">Image download</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#example">Example</a>
+        </li>
+        <li>
+            <a href="#acts-syntax">Acts syntax</a>
+        </li>
+        <li>
+            <a href="#gauquelin5-integration">Gauquelin5 integration</a>
+        </li>
+    </ul>
+</nav>
 
 
 <!-- ********************************************************************************* -->
-<h2>About french data</h2>
+<h2><a name="about-french-data">About french data</a></h2>
 
 In France, all acts since 1792 have times indicated. Scans of the original documents until ~1920 can be viewed online for free. This makes 5 generations, around 200 millions of acts (birth, death, mariage) with times (source <a href="http://www.filae.com/ressources/etat-civil-numerise-dou-viennent-les-donnees/">filae.com</a>).
 <br>Here lies potential data to test planetary heredity at large scale, but not (yet ?) in the scope of g5 program. 
@@ -55,7 +78,7 @@ In France, all acts since 1792 have times indicated. Scans of the original docum
 
 
 <!-- ********************************************************************************* -->
-<h2>Retrieval process</h2>
+<h2><a name="retrieval-process">Retrieval process</a></h2>
 
 An act consists of 2 documents :
 <ul>
@@ -84,7 +107,7 @@ An act consists of 2 documents :
 </ul>
 
 <!-- ************************************* -->
-<h3>Directory layout</h3>
+<h3><a name="2-1-directory-layout">Directory layout</a></h3>
 Acts are organized chronologically like <code>7-full/person/</code> :
 <pre>
 8-acts
@@ -98,7 +121,7 @@ Acts are organized chronologically like <code>7-full/person/</code> :
 </pre>
 
 <!-- ************************************* -->
-<h3><a name="2-1-image-download">Image download</a></h3>
+<h3><a name="2-2-image-download">Image download</a></h3>
 Some départements provide a link to download current page, some don't. When they don't, image retrieval is done with screen capture. This can be particularily long because sometimes several captures may be necessary to get the whole certificate with enough details. In this case, the image is reconstituted assembling the different parts.
 
 
@@ -211,12 +234,12 @@ personnes:
 </div><!-- end class="flex-wrap" -->
 
 <!-- ********************************************************************************* -->
-<h2>Acts syntax</h2>
+<h2><a name="acts-syntax">Acts syntax</a></h2>
 The syntax used to transcribe the acts comes from an unpublished genealogy software. YAML files are written using french vocabulary, and are translated to a reference vocabulary (close to english) understood by code parsing the yaml files.
 <br>This syntax is adapted to act transcription and contains informations currently not used for g5 development.
 
 <!-- ********************************************************************************* -->
-<h2>Gauquelin5 integration</h2>
+<h2><a name="gauquelin5-integration">Gauquelin5 integration</a></h2>
 Not done yet ; code transfering information from <code>8-acts/</code> to files of <code>7-full/person/</code> needs to be written.
 <br>Currently, when an information needs to be corrected (because it contradicts an act), this is done using the <a href="tweak2tmp.html">tweak2tmp</a> mechanism.
 
@@ -227,24 +250,17 @@ Not done yet ; code transfering information from <code>8-acts/</code> to files o
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
 <ul>
-    <li class="bold big1"><a href="index.html">g5 Doc</a></li>
-    <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">g5 code</a></li>
-    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
-    
-    <li><a href="organisation.html">Organisation</a></li>
-    <li><a href="usage.html">Program usage</a></li>
-    <li><a href="output-format.html">Output format</a></li>
-    <li>
-        <a href="db5.html">G5 database</a>
-        <!-- 
-        <ul>
-            <li><a href="db5-source.html">Source</a></li>
-            <li><a href="db5-person.html">Person</a></li>
-            <li><a href="db5-group.html">Group</a></li>
-            <li><a href="db5-api.html">API</a></li>
-        </ul>
-        -->
+    <li class="bold big1">
+        <a href="index.html">Home</a>
+        <br><a href="https://github.com/tig12/gauquelin5">Code</a>
     </li>
+    
+    <li><a href="usage.html">Program usage</a></li>
+    <li><a href="organisation.html">Organisation</a></li>
+    <li><a href="db5.html">G5 database</a></li>
+    <li><a href="output-format.html">Output format</a></li>
+    
+    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
     
     <li>
         <span class="big1">1 - Restore</span>                            

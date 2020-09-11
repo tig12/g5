@@ -25,8 +25,8 @@
 <nav class="prevnext">
     <a class="topage" rel="" href="#topage">&#10148;</a>
     <a class="top" href="index.html">&uarr;</a>
-    <a class="prev" rel="prev" href="full.html">&larr;</a>
-    <a class="next" rel="next" href="db5-source.html">&rarr;</a>
+    <a class="prev" rel="prev" href="organisation.html">&larr;</a>
+    <a class="next" rel="next" href="output-format.html">&rarr;</a>
 </nav>
 
 <header>
@@ -40,6 +40,16 @@ Gauquelin5 database contains the notions of <a href="db5-source.html"><b>Source<
 </header>
 
 <article>
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#syntax">Syntax</a>
+            <ul>
+                <li><a href="#1-1-common-fields">Common fields</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
 
 The flow is :
 <img class="border margin padding" src="img/db5-flow.svg" alt="">
@@ -52,11 +62,12 @@ Read :
 <br>
 <ul class="naked border inline-block padding05 margin05">
     <li>
-        1 source is related to 0-n persons
+        * means 0-n
+        <br>1 source is related to 0 or more persons
         <br>0 => a source can exist without being related to any person.
     </li>
     <li class="padding-top05">
-        1 person is related to 1-n sources
+        1 person is related to 1 or more sources
         <br>1 => a person cannot exist in the database without being related to a source.
     </li>
 </ul>
@@ -84,7 +95,7 @@ Read :
 
 
 <!-- ********************************************************************************* -->
-<h2>Syntax</h2>
+<h2><a name="syntax">Syntax</a></h2>
 The definitions of the fields are expressed in yaml files located with the source code of the model
 <pre>
 src/model/
@@ -100,7 +111,7 @@ File <code>Person.yml</code> contains an empty person with all its fields empty.
 <br>This provides to the code a precise definition of the entities, the description of a new type.
 
 <!-- ************************************* -->
-<h3>Common fields</h3>
+<h3><a name="1-1-common-fields">Common fields</a></h3>
 <ul>
     <li>
         <div class="bold">uid</div>
@@ -197,24 +208,17 @@ GNAME: Joseph</textarea>
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
 <ul>
-    <li class="bold big1"><a href="index.html">g5 Doc</a></li>
-    <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">g5 code</a></li>
-    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
-    
-    <li><a href="organisation.html">Organisation</a></li>
-    <li><a href="usage.html">Program usage</a></li>
-    <li><a href="output-format.html">Output format</a></li>
-    <li>
-        <a href="db5.html">G5 database</a>
-        <!-- 
-        <ul>
-            <li><a href="db5-source.html">Source</a></li>
-            <li><a href="db5-person.html">Person</a></li>
-            <li><a href="db5-group.html">Group</a></li>
-            <li><a href="db5-api.html">API</a></li>
-        </ul>
-        -->
+    <li class="bold big1">
+        <a href="index.html">Home</a>
+        <br><a href="https://github.com/tig12/gauquelin5">Code</a>
     </li>
+    
+    <li><a href="usage.html">Program usage</a></li>
+    <li><a href="organisation.html">Organisation</a></li>
+    <li><a href="db5.html">G5 database</a></li>
+    <li><a href="output-format.html">Output format</a></li>
+    
+    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
     
     <li>
         <span class="big1">1 - Restore</span>                            

@@ -37,11 +37,28 @@ This page describes the <code>Person</code> data type of <a href="db5.html">g5 d
 </header>
 
 <article>
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#yaml-template">YAML template</a>
+        </li>
+        <li>
+            <a href="#person-uid">Person uid</a>
+        </li>
+        <li>
+            <a href="#other-person-fields">Other Person fields</a>
+            <ul>
+                <li><a href="#3-1-sources">sources</a></li>
+                <li><a href="#3-2-ids">ids</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
 
 Persons are built by program generating and modifying yaml files in <code>7-full/person/</code>.
 
 <!-- ********************************************************************************* -->
-<h2>YAML template</h2>
+<h2><a name="yaml-template">YAML template</a></h2>
 
 The structure of a source is given by <code>src/model/Person.yml</code>
 
@@ -105,13 +122,13 @@ history: []
 </pre>
 
 <!-- ********************************************************************************* -->
-<h2>Person uid</h2>
+<h2><a name="person-uid">Person uid</a></h2>
 
 <!-- ********************************************************************************* -->
-<h2>Other Person fields</h2>
+<h2><a name="other-person-fields">Other Person fields</a></h2>
 
 <!-- ************************************* -->
-<h3>sources</h3>
+<h3><a name="3-1-sources">sources</a></h3>
 List of source ids containing informations about this person.
 <br>Regular array of source ids
 <br>ex: 
@@ -120,7 +137,7 @@ List of source ids containing informations about this person.
 </pre>
 
 <!-- ************************************* -->
-<h3>ids</h3>
+<h3><a name="3-2-ids">ids</a></h3>
 Associative array id source => id within this source
 <br>ex: <pre class="normal">cura: A5-725</pre>
 <br>The key of this array (ids source) must be present in array <code>sources</code>
@@ -132,24 +149,17 @@ Associative array id source => id within this source
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
 <ul>
-    <li class="bold big1"><a href="index.html">g5 Doc</a></li>
-    <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">g5 code</a></li>
-    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
-    
-    <li><a href="organisation.html">Organisation</a></li>
-    <li><a href="usage.html">Program usage</a></li>
-    <li><a href="output-format.html">Output format</a></li>
-    <li>
-        <a href="db5.html">G5 database</a>
-        <!-- 
-        <ul>
-            <li><a href="db5-source.html">Source</a></li>
-            <li><a href="db5-person.html">Person</a></li>
-            <li><a href="db5-group.html">Group</a></li>
-            <li><a href="db5-api.html">API</a></li>
-        </ul>
-        -->
+    <li class="bold big1">
+        <a href="index.html">Home</a>
+        <br><a href="https://github.com/tig12/gauquelin5">Code</a>
     </li>
+    
+    <li><a href="usage.html">Program usage</a></li>
+    <li><a href="organisation.html">Organisation</a></li>
+    <li><a href="db5.html">G5 database</a></li>
+    <li><a href="output-format.html">Output format</a></li>
+    
+    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
     
     <li>
         <span class="big1">1 - Restore</span>                            

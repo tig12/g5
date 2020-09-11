@@ -42,8 +42,19 @@
         <li>
             <a href="#format-used-in-g5">Format used in g5</a>
         </li>
+        <li>
+            <a href="#expressing-timezone-offset">Expressing timezone offset</a>
+        </li>
+        <li>
+            <a href="#timezone-offset-computation">Timezone offset computation</a>
+            <ul>
+                <li><a href="#4-1-g5-integration">g5 integration</a></li>
+                <li><a href="#4-2-examples-of-contradictions">Examples of contradictions</a></li>
+            </ul>
+        </li>
     </ul>
 </nav>
+
 
 
 In this page, "legal time" means "the time that can be read on the birth certificate".
@@ -102,7 +113,7 @@ In g5 database, dates are stored using 2 distinct fields :
 
 
 <!-- ********************************************************************************* -->
-<h2>Expressing timezone offset</h2>
+<h2><a name="expressing-timezone-offset">Expressing timezone offset</a></h2>
 
 Notations :
 <div class="margin-left">
@@ -151,7 +162,7 @@ Example : the first record of file D10 : Aaron Harold, born 1921-06-21 07:00
 
 
 <!-- ********************************************************************************* -->
-<h2>Timezone offset computation</h2>
+<h2><a name="timezone-offset-computation">Timezone offset computation</a></h2>
 
 This is a delicate and important problem.
 <br>Important because TZO is necessary to compute a chart, and delicate because information sources are sometimes contradictory.
@@ -175,7 +186,7 @@ This is a delicate and important problem.
 </ul>
 
 <!-- ************************************* -->
-<h3>g5 integration</h3>
+<h3><a name="4-1-g5-integration">g5 integration</a></h3>
 
 Time zone computation is a weak point of current implementation :
 <ul>
@@ -193,7 +204,7 @@ Time zone computation is a weak point of current implementation :
 <br>With (see above) : <code>date-ut + tzo = date</code>
 
 <!-- ************************************* -->
-<h3>Examples of contradictions</h3>
+<h3><a name="4-2-examples-of-contradictions">Examples of contradictions</a></h3>
 <ul>
     <li>
         For Italy, both books say that offset is 1h for the whole country since 1893-11-01.
@@ -213,24 +224,17 @@ Time zone computation is a weak point of current implementation :
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
 <ul>
-    <li class="bold big1"><a href="index.html">g5 Doc</a></li>
-    <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">g5 code</a></li>
-    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
-    
-    <li><a href="organisation.html">Organisation</a></li>
-    <li><a href="usage.html">Program usage</a></li>
-    <li><a href="output-format.html">Output format</a></li>
-    <li>
-        <a href="db5.html">G5 database</a>
-        <!-- 
-        <ul>
-            <li><a href="db5-source.html">Source</a></li>
-            <li><a href="db5-person.html">Person</a></li>
-            <li><a href="db5-group.html">Group</a></li>
-            <li><a href="db5-api.html">API</a></li>
-        </ul>
-        -->
+    <li class="bold big1">
+        <a href="index.html">Home</a>
+        <br><a href="https://github.com/tig12/gauquelin5">Code</a>
     </li>
+    
+    <li><a href="usage.html">Program usage</a></li>
+    <li><a href="organisation.html">Organisation</a></li>
+    <li><a href="db5.html">G5 database</a></li>
+    <li><a href="output-format.html">Output format</a></li>
+    
+    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
     
     <li>
         <span class="big1">1 - Restore</span>                            

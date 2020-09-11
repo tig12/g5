@@ -39,6 +39,22 @@ This page describes the <code>Group</code> data type of <a href="db5.html">g5 da
 </header>
 
 <article>
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#syntax">Syntax</a>
+        </li>
+        <li>
+            <a href="#group-uid">Group uid</a>
+        </li>
+        <li>
+            <a href="#group-id">Group id</a>
+        </li>
+        <li>
+            <a href="#7-full-tmp-group">7-full/tmp/group/</a>
+        </li>
+    </ul>
+</nav>
 
 Groups appear in several places in <code>7-full/</code>
 <pre>
@@ -90,7 +106,7 @@ data/9-output/
 
 
 <!-- ********************************************************************************* -->
-<h2>Syntax</h2>
+<h2><a name="syntax">Syntax</a></h2>
 Group syntax is given by YAML template <code>src/model/Group.yml</code>
 
 <textarea class="block margin05 padding05" cols="25" rows="17">
@@ -116,18 +132,18 @@ Function <code>g5\model\Group::newEmpty()</code> uses this template to initializ
 
 
 <!-- ********************************************************************************* -->
-<h2>Group uid</h2>
+<h2><a name="group-uid">Group uid</a></h2>
 Group uids are built from the path of the file containing its definition :
 <br><code>data/7-full/<b>group/datasets/newalch/muller402</b>.yml</code>
 <br>have uid <code><b>group/datasets/newalch/muller402</b></code>
 
 <!-- ********************************************************************************* -->
-<h2>Group id</h2>
+<h2><a name="group-id">Group id</a></h2>
 A group id is unique within groups ; ex <code>muller402</code>
 
 
 <!-- ********************************************************************************* -->
-<h2>7-full/tmp/group/</h2>
+<h2><a name="7-full-tmp-group">7-full/tmp/group/</a></h2>
 Contains text files with one person uid per line
 <br>ex: <code>7-full/tmp/group/datasets/cura/A2.txt</code>
 <pre>
@@ -143,24 +159,17 @@ persons/1864/03/10/jacques-abelous
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
 <ul>
-    <li class="bold big1"><a href="index.html">g5 Doc</a></li>
-    <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">g5 code</a></li>
-    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
-    
-    <li><a href="organisation.html">Organisation</a></li>
-    <li><a href="usage.html">Program usage</a></li>
-    <li><a href="output-format.html">Output format</a></li>
-    <li>
-        <a href="db5.html">G5 database</a>
-        <!-- 
-        <ul>
-            <li><a href="db5-source.html">Source</a></li>
-            <li><a href="db5-person.html">Person</a></li>
-            <li><a href="db5-group.html">Group</a></li>
-            <li><a href="db5-api.html">API</a></li>
-        </ul>
-        -->
+    <li class="bold big1">
+        <a href="index.html">Home</a>
+        <br><a href="https://github.com/tig12/gauquelin5">Code</a>
     </li>
+    
+    <li><a href="usage.html">Program usage</a></li>
+    <li><a href="organisation.html">Organisation</a></li>
+    <li><a href="db5.html">G5 database</a></li>
+    <li><a href="output-format.html">Output format</a></li>
+    
+    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
     
     <li>
         <span class="big1">1 - Restore</span>                            

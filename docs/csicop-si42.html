@@ -65,6 +65,25 @@ This page deals with the work done on the CSICOP test (USA 1979), using data pub
 </header>
 
 <article>
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#information-sources">Information sources</a>
+        </li>
+        <li>
+            <a href="#preparatory-work">Preparatory work</a>
+        </li>
+        <li>
+            <a href="#restoration-process">Restoration process</a>
+            <ul>
+                <li><a href="#3-1-raw2csv">raw2csv</a></li>
+                <li><a href="#3-2-addcanvas1">addCanvas1</a></li>
+                <li><a href="#3-3-addertel">addErtel</a></li>
+                <li><a href="#3-4-addd10">addD10</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
 
 <!-- ********************************************************************************* -->
 <h2><a name="information-sources">Information sources</a></h2>
@@ -85,7 +104,7 @@ Informations used to compute this group can be found in several places.
 </ul>
 
 <!-- ********************************************************************************* -->
-<h2>Preparatory work</h2>
+<h2><a name="preparatory-work">Preparatory work</a></h2>
 The PDF files downloaded from skepticalinquirer.org cannot be directly exploited by program. Text files were built from the PDF ; these files can be downloaded from <a href="https://larzac.info/gauquelin5/1-raw/csicop/si42/">larzac.info/gauquelin5/1-raw/csicop/si42/</a>.
 <br>The README file in this directory details the way PDF files were transformed to text files.
 
@@ -105,7 +124,7 @@ php run-g5.php csicop si42 export
 </pre>
 
 <!-- ************************************* -->
-<h3><a name="2-1-raw2csv">raw2csv</a></h3>
+<h3><a name="3-1-raw2csv">raw2csv</a></h3>
 
 <pre>php run-g5.php csicop si42 raw2csv</pre>
 
@@ -134,7 +153,7 @@ Generated files contain fields :
 
 
 <!-- ************************************* -->
-<h3><a name="2-2-addcanvas1">addCanvas1</a></h3>
+<h3><a name="3-2-addcanvas1">addCanvas1</a></h3>
 <ul>
     <li>
         Adds field CANVAS to 5-csicop/408-csicop-si42.csv                      
@@ -158,7 +177,7 @@ INPUT :
 </ul>
 
 <!-- ************************************* -->
-<h3><a name="2-3-addertel">addErtel</a></h3>
+<h3><a name="3-3-addertel">addErtel</a></h3>
 
 Adds to <code>408-csicop-si42.csv</code> informations coming from file <a href="newalch-ertel4391.html">Ertel 4391</a>.
 
@@ -259,7 +278,7 @@ The 3 last dates can be explained by a confusion on given names ; corrections we
 <br><b>This leaves 7 differences</b>, indicating an error either in Ertel file, or in SI42 list, or in file D10.
 
 <!-- ************************************* -->
-<h3><a name="2-4-addd10">addD10</a></h3>
+<h3><a name="3-4-addd10">addD10</a></h3>
 <pre>php run-g5.php csicop si42 addD10</pre>
 
 <!--
@@ -371,24 +390,17 @@ study.
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
 <ul>
-    <li class="bold big1"><a href="index.html">g5 Doc</a></li>
-    <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">g5 code</a></li>
-    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
-    
-    <li><a href="organisation.html">Organisation</a></li>
-    <li><a href="usage.html">Program usage</a></li>
-    <li><a href="output-format.html">Output format</a></li>
-    <li>
-        <a href="db5.html">G5 database</a>
-        <!-- 
-        <ul>
-            <li><a href="db5-source.html">Source</a></li>
-            <li><a href="db5-person.html">Person</a></li>
-            <li><a href="db5-group.html">Group</a></li>
-            <li><a href="db5-api.html">API</a></li>
-        </ul>
-        -->
+    <li class="bold big1">
+        <a href="index.html">Home</a>
+        <br><a href="https://github.com/tig12/gauquelin5">Code</a>
     </li>
+    
+    <li><a href="usage.html">Program usage</a></li>
+    <li><a href="organisation.html">Organisation</a></li>
+    <li><a href="db5.html">G5 database</a></li>
+    <li><a href="output-format.html">Output format</a></li>
+    
+    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
     
     <li>
         <span class="big1">1 - Restore</span>                            

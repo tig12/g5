@@ -25,7 +25,7 @@
 <nav class="prevnext">
     <a class="topage" rel="" href="#topage">&#10148;</a>
     <a class="top" href="index.html">&uarr;</a>
-    <a class="prev" rel="prev" href="output-format.html">&larr;</a>
+    <a class="prev" rel="prev" href="historicat-tests.html">&larr;</a>
     <a class="next" rel="next" href="cura-A.html">&rarr;</a>                                                                        
 </nav>
 
@@ -44,28 +44,29 @@ Gauquelin5 program handles a subset of the data published on <a href="http://cur
 <nav class="toc">
     <ul>
         <li>
-            <a href="#download-cura-data">Download cura data</a>
+            <a href="#cura-data-with-names">Cura data with names</a>
+        </li>
+        <li>
+            <a href="#gauquelin-unique-id">Gauquelin unique id</a>
         </li>
         <li>
             <a href="#working-on-cura-data">Working on cura data</a>
+            <ul>
+                <li><a href="#3-1-raw2tmp">raw2tmp</a></li>
+                <li><a href="#3-2-tweak2tmp">tweak2tmp</a></li>
+                <li><a href="#3-3-other-transformations">Other transformations</a></li>
+                <li><a href="#3-4-export-to-csv">Export to csv</a></li>
+            </ul>
         </li>
         <li>
-            <a href="#raw2csv">raw2csv</a>
-        </li>
-        <li>
-            <a href="#tweak2csv">tweak2csv</a>
-        </li>
-        <li>
-            <a href="#other-transformations">Other transformations</a>
-        </li>
-        <li>
-            <a href="#export">export</a>
+            <a href="#duplicates">Duplicates</a>
         </li>
     </ul>
 </nav>
 
+
 <!-- ********************************************************************************* -->
-<h2>Cura data with names</h2>
+<h2><a name="cura-data-with-names">Cura data with names</a></h2>
 
 The command
 <pre>php run-g5.php cura all count</pre>
@@ -93,7 +94,7 @@ generates a comparison between numbers claimed on Cura web site and numbers foun
 
 
 <!-- ********************************************************************************* -->
-<h2>Gauquelin unique id</h2>
+<h2><a name="gauquelin-unique-id">Gauquelin unique id</a></h2>
 
 Each person in g5 database has a unique id formed by its "slug", and several local ids, only unique within a source (see <a href="db5.html">page on database</a>).
 <br>Applied to Cura data, each person is at least related to 2 sources : one source called "cura" and one source related to its file of origin (ex "A1").
@@ -132,7 +133,7 @@ Each person in g5 database has a unique id formed by its "slug", and several loc
         <td>1008</td>
     </tr>
 </table>
-The GID of this person is <code>A1-2054</code>.
+The GQID of this person is <code>A1-2054</code>.
 
 
 <!-- ********************************************************************************* -->
@@ -155,7 +156,7 @@ the program tells you the possible values of datafiles for cura dataset :
 <br>- the last transformation is <code>tmp2db</code>.
 
 <!-- ************************************* -->
-<h3>raw2tmp</h3>
+<h3><a name="3-1-raw2tmp">raw2tmp</a></h3>
 For all cura datafiles, the first transformation is <code>raw2tmp</code>
 <br>It extracts data from html files located in <code>data/raw/cura.free.fr</code> and produces csv files located by default in <code>data/tmp/cura</code> (tmp dir can be modified in <code>config.yml</code>).
 <br>
@@ -184,11 +185,11 @@ During this step, some corrections are applied to the data.
 </ul>
 
 <!-- ************************************* -->
-<h3>tweak2tmp</h3>
+<h3><a name="3-2-tweak2tmp">tweak2tmp</a></h3>
 This is done after <code>tweak2tmp</code>, see <a href="tweak2tmp.html">page tweak2tmp</a>.
 
 <!-- ************************************* -->
-<h3>Other transformations</h3>
+<h3><a name="3-3-other-transformations">Other transformations</a></h3>
 
 Other transformations (between <code>raw2tmp</code> and <code>tmp2db</code>) may modify the files located in <code>data/tmp/cura</code>.
 <br>
@@ -201,14 +202,14 @@ Other transformations (between <code>raw2tmp</code> and <code>tmp2db</code>) may
 </ul>
 
 <!-- ************************************* -->
-<h3>Export to csv</h3>
+<h3><a name="3-4-export-to-csv">Export to csv</a></h3>
 Done with 
 <pre>php run-g5.php cura &lt;datafile> export</pre>
 where <code>&lt;datafile></code> can be any value understood by cura (A, A1 ... E3)
 
 
 <!-- ********************************************************************************* -->
-<h2>Duplicates</h2>
+<h2><a name="duplicates">Duplicates</a></h2>
 
 Analysis of the database shows that 
 <ul>
@@ -1098,24 +1099,17 @@ generates the following table containing the duplicates.
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
 <ul>
-    <li class="bold big1"><a href="index.html">g5 Doc</a></li>
-    <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">g5 code</a></li>
-    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
-    
-    <li><a href="organisation.html">Organisation</a></li>
-    <li><a href="usage.html">Program usage</a></li>
-    <li><a href="output-format.html">Output format</a></li>
-    <li>
-        <a href="db5.html">G5 database</a>
-        <!-- 
-        <ul>
-            <li><a href="db5-source.html">Source</a></li>
-            <li><a href="db5-person.html">Person</a></li>
-            <li><a href="db5-group.html">Group</a></li>
-            <li><a href="db5-api.html">API</a></li>
-        </ul>
-        -->
+    <li class="bold big1">
+        <a href="index.html">Home</a>
+        <br><a href="https://github.com/tig12/gauquelin5">Code</a>
     </li>
+    
+    <li><a href="usage.html">Program usage</a></li>
+    <li><a href="organisation.html">Organisation</a></li>
+    <li><a href="db5.html">G5 database</a></li>
+    <li><a href="output-format.html">Output format</a></li>
+    
+    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
     
     <li>
         <span class="big1">1 - Restore</span>                            
@@ -1201,5 +1195,3 @@ generates the following table containing the duplicates.
 
 </body>
 </html>
-<!-- ************************************* -->
-<!-- ********************************************************************************* -->

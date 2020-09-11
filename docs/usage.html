@@ -27,8 +27,8 @@
 <nav class="prevnext">
     <a class="topage" rel="" href="#topage">&#10148;</a>
     <a class="top" href="index.html">&uarr;</a>
-    <a class="prev" rel="prev" href="organisation.html">&larr;</a>
-    <a class="next" rel="next" href="output-format.html">&rarr;</a>
+    <a class="prev" rel="prev" href="index.html">&larr;</a>
+    <a class="next" rel="next" href="organisation.html">&rarr;</a>
 </nav>
 
 <header>
@@ -42,25 +42,30 @@
         <li>
             <a href="#installation">Installation</a>
             <ul>
-                <li><a href="#1-1-directory-structure">Directory structure</a></li>
+                <li><a href="#1-1-optional-steps">Optional steps</a></li>
+                <li><a href="#1-2-directory-structure">Directory structure</a></li>
             </ul>
         </li>
         <li>
             <a href="#configuration">Configuration</a>
             <ul>
                 <li><a href="#2-1-dirs">dirs</a></li>
-                <li><a href="#2-2-geonames">geonames</a></li>
-                <li><a href="#2-3-postgresql">postgresql</a></li>
+                <li><a href="#2-2-db5">db5</a></li>
+                <li><a href="#2-3-geonames">geonames</a></li>
             </ul>
         </li>
         <li>
             <a href="#usage">Usage</a>
         </li>
         <li>
-            <a href="#complete-execution">Complete execution</a>
+            <a href="#complete-generation-of-the-database">Complete generation of the database</a>
+        </li>
+        <li>
+            <a href="#generating-output-files">Generating output files</a>
         </li>
     </ul>
 </nav>
+
 
 
 
@@ -95,7 +100,7 @@ This software has been developed and tested under Linux. A priori, it should als
 </ol>
 
 <!-- ************************************* -->
-<h3>Optional steps</h3>
+<h3><a name="1-1-optional-steps">Optional steps</a></h3>
 
 <ul class="spaced">
     <li>
@@ -122,7 +127,7 @@ sudo apt install php-sqlite3
 </ul>
 
 <!-- ************************************* -->
-<h3><a name="1-1-directory-structure">Directory structure</a></h3>
+<h3><a name="1-2-directory-structure">Directory structure</a></h3>
 The important files and directories are :
 <pre>
 gauquelin5/
@@ -173,12 +178,12 @@ If you look at <code>data/</code> directory, you will see that it contains only 
 Other sub-directories of <code>data/</code>, are not versioned, ignored by git.
 
 <!-- ************************************* -->
-<h3><a name="2-3-postgresql">db5</a></h3>
-This concerns the main g5 database, used to store data imported by the program.
+<h3><a name="2-2-db5">db5</a></h3>
+This concerns g5 database, used to store data imported by the program.
 <br>It contains only one section : <code>postgresql</code>. Specify here the parameters used to connect to a local postgresql database.
 
 <!-- ************************************* -->
-<h3><a name="2-2-geonames">geonames</a></h3>
+<h3><a name="2-3-geonames">geonames</a></h3>
 G5 uses geonames.org to match place names to geonames ids. Some steps use a postgres database where geonames informations are stored ; some steps use geonames.org web service ; see <a href="geonames.html">page about geonames</a> for details.
 <br>
 <br>Section <code>postgresql</code> permits to specify the connection parameters, which can be identical or different from main g5 database.
@@ -239,7 +244,7 @@ Example 3
 This does a real transformation (converts A3 raw html file to a csv file in data/tmp/cura).
 
 <!-- ********************************************************************************* -->
-<h2><a name="complete-execution">Complete generation of the database</a></h2>
+<h2><a name="complete-generation-of-the-database">Complete generation of the database</a></h2>
 As described in <a href="organisation.html">the page about g5 organisation</a>, the program first converts raw data to temporary data, and then imports temporary files in database.
 <br><b>The different steps must be executed in a precise order</b>, because some steps need the result of previous executions to work.
 <br>
@@ -259,7 +264,7 @@ Then the following command builds the database from scratch :
 
 
 <!-- ********************************************************************************* -->
-<h2>Generating output files</h2>
+<h2><a name="generating-output-files">Generating output files</a></h2>
 
 TODO 
 
@@ -270,24 +275,17 @@ TODO
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
 <ul>
-    <li class="bold big1"><a href="index.html">g5 Doc</a></li>
-    <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">g5 code</a></li>
-    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
-    
-    <li><a href="organisation.html">Organisation</a></li>
-    <li><a href="usage.html">Program usage</a></li>
-    <li><a href="output-format.html">Output format</a></li>
-    <li>
-        <a href="db5.html">G5 database</a>
-        <!-- 
-        <ul>
-            <li><a href="db5-source.html">Source</a></li>
-            <li><a href="db5-person.html">Person</a></li>
-            <li><a href="db5-group.html">Group</a></li>
-            <li><a href="db5-api.html">API</a></li>
-        </ul>
-        -->
+    <li class="bold big1">
+        <a href="index.html">Home</a>
+        <br><a href="https://github.com/tig12/gauquelin5">Code</a>
     </li>
+    
+    <li><a href="usage.html">Program usage</a></li>
+    <li><a href="organisation.html">Organisation</a></li>
+    <li><a href="db5.html">G5 database</a></li>
+    <li><a href="output-format.html">Output format</a></li>
+    
+    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
     
     <li>
         <span class="big1">1 - Restore</span>                            
