@@ -16,6 +16,7 @@ use g5\commands\cura\CuraRouter;
 
 // raw2tmp
 use g5\commands\cura\A\raw2tmp                  as raw2tmpA;
+use g5\commands\cura\A\addGeo                   as addGeoA;
 use g5\commands\cura\D6\raw2tmp                 as raw2tmpD6;
 use g5\commands\cura\D6\addGeo                  as addGeoD6;
 use g5\commands\cura\D10\raw2tmp                as raw2tmpD10;
@@ -95,6 +96,7 @@ class history implements Command {
             echo "***********************\n";
             foreach($filesCuraA as $datafile){
                 echo raw2tmpA::execute([$datafile, 'raw2tmp', 'small']);
+                echo addGeoA::execute([$datafile, 'addGeo', 'small']);
             }
             echo raw2tmpD6::execute(['D6', 'raw2tmp']);
             echo addGeoD6::execute(['D6', 'addGeo']); // tmp code - addGeo needs to be fixed

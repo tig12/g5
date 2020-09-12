@@ -39,20 +39,6 @@ This page describes the corrections done on files A1 to A6 while importing html 
     <li>Restore legal birth times.</li>
 </ul>
 A files contain 15 790 unique persons.
-<!--
-Accoding to cura.free.fr :
-<div class="padding-left">
-A1 contains 2088 sports champions
-<br>A2 contains 3644 scientists and medical doctors
-<br>A3 contains 3047 military men
-<br>A4 contains 1473 painters and 1249 French musicians
-<br>A5 contains 1409 actors and 1003 politicians
-<br>A6 contains 2027 writers and journalists
-</div>
-2088+3644+3047+2722+2412+2027 = 15940
-2087+3643+3046+2720+2410+2026 = 15932
--->
-
 
 </div>
 </header>
@@ -90,7 +76,12 @@ A1 contains 2088 sports champions
     </ul>
 </nav>
 
-
+Raw files are imported in database with the following commands :
+<pre>
+php run-g5.php cura A raw2tmp small
+php run-g5.php cura A addGeo small
+php run-g5.php cura A tmp2db
+</pre>
 
 <!-- ********************************************************************************* -->
 <h2><a name="raw2csv">raw2csv</a></h2>
@@ -250,14 +241,22 @@ This is not present in pages including names (for example present in <a href="ht
 <br>This information is not yet included in g5 database.
 
 
+<!-- ********************************************************************************* -->
+<h2>addGeo</h2>
 
+This step bring corrections to place names and compute geonames id for non-ambiguous cases.
+
+
+<!-- ********************************************************************************* -->
+<!-- ********************************************************************************* -->
 <div class="margin-top2">
 <div class="warning">
     Following documentation is obsolete.
     <br>Corresponds to an earlier stage of development, before merging all imported files in a database.
 </div>
 </div>
-
+<!-- ********************************************************************************* -->
+<!-- ********************************************************************************* -->
 
 
 <!-- ********************************************************************************* -->

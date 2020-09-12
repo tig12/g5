@@ -188,10 +188,11 @@ Here also, the only way to be sure is to see the birth certificates. This was no
 
 <!-- ********************************************************************************* -->
 <h2><a name="restoration-process">Restoration process</a></h2>
-The command :
-<pre>php run-g5.php csicop irving all</pre>
-equivalent to 
+
+The conversion of raw file to database is done with these commands :
 <pre>
+php run-g5.php csicop si42 raw2csv
+php run-g5.php csicop si42 addCanvas1
 php run-g5.php csicop irving raw2csv
 php run-g5.php csicop irving addD10
 php run-g5.php csicop irving export
@@ -262,8 +263,6 @@ Extreme dates :
 35 dates > 1950
 
 
-
-
 Results of the U.S. Test of the "Mars Effect" Are Negative
 Paul Kurtz, Marvin Zelen, and George Abell
 Skeptical Inquier VOL IV NO. 2 WINTER 1979-80
@@ -327,9 +326,6 @@ contains 408 names, a number we deemed large enough for a preliminary
 study.
 
 -->
-
-
-
 
 </article>
 </div><!-- end class="main" -->

@@ -1,13 +1,11 @@
 <?php
 /********************************************************************************
-    Generates csv files in data/output
+    Generates data/output/history/1994-muller-medics/muller-1083-medics.csv
     
     @license    GPL
-    @history    2019-07-05 13:48:39+02:00, Thierry Graff : creation
-    @history    2019-12-28,                Thierry Graff : export using 7-full instead of 5-tmp
-    @history    2020-08-12 08:58:19+02:00, Thierry Graff : export using g5 db instead of 7-full
+    @history    2020-09-12 17:27:59+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace g5\commands\cura\all;
+namespace g5\commands\newalch\muller1083;
 
 use g5\Config;
 use g5\model\DB5;
@@ -18,42 +16,40 @@ use g5\model\Group;
 use g5\model\Person;
 
 class export implements Command {
-    
+                                                                                              
     /**
         Directory where the generated files are stored
         Relative to directory specified in config.yml by dirs / output
     **/
-    const OUTPUT_DIR = 'datasets' . DS . 'cura';
+    const OUTPUT_DIR = 'history' . DS . '1994-muller-medics';
+    
+    const OUTPUT_FILE = 'muller-1083-medics.csv';
     
     /** 
         Trick to access to $datafile within $fmap and $sort function
     **/
-//    private static $datafile;
+    private static $datafile;
     
     // *****************************************
     // Implementation of Command
     /** 
-        Called by : php run-g5.php cura <datafile> export
-        @param $params array containing two strings :
-                       - the datafile to process (like "A1").
-                       - The name of this command (useless here)
+        @param $params Empty array
         @return Report
     **/
     public static function execute($params=[]): string{
-        if(count($params) > 2){
-            return "WRONG USAGE : useless parameter : {$params[2]}\n";
+        if(count($params) > 0){
+            return "WRONG USAGE : useless parameter : {$params[0]}\n";
         }
         
         $report = '';
         
-        $datafile = $params[0];
-        
         $g = Group::getBySlug($datafile);
         $g-> computeMembers();
 
-        $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . $datafile . '.csv';
+        $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . self::OUTPUT_FILE;
         
         $csvFields = [
+            'MUID',
             'GQID',
             'FNAME',
             'GNAME',
@@ -71,7 +67,7 @@ class export implements Command {
         ];
         
         $map = [
-            'ids-in-sources.cura' => 'GQID',
+            'ids-in-sources.' . $datafile => 'GQID',
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
             'birth.date' => 'DATE',
@@ -86,22 +82,20 @@ class export implements Command {
             'birth.place.geoid' => 'GEOID',
         ];
         
-//        self::$datafile = $datafile; // trick for $fmap and $sort
+        self::$datafile = $datafile; // trick for $fmap and $sort
         
         $fmap = [
+            'GID' => function($p){
+                return Cura::gqid(self::$datafile, $p->data['ids-in-sources'][self::$datafile]);
+            },
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);
             },
         ];
         
-        // sorts by GQID within the $datafile
-        // need to compare int and not string for a natsort
+        // sorts by id within the $datafile
         $sort = function($a, $b){
-            $idA = $a->data['ids-in-sources']['cura'];
-            $idB = $b->data['ids-in-sources']['cura'];
-            $posA = strpos($idA, '-') + 1;
-            $posB = strpos($idB, '-') + 1;
-            return (int)substr($idA, $posA) <=> (int)substr($idB, $posB);
+             return $a->data['ids-in-sources'][self::$datafile] <=> $b->data['ids-in-sources'][self::$datafile];
         };
         
         return $g->exportCsv($outfile, $csvFields, $map, $fmap, $sort);

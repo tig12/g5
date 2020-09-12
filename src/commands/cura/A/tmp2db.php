@@ -125,6 +125,7 @@ class tmp2db implements Command {
                 $new['birth']['place']['cy'] = $line['CY'];
                 $new['birth']['place']['lg'] = $line['LG'];
                 $new['birth']['place']['lat'] = $line['LAT'];
+                $new['birth']['place']['geoid'] = $line['GEOID'];
                 $p->updateFields($new);
                 $p->computeSlug();
                 $p->addHistory("cura $datafile tmp2db", $source->data['slug'], $new);

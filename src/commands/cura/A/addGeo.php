@@ -1,7 +1,6 @@
 <?php
 /********************************************************************************
-    Adds field GEOID and corrects field PLACE to files of 5-cura-csv
-    For some fields, adds information in field NOTES
+    Adds field GEOID and corrects field PLACE to files of data/tmp/cura/A*.csv
     
     @license    GPL
     @history    2019-07-03 06:48:00+02:00, Thierry Graff : creation
@@ -39,9 +38,9 @@ class addGeo implements Command {
     **/
     public static function execute($params=[]): string{
         
-        $msg = "- full : lists all the place names that can't be matched to geonames.\n"
-             . "- medium : lists the places with several matches to geonames.\n"
-             . "- small : only echoes global information about matching.\n";
+        $msg = "  - full   : lists all the place names that can't be matched to geonames.\n"
+             . "  - medium : lists the places with several matches to geonames.\n"
+             . "  - small  : only echoes global information about matching.\n";
 
         if(count($params) < 3){
             return "WRONG USAGE - This command needs a parameter indicating the type of report\n$msg";
@@ -59,7 +58,7 @@ class addGeo implements Command {
         
         self::$pdo_geonames = Geonames::compute_dblink();
         
-        $report = '';
+        $report = "--- $datafile addGeo ---\n";
         $rows = Cura::loadTmpFile($datafile);
         $res = implode(G5::CSV_SEP, A::TMP_FIELDS) . "\n";
         

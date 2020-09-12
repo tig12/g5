@@ -1,7 +1,5 @@
 
-- docs/output-format.html : replace GQID MUID ERID CSID... by LOCALID
-
-- Config::$data['dirs']['9-*'] are useless because 9-output/ hierarchy is the same as 7-full/groups/
+- Handle occu in db, codes like SP+BAS => should be BAS
 
 - Use Ertel 4391 to have more precise sport codes in D10
 
@@ -17,30 +15,18 @@
 
 - tweak2csv : code should be factorized, available to all datafiles
               (cura, 1083MED, 4391SPO)
-- tweak2csv : include nb of modified records in report
 
 - fix nobilities in cura files
 
 - in all cura code, use Cura::tmpFilename()
 
-- rename Cura::loadTmpCsv() to load5csv() - same in newalch and other datasets
-    Harmonize also raw_filename(), tmp_csv_filename()
-    
 - Refactor generated filenames : G55570SPO, GQA1, ERT4384SPO, MUL1083MED ?
     adapt doc of 1083MED
 
 - Harmonize POSSIBLE_PARAMS in commands ; use model of muller1083/fixGnr (key val pairs)
   Harmonize messages for wrong parameters
 
-- Harmonize generated fields in files of 5-cura-csv/
-    Cura A differ from E1 E3
-    => A list of common fields, then particular fields, then field NOTES ?
-
-- Add field LEGAL_TIME or LEGTIME in 5-cura-csv
-    => inject Müller 1083MED in A2 and E1
-    => Use to test legal time restoration on serie A
-
-- share/ hierarchy is a big mess
+- Use Müller 1083MED to test legal time restoration on serie A
 
 - profession-codes.csv : add wd codes + Ertel codes.
 
@@ -55,12 +41,8 @@
 - E1 notice : "NUM : Number (from 1 to 2145 ; 11 items have been added but n. 285 & n. 1155 are omitted)"
 why ?
 
-- in E3, 47 persons were already published under an other id (marked with *).
-=> identify these records
 
-
-
----- BUG -----
+---- BUGS -----
 - check birth in A1
 from command
 php run-g5.php g55 570SPO edited2cura date
@@ -80,4 +62,3 @@ Bug in legal time restoration ?
 - In 570SPO generated :
 A1-81	Winter	Paul	ATH	1906-02-06 14:00-01	RIBEAUVILLE	FR	68	7.35	48.08333
 Why tz offset misses ':00' ?
-
