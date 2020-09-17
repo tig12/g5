@@ -40,14 +40,14 @@ Check data
 <div class="intro">
 The big part of the job is to achieve <b>data reliability</b>. Ideally, every information stored in g5 database should be checked against an official document. This is a huge work because it involves human work of transcription and verification.
 <br>For persons born before world war 2, we don't know the exact birth time. The most precise we can hope is to have a certificate from the <b>hospital</b> (HC). In practice, we have <b>birth certificates</b> (BC) from the civil registries, which are often rounded to the hour.
-<br>BC are not ideal but usable by statistical tests.
-<br>So in g5 context, a birth time is considered enough reliable if :
+<br>BC are not ideal but usable for statistical tests.
+<br>So in g5 context, a birth time is considered reliable if :
 <ul>
     <li>It is related to a BC <b>available and verifiable by anyone</b>.</li>
     <li>The transcription act has been <b>approved by 2 persons or more</b>.</li>
 </ul>
 
-<br>Integration of BCs in g5 is <a href=""><a href="https://larzac.info/gauquelin5/8-acts">data/acts/</a></a>, see page <a href="acts.html">Acts</a>.
+<br>Integration of BCs in g5 is described in page <a href="acts.html">Acts</a>.
 <br>Currently very few birth times have been verified, only to resolve questions raised by g5 development. 
 </div>
 </header>
@@ -96,11 +96,21 @@ Trust = level of reliability of an information.
     </li>
 </ul>
 
-<br>Precision are constants of class <code>g5\model\DB5</code>
-<br>
-<br>One supplementary level was introduced : <b>2.5</b>, meaning that one person has checked the BC, but the information has not been confirmed by a second person. Not really level 2 but better than 3.
-<br>
-<br>Most data handled by g5 are level 4, very few are level 2.5.
+Precision are constants of class <code>g5\model\DB5</code>
+
+<br><br>One supplementary level was introduced : <b>2.5</b>, meaning that one person has checked the BC, but the information has not been confirmed by a second person. Not really level 2 but better than 3.
+
+<br><br>Most data handled by g5 are level 4, very few are level 2.5.
+
+<br><br><b>Note</b> : as far as France is concerned, it's possible today to check BCs online. But at Gauquelin and Müller epoch, they had 2 possibilities : go physically to the archives and consult BCs, or sent a letter and receive BRs. It means that Gauquelin and Müller data are mosltly based on BRs. And a BR may differ from original BC because the officer can make an error of copy, or copy the time of registration instead of the time of birth.
+
+<br>Raw data used by g5 may contain errors from different origins :
+<ul>
+    <li>Copy error from the officer who established a BR.</li>
+    <li>Gauquelin or Müller error when integrating the BR in their files.</li>
+    <li>Error when original paper files where put in an electronic form (for example the error on GNR in <a href="newalch-muller1083.html">Müller 1083 physicians</a>).</li>
+</ul>
+Bugs in g5 program should be added to this list...
 
 
 <!-- ********************************************************************************* -->
@@ -119,7 +129,7 @@ Persons have 2 fields to express reliability :
 <br>This model permits to indicate separately the reliability of each field.
 <br>Ex : a person has <code>trust = 4</code> and <code>trust-details = {"name.fame": 2.5}</code> means that all fields are trust level 4, but one field, <code>person.data['name']['official']</code> is level 2.5.
 
-<br>When a person is imported in database, it takes by default the trust of its source.
+<br>When a person is imported in database, it takes by default the trust level of its source.
 
 
 </article>

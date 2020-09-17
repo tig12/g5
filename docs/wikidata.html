@@ -31,7 +31,8 @@
 <h1>Wikidata integration</h1>
 <div class="intro">
 An important feature of "good data" is the ability to connect them to other datasets. This permits to check, eventually correct them, and provides means to build new datasets. Current page explores the possibility to connect Gauquelin data with <a href="https://www.wikidata.org">wikidata.org</a>. From wikidata, it's possible to link with other standard ids (ISNI, VIAF etc.).
-<br>Matching wikidata with Gauquelin data has not (yet) been coded ; this page only explores the possibilities to retrieve relevant data from wikidata.org locally.
+<br>Matching wikidata with Gauquelin data has not (yet) been coded ; this page only explores the possibilities to retrieve relevant data from wikidata.org.
+<br>Directory <a href="img/wikidata.org">img/wikidata.org</a> contains draft development notes.
 <br>
 </div>
 </header>
@@ -120,35 +121,35 @@ This gave more than 6000 profession codes, leading to 2 647 452 person ids, whic
     </li>
     
     <li>
-Start from a subset of profession codes that corespond to Gauquelin data :
-
-<table class="wikitable margin">
-    <tr><th>Wikidata id</th><th>Profession</th></tr>
-    <tr><td>Q483501</td><td>artist</td></tr>
-    <tr><td>Q2066131</td><td>athlete</td></tr>
-    <tr><td>Q482980</td><td>author</td></tr>
-    <tr><td>Q189290</td><td>military-officer</td></tr>
-    <tr><td>Q82955</td><td>politician</td></tr>
-    <tr><td>Q39631</td><td>physician</td></tr>
-    <tr><td>Q901</td><td>scientist</td></tr>
-</table>
-("athlete" seems to mean "sportman" in Wikidata vocabulary)
-<br>
-<br>This solution involves 3 steps :
-<ul>
-    <li><b>Step 1</b> : store list of profession codes.</li>
-    <li><b>Step 2</b> : use these lists of profession codes to store lists of persons.</li>
-    <li><b>Step 3</b> : use these lists of persons to store detailed persons.</li>
-</ul>
-<br>Preparatory code executed on 2019-11-02 gave 592 profession codes containing 790 394 person ids, which would imply to download around 70 Gb on local machine.
+        Start from a subset of profession codes that corespond to Gauquelin data :
+        
+        <table class="wikitable margin">
+            <tr><th>Wikidata id</th><th>Profession</th></tr>
+            <tr><td>Q483501</td><td>artist</td></tr>
+            <tr><td>Q2066131</td><td>athlete</td></tr>
+            <tr><td>Q482980</td><td>author</td></tr>
+            <tr><td>Q189290</td><td>military-officer</td></tr>
+            <tr><td>Q82955</td><td>politician</td></tr>
+            <tr><td>Q39631</td><td>physician</td></tr>
+            <tr><td>Q901</td><td>scientist</td></tr>
+        </table>
+        
+        This solution involves 3 steps :
+        <ul>
+            <li><b>Step 1</b> : store list of profession codes.</li>
+            <li><b>Step 2</b> : use these lists of profession codes to store lists of persons.</li>
+            <li><b>Step 3</b> : use these lists of persons to store detailed persons.</li>
+        </ul>
+        <br>Preparatory code executed on 2019-11-02 gave 592 profession codes containing 790 394 person ids, which would imply to download around 70 Gb on local machine.
     </li>
     
     <li>
         Download the full dump from <a href="https://dumps.wikimedia.org/wikidatawiki/entities/">dumps.wikimedia.org/wikidatawiki/entities/</a> on a local machine ; on 2019-11-09, file <code>latest-all.json.bz2</code> was 43 Gb.
-        <br>As it is possible to extract information from the dump without uncompressing it, this solution seems to be the most convenient.
     </li>
     
 </ol>
+
+As it is possible to extract information from a wikidata dump without uncompressing it, working with a full dump on a local machine seems to be the most convenient solution.
 
 </article>
 </div><!-- end class="main" -->

@@ -37,8 +37,9 @@ Acts
 </h1>
 
 <div class="intro">
-Acts are official documents containing informations handled by g5 database. Acts are used to solve questions raised by g5 development.
-<br>They are stored in directory <code><b><a href="https://larzac.info/gauquelin5/8-acts">data/8-acts/</a></b></code>.
+Acts are official documents containing informations handled by g5 database, in particular birth certificates (BCs). They are used to solve questions raised by g5 development, but not integrated yet to the program (informations from BCs are currently integrated through <a href="tweak2tmp.html">tweak files</a>).
+<br>Although not integrated to g5, act transcription is precisely organized, as described in this page.
+<br>Consultation of BCs is currently only done for France.
 </div>
 </header>
 
@@ -67,9 +68,8 @@ Acts are official documents containing informations handled by g5 database. Acts
     </ul>
 </nav>
 
-
 <!-- ********************************************************************************* -->
-<h2><a name="about-french-data">About french data</a></h2>
+<h2><a name="about-french-data">About french archives</a></h2>
 
 In France, all acts since 1792 have times indicated. Scans of the original documents until ~1920 can be viewed online for free. This makes 5 generations, around 200 millions of acts (birth, death, mariage) with times (source <a href="http://www.filae.com/ressources/etat-civil-numerise-dou-viennent-les-donnees/">filae.com</a>).
 <br>Here lies potential data to test planetary heredity at large scale, but not (yet ?) in the scope of g5 program. 
@@ -99,18 +99,20 @@ An act consists of 2 documents :
     <li>Département (birth.place.c2)</li>
     <li>City (birth.place.name)</li>
     <li>Arrondissement (birth.place.c3), for Paris, Lyon, Marseille (arrondissement = part of a city).
-        <br>Important because without it, it's very difficult to find the registry.</li>
+        <br>This information is important because without it, it's very difficult to find the registry.</li>
     <li>Name of the registry</li>
-    <li>Page number where the birth certificate is located within the registry.
-        <br>Important because finding the right page may be a long process.</li>
-    <li>If possible the url directly pointing to the page. Some départements provide a way to copy the "permalink" of a document, which may be different from the url of the page displayed by the web browser.</li>
+    <li>
+        Page number where the birth certificate is located within the registry.
+        <br>Important because finding the right page may be a long process.
+    </li>
+    <li>If possible, the url directly pointing to the page. Some départements provide a way to copy the "permalink" of a document, which may be different from the url of the page displayed by the web browser.</li>
 </ul>
 
 <!-- ************************************* -->
 <h3><a name="2-1-directory-layout">Directory layout</a></h3>
-Acts are organized chronologically like <code>7-full/person/</code> :
+Acts are organized chronologically :
 <pre>
-8-acts
+acts
     └── birth
         └── 1811
             └── 10
@@ -123,7 +125,6 @@ Acts are organized chronologically like <code>7-full/person/</code> :
 <!-- ************************************* -->
 <h3><a name="2-2-image-download">Image download</a></h3>
 Some départements provide a link to download current page, some don't. When they don't, image retrieval is done with screen capture. This can be particularily long because sometimes several captures may be necessary to get the whole certificate with enough details. In this case, the image is reconstituted assembling the different parts.
-
 
 
 <!-- ********************************************************************************* -->
@@ -240,8 +241,8 @@ The syntax used to transcribe the acts comes from an unpublished genealogy softw
 
 <!-- ********************************************************************************* -->
 <h2><a name="gauquelin5-integration">Gauquelin5 integration</a></h2>
-Not done yet ; code transfering information from <code>8-acts/</code> to files of <code>7-full/person/</code> needs to be written.
-<br>Currently, when an information needs to be corrected (because it contradicts an act), this is done using the <a href="tweak2tmp.html">tweak2tmp</a> mechanism.
+Not done yet ; code transfering information from <code>acts/</code> to g5 database needs to be written.
+<br>Currently, when an information of the database needs to be corrected (because it contradicts an act), this is done using the <a href="tweak2tmp.html">tweak2tmp</a> mechanism.
 
 </article>
 </div><!-- end class="main" -->
