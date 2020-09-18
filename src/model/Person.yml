@@ -38,7 +38,7 @@ occus: []
 birth:
   date:     # exact date (day and hour) of the birth certificate
   tzo:      # timezone offset
-  date-ut:  # for dates like cura A
+  date-ut:  # date converted to Univesal Time
   note:     # eg "LMT"
   place:
     name:
@@ -52,7 +52,7 @@ birth:
 death:
   date:     # exact date of the birth certificate
   tz:       # timezone offset
-  date-ut:  # for dates like cura A
+  date-ut:  # date converted to Univesal Time
   note:     # eg "LMT"
   place:
     name:

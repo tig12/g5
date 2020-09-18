@@ -10,7 +10,7 @@ namespace g5\commands\newalch\muller402;
 
 use g5\Config;
 use g5\model\DB5;
-use g5\model\{Source, SourceI};
+use g5\model\{Source, SourceI, Group};
 
 use tiglib\arrays\csvAssociative;
 
@@ -67,6 +67,20 @@ class Muller402 implements SourceI {
     /** Returns a Source object for 5muller_writers.xlsx. **/
     public static function getSource(): Source {
         return Source::getSource(Config::$data['dirs']['build'] . DS . self::SOURCE_DEFINITION);
+    }
+    
+    // *********************** Group management ***********************
+    
+    /**
+        Returns a Group object for Muller1083.
+    **/
+    public static function getGroup(): Group {
+        $g = new Group();
+        $g->data['slug'] = self::GROUP_SLUG;
+        $g->data['name'] = "Müller 402 Italian writers";
+        $g->data['description'] = "402 Italian writers, gathered by Arno Müller";
+        $g->data['id'] = $g->insert();
+        return $g;
     }
     
     // *********************** Raw files manipulation ***********************

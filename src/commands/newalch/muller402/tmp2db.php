@@ -63,12 +63,7 @@ class tmp2db implements Command {
         // group
         $g = Group::getBySlug(Muller402::GROUP_SLUG);
         if(is_null($g)){
-            $g = new Group();
-            $g->data['slug'] = Muller402::GROUP_SLUG;
-            $g->data['sources'][] = $source->data['slug'];
-            $g->data['name'] = "Müller 402 Italian writers";
-            $g->data['description'] = "402 Italian writers, gathered by Arno Müller";
-            $g->data['id'] = $g->insert();
+            $g = Muller402::getGroup();
         }
         else{
             $g->deleteMembers(); // only deletes asssociations between group and members

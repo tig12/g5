@@ -46,21 +46,31 @@ Gauquelin5 database contains the notions of <a href="db5-source.html"><b>Source<
 <nav class="toc">
     <ul>
         <li>
+            <a href="#flow">Flow</a>
+        </li>
+        <li>
+            <a href="#data-model">Data model</a>
+        </li>
+        <li>
             <a href="#syntax">Syntax</a>
-            <ul>
-                <li><a href="#1-1-common-fields">Common fields</a></li>
-            </ul>
+        </li>
+        <li>
+            <a href="#person">Person</a>
+        </li>
+        <li>
+            <a href="#implementation-details">Implementation details</a>
         </li>
     </ul>
 </nav>
 
+
 <!-- ********************************************************************************* -->
-<h2>Flow</h2>
+<h2><a name="flow">Flow</a></h2>
 <img class="border margin padding" src="img/db5-flow.svg" alt="">
 
 
 <!-- ********************************************************************************* -->
-<h2>Data model</h2>
+<h2><a name="data-model">Data model</a></h2>
 <div class="float-left">
     <img class="border margin padding" src="img/db5-model.svg" alt="">
 </div>
@@ -83,17 +93,32 @@ Read :
 
 <ul class="spaced">
     <li>
-        <div class="bold"><a href="db5-source.html">Source</a></div>
+        <div class="bold">Source</div>
+        <!-- <div class="bold"><a href="db5-source.html">Source</a></div> -->
         Information sources, origin of the data manipulated by g5.
+        <br>The link between Source and Source permits to handle the notion of parent source.
+        <br>For example, the source called <code>A1</code> refers to the html web page <a href="http://cura.free.fr/gauq/902gdA1y.html">cura.free.fr/gauq/902gdA1y.html</a>
+        <br><code>A1</code> has a parent source called <code>cura</code>, which refers to web site <a href="http://cura.free.fr">cura.free.fr</a>.
+        <br>One source can have several parents.
     </li>
     <li>
-        <div class="bold"><a href="db5-person.html">Person</a></div>                          
+        <div class="bold">Person</div>
+        <!-- <div class="bold"><a href="db5-person.html">Person</a></div> -->
         Famous people who are studied.
     </li>
     <li>
-        <div class="bold"><a href="db5-group.html">Group</a></div>
+        <div class="bold">Group</div>
+        <!-- <div class="bold"><a href="db5-group.html">Group</a></div> -->
         A set of persons
-        <br>
+        <br>The link between Group and Group permits to handle the notion of sub-group.
+        <br>One group can be sub-group of several groups.
+    </li>
+    <li>
+        <div class="bold">Occupation</div>
+        <!-- <div class="bold"><a href="db5-occu.html">Occupation</a></div> -->
+        Activity of a person, ~profession
+        <br>The link between Occupation and Occupation permits to classify occupations.
+        <br>For example, a poet is also an artist.
     </li>
     
 </ul>
@@ -113,7 +138,88 @@ src/model/
 </pre>
 
 For example, file <code>Person.yml</code> contains an empty person with all its fields empty.
-<br>This provides to the code a precise definition of the entities, the description of a new type.
+<br>This provides to the code a precise definition of the entities, used as the description of a new type.
+
+<br><br>All entities of this database have a field called <b>slug</b>, unique within each entity type.
+
+<!-- ********************************************************************************* -->
+<h2><a name="person">Person</a></h2>
+
+The structure of a person is given by <code>src/model/Person.yml</code>
+<pre>
+slug:
+
+to-check:         # true or false - related to field "notes"
+
+trust:
+trust-details: []
+
+sources: []
+# key / value pairs
+# key = source slug ; value = local id in the given source
+ids-in-sources: []
+
+sex:
+
+name:
+  usual:
+  given:
+  family:
+  spouse:
+  official:                 # As written in the birth certificate
+    family:
+    given:
+  nobiliary-particle: false # de d' di del von...
+  fame:                     # stage, scene
+  nicknames: []
+  alternative: []
+
+# occupation codes
+occus: []
+
+birth:
+  date:     # exact date (day and hour) of the birth certificate
+  tzo:      # timezone offset
+  date-ut:  # date converted to Univesal Time
+  note:     # eg "LMT"
+  place:
+    name:
+    c2:
+    c3:
+    cy:
+    geoid:
+    lg:
+    lat:
+      
+death:
+  date:     # exact date of the birth certificate
+  tz:       # timezone offset
+  date-ut:  # date converted to Univesal Time
+  note:     # eg "LMT"
+  place:
+    name:
+    c2:
+    c3:
+    cy:
+    geoid:
+    lg:
+    lat:
+
+notes: []   # array of free notes
+
+raw: []
+
+history: []
+</pre>
+
+
+<!-- ********************************************************************************* -->
+<h2><a name="implementation-details">Implementation details</a></h2>
+The database uses <a href="https://www.postgresql.org/">postgresql</a>.
+<br>Structured fields are stored using <a href="https://www.postgresql.org/docs/12/datatype-json.html">jsonb</a> type. 
+<br>
+<br>Each entity has a field <code>id</code>, used as primary key.
+
 
 </article>
 </div><!-- end class="main" -->

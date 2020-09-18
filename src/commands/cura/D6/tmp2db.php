@@ -55,24 +55,13 @@ class tmp2db implements Command {
         // source corresponding to D6 file
         $source = Source::getBySlug($datafile);
         if(is_null($source)){
-            $source = new Source();
-            $source->data['slug'] = $datafile;
-            $source->data['name'] = "CURA file $datafile";
-            $source->data['description'] = Cura::CURA_URLS[$datafile] . "\nDescribed by Cura as " . Cura::CURA_CLAIMS[$datafile][2];
-            $source->data['source']['parents'][] = $curaSource->data['slug'];
-            $source->data['id'] = $source->insert();
+            $source = Cura::getSourceOfFile($datafile);
         }
         
         // group
         $g = Group::getBySlug($datafile);
         if(is_null($g)){
-            $g = new Group();
-            $g->data['slug'] = $datafile;
-            $g->data['sources'][] = $source->data['slug'];
-            $g->data['name'] = "Cura $datafile";
-            $g->data['description'] = "According to Cura : " . Cura::CURA_CLAIMS[$datafile][2] . ".\n"
-                . "In practice, contains " . Cura::CURA_CLAIMS[$datafile][1] . " persons.";
-            $g->data['id'] = $g->insert();
+            $g = Cura::getGroupOfFile($datafile);
         }
         else{
             $g->deleteMembers(); // only deletes asssociations between group and members

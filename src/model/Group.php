@@ -39,7 +39,6 @@ class Group{
         if($res === false || count($res) == 0){
             return null;
         }
-        $res['sources'] = json_decode($res['sources'], true);
         $g = new Group();
         $g->data = $res;
         $g->data['members'] = [];
@@ -58,7 +57,6 @@ class Group{
         if($res === false || count($res) == 0){
             return null;
         }
-        $res['sources'] = json_decode($res['sources'], true);
         $g = new Group();
         $g->data = $res;
         $g->data['members'] = [];
@@ -74,12 +72,11 @@ class Group{
     **/
     public function insert(): int{
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("insert into groop(slug,name,description,sources) values(?,?,?,?) returning id");
+        $stmt = $dblink->prepare("insert into groop(slug,name,description) values(?,?,?) returning id");
         $stmt->execute([
             $this->data['slug'],
             $this->data['name'],
             $this->data['description'],
-            json_encode($this->data['sources']),
         ]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         $this->data['id'] = $res['id'];
@@ -106,12 +103,11 @@ class Group{
     **/
     public function update() {
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("update groop set slug=?,name=?,description=?,sources=? where id=?");
+        $stmt = $dblink->prepare("update groop set slug=?,name=?,description=? where id=?");
         $stmt->execute([
             $this->data['slug'],
             $this->data['name'],
             $this->data['description'],
-            json_encode($this->data['sources']),
             $this->data['id'],
         ]);
         $this->updateMembers();

@@ -10,6 +10,7 @@ namespace g5\commands\newalch\muller1083;
 use g5\Config;
 use g5\model\SourceI;
 use g5\model\Source;
+use g5\model\Group;
 use tiglib\arrays\csvAssociative;
 use tiglib\strings\encode2utf8;
 use g5\commands\newalch\Newalch;
@@ -128,6 +129,20 @@ class Muller1083 implements SourceI {
     **/
     public static function getSource(): Source {
         return Source::getSource(Config::$data['dirs']['build'] . DS . self::RAW_SOURCE_DEFINITION);
+    }
+
+    // *********************** Group management ***********************
+    
+    /**
+        Returns a Group object for Muller1083.
+    **/
+    public static function getGroup(): Group {
+        $g = new Group();
+        $g->data['slug'] = self::GROUP_SLUG;
+        $g->data['name'] = "Müller 1083 physicians";
+        $g->data['description'] = "1083 physisicans of French Académie de médecine, gathered by Arno Müller";
+        $g->data['id'] = $g->insert();
+        return $g;
     }
 
     // *********************** Raw file manipulation ***********************

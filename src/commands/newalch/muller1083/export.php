@@ -9,9 +9,9 @@ namespace g5\commands\newalch\muller1083;
 
 use g5\Config;
 use g5\model\DB5;
+use g5\model\Names_fr;
 use g5\patterns\Command;
 use g5\commands\cura\Cura;
-use g5\model\Full;
 use g5\model\Group;
 use g5\model\Person;
 
@@ -25,10 +25,8 @@ class export implements Command {
     
     const OUTPUT_FILE = 'muller-1083-medics.csv';
     
-    /** 
-        Trick to access to $datafile within $fmap and $sort function
-    **/
-    private static $datafile;
+    /**  Trick to access to $sourceSlug within $sort function **/
+    private static $sourceSlug;
     
     // *****************************************
     // Implementation of Command
@@ -43,8 +41,11 @@ class export implements Command {
         
         $report = '';
         
-        $g = Group::getBySlug($datafile);
+        $g = Group::getBySlug(Muller1083::GROUP_SLUG);
         $g-> computeMembers();
+        
+        $source = Muller1083::getSource();
+        self::$sourceSlug = $source->data['slug'];
 
         $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . self::OUTPUT_FILE;
         
@@ -63,12 +64,34 @@ class export implements Command {
             'CY',
             'LG',
             'LAT',
-            'GEOID'
+            'GEOID',
+            // stuff coming from original raw file
+            'ELECTDAT',
+            'ELECTAGE',
+            'STBDATUM',
+            'SONNE',
+            'MOND',
+            'VENUS',
+            'MARS',
+            'JUPITER',
+            'SATURN',
+            'SO_',
+            'MO_',
+            'VE_',
+            'MA_',
+            'JU_',
+            'SA_',
+            'PHAS_',
+            'AUFAB',
+            'NIENMO',
+            'NIENVE',
+            'NIENMA',
+            'NIENJU',
+            'NIENSA',
         ];
         
         $map = [
-            'ids-in-sources.' . $datafile => 'GQID',
-            'name.family' => 'FNAME',
+            'ids-in-sources.' . self::$sourceSlug => 'MUID',
             'name.given' => 'GNAME',
             'birth.date' => 'DATE',
             'birth.tzo' => 'TZO',
@@ -80,22 +103,47 @@ class export implements Command {
             'birth.place.lg' => 'LG',
             'birth.place.lat' => 'LAT',
             'birth.place.geoid' => 'GEOID',
+            // stuff coming from original raw file
+            'raw.' . self::$sourceSlug . '.ELECTDAT' => 'ELECTDAT',
+            'raw.' . self::$sourceSlug . '.ELECTAGE' => 'ELECTAGE',
+            'raw.' . self::$sourceSlug . '.STBDATUM' => 'STBDATUM',
+            'raw.' . self::$sourceSlug . '.SONNE' => 'SONNE',
+            'raw.' . self::$sourceSlug . '.MOND' => 'MOND',
+            'raw.' . self::$sourceSlug . '.VENUS' => 'VENUS',
+            'raw.' . self::$sourceSlug . '.MARS' => 'MARS',
+            'raw.' . self::$sourceSlug . '.JUPITER' => 'JUPITER',
+            'raw.' . self::$sourceSlug . '.SATURN' => 'SATURN',
+            'raw.' . self::$sourceSlug . '.SO_' => 'SO_',
+            'raw.' . self::$sourceSlug . '.MO_' => 'MO_',
+            'raw.' . self::$sourceSlug . '.VE_' => 'VE_',
+            'raw.' . self::$sourceSlug . '.MA_' => 'MA_',
+            'raw.' . self::$sourceSlug . '.JU_' => 'JU_',
+            'raw.' . self::$sourceSlug . '.SA_' => 'SA_',
+            'raw.' . self::$sourceSlug . '.PHAS_' => 'PHAS_',
+            'raw.' . self::$sourceSlug . '.AUFAB' => 'AUFAB',
+            'raw.' . self::$sourceSlug . '.NIENMO' => 'NIENMO',
+            'raw.' . self::$sourceSlug . '.NIENVE' => 'NIENVE',
+            'raw.' . self::$sourceSlug . '.NIENMA' => 'NIENMA',
+            'raw.' . self::$sourceSlug . '.NIENJU' => 'NIENJU',
+            'raw.' . self::$sourceSlug . '.NIENSA' => 'NIENSA',
         ];
         
-        self::$datafile = $datafile; // trick for $fmap and $sort
-        
         $fmap = [
-            'GID' => function($p){
-                return Cura::gqid(self::$datafile, $p->data['ids-in-sources'][self::$datafile]);
+            'FNAME' => function($p){
+                // ok because all members are french
+                return Names_fr::computeFamilyName($p->data['name']['family'], $p->data['name']['nobiliary-particle']);
+            },
+            'GQID' => function($p){
+                return $p->data['ids-in-sources']['cura'] ?? '';
             },
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);
             },
         ];
         
-        // sorts by id within the $datafile
+        // sorts by Müller id
         $sort = function($a, $b){
-             return $a->data['ids-in-sources'][self::$datafile] <=> $b->data['ids-in-sources'][self::$datafile];
+             return $a->data['ids-in-sources'][self::$sourceSlug] <=> $b->data['ids-in-sources'][self::$sourceSlug];
         };
         
         return $g->exportCsv($outfile, $csvFields, $map, $fmap, $sort);

@@ -10,12 +10,13 @@ namespace g5\commands\cura;
 use g5\Config;
 use g5\model\SourceI;
 use g5\model\Source;
+use g5\model\Group;
 use tiglib\arrays\csvAssociative;
 
 class Cura implements SourceI {
     
     /**
-        Path to the yaml file containing the characteristics of the source.
+        Path to the yaml file containing the characteristics of "cura" source.
         Relative to directory specified in config.yml by dirs / build
     **/
     const SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'cura.yml';
@@ -50,7 +51,6 @@ class Cura implements SourceI {
     ];
     
     /** 
-        For documentation purpose only
         URLs of the raw files in Cura web site
     **/
     const CURA_URLS = [
@@ -101,6 +101,38 @@ class Cura implements SourceI {
     /** Returns a Source object for cura web site. **/
     public static function getSource(): Source {
         return Source::getSource(Config::$data['dirs']['build'] . DS . self::SOURCE_DEFINITION);           
+    }
+    
+    /**
+        Returns a Source object for one file of cura web site.
+        @param  $datafile : string like 'A1'
+    **/
+    public static function getSourceOfFile($datafile): Source {
+        $curaSource = self::getSource();
+        $source = new Source();
+        $source->data['slug'] = $datafile;
+        $source->data['name'] = "CURA file $datafile";
+        $source->data['description'] = self::CURA_URLS[$datafile]
+            . "\nDescribed by Cura as " . self::CURA_CLAIMS[$datafile][2];
+        $source->data['source']['parents'][] = $curaSource->data['slug'];
+        $source->data['id'] = $source->insert();
+        return $source;
+    }
+    
+    // *********************** Group management ***********************
+    
+    /**
+        Returns a Source object for one file of cura web site.
+        @param  $datafile : string like 'A1'
+    **/
+    public static function getGroupOfFile($datafile): Group {
+        $g = new Group(); 
+        $g->data['slug'] = $datafile;
+        $g->data['name'] = "Cura $datafile";
+        $g->data['description'] = "According to Cura : " . Cura::CURA_CLAIMS[$datafile][2] . ".\n"
+            . "In practice, contains " . Cura::CURA_CLAIMS[$datafile][1] . " persons.";
+        $g->data['id'] = $g->insert();
+        return $g;
     }
     
     // *********************** Raw files manipulation ***********************

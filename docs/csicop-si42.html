@@ -40,7 +40,7 @@ CSICOP 1979
 <div class="intro">
 This page deals with the work done on the CSICOP test (USA 1979), using data published in "The Skeptical Inquier", VOL IV NO. 2 WINTER 1979-80.
 <br>Skeptical Inquier data are incomplete : given names not present ; family names sometimes ambiguous ; no birth time ; neither place name nor longitude / latitude. This is logically impossible to generate precise data.
-<br>Fortunately, Kenneth Irving sent me an other file (unpublished so far), with more precise information, permitting a much better restoration. Irving's file then became the main file for CSICOP restoration ; see <a href="csicop2.html">main CSICOP page</a> for details.
+<br>Fortunately, Kenneth Irving sent me an other file (unpublished so far), with more precise information, permitting a much better restoration. Irving's file then became the main file for CSICOP restoration ; see <a href="csicop.html">main CSICOP page</a> for details.
 <br>
 <br>But work done on Skeptical Inquier's data was not totally useless :
 <ul>                                                                                                               
@@ -76,7 +76,7 @@ This page deals with the work done on the CSICOP test (USA 1979), using data pub
         <li>
             <a href="#restoration-process">Restoration process</a>
             <ul>
-                <li><a href="#3-1-raw2csv">raw2csv</a></li>
+                <li><a href="#3-1-raw2tmp">raw2tmp</a></li>
                 <li><a href="#3-2-addcanvas1">addCanvas1</a></li>
                 <li><a href="#3-3-addertel">addErtel</a></li>
                 <li><a href="#3-4-addd10">addD10</a></li>
@@ -84,6 +84,7 @@ This page deals with the work done on the CSICOP test (USA 1979), using data pub
         </li>
     </ul>
 </nav>
+
 
 <!-- ********************************************************************************* -->
 <h2><a name="information-sources">Information sources</a></h2>
@@ -105,18 +106,18 @@ Informations used to compute this group can be found in several places.
 
 <!-- ********************************************************************************* -->
 <h2><a name="preparatory-work">Preparatory work</a></h2>
-The PDF files downloaded from skepticalinquirer.org cannot be directly exploited by program. Text files were built from the PDF ; these files can be downloaded from <a href="https://larzac.info/gauquelin5/1-raw/csicop/si42/">larzac.info/gauquelin5/1-raw/csicop/si42/</a>.
+The PDF files downloaded from skepticalinquirer.org cannot be directly exploited by program. Text files were built from the PDF ; these files are located in <code>data/raw/csicop/si42/</code>.
 <br>The README file in this directory details the way PDF files were transformed to text files.
 
 <!-- ********************************************************************************* -->
 <h2><a name="restoration-process">Restoration process</a></h2>
 The command :
 <pre>php run-g5.php csicop si42 all</pre>
-generates file <a href="https://larzac.info/gauquelin5/9-output/history/1979-csicop/408-csicop-si42.csv">9-output/history/1979-csicop/408-csicop-si42.csv</a>
+generates file <a href="https://g5.tig12.net/output/history/1979-csicop/408-csicop-si42.csv">output/history/1979-csicop/408-csicop-si42.csv</a>
 <br>
 <br>This is equivalent to 
 <pre>
-php run-g5.php csicop si42 raw2csv
+php run-g5.php csicop si42 raw2tmp
 php run-g5.php csicop si42 addCanvas1
 php run-g5.php csicop si42 addErtel
 php run-g5.php csicop si42 addD10
@@ -124,9 +125,9 @@ php run-g5.php csicop si42 export
 </pre>
 
 <!-- ************************************* -->
-<h3><a name="3-1-raw2csv">raw2csv</a></h3>
+<h3><a name="3-1-raw2tmp">raw2tmp</a></h3>
 
-<pre>php run-g5.php csicop si42 raw2csv</pre>
+<pre>php run-g5.php csicop si42 raw2tmp</pre>
 
 INPUT :
 <ul>
@@ -190,7 +191,7 @@ INPUT :
         data/5-tmp/csicop/408-csicop-si42.csv
     </li>
     <li>
-        <a href="https://larzac.info/gauquelin5/9-output/history/1979-csicop/192-csicop-ertel.csv">data/9-output/history/1979-csicop/192-csicop-ertel.csv</a>
+        <a href="https://g5.tig12.net/output/history/1979-csicop/192-csicop-ertel.csv">data/9-output/history/1979-csicop/192-csicop-ertel.csv</a>
         <br>(from Ertel4391, 192 common records between 408 CSICOP and Gauquelin D10)
     </li>
 </ul>

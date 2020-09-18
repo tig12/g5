@@ -104,4 +104,18 @@ class Names_fr{
         return [$str, ''];
     }
     
+    // ******************************************************
+    /**
+        Computes a family name taking the nobiliary particle into account.
+    **/
+    public static function computeFamilyName($fname, $nob){
+        if($nob == ''){
+            return $fname;
+        }
+        if($nob == "d'"){
+            return $nob . $fname;
+        }
+        return $nob . ' ' . $fname;
+    }
+    
 }// end class
