@@ -108,6 +108,7 @@ class Muller1083 implements SourceI {
         'NIENSA',
     ];
     
+    // 2 constants only useful for look.php
     const SAMPLE_CODE = [
             'MUER_NUR'   => '1',
             'MUERGAUQ-d' => '2',

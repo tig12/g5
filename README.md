@@ -2,7 +2,7 @@
 Visit <a href="https://tig12.github.io/gauquelin5/index.html">tig12.github.io/gauquelin5</a>  
 or clone the repository on your local machine and browse <code>docs/index.html</code>.
 
-You also can directly <a href="https://larzac.info/gauquelin5">download generated data</a>, partially restored.
+You also can directly <a href="https://g5.tig12.net/output">download generated data</a>, partially restored.
 
 Code developed with php 7.2 ; tested on linux (ubuntu 18.4)  
 

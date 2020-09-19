@@ -9,11 +9,10 @@ namespace g5\commands\newalch\muller1083;
 
 use g5\Config;
 use g5\model\DB5;
+use g5\model\Group;
 use g5\model\Names_fr;
 use g5\patterns\Command;
 use g5\commands\cura\Cura;
-use g5\model\Group;
-use g5\model\Person;
 
 class export implements Command {
                                                                                               
@@ -21,9 +20,9 @@ class export implements Command {
         Directory where the generated files are stored
         Relative to directory specified in config.yml by dirs / output
     **/
-    const OUTPUT_DIR = 'history' . DS . '1994-muller-medics';
+    const OUTPUT_DIR = 'history' . DS . '1994-muller-physicians';
     
-    const OUTPUT_FILE = 'muller-1083-medics.csv';
+    const OUTPUT_FILE = 'muller-1083-physicians.csv';
     
     /**  Trick to access to $sourceSlug within $sort function **/
     private static $sourceSlug;
@@ -146,7 +145,9 @@ class export implements Command {
              return $a->data['ids-in-sources'][self::$sourceSlug] <=> $b->data['ids-in-sources'][self::$sourceSlug];
         };
         
-        return $g->exportCsv($outfile, $csvFields, $map, $fmap, $sort);
+        $filters = [];
+        
+        return $g->exportCsv($outfile, $csvFields, $map, $fmap, $sort, $filters);
     }
     
 }// end class    
