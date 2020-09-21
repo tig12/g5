@@ -41,21 +41,21 @@ This page deals with the file <a href="https://newalchemypress.com/gauquelin/gau
 <br>It contains the sportmen gathered by Ertel to do his eminence tests in 1988.
 <ul class="simple">
     <li>
-        It contains ids of cura.free.fr, Comité para, CSICOP, CFEPP, which is a precious help to <a href="full.html">merge data</a>
+        This file is the central piece to merge all files related to the mars effect.
+        <br>It contains ids of cura.free.fr, Comité para, CSICOP, CFEPP.
     </li>
     <li>
         Brings 1828 new birth dates not present in other datasets (but no birth times) .
     </li>
     <li>
-        It should permit to reconstitute parts of Ertel's work.
+        Permits to fix all missing names of Cura A1.
     </li>
     <li>
         It contains eminence information, with the precise source list permitting to check and reproduce eminence tests.
     </li>
-    <li>
-        Permits to fix all missing names of Cura A1.
-    </li>
 </ul>
+
+<br>The good surprise was the ability to precisely reconstitutes the groups cited by Ertel in his "Raising the Hurdle" article of 1988 - see <a href="#ertel-s-subsamples">Ertel's subsamples</a>.
 </div>
 </header>
 
@@ -71,7 +71,6 @@ This page deals with the file <a href="https://newalchemypress.com/gauquelin/gau
         <li>
             <a href="#integration-to-g5">Integration to g5</a>
             <ul>
-                <li><a href="#2-1-download-raw-file">Download raw file</a></li>
                 <li><a href="#2-2-full-execution">Full execution</a></li>
                 <li><a href="#2-3-raw2csv">raw2csv</a></li>
                 <li><a href="#2-4-fix-cura-a1-names">Fix cura A1 names</a></li>
@@ -104,14 +103,6 @@ This page deals with the file <a href="https://newalchemypress.com/gauquelin/gau
         </li>
     </ul>
 </nav>
-
-
-
-<div class="warning block">
-Following doc is obsolete.
-<br>This file is not yet imported in g5 database.
-</div>
-
 
 <!-- ********************************************************************************* -->
 <h2><a name="ertel-4391-generalities">Ertel 4391 generalities</a></h2>
@@ -181,20 +172,17 @@ One very strange feature of this file : many records don't contain birth time. S
 <!-- ********************************************************************************* -->
 <h2><a name="integration-to-g5">Integration to g5</a></h2>
 
-<!-- ************************************* -->
-<h3><a name="2-1-download-raw-file">Download raw file</a></h3>
-In the directory specified by <code>1-newalch-raw</code> in <code>config.yml</code>,
-<br>- create a sub-directory called <code>03-ertel/</code>
-<br>- download file <a href="https://larzac.info/gauquelin5/1-raw/newalchemypress.com/03-ertel/3a_sports-utf8.txt">3a_sports-utf8.txt</a> in it (an UTF-8 version of <code>3a_sports.txt</code>).
-<br>
-<br>With default value of <code>1-newalch-raw</code> :
-<pre>
-data/
-└── 1-raw
-    └── newalchemypress.com
-        └── 03-ertel
-            └── 3a_sports-utf8.txt
-</pre>
+
+<!-- ********************************************************************************* -->
+<!-- ********************************************************************************* -->
+<div class="warning block">
+This paragraph is obsolete.
+<br>This file is not yet imported in g5 database.
+</div>
+<!-- ********************************************************************************* -->
+<!-- ********************************************************************************* -->
+
+The raw file is <code>data/raw/newalchemypress.com/03-ertel/3a_sports-utf8.txt"</code> (an UTF-8 version of <code>3a_sports.txt</code>).
 
 <!-- ************************************* -->
 <h3><a name="2-2-full-execution">Full execution</a></h3>
@@ -416,6 +404,9 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <br>- the numbers in bold - ex <b>553</b> - are the numbers counted by program in Ertel 4391 file.
         <br>- the numbers in parentheses - ex (567) - are the numbers given in [Ertel 88].
     </li>
+    <li>
+        <b>Ertel subsample</b> : name of the subsample in Ertel article.
+    </li>
 </ul>
 <br>
 
@@ -426,7 +417,7 @@ Combining the output of the two previous commands permits a reconstitution of Ta
     <tr>
         <th title="">New</th>
         <th title="">P</th>
-        <th>QUEL</th><th>N<sub>QUEL</sub></th><th>Id</th><th>N<sub>Id</sub></th><th>Ertel sample</th><th>Comments</th>
+        <th>QUEL</th><th>N<sub>QUEL</sub></th><th>Id</th><th>N<sub>Id</sub></th><th>Ertel subsample</th><th>Comments</th>
     </tr>
     
     <tr>
@@ -895,7 +886,7 @@ generates the following table.
     <li><a href="db5.html">G5 database</a></li>
     <li><a href="output-format.html">Output format</a></li>
     
-    <li class="bold big1"><a href="https://larzac.info/gauquelin5">Download results</a></li>
+    <li class="bold big1"><a href="https://g5.tig12.net/output">Download results</a></li>
     
     <li>
         <span class="big1">1 - Restore</span>                            

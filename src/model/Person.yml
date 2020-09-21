@@ -63,9 +63,11 @@ death:
     lg:
     lat:
 
-notes: []   # array of free notes
-
 raw: []
 
 history: []
+
+free: []    # key value pairs
+
+notes: []   # array of free notes
 
