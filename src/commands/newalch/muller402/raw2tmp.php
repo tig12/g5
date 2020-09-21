@@ -14,7 +14,6 @@ use g5\Config;
 use g5\patterns\Command;
 use g5\commands\newalch\Newalch;
 use tiglib\arrays\sortByKey;
-use tiglib\time\seconds2HHMMSS;
 
 class raw2tmp implements Command {
     
@@ -39,7 +38,7 @@ class raw2tmp implements Command {
         foreach($raw as $line){
             $fields = explode(Muller402::RAW_SEP, $line);
             $new = $emptyNew;
-            $new['OCCU'] = 'WR'; /////// HERE put wikidata occupation id ///////////
+            $new['OCCU'] = 'WR'; /////// HERE TODO put wikidata occupation id ///////////
             preg_match($pname, $fields[0], $m);
             $sex = $m[2];
             if($sex != 'M' && $sex != 'F'){
@@ -76,6 +75,7 @@ class raw2tmp implements Command {
             
             //
             // keep only records with complete birth time (at least YYYY-MM-DD HH:MM)
+            // These are handled by Muller100
             //
             if(strlen($new['DATE']) < 16){
                 continue;
@@ -98,7 +98,7 @@ class raw2tmp implements Command {
             $new['CY'] = 'IT';
             $new['LG'] = self::lglat(-(int)$fields[9]); // minus sign, correction from raw here
             $new['LAT'] = self::lglat($fields[8]);
-            $new['TZO'] = self::compute_offset($fields[6], $new['LG']);
+            $new['TZO'] = Muller402::compute_offset($fields[6], $new['LG']);
             if($fields[6] == 'LMT'){
                 $new['LMT'] = 'LMT';
             }
@@ -122,7 +122,10 @@ class raw2tmp implements Command {
         return $report;
     }
     
-    
+    /** 
+        The string written in 5muller_writers.csv is already converted to decimal degrees
+        Different from original booklet
+    **/
     private static function lglat(string $str): string {
         return str_replace(',', '.', $str);
     }
@@ -137,7 +140,7 @@ class raw2tmp implements Command {
         @param $offset  timezone offset as specified in newalch file
         @param $lg      longitude, as previously computed
     **/
-    private static function compute_offset($offset, $lg){
+    public static function compute_offset($offset, $lg){
         if($offset == 'LMT'){ 
             // happens for 5 records
             // convert longitude to HH:MM:SS

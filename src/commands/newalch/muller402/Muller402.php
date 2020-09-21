@@ -11,7 +11,7 @@ namespace g5\commands\newalch\muller402;
 use g5\Config;
 use g5\model\DB5;
 use g5\model\{Source, SourceI, Group};
-
+use tiglib\time\seconds2HHMMSS;
 use tiglib\arrays\csvAssociative;
 
 class Muller402 implements SourceI {
@@ -131,9 +131,8 @@ class Muller402 implements SourceI {
     // *********************** Tmp raw file manipulation ***********************
     
     /**
-        Returns the name of a "tmp raw file", data/tmp/newalch/muller-402-it-writers-raw.csv
+        Returns the name of a "tmp raw file" : data/tmp/newalch/muller-402-it-writers-raw.csv
         (files used to keep trace of the original raw values).
-        @param  $datafile : a string like 'A1'
     **/
     public static function tmpRawFilename(){
         return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', 'muller-402-it-writers-raw.csv']);
@@ -147,4 +146,47 @@ class Muller402 implements SourceI {
         return csvAssociative::compute(self::tmpRawFilename());
     }
 
+    // *********************** time / space functions ***********************
+    // shared by Muller402 and Muller100
+    
+    /**
+        Conversion of TZ offset found in newalch file to standard sHH:MM offset.
+        WARNING : possible mistake for "-0.6" :
+            0.6*60 = 36
+            "Problèmes de l'heure résolus pour le monde entier",
+            Françoise Schneider-Gauquelin (p 288) indicates 00:37
+            Current implementation uses Gauquelin, but needs to be confirmed
+        @param $offset  timezone offset as specified in newalch file
+        @param $lg      longitude, as previously computed
+    **/
+    public static function compute_offset($offset, $lg){
+        if($offset == 'LMT'){ 
+            // happens for 5 records
+            // convert longitude to HH:MM:SS
+            $sec = $lg * 240; // 240 = 24 * 3600 / 360
+            return '+' . seconds2HHMMSS::compute($sec);
+        }
+        switch($offset){
+        	case '-1':
+        	case '-1.00':
+        	    return '+01:00';
+        	break;
+        	case '-0,83': 
+        	case '-0.83': 
+        	    return '+00:50';
+        	break;
+        	case '-0,88': 
+        	case '-0.88': 
+        	    // Converting geonames.org longitude for Palermo (13°20'08") gives 00:53:34
+        	    // Gauquelin says 00:54
+        	    // Gabriel says 00:53:28
+        	    return '+00:54';
+        	break;
+        	case '-0,6': 
+        	    return '+00:37';
+        	break;
+            default:
+                throw new \Exception("Timezone offset not handled in Muller402 : $offset");
+        }
+    }
 }// end class

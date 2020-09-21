@@ -24,7 +24,23 @@ class Muller100 implements SourceI {
         Path to the yaml file containing the characteristics of the source.
         Relative to directory specified in config.yml by dirs / build
     **/
-    const SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch' . DS . 'muller-100-it-writers.yml';
+    const SOURCE_DEFINITION = 'source' . DS . 'booklet' . DS . 'AFD1' . DS . 'muller-afd1-100-writers.yml';
+
+    const RAW_FIELDS = [
+            'MUID',
+            'FNAME',
+            'GNAME',
+            'SEX',
+            'DATE',
+            'TZO',
+            'PLACE',
+            'C2',
+            'LG',
+            'LAT',
+            'OCCU',
+            'OPUS',
+            'LEN',
+        ];
 
     const TMP_FIELDS = [
             'MUID',
@@ -32,7 +48,8 @@ class Muller100 implements SourceI {
             'GNAME',
             'SEX',
             'DATE',
-            'TZ',
+            'TZO',
+            'LMT',
             'PLACE',
             'C2',
             'CY',
@@ -42,6 +59,7 @@ class Muller100 implements SourceI {
             'OPUS',
             'LEN',
         ];
+
     // *********************** Source management ***********************
     
     /** Returns a Source object for 5muller_writers.xlsx. **/
@@ -55,14 +73,14 @@ class Muller100 implements SourceI {
         @return Path to the raw file 5muller_writers.csv coming from newalch
     **/
     public static function rawFilename(){
-        return implode(DS, [Config::$data['dirs']['raw'], 'newalchemypress.com', '05-muller-writers', 'muller-100-it-writers.txt']);
+        return implode(DS, [Config::$data['dirs']['raw'], 'newalchemypress.com', '05-muller-writers', 'muller-afd1-100-writers.txt']);
     }
     
     /** Loads csv file in a regular array **/
     public static function loadRawFile(){
         return file(self::rawFilename());
     }                                                                                              
-                                                                                         
+    
     // *********************** Tmp files manipulation ***********************
     
     /**
@@ -79,5 +97,23 @@ class Muller100 implements SourceI {
     public static function loadTmpFile(){
         return csvAssociative::compute(self::tmpFilename());
     }                                                                                              
+    
+    // *********************** Tmp raw file manipulation ***********************
+    
+    /**
+        Returns the name of a "tmp raw file" : data/tmp/newalch/muller-100-it-writers-raw.csv
+        (files used to keep trace of the original raw values).
+    **/
+    public static function tmpRawFilename(){
+        return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', 'muller-100-it-writers-raw.csv']);
+    }
+    
+    /**
+        Loads a "tmp raw file" in a regular array
+        Each element contains the person fields in an assoc. array
+    **/
+    public static function loadTmpRawFile(){
+        return csvAssociative::compute(self::tmpRawFilename());
+    }
     
 }// end class
