@@ -27,7 +27,7 @@ class raw2tmp100 implements Command {
             . '(?P<id>\d+)'
             . '(?P<sex>[MF])'
             . '\s+(?P<fname>.*?)'
-            . ',(?P<gname>.*?)'
+            . ',\s*(?P<gname>.*?)'
             . '\s+(?P<date>\d{2}\.\d{2}\.\d{4})'
             . '\s+(?P<tz>(?:\-?\d{1}\.\d{2}|LMT))'
             . '\s+(?P<place>.*?)'

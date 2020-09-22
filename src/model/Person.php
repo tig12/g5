@@ -43,7 +43,10 @@ class Person {
     
     // *********************** Get *******************************
     
-    /** Creates an object of type Person from storage, using its id. **/
+    /**
+        Returns an object of type Person from storage, using its id,
+        or null if doesn't exist.
+    **/
     public static function get($id): ?Person{
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("select * from person where id=?");
@@ -55,7 +58,10 @@ class Person {
         return self::row2person($res);
     }
     
-    /** Creates an object of type Person from storage, using its slug. **/
+    /**
+        Returns an object of type Person from storage, using its slug,
+        or null if doesn't exist.
+    **/
     public static function getBySlug($slug): ?Person{
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("select * from person where slug=?");
@@ -68,8 +74,9 @@ class Person {
     }
     
     /**
-        Creates an object of type Person from storage,
-        using its id for a given source.
+        Returns an object of type Person from storage,
+        using its id for a given source,
+        or null if doesn't exist.
         Ex : to get a person whose id in source A1 is 254, call
         getBySourceId('A1', '254')
         @param  $source     Slug of the source
@@ -105,6 +112,113 @@ class Person {
             $res[] = self::row2person($row);
         }
         return $res;
+    }
+    
+    
+    // *********************** Fields *******************************
+    
+    /**
+        @throws \Exception if the person id computation impossible (the person has no family name).
+    **/
+    public function getIdFromSlug($slug) {
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare("select id from person where slug=?");
+        $stmt->execute([$slug]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if($res === false || count($res) == 0){
+            throw new \Exception("Trying to get a person with unexisting slug : $slug");
+        }
+        return $res['id'];
+    }
+    
+    /**
+        Computes the slug of a person.
+        ex :
+            - galois-evariste-1811-10-25 for a person with a known birth time.
+            - galois-evariste for a person without a known birth time.
+        @throws \Exception if the person id computation impossible (the person has no family name).
+    **/
+    public function computeSlug() {
+        if(!$this->data['name']['family']){
+            throw new Exception("Person->computeSlug() impossible - needs family name");
+        }
+        $this->data['slug'] = self::doComputeSlug($this->data['name']['family'], $this->data['name']['given'], $this->birthday());
+        return;
+    }
+    
+    /** 
+        Static computation of slug
+    **/
+    public static function doComputeSlug($family, $given, $date): string {
+        $name = $family . ($given != '' ? ' ' . $given : '');
+        if($date != ''){
+            // galois-evariste-1811-10-25
+            $slug = slugify::compute($name . '-' . $date);
+        }
+        else{
+            // galois-evariste
+            $slug = slugify::compute($name);
+        }
+        return $slug;
+    }
+    
+    /**
+        Computes the birth day from date or date-ut
+        @return YYYY-MM-DD or ''
+    **/
+    private function birthday(): string {
+        if(isset($this->data['birth']['date'])){
+            return substr($this->data['birth']['date'], 0, 10);
+        }
+        else if(isset($this->data['birth']['date-ut'])){
+            // for cura A
+            return substr($this->data['birth']['date-ut'], 0, 10);
+        }
+        return '';
+    }
+    
+    // *********************** update fields *******************************
+    
+    /** 
+        Replaces $this->data with fields present in $replace.
+        Fields of $this->data not present in $replace are not modified.
+        @param $replace Assoc. array with the same structure as $this->data
+    **/
+    public function updateFields($replace){
+        $this->data = array_replace_recursive($this->data, $replace);
+    }
+    
+    public function addIdInSource($source, $id){
+        $this->data['ids-in-sources'][$source] = $id;
+    }
+    
+    public function addOccu($occu){
+        if(!in_array($occu, $this->data['occus'])){
+            $this->data['occus'][] = $occu;
+        }                              
+    }
+    
+    public function addSource($source){
+        if(!in_array($source, $this->data['sources'])){
+            $this->data['sources'][] = $source;
+        }
+    }
+    
+    public function addHistory($command, $source, $data){
+        $this->data['history'][] = [
+            'date'      => date('c'),
+            'command'   => $command,
+            'source'    => $source,
+            'values'    => $data,
+        ];
+    }
+    
+    public function addNote($note){
+        $this->data['notes'][] = $note;
+    }
+    
+    public function addRaw($source, $data){
+        $this->data['raw'][$source] = $data;
     }
     
     
@@ -194,103 +308,5 @@ class Person {
             $this->data['id'],
         ]);
     }
-    
-    // *********************** Fields *******************************
-    
-    /**
-        @throws \Exception if the person id computation impossible (the person has no family name).
-    **/
-    public function getIdFromSlug($slug) {
-        $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("select id from person where slug=?");
-        $stmt->execute([$slug]);
-        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
-        if($res === false || count($res) == 0){
-            throw new \Exception("Trying to get a person with unexisting slug : $slug");
-        }
-        return $res['id'];
-    }
-    
-    /**
-        Computes the slug of a person.
-        ex :
-            - galois-evariste-1811-10-25 for a person with a known birth time.
-            - galois-evariste for a person without a known birth time.
-        @throws \Exception if the person id computation impossible (the person has no family name).
-    **/
-    public function computeSlug() {
-        if(!$this->data['name']['family']){
-            throw new Exception("Person->computeSlug() impossible - needs family name");
-        }
-        $name = $this->data['name']['family'] . (isset($this->data['name']['given']) ? ' ' . $this->data['name']['given'] : '');
-        if($this->birthday()){
-            // galois-evariste-1811-10-25
-            $this->data['slug'] = slugify::compute($name . '-' . $this->birthday());
-        }
-        else{
-            // galois-evariste
-            $this->data['slug'] = slugify::compute($name);
-        }
-    }
-    
-    /**
-        Computes the birth day from date or date-ut
-        @return YYYY-MM-DD or ''
-    **/
-    private function birthday(): string {
-        if(isset($this->data['birth']['date'])){
-            return substr($this->data['birth']['date'], 0, 10);
-        }
-        else if(isset($this->data['birth']['date-ut'])){
-            // for cura A
-            return substr($this->data['birth']['date-ut'], 0, 10);
-        }
-        return '';
-    }
-    
-    // *********************** update fields *******************************
-    
-    /** 
-        Replaces $this->data with fields present in $replace.
-        Fields of $this->data not present in $replace are not modified.
-        @param $replace Assoc. array with the same structure as $this->data
-    **/
-    public function updateFields($replace){
-        $this->data = array_replace_recursive($this->data, $replace);
-    }
-    
-    public function addIdInSource($source, $id){
-        $this->data['ids-in-sources'][$source] = $id;
-    }
-    
-    public function addOccu($occu){
-        if(!in_array($occu, $this->data['occus'])){
-            $this->data['occus'][] = $occu;
-        }                              
-    }
-    
-    public function addSource($source){
-        if(!in_array($source, $this->data['sources'])){
-            $this->data['sources'][] = $source;
-        }
-    }
-    
-    public function addHistory($command, $source, $data){
-        $this->data['history'][] = [
-            'date'      => date('c'),
-            'command'   => $command,
-            'source'    => $source,
-            'values'    => $data,
-        ];
-    }
-    
-    public function addNote($note){
-        $this->data['notes'][] = $note;
-    }
-    
-    public function addRaw($source, $data){
-        $this->data['raw'][$source] = $data;
-    }
-    
     
 }// end class

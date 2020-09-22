@@ -178,7 +178,7 @@ class tmp2db implements Command {
             // group already exists
             $g->insertMembers();
         }
-        $dt = $t2 - $t1;
+        $dt = round($t2 - $t1, 5);
         if($reportType == 'full'){
             $report .= "=== Names fixed ===\n" . $namesReport;
             $report .= "\n=== Dates fixed ===\n" . $datesReport;

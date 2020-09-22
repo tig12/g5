@@ -11,6 +11,7 @@ namespace g5\commands\newalch\muller402;
 use g5\Config;
 use g5\model\Source;
 use g5\model\SourceI;
+use g5\model\Group;
 
 
 use tiglib\arrays\csvAssociative;
@@ -24,7 +25,10 @@ class Muller100 implements SourceI {
         Path to the yaml file containing the characteristics of the source.
         Relative to directory specified in config.yml by dirs / build
     **/
-    const SOURCE_DEFINITION = 'source' . DS . 'booklet' . DS . 'AFD1' . DS . 'muller-afd1-100-writers.yml';
+    const SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'g5' . DS . 'muller-afd1-100-writers.yml';
+
+    /** Slug of the group in db **/
+    const GROUP_SLUG = 'muller100writers';
 
     const RAW_FIELDS = [
             'MUID',
@@ -67,10 +71,24 @@ class Muller100 implements SourceI {
         return Source::getSource(Config::$data['dirs']['build'] . DS . self::SOURCE_DEFINITION);
     }
     
+    // *********************** Group management ***********************
+    
+    /**
+        Returns a Group object for Muller1083.
+    **/
+    public static function getGroup(): Group {
+        $g = new Group();
+        $g->data['slug'] = self::GROUP_SLUG;
+        $g->data['name'] = "Müller 100 Italian writers";
+        $g->data['description'] = "100 Italian writers without birth time, gathered by Arno Müller";
+        $g->data['id'] = $g->insert();
+        return $g;
+    }
+    
     // *********************** Raw files manipulation ***********************
     
     /**
-        @return Path to the raw file 5muller_writers.csv coming from newalch
+        @return Path to the raw file muller-afd1-100-writers.txt
     **/
     public static function rawFilename(){
         return implode(DS, [Config::$data['dirs']['raw'], 'newalchemypress.com', '05-muller-writers', 'muller-afd1-100-writers.txt']);

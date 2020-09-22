@@ -72,7 +72,7 @@ class Muller402 implements SourceI {
     // *********************** Group management ***********************
     
     /**
-        Returns a Group object for Muller1083.
+        Returns a Group object for Muller402.
     **/
     public static function getGroup(): Group {
         $g = new Group();

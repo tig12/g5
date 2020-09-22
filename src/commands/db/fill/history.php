@@ -47,6 +47,7 @@ use g5\commands\cura\D10\tmp2db                 as tmp2dbD10;
 use g5\commands\cura\E1_E3\tmp2db               as tmp2dbE1E3;
 use g5\commands\newalch\muller1083\tmp2db       as tmp2dbMuller1083;
 use g5\commands\newalch\muller402\tmp2db        as tmp2dbMuller402;
+use g5\commands\newalch\muller402\tmp2db100     as tmp2db100Muller402;
 use g5\commands\csicop\irving\tmp2db            as tmp2dbIrving;
 
 class history implements Command {
@@ -122,7 +123,7 @@ class history implements Command {
             echo raw2tmpMuller402::execute([]);
             echo tweak2tmpMuller402::execute([]);
             echo addA6Muller402::execute(['update']);
-//            echo raw2tmpMuller100::execute([]);
+            echo raw2tmpMuller100::execute([]);
         }
         
         //
@@ -142,6 +143,7 @@ class history implements Command {
             echo tmp2dbE1E3::execute(['E3', 'tmp2db', 'small']);
             echo tmp2dbMuller1083::execute(['small']);
             echo tmp2dbMuller402::execute(['small']);
+            echo tmp2db100Muller402::execute(['small']);
             echo tmp2dbIrving::execute(['small']);
         }
         

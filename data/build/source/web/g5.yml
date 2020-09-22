@@ -1,0 +1,12 @@
+
+document:
+  history:
+    - 2020-09-21 23:26:49+02:00: Thierry Graff, creation
+
+name: Gauquelin5
+slug: g5
+description: |
+  Computer program hosted on https://github.com/tig12/gauquelin5
+  Started by Thierry Graff in 2017
+source:
+  parents: []
