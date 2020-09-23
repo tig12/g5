@@ -53,15 +53,30 @@ Gauquelin5 database contains the notions of <a href="db5-source.html"><b>Source<
         </li>
         <li>
             <a href="#syntax">Syntax</a>
+            <ul>
+                <li><a href="#3-1-slugs">Slugs</a></li>
+            </ul>
         </li>
         <li>
             <a href="#person">Person</a>
+            <ul>
+                <li><a href="#4-1-sources-ids-in-sources">sources - ids_in_sources</a></li>
+                <li><a href="#4-2-raw">raw</a></li>
+                <li><a href="#4-3-history">history</a></li>
+            </ul>
         </li>
         <li>
             <a href="#implementation-details">Implementation details</a>
         </li>
+        <li>
+            <a href="#g5-integration">G5 integration</a>
+        </li>
     </ul>
 </nav>
+
+
+
+
 
 
 <!-- ********************************************************************************* -->
@@ -139,8 +154,23 @@ src/model/
 
 For example, file <code>Person.yml</code> contains an empty person with all its fields empty.
 <br>This provides to the code a precise definition of the entities, used as the description of a new type.
+<br>
+<br>Persons are built by program from raw files.
+<br>Sources are defined in files of <code>data/buid/source</code> and imported by program.
+<br>Groups are built in the code.
 
-<br><br>All entities of this database have a field called <b>slug</b>, unique within each entity type.
+<!-- ************************************* -->
+<h3><a name="3-1-slugs">Slugs</a></h3>
+
+All entities of this database have a field called <b>slug</b>, unique within each entity type.
+<br>
+<br>Person slugs are built by program, from family name, given name and birth day.
+<br>Example : <code>poincare-henri-1854-04-29</code>.
+<br>They contain only lower case letters without accents [a-z], digits [0-9], and hyphen (-).
+
+<br><br>Group and source slug are defined by humans, in the code for groups and or in files of <code>data/buid/source</code> for sources. 
+<br>They can contain lower or upper case letters without accents [a-z] or [A-Z], digits [0-9], and hyphen (-)
+
 
 <!-- ********************************************************************************* -->
 <h2><a name="person">Person</a></h2>
@@ -212,6 +242,131 @@ raw: []
 history: []
 </pre>
 
+This model permits to keep a precise trace of the transformations done on data.
+
+<!-- ************************************* -->
+<h3><a name="4-1-sources-ids-in-sources">sources - ids_in_sources</a></h3>
+
+These fields express the link between a person an information sources.
+<br>Example (in json syntax) :
+<pre>
+# field sources
+    ["A6", "E1", "E3"]
+    
+# field ids_in_sources 
+    {
+        "A6": "580",
+        "E1": "1477",
+        "E3": "1092",
+        "cura": "A6-580"
+    }
+</pre>
+Example of Moinot Pierre 1920-03-29, present in 3 different files of cura.free.fr.
+<br>Note : <code>ids_in_sources["cura"]</code> is the person's <a href="cura.html#gauquelin-unique-id">Gauquelin unique id</a>.
+
+<!-- ************************************* -->
+<h3><a name="4-2-raw">raw</a></h3>
+
+Associative array ;
+<br>keys = source slug
+<br>values = values of the person in the given source (errors not corrected).
+<br>Example : 
+<pre>
+{
+    "A6": {
+        "H": "13",
+        "MN": "40",
+        "TZ": "-1",
+        "COD": "TA",
+        "COU": "I",
+        "DAY": "20",
+        "LAT": "40N30",
+        "LON": "17E30",
+        "MON": "8",
+        "NUM": "814",
+        "PRO": "W",
+        "SEC": "4",
+        "YEA": "1884",
+        "CITY": "TARANTO"
+    },
+    "5muller_writers": {
+        "LG": "-17,5",
+        "DAY": "20",
+        "LAT": "40,5",
+        "MIN": "30",
+        "TZO": "-0,83",
+        "HOUR": "13",
+        "NAME": "2M Acquaviva, Cosimo",
+        "YEAR": "1884",
+        "MONTH": "08",
+        "PLACE": "Taranto TA"
+    }
+}</pre>
+
+It shows a record found in Gauquelin data (file A6) and in Müller data (file <code>5muller_writers.xslx</code>, see <a href="newalch-muller402.html">page Müller 402</a>).
+
+<!-- ************************************* -->
+<h3><a name="4-3-history">history</a></h3>
+Array ; each element contains an associative array with 4 key / value pairs :
+<ul>
+    <li><code>command</code> : the g5 command issued to update this person.</li>
+    <li><code>date</code> : date of execution of the command.</li>
+    <li><code>source</code> : slug of the source of informations.</li>
+    <li>
+        <code>values</code> : the person fields that this command updated.
+        <br>It only contains the updated fields, not all the informations coming from the source.
+    </li>
+</ul>
+
+<pre>
+[
+    {
+        "date": "2020-09-21T14:49:58+02:00",
+        "source": "A6",
+        "values": {
+            "name": {
+                "given": "Cosimo",
+                "family": "Acquaviva"
+            },
+            "birth": {
+                "place": {
+                    "c2": "TA",
+                    "c3": "",
+                    "cy": "IT",
+                    "lg": "17.22972",
+                    "lat": "40.47611",
+                    "name": "Taranto",
+                    "geoid": "3165926"
+                },
+                "date-ut": "1884-08-20 12:40:04"
+            },
+            "occus": ["WR"],
+            "trust": 4
+        },
+        "command": "cura A6 tmp2db"
+    },
+    {
+        "date": "2020-09-21T14:50:32+02:00",
+        "source": "5muller_writers",
+        "values": {
+            "name": {
+                "given": "Cosimo",
+                "family": "Acquaviva"
+            },
+            "birth": {
+                "tzo": "+00:50",
+                "date": "1884-08-20 13:30",
+                "note": "",
+                "place": {
+                    "name": "Taranto"
+                }
+            },
+            "notes": []
+        },
+        "command": "cura muller402 tmp2db"
+    }
+]
+</pre>
 
 <!-- ********************************************************************************* -->
 <h2><a name="implementation-details">Implementation details</a></h2>
@@ -219,6 +374,19 @@ The database uses <a href="https://www.postgresql.org/">postgresql</a>.
 <br>Structured fields are stored using <a href="https://www.postgresql.org/docs/12/datatype-json.html">jsonb</a> type. 
 <br>
 <br>Each entity has a field <code>id</code>, used as primary key.
+<br>Slugs are also indexed.
+<br>Links between Person and Group are expressed by a relation table. The other links (Source-Person, Source-Source...) are contained in the json values.
+<br>SQL to cretae the tables are located in <code>src/model/db-create-tables</code>
+
+<!-- ********************************************************************************* -->
+<h2><a name="g5-integration">G5 integration</a></h2>
+Empty tables are created with command
+<pre>php run-g5.php db build dbcreate</pre>
+
+The tables are also dropped and recreated when the database is created from scratch
+<pre>php run-g5.php db fill history all</pre>
+or
+<pre>php run-g5.php db fill history db</pre>
 
 
 </article>

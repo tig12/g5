@@ -71,10 +71,10 @@ This page deals with the file <a href="https://newalchemypress.com/gauquelin/gau
         <li>
             <a href="#integration-to-g5">Integration to g5</a>
             <ul>
-                <li><a href="#2-2-full-execution">Full execution</a></li>
-                <li><a href="#2-3-raw2csv">raw2csv</a></li>
-                <li><a href="#2-4-fix-cura-a1-names">Fix cura A1 names</a></li>
-                <li><a href="#2-5-generate-skeptics-files">Generate skeptics' files</a></li>
+                <li><a href="#2-1-full-execution">Full execution</a></li>
+                <li><a href="#2-2-raw2csv">raw2csv</a></li>
+                <li><a href="#2-3-fix-cura-a1-names">Fix cura A1 names</a></li>
+                <li><a href="#2-4-generate-skeptics-files">Generate skeptics' files</a></li>
             </ul>
         </li>
         <li>
@@ -103,6 +103,10 @@ This page deals with the file <a href="https://newalchemypress.com/gauquelin/gau
         </li>
     </ul>
 </nav>
+
+
+
+
 
 <!-- ********************************************************************************* -->
 <h2><a name="ertel-4391-generalities">Ertel 4391 generalities</a></h2>
@@ -185,7 +189,7 @@ This paragraph is obsolete.
 The raw file is <code>data/raw/newalchemypress.com/03-ertel/3a_sports-utf8.txt"</code> (an UTF-8 version of <code>3a_sports.txt</code>).
 
 <!-- ************************************* -->
-<h3><a name="2-2-full-execution">Full execution</a></h3>
+<h3><a name="2-1-full-execution">Full execution</a></h3>
 
 The full set of transformations can be executed with the command :
 
@@ -200,7 +204,7 @@ php run-g5.php newalch ertel4391 export dl
 </pre>
 
 <!-- ************************************* -->
-<h3><a name="2-3-raw2csv">raw2csv</a></h3>
+<h3><a name="2-2-raw2csv">raw2csv</a></h3>
 The first step is to generate the file <b><code>5-newalch-csv/4391SPO.csv</code></b> :
 <pre>php run-g5.php newalch ertel4391 raw2csv</pre>
 This step copies the contents of <code>3a_sports-utf8.txt</code> to <code>4391SPO.csv</code> with the following modifications ;
@@ -237,7 +241,7 @@ This step copies the contents of <code>3a_sports-utf8.txt</code> to <code>4391SP
 Other columns are copied as is.
 
 <!-- ************************************* -->
-<h3><a name="2-4-fix-cura-a1-names">Fix cura A1 names</a></h3>
+<h3><a name="2-3-fix-cura-a1-names">Fix cura A1 names</a></h3>
 This step is included in the restoration process of file A1, not part of Ertel 4391 process.
 <br>
 <br>Fixes 100% of the remaining unidentified names in A1.
@@ -257,7 +261,7 @@ Nb corrections : 117
 </pre>
 
 <!-- ************************************* -->
-<h3><a name="2-5-generate-skeptics-files">Generate skeptics' files</a></h3>
+<h3><a name="2-4-generate-skeptics-files">Generate skeptics' files</a></h3>
 Draft code ; in <code>4391SPO.csv</code>, the associations between lines and skeptic ids are sometimes wrong or missing.
 <br>Can come from a problem in <code>4391SPO.csv</code>, a misunderstanding of column meanings or a bug in the code.
 

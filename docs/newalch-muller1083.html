@@ -60,10 +60,10 @@ More work can be done on this file :
         <li>
             <a href="#integration-to-g5">Integration to g5</a>
             <ul>
-                <li><a href="#2-2-full-execution">Full execution</a></li>
-                <li><a href="#2-3-generate-csv">Generate csv</a></li>
-                <li><a href="#2-4-tweak2csv">tweak2csv</a></li>
-                <li><a href="#2-5-fix-gnr">Fix GNR</a></li>
+                <li><a href="#2-1-full-execution">Full execution</a></li>
+                <li><a href="#2-2-generate-csv">Generate csv</a></li>
+                <li><a href="#2-3-tweak2csv">tweak2csv</a></li>
+                <li><a href="#2-4-fix-gnr">Fix GNR</a></li>
             </ul>
         </li>
         <li>
@@ -106,6 +106,10 @@ More work can be done on this file :
 
 
 
+
+
+
+
 <!-- ********************************************************************************* -->
 <h2><a name="generalities">Generalities</a></h2>
 This group was built by Arno Müller and Suitbert Ertel in 1994.
@@ -128,7 +132,7 @@ This file is imported in g5 database but following doc has not been updated yet.
 The raw file is <code>data/raw/newalchemypress.com/05-muller-medics/5a_muller-medics-utf8.txt</code>
 
 <!-- ************************************* -->
-<h3><a name="2-2-full-execution">Full execution</a></h3>
+<h3><a name="2-1-full-execution">Full execution</a></h3>
 
 
 The full set of transformations can be executed with the command : 
@@ -142,18 +146,18 @@ php run-g5.php newalch muller1083 fixGnr update
 </pre>                                    
 
 <!-- ************************************* -->
-<h3><a name="2-3-generate-csv">Generate csv</a></h3>
+<h3><a name="2-2-generate-csv">Generate csv</a></h3>
 The first step is to generate the file <b><code>5-newalch-csv/1083MED.csv</code></b> :
 <pre>php run-g5.php newalch muller1083 raw2csv</pre>
 This step includes minor corrections in given names (some accents are missing).
 
 <!-- ************************************* -->
-<h3><a name="2-4-tweak2csv">tweak2csv</a></h3>
+<h3><a name="2-3-tweak2csv">tweak2csv</a></h3>
 This step applies corrections from file <code>data/3-edited/newalch-tweaked/1083MED.yml</code>, see page <a href="tweak2tmp.html">tweak2tmp</a>.
 <br>Used to fix errors in the names of noble persons (<a href="#nobilities">see below</a>).
 
 <!-- ************************************* -->
-<h3><a name="2-5-fix-gnr">Fix GNR</a></h3>
+<h3><a name="2-4-fix-gnr">Fix GNR</a></h3>
 Looking at the file with
 <pre>php run-g5.php newalch muller1083 look</pre>
 (see <a href="#looking-at-the-file">below</a>) showed abnormal differences for some names. This led to identify errors on <code>GNR</code> :

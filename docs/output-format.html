@@ -57,6 +57,10 @@ This page describes the format of generated csv files, <a href="https://g5.tig12
 
 
 
+
+
+
+
 In the csv files, the first line contains field names ; other lines contain data.
 <br>The field separator used in csv file is <code>;</code> (semicolon).
 <br>Character encoding is UTF-8.
@@ -81,16 +85,9 @@ Some csv files contain fields that are not listed here
         <td>GQID</td>
         <td>
             <b>Gauquelin id</b>
-            <br>Looks like <code>A2-721</code> ; built using Cura file name and field <b>NUM</b> of <a href="cura.html">cura.free.fr files</a>.
+            <br>Looks like <code>A2-721</code> ; built using Cura file name and field <b>NUM</b>
+            <br>See <a href="cura.html#gauquelin-unique-id">the definition of GQID</a>.
             <br>Corresponds to fields <b>QUEL</b> and <b>GNR</b> of <a href="newalch-ertel4391.html">Ertel 4391</a> raw file.
-        </td>
-    </tr>
-    
-    <tr>
-        <td>ERID</td>
-        <td>
-            <b>Ertel id</b>
-            <br>Corresponds to field <b>NR</b> of <a href="newalch-ertel4391.html">file Ertel 4391</a>.
         </td>
     </tr>
     
@@ -99,13 +96,22 @@ Some csv files contain fields that are not listed here
         <td>
             <b>Müller id</b>
             <br>Corresponds to field <b>NR</b> of <a href="newalch-muller1083.html">file Müller 1083</a>.
+            <br>See <a href="newalch.html#muller-unique-id">the definition of MUID</a>.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>ERID</td>
+        <td>
+            <b>Ertel id</b> ; only useful for sportsmen.
+            <br>Corresponds to field <b>NR</b> of <a href="newalch-ertel4391.html">file Ertel 4391</a>.
         </td>
     </tr>
     
     <tr>
         <td>CSID</td>
         <td>
-            <b>CSICOP id</b>
+            <b>CSICOP id</b> ; only useful for sportsmen.
             <br>Corresponds to field <b>CSINR</b> of <a href="newalch-ertel4391.html">file Ertel 4391</a>.
         </td>
     </tr>
@@ -113,20 +119,13 @@ Some csv files contain fields that are not listed here
     <tr>
         <td>WDID</td>
         <td>
-            <b>Wikidata id</b>
+            <b>Wikidata id</b> ; not integrated yet.
             <br>Looks like <code>Q41390</code>.
         </td>
     </tr>
     
     <!-- ************************************* -->
     <tr><td colspan="2"><div class="big3 bold padding05">Names</div></td></tr>
-    
-    <tr>
-        <td>NAME</td>
-        <td>
-            <b>Name currently used</b>.
-        </td>
-    </tr>
     
     <tr>
         <td>FNAME</td>
@@ -156,7 +155,7 @@ Some csv files contain fields that are not listed here
     </tr>
     
     <tr>
-        <td>TZ</td>
+        <td>TZO</td>
         <td>
             <b>Timezone offset</b>.
             <br>Format <code>sHH:MM:SS</code>, where s is the sign (+ or -).
@@ -257,7 +256,7 @@ Some csv files contain fields that are not listed here
             <br>Corresponds to field <code>PRO</code> in cura files.
             <br>When a person has more than one occupation code, the codes are separated by "+".
             Ex : PO+WR means that the person is identified as a politician and a writer.
-            <br>See below for a full list of codes.
+            <br>See below for codes used in g5.
         </td>
     </tr>
     
@@ -318,7 +317,7 @@ I didn't find a convenient standard for occupation codes, so I built arbitrary c
 <h3><a name="2-3-sports">Sports</a></h3>
 <table class="wikitable margin">
 <tr><th>Code</th><th>Label (fr)</th><th>Label (en)</th></tr>
-<tr><td>ATH</td><td>Athlétisme</td><td>Athletism</td></tr>
+<tr><td>ATH</td><td>Athlétisme</td><td>Track and field</td></tr>
 <tr><td>AUT</td><td>Auto-moto</td><td>Auto-moto</td></tr>
 <tr><td>AVI</td><td>Aviation</td><td>Aviation</td></tr>
 <tr><td>AVR</td><td>Aviron</td><td>Rowing</td></tr>

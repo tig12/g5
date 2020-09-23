@@ -105,7 +105,6 @@ class tmp2db implements Command {
                 $new['trust'] = Cura::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
-                $new['occus'] = [$line['OCCU']];
                 $new['birth'] = [];
                 $new['birth']['date-ut'] = $line['DATE-UT'];
                 $new['birth']['place']['name'] = $line['PLACE'];
@@ -116,6 +115,7 @@ class tmp2db implements Command {
                 $new['birth']['place']['lat'] = $line['LAT'];
                 $new['birth']['place']['geoid'] = $line['GEOID'];
                 $p->updateFields($new);
+                $p->addOccu($line['OCCU']);
                 $p->computeSlug();
                 $p->addHistory("cura $datafile tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);
@@ -124,9 +124,12 @@ class tmp2db implements Command {
             }
             else{
                 // duplicate, person appears in more than one cura file
+                $p->addOccu($line['OCCU']);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
-                // does not addIdInSource($curaSource) to respect the definition of Gauquelin id
+                // Does not addIdInSource('cura') to respect the definition of Gauquelin id
+                $p->addRaw($source->data['slug'], $lineRaw);
+                $p->addHistory("cura $datafile tmp2db", $source->data['slug'], []);
                 $p->update(); // Storage
                 if($reportType == 'full'){
                     $report .= "Duplicate {$test->data['slug']} : {$p->data['ids-in-sources']['cura']} = $curaId\n";

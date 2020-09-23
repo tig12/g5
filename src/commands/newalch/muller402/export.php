@@ -11,6 +11,7 @@ use g5\Config;
 use g5\model\DB5;
 use g5\model\Group;
 use g5\patterns\Command;
+use g5\commands\newalch\Newalch;
 use g5\commands\cura\Cura;
 
 class export implements Command {
@@ -66,7 +67,6 @@ class export implements Command {
         ];
         
         $map = [
-            'ids-in-sources.' . self::$sourceSlug => 'MUID',
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
             'birth.date' => 'DATE',
@@ -83,6 +83,9 @@ class export implements Command {
         $fmap = [
             'GQID' => function($p){
                 return $p->data['ids-in-sources']['cura'] ?? '';
+            },
+            'MUID' => function($p){
+                return Newalch::ids_in_sources2muId($p->data['ids-in-sources']);
             },
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);

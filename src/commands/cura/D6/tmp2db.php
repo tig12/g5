@@ -96,13 +96,13 @@ class tmp2db implements Command {
                 $new['trust'] = Cura::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
-                $new['occus'] = [$line['OCCU']];
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['place']['cy'] = $line['CY'];
                 $new['birth']['place']['lg'] = $line['LG'];
                 $new['birth']['place']['lat'] = $line['LAT'];
                 $p->updateFields($new);
+                $p->addOccu($line['OCCU']);
                 $p->computeSlug();
                 $p->addHistory("cura $datafile tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);
@@ -111,6 +111,7 @@ class tmp2db implements Command {
             }
             else{
                 // duplicate, person appears in more than one cura file
+                $p->addOccu($line['OCCU']);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
                 // does not addIdInSource($curaSource) to respect the definition of Gauquelin id

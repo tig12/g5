@@ -70,6 +70,10 @@
 
 
 
+
+
+
+
 This software has been developed and tested under Linux. A priori, it should also work under Windows and Macintosh.
 <br>
 <br>It is used through the command line.
@@ -267,7 +271,25 @@ Then the following command builds the database from scratch :
 <!-- ********************************************************************************* -->
 <h2><a name="generating-output-files">Generating output files</a></h2>
 
-TODO 
+Output capacities are still limited.
+
+<br><br>A specific export was written for each historical file, because some fields coming from the raw files are copied in the output.
+<br>So each file has a specific command to generate a csv file, for example :
+<pre>
+php run-g5.php cura A2 export
+
+php run-g5.php newalch muller1083 export
+</pre>
+
+Generic exports also permit to generate files from database (currently only by profession code).
+<br>Profession codes and target file must be specified, for example :
+<pre>
+php run-g5.php db export occu SP data/output/new/sport/sportsmen.csv
+
+php run-g5.php db export occu WR+JO data/output/new/letters/writers+journalists.csv
+</pre>
+
+A more flexible mechanism needs to be developed to specify precisely what to output.
 
 </article>
 </div><!-- end class="main" -->

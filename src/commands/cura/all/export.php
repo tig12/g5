@@ -13,6 +13,7 @@ use g5\Config;
 use g5\model\DB5;
 use g5\patterns\Command;
 use g5\commands\cura\Cura;
+use g5\commands\newalch\Newalch;
 use g5\model\Full;
 use g5\model\Group;
 use g5\model\Person;
@@ -25,15 +26,13 @@ class export implements Command {
     **/
     const OUTPUT_DIR = 'datasets' . DS . 'cura';
     
-    /** 
-        Trick to access to $datafile within $fmap and $sort function
-    **/
-//    private static $datafile;
+    // Trick to access to $datafile in sort function
+    public static $datafile;
     
     // *****************************************
     // Implementation of Command
     /** 
-        Called by : php run-g5.php cura <datafile> export
+        Called by : php run-g5.php cura <datafile> export               
         @param $params array containing two strings :
                        - the datafile to process (like "A1").
                        - The name of this command (useless here)
@@ -50,11 +49,14 @@ class export implements Command {
         
         $g = Group::getBySlug($datafile);
         $g-> computeMembers();
+        
 
         $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . $datafile . '.csv';
         
         $csvFields = [
             'GQID',
+            'MUID',
+            'NUM',
             'FNAME',
             'GNAME',
             'OCCU',
@@ -71,6 +73,7 @@ class export implements Command {
         ];
         
         $map = [
+            'ids-in-sources.' . $datafile => 'NUM',
             'ids-in-sources.cura' => 'GQID',
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
@@ -85,23 +88,19 @@ class export implements Command {
             'birth.place.lat' => 'LAT',
             'birth.place.geoid' => 'GEOID',
         ];
-        
-//        self::$datafile = $datafile; // trick for $fmap and $sort
-        
+                
         $fmap = [
+            'MUID' => function($p){
+                return Newalch::ids_in_sources2muId($p->data['ids-in-sources']);
+            },          
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);
             },
         ];
         
-        // sorts by GQID within the $datafile
-        // need to compare int and not string for a natsort
+        self::$datafile = $datafile; // trick to access to $datafile inside $sort
         $sort = function($a, $b){
-            $idA = $a->data['ids-in-sources']['cura'];
-            $idB = $b->data['ids-in-sources']['cura'];
-            $posA = strpos($idA, '-') + 1;
-            $posB = strpos($idB, '-') + 1;
-            return (int)substr($idA, $posA) <=> (int)substr($idB, $posB);
+            return (int)$a->data['ids-in-sources'][self::$datafile] <=> (int)$b->data['ids-in-sources'][self::$datafile];
         };
         
         return $g->exportCsv($outfile, $csvFields, $map, $fmap, $sort);

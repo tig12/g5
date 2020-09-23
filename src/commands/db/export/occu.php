@@ -95,8 +95,12 @@ class occu implements Command {
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);
             },
-            'GID' => function($p){
-                return $p->data['ids-in-sources']['cura'] ?? '';
+            'GQID' => function($p){
+                return ($p->data['ids-in-sources']['cura'] ?? '');
+                // if(isset($p->data['ids-in-sources']['cura'])){
+                    // return $p->data['ids-in-sources']['cura'];
+                // }
+                // return '';
             },
             'MUID' => function($p){
                 // TODO refactor, this should be called in raw2tmp or tmp2db of newalch files.

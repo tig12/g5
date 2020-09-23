@@ -118,6 +118,9 @@ class tmp2db implements Command {
             }
             else{
                 // duplicate, person appears in more than one cura file
+                foreach(explode('+', $line['OCCU']) as $occu){
+                    $p->addOccu($occu);
+                }
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
                 // does not addIdInSource($curaSource) to respect the definition of Gauquelin id

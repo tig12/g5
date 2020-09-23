@@ -40,10 +40,10 @@ class Newalch implements SourceI {
     public static function muId($source, $NR){
         switch($source){
         	case '5muller_writers': 
-        	    return 'AFD1-' . $NR;
+        	    return '1-' . $NR;
         	break;
         	case '5a_muller_medics': 
-        	    return 'AFD5-' . $NR;
+        	    return '5-' . $NR;
         	break;
         }
         throw new \Exception("Invalid \$source parameter : $source");
@@ -51,6 +51,7 @@ class Newalch implements SourceI {
     
     /**
         Convenience method to find Müller id from Person's ids-in-source field
+        Does not handle persons published in 2 different volumes of Astro-Forschungs-Daten
     **/
     public static function ids_in_sources2muId($ids_in_sources){
         if(isset($ids_in_sources['5muller_writers'])){
