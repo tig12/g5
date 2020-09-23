@@ -97,13 +97,8 @@ class occu implements Command {
             },
             'GQID' => function($p){
                 return ($p->data['ids-in-sources']['cura'] ?? '');
-                // if(isset($p->data['ids-in-sources']['cura'])){
-                    // return $p->data['ids-in-sources']['cura'];
-                // }
-                // return '';
             },
             'MUID' => function($p){
-                // TODO refactor, this should be called in raw2tmp or tmp2db of newalch files.
                 return Newalch::ids_in_sources2muId($p->data['ids-in-sources']);
             },
         ];
@@ -112,7 +107,6 @@ class occu implements Command {
         $sort = function($a, $b){
             $nameA = $a->data['name']['family'] . ' ' . $a->data['name']['given'];
             $nameB = $b->data['name']['family'] . ' ' . $b->data['name']['given'];
-            //return $a->data['name']['family'] <=> $b->data['name']['family'];
             return $nameA <=> $nameB;
         };
         

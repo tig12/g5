@@ -70,14 +70,15 @@ class Cura implements SourceI {
         Dates of publication of the different cura files.
         Source http://cura.free.fr/gauq/902gdG.html
         For documentation purpose only.
+        (comments = nb pages)
     **/
     const CURA_PUBLICATION_DATE = [
         'A1' =>  '1970-04',
-        'A2' =>  '1970-05',
+        'A2' =>  '1970-05', // 150
         'A3' =>  '1970-07',
-        'A4' =>  '1970-11',
+        'A4' =>  '1970-11', // 119
         'A5' =>  '1970-12',
-        'A6' =>  '1971-03',
+        'A6' =>  '1971-03', // 123
         'D6' =>  '1979-09',
         'D10' => '1982-01',
         'E1' =>  '1984',

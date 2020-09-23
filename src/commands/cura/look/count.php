@@ -6,7 +6,7 @@
     @license    GPL
     @history    2020-07-26 03:32:38+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace g5\commands\cura\all;
+namespace g5\commands\cura\look;
 
 use g5\Config;
 use g5\patterns\Command;
@@ -19,7 +19,7 @@ class count implements Command {
     // *****************************************
     // Implementation of Command
     /** 
-        Called by : php run-g5.php cura all count
+        Called by : php run-g5.php cura look count
         Note : can be indifferently called with any datafile of serie A
         So : php run-g5.php cura A count
         Is the same as : php run-g5.php cura A1 count
