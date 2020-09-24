@@ -56,12 +56,6 @@
 </nav>
 
 
-
-
-
-
-
-
 In this page, "legal time" means "the time that can be read on the birth certificate".
 
 <!-- ********************************************************************************* -->
@@ -87,7 +81,7 @@ This means that birth time is <code><b>05:00:00</b></code>, and timezone offset 
 <cite class="margin05">Birthtime is converted to standard time, either for zone 0 (= GMT) or -1 (= CET)</cite>
 
 The way birth times are expressed in cura site adds information (the timezone offset). It's cool because the information can be directly used to compute birth chart. 
-<br>But <b>expressing times this way is a bad practice and should be avoided</b> because two distinct informations are mixed in one field :
+<br>But <b>expressing times this way should be avoided</b> because two distinct informations are mixed in one field :
 <ul>
     <li>The legal time, as it can be read in civil registries.</li>
     <li>The timezone offset.</li>
@@ -128,7 +122,6 @@ LT = legal time
 </div>
 
 <br>A surprising feature of historical data is that <b>neither Gauquelin nor Müller respect the ISO 8601 definition of timezone offset</b>. They always indicate the opposite value. The same problem occurs in the 2 books used to compute timezone offset (see below).
-<br>This is not a blocking bug as it's finally just a matter of convention.
 
 <table class="wikitable margin">
     <tr>
@@ -164,6 +157,7 @@ Example : the first record of file D10 : Aaron Harold, born 1921-06-21 07:00
 <br>From g5 value : UT = 07:00 - (-6h) = 13:00
 <br>
 <br>The results are equivalent. 
+<br>This is not a blocking problem as it's finally just a matter of convention.
 
 
 <!-- ********************************************************************************* -->
