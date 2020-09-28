@@ -25,6 +25,51 @@ class Ertel4391 implements SourceI {
     /** Slug of the group in db **/
     const GROUP_SLUG = 'ertel4384athletes';
     
+    /**
+        Subgroups present in Ertel file
+        Keys = group slugs
+    **/
+    const SUBGROUPS = [
+        'GCPAR' => [
+            'name' => '76 Para lowers',
+            'description' => "76 athletes collected by Suitbert Ertel in Gauquelin laboratory,\n"
+                . "not retained in Comité Para experiment because considered less eminent.\n"
+                . "Sample called \"7 - Para lowers\" by Ertel in his 1988 article",
+        ],
+        'GMINI' => [
+            'name' => '599 minor Italian footballers',
+            'description' => "Unpublished by Gauquelin (not famous enough), copied manually by Ertel.\n"
+                . "Sample called \"3 - Italian football\" by Ertel in his 1988 article",
+        ],
+        'GMING' => [
+            'name' => '115 minor Germans sportsmen',
+            'description' => "Unpublished by Gauquelin (not famous enough), copied manually by Ertel.\n"
+                . "Sample called \"4 - German various\" by Ertel in his 1988 article",
+        ],
+        'G_ADD' => [
+            'name' => '202 French sportsmen',
+            'description' => "Copied manually by Ertel in Gauquelin's laboratory.\n"
+                . "Considered as \"low-low-ranking\" by Gauquelin.\n"
+                . "Sample called \"5 - French occasionals\" by Ertel in his 1988 article",
+        ],
+        'GMINV' => [
+            'name' => '24 Italian cyclists',
+            'description' => "Copied manually by Ertel in Gauquelin's laboratory.\n"
+                . "Sample called \"10 - Italian cyclists\" by Ertel in his 1988 article",
+        ],
+        'GMIND' => [
+            'name' => '453 French sportsmen',
+            'description' => "Copied manually by Ertel in Gauquelin's laboratory.\n"
+                . "Sample called \"11 - Lower French\" by Ertel in his 1988 article",
+        ],
+        'G_79F' => [
+            'name' => '27 sportsmen',
+            'description' => "Supplementary data sent by Gauquelin to Ertel after his visit in Paris.\n"
+                . "Sample called \"13 - Plus special\" by Ertel in his 1988 article",
+        ],
+    ];
+    
+    /* 
     const SPORT_ERTEL_G5 = [
         'AIRP' => 'AVI',
         'ALPI' => '',
@@ -66,6 +111,7 @@ class Ertel4391 implements SourceI {
         'WRES' => '',
         'YACH' => '',
     ];
+    */
     
     
     // *********************** Source management ***********************
@@ -88,19 +134,17 @@ class Ertel4391 implements SourceI {
         $g->data['id'] = $g->insert();
         return $g;
     }
-
-    /** Returns a Group object for "para lowers". **/
-/* 
-    public static function getGroup(): Group {
+    
+    /** Returns a Group object for one of Ertel4391 subgroups. **/
+    public static function getSubgroup($slug): Group {
         $g = new Group();
-        $g->data['slug'] = 'ParaLowers';
-        $g->data['name'] = "Ertel 4384 athletes";
-        $g->data['description'] = "4384 athletes compiled by Suitbert Ertel\n(Ertel says 4391)";
+        $g->data['slug'] = $slug;
+        $g->data['name'] = self::SUBGROUPS[$slug]['name'];
+        $g->data['description'] = self::SUBGROUPS[$slug]['description'];
         $g->data['id'] = $g->insert();
         return $g;
     }
-*/
-
+    
     // *********************** Raw file manipulation ***********************
     
     /**
