@@ -66,7 +66,8 @@ class dup implements Command {
             $res .= "    <tr>\n";
             $res .= "        <td>" . implode('<br>', $dup) . "</td>\n";
             $date = $p->data['birth']['date'] ?? $p->data['birth']['date-ut'];
-            $res .= "        <td>" . $p->data['name']['family'] . ' ' . $p->data['name']['given'] . '<br>' . $date . "</td>\n";
+            $date = substr($date, 0, 10);
+            $res .= "        <td>" . $p->data['name']['family'] . ' ' . $p->data['name']['given'] . ' ' . $date . "</td>\n";
             $res .= "    </tr>\n";
         }
         $res .= "</table>\n";

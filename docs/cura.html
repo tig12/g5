@@ -189,12 +189,12 @@ During this step, some corrections are applied to the data.
 
 <!-- ************************************* -->
 <h3><a name="3-2-tweak2tmp">tweak2tmp</a></h3>
-This is done after <code>tweak2tmp</code>, see <a href="tweak2tmp.html">page tweak2tmp</a>.
+This is done after <code>raw2tmp</code>, see <a href="tweak2tmp.html">page tweak2tmp</a>.
 
 <!-- ************************************* -->
 <h3><a name="3-3-other-transformations">Other transformations</a></h3>
 
-Other transformations (between <code>raw2tmp</code> and <code>tmp2db</code>) may modify the files located in <code>data/tmp/cura</code>.
+Other transformations (between <code>tweak2tmp</code> and <code>tmp2db</code>) may modify the files located in <code>data/tmp/cura</code>.
 <br>
 <br>Precise transformations are described in the following pages :
 <ul class="spaced naked margin-top big2">
@@ -221,7 +221,7 @@ Analysis of the database shows that
 </ul>
 This explains the difference 21 469 - 21 249 = 220 = 212 + (4 * 2)
 <br>
-<br>Full restoration of names in A files will maybe show more duplicates.
+<br>Full restoration of names in A files may show more duplicates.
 <br>
 <br>The command
 <pre>php run-g5.php cura look dup</pre>
@@ -230,868 +230,868 @@ generates the following table containing the duplicates.
 <table class="wikitable margin alternate">
     <tr><th>Ids</th><th>Person</th></tr>
     <tr>
+        <td>A2-241<br>A6-282</td>
+        <td>Dumas Georges 1866-03-06</td>
+    </tr>
+    <tr>
         <td>A1-2054<br>A2-1008</td>
-        <td>Geraud Louis<br>1902-07-06 10:50:40</td>
+        <td>Geraud Louis 1902-07-06</td>
     </tr>
     <tr>
         <td>A2-1098<br>E3-927</td>
-        <td>Le Gorgeu Victor<br>1881-05-05 10:16:24</td>
-    </tr>
-    <tr>
-        <td>A2-2685<br>A3-534</td>
-        <td>Ferrie Gustave<br>1868-11-19 07:36:20</td>
+        <td>Le Gorgeu Victor 1881-05-05</td>
     </tr>
     <tr>
         <td>A2-2766<br>A3-693</td>
-        <td>Laussedat Aimé<br>1819-04-15 07:46:40</td>
-    </tr>
-    <tr>
-        <td>A2-2849<br>E3-1225</td>
-        <td>Picard Alfred<br>1844-12-21 13:29:00</td>
+        <td>Laussedat Aimé 1819-04-15</td>
     </tr>
     <tr>
         <td>A2-2580<br>A3-231</td>
-        <td>Binger Louis<br>1856-10-14 00:29:00</td>
+        <td>Binger Louis 1856-10-14</td>
     </tr>
     <tr>
         <td>A2-2681<br>A3-527</td>
-        <td>Fave Ildephonse<br>1812-02-28 11:54:00</td>
+        <td>Fave Ildephonse 1812-02-28</td>
+    </tr>
+    <tr>
+        <td>A2-2685<br>A3-534</td>
+        <td>Ferrie Gustave 1868-11-19</td>
     </tr>
     <tr>
         <td>A2-2689<br>A3-539</td>
-        <td>Foch Ferdinand<br>1851-10-02 21:59:40</td>
+        <td>Foch Ferdinand 1851-10-02</td>
     </tr>
     <tr>
         <td>A2-2697<br>A3-560</td>
-        <td>Gallieni Joseph<br>1849-04-24 04:54:16</td>
+        <td>Gallieni Joseph 1849-04-24</td>
     </tr>
     <tr>
         <td>A2-2747<br>A3-645</td>
-        <td>Jonquieres Ernest<br>1820-07-03 02:40:40</td>
+        <td>Jonquieres Ernest 1820-07-03</td>
     </tr>
     <tr>
         <td>A2-2765<br>A3-689</td>
-        <td>Laubeuf Maxime<br>1864-11-23 18:51:28</td>
+        <td>Laubeuf Maxime 1864-11-23</td>
     </tr>
     <tr>
         <td>A2-2817<br>A3-777</td>
-        <td>Menabrea Louis<br>1809-09-04 03:36:20</td>
+        <td>Menabrea Louis 1809-09-04</td>
     </tr>
     <tr>
         <td>A2-2841<br>A3-863</td>
-        <td>Perrier François<br>1833-04-18 09:42:36</td>
+        <td>Perrier François 1833-04-18</td>
     </tr>
     <tr>
         <td>A2-2886<br>A3-950</td>
-        <td>Sebert Hippolyte<br>1839-01-31 11:50:48</td>
+        <td>Sebert Hippolyte 1839-01-31</td>
     </tr>
     <tr>
         <td>A2-2904<br>A3-979</td>
-        <td>Tilho Jean<br>1875-05-01 01:57:04</td>
+        <td>Tilho Jean 1875-05-01</td>
     </tr>
     <tr>
         <td>A3-1344<br>A5-1689</td>
-        <td>Graziani Rodolfo<br>1882-08-11 11:10:04</td>
+        <td>Graziani Rodolfo 1882-08-11</td>
     </tr>
     <tr>
         <td>A2-3134<br>A3-1600</td>
-        <td>Sacco Luigi<br>1883-08-01 03:10:04</td>
+        <td>Sacco Luigi 1883-08-01</td>
     </tr>
     <tr>
         <td>A2-3168<br>A3-1683</td>
-        <td>Toraldo Francia Orazio <br>1884-09-09 21:30:04</td>
+        <td>Toraldo Francia Orazio  1884-09-09</td>
     </tr>
     <tr>
         <td>A2-2213<br>A3-2177</td>
-        <td>Tillmanns Hermann<br>1844-10-04 01:00:00</td>
-    </tr>
-    <tr>
-        <td>A3-2241<br>A5-2127</td>
-        <td>Bara Jules<br>1835-08-23 07:12:00</td>
+        <td>Tillmanns Hermann 1844-10-04</td>
     </tr>
     <tr>
         <td>A3-2309<br>A6-1052</td>
-        <td>Collin J<br>1878-11-25 05:38:00</td>
+        <td>Collin J 1878-11-25</td>
     </tr>
     <tr>
         <td>A2-3432<br>A3-2315</td>
-        <td>Cornet Jules<br>1865-03-04 04:42:00</td>
+        <td>Cornet Jules 1865-03-04</td>
     </tr>
     <tr>
         <td>A2-3442<br>A3-2363</td>
-        <td>Denis Hector<br>1842-10-29 03:42:00</td>
-    </tr>
-    <tr>
-        <td>A2-2346<br>A3-2410</td>
-        <td>Firket Charles<br>1852-09-02 14:38:00</td>
-    </tr>
-    <tr>
-        <td>A3-2567<br>A6-1162</td>
-        <td>Neve Paul<br>1851-12-19 17:43:00</td>
-    </tr>
-    <tr>
-        <td>A3-2653<br>A5-2275</td>
-        <td>Tibbaut Emile<br>1862-06-12 08:45:00</td>
-    </tr>
-    <tr>
-        <td>A3-2667<br>A5-2284</td>
-        <td>Vandervelde Emile<br>1866-01-25 05:43:00</td>
-    </tr>
-    <tr>
-        <td>A2-3551<br>A3-2941</td>
-        <td>Tilly Joseph<br>1837-08-16 00:47:00</td>
-    </tr>
-    <tr>
-        <td>A5-132<br>A6-144</td>
-        <td>Brasseur Pierre<br>1905-12-22 21:20:40</td>
-    </tr>
-    <tr>
-        <td>A4-443<br>A5-359</td>
-        <td>Geffroy Edmond<br>1804-07-30 03:51:40</td>
-    </tr>
-    <tr>
-        <td>A4-1957<br>A5-422</td>
-        <td>Herve Florimond<br>1825-06-30 02:18:56</td>
-    </tr>
-    <tr>
-        <td>A4-753<br>A5-541</td>
-        <td>Melingue Etienne<br>1807-04-16 03:01:28</td>
-    </tr>
-    <tr>
-        <td>A5-1311<br>A6-1058</td>
-        <td>Cortvrient Alfons<br>1850-06-24 06:45:00</td>
-    </tr>
-    <tr>
-        <td>A5-1316<br>A6-1195</td>
-        <td>Schepens Adolphe<br>1819-04-13 17:45:00</td>
-    </tr>
-    <tr>
-        <td>A5-1317<br>A6-1219</td>
-        <td>Vandevelde Antonius<br>1895-07-08 23:00:00</td>
-    </tr>
-    <tr>
-        <td>A1-153<br>A5-1432</td>
-        <td>Corniglion-Molinier Edward<br>1898-01-23 03:50:40</td>
-    </tr>
-    <tr>
-        <td>A1-258<br>A5-1567</td>
-        <td>Badoglio Pietro<br>1871-09-28 00:10:04</td>
-    </tr>
-    <tr>
-        <td>A1-260<br>A5-1568</td>
-        <td>Balbo Italo<br>1896-06-05 18:30:00</td>
-    </tr>
-    <tr>
-        <td>A3-1087<br>A5-1572</td>
-        <td>Bencivenga Roberto<br>1872-10-02 15:10:04</td>
-    </tr>
-    <tr>
-        <td>A1-282<br>A5-1588</td>
-        <td>Bonzani Alberto<br>1872-02-01 00:10:04</td>
-    </tr>
-    <tr>
-        <td>A3-1168<br>A5-1617</td>
-        <td>Cavallero Ugo<br>1880-09-20 19:25:04</td>
-    </tr>
-    <tr>
-        <td>A3-1191<br>A5-1624</td>
-        <td>Clerici Ambrogio<br>1868-11-18 20:10:04</td>
-    </tr>
-    <tr>
-        <td>A2-3002<br>A5-1632</td>
-        <td>Corbino Mario<br>1876-04-30 00:13:04</td>
-    </tr>
-    <tr>
-        <td>A3-1224<br>A5-1641</td>
-        <td>De Bono Emilio<br>1866-03-19 19:08:00</td>
-    </tr>
-    <tr>
-        <td>A3-1288<br>A5-1673</td>
-        <td>Ferretti Lando<br>1895-05-02 22:30:00</td>
-    </tr>
-    <tr>
-        <td>A3-1306<br>A5-1680</td>
-        <td>Gabba Melchiade<br>1874-08-20 14:10:04</td>
-    </tr>
-    <tr>
-        <td>A3-1323<br>A5-1684</td>
-        <td>Gazzera Pietro<br>1879-12-11 05:15:04</td>
-    </tr>
-    <tr>
-        <td>A3-1342<br>A5-1688</td>
-        <td>Grandi Dino<br>1895-06-04 08:00:00</td>
-    </tr>
-    <tr>
-        <td>A2-1491<br>A5-1723</td>
-        <td>Martino Gaetano<br>1900-11-25 22:15:00</td>
-    </tr>
-    <tr>
-        <td>A2-3089<br>A5-1753</td>
-        <td>Nobile Umberto<br>1885-01-21 14:25:04</td>
-    </tr>
-    <tr>
-        <td>A3-1505<br>A5-1767</td>
-        <td>Piacentini Pietro<br>1898-11-26 00:30:00</td>
-    </tr>
-    <tr>
-        <td>A1-459<br>A5-1773</td>
-        <td>Pricolo Francesco<br>1891-01-30 04:40:04</td>
-    </tr>
-    <tr>
-        <td>A3-1561<br>A5-1781</td>
-        <td>Ricci Renato<br>1896-06-01 10:00:00</td>
-    </tr>
-    <tr>
-        <td>A3-1630<br>A5-1808</td>
-        <td>Sechi Giovanni<br>1871-01-18 21:10:04</td>
-    </tr>
-    <tr>
-        <td>A3-1881<br>A5-1906</td>
-        <td>Göring Hermann<br>1893-01-12 03:00:00</td>
-    </tr>
-    <tr>
-        <td>A3-2120<br>A5-2046</td>
-        <td>Schleich Eduard<br>1888-08-09 22:29:00</td>
-    </tr>
-    <tr>
-        <td>A3-2240<br>A5-2126</td>
-        <td>Banning Emile<br>1836-10-12 12:38:00</td>
-    </tr>
-    <tr>
-        <td>A3-2249<br>A5-2130</td>
-        <td>Bethune Léon<br>1864-07-07 14:05:00</td>
-    </tr>
-    <tr>
-        <td>A3-2274<br>A5-2133</td>
-        <td>Brassine Jacques<br>1830-10-12 03:42:00</td>
-    </tr>
-    <tr>
-        <td>A3-2286<br>A5-2139</td>
-        <td>Burlet Jules<br>1844-04-10 14:43:00</td>
-    </tr>
-    <tr>
-        <td>A3-2291<br>A5-2143</td>
-        <td>Camus Camille<br>1883-05-09 06:43:00</td>
-    </tr>
-    <tr>
-        <td>A3-2311<br>A5-2148</td>
-        <td>Cooreman Gérard<br>1852-03-25 13:15:00</td>
-    </tr>
-    <tr>
-        <td>A3-2755<br>A5-2150</td>
-        <td>Cousebant D'Alkemade Alexandre <br>1840-04-26 01:45:00</td>
-    </tr>
-    <tr>
-        <td>A3-2337<br>A5-2152</td>
-        <td>Davignon Henri<br>1854-12-03 12:43:00</td>
-    </tr>
-    <tr>
-        <td>A3-2350<br>A5-2158</td>
-        <td>Delbeke Auguste<br>1853-08-12 08:47:00</td>
-    </tr>
-    <tr>
-        <td>A3-2777<br>A5-2164</td>
-        <td>Denis Henri<br>1877-09-10 17:43:00</td>
-    </tr>
-    <tr>
-        <td>A3-2367<br>A5-2166</td>
-        <td>Descamps Edouard<br>1847-08-27 14:12:00</td>
+        <td>Denis Hector 1842-10-29</td>
     </tr>
     <tr>
         <td>A3-2371<br>A5-2168</td>
-        <td>Destree Jules<br>1863-08-21 19:42:00</td>
+        <td>Destree Jules 1863-08-21</td>
     </tr>
     <tr>
-        <td>A3-2375<br>A5-2170</td>
-        <td>Devolder Joseph<br>1842-07-07 05:43:00</td>
-    </tr>
-    <tr>
-        <td>A3-2389<br>A5-2174</td>
-        <td>Droogmans Hubert<br>1858-09-06 22:38:00</td>
-    </tr>
-    <tr>
-        <td>A3-2418<br>A5-2182</td>
-        <td>Franck Louis<br>1868-11-28 05:12:00</td>
-    </tr>
-    <tr>
-        <td>A3-2435<br>A5-2187</td>
-        <td>Goblet Alviella Eugene <br>1846-08-10 07:43:00</td>
-    </tr>
-    <tr>
-        <td>A3-2440<br>A5-2191</td>
-        <td>Graux Charles<br>1837-01-04 15:43:00</td>
-    </tr>
-    <tr>
-        <td>A3-2824<br>A5-2196</td>
-        <td>Heenen Gaston<br>1880-02-20 17:38:00</td>
-    </tr>
-    <tr>
-        <td>A3-2463<br>A5-2199</td>
-        <td>Heuvel Jules<br>1854-11-16 08:45:00</td>
-    </tr>
-    <tr>
-        <td>A3-2842<br>A5-2216</td>
-        <td>Kestens P<br>1867-12-29 22:45:00</td>
-    </tr>
-    <tr>
-        <td>A3-2493<br>A5-2218</td>
-        <td>Lantsheere Th<br>1833-11-04 05:42:00</td>
-    </tr>
-    <tr>
-        <td>A2-3499<br>A3-2853<br>A5-2219</td>
-        <td>Liagre Jean<br>1815-02-18 22:42:00</td>
-    </tr>
-    <tr>
-        <td>A3-2515<br>A5-2220</td>
-        <td>Liebaert Julien<br>1848-06-22 07:47:00</td>
-    </tr>
-    <tr>
-        <td>A3-2534<br>A5-2224</td>
-        <td>Magnette Charles<br>1863-02-03 11:39:00</td>
-    </tr>
-    <tr>
-        <td>A3-2537<br>A5-2226</td>
-        <td>Malou Jules<br>1810-10-19 02:17:00</td>
-    </tr>
-    <tr>
-        <td>A3-2542<br>A5-2228</td>
-        <td>Masson Fulgence<br>1854-02-16 07:42:00</td>
-    </tr>
-    <tr>
-        <td>A3-2565<br>A5-2235</td>
-        <td>Neujean Xavier<br>1840-01-23 04:08:00</td>
+        <td>A2-2346<br>A3-2410</td>
+        <td>Firket Charles 1852-09-02</td>
     </tr>
     <tr>
         <td>A3-2566<br>A5-2237</td>
-        <td>Neuss Hubert<br>1839-12-10 05:38:00</td>
+        <td>Neuss Hubert 1839-12-10</td>
     </tr>
     <tr>
-        <td>A2-2422<br>A5-2238</td>
-        <td>Noef Pierre<br>1873-07-26 17:47:00</td>
+        <td>A3-2653<br>A5-2275</td>
+        <td>Tibbaut Emile 1862-06-12</td>
     </tr>
     <tr>
-        <td>A3-2588<br>A5-2247</td>
-        <td>Pirmez Eudore<br>1830-09-14 15:12:00</td>
+        <td>A2-3551<br>A3-2941</td>
+        <td>Tilly Joseph 1837-08-16</td>
     </tr>
     <tr>
-        <td>A3-2909<br>A5-2252</td>
-        <td>Renard Bruno<br>1804-04-16 06:42:00</td>
+        <td>A5-132<br>A6-144</td>
+        <td>Brasseur Pierre 1905-12-22</td>
     </tr>
     <tr>
-        <td>A3-2601<br>A5-2253</td>
-        <td>Renkin Jules<br>1862-12-03 18:13:00</td>
+        <td>A4-443<br>A5-359</td>
+        <td>Geffroy Edmond 1804-07-30</td>
     </tr>
     <tr>
-        <td>A3-2609<br>A5-2257</td>
-        <td>Rolin-Jaequemyns Gustave<br>1835-01-31 11:00:00</td>
+        <td>A4-1957<br>A5-422</td>
+        <td>Herve Florimond 1825-06-30</td>
     </tr>
     <tr>
-        <td>A3-2616<br>A5-2258</td>
-        <td>Rubbens Edmond<br>1894-01-15 23:00:00</td>
-    </tr>
-    <tr>
-        <td>A3-2629<br>A5-2260</td>
-        <td>Schollaert François<br>1851-08-19 05:43:00</td>
-    </tr>
-    <tr>
-        <td>A3-2636<br>A5-2264</td>
-        <td>Smet Nayer Paul <br>1843-05-13 17:15:00</td>
-    </tr>
-    <tr>
-        <td>A3-2650<br>A5-2273</td>
-        <td>Thibaut Xavier<br>1817-10-27 13:42:00</td>
-    </tr>
-    <tr>
-        <td>A3-2666<br>A5-2283</td>
-        <td>Vandenpeereboom Jules<br>1843-03-18 12:32:00</td>
-    </tr>
-    <tr>
-        <td>A3-2706<br>A5-2293</td>
-        <td>Woeste Charles<br>1837-02-26 00:43:00</td>
-    </tr>
-    <tr>
-        <td>A3-2965<br>A5-2310</td>
-        <td>Bos Hendrik<br>1907-04-26 04:41:28</td>
-    </tr>
-    <tr>
-        <td>A3-2974<br>A5-2315</td>
-        <td>Casembroot Eduard<br>1812-06-20 21:15:00</td>
-    </tr>
-    <tr>
-        <td>A3-2999<br>A5-2346</td>
-        <td>Jonge Bonifacius<br>1875-01-22 01:12:08</td>
-    </tr>
-    <tr>
-        <td>A5-4<br>A6-5</td>
-        <td>Adam Alfred<br>1908-04-04 15:50:40</td>
-    </tr>
-    <tr>
-        <td>A4-62<br>A6-62</td>
-        <td>Bataille Henry<br>1872-04-04 04:42:36</td>
-    </tr>
-    <tr>
-        <td>A5-84<br>A6-85</td>
-        <td>Berat Frédéric<br>1801-03-13 21:55:40</td>
-    </tr>
-    <tr>
-        <td>A5-115<br>A6-125</td>
-        <td>Botrel Theodore<br>1868-09-14 03:11:00</td>
-    </tr>
-    <tr>
-        <td>A5-131<br>A6-143</td>
-        <td>Brassens Georges<br>1921-10-22 17:00:00</td>
-    </tr>
-    <tr>
-        <td>A5-144<br>A6-156</td>
-        <td>Bruant Aristide<br>1851-05-06 00:52:24</td>
-    </tr>
-    <tr>
-        <td>A4-237<br>A6-208</td>
-        <td>Cocteau Jean<br>1889-07-05 00:51:28</td>
-    </tr>
-    <tr>
-        <td>A5-261<br>A6-262</td>
-        <td>Dorin René<br>1891-11-13 22:20:40</td>
-    </tr>
-    <tr>
-        <td>A2-2667<br>A6-279</td>
-        <td>Duhem Pierre<br>1861-06-10 06:50:40</td>
-    </tr>
-    <tr>
-        <td>A3-524<br>A6-306</td>
-        <td>Farrere Claude<br>1876-04-27 16:40:40</td>
-    </tr>
-    <tr>
-        <td>A4-425<br>A6-341</td>
-        <td>Fromentin Eugène<br>1820-10-24 11:04:40</td>
-    </tr>
-    <tr>
-        <td>A5-360<br>A6-359</td>
-        <td>Gelin Daniel<br>1921-05-19 12:00:00</td>
-    </tr>
-    <tr>
-        <td>A5-378<br>A6-373</td>
-        <td>Glatigny Joseph<br>1839-05-21 13:55:40</td>
-    </tr>
-    <tr>
-        <td>A4-536<br>A6-423</td>
-        <td>Hugo Victor<br>1802-02-26 22:05:52</td>
-    </tr>
-    <tr>
-        <td>A4-543<br>A6-430</td>
-        <td>Jacob Max<br>1876-07-12 13:16:24</td>
-    </tr>
-    <tr>
-        <td>A4-570<br>A6-443</td>
-        <td>Klingsor Tristan<br>1874-08-08 16:51:40</td>
-    </tr>
-    <tr>
-        <td>A3-736<br>A6-517</td>
-        <td>Loti Pierre<br>1850-01-14 23:34:40</td>
-    </tr>
-    <tr>
-        <td>A6-578<br>E3-1090</td>
-        <td>Mistler Jean<br>1897-09-01 10:50:40</td>
-    </tr>
-    <tr>
-        <td>A5-580<br>A6-594</td>
-        <td>Nadaud Charles<br>1820-02-20 10:47:40</td>
-    </tr>
-    <tr>
-        <td>A2-2853<br>A6-642</td>
-        <td>Poincare Henri<br>1854-04-29 00:35:12</td>
-    </tr>
-    <tr>
-        <td>A5-685<br>A6-699</td>
-        <td>Rollinat Maurice<br>1846-12-29 08:53:16</td>
-    </tr>
-    <tr>
-        <td>A5-694<br>A6-709</td>
-        <td>Roussin André<br>1911-01-22 08:50:40</td>
-    </tr>
-    <tr>
-        <td>A1-224<br>A6-712</td>
-        <td>Roy Jules<br>1907-10-22 17:50:40</td>
-    </tr>
-    <tr>
-        <td>A2-2898<br>A6-763</td>
-        <td>Teilhard De Chardin Pierre <br>1881-05-01 06:47:40</td>
-    </tr>
-    <tr>
-        <td>A5-740<br>A6-778</td>
-        <td>Trenet Charles<br>1913-05-18 16:00:00</td>
-    </tr>
-    <tr>
-        <td>A4-1094<br>A6-784</td>
-        <td>Valery Paul<br>1871-10-30 18:44:28</td>
-    </tr>
-    <tr>
-        <td>A5-761<br>A6-798</td>
-        <td>Vian Boris<br>1920-03-10 05:30:00</td>
-    </tr>
-    <tr>
-        <td>A5-1739<br>A6-919</td>
-        <td>Morandi Rodolfo<br>1902-07-30 09:15</td>
-    </tr>
-    <tr>
-        <td>A2-2310<br>A6-1038</td>
-        <td>Candeze Ernest<br>1827-02-22 05:38:00</td>
-    </tr>
-    <tr>
-        <td>A5-1310<br>A6-1044</td>
-        <td>Cauwenberghe César<br>1870-05-14 14:47:00</td>
-    </tr>
-    <tr>
-        <td>A3-2298<br>A6-1045</td>
-        <td>Chaudoir Georges<br>1873-10-05 04:38:00</td>
+        <td>A4-753<br>A5-541</td>
+        <td>Melingue Etienne 1807-04-16</td>
     </tr>
     <tr>
         <td>A5-1312<br>A6-1069</td>
-        <td>Delacre Jules<br>1883-02-21 06:43:00</td>
+        <td>Delacre Jules 1883-02-21</td>
     </tr>
     <tr>
-        <td>A5-1366<br>A6-1279</td>
-        <td>Kan Willem<br>1911-01-15 00:40:28</td>
+        <td>A1-153<br>A5-1432</td>
+        <td>Corniglion-Molinier Edward 1898-01-23</td>
     </tr>
     <tr>
-        <td>A5-2398<br>A6-1341</td>
-        <td>Vissering Simon<br>1818-06-23 02:41:28</td>
+        <td>A1-258<br>A5-1567</td>
+        <td>Badoglio Pietro 1871-09-28</td>
     </tr>
     <tr>
-        <td>A5-835<br>D6-91</td>
-        <td>Carnera Primo<br>1906-10-25 13:00:00</td>
+        <td>A1-260<br>A5-1568</td>
+        <td>Balbo Italo 1896-06-05</td>
     </tr>
     <tr>
-        <td>A5-1418<br>E1-147</td>
-        <td>Bidault Georges<br>1899-10-05 14:50:40</td>
+        <td>A3-1087<br>A5-1572</td>
+        <td>Bencivenga Roberto 1872-10-02</td>
     </tr>
     <tr>
-        <td>A4-1597<br>E1-189</td>
-        <td>Bondeville Emmanuel<br>1898-10-29 07:50:40</td>
+        <td>A1-282<br>A5-1588</td>
+        <td>Bonzani Alberto 1872-02-01</td>
     </tr>
     <tr>
-        <td>A4-1615<br>E1-223</td>
-        <td>Boulez Pierre<br>1925-03-26 17:00:00</td>
+        <td>A3-1168<br>A5-1617</td>
+        <td>Cavallero Ugo 1880-09-20</td>
     </tr>
     <tr>
-        <td>A3-444<br>E1-493</td>
-        <td>Cousteau Jacques<br>1910-06-11 13:05:40</td>
+        <td>A3-1191<br>A5-1624</td>
+        <td>Clerici Ambrogio 1868-11-18</td>
     </tr>
     <tr>
-        <td>A1-33<br>A5-283<br>E1-660</td>
-        <td>Duhour Clément<br>1911-12-11 16:00:00</td>
+        <td>A2-3002<br>A5-1632</td>
+        <td>Corbino Mario 1876-04-30</td>
     </tr>
     <tr>
-        <td>A1-170<br>E1-782</td>
-        <td>Frantz Joseph<br>1890-08-07 18:40:40</td>
+        <td>A3-1224<br>A5-1641</td>
+        <td>De Bono Emilio 1866-03-19</td>
     </tr>
     <tr>
-        <td>A2-1022<br>E1-908</td>
-        <td>Grasset Jacques<br>1905-03-15 10:50:40</td>
+        <td>A3-1288<br>A5-1673</td>
+        <td>Ferretti Lando 1895-05-02</td>
     </tr>
     <tr>
-        <td>A5-1475<br>E1-1098</td>
-        <td>July Pierre<br>1906-09-09 11:50:40</td>
+        <td>A3-1306<br>A5-1680</td>
+        <td>Gabba Melchiade 1874-08-20</td>
     </tr>
     <tr>
-        <td>A1-2062<br>E1-1126</td>
-        <td>Lacoste René<br>1904-07-02 04:50:40</td>
+        <td>A3-1323<br>A5-1684</td>
+        <td>Gazzera Pietro 1879-12-11</td>
     </tr>
     <tr>
-        <td>A2-1097<br>E1-1252</td>
-        <td>Leger Lucien<br>1912-08-29 01:00:00</td>
+        <td>A3-1342<br>A5-1688</td>
+        <td>Grandi Dino 1895-06-04</td>
     </tr>
     <tr>
-        <td>A4-684<br>E1-1322</td>
-        <td>Lorjou Bernard<br>1908-09-09 04:50:40</td>
+        <td>A2-1491<br>A5-1723</td>
+        <td>Martino Gaetano 1900-11-25</td>
     </tr>
     <tr>
-        <td>A1-1955<br>E1-1459</td>
-        <td>Mias Lucien<br>1930-09-28 13:00:00</td>
+        <td>A2-3089<br>A5-1753</td>
+        <td>Nobile Umberto 1885-01-21</td>
     </tr>
     <tr>
-        <td>A5-1513<br>E1-1534</td>
-        <td>Moynet André<br>1921-07-19 09:15:00</td>
+        <td>A3-1505<br>A5-1767</td>
+        <td>Piacentini Pietro 1898-11-26</td>
     </tr>
     <tr>
-        <td>A1-1970<br>E1-1682</td>
-        <td>Pomathios Michel<br>1924-03-18 11:30:00</td>
+        <td>A1-459<br>A5-1773</td>
+        <td>Pricolo Francesco 1891-01-30</td>
     </tr>
     <tr>
-        <td>A3-902<br>E1-1744</td>
-        <td>Reilinger Alfred<br>1900-11-15 01:00:00</td>
+        <td>A3-1561<br>A5-1781</td>
+        <td>Ricci Renato 1896-06-01</td>
     </tr>
     <tr>
-        <td>A5-667<br>E1-1772</td>
-        <td>Richard Jean<br>1921-04-18 22:00:00</td>
+        <td>A3-1630<br>A5-1808</td>
+        <td>Sechi Giovanni 1871-01-18</td>
     </tr>
     <tr>
-        <td>A6-708<br>E1-1847</td>
-        <td>Rousset David<br>1912-01-18 14:00:00</td>
+        <td>A3-1881<br>A5-1906</td>
+        <td>Göring Hermann 1893-01-12</td>
     </tr>
     <tr>
-        <td>A6-722<br>E1-1875</td>
-        <td>Salacrou Armand<br>1899-08-09 10:20:40</td>
+        <td>A3-2120<br>A5-2046</td>
+        <td>Schleich Eduard 1888-08-09</td>
     </tr>
     <tr>
-        <td>A6-730<br>E1-1894</td>
-        <td>Sauvy Alfred<br>1898-10-31 06:20:40</td>
+        <td>A3-2240<br>A5-2126</td>
+        <td>Banning Emile 1836-10-12</td>
     </tr>
     <tr>
-        <td>A5-1538<br>E1-1908</td>
-        <td>Secretain Roger<br>1902-08-25 02:50:40</td>
+        <td>A3-2241<br>A5-2127</td>
+        <td>Bara Jules 1835-08-23</td>
     </tr>
     <tr>
-        <td>A1-72<br>E1-1936</td>
-        <td>Skawinski Pierre<br>1912-12-23 12:00:00</td>
+        <td>A3-2249<br>A5-2130</td>
+        <td>Bethune Léon 1864-07-07</td>
     </tr>
     <tr>
-        <td>A6-59<br>E3-65</td>
-        <td>Barres Maurice<br>1862-08-17 14:34:08</td>
+        <td>A3-2274<br>A5-2133</td>
+        <td>Brassine Jacques 1830-10-12</td>
     </tr>
     <tr>
-        <td>E1-97<br>E3-74</td>
-        <td>Bayrou Maurice<br>1905-03-02 08:00</td>
+        <td>A3-2286<br>A5-2139</td>
+        <td>Burlet Jules 1844-04-10</td>
     </tr>
     <tr>
-        <td>A3-208<br>E3-117</td>
-        <td>Besnard Armand<br>1833-10-11 14:51:28</td>
+        <td>A3-2291<br>A5-2143</td>
+        <td>Camus Camille 1883-05-09</td>
     </tr>
     <tr>
-        <td>A2-817<br>E3-141</td>
-        <td>Bodin Jean<br>1899-08-28 03:20:40</td>
+        <td>A3-2311<br>A5-2148</td>
+        <td>Cooreman Gérard 1852-03-25</td>
     </tr>
     <tr>
-        <td>A2-2587<br>E3-164</td>
-        <td>Borel Emile<br>1871-01-07 03:49:44</td>
+        <td>A3-2755<br>A5-2150</td>
+        <td>Cousebant D'Alkemade Alexandre  1840-04-26</td>
     </tr>
     <tr>
-        <td>A3-350<br>E3-188</td>
-        <td>Boulanger Georges<br>1837-04-29 08:21:40</td>
+        <td>A3-2337<br>A5-2152</td>
+        <td>Davignon Henri 1854-12-03</td>
     </tr>
     <tr>
-        <td>A2-2601<br>E3-211</td>
-        <td>Breton Jules<br>1872-04-01 00:48:56</td>
+        <td>A3-2350<br>A5-2158</td>
+        <td>Delbeke Auguste 1853-08-12</td>
     </tr>
     <tr>
-        <td>E1-270<br>E3-231</td>
-        <td>Brun Jean<br>1849-04-24 12:00</td>
+        <td>A3-2777<br>A5-2164</td>
+        <td>Denis Henri 1877-09-10</td>
     </tr>
     <tr>
-        <td>E1-357<br>E3-291</td>
-        <td>Chaban-delmas Jacques<br>1915-03-07 23:40</td>
+        <td>A3-2367<br>A5-2166</td>
+        <td>Descamps Edouard 1847-08-27</td>
     </tr>
     <tr>
-        <td>A4-212<br>E3-309</td>
-        <td>Charbonnier Pierre<br>1897-08-24 12:50:40</td>
+        <td>A3-2375<br>A5-2170</td>
+        <td>Devolder Joseph 1842-07-07</td>
     </tr>
     <tr>
-        <td>D6-104<br>E3-362</td>
-        <td>Colas Alain<br>1943-09-16 05:30</td>
+        <td>A3-2389<br>A5-2174</td>
+        <td>Droogmans Hubert 1858-09-06</td>
     </tr>
     <tr>
-        <td>A6-232<br>E3-441</td>
-        <td>Daudet Léon<br>1867-11-16 22:50:40</td>
+        <td>A3-2418<br>A5-2182</td>
+        <td>Franck Louis 1868-11-28</td>
     </tr>
     <tr>
-        <td>A5-1440<br>E3-454</td>
-        <td>Defferre Gaston<br>1910-09-14 07:50:40</td>
+        <td>A3-2435<br>A5-2187</td>
+        <td>Goblet Alviella Eugene  1846-08-10</td>
     </tr>
     <tr>
-        <td>A6-248<br>E3-482</td>
-        <td>Deroulede Paul<br>1846-09-02 21:50:40</td>
+        <td>A3-2440<br>A5-2191</td>
+        <td>Graux Charles 1837-01-04</td>
     </tr>
     <tr>
-        <td>E1-607<br>E3-498</td>
-        <td>Devay Jean-François<br>1925-10-15 17:30</td>
+        <td>A3-2824<br>A5-2196</td>
+        <td>Heenen Gaston 1880-02-20</td>
     </tr>
     <tr>
-        <td>A6-272<br>E3-538</td>
-        <td>Drumont Edouard<br>1844-05-03 07:50:40</td>
+        <td>A3-2463<br>A5-2199</td>
+        <td>Heuvel Jules 1854-11-16</td>
     </tr>
     <tr>
-        <td>E1-804<br>E3-678</td>
-        <td>Galley Robert<br>1921-01-11 01:00</td>
+        <td>A3-2842<br>A5-2216</td>
+        <td>Kestens P 1867-12-29</td>
     </tr>
     <tr>
-        <td>A6-347<br>E3-685</td>
-        <td>Garaudy Roger<br>1913-07-17 19:00:00</td>
+        <td>A3-2493<br>A5-2218</td>
+        <td>Lantsheere Th 1833-11-04</td>
     </tr>
     <tr>
-        <td>A6-372<br>E3-716</td>
-        <td>Giraudoux Jean<br>1882-10-29 20:55:00</td>
+        <td>A2-3499<br>A3-2853<br>A5-2219</td>
+        <td>Liagre Jean 1815-02-18</td>
     </tr>
     <tr>
-        <td>A2-1028<br>E3-736</td>
-        <td>Grinda Edouard<br>1866-12-20 15:30:56</td>
+        <td>A3-2515<br>A5-2220</td>
+        <td>Liebaert Julien 1848-06-22</td>
     </tr>
     <tr>
-        <td>D6-207<br>E3-787</td>
-        <td>Herzog Maurice<br>1919-01-15 03:30</td>
+        <td>A3-2534<br>A5-2224</td>
+        <td>Magnette Charles 1863-02-03</td>
     </tr>
     <tr>
-        <td>E1-1031<br>E3-802</td>
-        <td>Husson Albert<br>1912-08-03 21:45</td>
+        <td>A3-2537<br>A5-2226</td>
+        <td>Malou Jules 1810-10-19</td>
     </tr>
     <tr>
-        <td>A1-182<br>E3-804</td>
-        <td>Hymans Max<br>1900-03-02 05:50:40</td>
+        <td>A3-2542<br>A5-2228</td>
+        <td>Masson Fulgence 1854-02-16</td>
     </tr>
     <tr>
-        <td>A4-1981<br>E3-812</td>
-        <td>Jacob Maxime<br>1906-01-13 10:50:40</td>
+        <td>A3-2565<br>A5-2235</td>
+        <td>Neujean Xavier 1840-01-23</td>
     </tr>
     <tr>
-        <td>E1-1059<br>E3-822</td>
-        <td>Jarrot André<br>1909-12-13 16:00</td>
+        <td>A2-2422<br>A5-2238</td>
+        <td>Noef Pierre 1873-07-26</td>
     </tr>
     <tr>
-        <td>A6-436<br>E3-824</td>
-        <td>Jaures Jean<br>1859-09-03 11:51:28</td>
+        <td>A3-2588<br>A5-2247</td>
+        <td>Pirmez Eudore 1830-09-14</td>
     </tr>
     <tr>
-        <td>E1-1329<br>E3-971</td>
-        <td>Louis Roger<br>1925-01-29 16:30</td>
+        <td>A3-2909<br>A5-2252</td>
+        <td>Renard Bruno 1804-04-16</td>
     </tr>
     <tr>
-        <td>A6-534<br>E1-1368<br>E3-988</td>
-        <td>Malraux André<br>1901-11-03 15:50:40</td>
+        <td>A3-2601<br>A5-2253</td>
+        <td>Renkin Jules 1862-12-03</td>
     </tr>
     <tr>
-        <td>A1-59<br>E3-999</td>
-        <td>Marcillac Raymond<br>1917-04-11 13:20:00</td>
+        <td>A3-2609<br>A5-2257</td>
+        <td>Rolin-Jaequemyns Gustave 1835-01-31</td>
     </tr>
     <tr>
-        <td>A6-562<br>E3-1038</td>
-        <td>Maurras Charles<br>1868-04-20 01:38:32</td>
+        <td>A3-2616<br>A5-2258</td>
+        <td>Rubbens Edmond 1894-01-15</td>
     </tr>
     <tr>
-        <td>A3-783<br>E3-1069</td>
-        <td>Messimy Adolphe<br>1869-01-31 18:40:40</td>
+        <td>A3-2629<br>A5-2260</td>
+        <td>Schollaert François 1851-08-19</td>
     </tr>
     <tr>
-        <td>A6-580<br>E1-1477<br>E3-1092</td>
-        <td>Moinot Pierre<br>1920-03-29 21:00:00</td>
+        <td>A3-2636<br>A5-2264</td>
+        <td>Smet Nayer Paul  1843-05-13</td>
     </tr>
     <tr>
-        <td>A2-2830<br>E3-1162</td>
-        <td>Painleve Paul<br>1863-12-05 04:50:40</td>
+        <td>A3-2650<br>A5-2273</td>
+        <td>Thibaut Xavier 1817-10-27</td>
     </tr>
     <tr>
-        <td>E1-1602<br>E3-1175</td>
-        <td>Paris Henri de<br>1908-07-05 08:30</td>
+        <td>A3-2666<br>A5-2283</td>
+        <td>Vandenpeereboom Jules 1843-03-18</td>
     </tr>
     <tr>
-        <td>A4-2176<br>E3-1182</td>
-        <td>Passani Emile<br>1905-02-07 17:50:40</td>
+        <td>A3-2667<br>A5-2284</td>
+        <td>Vandervelde Emile 1866-01-25</td>
     </tr>
     <tr>
-        <td>A2-1181<br>E3-1191</td>
-        <td>Pechin Charles<br>1871-06-21 17:39:20</td>
+        <td>A3-2706<br>A5-2293</td>
+        <td>Woeste Charles 1837-02-26</td>
     </tr>
     <tr>
-        <td>A2-2844<br>E3-1210</td>
-        <td>Perrin Jean<br>1870-09-30 19:17:40</td>
+        <td>A3-2965<br>A5-2310</td>
+        <td>Bos Hendrik 1907-04-26</td>
     </tr>
     <tr>
-        <td>A3-869<br>E3-1216</td>
-        <td>Peyron Alexandre<br>1823-06-21 03:52:00</td>
+        <td>A3-2974<br>A5-2315</td>
+        <td>Casembroot Eduard 1812-06-20</td>
     </tr>
     <tr>
-        <td>E1-1696<br>E3-1260</td>
-        <td>Poujade Pierre<br>1920-12-01 01:00</td>
+        <td>A3-2999<br>A5-2346</td>
+        <td>Jonge Bonifacius 1875-01-22</td>
     </tr>
     <tr>
-        <td>A6-659<br>E3-1273</td>
-        <td>Prouteau Gilbert<br>1917-06-14 21:00:00</td>
+        <td>A5-4<br>A6-5</td>
+        <td>Adam Alfred 1908-04-04</td>
     </tr>
     <tr>
-        <td>E1-1703<br>E3-1274</td>
-        <td>Prouvost Jean<br>1885-04-24 01:00</td>
+        <td>A4-62<br>A6-62</td>
+        <td>Bataille Henry 1872-04-04</td>
     </tr>
     <tr>
-        <td>E1-1709<br>E3-1280</td>
-        <td>Pujo Bertrand<br>1878-08-21 14:00</td>
+        <td>A5-84<br>A6-85</td>
+        <td>Berat Frédéric 1801-03-13</td>
     </tr>
     <tr>
-        <td>E1-1848<br>E3-1346</td>
-        <td>Roussin Albert<br>1821-08-02 22:00</td>
+        <td>A5-115<br>A6-125</td>
+        <td>Botrel Theodore 1868-09-14</td>
     </tr>
     <tr>
-        <td>E1-1989<br>E3-1452</td>
-        <td>Tesson Philippe<br>1928-03-01 22:00</td>
+        <td>A5-131<br>A6-143</td>
+        <td>Brassens Georges 1921-10-22</td>
     </tr>
     <tr>
-        <td>A6-813<br>E3-1540</td>
-        <td>Zola Emile<br>1840-04-02 22:50:40</td>
+        <td>A5-144<br>A6-156</td>
+        <td>Bruant Aristide 1851-05-06</td>
     </tr>
     <tr>
-        <td>A2-130<br>A6-172</td>
-        <td>Carrel Alexis<br>1873-06-28 23:00</td>
+        <td>A4-237<br>A6-208</td>
+        <td>Cocteau Jean 1889-07-05</td>
     </tr>
     <tr>
-        <td>A2-162<br>E3-351</td>
-        <td>Clemenceau Georges<br>1841-09-28 21:30</td>
+        <td>A5-261<br>A6-262</td>
+        <td>Dorin René 1891-11-13</td>
     </tr>
     <tr>
-        <td>A2-193<br>E1-550</td>
-        <td>Delaby Raymond<br>1891-09-20 17:00</td>
+        <td>A2-2667<br>A6-279</td>
+        <td>Duhem Pierre 1861-06-10</td>
     </tr>
     <tr>
-        <td>A2-198<br>A6-240</td>
-        <td>Delay Jean<br>1907-11-14 14:00</td>
+        <td>A3-524<br>A6-306</td>
+        <td>Farrere Claude 1876-04-27</td>
     </tr>
     <tr>
-        <td>A2-239<br>A6-278</td>
-        <td>Duhamel Georges<br>1884-06-30 11:00</td>
+        <td>A4-425<br>A6-341</td>
+        <td>Fromentin Eugène 1820-10-24</td>
     </tr>
     <tr>
-        <td>A2-241<br>A6-282</td>
-        <td>Dumas Georges<br>1866-03-06 23:00</td>
+        <td>A5-360<br>A6-359</td>
+        <td>Gelin Daniel 1921-05-19</td>
     </tr>
     <tr>
-        <td>A2-309<br>E3-721</td>
-        <td>Godart Justin<br>1871-11-26 16:00</td>
+        <td>A5-378<br>A6-373</td>
+        <td>Glatigny Joseph 1839-05-21</td>
     </tr>
     <tr>
-        <td>A2-503<br>E3-1070</td>
-        <td>Mesureur Gustave<br>1847-04-02 04:00</td>
+        <td>A4-536<br>A6-423</td>
+        <td>Hugo Victor 1802-02-26</td>
     </tr>
     <tr>
-        <td>A2-526<br>E3-1120</td>
-        <td>Mourier Louis<br>1873-10-08 11:00</td>
+        <td>A4-543<br>A6-430</td>
+        <td>Jacob Max 1876-07-12</td>
     </tr>
     <tr>
-        <td>A2-604<br>A6-663</td>
-        <td>Quatrefages de Bréau Jean Louis Armand<br>1810-02-10 06:00</td>
+        <td>A4-570<br>A6-443</td>
+        <td>Klingsor Tristan 1874-08-08</td>
     </tr>
     <tr>
-        <td>A2-687<br>E3-1435</td>
-        <td>Strauss Paul<br>1852-09-23 20:00</td>
+        <td>A3-736<br>A6-517</td>
+        <td>Loti Pierre 1850-01-14</td>
+    </tr>
+    <tr>
+        <td>A6-578<br>E3-1090</td>
+        <td>Mistler Jean 1897-09-01</td>
+    </tr>
+    <tr>
+        <td>A5-580<br>A6-594</td>
+        <td>Nadaud Charles 1820-02-20</td>
+    </tr>
+    <tr>
+        <td>A2-2853<br>A6-642</td>
+        <td>Poincare Henri 1854-04-29</td>
+    </tr>
+    <tr>
+        <td>A5-685<br>A6-699</td>
+        <td>Rollinat Maurice 1846-12-29</td>
+    </tr>
+    <tr>
+        <td>A5-694<br>A6-709</td>
+        <td>Roussin André 1911-01-22</td>
+    </tr>
+    <tr>
+        <td>A1-224<br>A6-712</td>
+        <td>Roy Jules 1907-10-22</td>
+    </tr>
+    <tr>
+        <td>A2-2898<br>A6-763</td>
+        <td>Teilhard De Chardin Pierre  1881-05-01</td>
+    </tr>
+    <tr>
+        <td>A5-740<br>A6-778</td>
+        <td>Trenet Charles 1913-05-18</td>
+    </tr>
+    <tr>
+        <td>A4-1094<br>A6-784</td>
+        <td>Valery Paul 1871-10-30</td>
+    </tr>
+    <tr>
+        <td>A5-761<br>A6-798</td>
+        <td>Vian Boris 1920-03-10</td>
     </tr>
     <tr>
         <td>A5-1636<br>A6-862</td>
-        <td>Croce Benedetto<br>1866-02-25 14:00</td>
+        <td>Croce Benedetto 1866-02-25</td>
     </tr>
     <tr>
         <td>A3-1239<br>A6-866</td>
-        <td>Delcroix Carlo<br>1896-08-22 01:00</td>
-    </tr>
-    <tr>
-        <td>A5-1685<br>A6-894</td>
-        <td>Giannini Guglielmo<br>1891-10-14 23:04</td>
-    </tr>
-    <tr>
-        <td>A4-1266<br>A6-972</td>
-        <td>Soffici Ardengo<br>1879-04-07 21:30</td>
+        <td>Delcroix Carlo 1896-08-22</td>
     </tr>
     <tr>
         <td>A5-1828<br>A6-982</td>
-        <td>Tieri Vincenzo<br>1895-11-28 22:05</td>
+        <td>Tieri Vincenzo 1895-11-28</td>
+    </tr>
+    <tr>
+        <td>A2-2310<br>A6-1038</td>
+        <td>Candeze Ernest 1827-02-22</td>
+    </tr>
+    <tr>
+        <td>A5-1310<br>A6-1044</td>
+        <td>Cauwenberghe César 1870-05-14</td>
+    </tr>
+    <tr>
+        <td>A3-2298<br>A6-1045</td>
+        <td>Chaudoir Georges 1873-10-05</td>
+    </tr>
+    <tr>
+        <td>A5-1311<br>A6-1058</td>
+        <td>Cortvrient Alfons 1850-06-24</td>
+    </tr>
+    <tr>
+        <td>A3-2567<br>A6-1162</td>
+        <td>Neve Paul 1851-12-19</td>
+    </tr>
+    <tr>
+        <td>A5-1316<br>A6-1195</td>
+        <td>Schepens Adolphe 1819-04-13</td>
+    </tr>
+    <tr>
+        <td>A5-1317<br>A6-1219</td>
+        <td>Vandevelde Antonius 1895-07-08</td>
+    </tr>
+    <tr>
+        <td>A5-1366<br>A6-1279</td>
+        <td>Kan Willem 1911-01-15</td>
+    </tr>
+    <tr>
+        <td>A5-2398<br>A6-1341</td>
+        <td>Vissering Simon 1818-06-23</td>
+    </tr>
+    <tr>
+        <td>A5-835<br>D6-91</td>
+        <td>Carnera Primo 1906-10-25</td>
+    </tr>
+    <tr>
+        <td>A5-1418<br>E1-147</td>
+        <td>Bidault Georges 1899-10-05</td>
+    </tr>
+    <tr>
+        <td>A4-1597<br>E1-189</td>
+        <td>Bondeville Emmanuel 1898-10-29</td>
+    </tr>
+    <tr>
+        <td>A4-1615<br>E1-223</td>
+        <td>Boulez Pierre 1925-03-26</td>
+    </tr>
+    <tr>
+        <td>A3-444<br>E1-493</td>
+        <td>Cousteau Jacques 1910-06-11</td>
+    </tr>
+    <tr>
+        <td>A1-33<br>A5-283<br>E1-660</td>
+        <td>Duhour Clément 1911-12-11</td>
+    </tr>
+    <tr>
+        <td>A1-170<br>E1-782</td>
+        <td>Frantz Joseph 1890-08-07</td>
+    </tr>
+    <tr>
+        <td>A2-1022<br>E1-908</td>
+        <td>Grasset Jacques 1905-03-15</td>
+    </tr>
+    <tr>
+        <td>A5-1475<br>E1-1098</td>
+        <td>July Pierre 1906-09-09</td>
+    </tr>
+    <tr>
+        <td>A1-2062<br>E1-1126</td>
+        <td>Lacoste René 1904-07-02</td>
+    </tr>
+    <tr>
+        <td>A2-1097<br>E1-1252</td>
+        <td>Leger Lucien 1912-08-29</td>
+    </tr>
+    <tr>
+        <td>A4-684<br>E1-1322</td>
+        <td>Lorjou Bernard 1908-09-09</td>
+    </tr>
+    <tr>
+        <td>A1-1955<br>E1-1459</td>
+        <td>Mias Lucien 1930-09-28</td>
+    </tr>
+    <tr>
+        <td>A5-1513<br>E1-1534</td>
+        <td>Moynet André 1921-07-19</td>
+    </tr>
+    <tr>
+        <td>A1-1970<br>E1-1682</td>
+        <td>Pomathios Michel 1924-03-18</td>
+    </tr>
+    <tr>
+        <td>A3-902<br>E1-1744</td>
+        <td>Reilinger Alfred 1900-11-15</td>
+    </tr>
+    <tr>
+        <td>A5-667<br>E1-1772</td>
+        <td>Richard Jean 1921-04-18</td>
+    </tr>
+    <tr>
+        <td>A6-708<br>E1-1847</td>
+        <td>Rousset David 1912-01-18</td>
+    </tr>
+    <tr>
+        <td>A6-722<br>E1-1875</td>
+        <td>Salacrou Armand 1899-08-09</td>
+    </tr>
+    <tr>
+        <td>A6-730<br>E1-1894</td>
+        <td>Sauvy Alfred 1898-10-31</td>
+    </tr>
+    <tr>
+        <td>A5-1538<br>E1-1908</td>
+        <td>Secretain Roger 1902-08-25</td>
+    </tr>
+    <tr>
+        <td>A1-72<br>E1-1936</td>
+        <td>Skawinski Pierre 1912-12-23</td>
+    </tr>
+    <tr>
+        <td>A6-59<br>E3-65</td>
+        <td>Barres Maurice 1862-08-17</td>
+    </tr>
+    <tr>
+        <td>E1-97<br>E3-74</td>
+        <td>Bayrou Maurice 1905-03-02</td>
+    </tr>
+    <tr>
+        <td>A3-208<br>E3-117</td>
+        <td>Besnard Armand 1833-10-11</td>
+    </tr>
+    <tr>
+        <td>A2-817<br>E3-141</td>
+        <td>Bodin Jean 1899-08-28</td>
+    </tr>
+    <tr>
+        <td>A2-2587<br>E3-164</td>
+        <td>Borel Emile 1871-01-07</td>
+    </tr>
+    <tr>
+        <td>A3-350<br>E3-188</td>
+        <td>Boulanger Georges 1837-04-29</td>
+    </tr>
+    <tr>
+        <td>A2-2601<br>E3-211</td>
+        <td>Breton Jules 1872-04-01</td>
+    </tr>
+    <tr>
+        <td>E1-270<br>E3-231</td>
+        <td>Brun Jean 1849-04-24</td>
+    </tr>
+    <tr>
+        <td>E1-357<br>E3-291</td>
+        <td>Chaban-delmas Jacques 1915-03-07</td>
+    </tr>
+    <tr>
+        <td>A4-212<br>E3-309</td>
+        <td>Charbonnier Pierre 1897-08-24</td>
+    </tr>
+    <tr>
+        <td>D6-104<br>E3-362</td>
+        <td>Colas Alain 1943-09-16</td>
+    </tr>
+    <tr>
+        <td>A6-232<br>E3-441</td>
+        <td>Daudet Léon 1867-11-16</td>
+    </tr>
+    <tr>
+        <td>A5-1440<br>E3-454</td>
+        <td>Defferre Gaston 1910-09-14</td>
+    </tr>
+    <tr>
+        <td>A6-248<br>E3-482</td>
+        <td>Deroulede Paul 1846-09-02</td>
+    </tr>
+    <tr>
+        <td>E1-607<br>E3-498</td>
+        <td>Devay Jean-François 1925-10-15</td>
+    </tr>
+    <tr>
+        <td>A6-272<br>E3-538</td>
+        <td>Drumont Edouard 1844-05-03</td>
+    </tr>
+    <tr>
+        <td>E1-804<br>E3-678</td>
+        <td>Galley Robert 1921-01-11</td>
+    </tr>
+    <tr>
+        <td>A6-347<br>E3-685</td>
+        <td>Garaudy Roger 1913-07-17</td>
+    </tr>
+    <tr>
+        <td>A6-372<br>E3-716</td>
+        <td>Giraudoux Jean 1882-10-29</td>
+    </tr>
+    <tr>
+        <td>A2-1028<br>E3-736</td>
+        <td>Grinda Edouard 1866-12-20</td>
+    </tr>
+    <tr>
+        <td>D6-207<br>E3-787</td>
+        <td>Herzog Maurice 1919-01-15</td>
+    </tr>
+    <tr>
+        <td>E1-1031<br>E3-802</td>
+        <td>Husson Albert 1912-08-03</td>
+    </tr>
+    <tr>
+        <td>A1-182<br>E3-804</td>
+        <td>Hymans Max 1900-03-02</td>
+    </tr>
+    <tr>
+        <td>A4-1981<br>E3-812</td>
+        <td>Jacob Maxime 1906-01-13</td>
+    </tr>
+    <tr>
+        <td>E1-1059<br>E3-822</td>
+        <td>Jarrot André 1909-12-13</td>
+    </tr>
+    <tr>
+        <td>A6-436<br>E3-824</td>
+        <td>Jaures Jean 1859-09-03</td>
+    </tr>
+    <tr>
+        <td>E1-1329<br>E3-971</td>
+        <td>Louis Roger 1925-01-29</td>
+    </tr>
+    <tr>
+        <td>A6-534<br>E1-1368<br>E3-988</td>
+        <td>Malraux André 1901-11-03</td>
+    </tr>
+    <tr>
+        <td>A1-59<br>E3-999</td>
+        <td>Marcillac Raymond 1917-04-11</td>
+    </tr>
+    <tr>
+        <td>A6-562<br>E3-1038</td>
+        <td>Maurras Charles 1868-04-20</td>
+    </tr>
+    <tr>
+        <td>A3-783<br>E3-1069</td>
+        <td>Messimy Adolphe 1869-01-31</td>
+    </tr>
+    <tr>
+        <td>A6-580<br>E1-1477<br>E3-1092</td>
+        <td>Moinot Pierre 1920-03-29</td>
+    </tr>
+    <tr>
+        <td>A2-2830<br>E3-1162</td>
+        <td>Painleve Paul 1863-12-05</td>
+    </tr>
+    <tr>
+        <td>E1-1602<br>E3-1175</td>
+        <td>Paris Henri de 1908-07-05</td>
+    </tr>
+    <tr>
+        <td>A4-2176<br>E3-1182</td>
+        <td>Passani Emile 1905-02-07</td>
+    </tr>
+    <tr>
+        <td>A2-1181<br>E3-1191</td>
+        <td>Pechin Charles 1871-06-21</td>
+    </tr>
+    <tr>
+        <td>A2-2844<br>E3-1210</td>
+        <td>Perrin Jean 1870-09-30</td>
+    </tr>
+    <tr>
+        <td>A3-869<br>E3-1216</td>
+        <td>Peyron Alexandre 1823-06-21</td>
+    </tr>
+    <tr>
+        <td>A2-2849<br>E3-1225</td>
+        <td>Picard Alfred 1844-12-21</td>
+    </tr>
+    <tr>
+        <td>E1-1696<br>E3-1260</td>
+        <td>Poujade Pierre 1920-12-01</td>
+    </tr>
+    <tr>
+        <td>A6-659<br>E3-1273</td>
+        <td>Prouteau Gilbert 1917-06-14</td>
+    </tr>
+    <tr>
+        <td>E1-1703<br>E3-1274</td>
+        <td>Prouvost Jean 1885-04-24</td>
+    </tr>
+    <tr>
+        <td>E1-1709<br>E3-1280</td>
+        <td>Pujo Bertrand 1878-08-21</td>
+    </tr>
+    <tr>
+        <td>E1-1848<br>E3-1346</td>
+        <td>Roussin Albert 1821-08-02</td>
+    </tr>
+    <tr>
+        <td>E1-1989<br>E3-1452</td>
+        <td>Tesson Philippe 1928-03-01</td>
+    </tr>
+    <tr>
+        <td>A6-813<br>E3-1540</td>
+        <td>Zola Emile 1840-04-02</td>
+    </tr>
+    <tr>
+        <td>A2-130<br>A6-172</td>
+        <td>Carrel Alexis 1873-06-28</td>
+    </tr>
+    <tr>
+        <td>A2-162<br>E3-351</td>
+        <td>Clemenceau Georges 1841-09-28</td>
+    </tr>
+    <tr>
+        <td>A2-193<br>E1-550</td>
+        <td>Delaby Raymond 1891-09-20</td>
+    </tr>
+    <tr>
+        <td>A2-198<br>A6-240</td>
+        <td>Delay Jean 1907-11-14</td>
+    </tr>
+    <tr>
+        <td>A2-239<br>A6-278</td>
+        <td>Duhamel Georges 1884-06-30</td>
+    </tr>
+    <tr>
+        <td>A2-309<br>E3-721</td>
+        <td>Godart Justin 1871-11-26</td>
+    </tr>
+    <tr>
+        <td>A2-503<br>E3-1070</td>
+        <td>Mesureur Gustave 1847-04-02</td>
+    </tr>
+    <tr>
+        <td>A2-526<br>E3-1120</td>
+        <td>Mourier Louis 1873-10-08</td>
+    </tr>
+    <tr>
+        <td>A2-604<br>A6-663</td>
+        <td>Quatrefages de Bréau Jean Louis Armand 1810-02-10</td>
+    </tr>
+    <tr>
+        <td>A2-687<br>E3-1435</td>
+        <td>Strauss Paul 1852-09-23</td>
+    </tr>
+    <tr>
+        <td>A5-1685<br>A6-894</td>
+        <td>Giannini Guglielmo 1891-10-14</td>
+    </tr>
+    <tr>
+        <td>A5-1739<br>A6-919</td>
+        <td>Morandi Rodolfo 1902-07-30</td>
+    </tr>
+    <tr>
+        <td>A4-1266<br>A6-972</td>
+        <td>Soffici Ardengo 1879-04-07</td>
     </tr>
     <tr>
         <td>A5-1832<br>A6-988</td>
-        <td>Treves Paolo<br>1908-07-27 20:40</td>
+        <td>Treves Paolo 1908-07-27</td>
     </tr>
 </table>
 

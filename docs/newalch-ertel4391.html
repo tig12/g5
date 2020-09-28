@@ -104,10 +104,6 @@ This page deals with the file <a href="https://newalchemypress.com/gauquelin/gau
     </ul>
 </nav>
 
-
-
-
-
 <!-- ********************************************************************************* -->
 <h2><a name="ertel-4391-generalities">Ertel 4391 generalities</a></h2>
 
@@ -157,6 +153,12 @@ One very strange feature of this file : many records don't contain birth time. S
     <!-- 
     <li>The file contains 922 records from CFEPP (instead of 1 066).</li>
     -->
+    <li>
+        American football players and european football (soccer) players have the same code <code>FOOT</code>.
+        <!-- 
+        <br>Fixed in step <code>tmp2db</code>
+        -->
+    </li>
 </ul>
 
 <!--
@@ -535,7 +537,8 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <td>3 - Italian football</td>
         <td>
             Unpublished by Gauquelin (not famous enough), copied manually by Ertel.
-            <br>In file Ertel 4391, all records marked GMINV are marked sport = FOOT and country = IT.
+            <br>In file Ertel 4391, all records marked GMINI are marked sport = FOOT and country = IT.
+            <br>Possible meaning : Gauquelin MINor GItalian
         </td>
     </tr>
     
@@ -752,8 +755,30 @@ Incoherent association sport / IG, line Windal Claude : HOCK I
 </pre>
 
 Sport codes are mostly composed by 4 letters.
-<br>This list shows the IG column, and the number of records associated with each sport :
+<br>This list shows IG and SPORT columns, and the number of records associated with each sport :
 <div class="flex-wrap">
+<pre>
+I ICES : 16
+I JUDO : 5
+I MOTO : 4
+G PELOT : 18
+I RODE : 1
+I ROLL : 3
+I ROWI : 22
+G RUGB : 413
+I SHOO : 13
+I SKII : 86
+I SWIM : 62
+I TENN : 89
+I TRA : 1
+I TRAC : 407
+I TRAV : 1
+G VOLL : 4
+I WALK : 6
+I WEIG : 25
+I WRES : 19
+I YACH : 11
+</pre>
 <pre>
 I AIRP : 396
 I ALPI : 9
@@ -777,32 +802,13 @@ G HOCK : 21
 I HORS : 22
 </pre>
 
-<pre>
-I ICES : 16
-I JUDO : 5
-I MOTO : 4
-G PELOT : 18
-I RODE : 1
-I ROLL : 3
-I ROWI : 22
-G RUGB : 413
-I SHOO : 13
-I SKII : 86
-I SWIM : 62
-I TENN : 89
-I TRA : 1
-I TRAC : 407
-I TRAV : 1
-G VOLL : 4
-I WALK : 6
-I WEIG : 25
-I WRES : 19
-I YACH : 11
-</pre>
 </div><!-- end class="flex-wrap" -->
 
-Only one is composed by 3 letters (<code>TRA</code>), and this looks like a mistake. It corresponds to Charles Young (<a href="https://en.wikipedia.org/wiki/Charle_Young">wikipedia page</a>), and his sport is american football.
+Only one is composed by 3 letters (<code>TRA</code>), and this looks like a mistake. It corresponds to NR 4348 Charles Young (<a href="https://en.wikipedia.org/wiki/Charle_Young">wikipedia page</a>), and his sport is american football.
+<br>This code is changed to <code>FOOT</code> in step <code>tweak2csv</code>
 <br>
+Errors on <code>INDGRUP</code> and <code>SPORT</code> were fixed in step <code>tweak2tmp</code>, so they now only show before execution of this step.
+
 
 <!-- ********************************************************************************* -->
 <h2><a name="mars-sectors">Mars sectors</a></h2>

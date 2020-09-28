@@ -106,7 +106,15 @@ This step copies and reformat the informations of <code>902gdD6.html</code> to a
 <!-- ********************************************************************************* -->
 <h2><a name="addgeo">addGeo</a></h2>
 
-The second step computes country code and might be bettered to also compute place name.
+<div class="warning block">
+    Current code does not use anymore Geonames web service.
+    <br>Result of previous calls to geonames web service was copied to
+    <br><code>data/build/geonames/D6.csv</code>
+    <br><code>addGeo</code> contains temporary code using this file to restore country code.
+    <br>Documentation of this paragraph is obsolete.
+</div>
+
+This step computes country code and might be bettered to also compute place name.
 <br>The principle is to call geonames.org web service to perform reverse geocoding (compute place from longitude and latitude).
 <br>In practice, a new directory was added in config : <code>5-geonames</code>, located by default in <code>data/5-tmp/geonames</code>.
 <br>For each row of D6, <code>addGeo</code> :
@@ -222,13 +230,6 @@ From these examples, it seems that
 </ul>
 
 But step <code>addGeo</code> has the interest to restore the country, giving the ability to compute the timezone offset.
-
-<div class="warning block">
-    Current code does not use anymore Geonames web service.
-    <br>Result of previous calls to geonames web service was copied to
-    <br><code>data/build/geonames/D6.csv</code>
-    <br><code>addGeo</code>contains temporary code using this file to restore country code.
-</div>
 
 
 <!-- ********************************************************************************* -->

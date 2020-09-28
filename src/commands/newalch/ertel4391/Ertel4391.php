@@ -10,6 +10,7 @@ namespace g5\commands\newalch\ertel4391;
 use g5\Config;
 use g5\model\SourceI;
 use g5\model\Source;
+use g5\model\Group;
 use tiglib\arrays\csvAssociative;
 use g5\commands\newalch\Newalch;
 
@@ -21,6 +22,52 @@ class Ertel4391 implements SourceI {
     **/
     const RAW_SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch' . DS . '3a_sports.yml';
     
+    /** Slug of the group in db **/
+    const GROUP_SLUG = 'ertel4384athletes';
+    
+    const SPORT_ERTEL_G5 = [
+        'AIRP' => 'AVI',
+        'ALPI' => '',
+        'AUTO' => '',
+        'AVIR' => '',
+        'BADM' => '',
+        'BASE' => '',
+        'BASK' => '',
+        'BILL' => '',
+        'BOBS' => '',
+        'BOWL' => '',
+        'BOXI' => '',
+        'CANO' => '',
+        'CYCL' => '',
+        'FENC' => '',
+        'FOOT' => '',
+        'GOLF' => '',
+        'GYMN' => '',
+        'HAND' => '',
+        'HOCK' => '',
+        'HORS' => '',
+        'ICES' => '',
+        'JUDO' => '',
+        'MOTO' => '',
+        'PELO' => '',
+        'RODE' => '',
+        'ROLL' => '',
+        'ROWI' => '',
+        'RUGB' => '',
+        'SHOO' => '',
+        'SKII' => '',
+        'SWIM' => '',
+        'TENN' => '',
+        'TRAC' => 'ATH',
+        'TRAV' => '',
+        'VOLL' => '',
+        'WALK' => '',
+        'WEIG' => '',
+        'WRES' => '',
+        'YACH' => '',
+    ];
+    
+    
     // *********************** Source management ***********************
     
     /**
@@ -29,6 +76,30 @@ class Ertel4391 implements SourceI {
     public static function getSource(): Source {
         return Source::getSource(Config::$data['dirs']['build'] . DS . self::RAW_SOURCE_DEFINITION);
     }
+
+    // *********************** Group management ***********************
+    
+    /** Returns a Group object for Ertel4391. **/
+    public static function getGroup(): Group {
+        $g = new Group();
+        $g->data['slug'] = self::GROUP_SLUG;
+        $g->data['name'] = "Ertel 4384 athletes";
+        $g->data['description'] = "4384 athletes compiled by Suitbert Ertel\n(Ertel says 4391)";
+        $g->data['id'] = $g->insert();
+        return $g;
+    }
+
+    /** Returns a Group object for "para lowers". **/
+/* 
+    public static function getGroup(): Group {
+        $g = new Group();
+        $g->data['slug'] = 'ParaLowers';
+        $g->data['name'] = "Ertel 4384 athletes";
+        $g->data['description'] = "4384 athletes compiled by Suitbert Ertel\n(Ertel says 4391)";
+        $g->data['id'] = $g->insert();
+        return $g;
+    }
+*/
 
     // *********************** Raw file manipulation ***********************
     
@@ -44,11 +115,6 @@ class Ertel4391 implements SourceI {
     /** Path to the temporary csv file used to work on this group. **/
     public static function tmpFilename(){
         return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', '4391SPO.csv']);
-    }
-    
-    /** Path to the temporary csv file keeping an exact copy of the raw file. **/
-    public static function tmpRawFilename(){
-        return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', '4391SPO-raw.csv']);
     }
     
     /**
@@ -69,6 +135,19 @@ class Ertel4391 implements SourceI {
             $res[$row['NR']] = $row;
         }
         return $res;
+    }
+    
+    // *********************** Tmp raw files manipulation ***********************
+    
+    /** Path to the temporary csv file keeping an exact copy of the raw file. **/
+    public static function tmpRawFilename(){
+        return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', '4391SPO-raw.csv']);
+    }
+    
+    
+    /** Loads the "tmp raw file" in a regular array **/
+    public static function loadTmpRawFile(){
+        return csvAssociative::compute(self::tmpRawFilename());
     }
     
 }// end class

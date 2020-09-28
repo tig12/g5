@@ -68,11 +68,11 @@ class look implements Command {
             $res[$sport]['n'] ++;
             // coherence check
             if($res[$sport]['IG'] != $row['IG']){
-                echo "Incoherent association sport / IG, line " . $row['FNAME'] . ' ' . $row['GNAME']
+                echo "Incoherent association sport / IG, line " . $row['NR'] . ' ' . $row['FNAME'] . ' ' . $row['GNAME']
                     . ' : ' . $sport . ' ' . $row['IG'] . "\n";
             }
             if(strlen($sport) == 3){
-                echo $sport . ' ' . $row['NR'] . ' ' . $row['FNAME']
+                echo 'Incoherent sport code : ' . $sport . ' ' . $row['NR'] . ' ' . $row['FNAME']
                         . ' ' . $row['GNAME'] . ' ' . $row['IG'] . "\n";
             }
         }

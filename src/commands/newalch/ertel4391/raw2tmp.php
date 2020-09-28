@@ -67,7 +67,7 @@ class raw2tmp implements Command {
                 continue;                                                                                                   
             }
             $new = [];
-            $new['GNUM']        = '';
+            $new['GQID']        = '';
             $new['QUEL']        = trim(mb_substr($line, 0, 6));
             if($new['QUEL'] == '*G:D10'){
                 $new['QUEL'] = 'G:D10';
@@ -109,7 +109,7 @@ class raw2tmp implements Command {
             $new['EXTEND']      = trim(mb_substr($line, 251, 3));
             $new['NIENHUYS']    = trim(mb_substr($line, 260, 6));
             // Column 'L' dropped because contains nothing for all lines in newalch file
-            $new['GNUM'] = self::compute_GNUM($new);
+            $new['GQID'] = self::compute_GQID($new);
             
             // build a raw record, exact copy of the original file
             $raw = [
@@ -169,21 +169,21 @@ class raw2tmp implements Command {
     // ******************************************************
     /**
         Auxiliary of execute()
-        Computes field GNUM, string like "A1-123"
+        Computes field GQID, string like "A1-123"
     **/
-    private static function compute_GNUM(&$new){
+    private static function compute_GQID(&$new){
         if(substr($new['QUEL'], 0, 2) != 'G:'){
             return '';
         }
-        $GNUM = '';
+        $GQID = '';
         $rest = substr($new['QUEL'], 2);
         switch($rest){
-        	case 'A01': $GNUM = 'A1'; break;
-        	case 'D06': $GNUM = 'D6'; break;
-        	case 'D10': $GNUM = 'D10'; break;
+        	case 'A01': $GQID = 'A1'; break;
+        	case 'D06': $GQID = 'D6'; break;
+        	case 'D10': $GQID = 'D10'; break;
         }
-        $GNUM .= '-' . $new['G_NR'];
-        return $GNUM;
+        $GQID .= '-' . $new['G_NR'];
+        return $GQID;
     }
     
     

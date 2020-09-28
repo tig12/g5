@@ -7,79 +7,94 @@
 
 -
   NR: 136
-  GNUM: D10-38 
+  GQID: D10-38 
   build-notes: |
     seen while comparing with CSICOP dates
-    with command : php run-g5.php csicop si42 checkErtel date
+    with command php run-g5.php csicop si42 checkErtel date
 
 -
   NR: 148
-  GNUM: D10-43
+  GQID: D10-43
   build-notes: seen while comparing with CSICOP dates
 
 -
   NR: 187
-  GNUM: D10-55
+  GQID: D10-55
   build-notes: seen while comparing with CSICOP dates
 
 -
   NR: 201
-  GNUM: D10-62
+  GQID: D10-62
   build-notes: seen while comparing with CSICOP dates
 
 -
   NR: 202
-  GNUM: D10-63
+  GQID: D10-63
   build-notes: seen while comparing with CSICOP dates
 
 -
   NR: 250
-  GNUM: D10-69
+  GQID: D10-69
   build-notes: seen while comparing with CSICOP dates
 
 -
   NR: 256
-  GNUM: D10-70
+  GQID: D10-70
   build-notes: seen while comparing with CSICOP dates
 
 -
   NR: 353
-  GNUM: D10-92
+  GQID: D10-92
   build-notes: seen while comparing with CSICOP dates
 
 -
+  NR: 769
+  IG: G
+  build-notes: see php run-g5.php newalch ertel4391 look sport
+
+-
   NR: 1150
-  GNUM: D10-272
+  GQID: D10-272
   build-notes: seen while comparing with CSICOP dates
 
 -
   NR: 1197
-  GNUM: D10-291
+  GQID: D10-291
   build-notes: seen while comparing with CSICOP dates
 
 -
   NR: 1206
-  GNUM: D10-294
+  GQID: D10-294
   build-notes: seen while comparing with CSICOP dates
 
 -
+  NR: 1231
+  IG: I
+  build-notes: see php run-g5.php newalch ertel4391 look sport
+
+-
   NR: 1348
-  GNUM: D10-323
+  GQID: D10-323
   build-notes: seen while comparing with CSICOP dates
 
 -
   NR: 1350
-  GNUM: D10-325
+  GQID: D10-325
   build-notes: seen while comparing with CSICOP dates
 
 -
+  NR: 1718
+  IG: G
+  build-notes: see php run-g5.php newalch ertel4391 look sport
+
+-
   NR: 2050
-  GNUM: D10-542
+  GQID: D10-542
   build-notes: seen while comparing with CSICOP dates
 
 -
   NR: 2051
-  GNUM: D10-538
+  GQID: D10-538
   build-notes: seen while comparing with CSICOP dates
 
 -
@@ -99,60 +114,60 @@
     
 -
   NR: 2410
-  GNUM: D10-753
+  GQID: D10-753
   build-notes: seen while comparing with CSICOP dates
 
 -
   NR: 2412
-  GNUM: D10-754
+  GQID: D10-754
   build-notes: seen while comparing with CSICOP dates
 
 -
   NR: 2576
-  GNUM: D10-811
+  GQID: D10-811
   build-notes: seen while comparing with CSICOP dates
 
 -
   NR: 2604
-  GNUM: D10-814
+  GQID: D10-814
   build-notes: seen while comparing with CSICOP dates
 
 -
   NR: 2636
-  GNUM: D10-819
+  GQID: D10-819
   build-notes: seen while comparing with CSICOP dates
 
 -
   NR: 2637
-  GNUM: D10-820
+  GQID: D10-820
   build-notes: seen while comparing with CSICOP dates
 
 -
   NR: 2685
-  GNUM: D10-822
+  GQID: D10-822
   build-notes: seen while comparing with CSICOP dates
 
 -
   NR: 2769
-  GNUM: D10-846
+  GQID: D10-846
   build-notes: seen while comparing with CSICOP dates
 
 -
   NR: 2780
-  GNUM: D10-847
+  GQID: D10-847
   build-notes: seen while comparing with CSICOP dates
 
 -
   NR: 2783
-  GNUM: D10-858
+  GQID: D10-858
   build-notes: seen while comparing with CSICOP dates
 
 -
   NR: 3086
-  GNUM: D10-972
+  GQID: D10-972
   CSINR: 267
   build-notes: |
-    GNUM error seen while comparing with CSICOP dates
+    GQID error seen while comparing with CSICOP dates
     Original value of CSINR = 266
     Modif done to adapt to CSICOP change of ids
     Does not originate from an error in Ertel's file
@@ -181,6 +196,11 @@
     Error in Ertel's file
     
 -
+  NR: 3496
+  IG: G
+  build-notes: see php run-g5.php newalch ertel4391 look sport
+
+-
   NR: 4326
   CSINR: 394
   build-notes: |
@@ -200,4 +220,14 @@
   build-notes: |
     Original value of CSINR = 395
     Error in Ertel's file
-    
+
+-
+  NR: 4332
+  IG: G
+  build-notes: see php run-g5.php newalch ertel4391 look sport
+
+-
+  NR: 4348
+  SPORT: FOOT
+  IG: G
+  build-notes: see php run-g5.php newalch ertel4391 look sport
