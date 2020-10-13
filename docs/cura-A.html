@@ -48,7 +48,7 @@ This page describes the corrections done on files A1 to A6 while importing html 
 <nav class="toc">
     <ul>
         <li>
-            <a href="#raw2csv">raw2csv</a>
+            <a href="#raw2tmp">raw2tmp</a>
             <ul>
                 <li><a href="#1-1-profession-codes">Profession codes</a></li>
                 <li><a href="#1-2-name-restoration">Name restoration</a></li>
@@ -89,12 +89,12 @@ php run-g5.php cura A tmp2db
 </pre>
 
 <!-- ********************************************************************************* -->
-<h2><a name="raw2csv">raw2csv</a></h2>
+<h2><a name="raw2tmp">raw2tmp</a></h2>
 
 This command needs a parameter to indicate what it should print :
-<pre>php run-g5.php cura A raw2csv</pre>
+<pre>php run-g5.php cura A raw2tmp</pre>
 <pre>
-MISSING PARAMETER : raw2csv needs a parameter to specify which output it displays. Can be :
+MISSING PARAMETER : raw2tmp needs a parameter to specify which output it displays. Can be :
   small : echoes only global results
   full : prints the details of problematic rows
 </pre>
@@ -117,7 +117,7 @@ Each page of serie A contain 3 lists :
 
 <br>The purpose is to obtain records containing both precise birth data and the name of the person.
 <br>To summarize, this can be partially done by program from cura.free.fr web pages ; some cases can be fixed by human using Gauquelin 1955 book.
-<br><code>raw2csv</code> matching could be bettered for some cases, using newalchemypress.com data. See below, paragraphs <a href="#use-ertel-4391">Use Ertel 4391</a> and <a href="#use-muller-1083">Use Müller 1083</a>.
+<br><code>raw2tmp</code> matching could be bettered for some cases, using newalchemypress.com data. See below, paragraphs <a href="#use-ertel-4391">Use Ertel 4391</a> and <a href="#use-muller-1083">Use Müller 1083</a>.
 
 <!-- ****************** -->
 <h4>Merge lists</h4>
@@ -226,7 +226,7 @@ Name modification is done when these files are imported in database.
         <br>From "Traité de l'heure dans le monde", TU = HLO ;  4°6' = 00:16:24 => hour = 05:16:24
         <br>OK => The first line is exact, the second line must be replaced by
         <pre>1817	3	25	Lebris Jean</pre>
-        This fix is included in the code of <code>raw2csv</code>.
+        This fix is included in the code of <code>raw2tmp</code>.
     </li>
 </ul>
 
@@ -271,7 +271,7 @@ The command :
 permits to restore 100 % of names not identified by step <code>raw2csv</code> in A1.
 <br>See <a href="newalch-ertel4391.html#integration-to-g5">page on Ertel 4391</a>, paragraph "Fix cura A1 names".
 <br>
-<br>NB : <code>raw2csv</code> leaves 118 names unidentified and this step restores 117. This is because one name is handled by step <code>tweak2csv</code>.
+<br>NB : <code>raw2csv</code> leaves 118 names unidentified and this step restores 117. This is because one name is handled by step <code>tweak2tmp</code>.
 
 <!-- ********************************************************************************* -->
 <h2><a name="better-a2-days-and-names-with-muller1083">Better A2 days and names with muller1083</a></h2>

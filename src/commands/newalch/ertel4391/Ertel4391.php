@@ -194,4 +194,4 @@ class Ertel4391 implements SourceI {
         return csvAssociative::compute(self::tmpRawFilename());
     }
     
-}// end class
+} // end class

@@ -144,11 +144,11 @@ One very strange feature of this file : many records don't contain birth time. S
     </li>
     <li>
         5 associations with CSICOP file are erroneous (out of 190 - error rate 2.63 %).
-        <br>Fixed in step <code>tweak2csv</code>.
+        <br>Fixed in step <code>tweak2tmp</code>.
     </li>
     <li>
         26 associations with file D10 are erroneous (out of 349 - error rate 7.45 %).
-        <br>Fixed in step <code>tweak2csv</code>.
+        <br>Fixed in step <code>tweak2tmp</code>.
     </li>
     <!-- 
     <li>The file contains 922 records from CFEPP (instead of 1 066).</li>
@@ -201,7 +201,7 @@ This is equivalent to :
 
 <pre>
 php run-g5.php newalch ertel4391 raw2csv
-php run-g5.php newalch ertel4391 tweak2csv
+php run-g5.php newalch ertel4391 tweak2tmp
 php run-g5.php newalch ertel4391 export dl
 </pre>
 
@@ -319,7 +319,7 @@ Date comparisons done to <a href="csicop.html">build CSICOP test</a> showed erro
     <tr><td>2873</td><td>D10-894</td><td>Miller John L. 1947-04-29</td></tr>
 </table>
 
-Ertel file also contains 5 wrong associations to CSICOP, fixed in step <code>tweak2csv</code> (see file <code>3-edited/newalch-tweaked/4391SPO.yml</code> for   details).
+Ertel file also contains 5 wrong associations to CSICOP, fixed in step <code>tweak2tmp</code> (see file <code>3-edited/newalch-tweaked/4391SPO.yml</code> for   details).
 <br>
 <br>One record without <code>CSINR</code> could be identified during <a href="csicop.html">CSICOP merge</a> :
 <br>Miller Freddie 1911-04-03 ; NR = 2872 ; CSID = 254
@@ -815,7 +815,7 @@ I HORS : 22
 </div><!-- end class="flex-wrap" -->
 
 Only one is composed by 3 letters (<code>TRA</code>), and this looks like a mistake. It corresponds to NR 4348 Charles Young (<a href="https://en.wikipedia.org/wiki/Charle_Young">wikipedia page</a>), and his sport is american football.
-<br>This code is changed to <code>FOOT</code> in step <code>tweak2csv</code>
+<br>This code is changed to <code>FOOT</code> in step <code>tweak2tmp</code>
 <br>
 Errors on <code>INDGRUP</code> and <code>SPORT</code> were fixed in step <code>tweak2tmp</code>, so they now only show before execution of this step.
 

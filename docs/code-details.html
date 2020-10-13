@@ -47,7 +47,7 @@ The command line interface (CLI) is handled by <code>run-g5.php</code>. To inter
 <ul>
     <li><b>data set</b> (like <code>cura</code> for cura.free.fr, <code>newalch</code> for newalchemypress.com),</li>
     <li><b>data file</b> within a data set (like file A2),</li>
-    <li><b>action</b> (like <code>raw2csv</code>, which means "convert raw file to csv file").</li>
+    <li><b>action</b> (like <code>raw2tmp</code>, which means "convert raw file to csv file").</li>
 </ul>
 
 <br>Each data set corresponds to a sub-package of <code>g5\commands</code>.
@@ -74,7 +74,7 @@ The command line interface (CLI) is handled by <code>run-g5.php</code>. To inter
 <br>Examples :
 <ul class="margin-bottom">
     <li>
-        <code>php run-g5.php cura A raw2csv</code> : the code sees that there is a class <code>g5\commands\cura\CuraCommand</code>, so this class is called.
+        <code>php run-g5.php cura A raw2tmp</code> : the code sees that there is a class <code>g5\commands\cura\CuraCommand</code>, so this class is called.
     </li>
     <li>
         <code>php run-g5.php newalch ertel4391 look profession</code> : there is no class implementing <code>Command</code> in package <code>g5\commands\newalch</code>, so class <code>g5\commands\newalch\ertel4391\look</code> will be called, and one parameter, <code>profession</code> will be passed to the method <code>execute()</code>.
