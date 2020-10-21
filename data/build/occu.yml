@@ -97,187 +97,218 @@
 
 # sub-categories - sports
 -
-  code: ATH
+  g5: ATH
+  ertel: 
   fr: Athlétisme
   en: Track and field
   belongs-to:
     - SP
 -
-  code: AUT
+  g5: AUT
+  ertel: 
   fr: Auto-moto
   en: Auto-moto
   belongs-to:
     - SP
 -
-  code: AVI
+  g5: AVI
+  ertel: 
   fr: Aviation
   en: Aviation
   belongs-to:
     - SP
 -
-  code: AVR
+  g5: AVR
+  ertel: 
   fr: Aviron
   en: Rowing
   belongs-to:
     - SP
 -
-  code: BAS
+  g5: BAS
+  ertel: 
   fr: Basketball
   en: Basketball
   belongs-to:
     - SP
 -
-  code: BIL
+  g5: BIL
+  ertel: 
   fr: Billard
   en: Billard
   belongs-to:
     - SP
 -
-  code: BOX
+  g5: BOX
+  ertel: 
   fr: Boxe
   en: Boxing
   belongs-to:
     - SP
 -
-  code: CAN
+  g5: CAN
+  ertel: 
   fr: Canoë-kayak
   en: Canoe-kayak
   belongs-to:
     - SP
 -
-  code: CYC
+  g5: CYC
+  ertel: 
   fr: Cyclisme
   en: Cyclism
   belongs-to:
     - SP
 -
-  code: ESC
+  g5: ESC
+  ertel: 
   fr: Escrime
   en: Fencing
   belongs-to:
     - SP
 -
-  code: FEM
+  g5: FEM
+  ertel: 
   fr: Sports féminins
   en: Female sports
   belongs-to:
     - SP
 -
-  code: FOO
+  g5: FOO
+  ertel: 
   fr: Football
   en: Football
   belongs-to:
     - SP
 -
-  code: GOL
+  g5: GOL
+  ertel: 
   fr: Golf
   en: Golf
   belongs-to:
     - SP
 -
-  code: GYM
+  g5: GYM
+  ertel: 
   fr: Gymnastique
   en: Gymnastic
   belongs-to:
     - SP
 -
-  code: HAL
+  g5: HAL
+  ertel: 
   fr: Haltérophilie
   en: Weightlifting
   belongs-to:
     - SP
 -
-  code: HAN
+  g5: HAN
+  ertel: 
   fr: Handball
   en: Handball
   belongs-to:
     - SP
 -
-  code: HOC
+  g5: HOC
+  ertel: 
   fr: Hockey
   en: Hockey
   belongs-to:
     - SP
 -
-  code: LUT
+  g5: LUT
+  ertel: 
   fr: Lutte
   en: Wrestling
   belongs-to:
     - SP
 -
-  code: MAR
+  g5: MAR
+  ertel: 
   fr: Marche
   en: Walking
   belongs-to:
     - SP
 -
-  code: NAT
+  g5: NAT
+  ertel: 
   fr: Natation
   en: Swimming
   belongs-to:
     - SP
 -
-  code: PAT
+  g5: PAT
+  ertel: 
   fr: Patin à roulettes
   en: roller skate
   belongs-to:
     - SP
 -
-  code: PEL
+  g5: PEL
+  ertel: 
   fr: Pelote basque
   en: Pelote basque
   belongs-to:
     - SP
 -
-  code: ROD
+  g5: ROD
+  ertel: 
   fr: Rodéo
   en: Rodeo
   belongs-to:
     - SP
 -
-  code: RUG
+  g5: RUG
+  ertel: 
   fr: Rugby et Jeu à XIII
   en: Rugby and Rugby league
   belongs-to:
     - SP
 -
-  code: SKI
+  g5: SKI
+  ertel: 
   fr: Ski
   en: Ski
   belongs-to:
     - SP
 -
-  code: EQU
+  g5: EQU
+  ertel: 
   fr: Equitation
   en: Equestrian
   belongs-to:
     - SP
 -
-  code: GLA
+  g5: GLA
+  ertel: 
   fr: Sports de glace
   en: Bobsleigh and Skating
   belongs-to:
     - SP
 -
-  code: TEN
+  g5: TEN
+  ertel: 
   fr: Tennis
   en: Tennis
   belongs-to:
     - SP
 -
-  code: TIR
+  g5: TIR
+  ertel: 
   fr: Tir
   en: Shooting
   belongs-to:
     - SP
 -
-  code: VOI
+  g5: VOI
+  ertel: 
   fr: Voile
   en: Sailing
   belongs-to:
     - SP
 -
-  code: VOL
+  g5: VOL
+  ertel: 
   fr: Volley ball
   en: Volley ball
   belongs-to:

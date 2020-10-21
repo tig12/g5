@@ -17,12 +17,12 @@ class Occupation {
     
     /** Loads occupation codes **/
     public static function init(){
-        self::$records = yaml_parse_file(self::getDefinitionFile());
+        self::$records = yaml_parse_file(self::getBuildFile());
     }
     
     /** Returns path to the file containing definition of occupation codes **/
-    public static function getDefinitionFile() {
-        return Config::$data['dirs']['model'] . DS . 'occu.yml';
+    public static function getBuildFile() {
+        return Config::$data['dirs']['build'] . DS . 'occu.yml';
     }
     
     /**

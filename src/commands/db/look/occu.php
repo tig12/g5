@@ -85,7 +85,7 @@ class occu implements Command {
         @return associative array profession code => content of this record
     **/
     private static function readInputFile(){
-        $records = yaml_parse_file(Occupation::getDefinitionFile());
+        $records = yaml_parse_file(Occupation::getBuildFile());
         $res = [];
         $check = [];
         foreach($records as $rec){
