@@ -22,7 +22,7 @@ class Occupation {
     
     /** Returns path to the file containing definition of occupation codes **/
     public static function getDefinitionFile() {
-        return Config::$data['dirs']['build'] . DS . 'occu.yml';
+        return Config::$data['dirs']['model'] . DS . 'occu.yml';
     }
     
     /**

@@ -39,6 +39,7 @@ class Config{
         // Now it's useless because some data are versioned, and have a imposed location.
         self::$data['dirs']['raw'] = 'data/raw';
         self::$data['dirs']['build'] = 'data/build';
+        self::$data['dirs']['model'] = 'data/model';
     }
     
     
