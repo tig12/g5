@@ -5,91 +5,145 @@
 
 # General categories
 -
-  code: AR
+  slug: 
+  g5: ARTI
+  wd: 
+  cura: AR
   fr: Artiste
   en: Artist
 -
-  code: EX
+  slug: 
+  g5: EXEC
+  wd: 
+  cura: EX
   fr: Dirigeant
   en: Executive
 -
-  code: JO
+  slug: 
+  g5: JOUR
+  wd: 
+  cura: JO
   fr: Journaliste
   en: Journalist
 -
-  code: MI
+  slug: 
+  g5: MILI
+  wd: 
+  cura: MI
   fr: Militaire
   en: Military
 -
-  code: PH
+  slug: 
+  g5: MEDI
+  wd: 
+  cura: PH
   fr: Médecin
   en: Physician
 -
-  code: PO
+  slug: 
+  g5: POLI
+  wd: 
+  cura: PO
   fr: Politicien
   en: Politician
 -
-  code: SC
+  slug: 
+  g5: SCIE
+  wd: 
+  cura: SC
   fr: Scientifique
   en: Scientist
 -
-  code: SP
+  slug: 
+  g5: SPORT
+  wd: 
+  cura: SP
   fr: Sportif
   en: Sport champion
 -
-  code: WR
+  slug: 
+  g5: WRIT
+  wd: 
+  cura: WR
   fr: Ecrivain
   en: Writer
 -
-  code: XX
+  slug: 
+  g5: MISC
+  wd: 
+  cura: XX
   fr: Divers
-  en: Various
+  en: Miscelaneous
 
 # sub-categories - artists
 -
-  code: ACT
+  slug: 
+  g5: ACTO
+  wd: 
+  cura: ACT
   fr: Acteur
   en: Actor
   belongs-to:
     - AR
 -
-  code: CAR
+  slug: 
+  g5: CART
+  wd: 
+  cura: CAR
   fr: Réalisateur de dessins animés
   en: Cartoonist
   belongs-to:
     - AR
 -
-  code: CMB
+  slug: 
+  g5: COMI
+  wd: 
+  cura: CMB
   fr: Chef d'orchestre militaire
   en: Conductor of military band
   belongs-to:
     - AR
 -
-  code: DAN
+  slug: 
+  g5: DANC
+  wd: 
+  cura: DAN
   fr: Danseur
   en: Dancer
   belongs-to:
     - AR
 -
-  code: MUS
+  slug: 
+  g5: MUSI
+  wd: 
+  cura: MUS
   fr: Musicien
   en: Musician
   belongs-to:
     - AR
 -
-  code: OPE
+  slug: 
+  g5: OPER
+  wd: 
+  cura: OPE
   fr: Chanteur d'opéra
   en: Opera singer
   belongs-to:
     - AR
 -
-  code: PAI
+  slug: 
+  g5: PAIN
+  wd: 
+  cura: PAI
   fr: Peintre
   en: Painter
   belongs-to:
     - AR
 -
-  code: PHO
+  slug: 
+  g5: PHOT
+  wd: 
+  cura: PHO
   fr: Photographe
   en: Photographer
   belongs-to:
@@ -97,218 +151,313 @@
 
 # sub-categories - sports
 -
-  g5: ATH
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: ATH
+  ertel: TRAC
   fr: Athlétisme
   en: Track and field
   belongs-to:
     - SP
 -
-  g5: AUT
-  ertel: 
-  fr: Auto-moto
-  en: Auto-moto
+  # Auto-moto for Gauquelin
+  slug: AUTO
+  g5: 
+  wd: 
+  cura: AUT
+  ertel: AUTO
+  fr: Auto
+  en: Auto
   belongs-to:
     - SP
 -
-  g5: AVI
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: AVI
+  ertel: AIRP
   fr: Aviation
   en: Aviation
   belongs-to:
     - SP
 -
-  g5: AVR
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: AVR
+  #ertel: AVIR
+  #ertel: ROWI
   fr: Aviron
   en: Rowing
   belongs-to:
     - SP
 -
-  g5: BAS
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: BAS
+  ertel: BASK
   fr: Basketball
   en: Basketball
   belongs-to:
     - SP
 -
-  g5: BIL
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: BIL
+  ertel: BILL
   fr: Billard
   en: Billard
   belongs-to:
     - SP
 -
-  g5: BOX
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: BOX
+  ertel: BOXI                      
   fr: Boxe
   en: Boxing
   belongs-to:
     - SP
 -
-  g5: CAN
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: CAN
+  ertel: CANO
   fr: Canoë-kayak
   en: Canoe-kayak
   belongs-to:
     - SP
 -
-  g5: CYC
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: CYC
+  ertel: CYCL
   fr: Cyclisme
   en: Cyclism
   belongs-to:
     - SP
 -
-  g5: ESC
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: ESC
+  ertel: FENC
   fr: Escrime
   en: Fencing
   belongs-to:
     - SP
 -
-  g5: FEM
+  slug: 
+  g5: 
+  wd: 
+  cura: FEM
   ertel: 
   fr: Sports féminins
   en: Female sports
   belongs-to:
     - SP
 -
-  g5: FOO
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: FOO
+  ertel: FOOT
   fr: Football
   en: Football
   belongs-to:
     - SP
 -
-  g5: GOL
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: GOL
+  ertel: GOLF
   fr: Golf
   en: Golf
   belongs-to:
     - SP
 -
-  g5: GYM
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: GYM
+  ertel: GYMN
   fr: Gymnastique
   en: Gymnastic
   belongs-to:
     - SP
 -
-  g5: HAL
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: HAL
+  ertel: WEIG
   fr: Haltérophilie
   en: Weightlifting
   belongs-to:
     - SP
 -
-  g5: HAN
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: HAN
+  ertel: HAND
   fr: Handball
   en: Handball
   belongs-to:
     - SP
 -
-  g5: HOC
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: HOC
+  ertel: HOCK
   fr: Hockey
   en: Hockey
   belongs-to:
     - SP
 -
-  g5: LUT
-  ertel: 
-  fr: Lutte
+  slug: 
+  g5: 
+  wd: 
+  cura: LUT
+  ertel: WRES
+  fr: Lutte    
   en: Wrestling
   belongs-to:
     - SP
 -
-  g5: MAR
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: MAR
+  ertel: WALK
   fr: Marche
   en: Walking
   belongs-to:
     - SP
 -
-  g5: NAT
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: NAT
+  ertel: SWIM
   fr: Natation
   en: Swimming
   belongs-to:
     - SP
 -
-  g5: PAT
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: PAT
+  ertel: ROLL
   fr: Patin à roulettes
   en: roller skate
   belongs-to:
     - SP
 -
-  g5: PEL
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: PEL
+  ertel: PELO
   fr: Pelote basque
   en: Pelote basque
   belongs-to:
     - SP
 -
-  g5: ROD
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: ROD
+  ertel: RODE
   fr: Rodéo
   en: Rodeo
   belongs-to:
     - SP
 -
-  g5: RUG
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: RUG
+  ertel: RUGB
   fr: Rugby et Jeu à XIII
   en: Rugby and Rugby league
   belongs-to:
     - SP
 -
-  g5: SKI
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: SKI
+  ertel: SKII            
   fr: Ski
   en: Ski
   belongs-to:
     - SP
 -
-  g5: EQU
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: EQU
+  ertel: HORS
   fr: Equitation
   en: Equestrian
   belongs-to:
     - SP
 -
-  g5: GLA
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: GLA
+  ertel: ICES
   fr: Sports de glace
   en: Bobsleigh and Skating
   belongs-to:
     - SP
 -
-  g5: TEN
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: TEN
+  ertel: TENN
   fr: Tennis
   en: Tennis
   belongs-to:
     - SP
 -
-  g5: TIR
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: TIR
+  ertel: SHOO
   fr: Tir
   en: Shooting
   belongs-to:
     - SP
 -
-  g5: VOI
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: VOI
+  #ertel: YACH
   fr: Voile
   en: Sailing
   belongs-to:
     - SP
 -
-  g5: VOL
-  ertel: 
+  slug: 
+  g5: 
+  wd: 
+  cura: VOL
+  ertel: VOLL
   fr: Volley ball
   en: Volley ball
   belongs-to:

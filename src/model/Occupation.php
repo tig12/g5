@@ -33,10 +33,10 @@ class Occupation {
     public static function getChildren($code){
         $res = [];
         foreach(self::$records as $rec){
-            if(!isset($rec['belongs-to'])){
+            if(!isset($rec['parents'])){
                 continue;
             }
-            if(in_array($code, $rec['belongs-to'])){
+            if(in_array($code, $rec['parents'])){
                 $res[] = $rec['code'];
             }
         }

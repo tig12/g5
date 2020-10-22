@@ -37,8 +37,8 @@ class occu implements Command {
         $res .= "<table class=\"wikitable margin\">\n";
         $res .= "<tr><th>Code</th><th>Label (fr)</th><th>Label (en)</th></tr>\n";
         foreach($codes as $code => $record){
-            $belongs = self::belongsTo($record);
-            if(!empty($belongs)){
+            $parents = self::parents($record);
+            if(!empty($parents)){
                 continue;
             }
             $res .= "<tr><td>$code</td><td>{$record['fr']}</td><td>{$record['en']}</td></tr>\n";
@@ -50,8 +50,8 @@ class occu implements Command {
         $res .= "<table class=\"wikitable margin\">\n";
         $res .= "<tr><th>Code</th><th>Label (fr)</th><th>Label (en)</th></tr>\n";
         foreach($codes as $code => $record){
-            $belongs = self::belongsTo($record);
-            if(!in_array('AR', $belongs)){
+            $parents = self::parents($record);
+            if(!in_array('AR', $parents)){
                 continue;
             }
             $res .= "<tr><td>$code</td><td>{$record['fr']}</td><td>{$record['en']}</td></tr>\n";
@@ -63,8 +63,8 @@ class occu implements Command {
         $res .= "<table class=\"wikitable margin\">\n";
         $res .= "<tr><th>Code</th><th>Label (fr)</th><th>Label (en)</th></tr>\n";
         foreach($codes as $code => $record){
-            $belongs = self::belongsTo($record);
-            if(!in_array('SP', $belongs)){
+            $parents = self::parents($record);
+            if(!in_array('SP', $parents)){
                 continue;
             }
             $res .= "<tr><td>$code</td><td>{$record['fr']}</td><td>{$record['en']}</td></tr>\n";
@@ -89,7 +89,7 @@ class occu implements Command {
         $res = [];
         $check = [];
         foreach($records as $rec){
-            $code = $rec['code'];
+            $code = $rec['g5'];
             if(!isset($check[$code])){
                 $check[$code] = 0;
             }
@@ -99,7 +99,7 @@ class occu implements Command {
         // check doublons
         foreach($check as $code => $n){
             if($n > 1){
-                die("ERROR : code '$code' appears more than once\n");
+                die("ERROR : g5 code '$code' appears more than once\n");
             }
         }
         //
@@ -112,8 +112,8 @@ class occu implements Command {
     /**
         @param $record One element of the yaml file, representing an occupation
     **/
-     private static function belongsTo($record){
-         return $record['belongs-to'] ?? [];
+     private static function parents($record){
+         return $record['parents'] ?? [];
     }
 
 } // end class
