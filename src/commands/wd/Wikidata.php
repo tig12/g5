@@ -17,6 +17,9 @@ class Wikidata{
     
     /** Base url to query WDQS **/
     const QUERY_URL = 'https://query.wikidata.org/sparql?format=json&query=';
+    
+    /** Wikidata id, like Q465841 **/
+    const PATTERN_ID = '/Q\d+/';
 
 //    const PATTERN_LG_LAT = '/Point\((.*?) (.*?)\)/';
     

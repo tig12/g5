@@ -34,85 +34,40 @@ class Ertel4391 implements SourceI {
             'name' => '76 Para lowers',
             'description' => "76 athletes collected by Suitbert Ertel in Gauquelin laboratory,\n"
                 . "not retained in Comité Para experiment because considered less eminent.\n"
-                . "Sample called \"7 - Para lowers\" by Ertel in his 1988 article",
+                . "\"7 - Para lowers\" in Ertel 1988 article",
         ],
         'GMINI' => [
             'name' => '599 minor Italian footballers',
             'description' => "Unpublished by Gauquelin (not famous enough), copied manually by Ertel.\n"
-                . "Sample called \"3 - Italian football\" by Ertel in his 1988 article",
+                . "\"3 - Italian football\" in Ertel 1988 article",
         ],
         'GMING' => [
             'name' => '115 minor Germans sportsmen',
             'description' => "Unpublished by Gauquelin (not famous enough), copied manually by Ertel.\n"
-                . "Sample called \"4 - German various\" by Ertel in his 1988 article",
+                . "\"4 - German various\" in Ertel 1988 article",
         ],
         'G_ADD' => [
             'name' => '202 French sportsmen',
             'description' => "Copied manually by Ertel in Gauquelin's laboratory.\n"
                 . "Considered as \"low-low-ranking\" by Gauquelin.\n"
-                . "Sample called \"5 - French occasionals\" by Ertel in his 1988 article",
+                . "\"5 - French occasionals\" in Ertel 1988 article",
         ],
         'GMINV' => [
             'name' => '24 Italian cyclists',
             'description' => "Copied manually by Ertel in Gauquelin's laboratory.\n"
-                . "Sample called \"10 - Italian cyclists\" by Ertel in his 1988 article",
+                . "\"10 - Italian cyclists\" in Ertel 1988 article",
         ],
         'GMIND' => [
             'name' => '453 French sportsmen',
             'description' => "Copied manually by Ertel in Gauquelin's laboratory.\n"
-                . "Sample called \"11 - Lower French\" by Ertel in his 1988 article",
+                . "\"11 - Lower French\" in Ertel 1988 article",
         ],
         'G_79F' => [
             'name' => '27 sportsmen',
             'description' => "Supplementary data sent by Gauquelin to Ertel after his visit in Paris.\n"
-                . "Sample called \"13 - Plus special\" by Ertel in his 1988 article",
+                . "\"13 - Plus special\" in Ertel 1988 article",
         ],
     ];
-    
-    /* 
-    const SPORT_ERTEL_G5 = [
-        'AIRP' => 'AVI',
-        'ALPI' => '',
-        'AUTO' => 'AUT',
-        'AVIR' => '',
-        'BADM' => '',
-        'BASE' => '',
-        'BASK' => 'BAS',
-        'BILL' => 'BIL',
-        'BOBS' => '',
-        'BOWL' => '',
-        'BOXI' => 'BOX',
-        'CANO' => 'CAN',
-        'CYCL' => 'CYC',
-        'FENC' => 'ESC',
-        'FOOT' => 'FOO',
-        'GOLF' => 'GOL',
-        'GYMN' => 'GYM',
-        'HAND' => 'HAN',
-        'HOCK' => 'HOC',
-        'HORS' => 'EQU',
-        'ICES' => 'GLA',
-        'JUDO' => '',
-        'MOTO' => 'AUT',
-        'PELO' => 'PEL',
-        'RODE' => 'ROD',
-        'ROLL' => 'PAT',
-        'ROWI' => 'AVR',
-        'RUGB' => 'RUG',
-        'SHOO' => 'TIR',
-        'SKII' => 'SKI',
-        'SWIM' => 'NAT',
-        'TENN' => 'TEN',
-        'TRAC' => 'ATH',
-        'TRAV' => '',
-        'VOLL' => 'VOL',
-        'WALK' => 'MAR',
-        'WEIG' => 'HAL',
-        'WRES' => 'LUT',
-        'YACH' => '',
-    ];
-    */
-    
     
     // *********************** Source management ***********************
     
@@ -187,7 +142,6 @@ class Ertel4391 implements SourceI {
     public static function tmpRawFilename(){
         return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', '4391SPO-raw.csv']);
     }
-    
     
     /** Loads the "tmp raw file" in a regular array **/
     public static function loadTmpRawFile(){

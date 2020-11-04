@@ -83,8 +83,8 @@
   cura: ACT
   fr: Acteur
   en: Actor
-  belongs-to:
-    - AR
+  parents:
+    - ARTI
 -
   slug: 
   g5: CART
@@ -92,8 +92,8 @@
   cura: CAR
   fr: Réalisateur de dessins animés
   en: Cartoonist
-  belongs-to:
-    - AR
+  parents:
+    - ARTI
 -
   slug: 
   g5: COMI
@@ -101,8 +101,8 @@
   cura: CMB
   fr: Chef d'orchestre militaire
   en: Conductor of military band
-  belongs-to:
-    - AR
+  parents:
+    - ARTI
 -
   slug: 
   g5: DANC
@@ -110,8 +110,8 @@
   cura: DAN
   fr: Danseur
   en: Dancer
-  belongs-to:
-    - AR
+  parents:
+    - ARTI
 -
   slug: 
   g5: MUSI
@@ -119,8 +119,8 @@
   cura: MUS
   fr: Musicien
   en: Musician
-  belongs-to:
-    - AR
+  parents:
+    - ARTI
 -
   slug: 
   g5: OPER
@@ -128,8 +128,8 @@
   cura: OPE
   fr: Chanteur d'opéra
   en: Opera singer
-  belongs-to:
-    - AR
+  parents:
+    - ARTI
 -
   slug: 
   g5: PAIN
@@ -137,8 +137,8 @@
   cura: PAI
   fr: Peintre
   en: Painter
-  belongs-to:
-    - AR
+  parents:
+    - ARTI
 -
   slug: 
   g5: PHOT
@@ -146,8 +146,8 @@
   cura: PHO
   fr: Photographe
   en: Photographer
-  belongs-to:
-    - AR
+  parents:
+    - ARTI
 
 # sub-categories - sports
 -
@@ -158,8 +158,8 @@
   ertel: TRAC
   fr: Athlétisme
   en: Track and field
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   # Auto-moto for Gauquelin
   slug: AUTO
@@ -169,8 +169,8 @@
   ertel: AUTO
   fr: Auto
   en: Auto
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -179,8 +179,8 @@
   ertel: AIRP
   fr: Aviation
   en: Aviation
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -190,8 +190,8 @@
   #ertel: ROWI
   fr: Aviron
   en: Rowing
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -200,8 +200,8 @@
   ertel: BASK
   fr: Basketball
   en: Basketball
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -210,8 +210,8 @@
   ertel: BILL
   fr: Billard
   en: Billard
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -220,8 +220,8 @@
   ertel: BOXI                      
   fr: Boxe
   en: Boxing
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -230,8 +230,8 @@
   ertel: CANO
   fr: Canoë-kayak
   en: Canoe-kayak
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -240,8 +240,8 @@
   ertel: CYCL
   fr: Cyclisme
   en: Cyclism
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -250,8 +250,8 @@
   ertel: FENC
   fr: Escrime
   en: Fencing
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -260,8 +260,8 @@
   ertel: 
   fr: Sports féminins
   en: Female sports
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -270,8 +270,8 @@
   ertel: FOOT
   fr: Football
   en: Football
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -280,8 +280,8 @@
   ertel: GOLF
   fr: Golf
   en: Golf
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -290,8 +290,8 @@
   ertel: GYMN
   fr: Gymnastique
   en: Gymnastic
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -300,8 +300,8 @@
   ertel: WEIG
   fr: Haltérophilie
   en: Weightlifting
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -310,8 +310,8 @@
   ertel: HAND
   fr: Handball
   en: Handball
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -320,8 +320,8 @@
   ertel: HOCK
   fr: Hockey
   en: Hockey
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -330,8 +330,8 @@
   ertel: WRES
   fr: Lutte    
   en: Wrestling
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -340,8 +340,8 @@
   ertel: WALK
   fr: Marche
   en: Walking
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -350,8 +350,8 @@
   ertel: SWIM
   fr: Natation
   en: Swimming
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -360,8 +360,8 @@
   ertel: ROLL
   fr: Patin à roulettes
   en: roller skate
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -370,8 +370,8 @@
   ertel: PELO
   fr: Pelote basque
   en: Pelote basque
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -380,8 +380,8 @@
   ertel: RODE
   fr: Rodéo
   en: Rodeo
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -390,8 +390,8 @@
   ertel: RUGB
   fr: Rugby et Jeu à XIII
   en: Rugby and Rugby league
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -400,8 +400,8 @@
   ertel: SKII            
   fr: Ski
   en: Ski
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -410,8 +410,8 @@
   ertel: HORS
   fr: Equitation
   en: Equestrian
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -420,8 +420,8 @@
   ertel: ICES
   fr: Sports de glace
   en: Bobsleigh and Skating
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -430,8 +430,8 @@
   ertel: TENN
   fr: Tennis
   en: Tennis
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -440,8 +440,8 @@
   ertel: SHOO
   fr: Tir
   en: Shooting
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -450,8 +450,8 @@
   #ertel: YACH
   fr: Voile
   en: Sailing
-  belongs-to:
-    - SP
+  parents:
+    - SPOR
 -
   slug: 
   g5: 
@@ -460,5 +460,5 @@
   ertel: VOLL
   fr: Volley ball
   en: Volley ball
-  belongs-to:
-    - SP
+  parents:
+    - SPOR

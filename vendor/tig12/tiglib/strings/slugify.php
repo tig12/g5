@@ -20,7 +20,9 @@ class slugify{
         @return The transformed string
     **/
     public static function compute($str, $replace='-', $charset='utf8') {
-        if($charset == 'utf8') $str = utf8_decode($str);
+        if($charset == 'utf8'){
+            $str = utf8_decode($str);
+        }
         $str = self::convert_high_ascii($str);  ## convert high-ASCII chars to 7bit.
         $str = strtolower($str);                ## lower-case.
         $str = strip_tags($str);                ## remove HTML tags.

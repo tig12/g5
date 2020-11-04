@@ -1,0 +1,10 @@
+
+# profession instances
+# Used to generate data/build/occu/wikidata-all-professions.csv
+
+SELECT ?entity ?entityLabel
+WHERE{
+    ?entity wdt:P31 wd:Q28640.
+	SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+ORDER BY (?entityLabel)

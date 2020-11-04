@@ -36,7 +36,7 @@ class Config{
         // Add entries in self::$data['dirs']
         // This is done to avoid to refactor the code.
         // Previously these directory needed to be configured
-        // Now it's useless because some data are versioned, and have a imposed location.
+        // Now it's useless because some data are versioned, and have an imposed location.
         self::$data['dirs']['raw'] = 'data/raw';
         self::$data['dirs']['build'] = 'data/build';
         self::$data['dirs']['model'] = 'data/model';

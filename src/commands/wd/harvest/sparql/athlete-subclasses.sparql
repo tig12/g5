@@ -1,0 +1,9 @@
+
+# Subclasses of athlete
+
+SELECT ?entity ?entityLabel
+WHERE{
+    ?entity wdt:P279 wd:Q2066131.
+	SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+ORDER BY (?entityLabel)
