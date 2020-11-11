@@ -33,7 +33,7 @@ use g5\commands\newalch\muller1083\fixGnr       as fixGnrMuller1083;
 use g5\commands\newalch\muller402\raw2tmp       as raw2tmpMuller402;
 use g5\commands\newalch\muller402\tweak2tmp     as tweak2tmpMuller402;
 use g5\commands\newalch\muller402\addA6         as addA6Muller402;
-use g5\commands\newalch\muller402\raw2tmpMuller100;
+use g5\commands\newalch\muller402\raw2tmp100    as raw2tmpMuller100;
 
 use g5\commands\csicop\si42\raw2tmp             as raw2tmpSi42;
 use g5\commands\csicop\si42\addCanvas1          as addCanvas1Si42;

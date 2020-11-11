@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Importation of data/raw/irving/rawlins-ertel-data.csv
+    Importation of data/raw/csicop/rawlins-ertel-irving/rawlins-ertel-irving.csv
     to  data/tmp/csicop/408-csicop-irving.csv
     
     @license    GPL

@@ -66,9 +66,9 @@ class Muller100 implements SourceI {
 
     // *********************** Source management ***********************
     
-    /** Returns a Source object for 5muller_writers.xlsx. **/
+    /** Returns a Source object for muller-afd1-100-writers.txt. **/
     public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['build'] . DS . self::SOURCE_DEFINITION);
+        return Source::getSource(Config::$data['dirs']['model'] . DS . self::SOURCE_DEFINITION);
     }
     
     // *********************** Group management ***********************

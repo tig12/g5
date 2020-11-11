@@ -67,7 +67,7 @@ class Newalch implements SourceI {
     
     /** Returns a Source object for newalchemypress web site. **/
     public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['build'] . DS . self::SOURCE_DEFINITION);
+        return Source::getSource(Config::$data['dirs']['model'] . DS . self::SOURCE_DEFINITION);
     }
     
     // *********************** Raw files manipulation ***********************

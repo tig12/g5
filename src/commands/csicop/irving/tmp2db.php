@@ -50,7 +50,7 @@ class tmp2db implements Command {
             $datesReport = '';
         }
         
-        // source corresponding to rawlins-ertel-data.csv - insert if does not already exist
+        // source corresponding to rawlins-ertel-irving.csv - insert if does not already exist
         $source = Irving::getSource();
         try{
             $source->insert();

@@ -129,7 +129,7 @@ class Muller1083 implements SourceI {
         Returns a Source object for the raw file used for Muller1083.
     **/
     public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['build'] . DS . self::RAW_SOURCE_DEFINITION);
+        return Source::getSource(Config::$data['dirs']['model'] . DS . self::RAW_SOURCE_DEFINITION);
     }
 
     // *********************** Group management ***********************

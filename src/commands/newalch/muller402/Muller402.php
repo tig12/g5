@@ -66,7 +66,7 @@ class Muller402 implements SourceI {
     
     /** Returns a Source object for 5muller_writers.xlsx. **/
     public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['build'] . DS . self::SOURCE_DEFINITION);
+        return Source::getSource(Config::$data['dirs']['model'] . DS . self::SOURCE_DEFINITION);
     }
     
     // *********************** Group management ***********************

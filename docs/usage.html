@@ -264,7 +264,8 @@ Possible values for parameter :
     all : Build tmp files and fill db
 </pre>
 
-Then the following command builds the database from scratch :
+If 'db' or 'all' are choosen, it also drops existing tables and creates empty ones.
+<br>Then the following command builds the database from scratch :
 <pre>php run-g5.php db fill history all</pre>
 
 

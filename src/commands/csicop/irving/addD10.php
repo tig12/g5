@@ -56,7 +56,7 @@ class addD10 implements Command {
             $GQID = '';
             if(isset($ertel_csid[$CSID])){
                 $nModif++;
-                $GQID = $ertel_csid[$CSID]['GNUM'];
+                $GQID = $ertel_csid[$CSID]['GQID'];
                 $NUM = str_replace('D10-', '', $GQID);
             }
             $new = $irow;

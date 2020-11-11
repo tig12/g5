@@ -26,14 +26,14 @@ class Irving implements SourceI {
         Path to the yaml file containing the characteristics of the source.
         Relative to directory specified in config.yml by dirs / build
     **/
-    const SOURCE_DEFINITION = 'source' . DS . 'unpublished' . DS . 'rawlins-ertel-data.yml';
+    const SOURCE_DEFINITION = 'source' . DS . 'unpublished' . DS . 'rawlins-ertel-irving.yml';
 
     /** Slug of the group in db **/
     const GROUP_SLUG = 'csicop';
 
     const RAW_CSV_SEP = ';';
     
-    /** Field names of data/raw/csicop/irving/rawlins-ertel-data.csv **/
+    /** Field names of data/raw/csicop/rawlins-ertel-irving/rawlins-ertel-irving.csv **/
     const RAW_FIELDS = [
         'Satz#',
         'NAME',
@@ -124,19 +124,19 @@ class Irving implements SourceI {
     
     // *********************** Source management ***********************
     
-    /** Returns a Source object for 5muller_writers.xlsx. **/
+    /** Returns a Source object for rawlins-ertel-irving.csv. **/
     public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['build'] . DS . self::SOURCE_DEFINITION);
+        return Source::getSource(Config::$data['dirs']['model'] . DS . self::SOURCE_DEFINITION);
     }
     
     // *********************** Raw files manipulation ***********************
     
     /** Path to Irving's raw file **/
     public static function rawFilename(){
-        return implode(DS, [Config::$data['dirs']['raw'], 'csicop', 'irving', 'rawlins-ertel-data.csv']);
+        return implode(DS, [Config::$data['dirs']['raw'], 'csicop', 'rawlins-ertel-irving', 'rawlins-ertel-irving.csv']);
     }
     
-    /** Loads rawlins-ertel-data.csv in a regular array **/
+    /** Loads rawlins-ertel-irving.csv in a regular array **/
     public static function loadRawFile(){
         return file(self::rawFilename(), FILE_IGNORE_NEW_LINES);
     }
