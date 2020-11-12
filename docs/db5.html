@@ -169,7 +169,6 @@ All entities of this database have a field called <b>slug</b>, unique within eac
 <br>They contain only lower case letters without accents [a-z], digits [0-9], and hyphen (-).
 
 <br><br>Group and source slug are defined by humans, in the code for groups and or in files of <code>data/buid/source</code> for sources. 
-<br>They can contain lower or upper case letters without accents [a-z] or [A-Z], digits [0-9], and hyphen (-)
 
 
 <!-- ********************************************************************************* -->
@@ -267,7 +266,9 @@ Example of Moinot Pierre 1920-03-29, present in 3 different files of cura.free.f
 <!-- ************************************* -->
 <h3><a name="4-2-raw">raw</a></h3>
 
-Associative array ;
+This field permits to the fields of a person with the values of the raw data, ti eventually identify errors made during database construction.
+
+<br><br>Associative array ;
 <br>keys = source slug
 <br>values = values of the person in the given source (errors not corrected).
 <br>Example : 
@@ -307,7 +308,10 @@ It shows a record found in Gauquelin data (file A6) and in Müller data (file <c
 
 <!-- ************************************* -->
 <h3><a name="4-3-history">history</a></h3>
-Array ; each element contains an associative array with 4 key / value pairs :
+
+Permits to track the successive transformations operated on a person.
+
+<br><br>Regular array ; each element contains an associative array with 4 key / value pairs :
 <ul>
     <li><code>command</code> : the g5 command issued to update this person.</li>
     <li><code>date</code> : date of execution of the command.</li>
@@ -368,6 +372,12 @@ Array ; each element contains an associative array with 4 key / value pairs :
 ]
 </pre>
 
+<!-- ************************************* -->
+<h3>to-check</h3>
+Not implemented yet.
+<br>While importing data, it's sometimes possible to identify dubious values, and mark them, in order to build a list of records needing human check.
+
+
 <!-- ********************************************************************************* -->
 <h2><a name="implementation-details">Implementation details</a></h2>
 The database uses <a href="https://www.postgresql.org/">postgresql</a>.
@@ -376,7 +386,7 @@ The database uses <a href="https://www.postgresql.org/">postgresql</a>.
 <br>Each entity has a field <code>id</code>, used as primary key.
 <br>Slugs are also indexed.
 <br>Links between Person and Group are expressed by a relation table. The other links (Source-Person, Source-Source...) are contained in the json values.
-<br>SQL to cretae the tables are located in <code>src/model/db-create-tables</code>
+<br>SQL to crete the tables are located in <code>src/model/db-create-tables</code>
 
 <!-- ********************************************************************************* -->
 <h2><a name="g5-integration">G5 integration</a></h2>
