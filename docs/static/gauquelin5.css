@@ -1,11 +1,30 @@
-
 @import "style.css";
+
+/* ================ Move to template ================ */
+
+
+table.padded2 td{padding:2px;}
+.tip{
+    margin:1rem;
+    padding:1rem;
+    background:lightblue;
+    border:2px solid yellow;
+}
+
+/* ================  ================ */
+/* ================  ================ */
+/* ================  ================ */
+
 
 body{
     padding-top:0;
     padding-left:0;
     padding-bottom:1em;
 }
+
+
+
+
 
 code{font-size:1.1em;}
 

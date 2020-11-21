@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title> | Gauquelin5</title>
+    <title> Mathematicians ranking | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="">
     <meta name="robots" content="index,follow">
@@ -12,7 +12,7 @@
     <meta name="dcterms.dateCopyrighted" content="2019">
     <!-- 
     tigsite:
-        history: , Thierry Graff : Creation
+        history: 2020-11-21 04:46:42+01:00, Thierry Graff : Creation
     -->
 </head>
 
@@ -31,12 +31,18 @@
 
 <header>
 <h1></h1>
-<div class="intro"></div>
+<div class="intro">Mathematicians eminence ranking</div>
 </header>
 
 <article>
 
+<pre>
+for i in $(ls *.jpg); do tesseract $i $i --psm 6; done;
 
+touch peiffer-dahan.txt
+for i in $(ls *.txt); do cat $i >> peiffer-dahan.txt; done;
+
+</pre>
 
 </article>
 </div><!-- end class="main" -->

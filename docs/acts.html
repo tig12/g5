@@ -35,7 +35,6 @@
 <h1>
 Acts
 </h1>
-
 <div class="intro">
 Acts are official documents containing informations handled by g5 database, in particular birth certificates (BCs). They are used to solve questions raised by g5 development, but not integrated yet to the program (informations from BCs are currently integrated through <a href="tweak2tmp.html">tweak files</a>).
 <br>Although not integrated to g5, act transcription is precisely organized, as described in this page.
@@ -47,7 +46,6 @@ Acts are official documents containing informations handled by g5 database, in p
 <nav class="toc">
     <ul>
         <li>
-            <a href="#about-french-archives">About french archives</a>
         </li>
         <li>
             <a href="#retrieval-process">Retrieval process</a>
@@ -58,28 +56,18 @@ Acts are official documents containing informations handled by g5 database, in p
         </li>
         <li>
             <a href="#example">Example</a>
-        </li>
+        </li>                                                    
         <li>
             <a href="#acts-syntax">Acts syntax</a>
         </li>
         <li>
             <a href="#gauquelin5-integration">Gauquelin5 integration</a>
         </li>
+        <li>
+            <a href="#french-archives">French archives</a>
+        </li>
     </ul>
 </nav>
-
-
-
-
-
-
-<!-- ********************************************************************************* -->
-<h2><a name="about-french-archives">About french archives</a></h2>
-
-In France, all acts since 1792 include time. Scans of the original documents until ~1920 can be viewed online for free. This makes 5 generations, around 200 millions of acts (birth, death, mariage) with times (source <a href="http://www.filae.com/ressources/etat-civil-numerise-dou-viennent-les-donnees/">filae.com</a>).
-<br>Here lies potential data to test planetary heredity at large scale, but not (yet ?) in the scope of g5 program. 
-<br>
-<br>If you want to see original acts, type on a search engine for example "archives 45" (or maybe "Archives 45 France") to see the <i>archives départementales du Loiret</i> (Loiret is département n° 45).
 
 
 <!-- ********************************************************************************* -->
@@ -245,11 +233,116 @@ The syntax used to transcribe the acts comes from an unpublished genealogy softw
 <br>YAML files are written using french vocabulary, and are translated to a reference vocabulary (close to english) understood by the code parsing the yaml files. This permits to use other languages for the transcription.
 <br>This syntax is adapted to act transcription and contains informations currently not used for g5 development.
 
+
 <!-- ********************************************************************************* -->
 <h2><a name="gauquelin5-integration">Gauquelin5 integration</a></h2>
 Not done yet ; code transfering information from <code>acts/</code> to g5 database needs to be written.
 <br>Currently, when an information of the database needs to be corrected (because it contradicts an act), this is done using the <a href="tweak2tmp.html">tweak2tmp</a> mechanism.
 
+
+<!-- ********************************************************************************* -->
+<h2><a name="french-archives">French archives - Overview</a></h2>
+
+In France, all acts (birth, death, mariage) since 1792 include the time of the events.
+<br>Scans of the original documents until ~1920 can be browsed on web sites of the <i>Archives départementales</i>.
+<br>This makes 5 generations, around 200 millions of documents, originally scanned by Mormons (The Church of Jesus Christ of Latter-day Saints) in the 1980s.
+<br>Times are often rounded to the hour. 
+
+<div class="tip">
+To see original acts, type on a search engine for example "archives 45" (or maybe "Archives 45 France") to see the <i>archives départementales du Loiret</i> (Loiret is département n° 45).
+</div>
+
+Here lies potential data to test astral heredity at large scale, but not (yet ?) in the scope of g5 program. 
+
+
+<!-- ************************************* -->
+<h3>filae.com</h3>
+Page <a href="http://www.filae.com/ressources/etat-civil-numerise-dou-viennent-les-donnees/">Etat-civil numérisé : d’où viennent les données</a>
+says they have numerized the quasi-totality of french civil registries of the XIXth century, since revolution (1792).
+<br>More than 100 millions pages representing 200 millions acts.
+<br>Limits :
+<ul>
+    <li>Birth : acts older than 120 years</li>
+    <li>Mariage : acts older than 104 years</li>
+    <li>Death : acts older than 75 years</li>
+</ul>
+
+<!-- ************************************* -->
+<h3>Local associations</h3>
+Numerous individuals and local associations have transcribed (typed in electronic format) acts. For a part, data are closed, reserved to the associations adherents.
+<br>But part of these data are open, a quite dynamic ecosystem, with free software to assist act transcription, and millions of acts available from heterogenous sources, and (in general ?) without birth time mentioned.
+
+<ul class="spaced margin-top">
+    <li>
+        <div class="bold"><a href="https://www.cegfc.net/www/nimegue/nimegue/index.html">Nimègue</a></div>
+        <a href="https://www.cegfc.net/www/nimegue/nimegue/index.html">Nimègue</a> is a software used by genealogists to transcribe various types of acts (<i>actes paroissiaux, d'état civil, notariés</i>): civil registry, church, notary + army, hospital, justice.
+        <br>Very sad : Time is not handled by Nimègue. The form to create a new act contains only the day.
+<!-- 
+https://www.cegfc.net/www/nimegue/nimegue/questionsevolutions.html
+Pour s'incrire au groupe, envoyez un message à : nimegue-subscribe@yahoogroupes.fr
+Pour publier un message, l'envoyer à l'adresse : nimegue@yahoogroupes.fr
+Pour se désinscrire du groupe, envoyez un message à : nimegue-unsubscribe@yahoogroupes.fr
+-->
+    </li>
+    
+    <li>
+        <div class="bold">ExpoActes</div>
+        Software permitting to import and publish data - from Nimègue, csv,
+        <br>From <a href="http://expocartes.monrezo.be/agregactes.php">Inventaire des sites ExpoActes</a>
+        <table class="margin05 border padded2">
+        <tr><td>Births</td><td>Naissances</td><td>41 456 522</td></tr>
+        <tr><td>Mariages</td><td>Mariages</td><td>16 788 234</td></tr>
+        <tr><td>Death</td><td>Décès</td><td>29 431 962</td></tr>
+        <tr><td>Miscelaneous</td><td>Divers</td><td>9 844 697</td></tr>
+        <tr><td><b>Total</b></td><td><b>97 521 415</b></td></tr>
+        </table>
+        (data 2020-11-21)
+        <br>Part of these data can be browsed, part are reserved to the associations' members.
+        <br>Didn't find way to download the data.
+    </li>
+    
+    <li>
+        <div class="bold"><a href="http://www.bigenet.fr">bigenet.fr</a></div>
+        58 genealogical associations
+        <br>63 774 310 acts transcribed
+        <br><b>224 023 107</b> persons indexed
+    </li>
+    
+    <li>
+        <div class="bold"><a href="http://geneabank.org">geneabank.org</a></div>
+        Gathers data from <a href="http://www.geneabank.org/gensocs/indexfr.html">100 local associations</a>
+        <br><b>109 420 603</b> acts dated between 1358 and 1935.
+        <br>(data 2020-11-20)
+    </li>
+</ul>
+
+<!-- 
+
+-------------------------------------------------------
+
+Sites ExpoActes avec données directement accessibles sans incription
+
+Généprovence
+http://actes.geneprovence.com/chercher.php
+
+Doubs Genealogie
+http://doubsgenealogie.fr/genealogie/actes/index.php
+
+Biot en ligne
+http://bioutenc.free.fr/actes/index.php
+
+http://sbouv.free.fr/index.php
+
+AGHA (Association de Généalogie des Hautes-Alpes)
+http://agha.fr/actes/index.php
+
+Perigen, relevés généalogiques de la Dordogne
+http://perigen.fr/actes/index.php
+
+
+
+-->
+        
 </article>
 </div><!-- end class="main" -->
 
@@ -350,5 +443,3 @@ Not done yet ; code transfering information from <code>acts/</code> to g5 databa
 
 </body>
 </html>
-<!-- ************************************* -->
-<!-- ********************************************************************************* -->
