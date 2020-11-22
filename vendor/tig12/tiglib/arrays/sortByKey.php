@@ -22,14 +22,14 @@ class sortByKey{
             1=>['name'=>'titi', 'age'=>25],
             2=>['name'=>'tata', 'age'=>35]
         ];
-        $array2 = jth_sortByKey::sortByKey($array, 'name');
+        $array2 = sortByKey::compute($array, 'name');
         // then we have :
         $array2 = [
             0=>['name'=>'tata', 'age'=>35],
             1=>['name'=>'titi', 'age'=>25],
             2=>['name'=>'toto', 'age'=>45]
         ];
-        $array3 = jth_sortByKey::sortByKey($array, 'age');
+        $array3 = sortByKey::compute($array, 'age');
         // then we have :
         $array3 = [
             1=>['name'=>'titi', 'age'=>25],

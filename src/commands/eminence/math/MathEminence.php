@@ -1,34 +1,25 @@
 <?php
 /******************************************************************************
-    Arno Müller's 402 italian writers
-    Code common to muller402
     
     @license    GPL
-    @history    2020-05-15 ~22h30+02:00, Thierry Graff : Creation
+    @history    2020-11-22 09:42:25+01:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\eminence\math;
 
-use g5\Config;
-use g5\model\DB5;
-use g5\model\{Source, SourceI, Group};
-use tiglib\time\seconds2HHMMSS;
-use tiglib\arrays\csvAssociative;
+// use g5\Config;
+// use g5\model\DB5;
+// use g5\model\{Source, SourceI, Group};
+// use tiglib\time\seconds2HHMMSS;
+// use tiglib\arrays\csvAssociative;
 
-class MathEminence implements SourceI {
+class MathEminence {
     
     // TRUST_LEVEL not defined, using value of class Newalch
+
     
-    /**
-        Path to the yaml file containing the characteristics of the source.
-        Relative to directory specified in config.yml by dirs / build
-    **/
-    const SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch' . DS . '5muller_writers.yml';
-
-    /** Slug of the group in db **/
-    const GROUP_SLUG = 'muller402writers';
-
-    /** Separator used in the raw csv file **/
-    const RAW_SEP = ';';
+// ==================== WIP ====================
+// Following code is useless
+// Kept to copy / paste in pdd.php
     
     /** Names of the columns of raw file 5muller_writers.csv **/
     const RAW_FIELDS = [
@@ -62,13 +53,6 @@ class MathEminence implements SourceI {
         'OCCU',
     ];
     
-    // *********************** Source management ***********************
-    
-    /** Returns a Source object for 5muller_writers.xlsx. **/
-    public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['model'] . DS . self::SOURCE_DEFINITION);
-    }
-    
     // *********************** Group management ***********************
     
     /**
@@ -83,20 +67,6 @@ class MathEminence implements SourceI {
         return $g;
     }
     
-    // *********************** Raw files manipulation ***********************
-    
-    /**
-        @return Path to the raw file 5muller_writers.csv coming from newalch
-    **/
-    public static function rawFilename(){
-        return implode(DS, [Config::$data['dirs']['raw'], 'newalchemypress.com', '05-muller-writers', '5muller_writers.csv']);
-    }
-    
-    /** Loads 5muller_writers.csv in a regular array **/
-    public static function loadRawFile(){
-        return file(self::rawFilename(), FILE_IGNORE_NEW_LINES);
-    }                                                                                              
-                                                                                         
     // *********************** Tmp file manipulation ***********************
     
     /**
@@ -146,47 +116,4 @@ class MathEminence implements SourceI {
         return csvAssociative::compute(self::tmpRawFilename());
     }
 
-    // *********************** time / space functions ***********************
-    // shared by Muller402 and Muller100
-    
-    /**
-        Conversion of TZ offset found in newalch file to standard sHH:MM offset.
-        WARNING : possible mistake for "-0.6" :
-            0.6*60 = 36
-            "Problèmes de l'heure résolus pour le monde entier",
-            Françoise Schneider-Gauquelin (p 288) indicates 00:37
-            Current implementation uses Gauquelin, but needs to be confirmed
-        @param $offset  timezone offset as specified in newalch file
-        @param $lg      longitude, as previously computed
-    **/
-    public static function compute_offset($offset, $lg){
-        if($offset == 'LMT'){ 
-            // happens for 5 records
-            // convert longitude to HH:MM:SS
-            $sec = $lg * 240; // 240 = 24 * 3600 / 360
-            return '+' . seconds2HHMMSS::compute($sec);
-        }
-        switch($offset){
-        	case '-1':
-        	case '-1.00':
-        	    return '+01:00';
-        	break;
-        	case '-0,83': 
-        	case '-0.83': 
-        	    return '+00:50';
-        	break;
-        	case '-0,88': 
-        	case '-0.88': 
-        	    // Converting geonames.org longitude for Palermo (13°20'08") gives 00:53:34
-        	    // Gauquelin says 00:54
-        	    // Gabriel says 00:53:28
-        	    return '+00:54';
-        	break;
-        	case '-0,6': 
-        	    return '+00:37';
-        	break;
-            default:
-                throw new \Exception("Timezone offset not handled in Muller402 : $offset");
-        }
-    }
 }// end class
