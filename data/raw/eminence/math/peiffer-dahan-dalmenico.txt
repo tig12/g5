@@ -2,9 +2,9 @@ Abel, 117, 225, 232, 271, 274.
 Alberti, 128, 130.
 Alembert (d’), 199, 223, 234, 250.
 Anaximandre, 44.
-Anaximéne, 44.
+Anaximène, 44.
 Apollonius, 65-67, 128.
-Archiméde, 67-68, 171-174, 209.
+Archimède, 67-68, 171-174, 209.
 Argand, 256-257.
 Aristée, 65.
 Aristote, 17, 29, 54, 55, 209.
@@ -89,21 +89,21 @@ Descartes, 110, 135-136, 187, 215.
 
 Dini, 236.
 
-Dioclés, 68.
+Dioclès, 68.
 
 Diophante, 77-82, 111.
 
 Dirichlet (Lejeune-), 228-229, 232.
 
-Direr, 129.
+Dürer, 129.
 
 Eisenstein, 222.
 
-Eratosthéne, 68.
+Eratosthène, 68.
 
 Euclide, 55-64, 122, 151.
 
-Eudéme, 122.
+Eudème, 122.
 
 Eudoxe, 57.
 
@@ -137,7 +137,7 @@ Gauss, 112, 114, 153-155, 159, 225, 251-252, 258, 264-269, 283, 291.
 
 Gérard de Crémone, 27.
 
-Gerbert d’ Aurillac (Sylvestre II), 24.
+Gerbert d’Aurillac (Sylvestre II), 24.
 Gergonne, 144, 256.
  
 Gibbs, 287.

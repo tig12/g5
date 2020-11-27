@@ -1,0 +1,18 @@
+
+document:
+  history:
+    - 2020-11-26 22:33:59+01:00: Thierry Graff, creation
+
+name: bourbaki.txt
+slug: bourbaki-histoire
+description: |
+  List of mathematicians ranked by citation count in book :
+    Éléments d'histoire des Mathématiques
+    by Nicolas Bourbaki
+    Ed. Springer
+    2007 (3rd edition ; reprint from 1984 version, ed. Masson)
+    
+    Uses the "INDEX DES NOMS CITÉS", pp 366 - 376 of the book  
+source:
+  parents: []
+  

@@ -19,6 +19,7 @@ class DB5{
     const TRUST_REST = 5;
     
     /** Separator used to build uids **/
+// TODO suppress
     const SEP = '/';
     
     /**

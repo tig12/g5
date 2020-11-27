@@ -1,15 +1,15 @@
 <?php
 /********************************************************************************
-    Builds a list of 220 mathematicians ranked by eminence.
+    Builds a list of 458 mathematicians ranked by eminence.
     Data source : book
-        Une histoire des mathématiques
-        Routes et dédales
-        Amy Dahan-Dalmedico
-        Jeanne Peiffer
-        Editions du Seuil, 1986
+        Éléments d'histoire des Mathématiques
+        by Nicolas Bourbaki
+        Ed. Springer
+        2007 (3rd edition ; reprint from 1984 version, ed. Masson)
+        Uses the "INDEX DES NOMS CITÉS", pp 366 - 376 of the book
     
     @license    GPL
-    @history    2020-11-22, Thierry Graff : Creation
+    @history    2020-11-26 21:59:17+01:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\eminence\math;
 
@@ -22,22 +22,23 @@ use tiglib\arrays\sortByKey;
 // *****************************************
 //          Model class
 // *****************************************
-class PDDModel implements SourceI {
+class BourbakiModel implements SourceI {
 // PeifferDahanDalmedico
 
+    // TRUST_LEVEL not defined, using value of class Newalch
     
     /**
         Path to the yaml file containing the characteristics of the source.
         Relative to directory data/model/source
     **/
-    const SOURCE_DEFINITION = 'eminence' . DS . 'math' . DS . 'peiffer-dahan-dalmenico.yml';
+    const SOURCE_DEFINITION = 'eminence' . DS . 'math' . DS . 'bourbaki.yml';
 
     /** Slug of the group in db **/
     const GROUP_SLUG = 'peiffer-dahan-dalmenico';
     
     // *********************** Source management ***********************
     
-    /** @return a Source object for the raw file **/
+    /** @return a Source object for the raw file. **/
     public static function getSource(): Source {
         return Source::getSource(Config::$data['dirs']['model'] . DS . self::SOURCE_DEFINITION);
     }
@@ -46,7 +47,7 @@ class PDDModel implements SourceI {
     
     /** @return Path to the raw file **/
     public static function rawFilename(){
-        return implode(DS, [Config::$data['dirs']['raw'], 'eminence', 'math', 'peiffer-dahan-dalmenico.txt']);
+        return implode(DS, [Config::$data['dirs']['raw'], 'eminence', 'math', 'bourbaki.txt']);
     }
     
     /** Loads raw file in a regular array **/
@@ -58,7 +59,7 @@ class PDDModel implements SourceI {
     
     /** @return Path to the csv file stored in data/tmp/ **/
     public static function tmpFilename(){
-        return implode(DS, [Config::$data['dirs']['tmp'], 'eminence', 'math', 'peiffer-dahan-dalmenico.csv']);
+        return implode(DS, [Config::$data['dirs']['tmp'], 'eminence', 'math', 'bourbaki.csv']);
     }
     
 }
@@ -67,9 +68,9 @@ class PDDModel implements SourceI {
 // *****************************************
 //          Implementation of Command
 // *****************************************
-class pdd implements Command {
+class bourbaki implements Command {
     
-    /** Possible values of the command **/
+    /**  Possible values of the command **/
     const POSSIBLE_PARAMS = [
         'raw2tmp',
     ];
@@ -103,17 +104,17 @@ class pdd implements Command {
     }
     
     // ******************************************************
-    /** 
+    /**
         Input
-            data/raw/eminence/maths/peiffer-dahan-dalmenico.txt
+            data/raw/eminence/maths/bourbaki.txt
         Output
-            data/tmp/eminence/math/peiffer-dahan-dalmenico.csv
+            data/tmp/eminence/math/bourbaki.csv
     **/
     private static function exec_raw2tmp(){
-        $report =  "--- pdd raw2tmp ---\n";
-        $lines = PDDModel::loadRawFile();
+        $report =  "--- bourbaki raw2tmp ---\n";
+        $lines = BourbakiModel::loadRawFile();
         $N = 0;
-        $p = '/(.*?), (\d.*)\./';
+        $p = '/(.*?),\s*(\d.*)/';
         $res = [];
         foreach($lines as $line){
             $line = trim($line);
@@ -140,7 +141,7 @@ class pdd implements Command {
             $res2 .= implode(G5::CSV_SEP, $cur) . "\n";
         }
         //
-        $outfile = PDDModel::tmpFilename();
+        $outfile = BourbakiModel::tmpFilename();
         file_put_contents($outfile, $res2);
         $report .= "Wrote $N records in $outfile\n";
         return $report;
@@ -148,33 +149,35 @@ class pdd implements Command {
     
     /**
         Auxiliary of exec_raw2tmp()
-        @param  $str    List of pages as found in raw file
-                        Examples :
-                        296
-                        103, 107, 177
-                        125, 174-176
+        @param  $str    Examples :
+                        117, 225, 232, 271, 274
+                         117, 118, 120 à 124, 127, 128
         @return Array of page numbers
     **/
     public static function computePages($str){
-        $parts = explode(', ', $str);
+        $parts = explode(',', $str);
         $res = [];
         foreach($parts as $part){
             $part = trim($part);
+            $part = str_replace('.', '', $part);
             if(is_numeric($part)){
                 // single page number
-                $res[] = $part;
+                // cast to solve bug (a dot sometimes remains ar the end) - not understood
+                $res[] = (int)$part;
+                continue;
             }
-            else {
-                // page range, like 174-176
-                $tmp = explode('-', $part);
-                if(count($tmp) != 2){
-                    echo "ERROR in computePages($str) : $part\n";
-                    continue;
-                }
-                [$p1, $p2] = $tmp;
-                for($p=$p1; $p <= $p2; $p++){
-                    $res[] = $p;
-                }
+            // page range, like 174-176
+            $tmp = explode('à', $part);
+            if(count($tmp) != 2){
+                echo "ERROR in computePages($str) : $part\n";
+                continue;
+            }
+            [$p1, $p2] = $tmp;
+            // cast to solve bug (a dot sometimes remains ar the end) - not understood
+            $p1 = (int)$p1;
+            $p2 = (int)$p2;
+            for($p=$p1; $p <= $p2; $p++){
+                $res[] = $p;
             }
         }
         return $res;

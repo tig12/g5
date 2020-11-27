@@ -1,0 +1,248 @@
+Abel Niels : 64, 71, 77, 78, 79, 89, 122                       
+Adélard de Bath : 30               
+Al Haytham : 34                    
+Al Kashi Ghiyath : 35              
+Al Khazin : 33                     
+Al Khwarizmi Mohammed : 30, 31, 32, 40                    
+Al Tusi Nasir al Din : 35          
+Alberti Leone Battista : 37, 38    
+Alembert Jean Le Rond d’ : 62, 63, 65, 66, 73                
+Alexandrov Pavel : 107             
+Anaxagore de Clazomènes : 24       
+Apéry Roger : 61                   
+Apollonius de Pergé : 27, 28, 30   
+Arasse Daniel : 38                 
+Archimède : 17, 24, 25, 26, 27, 42, 122                       
+Aristote : 16, 17, 22, 30          
+Arnold Vladimir : 108, 109         
+Artin Emil : 96                    
+Atiyah Michael : 121               
+Audin Maurice : 112                
+                             
+Barner Klaus : 49                  
+Bénabou Jean : 107                 
+Benzécri Jean-Paul : 118           
+Berge Claude : 119                 
+Bernoulli Jacques : 58, 61         
+Bernoulli Jean : 58, 60            
+Birch Bryan : 122                  
+Bolyai Janos : 75                  
+Bolzano Bernard : 76               
+Bombelli Raffaelle : 41, 52        
+Bosse Abraham : 48                 
+Bouguer Pierre : 62                
+Bourbaki Charles : 106
+Bourbaki Nicolas : 105, 106
+Bourgain Jean : 120
+Brahmagupta : 32
+Briggs Henry : 45
+Brunelleschi Filippo : 37
+Bush Vannevar : 102
+
+Cantor Georg : 91, 97
+Carcavi Pierre de : 49, 50
+Cardan Jérôme : 40, 41, 43
+Carleson Lennart : 121
+Cartan Élie : 110
+Cartan Henri : 105, 106, 110, 111, 114, 122
+Cauchy Augustin : 68, 76, 77, 78, 79, 86, 89, 90, 91, 111
+Cavalieri Bonaventura : 50
+Caveing Maurice : 19
+Chasles Michel : 83, 84
+Chevalley Claude : 105
+Choquet Gustave : 106
+Christine de Suède : 53
+Chuquet Nicolas : 39
+Clairaut Alexis : 62
+Clay Landon : 122
+Cohen Paul : 98
+Colbert Jean-Baptiste : 56
+Condorcet marquis de : 65, 67
+Connes Alain : 81, 120, 121
+Courant Richard : 96, 97
+Crelle August : 78, 79
+Dan Klara : 103
+Darboux Gaston : 92
+Dautray Robert : 115
+Dedekind Richard : 21, 91
+Delambre Jean-Baptiste : 56
+Deligne Pierre : 101, 110, 120
+Delsarte Jean : 105  
+Démocrite : 22                      
+Desargues Girard : 47, 48, 54, 83   
+Descartes Francine : 52             
+Descartes René : 47, 50, 51, 52, 53                         
+Dieudonné Jean : 82, 105, 112, 113                            
+Diophante d'Alexandrie : 29, 51     
+Dirichlet Peter Lejeune : 81, 82    
+Dwork Bernard : 110                 
+          
+Egorov Dimitri : 107                
+Eilenberg Samuel : 107, 110         
+Einstein Albert : 75                
+Eratosthène : 23, 24, 56            
+Euclide d'Alexandrie : 17, 18, 19, 20, 21, 22, 25, 30, 106    
+Eudoxe de Cnide : 16, 17, 21, 22    
+Euler Leonhardt : 50, 60, 61, 63, 64, 75, 76, 79, 90, 94, 110, 122                       
+          
+Fermat Pierre de : 47, 49, 50, 51, 53, 55, 60, 62, 64, 75, 81, 122                        
+Ferro Scipione del : 40             
+Fields John : 120                   
+Fields médaille : 120, 121          
+Fourier Joseph : 71, 72, 79, 81, 82, 86, 107                    
+Fuchs Lazarus : 92                  
+          
+Galilée : 27, 45, 46                
+Galois Évariste : 64, 79, 80, 81, 88, 95, 113, 121, 122          
+Gamow George : 24                   
+Gauss Karl Friedrich : 69, 70, 73, 74, 75, 78, 79, 81, 86, 87, 122                        
+Gelfand Israël : 109, 122           
+Gérard de Crémone : 30              
+Gerbert d’Aurillac : 36             
+Germain Sophie : 72, 75             
+Gödel Kurt : 98                     
+Goldstine Hermann : 103             
+Gromov Mikhaïl : 84, 122            
+Grothendieck Alexandre : 81, 107, 110, 112, 113, 114, 120, 121, 122
+
+Hadamard Jacques : 99, 100, 105, 108, 109
+Halley Edmond 62
+Hardy Godfrey Harold : 101
+Heiberg Johan : 19, 25
+Herbrand Jacques : 105
+Herman Michael : 121
+Hermite Charles : 92, 98, 106
+Héron d'alexandrie : 12, 28
+Hilbert David : 20, 91, 94, 95, 96, 97, 98, 103, 107, 108, 122
+Hodge William : 122
+Holmboe Bernt : 77
+Hooke Robert : 58
+Hospital marquis Guillaume de : 58
+Hurwitz Adolf : 97
+Hypathie : 19
+
+Ibn Sahl : 53
+
+Jacobi Carl Gustav : 71, 78, 82
+Jordan Camille : 88
+
+Keller Olivier : 8, 9
+Kepler Johann : 27
+Khayyam Omar : 33, 34, 35, 40
+Klein Félix : 88, 95
+Kolmogorov Andrei : 107, 108, 109, 122
+Kovalevski Sophie : 89, 90
+La Condamine Charles Marie de : 62
+Lafforgue Laurent : 120
+Lagrange Joseph-Louis : 63, 64, 68, 71, 72, 75, 79, 122
+Laplace Pierre Simon : 66, 70, 109
+Lawvere William : 107
+Lax Peter : 121
+Le Verrier Urbain : 117
+Lebesgue Henri : 72, 100, 101, 107      
+Legendre Adrien-Marie : 66, 70, 71, 75, 79, 81, 82, 86       
+Leibniz Gottfried von : 58, 59    
+Léonard de Pise : 36, 40          
+Leray Jean : 41, 110, 111, 114, 122                          
+Libri Guillaume : 36              
+Lie Sophus : 88, 109              
+Lindemann Ferdinand von : 98      
+Lions Jacques-Louis : 111, 114, 115                          
+Lions Pierre-Louis : 120          
+Liouville Joseph : 81, 98         
+Lobatchevski Nikolai : 75, 84, 85, 86                       
+Lusin Nikolai : 107               
+            
+Mac Lane Saunders : 107           
+Manin Iouri : 109                 
+Matiyasevitch Iouri : 98          
+Méchain Pierre : 56               
+Mersenne Marin : 46, 47, 49, 50, 53                        
+Meyer Yves : 119                  
+Minkowski Hermann : 95, 97        
+Mittag-Leffler Gösta : 90, 93     
+Monge Gaspard : 19, 48, 65, 69, 76, 77, 83                    
+Morgenstern Oskar : 103           
+Morlet Jean : 118                 
+Moser Jürgen : 108                
+            
+Navier Claude : 110, 122          
+Neper John : 44, 45               
+Neugebauer Otto : 13, 14          
+Newton Isaac : 56, 57, 58, 62, 75, 78                        
+Nicomède : 23                     
+Noether Emmy : 96, 97, 107        
+            
+Okounkov Andrei : 120             
+Ostrogradski Mikhail : 89
+
+Pascal Blaise : 47, 49, 53, 54, 55, 62, 122                  
+Pascal Étienne : 47, 53, 54       
+Peletier du Mans Jacques : 39     
+Pell John : 50                    
+Perelman Grigori : 120, 122       
+Peyrard François : 19             
+Philippe de Macédoine : 18
+Phragmen Edvard : 93
+Pica Pierre : 8
+Picard Jean : 56
+Piero della Francesca : 38
+Pierre le Grand : 60
+Platon : 16, 17
+Plimpton George : 13, 322
+Poincaré Henri : 70, 92, 93, 94, 106, 107, 117, 120, 121, 122
+Poisson Siméon : 79
+Poncelet Jean-Victor : 83
+Pozzo Andrea : 39
+Proclus : 15
+Ptolémée Claude : 11, 30, 34
+Pythagore : 15, 16, 21
+
+Queneau Raymond : 51, 96
+
+Ramanujan Srinivasa : 101
+Rashed Roshdi : 29
+Riemann Bernhard : 72, 75, 86, 87, 98, 101, 109, 122
+Roberval Gilles Personne de : 47
+Robinson Abraham : 76
+Robinson Julia : 98
+Roubaud Jacques : 95, 106
+
+Sachs Abraham : 14
+Saint-Vincent Grégoire de : 22
+Schneider Theodor : 98
+Schwartz Laurent : 111, 112, 114, 120
+Serre Jean-Pierre : 113, 114, 120, 121, 122
+Shimura Goro : 110
+Singer Isadore : 121
+Snel van Royen Willebrord : 53
+Socrate : 16
+Stokes George : 122
+Swinnerton-Dyer Peter : 122
+
+Taniyama Yutaka : 110
+Tao Terence : 120
+Thalès : 15
+Théodore de Cyrène : 16
+Théon d'Alexandrie : 19
+Thom René : 120Ulam Stanislaw : 105                
+                  
+Vallée Poussin Charles de la : 99   
+Van der Waerden Bartel : 96         
+Varadhan Srinivasa : 121            
+Viète François : 42, 43, 50, 52     
+Vitrac Bernard : 19                 
+Vlacq Adriaan : 45                  
+Von Neumann John : 102, 103, 104, 105, 120, 122             
+                  
+Weierstrass Karl : 88, 89, 90, 93   
+Weil André : 105, 106, 109, 110, 113, 122
+Weil Simone : 109
+Welschinger Jean-Yves : 84
+Werner Wendelin : 120
+Weyl Hermann : 97, 122
+Wiles Andrew : 110
+Witten Edward : 84
+
+Yang Chen Ning : 122
+Yoccoz Jean-Christophe : 120, 121

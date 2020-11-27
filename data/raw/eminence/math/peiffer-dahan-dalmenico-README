@@ -1,0 +1,23 @@
+File peiffer-dahan-dalmenico.txt is built from the book
+
+Une histoire des mathématiques
+Routes et dédales
+Amy Dahan-Dalmedico
+Jeanne Peiffer
+Editions du Seuil, 1986
+
+Uses  "Index des noms propres"
+
+To check this file, see https://g5.tig12.net/auxiliary/eminence/math/peiffer-dahan-dalmenico
+
+Compared with the original data, some modifications were done :
+
+Suppressed line
+Fibonacci (cf. Léonard de Pise).
+
+Changed 
+Desargues, 128-193.
+to
+Desargues, 128, 193.
+
+
