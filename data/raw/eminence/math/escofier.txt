@@ -106,7 +106,7 @@ Gromov Mikhaïl : 84, 122
 Grothendieck Alexandre : 81, 107, 110, 112, 113, 114, 120, 121, 122
 
 Hadamard Jacques : 99, 100, 105, 108, 109
-Halley Edmond 62
+Halley Edmond : 62
 Hardy Godfrey Harold : 101
 Heiberg Johan : 19, 25
 Herbrand Jacques : 105
@@ -225,7 +225,8 @@ Tao Terence : 120
 Thalès : 15
 Théodore de Cyrène : 16
 Théon d'Alexandrie : 19
-Thom René : 120Ulam Stanislaw : 105                
+Thom René : 120
+Ulam Stanislaw : 105                
                   
 Vallée Poussin Charles de la : 99   
 Van der Waerden Bartel : 96         

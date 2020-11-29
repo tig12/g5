@@ -1,0 +1,20 @@
+
+document:
+  history:
+    - 2020-11-28 04:28:34+01:00: Thierry Graff, creation
+
+name: escofier.txt
+slug: irem
+description: |
+  List of mathematicians ranked by citation count in book :
+    Histoire des mathématiques
+    Jean-Pierre Escofier
+    2008
+    Ed. Dunod
+    Collection Les topos
+    
+    Uses the index, pp 125 - 128 of the book
+    
+source:
+  parents: []
+  

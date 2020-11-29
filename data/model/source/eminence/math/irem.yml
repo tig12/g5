@@ -1,0 +1,19 @@
+
+document:
+  history:
+    - 2020-11-27 13:06:26+01:00: Thierry Graff, creation
+
+name: irem.txt
+slug: irem
+description: |
+  List of mathematicians ranked by citation count in book :
+    Histoires de problèmes. Histoire des mathématiques.
+    Commission Inter-IREM Epistémologie et Histoire des Mathématiques
+    Ed. Ellipses Paris
+    Collection : IREM - Epistémologie et Histoire des Maths
+    1993
+    
+    Uses the "Index des noms", pp 415 - 419 of the book
+source:
+  parents: []
+  

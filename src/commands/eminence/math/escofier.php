@@ -1,15 +1,17 @@
 <?php
 /********************************************************************************
-    Builds a list of 458 mathematicians ranked by eminence.
+    Builds a list of 229 mathematicians ranked by eminence.
     Data source : book
-        Éléments d'histoire des Mathématiques
-        by Nicolas Bourbaki
-        Ed. Springer
-        2007 (3rd edition ; reprint from 1984 version, ed. Masson)
-        Uses the "INDEX DES NOMS CITÉS", pp 366 - 376 of the book
+        Histoire des mathématiques
+        Jean-Pierre Escofier
+        2008
+        Ed. Dunod
+        Collection Les topos
+        
+        Uses the index, pp 125 - 128 of the book
     
     @license    GPL
-    @history    2020-11-26 21:59:17+01:00, Thierry Graff : Creation
+    @history    2020-11-28 04:20:00+01:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\eminence\math;
 
@@ -22,22 +24,21 @@ use tiglib\arrays\sortByKey;
 // *****************************************
 //          Model class
 // *****************************************
-class BourbakiModel implements SourceI {
+class EscofierModel implements SourceI {
 
-    // TRUST_LEVEL not defined, using value of class Newalch
     
     /**
         Path to the yaml file containing the characteristics of the source.
         Relative to directory data/model/source
     **/
-    const SOURCE_DEFINITION = 'eminence' . DS . 'math' . DS . 'bourbaki.yml';
+    const SOURCE_DEFINITION = 'eminence' . DS . 'math' . DS . 'escofier.yml';
 
     /** Slug of the group in db **/
-    const GROUP_SLUG = 'peiffer-dahan-dalmenico';
+    const GROUP_SLUG = 'escofier';
     
     // *********************** Source management ***********************
     
-    /** @return a Source object for the raw file. **/
+    /** @return a Source object for the raw file **/
     public static function getSource(): Source {
         return Source::getSource(Config::$data['dirs']['model'] . DS . self::SOURCE_DEFINITION);
     }
@@ -46,7 +47,7 @@ class BourbakiModel implements SourceI {
     
     /** @return Path to the raw file **/
     public static function rawFilename(){
-        return implode(DS, [Config::$data['dirs']['raw'], 'eminence', 'math', 'bourbaki.txt']);
+        return implode(DS, [Config::$data['dirs']['raw'], 'eminence', 'math', 'escofier.txt']);
     }
     
     /** Loads raw file in a regular array **/
@@ -58,7 +59,7 @@ class BourbakiModel implements SourceI {
     
     /** @return Path to the csv file stored in data/tmp/ **/
     public static function tmpFilename(){
-        return implode(DS, [Config::$data['dirs']['tmp'], 'eminence', 'math', 'bourbaki.csv']);
+        return implode(DS, [Config::$data['dirs']['tmp'], 'eminence', 'math', 'escofier.csv']);
     }
     
 }
@@ -67,9 +68,9 @@ class BourbakiModel implements SourceI {
 // *****************************************
 //          Implementation of Command
 // *****************************************
-class bourbaki implements Command {
+class escofier implements Command {
     
-    /**  Possible values of the command **/
+    /** Possible values of the command **/
     const POSSIBLE_PARAMS = [
         'raw2tmp',
     ];
@@ -103,17 +104,17 @@ class bourbaki implements Command {
     }
     
     // ******************************************************
-    /**
+    /** 
         Input
-            data/raw/eminence/maths/bourbaki.txt
+            data/raw/eminence/maths/escofier.txt
         Output
-            data/tmp/eminence/math/bourbaki.csv
+            data/tmp/eminence/math/escofier.csv
     **/
     private static function exec_raw2tmp(){
-        $report =  "--- bourbaki raw2tmp ---\n";
-        $lines = BourbakiModel::loadRawFile();
+        $report =  "--- pdd raw2tmp ---\n";
+        $lines = EscofierModel::loadRawFile();
         $N = 0;
-        $p = '/(.*?),\s*(\d.*)/';
+        $p = '/(.*?)\s*:\s*(.*)/';
         $res = [];
         foreach($lines as $line){
             $line = trim($line);
@@ -140,7 +141,7 @@ class bourbaki implements Command {
             $res2 .= implode(G5::CSV_SEP, $cur) . "\n";
         }
         //
-        $outfile = BourbakiModel::tmpFilename();
+        $outfile = EscofierModel::tmpFilename();
         file_put_contents($outfile, $res2);
         $report .= "Wrote $N records in $outfile\n";
         return $report;
@@ -148,36 +149,18 @@ class bourbaki implements Command {
     
     /**
         Auxiliary of exec_raw2tmp()
-        @param  $str    Examples :
-                        117, 225, 232, 271, 274
-                         117, 118, 120 à 124, 127, 128
+        @param  $str    List of pages as found in raw file
+                        Examples :
+                        296
+                        108, 109
         @return Array of page numbers
     **/
     public static function computePages($str){
-        $parts = explode(',', $str);
+        $parts = explode(', ', $str);
         $res = [];
         foreach($parts as $part){
             $part = trim($part);
-            $part = str_replace('.', '', $part);
-            if(is_numeric($part)){
-                // single page number
-                // cast to solve bug (a dot sometimes remains ar the end) - not understood
-                $res[] = (int)$part;
-                continue;
-            }
-            // page range, like 174-176
-            $tmp = explode('à', $part);
-            if(count($tmp) != 2){
-                echo "ERROR in computePages($str) : $part\n";
-                continue;
-            }
-            [$p1, $p2] = $tmp;
-            // cast to solve bug (a dot sometimes remains ar the end) - not understood
-            $p1 = (int)$p1;
-            $p2 = (int)$p2;
-            for($p=$p1; $p <= $p2; $p++){
-                $res[] = $p;
-            }
+            $res[] = $part;
         }
         return $res;
     }
