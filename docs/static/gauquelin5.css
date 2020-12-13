@@ -23,9 +23,6 @@ body{
 }
 
 
-
-
-
 code{font-size:1.1em;}
 
 /* ================ Site layout ================ */
@@ -66,7 +63,7 @@ h1{
 }
 
 .left{
-    padding-top:2rem;
+    margin-top:4rem;
     border-left:1px solid grey;
     background:lightgoldenrodyellow;
     font-size:.9rem;
@@ -135,11 +132,12 @@ h4{
 
 
 /* ================ Navigation ================ */
+/* 
 .prevnext{
     font-family:DejaVu,serif;
     position:fixed; top:0px; right:0px;
     margin:1rem;
-    width:75px; height:40px
+    width:75px; height:40px;
 }
 .prevnext a{
     display:inline-block;
@@ -155,6 +153,31 @@ h4{
 .prevnext a.next{top:25px; right:5px;}
 .prevnext a.topage{
     top:15px; right:38px; color:#black; font-size:1.1rem;
+    transform:rotate(-90deg);
+}
+*/
+.prevnext{
+    font-family:DejaVu,serif;
+    position:fixed; top:0px; left:0px;
+    margin:0;
+    width:15%; height:4rem;
+    background:lightgoldenrodyellow;
+    border-right:1px solid grey;
+}
+.prevnext a{
+    display:inline-block;
+    position:fixed;
+    width:40px; height:40px;
+    text-decoration:none;
+    font-weight:bolder;
+    font-size:2rem;
+}
+.prevnext a.index{top:0px; left:50px; font-size:0.5rem;}
+.prevnext a.top{top:0px; left:80px;}
+.prevnext a.prev{top:25px; left:45px;}
+.prevnext a.next{top:25px; left:110px;}
+.prevnext a.topage{
+    top:15px; left:82px; color:#black; font-size:1.1rem;
     transform:rotate(-90deg);
 }
 
