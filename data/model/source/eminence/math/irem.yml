@@ -1,19 +1,27 @@
-
 document:
   history:
     - 2020-11-27 13:06:26+01:00: Thierry Graff, creation
 
-name: irem.txt
 slug: irem
+# name: irem.txt
+
+type: book
+
+title: Histoires de problèmes. Histoire des mathématiques
+author: Commission Inter-IREM Epistémologie et Histoire des Mathématiques
+edition: |
+  Ed. Ellipses Paris
+  Collection : IREM - Epistémologie et Histoire des Maths
+  1993
+isbn:     
+
 description: |
-  List of mathematicians ranked by citation count in book :
-    Histoires de problèmes. Histoire des mathématiques.
-    Commission Inter-IREM Epistémologie et Histoire des Mathématiques
-    Ed. Ellipses Paris
-    Collection : IREM - Epistémologie et Histoire des Maths
-    1993
+  This book was used to count the number of times each mathematician is cited in the book index
+  "Index des noms", pp 415 - 419 of the book
     
-    Uses the "Index des noms", pp 415 - 419 of the book
+  See https://tig12.github.io/gauquelin5/eminence-math.html
+  See https://g5.tig12.net/auxiliary/eminence/math/irem
+
 source:
   parents: []
   

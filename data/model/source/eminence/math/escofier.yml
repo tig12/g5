@@ -1,20 +1,27 @@
-
 document:
   history:
     - 2020-11-28 04:28:34+01:00: Thierry Graff, creation
 
-name: escofier.txt
-slug: irem
+slug: escofier
+# name: escofier.txt
+
+type: book
+
+title: Histoire des mathématiques
+author: Jean-Pierre Escofier
+edition: |
+  Dunod
+  Collection Les topos
+  2008
+isbn:     
+
 description: |
-  List of mathematicians ranked by citation count in book :
-    Histoire des mathématiques
-    Jean-Pierre Escofier
-    2008
-    Ed. Dunod
-    Collection Les topos
+  This book was used to count the number of times each mathematician is cited in the book index
+  Index, pp 125 - 128 of the book
     
-    Uses the index, pp 125 - 128 of the book
-    
+  See https://tig12.github.io/gauquelin5/eminence-math.html
+  See https://g5.tig12.net/auxiliary/eminence/math/escofier
+
 source:
   parents: []
   

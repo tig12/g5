@@ -125,19 +125,93 @@ class escofier implements Command {
             if(!preg_match($p, $line, $m)){
                 echo "NO MATCH === $line\n";
             }
-            $pages = self::computePages($m[2]);
+            $pages = self::computePages($m[2]);          
+            // family given names
+            if($m[1] == 'Al Haytham'){
+                $fname = 'Al Haytham';
+                $gname = '';
+            }
+            else if($m[1] == 'Al Kashi Ghiyath'){
+                $fname = 'Al Kashi';
+                $gname = 'Ghiyath';
+            }
+            else if($m[1] == 'Al Khazin'){
+                $fname = 'Al Khazin';
+                $gname = '';
+            }
+            else if($m[1] == 'Al Khwarizmi Mohammed'){
+                $fname = 'Al Khwarizmi';                                        
+                $gname = 'Mohammed';
+            }
+            else if($m[1] == 'Al Tusi Nasir al Din'){
+                $fname = 'Al Tusi al Din';
+                $gname = 'Nasir';
+            }
+            else if($m[1] == 'Ferro Scipione del'){
+                $fname = 'del Ferro';
+                $gname = 'Scipione';
+            }
+            else if($m[1] == 'Van der Waerden Bartel'){
+                $fname = 'Van der Waerden';
+                $gname = 'Bartel';
+            }
+            else if($m[1] == 'Piero della Francesca'){
+                $fname = 'Piero della Francesca';
+                $gname = '';
+            }
+            else if($m[1] == 'Peletier du Mans Jacques'){
+                $fname = 'Peletier du Mans';
+                $gname = 'Jacques';
+            }
+            else if($m[1] == 'Philippe de Macédoine'){
+                $fname = 'Philippe de Macédoine';
+                $gname = '';
+            }
+            else if($m[1] == 'La Condamine Charles Marie de'){
+                $fname = 'de La Condamine';
+                $gname = 'Charles Marie';
+            }
+            else if($m[1] == 'Ibn Sahl'){
+                $fname = 'Ibn Sahl';
+                $gname = '';
+            }
+            else if($m[1] == 'Mac Lane Saunders'){
+                $fname = 'Mac Lane';
+                $gname = 'Saunders';
+            }
+            else if($m[1] == 'Le Verrier Urbain'){
+                $fname = 'Le Verrier';
+                $gname = 'Urbain';
+            }
+            else if($m[1] == 'Von Neumann John'){
+                $fname = 'Von Neumann';
+                $gname = 'John';
+            }
+            else{
+                // general case
+                $pos = strpos($m[1], ' ');
+                if($pos === false){
+                    $fname = $m[1];
+                    $gname = '';
+                }
+                else{
+                    $fname = substr($m[1], 0, $pos);
+                    $gname = substr($m[1], $pos+1);
+                }
+            }
             $res[] = [
-                'name' => $m[1],
-                'score' => count($pages),
-                'pages' => $pages,
+                'FNAME' => $fname,
+                'GNAME' => $gname,
+                'SCORE' => count($pages),
+                'PAGES' => $pages,
             ];
         }
-        $res = sortByKey::compute($res, 'score');
+        $res = sortByKey::compute($res, 'SCORE');
         //
-        $res2 = implode(G5::CSV_SEP, ['NAME', 'SCORE', 'PAGES']) . "\n";
+        $res2 = implode(G5::CSV_SEP, ['FNAME', 'GNAME', 'SCORE', 'PAGES']) . "\n";
         for($i=count($res)-1; $i >= 0; $i--){
             $cur = $res[$i];
-            $cur['pages'] = implode('+', $cur['pages']);
+            $cur['PAGES'] = implode('+', $cur['PAGES']);
             $res2 .= implode(G5::CSV_SEP, $cur) . "\n";
         }
         //

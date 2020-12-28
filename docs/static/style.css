@@ -19,6 +19,9 @@ body{
 
 a{text-decoration:none;}
 
+img{display: block; background:white;}
+
+.pre{white-space:pre-wrap;}
 pre{
     white-space:pre-wrap;
     margin:1rem;
@@ -35,9 +38,6 @@ pre.normal{
     padding:0;
 }
 code.color{background:lightgrey;}
-.pre{white-space:pre-wrap;}
-
-img{display: block; background:white;}
 
 ul.spaced>li,ol.spaced>li{padding-bottom:0.8rem;}
 ul.simple{list-style-type: '- ';}
@@ -49,6 +49,13 @@ table.border td{border: 1px solid #a2a9b1;}
 
 table.alternate tr:nth-child(even) {background: #eee}
 table.alternate tr:nth-child(odd) {background: #ddd}
+table.padded2 td{padding:2px;}
+.tip{
+    margin:1rem;
+    padding:1rem;
+    background:lightblue;
+    border:2px solid yellow;
+}
 
 
 /* ================ Style shortcuts ================ */

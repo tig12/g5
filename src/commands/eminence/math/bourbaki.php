@@ -125,18 +125,28 @@ class bourbaki implements Command {
                 echo "NO MATCH === $line\n";
             }
             $pages = self::computePages($m[2]);
+            $m[1] = str_replace(' 77', '', $m[1]); // fix error of input file : "Van der Waerden 77"
+            // family given names
+            $fname = trim($m[1]);
+            $gname = '';
+            $pos = strpos($m[1], '(');
+            if($pos){
+                $fname = substr($fname, 0, $pos);
+                $gname = substr($m[1], $pos+1, -1);
+            }
             $res[] = [
-                'name' => $m[1],
-                'score' => count($pages),
-                'pages' => $pages,
+                'FNAME' => $fname,
+                'GNAME' => $gname,
+                'SCORE' => count($pages),
+                'PAGES' => $pages,
             ];
         }
-        $res = sortByKey::compute($res, 'score');
+        $res = sortByKey::compute($res, 'SCORE');
         //
-        $res2 = implode(G5::CSV_SEP, ['NAME', 'SCORE', 'PAGES']) . "\n";
+        $res2 = implode(G5::CSV_SEP, ['FNAME', 'GNAME', 'SCORE', 'PAGES']) . "\n";
         for($i=count($res)-1; $i >= 0; $i--){
             $cur = $res[$i];
-            $cur['pages'] = implode('+', $cur['pages']);
+            $cur['PAGES'] = implode('+', $cur['PAGES']);
             $res2 .= implode(G5::CSV_SEP, $cur) . "\n";
         }
         //

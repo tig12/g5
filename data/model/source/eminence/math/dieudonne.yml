@@ -1,0 +1,26 @@
+document:
+  history:
+    - 2020-12-27 22:38:16+01:00: Thierry Graff, creation
+
+slug: dieudonne-histoire
+# name: dieudonne.txt
+
+type: book
+
+title: Abrégé d'histoire des mathématiques
+author: Jean Dieudonné
+edition: |
+  Hermann
+  1996 (reprint)
+isbn:          
+    
+description: |
+  This book was used to count the number of times each mathematician is cited in the book index.
+  "Index historique", pp 495 - 512 of the book
+  
+  See https://tig12.github.io/gauquelin5/eminence-math.html
+  See https://g5.tig12.net/auxiliary/eminence/math/dieudonne
+
+source:
+  parents: []
+  

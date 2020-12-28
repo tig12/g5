@@ -1,22 +1,29 @@
-
 document:
   history:
+    - 2020-09-13 Scan by Thierry Graff
     - 2020-11-22 20:25:58+01:00: Thierry Graff, creation
-
-name: peiffer-dahan-dalmenico.txt
-slug: peiffer-dahan-dalmenico
-description: |
-  List of mathematicians ranked by citation count in book :
-    Une histoire des mathématiques
-    Routes et dédales
-    Amy Dahan-Dalmedico
-    Jeanne Peiffer
-    Editions du Seuil, 1986
     
-    Information coming from "Index des noms propres", p 307-309 of the bool
-    List of mathematicians associated to the page numbers where they are cited 
+slug: peiffer-dahan-dalmenico
+# name: peiffer-dahan-dalmenico.txt
+
+type: book
+
+title: Une histoire des mathématiques - Routes et dédales
+authors: 
+  - Amy Dahan-Dalmedico
+  - Jeanne Peiffer
+edition: |
+    Editions du Seuil
+    1986
+isbn:     
+
+description: |
+  This book was used to count the number of times each mathematician is cited in the book index
+  "Index des noms propres", p 307-309 of the book
   
-  2020-09-13 Scan by Thierry Graff
+  See https://tig12.github.io/gauquelin5/eminence-math.html
+  See https://g5.tig12.net/auxiliary/eminence/math/peiffer-dahan-dalmenico
+
 source:
   parents: []
   

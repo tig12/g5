@@ -2,7 +2,7 @@
 /********************************************************************************
     CLI (command line interface) of Gauquelin5 program
     
-    usage : php run.php
+    usage : php run-g5.php
     and follow error message
     
     @license    GPL
