@@ -34,12 +34,335 @@
 <header>
 <h1>Mathematicians eminence ranking</h1>
 <div class="intro">
-The purpose here is to build a list of mathematicians, ranked by eminence.
-<br>This is a work in progress
+The purpose here is to build a list of mathematicians, ranked by eminence, targetting reliability and verifiability.
+<br>This is a work in progress. Mathematicians are used to learn eminence ranking : implement, identify where human choices are made. See if a consensual list can be built, as described in <a href="eminence.html">page on eminence ranking</a>.
 </div>
 </header>
 
 <article>
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#steps">Steps</a>
+        </li>
+        <li>
+            <a href="#working-directories">Working directories</a>
+        </li>
+        <li>
+            <a href="#eminence-indicators">Eminence indicators</a>
+            <ul>
+                <li><a href="#3-1-wikidata">Wikidata</a></li>
+                <li><a href="#3-2-mactutor">MacTutor</a></li>
+                <li><a href="#3-3-bourbaki">Bourbaki</a></li>
+                <li><a href="#3-4-dieudonne">Dieudonné</a></li>
+                <li><a href="#3-5-escofier">Escofier</a></li>
+                <li><a href="#3-6-irem">IREM</a></li>
+                <li><a href="#3-7-peiffer-dahan-dalmenico">Peiffer Dahan Dalmenico</a></li>
+                <li><a href="#3-8-fabpedigree-com">fabpedigree.com</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#teachings">Teachings</a>
+            <ul>
+                <li><a href="#4-1-human-opinion">Human opinion</a></li>
+                <li><a href="#4-2-observed-bias-in-the-indicators">Observed bias in the indicators</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#merge-data">Merge data</a>
+            <ul>
+                <li><a href="#5-1-match-wikidata">Match wikidata</a></li>
+                <li><a href="#5-2-match-g5-database">Match g5 database</a></li>
+                <li><a href="#5-3-match-to-birth-certificates">Match to birth certificates</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#divide-by-historical-periods">Divide by historical periods</a>
+        </li>
+        <li>
+            <a href="#build-global-lists">Build global lists</a>
+        </li>
+    </ul>
+</nav>
+
+<!-- ********************************************************************************* -->
+<h2><a name="steps">Steps</a></h2>
+<ul>
+    <li>Gather eminence indicators</li>
+    <li>Clean indicators</li>
+    <li>merge them in a common database</li>
+    <li>Divide by periods</li>
+    <li>Make a global rank => propose lists</li>
+</ul>
+
+
+<!-- ********************************************************************************* -->
+<h2><a name="working-directories">Working directories</a></h2>
+
+<ul class="spaced">
+    <li>
+        <b>Auxiliary data</b> : <a href="https://g5.tig12.net/auxiliary/eminence/math/">https://g5.tig12.net/auxiliary/eminence/math</a>
+        <br>Original documents. Useful to check raw data.
+    </li>
+    <li>
+        <b>Raw data</b> : located in directory <code>data/raw/eminence/math</code> (versioned with g5 code).
+        <br>Raw data can be <a href="https://github.com/tig12/gauquelin5/tree/master/data/raw/eminence/math">browsed on github</a>.
+        <br>Extract or copy of auxiliary data - input of g5 program 
+    </li>
+    <li>
+        <b>tmp data</b> : located in directory <code>data/tmp/eminence/math</code> (not versioned with g5 code).
+        <br>A copy is located in <a href="https://g5.tig12.net/output/eminence/math/">https://g5.tig12.net/output/eminence/math/</a>.
+        <br>tmp data are a workable version of raw data.
+    </li>
+</ul>
+
+
+<!-- ********************************************************************************* -->
+<h2><a name="eminence-indicators">Eminence indicators</a></h2>
+
+Here are the indicators used so far :
+
+<style>
+.indicators td:nth-child(3){white-space:pre;}
+</style>
+<table class="indicators wikitable alternate margin-top">
+    <tr>
+        <th>Name</th>
+        <th>N</th>
+        <th>Scores</th>
+        <th>Type</th>
+        <th>20 first</th>
+    </tr>
+    <tr>
+        <td>Wikidata</td>
+        <td>2508</td>
+        <td>0 - 275</td>
+        <td>Link count</td>
+        <td>
+            Einstein Newton Edison Descartes Koppernigk Pascal Gauss Dürer Russell Kepler Euler Wittgenstein Bruno Maxwell Hobbes Hilbert Dodgson Fourier Heisenberg Poincaré
+        </td>
+    </tr>
+    <tr>
+        <td>MacTutor</td>
+        <td>2841</td>
+        <td>0 - 293</td>
+        <td>Link count</td>
+        <td>
+            Hilbert Newton Euclid Riemann Poincare Euler Klein Einstein Gauss Weierstrass Laplace Cauchy Lagrange Hardy Lie Von-Neumann Fourier Dirichlet Leibniz Descartes
+        </td>
+    </tr>
+    <tr>
+        <td>Bourbaki</td>
+        <td>458</td>
+        <td>1 - 51</td>
+        <td>Book index</td>
+        <td>
+            Dedekind Leibniz Hilbert Gauss Riemann Euler Weierstrass Lebesgue Kronecker Lie Euclide Fermat Cauchy Newton Lagrange Poincaré Cantor Pascal Dirichlet Descartes
+        </td>
+    </tr>
+    <tr>
+        <td>Dieudonné</td>
+        <td>330</td>
+        <td></td>
+        <td>Book index</td>
+        <td><i>Mathematicians are not sorted</i></td>
+    </tr>
+    <tr>
+        <td>Escofier</td>
+        <td>229</td>
+        <td>1 - 12</td>
+        <td>Book index</td>
+        <td>
+            Fermat Euler Hilbert Gauss Poincaré Cauchy Grothendieck Galois Euclide Riemann Legendre Lagrange Pascal Monge Fourier Archimède Abel Weil Von-Neumann Newton
+        </td>
+    </tr>
+    <tr>
+        <td>IREM</td>
+        <td>305</td>
+        <td>1 - 80</td>
+        <td>Book index</td>
+        <td>
+            Euclide Euler Fermat Descartes Newton Chasles Archimede Aristote Lagrange Nicomaque Leibniz Gauss Galilee Legendre Alberti Mersenne Eudoxe Alembert Piero-della-francesca Bernoulli
+        </td>
+    </tr>
+    <tr>
+        <td>PDD</td>
+        <td>220</td>
+        <td>1 - 20</td>
+        <td>Book index</td>
+        <td>
+            Cauchy Gauss Euler Euclide Riemann Lagrange Dedekind Galois Poncelet Newton Leibniz Fermat Diophante Archimède Pythagore Klein Al-Karagi  Cayley Weierstrass Descartes
+        </td>
+    </tr>
+    <tr>
+        <td>fabpedigree</td>
+        <td>100</td>
+        <td></td>
+        <td>Ranked list</td>
+        <td>
+            Newton Archimedes Gauss Euler Riemann Poincare Lagrange Euclid Hilbert Leibniz Grothendieck Fermat Galois Neumann Descartes Weier Ramanujan Weyl Dirichlet Abel
+        </td>
+    </tr>
+</table>
+
+<br>Potential other indicators
+
+<ul class="spaced margin-top">
+    <li>Academies</li>
+    <li>Field medal and other prizes</li>
+</ul>
+
+
+<!-- ************************************* -->
+<h3><a name="3-1-wikidata">Wikidata</a></h3>
+Wikidata poses a problem because some persons are associated to several different occupation codes. One person very famous in one discipline has a high link count and also appears on top in maths. This is the case for Einstein (physicist) and Kepler (astronomer). They both practiced maths but didn't make discoveries that would lead to consider them as important mathematicians.
+<br>For example, from wikidata 20 top list, I would remove Einstein, Edison, Koppernigk, Kepler, Wittgenstein, Bruno, Hobbes, Dodgson, Heisenberg and maybe Maxwell.
+
+
+<!-- ************************************* -->
+<h3><a name="3-2-mactutor">MacTutor</a></h3>
+
+
+<!-- ************************************* -->
+<h3><a name="3-3-bourbaki">Bourbaki</a></h3>
+<pre>
+type: book
+
+title: Éléments d'histoire des Mathématiques
+author: Nicolas Bourbaki
+edition: |
+  Springer
+  2007 (3rd edition ; reprint from 1984 version, ed. Masson)
+
+description: |
+  "INDEX DES NOMS CITÉS", pp 366 - 376 of the book
+  See https://g5.tig12.net/auxiliary/eminence/math/bourbaki
+</pre>
+
+<!-- ************************************* -->
+<h3><a name="3-4-dieudonne">Dieudonné</a></h3>
+<pre>
+type: book
+
+title: Abrégé d'histoire des mathématiques
+author: Jean Dieudonné
+edition: |
+  Hermann
+  1996 (reprint)
+    
+description: |
+  "Index historique", pp 495 - 512 of the book
+  See https://g5.tig12.net/auxiliary/eminence/math/dieudonne
+</pre>
+
+
+<!-- ************************************* -->
+<h3><a name="3-5-escofier">Escofier</a></h3>
+<pre>
+type: book
+
+title: Histoire des mathématiques
+author: Jean-Pierre Escofier
+edition: |
+  Dunod
+  Collection Les topos
+  2008
+
+description: |
+  Index, pp 125 - 128 of the book
+  See https://g5.tig12.net/auxiliary/eminence/math/escofier
+</pre>
+
+<!-- ************************************* -->
+<h3><a name="3-6-irem">IREM</a></h3>
+<pre>
+type: book
+
+title: Histoires de problèmes. Histoire des mathématiques
+author: Commission Inter-IREM Epistémologie et Histoire des Mathématiques
+edition: |
+  Ed. Ellipses Paris
+  Collection : IREM - Epistémologie et Histoire des Maths
+  1993
+
+description: |
+  "Index des noms", pp 415 - 419 of the book
+  See https://g5.tig12.net/auxiliary/eminence/math/irem
+</pre>
+
+Bug line 306
+<pre>RECORDE	Robert	vers 1510-1558	0</pre>
+
+<!-- ************************************* -->
+<h3><a name="3-7-peiffer-dahan-dalmenico">Peiffer Dahan Dalmenico</a></h3>
+<pre>
+type: book
+
+title: Une histoire des mathématiques - Routes et dédales
+authors: 
+  - Amy Dahan-Dalmedico
+  - Jeanne Peiffer
+edition: |
+    Editions du Seuil
+    1986
+
+description: |
+  "Index des noms propres", p 307-309 of the book
+  See https://g5.tig12.net/auxiliary/eminence/math/peiffer-dahan-dalmenico
+</pre>
+
+<!-- ************************************* -->
+<h3><a name="3-8-fabpedigree-com">fabpedigree.com</a></h3>
+
+<!-- ********************************************************************************* -->
+<h2><a name="teachings">Teachings</a></h2>
+
+<!-- ************************************* -->
+<h3><a name="4-1-human-opinion">Human opinion</a></h3>
+Here are listed the cases involving a choice made by humans.
+
+<ul class="spaced">
+    <li>Choice of the indicators</li>
+    <li>Removal of persons coming from other discipline</li>
+</ul>
+
+<!-- ************************************* -->
+<h3><a name="4-2-observed-bias-in-the-indicators">Observed bias in the indicators</a></h3>
+
+<ul class="spaced">
+    <li>
+        Citation count from book index do not reflect exactly the number of time a mathematician is cited in the book.
+        <br>Example for PDD : Gauss appears in many pages not listed in the index.
+        <div class="need">=> need for a tool similar to Google books.</div>
+    </li>
+    <li>
+        Current indicators have a national bias for France, because the books found so far in english mix topics and names in the index. (and the information is harder to extract).
+    </li>
+</ul>
+
+
+
+<!-- ********************************************************************************* -->
+<h2><a name="merge-data">Merge data</a></h2>
+
+<!-- ************************************* -->
+<h3><a name="5-1-match-wikidata">Match wikidata</a></h3>
+
+<!-- ************************************* -->
+<h3><a name="5-2-match-g5-database">Match g5 database</a></h3>
+
+<!-- ************************************* -->
+<h3><a name="5-3-match-to-birth-certificates">Match to birth certificates</a></h3>
+
+<!-- ********************************************************************************* -->
+<h2><a name="divide-by-historical-periods">Divide by historical periods</a></h2>
+
+
+<!-- ********************************************************************************* -->
+<h2><a name="build-global-lists">Build global lists</a></h2>
+
+
+
 
 
 </article>
@@ -115,9 +438,7 @@ The purpose here is to build a list of mathematicians, ranked by eminence.
         <span class="big1">3 - Eminence</span>
         <ul>
             <li><a href="eminence.html">Eminence ranking</a></li>
-            <!-- 
-            <li><a href="maths.html">Mathemeticians</a></li>
-            -->
+            <li><a href="eminence-math.html">Mathematicians</a></li>
         </ul>
     </li>
     

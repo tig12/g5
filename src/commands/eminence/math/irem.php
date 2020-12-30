@@ -274,7 +274,7 @@ class irem implements Command {
             }
             $N++;
             $res[] = [
-                'FNAME' => $fname,
+                'FNAME' => ucFirst(strTolower($fname)),
                 'GNAME' => $gname,
                 'DATES' => $dates,
                 'SCORE' => count($pages),

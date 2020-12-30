@@ -15,6 +15,9 @@ class Wikidata{
     /** Separator used in raw wikidata files **/
     const RAW_CSV_SEP = ',';
     
+    /** Base url for wikidata entities **/
+    const ENTITY_URL = 'http://www.wikidata.org/entity';
+    
     /** Base url to query WDQS **/
     const QUERY_URL = 'https://query.wikidata.org/sparql?format=json&query=';
     
