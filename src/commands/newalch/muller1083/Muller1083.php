@@ -20,7 +20,7 @@ class Muller1083 implements SourceI {
     
     /**
         Path to the yaml file containing the characteristics of the source describing file 5a_muller_medics.txt.
-        Relative to directory specified in config.yml by dirs / build
+        Relative to directory data/model
     **/
     const RAW_SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch' . DS . '5a_muller_medics.yml';
     

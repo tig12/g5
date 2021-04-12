@@ -1,0 +1,234 @@
+001 ADAM, Juliette *LAMBER                      04.10.1836 23.00       LMT  F   Verberie (Oise)                 49 N 19 002 E 44 AR 02 23       SG G
+002 ANDERSEN, Lale (Liselotte Helene)           23.03.1905 08.30 -1.00      D   Bremerhaven                     53 N 33 008 E 35 AR 06 2356     SE N
+003 ANDREAE, Illa (Aloysia) GROBE-LACKMANN      08.02.1902 06.00 -1.00      D   Wiegbold Wolbeck Münster Wstf.  51 N 58 007 E 38 AR 01 13       SE N
+004 ANNA AMALIE, HZGN VON SACHSEN-WEIMAR        24.10.1739 17.30 -0.96 LAT  D   Wolfenbiittel                   52 N 10 010 E 32 WA 06 123468   SE N
+005 ARENDT, Hannah                              14.10.1906 21.15 -1.00      D   Hannover-Linden                 52 N 23 009 E 44 SC 05 234568   FB N
+006 ASSING, Ludmilla (Rosa L.)                  22.02.1821 19.30       LMT  D   Hamburg                         53 N 34 010 E 02 AR 02 123      SE N
+007 AUDOUX, Marguerite (DONQUICHOTE, M.)        07.07.1863 04.00       LMT  F   Sancoins (Cher)                 46 N 50 002 E 55 AR 01 234      SG G
+008 AUGSPURG, Anita (A. Theodora Sophie)        22.09.1857 13.00       LMT  D   Verden Aller                    52 N 55 009 E 14 WA 10 1238     SE N
+009 AUGUSTA, Marie Luise Katharina, KSN         30.09.1811 01.30       LMT  D   Weimar                          50 N 59 011 E 20 WA 06 2346     SE N
+010 AUGUSTE VIKTORIA, KSN                       22.10.1858 07.30       LMT  DOP Dolzig                          51 N 45 014 E 58 WA 06 1236     SB N
+011 AURIOL, Jacqueline *DOUET                   05.11.1917 20.00  0.00      F   Challans (Vendée)               46 N 51 001 W 53 WA 02 12       SG G
+012 BACH, Anna Magdalena *WILCKEN               22.09.1701 05.30 -0.93 LAT  D   Zeitz                           51 N 03 012 E 08 AR 06 14       SE N
+013 BACHEM, Bele (BOHMER, Renate Gabriele)      17.05.1916 04.00 -2.00      D   Düsseldorf                      51 N 14 006 E 47 AR 08 234      SE N
+014 BACHMANN, Ingeborg                          25.06.1926 20.23 -1.00      A   Klagenfurt                      46 N 38 014 E 19 AR 01 23456    SE N
+015 BARDOT, Brigitte                            28.09.1934 13.15 -1.00      F   Paris                           48 N 50 002 E 17 AR 03 2357     SG G
+016 BAUMER, Gertrud                             12.09.1873 08.00       LMT  D   Hohenlimburg Westfalen          51 N 22 007 E 28 WA 10 123456   SE N
+017 BEATRIX, Wilhelmina Armgard                 31.01.1938 09.47 -0.33      NL  SchloB Soestdijk                52 N 11 005 E 17 WA 06 235      SA N
+018 BEAUVOIR, Simone DE                         09.01.1908 04.00 -0.16      F   Paris                           48 N 50 002 E 17 AR 01 123458   SG G
+019 BECK, Beatrix                               30.07.1914 08.35 -1.00      CH  Villars~sur-Ollon (Waadt)       46 N 18 007 E 03 AR 01 234      SE N
+020 BEESE-BOUTARD, Amelie                       18.09.1886 04.00       LMT  D   Laubegast (Dresden)             51 N 01 013 E 51 WA 02 24       SE N
+021 SBENTLAGE, Margarete ZUR                    24.03.1891 04.00       LMT  D   Hof Bentlage Menslage Emsland   52 N 41 007 E 57 AR 01 23       SE N
+022 BERENS-TOTENOHL, Josefa (BERENS)            30.03.1891 12.00       LMT  D   Grevenstein Arnsberg Sauerland  51 N 21 008 E 17 AR 01 23       SE N
+023 HERGER, Erna (Elisabeth E.)                 19.10.1900 22.15 -1.00      D   Cossebaude (Dresden)            51 N 05 013 E 38 AR 06 2357     SE N
+024 BERNADETTE (SOUBIROUS, Maria Bernarda)      07.01.1844 14.00       LMT  F   Lourdes                         43 N 06 000 W 03 WA 09 1234     SG N
+025 BERNHARDI, Sophie *TIBCK                    28.02.1775 04.00 -0.67 LAT  D   Berlin                          52 N 32 013 E 18 AR 01 23       SE N
+026 BLEIBTREU-PAULSEN, Hedwig                   23.12.1868 06.00       LMT  A   Linz (Donan)                    48 N 18 014 E 18 AR 03 12347    SE N
+027 BLIXEN-FINECKE, Karen BLIXEN, Tania         17.04.1885 16.00       LMT  DK  Rungsted                        55 N 53 012 E 33 AR 01 123456   SA N
+028 BODMERSHOF, Imma VON *EHRENFELS, VON        10.08.1895 15.30 -1.00      A   Graz                            47 N 04 015 E 27 AR 01 23       SE N
+029 S8OHLAU, Helene :                           22.11.1856 06.30       LMT  D   Weimar                          50 N 59 011 E 20 AR 01 124      SE N
+030 BONHEUR, Rosa (Marie Rosalie)               16.03.1822 20.00       LMT  F   Bordeaux                        44 N 51 000 W 35 AR 08 12348    SG G
+031 BOULANGER, Nadia Juliette                   16.09.1887 00.15       LMT  F   Paris                           48 N 50 002 E 17 SC 05 23       SG G
+032 BOY-ED, Ida (I. Cornelia Ernestine) *ED     17.04.1852 01.00       LMT  D   Bergedorf Hamburg               53 N 34 010 E 02 AR 01 23       SE N
+033 BRACHMANN, Luise Karoline                   09.02.1777 19.00 -0.61 LAT  D   Rochlitz (Sachsen)              51 N 03 012 E 48 AR 01 23       SE N
+034 BRAUN, Lily (Amelia) *KRETSCHMAN, VON       02.07.1865 10.30       LMT  D   Halberstadt                     51 N 54 011 E 03 AR 02 1234     SE N
+035 BRUCHOLLERIE, Monique DE LA                 20.04.1915 06.35 0.00       F   Paris                           48 N 50 002 E 17 AR 07 237      SG G
+036 BUBER-NEUMANN, Margarete *THUERING          21.10.1901 13.30 -1.00      D   Potsdan                         52 N 24 013 E 04 AR 01 23       SE N
+037 BUCHNER, Luise                              12.06.1821 04.00       LMT  D   Darmstadt                       49 N 52 008 E 39 AR 02 124      SE N
+038 BURDE-NEY, Jenny *NEY-SEGATTI               21.12.1824 07.00       LMT  A   Graz                            47 N 04 015 E 27 AR 06 24       SE N
+039 CAROL, Martine (MOURER, Marie-Louise)       16.05.1920 16.00 -1.00      F   Saint Mand6é (Seine, Paris)     48 N 47 002 E 29 AR 03 237      SG G
+040 CASPAR-FILSER, Maria *FILSER                07.08.1878 16.00       LMT  D   Riedlingen                      48 N 09 009 E 29 AR 08 123      SE N
+041 CAUER, Minna *SCHELLE, Wilhelmine           01.11.1841 10.00       LMT  D   Freyenstein (Ostpriegnitz)      53 N 18 012 E 21 WA 10 1248     SE N
+042 CESPEDES, Alba DE                           11.03.1911 01.15 -1.00      I   Rom                             41 N 54 012 E 30 AR 01 1234     SA N
+043 CHARRAT, Janine                             24.07.1924 14.00 -1.00      F   Grenoble                        45 N 11 005 E 42 AR 03 23       SG G
+044 CHEZY, Helmina (Wilh.)} DE *KLENCKE, VON    26.01.1783 22.00 -0.67 LAT  D   Berlin                          52 N 32 013 E 18 AR 01 23       SE N
+045 CHRIST, Lena                                30.10.1881 14.30       LMT  D   Glonn Grafing                   48 N 09 011 E 51 AR 01 1234     SE N
+046 COLETTE (Sidonie Gabrielle)                 28.01.1873 22.00       LMT  F   Saint-Sauveur-en-Puisaye (Yon.  47 N 35 003 E 10 AR 01 12345678 SG G
+047 COSSOTTO, Fiorenza                          22.04.1935 03.00 -1.00      I   Crescentino (Turin)             45 N 04 007 E 41 AR 06 23       SE N
+048 COURTHS-MAHLER, Hedwig *MAHLER              18.02.1867 13.30       LMT  D   Nebra (Thiiringen)              51 N 17 011 E 35 AR 01 2346     SE N
+049 CRESPIN, Regine                             23.02.1927 02.00  0.00      F   Marseille                       43 N 18 005 E 24 AR 06 235      SG G
+050 DARRIEUX, Daniele                           01.05.1917 21.00 -1.00      F   Bordeaux                        44 N 51 000 E 35 AR 03 237      SG G
+051 DAVIDIS, Henriette                          01.03.1801 19.30 -0.29 LAT  D   Wengern Westfalen               51 N 22 007 E 28 AR 02 34       SE N
+052 DAY, Doris (RKAPPELHOFF, Doris VON)         03.04.1922 16.30  6.00      USA Cincinnati (Ohio)               39 N 08 084 W 25 AR 03 237      SG G
+053 DELARUE-MARDRUS, Lucie *DELARUE             03.11.1874 18.30       LMT  F   Honfleur (Calvados)             49 N 26 000 E 14 AR 03 123      SG G
+054 DELEDDA, Grazia                             28.09.1871 02.00 -0.83      I   Nuoro (Sardinien)               40 N 20 009 E 20 AR 01 1234     SA N
+055 DIETRICH, Amalie (Konkordie A.) *NELLE      26.05.1821 13.00       LMT  D   Siebenlehn (Meifen, Sachsen)    51 N 01 013 E 17 SC 03 124      SE N
+056 DILL, Liesbet »pRIGALSKI, VON               28.03.1877 17.30       LMT  D   Dudweiler Saarbriicken          49 N 14 007 E 00 AR 01 123      SE N
+057 DOHM, Hedwig *SCHLEH                        20.09.1831 17.00       LMT  D   Berlin                          52 N 32 013 E 18 AR 02 1234     SE N
+058 DORSCH, Rathe (Katharina)                   29.12.1890 17.30       LMT  D   Neumarkt Oberpfalz              49 N 17 011 E 28 AR 03 12347    SE G
+059 DRANSFELD, Hedwig (Henriette Luise H.)      24.02.1871 07.00       LMT  D   Hacheney Dortmund Hirde Westf.  51 N 31 007 E 28 WA 04 1234     SE N
+060 DUENSING, Frieda (F. Johanna)               26.06.1864 11.00       LMT  D   Diepholz Niedersachsen          52 N 36 008 E 22 WA 09 124      SE N
+061 DUMONT, Louise *HEYNEN, Hubertine           22.02.1862 04.00       LMT  D   Köln                            50 N 57 006 E 57 AR 03 123467   SE N
+062 DUSE, Eleonora                              03.10.1858 02.00       LMT  I   Vigevano (Pavia, Lombardei)     45 N 19 008 E 51 AR 03 12345678 SG G
+063 ELISABETH Amalie Eugenie, KSN VON OSTER.    24.12.1837 22.43       LMT  D   München                         48 N 08 011 E 34 WA 06 12346    SE N
+064 ELISABETH Christine, KGN VON PREUSSEN       08.11.1715 07.53 -0.97 LAT  D   Wolfenbiittel                   52 N 10 010 E 32 WA 06 1234     SE N
+065 ELLERT, Gerhart (SCHMIRGER, Gertrud)        26.01.1900 22.30 -1.00      A   Wolfsberg (Karnten)             46 N 50 014 E 50 AR 01 23       SE N
+066 EMMA, KGN DER NIEDERLANDE                   02.08.1858 07.00       LMT  D   Arolsen                         51 N 17 008 E 52 WA 06 23       SE N
+067 ENGHAUS, Christine (ENGEHAUSEN, Chr.)       09.02.1815 09.00       LMT  D   Braunschweig                    52 N 16 010 E 32 AR 03 23       SE N
+068 EYSOLDT, Gertrud                            30.11.1870 16.15       LMT  D   Pirna (Sachsen)                 50 N 58 013 E 56 AR 03 234      SE N
+069 FASSBINDER, Klara Marie                     15.02.1890 05.00       LMT  D   Trier Mosel                     49 N 45 006 E 39 SC 05 12       SE N
+070 FEUERBACH, Henriette *HEYDENREICH           13.08.1812 11.30       LMT  D   Ermetzhofen Franken             49 N 35 010 E 36 WA 12 14       SE N
+071 FEUILLERE, Edwige *CUNATI, E. Caroline      29.10.1907 17.00 -0.16      F   Vesoul                          47 N 37 006 E 09 AR 03 12       SG G
+072 FLEISSER, Marieluise                        22.11.1901 07.30 -1.00      D   Ingolstadt                      48 N 46 011 E 26 AR 01 1234     SE N
+073 FORBES-MOSSE, Irene *FLEMMING, GFN VON      05.08.1864 21.30       LMT  D   Baden-Baden                     48 N 46 008 E 14 AR 01 123      SE N
+074 FORSTER~NIETZSCHE, Elisabeth *NIETZSCHE     10.07.1846 01.30       LMT  D   Récken (Liitzen)                51 N 14 012 E 07 AR 02 1234     SE N
+075 FRANCOIS, Marie Luise VON                   27.06.1817 02.30       LMT  D   Herzberg (Elster, Merseburg)    51 N 42 013 E 13 AR 01 1234     SE N
+076 FRANK, Anne (Annelies Marie)                12.06.1929 07.30 -1.00      D   Frankfurt Main                  50 N 07 008 E 41 AR 01 23456    SE N
+077 FRENI, Mirella                              27.02.1935 04.00 -1.00      I   Modena                          45 N 39 010 E 56 AR 06 23       SA N
+078 GALLMEYER, Josephine *GREINER               27.02.1838 16.00       LMT  D   Leipzig                         51 N 21 012 E 22 AR 03 124      SE N
+079 GARBO, Greta (GUSTAFSSON, Greta Lovisa)     18.09.1905 19.30 -1.00      S   Stockholm                       59 N 20 018 E 04 AR 03 123457   SA N
+080 GARLAND, Judy (GUMM, Frances)               10.06.1922 06.00  6.00      USA Grand Rapids (Minn.)            47 N 14 093 W 31 AR 03 1235     SA N
+081 GERHARD, Adele *DE JONGE                    08.06.1868 23.30       LMT  D   Köln                            50 N 57 006 E 57 AR 01 23       SE N
+082 GEVERS, Marie (Maria Theresia)              30.12.1883 16.45 -0.29      B   Edegem (Antwerpen)              51 N 09 004 E 27 AR 01 234      SG G
+083 GINZBURG, Natalia *LEVI                     14.07.1916 06.00 -2.00      I   Palermo                         38 N 07 013 E 21 AR 01 23       SA N
+084 GNAUCK-KUBNE, Elisabeth (Caroline)          02.01.1850 20.00       LMT  D   Vechelde Braunschweig           52 N 16 010 E 32 WA 10 123      SE N
+085 COETHE, Christiane VON *VULPIUS             01.06.1765 20.30 -0.80 LAT  D   Weimar                          50 N 59 011 E 20 WA 12 1234     SE N
+086 GORTHE, Cornelia (C. Friederike)            07.12.1750 20.00 -0.71 LAT  D   Frankfurt Main                  50 N 07 008 E 41 WA 12 24       SE N
+087 GOREPTI, Maria                              16.10.1890 13.15 ~0.83      I   Corinaldo (Ancona)              43 N 37 013 E 30 WA 09 1234     SA N
+088 GRECO, Juliette                             07.02.1927 21.00  0.00      F   Montpellier                     43 N 37 003 E 52 AR 06 235      SG G
+089 UROGGER, Paula                              12.07.1892 10.00 -1.00      A   Oblarn (Steiermark)             47 N 29 014 E 00 AR 01 1234     SE N
+090 GUGLIELMINETTI, Amalia                      05.04.1881 15.00 -0.83      I   Turin                           45 N 04 007 E 41 AR 01 13       SA N
+091 GUILBERT, Yvette                            22.01.1866 03.00       LMT  F   Paris                           48 N 50 002 E 17 AR 06 234      SG N
+092 GUNDERODE, Karoline VON                     11.02.1780 05.15 -0.31 LAT  D   Karlsruhe                       49 N 01 008 E 24 AR 01 1234     SE N
+093 GUNTHER, Dorothee                           08.10.1896 08.30 -1.00      D   Gelsenkirchen Westfalen         51 N 33 007 E 06 SC 05 23       SE N
+094 HAAGEN, Margarete                           29.11.1889 11.00       LMT  D   Niirnberg                       49 N 27 011 E 05 AR 03 23       SG G
+095 HANSHERRY, Lorraine                         19.05.1930 20.04  6.00      USA Chicago (Ill.)                  43 N 03 087 W 41 AR 01 38       SA N
+096 HARBOU, Thea VON                            27.12.1888 10.30       LMT  D   Tauperlitz Hof                  50 N 19 011 E 55 AR 01 234      SE N
+097 HARTLAUB, Genoveva                          07.06.1915 14.15 -1.00      D   Mannheim                        50 N 53 006 E 36 AR 01 23       SE N
+098 HENSEL, Luise (L. Maria)                    30.03.1798 05.30 -0.78 LAT  D   Linum (Fehrbellin, Brandenbg.)  52 N 45 012 E 54 AR 01 1234     SE N
+099 IUKIRURN, Audrey (VAN HEEMSTRA, Edda)       04.05.1929 03.00 -1.00      B   Ixelles (Briissel)              50 N 50 004 E 22 AR 03 2357     SA N
+100 HERKING, Ursula (KUEIN, U.)                 28.01.1912 09.30 -1.00      D   Dessau                          51 N 50 012 E 14 AR 03 23       SE N
+101 HEYKING, Elisabeth BAR VON *FLEMMING, VON   10.12.1861 09.30       LMT  D   Karlsruhe                       49 N 01 008 E 24 AR 01 123      SE N
+102 HEYL, Hedwig *CRUSEMANN                     05.05.1850 02.45       LMT  D   Bremen                          53 N 05 008 E 49 WA 04 1234     SE N
+103 HOHENSTEIN, Lily *SOMMER                    11.05.1896 17.30 -1.00      D   Darmstadt                       49 N 52 008 E 39 AR 01 12       SE N
+104 HONGEN, Elisabeth                           07.12.1906 04.00 -1.00      D   Gevelsberg                      51 N 19 007 E 20 AR 06 27       SE N
+105 HORNEY, Brigitte                            29.03.1911 05.00 -1.00      D   Berlin-Dahlem                   52 N 32 013 E 18 AR 03 2345     SE N
+106 HOYER, Dore                                 12.12.1911 18.30 -1.00      D   Dresden                         5i N 03 013 E 44 AR 03 23       SE N
+107 HUCH, Ricarda (Octavia R.)                  18.07.1864 14.00       LMT  D   Braunschweig                    52 N 16 010 E 32 AR 01 1234567  SE N
+108 JAGEMANN, Karoline, FRAU VON HEYGENDORFF    25.01.1777 07.30 -0.54 LAT  D   Weimar                          50 N 59 011 E 20 AR 03 1234     SE N
+109 JOLIOT-CURIE, Irene *CURIE                  12.09.1897 22.00 -0.16      F   Paris                           48 N 50 002 E 17 SC 02 123458   SG G
+110 KAMPHOVENER, Else (E. Sophia), BAR VON      14.06.1878 21.00       LMT  D   Hameln                          52 N 06 009 E 21 AR 01 124      SE N
+111 KAROLINE Amalie Elisabeth, KGN              17.05.1768 16.00 -0.77 LAT  D   Braunschweig                    52 N 16 010 E 32 WA 06 124      SE N
+112 KASCHNITZ VON WEINBERG, Marie Luise *HOLZ   31.01.1901 17.00 -1.00      D   Karlsruhe                       49 N 01 008 E 24 AR 01 12356    SE N
+113 KELLY, Grace                                12.11.1929 05.31  5.00      USA Philadelphia (Pa.)              39 N 57 075 W 10 AR 03 357      SA N
+114 KINZ, Franziska                             21.02.1897 03.30 -1.00      A   Kufsatein (Tirol)               47 N 35 012 E 11 AR 03 13       SE N
+115 KIRSCH, Sarah *BERNSTEIN                    16.04.1935 14.30 -1.00      D   Limlingerode (Harz)             $1 N 33 010 E 32 AR 01 35       SE N
+116 KLEIST, Ulrike VON                          Q3.03.1774 06.00 -0.76 LAT  D   Frankfurt (Oder)                52 N 21 014 E 33 WA 12 14       SE N
+117 KNEF, Hildegard                             28.12.1925 05.15 -1.00      D   Ulm                             48 N 24 009 E 59 AR 03 2357     SG G
+118 KOLB, Annette (Anna Mathilde)               03.02.1870 07.00       LMT  D   München                         48 N 08 011 E 34 AR 01 123456   SE N
+119 KOTH, Erika                                 15.09.1925 03.00 -1.00      D   Darmstadt                       49 N 52 008 E 39 AR 06 2357     SE N
+120 LANGEWIESCHE, Marianne                      16.11.1908 17.15 -1.00      D   Irschenhausen (Icking, Oberb.)  48 N 01 011 E 29 AR 01 123      SE N
+121 LANGGASSER, Elisabeth                       23.02.1899 23.45 -1.00      D   Alzey Rheinland                 50 N 00 008 E 16 AR 01 123456   SE N
+122 LASKER-SCHULER, Else (Elisabeth) *SCHULER   11.02.1869 02.00       LMT  D   Wuppertal-Elberfeld             51 N 16 007 E 12 AR 01 123456   SE N
+123 LAUBER, Cecile                              13.07.1887 20.25 -0.50      CH  Luzern (Luzern)                 47 N 03 008 E 18 AR 01 123      SE N
+124 LAURENCIN, Marie                            31.10.1883 09.00       LMT  F   Paris                           48 N 50 002 E 17 AR 08 123      SG N
+125 LAVANT, Christine *THONHAUSER               04.07.1915 03.30 -1.00      A   GroBedling (Lavanttal)          46 N 48 014 E 50 AR 01 23       SE N
+126 LEHMUS, Emilie                              30.08.1841 07.00       LMT  D   Firth                           49 N 29 010 E 59 SC 04 14       SE N
+127 LENDORFF, Gertrud                           13.05.1900 01.30 -1.00      CH  Lausen (Baselland)              47 N 29 007 E 43 AR 01 13       SE N
+128 LENERU, Marie                               02.06.1875 13.15       LMT  F   Brest                           48 N 24 004 W 29 AR 01 123      SG G
+129 LENGEFELD, Charlotte VON SCHILLER           22.11.1766 14.50 -0.98 LAT  D   Rudolstadt                      50 N 43 011 E 20 WA 12 124      SE N
+130 LENSING, Elise                              14.10.1804 04.00 -1.00 LAT  D   Lenzen (Elbe)                   53 N 06 011 E 30 WA 12 1234     SE N
+131 LEUWERIK, Ruth                              23.04.1924 12.00 -1.00      D   Essen                           51 N 28 007 E 01 AR 03 37       SG G
+132 LEVETZOW, Ulrike (U. Theodore) FRN VON      04.02.1804 20.25 -0.57 LAT  D   Löbnitz (Pegau, Sachsen)        51 N 10 012 E 16 WA 12 1234     SE N
+133 LICHNOWSKY, Mechthilde *ARCO-ZINNEBERG, VON 08.03.1879 15.15       LMT  D   SchloB Schönburg Griesbach      48 N 34 013 E 28 AR 01 12345    SE N
+134 LICHTENAU, Wilhelmine GFN VON *ENCKE        19.12.1753 11.00 -0.85 LAT  D   Dessau                          51 N 50 012 E 14 WA 12 23       SE N
+135 LINDEN, Maria GFN VON                       18.07.1869 15.30       LMT  D   SchloB Burgberg Heidenheim      48 N 41 010 E 09 SC 03 14       SE N
+136 LIPS, Eva *WIEGANDT                         06.02.1906 01.15 -1.00      D   Leipzig                         51 N 21 012 E 22 SC 05 23       SE N
+137 LIPSIUS, Marie                              30.12.1837 13.30       LMT  D   Leipzig                         51 N 21 012 E 22 AR 02 23       SE N
+138 LOLLOBRIGIDA, Gina                          04.07.1927 03.00 -1.00      I   Subiaco (Rom)                   41 N 56 013 E 05 AR 03 2357     SA N
+139 LOOS, Cecile Ines (I. Caecilia)             04.02.1883 13.00 -0.50      CH  Basel (Basel-Stadt)             47 N 33 007 E 35 AR 01 123      SE N
+140 LOREN, Sophia (SCICOLONE, Sofia)            20.09.1934 14.10 -1.00      I   Rom                             41 N 54 012 E 30 AR 03 2357     SA N
+141 LUDWIG, Paula                               05.01.1900 01.00 -1.00      A   Altenstadt (Feldkirch, Vorarl.  47 N 15 009 E 36 AR 01 23       SE N
+142 LUISE Auguste Wilhelmine A., KGN VON PR.    10.03.1776 07.00 -0.47 LAT  D   Hannover                        52 N 23 009 E 44 WA 06 123456   SE N
+143 MAGNANI, Anna                               07.03.1908 13.30 -1.00      I   Rom                             41 N 54 012 E 30 AR 03 1234567  SA N
+144 MAIER, Anneliese                            17.11.1905 15.00 -1.00      D   Tübingen                        48 N 31 009 E 04 SC 06 13       SE N
+145 MALLINCKRODT, Pauline VON                   03.06.1817 04.00       LMT  D   Minden                          52 N 18 008 E 55 WA 05 23       SE N
+146 MANGANO, Silvana                            23.04.1930 20.10 -1.00      I   Rom                             41 N 54 012 E 30 AR 03 27       SA N
+147 MANZINI, Gianna                             24.03.1896 05.00 -1.00      I   Pistola                         43 N 56 010 E 55 AR 01 12       SE N
+148 MARIA Sophie VON WITTELSBACH                04.10.1841 12.30       LMT  D   Possenhofen Bayern              48 N 00 011 E 20 WA 06 14       SE N
+149 MARLITT, E. (JOHN, Eugenie)                 05.12.1825 13.00       LMT  D   Arnatadt (Thiiringen)           50 N 50 010 E 57 AR 01 1234     SE N
+150 MASINA, Glulietta (Giulia Anna)             22.02.1921 08.15 -1.00      I   San Giorgio di Piano (Bologna)  44 N 30 011 E 21 AR 03 257      SA N
+151 MCCARTHY, Mary Therese                      21.06.1912 17.00  8.00      USA Seattle (Wash.)                 47 N 36 122 W 20 AR 01 23       SG G
+152 METALIOUS, Grace                            08.09.1924 09.30  5.00      USA Manchester (N.H.)               43 N 00 071 W 28 AR 01 23       SA N
+153 MICHAELIS DE VASCONCELOS, Karoline Wilh.    15.03.1851 07.15       LMT  D   Berlin                          52 N 32 013 E 18 SC 07 12       SE N
+154 MICHEL, Louise (Clémence L.)                29.05.1830 17.00       LMT  F   SchloB Vroncourt-la-Cote (Haut  48 N 07 005 E 08 WA 08 238      SG N
+155 MISTINGUETT (BOURGEOIS, Joanne-Marie)       03.04.1875 22.00       LMT  F   Enghien-les-Bains (Paris)       48 N 58 002 E 19 AR 03 23456    SG G
+156 MODERAGHIN BECKER, Paula *BECKER            08.02.1876 10.45       LMT  D   Dresden                         51 N 03 013 E 44 AR 08 234568   SE N
+157 MONROE, Marilyn (BAKER, Norma Jean)         01.06.1926 09.30  8.00      USA Los Angeles (Ca.)               34 N 04 118 W 15 AR 03 23567    SA N
+158 MONTESSORI, Maria                           31.08.1870 03.30 -0.83      I   Chiaravalle (Ancona, Rom)       43 N 36 013 E 19 SC 05 1234568  SE N
+159 MORANTE, Elsa                               18.08.1912 15.30 -1.00      I   Rom                             41 N 54 012 E 30 AR 03 23       SA N
+160 MOREAU, Jeanne                              23.01.1928 11.15  0.00      F   Paris                           48 N 50 002 E 17 AR 03 2357     SG G
+161 MORGAN, Michele (ROUSSEL, Simone)           29.02.1920 09.20 -1.00      F   Neuilly-sur-Seine               48 N 53 002 E 17 AR 03 1237     SG G
+162 MORISOT, Berthe                             14.01.1841 15.00       LMT  F   Bourges                         47 N 05 002 E 25 AR 08 123468   SG G
+163 MUELLER, Elisabeth                          21.09.1885 19.20 -0.50      CH  Langenau (Emmental, Bern)       46 N 57 007 E 47 AR 01 123      SE N
+164 NAGEL, Hanna                                10.06.1907 20.45 -1.00      D   Heidelberg                      49 N 24 00S E 41 AR 08 24       SE N
+165 NEGRI, Ada                                  03.02.1870 17.00 -0.83      I   Lodi                            45 N 19 009 E 32 AR 01 1234     SE N
+166 NEUMANN, Therese Th. VON KONNERSREUTH       09.04.1898 01.00 -1.00      D   Konnersreuth Oberpfalz          50 N 00 012 E 05 WA 09 12345    SE N
+167 NEY, Elizabeth (Francisca Bernardina)       26.01.1833 16.00       LMT  D   Minster Westfalen               51 N 58 007 E 38 AR 08 238      SE N
+168 NEY, Elly (Elisabeth Catharina Anna)        27.09.1882 06.30       LMT  D   Düsseldorf                      51 N 14 006 E 47 AR 07 123457   SE N
+169 NIN, Anais                                  21.02.1903 20.25 -0.16      F   Neuilly sur Seine               48 N 53 002 E 17 AR 01 2358     SG N
+170 NOAILLES, Anne-Elisabeth, GFN MATHIEU DE    15.11.1876 08.00       LMT  F   Paris                           48 N 50 002 E 17 AR 01 1234     SG G
+171 NOEL, Marie (ROUGET, M.}                    16.02.1883 20.30       LMT  F   Auxerre (Yonne)                 47 N 48 003 E 35 AR 01 23       SG G
+172 NOETHER, Emmy                               23.03.1882 20.00       LMT  D   Erlangen                        49 N 36 011 E 00 SC 01 2378     SE N
+173 OTTO-PETERS, Luise *OTTO                    26.03.1819 21.45       LMT  D   Meifen                          51 N 10 013 E 29 WA 10 12348    SE N
+174 PIAF, Edith (GASSION, E. Giovanna)          19.12.1915 05.00  0.00      F   Paris                           48 N 50 002 E 17 AR 06 235      SG G
+175 PICHT-AXENFELD, Edith (E. Maria)            01.01.1914 08.00 -1.00      D   Freiburg Breisgau               48 N 00 007 E 51 AR 07 37       SE N
+176 PORTEN, Henny                               07.01.1890 16.00       LMT  D   Magdeburg                       52 N 08 011 E 38 AR 03 123457   SE N
+177 RACHILDE *EYMERY, Marguerite Vallette       12.02.1860 01.00       LMT  F   Chateau-l'Evéque (Dordogne)     45 N 11 000 E 44 AR 01 123      SG G
+178 REICHER~KINDERMANN, Hedwig (Emma H.) *K.    15.07.1853 17.00       LMT  D   Müinchen                        48 N 08 011 E 34 AR 06 14       SE N
+179 RETHBERG, Elisabeth (SAETTLER, E.)          22.09.1894 23.45 -1.00      D   Schwarzenberg (Erzgebirge)      50 N 32 012 E 48 AR 06 12       SE N
+180 RINSER, Luise (HERRMANN, L-}                30.04.1911 01.30 -1.00      D   Pitzling Oberbayern             48 N 03 010 E 53 AR 01 12345    SE N
+181 ROCHEFORT, Christiane                       17.07.1917 08.00 -1.00      F   Paris                           48 N 50 002 E 17 AR 01 23       SG N
+182 ROGGE, Alma                                 24.07.1894 12.15 -1.00      D   Rodenkirchen Oldenburg          53 N 20 008 E 29 AR 01 23       SE N
+183 ROSAY, Francoise (BANDY DE NALECHE, F.)     19.04.1891 09.00 -0.16      F   Paris                           48 N 50 002 E 17 AR 03 234      SG G
+184 ROSE, Felicitas *SCHLIEWEN, Rosa            31.07.1862 03.00       LMT  D   Arnsberg Westfalen              51 N 24 008 E 04 AR 01 23       SE N
+185 RUBATSCHER, Maria Notburga                  23.01.1900 21.15 -1.00      A   Hall (Innsbruck, Tirol)         47 N 19 011 E 28 AR 01 13       SE N
+186 SAALFELD, Martha                            15.01.1898 21.00 -1.00      D   Landau Pfalz                    49 N 12 008 E 07 AR 01 23       SE N
+187 SAGAN, Francoise (QUOIREZ, F.)              21.06.1935 11.00 -1.00      F   Cajarc (Lot)                    44 N 30 001 E 50 AR 01 2357     SG G
+188 SAINT-HELIER, Monique *EYMANN, Berthe       02.09.1895 20.30 -1.00      CH  La Chaux-de-Fonds (Nevenburg)   47 N 06 006 E 50 AR 01 23       SE N
+189 SAINTE-SOLINE, Claire (FOUILLET, Nelly)     18.09.1891 21.30 -0.16      F   Melleran (Deux-Sévres)          46 N 19 000 W 27 AR 01 24       SG G
+190 SALOMON, Alice                              19.04.1872 17.30       LMT  D   Berlin                          52 N 32 013 E 18 WA 04 1234     SE N
+191 SAPPER, Agnes *BRATER                       12.04.1852 16.30       LMT  D   Miinchen                        48 N 08 011 E 34 AR 01 123      SE N
+192 SCHERVIER, Francisca                        03.01.1819 01.00       LMT  D   Aachen                          50 N 47 006 E 05 WA 05 123      SE N
+193 SCHIEBER, Anna                              12.12.1867 05.00       LMT  D   Esslingen Neckar                48 N 45 009 E 18 AR 01 23       SE N
+194 SCHLIER, Paula                              12.03.1899 15.30 -1.00      D   Neuburg Donau Schwaben          48 N 43 010 E 47 AR 01 23       SE N
+195 SCHMITZ, Sibylle (S. Maria Christine)       02.12.1909 03.15 -1.00      D   Diiren                          50 N 48 006 E 29 AR 03 24       SE N
+196 SCHOLL, Sophie (S. Lina)                    09.05.1921 23.00 -1.00      D   Forchtenberg Kocher Wttbg.      49 N 12 009 E 30 WA 08 23456    SE N
+197 SCHRADER, Henriette (Johanne) *BREYMANN     14.09.1827 04.30       LMT  D   Mahium Hildesheim               52 N 09 009 E 57 SC 05 14       SE N
+198 SCHWARZHAUPT, Elisabeth                     07.01.1901 16.45 -1.00      D   Frankfurt Main                  50 N 07 008 E 41 WA 04 23       SE N
+199 SCHWERIN, Jeannette *ABARBANELL             21.11.1852 05.00       LMT  D   Berlin                          52 N 32 013 E 18 WA 04 14       SE N
+200 SCIUTTI, Graziella                          17.04.1927 09.00 -1.00      I   Turin                           45 N 04 007 E 41 AR 06 23       SA N
+201 SIEMSEN-VOLLENWEIDER, Anna                  18.01.1882 17.30       LMT  D   Mark Westfalen                  51 N 41 007 E 49 SC 05 124      SE N
+202 SIGNORET, Simone (KAMINKER)                 25.03.1921 02.30 -1.00      D   Wiesbaden                       50 N 06 008 E 14 AR 03 23       SE N
+203 SIMIONATO, Giulietta                        12.05.1910 06.30 -1.00      I   Forli                           44 N 13 012 E 03 AR 06 257      SA N
+204 SONTAG, Henriette (SONNTAG, Gertrude)       03.01.1806 06.00 -0.42 LAT  D   Koblenz                         50 N 21 007 E 36 AR 06 12457    SE N
+205 SPARK, Muriel Sarah                         01.02.1918 03.00  0.00      GB  Edinburgh                       55 N 57 003 W 13 AR 02 23       SA N
+206 STACH, Ilse VON (STACH VON GOLTZHEIM)       17.02.1879 12.45       LMT  D   Haus Prébsting Borken Westf.    51 N 51 006 E 51 AR 01 23       SE N
+207 STEGER, Milly                               15.06.1881 09.00       LMT  D   Rheinberg                       51 N 27 006 E 38 AR 08 123      SE N
+208 STEHLE, Sophie (Sophia Anna Paula)          15.05.1838 03.15       LMT  D   Sigmaringen                     48 N 05 009 E 13 AR 06 14       SE N
+209 STOCKER, Helene                             13.11.1869 03.00       LMT  D   Elberfeld                       51 N 16 007 E 12 AR 02 13       SE N
+210 TAILLEFERRE, Germaine                       19.04.1892 01.00 -0.16      F   St. Maur (Paris)                48 N 47 002 E 29 AR 04 12       SG G
+211 TAUBER-ARP, Sophie *TAEUBER                 19.01.1889 04.00 -0.50      CH  Davos (Graublinden)             46 N 48 009 E 50 AR 08 238      SE N
+212 TESCHEMACHER, Margarete                     03.03.1903 11.30 -1.00      D   Köln                            50 N 57 006 E 57 AR 06 23       SE N
+213 TEUSCH, Christine                           11.10.1888 17.30       LMT  D   Köln                            50 N 57 006 E 57 WA 04 13       SE N
+214 TIBURTIUS, Franziska                        24.01.1643 04.17       LMT  D   Bisdamitz (Rigen)               54 N 25 013 E 26 SC 04 14       SE N
+215 TOPPER, Hertha                              19.04.1924 05.15 -1.00      A   Graz                            47 N 04 015 E 27 AR 06 257      SE N
+216 ULLMANN, Regina                             14.12.1884 04.00 -0.50      CH  St. Gallen (St. Gallen)         47 N 26 009 E 22 AR 01 1234     SE N
+217 VALADON, Suzanne (Marie Valentine)          23.09.1865 06.00       LMT  F   Bessines (Limoges, Haute Vienn  46 N 06 001 E 22 AR 08 12348    SG G
+218 VAUGBAN, Sarah Lois                         27.03.1924 21.45  5.00      USA Newark (N.J.)                   40 N 44 074 W 10 AR 06 237      SG G
+219 VIEBIG, Clara                               17.07.1860 22.00       LMT  D   Trier                           49 N 45 006 E 39 AR 01 1234     SE N
+220 VOIGT-DIEDERICHS, Helene *VOIGT             26.05.1875 20.00       LMT  D   Gut Marienhof Eckernférda       54 N 28 009 E 50 AR 01 23       SE N
+221 WALDOFF, Claire                             21.10.1884 11.30       LMT  D   Gelsenkirchen                   51 N 33 007 E 06 AR 03 235      SE G
+222 WASER, Maria *KREBS                         15.10.1878 21.00 -0.50      CH  Herzogenbuchsee (Bern)          47 N 11 007 E 41 AR 01 123      SE N
+223 WEBER, Helene (H. Auguste)                  17.03.1861 04.30       LMT  D   Elberfeld                       51 N 16 007 E 12 WA 04 1234     SE N
+224 WEGSCHEIDER, Hildegard *ZIEGLER             02.09.1871 07.30       LMT  D   Berlin                          52 N 32 013 E 18 WA 10 14       SE N
+225 WEIL, Simone                                03.02.1909 05.00 -0.16      F   Paris                           48 N 50 002 E 17 AR 02 12348    SG G
+226 WESENDONCK, Mathilde *LUCKEMEYER            23.12.1828 03.15       LMT  D   Elberfeld                       51 N 16 007 E 12 AR 01 1234     SE N
+227 WILDERMUTH, Ottilie *RooscRUTZ              22.02.1817 13.30       LMT  D   Rottenburg Neckar               48 N 32 009 E 04 AR 01 1234     SE N
+228 WINDTHORST, Margarete                       03.11.1884 20.00       LMT  D   Gut Haus Hesseln Halle Westf.   52 N 01 008 E 32 AR 01 123      SE N
+229 WOHMANN, Gabriele *GUYOT                    21.05.1932 09.15 -1.00      D   Darmstadt                       49 N 52 008 E 39 AR 01 235      SE N
+230 WOLTER, Charlotte                           01.03.1834 21.00       LMT  D   Köln                            50 N 57 006 E 57 AR 03 1234     SE N
+231 WOLZOGEN, Karoline FRF VON *LENGEFELD, VON  03.02.1763 16.00 -0.51 LAT  D   Rudolstadt                      50 N 43 011 E 20 AR 02 1234     SE N
+232 YOURCENAR, Marguerite (DE CRAYENCOUR)       08.06.1903 08.00  0.00      B   Brüssel                         50 N 50 004 E 21 AR 01 123      SG G
+233 ZETKIN, Clara *EISSNER                      05.07.1857 23.15       LMT  D   Wiederau (Rochlitz, Sachsen)    50 N 58 012 E 51 WA 10 12348    SE N
+234 ZIEGLER, Klara                              23.07.1844 03.30       LMT  D   Munchen                         48 N 08 011 E 34 AR 03 24       SE N

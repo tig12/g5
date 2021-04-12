@@ -24,7 +24,7 @@ class Irving implements SourceI {
     
     /**
         Path to the yaml file containing the characteristics of the source.
-        Relative to directory specified in config.yml by dirs / build
+        Relative to directory data/model
     **/
     const SOURCE_DEFINITION = 'source' . DS . 'unpublished' . DS . 'rawlins-ertel-irving.yml';
 

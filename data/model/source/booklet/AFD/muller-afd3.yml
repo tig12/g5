@@ -1,0 +1,13 @@
+
+document:
+  history:
+    - 2021-04-12 13:02:56+01:00: Thierry Graff, creation
+
+name: Astro-Forschungs-Daten 3
+slug: AFD3
+description: |
+  Booklet Astro-Forschungs-Daten 3, Arno Müller, Waldmohr, 1993
+  Self-edited by Arno Müller.
+  Contains a list of 234 famous women.
+source:
+  parents: ['AFD']

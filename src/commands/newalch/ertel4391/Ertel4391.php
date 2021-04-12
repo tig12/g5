@@ -18,7 +18,7 @@ class Ertel4391 implements SourceI {
     
     /**
         Path to the yaml file containing the characteristics of the source describing file 3a_sports.txt.
-        Relative to directory specified in config.yml by dirs / build
+        Relative to directory data/model
     **/
     const RAW_SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch' . DS . '3a_sports.yml';
     

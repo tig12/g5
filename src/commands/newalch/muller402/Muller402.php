@@ -20,7 +20,7 @@ class Muller402 implements SourceI {
     
     /**
         Path to the yaml file containing the characteristics of the source.
-        Relative to directory specified in config.yml by dirs / build
+        Relative to directory data/model
     **/
     const SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch' . DS . '5muller_writers.yml';
 
