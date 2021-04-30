@@ -77,6 +77,22 @@ class AFD3 implements SourceI {
     
     /** Names of the columns of tmp csv file **/
     const TMP_FIELDS = [
+        'MUID',
+        'FNAME',
+        'GNAME',
+        'ONAME', // other component of the name
+        'DATE',
+        'TZO',
+        'TIMOD', // time mode
+        'COU',
+        'PLACE',
+        'LAT',
+        'LG',
+        'OCCU',
+        'BERUF',
+        'BOOKS',
+        'SOURCE',
+        'GQ',
     ];
     
     // *********************** Source management ***********************
