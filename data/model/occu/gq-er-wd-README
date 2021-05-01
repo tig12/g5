@@ -1,0 +1,14 @@
+
+gq-er-mu-wd.csv: match between Gauquelin, Ertel, Müller and Wikidata occupation codes
+
+wikidata codes relate to occupation codes, but the labels sometimes refer to the related activity
+ex: Q7291 relates to "badminton player", but the label is "badminton"
+
+Build notes:
+
+Q2755547 : individual sport
+Q216048  : team sport
+
+possible ambiguity with hockey (field or ice ? chose field as all players are french)
+
+

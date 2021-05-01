@@ -1,11 +1,21 @@
 
-db dump : https://dumps.wikimedia.org/wikidatawiki/entities/
+Property page   : https://www.wikidata.org/wiki/Property:P25
+Entity page     : https://www.wikidata.org/wiki/Q28640
+Entity details  : http://www.wikidata.org/wiki/Special:EntityData/Q41390.json
+Query service   : https://query.wikidata.org/
+DB dump         : https://dumps.wikimedia.org/wikidatawiki/entities/
+
+Some properties
+---------------------------------------------------------------------------------------------------
+P31         : instance of
+P279        : subclass of
+P518        : applies to part
+
 
 https://www.wikidata.org/wiki/Wikidata:SPARQL_tutorial
-
+---------------------------------------------------------------------------------------------------
 To issue queries by program :
 https://www.mediawiki.org/wiki/Wikidata_Query_Service/User_Manual#SPARQL_endpoint
-
 
 #  (note: everything after a ‘#’ is a comment and ignored by WDQS.)
 
@@ -16,14 +26,8 @@ SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }
 SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
 SERVICE wikibase:label { bd:serviceParam wikibase:language "en,fr". }
 
------------------
-To know what a property is :
-https://www.wikidata.org/wiki/Property:P25
-instance of (P31)
-subclass of (P279)
-applies to part (P518)
+---------------------------------------------------------------------------------------------------
 
------------------
 Use ";"
   ?child wdt:P22 wd:Q1339.
   ?child wdt:P25 wd:Q57487.
@@ -41,23 +45,27 @@ equivalent to
          wdt:P25 wd:Q57487;
          wdt:P106 wd:Q36834, wd:Q486748.
 
------------------
+---------------------------------------------------------------------------------------------------
+
 Anonymous intermediate variable :         
   wd:Q1339 wdt:P40 ?child.
   ?child wdt:P40 ?grandChild.
 equivalent to 
   wd:Q1339 wdt:P40 [ wdt:P40 ?grandChild ].
-(if we don't care to ?child variable)
+(if we don't care of ?child variable)
 
------------------
-natural language      example                                  SPARQL      example
+---------------------------------------------------------------------------------------------------
+
+natural language       example                                 SPARQL      example
+---------------------------------------------------------------------------------------------------
 sentence               Juliet loves Romeo.                     period      juliet loves romeo.
 conjunction (clause)   Romeo loves Juliet and kills himself.   semicolon   romeo loves juliet; kills romeo.
 conjunction (noun)     Romeo kills Tybalt and himself.         comma       romeo kills tybalt, romeo.
 relative clause        Juliet loves someone who kills Tybalt.  brackets    juliet loves [ kills tybalt ].
 
 Property paths
------------------
+---------------------------------------------------------------------------------------------------
+
 work is an instance of sub
 sub is a subclass of wd:Q838948 (work of art)
     ?work wdt:P31 ?sub.
@@ -105,7 +113,8 @@ Another way to find all descendants of Bach is :
   ?descendant (wdt:P22|wdt:P25)+ wd:Q1339.  # :P22 = father ; #P25 = mother
 
 Qualifiers
------------------
+---------------------------------------------------------------------------------------------------
+
 wdt: points directly to the object of the statement.
 p:, points not to the object, but to a statement node. This node then is the subject of other triples
 ps: (for property statement) points to the statement object
@@ -126,17 +135,20 @@ wd:Q12418 p:P186 ?statement3.    # Mona Lisa: material used: ?statement3
 
 
 ORDER and LIMIT
------------------
+---------------------------------------------------------------------------------------------------
+
 ORDER BY DESC(?population)
 LIMIT 10 
 
 
 OPTIONAL
------------------
+---------------------------------------------------------------------------------------------------
+
 
 
 COUNT
------------------
+---------------------------------------------------------------------------------------------------
+
 # count nb of humans
 SELECT (COUNT(?item) AS ?count)
 WHERE {

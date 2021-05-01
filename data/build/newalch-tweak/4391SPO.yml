@@ -146,7 +146,11 @@
   NR: 2685
   GQID: D10-822
   build-notes: seen while comparing with CSICOP dates
-
+  
+-
+  NR: 2766
+  SPORT: TRAC
+  build-notes: error identified while building g5 occupation codes
 -
   NR: 2769
   GQID: D10-846

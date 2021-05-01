@@ -2,12 +2,15 @@
 
 profession-lists/ contains the results of the following queries
 
-profession Q28640
-subclass of
-occupation Q12737077
+Q12737077   : occupation 
+Q28640      : profession (subclass of occupation)
+ 
+Q482980     : Author
+Q36180      : Writer (subclass of author)
 
-Q482980 Author
-Q36180 Writer, subclass of author
+P31         : instance of
+P279        : subclass of
+
 
 Lists of professions - all-professions.csv
 ----------------------------------------------------------------------

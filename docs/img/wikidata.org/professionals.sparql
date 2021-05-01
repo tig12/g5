@@ -4,6 +4,8 @@ sparql query used to generate files of professionals/
 
 Replace Q170790 (mathematician) by profession code
 
+P31     : instance of
+
 TODO
 -------------------
 why

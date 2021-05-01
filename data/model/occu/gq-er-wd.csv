@@ -1,0 +1,56 @@
+slug;wd;cura5;ertel;fr;en;parents
+actor;Q33999;ACT;;Acteur;Actor;artist
+artist;Q483501;AR;;Artiste;Artist;
+Motor-sports;Q30339659;AUT;AUTO;Auto moto;Motor sports;sport
+aviation;Q2095549;AVI;AIRP;Aviation;Aviation;sport
+badminton;Q7291;;BADM;Badminton;Badminton;sport
+baseball;Q10871364;;BASE;Baseball;Baseball;sport
+basketball;Q3665646;BAS;BASK;Basketball;Basketball;sport
+billard;Q18544928;BIL;BILL;Billard;Billard;sport
+bobsleigh;Q177275;;BOBS;Bobsleigh;Bobsleigh;winter-sport
+bowling;Q4951095;;BOWL;Jeu de quilles;Bowling;sport
+boxing;Q11338576;BOX;BOXI;Boxe;Boxing;sport
+canoe-kayak;Q13382566+Q16004471;CAN;CANO;Canoë-kayak;Canoe-kayak;sport
+cartoonist;Q1114448;CAR;;Réalisateur de dessins animés;Cartoonist;artist
+climbing;Q22857;;ALPI;Escalade;Climbing;sport
+conductor-of-military-band;Q158852+Q47064;CMB;;Chef d'orchestre militaire;Conductor of military band;artist+military
+cyclism;Q2125610;CYC;CYCL;Cyclisme;Cyclism;sport
+dancer;Q5716684;DAN;;Danseur;Dancer;artist
+equestrian;Q2730732;EQU;HORS;Equitation;Equestrian;sport
+executive;Q978044;EX;;Dirigeant;Executive;
+female-sports;;FEM;;Sports féminins;Female sports;sport
+fencing;Q13381863;ESC;FENC;Escrime;Fencing;sport
+field-hockey;Q10843263;HOC;HOCK;Hockey sur gazon;Field hockey;sport
+football;Q19204627;FOO;FOOT;Football américain;American football;sport
+golf;Q11303721;GOL;GOLF;Golf;Golf;sport
+gymnastic;Q16947675;GYM;GYMN;Gymnastique;Gymnastic;sport
+handball;Q12840545;HAN;HAND;Handball;Handball;sport
+journalist;Q1930187;JO;;Journaliste;Journalist;
+judo;Q6665249;;JUDO;Judoka;Judoka;sport
+military;Q47064;MI;;Militaire;Military;
+miscelaneous;;XX;;Divers;Miscelaneous;
+musician;Q639669;MUS;;Musicien;Musician;artist
+opera-singer;Q2865819;OPE;;Chanteur d'opéra;Opera singer;musician
+painter;Q1028181;PAI;;Peintre;Painter;artist
+pelote-basque;Q19746576;PEL;PELO;Pelote basque;Pelote basque;sport
+photographer;Q33231;PHO;;Photographe;Photographer;artist
+physician;Q39631;PH;;Médecin;Physician;
+politician;Q82955;PO;;Politicien;Politician;
+rodeo;Q21517059;ROD;RODE;Rodéo;Rodeo;sport
+roller-skate;Q61278580;PAT;ROLL;Patin à roulettes;roller skate;sport
+rowing;Q13382576;AVR;AVIR+ROWI;Aviron;Rowing;sport
+rugby-and-rugby-league;Q13415036;RUG;RUGB;Rugby et Jeu à XIII;Rugby and Rugby league;sport
+sailing;Q476246;VOI;;Voile;Sailing;sport
+scientist;Q901;SC;;Scientifique;Scientist;
+shooting;Q17486376;TIR;SHOO;Tir;Shooting;sport
+ski;Q4270517;SKI;SKII;Ski;Ski;sport
+sport;Q2066131;SP;;Sportif;Sportsperson;
+swimming;Q10843402;NAT;SWIM;Natation;Swimming;sport
+tennis;Q10833314;TEN;TENN;Tennis;Tennis;sport
+track-and-field;Q11513337;ATH;TRAC+TRAV;Athlétisme;Track and field;sport
+volley-ball;Q15117302;VOL;VOLL;Volley-ball;Volleyball;sport
+Race-walking;Q17405793;MAR;WALK;Marche athlétique;Race walking;sport
+weightlifting;Q13381376;HAL;WEIG;Haltérophilie;Weightlifting;sport
+winter-sports;Q20965770;GLA;ICES;Sports d’hiver;Winter-sports;sport
+wrestling;Q13474373;LUT;WRES;Lutte;Wrestling;sport
+writer;Q36180;WR;;Ecrivain;Writer;
