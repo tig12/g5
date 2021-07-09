@@ -63,23 +63,68 @@ php run-g5.php muller afd3 raw2tmp
 <!-- ************************************* -->
 <h3>raw2tmp</h3>
 
-<!-- ************************************* -->
-<h3>Analyze</h3>
-A first look at the file shows that the file contains 43 persons from Gauquelin database, à priori brings <b>191</b> new records.
-<br>6 records must be checked : Müller indicates that the "secondary source of birth record" is Gauquelin, but the record is marked as not present in Gauquelin data.
+<!-- ********************************************************************************* -->
+<h2>Analyze</h2>
 
-<pre>php run-g5.php muller afd3 look gauquelin</pre>
+The meaning of the fields can be understood thanks to explanations given by Müller in his booklet.
+
+<!-- ************************************* -->
+<h3>Identify Gauqelin data</h3>
+
+2 fields are related to the origin of the data, called <code>SOURCE</code> and <code>GQ</code> in the input file.
+<ul>
+    <li>
+        <b>GQ</b> can take 2 values :
+        <ul>
+            <li><b>G</b> : present in Gauquelin data</li>
+            <li><b>N</b> : not present in Gauquelin data</li>
+        </ul>
+    </li>
+    <li>
+        <b>SOURCE</b> is composed of 2 letters.
+        <br>First letter is the "primary source" and can take these values :
+        <ul>
+            <li><b>S</b> : Registry office</li>
+            <li><b>F</b> : Family record</li>
+            <li><b>M</b> : Subjects statements</li>
+        </ul>
+        Second letter is "secondary source" and can take these values :
+        <ul>
+            <li><b>E</b> : Own inquiry</li>
+            <li><b>B</b> : Biography or other non-astrological publication</li>
+            <li><b>A</b> : Astrological publication</li>
+            <li><b>G</b> : Gauquelin data</li>
+        </ul>
+    </li>
+</ul>
+
+<br>These 2 fields are analyzed with the command
+<pre>php run-g5.php muller afd3 look source</pre>
+
 <pre>
-6 strange lines: not marked 'G' but field SOURCE contains 'G'
-  SG N 024 BERNADETTE (SOUBIROUS, Maria Bernarda) 07.01.1844 WA 
-  SG N 091 GUILBERT, Yvette 22.01.1866 AR 
-  SG N 124 LAURENCIN, Marie 31.10.1883 AR 
-  SG N 154 MICHEL, Louise (Clémence L.) 29.05.1830 WA 
-  SG N 169 NIN, Anais 21.02.1903 AR 
-  SG N 181 ROCHEFORT, Christiane 17.07.1917 AR 
+Primary source:
+  S: 233
+  F: 1
+  M: 0
+Secondary source:
+  E: 161
+  B: 2
+  A: 24
+  G: 47
+6 strange lines: secondary source contains 'G' but not marked 'G'
+  SG N 024 SOUBIROUS Bernadette	1844-01-07 14:00 WA 
+  SG N 091 GUILBERT Yvette      1866-01-22 03:00 AR 
+  SG N 124 LAURENCIN Marie      1883-10-31 09:00 AR 
+  SG N 154 MICHEL Louise        1830-05-29 17:00 WA 
+  SG N 169 NIN Anais            1903-02-21 20:25 AR 
+  SG N 181 ROCHEFORT Christiane	1917-07-17 08:00 AR 
 43 lines marked 'G'
 191 lines not marked 'G'
 </pre>
+
+The file contains 43 persons from Gauquelin database, à priori brings <b>191 new records</b>.
+<br>6 records must be checked : Müller indicates that the "secondary source of birth record" is Gauquelin, but the record is marked as not present in Gauquelin data.
+
 
 
 </article>

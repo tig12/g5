@@ -12,7 +12,7 @@ use g5\Config;
 use g5\model\DB5;
 use g5\model\{Source, SourceI, Group};
 //use tiglib\time\seconds2HHMMSS;
-//use tiglib\arrays\csvAssociative;
+use tiglib\arrays\csvAssociative;
 
 class AFD3 implements SourceI {
     
@@ -64,7 +64,7 @@ class AFD3 implements SourceI {
         'TIME',
         'TZO',
         'TIMOD', // time mode
-        'COU',
+        'CY',
         'PLACE',
         'LAT',
         'LG',
@@ -84,7 +84,7 @@ class AFD3 implements SourceI {
         'DATE',
         'TZO',
         'TIMOD', // time mode
-        'COU',
+        'CY',
         'PLACE',
         'LAT',
         'LG',

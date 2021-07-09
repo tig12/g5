@@ -24,6 +24,7 @@ class look implements Command {
         php run-g5.php muller afd3 look gauquelin
     **/
     const POSSIBLE_PARAMS = [
+        'source',
         'gauquelin',
     ];
     
@@ -60,32 +61,65 @@ class look implements Command {
     
     // ******************************************************
     /**
-        Count the number of lines present in Gauquelin data
         Checks columns SOURCE and GQ
+        SOURCE contains "primary source" and "secondary source"
+        See docs/newalch-muller234.html for details
     **/
-    private static function look_gauquelin(){
+    private static function look_source(){
         $report = '';
         $data = AFD3::loadTmpFile();
         $N = count($data);
-        $NG = 0;
+        $NG = 0; // nb of record marked G in GQ column
+        $source1 = array_fill_keys(['S', 'F', 'M'], 0); // primary source
+        $source2 = array_fill_keys(['E', 'B', 'A', 'G'], 0); // secondary source
         $NStrange = 0;
         $reportStrange = '';
         foreach($data as $line){
-            if($line['GQ'] == 'G'){
+            $s1 = substr($line['SOURCE'], 0, 1);
+            $s2 = substr($line['SOURCE'], 1);
+            $source1[$s1]++;
+            $source2[$s2]++;
+            $GQ = $line['GQ'];
+            if($GQ == 'G'){
                 $NG++;
             }
-            else{
-                if(strpos($line['SOURCE'], 'G') !== false){
-                    $reportStrange .=  "  {$line['SOURCE']} {$line['GQ']} {$line['MUID']} {$line['NAME']} {$line['DATE']} {$line['OCCU']} \n";
-                    $NStrange++;
-                }
+            if($GQ != 'G' && $s2 == 'G'){
+                $reportStrange .=  "  {$line['SOURCE']} {$line['GQ']} {$line['MUID']}"
+                    . " {$line['FNAME']} {$line['GNAME']}\t{$line['DATE']} {$line['OCCU']} \n";
+                $NStrange++;
             }
         }
-        $report .= "$NStrange strange lines: not marked 'G' but field SOURCE contains 'G'\n";
+        $report .= "Primary source:\n";
+        foreach($source1 as $k => $v){
+            $report .= "  $k: $v\n";
+        }
+        $report .= "Secondary source:\n";
+        foreach($source2 as $k => $v){
+            $report .= "  $k: $v\n";
+        }
+        $report .= "$NStrange strange lines: secondary source contains 'G' but not marked 'G'\n";
         $report .= $reportStrange;
         $report .= "$NG lines marked 'G'\n";
         $NNoG = $N - $NG;
         $report .= "$NNoG lines not marked 'G'\n";
+        return $report;
+    }
+    
+    // ******************************************************
+    /**
+        Lists persons supposed to be present in Gauquelin data
+    **/
+    private static function look_gauquelin(){
+        $report = '';
+        $data = AFD3::loadTmpFile();
+        foreach($data as $line){
+            $s1 = substr($line['SOURCE'], 0, 1);
+            $s2 = substr($line['SOURCE'], 1);
+            $GQ = $line['GQ'];
+            if($GQ == 'G' || $s2 == 'G'){
+                $report .=  "{$line['GQ']} {$line['MUID']} {$line['FNAME']} {$line['GNAME']}\t{$line['DATE']} {$line['CY']} \n";
+            }
+        }
         return $report;
     }
     
