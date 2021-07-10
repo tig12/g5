@@ -11,8 +11,14 @@ Scan of original document by Nick Kollerstrom
 Conversion to a text file and corrections by Thierry Graff
 
 Lists of modifications that may introduce errors:
-148 MARIA Sophie VON WITTELSBACH 
-148 MARIA, Sophie, VON WITTELSBACH 
+
+004 ANNA AMALIE, HZGN VON SACHSEN-WEIMAR
+004 von Braunschweig-Wolfenbüttel, Anna Amalia
+# from https://fr.wikipedia.org/wiki/Anne-Am%C3%A9lie_de_Brunswick
+
+010 AUGUSTE VIKTORIA, KSN
+010 von Schleswig-Holstein,Auguste Viktoria,KSN
+# obliged to shorten to fit in available space, see tweak file
 
 024 BERNADETTE (SOUBIROUS, Maria Bernarda)
 024 SOUBIROUS, Bernadette (Maria Bernarda)
@@ -20,9 +26,16 @@ Lists of modifications that may introduce errors:
 027 BLIXEN, Karen (BLIXEN-FINECKE Tania)
 027 BLIXEN-FINECKE, Karen BLIXEN, Tania
 
-155 MISTINGUETT (BOURGEOIS, Joanne-Marie)
-155 BOURGEOIS, Joanne-Marie (MISTINGUETT)
-
 046 COLETTE (Sidonie Gabrielle)
 046 SIDONIE, Gabrielle (Colette)
+
+111 KAROLINE Amalie Elisabeth, KGN
+111 Braunschweig-Wolfenbütte, Caroline Amalie Elisabeth, von
+# obliged to shorten to fit in available space, see tweak file
+
+148 MARIA Sophie VON WITTELSBACH 
+148 MARIA, Sophie, VON WITTELSBACH 
+
+155 MISTINGUETT (BOURGEOIS, Joanne-Marie)
+155 BOURGEOIS, Joanne-Marie (MISTINGUETT)
 

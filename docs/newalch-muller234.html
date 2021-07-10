@@ -69,7 +69,7 @@ php run-g5.php muller afd3 raw2tmp
 The meaning of the fields can be understood thanks to explanations given by Müller in his booklet.
 
 <!-- ************************************* -->
-<h3>Identify Gauqelin data</h3>
+<h3>Check data source</h3>
 
 2 fields are related to the origin of the data, called <code>SOURCE</code> and <code>GQ</code> in the input file.
 <ul>
@@ -124,6 +124,18 @@ Secondary source:
 
 The file contains 43 persons from Gauquelin database, à priori brings <b>191 new records</b>.
 <br>6 records must be checked : Müller indicates that the "secondary source of birth record" is Gauquelin, but the record is marked as not present in Gauquelin data.
+
+<!-- ************************************* -->
+<h3>Match Gauquelin data</h3>
+The command
+<pre>php run-g5.php muller afd3 look gauquelin</pre>
+is used to generate a table of correspondance between Müller and Gauquelin data.
+<br>Birth day is used to match the records.
+<br>This command was issued several times to fix manually the ambiguous cases.
+<br>This verification process showed that one birth date is wrong in Müller's file (record 177, RACHILDE *EYMERY Marguerite Vallette). A verification at online civil registry showed that Gauquelin date was correct.
+<br>44 records are found to match Gauquelin, so this file should bring 234 - 44 = <b>190 new records</b>.
+<br>The correspondances are stored in constant <code>MU_CURA</code> of class <code>g5\commands\muller\afd3\AFD3</code>.
+
 
 
 
@@ -239,5 +251,3 @@ The file contains 43 persons from Gauquelin database, à priori brings <b>191 ne
 
 </body>
 </html>
-<!-- ************************************* -->
-<!-- ********************************************************************************* -->

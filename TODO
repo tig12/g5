@@ -1,5 +1,10 @@
 
+- Refactor and unify tweak files :
+    - one common mechanism for all tweaks
+    - one general README
+
 - Handle occu in db, codes like SP+BAS => should be BAS
+- profession-codes.csv : add wd codes + Ertel codes.
 
 - Use Ertel 4391 to have more precise sport codes in D10
 
@@ -27,8 +32,6 @@
   Harmonize messages for wrong parameters
 
 - Use Müller 1083MED to test legal time restoration on serie A
-
-- profession-codes.csv : add wd codes + Ertel codes.
 
 - A : legal time restoration for other countries.
 

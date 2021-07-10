@@ -64,7 +64,6 @@ class raw2tmp implements Command {
                 }
             }
             $new['DATE'] = "$day $hour";
-//echo "\n<pre>"; print_r($new); echo "</pre>\n"; exit;
             $res .= implode(G5::CSV_SEP, $new) . "\n";
         }
         

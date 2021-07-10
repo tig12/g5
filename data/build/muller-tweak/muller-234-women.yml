@@ -1,0 +1,26 @@
+#
+# Human corrections to file data/raw/muller/muller-afd3/muller-afd3-women.txt
+# Fields sorted by MUID
+# 
+# 2021-07-10 17:19:55+01:00, Thierry Graff : Creation
+#
+
+-
+  MUID: 010
+  FNAME: Schleswig-Holstein-Sonderburg-Augustenburg
+  GNAME: Auguste Viktoria
+  NOB: von
+  build-notes:
+    - 2021-07-10 20:22:54+01:00 corrections from https://de.wikipedia.org/wiki/Auguste_Viktoria_von_Schleswig-Holstein-Sonderburg-Augustenburg
+-
+  MUID: 111
+  GNAME: Caroline Amalie Elisabeth
+  NOB: von
+  build-notes:
+    - 2021-07-10 20:27:58+01:00 corrections from https://de.wikipedia.org/wiki/Caroline_von_Braunschweig-Wolfenb%C3%BCttel
+-
+  MUID: 177
+  DATE: '1860-02-11 06:00'
+  build-notes:
+    - 2021-07-10 17:20:03+01:00 Date checked on civil registry (because Müller and Gauquelin differ)
+  
