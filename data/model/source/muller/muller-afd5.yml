@@ -1,0 +1,17 @@
+
+document:
+  history:
+    - 2021-07-17 21:48:57+02:00: Thierry Graff, creation
+
+name: Astro-Forschungs-Daten 5
+slug: afd5
+type: booklet
+authors:
+  - Arno Müller
+  - Suitbert Ertel
+description: |
+  AFD5 - 1083 members of the French "Académie de Médecine", Astro-Forschungs-Daten 5, Waldmohr, 1994
+  92 pages
+  Contains a list of 1083 members of the French Academie de Medicine
+parents: 
+  - afd

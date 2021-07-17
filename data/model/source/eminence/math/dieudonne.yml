@@ -8,7 +8,8 @@ slug: dieudonne-histoire
 type: book
 
 title: Abrégé d'histoire des mathématiques
-author: Jean Dieudonné
+authors:
+  - Jean Dieudonné
 edition: |
   Hermann
   1996 (reprint)
@@ -21,6 +22,5 @@ description: |
   See https://tig12.github.io/gauquelin5/eminence-math.html
   See https://g5.tig12.net/auxiliary/eminence/math/dieudonne
 
-source:
-  parents: []
+parents: []
   

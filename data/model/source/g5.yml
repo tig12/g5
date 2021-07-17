@@ -5,8 +5,7 @@ document:
 
 name: Gauquelin5
 slug: g5
+type: website
 description: |
   Computer program hosted on https://github.com/tig12/gauquelin5
   Started by Thierry Graff in 2017
-source:
-  parents: []

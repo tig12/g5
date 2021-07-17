@@ -206,20 +206,20 @@ class look implements Command {
             }
         }
         //
-        $report .= "\n=== Incoherences:\n";
+        $report .= "\n=== 1 match but incoherent:\n";
         $report .= $report_incoherent;
         //
-        $report .= "\n=== No match:\n";
+        $report .= "\n=== Several matches => no match:\n";
         $report .= $report_nomatch;
         //
-        $report .= "\n=== Code to copy in class AFD3:\n";
+        $report .= "\n=== Coherent matches - code to copy in class AFD3:\n";
         $tmp = explode("\n", $res_match);
         sort($tmp);
         $report .= "    const MU_GQ = ["; // code to copy in class AFD3
         $report .= implode("\n", $tmp) . "\n";
         $report .= "    ];\n";
         //
-        $report .= "According to Müller:\n";
+        $report .= "--- According to Müller:\n";
         $report .= "N not Gauquelin = $N_nogauq\n";
         $report .= "N Gauquelin     = $N_gauq\n";
         $report .= "---\n";

@@ -1,6 +1,6 @@
 
 -- The structure of json fields is given by src/model/Group.yml
--- Named groop instead of group because group is a sql key word
+-- Named groop instead of group because group is a sql keyword
 
 create table groop (
     id              serial primary key,

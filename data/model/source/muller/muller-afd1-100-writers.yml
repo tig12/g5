@@ -5,12 +5,17 @@ document:
 
 name: Müller's 100 Italian writers
 slug: muller-afd1-100-writers
+type: file
+authors: 
+  - Nick Kollerstrom
+  - Thierry Graff
 description: |
-  List of 100 italian witers without birth time
+  List of 100 Italian writers without birth time.
   Comes from Astro-Forschungs-Daten 1, Arno Müller, Waldmohr, 1991 - pp 25 - 27
-  The list if a text file built by Nick Kollerstrom (scan) and Thierry Graff (OCR and corrections)
+  Text file built by Nick Kollerstrom (scan) and Thierry Graff (OCR and corrections)
   Located in raw data versioned with Gauquelin5 program, in
   data/raw/newalchemypress.com/05-muller-writers/muller-afd1-100-writers.txt
-source:
-  parents: ['AFD1', 'g5']
+parents:
+  - afd1
+  - g5
                                                                                                           

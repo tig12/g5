@@ -8,7 +8,8 @@ slug: irem
 type: book
 
 title: Histoires de problèmes. Histoire des mathématiques
-author: Commission Inter-IREM Epistémologie et Histoire des Mathématiques
+authors:
+  - Commission Inter-IREM Epistémologie et Histoire des Mathématiques
 edition: |
   Ed. Ellipses Paris
   Collection : IREM - Epistémologie et Histoire des Maths
@@ -22,6 +23,5 @@ description: |
   See https://tig12.github.io/gauquelin5/eminence-math.html
   See https://g5.tig12.net/auxiliary/eminence/math/irem
 
-source:
-  parents: []
+parents: []
   

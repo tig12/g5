@@ -8,7 +8,8 @@ slug: escofier
 type: book
 
 title: Histoire des mathématiques
-author: Jean-Pierre Escofier
+authors:
+  - Jean-Pierre Escofier
 edition: |
   Dunod
   Collection Les topos
@@ -22,6 +23,5 @@ description: |
   See https://tig12.github.io/gauquelin5/eminence-math.html
   See https://g5.tig12.net/auxiliary/eminence/math/escofier
 
-source:
-  parents: []
+parents: []
   

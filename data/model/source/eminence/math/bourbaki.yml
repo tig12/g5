@@ -8,7 +8,8 @@ slug: bourbaki-histoire
 type: book
 
 title: Éléments d'histoire des Mathématiques
-author: Nicolas Bourbaki
+authors:
+  - Nicolas Bourbaki
 edition: |
   Springer
   2007 (3rd edition ; reprint from 1984 version, ed. Masson)
@@ -21,6 +22,5 @@ description: |
   See https://tig12.github.io/gauquelin5/eminence-math.html
   See https://g5.tig12.net/auxiliary/eminence/math/bourbaki
 
-source:
-  parents: []
+parents: []
   

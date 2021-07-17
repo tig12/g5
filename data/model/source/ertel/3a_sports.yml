@@ -5,7 +5,12 @@ document:
 
 name: newalchemypress.com file 3a_sports.txt
 slug: 3a_sports
+type: file
+author: Suitbert Ertel
 description: |
+  Contains a list of 4384 sportsmen
   Original URL : https://newalchemypress.com/gauquelin/gauquelin_docs/3a_sports.txt
-source:
-  parents: ['newalch']
+  Details about this file on page https://newalchemypress.com/gauquelin/research3.php
+  File made available online by Nick Kollerstrom
+parents: 
+    - newalch

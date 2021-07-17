@@ -16,10 +16,10 @@ use tiglib\arrays\csvAssociative;
 class Cura implements SourceI {
     
     /**
-        Path to the yaml file containing the characteristics of "cura" source.
+        Path to the yaml file containing the characteristics of "cura5" source.
         Relative to directory data/model
     **/
-    const SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'cura.yml';
+    const SOURCE_DEFINITION = 'source' . DS . 'cura5.yml';
     
     /**
         Default trust level for data coming from Cura
@@ -112,7 +112,7 @@ class Cura implements SourceI {
         $curaSource = self::getSource();
         $source = new Source();
         $source->data['slug'] = $datafile;
-        $source->data['name'] = "CURA file $datafile";
+        $source->data['name'] = "CURA5 file $datafile";
         $source->data['description'] = self::CURA_URLS[$datafile]
             . "\nDescribed by Cura as " . self::CURA_CLAIMS[$datafile][2];
         $source->data['source']['parents'][] = $curaSource->data['slug'];

@@ -1,4 +1,7 @@
 
+
+- Add schema in db config + in all sql queries, specify the schema
+
 - Refactor and unify tweak files :
     - one common mechanism for all tweaks
     - one general README

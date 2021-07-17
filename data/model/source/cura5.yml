@@ -1,0 +1,12 @@
+
+document:
+  history:
+    - 2020-05-18 16:20:21+02:00: Thierry Graff, creation
+    - 2021-07-17 23:02:16+02:00: Thierry Graff, Change from cura to cura5
+
+name: cura.free.fr
+slug: cura5
+type: website
+description: |
+  Web site http://cura.free.fr
+  This information source refers to version 5 of CURA database, prior to November 2020.

@@ -3,10 +3,14 @@ document:
   history:
     - 2020-08-17 23:28:31+02:00: Thierry Graff, creation
 
-name: newalchemypress.com file 5muller_writers.xlsx
+name: 5muller_writers.xlsx
 slug: 5muller_writers
+type: file
+author: Nick Kollerstrom
 description: |
+  Excel file containing a list of 422 Italian writers, provided by Nick Kollerstrom.
   Original URL : https://newalchemypress.com/gauquelin/gauquelin_docs/5muller_writers.xlsx
-source:
-  parents: ['newalch']
+parents:
+  - newalch
+  - afd1
                                                                                                           

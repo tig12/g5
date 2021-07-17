@@ -18,6 +18,7 @@ db5:
     dbuser: pg_username
     dbpassword: pg_password
     dbname: pg_dbname
+    schema: pg_schema
 
 
 # geoname.org parameters

@@ -4,13 +4,16 @@ document:
     - 2020-08-18 19:17:32+02:00: Thierry Graff, creation
 
 name: Astro-Forschungs-Daten 1
-slug: AFD1
+slug: afd1
+type: booklet
+author: Arno Müller
 description: |
   Booklet Astro-Forschungs-Daten 1, Arno Müller, Waldmohr, 1991
+  54 pages
   Self-edited by Arno Müller
   Contains :
     - a list of 422 Italian writers with birth date and time
     - a list of 100 Italian writers with birth date and without birth time
     - a list of 22 Italian writers where Müller's data differ from Gauquelins'
-source:
-  parents: ['AFD']
+parents:
+  - afd

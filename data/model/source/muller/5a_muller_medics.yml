@@ -5,8 +5,14 @@ document:
 
 name: newalchemypress.com file 5a_muller_medics.txt
 slug: 5a_muller_medics
+type: file
+author: Arno Müller
 description: |
+  Text file containing a list of 1083 physicians.
   Original URL : https://newalchemypress.com/gauquelin/gauquelin_docs/5a_muller_medics.txt
-source:
-  parents: ['newalch']
+  Details about this file on https://newalchemypress.com/gauquelin/research5.php
+  File made available online by Nick Kollerstrom
+parents:
+  - newalch
+  - afd5
   
