@@ -31,10 +31,14 @@ class dbcreate implements Command {
         ];
         $dblink = DB5::getDblink();
         foreach($tables as $table){
-            $sql = file_get_contents($dir_sql . DS . $table . '.sql');
+            $sql_create = file_get_contents($dir_sql . DS . $table . '.sql');
             $dblink->exec("drop table if exists $table cascade");
-            $dblink->exec($sql);
+            $dblink->exec($sql_create);
             $report .= "Create table $table\n";
+            // grant privilege for use with postgrest
+            $sql_grant = "grant select on $table to " . Config::$data['db5']['postgrest']['user'];
+            $dblink->exec($sql_grant);
+            $report .= "$sql_grant\n";
         }
         return $report;
     }

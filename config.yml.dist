@@ -19,6 +19,10 @@ db5:
     dbpassword: pg_password
     dbname: pg_dbname
     schema: pg_schema
+  # used by open-gauquelin program to access the database through postgrest
+  # useful to grant read privilege on tables in command/db/build/dbcreate.php
+  postgrest:
+    user: web_anon
 
 
 # geoname.org parameters
