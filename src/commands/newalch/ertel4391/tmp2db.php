@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Loads files data/tmp/newalch/4391SPO.csv and 4391SPO.csv in database.
+    Loads files data/tmp/newalch/4391SPO.csv in database.
     Affects records imported in A1
     
     @license    GPL
@@ -29,6 +29,7 @@ class tmp2db implements Command {
         @param  $params Array containing 1 element : the type of report ; see REPORT_TYPE
     **/
     public static function execute($params=[]): string {
+die("\nNOT IMPLEMENTED\n" . __FILE__ . ' - line ' . __LINE__ . "\n");
         if(count($params) > 1){
             return "USELESS PARAMETER : " . $params[1] . "\n";
         }

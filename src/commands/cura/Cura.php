@@ -111,11 +111,13 @@ class Cura implements SourceI {
     public static function getSourceOfFile($datafile): Source {
         $curaSource = self::getSource();
         $source = new Source();
-        $source->data['slug'] = $datafile;
+        $source->data['slug'] = strtolower($datafile);
         $source->data['name'] = "CURA5 file $datafile";
-        $source->data['description'] = self::CURA_URLS[$datafile]
+        $source->data['type'] = 'file';
+        $source->data['authors'] = ['Patrice Guinard'];
+        $source->data['description'] = 'Web page ' . self::CURA_URLS[$datafile]
             . "\nDescribed by Cura as " . self::CURA_CLAIMS[$datafile][2];
-        $source->data['source']['parents'][] = $curaSource->data['slug'];
+        $source->data['parents'][] = $curaSource->data['slug'];
         $source->data['id'] = $source->insert();
         return $source;
     }

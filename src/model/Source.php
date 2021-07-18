@@ -30,7 +30,12 @@ class Source {
     **/
     public static function getSource($yamlFile): Source {
         $s = new Source();
-        $s->data = yaml_parse(file_get_contents($yamlFile));
+        $yaml = yaml_parse(file_get_contents($yamlFile));
+        // Allow yaml file containing a field author instead of authors
+        if(isset($yaml['author'])){
+            $yaml['authors'] = [$yaml['author']];
+        }
+        $s->data = array_replace_recursive($s->data, $yaml);
         return $s;
     }
     
@@ -45,7 +50,7 @@ class Source {
         if($res === false || count($res) == 0){
             return null;
         }
-        $res['source'] = json_decode($res['source'], true);
+        $res['parents'] = json_decode($res['parents'], true);
         $s = new Source();
         $s->data = $res;
         return $s;
@@ -60,7 +65,7 @@ class Source {
         if($res === false || count($res) == 0){
             return null;
         }
-        $res['source'] = json_decode($res['source'], true);
+        $res['parents'] = json_decode($res['parents'], true);
         $s = new Source();
         $s->data = $res;
         return $s;
@@ -75,12 +80,25 @@ class Source {
     **/
     public function insert(): int{
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("insert into source(slug,name,description,source) values(?,?,?,?) returning id");
+        $stmt = $dblink->prepare("insert into source(
+                slug,
+                name,
+                type,
+                authors,
+                edition,
+                isbn,
+                description,
+                parents
+            ) values(?,?,?,?,?,?,?,?) returning id");
         $stmt->execute([
             $this->data['slug'],
             $this->data['name'],
+            $this->data['type'],
+            json_encode($this->data['authors']),
+            $this->data['edition'],
+            $this->data['isbn'],
             $this->data['description'],
-            json_encode($this->data['source']),
+            json_encode($this->data['parents']),
         ]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         return $res['id'];
@@ -91,17 +109,27 @@ class Source {
         @throws \Exception if trying to update an unexisting id
     **/
     public function update() {
-        $stmt = $dblink->prepare("update source set slug=?,name=?,description=?,source=? where id=?");
+        $stmt = $dblink->prepare("update source set
+            slug=?,
+            name=?,
+            type=?,
+            authors=?,
+            edition=?,
+            isbn=?,
+            description=?,
+            parents=?
+            where id=?");
         $stmt->execute([
             $this->data['slug'],
             $this->data['name'],
+            $this->data['type'],
+            json_encode($this->data['authors']),
+            $this->data['edition'],
+            $this->data['isbn'],
             $this->data['description'],
-            json_encode($this->data['source']),
+            json_encode($this->data['parents']),
             $this->data['id'],
         ]);
     }
-    
-    // *********************** Fields *******************************
-    
     
 } // end class

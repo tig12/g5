@@ -111,8 +111,8 @@ Read :
         <!-- <div class="bold"><a href="db5-source.html">Source</a></div> -->
         Information sources, origin of the data manipulated by g5.
         <br>The link between Source and Source permits to handle the notion of parent source.
-        <br>For example, the source called <code>A1</code> refers to the html web page <a href="http://cura.free.fr/gauq/902gdA1y.html">cura.free.fr/gauq/902gdA1y.html</a>
-        <br><code>A1</code> has a parent source called <code>cura</code>, which refers to web site <a href="http://cura.free.fr">cura.free.fr</a>.
+        <br>For example, the source called <code>a1</code> refers to the html web page <a href="http://cura.free.fr/gauq/902gdA1y.html">cura.free.fr/gauq/902gdA1y.html</a>
+        <br><code>a1</code> has a parent source called <code>cura5</code>, which refers to version 5 of database located on web site <a href="http://cura.free.fr">cura.free.fr</a>.
         <br>One source can have several parents.
     </li>
     <li>
@@ -155,7 +155,7 @@ For example, file <code>Person.yml</code> contains an empty person with all its 
 <br>This provides to the code a precise definition of the entities, used as the description of a new type.
 <br>
 <br>Persons are built by program from raw files.
-<br>Sources are defined in files of <code>data/buid/source</code> and imported by program.
+<br>Sources are defined in files of <code>data/model/source</code> and imported by program.
 <br>Groups are built in the code.
 
 <!-- ************************************* -->
@@ -167,7 +167,7 @@ All entities of this database have a field called <b>slug</b>, unique within eac
 <br>Example : <code>poincare-henri-1854-04-29</code>.
 <br>They contain only lower case letters without accents [a-z], digits [0-9], and hyphen (-).
 
-<br><br>Group and source slug are defined by humans, in the code for groups and or in files of <code>data/buid/source</code> for sources. 
+<br><br>Group and source slug are defined by humans, in the code for groups and or in files of <code>data/model/source</code> for sources. 
 
 
 <!-- ********************************************************************************* -->
@@ -249,18 +249,18 @@ These fields express the link between a person an information sources.
 <br>Example (in json syntax) :
 <pre>
 # field sources
-    ["A6", "E1", "E3"]
+    ["a6", "e1", "e3"]
     
 # field ids_in_sources 
     {
-        "A6": "580",
-        "E1": "1477",
-        "E3": "1092",
-        "cura": "A6-580"
+        "a6": "580",
+        "e1": "1477",
+        "e3": "1092",
+        "cura5": "A6-580"
     }
 </pre>
 Example of Moinot Pierre 1920-03-29, present in 3 different files of cura.free.fr.
-<br>Note : <code>ids_in_sources["cura"]</code> is the person's <a href="cura.html#gauquelin-unique-id">Gauquelin unique id</a>.
+<br>Note : <code>ids_in_sources["cura5"]</code> is the person's <a href="cura.html#gauquelin-unique-id">Gauquelin unique id</a>.
 
 <!-- ************************************* -->
 <h3><a name="4-2-raw">raw</a></h3>
@@ -273,7 +273,7 @@ This field permits to the fields of a person with the values of the raw data, ti
 <br>Example : 
 <pre>
 {
-    "A6": {
+    "a6": {
         "H": "13",
         "MN": "40",
         "TZ": "-1",
@@ -325,7 +325,7 @@ Permits to track the successive transformations operated on a person.
 [
     {
         "date": "2020-09-21T14:49:58+02:00",
-        "source": "A6",
+        "source": "a6",
         "values": {
             "name": {
                 "given": "Cosimo",

@@ -22,7 +22,7 @@ class Muller1083 implements SourceI {
         Path to the yaml file containing the characteristics of the source describing file 5a_muller_medics.txt.
         Relative to directory data/model
     **/
-    const RAW_SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch' . DS . '5a_muller_medics.yml';
+    const RAW_SOURCE_DEFINITION = 'source' . DS . 'muller' . DS . '5a_muller_medics.yml';
     
     /** Slug of the group in db **/
     const GROUP_SLUG = 'muller1083medics';
@@ -132,6 +132,19 @@ class Muller1083 implements SourceI {
         return Source::getSource(Config::$data['dirs']['model'] . DS . self::RAW_SOURCE_DEFINITION);
     }
 
+    /**
+        Computes cura source and cura id within this source from field GNR.
+        WARNING : returns cura source slug, not cura file name ('a2' and not 'A2')
+        @param  $gnr String like "SA22" or "ND129"
+        @return Array with 2 elements : cura source id and NUM
+    **/
+    public static function gnr2curaSourceId($GNR){
+        $curaPrefix = substr($GNR, 0, 3); // SA2 or ND1
+        $curaFilename = ($curaPrefix == 'SA2' ? 'a2' : 'e1');
+        $NUM = substr($GNR, 3);
+        return [$curaFilename, $NUM];
+    }
+
     // *********************** Group management ***********************
     
     /**
@@ -197,16 +210,4 @@ class Muller1083 implements SourceI {
         return csvAssociative::compute(self::tmpRawFilename());
     }
     
-    // ******************************************************
-    /**
-        @param  $gnr String like "SA22" or "ND129"
-        @return Array with 2 elements : cura file and NUM
-    **/
-    public static function gnr2cura($GNR){
-        $curaPrefix = substr($GNR, 0, 3); // SA2 or ND1
-        $curaFilename = ($curaPrefix == 'SA2' ? 'A2' : 'E1');
-        $NUM = substr($GNR, 3);
-        return [$curaFilename, $NUM];
-    }
-
-}// end class
+} // end class

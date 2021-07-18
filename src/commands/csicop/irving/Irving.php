@@ -26,7 +26,7 @@ class Irving implements SourceI {
         Path to the yaml file containing the characteristics of the source.
         Relative to directory data/model
     **/
-    const SOURCE_DEFINITION = 'source' . DS . 'unpublished' . DS . 'rawlins-ertel-irving.yml';
+    const SOURCE_DEFINITION = 'source' . DS . 'csicop' . DS . 'rawlins-ertel-irving.yml';
 
     /** Slug of the group in db **/
     const GROUP_SLUG = 'csicop';
@@ -129,6 +129,17 @@ class Irving implements SourceI {
         return Source::getSource(Config::$data['dirs']['model'] . DS . self::SOURCE_DEFINITION);
     }
     
+    /**
+        Computes cura source and cura id within this source from field GQID.
+        WARNING : returns cura source slug, not cura file name ('a2' and not 'A2')
+        @param  $gnr String like "A6-1354"
+        @return Array with 2 elements : cura source id and NUM
+    **/
+    public static function gqid2curaSourceId($GQID){
+       [$curaFile, $NUM] = explode('-', $GQID);
+       return [strtolower($curaFile), $NUM];
+    }
+
     // *********************** Raw files manipulation ***********************
     
     /** Path to Irving's raw file **/
@@ -167,8 +178,7 @@ class Irving implements SourceI {
     
     /**
         Returns the name of a "tmp raw file", data/tmp/newalch/muller-402-it-writers-raw.csv
-        (files used to keep trace of the original raw values).
-        @param  $datafile : a string like 'A1'
+        (file used to keep trace of the original raw values).
     **/
     public static function tmpRawFilename(){
         return implode(DS, [Config::$data['dirs']['tmp'], 'csicop', 'irving', '408-csicop-irving-raw.csv']);

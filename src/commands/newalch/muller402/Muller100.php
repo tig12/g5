@@ -23,9 +23,9 @@ class Muller100 implements SourceI {
     
     /**
         Path to the yaml file containing the characteristics of the source.
-        Relative to directory specified in config.yml by dirs / build
+        Relative to directory data/model
     **/
-    const SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'g5' . DS . 'muller-afd1-100-writers.yml';
+    const SOURCE_DEFINITION = 'source' . DS . 'muller' . DS . 'muller-afd1-100-writers.yml';
 
     /** Slug of the group in db **/
     const GROUP_SLUG = 'muller100writers';

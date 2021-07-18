@@ -114,9 +114,10 @@ class tmp2db implements Command {
                 // Person already in D10
                 $new = [];
                 $new['notes'] = [];
-                [$curaFile, $NUM] = explode('-', $line['GQID']);
+                [$curaSourceSlug, $NUM] = Irving::gqid2curaSourceId($line['GQID']);
+                $curaFile = strtoupper($curaSourceSlug);
                 $curaId = Cura::gqid($curaFile, $NUM);
-                $p = Person::getBySourceId($curaFile, $NUM);
+                $p = Person::getBySourceId($curaSourceSlug, $NUM);
                 if(is_null($p)){
                     throw new \Exception("$curaId : try to update an unexisting person");
                 }

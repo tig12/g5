@@ -22,7 +22,7 @@ class Muller402 implements SourceI {
         Path to the yaml file containing the characteristics of the source.
         Relative to directory data/model
     **/
-    const SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch' . DS . '5muller_writers.yml';
+    const SOURCE_DEFINITION = 'source' . DS . 'muller' . DS . '5muller_writers.yml';
 
     /** Slug of the group in db **/
     const GROUP_SLUG = 'muller402writers';
@@ -69,6 +69,17 @@ class Muller402 implements SourceI {
         return Source::getSource(Config::$data['dirs']['model'] . DS . self::SOURCE_DEFINITION);
     }
     
+    /**
+        Computes cura source and cura id within this source from field GQID.
+        WARNING : returns cura source slug, not cura file name ('a2' and not 'A2')
+        @param  $gnr String like "A6-1354"
+        @return Array with 2 elements : cura source id and NUM
+    **/
+    public static function gqid2curaSourceId($GQID){
+       [$curaFile, $NUM] = explode('-', $GQID);
+       return [strtolower($curaFile), $NUM];
+    }
+
     // *********************** Group management ***********************
     
     /**

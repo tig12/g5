@@ -82,11 +82,11 @@ class Person {
         @param  $source     Slug of the source
         @param  $idInSource Local id of the person within this source 
     **/
-    public static function getBySourceId($source, $idInSource): ?Person {
+    public static function getBySourceId($sourceSlug, $idInSource): ?Person {
         $dblink = DB5::getDbLink();
         //$stmt = $dblink->prepare("select * from person where ids_in_sources @> '{\"?\": \"?\"}'");
-        //$stmt->execute([$source, $idInSource]);
-        $stmt = $dblink->prepare("select * from person where ids_in_sources @> '{\"$source\": \"$idInSource\"}'");
+        //$stmt->execute([$sourceSlug, $idInSource]);
+        $stmt = $dblink->prepare("select * from person where ids_in_sources @> '{\"$sourceSlug\": \"$idInSource\"}'");
         $stmt->execute([]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         if($res === false || count($res) == 0){
@@ -188,8 +188,8 @@ class Person {
         $this->data = array_replace_recursive($this->data, $replace);
     }
     
-    public function addIdInSource($source, $id){
-        $this->data['ids-in-sources'][$source] = $id;
+    public function addIdInSource($sourceSlug, $id){
+        $this->data['ids-in-sources'][$sourceSlug] = $id;
     }
     
     public function addOccu($occu){
@@ -198,17 +198,17 @@ class Person {
         }                              
     }
     
-    public function addSource($source){
-        if(!in_array($source, $this->data['sources'])){
-            $this->data['sources'][] = $source;
+    public function addSource($sourceSlug){
+        if(!in_array($sourceSlug, $this->data['sources'])){
+            $this->data['sources'][] = $sourceSlug;
         }
     }
     
-    public function addHistory($command, $source, $data){
+    public function addHistory($command, $sourceSlug, $data){
         $this->data['history'][] = [
             'date'      => date('c'),
             'command'   => $command,
-            'source'    => $source,
+            'source'    => $sourceSlug,
             'values'    => $data,
         ];
     }
@@ -217,8 +217,8 @@ class Person {
         $this->data['notes'][] = $note;
     }
     
-    public function addRaw($source, $data){
-        $this->data['raw'][$source] = $data;
+    public function addRaw($sourceSlug, $data){
+        $this->data['raw'][$sourceSlug] = $data;
     }
     
     
