@@ -25,15 +25,18 @@ class Source {
     
     // *********************** SourceI *******************************
     /** 
-        Provides a default implementation usable by classes implementing the SourceI interface.
-        Would be implemented in java as a default method of SourceI, but php7 does not allow that.
+        Computes a Source object from its yaml file.
     **/
     public static function getSource($yamlFile): Source {
         $s = new Source();
-        $yaml = yaml_parse(file_get_contents($yamlFile));
+        $yaml = @yaml_parse(file_get_contents($yamlFile));
+        if($yaml === false){
+            throw new \Exception("Unable to read source definition file $yamlFile");
+        }
         // Allow yaml file containing a field author instead of authors
         if(isset($yaml['author'])){
             $yaml['authors'] = [$yaml['author']];
+            unset($yaml['author']);
         }
         $s->data = array_replace_recursive($s->data, $yaml);
         return $s;
@@ -109,6 +112,7 @@ class Source {
         @throws \Exception if trying to update an unexisting id
     **/
     public function update() {
+        $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("update source set
             slug=?,
             name=?,

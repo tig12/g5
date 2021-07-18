@@ -16,9 +16,9 @@ class globRecursive{
     /** 
         Like glob() but also scans subdirectories
         Does not support flag GLOB_BRACE
-        ex: globRecursive::execute(mydir,  '*' . DS . '*.yml');
+        ex: globRecursive::execute(mydir . '*' . DS . '*.yml');
     **/
-   function execute($pattern, $flags = 0){
+   public static function execute(string $pattern, int $flags = 0){
      $files = glob($pattern, $flags);
      foreach (glob(dirname($pattern).DS.'*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir){
         $files = array_merge($files, self::execute($dir . DS . basename($pattern), $flags));

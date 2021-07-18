@@ -54,12 +54,14 @@ class tmp2db implements Command {
         
         // source corresponding to CURA - insert if does not already exist
         $curaSource = Cura::getSource();
+        /* 
         try{
             $curaSource->insert();
         }
         catch(\Exception $e){
             // already inserted, do nothing
         }
+        */
         
         // source corresponding to current A file
         $source = Source::getBySlug($datafile);

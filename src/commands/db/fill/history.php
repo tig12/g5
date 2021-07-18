@@ -11,8 +11,10 @@
 namespace g5\commands\db\fill;
 
 use g5\patterns\Command;
-use g5\commands\db\build\dbcreate;
 use g5\commands\cura\CuraRouter;
+
+use g5\commands\db\build\dbcreate;
+use g5\commands\db\fill\source;
 
 // raw2tmp
 use g5\commands\cura\A\raw2tmp                  as raw2tmpA;
@@ -133,7 +135,12 @@ class history implements Command {
             echo "***********************\n";
             echo "***  Fill database  ***\n";
             echo "***********************\n";
+            
             echo dbcreate::execute([]);
+            echo source::execute(['g5.yml']);
+            echo source::execute(['newalch.yml']);
+            echo source::execute(['cura5.yml']);
+            
             foreach($filesCuraA as $datafile){
                 echo tmp2dbA::execute([$datafile, 'tmp2db', 'small']);
             }
