@@ -4,7 +4,7 @@ document:
     - 2020-08-16 20:30:47+02:00: Thierry Graff, creation
 
 name: 5a_muller_medics.txt
-slug: 5a_muller_medics
+slug: afd5
 type: file
 author: Arno Müller
 description: |
@@ -13,6 +13,6 @@ description: |
   Details about this file on https://newalchemypress.com/gauquelin/research5.php
   File made available online by Nick Kollerstrom
 parents:
+  - afd5-booklet
   - newalch
-  - afd5
   

@@ -32,8 +32,10 @@ class source implements Command {
         }
         $param = $params[0];
         
+        echo "--- db fill source $param ---\n";
+        
         $yamlfiles = [];
-        $basedir = Config::$data['dirs']['ROOT'] . DS . Config::$data['dirs']['model'] . DS . 'source';
+        $basedir = ModelSource::$DIR;
         if($param == 'all'){
             $yamlfiles = globRecursive::execute($basedir . '*' . DS . '*.yml');
         }
@@ -44,28 +46,24 @@ class source implements Command {
             }
             $yamlfiles[] = $file;
         }
-        echo "--- db fill source $param ---\n";
         foreach($yamlfiles as $file){
+            $relativePath = str_replace($basedir . DS, '', $file);
             try{
-                $source = ModelSource::getSource($file);
+                $source = new ModelSource($relativePath);
             }
             catch(\Exception $e){
-                return "ERROR - invalid YAML file : $file\n"
-                    . "Check the syntax and try again\n";
+                return $e->getMessage() . "\n";
             }
             $slug = $source->data['slug'];
             $test = ModelSource::getBySlug($slug);
             if(is_null($test)){
                 $source->insert();
-                echo "Inserted source '$slug' in database from $file\n";
+                echo "Inserted source '$slug' in database from $relativePath\n";
             }
             else{
-/* 
-WARNING - bug here - update is not done becaus sourcee id is not known
-ModelSource::getSource() take data from yaml, not from db => doesn't have id
-*/
+                $source->data['id'] = $test->data['id'];
                 $source->update();
-                echo "Updated source '$slug' in database from $file\n";
+                echo "Updated source '$slug' in database from $relativePath\n";
             }
         }
         return '';

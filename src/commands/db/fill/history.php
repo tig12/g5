@@ -149,6 +149,7 @@ class history implements Command {
             echo tmp2dbE1E3::execute(['E1', 'tmp2db', 'small']);
             echo tmp2dbE1E3::execute(['E3', 'tmp2db', 'small']);
             echo tmp2dbMuller1083::execute(['small']);
+exit;
             echo tmp2dbMuller402::execute(['small']);
             echo tmp2db100Muller402::execute(['small']);
             echo tmp2dbIrving::execute(['small']);

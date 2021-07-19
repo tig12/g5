@@ -10,20 +10,33 @@ namespace g5\commands\newalch\muller402;
 
 use g5\Config;
 use g5\model\DB5;
-use g5\model\{Source, SourceI, Group};
+use g5\model\{Source, Group};
 use tiglib\time\seconds2HHMMSS;
 use tiglib\arrays\csvAssociative;
 
-class Muller402 implements SourceI {
+class Muller402 {
     
     // TRUST_LEVEL not defined, using value of class Newalch
     
     /**
-        Path to the yaml file containing the characteristics of the source.
+        Path to the yaml file containing the characteristics of the source describing file
+        data/raw/newalchemypress.com/05-muller-writers/5muller_writers.csv
         Relative to directory data/model
     **/
-    const SOURCE_DEFINITION = 'source' . DS . 'muller' . DS . '5muller_writers.yml';
+    const LIST_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd1-writers-list-402.yml';
 
+    /** Slug of source 5muller_writers.csv **/
+    const LIST_SOURCE_SLUG = 'afd1';
+    
+    /**
+        Path to the yaml file containing the characteristics of Müller's booklet AFD1.
+        Relative to directory data/model/source
+    **/
+    const BOOKLET_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd1-writers-booklet.yml';
+    
+    /** Slug of source Astro-Forschungs-Daten vol 1 **/
+    const BOOKLET_SOURCE_SLUG = 'afd1-booklet';
+    
     /** Slug of the group in db **/
     const GROUP_SLUG = 'muller402writers';
 
@@ -64,16 +77,11 @@ class Muller402 implements SourceI {
     
     // *********************** Source management ***********************
     
-    /** Returns a Source object for 5muller_writers.xlsx. **/
-    public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['model'] . DS . self::SOURCE_DEFINITION);
-    }
-    
     /**
         Computes cura source and cura id within this source from field GQID.
         WARNING : returns cura source slug, not cura file name ('a2' and not 'A2')
         @param  $gnr String like "A6-1354"
-        @return Array with 2 elements : cura source id and NUM
+        @return Array with 2 elements : cura source id and NUM (ex: a6 and 1354)
     **/
     public static function gqid2curaSourceId($GQID){
        [$curaFile, $NUM] = explode('-', $GQID);

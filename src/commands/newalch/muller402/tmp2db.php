@@ -50,14 +50,21 @@ class tmp2db implements Command {
             $namesReport = '';
             $datesReport = '';
         }
-                                             
-        // source corresponding to 5a_muller_medics - insert if does not already exist
-        $source = Muller402::getSource();
-        try{
-            $source->insert();
+        
+        // source of Müller's booklet AFD1 - insert if does not already exist
+        $bookletSource = Source::getBySlug(Muller402::BOOKLET_SOURCE_SLUG);
+        if(is_null($bookletSource)){
+            $bookletSource = new Source(Muller402::BOOKLET_SOURCE_DEFINITION_FILE);
+            $bookletSource->insert();
+            $report .= "Inserted source " . $bookletSource->data['slug'] . "\n";
         }
-        catch(\Exception $e){
-            // already inserted, do nothing
+        
+        // source of 5muller_writers.csv - insert if does not already exist
+        $source = Source::getBySlug(Muller402::LIST_SOURCE_SLUG);
+        if(is_null($source)){
+            $source = new Source(Muller402::LIST_SOURCE_DEFINITION_FILE);
+            $source->insert();
+            $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         
         // group

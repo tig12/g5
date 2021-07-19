@@ -2,7 +2,6 @@
 /******************************************************************************
     
     An object of type Source represents a source in g5 db.
-    This class also contains generic methods for source management.
     
     @license    GPL
     @history    2020-04-30 16:59:43+02:00, Thierry Graff : Creation
@@ -13,53 +12,52 @@ namespace g5\model;
 use g5\Config;
 use g5\model\DB5;
 
-
+Source::init();
 class Source {
     
-    /** Structure described by src/model/Source.yml **/
-    public $data = [];                                              
+    /**
+        Structure of a source object, contained in src/model/Source.yml
+    **/
+    public $data = [];
     
-    public function __construct(){
-        $this->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Source.yml'));
+    /** Root directory containing the yaml source files definitions **/
+    public static $DIR;
+    
+    /** Static initializer, executed once at class loading **/
+    public static function init(){
+        self::$DIR = Config::$data['dirs']['ROOT'] . DS . Config::$data['dirs']['model'] . DS . 'source';
     }
     
-    // *********************** SourceI *******************************
     /** 
-        Computes a Source object from its yaml file.
+        Constructor ; builds an empty source or a source filled from its yaml file definition
+        @param  $yamlFile Path of the file containing souce's data.
+                Relative to self::$DIR
     **/
-    public static function getSource($yamlFile): Source {
-        $s = new Source();
-        $yaml = @yaml_parse(file_get_contents($yamlFile));
-        if($yaml === false){
-            throw new \Exception("Unable to read source definition file $yamlFile");
+    public function __construct($yamlFile = ''){
+        
+        // Fills an empty source from its structure
+        $this->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Source.yml'));
+        if($yamlFile == ''){
+            return; // ok, just build an empty source
         }
-        // Allow yaml file containing a field author instead of authors
+        
+        // Load source data from data/model/source
+        $yamlFile = self::$DIR . DS . $yamlFile;
+        $yaml = yaml_parse_file($yamlFile);
+        if($yaml === false){
+            throw new \Exception("ERROR: Unable to read source definition file $yamlFile");
+        }
+        // Allow yaml file containing a field 'author' instead of 'authors'
         if(isset($yaml['author'])){
             $yaml['authors'] = [$yaml['author']];
             unset($yaml['author']);
         }
-        $s->data = array_replace_recursive($s->data, $yaml);
-        return $s;
+        $this->data = array_replace_recursive($this->data, $yaml);
     }
     
-    // *********************** Get *******************************
+    // *********************** Database operations *******************************
     
-    /** Creates an object of type Source from storage, using its id. **/
-    public static function get($id): ?Source {
-        $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("select * from source where id=?");
-        $stmt->execute([$id]);
-        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
-        if($res === false || count($res) == 0){
-            return null;
-        }
-        $res['parents'] = json_decode($res['parents'], true);
-        $s = new Source();
-        $s->data = $res;
-        return $s;
-    }
-    
-    /** Creates an object of type Source from storage, using its slug. **/
+    /** Creates an object of type Source from database, using its slug. **/
     public static function getBySlug($slug): ?Source {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("select * from source where slug=?");
@@ -69,19 +67,17 @@ class Source {
             return null;
         }
         $res['parents'] = json_decode($res['parents'], true);
+        $res['authors'] = json_decode($res['authors'], true);
         $s = new Source();
         $s->data = $res;
         return $s;
     }
     
-    // *********************** CRUD *******************************
-    
     /**
-        Inserts a source in storage.
-        @return The id of the inserted row
+        Inserts a source in database.
         @throws \Exception if trying to insert a duplicate slug
     **/
-    public function insert(): int{
+    public function insert() {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("insert into source(
                 slug,
@@ -92,7 +88,7 @@ class Source {
                 isbn,
                 description,
                 parents
-            ) values(?,?,?,?,?,?,?,?) returning id");
+            ) values(?,?,?,?,?,?,?,?)");
         $stmt->execute([
             $this->data['slug'],
             $this->data['name'],
@@ -103,12 +99,10 @@ class Source {
             $this->data['description'],
             json_encode($this->data['parents']),
         ]);
-        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
-        return $res['id'];
     }
     
     /**
-        Updates a source in storage.
+        Updates a source in database.
         @throws \Exception if trying to update an unexisting id
     **/
     public function update() {

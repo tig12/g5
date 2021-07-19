@@ -4,18 +4,18 @@ document:
     - 2021-07-17 22:12:01+02:00: Thierry Graff, creation
 
 name: Müller's 234 famous women
-slug: muller-afd3-234-women
+slug: afd3
 type: file
 authors: 
   - Nick Kollerstrom
   - Thierry Graff
 description: |
-  List of 234 italian witers without birth time
+  List of 234 falous women
   Comes from Astro-Forschungs-Daten 3, Arno Müller, Waldmohr, 1993
   Text file built by Nick Kollerstrom (scan) and Thierry Graff (OCR and corrections)
-  Located in raw data versioned with Gauquelin5 program, in
-  data/raw/muller/afd3-women/muller-afd3-women.txt
+  Located in raw data versioned with Gauquelin5 program, see
+  https://github.com/tig12/gauquelin5/tree/master/data/raw/muller/afd3-women
 parents:
-  - afd3
+  - afd3-booklet
   - g5
                                                                                                           

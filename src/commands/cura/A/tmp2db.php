@@ -52,21 +52,28 @@ class tmp2db implements Command {
         
         $report = "--- $datafile tmp2db ---\n";
         
-        // source corresponding to CURA - insert if does not already exist
-        $curaSource = Cura::getSource();
-        /* 
-        try{
+        // source corresponding to CURA5 - insert if does not already exist
+        $curaSource = Source::getBySlug(Cura::SOURCE_SLUG);
+        if(is_null($curaSource)){
+            $curaSource = new Source(Cura::SOURCE_DEFINITION_FILE);
             $curaSource->insert();
+            $report .= "Inserted source " . $curaSource->data['slug'] . "\n";
         }
-        catch(\Exception $e){
-            // already inserted, do nothing
+        
+        // source corresponding LERRCP booklet of current A file
+        $source = Source::getBySlug(Cura::datafile2bookletSourceSlug($datafile));
+        if(is_null($source)){
+            $source = Cura::getBookletSourceOfFile($datafile);
+            $source->insert();
+            $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
-        */
         
         // source corresponding to current A file
-        $source = Source::getBySlug($datafile);
+        $source = Source::getBySlug(Cura::datafile2sourceSlug($datafile));
         if(is_null($source)){
             $source = Cura::getSourceOfFile($datafile);
+            $source->insert();
+            $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         
         // group

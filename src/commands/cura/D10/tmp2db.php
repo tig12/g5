@@ -49,13 +49,24 @@ class tmp2db implements Command {
         
         $report = "--- $datafile tmp2db ---\n";
         
-        // source corresponding to CURA - not inserted because must have been done in A1 import
-        $curaSource = Cura::getSource();
+        // source corresponding to CURA
+        // not inserted because must have been done in A1 import
+        $curaSource = new Source(Cura::SOURCE_DEFINITION_FILE);
         
-        // source corresponding to $datafile file
-        $source = Source::getBySlug($datafile);
+        // source corresponding LERRCP booklet of D6 file
+        $source = Source::getBySlug(Cura::datafile2bookletSourceSlug($datafile));
+        if(is_null($source)){
+            $source = Cura::getBookletSourceOfFile($datafile);
+            $source->insert();
+            $report .= "Inserted source " . $source->data['slug'] . "\n";
+        }
+        
+        // source corresponding to D6 file
+        $source = Source::getBySlug(strtolower($datafile));
         if(is_null($source)){
             $source = Cura::getSourceOfFile($datafile);
+            $source->insert();
+            $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         
         // group

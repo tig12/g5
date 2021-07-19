@@ -8,7 +8,6 @@
 namespace g5\commands\newalch\muller1083;
 
 use g5\Config;
-use g5\model\SourceI;
 use g5\model\Source;
 use g5\model\Group;
 use tiglib\arrays\csvAssociative;
@@ -16,13 +15,25 @@ use tiglib\strings\encode2utf8;
 use g5\commands\newalch\Newalch;
 use g5\commands\cura\Cura;
 
-class Muller1083 implements SourceI {
+class Muller1083 {
     
     /**
         Path to the yaml file containing the characteristics of the source describing file 5a_muller_medics.txt.
-        Relative to directory data/model
+        Relative to directory data/model/source
     **/
-    const RAW_SOURCE_DEFINITION = 'source' . DS . 'muller' . DS . '5a_muller_medics.yml';
+    const LIST_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd5-medics-list.yml';
+    
+    /** Slug of source 5a_muller_medics.txt **/
+    const LIST_SOURCE_SLUG = 'afd5';
+    
+    /**
+        Path to the yaml file containing the characteristics of Müller's booklet AFD3.
+        Relative to directory data/model/source
+    **/
+    const BOOKLET_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd5-medics-booklet.yml';
+    
+    /** Slug of source Astro-Forschungs-Daten vol 3 **/
+    const BOOKLET_SOURCE_SLUG = 'afd5-booklet';
     
     /** Slug of the group in db **/
     const GROUP_SLUG = 'muller1083medics';
@@ -123,26 +134,17 @@ class Muller1083 implements SourceI {
     ];
     
     
-    // *********************** Source management ***********************
-    
-    /**
-        Returns a Source object for the raw file used for Muller1083.
-    **/
-    public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['model'] . DS . self::RAW_SOURCE_DEFINITION);
-    }
-
     /**
         Computes cura source and cura id within this source from field GNR.
         WARNING : returns cura source slug, not cura file name ('a2' and not 'A2')
         @param  $gnr String like "SA22" or "ND129"
-        @return Array with 2 elements : cura source id and NUM
+        @return Array with 2 elements : cura source slug and NUM
     **/
     public static function gnr2curaSourceId($GNR){
         $curaPrefix = substr($GNR, 0, 3); // SA2 or ND1
-        $curaFilename = ($curaPrefix == 'SA2' ? 'a2' : 'e1');
+        $curaSourceSlug = ($curaPrefix == 'SA2' ? 'a2' : 'e1');
         $NUM = substr($GNR, 3);
-        return [$curaFilename, $NUM];
+        return [$curaSourceSlug, $NUM];
     }
 
     // *********************** Group management ***********************

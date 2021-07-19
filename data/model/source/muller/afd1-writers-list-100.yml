@@ -4,7 +4,7 @@ document:
     - 2020-08-18 19:17:32+02:00: Thierry Graff, creation
 
 name: Müller's 100 Italian writers
-slug: muller-afd1-100-writers
+slug: afd1-100
 type: file
 authors: 
   - Nick Kollerstrom
@@ -16,6 +16,6 @@ description: |
   Located in raw data versioned with Gauquelin5 program, in
   data/raw/newalchemypress.com/05-muller-writers/muller-afd1-100-writers.txt
 parents:
-  - afd1
+  - afd1-booklet
   - g5
                                                                                                           

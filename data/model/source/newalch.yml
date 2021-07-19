@@ -3,10 +3,11 @@ document:
   history:
     - 2020-08-11 08:15:11+02:00: Thierry Graff, creation
 
-name: newalchemypress.com
+name: New Alchemy Press
 slug: newalch
 type: website
 author: Nick Kollesrtrom
 description: |
   Web site https://newalchemypress.com/
-  https://newalchemypress.com/gauquelin/
+  Gives access to Arno Müller, Suitbert Ertel an Gauquelin data.
+  Main page is https://newalchemypress.com/gauquelin/

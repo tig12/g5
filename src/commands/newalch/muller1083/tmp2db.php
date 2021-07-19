@@ -15,6 +15,7 @@ use g5\model\Group;
 use g5\model\Person;
 use g5\commands\newalch\Newalch;
 use g5\commands\cura\Cura;
+use g5\commands\muller\Muller;
 
 class tmp2db implements Command {
     
@@ -50,14 +51,37 @@ class tmp2db implements Command {
             $namesReport = '';
             $datesReport = '';
         }
-                                             
-        // source corresponding to 5a_muller_medics - insert if does not already exist
-        $source = Muller1083::getSource();
-        try{
-            $source->insert();
+        
+        // source corresponding to Müller's Astro-Forschungs-Daten - insert if does not already exist
+        $afdSource = Source::getBySlug(Muller::AFD_SOURCE_SLUG);
+        if(is_null($afdSource)){
+            $afdSource = new Source(Muller::AFD_SOURCE_DEFINITION_FILE);
+            $afdSource->insert();
+            $report .= "Inserted source " . $afdSource->data['slug'] . "\n";
         }
-        catch(\Exception $e){
-            // already inserted, do nothing
+        
+        // source corresponding to newalchemypress - insert if does not already exist
+        $newalchSource = Source::getBySlug(Newalch::SOURCE_SLUG);
+        if(is_null($newalchSource)){
+            $newalchSource = new Source(Newalch::SOURCE_DEFINITION_FILE);
+            $newalchSource->insert();
+            $report .= "Inserted source " . $newalchSource->data['slug'] . "\n";
+        }
+        
+        // source of Müller's booklet AFD3 - insert if does not already exist
+        $bookletSource = Source::getBySlug(Muller1083::BOOKLET_SOURCE_SLUG);
+        if(is_null($bookletSource)){
+            $bookletSource = new Source(Muller1083::BOOKLET_SOURCE_DEFINITION_FILE);
+            $bookletSource->insert();
+            $report .= "Inserted source " . $bookletSource->data['slug'] . "\n";
+        }
+        
+        // source of 5a_muller_medics.txt - insert if does not already exist
+        $source = Source::getBySlug(Muller1083::LIST_SOURCE_SLUG);
+        if(is_null($source)){
+            $source = new Source(Muller1083::LIST_SOURCE_DEFINITION_FILE);
+            $source->insert();
+            $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         
         // group

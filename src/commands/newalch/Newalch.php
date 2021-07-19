@@ -9,16 +9,20 @@
 namespace g5\commands\newalch;
 
 use g5\Config;
-use g5\model\SourceI;
 use g5\model\Source;
 
-class Newalch implements SourceI {
+class Newalch {
     
     /**
-        Path to the yaml file containing the characteristics of the source.
-        Relative to directory specified in config.yml by dirs / build
+        Path to the yaml file containing the characteristics of Newalchemypress source.
+        Relative to directory data/model/source
     **/
-    const SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch.yml';
+    const SOURCE_DEFINITION_FILE = 'newalch.yml';
+    
+    /**
+        Slug of "newalch" source.
+    **/
+    const SOURCE_SLUG = 'newalch';
     
     /**
         Trust level for data coming from newalchemypress.com

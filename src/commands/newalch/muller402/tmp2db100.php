@@ -46,13 +46,12 @@ class tmp2db100 implements Command {
         
         $report = "--- Muller402 tmp2db100 ---\n";
         
-        // source corresponding to 5a_muller_medics - insert if does not already exist
-        $source = Muller100::getSource();
-        try{
+        // source of muller-afd1-100-writers.txt - insert if does not already exist
+        $source = Source::getBySlug(Muller100::LIST_SOURCE_SLUG);
+        if(is_null($source)){
+            $source = new Source(Muller100::LIST_SOURCE_DEFINITION_FILE);
             $source->insert();
-        }
-        catch(\Exception $e){
-            // already inserted, do nothing
+            $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         
         // group

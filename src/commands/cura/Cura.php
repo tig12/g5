@@ -8,18 +8,22 @@
 namespace g5\commands\cura;
 
 use g5\Config;
-use g5\model\SourceI;
 use g5\model\Source;
 use g5\model\Group;
 use tiglib\arrays\csvAssociative;
 
-class Cura implements SourceI {
+class Cura {
     
     /**
         Path to the yaml file containing the characteristics of "cura5" source.
         Relative to directory data/model
     **/
-    const SOURCE_DEFINITION = 'source' . DS . 'cura5.yml';
+    const SOURCE_DEFINITION_FILE = 'cura5.yml';
+    
+    /**
+        Slug of "cura5" source.
+    **/
+    const SOURCE_SLUG = 'cura5';
     
     /**
         Default trust level for data coming from Cura
@@ -67,22 +71,25 @@ class Cura implements SourceI {
     ];
     
     /** 
-        Dates of publication of the different cura files.
+        Informations about the different LERRCP booklets.
+        Each line contains:
+            - date of publication
+            - nb of pages (empty sting when unknown)
+            - array of author names
         Source http://cura.free.fr/gauq/902gdG.html
         For documentation purpose only.
-        (comments = nb pages)
     **/
-    const CURA_PUBLICATION_DATE = [
-        'A1' =>  '1970-04',
-        'A2' =>  '1970-05', // 150
-        'A3' =>  '1970-07',
-        'A4' =>  '1970-11', // 119
-        'A5' =>  '1970-12',
-        'A6' =>  '1971-03', // 123
-        'D6' =>  '1979-09',
-        'D10' => '1982-01',
-        'E1' =>  '1984',
-        'E3' =>  '1984',
+    const LERRCP_INFOS = [
+        'A1' =>  ['1970-04', '',  ['Michel Gauquelin', 'Françoise Gauquelin']],
+        'A2' =>  ['1970-05', 150, ['Michel Gauquelin', 'Françoise Gauquelin']],
+        'A3' =>  ['1970-07', '',  ['Michel Gauquelin', 'Françoise Gauquelin']],
+        'A4' =>  ['1970-11', 119, ['Michel Gauquelin', 'Françoise Gauquelin']],
+        'A5' =>  ['1970-12', '',  ['Michel Gauquelin', 'Françoise Gauquelin']],
+        'A6' =>  ['1971-03', 123, ['Michel Gauquelin', 'Françoise Gauquelin']],
+        'D6' =>  ['1979-09', '',  ['Michel Gauquelin', 'Françoise Gauquelin']],
+        'D10' => ['1982-01', '',  ['Michel Gauquelin']],
+        'E1' =>  ['1984',    '',  ['Michel Gauquelin']],
+        'E3' =>  ['1984',    '',  ['Michel Gauquelin']],
     ];
     
     // *********************** Person ids ***********************
@@ -99,9 +106,20 @@ class Cura implements SourceI {
     
     // *********************** Source management ***********************
     
-    /** Returns a Source object for cura web site. **/
-    public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['model'] . DS . self::SOURCE_DEFINITION);           
+    /**
+        Computes slug of the source corresponding to cura page of a datafile.
+        Ex: for datafile 'A6', return 'a6'
+    **/
+    public static function datafile2sourceSlug($datafile) {
+        return strtolower($datafile);
+    }
+    
+    /**
+        Computes slug of the source corresponding to cura page of a datafile.
+        Ex: for datafile 'A6', return 'lerrcp-a6'
+    **/
+    public static function datafile2bookletSourceSlug($datafile) {
+        return self::datafile2sourceSlug($datafile) . '-booklet';
     }
     
     /**
@@ -109,16 +127,38 @@ class Cura implements SourceI {
         @param  $datafile : string like 'A1'
     **/
     public static function getSourceOfFile($datafile): Source {
-        $curaSource = self::getSource();
         $source = new Source();
-        $source->data['slug'] = strtolower($datafile);
+        $slug = self::datafile2sourceSlug($datafile);
+        $source->data['slug'] = $slug;
         $source->data['name'] = "CURA5 file $datafile";
         $source->data['type'] = 'file';
         $source->data['authors'] = ['Patrice Guinard'];
         $source->data['description'] = 'Web page ' . self::CURA_URLS[$datafile]
             . "\nDescribed by Cura as " . self::CURA_CLAIMS[$datafile][2];
-        $source->data['parents'][] = $curaSource->data['slug'];
-        $source->data['id'] = $source->insert();
+        $source->data['parents'][] = self::SOURCE_SLUG;
+        $source->data['parents'][] = self::datafile2bookletSourceSlug($datafile);
+        return $source;
+    }
+    
+    /**
+        Returns a Source object corresponding to original Gauquelin booklet
+        for one file of cura web site.
+        @param  $datafile : string like 'A1'
+    **/
+    public static function getBookletSourceOfFile($datafile): Source {
+        $source = new Source();      
+        $source->data['slug'] = 'lerrcp-' . strtolower($datafile);
+        $source->data['name'] = "LERRCP $datafile";
+        $source->data['type'] = 'booklet';
+        $source->data['authors'] = self::LERRCP_INFOS[$datafile][2];
+        $serie = substr($datafile, 0, 1);
+        $volume = substr($datafile, 1);
+        $source->data['description'] = "LERRCP Serie $serie, vol $volume: "
+            . self::CURA_CLAIMS[$datafile][2]
+            . "\nPublished in " . self::LERRCP_INFOS[$datafile][0];
+        if(self::LERRCP_INFOS[$datafile][1] != ''){
+            $source->data['description'] .= '(' . self::LERRCP_INFOS[$datafile][1] . ' pages)';
+        }
         return $source;
     }
     

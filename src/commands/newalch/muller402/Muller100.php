@@ -10,22 +10,27 @@ namespace g5\commands\newalch\muller402;
 
 use g5\Config;
 use g5\model\Source;
-use g5\model\SourceI;
 use g5\model\Group;
 
 
 use tiglib\arrays\csvAssociative;
-//use tiglib\strings\encode2utf8;
 
-class Muller100 implements SourceI {
+class Muller100 {
     
     // TRUST_LEVEL not defined, using value of class Newalch
     
     /**
-        Path to the yaml file containing the characteristics of the source.
-        Relative to directory data/model
+        Path to the yaml file containing the characteristics of the source describing file
+        data/raw/newalchemypress.com/05-muller-writers/muller-afd1-100-writers.txt
+        Relative to directory data/model/source
     **/
-    const SOURCE_DEFINITION = 'source' . DS . 'muller' . DS . 'muller-afd1-100-writers.yml';
+    const LIST_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd1-writers-list-100.yml';
+
+    /** Slug of source muller-afd1-100-writers.txt **/
+    const LIST_SOURCE_SLUG = 'afd1-100';
+    
+    // constants BOOKLET_SOURCE_DEFINITION_FILE and BOOKLET_SOURCE_SLUG not defined here
+    // (because they have the same values as Muller402)
 
     /** Slug of the group in db **/
     const GROUP_SLUG = 'muller100writers';
@@ -64,17 +69,11 @@ class Muller100 implements SourceI {
             'LEN',
         ];
 
-    // *********************** Source management ***********************
-    
-    /** Returns a Source object for muller-afd1-100-writers.txt. **/
-    public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['model'] . DS . self::SOURCE_DEFINITION);
-    }
-    
+        
     // *********************** Group management ***********************
     
     /**
-        Returns a Group object for Muller1083.
+        Returns a Group object for muller100writers.
     **/
     public static function getGroup(): Group {
         $g = new Group();
