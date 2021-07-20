@@ -12,9 +12,9 @@ use g5\G5;
 use g5\Config;
 use tiglib\arrays\csvAssociative;
 use g5\model\DB5;
-use g5\model\{Source, SourceI};
+use g5\model\Source;
 
-class Irving implements SourceI {
+class Irving {
     
     /**                                            
         Default trust level associated to the persons of this group
@@ -24,13 +24,15 @@ class Irving implements SourceI {
     
     /**
         Path to the yaml file containing the characteristics of the source.
-        Relative to directory data/model
+        Relative to directory data/model/source
     **/
-    const SOURCE_DEFINITION = 'source' . DS . 'csicop' . DS . 'rawlins-ertel-irving.yml';
-
-    /** Slug of the group in db **/
-    const GROUP_SLUG = 'csicop';
-
+    const LIST_SOURCE_DEFINITION_FILE = 'csicop' . DS . 'rawlins-ertel-irving.yml';
+    
+    /** Slug of source  **/
+    const LIST_SOURCE_SLUG = 'csi';
+    
+    // group definitions are located in class CSICOP
+    
     const RAW_CSV_SEP = ';';
     
     /** Field names of data/raw/csicop/rawlins-ertel-irving/rawlins-ertel-irving.csv **/
@@ -123,11 +125,6 @@ class Irving implements SourceI {
     ];
     
     // *********************** Source management ***********************
-    
-    /** Returns a Source object for rawlins-ertel-irving.csv. **/
-    public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['model'] . DS . self::SOURCE_DEFINITION);
-    }
     
     /**
         Computes cura source and cura id within this source from field GQID.

@@ -8,5 +8,6 @@ slug: g5
 type: website
 author: Thierry Graff
 description: |
-  Computer program hosted on https://github.com/tig12/gauquelin5, used to build the open Gauquelin database (current site).
-  
+  Computer program developped to build the open Gauquelin database (current site).
+  The code is hosted on https://github.com/tig12/gauquelin5
+  See documentation at https://tig12.github.io/gauquelin5

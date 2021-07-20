@@ -116,7 +116,7 @@ class Cura {
     
     /**
         Computes slug of the source corresponding to cura page of a datafile.
-        Ex: for datafile 'A6', return 'lerrcp-a6'
+        Ex: for datafile 'A6', return 'a6-booklet'
     **/
     public static function datafile2bookletSourceSlug($datafile) {
         return self::datafile2sourceSlug($datafile) . '-booklet';
@@ -135,8 +135,8 @@ class Cura {
         $source->data['authors'] = ['Patrice Guinard'];
         $source->data['description'] = 'Web page ' . self::CURA_URLS[$datafile]
             . "\nDescribed by Cura as " . self::CURA_CLAIMS[$datafile][2];
-        $source->data['parents'][] = self::SOURCE_SLUG;
         $source->data['parents'][] = self::datafile2bookletSourceSlug($datafile);
+        $source->data['parents'][] = self::SOURCE_SLUG;
         return $source;
     }
     
@@ -147,7 +147,7 @@ class Cura {
     **/
     public static function getBookletSourceOfFile($datafile): Source {
         $source = new Source();      
-        $source->data['slug'] = 'lerrcp-' . strtolower($datafile);
+        $source->data['slug'] = self::datafile2bookletSourceSlug($datafile);
         $source->data['name'] = "LERRCP $datafile";
         $source->data['type'] = 'booklet';
         $source->data['authors'] = self::LERRCP_INFOS[$datafile][2];
@@ -157,8 +157,9 @@ class Cura {
             . self::CURA_CLAIMS[$datafile][2]
             . "\nPublished in " . self::LERRCP_INFOS[$datafile][0];
         if(self::LERRCP_INFOS[$datafile][1] != ''){
-            $source->data['description'] .= '(' . self::LERRCP_INFOS[$datafile][1] . ' pages)';
+            $source->data['description'] .= ' (' . self::LERRCP_INFOS[$datafile][1] . ' pages)';
         }
+        $source->data['parents'] = ['lerrcp'];
         return $source;
     }
     

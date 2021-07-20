@@ -15,6 +15,7 @@ use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
 use g5\commands\cura\Cura;
+use g5\commands\gauquelin\LERRCP;
 
 class tmp2db implements Command {
     
@@ -51,6 +52,14 @@ class tmp2db implements Command {
         $datafile = $params[0];
         
         $report = "--- $datafile tmp2db ---\n";
+        
+        // source corresponding to CURA5 - insert if does not already exist
+        $lerrcpSource = Source::getBySlug(LERRCP::SOURCE_SLUG);
+        if(is_null($lerrcpSource)){
+            $lerrcpSource = new Source(LERRCP::SOURCE_DEFINITION_FILE);
+            $lerrcpSource->insert();
+            $report .= "Inserted source " . $lerrcpSource->data['slug'] . "\n";
+        }
         
         // source corresponding to CURA5 - insert if does not already exist
         $curaSource = Source::getBySlug(Cura::SOURCE_SLUG);

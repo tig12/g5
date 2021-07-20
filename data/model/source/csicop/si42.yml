@@ -1,0 +1,20 @@
+
+document:
+  history:
+    - 2021-07-19 20:37:20+02:00: Thierry Graff, creation
+
+name: Skeptical Inquier vol IV 2
+slug: si42
+type: review
+authors:
+  - Paul Kurtz
+  - Marvin Zelen
+  - George Abell
+  - Michel Gauquelin
+  - Francoise Gauquelin
+description: |
+  Skeptical Inquier VOL IV NO. 2 WINTER 1979-80 contains the only known published list of the CSICOP test.
+  See https://tig12.github.io/gauquelin5/csicop.html for more informations.
+parents:
+  - csicop-committee
+  

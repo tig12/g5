@@ -15,6 +15,8 @@ use g5\model\Group;
 use g5\model\Person;
 use g5\commands\newalch\Newalch;
 use g5\commands\cura\Cura;
+use g5\commands\csicop\CSICOP;
+use g5\commands\csicop\si42\SI42;
 
 class tmp2db implements Command {
     
@@ -50,20 +52,35 @@ class tmp2db implements Command {
             $datesReport = '';
         }
         
-        // source corresponding to rawlins-ertel-irving.csv - insert if does not already exist
-        $source = Irving::getSource();
-        try{
-            $source->insert();
-        }
-        catch(\Exception $e){
-            // already inserted, do nothing
+        // source related to CSICOP - insert if does not already exist
+        $csicopSource = Source::getBySlug(CSICOP::SOURCE_SLUG);
+        if(is_null($csicopSource)){
+            $csicopSource = new Source(CSICOP::SOURCE_DEFINITION_FILE);
+            $csicopSource->insert();
+            $report .= "Inserted source " . $csicopSource->data['slug'] . "\n";
         }
         
-        // group
-        $g = Group::getBySlug(Irving::GROUP_SLUG);
+        // source related to si42 - insert if does not already exist
+        $si42Source = Source::getBySlug(SI42::SOURCE_SLUG);
+        if(is_null($si42Source)){
+            $si42Source = new Source(SI42::SOURCE_DEFINITION_FILE);
+            $si42Source->insert();
+            $report .= "Inserted source " . $si42Source->data['slug'] . "\n";
+        }
+        
+        // source of rawlins-ertel-irving.csv - insert if does not already exist
+        $source = Source::getBySlug(Irving::LIST_SOURCE_SLUG);
+        if(is_null($source)){
+            $source = new Source(Irving::LIST_SOURCE_DEFINITION_FILE);
+            $source->insert();
+            $report .= "Inserted source " . $source->data['slug'] . "\n";
+        }
+        
+        // groups
+        $g = Group::getBySlug(CSICOP::GROUP_SLUG);
         if(is_null($g)){
             $g = new Group();
-            $g->data['slug'] = Irving::GROUP_SLUG;
+            $g->data['slug'] = CSICOP::GROUP_SLUG;
             $g->data['sources'][] = $source->data['slug'];
             $g->data['name'] = "CSICOP";
             $g->data['description'] = "CSICOP";
@@ -71,6 +88,42 @@ class tmp2db implements Command {
         }
         else{
             $g->deleteMembers(); // only deletes asssociations between group and members
+        }
+        $g1 = Group::getBySlug(CSICOP::GROUP1_SLUG);
+        if(is_null($g1)){
+            $g1 = new Group();
+            $g1->data['slug'] = CSICOP::GROUP1_SLUG;
+            $g1->data['sources'][] = $source->data['slug'];
+            $g1->data['name'] = "CSICOP Canvas 1";
+            $g1->data['description'] = "";
+            $g1->data['id'] = $g1->insert();
+        }
+        else{
+            $g1->deleteMembers(); // only deletes asssociations between group and members
+        }
+        $g2 = Group::getBySlug(CSICOP::GROUP2_SLUG);
+        if(is_null($g2)){
+            $g2 = new Group();
+            $g2->data['slug'] = CSICOP::GROUP2_SLUG;
+            $g2->data['sources'][] = $source->data['slug'];
+            $g2->data['name'] = "CSICOP Canvas 2";
+            $g2->data['description'] = "";
+            $g2->data['id'] = $g2->insert();
+        }
+        else{
+            $g2->deleteMembers(); // only deletes asssociations between group and members
+        }
+        $g3 = Group::getBySlug(CSICOP::GROUP3_SLUG);
+        if(is_null($g3)){
+            $g3 = new Group();
+            $g3->data['slug'] = CSICOP::GROUP3_SLUG;
+            $g3->data['sources'][] = $source->data['slug'];
+            $g3->data['name'] = "CSICOP Canvas 3";
+            $g3->data['description'] = "";
+            $g3->data['id'] = $g3->insert();
+        }
+        else{
+            $g3->deleteMembers(); // only deletes asssociations between group and members
         }
         
         $nInsert = 0;
@@ -144,6 +197,15 @@ class tmp2db implements Command {
                 $p->update(); // Storage
             }
             $g->addMember($p->data['id']);
+            if($line['CANVAS'] == 1){
+                $g1->addMember($p->data['id']);
+            }
+            else if($line['CANVAS'] == 2){
+                $g2->addMember($p->data['id']);
+            }
+            else if($line['CANVAS'] == 3){
+                $g3->addMember($p->data['id']);
+            }
         }
         $t2 = microtime(true);
         try{

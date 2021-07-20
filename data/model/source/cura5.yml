@@ -12,3 +12,5 @@ description: |
   Web site http://cura.free.fr
   Open Gauquelin database uses version 5 of CURA database. Since November 2020, Cura database became closed data.
   Previous version of cura site, used to build the open Gauquelin database, is available through archive.org : https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/17archg.html
+parents:
+  - lerrcp
