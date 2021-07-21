@@ -91,7 +91,7 @@ class Group{
     **/
     public function insertMembers() {
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("insert into person_groop(id_person,id_group) values(?,?)");
+        $stmt = $dblink->prepare("insert into person_groop(id_person,id_groop) values(?,?)");
         foreach($this->data['members'] as $pid){
             $stmt->execute([$pid, $this->data['id']]);
         }
@@ -119,8 +119,8 @@ class Group{
     **/
     public function updateMembers() {
         $dblink = DB5::getDbLink();
-        $dblink->exec("delete from person_groop where id_group='" . $dblink->quote($this->data['id']) . "'");
-        $stmt = $dblink->prepare("insert into person_groop(id_person,id_group) values(?,?)");
+        $dblink->exec("delete from person_groop where id_groop='" . $dblink->quote($this->data['id']) . "'");
+        $stmt = $dblink->prepare("insert into person_groop(id_person,id_groop) values(?,?)");
         foreach($this->data['members'] as $pid){
             $stmt->execute([$pid, $this->data['id']]);
         }
@@ -132,7 +132,7 @@ class Group{
     **/
     public function deleteMembers() {
         $dblink = DB5::getDbLink();
-        $dblink->exec("delete from person_groop where id_group=" . $dblink->quote($this->data['id']));
+        $dblink->exec("delete from person_groop where id_groop=" . $dblink->quote($this->data['id']));
         $this->data['members'] = [];
     }
     
@@ -151,7 +151,7 @@ class Group{
             return;
         }
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("select * from person where id in(select id_person from person_groop where id_group=?)");
+        $stmt = $dblink->prepare("select * from person where id in(select id_person from person_groop where id_groop=?)");
         $stmt->execute([$this->data['id']]);
         $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         $this->data['members'] = [];

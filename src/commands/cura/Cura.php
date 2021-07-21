@@ -166,14 +166,21 @@ class Cura {
     // *********************** Group management ***********************
     
     /**
+        Computes slug of the source corresponding to cura page of a datafile.
+        Ex: for datafile 'A6', return 'a6'
+    **/
+    public static function datafile2groupSlug($datafile) {
+        return strtolower($datafile);
+    }
+    /**
         Returns a Source object for one file of cura web site.
         @param  $datafile : string like 'A1'
     **/
     public static function getGroupOfFile($datafile): Group {
         $g = new Group(); 
-        $g->data['slug'] = $datafile;
-        $g->data['name'] = "Cura $datafile";
-        $g->data['description'] = "According to Cura : " . Cura::CURA_CLAIMS[$datafile][2] . ".\n"
+        $g->data['slug'] = self::datafile2groupSlug($datafile);
+        $g->data['name'] = "Gauquelin $datafile";
+        $g->data['description'] = "According to Gauquelin : " . Cura::CURA_CLAIMS[$datafile][2] . ".\n"
             . "In practice, contains " . Cura::CURA_CLAIMS[$datafile][1] . " persons.";
         $g->data['id'] = $g->insert();
         return $g;

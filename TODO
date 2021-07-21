@@ -1,8 +1,4 @@
 
-- Replace Source::getSource by a __construct($yamlfile)
-
-- extract 'source' from constant SOURCE_DEFINITION command classes, and put inside getSource()
-
 - Update Muller1083 documentation
 
 - Add schema in db config + in all sql queries, specify the schema
