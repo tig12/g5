@@ -15,6 +15,7 @@ use g5\commands\cura\CuraRouter;
 
 use g5\commands\db\build\dbcreate;
 use g5\commands\db\fill\source;
+use g5\commands\db\fill\stats;
 
 // raw2tmp
 use g5\commands\cura\A\raw2tmp                  as raw2tmpA;
@@ -152,6 +153,8 @@ class history implements Command {
             echo tmp2dbMuller402::execute(['small']);
             echo tmp2db100Muller402::execute(['small']);
             echo tmp2dbIrving::execute(['small']);
+            
+            echo stats::execute(['small']);
         }
         
         return '';

@@ -30,6 +30,7 @@ class dbcreate implements Command {
             'groop',
             'source',
             'person_groop',
+            'stats',
         ];
         foreach($tables as $table){
             $sql_create = file_get_contents($dir_sql . DS . $table . '.sql');
