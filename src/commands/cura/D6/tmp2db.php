@@ -54,28 +54,30 @@ class tmp2db implements Command {
         $curaSource = new Source(Cura::SOURCE_DEFINITION_FILE);
         
         // source corresponding LERRCP booklet of D6 file
-        $source = Source::getBySlug(Cura::datafile2bookletSourceSlug($datafile));
+        $source = Source::getBySlug(Cura::datafile2bookletSourceSlug($datafile)); // DB
         if(is_null($source)){
-            $source = Cura::getBookletSourceOfFile($datafile);
-            $source->insert();
+            $source = Cura::getBookletSourceOfDatafile($datafile);
+            $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         
         // source corresponding to D6 file
-        $source = Source::getBySlug(strtolower($datafile));
+        $source = Source::getBySlug(strtolower($datafile)); // DB
         if(is_null($source)){
-            $source = Cura::getSourceOfFile($datafile);
-            $source->insert();
+            $source = Cura::getSourceOfDatafile($datafile);
+            $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         
         // group
-        $g = Group::getBySlug($datafile);
+        $g = Group::getBySlug(Cura::datafile2groupSlug($datafile)); // DB
         if(is_null($g)){
-            $g = Cura::getGroupOfFile($datafile);
+            $g = Cura::getGroupOfDatafile($datafile);
+            $g->data['id'] = $g->insert(); // DB
+            $report .= "Inserted group " . $g->data['slug'] . "\n";
         }
         else{
-            $g->deleteMembers(); // only deletes asssociations between group and members
+            $g->deleteMembers(); // DB - only deletes asssociations between group and members
         }
         
         // both arrays share the same order of elements,
@@ -96,7 +98,7 @@ class tmp2db implements Command {
             $test->data['birth']['date'] = $line['DATE'];
             $test->computeSlug();
             $curaId = Cura::gqId($datafile, $line['NUM']);
-            $p = Person::getBySlug($test->data['slug']);
+            $p = Person::getBySlug($test->data['slug']); // DB
             if(is_null($p)){
                 // insert new person
                 $p = new Person();
@@ -117,7 +119,7 @@ class tmp2db implements Command {
                 $p->computeSlug();
                 $p->addHistory("cura $datafile tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);
-                $p->data['id'] = $p->insert(); // Storage
+                $p->data['id'] = $p->insert(); // DB
                 $nInsert++;
             }
             else{
@@ -126,7 +128,7 @@ class tmp2db implements Command {
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
                 // does not addIdInSource($curaSource) to respect the definition of Gauquelin id
-                $p->update(); // Storage
+                $p->update(); // DB
                 if($reportType == 'full'){
                     $report .= "Duplicate {$test->data['slug']} : {$p->data['ids-in-sources']['cura']} = $curaId\n";
                 }
@@ -135,13 +137,7 @@ class tmp2db implements Command {
             $g->addMember($p->data['id']);
         }
         $t2 = microtime(true);
-        try{
-            $g->data['id'] = $g->insert();
-        }
-        catch(\Exception $e){
-            // group already exists
-            $g->insertMembers();
-        }
+        $g->insertMembers(); // DB
         $dt = round($t2 - $t1, 5);
         if($reportType == 'full' && $nDuplicates != 0){
             $report .= "-------\n";

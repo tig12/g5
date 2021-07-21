@@ -52,28 +52,30 @@ class tmp2db implements Command {
         }
         
         // source of Müller's booklet AFD1 - insert if does not already exist
-        $bookletSource = Source::getBySlug(Muller402::BOOKLET_SOURCE_SLUG);
+        $bookletSource = Source::getBySlug(Muller402::BOOKLET_SOURCE_SLUG); // DB
         if(is_null($bookletSource)){
             $bookletSource = new Source(Muller402::BOOKLET_SOURCE_DEFINITION_FILE);
-            $bookletSource->insert();
+            $bookletSource->insert(); // DB
             $report .= "Inserted source " . $bookletSource->data['slug'] . "\n";
         }
         
         // source of 5muller_writers.csv - insert if does not already exist
-        $source = Source::getBySlug(Muller402::LIST_SOURCE_SLUG);
+        $source = Source::getBySlug(Muller402::LIST_SOURCE_SLUG); // DB
         if(is_null($source)){
             $source = new Source(Muller402::LIST_SOURCE_DEFINITION_FILE);
-            $source->insert();
+            $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         
         // group
-        $g = Group::getBySlug(Muller402::GROUP_SLUG);
+        $g = Group::getBySlug(Muller402::GROUP_SLUG); // DB
         if(is_null($g)){
             $g = Muller402::getGroup();
+            $g->data['id'] = $g->insert(); // DB
+            $report .= "Inserted group " . $g->data['slug'] . "\n";
         }
         else{
-            $g->deleteMembers(); // only deletes asssociations between group and members
+            $g->deleteMembers(); // DB - only deletes asssociations between group and members
         }
         
         $nInsert = 0;
@@ -115,13 +117,12 @@ class tmp2db implements Command {
                 $p->addHistory("newalch muller402 tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);
                 $nInsert++;
-                $p->data['id'] = $p->insert(); // Storage
+                $p->data['id'] = $p->insert(); // DB
             }
             else{
                 // Person already in A6
                 $new = [];
                 $new['notes'] = [];
-//                [$curaFile, $NUM] = explode('-', $line['GQID']);
                 [$curaSourceSlug, $NUM] = Muller402::gqid2curaSourceId($line['GQID']);
                 $curaFile = strtoupper($curaSourceSlug);
                 $curaId = Cura::gqid($curaFile, $NUM);
@@ -164,18 +165,12 @@ class tmp2db implements Command {
                 $p->addHistory("cura muller402 tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);                 
                 $nUpdate++;
-                $p->update(); // Storage
+                $p->update(); // DB
             }
             $g->addMember($p->data['id']);
         }
         $t2 = microtime(true);
-        try{
-            $g->data['id'] = $g->insert(); // Storage
-        }
-        catch(\Exception $e){
-            // group already exists
-            $g->insertMembers();
-        }
+        $g->insertMembers(); // DB
         $dt = round($t2 - $t1, 5);
         if($reportType == 'full'){
             $report .= "=== Names fixed ===\n" . $namesReport;

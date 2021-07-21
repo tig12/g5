@@ -27,7 +27,7 @@ name:
   official:                 # As written in the birth certificate
     family:
     given:
-  nobiliary-particle: false # de d' di del von...
+  nobiliary-particle:       # de d' di del von...
   fame:                     # stage, scene
   nicknames: []
   alternative: []

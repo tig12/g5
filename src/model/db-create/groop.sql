@@ -7,6 +7,7 @@ create table groop (
     slug            varchar(255) unique not null,
     name            varchar(255) unique not null,
     description     text,
-    sources         jsonb
+    sources         jsonb,
+    parents         jsonb
 );
 create index group_slug_idx on groop(slug);

@@ -33,7 +33,7 @@ class Muller100 {
     // (because they have the same values as Muller402)
 
     /** Slug of the group in db **/
-    const GROUP_SLUG = 'muller100writers';
+    const GROUP_SLUG = 'muller-afd1-100writers';
 
     const RAW_FIELDS = [
             'MUID',
@@ -80,7 +80,7 @@ class Muller100 {
         $g->data['slug'] = self::GROUP_SLUG;
         $g->data['name'] = "Müller 100 Italian writers";
         $g->data['description'] = "100 Italian writers without birth time, gathered by Arno Müller";
-        $g->data['id'] = $g->insert();
+        $g->data['sources'] = [self::LIST_SOURCE_SLUG, Muller402::BOOKLET_SOURCE_SLUG];
         return $g;
     }
     

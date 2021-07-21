@@ -136,6 +136,10 @@ class Irving {
        [$curaFile, $NUM] = explode('-', $GQID);
        return [strtolower($curaFile), $NUM];
     }
+    
+    // *********************** Group management ***********************
+    
+    // See class CSICOP
 
     // *********************** Raw files manipulation ***********************
     

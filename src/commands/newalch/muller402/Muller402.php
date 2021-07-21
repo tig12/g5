@@ -38,7 +38,7 @@ class Muller402 {
     const BOOKLET_SOURCE_SLUG = 'afd1-booklet';
     
     /** Slug of the group in db **/
-    const GROUP_SLUG = 'muller402writers';
+    const GROUP_SLUG = 'muller-afd1-writers';
 
     /** Separator used in the raw csv file **/
     const RAW_SEP = ';';
@@ -98,7 +98,7 @@ class Muller402 {
         $g->data['slug'] = self::GROUP_SLUG;
         $g->data['name'] = "Müller 402 Italian writers";
         $g->data['description'] = "402 Italian writers, gathered by Arno Müller";
-        $g->data['id'] = $g->insert();
+        $g->data['sources'] = [self::LIST_SOURCE_SLUG, self::BOOKLET_SOURCE_SLUG];
         return $g;
     }
     

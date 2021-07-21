@@ -53,77 +53,68 @@ class tmp2db implements Command {
         }
         
         // source related to CSICOP - insert if does not already exist
-        $csicopSource = Source::getBySlug(CSICOP::SOURCE_SLUG);
+        $csicopSource = Source::getBySlug(CSICOP::SOURCE_SLUG); // DB
         if(is_null($csicopSource)){
             $csicopSource = new Source(CSICOP::SOURCE_DEFINITION_FILE);
-            $csicopSource->insert();
+            $csicopSource->insert(); // DB
             $report .= "Inserted source " . $csicopSource->data['slug'] . "\n";
         }
         
         // source related to si42 - insert if does not already exist
-        $si42Source = Source::getBySlug(SI42::SOURCE_SLUG);
+        $si42Source = Source::getBySlug(SI42::SOURCE_SLUG); // DB
         if(is_null($si42Source)){
             $si42Source = new Source(SI42::SOURCE_DEFINITION_FILE);
-            $si42Source->insert();
+            $si42Source->insert(); // DB
             $report .= "Inserted source " . $si42Source->data['slug'] . "\n";
         }
         
         // source of rawlins-ertel-irving.csv - insert if does not already exist
-        $source = Source::getBySlug(Irving::LIST_SOURCE_SLUG);
+        $source = Source::getBySlug(Irving::LIST_SOURCE_SLUG); // DB
         if(is_null($source)){
             $source = new Source(Irving::LIST_SOURCE_DEFINITION_FILE);
-            $source->insert();
+            $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         
         // groups
-        $g = Group::getBySlug(CSICOP::GROUP_SLUG);
+        $g = Group::getBySlug(CSICOP::GROUP_SLUG); // DB
         if(is_null($g)){
-            $g = new Group();
-            $g->data['slug'] = CSICOP::GROUP_SLUG;
-            $g->data['sources'][] = $source->data['slug'];
-            $g->data['name'] = "CSICOP";
-            $g->data['description'] = "CSICOP";
-            $g->data['id'] = $g->insert();
+            $g = CSICOP::getGroup();
+            $g->data['id'] = $g->insert(); // DB
+            $report .= "Inserted group " . $g->data['slug'] . "\n";
         }
         else{
             $g->deleteMembers(); // only deletes asssociations between group and members
         }
-        $g1 = Group::getBySlug(CSICOP::GROUP1_SLUG);
+        
+        $g1 = Group::getBySlug(CSICOP::GROUP1_SLUG); // DB
         if(is_null($g1)){
-            $g1 = new Group();
-            $g1->data['slug'] = CSICOP::GROUP1_SLUG;
-            $g1->data['sources'][] = $source->data['slug'];
-            $g1->data['name'] = "CSICOP Canvas 1";
-            $g1->data['description'] = "";
-            $g1->data['id'] = $g1->insert();
+            $g1 = CSICOP::getGroup_batch1();
+            $g1->data['id'] = $g1->insert(); // DB
+            $report .= "Inserted group " . $g1->data['slug'] . "\n";
         }
         else{
-            $g1->deleteMembers(); // only deletes asssociations between group and members
+            $g1->deleteMembers(); // DB - only deletes asssociations between group and members
         }
-        $g2 = Group::getBySlug(CSICOP::GROUP2_SLUG);
+        
+        $g2 = Group::getBySlug(CSICOP::GROUP2_SLUG); // DB
         if(is_null($g2)){
-            $g2 = new Group();
-            $g2->data['slug'] = CSICOP::GROUP2_SLUG;
-            $g2->data['sources'][] = $source->data['slug'];
-            $g2->data['name'] = "CSICOP Canvas 2";
-            $g2->data['description'] = "";
+            $g2 = CSICOP::getGroup_batch2();
             $g2->data['id'] = $g2->insert();
+            $report .= "Inserted group " . $g2->data['slug'] . "\n";
         }
         else{
-            $g2->deleteMembers(); // only deletes asssociations between group and members
+            $g2->deleteMembers(); // DB - only deletes asssociations between group and members
         }
-        $g3 = Group::getBySlug(CSICOP::GROUP3_SLUG);
+        
+        $g3 = Group::getBySlug(CSICOP::GROUP3_SLUG); // DB
         if(is_null($g3)){
-            $g3 = new Group();
-            $g3->data['slug'] = CSICOP::GROUP3_SLUG;
-            $g3->data['sources'][] = $source->data['slug'];
-            $g3->data['name'] = "CSICOP Canvas 3";
-            $g3->data['description'] = "";
-            $g3->data['id'] = $g3->insert();
+            $g3 = CSICOP::getGroup_batch3();
+            $g3->data['id'] = $g3->insert(); // DB
+            $report .= "Inserted group " . $g3->data['slug'] . "\n";
         }
         else{
-            $g3->deleteMembers(); // only deletes asssociations between group and members
+            $g3->deleteMembers(); // DB - only deletes asssociations between group and members
         }
         
         $nInsert = 0;
@@ -161,7 +152,7 @@ class tmp2db implements Command {
                 $p->addHistory("newalch irving tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);
                 $nInsert++;
-                $p->data['id'] = $p->insert(); // Storage
+                $p->data['id'] = $p->insert(); // DB
             }
             else{
                 // Person already in D10
@@ -170,7 +161,7 @@ class tmp2db implements Command {
                 [$curaSourceSlug, $NUM] = Irving::gqid2curaSourceId($line['GQID']);
                 $curaFile = strtoupper($curaSourceSlug);
                 $curaId = Cura::gqid($curaFile, $NUM);
-                $p = Person::getBySourceId($curaSourceSlug, $NUM);
+                $p = Person::getBySourceId($curaSourceSlug, $NUM); // DB
                 if(is_null($p)){
                     throw new \Exception("$curaId : try to update an unexisting person");
                 }
@@ -194,7 +185,7 @@ class tmp2db implements Command {
                 $p->addHistory("cura irving tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);                 
                 $nUpdate++;
-                $p->update(); // Storage
+                $p->update(); // DB
             }
             $g->addMember($p->data['id']);
             if($line['CANVAS'] == 1){
@@ -208,13 +199,10 @@ class tmp2db implements Command {
             }
         }
         $t2 = microtime(true);
-        try{
-            $g->data['id'] = $g->insert(); // Storage
-        }
-        catch(\Exception $e){
-            // group already exists
-            $g->insertMembers();
-        }
+        $g->insertMembers(); // DB
+        $g1->insertMembers(); // DB
+        $g2->insertMembers(); // DB
+        $g3->insertMembers(); // DB
         $dt = round($t2 - $t1, 5);
         if($reportType == 'full'){
             $report .= "\n=== Dates different from D10 ===\n" . $datesReport;

@@ -28,28 +28,11 @@ class Group{
     // *********************** Get *******************************
     
     /**
-        Creates an object of type Group from storage, using its id.
-        Does not compute the members
+        Creates an object of type Group from storage, using its slug,
+        or null if the group doesn't exist.
+        Does not compute the members.
     **/
-    public static function get($id): ?Group{
-        $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("select * from groop where id=?");
-        $stmt->execute([$id]);
-        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
-        if($res === false || count($res) == 0){
-            return null;
-        }
-        $g = new Group();
-        $g->data = $res;
-        $g->data['members'] = [];
-        return $g;
-    }
-    
-    /**
-        Creates an object of type Group from storage, using its slug.
-        Does not compute the members
-    **/
-    public static function getBySlug($slug): ?Group{
+    public static function getBySlug($slug): ?Group {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("select * from groop where slug=?");
         $stmt->execute([$slug]);
@@ -72,11 +55,19 @@ class Group{
     **/
     public function insert(): int{
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("insert into groop(slug,name,description) values(?,?,?) returning id");
+        $stmt = $dblink->prepare("insert into groop(
+            slug,
+            name,
+            description,
+            sources,
+            parents
+            ) values(?,?,?,?,?) returning id");
         $stmt->execute([
             $this->data['slug'],
             $this->data['name'],
             $this->data['description'],
+            json_encode($this->data['sources']),
+            json_encode($this->data['parents']),
         ]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         $this->data['id'] = $res['id'];
@@ -103,11 +94,19 @@ class Group{
     **/
     public function update() {
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("update groop set slug=?,name=?,description=? where id=?");
+        $stmt = $dblink->prepare("update groop set
+            slug=?,
+            name=?,
+            description=?,
+            sources=?,
+            parents=?
+            where id=?");
         $stmt->execute([
             $this->data['slug'],
             $this->data['name'],
             $this->data['description'],
+            json_encode($this->data['sources']),
+            json_encode($this->data['parents']),
             $this->data['id'],
         ]);
         $this->updateMembers();
@@ -151,7 +150,7 @@ class Group{
             return;
         }
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("select * from person where id in(select id_person from person_groop where id_groop=?)");
+        $stmt = $dblink->prepare("select * from person where id in(select id_person from person_groop where id_groop    =?)");
         $stmt->execute([$this->data['id']]);
         $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         $this->data['members'] = [];

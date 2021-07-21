@@ -123,10 +123,10 @@ class Cura {
     }
     
     /**
-        Returns a Source object for one file of cura web site.
+        Returns a Source object for one data file of cura web site.
         @param  $datafile : string like 'A1'
     **/
-    public static function getSourceOfFile($datafile): Source {
+    public static function getSourceOfDatafile($datafile): Source {
         $source = new Source();
         $slug = self::datafile2sourceSlug($datafile);
         $source->data['slug'] = $slug;
@@ -142,10 +142,10 @@ class Cura {
     
     /**
         Returns a Source object corresponding to original Gauquelin booklet
-        for one file of cura web site.
+        for one data file of cura web site.
         @param  $datafile : string like 'A1'
     **/
-    public static function getBookletSourceOfFile($datafile): Source {
+    public static function getBookletSourceOfDatafile($datafile): Source {
         $source = new Source();      
         $source->data['slug'] = self::datafile2bookletSourceSlug($datafile);
         $source->data['name'] = "LERRCP $datafile";
@@ -173,16 +173,16 @@ class Cura {
         return strtolower($datafile);
     }
     /**
-        Returns a Source object for one file of cura web site.
+        Returns a Group object for one file of cura web site.
         @param  $datafile : string like 'A1'
     **/
-    public static function getGroupOfFile($datafile): Group {
+    public static function getGroupOfDatafile($datafile): Group {
         $g = new Group(); 
         $g->data['slug'] = self::datafile2groupSlug($datafile);
         $g->data['name'] = "Gauquelin $datafile";
-        $g->data['description'] = "According to Gauquelin : " . Cura::CURA_CLAIMS[$datafile][2] . ".\n"
-            . "In practice, contains " . Cura::CURA_CLAIMS[$datafile][1] . " persons.";
-        $g->data['id'] = $g->insert();
+        $g->data['description'] = "Persons published by Gauquelins' LERRCP booklet "
+            . '"' . Cura::CURA_CLAIMS[$datafile][2] . "\".";
+        $g->data['sources'] = [self::datafile2bookletSourceSlug($datafile)];
         return $g;
     }
     

@@ -47,20 +47,22 @@ class tmp2db100 implements Command {
         $report = "--- Muller402 tmp2db100 ---\n";
         
         // source of muller-afd1-100-writers.txt - insert if does not already exist
-        $source = Source::getBySlug(Muller100::LIST_SOURCE_SLUG);
+        $source = Source::getBySlug(Muller100::LIST_SOURCE_SLUG); // DB
         if(is_null($source)){
             $source = new Source(Muller100::LIST_SOURCE_DEFINITION_FILE);
-            $source->insert();
+            $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         
         // group
-        $g = Group::getBySlug(Muller100::GROUP_SLUG);
+        $g = Group::getBySlug(Muller100::GROUP_SLUG); // DB
         if(is_null($g)){
             $g = Muller100::getGroup();
+            $g->data['id'] = $g->insert(); // DB
+            $report .= "Inserted group " . $g->data['slug'] . "\n";
         }
         else{
-            $g->deleteMembers(); // only deletes asssociations between group and members
+            $g->deleteMembers(); // DB - only deletes asssociations between group and members
         }
         
         $nInsert = 0;
@@ -77,9 +79,8 @@ class tmp2db100 implements Command {
             $line = $lines[$i];
             $lineRaw = $linesRaw[$i];
             $slug = Person::doComputeSlug($line['FNAME'], $line['GNAME'], $line['DATE']);
-            $test = Person::getBySlug($slug);
+            $test = Person::getBySlug($slug); // DB
             if(is_null($test)){
-            //if(true){
                 // new person
                 $p = new Person();
                 $new = [];
@@ -105,7 +106,7 @@ class tmp2db100 implements Command {
                 $p->addHistory("newalch muller402 tmp2db100", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);
                 $nInsert++;
-                $p->data['id'] = $p->insert(); // Storage
+                $p->data['id'] = $p->insert(); // DB
                 $g->addMember($p->data['id']);
             }
             else{
@@ -121,18 +122,12 @@ class tmp2db100 implements Command {
                     $report .= "Müller {$line['MUID']} = $gqid - $slug\n";
                 }
                 $nUpdate++;
-                $test->update(); // Storage
+                $test->update(); // DB
                 $g->addMember($test->data['id']);
             }
         }
         $t2 = microtime(true);
-        try{
-            $g->data['id'] = $g->insert(); // Storage
-        }
-        catch(\Exception $e){
-            // group already exists
-            $g->insertMembers();
-        }
+        $g->insertMembers(); // DB
         $dt = round($t2 - $t1, 5);
         $report .= "$nInsert persons inserted, $nUpdate updated ($dt s)\n";
         return $report;

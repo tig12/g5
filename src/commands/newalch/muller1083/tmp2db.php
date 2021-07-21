@@ -53,34 +53,34 @@ class tmp2db implements Command {
         }
         
         // source corresponding to Müller's Astro-Forschungs-Daten - insert if does not already exist
-        $afdSource = Source::getBySlug(Muller::AFD_SOURCE_SLUG);
+        $afdSource = Source::getBySlug(Muller::AFD_SOURCE_SLUG); // DB
         if(is_null($afdSource)){
             $afdSource = new Source(Muller::AFD_SOURCE_DEFINITION_FILE);
-            $afdSource->insert();
+            $afdSource->insert(); // DB
             $report .= "Inserted source " . $afdSource->data['slug'] . "\n";
         }
         
         // source corresponding to newalchemypress - insert if does not already exist
-        $newalchSource = Source::getBySlug(Newalch::SOURCE_SLUG);
+        $newalchSource = Source::getBySlug(Newalch::SOURCE_SLUG); // DB
         if(is_null($newalchSource)){
             $newalchSource = new Source(Newalch::SOURCE_DEFINITION_FILE);
-            $newalchSource->insert();
+            $newalchSource->insert(); // DB
             $report .= "Inserted source " . $newalchSource->data['slug'] . "\n";
         }
         
         // source of Müller's booklet AFD3 - insert if does not already exist
-        $bookletSource = Source::getBySlug(Muller1083::BOOKLET_SOURCE_SLUG);
+        $bookletSource = Source::getBySlug(Muller1083::BOOKLET_SOURCE_SLUG); // DB
         if(is_null($bookletSource)){
             $bookletSource = new Source(Muller1083::BOOKLET_SOURCE_DEFINITION_FILE);
-            $bookletSource->insert();
+            $bookletSource->insert(); // DB
             $report .= "Inserted source " . $bookletSource->data['slug'] . "\n";
         }
         
         // source of 5a_muller_medics.txt - insert if does not already exist
-        $source = Source::getBySlug(Muller1083::LIST_SOURCE_SLUG);
+        $source = Source::getBySlug(Muller1083::LIST_SOURCE_SLUG); // DB
         if(is_null($source)){
             $source = new Source(Muller1083::LIST_SOURCE_DEFINITION_FILE);
-            $source->insert();
+            $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         
@@ -88,9 +88,11 @@ class tmp2db implements Command {
         $g = Group::getBySlug(Muller1083::GROUP_SLUG);
         if(is_null($g)){
             $g = Muller1083::getGroup();
+            $g->data['id'] = $g->insert(); // DB
+            $report .= "Inserted group " . $g->data['slug'] . "\n";
         }
         else{
-            $g->deleteMembers(); // only deletes asssociations between group and members
+            $g->deleteMembers(); // DB - only deletes asssociations between group and members
         }
         
         $nInsert = 0;
@@ -141,7 +143,7 @@ class tmp2db implements Command {
                 [$curaSourceSlug, $NUM] = Muller1083::gnr2curaSourceId($line['GNR']);
                 $curaFile = strtoupper($curaSourceSlug);
                 $curaId = Cura::gqid($curaFile, $NUM);
-                $p = Person::getBySourceId($curaSourceSlug, $NUM);
+                $p = Person::getBySourceId($curaSourceSlug, $NUM); // DB
                 if(is_null($p)){
                     throw new \Exception("$curaId : try to update an unexisting person");
                 }
@@ -191,18 +193,12 @@ class tmp2db implements Command {
                 $p->addHistory("cura muller1083 tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);                 
                 $nUpdate++;
-                $p->update(); // Storage
+                $p->update(); // DB
             }
             $g->addMember($p->data['id']);
         }
         $t2 = microtime(true);
-        try{
-            $g->data['id'] = $g->insert(); // Storage
-        }
-        catch(\Exception $e){
-            // group already exists
-            $g->insertMembers();
-        }
+        $g->insertMembers(); // DB
         $dt = round($t2 - $t1, 5);
         if($reportType == 'full'){
             $report .= "=== Names fixed ===\n" . $namesReport;

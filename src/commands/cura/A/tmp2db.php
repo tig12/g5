@@ -54,44 +54,46 @@ class tmp2db implements Command {
         $report = "--- $datafile tmp2db ---\n";
         
         // source corresponding to CURA5 - insert if does not already exist
-        $lerrcpSource = Source::getBySlug(LERRCP::SOURCE_SLUG);
+        $lerrcpSource = Source::getBySlug(LERRCP::SOURCE_SLUG); // DB
         if(is_null($lerrcpSource)){
             $lerrcpSource = new Source(LERRCP::SOURCE_DEFINITION_FILE);
-            $lerrcpSource->insert();
+            $lerrcpSource->insert(); // DB
             $report .= "Inserted source " . $lerrcpSource->data['slug'] . "\n";
         }
         
         // source corresponding to CURA5 - insert if does not already exist
-        $curaSource = Source::getBySlug(Cura::SOURCE_SLUG);
+        $curaSource = Source::getBySlug(Cura::SOURCE_SLUG); // DB
         if(is_null($curaSource)){
             $curaSource = new Source(Cura::SOURCE_DEFINITION_FILE);
-            $curaSource->insert();
+            $curaSource->insert(); // DB
             $report .= "Inserted source " . $curaSource->data['slug'] . "\n";
         }
         
         // source corresponding LERRCP booklet of current A file
-        $source = Source::getBySlug(Cura::datafile2bookletSourceSlug($datafile));
+        $source = Source::getBySlug(Cura::datafile2bookletSourceSlug($datafile)); // DB
         if(is_null($source)){
-            $source = Cura::getBookletSourceOfFile($datafile);
-            $source->insert();
+            $source = Cura::getBookletSourceOfDatafile($datafile);
+            $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         
         // source corresponding to current A file
-        $source = Source::getBySlug(Cura::datafile2sourceSlug($datafile));
+        $source = Source::getBySlug(Cura::datafile2sourceSlug($datafile)); // DB
         if(is_null($source)){
-            $source = Cura::getSourceOfFile($datafile);
-            $source->insert();
+            $source = Cura::getSourceOfDatafile($datafile);
+            $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         
         // group
-        $g = Group::getBySlug($datafile);
+        $g = Group::getBySlug(Cura::datafile2groupSlug($datafile)); // DB
         if(is_null($g)){
-            $g = Cura::getGroupOfFile($datafile);
+            $g = Cura::getGroupOfDatafile($datafile);
+            $g->data['id'] = $g->insert(); // DB
+            $report .= "Inserted group " . $g->data['slug'] . "\n";
         }
         else{
-            $g->deleteMembers(); // only deletes asssociations between group and members
+            $g->deleteMembers(); // DB - only deletes asssociations between group and members
         }
         
         // both arrays share the same order of elements,
@@ -112,7 +114,7 @@ class tmp2db implements Command {
             $test->data['birth']['date-ut'] = $line['DATE-UT'];
             $test->computeSlug();
             $curaId = Cura::gqId($datafile, $line['NUM']);
-            $p = Person::getBySlug($test->data['slug']);
+            $p = Person::getBySlug($test->data['slug']); // DB
             if(is_null($p)){
                 // insert new person
                 $p = new Person();
@@ -137,7 +139,7 @@ class tmp2db implements Command {
                 $p->computeSlug();
                 $p->addHistory("cura $datafile tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);
-                $p->data['id'] = $p->insert(); // Storage
+                $p->data['id'] = $p->insert(); // DB
                 $nInsert++;
             }
             else{
@@ -148,7 +150,7 @@ class tmp2db implements Command {
                 // Does not addIdInSource('cura') to respect the definition of Gauquelin id
                 $p->addRaw($source->data['slug'], $lineRaw);
                 $p->addHistory("cura $datafile tmp2db", $source->data['slug'], []);
-                $p->update(); // Storage
+                $p->update(); // DB
                 if($reportType == 'full'){
                     $report .= "Duplicate {$test->data['slug']} : {$p->data['ids-in-sources']['cura']} = $curaId\n";
                 }
@@ -157,13 +159,7 @@ class tmp2db implements Command {
             $g->addMember($p->data['id']);
         }
         $t2 = microtime(true);
-        try{
-            $g->data['id'] = $g->insert(); // Storage
-        }
-        catch(\Exception $e){
-            // group already exists
-            $g->insertMembers();
-        }
+        $g->insertMembers(); // DB
         $dt = round($t2 - $t1, 5);
         if($reportType == 'full' && $nDuplicates != 0){
             $report .= "-------\n";

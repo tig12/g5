@@ -1,15 +1,15 @@
 
+-- View used by postgrest api
 
 create or replace view api_persongroop as
 select
     p.slug              "person_slug",
+    g.slug              "group_slug",
     p.ids_in_sources,
     p.sex,
-    p.name              "person_name",
+    p.name,
     p.occus,
-    p.birth,
-    g.name              "group_name",
-    g.slug              "group_slug"
+    p.birth
 from
     person p,
     groop g,

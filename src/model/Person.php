@@ -44,21 +44,6 @@ class Person {
     // *********************** Get *******************************
     
     /**
-        Returns an object of type Person from storage, using its id,
-        or null if doesn't exist.
-    **/
-    public static function get($id): ?Person{
-        $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("select * from person where id=?");
-        $stmt->execute([$id]);
-        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
-        if($res === false || count($res) == 0){
-            return null;
-        }
-        return self::row2person($res);
-    }
-    
-    /**
         Returns an object of type Person from storage, using its slug,
         or null if doesn't exist.
     **/
