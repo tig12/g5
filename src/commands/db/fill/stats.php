@@ -95,8 +95,8 @@ class stats implements Command {
             n,
             n_time,
             n_day,
-            n_cy,
-            n_year
+            countries,
+            years
             )values(?,?,?,?,?)");
         $stmt->execute([
             $N,
