@@ -31,6 +31,7 @@ class dbcreate implements Command {
             'source',
             'person_groop',
             'stats',
+            'search',
         ];
         foreach($tables as $table){
             $sql_create = file_get_contents($dir_sql . DS . $table . '.sql');
@@ -60,5 +61,4 @@ class dbcreate implements Command {
         return $report;
     }
     
-    
-}// end class
+} // end class

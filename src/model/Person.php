@@ -17,6 +17,10 @@ class Person {
         $this->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Person.yml'));
     }
     
+    // ***********************************************************************
+    //                                  STATIC
+    // ***********************************************************************
+    
     /**
         Converts a row of table person to an object of type Person
         @param $row Assoc array, row of table person
@@ -100,6 +104,71 @@ class Person {
     }
     
     
+    /** 
+        Static computation of slug
+        @see    instance method computeSlug()
+    **/
+    public static function doComputeSlug($family, $given, $date): string {
+        $name = $family . ($given != '' ? ' ' . $given : '');
+        if($date != ''){
+            // galois-evariste-1811-10-25
+            $slug = slugify::compute($name . '-' . $date);
+        }
+        else{
+            // galois-evariste
+            $slug = slugify::compute($name);
+        }
+        return $slug;
+    }
+    
+    /**
+        Computes the different names of a person
+        @param  $array_name  Array representing the name, as stored in database. Ex: [
+            'fame' => ''
+            'given' => Pierre
+            'usual' => ''
+            'family' => Alard
+            'spouse' => ''
+            'official' => [
+                'given' => ''
+                'family' => ''
+            ]
+            'nicknames' => []
+            'alternative' => []
+            'nobiliary-particle' => ''
+        ]
+    **/
+    public static function computeNames(array $array_name) {
+        $res = [];
+        if($array_name['usual'] != ''){
+            $res[] = $array_name['usual'];
+        }
+        if($array_name['fame'] != ''){
+            $res[] = $array_name['fame'];
+        }
+        if(!empty($array_name['alternative'])){
+            foreach($array_name['alternative'] as $alt){
+                $res[] = $alt;
+            }
+        }
+        if(!empty($array_name['nicknames'])){
+            foreach($array_name['nicknames'] as $nick){
+                $res[] = $nick;
+            }
+        }
+        if($array_name['given'] != '' && $array_name['family'] != ''){
+            $res[] = $array_name['given'] . ' ' . $array_name['family'];
+        }
+        else if($array_name['family'] != ''){
+            $res[] = $array_name['family'];
+        }
+        return $res;
+    }
+    
+    // ***********************************************************************
+    //                                  INSTANCE
+    // ***********************************************************************
+    
     // *********************** Fields *******************************
     
     /**
@@ -122,6 +191,7 @@ class Person {
             - galois-evariste-1811-10-25 for a person with a known birth time.
             - galois-evariste for a person without a known birth time.
         @throws \Exception if the person id computation impossible (the person has no family name).
+        @see    static method doComputeSlug()
     **/
     public function computeSlug() {
         if(!$this->data['name']['family']){
@@ -131,21 +201,6 @@ class Person {
         return;
     }
     
-    /** 
-        Static computation of slug
-    **/
-    public static function doComputeSlug($family, $given, $date): string {
-        $name = $family . ($given != '' ? ' ' . $given : '');
-        if($date != ''){
-            // galois-evariste-1811-10-25
-            $slug = slugify::compute($name . '-' . $date);
-        }
-        else{
-            // galois-evariste
-            $slug = slugify::compute($name);
-        }
-        return $slug;
-    }
     
     /**
         Computes the birth day from date or date-ut
