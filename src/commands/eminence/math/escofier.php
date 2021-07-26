@@ -18,13 +18,13 @@ namespace g5\commands\eminence\math;
 use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
-use g5\model\{Source, SourceI, Group};
+use g5\model\{Source, Group};
 use tiglib\arrays\sortByKey;
 
 // *****************************************
 //          Model class
 // *****************************************
-class EscofierModel implements SourceI {
+class EscofierModel {
 
     
     /**

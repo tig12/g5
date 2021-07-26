@@ -8,13 +8,12 @@
 namespace g5\commands\newalch\ertel4391;
 
 use g5\Config;
-use g5\model\SourceI;
 use g5\model\Source;
 use g5\model\Group;
 use tiglib\arrays\csvAssociative;
 use g5\commands\newalch\Newalch;
 
-class Ertel4391 implements SourceI {
+class Ertel4391 {
     
     /**
         Path to the yaml file containing the characteristics of the source describing file 3a_sports.txt.

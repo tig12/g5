@@ -10,11 +10,11 @@ namespace g5\commands\muller\afd3;
 
 use g5\Config;
 use g5\model\DB5;
-use g5\model\{Source, SourceI, Group};
+use g5\model\{Source, Group};
 //use tiglib\time\seconds2HHMMSS;
 use tiglib\arrays\csvAssociative;
 
-class AFD3 implements SourceI {
+class AFD3 {
     
     /**
         Trust level for data

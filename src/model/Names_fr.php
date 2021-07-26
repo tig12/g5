@@ -118,4 +118,4 @@ class Names_fr{
         return $nob . ' ' . $fname;
     }
     
-}// end class
+} // end class
