@@ -1,0 +1,21 @@
+slug;wd;cura5;fr;en;parents
+actor;Q33999;AC;Acteur;Actor;artist
+artist;Q483501;AR;Artiste;Artist;
+cartoonist;Q1114448;CAR;Réalisateur de dessins animés;Cartoonist;artist
+conductor-of-military-band;X-CMB;CMB;Chef d'orchestre militaire;Conductor of military band;conductor+military-personnel
+dancer;Q5716684;DAN;Danseur;Dancer;artist
+executive;Q978044;EX;Cadre dirigeant;Executive;
+journalist;Q1930187;JO;Journaliste;Journalist;
+military-personnel;Q47064;MI;Militaire;Military personnel;
+miscelaneous;X-MISC;XX;Divers;Miscelaneous;
+musician;Q639669;MUS;Musicien;Musician;artist
+opera-singer;Q2865819;OPE;Chanteur d'opéra;Opera singer;musician
+painter;Q1028181;PAI;Peintre;Painter;artist
+photographer;Q33231;PHO;Photographe;Photographer;artist
+medical-doctor;Q39631;PH;Médecin;Medical doctor;
+politician;Q82955;PO;Politicien;Politician;
+scientist;Q901;SC;Scientifique;Scientist;
+sportsperson;Q2066131;SP;Sportif;Sportsperson;
+writer;Q36180;WR;Ecrivain;Writer;
+;;;;;
+conductor;Q158852;;Chef d’orchestre;Conductor;musician

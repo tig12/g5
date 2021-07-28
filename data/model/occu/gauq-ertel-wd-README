@@ -1,5 +1,5 @@
 
-gq-er-mu-wd.csv: match between Gauquelin, Ertel, Müller and Wikidata occupation codes
+gauq-ertel-wd.csv: match between Gauquelin, Ertel and Wikidata occupation codes
 
 wikidata codes relate to occupation codes, but the labels sometimes refer to the related activity
 ex: Q7291 relates to "badminton player", but the label is "badminton"

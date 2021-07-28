@@ -20,7 +20,8 @@ db5:
     dbname: pg_dbname
     schema: pg_schema
   # used by open-gauquelin program to access the database through postgrest
-  # useful to grant read privilege on tables in command/db/build/dbcreate.php
+  # This setting is included in current config because
+  # it permits to grant read privilege on tables in command/db/build/dbcreate.php
   postgrest:
     user: web_anon
 

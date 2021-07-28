@@ -16,7 +16,7 @@ class occus implements Command {
     
     // *****************************************
     /** 
-        @param $params array with one element :
+        @param $params empty array
         @return Empty string, echoes its output
     **/
     public static function execute($params=[]): string{
