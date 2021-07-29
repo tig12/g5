@@ -3,7 +3,7 @@
 
 create table occu (
     slug            varchar(255) primary key,
+    wd              varchar(11) unique not null, -- varchar(9) probably enough
     name            varchar(255) unique not null, -- english
-    wd              varchar(11), -- varchar(9) probably enough
     parents         jsonb
 );

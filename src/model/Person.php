@@ -232,12 +232,49 @@ class Person {
         $this->data['ids-in-sources'][$sourceSlug] = $id;
     }
     
-    public function addOccu($occu){
-        if(!in_array($occu, $this->data['occus'])){
-            $this->data['occus'][] = $occu;
+    /**
+        Adds one single occupation to field occus.
+        Does not check if an added slug represents a child or parent of current occupations.
+    **/
+    public function addOccu($occuSlug){
+        if(!in_array($occuSlug, $this->data['occus'])){
+            $this->data['occus'][] = $occuSlug;
         }                              
     }
     
+    /**
+        Adds an array of occupation slugs to field occus.
+        "Cleans" the occupation by removing useless slugs.
+        For example, 
+        - if $occuSlugs contains "dancer", and field occus already contains "artist", "artist" is removed.
+        - if $occuSlugs contains "artist", and field occus already contains "dancer", "artist" is not added.
+        Always remove the parents and keep the children, which are more specific.
+    **/
+    public function addOccus($occuSlugs){
+        $occus = $this->data['occus'];
+        foreach($occuSlugs as $occuSlug){
+            if(!in_array($occuSlug, $occus)){
+                $occus[] = $occuSlug;
+            }                              
+        }
+        $ancestors = Occupation::getAllAncestors();
+        $remove = [];
+        foreach($occus as $occu1){
+            foreach($occus as $occu2){
+                if($occu1 == $occu2){
+                    continue;
+                }
+                if(in_array($occu1, $ancestors[$occu2])){
+                    $remove[] = $occu1;
+                }
+            }
+        }
+echo "\n ===\noccus = "; print_r($occus); echo "\n";
+echo "\nremove = "; print_r($remove); echo "\n";
+        $this->data['occus'] = array_diff($occus, $remove);
+    }
+    
+    /** Adds one single source to field sources **/
     public function addSource($sourceSlug){
         if(!in_array($sourceSlug, $this->data['sources'])){
             $this->data['sources'][] = $sourceSlug;

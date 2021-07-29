@@ -6,7 +6,10 @@ document:
 name: LERRCP
 slug: lerrcp
 type: organization
+authors:
+  - Michel Gauquelin
+  - Françoise Gauquelin
 description: |
-  Laboratoire d'Étude des Relations entre Rythmes Cosmiques et Psychophysiologiques
-  Structure used by Michel and Françoise Gauquelin to publish their data and results.
-  
+  Laboratoire d'Étude des Relations entre Rythmes Cosmiques et Psycho-physiologiques
+  Structure used by Michel and Françoise Gauquelin to publish their data and results, between 1970 and 1984.
+  Main information source of the Open Gauquelin Database (current site).

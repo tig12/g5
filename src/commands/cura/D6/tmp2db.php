@@ -12,6 +12,8 @@ use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
+use g5\model\Occupation;
+use g5\commands\gauquelin\LERRCP;
 use g5\commands\cura\Cura;
 
 class tmp2db implements Command {
@@ -51,7 +53,7 @@ class tmp2db implements Command {
         
         // source corresponding to CURA
         // not inserted because must have been done in A1 import
-        $curaSource = new Source(Cura::SOURCE_DEFINITION_FILE);
+        $lerrcpSource = new Source(LERRCP::SOURCE_DEFINITION_FILE);
         
         // source corresponding LERRCP booklet of D6 file
         $source = Source::getBySlug(Cura::datafile2bookletSourceSlug($datafile)); // DB
@@ -80,6 +82,8 @@ class tmp2db implements Command {
             $g->deleteMembers(); // DB - only deletes asssociations between group and members
         }
         
+        $matchOccus = Occupation::loadForMatch('cura5');
+        
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
         $lines = Cura::loadTmpFile($datafile);
@@ -97,14 +101,14 @@ class tmp2db implements Command {
             $test->data['name']['given'] = $line['GNAME'];
             $test->data['birth']['date'] = $line['DATE'];
             $test->computeSlug();
-            $curaId = Cura::gqId($datafile, $line['NUM']);
+            $gqId = Cura::gqId($datafile, $line['NUM']);
             $p = Person::getBySlug($test->data['slug']); // DB
             if(is_null($p)){
                 // insert new person
                 $p = new Person();
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
-                $p->addIdInSource($curaSource->data['slug'], $curaId);
+                $p->addIdInSource($lerrcpSource->data['slug'], $gqId);
                 $new = [];
                 $new['trust'] = Cura::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
@@ -115,7 +119,15 @@ class tmp2db implements Command {
                 $new['birth']['place']['lg'] = $line['LG'];
                 $new['birth']['place']['lat'] = $line['LAT'];
                 $p->updateFields($new);
-                $p->addOccu($line['OCCU']);
+                // occu
+                if(!isset($matchOccus[$line['OCCU']])){
+                    throw new \Exception("Missing definition for occupation " . $line['OCCU']);
+                }
+                $occus = $matchOccus[$line['OCCU']];
+                foreach($occus as $occu){
+                    $p->addOccu($occu);
+                }
+                //
                 $p->computeSlug();
                 $p->addHistory("cura $datafile tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);
@@ -124,13 +136,21 @@ class tmp2db implements Command {
             }
             else{
                 // duplicate, person appears in more than one cura file
-                $p->addOccu($line['OCCU']);
+                // occu
+                if(!isset($matchOccus[$line['OCCU']])){
+                    throw new \Exception("Missing definition for occupation " . $line['OCCU']);
+                }
+                $occus = $matchOccus[$line['OCCU']];
+                foreach($occus as $occu){
+                    $p->addOccu($occu);
+                }
+                //
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
-                // does not addIdInSource($curaSource) to respect the definition of Gauquelin id
+                // does not addIdInSource($lerrcpSource) to respect the definition of Gauquelin id
                 $p->update(); // DB
                 if($reportType == 'full'){
-                    $report .= "Duplicate {$test->data['slug']} : {$p->data['ids-in-sources']['cura']} = $curaId\n";
+                    $report .= "Duplicate {$test->data['slug']} : {$p->data['ids-in-sources']['lerrcp']} = $gqId\n";
                 }
                 $nDuplicates++;
             }

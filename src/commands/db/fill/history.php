@@ -13,8 +13,16 @@ namespace g5\commands\db\fill;
 use g5\patterns\Command;
 use g5\commands\cura\CuraRouter;
 
-use g5\commands\db\build\dbcreate;
+// for information sources
+use g5\commands\gauquelin\LERRCP;
+use g5\commands\muller\Muller;
+use g5\commands\newalch\Newalch;
+use g5\commands\cura\Cura;
+use g5\G5;
+
+use g5\commands\db\create\dbcreate;
 use g5\commands\db\fill\source;
+use g5\commands\db\fill\occu;
 use g5\commands\db\fill\stats;
 use g5\commands\db\fill\search;
 
@@ -139,10 +147,14 @@ class history implements Command {
             echo "***********************\n";
             
             echo dbcreate::execute([]);
-            echo source::execute(['g5.yml']);
-            echo source::execute(['newalch.yml']);
-            echo source::execute(['cura5.yml']);
+            echo source::execute([LERRCP::SOURCE_DEFINITION_FILE]);
+            echo source::execute([Muller::AFD_SOURCE_DEFINITION_FILE]);
+            echo source::execute([Cura::SOURCE_DEFINITION_FILE]);
+            echo source::execute([Newalch::SOURCE_DEFINITION_FILE]);
+            echo source::execute([G5::SOURCE_DEFINITION_FILE]);
+            echo occu::execute();
             
+exit;            
             foreach($filesCuraA as $datafile){
                 echo tmp2dbA::execute([$datafile, 'tmp2db', 'small']);
             }

@@ -1,4 +1,18 @@
 
+- booklet functions of class Cura and constant LERRCP_INFOS should be placed in class LERRCP
+
+- Check remaining ids_in_sources whith 'cura'
+grep -rn "'cura'" src/
+Replace with 'cura5' => use constant => use 'lerrcp' instead
+
+- See the difference in export of physicians
+Counting the nb of unique physicians in each group :
+2551 come from A2
+976 come from E3
+224 come from Muller 1083
+2551+977+224 = 3751
+The export says 3748, there is a difference of 3 that I can't explain, I marked it as a potential bug to check.
+
 - Update Muller1083 documentation
 
 - Add schema in db config + in all sql queries, specify the schema
@@ -6,6 +20,8 @@
 - Refactor and unify tweak files :
     - one common mechanism for all tweaks
     - one general README
+- tweak2csv : code should be factorized, available to all datafiles
+              (cura, 1083MED, 4391SPO)
 
 - Handle occu in db, codes like SP+BAS => should be BAS
 - profession-codes.csv : add wd codes + Ertel codes.
@@ -21,9 +37,6 @@
 - G55::prepareCuraMatch not designed correctly
 
 - Harmonize all exports, use commands/csicop/si42/export.php code
-
-- tweak2csv : code should be factorized, available to all datafiles
-              (cura, 1083MED, 4391SPO)
 
 - fix nobilities in cura files
 
@@ -54,9 +67,6 @@ why ?
 from command
 php run-g5.php g55 570SPO edited2cura date
 
-883 CYC 1884-04-07 Seres Georges : 21:04 | 21:00
-Equation of time problem in legal time restoration ?
-
 1761 NAT 1927-11-11 Casteur Odette : 22:53 | 23:53
 Strange to have birth time with minutes in 1927
 
@@ -64,7 +74,7 @@ Strange to have birth time with minutes in 1927
 1934 RUG 1890-04-22 Lerou Roger : 22:55 | 23:00
 2044 TEN 1886-12-12 Blanchy François : 08:55 | 09:00
 2083 TIR 1876-05-29 Parmentier André : 03:55 | 04:00
-Bug in legal time restoration ?
+Equation of time problem in legal time restoration ?
 
 - In 570SPO generated :
 A1-81	Winter	Paul	ATH	1906-02-06 14:00-01	RIBEAUVILLE	FR	68	7.35	48.08333

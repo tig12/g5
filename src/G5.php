@@ -9,6 +9,13 @@ namespace g5;
 
 class G5{
     
+    /**
+        Path to the yaml file containing the characteristics of g5 program,
+        when seen as an information source.
+        Relative to directory data/model/source
+    **/
+    const SOURCE_DEFINITION_FILE = 'g5.yml';
+    
     /** 
         Separator for all csv files of data/5-tmp/ and data/3-edited/
     **/

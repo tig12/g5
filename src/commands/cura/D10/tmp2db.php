@@ -12,6 +12,8 @@ use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
+use g5\model\Occupation;
+use g5\commands\gauquelin\LERRCP;
 use g5\commands\cura\Cura;
 
 class tmp2db implements Command {
@@ -51,7 +53,7 @@ class tmp2db implements Command {
         
         // source corresponding to CURA
         // not inserted because must have been done in A1 import
-        $curaSource = new Source(Cura::SOURCE_DEFINITION_FILE);
+        $lerrcpSource = new Source(Cura::SOURCE_DEFINITION_FILE);
         
         // source corresponding LERRCP booklet of D6 file
         $source = Source::getBySlug(Cura::datafile2bookletSourceSlug($datafile)); // DB
@@ -104,7 +106,7 @@ class tmp2db implements Command {
                 $p = new Person();
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
-                $p->addIdInSource($curaSource->data['slug'], $curaId);
+                $p->addIdInSource($lerrcpSource->data['slug'], $curaId);
                 $new = [];
                 $new['trust'] = Cura::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
@@ -138,7 +140,7 @@ class tmp2db implements Command {
                 }
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
-                // does not addIdInSource($curaSource) to respect the definition of Gauquelin id
+                // does not addIdInSource($lerrcpSource) to respect the definition of Gauquelin id
                 $p->update(); // DB
                 if($reportType == 'full'){
                     $report .= "Duplicate {$test->data['slug']} : {$p->data['ids-in-sources']['cura']} = $curaId\n";

@@ -193,7 +193,7 @@ class look implements Command {
                 else{
                     $N_match++;
                     $ids_in_sources = json_decode($res[0]['ids_in_sources'], true);
-                    $res_match .= "        '$MUID' => '{$ids_in_sources['cura']}', // {$line['FNAME']} {$line['GNAME']}\n";
+                    $res_match .= "        '$MUID' => '{$ids_in_sources['cura5']}', // {$line['FNAME']} {$line['GNAME']}\n";
                 }
             }
             else{
@@ -255,7 +255,7 @@ class look implements Command {
         $birth = json_decode($line['birth'], true);
         $ids_in_sources = json_decode($line['ids_in_sources'], true);
         $date = $birth['date-ut'] ?? $birth['date'];
-        return "GQ: {$ids_in_sources['cura']}"
+        return "GQ: {$ids_in_sources['cura5']}"
             . " {$name['family']} {$name['given']}"
             . " $date"
             . " --- "

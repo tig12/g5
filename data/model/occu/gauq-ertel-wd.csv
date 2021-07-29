@@ -1,13 +1,13 @@
 slug;wd;cura5;ertel;fr;en;parents;IG
 aircraft-pilot;Q2095549;AVI;AIRP;Aviateur;Aircraft pilot;sportsperson;I
-Badminton-player;Q13141064;;BADM;Joueur de badminton;Badminton player;sportsperson;I
-Baseball-player;Q10871364;;BASE;Joueur de baseball;Baseball player;sportsperson;G
-Basketball-player;Q3665646;BAS;BASK;Joueur de basket-ball;Basketball player;sportsperson;G
-Billard-player;Q18544928;BIL;BILL;Joueur de billard;Billard player;sportsperson;I
+badminton-player;Q13141064;;BADM;Joueur de badminton;Badminton player;sportsperson;I
+baseball-player;Q10871364;;BASE;Joueur de baseball;Baseball player;sportsperson;G
+basketball-player;Q3665646;BAS;BASK;Joueur de basket-ball;Basketball player;sportsperson;G
+billard-player;Q18544928;BIL;BILL;Joueur de billard;Billard player;sportsperson;I
 bobsledder;Q177275;;BOBS;Pilote de bobsleigh;Bobsleigh pilot;winter-sports-practitioner;I
 bowler;Q4951095;;BOWL;Joueur de bowling;Bowling player;sportsperson;I
 boxer;Q11338576;BOX;BOXI;Boxeur;Boxer;sportsperson;I
-canoeist-kayaker;Q13382566+Q16004471;CAN;CANO;Canoëiste-kayakeur;Canoe-kayaker;sportsperson;I
+canoeist+kayaker;Q13382566+Q16004471;CAN;CANO;Canoëiste-kayakeur;Canoe-kayaker;sportsperson;I
 mountaineer;Q9149093;;ALPI;Alpiniste;Mountaineer;sportsperson;I
 cyclist;Q2125610;CYC;CYCL;Cycliste;Cyclist;sportsperson;I
 equestrian;Q2730732;EQU;HORS;Cavalier;Equestrian;sportsperson;I
@@ -35,3 +35,6 @@ volleyball-player;Q15117302;VOL;VOLL;Joueur de volley-ball;Volleyball player;spo
 weightlifter;Q13381376;HAL;WEIG;Haltérophile;Weightlifter;sportsperson;I
 winter-sports-practitioner;Q20965770;GLA;ICES;Pratiquant de sports d’hiver;Winter-sports;sportsperson;
 wrestler;Q13474373;LUT;WRES;Lutteur (catch);Wrestler;sportsperson;I
+;;;;;;;
+canoeist;Q13382566;;;Canoëiste;Canoeist;sportsperson;I
+kayaker;Q16004471;;;Kayakeur;Kayaker;sportsperson;I

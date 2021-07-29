@@ -14,6 +14,7 @@ use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
+use g5\model\Occupation;
 use g5\commands\cura\Cura;
 use g5\commands\gauquelin\LERRCP;
 
@@ -96,6 +97,8 @@ class tmp2db implements Command {
             $g->deleteMembers(); // DB - only deletes asssociations between group and members
         }
         
+        $matchOccus = Occupation::loadForMatch('cura5');
+        
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
         $lines = Cura::loadTmpFile($datafile);
@@ -120,7 +123,7 @@ class tmp2db implements Command {
                 $p = new Person();
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
-                $p->addIdInSource($curaSource->data['slug'], $curaId);
+                $p->addIdInSource($lerrcpSource->data['slug'], $curaId);
                 $new = [];
                 $new['trust'] = Cura::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
@@ -135,12 +138,20 @@ class tmp2db implements Command {
                 $new['birth']['place']['lat'] = $line['LAT'];
                 $new['birth']['place']['geoid'] = $line['GEOID'];
                 $p->updateFields($new);
-                $p->addOccu($line['OCCU']);
+                if(!isset($matchOccus[$line['OCCU']])){
+                    throw new \Exception("Missing definition for occupation " . $line['OCCU']);
+                }
+                $p->addOccus($matchOccus[$line['OCCU']]);
+//exit;
                 $p->computeSlug();
                 $p->addHistory("cura $datafile tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);
+$nInsert++;
+if($nInsert == 10) exit;
+continue;
                 $p->data['id'] = $p->insert(); // DB
                 $nInsert++;
+
             }
             else{
                 // duplicate, person appears in more than one cura file

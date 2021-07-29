@@ -4,13 +4,13 @@ document:
     - 2020-05-18 16:20:21+02:00: Thierry Graff, creation
     - 2021-07-17 23:02:16+02:00: Thierry Graff, Change from cura to cura5
 
-name: cura.free.fr
+name: cura.free.fr v5
 slug: cura5
 type: website
 author: Patrice Guinard
 description: |
-  Web site http://cura.free.fr
-  Open Gauquelin database uses version 5 of CURA database. Since November 2020, Cura database became closed data.
-  Previous version of cura site, used to build the open Gauquelin database, is available through archive.org : https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/17archg.html
+  The Open Gauquelin Database (current site) uses version 5 of CURA data. Since November 2020, Cura database became closed data. Data published after this date are not used by the Open Gauquelin Database.
+  Version of Cura data used by the Open Gauquelin Database is available through archive.org at
+  https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/17archg.html
 parents:
   - lerrcp
