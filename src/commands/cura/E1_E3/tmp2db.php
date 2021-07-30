@@ -12,6 +12,8 @@ use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
+use g5\model\Occupation;
+use g5\commands\gauquelin\LERRCP;
 use g5\commands\cura\Cura;
 
 class tmp2db implements Command {
@@ -49,9 +51,9 @@ class tmp2db implements Command {
         
         $report = "--- $datafile tmp2db ---\n";
         
-        // source corresponding to CURA
+        // source corresponding to LERRCP
         // not inserted because must have been done in A1 import
-        $curaSource = new Source(Cura::SOURCE_DEFINITION_FILE);
+        $lerrcpSource = new Source(LERRCP::SOURCE_DEFINITION_FILE);
         
         // source corresponding LERRCP booklet of D6 file
         $source = Source::getBySlug(Cura::datafile2bookletSourceSlug($datafile)); // DB
@@ -80,6 +82,8 @@ class tmp2db implements Command {
             $g->deleteMembers(); // DB - only deletes asssociations between group and members
         }
         
+        $matchOccus = Occupation::loadForMatch('cura5');
+        
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
         $lines = Cura::loadTmpFile($datafile);
@@ -104,12 +108,11 @@ class tmp2db implements Command {
                 $p = new Person();
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
-                $p->addIdInSource($curaSource->data['slug'], $curaId);
+                $p->addIdInSource($lerrcpSource->data['slug'], $curaId);
                 $new = [];
                 $new['trust'] = Cura::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
-                $new['occus'] = explode('+', $line['OCCU']);
                 $new['notes'] = [];
                 $new['notes'][] = self::expandNote($line['NOTE']);
                 $new['birth'] = [];
@@ -123,6 +126,15 @@ class tmp2db implements Command {
                 $new['birth']['place']['lat'] = $line['LAT'];
                 $new['birth']['place']['geoid'] = $line['GEOID'];
                 $p->updateFields($new);
+                $occus = explode('+', $line['OCCU']);
+                $addedOccus = [];
+                foreach($occus as $occu){
+                    if(!isset($matchOccus[$occu])){
+                        throw new \Exception("Missing definition for occupation " . $occu);
+                    }
+                    $addedOccus = array_merge($addedOccus, $matchOccus[$occu]);
+                }
+                $p->addOccus($addedOccus);
                 $p->computeSlug();
                 $p->addHistory("cura $datafile tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);                                            
@@ -131,12 +143,18 @@ class tmp2db implements Command {
             }
             else{
                 // duplicate, person appears in more than one cura file
-                foreach(explode('+', $line['OCCU']) as $occu){
-                    $p->addOccu($occu);
+                $occus = explode('+', $line['OCCU']);
+                $addedOccus = [];
+                foreach($occus as $occu){
+                    if(!isset($matchOccus[$occu])){
+                        throw new \Exception("Missing definition for occupation " . $occu);
+                    }
+                    $addedOccus = array_merge($addedOccus, $matchOccus[$occu]);
                 }
+                $p->addOccus($addedOccus);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
-                // does not addIdInSource($curaSource) to respect the definition of Gauquelin id
+                // does not addIdInSource($lerrcpSource) to respect the definition of Gauquelin id
                 $p->update(); // DB
                 if($reportType == 'full'){
                     $report .= "Duplicate {$test->data['slug']} : {$p->data['ids-in-sources']['cura']} = $curaId\n";

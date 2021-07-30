@@ -244,19 +244,21 @@ class Person {
     
     /**
         Adds an array of occupation slugs to field occus.
-        "Cleans" the occupation by removing useless slugs.
+        "Cleans" the occupation by removing useless (redundant) slugs.
         For example, 
-        - if $occuSlugs contains "dancer", and field occus already contains "artist", "artist" is removed.
-        - if $occuSlugs contains "artist", and field occus already contains "dancer", "artist" is not added.
+        - if $occuSlugs contains "dancer", and field occus already contains "artist", then "artist" is removed.
+        - if $occuSlugs contains "artist", and field occus already contains "dancer", then "artist" is not added.
         Always remove the parents and keep the children, which are more specific.
     **/
     public function addOccus($occuSlugs){
+//echo "addOccus(occuSlugs) = " . print_r($occuSlugs, true) . "\n";;
         $occus = $this->data['occus'];
         foreach($occuSlugs as $occuSlug){
             if(!in_array($occuSlug, $occus)){
                 $occus[] = $occuSlug;
             }                              
         }
+//echo "occus = " . print_r($occus, true) . "\n";;
         $ancestors = Occupation::getAllAncestors();
         $remove = [];
         foreach($occus as $occu1){
@@ -269,9 +271,12 @@ class Person {
                 }
             }
         }
-echo "\n ===\noccus = "; print_r($occus); echo "\n";
-echo "\nremove = "; print_r($remove); echo "\n";
-        $this->data['occus'] = array_diff($occus, $remove);
+//echo "\n ===\noccus = "; print_r($occus); echo "\n";
+//echo "remove = "; print_r($remove); echo "\n";
+        // note: here array_values() permits to reindex
+        // if array_values() not used, jsonb is not stored as a regular array, but as an associative array.
+        $this->data['occus'] = array_values(array_diff($occus, $remove));
+//echo "\nthis->data['occus'] =  "; print_r($this->data['occus']); echo "\n";
     }
     
     /** Adds one single source to field sources **/

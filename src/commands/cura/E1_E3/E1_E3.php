@@ -64,7 +64,7 @@ class E1_E3{
             'PO' => 'PO',
             'JO' => 'JO',
             'WR' => 'WR',
-            'AC' => 'AC',   // [including Pop Singers]
+            'AC' => 'ACT',   // [including Pop Singers]
             'PAI' => 'PAI', // [including 1 sculptor]
             'MUS' => 'MUS',
             'OPE' => 'OPE',

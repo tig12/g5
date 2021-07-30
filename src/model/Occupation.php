@@ -70,10 +70,10 @@ class Occupation {
             return self::$allAncestors;
         }
         $occusFromDB = self::loadFromDB();
-//echo "\n<pre>"; print_r($occusFromDB); echo "</pre>\n"; exit;
+        // 1 - $nodes = assoc array slug - DAGStringNode
+        //     $occus = assoc array slug - Occupation object
         $nodes = [];
         $occus = [];
-        // 1 - assoc array slug - DAGStringNode + assoc array slug - Occupation object
         foreach($occusFromDB as $occu){
             $slug = $occu->data['slug'];
             $nodes[$slug] = new DAGStringNode($slug);
@@ -82,9 +82,7 @@ class Occupation {
         // 2 - add edges from parents
         foreach($occus as $occu){
             $slug = $occu->data['slug'];
-//echo "slug = $slug\n";
             foreach($occu->data['parents'] as $parent){ // $parent is a slug
-//echo "  parent = '$parent'\n";
                 $nodes[$slug]->addEdge($nodes[$parent]);
             }
         }
@@ -93,7 +91,7 @@ class Occupation {
         foreach($nodes as $slug => $node){
             self::$allAncestors[$slug] = $node->getReachableAsStrings();
         }
-//echo "\n"; print_r(self::$allAncestors); echo "\n";
+//echo "\n<pre>"; print_r(self::$allAncestors); echo "</pre>\n"; exit;
         return self::$allAncestors;
     }
     
@@ -113,4 +111,4 @@ class Occupation {
         return $res;
     }
     
-}// end class
+} // end class

@@ -1,4 +1,5 @@
 
+
 - booklet functions of class Cura and constant LERRCP_INFOS should be placed in class LERRCP
 
 - Check remaining ids_in_sources whith 'cura'

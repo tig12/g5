@@ -51,9 +51,9 @@ class tmp2db implements Command {
         
         $report = "--- $datafile tmp2db ---\n";
         
-        // source corresponding to CURA
+        // source corresponding to LERRCP
         // not inserted because must have been done in A1 import
-        $lerrcpSource = new Source(Cura::SOURCE_DEFINITION_FILE);
+        $lerrcpSource = new Source(LERRCP::SOURCE_DEFINITION_FILE);
         
         // source corresponding LERRCP booklet of D6 file
         $source = Source::getBySlug(Cura::datafile2bookletSourceSlug($datafile)); // DB
@@ -81,6 +81,8 @@ class tmp2db implements Command {
         else{
             $g->deleteMembers(); // DB - only deletes asssociations between group and members
         }
+        
+        $matchOccus = Occupation::loadForMatch('cura5');
         
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
@@ -111,7 +113,7 @@ class tmp2db implements Command {
                 $new['trust'] = Cura::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
-                $new['occus'] = explode('+', $line['OCCU']);
+//$new['occus'] = explode('+', $line['OCCU']);
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['tzo'] = $line['TZO'];
@@ -127,6 +129,15 @@ class tmp2db implements Command {
                     ];
                 }
                 $p->updateFields($new);
+                $occus = explode('+', $line['OCCU']);
+                $addedOccus = [];
+                foreach($occus as $occu){
+                    if(!isset($matchOccus[$occu])){
+                        throw new \Exception("Missing definition for occupation " . $occu);
+                    }
+                    $addedOccus = array_merge($addedOccus, $matchOccus[$occu]);
+                }
+                $p->addOccus($addedOccus);
                 $p->computeSlug();
                 $p->addHistory("cura $datafile tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);
@@ -135,9 +146,18 @@ class tmp2db implements Command {
             }
             else{
                 // duplicate, person appears in more than one cura file
-                foreach(explode('+', $line['OCCU']) as $occu){
-                    $p->addOccu($occu);
+                $occus = explode('+', $line['OCCU']);
+//echo "\noccus = "; print_r($occus); echo "\n";
+                $addedOccus = [];
+                foreach($occus as $occu){
+                    if(!isset($matchOccus[$occu])){
+                        throw new \Exception("Missing definition for occupation " . $occu);
+                    }
+                    $addedOccus = array_merge($addedOccus, $matchOccus[$occu]);
                 }
+//echo "\naddedOccus = "; print_r($addedOccus); echo "\n";
+//exit;
+                $p->addOccus($addedOccus);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
                 // does not addIdInSource($lerrcpSource) to respect the definition of Gauquelin id

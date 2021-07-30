@@ -51,7 +51,7 @@ class tmp2db implements Command {
         
         $report = "--- $datafile tmp2db ---\n";
         
-        // source corresponding to CURA
+        // source corresponding to LERRCP
         // not inserted because must have been done in A1 import
         $lerrcpSource = new Source(LERRCP::SOURCE_DEFINITION_FILE);
         
@@ -123,10 +123,7 @@ class tmp2db implements Command {
                 if(!isset($matchOccus[$line['OCCU']])){
                     throw new \Exception("Missing definition for occupation " . $line['OCCU']);
                 }
-                $occus = $matchOccus[$line['OCCU']];
-                foreach($occus as $occu){
-                    $p->addOccu($occu);
-                }
+                $p->addOccus($matchOccus[$line['OCCU']]);
                 //
                 $p->computeSlug();
                 $p->addHistory("cura $datafile tmp2db", $source->data['slug'], $new);
@@ -140,10 +137,7 @@ class tmp2db implements Command {
                 if(!isset($matchOccus[$line['OCCU']])){
                     throw new \Exception("Missing definition for occupation " . $line['OCCU']);
                 }
-                $occus = $matchOccus[$line['OCCU']];
-                foreach($occus as $occu){
-                    $p->addOccu($occu);
-                }
+                $p->addOccus($matchOccus[$line['OCCU']]);
                 //
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);

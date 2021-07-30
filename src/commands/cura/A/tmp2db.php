@@ -51,10 +51,11 @@ class tmp2db implements Command {
         }
         
         $datafile = $params[0];
+//echo "datafile = $datafile\n";
         
         $report = "--- $datafile tmp2db ---\n";
         
-        // source corresponding to CURA5 - insert if does not already exist
+        // source corresponding to LERRCP - insert if does not already exist
         $lerrcpSource = Source::getBySlug(LERRCP::SOURCE_SLUG); // DB
         if(is_null($lerrcpSource)){
             $lerrcpSource = new Source(LERRCP::SOURCE_DEFINITION_FILE);
@@ -117,6 +118,7 @@ class tmp2db implements Command {
             $test->data['birth']['date-ut'] = $line['DATE-UT'];
             $test->computeSlug();
             $curaId = Cura::gqId($datafile, $line['NUM']);
+///if($test->data['slug'] != 'geffroy-edmond-1804-07-30') continue;
             $p = Person::getBySlug($test->data['slug']); // DB
             if(is_null($p)){
                 // insert new person
@@ -146,16 +148,19 @@ class tmp2db implements Command {
                 $p->computeSlug();
                 $p->addHistory("cura $datafile tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);
-$nInsert++;
-if($nInsert == 10) exit;
-continue;
+//$nInsert++;
+//if($nInsert == 10) exit;
+//continue;
                 $p->data['id'] = $p->insert(); // DB
                 $nInsert++;
 
             }
             else{
                 // duplicate, person appears in more than one cura file
-                $p->addOccu($line['OCCU']);
+                if(!isset($matchOccus[$line['OCCU']])){
+                    throw new \Exception("Missing definition for occupation " . $line['OCCU']);
+                }
+                $p->addOccus($matchOccus[$line['OCCU']]);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
                 // Does not addIdInSource('cura') to respect the definition of Gauquelin id
