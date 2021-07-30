@@ -154,7 +154,6 @@ class history implements Command {
             echo source::execute([G5::SOURCE_DEFINITION_FILE]);
             echo occu::execute();
             
-exit;            
             foreach($filesCuraA as $datafile){
                 echo tmp2dbA::execute([$datafile, 'tmp2db', 'small']);
             }
@@ -162,6 +161,7 @@ exit;
             echo tmp2dbD10::execute(['D10', 'tmp2db', 'small']);
             echo tmp2dbE1E3::execute(['E1', 'tmp2db', 'small']);
             echo tmp2dbE1E3::execute(['E3', 'tmp2db', 'small']);
+exit;            
             echo tmp2dbMuller1083::execute(['small']);
             echo tmp2dbMuller402::execute(['small']);
             echo tmp2db100Muller402::execute(['small']);

@@ -97,11 +97,13 @@ class tmp2db100 implements Command {
                 $new['birth']['place']['cy'] = $line['CY'];
                 $new['birth']['place']['lg'] = $line['LG'];
                 $new['birth']['place']['lat'] = $line['LAT'];
-                // OCCU, OPUS, LEN not part of standard person fields
+                // OPUS, LEN not part of standard person fields
                 // are stored in addHistory()
+                self::addOccu($line, $p);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['MUID']);
                 $p->updateFields($new);
+//echo "\n<pre>"; print_r($p); echo "</pre>\n"; exit;
                 $p->computeSlug();
                 $p->addHistory("newalch muller402 tmp2db100", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);
@@ -131,6 +133,18 @@ class tmp2db100 implements Command {
         $dt = round($t2 - $t1, 5);
         $report .= "$nInsert persons inserted, $nUpdate updated ($dt s)\n";
         return $report;
+    }
+    
+    
+    private static function addOccu(&$line, $p) {
+        $occu = match($line['OCCU']){
+        	'1' => 'comedy-writer',  // 1 commediografo
+        	'2',                     // 2 scrittore
+        	'3',                     // 3 scrittore combined with other professions
+        	'5' => 'writer',         // 5 sonstige, ie something other
+        	'4' => 'poet',           // 4 poeta
+        };
+        $p->addOccus([$occu]);
     }
         
 }// end class    

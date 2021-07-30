@@ -12,7 +12,7 @@ musician;Q639669;MUS;Musicien;Musician;artist
 opera-singer;Q2865819;OPE;Chanteur d'opéra;Opera singer;musician
 painter;Q1028181;PAI;Peintre;Painter;artist
 photographer;Q33231;PHO;Photographe;Photographer;artist
-medical-doctor;Q39631;PH;Médecin;Medical doctor;
+physician;Q39631;PH;Médecin;Physician;
 politician;Q82955;PO;Politicien;Politician;
 scientist;Q901;SC;Scientifique;Scientist;
 sportsperson;Q2066131;SP;Sportif;Sportsperson;

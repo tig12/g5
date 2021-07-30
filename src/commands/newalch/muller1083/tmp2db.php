@@ -126,7 +126,7 @@ class tmp2db implements Command {
                 $new['birth']['place']['lg'] = $line['LG'];
                 $new['birth']['place']['lat'] = $line['LAT'];
                 //
-                $p->addOccu('PH');
+                $p->addOccus(['physician']);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NR']);
                 $p->updateFields($new);
@@ -185,7 +185,7 @@ class tmp2db implements Command {
                 // (Gauquelin name considered as current name)
                 $new['name']['official']['given'] = $line['GNAME'];
                 //
-                $p->addOccu('PH');
+                $p->addOccus(['physician']);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NR']);
                 $p->updateFields($new);
