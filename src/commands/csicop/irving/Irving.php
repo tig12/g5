@@ -100,28 +100,28 @@ class Irving {
         Mapping between codes used in Irving file and g5 codes
     **/
     const SPORT_IRVING_G5 = [
-        'AUTO' => 'AUT',
-        'BASE' => 'BOX',
-        'BASK' => 'BAS',
-        'BOXI' => 'BOX',
-        'FOOT' => 'FOO',
-        'GOLF' => 'GOL',
-        'GYMN' => 'GYM',
-        'HORS' => 'EQU',
-        'ICES' => 'GLA',
+        'AUTO' => 'motor-sports-competitor',
+        'BASE' => 'baseball-player',
+        'BASK' => 'basketball-player',
+        'BOXI' => 'boxer',
+        'FOOT' => 'american-football-player',
+        'GOLF' => 'golfer',
+        'GYMN' => 'gymnast',
+        'HORS' => 'equestrian',
+        'ICES' => 'winter-sports-practitioner',
         // Gauquelin AUT refers to "Auto moto"
         // The code MOTO refers to one record
         // A check on wikipedia shows that the discipline was in fact auto
         // https://fr.wikipedia.org/wiki/Cale_Yarborough
         // Associating MOTO to AUT then does not imply loss of information 
-        'MOTO' => 'AUT',
-        'RODE' => 'ROD',
-        'SKII' => 'SKI',
-        'SWIM' => 'NAT',
-        'TENN' => 'TEN',
-        'TRAC' => 'ATH',
-        'VOLL' => 'VOL',
-        'WRES' => 'LUT',
+        'MOTO' => 'motor-sports-competitor',
+        'RODE' => 'rodeo-rider',
+        'SKII' => 'skier',
+        'SWIM' => 'swimmer',
+        'TENN' => 'tennis-player',
+        'TRAC' => 'athletics-competitor',
+        'VOLL' => 'volleyball-player',
+        'WRES' => 'wrestler',
     ];
     
     // *********************** Source management ***********************

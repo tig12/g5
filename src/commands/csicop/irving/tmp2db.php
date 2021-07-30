@@ -144,7 +144,7 @@ class tmp2db implements Command {
                 $new['birth']['place']['lg'] = $line['LG'];
                 $new['birth']['place']['lat'] = $line['LAT'];
                 //
-                $p->addOccu($line['SPORT']);
+                $p->addOccus([$line['SPORT']]);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['CSID']);
                 $p->updateFields($new);
@@ -177,7 +177,7 @@ class tmp2db implements Command {
                         $datesReport .= "Irving CSID {$line['CSID']}\t $csiday {$line['FNAME']} - {$line['GNAME']}\n";
                     }
                 }
-                $p->addOccu($line['SPORT']);
+                $p->addOccus([$line['SPORT']]);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['CSID']);
                 $p->updateFields($new);
