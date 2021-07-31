@@ -10,7 +10,7 @@ authors:
   - Nick Kollerstrom
   - Thierry Graff
 description: |
-  List of 234 falous women
+  List of 234 famous women
   Comes from Astro-Forschungs-Daten 3, Arno Müller, Waldmohr, 1993
   Text file built by Nick Kollerstrom (scan) and Thierry Graff (OCR and corrections)
   Located in raw data versioned with Gauquelin5 program, see
@@ -18,4 +18,3 @@ description: |
 parents:
   - afd3-booklet
   - g5
-                                                                                                          

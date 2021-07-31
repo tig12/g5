@@ -23,14 +23,24 @@ class AFD3 {
     const TRUST_LEVEL = 4;
     
     /**
-        Path to the yaml file containing the characteristics of the source.
-        Relative to directory data/model
+        Path to the yaml file containing the characteristics of the source describing file
+        data/raw/muller/afd3-women/muller-afd3-women.txt
+        Relative to directory data/model/source
     **/
-    const SOURCE_DEFINITION = 'source' . DS . 'booklet' . DS . 'AFD' . DS . 'muller-afd3.yml';
+    const LIST_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd3-women-list.yml';
 
-    /** Slug of the group in db **/
-    const GROUP_SLUG = 'muller234women';
-
+    /** Slug of source muller-afd3-women.txt **/
+    const LIST_SOURCE_SLUG = 'afd3';
+    
+    /**
+        Path to the yaml file containing the characteristics of Müller's booklet AFD3.
+        Relative to directory data/model/source
+    **/
+    const BOOKLET_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd3-women-booklet.yml';
+    
+    /** Slug of source Astro-Forschungs-Daten vol 3 **/
+    const BOOKLET_SOURCE_SLUG = 'afd3-booklet';
+    
     /**
         Limit of fields in the raw fields ; example for beginning of first line:
         001 ADAM, Juliette *LAMBER                      04.10.1836 23.00       LMT  F   Verberie (Oise)
@@ -49,7 +59,6 @@ class AFD3 {
         112,
         120,
         129,
-        132,
         135,
         144,
         147,
@@ -69,7 +78,6 @@ class AFD3 {
         'LAT',
         'LG',
         'OCCU',
-        'BERUF',
         'BOOKS',
         'SOURCE',
         'GQ',
@@ -89,7 +97,6 @@ class AFD3 {
         'LAT',
         'LG',
         'OCCU',
-        'BERUF',
         'BOOKS',
         'SOURCE',
         'GQ',

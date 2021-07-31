@@ -21,7 +21,7 @@ class Muller402 {
     /**
         Path to the yaml file containing the characteristics of the source describing file
         data/raw/newalchemypress.com/05-muller-writers/5muller_writers.csv
-        Relative to directory data/model
+        Relative to directory data/model/source
     **/
     const LIST_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd1-writers-list-402.yml';
 

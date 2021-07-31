@@ -91,7 +91,6 @@ class Occupation {
         foreach($nodes as $slug => $node){
             self::$allAncestors[$slug] = $node->getReachableAsStrings();
         }
-//echo "\n<pre>"; print_r(self::$allAncestors); echo "</pre>\n"; exit;
         return self::$allAncestors;
     }
     

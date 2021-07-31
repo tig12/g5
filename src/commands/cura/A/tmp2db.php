@@ -51,7 +51,6 @@ class tmp2db implements Command {
         }
         
         $datafile = $params[0];
-//echo "datafile = $datafile\n";
         
         $report = "--- $datafile tmp2db ---\n";
         
