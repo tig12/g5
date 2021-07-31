@@ -9,5 +9,5 @@ type: computer program
 author: Thierry Graff
 description: |
   Computer program developped to build the Open Gauquelin Database (current site).
-  The code is hosted on https://github.com/tig12/gauquelin5
-  Documentation is located at https://tig12.github.io/gauquelin5
+  <br>Documentation is located at <a href="https://tig12.github.io/gauquelin5">tig12.github.io/gauquelin5</a>
+  <br>Source code can be downloaded from <a href="https://github.com/tig12/gauquelin5">github.com/tig12/gauquelin5</a>

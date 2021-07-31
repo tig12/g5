@@ -56,9 +56,9 @@ class tmp2db implements Command {
         $lerrcpSource = new Source(LERRCP::SOURCE_DEFINITION_FILE);
         
         // source corresponding LERRCP booklet of D6 file
-        $source = Source::getBySlug(Cura::datafile2bookletSourceSlug($datafile)); // DB
+        $source = Source::getBySlug(LERRCP::datafile2bookletSourceSlug($datafile)); // DB
         if(is_null($source)){
-            $source = Cura::getBookletSourceOfDatafile($datafile);
+            $source = LERRCP::getBookletSourceOfDatafile($datafile);
             $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }

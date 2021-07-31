@@ -15,7 +15,7 @@ use g5\commands\cura\CuraRouter;
 
 // for information sources
 use g5\commands\gauquelin\LERRCP;
-use g5\commands\muller\Muller;
+use g5\commands\muller\AFD;
 use g5\commands\newalch\Newalch;
 use g5\commands\cura\Cura;
 use g5\G5;
@@ -146,10 +146,9 @@ class history implements Command {
             echo "***  Fill database  ***\n";
             echo "***********************\n";
             
-/* 
             echo dbcreate::execute([]);
             echo source::execute([LERRCP::SOURCE_DEFINITION_FILE]);
-            echo source::execute([Muller::AFD_SOURCE_DEFINITION_FILE]);
+            echo source::execute([AFD::SOURCE_DEFINITION_FILE]);
             echo source::execute([Cura::SOURCE_DEFINITION_FILE]);
             echo source::execute([Newalch::SOURCE_DEFINITION_FILE]);
             echo source::execute([G5::SOURCE_DEFINITION_FILE]);
@@ -159,7 +158,6 @@ class history implements Command {
                 echo tmp2dbA::execute([$datafile, 'tmp2db', 'small']);
             }
             echo tmp2dbD6::execute(['D6', 'tmp2db', 'small']);
-*/
             echo tmp2dbD10::execute(['D10', 'tmp2db', 'small']);
             echo tmp2dbE1E3::execute(['E1', 'tmp2db', 'small']);
             echo tmp2dbE1E3::execute(['E3', 'tmp2db', 'small']);

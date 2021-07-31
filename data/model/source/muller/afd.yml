@@ -9,11 +9,11 @@ type: booklets
 author: Arno Müller
 description: |
   Five booklets self-published by Arno Müller, 1991 - 1994
-  5 volumes containing birth times
-    1 : 402 Italian writers
-    2 : 612 Famous Men
-    3 : 234 Famous Women
-    4 : 1145 members of German dynasties
-    5 : 1083 members of the French Academie de Medicine
-  (total 402+612+234+1145+1083 = 3476)
-  In fact, contains more, these are the numbers of published groups.
+  <br>5 volumes containing birth times
+  <ol class="margin0">
+    <li>402 Italian writers</li>
+    <li>612 Famous Men</li>
+    <li>234 Famous Women</li>
+    <li>1145 members of German dynasties</li>
+    <li>1083 members of the French Academie de Medicine</li>
+  </ol>

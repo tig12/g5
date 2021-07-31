@@ -11,9 +11,8 @@ authors:
   - Edith Lührs 
 description: |
   Booklet Astro-Forschungs-Daten 3, Arno Müller, Waldmohr, 1993
-  76 pages
-  Self-edited by Arno Müller.
-  Contains a list of 234 famous women.
-  Scans of original documents located at https://g5.tig12.net/auxiliary/1993-muller-women/
+  <br>76 pages, self-edited by Arno Müller.
+  <br>Contains a list of 234 famous women.
+  <br>Scans of the original document can be downloaded from <a href="https://g5.tig12.net/auxiliary/1993-muller-women/">g5.tig12.net</a>.
 parents: 
   - afd

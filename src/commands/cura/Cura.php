@@ -8,9 +8,10 @@
 namespace g5\commands\cura;
 
 use g5\Config;
+use tiglib\arrays\csvAssociative;
 use g5\model\Source;
 use g5\model\Group;
-use tiglib\arrays\csvAssociative;
+use g5\commands\gauquelin\LERRCP;
 
 class Cura {
     
@@ -40,6 +41,7 @@ class Cura {
             - nb of records stored by g5
             - label on Cura web site
             - explanation of the difference between Cura and g5 numbers
+        TODO Titles should be removed, as they already are in LERRCP::LERRCP_INFOS.
     **/
     const CURA_CLAIMS = [
         'A1' =>  [2088, 2087, '2088 sports champions', 'Y, see <a href="http://cura.free.fr/gauq/902gdA1y.html">Cura web site</a>'],
@@ -58,38 +60,16 @@ class Cura {
         URLs of the raw files in Cura web site
     **/
     const CURA_URLS = [
-        'A1' =>  'http://cura.free.fr/gauq/902gdA1y.html',
-        'A2' =>  'http://cura.free.fr/gauq/902gdA2y.html',
-        'A3' =>  'http://cura.free.fr/gauq/902gdA3y.html',
-        'A4' =>  'http://cura.free.fr/gauq/902gdA4y.html',
-        'A5' =>  'http://cura.free.fr/gauq/902gdA5y.html',
-        'A6' =>  'http://cura.free.fr/gauq/902gdA6y.html',
-        'D6' =>  'http://cura.free.fr/gauq/902gdD6.html',
-        'D10' => 'http://cura.free.fr/gauq/902gdD10.html',
-        'E1' =>  'http://cura.free.fr/gauq/902gdE1.html',
-        'E3' =>  'http://cura.free.fr/gauq/902gdE3.html',
-    ];
-    
-    /** 
-        Informations about the different LERRCP booklets.
-        Each line contains:
-            - date of publication
-            - nb of pages (empty sting when unknown)
-            - array of author names
-        Source http://cura.free.fr/gauq/902gdG.html
-        For documentation purpose only.
-    **/
-    const LERRCP_INFOS = [
-        'A1' =>  ['1970-04', '',  ['Michel Gauquelin', 'Françoise Gauquelin']],
-        'A2' =>  ['1970-05', 150, ['Michel Gauquelin', 'Françoise Gauquelin']],
-        'A3' =>  ['1970-07', '',  ['Michel Gauquelin', 'Françoise Gauquelin']],
-        'A4' =>  ['1970-11', 119, ['Michel Gauquelin', 'Françoise Gauquelin']],
-        'A5' =>  ['1970-12', '',  ['Michel Gauquelin', 'Françoise Gauquelin']],
-        'A6' =>  ['1971-03', 123, ['Michel Gauquelin', 'Françoise Gauquelin']],
-        'D6' =>  ['1979-09', '',  ['Michel Gauquelin', 'Françoise Gauquelin']],
-        'D10' => ['1982-01', '',  ['Michel Gauquelin']],
-        'E1' =>  ['1984',    '',  ['Michel Gauquelin']],
-        'E3' =>  ['1984',    '',  ['Michel Gauquelin']],
+        'A1' =>  'https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdA1y.html',
+        'A2' =>  'https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdA2y.html',
+        'A3' =>  'https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdA3y.html',
+        'A4' =>  'https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdA4y.html',
+        'A5' =>  'https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdA5y.html',
+        'A6' =>  'https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdA6y.html',
+        'D6' =>  'https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdD6.html',
+        'D10' => 'https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdD10.html',
+        'E1' =>  'https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdE1.html',
+        'E3' =>  'https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdE3.html',
     ];
     
     // *********************** Source management ***********************
@@ -103,14 +83,6 @@ class Cura {
     }
     
     /**
-        Computes slug of the source corresponding to cura page of a datafile.
-        Ex: for datafile 'A6', return 'a6-booklet'
-    **/
-    public static function datafile2bookletSourceSlug($datafile) {
-        return self::datafile2sourceSlug($datafile) . '-booklet';
-    }
-    
-    /**
         Returns a Source object for one data file of cura web site.
         @param  $datafile : string like 'A1'
     **/
@@ -121,33 +93,11 @@ class Cura {
         $source->data['name'] = "CURA5 file $datafile";
         $source->data['type'] = 'file';
         $source->data['authors'] = ['Patrice Guinard'];
-        $source->data['description'] = 'Web page ' . self::CURA_URLS[$datafile]
-            . "\nDescribed by Cura as " . self::CURA_CLAIMS[$datafile][2];
-        $source->data['parents'][] = self::datafile2bookletSourceSlug($datafile);
-        $source->data['parents'][] = self::SOURCE_SLUG;
-        return $source;
-    }
-    
-    /**
-        Returns a Source object corresponding to original Gauquelin booklet
-        for one data file of cura web site.
-        @param  $datafile : string like 'A1'
-    **/
-    public static function getBookletSourceOfDatafile($datafile): Source {
-        $source = new Source();      
-        $source->data['slug'] = self::datafile2bookletSourceSlug($datafile);
-        $source->data['name'] = "LERRCP $datafile";
-        $source->data['type'] = 'booklet';
-        $source->data['authors'] = self::LERRCP_INFOS[$datafile][2];
-        $serie = substr($datafile, 0, 1);
-        $volume = substr($datafile, 1);
-        $source->data['description'] = "LERRCP Serie $serie, vol $volume: "
-            . self::CURA_CLAIMS[$datafile][2]
-            . "\nPublished in " . self::LERRCP_INFOS[$datafile][0];
-        if(self::LERRCP_INFOS[$datafile][1] != ''){
-            $source->data['description'] .= ' (' . self::LERRCP_INFOS[$datafile][1] . ' pages)';
-        }
-        $source->data['parents'] = ['lerrcp'];
+        $pageName = substr(Cura::CURA_URLS[$datafile], strrpos(Cura::CURA_URLS[$datafile], '/') +1);
+        $source->data['description'] = "Web page containing part of Gauquelins' data published in LERRCP booklet $datafile."
+            . '<br>Original URL : <a href="' . Cura::CURA_URLS[$datafile] . '">' . $pageName . '</a>.';
+        $source->data['parents'][] = LERRCP::datafile2bookletSourceSlug($datafile);
+        $source->data['parents'][] = Cura::SOURCE_SLUG;
         return $source;
     }
     
@@ -170,7 +120,7 @@ class Cura {
         $g->data['name'] = "Gauquelin $datafile";
         $g->data['description'] = "Persons published by Gauquelins' LERRCP booklet "
             . '"' . Cura::CURA_CLAIMS[$datafile][2] . "\".";
-        $g->data['sources'] = [self::datafile2bookletSourceSlug($datafile)];
+        $g->data['sources'] = [LERRCP::datafile2bookletSourceSlug($datafile)];
         return $g;
     }
     

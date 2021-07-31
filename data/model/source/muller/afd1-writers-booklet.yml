@@ -9,11 +9,13 @@ type: booklet
 author: Arno Müller
 description: |
   Booklet Astro-Forschungs-Daten 1, Arno Müller, Waldmohr, 1991
-  54 pages
-  Self-edited by Arno Müller
-  Contains :
-    - a list of 402 Italian writers with birth date and time
-    - a list of 100 Italian writers with birth date and without birth time
-    - a list of 22 Italian writers where Müller's data differ from Gauquelins'
+  <br>54 pages, self-edited by Arno Müller
+  <br>Contains
+    <ul class="margin0">
+        <li>a list of 402 Italian writers with birth date and time</li>
+        <li>a list of 100 Italian writers with birth date and without birth time</li>
+        <li>a list of 22 Italian writers where Müller's data differ from Gauquelins'</li>
+    </ul>
+  Scans of the original document can be downloaded from <a href="https://g5.tig12.net/auxiliary/1991-muller-writers/">g5.tig12.net</a>.
 parents:
   - afd

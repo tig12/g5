@@ -24,11 +24,6 @@ The export says 3748, there is a difference of 3 that I can't explain, I marked 
 - tweak2csv : code should be factorized, available to all datafiles
               (cura, 1083MED, 4391SPO)
 
-- Handle occu in db, codes like SP+BAS => should be BAS
-- profession-codes.csv : add wd codes + Ertel codes.
-
-- Use Ertel 4391 to have more precise sport codes in D10
-
 - cura : handle all cases of unexisting raw files
 
 - Refactor g55 commands : "all" is useless

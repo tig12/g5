@@ -15,7 +15,7 @@ use g5\model\Group;
 use g5\model\Person;
 use g5\commands\newalch\Newalch;
 use g5\commands\gauquelin\LERRCP;
-use g5\commands\muller\Muller;
+use g5\commands\muller\AFD;
 
 class tmp2db implements Command {
     
@@ -53,9 +53,9 @@ class tmp2db implements Command {
         }
         
         // source corresponding to Müller's Astro-Forschungs-Daten - insert if does not already exist
-        $afdSource = Source::getBySlug(Muller::AFD_SOURCE_SLUG); // DB
+        $afdSource = Source::getBySlug(AFD::SOURCE_SLUG); // DB
         if(is_null($afdSource)){
-            $afdSource = new Source(Muller::AFD_SOURCE_DEFINITION_FILE);
+            $afdSource = new Source(AFD::SOURCE_DEFINITION_FILE);
             $afdSource->insert(); // DB
             $report .= "Inserted source " . $afdSource->data['slug'] . "\n";
         }

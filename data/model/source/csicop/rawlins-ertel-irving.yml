@@ -11,10 +11,10 @@ authors:
   - Suitbert Ertel
   - Kenneth Irving
 description: |
-  CSV version of a file sent by Kenneth Irving on 2019-12-14.
-  This file is the main information source used to add CSICOP test in Open Gauquelin database.
-  The original file was named CSICOP.DOC and contained exactly the same content as the csv file.
-  Integrated to Gauquelin5 program as data/raw/csicop/rawlins-ertel-irving/rawlins-ertel-irving.csv.
-  See https://tig12.github.io/gauquelin5/csicop.html for more informations.
+  File sent by Kenneth Irving on 2019-12-14.
+  <br>This file is the main information source used to add CSICOP test in Open Gauquelin database.
+  <br>Original file : <a href="https://g5.tig12.net/auxiliary/1979-csicop/rawlins-ertel-irving/">CSICOP.DOC</a>.
+  <br>Integration to Open Gauquelin database : <a href="https://github.com/tig12/gauquelin5/tree/master/data/raw/csicop/rawlins-ertel-irving">rawlins-ertel-irving.csv</a>.
+  <br>See <a href="https://tig12.github.io/gauquelin5/csicop.html">tig12.github.io/gauquelin5/csicop.html</a> for more informations.
 parents:
   - csicop-committee

@@ -108,7 +108,6 @@ class Source {
     public function update() {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("update source set
-            slug=?,
             name=?,
             type=?,
             authors=?,
@@ -116,9 +115,8 @@ class Source {
             isbn=?,
             description=?,
             parents=?
-            where id=?");
+            where slug=?");
         $stmt->execute([
-            $this->data['slug'],
             $this->data['name'],
             $this->data['type'],
             json_encode($this->data['authors']),
@@ -126,7 +124,7 @@ class Source {
             $this->data['isbn'],
             $this->data['description'],
             json_encode($this->data['parents']),
-            $this->data['id'],
+            $this->data['slug'],
         ]);
     }
     

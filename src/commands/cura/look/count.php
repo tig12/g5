@@ -10,6 +10,7 @@ namespace g5\commands\cura\look;
 
 use g5\Config;
 use g5\patterns\Command;
+use g5\commands\gauquelin\LERRCP;
 use g5\commands\cura\Cura;
 use g5\commands\cura\CuraRouter;
 use tiglib\arrays\csvAssociative;
@@ -64,7 +65,7 @@ class count implements Command {
             $res .= '<tr>';
             $href = Cura::CURA_URLS[$datafile];
             $res .= '<td><a href="' . $href . '">' . $datafile . '</a></td>';
-            $res .= '<td>' . Cura::LERRCP_INFOS[$datafile][0] . '</td>';
+            $res .= '<td>' . LERRCP::LERRCP_INFOS[$datafile][0] . '</td>';
             $res .= '<td>' . Cura::CURA_CLAIMS[$datafile][2] . '</td>';
             $res .= '<td class="right">' . number_format(Cura::CURA_CLAIMS[$datafile][0], 0, '.', ' ') . '</td>';
             $res .= '<td class="right bold">' . number_format($N[$datafile], 0, '.', ' ') . '</td>';

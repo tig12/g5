@@ -71,9 +71,9 @@ class tmp2db implements Command {
         }
         
         // source corresponding LERRCP booklet of current A file
-        $source = Source::getBySlug(Cura::datafile2bookletSourceSlug($datafile)); // DB
+        $source = Source::getBySlug(LERRCP::datafile2bookletSourceSlug($datafile)); // DB
         if(is_null($source)){
-            $source = Cura::getBookletSourceOfDatafile($datafile);
+            $source = LERRCP::getBookletSourceOfDatafile($datafile);
             $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
@@ -85,7 +85,6 @@ class tmp2db implements Command {
             $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
-        
         // group
         $g = Group::getBySlug(Cura::datafile2groupSlug($datafile)); // DB
         if(is_null($g)){
@@ -142,13 +141,9 @@ class tmp2db implements Command {
                     throw new \Exception("Missing definition for occupation " . $line['OCCU']);
                 }
                 $p->addOccus($matchOccus[$line['OCCU']]);
-//exit;
                 $p->computeSlug();
                 $p->addHistory("cura $datafile tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);
-//$nInsert++;
-//if($nInsert == 10) exit;
-//continue;
                 $p->data['id'] = $p->insert(); // DB
                 $nInsert++;
 

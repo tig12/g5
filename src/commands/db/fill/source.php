@@ -61,7 +61,6 @@ class source implements Command {
                 echo "Inserted source '$slug' in database from $relativePath\n";
             }
             else{
-                $source->data['id'] = $test->data['id'];
                 $source->update();
                 echo "Updated source '$slug' in database from $relativePath\n";
             }

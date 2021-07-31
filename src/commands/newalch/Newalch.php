@@ -10,6 +10,7 @@ namespace g5\commands\newalch;
 
 use g5\Config;
 use g5\model\Source;
+use g5\commands\muller\AFD;
 
 class Newalch {
     
@@ -29,43 +30,6 @@ class Newalch {
         @see https://tig12.github.io/gauquelin5/check.html
     **/
     const TRUST_LEVEL = 4;
-    
-    // *********************** Person ids ***********************
-    /**
-        Returns a unique Müller id, like "AFD5-33"
-        Unique id of a record among newalch files.
-        AFD means Astro-Forschungs-Daten
-        5 means volume 5 of AFD (volumes from 1 to 5)
-        33 is the id of the record in newalchemypress.org web site.
-        See https://tig12.github.io/gauquelin5/newalch.html for precise definition
-        @param $source      Slug of the source
-        @param $NR          Value of field NR of a record within $source
-    **/
-    public static function muId($source, $NR){
-        switch($source){
-        	case '5muller_writers': 
-        	    return '1-' . $NR;
-        	break;
-        	case '5a_muller_medics': 
-        	    return '5-' . $NR;
-        	break;
-        }
-        throw new \Exception("Invalid \$source parameter : $source");
-    }
-    
-    /**
-        Convenience method to find Müller id from Person's ids-in-source field
-        Does not handle persons published in 2 different volumes of Astro-Forschungs-Daten
-    **/
-    public static function ids_in_sources2muId($ids_in_sources){
-        if(isset($ids_in_sources['5muller_writers'])){
-            return self::muId('5muller_writers', $ids_in_sources['5muller_writers']);
-        }
-        if(isset($ids_in_sources['5a_muller_medics'])){
-            return self::muId('5a_muller_medics', $ids_in_sources['5a_muller_medics']);
-        }
-        return '';
-    }
     
     // *********************** Source management ***********************
     
