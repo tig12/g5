@@ -101,14 +101,14 @@ class tmp2db implements Command {
             $test->data['name']['given'] = $line['GNAME'];
             $test->data['birth']['date'] = $line['DATE'];
             $test->computeSlug();
-            $curaId = Cura::gqId($datafile, $line['NUM']);
+            $gqId = LERRCP::gauquelinId($datafile, $line['NUM']);
             $p = Person::getBySlug($test->data['slug']); // DB
             if(is_null($p)){
                 // insert new person
                 $p = new Person();
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
-                $p->addIdInSource($lerrcpSource->data['slug'], $curaId);
+                $p->addIdInSource($lerrcpSource->data['slug'], $gqId);
                 $new = [];
                 $new['trust'] = Cura::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
@@ -157,7 +157,7 @@ class tmp2db implements Command {
                 // does not addIdInSource($lerrcpSource) to respect the definition of Gauquelin id
                 $p->update(); // DB
                 if($reportType == 'full'){
-                    $report .= "Duplicate {$test->data['slug']} : {$p->data['ids-in-sources']['cura']} = $curaId\n";
+                    $report .= "Duplicate {$test->data['slug']} : {$p->data['ids-in-sources']['cura']} = $gqId\n";
                 }
                 $nDuplicates++;
             }

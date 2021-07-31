@@ -11,6 +11,7 @@ namespace g5\commands\newalch\muller402;
 
 use g5\G5;
 use g5\patterns\Command;
+use g5\commands\gauquelin\LERRCP;
 use g5\commands\cura\Cura;
 
 class addA6 implements Command {
@@ -272,7 +273,7 @@ class addA6 implements Command {
         foreach($rows as $row){
             $MUID = $row['MUID'];
             if(isset($match2[$MUID])){
-                $row['GQID'] = Cura::gqid('A6', $match2[$MUID]);
+                $row['GQID'] = LERRCP::gauquelinId('A6', $match2[$MUID]);
                 $nUpdate++;
             }
             $res .= implode(G5::CSV_SEP, $row) . "\n";

@@ -116,15 +116,14 @@ class tmp2db implements Command {
             $test->data['name']['given'] = $line['GNAME'];
             $test->data['birth']['date-ut'] = $line['DATE-UT'];
             $test->computeSlug();
-            $curaId = Cura::gqId($datafile, $line['NUM']);
-///if($test->data['slug'] != 'geffroy-edmond-1804-07-30') continue;
+            $gqId = LERRCP::gauquelinId($datafile, $line['NUM']);
             $p = Person::getBySlug($test->data['slug']); // DB
             if(is_null($p)){
                 // insert new person
                 $p = new Person();
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
-                $p->addIdInSource($lerrcpSource->data['slug'], $curaId);
+                $p->addIdInSource($lerrcpSource->data['slug'], $gqId);
                 $new = [];
                 $new['trust'] = Cura::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
@@ -167,7 +166,7 @@ class tmp2db implements Command {
                 $p->addHistory("cura $datafile tmp2db", $source->data['slug'], []);
                 $p->update(); // DB
                 if($reportType == 'full'){
-                    $report .= "Duplicate {$test->data['slug']} : {$p->data['ids-in-sources']['cura']} = $curaId\n";
+                    $report .= "Duplicate {$test->data['slug']} : {$p->data['ids-in-sources']['cura']} = $gqId\n";
                 }
                 $nDuplicates++;
             }

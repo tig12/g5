@@ -101,7 +101,7 @@ class tmp2db implements Command {
             $test->data['name']['given'] = $line['GNAME'];
             $test->data['birth']['date'] = $line['DATE'];
             $test->computeSlug();
-            $gqId = Cura::gqId($datafile, $line['NUM']);
+            $gqId = LERRCP::gauquelinId($datafile, $line['NUM']);
             $p = Person::getBySlug($test->data['slug']); // DB
             if(is_null($p)){
                 // insert new person

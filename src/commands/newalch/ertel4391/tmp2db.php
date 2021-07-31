@@ -14,7 +14,7 @@ use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
 use g5\commands\newalch\Newalch;
-use g5\commands\cura\Cura;
+use g5\commands\gauquelin\LERRCP;
 
 class tmp2db implements Command {
     
@@ -125,15 +125,15 @@ echo "\n<pre>"; print_r($line); echo "</pre>\n"; exit;
                 $new = [];
                 $new['notes'] = [];
                 [$curaFile, $NUM] = Ertel4391::gnr2cura($line['GNR']);
-                $curaId = Cura::gqid($curaFile, $NUM);
+                $gqId = LERRCP::gauquelinId($curaFile, $NUM);
                 $p = Person::getBySourceId($curaFile, $NUM);
                 if(is_null($p)){
-                    throw new \Exception("$curaId : try to update an unexisting person");
+                    throw new \Exception("$gqId : try to update an unexisting person");
                 }
-                if($p->data['name']['family'] == "Gauquelin-$curaId"){
+                if($p->data['name']['family'] == "Gauquelin-$gqId"){
                     $nRestoredNames++;
                     if($reportType == 'full'){
-                        $namesReport .= "\nCura NUM $curaId\t {$p->data['name']['family']}\n";
+                        $namesReport .= "\nCura NUM $gqId\t {$p->data['name']['family']}\n";
                         $namesReport .= "Müller NR {$line['NR']}\t {$line['FNAME']} - {$line['GNAME']}\n";
                     }
                 }
@@ -148,10 +148,10 @@ echo "\n<pre>"; print_r($line); echo "</pre>\n"; exit;
                 }
                 if($mulday != $curaday){
                     $nDiffDates++;
-                    $new['notes'][] = "CHECK birth day : $curaId $curaday / Ertel4391 {$line['NR']} $mulday";
+                    $new['notes'][] = "CHECK birth day : $gqId $curaday / Ertel4391 {$line['NR']} $mulday";
                     $new['to-check'] = true;
                     if($reportType == 'full'){
-                        $datesReport .= "\nCura $curaId\t $curaday {$p->data['name']['family']} - {$p->data['name']['given']}\n";
+                        $datesReport .= "\nCura $gqId\t $curaday {$p->data['name']['family']} - {$p->data['name']['given']}\n";
                         $datesReport .= "Müller NR {$line['NR']}\t $mulday {$line['FNAME']} - {$line['GNAME']}\n";
                     }
                 }

@@ -101,19 +101,18 @@ class tmp2db implements Command {
             $test->data['name']['given'] = $line['GNAME'];
             $test->data['birth']['date'] = $line['DATE'];
             $test->computeSlug();
-            $curaId = Cura::gqId($datafile, $line['NUM']);
+            $gqId = LERRCP::gauquelinId($datafile, $line['NUM']);
             $p = Person::getBySlug($test->data['slug']); // DB
             if(is_null($p)){
                 // insert new person
                 $p = new Person();
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
-                $p->addIdInSource($lerrcpSource->data['slug'], $curaId);
+                $p->addIdInSource($lerrcpSource->data['slug'], $gqId);
                 $new = [];
                 $new['trust'] = Cura::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
-//$new['occus'] = explode('+', $line['OCCU']);
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['tzo'] = $line['TZO'];
@@ -147,7 +146,6 @@ class tmp2db implements Command {
             else{
                 // duplicate, person appears in more than one cura file
                 $occus = explode('+', $line['OCCU']);
-//echo "\noccus = "; print_r($occus); echo "\n";
                 $addedOccus = [];
                 foreach($occus as $occu){
                     if(!isset($matchOccus[$occu])){
@@ -155,15 +153,13 @@ class tmp2db implements Command {
                     }
                     $addedOccus = array_merge($addedOccus, $matchOccus[$occu]);
                 }
-//echo "\naddedOccus = "; print_r($addedOccus); echo "\n";
-//exit;
                 $p->addOccus($addedOccus);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
                 // does not addIdInSource($lerrcpSource) to respect the definition of Gauquelin id
                 $p->update(); // DB
                 if($reportType == 'full'){
-                    $report .= "Duplicate {$test->data['slug']} : {$p->data['ids-in-sources']['cura']} = $curaId\n";
+                    $report .= "Duplicate {$test->data['slug']} : {$p->data['ids-in-sources']['cura']} = $gqId\n";
                 }
                 $nDuplicates++;
             }

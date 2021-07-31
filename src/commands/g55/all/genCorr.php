@@ -11,7 +11,7 @@ namespace g5\commands\g55\all;
 use g5\G5;
 use g5\Config;
 use g5\commands\g55\G55;
-use g5\commands\cura\Cura;
+use g5\commands\gauquelin\LERRCP;
 use g5\patterns\Command;
 use g5\model\Libreoffice;
 
@@ -94,7 +94,7 @@ class genCorr implements Command {
                 continue;
             }
             $curarow =& $curarows[$NUM];
-            $new['ORIG'] = Cura::gqid($origin, $NUM);
+            $new['ORIG'] = LERRCP::gauquelinId($origin, $NUM);
             // copy cura row except for NUM field
             foreach($curarow as $k => $v){
                 if($k == 'NUM'){

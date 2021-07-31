@@ -14,7 +14,7 @@ use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
 use g5\commands\newalch\Newalch;
-use g5\commands\cura\Cura;
+use g5\commands\gauquelin\LERRCP;
 use g5\commands\csicop\CSICOP;
 use g5\commands\csicop\si42\SI42;
 
@@ -160,10 +160,10 @@ class tmp2db implements Command {
                 $new['notes'] = [];
                 [$curaSourceSlug, $NUM] = Irving::gqid2curaSourceId($line['GQID']);
                 $curaFile = strtoupper($curaSourceSlug);
-                $curaId = Cura::gqid($curaFile, $NUM);
+                $gqId = LERRCP::gauquelinId($curaFile, $NUM);
                 $p = Person::getBySourceId($curaSourceSlug, $NUM); // DB
                 if(is_null($p)){
-                    throw new \Exception("$curaId : try to update an unexisting person");
+                    throw new \Exception("$gqId : try to update an unexisting person");
                 }
                 // if Cura and csicop have different birth day
                 $csiday = substr($line['DATE'], 0, 10);
@@ -171,9 +171,9 @@ class tmp2db implements Command {
                 if($csiday != $curaday){
                     $nDiffDates++;
                     $new['to-check'] = true;
-                    $new['notes'][] = "CHECK birth day : $curaId $curaday / CSID {$line['CSID']} $csiday";
+                    $new['notes'][] = "CHECK birth day : $gqId $curaday / CSID {$line['CSID']} $csiday";
                     if($reportType == 'full'){
-                        $datesReport .= "\nCura $curaId\t $curaday {$p->data['name']['family']} - {$p->data['name']['given']}\n";
+                        $datesReport .= "\nCura $gqId\t $curaday {$p->data['name']['family']} - {$p->data['name']['given']}\n";
                         $datesReport .= "Irving CSID {$line['CSID']}\t $csiday {$line['FNAME']} - {$line['GNAME']}\n";
                     }
                 }

@@ -16,6 +16,7 @@ namespace g5\commands\cura\A;
 use g5\G5;
 use g5\model\DB5;
 use g5\patterns\Command;
+use g5\commands\gauquelin\LERRCP;
 use g5\commands\cura\Cura;
 use g5\commands\cura\CuraNames;
 use tiglib\arrays\sortByKey;
@@ -294,7 +295,7 @@ class raw2tmp implements Command {
     // ******************************************************
     /**  @return String like 'Gauquelin-A1-243' **/
     private static function computeReplacementName($datafile, $NUM){
-        return 'Gauquelin-' . Cura::gqid($datafile, $NUM);
+        return 'Gauquelin-' . LERRCP::gauquelinId($datafile, $NUM);
     }
     
     // ******************************************************

@@ -12,7 +12,7 @@ namespace g5\commands\g55\all;
 use g5\G5;
 use g5\Config;
 use g5\commands\g55\G55;
-use g5\commands\cura\Cura;
+use g5\commands\gauquelin\LERRCP;
 use g5\patterns\Command;
 use g5\model\Libreoffice;
 
@@ -86,7 +86,7 @@ class genOrig implements Command {
                 continue;
             }
             $curaRow =& $curarows[$NUM];                        
-            $new['ORIG'] = Cura::gqid($origin, $NUM);
+            $new['ORIG'] = LERRCP::gauquelinId($origin, $NUM);
             $new['FNAME'] = $g55row['FAMILY_55'] != '' ? $g55row['FAMILY_55'] : $curaRow['FNAME'];
             $new['GNAME'] = $g55row['GIVEN_55'] != '' ? $g55row['GIVEN_55'] : $curaRow['GNAME'];
             $new['OCCU'] = $g55row['OCCU_55'] != '' ? $g55row['OCCU_55'] : $curaRow['OCCU'];

@@ -10,11 +10,10 @@ authors:
   - Nick Kollerstrom
   - Thierry Graff
 description: |
-  List of 234 famous women
-  Comes from Astro-Forschungs-Daten 3, Arno Müller, Waldmohr, 1993
-  Text file built by Nick Kollerstrom (scan) and Thierry Graff (OCR and corrections)
-  Located in raw data versioned with Gauquelin5 program, see
+  List of 234 famous women, from Astro-Forschungs-Daten 3, Arno Müller, Waldmohr, 1993
+  Text file built by Nick Kollerstrom (scan) and Thierry Graff (OCR and corrections), located in raw data versioned with Gauquelin5 program, see
   https://github.com/tig12/gauquelin5/tree/master/data/raw/muller/afd3-women
+  Scans of original documents are located at https://g5.tig12.net/auxiliary/1993-muller-women/
 parents:
   - afd3-booklet
   - g5

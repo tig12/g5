@@ -146,6 +146,7 @@ class history implements Command {
             echo "***  Fill database  ***\n";
             echo "***********************\n";
             
+/* 
             echo dbcreate::execute([]);
             echo source::execute([LERRCP::SOURCE_DEFINITION_FILE]);
             echo source::execute([Muller::AFD_SOURCE_DEFINITION_FILE]);
@@ -158,6 +159,7 @@ class history implements Command {
                 echo tmp2dbA::execute([$datafile, 'tmp2db', 'small']);
             }
             echo tmp2dbD6::execute(['D6', 'tmp2db', 'small']);
+*/
             echo tmp2dbD10::execute(['D10', 'tmp2db', 'small']);
             echo tmp2dbE1E3::execute(['E1', 'tmp2db', 'small']);
             echo tmp2dbE1E3::execute(['E3', 'tmp2db', 'small']);
