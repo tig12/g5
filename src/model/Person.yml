@@ -29,7 +29,7 @@ name:
     given:
   nobiliary-particle:       # de d' di del von...
   fame:                     # stage, scene
-  # fame-full is experimental - may be removed - see afd3 234 women
+# fame-full is experimental - may be removed - see afd3 234 women
   fame-full:                # stage, scene, when family / given names are differentiated
     family: 
     given: 

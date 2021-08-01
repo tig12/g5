@@ -17,6 +17,7 @@ class Occupation {
     const DEFINITION_FILES = [
         'cura5.csv',
         'gauq-ertel-wd.csv',
+        'general.csv',
     ];
     
     /** Stores the data of an Occupation object **/

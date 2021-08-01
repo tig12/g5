@@ -33,10 +33,5 @@ tennis-player;Q10833314;TEN;TENN;Joueur de tennis;Tennis player;sportsperson;I
 athletics-competitor;Q11513337;ATH;TRAC+TRAV;Athléte;Athletics competitor;sportsperson;I
 volleyball-player;Q15117302;VOL;VOLL;Joueur de volley-ball;Volleyball player;sportsperson;G
 weightlifter;Q13381376;HAL;WEIG;Haltérophile;Weightlifter;sportsperson;I
-winter-sports-practitioner;Q20965770;GLA;ICES;Pratiquant de sports d’hiver;Winter-sports;sportsperson;
+winter-sports-practitioner;Q20965770;GLA;ICES;Pratiquant de sports d’hiver;Winter sports practitionner;sportsperson;
 wrestler;Q13474373;LUT;WRES;Lutteur (catch);Wrestler;sportsperson;I
-;;;;;;;
-canoeist;Q13382566;;;Canoëiste;Canoeist;sportsperson;I
-kayaker;Q16004471;;;Kayakeur;Kayaker;sportsperson;I
-comedy-writer;Q11914886;;;Auteur de comédies;Comedy writer;writer;
-poet;Q49757;;;Poète;Poet;writer+artist;

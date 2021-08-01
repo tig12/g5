@@ -2,6 +2,7 @@
 /******************************************************************************
     
     Fills table occu (occupations) from csv files located in data/model/occu
+    Does not fill field N (nb of persons with this occupation)
     
     @license    GPL
     @history    2021-07-28 20:59:37+02:00, Thierry Graff : Creation
