@@ -14,7 +14,7 @@ use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
 use g5\commands\newalch\Newalch;
-use g5\commands\cura\Cura;
+use g5\commands\muller\AFD;
 
 class tmp2db100 implements Command {
     
@@ -102,8 +102,9 @@ class tmp2db100 implements Command {
                 self::addOccu($line, $p);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['MUID']);
+                $mullerId = AFD::mullerId($source->data['slug'], $line['MUID']);
+                $p->addIdInSource(AFD::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
-//echo "\n<pre>"; print_r($p); echo "</pre>\n"; exit;
                 $p->computeSlug();
                 $p->addHistory("newalch muller402 tmp2db100", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);
@@ -115,6 +116,8 @@ class tmp2db100 implements Command {
                 // person already in Gauquelin data
                 $test->addSource($source->data['slug']);
                 $test->addIdInSource($source->data['slug'], $line['MUID']);
+                $mullerId = AFD::mullerId($source->data['slug'], $line['MUID']);
+                $test->addIdInSource(AFD::SOURCE_SLUG, $mullerId);
                 // TODO see if some fields can be updated (if Müller more precise than Gauquelin)
                 $updatedValues = [];
                 $test->addHistory("newalch muller402 tmp2db100", $source->data['slug'], $updatedValues);

@@ -10,7 +10,7 @@ authors:
   - Nick Kollerstrom
   - Thierry Graff
 description: |
-  List of 100 Italian writers without birth time coming from Astro-Forschungs-Daten 1, Arno Müller, Waldmohr, 1991 - pp 25 - 27
+  List of 100 Italian writers without birth time, coming from Astro-Forschungs-Daten 1, pp 25 - 27
   <br>Text file built by Nick Kollerstrom (scan) and Thierry Graff (OCR and corrections)
   <br>Integration to Open Gauquelin database : <a href="https://github.com/tig12/gauquelin5/blob/master/data/raw/newalchemypress.com/05-muller-writers/muller-afd1-100-writers.txt">muller-afd1-100-writers.txt</a>
   <br>Scans of original document can be downloaded from <a href="https://g5.tig12.net/auxiliary/1993-muller-women/">g5.tig12.net</a>

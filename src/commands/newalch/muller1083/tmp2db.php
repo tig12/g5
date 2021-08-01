@@ -129,6 +129,8 @@ class tmp2db implements Command {
                 $p->addOccus(['physician']);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NR']);
+                $mullerId = AFD::mullerId($source->data['slug'], $line['NR']);
+                $p->addIdInSource(AFD::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 $p->addHistory("newalch muller1083 tmp2db", $source->data['slug'], $new);
@@ -188,6 +190,8 @@ class tmp2db implements Command {
                 $p->addOccus(['physician']);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NR']);
+                $mullerId = AFD::mullerId($source->data['slug'], $line['NR']);
+                $p->addIdInSource(AFD::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 $p->addHistory("cura muller1083 tmp2db", $source->data['slug'], $new);

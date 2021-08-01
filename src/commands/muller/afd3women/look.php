@@ -11,7 +11,7 @@
     @license    GPL
     @history    2021-04-11, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\commands\muller\afd3;
+namespace g5\commands\muller\afd3women;
 
 use g5\patterns\Command;
 use g5\model\DB5;
@@ -124,7 +124,7 @@ class look implements Command {
         $N_gauq = 0; // total number of lines supposed to be in Gauquelin data
         $N_nogauq = 0; // total number of lines not supposed to be in Gauquelin data
         
-        // Ambiguous cases fixed by hand from previous execution
+        // Ambiguous cases fixed by hand from previous executions
         $match = [
             '011' => 'A1-129', // AURIOL Jacqueline *DOUET
             '018' => 'A6-72',  // BEAUVOIR Simone DE

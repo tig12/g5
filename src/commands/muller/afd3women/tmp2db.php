@@ -5,7 +5,7 @@
     @license    GPL
     @history    2021-07-31 07:27:19+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace g5\commands\newalch\muller402;
+namespace g5\commands\muller\afd3women;
 
 use g5\patterns\Command;
 use g5\DB5;
@@ -18,7 +18,7 @@ class tmp2db implements Command {
     
     const REPORT_TYPE = [
         'small' => 'Echoes the number of inserted / updated rows',
-        'full'  => 'Lists details of names and dates restoration on A6',
+        'full'  => 'Lists details of names and dates restoration on Gauquelin files',
     ];
     
     /**
@@ -40,7 +40,7 @@ class tmp2db implements Command {
             return "INVALID PARAMETER : $reportType - Possible values :\n" . $msg;
         }
         
-        $report = "--- Muller234women tmp2db ---\n";
+        $report = "--- afd3women tmp2db ---\n";
         
         if($reportType == 'full'){
             $namesReport = '';
@@ -78,16 +78,15 @@ class tmp2db implements Command {
         $nUpdate = 0;
         $nRestoredNames = 0;
         $nDiffDates = 0;
-        // both arrays share the same order of elements,
-        // so they can be iterated in a single loop
-        $lines = Muller402::loadTmpFile();
-        $linesRaw = Muller402::loadTmpRawFile();
+        
+        $lines = AFD3::loadTmpFile();
         $N = count($lines);
         $t1 = microtime(true);
         for($i=0; $i < $N; $i++){
             $line = $lines[$i];
-            $lineRaw = $linesRaw[$i];
-            if($line['GQID'] == ''){
+            $muid = $line['MUID'];
+echo "\n<pre>"; print_r($line); echo "</pre>\n"; exit;
+            if(!isset(AFD3::MU_GQ[$muid])){
                 // Person not in Gauquelin data
                 $p = new Person();
                 $new = [];

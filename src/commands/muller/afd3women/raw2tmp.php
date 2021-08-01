@@ -6,7 +6,7 @@
     @license    GPL
     @history    2021-04-11, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\commands\muller\afd3;
+namespace g5\commands\muller\afd3women;
 
 use g5\G5;
 use g5\Config;

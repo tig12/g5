@@ -8,7 +8,8 @@ slug: afd1
 type: file
 author: Nick Kollerstrom
 description: |
-  Excel file containing a list of 402 Italian writers, made available online by Nick Kollerstrom.
+  Excel file containing a list of 402 Italian writers, coming from Astro-Forschungs-Daten 1.
+  <br>Made available online by Nick Kollerstrom.
   <br>Original URL : <a href="https://newalchemypress.com/gauquelin/gauquelin_docs/5muller_writers.xlsx">5muller_writers.xlsx</a>.
   <br>Integration to Open Gauquelin database : <a href="https://github.com/tig12/gauquelin5/blob/master/data/raw/newalchemypress.com/05-muller-writers/5muller_writers.csv">5muller_writers.csv</a>
   <br>More information about this file : <a href="https://newalchemypress.com/gauquelin/research5.php">newalchemypress.com</a> and <a href="https://tig12.github.io/gauquelin5/newalch-muller402.html">tig12.github.io</a>.

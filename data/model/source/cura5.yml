@@ -9,9 +9,9 @@ slug: cura5
 type: website
 author: Patrice Guinard
 description: |
-  The Open Gauquelin Database (current site) uses version 5 of CURA data.
+  Web site containing Gauquelin data.
   <br>Since November 2020, Cura database became closed data. Data published after this date on Cura web site are not used by the Open Gauquelin Database.
-  <br>Version 5 of Cura data is available through 
+  <br>The Open Gauquelin Database uses version 5 of Cura data, available through 
   <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/17archg.html">archive.org</a>
 parents:
   - lerrcp

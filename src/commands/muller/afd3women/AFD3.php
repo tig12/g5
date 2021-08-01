@@ -6,7 +6,7 @@
     @license    GPL
     @history    2020-05-15 ~22h30+02:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\commands\muller\afd3;
+namespace g5\commands\muller\afd3women;
 
 use g5\Config;
 use g5\model\DB5;
@@ -41,6 +41,9 @@ class AFD3 {
     /** Slug of source Astro-Forschungs-Daten vol 3 **/
     const BOOKLET_SOURCE_SLUG = 'afd3-booklet';
     
+    /** Slug of the group in db **/
+    const GROUP_SLUG = 'muller-afd3-women';
+
     /**
         Limit of fields in the raw fields ; example for beginning of first line:
         001 ADAM, Juliette *LAMBER                      04.10.1836 23.00       LMT  F   Verberie (Oise)

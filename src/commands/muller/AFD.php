@@ -21,8 +21,14 @@ class AFD {
     const SOURCE_SLUG = 'afd';
     
     /**
+        Trust level for data coming from Astro-Forschungs-Daten booklets.
+        @see https://tig12.github.io/gauquelin5/check.html
+    **/
+    const TRUST_LEVEL = 4;
+    
+    /**
         AFD means Astro-Forschungs-Daten
-        Returns a unique Müller id, like "5-33"
+        Returns a unique Müller id, like "M5-33"
         Unique id of a record among Müller's files.
         5 means volume 5 of AFD (volumes from 1 to 5)
         33 is the id of the record within this volume.
@@ -35,7 +41,7 @@ class AFD {
             throw new \Exception("INVALID SOURCE: $source");
         }
         $tmp = str_replace('afd', '', $source);
-        return $tmp . '-' . $NR;
+        return 'M' . $tmp . '-' . $NR;
     }
     
     // *********************** Person ids ***********************

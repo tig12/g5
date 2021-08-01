@@ -14,6 +14,7 @@ use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
 use g5\commands\newalch\Newalch;
+use g5\commands\muller\AFD;
 use g5\commands\gauquelin\LERRCP;
 
 class tmp2db implements Command {
@@ -112,6 +113,8 @@ class tmp2db implements Command {
                 $p->addOccus(['writer']);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['MUID']);
+                $mullerId = AFD::mullerId($source->data['slug'], $line['MUID']);
+                $p->addIdInSource(AFD::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 $p->addHistory("newalch muller402 tmp2db", $source->data['slug'], $new);
@@ -160,6 +163,8 @@ class tmp2db implements Command {
                 $p->addOccus(['writer']);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['MUID']);
+                $mullerId = AFD::mullerId($source->data['slug'], $line['MUID']);
+                $p->addIdInSource(AFD::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 $p->addHistory("cura muller402 tmp2db", $source->data['slug'], $new);
