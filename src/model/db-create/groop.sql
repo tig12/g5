@@ -6,6 +6,7 @@ create table groop (
     id              serial primary key,
     slug            varchar(255) unique not null,
     name            varchar(255) unique not null,
+    n               integer not null default 0,     -- nb of persons in this groop
     description     text,
     sources         jsonb,
     parents         jsonb

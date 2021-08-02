@@ -9,10 +9,15 @@ slug:
 
 name:
 
+'n': 0
+
 description: |
 
+# array of source slugs
 sources: []
 
+# array of group slugs
 parents: []
 
+# array of person ids
 members: []

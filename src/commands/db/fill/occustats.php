@@ -38,11 +38,7 @@ class occustats implements Command {
                     $N[$ancestor]++;
                 }
             }
-//break;
-//echo "\n<pre>"; print_r($N); echo "</pre>\n"; exit;
         }
-        
-//exit;
         //
         // insert
         //

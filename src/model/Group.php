@@ -25,7 +25,7 @@ class Group{
         $this->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Group.yml'));
     }
     
-    // *********************** Get *******************************
+    // *********************** Get ***********************
     
     /**
         Creates an object of type Group from storage, using its slug,
@@ -42,11 +42,13 @@ class Group{
         }
         $g = new Group();
         $g->data = $res;
+        $g->data['sources'] = json_decode($res['sources'], true);
+        $g->data['parents'] = json_decode($res['parents'], true);
         $g->data['members'] = [];
         return $g;
     }
     
-    // *********************** CRUD *******************************
+    // *********************** CRUD ***********************
     
     /**
         Inserts a group in storage.
@@ -58,13 +60,16 @@ class Group{
         $stmt = $dblink->prepare("insert into groop(
             slug,
             name,
+            n,
             description,
             sources,
             parents
-            ) values(?,?,?,?,?) returning id");
+            ) values(?,?,?,?,?,?) returning id");
+        $this->data['n'] = count($this->data['members']);
         $stmt->execute([
             $this->data['slug'],
             $this->data['name'],
+            $this->data['n'],
             $this->data['description'],
             json_encode($this->data['sources']),
             json_encode($this->data['parents']),
@@ -78,17 +83,6 @@ class Group{
     }
     
     /**
-        Inserts a the associations between a group and its members in storage (does not insert the persons).
-    **/
-    public function insertMembers() {
-        $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("insert into person_groop(id_person,id_groop) values(?,?)");
-        foreach($this->data['members'] as $pid){
-            $stmt->execute([$pid, $this->data['id']]);
-        }
-    }
-    
-    /**
         Updates a group in storage.
         @throws \Exception if trying to update an unexisting group
     **/
@@ -97,13 +91,16 @@ class Group{
         $stmt = $dblink->prepare("update groop set
             slug=?,
             name=?,
+            n=?,
             description=?,
             sources=?,
             parents=?
             where id=?");
+        $this->data['n'] = count($this->data['members']);
         $stmt->execute([
             $this->data['slug'],
             $this->data['name'],
+            $this->data['n'],
             $this->data['description'],
             json_encode($this->data['sources']),
             json_encode($this->data['parents']),
@@ -112,14 +109,67 @@ class Group{
         $this->updateMembers();
     }
     
+    // *********************** Members ***********************
+    
+    /** 
+        Fills members with objects of type Person
+        @param $force If true, members computation will be done even if it was already done.
+    **/
+    public function computeMembers(bool $force=false){
+        if($force === false && $this->membersComputed === true){
+            return;
+        }
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare("select * from person where id in(select id_person from person_groop where id_groop=?)");
+        $stmt->execute([$this->data['id']]);
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $this->data['members'] = [];
+        foreach($rows as $row){
+            $this->data['members'][] = Person::row2person($row);
+        }
+        $this->data['n'] = count($this->data['members']);
+        $this->membersComputed = true;
+    }
+    
+    /** 
+        Adds a person id in $this->members
+        (does not insert in database).
+        @param  $entry Person id
+    **/
+    public function addMember($entry){
+        $this->data['members'][] = $entry;
+        $this->data['n']++;
+    }
+    
     /**
-        Updates the associations between the group and its members in storage.
+        Inserts a the associations between a group and its members in database
+        (does not insert the persons).
+        If trying to insert a member already associated with the group in database,
+        insertion is silently ignored.
+    **/
+    public function insertMembers() {
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare("insert into person_groop(id_person,id_groop) values(?,?)");
+        $this->data['members'] = array_unique($this->data['members']);
+        foreach($this->data['members'] as $pid){
+            try{
+                $stmt->execute([$pid, $this->data['id']]);
+            }
+            catch(Exception $e){
+                // do nothing
+            }
+        }
+    }
+    
+    /**
+        Updates the associations between the group and its members in database.
         @throws \Exception if trying to update an unexisting group
     **/
     public function updateMembers() {
         $dblink = DB5::getDbLink();
-        $dblink->exec("delete from person_groop where id_groop='" . $dblink->quote($this->data['id']) . "'");
+        $dblink->exec("delete from person_groop where id_groop=" . $this->data['id']);
         $stmt = $dblink->prepare("insert into person_groop(id_person,id_groop) values(?,?)");
+        $this->data['members'] = array_unique($this->data['members']);
         foreach($this->data['members'] as $pid){
             $stmt->execute([$pid, $this->data['id']]);
         }
@@ -131,36 +181,12 @@ class Group{
     **/
     public function deleteMembers() {
         $dblink = DB5::getDbLink();
-        $dblink->exec("delete from person_groop where id_groop=" . $dblink->quote($this->data['id']));
+        $dblink->exec("delete from person_groop where id_groop=" . $this->data['id']);
         $this->data['members'] = [];
+        $this->data['n'] = 0;
     }
     
-    // *********************** Fields *******************************
-    
-    public function addMember($entry){
-        $this->data['members'][] = $entry;
-    }
-    
-    /** 
-        Fills members with objects of type Person
-        @param $force If true, members computation will be done even if it was already done.
-    **/
-    public function computeMembers(bool $force=false){
-        if($force === false && $this->membersComputed === true){
-            return;
-        }
-        $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("select * from person where id in(select id_person from person_groop where id_groop    =?)");
-        $stmt->execute([$this->data['id']]);
-        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        $this->data['members'] = [];
-        foreach($rows as $row){
-            $this->data['members'][] = Person::row2person($row);
-            $this->membersComputed = true;
-        }
-    }
-    
-    // *********************** Export *******************************
+    // *********************** Export ***********************
     
     /** 
         Generates a csv from its members (of type Person)

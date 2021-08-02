@@ -21,8 +21,8 @@ class source implements Command {
     /** 
         Inserts or updates a source in database
         @param  $params array containing one element. Can be :
-                        - 'all'
-                        - the path to the yaml file containing the source definition, relative to data/model/source
+                    - 'all'
+                    - the path to the yaml file containing the source definition, relative to data/model/source
         @return Empty string, echoes the report on execution for each source processed.
     **/
     public static function execute($params=[]): string {

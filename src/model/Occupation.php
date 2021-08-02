@@ -46,12 +46,17 @@ class Occupation {
     **/
     public static function loadForMatch(string $what) {
         if(!in_array($what, ['cura5', 'ertel'])){
-            throw new \Exception("Invalid value for parameter \$what");
+            throw new \Exception('Invalid value for parameter $what');
         }
         $res = [];
         foreach(Occupation::DEFINITION_FILES as $file){
             $lines = csvAssociative::compute(Occupation::getDefinitionDir() . DS . $file);
             foreach($lines as $line){
+                if(!isset($line[$what])){
+                    // for ex in general.csv, informations about cura5 and ertel
+                    // are not present, so useless for match
+                    break;
+                }
                 $code = $line[$what]; // in $what vocabulary - ex AVI or AIRP
                 if($code == ''){
                     continue;
@@ -70,7 +75,7 @@ class Occupation {
         if(self::$allAncestors != null){
             return self::$allAncestors;
         }
-        $occusFromDB = self::loadFromDB();
+        $occusFromDB = self::loadAllFromDB();
         // 1 - $nodes = assoc array slug - DAGStringNode
         //     $occus = assoc array slug - Occupation object
         $nodes = [];
@@ -96,9 +101,22 @@ class Occupation {
     }
     
     /**
+        Returns an associative array slug => name for all occupations in database.
+    **/
+    public static function getAllSlugNames() {
+        $dblink = DB5::getDbLink();
+        $query = "select slug,name from occu";
+        $res = [];
+        foreach($dblink->query($query, \PDO::FETCH_ASSOC) as $row){
+            $res[$row['slug']] = $row['name'];
+        }
+        return $res;
+    }
+    
+    /**
         Returns an array of Occupation objects, retrieved from database.
     **/
-    public static function loadFromDB() {
+    public static function loadAllFromDB() {
         $dblink = DB5::getDbLink();
         $query = "select * from occu";
         $res = [];

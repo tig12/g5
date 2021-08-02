@@ -23,6 +23,7 @@ use g5\G5;
 use g5\commands\db\create\dbcreate;
 use g5\commands\db\fill\source;
 use g5\commands\db\fill\occu;
+use g5\commands\db\fill\occustats;
 use g5\commands\db\fill\stats;
 use g5\commands\db\fill\search;
 
@@ -51,6 +52,8 @@ use g5\commands\csicop\si42\raw2tmp             as raw2tmpSi42;
 use g5\commands\csicop\si42\addCanvas1          as addCanvas1Si42;
 use g5\commands\csicop\irving\raw2tmp           as raw2tmpIrving;
 use g5\commands\csicop\irving\addD10            as addD10Irving;
+
+use g5\commands\muller\afd3women\raw2tmp        as raw2tmpAfd3Women;
 
 // tmp2db
 use g5\commands\cura\A\tmp2db                   as tmp2dbA;
@@ -136,6 +139,8 @@ class history implements Command {
             echo tweak2tmpMuller402::execute([]);
             echo addA6Muller402::execute(['update']);
             echo raw2tmpMuller100::execute([]);
+            
+            echo raw2tmpAfd3Women::execute([]);
         }
         
         //
@@ -167,6 +172,8 @@ class history implements Command {
             echo tmp2dbIrving::execute(['small']);
             
             echo stats::execute(['small']);
+            echo occustats::execute();
+//            echo occugroup::execute(['all']);
             echo search::execute();
         }
         
