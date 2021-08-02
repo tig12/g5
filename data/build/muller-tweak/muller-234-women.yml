@@ -36,6 +36,15 @@
   build-notes:
     - 2021-08-02 16:46:40+02:00 corrections from https://fr.wikipedia.org/wiki/Jacqueline_Auriol
 
+# Bele Bachem
+-
+  MUID: 013
+  WD: Q815333
+  OFFICIAL:
+    GNAME: Renate Gabriele
+  OCCU:
+    - painter
+
 -
   MUID: 020
   WD: Q97003
@@ -51,6 +60,24 @@
   OCCU:
     - saint
   
+# Rosa Bonheur
+-
+  MUID: 030
+  WD: Q241732
+  OFFICIAL:
+    GNAME: Marie-Rosalie
+  OCCU:
+    - painter
+    - sculptor
+
+# Maria CASPAR-FILSER 
+-
+  MUID: 040
+  WD: Q545965
+  GNAME: Maria
+  OCCU: 
+    - painter
+    
 -
   MUID: 055
   WD: Q76851
@@ -76,7 +103,6 @@
   OCCU:
     - saint
   
-  
 -
   MUID: 109
   FNAME: Joliot-Curie
@@ -87,6 +113,14 @@
     - physicist
     - chemist
     - politician
+
+# Marie Laurencin
+-
+  MUID: 124
+  WD: Q233088
+  OCCU:
+    - painter
+    - printmaker
 
 -
   MUID: 111
@@ -113,6 +147,27 @@
     FNAME: Michaelis
     GNAME: Karoline
 
+# Paula Modersohn-Becker
+-
+  MUID: 156
+  WD: Q234370
+  OCCU:
+    - painter
+
+# Berthe Morisot
+-
+  MUID: 162
+  WD: Q105320
+  OCCU:
+    - painter
+
+# Hanna Nagel
+-
+  MUID: 164
+  WD: Q1575726
+  OCCU:
+    - graphic-artist
+
 # Therese Neumann 
 -
   MUID: 166
@@ -120,6 +175,15 @@
   GNAME: Neumann
   OCCU:
     - mystic
+
+# Elisabeth Ney
+-
+  MUID: 167
+  OFFICIAL:
+    GNAME: Franzisca Bernadina Wilhelmina Elisabeth
+  WD: Q99869
+  OCCU:
+    - sculptor
 
 -  
   MUID: 177
@@ -133,3 +197,36 @@
   DATE: '1860-02-11 06:00'
   build-notes:
     - 2021-07-10 17:20:03+01:00 Date checked on civil registry (because Müller and Gauquelin differ)
+
+# Milly Steger
+-
+  MUID: 207
+  WD: Q1246805
+  OFFICIAL:
+    GNAME: Emilie Sibilla Elisabeth Johanna
+  OCCU:
+    - sculptor
+
+# Sophie Taeuber-Arp
+-
+  MUID: 211
+  OFFICIAL:
+    GNAME: Sophie Henriette Gertrud
+  WD: Q254395
+  OCCU:
+    - painter
+    - sculptor
+    - textile-designer
+    - interior-designer
+    - furniture-designer
+    - architect
+    - dancer
+
+# Suzanne Valadon
+-
+  MUID: 217
+  OFFICIAL:
+    GNAME: Marie-Clémentine
+  WD: Q156889
+  OCCU:
+    - painter

@@ -1,18 +1,28 @@
 slug;wd;fr;en;parents
 ;;;;
+partner-of-celebrity;;Partenaire de célebrité;Partner of celebrity;
+social-worker;Q7019111;Travailleur social;Social worker;
+;;;;
 feminist;Q34074720;Féministe;Feminist;
 suffragette;Q322170;Suffragette;Suffragette;feminist
 ;;;;
 canoeist;Q13382566;Canoëiste;Canoeist;sportsperson
 kayaker;Q16004471;Kayakeur;Kayaker;sportsperson
 ;;;;
-comedy-writer;Q11914886;Auteur de comédies;Comedy writer;writer
 composer;Q36834;Compositeur;Composer;musician
 conductor;Q158852;Chef d’orchestre;Conductor;musician
+;;;;
+architect;Q42973;Architecte;Architect;
+comedy-writer;Q11914886;Auteur de comédies;Comedy writer;writer
 factual-writer;;Ecrivain factuel;Factual writer;writer
 fictional-writer;;Ecrivain de fictions;Fictional writer;writer
+furniture-designer;Q11455387;Concepteur de meubles;Furniture designer;
+graphic-artist;Q1925963;Artiste graphique;Graphic artist;artist 
+interior-designer;Q2133309;Designer d'intérieur;Interior designer;
 poet;Q49757;Poète;Poet;writer+artist
+printmaker;Q11569986;Graveur;Printmaker;graphic-artist
 singer;Q177220;Chanteur;Singer;musician
+textile-designer;Q18611810;Styliste;Textile designer;
 ;;;;
 bacteriologist;Q15816836;bactériologiste;Bacteriologist;scientist
 chemist;Q593644;Chimiste;Chemist;scientist
@@ -26,10 +36,10 @@ zoologist;Q350979;Zoologiste;Zoologist;scientist
 ;;;;
 religious-leader;Q15995642;Leader religieux;Religious leader;
 religious;Q2566598;Religieux;Religious
+mystic;Q12328016;Mystique;Mystic;
 monarch;Q116;Monarque;Monarch;
 revolutionary;Q3242115;Révolutionnaire;Revolutionary;
 saint;Q43115;Saint;Saint;
+;;;;
 lawyer;Q40348;Avocat;Lawyer;legal-profession
-social-worker;Q7019111;Travailleur social;Social worker;
 legal-profession;Q15987302;Profession juridique;Legal profession;
-mystic;Q12328016;Mystique;Mystic;
