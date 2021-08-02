@@ -1,7 +1,35 @@
 slug;wd;fr;en;parents
-canoeist;Q13382566;Canoëiste;Canoeist;sportsperson
-comedy-writer;Q11914886;Auteur de comédies;Comedy writer;writer
-conductor;Q158852;Chef d’orchestre;Conductor;musician
+;;;;
 feminist;Q34074720;Féministe;Feminist;
+suffragette;Q322170;Suffragette;Suffragette;feminist
+;;;;
+canoeist;Q13382566;Canoëiste;Canoeist;sportsperson
 kayaker;Q16004471;Kayakeur;Kayaker;sportsperson
+;;;;
+comedy-writer;Q11914886;Auteur de comédies;Comedy writer;writer
+composer;Q36834;Compositeur;Composer;musician
+conductor;Q158852;Chef d’orchestre;Conductor;musician
+factual-writer;;Ecrivain factuel;Factual writer;writer
+fictional-writer;;Ecrivain de fictions;Fictional writer;writer
 poet;Q49757;Poète;Poet;writer+artist
+singer;Q177220;Chanteur;Singer;musician
+;;;;
+bacteriologist;Q15816836;bactériologiste;Bacteriologist;scientist
+chemist;Q593644;Chimiste;Chemist;scientist
+historian-of-science;Q16063546;Historien des sciences;Historian of science;scientist
+mathematician;Q170790;Mathématicien;Mathematician;scientist
+naturalist;Q18805;Naturaliste;Naturalist;scientist
+physicist;Q169470;Physicien;Physicist;scientist
+romanist;Q2504617;Romaniste;Romanist;scientist
+social-scientist;Q15319501;Chercheur en sciences sociales;Social scientist;scientist
+zoologist;Q350979;Zoologiste;Zoologist;scientist
+;;;;
+religious-leader;Q15995642;Leader religieux;Religious leader;
+religious;Q2566598;Religieux;Religious
+monarch;Q116;Monarque;Monarch;
+revolutionary;Q3242115;Révolutionnaire;Revolutionary;
+saint;Q43115;Saint;Saint;
+lawyer;Q40348;Avocat;Lawyer;legal-profession
+social-worker;Q7019111;Travailleur social;Social worker;
+legal-profession;Q15987302;Profession juridique;Legal profession;
+mystic;Q12328016;Mystique;Mystic;

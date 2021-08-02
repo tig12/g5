@@ -156,6 +156,36 @@ class AFD3 {
         '232' => 'A6-810', // YOURCENAR Marguerite
     ];
     
+    /** 
+        Associations Müller's Berufsgruppe / Tätigkeitsfeld => g5 occupation code
+        Pertly built by look::look_occus()
+        Note: sometimes doesn't follow Müller, after check on wikipedia.
+    **/
+    const OCCUS = [
+        'AR 01' => 'fictional-writer', // 85 persons
+        'AR 02' => 'factual-writer', // 12 persons
+        'AR 03' => 'actor', // 43 persons
+        'AR 04' => 'composer', // 1 persons
+        'AR 06' => 'singer', // 21 persons
+        'AR 07' => 'musician', // 3 persons
+        'AR 08' => 'painter+sculptor', // 11 persons
+        'SC 01' => 'mathematician', // 1 persons
+        'SC 02' => 'miscelaneous', // 1 persons - Irène Joliot-Curie - more precise infos in tweaks file
+        'SC 03' => 'miscelaneous', // 2 persons - more precise infos in tweaks file
+        'SC 04' => 'physician', // 2 persons
+        'SC 05' => 'social-scientist', // 8 persons
+        'SC 06' => 'historian-of-science', // 1 persons
+        'SC 07' => 'romanist', // 1 persons
+        'WA 02' => 'aircraft-pilot', // 2 persons
+        'WA 04' => 'politician', // 7 persons
+        'WA 05' => 'religious-leader', // 2 persons
+        'WA 06' => 'monarch', // 10 persons
+        'WA 08' => 'revolutionary', // 2 persons
+        'WA 09' => 'miscelaneous', // 4 persons - more precise infos in tweaks file
+        'WA 10' => 'suffragette', // 7 persons
+        'WA 12' => '', // 8 persons
+    ];
+    
     // *********************** Source management ***********************
     
     /** Returns a Source object for raw file. **/

@@ -11,7 +11,7 @@
   FNAME: Adam
   GNAME: Juliette
   OFFICIAL:
-    GNAME: Lambert
+    FNAME: Lambert
   OCCU:
     - writer
     - feminist
@@ -25,15 +25,111 @@
   NOB: von
   build-notes:
     - 2021-07-10 20:22:54+01:00 corrections from https://de.wikipedia.org/wiki/Auguste_Viktoria_von_Schleswig-Holstein-Sonderburg-Augustenburg
+
+-
+  MUID: 011
+  WD: Q270187
+  FNAME: Auriol
+  GNAME: Jacqueline
+  OFFICIAL:
+    FNAME: Douet
+  build-notes:
+    - 2021-08-02 16:46:40+02:00 corrections from https://fr.wikipedia.org/wiki/Jacqueline_Auriol
+
+-
+  MUID: 020
+  WD: Q97003
+  FAME: Melli Beese
+  OFFICIAL:
+    FNAME: Boutard-Beese
+    GNAME: Amelie Hedwig
+
+# Bernadette Soubirous
+-
+  MUID: 024
+  WD: Q55398
+  OCCU:
+    - saint
+  
+-
+  MUID: 055
+  WD: Q76851
+  OFFICIAL:
+    FNAME: Nelle
+  OCCU: 
+    - naturalist
+
+# Frieda Duensing
+-
+  MUID: 060
+  WD: Q1456321
+  OFFICIAL:
+    GNAME: Frieda Johanna
+  OCCU:
+    - lawyer
+    - social-worker
+  
+# Maria Goretti
+-
+  MUID: 087
+  WD: Q234697
+  OCCU:
+    - saint
+  
+  
+-
+  MUID: 109
+  FNAME: Joliot-Curie
+  GNAME: Irène
+  OFFICIAL:
+    GNAME: Curie
+  OCCU:
+    - physicist
+    - chemist
+    - politician
+
 -
   MUID: 111
   GNAME: Caroline Amalie Elisabeth
+  WD: Q167433
   NOB: von
   build-notes:
     - 2021-07-10 20:27:58+01:00 corrections from https://de.wikipedia.org/wiki/Caroline_von_Braunschweig-Wolfenb%C3%BCttel
+
 -
+  MUID: 135
+  FNAME: Linden
+  WD: Q1896519
+  OCCU:
+    - bacteriologist
+    - zoologist
+
+-
+  MUID: 154
+  WD: Q76158
+  FNAME: Michaëlis de Vasconcelos
+  GNAME: Carolina
+  OFFICIAL:
+    FNAME: Michaelis
+    GNAME: Karoline
+
+# Therese Neumann 
+-
+  MUID: 166
+  WD: Q76551
+  GNAME: Neumann
+  OCCU:
+    - mystic
+
+-  
   MUID: 177
+  FNAME: Eymerie
+  GNAME: Marguerite
+  ALTERNATE:
+    - Rachilde
+    - Jean de Childra
+    - Jean de Chibra
+  SPOUSE: Valette
   DATE: '1860-02-11 06:00'
   build-notes:
     - 2021-07-10 17:20:03+01:00 Date checked on civil registry (because Müller and Gauquelin differ)
-  

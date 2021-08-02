@@ -27,6 +27,7 @@ class look implements Command {
         'source',
         'gauquelin',
         'check',
+        'occu',
     ];
     
     // *****************************************
@@ -289,6 +290,27 @@ class look implements Command {
         return $report;
     }
     
-    
+    // ******************************************************
+    /**
+        Echoes a list of occupation codes and the nb of associated persons
+    **/
+    public static function look_occu() {
+        $data = AFD3::loadTmpFile();
+
+        $occus = [];
+        foreach($data as $line){
+            $occu = $line['OCCU'];
+            if(!isset($occus[$occu])){
+                $occus[$occu] = 0;
+            }
+            $occus[$occu]++;
+        }
+        ksort($occus);
+        $res = '';
+        foreach($occus as $code => $nb){
+            $res .= "        '$code' => '', // $nb persons\n";
+        }
+        return $res;
+    }
     
 }// end class
