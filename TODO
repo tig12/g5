@@ -1,7 +1,5 @@
 
 
-- WARNING incoherence: Group->computeMembers() computes objects of type Person. Other group function manipulate person ids.
-
 - Check remaining ids_in_sources whith 'cura'
 grep -rn "'cura'" src/
 Replace with 'cura5' => use constant => use 'lerrcp' instead

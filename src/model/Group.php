@@ -1,7 +1,9 @@
 <?php
 /******************************************************************************
-    Regular array containing person paths (strings)
-    ex of persons/1864/12/16/machin-pierre
+    Group of persons
+    Structure of field $data is described in Group.yml
+    Field data['members'] is an array of person ids.
+    Field data['person-members'] is an array of Person objects.
     
     @license    GPL
     @history    2019-12-27 23:20:16+01:00, Thierry Graff : Creation
@@ -16,12 +18,12 @@ class Group{
     
     public $data = [];
     
-    /** Boolean indicating if members have already been computed **/
-    public $membersComputed;
+    /** Boolean indicating if data['person-members'] have already been computed **/
+    public $personMembersComputed;
     
     
     public function __construct(){
-        $this->membersComputed = false;
+        $this->personMembersComputed = false;
         $this->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Group.yml'));
     }
     
@@ -112,26 +114,6 @@ class Group{
     // *********************** Members ***********************
     
     /** 
-        Fills members with objects of type Person
-        @param $force If true, members computation will be done even if it was already done.
-    **/
-    public function computeMembers(bool $force=false){
-        if($force === false && $this->membersComputed === true){
-            return;
-        }
-        $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("select * from person where id in(select id_person from person_groop where id_groop=?)");
-        $stmt->execute([$this->data['id']]);
-        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        $this->data['members'] = [];
-        foreach($rows as $row){
-            $this->data['members'][] = Person::row2person($row);
-        }
-        $this->data['n'] = count($this->data['members']);
-        $this->membersComputed = true;
-    }
-    
-    /** 
         Adds a person id in $this->members
         (does not insert in database).
         @param  $entry Person id
@@ -189,10 +171,33 @@ class Group{
     // *********************** Export ***********************
     
     /** 
-        Generates a csv from its members (of type Person)
+        Fills person-members with objects of type Person
+        @param $force If true, members computation will be done even if it was already done.
+    **/
+    public function computePersonMembers(bool $force=false){
+        if($force === false && $this->personMembersComputed === true){
+            return;
+        }
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare("select * from person where id in(select id_person from person_groop where id_groop=?)");
+        $stmt->execute([$this->data['id']]);
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $this->data['person-members'] = [];
+        $this->data['members'] = [];
+        foreach($rows as $row){
+            $this->data['person-members'][] = Person::row2person($row);
+            $this->data['members'][] = $row['id'];
+        }
+        $this->data['n'] = count($this->data['person-members']);
+        $this->personMembersComputed = true;
+    }
+    
+    /** 
+        Generates and stores on disk a csv file from its members (of type Person)
             first line contains field names
             other lines contain data
-        @param $csvFile     Path to the generated file
+        @param $csvFile
+            Path to the generated file
         @param $csvFields
             Names of the fields of the generated csv
             Are written in this order in the csv
@@ -236,16 +241,16 @@ class Group{
         
         $emptyNew = array_fill_keys($csvFields, '');
         
-        $this->computeMembers();
+        $this->computePersonMembers();
         
         if($sort !== false){
-            usort($this->data['members'], $sort);
+            usort($this->data['person-members'], $sort);
         }
         
         $report = '';
 
         $N = 0;
-        foreach($this->data['members'] as $p){
+        foreach($this->data['person-members'] as $p){
             // filters
             foreach($filters as $function){
                 if(!$function($p)){

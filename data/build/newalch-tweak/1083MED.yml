@@ -23,6 +23,14 @@
   NOB: de
   FNAME: Barthez
   GNAME: Antoine Charles Ernest
+  
+-
+  NR: 70
+  PLACE: Bassing
+  C2: 57
+  build-notes: |
+    2021-08-04 10:43:44+02:00, Thierry Graff
+    Precise birth place is Tour-de-Faure (part of Saint-Cirq-la-Popie)
 
 -
   NR: 152
@@ -105,6 +113,14 @@
   FNAME: Ranse
   GNAME: Félix Henri
 
+-
+  NR: 880
+  PLACE: Saint-Cirq-la-Popie
+  C2: 46
+  build-notes: |
+    2021-08-04 10:36:29+02:00, Thierry Graff
+    Precise birth place is Tour-de-Faure (part of Saint-Cirq-la-Popie)
+    
 -
   NR: 1000
   FNAME: Thomas de Closmadeuc

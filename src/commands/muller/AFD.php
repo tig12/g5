@@ -50,7 +50,8 @@ class AFD {
         Does not handle ids of persons published in 2 different volumes
         of Astro-Forschungs-Daten (this does not occur).
     **/
-    public static function ids_in_sources2muId($ids_in_sources){
+    /* 
+    public static function ids_in_sources2mullerId($ids_in_sources){
         if(isset($ids_in_sources['5muller_writers'])){
             return self::mullerId('5muller_writers', $ids_in_sources['5muller_writers']);
         }
@@ -59,5 +60,6 @@ class AFD {
         }
         return '';
     }
+    */
     
 } // end class

@@ -2,6 +2,9 @@
 /********************************************************************************
     Loads files data/tmp/newalch/1083MED.csv and 1083MED-raw.csv in database.
     Affects records imported in A2 and E1
+
+    NOTE: This code cannot be executed several times (won't update the records if already in database)
+        To re-execute it (for debug purposes), you must rebuild the databse from scratch (at least A2 and E1)
     
     @license    GPL
     @history    2020-08-20 10:46:02+02:00, Thierry Graff : creation

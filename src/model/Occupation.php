@@ -13,19 +13,21 @@ use tiglib\arrays\csvAssociative;
 
 class Occupation {
     
-    /** List of csv files containing the definitions of occupations **/
+    /**
+        List of csv files containing the definitions of occupations.
+    **/
     const DEFINITION_FILES = [
         'cura5.csv',
         'gauq-ertel-wd.csv',
         'general.csv',
     ];
     
-    /** Stores the data of an Occupation object **/
+    /** Stores the data of an Occupation object. **/
     public $data;
     
     /**
-        Associative array: occupation slug => array of slugs of ancestors 
-        Computed by getAllAncestors()
+        Associative array: occupation slug => array of slugs of ancestors.
+        Computed by getAllAncestors().
     **/
     private static $allAncestors = null;
     
@@ -89,6 +91,9 @@ class Occupation {
         foreach($occus as $occu){
             $slug = $occu->data['slug'];
             foreach($occu->data['parents'] as $parent){ // $parent is a slug
+if(!isset($nodes[$parent])){
+echo "\n<pre>"; print_r("'$slug' '$parent'"); echo "</pre>\n"; exit;
+}
                 $nodes[$slug]->addEdge($nodes[$parent]);
             }
         }

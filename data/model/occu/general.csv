@@ -17,7 +17,7 @@ comedy-writer;Q11914886;Auteur de comédies;Comedy writer;writer
 factual-writer;;Ecrivain factuel;Factual writer;writer
 fictional-writer;;Ecrivain de fictions;Fictional writer;writer
 furniture-designer;Q11455387;Concepteur de meubles;Furniture designer;
-graphic-artist;Q1925963;Artiste graphique;Graphic artist;artist 
+graphic-artist;Q1925963;Artiste graphique;Graphic artist;artist
 interior-designer;Q2133309;Designer d'intérieur;Interior designer;
 poet;Q49757;Poète;Poet;writer+artist
 printmaker;Q11569986;Graveur;Printmaker;graphic-artist
@@ -35,7 +35,7 @@ social-scientist;Q15319501;Chercheur en sciences sociales;Social scientist;scien
 zoologist;Q350979;Zoologiste;Zoologist;scientist
 ;;;;
 religious-leader;Q15995642;Leader religieux;Religious leader;
-religious;Q2566598;Religieux;Religious
+religious;Q2566598;Religieux;Religious;
 mystic;Q12328016;Mystique;Mystic;
 monarch;Q116;Monarque;Monarch;
 revolutionary;Q3242115;Révolutionnaire;Revolutionary;

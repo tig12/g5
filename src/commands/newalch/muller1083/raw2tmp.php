@@ -131,6 +131,7 @@ Pyrénées
 Seine
 Seine-
 Seine-et
+Seine-et-Oise
 77 Seine-et-M
 77 Seine-et-Marne
 Seine-et-Oi
@@ -157,20 +158,50 @@ DEPT_STR;
     /**
         Particular cases to restore C2
         These are cases not handled by self::$depts
-        These corrections are done only for records not associated to a Gauquelin record
-        (because cura contains codes, so these cases are handled when merging data).
+        Necessary when old départements do not correspond to present.
     **/
-    private static $cities_dept = [
-        'Etampes'           => '91',
-        'le Raincy'         => '93',
-        "l'Ile-Saint-Denis" => '93',
-        'Marly-la-Ville'    => '95',
-        'Montgeron'         => '91',
-        'Paris'             => '75',
-        'Trappes'           => '78',
-        'Villepreux'        => '78',
-        'Vincennes'         => '94',
+    private static $cities_depts = [
+        'Boulogne-sur-Seine'        => '92',
+        'Bassing [Moselle]'         => '57',
+        'Charenton'                 => '94',
+        'Clichy-la-Garenne'         => '92',
+        'Conflans-Sainte-Honorine'  => '78',
+        'Créteil'                   => '94',
+        'Etampes'                   => '91',
+        'Fontenay-sous-Bois'        => '94',
+        'Fourqueux'                 => '78',
+        'le Raincy'                 => '93',
+        "l'Ile-Saint-Denis"         => '93',
+        'Malakoff'                  => '92',
+        'Marly-la-Ville'            => '95',
+        'Meudon'                    => '92',
+        'Montgeron'                 => '91',
+        "Monfort-l'Amaury"          => '78',
+        "Montfort-l'Amaury"         => '78',
+        'Neuilly-sur-Seine'         => '92',
+        'Paris'                     => '75',
+        'Pontoise'                  => '95',
+        'Rouen'                     => '76',
+        'Saint-Cirq-Lalo'           => '46',
+        'Saint-Cloud'               => '92',
+        'Saint-Denis'               => '93',
+        'Saint-Germain-en-Laye'     => '78',
+        'Saint-Nicolas-du-Port'     => '54',
+        'Saint-Paul-de-Fenouillet'  => '66',
+        'Saint-Ouen'                => '93',
+        "Saint-Ouen-l'Aumône"       => '95',
+        'Savigny-sur-Orge'          => '91',
+        'Tourcoing'                 => '59',
+        'Trappes'                   => '78',
+        'Versailles'                => '78',
+        'Villepreux'                => '78',
+        'Vincennes'                 => '94',
     ];
+    /** 
+        = array_keys($cities_depts)
+        Initialized in compute_place()
+    **/
+    private static $cities;
     
     // *****************************************
     /** 
@@ -182,19 +213,6 @@ DEPT_STR;
         
         if(count($params) > 0){
             return "INVALID PARAMETER : " . $params[0] . " - parameter not needed\n";
-        }
-        
-        // prepare self::$depts
-        $lines = explode("\n", self::$DEPT_STR);
-        $p = '/(\d{2}) (.*)/';
-        foreach($lines as $line){
-            preg_match($p, $line, $m);
-            if(count($m) == 3){
-                self::$depts[$m[2]] = $m[1];
-            }
-            else{
-                self::$depts[$line] = $line;
-            }
         }
         
         $filename = Muller1083::rawFilename();                  
@@ -382,20 +400,42 @@ DEPT_STR;
                 - department code (C2)
     **/
     private static function compute_place($str){
+        // prepare self::$depts and self::$cities
+        if(count(self::$depts) == 0){
+            $lines = explode("\n", self::$DEPT_STR);
+            $p = '/(\d{2}) (.*)/';
+            foreach($lines as $line){
+                preg_match($p, $line, $m);
+                if(count($m) == 3){
+                    self::$depts[$m[2]] = $m[1];
+                }
+                else{
+                    self::$depts[$line] = $line;
+                }
+            }
+            self::$cities = array_keys(self::$cities_depts);
+        }
         $place = $dept = '';
         $pos = mb_strpos($str, '(');
         if($pos === false){
+            // happens for 3 cases:
+            // Bassing [Moselle] - correct name fixed in tweak2tmp
+            // Tourcoing
+            // Saint-Cirq-Lalo - correct name fixed in tweak2tmp
             $place = trim($str);
+            $dept = self::$cities_depts[$place];
             return [$place, $dept];
         }
         $place = trim(mb_substr($str, 0, $pos)); // could be $pos-1
         $dept = mb_substr($str, $pos + 1);
         $dept = str_replace(')', '', $dept);
+        // Obliged to handle Paris here as a particular case
+        // because written "Paris (1ER)", then "1ER" is considered as $dept_code
         if($place == 'Paris'){
             $dept_code = 75;
         }
-        else if(in_array($place, self::$cities_dept)){
-            $dept_code = self::$cities_dept[$place];
+        else if(in_array($place, self::$cities)){
+            $dept_code = self::$cities_depts[$place];
         }
         else{
             $dept_code = self::$depts[$dept];

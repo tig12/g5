@@ -33,11 +33,13 @@ class occu implements Command {
         
         $N = 0;
         foreach(Occupation::DEFINITION_FILES as $file){
+//echo "PERFORM $file\n";
             $lines = csvAssociative::compute(Occupation::getDefinitionDir() . DS . $file);
             foreach($lines as $line){
                 if($line['slug'] == ''){
                     continue; // skip blank lines
                 }
+//echo "\n"; print_r($line); echo "\n";
                 if(strpos($line['wd'], '+') !== false){
                     // happens for canoeist-kayaker Q13382566+Q16004471
                     // useless here because canoeist Q13382566 and kayaker Q16004471

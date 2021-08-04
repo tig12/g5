@@ -12,8 +12,8 @@ use g5\model\DB5;
 use g5\model\Group;
 use g5\model\Names_fr;
 use g5\patterns\Command;
-use g5\commands\newalch\Newalch;
-use g5\commands\cura\Cura;
+use g5\commands\gauquelin\LERRCP;
+use g5\commands\muller\AFD;
 
 class export implements Command {
                                                                                               
@@ -42,10 +42,8 @@ class export implements Command {
         $report = '';
         
         $g = Group::getBySlug(Muller1083::GROUP_SLUG);
-        $g-> computeMembers();
         
-        $source = Muller1083::getSource();
-        self::$sourceSlug = $source->data['slug'];
+        self::$sourceSlug = Muller1083::LIST_SOURCE_SLUG;
 
         $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . self::OUTPUT_FILE;
         
@@ -54,7 +52,6 @@ class export implements Command {
             'GQID',
             'FNAME',
             'GNAME',
-            'OCCU',
             'DATE',
             'TZO',
             'DATE-UT',
@@ -65,7 +62,8 @@ class export implements Command {
             'LG',
             'LAT',
             'GEOID',
-            // stuff coming from original raw file
+            'OCCU',
+            // specific to this group, coming from original raw file
             'ELECTDAT',
             'ELECTAGE',
             'STBDATUM',
@@ -133,10 +131,10 @@ class export implements Command {
                 return Names_fr::computeFamilyName($p->data['name']['family'], $p->data['name']['nobiliary-particle']);
             },
             'GQID' => function($p){
-                return $p->data['ids-in-sources']['cura'] ?? '';
+                return $p->data['ids-in-sources'][LERRCP::SOURCE_SLUG] ?? '';
             },
             'MUID' => function($p){
-                return Newalch::ids_in_sources2muId($p->data['ids-in-sources']);
+                return $p->data['ids-in-sources'][AFD::SOURCE_SLUG] ?? '';
             },
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);

@@ -71,9 +71,10 @@ class history implements Command {
         Possible values of the command
     **/
     const POSSIBLE_PARAMS = [
-        'tmp' => 'Build files in data/tmp',
-        'db'  => 'Fill database with tmp files',
-        'all' => 'Build tmp files and fill db',
+        'tmp'       => 'Build files in data/tmp',
+        'db'        => 'Fill database with tmp files',
+        'finalize'  => 'Finalize DB (stats, groups, search)',
+        'all'       => 'Executes all steps',
     ];
     
     // *****************************************
@@ -170,10 +171,16 @@ class history implements Command {
             echo tmp2dbMuller402::execute(['small']);
             echo tmp2db100Muller402::execute(['small']);
             echo tmp2dbIrving::execute(['small']);
+        }
+        
+        if($param == 'finalize' || $param == 'all'){
+            echo "***************************\n";
+            echo "***  Finalize database  ***\n";
+            echo "***************************\n";
             
             echo stats::execute(['small']);
             echo occustats::execute();
-//            echo occugroup::execute(['all']);
+            echo occugroup::execute();
             echo search::execute();
         }
         
