@@ -125,6 +125,7 @@ class tmp2db implements Command {
                 $p->addIdInSource($lerrcpSource->data['slug'], $gqId);
                 $new = [];
                 $new['trust'] = Cura::TRUST_LEVEL;
+//                $new['to-check'] = false;
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
                 $new['birth'] = [];

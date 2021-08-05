@@ -9,6 +9,8 @@
 ********************************************************************************/
 namespace g5\commands\gauquelin;
 
+use g5\commands\cura\Cura;
+use g5\model\Group;
 use g5\model\Source;
 
 class LERRCP {
@@ -106,7 +108,7 @@ class LERRCP {
         return "$datafile-$NUM";
     }
     
-    // *********************** Source management - data files***********************
+    // *********************** Source management - data files ***********************
     
     /**
         Computes slug of the source corresponding to a datafile.
@@ -186,7 +188,7 @@ class LERRCP {
         $g->data['slug'] = LERRCP::datafile2groupSlug($datafile);
         $g->data['name'] = "Gauquelin $datafile";
         $g->data['description'] = "Persons published by Gauquelins' LERRCP booklet "
-            . '"' . LERRCP::LERRCP_INFOS[$datafile][2] . '.';
+            . '"' . LERRCP::LERRCP_INFOS[$datafile][3] . '.';
         $g->data['sources'] = [LERRCP::datafile2bookletSourceSlug($datafile)];
         return $g;
     }

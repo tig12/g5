@@ -1,6 +1,7 @@
 <?php
 /********************************************************************************
     Generates data/output/history/1991-muller-writers/muller-402-writers.csv
+    By default, the generated file is compressed (using zip).
     
     @license    GPL
     @history    2020-09-18 16:41:27+02:00, Thierry Graff : Creation
@@ -11,8 +12,8 @@ use g5\Config;
 use g5\model\DB5;
 use g5\model\Group;
 use g5\patterns\Command;
+use g5\commands\gauquelin\LERRCP;
 use g5\commands\muller\AFD;
-use g5\commands\cura\Cura;
 
 class export implements Command {
     
@@ -27,25 +28,30 @@ class export implements Command {
     /**  Trick to access to $sourceSlug within $sort function **/
     private static $sourceSlug;
     
-    // *****************************************
-    // Implementation of Command
     /** 
-        Called by : php run-g5.php newalch muller402 export
-        @param $params empty array 
+        Called by : php run-g5.php newalch muller402 export [nozip]
+        If called without parameter, the output is compressed (using zip)
+        @param $params array containing 0 or 1 element :
+                       - An optional string "nozip"
         @return Report
     **/
     public static function execute($params=[]): string{
-        if(count($params) > 0){
-            return "WRONG USAGE : useless parameter : {$params[0]}\n";
+        if(count($params) > 1){
+            return "WRONG USAGE : useless parameter : '{$params[1]}'\n";
+        }
+        if(count($params) == 1 && $params[0] != 'nozip'){
+            return "WRONG USAGE : invalid parameter : '{$params[0]}' - possible value : 'nozip'\n";
+        }
+        $dozip = true;
+        if(count($params) == 1){
+            $dozip = false;
         }
         
         $report = '';
         
         $g = Group::getBySlug(Muller402::GROUP_SLUG);
-        $g-> computeMembers();
         
-        $source = Muller402::getSource();
-        self::$sourceSlug = $source->data['slug'];
+        self::$sourceSlug = Muller402::LIST_SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
 
         $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . self::OUTPUT_FILE;
         
@@ -67,6 +73,7 @@ class export implements Command {
         ];
         
         $map = [
+            'ids-in-sources.' . AFD::SOURCE_SLUG => 'MUID',
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
             'birth.date' => 'DATE',
@@ -84,9 +91,6 @@ class export implements Command {
             'GQID' => function($p){
                 return $p->data['ids-in-sources'][LERRCP::SOURCE_SLUG] ?? '';
             },
-            'MUID' => function($p){
-                return AFD::ids_in_sources2mullerId($p->data['ids-in-sources']);
-            },
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);
             },
@@ -99,8 +103,16 @@ class export implements Command {
         
         $filters = [];
         
-        return $g->exportCsv($outfile, $csvFields, $map, $fmap, $sort, $filters);
+        return $g->exportCsv(
+            csvFile:    $outfile,
+            csvFields:  $csvFields,
+            map:        $map,
+            fmap:       $fmap,
+            sort:       $sort,
+            filters:    $filters,
+            dozip:      $dozip
+        );
     }
     
-}// end class    
+} // end class    
 

@@ -15,7 +15,7 @@ use g5\model\Group;
 use g5\model\Person;
 use g5\commands\muller\AFD;
 use g5\commands\newalch\Newalch;
-use g5\commands\cura\Cura;
+use g5\commands\gauquelin\LERRCP;
 
 class tmp2db100 implements Command {
     

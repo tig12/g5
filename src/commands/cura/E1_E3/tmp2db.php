@@ -66,7 +66,7 @@ class tmp2db implements Command {
         // source corresponding to D6 file
         $source = Source::getBySlug(LERRCP::datafile2sourceSlug($datafile)); // DB
         if(is_null($source)){
-            $source = Cura::getSourceOfDatafile($datafile);
+            $source = LERRCP::getSourceOfDatafile($datafile);
             $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
@@ -74,7 +74,7 @@ class tmp2db implements Command {
         // group
         $g = Group::getBySlug(LERRCP::datafile2groupSlug($datafile)); // DB
         if(is_null($g)){
-            $g = Cura::getGroupOfDatafile($datafile);
+            $g = LERRCP::getGroupOfDatafile($datafile);
             $g->data['id'] = $g->insert(); // DB
             $report .= "Inserted group " . $g->data['slug'] . "\n";
         }

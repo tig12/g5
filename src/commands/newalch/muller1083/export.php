@@ -1,6 +1,7 @@
 <?php
 /********************************************************************************
     Generates data/output/history/1994-muller-medics/muller-1083-medics.csv
+    By default, the generated file is compressed (using zip).
     
     @license    GPL
     @history    2020-09-12 17:27:59+02:00, Thierry Graff : creation
@@ -29,7 +30,10 @@ class export implements Command {
     private static $sourceSlug;
     
     /** 
-        @param $params Empty array
+        Called by : php run-g5.php newalch muller1083 export [nozip]
+        If called without parameter, the output is compressed (using zip)
+        @param $params array containing 0 or 1 element :
+                       - An optional string "nozip"
         @return Report
     **/
     public static function execute($params=[]): string{
@@ -94,6 +98,7 @@ class export implements Command {
         ];
         
         $map = [
+            'ids-in-sources.' . AFD::SOURCE_SLUG => 'MUID',
             'name.given' => 'GNAME',
             'birth.date' => 'DATE',
             'birth.tzo' => 'TZO',
@@ -138,9 +143,6 @@ class export implements Command {
             'GQID' => function($p){
                 return $p->data['ids-in-sources'][LERRCP::SOURCE_SLUG] ?? '';
             },
-            'MUID' => function($p){
-                return $p->data['ids-in-sources'][AFD::SOURCE_SLUG] ?? '';
-            },
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);
             },
@@ -154,12 +156,13 @@ class export implements Command {
         $filters = [];
         
         return $g->exportCsv(
-            csvFile:$outfile,
-            csvFields:$csvFields,
-            map:$map,
-            fmap:$fmap,
-            sort:$sort,
-            dozip:$dozip
+            csvFile:    $outfile,
+            csvFields:  $csvFields,
+            map:        $map,
+            fmap:       $fmap,
+            sort:       $sort,
+            filters:    $filters,
+            dozip:      $dozip
         );
     }
     

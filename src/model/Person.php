@@ -349,7 +349,9 @@ class Person {
             )values(?,?,?,?,?,?,?,?,?,?,?,?,?,?) returning id");
         $stmt->execute([
             $this->data['slug'],
-            $this->data['to-check'],
+// desactivated because of php bug - https://bugs.php.net/bug.php?id=81002
+true,
+//            $this->data['to-check'],
             json_encode($this->data['sources']),
             json_encode($this->data['ids-in-sources']),
             $this->data['trust'],
@@ -392,7 +394,9 @@ class Person {
             ");
         $stmt->execute([
             $this->data['slug'],
-            $this->data['to-check'],
+// desactivated because of php bug - https://bugs.php.net/bug.php?id=81002
+true,
+//            $this->data['to-check'],
             json_encode($this->data['sources']),
             json_encode($this->data['ids-in-sources']),
             $this->data['trust'],

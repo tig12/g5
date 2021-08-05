@@ -70,9 +70,9 @@ class checkErtel implements Command {
                 continue;
             }
             
-            $GNUM = $rowE['GNUM'];
+            $GQID = $rowE['GQID'];
 //////// These tweaks must be removed - handled in tweak.csv /////////////////////
-            $NUM = substr($GNUM, 4); // remove 'D10-'
+            $NUM = substr($GQID, 4); // remove 'D10-'
             if($CSINR == '394'){
                 $i42 = 394; // Williams R.
             }

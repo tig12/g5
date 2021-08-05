@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Generates csv files in data/output
+    Generates csv files in data/output/1970-1984-gauquelin
     By default, the generated files are compressed (using zip).
     
     @license    GPL
@@ -111,13 +111,16 @@ class export implements Command {
             return (int)$a->data['ids-in-sources'][self::$sourceSlug] <=> (int)$b->data['ids-in-sources'][self::$sourceSlug];
         };
         
+        $filters = [];
+        
         return $g->exportCsv(
-            csvFile:$outfile,
-            csvFields:$csvFields,
-            map:$map,
-            fmap:$fmap,
-            sort:$sort,
-            dozip:$dozip
+            csvFile:    $outfile,
+            csvFields:  $csvFields,
+            map:        $map,
+            fmap:       $fmap,
+            sort:       $sort,
+            filters:    $filters,
+            dozip:      $dozip
         );
     }
     

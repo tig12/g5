@@ -9,8 +9,6 @@ namespace g5\commands\cura;
 
 use g5\Config;
 use tiglib\arrays\csvAssociative;
-use g5\model\Source;
-use g5\model\Group;
 use g5\commands\gauquelin\LERRCP;
 
 class Cura {
