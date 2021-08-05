@@ -1,6 +1,7 @@
 <?php
 /********************************************************************************
     Generates csv files in data/output
+    By default, the generated files are compressed (using zip).
     
     @license    GPL
     @history    2019-07-05 13:48:39+02:00, Thierry Graff : creation
@@ -30,16 +31,24 @@ class export implements Command {
     private static $sourceSlug;
     
     /** 
-        Called by : php run-g5.php cura <datafile> export               
-        @param $params array containing two strings :
+        Called by : php run-g5.php cura <datafile> export [nozip]
+        If called without third parameter, the output is compressed (using zip)
+        @param $params array containing 2 or 3 strings :
                        - the datafile to process (like "A1").
                        - The name of this command (useless here).
+                       - An optional string "nozip"
         @return Report
     **/
     public static function execute($params=[]): string{
-echo "\n<pre>"; print_r($params); echo "</pre>\n"; exit;
-        if(count($params) > 2){
-            return "WRONG USAGE : useless parameter : {$params[2]}\n";
+        if(count($params) > 3){
+            return "WRONG USAGE : useless parameter : {$params[3]}\n";
+        }
+        if(count($params) == 3 && $params[2] != 'nozip'){
+            return "WRONG USAGE : invalid parameter : {$params[2]} - possible value : 'nozip'\n";
+        }
+        $dozip = true;
+        if(count($params) == 3){
+            $dozip = false;
         }
         
         $report = '';
@@ -102,7 +111,13 @@ echo "\n<pre>"; print_r($params); echo "</pre>\n"; exit;
             return (int)$a->data['ids-in-sources'][self::$sourceSlug] <=> (int)$b->data['ids-in-sources'][self::$sourceSlug];
         };
         
-        return $g->exportCsv($outfile, $csvFields, $map, $fmap, $sort);
+        return $g->exportCsv(
+            csvFile:$outfile,
+            csvFields:$csvFields,
+            map:$map,
+            fmap:$fmap,
+            sort:$sort,
+            dozip:$dozip);
     }
     
 }// end class    

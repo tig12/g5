@@ -193,14 +193,15 @@ class Group{
     }
     
     /** 
-        Generates and stores on disk a csv file from its members (of type Person)
-            first line contains field names
-            other lines contain data
+        Generates and stores on disk a csv file (which may be zipped) from its members (of type Person).
+            First line contains field names.
+            Other lines contain data.
         @param $csvFile
-            Path to the generated file
+            Path to the generated file.
+            If $dozip = true, '.zip' is added at the end of $csvFile.
         @param $csvFields
-            Names of the fields of the generated csv
-            Are written in this order in the csv
+            Names of the fields of the generated csv.
+            Are written in this order in the csv.
             ex:
             $csvFields = ['GID', 'FNAME', 'GNAME', 'OCCU', '...', 'GEOID']
         @param $map
@@ -232,10 +233,11 @@ class Group{
         @param $filters Regular array of functions returning a boolean.
                         If one of these functions returns false on a group member,
                         export() skips the record.
+        @param $dozip   Boolean indicating if hte output should be zipped
         @return Report
         
     **/
-    public function exportCsv($csvFile, $csvFields, $map=[], $fmap=[], $sort=false, $filters=[]): string {
+    public function exportCsv($csvFile, $csvFields, $map=[], $fmap=[], $sort=false, $filters=[], $dozip=false): string {
         
         $csv = implode(G5::CSV_SEP, $csvFields) . "\n";
         
@@ -280,8 +282,20 @@ class Group{
             mkdir($dir, 0755, true);
             $report .= "Created directory $dir\n";
         }
-        file_put_contents($csvFile, $csv);
-        $report .= "Generated $N lines in file $csvFile\n";
+        if($dozip){
+            $zipFile = $csvFile . '.zip';
+            $zip = new \ZipArchive();
+            if ($zip->open($zipFile, \ZipArchive::CREATE) !== true) {
+                throw new \Exception("Cannot open <$zipFile>");
+            }
+            $zip->addFromString(basename($csvFile), $csv);
+            $zip->close();
+            $report .= "Generated $N lines in file $zipFile\n";
+        }
+        else{
+            file_put_contents($csvFile, $csv);
+            $report .= "Generated $N lines in file $csvFile\n";
+        }
         return $report;
     }
     
