@@ -41,10 +41,10 @@ class export implements Command {
     **/
     public static function execute($params=[]): string{
         if(count($params) > 3){
-            return "WRONG USAGE : useless parameter : {$params[3]}\n";
+            return "WRONG USAGE : useless parameter : '{$params[3]}'\n";
         }
         if(count($params) == 3 && $params[2] != 'nozip'){
-            return "WRONG USAGE : invalid parameter : {$params[2]} - possible value : 'nozip'\n";
+            return "WRONG USAGE : invalid parameter : '{$params[2]}' - possible value : 'nozip'\n";
         }
         $dozip = true;
         if(count($params) == 3){
@@ -117,7 +117,8 @@ class export implements Command {
             map:$map,
             fmap:$fmap,
             sort:$sort,
-            dozip:$dozip);
+            dozip:$dozip
+        );
     }
     
 }// end class    

@@ -85,7 +85,7 @@ class look implements Command {
     **/
     private static function look_paris($params=[]){
         $data = [];
-        $N = $N1870 = 0;
+        $N = $N1860 = 0;
         $rows = Muller1083::loadTmpFile();
         foreach($rows as $row){
             if($row['PLACE'] != 'Paris'){
@@ -94,7 +94,7 @@ class look implements Command {
             $data[] = $row;
             $N++;
             if($row['DATE'] < '1860'){
-                $N1870++;
+                $N1860++;
             }
         }
         $data = sortByKey::compute($data, 'DATE');
@@ -105,7 +105,7 @@ class look implements Command {
         }
         $res .= "---\n";
         $res .= "Total : $N\n";
-        $res .= "Born before 1860 : $N1870\n";
+        $res .= "Born before 1860 : $N1860\n";
         return $res;
     }
     
@@ -290,7 +290,9 @@ class look implements Command {
             $NUM = substr($mulrow['GNR'], 3);
             $curarow =& $curaFile[$NUM];
             $mulday = substr($mulrow['DATE'], 0, 10);
-            $curaday = substr($curarow['DATE'], 0, 10);
+            $curaday = $curaFilename == 'A2'
+                ? substr($curarow['DATE-UT'], 0, 10)
+                : substr($curarow['DATE'], 0, 10);
             
             if($curaFilename == 'A2'){
                 $totalA2++;

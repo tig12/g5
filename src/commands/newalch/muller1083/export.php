@@ -28,15 +28,20 @@ class export implements Command {
     /**  Trick to access to $sourceSlug inside $sort function **/
     private static $sourceSlug;
     
-    // *****************************************
-    // Implementation of Command
     /** 
         @param $params Empty array
         @return Report
     **/
     public static function execute($params=[]): string{
-        if(count($params) > 0){
-            return "WRONG USAGE : useless parameter : {$params[0]}\n";
+        if(count($params) > 1){
+            return "WRONG USAGE : useless parameter : '{$params[1]}'\n";
+        }
+        if(count($params) == 1 && $params[0] != 'nozip'){
+            return "WRONG USAGE : invalid parameter : '{$params[0]}' - possible value : 'nozip'\n";
+        }
+        $dozip = true;
+        if(count($params) == 1){
+            $dozip = false;
         }
         
         $report = '';
@@ -148,7 +153,14 @@ class export implements Command {
         
         $filters = [];
         
-        return $g->exportCsv($outfile, $csvFields, $map, $fmap, $sort, $filters);
+        return $g->exportCsv(
+            csvFile:$outfile,
+            csvFields:$csvFields,
+            map:$map,
+            fmap:$fmap,
+            sort:$sort,
+            dozip:$dozip
+        );
     }
     
 }// end class    
