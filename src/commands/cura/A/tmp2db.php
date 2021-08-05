@@ -79,16 +79,16 @@ class tmp2db implements Command {
         }
         
         // source corresponding to current A file
-        $source = Source::getBySlug(Cura::datafile2sourceSlug($datafile)); // DB
+        $source = Source::getBySlug(LERRCP::datafile2sourceSlug($datafile)); // DB
         if(is_null($source)){
-            $source = Cura::getSourceOfDatafile($datafile);
+            $source = LERRCP::getSourceOfDatafile($datafile);
             $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         // group
-        $g = Group::getBySlug(Cura::datafile2groupSlug($datafile)); // DB
+        $g = Group::getBySlug(LERRCP::datafile2groupSlug($datafile)); // DB
         if(is_null($g)){
-            $g = Cura::getGroupOfDatafile($datafile);
+            $g = LERRCP::getGroupOfDatafile($datafile);
             $g->data['id'] = $g->insert(); // DB
             $report .= "Inserted group " . $g->data['slug'] . "\n";
         }
@@ -156,12 +156,15 @@ class tmp2db implements Command {
                 $p->addOccus($matchOccus[$line['OCCU']]);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
-                // Does not addIdInSource('cura') to respect the definition of Gauquelin id
+                // Does not addIdInSource('cura5') to respect the definition of Gauquelin id
                 $p->addRaw($source->data['slug'], $lineRaw);
                 $p->addHistory("cura $datafile tmp2db", $source->data['slug'], []);
                 $p->update(); // DB
                 if($reportType == 'full'){
-                    $report .= "Duplicate {$test->data['slug']} : {$p->data['ids-in-sources']['cura']} = $gqId\n";
+                    $report .= "Duplicate "
+                    . $test->data['slug'] . " : "
+                    . $p->data['ids-in-sources'][LERRCP::SOURCE_SLUG]
+                    . " = $gqId\n";
                 }
                 $nDuplicates++;
             }

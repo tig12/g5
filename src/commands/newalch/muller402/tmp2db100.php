@@ -13,8 +13,9 @@ use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
-use g5\commands\newalch\Newalch;
 use g5\commands\muller\AFD;
+use g5\commands\newalch\Newalch;
+use g5\commands\cura\Cura;
 
 class tmp2db100 implements Command {
     
@@ -123,7 +124,7 @@ class tmp2db100 implements Command {
                 $test->addHistory("newalch muller402 tmp2db100", $source->data['slug'], $updatedValues);
                 $test->addRaw($source->data['slug'], $lineRaw);
                 if($reportType == 'full'){
-                    $gqid = $test->data['ids-in-sources']['cura'];
+                    $gqid = $test->data['ids-in-sources'][LERRCP::SOURCE_SLUG];
                     $report .= "Müller {$line['MUID']} = $gqid - $slug\n";
                 }
                 $nUpdate++;

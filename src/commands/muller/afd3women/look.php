@@ -16,6 +16,7 @@ namespace g5\commands\muller\afd3women;
 use g5\patterns\Command;
 use g5\model\DB5;
 use tiglib\arrays\sortByKey;
+use g5\commands\cura\Cura;
 
 class look implements Command {
     
@@ -275,7 +276,7 @@ class look implements Command {
         $report = '';
         $data = AFD3::loadTmpFile_muid();
         $dblink = DB5::getDbLink();
-        $query = "select name,ids_in_sources,birth from person where ids_in_sources->>'cura'=?";
+        $query = "select name,ids_in_sources,birth from person where ids_in_sources->>'" . Cura::SOURCE_SLUG . "'=?";
         $stmt = $dblink->prepare($query);
         
         foreach(AFD3::MU_GQ as $MUID => $GQID){

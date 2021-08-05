@@ -29,14 +29,6 @@ class csvAssociative{
                 }
                 $tmp = [];
                 for ($c=0; $c < $N; $c++) {
-if(!isset($fieldnames[$c])){
-    throw new \Exception("1111");
-}
-if(!isset($data[$c])){
-    echo "\nfieldnames = "; print_r($fieldnames); echo "\n";
-    echo "\ndata = "; print_r($data); echo "\n";
-    throw new \Exception("22222");
-}
                     $tmp[$fieldnames[$c]] = $data[$c];
                 }
                 $res[] = $tmp;

@@ -9,30 +9,34 @@
 namespace g5\commands\cura\look;
 
 use g5\patterns\Command;
-use g5\commands\cura\CuraRouter;
 use g5\model\DB5;
 use g5\model\Person;
+use g5\commands\cura\CuraRouter;
+use g5\commands\cura\Cura;
+use g5\commands\gauquelin\LERRCP;
 
 class dup implements Command {
     
-    // *****************************************
-    // Implementation of Command
     /** 
         @param  $params empty array
         @return Report
     **/
     public static function execute($params=[]): string {
         
-        $filesCura = CuraRouter::computeDatafiles('all');
+        $filesCura = [];
+        $tmp = CuraRouter::computeDatafiles('all');
+        foreach($tmp as $file){
+            $filesCura[] = LERRCP::datafile2sourceSlug($file);
+        }
         
         $dblink = DB5::getDbLink();
         $persons = [];
-        foreach($dblink->query("select * from person") as $row){
+        foreach($dblink->query("select ids_in_sources,name,birth from person", \PDO::FETCH_ASSOC) as $row){
             $p = Person::row2person($row);
-            if(!isset($p->data['ids-in-sources']['cura'])){
+            if(!isset($p->data['ids-in-sources'][LERRCP::SOURCE_SLUG])){
                 continue;
             }
-            $persons[$p->data['ids-in-sources']['cura']] = $p;
+            $persons[$p->data['ids-in-sources'][LERRCP::SOURCE_SLUG]] = $p;
         }
         
         $dups = [];
@@ -52,7 +56,6 @@ class dup implements Command {
         $res = '<table class="wikitable margin alternate">' . "\n"
              . "    <tr><th>Ids</th><th>Person</th></tr>\n";
         foreach($dups as $dup){
-            $N++;
             if(count($dup) == 2){
                 $N2++;
             }
@@ -62,7 +65,8 @@ class dup implements Command {
             else {
                 $N4++;
             }
-            $p =& $persons[$dup[0]]; // $dup[0] = Gauquelin id
+            $gqid = strtoupper($dup[0]); // $dup[0] looks like 'a1-2054' ; = Gauquelin id looks like 'A1-2054' 
+            $p =& $persons[$gqid];
             $res .= "    <tr>\n";
             $res .= "        <td>" . implode('<br>', $dup) . "</td>\n";
             $date = $p->data['birth']['date'] ?? $p->data['birth']['date-ut'];

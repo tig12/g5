@@ -12,8 +12,8 @@ namespace g5\commands\cura\all;
 use g5\Config;
 use g5\model\DB5;
 use g5\patterns\Command;
-use g5\commands\cura\Cura;
-use g5\commands\newalch\Newalch;
+use g5\commands\gauquelin\LERRCP;
+use g5\commands\muller\AFD;
 use g5\model\Full;
 use g5\model\Group;
 use g5\model\Person;
@@ -24,21 +24,20 @@ class export implements Command {
         Directory where the generated files are stored
         Relative to directory specified in config.yml by dirs / output
     **/
-    const OUTPUT_DIR = 'datasets' . DS . 'cura';
+    const OUTPUT_DIR = 'history' . DS . '1970-1984-gauquelin';
     
-    // Trick to access to $datafile in sort function
-    public static $datafile;
+    /**  Trick to access to $sourceSlug from $sort function **/
+    private static $sourceSlug;
     
-    // *****************************************
-    // Implementation of Command
     /** 
         Called by : php run-g5.php cura <datafile> export               
         @param $params array containing two strings :
                        - the datafile to process (like "A1").
-                       - The name of this command (useless here)
+                       - The name of this command (useless here).
         @return Report
     **/
     public static function execute($params=[]): string{
+echo "\n<pre>"; print_r($params); echo "</pre>\n"; exit;
         if(count($params) > 2){
             return "WRONG USAGE : useless parameter : {$params[2]}\n";
         }
@@ -47,10 +46,11 @@ class export implements Command {
         
         $datafile = $params[0];
         
-        $g = Group::getBySlug($datafile);
-        $g-> computeMembers();
-        
+        $groupSlug = LERRCP::datafile2groupSlug($datafile);
+        $g = Group::getBySlug($groupSlug);
 
+        self::$sourceSlug = LERRCP::datafile2sourceSlug($datafile); // Trick to access to $sourceSlug inside $sort function
+        
         $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . $datafile . '.csv';
         
         $csvFields = [
@@ -59,7 +59,6 @@ class export implements Command {
             'NUM',
             'FNAME',
             'GNAME',
-            'OCCU',
             'DATE',
             'TZO',
             'DATE-UT',
@@ -69,12 +68,13 @@ class export implements Command {
             'CY',
             'LG',
             'LAT',
-            'GEOID'
+            'GEOID',
+            'OCCU',
         ];
         
         $map = [
-            'ids-in-sources.' . $datafile => 'NUM',
-            'ids-in-sources.cura' => 'GQID',
+            'ids-in-sources.' . self::$sourceSlug => 'NUM',
+            'ids-in-sources.' . LERRCP::SOURCE_SLUG => 'GQID',
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
             'birth.date' => 'DATE',
@@ -91,16 +91,15 @@ class export implements Command {
                 
         $fmap = [
             'MUID' => function($p){
-                return Newalch::ids_in_sources2muId($p->data['ids-in-sources']);
+                return AFD::ids_in_sources2mullerId($p->data['ids-in-sources']);
             },          
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);
             },
         ];
         
-        self::$datafile = $datafile; // trick to access to $datafile inside $sort
         $sort = function($a, $b){
-            return (int)$a->data['ids-in-sources'][self::$datafile] <=> (int)$b->data['ids-in-sources'][self::$datafile];
+            return (int)$a->data['ids-in-sources'][self::$sourceSlug] <=> (int)$b->data['ids-in-sources'][self::$sourceSlug];
         };
         
         return $g->exportCsv($outfile, $csvFields, $map, $fmap, $sort);

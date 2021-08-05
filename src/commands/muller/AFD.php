@@ -46,20 +46,18 @@ class AFD {
     
     // *********************** Person ids ***********************
     /**
-        Convenience method to find Müller id from Person's ids-in-source field.
+        Convenience method to find Müller id from Person's $data['ids-in-source'] field.
+        If the person is not related to Müller, returns empty string.
         Does not handle ids of persons published in 2 different volumes
         of Astro-Forschungs-Daten (this does not occur).
     **/
-    /* 
     public static function ids_in_sources2mullerId($ids_in_sources){
-        if(isset($ids_in_sources['5muller_writers'])){
-            return self::mullerId('5muller_writers', $ids_in_sources['5muller_writers']);
-        }
-        if(isset($ids_in_sources['5a_muller_medics'])){
-            return self::mullerId('5a_muller_medics', $ids_in_sources['5a_muller_medics']);
+        foreach($ids_in_sources as $source => $id){
+            if($source != 'afd' && str_starts_with($source, 'afd')){
+                return AFD::mullerId($source, $id);
+            }
         }
         return '';
     }
-    */
     
 } // end class

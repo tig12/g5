@@ -72,7 +72,7 @@ class tmp2db implements Command {
         }
         
         // group
-        $g = Group::getBySlug(Cura::datafile2groupSlug($datafile)); // DB
+        $g = Group::getBySlug(LERRCP::datafile2groupSlug($datafile)); // DB
         if(is_null($g)){
             $g = Cura::getGroupOfDatafile($datafile);
             $g->data['id'] = $g->insert(); // DB
@@ -159,7 +159,10 @@ class tmp2db implements Command {
                 // does not addIdInSource($lerrcpSource) to respect the definition of Gauquelin id
                 $p->update(); // DB
                 if($reportType == 'full'){
-                    $report .= "Duplicate {$test->data['slug']} : {$p->data['ids-in-sources']['cura']} = $gqId\n";
+                    $report .= "Duplicate "
+                    . $test->data['slug'] . " : "
+                    . $p->data['ids-in-sources'][Cura::SOURCE_SLUG]
+                    . " = $gqId\n";
                 }
                 $nDuplicates++;
             }

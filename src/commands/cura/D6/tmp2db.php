@@ -72,7 +72,7 @@ class tmp2db implements Command {
         }
         
         // group
-        $g = Group::getBySlug(Cura::datafile2groupSlug($datafile)); // DB
+        $g = Group::getBySlug(LERRCP::datafile2groupSlug($datafile)); // DB
         if(is_null($g)){
             $g = Cura::getGroupOfDatafile($datafile);
             $g->data['id'] = $g->insert(); // DB

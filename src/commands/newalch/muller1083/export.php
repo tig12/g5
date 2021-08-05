@@ -25,7 +25,7 @@ class export implements Command {
     
     const OUTPUT_FILE = 'muller-1083-physicians.csv';
     
-    /**  Trick to access to $sourceSlug within $sort function **/
+    /**  Trick to access to $sourceSlug inside $sort function **/
     private static $sourceSlug;
     
     // *****************************************
@@ -43,7 +43,7 @@ class export implements Command {
         
         $g = Group::getBySlug(Muller1083::GROUP_SLUG);
         
-        self::$sourceSlug = Muller1083::LIST_SOURCE_SLUG;
+        self::$sourceSlug = Muller1083::LIST_SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
 
         $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . self::OUTPUT_FILE;
         

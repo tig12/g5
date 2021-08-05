@@ -1,8 +1,13 @@
 
+- check doc of page A with the results of
+php run-g5.php cura A1 look count
 
-- Check remaining ids_in_sources whith 'cura'
-grep -rn "'cura'" src/
-Replace with 'cura5' => use constant => use 'lerrcp' instead
+- better the output of
+php run-g5.php cura A1 raw2tmp full
+to prepare complete restoration
+
+- check pertinence of
+grep -rn '0777' src/
 
 - See the difference in export of physicians
 Counting the nb of unique physicians in each group :

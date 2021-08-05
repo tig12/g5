@@ -91,9 +91,10 @@ class Occupation {
         foreach($occus as $occu){
             $slug = $occu->data['slug'];
             foreach($occu->data['parents'] as $parent){ // $parent is a slug
-if(!isset($nodes[$parent])){
-echo "\n<pre>"; print_r("'$slug' '$parent'"); echo "</pre>\n"; exit;
-}
+                if(!isset($nodes[$parent])){
+                    $msg = "INCORRECT OCCUPATION DEFINITION - occupation = '$slug' ; parent = '$parent'";
+                    throw new \Exception($msg);
+                }
                 $nodes[$slug]->addEdge($nodes[$parent]);
             }
         }

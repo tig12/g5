@@ -64,7 +64,7 @@ class tmp2db implements Command {
         }
         
         // source corresponding to D6 file
-        $source = Source::getBySlug(strtolower($datafile)); // DB
+        $source = Source::getBySlug(LERRCP::datafile2sourceSlug($datafile)); // DB
         if(is_null($source)){
             $source = Cura::getSourceOfDatafile($datafile);
             $source->insert(); // DB
@@ -72,7 +72,7 @@ class tmp2db implements Command {
         }
         
         // group
-        $g = Group::getBySlug(Cura::datafile2groupSlug($datafile)); // DB
+        $g = Group::getBySlug(LERRCP::datafile2groupSlug($datafile)); // DB
         if(is_null($g)){
             $g = Cura::getGroupOfDatafile($datafile);
             $g->data['id'] = $g->insert(); // DB
@@ -157,7 +157,10 @@ class tmp2db implements Command {
                 // does not addIdInSource($lerrcpSource) to respect the definition of Gauquelin id
                 $p->update(); // DB
                 if($reportType == 'full'){
-                    $report .= "Duplicate {$test->data['slug']} : {$p->data['ids-in-sources']['cura']} = $gqId\n";
+                    $report .= "Duplicate "
+                    . $test->data['slug'] . " : "
+                    . $p->data['ids-in-sources'][LERRCP::SOURCE_SLUG]
+                    . " = $gqId\n";
                 }
                 $nDuplicates++;
             }

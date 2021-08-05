@@ -54,7 +54,7 @@ class count implements Command {
         $res .= '<tr>'
              . '<th>File</th>'
              . '<th>Date</th>'
-             . '<th>Cura claims</th>'
+             . '<th>Title</th>'
              . '<th>N <sub>Cura</sub></th>'
              . '<th>N <sub>g5</sub></th>'
              . '<th>&Delta;</th>'
@@ -66,11 +66,11 @@ class count implements Command {
             $href = Cura::CURA_URLS[$datafile];
             $res .= '<td><a href="' . $href . '">' . $datafile . '</a></td>';
             $res .= '<td>' . LERRCP::LERRCP_INFOS[$datafile][0] . '</td>';
-            $res .= '<td>' . Cura::CURA_CLAIMS[$datafile][2] . '</td>';
+            $res .= '<td>' . LERRCP::LERRCP_INFOS[$datafile][3] . '</td>';
             $res .= '<td class="right">' . number_format(Cura::CURA_CLAIMS[$datafile][0], 0, '.', ' ') . '</td>';
             $res .= '<td class="right bold">' . number_format($N[$datafile], 0, '.', ' ') . '</td>';
             $res .= '<td>' . $delta . '</td>';
-            $res .= '<td>' . Cura::CURA_CLAIMS[$datafile][3] . '</td>';
+            $res .= '<td>' . Cura::CURA_CLAIMS[$datafile][2] . '</td>';
             $res .= '</tr>' . "\n";
         }
         

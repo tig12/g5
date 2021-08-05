@@ -22,24 +22,47 @@ class Person {
     // ***********************************************************************
     
     /**
-        Converts a row of table person to an object of type Person
-        @param $row Assoc array, row of table person
+        Converts a row of table person to an object of type Person.
+        @param $row Assoc array, row of table person.
+                    Can be partial (containing only parts of the fields).
     **/
     public static function row2person($row){
-        $row['to-check'] = $row['to_check'];
-        unset($row['to_check']);
-        $row['sources'] = json_decode($row['sources'], true);
-        $row['ids-in-sources'] = json_decode($row['ids_in_sources'], true);
-        unset($row['ids_in_sources']);
-        $row['trust-details'] = json_decode($row['trust_details'], true);
-        unset($row['trust_details']);
-        $row['name'] = json_decode($row['name'], true);                             
-        $row['occus'] = json_decode($row['occus'], true);
-        $row['birth'] = json_decode($row['birth'], true);
-        $row['death'] = json_decode($row['death'], true);
-        $row['raw'] = json_decode($row['raw'], true);
-        $row['history'] = json_decode($row['history'], true);
-        $row['notes'] = json_decode($row['notes'], true);
+        if(isset($row['to_check'])){
+            $row['to-check'] = $row['to_check'];
+            unset($row['to_check']);
+        }
+        if(isset($row['sources'])){
+            $row['sources'] = json_decode($row['sources'], true);
+        }
+        if(isset($row['ids_in_sources'])){
+            $row['ids-in-sources'] = json_decode($row['ids_in_sources'], true);
+            unset($row['ids_in_sources']);
+        }
+        if(isset($row['trust_details'])){
+            $row['trust-details'] = json_decode($row['trust_details'], true);
+            unset($row['trust_details']);
+        }
+        if(isset($row['name'])){
+            $row['name'] = json_decode($row['name'], true);                             
+        }
+        if(isset($row['occus'])){
+            $row['occus'] = json_decode($row['occus'], true);
+        }
+        if(isset($row['birth'])){
+            $row['birth'] = json_decode($row['birth'], true);
+        }
+        if(isset($row['death'])){
+            $row['death'] = json_decode($row['death'], true);
+        }
+        if(isset($row['raw'])){
+            $row['raw'] = json_decode($row['raw'], true);
+        }
+        if(isset($row['history'])){
+            $row['history'] = json_decode($row['history'], true);
+        }
+        if(isset($row['notes'])){
+            $row['notes'] = json_decode($row['notes'], true);
+        }
         $p = new Person();
         $p->data = $row;
         return $p;

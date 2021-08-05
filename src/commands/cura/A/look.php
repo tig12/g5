@@ -64,7 +64,7 @@ class look implements Command {
     **/
     private static function look_count($datafile){
         $datafiles = CuraRouter::computeDatafiles('A');
-        $dir = Config::$data['dirs']['tmp'] . DS . 'cura';
+        $dir = Cura::tmpDirname();
         
         $N = $nNAME = $nDATE = $nGEOID = array_fill_keys($datafiles, 0);
         $missNAME = $missDATE = $missGEOID = 0;
