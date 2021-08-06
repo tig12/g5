@@ -1,10 +1,12 @@
 
-Visit <a href="https://tig12.github.io/gauquelin5/index.html">tig12.github.io/gauquelin5</a>  
+Gathers heterogeneous data (timed birth dates of famous persons) and merges them in a single database.
+
+For details, visit <a href="https://tig12.github.io/gauquelin5/index.html">tig12.github.io/gauquelin5</a>  
 or clone the repository on your local machine and browse <code>docs/index.html</code>.
 
 You also can directly <a href="https://g5.tig12.net/output">download generated data</a>, partially restored.
 
-Code developed with php 7.2 ; tested on linux (ubuntu 18.4)  
+Needs php 8.0 or higher ; tested on linux (ubuntu 18.4 and debian 10 buster).
 
 Licence, for code and doc : choose between
 <ul>
