@@ -22,3 +22,8 @@
     Only modified the day, kept cura hour
     legal time = 20:30 (Müller 1083MED 484)
   
+-
+  NUM: 1369
+  FNAME: Cannavò
+  build-notes: |
+    2021-08-06 08:18:52+02:00 Fixed typo in cura file (Cannavò instead of Cannavo')

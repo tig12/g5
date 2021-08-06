@@ -1,10 +1,10 @@
 <?php
 /********************************************************************************
-    Generates data/output/history/1991-muller-writers/muller-402-writers.csv
+    Generates data/output/history/1991-muller-writers/muller-100-writers.csv
     By default, the generated file is compressed (using zip).
     
     @license    GPL
-    @history    2020-09-18 16:41:27+02:00, Thierry Graff : Creation
+    @history    2021-08-06 07:39:07+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\newalch\muller402;
 
@@ -15,7 +15,7 @@ use g5\patterns\Command;
 use g5\commands\gauquelin\LERRCP;
 use g5\commands\muller\AFD;
 
-class export implements Command {
+class export100 implements Command {
     
     /**
         Directory where the generated files are stored
@@ -23,13 +23,13 @@ class export implements Command {
     **/
     const OUTPUT_DIR = 'history' . DS . '1991-muller-writers';
     
-    const OUTPUT_FILE = 'muller-402-writers.csv';
+    const OUTPUT_FILE = 'muller-100-writers.csv';
     
     /**  Trick to access to $sourceSlug within $sort function **/
     private static $sourceSlug;
     
     /** 
-        Called by : php run-g5.php newalch muller402 export [nozip]
+        Called by : php run-g5.php newalch muller402 export100 [nozip]
         If called without parameter, the output is compressed (using zip)
         @param $params array containing 0 or 1 element :
                        - An optional string "nozip"
@@ -49,9 +49,9 @@ class export implements Command {
         
         $report = '';
         
-        $g = Group::getBySlug(Muller402::GROUP_SLUG);
+        $g = Group::getBySlug(Muller100::GROUP_SLUG);
         
-        self::$sourceSlug = Muller402::LIST_SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
+        self::$sourceSlug = Muller100::LIST_SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
 
         $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . self::OUTPUT_FILE;
         
@@ -63,6 +63,7 @@ class export implements Command {
             'DATE',
             'TZO',
             'DATE-UT',
+            'LMT',
             'PLACE',
             'C2',
             'CY',
@@ -70,6 +71,8 @@ class export implements Command {
             'LAT',
             'GEOID',
             'OCCU',
+            'OPUS',
+            'LEN',
         ];
         
         $map = [
@@ -79,12 +82,15 @@ class export implements Command {
             'birth.date' => 'DATE',
             'birth.tzo' => 'TZO',
             'birth.date-ut' => 'DATE-UT',
+            'birth.note' => 'LMT',
             'birth.place.name' => 'PLACE',
             'birth.place.c2' => 'C2',
             'birth.place.cy' => 'CY',
             'birth.place.lg' => 'LG',
             'birth.place.lat' => 'LAT',
             'birth.place.geoid' => 'GEOID',
+            'raw.' . self::$sourceSlug . '.OPUS' => 'OPUS',
+            'raw.' . self::$sourceSlug . '.LEN' => 'LEN',
         ];
         
         $fmap = [

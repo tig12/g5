@@ -119,6 +119,7 @@ class tmp2db100 implements Command {
                 $test->addIdInSource($source->data['slug'], $line['MUID']);
                 $mullerId = AFD::mullerId($source->data['slug'], $line['MUID']);
                 $test->addIdInSource(AFD::SOURCE_SLUG, $mullerId);
+                self::addOccu($line, $test);
                 // TODO see if some fields can be updated (if Müller more precise than Gauquelin)
                 $updatedValues = [];
                 $test->addHistory("newalch muller402 tmp2db100", $source->data['slug'], $updatedValues);
