@@ -71,11 +71,19 @@ class Occupation {
     }
     
     /**
-        Computes self::$allAncestors
+        Returns self::$allAncestors
     **/
     public static function getAllAncestors() {
+        self::computeAllAncestors();
+        return self::$allAncestors;
+    }
+    
+    /**
+        Computes self::$allAncestors
+    **/
+    private static function computeAllAncestors() {
         if(self::$allAncestors != null){
-            return self::$allAncestors;
+            return;
         }
         $occusFromDB = self::loadAllFromDB();
         // 1 - $nodes = assoc array slug - DAGStringNode
@@ -103,7 +111,6 @@ class Occupation {
         foreach($nodes as $slug => $node){
             self::$allAncestors[$slug] = $node->getReachableAsStrings();
         }
-        return self::$allAncestors;
     }
     
     /**
@@ -132,6 +139,27 @@ class Occupation {
             $tmp->data = $row;
             $res[] = $tmp;
         }
+        return $res;
+    }
+    
+    // ******************************************************
+    /**
+        Returns an array of slugs of all the descendants of an occupation.
+        @param  $occu Occupation slug for which descendants need to be computed
+        @param  $includeSeed    Boolean indicating if $occu should be also returned
+    **/
+    public static function getDescendants(string $occu, bool $includeSeed) {
+        self::computeAllAncestors();
+        $res = [];
+        foreach(self::$allAncestors as $current => $ancestors){
+            if(in_array($occu, $ancestors)){
+                $res[] = $current;
+            }
+        }
+        if($includeSeed){
+            $res[] = $occu;
+        }
+        $res = array_unique($res);
         return $res;
     }
     

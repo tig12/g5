@@ -163,7 +163,7 @@ class export implements Command {
             sort:       $sort,
             filters:    $filters,
             dozip:      $dozip
-        );
+        )[0];
     }
     
 }// end class    

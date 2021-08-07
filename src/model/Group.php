@@ -233,11 +233,13 @@ class Group{
         @param $filters Regular array of functions returning a boolean.
                         If one of these functions returns false on a group member,
                         export() skips the record.
-        @param $dozip   Boolean indicating if hte output should be zipped
-        @return Report
+        @param $dozip   Boolean indicating if the output should be zipped
+        @return An array with 2 elements :
+                - A report 
+                - The name of the file where the export is stored.
         
     **/
-    public function exportCsv($csvFile, $csvFields, $map=[], $fmap=[], $sort=false, $filters=[], $dozip=false): string {
+    public function exportCsv($csvFile, $csvFields, $map=[], $fmap=[], $sort=false, $filters=[], $dozip=false) {
         
         $csv = implode(G5::CSV_SEP, $csvFields) . "\n";
         
@@ -291,10 +293,12 @@ class Group{
             $zip->addFromString(basename($csvFile), $csv);
             $zip->close();
             $report .= "Generated $N lines in file $zipFile\n";
+            return [$report, $zipFile];
         }
         else{
             file_put_contents($csvFile, $csv);
             $report .= "Generated $N lines in file $csvFile\n";
+            return [$report, $csvFile];
         }
         return $report;
     }

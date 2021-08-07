@@ -9,6 +9,8 @@ to prepare complete restoration
 - check pertinence of
 grep -rn '0777' src/
 
+- addGeo (compute geonames) for D10 ?
+
 - See the difference in export of physicians
 Counting the nb of unique physicians in each group :
 2551 come from A2

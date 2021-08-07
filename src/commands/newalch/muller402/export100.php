@@ -117,7 +117,7 @@ class export100 implements Command {
             sort:       $sort,
             filters:    $filters,
             dozip:      $dozip
-        );
+        )[0];
     }
     
 } // end class    
