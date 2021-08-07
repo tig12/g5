@@ -16,6 +16,11 @@ use g5\G5;
 
 class Group{
     
+    // possible types of groups
+    
+    const TYPE_OCCU = 'occu';
+    const TYPE_HISTORICAL = 'history';
+    
     public $data = [];
     
     /** Boolean indicating if data['person-members'] have already been computed **/
@@ -63,16 +68,20 @@ class Group{
             slug,
             name,
             n,
+            type,
             description,
+            download,
             sources,
             parents
-            ) values(?,?,?,?,?,?) returning id");
+            ) values(?,?,?,?,?,?,?,?) returning id");
         $this->data['n'] = count($this->data['members']);
         $stmt->execute([
             $this->data['slug'],
             $this->data['name'],
             $this->data['n'],
+            $this->data['type'],
             $this->data['description'],
+            $this->data['download'],
             json_encode($this->data['sources']),
             json_encode($this->data['parents']),
         ]);
@@ -88,13 +97,15 @@ class Group{
         Updates a group in storage.
         @throws \Exception if trying to update an unexisting group
     **/
-    public function update() {
+    public function update(bool $updateMembers=true) {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("update groop set
             slug=?,
             name=?,
             n=?,
+            type=?,
             description=?,
+            download=?,
             sources=?,
             parents=?
             where id=?");
@@ -103,7 +114,9 @@ class Group{
             $this->data['slug'],
             $this->data['name'],
             $this->data['n'],
+            $this->data['type'],
             $this->data['description'],
+            $this->data['download'],
             json_encode($this->data['sources']),
             json_encode($this->data['parents']),
             $this->data['id'],
@@ -292,15 +305,14 @@ class Group{
             }
             $zip->addFromString(basename($csvFile), $csv);
             $zip->close();
-            $report .= "Generated $N lines in file $zipFile\n";
+            $report .= "Exported group to file $zipFile ($N lines)\n";
             return [$report, $zipFile];
         }
         else{
             file_put_contents($csvFile, $csv);
-            $report .= "Generated $N lines in file $csvFile\n";
+            $report .= "Exported group to file $csvFile ($N lines)\n";
             return [$report, $csvFile];
         }
-        return $report;
     }
     
-}// end class
+} // end class

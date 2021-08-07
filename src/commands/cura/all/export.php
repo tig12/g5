@@ -56,7 +56,7 @@ class export implements Command {
         $datafile = $params[0];
         
         $groupSlug = LERRCP::datafile2groupSlug($datafile);
-        $g = Group::getBySlug($groupSlug);
+        $g = Group::getBySlug($groupSlug); // DB
 
         self::$sourceSlug = LERRCP::datafile2sourceSlug($datafile); // Trick to access to $sourceSlug inside $sort function
         
@@ -113,15 +113,20 @@ class export implements Command {
         
         $filters = [];
         
-        return $g->exportCsv(
+        [$exportReport, $exportFile] = 
+        $g->exportCsv(
             csvFile:    $outfile,
             csvFields:  $csvFields,
             map:        $map,
             fmap:       $fmap,
             sort:       $sort,
             filters:    $filters,
-            dozip:      $dozip
-        )[0];
+            dozip:      $dozip,
+        );
+        $g->data['download'] = str_replace(Config::$data['dirs']['output'] . DS, '', $exportFile);
+        $g->update(updateMembers:false);
+        $report .= $exportReport;
+        return $report;
     }
     
 }// end class    

@@ -23,9 +23,6 @@ use g5\G5;
 use g5\commands\db\create\dbcreate;
 use g5\commands\db\fill\source;
 use g5\commands\db\fill\occu;
-use g5\commands\db\fill\occustats;
-use g5\commands\db\fill\stats;
-use g5\commands\db\fill\search;
 
 // raw2tmp
 use g5\commands\cura\A\raw2tmp                  as raw2tmpA;
@@ -62,8 +59,21 @@ use g5\commands\cura\D10\tmp2db                 as tmp2dbD10;
 use g5\commands\cura\E1_E3\tmp2db               as tmp2dbE1E3;
 use g5\commands\newalch\muller1083\tmp2db       as tmp2dbMuller1083;
 use g5\commands\newalch\muller402\tmp2db        as tmp2dbMuller402;
-use g5\commands\newalch\muller402\tmp2db100     as tmp2db100Muller402;
+use g5\commands\newalch\muller402\tmp2db100     as tmp2dbMuller100;
 use g5\commands\csicop\irving\tmp2db            as tmp2dbIrving;
+
+// finalize
+use g5\commands\db\fill\stats;
+use g5\commands\db\fill\occustats;
+use g5\commands\db\fill\occugroup;
+use g5\commands\db\fill\search;
+
+// export
+use g5\commands\cura\all\export                 as exportCura;
+use g5\commands\newalch\muller1083\export       as exportMuller1083;
+use g5\commands\newalch\muller402\export        as exportMuller402;
+use g5\commands\newalch\muller402\export100     as exportMuller100;
+use g5\commands\csicop\irving\export            as exportIrving;
 
 class history implements Command {
     
@@ -74,6 +84,7 @@ class history implements Command {
         'tmp'       => 'Build files in data/tmp',
         'db'        => 'Fill database with tmp files',
         'finalize'  => 'Finalize DB (stats, groups, search)',
+        'export'    => 'Exports the groups in zipped csv files',
         'all'       => 'Executes all steps',
     ];
     
@@ -151,7 +162,6 @@ class history implements Command {
             echo "***********************\n";
             echo "***  Fill database  ***\n";
             echo "***********************\n";
-            
             echo dbcreate::execute([]);
             echo source::execute([LERRCP::SOURCE_DEFINITION_FILE]);
             echo source::execute([AFD::SOURCE_DEFINITION_FILE]);
@@ -169,7 +179,7 @@ class history implements Command {
             echo tmp2dbE1E3::execute(['E3', 'tmp2db', 'small']);
             echo tmp2dbMuller1083::execute(['small']);
             echo tmp2dbMuller402::execute(['small']);
-            echo tmp2db100Muller402::execute(['small']);
+            echo tmp2dbMuller100::execute(['small']);
             echo tmp2dbIrving::execute(['small']);
         }
         
@@ -177,11 +187,27 @@ class history implements Command {
             echo "***************************\n";
             echo "***  Finalize database  ***\n";
             echo "***************************\n";
-            
             echo stats::execute(['small']);
             echo occustats::execute();
             echo occugroup::execute();
             echo search::execute();
+        }
+        
+        if($param == 'export' || $param == 'all'){
+            echo "***************************\n";
+            echo "***    Export groups    ***\n";
+            echo "***************************\n";
+            foreach($filesCuraA as $datafile){
+                echo exportCura::execute([$datafile, 'export']);
+            }
+            echo exportCura::execute(['D6', 'export']);
+            echo exportCura::execute(['D10', 'export']);
+            echo exportCura::execute(['E1', 'export']);
+            echo exportCura::execute(['E3', 'export']);
+            echo exportMuller1083::execute([]);
+            echo exportMuller402::execute([]);
+            echo exportMuller100::execute([]);
+            echo exportIrving::execute([]);
         }
         
         return '';

@@ -156,6 +156,7 @@ class Muller1083 {
         $g = new Group();
         $g->data['slug'] = self::GROUP_SLUG;
         $g->data['name'] = "Müller 1083 physicians";
+        $g->data['type'] = Group::TYPE_HISTORICAL;
         $g->data['description'] = "1083 physisicans of French Académie de médecine, gathered by Arno Müller";
         $g->data['sources'] = [self::LIST_SOURCE_SLUG, self::BOOKLET_SOURCE_SLUG];
         return $g;

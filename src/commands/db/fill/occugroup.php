@@ -40,6 +40,7 @@ class occugroup implements Command {
                 $test = new Group();
                 $test->data['slug'] = $todo;
                 $test->data['name'] = $occuSlugNames[$todo];
+                $test->data['type'] = Group::TYPE_OCCU;
                 $test->data['description'] = "Persons whose occupation is " . $occuSlugNames[$todo] . '.';
             }
             $groups[$todo] = $test;

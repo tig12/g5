@@ -6,8 +6,10 @@ create table groop (
     id              serial primary key,
     slug            varchar(255) unique not null,
     name            varchar(255) unique not null,
-    n               integer not null default 0,     -- nb of persons in this groop
-    description     text,
+    n               integer not null default 0,         -- nb of persons in this groop
+    type            varchar(255),                       -- eg 'occu', 'history' ...
+    description     text not null default '',
+    download        varchar(255),                       -- optional path to file / dir to download this group
     sources         jsonb,
     parents         jsonb
 );

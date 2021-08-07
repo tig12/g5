@@ -80,6 +80,7 @@ class Muller100 {
         $g->data['slug'] = self::GROUP_SLUG;
         $g->data['name'] = "Müller 100 Italian writers";
         $g->data['description'] = "100 Italian writers without birth time, gathered by Arno Müller";
+        $g->data['type'] = Group::TYPE_HISTORICAL;
         $g->data['sources'] = [self::LIST_SOURCE_SLUG, Muller402::BOOKLET_SOURCE_SLUG];
         return $g;
     }

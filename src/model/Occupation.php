@@ -15,12 +15,19 @@ class Occupation {
     
     /**
         List of csv files containing the definitions of occupations.
+        Relative to data/model/occu
     **/
     const DEFINITION_FILES = [
         'cura5.csv',
         'gauq-ertel-wd.csv',
         'general.csv',
     ];
+    
+    /** 
+        Directory where the csv files containing lists by occupation are stored.
+        Relative to data/output (see entry dirs / output in config.yml).
+    **/
+    const DOWNLOAD_BASEDIR = 'occupation';
     
     /** Stores the data of an Occupation object. **/
     public $data;

@@ -49,7 +49,7 @@ class export100 implements Command {
         
         $report = '';
         
-        $g = Group::getBySlug(Muller100::GROUP_SLUG);
+        $g = Group::getBySlug(Muller100::GROUP_SLUG); // DB
         
         self::$sourceSlug = Muller100::LIST_SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
 
@@ -109,15 +109,20 @@ class export100 implements Command {
         
         $filters = [];
         
-        return $g->exportCsv(
+        [$exportReport, $exportFile] = 
+        $g->exportCsv(
             csvFile:    $outfile,
             csvFields:  $csvFields,
             map:        $map,
             fmap:       $fmap,
             sort:       $sort,
             filters:    $filters,
-            dozip:      $dozip
-        )[0];
+            dozip:      $dozip,
+        );
+        $g->data['download'] = str_replace(Config::$data['dirs']['output'] . DS, '', $exportFile);
+        $g->update(updateMembers:false);
+        $report .= $exportReport;
+        return $report;
     }
     
 } // end class    

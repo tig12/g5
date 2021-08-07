@@ -1,8 +1,12 @@
 <?php
 /******************************************************************************
     
-    Stores all persons with gien occupation codes in a csv file
+    Stores all persons with given occupation codes in a csv file
     By default, the generated file is compressed (using zip).
+    
+    WARNING This command does not fill the field "downloads" of the group
+    corresponding to the occupation (because several occus separated by + can be given as parameter,
+    so there is no correspondance between occus handled and group stored in database).
     
     @license    GPL
     @history    2020-08-29 19:42:54+02:00, Thierry Graff : Creation
@@ -23,22 +27,20 @@ class occu implements Command {
         Supplementary parameters that are not hadled by CLI interface
     **/
     const PARAMS = [
-        // if true the generated file name will be prefixed by the number of records
-        'prefix_with_number' => true,
+        // if true, the generated file name will be prefixed by the number of records
+        'add_number_in_name' => true,
     ];
     
-    // *****************************************
-    // Implementation of Command
     /** 
         @param  $params array containing 2 or 3 elements :
-                        - a list of profession codes separated by +
+                        - a list of occupation slugs separated by +
                         - The path to the output file, relative to directory specified in config.yml by dirs / output
                         - An optional string "nozip"
     **/
     public static function execute($params=[]): string {
         $msg = "USAGE : php run-g5.php db export occu <profession codes> <path to output file> [nozip]\n"
             . "  To export several professions, separate the codes by \"+\"\n"
-            . "  Use 'nozip' as 3rd parameter to export a csv instead of a zipped csv :\n"
+            . "  Use 'nozip' as 3rd parameter to export a csv instead of a zipped csv.\n"
             . "Examples :\n"
             . "  php run-g5.php db export skier path/to/output.csv\n"
             . "  php run-g5.php db export skier path/to/output.csv nozip\n"
@@ -69,7 +71,14 @@ class occu implements Command {
         
         $outfile = Config::$data['dirs']['output'] . DS . $params[1];
         
-        $persons = Person::getByOccu($occus);
+        $report = '';
+        
+        $persons = Person::getByOccu($occus); // DB
+        if(count($persons) == 0){
+            return "GROUP NOT EXPORTED - '{$params[0]}' corresponds to 0 persons\n";
+        }
+        
+        // Can't do Group::getBySlug() because possibly several occus
         $g = new Group();
         $g->data['person-members'] =& $persons;
         $g->personMembersComputed = true;
@@ -128,31 +137,28 @@ class occu implements Command {
         
         $filters = [];
         
-        if(self::PARAMS['prefix_with_number']){
-            $outfile = self::prefix_with_number($outfile, count($persons));
+        if(self::PARAMS['add_number_in_name']){
+            $outfile = self::add_number_in_name($outfile, count($persons));
         }
-//echo "$outfile\n"; exit;
         
-        [$report, $file] =  $g->exportCsv(
+        [$exportReport, $exportfile] =  $g->exportCsv(
             csvFile:    $outfile,
             csvFields:  $csvFields,
             map:        $map,
             fmap:       $fmap,
             sort:       $sort,
             filters:    $filters,
-            dozip:      $dozip
+            dozip:      $dozip,
         );
-        
+        $report .= $exportReport;
         return $report;
     }
     
-    
     // ************************* Auxiliary functions *****************************
-    private static function prefix_with_number($filename, $N){
-        $dir = dirname($filename);
-        $base = basename($filename);
-        return $dir . DS . "$N-$base";
+    private static function add_number_in_name($file, $N){
+        $pathinfo = pathinfo($file);
+        return $pathinfo['dirname'] . DS . $pathinfo['filename'] . "-$N." . $pathinfo['extension'];
     }
     
     
-}// end class
+} // end class

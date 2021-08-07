@@ -43,6 +43,7 @@ class CSICOP {
         $g = new Group();
         $g->data['slug'] = self::GROUP_SLUG;
         $g->data['name'] = "CSICOP 408 sportsmen";
+        $g->data['type'] = Group::TYPE_HISTORICAL;
         $g->data['description'] = "408 American athletes, gathered by CSICOP";
         $g->data['sources'] = [CSICOP::SOURCE_SLUG, SI42::SOURCE_SLUG, Irving::LIST_SOURCE_SLUG];
         return $g;
@@ -55,6 +56,7 @@ class CSICOP {
         $g = new Group();
         $g->data['slug'] = self::GROUP1_SLUG;
         $g->data['name'] = "CSICOP Batch 1 - 128 sportsmen";
+        $g->data['type'] = Group::TYPE_HISTORICAL;
         $g->data['description'] = "128 American athletes, first batch of data gathered by CSICOP";
         $g->data['sources'] = [CSICOP::SOURCE_SLUG, SI42::SOURCE_SLUG, Irving::LIST_SOURCE_SLUG];
         $g->data['parents'] = [CSICOP::GROUP_SLUG];
@@ -68,6 +70,7 @@ class CSICOP {
         $g = new Group();
         $g->data['slug'] = self::GROUP2_SLUG;
         $g->data['name'] = "CSICOP Batch 2 - 198 sportsmen";
+        $g->data['type'] = Group::TYPE_HISTORICAL;
         $g->data['description'] = "198 American athletes, second batch of data gathered by CSICOP";
         $g->data['sources'] = [CSICOP::SOURCE_SLUG, SI42::SOURCE_SLUG, Irving::LIST_SOURCE_SLUG];
         $g->data['parents'] = [CSICOP::GROUP_SLUG];
@@ -81,6 +84,7 @@ class CSICOP {
         $g = new Group();
         $g->data['slug'] = self::GROUP3_SLUG;
         $g->data['name'] = "CSICOP Batch 3 - 82 sportsmen";
+        $g->data['type'] = Group::TYPE_HISTORICAL;
         $g->data['description'] = "82 American athletes, third batch of data gathered by CSICOP";
         $g->data['sources'] = [CSICOP::SOURCE_SLUG, SI42::SOURCE_SLUG, Irving::LIST_SOURCE_SLUG];
         $g->data['parents'] = [CSICOP::GROUP_SLUG];

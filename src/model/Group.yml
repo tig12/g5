@@ -11,7 +11,11 @@ name:
 
 'n': 0
 
+type: 
+
 description: |
+
+download: 
 
 # array of source slugs
 sources: []
