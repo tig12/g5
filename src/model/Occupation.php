@@ -38,6 +38,10 @@ class Occupation {
     **/
     private static $allAncestors = null;
     
+    // ***********************************************************************
+    //                                  STATIC
+    // ***********************************************************************
+    
     /** 
         Returns the directory where sources are defined, in csv files.
     **/
@@ -45,7 +49,6 @@ class Occupation {
         return Config::$data['dirs']['model'] . DS . 'occu';
     }
     
-    // ******************************************************
     /**
         Returns an associative array with
             keys = occupation codes for Ertel or Cura5
@@ -168,6 +171,49 @@ class Occupation {
         }
         $res = array_unique($res);
         return $res;
+    }
+    
+    /**
+        Creates an object of type Occupation from storage, using its slug,
+        or null if the occupation doesn't exist.
+    **/
+    public static function getBySlug($slug): ?Occupation {
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare("select * from occu where slug=?");
+        $stmt->execute([$slug]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if($res === false || count($res) == 0){
+            return null;
+        }
+        $o = new Occupation();
+        $o->data = $res;
+        $o->data['parents'] = json_decode($res['parents'], true);
+        return $o;
+    }
+    
+    // ***********************************************************************
+    //                                  INSTANCE
+    // ***********************************************************************
+    
+    /**
+        Updates an occupation in storage.
+        @throws \Exception if trying to update an unexisting occupation
+    **/
+    public function update() {
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare("update occu set
+            wd=?,
+            name=?,
+            n=?,
+            parents=?
+            where slug=?");
+        $stmt->execute([
+            $this->data['wd'],
+            $this->data['name'],
+            $this->data['n'],
+            json_encode($this->data['parents']),
+            $this->data['slug'],
+        ]);
     }
     
 } // end class

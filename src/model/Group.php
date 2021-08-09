@@ -109,7 +109,9 @@ class Group{
             sources=?,
             parents=?
             where id=?");
-        $this->data['n'] = count($this->data['members']);
+        if($updateMembers == true){
+            $this->data['n'] = count($this->data['members']);
+        }
         $stmt->execute([
             $this->data['slug'],
             $this->data['name'],
@@ -247,9 +249,10 @@ class Group{
                         If one of these functions returns false on a group member,
                         export() skips the record.
         @param $dozip   Boolean indicating if the output should be zipped
-        @return An array with 2 elements :
-                - A report 
+        @return An array with 3 elements :
+                - A report.
                 - The name of the file where the export is stored.
+                - The number of elements in the group
         
     **/
     public function exportCsv($csvFile, $csvFields, $map=[], $fmap=[], $sort=false, $filters=[], $dozip=false) {
@@ -266,7 +269,7 @@ class Group{
         
         $report = '';
 
-        $N = 0;
+        $N = 0; // nb of elements in the group
         foreach($this->data['person-members'] as $p){
             // filters
             foreach($filters as $function){
@@ -298,21 +301,20 @@ class Group{
             $report .= "Created directory $dir\n";
         }
         if($dozip){
-            $zipFile = $csvFile . '.zip';
+            $filename = $csvFile . '.zip';
             $zip = new \ZipArchive();
-            if ($zip->open($zipFile, \ZipArchive::CREATE) !== true) {
-                throw new \Exception("Cannot open <$zipFile>");
+            if ($zip->open($filename, \ZipArchive::CREATE) !== true) {
+                throw new \Exception("Cannot open <$filename>");
             }
             $zip->addFromString(basename($csvFile), $csv);
             $zip->close();
-            $report .= "Exported group to file $zipFile ($N lines)\n";
-            return [$report, $zipFile];
         }
         else{
-            file_put_contents($csvFile, $csv);
-            $report .= "Exported group to file $csvFile ($N lines)\n";
-            return [$report, $csvFile];
+            $filename = $csvFile;
+            file_put_contents($filename, $csv);
         }
+        $report .= "Exported group to file $filename ($N lines)\n";
+        return [$report, $filename, $N];
     }
     
 } // end class

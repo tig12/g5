@@ -74,6 +74,7 @@ use g5\commands\newalch\muller1083\export       as exportMuller1083;
 use g5\commands\newalch\muller402\export        as exportMuller402;
 use g5\commands\newalch\muller402\export100     as exportMuller100;
 use g5\commands\csicop\irving\export            as exportIrving;
+use g5\commands\db\export\alloccus              as exportAllOccus;
 
 class history implements Command {
     
@@ -208,6 +209,7 @@ class history implements Command {
             echo exportMuller402::execute([]);
             echo exportMuller100::execute([]);
             echo exportIrving::execute([]);
+            echo exportAllOccus::execute([]);
         }
         
         return '';

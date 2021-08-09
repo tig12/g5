@@ -189,7 +189,7 @@ class LERRCP {
         $g->data['name'] = "Gauquelin $datafile";
         $g->data['type'] = Group::TYPE_HISTORICAL;
         $g->data['description'] = "Persons published by Gauquelins' LERRCP booklet "
-            . '"' . LERRCP::LERRCP_INFOS[$datafile][3] . '.';
+            . '"' . LERRCP::LERRCP_INFOS[$datafile][3] . '".';
         $g->data['sources'] = [LERRCP::datafile2bookletSourceSlug($datafile)];
         return $g;
     }

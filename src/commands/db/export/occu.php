@@ -24,7 +24,7 @@ use g5\commands\muller\AFD;
 class occu implements Command {
     
     /** 
-        Supplementary parameters that are not hadled by CLI interface
+        Supplementary parameters that are not handled by CLI interface
     **/
     const PARAMS = [
         // if true, the generated file name will be prefixed by the number of records
@@ -36,28 +36,53 @@ class occu implements Command {
                         - a list of occupation slugs separated by +
                         - The path to the output file, relative to directory specified in config.yml by dirs / output
                         - An optional string "nozip"
-    **/
-    public static function execute($params=[]): string {
-        $msg = "USAGE : php run-g5.php db export occu <profession codes> <path to output file> [nozip]\n"
+                        - An optional string "full", indicating that the function must
+                          return an associative array with 3 elements :
+                            - A report.
+                            - The name of the file where the export is stored.
+                            - The number of elements in the group
+                          If "full" is not present, the function returns a report as usual.
+    **/                                                                                          
+    public static function execute($params=[]) {
+        $msg = "USAGE : php run-g5.php db export occu <profession codes> <path to output file> [nozip] [full]\n"
             . "  To export several professions, separate the codes by \"+\"\n"
-            . "  Use 'nozip' as 3rd parameter to export a csv instead of a zipped csv.\n"
+            . "  Use 'nozip' to export a csv instead of a zipped csv.\n"
+            . "  Use 'full' to indicate that the function must return an array with 3 elements :\n"
+            . "    - the report.\n"
+            . "    - the file name where the csv was stored (can be a .zip file).\n"
+            . "    - the number of elements of the stored group.\n"
             . "Examples :\n"
             . "  php run-g5.php db export skier path/to/output.csv\n"
             . "  php run-g5.php db export skier path/to/output.csv nozip\n"
+            . "  php run-g5.php db export skier path/to/output.csv nozip full\n"
             . "  php run-g5.php db export skier+writer path/to/output.csv\n"
             ;
-        if(count($params) > 3){
-            return "USELESS PARAMETER : '{$params[3]}'\n" . $msg;
+        $possibles = ['nozip', 'full'];
+        if(count($params) > 4){
+            return "USELESS PARAMETER : '{$params[4]}'\n" . $msg;
         }
-        if(count($params) == 3 && $params[2] != 'nozip'){
+        if(count($params) == 4 && !in_array($params[3], $possibles)){
+            return "INVALID PARAMETER : '{$params[3]}'\n" . $msg;
+        }
+        if(count($params) == 3 && !in_array($params[2], $possibles)){
             return "INVALID PARAMETER : '{$params[2]}'\n" . $msg;
         }
         if(count($params) < 2){
             return "MISSING PARAMETER'\n" . $msg;
         }
         $dozip = true;
-        if(count($params) == 3){
+        $returnType = 'report';
+        if(count($params) == 4 && ($params[2] == 'nozip' || $params[3] == 'nozip')){
             $dozip = false;
+        }
+        if(count($params) == 4 && ($params[2] == 'full' || $params[3] == 'full')){
+            $returnType = 'full';
+        }
+        if(count($params) == 3 && $params[2] == 'nozip'){
+            $dozip = false;
+        }
+        if(count($params) == 3 && $params[2] == 'full'){
+            $returnType = 'full';
         }
         
         $occus1 = explode('+', $params[0]);
@@ -75,7 +100,12 @@ class occu implements Command {
         
         $persons = Person::getByOccu($occus); // DB
         if(count($persons) == 0){
-            return "GROUP NOT EXPORTED - '{$params[0]}' corresponds to 0 persons\n";
+            $report .= "GROUP NOT EXPORTED - '{$params[0]}' corresponds to 0 persons\n";
+            if($returnType == 'report'){
+                return $report;
+            }
+            return [$report, '', 0];
+            
         }
         
         // Can't do Group::getBySlug() because possibly several occus
@@ -141,7 +171,7 @@ class occu implements Command {
             $outfile = self::add_number_in_name($outfile, count($persons));
         }
         
-        [$exportReport, $exportfile] =  $g->exportCsv(
+        [$exportReport, $exportfile, $N] =  $g->exportCsv(
             csvFile:    $outfile,
             csvFields:  $csvFields,
             map:        $map,
@@ -151,7 +181,10 @@ class occu implements Command {
             dozip:      $dozip,
         );
         $report .= $exportReport;
-        return $report;
+        if($returnType == 'report'){
+            return $report;
+        }
+        return [$report, $exportfile, $N];
     }
     
     // ************************* Auxiliary functions *****************************
@@ -159,6 +192,5 @@ class occu implements Command {
         $pathinfo = pathinfo($file);
         return $pathinfo['dirname'] . DS . $pathinfo['filename'] . "-$N." . $pathinfo['extension'];
     }
-    
     
 } // end class

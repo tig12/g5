@@ -109,7 +109,7 @@ class export100 implements Command {
         
         $filters = [];
         
-        [$exportReport, $exportFile] = 
+        [$exportReport, $exportFile, $N] = 
         $g->exportCsv(
             csvFile:    $outfile,
             csvFields:  $csvFields,
@@ -126,4 +126,3 @@ class export100 implements Command {
     }
     
 } // end class    
-
