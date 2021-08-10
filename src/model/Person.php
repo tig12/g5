@@ -280,7 +280,7 @@ class Person {
                 $occus[] = $occuSlug;
             }                              
         }
-        $ancestors = Occupation::getAllAncestors();
+        $ancestors = Group::getAllAncestors();
         $remove = [];
         foreach($occus as $occu1){
             foreach($occus as $occu2){
@@ -292,8 +292,8 @@ class Person {
                 }
             }
         }
-        // note: here array_values() permits to reindex
-        // if array_values() not used, jsonb is not stored as a regular array, but as an associative array.
+        // note: array_values() permits to reindex + if array_values() not used,
+        // jsonb is not stored as a regular array, but as an associative array.
         $this->data['occus'] = array_values(array_diff($occus, $remove));
     }
     

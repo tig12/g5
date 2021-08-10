@@ -6,6 +6,7 @@ create table groop (
     id              serial primary key,
     slug            varchar(255) unique not null,
     name            varchar(255) unique not null,
+    wd              varchar(11) not null default '',    -- varchar(9) probably enough
     n               integer not null default 0,         -- nb of persons in this groop
     type            varchar(255),                       -- eg 'occu', 'history' ...
     description     text not null default '',

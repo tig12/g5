@@ -29,7 +29,6 @@ class dbcreate implements Command {
             'person',
             'groop',
             'source',
-            'occu',
             'person_groop',
             'stats',
             'search',

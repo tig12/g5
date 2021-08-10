@@ -13,6 +13,7 @@
 ********************************************************************************/
 namespace g5\commands\db\export;
 
+use g5\Config;
 use g5\patterns\Command;
 use g5\model\Occupation;
 use g5\model\Group;
@@ -48,13 +49,12 @@ class alloccus implements Command {
             }
             // uses the fact that groups are named using the occupation slug (see command occugroup).
             $g = Group::getBySlug($slug); // DB
-            $g->data['download'] = $execFile;
+// HERE not correct - the group shouldn't store the export
+// suppress use g5\Config when refactoring
+            $download = str_replace(Config::$data['dirs']['output'] . DS, '', $execFile);
+            $g->data['download'] = $download;
             $g->data['n'] = $execN;
             $g->update(updateMembers:false); // DB
-            //
-            $o = Occupation::getBySlug($slug); // DB
-            $o->data['n'] = $execN;
-            $o->update(); // DB
             echo $execReport;
         }
         

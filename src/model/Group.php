@@ -13,13 +13,21 @@ namespace g5\model;
 
 use g5\Config;                           
 use g5\G5;
+use g5\patterns\DAGStringNode;
 
 class Group{
     
     // possible types of groups
     
     const TYPE_OCCU = 'occu';
+    
     const TYPE_HISTORICAL = 'history';
+
+    /**
+        Associative array: group slug => array of slugs of ancestors.
+        Computed by getAllAncestors().
+    **/
+    private static $allAncestors = null;
     
     public $data = [];
     
@@ -32,7 +40,9 @@ class Group{
         $this->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Group.yml'));
     }
     
-    // *********************** Get ***********************
+    // ***********************************************************************
+    //                                  Get
+    // ***********************************************************************
     
     /**
         Creates an object of type Group from storage, using its slug,
@@ -55,7 +65,9 @@ class Group{
         return $g;
     }
     
-    // *********************** CRUD ***********************
+    // ***********************************************************************
+    //                                  CRUD
+    // ***********************************************************************
     
     /**
         Inserts a group in storage.
@@ -123,10 +135,14 @@ class Group{
             json_encode($this->data['parents']),
             $this->data['id'],
         ]);
-        $this->updateMembers();
+        if($updateMembers == true){
+            $this->updateMembers();
+        }
     }
     
-    // *********************** Members ***********************
+    // ***********************************************************************
+    //                                  Members
+    // ***********************************************************************
     
     /** 
         Adds a person id in $this->members
@@ -183,7 +199,92 @@ class Group{
         $this->data['n'] = 0;
     }
     
-    // *********************** Export ***********************
+    // ***********************************************************************
+    //                       Ancestors / descendants
+    // ***********************************************************************
+    /**
+        Returns self::$allAncestors
+    **/
+    public static function getAllAncestors() {
+        self::computeAllAncestors();
+        return self::$allAncestors;
+    }
+    
+    /**
+        Computes self::$allAncestors
+    **/
+    private static function computeAllAncestors() {
+        if(self::$allAncestors != null){
+            return;
+        }
+        $groupsFromDB = self::loadAllFromDB();
+        // 1 - $nodes = assoc array slug - DAGStringNode
+        //     $groups = assoc array slug - Group object
+        $nodes = [];
+        $groups = [];
+        foreach($groupsFromDB as $group){
+            $slug = $group->data['slug'];
+            $nodes[$slug] = new DAGStringNode($slug);
+            $groups[$slug] = $group;
+        }
+        // 2 - add edges from parents
+        foreach($groups as $group){
+            $slug = $group->data['slug'];
+            foreach($group->data['parents'] as $parent){ // $parent is a slug
+                if(!isset($nodes[$parent])){
+                    $msg = "INCORRECT GROUP DEFINITION - group = '$slug' ; parent = '$parent'";
+                    throw new \Exception($msg);
+                }
+                $nodes[$slug]->addEdge($nodes[$parent]);
+            }
+        }
+        // 3 - result
+        self::$allAncestors = [];
+        foreach($nodes as $slug => $node){
+            self::$allAncestors[$slug] = $node->getReachableAsStrings();
+        }
+    }
+    
+    /**
+        Returns an array of Group objects, retrieved from database.
+    **/
+    public static function loadAllFromDB() {
+        $dblink = DB5::getDbLink();
+        $query = "select * from groop";
+        $res = [];
+        foreach($dblink->query($query, \PDO::FETCH_ASSOC) as $row){
+            $row['parents'] = json_decode($row['parents'], true);
+            $row['sources'] = json_decode($row['sources'], true);
+            $tmp = new Group();
+            $tmp->data = $row;
+            $res[] = $tmp;
+        }
+        return $res;
+    }
+    
+    /**
+        Returns an array of slugs of all the descendants of an occupation.
+        @param  $group Group    slug for which descendants need to be computed
+        @param  $includeSeed    Boolean indicating if $group should be also returned
+    **/
+    public static function getDescendants(string $group, bool $includeSeed) {
+        self::computeAllAncestors();
+        $res = [];
+        foreach(self::$allAncestors as $current => $ancestors){
+            if(in_array($group, $ancestors)){
+                $res[] = $current;
+            }
+        }
+        if($includeSeed){
+            $res[] = $group;
+        }
+        $res = array_unique($res);
+        return $res;
+    }
+    
+    // ***********************************************************************
+    //                                Export
+    // ***********************************************************************
     
     /** 
         Fills person-members with objects of type Person
@@ -209,6 +310,7 @@ class Group{
     
     /** 
         Generates and stores on disk a csv file (which may be zipped) from its members (of type Person).
+        Does not modify the group (in particular, fields 'dowload', 'n', 'members' are untouched).
             First line contains field names.
             Other lines contain data.
         @param $csvFile
@@ -231,7 +333,6 @@ class Group{
                 // ...
                 'birth.place.geoid' => 'GEOID',
             ];
-        
         @param $fmap Assoc array
                     key = field name in generated csv
                     value = function computing this field's value to write in the csv
@@ -251,7 +352,7 @@ class Group{
         @param $dozip   Boolean indicating if the output should be zipped
         @return An array with 3 elements :
                 - A report.
-                - The name of the file where the export is stored.
+                - The name of the file where the export is stored, relative to data/output (see config.yml).
                 - The number of elements in the group
         
     **/

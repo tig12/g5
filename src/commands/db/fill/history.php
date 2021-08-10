@@ -21,8 +21,8 @@ use g5\commands\cura\Cura;
 use g5\G5;
 
 use g5\commands\db\create\dbcreate;
-use g5\commands\db\fill\source;
-use g5\commands\db\fill\occu;
+use g5\commands\db\fill\source                  as fillsource;
+use g5\commands\db\fill\occu                    as filloccu;
 
 // raw2tmp
 use g5\commands\cura\A\raw2tmp                  as raw2tmpA;
@@ -64,7 +64,6 @@ use g5\commands\csicop\irving\tmp2db            as tmp2dbIrving;
 
 // finalize
 use g5\commands\db\fill\stats;
-use g5\commands\db\fill\occustats;
 use g5\commands\db\fill\occugroup;
 use g5\commands\db\fill\search;
 
@@ -164,12 +163,12 @@ class history implements Command {
             echo "***  Fill database  ***\n";
             echo "***********************\n";
             echo dbcreate::execute([]);
-            echo source::execute([LERRCP::SOURCE_DEFINITION_FILE]);
-            echo source::execute([AFD::SOURCE_DEFINITION_FILE]);
-            echo source::execute([Cura::SOURCE_DEFINITION_FILE]);
-            echo source::execute([Newalch::SOURCE_DEFINITION_FILE]);
-            echo source::execute([G5::SOURCE_DEFINITION_FILE]);
-            echo occu::execute();
+            echo fillsource::execute([LERRCP::SOURCE_DEFINITION_FILE]);
+            echo fillsource::execute([AFD::SOURCE_DEFINITION_FILE]);
+            echo fillsource::execute([Cura::SOURCE_DEFINITION_FILE]);
+            echo fillsource::execute([Newalch::SOURCE_DEFINITION_FILE]);
+            echo fillsource::execute([G5::SOURCE_DEFINITION_FILE]);
+            echo filloccu::execute();
             
             foreach($filesCuraA as $datafile){
                 echo tmp2dbA::execute([$datafile, 'tmp2db', 'small']);
@@ -189,7 +188,6 @@ class history implements Command {
             echo "***  Finalize database  ***\n";
             echo "***************************\n";
             echo stats::execute(['small']);
-            echo occustats::execute();
             echo occugroup::execute();
             echo search::execute();
         }
@@ -209,6 +207,7 @@ class history implements Command {
             echo exportMuller402::execute([]);
             echo exportMuller100::execute([]);
             echo exportIrving::execute([]);
+            //
             echo exportAllOccus::execute([]);
         }
         

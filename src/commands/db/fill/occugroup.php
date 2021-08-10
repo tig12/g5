@@ -28,14 +28,14 @@ class occugroup implements Command {
         $t1 = microtime(true);
         
         $occuSlugNames = Occupation::getAllSlugNames();
-        $allAncestors = Occupation::getAllAncestors();
+        $allAncestors = Group::getAllAncestors();
         $todos = array_keys($allAncestors);
         //
         // initialize the groups
         //
         $groups = [];
         foreach($todos as $todo){
-            $test = Group::getBySlug($todo);
+            $test = Group::getBySlug($todo); // DB
             if(is_null($test)){
                 $test = new Group();
                 $test->data['slug'] = $todo;
@@ -66,10 +66,10 @@ class occugroup implements Command {
         $N = 0; // only useful for report
         foreach($groups as $group){
             if(is_null($group->data['id'])){
-                $group->insert();
+                $group->insert(); // DB
             }
             else{
-                $group->update();
+                $group->update(); // DB
             }
             $N += $group->data['n'];
         }

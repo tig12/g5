@@ -88,7 +88,7 @@ class occu implements Command {
         $occus1 = explode('+', $params[0]);
         $occus = [];
         foreach($occus1 as $occu){
-            $children = Occupation::getDescendants($occu, includeSeed:true);
+            $children = Group::getDescendants($occu, includeSeed:true);
             if(!empty($children)){
                 $occus = array_merge($occus, $children);
             }

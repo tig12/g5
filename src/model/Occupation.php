@@ -8,7 +8,6 @@
 namespace g5\model;
 
 use g5\Config;
-use g5\patterns\DAGStringNode;
 use tiglib\arrays\csvAssociative;
 
 class Occupation {
@@ -31,12 +30,6 @@ class Occupation {
     
     /** Stores the data of an Occupation object. **/
     public $data;
-    
-    /**
-        Associative array: occupation slug => array of slugs of ancestors.
-        Computed by getAllAncestors().
-    **/
-    private static $allAncestors = null;
     
     // ***********************************************************************
     //                                  STATIC
@@ -81,139 +74,16 @@ class Occupation {
     }
     
     /**
-        Returns self::$allAncestors
-    **/
-    public static function getAllAncestors() {
-        self::computeAllAncestors();
-        return self::$allAncestors;
-    }
-    
-    /**
-        Computes self::$allAncestors
-    **/
-    private static function computeAllAncestors() {
-        if(self::$allAncestors != null){
-            return;
-        }
-        $occusFromDB = self::loadAllFromDB();
-        // 1 - $nodes = assoc array slug - DAGStringNode
-        //     $occus = assoc array slug - Occupation object
-        $nodes = [];
-        $occus = [];
-        foreach($occusFromDB as $occu){
-            $slug = $occu->data['slug'];
-            $nodes[$slug] = new DAGStringNode($slug);
-            $occus[$slug] = $occu;
-        }
-        // 2 - add edges from parents
-        foreach($occus as $occu){
-            $slug = $occu->data['slug'];
-            foreach($occu->data['parents'] as $parent){ // $parent is a slug
-                if(!isset($nodes[$parent])){
-                    $msg = "INCORRECT OCCUPATION DEFINITION - occupation = '$slug' ; parent = '$parent'";
-                    throw new \Exception($msg);
-                }
-                $nodes[$slug]->addEdge($nodes[$parent]);
-            }
-        }
-        // 3 - result
-        self::$allAncestors = [];
-        foreach($nodes as $slug => $node){
-            self::$allAncestors[$slug] = $node->getReachableAsStrings();
-        }
-    }
-    
-    /**
         Returns an associative array slug => name for all occupations in database.
     **/
     public static function getAllSlugNames() {
         $dblink = DB5::getDbLink();
-        $query = "select slug,name from occu";
+        $query = "select slug,name from groop where type='" . Group::TYPE_OCCU . "'";
         $res = [];
         foreach($dblink->query($query, \PDO::FETCH_ASSOC) as $row){
             $res[$row['slug']] = $row['name'];
         }
         return $res;
-    }
-    
-    /**
-        Returns an array of Occupation objects, retrieved from database.
-    **/
-    public static function loadAllFromDB() {
-        $dblink = DB5::getDbLink();
-        $query = "select * from occu";
-        $res = [];
-        foreach($dblink->query($query, \PDO::FETCH_ASSOC) as $row){
-            $row['parents'] = json_decode($row['parents'], true);
-            $tmp = new Occupation();
-            $tmp->data = $row;
-            $res[] = $tmp;
-        }
-        return $res;
-    }
-    
-    // ******************************************************
-    /**
-        Returns an array of slugs of all the descendants of an occupation.
-        @param  $occu Occupation slug for which descendants need to be computed
-        @param  $includeSeed    Boolean indicating if $occu should be also returned
-    **/
-    public static function getDescendants(string $occu, bool $includeSeed) {
-        self::computeAllAncestors();
-        $res = [];
-        foreach(self::$allAncestors as $current => $ancestors){
-            if(in_array($occu, $ancestors)){
-                $res[] = $current;
-            }
-        }
-        if($includeSeed){
-            $res[] = $occu;
-        }
-        $res = array_unique($res);
-        return $res;
-    }
-    
-    /**
-        Creates an object of type Occupation from storage, using its slug,
-        or null if the occupation doesn't exist.
-    **/
-    public static function getBySlug($slug): ?Occupation {
-        $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("select * from occu where slug=?");
-        $stmt->execute([$slug]);
-        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
-        if($res === false || count($res) == 0){
-            return null;
-        }
-        $o = new Occupation();
-        $o->data = $res;
-        $o->data['parents'] = json_decode($res['parents'], true);
-        return $o;
-    }
-    
-    // ***********************************************************************
-    //                                  INSTANCE
-    // ***********************************************************************
-    
-    /**
-        Updates an occupation in storage.
-        @throws \Exception if trying to update an unexisting occupation
-    **/
-    public function update() {
-        $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("update occu set
-            wd=?,
-            name=?,
-            n=?,
-            parents=?
-            where slug=?");
-        $stmt->execute([
-            $this->data['wd'],
-            $this->data['name'],
-            $this->data['n'],
-            json_encode($this->data['parents']),
-            $this->data['slug'],
-        ]);
     }
     
 } // end class

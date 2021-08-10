@@ -1,4 +1,9 @@
 
+
+- refactor group export mechanism
+    Group::export() shouldn't store on disk
+    Modify articulation between commands/db/export/occu and alloccus (storage should be done in occu)
+
 - check doc of page A with the results of
 php run-g5.php cura A1 look count
 
