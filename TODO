@@ -1,4 +1,11 @@
 
+- in all tmp2db, when $p->addHistory is done,
+    $p->addSource and $p->addIdInSource are not taken into account
+
+- Add sources for all historical groups
+
+- review person name structure in src/model/Person.yml
+  Implement precisely for all groups
 
 - refactor group export mechanism
     Group::export() shouldn't store on disk

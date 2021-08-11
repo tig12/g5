@@ -1,6 +1,7 @@
 #
 # Human corrections to file data/raw/muller/muller-afd3/muller-afd3-women.txt
 # Fields sorted by MUID
+# WD base url = https://www.wikidata.org/wiki/Special:EntityPage/
 # 
 # 2021-07-10 17:19:55+01:00, Thierry Graff : Creation
 #
@@ -20,6 +21,7 @@
 
 -
   MUID: 010
+  WD: Q161247
   FNAME: Schleswig-Holstein-Sonderburg-Augustenburg
   GNAME: Auguste Viktoria
   NOB: von
@@ -52,6 +54,17 @@
   OFFICIAL:
     FNAME: Boutard-Beese
     GNAME: Amelie Hedwig
+  BIRTH:
+    PLACE:
+      GEOID: 2880284
+      NAME: Laubegast
+
+# BERGER Erna Elisabeth E.
+-
+  MUID: 023
+  BIRTH:
+    PLACE:
+      GEOID: 2939828
 
 # Bernadette Soubirous
 -
@@ -105,6 +118,7 @@
   
 -
   MUID: 109
+  WD: Q7504
   FNAME: Joliot-Curie
   GNAME: Irène
   OFFICIAL:
@@ -124,16 +138,16 @@
 
 -
   MUID: 111
-  GNAME: Caroline Amalie Elisabeth
   WD: Q167433
+  GNAME: Caroline Amalie Elisabeth
   NOB: von
   build-notes:
     - 2021-07-10 20:27:58+01:00 corrections from https://de.wikipedia.org/wiki/Caroline_von_Braunschweig-Wolfenb%C3%BCttel
 
 -
   MUID: 135
-  FNAME: Linden
   WD: Q1896519
+  FNAME: Linden
   OCCU:
     - bacteriologist
     - zoologist
@@ -146,6 +160,17 @@
   OFFICIAL:
     FNAME: Michaelis
     GNAME: Karoline
+    
+-
+  MUID: 155
+  WD: Q235507
+  NAME: Mistinguett
+  OFFICIAL:
+    FNAME: Bourgeois
+    GNAME: Jeanne Florentine
+  OCCU:
+    - actor
+    - singer
 
 # Paula Modersohn-Becker
 -
@@ -179,24 +204,26 @@
 # Elisabeth Ney
 -
   MUID: 167
+  WD: Q99869
   OFFICIAL:
     GNAME: Franzisca Bernadina Wilhelmina Elisabeth
-  WD: Q99869
   OCCU:
     - sculptor
 
 -  
   MUID: 177
+  WD: Q2366473
+  FAME: Rachilde
   FNAME: Eymerie
   GNAME: Marguerite
   ALTERNATE:
-    - Rachilde
     - Jean de Childra
     - Jean de Chibra
   SPOUSE: Valette
   DATE: '1860-02-11 06:00'
   build-notes:
-    - 2021-07-10 17:20:03+01:00 Date checked on civil registry (because Müller and Gauquelin differ)
+    - 2021-07-10 17:20:03+01:00 Date checked on civil registry
+      because Müller and Gauquelin differ - Gauquelin was right
 
 # Milly Steger
 -
@@ -210,9 +237,10 @@
 # Sophie Taeuber-Arp
 -
   MUID: 211
-  OFFICIAL:
-    GNAME: Sophie Henriette Gertrud
   WD: Q254395
+  OFFICIAL:
+    FNAME: Taeuber
+    GNAME: Sophie Henriette Gertrud
   OCCU:
     - painter
     - sculptor
@@ -225,8 +253,8 @@
 # Suzanne Valadon
 -
   MUID: 217
+  WD: Q156889
   OFFICIAL:
     GNAME: Marie-Clémentine
-  WD: Q156889
   OCCU:
     - painter

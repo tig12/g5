@@ -91,12 +91,16 @@ class AFD3 {
         'MUID',
         'FNAME',
         'GNAME',
-        'ONAME', // other component of the name
+        'ONAME1', // other component of the name 1 - part between parentheses
+        'ONAME2', // other component of the name 2 - for names with 2 comas
+        'ONAME3', // other component of the name 3 - part after the *
         'DATE',
         'TZO',
         'TIMOD', // time mode
-        'CY',
         'PLACE',
+        'CY',
+        'C1',
+        'C2',
         'LAT',
         'LG',
         'OCCU',
@@ -205,7 +209,7 @@ class AFD3 {
         $g->data['name'] = "Müller 234 famous women";
         $g->data['type'] = Group::TYPE_HISTORICAL;
         $g->data['description'] = "234 famous women, gathered by Arno Müller";
-        $g->data['id'] = $g->insert();
+        $g->data['sources'][] = self::LIST_SOURCE_SLUG;
         return $g;
     }
     
@@ -251,4 +255,20 @@ class AFD3 {
         }
         return $res;
     }
+    
+    // *********************** Tmp raw files manipulation ***********************
+    
+    /**
+        Returns the name of the "tmp raw file", eg. data/tmp/newalch/1083MED-raw.csv
+        (file used to keep trace of the original raw values).
+    **/
+    public static function tmpRawFilename(){
+        return implode(DS, [Config::$data['dirs']['tmp'], 'muller', 'afd3-women', 'muller-afd3-women-raw.csv']);
+    }
+    
+    /** Loads the "tmp raw file" in a regular array **/
+    public static function loadTmpRawFile(){
+        return csvAssociative::compute(self::tmpRawFilename());
+    }
+    
 } // end class

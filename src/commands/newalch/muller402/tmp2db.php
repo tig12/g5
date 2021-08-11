@@ -167,7 +167,7 @@ class tmp2db implements Command {
                 $p->addIdInSource(AFD::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
-                $p->addHistory("cura muller402 tmp2db", $source->data['slug'], $new);
+                $p->addHistory("newalch muller402 tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);                 
                 $nUpdate++;
                 $p->update(); // DB

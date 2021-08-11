@@ -39,10 +39,15 @@ class occugroup implements Command {
             if(is_null($test)){
                 $test = new Group();
                 $test->data['slug'] = $todo;
-                $test->data['name'] = $occuSlugNames[$todo];
-                $test->data['type'] = Group::TYPE_OCCU;
-                $test->data['description'] = "Persons whose occupation is " . $occuSlugNames[$todo] . '.';
             }
+            else{
+                if($test->data['type'] != Group::TYPE_OCCU){
+                    continue;
+                }
+            }
+            $test->data['name'] = $occuSlugNames[$todo];
+            $test->data['type'] = Group::TYPE_OCCU;
+            $test->data['description'] = "Persons whose occupation is " . $occuSlugNames[$todo] . '.';
             $groups[$todo] = $test;
         }
         //

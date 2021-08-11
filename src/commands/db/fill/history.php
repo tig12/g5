@@ -189,7 +189,7 @@ class history implements Command {
             echo "***************************\n";
             echo stats::execute(['small']);
             echo occugroup::execute();
-            echo search::execute();
+//            echo search::execute();
         }
         
         if($param == 'export' || $param == 'all'){

@@ -7,10 +7,10 @@ id:
 
 slug:
 
-to-check:         # true or false - related to field "notes"
+to-check:           # true or false - related to field "notes"
 
-trust:
-trust-details: []
+trust:              # overall trust level (=min(trust-details))
+trust-details: []   # different trust levels for fields
 
 sources: []
 # key / value pairs
@@ -27,7 +27,7 @@ name:
   official:                 # As written in the birth certificate
     family:
     given:
-  nobiliary-particle:       # de d' di del von...
+  nobiliary-particle:       # nobiliary-particle: de d' di del von...
   fame:                     # stage, scene
 # fame-full is experimental - may be removed - see afd3 234 women
   fame-full:                # stage, scene, when family / given names are differentiated
@@ -43,9 +43,10 @@ birth:
   date:     # exact date (day and hour) of the birth certificate
   tzo:      # timezone offset
   date-ut:  # date converted to Univesal Time
-  note:     # eg "LMT"
+  note:     # eg "LMT" or "notime"
   place:
     name:
+    c1:
     c2:
     c3:
     cy:
@@ -60,6 +61,7 @@ death:
   note:     # eg "LMT"
   place:
     name:
+    c1:
     c2:
     c3:
     cy:

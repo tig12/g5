@@ -12,6 +12,7 @@ use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
+use g5\commands\muller\AFD;
 use g5\commands\gauquelin\LERRCP;
 
 class tmp2db implements Command {
@@ -45,6 +46,7 @@ class tmp2db implements Command {
         if($reportType == 'full'){
             $namesReport = '';
             $datesReport = '';
+            $timesReport = '';
         }
         
         // source of Müller's booklet AFD3 - insert if does not already exist
@@ -78,87 +80,133 @@ class tmp2db implements Command {
         $nUpdate = 0;
         $nRestoredNames = 0;
         $nDiffDates = 0;
+        $nRestoredTimes = 0;
         
+        // both arrays share the same order of elements,
+        // so they can be iterated in a single loop
         $lines = AFD3::loadTmpFile();
+        $linesRaw = AFD3::loadTmpRawFile();
         $N = count($lines);
         $t1 = microtime(true);
         for($i=0; $i < $N; $i++){
             $line = $lines[$i];
+            $lineRaw = $linesRaw[$i];
             $muid = $line['MUID'];
-echo "\n<pre>"; print_r($line); echo "</pre>\n"; exit;
+            $mullerId = AFD::mullerId($source->data['slug'], $line['MUID']);
             if(!isset(AFD3::MU_GQ[$muid])){
                 // Person not in Gauquelin data
                 $p = new Person();
                 $new = [];
-                $new['trust'] = Newalch::TRUST_LEVEL;
+                $new['sex'] = 'F';
+                $new['trust'] = AFD::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
-                $new['sex'] = $line['SEX'];
+                // note: ONAME1, 2, 3 are not used => TODO ?
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['tzo'] = $line['TZO'];
-                $new['birth']['note'] = $line['LMT'];
+                $new['birth']['note'] = $line['TIMOD'];
                 $new['birth']['place']['name'] = $line['PLACE'];
+                $new['birth']['place']['c1'] = $line['C1'];
                 $new['birth']['place']['c2'] = $line['C2'];
                 $new['birth']['place']['cy'] = $line['CY'];
                 $new['birth']['place']['lg'] = $line['LG'];
                 $new['birth']['place']['lat'] = $line['LAT'];
                 //
-                $p->addOccus(['writer']);
+                if(AFD3::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
+                    $p->addOccus([ AFD3::OCCUS[$line['OCCU']] ]);
+                }
                 $p->addSource($source->data['slug']);
-                $p->addIdInSource($source->data['slug'], $line['MUID']);
+                $p->addIdInSource($source->data['slug'], $muid);
+                $p->addIdInSource(AFD::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
-                $p->addHistory("newalch muller402 tmp2db", $source->data['slug'], $new);
+                $p->addHistory("muller afd3women tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);
                 $nInsert++;
                 $p->data['id'] = $p->insert(); // DB
             }
             else{
-                // Person already in A6
+                // Person already in other Gauquelin data sets
+                // common lines come from A1 A2 A4 A5 A6 D10 E3
                 $new = [];
-                $new['notes'] = [];
-                [$curaSourceSlug, $NUM] = Muller402::gqid2curaSourceId($line['GQID']);
-                $curaFile = strtoupper($curaSourceSlug);
-                $gqId = LERRCP::gauquelinId($curaFile, $NUM);
+                $new['sex'] = 'F';
+                $gqid = AFD3::MU_GQ[$muid];
+                $tmp = explode('-', $gqid);
+                $curaSourceSlug = LERRCP::datafile2sourceSlug($tmp[0]);
+                $NUM = $tmp[1];
                 $p = Person::getBySourceId($curaSourceSlug, $NUM);
                 if(is_null($p)){
-                    throw new \Exception("$gqId : try to update an unexisting person");
+                    throw new \Exception("$gqid : try to update an unexisting person");
                 }
-                if($p->data['name']['family'] == "Gauquelin-$gqId"){
+                if($p->data['name']['family'] == "Gauquelin-$gqid"){
+                    $new['name']['family'] = $line['FNAME'];
+                    $new['name']['given'] = $line['GNAME'];
                     $nRestoredNames++;
                     if($reportType == 'full'){
-                        $namesReport .= "\nCura\t $gqId\t {$p->data['name']['family']}\n";
-                        $namesReport .= "Müller\t {$line['MUID']}\t {$line['FNAME']} - {$line['GNAME']}\n";
+                        $namesReport .= "Cura\t $gqid\t {$p->data['name']['family']}\n";
+                        $namesReport .= "Müller\t {$muid}\t {$line['FNAME']} - {$line['GNAME']}\n\n";
                     }
                 }
                 // if Cura and Müller have different birth day
                 $mulday = substr($line['DATE'], 0, 10);
-                // in E6, stored in field 'date-ut'
-                $curaday = substr($p->data['birth']['date-ut'], 0, 10);
+                // in A6, stored in field 'date-ut' - in D10 and E3 in field 'date'
+                $curaday = $p->data['birth']['date-ut'] != ''
+                    ? substr($p->data['birth']['date-ut'], 0, 10)
+                    : substr($p->data['birth']['date'], 0, 10);
                 if($mulday != $curaday){
+                    // This happens only for 1 person 177 Rachilde Eymerie (Gauquelin is correct)
+                    // Fixed in tweak2db - so only report, don't fix
                     $nDiffDates++;
-                    $new['to-check'] = true;
-                    $new['notes'][] = "CHECK: birth day - $gqId $curaday / Muller402 {$line['MUID']} $mulday";
                     if($reportType == 'full'){
-                        $datesReport .= "\nCura\t $gqId\t $curaday {$p->data['name']['family']} - {$p->data['name']['given']}\n";
-                        $datesReport .= "Müller\t {$line['MUID']}\t $mulday {$line['FNAME']} - {$line['GNAME']}\n";
+                        $datesReport .= "Cura\t $gqid\t $curaday {$p->data['name']['family']} - {$p->data['name']['given']}\n";
+                        $datesReport .= "Müller\t {$muid}\t $mulday {$line['FNAME']} - {$line['GNAME']}\n\n";
                     }
                 }
-                // update fields that are more precise in muller402
-                $new['birth']['date'] = $line['DATE']; // Cura contains only date-ut
-                $new['birth']['tzo'] = $line['TZO'];
-                $new['birth']['note'] = $line['LMT'];
-                $new['birth']['place']['name'] = $line['PLACE'];
-                $new['name']['family'] = $line['FNAME'];
-                $new['name']['given'] = $line['GNAME'];
-                $p->addOccus(['writer']);
+                else{
+                    // in A, stored in field 'date-ut' - in D10 and E3 in field 'date'
+                    if($p->data['birth']['date-ut'] != '' && $p->data['birth']['date'] == ''){
+                        // A file, restore date
+                        $new['birth']['date'] = $line['DATE'];
+                        $nRestoredTimes++;
+                    }
+                    else if($p->data['birth']['date'] != ''){
+                        // compare times
+                        // This concerns 9 lines - and none differ !
+                        $multime = substr($line['DATE'], 11);
+                        $curatime = substr($p->data['birth']['date'], 11);
+                        if($multime != $curatime){
+                            $timesReport .= "Cura\t $gqid\t $curatime {$p->data['name']['family']} - {$p->data['name']['given']}\n";
+                            $timesReport .= "Müller\t {$muid}\t $multime {$line['FNAME']} - {$line['GNAME']}\n\n";
+                        }
+                    }
+                }
+                // update fields that are more precise in muller234
+                //$new['birth']['date'] = $line['DATE']; // Cura contains only date-ut
+                if($p->data['birth']['tzo'] == '' && $line['TZO'] != ''){
+                    $new['birth']['tzo'] = $line['TZO'];
+                }
+                if($p->data['birth']['note'] == '' && $line['TIMOD'] != ''){
+                    $new['birth']['note'] = $line['TIMOD'];
+                }
+                // birth place not handled correctly in Müller
+                //$new['birth']['place']['name'] = $line['PLACE'];
+                if($p->data['birth']['place']['c1'] == '' && $line['C1'] != ''){
+                    $new['place']['c1'] = $line['C1'];
+                }
+                if($p->data['birth']['place']['c2'] == '' && $line['C2'] != ''){
+                    $new['place']['c2'] = $line['C2'];
+                }
+                if(AFD3::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
+                    $p->addOccus([ AFD3::OCCUS[$line['OCCU']] ]);
+                }
                 $p->addSource($source->data['slug']);
-                $p->addIdInSource($source->data['slug'], $line['MUID']);
+                $p->addIdInSource($source->data['slug'], $muid);
+                $p->addIdInSource(AFD::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
-                $p->addHistory("cura muller402 tmp2db", $source->data['slug'], $new);
-                $p->addRaw($source->data['slug'], $lineRaw);                 
+                $p->addHistory("muller afd3women tmp2db", $source->data['slug'], $new);
+                $p->addRaw($source->data['slug'], $lineRaw);
                 $nUpdate++;
                 $p->update(); // DB
             }
@@ -169,12 +217,14 @@ echo "\n<pre>"; print_r($line); echo "</pre>\n"; exit;
         $dt = round($t2 - $t1, 5);
         if($reportType == 'full'){
             $report .= "=== Names fixed ===\n" . $namesReport;
-            $report .= "\n=== Dates fixed ===\n" . $datesReport;
+            $report .= "=== Dates fixed ===\n" . $datesReport;
+            if($timesReport) $report .= "=== Times fixed ===\n" . $timesReport;
             $report .= "============\n";
         }
         $report .= "$nInsert persons inserted, $nUpdate updated ($dt s)\n";
-        $report .= "$nDiffDates dates differ from A6";
-        $report .= " - $nRestoredNames names restored in A6\n";
+        $report .= "$nDiffDates dates differ from Gauquelin\n";
+        $report .= "$nRestoredTimes legal times restored in A files\n";
+        $report .= "$nRestoredNames names restored in A files\n";
         return $report;
     }
         
