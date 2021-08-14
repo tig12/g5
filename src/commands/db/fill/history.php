@@ -16,13 +16,15 @@ use g5\commands\cura\CuraRouter;
 // for information sources
 use g5\commands\gauquelin\LERRCP;
 use g5\commands\muller\AFD;
+use g5\G5;
 use g5\commands\newalch\Newalch;
 use g5\commands\cura\Cura;
-use g5\G5;
+use g5\commands\wd\Wikidata;
 
 use g5\commands\db\create\dbcreate;
 use g5\commands\db\fill\source                  as fillsource;
-use g5\commands\db\fill\occu                    as filloccu;
+use g5\commands\db\fill\occus                   as filloccus;
+use g5\commands\db\fill\tweak;
 
 // raw2tmp
 use g5\commands\cura\A\raw2tmp                  as raw2tmpA;
@@ -49,7 +51,6 @@ use g5\commands\csicop\si42\raw2tmp             as raw2tmpSi42;
 use g5\commands\csicop\si42\addCanvas1          as addCanvas1Si42;
 use g5\commands\csicop\irving\raw2tmp           as raw2tmpIrving;
 use g5\commands\csicop\irving\addD10            as addD10Irving;
-
 use g5\commands\muller\afd3women\raw2tmp        as raw2tmpAfd3Women;
 
 // tmp2db
@@ -61,6 +62,7 @@ use g5\commands\newalch\muller1083\tmp2db       as tmp2dbMuller1083;
 use g5\commands\newalch\muller402\tmp2db        as tmp2dbMuller402;
 use g5\commands\newalch\muller402\tmp2db100     as tmp2dbMuller100;
 use g5\commands\csicop\irving\tmp2db            as tmp2dbIrving;
+use g5\commands\muller\afd3women\tmp2db         as tmp2dbAfd3Women;
 
 // finalize
 use g5\commands\db\fill\stats;
@@ -88,8 +90,6 @@ class history implements Command {
         'all'       => 'Executes all steps',
     ];
     
-    // *****************************************
-    // Implementation of Command
     /** 
         @param  $params empty array
         @return Empty string, echoes the reports of individual commands progressively. 
@@ -114,6 +114,8 @@ class history implements Command {
         
         $filesCura = CuraRouter::computeDatafiles('all');
         $filesCuraA = CuraRouter::computeDatafiles('A');
+        
+        $t1 = microtime(true);
         
         //
         //  1 - Create tmp files from raw data
@@ -165,10 +167,11 @@ class history implements Command {
             echo dbcreate::execute([]);
             echo fillsource::execute([LERRCP::SOURCE_DEFINITION_FILE]);
             echo fillsource::execute([AFD::SOURCE_DEFINITION_FILE]);
+            echo fillsource::execute([G5::SOURCE_DEFINITION_FILE]);
             echo fillsource::execute([Cura::SOURCE_DEFINITION_FILE]);
             echo fillsource::execute([Newalch::SOURCE_DEFINITION_FILE]);
-            echo fillsource::execute([G5::SOURCE_DEFINITION_FILE]);
-            echo filloccu::execute();
+            echo fillsource::execute([Wikidata::SOURCE_DEFINITION_FILE]);
+            echo filloccus::execute();
             
             foreach($filesCuraA as $datafile){
                 echo tmp2dbA::execute([$datafile, 'tmp2db', 'small']);
@@ -177,10 +180,17 @@ class history implements Command {
             echo tmp2dbD10::execute(['D10', 'tmp2db', 'small']);
             echo tmp2dbE1E3::execute(['E1', 'tmp2db', 'small']);
             echo tmp2dbE1E3::execute(['E3', 'tmp2db', 'small']);
+            
             echo tmp2dbMuller1083::execute(['small']);
+            
             echo tmp2dbMuller402::execute(['small']);
+            
             echo tmp2dbMuller100::execute(['small']);
+            
             echo tmp2dbIrving::execute(['small']);
+            
+            echo tmp2dbAfd3Women::execute(['small']);
+            echo tweak::execute(['muller-234-women.yml']);
         }
         
         if($param == 'finalize' || $param == 'all'){
@@ -211,6 +221,9 @@ class history implements Command {
             echo exportAllOccus::execute([]);
         }
         
+        $t2 = microtime(true);
+        $dt = round($t2 - $t1, 3);
+        echo "====== Execution of all commands in $dt s ======\n";
         return '';
     }
     

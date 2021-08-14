@@ -14,8 +14,6 @@ use g5\model\DB5;
 class stats implements Command {
     
     
-    // *****************************************
-    // Implementation of Command
     /** 
         @param  $params array with one element 'full' or 'small'
         @return report.

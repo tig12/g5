@@ -17,8 +17,6 @@ use tiglib\arrays\sortByKey;
 
 class raw2tmp implements Command {
     
-    // *****************************************
-    // Implementation of Command
     /** 
         @param  $params empty array
         @return String report

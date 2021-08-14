@@ -20,8 +20,6 @@ use tiglib\arrays\csvAssociative;
 
 class fixA1 implements Command {
     
-    // *****************************************
-    // Implementation of Command
     /** 
         Called by : php run-g5.php newalch ertel4391 fixA1 [update|report]
         @param $params array that must contain 1 string : 'echo' or 'update'

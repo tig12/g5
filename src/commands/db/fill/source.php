@@ -15,9 +15,6 @@ use g5\model\Source as ModelSource;
 
 class source implements Command {
     
-    
-    // *****************************************
-    // Implementation of Command
     /** 
         Inserts or updates a source in database
         @param  $params array containing one element. Can be :

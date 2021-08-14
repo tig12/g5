@@ -17,8 +17,6 @@ use tiglib\arrays\csvAssociative;
 
 class count implements Command {
     
-    // *****************************************
-    // Implementation of Command
     /** 
         Called by : php run-g5.php cura look count
         Note : can be indifferently called with any datafile of serie A

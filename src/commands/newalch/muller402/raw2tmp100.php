@@ -15,8 +15,6 @@ use g5\patterns\Command;
 
 class raw2tmp100 implements Command {
     
-    // *****************************************
-    // Implementation of Command
     /** 
         @param  $params empty Array
         @return String report

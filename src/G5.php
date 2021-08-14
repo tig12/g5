@@ -22,9 +22,10 @@ class G5{
     const CSV_SEP = ';';
     
     /** 
-        Used in all files containing human tweaks in 3-edited/
-        This key is considered as notes and is not processed by raw2csv steps.
+        Used in all files containing human tweaks in data/build
+        This key is considered as notes and is not processed by tweak2db command.
     **/
+// TODO remove when all tweaks are converted to tweak2db
     const TWEAK_BUILD_NOTES = 'build-notes';
     
     

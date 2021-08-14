@@ -25,8 +25,6 @@ use g5\model\Names_fr;
 
 class raw2tmp implements Command {
     
-    // *****************************************
-    // Implementation of Command
     /** 
         Parses one html cura file of serie A (locally stored in directory data/raw/cura.free.fr)
         

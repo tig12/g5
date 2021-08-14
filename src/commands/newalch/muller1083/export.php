@@ -138,7 +138,7 @@ class export implements Command {
         $fmap = [
             'FNAME' => function($p){
                 // ok because all members are french
-                return Names_fr::computeFamilyName($p->data['name']['family'], $p->data['name']['nobiliary-particle']);
+                return Names_fr::computeFamilyName($p->data['name']['family'], $p->data['name']['nobl']);
             },
             'GQID' => function($p){
                 return $p->data['ids-in-sources'][LERRCP::SOURCE_SLUG] ?? '';

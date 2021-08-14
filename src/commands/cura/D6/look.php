@@ -22,8 +22,6 @@ class look implements Command {
         'emptyGiven',
     ];
     
-    // *****************************************
-    // Implementation of Command
     /** 
         Called by : php run-g5.php cura D6 build <action>
         @param $params  array with 3 strings : 

@@ -14,27 +14,25 @@ trust-details: []   # different trust levels for fields
 
 sources: []
 # key / value pairs
-# key = source slug ; value = local id in the given source
+# key = source slug ; value = local id within the given source
 ids-in-sources: []
 
 sex:
 
 name:
-  usual:
+  usual:            # not used so far, maybe will be removed
   given:
   family:
   spouse:
-  official:                 # As written in the birth certificate
+  official:         # As written in the birth certificate
     family:
     given:
-  nobiliary-particle:       # nobiliary-particle: de d' di del von...
-  fame:                     # stage, scene
-# fame-full is experimental - may be removed - see afd3 234 women
-  fame-full:                # stage, scene, when family / given names are differentiated
+  nobl:             # nobiliary-particle: de d' di del von...
+  fame:             # stage, scene
+    full:           # eg Mistinguett or Stromae
     family: 
     given: 
-  nicknames: []
-  alternative: []
+  alter: []         # alternative names, like nicknames, or author names
 
 # occupation codes
 occus: []
@@ -42,7 +40,7 @@ occus: []
 birth:
   date:     # exact date (day and hour) of the birth certificate
   tzo:      # timezone offset
-  date-ut:  # date converted to Univesal Time
+  date-ut:  # date converted to Universal Time
   note:     # eg "LMT" or "notime"
   place:
     name:
@@ -58,7 +56,7 @@ death:
   date:     # exact date of the birth certificate
   tz:       # timezone offset
   date-ut:  # date converted to Univesal Time
-  note:     # eg "LMT"
+  note:     # eg "LMT" or "notime"
   place:
     name:
     c1:
@@ -69,11 +67,13 @@ death:
     lg:
     lat:
 
+civil-registry: []  # links with directory acts/
+
 raw: []
 
 history: []
 
-free: []    # key value pairs
+free: []    # key value pairs - not used so far, maybe will be removed
 
 notes: []   # array of free notes
 

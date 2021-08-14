@@ -12,6 +12,21 @@ use g5\Config;
 
 class Wikidata{
     
+    /**
+        Path to the yaml file containing the characteristics of Newalchemypress source.
+        Relative to directory data/model/source
+    **/
+    const SOURCE_DEFINITION_FILE = 'wikidata.yml';
+    
+    /**
+        Slug of Wikidata information source.
+    **/
+    const SOURCE_SLUG = 'wd';
+    
+// ----------------------------------------------------------------------------
+// Following code is experimental and currently not used to build the database.
+// ----------------------------------------------------------------------------
+    
     /** Separator used in raw wikidata files **/
     const RAW_CSV_SEP = ',';
     

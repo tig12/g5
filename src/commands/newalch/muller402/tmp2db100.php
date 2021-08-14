@@ -24,8 +24,6 @@ class tmp2db100 implements Command {
         'full'  => 'Lists details of perons already in Gauquelin data',
     ];
     
-    // *****************************************
-    // Implementation of Command
     /**
         @param  $params Array containing 1 element : the type of report ; see REPORT_TYPE
     **/

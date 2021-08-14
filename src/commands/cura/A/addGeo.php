@@ -26,9 +26,6 @@ class addGeo implements Command {
         'small',
     ];
     
-    
-    // *****************************************
-    // Implementation of Command
     /** 
         Called by : php run-g5.php cura A1 addGeo
         @param $params array that must contain 3 elements :

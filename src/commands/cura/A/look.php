@@ -27,8 +27,6 @@ class look implements Command {
         'names',
     ];
     
-    // *****************************************
-    // Implementation of Command
     /** 
         Called by       : php run-g5.php cura A count
         So              : php run-g5.php cura A look count

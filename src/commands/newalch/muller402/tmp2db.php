@@ -24,8 +24,6 @@ class tmp2db implements Command {
         'full'  => 'Lists details of names and dates restoration on A6',
     ];
     
-    // *****************************************
-    // Implementation of Command
     /**
         @param  $params Array containing 1 element : the type of report ; see REPORT_TYPE
     **/

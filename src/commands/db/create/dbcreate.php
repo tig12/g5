@@ -15,8 +15,6 @@ use g5\model\DB5;
 
 class dbcreate implements Command {
     
-    // *****************************************
-    // Implementation of Command
     /** 
         @param  $params empty array
     **/

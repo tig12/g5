@@ -23,8 +23,6 @@ class tmp2db implements Command {
         'full'  => 'Lists details of names restoration on A1',
     ];
     
-    // *****************************************
-    // Implementation of Command
     /**
         @param  $params Array containing 1 element : the type of report ; see REPORT_TYPE
     **/
@@ -158,7 +156,7 @@ echo "\n<pre>"; print_r($line); echo "</pre>\n"; exit;
                 // update fields that are more precise in muller1083
                 $new['birth']['date'] = $line['DATE']; // Cura contains only date-ut
                 $new['birth']['place']['name'] = $line['PLACE'];
-                $new['name']['nobiliary-particle'] = $line['NOB'];
+                $new['name']['nobl'] = $line['NOB'];
                 $new['name']['family'] = $line['FNAME'];
                 if($p->data['name']['given'] == ''){
                     // happens with names like Gauquelin-A1-258

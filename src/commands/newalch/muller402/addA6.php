@@ -86,8 +86,6 @@ class addA6 implements Command {
     ];
     
     
-    // *****************************************
-    // Implementation of Command
     /** 
         @param $param Array containing one element (a string)
                       Must be one of self::POSSIBLE_PARAMS

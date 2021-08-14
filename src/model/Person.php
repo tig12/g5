@@ -8,6 +8,7 @@
 namespace g5\model;
 
 use tiglib\strings\slugify;
+use tiglib\arrays\flattenAssociative;
 
 class Person {
     
@@ -89,8 +90,8 @@ class Person {
         Returns an object of type Person from storage,
         using its id for a given source,
         or null if doesn't exist.
-        Ex : to get a person whose id in source A1 is 254, call
-        getBySourceId('A1', '254')
+        Ex : to get a person whose id in source a1 is 254, call
+        getBySourceId('a1', '254')
         @param  $source     Slug of the source
         @param  $idInSource Local id of the person within this source 
     **/
@@ -145,20 +146,23 @@ class Person {
     }
     
     /**
-        Computes the different names of a person
+        Computes the different forms of a person name.
         @param  $array_name  Array representing the name, as stored in database. Ex: [
-            'fame' => ''
-            'given' => Pierre
             'usual' => ''
+            'given' => Pierre
             'family' => Alard
             'spouse' => ''
             'official' => [
                 'given' => ''
                 'family' => ''
             ]
-            'nicknames' => []
-            'alternative' => []
-            'nobiliary-particle' => ''
+            'fame' => [
+                'full' => ''
+                'given' => ''
+                'family' => ''
+            ]
+            'alter' => []
+            'nobl' => ''
         ]
     **/
     public static function computeNames(array $array_name) {
@@ -169,14 +173,9 @@ class Person {
         if($array_name['fame'] != ''){
             $res[] = $array_name['fame'];
         }
-        if(!empty($array_name['alternative'])){
-            foreach($array_name['alternative'] as $alt){
+        if(!empty($array_name['alter'])){
+            foreach($array_name['alter'] as $alt){
                 $res[] = $alt;
-            }
-        }
-        if(!empty($array_name['nicknames'])){
-            foreach($array_name['nicknames'] as $nick){
-                $res[] = $nick;
             }
         }
         if($array_name['given'] != '' && $array_name['family'] != ''){
@@ -251,8 +250,18 @@ class Person {
         $this->data = array_replace_recursive($this->data, $replace);
     }
     
+    /** 
+        Adds or updates a couple (source slug, id) in data['ids-in-sources']
+    **/
     public function addIdInSource($sourceSlug, $id){
         $this->data['ids-in-sources'][$sourceSlug] = $id;
+    }
+    
+    /** Adds one single source to field sources **/
+    public function addSource($sourceSlug){
+        if(!in_array($sourceSlug, $this->data['sources'])){
+            $this->data['sources'][] = $sourceSlug;
+        }
     }
     
     /**
@@ -292,24 +301,18 @@ class Person {
                 }
             }
         }
-        // note: array_values() permits to reindex + if array_values() not used,
-        // jsonb is not stored as a regular array, but as an associative array.
+        // note:
+        // - array_values() permits to reindex
+        // - if array_values() not used, jsonb is not stored as a regular array, but as an associative array.
         $this->data['occus'] = array_values(array_diff($occus, $remove));
     }
     
-    /** Adds one single source to field sources **/
-    public function addSource($sourceSlug){
-        if(!in_array($sourceSlug, $this->data['sources'])){
-            $this->data['sources'][] = $sourceSlug;
-        }
-    }
-    
-    public function addHistory($command, $sourceSlug, $data){
+    public function addHistory($command, $sourceSlug, $newdata){
         $this->data['history'][] = [
             'date'      => date('c'),
             'command'   => $command,
             'source'    => $sourceSlug,
-            'values'    => $data,
+            'values'    => $newdata,
         ];
     }
     
@@ -317,10 +320,21 @@ class Person {
         $this->data['notes'][] = $note;
     }
     
-    public function addRaw($sourceSlug, $data){
-        $this->data['raw'][$sourceSlug] = $data;
+    public function addRaw($sourceSlug, $newdata){
+        $this->data['raw'][$sourceSlug] = flattenAssociative::compute($newdata);
     }
     
+    public function addAlternativeNames($newdata){
+        if(!in_array($newdata, $this->data['name']['alter'])){
+            $this->data['name']['alter'] = $newdata;
+        }
+    }
+    
+    public function addCivilRegistries($newdata){
+        if(!in_array($newdata, $this->data['name']['alter'])){
+            $this->data['name']['alter'] = $newdata;
+        }
+    }
     
     // *********************** CRUD *******************************
     

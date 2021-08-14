@@ -101,8 +101,6 @@ class raw2tmp implements Command {
         'Yonne'             => '89',
     ];
     
-    // *****************************************
-    // Implementation of Command
     /** 
         @param  $params empty array
         @return String report

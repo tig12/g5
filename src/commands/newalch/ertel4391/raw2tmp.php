@@ -39,9 +39,6 @@ class raw2tmp implements Command {
         'SPA' => 'ES',
     ];
     
-        
-    // *****************************************
-    // Implementation of Command
     /** 
         Imports file data/raw/newalchemypress.com/03-ertel/3a_sports-utf8.txt to data/tmp/newalch.
         @param $params  Empty array

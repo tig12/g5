@@ -25,8 +25,6 @@ class tmp2db implements Command {
         'full'  => 'Lists details of date differences from D10',
     ];
     
-    // *****************************************
-    // Implementation of Command
     /**
         @param  $params Empty array
     **/

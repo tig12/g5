@@ -1,0 +1,12 @@
+
+document:
+  history:
+    - 2021-08-14 04:04:56+02:00: Thierry Graff, creation
+
+name: Wikidata
+slug: wd
+type: database
+description: |
+  &laquo; <a href="https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:About">Wikidata</a> is a multilingual free knowledge base about the world that can be read and edited by humans and machines alike. &raquo;
+  <br>Contains a subset of Wikipedia data. Used by the Open Gauquelin Database to relate Gauquelin data to standard ids, and to complete / check the data.
+    

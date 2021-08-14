@@ -27,8 +27,6 @@ class tmp2db implements Command {
         'full'  => 'Lists details of names and dates restoration on A2 or E1',
     ];
     
-    // *****************************************
-    // Implementation of Command
     /**
         @param  $params Array containing 1 element : the type of report ; see REPORT_TYPE
     **/
@@ -118,7 +116,7 @@ class tmp2db implements Command {
                 $new['trust'] = Newalch::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
-                $new['name']['nobiliary-particle'] = $line['NOB'];
+                $new['name']['nobl'] = $line['NOB'];
                 // Müller name considered as = to full name copied from birth certificate
                 $new['name']['official']['given'] = $line['GNAME'];
                 $new['birth'] = [];
@@ -180,7 +178,7 @@ class tmp2db implements Command {
                 // update fields that are more precise in muller1083
                 $new['birth']['date'] = $line['DATE']; // Cura contains only date-ut
                 $new['birth']['place']['name'] = $line['PLACE'];
-                $new['name']['nobiliary-particle'] = $line['NOB'];
+                $new['name']['nobl'] = $line['NOB'];
                 $new['name']['family'] = $line['FNAME'];
                 if($p->data['name']['given'] == ''){
                     // happens with names like Gauquelin-A1-258

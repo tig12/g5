@@ -25,8 +25,6 @@ class tmp2db implements Command {
         'full'  => 'Echoes the details of duplicate entries',
     ];
     
-    // *****************************************
-    // Implementation of Command
     /**
         @param  $params Array containing 3 elements :
                         - a string identifying what is processed (ex : "A1")

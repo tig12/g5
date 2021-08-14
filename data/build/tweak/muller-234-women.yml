@@ -1,0 +1,314 @@
+#
+# Human corrections to file data/raw/muller/muller-afd3/muller-afd3-women.txt
+# Fields sorted by afd3 id (Müller id in the file)
+# WD base url = https://www.wikidata.org/wiki/Special:EntityPage/
+# 
+# 2021-07-10 17:19:55+01:00, Thierry Graff : Creation
+# 2021-08-12 14:25:06+02:00, Thierry Graff : Converted to db/fill/tweak format.
+
+-
+  ids-in-sources:
+    afd3: '001'
+    wd: Q270617
+  name:
+    family: Adam
+    given: Juliette
+    official:
+      family: Lambert
+  occus:
+    - writer
+    - feminist
+  BUILD-NOTES:
+    - 2021-08-01 06:09:20+02:00 corrections from https://en.wikipedia.org/wiki/Juliette_Adam
+
+-
+  ids-in-sources:
+    afd3: '010'
+    wd: Q161247
+  name:
+    family: Schleswig-Holstein-Sonderburg-Augustenburg
+    given: Auguste Viktoria
+    nobl: von
+  BUILD-NOTES:
+    - 2021-07-10 20:22:54+01:00 corrections from https://de.wikipedia.org/wiki/Auguste_Viktoria_von_Schleswig-Holstein-Sonderburg-Augustenburg
+
+-
+  ids-in-sources:
+    afd3: '011'
+    wd: Q270187
+  name:
+    family: Douet
+    given: Jacqueline
+    spouse: Auriol
+    fame:
+      family: Auriol
+  BUILD-NOTES:
+    - 2021-08-02 16:46:40+02:00 corrections from https://fr.wikipedia.org/wiki/Jacqueline_Auriol
+
+# Bele Bachem
+-
+  ids-in-sources:
+    afd3: '013'
+    wd: Q815333
+  name:
+    official:
+      given: Renate Gabriele
+  occus:                                                                                                      
+    - painter
+
+-
+  ids-in-sources:
+    afd3: '020'
+    wd: Q97003
+  name:
+    fame:
+      family: Beese
+      given: Melli
+    official:
+      family: Boutard-Beese
+      given: Amelie Hedwig
+  birth:
+    place:
+      geoid: '2880284'
+      name: Laubegast
+
+# BERGER Erna Elisabeth E.
+-
+  ids-in-sources:
+    afd3: '023'
+  birth:
+    place:
+      geoid: '2939828'
+
+# Bernadette Soubirous
+-
+  ids-in-sources:
+    afd3: '024'
+    wd: Q55398
+  occus:
+    - saint
+  
+# Rosa Bonheur
+-
+  ids-in-sources:
+    afd3: '030'
+    wd: Q241732
+  official:
+    given: Marie-Rosalie
+  occus:
+    - painter
+    - sculptor
+
+# Maria CASPAR-FILSER 
+-
+  ids-in-sources:
+    afd3: '040'
+    wd: Q545965
+  name:
+    given: Maria
+  occus: 
+    - painter
+    
+-
+  ids-in-sources:
+    afd3: '055'
+    wd: Q76851
+  name:
+    official:
+      family: Nelle
+  occus: 
+    - naturalist
+
+# Frieda Duensing
+-
+  ids-in-sources:
+    afd3: '060'
+    wd: Q1456321
+  name:
+    official:
+      given: Frieda Johanna
+  occus:
+    - lawyer
+    - social-worker
+  
+# Maria Goretti
+-
+  ids-in-sources:
+    afd3: '087'
+    wd: Q234697
+  occus:
+    - saint
+  
+-
+  ids-in-sources:
+    afd3: '109'
+    wd: Q7504
+  name:
+    family: Joliot-Curie
+    given: Irène
+    spouse: Joliot
+    official:
+      family: Curie
+  occus:
+    - physicist
+    - chemist
+    - politician
+
+# Marie Laurencin
+-
+  ids-in-sources:
+    afd3: '124'
+    wd: Q233088
+  occus:
+    - painter
+    - printmaker
+
+-
+  ids-in-sources:
+    afd3: '111'
+    wd: Q167433
+  name:
+    given: Caroline Amalie Elisabeth
+    nobl: von
+  BUILD-NOTES:
+    - 2021-07-10 20:27:58+01:00 corrections from https://de.wikipedia.org/wiki/Caroline_von_Braunschweig-Wolfenb%C3%BCttel
+
+-
+  ids-in-sources:
+    afd3: '135'
+    wd: Q1896519
+  name:
+    family: Linden
+  occus:
+    - bacteriologist
+    - zoologist
+
+-
+  ids-in-sources:
+    afd3: '154'
+    wd: Q76158
+  name:
+    family: Michaëlis de Vasconcelos
+    given: Carolina
+    official:
+      family: Michaelis
+      given: Karoline
+    
+-
+  ids-in-sources:
+    afd3: '155'
+    wd: Q235507
+  name:
+    usual: Mistinguett
+    official:
+      family: Bourgeois
+      given: Jeanne Florentine
+  occus:
+    - actor
+    - singer
+
+# Paula Modersohn-Becker
+-
+  ids-in-sources:
+    afd3: '156'
+    wd: Q234370
+  occus:
+    - painter
+
+# Berthe Morisot
+-
+  ids-in-sources:
+    afd3: '162'
+    wd: Q105320
+  occus:
+    - painter
+
+# Hanna Nagel
+-
+  ids-in-sources:
+    afd3: '164'
+    wd: Q1575726
+  occus:
+    - graphic-artist
+
+# Therese Neumann 
+-
+  ids-in-sources:
+    afd3: '166'
+    wd: Q76551
+  name:
+    given: Neumann
+  occus:
+    - mystic
+
+# Elisabeth Ney
+-
+  ids-in-sources:
+    afd3: '167'
+    wd: Q99869
+  name:
+    official:
+      given: Franzisca Bernadina Wilhelmina Elisabeth
+  occus:
+    - sculptor
+
+-  
+  ids-in-sources:
+    afd3: '177'
+    wd: Q2366473
+  name:
+    family: Eymerie
+    given: Marguerite
+    fame:
+      given: Rachilde
+    alter:
+      - Jean de Childra
+      - Jean de Chibra
+    spouse: Valette
+  birth:
+    date: '1860-02-11 06:00'
+  civil-registry:
+    - birth/1860/02/11/eymery-marguerite-1860-02-11
+  BUILD-NOTES:
+    - 2021-07-10 17:20:03+01:00 Date checked on civil registry
+      because Müller and Gauquelin differ - Gauquelin was right
+
+# Milly Steger
+-
+  ids-in-sources:
+    afd3: '207'
+    wd: Q1246805
+  name:
+    official:
+      given: Emilie Sibilla Elisabeth Johanna
+  occus:
+    - sculptor
+
+# Sophie Taeuber-Arp
+-
+  ids-in-sources:
+    afd3: '211'
+    wd: Q254395
+  name:
+    official:
+      family: Taeuber
+      given: Sophie Henriette Gertrud
+  occus:
+    - painter
+    - sculptor
+    - textile-designer
+    - interior-designer
+    - furniture-designer
+    - architect
+    - dancer
+
+# Suzanne Valadon
+-
+  ids-in-sources:
+    afd3: '217'
+    wd: Q156889
+  name:
+    official:
+      given: Marie-Clémentine
+  occus:
+    - painter

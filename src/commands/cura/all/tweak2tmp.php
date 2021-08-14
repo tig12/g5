@@ -20,8 +20,6 @@ use g5\model\Person;
 
 class tweak2tmp implements Command {
     
-    // *****************************************
-    // Implementation of Command
     /** 
         Called by : php run-g5.php cura <datafile> tweak2tmp
         @param $params array containing two strings :

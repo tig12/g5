@@ -23,8 +23,6 @@ class look implements Command {
         'occu',
     ];
     
-    // *****************************************
-    // Implementation of Command
     /** 
         Called by : php run-g5.php cura D10 all
         @param $params  array containing:

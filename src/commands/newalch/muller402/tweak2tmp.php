@@ -17,8 +17,6 @@ use g5\patterns\Command;
 
 class tweak2tmp implements Command {
     
-    // *****************************************
-    // Implementation of Command
     /** 
         @param $params empty array
         @return Report

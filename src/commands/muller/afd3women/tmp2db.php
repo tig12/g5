@@ -91,7 +91,7 @@ class tmp2db implements Command {
         for($i=0; $i < $N; $i++){
             $line = $lines[$i];
             $lineRaw = $linesRaw[$i];
-            $muid = $line['MUID'];
+            $muid = (string)$line['MUID'];
             $mullerId = AFD::mullerId($source->data['slug'], $line['MUID']);
             if(!isset(AFD3::MU_GQ[$muid])){
                 // Person not in Gauquelin data
@@ -223,8 +223,7 @@ class tmp2db implements Command {
         }
         $report .= "$nInsert persons inserted, $nUpdate updated ($dt s)\n";
         $report .= "$nDiffDates dates differ from Gauquelin\n";
-        $report .= "$nRestoredTimes legal times restored in A files\n";
-        $report .= "$nRestoredNames names restored in A files\n";
+        $report .= "$nRestoredTimes legal times and $nRestoredNames names restored in A files\n";
         return $report;
     }
         

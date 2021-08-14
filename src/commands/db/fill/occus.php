@@ -17,7 +17,7 @@ use g5\model\Group;
 use g5\model\Occupation;
 use tiglib\arrays\csvAssociative;
 
-class occu implements Command {
+class occus implements Command {
     
     /** 
         @param  $params Empty array

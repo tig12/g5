@@ -25,8 +25,6 @@ class legalTime implements Command {
     
     const POSSIBLE_PARAM = ['update', 'echo'];
     
-    // *****************************************
-    // Implementation of Command
     /** 
         Called by : php run-g5.php cura <datafile> legalTime
         
