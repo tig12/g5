@@ -97,7 +97,7 @@ class Group{
             $this->data['download'],
             json_encode($this->data['sources']),
             json_encode($this->data['parents']),
-            json_encode($this->data['children']),
+            json_encode(array_values($this->data['children'])),
         ]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         $this->data['id'] = $res['id'];
@@ -136,7 +136,7 @@ class Group{
             $this->data['download'],
             json_encode($this->data['sources']),
             json_encode($this->data['parents']),
-            json_encode($this->data['children']),
+            json_encode(array_values($this->data['children'])),
             $this->data['id'],
         ]);
         if($updateMembers == true){
