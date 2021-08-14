@@ -37,7 +37,7 @@ class Group{
     
     public function __construct(){
         $this->personMembersComputed = false;
-        $this->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Group.yml'));
+        $this->data = yaml_parse_file(__DIR__ . DS . 'Group.yml');
     }
     
     // ***********************************************************************
@@ -61,6 +61,7 @@ class Group{
         $g->data = $res;
         $g->data['sources'] = json_decode($res['sources'], true);
         $g->data['parents'] = json_decode($res['parents'], true);
+        $g->data['children'] = json_decode($res['children'], true);
         $g->data['members'] = [];
         return $g;
     }
@@ -97,7 +98,7 @@ class Group{
             $this->data['download'],
             json_encode($this->data['sources']),
             json_encode($this->data['parents']),
-            json_encode(array_values($this->data['children'])),
+            json_encode($this->data['children']),
         ]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         $this->data['id'] = $res['id'];
@@ -136,7 +137,7 @@ class Group{
             $this->data['download'],
             json_encode($this->data['sources']),
             json_encode($this->data['parents']),
-            json_encode(array_values($this->data['children'])),
+            json_encode($this->data['children']),
             $this->data['id'],
         ]);
         if($updateMembers == true){
@@ -266,6 +267,7 @@ class Group{
         $res = [];
         foreach($dblink->query($query, \PDO::FETCH_ASSOC) as $row){
             $row['parents'] = json_decode($row['parents'], true);
+            $row['children'] = json_decode($row['children'], true);
             $row['sources'] = json_decode($row['sources'], true);
             $tmp = new Group();
             $tmp->data = $row;
