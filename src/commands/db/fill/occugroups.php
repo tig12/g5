@@ -1,11 +1,18 @@
 <?php
 /******************************************************************************
     
-    Computes groups of persons with the same occupation.
+    Fills table person_groop for occupation groups and completes table groop 
+    with fields n and children.
     This can be done only for all occupations in the same run.
+    
+    Computation of occupation groups is a 3-steps process :
+    - The groups are created in commands/db/fill/occus
+    - The persons are created (by tmp2db commands)
+    - The groups are filled by current command
     
     @license    GPL
     @history    2021-08-01 16:36:23+02:00, Thierry Graff : Creation
+    @pre        commands/db/fill/occus must have been executed before
 ********************************************************************************/
 namespace g5\commands\db\fill;
 
@@ -14,7 +21,7 @@ use g5\model\DB5;
 use g5\model\Group;
 use g5\model\Occupation;
 
-class occugroup implements Command {
+class occugroups implements Command {
     
     /** 
         @param  $params Empty array
@@ -24,10 +31,9 @@ class occugroup implements Command {
         if(count($params) != 0){
             return "INVALID USAGE - Useless parameter: {$params[0]}\n";
         }
-        $report = "--- db fill occugroup ---\n";
+        $report = "--- db fill occugroups ---\n";
         $t1 = microtime(true);
         
-        $occuSlugNames = Occupation::getAllSlugNames();
         $allAncestors = Group::getAllAncestors();
         $todos = array_keys($allAncestors);
         //
@@ -36,18 +42,9 @@ class occugroup implements Command {
         $groups = [];
         foreach($todos as $todo){
             $test = Group::getBySlug($todo); // DB
-            if(is_null($test)){
-                $test = new Group();
-                $test->data['slug'] = $todo;
+            if($test->data['type'] != Group::TYPE_OCCU){
+                continue;
             }
-            else{
-                if($test->data['type'] != Group::TYPE_OCCU){
-                    continue;
-                }
-            }
-            $test->data['name'] = $occuSlugNames[$todo];
-            $test->data['type'] = Group::TYPE_OCCU;
-            $test->data['description'] = "Persons whose occupation is " . $occuSlugNames[$todo] . '.';
             $groups[$todo] = $test;
         }
         //
@@ -61,21 +58,17 @@ class occugroup implements Command {
             foreach($occus as $occu){
                 $groups[$occu]->addMember($personId);
                 foreach($allAncestors[$occu] as $ancestor){
-                    $groups[$ancestor]->addMember($personId);
+                    $groups[$ancestor]->addMember($personId); // HERE data['n'] is incremented
                 }
             }
         }
         //
-        // insert in database
+        // Compute field children and insert in database
         //
         $N = 0; // only useful for report
         foreach($groups as $group){
-            if(is_null($group->data['id'])){
-                $group->insert(); // DB
-            }
-            else{
-                $group->update(); // DB
-            }
+            $group->data['children'] = Group::getDescendants($group->data['slug'], includeSeed:false);
+            $group->update(); // DB
             $N += $group->data['n'];
         }
         $t2 = microtime(true);

@@ -66,7 +66,7 @@ use g5\commands\muller\afd3women\tmp2db         as tmp2dbAfd3Women;
 
 // finalize
 use g5\commands\db\fill\stats;
-use g5\commands\db\fill\occugroup;
+use g5\commands\db\fill\occugroups;
 use g5\commands\db\fill\search;
 
 // export
@@ -191,6 +191,8 @@ class history implements Command {
             
             echo tmp2dbAfd3Women::execute(['small']);
             echo tweak::execute(['muller-234-women.yml']);
+            
+            echo occugroups::execute();
         }
         
         if($param == 'finalize' || $param == 'all'){
@@ -198,7 +200,6 @@ class history implements Command {
             echo "***  Finalize database  ***\n";
             echo "***************************\n";
             echo stats::execute(['small']);
-            echo occugroup::execute();
 //            echo search::execute();
         }
         

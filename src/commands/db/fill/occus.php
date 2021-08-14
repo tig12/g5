@@ -3,8 +3,12 @@
     
     Fills table groop from csv files located in data/model/occu
     Created groups have type Group::TYPE_OCCU.
-    Does not fill field N (nb of persons with this occupation).
-    
+    Creation of occupation groups is only partially done by this command,
+    and must be completed by commands/db/fill/occugroups.
+    In particular, current command doesn't compute
+        - field n (nb of persons with this occupation).
+        - field children.
+    See command occugroups.
     @license    GPL
     @history    2021-07-28 20:59:37+02:00, Thierry Graff : Creation
 ********************************************************************************/
@@ -27,12 +31,19 @@ class occus implements Command {
         if(count($params) != 0){
             return "USELESS PARAMETER {$params[0]}\n";
         }
-        $report = "--- db fill occu ---\n";
+        $report = "--- db fill occus ---\n";
         
         $dblink = DB5::getDbLink();
         $dblink->exec("delete from groop where type='" . Group::TYPE_OCCU . "'");
         $stmt_insert = $dblink->prepare(
-            "insert into groop(slug,wd,name,type,parents)values(?,?,?,?,?)"
+            "insert into groop(
+                slug,
+                wd,
+                name,
+                description,
+                type,
+                parents
+            )values(?,?,?,?,?,?)"
         );
         
         $N = 0;
@@ -58,13 +69,14 @@ class occus implements Command {
                     $line['slug'],
                     $line['wd'],
                     $line['en'],
+                    'Persons whose occupation is ' . $line['en'] . '.',
                     Group::TYPE_OCCU,
                     json_encode($parents),
                 ]);
                 $N++;
             }
         }
-        $report .= "Inserted $N occupations\n";
+        $report .= "Inserted $N occupation groups\n";
         return $report;
     }
     

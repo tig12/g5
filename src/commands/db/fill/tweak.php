@@ -78,9 +78,8 @@ class tweak implements Command {
             $p->addHistory('db fill tweak2db ' . $params[0], ModelTweak::SOURCE, $history);
             $p->addRaw(ModelTweak::SOURCE, $new);
             $p->update(); // DB
-            
         }
-        $report .= 'Updated ' . count($yaml) . " persons in DB\n";
+        $report .= 'Updated ' . count($yaml) . " persons in DB from {$params[0]}\n";
         return $report;
     }
     

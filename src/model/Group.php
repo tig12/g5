@@ -84,8 +84,9 @@ class Group{
             description,
             download,
             sources,
-            parents
-            ) values(?,?,?,?,?,?,?,?) returning id");
+            parents,
+            children
+            ) values(?,?,?,?,?,?,?,?,?) returning id");
         $this->data['n'] = count($this->data['members']);
         $stmt->execute([
             $this->data['slug'],
@@ -96,6 +97,7 @@ class Group{
             $this->data['download'],
             json_encode($this->data['sources']),
             json_encode($this->data['parents']),
+            json_encode($this->data['children']),
         ]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         $this->data['id'] = $res['id'];
@@ -119,7 +121,8 @@ class Group{
             description=?,
             download=?,
             sources=?,
-            parents=?
+            parents=?,
+            children=?
             where id=?");
         if($updateMembers == true){
             $this->data['n'] = count($this->data['members']);
@@ -133,6 +136,7 @@ class Group{
             $this->data['download'],
             json_encode($this->data['sources']),
             json_encode($this->data['parents']),
+            json_encode($this->data['children']),
             $this->data['id'],
         ]);
         if($updateMembers == true){
@@ -264,19 +268,19 @@ class Group{
     
     /**
         Returns an array of slugs of all the descendants of an occupation.
-        @param  $group Group    slug for which descendants need to be computed
-        @param  $includeSeed    Boolean indicating if $group should be also returned
+        @param  $groupSlug      Group slug for which descendants need to be computed
+        @param  $includeSeed    Boolean indicating if $groupSlug should be also returned
     **/
-    public static function getDescendants(string $group, bool $includeSeed) {
+    public static function getDescendants(string $groupSlug, bool $includeSeed) {
         self::computeAllAncestors();
         $res = [];
         foreach(self::$allAncestors as $current => $ancestors){
-            if(in_array($group, $ancestors)){
+            if(in_array($groupSlug, $ancestors)){
                 $res[] = $current;
             }
         }
         if($includeSeed){
-            $res[] = $group;
+            $res[] = $groupSlug;
         }
         $res = array_unique($res);
         return $res;

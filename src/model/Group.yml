@@ -23,5 +23,8 @@ sources: []
 # array of group slugs
 parents: []
 
+# array of group slugs
+children: []
+
 # array of person ids (not person objects)
 members: []

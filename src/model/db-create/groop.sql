@@ -12,6 +12,7 @@ create table groop (
     description     text not null default '',
     download        varchar(255),                       -- optional path to file / dir to download this group
     sources         jsonb,
-    parents         jsonb
+    parents         jsonb,                              -- group slugs
+    children        jsonb                               -- group slugs
 );
 create index group_slug_idx on groop(slug);
