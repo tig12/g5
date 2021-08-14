@@ -1,15 +1,13 @@
 <?php
 /********************************************************************************
-    Generates data/output/history/1991-muller-writers/muller-402-writers.csv
-    By default, the generated file is compressed (using zip).
+    Generates data/output/history/1993-muller-women/muller-234-women.csv
     
     @license    GPL
-    @history    2020-09-18 16:41:27+02:00, Thierry Graff : Creation
+    @history    2021-08-14 20:01:49+02:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\commands\newalch\muller402;
+namespace g5\commands\muller\afd3women;
 
 use g5\Config;
-use g5\model\DB5;
 use g5\model\Group;
 use g5\patterns\Command;
 use g5\commands\muller\AFD;
@@ -21,18 +19,16 @@ class export implements Command {
         Directory where the generated files are stored
         Relative to directory specified in config.yml by dirs / output
     **/
-    const OUTPUT_DIR = 'history' . DS . '1991-muller-writers';
+    const OUTPUT_DIR = 'history' . DS . '1993-muller-women';
     
-    const OUTPUT_FILE = 'muller-402-writers.csv';
+    const OUTPUT_FILE = 'muller-234-women.csv';
     
     /**  Trick to access to $sourceSlug within $sort function **/
     private static $sourceSlug;
     
     /** 
-        Called by : php run-g5.php newalch muller402 export [nozip]
-        If called without parameter, the output is compressed (using zip)
-        @param $params array containing 0 or 1 element :
-                       - An optional string "nozip"
+        Called by : php run-g5.php muller afd3women export
+        @param $params empty array 
         @return Report
     **/
     public static function execute($params=[]): string{
@@ -49,9 +45,9 @@ class export implements Command {
         
         $report = '';
         
-        $g = Group::getBySlug(Muller402::GROUP_SLUG); // DB
+        $g = Group::getBySlug(AFD3::GROUP_SLUG); // DB
         
-        self::$sourceSlug = Muller402::LIST_SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
+        self::$sourceSlug = AFD3::LIST_SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
 
         $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . self::OUTPUT_FILE;
         
@@ -63,7 +59,9 @@ class export implements Command {
             'DATE',
             'TZO',
             'DATE-UT',
+            'TIMOD',
             'PLACE',
+            'C1',
             'C2',
             'CY',
             'LG',
@@ -79,7 +77,9 @@ class export implements Command {
             'birth.date' => 'DATE',
             'birth.tzo' => 'TZO',
             'birth.date-ut' => 'DATE-UT',
+            'birth.note' => 'TIMOD',
             'birth.place.name' => 'PLACE',
+            'birth.place.c1' => 'C1',
             'birth.place.c2' => 'C2',
             'birth.place.cy' => 'CY',
             'birth.place.lg' => 'LG',

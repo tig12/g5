@@ -149,8 +149,8 @@ class Group{
     // ***********************************************************************
     
     /** 
-        Adds a person id in $this->members
-        (does not insert in database).
+        Adds a person id in $this->members (does not insert in database).
+        Also updates field 'n' (not in database).
         @param  $entry Person id
     **/
     public function addMember($entry){
@@ -161,6 +161,7 @@ class Group{
     /**
         Inserts a the associations between a group and its members in database
         (does not insert the persons).
+        Also updates field 'n' in table groop.
         If trying to insert a member already associated with the group in database,
         insertion is silently ignored.
     **/
@@ -176,10 +177,13 @@ class Group{
                 // do nothing
             }
         }
+        $this->data['n'] = count($this->data['members']);
+        $this->update(updateMembers:false); // for field n
     }
     
     /**
         Updates the associations between the group and its members in database.
+        Also updates field 'n' in table groop.
         @throws \Exception if trying to update an unexisting group
     **/
     public function updateMembers() {
@@ -190,10 +194,13 @@ class Group{
         foreach($this->data['members'] as $pid){
             $stmt->execute([$pid, $this->data['id']]);
         }
+        $this->data['n'] = count($this->data['members']);
+        $this->update(updateMembers:false); // for field n
     }
     
     /**
         Deletes the associations between group and persons (doesn't delete the persons).
+        Also updates field 'n' in table groop.
         @throws \Exception if trying to delete members of an unexisting group
     **/
     public function deleteMembers() {
@@ -201,6 +208,7 @@ class Group{
         $dblink->exec("delete from person_groop where id_groop=" . $this->data['id']);
         $this->data['members'] = [];
         $this->data['n'] = 0;
+        $this->update(updateMembers:false); // for field n
     }
     
     // ***********************************************************************
