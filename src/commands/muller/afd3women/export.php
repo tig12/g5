@@ -10,6 +10,7 @@ namespace g5\commands\muller\afd3women;
 use g5\Config;
 use g5\model\Group;
 use g5\patterns\Command;
+use g5\commands\db\export\Export as ExportUtils;
 use g5\commands\muller\AFD;
 use g5\commands\gauquelin\LERRCP;
 
@@ -58,7 +59,6 @@ class export implements Command {
             'GNAME',
             'DATE',
             'TZO',
-            'DATE-UT',
             'TIMOD',
             'PLACE',
             'C1',
@@ -74,9 +74,8 @@ class export implements Command {
             'ids-in-sources.' . AFD::SOURCE_SLUG => 'MUID',
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
-            'birth.date' => 'DATE',
+//            'birth.date' => 'DATE',
             'birth.tzo' => 'TZO',
-            'birth.date-ut' => 'DATE-UT',
             'birth.note' => 'TIMOD',
             'birth.place.name' => 'PLACE',
             'birth.place.c1' => 'C1',
@@ -94,6 +93,13 @@ class export implements Command {
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);
             },
+            'DATE' => function($p){
+                return ExportUtils::exportDate(
+                    date: $p->data['birth']['date'],
+                    dateUT: $p->data['birth']['date-ut'],
+                    tzo: $p->data['birth']['tzo'],
+                );
+            }
         ];
         
         // sort by Müller id

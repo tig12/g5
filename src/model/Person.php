@@ -320,6 +320,11 @@ class Person {
         $this->data['notes'][] = $note;
     }
     
+    /** 
+        Adds a raw entry.
+        Flatten is useful for tweaks.
+        (only necessary because in go application, a raw entry is typed map[string]string)
+    **/
     public function addRaw($sourceSlug, $newdata){
         $this->data['raw'][$sourceSlug] = flattenAssociative::compute($newdata);
     }

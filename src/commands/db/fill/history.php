@@ -55,6 +55,7 @@ use g5\commands\muller\afd3women\raw2tmp        as raw2tmpAfd3Women;
 
 // tmp2db
 use g5\commands\cura\A\tmp2db                   as tmp2dbA;
+use g5\commands\newalch\occu\pnA6;
 use g5\commands\cura\D6\tmp2db                  as tmp2dbD6;
 use g5\commands\cura\D10\tmp2db                 as tmp2dbD10;
 use g5\commands\cura\E1_E3\tmp2db               as tmp2dbE1E3;
@@ -176,6 +177,7 @@ class history implements Command {
             foreach($filesCuraA as $datafile){
                 echo tmp2dbA::execute([$datafile, 'tmp2db', 'small']);
             }
+            echo pnA6::execute(['D6', 'tmp2db', 'small']);
             echo tmp2dbD6::execute(['D6', 'tmp2db', 'small']);
             echo tmp2dbD10::execute(['D10', 'tmp2db', 'small']);
             echo tmp2dbE1E3::execute(['E1', 'tmp2db', 'small']);

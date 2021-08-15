@@ -140,6 +140,9 @@ class raw2tmp implements Command {
                 case 'TIME':
                     $hour = self::computeHour($field);
                 break;
+                case 'TZO':
+                    $new['TZO'] = self::computeTimezoneOffset($field);
+                break;
                 case 'PLACE':
                     // by chance, CY appears before place in raw file => can be passed here
                     [$new['C1'], $new['C2'], $new['PLACE']] = self::computePlace($field, $new['CY']);
@@ -213,7 +216,7 @@ class raw2tmp implements Command {
         ONAME3: part after the *
         @return [$new['FNAME'], $new['GNAME'], $new['ONAME1'], $new['ONAME2'], $new['ONAME3']]
     **/
-    private static function computeName($str) {
+    private static function computeName($str): array {
         $oname1 = $oname2 = $oname3 = '';
         // grab content between parentheses
         preg_match('/.*?\((.*?)\).*?/', $str, $m);
@@ -242,7 +245,7 @@ class raw2tmp implements Command {
         return [$fname, $gname, $oname1, $oname2, $oname3];
     }
     
-    private static function computePlace($str, $cy) {
+    private static function computePlace($str, $cy): array {
         // content between parentheses => existence of C1 or C2
         $c1 = $c2 = '';
         $place = $str;
@@ -268,6 +271,26 @@ class raw2tmp implements Command {
         $c1 = self::$c1s[$test] ?? '';
         $c2 = self::$c2s[$test] ?? '';
         return [$c1, $c2, $place];
+    }
+    
+    private static function computeTimezoneOffset($str): string {
+        if($str == ''){
+            return $str;
+        }
+        preg_match('/(-?)(\d+)\.(\d+)/', $str, $m);
+        array_shift($m);
+        [$sign1, $hour1, $min1] = $m;
+        // Müller's sign is inverse of ISO 8601
+        $sign = $sign1 == '' ? '-' : '+';
+        if((int)$hour1 == 0 && (int)$min1 == 0){
+            $sign = '+';
+        }
+        $hour = str_pad($hour1, 2, '0', STR_PAD_LEFT);
+        // $min1 is a decimal fraction of hour
+        $min = round($min1 * 0.6); // *60 / 100
+        $min = str_pad($min, 2, '0', STR_PAD_LEFT);
+        $res = "$sign$hour:$min";
+        return $res;
     }
     
 }// end class    

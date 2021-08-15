@@ -156,8 +156,8 @@ class raw2tmp implements Command {
             $new['DATE'] = "$day $hour";
             // timezone
             $tmp = explode('h', trim($cur[7]));
-            $h =  str_pad($tmp[0] , 2, '0', STR_PAD_LEFT);
-            $m =  str_pad ($tmp[1] , 2, '0');
+            $h =  str_pad($tmp[0], 2, '0', STR_PAD_LEFT);
+            $m =  str_pad ($tmp[1], 2, '0');
             $new['TZO'] = '-' . $h . ':' . $m;
             // place
             $tmp = explode(',', $cur[10]);

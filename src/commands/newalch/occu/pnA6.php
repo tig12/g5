@@ -4,7 +4,7 @@
     "pn" stands for "poets - novelists".
     Based on a work exposed on https://newalchemypress.com/gauquelin/research8.php
     
-    A6 records must have been imported in DB before executing this command.
+    A6 records must have been imported in database before executing this command.
     
     @license    GPL
     @history    2021-08-15 16:45:27+02:00, Thierry Graff : creation
