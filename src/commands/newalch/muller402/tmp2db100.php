@@ -98,15 +98,27 @@ class tmp2db100 implements Command {
                 $new['birth']['place']['lat'] = $line['LAT'];
                 // OPUS, LEN not part of standard person fields
                 // are stored in addHistory()
-                self::addOccu($line, $p);
+                $occu = self::computeOccu($line);
+                $p->addOccus([$occu]);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['MUID']);
                 $mullerId = AFD::mullerId($source->data['slug'], $line['MUID']);
                 $p->addIdInSource(AFD::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
-                $p->addHistory("newalch muller402 tmp2db100", $source->data['slug'], $new);
-                $p->addRaw($source->data['slug'], $lineRaw);
+                // repeat fields to include in $history
+                $new['sources'] = $source->data['slug'];
+                $new['ids_in_sources'] = [
+                    AFD::SOURCE_SLUG => $mullerId,
+                    $source->data['slug'] => $line['MUID'],
+                ];
+                $new['occus'] = [$occu];
+                $p->addHistory(
+                    command: 'newalch muller402 tmp2db100',
+                    sourceSlug: $source->data['slug'],
+                    newdata: $new,
+                    rawdata: $lineRaw
+                );
                 $nInsert++;
                 $p->data['id'] = $p->insert(); // DB
                 $g->addMember($p->data['id']);
@@ -117,11 +129,23 @@ class tmp2db100 implements Command {
                 $test->addIdInSource($source->data['slug'], $line['MUID']);
                 $mullerId = AFD::mullerId($source->data['slug'], $line['MUID']);
                 $test->addIdInSource(AFD::SOURCE_SLUG, $mullerId);
-                self::addOccu($line, $test);
+                $occu = self::computeOccu($line);
+                $p->addOccus([$occu]);
                 // TODO see if some fields can be updated (if Müller more precise than Gauquelin)
-                $updatedValues = [];
-                $test->addHistory("newalch muller402 tmp2db100", $source->data['slug'], $updatedValues);
-                $test->addRaw($source->data['slug'], $lineRaw);
+                $new = [];
+                // repeat fields to include in $history
+                $new['sources'] = $source->data['slug'];
+                $new['ids_in_sources'] = [
+                    AFD::SOURCE_SLUG => $mullerId,
+                    $source->data['slug'] => $line['MUID'],
+                ];
+                $new['occus'] = [$occu];
+                $p->addHistory(
+                    command: 'newalch muller402 tmp2db100',
+                    sourceSlug: $source->data['slug'],
+                    newdata: $new,
+                    rawdata: $lineRaw
+                );
                 if($reportType == 'full'){
                     $gqid = $test->data['ids-in-sources'][LERRCP::SOURCE_SLUG];
                     $report .= "Müller {$line['MUID']} = $gqid - $slug\n";
@@ -139,7 +163,7 @@ class tmp2db100 implements Command {
     }
     
     
-    private static function addOccu(&$line, $p) {
+    private static function computeOccu(&$line) {
         $occu = match($line['OCCU']){
         	'1' => 'comedy-writer',  // 1 commediografo
         	'2',                     // 2 scrittore
@@ -147,7 +171,7 @@ class tmp2db100 implements Command {
         	'5' => 'writer',         // 5 sonstige, ie something other
         	'4' => 'poet',           // 4 poeta
         };
-        $p->addOccus([$occu]);
+        return $occu;
     }
         
 }// end class    

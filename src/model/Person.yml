@@ -69,8 +69,6 @@ death:
 
 civil-registry: []  # links with directory acts/
 
-raw: []
-
 history: []
 
 free: []    # key value pairs - not used so far, maybe will be removed

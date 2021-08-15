@@ -177,7 +177,7 @@ class history implements Command {
             foreach($filesCuraA as $datafile){
                 echo tmp2dbA::execute([$datafile, 'tmp2db', 'small']);
             }
-            echo pnA6::execute(['D6', 'tmp2db', 'small']);
+            echo pnA6::execute([]);
             echo tmp2dbD6::execute(['D6', 'tmp2db', 'small']);
             echo tmp2dbD10::execute(['D10', 'tmp2db', 'small']);
             echo tmp2dbE1E3::execute(['E1', 'tmp2db', 'small']);

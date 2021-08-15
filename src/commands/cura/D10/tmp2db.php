@@ -136,8 +136,19 @@ class tmp2db implements Command {
                 }
                 $p->addOccus($addedOccus);
                 $p->computeSlug();
-                $p->addHistory("cura $datafile tmp2db", $source->data['slug'], $new);
-                $p->addRaw($source->data['slug'], $lineRaw);
+                // repeat fields to include in $history
+                $new['sources'] = $source->data['slug'];
+                $new['ids_in_sources'] = [
+                    $source->data['slug'] => $line['NUM'],
+                    $lerrcpSource->data['slug'] => $gqId,
+                ];
+                $new['occus'] = $addedOccus;
+                $p->addHistory(
+                    command: "cura $datafile tmp2db",
+                    sourceSlug: $source->data['slug'],
+                    newdata: $new,
+                    rawdata: $lineRaw
+                );
                 $p->data['id'] = $p->insert(); // DB
                 $nInsert++;
             }
@@ -155,6 +166,18 @@ class tmp2db implements Command {
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
                 // does not addIdInSource($lerrcpSource) to respect the definition of Gauquelin id
+                $new = [];
+                $new['sources'] = $source->data['slug'];
+                $new['ids_in_sources'] = [
+                    $source->data['slug'] => $line['NUM'],
+                ];
+                $new['occus'] = $addedOccus;
+                $p->addHistory(
+                    command: "cura $datafile tmp2db",
+                    sourceSlug: $source->data['slug'],
+                    newdata: $new,
+                    rawdata: $lineRaw
+                );
                 $p->update(); // DB
                 if($reportType == 'full'){
                     $report .= "Duplicate "

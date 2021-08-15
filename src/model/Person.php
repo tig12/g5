@@ -55,9 +55,6 @@ class Person {
         if(isset($row['death'])){
             $row['death'] = json_decode($row['death'], true);
         }
-        if(isset($row['raw'])){
-            $row['raw'] = json_decode($row['raw'], true);
-        }
         if(isset($row['history'])){
             $row['history'] = json_decode($row['history'], true);
         }
@@ -307,26 +304,19 @@ class Person {
         $this->data['occus'] = array_values(array_diff($occus, $remove));
     }
     
-    public function addHistory($command, $sourceSlug, $newdata){
+    public function addHistory($command, $sourceSlug, $newdata, $rawdata){
         $this->data['history'][] = [
             'date'      => date('c'),
             'command'   => $command,
             'source'    => $sourceSlug,
-            'values'    => $newdata,
+            'new'       => $newdata,
+            // flatten necessary because in go application, a raw entry is typed map[string]string
+            'raw'       => flattenAssociative::compute($rawdata),
         ];
     }
     
     public function addNote($note){
         $this->data['notes'][] = $note;
-    }
-    
-    /** 
-        Adds a raw entry.
-        Flatten is useful for tweaks.
-        (only necessary because in go application, a raw entry is typed map[string]string)
-    **/
-    public function addRaw($sourceSlug, $newdata){
-        $this->data['raw'][$sourceSlug] = flattenAssociative::compute($newdata);
     }
     
     public function addAlternativeNames($newdata){
@@ -362,10 +352,9 @@ class Person {
             occus,
             birth,
             death,
-            raw,
             history,
             notes
-            )values(?,?,?,?,?,?,?,?,?,?,?,?,?,?) returning id");
+            )values(?,?,?,?,?,?,?,?,?,?,?,?,?) returning id");
         $stmt->execute([
             $this->data['slug'],
 // desactivated because of php bug - https://bugs.php.net/bug.php?id=81002
@@ -380,7 +369,6 @@ true,
             json_encode($this->data['occus']),
             json_encode($this->data['birth']),
             json_encode($this->data['death']),
-            json_encode($this->data['raw']),
             json_encode($this->data['history']),
             json_encode($this->data['notes']),
         ]);
@@ -406,7 +394,6 @@ true,
             occus=?,
             birth=?,
             death=?,
-            raw=?,
             history=?,
             notes=?
             where id=?
@@ -425,7 +412,6 @@ true,
             json_encode($this->data['occus']),
             json_encode($this->data['birth']),
             json_encode($this->data['death']),
-            json_encode($this->data['raw']),
             json_encode($this->data['history']),
             json_encode($this->data['notes']),
             $this->data['id'],

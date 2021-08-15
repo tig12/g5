@@ -61,7 +61,12 @@ class pnA6 implements Command {
                 $p = Person::getBySourceId('a6', $m[1]);
                 $p->addOccus([$occu]);
                 $new = ['occus' => $occu];
-                $p->addHistory('newalch occu pnA6', Newalch::SOURCE_SLUG, $new);
+                $p->addHistory(
+                    command: 'newalch occu pnA6',
+                    sourceSlug: Newalch::SOURCE_SLUG,
+                    newdata: $new,
+                    rawdata: $new,
+                );
                 $p->update(); // DB
                 $g->addMember($p->data['id']);
                 $N++;

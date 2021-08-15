@@ -141,11 +141,21 @@ class tmp2db implements Command {
                 }
                 $p->addOccus($matchOccus[$line['OCCU']]);
                 $p->computeSlug();
-                $p->addHistory("cura $datafile tmp2db", $source->data['slug'], $new);
-                $p->addRaw($source->data['slug'], $lineRaw);
+                // repeat fields to include in $history
+                $new['sources'] = $source->data['slug'];
+                $new['ids_in_sources'] = [
+                    $source->data['slug'] => $line['NUM'],
+                    $lerrcpSource->data['slug'] => $gqId,
+                ];
+                $new['occus'] = $matchOccus[$line['OCCU']];
+                $p->addHistory(
+                    command: "cura $datafile tmp2db",
+                    sourceSlug: $source->data['slug'],
+                    newdata: $new,
+                    rawdata: $lineRaw
+                );
                 $p->data['id'] = $p->insert(); // DB
                 $nInsert++;
-
             }
             else{
                 // duplicate, person appears in more than one cura file
@@ -156,8 +166,19 @@ class tmp2db implements Command {
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
                 // Does not addIdInSource('cura5') to respect the definition of Gauquelin id
-                $p->addRaw($source->data['slug'], $lineRaw);
-                $p->addHistory("cura $datafile tmp2db", $source->data['slug'], []);
+                // repeat fields to include in $history
+                $new = [];
+                $new['sources'] = $source->data['slug'];
+                $new['ids_in_sources'] = [
+                    $source->data['slug'] => $line['NUM'],
+                ];
+                $new['occus'] = $matchOccus[$line['OCCU']];
+                $p->addHistory(
+                    command: "cura $datafile tmp2db",
+                    sourceSlug: $source->data['slug'],
+                    newdata: $new,
+                    rawdata: $lineRaw
+                );
                 $p->update(); // DB
                 if($reportType == 'full'){
                     $report .= "Duplicate "

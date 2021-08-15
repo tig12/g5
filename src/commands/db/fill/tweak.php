@@ -55,7 +55,6 @@ class tweak implements Command {
             }
             
             // OK, possible to update
-            $history = $tweak;  // to fill field history
             $new = $tweak;      // to update the person
             unset($new[ModelTweak::BUILD_NOTES]);
             
@@ -75,8 +74,14 @@ class tweak implements Command {
             }
             
             $p->updateFields($new);
-            $p->addHistory('db fill tweak2db ' . $params[0], ModelTweak::SOURCE, $history);
-            $p->addRaw(ModelTweak::SOURCE, $new);
+            
+            $p->addHistory(
+                command: 'db fill tweak2db ' . $params[0],
+                sourceSlug: $yamlfile, // not a real source slug
+                newdata: $new,
+                rawdata: $tweak
+            );
+            
             $p->update(); // DB
         }
         $report .= 'Updated ' . count($yaml) . " persons in DB from {$params[0]}\n";

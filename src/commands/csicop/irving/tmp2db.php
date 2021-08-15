@@ -147,8 +147,16 @@ class tmp2db implements Command {
                 $p->addIdInSource($source->data['slug'], $line['CSID']);
                 $p->updateFields($new);
                 $p->computeSlug();
-                $p->addHistory("newalch irving tmp2db", $source->data['slug'], $new);
-                $p->addRaw($source->data['slug'], $lineRaw);
+                // repeat fields to include in $history
+                $new['sources'] = $source->data['slug'];
+                $new['ids_in_sources'] = [ $source->data['slug'] => $line['CSID'] ];
+                $new['occus'] = [[$line['SPORT']]];
+                $p->addHistory(
+                    command: 'csicop irving tmp2db100',
+                    sourceSlug: $source->data['slug'],
+                    newdata: $new,
+                    rawdata: $lineRaw
+                );
                 $nInsert++;
                 $p->data['id'] = $p->insert(); // DB
             }
@@ -180,8 +188,16 @@ class tmp2db implements Command {
                 $p->addIdInSource($source->data['slug'], $line['CSID']);
                 $p->updateFields($new);
                 $p->computeSlug();
-                $p->addHistory("cura irving tmp2db", $source->data['slug'], $new);
-                $p->addRaw($source->data['slug'], $lineRaw);                 
+                // repeat fields to include in $history
+                $new['sources'] = $source->data['slug'];
+                $new['ids_in_sources'] = [ $source->data['slug'] => $line['CSID'] ];
+                $new['occus'] = [[$line['SPORT']]];
+                $p->addHistory(
+                    command: 'csicop irving tmp2db100',
+                    sourceSlug: $source->data['slug'],
+                    newdata: $new,
+                    rawdata: $lineRaw
+                );
                 $nUpdate++;
                 $p->update(); // DB
             }

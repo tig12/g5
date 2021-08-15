@@ -121,8 +121,21 @@ class tmp2db implements Command {
                 $p->addIdInSource(AFD::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
-                $p->addHistory("muller afd3women tmp2db", $source->data['slug'], $new);
-                $p->addRaw($source->data['slug'], $lineRaw);
+                // repeat fields to include in $history
+                $new['sources'] = $source->data['slug'];
+                $new['ids_in_sources'] = [
+                    $source->data['slug'] => $muid,
+                    AFD::SOURCE_SLUG => $mullerId,
+                ];
+                if(AFD3::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
+                    $new['occus'] = [ AFD3::OCCUS[$line['OCCU']] ];
+                }
+                $p->addHistory(
+                    command: 'muller afd3women tmp2db',
+                    sourceSlug: $source->data['slug'],
+                    newdata: $new,
+                    rawdata: $lineRaw
+                );
                 $nInsert++;
                 $p->data['id'] = $p->insert(); // DB
             }
@@ -205,8 +218,21 @@ class tmp2db implements Command {
                 $p->addIdInSource(AFD::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
-                $p->addHistory("muller afd3women tmp2db", $source->data['slug'], $new);
-                $p->addRaw($source->data['slug'], $lineRaw);
+                // repeat fields to include in $history
+                $new['sources'] = $source->data['slug'];
+                $new['ids_in_sources'] = [
+                    $source->data['slug'] => $muid,
+                    AFD::SOURCE_SLUG => $mullerId,
+                ];
+                if(AFD3::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
+                    $new['occus'] = [ AFD3::OCCUS[$line['OCCU']] ];
+                }
+                $p->addHistory(
+                    command: 'muller afd3women tmp2db',
+                    sourceSlug: $source->data['slug'],
+                    newdata: $new,
+                    rawdata: $lineRaw
+                );
                 $nUpdate++;
                 $p->update(); // DB
             }

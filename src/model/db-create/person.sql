@@ -15,7 +15,6 @@ create table person (
     birth           jsonb not null,
     death           jsonb not null,
     -- admin fields
-    raw             jsonb not null,
     history         jsonb not null,
     notes           jsonb
 );

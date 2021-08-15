@@ -134,8 +134,16 @@ class tmp2db implements Command {
                 $p->addIdInSource(AFD::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
-                $p->addHistory("newalch muller1083 tmp2db", $source->data['slug'], $new);
-                $p->addRaw($source->data['slug'], $lineRaw);
+                // repeat fields to include in $history
+                $new['sources'] = $source->data['slug'];
+                $new['ids_in_sources'] = [ $source->data['slug'] => $line['NR'] ];
+                $new['occus'] = ['physician'];
+                $p->addHistory(
+                    command: 'newalch muller1083 tmp2db',
+                    sourceSlug: $source->data['slug'],
+                    newdata: $new,
+                    rawdata: $lineRaw
+                );
                 $nInsert++;
                 $p->data['id'] = $p->insert(); // Storage
             }
@@ -195,8 +203,16 @@ class tmp2db implements Command {
                 $p->addIdInSource(AFD::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
-                $p->addHistory("cura muller1083 tmp2db", $source->data['slug'], $new);
-                $p->addRaw($source->data['slug'], $lineRaw);                 
+                // repeat fields to include in $history
+                $new['sources'] = $source->data['slug'];
+                $new['ids_in_sources'] = [ $source->data['slug'] => $line['NR'] ];
+                $new['occus'] = ['physician'];
+                $p->addHistory(
+                    command: 'cura muller1083 tmp2db',
+                    sourceSlug: $source->data['slug'],
+                    newdata: $new,
+                    rawdata: $lineRaw
+                );
                 $nUpdate++;
                 $p->update(); // DB
             }
