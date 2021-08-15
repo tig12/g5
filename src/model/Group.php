@@ -66,6 +66,24 @@ class Group{
         return $g;
     }
     
+    /**
+        Returns an array of Group objects, retrieved from database.
+    **/
+    public static function loadAllFromDB() {
+        $dblink = DB5::getDbLink();
+        $query = "select * from groop";
+        $res = [];
+        foreach($dblink->query($query, \PDO::FETCH_ASSOC) as $row){
+            $row['parents'] = json_decode($row['parents'], true);
+            $row['children'] = json_decode($row['children'], true);
+            $row['sources'] = json_decode($row['sources'], true);
+            $tmp = new Group();
+            $tmp->data = $row;
+            $res[] = $tmp;
+        }
+        return $res;
+    }
+    
     // ***********************************************************************
     //                                  CRUD
     // ***********************************************************************
@@ -150,19 +168,38 @@ class Group{
     // ***********************************************************************
     
     /** 
-        Adds a person id in $this->members (does not insert in database).
-        Also updates field 'n' (not in database).
-        @param  $entry Person id
+        Adds a person id in $this->members
+        Also updates field "n".
+        Does not affect database.
+        @param  $pid Person id
     **/
-    public function addMember($entry){
-        $this->data['members'][] = $entry;
+    public function addMember($pid){
+        $this->data['members'][] = $pid;
         $this->data['n']++;
     }
     
+    /** 
+        Fills field $this->members with person ids from table person_groop.
+        Also updates field "n".
+        Does not affect database.
+        @see    computePersonMembers()
+    **/
+    public function computeMembers(){
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare("select id_person from person_groop where id_groop=" . $this->data['id']);
+        $stmt->execute([]);
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $this->data['members'] = [];
+        foreach($rows as $row){
+            $this->data['members'][] = $row['id_person'];
+        }
+        $this->data['n'] = count($this->data['members']);
+    }
+    
     /**
-        Inserts a the associations between a group and its members in database
-        (does not insert the persons).
-        Also updates field 'n' in table groop.
+        Inserts in database the associations between a group and its members.
+        Does not insert the persons.
+        Update in database the group (field 'n' is modified).
         If trying to insert a member already associated with the group in database,
         insertion is silently ignored.
     **/
@@ -183,7 +220,7 @@ class Group{
     }
     
     /**
-        Updates the associations between the group and its members in database.
+        Updates in database the associations between the group and its members in database.
         Also updates field 'n' in table groop.
         @throws \Exception if trying to update an unexisting group
     **/
@@ -200,7 +237,7 @@ class Group{
     }
     
     /**
-        Deletes the associations between group and persons (doesn't delete the persons).
+        Deletes in database the associations between group and persons (doesn't delete the persons).
         Also updates field 'n' in table groop.
         @throws \Exception if trying to delete members of an unexisting group
     **/
@@ -256,24 +293,6 @@ class Group{
         foreach($nodes as $slug => $node){
             self::$allAncestors[$slug] = $node->getReachableAsStrings();
         }
-    }
-    
-    /**
-        Returns an array of Group objects, retrieved from database.
-    **/
-    public static function loadAllFromDB() {
-        $dblink = DB5::getDbLink();
-        $query = "select * from groop";
-        $res = [];
-        foreach($dblink->query($query, \PDO::FETCH_ASSOC) as $row){
-            $row['parents'] = json_decode($row['parents'], true);
-            $row['children'] = json_decode($row['children'], true);
-            $row['sources'] = json_decode($row['sources'], true);
-            $tmp = new Group();
-            $tmp->data = $row;
-            $res[] = $tmp;
-        }
-        return $res;
     }
     
     /**
