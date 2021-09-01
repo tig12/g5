@@ -4,13 +4,13 @@ File muller-afd3-women.txt contains a list published in
 by A Müller and E Lührs
 
 File muller-afd3-women.txt was built from scans of the original document.
-Scans can be dowloaded from https://g5.tig12.net/auxiliary/1993-muller-women/
+These scans can be dowloaded from https://github.com/tig12/g5-aux/tree/master/1993-muller-women
 
-Mars - april 2021
-Scan of original document by Nick Kollerstrom
-Conversion to a text file and corrections by Thierry Graff
+Build process : see https://github.com/tig12/g5-aux/blob/master/1993-muller-women/README
 
-Lists of modifications that may introduce errors:
+
+Lists of manual modifications introduced in muller-afd3-women.txt
+and not present in the original document:
 
 004 ANNA AMALIE, HZGN VON SACHSEN-WEIMAR
 004 von Braunschweig-Wolfenbüttel, Anna Amalia

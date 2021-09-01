@@ -51,8 +51,6 @@ The export says 3748, there is a difference of 3 that I can't explain, I marked 
 
 - G55::prepareCuraMatch not designed correctly
 
-- Harmonize all exports, use commands/csicop/si42/export.php code
-
 - fix nobilities in cura files
 
 - in all cura code, use Cura::tmpFilename()
