@@ -1,9 +1,15 @@
 
+
+- rename db/fill/ occus and occugroups as occus1 and occus2
+
+- integrate muller 1083 fix cura days and names to db/fill/history
+
 - AFD2: 
     - check 17  Arrau, Claudio (south lat)
     - check 202 Franz II., Joseph Karl (-.50) tz offset (instead of -0.50)
 
 - AFD3: 
+    - refactor using common code with AFD2
     - check if mb_substr is needed
     - simplify name (remove name2 and 3)
 

@@ -69,3 +69,15 @@
     family: Montini
     official:
       given: Giovanni Battista Enrico Antonio Maria
+
+-
+  ids-in-sources:
+    afd2: '550'
+    wd: Q42247
+  name:
+    official:
+      given: René Armand François
+      family: Prudhomme
+    alter:
+      - Sully-Prudhomme
+      

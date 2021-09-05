@@ -90,6 +90,7 @@ class AFD2 {
         'MUID',
         'FNAME',
         'GNAME',
+        'FAME',
         'NOBL',
         'DATE',
         'TZO',
@@ -144,6 +145,99 @@ class AFD2 {
         'WA 09' => 'X', // 4 persons - more precise infos in tweaks file
         'WA 10' => 'suffragette', // 7 persons
         'WA 12' => 'partner-of-celebrity', // 8 persons
+*/
+    ];
+    
+    /** Conversion to ISO 3166. **/
+    public const COUNTRIES = [
+        'A'   => 'AT', // Austria
+        'B'   => 'BE', // Belgium
+        'CH'  => 'CH', // Switzerland
+        'CS'  => 'CZ', // Czech Republic
+        'D'   => 'DE', // Germany
+        'DK'  => 'DK', // Denmark
+        'DOP' => 'PL', // Former German regions, now Polish
+        'DOS' => 'RU', // Former German regions, now Russia 
+        'DZ'  => 'DZ', // Algeria
+        'E'   => 'ES', // Spain
+        'F'   => 'FR', // France
+        'GB'  => 'GB', // Great Britain
+        'I'   => 'IT', // Italy
+        'L'   => 'LU', // Luxemburg
+        'NL'  => 'NL', // Netherlands
+        'S'   => 'SE', // Sweden
+        'RCH' => 'CL', // Chile
+        'USA' => 'US', // United States of America
+    ];
+    
+    /** Admin code level 1. **/
+    public const C1 = [
+        /* 
+        'Baselland'         => 'BL',
+        'Basel-Stadt'       => 'BS',
+        'Bern'              => 'BE',
+        'Ca.'               => 'CA',
+        'Emmental, Bern'    => 'BE',
+        'Graubünden'        => 'GR',
+        'Ill.'              => 'IL',
+        'Luzern'            => 'LU',
+        'N.H.'              => 'NH',
+        'N.J.'              => 'NJ',
+        'Minn.'             => 'MN',
+        'Nevenburg'         => 'NE',
+        'Ohio'              => 'OH',
+        'Pa.'               => 'PA',
+        'St. Gallen'        => 'SG',
+        'Waadt'             => 'VD',
+        'Wash.'             => 'WA',
+        */
+    ];
+    
+    /**
+        Admin code level 2.
+    **/
+    public const C2 = [
+/* 
+        'Ancona'            => 'AN',
+        'Ancona, Rom'       => 'AN',
+        'Antwerpen'         => 'VAN',
+        'Bologna'           => 'BO',
+        'Briissel'          => 'BRU',
+        'Calvados'          => '14',
+        'Cher'              => '18',
+        'Deux-Sévres'       => '79',
+        //'Donan'             => '',
+        'Dordogne'          => '19',
+        'Dresden'           => '',
+        //'Elster, Merseburg' => '',
+        //'Erzgebirge'        => '',
+        //'Fehrbellin, Brandenbg.' => '',
+        //'Harz'              => '',
+        //'Icking, Oberb.'    => '',
+        //'Innsbruck, Tirol'  => '',
+        //'Karnten'           => '',
+        //'Lavanttal'         => '',
+        //'Liitzen'           => '',
+        'Lot'               => '46',
+        //'Meifen, Sachsen'   => '',
+        //'Oder'              => '',
+        'Oise'              => '60',
+        //'Ostpriegnitz'      => '',
+        'Paris'             => '75',
+        'Pavia, Lombardei'  => 'PV',
+        //'Pegau, Sachsen'    => '',
+        //'Rigen'             => '',
+        //'Rochlitz, Sachsen' => '',
+        'Rom'               => 'RM',
+        //'Sachsen'           => '',
+        'Sardinien'         => 'NU', // Nuoro
+        'Seine, Paris'      => '75',
+        //'Steiermark'        => '',
+        //'Thüringen'         => '',
+        //'Tirol'             => '',
+        'Turin'             => 'TO',
+        'Vendée'            => '85',
+        'Yonne'             => '89',
 */
     ];
     
