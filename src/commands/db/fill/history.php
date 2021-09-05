@@ -14,9 +14,9 @@ use g5\patterns\Command;
 use g5\commands\cura\CuraRouter;
 
 // for information sources
+use g5\G5;
 use g5\commands\gauquelin\LERRCP;
 use g5\commands\muller\AFD;
-use g5\G5;
 use g5\commands\newalch\Newalch;
 use g5\commands\cura\Cura;
 use g5\commands\wd\Wikidata;

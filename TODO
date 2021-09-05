@@ -1,5 +1,11 @@
 
+- AFD2: 
+    - check 17  Arrau, Claudio (south lat)
+    - check 202 Franz II., Joseph Karl (-.50) tz offset (instead of -0.50)
 
+- AFD3: 
+    - check if mb_substr is needed
+    - simplify name (remove name2 and 3)
 
 - in all tmp2db, when $p->addHistory is done,
     $p->addSource and $p->addIdInSource are not taken into account

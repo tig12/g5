@@ -1,7 +1,7 @@
 1   Abbe, Ernst                         23.01.1840 21.30        LMT D   Eisenach                50 N 59 010 E 19 SC02 4567  SE N
 2   Achard, Franz Carl                  28.04.1753 14.00 -0.93      D   Berlin                  52 N 32 013 E 18 SC03 46    SE N
 3   Adenauer, Konrad                    05.01.1876 10.30        LMT D   Köln                    50 N 57 006 E 57 MA04 4567  SE G
-4   Adorno, Theodor We                  11.09.1903 05.30 -1.00      D   Frankfurt Main          50 N O7 008 E 41 SC06 567   SE N
+4   Adorno, Theodor We                  11.09.1903 05.30 -1.00      D   Frankfurt Main          50 N 07 008 E 41 SC06 567   SE N
 5   Albers, Hans                        22.09.1891 10.15        LMT D   Hamburg                 53 N 34 010 E 02 AR03 567   SA N
 6   Albert, v. Sachsen-Coburg-Gotha     26.08.1819 06.00        LMT D   Schloss Rosenau Coburg  50 N 16 010 E 58 MA06 46    SE N
 7   Altig, Rudi                         18.03.1937 23.30 -1.00      D   Mannheim                49 N 29 008 E 29 MA13 57    SE N
@@ -10,17 +10,17 @@
 10  Annunzio, Gabriele d'               12.03.1863 08.00        LMT I   Francaville (Pescara)   42 N 28 014 E 13 AR01 56    SG G
 11  Anouvilh, Jean                      23.06.1910 01.00 -0.16      F   Bordeaux                44 N 50 000 E 34 AR01 57    SG G
 12  Anguetil, Jacques                   08.01.1934 10.30  0.00      F   Mont-Saint-Aignan       49 N 26 001 E 05 MA13 57    SG G
-13  Ansermet, Ernest                    41.11.1883 09.45        LMT CH  Vevey                   46 N 28 006 E 51 AR05 57    SE N
+13  Ansermet, Ernest                    11.11.1883 09.45        LMT CH  Vevey                   46 N 28 006 E 51 AR05 57    SE N
 14  Antonioni, Michelangelo             29.09.1912 21.45 -1.00      I   Ferrara                 44 N 42 012 E 30 AR05 57    SA N
 15  Apollinaire, Guillaume              26.08.1880 05.00 -0.83      I   Roma                    41 N 54 012 E 30 AR01 56    SG G
 16  Arp, Hans                           16.09.1686 06.00        LMT F   StraBburg               48 N 35 007 E 42 AR08 567   SA N
 17  Arrau, Claudio                      06.02.1903 24.00  4.79      RCH Chillan                 36 S 36 072 W 07 AR07 57    SA N
-18  Aschoff, Ludwig                     40.01.1866 13.00        LMT D   Berlin                  52 N 32 013 E 18 SC03 56    SE N
+18  Aschoff, Ludwig                     10.01.1866 13.00        LMT D   Berlin                  52 N 32 013 E 18 SC03 56    SE N
 19  Ayme, Marcel                        29.03.1902 12.00 -0.16      F   Joigny                  47 N 59 003 E 24 AR01 56    SG G
 20  Baader, Franz Xaver von             27.03.1765 03.15 -0.68      D   München                 48 N 08 011 E 34 SC06 46    SE N
 21  Baeyer, Adolf von                   31.10.1835 22.30        LMT D   Berlin                  52 N 32 013 E 18 SC03 56    SE N
 22  Baier, Ernst                        27.09.1905 23.45 -1.00      D   Zittau                  50 N 54 014 E 48 MA13 7     SE N
-23  Balla, Giacomo                      19.07.1871 00.00 -0.83      x   Torino                  45 N 04 007 E 41 AR08 67    SG G
+23  Balla, Giacomo                      19.07.1871 00.00 -0.83      I   Torino                  45 N 04 007 E 41 AR08 67    SG G
 24  Balser, Ewald                       05.10.1898 01.30 -1.00      D   Elberfeld               51 N 16 007 E 12 AR03 57    SE G
 25  Balzac, Honoré de                   20.05.1799 11.00 -0.12      F   Tours                   47 N 24 000 E 42 AR01 4567  SA N
 26  Bamm, Peter                         20.10.1897 00.45 -1.00      D   Hochneukirch            51 N 06 006 E 36 AR02 56    SE N
@@ -28,12 +28,12 @@
 28  Barrault, Jean-Louis                08.09.1910 66.00 -0.16      F   Le Vésinet              48 N 50 002 E 08 AR03 57    SG G
 29  Barth, Heinrich                     16.02.1821 23.00        LMT D   Hamburg                 53 N 34 010 E 02 MA02 67    SE N
 30  Barth, Karl                         10.05.1886 05.00        LMT CH  Basel                   47 N 33 007 E 27 SC06 567   SE N
-31  Bartning, Otto                      42.04.1883 23.45        LMT D   Karlsruhe               49 N O1 008 E 24 AR09 56    SE N
+31  Bartning, Otto                      12.04.1883 23.45        LMT D   Karlsruhe               49 N 01 008 E 24 AR09 56    SE N
 32  Basedow, Karl von                   28.03.1799 14.00 -0.73      D   Dessau                  51 N 50 012 E 14 SC04 46    SE N
 33  Bassermann, Albert                  07.09.1867 22.30        LMT D   Mannheim                49 N 29 008 E 29 AR03 567   SG G
 34  Bastian, Adolf                      26.06.1826 00.30        LMT D   Bremen                  53 N 05 008 E 49 SC05 456   SE G
 35  Baudelaire, Charles                 09.04.1821 15.00        LMT F   Paris                   48 N 50 002 E 20 AR01 4567  SG G
-36  Bauer, Wilhelm                      23.12.1822 05.15        LMT D   Dillingen (Donav)       48 N 35 O10 E 30 MA01 46    SE N
+36  Bauer, Wilhelm                      23.12.1822 05.15        LMT D   Dillingen (Donav)       48 N 35 010 E 30 MA01 46    SE N
 37  Bayer, Friedrich                    06.06.1825 23.30        LMT D   Barmen                  51 N 16 007 E 12 SC03 56    SE N
 38  Bea, Augustin                       28.05.1881 03.30        LMT D   Riedbéhringen           47 N 57 008 E 30 MA05 567   SE N
 39  Bebel, August                       22.02.1840 20.30        LMT D   Köln-Deutz              50 N 57 006 E 57 MA04 567   SE N
@@ -41,10 +41,10 @@
 41  Beck, Ludwig                        29.06.1880 14.45        LMT D   Biebrich                50 N 03 008 E 17 MA07 56    SE G
 42  Becquerel, Henri                    15.12.1852 15.00        LMT F   Paris                   48 N 50 002 E 20 SC02 456   SG G
 43  Behrens, Peter                      14.04.1868 01.00        LMT D   Hamburg                 53 N 34 010 E 02 AR09 56    SE N
-44  Belmondo, Jean-Paul                 09.04.1933 09.00 -1.00      F   Neuilly sur Seine       48 N 53 002 E i7 AR03 57    SG G
+44  Belmondo, Jean-Paul                 09.04.1933 09.00 -1.00      F   Neuilly sur Seine       48 N 53 002 E 7 AR03 57    SG G
 45  Benedetti Michelangeli, Arturo      05.01.1920 23.05 -1.00      I   Brescia                 45 N 30 011 E 00 AR07 57    SE N
 46  Benn, Gottfried                     02.05.1886 19.30        LMT D   Mansfeld                53 N 14 012 E 02 AR01 567   SE N
-47  Benz, Carl                          25.11.1844 23.30        LMT D   Karlsruhe               49 N O1 008 E 24 MA01 4567  SE N
+47  Benz, Carl                          25.11.1844 23.30        LMT D   Karlsruhe               49 N 01 008 E 24 MA01 4567  SE N
 48  Berlioz, Hector                     11.12.1803 17.00 -0.46      F   La Cote-Saint-André     45 N 23 005 E 15 AR04 4567  SG G
 49  Bernanos, Georges                   20.02.1888 09.00        LMT F   Paris                   48 N 51 002 E 20 AR01 567   SG G
 50  Bessel, Friedrich Wilhelm           21.06.1784 16.00 -0.58      D   Minden Westfalen        52 N 18 008 E 55 SC02 567   SE N
@@ -55,7 +55,7 @@
 55  Bismarck, Otto von                  01.04.1815 13.00        LMT D   Schönhausen (Altmark)   52 N 35 012 E 03 MA04 4567  SE N
 56  Blondel, Maurice                    02.11.1861 10.30        LMT F   Dijon                   47 N 19 005 E 02 SC06 67    SG G
 57  Blum, Leon                          09.04.1872 11.00        LMT F   Paris                   48 N 50 002 E 20 MA04 56    SG G
-58  Boccioni, Umberto                   19.10.1882 15.15 -0.83      I   Reggio di Calabria      3g N 06 015 E 30 AR08 567   SE N
+58  Boccioni, Umberto                   19.10.1882 15.15 -0.83      I   Reggio di Calabria      38 N 06 015 E 30 AR08 567   SE N
 59  Bode, Johann Elert                  19.01.1747 13.15 -0.47      D   Hamburg                 53 N 34 010 E 02 SC02 57    MA N
 60  Bodelschwingh, Friedrich von        06.03.1831 16.00        LMT D   Tecklenburg             52 N 17 007 E 48 MA05 4567  SE N
 61  Böhm, Karl                          28.08.1894 18.15 -1.00      A   Graz                    47 N 04 015 E 27 AR05 57    SE N
@@ -63,7 +63,7 @@
 63  Bonnard, Pierre                     03.10.1867 10.00        LMT F   Fontenay-aux-Roses      48 N 47 002 E 17 AR08 56    SG G
 64  Borchert, Wolfgang                  20.05.1921 03.10 -1.00      D   Hamburg                 53 N 33 010 E 00 AR01 56    SA N
 65  Borgward, Carl                      10.11.1890 19.30        LMT D   Altona Hamburg          53 N 33 009 E 57 MA03 56    SA N
-66  Borotra, Jean                       13.08.1898 17.00 -0.16      F   Biarritz                43 N 29 OO1 W 34 MA13 7     SG G
+66  Borotra, Jean                       13.08.1898 17.00 -0.16      F   Biarritz                43 N 29 001 W 34 MA13 7     SG G
 67  Bosch, Carl                         27.08.1874 23.15        LMT D   Köln                    50 N 57 006 E 57 SC03 56    SE N
 68  Bosch, Robert                       23.09.1861 05.00        LMT D   Albeck                  48 N 24 009 E 59 MA03 4567  SE N
 69  Bothe, Walter Wilhelm               08.01.1891 08.30        LMT D   Oranienburg (Berlin)    52 N 45 013 E 14 SC02 56    SE N
@@ -84,18 +84,18 @@
 84  Brubeck, Dave                       06.12.1920 18.35 8.00       USA Concord (Calif)         38 N 00 122 W 00 AR07 57    SG G
 85  Bruckner, Anton                     04.09.1824 04.15        LMT A   Ansfelden               48 N 18 014 E 17 AR04 4567  SE N
 86  Brüning, Heinrich                   26.11.1885 17.00        LMT D   Münster                 51 N 58 007 E 38 MA04 56    SE G
-87  Budinger, Hugo                      10.06.1927 07.00 ~1.00      D   Düsseldorf              51 N 14 006 E 47 MA13 7     SE N
-88  Blicher, Karl                       16.02.1847 04.00        LMT D   Kirberg (Wiesbaden)     50 N 18 008 E 0S SC09 57    SE N
-89  Büchmann, Georg                     04.01.1822 03.00        LMT D   Berlin                  52 N 32 013 E i8 SC07 56    SE N
+87  Budinger, Hugo                      10.06.1927 07.00 -1.00      D   Düsseldorf              51 N 14 006 E 47 MA13 7     SE N
+88  Blicher, Karl                       16.02.1847 04.00        LMT D   Kirberg (Wiesbaden)     50 N 18 008 E 09 SC09 57    SE N
+89  Büchmann, Georg                     04.01.1822 03.00        LMT D   Berlin                  52 N 32 013 E 18 SC07 56    SE N
 90  Büchner, Georg                      17.10.1813 05.30        LMT D   Goddelau                49 N 52 008 E 39 AR01 567   SE N
 91  Bühler, Karl                        27.05.1879 19.30        LMT D   Meckesheim              49 N 19 008 E 49 SC05 56    SE N
-92  Bixger, Gottfried August            31.12.1747 23.00 ~0.69      D   Molmerswende (Harz)     51 N 39 011 E 15 AR01 456   SE N
+92  Bixger, Gottfried August            31.12.1747 23.00 -0.69      D   Molmerswende (Harz)     51 N 39 011 E 15 AR01 456   SE N
 93  Bultmann, Rudolf                    20.08.1884 05.45        LMT D   Wiefelstede             53 N 09 008 E 13 SC06 567   SE N
 94  Bungert, Wilhelm                    01.04.1939 12.35 -1.00      D   Mannheim                49 N 29 008 E 29 MA13 57    SE N
 95  Burckhardt, Carl Jacob              10.09.1891 16.30        LMT CH  Basel                   47 N 33 007 E 27 SC07 56    SE N
 96  Burckhardt, Jacob                   25.05.1818 01.30        LMT CH  Basel                   47 N 33 007 E 27 SC07 456   FE N
 97  Busch, Wilhelm                      14.04.1832 06.00        LMT D   Wiedensahl              52 N 23 009 E 06 AR01 456   SE N
-98  Busoni, Ferruccio                   01.04.1866 10.30        LMT I   Empoli                  43 N 47 O11 E 15 AR04 567   SA N
+98  Busoni, Ferruccio                   01.04.1866 10.30        LMT I   Empoli                  43 N 47 011 E 15 AR04 567   SA N
 99  Butenandt, Adolf                    24.03.1903 22.00 -1.00      D   Bremerhaven             53 N 33 008 E 35 SC03 57    SE N
 100 Button, Richard                     18.07.1929 15.34 4.00       USA Englewood (NJ)          40 N 54 073 W 58 MA13 7     SG G
 101 Byron, Lord George Gordon           22.01.1788 14.00 0.20       GB  London                  51 N 30 000 W 07 AR01 4567  FA N
@@ -108,10 +108,10 @@
 108 Caruso, Enrico                      27.02.1873 03.00 -0.83      I   Napoli                  40 N 54 014 E 00 AR06 4567  SA N
 109 Caspar, Horst                       20.01.1913 06.45 -1.00      D   Radegast (Anhalt)       51 N 39 012 E 05 AR03 57    SE N
 110 Cezanne, Paul                       19.01.1839 01.00        LMT F   Aix en Provence         43 N 18 005 E 22 AR08 456   SG G
-111 Cherubini, Luigi                    14.09.1760 00.00 ~0.75      I   Firenze                 43 N 47 011 E 15 AR04 56    SA N
+111 Cherubini, Luigi                    14.09.1760 00.00 -0.75      I   Firenze                 43 N 47 011 E 15 AR04 56    SA N
 112 Churchill, Sir Winston              30.11.1874 01.30        LMT GB  Woodstock (Oxford)      51 N 46 001 W 15 MA04 4567  FB N
 113 Clair, René                         11.11.1898 14.00 -0.16      F   Paris                   48 N 50 002 E 20 AR03 57    SG G
-114 Clark, Jim                          04.03.1936 15.25 0.00       GB  Duns (Schottland)       57 N 0O 003 W OO MA13 5     SG G
+114 Clark, Jim                          04.03.1936 15.25 0.00       GB  Duns (Schottland)       57 N 00 003 W 00 MA13 5     SG G
 115 Claudel, Paul                       06.08.1868 04.00        LMT F   Villeneuve-sur-Fére     49 N 34 003 E 37 AR01 567   SG G
 116 Claudius, Matthias                  15.08.1740 22.30 -0.63      D   Reinfeld Holstein       53 N 49 010 E 22 AR01 4567  SE N
 117 Clausewitz, Carl von                01.06.1780 15.30 -0.83      D   Burg                    52 N 16 011 E 50 MA07 456   SE N
@@ -122,7 +122,7 @@
 122 Cole, Nat "King"                    17.03.1919 09.00 6.00       USA Montgomery (Ala)        32 N 30 086 W 18 AR07 567   SA N
 123 Coppi, Fausto                       15.09.1919 21.30 -2.00      I   Castellania             44 N 55 008 E 56 MA13 5     SG G
 124 Corot, Camille                      16.07.1796 01.30 -0.07      F   Paris                   48 N 50 002 E 20 AR08 56    SG G
-125 Coster, Charles de                  20.08.1827 15.30        LMT D   München                 48 N 08 O11 E 34 AR01 456   SE N
+125 Coster, Charles de                  20.08.1827 15.30        LMT D   München                 48 N 08 011 E 34 AR01 456   SE N
 126 Courbet, Gustave                    10.06.1819 03.00        LMT F   Ornans (Doubs)          47 N 07 006 E 09 AR08 567   SG G
 127 Coward, Sir Noel Pierce             16.12.1899 02.30 0.00       GB  Teddington (London)     51 N 31 000 W 20 AR01 56    SA N
 128 Cramm, Gottfried von                07.07.1909 17.45 -1.00      D   Nettlingen              52 N 10 010 E 10 MA13 7     SE G
@@ -143,7 +143,7 @@
 143 Delon, Alain                        08.11.1935 03.25 0.00       F   Sceaux                  48 N 47 002 E 21 AR03 57    SG G
 144 Demus, Jérg                         02.12.1928 11.20 -1.00      A   St. Pélten              48 N 12 015 E 38 AR07 57    SE N
 145 Derain, André                       17.06.1880 14.00        LMT F   Paris                   48 N 50 002 E 20 AR08 56    SG G
-146 Derwall, Josef                      10.03.1927 08.15 ~1.00      D   Würselen Aachen         50 N 47 006 E 05 MA13 5     SE N
+146 Derwall, Josef                      10.03.1927 08.15 -1.00      D   Würselen Aachen         50 N 47 006 E 05 MA13 5     SE N
 147 Devrient, Ludwig                    15.12.1784 01.30 -0.95      D   Berlin                  52 N 32 013 E 18 AR03 457   SE N
 148 Dietrich, Wilfried                  14.10.1933 01.00 -1.00      D   Schifferstadt           49 N 28 008 E 27 MA13 57    SE N
 149 Dilthey, Wilhelm                    19.11.1833 20.00        LMT D   Biebrich                50 N 03 008 E 17 SC07 567   SE N
@@ -169,7 +169,7 @@
 169 Einstein, Albert                    14.03.1879 11.30        LMT D   Ulm                     48 N 24 009 E 59 SC02 4567  SE G
 170 Eliot, Thomas Stearns               26.09.1888 07.45 6.00       USA Saint Louis (Miss)      38 N 38 090 W 15 AR01 567   FA N
 171 Eluard, Paul                        14.12.1895 11.00 -0.16      F   Saint-Denis             48 N 56 002 E 22 AR01 56    SG G
-172 Engels, Friedrich                   28.11.1820 21.00        LMT DB  Barmen                  51 N 16 007 E 12 MA04 4567  SE N
+172 Engels, Friedrich                   28.11.1820 21.00        LMT D   Barmen                  51 N 16 007 E 12 MA04 4567  SE N
 173 Ensor, James                        13.04.1860 04.30        LMT B   Ostende                 51 N 14 002 E 55 AR08 56    SG G 
 174 Erhard, Ludwig                      04.02.1897 02.45 -1.00      D   Fürth                   49 N 29 010 E 59 MA04 56    SE G
 175 Ernst, Max                          02.04.1891 09.45        LMT D   Brühl                   50 N 50 006 E 54 AR08 56    FB N 
@@ -178,7 +178,7 @@
 178 Eucken, Walter                      17.01.1891 09.00        LMT D   Jena                    50 N 56 011 E 36 SC09 57    SE N
 179 Eyth, Max von                       06.05.1836 13.30        LMT D   Kirchheim Teck          48 N 39 009 E 27 MA01 46    SE N
 180 Falla, Manual de                    23.11.1876 06.00        LMT E   Cadiz                   36 N 28 006 W 12 AR04 567   SA N
-181 Fallada, Hans                       21.07.1893 06.45 -1.00      DB  Greifswald              54 N 05 013 E 23 AR01 567   SE N
+181 Fallada, Hans                       21.07.1893 06.45 -1.00      D   Greifswald              54 N 05 013 E 23 AR01 567   SE N
 182 Fauré, Gabriel                      12.05.1845 04.00        LMT F   Pamiers                 43 N 07 001 E 37 AR04 56    SG G
 183 Fehling, Jürgen                     01.03.1885 18.00        LMT D   Lübeck                  53 N 52 010 E 41 AR03 57    SE N
 184 Fellini, Federico                   20.01.1920 21.00 -1.00      I   Rimini                  44 N 12 012 E 30 AR03 57    SA N
@@ -194,20 +194,20 @@
 194 Foch, Ferdinand                     02.10.1851 22.00        LMT F   Tarbes                  43 N 14 000 E 05 MA07 56    SG G
 195 Focke, Heinrich                     08.10.1890 13.15        LMT D   Bremen                  53 N 05 008 E 49 MA01 56    SE N
 196 Fontane, Theodor                    30.12.1819 16.30        LMT D   Neuruppin               52 N 56 012 E 49 AR01 4567  SE N
-197 Fortner, Wolfgang                   12.10.1907 01.45 ~1.00      D   Leipzig                 51 N 21 012 E 22 AR04 57    SE N
+197 Fortner, Wolfgang                   12.10.1907 01.45 -1.00      D   Leipzig                 51 N 21 012 E 22 AR04 57    SE N
 198 France, Anatole                     16.04.1844 07.00        LMT F   Paris                   48 N 50 002 E 20 AR01 56    SG G
 199 Franck, César                       10.12.1822 07.00        LMT B   Littich                 50 N 37 005 E 34 AR04 567   SA N
 200 Francois-Poncet, André              13.06.1887 12.00        LMT F   Provins                 48 N 34 003 E 18 MA04 56    SG G
 201 Franz Ferdinand, von Osterreich     18.12.1863 07.15        LMT A   Graz                    47 N 04 015 E 27 MA06 56    SE N
-202 Franz II., Joseph Karl              12.02.1768 04,30 -.50       I   Firenze                 43 N 47 011 E 15 MA06 56    FA N
+202 Franz II., Joseph Karl              12.02.1768 04.30 -0.50      I   Firenze                 43 N 47 011 E 15 MA06 56    FA N
 203 Franz Joseph I. von Osterreich      18.08.1830 09.15        LMT A   Schönbrunn              48 N 13 016 E 23 MA06 567   SA N
 204 Fraunhofer, Joseph von              06.03.1787 20.30 -0.63      D   Straubing               48 N 53 012 E 35 SC02 4567  SE N
 205 Friedrich II., der Grofe            24.01.1712 11.15 -0.67      D   Berlin                  52 N 32 013 E 18 MA06 4567  SA N
 206 Friedrich III. von Hohenzollern     18.10.1831 10.00        LMT D   Potsdam                 52 N 24 013 E 04 MA06 56    SE N
-207 Friedrich Wilhelm IV.               15.10.1795 06.00 ~1.12      D   Berlin                  52 N 32 013 E 18 MA06 56    SE N
+207 Friedrich Wilhelm IV.               15.10.1795 06.00 -1.12      D   Berlin                  52 N 32 013 E 18 MA06 56    SE N
 208 Frébe, Gert                         25.02.1913 12.30 -1.00      D   Oberplanitz             50 N 43 012 E 31 AR03 57    SE N
 209 Fromm, Erich                        23.03.1900 19.30 -1.00      D   Frankfurt               50 N 07 008 E 41 SC05 56    SE N
-210 Gabelsberger, Franz Xaver           09.02.1789 13.30 -0.52      D   München                 48 N 08 O11 E 34 MA01 46    SE N
+210 Gabelsberger, Franz Xaver           09.02.1789 13.30 -0.52      D   München                 48 N 08 011 E 34 MA01 46    SE N
 211 Gabin, Jean                         17.05.1904 02.00 -0.16      F   Paris                   48 N 50 002 E 20 AR03 567   SG G
 212 Galen, Clemens August von           16.03.1878 22.30        LMT D   Dinklage                52 N 40 008 E 07 MA05 56    SE N
 213 Gambetta, Leon                      02.04.1838 20.00        LMT F   Cahors                  44 N 27 001 E 27 MA04 56    SG G
@@ -219,7 +219,7 @@
 219 Geibel, Emanuel                     18.10.1815 00.00        LMT D   Lübeck                  53 N 52 010 E 41 AR01 67    SE N
 220 Geiger, Hans                        30.09.1882 08.30        LMT D   Neustadt (Weinstrafe)   49 N 21 008 E 09 SC02 56    SE N
 221 Gellert, Christian Fürchtegott      04.07.1715 13.30 -0.82      D   Hainichen               50 N 58 013 E 08 AR01 4567  SE N
-222 George, Stefan                      12.07.1868 15.00        LMT D   Büdesheim               49 8 59 008 E 00 AR01 4567  SE N
+222 George, Stefan                      12.07.1868 15.00        LMT D   Büdesheim               49 N 59 008 E 00 AR01 4567  SE N
 223 Germar, Manfred                     10.03.1935 18.30 -1.00      D   Köln                    50 N 57 006 E 57 MA13 7     SE G
 224 Giacometti, Alberto                 10.10.1901 01.00 -1.00      CH  Stampa                  46 N 22 009 E 32 AR08 56    SE N
 225 Gide, André                         22.11.1869 93.00        LMT F   Paris                   48 N 50 002 E 20 AR01 4567  SG G
@@ -236,7 +236,7 @@
 236 Grieshaber, HAP                     15.02.1909 01.00 -1.00      D   Schloß Rot              48 N 07 010 E 02 AR08 56    SE N
 237 Grillparzer, Franz                  15.01.1791 10.30 -0.92      A   Wien                    48 N 13 016 E 21 AR01 4567  FA N
 238 Grock (Adrian Wettach)              10.01.1880 09.00        LMT CH  Reconvilier             47 N 09 007 E 14 AR03 56    SE N
-239 Gründgens, Gustaf                   22.12.1899 10.00 ~1.00      D   Düsseldorf              51 N 14 006 E 47 AR03 567   SE G
+239 Gründgens, Gustaf                   22.12.1899 10.00 -1.00      D   Düsseldorf              51 N 14 006 E 47 AR03 567   SE G
 240 Guardini, Romano                    17.02.1885 01.30 -0.83      I   Verona                  45 N 30 011 E 00 SC06 57    SE N
 241 Guareschi, Giovanni                 01.05.1908 23.00 -1.00      I   Roccabianca             44 N 48 010 E 19 AR01 567   SA N
 242 Gutzkow, Karl                       17.03.1811 00.30        LMT D   Berlin                  52 N 32 013 E 18 AR01 45    SE N
@@ -248,38 +248,38 @@
 248 Hary, Armin                         22.03.1937 10.00 -1.00      D   Gersweiler              49 N 14 007 E 00 MA13 57    SE G
 249 Hasenclever, Walter                 08.07.1890 15.30        LMT D   Aachen                  50 N 47 006 E 05 AR01 56    SE N
 250 Heckel, Erich                       31.07.1883 04.30        LMT D   Ddbeln (Sachsen)        51 N 07 013 E 07 AR08 56    SE N
-251 Hecker, Friedrich                   28.09.1811 22.45 LMT        D   Eichtershein            49 N 14 008 E 50 MA08 46    SE N
+251 Hecker, Friedrich                   28.09.1811 22.45        LMT D   Eichtershein            49 N 14 008 E 50 MA08 46    SE N
 252 Heidegger, Martin                   26.09.1889 11.30        LMT D   Meßkirch                47 N 51 009 E 02 SC06 4567  SE N
 253 Heinemann, Gustav                   23.07.1899 20.30 -1.00      D   Schwelm                 51 N 17 007 E 18 MA04 56    SE N
 254 Heinkel, Ernst                      24.01.1888 09.45        LMT D   Grunbach                48 N 50 009 E 20 MA01 56    SE N
 255 Henze, Hans Werner                  01.07.1926 22.15 -1.00      D   Gütersloh               51 N 54 008 E 23 AR04 57    SE N
-256 Herberger, Josef                    28.03.1897 09.45 ~1.00      D   Mannheim                49 N 29 008 E 28 MA13 5     SE N
+256 Herberger, Josef                    28.03.1897 09.45 -1.00      D   Mannheim                49 N 29 008 E 28 MA13 5     SE N
 257 Herman, Woody                       16.05.1913 12.30 6.00       USA Milwaukee (Wis)         43 N 00 088 W 00 AR07 57    SG G
 258 Hertz, Heinrich                     22.02.1857 06.00        LMT D   Hamburg                 53 N 34 010 E 02 SC02 4567  SE N
 259 Hesse, Hermann                      02.07.1877 18.30        LMT D   Calw                    48 N 44 008 E 44 AR01 4567  SE N
 260 Hettner, Alfred                     06.08.1859 13.00        LMT D   Dresden                 51 N 03 013 E 44 SC05 57    SE N
-261 Heuss, Theodor                      31.01.1884 13.30        LMT D   Brackenheim             49 N 05 009 E OO MA04 4567  SE N
+261 Heuss, Theodor                      31.01.1884 13.30        LMT D   Brackenheim             49 N 05 009 E 00 MA04 4567  SE N
 262 Hilbert, David                      23.01.1862 18.00        LMT DOS Königsberg              54 N 43 020 E 30 SC01 567   SE N
 263 Hilpert, Heinz                      01.03.1890 02.50        LMT D   Berlin                  52 N 32 013 E 18 AR03 57    SA N
 264 Himmler, Heinrich                   07.10.1960 15.30 -1.00      D   München                 48 N 08 011 E 34 MA04 56    SG G
 265 Hindemith, Paul                     16.11.1895 21.30 -1.00      D   Hanau                   50 N 08 008 E 55 AR04 4567  SE N
 266 Hindenburg, Paul von                02.10.1847 14.30        LMT DOP Posen                   52 N 25 016 E 56 MA07 456   SA N
-267 Hinz, Werner                        18.01.1903 16.30 ~1.00      D   Berlin-Lankwitz         52 N 30 013 E 30 AR03 57    SE N
+267 Hinz, Werner                        18.01.1903 16.30 -1.00      D   Berlin-Lankwitz         52 N 30 013 E 30 AR03 57    SE N
 268 Hitler, Adolf                       20.04.1889 18.30        LMT A   Braunau                 48 N 15 013 E 04 MA04 567   SE N
 269 Hodler, Ferdinand                   14.03.1853 05.00        LMT CH  Bern                    46 N 57 007 E 27 AR08 4567  SA N
-270 Hoffmann, Kurt                      12.11.1910 22.15 ~1.00      D   Freiburg                48 N 00 007 E 51 AR03 57    SE N
+270 Hoffmann, Kurt                      12.11.1910 22.15 -1.00      D   Freiburg                48 N 00 007 E 51 AR03 57    SE N
 271 Holz, Arno                          26.04.1863 16.00        LMT DOP Rastenburg              54 N 05 021 E 23 AR01 4567  SE N
 272 Honegger, Arthur                    10.03.1892 08.00 -0.16      F   Le Havre                49 N 26 001 E 05 AR04 567   SG G
 273 Horch, August                       12.10.1868 21.00        LMT D   Winningen (Koblenz)     50 N 22 007 E 36 MA01 56    SE N
 274 Horkheimer, Max                     14.02.1895 12.30 -1.00      D   Stuttgart               48 N 47 009 E 11 SC06 56    SA N
 275 Hufeland, Christoph Wilheim         12.08.1762 06.00 -0.63      D   Bad Langensalza         51 N 07 010 E 39 SC04 45    SE N
-276 Hugenberg, Alfred                   19.06.1865 23.45 LMT        D   Hannover                52 N 23 009 E 44 MA03 56    SE N
+276 Hugenberg, Alfred                   19.06.1865 23.45        LMT D   Hannover                52 N 23 009 E 44 MA03 56    SE N
 277 Hugo, Victor                        26.02.1802 22.30 -0.18      F   Besancon                47 N 15 006 E 02 AR01 4567  SG G
 278 Huizinga, Johan                     07.12.1872 13.30        LMT NL  Groningen               53 N 13 006 E 34 SC07 56    SA N
-279 Humperdinck, Engelbert              01.09.1854 12.C9        LMT D   Siegburg                50 N 48 CO7 E 12 AR04 567   SE N
+279 Humperdinck, Engelbert              01.09.1854 12.C9        LMT D   Siegburg                50 N 48 007 E 12 AR04 567   SE N
 280 Iffland, August Wilhelm             19.04.1759 00.30 -0.67      D   Hannover                52 N 23 009 E 44 AR03 4567  SE N
 281 Ihering, Herbert                    29.02.1888 16.00        LMT D   Springe                 52 N 06 009 E 32 SC08 56    SE N
-282 Inzeo, Raimondo d'                  08.02.1925 01.00 ~1.00      I   Poggio Mirteto          42 N 16 012 E 41 MA13 5     SA N
+282 Inzeo, Raimondo d'                  08.02.1925 01.00 -1.00      I   Poggio Mirteto          42 N 16 012 E 41 MA13 5     SA N
 283 Ismayr, Rudolf                      14.10.1908 00.30 -1.00      D   Landshut                48 N 32 012 E 09 MA13 7     SE N
 284 Jannings, Emil                      23.07.1884 01.00        LMT CH  Rorschach               47 N 29 009 E 30 AR03 567   SE N
 285 Jaspers, Karl                       23.02.1883 14.30        LMT D   Oldenburg               53 N 09 008 E 13 SC06 4567  SE N
@@ -287,14 +287,14 @@
 287 Jean Paul                           21.03.1763 01.30 -0.68      D   Wunsiedel               50 N 02 012 E 00 AR01 4567  SE N
 288 Jochum, Eugen                       01.11.1902 10.00 -1.00      D   Babenhausen             48 N 00 010 E 18 AR05 57    SE N
 289 Jünger, Ernst                       29.03.1895 12.00 -1.00      D   Heidelberg              49 N 24 008 E 41 AR01 457   SE G
-290 Jürgens, Curd                       13.12.1915 05.00 ~1.00      D   München                 48 N 08 O11 E 34 AR03 57    SG G
+290 Jürgens, Curd                       13.12.1915 05.00 -1.00      D   München                 48 N 08 011 E 34 AR03 57    SG G
 291 Jung, Carl Gustav                   26.07.1875 19.20        LMT CH  Kesswil                 47 N 33 009 E 18 SC05 56    SA N
 292 Junkers, Hugo                       03.02.1859 03.00        LMT D   Rheydt                  51 N 10 006 E 27 MA01 4567  SG G
 293 Kästner, Erich                      23.02.1899 02.15 -1.00      D   Dresden                 51 N 03 013 E 44 AR01 567   SA N
 294 Kädutner, Helmut                    25.03.1908 08.00 -1.00      D   Düsseldorf              51 N 14 006 E 47 AR03 57    SE N
 295 Kaiser, Georg                       25.11.1878 15.30        LMT D   Magdeburg               52 N 08 011 E 38 AR01 56    SE N
 296 Kant, Immanuel                      22.04.1724 05.00 -1.40      DOS Königsberg              54 N 43 020 E 30 SC06 4567  FE N
-297 Karl August von Sachsen-Weimar      03.09.1757 05.30 -0.77      D   Weimar                  50 N 59 O11 E 20 MA06 46    SE N
+297 Karl August von Sachsen-Weimar      03.09.1757 05.30 -0.77      D   Weimar                  50 N 59 011 E 20 MA06 46    SE N
 298 Karrer, Otto                        30.11.1888 06.00        LMT D   Balirechten             47 N 49 007 E 38 SC06 57    SE N
 299 Kaulbach, Wilhelm von               15.10.1804 01.30 -0.83      D   Arolsen                 51 N 24 009 E 00 AR08 46    SE N
 300 Keilberth, Josef                    19.04.1908 21.00 -1.00      D   Karlsruhe               49 N 01 008 E 24 AR05 57    SE N
@@ -302,10 +302,10 @@
 302 Kekule von Stradonitz, August       07.09.1629 17.15        LMT D   Darmstadt               49 N 52 008 E 39 SC03 45    SE N
 303 Kempe, Rudolf                       14.06.1910 01.00 -1.00      D   Nieder-Poyritz          51 N 03 013 E 44 AR05 57    SE N
 304 Kempff, Wilhelm                     25.11.1895 19.00 -1.00      D   Jüterbog                52 N 00 013 E 04 AR07 57    SE N
-305 Kerschensteiner, Georg              29.07.1854 04.00        LMT D   München                 48 N 08 O11 E 34 SC05 45    SE N
+305 Kerschensteiner, Georg              29.07.1854 04.00        LMT D   München                 48 N 08 011 E 34 SC05 45    SE N
 306 Ketteler, Wilhelm von               25.12.1811 12.30        LMT D   Münster                 51 N 58 007 E 37 MA0S 456   SE N
 307 Kirchner, Ernst Ludwig              06.05.1880 06.30        LMT D   Aschaffenburg           49 N 58 009 E 09 AR0S 567   SE G
-308 Klebe, Giselher                     28.06.1925 18.00 -1.00      D   Mannheim                49 N 29 COB E 29 AR04 57    SE N
+308 Klebe, Giselher                     28.06.1925 18.00 -1.00      D   Mannheim                49 N 29 008 E 29 AR04 57    SE N
 309 Klee, Paul                          18.12.1879 04.00        LMT CH  Münchenbuchsee          46 N 57 007 E 26 AR08 4567  SE N
 310 Klein, Felix                        25.04.1849 07.15        LMT D   Düsseldorf              51 N 34 006 E 47 SC01 57    SE N
 311 Kleist, Heinrich von                18.10.1777 01.00 -1.22      D   Frankfurt (Oder)        52 N 21 014 E 33 AR01 4567  SE N
@@ -330,9 +330,9 @@
 330 Léger, Fernand                      04.02.1881 13.00        LMT F   Argentan                48 N 26 000 E 05 AR08 567   SG G
 331 Lehmbruck, Wilhelm                  04.01.1881 05.00        LMT D   Meiderich               51 N 26 006 E 46 AR08 567   SE N
 332 Leibi, Wilhelm                      23.10.1844 10.00        LMT D   Köln                    50 N 57 006 E 57 AR08 56    SE N
-333 Lenbach, Franz von                  13.12.1836 07.30        LMT D   Schrobenhausen          48 N 28 O11 E 08 AR08 456   SE N
+333 Lenbach, Franz von                  13.12.1836 07.30        LMT D   Schrobenhausen          48 N 28 011 E 08 AR08 456   SE N
 334 Leoncavallo, Ruggiero               23.04.1857 16.00        LMT I   Napoli                  40 N 54 014 E 17 AR04 567   SA N
-335 Lepsius, Karl Richard               23.12.1810 21.00        LMT D   Naumburg                51 N 09 O11 E 49 SC07 56    SE N
+335 Lepsius, Karl Richard               23.12.1810 21.00        LMT D   Naumburg                51 N 09 011 E 49 SC07 56    SE N
 336 Lesseps, Ferdinand de               21.11.1805 15.30 -0.38      F   Versailles              48 N 48 002 E 08 MA01 4567  SG G
 337 Lettow-Vorbeck, Paul von            20.03.1870 05.00        LMT D   Saarlouis               49 N 19 006 E 45 MA07 56    SE N
 338 Lichtenberg, Georg Christoph        01.07.1742 17.00 -0.53      D   Ober-Ramstadt           49 N 52 008 E 39 AR02 456   SB N
@@ -340,26 +340,26 @@
 340 Liebig, Justus von                  12.05.1803 08.30 -0.65      D   Darmstadt               49 N 52 008 E 39 SC03 4567  SE N
 341 Liebknecht, Karl                    13.08.1871 08.00        LMT D   Leipzig                 51 N 21 012 E 22 MA08 567   SE N
 342 Lilienthal, Otto                    23.05.1848 11.30        LMT D   Anklam                  53 N 51 013 E 41 MA01 4567  SE N
-343 Lincke, Paul                        07.11.1866 12.15 LMT        D   Berlin                  52 N 32 013 E 18 AR04 567   SE N
+343 Lincke, Paul                        07.11.1866 12.15        LMT D   Berlin                  52 N 32 013 E 18 AR04 567   SE N
 344 Linde, Carl von                     11.06.1842 08.30        LMT D   Berndorf                30 N 07 011 E 27 MA01 4567  SE N
 345 Lingen, Theo                        10.06.1903 05.00 -1.00      D   Hannover                52 N 22 009 E 44 AR03 567   SA N
 346 Litt, Theodor                       27.12.1880 13.00        LMT D   Disseldorf              51 N 14 006 E 47 SC05 567   SE N
 347 Lorentz, Hendrik Antoon             18.07.1853 13.00        LMT NL  Arnheim                 51 N 59 005 E 54 SC02 4567  SG G
 348 Lortzing, Albert                    23.10.1801 17.00 -1.15      D   Berlin                  52 N 32 013 E 18 AR04 4567  SE N
-349 Ludwig TI., von Bayern              25.08.1845 00.30        LMT D   München                 48 N 08 O11 E 35 MA06 456   SE N
+349 Ludwig II., von Bayern              25.08.1845 00.30        LMT D   München                 48 N 08 011 E 35 MA06 456   SE N
 350 Lübke, Heinrich                     14.10.1894 03.30 -1.00      D   Enkhausen               51 N 24 008 E 04 MA04 56    SG G
 351 Macke, August                       03.01.1887 13.30        LMT D   Meschede                51 N 21 006 E 17 AR08 567   SE N
 352 Madersperger, Joseph                06.10.1768 12.00 -1.02      A   Kufstein                47 N 35 012 E 10 MA01 57    SE N
 353 Maeterlinck, Maurice                29.08.1862 08.30        LMT B   Gent                    51 N 05 003 E 45 AR01 4567  SG G
 354 Magritte, René                      21.11.1898 07.30 0.00       B   Lessines                50 N 43 003 E 51 AR08 56    SA N
 355 Maillol, Aristide                   08.12.1861 10.00        LMT F   Banyuls-sur-Mer         42 N 28 003 E 07 AR08 567   SG G
-356 Mainardi, Enrico                    19.05.1897 15.20 ~1.00      I   Mailand                 45 N 30 009 E 15 AR07 57    SE N
+356 Mainardi, Enrico                    19.05.1897 15.20 -1.00      I   Mailand                 45 N 30 009 E 15 AR07 57    SE N
 357 Makart, Hans                        28.05.1840 05.30        LMT A   Salzburg                47 N 48 013 E 03 AR08 45    SE N
 358 Malaparte, Curzio                   09.06.1898 23.00 -1.00      I   Prato                   43 N 53 011 E 05 AR01 67    SG G
 359 Mallarmé, Stéphane                  18.03.1842 07.00        LMT F   Paris                   48 N 50 002 E 20 AR01 456   SG G
 360 Manet, Edouard                      23.01.1832 19.00        LMT F   Paris                   48 N 50 002 E 20 AR08 457   SG G
 361 Mann, Heinrich                      27.03.1871 21.00        LMT D   Lübeck                  53 N 52 010 E 41 AR01 567   SE N
-362 Mann, Thomas                        06.06.1875 10.15 LMT        D   Lübeck                  53 N 52 010 E 41 AR01 4567  SE N
+362 Mann, Thomas                        06.06.1875 10.15        LMT D   Lübeck                  53 N 52 010 E 41 AR01 4567  SE N
 363 Manzoni, Alessandro                 07.03.1785 08.00 -0.43      I   Milano                  45 N 28 009 E 12 AR01 456   SA N
 364 Manzi, Giacomo                      22.12.1908 09.00 -1.00      I   Bergamo                 45 N 36 009 E 45 AR08 57    SA N
 365 Marais, Jean                        11.12.1913 12.30 0.00       F   Cherbourg               49 N 39 001 W 38 AR03 57    SG G
@@ -374,13 +374,13 @@
 374 Matisse, Henri                      31.12.1869 20.00        LMT F   Le Cateau               50 N 05 003 E 32 AR08 4567  SG G
 375 Maupassant, Guy de                  05.08.1850 08.00        LMT F   Miromesnil              49 N 56 001 E 05 AR01 4567  SG G
 376 Mauriac, Francois                   11.10.1885 04.00        LMT F   Bordeaux                44 N 50 000 E 34 AR01 4567  SG G
-377 May, Karl                           25.02.1842 22.00        LMT D   Exrnstthal              5O N 49 012 E 43 AR01 567   SE N
+377 May, Karl                           25.02.1842 22.00        LMT D   Exrnstthal              50 N 49 012 E 43 AR01 567   SE N
 378 Maybach, Wilhelm                    09.02.1846 01.30        LMT D   Heilbronn               49 N 09 009 E 13 MA01 456   SE N
 379 Mayer, Julius Robert                25.11.1814 00.15        LMT D   Heitibronn              49 N 09 009 E 13 SC02 4567  SE N
 380 Meinecke, Friedrich                 30.10.1862 04.00        LMT D   Salzwedel               52 N 51 011 E 10 SC07 56    SE N
 381 Menotti, Gian Carlo                 07.07.1911 07.00 -1.00      I   Cadegliano-Viconago     45 N 48 009 E 00 AR04 57    SE N
 382 Mergenthaler, Ottmar                11.05.1854 05.00        LMT D   Hachtel                 49 N 29 009 E 47 MA01 457   SE N
-383 Messemer, Hannes                    17.05.1924 21.45 ~1.00      D   Dillingen (Donan)       48 N 35 010 E 30 AR03 57    SE N
+383 Messemer, Hannes                    17.05.1924 21.45 -1.00      D   Dillingen (Donan)       48 N 35 010 E 30 AR03 57    SE N
 384 Messerschmitt, Willy                26.06.1898 07.15 -1.00      D   Frankfurt               50 N 07 008 E 41 MA01 56    SE G
 385 Messiaen, Oliver                    10.12.1908 23.00 -0.16      F   Avignon                 43 N 57 004 E 50 AR04 57    SG G
 386 Messter, Oskar                      21.11.1866 21.15        LMT D   Berlin                  52 N 32 013 B 18 MA01 45    SE N
@@ -392,25 +392,25 @@
 392 Minetti, Bernhard                   26.01.1905 15.15 -1.00      D   Kiel                    54 N 20 010 E 08 AR03 57    SE G
 393 Miro, Joan                          20.04.1893 21.00        LMT E   Montroig                41 N 24 002 E 10 AR08 57    SA N
 394 Modigliani, Amedeo                  12.07.1884 09.00 -0.83      I   Livorno                 43 N 33 010 E 18 AR08 56    SG G
-395 Mérike, Eduard                      08.09.1804 11.30 -0.67      D   Ludwigsburg             48 N 54 009 E 12 AR01 4567  SE N
+395 Mörike, Eduard                      08.09.1804 11.30 -0.67      D   Ludwigsburg             48 N 54 009 E 12 AR01 4567  SE N
 396 Mondrian, Piet                      07.03.1872 06.00        LMT NL  Amersfoort              52 N 06 005 E 24 AR08 567   SG G
 397 Montherlant, Henry de               20.04.1895 02.00 -0.16      F   Neuilly-sur-Seine       48 N 50 002 B 11 AR01 56    SG G
 398 Morgenstern, Christian              06.05.1871 06.30        LMT D   München                 48 N 08 011 E 34 AR01 567   SE N
 399 Moro, Aldo                          23.09.1916 09.00 -2.00      I   Maglie                  40 N 07 018 E 20 MA04 56    SG G
 400 Mozart, Wolfgang Amadeus            27.01.1756 20.00 -0.65      A   Salzburg                47 N 48 013 E 03 AR04 4567  FB N
-401 Miller, Adam Heinrich               30.06.1779 22.00 -0.83      D   Berlin                  52 N 32 013 E 18 SC07 57    SE N
-402 Mijller, Johannes                   14.07.1801 06.00 -0.42      D   Koblenz                 50 N 22 007 E 36 SC03 456   SE N
+401 Müller, Adam Heinrich               30.06.1779 22.00 -0.83      D   Berlin                  52 N 32 013 E 18 SC07 57    SE N
+402 Müller, Johannes                    14.07.1801 06.00 -0.42      D   Koblenz                 50 N 22 007 E 36 SC03 456   SE N
 403 Murnau, Friedrich Wilhelm           28.12.1888 07.00        LMT D   Bielefeld               52 N 01 008 E 32 AR03 56    SE N
 404 Musil, Robert                       06.11.1880 05.00        LMT A   Kiagenfurt              46 N 38 014 E 19 AR01 567   SE N
 405 Musset, Alfred de                   11.12.1810 11.00        LMT F   Paris                   48 N 50 002 E 20 AR01 56    SG G
 406 Mussolini, Benito                   29.07.1883 14.00 -0.83      I   Dovia di Predappio      44 N 13 012 E 03 MA04 567   SG G
-407 Nachtigall, Gustav                  23.02.1834 16.45        LMT D   Eichstedt               52 N 41 O11 E 52 MA02 4567  SE N
+407 Nachtigall, Gustav                  23.02.1834 16.45        LMT D   Eichstedt               52 N 41 011 E 52 MA02 4567  SE N
 408 Natorp, Paul                        24.01.1854 13.00        LMT D   Düsseldorf              51 N 14 006 E 47 SC06 57    SE N
-409 Naumann, Friedrich                  25.03.1860 14.50        LMT DD  Stérmthal (Leipzig)     51 N 21 012 E 23 MA04 56    SE N
+409 Naumann, Friedrich                  25.03.1860 14.50        LMT D   Störmthal (Leipzig)     51 N 21 012 E 23 MA04 56    SE N
 410 Nenni, Pietro                       08.02.1891 07.00 -0.83      I   Faenza                  44 N 17 011 E 53 MA04 56    SG G
 411 Nernst, Walther                     25.06.1864 00.15        LMT DOP Briesen                 53 N 18 018 E 58 SC02 456   SE N
 412 Nicklisch, Heinrich                 19.07.1876 05.00        LMT D   Tettau                  50 N 28 011 E 15 SCO9 57    SE N
-413 Nietzsche, Friedrich                15.10.1844 10.00        LMT D   Récken                  51 N 15 012 E 08 SC06 4567  SE N
+413 Nietzsche, Friedrich                15.10.1844 10.00        LMT D   Röcken                  51 N 15 012 E 08 SC06 4567  SE N
 414 Nixon, Richard                      09.01.1913 21.30 8.00       USA Yorba Linda (Calif)     33 N 53 117 W 49 MA04 57    SA N
 415 Nono, Luigi                         29.01.1924 14.35 -1.00      I   Venedig                 45 N 26 012 E 20 AR04 57    SE N
 416 Novalis                             02.05.1772 10.00 -0.82      D   Oberwiederstedt         51 N 39 011 B 30 AR01 4567  SE N
@@ -418,7 +418,7 @@
 418 Ohm, Georg Simon                    16.03.1789 03.00 -9.58      D   Erlangen                49 N 36 011 E 00 SC02 4567  SE N
 419 Ollenhauer, Erich                   27.03.1901 10.00 -1.00      D   Magdeburg               52 N 08 011 E 38 MA04 56    SE N
 420 Ophüls, Max                         06.05.1902 11.00 -1.00      D   Saarbrücken             49 N 14 007 E 00 AR03 56    SE N
-421 Orff, Carl                          10.07.1895 03.15 ~1.00      D   München                 48 N 08 O11 E 34 AR04 567   FB N
+421 Orff, Carl                          10.07.1895 03.15 -1.00      D   München                 48 N 08 011 E 34 AR04 567   FB N
 422 Ossietzky, Carl von                 03.10.1889 19.45        LMT D   Hamburg                 53 N 34 010 E 02 AR02 456   SB N
 423 Ostler, Andreas                     21.01.1921 16.45 -1.00      D   Grainau                 47 N 30 011 E 06 MA13 7     SE N
 424 Otto, Nikolaus August               14.06.1832 09.10        LMT D   Holzhausen              50 N 05 007 E 55 MA01 4567  SE N
@@ -427,7 +427,7 @@
 427 Pasolini, Pier Paolo                05.03.1922 06.30 -1.00      I   Bologna                 44 N 30 011 E 20 AR03 56    SA N
 428 Pasteur, Louis                      27.12.1822 02.00        LMT F   Dole                    47 N 06 005 E 30 SC03 4567  SG G
 429 Paul VI., Papst                     26.09.1897 22.00 -1.00      I   Concesio                45 N 32 010 E 13 MA05 56    SA N
-430 Paulus, Friedrich                   23.09.1890 20.45 LMT        D   Breitenau               51 N 08 009 E 32 MA07 56    SE G
+430 Paulus, Friedrich                   23.09.1890 20.45        LMT D   Breitenau               51 N 08 009 E 32 MA07 56    SE G
 431 Pavese, Cesare                      09.09.1908 06.00 -1.00      I   Santo Stefano Belbo     44 N 42 008 E 14 AR01 56    SA N
 432 Pechstein, Max                      31.12.1881 15.15        LMT D   Zwickau                 50 N 43 012 E 29 AR08 567   SE N
 433 Peck, Gregory                       05.04.1916 08.00 8.00       USA La Iolla (Calif)        32 N 51 117 W 16 AR03 57    SG G
@@ -446,8 +446,8 @@
 446 Poincaré, Henri                     29.04.1854 01.00        LMT F   Nancy                   48 N 42 006 E 12 SCO1 467   SG G
 447 Poincaré, Raymond                   20.08.1860 17.00        LMT F   Bar-le-Duc              48 N 46 005 E 10 MA04 46    SG G
 448 Polanski, Roman                     18.08.1933 10.30 -1.00      F   Paris                   48 N 50 002 E 20 AR03 57    SG G
-449 Ponto, Erich                        14.12.1884 14.30        LMT D  Lübeck                   53 N 52 010 E 41 AR03 57    SE G
-450 Prandtl, Ludwig                     04.02.1875 18.45 LMT        D   Freising                48 N 24 011 E 45 SC02 56    SE G
+449 Ponto, Erich                        14.12.1884 14.30        LMT D   Lübeck                  53 N 52 010 E 41 AR03 57    SE G
+450 Prandtl, Ludwig                     04.02.1875 18.45        LMT D   Freising                48 N 24 011 E 45 SC02 56    SE G
 451 Presley, Elvis                      08.01.1935 04.35 6.00       USA Tupelo                  34 N 10 088 W 43 AR06 56    SA N
 452 Proudhon, Pierre                    15.01.1809 18.00 -0.23      F   Besancon                47 N 15 006 E  2 AR02 456   SG G
 453 Proust, Marcel                      10.07.1871 23.30        LMT F   Paris                   48 N 50 002 E 20 AR01 4567  SG G
@@ -477,9 +477,9 @@
 477 Richter, Ludwig                     28.09.1803 12,30 -1.07      D   Dresden                 51 N 03 013 E 44 AR08 456   SE N
 478 Rilke, Rainer Maria                 04.12.1875 00.00        LMT CS  Prag                    50 N 05 014 E 25 AR01 4567  FB N
 479 Rimbaud, Arthur                     20.10.1854 06.00        LMT F   Charleville             49 N 50 004 E 42 AR01 4567  SG G
-480 Ringelnatz, Joachim                 07.08.1883 23.45 LMT        D   Wurzen                  51 N 22 012 E 44 AR01 56    SE N
+480 Ringelnatz, Joachim                 07.08.1883 23.45        LMT D   Wurzen                  51 N 22 012 E 44 AR01 56    SE N
 481 Ritschl, Albrecht                   25.03.1822 04.15        LMT D   Berlin                  52 N 32 013 E 18 SC06 567   SE N
-482 Ritter, Carl                        07.08.1779 15.00 ~0.67      D   Quedlinburg             51 N 47 011 E 09 SC05 567   SE N
+482 Ritter, Carl                        07.08.1779 15.00 -0.67      D   Quedlinburg             51 N 47 011 E 09 SC05 567   SE N
 483 Robespierre, Maximilian de          06.05.1758 02.00 -0.25      F   Arras                   50 N 18 002 E 46 MA08 4567  SA N
 484 Rodin, Auguste                      12.11.1840 12.00        LMT F   Paris                   48 N 50 002 E 20 AR08 4567  SG G
 485 Röbling, Johann August              12.06.1806 09.00 -0.72      D   Mühlhausen              51 N 13 010 E 27 MA01 45    SE N
@@ -494,7 +494,7 @@
 494 Rousseau, Henri                     21.05.1844 01.00        LMT F   Laval                   48 N 04 000 E 45 AR08 567   SG G
 495 Rückert, Friedrich                  16.05.1788 06.00 -0.75      D   Schweinfurt             50 N 03 010 E 14 AR01 4567  SE N
 496 Rühmann, Heinz                      07.03.1902 02.30 -1.00      D   Essen                   51 N 28 007 E 01 AR03 57    SG G
-497 Runge, Philipp Otto                 23.07.1777 06.00 ~0.82      D   Wolgast                 54 N 03 013 E 46 AR08 4567  SE N
+497 Runge, Philipp Otto                 23.07.1777 06.00 -0.82      D   Wolgast                 54 N 03 013 E 46 AR08 4567  SE N
 498 Saint-Exupéry, Antoine de           29.06.1900 09.15 -0.16      F   Lyon                    45 N 46 004 E 50 AR01 4567  SG G
 499 Saint-Saens, Camille                09.10.1835 07.00        LMT F   Paris                   48 N 50 002 E 20 AR04 567   SG G
 500 Sartre, Jean-Paul                   21.06.1905 18.45 -0.16      F   Paris                   48 N 50 002 E 20 SC06 4567  SG G
@@ -523,24 +523,24 @@
 523 Seliner, Gustav Rudolf              25.05.1905 11.45 -1.00      D   Traunstein              47 N 52 012 E 38 AR03 57    SE N
 524 Seurat, Georges                     02.12.1859 01.00        LMT F   Paris                   48 N 50 002 E 20 AR08 56    SG G
 525 Shelley, Percy Bysshe               04.08.1792 22.00 0.11       GB  Field Place (Warnham)   51 N 06 000 W 20 AR01 4567  FA N
-526 Sica, Vittorio de                   07.07.1902 11.00 ~1.00      I   Sora                    41 N 40 013 E 30 AR03 57    SG G
+526 Sica, Vittorio de                   07.07.1902 11.00 -1.00      I   Sora                    41 N 40 013 E 30 AR03 57    SG G
 527 Signac, Paul                        11.11.1863 15.00        LMT F   Paris                   48 N 50 002 E 20 AR08 4567  SE N
-528 Skladanowsky, Max                   30.04.1863 00.15 LMT        D   Berlin                  52 N 32 013 E 18 MA01 456   SE N
+528 Skladanowsky, Max                   30.04.1863 00.15        LMT D   Berlin                  52 N 32 013 E 18 MA01 456   SE N
 529 Slevogt, Max                        08.16.1868 07.00        LMT D   Landshut                48 N 32 012 E 09 AR08 4567  SE N
 530 Sombart, Werner                     19.01.1863 17.00        LMT D   Ermsleben               51 N 45 011 E 27 SC09 567   SE N
 531 Sommerfeld, Arnold                  05.12.1868 17.45        LMT DOS Kénigsberg              54 N 43 020 E 30 SC02 56    SE N
 532 Spengler, Oswald                    29.05.1880 18.30        LMT D   Blankenburg (Harz)      51 N 47 010 E 57 SC07 456   SA N
 533 Spitzweg, Cari                      05.02.1808 04.30 -0.52      D   München                 48 N 08 011 E 34 AR08 4557  SE N
 534 Spranger, Eduard                    27.06.1882 05.00        LMT D   Grof-Lichterfelde       52 N 30 013 E 30 SC07 567   SE N
-535 Stark, Johannes                     15.04.1874 06.00        LMT D   Schickenhof (Amberg)    49 N 27 O11 E 52 SCO2 45    SE N
+535 Stark, Johannes                     15.04.1874 06.00        LMT D   Schickenhof (Amberg)    49 N 27 011 E 52 SCO2 45    SE N
 536 Staudinger, Hermann                 23.03.1881 23.45        LMT D   Worms                   49 N 38 008 E 22 SC03 457   SE N
 537 Stauffenberg, Claus von             15.11.1907 01.00 -1.00      D   Schloß Jettingen        48 N 24 010 E 26 MA08 56    SE N
 538 Stefano, Giuseppe di                24.07.1921 12.00 -1.00      I   Motta Sta. Anastasia    37 N 30 014 E 58 AR06 57    SA N
 539 Steinberg, William                  01.08.1899 04.30 -1.00      D   Köln                    50 N 57 006 E 57 AR05 57    SE N
-540 Steinway, Heinrich E.               22.02.1797 18.00 -~0.44     D   Wolfshagen              51 N 54 010 E 19 MA01 45    SE N
+540 Steinway, Heinrich E.               22.02.1797 18.00 -0.44      D   Wolfshagen              51 N 54 010 E 19 MA01 45    SE N
 541 Stern, William                      29.04.1871 02.30        LMT D   Berlin                  52 N 32 013 E 18 SCO5 56    SE N
 542 Sternheim, Carl                     01.04.1878 07.15        LMT D   Leipzig                 51 N 21 012 B 22 AR01 56    SB N
-543 Stirner, Max                        25.10.1806 06.00 -1.03      D   Bayreuth                49 N 57 O11 E 35 SC06 57    SE N
+543 Stirner, Max                        25.10.1806 06.00 -1.03      D   Bayreuth                49 N 57 011 E 35 SC06 57    SE N
 544 Stolz, Robert                       25.08.1880 16.15        LMT A   Graz                    47 N 04 015 E 27 AR04 567   SE N
 545 Storm, Theodor                      14.09.1817 23.30        LMT D   Husum                   54 N 29 009 E 03 AR01 4567  SE N
 546 Strauf, David Friedrich             27.01.1808 03.00 -0.40      D   Ludwigsburg             48 N 54 009 E 12 SC06 567   SE N
@@ -557,19 +557,19 @@
 557 Thiers, Adolphe                     14.04.1797 14.00 -0.37      F   Marseille               43 N 18 005 E 22 SC07 56    SG G
 558 Thoma, Georg                        20.08.1937 09.00 -1.00      D   Neustadt (Titisee)      47 N 55 008 E 13 MA13 57    SE N
 559 Thoma, Hans                         02.10.1839 23.30        LMT D   Bernau                  47 N 55 008 E 13 AR08 4567  SG G
-560 Thoma, Ludwig                       21.01.1867 11.90        LMT D   Oberammergau            47 N 30 O11 E 06 AR01 567   SE N
+560 Thoma, Ludwig                       21.01.1867 11.90        LMT D   Oberammergau            47 N 30 011 E 06 AR01 567   SE N
 561 Thyssen, August                     17.05.1842 04.00        LMT D   Eschweiler              50 N 49 006 E 16 MA03 56    SE N
 562 Tieck, Ludwig                       31.05.1773 11.00 -0.93      D   Berlin                  52 N 32 013 E 18 AR01 467   SE N
 563 Togliatti, Palmiro                  26.03.1893 01.00 -0.83      I   Genua                   44 N 25 008 E 54 MA04 56    SG G
 564 Toscanini, Arturo                   25.03.1867 03.00 -0.83      I   Parma                   44 N 48 010 E 20 AR05 4567  SA N
-565 Toulouse-Lautrec, Henri de          24.11.1864 06.00        LMT F   Albi                    43 N 56 002 E O9 AR08 4567  SG G
+565 Toulouse-Lautrec, Henri de          24.11.1864 06.00        LMT F   Albi                    43 N 56 002 E 09 AR08 4567  SG G
 566 Trakl, Georg                        03.02.1887 18.30        LMT A   Salzburg                47 N 48 013 E 03 AR01 567   SE N
 567 Treitschke, Heinrich von            15.09.1834 19.00        LMT D   Dresden                 51 N 03 013 E 44 SC07 456   SE N
 568 Troeltsch, Ernst                    17.02.1865 01.30        LMT D   Haunstetten             48 N 22 010 E 54 SC07 57    SE N
 569 Truffaut, Francois                  06.02.1932 06.00 0.00       F   Paris                   48 N 50 002 E 20 AR03 57    SG G
 570 Tucholsky, Kurt                     09.01.1890 18.45        LMT D   Berlin                  52 N 30 013 E 30 AR01 567   SE N
 571 Utrillo, Maurice                    26.12.1883 13.00        LMT F   Paris                   48 N 50 002 E 20 AR08 56    SG G
-572 Valentin, Karl                      04.06.1882 21.00        LMT D   München                 48 N 08 O11 E 34 AR03 56    SA N
+572 Valentin, Karl                      04.06.1882 21.00        LMT D   München                 48 N 08 011 E 34 AR03 56    SA N
 573 Valery, Paul                        30.10.1871 19.00        LMT F   Sète                    43 N 24 003 E 42 AR01 56    SG G
 574 Velde, Henry van de                 03.04.1863 01.00        LMT B   Antwerpen               51 N 14 004 E 30 AR00 567   SA N
 575 Verdi, Giuseppe                     10.10.1813 20.00        LMT I   Le Roncole              44 N 56 010 E 02 AR04 4567  SB N
@@ -582,12 +582,12 @@
 582 Wagner, Wieland                     05.01.1917 09.15 -1.00      D   Bayreuth                49 N 57 011 E 35 AR03 57    SE N
 583 Wallach, Otto                       27.03.1847 04.30        LMT DOS Kénigsberg              54 N 43 020 E 30 SC03 45    SE N
 584 Walser, Robert                      15.04.1878 15.00        LMT CH  Biel                    47 N 09 007 E 14 AR01 56    SE N
-585 Walter, Fritz                       31.10.1920 21.15 ~1.00      D   Kaiserslautern          49 N 27 007 E 46 MA13 57    SE G
+585 Walter, Fritz                       31.10.1920 21.15 -1.00      D   Kaiserslautern          49 N 27 007 E 46 MA13 57    SE G
 586 Warburg, Otto Heinrich              08.10.1883 18.00        LMT D   Freiburg (Breisgau)     48 N 00 007 E 51 SC03 457   SE N
 587 Watson, James                       06.04.1928 01.23 6.00       USA Chicago (Ill)           42 N 00 087 W 50 SC03 57    SA N
 588 Weber, Alfred                       30.07.1868 06.00        LMT D   Erfurt                  50 N 59 011 E 02 SC07 457   SE N
 589 Weber, Carl Maria von               18.12.1786 22.30 -0.77      D   Eutin                   54 N 08 610 E 37 AR04 4567  FA N
-590 Weber, Max                          21.04.1864 22.00        LMT D   Erfurt                  50 N 59 O11 E 02 SC09 4567  SE N
+590 Weber, Max                          21.04.1864 22.00        LMT D   Erfurt                  50 N 59 011 E 02 SC09 4567  SE N
 591 Wedekind, Frank                     24.07.1864 12.15        LMT D   Hannover                52 N 23 009 E 44 AR01 4567  SE N
 592 Weill, Kurt                         02.03.1900 16.30 -1.00      D   Dessau                  51 N 50 012 E 14 AR04 567   SE N
 593 Weiss, Peter                        08.11.1916 07.00 -1.00      D   Nowames                 52 N 24 013 E 06 AR01 56    SE N
@@ -610,4 +610,3 @@
 610 Zinzendorf, Nikolaus Graf von       26.05.1700 18.00 -0.98      D   Dresden                 51 N 03 013 E 44 MA05 4567  FB N
 611 Zola, Emile                         02.04.1840 23.00        LMT F   Paris                   48 N 50 002 E 20 AR01 4567  SG G
 612 Zuckmayer, Carl                     27.12.1896 19.30 -1.00      D   Nackenheim              49 N 55 008 E 20 AR01 567   SE N
-

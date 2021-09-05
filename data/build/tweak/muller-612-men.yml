@@ -1,0 +1,71 @@
+#
+# Human corrections to file data/raw/muller/muller-afd2/muller-afd2-men.txt
+# Fields sorted by afd2 id (Müller id in the file)
+# WD base url = https://www.wikidata.org/wiki/Special:EntityPage/
+# 
+# 2021-09-05 03:27:53+02:00, Thierry Graff : Creation
+
+-
+  ids-in-sources:
+    afd2: '6'
+    wd: Q152245
+  name:
+    nobl: von
+    family: Sachsen Coburg und Gotha
+    given: Albert
+    official:
+      given: Franz Albrecht August Karl Emanuel
+    alter:
+      - Albert of Saxe-Coburg and Gotha
+      - Albert de Saxe-Cobourg-Gotha
+  BUILD-NOTES:
+    - |
+      2021-08-01 06:09:20+02:00
+      Corrections from
+      https://fr.wikipedia.org/wiki/Albert_de_Saxe-Cobourg-Gotha
+      https://en.wikipedia.org/wiki/Albert,_Prince_Consort
+      https://de.wikipedia.org/wiki/Albert_von_Sachsen-Coburg_und_Gotha
+      Each page give a different official given name.
+      Retained German version
+
+-
+  ids-in-sources:
+    afd2: '160'
+    wd: Q38337
+  name:
+    family: Dumas
+    given: Alexandre
+    alter:
+      - Alexandre Dumas père
+
+-
+  ids-in-sources:
+    afd2: '193'
+    wd: Q37064
+  name:
+    nobl: Sir
+    family: Fleming
+    given: Alexander
+
+
+-
+  ids-in-sources:
+    afd2: '238'
+    wd: Q302873
+  name:
+    family: Wettach
+    given: Adrian
+    fame:
+      full: Grock
+
+-
+  ids-in-sources:
+    afd2: '429'
+    wd: Q16975
+  name:
+    fame:
+      full: Paul VI
+    given: Giovanni Battista
+    family: Montini
+    official:
+      given: Giovanni Battista Enrico Antonio Maria
