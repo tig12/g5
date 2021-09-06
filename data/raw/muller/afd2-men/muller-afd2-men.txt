@@ -367,7 +367,7 @@
 367 Marconi, Guglielmo                  25.04.1874 09.15 -0.83      I   Bologna                 44 N 30 011 E 20 SC02 456   SG G
 368 Marées, Hans von                    24.12.1837 06.30        LMT D   Elberfeld               51 N 16 007 E 12 AR08 456   SE N
 369 Marini, Marino                      27.02.1901 13.00 -1.00      I   Pistoia                 43 N 56 010 E 54 AR08 567   SA N
-370 Martin du Gard, Roger               23.03.1881 03.00        LMT F   Nevilly-sur-Seine       48 N 50 002 E 11 AR01 56    SG G
+370 Martin du Gard, Roger               23.03.1881 03.00        LMT F   Neuilly-sur-Seine       48 N 50 002 E 11 AR01 56    SG G
 371 Marx, Karl                          05.05.1818 02.00        LMT D   Trier                   49 N 45 006 E 39 SC06 4567  SE N
 372 Masereel, Frans                     30.07.1889 10.00 -0.29      B   Blankenberge            51 N 19 003 E 08 AR08 57    SA N
 373 Mascagni, Pietro                    07.12.1863 06.30        LMT I   Livorno                 43 N 33 010 E 18 AR04 456   SA N

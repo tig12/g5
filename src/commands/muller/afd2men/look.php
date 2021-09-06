@@ -124,7 +124,80 @@ class look implements Command {
         $N_nogauq = 0; // total number of lines not supposed to be in Gauquelin data
         
         // Ambiguous cases fixed by hand from previous executions
+        // Müller id => lerrcp id
         $match = [
+            '15'    => 'A6-29',     // Apollinaire Guillaume
+            '19'    => 'A6-50',     // Ayme Marcel
+            '28'    => 'A5-67',     // Barrault Jean-Louis
+            '41'    => 'A3-1758',   // Beck Ludwig
+            '49'    => 'A6-89',     // Bernanos Georges
+            '63'    => 'A4-139',    // Bonnard Pierre
+            '74'    => 'A5-1861',   // Brandt Willy
+            '81'    => 'E3-212',    // Briand Aristide
+            '82'    => 'A2-2604',   // Broglie Louis
+            '100'   => 'A1-1449',   // Button Richard
+            '103'   => 'A6-168',    // Camus Albert
+            '104'   => 'A3-1800',   // Canaris Wilhelm
+            '106'   => 'A2-3240',   // Carnap Rudolf
+            '121'   => 'A4-237',    // Cocteau Jean
+            '123'   => 'A1-924',    // Coppi Fausto
+            '129'   => 'A5-1636',   // Croce Benedetto
+            '140'   => 'A4-281',    // Degas Edgar
+            '145'   => 'A4-300',    // Derain André
+            '157'   => 'A6-276',    // Duchamp Marcel
+            '158'   => 'A2-239',    // Duhamel Georges
+            '174'   => 'A5-1885',   // Erhard Ludwi 
+            '194'   => 'A2-2689',   // Foch Ferdinand
+            '213'   => 'E3-682',    // Gambetta Leon
+            '227'   => 'A6-372',    // Giraudoux Jean
+            '233'   => 'A4-1444',   // Gogh Vincent Van
+            '239'   => 'A5-1112',   // Gründgens Gustav
+            '244'   => 'A2-3304',   // Hahn Otto
+            '257'   => 'D10-582',   // Herman Woody
+            '290'   => 'A5-1149',   // Jürgens Curd
+            '307'   => 'A4-1324',   // Kirchner Ernst
+            '327'   => 'A2-3328',   // Laue Max
+            '347'   => 'A2-3606',   // Lorentz Hendrik Antoon
+            '350'   => 'A5-1977',   // Lübke Heinrich
+            '358'   => 'A6-909',    // Malaparte Curzio
+            '365'   => 'A5-521',    // Marais Jean
+            '367'   => 'A2-3071',   // Marconi Guglielmo
+            '370'   => 'A6-548',    // Martin du Gard Roger
+            '374'   => 'A4-742',    // Matisse Henri
+            '385'   => 'A4-2130',   // Messiaen Olivier
+            '392'   => 'A5-1204',   // Minetti Bernhard
+            '394'   => 'A4-1212',   // Modigliani Amedeo
+            '396'   => 'A4-1456',   // Mondrian Piet
+            '397'   => 'A6-585',    // Montherlant Henri
+            '399'   => 'A5-1742',   // Moro Aldo
+            '410'   => 'A5-1751',   // Nenni Pietro
+            '426'   => 'A5-2006',   // Papen Franz
+            '433'   => 'D10-1006',  // Peck Gregory
+            '438'   => 'A5-627',    // Philippe Gérard
+            '449'   => 'A5-1221',   // Ponto Erich
+            '450'   => 'A2-3346',   // Prandtl Ludwig
+            '453'   => 'A3-2639',   // Proust Marcel
+            '458'   => 'A6-665',    // Queneau Raymond
+            '467'   => 'A4-2218',   // Ravel Maurice
+            '479'   => 'A6-689',    // Raimbaud Arthur
+            '487'   => 'A6-697',    // Rolland Romain
+            '488'   => 'A6-700',    // Romains Jules
+            '489'   => 'A3-2098',   // Rommel Erwin
+            '494'   => 'A4-979',    // Rousseau Henri
+            '498'   => 'A1-223',    // de Saint-Exupery Antoine
+            '500'   => 'A6-727',    // Sartre Jean-Paul
+            '501'   => 'A2-2110',   // Sauerbruch Ernst
+            '518'   => 'E3-1384',   // Schuman Robert
+            '524'   => 'A4-1030',   // Seurat Georges
+            '550'   => 'A6-758',    // Sully-Prud'Homme Armand
+            '554'   => 'A2-2898',   // Teilhard De Chardin Pierre
+            '559'   => 'A4-1359',   // Thoma Hans
+            '563'   => 'A5-1829',   // Togliatti Palmiro
+            '585'   => 'D6-420',    // Walter Fritz
+            '597'   => 'A2-3392',   // Wieland Heinrich
+            '600'   => 'D6-424',    // Winkler Hans Günter
+            '607'   => 'A2-3396',   // Ziegler Karl
+            '611'   => 'A6-813',    // Zola Emile
         ];
         $res_match = ''; // code to copy in class AFD2
         $N_match = 0;
@@ -241,7 +314,11 @@ class look implements Command {
         $birth = json_decode($line['birth'], true);
         $ids_in_sources = json_decode($line['ids_in_sources'], true);
         $date = $birth['date-ut'] ?? $birth['date'];
-        return "GQ: {$ids_in_sources[LERRCP::SOURCE_SLUG]}"
+        // for 3 records, Müller data matches with a record not coming from Gauquelin.
+        $id = isset($ids_in_sources[LERRCP::SOURCE_SLUG]) 
+            ? $ids_in_sources[LERRCP::SOURCE_SLUG]
+            : '';
+        return "GQ: $id"
             . " {$name['family']} {$name['given']}"
             . " $date"
             . " --- "

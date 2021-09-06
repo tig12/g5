@@ -124,6 +124,7 @@ class look implements Command {
         $N_nogauq = 0; // total number of lines not supposed to be in Gauquelin data
         
         // Ambiguous cases fixed by hand from previous executions
+        // Müller id => lerrcp id
         $match = [
             '011' => 'A1-129', // AURIOL Jacqueline *DOUET
             '018' => 'A6-72',  // BEAUVOIR Simone DE
