@@ -12,7 +12,6 @@ use g5\G5;
 use g5\Config;
 use g5\patterns\Command;
 use g5\commands\muller\AFD;
-//use tiglib\arrays\sortByKey;
 
 class raw2tmp implements Command {
     
@@ -77,10 +76,6 @@ class raw2tmp implements Command {
                 break;
                 }
             }
-//echo "\n"; print_r($new_raw); echo "\n";
-//echo "\n"; print_r($new); echo "\n";
-//if($N >2)
-//exit;
             $new['DATE'] = "$day $hour";
             $res .= implode(G5::CSV_SEP, $new) . "\n";
             $res_raw .= implode(G5::CSV_SEP, $new_raw) . "\n";
@@ -162,7 +157,7 @@ class raw2tmp implements Command {
         }
         $test = $m[1];
         $place = trim(str_replace("($test)" , '', $str));
-        
+// HERE must be completed
         $c1 = AFD2::C1[$test] ?? '';
         $c2 = AFD2::C2[$test] ?? '';
         return [$c1, $c2, $place];

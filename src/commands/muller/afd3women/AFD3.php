@@ -91,9 +91,6 @@ class AFD3 {
         'MUID',
         'FNAME',
         'GNAME',
-        'ONAME1', // other component of the name 1 - part between parentheses
-        'ONAME2', // other component of the name 2 - for names with 2 comas
-        'ONAME3', // other component of the name 3 - part after the *
         'DATE',
         'TZO',
         'TIMOD', // time mode
@@ -189,6 +186,90 @@ class AFD3 {
         'WA 09' => 'X', // 4 persons - more precise infos in tweaks file
         'WA 10' => 'suffragette', // 7 persons
         'WA 12' => 'partner-of-celebrity', // 8 persons
+    ];
+    
+    /** Conversion to ISO 3166. **/
+    public const COUNTRIES = [
+        'A'   => 'AT', // Austria
+        'B'   => 'BE', // Belgium
+        'CH'  => 'CH', // Switzerland
+        'D'   => 'DE', // Germany
+        'DK'  => 'DK', // Denmark
+        'DOP' => 'PL', // Former German regions, now Polish
+        'F'   => 'FR', // France
+        'GB'  => 'GB', // Great Britain
+        'I'   => 'IT', // Italy
+        'NL'  => 'NL', // Netherlands
+        'S'   => 'SE', // Sweden
+        'USA' => 'US', // United States of America
+    ];
+    
+    /** Admin code level 1. **/
+    public const C1 = [
+        'Baselland'         => 'BL',
+        'Basel-Stadt'       => 'BS',
+        'Bern'              => 'BE',
+        'Ca.'               => 'CA',
+        'Emmental, Bern'    => 'BE',
+        'Graubünden'        => 'GR',
+        'Ill.'              => 'IL',
+        'Luzern'            => 'LU',
+        'N.H.'              => 'NH',
+        'N.J.'              => 'NJ',
+        'Minn.'             => 'MN',
+        'Nevenburg'         => 'NE',
+        'Ohio'              => 'OH',
+        'Pa.'               => 'PA',
+        'St. Gallen'        => 'SG',
+        'Waadt'             => 'VD',
+        'Wash.'             => 'WA',
+    ];
+    
+    /**
+        Admin code level 2.
+        Match not done for AT, DE
+    **/
+    public const C2 = [
+        'Ancona'            => 'AN',
+        'Ancona, Rom'       => 'AN',
+        'Antwerpen'         => 'VAN',
+        'Bologna'           => 'BO',
+        'Briissel'          => 'BRU',
+        'Calvados'          => '14',
+        'Cher'              => '18',
+        'Deux-Sévres'       => '79',
+        //'Donan'             => '',
+        'Dordogne'          => '19',
+        'Dresden'           => '',
+        //'Elster, Merseburg' => '',
+        //'Erzgebirge'        => '',
+        //'Fehrbellin, Brandenbg.' => '',
+        //'Harz'              => '',
+        //'Icking, Oberb.'    => '',
+        //'Innsbruck, Tirol'  => '',
+        //'Karnten'           => '',
+        //'Lavanttal'         => '',
+        //'Liitzen'           => '',
+        'Lot'               => '46',
+        //'Meifen, Sachsen'   => '',
+        //'Oder'              => '',
+        'Oise'              => '60',
+        //'Ostpriegnitz'      => '',
+        'Paris'             => '75',
+        'Pavia, Lombardei'  => 'PV',
+        //'Pegau, Sachsen'    => '',
+        //'Rigen'             => '',
+        //'Rochlitz, Sachsen' => '',
+        'Rom'               => 'RM',
+        //'Sachsen'           => '',
+        'Sardinien'         => 'NU', // Nuoro
+        'Seine, Paris'      => '75',
+        //'Steiermark'        => '',
+        //'Thüringen'         => '',
+        //'Tirol'             => '',
+        'Turin'             => 'TO',
+        'Vendée'            => '85',
+        'Yonne'             => '89',
     ];
     
     // *********************** Source management ***********************
