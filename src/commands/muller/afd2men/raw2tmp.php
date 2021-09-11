@@ -35,6 +35,9 @@ class raw2tmp implements Command {
         $N = 0;
         $day = $hour = '';
         foreach($raw as $line){
+            if(trim($line) == ''){
+                continue;
+            }
             $N++;
             $new = array_fill_keys(AFD2::TMP_FIELDS, '');
             $new_raw = array_fill_keys(AFD2::RAW_FIELDS, '');

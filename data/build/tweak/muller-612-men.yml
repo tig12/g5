@@ -30,6 +30,17 @@
 
 -
   ids-in-sources:
+    afd2: '119'
+    wd: Q366355
+  name:
+    fame:
+      full: Van Cliburn
+    given: Harvey Lavan
+  occus:
+    - pianist
+
+-
+  ids-in-sources:
     afd2: '160'
     wd: Q38337
   name:

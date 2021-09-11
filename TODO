@@ -5,13 +5,31 @@
 - integrate muller 1083 fix cura days and names to db/fill/history
 
 - AFD2: 
+
     - check 17  Arrau, Claudio (south lat)
     - check 202 Franz II., Joseph Karl (-.50) tz offset (instead of -0.50)
+    - case 34 Bastian Adolf  1826-06-26 00:30 / 1826-06-25 23:54:40 for Gauquelin
+      (both correct but legal to UT make day change).
+    - 182 Gabriel Fauré => Gauquelin / Müller dates differ => check civil registries
+    - 456 Quadflieg, Will A5-1225 => Gauquelin / Müller dates differ => check civil registries
+    - 23  Balla, Giacomo is born 19.07.1871, but 18.07 according to wikipedia
+    - 102 Cage, John => Gauquelin / Müller dates differ => check civil registries
+    - try to match with Gauquelin
+        - MU: 162      Duvivier Julien
+        - MU: 384      Messerschmitt Willy
+        - MU: 292      Junkers Hugo
 
 - AFD3: 
     - refactor using common code with AFD2
     - check if mb_substr is needed
     - simplify name (remove name2 and 3)
+
+- E1 E3 / 'L' => compagnon de la libération
+
+- A2 : Auguste /Jean Piccard: who is who ?
+    Associated A A2-3343 and J A2-3344 to match astrotheme.fr data (A: 23h - J: 22h45)
+    But possible error: astrotheme.fr hours differ from cura, need to check civil registry.
+    The association is done in tmp2db of Muller AFD2 312 famous men.
 
 - in all tmp2db, when $p->addHistory is done,
     $p->addSource and $p->addIdInSource are not taken into account

@@ -145,7 +145,7 @@ class look implements Command {
         $res_match = ''; // code to copy in class AFD3
         $N_match = 0;
         
-        // Incoherent cases, filled by hand from previous execution
+        // Incoherent cases, filled by hand from previous executions
         // Contains Müller ids
         $incoherent = [
             '091', // GUILBERT Yvette

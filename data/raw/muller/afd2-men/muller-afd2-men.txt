@@ -8,12 +8,12 @@
 8   Andersen, Hans Christian            02.04.1805 01.00 -0.63      DK  Odense                  55 N 23 010 E 23 AR01 4567  SA N
 9   Andres, Stefan                      26.06.1906 08.30 -1.00      D   Breitwies (Trier)       49 N 49 006 E 54 AR01 56    SE N
 10  Annunzio, Gabriele d'               12.03.1863 08.00        LMT I   Francaville (Pescara)   42 N 28 014 E 13 AR01 56    SG G
-11  Anouvilh, Jean                      23.06.1910 01.00 -0.16      F   Bordeaux                44 N 50 000 E 34 AR01 57    SG G
+11  Anouilh, Jean                       23.06.1910 01.00 -0.16      F   Bordeaux                44 N 50 000 E 34 AR01 57    SG G
 12  Anguetil, Jacques                   08.01.1934 10.30  0.00      F   Mont-Saint-Aignan       49 N 26 001 E 05 MA13 57    SG G
 13  Ansermet, Ernest                    11.11.1883 09.45        LMT CH  Vevey                   46 N 28 006 E 51 AR05 57    SE N
 14  Antonioni, Michelangelo             29.09.1912 21.45 -1.00      I   Ferrara                 44 N 42 012 E 30 AR05 57    SA N
 15  Apollinaire, Guillaume              26.08.1880 05.00 -0.83      I   Roma                    41 N 54 012 E 30 AR01 56    SG G
-16  Arp, Hans                           16.09.1686 06.00        LMT F   StraBburg               48 N 35 007 E 42 AR08 567   SA N
+16  Arp, Hans                           16.09.1886 06.00        LMT F   Straßburg               48 N 35 007 E 42 AR08 567   SA N
 17  Arrau, Claudio                      06.02.1903 24.00  4.79      RCH Chillan                 36 S 36 072 W 07 AR07 57    SA N
 18  Aschoff, Ludwig                     10.01.1866 13.00        LMT D   Berlin                  52 N 32 013 E 18 SC03 56    SE N
 19  Ayme, Marcel                        29.03.1902 12.00 -0.16      F   Joigny                  47 N 59 003 E 24 AR01 56    SG G
@@ -261,7 +261,7 @@
 261 Heuss, Theodor                      31.01.1884 13.30        LMT D   Brackenheim             49 N 05 009 E 00 MA04 4567  SE N
 262 Hilbert, David                      23.01.1862 18.00        LMT DOS Königsberg              54 N 43 020 E 30 SC01 567   SE N
 263 Hilpert, Heinz                      01.03.1890 02.50        LMT D   Berlin                  52 N 32 013 E 18 AR03 57    SA N
-264 Himmler, Heinrich                   07.10.1960 15.30 -1.00      D   München                 48 N 08 011 E 34 MA04 56    SG G
+264 Himmler, Heinrich                   07.10.1900 15.30 -1.00      D   München                 48 N 08 011 E 34 MA04 56    SG G
 265 Hindemith, Paul                     16.11.1895 21.30 -1.00      D   Hanau                   50 N 08 008 E 55 AR04 4567  SE N
 266 Hindenburg, Paul von                02.10.1847 14.30        LMT DOP Posen                   52 N 25 016 E 56 MA07 456   SA N
 267 Hinz, Werner                        18.01.1903 16.30 -1.00      D   Berlin-Lankwitz         52 N 30 013 E 30 AR03 57    SE N
@@ -299,7 +299,7 @@
 299 Kaulbach, Wilhelm von               15.10.1804 01.30 -0.83      D   Arolsen                 51 N 24 009 E 00 AR08 46    SE N
 300 Keilberth, Josef                    19.04.1908 21.00 -1.00      D   Karlsruhe               49 N 01 008 E 24 AR05 57    SE N
 301 Keitel, Wilhelm                     22.09.1882 02.00        LMT D   Helmscherode            51 N 54 010 E 03 MA07 56    SE N
-302 Kekule von Stradonitz, August       07.09.1629 17.15        LMT D   Darmstadt               49 N 52 008 E 39 SC03 45    SE N
+302 Kekule von Stradonitz, August       07.09.1829 17.15        LMT D   Darmstadt               49 N 52 008 E 39 SC03 45    SE N
 303 Kempe, Rudolf                       14.06.1910 01.00 -1.00      D   Nieder-Poyritz          51 N 03 013 E 44 AR05 57    SE N
 304 Kempff, Wilhelm                     25.11.1895 19.00 -1.00      D   Jüterbog                52 N 00 013 E 04 AR07 57    SE N
 305 Kerschensteiner, Georg              29.07.1854 04.00        LMT D   München                 48 N 08 011 E 34 SC05 45    SE N
@@ -387,7 +387,7 @@
 387 Mies van der Rohe, Ludwig           27.03.1886 10.00        LMT D   Aachen                  50 N 47 006 E 05 AR09 567   SE N
 388 Milhaud, Darius                     04.09.1892 14.00 -0.16      F   Aix en Provence         43 N 18 005 B 22 AR04 567   SG G
 389 Miller, Henry                       26.12.1891 12.35 5.00       USA New York                40 N 45 073 W 45 AR01 567   FB N
-390 Miller, Oskar von                   07.05.1855 15.30        LMT D   Minchen                 48 N 08 011 E 34 MA01 4567  SE N
+390 Miller, Oskar von                   07.05.1855 15.30        LMT D   München                 48 N 08 011 E 34 MA01 4567  SE N
 391 Millet, Jean-Francois               04.10.1814 20.00        LMT F   Gréville-Hague          49 N 41 001 W 48 AR08 56    SG G
 392 Minetti, Bernhard                   26.01.1905 15.15 -1.00      D   Kiel                    54 N 20 010 E 08 AR03 57    SE G
 393 Miro, Joan                          20.04.1893 21.00        LMT E   Montroig                41 N 24 002 E 10 AR08 57    SA N
@@ -438,7 +438,7 @@
 438 Philipe, Gerard                     04.12.1922 14.00 0.00       F   Cannes                  43 N 33 007 E 01 AR03 57    SG G
 439 Piaget, Jean                        09.08.1896 00.45 -1.00      CH  Neuenburg               47 N 01 006 E 55 SC05 56    SE N
 440 Picasso, Pablo                      25.10.1881 23.15        LMT E   Malaga                  36 N 44 004 W 25 AR08 4567  SA N
-441 Piccard, Auguste                    28.01.1684 23.00        LMT CH  Basel                   47 N 33 007 E 27 SC02 456   SE G
+441 Piccard, Auguste                    28.01.1884 23.00        LMT CH  Basel                   47 N 33 007 E 27 SC02 456   SE G
 442 Piloty, Karl von                    01.10.1826 07.00        LMT D   München                 48 N 08 011 E 34 AR08 56    SE N
 443 Pirandello, Luigi                   28.06.1867 03.15 -0.88      I   Agrigent                37 N 12 013 E 30 AR01 567   SA N
 444 Piscator, Erwin                     47.12.1893 15.30 -1.00      D   Ulm (Wetzlar)           50 N 33 008 E 30 AR03 567   SE N
