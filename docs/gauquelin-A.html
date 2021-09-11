@@ -26,7 +26,7 @@
     <a class="topage" rel="" href="#topage">&#10148;</a>
     <a class="top" href="index.html">&uarr;</a>
     <a class="prev" rel="prev" href="cura.html">&larr;</a>
-    <a class="next" rel="next" href="cura-D6.html">&rarr;</a>
+    <a class="next" rel="next" href="gauquelin-D6.html">&rarr;</a>
 </nav>
 
 <header>
@@ -270,7 +270,7 @@ This step bring corrections to place names and compute geonames id for non-ambig
 The command :
 <pre>php run-g5.php newalch ertel4391 fixA1 update</pre>
 permits to restore 100 % of names not identified by step <code>raw2csv</code> in A1.
-<br>See <a href="newalch-ertel4391.html#integration-to-g5">page on Ertel 4391</a>, paragraph "Fix cura A1 names".
+<br>See <a href="ertel-4391-sportsmen.html#integration-to-g5">page on Ertel 4391</a>, paragraph "Fix cura A1 names".
 <br>
 <br>NB : <code>raw2csv</code> leaves 118 names unidentified and this step restores 117. This is because one name is handled by step <code>tweak2tmp</code>.
 
@@ -279,7 +279,7 @@ permits to restore 100 % of names not identified by step <code>raw2csv</code> in
 
 Arno Müller's file of 1083 medical doctors is used to better names and birth days in A2.
 <br>This permits to fix only 12 unidentified names in A2.
-<br>See <a href="newalch-muller1083.html#integration-to-g5">page on Müller 1083</a>, paragraphs "Fix Cura names" and "Fix Cura days".
+<br>See <a href="muller-1083-medics.html#integration-to-g5">page on Müller 1083</a>, paragraphs "Fix Cura names" and "Fix Cura days".
 
 
 <!-- ********************************************************************************* -->
@@ -325,7 +325,7 @@ The command
 <pre>php run-g5.php g55 570SPO edited2cura name list</pre>
 lists the differences between names of Cura A files and Gauquelin 1955 groups.
 <br>Random checks, comparing the names with wikipedia and other sources, show that Gauquelin names are globally better than Cura names (but Gauquelin 1955 names also contain errors).
-<!--  - these are handled by the <code>finalize-csv</code> step of cura csv generation, see <a href="cura-A.html">the page about serie A</a> -->
+<!--  - these are handled by the <code>finalize-csv</code> step of cura csv generation, see <a href="gauquelin-A.html">the page about serie A</a> -->
 
 
 <pre>php run-g5.php g55 570SPO edited2cura name update</pre>
@@ -388,16 +388,16 @@ It modifies records of <code>5-cura-csv/</code> only if there is a unique match 
                 <div class="bold">Gauquelin</div>                            
                 <ul>
                     <li>
-                        <a href="cura-A.html">A</a>
-                        <a href="cura-D6.html">D6</a>
-                        <a href="cura-D10.html">D10</a>
-                        <a href="cura-E1-E3.html">E1 E3</a>
+                        <a href="gauquelin-A.html">A</a>
+                        <a href="gauquelin-D6.html">D6</a>
+                        <a href="gauquelin-D10.html">D10</a>
+                        <a href="gauquelin-E1-E3.html">E1 E3</a>
                     </li>
                     <li>
-                        <a href="g55.html">Gauquelin 1955</a>
+                        <a href="gauquelin-55.html">Gauquelin 1955</a>
                         <ul>
-                            <li><a href="g55-restore.html">Restoration</a></li>
-                            <li><a href="g55-curadiff.html">Differences with Cura</a></li>
+                            <li><a href="gauquelin-55-restore.html">Restoration</a></li>
+                            <li><a href="gauquelin-55-curadiff.html">Differences with Cura</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -406,16 +406,17 @@ It modifies records of <code>5-cura-csv/</code> only if there is a unique match 
             <li>
                 <div class="bold">Arno Müller</div>
                 <ul>
-                    <li><a href="newalch-muller402.html">1991 - 402 writers</a></li>
-                    <li><a href="newalch-muller234.html">1993 - 234 women</a></li>
-                    <li><a href="newalch-muller1083.html">1994 - 1083 physicians</a></li>
+                    <li><a href="muller-402-writers.html">1991 - 402 writers</a></li>
+                    <li><a href="muller-612-men.html">1992 - 612 men</a></li>
+                    <li><a href="muller-234-women.html">1993 - 234 women</a></li>
+                    <li><a href="muller-1083-medics.html">1994 - 1083 physicians</a></li>
                 </ul>
             </li>
             
             <li>
                 <div class="bold">Suitbert Ertel</div>                            
                 <ul>
-                    <li><a href="newalch-ertel4391.html">1988 - 4391 athletes</a></li>
+                    <li><a href="ertel-4391-sportsmen.html">1988 - 4391 athletes</a></li>
                 </ul>
             </li>
             

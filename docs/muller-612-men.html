@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Check data | Gauquelin5</title>
+    <title>612 famous men (Arno Müller) | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
-    <meta name="description" content="">
+    <meta name="description" content="Arno Müller's list of ">
     <meta name="robots" content="index,follow">
     <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
     <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
@@ -12,7 +12,7 @@
     <meta name="dcterms.dateCopyrighted" content="2019">
     <!-- 
     tigsite:
-        history: 2020-04-29 01:50:25+02:00, Thierry Graff : Creation
+        history: 2021-09-11, Thierry Graff : Creation
     -->
 </head>
 
@@ -25,118 +25,35 @@
 <nav class="prevnext">
     <a class="topage" rel="" href="#topage">&#10148;</a>
     <a class="top" href="index.html">&uarr;</a>
-    <!-- 
-    <a class="prev" rel="prev" href=".html">&larr;</a>
-    -->
-    <a class="next" rel="next" href="acts.html">&rarr;</a>
+    <a class="prev" rel="prev" href="muller-402-writers.html">&larr;</a>
+    <a class="next" rel="next" href="muller-234-women.html">&rarr;</a>
 </nav>
 
 <header>
 <h1>
-Check data
-<div class="subtitle">Precision, reliability</div>
+612 famous men
+<div class="subtitle">(Arno Müller)</div>
 </h1>
-
 <div class="intro">
-The big part of the job is to achieve <b>data reliability</b>. Ideally, every information stored in g5 database should be checked against an official document. This is a huge work because it involves human work of transcription and verification.
-<br>For persons born before world war 2, we don't know the exact birth time. The most precise we can hope is to have a certificate from the <b>hospital</b> (HC). In practice, we have <b>birth certificates</b> (BC) from the civil registries, which are often rounded to the hour.
-<br>BC are not ideal but usable for statistical tests.
-<br>So in g5 context, a birth time is considered reliable if :
-<ul>
-    <li>It is related to a BC <b>available and verifiable by anyone</b>.</li>
-    <li>The transcription act has been <b>approved by 2 persons or more</b>.</li>
-</ul>
-
-Currently very few birth times have been verified, only to resolve questions raised by g5 development.
-<br>See also page <a href="acts.html">Acts</a>.
-
 </div>
 </header>
 
 <article>
-<nav class="toc">
-    <ul>
-        <li>
-            <a href="#trust-data-reliability">Trust - data reliability</a>
-        </li>
-        <li>
-            <a href="#g5-integration">G5 integration</a>
-        </li>
-    </ul>
-</nav>
-
 
 <!-- ********************************************************************************* -->
-<h2><a name="trust-data-reliability">Trust - data reliability</a></h2>
-Trust = level of reliability of an information.
-<br>Five main levels of reliability are defined in g5 :
-<ul class="spaced margin-top">
-    <li>
-        <div class="bold">1 - Hospital Certificate (HC)</div>
-        - Original document available and verifiable by anyone.
-        <br>- Transcription approved by 2 persons or more.
-    </li>
-    <li>
-        <div class="bold">2 - Birth Certificate (BC)</div>
-        - Original document available and verifiable by anyone.
-        <br>- Transcription approved by 2 persons or more.
-    </li>
-    <li>
-        <div class="bold">3 - Birth Record (BR)</div>
-        (= copy of the BC by an officer - may contain mistakes)
-        <br>- Original document available and verifiable by anyone.
-        <br>- Transcription approved by 2 persons or more.
-    </li>
-    <li>
-        <div class="bold">4 - to check</div>
-        Data à priori serious (Cura, Newalchemypress, Astrodatabank) but containing errors.
-        <br>Need to be matched against BC.
-    </li>
-    <li>
-        <div class="bold">5 - the rest</div>
-        Data without birth time or grabbed from the web (wikidata, web sites).
-    </li>
-</ul>
+<h2><a>Origin</a></h2>
+This list was published in Müller's <i>Astro-Forschungs-Daten</i> (AFD) volume 2 (1992).
 
-Precision are constants of class <code>g5\model\DB5</code>
+<!-- 
+<br><br>Publication of this list is possible thanks to Nick Kollerstrom, who scanned the original booklet.
+<br>Scans of the list + field meanings can be downloaded from <a href="https://g5.tig12.net/auxiliary/1992-muller-men">g5.tig12.net/auxiliary/1992-muller-men</a>.
 
-<br><br>One supplementary level was introduced : <b>2.5</b>, meaning that one person has checked the BC, but the information has not been confirmed by a second person. Not really level 2 but better than 3.
-
-<br><br>Most data handled by g5 are level 4, very few are level 2.5.
-
-<br><br><b>Note</b> : as far as France is concerned, it's possible today to check BCs online. But at Gauquelin and Müller epoch, they had 2 possibilities : go physically to the archives and consult BCs, or sent a letter and receive BRs. It means that Gauquelin and Müller data are mostly based on BRs. And a BR may differ from the original BC because the officer can make an error of copy, or copy the time of registration instead of the time of birth.
-
-<br>Raw data used by g5 may contain errors from different origins :
-<ul>
-    <li>Copy error from the officer who established a BR.</li>
-    <li>Gauquelin or Müller error when integrating the BR in their files.</li>
-    <li>Error when original paper files where put in an electronic form (for example the error on GNR in <a href="muller-1083-medics.html">Müller 1083 physicians</a>).</li>
-    <li>Bugs in g5 program should be added to this list...</li>
-</ul>
-
-
-<!-- ********************************************************************************* -->
-<h2><a name="g5-integration">G5 integration</a></h2>
-
-Persons have 2 fields to express reliability :
-<ul>
-    <li>
-        <code><b>trust</b></code> permits to specify the default trust level of the person.
-    </li>
-    <li>
-        <code><b>trust-details</b></code> is an array associating specific fields and trust level.
-    </li>
-</ul>
-
-<br>This model permits to indicate separately the reliability of each field.
-<br>Ex : a person has <code>trust = 4</code> and <code>trust-details = {"name.fame": 2.5}</code> means that all fields are trust level 4, but one field, <code>person.data['name']['official']</code> is level 2.5.
-
-<br>When a person is imported in database, it takes by default the trust level of its source.
+<br><br>These scans were transformed to a text file used as input by g5 : <a href="https://github.com/tig12/gauquelin5/tree/master/data/raw/muller/afd2-men">data/raw/muller/afd2-men</a>
+-->
 
 
 </article>
 </div><!-- end class="main" -->
-
 
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
@@ -248,5 +165,3 @@ Persons have 2 fields to express reliability :
 
 </body>
 </html>
-<!-- ************************************* -->
-<!-- ********************************************************************************* -->
