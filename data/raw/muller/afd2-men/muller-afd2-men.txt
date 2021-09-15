@@ -303,8 +303,8 @@
 303 Kempe, Rudolf                       14.06.1910 01.00 -1.00      D   Nieder-Poyritz          51 N 03 013 E 44 AR05 57    SE N
 304 Kempff, Wilhelm                     25.11.1895 19.00 -1.00      D   Jüterbog                52 N 00 013 E 04 AR07 57    SE N
 305 Kerschensteiner, Georg              29.07.1854 04.00        LMT D   München                 48 N 08 011 E 34 SC05 45    SE N
-306 Ketteler, Wilhelm von               25.12.1811 12.30        LMT D   Münster                 51 N 58 007 E 37 MA0S 456   SE N
-307 Kirchner, Ernst Ludwig              06.05.1880 06.30        LMT D   Aschaffenburg           49 N 58 009 E 09 AR0S 567   SE G
+306 Ketteler, Wilhelm von               25.12.1811 12.30        LMT D   Münster                 51 N 58 007 E 37 MA05 456   SE N
+307 Kirchner, Ernst Ludwig              06.05.1880 06.30        LMT D   Aschaffenburg           49 N 58 009 E 09 AR08 567   SE G
 308 Klebe, Giselher                     28.06.1925 18.00 -1.00      D   Mannheim                49 N 29 008 E 29 AR04 57    SE N
 309 Klee, Paul                          18.12.1879 04.00        LMT CH  Münchenbuchsee          46 N 57 007 E 26 AR08 4567  SE N
 310 Klein, Felix                        25.04.1849 07.15        LMT D   Düsseldorf              51 N 34 006 E 47 SC01 57    SE N
@@ -571,7 +571,7 @@
 571 Utrillo, Maurice                    26.12.1883 13.00        LMT F   Paris                   48 N 50 002 E 20 AR08 56    SG G
 572 Valentin, Karl                      04.06.1882 21.00        LMT D   München                 48 N 08 011 E 34 AR03 56    SA N
 573 Valery, Paul                        30.10.1871 19.00        LMT F   Sète                    43 N 24 003 E 42 AR01 56    SG G
-574 Velde, Henry van de                 03.04.1863 01.00        LMT B   Antwerpen               51 N 14 004 E 30 AR00 567   SA N
+574 Velde, Henry van de                 03.04.1863 01.00        LMT B   Antwerpen               51 N 14 004 E 30 AR09 567   SA N
 575 Verdi, Giuseppe                     10.10.1813 20.00        LMT I   Le Roncole              44 N 56 010 E 02 AR04 4567  SB N
 576 Verlaine, Paul                      30.03.1844 21.00        LMT F   Metz                    49 N 07 006 E 11 AR01 567   SG G
 577 Verne, Jules                        08.02.1828 12.00        LMT F   Nantes                  47 N 13 001 W 35 AR01 4567  SG G

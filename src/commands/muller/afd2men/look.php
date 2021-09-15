@@ -424,6 +424,8 @@ class look implements Command {
         ksort($occus);
         $res = '';
         foreach($occus as $code => $nb){
+            // convert 'AR00' to 'AR 00'
+            $code = substr($code, 0, 2) . ' ' . substr($code, 2);
             $res .= "        '$code' => '', // $nb persons\n";
         }
         return $res;

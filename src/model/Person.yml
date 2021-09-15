@@ -7,10 +7,18 @@ id:
 
 slug:
 
-to-check:           # true or false - related to field "notes"
+# key / value pairs
+# keys: string identifying the kind of check needed
+# values: description of the reason leading to the need to check the person
+tocheck: []
 
-trust:              # overall trust level (=min(trust-details))
-trust-details: []   # different trust levels for fields
+# overall trust level (=min(trust-details))
+trust:
+# different trust levels for fields
+# key / value pairs
+# keys: field name with dot syntax (ex "birth.date")
+# values: trust level of the field
+trust-details: []
 
 sources: []
 # key / value pairs

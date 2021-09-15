@@ -28,9 +28,8 @@ class Person {
                     Can be partial (containing only parts of the fields).
     **/
     public static function row2person($row){
-        if(isset($row['to_check'])){
-            $row['to-check'] = $row['to_check'];
-            unset($row['to_check']);
+        if(isset($row['tocheck'])){
+            $row['tocheck'] = json_decode($row['tocheck'], true);
         }
         if(isset($row['sources'])){
             $row['sources'] = json_decode($row['sources'], true);
@@ -123,7 +122,6 @@ class Person {
         }
         return $res;
     }
-    
     
     /** 
         Static computation of slug
@@ -342,7 +340,7 @@ class Person {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("insert into person(
             slug,
-            to_check,
+            tocheck,
             sources,
             ids_in_sources,
             trust,
@@ -357,9 +355,7 @@ class Person {
             )values(?,?,?,?,?,?,?,?,?,?,?,?,?) returning id");
         $stmt->execute([
             $this->data['slug'],
-// desactivated because of php bug - https://bugs.php.net/bug.php?id=81002
-true,
-//            $this->data['to-check'],
+            json_encode($this->data['tocheck']),
             json_encode($this->data['sources']),
             json_encode($this->data['ids-in-sources']),
             $this->data['trust'],
@@ -384,7 +380,7 @@ true,
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("update person set
             slug=?,
-            to_check=?,
+            tocheck=?,
             sources=?,
             ids_in_sources=?,
             trust=?,
@@ -400,9 +396,7 @@ true,
             ");
         $stmt->execute([
             $this->data['slug'],
-// desactivated because of php bug - https://bugs.php.net/bug.php?id=81002
-true,
-//            $this->data['to-check'],
+            json_encode($this->data['tocheck']),
             json_encode($this->data['sources']),
             json_encode($this->data['ids-in-sources']),
             $this->data['trust'],
@@ -418,4 +412,4 @@ true,
         ]);
     }
     
-}// end class
+} // end class

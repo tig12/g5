@@ -1,4 +1,5 @@
 
+- see php bug - https://bugs.php.net/bug.php?id=81002
 
 - rename db/fill/ occus and occugroups as occus1 and occus2
 
@@ -30,6 +31,10 @@
     Associated A A2-3343 and J A2-3344 to match astrotheme.fr data (A: 23h - J: 22h45)
     But possible error: astrotheme.fr hours differ from cura, need to check civil registry.
     The association is done in tmp2db of Muller AFD2 312 famous men.
+    
+- Check :
+    GQ: A2-1462  Gayda Tullio                            1882-10-19 05:55:04 ROMA
+    GQ: A3-1697  Gauquelin-A3-1697                       1882-10-19 20:10:04 ROMA
 
 - in all tmp2db, when $p->addHistory is done,
     $p->addSource and $p->addIdInSource are not taken into account

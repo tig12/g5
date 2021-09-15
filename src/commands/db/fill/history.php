@@ -226,6 +226,7 @@ class history implements Command {
         
         $t2 = microtime(true);
         $dt = round($t2 - $t1, 3);
+        
         echo "====== Execution of all commands in $dt s ======\n";
         return '';
     }

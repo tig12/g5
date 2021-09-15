@@ -297,7 +297,6 @@ class AFD2 {
         X means useless because handled by tweaks file.
     **/
     const OCCUS = [
-/* 
         'AR 01' => 'fictional-writer', // 85 persons
         'AR 02' => 'factual-writer', // 12 persons
         'AR 03' => 'actor', // 43 persons
@@ -320,7 +319,6 @@ class AFD2 {
         'WA 09' => 'X', // 4 persons - more precise infos in tweaks file
         'WA 10' => 'suffragette', // 7 persons
         'WA 12' => 'partner-of-celebrity', // 8 persons
-*/
     ];
     
     /** Conversion to ISO 3166. **/
