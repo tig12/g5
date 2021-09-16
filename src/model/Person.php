@@ -28,8 +28,8 @@ class Person {
                     Can be partial (containing only parts of the fields).
     **/
     public static function row2person($row){
-        if(isset($row['tocheck'])){
-            $row['tocheck'] = json_decode($row['tocheck'], true);
+        if(isset($row['todo'])){
+            $row['todo'] = json_decode($row['todo'], true);
         }
         if(isset($row['sources'])){
             $row['sources'] = json_decode($row['sources'], true);
@@ -340,7 +340,7 @@ class Person {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("insert into person(
             slug,
-            tocheck,
+            todo,
             sources,
             ids_in_sources,
             trust,
@@ -355,7 +355,7 @@ class Person {
             )values(?,?,?,?,?,?,?,?,?,?,?,?,?) returning id");
         $stmt->execute([
             $this->data['slug'],
-            json_encode($this->data['tocheck']),
+            json_encode($this->data['todo']),
             json_encode($this->data['sources']),
             json_encode($this->data['ids-in-sources']),
             $this->data['trust'],
@@ -380,7 +380,7 @@ class Person {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("update person set
             slug=?,
-            tocheck=?,
+            todo=?,
             sources=?,
             ids_in_sources=?,
             trust=?,
@@ -396,7 +396,7 @@ class Person {
             ");
         $stmt->execute([
             $this->data['slug'],
-            json_encode($this->data['tocheck']),
+            json_encode($this->data['todo']),
             json_encode($this->data['sources']),
             json_encode($this->data['ids-in-sources']),
             $this->data['trust'],

@@ -4,7 +4,7 @@
 create table person (
     id              serial primary key,
     slug            varchar(255) unique not null,
-    tocheck         jsonb not null,
+    todo            jsonb not null,
     sources         jsonb not null,
     ids_in_sources  jsonb not null,
     trust           varchar(255) not null,                                                           

@@ -9,8 +9,9 @@ slug:
 
 # key / value pairs
 # keys: string identifying the kind of check needed
+# keys can be any string - standard keys exist, see constants of class model.Todo
 # values: description of the reason leading to the need to check the person
-tocheck: []
+todo: []
 
 # overall trust level (=min(trust-details))
 trust:
