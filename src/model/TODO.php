@@ -9,7 +9,7 @@
 
 namespace g5\model;
 
-use g5\Config;
+use g5\app\Config;
 use g5\model\DB5;
 
 TODO::init();

@@ -9,7 +9,7 @@
 namespace g5\commands\csicop\si42;
 
 use g5\G5;
-use g5\patterns\Command;
+use tiglib\patterns\Command;
 use tiglib\arrays\csvAssociative;
 
 class addCanvas1 implements Command {

@@ -4,16 +4,15 @@
     
     @license    GPL
     @history    2019-05-11 17:33:48+02:00, Thierry Graff : Creation
+    @history    2021-09-16 12:26:02+02:00, Thierry Graff : Integrate to tiglib
 ********************************************************************************/
-namespace g5\patterns;
+namespace tiglib\patterns;
 
-interface Command{
+interface Command {
     
     /** 
         Do something
-        @return report : string describing the result of execution.
     **/
-    //public static function execute($params=[]): string;
     public static function execute($params=[]);
     
 } // end interface

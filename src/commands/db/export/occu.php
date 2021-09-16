@@ -13,8 +13,8 @@
 ********************************************************************************/
 namespace g5\commands\db\export;
 
-use g5\patterns\Command;
-use g5\Config;
+use tiglib\patterns\Command;
+use g5\app\Config;
 use g5\model\Person;
 use g5\model\Group;
 use g5\model\Occupation;

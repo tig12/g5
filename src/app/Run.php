@@ -8,7 +8,7 @@
     @history    2017-04-27 10:41:02+02:00, Thierry Graff : creation
     @history    2019-05-10 08:22:01+02:00, Thierry Graff : new version
 ********************************************************************************/
-namespace g5;
+namespace g5\app;
 
 class Run{
     
@@ -34,7 +34,7 @@ class Run{
         = list of sub-directories of commands/
     **/
     public static function getArgs1(){
-        return self::getSubdirs(__DIR__ . DS . 'commands');
+        return self::getSubdirs(dirname(__DIR__) . DS . 'commands');
     }
     
     
@@ -53,7 +53,7 @@ class Run{
         }
         // else return the directories located in the arg1's class directory
         // as the code is psr4, possible to list php files without using reflection.
-        $dir = implode(DS, [__DIR__, 'commands', $arg1]);
+        $dir = implode(DS, [dirname(__DIR__), 'commands', $arg1]);
         return self::getSubdirs($dir);
     }
     
@@ -73,14 +73,14 @@ class Run{
         }
         // else return the classes located in the arg2's class directory
         // as the code is psr4, possible to list php files without using reflection.
-        $dir = implode(DS, [__DIR__, 'commands', $arg1, $arg2]);
+        $dir = implode(DS, [dirname(__DIR__), 'commands', $arg1, $arg2]);
         $tmp = glob($dir . DS . '*.php');
         $res = [];
         foreach($tmp as $file){
             $basename = basename($file, '.php');
             try{
                 $class = new \ReflectionClass("g5\\commands\\$arg1\\$arg2\\$basename");
-                if($class->implementsInterface("g5\\patterns\\Command")){
+                if($class->implementsInterface("tiglib\\patterns\\Command")){
                     $res[] = $basename;
                 }
             }
@@ -138,7 +138,7 @@ class Run{
         Auxiliary of self::getArgs2() and self::getActionClass().
     **/
     private static function arg1RouterFilename($arg1){
-        return implode(DS, [__DIR__, 'commands', $arg1, ucFirst($arg1) . 'Router.php']);
+        return implode(DS, [dirname(__DIR__), 'commands', $arg1, ucFirst($arg1) . 'Router.php']);
     }
     
     
@@ -156,7 +156,7 @@ class Run{
         Auxiliary of self::getCommandClass().
     **/
     private static function arg1CommandFilename($arg1){
-        return implode(DS, [__DIR__, 'commands', $arg1, ucFirst($arg1) . 'Command' . '.php']);
+        return implode(DS, [dirname(__DIR__), 'commands', $arg1, ucFirst($arg1) . 'Command' . '.php']);
     }
     
     

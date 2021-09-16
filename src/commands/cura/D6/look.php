@@ -8,7 +8,7 @@
 ********************************************************************************/
 namespace g5\commands\cura\D6;
 
-use g5\patterns\Command;
+use tiglib\patterns\Command;
 use tiglib\arrays\csvAssociative;
 use g5\commands\cura\Cura;
 

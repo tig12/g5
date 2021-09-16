@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Person | Open Gauquelin database</title>
+    <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
+    <meta name="description" content="">
+    <meta name="robots" content="index,follow">
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
+    <meta name="dcterms.rightsHolder" content="Thierry Graff">
+    <meta name="dcterms.dateCopyrighted" content="2019">
+    <!-- 
+    tigsite:
+        history: 2021-09-16 21:28:10+02:00, Thierry Graff : Creation
+    -->
+</head>
+
+<body>
+<div class="container">
+
+<div class="main">
+
+<a name="topage"></a>
+<nav class="prevnext">
+    <a class="topage" rel="" href="#topage">&#10148;</a>
+    <a class="top" href="index.html">&uarr;</a>
+    <a class="prev" rel="prev" href=".html">&larr;</a>
+    <a class="next" rel="next" href=".html">&rarr;</a>
+</nav>
+
+<header>
+<h1>Person</h1>
+<div class="intro">
+
+</div>
+</header>
+
+<article>
+
+
+The structure of a person is given by <code>src/model/Person.yml</code>
+<pre>
+#
+# Describes the structure of a Person
+# Used to create an empty person
+#
+
+id: 
+
+slug:
+
+# key / value pairs
+# keys: string identifying the kind of check needed
+# keys can be any string - standard keys exist, see constants of class model.Todo
+# values: description of the reason leading to the need to check the person
+todo: []
+
+# overall trust level (=min(trust-details))
+trust:
+# different trust levels for fields
+# key / value pairs
+# keys: field name with dot syntax (ex "birth.date")
+# values: trust level of the field
+trust-details: []
+
+sources: []
+# key / value pairs
+# key = source slug ; value = local id within the given source
+ids-in-sources: []
+
+sex:
+
+name:
+  usual:            # not used so far, maybe will be removed
+  given:
+  family:
+  spouse:
+  official:         # As written in the birth certificate
+    family:
+    given:
+  nobl:             # nobiliary-particle: de d' di del von...
+  fame:             # stage, scene
+    full:           # eg Mistinguett or Stromae
+    family: 
+    given: 
+  alter: []         # alternative names, like nicknames, or author names
+
+# occupation codes
+occus: []
+
+birth:
+  date:     # exact date (day and hour) of the birth certificate
+  tzo:      # timezone offset
+  date-ut:  # date converted to Universal Time
+  note:     # eg "LMT" or "notime"
+  place:
+    name:
+    c1:
+    c2:
+    c3:
+    cy:
+    geoid:
+    lg:
+    lat:
+      
+death:
+  date:     # exact date of the birth certificate
+  tz:       # timezone offset
+  date-ut:  # date converted to Univesal Time
+  note:     # eg "LMT" or "notime"
+  place:
+    name:
+    c1:
+    c2:
+    c3:
+    cy:
+    geoid:
+    lg:
+    lat:
+
+civil-registry: []  # links with directory acts/
+
+history: []
+
+free: []    # key value pairs - not used so far, maybe will be removed
+
+notes: []   # array of free notes
+</pre>
+
+This model permits to keep a precise trace of the transformations done on data.
+
+<!-- ************************************* -->
+<h3><a name="4-1-sources-ids-in-sources">sources - ids_in_sources</a></h3>
+
+These fields express the link between a person an information sources.
+<br>Example (in json syntax) :
+<pre>
+# field sources
+    ["a6", "e1", "e3"]
+    
+# field ids_in_sources 
+    {
+        "a6": "580",
+        "e1": "1477",
+        "e3": "1092",
+        "cura5": "A6-580"
+    }
+</pre>
+Example of Moinot Pierre 1920-03-29, present in 3 different files of cura.free.fr.
+<br>Note : <code>ids_in_sources["cura5"]</code> is the person's <a href="cura.html#gauquelin-unique-id">Gauquelin unique id</a>.
+
+<!-- ************************************* -->
+<h3><a name="4-2-raw">raw</a></h3>
+
+This field permits to the fields of a person with the values of the raw data, ti eventually identify errors made during database construction.
+
+<br><br>Associative array ;
+<br>keys = source slug
+<br>values = values of the person in the given source (errors not corrected).
+<br>Example : 
+<pre>
+{
+    "a6": {
+        "H": "13",
+        "MN": "40",
+        "TZ": "-1",
+        "COD": "TA",
+        "COU": "I",
+        "DAY": "20",
+        "LAT": "40N30",
+        "LON": "17E30",
+        "MON": "8",
+        "NUM": "814",
+        "PRO": "W",
+        "SEC": "4",
+        "YEA": "1884",
+        "CITY": "TARANTO"
+    },
+    "5muller_writers": {
+        "LG": "-17,5",
+        "DAY": "20",
+        "LAT": "40,5",
+        "MIN": "30",
+        "TZO": "-0,83",
+        "HOUR": "13",
+        "NAME": "2M Acquaviva, Cosimo",
+        "YEAR": "1884",
+        "MONTH": "08",
+        "PLACE": "Taranto TA"
+    }
+}</pre>
+
+It shows a record found in Gauquelin data (file A6) and in Müller data (file <code>5muller_writers.xslx</code>, see <a href="muller-402-writers.html">page Müller 402</a>).
+
+<!-- ************************************* -->
+<h3><a name="4-3-history">history</a></h3>
+
+Permits to track the successive transformations operated on a person.
+
+<br><br>Regular array ; each element contains an associative array with 4 key / value pairs :
+<ul>
+    <li><code>command</code> : the g5 command issued to update this person.</li>
+    <li><code>date</code> : date of execution of the command.</li>
+    <li><code>source</code> : slug of the source of informations.</li>
+    <li>
+        <code>values</code> : the person fields that this command updated.
+        <br>It only contains the updated fields, not all the informations coming from the source.
+    </li>
+</ul>
+
+<pre>
+[
+    {
+        "date": "2020-09-21T14:49:58+02:00",
+        "source": "a6",
+        "values": {
+            "name": {
+                "given": "Cosimo",
+                "family": "Acquaviva"
+            },
+            "birth": {
+                "place": {
+                    "c2": "TA",
+                    "c3": "",
+                    "cy": "IT",
+                    "lg": "17.22972",
+                    "lat": "40.47611",
+                    "name": "Taranto",
+                    "geoid": "3165926"
+                },
+                "date-ut": "1884-08-20 12:40:04"
+            },
+            "occus": ["WR"],
+            "trust": 4
+        },
+        "command": "cura A6 tmp2db"
+    },
+    {
+        "date": "2020-09-21T14:50:32+02:00",
+        "source": "5muller_writers",
+        "values": {
+            "name": {
+                "given": "Cosimo",
+                "family": "Acquaviva"
+            },
+            "birth": {
+                "tzo": "+00:50",
+                "date": "1884-08-20 13:30",
+                "note": "",
+                "place": {
+                    "name": "Taranto"
+                }
+            },
+            "notes": []
+        },
+        "command": "cura muller402 tmp2db"
+    }
+]
+</pre>
+
+<!-- ********************************************************************************* -->
+<h2>field todo</h2>
+While importing data, it's sometimes possible to identify dubious values, and mark them, in order to build a list of records needing human check.
+
+
+
+</article>
+</div><!-- end class="main" -->
+
+<!-- ************************************* -->
+<aside class="left">                                                                                                                                              
+<ul>
+    <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">Code repository</a></li>
+    <li class="bold big1"><a href="index.html">Home</a></li>
+    
+    <li><a href="usage.html">Program usage</a></li>
+    <li><a href="organisation.html">Organisation</a></li>
+    <li><a href="db.html">G5 database</a></li>
+    <li><a href="output-format.html">Output format</a></li>
+    
+    <li class="bold big1"><a href="https://g5.tig12.net/output">Download results</a></li>
+    
+    <li>
+        <span class="big1">1 - Restore</span>                            
+        <ul>
+        
+            <li><a href="historical-tests.html"><b>Historical tests</b></a></li>
+            
+            <li><a href="cura.html">cura.free.fr</a></li>
+            <li><a href="newalch.html">newalchemypress.com</a></li>
+            
+            <li>
+                <div class="bold">Gauquelin</div>                            
+                <ul>
+                    <li>
+                        <a href="gauquelin-A.html">A</a>
+                        <a href="gauquelin-D6.html">D6</a>
+                        <a href="gauquelin-D10.html">D10</a>
+                        <a href="gauquelin-E1-E3.html">E1 E3</a>
+                    </li>
+                    <li>
+                        <a href="gauquelin-55.html">Gauquelin 1955</a>
+                        <ul>
+                            <li><a href="gauquelin-55-restore.html">Restoration</a></li>
+                            <li><a href="gauquelin-55-curadiff.html">Differences with Cura</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            
+            <li>
+                <div class="bold">Arno Müller</div>
+                <ul>
+                    <li><a href="muller-402-writers.html">1991 - 402 writers</a></li>
+                    <li><a href="muller-612-men.html">1992 - 612 men</a></li>
+                    <li><a href="muller-234-women.html">1993 - 234 women</a></li>
+                    <li><a href="muller-1083-medics.html">1994 - 1083 physicians</a></li>
+                </ul>
+            </li>
+            
+            <li>
+                <div class="bold">Suitbert Ertel</div>                            
+                <ul>
+                    <li><a href="ertel-4391-sportsmen.html">1988 - 4391 athletes</a></li>
+                </ul>
+            </li>
+            
+            <li>
+                <div class="bold">Skeptics</div>
+                <ul>
+                    <li><a href="comite-para.html">1976 - Comité Para</a></li>
+                    <li><a href="csicop.html">1979 - CSICOP</a></li>
+                    <li><a href="cfepp.html">1996 - CFEPP</a></li>
+                </ul>
+            </li>
+            
+            <!-- <li><a href="todo-data.html">Data TODO</a></li> -->
+        </ul>
+    </li>
+    
+    <li>
+        <span class="big1">2 - Build new data</span>
+        <ul>
+            <!-- <li><a href="full.html">7-full</a></li> -->
+            <li><a href="check.html">Check</a></li>
+            <li><a href="acts.html">Acts</a></li>
+            <li><a href="wikidata.html">Wikidata.org</a></li>
+            <li><a href="geonames.html">Geonames.org</a></li>
+        </ul>
+    </li>
+        
+    <li>
+        <span class="big1">3 - Eminence</span>
+        <ul>
+            <li><a href="eminence.html">Eminence ranking</a></li>
+            <li><a href="eminence-math.html">Mathematicians</a></li>
+        </ul>
+    </li>
+    
+    <li>
+        <span class="big1">Details</span>
+        <ul>
+            <li><a href="time.html">Time and timezone</a></li>
+            <li><a href="tweak2tmp.html">tweak2tmp</a></li>
+            <li><a href="code-details.html">Code details</a></li>
+        </ul>
+    </li>
+    
+    <!-- <li><a href="next.html">Next</a></li> -->
+    
+    <!-- <li><a href="questions.html">Questions</a></li> -->
+
+</ul>
+</aside>
+
+</div><!-- end class="container" -->
+
+</body>
+</html>
+<!-- ************************************* -->
+<!-- ********************************************************************************* -->

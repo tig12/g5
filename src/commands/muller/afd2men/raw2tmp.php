@@ -9,8 +9,8 @@
 namespace g5\commands\muller\afd2men;
 
 use g5\G5;
-use g5\Config;
-use g5\patterns\Command;
+use g5\app\Config;
+use tiglib\patterns\Command;
 use g5\commands\muller\AFD;
 
 class raw2tmp implements Command {

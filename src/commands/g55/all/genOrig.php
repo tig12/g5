@@ -10,10 +10,10 @@
 namespace g5\commands\g55\all;
 
 use g5\G5;
-use g5\Config;
+use g5\app\Config;
 use g5\commands\g55\G55;
 use g5\commands\gauquelin\LERRCP;
-use g5\patterns\Command;
+use tiglib\patterns\Command;
 use g5\model\Libreoffice;
 
 class genOrig implements Command {

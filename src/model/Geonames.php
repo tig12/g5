@@ -8,7 +8,7 @@
 ********************************************************************************/
 namespace g5\model;
 
-use g5\Config;
+use g5\app\Config;
 
 Geonames::init();
 

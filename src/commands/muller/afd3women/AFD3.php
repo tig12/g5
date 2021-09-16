@@ -8,7 +8,7 @@
 ********************************************************************************/
 namespace g5\commands\muller\afd3women;
 
-use g5\Config;
+use g5\app\Config;
 use g5\model\DB5;
 use g5\model\{Source, Group};
 //use tiglib\time\seconds2HHMMSS;
@@ -276,7 +276,7 @@ class AFD3 {
     
     /** Returns a Source object for raw file. **/
     public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['model'] . DS . self::SOURCE_DEFINITION);
+        return Source::getSource(Config::$data['dirs']['db'] . DS . self::SOURCE_DEFINITION);
     }
     
     // *********************** Group management ***********************

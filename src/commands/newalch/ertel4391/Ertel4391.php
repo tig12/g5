@@ -7,7 +7,7 @@
 ********************************************************************************/
 namespace g5\commands\newalch\ertel4391;
 
-use g5\Config;
+use g5\app\Config;
 use g5\model\Source;
 use g5\model\Group;
 use tiglib\arrays\csvAssociative;
@@ -74,7 +74,7 @@ class Ertel4391 {
         Returns a Source object for the raw file used for Ertel4391.
     **/
     public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['model'] . DS . self::RAW_SOURCE_DEFINITION);
+        return Source::getSource(Config::$data['dirs']['db'] . DS . self::RAW_SOURCE_DEFINITION);
     }
 
     // *********************** Group management ***********************

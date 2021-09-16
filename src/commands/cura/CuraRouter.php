@@ -7,7 +7,7 @@
 ********************************************************************************/
 namespace g5\commands\cura;
 
-use g5\patterns\Router;
+use g5\app\Router;
 
 class CuraRouter implements Router{
     

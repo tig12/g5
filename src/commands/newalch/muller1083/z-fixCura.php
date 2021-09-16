@@ -8,7 +8,7 @@
 namespace g5\commands\newalch\muller1083;
 
 use g5\G5;
-use g5\patterns\Command;
+use tiglib\patterns\Command;
 use g5\commands\cura\Cura;
 
 class fixCura implements Command {

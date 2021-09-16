@@ -1,27 +1,29 @@
 <?php
 /******************************************************************************
     
-    Fills table person_groop for occupation groups and completes table groop 
-    with fields n and children.
+    Completes occus1
+    For all groups of type Group::TYPE_OCCU
+    - Fills table person_groop for occupation groups
+    - Completes table groop with fields 'n' and 'children'.
     This can be done only for all occupations in the same run.
     
     Computation of occupation groups is a 3-steps process :
-    - The groups are created in commands/db/fill/occus
+    - The groups are created in class occus1
     - The persons are created (by tmp2db commands)
     - The groups are filled by current command
     
     @license    GPL
     @history    2021-08-01 16:36:23+02:00, Thierry Graff : Creation
-    @pre        commands/db/fill/occus must have been executed before
+    @pre        commands/db/init/occus1 must have been executed before
 ********************************************************************************/
-namespace g5\commands\db\fill;
+namespace g5\commands\db\init;
 
-use g5\patterns\Command;
+use tiglib\patterns\Command;
 use g5\model\DB5;
 use g5\model\Group;
 use g5\model\Occupation;
 
-class occugroups implements Command {
+class occus2 implements Command {
     
     /** 
         @param  $params Empty array

@@ -8,7 +8,7 @@
 ********************************************************************************/
 namespace g5\commands\cura\look;
 
-use g5\patterns\Command;
+use tiglib\patterns\Command;
 use g5\model\DB5;
 use g5\model\Person;
 use g5\commands\cura\CuraRouter;

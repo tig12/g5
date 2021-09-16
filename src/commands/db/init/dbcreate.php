@@ -7,10 +7,10 @@
     @license    GPL
     @history    2020-08-08 17:22:57+02:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\commands\db\create;
+namespace g5\commands\db\init;
 
-use g5\patterns\Command;
-use g5\Config;
+use tiglib\patterns\Command;
+use g5\app\Config;
 use g5\model\DB5;
 
 class dbcreate implements Command {

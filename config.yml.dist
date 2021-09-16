@@ -2,7 +2,8 @@
 # Configuration for https://github.com/tig12/gauquelin5
 #
 
-# Directories where data files are stored
+# Directories where unversioned data files are stored
+# Versioned data directories are initialized in app/Config.php
 # Absolute paths or paths relative to gauquelin5 root directory
 dirs:
   output: data/output

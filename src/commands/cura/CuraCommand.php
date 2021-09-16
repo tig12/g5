@@ -12,7 +12,7 @@
 ********************************************************************************/
 namespace g5\commands\cura;
 
-use g5\patterns\Command;
+use tiglib\patterns\Command;
 
 class CuraCommand implements Command {
 

@@ -20,8 +20,8 @@
 namespace g5\commands\cura\D6;
 
 use g5\G5;
-use g5\Config;
-use g5\patterns\Command;
+use g5\app\Config;
+use tiglib\patterns\Command;
 use g5\commands\cura\Cura;
 use g5\model\Geonames;
 use tiglib\misc\dosleep;
@@ -53,8 +53,9 @@ class addGeo implements Command {
         //
         // Fills CY in data/tmp/cura/D6.csv 
         // from data/build/geonames/D6.csv
+        // TEMPORARY MECHANISM - 
         $rows = Cura::loadTmpFile_num($datafile);
-        $rowsGeo = csvAssociative::compute('data/build/geonames/D6.csv');
+        $rowsGeo = csvAssociative::compute('data/init/geonames/D6.csv');
         $res = implode(G5::CSV_SEP, D6::TMP_FIELDS) . "\n";
         foreach($rowsGeo as $rowGeo){
             $NUM = $rowGeo['NUM'];

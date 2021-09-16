@@ -9,7 +9,7 @@
 ********************************************************************************/
 namespace g5\commands\newalch\ertel4391;
 
-use g5\patterns\Command;
+use tiglib\patterns\Command;
 
 class look implements Command {
     

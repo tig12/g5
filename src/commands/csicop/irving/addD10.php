@@ -11,8 +11,8 @@
 namespace g5\commands\csicop\irving;
 
 use g5\G5;
-use g5\Config;
-use g5\patterns\Command;
+use g5\app\Config;
+use tiglib\patterns\Command;
 use g5\commands\cura\Cura;
 use g5\commands\newalch\ertel4391\Ertel4391;
 

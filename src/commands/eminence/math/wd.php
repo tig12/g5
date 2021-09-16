@@ -30,8 +30,8 @@ deathcauseLabel
 ********************************************************************************/
 namespace g5\commands\eminence\math;
 
-use g5\Config;
-use g5\patterns\Command;
+use g5\app\Config;
+use tiglib\patterns\Command;
 use g5\model\DB5;
 use g5\commands\wd\Wikidata;
 use tiglib\arrays\csvAssociative;

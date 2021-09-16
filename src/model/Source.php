@@ -9,7 +9,7 @@
 
 namespace g5\model;
 
-use g5\Config;
+use g5\app\Config;
 use g5\model\DB5;
 
 Source::init();
@@ -25,7 +25,7 @@ class Source {
     
     /** Static initializer, executed once at class loading **/
     public static function init(){
-        self::$DIR = Config::$data['dirs']['ROOT'] . DS . Config::$data['dirs']['model'] . DS . 'source';
+        self::$DIR = Config::$data['dirs']['ROOT'] . DS . Config::$data['dirs']['db'] . DS . 'source';
     }
     
     /** 

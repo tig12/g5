@@ -5,8 +5,9 @@
     
     @license    GPL
     @history    2021-07-29 17:10:25+02:00, Thierry Graff : Creation
+    @history    2021-09-16 12:18:30+02:00, Thierry Graff : Integrate to tiglib
 ********************************************************************************/
-namespace g5\patterns;
+namespace tiglib\dag;
 
 class DAGStringNode{
     

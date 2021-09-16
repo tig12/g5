@@ -13,7 +13,7 @@
 ********************************************************************************/
 namespace g5\commands\muller\afd3women;
 
-use g5\patterns\Command;
+use tiglib\patterns\Command;
 use g5\model\DB5;
 use tiglib\arrays\sortByKey;
 use g5\commands\cura\Cura;

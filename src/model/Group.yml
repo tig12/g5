@@ -26,5 +26,5 @@ parents: []
 # array of group slugs
 children: []
 
-# array of person ids (not person objects)
+# array of person ids (nor person slugs ; not person objects)
 members: []

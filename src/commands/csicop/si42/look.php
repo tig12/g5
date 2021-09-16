@@ -6,7 +6,7 @@
 ********************************************************************************/
 namespace g5\commands\csicop\si42;
 
-use g5\patterns\Command;
+use tiglib\patterns\Command;
 use tiglib\arrays\csvAssociative;
 
 class look implements Command {                                                                       

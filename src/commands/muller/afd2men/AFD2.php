@@ -8,9 +8,10 @@
 ********************************************************************************/
 namespace g5\commands\muller\afd2men;
 
-use g5\Config;
+use g5\app\Config;
 use g5\model\DB5;
-use g5\model\{Source, Group};
+use g5\model\Source;
+use g5\model\Group;
 use tiglib\arrays\csvAssociative;
 
 class AFD2 {
@@ -418,7 +419,7 @@ class AFD2 {
     
     /** Returns a Source object for raw file. **/
     public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['model'] . DS . self::SOURCE_DEFINITION);
+        return Source::getSource(Config::$data['dirs']['db'] . DS . self::SOURCE_DEFINITION);
     }
     
     // *********************** Group management ***********************

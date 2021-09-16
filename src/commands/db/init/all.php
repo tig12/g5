@@ -8,9 +8,9 @@
     @license    GPL
     @history    2020-08-17 20:18:47+02:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\commands\db\fill;
+namespace g5\commands\db\init;
 
-use g5\patterns\Command;
+use tiglib\patterns\Command;
 use g5\commands\cura\CuraRouter;
 
 // for information sources
@@ -21,10 +21,11 @@ use g5\commands\newalch\Newalch;
 use g5\commands\cura\Cura;
 use g5\commands\wd\Wikidata;
 
-use g5\commands\db\create\dbcreate;
+use g5\commands\db\init\dbcreate;
+use g5\commands\db\init\occus1;
+use g5\commands\db\init\occus2;
 use g5\commands\db\fill\source                  as fillsource;
-use g5\commands\db\fill\occus                   as filloccus;
-use g5\commands\db\fill\tweak;
+use g5\commands\db\fill\tweak                   as filltweak;
 
 // raw2tmp
 use g5\commands\cura\A\raw2tmp                  as raw2tmpA;
@@ -66,9 +67,8 @@ use g5\commands\csicop\irving\tmp2db            as tmp2dbIrving;
 use g5\commands\muller\afd3women\tmp2db         as tmp2dbAfd3Women;
 
 // finalize
-use g5\commands\db\fill\stats;
-use g5\commands\db\fill\occugroups;
-use g5\commands\db\fill\search;
+use g5\commands\db\init\stats;
+use g5\commands\db\init\search;
 
 // export
 use g5\commands\cura\all\export                 as exportCura;
@@ -78,7 +78,7 @@ use g5\commands\newalch\muller402\export100     as exportMuller100;
 use g5\commands\csicop\irving\export            as exportIrving;
 use g5\commands\db\export\alloccus              as exportAllOccus;
 
-class history implements Command {
+class all implements Command {
     
     /** 
         Possible values of the command
@@ -125,10 +125,12 @@ class history implements Command {
             echo "***********************\n";
             echo "*** Build tmp files ***\n";
             echo "***********************\n";
+///* 
             foreach($filesCuraA as $datafile){
                 echo raw2tmpA::execute([$datafile, 'raw2tmp', 'small']);
                 echo addGeoA::execute([$datafile, 'addGeo', 'small']);
             }
+//*/
             echo raw2tmpD6::execute(['D6', 'raw2tmp']);
             echo addGeoD6::execute(['D6', 'addGeo']); // tmp code - addGeo needs to be fixed
             echo raw2tmpD10::execute(['D10', 'raw2tmp']);
@@ -162,6 +164,7 @@ class history implements Command {
         //  2 - Import tmp files to db
         //
         if($param == 'db' || $param == 'all'){
+/* 
             echo "***********************\n";
             echo "***  Fill database  ***\n";
             echo "***********************\n";
@@ -172,7 +175,7 @@ class history implements Command {
             echo fillsource::execute([Cura::SOURCE_DEFINITION_FILE]);
             echo fillsource::execute([Newalch::SOURCE_DEFINITION_FILE]);
             echo fillsource::execute([Wikidata::SOURCE_DEFINITION_FILE]);
-            echo filloccus::execute();
+            echo occus1::execute();
             
             foreach($filesCuraA as $datafile){
                 echo tmp2dbA::execute([$datafile, 'tmp2db', 'small']);
@@ -192,9 +195,10 @@ class history implements Command {
             echo tmp2dbIrving::execute(['small']);
             
             echo tmp2dbAfd3Women::execute(['small']);
-            echo tweak::execute(['muller-234-women.yml']);
+*/
+            echo filltweak::execute(['muller-234-women.yml']);
             
-            echo occugroups::execute();
+            echo occus2::execute();
         }
         
         if($param == 'finalize' || $param == 'all'){

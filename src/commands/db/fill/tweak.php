@@ -1,15 +1,15 @@
 <?php
 /******************************************************************************
     
-    Updates persons in the database from a tweak file (in data/build/tweak)
+    Updates persons in the database from a tweak file (in data/db/tweak)
     
     @license    GPL
     @history    2021-08-12 14:28:11+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\db\fill;
 
-use g5\patterns\Command;
-use g5\Config;
+use tiglib\patterns\Command;
+use g5\app\Config;
 use g5\model\Tweak as ModelTweak;
 use g5\model\Person;
 
@@ -17,7 +17,7 @@ class tweak implements Command {
     
     /** 
         @param  $params Array containing one element:
-                    path to the yaml file containing the tweaks, relative to data/build/tweak (see config.yml).
+                    path to the yaml file containing the tweaks, relative to data/db/tweak.
         @return report.
     **/
     public static function execute($params=[]): string {
@@ -27,7 +27,7 @@ class tweak implements Command {
         if(count($params) != 1){
             return "MISSING PARAMETER: this command needs the path to the file containing the tweaks\n";
         }
-        $yamlfile = Config::$data['dirs']['build'] . DS . 'tweak' . DS . $params[0];
+        $yamlfile = Config::$data['dirs']['db'] . DS . 'tweak' . DS . $params[0];
         $yaml = @yaml_parse_file($yamlfile);
         if($yaml === false){
             return "FILE DOES NOT EXIST: $yamlfile\n";

@@ -12,8 +12,8 @@
 namespace g5\commands\newalch\ertel4391;
 
 use g5\G5;
-use g5\Config;
-use g5\patterns\Command;
+use g5\app\Config;
+use tiglib\patterns\Command;
 use tiglib\arrays\csvAssociative;
                                      
 class ertel2skeptics implements Command {

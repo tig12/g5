@@ -6,7 +6,7 @@
     @license    GPL
     @history    2019-05-13 15:09:10+02:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\patterns;
+namespace g5\app;
 
 interface Router{
     

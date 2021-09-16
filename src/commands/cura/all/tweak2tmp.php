@@ -12,8 +12,8 @@
 namespace g5\commands\cura\all;
 
 use g5\G5;
-use g5\Config;
-use g5\patterns\Command;
+use g5\app\Config;
+use tiglib\patterns\Command;
 use g5\commands\cura\Cura;
 use g5\model\Group;
 use g5\model\Person;
@@ -32,7 +32,7 @@ class tweak2tmp implements Command {
             return "WRONG USAGE : useless parameter : {$params[2]}\n";
         }
         $datafile = $params[0];
-        $tweaksFile = Config::$data['dirs']['build'] . DS . 'cura-tweak' . DS . $datafile . '.yml';
+        $tweaksFile = Config::$data['dirs']['init'] . DS . 'cura-tweak' . DS . $datafile . '.yml';
         
         $report = "--- $datafile tweak2tmp ---\n";
         

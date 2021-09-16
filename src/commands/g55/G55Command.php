@@ -16,7 +16,7 @@
 ********************************************************************************/
 namespace g5\commands\g55;
 
-use g5\patterns\Command;
+use tiglib\patterns\Command;
 
 class G55Command implements Command {
 

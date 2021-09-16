@@ -7,7 +7,7 @@
 ********************************************************************************/
 namespace g5\model;
 
-use g5\Config;
+use g5\app\Config;
 use tiglib\arrays\csvAssociative;
 
 class Occupation {
@@ -16,6 +16,8 @@ class Occupation {
         List of csv files containing the definitions of occupations.
         Relative to data/model/occu
     **/
+// TODO remove when 'cura5.csv' and 'gauq-ertel-wd.csv' are refactored
+
     const DEFINITION_FILES = [
         'cura5.csv',
         'gauq-ertel-wd.csv',
@@ -39,7 +41,7 @@ class Occupation {
         Returns the directory where sources are defined, in csv files.
     **/
     public static function getDefinitionDir(): string {
-        return Config::$data['dirs']['model'] . DS . 'occu';
+        return Config::$data['dirs']['db'] . DS . 'occu';
     }
     
     /**

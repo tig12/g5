@@ -8,7 +8,7 @@
 ********************************************************************************/
 namespace g5\commands\wd;
 
-use g5\Config;
+use g5\app\Config;
 
 class Wikidata{
     

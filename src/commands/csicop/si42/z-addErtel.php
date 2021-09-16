@@ -10,7 +10,7 @@
 namespace g5\commands\csicop\si42;
 
 use g5\G5;
-use g5\patterns\Command;
+use tiglib\patterns\Command;
 use g5\commands\newalch\ertel4391\Ertel4391;
 use tiglib\arrays\csvAssociative;
 

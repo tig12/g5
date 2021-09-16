@@ -8,7 +8,7 @@
 ********************************************************************************/
 namespace g5\commands\newalch;
 
-use g5\Config;
+use g5\app\Config;
 use g5\model\Source;
 use g5\commands\muller\AFD;
 
@@ -35,7 +35,7 @@ class Newalch {
     
     /** Returns a Source object for newalchemypress web site. **/
     public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['model'] . DS . self::SOURCE_DEFINITION);
+        return Source::getSource(Config::$data['dirs']['db'] . DS . self::SOURCE_DEFINITION);
     }
     
     // *********************** Raw files manipulation ***********************

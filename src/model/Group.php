@@ -11,9 +11,9 @@
 
 namespace g5\model;
 
-use g5\Config;                           
+use g5\app\Config;                           
 use g5\G5;
-use g5\patterns\DAGStringNode;
+use tiglib\dag\DAGStringNode;
 
 class Group{
     

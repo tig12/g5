@@ -11,8 +11,8 @@
 ********************************************************************************/
 namespace g5\commands\newalch\occu;
 
-use g5\Config;
-use g5\patterns\Command;
+use g5\app\Config;
+use tiglib\patterns\Command;
 use g5\commands\newalch\Newalch;
 use g5\commands\gauquelin\LERRCP;
 use g5\model\Person;

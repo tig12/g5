@@ -7,7 +7,7 @@
 ********************************************************************************/
 namespace g5\commands\g55;
 
-use g5\patterns\Router;
+use g5\app\Router;
 
 class G55Router implements Router{
     

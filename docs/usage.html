@@ -160,7 +160,7 @@ Edit <code>config.yml</code> and adapt some values :
 
 <!-- ************************************* -->
 <h3><a name="2-1-dirs">dirs</a></h3>
-This directive permits to specify the different directories used by the program to store the data it manipulates.
+This directive permits to specify <b>unversioned</b> directories containing data.
 <br>The values can contain either absolute paths or paths relative to root directory.
 <br>Default values are all relative to root directory :
 <pre>
@@ -169,11 +169,10 @@ dirs:
   tmp:    data/tmp
 </pre>
 
-If you look at <code>data/</code> directory, you will see that it contains only 2 sub-directories : <code>raw/</code> and <code>build/</code>.
-<br>This is because these directories contain data necessary to g5, <i>and are versioned with the program</i>. Their locations are imposed and not configurable.
-<br>
-<br>
-Other sub-directories of <code>data/</code>, are not versioned, ignored by git.
+At programm installation, <code>data/</code> directory contains 3 sub-directories : <code>db/</code>, <code>init/</code> <code>raw/</code>.
+<br>These directories contain data necessary to g5, <i>and are versioned with the program</i>. Their locations are imposed and not configurable.
+
+<br><br>Other sub-directories of <code>data/</code>, are not versioned, ignored by git.
 
 <!-- ************************************* -->
 <h3><a name="2-2-db5">db5</a></h3>
@@ -246,9 +245,9 @@ This does a real transformation (converts A3 raw html file to a csv file in data
 As described in <a href="organisation.html">the page about g5 organisation</a>, the program first converts raw data to temporary data, and then imports temporary files in database.
 <br><b>The different steps must be executed in a precise order</b>, because some steps need the result of previous executions to work.
 <br>
-<br>The order of execution is given by the code of class <code>g5\commands\db\fill\history</code>
+<br>The order of execution is given by the code of class <code>g5\commands\db\init\all</code>
 
-<pre>php run-g5.php db fill history</pre>
+<pre>php run-g5.php db init all</pre>
 <pre>
 PARAMETER MISSING
 Possible values for parameter :
@@ -259,7 +258,7 @@ Possible values for parameter :
 
 If 'db' or 'all' are choosen, it also drops existing tables and creates empty ones.
 <br>Then the following command builds the database from scratch :
-<pre>php run-g5.php db fill history all</pre>
+<pre>php run-g5.php db init all all</pre>
 
 
 <!-- ********************************************************************************* -->
@@ -297,7 +296,7 @@ A more flexible mechanism needs to be developed to specify precisely what to out
     
     <li><a href="usage.html">Program usage</a></li>
     <li><a href="organisation.html">Organisation</a></li>
-    <li><a href="db5.html">G5 database</a></li>
+    <li><a href="db.html">G5 database</a></li>
     <li><a href="output-format.html">Output format</a></li>
     
     <li class="bold big1"><a href="https://g5.tig12.net/output">Download results</a></li>

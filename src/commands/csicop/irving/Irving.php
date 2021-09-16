@@ -9,7 +9,7 @@
 namespace g5\commands\csicop\irving;
 
 use g5\G5;
-use g5\Config;
+use g5\app\Config;
 use tiglib\arrays\csvAssociative;
 use g5\model\DB5;
 use g5\model\Source;

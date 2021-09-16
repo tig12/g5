@@ -15,8 +15,8 @@
 namespace g5\commands\cura\E1_E3;
 
 use g5\G5;
-use g5\Config;
-use g5\patterns\Command;
+use g5\app\Config;
+use tiglib\patterns\Command;
 use g5\model\Names;
 use g5\model\Geonames;
 use g5\commands\cura\Cura;

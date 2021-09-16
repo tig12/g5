@@ -2,9 +2,9 @@
 /******************************************************************************
     
     Fills table groop from csv files located in data/model/occu
-    Created groups have type Group::TYPE_OCCU.
+    Each occu is stored in db as a groop of type Group::TYPE_OCCU.
     Creation of occupation groups is only partially done by this command,
-    and must be completed by commands/db/fill/occugroups.
+    and must be completed by occus2.
     In particular, current command doesn't compute
         - field n (nb of persons with this occupation).
         - field children.
@@ -12,16 +12,16 @@
     @license    GPL
     @history    2021-07-28 20:59:37+02:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\commands\db\fill;
+namespace g5\commands\db\init;
 
-use g5\patterns\Command;
-use g5\Config;
+use tiglib\patterns\Command;
+use g5\app\Config;
 use g5\model\DB5;
 use g5\model\Group;
 use g5\model\Occupation;
 use tiglib\arrays\csvAssociative;
 
-class occus implements Command {
+class occus1 implements Command {
     
     /** 
         @param  $params Empty array

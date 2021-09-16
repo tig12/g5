@@ -9,7 +9,7 @@
 ********************************************************************************/
 namespace g5\commands\csicop\si42;
 
-use g5\Config;
+use g5\app\Config;
 
 class SI42 {
     

@@ -10,7 +10,7 @@
 ********************************************************************************/
 namespace g5\commands\cura;
 
-use g5\Config;
+use g5\app\Config;
 use g5\commands\cura\Cura;
 
 class SerieB{

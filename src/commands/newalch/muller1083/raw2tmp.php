@@ -12,8 +12,8 @@
 namespace g5\commands\newalch\muller1083;
 
 use g5\G5;
-use g5\Config;
-use g5\patterns\Command;
+use g5\app\Config;
+use tiglib\patterns\Command;
 use g5\model\Names_fr;
 use tiglib\arrays\csvAssociative;
 

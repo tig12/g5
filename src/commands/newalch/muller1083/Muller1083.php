@@ -7,7 +7,7 @@
 ********************************************************************************/
 namespace g5\commands\newalch\muller1083;
 
-use g5\Config;
+use g5\app\Config;
 use g5\model\Source;
 use g5\model\Group;
 use tiglib\arrays\csvAssociative;

@@ -1,9 +1,9 @@
 
 - see php bug - https://bugs.php.net/bug.php?id=81002
 
-- rename db/fill/ occus and occugroups as occus1 and occus2
+- rename db/init/ occus and occugroups as occus1 and occus2
 
-- integrate muller 1083 fix cura days and names to db/fill/history
+- integrate muller 1083 fix cura days and names to db/init/all
 
 - AFD2: 
 

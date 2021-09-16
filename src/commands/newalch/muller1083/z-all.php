@@ -8,7 +8,7 @@
 namespace g5\commands\newalch\muller1083;
 
 use g5\G5;
-use g5\patterns\Command;
+use tiglib\patterns\Command;
 
 class all implements Command {
     

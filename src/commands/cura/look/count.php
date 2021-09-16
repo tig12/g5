@@ -8,8 +8,8 @@
 ********************************************************************************/
 namespace g5\commands\cura\look;
 
-use g5\Config;
-use g5\patterns\Command;
+use g5\app\Config;
+use tiglib\patterns\Command;
 use g5\commands\gauquelin\LERRCP;
 use g5\commands\cura\Cura;
 use g5\commands\cura\CuraRouter;

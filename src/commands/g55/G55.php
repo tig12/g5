@@ -10,7 +10,7 @@
 ********************************************************************************/
 namespace g5\commands\g55;
 
-use g5\Config;
+use g5\app\Config;
 use g5\commands\cura\Cura;
 use tiglib\arrays\csvAssociative;
 

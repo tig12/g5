@@ -8,8 +8,8 @@
 ********************************************************************************/
 namespace g5\commands\db\fill;
 
-use g5\patterns\Command;
-use g5\Config;
+use tiglib\patterns\Command;
+use g5\app\Config;
 use tiglib\filesystem\globRecursive;
 use g5\model\Source as ModelSource;
 

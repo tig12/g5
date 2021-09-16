@@ -10,8 +10,8 @@
 namespace g5\commands\newalch\muller1083;
 
 use g5\G5;
-use g5\Config;
-use g5\patterns\Command;
+use g5\app\Config;
+use tiglib\patterns\Command;
 
 class tweak2tmp implements Command {
     
@@ -25,7 +25,7 @@ class tweak2tmp implements Command {
             return "WRONG USAGE : useless parameter : {$params[2]}\n";
         }
         $report = "--- muller1083 tweak2tmp ---\n";
-        $yamlfile = Config::$data['dirs']['build'] . DS . 'newalch-tweak' . DS . '1083MED.yml';
+        $yamlfile = Config::$data['dirs']['init'] . DS . 'newalch-tweak' . DS . '1083MED.yml';
         
         // load tweaks in an assoc arrray (keys = NR)
         $yaml = yaml_parse(file_get_contents($yamlfile));

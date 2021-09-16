@@ -14,8 +14,8 @@
 namespace g5\commands\eminence\math;
 
 use g5\G5;
-use g5\Config;
-use g5\patterns\Command;
+use g5\app\Config;
+use tiglib\patterns\Command;
 use g5\model\{Source, Group};
 use tiglib\arrays\sortByKey;
 
@@ -39,7 +39,7 @@ class PDDModel {
     
     /** @return a Source object for the raw file **/
     public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['model'] . DS . self::SOURCE_DEFINITION);
+        return Source::getSource(Config::$data['dirs']['db'] . DS . self::SOURCE_DEFINITION);
     }
     
     // *********************** Raw files manipulation ***********************

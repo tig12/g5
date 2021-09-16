@@ -8,7 +8,7 @@
 ********************************************************************************/
 namespace g5\commands\wd\harvest;
 
-use g5\patterns\Command;
+use tiglib\patterns\Command;
 use g5\commands\wd\Wikidata;
 use tiglib\misc\dosleep;
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Data model | Gauquelin5</title>
+    <title>Open Gauquelin Database | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="">
     <meta name="robots" content="index,follow">
@@ -31,20 +31,18 @@
 
 <header>
 <h1>
-Gauquelin5 database
-<div class="subtitle">(db5)</div>
+Open Gauquelin Database
+<div class="subtitle">(ogdb)</div>
 </h1>
 <div class="intro">
-Gauquelin5 database is used to merge the data manipulated by g5 ; it contains the notions of <b>Source</b>, <b>Person</b>, <b>Group</b> and <b>Occupation</b>.
+Data processed by g5 are imported in a postgresql database, named the <b>Open Gauquelin Database</b>, abbreviated <b>ogdb</b>.
+<br>It contains the notions of <b><a href="db-source.html">Source</a></b>, <b><a href="db-person.html">Person</a></b>, <b><a href="db-group.html">Group</a></b> and <b>Occupation</b>.
 </div>
 </header>
 
 <article>
 <nav class="toc">
     <ul>
-        <li>
-            <a href="#flow">Flow</a>
-        </li>
         <li>
             <a href="#data-model">Data model</a>
         </li>
@@ -55,15 +53,6 @@ Gauquelin5 database is used to merge the data manipulated by g5 ; it contains th
             </ul>
         </li>
         <li>
-            <a href="#person">Person</a>
-            <ul>
-                <li><a href="#4-1-sources-ids-in-sources">sources - ids_in_sources</a></li>
-                <li><a href="#4-2-raw">raw</a></li>
-                <li><a href="#4-3-history">history</a></li>
-                <li><a href="#4-4-to-check">to-check</a></li>
-            </ul>
-        </li>
-        <li>
             <a href="#implementation-details">Implementation details</a>
         </li>
         <li>
@@ -71,16 +60,6 @@ Gauquelin5 database is used to merge the data manipulated by g5 ; it contains th
         </li>
     </ul>
 </nav>
-
-
-
-
-
-
-
-<!-- ********************************************************************************* -->
-<h2><a name="flow">Flow</a></h2>
-<img class="border margin padding" src="img/db5-flow.svg" alt="">
 
 
 <!-- ********************************************************************************* -->
@@ -107,8 +86,7 @@ Read :
 
 <ul class="spaced">
     <li>
-        <div class="bold">Source</div>
-        <!-- <div class="bold"><a href="db5-source.html">Source</a></div> -->
+        <div class="bold"><a href="db-source.html">Source</a></div>
         Information sources, origin of the data manipulated by g5.
         <br>The link between Source and Source permits to handle the notion of parent source.
         <br>For example, the source called <code>a1</code> refers to the html web page <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdA1y.html">cura.free.fr/gauq/902gdA1y.html</a>
@@ -116,13 +94,11 @@ Read :
         <br>One source can have several parents.
     </li>
     <li>
-        <div class="bold">Person</div>
-        <!-- <div class="bold"><a href="db5-person.html">Person</a></div> -->
+        <div class="bold"><a href="db-person.html">Person</a></div>
         Famous people who are studied.
     </li>
     <li>
-        <div class="bold">Group</div>
-        <!-- <div class="bold"><a href="db5-group.html">Group</a></div> -->
+        <div class="bold"><a href="db-group.html">Group</a></div>
         A set of persons
         <br>The link between Group and Group permits to handle the notion of sub-group.
         <br>One group can be sub-group of several groups.
@@ -169,216 +145,6 @@ All entities of this database have a field called <b>slug</b>, unique within eac
 
 <br><br>Group and source slug are defined by humans, in the code for groups and or in files of <code>data/model/source</code> for sources. 
 
-
-<!-- ********************************************************************************* -->
-<h2><a name="person">Person</a></h2>
-
-The structure of a person is given by <code>src/model/Person.yml</code>
-<pre>
-slug:
-
-to-check:         # true or false - related to field "notes"
-
-trust:
-trust-details: []
-
-sources: []
-# key / value pairs
-# key = source slug ; value = local id in the given source
-ids-in-sources: []
-
-sex:
-
-name:
-  usual:
-  given:
-  family:
-  spouse:
-  official:         # As written in the birth certificate
-    family:
-    given:
-  nobl:             # nobiliary-particle: de d' di del von...
-  fame:             # stage, scene
-    full:           # eg Mistinguett or Stromae
-    family: 
-    given: 
-  alter: []         # alternative names, like nicknames, or author names
-
-# occupation codes
-occus: []
-
-birth:
-  date:     # exact date (day and hour) of the birth certificate
-  tzo:      # timezone offset
-  date-ut:  # date converted to Univesal Time
-  note:     # eg "LMT"
-  place:
-    name:
-    c2:
-    c3:
-    cy:
-    geoid:
-    lg:
-    lat:
-      
-death:
-  date:     # exact date of the birth certificate
-  tz:       # timezone offset
-  date-ut:  # date converted to Univesal Time
-  note:     # eg "LMT"
-  place:
-    name:
-    c2:
-    c3:
-    cy:
-    geoid:
-    lg:
-    lat:
-
-notes: []   # array of free notes
-
-raw: []
-
-history: []
-</pre>
-
-This model permits to keep a precise trace of the transformations done on data.
-
-<!-- ************************************* -->
-<h3><a name="4-1-sources-ids-in-sources">sources - ids_in_sources</a></h3>
-
-These fields express the link between a person an information sources.
-<br>Example (in json syntax) :
-<pre>
-# field sources
-    ["a6", "e1", "e3"]
-    
-# field ids_in_sources 
-    {
-        "a6": "580",
-        "e1": "1477",
-        "e3": "1092",
-        "cura5": "A6-580"
-    }
-</pre>
-Example of Moinot Pierre 1920-03-29, present in 3 different files of cura.free.fr.
-<br>Note : <code>ids_in_sources["cura5"]</code> is the person's <a href="cura.html#gauquelin-unique-id">Gauquelin unique id</a>.
-
-<!-- ************************************* -->
-<h3><a name="4-2-raw">raw</a></h3>
-
-This field permits to the fields of a person with the values of the raw data, ti eventually identify errors made during database construction.
-
-<br><br>Associative array ;
-<br>keys = source slug
-<br>values = values of the person in the given source (errors not corrected).
-<br>Example : 
-<pre>
-{
-    "a6": {
-        "H": "13",
-        "MN": "40",
-        "TZ": "-1",
-        "COD": "TA",
-        "COU": "I",
-        "DAY": "20",
-        "LAT": "40N30",
-        "LON": "17E30",
-        "MON": "8",
-        "NUM": "814",
-        "PRO": "W",
-        "SEC": "4",
-        "YEA": "1884",
-        "CITY": "TARANTO"
-    },
-    "5muller_writers": {
-        "LG": "-17,5",
-        "DAY": "20",
-        "LAT": "40,5",
-        "MIN": "30",
-        "TZO": "-0,83",
-        "HOUR": "13",
-        "NAME": "2M Acquaviva, Cosimo",
-        "YEAR": "1884",
-        "MONTH": "08",
-        "PLACE": "Taranto TA"
-    }
-}</pre>
-
-It shows a record found in Gauquelin data (file A6) and in Müller data (file <code>5muller_writers.xslx</code>, see <a href="muller-402-writers.html">page Müller 402</a>).
-
-<!-- ************************************* -->
-<h3><a name="4-3-history">history</a></h3>
-
-Permits to track the successive transformations operated on a person.
-
-<br><br>Regular array ; each element contains an associative array with 4 key / value pairs :
-<ul>
-    <li><code>command</code> : the g5 command issued to update this person.</li>
-    <li><code>date</code> : date of execution of the command.</li>
-    <li><code>source</code> : slug of the source of informations.</li>
-    <li>
-        <code>values</code> : the person fields that this command updated.
-        <br>It only contains the updated fields, not all the informations coming from the source.
-    </li>
-</ul>
-
-<pre>
-[
-    {
-        "date": "2020-09-21T14:49:58+02:00",
-        "source": "a6",
-        "values": {
-            "name": {
-                "given": "Cosimo",
-                "family": "Acquaviva"
-            },
-            "birth": {
-                "place": {
-                    "c2": "TA",
-                    "c3": "",
-                    "cy": "IT",
-                    "lg": "17.22972",
-                    "lat": "40.47611",
-                    "name": "Taranto",
-                    "geoid": "3165926"
-                },
-                "date-ut": "1884-08-20 12:40:04"
-            },
-            "occus": ["WR"],
-            "trust": 4
-        },
-        "command": "cura A6 tmp2db"
-    },
-    {
-        "date": "2020-09-21T14:50:32+02:00",
-        "source": "5muller_writers",
-        "values": {
-            "name": {
-                "given": "Cosimo",
-                "family": "Acquaviva"
-            },
-            "birth": {
-                "tzo": "+00:50",
-                "date": "1884-08-20 13:30",
-                "note": "",
-                "place": {
-                    "name": "Taranto"
-                }
-            },
-            "notes": []
-        },
-        "command": "cura muller402 tmp2db"
-    }
-]
-</pre>
-
-<!-- ************************************* -->
-<h3><a name="4-4-to-check">to-check</a></h3>
-Not implemented yet.
-<br>While importing data, it's sometimes possible to identify dubious values, and mark them, in order to build a list of records needing human check.
-
-
 <!-- ********************************************************************************* -->
 <h2><a name="implementation-details">Implementation details</a></h2>
 The database uses <a href="https://www.postgresql.org/">postgresql</a>.
@@ -411,7 +177,7 @@ or
     
     <li><a href="usage.html">Program usage</a></li>
     <li><a href="organisation.html">Organisation</a></li>
-    <li><a href="db5.html">G5 database</a></li>
+    <li><a href="db.html">G5 database</a></li>
     <li><a href="output-format.html">Output format</a></li>
     
     <li class="bold big1"><a href="https://g5.tig12.net/output">Download results</a></li>

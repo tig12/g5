@@ -8,7 +8,7 @@
 ********************************************************************************/
 namespace g5\commands\newalch\ertel4391;
 
-use g5\patterns\Command;
+use tiglib\patterns\Command;
 use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;

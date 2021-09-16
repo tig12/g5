@@ -12,9 +12,9 @@
 
 define('DS', DIRECTORY_SEPARATOR);
 
-require_once __DIR__ . DS . 'src' . DS . 'init' . DS . 'init.php';
+require_once __DIR__ . DS . 'src' . DS . 'app' . DS . 'init.php';
 
-use g5\Run;
+use g5\app\Run;
 
 //
 // parameter checking

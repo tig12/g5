@@ -8,10 +8,10 @@
 ********************************************************************************/
 namespace g5\commands\newalch\muller402;
 
-use g5\Config;
+use g5\app\Config;
 use g5\model\DB5;
 use g5\model\Group;
-use g5\patterns\Command;
+use tiglib\patterns\Command;
 use g5\commands\muller\AFD;
 use g5\commands\gauquelin\LERRCP;
 

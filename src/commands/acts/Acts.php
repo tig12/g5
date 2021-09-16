@@ -7,7 +7,7 @@
 ********************************************************************************/
 namespace g5\commands\acts;
 
-use g5\Config;
+use g5\app\Config;
 use tiglib\arrays\csvAssociative;
 
 Acts::init();

@@ -6,9 +6,9 @@
     @license    GPL
     @history    2021-07-22 15:30:56+02:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\commands\db\fill;
+namespace g5\commands\db\init;
 
-use g5\patterns\Command;
+use tiglib\patterns\Command;
 use g5\model\DB5;
 use g5\model\Person;
 

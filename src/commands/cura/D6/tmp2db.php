@@ -7,7 +7,7 @@
 ********************************************************************************/
 namespace g5\commands\cura\D6;
 
-use g5\patterns\Command;
+use tiglib\patterns\Command;
 use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
