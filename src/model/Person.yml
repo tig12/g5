@@ -7,25 +7,6 @@ id:
 
 slug:
 
-# key / value pairs
-# keys: string identifying the kind of check needed
-# keys can be any string - standard keys exist, see constants of class model.Todo
-# values: description of the reason leading to the need to check the person
-todo: []
-
-# overall trust level (=min(trust-details))
-trust:
-# different trust levels for fields
-# key / value pairs
-# keys: field name with dot syntax (ex "birth.date")
-# values: trust level of the field
-trust-details: []
-
-sources: []
-# key / value pairs
-# key = source slug ; value = local id within the given source
-ids-in-sources: []
-
 sex:
 
 name:
@@ -43,11 +24,11 @@ name:
     given: 
   alter: []         # alternative names, like nicknames, or author names
 
-# occupation codes
+# occupation slugs
 occus: []
 
 birth:
-  date:     # exact date (day and hour) of the birth certificate
+  date:     # date of the birth certificate
   tzo:      # timezone offset
   date-ut:  # date converted to Universal Time
   note:     # eg "LMT" or "notime"
@@ -62,7 +43,7 @@ birth:
     lat:
       
 death:
-  date:     # exact date of the birth certificate
+  date:     # date of the birth certificate
   tz:       # timezone offset
   date-ut:  # date converted to Univesal Time
   note:     # eg "LMT" or "notime"
@@ -76,11 +57,27 @@ death:
     lg:
     lat:
 
-civil-registry: []  # links with directory acts/
+# Regular array of source slugs
+sources: []
+
+# key / value pairs
+# key = source slug
+# value = local id within the given source
+ids-in-sources: []
+
+# Reliability of the information
+# Can be a number or a key-value map
+# See docs/db-person.html for details
+trust:
+
+# regular array of paths to sub-directories of acts/
+acts: []
 
 history: []
 
-free: []    # key value pairs - not used so far, maybe will be removed
-
-notes: []   # array of free notes
+# key / value pairs
+# keys: string identifying the kind of check needed
+# keys can be any string - standard keys exist, see constants of class model.Todo
+# values: description of the reason leading to the need to check the person
+todo: []
 

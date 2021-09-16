@@ -268,7 +268,7 @@
     spouse: Valette
   birth:
     date: '1860-02-11 06:00'
-  civil-registry:
+  acts:
     - birth/1860/02/11/eymery-marguerite-1860-02-11
   BUILD-NOTES:
     - 2021-07-10 17:20:03+01:00 Date checked on civil registry

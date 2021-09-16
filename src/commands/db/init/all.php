@@ -164,7 +164,6 @@ class all implements Command {
         //  2 - Import tmp files to db
         //
         if($param == 'db' || $param == 'all'){
-/* 
             echo "***********************\n";
             echo "***  Fill database  ***\n";
             echo "***********************\n";
@@ -195,7 +194,6 @@ class all implements Command {
             echo tmp2dbIrving::execute(['small']);
             
             echo tmp2dbAfd3Women::execute(['small']);
-*/
             echo filltweak::execute(['muller-234-women.yml']);
             
             echo occus2::execute();

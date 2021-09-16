@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Person | Open Gauquelin database</title>
+    <title>Group | Open Gauquelin database</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="">
     <meta name="robots" content="index,follow">
@@ -12,7 +12,7 @@
     <meta name="dcterms.dateCopyrighted" content="2019">
     <!-- 
     tigsite:
-        history: 2021-09-16 21:28:10+02:00, Thierry Graff : Creation
+        history: 2021-09-16 22:12:44+02:00, Thierry Graff : Creation
     -->
 </head>
 
@@ -30,7 +30,7 @@
 </nav>
 
 <header>
-<h1>Person</h1>
+<h1>Group</h1>
 <div class="intro">
 
 </div>
@@ -39,168 +39,27 @@
 <article>
 
 
-The structure of a person is given by <code>src/model/Person.yml</code>
-
-This model permits to keep a precise trace of the transformations done on data.
-
-
 <pre>
-    public static function row2person($row)
-    public static function getBySlug($slug): ?Person
-    public static function getBySourceId($sourceSlug, $idInSource): ?Person 
-    public static function getByOccu($occus)     
-    public static function doComputeSlug($family, $given, $date): string 
-    public static function computeNames(array $array_name) 
+    public static function getBySlug($slug): ?Group
+    public static function loadAllFromDB()
+    
+    public static function getAllAncestors()
+    private static function computeAllAncestors()
+    public static function getDescendants(string $groupSlug, bool $includeSeed)
     
     public function __construct()
-    public function getIdFromSlug($slug) 
-    public function computeSlug() 
-    private function birthday(): string 
-    public function updateFields($replace)
-    public function addIdInSource($sourceSlug, $id)
-    public function addSource($sourceSlug)
-    public function addOccu($occuSlug)
-    public function addOccus($occuSlugs)
-    public function addHistory($command, $sourceSlug, $newdata, $rawdata)
-    public function addAlternativeNames($newdata)
-    public function addAct($newdata)
-    public function insert(): int
-    public function update() 
-</pre>
-
-<!-- ************************************* -->
-<h3><a name="4-1-sources-ids-in-sources">sources - ids_in_sources</a></h3>
-
-These fields express the link between a person an information sources.
-<br>Example (in json syntax) :
-<pre>
-# field sources
-    ["a6", "e1", "e3"]
     
-# field ids_in_sources 
-    {
-        "a6": "580",
-        "e1": "1477",
-        "e3": "1092",
-        "cura5": "A6-580"
-    }
+    public function insert(): int
+    public function update(bool $updateMembers=true)
+    public function addMember($pid)
+    public function computeMembers()
+    public function insertMembers()
+    public function updateMembers()
+    public function deleteMembers()
+    public function computePersonMembers(bool $force=false)
+    public function exportCsv($csvFile, $csvFields, $map=[], $fmap=[], $sort=false, $filters=[], $dozip=false)
+
 </pre>
-Example of Moinot Pierre 1920-03-29, present in 3 different files of cura.free.fr.
-<br>Note : <code>ids_in_sources["cura5"]</code> is the person's <a href="cura.html#gauquelin-unique-id">Gauquelin unique id</a>.
-
-<!-- ************************************* -->
-<h3><a name="4-2-raw">raw</a></h3>
-
-This field permits to the fields of a person with the values of the raw data, ti eventually identify errors made during database construction.
-
-<br><br>Associative array ;
-<br>keys = source slug
-<br>values = values of the person in the given source (errors not corrected).
-<br>Example : 
-<pre>
-{
-    "a6": {
-        "H": "13",
-        "MN": "40",
-        "TZ": "-1",
-        "COD": "TA",
-        "COU": "I",
-        "DAY": "20",
-        "LAT": "40N30",
-        "LON": "17E30",
-        "MON": "8",
-        "NUM": "814",
-        "PRO": "W",
-        "SEC": "4",
-        "YEA": "1884",
-        "CITY": "TARANTO"
-    },
-    "5muller_writers": {
-        "LG": "-17,5",
-        "DAY": "20",
-        "LAT": "40,5",
-        "MIN": "30",
-        "TZO": "-0,83",
-        "HOUR": "13",
-        "NAME": "2M Acquaviva, Cosimo",
-        "YEAR": "1884",
-        "MONTH": "08",
-        "PLACE": "Taranto TA"
-    }
-}</pre>
-
-It shows a record found in Gauquelin data (file A6) and in Müller data (file <code>5muller_writers.xslx</code>, see <a href="muller-402-writers.html">page Müller 402</a>).
-
-<!-- ************************************* -->
-<h3><a name="4-3-history">history</a></h3>
-
-Permits to track the successive transformations operated on a person.
-
-<br><br>Regular array ; each element contains an associative array with 4 key / value pairs :
-<ul>
-    <li><code>command</code> : the g5 command issued to update this person.</li>
-    <li><code>date</code> : date of execution of the command.</li>
-    <li><code>source</code> : slug of the source of informations.</li>
-    <li>
-        <code>values</code> : the person fields that this command updated.
-        <br>It only contains the updated fields, not all the informations coming from the source.
-    </li>
-</ul>
-
-<pre>
-[
-    {
-        "date": "2020-09-21T14:49:58+02:00",
-        "source": "a6",
-        "values": {
-            "name": {
-                "given": "Cosimo",
-                "family": "Acquaviva"
-            },
-            "birth": {
-                "place": {
-                    "c2": "TA",
-                    "c3": "",
-                    "cy": "IT",
-                    "lg": "17.22972",
-                    "lat": "40.47611",
-                    "name": "Taranto",
-                    "geoid": "3165926"
-                },
-                "date-ut": "1884-08-20 12:40:04"
-            },
-            "occus": ["WR"],
-            "trust": 4
-        },
-        "command": "cura A6 tmp2db"
-    },
-    {
-        "date": "2020-09-21T14:50:32+02:00",
-        "source": "5muller_writers",
-        "values": {
-            "name": {
-                "given": "Cosimo",
-                "family": "Acquaviva"
-            },
-            "birth": {
-                "tzo": "+00:50",
-                "date": "1884-08-20 13:30",
-                "note": "",
-                "place": {
-                    "name": "Taranto"
-                }
-            },
-            "notes": []
-        },
-        "command": "cura muller402 tmp2db"
-    }
-]
-</pre>
-
-<!-- ********************************************************************************* -->
-<h2>field todo</h2>
-While importing data, it's sometimes possible to identify dubious values, and mark them, in order to build a list of records needing human check.
-
 
 
 </article>

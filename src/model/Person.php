@@ -28,20 +28,6 @@ class Person {
                     Can be partial (containing only parts of the fields).
     **/
     public static function row2person($row){
-        if(isset($row['todo'])){
-            $row['todo'] = json_decode($row['todo'], true);
-        }
-        if(isset($row['sources'])){
-            $row['sources'] = json_decode($row['sources'], true);
-        }
-        if(isset($row['ids_in_sources'])){
-            $row['ids-in-sources'] = json_decode($row['ids_in_sources'], true);
-            unset($row['ids_in_sources']);
-        }
-        if(isset($row['trust_details'])){
-            $row['trust-details'] = json_decode($row['trust_details'], true);
-            unset($row['trust_details']);
-        }
         if(isset($row['name'])){
             $row['name'] = json_decode($row['name'], true);                             
         }
@@ -54,11 +40,24 @@ class Person {
         if(isset($row['death'])){
             $row['death'] = json_decode($row['death'], true);
         }
+        if(isset($row['sources'])){
+            $row['sources'] = json_decode($row['sources'], true);
+        }
+        if(isset($row['ids_in_sources'])){
+            $row['ids-in-sources'] = json_decode($row['ids_in_sources'], true);
+            unset($row['ids_in_sources']);
+        }
+        if(isset($row['trust'])){
+            $row['trust'] = json_decode($row['trust'], true);
+        }
+        if(isset($row['acts'])){
+            $row['acts'] = json_decode($row['acts'], true);
+        }
         if(isset($row['history'])){
             $row['history'] = json_decode($row['history'], true);
         }
-        if(isset($row['notes'])){
-            $row['notes'] = json_decode($row['notes'], true);
+        if(isset($row['todo'])){
+            $row['todo'] = json_decode($row['todo'], true);
         }
         $p = new Person();
         $p->data = $row;
@@ -313,19 +312,25 @@ class Person {
         ];
     }
     
-    public function addNote($note){
-        $this->data['notes'][] = $note;
-    }
-    
+    /** 
+        Adds an array of alternative names.
+    **/
     public function addAlternativeNames($newdata){
-        if(!in_array($newdata, $this->data['name']['alter'])){
-            $this->data['name']['alter'] = $newdata;
+        foreach($newdata as $alter){
+            if(!in_array($alter, $this->data['name']['alter'])){
+                $this->data['name']['alter'][] = $alter;
+            }
         }
     }
     
-    public function addCivilRegistries($newdata){
-        if(!in_array($newdata, $this->data['name']['alter'])){
-            $this->data['name']['alter'] = $newdata;
+    /** 
+        Adds an array of act
+    **/
+    public function addActs($newdata){
+        foreach($newdata as $act){
+            if(!in_array($act, $this->data['acts'])){
+                $this->data['acts'][] = $act;
+            }
         }
     }
     
@@ -340,33 +345,31 @@ class Person {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("insert into person(
             slug,
-            todo,
-            sources,
-            ids_in_sources,
-            trust,
-            trust_details,
             sex,
             name,
             occus,
             birth,
             death,
+            sources,
+            ids_in_sources,
+            trust,
+            acts,
             history,
-            notes
-            )values(?,?,?,?,?,?,?,?,?,?,?,?,?) returning id");
+            todo
+            )values(?,?,?,?,?,?,?,?,?,?,?,?) returning id");
         $stmt->execute([
             $this->data['slug'],
-            json_encode($this->data['todo']),
-            json_encode($this->data['sources']),
-            json_encode($this->data['ids-in-sources']),
-            $this->data['trust'],
-            json_encode($this->data['trust-details']),
             $this->data['sex'],
             json_encode($this->data['name']),
             json_encode($this->data['occus']),
             json_encode($this->data['birth']),
             json_encode($this->data['death']),
+            json_encode($this->data['sources']),
+            json_encode($this->data['ids-in-sources']),
+            json_encode($this->data['trust']),
+            json_encode($this->data['acts']),
             json_encode($this->data['history']),
-            json_encode($this->data['notes']),
+            json_encode($this->data['todo']),
         ]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         return $res['id'];
@@ -380,34 +383,32 @@ class Person {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("update person set
             slug=?,
-            todo=?,
-            sources=?,
-            ids_in_sources=?,
-            trust=?,
-            trust_details=?,
             sex=?,
             name=?,
             occus=?,
             birth=?,
             death=?,
+            sources=?,
+            ids_in_sources=?,
+            trust=?,
+            acts=?,
             history=?,
-            notes=?
+            todo=?
             where id=?
             ");
         $stmt->execute([
             $this->data['slug'],
-            json_encode($this->data['todo']),
-            json_encode($this->data['sources']),
-            json_encode($this->data['ids-in-sources']),
-            $this->data['trust'],
-            json_encode($this->data['trust-details']),
             $this->data['sex'],
             json_encode($this->data['name']),
             json_encode($this->data['occus']),
             json_encode($this->data['birth']),
             json_encode($this->data['death']),
+            json_encode($this->data['sources']),
+            json_encode($this->data['ids-in-sources']),
+            json_encode($this->data['trust']),
+            json_encode($this->data['acts']),
             json_encode($this->data['history']),
-            json_encode($this->data['notes']),
+            json_encode($this->data['todo']),
             $this->data['id'],
         ]);
     }

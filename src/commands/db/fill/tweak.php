@@ -68,9 +68,9 @@ class tweak implements Command {
                 $p->addAlternativeNames($tweak['name']['alter']);
                 unset($new['name']['alter']);
             }
-            if(isset($tweak['civil-registry'])){
-                $p->addCivilRegistries($tweak['civil-registry']);
-                unset($new['civil-registry']);
+            if(isset($tweak['acts'])){
+                $p->addActs($tweak['acts']);
+                unset($new['acts']);
             }
             
             $p->updateFields($new);
