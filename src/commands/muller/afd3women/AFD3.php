@@ -171,13 +171,7 @@ class AFD3 {
         'AR 06' => 'singer', // 21 persons
         'AR 07' => 'musician', // 3 persons
         'AR 08' => 'X', // 11 persons - more precise infos in tweaks file
-        'SC 01' => 'mathematician', // 1 persons
-        'SC 02' => 'X', // 1 persons - Irène Joliot-Curie - more precise infos in tweaks file
-        'SC 03' => 'X', // 2 persons - more precise infos in tweaks file
-        'SC 04' => 'physician', // 2 persons
-        'SC 05' => 'social-scientist', // 8 persons
-        'SC 06' => 'historian-of-science', // 1 persons
-        'SC 07' => 'romanist', // 1 persons
+        
         'WA 02' => 'aircraft-pilot', // 2 persons
         'WA 04' => 'politician', // 7 persons
         'WA 05' => 'religious-leader', // 2 persons
@@ -186,6 +180,14 @@ class AFD3 {
         'WA 09' => 'X', // 4 persons - more precise infos in tweaks file
         'WA 10' => 'suffragette', // 7 persons
         'WA 12' => 'partner-of-celebrity', // 8 persons
+        
+        'SC 01' => 'mathematician', // 1 persons
+        'SC 02' => 'X', // 1 persons - Irène Joliot-Curie - more precise infos in tweaks file
+        'SC 03' => 'X', // 2 persons - more precise infos in tweaks file
+        'SC 04' => 'physician', // 2 persons
+        'SC 05' => 'social-scientist', // 8 persons
+        'SC 06' => 'historian-of-science', // 1 persons
+        'SC 07' => 'romanist', // 1 persons
     ];
     
     /** Conversion to ISO 3166. **/

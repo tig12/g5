@@ -35,6 +35,9 @@
 - Check :
     GQ: A2-1462  Gayda Tullio                            1882-10-19 05:55:04 ROMA
     GQ: A3-1697  Gauquelin-A3-1697                       1882-10-19 20:10:04 ROMA
+- Check :
+    A2-3203 Becker
+    A2-3204 Friedrich	Becker
 
 - in all tmp2db, when $p->addHistory is done,
     $p->addSource and $p->addIdInSource are not taken into account

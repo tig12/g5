@@ -297,29 +297,38 @@ class AFD2 {
         Note: sometimes doesn't follow Müller, after checking on wikipedia.
         X means useless because handled by tweaks file.
     **/
+        
     const OCCUS = [
-        'AR 01' => 'fictional-writer', // 85 persons
-        'AR 02' => 'factual-writer', // 12 persons
-        'AR 03' => 'actor', // 43 persons
-        'AR 04' => 'composer', // 1 persons
-        'AR 06' => 'singer', // 21 persons
-        'AR 07' => 'musician', // 3 persons
-        'AR 08' => 'X', // 11 persons - more precise infos in tweaks file
-        'SC 01' => 'mathematician', // 1 persons
-        'SC 02' => 'X', // 1 persons - Irène Joliot-Curie - more precise infos in tweaks file
-        'SC 03' => 'X', // 2 persons - more precise infos in tweaks file
-        'SC 04' => 'physician', // 2 persons
-        'SC 05' => 'social-scientist', // 8 persons
-        'SC 06' => 'historian-of-science', // 1 persons
-        'SC 07' => 'romanist', // 1 persons
-        'WA 02' => 'aircraft-pilot', // 2 persons
-        'WA 04' => 'politician', // 7 persons
-        'WA 05' => 'religious-leader', // 2 persons
-        'WA 06' => 'monarch', // 10 persons
-        'WA 08' => 'revolutionary', // 2 persons
-        'WA 09' => 'X', // 4 persons - more precise infos in tweaks file
-        'WA 10' => 'suffragette', // 7 persons
-        'WA 12' => 'partner-of-celebrity', // 8 persons
+        'AR 01' => 'fictional-writer', // 113 persons
+        'AR 02' => 'factual-writer', // 5 persons
+        'AR 03' => 'actor', // 58 persons
+        'AR 04' => 'composer', // 46 persons
+        'AR 05' => 'conductor', // 11 persons
+        'AR 06' => 'singer', // 8 persons
+        'AR 07' => 'musician', // 12 persons
+        'AR 08' => 'artist', // 70 persons - painter or sculptor => loss of information
+        'AR 09' => 'architect', // 8 persons
+        
+        'MA 01' => 'miscelaneous', // 29 persons - Engineer, Inventor - meaningless, should be treated one by one
+        'MA 02' => 'miscelaneous', // 3 persons
+        'MA 03' => 'executive', // 9 persons
+        'MA 04' => 'politician', // 42 persons
+        'MA 05' => 'religious-leader', // 7 persons
+        'MA 06' => 'monarch', // 10 persons
+        'MA 07' => 'military-personnel', // 12 persons
+        'MA 08' => 'revolutionary', // 6 persons
+        'MA 09' => 'miscelaneous', // 5 persons - Reformer - meaningless, should be treated one by one
+        'MA 13' => 'sportsperson', // 32 persons
+        
+        'SC 01' => 'mathematician', // 6 persons
+        'SC 02' => 'scientist', // 24 persons - Physicist, Astronomer => loss of information
+        'SC 03' => 'scientist', // 21 persons - Natural scientist => loss of information
+        'SC 04' => 'physician', // 4 persons
+        'SC 05' => 'social-scientist', // 13 persons
+        'SC 06' => 'humanities-scholar', // 29 persons - Philosopher, Theologian => loss of information
+        'SC 07' => 'humanities-scholar', // 19 persons
+        'SC 08' => 'jurist', // 1 persons
+        'SC 09' => 'political-economist', // 9 persons
     ];
     
     /** Conversion to ISO 3166. **/

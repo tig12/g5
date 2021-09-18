@@ -37,6 +37,9 @@ romanist;Q2504617;Romaniste;Romanist;scientist
 social-scientist;Q15319501;Chercheur en sciences sociales;Social scientist;scientist
 zoologist;Q350979;Zoologiste;Zoologist;scientist
 ;;;;
+humanities-scholar;Q16727193;Scientifique de l'esprit;Humanities scholar;researcher
+researcher;Q1650915;Chercheur;Researcher;
+;;;;
 religious-leader;Q15995642;Leader religieux;Religious leader;
 religious;Q2566598;Religieux;Religious;
 mystic;Q12328016;Mystique;Mystic;
@@ -44,5 +47,7 @@ monarch;Q116;Monarque;Monarch;
 revolutionary;Q3242115;Révolutionnaire;Revolutionary;
 saint;Q43115;Saint;Saint;
 ;;;;
+jurist;Q185351;Juriste;Jurist;legal-profession
 lawyer;Q40348;Avocat;Lawyer;legal-profession
 legal-profession;Q15987302;Profession juridique;Legal profession;
+political-economist;Q105572010;Economiste politique;Political economist;

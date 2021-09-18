@@ -409,7 +409,7 @@
 409 Naumann, Friedrich                  25.03.1860 14.50        LMT D   Störmthal (Leipzig)     51 N 21 012 E 23 MA04 56    SE N
 410 Nenni, Pietro                       08.02.1891 07.00 -0.83      I   Faenza                  44 N 17 011 E 53 MA04 56    SG G
 411 Nernst, Walther                     25.06.1864 00.15        LMT DOP Briesen                 53 N 18 018 E 58 SC02 456   SE N
-412 Nicklisch, Heinrich                 19.07.1876 05.00        LMT D   Tettau                  50 N 28 011 E 15 SCO9 57    SE N
+412 Nicklisch, Heinrich                 19.07.1876 05.00        LMT D   Tettau                  50 N 28 011 E 15 SC09 57    SE N
 413 Nietzsche, Friedrich                15.10.1844 10.00        LMT D   Röcken                  51 N 15 012 E 08 SC06 4567  SE N
 414 Nixon, Richard                      09.01.1913 21.30 8.00       USA Yorba Linda (Calif)     33 N 53 117 W 49 MA04 57    SA N
 415 Nono, Luigi                         29.01.1924 14.35 -1.00      I   Venedig                 45 N 26 012 E 20 AR04 57    SE N
@@ -443,7 +443,7 @@
 443 Pirandello, Luigi                   28.06.1867 03.15 -0.88      I   Agrigent                37 N 12 013 E 30 AR01 567   SA N
 444 Piscator, Erwin                     47.12.1893 15.30 -1.00      D   Ulm (Wetzlar)           50 N 33 008 E 30 AR03 567   SE N
 445 Poelzig, Hans                       30.04.1869 11.00        LMT D   Berlin                  52 N 32 013 E 18 AR09 57    SE N
-446 Poincaré, Henri                     29.04.1854 01.00        LMT F   Nancy                   48 N 42 006 E 12 SCO1 467   SG G
+446 Poincaré, Henri                     29.04.1854 01.00        LMT F   Nancy                   48 N 42 006 E 12 SC01 467   SG G
 447 Poincaré, Raymond                   20.08.1860 17.00        LMT F   Bar-le-Duc              48 N 46 005 E 10 MA04 46    SG G
 448 Polanski, Roman                     18.08.1933 10.30 -1.00      F   Paris                   48 N 50 002 E 20 AR03 57    SG G
 449 Ponto, Erich                        14.12.1884 14.30        LMT D   Lübeck                  53 N 52 010 E 41 AR03 57    SE G
@@ -532,13 +532,13 @@
 532 Spengler, Oswald                    29.05.1880 18.30        LMT D   Blankenburg (Harz)      51 N 47 010 E 57 SC07 456   SA N
 533 Spitzweg, Cari                      05.02.1808 04.30 -0.52      D   München                 48 N 08 011 E 34 AR08 4557  SE N
 534 Spranger, Eduard                    27.06.1882 05.00        LMT D   Grof-Lichterfelde       52 N 30 013 E 30 SC07 567   SE N
-535 Stark, Johannes                     15.04.1874 06.00        LMT D   Schickenhof (Amberg)    49 N 27 011 E 52 SCO2 45    SE N
+535 Stark, Johannes                     15.04.1874 06.00        LMT D   Schickenhof (Amberg)    49 N 27 011 E 52 SC02 45    SE N
 536 Staudinger, Hermann                 23.03.1881 23.45        LMT D   Worms                   49 N 38 008 E 22 SC03 457   SE N
 537 Stauffenberg, Claus von             15.11.1907 01.00 -1.00      D   Schloß Jettingen        48 N 24 010 E 26 MA08 56    SE N
 538 Stefano, Giuseppe di                24.07.1921 12.00 -1.00      I   Motta Sta. Anastasia    37 N 30 014 E 58 AR06 57    SA N
 539 Steinberg, William                  01.08.1899 04.30 -1.00      D   Köln                    50 N 57 006 E 57 AR05 57    SE N
 540 Steinway, Heinrich E.               22.02.1797 18.00 -0.44      D   Wolfshagen              51 N 54 010 E 19 MA01 45    SE N
-541 Stern, William                      29.04.1871 02.30        LMT D   Berlin                  52 N 32 013 E 18 SCO5 56    SE N
+541 Stern, William                      29.04.1871 02.30        LMT D   Berlin                  52 N 32 013 E 18 SC05 56    SE N
 542 Sternheim, Carl                     01.04.1878 07.15        LMT D   Leipzig                 51 N 21 012 B 22 AR01 56    SB N
 543 Stirner, Max                        25.10.1806 06.00 -1.03      D   Bayreuth                49 N 57 011 E 35 SC06 57    SE N
 544 Stolz, Robert                       25.08.1880 16.15        LMT A   Graz                    47 N 04 015 E 27 AR04 567   SE N
