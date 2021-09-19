@@ -18,18 +18,18 @@ class raw2tmp implements Command {
     const COUNTRY = 'US';
     
     /**
-        Associations between Cura profession codes and g5 profession codes
+        Associations between Cura profession codes and g5 occupation slugs
     **/
     const PROFESSIONS = [
-        'SP' => 'SP',
-        'MI' => 'MI',
-        'AC' => 'ACT',
-        'PO' => 'PO',
-        'EX' => 'EX',
-        'WR' => 'WR',
-        'SC' => 'SC',
-        'AR' => 'AR',
-        'X'  => 'XX', 
+        'SP' => 'sportsperson',
+        'MI' => 'military-personnel',
+        'AC' => 'actor',
+        'PO' => 'politician',
+        'EX' => 'executive',
+        'WR' => 'writer',
+        'SC' => 'scientist',
+        'AR' => 'artist',
+        'X'  => 'miscelaneous', 
     ];
     
     // *****************************************

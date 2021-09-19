@@ -15,13 +15,13 @@ namespace g5\commands\cura\A;
 
 use g5\G5;
 use g5\model\DB5;
-use tiglib\patterns\Command;
 use g5\commands\gauquelin\LERRCP;
 use g5\commands\cura\Cura;
 use g5\commands\cura\CuraNames;
-use tiglib\arrays\sortByKey;
 use g5\model\Names;
 use g5\model\Names_fr;
+use tiglib\patterns\Command;
+use tiglib\arrays\sortByKey;
 
 class raw2tmp implements Command {
     
@@ -307,7 +307,7 @@ class raw2tmp implements Command {
         if(isset(A::PROFESSIONS_DETAILS[$datafile])){
             $tmp = A::PROFESSIONS_DETAILS[$datafile];
             foreach($tmp as $elts){
-                // $elts looks like that : ['Athlétisme', 1, 86],
+                // $elts looks like that : ['athletics-competitor', 1, 86],
                 if($num >= $elts[1] && $num <= $elts[2]){
                     $res = $elts[0];
                     break;

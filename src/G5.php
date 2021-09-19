@@ -12,7 +12,7 @@ class G5{
     /**
         Path to the yaml file containing the characteristics of g5 program,
         when seen as an information source.
-        Relative to directory data/model/source
+        Relative to directory data/db/source
     **/
     const SOURCE_DEFINITION_FILE = 'g5.yml';
     

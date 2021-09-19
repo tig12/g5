@@ -24,7 +24,7 @@ class Irving {
     
     /**
         Path to the yaml file containing the characteristics of the source.
-        Relative to directory data/model/source
+        Relative to directory data/db/source
     **/
     const LIST_SOURCE_DEFINITION_FILE = 'csicop' . DS . 'rawlins-ertel-irving.yml';
     

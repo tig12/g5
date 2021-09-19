@@ -1,0 +1,98 @@
+slug;wd;fr;en;parents
+actor;Q33999;Acteur;Actor;artist
+aircraft-pilot;Q2095549;Aviateur;Aircraft pilot;sportsperson
+american-football-player;Q19204627;Joueur de football américain;American football player;sportsperson
+architect;Q42973;Architecte;Architect;
+artist;Q483501;Artiste;Artist;
+athletics-competitor;Q11513337;Athléte;Athletics competitor;sportsperson
+bacteriologist;Q15816836;bactériologiste;Bacteriologist;scientist
+badminton-player;Q13141064;Joueur de badminton;Badminton player;sportsperson
+baseball-player;Q10871364;Joueur de baseball;Baseball player;sportsperson
+basketball-player;Q3665646;Joueur de basket-ball;Basketball player;sportsperson
+basque-pelota-player;Q19746576;Joueur de pelote basque;Basque pelota player;sportsperson
+billard-player;Q18544928;Joueur de billard;Billard player;sportsperson
+bobsledder;Q177275;Pilote de bobsleigh;Bobsleigh pilot;winter-sports-practitioner
+bowler;Q4951095;Joueur de bowling;Bowling player;sportsperson
+boxer;Q11338576;Boxeur;Boxer;sportsperson
+canoeist;Q13382566;Canoëiste;Canoeist;sportsperson
+cartoonist;Q1114448;Réalisateur de dessins animés;Cartoonist;artist
+chemist;Q593644;Chimiste;Chemist;scientist
+comedy-writer;Q11914886;Auteur de comédies;Comedy writer;writer
+composer;Q36834;Compositeur;Composer;musician
+conductor-of-military-band;;Chef d'orchestre militaire;Conductor of military band;conductor+military-personnel
+conductor;Q158852;Chef d’orchestre;Conductor;musician
+cyclist;Q2125610;Cycliste;Cyclist;sportsperson
+dancer;Q5716684;Danseur;Dancer;artist
+equestrian;Q2730732;Cavalier;Equestrian;sportsperson
+executive;Q978044;Cadre dirigeant;Executive;
+factual-writer;;Ecrivain factuel;Factual writer;writer
+feminist;Q34074720;Féministe;Feminist;
+fencer;Q13381863;Escrimeur;Fencer;sportsperson
+fictional-writer;;Ecrivain de fictions;Fictional writer;writer
+field-hockey-player;Q10843263;Joueur de hockey sur gazon;Field hockey player;sportsperson
+football-player;Q937857;Joueur de football;Soccer player;sportsperson
+furniture-designer;Q11455387;Concepteur de meubles;Furniture designer;
+golfer;Q11303721;Joueur de golf;Golfer;sportsperson
+graphic-artist;Q1925963;Artiste graphique;Graphic artist;artist
+gymnast;Q16947675;Gymnaste;Gymnast;sportsperson
+handball-player;Q12840545;Joueur de handball;Handball player;sportsperson
+historian-of-science;Q16063546;Historien des sciences;Historian of science;scientist
+humanities-scholar;Q16727193;Scientifique de l'esprit;Humanities scholar;researcher
+interior-designer;Q2133309;Designer d'intérieur;Interior designer;
+journalist;Q1930187;Journaliste;Journalist;
+judoka;Q6665249;Judoka;Judoka;sportsperson
+jurist;Q185351;Juriste;Jurist;legal-profession
+kayaker;Q16004471;Kayakeur;Kayaker;sportsperson
+lawyer;Q40348;Avocat;Lawyer;legal-profession
+legal-profession;Q15987302;Profession juridique;Legal profession;
+mathematician;Q170790;Mathématicien;Mathematician;scientist
+military-personnel;Q47064;Militaire;Military personnel;
+miscelaneous;;Divers;Miscelaneous;
+monarch;Q116;Monarque;Monarch;
+motor-sports-competitor;Q30339659;Compétiteur de sport automobile;Motor sports competitor;sportsperson
+mountaineer;Q9149093;Alpiniste;Mountaineer;sportsperson
+musician;Q639669;Musicien;Musician;artist
+mystic;Q12328016;Mystique;Mystic;
+naturalist;Q18805;Naturaliste;Naturalist;scientist
+novelist;Q6625963;Romancier;Novelist;writer
+opera-singer;Q2865819;Chanteur d'opéra;Opera singer;musician
+painter;Q1028181;Peintre;Painter;graphic-artist
+partner-of-celebrity;;Partenaire de célebrité;Partner of celebrity;
+photographer;Q33231;Photographe;Photographer;artist
+physician;Q39631;Médecin;Physician;
+physicist;Q169470;Physicien;Physicist;scientist
+pianist;Q486748;Pianiste;Pianist;musician
+poet;Q49757;Poète;Poet;writer+artist
+political-economist;Q105572010;Economiste politique;Political economist;
+politician;Q82955;Politicien;Politician;
+printmaker;Q11569986;Graveur;Printmaker;graphic-artist
+race-walker;Q17405793;Marcheur athlétique;Race walker;sportsperson
+religious-leader;Q15995642;Leader religieux;Religious leader;
+religious;Q2566598;Religieux;Religious;
+researcher;Q1650915;Chercheur;Researcher;
+revolutionary;Q3242115;Révolutionnaire;Revolutionary;
+rodeo-rider;Q21517059;Cavalier de rodéo;Rodeo rider;sportsperson
+roller-skater;Q61278580;Patineur à roulettes;Roller skate;sportsperson
+romanist;Q2504617;Romaniste;Romanist;scientist
+rower;Q13382576;Avironeur;Rower;sportsperson
+rugby-player;Q13415036;Joueur de rugby;Rugby player;sportsperson
+saint;Q43115;Saint;Saint;
+scientist;Q901;Scientifique;Scientist;researcher
+sculptor;Q1281618;Sculpteur;Sculptor;artist
+singer;Q177220;Chanteur;Singer;musician
+skier;Q4270517;Skieur;Skier;winter-sports-practitioner
+social-scientist;Q15319501;Chercheur en sciences sociales;Social scientist;scientist
+social-worker;Q7019111;Travailleur social;Social worker;
+sport-sailer;Q476246;Skipper;Sport sailer;sportsperson
+sport-shooter;Q17486376;Tireur sportif;Sport shooter;sportsperson
+sportsperson;Q2066131;Sportif;Sportsperson;
+suffragette;Q322170;Suffragette;Suffragette;feminist
+swimmer;Q10843402;Nageur;Swimmer;sportsperson
+tennis-player;Q10833314;Joueur de tennis;Tennis player;sportsperson
+textile-designer;Q18611810;Styliste;Textile designer;
+volleyball-player;Q15117302;Joueur de volley-ball;Volleyball player;sportsperson
+weightlifter;Q13381376;Haltérophile;Weightlifter;sportsperson
+winter-sports-practitioner;Q20965770;Pratiquant de sports d’hiver;Winter sports practitionner;sportsperson;
+wrestler;Q13474373;Lutteur (catch);Wrestler;sportsperson
+writer;Q36180;Ecrivain;Writer;
+zoologist;Q350979;Zoologiste;Zoologist;scientist

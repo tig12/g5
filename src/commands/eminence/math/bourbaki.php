@@ -28,7 +28,7 @@ class BourbakiModel {
     
     /**
         Path to the yaml file containing the characteristics of the source.
-        Relative to directory data/model/source
+        Relative to directory data/db/source
     **/
     const SOURCE_DEFINITION = 'eminence' . DS . 'math' . DS . 'bourbaki.yml';
 

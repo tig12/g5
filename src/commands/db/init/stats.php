@@ -25,7 +25,7 @@ class stats implements Command {
                 . "  - full : echoes a detailed report\n";
         }
         
-        $report = "--- db fill stats ---\n";
+        $report = "--- db init stats ---\n";
         $report_full = '';
         
         $dblink = DB5::getDbLink();

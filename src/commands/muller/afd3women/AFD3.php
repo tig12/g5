@@ -25,7 +25,7 @@ class AFD3 {
     /**
         Path to the yaml file containing the characteristics of the source describing file
         data/raw/muller/afd3-women/muller-afd3-women.txt
-        Relative to directory data/model/source
+        Relative to directory data/db/source
     **/
     const LIST_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd3-women-list.yml';
 
@@ -34,7 +34,7 @@ class AFD3 {
     
     /**
         Path to the yaml file containing the characteristics of Müller's booklet AFD3.
-        Relative to directory data/model/source
+        Relative to directory data/db/source
     **/
     const BOOKLET_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd3-women-booklet.yml';
     

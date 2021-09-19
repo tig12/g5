@@ -13,10 +13,10 @@ namespace g5\commands\cura\all;
 
 use g5\G5;
 use g5\app\Config;
-use tiglib\patterns\Command;
 use g5\commands\cura\Cura;
 use g5\model\Group;
 use g5\model\Person;
+use tiglib\patterns\Command;
 
 class tweak2tmp implements Command {
     

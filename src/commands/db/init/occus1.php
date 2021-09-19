@@ -1,14 +1,14 @@
 <?php
 /******************************************************************************
     
-    Fills table groop from csv files located in data/model/occu
+    Fills table groop from csv files located in data/db/occu
     Each occu is stored in db as a groop of type Group::TYPE_OCCU.
     Creation of occupation groups is only partially done by this command,
     and must be completed by occus2.
     In particular, current command doesn't compute
         - field n (nb of persons with this occupation).
         - field children.
-    See command occugroups.
+    See command occus2.
     @license    GPL
     @history    2021-07-28 20:59:37+02:00, Thierry Graff : Creation
 ********************************************************************************/
@@ -31,7 +31,7 @@ class occus1 implements Command {
         if(count($params) != 0){
             return "USELESS PARAMETER {$params[0]}\n";
         }
-        $report = "--- db fill occus ---\n";
+        $report = "--- db init occus1 ---\n";
         
         $dblink = DB5::getDbLink();
         $dblink->exec("delete from groop where type='" . Group::TYPE_OCCU . "'");
@@ -52,12 +52,6 @@ class occus1 implements Command {
             foreach($lines as $line){
                 if($line['slug'] == ''){
                     continue; // skip blank lines
-                }
-                if(strpos($line['wd'], '+') !== false){
-                    // happens for canoeist-kayaker Q13382566+Q16004471
-                    // useless here because canoeist Q13382566 and kayaker Q16004471
-                    // (useful to match with cura and Ertel in tmp2db classes)
-                    continue;
                 }
                 $parents = [];
                 // obliged to add this test to prevent a bug:

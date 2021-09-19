@@ -22,7 +22,7 @@ class search implements Command {
         if(count($params) != 0){
             return "USELESS PARAMETER {$params[0]}\n";
         }
-        $report = "--- db fill search ---\n";
+        $report = "--- db init search ---\n";
         
         $dblink = DB5::getDbLink();
         

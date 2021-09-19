@@ -36,7 +36,9 @@ class raw2tmp implements Command {
         foreach($raw as $line){
             $fields = explode(Muller402::RAW_SEP, $line);
             $new = $emptyNew;
-            $new['OCCU'] = 'WR'; /////// HERE TODO put wikidata occupation id ///////////
+            // raw file 5muller_writers.csv doesn't contain the occupation (between 1 to 5)
+            // but Müller booklet contains it => a new OCR of the original would permit to have a more precise occupation
+            $new['OCCU'] = 'writer';
             preg_match($pname, $fields[0], $m);
             $sex = $m[2];
             if($sex != 'M' && $sex != 'F'){

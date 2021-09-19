@@ -19,7 +19,7 @@ class Muller1083 {
     
     /**
         Path to the yaml file containing the characteristics of the source describing file 5a_muller_medics.txt.
-        Relative to directory data/model/source
+        Relative to directory data/db/source
     **/
     const LIST_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd5-medics-list.yml';
     
@@ -28,7 +28,7 @@ class Muller1083 {
     
     /**
         Path to the yaml file containing the characteristics of Müller's booklet AFD3.
-        Relative to directory data/model/source
+        Relative to directory data/db/source
     **/
     const BOOKLET_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd5-medics-booklet.yml';
     

@@ -14,7 +14,7 @@ class Wikidata{
     
     /**
         Path to the yaml file containing the characteristics of Newalchemypress source.
-        Relative to directory data/model/source
+        Relative to directory data/db/source
     **/
     const SOURCE_DEFINITION_FILE = 'wikidata.yml';
     

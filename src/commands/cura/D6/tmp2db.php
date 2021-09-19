@@ -80,8 +80,6 @@ class tmp2db implements Command {
             $g->deleteMembers(); // DB - only deletes asssociations between group and members
         }
         
-        $matchOccus = Occupation::loadForMatch('cura5');
-        
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
         $lines = Cura::loadTmpFile($datafile);
@@ -100,6 +98,7 @@ class tmp2db implements Command {
             $test->data['birth']['date'] = $line['DATE'];
             $test->computeSlug();
             $gqId = LERRCP::gauquelinId($datafile, $line['NUM']);
+            $newOccus = explode('+', $line['OCCU']);
             $p = Person::getBySlug($test->data['slug']); // DB
             if(is_null($p)){
                 // insert new person
@@ -117,11 +116,7 @@ class tmp2db implements Command {
                 $new['birth']['place']['lg'] = $line['LG'];
                 $new['birth']['place']['lat'] = $line['LAT'];
                 $p->updateFields($new);
-                // occu
-                if(!isset($matchOccus[$line['OCCU']])){
-                    throw new \Exception("Missing definition for occupation " . $line['OCCU']);
-                }
-                $p->addOccus($matchOccus[$line['OCCU']]);
+                $p->addOccus($newOccus);
                 //
                 $p->computeSlug();
                 // repeat fields to include in $history
@@ -130,7 +125,7 @@ class tmp2db implements Command {
                     $source->data['slug'] => $line['NUM'],
                     $lerrcpSource->data['slug'] => $gqId,
                 ];
-                $new['occus'] = $matchOccus[$line['OCCU']];
+                $new['occus'] = $newOccus;
                 $p->addHistory(
                     command: "cura $datafile tmp2db",
                     sourceSlug: $source->data['slug'],
@@ -142,21 +137,19 @@ class tmp2db implements Command {
             }
             else{
                 // duplicate, person appears in more than one cura file
-                // occu
-                if(!isset($matchOccus[$line['OCCU']])){
-                    throw new \Exception("Missing definition for occupation " . $line['OCCU']);
-                }
-                $p->addOccus($matchOccus[$line['OCCU']]);
-                //
+                $p->addOccus($newOccus);
                 $p->addSource($source->data['slug']);
+                // does not addIdInSource(lerrcp) to respect the definition of Gauquelin id:
+                // lerrcp id takes the value of the first volume where it appears.
+                // lerrcp id already affected in a previous file for this record.
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
-                // does not addIdInSource($lerrcpSource) to respect the definition of Gauquelin id
+                // repeat fields to include in $history
                 $new = [];
                 $new['sources'] = $source->data['slug'];
                 $new['ids_in_sources'] = [
                     $source->data['slug'] => $line['NUM'],
                 ];
-                $new['occus'] = $matchOccus[$line['OCCU']];
+                $new['occus'] = $newOccus;
                 $p->addHistory(
                     command: "cura $datafile tmp2db",
                     sourceSlug: $source->data['slug'],

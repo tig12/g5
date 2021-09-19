@@ -115,7 +115,7 @@ class raw2tmp implements Command {
                 [$new['FNAME'], $new['GNAME']] = self::$NAMES_CORRECTIONS[$new['NUM']];
             }
             //
-            $new['OCCU'] = 'SP';
+            $new['OCCU'] = 'sportsperson';
             //
             $day = Cura::computeDay(['DAY' => $cur[1], 'MON' => $cur[2], 'YEA' => $cur[3]]);
             $hour = Cura::computeHHMM(['H' => $cur[4], 'MN' => $cur[5]]);

@@ -17,7 +17,7 @@ class Ertel4391 {
     
     /**
         Path to the yaml file containing the characteristics of the source describing file 3a_sports.txt.
-        Relative to directory data/model
+        Relative to directory data/db
     **/
     const RAW_SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch' . DS . '3a_sports.yml';
     

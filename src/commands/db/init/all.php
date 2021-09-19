@@ -45,7 +45,7 @@ use g5\commands\newalch\muller1083\fixGnr       as fixGnrMuller1083;
 
 use g5\commands\newalch\muller402\raw2tmp       as raw2tmpMuller402;
 use g5\commands\newalch\muller402\tweak2tmp     as tweak2tmpMuller402;
-use g5\commands\newalch\muller402\addA6         as addA6Muller402;
+use g5\commands\newalch\muller402\gauq          as gauqMuller402;
 use g5\commands\newalch\muller402\raw2tmp100    as raw2tmpMuller100;
 
 use g5\commands\csicop\si42\raw2tmp             as raw2tmpSi42;
@@ -125,12 +125,10 @@ class all implements Command {
             echo "***********************\n";
             echo "*** Build tmp files ***\n";
             echo "***********************\n";
-///* 
             foreach($filesCuraA as $datafile){
                 echo raw2tmpA::execute([$datafile, 'raw2tmp', 'small']);
                 echo addGeoA::execute([$datafile, 'addGeo', 'small']);
             }
-//*/
             echo raw2tmpD6::execute(['D6', 'raw2tmp']);
             echo addGeoD6::execute(['D6', 'addGeo']); // tmp code - addGeo needs to be fixed
             echo raw2tmpD10::execute(['D10', 'raw2tmp']);
@@ -154,7 +152,7 @@ class all implements Command {
             
             echo raw2tmpMuller402::execute([]);
             echo tweak2tmpMuller402::execute([]);
-            echo addA6Muller402::execute(['update']);
+            echo gauqMuller402::execute(['update']);
             echo raw2tmpMuller100::execute([]);
             
             echo raw2tmpAfd3Women::execute([]);

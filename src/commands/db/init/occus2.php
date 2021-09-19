@@ -33,7 +33,7 @@ class occus2 implements Command {
         if(count($params) != 0){
             return "INVALID USAGE - Useless parameter: {$params[0]}\n";
         }
-        $report = "--- db fill occugroups ---\n";
+        $report = "--- db init occus2 ---\n";
         $t1 = microtime(true);
         
         $allAncestors = Group::getAllAncestors();

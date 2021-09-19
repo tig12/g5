@@ -23,13 +23,13 @@ class ZZZoccu implements Command {
         Inserts or updates a source in database
         @param  $params array containing one element. Can be :
                     - 'all'
-                    - the path to the yaml file containing the source definition, relative to data/model/source
+                    - the path to the yaml file containing the source definition, relative to data/db/source
         @return Empty string, echoes the report on execution for each source processed.
     **/
     public static function execute($params=[]): string {
         if(count($params) != 1){
             return "INVALID USAGE - This command needs one parameter :\n"
-                . "  'all' or path to yaml file containing the source definition, relative to data/model/source\n";
+                . "  'all' or path to yaml file containing the source definition, relative to data/db/source\n";
         }
         $param = $params[0];
         

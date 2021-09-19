@@ -19,7 +19,7 @@ class dbcreate implements Command {
         @param  $params empty array
     **/
     public static function execute($params=[]): string {
-        $report = "--- DB create ---\n";
+        $report = "--- db init dbcreate ---\n";
         $dir_sql = implode(DS, [Config::$data['dirs']['ROOT'], 'src', 'model', 'db-create']);
         $dblink = DB5::getDblink();
         

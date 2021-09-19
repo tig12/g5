@@ -22,7 +22,7 @@ class Muller100 {
     /**
         Path to the yaml file containing the characteristics of the source describing file
         data/raw/newalchemypress.com/05-muller-writers/muller-afd1-100-writers.txt
-        Relative to directory data/model/source
+        Relative to directory data/db/source
     **/
     const LIST_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd1-writers-list-100.yml';
 

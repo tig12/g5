@@ -15,7 +15,7 @@ class Cura {
     
     /**
         Path to the yaml file containing the characteristics of "cura5" source.
-        Relative to directory data/model
+        Relative to directory data/db
     **/
     const SOURCE_DEFINITION_FILE = 'cura5.yml';
     

@@ -156,8 +156,7 @@ class Run{
         Auxiliary of self::getCommandClass().
     **/
     private static function arg1CommandFilename($arg1){
-        return implode(DS, [dirname(__DIR__), 'commands', $arg1, ucFirst($arg1) . 'Command' . '.php']);
+        return implode(DS, [dirname(__DIR__), 'commands', $arg1, ucFirst($arg1) . 'Command.php']);
     }
     
-    
-}// end class
+} // end class

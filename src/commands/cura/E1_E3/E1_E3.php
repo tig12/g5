@@ -53,24 +53,24 @@ class E1_E3{
     **/
     const PROFESSIONS = [
         'E1' => [
-            'PH' => 'PH',
-            'MI' => 'MI',
-            'EX' => 'EX',
-            'PH,EX' => 'PH+EX',
-            'MI,PH' => 'MI+PH',
-            'MI,EX' => 'MI+EX',
+            'PH' => 'physician',
+            'MI' => 'military-personnel',
+            'EX' => 'executive',
+            'PH,EX' => 'physician+executive',
+            'MI,PH' => 'military-personnel+physician',
+            'MI,EX' => 'military-personnel+executive',
         ],
         'E3' => [
-            'PO' => 'PO',
-            'JO' => 'JO',
-            'WR' => 'WR',
-            'AC' => 'ACT',   // [including Pop Singers]
-            'PAI' => 'PAI', // [including 1 sculptor]
-            'MUS' => 'MUS',
-            'OPE' => 'OPE',
-            'CAR' => 'CAR',
-            'DAN' => 'DAN',
-            'PHO' => 'PHO',
+            'PO' => 'politician',
+            'JO' => 'journalist',
+            'WR' => 'writer',
+            'AC' => 'actor',   // [including Pop Singers]
+            'PAI' => 'painter', // [including 1 sculptor]
+            'MUS' => 'musician',
+            'OPE' => 'opera-singer',
+            'CAR' => 'cartoonist',
+            'DAN' => 'dancer',
+            'PHO' => 'photographer',
         ],
     ];
     

@@ -42,7 +42,7 @@ class TODO {
             return; // ok, just build an empty source
         }
         
-        // Load source data from data/model/source
+        // Load source data from data/db/source
         $yamlFile = self::$DIR . DS . $yamlFile;
         $yaml = yaml_parse_file($yamlFile);
         if($yaml === false){

@@ -9,7 +9,7 @@ namespace g5\commands\cura;
 
 use g5\app\Router;
 
-class CuraRouter implements Router{
+class CuraRouter implements Router {
     
     /** 
         Associations between datafile in the user's vocabulary and the sub-namespace that handles it.
@@ -94,7 +94,7 @@ class CuraRouter implements Router{
             $basename = basename($file, '.php');
             try{
                 $class = new \ReflectionClass("g5\\commands\\cura\\$subnamespace\\$basename");
-                if($class->implementsInterface("g5\\patterns\\Command")){
+                if($class->implementsInterface("tiglib\\patterns\\Command")){
                     $res[] = $basename;
                 }
             }

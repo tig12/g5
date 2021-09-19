@@ -1,12 +1,18 @@
 
 - see php bug - https://bugs.php.net/bug.php?id=81002
 
-- rename db/init/ occus and occugroups as occus1 and occus2
+- add commit / rollback for all tmp2db commands ?
+
+- add field notes in Person (useful for D10, fields corrected in APP)
+  (also useful in E1 E3)
+
+- systematic rewiew of C1, C2, C3, in particular for USA
+
+- Add children computation in db/init/occus1
 
 - integrate muller 1083 fix cura days and names to db/init/all
 
 - AFD2: 
-
     - check 17  Arrau, Claudio (south lat)
     - check 202 Franz II., Joseph Karl (-.50) tz offset (instead of -0.50)
     - case 34 Bastian Adolf  1826-06-26 00:30 / 1826-06-25 23:54:40 for Gauquelin
@@ -41,11 +47,6 @@
 
 - in all tmp2db, when $p->addHistory is done,
     $p->addSource and $p->addIdInSource are not taken into account
-
-- Add sources for all historical groups
-
-- review person name structure in src/model/Person.yml
-  Implement precisely for all groups
 
 - refactor group export mechanism
     Group::export() shouldn't store on disk

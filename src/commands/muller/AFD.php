@@ -11,7 +11,7 @@ class AFD {
     
     /**
         Path to the yaml file containing the characteristics of Müller's Astro-Forschungs-Daten source.
-        Relative to directory data/model/source
+        Relative to directory data/db/source
     **/
     const SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd.yml';
     

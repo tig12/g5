@@ -106,6 +106,7 @@ class tmp2db implements Command {
         $linesRaw = Muller1083::loadTmpRawFile();
         $N = count($lines);
         $t1 = microtime(true);
+        $newOccus = ['physician'];
         for($i=0; $i < $N; $i++){
             $line = $lines[$i];                                                                        
             $lineRaw = $linesRaw[$i];
@@ -127,7 +128,7 @@ class tmp2db implements Command {
                 $new['birth']['place']['lg'] = $line['LG'];
                 $new['birth']['place']['lat'] = $line['LAT'];
                 //
-                $p->addOccus(['physician']);
+                $p->addOccus($newOccus);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NR']);
                 $mullerId = AFD::mullerId($source->data['slug'], $line['NR']);
@@ -137,7 +138,7 @@ class tmp2db implements Command {
                 // repeat fields to include in $history
                 $new['sources'] = $source->data['slug'];
                 $new['ids_in_sources'] = [ $source->data['slug'] => $line['NR'] ];
-                $new['occus'] = ['physician'];
+                $new['occus'] = $newOccus;
                 $p->addHistory(
                     command: 'newalch muller1083 tmp2db',
                     sourceSlug: $source->data['slug'],
@@ -196,7 +197,7 @@ class tmp2db implements Command {
                 // (Gauquelin name considered as current name)
                 $new['name']['official']['given'] = $line['GNAME'];
                 //
-                $p->addOccus(['physician']);
+                $p->addOccus($newOccus);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NR']);
                 $mullerId = AFD::mullerId($source->data['slug'], $line['NR']);
@@ -206,7 +207,7 @@ class tmp2db implements Command {
                 // repeat fields to include in $history
                 $new['sources'] = $source->data['slug'];
                 $new['ids_in_sources'] = [ $source->data['slug'] => $line['NR'] ];
-                $new['occus'] = ['physician'];
+                $new['occus'] = $newOccus;
                 $p->addHistory(
                     command: 'cura muller1083 tmp2db',
                     sourceSlug: $source->data['slug'],
