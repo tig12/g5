@@ -62,10 +62,10 @@ class AFD2 {
         96,
         103,
         113,
-        118,
-        124,
-        127,
+        119,
+        125,
         128,
+        129,
     ];
     
     /** Names of the columns of raw file **/
@@ -121,6 +121,7 @@ class AFD2 {
         '15' => 'A6-29', // Apollinaire Guillaume 
         '19' => 'A6-50', // Ayme Marcel 
         '24' => 'A5-1057', // Balser Ewald 
+        '25' => 'A6-53', // Balzac, Honoré de
         '28' => 'A5-67', // Barrault Jean-Louis 
         '33' => 'A5-1059', // Bassermann Albert 
         '34' => 'A2-1646', // Bastian Adolf 
@@ -182,13 +183,14 @@ class AFD2 {
         '186' => 'A5-320', //   Fernandel
         '192' => 'A6-318', // Flaubert Gustave 
         '194' => 'A2-2689', // Foch Ferdinand 
-        '198' => 'A6-334', // France Anatole 
+        '198' => 'A6-334', // France Anatole
+        '199' => 'A4-1883', // Franck, César
         '200' => 'E3-660', // Francois-Poncet André 
         '211' => 'E3-669', // Gabin Jean 
         '213' => 'E3-682', // Gambetta Leon 
         '216' => 'A5-1646', // Gasperi Alcide 
         '217' => 'A4-439', // Gauguin Paul 
-        '218' => 'A3-568', // Gaulle Charles 
+        '218' => 'A3-568', // Gaulle Charles
         '223' => 'D6-177', // Germar Manfred 
         '225' => 'A6-364', // Gide André 
         '227' => 'A6-372', // Giraudoux Jean 

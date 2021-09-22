@@ -1,0 +1,17 @@
+
+document:
+  history:
+    - 2021-09-19 18:09:22+02:00: Thierry Graff, creation
+
+name: Astro-Forschungs-Daten 2
+slug: afd2-booklet
+type: booklet
+authors:
+  - Arno Müller
+description: |
+  Booklet Astro-Forschungs-Daten 2, Arno Müller, Waldmohr, 1992
+  <br>Self-edited by Arno Müller.
+  <br>Contains a list of 612 famous men.
+  <br>Scans of the original document can be downloaded from <a href="https://g5.tig12.net/auxiliary/1992-muller-men/">g5.tig12.net</a>.
+parents: 
+  - afd

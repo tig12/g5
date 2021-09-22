@@ -14,7 +14,7 @@ description: |
   <br>Text file built by Nick Kollerstrom (scan) and Thierry Graff (OCR and corrections).
   <br>Integration to Open Gauquelin database : <a href="https://github.com/tig12/gauquelin5/tree/master/data/raw/muller/afd3-women">muller-afd3-women.txt</a>.
   <br>Scans of original documents can be downloaded from <a href="https://g5.tig12.net/auxiliary/1993-muller-women/">g5.tig12.net</a>.
-  <br>More information about this file : <a href="https://tig12.github.io/gauquelin5/newalch-muller234.html">tig12.github.io</a>.
+  <br>More information about this file : <a href="https://tig12.github.io/gauquelin5/muller-234-women.html">tig12.github.io</a>.
 parents:
   - afd3-booklet
   - g5

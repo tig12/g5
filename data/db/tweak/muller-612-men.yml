@@ -71,6 +71,23 @@
 
 -
   ids-in-sources:
+    afd2: '329'
+    wd: Q4724
+  name:
+    given: Charles-Édouard
+    family: Jeanneret-Gris
+    
+-
+  ids-in-sources:
+    afd2: '416'
+    wd: Q60684
+  name:
+    given: Georg Philipp Friedrich
+    family: Hardenberg
+    nobl: von 
+
+-
+  ids-in-sources:
     afd2: '429'
     wd: Q16975
   name:
@@ -89,6 +106,5 @@
     official:
       given: René Armand François
       family: Prudhomme
-    alter:
-      - Sully-Prudhomme
+    fame: Sully-Prudhomme
       

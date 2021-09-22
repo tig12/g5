@@ -123,11 +123,16 @@ class Person {
     }
     
     /** 
-        Static computation of slug
+        Static computation of slug.
+        Normally done with family and given name, but $name1 and $name2 may contain
+        other informations, like fame name.
+        @param  $name1 Generally family name
+        @param  $name2 Generally given name 
+        
         @see    instance method computeSlug()
     **/
-    public static function doComputeSlug($family, $given, $date): string {
-        $name = $family . ($given != '' ? ' ' . $given : '');
+    public static function doComputeSlug($name1, $name2, $date): string {
+        $name = $name1 . ($name2 != '' ? ' ' . $name2 : '');
         if($date != ''){
             // galois-evariste-1811-10-25
             $slug = slugify::compute($name . '-' . $date);
@@ -210,10 +215,25 @@ class Person {
         @see    static method doComputeSlug()
     **/
     public function computeSlug() {
-        if(!$this->data['name']['family']){
-            throw new Exception("Person->computeSlug() impossible - needs family name");
+        $name1 = $name2 = '';
+        if($this->data['name']['family']){
+            $name1 = $this->data['name']['family'];
+            $name2 = $this->data['name']['given'];
         }
-        $this->data['slug'] = self::doComputeSlug($this->data['name']['family'], $this->data['name']['given'], $this->birthday());
+        else if($this->data['name']['fame']['full']){
+            $name1 = $this->data['name']['fame']['full'];
+        }
+        else if($this->data['name']['fame']['family']){
+            $name1 = $this->data['name']['fame']['family'];
+            $name2 = $this->data['name']['fame']['given'];
+        }
+        else{
+            throw new \Exception(
+                "Person->computeSlug() impossible - information missing\n"
+                . "Available info = " . print_r($this->data['name'], true) . "\n"
+            );
+        }
+        $this->data['slug'] = self::doComputeSlug($name1, $name2, $this->birthday());
         return;
     }
     

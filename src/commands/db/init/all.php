@@ -64,6 +64,7 @@ use g5\commands\newalch\muller1083\tmp2db       as tmp2dbMuller1083;
 use g5\commands\newalch\muller402\tmp2db        as tmp2dbMuller402;
 use g5\commands\newalch\muller402\tmp2db100     as tmp2dbMuller100;
 use g5\commands\csicop\irving\tmp2db            as tmp2dbIrving;
+use g5\commands\muller\afd2men\tmp2db           as tmp2dbAfd2Mmen;
 use g5\commands\muller\afd3women\tmp2db         as tmp2dbAfd3Women;
 
 // finalize
@@ -193,6 +194,8 @@ class all implements Command {
             
             echo tmp2dbAfd3Women::execute(['small']);
             echo filltweak::execute(['muller-234-women.yml']);
+            
+            echo tmp2dbAfd2Mmen::execute(['small']);
             
             echo occus2::execute();
         }

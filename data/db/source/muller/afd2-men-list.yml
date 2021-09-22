@@ -1,0 +1,20 @@
+
+document:
+  history:
+    - 2021-09-19 18:11:27+02:00: Thierry Graff, creation
+
+name: Müller's 612 famous men
+slug: afd2
+type: file
+authors: 
+  - Nick Kollerstrom
+  - Thierry Graff
+description: |
+  List of 612 famous women, from Astro-Forschungs-Daten 2, Arno Müller, Waldmohr, 1992
+  <br>Text file built by Nick Kollerstrom (scan) and Thierry Graff (OCR and corrections).
+  <br>Integration to Open Gauquelin database : <a href="https://github.com/tig12/gauquelin5/tree/master/data/raw/muller/afd2-men">muller-afd2-men.txt</a>.
+  <br>Scans of original documents can be downloaded from <a href="https://g5.tig12.net/auxiliary/1992-muller-men/">g5.tig12.net</a>.
+  <br>More information about this file : <a href="https://tig12.github.io/gauquelin5/muller-612-men.html">tig12.github.io</a>.
+parents:
+  - afd3-booklet
+  - g5
