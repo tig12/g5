@@ -89,8 +89,13 @@ class export100 implements Command {
             'birth.place.lg' => 'LG',
             'birth.place.lat' => 'LAT',
             'birth.place.geoid' => 'GEOID',
+// BUG HERE - 
+// some records: raw.history.0
+// some records: raw.history.1
+/* 
             'raw.' . self::$sourceSlug . '.OPUS' => 'OPUS',
             'raw.' . self::$sourceSlug . '.LEN' => 'LEN',
+*/
         ];
         
         $fmap = [

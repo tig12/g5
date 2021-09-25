@@ -74,7 +74,10 @@ class export implements Command {
         
         $map = [
             'ids-in-sources.' . Irving::LIST_SOURCE_SLUG => 'CSID',
-            'raw.' . self::$sourceSlug . '.BATCH' => 'BATCH',
+// BUG HERE - 
+// some records: raw.history.0
+// some records: raw.history.1
+//            'raw.' . self::$sourceSlug . '.BATCH' => 'BATCH',
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
             'birth.date' => 'DATE',
