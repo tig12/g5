@@ -59,6 +59,9 @@ class Person {
         if(isset($row['todo'])){
             $row['todo'] = json_decode($row['todo'], true);
         }
+        if(isset($row['notes'])){
+            $row['notes'] = json_decode($row['notes'], true);
+        }
         $p = new Person();
         $p->data = $row;
         return $p;
@@ -327,7 +330,7 @@ class Person {
             'command'   => $command,
             'source'    => $sourceSlug,
             'new'       => $newdata,
-            // flatten necessary because in go application, a raw entry is typed map[string]string
+            // flatten necessary because in the go application, a raw entry is typed map[string]string
             'raw'       => flattenAssociative::compute($rawdata),
         ];
     }
@@ -375,8 +378,9 @@ class Person {
             trust,
             acts,
             history,
-            todo
-            )values(?,?,?,?,?,?,?,?,?,?,?,?) returning id");
+            todo,
+            notes
+            )values(?,?,?,?,?,?,?,?,?,?,?,?,?) returning id");
         $stmt->execute([
             $this->data['slug'],
             $this->data['sex'],
@@ -390,6 +394,7 @@ class Person {
             json_encode($this->data['acts']),
             json_encode($this->data['history']),
             json_encode($this->data['todo']),
+            json_encode($this->data['notes']),
         ]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         return $res['id'];
@@ -413,7 +418,8 @@ class Person {
             trust=?,
             acts=?,
             history=?,
-            todo=?
+            todo=?,
+            notes=?
             where id=?
             ");
         $stmt->execute([
@@ -429,6 +435,7 @@ class Person {
             json_encode($this->data['acts']),
             json_encode($this->data['history']),
             json_encode($this->data['todo']),
+            json_encode($this->data['notes']),
             $this->data['id'],
         ]);
     }

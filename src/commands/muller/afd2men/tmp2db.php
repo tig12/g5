@@ -14,6 +14,7 @@ use g5\model\Group;
 use g5\model\Person;
 use g5\commands\muller\AFD;
 use g5\commands\gauquelin\LERRCP;
+use g5\commands\newalch\muller402\Muller402;
 
 class tmp2db implements Command {
     
@@ -93,11 +94,43 @@ class tmp2db implements Command {
             $lineRaw = $linesRaw[$i];
             $muid = (string)$line['MUID'];
             $mullerId = AFD::mullerId($source->data['slug'], $line['MUID']);
+            $new = [];
+            $new['sex'] = 'M';
+            if($muid == '457'){
+                // M1-367 - Exceptional case: same person present in 2 different Müller data sets
+                // Birth time and birth place differ
+                // M1-367: Quasimodo Salvatore M 1901-08-20 18:00 +01:00  Siracusa IT SR 15 37 writer
+                // M3-457: Quasimodo, Salvatore 20.08.1901 04.10 -1.00 I Modica 36 N 48 014 E 58 AR 01 56 SA N
+                // Update with M3 data (because birth place corresponds to Wikipedia) But should be checked
+                $new['birth']['date'] = $line['DATE'];
+                $new['birth']['tzo'] = $line['TZO'];
+                $new['birth']['note'] = $line['TIMOD'];
+                $new['birth']['place']['name'] = $line['PLACE'];
+                $p->addSource($source->data['slug']);
+                $p->addIdInSource($source->data['slug'], $muid);
+                $p->updateFields($new);
+                // repeat fields to include in $history
+                $new['sources'] = $source->data['slug'];
+                $new['ids_in_sources'] = [
+                    $source->data['slug'] => $muid,
+                    AFD::SOURCE_SLUG => $mullerId,
+                ];
+                if(AFD2::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
+                    $new['occus'] = [ AFD2::OCCUS[$line['OCCU']] ];
+                }
+                $p->addHistory(
+                    command: 'muller afd2men tmp2db',
+                    sourceSlug: $source->data['slug'],
+                    newdata: $new,
+                    rawdata: $lineRaw
+                );
+                $nUpdate++;
+                $p->update(); // DB
+                continue;
+            }
             if(!isset(AFD2::MU_GQ[$muid])){
-                // Person not in Gauquelin data
+                // Person not already in db (mainly in Gauquelin data)
                 $p = new Person();
-                $new = [];
-                $new['sex'] = 'F';
                 $new['trust'] = AFD::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
@@ -115,6 +148,7 @@ class tmp2db implements Command {
                 $new['birth']['place']['lg'] = $line['LG'];
                 $new['birth']['place']['lat'] = $line['LAT'];
                 //
+                $p->addOccus([ AFD2::OCCUS[$line['OCCU']] ]);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $muid);
                 $p->addIdInSource(AFD::SOURCE_SLUG, $mullerId);
@@ -143,8 +177,6 @@ class tmp2db implements Command {
             }
             else{
                 // Person already in other Gauquelin data sets
-                $new = [];
-                $new['sex'] = 'F';
                 $gqid = AFD2::MU_GQ[$muid];
                 $tmp = explode('-', $gqid);
                 $curaSourceSlug = LERRCP::datafile2sourceSlug($tmp[0]);
@@ -169,8 +201,6 @@ class tmp2db implements Command {
                     ? substr($p->data['birth']['date-ut'], 0, 10)
                     : substr($p->data['birth']['date'], 0, 10);
                 if($mulday != $curaday){
-// This happens only for 1 person 177 Rachilde Eymerie (Gauquelin is correct)
-// Fixed in tweak2db - so only report, don't fix
                     $nDiffDates++;
                     if($reportType == 'full'){
                         $datesReport .= "Cura\t $gqid\t $curaday {$p->data['name']['family']} - {$p->data['name']['given']}\n";
@@ -211,9 +241,7 @@ class tmp2db implements Command {
                 if($p->data['birth']['place']['c2'] == '' && $line['C2'] != ''){
                     $new['place']['c2'] = $line['C2'];
                 }
-                if(AFD2::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
-                    $p->addOccus([ AFD2::OCCUS[$line['OCCU']] ]);
-                }
+                $p->addOccus([ AFD2::OCCUS[$line['OCCU']] ]);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $muid);
                 $p->addIdInSource(AFD::SOURCE_SLUG, $mullerId);
@@ -225,9 +253,7 @@ class tmp2db implements Command {
                     $source->data['slug'] => $muid,
                     AFD::SOURCE_SLUG => $mullerId,
                 ];
-                if(AFD2::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
-                    $new['occus'] = [ AFD2::OCCUS[$line['OCCU']] ];
-                }
+                $new['occus'] = [ AFD2::OCCUS[$line['OCCU']] ];
                 $p->addHistory(
                     command: 'muller afd2men tmp2db',
                     sourceSlug: $source->data['slug'],

@@ -196,6 +196,7 @@ class all implements Command {
             echo filltweak::execute(['muller-234-women.yml']);
             
             echo tmp2dbAfd2Mmen::execute(['small']);
+            echo filltweak::execute(['muller-612-men.yml']);
             
             echo occus2::execute();
         }

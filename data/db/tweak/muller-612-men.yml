@@ -51,6 +51,16 @@
 
 -
   ids-in-sources:
+    afd2: '186'
+    wd: Q129092
+  name:
+    family: Contandin
+    given: Fernand
+    fame:
+      full: Fernandel
+
+-
+  ids-in-sources:
     afd2: '193'
     wd: Q37064
   name:
@@ -106,5 +116,6 @@
     official:
       given: René Armand François
       family: Prudhomme
-    fame: Sully-Prudhomme
+    fame:
+      full: Sully-Prudhomme
       

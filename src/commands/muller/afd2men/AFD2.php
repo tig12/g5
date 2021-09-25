@@ -42,7 +42,7 @@ class AFD2 {
     const BOOKLET_SOURCE_SLUG = 'afd2-booklet';
     
     /** Slug of the group in db **/
-    const GROUP_SLUG = 'muller-02-men';
+    const GROUP_SLUG = 'muller-afd2-men';
 
     /**
         Limit of fields in the raw fields ; example for beginning of first line:
@@ -195,10 +195,10 @@ class AFD2 {
         '225' => 'A6-364', // Gide André 
         '227' => 'A6-372', // Giraudoux Jean 
         '229' => 'A5-1903', // Goebbels ageepe 
+        '230' => 'A4-1304', // Goebel Heinrich 
         '231' => 'A3-1881', // Göring Hermann 
         '233' => 'A4-1444', // Gogh Vincent van 
         '234' => 'A4-1929', // Gounod Charles 
-        '239' => 'A5-1112', // Goebel Heinrich 
         '239' => 'A5-1112', // Gründgens Gustaf 
         '244' => 'A2-3304', // Hahn Otto 
         '248' => 'D6-199', // Hary Armin 
@@ -284,6 +284,7 @@ class AFD2 {
         '576' => 'A6-793', // Verlaine Paul 
         '577' => 'A6-794', // Verne Jules 
         '585' => 'D6-420', // Walter Fritz 
+        '595' => 'A2-3391', // Weyl Hermann
         '594' => 'D10-1339', // Welles Orson 
         '597' => 'A2-3392', // Wieland Heinrich 
         '599' => 'A2-2268', // Willistatter Richard 

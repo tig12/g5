@@ -54,7 +54,7 @@
 54  Birgel, Willy                       19.09.1891 05.00        LMT D   Köln                    50 N 57 006 E 57 AR 03 567   SE G
 55  Bismarck, Otto von                  01.04.1815 13.00        LMT D   Schönhausen (Altmark)   52 N 35 012 E 03 MA 04 4567  SE N
 56  Blondel, Maurice                    02.11.1861 10.30        LMT F   Dijon                   47 N 19 005 E 02 SC 06 67    SG G
-57  Blum, Leon                          09.04.1872 11.00        LMT F   Paris                   48 N 50 002 E 20 MA 04 56    SG G
+57  Blum, Léon                          09.04.1872 11.00        LMT F   Paris                   48 N 50 002 E 20 MA 04 56    SG G
 58  Boccioni, Umberto                   19.10.1882 15.15 -0.83      I   Reggio di Calabria      38 N 06 015 E 30 AR 08 567   SE N
 59  Bode, Johann Elert                  19.01.1747 13.15 -0.47      D   Hamburg                 53 N 34 010 E 02 SC 02 57    MA N
 60  Bodelschwingh, Friedrich von        06.03.1831 16.00        LMT D   Tecklenburg             52 N 17 007 E 48 MA 05 4567  SE N
@@ -227,7 +227,7 @@
 227 Giraudoux, Jean                     29.10.1882 21.90        LMT F   Bellac                  46 N 07 001 E 03 AR 01 567   SG G
 228 Godard, Jean Luc                    03.12.1930 02.00 0.00       F   Paris                   48 N 50 002 E 20 AR 03 57    SG G
 229 Goebbels, ageepe                    29.10.1897 23.30 -1.00      D   Rheydt                  51 N 10 006 E 27 MA 04 56    SG G
-239 Goebel, Heinrich                    20.04.1818 13.00        LMT D   Springe                 52 N 12 009 E 33 MA 01 45    SE N
+230 Goebel, Heinrich                    20.04.1818 13.00        LMT D   Springe                 52 N 12 009 E 33 MA 01 45    SE N
 231 Göring, Hermann                     12.01.1893 04.00 -1.00      D   Rosenheim               47 N 51 012 E 08 MA 04 56    SE G
 232 Geethe, Johann Wolfgang von         28.08.1749 12.30 -0.57      D   Frankfurt               50 N 07 008 E 41 AR 01 4567  SE N
 233 Gogh, Vincent van                   30.03.1853 11.00        LMT NL  Zundert                 51 N 28 004 E 41 AR 08 4567  SG G
