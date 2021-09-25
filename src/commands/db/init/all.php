@@ -53,6 +53,7 @@ use g5\commands\csicop\si42\addCanvas1          as addCanvas1Si42;
 use g5\commands\csicop\irving\raw2tmp           as raw2tmpIrving;
 use g5\commands\csicop\irving\addD10            as addD10Irving;
 use g5\commands\muller\afd3women\raw2tmp        as raw2tmpAfd3Women;
+use g5\commands\muller\afd2men\raw2tmp          as raw2tmpAfd2Men;
 
 // tmp2db
 use g5\commands\cura\A\tmp2db                   as tmp2dbA;
@@ -157,6 +158,8 @@ class all implements Command {
             echo raw2tmpMuller100::execute([]);
             
             echo raw2tmpAfd3Women::execute([]);
+            
+            echo raw2tmpAfd2Men::execute([]);
         }
         
         //

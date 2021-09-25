@@ -216,7 +216,6 @@ class tmp2db implements Command {
                     }
                     else if($p->data['birth']['date'] != ''){
                         // compare times
-// This concerns 9 lines - and none differ !
                         $multime = substr($line['DATE'], 11);
                         $curatime = substr($p->data['birth']['date'], 11);
                         if($multime != $curatime){
