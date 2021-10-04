@@ -324,6 +324,26 @@ class Person {
         $this->data['occus'] = array_values(array_diff($occus, $remove));
     }
     
+    
+    /**
+        
+        @param  $k  Key of the todo
+        @param  $v  Value of the todo
+    **/
+    public function addTodo(string $k, string $v) {
+        if(isset($this->data['todo'][$k])){
+            throw new \Exception("TRYING TO ADD A TODO OF AN EXISTING KEY \n" . $this->data['slug'] . " - todo key = $key\n");
+        }
+        $this->data['todo'][$k] = $v;
+    }
+    
+    /**
+        @param  $k  Key of the todo to remove
+    **/
+    public function removeTodo(string $k) {
+        unset($this->data['todo'][$k]);
+    }
+    
     public function addHistory($command, $sourceSlug, $newdata, $rawdata){
         $this->data['history'][] = [
             'date'      => date('c'),
