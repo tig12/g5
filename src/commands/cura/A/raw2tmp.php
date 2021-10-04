@@ -195,11 +195,18 @@ class raw2tmp implements Command {
         //
         // 1955 corrections
         //
+        $n1_fix = 0;    // cases in $missing_in_names solved by 1955
+        $n2_fix = 0;    // cases in $doublons_same_nb solved by 1955
+        $n_ok_fix = 0;  // other cases solved by 1955, directly solved by A::CORRECTIONS_1955
         if(isset(A::CORRECTIONS_1955[$datafile])){
             [$n_ok_fix, $n1_fix, $n2_fix] = self::corrections1955($res, $missing_in_names, $doublons_same_nb, $datafile, $file_datafile, $file_names);
         }
-        else{
-            $n_ok_fix = $n1_fix = $n2_fix = 0;
+        //
+        // Manual corrections
+        //
+        $n2bis_fix = 0;    // cases solved by A::CORRECTIONS_BYHAND ($doublons_same_nb only)
+        if(isset(A::CORRECTIONS_BYHAND[$datafile])){
+            $n2bis_fix = self::correctionsByhand($res, $doublons_same_nb, $datafile, $file_datafile);
         }
         //
         // FNAME, GNAME
@@ -220,12 +227,47 @@ class raw2tmp implements Command {
         $percent_not_ok = round($n_bad * 100 / count($lines1), 2);
         if($report_type == 'full'){
             $report .= "nb in list1 ($file_datafile) : " . count($lines1) . " - nb in list2 ($file_names) : " . count($names) . "\n";
-            $report .= "case 1 : $n1 dates present in $file_datafile and missing in $file_names - $n1_fix fixed by 1955\n";
-            $report .=  print_r($missing_in_names, true) . "\n";
-            $report .= "case 2 : $n2 date ambiguities with same nb - $n2_fix fixed by 1955\n";
-            $report .= print_r($doublons_same_nb, true) . "\n";
-            $report .= "case 3 : $n3 date ambiguities with different nb\n";
-            $report .= print_r($doublons_different_nb, true) . "\n";
+            //
+            if(count($missing_in_names) > 0){
+                $report .= "\n======= case 1 : $n1 dates present in $file_datafile and missing in $file_names =======\n"
+                    . "$n1_fix fixed by 1955\n"
+                    . "Remains " . ($n1 - $n1_fix) . " to fix\n";
+                foreach($missing_in_names as $entry){
+                    $report .= $entry['LINE'] . "\n";
+                }
+            }
+            //
+            if(count($doublons_same_nb) > 0){
+                $report .= "\n======= case 2 : $n2 date ambiguities with same nb =======\n"
+                    . "$n2_fix fixed by 1955\n"
+                    . "$n2bis_fix fixed by manual corrections\n"
+                    . "Remains " . ($n2 - $n2_fix - $n2bis_fix) . " to fix\n";
+                $doublons_same_nb_keys = array_keys($doublons_same_nb[0]); // ex ['902gdA2y.html', '902gdN.html']
+                $i = 0;
+                foreach($doublons_same_nb as $entry){
+                    $report .= "$i\n"
+                        . $entry[$doublons_same_nb_keys[0]][0]['LINE'] . "\n"
+                        . $entry[$doublons_same_nb_keys[0]][1]['LINE'] . "\n"
+                        . $entry[$doublons_same_nb_keys[1]][0]['LINE'] . "\n"
+                        . $entry[$doublons_same_nb_keys[1]][1]['LINE'] . "\n";
+                    $i++;
+                }
+            }
+//echo "$report\n"; exit;
+            //
+            if(count($doublons_different_nb) > 0){
+                $report .= "\n======= case 3 : $n3 date ambiguities with different nb =======\n";
+                $doublons_different_nb_keys = array_keys($doublons_different_nb[0]); // ex ['902gdA2y.html', '902gdN.html']
+                foreach($doublons_different_nb as $entry){
+                    $report .= "\n";
+                    foreach($entry[$doublons_different_nb_keys[0]] as $entry2){
+                        $report .=  $entry2['LINE'] . "\n";
+                    }
+                    foreach($entry[$doublons_different_nb_keys[1]] as $entry2){
+                        $report .=  $entry2['LINE'] . "\n";
+                    }
+                }
+            }
         }
         $n = $n_bad + $n_good;
         $report .= "Corrections from 1955 book : $n_correction_1955\n";
@@ -377,6 +419,7 @@ class raw2tmp implements Command {
     // ******************************************************
     /**
         Auxiliary of raw2tmp()
+        Modifies $res passed by reference
         @return [$n_ok_fix, $n1_fix, $n2_fix]
     **/
     private static function corrections1955(&$res, &$missing_in_names, &$doublons_same_nb, $datafile, $file_datafile, $file_names){
@@ -440,7 +483,7 @@ class raw2tmp implements Command {
                     }
                 }
                 $n2_fix += 2;
-                unset($doublons_same_nb[$i]); // useful only for report
+                unset($doublons_same_nb[$i]);
             }
         }
         //
@@ -461,5 +504,23 @@ class raw2tmp implements Command {
     }
     
     
+    // ******************************************************
+    /**
+        Auxiliary of raw2tmp()
+        Modifies $res passed by reference
+        @return $n2bis_fix
+    **/
+    private static function correctionsByhand(&$res, &$doublons_same_nb, $datafile, $file_datafile){
+        $n2bis_fix = 0;
+        $n = count($res);
+        for($i=0; $i < $n; $i++){
+            $NUM = $res[$i]['NUM'];
+            if(isset(A::CORRECTIONS_BYHAND[$datafile][$NUM]) && strpos($res[$i]['FNAME'], 'Gauquelin-') === 0){
+                $n2bis_fix++;
+                $res[$i]['FNAME'] = A::CORRECTIONS_BYHAND[$datafile][$NUM];
+            }
+        }
+        return $n2bis_fix;
+    }
 }// end class    
 

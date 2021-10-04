@@ -391,4 +391,23 @@ class A{
         ],
     ];
 
+    
+    /** 
+        Manual corrections : name matching added using successive executions of raw2tmp.
+        Asoociative array : [
+                serie => [
+                    NUM => name,
+                    ...
+                ],
+                ...
+            ]
+        Name spelling is the exact spelling contained in gd902N.html.
+        This exact spelling is used to solve ambiguities.
+    **/
+    const CORRECTIONS_BYHAND = [
+        //A1 not done because completely fixed by further commands (like Ertel4391)
+        'A2' => [
+        ],
+    ];
+    
 }// end class    

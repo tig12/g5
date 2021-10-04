@@ -5,7 +5,6 @@
     PL : Place of Birth for children (HOS = Saint-Antoine Hospital ; MAT = private Maternity ; H = Home)     
     
     @license    GPL
-    @copyright  jetheme.org
     @history    2014-01-11 00:17:29+01:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\cura;
@@ -32,6 +31,9 @@ class SerieB{
         @return report
     **/
     public static function import($params){
+        
+die("Draft code - not included in Gauquelin5 program\n");
+        
         $report = '';
         // load and parse raw page
         $raw = Cura::read_raw_file($params['file-info']);
