@@ -245,15 +245,16 @@ class raw2tmp implements Command {
                 $doublons_same_nb_keys = array_keys($doublons_same_nb[0]); // ex ['902gdA2y.html', '902gdN.html']
                 $i = 0;
                 foreach($doublons_same_nb as $entry){
-                    $report .= "$i\n"
-                        . $entry[$doublons_same_nb_keys[0]][0]['LINE'] . "\n"
-                        . $entry[$doublons_same_nb_keys[0]][1]['LINE'] . "\n"
-                        . $entry[$doublons_same_nb_keys[1]][0]['LINE'] . "\n"
-                        . $entry[$doublons_same_nb_keys[1]][1]['LINE'] . "\n";
+                    $report .= "--- $i ---\n";
+                    foreach($entry[$doublons_same_nb_keys[0]] as $element){
+                        $report .= $element['LINE'] . "\n";
+                    }
+                    foreach($entry[$doublons_same_nb_keys[1]] as $element){
+                        $report .= $element['LINE'] . "\n";
+                    }
                     $i++;
                 }
             }
-//echo "$report\n"; exit;
             //
             if(count($doublons_different_nb) > 0){
                 $report .= "\n======= case 3 : $n3 date ambiguities with different nb =======\n";
@@ -508,14 +509,17 @@ class raw2tmp implements Command {
     /**
         Auxiliary of raw2tmp()
         Modifies $res passed by reference
+        WARNING: this function does not modify $doublons_same_nb, even if it should in fact
+        (because the doublons are solved by A::CORRECTIONS_BYHAND)
         @return $n2bis_fix
     **/
     private static function correctionsByhand(&$res, &$doublons_same_nb, $datafile, $file_datafile){
         $n2bis_fix = 0;
         $n = count($res);
+        // first pass, on $res, to correct the names
         for($i=0; $i < $n; $i++){
             $NUM = $res[$i]['NUM'];
-            if(isset(A::CORRECTIONS_BYHAND[$datafile][$NUM]) && strpos($res[$i]['FNAME'], 'Gauquelin-') === 0){
+            if(isset(A::CORRECTIONS_BYHAND[$datafile][$NUM])){
                 $n2bis_fix++;
                 $res[$i]['FNAME'] = A::CORRECTIONS_BYHAND[$datafile][$NUM];
             }

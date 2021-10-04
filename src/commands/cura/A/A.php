@@ -394,6 +394,7 @@ class A{
     
     /** 
         Manual corrections : name matching added using successive executions of raw2tmp.
+        This array is built using raw2tmp full, and looking at $doublons_same_nb
         Asoociative array : [
                 serie => [
                     NUM => name,
@@ -407,6 +408,50 @@ class A{
     const CORRECTIONS_BYHAND = [
         //A1 not done because completely fixed by further commands (like Ertel4391)
         'A2' => [
+            '717'  => 'Trousseau Armand',
+            '3528' => 'Plateau Joseph',
+            '2399' => 'Lequime Joseph',
+            '2442' => 'Sotteau Auguste',
+            '2466' => 'Warlomont Evariste',
+            '622'  => 'Regnaud Jules',
+            '2319' => 'Cousot Theodule',
+            '3594' => 'Haan David',
+            '3446' => 'Dewalque Gustave',
+            '2462' => 'Vleminckx Victor',
+            '2210' => 'Thoma Richard',
+            '1668' => 'Bloch Emil',
+            '2224' => 'Veiel Theodor',
+            '2139' => 'Schön Wilhelm',
+            '1682' => 'Bresgen Maximilian',
+            '3563' => 'Verschaffel Aloys',
+            '2498' => 'Eykman Johan',
+            '3600' => 'Kapteijn Jacobus',
+            '1931' => 'Königshöfer Oskar',
+            '3489' => 'Lagrange Charles',
+            '2864' => 'Rabut Charles',
+            '1972' => 'Liebendörfer Georg',
+            '662'  => 'Schwartz Edouard',
+            '3606' => 'Lorentz Hendrik',
+            '2682' => 'Fave Louis',
+            '2113' => 'Schallmayer Wilhelm',
+            '329'  => 'Hache Louis',
+            '2262' => 'Wette Hermann',
+            '444'  => 'Linossier Jules',
+            '2058' => 'Orthmann Ernst',
+            '1531' => 'Pascale Giovanni',
+            '2183' => 'Stacke Ludwig',
+            '1436' => 'Ficano Giuseppe',
+            '2119' => 'Schenck Friedrich',
+            '2357' => 'Gilson Eugene',
+            '2409' => 'Massart Jean',
+            '2127' => 'Schmidt Adolf',
+            // '2548' => 'Winkler Prins Vincent',
+            // '1845' => 'Herrenknecht Wilhelm',
+            // '1822' => 'Hackenbruch Peter',
+            '3568' => 'Willem Victor',
+            '1884' => 'Jores Leonhard',
+//stopped at nb 20
+//            '' => '',
         ],
     ];
     
