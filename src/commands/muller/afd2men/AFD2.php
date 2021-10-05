@@ -180,7 +180,7 @@ class AFD2 {
         '174' => 'A5-1885', // Erhard Ludwig 
         '182' => 'A4-1860', // Fauré Gabriel 
         '185' => 'A2-3027', // Fermi Enrico 
-        '186' => 'A5-320', //   Fernandel
+        '186' => 'A5-320', // Fernandel
         '192' => 'A6-318', // Flaubert Gustave 
         '194' => 'A2-2689', // Foch Ferdinand 
         '198' => 'A6-334', // France Anatole

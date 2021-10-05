@@ -394,7 +394,8 @@ class A{
     
     /** 
         Manual corrections : name matching added using successive executions of raw2tmp.
-        This array is built using raw2tmp full, and looking at $doublons_same_nb
+        This array is built using raw2tmp full, and looking at $doublons_same_nb.
+        Differentiation done mainly using birth place (search on internet).
         Asoociative array : [
                 serie => [
                     NUM => name,
@@ -402,10 +403,10 @@ class A{
                 ],
                 ...
             ]
-        Name spelling is the exact spelling contained in gd902N.html.
-        This exact spelling is used to solve ambiguities.
+        Name spelling is not necessarily the exact spelling contained in gd902N.html
+        (this list contain some corrections on the names)
     **/
-    const CORRECTIONS_BYHAND = [
+    const CORRECTIONS_BY_HAND = [
         //A1 not done because completely fixed by further commands (like Ertel4391)
         'A2' => [
             '717'  => 'Trousseau Armand',
@@ -445,10 +446,9 @@ class A{
             '2357' => 'Gilson Eugene',
             '2409' => 'Massart Jean',
             '2127' => 'Schmidt Adolf',
-// need confirmation
-            // '2548' => 'Winkler Prins Vincent',
-            // '1845' => 'Herrenknecht Wilhelm',
-            // '1822' => 'Hackenbruch Peter',
+            '1845' => 'Herrenknecht Wilhelm',
+            '2548' => 'Winkler Prins Vincent',
+            '1822' => 'Hackenbruch Peter',
             '3568' => 'Willem Victor',
             '1884' => 'Jores Leonhard',
             '1951' => 'Kümmel Werner',
@@ -466,13 +466,122 @@ class A{
             '1247' => 'Savoire Camille',
             '3267' => 'Fichter Carl',
             '1421' => 'Erchia Florenzo',
-//stopped at nb 27
-            '' => '',
-            '' => '',
-            '' => '',
-            '' => '',
-            '' => '',
-            '' => '',
+            '538'  => 'Nobecourt Pierre',
+            '2162' => 'Sellheim Hugo',
+            '1260' => 'Sicard Pauzoles Just',
+            '1504' => 'Micheli Ferdinando',
+            '1410' => 'De Lieto Vollaro Agostino',
+            '1606' => 'Veratti Emilio',
+            '2253' => 'Weidenreich Franz',
+            '1942' => 'Krauss Wilhelm',
+            '2532' => 'Römer Lucien',
+            '3173' => 'Vaccari Lino',
+            '3071' => 'Marconi Guglielmo',
+            '499'  => 'Merklen Jean',
+            '1034' => 'Guillemin Joseph',
+            '2507' => 'Hammes Theodor',
+            '2228' => 'Verth Max',
+            '3038' => 'Ghigi Alessandro',
+            '1501' => 'Merzbacher Ludwig',
+            '3612' => 'Mourik-Broekman Gerrit',
+            '3177' => 'Vitali Giuseppe',
+            '1477' => 'Levi Bianchini Marco',
+            '2185' => 'Staehelin Rudolf',
+            '1593' => 'Stoppoloni Giuseppe',
+            '1829' => 'Harms Clemens',
+            '1947' => 'Külbs Franz',
+            '3066' => 'Mameli Efisio',
+            '937'  => 'Delherm Louis',
+            '1805' => 'Grashey Rudolf',
+            '1771' => 'Frangenheim Paul',
+            '1922' => 'Koelsch Franz',
+            '3383' => 'Tillmans Joseph',
+            '1348' => 'Bertolotti Mario',
+            '1833' => 'Hartmann Max',
+            '2988' => 'Casati Edmondo',
+            '1838' => 'Haymann Ludwig',
+            '2566' => 'Baulig Henri',
+            '614'  => 'Rathery Edme',
+            '3024' => 'Fachini Stefano',
+            '2156' => 'Schwarz Leopold',
+            '2187' => 'Stauder Alfons',
+            '1795' => 'Goldschmidt Richard',
+            '1744' => 'Euler Hermann',
+            '1645' => 'Basler Adolf',
+            '1802' => 'Graff Erwin',
+            '2004' => 'Meinicke Ernst',
+            '3034' => 'Fubini Ghiron Guido',
+            '3585' => 'Burg Boke',
+            '3162' => 'Tieri Laureto',
+            '1419' => 'Donati Mario',
+            '3313' => 'Jakob Max',
+            '3372' => 'Schröder Johannes',
+            '3472' => 'Kaisin Felix',
+            '1354' => 'Bolognesi Giuseppe',
+            '3478' => 'Halet Frans', // Frans Albert Thomas Émile
+            '3062' => 'Lo Surdo Antonino',
+            '3150' => 'Sibirani Filippo',
+            '1536' => 'Pende Nicola',
+            '2222' => 'Veiel Eberhard',
+            '2501' => 'Gezelle-Meerburg George',
+            '3354' => 'Rogowski Walter',
+            '2991' => 'Charrier Gaetano',
+            '3321' => 'Kopff August',
+            '1460' => 'Gasbarrini Antonio',
+            '3151' => 'Silva Giovanni',
+            '3100' => 'Parlati Luigi',
+            '1659' => 'Berblinger Walther',
+            '2934' => 'Abetti Giorgio',
+            '1721' => 'Dold Hermann',
+            '1624' => 'Ackerknecht Eberhard',
+            '1746' => 'Eymer Heinrich',
+            '1792' => 'Gins Heinrich',
+            '3101' => 'Parravano Nicola',
+            '3343' => 'Piccard Auguste', //fixed thanks to Müller 612 famous men
+            '3344' => 'Piccard Jean', //fixed thanks to Müller 612 famous men
+            '2745' => 'Jolibois Medard',
+            '3041' => 'Gini Corrado',
+            '2943' => 'Almagia Roberto',
+            '3070' => 'Marchetti Alessandro',
+            '2982' => 'Caproni Gianni',
+            '1818' => 'Guggenheimer Hans',
+            '1577' => 'Schiassi Francesco',
+            '3374' => 'Seeliger Rudolf',
+            '1890' => 'Kahn Eugen',
+            '3084' => 'Monterosso Bruno',
+            '1272' => 'Tarneaud Jean',
+            '3338' => 'Oettingen Wolfgan',
+            '1184' => 'Peres Gustave',
+            '1119' => 'Loubatie René',
+            '1660' => 'Berg Hans',
+            '1381' => 'Castaldi Luigi',
+            '2359' => 'Goormaghtigh Norbert',
+            '2640' => 'Danjon André',
+            '3126' => 'Rivera Vincenzo',
+            '73'   => 'Binet Leon',
+            '2199' => 'Straus Erwin',
+            '1674' => 'Bogendorfer Ludwig',
+            '3522' => 'Mund Walter',
+            '3074' => 'Marzolo Francesco',
+            '3352' => 'Reihlen Hans',
+            '197'  => 'Delannoy Emile',
+            '3616' => 'Oordt Gregorius',
+            '3584' => 'Bungenberg Jong Hendrik',
+            //unable to find out
+            // 1893	5	27	S	810	F	16	5	40	0	47N15	6E 2	25	BESANCON
+            // 1893	5	27	S	1047	F	14	50	40	0	35N40	0W30	ALG	ORAN
+            // 1893-05-27	SC	Bienvenu Georges
+            // 1893-05-27	SC	Henry Jean
+            '1820' => 'Guthmann Heinrich',
+            '2324' => 'Dalco Albert',
+            '3190' => 'Auwers Otto',
+            '1892' => 'Kalk Heinz',
+            '3085' => 'Mordini Antonio',
+            '2541' => 'Vedder Aron',
+            '1503' => 'Michelazzi Augusto',
+            '1310' => 'Vives Marcel',
+            '2973' => 'Bottini Ottaviano',
+            '3167' => 'Tonzig Sergio',
         ],
     ];
     
