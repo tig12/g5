@@ -25,17 +25,23 @@ use tiglib\arrays\sortByKey;
 
 class raw2tmp implements Command {
     
+    const REPORT_TYPE = [
+        'small' => 'Echoes only global results',
+        'full'  => 'Prints the details of all problematic rows',
+        'same'  => 'Prints the details of unsolved repeats (with same number in list 1 and list 2)',
+    ];
+    
     /** 
         Parses one html cura file of serie A (locally stored in directory data/raw/cura.free.fr)
         
         Merges the original list (without names) with names contained in file 902gdN.html
         Merge is done using birthdate.
-        Merge is not complete because of doublons (persons born the same day).
+        Merge is not complete because of repeats (persons born the same day).
         
         @param  $params Array containing 3 elements :
                         - a string identifying what is processed (ex : 'A1')
                         - "raw2tmp" (useless here)
-                        - The report type. Can be "small" or "full"
+                        - The report type. Can be one of REPORT_TYPE keys.
         @return String report
         @throws Exception if unable to parse
     **/
@@ -44,14 +50,15 @@ class raw2tmp implements Command {
         if(count($params) > 3){
             return "USELESS PARAMETER : " . $params[3] . "\n";
         }
-        $msg = "This command needs a parameter to specify which output it displays. Can be :\n"
-             . "  small : echoes only global results\n"
-             . "  full : prints the details of problematic rows\n";
-        if(count($params) < 3){
-            return "MISSING PARAMETER : $msg";
+        $msg = "Possible values for parameter:\n";
+        foreach(self::REPORT_TYPE as $k => $v){
+            $msg .= "  '$k' : $v\n";
         }
-        if(!in_array($params[2], ['small', 'full'])){
-            return "INVALID PARAMETER : $msg";
+        if(count($params) < 3){
+            return "MISSING PARAMETER - This command needs a parameter to specify which output it displays.\n$msg";
+        }
+        if(!in_array($params[2], array_keys(self::REPORT_TYPE))){
+            return "INVALID PARAMETER '{$params[2]}':\n$msg";
         }
         
         $report_type = $params[2];
@@ -113,8 +120,8 @@ class raw2tmp implements Command {
         // variables used only for report
         $n_ok = 0;                              // correctly merged
         $n1 = 0; $missing_in_names = [];        // date present in list 1 and not in name list
-        $n2 = 0; $doublons_same_nb = [];        // multiple persons born the same day ; same nb of persons in list 1 and name list
-        $n3 = 0; $doublons_different_nb = [];   // multiple persons born the same day ; different nb of persons in list 1 and name list
+        $n2 = 0; $repeats_same_nb = [];        // multiple persons born the same day ; same nb of persons in list 1 and name list
+        $n3 = 0; $repeats_different_nb = [];   // multiple persons born the same day ; different nb of persons in list 1 and name list
         foreach($res1 as $day1 => $array1){
             if(!isset($res2[$day1])){
                 // date in list 1 and not in name list
@@ -140,20 +147,20 @@ class raw2tmp implements Command {
                     $tmp['FNAME'] = self::computeReplacementName($datafile, $tmp['NUM']);
                     $res[] = $tmp;
                 }
-                $new_doublon = [$file_datafile => [], $file_names => []];
+                $new_repeat = [$file_datafile => [], $file_names => []];
                 foreach($array1 as $tmp){
-                    $new_doublon[$file_datafile][] = [
+                    $new_repeat[$file_datafile][] = [
                         'LINE' => implode("\t", $tmp),
                         'NUM' => $tmp['NUM'],
                     ];
                 }
                 foreach($array2 as $tmp){
-                    $new_doublon[$file_names][] = [
+                    $new_repeat[$file_names][] = [
                         'LINE' => implode("\t", $tmp),
                         'FNAME' => $tmp['name'],
                     ];
                 }
-                $doublons_different_nb[] = $new_doublon;
+                $repeats_different_nb[] = $new_repeat;
                 continue;
             }
             else{
@@ -173,21 +180,21 @@ class raw2tmp implements Command {
                         $tmp['FNAME'] = self::computeReplacementName($datafile, $tmp['NUM']);
                         $res[] = $tmp;
                     }
-                    // fill $doublons_same_nb with all candidate lines
-                    $new_doublon = [$file_datafile => [], $file_names => []];
+                    // fill $repeats_same_nb with all candidate lines
+                    $new_repeat = [$file_datafile => [], $file_names => []];
                     foreach($array1 as $tmp){
-                        $new_doublon[$file_datafile][] = [
+                        $new_repeat[$file_datafile][] = [
                             'LINE' => implode("\t", $tmp),
                             'NUM' => $tmp['NUM'],
                         ];
                     }
                     foreach($array2 as $tmp){
-                        $new_doublon[$file_names][] = [
+                        $new_repeat[$file_names][] = [
                             'LINE' => implode("\t", $tmp),
                             'FNAME' => $tmp['name'],
                         ];
                     }
-                    $doublons_same_nb[] = $new_doublon;
+                    $repeats_same_nb[] = $new_repeat;
                 }
             }
         }
@@ -196,17 +203,17 @@ class raw2tmp implements Command {
         // 1955 corrections
         //
         $n1_fix = 0;    // cases in $missing_in_names solved by 1955
-        $n2_fix = 0;    // cases in $doublons_same_nb solved by 1955
+        $n2_fix = 0;    // cases in $repeats_same_nb solved by 1955
         $n_ok_fix = 0;  // other cases solved by 1955, directly solved by A::CORRECTIONS_1955
         if(isset(A::CORRECTIONS_1955[$datafile])){
-            [$n_ok_fix, $n1_fix, $n2_fix] = self::corrections1955($res, $missing_in_names, $doublons_same_nb, $datafile, $file_datafile, $file_names);
+            [$n_ok_fix, $n1_fix, $n2_fix] = self::corrections1955($res, $missing_in_names, $repeats_same_nb, $datafile, $file_datafile, $file_names);
         }
         //
         // Manual corrections
         //
-        $n2bis_fix = 0;    // cases solved by A::CORRECTIONS_BY_HAND ($doublons_same_nb only)
+        $n2bis_fix = 0;    // cases solved by A::CORRECTIONS_BY_HAND ($repeats_same_nb only)
         if(isset(A::CORRECTIONS_BY_HAND[$datafile])){
-            $n2bis_fix = self::correctionsByhand($res, $doublons_same_nb, $datafile, $file_datafile);
+            $n2bis_fix = self::correctionsByhand($res, $datafile, $file_datafile);
         }
         //
         // FNAME, GNAME
@@ -237,37 +244,50 @@ class raw2tmp implements Command {
                 }
             }
             //
-            if(count($doublons_same_nb) > 0){
-                $report .= "\n======= case 2 : $n2 date ambiguities with same nb =======\n"
-                    . "$n2_fix fixed by 1955\n"
-                    . "$n2bis_fix fixed by manual corrections\n"
-                    . "Remains " . ($n2 - $n2_fix - $n2bis_fix) . " to fix\n";
-                $doublons_same_nb_keys = array_keys($doublons_same_nb[0]); // ex ['902gdA2y.html', '902gdN.html']
-                $i = 0;
-                foreach($doublons_same_nb as $entry){
-                    $report .= "--- $i ---\n";
-                    foreach($entry[$doublons_same_nb_keys[0]] as $element){
-                        $report .= $element['LINE'] . "\n";
+            if(count($repeats_different_nb) > 0){
+                $report .= "\n======= case 3 : $n3 date ambiguities with different nb =======\n";
+                $repeats_different_nb_keys = array_keys($repeats_different_nb[0]); // ex ['902gdA2y.html', '902gdN.html']
+                foreach($repeats_different_nb as $entry){
+                    $report .= "\n";
+                    foreach($entry[$repeats_different_nb_keys[0]] as $entry2){
+                        $report .=  $entry2['LINE'] . "\n";
                     }
-                    foreach($entry[$doublons_same_nb_keys[1]] as $element){
-                        $report .= $element['LINE'] . "\n";
+                    foreach($entry[$repeats_different_nb_keys[1]] as $entry2){
+                        $report .=  $entry2['LINE'] . "\n";
                     }
-                    $i++;
                 }
             }
-            //
-            if(count($doublons_different_nb) > 0){
-                $report .= "\n======= case 3 : $n3 date ambiguities with different nb =======\n";
-                $doublons_different_nb_keys = array_keys($doublons_different_nb[0]); // ex ['902gdA2y.html', '902gdN.html']
-                foreach($doublons_different_nb as $entry){
-                    $report .= "\n";
-                    foreach($entry[$doublons_different_nb_keys[0]] as $entry2){
-                        $report .=  $entry2['LINE'] . "\n";
-                    }
-                    foreach($entry[$doublons_different_nb_keys[1]] as $entry2){
-                        $report .=  $entry2['LINE'] . "\n";
+        }
+        if(($report_type == 'full' || $report_type == 'same') && count($repeats_same_nb) > 0){
+            $res_num = [];
+            foreach($res as $entry){
+                $res_num[$entry['NUM']] = $entry;
+            }
+            $report .= "\n======= case 2 : $n2 date ambiguities with same nb =======\n"
+                . "$n2_fix fixed by 1955\n"
+                . "$n2bis_fix fixed by manual corrections\n"
+                . "Remains " . ($n2 - $n2_fix - $n2bis_fix) . " to fix\n";
+            [$key1, $key2] = array_keys($repeats_same_nb[0]); // ex ['902gdA2y.html', '902gdN.html']
+            $i = 1;
+            foreach($repeats_same_nb as $repeat){
+                $all_fixed = true;
+                foreach($repeat[$key1] as $elt){
+                    if(strpos($res_num[$elt['NUM']]['FNAME'], 'Gauquelin-') === 0){
+                        $all_fixed = false;
+                        break;
                     }
                 }
+                if($all_fixed){
+                    continue;
+                }
+                $report .= "--- $i ---\n";
+                foreach($repeat[$key1] as $elt){
+                    $report .= $elt['LINE'] . "\n";
+                }
+                foreach($repeat[$key2] as $elt){
+                    $report .= $elt['LINE'] . "\n";
+                }
+                $i++;
             }
         }
         $n = $n_bad + $n_good;
@@ -286,7 +306,6 @@ class raw2tmp implements Command {
             $new['NUM'] = trim($cur['NUM']);
             $new['FNAME'] = trim($cur['FNAME']);
             $new['GNAME'] = trim($cur['GNAME']);
-            /////// TODO put wikidata occupation id ///////////
             $new['OCCU'] = self::computeProfession($datafile, $cur['PRO'], $new['NUM']);
             // date time
             $day = Cura::computeDay($cur);
@@ -423,7 +442,7 @@ class raw2tmp implements Command {
         Modifies $res passed by reference
         @return [$n_ok_fix, $n1_fix, $n2_fix]
     **/
-    private static function corrections1955(&$res, &$missing_in_names, &$doublons_same_nb, $datafile, $file_datafile, $file_names){
+    private static function corrections1955(&$res, &$missing_in_names, &$repeats_same_nb, $datafile, $file_datafile, $file_names){
         $n_ok_fix = $n1_fix = $n2_fix = 0;
         //
         // Remove cases in $missing_in_names solved by 1955
@@ -437,34 +456,34 @@ class raw2tmp implements Command {
             }
         }
         //
-        // Resolve doublons
+        // Resolve repeats
         // computes $n2_fix
         //
         $NUMS_1955 = array_keys(A::CORRECTIONS_1955[$datafile]);
-        $N_DOUBLONS = count($doublons_same_nb);
-        for($i=0; $i < $N_DOUBLONS; $i++){
-            if(count($doublons_same_nb[$i][$file_datafile]) != 2){                
-                // resolution works only for doublons (not triplets or more elements)
+        $N_REPEATS = count($repeats_same_nb);
+        for($i=0; $i < $N_REPEATS; $i++){
+            if(count($repeats_same_nb[$i][$file_datafile]) != 2){                
+                // resolution works only for repeats (not triplets or more elements)
                 continue;
             }
             $found = false;
-            if(in_array($doublons_same_nb[$i][$file_datafile][0]['NUM'], $NUMS_1955)){
-                $NUM = $doublons_same_nb[$i][$file_datafile][0]['NUM'];
+            if(in_array($repeats_same_nb[$i][$file_datafile][0]['NUM'], $NUMS_1955)){
+                $NUM = $repeats_same_nb[$i][$file_datafile][0]['NUM'];
                 $NAME = A::CORRECTIONS_1955[$datafile][$NUM];
                 $found = 0;
             }
-            else if(in_array($doublons_same_nb[$i][$file_datafile][1]['NUM'], $NUMS_1955)){
-                $NUM = $doublons_same_nb[$i][$file_datafile][1]['NUM'];
+            else if(in_array($repeats_same_nb[$i][$file_datafile][1]['NUM'], $NUMS_1955)){
+                $NUM = $repeats_same_nb[$i][$file_datafile][1]['NUM'];
                 $NAME = A::CORRECTIONS_1955[$datafile][$NUM];
                 $found = 1;
             }
             if($found !== false){
                 // resolve first
                 $idx_num = ($found === 0 ? 1 : 0);
-                $idx_name = ($doublons_same_nb[$i][$file_names][0]['FNAME'] == $NAME ? 1 : 0); // HERE use of exact name spelling in A::CORRECTIONS_1955
-                $new_num1 = $doublons_same_nb[$i][$file_datafile][$idx_num]['NUM'];
-                $new_name1 = $doublons_same_nb[$i][$file_names][$idx_name]['FNAME'];
-                // inject doublon resolution in $res
+                $idx_name = ($repeats_same_nb[$i][$file_names][0]['FNAME'] == $NAME ? 1 : 0); // HERE use of exact name spelling in A::CORRECTIONS_1955
+                $new_num1 = $repeats_same_nb[$i][$file_datafile][$idx_num]['NUM'];
+                $new_name1 = $repeats_same_nb[$i][$file_names][$idx_name]['FNAME'];
+                // inject repeat resolution in $res
                 for($j=0; $j < count($res); $j++){
                     if($res[$j]['NUM'] == $new_num1){
                         $res[$j]['FNAME'] = $new_name1;
@@ -474,9 +493,9 @@ class raw2tmp implements Command {
                 // resolve second
                 $idx_num = ($idx_num == 0 ? 1 : 0);
                 $idx_name = ($idx_name == 0 ? 1 : 0);
-                $new_num2 = $doublons_same_nb[$i][$file_datafile][$idx_num]['NUM'];
-                $new_name2 = $doublons_same_nb[$i][$file_names][$idx_name]['FNAME'];
-                // inject doublon resolution in $res
+                $new_num2 = $repeats_same_nb[$i][$file_datafile][$idx_num]['NUM'];
+                $new_name2 = $repeats_same_nb[$i][$file_names][$idx_name]['FNAME'];
+                // inject repeat resolution in $res
                 for($j=0; $j < count($res); $j++){
                     if($res[$j]['NUM'] == $new_num2){
                         $res[$j]['FNAME'] = $new_name2;
@@ -484,18 +503,18 @@ class raw2tmp implements Command {
                     }
                 }
                 $n2_fix += 2;
-                unset($doublons_same_nb[$i]);
+                unset($repeats_same_nb[$i]);
             }
         }
         //
         // directly fix the result with data of A::CORRECTIONS_1955
-        // only for cases not solved by doublons
+        // only for cases not solved by repeats
         // computes $n_ok_fix
         //
         $n = count($res);
         for($i=0; $i < $n; $i++){
             $NUM = $res[$i]['NUM'];
-            // test on strpos done to avoid counting cases solved by doublons
+            // test on strpos done to avoid counting cases solved by repeats
             if(isset(A::CORRECTIONS_1955[$datafile][$NUM]) && strpos($res[$i]['FNAME'], 'Gauquelin-') === 0){
                 $n_ok_fix++;
                 $res[$i]['FNAME'] = A::CORRECTIONS_1955[$datafile][$NUM];
@@ -509,11 +528,11 @@ class raw2tmp implements Command {
     /**
         Auxiliary of raw2tmp()
         Modifies $res passed by reference
-        WARNING: this function does not modify $doublons_same_nb, even if it should in fact
-        (because the doublons are solved by A::CORRECTIONS_BY_HAND)
+        WARNING: this function does not modify $repeats_same_nb, even if it should in fact
+        (because the repeats are solved by A::CORRECTIONS_BY_HAND)
         @return $n2bis_fix
     **/
-    private static function correctionsByhand(&$res, &$doublons_same_nb, $datafile, $file_datafile){
+    private static function correctionsByhand(&$res, $datafile, $file_datafile){
         $n2bis_fix = 0;
         $n = count($res);
         // first pass, on $res, to correct the names

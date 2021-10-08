@@ -274,7 +274,7 @@ class A{
             '485' => 'Masson Claude',
             '486' => 'Mathis Constant',
             '491' => 'Mauricet Alphonse',
-            '499' => 'Merklen J',
+            //'499' => 'Merklen J', // commented because handled in CORRECTIONS_BY_HAND
             '504' => 'Meunier Henri',
             '506' => 'Mignot Antoine',
             '512' => 'Montprofit Jacques',
@@ -288,7 +288,7 @@ class A{
             '653' => 'Rouvillois Henri',
             '655' => 'Sabrazes Jean',
             '659' => 'Sartory Auguste',
-            '662' => 'Schwartz Edouard',
+            //'662' => 'Schwartz Edouard', // commented because handled in CORRECTIONS_BY_HAND
             '682' => 'Spillmann Louis',
             '706' => 'Teissier Joseph',
             '699' => 'Thierry Auguste',
@@ -332,7 +332,7 @@ class A{
             '1021' => 'Grandjean Alexandre',
             '1023' => 'Grasset Raymond',
             '1027' => 'Grenier Cardenal Henri',
-            '1034' => 'Guillemin Joseph',
+            //'1034' => 'Guillemin Joseph', // commented because handled in CORRECTIONS_BY_HAND
             '1041' => 'Guyon Emile',
             '1047' => 'Henry Jean',
             '1056' => 'Jacob Gustave',
@@ -352,7 +352,7 @@ class A{
             '1177' => 'Paschetta Charles',
             '1198' => 'Piollet Paul',
             '1220' => 'Renard Leon',
-            '1247' => 'Savoire Camille',
+            //'1247' => 'Savoire Camille', // commented because handled in CORRECTIONS_BY_HAND
             '1261' => 'Sikora Pierre',
             '1262' => 'Simon Clement',
             '1271' => 'Taillard Fulbert',
@@ -394,7 +394,7 @@ class A{
     
     /** 
         Manual corrections : name matching added using successive executions of raw2tmp.
-        This array is built using raw2tmp full, and looking at $doublons_same_nb.
+        This array is built using raw2tmp double, and looking at $doublons_same_nb.
         Differentiation done mainly using birth place (search on internet).
         Asoociative array : [
                 serie => [
@@ -566,7 +566,7 @@ class A{
             '3352' => 'Reihlen Hans',
             '197'  => 'Delannoy Emile',
             '3616' => 'Oordt Gregorius',
-            '3584' => 'Bungenberg Jong Hendrik',
+//            '3584' => 'Bungenberg Jong Hendrik',
             //unable to find out
             // 1893	5	27	S	810	F	16	5	40	0	47N15	6E 2	25	BESANCON
             // 1893	5	27	S	1047	F	14	50	40	0	35N40	0W30	ALG	ORAN
@@ -582,6 +582,14 @@ class A{
             '1310' => 'Vives Marcel',
             '2973' => 'Bottini Ottaviano',
             '3167' => 'Tonzig Sergio',
+            '1356' => 'Bonfiglio Francesco',
+            '3318' => 'Knoch Heinrich',
+            '1347' => 'Bertolani Aldo',
+            '3174' => 'Vercelli Francesco',
+            '1366' => 'Caliceti Pietro',
+            '1272' => 'Tarneaud Jean',
+            '1452' => 'Galdi Francesco',
+            '' => '',
         ],
     ];
     

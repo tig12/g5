@@ -36,7 +36,7 @@ class tmp2db implements Command {
         }
         $msg = '';
         foreach(self::REPORT_TYPE as $k => $v){
-            $msg .= "  $k : $v\n";
+            $msg .= "  '$k' : $v\n";
         }
         if(count($params) != 1){
             return "WRONG USAGE - This command needs a parameter to specify which output it displays. Can be :\n" . $msg;

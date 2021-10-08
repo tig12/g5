@@ -22,9 +22,10 @@ class look implements Command {
         Possible values of the command
     **/
     const POSSIBLE_PARAMS = [
-        'count',
-        'lists',
-        'names',
+        'count' => 'Echoes a html table with caracteristics of restoration of all A files',
+        'lists' => 'Compares list 1 (precise data) and list 2 (names) for a given A file',
+        'names' => 'Counts the number of names in 902gdN.html (for all Gauquelin files)',
+        'corr'  => 'Compares 1955 / hand corrections for a given A file'
     ];
     
     /** 
@@ -41,15 +42,16 @@ class look implements Command {
         if(count($params) > 3){
             return "INVALID PARAMETER : " . $params[3] . " - this command doesn't need this parameter\n";
         }
-        $possibleParams_str = implode(', ', self::POSSIBLE_PARAMS);
+        $msg = "Possible values for parameter:\n";
+        foreach(self::POSSIBLE_PARAMS as $k => $v){
+            $msg .= "  '$k' : $v\n";
+        }
         if(count($params) != 3){
-            return "PARAMETER MISSING\n"
-                . "Possible values for parameter : $possibleParams_str\n";
+            return "PARAMETER MISSING\n" . $msg;
         }
         $param = $params[2];
-        if(!in_array($param, self::POSSIBLE_PARAMS)){
-            return "INVALID PARAMETER\n"
-                . "Possible values for parameter : $possibleParams_str\n";
+        if(!in_array($param, array_keys(self::POSSIBLE_PARAMS))){
+            return "INVALID PARAMETER: '$param'\n" . $msg;
         }
         $datafile = $params[0];
         $method = 'look_' . $param;
@@ -63,17 +65,15 @@ class look implements Command {
     private static function look_count($datafile){
         $datafiles = CuraRouter::computeDatafiles('A');
         $dir = Cura::tmpDirname();
-        
+        //
         $N = $nNAME = $nDATE = $nGEOID = array_fill_keys($datafiles, 0);
         $missNAME = $missDATE = $missGEOID = 0;
-        
+        //
         foreach($datafiles as $datafile){
             $file = $dir . DS . $datafile . '.csv';
             $rows = csvAssociative::compute($file);
             foreach($rows as $row){
-                
                 $N[$datafile]++;
-                
                 if(substr($row['FNAME'], 0, 11) != 'Gauquelin-A'){
                     $nNAME[$datafile]++;
                 }
@@ -84,9 +84,8 @@ class look implements Command {
                     $nGEOID[$datafile]++;
                 }
             }
-            
         }
-        
+        //
         $report = '';
         $report .= '<table class="count-A wikitable margin">' . "\n";
         $report .= '<tr>'
@@ -161,7 +160,7 @@ class look implements Command {
     /**
         Tests if two lists contained in 902gdA*y.html files (ex 902gdA1y.html) contain the same number of elements.
         - First list contains the detailed birth data but not the names.
-        - Second list is chronologial order list with names.
+        - Second list is chronological order list with names.
         
         Result (execution 2019-03-31) : 
         Serie A1 - nb of elements : list1 : 2087 - list2 : 2082
@@ -229,7 +228,6 @@ class look implements Command {
         @param $datafile    Useless here
         @history    2017-04-27 11:16:42+02:00, Thierry Graff : creation   
         @history    2020-09-07, Thierry Graff : Integration to g5\commands
-        
     **/
     private static function look_names($datafile){
         $report = '';
@@ -238,6 +236,39 @@ class look implements Command {
         $report .= "Number of names in the different files\n";                                                                        
         foreach($names as $k => $v){
             $report .= $k . ' : ' . count($v) . "\n";
+        }
+        return $report;
+    }
+    
+    /** 
+        Check if corrections coming from 1955 and from manual corrections overlapse.
+    **/
+    private static function look_corr($datafile){
+        $report = "Comparing A::CORRECTIONS_1955 and A::CORRECTIONS_BY_HAND for $datafile\n";
+        $g55 = isset(A::CORRECTIONS_1955[$datafile]);
+        $hand = isset(A::CORRECTIONS_BY_HAND[$datafile]);
+        $N_g55 = $N_hand = 0;
+        if($g55){
+            $N_g55 = count(A::CORRECTIONS_1955[$datafile]);
+        }
+        $report .= "Nb of records in A::CORRECTIONS_1955:    $N_g55\n";
+        if($hand){
+            $N_hand = count(A::CORRECTIONS_BY_HAND[$datafile]);
+        }
+        $report .= "Nb of records in A::CORRECTIONS_BY_HAND: $N_hand\n";
+        if($hand && $g55){
+            $inter = array_intersect(
+                array_keys(A::CORRECTIONS_1955[$datafile]),
+                array_keys(A::CORRECTIONS_BY_HAND[$datafile]));
+            if(count($inter) == 0){
+                $report .= "A::CORRECTIONS_1955[$datafile] and A::CORRECTIONS_BY_HAND[$datafile] do not overlapse\n";
+            }
+            else{
+                $report .= "Common values in A::CORRECTIONS_1955[$datafile] and A::CORRECTIONS_BY_HAND[$datafile]:\n";
+            }
+            foreach($inter as $k){
+                $report .= "  $k => " . A::CORRECTIONS_1955[$datafile][$k] . "\n";
+            }
         }
         return $report;
     }
