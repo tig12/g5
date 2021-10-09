@@ -14,7 +14,7 @@
 namespace g5\commands\newalch\muller1083;
 
 use tiglib\patterns\Command;
-use g5\commands\cura\Cura;
+use g5\commands\gauq\Cura;
 use tiglib\arrays\sortByKey;
 
 class look implements Command {

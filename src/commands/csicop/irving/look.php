@@ -8,7 +8,7 @@ namespace g5\commands\csicop\irving;
 
 use g5\G5;
 use tiglib\patterns\Command;
-use g5\commands\cura\Cura;
+use g5\commands\gauq\Cura;
 use g5\commands\newalch\ertel4391\Ertel4391;
 use g5\commands\csicop\si42\SI42;
 use tiglib\arrays\csvAssociative;

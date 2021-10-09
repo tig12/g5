@@ -16,7 +16,7 @@ namespace g5\commands\muller\afd3women;
 use tiglib\patterns\Command;
 use g5\model\DB5;
 use tiglib\arrays\sortByKey;
-use g5\commands\cura\Cura;
+use g5\commands\gauq\Cura;
 
 class look implements Command {
     

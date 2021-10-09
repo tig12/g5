@@ -11,14 +11,14 @@
 namespace g5\commands\db\init;
 
 use tiglib\patterns\Command;
-use g5\commands\cura\CuraRouter;
+use g5\commands\gauq\GauqRouter;
 
 // for information sources
 use g5\G5;
 use g5\commands\gauq\LERRCP;
 use g5\commands\muller\AFD;
 use g5\commands\newalch\Newalch;
-use g5\commands\cura\Cura;
+use g5\commands\gauq\Cura;
 use g5\commands\wd\Wikidata;
 
 use g5\commands\db\init\dbcreate;
@@ -28,13 +28,13 @@ use g5\commands\db\fill\source                  as fillsource;
 use g5\commands\db\fill\tweak                   as filltweak;
 
 // raw2tmp
-use g5\commands\cura\A\raw2tmp                  as raw2tmpA;
-use g5\commands\cura\A\addGeo                   as addGeoA;
-use g5\commands\cura\D6\raw2tmp                 as raw2tmpD6;
-use g5\commands\cura\D6\addGeo                  as addGeoD6;
-use g5\commands\cura\D10\raw2tmp                as raw2tmpD10;
-use g5\commands\cura\E1_E3\raw2tmp              as raw2tmpE1E3;
-use g5\commands\cura\all\tweak2tmp              as tweak2tmpCura;
+use g5\commands\gauq\A\raw2tmp                  as raw2tmpA;
+use g5\commands\gauq\A\addGeo                   as addGeoA;
+use g5\commands\gauq\D6\raw2tmp                 as raw2tmpD6;
+use g5\commands\gauq\D6\addGeo                  as addGeoD6;
+use g5\commands\gauq\D10\raw2tmp                as raw2tmpD10;
+use g5\commands\gauq\E1_E3\raw2tmp              as raw2tmpE1E3;
+use g5\commands\gauq\all\tweak2tmp              as tweak2tmpCura;
 
 use g5\commands\newalch\ertel4391\raw2tmp       as raw2tmpErtel4391;
 use g5\commands\newalch\ertel4391\tweak2tmp     as tweak2tmpErtel4391;
@@ -56,11 +56,11 @@ use g5\commands\muller\afd3women\raw2tmp        as raw2tmpAfd3Women;
 use g5\commands\muller\afd2men\raw2tmp          as raw2tmpAfd2Men;
 
 // tmp2db
-use g5\commands\cura\A\tmp2db                   as tmp2dbA;
+use g5\commands\gauq\A\tmp2db                   as tmp2dbA;
 use g5\commands\newalch\occu\pnA6;
-use g5\commands\cura\D6\tmp2db                  as tmp2dbD6;
-use g5\commands\cura\D10\tmp2db                 as tmp2dbD10;
-use g5\commands\cura\E1_E3\tmp2db               as tmp2dbE1E3;
+use g5\commands\gauq\D6\tmp2db                  as tmp2dbD6;
+use g5\commands\gauq\D10\tmp2db                 as tmp2dbD10;
+use g5\commands\gauq\E1_E3\tmp2db               as tmp2dbE1E3;
 use g5\commands\newalch\muller1083\tmp2db       as tmp2dbMuller1083;
 use g5\commands\newalch\muller402\tmp2db        as tmp2dbMuller402;
 use g5\commands\newalch\muller402\tmp2db100     as tmp2dbMuller100;
@@ -73,7 +73,7 @@ use g5\commands\db\init\stats;
 use g5\commands\db\init\search;
 
 // export
-use g5\commands\cura\all\export                 as exportCura;
+use g5\commands\gauq\all\export                 as exportCura;
 use g5\commands\newalch\muller1083\export       as exportMuller1083;
 use g5\commands\newalch\muller402\export        as exportMuller402;
 use g5\commands\newalch\muller402\export100     as exportMuller100;
@@ -115,8 +115,8 @@ class all implements Command {
                 . "Possible values for parameter :\n$possibleParams_str\n";
         }
         
-        $filesCura = CuraRouter::computeDatafiles('all');
-        $filesCuraA = CuraRouter::computeDatafiles('A');
+        $filesCura = GauqRouter::computeDatafiles('all');
+        $filesCuraA = GauqRouter::computeDatafiles('A');
         
         $t1 = microtime(true);
         

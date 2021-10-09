@@ -5,7 +5,7 @@
     Updates the file 1083MED.csv with the values found in the yaml file.
     
     @license    GPL
-    @history    2019-10-18 16:16:16+02:00, Thierry Graff : creation from g5\commands\cura\all\tweak2csv
+    @history    2019-10-18 16:16:16+02:00, Thierry Graff : creation from g5\commands\gauq\all\tweak2csv
 ********************************************************************************/
 namespace g5\commands\newalch\muller1083;
 

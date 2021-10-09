@@ -9,7 +9,7 @@
 ********************************************************************************/
 namespace g5\commands\gauq;
 
-use g5\commands\cura\Cura;
+use g5\commands\gauq\Cura;
 use g5\model\Group;
 use g5\model\Source;
 

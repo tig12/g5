@@ -4,7 +4,7 @@
     Updates the file 4391SPO.csv with the values found in the yaml file.
     
     @license    GPL
-    @history    2019-12-23 18:40:13+01:00, Thierry Graff : Creation from g5\commands\cura\muller1083\tweak2csv
+    @history    2019-12-23 18:40:13+01:00, Thierry Graff : Creation from g5\commands\gauq\muller1083\tweak2csv
 ********************************************************************************/
 namespace g5\commands\newalch\ertel4391;
 

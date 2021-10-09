@@ -12,7 +12,7 @@ namespace g5\commands\newalch\muller402;
 use g5\G5;
 use tiglib\patterns\Command;
 use g5\commands\gauq\LERRCP;
-use g5\commands\cura\Cura;
+use g5\commands\gauq\Cura;
 
 class gauq implements Command {
     

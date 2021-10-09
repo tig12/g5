@@ -13,7 +13,7 @@ use g5\model\Group;
 use tiglib\arrays\csvAssociative;
 use tiglib\strings\encode2utf8;
 use g5\commands\newalch\Newalch;
-use g5\commands\cura\Cura;
+use g5\commands\gauq\Cura;
 
 class Muller1083 {
     
