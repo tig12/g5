@@ -16,7 +16,7 @@ namespace g5\commands\muller\afd3women;
 use tiglib\patterns\Command;
 use g5\model\DB5;
 use tiglib\arrays\sortByKey;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\LERRCP;
 
 class look implements Command {
     
@@ -193,7 +193,7 @@ class look implements Command {
                 else{
                     $N_match++;
                     $ids_in_sources = json_decode($res[0]['ids_in_sources'], true);
-                    $res_match .= "        '$MUID' => '{$ids_in_sources['cura5']}', // {$line['FNAME']} {$line['GNAME']}\n";
+                    $res_match .= "        '$MUID' => '{$ids_in_sources[LERRCP::SOURCE_SLUG]}', // {$line['FNAME']} {$line['GNAME']}\n";
                 }
             }
             else{
@@ -255,7 +255,7 @@ class look implements Command {
         $birth = json_decode($line['birth'], true);
         $ids_in_sources = json_decode($line['ids_in_sources'], true);
         $date = $birth['date-ut'] ?? $birth['date'];
-        return "GQ: {$ids_in_sources['cura5']}"
+        return "GQ: {$ids_in_sources[LERRCP::SOURCE_SLUG]}"
             . " {$name['family']} {$name['given']}"
             . " $date"
             . " --- "
@@ -274,7 +274,7 @@ class look implements Command {
         $report = '';
         $data = AFD3::loadTmpFile_muid();
         $dblink = DB5::getDbLink();
-        $query = "select name,ids_in_sources,birth from person where ids_in_sources->>'" . Cura::SOURCE_SLUG . "'=?";
+        $query = "select name,ids_in_sources,birth from person where ids_in_sources->>'" . LERRCP::SOURCE_SLUG . "'=?";
         $stmt = $dblink->prepare($query);
         
         foreach(AFD3::MU_GQ as $MUID => $GQID){

@@ -168,7 +168,7 @@ class tmp2db implements Command {
                 if($reportType == 'full'){
                     $report .= "Duplicate "
                     . $test->data['slug'] . " : "
-                    . $p->data['ids-in-sources'][Cura::SOURCE_SLUG]
+                    . $p->data['ids-in-sources'][LERRCP::SOURCE_SLUG]
                     . " = $gqId\n";
                 }
                 $nDuplicates++;

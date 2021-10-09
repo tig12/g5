@@ -34,7 +34,7 @@ use g5\commands\gauq\D6\raw2tmp                 as raw2tmpD6;
 use g5\commands\gauq\D6\addGeo                  as addGeoD6;
 use g5\commands\gauq\D10\raw2tmp                as raw2tmpD10;
 use g5\commands\gauq\E1_E3\raw2tmp              as raw2tmpE1E3;
-use g5\commands\gauq\all\tweak2tmp              as tweak2tmpCura;
+use g5\commands\gauq\all\tweak2tmp              as tweak2tmpGauq;
 
 use g5\commands\ertel\sport\raw2tmp             as raw2tmpErtelSport;
 use g5\commands\ertel\sport\tweak2tmp           as tweak2tmpErtelSport;
@@ -57,11 +57,11 @@ use g5\commands\muller\afd2men\raw2tmp          as raw2tmpAfd2Men;
 
 // tmp2db
 use g5\commands\gauq\A\tmp2db                   as tmp2dbA;
-use g5\commands\gauq\A\A6occu;
+use g5\commands\gauq\A\A6occu                   as A6occu;
 use g5\commands\gauq\D6\tmp2db                  as tmp2dbD6;
 use g5\commands\gauq\D10\tmp2db                 as tmp2dbD10;
 use g5\commands\gauq\E1_E3\tmp2db               as tmp2dbE1E3;
-use g5\commands\muller\afd5medics\tmp2db               as tmp2dbAfd5Medics;
+use g5\commands\muller\afd5medics\tmp2db        as tmp2dbAfd5Medics;
 use g5\commands\muller\afd1writers\tmp2db       as tmp2dbAfd1Writers;
 use g5\commands\muller\afd1writers\tmp2db100    as tmp2dbAfd1Writers100;
 use g5\commands\csicop\irving\tmp2db            as tmp2dbIrving;
@@ -137,7 +137,7 @@ class all implements Command {
             echo raw2tmpE1E3::execute(['E1', 'raw2tmp', 'small']);
             echo raw2tmpE1E3::execute(['E3', 'raw2tmp', 'small']);
             foreach($filesCura as $datafile){
-                echo tweak2tmpCura::execute([$datafile, 'tweak2tmp']);
+                echo tweak2tmpGauq::execute([$datafile, 'tweak2tmp']);
             }
             
             echo raw2tmpErtelSport::execute([]);

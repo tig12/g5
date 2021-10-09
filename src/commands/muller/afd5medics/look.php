@@ -222,13 +222,13 @@ class look implements Command {
          @param     $params Array with one element which must contain a string, which can take the values :
                     - "simple" : simply prints the names of noble persons.
                     - "yaml" : prints the noble persons in a yaml format
-                               (was used to write data/build/newalch-tweak/1083MED.yml)
+                               (was used to write data/db/init/newalch-tweak/1083MED.yml)
      **/
      private static function look_nobilities($params=[]){
         $msg = "This function needs one parameter to indicate the format. Can be \n"
         . "  simple : displays the noble persons\n"
         . "  yaml : displays the noble persons in a yaml format\n"
-        . "         (was used to write data/build/newalch-tweak/1083MED.yml)\n";
+        . "         (was used to write data/db/init/newalch-tweak/1083MED.yml)\n";
         if(count($params) != 1){
             return $msg;
         }

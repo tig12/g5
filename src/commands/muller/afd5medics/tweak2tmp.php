@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Transfers information from data/build/newalch-tweak/
+    Transfers information from data/db/init/newalch-tweak/
     to data/tmp/newalch-/
     Updates the file 1083MED.csv with the values found in the yaml file.
     

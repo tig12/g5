@@ -19,4 +19,4 @@ create table person (
 );
 create index person_slug_idx on person(slug);
 
--- create index person_cura_gin_idx on person using gin ((ids_in_sources -> 'cura5') jsonb_path_ops);
+-- create index person_lerrcp_gin_idx on person using gin ((ids_in_sources -> 'lerrcp') jsonb_path_ops);

@@ -1,7 +1,7 @@
 <?php
 /********************************************************************************
     Transfers information from
-    data/build/newalch-tweak/muller-402-it-writers.yml
+    data/db/init/newalch-tweak/muller-402-it-writers.yml
     to
     tmp/newalch/muller-402-it-writers.csv
     Updates the csv file with the values found in the yaml file.

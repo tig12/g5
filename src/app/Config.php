@@ -38,7 +38,7 @@ class Config {
         
         self::$data['dirs']['raw'] = 'data/raw';
         
-        self::$data['dirs']['init'] = 'data/init';
+        self::$data['dirs']['init'] = 'data/db/init';
         
         self::$data['dirs']['db'] = 'data/db';
     }

@@ -2,6 +2,9 @@
 /********************************************************************************
     Adds field GEOID and corrects field PLACE to files of data/tmp/cura/A*.csv
     
+    Here, could add TODO for concerned person
+    
+    
     @license    GPL
     @history    2019-07-03 06:48:00+02:00, Thierry Graff : creation
 ********************************************************************************/
@@ -21,9 +24,9 @@ class addGeo implements Command {
     private static $pdo_geonames;
 
     const POSSIBLE_PARAMS = [
-        'full',
-        'medium',
-        'small',
+        'full' => "lists all the place names that can't be matched to geonames.",
+        'medium' => 'lists the places with several matches to geonames.',
+        'small' => 'only echoes global information about matching.',
     ];
     
     /** 
@@ -35,9 +38,10 @@ class addGeo implements Command {
     **/
     public static function execute($params=[]): string{
         
-        $msg = "  - full   : lists all the place names that can't be matched to geonames.\n"
-             . "  - medium : lists the places with several matches to geonames.\n"
-             . "  - small  : only echoes global information about matching.\n";
+        $msg = "Possible values for parameter:\n";
+        foreach(self::POSSIBLE_PARAMS as $k => $v){
+            $msg .= "  '$k' : $v\n";
+        }
 
         if(count($params) < 3){
             return "WRONG USAGE - This command needs a parameter indicating the type of report\n$msg";
@@ -46,7 +50,7 @@ class addGeo implements Command {
             return "WRONG USAGE - Useless parameter \"{$params[3]}\".\n";
         }
         
-        if(!in_array($params[2], self::POSSIBLE_PARAMS)){
+        if(!in_array($params[2], array_keys(self::POSSIBLE_PARAMS))){
             return "WRONG USAGE - Invalid value : {$params[2]}. Possible values :\n$msg";
         }
         
