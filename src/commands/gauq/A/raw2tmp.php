@@ -291,9 +291,8 @@ class raw2tmp implements Command {
             }
         }
         $n = $n_bad + $n_good;
-        $report .= "Corrections from 1955 book : $n_correction_1955\n";
-        $report .= "names : nb match = $n_good / $n ($percent_ok %)\n";
-        $report .= "    nb NOT match = $n_bad ($percent_not_ok %)\n";
+        $report .= "N = $n ; corrections from 1955 book : $n_correction_1955\n";
+        $report .= "names : nb match = $n_good ($percent_ok %) - nb NOT match = $n_bad ($percent_not_ok %)\n";
         
         //
         // 4 - Generate result and store in data/tmp

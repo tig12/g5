@@ -13,7 +13,7 @@ use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
-use g5\commands\newalch\Newalch;
+use g5\commands\ertel\Newalch;
 use g5\commands\gauq\LERRCP;
 use g5\commands\csicop\CSICOP;
 use g5\commands\csicop\si42\SI42;

@@ -14,7 +14,7 @@ use g5\model\Group;
 use g5\model\Person;
 use g5\commands\muller\AFD;
 use g5\commands\gauq\LERRCP;
-use g5\commands\newalch\muller402\Muller402;
+use g5\commands\muller\afd1writers\Muller402;
 
 class tmp2db implements Command {
     

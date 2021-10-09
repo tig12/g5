@@ -11,7 +11,7 @@ namespace g5\commands\csicop\si42;
 
 use g5\G5;
 use tiglib\patterns\Command;
-use g5\commands\newalch\ertel4391\Ertel4391;
+use g5\commands\ertel\sport\Ertel4391;
 use tiglib\arrays\csvAssociative;
 
 class addErtel implements Command {

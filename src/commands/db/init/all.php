@@ -17,7 +17,7 @@ use g5\commands\gauq\GauqRouter;
 use g5\G5;
 use g5\commands\gauq\LERRCP;
 use g5\commands\muller\AFD;
-use g5\commands\newalch\Newalch;
+use g5\commands\ertel\Newalch;
 use g5\commands\gauq\Cura;
 use g5\commands\wd\Wikidata;
 
@@ -36,17 +36,17 @@ use g5\commands\gauq\D10\raw2tmp                as raw2tmpD10;
 use g5\commands\gauq\E1_E3\raw2tmp              as raw2tmpE1E3;
 use g5\commands\gauq\all\tweak2tmp              as tweak2tmpCura;
 
-use g5\commands\newalch\ertel4391\raw2tmp       as raw2tmpErtel4391;
-use g5\commands\newalch\ertel4391\tweak2tmp     as tweak2tmpErtel4391;
+use g5\commands\ertel\sport\raw2tmp             as raw2tmpErtelSport;
+use g5\commands\ertel\sport\tweak2tmp           as tweak2tmpErtelSport;
 
-use g5\commands\newalch\muller1083\raw2tmp      as raw2tmpMuller1083;
-use g5\commands\newalch\muller1083\tweak2tmp    as tweak2tmpMuller1083;
-use g5\commands\newalch\muller1083\fixGnr       as fixGnrMuller1083;
+use g5\commands\muller\afd5medics\raw2tmp       as raw2tmpAfd5Medics;
+use g5\commands\muller\afd5medics\tweak2tmp     as tweak2tmpAfd5Medics;
+use g5\commands\muller\afd5medics\fixGnr        as fixGnrAfd5Medics;
 
-use g5\commands\newalch\muller402\raw2tmp       as raw2tmpMuller402;
-use g5\commands\newalch\muller402\tweak2tmp     as tweak2tmpMuller402;
-use g5\commands\newalch\muller402\gauq          as gauqMuller402;
-use g5\commands\newalch\muller402\raw2tmp100    as raw2tmpMuller100;
+use g5\commands\muller\afd1writers\raw2tmp      as raw2tmpAfd1Writers;
+use g5\commands\muller\afd1writers\tweak2tmp    as tweak2tmpAfd1Writers;
+use g5\commands\muller\afd1writers\gauq         as gauqAfd1Writers;
+use g5\commands\muller\afd1writers\raw2tmp100   as raw2tmpAfd1Writers100;
 
 use g5\commands\csicop\si42\raw2tmp             as raw2tmpSi42;
 use g5\commands\csicop\si42\addCanvas1          as addCanvas1Si42;
@@ -57,13 +57,13 @@ use g5\commands\muller\afd2men\raw2tmp          as raw2tmpAfd2Men;
 
 // tmp2db
 use g5\commands\gauq\A\tmp2db                   as tmp2dbA;
-use g5\commands\newalch\occu\pnA6;
+use g5\commands\gauq\A\A6occu;
 use g5\commands\gauq\D6\tmp2db                  as tmp2dbD6;
 use g5\commands\gauq\D10\tmp2db                 as tmp2dbD10;
 use g5\commands\gauq\E1_E3\tmp2db               as tmp2dbE1E3;
-use g5\commands\newalch\muller1083\tmp2db       as tmp2dbMuller1083;
-use g5\commands\newalch\muller402\tmp2db        as tmp2dbMuller402;
-use g5\commands\newalch\muller402\tmp2db100     as tmp2dbMuller100;
+use g5\commands\muller\afd5medics\tmp2db               as tmp2dbAfd5Medics;
+use g5\commands\muller\afd1writers\tmp2db       as tmp2dbAfd1Writers;
+use g5\commands\muller\afd1writers\tmp2db100    as tmp2dbAfd1Writers100;
 use g5\commands\csicop\irving\tmp2db            as tmp2dbIrving;
 use g5\commands\muller\afd2men\tmp2db           as tmp2dbAfd2Mmen;
 use g5\commands\muller\afd3women\tmp2db         as tmp2dbAfd3Women;
@@ -74,9 +74,9 @@ use g5\commands\db\init\search;
 
 // export
 use g5\commands\gauq\all\export                 as exportCura;
-use g5\commands\newalch\muller1083\export       as exportMuller1083;
-use g5\commands\newalch\muller402\export        as exportMuller402;
-use g5\commands\newalch\muller402\export100     as exportMuller100;
+use g5\commands\muller\afd5medics\export        as exportAfd5Medics;
+use g5\commands\muller\afd1writers\export       as exportAfd1Writers;
+use g5\commands\muller\afd1writers\export100    as exportAfd1Writers100;
 use g5\commands\csicop\irving\export            as exportIrving;
 use g5\commands\db\export\alloccus              as exportAllOccus;
 
@@ -140,22 +140,22 @@ class all implements Command {
                 echo tweak2tmpCura::execute([$datafile, 'tweak2tmp']);
             }
             
-            echo raw2tmpErtel4391::execute([]);
-            echo tweak2tmpErtel4391::execute([]);
+            echo raw2tmpErtelSport::execute([]);
+            echo tweak2tmpErtelSport::execute([]);
             
-            echo raw2tmpMuller1083::execute([]);
-            echo tweak2tmpMuller1083::execute([]);
-            echo fixGnrMuller1083::execute(['update']);
+            echo raw2tmpAfd5Medics::execute([]);
+            echo tweak2tmpAfd5Medics::execute([]);
+            echo fixGnrAfd5Medics::execute(['update']);
             
             echo raw2tmpSi42::execute([]);                                   
             echo addCanvas1Si42::execute([]);
             echo raw2tmpIrving::execute([]);
             echo addD10Irving::execute([]);
             
-            echo raw2tmpMuller402::execute([]);
-            echo tweak2tmpMuller402::execute([]);
-            echo gauqMuller402::execute(['update']);
-            echo raw2tmpMuller100::execute([]);
+            echo raw2tmpAfd1Writers::execute([]);
+            echo tweak2tmpAfd1Writers::execute([]);
+            echo gauqAfd1Writers::execute(['update']);
+            echo raw2tmpAfd1Writers100::execute([]);
             
             echo raw2tmpAfd3Women::execute([]);
             
@@ -181,17 +181,17 @@ class all implements Command {
             foreach($filesCuraA as $datafile){
                 echo tmp2dbA::execute([$datafile, 'tmp2db', 'small']);
             }
-            echo pnA6::execute([]);
+            echo A6occu::execute([]);
             echo tmp2dbD6::execute(['D6', 'tmp2db', 'small']);
             echo tmp2dbD10::execute(['D10', 'tmp2db', 'small']);
             echo tmp2dbE1E3::execute(['E1', 'tmp2db', 'small']);
             echo tmp2dbE1E3::execute(['E3', 'tmp2db', 'small']);
             
-            echo tmp2dbMuller1083::execute(['small']);
+            echo tmp2dbAfd5Medics::execute(['small']);
             
-            echo tmp2dbMuller402::execute(['small']);
+            echo tmp2dbAfd1Writers::execute(['small']);
             
-            echo tmp2dbMuller100::execute(['small']);
+            echo tmp2dbAfd1Writers100::execute(['small']);
             
             echo tmp2dbIrving::execute(['small']);
             
@@ -223,9 +223,9 @@ class all implements Command {
             echo exportCura::execute(['D10', 'export']);
             echo exportCura::execute(['E1', 'export']);
             echo exportCura::execute(['E3', 'export']);
-            echo exportMuller1083::execute([]);
-            echo exportMuller402::execute([]);
-            echo exportMuller100::execute([]);
+            echo exportAfd5Medics::execute([]);
+            echo exportAfd1Writers::execute([]);
+            echo exportAfd1Writers100::execute([]);
             echo exportIrving::execute([]);
             //
             echo exportAllOccus::execute([]);

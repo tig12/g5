@@ -27,7 +27,7 @@ $USAGE = <<<USAGE
 Usage : 
     php {$argv[0]} <argument1> <argument2> <argument3> [optional arguments]
 Example :
-    php {$argv[0]} cura A2 raw2csv
+    php {$argv[0]} gauq A2 raw2tmp
 -------
 
 USAGE;
