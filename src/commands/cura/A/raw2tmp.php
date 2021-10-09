@@ -15,7 +15,7 @@ namespace g5\commands\cura\A;
 
 use g5\G5;
 use g5\model\DB5;
-use g5\commands\gauquelin\LERRCP;
+use g5\commands\gauq\LERRCP;
 use g5\commands\cura\Cura;
 use g5\commands\cura\CuraNames;
 use g5\model\Names;
@@ -71,8 +71,7 @@ class raw2tmp implements Command {
         //
         // 1 - parse first list (without names) - store by birth date to prepare matching
         //
-        // $raw is used to keep trace of an exact copy of the raw fields
-        // assoc array, keys = NUM
+        // $raw is used to keep trace of an exact copy of the raw fields ; assoc array, keys = NUM
         $raw = [];
         $res1 = [];
         preg_match('#<pre>\s*(YEA.*?CITY)\s*(.*?)\s*</pre>#sm', $html, $m);
@@ -120,8 +119,8 @@ class raw2tmp implements Command {
         // variables used only for report
         $n_ok = 0;                              // correctly merged
         $n1 = 0; $missing_in_names = [];        // date present in list 1 and not in name list
-        $n2 = 0; $repeats_same_nb = [];        // multiple persons born the same day ; same nb of persons in list 1 and name list
-        $n3 = 0; $repeats_different_nb = [];   // multiple persons born the same day ; different nb of persons in list 1 and name list
+        $n2 = 0; $repeats_same_nb = [];         // multiple persons born the same day ; same nb of persons in list 1 and name list
+        $n3 = 0; $repeats_different_nb = [];    // multiple persons born the same day ; different nb of persons in list 1 and name list
         foreach($res1 as $day1 => $array1){
             if(!isset($res2[$day1])){
                 // date in list 1 and not in name list
@@ -210,6 +209,7 @@ class raw2tmp implements Command {
         }
         //
         // Manual corrections
+        // php run-g5.php cura A2 raw2tmp same
         //
         $n2bis_fix = 0;    // cases solved by A::CORRECTIONS_BY_HAND ($repeats_same_nb only)
         if(isset(A::CORRECTIONS_BY_HAND[$datafile])){
@@ -352,13 +352,13 @@ class raw2tmp implements Command {
         return $report;
     }
     
-    // ******************************************************
-    /**  @return String like 'Gauquelin-A1-243' **/
+    /**
+        @return String like 'Gauquelin-A1-243'
+    **/
     private static function computeReplacementName($datafile, $NUM){
         return 'Gauquelin-' . LERRCP::gauquelinId($datafile, $NUM);
     }
     
-    // ******************************************************
     /** 
         Computes precise profession when possible
         First compute not-detailed profession from $pro
@@ -379,8 +379,9 @@ class raw2tmp implements Command {
         return $res;
     }
     
-    // ******************************************************
-    /** Computes place name and C3 (arrondissement) for Paris and Lyon **/
+    /**
+        Computes place name and C3 (arrondissement) for Paris and Lyon
+    **/
     private static function computePlace($str){
         $str = trim($str);
         preg_match('/(.*?) (\d+).*/', $str, $m);
@@ -392,8 +393,9 @@ class raw2tmp implements Command {
         return [$str, ''];
     }
     
-    // ******************************************************
-    /**  Computes the ISO 3166 country code from fields COU and COD of cura files. **/
+    /**
+        Computes the ISO 3166 country code from fields COU and COD of cura files.
+    **/
     private static function computeCountry($COU, $COD){
         $COU = A::COUNTRIES[$COU];
         $COD = trim($COD);
@@ -436,7 +438,6 @@ class raw2tmp implements Command {
         return [$COU, $COD];
     }
     
-    // ******************************************************
     /**
         Auxiliary of raw2tmp()
         Modifies $res passed by reference
@@ -463,7 +464,7 @@ class raw2tmp implements Command {
         $N_REPEATS = count($repeats_same_nb);
         for($i=0; $i < $N_REPEATS; $i++){
             if(count($repeats_same_nb[$i][$file_datafile]) != 2){                
-                // resolution works only for repeats (not triplets or more elements)
+                // resolution works only for doublon repeats (not triplets or more elements)
                 continue;
             }
             $found = false;

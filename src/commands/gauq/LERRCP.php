@@ -7,7 +7,7 @@
     @license    GPL
     @history    2021-07-20 07:39:16+02:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\commands\gauquelin;
+namespace g5\commands\gauq;
 
 use g5\commands\cura\Cura;
 use g5\model\Group;

@@ -13,7 +13,7 @@ use g5\model\DB5;
 use g5\model\Group;
 use tiglib\patterns\Command;
 use g5\commands\csicop\CSICOP;
-use g5\commands\gauquelin\LERRCP;
+use g5\commands\gauq\LERRCP;
 
 class export implements Command {
     

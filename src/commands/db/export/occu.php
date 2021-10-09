@@ -18,7 +18,7 @@ use g5\app\Config;
 use g5\model\Person;
 use g5\model\Group;
 use g5\model\Occupation;
-use g5\commands\gauquelin\LERRCP;
+use g5\commands\gauq\LERRCP;
 use g5\commands\muller\AFD;
 
 class occu implements Command {

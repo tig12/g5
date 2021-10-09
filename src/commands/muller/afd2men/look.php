@@ -16,7 +16,7 @@ namespace g5\commands\muller\afd2men;
 use tiglib\patterns\Command;
 use g5\model\DB5;
 use tiglib\arrays\sortByKey;
-use g5\commands\gauquelin\LERRCP;
+use g5\commands\gauq\LERRCP;
 
 class look implements Command {
     

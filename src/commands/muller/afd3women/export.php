@@ -12,7 +12,7 @@ use g5\model\Group;
 use tiglib\patterns\Command;
 use g5\commands\db\export\Export as ExportUtils;
 use g5\commands\muller\AFD;
-use g5\commands\gauquelin\LERRCP;
+use g5\commands\gauq\LERRCP;
 
 class export implements Command {
     

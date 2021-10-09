@@ -566,12 +566,7 @@ class A{
             '3352' => 'Reihlen Hans',
             '197'  => 'Delannoy Emile',
             '3616' => 'Oordt Gregorius',
-//            '3584' => 'Bungenberg Jong Hendrik',
-            //unable to find out
-            // 1893	5	27	S	810	F	16	5	40	0	47N15	6E 2	25	BESANCON
-            // 1893	5	27	S	1047	F	14	50	40	0	35N40	0W30	ALG	ORAN
-            // 1893-05-27	SC	Bienvenu Georges
-            // 1893-05-27	SC	Henry Jean
+            '3584' => 'Bungenberg Jong Hendrik',
             '1820' => 'Guthmann Heinrich',
             '2324' => 'Dalco Albert',
             '3190' => 'Auwers Otto',
@@ -589,7 +584,8 @@ class A{
             '1366' => 'Caliceti Pietro',
             '1272' => 'Tarneaud Jean',
             '1452' => 'Galdi Francesco',
-            '' => '',
+            '2517' => 'Janssonius Hindrik',
+            '3645' => 'Zanten Jakob',
         ],
     ];
     

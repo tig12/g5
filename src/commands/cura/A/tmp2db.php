@@ -16,7 +16,7 @@ use g5\model\Group;
 use g5\model\Person;
 use g5\model\Occupation;
 use g5\commands\cura\Cura;
-use g5\commands\gauquelin\LERRCP;
+use g5\commands\gauq\LERRCP;
 
 class tmp2db implements Command {
     

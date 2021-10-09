@@ -13,7 +13,7 @@ use g5\model\DB5;
 use g5\model\Person;
 use g5\commands\cura\CuraRouter;
 use g5\commands\cura\Cura;
-use g5\commands\gauquelin\LERRCP;
+use g5\commands\gauq\LERRCP;
 
 class dup implements Command {
     

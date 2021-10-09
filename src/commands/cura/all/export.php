@@ -13,7 +13,7 @@ namespace g5\commands\cura\all;
 use g5\app\Config;
 use g5\model\DB5;
 use tiglib\patterns\Command;
-use g5\commands\gauquelin\LERRCP;
+use g5\commands\gauq\LERRCP;
 use g5\commands\muller\AFD;
 use g5\model\Full;
 use g5\model\Group;
