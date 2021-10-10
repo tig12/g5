@@ -2,7 +2,7 @@
 /********************************************************************************
     Adds field GEOID and corrects field PLACE to files of data/tmp/cura/A*.csv
     
-    Here, could add TODO for concerned person
+    TODO Could add an entry in 'todo' field of persons without geoid (but useless)
     
     
     @license    GPL

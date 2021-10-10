@@ -109,7 +109,7 @@ class look implements Command {
     /**
         Lists persons supposed to be present in Gauquelin data.
         Match between Müller and Gauquelin is only done by birth day.
-        Function written in an iterative process, to build variables $match and $incoherent.
+        Function written in an iterative process, to build variables AFD3::GQ_MATCH and AFD3::GQ_NOMATCH.
         @pre    Gauquelin data must have been previously loaded in g5 database.
     **/
     private static function look_gauquelin(){
@@ -120,116 +120,91 @@ class look implements Command {
         $stmt = $dblink->prepare($query);
         
         $N_total = 0; // total number of lines in Müller's file
-        $N_gauq = 0; // total number of lines supposed to be in Gauquelin data
-        $N_nogauq = 0; // total number of lines not supposed to be in Gauquelin data
+        // According to Müller:
+        $N_supposed_gauq = 0; // total number of lines supposed to be in Gauquelin data
+        $N_supposed_nogauq = 0; // total number of lines not supposed to be in Gauquelin data
         
-        // Ambiguous cases fixed by hand from previous executions
-        // Müller id => lerrcp id
-        $match = [
-            '011' => 'A1-129', // AURIOL Jacqueline *DOUET
-            '018' => 'A6-72',  // BEAUVOIR Simone DE
-            '046' => 'A6-210', // SIDONIE Gabrielle
-            '050' => 'A5-215', // DARRIEUX Daniele
-            '052' => 'D10-308', // DAY Doris
-            '058' => 'A5-1084', // DORSCH Rathe
-            '082' => 'A6-1098', // GEVERS Marie
-            '109' => 'E3-834', // JOLIOT-CURIE Irene *CURIE
-            '135' => 'A2-1974', // LINDEN Maria GFN VON
-            '160' => 'E3-1107', // MOREAU Jeanne
-            '161' => 'A5-568', // MORGAN Michele
-            '171' => 'A6-601', // NOEL Marie
-            '177' => 'A6-668', // RACHILDE *EYMERY Marguerite Vallette
-            '183' => 'A5-690', // ROSAY Francoise
-            '232' => 'A6-810', // YOURCENAR Marguerite
-        ];
         $res_match = ''; // code to copy in class AFD3
         $N_match = 0;
         
-        // Incoherent cases, filled by hand from previous executions
-        // Contains Müller ids
-        $incoherent = [
-            '091', // GUILBERT Yvette
-            '181', // ROCHEFORT Christiane
-            '225', // WEIL Simone
-        ];
-        $N_incoherent = 0;
-        $report_incoherent = '';
-        
         // records supposed to be in Gauquelin data, but no match found
-        $N_nomatch = 0;
-        $report_nomatch = '';
+        $N_unresolved_nomatch = 0;
+        $report_unresolved = '';
         
         foreach($data as $line){
             $N_total++;
+            $MUID = $line['MUID'];
             $s1 = substr($line['SOURCE'], 0, 1);
             $s2 = substr($line['SOURCE'], 1);
             $GQ = $line['GQ'];
             if($GQ == 'N' && $s2 != 'G'){
-                $N_nogauq++;
-                continue;
+                $N_supposed_nogauq++;
+                if(!isset(AFD3::GQ_MATCH[$MUID])){
+                    continue;
+                }
+                // else
+                    // Marked not Gauquelin by Müller but in Gauquelin
+                    // report ?
+            }
+            else {
+                $N_supposed_gauq++;
             }
             //
             // here line should match with a Gauquelin record
             //
-            $N_gauq++;
-            $MUID = $line['MUID'];
-            if(isset($match[$MUID])){
-                // case manually fixed in $match
+            if(isset(AFD3::GQ_MATCH[$MUID])){
                 $N_match++;
-                $res_match .= "        '$MUID' => '{$match[$MUID]}', // {$line['FNAME']} {$line['GNAME']}\n";
+                $res_match .= "        '$MUID' => '" . AFD3::GQ_MATCH[$MUID] . "', // {$line['FNAME']} {$line['GNAME']}\n";
                 continue;
             }
             //
-            // HERE query g5 database
+            if(in_array($MUID, AFD3::GQ_NOMATCH)){
+                continue;
+            }
+            //
+            // HERE query g5 database to check in unresolved cases remain
             $param = substr($line['DATE'], 0, 10) . '%';
             $stmt->execute([$param, $param]);
             $res = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             if(count($res) == 1){
-                if(in_array($MUID, $incoherent)){
-                    // case manually handled in $incoherent
-                    $N_incoherent++;
-                    $report_incoherent .= self::report_muller($line);
-                }
-                else{
-                    $N_match++;
-                    $ids_in_sources = json_decode($res[0]['ids_in_sources'], true);
-                    $res_match .= "        '$MUID' => '{$ids_in_sources[LERRCP::SOURCE_SLUG]}', // {$line['FNAME']} {$line['GNAME']}\n";
-                }
+                $N_match++;
+                $ids_in_sources = json_decode($res[0]['ids_in_sources'], true);
+                $res_match .= "        '$MUID' => '{$ids_in_sources[LERRCP::SOURCE_SLUG]}', // {$line['FNAME']} {$line['GNAME']}\n";
             }
             else{
-                // Zero match or several marches no handled by $match or $incoherent
-                $N_nomatch++;
-                $report_nomatch .= "\n" . self::report_muller($line);
+                // not handled by $match or $nomatch
+                // several possible matches, one match but different person
+                $N_unresolved_nomatch++;
+                $report_unresolved .= "\n" . self::report_muller($line);
                 foreach($res as $candidate){
-                    $report_nomatch .= self::report_gauquelin($candidate);
+                    $report_unresolved .= self::report_gauquelin($candidate);
                 }
             }
         }
         //
-        $report .= "\n=== 1 match but incoherent:\n";
-        $report .= $report_incoherent;
-        //
-        $report .= "\n=== Several matches => no match:\n";
-        $report .= $report_nomatch;
+        if($report_unresolved){
+            $report .= "\n=== Unresolved - fix in AFD3::GQ_MATCH or GQ_NOMATCH:\n";
+            $report .= $report_unresolved;
+        }
         //
         $report .= "\n=== Coherent matches - code to copy in class AFD3:\n";
         $tmp = explode("\n", $res_match);
         sort($tmp);
-        $report .= "    const MU_GQ = ["; // code to copy in class AFD3
+        $report .= "    const MU_MATCH = ["; // code to copy in class AFD3
         $report .= implode("\n", $tmp) . "\n";
         $report .= "    ];\n";
         //
-        $report .= "--- According to Müller:\n";
-        $report .= "N not Gauquelin = $N_nogauq\n";
-        $report .= "N Gauquelin     = $N_gauq\n";
-        $report .= "---\n";
-        $report .= "N match         = $N_match\n";
-        $report .= "N no match      = $N_nomatch\n";
-        $report .= "N incoherent    = $N_incoherent\n";
-        $report .= "---\n";
-        $report .= "N total         = $N_total\n";
+        $report .= "--- According to Müller ---\n";
+        $report .= "N not Gauquelin     = $N_supposed_nogauq\n";
+        $report .= "N Gauquelin         = $N_supposed_gauq\n";
+        $report .= "--- Found by g5 ---\n";
+        $report .= "N match Gauquelin   = $N_match\n";
+        if($N_unresolved_nomatch != 0){
+            $report .= "N no match Gq.  = $N_unresolved_nomatch\n";
+        }
         $N_new = $N_total - $N_match;
-        $report .= "N new           = $N_new\n";
+        $report .= "N new               = $N_new\n";
+        $report .= "N total             = $N_total\n";
         
         
         return $report;
@@ -239,7 +214,7 @@ class look implements Command {
         Auxiliairy of look_gauquelin()
     **/
     private static function report_muller($line) {
-        return "MU: {$line['MUID']}"
+        return str_pad("MU: {$line['MUID']}", 12)
         . " {$line['FNAME']} {$line['GNAME']}"
         . " {$line['DATE']}"
         . " --- "
@@ -255,7 +230,7 @@ class look implements Command {
         $birth = json_decode($line['birth'], true);
         $ids_in_sources = json_decode($line['ids_in_sources'], true);
         $date = $birth['date-ut'] ?? $birth['date'];
-        return "GQ: {$ids_in_sources[LERRCP::SOURCE_SLUG]}"
+        return str_pad("GQ: {$ids_in_sources[LERRCP::SOURCE_SLUG]}", 12)
             . " {$name['family']} {$name['given']}"
             . " $date"
             . " --- "
@@ -268,7 +243,7 @@ class look implements Command {
     /**
         Command used to visually check the coherence of look_gauquelin()
         Prints Gauquelin and Müller records
-        Constant AFD3::MU_GQ to retrieve the data fro g5 database.
+        Constant AFD3::GQ_MATCH to retrieve the data fro g5 database.
     **/
     public static function look_check() {
         $report = '';
@@ -277,7 +252,7 @@ class look implements Command {
         $query = "select name,ids_in_sources,birth from person where ids_in_sources->>'" . LERRCP::SOURCE_SLUG . "'=?";
         $stmt = $dblink->prepare($query);
         
-        foreach(AFD3::MU_GQ as $MUID => $GQID){
+        foreach(AFD3::GQ_MATCH as $MUID => $GQID){
             $report .= "\n" . self::report_muller($data[$MUID]);
             $stmt->execute([$GQID]);
             $res = $stmt->fetchAll(\PDO::FETCH_ASSOC);

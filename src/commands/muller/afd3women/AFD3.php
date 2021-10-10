@@ -108,10 +108,12 @@ class AFD3 {
     
     /** 
         Match between Müller and Cura ids.
-        Array built by look::look_gauquelin()
+        Array built executing look::look_gauquelin()
         Used by tmp2db::execute()
+        Format: Müller id => lerrcp id
+
     **/
-    const MU_GQ = [
+    const GQ_MATCH = [
         '001' => 'A6-6', // ADAM Juliette *LAMBER
         '007' => 'A6-46', // AUDOUX Marguerite
         '011' => 'A1-129', // AURIOL Jacqueline *DOUET
@@ -156,7 +158,19 @@ class AFD3 {
         '221' => 'A5-1289', // WALDOFF Claire
         '232' => 'A6-810', // YOURCENAR Marguerite
     ];
-    
+   
+    // Cases matching one Gauquelin date but different person
+    // filled by hand from previous executions
+    // Contains Müller ids
+    const GQ_NOMATCH = [
+        '024', // Soubirous Bernadette
+        '091', // Yvette Guilbert
+        '124', // Laurencin Marie
+        '154', // Michel Louise
+        '169', // Nin Anais
+        '181', // Rochefort Christiane
+        '225', // Weil Simone
+    ];
     /** 
         Associations Müller's Berufsgruppe / Tätigkeitsfeld => g5 occupation code
         Partly built by look::look_occus().
