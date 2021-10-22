@@ -1,0 +1,513 @@
+ABLIN Paul, 3-7-1857, 19. h. 30, Rouen (Seine-Inférieure).
+ACKERMANN Joseph, 1-10-1846, 9 h., Soultz (Haut-Rhin).
+ADAM Jean, 19-12-1856, 2 h., Strasbourg (Bas-Rhin).
+AIGOUY Jean, 6-3-1867, 21 h., Marvejols (Lozère).
+AIGOUY Pierre, 11-10-1861, 12 h., Marvejols (Lozère).
+AIGOUY Xavier, 5-4-1868, 9 h., Marvejols (Lozère).
+ALLEZ Claude, 1-8-1866, 19 h., Bouillargue (Gard).
+AMIOT Sébastien, 18-1-1872, 16 h., Boussay (Loire-Inférieure).
+AMIRAN Eugéne, 19-12-1852, 5 h., Saint-Briac (Ille-et-Vilaine).
+ANDRE Jean-M., 1-9-1858, 2 h., Saint-Laurent-Canet-d’Olt (Var).
+ANGLADE Jean, 21-2-1830, 13 h., Oradour. (Cantal).
+ANIEZAN Jean, 6-1-1853, 1 h., Artenay (Loiret).
+ANTZENBERGER Pierre, 9-1-1858, 8 h., Fouchy (Bas-Rhin).
+ARCHIMBAUD François, 19-7-1879, 5 h., Vollores-Montagne (P.-de-D.).
+ARNAL Auguste, 21-10-1848, 13 h., Camarés (Aveyron).
+ARNAL Jean, 6-11-1859, 22 h., Anglards-de-Salers (Cantal).
+AUBRY Raymond, 4-9-1864, 21 h., Montigny-le-Roi (Haute-Marne).
+AUBRY Jean-Baptiste, 24-2-1850, 21 h., Thuilley (Meurthe-et-Moselle).
+AUDIGIER Pierre, 7-11-1838, 2 h., Burzet (Ardéche).
+AULAGNE Joseph, 6-4-1862, 2 h., Langeac (Haute-Loire).
+AUVRAY Georges, 8-3-1871, 10 h., Auxy (Loiret).
+AVRIAL Alban, 7-5-1853, 3 h., Thézon (Aude).
+BACHELIN Louis, 28-7-1866, 4 h., Bonnat (Creuse).
+BALOCHE Constant, 9-5-1856, 7 h., Flers (Orne).
+BARASCUD Frédéric, 24-12-1874, 18 h., Millau (Aveyron).
+BARBRY Pierre, 8-2-1915, 2 h., Portel (Pas-de-Calais).
+BAROS Jean, 24-6-1856, 4 h., Grenoble (Isére).
+BARTHELEMY Clément, 18-10-1854, 4 h., Goudet (Haute-Loire).
+BARUTEIL Pierre, 26-8-1843, 8 h., Bayxas (Pyrénées-Orientales).
+BATIFFOL Pierre, 27-1-1861, 2 h., Toulouse (Haute-Garonne).
+BATISSE Emile, 9-2-1873, 10 h., Saint-Vallier (Saône-et-Loire).
+BATISSIER Léon, 13-8-1860, 4 h. 30, Bourbon-L’Archambault (Allier).
+BAUDAN Maurice, 21-7-1860, 15 h.. Saint-Christophe-de-Chalais (Ch.).
+BAYOL Adrien, 28-12-1878, 4 h., Castanet (Aveyron).
+BAZIERE Alfred, 1-12-1865, 21 h., Condé-sur-Noireau (Calvados).
+BEAUDEMON Etienne, 23-11-1840, 11 h., Tulle (Corrèze).
+BEAUREGARD Emile, 29-12-1880, 10 h. 30, Saint-Braic (Ille-et-Vilaine).
+BELLON Edmond, 1-11-1854, 12 h., Digne (Basses-Alpes).
+BELSCEUR Désiré, 5-4-1874, 11 h., Fougerets (Morbihan).
+BENEZET Louis, 26-4-1877, 17 h., Berc (Lozère).
+BERCIER Georges, 27-5-1860, 17 h., Egleny (Yonne).
+BERGERET Jean, 11-9-1835, 4 h., Saint-Pé-de-Bigorre (Tarbes).
+BERLIOZ Jean, 25-9-1870, 12 h. 30, Morestel (Isere).
+BERNARD Joseph, 12-2-1873, 16 h., Saint-Nazaire (Loire-Inférieure).
+BERTHET Clément, 25-11-1871, 1 h., Cheus (Haute-Garonne).
+BERTHET Jean, 13-1-1868, 10 h., Menton-Salon (Cher).
+BERTRIN Georges, 7-7-1851, 10 h., Sainte-Bazeille (Lot-et-Garonne).
+BESSE Frédéric, 25-11-1837, 3 h., Bains (Haute-Loire).
+BEZIEL Marcel, 14-2-1862, 21 h., Combourg (Ille-et-Vilaine).
+BIDET Emile, 3-10-1867, 23 h., Saint-Etienne-de-Montluc (Loire).
+BLANC Alphonse, 23-2-1852, 22 h., Bourg-Saint-Maurice (Savoie).
+BLANCHER François, 27-10-1858, 12 h., Saint-Chély-d’Aubac (Aveyr.).
+BLAUVAC Bernard, 14-12-1849, 6 h., Chalon-sur-Saône (Saône-et-L.).
+BOEHRER Joseph, 4-9-1856, 2 h., Schlestadt (Alsace).
+BOESCH Edouard, 26-2-1851, 15 h., Soultzmatt (Haut-Rhin).
+BOHLY Joseph, 4-3-1864, 8 h., Grussenheim (Haut-Rhin).
+BOILEAU Stanislas, 15-3-1842, 1 h., Jasney (Haute-Saône).
+BOITARD François, 11-10-1849, 6 h., Montcontour (Bretagne).
+BOMEL Léger, 1-7-1854, 3 h., Aigueperse (Puy-de-Dôme).
+BONNAFOUS André, 31-8-1866, 15 h., Limoux (Aude).
+BONNERY Paul, 28-5-1862, 10 h., La Cassaigne (Aude).
+BONNEVIE Jean, 29-9-1865, 13 h., Val-d’lsére (Savoie).
+BONTOUX Gustave, 10-10-1862, 18 h., Motte-Chalancon (Drôme),
+BOSSU Léon, 11-7-1868, 1 h. 30, Corte (Corse).
+BOUCHER André, 29-8-1879, 10 h., Dun-sur-Auron (Cher).
+BOUCHET Louis, 13-11-1871, 22 h., Meximieux (Ain).
+BOUDINHON Auguste, 28-3-1858, 1 h., Le Puy. (Haute-Loire).
+BOUET Louis, 22-5-1888, 17 h., Puiset-Doré (Maine-et-Loire).
+BOULET Léopold, 12-12-1882, 9 h., Brenoux (Lozère).
+BOULVE Léon, 21-12-1859, 1 h., Saint-Pierre-Miramont (Tarn-et-Gar.).
+BOUQUEREL Esther L., 23-3-1855, 15 h., La Sauvagére (Orne).
+BOURGEOIS Louis, 24-10-1859, 16 h., Espieds (Aisne).
+BOUTHORS Paul, 23-5-1866, 21 h.,, Magny-en-Vexin (Seine-et-Oise).
+BOUVIER Eugéne, 3-8-1856, 11 h., Lyon (Rhône).
+BOXLER Antoine, 27-4-1861, 21 h., Katzenthal (Haut-Rhin).
+BOYER Auguste, 7-7-1852, 7 h., Carcassonne (Aude).
+BOYER Jean, 9-12-1854, 2 h., Bordeaux (Gironde).
+BOYER Jean, 23-6-1878, 23 h., Bar-le-Duc (Meuse).
+BOYREAU Emmanuel, 3-10-1859, 9 h., Pantin (Seine).
+BRACH Joseph, 23-3-1853, 22 h., Zellwiller (Bas-Rhin).
+BRACONNIER François, 21-3-1853, 22 h., Faverney (Haute-Saône).
+BRAUN François, 8-7-1877, 23 h. 30, Thann (Haut-Rhin).
+BREANT Gabriel, 15-4-1864, 17 h., Gallardon (Eure-et-Loire).
+BREFFY Georges, 21-10-1859, 5 h., Bonneuil-Matours (Vienne).
+BREME François, 12-6-1860, 8 h., Berwillers (Moselle).
+BRESARD Marie, 12-9-1851, 18 h., Gray (Haute-Saône).
+BRESSANGE Paul, 4-9-1866,, 2 h., Murat (Cantal).
+BRICOUT Pierre, 6-11-1867, 12 h., Boussiéres (Nord).
+BRIFFON Jean, 26-9-1859, 13 h., Grenade (Haute-Garonne).
+BROSSARD Emile, 27-3-1880, 5 h., Lantenay (Côte-d’Or).
+BROUSSOLLE Jacques, 31-12-1861, 6 h., Dijon (Côte-d’Or).
+BRUN François, 12-1-1878, 20 h., Combronde (Puy-de-Dôme).
+BRUNEAU Benjamin, 9-2-1871, 2 h., Mareuil-sur-Arnon (Cher).
+BRUNET Pierre, 20-9-1867, 1 h., Marcillac (Aveyron).
+BUFFIERE François, 12-9-1861, 1 h., Commentry (Allier).
+BUTET Henri, 19-10-1865, 10 h., Rouvres (Loiret).
+CABANEL Firmin, 8-1-1877, 16 h., Salviac (Lot).
+CADIC François, 29-9-1864, 7 h., Royal-Pontivy (Morbihan)
+CAMUS de La G. Emile, 2-3-1833, 13 h., La Guibourgére (Loire-Inf.).
+CANCE Jean, 16-2-1866, 10 h., Tronquiére (Lot).
+CANDEZE Antoine, 11-9-1847, 10 h., Lascelle (Cantal).
+CANTENOT Jean, 21-3-1846, 11 h., Augerans (Jura).
+CAPDAZE Jean, 2-2-1866, 17 h., Lomagne (Tarn-et-Garonne).
+CARON Emile, 18-1-1866, 4 h., Chuignes (Somme).
+CARRE Etienne, 2-11-1852, 10 h., Buzangais (Indre).
+CARREAU Benjamin, 13-12-1846, 5 h., Epinac (Saône-et-Loire).
+CASSAGNES (de) Marie, 12-1-1867, 22 h., Bazougues-sur-Loire (Sarthe).
+CATESSON Benoit, 22-8-1858, 23 h., Saint-Anthene (Puy-de-Dôme).
+CHABERT Jules, 17-10-1855, 5 h., Aubenas (Ardeche).
+CHABIN Louis, 29-2-1860, 5 h., Crézancy (Cher).
+CHAMBODUT Pierre, 8-4-1858, 10 h., Saint-Just-en-Chevalet (Loire).
+CHAMBON Antoine, 27-7-1848, 4 h., Boussac (Creuse).
+CHAPDELAINE Auguste, 11-7-1871, 20 h., La Rochelle (Manche).
+CHAUSSELLE Henri 19-1-1890, 17 h., Saintweticnne (Loire).
+CHAUSSON Ferdinand, 30-12-1854, 2 h., Gentilly (Seine).
+CHAUVIN Amédée, 10-2-1852, 15 h., Hudemesnil (Manche).
+CHAZAL Auguste, 5-3-1849, 20 h., Thoras (Haute-Loire).
+CHEFEUR Auguste, 5-12-1856, 15 h., Clézentaines (Vosges).
+CHEVALLIER Hector, 11-6-1871, 21 h., Boulogne-sur-Seine (Seine).
+CHIRON Louis, 18-10-1863, 21 h., Saint-Marcel-d’Ardeche (Ardéche).
+CLAIR Pierre, 6-1-1854, 8 h. 30, Créancey (Côte-d’Or).
+CLAVE Marcel, 22-9-1872, 9 h., Cauna (Landes).
+CLEMENT Raymond, 5-10-1841, 21 h., Albestroff (Moselle).
+COLIN Henri, 1-11-1880, 7 h., Bains-les-Bains (Vosges).
+COLLIGNON Théodore, 29-3-1853, 12 h., Bar-le-Duc (Meuse).
+COLOMBEL Albert, 22-8-1864, 2 h., Andilly (Seine-et-Oise).
+CONTEVILLE Henri, 21-7-1857, 15 h., Galametz (Pas-de-Calais).
+CORBILLE François, 29-7-1866, 9 h., Crassac (Loire-Inférieure).
+CORITON Léonce, 3-6-1860, 6 h., Saint-Aubin-du-Cormier (Ille-et-Vil.).
+CORNETTE Anjoine, 8-11-1860, 22 h., Pierrefitte-sur-Loire (Allier).
+COSTE Jean, 14-1-1865, 9 h., Noziére (Ardeche).
+COSTE Pierre, 3-2-1873, 5 h., Tartas (Landes).
+COUGOULUENHES Jean, 30-10-1878, 18 h., Mazel-ies-Lambrés (Loz.).
+COURAGE Emile, 1-1-1845, 20 h., Elbeuf (Seine-Inférieure).
+COURRAS Marie, 30-9-1860, 23 h. 30, Saint-Etienne (Loire).
+COURREGE Louis, 28-1-1841, 6 h., Vimenet (Aveyron).
+COURT Gustave, 14-8-1872, 1 h., Lutzelhausen (Bas-Rhin).
+COURTIAL Pierre, 25-2-1870, 15 h., Saint-Louis-de-Montferrand (Gir.).
+COUTADEUR Pierre, 26-2-1831, 10 h., Orléans (Loiret).
+COUVRAT-DESVER. Guy, 1-3-1878, 19 h., Condom (Gers).
+CRESTEY André, 10-1-1871, 10 h., Trouville (Calvados).
+CROIZIER Paul, 20-6-1878, 0 h. 15, Autun (Saône-et-Loire).
+CROMBETTE Jean-Baptiste, 2-8-1857, 22 h., Loos-lés-Lille (Nord).
+CROSNIER Paul, 14-11-1892, 2 h., Créteil (Seine).
+DADON Romain, 6-8-1852, 1 h., Bourges (Cher).
+DARDANS Julien, 6-5-1862, 22 h., Ustaritz (Basses-Pyrénées).
+DASTARAC Louis, 6-9-1849, 13 h., Cadours (Haute-Garonne).
+DATIN François, 20-1-1880, 12 h., Fougéres (Ille-et-Vilaine).
+DAUBY Gustave, 9-11-1847, 21 h., Castillon (Nord).
+DEBOUT Henri, 22-8-1857, 9 h., Arras (Pas-de-Calais).
+DECLOMESNIL Léon, 30-5-1866, 5 h., Caen (Calvados).
+DEFFIEUX Jean, 6-5-1863, 15 h., Gondrin (Gers).
+DELABAR Charles, 6-4-1867, 4 h., Ornes (Meuse).
+DELAUNAY Jules, 30-1-1847, 3 h. 30, Avranches (Manche).
+DELBOS Charles, 16-7-1871, 7 h., Saint-Germain-les-Corbeil (S.-et-O.).
+DELERUE Félix, 28-4-1871, 20 h., Roubaix (Nord).
+DELEUZE Jean, 18-1-1857. 7 h., Bordeaux (Gironde).
+DELTEIL Pierre, 11-38-1846, 12 h., Moussages (Cantal).
+DEMARGNE Jean-M., 24-2-1904, 23 h., Aix-en-Provence (B.-du-Rh.).
+DEMAY Jules, 6-6-1861, 23 h., Tessé-Fronlay (Orne).
+DENAUT Oscar, 15-5-1845, 18 h., Lanenville (Somme).
+DENILLE Ernest, 6-11-1866, 19 h., Puylaurens (Tarn).
+DEQUENE Léon, 9-10-1851, 7 h., Sars-Poteries (Nord).
+DESERS Léon, 22-12-1851, 11 h., Tours (Indre-et-Loire).
+DESHAYES Marie-J., 24-6-1858, 5 h., Saint-Calais (Sarthe).
+DEVUYST Charles, 10-5-1881, 4 h., Lille (Nord).
+DIEU Albert, 24-5-1869, 12 h., Joinville-le-Pont (Seine).
+DINET Louis, 9-7-1847, 19 h., Nanteuil-en-Vallée (Charente).
+DITIERE Marie-A., 2-2-1877, 2 h.. Tours (Indre-et-Loire).
+DIVOIR Charles, 23-1-1852, 3 h., Beaumont-sur-Vesle (Marne).
+DIVOL Aimé, 17-8-1856, 14 h., Roquemaure (Gard).
+DOMMERGUE Alphonse, 12-4-1848, 15 h., Chaudes-Aigues (Cantal).
+DROUOT Pierre, 6-10-1864, 10 h., Maatz (Haute-Marne).
+DUBOIS Louis, 1-9-1856, 23 h., Saint-Calais (Sarthe).
+DUBORD Jean, 8-7-1849, 20 h., La Courtine (Creuse).
+DUC Michel, 28-3-1849, 1 h., Granier (Savoie).
+DUCHER Joseph, 9-8-1869, 22 h., Ravel (Puy-de-Dôme).
+DUFOUR Jules, 3-7-1864, 1 h., Massongy (Haute-Savoie).
+DUFOUR Marie, 9-11-1866, 23 h., Montlucon (Allier).
+DUHAMEL G. Joseph, 10-11-1874, 18 h. 30, Langres (Haute-Marne).
+DUHAMEL Etienne, 21-4-1865, 8 h. 30, Linselles (Nord).
+DUHAMEL Joseph, 15-3-1871, 10 h., Mordelle (Ille-et-Vilaine).
+DUMAINE Paul, 24-6-1870, 16 h. 15, Troarn (Calvados).
+DUMONT Joseph, 13-1-1873, 6 h., Dampriat (Correéze).
+DUVAL Eugene, 28-8-1858, 14 h., Aigues-Mortes (Gard).
+DYVERSAIS Paul, 7-7-1846, 14 h., Yversais (Vienne).
+EHRHARDT Frédéric,, 27-5-1877. 4 h., Strasbourg (Bas-Rhin).
+EISENMENGER Jacques, 20-3-1879, 16 h., Limay (Seine-et-Oise).
+EVRARD François, 1-9-1873, 1 h., Hayange (Moselle).
+FABRY Dominique, 31-12-1873, 5 h., Custines (Meurthe-et-Moselle).
+FAGES Philippe, 23-7-1843. 12 h., La Carrourgue (Lozère).
+FAGES Denis, 25-11-1878, 2 h., La Carrourgue (Lozère).
+FAGET Jean, 31-10-1867, 14 h., Mérac (Lot-et-Garonne).
+FARALICQ Adrien, 16-8-1842, 11 h. 30, Chartres (Eure-et-Loire).
+FAYOLLAT Jules, 3-7-1882, 13 h. 30, Lans (Isére).
+FENEON Raoul, 2-3-1862, 7 h., Epernay (Marne).
+FERRAUD Pierre, 1-11-1847, 8 h., Lannejols (Lozère).
+FIAMMA Jean, 12-6-1857, 9 h., Zivaco (Corse).
+FICHOT Pierre, 3-9-1876. 0 h., Jallieu (Isére).
+FILLION L. Cl., 25-6-1843, 2 h., Saint-Bonnet-de-Joux (Saône-et-Loire).
+FILLON Louis, 1-8-1877, 6 h., Vineuil (Indre).
+FONSSAGRIVES Joseph, 2-6-1860, 4 h., Brest (Finistere).
+FONTAINE Maurice, 26-7-1863, 22 h., Taverny (Seine-et-Oise).
+FONTAINE Joseph, 3-9-1861, 5 h.. Verdes (Loir-et-Cher).
+FONTAINE Marie Dan., 1-3-1862, 16 h., Saint-Leu (Seine-et-Oise).
+FORESTIER Léon, 9-11-1823, 1 h., Albi (Tarn).
+FOURNERET Pierre, 11-9-1868, 9 h., Saint-Dizier (Haute-Marne).
+FRISCH Henri, 28-5-1851, 9 h.,  Freistroff (Moselle).
+FROBERT Marie, 21-1-1876, 11 h., Moulins (Allier).
+FROMENTIN Jean, 13-7-1883, 1 h., Saint-Brieuc (Côtes-du-Nord).
+GAILHOUSTE Jean, 10-5-1886, 3 h., Bordeaux (Gironde).
+LE GALL Hyacinthe, 7-2-1863, 17 h., Brest (Finistére).
+GARILHE Ulysse, 23-10-1856, 6 h., Gravieres (Manche).
+GARRIGUET Louis, 13-11-1859, 4 h., Neyrac (Aveyron).
+GASSION Joseph, 24-7-1887, 16 h., Isigny-sur-Mer (Calvados).
+GASTON Jean, 11-9-1875, 3 h., Aurillac (Cantal).
+GAUTIER Félix , 26-3-1861, 23 h., Villedieu (Manche).
+GAZEAU André, 28-7-1888, 11 h., Coax (Vendée).
+GEISPITZ Charles, 18-7-1839, 8 h., Guise (Aisne).
+GENDRE Jean-Baptiste, 26-2-1863, 2 h., Nonards (Corséze).
+GENTY Constant, 19-3-1858, 4 h., Donzy (Nièvre).
+GERARD Louis, 20-5-1876, 20 h.. Maurupt-le-Montoy (Marne).
+GERARD Charles, 19-8-1843, 8 h., Jonvelle (Haute-Saône).
+GERMOND Paul, 30-6-1870, 16 h.. Saint-Etienne-du-Mont (Alpes-M.)
+GERVAIS Pierre, 29-2-1880, 20 h., Villepreux (Seine-et-Oise),
+GIBERT-LAFON Jean, 28-1-1866, 14 h., Mauriac (Cantal).
+GILAND Albin, 7-2-1874, 9 h.. Thines (Ardache).
+GILBERT Jean, 17-7-1855, 18 h., Vieux-Vieil (Ille-et-Vilaine).
+GIQUELLO Pierre, 22-12-1860, 21 h., Kervignac (Morbihan).
+GIROUY Hector, 8-11-1883, 21 h. 30, Vulaines (Aube).
+GLANDIERES Alphonse, 13-8-1856, 8 h., Huparlac (Aveyron).
+GLEYE Jacques, 28-5-1874, 21 h.. Millau (Aveyron).
+GOBAUD Léon, 4-8-1868, 0 h., Nanteuil-en-Vallée (Charente).
+GODEAU Cyprien, 6-4-1858, 8 h., Nantes (Loire-Inférieure).
+GODIN Henri, 18-4-1906, 8 h.. Audeux (Doubs).
+GONDRE Achille, 29-3-1856, 21 h. 30, Rouen (Seine-Inférieure).
+GONTHARET Claude, 18-9-1846, 1 h., Peisey (Savoie).
+GOUAULT Pierre, 8-8-1892, 11 h., Grez-en-Bouére (Mayenne).
+GOUESLAIN Arsène, 18-8-1858, 4 h., Quettehou (Manche).
+GOURON-BOISVERT Ernest, 6-6-1853, 20 h., La Roche-sur-Yon (Vend.).
+GRAFFAIN René, 22-3-1858, 3 h. 30, Pontvallain (Sarthe).
+GRANGENEUVE Jean-Baptiste, 27-7-1881, 3 h., Cestas (Gironde).
+GRANIER Marius, 17-3-1856, 2 h., Tavel (Gard).
+GRAPPIN Emile, 15-9-1882, 12 h., Saint-Ouen (Seine).
+GREGOIRE Gaston, 2-12-1860,' 17. bh. 30.) Vaucouleurs (Meuse).
+GRESSIN François, 1-2-1844, 23 h., Ménétou-Couture (Cher).
+GROS Marie, 1-1-1878, 2 h., Besancon (Doubs).
+GUENARD Théophile, 9-5-1860, 9 h., Saint-Georges-de-Chesne (I.-et-V.).
+GUERIN Louis, 20-1-1874, 10 h., Chatellerault (Vienne).
+GUILBEAULT Paul, 238-8-1908). 14. h., Vandermont (Maine-et-Loire).
+GUILLON Georges, 5-5-1849, 5 h., Saint-Germain-en-Laye (S.-et-O.).
+HALOT Arsène, 29-7-1877, 12 h., Nantes (Loire-Inférieure).
+HAUBOIS Marie-J.,. 21-11-1866, 19 h. 30, Soissons (Aisne).
+HERBERT Théodore, 9-11-1859, O h., Haguenau (Haut-Rhin).
+HERMELINE Charles, 27-3-1867, 2 h., Dancy (Eure-et-Loire),
+HERSCHER Sébastien, 29-10-1853, 22 h., Hettenschlag (Haut-Rhin).
+HOUDARD Maurice, 4-10-1896, 4 h., Crépy-en-Léonnois (Aisne).
+HUSSON Henri,’ 17-8-1890, 9 h. 30, Besancon (Doubs).
+IMBERT Marie-L., 9-7-1854, 13 h,, Clermont-Ferrand (Puy-de-Dôme).
+JACQUEMOT Ernest, 7-6-1859, 5 h.. Mouilly (Meuse).
+JACQUES Gustave, 4-7-1852, 17 h. 30, Carignan (Ardennes).
+JACQUET Marie-B., 26-1-1849, 18 h., Frolois (Meurthe-et-Moselle).
+JACQUET Paul, 2-9-1859, 21 h. 45, Nogent-sur-Marne (Seine).
+JACQUIN Joseph, 21-11-1835, 22 h., Broussailles (Doubs).
+JAGUELIN René, 28-7-1875, 1 h., Poillé (Sarthe).
+JANEAU François, 26-8-1876, 14 h., Sorges (Maine-et-Loire).
+JAUD Victor, 16-1-1851, 14 h., Chavagnes-en-Paillers (Vendée).
+JEHANNO Mathurin, 29-9-1874, 16 h., Limerzel (Morbihan).
+MOBERT Camille, 3-6-1872.'5 h., Vermenion (Yonne).
+JOUFFRET Jean, 19-6-1860, 4 h., Avignon (Vaucluse).
+JOUIN Ernest, 20-12-1844, 7 h.. Angers (Maine-et-Loire).
+JUBAULT Louis, 27-4-1870, 4 h., Chateaudun (Eure-et-Loire).
+JUNG Henri, 25-12-1846, 15 h., Grosblidestroff (Moselle).
+KARPEN Albert, 6-2-1891, 2 h.,. Neuilly-sur-Seine (Seine).
+KIEFFER Joseph, 7-2-1888, 20 h., Limersheim (Bas-Rhin).
+KRIEGER Antoine, 17-11-1874, 17 h. 30, Blois (Loir-et-Cher).
+LA BARRE (de) André, 25-8-1855, 13 h., Temple (Loir-et-Cher),
+LACAS Albert, 25-38-1879, 4 h., Banassac (Lozère).
+LACHAPELLE Marcel, 14-6-1867, 5 h., Chateauroux (Indre).
+LAGUENS Emile, 14-9-1857, 5 h., Campuzan (Hautes-Pyrénées).
+LAGUENS François, 2-12-1847, 22 h., Campuzan (Hautes-Pyrénées).
+LALIGNANT Pierre, 29-3-1880, 15 h., Lons-le-Saunier (Jura).
+LANCELLE Edouard, 19-2-1859, 22 h., Jeumont (Nord).
+LANG Jules, 9-6-1859, 21 h., Decazeville (Aveyron).
+LANGLOIS Marcel, 23-4-1871, 9 h., Pierres (Eure-et-Loire).
+LAPALME Jules, 23-12-1861, 2 h., Chatillon-sur-Seine (Côte-d’Or).
+LAPEYRADE Firmin, 5-2-1847, 23 h., Argelés (Hautes-Pyrénées).
+LAPPARENT André, 14-1-1866, 22 h., Saint-Eloi-de-Gy (Cher).
+LARGENT Gustave, 26-6-1834, 8 h., Bassée (Nord).
+LARIGALDIE Gabriel, 2-10-1857, 1 h. 45, Mauriac (Cantal).
+LASSERRE Pierre, 3-5-1853, 17 h., Horgues (Hautes-Pyrénées).
+LATRASSE Marcel, 9-2-1885, 6 h., Cercy-la-Tour (Nièvre).
+LAUDET Emile, 7-7-1872, 1 h. 30, Moulins-Engilbert (Nièvre).
+LAUMONDAIS Yves, 26-2-1890, 5 h., Saumur (Maine-et-Loire).
+LAURENT Marcel, 17-11-1887, 7 h., Reims (Marne).
+LAURENT Marien, 23-11-1853, 10 h., Gonihiers (Puy-de-Dôme).
+LAURENT Georges, 11-2-1888, 22 h. 30, Lunévilie (Meurthe-et-Moselle).
+LAURIER Jean, 18-1-1852, 5 h., Serveretie (Lozère).
+LEBLANC Charles, 9-5-1846, 22 h., Ligniéres (Somme).
+LEBRETON Joseph, 10-1-1850, 18 h., Lyon (Rhône).
+LE CHATELIER Pierre, 30-9-1851, 10 h., Beauchéne (Orne).
+LEFEUVRE Yves, 1-10-1909, 14 h., La Guerche-de-Bretagne (Ille-et-V.).
+LEGRIS René, 7-9-1874, 12 h., Amiens (Somme).
+LA HIR Daniel, 12-12-1851, 17 h., Morlaix (Finistére).
+LEITERER Auguste, 23-9-1874, 20 h., Soultz-les-Bains (Bas-Rhin).
+LEJOUR Jean-Marie, 26-11-1866, 1 h., Chassigny (Haute-Marne).
+LELIEVRE Pierre, 24-10-1874, 6 h., Treize-Septiers (Vendée).
+LEMOND Charles, 28-10-1856, 10 h., Rouvrois-sur-Meuse (Meuse).
+LEONETTI Dominique, 13-1-1852, 0 h., Ciamannacio (Corse).
+LEROQUAIS Victor-M., 7-8-1873, 18 h., Saint-Germain-de-T.
+LESAGE Louis, 4-1-1872, 21 h., Romillé (Ille-et-Vilaine).
+LE TESSON Jean-L., 17-1-1850, 9 h., Plouhinec (Morbihan).
+LE TROADEC Toussain, 30-10-1882, 22 h., Rospez (Côtes-du-Nord).
+LEVEQUE Eugéne, 20-9-1855, 11 h. 20, Angers (Maine-et-Loire).
+LION Léopold, 14-12-1855, 22 h., Chépy (Somme).
+LOUARN Pierre, 6-1-1905, 20 h., Lennon (Finistére).
+LOTHON Alphonse, 1-3-1874, 14 h., Laval (Mayenne).
+LOUIS Henri, 29-4-1865, 2 h., Dounous (Vosges).
+LOUWICK Alfred, 24-1-1851. 5 h., Wulvelding (Nord).
+LURET Jean, 20-2-1857, 9 h., Buverette (Indre).
+MAILFERT François, 3-5-1838, 1 h., Bruyere-Montberaut (Aisne).
+MAILLES Auguste, 25-11-1842, 6 h., Lacassagne (Hautes-Pyrénées).
+MALIJOUD Charles, 12-1-1868, 18 h., Douai (Nord).
+MALLEY Théodore, 9-11-1853, 5 h., Murat (Allier).
+MALLET Emile, 15-1-1859, 16 h., Condé-en-Brie (Aisne).
+MANY Seéraphin, 30-12-1847, 2 h., Gespunsart (Ain).
+MARCHAND Dominique, 10-10-1879, 5 h., Versailles (Seine-et-Oise).
+MARIES Louis, 19-8-1831, 1 h., Albi (Tarn).
+MARRE André, 1-4-1906, 17 h., Evreux (Eure).
+MATHE Jean, 24-2-1856, 18 h., Vigoux (Indre).
+MATHIEU Joseph, 20-6-1859, 1 h. 30, Macon (Saône-et-Loire).
+MARTIN Benoist, 18-8-1842, 6 h., Saint-Etienne (Loire).
+MARTIN François, 19-1-1873, 13 h., Dracy-sur-Loup (Sa6ne-et-Loire).
+MARTIN Louis, 10-8-1861, 13 h., Cénomes (Aveyron).
+MARTIN Victor, 27-5-1872, 4 h., Présaille (Haute-Loire).
+MATHIS François, 26-11-1860, 14 h., Bidestroff (Moselle).
+MAUGARS Charles, 3-2-1879, 20 h., Tillay-le-Perreux (Eure-et-Loire).
+MAUMUS Jean, 4-4-1845, 2 h.. Aste (Hautes-Pyrénées).
+MAUREL Jean-Baptiste, 13-6-1877, 19 h., Broquies (Aveyron).
+MAURY Jean, 15-10-1882, 18 h., Boussenac (Ariége).
+MEGROT Auguste, 19-3-1878, 1 h. 30, Cosne (Nièvre).
+AMERG Louis, 31-8-1862,.10 h.. Schlestadt (Bas-Rhin).
+MERRIEN Eugéne, 18-1-1855, 3 h., Saint-Léon-sur-Vezere (Dordogne).
+MEWLEY Alphonse, 25-3-1842, 1 h., Aix-en-Othe (Aube).
+MEURET Joseph, 5-8-1865, 4 h., Bourges (Cher).
+MEURISSE Charles, 2-3-1831, 8 h., Guignicourt (Aisne).
+MEYER André, 29-10-1842, 1 h., Hohengift (Bas-Rhin).
+MIGNARD Camille, 19-5-1867, 11 h., Raviéres (Yonne).
+MILLET Ernest, 27-9-1861, 6 h., Vailly (Cher).
+MILLIARD Charles, 6-1-1831, 10 h., Alisay (Eure).
+MITTELHEISSER Antoine, 27-10-1840, 16 h.. Truchtersheim (Bas-Rhin),
+MONMARCHE René, 5-6-1868, 17 h., Onzain (Loir-et-Cher).
+MONNIER Louis, 28-8-1869, 6 h., Besancon (Doubs).
+MONSCHE Georges, 22-10-1882, 3 h. 30, Munster (Haut-Rhin).
+MONTAGNE Jean-Baptiste, 13-2-1864, 22 h., Carcassonne (Aube).
+MONTAGUY Barthélemy, 14-8-1841, 0 h., Saint-Etienne (Loire).
+MONTITON Leon, 27-224847, 4. lbs) Sourdaval (Manche).
+MOREAU de MONT. Yves, 30-1-1900, 6 h., Paimpol (Côtes-du-Nord).
+MORTIER Robert, 4-7-1877, 22 h., Thorigné (Sarthe).
+MOUNET Jacques, 23-1-1844, 20 h., Saint-Germain (Savoie).
+MOUROT Henri, 13-8-1877, 11 h. 30, Eureville (Haute-Marne).
+MOUROT Joseph, 1-3-1880,.4 h. 30, Eureville (Haute-Marne).
+MOYSEN Auguste, 23-12-1840, 5 h., Coupiac (Aveyron).
+MUGNIER Arthur, 27-11-1853, 20 h., Lubersac (Corréze).
+MULLER Louis, 6-12-1848, 10 h., Guesting (Moselle).
+MULLER Henri, 10-2-1884, 1 h., Pantin (Seine).
+NAU François, 13-5-1864, 22 h., Thil (Meurthe-et-Moselle).
+NAVIEL Henri, 4-4-1889, 7 h., Fougéres (Ille-et-Vilaine).
+NETZER Henri, 28-11-1878, 23 h., Gorze (Moselle).
+NICOLLE Louis, 30-11-1851, 9 h., Rouen (Seine-Inférieure).
+NOEL Louis, 18-4-1856, 23 h., Tendon (Vosges).
+NOEL Louis, 23-3-1859, 6 h., Méziére (Moselle).
+NOYER Auguste, 12-2-1839, 7 h., Brives (Corréze).
+OLLIER Marie, 6-5-1872, 10 h., Goudet (Haute-Loire).
+OLLIVIER Joseph, 27-1-1846, 6 h., Pleurtuit (Ille-et-Vilaine).
+OUCHARD Alexandre, 19-10-1842, 14 h., Lunéville (Meurthe-et-Mos.).
+OUDIN François, 1-4-1856, 9 h., Montagny (Loire).
+PAGIS François, 13-7-1839, 4 h., Pléaux (Cantal).
+PAPILLON Louis, 22-6-1896, 17 h., Montbard (Côte-d’Or).
+PAQUIER Jules, 11-1-1864, 10 h., Vieillevigne (Loire-Inférieure).
+PARDIEU Jules, 30-11-1857, 12 h., Salonnes (Meurthe).
+PAROT Michel, 25-2-1860, 4 h., Saint-Pourcain (Allier).
+PASCAUD Eugéne, 9-6-1862, 4 h., Gentilly (Seine).
+PASSENAUD Pierre, 11-11-1845, 23 h., Claviére-de-Montagne (Cantal).
+PASTRE-JOUET Frédéric, 23-4-1876, 5 h., Avignon (Vaucluse).
+PATAUD Marcel, 21-5-1885, 6 h., Giencourt (Oise).
+PATERNOT André, 18-10-1900, 20 h., Puteaux (Seine).
+PATUREAU Ernest, 8-9-1853, 14 h., Saint-Dié-sur-Loire (Loir-et-Cher).
+PAUC Armand, 7-1-1883, 9 h., Mende (Lozère).
+PEAUCELLIER Constant, 18-6-1862, 2 h., Saint-Just-en-Chaussée (Oise).
+PEILLAUBE Emile, 8-7-1864, 1 h., Calonges (Lot-et-Garonne).
+PELLERIN Julien, 18-3-1892, 16 h., La Chapelle (Morbihan).
+PELLET Charles, 11-11-1883, 10 h. 30, Besseges (Gard).
+PERICHON Jean, 20-3-1849, 9 h., Roanne (Loire).
+PERISSE Adrien, 6-4-1860, 3 h., Saint-Martin-d’Ertreaux (Loire).
+PERISSE Benjamin, 29-3-1846, 4 h., Montgaillard (Landes).
+PERREL-BEAUFIN Paul, 18-9-1886, 20 h. 45, Saint-Cloud (Seine-et-O.).
+PERRIN Alphonse, 14-7-1843, 5 h., Glonville (Meurthe-et-Moselle).
+PERRON Edmond, 8-6-1850, 20 h., Boncourt (Eure-et-Loire).
+PETITOT Arthur, 1-10-1868, 7 h., Auxonnes (Côte-d’Or).
+PEUCH Justin, 14-1-1843, 2 h., Végennes (Corréze).
+PIAT Claudius, 21-8-1854, 14 h., Saint-Maurice-sur-Loire (Loire).
+PIDOT Jules, 3-4-1854, 21 h., 45, Ensisheim (Haut-Rhin).
+PIERRE Jules, 5-7-1857, 4 h., Athis (Orne).
+PIERRET Louis, 29-4-1862, 23 h., 30, Vouziers (Ardennes).
+PIGEON Pierre, 5-5-1875, 10 h., Theil (Orne).
+PINCEMIN Jean, 11-7-1879, 14 h., L’Hermitage-Lorges (Côtes-du-N.).
+PIQUEMAL Auguste, 7-6-1858, 18 h., Courbevoie (Seine).
+PIVET Louis, 6-3-1875, 1 h., Henrichemont (Cher).
+PLANTARD Pierre, 19-7-1872, 16 h., Camoél (Morbihan).
+POIRIER Félix, 7-3-1872, 8 h., Thauvenay (Cher).
+POIZAT Antoine, 15-2-1852, 9 h., Fourneaux (Loire).
+POIZAT Pierre, 15-2-1852, 9 h., Fourneaux (Loire).
+POUCHARD Jules, 14-2-1879, 2 h., Bais (Ille-et-Vilaine).
+POUGET Guillaume, 14-10-1847, 6 h., Maurines (Cantal).
+POUJOL Elie, 21-2-1881, 2 h., La Maléne (Lozère).
+POUJOL Pierre, 18-4-1846, 21 h., Broquiéres (Aveyron).
+PROTAT Célestin, 11-1-1872, 23 h.. Givardon (Cher).
+PROTOIS Jean, 9-2-1851, 8 h., Colombey-les-Deux-Eglises (Haute-M.).
+PRUNEL Louis, 11-11-1874, 0 h., Laignes (Côte-d’Or).
+QUERRY Henri, 13-5-1882, 4 h., Bergerac (Dordogne).
+RABEUX Jean, 7-1-1873, 8 h., Laveult-du-Frétoy (Nièvre).
+RASSAT Adolphe, 16-12-1864, 23 h., Saini-Osenge-Dessus (Savoie).
+RASTOUL Auguste, 6-8-1842, 2 h., Labécéde-Lauraguais (Aude).
+REBOUL Fréd., 1-3-1856, 12 h., Lunel (Hérault).
+REIMERINGER Eugéne, 19-2-1861, 10 h., Epernay (Marne).
+RETROU Louis, 9-7-1872, 6 h., Gennevilliers (Seine).
+REY Octave, 11-7-1851, 18 h., Ruy-l’Evéque (Lot).
+REYMANN Ernest, 23-12-1863, 5 h., Reichshoffen (Bas-Rhin).
+REYNAUD Hyacinthe, 31-7-1847, 2 h. 30, Orange (Vaucluse).
+RIBAUD Michel, 18-2-1870, 12 h., Rumilly (Haute-Savoie).
+RICHARD Aimé, 15-12-1883, 1 h. 30, Chatillon-Coligny (Loiret).
+RIFFET François, 28-2-1850, 20 h., Selly-sur-Cher (Loir-et-Cher).
+RIMBAULT Arsene, 26-12-1885, 21 h., Sougéres (Yonne).
+RIVALIN Eugéne, 10-9-1863, 3 h., Grand-Champ (Morbthan).
+RIVIERE Albert, 2-1-1844, 14 h., Courseulles-sur-Mer (Calvados).
+ROBERT Eugéne, 20-1-1854, 13 h., Moirey (Meuse).
+ROBERT François, 27-3-1866,, 9 h., Fix-Saint-Georges (Havte-Loire).
+ROQUETAILLADE (de) René, 24-3-1852, 15 h., Roquetaillade (Aveyron).
+ROUAULT François, 18-5-1874, 4 h., Langrolay (Cdtes-du-Nord).
+ROUEDE Eugéne, 18-1-1877, 2 h., Sarrancolin (Hautes-Pyrénées),
+ROUGE Emile, 28-10-1847, 10 h., Salvagnac (Tarn).
+ROURE Marius, 22-10-1874, 4 h., Montpezat (Ardéche).
+ROUSSELOT Pierre, 14-10-1846, 4 h., Saint-Claude-sur-le-Son (Char.).
+ROUX Albert, 25-7-1856, 5 h., Rochefort-sur-Mer (Charente-Maritime).
+ROY (le) Armand, 5-3-1850, 21 h., Saint-Pierre-de-Mailloc (Calvados).
+RUE Louis, 8-8-1884, 14 h., Montrouge (Seine).
+RUNNER Eugéne, 5-8-1851, 1 h., Pfaffenheim (Haut-Rhin).
+RUSTAIN Antoine, 13-2-1866, 0 h., Arlanc (Puy-de-Dôme).
+SABATIER Claude, 14-5-1847, 21 h., Rodez (Aveyron).
+SAGNES Léon, 5-1-1861, 1 h., Béduer (Loi).
+SAINT-JEAN. Victor, 1-11-1859, 1 h., Chateauneuf-de-Randon (Lozère),
+SALAT Antoine, 14-10-1855, 14 h., Brézons (Cantal).
+SALIVET de FOUCHECOURT Fr., 11-4-1870, 21 h. 30, Mende (Lozere).
+SALMON François, 18-6-1846, 16 h., Dieu (Meuse).
+SAUVEPLANE Jules, 22-2-1862, 11 h., Nant (Aveyron).
+SCHAUFFLER Aimé, 2-11-1863, 13 h., Sarrebourg (Moselle).
+SCHLOSSER François, 3-7-1837, 9 h., Talange (Moselle).
+SCHMITT Jacques, 9-2-1856, 6 h., Oberseebach (Bas-Rhin).
+SCHOENHENTZ Jean, 19-11-1860, 1 h., Saint-Avold (Moselle).
+SCHOENHER Pierre, 23-2-1862, 5 h., Osne-le-Val (Haute-Marne).
+SCHOEPPER, 22-4-1843, 23 h., Wettolsheim (Haut-Rhin).
+SCHUTZ Michel, 21-2-1877, 1 h.. Yvry-sur-Seine (Seine).
+SEBERT Adolphe, 15-7-1843, 21 h., Aunou-sur-Orne (Orne).
+SENOT de La Londe (de), Yves, 9-2-1861, 10 h.. Nantes (Loire-Infér.).
+SEXER Jean, 27-8-1868, 15 h., Flexbourg (Bas-Rhin).
+SIBASSIE Pierre, 12-6-1838, 11 h., Blanquefort (Gironde).
+SIBILLE Justin, 5-9-1853, 5 h., Sarreguemines (Moselle).
+SIMON Jean-Baptiste, 23-1-1864, 3 h., Remoiville (Meuse).
+SIMONNET Léon, 9-4-1863, 17 h., Fougéres (Ille-et-Vilaine).
+SIVET Adolphe, 12-11-1862, 14-h., Avignon (Vaucluse).
+SOMMERHALTER Jean, 16-11-1886, 7 h., Mulhouse (Haut-Rhin).
+SOUCHON Jean, 26-10-1840, 23 h., Javols (Lozère).
+STEPHANE Emile, 29-11-1875, 9 h., Margerie-Haucourt (Marne).
+SYRIES Jean, 2-2-1877, 2 h., Decazeville (Aveyron).
+TANQUEREY Adolphe, 1-5-1854, 9 h., Blainville (Manche).
+TEULET Philippe, 22-1-1856, 19 h., Saint-Siran (Cantal).
+THOME Charles, 28-12-1870, 6 h., Martey-Notre-Dame (Ardennes).
+THOOR Albert, 10-11-1875, 21 h., Cassel (Nord).
+THOREL Jacques, 15-1-1878, 12 h., Fécamp (Seine-Inférieure).
+TIGER Joseph, 30-1-1868, 1 h, 30, Mayet (Sarthe).
+TIGIER Pierre, 11-6-1862, 17 h., Beignon (Morbihan).
+TIRIAUX Prosper, 24-5-1863, 15 h. 30, Piré (Ille-et-Vilaine).
+TISON Crépinien, 23-6-1871, 1 h., Vred (Nord).
+TISSOT Alexis, 26-2-1866, 2 h., Fontenay-aux-Roses (Seine).
+TOULOUSE Louis, 27-5-1856, 12 h., Muret (Haute-Garonne).
+JOUPIN Jean, 10-5-1855, 23 h., Quay-Portrieux (Côtes-du-Nord).
+TOURNIAIRE Louis, 4-5-1867, 13 h., Mane (Basses-Alpes).
+TOUYE Joseph, 6-10-1875, 5 h., Saint-Brieuc (Côtes-du-Nord).
+TRAINEAU Marie, 30-10-1865, 23 h., Saint-Martin-Cantalés (Cantal).
+TREZIERES Théophile, 1-7-1868, 19 h., La Fouillade (Aveyron).
+TRILLON de La BIG. Charles, 31-7-1841, 8 h., Sainte-Croix (Sarthe).
+TROCELLIER Adrien, 16-3-1885, 17 h., Javols (Lozère).
+TRUEL Pierre, 23-4-1862, 2 h., Belmont (Aveyron).
+TUBEUF Louis, 6-10-1854, 18 h., Nancy (Meurthe-et-Moselle).
+URBAIN Charles, 19-10-1852, 12 h., Doulevant-le-Chateau (Hte-Marne).
+VALETTE Théophile, 8-8-1868, 4 h., Laubies (Corréze).
+NALLAGE Paul, 6-11-1852, 6 h., Béthune (Pas-de-Calais).
+VARNIER Eugéne, 19-6-1867, 11 h., Saint-Aubin-Epinay (Seine-Infér.).
+VASSELIN Pierre, 28-8-1868, 17 h., Besneville (Manche).
+VEILLA-ABADIE. Bernard, 3-4-1855, 18 h., Gouaux (Hautes-Pyrénées).
+VEILLAT Maria, 5-2-1872, 14 h., Selles-sur-Cher (Loir-et-Cher).
+VERGNE Jules, 19-3-1875, 1 h., Saint-Victor (Ardéche).
+VERICH Jules, 28-12-1856, 2 h., Raon-L’Etape (Vosges).
+VIALETTE Henri, 27-1-1862, 3 h., Lavastrie (Cantal).
+VIDIS Charles, 15-5-1875, 16 h., Henrichemont (Cher).
+VIELLARD-LACHARME Marie, 13-12-1854, 16 h., Sermanges (Nièvre).
+VIGOUREL Adrien, 25-8-1843, 4 h., Lodéve (Hérault).
+VILAIN Camille, 11-3-1859, 21 h., Ivry-le-Pré (Cher).
+VILLELE (de) Joseph, 24-2-1858, 11 h., Chateau-Renard (Bouches-du-R.).
+VILLIEN Antoine, 4-12-1867, 15 h., Aime (Savoie).
+VUILLARD Pierre, 20-6-1888, 3 h., Saint-Claude (Jura).
+WINTZER Ferdinand, 8-6-1872, 5 h., Ulfholz (Haut-Rhin).
