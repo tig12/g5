@@ -135,16 +135,16 @@ class Muller1083 {
     
     
     /**
-        Computes cura source and cura id within this source from field GNR.
-        WARNING : returns cura source slug, not cura file name ('a2' and not 'A2')
-        @param  $gnr String like "SA22" or "ND129"
-        @return Array with 2 elements : cura source slug and NUM
+        Computes cura source and LERRCP id within this source from field GNR.
+        WARNING : returns cura source slug, not LERRCP file name ('a2' and not 'A2')
+        @param  $GNR String like "SA22" or "ND129"
+        @return Array with 2 elements : LERRCP source slug and NUM
     **/
-    public static function gnr2curaSourceId($GNR){
-        $curaPrefix = substr($GNR, 0, 3); // SA2 or ND1
-        $curaSourceSlug = ($curaPrefix == 'SA2' ? 'a2' : 'e1');
+    public static function gnr2LERRCPSourceId($GNR){
+        $lerrcpPrefix = substr($GNR, 0, 3); // SA2 or ND1
+        $lerrcpSourceSlug = ($lerrcpPrefix == 'SA2' ? 'a2' : 'e1');
         $NUM = substr($GNR, 3);
-        return [$curaSourceSlug, $NUM];
+        return [$lerrcpSourceSlug, $NUM];
     }
 
     // *********************** Group management ***********************

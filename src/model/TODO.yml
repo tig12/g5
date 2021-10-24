@@ -7,28 +7,39 @@
 #     @history    2021-09-15 22:40:12+02:00, Thierry Graff : Creation
 # ********************************************************************************/
 
+#
+# 1 - Meta-data
+#
+
+# Creation of this todo
 object:
-  history:
   date:
   author:
 
-# Unique identifier of a TODO
+#
+# 2 - Unique id of a slug
+#
+
+# Two possible forms: person-slug and person-slugs
+# can be one or several references to person slug
+# NOTE: person-slugs Not used so far - could be removed
+# ex: 
+#   'alard-pierre-1937-09-17'
+#   ['andre-georges-1889-08-13', 'arifon-jean-1926-11-16']
+# person-slugs: 
+person-slug: 
+
+# Unique identifier of a TODO within a given person
 # Can be one of class model.TODO constants (standard keys) or any unique string (custom keys)
 key: 
 
-# 2 possible forms: person and persons
-# can be one or several references to persons, either string (slug) or int (id)
-# ex: 
-  # 123
-  # [123, 324]
-  # 'alard-pierre-1937-09-17'
-  # ['andre-georges-1889-08-13', 'arifon-jean-1926-11-16']
-# persons: 
-person: 
 
-string 
-content: |
-  
-#description: |
-#parents: [] # list of source slugs
+#
+# 3 - Content of the todo
+#
 
+# If empty, takes the value of field 'key'
+# Useful when 2 or more todos of a same type
+type:
+
+description: |

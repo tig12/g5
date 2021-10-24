@@ -377,6 +377,13 @@ class Person {
         }
     }
     
+    /** 
+        Adds a note
+    **/
+    public function addNote($note){
+        $this->data['notes'][] = $note;
+    }
+    
     // *********************** CRUD *******************************
     
     /**
