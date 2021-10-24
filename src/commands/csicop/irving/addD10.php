@@ -14,7 +14,7 @@ use g5\G5;
 use g5\app\Config;
 use tiglib\patterns\Command;
 use g5\commands\gauq\Cura;
-use g5\commands\ertel\sport\Ertel4391;
+use g5\commands\ertel\ertel4391\Ertel4391;
 
 class addD10 implements Command {
 

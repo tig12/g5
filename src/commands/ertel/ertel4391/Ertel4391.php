@@ -5,7 +5,7 @@
     @license    GPL
     @history    2019-05-11 23:15:33+02:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\commands\ertel\sport;
+namespace g5\commands\ertel\ertel4391;
 
 use g5\app\Config;
 use g5\model\Source;

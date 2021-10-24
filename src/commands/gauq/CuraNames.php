@@ -23,7 +23,7 @@ class CuraNames{
         @throws Exception if unable to parse
     **/
     public static function parse(){
-        $filename =self::rawFilename();
+        $filename = self::rawFilename();
         $raw = Cura::loadRawFile('N');
         preg_match_all('#<pre>\s*(DAY.*?NAME)\s*(.*?)\s*</pre>#sm', $raw, $m);
         // check that the lines are present

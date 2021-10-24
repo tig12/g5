@@ -152,7 +152,7 @@ class tmp2db implements Command {
                 // Person already in A2 or E1
                 $new = [];
                 $new['notes'] = [];
-                [$curaSourceSlug, $NUM] = Muller1083::gnr2curaSourceId($line['GNR']);
+                [$curaSourceSlug, $NUM] = Muller1083::gnr2LERRCPSourceId($line['GNR']);
                 $curaFile = strtoupper($curaSourceSlug);
                 $gqId = LERRCP::gauquelinId($curaFile, $NUM);
                 $p = Person::getBySourceId($curaSourceSlug, $NUM); // DB

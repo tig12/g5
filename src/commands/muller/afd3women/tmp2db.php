@@ -12,6 +12,7 @@ use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
+use g5\model\TODO;
 use g5\commands\muller\AFD;
 use g5\commands\gauq\LERRCP;
 
@@ -93,7 +94,7 @@ class tmp2db implements Command {
             $lineRaw = $linesRaw[$i];
             $muid = (string)$line['MUID'];
             $mullerId = AFD::mullerId($source->data['slug'], $line['MUID']);
-            if(!isset(AFD3::MU_GQ[$muid])){
+            if(!isset(AFD3::GQ_MATCH[$muid])){
                 // Person not in Gauquelin data
                 $p = new Person();
                 $new = [];
@@ -144,7 +145,7 @@ class tmp2db implements Command {
                 // common lines come from A1 A2 A4 A5 A6 D10 E3
                 $new = [];
                 $new['sex'] = 'F';
-                $gqid = AFD3::MU_GQ[$muid];
+                $gqid = AFD3::GQ_MATCH[$muid];
                 $tmp = explode('-', $gqid);
                 $curaSourceSlug = LERRCP::datafile2sourceSlug($tmp[0]);
                 $NUM = $tmp[1];
@@ -168,8 +169,8 @@ class tmp2db implements Command {
                     ? substr($p->data['birth']['date-ut'], 0, 10)
                     : substr($p->data['birth']['date'], 0, 10);
                 if($mulday != $curaday){
-                    // This happens only for 1 person 177 Rachilde Eymerie (Gauquelin is correct)
-                    // Fixed in tweak2db - so only report, don't fix
+                    // This happens only for 1 person: 177 Rachilde Eymerie (Gauquelin is correct)
+                    // Fixed in tweak2db - so only report, don't fix, don't build a TODO
                     $nDiffDates++;
                     if($reportType == 'full'){
                         $datesReport .= "Cura\t $gqid\t $curaday {$p->data['name']['family']} - {$p->data['name']['given']}\n";
@@ -180,6 +181,12 @@ class tmp2db implements Command {
                     // in A, stored in field 'date-ut' - in D10 and E3 in field 'date'
                     if($p->data['birth']['date-ut'] != '' && $p->data['birth']['date'] == ''){
                         // A file, restore date
+                        //
+                        // HERE TODO 
+                        // compute date for Gauquelin row - compute date-ut for Müller row
+                        // Compare result - log in a TODO object if difference
+                        // $new['birth']['date'] should be filled only if this computation gives coherent result
+                        //
                         $new['birth']['date'] = $line['DATE'];
                         $nRestoredTimes++;
                     }
@@ -188,10 +195,31 @@ class tmp2db implements Command {
                         // This concerns 9 lines - and none differ !
                         $multime = substr($line['DATE'], 11);
                         $curatime = substr($p->data['birth']['date'], 11);
-                        if($multime != $curatime){
-                            $timesReport .= "Cura\t $gqid\t $curatime {$p->data['name']['family']} - {$p->data['name']['given']}\n";
-                            $timesReport .= "Müller\t {$muid}\t $multime {$line['FNAME']} - {$line['GNAME']}\n\n";
-                        }
+                        $localReport_txt  = str_pad("Gauquelin $gqid", 20) . "$curatime {$p->data['name']['family']} - {$p->data['name']['given']}\n";
+                        $localReport_txt .= str_pad("Müller    $muid", 20) . "$multime {$line['FNAME']} - {$line['GNAME']}\n\n";
+                        $localReport_html  = '<br>' . str_pad("Gauquelin $gqid", 20, '&nbsp;') . "$curatime\n";
+                        $localReport_html .= '<br>' . str_pad("Müller    $muid", 20, '&nbsp;') . "$multime\n";
+if($multime != $curatime){
+    // code never executed as all times are equal
+    $localReport_txt = "Gauquelin / Müller times different:\n" . $localReport_txt;
+    $localReport_html = "Gauquelin / Müller times different:\n<br>" . $localReport_html;
+    $timesReport .= $localReport_txt;
+    $todo = [
+        'object' => [
+          'date' => date('c'),
+          'author' => 'php run-g5.php muller afd3women tmp2db',
+        ],
+        'key' => TODO::CHK_TIME,
+        'person' => $p->data['slug'],
+        'description' => $localReport_html, 
+    ];
+    $p->addTodo($todo);
+}
+else{
+echo "NOTE: $localReport_html\n";
+    $localReport_html = "Gauquelin and Müller have same time:\n" . $localReport_html;
+    $p->addNote($localReport_html);
+}
                     }
                 }
                 // update fields that are more precise in muller234
@@ -244,7 +272,9 @@ class tmp2db implements Command {
         if($reportType == 'full'){
             $report .= "=== Names fixed ===\n" . $namesReport;
             $report .= "=== Dates fixed ===\n" . $datesReport;
-            if($timesReport) $report .= "=== Times fixed ===\n" . $timesReport;
+            if($timesReport){
+                $report .= "=== Times fixed ===\n" . $timesReport;
+            }
             $report .= "============\n";
         }
         $report .= "$nInsert persons inserted, $nUpdate updated ($dt s)\n";

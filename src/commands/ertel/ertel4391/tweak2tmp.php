@@ -6,7 +6,7 @@
     @license    GPL
     @history    2019-12-23 18:40:13+01:00, Thierry Graff : Creation from g5\commands\gauq\muller1083\tweak2csv
 ********************************************************************************/
-namespace g5\commands\ertel\sport;
+namespace g5\commands\ertel\ertel4391;
 
 use g5\G5;
 use g5\app\Config;

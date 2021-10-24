@@ -7,7 +7,7 @@
     @license    GPL
     @history    2019-05-11 18:58:50+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace g5\commands\ertel\sport;
+namespace g5\commands\ertel\ertel4391;
 
 use tiglib\patterns\Command;
 

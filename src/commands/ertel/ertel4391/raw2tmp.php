@@ -14,7 +14,7 @@
     @history    2019-05-10 12:19:50+02:00, Thierry Graff : creation
     @history    2020-08-12 19:20:17+02:00, Thierry Graff : add generation of 4391SPO-raw.csv
 ********************************************************************************/
-namespace g5\commands\ertel\sport;
+namespace g5\commands\ertel\ertel4391;
 
 use g5\G5;
 use g5\app\Config;
