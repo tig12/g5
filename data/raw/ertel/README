@@ -1,0 +1,22 @@
+
+3a_sports-utf8.txt is an UTF-8 version of file 3a_sports.txt
+
+File 3a_sports.txt originally comes from
+https://newalchemypress.com/gauquelin/gauquelin_docs/3a_sports.txt
+Another copy of this file can be found at
+https://github.com/tig12/g5-aux/tree/master/1988-ertel
+
+See also 
+    https://tig12.github.io/gauquelin5/ertel-4391-sportsmen.html
+    https://newalchemypress.com/gauquelin/research3.php
+    
+Conversion steps :
+
+Opened 3a_sports.txt in libreoffice writer with encoding DOS/OS2-865/Nordique
+Then exported as xhtml
+Opened the xhtml file in firefox
+Select all and copy
+Paste in an empty txt file : 3a_sport-utf8.txt
+Save
+
+There is probably a better way to do this...

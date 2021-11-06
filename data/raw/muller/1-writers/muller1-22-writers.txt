@@ -1,0 +1,22 @@
+503M Ardau, Giuseppe                10.03.1889 13.00 -0.60 Cagliari         CA 39 N 24 0 9 E  0 2 11 06 1 6
+504M Bontempelli, Massimo           12.05.1878 00.30 -0.83 Como             CO 45 N 48 0 9 E 15 2 31 11 1 6
+505M Busetto, Andrea                09.08.1888 12.00 -0.83 Venezia          VE 45 N 30 012 E 30 2 10 04 1 6
+506M Calitri, Antonio               07.06.1875 12.45 -0.83 Panni            FG 41 N 36 015 E 30 4  0 02 1 6
+507M Cecchi, Emilio                 04.07.1884 21.00 -0.83 Firenze          FI 43 N 42 011 E 30 2 15 05 1 6
+508M Chini, Mario                   29.07.1876 04.00 -0.83 Borgo S. Lorenzo FI 43 N 42 011 E 30 3 11 09 1 6
+509M Corréa d'Olivéira, Emanuele    12.05.1887 16.25 -0.83 Pisa             PI 43 N 42 010 E 30 2  5 03 1 6
+510M De Libero, Libero              11.09.1906 01.10 -1.00 Fondi            LT 41 N 30 013 E  0 2  5 02 2 6
+511M De Maria, Federico             21.07.1883 07.30 -0.88 Palermo          PA 38 N 0  013 E 30 2 19 10 2 6
+512M Gastaldi, Mario                28.08.1902 18.50 -1.00 Bedizzole di Br  BS 45 N 30 011 E  0 3 14 05 2 6
+513M Giordana, Carlo                15.07.1877 21.00 -0.83 Crema            CR 45 N 12 011 E  0 2  9 05 1 6
+514M Guandalini, Ugo                09.03.1905 18.20 -1.00 Modena           MO 44 N 36 011 E 15 3  5 04 1 6
+515M Lipparini, Giuseppe            02.09.1877 14.15 -0.83 Bologna          BO 44 N 30 011 E  0 2 13 05 1 6
+516M Luisi, Mariano                 18.10.1891 18.00 -0.83 Casalbuono       SA 40 N 42 015 E 15 3 16 08 1 6
+517M Migliore, Benedetto            03.02.1892 04.30 -0.88 Trapani          TP 38 N  O 012 E 30 3 22 11 1 6
+518M Orsini, Luigi                  13.11.1873 20.30 -0.83 Imola            BO 44 N 30 011 E  0 2 20 07 2 6
+519M Prepositi, Clementino          08.02.1886 06.05 -0.83 Atri             TE 42 N 42 014 E  0 3 15 06 2 6
+520M Profeta, Ottavio               10.10.1896 16.00 -0.88 Aidone           EN 37 N 30 014 E 15 3 10 05 1 6
+521M Puccini, Mario                 29.07.1887 20.00 -0.83 Senigallia       AN 43 N 42 013 E 45 3 23 07 1 6
+522M Répaci, Leonida                24.04.1898 17.00 -1.00 Palmi Calabria   RC 38 N  6 015 E 30 3 10 06 1 6
+523M Sboto, Edoardo                 30.05.1888 05.00 -0.88 Catania          CT 37 N 30 015 E 0  3  7 04 1 6
+524M Zucca, Giuseppe                01.05.1887 03.30 -0.88 Messina          ME 38 N  0 015 E 30 2 12 05 1 6

@@ -1,0 +1,12 @@
+A   Austria
+B   Belgium
+CH  Switzerland
+D   Germany
+DK  Denmark
+DOP Former German regions, now Polish
+F   France
+GB  Great Britain
+I   Italy
+NL  Netherlands
+S   Sweden
+USA United States of America

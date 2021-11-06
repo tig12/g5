@@ -1,13 +1,16 @@
 
-File muller-afd3-women.txt contains a list published in 
+File muller3-234-women.txt contains a list published in 
 234 berühmte Frauen, Astro-Forschungs-Daten 3, Waldmohr 1993, 76 pp.
 by A Müller and E Lührs
 
-File muller-afd3-women.txt was built from scans of the original document.
+File muller3-234-women.txt was built from scans of the original document.
 These scans can be downloaded from
-https://github.com/tig12/g5-aux/tree/master/1993-muller-women
+    https://github.com/tig12/g5-aux/tree/master/1993-muller3-women
 
-Build process : see https://github.com/tig12/g5-aux/blob/master/1993-muller-women/README
+See also 
+    https://tig12.github.io/gauquelin5/muller3-234-women.html
+    https://newalchemypress.com/gauquelin/research5.php
+
 
 Lists of manual modifications introduced in muller-afd3-women.txt
 and not present in the original document:

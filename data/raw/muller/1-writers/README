@@ -1,0 +1,49 @@
+
+This directory contains data published in
+Astro-Forschungs-Daten 1, Arno Müller, Waldmohr, 1991
+
+Scans of original documents available at
+https://github.com/tig12/g5-aux/tree/master/1991-muller1-writers
+
+See also 
+https://tig12.github.io/gauquelin5/muller1-402-writers.html
+https://newalchemypress.com/gauquelin/research5.php
+
+
+5muller_writers.csv
+----------------------------------
+Main list of 402 published records with birth time.
+Built from file 5muller_writers.xlsx, found at
+https://newalchemypress.com/gauquelin/gauquelin_docs/5muller_writers.xlsx
+A copy of this file is also located at
+https://github.com/tig12/g5-aux/tree/master/1991-muller1-writers
+
+5muller_writers.xlsx contains 2 sheets :
+- MuErtel402Italians(SolarFire) : contains legal birth time and dtu.
+- MuErtel402Italians(JigSaw) : contains UT time and dtu
+
+Select MuErtel402Italians(SolarFire)
+Save as csv (UTF8 separated by ;)
+=> generates 5muller_writers.csv
+
+5muller_writers.xlsx made available online by Nick Kollerstrom
+5muller_writers.csv built by Thierry Graff
+
+
+muller1-100-it-writers.txt
+----------------------------------
+It contains 100 italian witers with birth days but without birth times (Müller requested the data to civil registries but didn't succeed for these records).
+
+Scan by Nick Kollerstrom
+OCR and human corrections by Thierry Graff
+
+
+muller1-22-writers.txt
+----------------------------------
+is a transcription of the image (see https://github.com/tig12/g5-aux/tree/master/1991-muller1-writers).
+
+Scan by Nick Kollerstrom
+OCR and human corrections by Thierry Graff
+
+Conversion from jpg to txt done with command :
+tesseract muller1-22-writers.jpg muller1-22-writers --psm 6
