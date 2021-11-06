@@ -32,7 +32,7 @@ class offset{
     **/
     public static function compute($date, $zone, $format='HH:MM'){
         if($format != 'HH:MM' && $format != 'HH:MM:SS'){
-            throw new Exception("Invalid \$format parameter : $format - Must be 'HH:MM' or 'HH:MM:SS'");
+            throw new \Exception("Invalid \$format parameter : $format - Must be 'HH:MM' or 'HH:MM:SS'");
         }
         $tz = new \DateTimeZone($zone);
         $dt = new \DateTime($date);

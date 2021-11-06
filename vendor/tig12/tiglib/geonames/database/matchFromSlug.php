@@ -54,7 +54,7 @@ class matchFromSlug{
                 }
                 return $rst->fetchAll(\PDO::FETCH_ASSOC);
             }
-            catch(Exception $e){
+            catch(\Exception $e){
                 // silently pass the fact that a country is not available
                 continue;
             }

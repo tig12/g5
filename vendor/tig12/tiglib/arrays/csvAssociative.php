@@ -22,7 +22,7 @@ class csvAssociative{
     public static function compute($filename, $delimiter=';'){
         $res = [];
         if (($handle = fopen($filename, "r")) === FALSE) {
-            throw new Exception("-- UNEXISTING FILE -- $filename");
+            throw new \Exception("-- UNEXISTING FILE -- $filename");
         }
         $fieldnames = fgetcsv($handle, 0, $delimiter);
         $N = count($fieldnames);

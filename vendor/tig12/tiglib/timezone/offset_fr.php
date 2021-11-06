@@ -57,7 +57,7 @@ class offset_fr{
     **/
     public static function compute($date, $lg, $c2, $format='HH:MM'){
         if($format != 'HH:MM' && $format != 'HH:MM:SS'){
-            throw new Exception("Invalid \$format parameter : $format - Must be 'HH:MM' or 'HH:MM:SS'");
+            throw new \Exception("Invalid \$format parameter : $format - Must be 'HH:MM' or 'HH:MM:SS'");
         }
         $err = $offset = '';
         $case = 0;
