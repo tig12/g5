@@ -17,7 +17,7 @@ use g5\G5;
 use g5\model\DB5;
 use g5\commands\gauq\LERRCP;
 use g5\commands\gauq\Cura;
-use g5\commands\gauq\CuraNames;
+use g5\commands\gauq\A\ACuraNames;
 use g5\model\Names;
 use g5\model\Names_fr;
 use tiglib\patterns\Command;
@@ -65,9 +65,9 @@ class raw2tmp implements Command {
         $datafile = $params[0];
         
         $report =  "--- $datafile raw2tmp ---\n";
-        $html = Cura::loadRawFile($datafile);
-        $file_datafile = Cura::rawFilename($datafile);
-        $file_names = CuraNames::rawFilename(); // = 902gdN.html
+        $html = LERRCP::loadRawFile($datafile);
+        $file_datafile = LERRCP::rawFilename($datafile);
+        $file_names = ACuraNames::rawFilename(); // = 902gdN.html
         //
         // 1 - parse first list (without names) - store by birth date to prepare matching
         //
@@ -97,7 +97,7 @@ class raw2tmp implements Command {
         // 2 - prepare names - store by birth date to prepare matching
         //
         $res2 = [];
-        $names = CuraNames::parse()[$datafile];
+        $names = ACuraNames::parse()[$datafile];
         foreach($names as $fields){
             $day = $fields['day'];
             if(!isset($res2[$day])){
@@ -336,7 +336,7 @@ class raw2tmp implements Command {
             $nbStored ++;
         }
         
-        $csvfile = Cura::tmpFilename($datafile);
+        $csvfile = LERRCP::tmpFilename($datafile);
         $dir = dirname($csvfile);
         if(!is_dir($dir)){
             mkdir($dir, 0755, true);
@@ -344,7 +344,7 @@ class raw2tmp implements Command {
         file_put_contents($csvfile, $csv);
         $report .= "Stored $nbStored lines in $csvfile\n";
         // second file keeping a trace of the original values
-        $csvfile = Cura::tmpRawFilename($datafile);
+        $csvfile = LERRCP::tmpRawFilename($datafile);
         file_put_contents($csvfile, $csv_raw);
         $report .= "Stored $nbStored lines in $csvfile\n";
         

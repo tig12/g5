@@ -178,7 +178,7 @@ class Irving {
     // *********************** Tmp raw file manipulation ***********************
     
     /**
-        Returns the name of a "tmp raw file", data/tmp/newalch/muller-402-it-writers-raw.csv
+        Returns the name of a "tmp raw file", data/tmp/csicop/irving/408-csicop-irving-raw.csv
         (file used to keep trace of the original raw values).
     **/
     public static function tmpRawFilename(){

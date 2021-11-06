@@ -1,10 +1,13 @@
 <?php
 /********************************************************************************
-    Affects occupation "poet" or "novelist" to some records of A6 file.
-    "pn" stands for "poets - novelists".
-    Based on a work exposed on https://newalchemypress.com/gauquelin/research8.php
-    
+
+    php run-g5.php gauq A6 occupn
+
+    occupn = occupation "poet" or "novelist"
+    Updates 885 occupations in file A6 (11.366 s)
     A6 records must have been imported in database before executing this command.
+    
+    Based on a work exposed on https://newalchemypress.com/gauquelin/research8.php
     
     @license    GPL
     @history    2021-08-15 16:45:27+02:00, Thierry Graff : creation
@@ -13,15 +16,15 @@ namespace g5\commands\gauq\A;
 
 use g5\app\Config;
 use tiglib\patterns\Command;
-use g5\commands\ertel\Newalch;
+use g5\commands\Newalch;
 use g5\commands\gauq\LERRCP;
 use g5\model\Person;
 use g5\model\Group;
 
-class A6occu implements Command {
+class occupn implements Command {
     
-    /** Directory where FILES are located, relative to Newalch raw directory. **/
-    const DIR = '08-writers';
+    /** Directory where FILES are located, relative to LERRCP raw directory. **/
+    const DIR = 'a6occu';
     
     /**
         Files used in this command, and related occupations.
@@ -32,15 +35,15 @@ class A6occu implements Command {
     ];
     
     /**
-        @param  $params Empty array
+        @param  $params Array with 2 elements : 'A6' and 'occupn' (useless here - transmitted by GauqRouter)
     **/
     public static function execute($params=[]): string {
         
-        if(count($params) > 0){
+        if(count($params) > 2){
             return "USELESS PARAMETER : " . $params[0] . "\n";
         }
         
-        $report = "--- newalch occu pnA6 ---\n";
+        $report = "--- gauq A6 occupn ---\n";
         
         $t1 = microtime(true);        
         $pattern = '/"(\d+)"/';
@@ -48,7 +51,7 @@ class A6occu implements Command {
         foreach(self::FILES as $file => $occu){
             $g = Group::getBySlug($occu); // group slug = occupation slug
             $g->computeMembers();
-            $zipfile = Newalch::rawDirname() . DS . self::DIR . DS . $file;
+            $zipfile = LERRCP::rawDirname() . DS . self::DIR . DS . $file;
             $zip = new \ZipArchive;
             $zip->open($zipfile);
             $content = $zip->getFromName(str_replace('.zip', '', $file));
@@ -62,7 +65,7 @@ class A6occu implements Command {
                 $p->addOccus([$occu]);
                 $new = ['occus' => $occu];
                 $p->addHistory(
-                    command: 'newalch occu pnA6',
+                    command: 'gauq A6 occupn',
                     sourceSlug: Newalch::SOURCE_SLUG,
                     newdata: $new,
                     rawdata: $new,

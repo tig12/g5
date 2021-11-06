@@ -11,8 +11,9 @@ namespace g5\commands\gauq\A;
 
 use g5\app\Config;
 use tiglib\patterns\Command;
+use g5\commands\gauq\LERRCP;
 use g5\commands\gauq\Cura;
-use g5\commands\gauq\CuraNames;
+use g5\commands\gauq\A\ACuraNames;
 use g5\commands\gauq\GauqRouter;
 use tiglib\arrays\csvAssociative;
 
@@ -64,7 +65,7 @@ class look implements Command {
     **/
     private static function look_count($datafile){
         $datafiles = GauqRouter::computeDatafiles('A');
-        $dir = Cura::tmpDirname();
+        $dir = LERRCP::tmpDirname();
         //
         $N = $nNAME = $nDATE = $nGEOID = array_fill_keys($datafiles, 0);
         $missNAME = $missDATE = $missGEOID = 0;
@@ -174,7 +175,7 @@ class look implements Command {
     **/
     private static function look_lists($datafile){
         $report =  "Comparing the two lists in file $datafile - ";
-        $raw = Cura::loadRawFile($datafile);
+        $raw = LERRCP::loadRawFile($datafile);
         //
         // 1 - parse first list (without names)
         //
@@ -231,7 +232,7 @@ class look implements Command {
     **/
     private static function look_names($datafile){
         $report = '';
-        $names = CuraNames::parse();
+        $names = ACuraNames::parse();
         ksort($names);
         $report .= "Number of names in the different files\n";                                                                        
         foreach($names as $k => $v){

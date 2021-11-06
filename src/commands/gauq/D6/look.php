@@ -10,7 +10,7 @@ namespace g5\commands\gauq\D6;
 
 use tiglib\patterns\Command;
 use tiglib\arrays\csvAssociative;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\LERRCP;
 
 class look implements Command {
     
@@ -49,7 +49,7 @@ class look implements Command {
         It has been used to build raw2tmp::$NAMES_CORRECTIONS
     **/
     public static function execute_emptyGiven(): string{
-        $csvFile = Cura::tmpFilename('D6');
+        $csvFile = LERRCP::tmpFilename('D6');
         if(!is_file($csvFile)){
             return "Missing file $csvFile\n"
                 . "You must run first : php run-g5.php cura D6 raw2tmp\n";

@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Loads files data/tmp/newalch/4391SPO.csv in database.
+    Loads files data/tmp/ertel/ertel-4384-athletes.csv and ertel-4384-athletes-raw.csv in database.
     Affects records imported in A1
     
     @license    GPL
@@ -13,8 +13,7 @@ use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
-use g5\commands\ertel\Newalch;
-use g5\commands\gauq\LERRCP;
+use g5\commands\ertel\Ertel;
 
 class tmp2db implements Command {
     
@@ -49,7 +48,7 @@ die("\nNOT IMPLEMENTED\n" . __FILE__ . ' - line ' . __LINE__ . "\n");
             $namesReport = '';
             $datesReport = '';
         }
-                                             
+        
         // source corresponding to 5a_muller_medics - insert if does not already exist
         $source = Ertel4391::getSource();
         try{
@@ -99,7 +98,7 @@ echo "\n<pre>"; print_r($line); echo "</pre>\n"; exit;
                 // Person not in Gauquelin data
                 $p = new Person();
                 $new = [];
-                $new['trust'] = Newalch::TRUST_LEVEL;
+                $new['trust'] = Ertel4391::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
                 $new['birth'] = [];

@@ -1,12 +1,13 @@
 <?php
 /********************************************************************************
-    Constants and utilities shared by several classes of this package.
+    Constants and utilities related to newalchemypress.org information source.
+    This class is used by several subpackages (ertel, gauq, muller).
     
     @license    GPL
     @history    2020-07-13 17:15:37+02:00, Thierry Graff : creation
     @history    2020-08-12 19:46:54+02:00, Thierry Graff : adaptation for g5 database
 ********************************************************************************/
-namespace g5\commands\ertel;
+namespace g5\commands;
 
 use g5\app\Config;
 use g5\model\Source;

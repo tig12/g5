@@ -13,7 +13,7 @@ namespace g5\commands\gauq\all;
 
 use g5\G5;
 use g5\app\Config;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\LERRCP;
 use g5\model\Group;
 use g5\model\Person;
 use tiglib\patterns\Command;
@@ -64,7 +64,7 @@ class tweak2tmp implements Command {
         
         // modify file in data/tmp/cura
         
-        $cura = Cura::loadTmpFile_num($datafile);
+        $cura = LERRCP::loadTmpFile_num($datafile);
         $keys = array_keys(current($cura));
         $res = implode(G5::CSV_SEP, $keys) . "\n";
         $nUpdated = 0;
@@ -85,7 +85,7 @@ class tweak2tmp implements Command {
             $res .= implode(G5::CSV_SEP, $row) . "\n";
         }
         
-        $curafile = Cura::tmpFilename($datafile);
+        $curafile = LERRCP::tmpFilename($datafile);
         file_put_contents($curafile, $res);
         $report .= "Updated $nUpdated records of $curafile with $tweaksFile\n";
         return $report;

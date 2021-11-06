@@ -1,7 +1,7 @@
 <?php
 /********************************************************************************
-    Adds Gauquelin A6 or A4 NUM in column GQID tmp/newalch/muller-402-it-writers.csv
-    using tmp/cura/A6.csv
+    Adds Gauquelin A6 or A4 NUM in column GQID tmp/muller/1-writers/muller1-402-writers.csv
+    using tmp/gauq/lerrcp/A6.csv
     Must be executed before import in database.
     
     @license    GPL
@@ -12,15 +12,14 @@ namespace g5\commands\muller\afd1writers;
 use g5\G5;
 use tiglib\patterns\Command;
 use g5\commands\gauq\LERRCP;
-use g5\commands\gauq\Cura;
 
 class gauq implements Command {
     
     /** Possible value for parameter 1 **/
     const POSSIBLE_PARAMS = [
-        'update' => "Updates column GQID of file data/tmp/newalch/muller-402-it-writers.csv",
+        'update' => "Updates column GQID of file tmp/muller/1-writers/muller1-402-writers.csv",
         'report' => "Echoes a html table to compare muller-402-it-writers.csv and A6.csv",
-        'check' => "Echoes a html table comparing Muller402 to all Gauquelin data, not only A6",
+        'check' => "Echoes a html table comparing AFD1writers to all Gauquelin data, not only A6",
     ];                                                                                                  
     
     /** 
@@ -118,7 +117,7 @@ class gauq implements Command {
         
         $report =  "--- muller402 addA6 ---\n";                                                                     
 
-        $m402_ids = Muller402::loadTmpFile_id(); // Assoc array, keys = Müller id
+        $m402_ids = AFD1writers::loadTmpFile_id(); // Assoc array, keys = Müller id
         $m402_days = []; // Assoc array, keys = birth days
         foreach($m402_ids as $row402){
             $day = substr($row402['DATE'], 0, 10);
@@ -140,7 +139,7 @@ class gauq implements Command {
         $na6 = 0;
         
         // loop on a6, try to match muller402
-        $a6 = Cura::loadTmpFile_num('A6');
+        $a6 = LERRCP::loadTmpFile_num('A6');
         $matchingA6NUMs = array_keys(self::A6_M402);
         foreach($a6 as $a6row){
             if($a6row['CY'] != 'IT'){
@@ -273,8 +272,8 @@ class gauq implements Command {
             $match2[$MUID] = $NUM;
         }
         
-        $res = implode(G5::CSV_SEP, Muller402::TMP_FIELDS) . "\n";
-        $rows = Muller402::loadTmpFile();
+        $res = implode(G5::CSV_SEP, AFD1writers::TMP_FIELDS) . "\n";
+        $rows = AFD1writers::loadTmpFile();
         $nUpdate = 0;
         foreach($rows as $row){
             $MUID = $row['MUID'];
@@ -302,7 +301,7 @@ class gauq implements Command {
             }
             $res .= implode(G5::CSV_SEP, $row) . "\n";
         }
-        $outfile = Muller402::tmpFilename();
+        $outfile = AFD1writers::tmpFilename();
         file_put_contents($outfile, $res);
         // $report .= "$nMatch matches ; $nNomatch nomatch\n";
         $report .= "Updated GQID in $nUpdate lines of $outfile\n";
@@ -366,7 +365,7 @@ class gauq implements Command {
     }
     
     /**
-        Builds a HTML table with matches between all Gauquelin and M402
+        Builds a HTML table with matches between all Gauquelin and Müller writers
         @return Report
     **/
     private static function check(): string {

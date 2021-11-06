@@ -1,0 +1,162 @@
+
+  
+document:
+  history:
+    - 2021-10-28 02:17:35+02:00: Thierry Graff, creation
+
+same-as:
+  # source of the group, @source relates to data/db/source/
+  - @source/ertel/3a_sports.yml
+
+name: Ertel 4391 sportsmen
+slug: ertel4391
+type: group
+authors:
+  - Suitbert Ertel
+  - Nick Kollerstrom
+  - Thierry Graff
+date: 1988
+description: |
+  <br>4384 sportsmen coming from Gauquelin A1, D6, D10 and the 3 skeptic tests Comité Para (Belgium 1976), CSICOP (USA 1979), CFEPP (France 1996).
+  <br>N with birth time : <b>2086</b> (47.58 %)
+  <br>N without birth time : <b>2297</b> (52.4 %)
+  <br>Published by Suitbert Ertel in 1988 - original article available online: <a href="https://www.scientificexploration.org/docs/2/jse_02_1_ertel.pdf">"Raising the Hurdle for the Athletes' Mars Effect: Association Co-Varies With Eminence" on scientificexploration.org</a>
+  <br>Details about data are given p 58.
+
+subgroups:
+  
+  -
+    slug: 1-first-french
+    name: 1 - First French
+    nclaimed: 568
+    nfound: 553
+    sources:
+      - g55
+      - a1
+    description: |
+      Records coming from Michel Gauquelin "L'influence des astres", 1955.
+      
+      
+  -
+    slug: 2-first-european
+    name: 2 - First European
+    nclaimed:  1189
+    nfound: 1202
+    sources:
+      - a1
+    description: |
+      Records gathered by Gauquelin after 1955. According to Ertel, contains
+      <ul>
+          <li>915 non-French athletes used for Gauquelin 1960 european replication</li>
+          <li>274 casual data gathering</li>
+      </ul>
+      
+  -
+    slug: 3-italian-football
+    name: 3 - Italian football
+    nclaimed: 600
+    nfound: 599
+    description: |
+      Italian footballers gathered by Michel Gauquelin and copied manually by Ertel.
+      <br>Unpublished by Gauquelin (not famous enough).
+  -
+    slug: 4-german-various
+    name: 4 - German various
+    nclaimed: 117
+    nfound: 115
+    description: |
+      German birth dates. Origin of this group is not clearly described by Ertel. Possibly gathered by Gauquelin and copied manually by Ertel.
+      
+  -
+    slug: 5-french-occasionals
+    name: 5 - French occasionals
+    nclaimed: 204
+    nfound: 202
+    description: |
+      French sportsmen (and one Italian) not published in A1
+      <br>Copied manually by Ertel in Gauquelin's laboratory.
+      <br>Considered as "low-low-ranking" by Gauquelin.
+      
+  -
+    slug: 6-para-champions
+    name: 6 - Para champions
+    nclaimed: 535
+    nfound: 535
+    sources:
+      - cpara
+      - a1
+    description: |
+      Published by Comité Para for its 1976 test.
+      
+  -
+    slug: 7-para-lowers
+    name: 7 - Para lowers
+    nclaimed: 76
+    nfound: 76
+    sources:
+      - cpara
+    description: |
+      Part of a list of 241 champions not included in the Compité Para 1976 test because they had participated in fewer than 20 international events.
+      <br>Copied manually by Ertel in Gauquelin's laboratory (he copied only records for which Mars sector had benn computed).
+        
+  -
+    slug: 8-csicop-us
+    name: 8 - CSICOP-U.S.
+    nclaimed: 192
+    nfound: 192
+    sources:
+      - d10
+      - csicop
+    description: |
+      Part of CSICOP data that are present in D10 file.
+      
+  -
+    slug: 9-second-european
+    name: 9 - Second European
+    nclaimed: 450
+    nfound: 450
+    sources:
+      - d6
+    description: |
+      Published in Gauquelin file D6.
+      
+  -
+    slug: 10-italian-cyclists
+    name: 10 - Italian cyclists
+    nclaimed: 24
+    nfound: 24
+    description: |
+      Copied manually by Ertel in Gauquelin's laboratory.
+      <br>Considered low-ranking by Gauquelin.
+      
+  -
+    slug: 11-lower-french
+    name: 11 - Lower French
+    nclaimed: 455
+    nfound: 453
+    description: |
+      Copied manually by Ertel in Gauquelin's laboratory.
+      
+  -
+    slug: 12-gauq-us
+    name: 12 - GAUQ-U.S.
+    nclaimed: 158
+    nfound: 159
+    sources:
+      - d10
+    description: |
+      Athletes published by Gauquelin in file D10, not included in CSICOP test.
+      
+  -
+    slug: 13-plus-special
+    name: 13 - Plus special
+    nclaimed: 27
+    nfound: 27
+    description: |
+      Ertel notice: "Gauquelin mailed these sets to the author after his
+      return from Paris. Inadvertently they had not been handed over. There are
+      sports figures from former French colonies and fiom Paris anondissements
+      where birth records were difficult to obtain. Gauquelin indicated he tried
+      hard to obtain the data since the athletes in question were famous, and he
+      was successful in 27 cases."
+      

@@ -13,7 +13,7 @@ namespace g5\commands\csicop\irving;
 use g5\G5;
 use g5\app\Config;
 use tiglib\patterns\Command;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\LERRCP;
 use g5\commands\ertel\ertel4391\Ertel4391;
 
 class addD10 implements Command {
@@ -33,7 +33,7 @@ class addD10 implements Command {
         $report =  "--- csicop irving addD10 ---\n";
         
         $irving = Irving::loadTmpFile_csid();
-        $d10 = Cura::loadTmpFile_num('D10');
+        $d10 = LERRCP::loadTmpFile_num('D10');
         $ertel = Ertel4391::loadTmpFile();
         $ertel_csid = [];
         $ertel_gqid = [];

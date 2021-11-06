@@ -15,6 +15,7 @@ use g5\app\Config;
 use tiglib\patterns\Command;
 use g5\model\Names;
 use g5\model\Names_fr;
+use g5\commands\gauq\LERRCP;
 use g5\commands\gauq\Cura;
 
 class raw2tmp implements Command {
@@ -82,13 +83,13 @@ class raw2tmp implements Command {
         $datafile = 'D6';
         
         $report =  "--- $datafile raw2tmp ---\n";
-        $raw = Cura::loadRawFile($datafile);
+        $raw = LERRCP::loadRawFile($datafile);
         
         // To fix an error on a latitude in cura file, in line
         // 356	8	1	1925	11	0	0	36N05	00W56	Ruiz Bernardo
         $lat356 = '38N05';
         
-        $file_serie = Cura::rawFilename($datafile);
+        $file_serie = LERRCP::rawFilename($datafile);
         preg_match('#<pre>.*?(NUM.*?NAME)\s*(.*?)\s*</pre>#sm', $raw, $m);
         if(count($m) != 3){
             throw new \Exception("Unable to parse list in " . $file_serie);
@@ -144,11 +145,11 @@ class raw2tmp implements Command {
             $csvRaw .= implode(G5::CSV_SEP, $raw) . "\n";
             $nb_stored ++;
         }
-        $csvfile = Cura::tmpFilename($datafile);
+        $csvfile = LERRCP::tmpFilename($datafile);
         file_put_contents($csvfile, $csv);
         $report .= $nb_stored . " lines stored in $csvfile\n";
         //
-        $csvRawfile = Cura::tmpRawFilename($datafile);
+        $csvRawfile = LERRCP::tmpRawFilename($datafile);
         file_put_contents($csvRawfile, $csvRaw);
         $report .= $nb_stored . " lines stored in $csvRawfile\n";
         return $report;

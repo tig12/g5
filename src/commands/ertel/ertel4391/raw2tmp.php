@@ -3,12 +3,12 @@
     Converts file 3a_sports-utf8.txt to a csv
     This file was retrieved in april 2019 from
     https://newalchemypress.com/gauquelin/gauquelin_docs/3a_sports.txt
-    The file contains 4387 sportsmen used by Ertel
+    The file contains 4384 sportsmen used by Ertel.
     
     Generates 2 files :
-        - data/tmp/newalch/4391SPO.csv, to work on the file
-        - data/tmp/newalch/4391SPO-raw.csv, to keep an exact copy of of the original fields
-    The unique utility of 4391SPO-raw.csv is to fill the field "raw" of persons in db
+        - data/tmp/ertel/ertel-4384-athletes.csv, to work on the file.
+        - data/tmp/ertel/ertel-4384-athletes-raw.csv, to keep an exact copy of of the original fields.
+    The unique utility of ertel-4384-athletes-raw.csv is to fill the field "raw" of persons in db.
     
     @license    GPL
     @history    2019-05-10 12:19:50+02:00, Thierry Graff : creation
@@ -19,7 +19,7 @@ namespace g5\commands\ertel\ertel4391;
 use g5\G5;
 use g5\app\Config;
 use tiglib\patterns\Command;
-use g5\commands\ertel\Newalch;
+use g5\commands\Newalch;
 
 class raw2tmp implements Command {
     
@@ -40,7 +40,7 @@ class raw2tmp implements Command {
     ];
     
     /** 
-        Imports file data/raw/newalchemypress.com/03-ertel/3a_sports-utf8.txt to data/tmp/newalch.
+        Imports file data/raw/ertel/3a_sports-utf8.txt to data/tmp/ertel.
         @param $params  Empty array
         @return report
     **/

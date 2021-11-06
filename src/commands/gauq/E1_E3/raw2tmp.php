@@ -19,7 +19,7 @@ use g5\app\Config;
 use tiglib\patterns\Command;
 use g5\model\Names;
 use g5\model\Geonames;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\LERRCP;
 use tiglib\arrays\sortByKey;
 use tiglib\strings\slugify;
 use tiglib\timezone\offset_fr;
@@ -76,7 +76,7 @@ class raw2tmp implements Command {
         // parse first list (with birth date and place)
         //
         $res1 = [];
-        $raw = Cura::loadRawFile($datafile);
+        $raw = LERRCP::loadRawFile($datafile);
         preg_match('#<pre>\s*(NUM.*?COD)\s*(.*?)\s*</pre>#sm', $raw, $m);
         if(count($m) != 3){
             throw new \Exception($datafile . " - Unable to parse $file - first list");
@@ -220,7 +220,7 @@ class raw2tmp implements Command {
             $csv .= implode(G5::CSV_SEP, $fields) . "\n";
         }
         
-        $outfile = Cura::tmpFilename($datafile);
+        $outfile = LERRCP::tmpFilename($datafile);
         file_put_contents($outfile, $csv);
         $report .= "Stored " . self::$n_total . " lines in $outfile\n";
         
@@ -231,7 +231,7 @@ class raw2tmp implements Command {
             $csvRaw .= implode(G5::CSV_SEP, $fields) . "\n";
         }
         
-        $outfile = Cura::tmpRawFilename($datafile);
+        $outfile = LERRCP::tmpRawFilename($datafile);
         file_put_contents($outfile, $csvRaw);
         $report .= "Stored " . self::$n_total . " lines in $outfile\n";
         

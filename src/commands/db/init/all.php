@@ -17,7 +17,7 @@ use g5\commands\gauq\GauqRouter;
 use g5\G5;
 use g5\commands\gauq\LERRCP;
 use g5\commands\muller\AFD;
-use g5\commands\ertel\Newalch;
+use g5\commands\Newalch;
 use g5\commands\gauq\Cura;
 use g5\commands\wd\Wikidata;
 
@@ -36,8 +36,8 @@ use g5\commands\gauq\D10\raw2tmp                as raw2tmpD10;
 use g5\commands\gauq\E1_E3\raw2tmp              as raw2tmpE1E3;
 use g5\commands\gauq\all\tweak2tmp              as tweak2tmpGauq;
 
-use g5\commands\ertel\ertel4391\raw2tmp             as raw2tmpErtelSport;
-use g5\commands\ertel\ertel4391\tweak2tmp           as tweak2tmpErtelSport;
+use g5\commands\ertel\ertel4391\raw2tmp         as raw2tmpErtelSport;
+use g5\commands\ertel\ertel4391\tweak2tmp       as tweak2tmpErtelSport;
 
 use g5\commands\muller\afd5medics\raw2tmp       as raw2tmpAfd5Medics;
 use g5\commands\muller\afd5medics\tweak2tmp     as tweak2tmpAfd5Medics;
@@ -57,16 +57,16 @@ use g5\commands\muller\afd2men\raw2tmp          as raw2tmpAfd2Men;
 
 // tmp2db
 use g5\commands\gauq\A\tmp2db                   as tmp2dbA;
-use g5\commands\gauq\A\A6occu                   as A6occu;
+use g5\commands\gauq\A\occupn                   as occupnA6;
 use g5\commands\gauq\D6\tmp2db                  as tmp2dbD6;
 use g5\commands\gauq\D10\tmp2db                 as tmp2dbD10;
 use g5\commands\gauq\E1_E3\tmp2db               as tmp2dbE1E3;
-use g5\commands\muller\afd5medics\tmp2db        as tmp2dbAfd5Medics;
-use g5\commands\muller\afd1writers\tmp2db       as tmp2dbAfd1Writers;
-use g5\commands\muller\afd1writers\tmp2db100    as tmp2dbAfd1Writers100;
+use g5\commands\muller\afd1writers\tmp2db       as tmp2dbAfd1writers;
+use g5\commands\muller\afd1writers\tmp2db100    as tmp2dbAfd1writers100;
+use g5\commands\muller\afd2men\tmp2db           as tmp2dbAfd2men;
+use g5\commands\muller\afd3women\tmp2db         as tmp2dbAfd3women;
+use g5\commands\muller\afd5medics\tmp2db        as tmp2dbAfd5medics;
 use g5\commands\csicop\irving\tmp2db            as tmp2dbIrving;
-use g5\commands\muller\afd2men\tmp2db           as tmp2dbAfd2Mmen;
-use g5\commands\muller\afd3women\tmp2db         as tmp2dbAfd3Women;
 
 // finalize
 use g5\commands\db\init\stats;
@@ -166,6 +166,7 @@ class all implements Command {
         //  2 - Import tmp files to db
         //
         if($param == 'db' || $param == 'all'){
+
             echo "***********************\n";
             echo "***  Fill database  ***\n";
             echo "***********************\n";
@@ -181,24 +182,25 @@ class all implements Command {
             foreach($filesCuraA as $datafile){
                 echo tmp2dbA::execute([$datafile, 'tmp2db', 'small']);
             }
-            echo A6occu::execute([]);
+            
+            echo occupnA6::execute([]);
             echo tmp2dbD6::execute(['D6', 'tmp2db', 'small']);
             echo tmp2dbD10::execute(['D10', 'tmp2db', 'small']);
             echo tmp2dbE1E3::execute(['E1', 'tmp2db', 'small']);
             echo tmp2dbE1E3::execute(['E3', 'tmp2db', 'small']);
             
-            echo tmp2dbAfd5Medics::execute(['small']);
+            echo tmp2dbAfd5medics::execute(['small']);
             
-            echo tmp2dbAfd1Writers::execute(['small']);
+            echo tmp2dbAfd1writers::execute(['small']);
             
-            echo tmp2dbAfd1Writers100::execute(['small']);
+            echo tmp2dbAfd1writers100::execute(['small']);
             
             echo tmp2dbIrving::execute(['small']);
             
-            echo tmp2dbAfd3Women::execute(['small']);
+            echo tmp2dbAfd3women::execute(['small']);
             echo filltweak::execute(['muller-234-women.yml']);
             
-            echo tmp2dbAfd2Mmen::execute(['small']);
+            echo tmp2dbAfd2men::execute(['small']);
             echo filltweak::execute(['muller-612-men.yml']);
             
             echo occus2::execute();

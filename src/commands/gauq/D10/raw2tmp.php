@@ -10,6 +10,7 @@ namespace g5\commands\gauq\D10;
 
 use g5\G5;
 use tiglib\patterns\Command;
+use g5\commands\gauq\LERRCP;
 use g5\commands\gauq\Cura;
 
 class raw2tmp implements Command {
@@ -46,10 +47,10 @@ class raw2tmp implements Command {
         }
         
         $report =  "--- D10 raw2tmp ---\n";
-        $raw = Cura::loadRawFile('D10');
+        $raw = LERRCP::loadRawFile('D10');
         preg_match('#<pre>\s*(NUM.*?CICO)\s*(.*?)\s*</pre>#sm', $raw, $matches);
         if(count($matches) != 3){
-            throw new \Exception("Unable to parse list in " . Cura::rawFilename('D10'));
+            throw new \Exception("Unable to parse list in " . LERRCP::rawFilename('D10'));
         }
         // $matches[2] contains all interesting lines
         // Fix problems of whitespace + missing lg lat (NUM 493) in cura html page
@@ -192,11 +193,11 @@ class raw2tmp implements Command {
             //
             $nb_stored ++;
         }
-        $csvfile = Cura::tmpFilename('D10');
+        $csvfile = LERRCP::tmpFilename('D10');
         file_put_contents($csvfile, $csv);
         $report .= $nb_stored . " lines stored in $csvfile\n";
         
-        $csvfile = Cura::tmpRawFilename('D10');
+        $csvfile = LERRCP::tmpRawFilename('D10');
         file_put_contents($csvfile, $csvRaw);
         $report .= $nb_stored . " lines stored in $csvfile\n";
         

@@ -14,7 +14,7 @@ use g5\model\Source;
 use g5\model\Group;
 use tiglib\arrays\csvAssociative;
 
-class AFD2 {
+class AFD2men {
     
     /**
         Trust level for data
@@ -33,7 +33,7 @@ class AFD2 {
     const LIST_SOURCE_SLUG = 'afd2';
     
     /**
-        Path to the yaml file containing the characteristics of Müller's booklet AFD2.
+        Path to the yaml file containing the characteristics of Müller's booklet AFD2men.
         Relative to directory data/db/source
     **/
     const BOOKLET_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd2-men-booklet.yml';
@@ -455,7 +455,7 @@ class AFD2 {
         @return Path to the raw file, built from scans.
     **/
     public static function rawFilename(){
-        return implode(DS, [Config::$data['dirs']['raw'], 'muller', 'afd2-men', 'muller-afd2-men.txt']);
+        return implode(DS, [Config::$data['dirs']['raw'], 'muller', '2-men', 'muller2-612-men.txt']);
     }
     
     /** Loads 5muller_writers.csv in a regular array **/
@@ -466,10 +466,10 @@ class AFD2 {
     // *********************** Tmp file manipulation ***********************
     
     /**
-        @return Path to the csv file stored in data/tmp/newalch/
+        @return Path to the csv file stored in data/tmp/muller/2-men/muller2-612-men.csv
     **/
     public static function tmpFilename(){
-        return implode(DS, [Config::$data['dirs']['tmp'], 'muller', 'afd2-men', 'muller-afd2-men.csv']);
+        return implode(DS, [Config::$data['dirs']['tmp'], 'muller', '2-men', 'muller2-612-men.csv']);
     }
     
     /**
@@ -495,11 +495,11 @@ class AFD2 {
     // *********************** Tmp raw files manipulation ***********************
     
     /**
-        Returns the name of the "tmp raw file", eg. data/tmp/newalch/1083MED-raw.csv
+        Returns the name of the "tmp raw file", eg. data/tmp/muller/2-men/muller2-612-men-raw.csv
         (file used to keep trace of the original raw values).
     **/
     public static function tmpRawFilename(){
-        return implode(DS, [Config::$data['dirs']['tmp'], 'muller', 'afd2-men', 'muller-afd2-men-raw.csv']);
+        return implode(DS, [Config::$data['dirs']['tmp'], 'muller', '2-men', 'muller2-612-men-raw.csv']);
     }
     
     /** Loads the "tmp raw file" in a regular array **/

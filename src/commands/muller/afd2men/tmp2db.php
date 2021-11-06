@@ -14,7 +14,7 @@ use g5\model\Group;
 use g5\model\Person;
 use g5\commands\muller\AFD;
 use g5\commands\gauq\LERRCP;
-use g5\commands\muller\afd1writers\Muller402;
+use g5\commands\muller\afd1writers\AFD1writers;
 
 class tmp2db implements Command {
     
@@ -50,26 +50,26 @@ class tmp2db implements Command {
             $timesReport = '';
         }
         
-        // source of Müller's booklet AFD2 - insert if does not already exist
-        $bookletSource = Source::getBySlug(AFD2::BOOKLET_SOURCE_SLUG); // DB
+        // source of Müller's booklet AFD2men - insert if does not already exist
+        $bookletSource = Source::getBySlug(AFD2men::BOOKLET_SOURCE_SLUG); // DB
         if(is_null($bookletSource)){
-            $bookletSource = new Source(AFD2::BOOKLET_SOURCE_DEFINITION_FILE);
+            $bookletSource = new Source(AFD2men::BOOKLET_SOURCE_DEFINITION_FILE);
             $bookletSource->insert(); // DB
             $report .= "Inserted source " . $bookletSource->data['slug'] . "\n";
         }
         
         // source of muller-afd2-men.txt - insert if does not already exist
-        $source = Source::getBySlug(AFD2::LIST_SOURCE_SLUG); // DB
+        $source = Source::getBySlug(AFD2men::LIST_SOURCE_SLUG); // DB
         if(is_null($source)){
-            $source = new Source(AFD2::LIST_SOURCE_DEFINITION_FILE);
+            $source = new Source(AFD2men::LIST_SOURCE_DEFINITION_FILE);
             $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         
         // group
-        $g = Group::getBySlug(AFD2::GROUP_SLUG); // DB
+        $g = Group::getBySlug(AFD2men::GROUP_SLUG); // DB
         if(is_null($g)){
-            $g = AFD2::getGroup();
+            $g = AFD2men::getGroup();
             $g->data['id'] = $g->insert(); // DB
             $report .= "Inserted group " . $g->data['slug'] . "\n";
         }
@@ -85,8 +85,8 @@ class tmp2db implements Command {
         
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
-        $lines = AFD2::loadTmpFile();
-        $linesRaw = AFD2::loadTmpRawFile();
+        $lines = AFD2men::loadTmpFile();
+        $linesRaw = AFD2men::loadTmpRawFile();
         $N = count($lines);
         $t1 = microtime(true);
         for($i=0; $i < $N; $i++){
@@ -115,8 +115,8 @@ class tmp2db implements Command {
                     $source->data['slug'] => $muid,
                     AFD::SOURCE_SLUG => $mullerId,
                 ];
-                if(AFD2::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
-                    $new['occus'] = [ AFD2::OCCUS[$line['OCCU']] ];
+                if(AFD2men::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
+                    $new['occus'] = [ AFD2men::OCCUS[$line['OCCU']] ];
                 }
                 $p->addHistory(
                     command: 'muller afd2men tmp2db',
@@ -128,7 +128,7 @@ class tmp2db implements Command {
                 $p->update(); // DB
                 continue;
             }
-            if(!isset(AFD2::MU_GQ[$muid])){
+            if(!isset(AFD2men::MU_GQ[$muid])){
                 // Person not already in db (mainly in Gauquelin data)
                 $p = new Person();
                 $new['trust'] = AFD::TRUST_LEVEL;
@@ -148,7 +148,7 @@ class tmp2db implements Command {
                 $new['birth']['place']['lg'] = $line['LG'];
                 $new['birth']['place']['lat'] = $line['LAT'];
                 //
-                $p->addOccus([ AFD2::OCCUS[$line['OCCU']] ]);
+                $p->addOccus([ AFD2men::OCCUS[$line['OCCU']] ]);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $muid);
                 $p->addIdInSource(AFD::SOURCE_SLUG, $mullerId);
@@ -160,7 +160,7 @@ class tmp2db implements Command {
                     $source->data['slug'] => $muid,
                     AFD::SOURCE_SLUG => $mullerId,
                 ];
-                $new['occus'] = [ AFD2::OCCUS[$line['OCCU']] ];
+                $new['occus'] = [ AFD2men::OCCUS[$line['OCCU']] ];
                 $p->addHistory(
                     command: 'muller afd2men tmp2db',
                     sourceSlug: $source->data['slug'],
@@ -177,7 +177,7 @@ class tmp2db implements Command {
             }
             else{
                 // Person already in other Gauquelin data sets
-                $gqid = AFD2::MU_GQ[$muid];
+                $gqid = AFD2men::MU_GQ[$muid];
                 $tmp = explode('-', $gqid);
                 $curaSourceSlug = LERRCP::datafile2sourceSlug($tmp[0]);
                 $NUM = $tmp[1];
@@ -240,7 +240,7 @@ class tmp2db implements Command {
                 if($p->data['birth']['place']['c2'] == '' && $line['C2'] != ''){
                     $new['place']['c2'] = $line['C2'];
                 }
-                $p->addOccus([ AFD2::OCCUS[$line['OCCU']] ]);
+                $p->addOccus([ AFD2men::OCCUS[$line['OCCU']] ]);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $muid);
                 $p->addIdInSource(AFD::SOURCE_SLUG, $mullerId);
@@ -252,7 +252,7 @@ class tmp2db implements Command {
                     $source->data['slug'] => $muid,
                     AFD::SOURCE_SLUG => $mullerId,
                 ];
-                $new['occus'] = [ AFD2::OCCUS[$line['OCCU']] ];
+                $new['occus'] = [ AFD2men::OCCUS[$line['OCCU']] ];
                 $p->addHistory(
                     command: 'muller afd2men tmp2db',
                     sourceSlug: $source->data['slug'],

@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Loads files data/tmp/newalch/1083MED.csv and 1083MED-raw.csv in database.
+    Loads files data/tmp/muller/5-medics/muller5-1083-medics.csv and muller5-1083-medics-raw.csv in database.
     Affects records imported in A2 and E1
 
     NOTE: This code cannot be executed several times (won't update the records if already in database)
@@ -16,7 +16,7 @@ use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
-use g5\commands\ertel\Newalch;
+use g5\commands\Newalch;
 use g5\commands\gauq\LERRCP;
 use g5\commands\muller\AFD;
 
@@ -46,7 +46,7 @@ class tmp2db implements Command {
             return "INVALID PARAMETER : $reportType - Possible values :\n" . $msg;
         }
         
-        $report = "--- Muller1083 tmp2db ---\n";
+        $report = "--- AFD5medics tmp2db ---\n";
         
         if($reportType == 'full'){
             $namesReport = '';
@@ -69,26 +69,26 @@ class tmp2db implements Command {
             $report .= "Inserted source " . $newalchSource->data['slug'] . "\n";
         }
         
-        // source of Müller's booklet AFD3 - insert if does not already exist
-        $bookletSource = Source::getBySlug(Muller1083::BOOKLET_SOURCE_SLUG); // DB
+        // source of Müller's booklet AFD3women - insert if does not already exist
+        $bookletSource = Source::getBySlug(AFD5medics::BOOKLET_SOURCE_SLUG); // DB
         if(is_null($bookletSource)){
-            $bookletSource = new Source(Muller1083::BOOKLET_SOURCE_DEFINITION_FILE);
+            $bookletSource = new Source(AFD5medics::BOOKLET_SOURCE_DEFINITION_FILE);
             $bookletSource->insert(); // DB
             $report .= "Inserted source " . $bookletSource->data['slug'] . "\n";
         }
         
         // source of 5a_muller_medics.txt - insert if does not already exist
-        $source = Source::getBySlug(Muller1083::LIST_SOURCE_SLUG); // DB
+        $source = Source::getBySlug(AFD5medics::LIST_SOURCE_SLUG); // DB
         if(is_null($source)){
-            $source = new Source(Muller1083::LIST_SOURCE_DEFINITION_FILE);
+            $source = new Source(AFD5medics::LIST_SOURCE_DEFINITION_FILE);
             $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         
         // group
-        $g = Group::getBySlug(Muller1083::GROUP_SLUG);
+        $g = Group::getBySlug(AFD5medics::GROUP_SLUG);
         if(is_null($g)){
-            $g = Muller1083::getGroup();
+            $g = AFD5medics::getGroup();
             $g->data['id'] = $g->insert(); // DB
             $report .= "Inserted group " . $g->data['slug'] . "\n";
         }
@@ -102,8 +102,8 @@ class tmp2db implements Command {
         $nDiffDates = 0;
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
-        $lines = Muller1083::loadTmpFile();
-        $linesRaw = Muller1083::loadTmpRawFile();
+        $lines = AFD5medics::loadTmpFile();
+        $linesRaw = AFD5medics::loadTmpRawFile();
         $N = count($lines);
         $t1 = microtime(true);
         $newOccus = ['physician'];
@@ -152,7 +152,7 @@ class tmp2db implements Command {
                 // Person already in A2 or E1
                 $new = [];
                 $new['notes'] = [];
-                [$curaSourceSlug, $NUM] = Muller1083::gnr2LERRCPSourceId($line['GNR']);
+                [$curaSourceSlug, $NUM] = AFD5medics::gnr2LERRCPSourceId($line['GNR']);
                 $curaFile = strtoupper($curaSourceSlug);
                 $gqId = LERRCP::gauquelinId($curaFile, $NUM);
                 $p = Person::getBySourceId($curaSourceSlug, $NUM); // DB
@@ -177,7 +177,7 @@ class tmp2db implements Command {
                 }
                 if($mulday != $curaday){
                     $nDiffDates++;
-                    $new['notes'][] = "CHECK birth day : $gqId $curaday / Muller1083 {$line['NR']} $mulday";
+                    $new['notes'][] = "CHECK birth day : $gqId $curaday / AFD5medics {$line['NR']} $mulday";
                     $new['to-check'] = true;
                     if($reportType == 'full'){
                         $datesReport .= "\nCura $gqId\t $curaday {$p->data['name']['family']} - {$p->data['name']['given']}\n";

@@ -11,7 +11,7 @@
 namespace g5\commands\g55;
 
 use g5\app\Config;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\LERRCP;
 use tiglib\arrays\csvAssociative;
 
 class G55{
@@ -117,7 +117,7 @@ class G55{
             }
         }
         
-        $curarows1 = Cura::loadTmpCsv($origin);
+        $curarows1 = LERRCP::loadTmpCsv($origin);
         $curarows = [];
         foreach($curarows1 as $row){
             if(isset($g55rows[$row['NUM']])){

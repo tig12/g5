@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Loads files data/tmp/newalch/muller-100-it-writers.csv and muller-100-it-writers-raw.csv in database.
+    Loads files data/tmp/muller/1-writers/muller1-100-writers.csv and muller1-100-writers-raw.csv in database.
     Affects records imported from A6
     
     @license    GPL
@@ -14,7 +14,7 @@ use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
 use g5\commands\muller\AFD;
-use g5\commands\ertel\Newalch;
+use g5\commands\Newalch;
 use g5\commands\gauq\LERRCP;
 
 class tmp2db100 implements Command {
@@ -43,20 +43,20 @@ class tmp2db100 implements Command {
             return "INVALID PARAMETER : $reportType - Possible values :\n" . $msg;
         }
         
-        $report = "--- Muller402 tmp2db100 ---\n";
+        $report = "--- AFD1writers tmp2db100 ---\n";
         
         // source of muller-afd1-100-writers.txt - insert if does not already exist
-        $source = Source::getBySlug(Muller100::LIST_SOURCE_SLUG); // DB
+        $source = Source::getBySlug(AFD1writers100::LIST_SOURCE_SLUG); // DB
         if(is_null($source)){
-            $source = new Source(Muller100::LIST_SOURCE_DEFINITION_FILE);
+            $source = new Source(AFD1writers100::LIST_SOURCE_DEFINITION_FILE);
             $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         
         // group
-        $g = Group::getBySlug(Muller100::GROUP_SLUG); // DB
+        $g = Group::getBySlug(AFD1writers100::GROUP_SLUG); // DB
         if(is_null($g)){
-            $g = Muller100::getGroup();
+            $g = AFD1writers100::getGroup();
             $g->data['id'] = $g->insert(); // DB
             $report .= "Inserted group " . $g->data['slug'] . "\n";
         }
@@ -70,8 +70,8 @@ class tmp2db100 implements Command {
         $nDiffDates = 0;
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
-        $lines = Muller100::loadTmpFile();
-        $linesRaw = Muller100::loadTmpRawFile();
+        $lines = AFD1writers100::loadTmpFile();
+        $linesRaw = AFD1writers100::loadTmpRawFile();
         $N = count($lines);
         $t1 = microtime(true);
         for($i=0; $i < $N; $i++){

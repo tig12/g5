@@ -11,64 +11,23 @@ use g5\app\Config;
 use g5\model\Source;
 use g5\model\Group;
 use tiglib\arrays\csvAssociative;
-use g5\commands\ertel\Newalch;
+use g5\commands\ertel\Ertel;
 
 class Ertel4391 {
+    
+    /**
+        Trust level for data coming from Ertel file
+        @see https://tig12.github.io/gauquelin5/check.html
+    **/
+    const TRUST_LEVEL = 4;
+    
+    // *********************** Source management ***********************
     
     /**
         Path to the yaml file containing the characteristics of the source describing file 3a_sports.txt.
         Relative to directory data/db
     **/
     const RAW_SOURCE_DEFINITION = 'source' . DS . 'web' . DS . 'newalch' . DS . '3a_sports.yml';
-    
-    /** Slug of the group in db **/
-    const GROUP_SLUG = 'ertel4384athletes';
-    
-    /**
-        Subgroups present in Ertel file
-        Keys = group slugs
-    **/
-    const SUBGROUPS = [
-        'GCPAR' => [
-            'name' => '76 Para lowers',
-            'description' => "76 athletes collected by Suitbert Ertel in Gauquelin laboratory,\n"
-                . "not retained in Comité Para experiment because considered less eminent.\n"
-                . "\"7 - Para lowers\" in Ertel 1988 article",
-        ],
-        'GMINI' => [
-            'name' => '599 minor Italian footballers',
-            'description' => "Unpublished by Gauquelin (not famous enough), copied manually by Ertel.\n"
-                . "\"3 - Italian football\" in Ertel 1988 article",
-        ],
-        'GMING' => [
-            'name' => '115 minor Germans sportsmen',
-            'description' => "Unpublished by Gauquelin (not famous enough), copied manually by Ertel.\n"
-                . "\"4 - German various\" in Ertel 1988 article",
-        ],
-        'G_ADD' => [
-            'name' => '202 French sportsmen',
-            'description' => "Copied manually by Ertel in Gauquelin's laboratory.\n"
-                . "Considered as \"low-low-ranking\" by Gauquelin.\n"
-                . "\"5 - French occasionals\" in Ertel 1988 article",
-        ],
-        'GMINV' => [
-            'name' => '24 Italian cyclists',
-            'description' => "Copied manually by Ertel in Gauquelin's laboratory.\n"
-                . "\"10 - Italian cyclists\" in Ertel 1988 article",
-        ],
-        'GMIND' => [
-            'name' => '453 French sportsmen',
-            'description' => "Copied manually by Ertel in Gauquelin's laboratory.\n"
-                . "\"11 - Lower French\" in Ertel 1988 article",
-        ],
-        'G_79F' => [
-            'name' => '27 sportsmen',
-            'description' => "Supplementary data sent by Gauquelin to Ertel after his visit in Paris.\n"
-                . "\"13 - Plus special\" in Ertel 1988 article",
-        ],
-    ];
-    
-    // *********************** Source management ***********************
     
     /**
         Returns a Source object for the raw file used for Ertel4391.
@@ -78,6 +37,9 @@ class Ertel4391 {
     }
 
     // *********************** Group management ***********************
+    
+    /** Slug of the group in db **/
+    const GROUP_SLUG = 'ertel4384sport';
     
     /** Returns a Group object for Ertel4391. **/
     public static function getGroup(): Group {
@@ -105,14 +67,14 @@ class Ertel4391 {
         @return Path to the raw file coming from newalch
     **/
     public static function rawFilename(){
-        return Newalch::rawDirname() . DS . '03-ertel' . DS . '3a_sports-utf8.txt';
+        return Ertel::rawDirname() . DS . '3a_sports-utf8.txt';
     }
     
     // *********************** Tmp files manipulation ***********************
     
     /** Path to the temporary csv file used to work on this group. **/
     public static function tmpFilename(){
-        return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', '4391SPO.csv']);
+        return Ertel::tmpDirname() . DS . 'ertel-4384-athletes.csv';
     }
     
     /**
@@ -139,12 +101,18 @@ class Ertel4391 {
     
     /** Path to the temporary csv file keeping an exact copy of the raw file. **/
     public static function tmpRawFilename(){
-        return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', '4391SPO-raw.csv']);
+        return Ertel::tmpDirname() . DS . 'ertel-4384-athletes-raw.csv';
     }
     
     /** Loads the "tmp raw file" in a regular array **/
     public static function loadTmpRawFile(){
         return csvAssociative::compute(self::tmpRawFilename());
     }
+    
+    // *********************** Tweak file manipulation ***********************
+    public static function tweakFilename(){
+        return Config::$data['dirs']['init'] . DS . 'newalch-tweak' . DS . '4391SPO.yml';
+    }
+    
     
 } // end class

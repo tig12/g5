@@ -10,7 +10,7 @@ namespace g5\commands\csicop\si42;
 use g5\G5;
 use tiglib\patterns\Command;
 use g5\commands\ertel\ertel4391\Ertel4391;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\LERRCP;
 use tiglib\arrays\csvAssociative;
 
 class checkErtel implements Command {
@@ -58,7 +58,7 @@ class checkErtel implements Command {
         $ertel = Ertel4391::loadTmpFile();
         $si42file = SI42::tmpFilename();
         $si42 = csvAssociative::compute($si42file);
-        $d10 = Cura::loadTmpFile_num('D10');
+        $d10 = LERRCP::loadTmpFile_num('D10');
         
         $report =  "Check dates Ertel4391 / $si42file\n";
         
@@ -71,7 +71,7 @@ class checkErtel implements Command {
             }
             
             $GQID = $rowE['GQID'];
-//////// These tweaks must be removed - handled in tweak.csv /////////////////////
+//////// TODO These tweaks must be removed - handled in tweak.csv /////////////////////
             $NUM = substr($GQID, 4); // remove 'D10-'
             if($CSINR == '394'){
                 $i42 = 394; // Williams R.

@@ -14,7 +14,7 @@ use g5\G5;
 use g5\app\Config;
 use tiglib\patterns\Command;
 use g5\model\Geonames;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\LERRCP;
 use tiglib\strings\slugify;
 use tiglib\geonames\database\matchFromSlug;
 
@@ -60,7 +60,7 @@ class addGeo implements Command {
         self::$pdo_geonames = Geonames::compute_dblink();
         
         $report = "--- $datafile addGeo ---\n";
-        $rows = Cura::loadTmpFile($datafile);
+        $rows = LERRCP::loadTmpFile($datafile);
         $res = implode(G5::CSV_SEP, A::TMP_FIELDS) . "\n";
         
         $N = $ok = 0;
@@ -115,7 +115,7 @@ class addGeo implements Command {
         }
         $report .= "$datafile : geonames ok = $ok ($p %) - miss $miss\n";
         
-        $csvfile = Cura::tmpFilename($datafile);
+        $csvfile = LERRCP::tmpFilename($datafile);
         file_put_contents($csvfile, $res);
         
         return $report;

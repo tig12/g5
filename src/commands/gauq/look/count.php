@@ -32,7 +32,7 @@ class count implements Command {
         }
         
         $datafiles = GauqRouter::computeDatafiles('all');
-        $dir = Cura::tmpDirname();
+        $dir = LERRCP::tmpDirname();
         
         $N = array_fill_keys($datafiles, 0);
 

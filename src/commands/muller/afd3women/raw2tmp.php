@@ -27,22 +27,22 @@ class raw2tmp implements Command {
         
         $report =  "--- muller afd3 raw2tmp ---\n";
         
-        $raw = AFD3::loadRawFile();
-        $res = implode(G5::CSV_SEP, AFD3::TMP_FIELDS) . "\n";
-        $res_raw = implode(G5::CSV_SEP, AFD3::RAW_FIELDS) . "\n";
+        $raw = AFD3women::loadRawFile();
+        $res = implode(G5::CSV_SEP, AFD3women::TMP_FIELDS) . "\n";
+        $res_raw = implode(G5::CSV_SEP, AFD3women::RAW_FIELDS) . "\n";
         
-        $nLimits = count(AFD3::RAW_LIMITS);
+        $nLimits = count(AFD3women::RAW_LIMITS);
         $N = 0;
         $day = $hour = '';
         foreach($raw as $line){
             $N++;
-            $new = array_fill_keys(AFD3::TMP_FIELDS, '');
-            $new_raw = array_fill_keys(AFD3::RAW_FIELDS, '');
+            $new = array_fill_keys(AFD3women::TMP_FIELDS, '');
+            $new_raw = array_fill_keys(AFD3women::RAW_FIELDS, '');
             for($i=0; $i < $nLimits-1; $i++){
-                $rawFieldname = AFD3::RAW_FIELDS[$i];
-                $offset = AFD3::RAW_LIMITS[$i];
-                $length   = AFD3::RAW_LIMITS[$i+1] - AFD3::RAW_LIMITS[$i];
-                $field = trim(substr($line, $offset, $length));
+                $rawFieldname = AFD3women::RAW_FIELDS[$i];
+                $offset = AFD3women::RAW_LIMITS[$i];
+                $length   = AFD3women::RAW_LIMITS[$i+1] - AFD3women::RAW_LIMITS[$i];
+                $field = trim(mb_substr($line, $offset, $length));
                 $new_raw[$rawFieldname] = $field;
                 switch($rawFieldname){
                 case 'NAME':
@@ -65,7 +65,7 @@ class raw2tmp implements Command {
                     $new['LAT'] = AFD::computeLat($field);
                 break;
                 case 'CY':
-                    $new['CY'] = AFD3::COUNTRIES[$field];
+                    $new['CY'] = AFD3women::COUNTRIES[$field];
                 break;
                 case 'LG':
                     $new['LG'] = AFD::computeLg($field);
@@ -81,7 +81,7 @@ class raw2tmp implements Command {
             $res_raw .= implode(G5::CSV_SEP, $new_raw) . "\n";
         }
         
-        $outfile = AFD3::tmpFilename();
+        $outfile = AFD3women::tmpFilename();
         $dir = dirname($outfile);
         if(!is_dir($dir)){
             $report .= "Created directory $dir\n";
@@ -91,7 +91,7 @@ class raw2tmp implements Command {
         file_put_contents($outfile, $res);
         $report .= "Stored $N records in $outfile\n";
         
-        $outfile = AFD3::tmpRawFilename();
+        $outfile = AFD3women::tmpRawFilename();
         file_put_contents($outfile, $res_raw);
         $report .= "Stored $N records in $outfile\n";
         
@@ -149,8 +149,8 @@ class raw2tmp implements Command {
             return [$c1, $c2, $place];
         }
         $place = trim(str_replace("($test)" , '', $str));
-        $c1 = AFD3::C1[$test] ?? '';
-        $c2 = AFD3::C2[$test] ?? '';
+        $c1 = AFD3women::C1[$test] ?? '';
+        $c2 = AFD3women::C2[$test] ?? '';
         return [$c1, $c2, $place];
     }
     

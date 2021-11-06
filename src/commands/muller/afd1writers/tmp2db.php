@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Loads files data/tmp/newalch/muller-402-it-writers.csv and muller-402-it-writers-raw.csv in database.
+    Loads files data/tmp/muller/1-writers/muller1-402-writers.csv and muller1-402-writers-raw.csv in database.
     Affects records imported from A6
     
     @license    GPL
@@ -13,7 +13,7 @@ use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
-use g5\commands\ertel\Newalch;
+use g5\commands\Newalch;
 use g5\commands\muller\AFD;
 use g5\commands\gauq\LERRCP;
 
@@ -43,7 +43,7 @@ class tmp2db implements Command {
             return "INVALID PARAMETER : $reportType - Possible values :\n" . $msg;
         }
         
-        $report = "--- Muller402 tmp2db ---\n";
+        $report = "--- AFD1writers tmp2db ---\n";
         
         if($reportType == 'full'){
             $namesReport = '';
@@ -51,25 +51,25 @@ class tmp2db implements Command {
         }
         
         // source of Müller's booklet AFD1 - insert if does not already exist
-        $bookletSource = Source::getBySlug(Muller402::BOOKLET_SOURCE_SLUG); // DB
+        $bookletSource = Source::getBySlug(AFD1writers::BOOKLET_SOURCE_SLUG); // DB
         if(is_null($bookletSource)){
-            $bookletSource = new Source(Muller402::BOOKLET_SOURCE_DEFINITION_FILE);
+            $bookletSource = new Source(AFD1writers::BOOKLET_SOURCE_DEFINITION_FILE);
             $bookletSource->insert(); // DB
             $report .= "Inserted source " . $bookletSource->data['slug'] . "\n";
         }
         
         // source of 5muller_writers.csv - insert if does not already exist
-        $source = Source::getBySlug(Muller402::LIST_SOURCE_SLUG); // DB
+        $source = Source::getBySlug(AFD1writers::LIST_SOURCE_SLUG); // DB
         if(is_null($source)){
-            $source = new Source(Muller402::LIST_SOURCE_DEFINITION_FILE);
+            $source = new Source(AFD1writers::LIST_SOURCE_DEFINITION_FILE);
             $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         
         // group
-        $g = Group::getBySlug(Muller402::GROUP_SLUG); // DB
+        $g = Group::getBySlug(AFD1writers::GROUP_SLUG); // DB
         if(is_null($g)){
-            $g = Muller402::getGroup();
+            $g = AFD1writers::getGroup();
             $g->data['id'] = $g->insert(); // DB
             $report .= "Inserted group " . $g->data['slug'] . "\n";
         }
@@ -83,8 +83,8 @@ class tmp2db implements Command {
         $nDiffDates = 0;
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
-        $lines = Muller402::loadTmpFile();
-        $linesRaw = Muller402::loadTmpRawFile();
+        $lines = AFD1writers::loadTmpFile();
+        $linesRaw = AFD1writers::loadTmpRawFile();
         $N = count($lines);
         $t1 = microtime(true);
         for($i=0; $i < $N; $i++){
@@ -135,7 +135,7 @@ class tmp2db implements Command {
                 // Person already in A6
                 $new = [];
                 $new['notes'] = [];
-                [$curaSourceSlug, $NUM] = Muller402::gqid2curaSourceId($line['GQID']);
+                [$curaSourceSlug, $NUM] = AFD1writers::gqid2curaSourceId($line['GQID']);
                 $curaFile = strtoupper($curaSourceSlug);
                 $gqId = LERRCP::gauquelinId($curaFile, $NUM);
                 $p = Person::getBySourceId($curaSourceSlug, $NUM);
@@ -156,7 +156,7 @@ class tmp2db implements Command {
                 if($mulday != $curaday){
                     $nDiffDates++;
                     $new['to-check'] = true;
-                    $new['notes'][] = "CHECK: birth day - $gqId $curaday / Muller402 {$line['MUID']} $mulday";
+                    $new['notes'][] = "CHECK: birth day - $gqId $curaday / AFD1writers {$line['MUID']} $mulday";
                     if($reportType == 'full'){
                         $datesReport .= "\nCura\t $gqId\t $curaday {$p->data['name']['family']} - {$p->data['name']['given']}\n";
                         $datesReport .= "Müller\t {$line['MUID']}\t $mulday {$line['FNAME']} - {$line['GNAME']}\n";

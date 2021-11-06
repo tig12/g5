@@ -1,8 +1,8 @@
 <?php
 /********************************************************************************
     Transfers information from data/db/init/newalch-tweak/
-    to data/tmp/newalch-/
-    Updates the file 1083MED.csv with the values found in the yaml file.
+    to data/tmp/muller/5-medics/muller5-1083-medics.csv
+    Updates the file muller5-1083-medics.csv with the values found in the yaml file.
     
     @license    GPL
     @history    2019-10-18 16:16:16+02:00, Thierry Graff : creation from g5\commands\gauq\all\tweak2csv
@@ -16,7 +16,7 @@ use tiglib\patterns\Command;
 class tweak2tmp implements Command {
     
     /** 
-        Called by : php run-g5.php cura <datafile> tweak2csv
+        Called by : php run-g5.php muller afd5medics tweak2csv
         @param $params empty array
         @return Report
     **/
@@ -47,7 +47,7 @@ class tweak2tmp implements Command {
             $tweaks[$NR] = $record;
         }
         
-        $target = Muller1083::loadTmpFile_nr();
+        $target = AFD5medics::loadTmpFile_nr();
         
         $keys = array_keys(current($target));
         $res = implode(G5::CSV_SEP, $keys) . "\n";
@@ -69,7 +69,7 @@ class tweak2tmp implements Command {
             $res .= implode(G5::CSV_SEP, $row) . "\n";
         }
         
-        $targetFile = Muller1083::tmpFilename();
+        $targetFile = AFD5medics::tmpFilename();
         file_put_contents($targetFile, $res);
                                              
         $report .= "Updated $N records of $targetFile\n";

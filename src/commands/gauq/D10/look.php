@@ -11,7 +11,7 @@ namespace g5\commands\gauq\D10;
 use g5\app\Config;
 use tiglib\patterns\Command;
 use tiglib\arrays\csvAssociative;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\LERRCP;
 
 class look implements Command {
     
@@ -53,7 +53,7 @@ class look implements Command {
         Counts the records of different occupation codes.
     **/
     public static function look_occu(){
-        $csvfile = Cura::tmpFilename('D10');
+        $csvfile = LERRCP::tmpFilename('D10');
         $res = [];
         $records = @csvAssociative::compute($csvfile);
         if(empty($records)){

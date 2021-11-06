@@ -11,11 +11,9 @@ namespace g5\commands\muller\afd1writers;
 use g5\app\Config;
 use g5\model\Source;
 use g5\model\Group;
-
-
 use tiglib\arrays\csvAssociative;
 
-class Muller100 {
+class AFD1writers100 {
     
     // TRUST_LEVEL not defined, using value of class Newalch
     
@@ -30,7 +28,7 @@ class Muller100 {
     const LIST_SOURCE_SLUG = 'afd1-100';
     
     // constants BOOKLET_SOURCE_DEFINITION_FILE and BOOKLET_SOURCE_SLUG not defined here
-    // (because they have the same values as Muller402)
+    // (because they have the same values as AFD1writers)
 
     /** Slug of the group in db **/
     const GROUP_SLUG = 'muller-afd1-100writers';
@@ -81,7 +79,7 @@ class Muller100 {
         $g->data['name'] = "Müller 100 Italian writers";
         $g->data['description'] = "100 Italian writers without birth time, gathered by Arno Müller";
         $g->data['type'] = Group::TYPE_HISTORICAL;
-        $g->data['sources'] = [self::LIST_SOURCE_SLUG, Muller402::BOOKLET_SOURCE_SLUG];
+        $g->data['sources'] = [self::LIST_SOURCE_SLUG, AFD1writers::BOOKLET_SOURCE_SLUG];
         return $g;
     }
     
@@ -91,7 +89,7 @@ class Muller100 {
         @return Path to the raw file muller-afd1-100-writers.txt
     **/
     public static function rawFilename(){
-        return implode(DS, [Config::$data['dirs']['raw'], 'newalchemypress.com', '05-muller-writers', 'muller-afd1-100-writers.txt']);
+        return implode(DS, [Config::$data['dirs']['raw'], 'muller', '1-writers', 'muller1-100-writers.txt']);
     }
     
     /** Loads csv file in a regular array **/
@@ -102,10 +100,10 @@ class Muller100 {
     // *********************** Tmp files manipulation ***********************
     
     /**
-        @return Path to the csv file stored in data/tmp/newalch/
+        @return Path to the csv file stored in data/tmp/muller/1-writers/
     **/
     public static function tmpFilename(){
-        return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', 'muller-100-it-writers.csv']);
+        return implode(DS, [Config::$data['dirs']['tmp'], 'muller', '1-writers', 'muller1-100-writers.csv']);
     }
     
     /**
@@ -119,11 +117,11 @@ class Muller100 {
     // *********************** Tmp raw file manipulation ***********************
     
     /**
-        Returns the name of a "tmp raw file" : data/tmp/newalch/muller-100-it-writers-raw.csv
+        Returns the name of a "tmp raw file" : data/tmp/muller/1-writers/muller1-100-writers-raw.csv
         (files used to keep trace of the original raw values).
     **/
     public static function tmpRawFilename(){
-        return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', 'muller-100-it-writers-raw.csv']);
+        return implode(DS, [Config::$data['dirs']['tmp'], 'muller', '1-writers', 'muller1-100-writers-raw.csv']);
     }
     
     /**

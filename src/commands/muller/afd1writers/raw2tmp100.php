@@ -1,8 +1,8 @@
 <?php
 /********************************************************************************
     
-    Converts data/raw/newalchemypress.com/05-muller-writers/muller-afd1-100-writers.txt
-    to data/tmp/newalch/05-muller-writers/muller-afd1-100-writers.csv
+    Converts data/raw/muller/1-writers/muller1-100-writers.txt
+    to data/tmp/muller/1-writers/muller1-100-writers.csv
     
     @license    GPL
     @history    2020-08-01 02:49:29+02:00, Thierry Graff : Creation
@@ -37,17 +37,17 @@ class raw2tmp100 implements Command {
             . '\s+(?P<LEN>\d+)'
             . '/';
         
-        // TODO put in Muller402 constants
-        $infile = Muller100::rawFilename();
+        // TODO put in AFD1writers constants
+        $infile = AFD1writers100::rawFilename();
         $lines = file($infile);
         
-        $csvFields = Muller100::TMP_FIELDS;
+        $csvFields = AFD1writers100::TMP_FIELDS;
         
-        $emptyNew = array_fill_keys(Muller100::TMP_FIELDS, '');
-        $res = implode(G5::CSV_SEP, Muller100::TMP_FIELDS) . "\n";
+        $emptyNew = array_fill_keys(AFD1writers100::TMP_FIELDS, '');
+        $res = implode(G5::CSV_SEP, AFD1writers100::TMP_FIELDS) . "\n";
         // to keep trace of original raw fields
-        $emptyNewRaw = array_fill_keys(Muller100::RAW_FIELDS, '');
-        $resRaw = implode(G5::CSV_SEP, Muller100::RAW_FIELDS) . "\n";
+        $emptyNewRaw = array_fill_keys(AFD1writers100::RAW_FIELDS, '');
+        $resRaw = implode(G5::CSV_SEP, AFD1writers100::RAW_FIELDS) . "\n";
         
         $N = 0;
         foreach($lines as $line){
@@ -73,7 +73,7 @@ class raw2tmp100 implements Command {
             $new['C2'] = $newRaw['C2'] = $m['c2'];
             $new['CY'] = 'IT';
             $new['LG'] = self::compute_lg($m['lg']);
-            $new['TZO'] = Muller402::compute_offset($m['tz'], $new['LG']);
+            $new['TZO'] = AFD1writers::compute_offset($m['tz'], $new['LG']);
             $newRaw['LG'] = $m['lg'];                                                                                    
             $new['LAT'] = self::compute_lat($m['lat']);
             $newRaw['LAT'] = $m['lat'];
@@ -85,7 +85,7 @@ class raw2tmp100 implements Command {
             $N++;
         }
         $report =  "--- muller100 raw2tmp ---\n";
-        $outfile = Muller100::tmpFilename();
+        $outfile = AFD1writers100::tmpFilename();
         $dir = dirname($outfile);
         if(!is_dir($dir)){
             $report .= "Created directory $dir\n";
@@ -94,7 +94,7 @@ class raw2tmp100 implements Command {
         file_put_contents($outfile, $res);
         $report .= "Wrote $N lines in $outfile \n";
         //
-        $outfile = Muller100::tmpRawFilename();
+        $outfile = AFD1writers100::tmpRawFilename();
         file_put_contents($outfile, $resRaw);
         $report .= "Stored $N records in $outfile\n";
         return $report;

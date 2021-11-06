@@ -1,6 +1,6 @@
 <?php
 /******************************************************************************
-    Code common to muller1083
+    Code common to afd5
     
     @license    GPL
     @history    2019-07-08 19:22:25+02:00, Thierry Graff : Creation
@@ -12,10 +12,10 @@ use g5\model\Source;
 use g5\model\Group;
 use tiglib\arrays\csvAssociative;
 use tiglib\strings\encode2utf8;
-use g5\commands\ertel\Newalch;
+use g5\commands\Newalch;
 use g5\commands\gauq\Cura;
 
-class Muller1083 {
+class AFD5medics {
     
     /**
         Path to the yaml file containing the characteristics of the source describing file 5a_muller_medics.txt.
@@ -27,7 +27,7 @@ class Muller1083 {
     const LIST_SOURCE_SLUG = 'afd5';
     
     /**
-        Path to the yaml file containing the characteristics of Müller's booklet AFD3.
+        Path to the yaml file containing the characteristics of Müller's booklet AFD3women.
         Relative to directory data/db/source
     **/
     const BOOKLET_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd5-medics-booklet.yml';
@@ -150,7 +150,7 @@ class Muller1083 {
     // *********************** Group management ***********************
     
     /**
-        Returns a Group object for Muller1083.
+        Returns a Group object for AFD5medics.
     **/
     public static function getGroup(): Group {
         $g = new Group();
@@ -165,17 +165,17 @@ class Muller1083 {
     // *********************** Raw file manipulation ***********************
     
     /**
-        @return Path to the raw file coming from newalch
+        @return Path to the raw file coming from newalchemypress.com
     **/
     public static function rawFilename(){
-        return Newalch::rawDirname() . DS . '05-muller-medics' . DS . '5a_muller-medics-utf8.txt';
+        return implode(DS, [Config::$data['dirs']['raw'], 'muller', '5-medics', '5a_muller-medics-utf8.txt']);
     }
     
     // *********************** Tmp files manipulation ***********************
     
     /** Path to the temporary csv file used to work on this group. **/
     public static function tmpFilename(){
-        return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', '1083MED.csv']);
+        return implode(DS, [Config::$data['dirs']['tmp'], 'muller', '5-medics', 'muller5-1083-medics.csv']);
     }
     
     /**
@@ -201,11 +201,11 @@ class Muller1083 {
     // *********************** Tmp raw files manipulation ***********************
     
     /**
-        Returns the name of the "tmp raw file", eg. data/tmp/newalch/1083MED-raw.csv
+        Returns the name of the "tmp raw file", data/tmp/muller/5-medics/muller5-1083-medics-raw.csv
         (file used to keep trace of the original raw values).
     **/
     public static function tmpRawFilename(){
-        return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', '1083MED-raw.csv']);
+        return implode(DS, [Config::$data['dirs']['tmp'], 'muller', '5-medics', 'muller5-1083-medics-raw.csv']);
     }
     
     /** Loads the "tmp raw file" in a regular array **/

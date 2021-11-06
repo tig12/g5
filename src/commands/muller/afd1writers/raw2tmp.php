@@ -1,7 +1,7 @@
 <?php
 /********************************************************************************
-    Import data/raw/newalchemypress.com/05-muller-writers/5muller_writers.csv
-    to data/tmp/newalch/muller-402-it-writers.csv
+    Import data/raw/muller/1-writers/5muller_writers.csv
+    to data/data/tmp/muller/1-writers/muller1-402-writers.csv
     
     @license    GPL
     @history    2020-05-15 22:38:58+02:00, Thierry Graff : Creation
@@ -12,7 +12,7 @@ namespace g5\commands\muller\afd1writers;
 use g5\G5;
 use g5\app\Config;
 use tiglib\patterns\Command;
-use g5\commands\ertel\Newalch;
+use g5\commands\Newalch;
 use tiglib\arrays\sortByKey;
 
 class raw2tmp implements Command {
@@ -28,13 +28,13 @@ class raw2tmp implements Command {
         $pname = '/(\d+)([MFK])\s*(.*)\s*/';
         $pplace = '/(.*?) ([A-Z]{2})/';
         
-        $emptyNew = array_fill_keys(Muller402::TMP_FIELDS, '');
-        $res = implode(G5::CSV_SEP, Muller402::TMP_FIELDS) . "\n";
-        $resRaw = implode(G5::CSV_SEP, Muller402::RAW_FIELDS) . "\n"; // keep trace of original raw fields
+        $emptyNew = array_fill_keys(AFD1writers::TMP_FIELDS, '');
+        $res = implode(G5::CSV_SEP, AFD1writers::TMP_FIELDS) . "\n";
+        $resRaw = implode(G5::CSV_SEP, AFD1writers::RAW_FIELDS) . "\n"; // keep trace of original raw fields
         $N = 0;
-        $raw = Muller402::loadRawFile();
+        $raw = AFD1writers::loadRawFile();
         foreach($raw as $line){
-            $fields = explode(Muller402::RAW_SEP, $line);
+            $fields = explode(AFD1writers::RAW_SEP, $line);
             $new = $emptyNew;
             // raw file 5muller_writers.csv doesn't contain the occupation (between 1 to 5)
             // but Müller booklet contains it => a new OCR of the original would permit to have a more precise occupation
@@ -75,7 +75,7 @@ class raw2tmp implements Command {
             
             //
             // keep only records with complete birth time (at least YYYY-MM-DD HH:MM)
-            // These are handled by Muller100
+            // These are handled by AFD1writers100
             //
             if(strlen($new['DATE']) < 16){
                 continue;
@@ -98,7 +98,7 @@ class raw2tmp implements Command {
             $new['CY'] = 'IT';
             $new['LG'] = self::lglat(-(int)$fields[9]); // minus sign, correction from raw here
             $new['LAT'] = self::lglat($fields[8]);
-            $new['TZO'] = Muller402::compute_offset($fields[6], $new['LG']);
+            $new['TZO'] = AFD1writers::compute_offset($fields[6], $new['LG']);
             if($fields[6] == 'LMT'){
                 $new['LMT'] = 'LMT';
             }
@@ -107,7 +107,7 @@ class raw2tmp implements Command {
             $N++;
         }
         
-        $outfile = Muller402::tmpFilename();
+        $outfile = AFD1writers::tmpFilename();
         $dir = dirname($outfile);
         if(!is_dir($dir)){
             $report .= "Created directory $dir\n";
@@ -116,7 +116,7 @@ class raw2tmp implements Command {
         file_put_contents($outfile, $res);
         $report .= "Stored $N records in $outfile\n";
         //
-        $outfile = Muller402::tmpRawFilename();
+        $outfile = AFD1writers::tmpRawFilename();
         file_put_contents($outfile, $resRaw);
         $report .= "Stored $N records in $outfile\n";
         return $report;
@@ -164,7 +164,7 @@ class raw2tmp implements Command {
         	    return '+00:37';
         	break;
             default:
-                throw new \Exception("Timezone offset not handled in Muller402 : $offset");
+                throw new \Exception("Timezone offset not handled in AFD1writers : $offset");
         }
     }
     

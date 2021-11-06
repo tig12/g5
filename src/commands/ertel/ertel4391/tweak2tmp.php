@@ -1,10 +1,10 @@
 <?php
 /********************************************************************************
-    Transfers information from data/db/init/newalch-tweak/ to data/tmp/newalch/
-    Updates the file 4391SPO.csv with the values found in the yaml file.
+    Transfers information from data/db/init/newalch-tweak/ to data/tmp/ertel/
+    Updates the file data/tmp/ertel/ertel-4384-athletes.csv with the values found in the yaml tweak file.
     
     @license    GPL
-    @history    2019-12-23 18:40:13+01:00, Thierry Graff : Creation from g5\commands\gauq\muller1083\tweak2csv
+    @history    2019-12-23 18:40:13+01:00, Thierry Graff : Creation from command muller1083 tweak2csv
 ********************************************************************************/
 namespace g5\commands\ertel\ertel4391;
 
@@ -23,8 +23,8 @@ class tweak2tmp implements Command {
         if(count($params) > 0){
             return "WRONG USAGE : useless parameter : {$params[2]}\n";
         }
-        $report = "--- Ertel4391 tweak2tmp ---\n";
-        $yamlfile = Config::$data['dirs']['init'] . DS . 'newalch-tweak' . DS . '4391SPO.yml';
+        $report = "--- ertel ertel4391 tweak2tmp ---\n";
+        $yamlfile = Ertel4391::tweakFilename();
         
         // load tweaks in an assoc arrray (keys = NR)
         $yaml = yaml_parse(file_get_contents($yamlfile));

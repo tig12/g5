@@ -23,7 +23,7 @@ namespace g5\commands\g55\all;
 
 use g5\app\Config;
 use g5\G5;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\LERRCP;
 use g5\commands\g55\G55;
 use tiglib\patterns\Command;
 use g5\model\Libreoffice;
@@ -101,7 +101,7 @@ class edited2cura implements Command {
         [$origin, $g55rows, $curarows] = G55::prepareCuraMatch($g55group);
         
         if($action == 'update'){
-            $curaFull = Cura::loadTmpCsv_num($origin);
+            $curaFull = LERRCP::loadTmpCsv_num($origin);
         }
         $report = '';
         $N = 0;
@@ -172,7 +172,7 @@ class edited2cura implements Command {
         [$origin, $g55rows, $curarows] = G55::prepareCuraMatch($g55group);
         
         if($action == 'update'){
-            $curaFull = Cura::loadTmpCsv_num($origin);
+            $curaFull = LERRCP::loadTmpCsv_num($origin);
         }
         $report = '';
         $N = 0;

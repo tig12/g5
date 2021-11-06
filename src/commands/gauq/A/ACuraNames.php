@@ -1,15 +1,19 @@
 <?php
 /********************************************************************************
-    Parses file 902gdN.html
+    Parses file 902gdN.html with names of A files
+    
+    TODO This class and file 902gdN.html could be removed,
+         because names are present in files 902gdA*y.html
     
     @license    GPL
     @history    2017-04-27 11:16:42+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace g5\commands\gauq;
+namespace g5\commands\gauq\A;
 
+use g5\commands\gauq\LERRCP;
 use g5\commands\gauq\Cura;
 
-class CuraNames{
+class ACuraNames{
     
     // ******************************************************
     public static function rawFilename(){
@@ -24,7 +28,7 @@ class CuraNames{
     **/
     public static function parse(){
         $filename = self::rawFilename();
-        $raw = Cura::loadRawFile('N');
+        $raw = LERRCP::loadRawFile('N');
         preg_match_all('#<pre>\s*(DAY.*?NAME)\s*(.*?)\s*</pre>#sm', $raw, $m);
         // check that the lines are present
         if(!isset($m[2]) || count($m[2]) != 2){

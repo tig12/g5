@@ -1,6 +1,15 @@
 
 - see php bug - https://bugs.php.net/bug.php?id=81002
 
+- scans of data/auxiliary/1991-muller1-writers are incomplete
+  Ask for new complete version and include supplementary fields in g5
+  
+- in all tweak2db : add function tweakFileName in "model" classes (already done in Ertel4391)
+
+- Use data/auxiliary/muller1-22-writers to check Gauquelin birth time errors - compare with results of raw2tmp / tmp2db
+
+- add SI42 to auxiliary data - see share/data/gauquelin/csicop-sportsmen-1979
+
 - add commit / rollback for all tmp2db commands ?
 
 - quasimodo-salvatore-1901-08-20: NAME not stored correctly in history

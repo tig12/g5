@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Fixes the problem of truncated GNR in data/tmp/newalch/1083MED.csv
+    Fixes the problem of truncated GNR in data/tmp/muller/5-medics/muller5-1083-medics.csv
     
     @license    GPL
     @history    2019-10-15 01:24:44+02:00, Thierry Graff : Creation
@@ -10,13 +10,13 @@ namespace g5\commands\muller\afd5medics;
 
 use g5\G5;
 use tiglib\patterns\Command;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\LERRCP;
 
 class fixGnr implements Command {
     
     const POSSIBLE_PARAMS = [
-        'update' => "Updates column GNR of file data/tmp/newalch/1083MED.csv",
-        'report' => "Echoes a full list of GNR corrections without modifying data/tmp/newalch/1083MED.csv",
+        'update' => "Updates column GNR of file data/tmp/muller/5-medics/muller5-1083-medics.csv",
+        'report' => "Echoes a full list of GNR corrections without modifying data/tmp/muller/5-medics/muller5-1083-medics.csv",
     ];
     
     // *****************************************
@@ -48,17 +48,17 @@ class fixGnr implements Command {
         $report = "--- muller1083 fixGnr ---\n";
         
         // assoc arrays
-        $a2s = @Cura::loadTmpFile_num('A2'); // keys = NUM
+        $a2s = @LERRCP::loadTmpFile_num('A2'); // keys = NUM
         if(empty($a2s)){
             return "File data/tmp/cura/A2.csv doesn't exist\n"
                 . "Build this file before executing fixGnr \n";
         }
-        $e1s = @Cura::loadTmpFile_num('E1'); // keys = NUM
+        $e1s = @LERRCP::loadTmpFile_num('E1'); // keys = NUM
         if(empty($e1s)){
             return "File data/tmp/cura/E1.csv doesn't exist\n"
                 . "Build this file before executing fixGnr \n";
         }
-        $MullerCsv = Muller1083::loadTmpFile_nr(); // keys = NR
+        $MullerCsv = AFD5medics::loadTmpFile_nr(); // keys = NR
         $maxNUM_A2 = 3647;
         $maxNUM_E1 = 2154;
         
@@ -220,7 +220,7 @@ class fixGnr implements Command {
             }
             $res .= implode(G5::CSV_SEP, $new) . "\n";
         }
-        $destFile = Muller1083::tmpFilename();
+        $destFile = AFD5medics::tmpFilename();
         file_put_contents($destFile, $res);// HERE update 1083MED.csv
         $report .= "Corrected $nCorr GNR in $destFile\n";
         

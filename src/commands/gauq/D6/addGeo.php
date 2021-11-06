@@ -22,7 +22,7 @@ namespace g5\commands\gauq\D6;
 use g5\G5;
 use g5\app\Config;
 use tiglib\patterns\Command;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\LERRCP;
 use g5\model\Geonames;
 use tiglib\misc\dosleep;
 use tiglib\arrays\csvAssociative;
@@ -54,8 +54,8 @@ class addGeo implements Command {
         // Fills CY in data/tmp/cura/D6.csv 
         // from data/build/geonames/D6.csv
         // TEMPORARY MECHANISM - 
-        $rows = Cura::loadTmpFile_num($datafile);
-        $rowsGeo = csvAssociative::compute('data/init/geonames/D6.csv');
+        $rows = LERRCP::loadTmpFile_num($datafile);
+        $rowsGeo = csvAssociative::compute('data/db/init/geonames/D6.csv');
         $res = implode(G5::CSV_SEP, D6::TMP_FIELDS) . "\n";
         foreach($rowsGeo as $rowGeo){
             $NUM = $rowGeo['NUM'];
@@ -63,7 +63,7 @@ class addGeo implements Command {
             $new['CY'] = $rowGeo['CY'];
             $res .= implode(G5::CSV_SEP, $new) . "\n";
         }
-        $outfile = Cura::tmpFilename($datafile);
+        $outfile = LERRCP::tmpFilename($datafile);
         file_put_contents($outfile, $res);
         $report .= "Added CY to $outfile\n";
         return $report;
@@ -71,7 +71,7 @@ class addGeo implements Command {
         // END TEMP CODE
         //
         
-        $csvfile = Cura::tmpFilename($datafile);
+        $csvfile = LERRCP::tmpFilename($datafile);
         $geofile = Geonames::$TMP_SERVICE_DIR . DS . $datafile . '.csv';
         
         if(!is_file($csvfile)){

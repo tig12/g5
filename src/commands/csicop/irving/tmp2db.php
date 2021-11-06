@@ -1,7 +1,6 @@
 <?php
 /********************************************************************************
-    Loads files data/tmp/newalch/muller-402-it-writers.csv and muller-402-it-writers-raw.csv in database.
-    Affects records imported from A1
+    Loads files data/tmp/csicop/irving/408-csicop-irving.csv and 408-csicop-irving-raw.csv in database.
     
     @license    GPL
     @history    2020-09-02 00:36:52+02:00, Thierry Graff : creation
@@ -13,7 +12,7 @@ use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
-use g5\commands\ertel\Newalch;
+use g5\commands\Newalch;
 use g5\commands\gauq\LERRCP;
 use g5\commands\csicop\CSICOP;
 use g5\commands\csicop\si42\SI42;

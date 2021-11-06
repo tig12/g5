@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Generates data/output/history/1991-muller-writers/muller-402-writers.csv
+    Generates data/output/history/1991-muller1-writers/muller-402-writers.csv
     By default, the generated file is compressed (using zip).
     
     @license    GPL
@@ -21,7 +21,7 @@ class export implements Command {
         Directory where the generated files are stored
         Relative to directory specified in config.yml by dirs / output
     **/
-    const OUTPUT_DIR = 'history' . DS . '1991-muller-writers';
+    const OUTPUT_DIR = 'history' . DS . '1991-muller1-writers';
     
     const OUTPUT_FILE = 'muller-402-writers.csv';
     
@@ -49,9 +49,9 @@ class export implements Command {
         
         $report = '';
         
-        $g = Group::getBySlug(Muller402::GROUP_SLUG); // DB
+        $g = Group::getBySlug(AFD1writers::GROUP_SLUG); // DB
         
-        self::$sourceSlug = Muller402::LIST_SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
+        self::$sourceSlug = AFD1writers::LIST_SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
 
         $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . self::OUTPUT_FILE;
         

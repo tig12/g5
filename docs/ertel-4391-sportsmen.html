@@ -38,17 +38,31 @@ Ertel 4391
 <div class="intro">
 This page deals with the file <a href="https://newalchemypress.com/gauquelin/gauquelin_docs/3a_sports.txt">3a_sports.txt</a> downloaded from 
 <a href="https://newalchemypress.com/gauquelin/research3.php">newalchemypress.com</a>.
-<br>It contains the sportmen gathered by Ertel to do his eminence tests in 1988.
+<br>It contains the sportmen gathered by Ertel, published in 1988: <b>Raising the Hurdle for the Athletes' Mars Effect: Association Co-Varies With Eminence</b>.
+<br>This file is the central piece to merge all files related to the mars effect.
+It contains ids of Gauquelin LERRCP, Comité para, CSICOP, CFEPP.
+Brings 1828 new birth dates not present in other datasets (but no birth times) .
+
 <ul class="simple">
     <li>
-        This file is the central piece to merge all files related to the mars effect.
-        <br>It contains ids of cura.free.fr, Comité para, CSICOP, CFEPP.
+<!-- 
+        <br>Links with
+        [G:A01] => 2087
+D6] => 450
+[G:D10] => 351
+[GCPAR] => 76
+[GMIND] => 453
+[GMING] => 115
+[GMINI] => 599
+[GMINV] => 24
+[G_79F] => 27
+[G_ADD] => 202
+-->        
     </li>
     <li>
-        Brings 1828 new birth dates not present in other datasets (but no birth times) .
     </li>
     <li>
-        Permits to fix all missing names of Cura A1.
+        Permits to fix all missing names of Gauquelin A1.
     </li>
     <li>
         It contains eminence information, with the precise source list permitting to check and reproduce eminence tests.
@@ -73,7 +87,7 @@ This page deals with the file <a href="https://newalchemypress.com/gauquelin/gau
             <ul>
                 <li><a href="#2-1-full-execution">Full execution</a></li>
                 <li><a href="#2-2-raw2csv">raw2csv</a></li>
-                <li><a href="#2-3-fix-cura-a1-names">Fix cura A1 names</a></li>
+                <li><a href="#2-3-fix-gauquelin-a1-names">Fix Gauquelin A1 names</a></li>
                 <li><a href="#2-4-generate-skeptics-files">Generate skeptics' files</a></li>
             </ul>
         </li>
@@ -246,7 +260,7 @@ This step copies the contents of <code>3a_sports-utf8.txt</code> to <code>4391SP
 Other columns are copied as is.
 
 <!-- ************************************* -->
-<h3><a name="2-3-fix-cura-a1-names">Fix cura A1 names</a></h3>
+<h3><a name="2-3-fix-gauquelin-a1-names">Fix Gauquelin A1 names</a></h3>
 This step is included in the restoration process of file A1, not part of Ertel 4391 process.
 <br>
 <br>Fixes 100% of the remaining unidentified names in A1.
@@ -260,7 +274,7 @@ WRONG USAGE - fixA1 needs one parameter. Can be :
 
 <pre>php run-g5.php newalch ertel4391 fixA1 update</pre>
 <pre>
-Nb missing names in cura A1 : 117
+Nb missing names in Gauquelin A1 : 117
 Ertel 4391 contains : 2084 lines from A1
 Nb corrections : 117
 </pre>
@@ -406,7 +420,7 @@ Combining the output of the two previous commands permits a reconstitution of Ta
 <br>Notes :
 <ul>
     <li>
-        <b>New</b> indicates the number of new records brought by this file, not present in Cura or skeptics' files.
+        <b>New</b> indicates the number of new records brought by this file, not present in Gauquelin or skeptics' files.
         <br>This file brings <b>1828 new records</b>.
     </li>
     <li>
@@ -419,9 +433,8 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <b>Id</b> : Name of the column concerning the sample in the original file.
     </li>
     <li>
-        In columns N<sub>QUEL</sub> and N<sub>Id</sub>
-        <br>- the numbers in bold - ex <b>553</b> - are the numbers counted by program in Ertel 4391 file.
-        <br>- the numbers in parentheses - ex (567) - are the numbers given in [Ertel 88].
+        N<sub>er</sub> = number claimed by Ertel.
+        <br>N<sub>g5</sub> = number found by g5, using columns QUEL and Id.
     </li>
     <li>
         <b>Ertel subsample</b> : name of the subsample in Ertel article.
@@ -443,50 +456,54 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <td></td>
         <td></td>
         <td rowspan="4">G:A01</td>
-        <td rowspan="4"><b>2087</b><br>(2087)</td>
+        <td rowspan="4">2087</td>
         <td colspan="3"></td>
         <td>
-            G:A01 records come from <a href="gauquelin-A.html">file A1</a>.
-            <br>Cura file contains 2087 records, corresponds to number given by Ertel.
+            <div class="pre padding-bottom05">N<sub>er</sub> = 2087     N<sub>g5</sub> = 2087</div>
+            QUEL = G:A01 => records come from <a href="gauquelin-A.html"><b>Gauquelin file A1</b></a>.
         </td>
     </tr>
     <tr>
         <td>0</td>
         <td>P</td>
         <td>G55</td>
-        <td><b>553</b><br>(567)</td>
+        <td></td>
         <td>1 - First French</td>
         <td>
-            <a href="gauquelin-55.html">Gauquelin 1955 restoration</a> finds 564 G55 records present in Cura file A1. 
+            <div class="pre padding-bottom05">N<sub>er</sub> = 567     N<sub>g5</sub> = 553</div>
+            Records coming from Michel Gauquelin "L'influence des astres", 1955.
+            <br><a href="gauquelin-55.html"><b>Gauquelin 1955 restoration</b></a> identifies 564 Gauquelin 1955 records present in file A1. 
         </td>
     </tr>
     <tr>
-        <td>0</td>
+        <td>0</td>                         
         <td>P</td>
         <td></td>
-        <td><b>1202</b><br>(1189)</td>
+        <td>1202</td>
         <td>2 - First European</td>
         <td>
-            Records where QUEL = G:A01 and G55 empty and PARA_NR empty. Corresponding number is 2087 - 553 - 332 = 1202 records.
+            <div class="pre padding-bottom05">N<sub>er</sub> = 1189     N<sub>g5</sub> = 1202  (1202 = 2087 - 553 - 332)</div>
+            Records where QUEL = G:A01 and G55 empty and PARA_NR empty.
             <br>
             <br>From [Ertel 88] :
             <ul>
-                <li>915 non-french athletes used for Gauquelin 1960 european replication</li>
+                <li>915 non-French athletes used for Gauquelin 1960 european replication</li>
                 <li>274 casual data gathering</li>
             </ul>
-            Total of 915 + 214 = 1189 records.
+            Total of 915 + 274 = 1189 records.
         </td>
     </tr>
     <tr>
         <td>332</td>
         <td>P</td>
         <td>PARA_NR</td>
-        <td><b>535</b><br>(535)</td>
+        <td>535</td>
         <td>6 - Para champions</td>
         <td>
+            <div class="pre padding-bottom05">N<sub>er</sub> = 535     N<sub>g5</sub> = 535</div>
             Records with QUEL = G:A01 and PARA_NR = number from 1 to 535.
-            <br>From [Ertel 88] : "Since Gauquelin had already 203 athletes from the Para smaple in his earlier studies (1955, 1960), only 332 are gained".
-            <br>List published by Comité Para for its 1976 test.
+            <br>List published by <a href="comite-para.html"><b>Comité Para</b></a> for its 1976 test.
+            <br>From [Ertel 88] : "Since Gauquelin had already 203 athletes from the Para sample in his earlier studies (1955, 1960), only 332 are gained".
         </td>
     </tr>
     
@@ -499,10 +516,11 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <td>76</td>
         <td>7 - Para lowers</td>
         <td>
+            <div class="pre padding-bottom05">N<sub>er</sub> = 76     N<sub>g5</sub> = 76</div>
             Records with QUEL = GCPAR and PARA_NR = string from *1 to *76
             <br>535 + 76 = 611 ; numbers given in [Ertel 88] correspond to the content of the file.
-            <br>
-            <br>From [Ertel 88] : These 76 are part of a group of 241 soccer players gathered for the Comité Para test (1976). They were not retained in Comité Para experiment because considered less eminent and remained unpublished. They were copied by Ertel when he visited Gauquelin laboratory.
+            <div class="bold padding05">No birth time - only birth day</div>
+            From [Ertel 88] : These 76 are part of a group of 241 soccer players gathered for the <a href="comite-para.html">Comité Para test (1976)</a>. They were not retained in Comité Para experiment because considered less eminent and remained unpublished. They were copied by Ertel when he visited Gauquelin laboratory.
             <br>Ertel copied only 76 because it was for only 76 out of 241 (ranks 1-76) that mars sector was computed.
         </td>
     </tr>
@@ -511,32 +529,38 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <td></td>
         <td></td>
         <td rowspan="3">G:D10<br>*G:D10</td>
-        <td rowspan="3"><b>351</b><br>(351)</td>
+        <td rowspan="3">351</td>
         <td colspan="3"></td>
         <td>
-            G:D10 records come from <a href="gauquelin-D10.html">file D10</a>
-            <br>Cura file contains 352 sportsmen, not 351.
-            <br>(Code <code>*G:D10</code> is a typo concerning 2 records, present in D10 Cura file)
+            <div class="pre padding-bottom05">N<sub>er</sub> = 351     N<sub>g5</sub> = 351</div>
+            G:D10 records come from <a href="gauquelin-D10.html"><b>Gauquelin file D10</b></a>
+            <br>Gauquelin file contains 352 sportsmen, not 351.
+            <br>(Code <code>*G:D10</code> is a typo concerning 2 records, present in D10 Gauquelin file)
         </td>
     </tr>
     <tr>
         <td>0</td>
         <td>P</td>
         <td>CSINR</td>
-        <td><b>192</b><br>(192)</td>
+        <td>192</td>
         <td>8 - CSICOP-U.S.</td>
         <td>
-            Out of the 408 (Ertel cites 409) CSICOP records, Ertel uses only 192 also gathered by Gauquelin for his 1979 US test because mars 36 sector information was not available for CSICOP data.
+            <div class="pre padding-bottom05">N<sub>er</sub> = 192     N<sub>g5</sub> = 192</div>
+            Related to the <a href="csicop.html"><b>1979 CSICOP test (US skeptics)</b></a>
+            <br>
+            Out of the 408 (Ertel cites 409) CSICOP records, Ertel uses only 192 also gathered by Gauquelin because mars 36 sector information was not available for CSICOP data.
             <br>In file Ertel 4391, 2 records don't match D10, leading to 190 effective matches.
+            <br>TODO CHECK if these 2 records are new data.
         </td>
     </tr>
     <tr>
         <td>0</td>
         <td>P</td>
         <td></td>
-        <td><b>159</b><br>(158)</td>
+        <td>159</td>
         <td>12 - GAUQ-U.S.</td>
         <td>
+            <div class="pre padding-bottom05">N<sub>er</sub> = 158     N<sub>g5</sub> = 159</div>
             Remaining sportsmen of D10, not already included in CSICOP test.
             <br>159 = 351 - 192
         </td>
@@ -546,11 +570,13 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <td>599</td>
         <td>U</td>
         <td>GMINI</td>
-        <td colspan="3"><b>599</b><br>(600)</td>
+        <td colspan="3">599</td>
         <td>3 - Italian football</td>
         <td>
+            <div class="pre padding-bottom05">N<sub>er</sub> = 600     N<sub>g5</sub> = 599</div>
             Unpublished by Gauquelin (not famous enough), copied manually by Ertel.
-            <br>In file Ertel 4391, all records marked GMINI are marked sport = FOOT and country = IT.
+            <div class="bold padding05">No birth time - only birth day</div>
+            In file Ertel 4391, all records marked GMINI are marked sport = FOOT and country = IT.
             <br>Possible meaning : Gauquelin MINor Italian
         </td>
     </tr>
@@ -559,11 +585,13 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <td>115</td>
         <td>U</td>
         <td>GMING</td>
-        <td colspan="3"><b>115</b><br>(117)</td>
+        <td colspan="3">115</td>
         <td>4 - German various</td>
         <td>
+            <div class="pre padding-bottom05">N<sub>er</sub> = 117     N<sub>g5</sub> = 115</div>
+            Possible meaning : Gauquelin MINor German
+            <div class="bold padding05">No birth time - only birth day</div>
             In file Ertel 4391, all records marked GMING have country = DE.
-            <br>Possible meaning : Gauquelin MINor German
         </td>
     </tr>
     
@@ -571,23 +599,28 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <td>202</td>
         <td>U</td>
         <td>G_ADD</td>
-        <td colspan="3"><b>202</b><br>(204)</td>
+        <td colspan="3">202</td>
         <td>5 - French occasionals</td>
         <td>
+            <div class="pre padding-bottom05">N<sub>er</sub> = 204     N<sub>g5</sub> = 202</div>
             Copied manually by Ertel in Gauquelin's laboratory.
-            <br>Considered as "low-low-ranking" by Gauquelin.
+            <div class="bold padding05">No birth time - only birth day</div>
+            Considered as "low-low-ranking" by Gauquelin.
         </td>
     </tr>
+    
     <tr>
         <td>0</td>
         <td>P</td>
         <td>G:D06</td>
-        <td colspan="3"><b>450</b><br>(450)</td>
+        <td colspan="3">450</td>
         <td>9 - Second European</td>
         <td>
-            G:D06 records come from <a href="gauquelin-D6.html">file D6</a>.
-            <br>Cura file contains 449 sportsmen, not 450.
-            <br>=> TODO : check
+            <div class="pre padding-bottom05">N<sub>er</sub> = 450     N<sub>g5</sub> = 450</div>
+            G:D06 records come from <a href="gauquelin-D6.html"><b>Gauquelin file D6</b></a>.
+            <div class="bold padding05">No birth time - only birth day</div>
+            Gauquelin file contains 449 sportsmen, not 450.
+            <br>=> TODO : check (understand Ertel note: "In an appendix to D6 he listed 15 additional athletes whose birth dates had been received too late for inclusion. They were added to the present pool").
         </td>
     </tr>
     
@@ -595,12 +628,14 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <td>24</td>
         <td>U</td>
         <td>GMINV</td>
-        <td colspan="3"><b>24</b><br>(24)</td>
+        <td colspan="3">24</td>
         <td>10 - Italian cyclists</td>
         <td>
+            <div class="pre padding-bottom05">N<sub>er</sub> = 24     N<sub>g5</sub> = 24</div>
             Copied manually by Ertel in Gauquelin's laboratory.
-            <br>In file Ertel 4391, all records marked GMINV are marked sport = CYCL and country = IT.
             <br>Supposition from [KNS 97] p 25 : <code>GMINV</code> could mean Gauquelin MINor Vélo
+            <div class="bold padding05">No birth time - only birth day</div>
+            In file Ertel 4391, all records marked GMINV are marked sport = CYCL and country = IT.
         </td>
     </tr>
     
@@ -608,11 +643,13 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <td>453</td>
         <td>U</td>
         <td>GMIND</td>
-        <td colspan="3"><b>453</b><br>(455)</td>
+        <td colspan="3">453</td>
         <td>11 - Lower French</td>
         <td>
-            Copied manually by Ertel in Gauquelin's laboratory. 
+            <div class="pre padding-bottom05">N<sub>er</sub> = 455     N<sub>g5</sub> = 453</div>
+            Copied manually by Ertel in Gauquelin's laboratory.
             <br>Supposition from [KNS 97] p 25 : <code>GMIND</code> could mean Gauquelin MINor Dictionary
+            <div class="bold padding05">No birth time - only birth day</div>
         </td>
     </tr>
     
@@ -620,10 +657,12 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <td>27</td>
         <td>U</td>
         <td>G_79F</td>
-        <td colspan="3"><b>27</b><br>(27)</td>
+        <td colspan="3">27</td>
         <td>13 - Plus special</td>
         <td>
+            <div class="pre padding-bottom05">N<sub>er</sub> = 27     N<sub>g5</sub> = 27</div>
             Supplementary data sent by Gauquelin to Ertel after his visit in Paris.
+            <div class="bold padding05">No birth time - only birth day</div>
         </td>
     </tr>
     
@@ -632,7 +671,7 @@ Combining the output of the two previous commands permits a reconstitution of Ta
     </tr>
     
     <tr>
-        <td>1828</td>
+        <td colspan="8" class="bold big11">1828 new birth dates without time</td>
     </tr>
     
 </table>
@@ -942,7 +981,7 @@ generates the following table.
                         <a href="gauquelin-55.html">Gauquelin 1955</a>
                         <ul>
                             <li><a href="gauquelin-55-restore.html">Restoration</a></li>
-                            <li><a href="gauquelin-55-curadiff.html">Differences with Cura</a></li>
+                            <li><a href="gauquelin-55-curadiff.html">Differences with Gauquelin</a></li>
                         </ul>
                     </li>
                 </ul>

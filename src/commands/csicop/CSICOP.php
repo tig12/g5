@@ -91,4 +91,11 @@ class CSICOP {
         return $g;
     }
     
+    /** 
+        Computes the name of the directory where output files are stored
+    **/
+    public static function outputDirname(){
+        return Config::$data['dirs']['output'] . DS . 'history' . DS . '1979-csicop';
+    }
+    
 } // end class

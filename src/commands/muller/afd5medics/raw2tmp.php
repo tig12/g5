@@ -1,8 +1,8 @@
 <?php
 /********************************************************************************
-    Imports data/raw/newalchemypress.com/05-muller-medics/5a_muller-medics-utf8.txt
-    to  data/tmp/newalch/1083MED.csv
-    and data/tmp/newalch/1083MED-raw.csv
+    Imports data/raw/muller/5-medics/5a_muller-medics-utf8.txt
+    to  data/tmp/muller/5-medics/muller5-1083-medics.csv
+    and data/tmp/muller/5-medics/muller5-1083-medics-raw.csv
     
     @todo Handle C2 (départements)
         
@@ -205,7 +205,7 @@ DEPT_STR;
     
     // *****************************************
     /** 
-        Imports file raw/newalchemypress.com/3a_sports-utf8.csv to tmp/newalch/
+        Imports file raw/muller/5-medics/3a_sports-utf8.csv to tmp/muller/5-medics/
         @param $params empty array
         @return report
     **/
@@ -215,7 +215,7 @@ DEPT_STR;
             return "INVALID PARAMETER : " . $params[0] . " - parameter not needed\n";
         }
         
-        $filename = Muller1083::rawFilename();                  
+        $filename = AFD5medics::rawFilename();                  
         if(!is_file($filename)){
             return "ERROR : Missing file $filename\n";
         }
@@ -223,8 +223,8 @@ DEPT_STR;
         $lines = explode("\n", $raw);
         $N = count($lines);
         
-        $res = implode(G5::CSV_SEP, Muller1083::TMP_FIELDS) . "\n";
-        $res_raw = implode(G5::CSV_SEP, array_keys(Muller1083::RAW_FIELDS)) . "\n";
+        $res = implode(G5::CSV_SEP, AFD5medics::TMP_FIELDS) . "\n";
+        $res_raw = implode(G5::CSV_SEP, array_keys(AFD5medics::RAW_FIELDS)) . "\n";
         
         $nRecords = 0;
         for($i=5; $i < $N-3; $i++){
@@ -234,7 +234,7 @@ DEPT_STR;
             $nRecords++;
             
             $line  = trim($lines[$i]);
-            $new = array_fill_keys(Muller1083::TMP_FIELDS, '');
+            $new = array_fill_keys(AFD5medics::TMP_FIELDS, '');
             $new['NR'] = trim(mb_substr($line, 0, 5));
             $new['SAMPLE'] = trim(mb_substr($line, 5, 11));
             $new['GNR'] = trim(mb_substr($line, 16, 6));
@@ -333,7 +333,7 @@ DEPT_STR;
         }
         
         $report = "--- muller1083 raw2tmp ---\n";
-        $outfile = Muller1083::tmpFilename();
+        $outfile = AFD5medics::tmpFilename();
         $dir = dirname($outfile);
         if(!is_dir($dir)){
             mkdir($dir, 0755, true);
@@ -341,7 +341,7 @@ DEPT_STR;
         file_put_contents($outfile, $res);
         $report .=  "Generated $nRecords records in $outfile\n";
         
-        $outfile = Muller1083::tmpRawFilename();
+        $outfile = AFD5medics::tmpRawFilename();
         file_put_contents($outfile, $res_raw);
         $report .=  "Generated $nRecords records in $outfile\n";
         

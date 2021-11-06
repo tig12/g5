@@ -3,7 +3,7 @@
     Transfers information from
     data/db/init/newalch-tweak/muller-402-it-writers.yml
     to
-    tmp/newalch/muller-402-it-writers.csv
+    data/data/tmp/muller/1-writers/muller1-402-writers.csv
     Updates the csv file with the values found in the yaml file.
     
     @license    GPL
@@ -48,7 +48,7 @@ class tweak2tmp implements Command {
             $tweaks[$MUID] = $record;
         }
         
-        $target = Muller402::loadTmpFile_id();
+        $target = AFD1writers::loadTmpFile_id();
         
         $keys = array_keys(current($target));
         $res = implode(G5::CSV_SEP, $keys) . "\n";
@@ -70,7 +70,7 @@ class tweak2tmp implements Command {
             $res .= implode(G5::CSV_SEP, $row) . "\n";
         }
         
-        $targetFile = Muller402::tmpFilename();
+        $targetFile = AFD1writers::tmpFilename();
         file_put_contents($targetFile, $res);
                                              
         $report .= "Updated $N records of $targetFile\n";

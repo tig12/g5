@@ -208,7 +208,7 @@
 208 STEHLE, Sophie (Sophia Anna Paula)          15.05.1838 03.15       LMT  D   Sigmaringen                     48 N 05 009 E 13 AR 06 14       SE N
 209 STOCKER, Helene                             13.11.1869 03.00       LMT  D   Elberfeld                       51 N 16 007 E 12 AR 02 13       SE N
 210 TAILLEFERRE, Germaine                       19.04.1892 01.00 -0.16      F   St. Maur (Paris)                48 N 47 002 E 29 AR 04 12       SG G
-211 TAUBER-ARP, Sophie *TAEUBER                 19.01.1889 04.00 -0.50      CH  Davos (Graubünden)             46 N 48 009 E 50 AR 08 238      SE N
+211 TAUBER-ARP, Sophie *TAEUBER                 19.01.1889 04.00 -0.50      CH  Davos (Graubünden)              46 N 48 009 E 50 AR 08 238      SE N
 212 TESCHEMACHER, Margarete                     03.03.1903 11.30 -1.00      D   Köln                            50 N 57 006 E 57 AR 06 23       SE N
 213 TEUSCH, Christine                           11.10.1888 17.30       LMT  D   Köln                            50 N 57 006 E 57 WA 04 13       SE N
 214 TIBURTIUS, Franziska                        24.01.1643 04.17       LMT  D   Bisdamitz (Rigen)               54 N 25 013 E 26 SC 04 14       SE N

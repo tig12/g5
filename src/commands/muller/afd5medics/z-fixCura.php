@@ -59,12 +59,12 @@ class fixCura implements Command {
     private static function fix_names($file, $action){
         $report = '';
         
-        $curaFile = Cura::loadTmpCsv_num($file); // keys = NUM
+        $curaFile = LERRCP::loadTmpCsv_num($file); // keys = NUM
         
         $mulPrefix = ($file == 'A2' ? 'SA2' : 'ND1');
         
         // $mulFile contains only records common with A2 and E1
-        $tmp = Muller1083::loadTmpFile();
+        $tmp = AFD5medics::loadTmpFile();
         $mulFile = []; // keys = NUM
         foreach($tmp as $mulrow){
             $gnr = $mulrow['GNR'];
@@ -108,7 +108,7 @@ class fixCura implements Command {
             $report .= "It will restore $nRestoredNames unknown names in $file\n";
         }
         else{
-            $destFile = Cura::tmpFilename($file);
+            $destFile = LERRCP::tmpFilename($file);
             file_put_contents($destFile, $res);
             $report .= "$N records modified in $destFile\n";
             $report .= "$nRestoredNames unknown names restored in $file\n";
@@ -121,12 +121,12 @@ class fixCura implements Command {
     private static function fix_days($file, $action){
         $report = '';
         
-        $curaFile = Cura::loadTmpCsv_num($file); // keys = NUM
+        $curaFile = LERRCP::loadTmpCsv_num($file); // keys = NUM
         
         $mulPrefix = ($file == 'A2' ? 'SA2' : 'ND1');
         
         // $mulFile contains only records common with A2 and E1
-        $tmp = Muller1083::loadTmpFile();
+        $tmp = AFD5medics::loadTmpFile();
         $mulFile = []; // keys = NUM
         foreach($tmp as $mulrow){
             $gnr = $mulrow['GNR'];
@@ -173,7 +173,7 @@ class fixCura implements Command {
             $report .= "An execution with 'update' will modify $nDateFixed records\n";
         }
         else{
-            $destFile = Cura::tmpFilename($file);
+            $destFile = LERRCP::tmpFilename($file);
             file_put_contents($destFile, $res);
             $report .= "$nDateFixed records modified in $destFile\n";
         }

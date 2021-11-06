@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Generates data/output/history/1993-muller-women/muller-234-women.csv
+    Generates data/output/history/1993-muller3-women/muller-234-women.csv
     
     @license    GPL
     @history    2021-08-14 20:01:49+02:00, Thierry Graff : Creation
@@ -20,7 +20,7 @@ class export implements Command {
         Directory where the generated files are stored
         Relative to directory specified in config.yml by dirs / output
     **/
-    const OUTPUT_DIR = 'history' . DS . '1993-muller-women';
+    const OUTPUT_DIR = 'history' . DS . '1993-muller3-women';
     
     const OUTPUT_FILE = 'muller-234-women.csv';
     
@@ -46,9 +46,9 @@ class export implements Command {
         
         $report = '';
         
-        $g = Group::getBySlug(AFD3::GROUP_SLUG); // DB
+        $g = Group::getBySlug(AFD3women::GROUP_SLUG); // DB
         
-        self::$sourceSlug = AFD3::LIST_SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
+        self::$sourceSlug = AFD3women::LIST_SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
 
         $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . self::OUTPUT_FILE;
         

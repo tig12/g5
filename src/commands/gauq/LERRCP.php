@@ -9,9 +9,11 @@
 ********************************************************************************/
 namespace g5\commands\gauq;
 
+use g5\app\Config;
 use g5\commands\gauq\Cura;
 use g5\model\Group;
 use g5\model\Source;
+use tiglib\arrays\csvAssociative;
 
 class LERRCP {
     
@@ -31,7 +33,7 @@ class LERRCP {
             - nb of pages (empty sting when unknown)
             - array of author names
             - title of the booklet (TODO check the original title)
-        Source http://cura.free.fr/gauq/902gdG.html
+        Source https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdG.html
         For documentation purpose only.
     **/
     const LERRCP_INFOS = [
@@ -194,4 +196,102 @@ class LERRCP {
         return $g;
     }
     
+    // *********************** Raw files manipulation ***********************
+    
+    /** 
+        Computes the name of the directory where raw cura5 files are stored
+    **/
+    public static function rawDirname(){
+        return Config::$data['dirs']['raw'] . DS . 'gauq' . DS . 'lerrcp';
+    }
+    
+    /** 
+        Computes the name of a html file downloaded from cura.free.fr
+        and locally stored in directory data/raw/gauq/lerrcp
+        @param  $datafile : a string like 'A1'
+        @return filename, a string like '902gdA1y.html' or '902gdB1.html'
+    **/
+    public static function rawFilename($datafile){
+        return '902gd' . $datafile . (substr($datafile, 0, 1) == 'A' ? 'y' : '') . '.html';
+    }
+    
+    /** 
+        Reads a html file downloaded from cura.free.fr
+        and locally stored in directory data/raw/gauq/lerrcp
+        @param  $datafile : string like 'A1'
+        @return The content of the file
+    **/
+    public static function loadRawFile($datafile){
+        $rawFile = self::rawDirname() . DS . self::rawFilename($datafile);
+        $tmp = @file_get_contents($rawFile);
+        if(!$tmp){
+            $msg = "ERROR : Unable to read file $rawFile\n"
+                . "Check that config.yml indicates a correct path\n";
+            throw new \Exception($msg);
+        }
+        return utf8_encode($tmp);
+    }
+    
+    // *********************** Tmp files manipulation ***********************
+    
+    /**
+        Returns the name of a tmp file, eg. data/tmp/gauq/lerrcp/A1.csv
+        @param  $datafile : a string like 'A1'
+    **/
+    public static function tmpDirname(){
+        return Config::$data['dirs']['tmp'] . DS . 'gauq' . DS . 'lerrcp';
+    }
+    
+    /**
+        Returns the name of a tmp file, eg. data/tmp/gauq/lerrcp/A1.csv
+        @param  $datafile : a string like 'A1'
+    **/
+    public static function tmpFilename($datafile){
+        return self::tmpDirname() . DS . $datafile . '.csv';
+    }
+    
+    /**
+        Loads a tmp file in a regular array
+        Each element contains the person fields in an assoc. array
+        @param  $datafile : a string like 'A1'
+    **/
+    public static function loadTmpFile($datafile){
+        return csvAssociative::compute(self::tmpFilename($datafile));
+    }
+
+    /**
+        Loads a tmp file in an asssociative array.
+            keys = cura ids (NUM)
+            values = assoc array containing the fields
+        @param      $datafile : a string like 'A1'
+    **/
+    public static function loadTmpFile_num($datafile){
+        $curaRows1 = self::loadTmpFile($datafile);
+        $res = [];
+        foreach($curaRows1 as $row){
+            $res[$row['NUM']] = $row;
+        }
+        return $res;
+    }
+    
+    // *********************** Tmp raw files manipulation ***********************
+    
+    /**
+        Returns the name of a "tmp raw file", eg. data/tmp/gauq/lerrcp/A1-raw.csv
+        (files used to keep trace of the original raw values).
+        @param  $datafile : a string like 'A1'
+    **/
+    public static function tmpRawFilename($datafile){
+        return Config::$data['dirs']['tmp'] . DS . 'gauq' . DS . 'lerrcp' . DS . $datafile . '-raw.csv';
+    }
+    
+    /**
+        Loads a "tmp raw file" in a regular array
+        Each element contains the person fields in an assoc. array
+        @param  $datafile : a string like 'A1'
+    **/
+    public static function loadTmpRawFile($datafile){
+        return csvAssociative::compute(self::tmpRawFilename($datafile));
+    }
+
 } // end class

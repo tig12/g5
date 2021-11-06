@@ -82,8 +82,8 @@ class tmp2db implements Command {
         
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
-        $lines = Cura::loadTmpFile($datafile);
-        $linesRaw = Cura::loadTmpRawFile($datafile);
+        $lines = LERRCP::loadTmpFile($datafile);
+        $linesRaw = LERRCP::loadTmpRawFile($datafile);
         $nInsert = 0;
         $nDuplicates = 0;
         $N = count($lines);

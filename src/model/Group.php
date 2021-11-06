@@ -34,10 +34,19 @@ class Group{
     /** Boolean indicating if data['person-members'] have already been computed **/
     public $personMembersComputed;
     
-    
-    public function __construct(){
+    /** 
+        @param  $humanFile Path to yaml file relative to data/db/group
+    **/
+    public function __construct($humanFile=''){
         $this->personMembersComputed = false;
+        // parse empty model file
         $this->data = yaml_parse_file(__DIR__ . DS . 'Group.yml');
+        // human
+        if($humanFile){
+            $human = yaml_parse_file($humanFile);
+            $this->data = array_replace_recursive($this->data, $human);
+echo "\n<pre>"; print_r($this->data); echo "</pre>\n"; exit;
+        }
     }
     
     // ***********************************************************************

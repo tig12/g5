@@ -60,7 +60,7 @@ class tmp2db implements Command {
             $report .= "Inserted source " . $lerrcpSource->data['slug'] . "\n";
         }
         
-        // source corresponding to CURA5 - insert if does not already exist
+        // source corresponding to cura5 - insert if does not already exist
         $curaSource = Source::getBySlug(Cura::SOURCE_SLUG); // DB
         if(is_null($curaSource)){
             $curaSource = new Source(Cura::SOURCE_DEFINITION_FILE);
@@ -96,8 +96,8 @@ class tmp2db implements Command {
         
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
-        $lines = Cura::loadTmpFile($datafile);
-        $linesRaw = Cura::loadTmpRawFile($datafile);
+        $lines = LERRCP::loadTmpFile($datafile);
+        $linesRaw = LERRCP::loadTmpRawFile($datafile);
         $nInsert = 0;
         $nDuplicates = 0;
         $N = count($lines);

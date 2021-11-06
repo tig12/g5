@@ -50,26 +50,26 @@ class tmp2db implements Command {
             $timesReport = '';
         }
         
-        // source of Müller's booklet AFD3 - insert if does not already exist
-        $bookletSource = Source::getBySlug(AFD3::BOOKLET_SOURCE_SLUG); // DB
+        // source of Müller's booklet AFD3women - insert if does not already exist
+        $bookletSource = Source::getBySlug(AFD3women::BOOKLET_SOURCE_SLUG); // DB
         if(is_null($bookletSource)){
-            $bookletSource = new Source(AFD3::BOOKLET_SOURCE_DEFINITION_FILE);
+            $bookletSource = new Source(AFD3women::BOOKLET_SOURCE_DEFINITION_FILE);
             $bookletSource->insert(); // DB
             $report .= "Inserted source " . $bookletSource->data['slug'] . "\n";
         }
         
         // source of muller-afd3-women.txt - insert if does not already exist
-        $source = Source::getBySlug(AFD3::LIST_SOURCE_SLUG); // DB
+        $source = Source::getBySlug(AFD3women::LIST_SOURCE_SLUG); // DB
         if(is_null($source)){
-            $source = new Source(AFD3::LIST_SOURCE_DEFINITION_FILE);
+            $source = new Source(AFD3women::LIST_SOURCE_DEFINITION_FILE);
             $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         
         // group
-        $g = Group::getBySlug(AFD3::GROUP_SLUG); // DB
+        $g = Group::getBySlug(AFD3women::GROUP_SLUG); // DB
         if(is_null($g)){
-            $g = AFD3::getGroup();
+            $g = AFD3women::getGroup();
             $g->data['id'] = $g->insert(); // DB
             $report .= "Inserted group " . $g->data['slug'] . "\n";
         }
@@ -85,8 +85,8 @@ class tmp2db implements Command {
         
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
-        $lines = AFD3::loadTmpFile();
-        $linesRaw = AFD3::loadTmpRawFile();
+        $lines = AFD3women::loadTmpFile();
+        $linesRaw = AFD3women::loadTmpRawFile();
         $N = count($lines);
         $t1 = microtime(true);
         for($i=0; $i < $N; $i++){
@@ -94,7 +94,7 @@ class tmp2db implements Command {
             $lineRaw = $linesRaw[$i];
             $muid = (string)$line['MUID'];
             $mullerId = AFD::mullerId($source->data['slug'], $line['MUID']);
-            if(!isset(AFD3::GQ_MATCH[$muid])){
+            if(!isset(AFD3women::GQ_MATCH[$muid])){
                 // Person not in Gauquelin data
                 $p = new Person();
                 $new = [];
@@ -114,8 +114,8 @@ class tmp2db implements Command {
                 $new['birth']['place']['lg'] = $line['LG'];
                 $new['birth']['place']['lat'] = $line['LAT'];
                 //
-                if(AFD3::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
-                    $p->addOccus([ AFD3::OCCUS[$line['OCCU']] ]);
+                if(AFD3women::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
+                    $p->addOccus([ AFD3women::OCCUS[$line['OCCU']] ]);
                 }
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $muid);
@@ -128,8 +128,8 @@ class tmp2db implements Command {
                     $source->data['slug'] => $muid,
                     AFD::SOURCE_SLUG => $mullerId,
                 ];
-                if(AFD3::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
-                    $new['occus'] = [ AFD3::OCCUS[$line['OCCU']] ];
+                if(AFD3women::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
+                    $new['occus'] = [ AFD3women::OCCUS[$line['OCCU']] ];
                 }
                 $p->addHistory(
                     command: 'muller afd3women tmp2db',
@@ -145,7 +145,7 @@ class tmp2db implements Command {
                 // common lines come from A1 A2 A4 A5 A6 D10 E3
                 $new = [];
                 $new['sex'] = 'F';
-                $gqid = AFD3::GQ_MATCH[$muid];
+                $gqid = AFD3women::GQ_MATCH[$muid];
                 $tmp = explode('-', $gqid);
                 $curaSourceSlug = LERRCP::datafile2sourceSlug($tmp[0]);
                 $NUM = $tmp[1];
@@ -238,8 +238,8 @@ echo "NOTE: $localReport_html\n";
                 if($p->data['birth']['place']['c2'] == '' && $line['C2'] != ''){
                     $new['place']['c2'] = $line['C2'];
                 }
-                if(AFD3::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
-                    $p->addOccus([ AFD3::OCCUS[$line['OCCU']] ]);
+                if(AFD3women::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
+                    $p->addOccus([ AFD3women::OCCUS[$line['OCCU']] ]);
                 }
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $muid);
@@ -252,8 +252,8 @@ echo "NOTE: $localReport_html\n";
                     $source->data['slug'] => $muid,
                     AFD::SOURCE_SLUG => $mullerId,
                 ];
-                if(AFD3::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
-                    $new['occus'] = [ AFD3::OCCUS[$line['OCCU']] ];
+                if(AFD3women::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
+                    $new['occus'] = [ AFD3women::OCCUS[$line['OCCU']] ];
                 }
                 $p->addHistory(
                     command: 'muller afd3women tmp2db',

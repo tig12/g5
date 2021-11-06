@@ -61,11 +61,11 @@ class AFD {
     }
     
     // ****************************************************
-    // Code shared by several AFD files.    
+    // Code shared by several Müller files.    
     // ****************************************************
     
     /** 
-        Common to AFD2 (famous men) and AFD3 (famous women).
+        Common to AFD2men (famous men) and AFD3women (famous women).
         @param  $str String like '010 E 19'.
         @return Longitude expressed in decimal degrees.
     **/
@@ -79,7 +79,7 @@ class AFD {
     }
     
     /** 
-        Common to AFD2 (famous men) and AFD3 (famous women).
+        Common to AFD2men (famous men) and AFD3women (famous women).
         @param  $str String like '50 N 59'.
         @return Latitude expressed in decimal degrees.
     **/
@@ -94,7 +94,7 @@ class AFD {
     }
     
     /** 
-        Common to AFD2 (famous men) and AFD3 (famous women).
+        Common to AFD2men (famous men) and AFD3women (famous women).
         @param  $str String like '21.30'.
         @return String like '21:30'.
     **/
@@ -103,7 +103,7 @@ class AFD {
     }
     
     /** 
-        Common to AFD2 (famous men) and AFD3 (famous women).
+        Common to AFD2men (famous men) and AFD3women (famous women).
         @param  $str String like '23.01.1840'.
         @return String like '1840-01-23'.
     **/
@@ -117,7 +117,7 @@ class AFD {
     }
     
     /** 
-        Common to AFD2 (famous men) and AFD3 (famous women).
+        Common to AFD2men (famous men) and AFD3women (famous women).
         @param  $str String like '-0.83'.
         @return String like '00:50'.
     **/

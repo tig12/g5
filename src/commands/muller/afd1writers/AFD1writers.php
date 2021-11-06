@@ -10,11 +10,12 @@ namespace g5\commands\muller\afd1writers;
 
 use g5\app\Config;
 use g5\model\DB5;
-use g5\model\{Source, Group};
+use g5\model\Source;
+use g5\model\Group;
 use tiglib\time\seconds2HHMMSS;
 use tiglib\arrays\csvAssociative;
 
-class Muller402 {
+class AFD1writers {
     
     // TRUST_LEVEL not defined, using value of class Newalch
     
@@ -57,7 +58,7 @@ class Muller402 {
         'LG',
     ];
     
-    /** Names of the columns of raw file data/tmp/newalch/muller-402-it-writers.csv **/
+    /** Names of the columns of raw file data/tmp/muller/1-writers/muller1-402-writers.csv **/
     const TMP_FIELDS = [
         'MUID',
         'GQID',
@@ -91,7 +92,7 @@ class Muller402 {
     // *********************** Group management ***********************
     
     /**
-        Returns a Group object for Muller402.
+        Returns a Group object for AFD1writers.
     **/
     public static function getGroup(): Group {
         $g = new Group();
@@ -109,7 +110,7 @@ class Muller402 {
         @return Path to the raw file 5muller_writers.csv coming from newalch
     **/
     public static function rawFilename(){
-        return implode(DS, [Config::$data['dirs']['raw'], 'newalchemypress.com', '05-muller-writers', '5muller_writers.csv']);
+        return implode(DS, [Config::$data['dirs']['raw'], 'muller', '1-writers', '5muller_writers.csv']);
     }
     
     /** Loads 5muller_writers.csv in a regular array **/
@@ -120,10 +121,10 @@ class Muller402 {
     // *********************** Tmp file manipulation ***********************
     
     /**
-        @return Path to the csv file stored in data/tmp/newalch/
+        @return Path to the csv file stored in data/tmp/muller/1-writers/
     **/
     public static function tmpFilename(){
-        return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', 'muller-402-it-writers.csv']);
+        return implode(DS, [Config::$data['dirs']['tmp'], 'muller', '1-writers', 'muller1-402-writers.csv']);
     }
     
     /**
@@ -151,11 +152,11 @@ class Muller402 {
     // *********************** Tmp raw file manipulation ***********************
     
     /**
-        Returns the name of a "tmp raw file" : data/tmp/newalch/muller-402-it-writers-raw.csv
+        Returns the name of a "tmp raw file" : data/tmp/muller/1-writers/muller1-402-writers-raw.csv
         (files used to keep trace of the original raw values).
     **/
     public static function tmpRawFilename(){
-        return implode(DS, [Config::$data['dirs']['tmp'], 'newalch', 'muller-402-it-writers-raw.csv']);
+        return implode(DS, [Config::$data['dirs']['tmp'], 'muller', '1-writers', 'muller1-402-writers-raw.csv']);
     }
     
     /**
@@ -167,7 +168,7 @@ class Muller402 {
     }
 
     // *********************** time / space functions ***********************
-    // shared by Muller402 and Muller100
+    // shared by AFD1writers and AFD1writers100
     
     /**
         Conversion of TZ offset found in newalch file to standard sHH:MM offset.
@@ -206,7 +207,7 @@ class Muller402 {
         	    return '+00:37';
         	break;
             default:
-                throw new \Exception("Timezone offset not handled in Muller402 : $offset");
+                throw new \Exception("Timezone offset not handled in AFD1writers : $offset");
         }
     }
 }// end class
