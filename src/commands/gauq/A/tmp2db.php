@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Loads files data/tmp/cura/A*.csv and A-raw.csv in database.
+    Loads files data/tmp/gauq/lerrcp/A*.csv and A-raw.csv in database.
     Must be exectued in alphabetical order (first A1, then A2 ... A6)
     to respect the defition of Gauquelin id (see https://tig12.github.io/gauquelin5/cura.html)
     

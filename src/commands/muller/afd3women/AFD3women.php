@@ -24,12 +24,12 @@ class AFD3women {
     
     /**
         Path to the yaml file containing the characteristics of the source describing file
-        data/raw/muller/afd3-women/muller-afd3-women.txt
+        data/raw/muller/3-women/muller3-234-women.txt
         Relative to directory data/db/source
     **/
     const LIST_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd3-women-list.yml';
 
-    /** Slug of source muller-afd3-women.txt **/
+    /** Slug of source muller3-234-women.txt **/
     const LIST_SOURCE_SLUG = 'afd3';
     
     /**

@@ -29,7 +29,7 @@ class A{
         'CITY',
     ];
     
-    /** Names of the columns of A files in data/tmp/cura **/
+    /** Names of the columns of A files in data/tmp/gauq/lerrcp **/
     const TMP_FIELDS = [
         'NUM',
         'FNAME',

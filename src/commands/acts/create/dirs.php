@@ -14,10 +14,6 @@ use g5\commands\acts\Acts;
 
 class dirs implements Command { 
     
-    /** 
-        Possible values of the command, for ex :
-        php run-g5.php newalch muller1083 look gnr
-    **/
     const POSSIBLE_PARAMS = [
         'y' => "Create directories YYYY/MM/DD for a date range\nex: run-g5.php acts create dirs years 1792 2020",
     ];

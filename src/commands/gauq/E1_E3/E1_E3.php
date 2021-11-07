@@ -11,7 +11,7 @@ class E1_E3{
     
     // TRUST_LEVEL not defined, using value of class Cura
     
-    /** Fields of data/raw/cura/E1.csv and E3.csv **/
+    /** Fields of data/raw/gauq/lerrcp/E1.csv and E3.csv **/
     const RAW_FIELDS = [
         'NUM',
         'PRO',
@@ -25,7 +25,7 @@ class E1_E3{
         'COD',
     ];
     
-    /** Fields of data/tmp/cura/E1.csv and E3.csv **/
+    /** Fields of data/tmp/gauq/lerrcp/E1.csv and E3.csv **/
     const TMP_FIELDS = [
         'NUM',
         'OCCU',

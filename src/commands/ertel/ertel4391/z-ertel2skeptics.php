@@ -38,7 +38,7 @@ class ertel2skeptics implements Command {
     ];
     
     /** 
-        Contents of 5-tmp/cura-csv/A1.csv
+        Contents of data/tmp/gauq/lerrcp/A1.csv
         Associative array ; keys = Gauquelin NUM
     **/
     private static $curaA1 = [];

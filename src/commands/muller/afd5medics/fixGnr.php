@@ -50,12 +50,12 @@ class fixGnr implements Command {
         // assoc arrays
         $a2s = @LERRCP::loadTmpFile_num('A2'); // keys = NUM
         if(empty($a2s)){
-            return "File data/tmp/cura/A2.csv doesn't exist\n"
+            return "File data/tmp/gauq/lerrcp/A2.csv doesn't exist\n"
                 . "Build this file before executing fixGnr \n";
         }
         $e1s = @LERRCP::loadTmpFile_num('E1'); // keys = NUM
         if(empty($e1s)){
-            return "File data/tmp/cura/E1.csv doesn't exist\n"
+            return "File data/tmp/gauq/lerrcp/E1.csv doesn't exist\n"
                 . "Build this file before executing fixGnr \n";
         }
         $MullerCsv = AFD5medics::loadTmpFile_nr(); // keys = NR

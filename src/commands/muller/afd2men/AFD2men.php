@@ -24,12 +24,12 @@ class AFD2men {
     
     /**
         Path to the yaml file containing the characteristics of the source describing file
-        data/raw/muller/afd2-men/muller-afd2-men.txt
+        data/raw/muller/2-men/muller2-612-men.txt
         Relative to directory data/db/source
     **/
     const LIST_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd2-men-list.yml';
 
-    /** Slug of source muller-afd2-men.txt **/
+    /** Slug of source muller2-612-men.txt **/
     const LIST_SOURCE_SLUG = 'afd2';
     
     /**

@@ -19,12 +19,12 @@ class AFD1writers100 {
     
     /**
         Path to the yaml file containing the characteristics of the source describing file
-        data/raw/newalchemypress.com/05-muller-writers/muller-afd1-100-writers.txt
+        data/raw/muller/1-writers/muller1-100-writers.txt
         Relative to directory data/db/source
     **/
     const LIST_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd1-writers-list-100.yml';
 
-    /** Slug of source muller-afd1-100-writers.txt **/
+    /** Slug of source muller1-100-writers.txt **/
     const LIST_SOURCE_SLUG = 'afd1-100';
     
     // constants BOOKLET_SOURCE_DEFINITION_FILE and BOOKLET_SOURCE_SLUG not defined here
@@ -86,7 +86,7 @@ class AFD1writers100 {
     // *********************** Raw files manipulation ***********************
     
     /**
-        @return Path to the raw file muller-afd1-100-writers.txt
+        @return Path to the raw file muller1-100-writers.txt
     **/
     public static function rawFilename(){
         return implode(DS, [Config::$data['dirs']['raw'], 'muller', '1-writers', 'muller1-100-writers.txt']);

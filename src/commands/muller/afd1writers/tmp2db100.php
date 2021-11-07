@@ -45,7 +45,7 @@ class tmp2db100 implements Command {
         
         $report = "--- AFD1writers tmp2db100 ---\n";
         
-        // source of muller-afd1-100-writers.txt - insert if does not already exist
+        // source of muller1-100-writers.txt - insert if does not already exist
         $source = Source::getBySlug(AFD1writers100::LIST_SOURCE_SLUG); // DB
         if(is_null($source)){
             $source = new Source(AFD1writers100::LIST_SOURCE_DEFINITION_FILE);

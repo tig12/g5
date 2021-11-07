@@ -46,7 +46,7 @@
 046 SIDONIE, Gabrielle (Colette)                28.01.1873 22.00       LMT  F   Saint-Sauveur-en-Puisaye (Yon.  47 N 35 003 E 10 AR 01 12345678 SG G
 047 COSSOTTO, Fiorenza                          22.04.1935 03.00 -1.00      I   Crescentino (Turin)             45 N 04 007 E 41 AR 06 23       SE N
 048 COURTHS-MAHLER, Hedwig *MAHLER              18.02.1867 13.30       LMT  D   Nebra (Thüringen)               51 N 17 011 E 35 AR 01 2346     SE N
-049 CRESPIN, Regine                             23.02.1927 02.00  0.00      F   Marseille                       43 N 18 005 E 24 AR 05 235      SG G
+049 CRESPIN, Regine                             23.02.1927 02.00  0.00      F   Marseille                       43 N 18 005 E 24 AR 06 235      SG G
 050 DARRIEUX, Danièle                           01.05.1917 21.00 -1.00      F   Bordeaux                        44 N 51 000 E 35 AR 03 237      SG G
 051 DAVIDIS, Henriette                          01.03.1801 19.30 -0.29 LAT  D   Wengern Westfalen               51 N 22 007 E 28 AR 02 34       SE N
 052 DAY, Doris (KAPPELHOFF, Doris VON)          03.04.1922 16.30  6.00      USA Cincinnati (Ohio)               39 N 08 084 W 25 AR 03 237      SG G

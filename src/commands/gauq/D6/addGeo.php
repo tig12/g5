@@ -1,10 +1,10 @@
 <?php
 /********************************************************************************
-    Add missing geographic informations to data/tmp/cura/D6.csv.
+    Add missing geographic informations to data/tmp/gauq/lerrcp/D6.csv.
     Uses geonames.org web service.
     
     This code operates on file data/tmp/geonames/D6.csv
-    And then copies info from this file to data/tmp/cura/D6.csv
+    And then copies info from this file to data/tmp/gauq/lerrcp/D6.csv
     This is done to prevent accidental erasure of previous calls to geonames web service : 
         - call raw2tmp
         - call addGeo
@@ -37,7 +37,7 @@ class addGeo implements Command {
         
     // ******************************************************
     /**
-        Add missing geographic informations to data/tmp/geonames/D6.csv and 5-tmp/cura-csv/D6.csv.
+        Add missing geographic informations to data/tmp/geonames/D6.csv and data/tmp/gauq/lerrcp/D6.csv.
     **/
     public static function execute($params=[]): string{
         
@@ -51,8 +51,8 @@ class addGeo implements Command {
         //
         // TEMP CODE
         //
-        // Fills CY in data/tmp/cura/D6.csv 
-        // from data/build/geonames/D6.csv
+        // Fills CY in data/tmp/gauq/lerrcp/D6.csv 
+        // from data/db/init/geonames/D6.csv
         // TEMPORARY MECHANISM - 
         $rows = LERRCP::loadTmpFile_num($datafile);
         $rowsGeo = csvAssociative::compute('data/db/init/geonames/D6.csv');
@@ -134,7 +134,7 @@ class addGeo implements Command {
             }
             // Write back the csv 
             file_put_contents($geofile, $res_geo); // file in data/tmp/geonames/
-            self::geo2csv($geofile, $csvfile); // copy results back in data/tmp/cura/
+            self::geo2csv($geofile, $csvfile); // copy results back in data/tmp/gauq/lerrcp
             dosleep::execute(1.5); // keep cool with geonames.org web service
         } // end while true
         
@@ -148,10 +148,10 @@ class addGeo implements Command {
     
     // ******************************************************
     /**                                    
-        Transfers geo informations from data/tmp/geonames/D6.csv to data/tmp/cura/D6.csv
+        Transfers geo informations from data/tmp/geonames/D6.csv to data/tmp/gauq/lerrcp/D6.csv
         Replaces copy($geofile, $csvfile) to transfer only relevant columns.
         This function became necessary when modifs in raw2tmp rendered data/tmp/geonames/D6.csv column names obsolete
-        and not compatible with new version of data/tmp/cura/D6.csv
+        and not compatible with new version of data/tmp/gauq/lerrcp/D6.csv
         
     **/
     private static function geo2csv($geofile, $csvfile){

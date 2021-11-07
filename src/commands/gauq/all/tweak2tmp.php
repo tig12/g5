@@ -1,7 +1,7 @@
 <?php
 /********************************************************************************
-    Transfers information from data/build/cura-tweak/ to data/tmp/cura/
-    Updates a file of data/tmp/cura/ with the values found in the yaml file containing tweaks.
+    Transfers information from data/build/cura-tweak/ to data/tmp/gauq/lerrcp
+    Updates a file of data/tmp/gauq/lerrcp/ with the values found in the yaml file containing tweaks.
     
     WARNING : this step must be done just after step raw2tmp.
     For example, if a date or a time is modified, should be done before step "legalTime"
@@ -62,7 +62,7 @@ class tweak2tmp implements Command {
             $tweaks[$NUM] = $record;
         }
         
-        // modify file in data/tmp/cura
+        // modify file in data/tmp/gauq/lerrcp
         
         $cura = LERRCP::loadTmpFile_num($datafile);
         $keys = array_keys(current($cura));

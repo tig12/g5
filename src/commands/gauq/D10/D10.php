@@ -11,7 +11,7 @@ class D10{
     
     // TRUST_LEVEL not defined, using value of class Cura
 
-    /** Fields of data/raw/cura/D10.csv **/
+    /** Fields of data/raw/gauq/lerrcp/D10.csv **/
     const RAW_FIELDS = [
         'NUM',
         'NAME',
@@ -26,7 +26,7 @@ class D10{
         'CICO',
     ];
 
-    /** Fields of data/tmp/cura/D10.csv **/
+    /** Fields of data/tmp/gauq/lerrcp/D10.csv **/
     const TMP_FIELDS = [
         'NUM',
         'FNAME',

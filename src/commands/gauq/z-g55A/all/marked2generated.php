@@ -2,11 +2,11 @@
 /********************************************************************************
     Generates the files in 5-tmp/g55-generated/
     from files in
-    - 3-edited/cura-marked/
+    - data/db/init/cura-marked/
     and
-    - 5-tmp/cura-csv/
-    Takes an exact copy of files in 5-tmp/cura-csv/
-    Uses files from 3-edited/cura-marked/ to filter and dispatch in different resulting files in g55-generated
+    - data/tmp/gauq/lerrcp/
+    Takes an exact copy of files in data/tmp/gauq/lerrcp/
+    Uses files from data/db/init/cura-marked/ to filter and dispatch in different resulting files in g55-generated
     Adds a column ORIGIN
 
     Called by : php run-g5.php g55 <filenamme> marked2generated
@@ -71,7 +71,7 @@ class marked2generated implements Command {
         // $sort_field : necessary because "570 sportif" is listed by sport in Gauquelin book
         // Other fields are sorted alphabetically
         // $sort_field permits to have a convenient list to compare with the book.
-        // here simplification : files in 5-tmp/cura-csv/
+        // here simplification : files in data/tmp/gauq/lerrcp/
         // have first field = NUM and second field = FNAME
         $sort_field = ($groupCode == '570SPO' ? 0 : 1);
         $res = sortByKey::compute($res, $sort_field);

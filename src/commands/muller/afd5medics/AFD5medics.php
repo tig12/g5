@@ -80,7 +80,7 @@ class AFD5medics {
         'NIENSA'    => '',
     ];
     
-    /** Names of the columns of data/tmp/cura/1083MED.csv **/
+    /** Names of the columns of data/tmp/muller/5-medics/muller5-1083-medics.csv **/
     const TMP_FIELDS = [
         'NR',
         'SAMPLE',

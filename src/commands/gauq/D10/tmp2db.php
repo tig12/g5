@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Loads files data/tmp/cura/D10.csv and D10-raw.csv in database.
+    Loads files data/tmp/gauq/lerrcp/D10.csv and D10-raw.csv in database.
     
     @license    GPL
     @history    2020-08-19 23:55:18+02:00, Thierry Graff : creation

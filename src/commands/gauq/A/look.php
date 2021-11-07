@@ -60,7 +60,7 @@ class look implements Command {
     }
     
     /**
-        Counts records in data/tmp/cura files.
+        Counts records in data/tmp/gauq/lerrcp files.
         @param  $datafile Useless here
     **/
     private static function look_count($datafile){

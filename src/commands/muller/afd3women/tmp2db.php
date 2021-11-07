@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Loads files data/tmp/muller/afd3-women/muller-afd3-women.csv in database.
+    Loads files data/tmp/muller/3-women/muller3-234-women.csv in database.
     
     @license    GPL
     @history    2021-07-31 07:27:19+02:00, Thierry Graff : creation
@@ -58,7 +58,7 @@ class tmp2db implements Command {
             $report .= "Inserted source " . $bookletSource->data['slug'] . "\n";
         }
         
-        // source of muller-afd3-women.txt - insert if does not already exist
+        // source of muller3-234-women.txt - insert if does not already exist
         $source = Source::getBySlug(AFD3women::LIST_SOURCE_SLUG); // DB
         if(is_null($source)){
             $source = new Source(AFD3women::LIST_SOURCE_DEFINITION_FILE);
@@ -199,6 +199,7 @@ class tmp2db implements Command {
                         $localReport_txt .= str_pad("Müller    $muid", 20) . "$multime {$line['FNAME']} - {$line['GNAME']}\n\n";
                         $localReport_html  = '<br>' . str_pad("Gauquelin $gqid", 20, '&nbsp;') . "$curatime\n";
                         $localReport_html .= '<br>' . str_pad("Müller    $muid", 20, '&nbsp;') . "$multime\n";
+/* 
 if($multime != $curatime){
     // code never executed as all times are equal
     $localReport_txt = "Gauquelin / Müller times different:\n" . $localReport_txt;
@@ -220,6 +221,7 @@ echo "NOTE: $localReport_html\n";
     $localReport_html = "Gauquelin and Müller have same time:\n" . $localReport_html;
     $p->addNote($localReport_html);
 }
+*/
                     }
                 }
                 // update fields that are more precise in muller234
@@ -283,5 +285,4 @@ echo "NOTE: $localReport_html\n";
         return $report;
     }
         
-}// end class    
-
+} // end class    

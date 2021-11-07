@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Import cura A files to csv file in data/tmp/cura
+    Import cura A files to csv file in data/tmp/gauq/lerrcp
     For each A file, 2 files are generated :
     - An.csv (ex A1.csv) - includes corrections
     - An-raw.csv (ex A1-raw.csv) - without corrections, to keep a trace of the original raw values
@@ -32,7 +32,7 @@ class raw2tmp implements Command {
     ];
     
     /** 
-        Parses one html cura file of serie A (locally stored in directory data/raw/cura.free.fr)
+        Parses one html cura file of serie A (locally stored in directory data/raw/gauq/lerrcp)
         
         Merges the original list (without names) with names contained in file 902gdN.html
         Merge is done using birthdate.

@@ -1,7 +1,7 @@
 <?php
 /********************************************************************************
-    Import data/raw/muller/afd3-women/muller-afd3-women.txt
-    to data/tmp/muller/afd3-women/muller-afd3-women.csv
+    Import data/raw/muller/3-women/muller3-234-women.txt
+    to data/tmp/muller/3-women/muller3-234-women.csv
     
     @license    GPL
     @history    2021-04-11, Thierry Graff : Creation

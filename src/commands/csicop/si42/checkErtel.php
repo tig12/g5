@@ -15,10 +15,6 @@ use tiglib\arrays\csvAssociative;
 
 class checkErtel implements Command {
     
-    /** 
-        Possible values of the command, for ex :
-        php run-g5.php newalch muller1083 look gnr
-    **/
     const POSSIBLE_PARAMS = [
         'date',
     ];

@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Adds field GEOID and corrects field PLACE to files of data/tmp/cura/A*.csv
+    Adds field GEOID and corrects field PLACE to files of data/tmp/gauq/lerrcp/A*.csv
     
     TODO Could add an entry in 'todo' field of persons without geoid (but useless)
     

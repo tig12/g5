@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Loads files data/tmp/muller/afd2-men/muller-afd2-men.csv in database.
+    Loads files data/tmp/muller/2-men/muller2-612-men.csv in database.
     
     @license    GPL
     @history    2021-09-19 18:05:53+02:00, Thierry Graff : creation
@@ -58,7 +58,7 @@ class tmp2db implements Command {
             $report .= "Inserted source " . $bookletSource->data['slug'] . "\n";
         }
         
-        // source of muller-afd2-men.txt - insert if does not already exist
+        // source of muller2-612-men.txt - insert if does not already exist
         $source = Source::getBySlug(AFD2men::LIST_SOURCE_SLUG); // DB
         if(is_null($source)){
             $source = new Source(AFD2men::LIST_SOURCE_DEFINITION_FILE);

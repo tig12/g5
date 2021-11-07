@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Imports file data/raw/cura.free.fr/902gdD10.html to data/tmp/cura/D10.csv
+    Imports file data/raw/gauq/lerrcp/902gdD10.html to data/tmp/gauq/lerrcp/D10.csv
     1398 Data of Successful Americans
     
     @license    GPL                  
