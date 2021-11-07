@@ -71,7 +71,7 @@ class raw2tmp implements Command {
         self::$n_missing_timezone = 0;
         self::$n_total = 0;
         $report = '';
-        $report .= "--- $datafile raw2tmp ---\n";
+        $report .= "--- gauq $datafile raw2tmp ---\n";
         //
         // parse first list (with birth date and place)
         //

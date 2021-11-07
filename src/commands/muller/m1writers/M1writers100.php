@@ -13,7 +13,7 @@ use g5\model\Source;
 use g5\model\Group;
 use tiglib\arrays\csvAssociative;
 
-class AFD1writers100 {
+class M1writers100 {
     
     // TRUST_LEVEL not defined, using value of class Newalch
     
@@ -28,7 +28,7 @@ class AFD1writers100 {
     const LIST_SOURCE_SLUG = 'afd1-100';
     
     // constants BOOKLET_SOURCE_DEFINITION_FILE and BOOKLET_SOURCE_SLUG not defined here
-    // (because they have the same values as AFD1writers)
+    // (because they have the same values as M1writers)
 
     /** Slug of the group in db **/
     const GROUP_SLUG = 'muller-afd1-100writers';
@@ -79,7 +79,7 @@ class AFD1writers100 {
         $g->data['name'] = "Müller 100 Italian writers";
         $g->data['description'] = "100 Italian writers without birth time, gathered by Arno Müller";
         $g->data['type'] = Group::TYPE_HISTORICAL;
-        $g->data['sources'] = [self::LIST_SOURCE_SLUG, AFD1writers::BOOKLET_SOURCE_SLUG];
+        $g->data['sources'] = [self::LIST_SOURCE_SLUG, M1writers::BOOKLET_SOURCE_SLUG];
         return $g;
     }
     

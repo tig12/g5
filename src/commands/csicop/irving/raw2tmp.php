@@ -28,7 +28,7 @@ class raw2tmp implements Command {
         $outfile = Irving::tmpFilename();
         $outfileRaw = Irving::tmpRawFilename();
         
-        $report =  "--- CSICOP Irving raw2tmp ---\n";
+        $report =  "--- csicop irving raw2tmp ---\n";
         
         $rows = Irving::loadRawFile();
         

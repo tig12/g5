@@ -24,7 +24,7 @@ class tweak2tmp implements Command {
         if(count($params) > 0){
             return "WRONG USAGE : useless parameter : {$params[2]}\n";
         }
-        $report = "--- muller1083 tweak2tmp ---\n";
+        $report = "--- muller m5medics tweak2tmp ---\n";
         $yamlfile = Config::$data['dirs']['init'] . DS . 'newalch-tweak' . DS . '1083MED.yml';
         
         // load tweaks in an assoc arrray (keys = NR)
@@ -47,7 +47,7 @@ class tweak2tmp implements Command {
             $tweaks[$NR] = $record;
         }
         
-        $target = AFD5medics::loadTmpFile_nr();
+        $target = M5medics::loadTmpFile_nr();
         
         $keys = array_keys(current($target));
         $res = implode(G5::CSV_SEP, $keys) . "\n";
@@ -69,7 +69,7 @@ class tweak2tmp implements Command {
             $res .= implode(G5::CSV_SEP, $row) . "\n";
         }
         
-        $targetFile = AFD5medics::tmpFilename();
+        $targetFile = M5medics::tmpFilename();
         file_put_contents($targetFile, $res);
                                              
         $report .= "Updated $N records of $targetFile\n";

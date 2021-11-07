@@ -37,17 +37,17 @@ class raw2tmp100 implements Command {
             . '\s+(?P<LEN>\d+)'
             . '/';
         
-        // TODO put in AFD1writers constants
-        $infile = AFD1writers100::rawFilename();
+        // TODO put in M1writers constants
+        $infile = M1writers100::rawFilename();
         $lines = file($infile);
         
-        $csvFields = AFD1writers100::TMP_FIELDS;
+        $csvFields = M1writers100::TMP_FIELDS;
         
-        $emptyNew = array_fill_keys(AFD1writers100::TMP_FIELDS, '');
-        $res = implode(G5::CSV_SEP, AFD1writers100::TMP_FIELDS) . "\n";
+        $emptyNew = array_fill_keys(M1writers100::TMP_FIELDS, '');
+        $res = implode(G5::CSV_SEP, M1writers100::TMP_FIELDS) . "\n";
         // to keep trace of original raw fields
-        $emptyNewRaw = array_fill_keys(AFD1writers100::RAW_FIELDS, '');
-        $resRaw = implode(G5::CSV_SEP, AFD1writers100::RAW_FIELDS) . "\n";
+        $emptyNewRaw = array_fill_keys(M1writers100::RAW_FIELDS, '');
+        $resRaw = implode(G5::CSV_SEP, M1writers100::RAW_FIELDS) . "\n";
         
         $N = 0;
         foreach($lines as $line){
@@ -73,7 +73,7 @@ class raw2tmp100 implements Command {
             $new['C2'] = $newRaw['C2'] = $m['c2'];
             $new['CY'] = 'IT';
             $new['LG'] = self::compute_lg($m['lg']);
-            $new['TZO'] = AFD1writers::compute_offset($m['tz'], $new['LG']);
+            $new['TZO'] = M1writers::compute_offset($m['tz'], $new['LG']);
             $newRaw['LG'] = $m['lg'];                                                                                    
             $new['LAT'] = self::compute_lat($m['lat']);
             $newRaw['LAT'] = $m['lat'];
@@ -84,8 +84,8 @@ class raw2tmp100 implements Command {
             $resRaw .= implode(G5::CSV_SEP, $newRaw) . "\n";
             $N++;
         }
-        $report =  "--- muller100 raw2tmp ---\n";
-        $outfile = AFD1writers100::tmpFilename();
+        $report =  "--- muller m1writers raw2tmp100 ---\n";
+        $outfile = M1writers100::tmpFilename();
         $dir = dirname($outfile);
         if(!is_dir($dir)){
             $report .= "Created directory $dir\n";
@@ -94,7 +94,7 @@ class raw2tmp100 implements Command {
         file_put_contents($outfile, $res);
         $report .= "Wrote $N lines in $outfile \n";
         //
-        $outfile = AFD1writers100::tmpRawFilename();
+        $outfile = M1writers100::tmpRawFilename();
         file_put_contents($outfile, $resRaw);
         $report .= "Stored $N records in $outfile\n";
         return $report;

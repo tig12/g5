@@ -11,7 +11,7 @@ namespace g5\commands\muller\m2men;
 use g5\G5;
 use g5\app\Config;
 use tiglib\patterns\Command;
-use g5\commands\muller\AFD;
+use g5\commands\muller\Muller;
 
 class raw2tmp implements Command {
     
@@ -25,13 +25,13 @@ class raw2tmp implements Command {
             return "USELESS PARAMETER : {$params[0]}\n";
         }
         
-        $report =  "--- muller m3 raw2tmp ---\n";
+        $report =  "--- muller m2men raw2tmp ---\n";
         
-        $raw = AFD2men::loadRawFile();
-        $res = implode(G5::CSV_SEP, AFD2men::TMP_FIELDS) . "\n";
-        $res_raw = implode(G5::CSV_SEP, AFD2men::RAW_FIELDS) . "\n";
+        $raw = M2men::loadRawFile();
+        $res = implode(G5::CSV_SEP, M2men::TMP_FIELDS) . "\n";
+        $res_raw = implode(G5::CSV_SEP, M2men::RAW_FIELDS) . "\n";
         
-        $nLimits = count(AFD2men::RAW_LIMITS);
+        $nLimits = count(M2men::RAW_LIMITS);
         $N = 0;
         $day = $hour = '';
         foreach($raw as $line){
@@ -39,12 +39,12 @@ class raw2tmp implements Command {
                 continue;
             }
             $N++;
-            $new = array_fill_keys(AFD2men::TMP_FIELDS, '');
-            $new_raw = array_fill_keys(AFD2men::RAW_FIELDS, '');
+            $new = array_fill_keys(M2men::TMP_FIELDS, '');
+            $new_raw = array_fill_keys(M2men::RAW_FIELDS, '');
             for($i=0; $i < $nLimits-1; $i++){
-                $rawFieldname = AFD2men::RAW_FIELDS[$i];
-                $offset = AFD2men::RAW_LIMITS[$i];
-                $length   = AFD2men::RAW_LIMITS[$i+1] - AFD2men::RAW_LIMITS[$i];
+                $rawFieldname = M2men::RAW_FIELDS[$i];
+                $offset = M2men::RAW_LIMITS[$i];
+                $length   = M2men::RAW_LIMITS[$i+1] - M2men::RAW_LIMITS[$i];
                 $field = trim(mb_substr($line, $offset, $length));
                 $new_raw[$rawFieldname] = $field;
                 switch($rawFieldname){
@@ -52,26 +52,26 @@ class raw2tmp implements Command {
                     [$new['FNAME'], $new['GNAME'], $new['FAME'], $new['NOBL']] = self::computeName($field);
                 break;
                 case 'DATE':
-                    $day = AFD::computeDay($field);
+                    $day = Muller::computeDay($field);
                 break;
                 case 'TIME':
-                    $hour = AFD::computeHour($field);
+                    $hour = Muller::computeHour($field);
                 break;
                 case 'TZO':
-                    $new['TZO'] = AFD::computeTimezoneOffset($field);
+                    $new['TZO'] = Muller::computeTimezoneOffset($field);
                 break;
                 case 'PLACE':
                     // by chance, CY appears before place in raw file => can be passed here
                     [$new['C1'], $new['C2'], $new['PLACE']] = self::computePlace($field, $new['CY']);
                 break;
                 case 'LAT':
-                    $new['LAT'] = AFD::computeLat($field);
+                    $new['LAT'] = Muller::computeLat($field);
                 break;
                 case 'CY':
-                    $new['CY'] = AFD2men::COUNTRIES[$field];
+                    $new['CY'] = M2men::COUNTRIES[$field];
                 break;
                 case 'LG':
-                    $new['LG'] = AFD::computeLg($field);
+                    $new['LG'] = Muller::computeLg($field);
                 break;
                 // other fields are simply copied
                 default:
@@ -84,7 +84,7 @@ class raw2tmp implements Command {
             $res_raw .= implode(G5::CSV_SEP, $new_raw) . "\n";
         }
         
-        $outfile = AFD2men::tmpFilename();
+        $outfile = M2men::tmpFilename();
         $dir = dirname($outfile);
         if(!is_dir($dir)){
             $report .= "Created directory $dir\n";
@@ -94,7 +94,7 @@ class raw2tmp implements Command {
         file_put_contents($outfile, $res);
         $report .= "Stored $N records in $outfile\n";
         
-        $outfile = AFD2men::tmpRawFilename();
+        $outfile = M2men::tmpRawFilename();
         file_put_contents($outfile, $res_raw);
         $report .= "Stored $N records in $outfile\n";
         
@@ -161,8 +161,8 @@ class raw2tmp implements Command {
         $test = $m[1];
         $place = trim(str_replace("($test)" , '', $str));
 // HERE must be completed
-        $c1 = AFD2men::C1[$test] ?? '';
-        $c2 = AFD2men::C2[$test] ?? '';
+        $c1 = M2men::C1[$test] ?? '';
+        $c2 = M2men::C2[$test] ?? '';
         return [$c1, $c2, $place];
     }
     

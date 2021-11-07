@@ -64,7 +64,7 @@ class fixCura implements Command {
         $mulPrefix = ($file == 'A2' ? 'SA2' : 'ND1');
         
         // $mulFile contains only records common with A2 and E1
-        $tmp = AFD5medics::loadTmpFile();
+        $tmp = M5medics::loadTmpFile();
         $mulFile = []; // keys = NUM
         foreach($tmp as $mulrow){
             $gnr = $mulrow['GNR'];
@@ -126,7 +126,7 @@ class fixCura implements Command {
         $mulPrefix = ($file == 'A2' ? 'SA2' : 'ND1');
         
         // $mulFile contains only records common with A2 and E1
-        $tmp = AFD5medics::loadTmpFile();
+        $tmp = M5medics::loadTmpFile();
         $mulFile = []; // keys = NUM
         foreach($tmp as $mulrow){
             $gnr = $mulrow['GNR'];

@@ -6,7 +6,7 @@
     
     @pre        5-cura-csv/A1.csv must exist in its best possible state.
                 To be clean, execute before
-                php run-g5.php cura A1 all
+                php run-g5.php gauq A1 all
                 
     @pre        3-g55-edited/570SPO.csv must exist.
     
@@ -33,7 +33,7 @@ class edited2cura implements Command {
     
     /** 
         Possible values of the command, for ex :
-        php run-g5.php newalch ertel4391 examine eminence
+        php run-g5.php ertel ertel4391 examine eminence
     **/
     const POSSIBLE_PARAMS = [
         'date',

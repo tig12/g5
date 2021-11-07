@@ -26,7 +26,6 @@ class tmp2db implements Command {
         @param  $params Array containing 1 element : the type of report ; see REPORT_TYPE
     **/
     public static function execute($params=[]): string {
-die("\nNOT IMPLEMENTED\n" . __FILE__ . ' - line ' . __LINE__ . "\n");
         if(count($params) > 1){
             return "USELESS PARAMETER : " . $params[1] . "\n";
         }
@@ -58,6 +57,7 @@ die("\nNOT IMPLEMENTED\n" . __FILE__ . ' - line ' . __LINE__ . "\n");
             // already inserted, do nothing
         }
         
+die("\nNOT IMPLEMENTED\n" . __FILE__ . ' - line ' . __LINE__ . "\n");
         // main group
         $g = Group::getBySlug(Ertel4391::GROUP_SLUG);
         if(is_null($g)){

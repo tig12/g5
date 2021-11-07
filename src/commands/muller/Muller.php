@@ -7,7 +7,7 @@
 ********************************************************************************/
 namespace g5\commands\muller;
 
-class AFD {
+class Muller {
     
     /**
         Path to the yaml file containing the characteristics of Müller's Astro-Forschungs-Daten source.
@@ -54,7 +54,7 @@ class AFD {
     public static function ids_in_sources2mullerId($ids_in_sources){
         foreach($ids_in_sources as $source => $id){
             if($source != 'afd' && str_starts_with($source, 'afd')){
-                return AFD::mullerId($source, $id);
+                return Muller::mullerId($source, $id);
             }
         }
         return '';
@@ -65,7 +65,7 @@ class AFD {
     // ****************************************************
     
     /** 
-        Common to AFD2men (famous men) and AFD3women (famous women).
+        Common to m2men (famous men) and m3women (famous women).
         @param  $str String like '010 E 19'.
         @return Longitude expressed in decimal degrees.
     **/
@@ -79,7 +79,7 @@ class AFD {
     }
     
     /** 
-        Common to AFD2men (famous men) and AFD3women (famous women).
+        Common to m2men (famous men) and m3women (famous women).
         @param  $str String like '50 N 59'.
         @return Latitude expressed in decimal degrees.
     **/
@@ -94,7 +94,7 @@ class AFD {
     }
     
     /** 
-        Common to AFD2men (famous men) and AFD3women (famous women).
+        Common to m2men (famous men) and m3women (famous women).
         @param  $str String like '21.30'.
         @return String like '21:30'.
     **/
@@ -103,7 +103,7 @@ class AFD {
     }
     
     /** 
-        Common to AFD2men (famous men) and AFD3women (famous women).
+        Common to m2men (famous men) and m3women (famous women).
         @param  $str String like '23.01.1840'.
         @return String like '1840-01-23'.
     **/
@@ -117,7 +117,7 @@ class AFD {
     }
     
     /** 
-        Common to AFD2men (famous men) and AFD3women (famous women).
+        Common to m2men (famous men) and m3women (famous women).
         @param  $str String like '-0.83'.
         @return String like '00:50'.
     **/

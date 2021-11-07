@@ -6,7 +6,7 @@
 ********************************************************************************/
 namespace g5\model;
 
-class Libreoffice{
+class Libreoffice {
     
     // ******************************************************
     /**
@@ -25,4 +25,4 @@ class Libreoffice{
     }
     
     
-}// end class
+} // end class

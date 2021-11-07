@@ -21,7 +21,7 @@ use tiglib\patterns\Command;
 class tweak2tmp implements Command {
     
     /** 
-        Called by : php run-g5.php cura <datafile> tweak2tmp
+        Called by : php run-g5.php gauq <datafile> tweak2tmp
         @param $params array containing two strings :
                        - the datafile to process (like "A1").
                        - The name of this command (useless here)

@@ -47,7 +47,7 @@ class tmp2db implements Command {
         
         $datafile = $params[0];
         
-        $report = "--- $datafile tmp2db ---\n";
+        $report = "--- gauq $datafile tmp2db ---\n";
         
         // source corresponding to LERRCP
         // not inserted because must have been done in A1 import

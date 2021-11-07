@@ -12,7 +12,7 @@ use g5\app\Config;
 use g5\model\DB5;
 use g5\model\Group;
 use tiglib\patterns\Command;
-use g5\commands\muller\AFD;
+use g5\commands\muller\Muller;
 use g5\commands\gauq\LERRCP;
 
 class export implements Command {
@@ -29,7 +29,7 @@ class export implements Command {
     private static $sourceSlug;
     
     /** 
-        Called by : php run-g5.php newalch muller402 export [nozip]
+        Called by : php run-g5.php muller m1writers export [nozip]
         If called without parameter, the output is compressed (using zip)
         @param $params array containing 0 or 1 element :
                        - An optional string "nozip"
@@ -49,9 +49,9 @@ class export implements Command {
         
         $report = '';
         
-        $g = Group::getBySlug(AFD1writers::GROUP_SLUG); // DB
+        $g = Group::getBySlug(M1writers::GROUP_SLUG); // DB
         
-        self::$sourceSlug = AFD1writers::LIST_SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
+        self::$sourceSlug = M1writers::LIST_SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
 
         $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . self::OUTPUT_FILE;
         
@@ -73,7 +73,7 @@ class export implements Command {
         ];
         
         $map = [
-            'ids-in-sources.' . AFD::SOURCE_SLUG => 'MUID',
+            'ids-in-sources.' . Muller::SOURCE_SLUG => 'MUID',
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
             'birth.date' => 'DATE',

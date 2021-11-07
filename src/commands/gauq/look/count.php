@@ -18,10 +18,10 @@ use tiglib\arrays\csvAssociative;
 class count implements Command {
     
     /** 
-        Called by : php run-g5.php cura look count
+        Called by : php run-g5.php gauq look count
         Note : can be indifferently called with any datafile of serie A
-        So : php run-g5.php cura A count
-        Is the same as : php run-g5.php cura A1 count
+        So : php run-g5.php gauq A count
+        Is the same as : php run-g5.php gauq A1 count
         @param $params  array with 2 elements : datafile and command name
         @return         Empty string ; echoes the commands' reports
     **/

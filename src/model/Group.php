@@ -15,7 +15,7 @@ use g5\app\Config;
 use g5\G5;
 use tiglib\dag\DAGStringNode;
 
-class Group{
+class Group {
     
     // possible types of groups
     
@@ -35,6 +35,8 @@ class Group{
     public $personMembersComputed;
     
     /** 
+        Creates either either a group with empty fields (if $humanFile == '')
+                or a group with fields coming from $humanFile.
         @param  $humanFile Path to yaml file relative to data/db/group
     **/
     public function __construct($humanFile=''){

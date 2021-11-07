@@ -50,7 +50,7 @@ class tmp2db implements Command {
         
         $datafile = $params[0];
         
-        $report = "--- $datafile tmp2db ---\n";
+        $report = "--- gauq $datafile tmp2db ---\n";
         
         // source corresponding to LERRCP - insert if does not already exist
         $lerrcpSource = Source::getBySlug(LERRCP::SOURCE_SLUG); // DB

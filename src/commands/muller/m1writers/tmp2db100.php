@@ -13,7 +13,7 @@ use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
-use g5\commands\muller\AFD;
+use g5\commands\muller\Muller;
 use g5\commands\Newalch;
 use g5\commands\gauq\LERRCP;
 
@@ -43,20 +43,20 @@ class tmp2db100 implements Command {
             return "INVALID PARAMETER : $reportType - Possible values :\n" . $msg;
         }
         
-        $report = "--- AFD1writers tmp2db100 ---\n";
+        $report = "--- muller m1writers tmp2db100 ---\n";
         
         // source of muller1-100-writers.txt - insert if does not already exist
-        $source = Source::getBySlug(AFD1writers100::LIST_SOURCE_SLUG); // DB
+        $source = Source::getBySlug(M1writers100::LIST_SOURCE_SLUG); // DB
         if(is_null($source)){
-            $source = new Source(AFD1writers100::LIST_SOURCE_DEFINITION_FILE);
+            $source = new Source(M1writers100::LIST_SOURCE_DEFINITION_FILE);
             $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         
         // group
-        $g = Group::getBySlug(AFD1writers100::GROUP_SLUG); // DB
+        $g = Group::getBySlug(M1writers100::GROUP_SLUG); // DB
         if(is_null($g)){
-            $g = AFD1writers100::getGroup();
+            $g = M1writers100::getGroup();
             $g->data['id'] = $g->insert(); // DB
             $report .= "Inserted group " . $g->data['slug'] . "\n";
         }
@@ -70,8 +70,8 @@ class tmp2db100 implements Command {
         $nDiffDates = 0;
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
-        $lines = AFD1writers100::loadTmpFile();
-        $linesRaw = AFD1writers100::loadTmpRawFile();
+        $lines = M1writers100::loadTmpFile();
+        $linesRaw = M1writers100::loadTmpRawFile();
         $N = count($lines);
         $t1 = microtime(true);
         for($i=0; $i < $N; $i++){
@@ -102,19 +102,19 @@ class tmp2db100 implements Command {
                 $p->addOccus([$occu]);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['MUID']);
-                $mullerId = AFD::mullerId($source->data['slug'], $line['MUID']);
-                $p->addIdInSource(AFD::SOURCE_SLUG, $mullerId);
+                $mullerId = Muller::mullerId($source->data['slug'], $line['MUID']);
+                $p->addIdInSource(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
                 $new['sources'] = $source->data['slug'];
                 $new['ids_in_sources'] = [
-                    AFD::SOURCE_SLUG => $mullerId,
+                    Muller::SOURCE_SLUG => $mullerId,
                     $source->data['slug'] => $line['MUID'],
                 ];
                 $new['occus'] = [$occu];
                 $p->addHistory(
-                    command: 'newalch muller402 tmp2db100',
+                    command: 'muller m1writers tmp2db100',
                     sourceSlug: $source->data['slug'],
                     newdata: $new,
                     rawdata: $lineRaw
@@ -127,8 +127,8 @@ class tmp2db100 implements Command {
                 // person already in Gauquelin data
                 $test->addSource($source->data['slug']);
                 $test->addIdInSource($source->data['slug'], $line['MUID']);
-                $mullerId = AFD::mullerId($source->data['slug'], $line['MUID']);
-                $test->addIdInSource(AFD::SOURCE_SLUG, $mullerId);
+                $mullerId = Muller::mullerId($source->data['slug'], $line['MUID']);
+                $test->addIdInSource(Muller::SOURCE_SLUG, $mullerId);
                 $occu = self::computeOccu($line);
                 $p->addOccus([$occu]);
                 // TODO see if some fields can be updated (if Müller more precise than Gauquelin)
@@ -136,12 +136,12 @@ class tmp2db100 implements Command {
                 // repeat fields to include in $history
                 $new['sources'] = $source->data['slug'];
                 $new['ids_in_sources'] = [
-                    AFD::SOURCE_SLUG => $mullerId,
+                    Muller::SOURCE_SLUG => $mullerId,
                     $source->data['slug'] => $line['MUID'],
                 ];
                 $new['occus'] = [$occu];
                 $p->addHistory(
-                    command: 'newalch muller402 tmp2db100',
+                    command: 'muller m1writers tmp2db100',
                     sourceSlug: $source->data['slug'],
                     newdata: $new,
                     rawdata: $lineRaw

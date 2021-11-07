@@ -64,7 +64,7 @@ class raw2tmp implements Command {
         $report_type = $params[2];
         $datafile = $params[0];
         
-        $report =  "--- $datafile raw2tmp ---\n";
+        $report =  "--- gauq $datafile raw2tmp ---\n";
         $html = LERRCP::loadRawFile($datafile);
         $file_datafile = LERRCP::rawFilename($datafile);
         $file_names = ACuraNames::rawFilename(); // = 902gdN.html
@@ -209,7 +209,7 @@ class raw2tmp implements Command {
         }
         //
         // Manual corrections
-        // php run-g5.php cura A2 raw2tmp same
+        // php run-g5.php gauq A2 raw2tmp same
         //
         $n2bis_fix = 0;    // cases solved by A::CORRECTIONS_BY_HAND ($repeats_same_nb only)
         if(isset(A::CORRECTIONS_BY_HAND[$datafile])){

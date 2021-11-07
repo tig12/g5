@@ -1,7 +1,7 @@
 <?php
 /******************************************************************************
-    Arno Müller's 402 italian writers
-    Code common to muller402
+    Arno Müller's 402 Italian writers
+    Code common to m1writers
     
     @license    GPL
     @history    2020-05-15 ~22h30+02:00, Thierry Graff : Creation
@@ -15,7 +15,7 @@ use g5\model\Group;
 use tiglib\time\seconds2HHMMSS;
 use tiglib\arrays\csvAssociative;
 
-class AFD1writers {
+class M1writers {
     
     // TRUST_LEVEL not defined, using value of class Newalch
     
@@ -25,7 +25,7 @@ class AFD1writers {
         Relative to directory data/db/source
     **/
     const LIST_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd1-writers-list-402.yml';
-
+    
     /** Slug of source 5muller_writers.csv **/
     const LIST_SOURCE_SLUG = 'afd1';
     
@@ -40,7 +40,7 @@ class AFD1writers {
     
     /** Slug of the group in db **/
     const GROUP_SLUG = 'muller-afd1-writers';
-
+    
     /** Separator used in the raw csv file **/
     const RAW_SEP = ';';
     
@@ -92,7 +92,7 @@ class AFD1writers {
     // *********************** Group management ***********************
     
     /**
-        Returns a Group object for AFD1writers.
+        Returns a Group object for M1writers.
     **/
     public static function getGroup(): Group {
         $g = new Group();
@@ -168,7 +168,7 @@ class AFD1writers {
     }
 
     // *********************** time / space functions ***********************
-    // shared by AFD1writers and AFD1writers100
+    // shared by M1writers and M1writers100
     
     /**
         Conversion of TZ offset found in newalch file to standard sHH:MM offset.
@@ -207,7 +207,7 @@ class AFD1writers {
         	    return '+00:37';
         	break;
             default:
-                throw new \Exception("Timezone offset not handled in AFD1writers : $offset");
+                throw new \Exception("Timezone offset not handled in M1writers : $offset");
         }
     }
 }// end class

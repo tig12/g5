@@ -68,7 +68,7 @@ class look implements Command {
     **/
     private static function look_source(){
         $report = '';
-        $data = AFD3women::loadTmpFile();
+        $data = M3women::loadTmpFile();
         $N = count($data);
         $NG = 0; // nb of record marked G in GQ column
         $source1 = array_fill_keys(['S', 'F', 'M'], 0); // primary source
@@ -109,12 +109,12 @@ class look implements Command {
     /**
         Lists persons supposed to be present in Gauquelin data.
         Match between Müller and Gauquelin is only done by birth day.
-        Function written in an iterative process, to build variables AFD3women::GQ_MATCH and AFD3women::GQ_NOMATCH.
+        Function written in an iterative process, to build variables M3women::GQ_MATCH and M3women::GQ_NOMATCH.
         @pre    Gauquelin data must have been previously loaded in g5 database.
     **/
     private static function look_gauquelin(){
         $report = '';
-        $data = AFD3women::loadTmpFile();
+        $data = M3women::loadTmpFile();
         $dblink = DB5::getDbLink();
         $query = "select name,ids_in_sources,birth from person where birth->>'date-ut' like ? or birth->>'date' like ?";
         $stmt = $dblink->prepare($query);
@@ -124,7 +124,7 @@ class look implements Command {
         $N_supposed_gauq = 0; // total number of lines supposed to be in Gauquelin data
         $N_supposed_nogauq = 0; // total number of lines not supposed to be in Gauquelin data
         
-        $res_match = ''; // code to copy in class AFD3women
+        $res_match = ''; // code to copy in class M3women
         $N_match = 0;
         
         // records supposed to be in Gauquelin data, but no match found
@@ -139,7 +139,7 @@ class look implements Command {
             $GQ = $line['GQ'];
             if($GQ == 'N' && $s2 != 'G'){
                 $N_supposed_nogauq++;
-                if(!isset(AFD3women::GQ_MATCH[$MUID])){
+                if(!isset(M3women::GQ_MATCH[$MUID])){
                     continue;
                 }
                 // else
@@ -152,13 +152,13 @@ class look implements Command {
             //
             // here line should match with a Gauquelin record
             //
-            if(isset(AFD3women::GQ_MATCH[$MUID])){
+            if(isset(M3women::GQ_MATCH[$MUID])){
                 $N_match++;
-                $res_match .= "        '$MUID' => '" . AFD3women::GQ_MATCH[$MUID] . "', // {$line['FNAME']} {$line['GNAME']}\n";
+                $res_match .= "        '$MUID' => '" . M3women::GQ_MATCH[$MUID] . "', // {$line['FNAME']} {$line['GNAME']}\n";
                 continue;
             }
             //
-            if(in_array($MUID, AFD3women::GQ_NOMATCH)){
+            if(in_array($MUID, M3women::GQ_NOMATCH)){
                 continue;
             }
             //
@@ -183,14 +183,14 @@ class look implements Command {
         }
         //
         if($report_unresolved){
-            $report .= "\n=== Unresolved - fix in AFD3women::GQ_MATCH or GQ_NOMATCH:\n";
+            $report .= "\n=== Unresolved - fix in M3women::GQ_MATCH or GQ_NOMATCH:\n";
             $report .= $report_unresolved;
         }
         //
-        $report .= "\n=== Coherent matches - code to copy in class AFD3women:\n";
+        $report .= "\n=== Coherent matches - code to copy in class M3women:\n";
         $tmp = explode("\n", $res_match);
         sort($tmp);
-        $report .= "    const MU_MATCH = ["; // code to copy in class AFD3women
+        $report .= "    const MU_MATCH = ["; // code to copy in class M3women
         $report .= implode("\n", $tmp) . "\n";
         $report .= "    ];\n";
         //
@@ -243,16 +243,16 @@ class look implements Command {
     /**
         Command used to visually check the coherence of look_gauquelin()
         Prints Gauquelin and Müller records
-        Constant AFD3women::GQ_MATCH to retrieve the data fro g5 database.
+        Constant M3women::GQ_MATCH to retrieve the data fro g5 database.
     **/
     public static function look_check() {
         $report = '';
-        $data = AFD3women::loadTmpFile_muid();
+        $data = M3women::loadTmpFile_muid();
         $dblink = DB5::getDbLink();
         $query = "select name,ids_in_sources,birth from person where ids_in_sources->>'" . LERRCP::SOURCE_SLUG . "'=?";
         $stmt = $dblink->prepare($query);
         
-        foreach(AFD3women::GQ_MATCH as $MUID => $GQID){
+        foreach(M3women::GQ_MATCH as $MUID => $GQID){
             $report .= "\n" . self::report_muller($data[$MUID]);
             $stmt->execute([$GQID]);
             $res = $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -269,7 +269,7 @@ class look implements Command {
         Echoes a list of occupation codes and the nb of associated persons
     **/
     public static function look_occu() {
-        $data = AFD3women::loadTmpFile();
+        $data = M3women::loadTmpFile();
 
         $occus = [];
         foreach($data as $line){

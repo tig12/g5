@@ -26,7 +26,7 @@ class legalTime implements Command {
     const POSSIBLE_PARAM = ['update', 'echo'];
     
     /** 
-        Called by : php run-g5.php cura <datafile> legalTime
+        Called by : php run-g5.php gauq <datafile> legalTime
         
         @param $params array containing two elements :
                        - the datafile to process.

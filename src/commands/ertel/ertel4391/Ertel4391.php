@@ -39,7 +39,7 @@ class Ertel4391 {
     // *********************** Group management ***********************
     
     /** Slug of the group in db **/
-    const GROUP_SLUG = 'ertel4384sport';
+    const GROUP_SLUG = 'ertel4384sportsmen';
     
     /** Returns a Group object for Ertel4391. **/
     public static function getGroup(): Group {

@@ -46,7 +46,7 @@ class raw2tmp implements Command {
             return "INVALID PARAMETER : " . $params[2] . " - raw2tmp doesn't need this parameter\n";
         }
         
-        $report =  "--- D10 raw2tmp ---\n";
+        $report =  "--- gauq D10 raw2tmp ---\n";
         $raw = LERRCP::loadRawFile('D10');
         preg_match('#<pre>\s*(NUM.*?CICO)\s*(.*?)\s*</pre>#sm', $raw, $matches);
         if(count($matches) != 3){

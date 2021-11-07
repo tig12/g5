@@ -51,7 +51,7 @@ class raw2tmp implements Command {
             return "ERROR : Missing file $filename\n";
         }
         
-        $report = "--- Ertel4391 raw2tmp ---\n";
+        $report = "--- ertel ertel4391 raw2tmp ---\n";
         
         $lines = file($filename);
         $output = $output_raw = '';

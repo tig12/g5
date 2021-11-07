@@ -16,14 +16,14 @@ class look implements Command {
     
     /** 
         Possible values of the command, for ex :
-        php run-g5.php cura D6 build emptyGiven
+        php run-g5.php gauq D6 build emptyGiven
     **/
     const POSSIBLE_PARAMS = [
         'emptyGiven',
     ];
     
     /** 
-        Called by : php run-g5.php cura D6 build <action>
+        Called by : php run-g5.php gauq D6 build <action>
         @param $params  array with 3 strings : 
                         - "D6" (useless here)
                         - "build" (useless here)
@@ -52,7 +52,7 @@ class look implements Command {
         $csvFile = LERRCP::tmpFilename('D6');
         if(!is_file($csvFile)){
             return "Missing file $csvFile\n"
-                . "You must run first : php run-g5.php cura D6 raw2tmp\n";
+                . "You must run first : php run-g5.php gauq D6 raw2tmp\n";
         }
         $res = '';
         $rows = csvAssociative::compute($csvFile);

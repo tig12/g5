@@ -46,7 +46,7 @@ class addGeo implements Command {
         }
         
         $datafile = 'D6';
-        $report =  "--- $datafile addGeo ---\n";
+        $report =  "--- gauq $datafile addGeo ---\n";
         
         //
         // TEMP CODE
@@ -76,7 +76,7 @@ class addGeo implements Command {
         
         if(!is_file($csvfile)){
             $report .= "Missing file $csvfile\n";
-            $report .= "You must run first : php run-g5.php cura D6 raw2tmp\n";
+            $report .= "You must run first : php run-g5.php gauq D6 raw2tmp\n";
         }
         
         if(!is_file($geofile)){

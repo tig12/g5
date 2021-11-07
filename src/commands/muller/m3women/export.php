@@ -11,7 +11,7 @@ use g5\app\Config;
 use g5\model\Group;
 use tiglib\patterns\Command;
 use g5\commands\db\export\Export as ExportUtils;
-use g5\commands\muller\AFD;
+use g5\commands\muller\Muller;
 use g5\commands\gauq\LERRCP;
 
 class export implements Command {
@@ -46,9 +46,9 @@ class export implements Command {
         
         $report = '';
         
-        $g = Group::getBySlug(AFD3women::GROUP_SLUG); // DB
+        $g = Group::getBySlug(M3women::GROUP_SLUG); // DB
         
-        self::$sourceSlug = AFD3women::LIST_SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
+        self::$sourceSlug = M3women::LIST_SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
 
         $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . self::OUTPUT_FILE;
         
@@ -71,7 +71,7 @@ class export implements Command {
         ];
         
         $map = [
-            'ids-in-sources.' . AFD::SOURCE_SLUG => 'MUID',
+            'ids-in-sources.' . Muller::SOURCE_SLUG => 'MUID',
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
 //            'birth.date' => 'DATE',

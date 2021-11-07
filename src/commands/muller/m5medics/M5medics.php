@@ -15,7 +15,7 @@ use tiglib\strings\encode2utf8;
 use g5\commands\Newalch;
 use g5\commands\gauq\Cura;
 
-class AFD5medics {
+class M5medics {
     
     /**
         Path to the yaml file containing the characteristics of the source describing file 5a_muller_medics.txt.
@@ -27,12 +27,12 @@ class AFD5medics {
     const LIST_SOURCE_SLUG = 'afd5';
     
     /**
-        Path to the yaml file containing the characteristics of Müller's booklet AFD3women.
+        Path to the yaml file containing the characteristics of Müller's booklet 5 physicians.
         Relative to directory data/db/source
     **/
     const BOOKLET_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd5-medics-booklet.yml';
     
-    /** Slug of source Astro-Forschungs-Daten vol 3 **/
+    /** Slug of source Astro-Forschungs-Daten vol 5 **/
     const BOOKLET_SOURCE_SLUG = 'afd5-booklet';
     
     /** Slug of the group in db **/
@@ -150,7 +150,7 @@ class AFD5medics {
     // *********************** Group management ***********************
     
     /**
-        Returns a Group object for AFD5medics.
+        Returns a Group object for M5medics.
     **/
     public static function getGroup(): Group {
         $g = new Group();

@@ -30,7 +30,7 @@ class addGeo implements Command {
     ];
     
     /** 
-        Called by : php run-g5.php cura A1 addGeo
+        Called by : php run-g5.php gauq A1 addGeo
         @param $params array that must contain 3 elements :
                        - datafile : string like 'A1'
                        - command : useless
@@ -59,7 +59,7 @@ class addGeo implements Command {
         
         self::$pdo_geonames = Geonames::compute_dblink();
         
-        $report = "--- $datafile addGeo ---\n";
+        $report = "--- gauq $datafile addGeo ---\n";
         $rows = LERRCP::loadTmpFile($datafile);
         $res = implode(G5::CSV_SEP, A::TMP_FIELDS) . "\n";
         

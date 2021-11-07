@@ -11,10 +11,9 @@ namespace g5\commands\muller\m3women;
 use g5\app\Config;
 use g5\model\DB5;
 use g5\model\{Source, Group};
-//use tiglib\time\seconds2HHMMSS;
 use tiglib\arrays\csvAssociative;
 
-class AFD3women {
+class M3women {
     
     /**
         Trust level for data
@@ -33,7 +32,7 @@ class AFD3women {
     const LIST_SOURCE_SLUG = 'afd3';
     
     /**
-        Path to the yaml file containing the characteristics of Müller's booklet AFD3women.
+        Path to the yaml file containing the characteristics of Müller's booklet 3 famous women.
         Relative to directory data/db/source
     **/
     const BOOKLET_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd3-women-booklet.yml';

@@ -17,14 +17,14 @@ class look implements Command {
     
     /** 
         Possible values of the command, for ex :
-        php run-g5.php newalch ertel4391 examine eminence
+        php run-g5.php ertel ertel4391 examine eminence
     **/
     const POSSIBLE_PARAMS = [
         'occu',
     ];
     
     /** 
-        Called by : php run-g5.php cura D10 all
+        Called by : php run-g5.php gauq D10 all
         @param $params  array containing:
                         - "D10"
                         - "look"
@@ -57,7 +57,7 @@ class look implements Command {
         $res = [];
         $records = @csvAssociative::compute($csvfile);
         if(empty($records)){
-            return "ERROR : missing file $csvfile\nTo build D10.csv, execute : php run-g5.php cura D10 raw2tmp\n";
+            return "ERROR : missing file $csvfile\nTo build D10.csv, execute : php run-g5.php gauq D10 raw2tmp\n";
         }
         foreach($records as $record){
             $occu = $record['OCCU'];

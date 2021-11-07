@@ -14,7 +14,7 @@ use g5\model\Source;
 use g5\model\Group;
 use tiglib\arrays\csvAssociative;
 
-class AFD2men {
+class M2men {
     
     /**
         Trust level for data
@@ -33,7 +33,7 @@ class AFD2men {
     const LIST_SOURCE_SLUG = 'afd2';
     
     /**
-        Path to the yaml file containing the characteristics of Müller's booklet AFD2men.
+        Path to the yaml file containing the characteristics of Müller's booklet 2 famous men.
         Relative to directory data/db/source
     **/
     const BOOKLET_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd2-men-booklet.yml';

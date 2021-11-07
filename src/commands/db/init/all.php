@@ -16,7 +16,7 @@ use g5\commands\gauq\GauqRouter;
 // for information sources
 use g5\G5;
 use g5\commands\gauq\LERRCP;
-use g5\commands\muller\AFD;
+use g5\commands\muller\Muller;
 use g5\commands\Newalch;
 use g5\commands\gauq\Cura;
 use g5\commands\wd\Wikidata;
@@ -172,7 +172,7 @@ class all implements Command {
             echo "***********************\n";
             echo dbcreate::execute([]);
             echo fillsource::execute([LERRCP::SOURCE_DEFINITION_FILE]);
-            echo fillsource::execute([AFD::SOURCE_DEFINITION_FILE]);
+            echo fillsource::execute([Muller::SOURCE_DEFINITION_FILE]);
             echo fillsource::execute([G5::SOURCE_DEFINITION_FILE]);
             echo fillsource::execute([Cura::SOURCE_DEFINITION_FILE]);
             echo fillsource::execute([Newalch::SOURCE_DEFINITION_FILE]);

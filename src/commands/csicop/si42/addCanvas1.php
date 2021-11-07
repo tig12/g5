@@ -33,7 +33,7 @@ class addCanvas1 implements Command {
         }
         $c1file = SI42::rawFilename_canvas1();
         
-        $report =  "--- CSICOP si42 addCanvas1 ---\n";
+        $report =  "--- csicop si42 addCanvas1 ---\n";
         
         $c1rows = file($c1file, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
         

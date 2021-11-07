@@ -30,9 +30,9 @@ class look implements Command {
     ];
     
     /** 
-        Called by       : php run-g5.php cura A count
-        So              : php run-g5.php cura A look count
-        Is the same as  : php run-g5.php cura A1 count
+        Called by       : php run-g5.php gauq A count
+        So              : php run-g5.php gauq A look count
+        Is the same as  : php run-g5.php gauq A1 count
         @param $params  array with 3 elements :
                         - the datafile to process (ex A1) 
                         - name of this command (useless here) 

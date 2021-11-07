@@ -15,7 +15,7 @@ use tiglib\patterns\Command;
 class tweak2tmp implements Command {
     
     /** 
-        Called by : php run-g5.php cura <datafile> tweak2csv
+        Called by : php run-g5.php ertel ertel4391 tweak2tmp
         @param $params empty array
         @return Report
     **/

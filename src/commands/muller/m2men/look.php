@@ -68,7 +68,7 @@ class look implements Command {
     **/
     private static function look_source(){
         $report = '';
-        $data = AFD2men::loadTmpFile();
+        $data = M2men::loadTmpFile();
         $N = count($data);
         $NG = 0; // nb of record marked G in GQ column
         $source1 = array_fill_keys(['S', 'F', 'M'], 0); // primary source
@@ -222,7 +222,7 @@ class look implements Command {
         ];
         
         $report = '';
-        $data = AFD2men::loadTmpFile();
+        $data = M2men::loadTmpFile();
         $dblink = DB5::getDbLink();
         $query = "select name,ids_in_sources,birth from person where birth->>'date-ut' like ? or birth->>'date' like ?";
         $stmt = $dblink->prepare($query);
@@ -231,7 +231,7 @@ class look implements Command {
         $N_GQ_G = 0; // total number of lines supposed to be in Gauquelin data (field GQ = G)
         $N_GQ_N = 0; // total number of lines not supposed to be in Gauquelin data (field GQ = N)
         
-        $res_match = ''; // code to copy in class AFD2men
+        $res_match = ''; // code to copy in class M2men
         $N_match = 0; // nb of records matching Gauquelin
         $N_nomatch = 0; // nb of records not matching Gauquelin
         
@@ -319,10 +319,10 @@ class look implements Command {
             }
         }
         //
-        $report .= "\n=== matches to copy in class AFD2men: ===\n";
+        $report .= "\n=== matches to copy in class M2men: ===\n";
         $tmp = explode("\n", $res_match);
         usort($tmp, 'strnatcmp');
-        $report .= "    const MU_GQ = ["; // code to copy in class AFD2men
+        $report .= "    const MU_GQ = ["; // code to copy in class M2men
         $report .= implode("\n", $tmp) . "\n";
         $report .= "    ];\n";
         //
@@ -386,16 +386,16 @@ class look implements Command {
     /**
         Command used to visually check the coherence of look_gauquelin()
         Prints Gauquelin and Müller records
-        Constant AFD2men::MU_GQ to retrieve the data fro g5 database.
+        Constant M2men::MU_GQ to retrieve the data fro g5 database.
     **/
     public static function look_check() {
         $report = '';
-        $data = AFD2men::loadTmpFile_muid();
+        $data = M2men::loadTmpFile_muid();
         $dblink = DB5::getDbLink();
         $query = "select name,ids_in_sources,birth from person where ids_in_sources->>'" . LERRCP::SOURCE_SLUG . "'=?";
         $stmt = $dblink->prepare($query);
         
-        foreach(AFD2men::MU_GQ as $MUID => $GQID){
+        foreach(M2men::MU_GQ as $MUID => $GQID){
             $report .= "\n" . self::report_muller($data[$MUID]);
             $stmt->execute([$GQID]);
             $res = $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -411,7 +411,7 @@ class look implements Command {
         Echoes a list of occupation codes and the nb of associated persons
     **/
     public static function look_occu() {
-        $data = AFD2men::loadTmpFile();
+        $data = M2men::loadTmpFile();
 
         $occus = [];
         foreach($data as $line){

@@ -23,18 +23,18 @@ class raw2tmp implements Command {
     **/
     public static function execute($params=[]): string{
         
-        $report =  "--- muller402 raw2tmp ---\n";
+        $report =  "--- muller m1writers raw2tmp ---\n";
         
         $pname = '/(\d+)([MFK])\s*(.*)\s*/';
         $pplace = '/(.*?) ([A-Z]{2})/';
         
-        $emptyNew = array_fill_keys(AFD1writers::TMP_FIELDS, '');
-        $res = implode(G5::CSV_SEP, AFD1writers::TMP_FIELDS) . "\n";
-        $resRaw = implode(G5::CSV_SEP, AFD1writers::RAW_FIELDS) . "\n"; // keep trace of original raw fields
+        $emptyNew = array_fill_keys(M1writers::TMP_FIELDS, '');
+        $res = implode(G5::CSV_SEP, M1writers::TMP_FIELDS) . "\n";
+        $resRaw = implode(G5::CSV_SEP, M1writers::RAW_FIELDS) . "\n"; // keep trace of original raw fields
         $N = 0;
-        $raw = AFD1writers::loadRawFile();
+        $raw = M1writers::loadRawFile();
         foreach($raw as $line){
-            $fields = explode(AFD1writers::RAW_SEP, $line);
+            $fields = explode(M1writers::RAW_SEP, $line);
             $new = $emptyNew;
             // raw file 5muller_writers.csv doesn't contain the occupation (between 1 to 5)
             // but Müller booklet contains it => a new OCR of the original would permit to have a more precise occupation
@@ -75,7 +75,7 @@ class raw2tmp implements Command {
             
             //
             // keep only records with complete birth time (at least YYYY-MM-DD HH:MM)
-            // These are handled by AFD1writers100
+            // These are handled by M1writers100
             //
             if(strlen($new['DATE']) < 16){
                 continue;
@@ -98,7 +98,7 @@ class raw2tmp implements Command {
             $new['CY'] = 'IT';
             $new['LG'] = self::lglat(-(int)$fields[9]); // minus sign, correction from raw here
             $new['LAT'] = self::lglat($fields[8]);
-            $new['TZO'] = AFD1writers::compute_offset($fields[6], $new['LG']);
+            $new['TZO'] = M1writers::compute_offset($fields[6], $new['LG']);
             if($fields[6] == 'LMT'){
                 $new['LMT'] = 'LMT';
             }
@@ -107,7 +107,7 @@ class raw2tmp implements Command {
             $N++;
         }
         
-        $outfile = AFD1writers::tmpFilename();
+        $outfile = M1writers::tmpFilename();
         $dir = dirname($outfile);
         if(!is_dir($dir)){
             $report .= "Created directory $dir\n";
@@ -116,7 +116,7 @@ class raw2tmp implements Command {
         file_put_contents($outfile, $res);
         $report .= "Stored $N records in $outfile\n";
         //
-        $outfile = AFD1writers::tmpRawFilename();
+        $outfile = M1writers::tmpRawFilename();
         file_put_contents($outfile, $resRaw);
         $report .= "Stored $N records in $outfile\n";
         return $report;
@@ -164,7 +164,7 @@ class raw2tmp implements Command {
         	    return '+00:37';
         	break;
             default:
-                throw new \Exception("Timezone offset not handled in AFD1writers : $offset");
+                throw new \Exception("Timezone offset not handled in M1writers : $offset");
         }
     }
     

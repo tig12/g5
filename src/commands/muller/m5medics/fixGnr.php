@@ -45,7 +45,7 @@ class fixGnr implements Command {
                 . "Possible values for parameter :\n$possibleParams_str\n";
         }
         
-        $report = "--- muller1083 fixGnr ---\n";
+        $report = "--- muller m5medics fixGnr ---\n";
         
         // assoc arrays
         $a2s = @LERRCP::loadTmpFile_num('A2'); // keys = NUM
@@ -58,7 +58,7 @@ class fixGnr implements Command {
             return "File data/tmp/gauq/lerrcp/E1.csv doesn't exist\n"
                 . "Build this file before executing fixGnr \n";
         }
-        $MullerCsv = AFD5medics::loadTmpFile_nr(); // keys = NR
+        $MullerCsv = M5medics::loadTmpFile_nr(); // keys = NR
         $maxNUM_A2 = 3647;
         $maxNUM_E1 = 2154;
         
@@ -220,7 +220,7 @@ class fixGnr implements Command {
             }
             $res .= implode(G5::CSV_SEP, $new) . "\n";
         }
-        $destFile = AFD5medics::tmpFilename();
+        $destFile = M5medics::tmpFilename();
         file_put_contents($destFile, $res);// HERE update 1083MED.csv
         $report .= "Corrected $nCorr GNR in $destFile\n";
         

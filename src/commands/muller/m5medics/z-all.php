@@ -24,13 +24,13 @@ class all implements Command {
             return "USELESS PARAMETER : {$params[0]}\n";
         }
         
-        echo "\n=== php run-g5.php newalch muller1083 raw2csv ===\n";
+        echo "\n=== php run-g5.php muller m5medics raw2csv ===\n";
         echo raw2csv::execute();
         
-        echo "\n=== php run-g5.php newalch muller1083 fixGnr update ===\n";
+        echo "\n=== php run-g5.php muller m5medics fixGnr update ===\n";
         echo fixGnr::execute(['update']);
         
-        echo "\n=== php run-g5.php newalch muller1083 export dl ===\n";
+        echo "\n=== php run-g5.php muller m5medics export dl ===\n";
         echo export::execute(['dl']);
 
         

@@ -82,7 +82,7 @@ class raw2tmp implements Command {
         
         $datafile = 'D6';
         
-        $report =  "--- $datafile raw2tmp ---\n";
+        $report =  "--- gauq $datafile raw2tmp ---\n";
         $raw = LERRCP::loadRawFile($datafile);
         
         // To fix an error on a latitude in cura file, in line

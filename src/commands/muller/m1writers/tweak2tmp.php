@@ -25,7 +25,7 @@ class tweak2tmp implements Command {
         if(count($params) > 0){
             return "WRONG USAGE : useless parameter : {$params[2]}\n";
         }
-        $report = "--- muller402 tweak2tmp ---\n";
+        $report = "--- muller m1writers tweak2tmp ---\n";
         $yamlfile = Config::$data['dirs']['init'] . DS . 'newalch-tweak' . DS . 'muller-402-it-writers.yml';
         
         // load tweaks in an assoc arrray (keys = MUID)
@@ -48,7 +48,7 @@ class tweak2tmp implements Command {
             $tweaks[$MUID] = $record;
         }
         
-        $target = AFD1writers::loadTmpFile_id();
+        $target = M1writers::loadTmpFile_id();
         
         $keys = array_keys(current($target));
         $res = implode(G5::CSV_SEP, $keys) . "\n";
@@ -70,7 +70,7 @@ class tweak2tmp implements Command {
             $res .= implode(G5::CSV_SEP, $row) . "\n";
         }
         
-        $targetFile = AFD1writers::tmpFilename();
+        $targetFile = M1writers::tmpFilename();
         file_put_contents($targetFile, $res);
                                              
         $report .= "Updated $N records of $targetFile\n";

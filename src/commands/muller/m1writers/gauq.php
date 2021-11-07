@@ -19,14 +19,14 @@ class gauq implements Command {
     const POSSIBLE_PARAMS = [
         'update' => "Updates column GQID of file tmp/muller/1-writers/muller1-402-writers.csv",
         'report' => "Echoes a html table to compare muller-402-it-writers.csv and A6.csv",
-        'check' => "Echoes a html table comparing AFD1writers to all Gauquelin data, not only A6",
+        'check' => "Echoes a html table comparing M1writers to all Gauquelin data, not only A6",
     ];                                                                                                  
     
     /** 
         Assoc array NUM in A6 => ID in M402
         Manual additions to handle journalists
         WARNING - this may lead to erroneous information
-        see https://tig12.github.io/gauquelin5/newalch-muller402.html
+        see https://tig12.github.io/gauquelin5/muller1-402-writers.html
     **/
     const A6_M402_JO = [
         1354 => 1,
@@ -115,9 +115,9 @@ class gauq implements Command {
                 . "Possible values for parameter :\n$possibleParams_str\n";
         }
         
-        $report =  "--- muller402 addA6 ---\n";                                                                     
+        $report =  "--- muller m1writers addA6 ---\n";                                                                     
 
-        $m402_ids = AFD1writers::loadTmpFile_id(); // Assoc array, keys = Müller id
+        $m402_ids = M1writers::loadTmpFile_id(); // Assoc array, keys = Müller id
         $m402_days = []; // Assoc array, keys = birth days
         foreach($m402_ids as $row402){
             $day = substr($row402['DATE'], 0, 10);
@@ -138,7 +138,7 @@ class gauq implements Command {
         $nomatch = [];
         $na6 = 0;
         
-        // loop on a6, try to match muller402
+        // loop on a6, try to match M402
         $a6 = LERRCP::loadTmpFile_num('A6');
         $matchingA6NUMs = array_keys(self::A6_M402);
         foreach($a6 as $a6row){
@@ -272,8 +272,8 @@ class gauq implements Command {
             $match2[$MUID] = $NUM;
         }
         
-        $res = implode(G5::CSV_SEP, AFD1writers::TMP_FIELDS) . "\n";
-        $rows = AFD1writers::loadTmpFile();
+        $res = implode(G5::CSV_SEP, M1writers::TMP_FIELDS) . "\n";
+        $rows = M1writers::loadTmpFile();
         $nUpdate = 0;
         foreach($rows as $row){
             $MUID = $row['MUID'];
@@ -301,7 +301,7 @@ class gauq implements Command {
             }
             $res .= implode(G5::CSV_SEP, $row) . "\n";
         }
-        $outfile = AFD1writers::tmpFilename();
+        $outfile = M1writers::tmpFilename();
         file_put_contents($outfile, $res);
         // $report .= "$nMatch matches ; $nNomatch nomatch\n";
         $report .= "Updated GQID in $nUpdate lines of $outfile\n";

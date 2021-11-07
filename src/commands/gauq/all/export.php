@@ -14,7 +14,7 @@ use g5\app\Config;
 use g5\model\DB5;
 use tiglib\patterns\Command;
 use g5\commands\gauq\LERRCP;
-use g5\commands\muller\AFD;
+use g5\commands\muller\Muller;
 use g5\model\Full;
 use g5\model\Group;
 use g5\model\Person;
@@ -31,7 +31,7 @@ class export implements Command {
     private static $sourceSlug;
     
     /** 
-        Called by : php run-g5.php cura <datafile> export [nozip]
+        Called by : php run-g5.php gauq <datafile> export [nozip]
         If called without third parameter, the output is compressed (using zip)
         @param $params array containing 2 or 3 strings :
                        - the datafile to process (like "A1").
@@ -100,7 +100,7 @@ class export implements Command {
                 
         $fmap = [
             'MUID' => function($p){
-                return AFD::ids_in_sources2mullerId($p->data['ids-in-sources']);
+                return Muller::ids_in_sources2mullerId($p->data['ids-in-sources']);
             },          
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);

@@ -60,7 +60,7 @@ class genCorr implements Command {
         $g55group = $params[0];
         
         $report = '';
-        $report .= "\n=== php run-g5.php newalch muller1083 raw2csv ===\n";
+        $report .= "\n=== php run-g5.php muller m5medics raw2csv ===\n";
         
         if(!G55::editedFileExists($g55group)){
             $report .= "Cannot compute $g55group because " . G55::editedFilename($g55group) . " does not exist\n";

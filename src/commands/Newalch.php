@@ -11,7 +11,7 @@ namespace g5\commands;
 
 use g5\app\Config;
 use g5\model\Source;
-use g5\commands\muller\AFD;
+use g5\commands\muller\Muller;
 
 class Newalch {
     

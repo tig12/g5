@@ -33,7 +33,7 @@ class G55new {
     ];
     
     /**
-        Path to the yaml file containing the characteristics of Müller's booklet AFD3women.
+        Path to the yaml file containing the characteristics of Müller's booklet 3 famous women.
         Relative to directory data/db/source
     **/
     const BOOK_SOURCE_DEFINITION_FILE = 'gauquelin' . DS . '1955-book.yml';

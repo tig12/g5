@@ -21,7 +21,7 @@ class look implements Command {
     
     /** 
         Possible values of the command, for ex :
-        php run-g5.php newalch muller1083 look gnr
+        php run-g5.php muller m5medics look gnr
     **/
     const POSSIBLE_PARAMS = [
         'curadates',
@@ -71,7 +71,7 @@ class look implements Command {
     private static function look_fields(){
         $res = "<table class=\"wikitable margin\">\n";
         $res .= "    <tr><th>Field</th><th>Meaning</th></tr>\n";
-        foreach(AFD5medics::RAW_FIELDS as $k => $v){
+        foreach(M5medics::RAW_FIELDS as $k => $v){
             $res .= "    <tr><td>$k</td><td>$v</td></tr>\n";
         }
         $res .= "</table>\n";
@@ -86,7 +86,7 @@ class look implements Command {
     private static function look_paris($params=[]){
         $data = [];
         $N = $N1860 = 0;
-        $rows = AFD5medics::loadTmpFile();
+        $rows = M5medics::loadTmpFile();
         foreach($rows as $row){
             if($row['PLACE'] != 'Paris'){
                 continue;
@@ -116,9 +116,9 @@ class look implements Command {
     **/
     private static function look_sample($params=[]){
         $output = $params[0] ?? 'text';
-        $rows = AFD5medics::loadTmpFile();
+        $rows = M5medics::loadTmpFile();
         // assoc SAMPLE => nb of records with this code
-        $data = array_fill_keys(array_keys(AFD5medics::SAMPLE_CODE), 0); 
+        $data = array_fill_keys(array_keys(M5medics::SAMPLE_CODE), 0); 
         foreach($rows as $row){
             $data[$row['SAMPLE']] ++;
         }
@@ -129,14 +129,14 @@ class look implements Command {
             $res .= "SAMPLE\t\tN\tCODE\n";
             $res .= "-----------------------------\n";
             foreach($data as $k => $v){
-                $res .=  "$k\t$v\t" . AFD5medics::SAMPLE_CODE[$k] . "\n";
+                $res .=  "$k\t$v\t" . M5medics::SAMPLE_CODE[$k] . "\n";
             }
         break;
         case 'table': 
             $res = "<table class=\"wikitable margin\">\n";
             $res .= "    <tr><th>SAMPLE</th><th>CODE</th><th>Nb</th><th>GNR ?</th></tr>\n";
             foreach($data as $k => $v){
-                $res .= "    <tr><td>$k</td><td>" . AFD5medics::SAMPLE_CODE[$k] . "</td><td>$v</td><td>" . AFD5medics::SAMPLE_GNR[$k] . "</td></tr>\n";
+                $res .= "    <tr><td>$k</td><td>" . M5medics::SAMPLE_CODE[$k] . "</td><td>$v</td><td>" . M5medics::SAMPLE_GNR[$k] . "</td></tr>\n";
             }
             $res .= "</table>\n";
         break;
@@ -151,7 +151,7 @@ class look implements Command {
         Indicates the number of records common with cura A3 and E1
     **/
     private static function look_gnr(){
-        $rows = AFD5medics::loadTmpFile();
+        $rows = M5medics::loadTmpFile();
         $res = [
             'EMPTY' => 0,
             'A2' => 0,
@@ -188,7 +188,7 @@ class look implements Command {
     private static function look_curanames(){
         $a2s = LERRCP::loadTmpFile_num('A2'); // keys = NUM
         $e1s = LERRCP::loadTmpFile_num('E1'); // keys = NUM
-        $MullerCsv = AFD5medics::loadTmpFile_nr(); // keys = NR
+        $MullerCsv = M5medics::loadTmpFile_nr(); // keys = NR
         
         foreach($MullerCsv as $NR => $mulrow){
             $GNR = $mulrow['GNR'];
@@ -237,7 +237,7 @@ class look implements Command {
             return $msg;
         }
         
-        $MullerCsv = AFD5medics::loadTmpFile_nr(); // keys = NR
+        $MullerCsv = M5medics::loadTmpFile_nr(); // keys = NR
         $p = '/\b[Dd]e\b/';
         $n = 0;
         foreach($MullerCsv as $NR => $mulrow){
@@ -266,7 +266,7 @@ class look implements Command {
     private static function look_curadates(){
         $a2s = LERRCP::loadTmpFile_num('A2'); // keys = NUM
         $e1s = LERRCP::loadTmpFile_num('E1'); // keys = NUM
-        $MullerCsv = AFD5medics::loadTmpFile_nr(); // keys = NR
+        $MullerCsv = M5medics::loadTmpFile_nr(); // keys = NR
         
         $equalA2 = $diffA2 = $totalA2 = 0;
         $equalE1 = $diffE1 = $totalE1 = 0;

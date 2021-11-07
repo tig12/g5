@@ -19,7 +19,7 @@ use g5\model\Person;
 use g5\model\Group;
 use g5\model\Occupation;
 use g5\commands\gauq\LERRCP;
-use g5\commands\muller\AFD;
+use g5\commands\muller\Muller;
 
 class occu implements Command {
     
@@ -154,7 +154,7 @@ class occu implements Command {
                 return ($p->data['ids-in-sources'][LERRCP::SOURCE_SLUG] ?? '');
             },
             'MUID' => function($p){
-                return AFD::ids_in_sources2mullerId($p->data['ids-in-sources']);
+                return Muller::ids_in_sources2mullerId($p->data['ids-in-sources']);
             },
         ];
         

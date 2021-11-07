@@ -23,7 +23,7 @@ class raw2tmp implements Command {
         Generated adding in execute() :
         echo $new['C2'] . "\n";
         And executing :
-        php run-g5.php newalch muller1083 raw2csv | sort | uniq
+        php run-g5.php muller m5medics raw2csv | sort | uniq
         Then C2 (= département in France) codes were added manually.
         Ambiguous codes are not handled.
     **/
@@ -215,7 +215,7 @@ DEPT_STR;
             return "INVALID PARAMETER : " . $params[0] . " - parameter not needed\n";
         }
         
-        $filename = AFD5medics::rawFilename();                  
+        $filename = M5medics::rawFilename();                  
         if(!is_file($filename)){
             return "ERROR : Missing file $filename\n";
         }
@@ -223,8 +223,8 @@ DEPT_STR;
         $lines = explode("\n", $raw);
         $N = count($lines);
         
-        $res = implode(G5::CSV_SEP, AFD5medics::TMP_FIELDS) . "\n";
-        $res_raw = implode(G5::CSV_SEP, array_keys(AFD5medics::RAW_FIELDS)) . "\n";
+        $res = implode(G5::CSV_SEP, M5medics::TMP_FIELDS) . "\n";
+        $res_raw = implode(G5::CSV_SEP, array_keys(M5medics::RAW_FIELDS)) . "\n";
         
         $nRecords = 0;
         for($i=5; $i < $N-3; $i++){
@@ -234,7 +234,7 @@ DEPT_STR;
             $nRecords++;
             
             $line  = trim($lines[$i]);
-            $new = array_fill_keys(AFD5medics::TMP_FIELDS, '');
+            $new = array_fill_keys(M5medics::TMP_FIELDS, '');
             $new['NR'] = trim(mb_substr($line, 0, 5));
             $new['SAMPLE'] = trim(mb_substr($line, 5, 11));
             $new['GNR'] = trim(mb_substr($line, 16, 6));
@@ -332,8 +332,8 @@ DEPT_STR;
             $res_raw .= implode(G5::CSV_SEP, $new_raw) . "\n";
         }
         
-        $report = "--- muller1083 raw2tmp ---\n";
-        $outfile = AFD5medics::tmpFilename();
+        $report = "--- muller m5medics raw2tmp ---\n";
+        $outfile = M5medics::tmpFilename();
         $dir = dirname($outfile);
         if(!is_dir($dir)){
             mkdir($dir, 0755, true);
@@ -341,7 +341,7 @@ DEPT_STR;
         file_put_contents($outfile, $res);
         $report .=  "Generated $nRecords records in $outfile\n";
         
-        $outfile = AFD5medics::tmpRawFilename();
+        $outfile = M5medics::tmpRawFilename();
         file_put_contents($outfile, $res_raw);
         $report .=  "Generated $nRecords records in $outfile\n";
         
