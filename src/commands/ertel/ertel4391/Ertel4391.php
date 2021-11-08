@@ -25,46 +25,39 @@ class Ertel4391 {
     
     /**
         Path to the yaml file containing the characteristics of the source describing file 3a_sports.txt.
-        Relative to directory data/db
+        Relative to directory data/db/source
     **/
-    const RAW_SOURCE_DEFINITION = 'source' . DS . 'ertel' . DS . '3a_sports.yml';
+    const SOURCE_DEFINITION_FILE = 'ertel' . DS . '3a_sports.yml';
     
-    /**
-        Returns a Source object for the raw file used for Ertel4391.
-    **/
-    public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['db'] . DS . self::RAW_SOURCE_DEFINITION);
-    }
-
+    /** Slug of source 3a_sports.txt **/
+    const SOURCE_SLUG = '3a_sports';
+    
     // *********************** Group management ***********************
     
     /** Slug of the group in db **/
-    const GROUP_SLUG = 'ertel4384sportsmen';
+    const GROUP_SLUG = 'ertel-4384-sportsmen';
     
-    /** Returns a Group object for Ertel4391. **/
-    public static function getGroup(): Group {
-        $g = new Group();
-        $g->data['slug'] = self::GROUP_SLUG;
-        $g->data['name'] = "Ertel 4384 athletes";
-        $g->data['description'] = "4384 athletes compiled by Suitbert Ertel\n(Ertel says 4391)";
-        $g->data['id'] = $g->insert();
-        return $g;
-    }
-    
-    /** Returns a Group object for one of Ertel4391 subgroups. **/
-    public static function getSubgroup($slug): Group {
-        $g = new Group();
-        $g->data['slug'] = $slug;
-        $g->data['name'] = self::SUBGROUPS[$slug]['name'];
-        $g->data['description'] = self::SUBGROUPS[$slug]['description'];
-        $g->data['id'] = $g->insert();
-        return $g;
-    }
+    /** Slugs of ertel4384sportsmen subgroups **/
+    const SUBGROUP_SLUGS = [
+        'ertel-1-first-french',
+        'ertel-2-first-european',
+        'ertel-3-italian-football',
+        'ertel-4-german-various',
+        'ertel-5-french-occasionals',
+        'ertel-6-para-champions',
+        'ertel-7-para-lowers',
+        'ertel-8-csicop-us',
+        'ertel-9-second-european',
+        'ertel-10-italian-cyclists',
+        'ertel-11-lower-french',
+        'ertel-12-gauq-us',
+        'ertel-13-plus-special',
+    ];
     
     // *********************** Raw file manipulation ***********************
     
     /**
-        @return Path to the raw file coming from newalch
+        @return Path to the raw file coming from newalchemypress.com
     **/
     public static function rawFilename(){
         return Ertel::rawDirname() . DS . '3a_sports-utf8.txt';
@@ -74,7 +67,7 @@ class Ertel4391 {
     
     /** Path to the temporary csv file used to work on this group. **/
     public static function tmpFilename(){
-        return Ertel::tmpDirname() . DS . 'ertel-4384-athletes.csv';
+        return Ertel::tmpDirname() . DS . 'ertel-4384-sportsmen.csv';
     }
     
     /**
@@ -101,7 +94,7 @@ class Ertel4391 {
     
     /** Path to the temporary csv file keeping an exact copy of the raw file. **/
     public static function tmpRawFilename(){
-        return Ertel::tmpDirname() . DS . 'ertel-4384-athletes-raw.csv';
+        return Ertel::tmpDirname() . DS . 'ertel-4384-sportsmen-raw.csv';
     }
     
     /** Loads the "tmp raw file" in a regular array **/
@@ -111,7 +104,7 @@ class Ertel4391 {
     
     // *********************** Tweak file manipulation ***********************
     public static function tweakFilename(){
-        return Config::$data['dirs']['init'] . DS . 'newalch-tweak' . DS . '4391SPO.yml';
+        return Config::$data['dirs']['init'] . DS . 'newalch-tweak' . DS . 'ertel-4384-sportsmen.yml';
     }
     
     

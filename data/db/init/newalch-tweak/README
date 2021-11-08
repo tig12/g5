@@ -1,9 +1,6 @@
 
 
-This directory contains human corrections that should be applied to files of 5-newalch-csv/
-Original files come from https://newalchemypress.com/gauquelin/ ; stored in 1-newalch-raw
-Then converted to csv by step raw2csv
-Then these yaml corrections are applied
+This directory contains human corrections that should be applied to files of data/tmp
 
 Each yaml file contains a list of associations key: value
 

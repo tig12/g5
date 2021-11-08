@@ -48,13 +48,12 @@ class tmp2db implements Command {
             $datesReport = '';
         }
         
-        // source corresponding to 5a_muller_medics - insert if does not already exist
-        $source = Ertel4391::getSource();
-        try{
-            $source->insert();
-        }
-        catch(\Exception $e){
-            // already inserted, do nothing
+        // source corresponding to 3a_sports - insert if does not already exist
+        $source = Source::getBySlug(Ertel4391::SOURCE_SLUG); // DB
+        if(is_null($source)){
+            $source = new Source(Ertel4391::SOURCE_DEFINITION_FILE);
+            $source->insert(); // DB
+            $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         
 die("\nNOT IMPLEMENTED\n" . __FILE__ . ' - line ' . __LINE__ . "\n");

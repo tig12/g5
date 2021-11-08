@@ -29,13 +29,13 @@ class Source {
     }
     
     /** 
-        Constructor ; builds an empty source or a source filled from its yaml file definition
+        Constructor ; builds an empty source or a source filled from its yaml file definition.
         @param  $yamlFile Path of the file containing souce's data.
-                Relative to self::$DIR
+                Relative to data/model/source
     **/
-    public function __construct($yamlFile = ''){
+    public function __construct($yamlFile=''){
         
-        // Fills an empty source from its structure
+        // Fill an empty source from its structure
         $this->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Source.yml'));
         if($yamlFile == ''){
             return; // ok, just build an empty source

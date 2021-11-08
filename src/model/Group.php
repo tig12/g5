@@ -35,20 +35,23 @@ class Group {
     public $personMembersComputed;
     
     /** 
-        Creates either either a group with empty fields (if $humanFile == '')
-                or a group with fields coming from $humanFile.
-        @param  $humanFile Path to yaml file relative to data/db/group
+        Constructor ; builds an empty group or a group filled from its yaml file definition.
+        In all cases, members are not computed.
+        @param  $yamlFile Path to a yaml file, relative to data/db/group
     **/
-    public function __construct($humanFile=''){
+    public function __construct($yamlFile=''){
         $this->personMembersComputed = false;
-        // parse empty model file
+
+        // Fill an empty source from its structure
         $this->data = yaml_parse_file(__DIR__ . DS . 'Group.yml');
-        // human
-        if($humanFile){
-            $human = yaml_parse_file($humanFile);
-            $this->data = array_replace_recursive($this->data, $human);
-echo "\n<pre>"; print_r($this->data); echo "</pre>\n"; exit;
+        if($yamlFile == ''){
+            return; // ok, just build an empty group
         }
+
+        // Load group data from data/db/group
+        $human = yaml_parse_file($yamlFile);
+        $this->data = array_replace_recursive($this->data, $human);
+echo "\n<pre>"; print_r($this->data); echo "</pre>\n"; exit;
     }
     
     // ***********************************************************************

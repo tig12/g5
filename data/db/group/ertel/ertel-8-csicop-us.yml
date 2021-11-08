@@ -1,0 +1,11 @@
+slug: ertel-8-csicop-us
+name: 8 - CSICOP-U.S.
+'n': 192
+sources:
+  - d10
+  - csicop
+description: |
+  Part of CSICOP data that are present in D10 file.
+  <br>Number claimed by Ertel : 192
+parents: 
+  - ertel4391

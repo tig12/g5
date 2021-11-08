@@ -26,7 +26,7 @@ class tweak2tmp implements Command {
             return "WRONG USAGE : useless parameter : {$params[2]}\n";
         }
         $report = "--- muller m1writers tweak2tmp ---\n";
-        $yamlfile = Config::$data['dirs']['init'] . DS . 'newalch-tweak' . DS . 'muller-402-it-writers.yml';
+        $yamlfile = Config::$data['dirs']['init'] . DS . 'newalch-tweak' . DS . 'muller1-402-writers.yml';
         
         // load tweaks in an assoc arrray (keys = MUID)
         $yaml = yaml_parse(file_get_contents($yamlfile));

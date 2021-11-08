@@ -18,4 +18,5 @@ isbn:
 
 description: |
 
-parents: [] # list of source slugs
+# list of source slugs
+parents: []

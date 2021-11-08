@@ -1,5 +1,6 @@
+
 This diretory contains data used by initial building of the database.
 
 Format of tweak files is different from data/db/tweaks: 
 Correspond to early stages of development.
-Modifies tmp files, ont database.
+Modifies tmp files, not database.
