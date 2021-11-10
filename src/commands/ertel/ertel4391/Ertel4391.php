@@ -34,10 +34,16 @@ class Ertel4391 {
     
     // *********************** Group management ***********************
     
+    /**
+        Path to the yaml file containing the characteristics of the group ertel-4384-sportsmen.
+        Relative to directory data/db/group
+    **/
+    const GROUP_DEFINITION_FILE = 'ertel' . DS . 'ertel-4384-sportsmen.yml';
+    
     /** Slug of the group in db **/
     const GROUP_SLUG = 'ertel-4384-sportsmen';
     
-    /** Slugs of ertel4384sportsmen subgroups **/
+    /** Slugs of ertel-4384-sportsmen subgroups **/
     const SUBGROUP_SLUGS = [
         'ertel-1-first-french',
         'ertel-2-first-european',
@@ -53,6 +59,16 @@ class Ertel4391 {
         'ertel-12-gauq-us',
         'ertel-13-plus-special',
     ];
+    
+    /** Returns a Group object for ertel-4384-sportsmen. **/
+    public static function getGroup(): Group {
+        return new Group(self::GROUP_DEFINITION_FILE);
+    }
+    
+    /** Returns a Group object for a given subgroup. **/
+    public static function getSubgroup(string $slug): Group {
+        return new Group('ertel' . DS . $slug . '.yml');
+    }
     
     // *********************** Raw file manipulation ***********************
     
@@ -103,9 +119,68 @@ class Ertel4391 {
     }
     
     // *********************** Tweak file manipulation ***********************
+    
     public static function tweakFilename(){
         return Config::$data['dirs']['init'] . DS . 'newalch-tweak' . DS . 'ertel-4384-sportsmen.yml';
     }
     
+    // *********************** Country management ***********************
+    
+    /** Mapping between country code used in raw file (field NATION) and ISO 3166 country code. **/
+    const RAW_NATION_CY = [
+        'USA' => 'US',
+        'FRA' => 'FR',
+        'ITA' => 'IT',
+        'BEL' => 'BE',
+        'GER' => 'DE',
+        'SCO' => 'GB',
+        'NET' => 'NL',
+        'LUX' => 'LU',
+        'SPA' => 'ES',
+    ];
+    
+    // *********************** Occupation management ***********************
+    
+    /** Mapping between sport code used in raw file (field SPORT) and g5 occupation slug. **/
+    const RAW_SPORT_OCCU = [
+        'AIRP'      => 'aircraft-pilot',
+        'BADM'      => 'badminton-player',
+        'BASE'      => 'baseball-player',
+        'BASK'      => 'basketball-player',
+        'BILL'      => 'billard-player',
+        'BOBS'      => 'bobsledder',
+        'BOWL'      => 'bowler',
+        'BOXI'      => 'boxer',
+'CANO'      => 'canoeist+kayaker',
+        'ALPI'      => 'mountaineer',
+        'CYCL'      => 'cyclist',
+        'HORS'      => 'equestrian',
+        'FENC'      => 'fencer',
+        'HOCK'      => 'field-hockey-player',
+        //'FOOT'      => 'american-football-player',
+        //'FOOT'      => 'football-player',
+        'GOLF'      => 'golfer',
+        'GYMN'      => 'gymnast',
+        'HAND'      => 'handball-player',
+        'JUDO'      => 'judoka',
+        'AUTO'      => 'motor-sports-competitor',
+        'PELO'      => 'basque-pelota-player',
+        'WALK'      => 'race-walker',
+        'RODE'      => 'rodeo-rider',
+        'ROLL'      => 'roller-skater',
+'AVIR'      => 'rower',
+'ROWI'      => 'rower',
+        'RUGB'      => 'rugby-player',
+        'YACH'      => 'sport-sailer',
+        'SHOO'      => 'sport-shooter',
+        'SKII'      => 'skier',
+        'SWIM'      => 'swimmer',
+        'TENN'      => 'tennis-player',
+        'TRAC'      => 'athletics-competitor',
+        'VOLL'      => 'volleyball-player',
+        'WEIG'      => 'weightlifter',
+        'ICES'      => 'winter-sports-practitioner',
+        'WRES'      => 'wrestler',
+    ];
     
 } // end class

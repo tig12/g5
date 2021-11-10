@@ -3,8 +3,8 @@
 #   history:
 #     - 2021-10-28 02:17:35+02:00: Thierry Graff, creation
 
-name: Ertel 4391 sportsmen
-slug: ertel4391
+name: Ertel 4384 sportsmen
+slug: ertel-4384-sportsmen
 sources:
   - 3a_sports
 
@@ -14,6 +14,7 @@ description: |
   <br>N without birth time : <b>2297</b> (52.4 %)
   <br>Published by Suitbert Ertel in 1988 - original article available online: <a href="https://www.scientificexploration.org/docs/2/jse_02_1_ertel.pdf">"Raising the Hurdle for the Athletes' Mars Effect: Association Co-Varies With Eminence" on scientificexploration.org</a>
   <br>Details about data are given p 58.
+  <br>In the article, Ertel announces 4391 sportsmen.
 
 children:
   - ertel-1-first-french

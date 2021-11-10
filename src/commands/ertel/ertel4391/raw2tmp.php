@@ -23,22 +23,6 @@ use g5\commands\Newalch;
 
 class raw2tmp implements Command {
     
-    /**
-        Mapping between country code used in the file (field NATION)
-        and ISO 3166 country code.
-    **/
-    const NATION_CY = [
-        'USA' => 'US',
-        'FRA' => 'FR',
-        'ITA' => 'IT',
-        'BEL' => 'BE',
-        'GER' => 'DE',
-        'SCO' => 'GB',
-        'NET' => 'NL',
-        'LUX' => 'LU',
-        'SPA' => 'ES',
-    ];
-    
     /** 
         Imports file data/raw/ertel/3a_sports-utf8.txt to data/tmp/ertel.
         @param $params  Empty array
@@ -78,7 +62,7 @@ class raw2tmp implements Command {
             $new['SPORT']       = trim(mb_substr($line, 70, 6));
             $new['IG']          = trim(mb_substr($line, 79, 1));
             $country            = trim(mb_substr($line, 87, 3));
-            $new['CY'] = self::NATION_CY[$country];
+            $new['CY'] = Ertel4391::RAW_NATION_CY[$country];
             $new['C2'] = ($country == 'SCO' ? 'SCT' : ''); // SCT = geonames code for Scotland
             $new['ZITRANG']     = trim(mb_substr($line, 100, 1));
             $new['ZITSUM']      = trim(mb_substr($line, 107, 1));

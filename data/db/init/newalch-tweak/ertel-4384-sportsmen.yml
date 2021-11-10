@@ -113,6 +113,14 @@
     Error in Ertel's file
     
 -
+  # Lauer Martin
+  NR: 2378
+  SPORT: TRAC
+  build-notes: |
+    Fix typo in Ertel file (TRAV instead of TRAC)
+    Error identified while building g5 occupation codes
+
+-
   NR: 2410
   GQID: D10-753
   build-notes: seen while comparing with CSICOP dates
@@ -147,10 +155,6 @@
   GQID: D10-822
   build-notes: seen while comparing with CSICOP dates
   
--
-  NR: 2766
-  SPORT: TRAC
-  build-notes: error identified while building g5 occupation codes
 -
   NR: 2769
   GQID: D10-846

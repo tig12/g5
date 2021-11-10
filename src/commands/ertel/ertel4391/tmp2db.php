@@ -56,9 +56,8 @@ class tmp2db implements Command {
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         
-die("\nNOT IMPLEMENTED\n" . __FILE__ . ' - line ' . __LINE__ . "\n");
         // main group
-        $g = Group::getBySlug(Ertel4391::GROUP_SLUG);
+        $g = Group::getBySlug(Ertel4391::GROUP_SLUG); // DB
         if(is_null($g)){
             $g = Ertel4391::getGroup();
         }
@@ -67,8 +66,8 @@ die("\nNOT IMPLEMENTED\n" . __FILE__ . ' - line ' . __LINE__ . "\n");
         }
         // subgroups
         $subgroups = [];
-        foreach(Ertel4391::SUBGROUPS as $slug => $value){
-            $subgroups[$slug] = Group::getBySlug($slug);
+        foreach(Ertel4391::SUBGROUP_SLUGS as $slug){
+            $subgroups[$slug] = Group::getBySlug($slug); // DB
             if(is_null($subgroups[$slug])){
                 $subgroups[$slug] = Ertel4391::getSubgroup($slug);
             }
@@ -76,7 +75,6 @@ die("\nNOT IMPLEMENTED\n" . __FILE__ . ' - line ' . __LINE__ . "\n");
                 $subgroups[$slug]->deleteMembers(); // only deletes asssociations between group and members
             }
         }
-        
         $nInsert = 0;
         $nUpdate = 0;
         $nRestoredNames = 0;
@@ -89,7 +87,8 @@ die("\nNOT IMPLEMENTED\n" . __FILE__ . ' - line ' . __LINE__ . "\n");
         $t1 = microtime(true);
         for($i=0; $i < $N; $i++){
             $line = $lines[$i];
-echo "\n<pre>"; print_r($line); echo "</pre>\n"; exit;
+            $subsample = self::computeSubgroup($line);
+continue;
             $lineRaw = $linesRaw[$i];
             // All persons already in db are coming from Gauquelin data
             // see docs/newalch-ertel4391.html#ertel-s-subsamples
@@ -102,8 +101,10 @@ echo "\n<pre>"; print_r($line); echo "</pre>\n"; exit;
                 $new['name']['given'] = $line['GNAME'];
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
-                $new['birth']['place']['c2'] = $line['C2'];
+$new['birth']['place']['c2'] = $line['C2'];
+// fix : C1 ??? (SCT)
                 $new['birth']['place']['cy'] = $line['CY'];
+                $new['sex'] = $line['SEX'];
                 //
                 $p->addOccu($line['SPORT']);
                 $p->addSource($source->data['slug']);
@@ -113,10 +114,16 @@ echo "\n<pre>"; print_r($line); echo "</pre>\n"; exit;
                 $p->addHistory("newalch ertel4391 tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);
                 $nInsert++;
-                $p->data['id'] = $p->insert(); // Storage
+                $p->data['id'] = $p->insert(); // DB
             }
             else{
                 // Person already in A1 or D6 or D10
+                // Ertel data are considered of lower quality than Gauquelin
+                // Then update only missing information in Gauquelin:
+                // - missing names in A1
+                // - birth times (legal, not UTC) in A1
+                // - precise sport in D6
+                // - sex
                 /* 
                 $new = [];
                 $new['notes'] = [];
@@ -183,6 +190,8 @@ echo "\n<pre>"; print_r($line); echo "</pre>\n"; exit;
                 $subgroups[$QUEL]->addMember($p->data['id']);
             }
         }
+die("\n<br>die here " . __FILE__ . ' - line ' . __LINE__ . "\n");
+
         $t2 = microtime(true);
         try{
             $g->data['id'] = $g->insert(); // Storage
@@ -210,6 +219,51 @@ echo "\n<pre>"; print_r($line); echo "</pre>\n"; exit;
         $report .= "$nDiffDates dates differ from A2 and E1";
         $report .= " - $nRestoredNames names restored in A2\n";
         return $report;
+    }
+    
+    /** Returns the slug of the subgroup of a record **/
+    private static function computeSubgroup(&$line) {
+//echo "\n<pre>"; print_r($line); echo "</pre>\n"; exit;
+        if($line['G55'] != ''){
+            return 'ertel-1-first-french';
+        }
+        if($line['QUEL'] == 'G:A01' && $line['G55'] == '' && $line['PARA_NR'] == ''){
+            return 'ertel-2-first-european';
+        }
+        if($line['QUEL'] == 'GMINI'){
+            return 'ertel-3-italian-football';
+        }
+        if($line['QUEL'] == 'GMING'){
+            return 'ertel-4-german-various';
+        }
+        if($line['QUEL'] == 'G_ADD'){
+            return 'ertel-5-french-occasionals';
+        }
+        if($line['QUEL'] == 'G:A01' && $line['PARA_NR'] != ''){
+            return 'ertel-6-para-champions';
+        }
+        if($line['QUEL'] == 'GCPAR'){
+            return 'ertel-7-para-lowers';
+        }
+        if($line['QUEL'] == 'G:D10' && $line['CSINR'] != ''){
+            return 'ertel-8-csicop-us';
+        }
+        if($line['QUEL'] == 'G:D06'){
+            return 'ertel-9-second-european';
+        }
+        if($line['QUEL'] == 'GMINV'){
+            return 'ertel-10-italian-cyclists';
+        }
+        if($line['QUEL'] == 'GMIND'){
+            return 'ertel-11-lower-french';
+        }
+        if($line['QUEL'] == 'G:D10' && $line['CSINR'] == ''){
+            return 'ertel-12-gauq-us';
+        }
+        if($line['QUEL'] == 'G_79F'){
+            return 'ertel-13-plus-special';
+        }
+        throw new \Exception("Line without subgroup " .print_r($line, true));
     }
         
 }// end class    

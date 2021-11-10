@@ -133,7 +133,7 @@ class tmp2db implements Command {
                 ];
                 $new['occus'] = $newOccus;
                 $p->addHistory(
-                    command: "cura $datafile tmp2db",
+                    command: "gauq $datafile tmp2db",
                     sourceSlug: $source->data['slug'],
                     newdata: $new,
                     rawdata: $lineRaw
@@ -157,7 +157,7 @@ class tmp2db implements Command {
                 ];
                 $new['occus'] = $newOccus;
                 $p->addHistory(
-                    command: "cura $datafile tmp2db",
+                    command: "gauq $datafile tmp2db",
                     sourceSlug: $source->data['slug'],
                     newdata: $new,
                     rawdata: $lineRaw

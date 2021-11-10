@@ -49,9 +49,9 @@ class Group {
         }
 
         // Load group data from data/db/group
-        $human = yaml_parse_file($yamlFile);
-        $this->data = array_replace_recursive($this->data, $human);
-echo "\n<pre>"; print_r($this->data); echo "</pre>\n"; exit;
+        $yamlFile = Config::$data['dirs']['ROOT'] . DS . Config::$data['dirs']['db'] . DS . 'group' . DS . $yamlFile;
+        $yaml = yaml_parse_file($yamlFile);
+        $this->data = array_replace_recursive($this->data, $yaml);
     }
     
     // ***********************************************************************
