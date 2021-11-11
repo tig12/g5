@@ -24,6 +24,7 @@ class look implements Command {
         'ids',
         'mars',
         'cp',
+        'checkoccu',
     ];
     
     // *****************************************
@@ -305,4 +306,12 @@ class look implements Command {
         echo "$nMiss GCPAR without PARA_NR\n";
     }
     
-}// end class
+    // ******************************************************
+    /**
+        Compares occupation codes (sport) of Ertel with A1 and CSICOP.
+    **/
+    private static function look_checkoccu(){
+        die("TO IMPLEMENT\n");
+    }
+    
+} // end class

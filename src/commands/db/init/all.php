@@ -38,6 +38,7 @@ use g5\commands\gauq\all\tweak2tmp              as tweak2tmpGauq;
 
 use g5\commands\ertel\ertel4391\raw2tmp         as raw2tmpErtelSport;
 use g5\commands\ertel\ertel4391\tweak2tmp       as tweak2tmpErtelSport;
+use g5\commands\ertel\ertel4391\fixA1           as fixA1ErtelSport;
 
 use g5\commands\muller\m5medics\raw2tmp         as raw2tmpM5Medics;
 use g5\commands\muller\m5medics\tweak2tmp       as tweak2tmpM5Medics;
@@ -142,6 +143,7 @@ class all implements Command {
             
             echo raw2tmpErtelSport::execute([]);
             echo tweak2tmpErtelSport::execute([]);
+            echo fixA1ErtelSport::execute(['update']);
             
             echo raw2tmpM5Medics::execute([]);
             echo tweak2tmpM5Medics::execute([]);

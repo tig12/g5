@@ -8,7 +8,7 @@
 
 - Use data/auxiliary/muller1-22-writers to check Gauquelin birth time errors - compare with results of raw2tmp / tmp2db
 
-- add SI42 to auxiliary data - see share/data/gauquelin/csicop-sportsmen-1979
+- add SI42 to auxiliary data - see data/auxiliary/1979-csicop
 
 - add commit / rollback for all tmp2db commands ?
 

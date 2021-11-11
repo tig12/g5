@@ -12,12 +12,23 @@ namespace g5\model;
 use g5\app\Config;
 use g5\model\DB5;
 
+Source::init();
 class Source {
     
     /**
         Structure of a source object, contained in src/model/Source.yml
     **/
     public $data = [];
+    
+    /** Absolute path to data/db/source **/
+    public static $DIR;
+    
+    /** 
+        Static initializer, executed once at class loading.
+    **/
+    public static function init() {
+        self::$DIR = Config::$data['dirs']['ROOT'] . DS . Config::$data['dirs']['db'] . DS . 'source';
+    }
     
     /** 
         Constructor ; builds an empty source or a source filled from its yaml file definition.
@@ -33,7 +44,7 @@ class Source {
         }
         
         // Load source data from data/db/source
-        $yamlFile = Config::$data['dirs']['ROOT'] . DS . Config::$data['dirs']['db'] . DS . 'source' . DS . $yamlFile;
+        $yamlFile = self::$DIR . DS . $yamlFile;
         $yaml = yaml_parse_file($yamlFile);
         if($yaml === false){
             throw new \Exception("ERROR: Unable to read source definition file $yamlFile");

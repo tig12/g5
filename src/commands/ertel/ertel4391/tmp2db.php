@@ -120,10 +120,10 @@ $new['birth']['place']['c2'] = $line['C2'];
                 // Person already in A1 or D6 or D10
                 // Ertel data are considered of lower quality than Gauquelin
                 // Then update only missing information in Gauquelin:
-                // - missing names in A1
                 // - birth times (legal, not UTC) in A1
                 // - precise sport in D6
                 // - sex
+                // Missing names in A1 are not handled here (done by class fixA1)
                 /* 
                 $new = [];
                 $new['notes'] = [];

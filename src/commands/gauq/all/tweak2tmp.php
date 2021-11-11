@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Transfers information from data/build/cura-tweak/ to data/tmp/gauq/lerrcp
+    Transfers information from data/db/init/lerrcp-tweak/ to data/tmp/gauq/lerrcp
     Updates a file of data/tmp/gauq/lerrcp/ with the values found in the yaml file containing tweaks.
     
     WARNING : this step must be done just after step raw2tmp.
@@ -32,7 +32,7 @@ class tweak2tmp implements Command {
             return "WRONG USAGE : useless parameter : {$params[2]}\n";
         }
         $datafile = $params[0];
-        $tweaksFile = Config::$data['dirs']['init'] . DS . 'cura-tweak' . DS . $datafile . '.yml';
+        $tweaksFile = Config::$data['dirs']['init'] . DS . 'lerrcp-tweak' . DS . $datafile . '.yml';
         
         $report = "--- $datafile tweak2tmp ---\n";
         
