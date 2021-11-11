@@ -2,11 +2,11 @@
 /********************************************************************************
     Generates the files in 5-tmp/g55-generated/
     from files in
-    - data/db/init/cura-marked/
+    - data/db/init/lerrcp-marked/
     and
     - data/tmp/gauq/lerrcp/
     Takes an exact copy of files in data/tmp/gauq/lerrcp/
-    Uses files from data/db/init/cura-marked/ to filter and dispatch in different resulting files in g55-generated
+    Uses files from data/db/init/lerrcp-marked/ to filter and dispatch in different resulting files in g55-generated
     Adds a column ORIGIN
 
     Called by : php run-g5.php g55 <filenamme> marked2generated
@@ -41,7 +41,7 @@ class marked2generated implements Command {
         $groupCode = $params[0];
         
         $cura_file = G55::GROUPS[$groupCode][1]; // A1, A2 etc.
-        $file_marked = Config::$data['dirs']['3-cura-marked'] . DS . $cura_file . '.csv';
+        $file_marked = Config::$data['dirs']['3-lerrcp-marked'] . DS . $cura_file . '.csv';
         $file_csv = Config::$data['dirs']['5-cura-csv'] . DS . $cura_file . '.csv';
         $file_output = Config::$data['dirs']['5-g55-generated'] . DS . $groupCode . '.csv';
 
@@ -88,9 +88,9 @@ class marked2generated implements Command {
     
     // ******************************************************
     /**
-        Loads one csv file located in 3-edited/cura-marked/
+        Loads one csv file located in data/db/init/lerrcp-marked/
         Auxiliary of self::execute()
-        @param $filename    String file name located in 3-edited/cura-marked/
+        @param $filename    String file name located in data/db/init/lerrcp-marked/
         @param $groupCode   String identifying a Gauquelin 1955 group, like "570SPO"
         @return false or a regular array containing the NUM of marked records
     **/
