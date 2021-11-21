@@ -93,7 +93,7 @@ class A{
             ['basketball-player',           523, 555],
             ['billard-player',              556, 564],
             ['boxer',                       565, 768],
-            ['canoeist+kayaker',            769, 769],
+            ['canoeist',                    769, 769],
             ['cyclist',                     770, 1226],
             ['fencer',                      1227, 1242],
             ['football-player',             1243, 1690],

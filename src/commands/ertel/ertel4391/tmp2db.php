@@ -223,7 +223,6 @@ die("\n<br>die here " . __FILE__ . ' - line ' . __LINE__ . "\n");
     
     /** Returns the slug of the subgroup of a record **/
     private static function computeSubgroup(&$line) {
-//echo "\n<pre>"; print_r($line); echo "</pre>\n"; exit;
         if($line['G55'] != ''){
             return 'ertel-1-first-french';
         }

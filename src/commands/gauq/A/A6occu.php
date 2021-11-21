@@ -1,10 +1,10 @@
 <?php
 /********************************************************************************
 
-    php run-g5.php gauq A6 occupn
+    php run-g5.php gauq A6 A6occu
 
-    occupn = occupation "poet" or "novelist"
     Updates 885 occupations in file A6 (11.366 s)
+    Occupations are set to "poet" or "novelist"
     A6 records must have been imported in database before executing this command.
     
     Based on a work exposed on https://newalchemypress.com/gauquelin/research8.php
@@ -21,7 +21,7 @@ use g5\commands\gauq\LERRCP;
 use g5\model\Person;
 use g5\model\Group;
 
-class occupn implements Command {
+class A6occu implements Command {
     
     /** Directory where FILES are located, relative to LERRCP raw directory. **/
     const DIR = 'a6occu';

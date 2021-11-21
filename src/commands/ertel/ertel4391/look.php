@@ -9,6 +9,8 @@
 namespace g5\commands\ertel\ertel4391;
 
 use tiglib\patterns\Command;
+use g5\commands\gauq\LERRCP;
+use g5\commands\csicop\irving\Irving;
 
 class look implements Command {
     
@@ -45,8 +47,7 @@ class look implements Command {
                 . "Possible values for parameter : $possibleParams_str\n";
         }
         $method = 'look_' . $param;
-        self::$method();
-        return '';
+        return self::$method();
     }
     
     
@@ -55,6 +56,7 @@ class look implements Command {
         Look at SPORT and IG columns.
     **/
     private static function look_sport(){
+        $report = '';
         $rows = Ertel4391::loadTmpFile();
         $res = []; // assoc array keys = sport codes ; values = [IG, n]
         foreach($rows as $row){
@@ -68,19 +70,20 @@ class look implements Command {
             $res[$sport]['n'] ++;
             // coherence check
             if($res[$sport]['IG'] != $row['IG']){
-                echo "Incoherent association sport / IG, line " . $row['NR'] . ' ' . $row['FNAME'] . ' ' . $row['GNAME']
+                $report .= "Incoherent association sport / IG, line " . $row['NR'] . ' ' . $row['FNAME'] . ' ' . $row['GNAME']
                     . ' : ' . $sport . ' ' . $row['IG'] . "\n";
             }
             if(strlen($sport) == 3){
-                echo 'Incoherent sport code : ' . $sport . ' ' . $row['NR'] . ' ' . $row['FNAME']
+                $report .= 'Incoherent sport code : ' . $sport . ' ' . $row['NR'] . ' ' . $row['FNAME']
                         . ' ' . $row['GNAME'] . ' ' . $row['IG'] . "\n";
             }
         }
         // print
         ksort($res);
         foreach($res as $sport => $details){
-            echo "{$details['IG']} $sport : {$details['n']}\n";
+            $report .= "{$details['IG']} $sport : {$details['n']}\n";
         }
+        return $report;
     }
     
     // ******************************************************
@@ -88,6 +91,7 @@ class look implements Command {
         Look at QUEL column.
     **/
     private static function look_quel(){
+        $report = '';
         $rows = Ertel4391::loadTmpFile();
         $res = []; // assoc codes => nb of records with this code
         foreach($rows as $row){
@@ -97,7 +101,8 @@ class look implements Command {
             $res[$row['QUEL']] ++;
         }
         ksort($res);
-        echo "\n"; print_r($res); echo "\n";
+        $report .= "\n" . print_r($res, true) . "\n";
+        return $report;
     }
     
     // ******************************************************
@@ -105,6 +110,7 @@ class look implements Command {
         Look at DATE column.
     **/
     private static function look_date(){
+        $report = '';
         $rows = Ertel4391::loadTmpFile();
         $N = 0;             // total nb lines
         $nWith = 0;         // nb lines with birth time
@@ -124,16 +130,17 @@ class look implements Command {
                 $nWith++;
             }
             else{
-                echo 'BUG in date : ' . $row['NR'] . ' ' . $row['FNAME'] . ' ' . $row['GNAME'] . ' : ' . $row['DATE'] . "\n";
+                $report .= 'BUG in date : ' . $row['NR'] . ' ' . $row['FNAME'] . ' ' . $row['GNAME'] . ' : ' . $row['DATE'] . "\n";
             }
         }
         // percent
         $pWith = round($nWith * 100 / $N, 2);
         $pWithout = round($nWithout * 100 / $N, 2);
-        echo "N total : $N\n";
-        echo "N with birth time : $nWith ($pWith %)\n";
-        echo "N without birth time : $nWithout ($pWithout %)\n";
-        echo "N without birth time from Gauquelin LERRCP : $nWithoutFromG\n";
+        $report .= "N total : $N\n";
+        $report .= "N with birth time : $nWith ($pWith %)\n";
+        $report .= "N without birth time : $nWithout ($pWithout %)\n";
+        $report .= "N without birth time from Gauquelin LERRCP : $nWithoutFromG\n";
+        return $report;
     }
     
     // ******************************************************
@@ -141,6 +148,7 @@ class look implements Command {
         Look at eminence columns : ZITRANG ZITSUM ZITATE ZITSUM_OD
     **/
     private static function look_eminence(){
+        $report = '';
         $rows = Ertel4391::loadTmpFile();
         $ranks = []; // assoc array rank => nb records with this rank (ZITRANG)
         $sums = []; // assoc array sums => nb records with this sum (ZITSUM)
@@ -167,11 +175,12 @@ class look implements Command {
         ksort($ranks);
         ksort($sums);
         ksort($sources);
-        echo "\n"; print_r($ranks); echo "\n";
-        echo "\n"; print_r($sums); echo "\n";
-        echo "\n"; print_r($sources); echo "\n";
+        $report .= "\n" . print_r($ranks, true) . "\n";
+        $report .= "\n" . print_r($sums, true) . "\n";
+        $report .= "\n" . print_r($sources, true) . "\n";
         arsort($sources);
-        echo "\n"; print_r($sources); echo "\n";
+        $report .= "\n" . print_r($sources, true) . "\n";
+        return $report;
     }
     
     // ******************************************************
@@ -180,6 +189,7 @@ class look implements Command {
         Columns : G_NR PARA_NR CFEPNR CSINR G55
     **/
     private static function look_ids(){
+        $report = '';
         $rows = Ertel4391::loadTmpFile();
         $N = 0;
         $res = [
@@ -222,12 +232,11 @@ class look implements Command {
             'CFEPNR' => 'CFEPP',
         ];
         //
-        echo "Total : $N\n";
+        $report .= "Total : $N\n";
         foreach($res as $k => $v){
-            echo str_pad($labels[$k], 16) . str_pad($k, 8) . "$v ({$p[$k]} %)\n";
+            $report .= str_pad($labels[$k], 16) . str_pad($k, 8) . "$v ({$p[$k]} %)\n";
         }
-        
-        
+        return $report;
     }
     
     // ******************************************************
@@ -237,6 +246,7 @@ class look implements Command {
         Tests if there is a one to one correspondance between the values of the 3 columns
     **/
     private static function look_mars(){
+        $report = '';
         $rows = Ertel4391::loadTmpFile();
         $N = 0;
         $res = [];
@@ -257,19 +267,19 @@ class look implements Command {
         $one_to_one = true;
         foreach($res as $s36 => $value){
             if(count($value['MA_']) != 1){
-                echo "Problem for sector36, MA_ : $s36\n";
+                $report .= "Problem for sector36, MA_ : $s36\n";
                 $one_to_one = false;
             }
             if(count($value['MA12']) != 1){
-                echo "Problem for sector36, MA12 : $s36\n";
+                $report .= "Problem for sector36, MA12 : $s36\n";
                 $one_to_one = false;
             }
         }
         if(!$one_to_one){
             return;
         }
-        echo "<table class=\"wikitable margin center\">\n";
-        echo "    <tr><th>MARS</th><th>MA12</th><th>MA_<br>(importance)</th></tr>\n";
+        $report .= "<table class=\"wikitable margin center\">\n";
+        $report .= "    <tr><th>MARS</th><th>MA12</th><th>MA_<br>(importance)</th></tr>\n";
         foreach($res as $s36 => $value){
             $s12 = $value['MA12'][0];
             $ipt = $value['MA_'][0]; // importance
@@ -277,13 +287,14 @@ class look implements Command {
             if($s36 == 9 || $s36 == 36){
                 $tr = '<tr class="bold">';
             }
-            echo "    $tr"
+            $report .= "    $tr"
                 . "<td>$s36</td>"
                 . "<td>$s12</td>"
                 . ($ipt == 2 ? "<td class=\"bold\">$ipt</td>" : "<td>$ipt</td>")
                 . "</tr>\n";
         }
-        echo "</table>\n";
+        $report .= "</table>\n";
+        return $report;
     }
     
     // ******************************************************
@@ -293,6 +304,7 @@ class look implements Command {
         0 GCPAR without PARA_NR
     **/
     private static function look_cp(){
+        $report = '';
         $rows = Ertel4391::loadTmpFile();
         $nMiss = 0;
         foreach($rows as $row){
@@ -303,7 +315,8 @@ class look implements Command {
                 $nMiss++;
             }
         }
-        echo "$nMiss GCPAR without PARA_NR\n";
+        $report .= "$nMiss GCPAR without PARA_NR\n";
+        return $report;
     }
     
     // ******************************************************
@@ -311,7 +324,27 @@ class look implements Command {
         Compares occupation codes (sport) of Ertel with A1 and CSICOP.
     **/
     private static function look_checkoccu(){
-        die("TO IMPLEMENT\n");
+        $report = '';
+        $erRows = Ertel4391::loadTmpFile();
+        $a1Rows = LERRCP::loadTmpFile_num('A1');
+        $csiRows = Irving::loadTmpfile_csid();
+        $reportA1 = $reportCSI = '';
+        foreach($erRows as $erId => $erRow){
+            $erSport = Ertel4391::computeSport($erRow);
+            if($erRow['QUEL'] == 'G:A01'){
+                $num = str_replace('A1-', '', $erRow['GQID']);
+                $a1Sport = $a1Rows[$num]['OCCU'];
+                if($a1Sport != $erSport){
+                    $reportA1 .= "ertel $erId: $erSport / A1 $num: $a1Sport\n";
+                }
+//echo "$num - $erSport - $a1Sport\n";
+//exit;
+// https://www.sudouest.fr/2013/09/03/le-bts-peut-compter-sur-les-anciens-1157295-3566.php?nic
+            }
+            
+        }
+        $reportA1 = "========= A1 differences: =========\n";
+        return $report;
     }
     
 } // end class

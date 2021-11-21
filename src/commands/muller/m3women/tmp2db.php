@@ -12,7 +12,7 @@ use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
-use g5\model\TODO;
+use g5\model\Issue;
 use g5\commands\muller\Muller;
 use g5\commands\gauq\LERRCP;
 
@@ -111,8 +111,8 @@ class tmp2db implements Command {
                 $new['birth']['place']['c1'] = $line['C1'];
                 $new['birth']['place']['c2'] = $line['C2'];
                 $new['birth']['place']['cy'] = $line['CY'];
-                $new['birth']['place']['lg'] = $line['LG'];
-                $new['birth']['place']['lat'] = $line['LAT'];
+                $new['birth']['place']['lg'] = (float)$line['LG'];
+                $new['birth']['place']['lat'] = (float)$line['LAT'];
                 //
                 if(M3women::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
                     $p->addOccus([ M3women::OCCUS[$line['OCCU']] ]);
@@ -219,7 +219,7 @@ if($multime != $curatime){
 else{
 echo "NOTE: $localReport_html\n";
     $localReport_html = "Gauquelin and Müller have same time:\n" . $localReport_html;
-    $p->addNote($localReport_html);
+    $p->addNotes([$localReport_html]);
 }
 */
                     }

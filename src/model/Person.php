@@ -56,8 +56,8 @@ class Person {
         if(isset($row['history'])){
             $row['history'] = json_decode($row['history'], true);
         }
-        if(isset($row['todo'])){
-            $row['todo'] = json_decode($row['todo'], true);
+        if(isset($row['issues'])){
+            $row['issues'] = json_decode($row['issues'], true);
         }
         if(isset($row['notes'])){
             $row['notes'] = json_decode($row['notes'], true);
@@ -327,21 +327,24 @@ class Person {
     
     /**
         
-        @param  $k  Key of the todo
-        @param  $v  Value of the todo
+        @param  $k  Key of the issue
+        @param  $v  Value of the issue
     **/
-    public function addTodo(string $k, string $v) {
-        if(isset($this->data['todo'][$k])){
-            throw new \Exception("TRYING TO ADD A TODO OF AN EXISTING KEY \n" . $this->data['slug'] . " - todo key = $key\n");
+    public function addIssue(string $k, string $v) {
+        if(isset($this->data['issues'][$k])){
+            throw new \Exception("TRYING TO ADD A ISSUE OF AN EXISTING KEY \n" . $this->data['slug'] . " - issue key = $key\n");
         }
-        $this->data['todo'][$k] = $v;
+        if(is_null($this->data['issues'][$k])){
+            $this->data['issues'][$k] = [];
+        }
+        $this->data['issues'][$k] = $v;
     }
     
     /**
-        @param  $k  Key of the todo to remove
+        @param  $k  Key of the issue to remove
     **/
-    public function removeTodo(string $k) {
-        unset($this->data['todo'][$k]);
+    public function removeIssue(string $k) {
+        unset($this->data['issues'][$k]);
     }
     
     public function addHistory($command, $sourceSlug, $newdata, $rawdata){
@@ -378,10 +381,14 @@ class Person {
     }
     
     /** 
-        Adds a note
+        Adds an array of notes
     **/
-    public function addNote($note){
-        $this->data['notes'][] = $note;
+    public function addNotes($notes){
+        foreach($notes as $note){
+            if(!in_array($note, $this->data['notes'])){
+                $this->data['notes'][] = $note;
+            }
+        }
     }
     
     // *********************** CRUD *******************************
@@ -405,7 +412,7 @@ class Person {
             trust,
             acts,
             history,
-            todo,
+            issues,
             notes
             )values(?,?,?,?,?,?,?,?,?,?,?,?,?) returning id");
         $stmt->execute([
@@ -420,7 +427,7 @@ class Person {
             json_encode($this->data['trust']),
             json_encode($this->data['acts']),
             json_encode($this->data['history']),
-            json_encode($this->data['todo']),
+            json_encode($this->data['issues']),
             json_encode($this->data['notes']),
         ]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -445,7 +452,7 @@ class Person {
             trust=?,
             acts=?,
             history=?,
-            todo=?,
+            issues=?,
             notes=?
             where id=?
             ");
@@ -461,7 +468,7 @@ class Person {
             json_encode($this->data['trust']),
             json_encode($this->data['acts']),
             json_encode($this->data['history']),
-            json_encode($this->data['todo']),
+            json_encode($this->data['issues']),
             json_encode($this->data['notes']),
             $this->data['id'],
         ]);

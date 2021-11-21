@@ -130,9 +130,9 @@ class tmp2db implements Command {
                 $new['birth']['place']['c2'] = $line['C2'];
                 $new['birth']['place']['c3'] = $line['C3'];
                 $new['birth']['place']['cy'] = $line['CY'];
-                $new['birth']['place']['lg'] = $line['LG'];
-                $new['birth']['place']['lat'] = $line['LAT'];
-                $new['birth']['place']['geoid'] = $line['GEOID'];
+                $new['birth']['place']['lg'] = (float)$line['LG'];
+                $new['birth']['place']['lat'] = (float)$line['LAT'];
+                $new['birth']['place']['geoid'] = (int)$line['GEOID'];
                 $p->updateFields($new);
                 $p->addOccus($newOccus);
                 $p->computeSlug();

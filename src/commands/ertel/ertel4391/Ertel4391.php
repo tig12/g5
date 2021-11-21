@@ -148,15 +148,16 @@ class Ertel4391 {
         'BASE'      => 'baseball-player',
         'BASK'      => 'basketball-player',
         'BILL'      => 'billard-player',
-        'BOBS'      => 'bobsledder',
+        'BOBSL'     => 'bobsledder',
         'BOWL'      => 'bowler',
         'BOXI'      => 'boxer',
-'CANO'      => 'canoeist+kayaker',
+        'CANO'      => 'canoeist',
         'ALPI'      => 'mountaineer',
         'CYCL'      => 'cyclist',
         'HORS'      => 'equestrian',
         'FENC'      => 'fencer',
         'HOCK'      => 'field-hockey-player',
+        // see function computeSport()
         //'FOOT'      => 'american-football-player',
         //'FOOT'      => 'football-player',
         'GOLF'      => 'golfer',
@@ -164,12 +165,13 @@ class Ertel4391 {
         'HAND'      => 'handball-player',
         'JUDO'      => 'judoka',
         'AUTO'      => 'motor-sports-competitor',
-        'PELO'      => 'basque-pelota-player',
+        'MOTO'      => 'motor-sports-competitor',
+        'PELOT'     => 'basque-pelota-player',
         'WALK'      => 'race-walker',
         'RODE'      => 'rodeo-rider',
         'ROLL'      => 'roller-skater',
-'AVIR'      => 'rower',
-'ROWI'      => 'rower',
+        'AVIR'      => 'rower',
+        'ROWI'      => 'rower',
         'RUGB'      => 'rugby-player',
         'YACH'      => 'sport-sailer',
         'SHOO'      => 'sport-shooter',
@@ -182,5 +184,22 @@ class Ertel4391 {
         'ICES'      => 'winter-sports-practitioner',
         'WRES'      => 'wrestler',
     ];
+    
+    // ******************************************************
+    /**
+        Converts a sport code used in Ertel file to an occupation code used in g5.
+        @param  $line Associative array containing a line of the tmp file.
+    **/
+    public static function computeSport($line) {
+        $sport = $line['SPORT'];
+        if($sport != 'FOOT'){
+            return self::RAW_SPORT_OCCU[$sport];
+        }
+        // FOOT
+        if($line['CY'] == 'US'){
+            return 'american-football-player';
+        }
+        return 'football-player';
+    }
     
 } // end class

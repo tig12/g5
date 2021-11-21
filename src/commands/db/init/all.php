@@ -25,7 +25,7 @@ use g5\commands\db\init\dbcreate;
 use g5\commands\db\init\occus1;
 use g5\commands\db\init\occus2;
 use g5\commands\db\fill\source                  as fillsource;
-use g5\commands\db\fill\tweak                   as filltweak;
+use g5\commands\db\fill\person                  as fillperson;
 
 // raw2tmp
 use g5\commands\gauq\A\raw2tmp                  as raw2tmpA;
@@ -58,7 +58,7 @@ use g5\commands\muller\m2men\raw2tmp            as raw2tmpM2Men;
 
 // tmp2db
 use g5\commands\gauq\A\tmp2db                   as tmp2dbA;
-use g5\commands\gauq\A\occupn                   as occupnA6;
+use g5\commands\gauq\A\A6occu                   as A6occu;
 use g5\commands\gauq\D6\tmp2db                  as tmp2dbD6;
 use g5\commands\gauq\D10\tmp2db                 as tmp2dbD10;
 use g5\commands\gauq\E1_E3\tmp2db               as tmp2dbE1E3;
@@ -116,8 +116,8 @@ class all implements Command {
                 . "Possible values for parameter :\n$possibleParams_str\n";
         }
         
-        $filesCura = GauqRouter::computeDatafiles('all');
-        $filesCuraA = GauqRouter::computeDatafiles('A');
+        $filesGauq = GauqRouter::computeDatafiles('all');
+        $filesGauqA = GauqRouter::computeDatafiles('A');
         
         $t1 = microtime(true);
         
@@ -128,7 +128,7 @@ class all implements Command {
             echo "***********************\n";
             echo "*** Build tmp files ***\n";
             echo "***********************\n";
-            foreach($filesCuraA as $datafile){
+            foreach($filesGauqA as $datafile){
                 echo raw2tmpA::execute([$datafile, 'raw2tmp', 'small']);
                 echo addGeoA::execute([$datafile, 'addGeo', 'small']);
             }
@@ -137,7 +137,7 @@ class all implements Command {
             echo raw2tmpD10::execute(['D10', 'raw2tmp']);
             echo raw2tmpE1E3::execute(['E1', 'raw2tmp', 'small']);
             echo raw2tmpE1E3::execute(['E3', 'raw2tmp', 'small']);
-            foreach($filesCura as $datafile){
+            foreach($filesGauq as $datafile){
                 echo tweak2tmpGauq::execute([$datafile, 'tweak2tmp']);
             }
             
@@ -181,11 +181,12 @@ class all implements Command {
             echo fillsource::execute([Wikidata::SOURCE_DEFINITION_FILE]);
             echo occus1::execute();
             
-            foreach($filesCuraA as $datafile){
+            foreach($filesGauqA as $datafile){
                 echo tmp2dbA::execute([$datafile, 'tmp2db', 'small']);
             }
+            echo fillperson::execute(['A1.yml']);
             
-            echo occupnA6::execute([]);
+            echo A6occu::execute([]);
             echo tmp2dbD6::execute(['D6', 'tmp2db', 'small']);
             echo tmp2dbD10::execute(['D10', 'tmp2db', 'small']);
             echo tmp2dbE1E3::execute(['E1', 'tmp2db', 'small']);
@@ -200,10 +201,10 @@ class all implements Command {
             echo tmp2dbIrving::execute(['small']);
             
             echo tmp2dbM3women::execute(['small']);
-            echo filltweak::execute(['muller-234-women.yml']);
+            echo fillperson::execute(['muller-234-women.yml']);
             
             echo tmp2dbM2men::execute(['small']);
-            echo filltweak::execute(['muller-612-men.yml']);
+            echo fillperson::execute(['muller-612-men.yml']);
             
             echo occus2::execute();
         }
@@ -220,7 +221,7 @@ class all implements Command {
             echo "***************************\n";
             echo "***    Export groups    ***\n";
             echo "***************************\n";
-            foreach($filesCuraA as $datafile){
+            foreach($filesGauqA as $datafile){
                 echo exportCura::execute([$datafile, 'export']);
             }
             echo exportCura::execute(['D6', 'export']);

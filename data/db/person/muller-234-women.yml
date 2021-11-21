@@ -1,12 +1,13 @@
 #
-# Human corrections to file data/raw/muller/muller-afd3/muller-afd3-women.txt
-# Fields sorted by afd3 id (Müller id in the file)
+# Human corrections to file data/tmp/muller/3-women/muller3-234-women.csv
+# Fields sorted by Müller id
 # WD base url = https://www.wikidata.org/wiki/Special:EntityPage/
 # 
 # 2021-07-10 17:19:55+01:00, Thierry Graff : Creation
 # 2021-08-12 14:25:06+02:00, Thierry Graff : Converted to db/fill/tweak format.
 
 -
+  ACTION: update
   ids-in-sources:
     afd3: '001'
     wd: Q270617
@@ -18,10 +19,11 @@
   occus:
     - writer
     - feminist
-  BUILD-NOTES:
+  notes:
     - 2021-08-01 06:09:20+02:00 corrections from https://en.wikipedia.org/wiki/Juliette_Adam
 
 -
+  ACTION: update
   ids-in-sources:
     afd3: '010'
     wd: Q161247
@@ -29,10 +31,11 @@
     family: Schleswig-Holstein-Sonderburg-Augustenburg
     given: Auguste Viktoria
     nobl: von
-  BUILD-NOTES:
+  notes:
     - 2021-07-10 20:22:54+01:00 corrections from https://de.wikipedia.org/wiki/Auguste_Viktoria_von_Schleswig-Holstein-Sonderburg-Augustenburg
 
 -
+  ACTION: update
   ids-in-sources:
     afd3: '011'
     wd: Q270187
@@ -42,11 +45,12 @@
     spouse: Auriol
     fame:
       family: Auriol
-  BUILD-NOTES:
+  notes:
     - 2021-08-02 16:46:40+02:00 corrections from https://fr.wikipedia.org/wiki/Jacqueline_Auriol
 
 # Bele Bachem
 -
+  ACTION: update
   ids-in-sources:
     afd3: '013'
     wd: Q815333
@@ -57,6 +61,7 @@
     - painter
 
 -
+  ACTION: update
   ids-in-sources:
     afd3: '020'
     wd: Q97003
@@ -74,6 +79,7 @@
 
 # BERGER Erna Elisabeth E.
 -
+  ACTION: update
   ids-in-sources:
     afd3: '023'
   birth:
@@ -82,6 +88,7 @@
 
 # Bernadette Soubirous
 -
+  ACTION: update
   ids-in-sources:
     afd3: '024'
     wd: Q55398
@@ -90,6 +97,7 @@
   
 # Rosa Bonheur
 -
+  ACTION: update
   ids-in-sources:
     afd3: '030'
     wd: Q241732
@@ -101,6 +109,7 @@
 
 # Maria CASPAR-FILSER 
 -
+  ACTION: update
   ids-in-sources:
     afd3: '040'
     wd: Q545965
@@ -110,6 +119,7 @@
     - painter
     
 -
+  ACTION: update
   ids-in-sources:
     afd3: '055'
     wd: Q76851
@@ -121,6 +131,7 @@
 
 # Frieda Duensing
 -
+  ACTION: update
   ids-in-sources:
     afd3: '060'
     wd: Q1456321
@@ -133,6 +144,7 @@
   
 # Maria Goretti
 -
+  ACTION: update
   ids-in-sources:
     afd3: '087'
     wd: Q234697
@@ -140,6 +152,7 @@
     - saint
   
 -
+  ACTION: update
   ids-in-sources:
     afd3: '109'
     wd: Q7504
@@ -154,8 +167,22 @@
     - chemist
     - politician
 
+-
+  ACTION: update
+  ids-in-sources:
+    afd3: '111'
+    wd: Q167433
+  name:
+    given: Caroline Amalie Elisabeth
+    nobl: von
+  notes:
+    - |
+      2021-07-10 20:27:58+01:00 corrections from
+      https://de.wikipedia.org/wiki/Caroline_von_Braunschweig-Wolfenb%C3%BCttel
+
 # Marie Laurencin
 -
+  ACTION: update
   ids-in-sources:
     afd3: '124'
     wd: Q233088
@@ -164,17 +191,7 @@
     - printmaker
 
 -
-  ids-in-sources:
-    afd3: '111'
-    wd: Q167433
-  name:
-    given: Caroline Amalie Elisabeth
-    nobl: von
-  BUILD-NOTES:
-    - 2021-07-10 20:27:58+01:00 corrections from
-      https://de.wikipedia.org/wiki/Caroline_von_Braunschweig-Wolfenb%C3%BCttel
-
--
+  ACTION: update
   ids-in-sources:
     afd3: '135'
     wd: Q1896519
@@ -185,6 +202,7 @@
     - zoologist
 
 -
+  ACTION: update
   ids-in-sources:
     afd3: '154'
     wd: Q76158
@@ -196,6 +214,7 @@
       given: Karoline
     
 -
+  ACTION: update
   ids-in-sources:
     afd3: '155'
     wd: Q235507
@@ -210,6 +229,7 @@
 
 # Paula Modersohn-Becker
 -
+  ACTION: update
   ids-in-sources:
     afd3: '156'
     wd: Q234370
@@ -218,6 +238,7 @@
 
 # Berthe Morisot
 -
+  ACTION: update
   ids-in-sources:
     afd3: '162'
     wd: Q105320
@@ -226,6 +247,7 @@
 
 # Hanna Nagel
 -
+  ACTION: update
   ids-in-sources:
     afd3: '164'
     wd: Q1575726
@@ -234,6 +256,7 @@
 
 # Therese Neumann 
 -
+  ACTION: update
   ids-in-sources:
     afd3: '166'
     wd: Q76551
@@ -244,6 +267,7 @@
 
 # Elisabeth Ney
 -
+  ACTION: update
   ids-in-sources:
     afd3: '167'
     wd: Q99869
@@ -254,6 +278,7 @@
     - sculptor
 
 -  
+  ACTION: update
   ids-in-sources:
     afd3: '177'
     wd: Q2366473
@@ -270,12 +295,14 @@
     date: '1860-02-11 06:00'
   acts:
     - birth/1860/02/11/eymery-marguerite-1860-02-11
-  BUILD-NOTES:
-    - 2021-07-10 17:20:03+01:00 Date checked on civil registry
+  notes:
+    - |
+      2021-07-10 17:20:03+01:00 Date checked on civil registry
       because Müller and Gauquelin differ - Gauquelin was right
 
 # Milly Steger
 -
+  ACTION: update
   ids-in-sources:
     afd3: '207'
     wd: Q1246805
@@ -287,6 +314,7 @@
 
 # Sophie Taeuber-Arp
 -
+  ACTION: update
   ids-in-sources:
     afd3: '211'
     wd: Q254395
@@ -305,6 +333,7 @@
 
 # Suzanne Valadon
 -
+  ACTION: update
   ids-in-sources:
     afd3: '217'
     wd: Q156889

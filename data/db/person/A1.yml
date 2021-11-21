@@ -1,0 +1,67 @@
+#
+# Human additions to file data/tmp/gauq/lerrcp/A1.csv
+# records are sorted by NUM within the file A1
+# 
+# 2021-11-18 16:16:30+01:00, Thierry Graff : Creation
+
+# Van Den Boorn Charles
+-
+  ACTION: update
+  ids-in-sources:
+    a1: '513'
+  occus:
+    - cyclist
+    - motor-sports-competitor
+  death:
+    date: '1958-01-24'
+    place:
+      name: Saint-Germain-en-Laye
+      lg: 2.0938
+      lat: 48.8989
+      c2: 78
+      cy: FR
+      geoid: 2979783
+
+  notes:
+    - Death informations come from <a href="https://earlyaviators.com/eborn1.htm">https://earlyaviators.com/eborn1.htm</a>
+  issues:
+    chk-date: |
+      Page <a href="https://earlyaviators.com/eborn1.htm">https://earlyaviators.com/eborn1.htm</a> says: "11 July 1874 (some sources say 1873)". Gauquelin gives 1873. A check in civil registry is necessary to find out.
+
+-
+  ACTION: insert
+  sources:
+    - a1
+    - ertel-sport
+  ids-in-sources:
+    a1: '1899'
+    ertel-sport: '1548'
+    lerrcp: A1-1899
+  name:
+    family: Escalante
+    given: Edouard
+  occus:
+    - rugby-player
+  birth:
+    date: '1934-12-03 12:30'
+    place: 
+      name: Boucau
+      cy: FR
+      c2: '64'
+      lg: -1.46556
+      lat: 43.5277
+      geoid: 3031389
+  death:
+    date: '2012-11-22'
+    place:
+      name: Mably
+      cy: FR
+      c2: '42'
+      lg: 4.06014
+      lat: 46.06484
+      geoid: 2996921
+  notes: 
+    - |
+      This person is present in Ertel sportsmen list, but not present in cura5 A1 list.
+      <br>Birth place and death informations come from <a href="https://avis-deces.linternaute.com/nom/famille-escalante">https://avis-deces.linternaute.com/nom/famille-escalante</a> (Ertel file does not contain birth place).
+      

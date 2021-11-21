@@ -209,6 +209,13 @@
   build-notes: see php run-g5.php newalch ertel4391 look sport
 
 -
+  NR: 4155
+  GQID: A1-513
+  build-notes: |
+    See cura file notice: "Numbers 513 and 1153 represent the same person : n. 1153 is not reproduced".
+    So the line pointing to A1-1153 was pointing to an unexisting record.
+
+-
   NR: 4326
   CSINR: 394
   build-notes: |

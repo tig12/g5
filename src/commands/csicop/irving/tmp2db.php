@@ -138,8 +138,8 @@ class tmp2db implements Command {
                 $new['birth']['tzo'] = $line['TZO'];
                 $new['birth']['place']['c2'] = $line['C2'];
                 $new['birth']['place']['cy'] = $line['CY'];
-                $new['birth']['place']['lg'] = $line['LG'];
-                $new['birth']['place']['lat'] = $line['LAT'];
+                $new['birth']['place']['lg'] = (float)$line['LG'];
+                $new['birth']['place']['lat'] = (float)$line['LAT'];
                 //
                 $p->addOccus([$line['SPORT']]);
                 $p->addSource($source->data['slug']);

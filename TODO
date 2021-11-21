@@ -1,5 +1,11 @@
 
+
+
+
 - see php bug - https://bugs.php.net/bug.php?id=81002
+
+
+- add notes and issues in tmp2db - fix array / map problem for go
 
 - scans of data/auxiliary/1991-muller1-writers are incomplete
   Ask for new complete version and include supplementary fields in g5

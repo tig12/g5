@@ -94,8 +94,8 @@ class tmp2db100 implements Command {
                 $new['birth']['place']['name'] = $line['PLACE'];
                 $new['birth']['place']['c2'] = $line['C2'];
                 $new['birth']['place']['cy'] = $line['CY'];
-                $new['birth']['place']['lg'] = $line['LG'];
-                $new['birth']['place']['lat'] = $line['LAT'];
+                $new['birth']['place']['lg'] = (float)$line['LG'];
+                $new['birth']['place']['lat'] = (float)$line['LAT'];
                 // OPUS, LEN not part of standard person fields
                 // are stored in addHistory()
                 $occu = self::computeOccu($line);

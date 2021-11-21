@@ -11,13 +11,14 @@
 # 1 - Meta-data
 #
 
-# Creation of this todo
+# Creation of this issue
 object:
   date:
   author:
 
 #
-# 2 - Unique id of a slug
+# 2 - Unique id of an issue
+# = combination of a person slug and an issue key
 #
 
 # Two possible forms: person-slug and person-slugs
@@ -29,17 +30,16 @@ object:
 # person-slugs: 
 person-slug: 
 
-# Unique identifier of a TODO within a given person
-# Can be one of class model.TODO constants (standard keys) or any unique string (custom keys)
+# Unique identifier of an Issue within a given person
+# Can be one of class model.Issue constants (standard keys) or any unique string (custom keys)
 key: 
 
-
 #
-# 3 - Content of the todo
+# 3 - Content of the issue
 #
 
 # If empty, takes the value of field 'key'
-# Useful when 2 or more todos of a same type
+# Useful when 2 or more issues of a same type
 type:
 
 description: |

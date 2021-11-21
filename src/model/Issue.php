@@ -10,9 +10,12 @@ namespace g5\model;
 //use g5\app\Config;
 //use g5\model\DB5;
 
-TODO::init();
-class TODO {
+Issue::init();
+class Issue {
     
+    //Standard values for keys
+    
+    /** Check the name **/
     const CHK_NAME = 'chk-name';
     
     /** Check day or time or both **/
@@ -29,7 +32,7 @@ class TODO {
     const CHK_NAME = 'chk-name';
     
     /** 
-        Associative array with the structure defined in TODO.yml
+        Associative array with the structure defined in Issue.yml
         Values of fields are empty
     **/
     public static $STRCUTURE;
@@ -37,17 +40,17 @@ class TODO {
     /**
     **/
     public static function init() {
-        self::$STRCUTURE = yaml_parse_file(__DIR__ . DS . 'TODO.yml');
+        self::$STRCUTURE = yaml_parse_file(__DIR__ . DS . 'Issue.yml');
     }
     
     
     /**
         @param  $data
-                    Associative array with the structure defined in TODO.yml.
+                    Associative array with the structure defined in Issue.yml.
                     May be incomplete.
         @return
-                    Associative array with the structure defined in TODO.yml.
-                    Valid TODO - incomplete fields completed.
+                    Associative array with the structure defined in Issue.yml.
+                    Valid Issue - incomplete fields completed.
     **/
     public static function newTodo($data) {
         $res = array_replace_recursive(self::$STRCUTURE, $data);

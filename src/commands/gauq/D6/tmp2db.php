@@ -113,8 +113,8 @@ class tmp2db implements Command {
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['place']['cy'] = $line['CY'];
-                $new['birth']['place']['lg'] = $line['LG'];
-                $new['birth']['place']['lat'] = $line['LAT'];
+                $new['birth']['place']['lg'] = (float)$line['LG'];
+                $new['birth']['place']['lat'] = (float)$line['LAT'];
                 $p->updateFields($new);
                 $p->addOccus($newOccus);
                 //

@@ -17,15 +17,14 @@ class G5{
     const SOURCE_DEFINITION_FILE = 'g5.yml';
     
     /** 
-        Separator for all csv files of data/5-tmp/ and data/3-edited/
+        Separator for all csv files of data/tmp/ and data/db/init/
     **/
     const CSV_SEP = ';';
     
     /** 
-        Used in all files containing human tweaks in data/build
-        This key is considered as notes and is not processed by tweak2db command.
+        Used in all files containing human tweaks in data/db/init
+        This key is considered as notes and is not processed by tweak2tmp commands.
     **/
-// TODO remove when all tweaks are converted to tweak2db
     const TWEAK_BUILD_NOTES = 'build-notes';
     
     

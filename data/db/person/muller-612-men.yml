@@ -1,11 +1,12 @@
 #
-# Human corrections to file data/raw/muller/muller-afd2/muller-afd2-men.txt
-# Fields sorted by afd2 id (Müller id in the file)
+# Human corrections to file data/tmp/muller/2-men/muller2-612-men.csv
+# Fields sorted by Müller id
 # WD base url = https://www.wikidata.org/wiki/Special:EntityPage/
 # 
 # 2021-09-05 03:27:53+02:00, Thierry Graff : Creation
 
 -
+  ACTION: update
   ids-in-sources:
     afd2: '6'
     wd: Q152245
@@ -18,17 +19,20 @@
     alter:
       - Albert of Saxe-Coburg and Gotha
       - Albert de Saxe-Cobourg-Gotha
-  BUILD-NOTES:
+  notes:
     - |
       2021-08-01 06:09:20+02:00
-      Corrections from
-      https://fr.wikipedia.org/wiki/Albert_de_Saxe-Cobourg-Gotha
-      https://en.wikipedia.org/wiki/Albert,_Prince_Consort
-      https://de.wikipedia.org/wiki/Albert_von_Sachsen-Coburg_und_Gotha
+      <br>Corrections from
+      <ul>
+          <li><a href="https://fr.wikipedia.org/wiki/Albert_de_Saxe-Cobourg-Gotha">https://fr.wikipedia.org/wiki/Albert_de_Saxe-Cobourg-Gotha</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Albert,_Prince_Consort">https://en.wikipedia.org/wiki/Albert,_Prince_Consort</a></li>
+          <li><a href="https://de.wikipedia.org/wiki/Albert_von_Sachsen-Coburg_und_Gotha">https://de.wikipedia.org/wiki/Albert_von_Sachsen-Coburg_und_Gotha</a></li>
+      </ul>
       Each page give a different official given name.
-      Retained German version
+      <br>Retained German version.
 
 -
+  ACTION: update
   ids-in-sources:
     afd2: '119'
     wd: Q366355
@@ -40,6 +44,7 @@
     - pianist
 
 -
+  ACTION: update
   ids-in-sources:
     afd2: '160'
     wd: Q38337
@@ -50,6 +55,7 @@
       - Alexandre Dumas père
 
 -
+  ACTION: update
   ids-in-sources:
     afd2: '186'
     wd: Q129092
@@ -60,6 +66,7 @@
       full: Fernandel
 
 -
+  ACTION: update
   ids-in-sources:
     afd2: '193'
     wd: Q37064
@@ -70,6 +77,7 @@
 
 
 -
+  ACTION: update
   ids-in-sources:
     afd2: '238'
     wd: Q302873
@@ -80,6 +88,7 @@
       full: Grock
 
 -
+  ACTION: update
   ids-in-sources:
     afd2: '329'
     wd: Q4724
@@ -88,6 +97,7 @@
     family: Jeanneret-Gris
     
 -
+  ACTION: update
   ids-in-sources:
     afd2: '416'
     wd: Q60684
@@ -97,6 +107,7 @@
     nobl: von 
 
 -
+  ACTION: update
   ids-in-sources:
     afd2: '429'
     wd: Q16975
@@ -109,6 +120,7 @@
       given: Giovanni Battista Enrico Antonio Maria
 
 -
+  ACTION: update
   ids-in-sources:
     afd2: '550'
     wd: Q42247

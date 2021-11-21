@@ -64,7 +64,7 @@ sources: []
 # key / value pairs
 # key = source slug
 # value = local id within the given source
-ids-in-sources: []
+ids-in-sources: {}
 
 # Reliability of the information
 # Can be a number or a key-value map
@@ -78,8 +78,10 @@ history: []
 
 # key / value pairs
 # keys: string identifying the kind of check needed
-# keys can be any string - standard keys exist, see constants of class model.Todo
+# keys can be any string - standard keys exist, see constants of class model.Issue
 # values: description of the reason leading to the need to check the person
-todo: []
+# Note: initialized to null because php cannot make the difference between
+# initialization to empty map {} and empty array []
+issues: 
 
 notes: []
