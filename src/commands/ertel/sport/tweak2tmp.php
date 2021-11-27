@@ -6,7 +6,7 @@
     @license    GPL
     @history    2019-12-23 18:40:13+01:00, Thierry Graff : Creation from command muller1083 tweak2csv
 ********************************************************************************/
-namespace g5\commands\ertel\ertel4391;
+namespace g5\commands\ertel\sport;
 
 use g5\G5;
 use g5\app\Config;
@@ -15,7 +15,7 @@ use tiglib\patterns\Command;
 class tweak2tmp implements Command {
     
     /** 
-        Called by : php run-g5.php ertel ertel4391 tweak2tmp
+        Called by : php run-g5.php ertel sport tweak2tmp
         @param $params empty array
         @return Report
     **/
@@ -23,8 +23,8 @@ class tweak2tmp implements Command {
         if(count($params) > 0){
             return "WRONG USAGE : useless parameter : {$params[2]}\n";
         }
-        $report = "--- ertel ertel4391 tweak2tmp ---\n";
-        $yamlfile = Ertel4391::tweakFilename();
+        $report = "--- ertel sport tweak2tmp ---\n";
+        $yamlfile = ErtelSport::tweakFilename();
         
         // load tweaks in an assoc arrray (keys = NR)
         $yaml = yaml_parse(file_get_contents($yamlfile));
@@ -46,7 +46,7 @@ class tweak2tmp implements Command {
             $tweaks[$NR] = $record;
         }
         
-        $target = Ertel4391::loadTmpFile_nr();
+        $target = ErtelSport::loadTmpFile_nr();
         
         $keys = array_keys(current($target));
         $res = implode(G5::CSV_SEP, $keys) . "\n";
@@ -68,7 +68,7 @@ class tweak2tmp implements Command {
             $res .= implode(G5::CSV_SEP, $row) . "\n";
         }
         
-        $targetFile = Ertel4391::tmpFilename();
+        $targetFile = ErtelSport::tmpFilename();
         file_put_contents($targetFile, $res);
         
         $report .= "Updated $N records in $targetFile\n";

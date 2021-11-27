@@ -1,11 +1,11 @@
 <?php
 /******************************************************************************
-    Code common to ertel4391
+    Code common to sport
     
     @license    GPL
     @history    2019-05-11 23:15:33+02:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\commands\ertel\ertel4391;
+namespace g5\commands\ertel\sport;
 
 use g5\app\Config;
 use g5\model\Source;
@@ -13,7 +13,7 @@ use g5\model\Group;
 use tiglib\arrays\csvAssociative;
 use g5\commands\ertel\Ertel;
 
-class Ertel4391 {
+class ErtelSport {
     
     /**
         Trust level for data coming from Ertel file
@@ -34,14 +34,14 @@ class Ertel4391 {
     
     // *********************** Group management ***********************
     
+    /** Slug of the group in db **/
+    const GROUP_SLUG = 'ertel-4384-sport';
+    
     /**
         Path to the yaml file containing the characteristics of the group ertel-4384-sportsmen.
         Relative to directory data/db/group
     **/
-    const GROUP_DEFINITION_FILE = 'ertel' . DS . 'ertel-4384-sportsmen.yml';
-    
-    /** Slug of the group in db **/
-    const GROUP_SLUG = 'ertel-4384-sportsmen';
+    const GROUP_DEFINITION_FILE = 'ertel' . DS . 'sport' . DS. self::GROUP_SLUG . '.yml';
     
     /** Slugs of ertel-4384-sportsmen subgroups **/
     const SUBGROUP_SLUGS = [
@@ -83,7 +83,7 @@ class Ertel4391 {
     
     /** Path to the temporary csv file used to work on this group. **/
     public static function tmpFilename(){
-        return Ertel::tmpDirname() . DS . 'ertel-4384-sportsmen.csv';
+        return Ertel::tmpDirname() . DS . self::GROUP_SLUG . '.csv';
     }
     
     /**
@@ -110,7 +110,7 @@ class Ertel4391 {
     
     /** Path to the temporary csv file keeping an exact copy of the raw file. **/
     public static function tmpRawFilename(){
-        return Ertel::tmpDirname() . DS . 'ertel-4384-sportsmen-raw.csv';
+        return Ertel::tmpDirname() . DS . self::GROUP_SLUG . '-raw.csv';
     }
     
     /** Loads the "tmp raw file" in a regular array **/
@@ -121,7 +121,7 @@ class Ertel4391 {
     // *********************** Tweak file manipulation ***********************
     
     public static function tweakFilename(){
-        return Config::$data['dirs']['init'] . DS . 'newalch-tweak' . DS . 'ertel-4384-sportsmen.yml';
+        return Config::$data['dirs']['init'] . DS . 'newalch-tweak' . DS . self::GROUP_SLUG . '.yml';
     }
     
     // *********************** Country management ***********************

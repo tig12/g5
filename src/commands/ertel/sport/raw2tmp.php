@@ -14,7 +14,7 @@
     @history    2019-05-10 12:19:50+02:00, Thierry Graff : creation
     @history    2020-08-12 19:20:17+02:00, Thierry Graff : add generation of 4391SPO-raw.csv
 ********************************************************************************/
-namespace g5\commands\ertel\ertel4391;
+namespace g5\commands\ertel\sport;
 
 use g5\G5;
 use g5\app\Config;
@@ -30,12 +30,12 @@ class raw2tmp implements Command {
     **/
     public static function execute($params=[]): string {
         
-        $filename = Ertel4391::rawFilename();
+        $filename = ErtelSport::rawFilename();
         if(!is_file($filename)){
             return "ERROR : Missing file $filename\n";
         }
         
-        $report = "--- ertel ertel4391 raw2tmp ---\n";
+        $report = "--- ertel sport raw2tmp ---\n";
         
         $lines = file($filename);
         $output = $output_raw = '';
@@ -62,7 +62,7 @@ class raw2tmp implements Command {
             $new['SPORT']       = trim(mb_substr($line, 70, 6));
             $new['IG']          = trim(mb_substr($line, 79, 1));
             $country            = trim(mb_substr($line, 87, 3));
-            $new['CY'] = Ertel4391::RAW_NATION_CY[$country];
+            $new['CY'] = ErtelSport::RAW_NATION_CY[$country];
             $new['C2'] = ($country == 'SCO' ? 'SCT' : ''); // SCT = geonames code for Scotland
             $new['ZITRANG']     = trim(mb_substr($line, 100, 1));
             $new['ZITSUM']      = trim(mb_substr($line, 107, 1));
@@ -136,13 +136,20 @@ class raw2tmp implements Command {
         $output = implode(G5::CSV_SEP, array_keys($new)) . "\n" . $output;       
         $output_raw = implode(G5::CSV_SEP, array_keys($raw)) . "\n" . $output_raw;
 
-        $outfile = Ertel4391::tmpFilename();
+        // store tmp file 
+        $outfile = ErtelSport::tmpFilename();
         $dir = dirname($outfile);
         if(!is_dir($dir)){
             mkdir($dir, 0755, true);
         }
         file_put_contents($outfile, $output);
         $report .=  "Generated $nRes records in $outfile\n";
+        
+        // store tmp raw file 
+        $outfile = ErtelSport::tmpRawFilename();
+        file_put_contents($outfile, $output_raw);
+        $report .=  "Generated $nRes records in $outfile\n";
+        
         return $report;
     }
     

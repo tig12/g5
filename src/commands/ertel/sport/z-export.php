@@ -4,7 +4,7 @@
     @license    GPL
     @history    2019-10-23 23:54:51+02:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\commands\ertel\ertel4391;
+namespace g5\commands\ertel\sport;
 
 use g5\G5;
 use g5\app\Config;
@@ -54,8 +54,8 @@ class export implements Command {
     private static function export_dl(){
         $report = '';
         $gen = [
-            Config::$data['dirs']['5-newalch-csv'] . DS . Ertel4391::TMP_CSV_FILE =>
-            Config::$data['dirs']['9-newalch'] . DS . Ertel4391::TMP_CSV_FILE,
+            Config::$data['dirs']['5-newalch-csv'] . DS . ErtelSport::TMP_CSV_FILE =>
+            Config::$data['dirs']['9-newalch'] . DS . ErtelSport::TMP_CSV_FILE,
             
             Config::$data['dirs']['5-cpara'] . DS . '535-cpara-ertel.csv' =>
             Config::$data['dirs']['9-cpara'] . DS . '535-cpara-ertel.csv',

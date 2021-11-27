@@ -11,7 +11,7 @@
     @license    GPL
     @history    2019-06-05 23:25:56+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace g5\commands\ertel\ertel4391;
+namespace g5\commands\ertel\sport;
 
 use g5\G5;
 use g5\app\Config;
@@ -26,7 +26,7 @@ class ertel2skeptics implements Command {
     
     /** 
         Possible values of the command, for ex :
-        php run-g5.php ertel ertel4391 ertel2skeptics cfepp
+        php run-g5.php ertel sport ertel2skeptics cfepp
     **/
     const POSSIBLE_PARAMS = [
         'all'           => 'Generate all skeptic files',
@@ -86,7 +86,7 @@ class ertel2skeptics implements Command {
         
         // build arrays
         $cp = $cpfull = $cplowers = $csicop = $cfepp = [];
-        $rows = Ertel4391::loadTmpFile());
+        $rows = ErtelSport::loadTmpFile());
         foreach($rows as $row){
             $NUM = $row['G_NR'];
             if(($docp || $docpfull || $docplowers) && $row['PARA_NR'] != ''){

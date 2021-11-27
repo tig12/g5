@@ -407,7 +407,7 @@ class A{
         (this list contain some corrections on the names)
     **/
     const CORRECTIONS_BY_HAND = [
-        //A1 not done because completely fixed by further commands (like Ertel4391)
+        //A1 not done because completely fixed by further commands (like ErtelSport)
         'A2' => [
             '717'  => 'Trousseau Armand',
             '3528' => 'Plateau Joseph',

@@ -6,7 +6,7 @@
     @license    GPL
     @history    2020-09-25 20:55:38+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace g5\commands\ertel\ertel4391;
+namespace g5\commands\ertel\sport;
 
 use tiglib\patterns\Command;
 use g5\DB5;
@@ -41,7 +41,7 @@ class tmp2db implements Command {
             return "INVALID PARAMETER : $reportType - Possible values :\n" . $msg;
         }
         
-        $report = "--- Ertel4391 tmp2db ---\n";
+        $report = "--- ErtelSport tmp2db ---\n";
         
         if($reportType == 'full'){
             $namesReport = '';
@@ -49,27 +49,27 @@ class tmp2db implements Command {
         }
         
         // source corresponding to 3a_sports - insert if does not already exist
-        $source = Source::getBySlug(Ertel4391::SOURCE_SLUG); // DB
+        $source = Source::getBySlug(ErtelSport::SOURCE_SLUG); // DB
         if(is_null($source)){
-            $source = new Source(Ertel4391::SOURCE_DEFINITION_FILE);
+            $source = new Source(ErtelSport::SOURCE_DEFINITION_FILE);
             $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         
         // main group
-        $g = Group::getBySlug(Ertel4391::GROUP_SLUG); // DB
+        $g = Group::getBySlug(ErtelSport::GROUP_SLUG); // DB
         if(is_null($g)){
-            $g = Ertel4391::getGroup();
+            $g = ErtelSport::getGroup();
         }
         else{
             $g->deleteMembers(); // only deletes asssociations between group and members
         }
         // subgroups
         $subgroups = [];
-        foreach(Ertel4391::SUBGROUP_SLUGS as $slug){
+        foreach(ErtelSport::SUBGROUP_SLUGS as $slug){
             $subgroups[$slug] = Group::getBySlug($slug); // DB
             if(is_null($subgroups[$slug])){
-                $subgroups[$slug] = Ertel4391::getSubgroup($slug);
+                $subgroups[$slug] = ErtelSport::getSubgroup($slug);
             }
             else{
                 $subgroups[$slug]->deleteMembers(); // only deletes asssociations between group and members
@@ -81,8 +81,8 @@ class tmp2db implements Command {
         $nDiffDates = 0;
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
-        $lines = Ertel4391::loadTmpFile();
-        $linesRaw = Ertel4391::loadTmpRawFile();
+        $lines = ErtelSport::loadTmpFile();
+        $linesRaw = ErtelSport::loadTmpRawFile();
         $N = count($lines);
         $t1 = microtime(true);
         for($i=0; $i < $N; $i++){
@@ -93,14 +93,14 @@ echo "subsample = $subsample\n";
 exit;
             $lineRaw = $linesRaw[$i];
             // All persons already in db are coming from Gauquelin data
-            // see docs/ertel4391-sportsmen.html#ertel-s-subsamples
+            // see docs/sport-sportsmen.html#ertel-s-subsamples
             if($line['GQID'] == ''){
                 //
                 // Person not in Gauquelin data
                 //
                 $p = new Person();
                 $new = [];
-                $new['trust'] = Ertel4391::TRUST_LEVEL;
+                $new['trust'] = ErtelSport::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
                 $new['birth'] = [];
@@ -115,7 +115,7 @@ $new['birth']['place']['c2'] = $line['C2'];
                 $p->addIdInSource($source->data['slug'], $line['NR']);
                 $p->updateFields($new);
                 $p->computeSlug();
-                $p->addHistory("newalch ertel4391 tmp2db", $source->data['slug'], $new);
+                $p->addHistory("newalch sport tmp2db", $source->data['slug'], $new);
                 $p->addRaw($source->data['slug'], $lineRaw);
                 $nInsert++;
                 $p->data['id'] = $p->insert(); // DB
@@ -128,10 +128,10 @@ $new['birth']['place']['c2'] = $line['C2'];
                 // - precise sport in D6
                 // - sex
                 // Missing names in A1 are not handled here (done by class fixA1)
-                /* 
+/* 
                 $new = [];
                 $new['notes'] = [];
-                [$curaFile, $NUM] = Ertel4391::gnr2cura($line['GNR']);
+                [$curaFile, $NUM] = ErtelSport::gnr2cura($line['GNR']);
                 $gqId = LERRCP::gauquelinId($curaFile, $NUM);
                 $p = Person::getBySourceId($curaFile, $NUM);
                 if(is_null($p)){
@@ -155,7 +155,7 @@ $new['birth']['place']['c2'] = $line['C2'];
                 }
                 if($mulday != $curaday){
                     $nDiffDates++;
-                    $new['notes'][] = "CHECK birth day : $gqId $curaday / Ertel4391 {$line['NR']} $mulday";
+                    $new['notes'][] = "CHECK birth day : $gqId $curaday / ErtelSport {$line['NR']} $mulday";
                     $new['to-check'] = true;
                     if($reportType == 'full'){
                         $datesReport .= "\nCura $gqId\t $curaday {$p->data['name']['family']} - {$p->data['name']['given']}\n";

@@ -332,6 +332,7 @@ DEPT_STR;
             $res_raw .= implode(G5::CSV_SEP, $new_raw) . "\n";
         }
         
+        // store tmp file 
         $report = "--- muller m5medics raw2tmp ---\n";
         $outfile = M5medics::tmpFilename();
         $dir = dirname($outfile);
@@ -341,6 +342,7 @@ DEPT_STR;
         file_put_contents($outfile, $res);
         $report .=  "Generated $nRecords records in $outfile\n";
         
+        // store tmp raw file 
         $outfile = M5medics::tmpRawFilename();
         file_put_contents($outfile, $res_raw);
         $report .=  "Generated $nRecords records in $outfile\n";

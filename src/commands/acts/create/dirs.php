@@ -92,14 +92,14 @@ class dirs implements Command {
     
     // ******************************************************
     /** 
-        Compares Irving dates with Ertel4391
+        Compares Irving dates with ErtelSport
     **/
     private static function look_ertel(){
         
         $report = '';
         
         $irving = Irving::loadTmpCsv_csid();
-        $ertel = Ertel4391::loadTmpFile();
+        $ertel = ErtelSport::loadTmpFile();
         $nOK = $nDiff = 0;
         foreach($ertel as $erow){
             $CSID = $erow['CSINR'];

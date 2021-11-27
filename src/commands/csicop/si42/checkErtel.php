@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Comparison between si42 and Ertel4391
+    Comparison between si42 and ErtelSport
     
     @license    GPL
     @history    2019-11-24 05:10:54+01:00, Thierry Graff : Creation
@@ -9,7 +9,7 @@ namespace g5\commands\csicop\si42;
 
 use g5\G5;
 use tiglib\patterns\Command;
-use g5\commands\ertel\ertel4391\Ertel4391;
+use g5\commands\ertel\sport\ErtelSport;
 use g5\commands\gauq\LERRCP;
 use tiglib\arrays\csvAssociative;
 
@@ -51,12 +51,12 @@ class checkErtel implements Command {
     
     // ******************************************************
     private static function check_date(){
-        $ertel = Ertel4391::loadTmpFile();
+        $ertel = ErtelSport::loadTmpFile();
         $si42file = SI42::tmpFilename();
         $si42 = csvAssociative::compute($si42file);
         $d10 = LERRCP::loadTmpFile_num('D10');
         
-        $report =  "Check dates Ertel4391 / $si42file\n";
+        $report =  "Check dates ErtelSport / $si42file\n";
         
         $nDates = 0;
         foreach($ertel as $rowE){

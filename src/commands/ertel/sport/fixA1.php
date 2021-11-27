@@ -7,12 +7,12 @@
     @pre        data/tmp/gauq/lerrcp/A1.csv must exist.
                 (so src/commands/gauq/A/raw2tmp.php must have been executed before).
     @pre        data/tmp/ertel/ertel-4384-sportsmen.csv must exist
-                (so src/commands/ertel/ertel4391/raw2tmp.php must have been executed before).
+                (so src/commands/ertel/sport/raw2tmp.php must have been executed before).
     @license    GPL
     @history    2019-05-18 07:06:41+02:00, Thierry Graff : creation
                 2021-11-11 06:43:00+01:00, Thierry Graff : adaptation to new structure
 ********************************************************************************/
-namespace g5\commands\ertel\ertel4391;
+namespace g5\commands\ertel\sport;
 
 use g5\G5;
 use g5\app\Config;
@@ -23,7 +23,7 @@ use g5\commands\gauq\LERRCP;
 class fixA1 implements Command {
     
     /** 
-        Called by : php run-g5.php ertel ertel4391 fixA1 [update|report]
+        Called by : php run-g5.php ertel sport fixA1 [update|report]
         @param $params array that must contain 1 string : 'echo' or 'update'
     **/
     public static function execute($params=[]): string{
@@ -41,10 +41,10 @@ class fixA1 implements Command {
             return $err_msg;
         }
         
-        $report = "--- Ertel4391 fixA1 ---\n";
+        $report = "--- ErtelSport fixA1 ---\n";
         
         $gauqRows = csvAssociative::compute(LERRCP::tmpFilename('A1'));
-        $erteRows = csvAssociative::compute(Ertel4391::tmpFilename());
+        $erteRows = csvAssociative::compute(ErtelSport::tmpFilename());
         
         // build $gauqMissing
         // assoc arrays with NUM as key

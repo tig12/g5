@@ -14,7 +14,7 @@ use g5\G5;
 use g5\app\Config;
 use tiglib\patterns\Command;
 use g5\commands\gauq\LERRCP;
-use g5\commands\ertel\ertel4391\Ertel4391;
+use g5\commands\ertel\sport\ErtelSport;
 
 class addD10 implements Command {
 
@@ -34,7 +34,7 @@ class addD10 implements Command {
         
         $irving = Irving::loadTmpFile_csid();
         $d10 = LERRCP::loadTmpFile_num('D10');
-        $ertel = Ertel4391::loadTmpFile();
+        $ertel = ErtelSport::loadTmpFile();
         $ertel_csid = [];
         $ertel_gqid = [];
         foreach($ertel as $row){

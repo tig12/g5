@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Adds information coming from Ertel4391 to 5-csicop/408-csicop-si42.csv
+    Adds information coming from ErtelSport to 5-csicop/408-csicop-si42.csv
     
     
     
@@ -11,7 +11,7 @@ namespace g5\commands\csicop\si42;
 
 use g5\G5;
 use tiglib\patterns\Command;
-use g5\commands\ertel\ertel4391\Ertel4391;
+use g5\commands\ertel\sport\ErtelSport;
 use tiglib\arrays\csvAssociative;
 
 class addErtel implements Command {
@@ -26,11 +26,11 @@ class addErtel implements Command {
             return "USELESS PARAMETER : " . $params[0] . "\n";
         }
         
-        $ertel = Ertel4391::loadTmpFile();
+        $ertel = ErtelSport::loadTmpFile();
         $si42file = SI42::tmpFilename();
         $si42 = csvAssociative::compute($si42file);
         
-        $report =  "Add Ertel4391 to $si42file\n";
+        $report =  "Add ErtelSport to $si42file\n";
         
         $nDates = 0;
         foreach($ertel as $rowE){

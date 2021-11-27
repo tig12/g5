@@ -6,7 +6,7 @@
     @license    GPL
     @history    2019-05-11 18:58:50+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace g5\commands\ertel\ertel4391;
+namespace g5\commands\ertel\sport;
 
 use tiglib\patterns\Command;
 use g5\commands\gauq\LERRCP;
@@ -16,7 +16,7 @@ class look implements Command {
     
     /** 
         Possible values of the command, for ex :
-        php run-g5.php ertel ertel4391 look eminence
+        php run-g5.php ertel sport look eminence
     **/
     const POSSIBLE_PARAMS = [
         'sport',
@@ -57,7 +57,7 @@ class look implements Command {
     **/
     private static function look_sport(){
         $report = '';
-        $rows = Ertel4391::loadTmpFile();
+        $rows = ErtelSport::loadTmpFile();
         $res = []; // assoc array keys = sport codes ; values = [IG, n]
         foreach($rows as $row){
             $sport = $row['SPORT'];
@@ -92,7 +92,7 @@ class look implements Command {
     **/
     private static function look_quel(){
         $report = '';
-        $rows = Ertel4391::loadTmpFile();
+        $rows = ErtelSport::loadTmpFile();
         $res = []; // assoc codes => nb of records with this code
         foreach($rows as $row){
             if(!isset($res[$row['QUEL']])){
@@ -111,7 +111,7 @@ class look implements Command {
     **/
     private static function look_date(){
         $report = '';
-        $rows = Ertel4391::loadTmpFile();
+        $rows = ErtelSport::loadTmpFile();
         $N = 0;             // total nb lines
         $nWith = 0;         // nb lines with birth time
         $nWithout = 0;      // nb lines without birth time
@@ -149,7 +149,7 @@ class look implements Command {
     **/
     private static function look_eminence(){
         $report = '';
-        $rows = Ertel4391::loadTmpFile();
+        $rows = ErtelSport::loadTmpFile();
         $ranks = []; // assoc array rank => nb records with this rank (ZITRANG)
         $sums = []; // assoc array sums => nb records with this sum (ZITSUM)
         $sources = []; // assoc array sources => nb of records found in this source
@@ -190,7 +190,7 @@ class look implements Command {
     **/
     private static function look_ids(){
         $report = '';
-        $rows = Ertel4391::loadTmpFile();
+        $rows = ErtelSport::loadTmpFile();
         $N = 0;
         $res = [
             'G_NR' => 0,
@@ -247,7 +247,7 @@ class look implements Command {
     **/
     private static function look_mars(){
         $report = '';
-        $rows = Ertel4391::loadTmpFile();
+        $rows = ErtelSport::loadTmpFile();
         $N = 0;
         $res = [];
         for($i=1; $i <= 36; $i++){
@@ -305,7 +305,7 @@ class look implements Command {
     **/
     private static function look_cp(){
         $report = '';
-        $rows = Ertel4391::loadTmpFile();
+        $rows = ErtelSport::loadTmpFile();
         $nMiss = 0;
         foreach($rows as $row){
             if($row['QUEL'] != 'GCPAR'){
@@ -325,12 +325,12 @@ class look implements Command {
     **/
     private static function look_checkoccu(){
         $report = '';
-        $erRows = Ertel4391::loadTmpFile();
+        $erRows = ErtelSport::loadTmpFile();
         $a1Rows = LERRCP::loadTmpFile_num('A1');
         $csiRows = Irving::loadTmpfile_csid();
         $reportA1 = $reportCSI = '';
         foreach($erRows as $erId => $erRow){
-            $erSport = Ertel4391::computeSport($erRow);
+            $erSport = ErtelSport::computeSport($erRow);
             if($erRow['QUEL'] == 'G:A01'){
                 $num = str_replace('A1-', '', $erRow['GQID']);
                 $a1Sport = $a1Rows[$num]['OCCU'];

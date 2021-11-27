@@ -9,7 +9,7 @@ namespace g5\commands\csicop\irving;
 use g5\G5;
 use tiglib\patterns\Command;
 use g5\commands\gauq\Cura;
-use g5\commands\ertel\ertel4391\Ertel4391;
+use g5\commands\ertel\sport\ErtelSport;
 use g5\commands\csicop\si42\SI42;
 use tiglib\arrays\csvAssociative;
 
@@ -86,7 +86,7 @@ class look implements Command {
     }
     
     // ******************************************************
-    /**  Compares Irving dates with Ertel4391 **/
+    /**  Compares Irving dates with ErtelSport **/
     private static function look_ertel(){
         
         $report = '';
@@ -95,9 +95,9 @@ class look implements Command {
         if(empty($irving)){
             return "ERROR : Missing file " . Irving::tmpFilename() . "\nFirst execute : php run-g5.php csicop irving raw2tmp\n";
         }
-        $ertel = @Ertel4391::loadTmpFile();
+        $ertel = @ErtelSport::loadTmpFile();
         if(empty($ertel)){
-            return "ERROR : Missing file " . Ertel4391::tmpFilename() . "\nFirst import this file\n";
+            return "ERROR : Missing file " . ErtelSport::tmpFilename() . "\nFirst import this file\n";
         }
         $nOK = $nDiff = 0;
         foreach($ertel as $erow){
