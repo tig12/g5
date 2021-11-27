@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Geonames | Gauquelin5</title>
+    <title>Suitbert Ertel | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
-    <meta name="description" content="Using geonames.org to relate Gauquelin data to a standard geographic frame">
+    <meta name="description" content="Suitbert Ertel">
     <meta name="robots" content="index,follow">
     <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
     <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
     <meta name="dcterms.rightsHolder" content="Thierry Graff">
-    <meta name="dcterms.dateCopyrighted" content="2018">
+    <meta name="dcterms.dateCopyrighted" content="2019">
     <!-- 
     tigsite:
-        history: 2018, Thierry Graff : Creation
+        history: 2021-11-27 17:42:41+01:00, Thierry Graff : Creation
     -->
 </head>
 
@@ -25,92 +25,54 @@
 <nav class="prevnext">
     <a class="topage" rel="" href="#topage">&#10148;</a>
     <a class="top" href="index.html">&uarr;</a>
+    <a class="prev" rel="prev" href="muller1-402-writers.html">&larr;</a>
+    <a class="next" rel="next" href="muller3-234-women.html">&rarr;</a>
 </nav>
 
 <header>
-<h1>Integrating geonames.org</h1>
+<h1>
+Suitbert Ertel
+</h1>
 <div class="intro">
-Relating places to a Geonames identifier can be seen as a way to prepare the merge of historical data with <a href="wikidata.html">Wikidata</a>.
-<br>Places expressed with a string are ambiguous because orthograph vary from one source to another (typos, abbreviations, truncated names, misspelling...). An id is needed to handle places by program.
-<br>G5 uses two ways to do associate data to Geonames : a local database and geonames.org web service.
-<br>In both cases, code can be developed to better the matching between Gauquelin data and geonames.
+Suitbert Ertel (1932 - 2017) was not a data collector, but he assembled Gauquelin and skeptic data to re-analyze them using eminence grading based on citation count.
+
+<br><br>His analysis of <b><a href="ertel-4391-sportsmen.html">4391 soprtsmen</a></b> (in fact 4384) concerns most data involved in the "mars effect" polemic.
+<br>This work could be integrated in g5 database thanks to a file published on <a href="https://newalchemypress.com/gauquelin/research3.php">newalchemypress.com</a>.
+
+<br><br>He is also reported to have published other articles based on historical data:
+
+<ul>
+    <li>1987 Eminence effect on painters and musicians</li>
+    <li>1993 Eminence grading on actors, athletes, musicians, scientists</li>
+</ul>
+<b>The data relative to these works couldn't be found so far.</b>
+
 </div>
 </header>
 
 <article>
-<nav class="toc">
-    <ul>
-        <li>
-            <a href="#local-database">Local database</a>
-        </li>
-        <li>
-            <a href="#geonames-web-service">Geonames web service</a>
-        </li>
-    </ul>
-</nav>
-
-
-
-
-
-
-
 
 <!-- ********************************************************************************* -->
-<h2><a name="local-database">Local database</a></h2>
-
-The program uses geonames data stored in a local postgres database, as done by the program located at <a href="https://github.com/tig12/geonames2postgres">github.com/tig12/geonames2postgres</a>.  
-<br>You need to :
+<h2 id="ertel-unique-id">Ertel unique id</h2>
+Permits to identify a person published by Suitbert Ertel in g5 database.
+<br>Noted <code>ERID</code> in output csv files.
+<br>The Ertel unique id is built concatenating
 <ul>
+    <li>the letter "E",</li>
     <li>
-        have postgres installed on your machine,
+        a code to identify Ertel's dataset:
+        <ul>
+            <li><b>S</b>: sportsmen - the only code used so far.</li>
+        </ul>
     </li>
-    <li>
-        in <code>config.yml</code>, put the correct values in the <code>geonames / postgresql</code> section,
-    </li>
-    <li>
-        run <code>geonames2postgres.py</code> for each country.
-        <br>Gauquelin5 needs :
-<pre>
-python geonames2postgres.py BE
-python geonames2postgres.py CH
-python geonames2postgres.py DE
-python geonames2postgres.py DZ
-python geonames2postgres.py FR
-python geonames2postgres.py IT
-python geonames2postgres.py LU
-python geonames2postgres.py MA
-python geonames2postgres.py MC
-python geonames2postgres.py NL
-python geonames2postgres.py US
-</pre>
-    </li>
+    <li>an hyphen (-)</li>
+    <li>the value of its identifier within this dataset.</li>
 </ul>
 
-The interest of a solution with data stored in a local database comes from the possibility to make lots of requests without worrying about the limitations of distant calls.
-<br>For the moment, this has been used to try a quite restrictive matching :
-<ul>
-    <li>CY (country code) must be exactly the same.</li>
-    <li>C2 (département in France, State in the USA, Province in Italy...) must be exactly the same.</li>
-    <li>The "slug" must be exactly the same (the slug is a name with all letters lowercased, accents removed and all non alpha-numeric characters converted to hyphen ; eg the slug of Saint-Jean de Védas is saint-jean-de-vedas).</li>
-</ul>
-This gives low matching rates but prevents accidental association to wrong geonames ids.
-<br>This is used in serie A, E1 and E3 (step <code>addGeo</code>).
-<br>
-<br>Better matching rates could be obtained using approximate string matching (like Levenstein), but this may need human validation to prevent wrong associations.
-
-<!-- ********************************************************************************* -->
-<h2><a name="geonames-web-service">Geonames web service</a></h2>
-This has been used for file D6, which doesn't contain place name. The question asked to the web service is "given a longitude and a latitude, give me a place name (reverse geocoding). This gives very poor results for place names, but was useful to restore the country, see <a href="gauquelin-D6.html">page on file D6</a>.
-<br>
-<br>Here also, approximate matching could be tried to get better results.
-<br>
-<br>Note : this kind of request could be done on local database, the only reason to use the web service is to avoid coding something that already exists.
-
+<br>Ex: Aaron Henry Louis (1934-02-05) is NR = 1 in Ertel sportsmen file has <span class="bold big3">Ertel id = ES-1</span> 
 
 </article>
 </div><!-- end class="main" -->
-
 
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
@@ -222,5 +184,3 @@ This has been used for file D6, which doesn't contain place name. The question a
 
 </body>
 </html>
-<!-- ************************************* -->
-<!-- ********************************************************************************* -->

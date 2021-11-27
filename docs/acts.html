@@ -36,9 +36,14 @@
 Acts
 </h1>
 <div class="intro">
-Acts are official documents containing informations handled by g5 database, in particular birth certificates (BCs). They are used to solve questions raised by g5 development, but not integrated yet to the program (informations from BCs are currently integrated through <a href="tweak2tmp.html">tweak files</a>).
+Acts are official documents, in particular <b>birth certificates (BC)</b> .
+<br>This page describes their integration in the database.
+
+<!--
+They are used to solve questions raised by g5 development, but not integrated yet to the program (informations from BCs are currently integrated through <a href="tweak2tmp.html">tweak files</a>).
 <br>Although not integrated to g5, act transcription is precisely organized, as described in this page.
 <br>Consultation of BCs is currently only done for France.
+ -->
 </div>
 </header>
 
@@ -46,14 +51,14 @@ Acts are official documents containing informations handled by g5 database, in p
 <nav class="toc">
     <ul>
         <li>
+            <a href="#purpose">Purpose</a>
+        </li>
+        <li>
             <a href="#retrieval-process">Retrieval process</a>
             <ul>
                 <li><a href="#1-1-directory-layout">Directory layout</a></li>
                 <li><a href="#1-2-image-download">Image download</a></li>
             </ul>
-        </li>
-        <li>
-            <a href="#example">Example</a>
         </li>
         <li>
             <a href="#acts-syntax">Acts syntax</a>
@@ -72,60 +77,12 @@ Acts are official documents containing informations handled by g5 database, in p
 </nav>
 
 
-
 <!-- ********************************************************************************* -->
-<h2><a name="retrieval-process">Retrieval process</a></h2>
+<h2><a name="purpose">Purpose</a></h2>
 
-An act consists of 2 documents :
-<ul>
-    <li>The image of the scan of the original document</li>
-    <li>
-        A yaml file with structured informations containing
-        <ul>
-            <li>The way to easily go back to the document published by the administration.</li>
-            <li>A transcription of the act</li>
-        </ul>
-        This yaml file is expressed in a precisely defined syntax which can be used to inject these informations in g5 database by program.
-    </li>
-</ul>
-<br>The following informations are necessary :
-<br>(in parentheses, corresponding fieldname in g5 vocabulary of entity Person).
-<ul>
-    <li>Country (birth.place.cy)</li>
-    <li>Département (birth.place.c2)</li>
-    <li>City (birth.place.name)</li>
-    <li>Arrondissement (birth.place.c3), for Paris, Lyon, Marseille (arrondissement = part of a city).
-        <br>This information is important because without it, it's very difficult to find the registry.</li>
-    <li>Name of the registry</li>
-    <li>
-        Page number where the birth certificate is located within the registry.
-        <br>Important because finding the right page may be a long process.
-    </li>
-    <li>If possible, the url directly pointing to the page. Some départements provide a way to copy the "permalink" of a document, which may be different from the url of the page displayed by the web browser.</li>
-</ul>
+Permit the user to check the database with scans of original documents.
 
-<!-- ************************************* -->
-<h3><a name="1-1-directory-layout">Directory layout</a></h3>
-Acts are organized chronologically :
-<pre>
-acts
-    └── birth
-        └── 1811
-            └── 10
-                └── 25
-                    └── galois-evariste-1811-10-25
-                        ├── naissance.jpg
-                        └── naissance.yml
-</pre>
-
-<!-- ************************************* -->
-<h3><a name="1-2-image-download">Image download</a></h3>
-Some départements provide a link to download current page, some don't. When they don't, image retrieval is done with screen capture. This can be particularily long because sometimes several captures may be necessary to get the whole certificate with enough details. In this case, the image is reconstituted assembling the different parts.
-
-
-<!-- ********************************************************************************* -->
-<h2><a name="example">Example</a></h2>
-
+<br><br>Example of a complete transcription of BC <b>Evariste Galois, Bourg-la-Reine, France, 1811-10-25 01:00</b>
 <style>
 #proto div{
     margin:0.5em;
@@ -229,6 +186,57 @@ personnes:
 </div>
 
 </div><!-- end class="flex-wrap" -->
+
+
+<!-- ********************************************************************************* -->
+<h2><a name="retrieval-process">Act</a></h2>
+
+An act consists of 2 documents :
+<ul class="spaced padding-top">
+    <li>The image of the scan of the original document</li>
+    <li>
+        A yaml file with structured informations containing
+        <ul>
+            <li>ideally, a transcription of the act</li>
+            <li>An url The way to easily go back to the document published by the administration.</li>
+        </ul>
+        This yaml file is expressed in a precisely defined syntax which can be used to inject these informations in g5 database by program.
+    </li>
+</ul>
+<br>The following informations are necessary :
+<br>(in parentheses, corresponding fieldname in g5 vocabulary of entity Person).
+<ul>
+    <li>Country (birth.place.cy)</li>
+    <li>Département (birth.place.c2)</li>
+    <li>City (birth.place.name)</li>
+    <li>Arrondissement (birth.place.c3), for Paris, Lyon, Marseille (arrondissement = part of a city).
+        <br>This information is important because without it, it's very difficult to find the registry.</li>
+    <li>Name of the registry</li>
+    <li>
+        Page number where the birth certificate is located within the registry.
+        <br>Important because finding the right page may be a long process.
+    </li>
+    <li>If possible, the url directly pointing to the page. Some départements provide a way to copy the "permalink" of a document, which may be different from the url of the page displayed by the web browser.</li>
+</ul>
+
+<!-- ************************************* -->
+<h3><a name="1-1-directory-layout">Directory layout</a></h3>
+Acts are organized chronologically :
+<pre>
+acts
+    └── birth
+        └── 1811
+            └── 10
+                └── 25
+                    └── galois-evariste-1811-10-25
+                        ├── naissance.jpg
+                        └── naissance.yml
+</pre>
+
+<!-- ************************************* -->
+<h3><a name="1-2-image-download">Image download</a></h3>
+Some départements provide a link to download current page, some don't. When they don't, image retrieval is done with screen capture. This can be particularily long because sometimes several captures may be necessary to get the whole certificate with enough details. In this case, the image is reconstituted assembling the different parts.
+
 
 <!-- ********************************************************************************* -->
 <h2><a name="acts-syntax">Acts syntax</a></h2>
@@ -354,27 +362,25 @@ http://perigen.fr/actes/index.php
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
 <ul>
-    <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">Code repository</a></li>
     <li class="bold big1"><a href="index.html">Home</a></li>
-    
-    <li><a href="usage.html">Program usage</a></li>
-    <li><a href="organisation.html">Organisation</a></li>
-    <li><a href="db.html">G5 database</a></li>
-    <li><a href="output-format.html">Output format</a></li>
-    
+    <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">Code repository</a></li>
     <li class="bold big1"><a href="https://g5.tig12.net/output">Download results</a></li>
+    
+    <li><a href="db.html">G5 database</a></li>
+    <li><a href="organisation.html">Organisation</a></li>
+    <li><a href="usage.html">Program usage</a></li>
     
     <li>
         <span class="big1">1 - Restore</span>                            
         <ul>
         
-            <li><a href="historical-tests.html"><b>Historical tests</b></a></li>
+            <li><a href="historical-tests.html"><b>List of historical tests</b></a></li>
             
             <li><a href="cura.html">cura.free.fr</a></li>
             <li><a href="newalch.html">newalchemypress.com</a></li>
             
             <li>
-                <div class="bold">Gauquelin</div>                            
+                <div class="bold"><a href="gauquelin-A.html">Gauquelin</a></div>                            
                 <ul>
                     <li>
                         <a href="gauquelin-A.html">A</a>
@@ -395,7 +401,7 @@ http://perigen.fr/actes/index.php
             </li>
             
             <li>
-                <div class="bold">Arno Müller</div>
+                <div class="bold"><a href="muller.html">Arno Müller</a></div>
                 <ul>
                     <li><a href="muller1-402-writers.html">1991 - 402 writers</a></li>
                     <li><a href="muller2-612-men.html">1992 - 612 men</a></li>
@@ -405,7 +411,7 @@ http://perigen.fr/actes/index.php
             </li>
             
             <li>
-                <div class="bold">Suitbert Ertel</div>                            
+                <div class="bold"><a href="ertel.html">Suitbert Ertel</a></div>
                 <ul>
                     <li><a href="ertel-4391-sportsmen.html">1988 - 4391 athletes</a></li>
                 </ul>

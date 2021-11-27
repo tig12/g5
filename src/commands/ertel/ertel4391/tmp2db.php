@@ -88,12 +88,16 @@ class tmp2db implements Command {
         for($i=0; $i < $N; $i++){
             $line = $lines[$i];
             $subsample = self::computeSubgroup($line);
-continue;
+echo "\n<pre>"; print_r($line); echo "</pre>\n";
+echo "subsample = $subsample\n";
+exit;
             $lineRaw = $linesRaw[$i];
             // All persons already in db are coming from Gauquelin data
-            // see docs/newalch-ertel4391.html#ertel-s-subsamples
+            // see docs/ertel4391-sportsmen.html#ertel-s-subsamples
             if($line['GQID'] == ''){
+                //
                 // Person not in Gauquelin data
+                //
                 $p = new Person();
                 $new = [];
                 $new['trust'] = Ertel4391::TRUST_LEVEL;

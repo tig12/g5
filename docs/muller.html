@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Geonames | Gauquelin5</title>
+    <title>Arno Müller | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
-    <meta name="description" content="Using geonames.org to relate Gauquelin data to a standard geographic frame">
+    <meta name="description" content="Arno Müller's list of ">
     <meta name="robots" content="index,follow">
     <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
     <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
     <meta name="dcterms.rightsHolder" content="Thierry Graff">
-    <meta name="dcterms.dateCopyrighted" content="2018">
+    <meta name="dcterms.dateCopyrighted" content="2019">
     <!-- 
     tigsite:
-        history: 2018, Thierry Graff : Creation
+        history: 2021-11-27 16:59:10+01:00, Thierry Graff : Creation
     -->
 </head>
 
@@ -25,92 +25,57 @@
 <nav class="prevnext">
     <a class="topage" rel="" href="#topage">&#10148;</a>
     <a class="top" href="index.html">&uarr;</a>
+    <a class="prev" rel="prev" href="muller1-402-writers.html">&larr;</a>
+    <a class="next" rel="next" href="muller3-234-women.html">&rarr;</a>
 </nav>
 
 <header>
-<h1>Integrating geonames.org</h1>
+<h1>
+Arno Müller
+</h1>
 <div class="intro">
-Relating places to a Geonames identifier can be seen as a way to prepare the merge of historical data with <a href="wikidata.html">Wikidata</a>.
-<br>Places expressed with a string are ambiguous because orthograph vary from one source to another (typos, abbreviations, truncated names, misspelling...). An id is needed to handle places by program.
-<br>G5 uses two ways to do associate data to Geonames : a local database and geonames.org web service.
-<br>In both cases, code can be developed to better the matching between Gauquelin data and geonames.
+Arno Müller (1941 - 2005) is the second data collector of the historical period after Gauquelin.
+<br>Quotation from <a href="https://www.astro.com/astro-databank/M%C3%BCller,_Arno">Astrodatabank</a>: <i>German psychologist, parapsychologist ("Institut fuer Grenzgebiete der Psychologie und Psychohygiene, Freiburg"’), head of the Institute for Medical Psychology in Homburg-Saar, Germany, research astrologer (statistics), data collector and publisher of data books.</i>
+
+<br><br>He has published 5 booklets with birth times of famous persons, named <b>Astro-Forschungs-Daten</b> (noted AFD), containing a total of XXXX persons.
+<ul class="naked">
+    <li>1991 AFD1 <a href="muller1-402-writers.html">402 Italian writers</a></li>
+    <li>1992 AFD2 <a href="muller2-612-men.html">612 Famous Men</a></li>
+    <li>1993 AFD3 <a href="muller3-234-women.html">234 Famous Women</a></li>
+    <li>1993 AFD4 <a href=".html">1145 members of German dynasties</a></li>
+    <li>1994 AFD5 <a href="muller5-1083-medics.html">1083 members of the French Academie de Medicine</a></li>
+</ul>
+
+All these groups could be reconstituted. 4 are integrated in the database ; 1145 members of German dynasties is available but not integrated yet.
+
+<br><br>He is also reported to have collected <b>1138 German physicians</b>, but this dataset has not been published, and original data couldn't be found so far.
+<br><b>This dataset is possibly lost.</b>
+
 </div>
 </header>
 
 <article>
-<nav class="toc">
-    <ul>
-        <li>
-            <a href="#local-database">Local database</a>
-        </li>
-        <li>
-            <a href="#geonames-web-service">Geonames web service</a>
-        </li>
-    </ul>
-</nav>
-
-
-
-
-
-
-
 
 <!-- ********************************************************************************* -->
-<h2><a name="local-database">Local database</a></h2>
-
-The program uses geonames data stored in a local postgres database, as done by the program located at <a href="https://github.com/tig12/geonames2postgres">github.com/tig12/geonames2postgres</a>.  
-<br>You need to :
+<h2>Müller unique id</h2>
+Permits to identify a person published by Arno Müller in g5 database.
+<br>Noted <code>MUID</code> in output csv files.
+<br>Müller data were published in five booklets called <i>Astro-Forschungs-Daten</i>, from 1 to 5.
+<br>The Müller unique id is built concatenating
 <ul>
-    <li>
-        have postgres installed on your machine,
-    </li>
-    <li>
-        in <code>config.yml</code>, put the correct values in the <code>geonames / postgresql</code> section,
-    </li>
-    <li>
-        run <code>geonames2postgres.py</code> for each country.
-        <br>Gauquelin5 needs :
-<pre>
-python geonames2postgres.py BE
-python geonames2postgres.py CH
-python geonames2postgres.py DE
-python geonames2postgres.py DZ
-python geonames2postgres.py FR
-python geonames2postgres.py IT
-python geonames2postgres.py LU
-python geonames2postgres.py MA
-python geonames2postgres.py MC
-python geonames2postgres.py NL
-python geonames2postgres.py US
-</pre>
-    </li>
+    <li>the letter "M",</li>
+    <li>the number of the volume where the person was published,</li>
+    <li>the value of its identifier within this volume.</li>
 </ul>
 
-The interest of a solution with data stored in a local database comes from the possibility to make lots of requests without worrying about the limitations of distant calls.
-<br>For the moment, this has been used to try a quite restrictive matching :
-<ul>
-    <li>CY (country code) must be exactly the same.</li>
-    <li>C2 (département in France, State in the USA, Province in Italy...) must be exactly the same.</li>
-    <li>The "slug" must be exactly the same (the slug is a name with all letters lowercased, accents removed and all non alpha-numeric characters converted to hyphen ; eg the slug of Saint-Jean de Védas is saint-jean-de-vedas).</li>
-</ul>
-This gives low matching rates but prevents accidental association to wrong geonames ids.
-<br>This is used in serie A, E1 and E3 (step <code>addGeo</code>).
-<br>
-<br>Better matching rates could be obtained using approximate string matching (like Levenstein), but this may need human validation to prevent wrong associations.
+<br>For example, Beonio-Brocchieri Vittorio 1902-05-04 was published as record NR 42 in <i>Astro-Forschungs-Daten 1</i> (group of <a href="muller1-402-writers.html">402 italian writers</a>).
+<br>His MUID is <code class="bold">M1-42</code>
 
-<!-- ********************************************************************************* -->
-<h2><a name="geonames-web-service">Geonames web service</a></h2>
-This has been used for file D6, which doesn't contain place name. The question asked to the web service is "given a longitude and a latitude, give me a place name (reverse geocoding). This gives very poor results for place names, but was useful to restore the country, see <a href="gauquelin-D6.html">page on file D6</a>.
-<br>
-<br>Here also, approximate matching could be tried to get better results.
-<br>
-<br>Note : this kind of request could be done on local database, the only reason to use the web service is to avoid coding something that already exists.
+<br><br>Similarily a <a href="cura.html#gauquelin-unique-id">Gauquelin unique id</a> was defined.
 
 
 </article>
 </div><!-- end class="main" -->
-
 
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              
@@ -222,5 +187,3 @@ This has been used for file D6, which doesn't contain place name. The question a
 
 </body>
 </html>
-<!-- ************************************* -->
-<!-- ********************************************************************************* -->
