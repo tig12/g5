@@ -24,62 +24,64 @@ use g5\commands\wd\Wikidata;
 use g5\commands\db\init\dbcreate;
 use g5\commands\db\init\occus1;
 use g5\commands\db\init\occus2;
-use g5\commands\db\fill\source                  as fillsource;
-use g5\commands\db\fill\person                  as fillperson;
+use g5\commands\db\fill\source                  as dbFillSource;
+use g5\commands\db\fill\person                  as dbFillPerson;
 
 // raw2tmp
-use g5\commands\gauq\A\raw2tmp                  as raw2tmpA;
-use g5\commands\gauq\A\addGeo                   as addGeoA;
-use g5\commands\gauq\D6\raw2tmp                 as raw2tmpD6;
-use g5\commands\gauq\D6\addGeo                  as addGeoD6;
-use g5\commands\gauq\D10\raw2tmp                as raw2tmpD10;
-use g5\commands\gauq\E1_E3\raw2tmp              as raw2tmpE1E3;
-use g5\commands\gauq\all\tweak2tmp              as tweak2tmpGauq;
+use g5\commands\gauq\A\raw2tmp                  as Araw2tmp;
+use g5\commands\gauq\A\addGeo                   as AaddGeo;
+use g5\commands\gauq\D6\raw2tmp                 as D6raw2tmp;
+use g5\commands\gauq\D6\addGeo                  as D6addGeo;
+use g5\commands\gauq\D10\raw2tmp                as D10raw2tmp;
+use g5\commands\gauq\E1_E3\raw2tmp              as E1E3raw2tmp;
+use g5\commands\gauq\all\tweak2tmp              as Gauqtweak2tmp;
 
-use g5\commands\ertel\sport\raw2tmp             as raw2tmpErtelSport;
-use g5\commands\ertel\sport\tweak2tmp           as tweak2tmpErtelSport;
-use g5\commands\ertel\sport\fixA1               as fixA1ErtelSport;
+use g5\commands\ertel\sport\raw2tmp             as ErtelSportRaw2tmp;
+use g5\commands\ertel\sport\tweak2tmp           as ErtelSporttweak2tmp;
+use g5\commands\ertel\sport\fixA1               as ErtelSportFixA1;
 
-use g5\commands\muller\m5medics\raw2tmp         as raw2tmpM5Medics;
-use g5\commands\muller\m5medics\tweak2tmp       as tweak2tmpM5Medics;
-use g5\commands\muller\m5medics\fixGnr          as fixGnrM5Medics;
+use g5\commands\muller\m5medics\raw2tmp         as M5MedicsRaw2tmp;
+use g5\commands\muller\m5medics\tweak2tmp       as M5MedicsTweak2tmp;
+use g5\commands\muller\m5medics\fixGnr          as M5MedicsFixGnr;
 
-use g5\commands\muller\m1writers\raw2tmp        as raw2tmpM1Writers;
-use g5\commands\muller\m1writers\tweak2tmp      as tweak2tmpM1Writers;
-use g5\commands\muller\m1writers\gauq           as gauqM1Writers;
-use g5\commands\muller\m1writers\raw2tmp100     as raw2tmpM1Writers100;
+use g5\commands\muller\m1writers\raw2tmp        as M1WritersRaw2tmp;
+use g5\commands\muller\m1writers\tweak2tmp      as M1WritersTweak2tmp;
+use g5\commands\muller\m1writers\gauq           as M1WritersGauq;
+use g5\commands\muller\m1writers\raw2tmp100     as M1Writers100raw2tmp;
 
-use g5\commands\csicop\si42\raw2tmp             as raw2tmpSi42;
-use g5\commands\csicop\si42\addCanvas1          as addCanvas1Si42;
-use g5\commands\csicop\irving\raw2tmp           as raw2tmpIrving;
-use g5\commands\csicop\irving\addD10            as addD10Irving;
-use g5\commands\muller\m3women\raw2tmp          as raw2tmpM3Women;
-use g5\commands\muller\m2men\raw2tmp            as raw2tmpM2Men;
+use g5\commands\csicop\si42\raw2tmp             as si42raw2tmp;
+use g5\commands\csicop\si42\addCanvas1          as si42addCanvas1;
+use g5\commands\csicop\irving\raw2tmp           as csiIrvingRaw2tmp;
+use g5\commands\csicop\irving\addD10            as csiIrvingAddD10;
+
+use g5\commands\muller\m3women\raw2tmp          as M3WomenRaw2tmp;
+
+use g5\commands\muller\m2men\raw2tmp            as M2MenRaw2tmp;
 
 // tmp2db
-use g5\commands\gauq\A\tmp2db                   as tmp2dbA;
+use g5\commands\gauq\A\tmp2db                   as Atmp2db;
 use g5\commands\gauq\A\A6occu                   as A6occu;
-use g5\commands\gauq\D6\tmp2db                  as tmp2dbD6;
-use g5\commands\gauq\D10\tmp2db                 as tmp2dbD10;
-use g5\commands\gauq\E1_E3\tmp2db               as tmp2dbE1E3;
-use g5\commands\muller\m1writers\tmp2db         as tmp2dbM1writers;
-use g5\commands\muller\m1writers\tmp2db100      as tmp2dbM1writers100;
-use g5\commands\muller\m2men\tmp2db             as tmp2dbM2men;
-use g5\commands\muller\m3women\tmp2db           as tmp2dbM3women;
-use g5\commands\muller\m5medics\tmp2db          as tmp2dbM5medics;
-use g5\commands\csicop\irving\tmp2db            as tmp2dbIrving;
+use g5\commands\gauq\D6\tmp2db                  as D6tmp2db;
+use g5\commands\gauq\D10\tmp2db                 as D10tmp2db;
+use g5\commands\gauq\E1_E3\tmp2db               as E1E3tmp2db;
+use g5\commands\muller\m1writers\tmp2db         as M1writersTmp2db;
+use g5\commands\muller\m1writers\tmp2db100      as M1writers100tmp2db;
+use g5\commands\muller\m2men\tmp2db             as M2menTmp2db;
+use g5\commands\muller\m3women\tmp2db           as M3womenTmp2db;
+use g5\commands\muller\m5medics\tmp2db          as M5medicsTmp2db;
+use g5\commands\csicop\irving\tmp2db            as csiIrvingTmp2db;
 
 // finalize
 use g5\commands\db\init\stats;
 use g5\commands\db\init\search;
 
 // export
-use g5\commands\gauq\all\export                 as exportCura;
-use g5\commands\muller\m5medics\export          as exportM5Medics;
-use g5\commands\muller\m1writers\export         as exportM1Writers;
-use g5\commands\muller\m1writers\export100      as exportM1Writers100;
-use g5\commands\csicop\irving\export            as exportIrving;
-use g5\commands\db\export\alloccus              as exportAllOccus;
+use g5\commands\gauq\all\export                 as curaExport;
+use g5\commands\muller\m5medics\export          as M5MedicsExport;
+use g5\commands\muller\m1writers\export         as M1WritersExport;
+use g5\commands\muller\m1writers\export100      as M1Writers100export;
+use g5\commands\csicop\irving\export            as csiIrvingExport;
+use g5\commands\db\export\alloccus              as allOccusExport;
 
 class all implements Command {
     
@@ -129,39 +131,39 @@ class all implements Command {
             echo "*** Build tmp files ***\n";
             echo "***********************\n";
             foreach($filesGauqA as $datafile){
-                echo raw2tmpA::execute([$datafile, 'raw2tmp', 'small']);
-                echo addGeoA::execute([$datafile, 'addGeo', 'small']);
+                echo Araw2tmp::execute([$datafile, 'raw2tmp', 'small']);
+                echo AaddGeo::execute([$datafile, 'addGeo', 'small']);
             }
-            echo raw2tmpD6::execute(['D6', 'raw2tmp']);
-            echo addGeoD6::execute(['D6', 'addGeo']); // tmp code - addGeo needs to be fixed
-            echo raw2tmpD10::execute(['D10', 'raw2tmp']);
-            echo raw2tmpE1E3::execute(['E1', 'raw2tmp', 'small']);
-            echo raw2tmpE1E3::execute(['E3', 'raw2tmp', 'small']);
+            echo D6raw2tmp::execute(['D6', 'raw2tmp']);
+            echo D6addGeo::execute(['D6', 'addGeo']); // tmp code - addGeo needs to be fixed
+            echo D10raw2tmp::execute(['D10', 'raw2tmp']);
+            echo E1E3raw2tmp::execute(['E1', 'raw2tmp', 'small']);
+            echo E1E3raw2tmp::execute(['E3', 'raw2tmp', 'small']);
             foreach($filesGauq as $datafile){
-                echo tweak2tmpGauq::execute([$datafile, 'tweak2tmp']);
+                echo Gauqtweak2tmp::execute([$datafile, 'tweak2tmp']);
             }
             
-            echo raw2tmpErtelSport::execute([]);
-            echo tweak2tmpErtelSport::execute([]);
-            echo fixA1ErtelSport::execute(['update']);
+            echo ErtelSportRaw2tmp::execute([]);
+            echo ErtelSporttweak2tmp::execute([]);
+            echo ErtelSportFixA1::execute(['update']);
             
-            echo raw2tmpM5Medics::execute([]);
-            echo tweak2tmpM5Medics::execute([]);
-            echo fixGnrM5Medics::execute(['update']);
+            echo M5MedicsRaw2tmp::execute([]);
+            echo M5MedicsTweak2tmp::execute([]);
+            echo M5MedicsFixGnr::execute(['update']);
             
-            echo raw2tmpSi42::execute([]);                                   
-            echo addCanvas1Si42::execute([]);
-            echo raw2tmpIrving::execute([]);
-            echo addD10Irving::execute([]);
+            echo si42raw2tmp::execute([]);                                   
+            echo si42addCanvas1::execute([]);
+            echo csiIrvingRaw2tmp::execute([]);
+            echo csiIrvingAddD10::execute([]);
             
-            echo raw2tmpM1Writers::execute([]);
-            echo tweak2tmpM1Writers::execute([]);
-            echo gauqM1Writers::execute(['update']);
-            echo raw2tmpM1Writers100::execute([]);
+            echo M1WritersRaw2tmp::execute([]);
+            echo M1WritersTweak2tmp::execute([]);
+            echo M1WritersGauq::execute(['update']);
+            echo M1Writers100raw2tmp::execute([]);
             
-            echo raw2tmpM3Women::execute([]);
+            echo M3WomenRaw2tmp::execute([]);
             
-            echo raw2tmpM2Men::execute([]);
+            echo M2MenRaw2tmp::execute([]);
         }
         
         //
@@ -173,38 +175,38 @@ class all implements Command {
             echo "***  Fill database  ***\n";
             echo "***********************\n";
             echo dbcreate::execute([]);
-            echo fillsource::execute([LERRCP::SOURCE_DEFINITION_FILE]);
-            echo fillsource::execute([Muller::SOURCE_DEFINITION_FILE]);
-            echo fillsource::execute([G5::SOURCE_DEFINITION_FILE]);
-            echo fillsource::execute([Cura::SOURCE_DEFINITION_FILE]);
-            echo fillsource::execute([Newalch::SOURCE_DEFINITION_FILE]);
-            echo fillsource::execute([Wikidata::SOURCE_DEFINITION_FILE]);
+            echo dbFillSource::execute([LERRCP::SOURCE_DEFINITION_FILE]);
+            echo dbFillSource::execute([Muller::SOURCE_DEFINITION_FILE]);
+            echo dbFillSource::execute([G5::SOURCE_DEFINITION_FILE]);
+            echo dbFillSource::execute([Cura::SOURCE_DEFINITION_FILE]);
+            echo dbFillSource::execute([Newalch::SOURCE_DEFINITION_FILE]);
+            echo dbFillSource::execute([Wikidata::SOURCE_DEFINITION_FILE]);
             echo occus1::execute();
             
             foreach($filesGauqA as $datafile){
-                echo tmp2dbA::execute([$datafile, 'tmp2db', 'small']);
+                echo Atmp2db::execute([$datafile, 'tmp2db', 'small']);
             }
-            echo fillperson::execute(['A1.yml']);
+            echo dbFillPerson::execute(['A1.yml']);
             
             echo A6occu::execute([]);
-            echo tmp2dbD6::execute(['D6', 'tmp2db', 'small']);
-            echo tmp2dbD10::execute(['D10', 'tmp2db', 'small']);
-            echo tmp2dbE1E3::execute(['E1', 'tmp2db', 'small']);
-            echo tmp2dbE1E3::execute(['E3', 'tmp2db', 'small']);
+            echo D6tmp2db::execute(['D6', 'tmp2db', 'small']);
+            echo D10tmp2db::execute(['D10', 'tmp2db', 'small']);
+            echo E1E3tmp2db::execute(['E1', 'tmp2db', 'small']);
+            echo E1E3tmp2db::execute(['E3', 'tmp2db', 'small']);
             
-            echo tmp2dbM5medics::execute(['small']);
+            echo M5medicsTmp2db::execute(['small']);
             
-            echo tmp2dbM1writers::execute(['small']);
+            echo M1writersTmp2db::execute(['small']);
             
-            echo tmp2dbM1writers100::execute(['small']);
+            echo M1writers100tmp2db::execute(['small']);
             
-            echo tmp2dbIrving::execute(['small']);
+            echo csiIrvingTmp2db::execute(['small']);
             
-            echo tmp2dbM3women::execute(['small']);
-            echo fillperson::execute(['muller-234-women.yml']);
+            echo M3womenTmp2db::execute(['small']);
+            echo dbFillPerson::execute(['muller-234-women.yml']);
             
-            echo tmp2dbM2men::execute(['small']);
-            echo fillperson::execute(['muller-612-men.yml']);
+            echo M2menTmp2db::execute(['small']);
+            echo dbFillPerson::execute(['muller-612-men.yml']);
             
             echo occus2::execute();
         }
@@ -222,18 +224,18 @@ class all implements Command {
             echo "***    Export groups    ***\n";
             echo "***************************\n";
             foreach($filesGauqA as $datafile){
-                echo exportCura::execute([$datafile, 'export']);
+                echo curaExport::execute([$datafile, 'export']);
             }
-            echo exportCura::execute(['D6', 'export']);
-            echo exportCura::execute(['D10', 'export']);
-            echo exportCura::execute(['E1', 'export']);
-            echo exportCura::execute(['E3', 'export']);
-            echo exportM5Medics::execute([]);
-            echo exportM1Writers::execute([]);
-            echo exportM1Writers100::execute([]);
-            echo exportIrving::execute([]);
+            echo curaExport::execute(['D6', 'export']);
+            echo curaExport::execute(['D10', 'export']);
+            echo curaExport::execute(['E1', 'export']);
+            echo curaExport::execute(['E3', 'export']);
+            echo M5MedicsExport::execute([]);
+            echo M1WritersExport::execute([]);
+            echo M1Writers100export::execute([]);
+            echo csiIrvingExport::execute([]);
             //
-            echo exportAllOccus::execute([]);
+            echo allOccusExport::execute([]);
         }
         
         $t2 = microtime(true);

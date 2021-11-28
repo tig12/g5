@@ -4,6 +4,10 @@
 
 - see php bug - https://bugs.php.net/bug.php?id=81002
 
+- 
+grep -rn 'DB5::getDbLink()' src/
+=> refactor: dblink must be passed in parameter to model classes, initialized in commands
+=> commit / rollback possible
 
 - add notes and issues in tmp2db - fix array / map problem for go
 

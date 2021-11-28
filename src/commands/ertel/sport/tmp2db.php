@@ -75,6 +75,16 @@ class tmp2db implements Command {
                 $subgroups[$slug]->deleteMembers(); // only deletes asssociations between group and members
             }
         }
+        
+        //
+        // Start postgresql session
+        //
+/* 
+        $dblink->beginTransaction();
+        $dblink->commit();
+        $dblink->rollBack();
+*/
+        
         $nInsert = 0;
         $nUpdate = 0;
         $nRestoredNames = 0;

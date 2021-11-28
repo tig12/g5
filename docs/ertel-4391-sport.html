@@ -210,24 +210,24 @@ The raw file is <code>data/raw/newalchemypress.com/03-ertel/3a_sports-utf8.txt"<
 
 The full set of transformations can be executed with the command :
 
-<pre>php run-g5.php newalch ertel4391 all</pre>
+<pre>php run-g5.php ertel sport all</pre>
 
 This is equivalent to :
 
 <pre>
-php run-g5.php newalch ertel4391 raw2csv
-php run-g5.php newalch ertel4391 tweak2tmp
-php run-g5.php newalch ertel4391 export dl
+php run-g5.php ertel sport raw2csv
+php run-g5.php ertel sport tweak2tmp
+php run-g5.php ertel sport export dl
 </pre>
 
 <!-- ************************************* -->
 <h3><a name="2-2-raw2csv">raw2csv</a></h3>
 The first step is to generate the file <b><code>5-newalch-csv/4391SPO.csv</code></b> :
-<pre>php run-g5.php newalch ertel4391 raw2csv</pre>
+<pre>php run-g5.php ertel sport raw2csv</pre>
 This step copies the contents of <code>3a_sports-utf8.txt</code> to <code>4391SPO.csv</code> with the following modifications ;
 <ul>
     <li>
-        Column <code>GNUM</code> is created, containing a Gauquelin id (a string like "A1-123") from columns <code>QUEL</code> and <code>G_NR</code> for records originating from A1, D6 and D10.
+        Column <code>GNUM</code> is created, containing a <a href="gauquelin.html">Gauquelin id</a> (a string like "A1-123") from columns <code>QUEL</code> and <code>G_NR</code> for records originating from A1, D6 and D10.
         <br>Left empty for records of other origin.
     </li>
     <li>
@@ -246,7 +246,7 @@ This step copies the contents of <code>3a_sports-utf8.txt</code> to <code>4391SP
         Column <code>MF</code> produces column <code>G</code> (gender), containing "M" or "F" (column is empty for males in <code>3a_sports-utf8.txt</code>).
     </li>
     <li>
-        Column <code>SPORTART</code> is renamed <code>SPORT</code> ; contains the same value as in <code>3a_sports-utf8.txt</code>.
+        Column <code>SPORTART</code> is renamed <code>SPORT</code> and is converted to.
     </li>
     <li>
         Column <code>INDGRUP</code> is renamed <code>IG</code> (individual or collective sport) ; contains the same value as in <code>3a_sports-utf8.txt</code>.
@@ -263,14 +263,14 @@ This step is included in the restoration process of file A1, not part of Ertel 4
 <br>
 <br>Fixes 100% of the remaining unidentified names in A1.
 
-<pre>php run-g5.php newalch ertel4391 fixA1</pre>
+<pre>php run-g5.php ertel sport fixA1</pre>
 <pre>
 WRONG USAGE - fixA1 needs one parameter. Can be :
   'report' : echoes the list of names that will be modified by 'update'
   'update' : updates file A1
 </pre>
 
-<pre>php run-g5.php newalch ertel4391 fixA1 update</pre>
+<pre>php run-g5.php ertel sport fixA1 update</pre>
 <pre>
 Nb missing names in Gauquelin A1 : 117
 Ertel 4391 contains : 2084 lines from A1
@@ -283,7 +283,7 @@ Draft code ; in <code>4391SPO.csv</code>, the associations between lines and ske
 <br>Can come from a problem in <code>4391SPO.csv</code>, a misunderstanding of column meanings or a bug in the code.
 
 <pre>
-php run-g5.php newalch ertel4391 ertel2skeptics 
+php run-g5.php ertel sport ertel2skeptics 
 </pre>
 <pre>
 PARAMETER MISSING
@@ -297,7 +297,7 @@ Possible values for parameter :
 </pre>
 
 <pre>
-php run-g5.php newalch ertel4391 ertel2skeptics all
+php run-g5.php ertel sport ertel2skeptics all
 </pre>
 <pre>
 CPARA : 535 records saved - stored in data/5-tmp/cpara/535-cpara.csv
@@ -346,13 +346,13 @@ Ertel file also contains 5 wrong associations to CSICOP, fixed in step <code>twe
 <br>I don't understand all the columns, so consider the informations about the file as suppositions, there are possibly mistakes.
 
 <pre>
-php run-g5.php newalch ertel4391 look 
+php run-g5.php ertel sport look 
 PARAMETER MISSING
 Possible values for parameter : sport, quel, date, eminence, ids, mars
 </pre>
 For example :
 <pre>
-php run-g5.php newalch ertel4391 look sport
+php run-g5.php ertel sport look sport
 </pre>
 
 <!-- ********************************************************************************* -->
@@ -380,7 +380,7 @@ An interest of this file is the presence of columns indicating the ids of the re
     </li>
 </ul>
 
-<pre>php run-g5.php newalch ertel4391 look ids</pre>
+<pre>php run-g5.php ertel sport look ids</pre>
 
 lists the number of records associated to the external datasets :
 
@@ -394,7 +394,7 @@ CFEPP 	         CFEPNR    : 925 (21.1 %)
 
 Column <code>QUEL</code> seems to indicate the origin of the records.
 
-<pre>php run-g5.php newalch ertel4391 look quel</pre>
+<pre>php run-g5.php ertel sport look quel</pre>
 gives the different values of <code>QUEL</code> and corresponding number of records :
 <pre>
 [G:A01] => 2087
@@ -739,7 +739,7 @@ This can be precisely matched with <b>[Ertel 88]</b> : in Table 2, he lists 18 s
 
 <!-- ********************************************************************************* -->
 <h2><a name="birth-dates">Birth dates</a></h2>
-<pre>php run-g5.php newalch ertel4391 look date</pre>
+<pre>php run-g5.php ertel sport look date</pre>
 <pre>
 BUG in date : 46 Albani Peppino : -  -
 N total : 4384
@@ -752,7 +752,7 @@ Among the 802 missing times coming from Gauquelin, 3 come from A1 and 799 from D
 
 <!-- ********************************************************************************* -->
 <h2><a name="eminence">Eminence</a></h2>
-<pre>php run-g5.php newalch ertel4391 look eminence</pre>
+<pre>php run-g5.php ertel sport look eminence</pre>
 Columns <code>ZITRANG ZITSUM ZITATE ZITSUM_OD</code> deal with eminence.
 <ul>
     <li><code>ZITRANG</code> is the eminence rank (1 - 6).</li>
@@ -793,7 +793,7 @@ Columns <code>ZITRANG ZITSUM ZITATE ZITSUM_OD</code> deal with eminence.
 
 <!-- ********************************************************************************* -->
 <h2><a name="sport-codes">Sport codes</a></h2>
-<pre>php run-g5.php newalch ertel4391 look sport</pre>
+<pre>php run-g5.php ertel sport look sport</pre>
 Two columns are related to the sport of the persons : <code>SPORTART</code> and <code>INDGRUP</code>.
 <br><code>INDGRUP</code> contains 'I' or 'G', indicating if this is an individual or collective sport.
 <br>The file contains 5 mistakes : 
@@ -884,7 +884,7 @@ Concerned columns are
 <br>Combinig these informations with eminence rank, it should be possible to reproduce Ertel's famous curves of 1988.
 <br>
 <br>Command :
-<pre>php run-g5.php newalch ertel4391 look mars</pre>
+<pre>php run-g5.php ertel sport look mars</pre>
 generates the following table.
 <br>
 <br>This table lists the different values found in the 3 columns.
@@ -952,7 +952,15 @@ generates the following table.
     <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">Code repository</a></li>
     <li class="bold big1"><a href="https://g5.tig12.net/output">Download results</a></li>
     
-    <li><a href="db.html">G5 database</a></li>
+    <li>
+        <a href="db.html">G5 database</a>
+        <div class="padding-left2">
+        <a href="db-person.html">Person</a>
+        <a href="db-group.html">Group</a>
+        <a href="db-source.html">Source</a>
+        <a href="db-occu.html">Occupation</a>
+        </div>
+    </li>
     <li><a href="organisation.html">Organisation</a></li>
     <li><a href="usage.html">Program usage</a></li>
     
@@ -992,6 +1000,7 @@ generates the following table.
                     <li><a href="muller1-402-writers.html">1991 - 402 writers</a></li>
                     <li><a href="muller2-612-men.html">1992 - 612 men</a></li>
                     <li><a href="muller3-234-women.html">1993 - 234 women</a></li>
+                    <li><a href="muller4-1145-dynasties.html">1993 - 1145 dynasties</a></li>
                     <li><a href="muller5-1083-medics.html">1994 - 1083 physicians</a></li>
                 </ul>
             </li>
@@ -999,7 +1008,7 @@ generates the following table.
             <li>
                 <div class="bold"><a href="ertel.html">Suitbert Ertel</a></div>
                 <ul>
-                    <li><a href="ertel-4391-sportsmen.html">1988 - 4391 athletes</a></li>
+                    <li><a href="ertel-4391-sport.html">1988 - 4391 athletes</a></li>
                 </ul>
             </li>
             
