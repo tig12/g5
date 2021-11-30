@@ -10,7 +10,18 @@ namespace g5\commands\ertel;
 use g5\app\Config;
 
 class Ertel {
-        
+            
+    // *********************** Ertel unique id ***********************
+    /** 
+        Computes Ertel ID
+        @param  $fileCode   Code of Ertel file
+                            - 'S' for 4384 sportsmen - currently only possible value
+        @param  $num        Unique id within the file
+    **/
+    public static function ertelId($fileCode, $num){
+        return 'E' . $fileCode . '-' . $num;
+    }
+    
     // *********************** Raw files manipulation ***********************
     
     /** 

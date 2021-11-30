@@ -41,7 +41,7 @@ class ErtelSport {
         Path to the yaml file containing the characteristics of the group ertel-4384-sportsmen.
         Relative to directory data/db/group
     **/
-    const GROUP_DEFINITION_FILE = 'ertel' . DS . 'sport' . DS. self::GROUP_SLUG . '.yml';
+    const GROUP_DEFINITION_FILE = 'ertel' . DS. self::GROUP_SLUG . '.yml';
     
     /** Slugs of ertel-4384-sportsmen subgroups **/
     const SUBGROUP_SLUGS = [

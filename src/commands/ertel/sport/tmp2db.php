@@ -98,8 +98,10 @@ class tmp2db implements Command {
         for($i=0; $i < $N; $i++){
             $line = $lines[$i];
             $subsample = self::computeSubgroup($line);
+            $erid = Ertel::ertelId('S', $line['NR']);
 echo "\n<pre>"; print_r($line); echo "</pre>\n";
 echo "subsample = $subsample\n";
+echo "ertel id = $erid\n";
 exit;
             $lineRaw = $linesRaw[$i];
             // All persons already in db are coming from Gauquelin data
