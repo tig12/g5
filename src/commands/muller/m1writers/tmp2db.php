@@ -112,7 +112,7 @@ class tmp2db implements Command {
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['MUID']);
                 $mullerId = Muller::mullerId($source->data['slug'], $line['MUID']);
-                $p->addIdInSource(Muller::SOURCE_SLUG, $mullerId);
+                $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
@@ -173,7 +173,7 @@ class tmp2db implements Command {
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['MUID']);
                 $mullerId = Muller::mullerId($source->data['slug'], $line['MUID']);
-                $p->addIdInSource(Muller::SOURCE_SLUG, $mullerId);
+                $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history

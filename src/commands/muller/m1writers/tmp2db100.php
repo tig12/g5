@@ -103,7 +103,7 @@ class tmp2db100 implements Command {
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['MUID']);
                 $mullerId = Muller::mullerId($source->data['slug'], $line['MUID']);
-                $p->addIdInSource(Muller::SOURCE_SLUG, $mullerId);
+                $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
@@ -128,7 +128,7 @@ class tmp2db100 implements Command {
                 $test->addSource($source->data['slug']);
                 $test->addIdInSource($source->data['slug'], $line['MUID']);
                 $mullerId = Muller::mullerId($source->data['slug'], $line['MUID']);
-                $test->addIdInSource(Muller::SOURCE_SLUG, $mullerId);
+                $test->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
                 $occu = self::computeOccu($line);
                 $p->addOccus([$occu]);
                 // TODO see if some fields can be updated (if Müller more precise than Gauquelin)

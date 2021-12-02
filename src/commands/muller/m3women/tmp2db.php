@@ -119,7 +119,7 @@ class tmp2db implements Command {
                 }
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $muid);
-                $p->addIdInSource(Muller::SOURCE_SLUG, $mullerId);
+                $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
@@ -245,7 +245,7 @@ echo "NOTE: $localReport_html\n";
                 }
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $muid);
-                $p->addIdInSource(Muller::SOURCE_SLUG, $mullerId);
+                $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history

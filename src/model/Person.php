@@ -28,11 +28,19 @@ class Person {
                     Can be partial (containing only parts of the fields).
     **/
     public static function row2person($row){
+        if(isset($row['sources'])){
+            $row['sources'] = json_decode($row['sources'], true);
+        }
+        if(isset($row['ids_in_sources'])){
+            $row['ids-in-sources'] = json_decode($row['ids_in_sources'], true);
+            unset($row['ids_in_sources']);
+        }
+        if(isset($row['ids_partial'])){
+            $row['ids-partial'] = json_decode($row['ids_partial'], true);
+            unset($row['ids_partial']);
+        }
         if(isset($row['name'])){
             $row['name'] = json_decode($row['name'], true);                             
-        }
-        if(isset($row['occus'])){
-            $row['occus'] = json_decode($row['occus'], true);
         }
         if(isset($row['birth'])){
             $row['birth'] = json_decode($row['birth'], true);
@@ -40,12 +48,8 @@ class Person {
         if(isset($row['death'])){
             $row['death'] = json_decode($row['death'], true);
         }
-        if(isset($row['sources'])){
-            $row['sources'] = json_decode($row['sources'], true);
-        }
-        if(isset($row['ids_in_sources'])){
-            $row['ids-in-sources'] = json_decode($row['ids_in_sources'], true);
-            unset($row['ids_in_sources']);
+        if(isset($row['occus'])){
+            $row['occus'] = json_decode($row['occus'], true);
         }
         if(isset($row['trust'])){
             $row['trust'] = json_decode($row['trust'], true);
@@ -193,7 +197,7 @@ class Person {
     //                                  INSTANCE
     // ***********************************************************************
     
-    // *********************** Fields *******************************
+    // *********************** compute fields *******************************
     
     /**
         @throws \Exception if the person id computation impossible (the person has no family name).
@@ -267,6 +271,13 @@ class Person {
         $this->data = array_replace_recursive($this->data, $replace);
     }
     
+    /** Adds one single source to field sources **/
+    public function addSource($sourceSlug){
+        if(!in_array($sourceSlug, $this->data['sources'])){
+            $this->data['sources'][] = $sourceSlug;
+        }
+    }
+    
     /** 
         Adds or updates a couple (source slug, id) in data['ids-in-sources']
     **/
@@ -274,11 +285,11 @@ class Person {
         $this->data['ids-in-sources'][$sourceSlug] = $id;
     }
     
-    /** Adds one single source to field sources **/
-    public function addSource($sourceSlug){
-        if(!in_array($sourceSlug, $this->data['sources'])){
-            $this->data['sources'][] = $sourceSlug;
-        }
+    /** 
+        Adds or updates a couple (source slug, id) in data['ids-partial']
+    **/
+    public function addIdPartial($sourceSlug, $id){
+        $this->data['ids-partial'][$sourceSlug] = $id;
     }
     
     /**
@@ -402,28 +413,30 @@ class Person {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("insert into person(
             slug,
-            sex,
-            name,
-            occus,
-            birth,
-            death,
             sources,
             ids_in_sources,
+            ids_partial,
+            name,
+            sex,
+            birth,
+            death,
+            occus,
             trust,
             acts,
             history,
             issues,
             notes
-            )values(?,?,?,?,?,?,?,?,?,?,?,?,?) returning id");
+            )values(?,?,?,?,?,?,?,?,?,?,?,?,?,?) returning id");
         $stmt->execute([
             $this->data['slug'],
-            $this->data['sex'],
-            json_encode($this->data['name']),
-            json_encode($this->data['occus']),
-            json_encode($this->data['birth']),
-            json_encode($this->data['death']),
             json_encode($this->data['sources']),
             json_encode($this->data['ids-in-sources']),
+            json_encode($this->data['ids-partial']),
+            json_encode($this->data['name']),
+            $this->data['sex'],
+            json_encode($this->data['birth']),
+            json_encode($this->data['death']),
+            json_encode($this->data['occus']),
             json_encode($this->data['trust']),
             json_encode($this->data['acts']),
             json_encode($this->data['history']),
@@ -442,13 +455,14 @@ class Person {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("update person set
             slug=?,
-            sex=?,
-            name=?,
-            occus=?,
-            birth=?,
-            death=?,
             sources=?,
             ids_in_sources=?,
+            ids_partial=?,
+            name=?,
+            sex=?,
+            birth=?,
+            death=?,
+            occus=?,
             trust=?,
             acts=?,
             history=?,
@@ -458,13 +472,14 @@ class Person {
             ");
         $stmt->execute([
             $this->data['slug'],
-            $this->data['sex'],
-            json_encode($this->data['name']),
-            json_encode($this->data['occus']),
-            json_encode($this->data['birth']),
-            json_encode($this->data['death']),
             json_encode($this->data['sources']),
             json_encode($this->data['ids-in-sources']),
+            json_encode($this->data['ids-partial']),
+            json_encode($this->data['name']),
+            $this->data['sex'],
+            json_encode($this->data['birth']),
+            json_encode($this->data['death']),
+            json_encode($this->data['occus']),
             json_encode($this->data['trust']),
             json_encode($this->data['acts']),
             json_encode($this->data['history']),

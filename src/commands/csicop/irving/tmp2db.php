@@ -144,6 +144,7 @@ class tmp2db implements Command {
                 $p->addOccus([$line['SPORT']]);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['CSID']);
+                $p->addIdPartial($csicopSource->data['slug'], $line['CSID']);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
@@ -185,6 +186,7 @@ class tmp2db implements Command {
                 $p->addOccus([$line['SPORT']]);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['CSID']);
+                $p->addIdPartial($csicopSource->data['slug'], $line['CSID']);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
@@ -192,7 +194,7 @@ class tmp2db implements Command {
                 $new['ids_in_sources'] = [ $source->data['slug'] => $line['CSID'] ];
                 $new['occus'] = [[$line['SPORT']]];
                 $p->addHistory(
-                    command: 'csicop irving tmp2db100',
+                    command: 'csicop irving tmp2db',
                     sourceSlug: $source->data['slug'],
                     newdata: $new,
                     rawdata: $lineRaw

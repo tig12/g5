@@ -8,7 +8,18 @@ id:
 
 slug:
 
-sex:
+# Regular array of source slugs
+sources: []
+
+# key / value pairs
+# key = source slug
+# value = local id within the given source
+ids-in-sources: {}
+
+# key / value pairs
+# key = id name - necessarily a source slug ?
+# value = local id
+ids-partial: {}
 
 name:
   usual:            # not used so far, maybe will be removed
@@ -25,8 +36,7 @@ name:
     given: 
   alter: []         # alternative names, like nicknames, or author names
 
-# occupation slugs
-occus: []
+sex:
 
 birth:
   date:     # date of the birth certificate
@@ -58,13 +68,8 @@ death:
     lg:
     lat:
 
-# Regular array of source slugs
-sources: []
-
-# key / value pairs
-# key = source slug
-# value = local id within the given source
-ids-in-sources: {}
+# occupation slugs
+occus: []
 
 # Reliability of the information
 # Can be a number or a key-value map

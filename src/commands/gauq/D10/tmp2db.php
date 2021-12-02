@@ -105,7 +105,7 @@ class tmp2db implements Command {
                 $p = new Person();
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
-                $p->addIdInSource($lerrcpSource->data['slug'], $gqId);
+                $p->addIdPartial($lerrcpSource->data['slug'], $gqId);
                 $new = [];
                 $new['trust'] = Cura::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
@@ -147,7 +147,7 @@ class tmp2db implements Command {
                 // duplicate, person appears in more than one cura file
                 $p->addOccus($newOccus);
                 $p->addSource($source->data['slug']);
-                // does not addIdInSource(lerrcp) to respect the definition of Gauquelin id:
+                // does not addIdPartial(lerrcp) to respect the definition of Gauquelin id:
                 // lerrcp id takes the value of the first volume where it appears.
                 // lerrcp id already affected in a previous file for this record.
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
