@@ -152,7 +152,7 @@ class tmp2db implements Command {
                 $new['ids_in_sources'] = [ $source->data['slug'] => $line['CSID'] ];
                 $new['occus'] = [[$line['SPORT']]];
                 $p->addHistory(
-                    command: 'csicop irving tmp2db100',
+                    command: 'csicop irving tmp2db',
                     sourceSlug: $source->data['slug'],
                     newdata: $new,
                     rawdata: $lineRaw

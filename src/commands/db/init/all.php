@@ -170,7 +170,7 @@ class all implements Command {
         //  2 - Import tmp files to db
         //
         if($param == 'db' || $param == 'all'){
-
+            
             echo "***********************\n";
             echo "***  Fill database  ***\n";
             echo "***********************\n";

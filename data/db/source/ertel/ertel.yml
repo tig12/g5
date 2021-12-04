@@ -1,0 +1,13 @@
+
+# Note : this source is not used by a precise data set
+#        It is used by partial ids
+
+document:
+  history:
+    - 2021-12-04 10:57:58+01:00: Thierry Graff, creation
+
+name: Suitbert Ertel
+slug: ertel
+type: person
+description: |
+  <b>Suitbert Ertel</b> (1932 - 2017) was a German psychologist who assembled Gauquelin and skeptic data to re-analyze them using eminence grading based on citation count.

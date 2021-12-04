@@ -1,13 +1,15 @@
 slug: ertel-13-plus-special
 name: 13 - Plus special
 'n': 27
+sources:
+  - 3a_sports
 description: |
   Ertel notice: "Gauquelin mailed these sets to the author after his
   return from Paris. Inadvertently they had not been handed over. There are
-  sports figures from former French colonies and fiom Paris anondissements
+  sports figures from former French colonies and from Paris arrondissements
   where birth records were difficult to obtain. Gauquelin indicated he tried
   hard to obtain the data since the athletes in question were famous, and he
   was successful in 27 cases."
   <br>Number claimed by Ertel : 27
 parents: 
-  - ertel4391
+  - ertel-4384-sport

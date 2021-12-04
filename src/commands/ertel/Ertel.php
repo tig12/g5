@@ -11,6 +11,17 @@ use g5\app\Config;
 
 class Ertel {
             
+    // *********************** Source management ***********************
+    
+    /** Slug of source corresponding to Suitbert Ertel **/
+    const SOURCE_SLUG = 'ertel';
+    
+    /**
+        Path to the yaml file containing the characteristics of the source describing Suitbert Ertel
+        Relative to directory data/db/source
+    **/
+    const SOURCE_DEFINITION_FILE = 'ertel' . DS . self::SOURCE_SLUG .'.yml';
+    
     // *********************** Ertel unique id ***********************
     /** 
         Computes Ertel ID

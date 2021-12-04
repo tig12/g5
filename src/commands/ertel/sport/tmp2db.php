@@ -1,10 +1,9 @@
 <?php
 /********************************************************************************
     Loads files data/tmp/ertel/ertel-4384-athletes.csv and ertel-4384-athletes-raw.csv in database.
-    Affects records imported in A1
     
     @license    GPL
-    @history    2020-09-25 20:55:38+02:00, Thierry Graff : creation
+    @history    2021, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\ertel\sport;
 
@@ -14,12 +13,16 @@ use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
 use g5\commands\ertel\Ertel;
+use g5\commands\gauq\LERRCP;
+use g5\commands\cpara\CPara;
+use g5\commands\csicop\CSICOP;
+use g5\commands\cfepp\CFEPP;
 
 class tmp2db implements Command {
     
     const REPORT_TYPE = [
         'small' => 'Echoes the number of inserted / updated rows',
-        'full'  => 'Lists details of names restoration on A1',
+        'full'  => 'Lists details of other restorations',
     ];
     
     /**
@@ -43,17 +46,40 @@ class tmp2db implements Command {
         
         $report = "--- ErtelSport tmp2db ---\n";
         
-        if($reportType == 'full'){
-            $namesReport = '';
-            $datesReport = '';
-        }
-        
         // source corresponding to 3a_sports - insert if does not already exist
         $source = Source::getBySlug(ErtelSport::SOURCE_SLUG); // DB
         if(is_null($source)){
             $source = new Source(ErtelSport::SOURCE_DEFINITION_FILE);
             $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
+        }
+        // source corresponding to Ertel (for partial ids) - insert if does not already exist
+        $sourceErtel = Source::getBySlug(Ertel::SOURCE_SLUG); // DB
+        if(is_null($sourceErtel)){
+            $sourceErtel = new Source(Ertel::SOURCE_DEFINITION_FILE);
+            $sourceErtel->insert(); // DB
+            $report .= "Inserted source " . $sourceErtel->data['slug'] . "\n";
+        }
+        // source corresponding to Comité Para
+        $sourceCPara = Source::getBySlug(CPara::SOURCE_SLUG); // DB
+        if(is_null($sourceCPara)){
+            $sourceCPara = new Source(CPara::SOURCE_DEFINITION_FILE);
+            $sourceCPara->insert(); // DB
+            $report .= "Inserted source " . $sourceCPara->data['slug'] . "\n";
+        }
+        // source corresponding to CSICOP
+        $sourceCSICOP = Source::getBySlug(CSICOP::SOURCE_SLUG); // DB
+        if(is_null($sourceCSICOP)){
+            $sourceCSICOP = new Source(CSICOP::SOURCE_DEFINITION_FILE);
+            $sourceCSICOP>insert(); // DB
+            $report .= "Inserted source " . $sourceCSICOP->data['slug'] . "\n";
+        }
+        // source corresponding to CFEPP
+        $sourceCFEPP = Source::getBySlug(CFEPP::SOURCE_SLUG); // DB
+        if(is_null($sourceCFEPP)){
+            $sourceCFEPP = new Source(CFEPP::SOURCE_DEFINITION_FILE);
+            $sourceCFEPP->insert(); // DB
+            $report .= "Inserted source " . $sourceCFEPP->data['slug'] . "\n";
         }
         
         // main group
@@ -72,23 +98,15 @@ class tmp2db implements Command {
                 $subgroups[$slug] = ErtelSport::getSubgroup($slug);
             }
             else{
-                $subgroups[$slug]->deleteMembers(); // only deletes asssociations between group and members
+                $subgroups[$slug]->deleteMembers(); // DB only deletes asssociations between group and members
             }
         }
         
-        //
-        // Start postgresql session
-        //
-/* 
-        $dblink->beginTransaction();
-        $dblink->commit();
-        $dblink->rollBack();
-*/
-        
+        // Main loop
         $nInsert = 0;
         $nUpdate = 0;
-        $nRestoredNames = 0;
-        $nDiffDates = 0;
+        $nRestoredSex = 0;
+        $nRestoredOccu = 0;
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
         $lines = ErtelSport::loadTmpFile();
@@ -97,12 +115,8 @@ class tmp2db implements Command {
         $t1 = microtime(true);
         for($i=0; $i < $N; $i++){
             $line = $lines[$i];
-            $subsample = self::computeSubgroup($line);
-            $erid = Ertel::ertelId('S', $line['NR']);
-echo "\n<pre>"; print_r($line); echo "</pre>\n";
-echo "subsample = $subsample\n";
-echo "ertel id = $erid\n";
-exit;
+            $subgroup = self::computeSubgroupSlug($line);
+            $erId = Ertel::ertelId('S', $line['NR']);
             $lineRaw = $linesRaw[$i];
             // All persons already in db are coming from Gauquelin data
             // see docs/sport-sportsmen.html#ertel-s-subsamples
@@ -117,18 +131,24 @@ exit;
                 $new['name']['given'] = $line['GNAME'];
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
-$new['birth']['place']['c2'] = $line['C2'];
-// fix : C1 ??? (SCT)
                 $new['birth']['place']['cy'] = $line['CY'];
+                if($line['C1'] != ''){
+                    $new['birth']['place']['c1'] = $line['C1']; // useful only for SCT (Scotland)
+                }
                 $new['sex'] = $line['SEX'];
                 //
-                $p->addOccu($line['SPORT']);
+                $p->addOccu(ErtelSport::computeSport($line));
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NR']);
+                $p->addIdPartial(Ertel::SOURCE_SLUG, $erId);
                 $p->updateFields($new);
                 $p->computeSlug();
-                $p->addHistory("newalch sport tmp2db", $source->data['slug'], $new);
-                $p->addRaw($source->data['slug'], $lineRaw);
+                $p->addHistory(
+                    command: 'ertel sport tmp2db',
+                    sourceSlug: $source->data['slug'],
+                    newdata: $new,
+                    rawdata: $lineRaw
+                );
                 $nInsert++;
                 $p->data['id'] = $p->insert(); // DB
             }
@@ -140,77 +160,59 @@ $new['birth']['place']['c2'] = $line['C2'];
                 // - precise sport in D6
                 // - sex
                 // Missing names in A1 are not handled here (done by class fixA1)
-/* 
+                $p = Person::getByPartialId(LERRCP::SOURCE_SLUG, $line['GQID']);
                 $new = [];
-                $new['notes'] = [];
-                [$curaFile, $NUM] = ErtelSport::gnr2cura($line['GNR']);
-                $gqId = LERRCP::gauquelinId($curaFile, $NUM);
-                $p = Person::getBySourceId($curaFile, $NUM);
-                if(is_null($p)){
-                    throw new \Exception("$gqId : try to update an unexisting person");
+                switch($subgroup){
+                    // Already in A1
+                    case 'ertel-1-first-french':
+                    case 'ertel-2-first-european':
+                    case 'ertel-6-para-champions':
+                        $new['birth']['date'] = $line['DATE']; // A1 contains only date UT
+                        $new['sex'] = $line['SEX'];
+                        $nRestoredSex++;
+                	break;
+                	// Already in D6
+                    case 'ertel-9-second-european':
+                        $new['sex'] = $line['SEX'];
+                        $nRestoredSex++;
+                        // replace occu by Ertel value as Gauquelin file contains only 'sportsperson'
+                        $new['occus'] = [ErtelSport::computeSport($line)];
+                        $nRestoredOccu++;
+                        // TODO compare birth dates; add an issue if Ertel != D6
+                	break;
+                	// Already in D10
+                    case 'ertel-8-csicop-us':
+                    case 'ertel-12-gauq-us':
+                        $new['sex'] = $line['SEX'];
+                        $nRestoredSex++;
+                        // replace occu by Ertel value as Gauquelin file contains only 'sportsperson'
+                        $new['occus'] = [ErtelSport::computeSport($line)];
+                        $nRestoredOccu++;
+                        // TODO compare birth dates; add an issue if Ertel != D10
+                	break;
                 }
-                if($p->data['name']['family'] == "Gauquelin-$gqId"){
-                    $nRestoredNames++;
-                    if($reportType == 'full'){
-                        $namesReport .= "\nCura NUM $gqId\t {$p->data['name']['family']}\n";
-                        $namesReport .= "Müller NR {$line['NR']}\t {$line['FNAME']} - {$line['GNAME']}\n";
-                    }
-                }
-                // if Cura and Müller have different birth day
-                $mulday = substr($line['DATE'], 0, 10);
-                // from A2, stored in field 'date-ut' ; from E1, stored in field 'date'
-                if(isset($p->data['ids-in-sources']['A2'])){
-                    $curaday = substr($p->data['birth']['date-ut'], 0, 10);
-                }
-                else{
-                    $curaday = substr($p->data['birth']['date'], 0, 10);
-                }
-                if($mulday != $curaday){
-                    $nDiffDates++;
-                    $new['notes'][] = "CHECK birth day : $gqId $curaday / ErtelSport {$line['NR']} $mulday";
-                    $new['to-check'] = true;
-                    if($reportType == 'full'){
-                        $datesReport .= "\nCura $gqId\t $curaday {$p->data['name']['family']} - {$p->data['name']['given']}\n";
-                        $datesReport .= "Müller NR {$line['NR']}\t $mulday {$line['FNAME']} - {$line['GNAME']}\n";
-                    }
-                }
-                // update fields that are more precise in muller1083
-                $new['birth']['date'] = $line['DATE']; // Cura contains only date-ut
-                $new['birth']['place']['name'] = $line['PLACE'];
-                $new['name']['nobl'] = $line['NOB'];
-                $new['name']['family'] = $line['FNAME'];
-                if($p->data['name']['given'] == ''){
-                    // happens with names like Gauquelin-A1-258
-                    $new['name']['given'] = $line['GNAME'];
-                }
-                // Müller name considered as = to full name copied from birth certificate
-                // (Gauquelin name considered as current name)
-                $new['name']['official']['given'] = $line['GNAME'];
-                //
-                $p->addOccu('PH');
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NR']);
+                $p->addIdPartial(Ertel::SOURCE_SLUG, $erId);
                 $p->updateFields($new);
-                $p->computeSlug();
-                $p->addHistory("cura muller1083 tmp2db", $source->data['slug'], $new);
-                $p->addRaw($source->data['slug'], $lineRaw);                 
+                $p->addHistory(
+                    command: 'ertel sport tmp2db',
+                    sourceSlug: $source->data['slug'],
+                    newdata: $new,
+                    rawdata: $lineRaw
+                );
                 $nUpdate++;
-                $p->update(); // Storage
-                */
+                $p->update(); // DB
             }
             // main group
             $g->addMember($p->data['id']);
             // subgroups
-            $QUEL = $line['QUEL'];
-            if(isset($subgroups[$QUEL])){
-                $subgroups[$QUEL]->addMember($p->data['id']);
-            }
-        }
-die("\n<br>die here " . __FILE__ . ' - line ' . __LINE__ . "\n");
+            $subgroups[$subgroup]->addMember($p->data['id']);
+        } // end main loop
 
         $t2 = microtime(true);
         try{
-            $g->data['id'] = $g->insert(); // Storage
+            $g->data['id'] = $g->insert(); // DB
         }
         catch(\Exception $e){
             // group already exists
@@ -218,7 +220,7 @@ die("\n<br>die here " . __FILE__ . ' - line ' . __LINE__ . "\n");
         }
         foreach($subgroups as $slug => $subgroup){
             try{
-                $subgroup->data['id'] = $subgroup->insert(); // Storage
+                $subgroup->data['id'] = $subgroup->insert(); // DB
             }
             catch(\Exception $e){
                 // group already exists
@@ -227,18 +229,16 @@ die("\n<br>die here " . __FILE__ . ' - line ' . __LINE__ . "\n");
         }
         $dt = round($t2 - $t1, 5);
         if($reportType == 'full'){
-            $report .= "=== Names fixed ===\n" . $namesReport;
-            $report .= "\n=== Dates fixed ===\n" . $datesReport;
-            $report .= "============\n";
+            $report = 
+                  "Nb restored sex = $nRestoredSex\n"
+                . "Nb restored sex = $nRestoredOccu\n"
+                . $report;
         }
-        $report .= "$nInsert persons inserted, $nUpdate updated ($dt s)\n";
-        $report .= "$nDiffDates dates differ from A2 and E1";
-        $report .= " - $nRestoredNames names restored in A2\n";
         return $report;
     }
     
     /** Returns the slug of the subgroup of a record **/
-    private static function computeSubgroup(&$line) {
+    private static function computeSubgroupSlug(&$line) {
         if($line['G55'] != ''){
             return 'ertel-1-first-french';
         }

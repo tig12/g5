@@ -140,6 +140,8 @@ class tmp2db implements Command {
                 $new['sources'] = $source->data['slug'];
                 $new['ids_in_sources'] = [
                     $source->data['slug'] => $line['NUM'],
+                ];
+                $new['ids_partial'] = [
                     $lerrcpSource->data['slug'] => $gqId,
                 ];
                 $new['occus'] = $newOccus;

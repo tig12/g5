@@ -13,14 +13,14 @@ use g5\app\Config;
 
 class SI42 {
     
+    /** Slug of source  **/
+    const SOURCE_SLUG = 'si42';
+    
     /**
         Path to the yaml file containing the characteristics of the source.
         Relative to directory data/db/source
     **/
-    const SOURCE_DEFINITION_FILE = 'csicop' . DS . 'si42.yml';
-    
-    /** Slug of source  **/
-    const SOURCE_SLUG = 'si42';
+    const SOURCE_DEFINITION_FILE = 'csicop' . DS . self::SOURCE_SLUG . '.yml';
     
     /**
         Field names of tmpFilename() for step raw2csv.
@@ -40,24 +40,24 @@ class SI42 {
     
     /** Raw file containing 408 records **/
     public static function rawFilename(){
-        return implode(DS, [Config::$data['dirs']['raw'], 'csicop', 'si42', 'si42-p60-63.txt']);
+        return implode(DS, [Config::$data['dirs']['raw'], 'csicop', self::SOURCE_SLUG, 'si42-p60-63.txt']);
     }
     
     /** Raw file containing 128 records of canvas 1 **/
     public static function rawFilename_canvas1(){
-        return implode(DS, [Config::$data['dirs']['raw'], 'csicop', 'si42', 'si42-p41.txt']);
+        return implode(DS, [Config::$data['dirs']['raw'], 'csicop', self::SOURCE_SLUG, 'si42-p41.txt']);
     }
     
     // *********************** Tmp files manipulation ***********************
     
     /** Tmp file name with 408 records **/
     public static function tmpFilename(){
-        return implode(DS, [Config::$data['dirs']['tmp'], 'csicop', 'si42', '408-csicop-si42.csv']);
+        return implode(DS, [Config::$data['dirs']['tmp'], 'csicop', self::SOURCE_SLUG, 'csicop-408-si42.csv']);
     }
     
     /** Tmp file containing only records marked SC **/
     public static function tmpFilename_181(){
-        return implode(DS, [Config::$data['dirs']['tmp'], 'csicop', 'si42', '181-csicop-si42.csv']);
+        return implode(DS, [Config::$data['dirs']['tmp'], 'csicop', self::SOURCE_SLUG, 'csicop-181-si42.csv']);
     }
     
 }// end class

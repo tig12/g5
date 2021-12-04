@@ -1,8 +1,10 @@
 slug: ertel-4-german-various
 name: 4 - German various
 'n': 115
+sources:
+  - 3a_sports
 description: |
   German birth dates. Origin of this group is not clearly described by Ertel. Possibly gathered by Gauquelin and copied manually by Ertel.
   <br>Number claimed by Ertel : 117
 parents: 
-  - ertel4391
+  - ertel-4384-sport

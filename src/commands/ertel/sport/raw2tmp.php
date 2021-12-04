@@ -63,7 +63,7 @@ class raw2tmp implements Command {
             $new['IG']          = trim(mb_substr($line, 79, 1));
             $country            = trim(mb_substr($line, 87, 3));
             $new['CY'] = ErtelSport::RAW_NATION_CY[$country];
-            $new['C2'] = ($country == 'SCO' ? 'SCT' : ''); // SCT = geonames code for Scotland
+            $new['C1'] = ($country == 'SCO' ? 'SCT' : ''); // SCT = geonames code for Scotland
             $new['ZITRANG']     = trim(mb_substr($line, 100, 1));
             $new['ZITSUM']      = trim(mb_substr($line, 107, 1));
             $new['ZITATE']      = trim(mb_substr($line, 109, 16));

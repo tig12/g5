@@ -1,8 +1,10 @@
 slug: ertel-11-lower-french
 name: 11 - Lower French
 'n': 453
+sources:
+  - 3a_sports
 description: |
   Copied manually by Ertel in Gauquelin's laboratory.
   <br>Number claimed by Ertel : 455
 parents: 
-  - ertel4391
+  - ertel-4384-sport

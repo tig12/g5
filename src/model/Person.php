@@ -111,6 +111,26 @@ class Person {
     }
     
     /**
+        Returns an object of type Person from storage,
+        using its id for a given source,
+        or null if doesn't exist.
+        Ex : to get a person whose id in source a1 is 254, call
+        getBySourceId('lerrcp', 'A1-254')
+        @param  $source     Slug of the source
+        @param  $partialId partial id of the person within this source 
+    **/
+    public static function getByPartialId($sourceSlug, $partialId): ?Person {
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare("select * from person where ids_partial @> '{\"$sourceSlug\": \"$partialId\"}'");
+        $stmt->execute([]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if($res === false || count($res) == 0){
+            return null;
+        }
+        return self::row2person($res);
+    }
+    
+    /**
         Returns an array of Persons with given occupation codes.
         @param $occus Array of occupation codes
     **/

@@ -2,6 +2,7 @@ slug: ertel-2-first-european
 name: 2 - First European
 'n': 1202
 sources:
+  - 3a_sports
   - a1
 description: |
   Records gathered by Gauquelin after 1955. According to Ertel, contains
@@ -11,4 +12,4 @@ description: |
   </ul>
   <br>Number claimed by Ertel : 1189
 parents: 
-  - ertel4391
+  - ertel-4384-sport

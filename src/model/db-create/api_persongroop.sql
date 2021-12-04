@@ -6,6 +6,7 @@ select
     p.slug              "person_slug",
     g.slug              "group_slug",
     p.ids_in_sources,
+    p.ids_partial,
     p.sex,
     p.name,
     p.occus,

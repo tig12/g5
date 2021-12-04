@@ -22,14 +22,14 @@ class Irving {
     **/
     const TRUST_LEVEL = DB5::TRUST_CHECK;
     
+    /** Slug of source  **/
+    const LIST_SOURCE_SLUG = 'rawlins-ertel-irving';
+    
     /**
         Path to the yaml file containing the characteristics of the source.
         Relative to directory data/db/source
     **/
-    const LIST_SOURCE_DEFINITION_FILE = 'csicop' . DS . 'rawlins-ertel-irving.yml';
-    
-    /** Slug of source  **/
-    const LIST_SOURCE_SLUG = 'csi';
+    const LIST_SOURCE_DEFINITION_FILE = 'csicop' . DS . self::LIST_SOURCE_SLUG . '.yml';
     
     // group definitions are located in class CSICOP
     
@@ -54,7 +54,7 @@ class Irving {
         'BATCH',
     ];
     
-    /** Field names of data/tmp/csicop/irving/408-csicop-irving.csv **/
+    /** Field names of data/tmp/csicop/irving/csicop-408-irving.csv **/
     const TMP_FIELDS = [
         'CSID',
         'GQID',
@@ -145,7 +145,7 @@ class Irving {
     
     /** Path to Irving's raw file **/
     public static function rawFilename(){
-        return implode(DS, [Config::$data['dirs']['raw'], 'csicop', 'rawlins-ertel-irving', 'rawlins-ertel-irving.csv']);
+        return implode(DS, [Config::$data['dirs']['raw'], 'csicop', self::LIST_SOURCE_SLUG, self::LIST_SOURCE_SLUG . '.csv']);
     }
     
     /** Loads rawlins-ertel-irving.csv in a regular array **/
@@ -157,15 +157,15 @@ class Irving {
     
     /** Temporary file in data/tmp/csicop/irving/ **/
     public static function tmpFilename(){
-        return implode(DS, [Config::$data['dirs']['tmp'], 'csicop', 'irving', '408-csicop-irving.csv']);
+        return implode(DS, [Config::$data['dirs']['tmp'], 'csicop', 'irving', 'csicop-408-irving.csv']);
     }
     
-    /** Loads data/tmp/csicop/irving/408-csicop-irving.csv in a regular array **/
+    /** Loads data/tmp/csicop/irving/csicop-408-irving.csv in a regular array **/
     public static function loadTmpFile(){
         return csvAssociative::compute(self::tmpFilename(), G5::CSV_SEP);
     }
     
-    /** Loads data/tmp/csicop/irving/408-csicop-irving.csv in an asssociative array ; keys = CSID **/
+    /** Loads data/tmp/csicop/irving/csicop-408-irving.csv in an asssociative array ; keys = CSID **/
     public static function loadTmpFile_csid(){
         $csv = self::loadTmpFile();
         $res = [];              
@@ -178,11 +178,11 @@ class Irving {
     // *********************** Tmp raw file manipulation ***********************
     
     /**
-        Returns the name of a "tmp raw file", data/tmp/csicop/irving/408-csicop-irving-raw.csv
+        Returns the name of a "tmp raw file", data/tmp/csicop/irving/csicop-408-irving-raw.csv
         (file used to keep trace of the original raw values).
     **/
     public static function tmpRawFilename(){
-        return implode(DS, [Config::$data['dirs']['tmp'], 'csicop', 'irving', '408-csicop-irving-raw.csv']);
+        return implode(DS, [Config::$data['dirs']['tmp'], 'csicop', 'irving', 'csicop-408-irving-raw.csv']);
     }
     
     /**

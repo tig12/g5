@@ -4,7 +4,7 @@ document:
     - 2020-09-01 17:56:19+02:00: Thierry Graff, creation
 
 name: rawlins-ertel-irving.csv
-slug: csi
+slug: rawlins-ertel-irving
 type: file
 authors:
   - Dennis Rawlins
@@ -13,8 +13,8 @@ authors:
 description: |
   File sent by Kenneth Irving on 2019-12-14.
   <br>This file is the main information source used to add CSICOP test in Open Gauquelin database.
-  <br>Original file : <a href="https://g5.tig12.net/auxiliary/1979-csicop/rawlins-ertel-irving/">CSICOP.DOC</a>.
+  <br>Original file : <a href="https://github.com/tig12/g5-aux/tree/master/1979-csicop/rawlins-ertel-irving">CSICOP.DOC</a>.
   <br>Integration to Open Gauquelin database : <a href="https://github.com/tig12/gauquelin5/tree/master/data/raw/csicop/rawlins-ertel-irving">rawlins-ertel-irving.csv</a>.
   <br>See <a href="https://tig12.github.io/gauquelin5/csicop.html">tig12.github.io/gauquelin5/csicop.html</a> for more informations.
 parents:
-  - csicop-committee
+  - csicop

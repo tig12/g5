@@ -2,9 +2,10 @@ slug: ertel-12-gauq-us
 name: 12 - GAUQ-U.S.
 'n': 159
 sources:
+  - 3a_sports
   - d10
 description: |
   Athletes published by Gauquelin in file D10, not included in CSICOP test.
   <br>Number claimed by Ertel : 158
 parents: 
-  - ertel4391
+  - ertel-4384-sport

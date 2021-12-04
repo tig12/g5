@@ -2,10 +2,11 @@ slug: ertel-1-first-french
 name: 1 - First French
 'n': 553
 sources:
+  - 3a_sports
   - g55
   - a1
 description: |
   Records coming from Michel Gauquelin "L'influence des astres", 1955.
   <br>Number claimed by Ertel : 568
 parents: 
-  - ertel4391      
+  - ertel-4384-sport

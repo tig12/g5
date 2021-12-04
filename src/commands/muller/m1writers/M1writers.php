@@ -19,15 +19,15 @@ class M1writers {
     
     // TRUST_LEVEL not defined, using value of class Newalch
     
+    /** Slug of source 5muller_writers.csv **/
+    const LIST_SOURCE_SLUG = 'afd1';
+    
     /**
         Path to the yaml file containing the characteristics of the source describing file
         data/raw/muller/1-writers/5muller_writers.csv
         Relative to directory data/db/source
     **/
     const LIST_SOURCE_DEFINITION_FILE = 'muller' . DS . 'afd1-writers-list-402.yml';
-    
-    /** Slug of source 5muller_writers.csv **/
-    const LIST_SOURCE_SLUG = 'afd1';
     
     /**
         Path to the yaml file containing the characteristics of Müller's booklet AFD1.

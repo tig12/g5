@@ -1,7 +1,10 @@
 
-rawlins-ertel-irving.csv
-was built from file
-https://g5.tig12.net/auxiliary/1997-csicop/rawlins-ertel-irving/CSICOP.DOC
-(a file sent by Kenneth Irving on 2019-12-14, see https://g5.tig12.net/auxiliary/1997-csicop/rawlins-ertel-irving/README for details)
+rawlins-ertel-irving.csv is a csv copy of the original file:
+
+https://github.com/tig12/g5-aux/blob/master/1979-csicop/rawlins-ertel-irving/CSICOP.DOC
 
 rawlins-ertel-irving.csv contains exactly the same data as CSICOP.DOC (just opened CSICOP.DOC and saved as csv).
+
+CSICOP.DOC is a file sent by Kenneth Irving on 2019-12-14
+For details and comments by Kenneth Irving, see
+https://github.com/tig12/g5-aux/tree/master/1979-csicop/rawlins-ertel-irving

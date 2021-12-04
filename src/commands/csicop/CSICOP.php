@@ -2,7 +2,7 @@
 /******************************************************************************
 
     CSICOP = Committee for the Scientific Investigation of Claims of the Paranormal
-    Class used by source management
+    U.S. skeptic organization.
                                    
     @license    GPL
     @history    2021-07-20 07:33:13+02:00, Thierry Graff : Creation
@@ -15,14 +15,18 @@ use g5\commands\csicop\irving\Irving;
 
 class CSICOP {
     
+    // *********************** Source management ***********************
+    
+    /** Slug of source  **/
+    const SOURCE_SLUG = 'csicop';
+    
     /**
         Path to the yaml file containing the characteristics of the source.
         Relative to directory data/db/source
     **/
-    const SOURCE_DEFINITION_FILE = 'csicop' . DS . 'csicop.yml';
+    const SOURCE_DEFINITION_FILE = 'csicop' . DS . self::SOURCE_SLUG . '.yml';
     
-    /** Slug of source  **/
-    const SOURCE_SLUG = 'csicop-committee';
+    // *********************** Group management ***********************
     
     /** Slug of the group (all csicop records) **/
     const GROUP_SLUG = 'csicop';
@@ -90,6 +94,8 @@ class CSICOP {
         $g->data['parents'] = [CSICOP::GROUP_SLUG];
         return $g;
     }
+    
+    // *********************** Output files manipulation ***********************
     
     /** 
         Computes the name of the directory where output files are stored
