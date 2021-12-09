@@ -197,14 +197,25 @@ The database uses <a href="https://www.postgresql.org/">postgresql</a>.
 
 <!-- ********************************************************************************* -->
 <h2><a name="g5-integration">G5 integration</a></h2>
-Empty tables are created with command
-<pre>php run-g5.php db build dbcreate</pre>
+These commands create the whole database from scratch.
+<br>The code of class <code>g5\db\init\all</code> is the only reliable reference documenting the complete build process.
 
-The tables are also dropped and recreated when the database is created from scratch
-<pre>php run-g5.php db fill history all</pre>
-or
-<pre>php run-g5.php db fill history db</pre>
-
+<pre>
+# Generate tmp files from raw files
+php run-g5.php db init all tmp
+</pre>
+<pre>
+# Fill the content of tmp files in database
+php run-g5.php db init all db
+</pre>
+<pre>
+# Compute occupations and db statistics
+php run-g5.php db init all finalize
+</pre>
+<pre>
+# Generate csv files to download
+php run-g5.php db init all export
+</pre>
 
 </article>
 </div><!-- end class="main" -->

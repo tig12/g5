@@ -119,6 +119,7 @@ class Person {
         @param  $source     Slug of the source
         @param  $partialId partial id of the person within this source 
     **/
+// WARNING - this function is not used anymore => remove ?
     public static function getByPartialId($sourceSlug, $partialId): ?Person {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("select * from person where ids_partial @> '{\"$sourceSlug\": \"$partialId\"}'");

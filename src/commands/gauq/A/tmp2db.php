@@ -1,8 +1,8 @@
 <?php
 /********************************************************************************
-    Loads files data/tmp/gauq/lerrcp/A*.csv and A-raw.csv in database.
+    Loads files data/tmp/gauq/lerrcp/A*.csv and A*-raw.csv in database.
     Must be exectued in alphabetical order (first A1, then A2 ... A6)
-    to respect the defition of Gauquelin id (see https://tig12.github.io/gauquelin5/cura.html)
+    to respect the defition of Gauquelin id
     
     @license    GPL
     @history    2020-08-19 05:23:25+02:00, Thierry Graff : creation
@@ -69,11 +69,11 @@ class tmp2db implements Command {
         }
         
         // source corresponding LERRCP booklet of current A file
-        $source = Source::getBySlug(LERRCP::datafile2bookletSourceSlug($datafile)); // DB
-        if(is_null($source)){
-            $source = LERRCP::getBookletSourceOfDatafile($datafile);
-            $source->insert(); // DB
-            $report .= "Inserted source " . $source->data['slug'] . "\n";
+        $bookletSource = Source::getBySlug(LERRCP::datafile2bookletSourceSlug($datafile)); // DB
+        if(is_null($bookletSource)){
+            $bookletSource = LERRCP::getBookletSourceOfDatafile($datafile);
+            $bookletSource->insert(); // DB
+            $report .= "Inserted source " . $bookletSource->data['slug'] . "\n";
         }
         
         // source corresponding to current A file
@@ -83,6 +83,7 @@ class tmp2db implements Command {
             $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
+        
         // group
         $g = Group::getBySlug(LERRCP::datafile2groupSlug($datafile)); // DB
         if(is_null($g)){
@@ -155,13 +156,13 @@ class tmp2db implements Command {
                 $nInsert++;
             }
             else{
-                // duplicate, person appears in more than one cura file
+                // duplicate, person appears in more than one lerrcp file
                 if(!isset($line['OCCU'])){
                     throw new \Exception("Missing definition for occupation - {$line['NUM']} {$line['FNAME']} {$line['GNAME']} ");
                 }
                 $p->addOccus($newOccus);
                 $p->addSource($source->data['slug']);
-                // does not addIdPartial(lerrcp) to respect the definition of Gauquelin id:
+                // does not addIdPartial(lerrcp) to conform with the definition of Gauquelin id:
                 // lerrcp id takes the value of the first volume where it appears.
                 // lerrcp id already affected in a previous file for this record.
                 $p->addIdInSource($source->data['slug'], $line['NUM']);

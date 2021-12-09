@@ -70,6 +70,7 @@ use g5\commands\muller\m2men\tmp2db             as M2menTmp2db;
 use g5\commands\muller\m3women\tmp2db           as M3womenTmp2db;
 use g5\commands\muller\m5medics\tmp2db          as M5medicsTmp2db;
 use g5\commands\csicop\irving\tmp2db            as csiIrvingTmp2db;
+use g5\commands\ertel\sport\tmp2db              as ErteSportTmp2db;
 
 // finalize
 use g5\commands\db\init\stats;
@@ -190,6 +191,7 @@ class all implements Command {
             
             echo A6occu::execute([]);
             echo D6tmp2db::execute(['D6', 'tmp2db', 'small']);
+            echo dbFillPerson::execute(['D6.yml']);
             echo D10tmp2db::execute(['D10', 'tmp2db', 'small']);
             echo E1E3tmp2db::execute(['E1', 'tmp2db', 'small']);
             echo E1E3tmp2db::execute(['E3', 'tmp2db', 'small']);
@@ -207,6 +209,8 @@ class all implements Command {
             
             echo M2menTmp2db::execute(['small']);
             echo dbFillPerson::execute(['muller-612-men.yml']);
+            
+            echo ErteSportTmp2db::execute(['small']);
             
             echo occus2::execute();
         }

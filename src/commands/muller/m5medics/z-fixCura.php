@@ -1,6 +1,7 @@
 <?php
 /********************************************************************************
-    Injects names and birth day of 5-newalch-csv/1083MED.csv to 5-cura-csv/A2.csv E1.csv
+    Injects names and birth day of data/tmp/muller/5-medics/muller5-1083-medics.csv
+    to data/tmp/gauq/lerrcp/A2.csv E1.csv
     
     @license    GPL
     @history    2019-10-19 12:28:40+02:00, Thierry Graff : Creation
@@ -9,9 +10,9 @@ namespace g5\commands\muller\m5medics;
 
 use g5\G5;
 use tiglib\patterns\Command;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\LERRCP;
 
-class fixCura implements Command {
+class fixGauquelin implements Command {
     
     // *****************************************
     /** 

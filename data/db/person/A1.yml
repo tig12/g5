@@ -1,5 +1,5 @@
 #
-# Human additions to file data/tmp/gauq/lerrcp/A1.csv
+# Human additions to data coming from file data/tmp/gauq/lerrcp/A1.csv
 # records are sorted by NUM within the file A1
 # 
 # 2021-11-18 16:16:30+01:00, Thierry Graff : Creation
@@ -36,7 +36,9 @@
   ids-in-sources:
     a1: '1899'
     ertel-sport: '1548'
+  ids-partial:
     lerrcp: A1-1899
+    ertel: ES-1548
   name:
     family: Escalante
     given: Edouard

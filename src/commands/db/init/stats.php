@@ -51,7 +51,7 @@ class stats implements Command {
         $sum = $N_time + $N_day;
         $report_full .= "N_time + N_day = $sum\n";
         if($sum != $N){
-            return "ANOMALY: normally, N_time + N_day = N\n" . $report_full;
+            $report .= "*** ANOMALY *** normally, N_time + N_day = N\n" . $report_full;
         }
         
         $countries = [];

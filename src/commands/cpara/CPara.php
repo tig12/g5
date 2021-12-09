@@ -1,9 +1,8 @@
 <?php
 /******************************************************************************
-                                                     
     CPara = "Comité para" = Comité belge pour l'investigation scientifique des phénomènes réputés paranormaux
     Belgian skeptic organization.
-                                   
+    
     @license    GPL
     @history    2021-11-06 20:47:26+01:00, Thierry Graff : Creation
 ********************************************************************************/
@@ -12,6 +11,15 @@ namespace g5\commands\cpara;
 use g5\app\Config;
 
 class CPara {
+    
+    // *********************** Comité Para unique id ***********************
+    /** 
+        Computes Comité Para unique ID
+        @param  $num        Unique id within Comité Para file
+    **/
+    public static function cparaId($num){
+        return 'CP-' . $num;
+    }
     
     // *********************** Source management ***********************
     

@@ -6,6 +6,6 @@ sources:
   - d10
 description: |
   Athletes published by Gauquelin in file D10, not included in CSICOP test.
-  <br>Number claimed by Ertel : 158
+  <br>Number according to Ertel : 158
 parents: 
   - ertel-4384-sport

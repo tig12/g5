@@ -7,6 +7,6 @@ sources:
   - csicop
 description: |
   Part of CSICOP data that are present in D10 file.
-  <br>Number claimed by Ertel : 192
+  <br>Number according to Ertel : 192
 parents: 
   - ertel-4384-sport

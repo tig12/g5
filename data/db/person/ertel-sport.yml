@@ -1,0 +1,41 @@
+#
+# Human additions to data coming from file data/tmp/ertel/ertel-4384-sport.csv
+# records are sorted by NUM within the file ertel-4384-sport.csv
+# 
+# 2021-12-05 18:25:13+01:00, Thierry Graff : Creation
+
+# Albani Peppino
+-
+  ACTION: update
+  ids-in-sources:
+    3a_sports: '46'
+  name:
+    given: Giuseppe
+    fame:
+      given: Peppino
+  birth:
+    date: '1921-04-08'
+    place:
+      name: Cava Manara
+      lg: 45.14014
+      lat: 9.10774
+      c2: PV
+      cy: IT
+      geoid: 3179305
+  death:
+    date: '1989-06-07'
+    place:
+      name: Pavia
+      lg: 45.19205
+      lat: 9.15917
+      c2: PV
+      cy: IT
+      geoid: 3171366
+
+  notes:
+    - |
+      This person is present in Ertel file gathering athletes without birth date.
+      <br>Informations come from <a href="https://it.wikipedia.org/wiki/Giuseppe_Albani_(calciatore)">https://it.wikipedia.org/wiki/Giuseppe_Albani_(calciatore)</a> and <a href="https://www.transfermarkt.com/peppino-albani/profil/spieler/538598">https://www.transfermarkt.com/peppino-albani/profil/spieler/538598</a>
+  issues:
+    chk-date: |
+      Birth date comes from the internet, and must be checked.

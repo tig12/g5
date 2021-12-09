@@ -115,12 +115,13 @@ class tmp2db implements Command {
         $t1 = microtime(true);
         for($i=0; $i < $N; $i++){
             $line = $lines[$i];
-            $subgroup = self::computeSubgroupSlug($line);
+            $subgroupSlug = self::computeSubgroupSlug($line);
             $erId = Ertel::ertelId('S', $line['NR']);
             $lineRaw = $linesRaw[$i];
             // All persons already in db are coming from Gauquelin data
             // see docs/sport-sportsmen.html#ertel-s-subsamples
-            if($line['GQID'] == ''){
+            // Except line 4011 thoma-georg-1937-08-20 ; in file Müller 2 (612 famous men)
+            if($line['GQID'] == '' && $line['NR'] != 4011){
                 //
                 // Person not in Gauquelin data
                 //
@@ -155,24 +156,34 @@ class tmp2db implements Command {
             else{
                 // Person already in A1 or D6 or D10
                 // Ertel data are considered of lower quality than Gauquelin
-                // Then update only missing information in Gauquelin:
+                // So update only missing information in Gauquelin:
                 // - birth times (legal, not UTC) in A1
-                // - precise sport in D6
+                // - precise sport in D6 and D10
                 // - sex
                 // Missing names in A1 are not handled here (done by class fixA1)
-                $p = Person::getByPartialId(LERRCP::SOURCE_SLUG, $line['GQID']);
                 $new = [];
-                switch($subgroup){
+                $tmp = LERRCP::explodeGauquelinId($line['GQID']);
+                // $tmp != 2 for thoma-georg-1937-08-20 (the only record coming from Müller)
+                if(count($tmp) == 2){
+                    $NUM = $tmp[1];
+                }
+                switch($subgroupSlug){
+                    //
                     // Already in A1
+                    //
                     case 'ertel-1-first-french':
                     case 'ertel-2-first-european':
                     case 'ertel-6-para-champions':
+                        $p = Person::getBySourceId('a1', $NUM);
                         $new['birth']['date'] = $line['DATE']; // A1 contains only date UT
                         $new['sex'] = $line['SEX'];
                         $nRestoredSex++;
                 	break;
+                    //
                 	// Already in D6
+                    //
                     case 'ertel-9-second-european':
+                        $p = Person::getBySourceId('d6', $NUM);
                         $new['sex'] = $line['SEX'];
                         $nRestoredSex++;
                         // replace occu by Ertel value as Gauquelin file contains only 'sportsperson'
@@ -180,9 +191,12 @@ class tmp2db implements Command {
                         $nRestoredOccu++;
                         // TODO compare birth dates; add an issue if Ertel != D6
                 	break;
+                    //
                 	// Already in D10
+                    //
                     case 'ertel-8-csicop-us':
                     case 'ertel-12-gauq-us':
+                        $p = Person::getBySourceId('d10', $NUM);
                         $new['sex'] = $line['SEX'];
                         $nRestoredSex++;
                         // replace occu by Ertel value as Gauquelin file contains only 'sportsperson'
@@ -191,10 +205,28 @@ class tmp2db implements Command {
                         // TODO compare birth dates; add an issue if Ertel != D10
                 	break;
                 }
+                //
+                // Particular cases
+                //
+                // Beltoise Jean Pierre 1937-04-26 ; in file E3, not mentioned by Ertel
+                if($line['GQID'] == 'E3-95'){
+                    $p = Person::getBySourceId('e3', 95);
+                    $p->addOccu(ErtelSport::computeSport($line));
+                    $new['occus'] = [ErtelSport::computeSport($line)];
+                }
+                // thoma-georg-1937-08-20 ; in file Müller 2 (612 famous men)
+                else if($line['NR'] == 4011){
+                    $p = Person::getBySourceId('afd2', 558);
+                    // no new information added by Ertel
+                }
+                
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NR']);
                 $p->addIdPartial(Ertel::SOURCE_SLUG, $erId);
                 $p->updateFields($new);
+                // repeat fields to include in $history
+                $new['sources'] = [$source->data['slug']];
+                $new['ids-partial'] = [Ertel::SOURCE_SLUG => $erId];
                 $p->addHistory(
                     command: 'ertel sport tmp2db',
                     sourceSlug: $source->data['slug'],
@@ -207,7 +239,7 @@ class tmp2db implements Command {
             // main group
             $g->addMember($p->data['id']);
             // subgroups
-            $subgroups[$subgroup]->addMember($p->data['id']);
+            $subgroups[$subgroupSlug]->addMember($p->data['id']);
         } // end main loop
 
         $t2 = microtime(true);
@@ -228,11 +260,10 @@ class tmp2db implements Command {
             }
         }
         $dt = round($t2 - $t1, 5);
+        $report .= "Inserted $nInsert, updated $nUpdate ($dt s)\n";
         if($reportType == 'full'){
-            $report = 
-                  "Nb restored sex = $nRestoredSex\n"
-                . "Nb restored sex = $nRestoredOccu\n"
-                . $report;
+            $report .= "Nb restored sex = $nRestoredSex\n"
+                     . "Nb restored occu = $nRestoredOccu\n";
         }
         return $report;
     }

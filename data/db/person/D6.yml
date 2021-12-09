@@ -1,0 +1,39 @@
+#
+# Human additions to data coming from file data/tmp/gauq/lerrcp/D6.csv
+# records are sorted by NUM within the file D6
+# 
+# 2021-12-05 06:11:16+01:00, Thierry Graff : Creation
+
+-
+  ACTION: insert
+  sources:
+    - d6
+    - ertel-sport
+    - wd
+  ids-in-sources:
+    d6: '234'
+    ertel-sport: '2318'
+    wd: Q522782
+  ids-partial:
+    lerrcp: A1-1899
+    ertel: ES-2318
+    wd: Q522782
+  name:
+    family: Lacroix
+    given: Léo
+  occus:
+    - skier
+  birth:
+    date: '1937-11-26'
+    place: 
+      name: Bois-d'Amont
+      cy: FR
+      c2: '39'
+      lg: 46.5328
+      lat: 6.1375
+      geoid: 3032067
+  notes: 
+    - |
+      This person is present in Ertel sportsmen list, but not present in cura5 D6 list.
+      <br>Informations come from <a href="https://fr.wikipedia.org/wiki/L%C3%A9o_Lacroix_(ski_alpin)">https://fr.wikipedia.org/wiki/Léo_Lacroix_(ski_alpin)</a>
+      

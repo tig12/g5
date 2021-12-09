@@ -110,6 +110,15 @@ class LERRCP {
         return "$datafile-$NUM";
     }
     
+    /**
+        Converts Gauquelin id to an array containing 2 elements: the datafile and the num within this datafile.
+        Ex: "A1-654" returns ["A1", 654]
+        @param $datafile    String like 'A1-654'
+    **/
+    public static function explodeGauquelinId($gqId){
+        return explode('-', $gqId);
+    }
+        
     // *********************** Source management - data files ***********************
     
     /**

@@ -15,6 +15,15 @@ use g5\commands\csicop\irving\Irving;
 
 class CSICOP {
     
+    // *********************** CSICOP unique id ***********************
+    /** 
+        Computes CSICOP unique ID
+        @param  $num        Unique id within csicop file
+    **/
+    public static function csicopId($num){
+        return 'CSI-' . $num;
+    }
+    
     // *********************** Source management ***********************
     
     /** Slug of source  **/

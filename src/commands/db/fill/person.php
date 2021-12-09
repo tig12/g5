@@ -36,7 +36,7 @@ class person implements Command {
         self::$yamlFile = $params[0];
         $yaml = @yaml_parse_file(Config::$data['dirs']['db'] . DS . 'person' . DS . self::$yamlFile);
         if($yaml === false){
-            return 'FILE DOES NOT EXIST: ' . self::$yamlFile . "\n";
+            return 'FILE DOES NOT EXIST OR IS NOT CORRECTLY FORMATTED: ' . self::$yamlFile . "\n";
         }
         
         $report = "--- db fill tweak " . self::$yamlFile . " ---\n";
@@ -114,6 +114,7 @@ class person implements Command {
         }
         
         $p->updateFields($new);
+        $p->computeSlug(); // HERE recompute slug if the update changes name or birth date
         
         $p->addHistory(
             command: 'db fill person ' . self::$yamlFile,

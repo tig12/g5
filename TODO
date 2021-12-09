@@ -1,15 +1,28 @@
 
 
-
-
 - see php bug - https://bugs.php.net/bug.php?id=81002
 
-- 
-grep -rn 'DB5::getDbLink()' src/
-=> refactor: dblink must be passed in parameter to model classes, initialized in commands
-=> commit / rollback possible
+- integrate muller 1083 fix cura days and names to db/init/all
+
+- see db/fill/person
+    unset($new['occus']);
+    unset($new['name']['alter']);
+    etc.
+    => keeping all the fields in new seems more logical
+
+- add field 'lmt'       in person birth - in Muller 612 men and 234 women, put LMT info in field birth.lmt instead of birth.note.
+- add field 'notime'    in person birth - in Muller 612 men and 234 women, put LMT info in field birth.lmt instead of birth.note.
+
+- Person field 'sources' seems useless - redundant with ids_in_sources
+    => remove from bd
+    => remove all instructions addSource from tmp2db
 
 - add notes and issues in tmp2db - fix array / map problem for go
+
+- add commit / rollback for all tmp2db commands ?
+-  grep -rn 'DB5::getDbLink()' src/
+    => refactor: dblink must be passed in parameter to model classes, initialized in commands
+    => commit / rollback possible
 
 - scans of data/auxiliary/1991-muller1-writers are incomplete
   Ask for new complete version and include supplementary fields in g5
@@ -20,8 +33,6 @@ grep -rn 'DB5::getDbLink()' src/
 
 - add SI42 to auxiliary data - see data/auxiliary/1979-csicop
 
-- add commit / rollback for all tmp2db commands ?
-
 - quasimodo-salvatore-1901-08-20: NAME not stored correctly in history
 history        | [{"new": {"sex": "M", "name": {"given": "Salvatore", "family": "Quasimodo"}, "birth": {"tzo": "+01:00", "date": "1901-08-20 18:00", "note": "", "place": {"c2": "SR", "cy": "IT", "lg": "15", "lat": "37", "name": "Siracusa"}}, "occus": ["writer"], "trust": 4, "sources": "afd1", "ids_in_sources": {"afd": "M1-367", "afd1": "367"}}, "raw": {"LG": "-15,5", "DAY": "20", "LAT": "37", "MIN": "00", "TZO": "-1", "HOUR": "18", "NAME": "367M Quasimodo, Salvatore", "YEAR": "1901", "MONTH": "08", "PLACE": "Siracusa SR"}, "date": "2021-09-19T16:55:03+02:00", "source": "afd1", "command": "cura muller402 tmp2db"}]
 
@@ -31,13 +42,9 @@ history        | [{"new": {"sex": "M", "name": {"given": "Salvatore", "family": 
 - add field notes in Person (useful for D10, fields corrected in APP)
   (also useful in E1 E3)
 
-- add field lmt in person birth - in Muller 612 men and 234 women, put LMT info in field birth.lmt instead of birth.note.
-  
 - systematic rewiew of C1, C2, C3, in particular for USA
 
 - Add children computation in db/init/occus1
-
-- integrate muller 1083 fix cura days and names to db/init/all
 
 - AFD2: 
     - check 17  Arrau, Claudio (south lat)
@@ -118,11 +125,6 @@ The export says 3748, there is a difference of 3 that I can't explain, I marked 
 - G55::prepareCuraMatch not designed correctly
 
 - fix nobilities in cura files
-
-- in all cura code, use Cura::tmpFilename()
-
-- Refactor generated filenames : G55570SPO, GQA1, ERT4384SPO, MUL1083MED ?
-    adapt doc of 1083MED
 
 - Harmonize POSSIBLE_PARAMS in commands ; use model of muller1083/fixGnr (key val pairs)
   Harmonize messages for wrong parameters
