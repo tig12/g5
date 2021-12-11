@@ -24,8 +24,8 @@ class look implements Command {
         php run-g5.php muller m5medics look gnr
     **/
     const POSSIBLE_PARAMS = [
-        'curadates',
-        'curanames',
+        'gauqdates',
+        'gauqnames',
         'fields',
         'gnr',
         'nobilities',
@@ -185,7 +185,7 @@ class look implements Command {
     /**
         Must be executed after fixGnr
     **/
-    private static function look_curanames(){
+    private static function look_gauqnames(){
         $a2s = LERRCP::loadTmpFile_num('A2'); // keys = NUM
         $e1s = LERRCP::loadTmpFile_num('E1'); // keys = NUM
         $MullerCsv = M5medics::loadTmpFile_nr(); // keys = NR
@@ -263,7 +263,7 @@ class look implements Command {
     /**
         Must be executed after fixGnr
     **/
-    private static function look_curadates(){
+    private static function look_gauqdates(){
         $a2s = LERRCP::loadTmpFile_num('A2'); // keys = NUM
         $e1s = LERRCP::loadTmpFile_num('E1'); // keys = NUM
         $MullerCsv = M5medics::loadTmpFile_nr(); // keys = NR

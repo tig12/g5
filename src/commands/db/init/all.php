@@ -43,6 +43,7 @@ use g5\commands\ertel\sport\fixA1               as ErtelSportFixA1;
 use g5\commands\muller\m5medics\raw2tmp         as M5MedicsRaw2tmp;
 use g5\commands\muller\m5medics\tweak2tmp       as M5MedicsTweak2tmp;
 use g5\commands\muller\m5medics\fixGnr          as M5MedicsFixGnr;
+//use g5\commands\muller\m5medics\fixGauq         as M5MedicsFixGauq;
 
 use g5\commands\muller\m1writers\raw2tmp        as M1WritersRaw2tmp;
 use g5\commands\muller\m1writers\tweak2tmp      as M1WritersTweak2tmp;

@@ -1,10 +1,14 @@
 <?php
 /********************************************************************************
-    Injects names and birth day of data/tmp/muller/5-medics/muller5-1083-medics.csv
-    to data/tmp/gauq/lerrcp/A2.csv E1.csv
+    Injects names and birth day of
+        data/tmp/muller/5-medics/muller5-1083-medics.csv
+    to
+        data/tmp/gauq/lerrcp/A2.csv
+        data/tmp/gauq/lerrcp/E1.csv
     
     @license    GPL
     @history    2019-10-19 12:28:40+02:00, Thierry Graff : Creation
+    @history    2021-12-11 01:10:23+01:00, Thierry Graff : adapt to modify database instead of tmp files
 ********************************************************************************/
 namespace g5\commands\muller\m5medics;
 
@@ -12,7 +16,7 @@ use g5\G5;
 use tiglib\patterns\Command;
 use g5\commands\gauq\LERRCP;
 
-class fixGauquelin implements Command {
+class fixGauq implements Command {
     
     // *****************************************
     /** 
@@ -60,7 +64,7 @@ class fixGauquelin implements Command {
     private static function fix_names($file, $action){
         $report = '';
         
-        $curaFile = LERRCP::loadTmpCsv_num($file); // keys = NUM
+        $gauqFile = LERRCP::loadTmpCsv_num($file); // keys = NUM
         
         $mulPrefix = ($file == 'A2' ? 'SA2' : 'ND1');
         
@@ -75,27 +79,27 @@ class fixGauquelin implements Command {
         }
         
         if($action == 'update'){
-            $res = implode(G5::CSV_SEP, array_keys(current($curaFile))) . "\n";
+            $res = implode(G5::CSV_SEP, array_keys(current($gauqFile))) . "\n";
         }
         
         $nRestoredNames = 0;
-        foreach($curaFile as $NUM => $curarow){
+        foreach($gauqFile as $NUM => $gauqRow){
             if(!isset($mulFile[$NUM])){
                 if($action == 'update'){
-                    $res .= implode(G5::CSV_SEP, $curarow) . "\n";
+                    $res .= implode(G5::CSV_SEP, $gauqRow) . "\n";
                 }
                 continue;
             }
-            if($curarow['FNAME'] == "Gauquelin-$file-$NUM"){
+            if($gauqRow['FNAME'] == "Gauquelin-$file-$NUM"){
                 $nRestoredNames++;
             }
             $mulrow =& $mulFile[$NUM];
             if($action == 'report'){
-                $report .= "\n$file    NUM $NUM\t {$curarow['FNAME']}\t| {$curarow['GNAME']}\n";
+                $report .= "\n$file    NUM $NUM\t {$gauqRow['FNAME']}\t| {$gauqRow['GNAME']}\n";
                 $report .= "Müller NR {$mulrow['NR']}\t {$mulrow['FNAME']}\t| {$mulrow['GNAME']}\n";
             }
             else{
-                $new = $curarow;
+                $new = $gauqRow;
                 // HERE a distinction between official name and name could be done
                 $new['FNAME'] = $mulrow['FNAME'];
                 $new['GNAME'] = $mulrow['GNAME'];
@@ -122,7 +126,7 @@ class fixGauquelin implements Command {
     private static function fix_days($file, $action){
         $report = '';
         
-        $curaFile = LERRCP::loadTmpCsv_num($file); // keys = NUM
+        $gauqFile = LERRCP::loadTmpCsv_num($file); // keys = NUM
         
         $mulPrefix = ($file == 'A2' ? 'SA2' : 'ND1');
         
@@ -137,29 +141,29 @@ class fixGauquelin implements Command {
         }
         
         if($action == 'update'){
-            $res = implode(G5::CSV_SEP, array_keys(current($curaFile))) . "\n";
+            $res = implode(G5::CSV_SEP, array_keys(current($gauqFile))) . "\n";
         }
         
         $nDateFixed = 0;
-        foreach($curaFile as $NUM => $curarow){
+        foreach($gauqFile as $NUM => $gauqRow){
             if(!isset($mulFile[$NUM])){
                 if($action == 'update'){
-                    $res .= implode(G5::CSV_SEP, $curarow) . "\n";
+                    $res .= implode(G5::CSV_SEP, $gauqRow) . "\n";
                 }
                 continue;
             }
             $mulrow =& $mulFile[$NUM];
             $mulday = substr($mulrow['DATE'], 0, 10);
-            $curaday = substr($curarow['DATE'], 0, 10);
+            $curaday = substr($gauqRow['DATE'], 0, 10);
             
-            $new = $curarow;
+            $new = $gauqRow;
             
             if($mulday != $curaday){
                 $nDateFixed++;
                 // just replace the day, keep hour unchanged
-                $new['DATE'] = $mulday . substr($curarow['DATE'], 10);
+                $new['DATE'] = $mulday . substr($gauqRow['DATE'], 10);
                 if($action == 'report'){
-                    $report .= "\n$file    NUM $NUM\t {$curarow['DATE']} {$curarow['FNAME']}\t| {$curarow['GNAME']}\n";
+                    $report .= "\n$file    NUM $NUM\t {$gauqRow['DATE']} {$gauqRow['FNAME']}\t| {$gauqRow['GNAME']}\n";
                     $report .= "Müller NR {$mulrow['NR']}\t {$mulrow['DATE']}\t   {$mulrow['FNAME']}\t| {$mulrow['GNAME']}\n";
                     $report .= "Correction       {$new['DATE']}\n";
                 }

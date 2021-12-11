@@ -37,7 +37,7 @@
 </h1>
 <div class="intro">
 This page deals with the file <a href="https://newalchemypress.com/gauquelin/gauquelin_docs/5a_muller_medics.txt">5muller_medics.txt</a> downloaded from <a href="https://newalchemypress.com/gauquelin/research5.php">newalchemypress.com</a>.
-<br>This file contains records already present in Cura files A2 and E1, and brings <b>224</b> new birth dates.
+<br>This file contains records already present in Gauquelin files A2 and E1, and brings <b>224</b> new birth dates.
 <br>It was used to :
 <ul>
     <li>Fix column GNR and build a modified version : <a href="https://g5.tig12.net/output/datasets/newalchemypress/1083MED.csv">1083MED.csv</a>.</li>
@@ -69,13 +69,16 @@ More work can be done on this file :
             </ul>
         </li>
         <li>
-            <a href="#fix-cura">Fix Cura</a>
-            <ul>
-                <li><a href="#3-1-fix-cura-names">Fix Cura names</a></li>
-                <li><a href="#3-2-fix-cura-days">Fix Cura days</a></li>
-                <li><a href="#3-3-fix-paris">Fix Paris</a></li>
-                <li><a href="#3-4-fix-nobilities">Fix nobilities</a></li>
-            </ul>
+            <a href="#fix-gauquelin-days">Fix Gauquelin days</a>
+        </li>
+        <li>
+            <a href="#fix-gauquelin-names">Fix Gauquelin names</a>
+        </li>
+        <li>
+            <a href="#fix-paris">Fix Paris</a>
+        </li>
+        <li>
+            <a href="#3-4-fix-nobilities">Fix nobilities</a>
         </li>
         <li>
             <a href="#looking-at-the-file">Looking at the file</a>
@@ -91,23 +94,8 @@ More work can be done on this file :
                 <li><a href="#6-3-muergauq">MUERGAUQ</a></li>
             </ul>
         </li>
-        <li>
-            <a href="#column-gnr">Column GNR</a>
-        </li>
-        <li>
-            <a href="#comparing-with-cura-names">Comparing with Cura names</a>
-        </li>
-        <li>
-            <a href="#comparing-with-cura-dates">Comparing with Cura dates</a>
-        </li>
     </ul>
 </nav>
-
-
-
-
-
-
 
 
 <!-- ********************************************************************************* -->
@@ -136,19 +124,19 @@ The raw file is <code>data/raw/newalchemypress.com/05-muller-medics/5a_muller-me
 
 
 The full set of transformations can be executed with the command : 
-<pre>php run-g5.php newalch muller1083 all</pre>
+<pre>php run-g5.php muller m5medics all</pre>
 
 This is equivalent to :
 <pre>
-php run-g5.php newalch muller1083 raw2tmp
-php run-g5.php newalch muller1083 tweak2tmp
-php run-g5.php newalch muller1083 fixGnr update
+php run-g5.php muller m5medics raw2tmp
+php run-g5.php muller m5medics tweak2tmp
+php run-g5.php muller m5medics fixGnr update
 </pre>                                    
 
 <!-- ************************************* -->
 <h3><a name="2-2-generate-csv">Generate csv</a></h3>
-The first step is to generate the file <b><code>5-newalch-csv/1083MED.csv</code></b> :
-<pre>php run-g5.php newalch muller1083 raw2tmp</pre>
+The first step is to generate the file <b><code>data/tmp/muller/5-medics/muller5-1083-medics.csv</code></b> :
+<pre>php run-g5.php muller m5medics raw2tmp</pre>
 This step includes minor corrections in given names (some accents are missing).
 
 <!-- ************************************* -->
@@ -156,81 +144,121 @@ This step includes minor corrections in given names (some accents are missing).
 This step applies corrections from file <code>data/3-edited/newalch-tweaked/1083MED.yml</code>, see page <a href="tweak2tmp.html">tweak2tmp</a>.
 <br>Used to fix errors in the names of noble persons (<a href="#nobilities">see below</a>).
 
-<!-- ************************************* -->
-<h3><a name="2-4-fix-gnr">Fix GNR</a></h3>
-Looking at the file with
-<pre>php run-g5.php newalch muller1083 look</pre>
-(see <a href="#looking-at-the-file">below</a>) showed abnormal differences for some names. This led to identify errors on <code>GNR</code> :
 
-<div class="bold padding05">
-Column <code>GNR</code> is truncated, so GNRs superior to 99 are possibly erroneous.
-<br>Step <code>fixGnr</code> showed that 87 records have a wrong GNR.
-</div>
+<!-- ********************************************************************************* -->
+<h2><a name="fix-gnr">Fix GNR</a></h2>
 
-The command
+GNR seems to mean "Gauquelin Number Record".
 
-<pre>php run-g5.php newalch muller1083 fixGnr report</pre>
+<table class="wikitable margin">
+    <tr><th>GNR value</th><th>Meaning</th></tr>
+    <tr>
+        <td>Starting by SA2</td>
+        <td>
+            From Gauquelin file A2 (SA may mean "Serie A")
+            <br>ex: SA232 corresponds to Gauquelin id A2-32.
+        </td>
+    </tr>
+    <tr>
+        <td>Starting by ND1</td>
+        <td>
+            From Gauquelin file E1 (ND1 may mean "New Data 1")
+            <br>ex: ND1204 corresponds to Gauquelin id E1-204.
+        </td>
+    </tr>
+</table>
 
+This command counts the records associated to Gauquelin files :
+<pre>php run-g5.php muller m5medics look gnr</pre>
+<pre>
+EMPTY 	: 224
+A2 	: 765
+E1 	: 94
+A2 + E1 : 859
+Total 	: 1083
+</pre>
+
+First executions of
+<pre>php run-g5.php muller m5medics look</pre>
+showed abnormal differences for some names. This led to identify errors on <code>GNR</code>)
+
+<br><br>The command
+<pre>php run-g5.php muller m5medics fixGnr report</pre>
 lists the GNRs to fix with the corresponding values of dates and names in A2 and E1.
+
 <br>This step is necessary, to manually check that the fix does not introduce wrong associations (this is not the case).
 <details class="margin">
-    <summary>Details</summary>
-    <br>For each GNR > 99, the code builds a list af possible matches in Cura files (for example, A code 103 in Müller's file could correspond to 103, 1030, 1031 ... 1039.
+    <summary>Show details</summary>
+    <br>For each GNR > 99, the code builds a list af possible matches in Gauquelin files (for example, A code 103 in Müller's file could correspond to 103, 1030, 1031 ... 1039.
     <br>To choose the right match, the code uses field DATE (in fact, it uses only the day).
     <br>But cura files contain errors in DATE field.
     <br>The improbable situation could have occured : among the 11 candidates, the good one contains an error in DATE, and an other candidate has Müller's date.
     <br>In this case, the code would have generated a mistake. So report with human check is necessary.
 </details>
 
-To correct GNR <code>newalch-csv/1083MED.csw</code>, run
+<div class="bold padding05">
+Conclusions:
+<br>- Column <code>GNR</code> is truncated, so GNRs superior to 99 are possibly erroneous.
+<br>- 87 records have a wrong GNR.
+</div>
 
-<pre>php run-g5.php newalch muller1083 fixGnr update</pre>
+Finally, the command
+<pre>php run-g5.php muller m5medics fixGnr update</pre>
 
-It modifies 87 records.
+fixes GNR in 87 records of <code>data/tmp/muller/5-medics/muller5-1083-medics.csv</code>.
+
+<br><br><div class="warning">
+Following steps are not part of Müller 1083MED restoration process, but are included in the processes of A2 and E1.
+<br>Prequisites:
+<pre>
+php run-g5.php gauq A2 raw2tmp
+php run-g5.php gauq A2 tweak2tmp
+
+php run-g5.php gauq E1 raw2tmp
+php run-g5.php gauq E1 tweak2tmp
+
+php run-g5.php muller m5medics raw2tmp
+php run-g5.php muller m5medics tweak2tmp
+php run-g5.php muller m5medics fixGnr update
+</pre>
+</div>
 
 <!-- ********************************************************************************* -->
-<h2><a name="fix-cura">Fix Cura</a></h2>
+<h2><a name="fix-gauquelin-days">Fix Gauquelin days</a></h2>
 
-These steps are not part of Müller 1083MED restoration process, but are included in the processes of A2 and E1.
+The command
+<pre>php run-g5.php muller m5medics look gauqdates</pre>
+displays the differences between Müller's dates and A2 and E1.
 
-<!-- ************************************* -->
-<h3><a name="3-1-fix-cura-names">Fix Cura names</a></h3>
-
-Step <a href="#2-3-fix-gnr">fixGnr</a> must have been executed before this step.
-<br>
-<br>The comparison between names in Müller's file and Cura (<a href="comparing-with-cura-names">see below</a>) shows that Müller's names are better than Cura's.
-<br>Step <code>fixCura</code> copies Müller's names in corresponding Cura records.
-<pre>php run-g5.php newalch muller1083 fixCura</pre>
 <pre>
-PARAMETER MISSING - This function needs 3 parameters :
-  Param 1 can be : 'A2', 'E1'
-  Param 2 can be : 'names', 'days'
-  Param 3 can be : 'report', 'update'
-</pre>
-To restore the names :
-<pre>php run-g5.php newalch muller1083 fixCura A2 names update</pre>
-<pre>
-739 records modified in data/5-tmp/cura-csv/A2.csv
-12 unknown names restored in A2
-</pre>
+Müller NR 31   1904-04-06	| Aubry	| Maurice Charles Louis
+E1    NUM 45   1899-04-06	| AUBRY Maurice Charles	| 
 
-<pre>php run-g5.php newalch muller1083 fixCura E1 names update</pre>
-<pre>
-82 records modified in data/5-tmp/cura-csv/E1.csv
-0 unknown names restored in E1
+Müller NR 107  1808-02-04	| Blondlot	| Nicolas
+A2    NUM 80   1808-02-05	| Blondlot	| Nicolas
+
+(... displays 39 differences ...)
+
+Compare dates Müller / A2 E1
+        | Equal         | Different  | Total
+--------------------------------------------
+A2      | 730 (95.42 %) | 35 (4.58 %)| 765
+E1      | 90  (95.74 %) | 4  (4.26 %)| 94
+A2 + E1 | 820 (95.46 %) | 39 (4.54 %)| 859
 </pre>
-This permits to restore (only) 12 unknown names from A2.
+Note : these results were obtained from Gauquelin files generated by <code>raw2tmp</code>. If step <code>tweak2tmp</code> is applied on A2 or E1 before looking at the differences, these results are different, because <code>tweak2tmp</code> include corrections on the concerned records.
 
-<!-- ************************************* -->
-<h3><a name="3-2-fix-cura-days">Fix Cura days</a></h3>
+<br><br>So among the 859 common records, <b>39 have different birth days</b> (4.54 %).
 
-Step <a href="#2-3-fix-gnr">fixGnr</a> must have been executed before this step.
-<br>
-<br>The comparison between birth days in Müller's file and Cura A2 and E1 (<a href="#comparing-with-cura-dates">see below</a>) shows that among the 859 common records, <b>39 have different birth days</b> (4.54 %).
-<br>
-<br>The only way to find out which day is correct is to check on birth certificates. Other sources are available, like Wikipedia or <a href="http://cths.fr/an/prosopographie.php">Comité des travaux historiques et scientifiques</a>, but these sources may contain errors.
+<br><br><u>Note</u>: birth times were not compared because Gauquelin dates (coming from Cura) are converted to UTC, and Müller dates are legal times.
+
+
+<br><br><b>The only way to find out which day is correct is to check on birth certificates.</b>
+<!-- 
+Other sources are available, like Wikipedia or <a href="http://cths.fr/an/prosopographie.php">Comité des travaux historiques et scientifiques</a>, but these sources may contain errors.
+-->
 <br>French registries are available online, so checking is possible, but this is a long process.
-<br>Very few records were really checked, and all of them showed that the error was coming from Cura file.
+<br>Very few records were really checked, and all of them showed that the error was coming from Gauquelin file.
 
 <table class="wikitable margin">
     <tr class="bold">
@@ -239,7 +267,7 @@ Step <a href="#2-3-fix-gnr">fixGnr</a> must have been executed before this step.
         <td>1880-02-04</td>
     </tr>
     <tr class="bold">
-        <td>Cura A2-80</td>
+        <td>Gauquelin A2-80</td>
         <td>Blondot Nicolas</td>
         <td>1880-02-05</td>
     </tr>
@@ -261,7 +289,7 @@ Step <a href="#2-3-fix-gnr">fixGnr</a> must have been executed before this step.
         <td>1864-06-08</td>
     </tr>
     <tr class="bold">
-        <td>Cura A2-255</td>
+        <td>Gauquelin A2-255</td>
         <td>Fabre Jean</td>
         <td>1874-06-08</td>
     </tr>
@@ -280,7 +308,7 @@ Step <a href="#2-3-fix-gnr">fixGnr</a> must have been executed before this step.
         <td>1884-01-30</td>
     </tr>
     <tr class="bold">
-        <td>Cura A2-1051</td>
+        <td>Gauquelin A2-1051</td>
         <td>Heuyer Georges</td>
         <td>1884-07-30</td>
     </tr>
@@ -299,7 +327,7 @@ Step <a href="#2-3-fix-gnr">fixGnr</a> must have been executed before this step.
         <td>1890-07-31</td>
     </tr>
     <tr class="bold">
-        <td>Cura E1-1520</td>
+        <td>Gauquelin E1-1520</td>
         <td>MORICE André</td>
         <td>1891-07-31</td>
     </tr>
@@ -318,7 +346,7 @@ Step <a href="#2-3-fix-gnr">fixGnr</a> must have been executed before this step.
         <td>1876-05-28</td> 
     </tr>
     <tr class="bold">
-        <td>Cura E1-1806</td>
+        <td>Gauquelin E1-1806</td>
         <td>ROCHER Louis</td>
         <td>1876-05-27</td>
     </tr>
@@ -332,28 +360,62 @@ Step <a href="#2-3-fix-gnr">fixGnr</a> must have been executed before this step.
     </tr>
 </table>
 
+The supposition was made that Müller's days are globally more exact than Gauquelin's, which lead to inject Müller's days in A2 and E1.
 
-The supposition was made that Müller's days are globally more exact than Cura's, which lead to inject Müller's days in A2 and E1.
-<br><b>This may lead to introduce errors in Cura data</b>.
-<br>
-<br>Note : birth hours were not modified because it deals with the problem of timezone offset, handled in an other step.
-<br>
-<br>Other note : extrapolating the error rate of 4.54 % to all Cura data used in g5 program (21 249) leads to 964 erroneous dates in Cura files. This does not permit to suppose that this error rate was the same in Gauquelin's original data, because errors may have been introduced in the editing process of cura.free.fr.
+<!-- ********************************************************************************* -->
+<div class="margin"><div class="warning">Warning: This may lead to introduce errors in Gauquelin data
+<br>(cases where Gauquelin is correct and Müller erroneous).</div></div>
+<!-- ********************************************************************************* -->
+
+Note : extrapolating the error rate of 4.54 % to all Gauquelin data used in g5 program (21 249) leads to 964 erroneous dates in Gauquelin files. This does not permit to suppose that this error rate was the same in Gauquelin's original data, because errors may have been introduced in the editing process of cura.free.fr.
 <br>
 <br>Execution for A2 :
-<pre>php run-g5.php newalch muller1083 fixCura A2 days update</pre>
-<pre>33 records modified in data/5-tmp/cura-csv/A2.csv</pre>
+<pre>php run-g5.php muller m5medics fixGauq A2 days update</pre>
+<pre>33 records modified in data/tmp/gauq/lerrcp/A2.csv</pre>
 for E1 :
-<pre>php run-g5.php newalch muller1083 fixCura E1 days update</pre>
-<pre>2 records modified in data/5-tmp/cura-csv/E1.csv</pre>
+<pre>php run-g5.php muller m5medics fixGauq E1 days update</pre>
+<pre>2 records modified in data/tmp/gauq/lerrcp/E1.csv</pre>
 
-<!-- ************************************* -->
-<h3><a name="3-3-fix-paris">Fix Paris</a></h3>
+
+<!-- ********************************************************************************* -->
+<h2><a name="fix-gauquelin-names">Fix Gauquelin names</a></h2>
+
+The command :
+<pre>php run-g5.php muller m5medics look gauqnames</pre>
+prints side by side family and given names of records present both in Müller's file and file A2.
+<br>
+<br>This shows that Müller's names are better - They sometimes contain second and third given names, as written in civil registry.
+It also shows that spelling of name contain mistakes for noble persons (<a href="#3-4-fix-nobilities">see above</a>).
+
+<br>Step <code>fixGauquelin</code> copies Müller's names in corresponding Gauquelin records.
+<pre>php run-g5.php muller m5medics fixGauq</pre>
+<pre>
+PARAMETER MISSING - This function needs 3 parameters :
+  Param 1 can be : 'A2', 'E1'
+  Param 2 can be : 'names', 'days'
+  Param 3 can be : 'report', 'update'
+</pre>
+To restore the names :
+<pre>php run-g5.php muller m5medics fixGauq A2 names update</pre>
+<pre>
+739 records modified in data/tmp/gauq/lerrcp/A2.csv
+12 unknown names restored in A2
+</pre>
+
+<pre>php run-g5.php muller m5medics fixGauq E1 names update</pre>
+<pre>
+82 records modified in data/tmp/gauq/lerrcp/E1.csv
+0 unknown names restored in E1
+</pre>
+This permits to restore (only) 12 unknown names from A2.
+
+<!-- ********************************************************************************* -->
+<h2><a name="fix-paris">Fix Paris</a></h2>
 The file contains 110 persons born in Paris, which need to be checked (see Newalchemypress indication below, sections SAMPLE and GAUQ_NUR).
 
 <h4>Fix arrondissement</h4>
 All people in Müller's file are noted Paris 1er arrondissement, which is not correct.
-There is a way to find the arrondissement : check in Cura file A2 and find the corresponding person, using birth date ; the arrondissement is noted in A2.
+There is a way to find the arrondissement : check in Gauquelin file A2 and find the corresponding person, using birth date ; the arrondissement is noted in A2.
 <br>Once the arrondissement is found, it's possible to check in the online registries.
 
 <h4>Check dates and times</h4>
@@ -361,7 +423,7 @@ Checking is possible using online archives, but there is one important restricti
 
 <br><br><b>So I don't know where Gauquelin found the birth times of persons born in Paris before 1860.</b>
 
-<pre>php run-g5.php newalch muller1083 look paris</pre>
+<pre>php run-g5.php muller m5medics look paris</pre>
 Shows that there are 70 persons born before 1860 ; only possible to check 110 - 70 = 40 persons.
 <br>7 have been checked so far, one error was found :
 <pre>
@@ -424,8 +486,8 @@ C3 = arrondissement
 -->
 
 
-<!-- ************************************* -->
-<h3><a name="3-4-fix-nobilities">Fix nobilities</a></h3>
+<!-- ********************************************************************************* -->
+<h2><a name="fix-nobilities">Fix nobilities</a></h2>
 Listing names shows small errors in columns <code>FNAME</code> and <code>GNAME</code> of noble persons.
 <ul>
     <li>Sometimes the nobility is included in the given name (it should be part of the family name).</li>
@@ -433,7 +495,7 @@ Listing names shows small errors in columns <code>FNAME</code> and <code>GNAME</
 </ul>
 
 <br>To list the noble persons of the file.
-<pre>php run-g5.php newalch muller1083 look nobilities simple</pre>
+<pre>php run-g5.php muller m5medics look nobilities simple</pre>
 
 <pre>
 61 de Barthez| Antoine Charles Ernest
@@ -444,7 +506,7 @@ Listing names shows small errors in columns <code>FNAME</code> and <code>GNAME</
 </pre>
 
 The command :
-<pre>php run-g5.php newalch muller1083 look nobilities yaml</pre>
+<pre>php run-g5.php muller m5medics look nobilities yaml</pre>
 prints the same list in a YAML format.
 <br>
 <br>This was used to copy the output in file <code>data/3-edited/newalch-tweaked/1083MED.yml</code>.
@@ -452,27 +514,26 @@ prints the same list in a YAML format.
 
 
 <!-- ********************************************************************************* -->
-<hr class="margin">
-<center>The rest of this page concerns preparatory code
-<br>and is not part of any data transformation process.</center>
-<hr class="margin">
-<!-- ********************************************************************************* -->
-
-
-<!-- ********************************************************************************* -->
 <h2><a name="looking-at-the-file">Looking at the file</a></h2>
 
+<!-- ********************************************************************************* -->
+<div class="warning center">
+The rest of this page concerns preparatory code
+<br>and is not part of any data transformation process.
+</div>
+<!-- ********************************************************************************* -->
+
 With class <code>src/commands/newalch/muller1083/look.php</code> :
-<pre>php run-g5.php newalch muller1083 look</pre>
+<pre>php run-g5.php muller m5medics look</pre>
 <pre>
 PARAMETER MISSING
-Possible values for parameter : curadates, curanames, fields, gnr, nobilities, paris, sample
+Possible values for parameter : gauqdates, gauqnames, fields, gnr, nobilities, paris, sample
     </pre>
 
 
 <!-- ********************************************************************************* -->
 <h2><a name="fields">Fields</a></h2>
-<pre>php run-g5.php newalch muller1083 look fields</pre>
+<pre>php run-g5.php muller m5medics look fields</pre>
 Partial comprehension so far.
 <table class="wikitable margin">
     <tr><th>Field</th><th>Meaning</th></tr>
@@ -517,9 +578,9 @@ Partial comprehension so far.
 This column seems to indicate the origin of the record.
 <br>There is a one to one mapping between SAMPLE and CODE.
 <br>
-<pre>php run-g5.php newalch muller1083 look sample</pre>
+<pre>php run-g5.php muller m5medics look sample</pre>
 to generate a html table :
-<pre>php run-g5.php newalch muller1083 look sample table</pre>
+<pre>php run-g5.php muller m5medics look sample table</pre>
 
 <table class="wikitable margin">
     <tr><th>SAMPLE</th><th>CODE</th><th>Nb</th><th>GNR ?</th></tr>
@@ -553,66 +614,11 @@ All <code>MUER_NUR</code> records have <code>GNR</code> empty, unknown in Gauque
 ?
 
 <!-- ********************************************************************************* -->
-<h2><a name="column-gnr">Column GNR</a></h2>
-Seems to mean "Gauquelin Number Record".
-<br>Values starting by SA2 correspond to Cura file A2 (SA may mean "Serie A") ; for example SA232 corresponds to record NUM 32 in file A2.
-<br>Values starting by ND1 correspond to Cura file E1 (ND1 may mean "New Data 1") ; for example ND1204 corresponds to record NUM 204 in file E1.
-<br>
-<br>This command counts the records associated to Gauquelin files :
-<pre>php run-g5.php newalch muller1083 look gnr</pre>
-<pre>
-EMPTY 	: 224
-A2 	: 765
-E1 	: 94
-A2 + E1 : 859
-Total 	: 1083
-</pre>
-
-
-<!-- ********************************************************************************* -->
-<h2><a name="comparing-with-cura-names">Comparing with Cura names</a></h2>
-The command :
-<pre>php run-g5.php newalch muller1083 look curanames</pre>
-prints side by side family and given names of records present both in Müller's file and file A2.
-<br>
-<br>This must be exectuted after having executed <a href="#1-3-fix-gnr">step fixGnr</a> to see all names.
-
-<br>This shows that Müller's names are better.
-It also shows that spelling of name contain mistakes for noble persons (<a href="#nobilities">see below</a>).
-
-
-<!-- ********************************************************************************* -->
-<h2><a name="comparing-with-cura-dates">Comparing with Cura dates</a></h2>
-
-The command
-<pre>php run-g5.php newalch muller1083 look curadates</pre>
-displays the differences between Müller's dates and A2 and E1.
-
-<pre>
-Müller NR 31   1904-04-06	| Aubry	| Maurice Charles Louis
-E1    NUM 45   1899-04-06	| AUBRY Maurice Charles	| 
-
-Müller NR 107  1808-02-04	| Blondlot	| Nicolas
-A2    NUM 80   1808-02-05	| Blondlot	| Nicolas
-
-(... displays 39 differences ...)
-
-Compare dates Müller / A2 E1
-        | Equal         | Different  | Total
---------------------------------------------
-A2      | 730 (95.42 %) | 35 (4.58 %)| 765
-E1      | 90  (95.74 %) | 4  (4.26 %)| 94
-A2 + E1 | 820 (95.46 %) | 39 (4.54 %)| 859
-</pre>
-Note : these results were obtained from Cura files generated by <code>raw2tmp</code>. If step <code>tweak2tmp</code> is applied on A2 or E1 before looking at the differences, these results are different, because <code>tweak2tmp</code> include corrections on the concerned records.
-
-<!-- ********************************************************************************* -->
-<!-- 
 <h2><a name="to-do">TO DO</a></h2>
 
 <ul class="spaced">
+    <li>Use Müller data to check time restoration in Gauquelin A2 and E1</li>
 </ul>
--->
 
 </article>
 </div><!-- end class="main" -->
@@ -661,7 +667,7 @@ Note : these results were obtained from Cura files generated by <code>raw2tmp</c
                             <li><a href="g55-884-priests.html">884 priests</a></li>
                             <li><a href="g55-361-painters.html">361 minor painters</a></li>
                             <li><a href="g55-restore.html">Other groups</a></li>
-                            <li><a href="g55-curadiff.html">Differences with Cura 5</a></li>
+                            <li><a href="g55-curadiff.html">Differences with Gauquelin</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -731,13 +737,6 @@ Note : these results were obtained from Cura files generated by <code>raw2tmp</c
     <!-- <li><a href="questions.html">Questions</a></li> -->
 
 </ul>
-</aside>
-
-</div><!-- end class="container" -->
-
-</body>
-</html>
-
 </aside>
 
 </div><!-- end class="container" -->
