@@ -3,7 +3,7 @@
     List of 100 italian writers without birth time published by Arno Müller
     in Astro-Forschungs-Daten 1
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-08-18 19:13:37+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\muller\m1writers;

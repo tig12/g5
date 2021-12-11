@@ -8,7 +8,7 @@
     corresponding to the occupation (because several occus separated by + can be given as parameter,
     so there is no correspondance between occus handled and group stored in database).
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-08-29 19:42:54+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\db\export;

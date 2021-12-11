@@ -8,7 +8,7 @@
         - add <entry> in POSSIBLE_PARAMS
         - implement a method named "look_<entry>"
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-05-11 18:58:50+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\muller\m5medics;

@@ -1,7 +1,7 @@
 <?php
 /********************************************************************************
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-12-23 11:46:39+01:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\acts\create;

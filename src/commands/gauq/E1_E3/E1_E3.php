@@ -2,7 +2,7 @@
 /********************************************************************************
     Contains code common to several E1 E3 classes.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-06-07 12:21:18+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\gauq\E1_E3;

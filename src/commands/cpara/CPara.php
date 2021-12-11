@@ -3,7 +3,7 @@
     CPara = "Comité para" = Comité belge pour l'investigation scientifique des phénomènes réputés paranormaux
     Belgian skeptic organization.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-11-06 20:47:26+01:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\cpara;

@@ -4,7 +4,7 @@
     to data/tmp/muller/5-medics/muller5-1083-medics.csv
     Updates the file muller5-1083-medics.csv with the values found in the yaml file.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-10-18 16:16:16+02:00, Thierry Graff : creation from g5\commands\gauq\all\tweak2csv
 ********************************************************************************/
 namespace g5\commands\muller\m5medics;

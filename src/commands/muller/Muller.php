@@ -2,7 +2,7 @@
 /********************************************************************************
     Constants and utilities related to AFD (Müller's Astro-Forschungs-Daten booklets).
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-07-19 15:31:36+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\muller;

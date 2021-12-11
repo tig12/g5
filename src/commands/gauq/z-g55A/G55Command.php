@@ -11,7 +11,7 @@
     which would be stupid as actions are the same for all datafiles.
     So all actions were put in sub-package 'all'
 
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-06-21 09:35:47+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\g55;

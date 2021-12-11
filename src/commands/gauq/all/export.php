@@ -3,7 +3,7 @@
     Generates csv files in data/output/1970-1984-gauquelin
     By default, the generated files are compressed (using zip).
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-07-05 13:48:39+02:00, Thierry Graff : creation
     @history    2019-12-28,                Thierry Graff : export using 7-full instead of 5-tmp
     @history    2020-08-12 08:58:19+02:00, Thierry Graff : export using g5 db instead of 7-full

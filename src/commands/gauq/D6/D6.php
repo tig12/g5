@@ -2,7 +2,7 @@
 /********************************************************************************
     Contains code common to several D6 classes.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-06-07, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\gauq\D6;

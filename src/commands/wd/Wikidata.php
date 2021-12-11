@@ -3,7 +3,7 @@
     
     Contains constants related to wikidata.
 
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-05-16 12:58:51+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\wd;

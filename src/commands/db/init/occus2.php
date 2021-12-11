@@ -12,7 +12,7 @@
     - The persons are created (by tmp2db commands)
     - The groups are filled by current command
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-08-01 16:36:23+02:00, Thierry Graff : Creation
     @pre        commands/db/init/occus1 must have been executed before
 ********************************************************************************/

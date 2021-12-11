@@ -6,7 +6,7 @@
     
     @pre        raw2csv must have been executed.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-06-01 03:46:23+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\gauq\A;

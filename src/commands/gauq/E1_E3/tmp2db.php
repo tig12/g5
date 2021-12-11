@@ -2,7 +2,7 @@
 /********************************************************************************
     Loads files data/tmp/gauq/lerrcp/E1.csv and E1-raw.csv in database.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-08-20 07:47:13+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\gauq\E1_E3;

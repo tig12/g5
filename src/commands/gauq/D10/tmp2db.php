@@ -2,7 +2,7 @@
 /********************************************************************************
     Loads files data/tmp/gauq/lerrcp/D10.csv and D10-raw.csv in database.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-08-19 23:55:18+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\gauq\D10;

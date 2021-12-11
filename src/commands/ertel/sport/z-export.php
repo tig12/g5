@@ -1,7 +1,7 @@
 <?php
 /********************************************************************************
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-10-23 23:54:51+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\ertel\sport;

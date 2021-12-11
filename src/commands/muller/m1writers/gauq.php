@@ -4,7 +4,7 @@
     using tmp/gauq/lerrcp/A6.csv
     Must be executed before import in database.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-07-18 01:45:49+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\muller\m1writers;

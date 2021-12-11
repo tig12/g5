@@ -6,7 +6,7 @@
         data/tmp/gauq/lerrcp/A2.csv
         data/tmp/gauq/lerrcp/E1.csv
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-10-19 12:28:40+02:00, Thierry Graff : Creation
     @history    2021-12-11 01:10:23+01:00, Thierry Graff : adapt to modify database instead of tmp files
 ********************************************************************************/

@@ -10,7 +10,7 @@
         - data/tmp/ertel/ertel-4384-athletes-raw.csv, to keep an exact copy of of the original fields.
     The unique utility of ertel-4384-athletes-raw.csv is to fill the field "raw" of persons in db.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-05-10 12:19:50+02:00, Thierry Graff : creation
     @history    2020-08-12 19:20:17+02:00, Thierry Graff : add generation of 4391SPO-raw.csv
 ********************************************************************************/

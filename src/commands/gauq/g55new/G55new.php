@@ -10,7 +10,7 @@
         55PP priests Paris
     
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-10-23 17:34:22+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\gauq\g55new;

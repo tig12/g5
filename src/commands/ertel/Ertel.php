@@ -2,7 +2,7 @@
 /********************************************************************************
     Constants and utilities related to all Erel files.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-11-06 18:39:04+01:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\ertel;

@@ -6,7 +6,7 @@
     
     @todo Handle C2 (départements)
         
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-07-06 12:21:23+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\muller\m5medics;

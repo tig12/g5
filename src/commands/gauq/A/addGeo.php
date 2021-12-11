@@ -5,7 +5,7 @@
     TODO Could add an entry in 'todo' field of persons without geoid (but useless)
     
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-07-03 06:48:00+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\gauq\A;

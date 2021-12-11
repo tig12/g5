@@ -3,7 +3,7 @@
     Loads files data/tmp/muller/1-writers/muller1-100-writers.csv and muller1-100-writers-raw.csv in database.
     Affects records imported from A6
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-09-21, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\muller\m1writers;

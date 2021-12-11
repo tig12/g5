@@ -8,7 +8,7 @@
         - add <entry> in POSSIBLE_PARAMS
         - implement a method named "look_<entry>"
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-04-11, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\muller\m3women;

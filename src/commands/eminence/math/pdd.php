@@ -8,7 +8,7 @@
         Jeanne Peiffer
         Editions du Seuil, 1986
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-11-22, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\eminence\math;

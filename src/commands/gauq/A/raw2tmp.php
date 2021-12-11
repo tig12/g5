@@ -8,7 +8,7 @@
     This code uses file 902gdN.html to retrieve the names, but this could have been done using only 902gdA*y.html files
     (for example, 902gdA1y.html could have been used instead of using 902gdA1y.html and 902gdN.html).
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-12-26 22:30:04+01:00, Thierry Graff : creation from raw2csv
 ********************************************************************************/
 namespace g5\commands\gauq\A;

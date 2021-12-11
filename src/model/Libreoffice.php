@@ -1,7 +1,7 @@
 <?php
 /******************************************************************************
 
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-07-02 02:01:09+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\model;

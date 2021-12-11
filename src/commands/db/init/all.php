@@ -5,7 +5,7 @@
     WARNING : all existing tables are dropped and recreated.
     Precise order of the executed steps must be respcted to obtain a coherent result.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-08-17 20:18:47+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\db\init;

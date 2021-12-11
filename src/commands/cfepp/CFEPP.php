@@ -4,7 +4,7 @@
     CFEPP = Comité Français pour l’Étude des Phénomènes Paranormaux.
     French skeptic organization.
 
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-11-06 20:51:55+01:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\cfepp;

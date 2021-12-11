@@ -3,7 +3,7 @@
     Arno Müller's 402 Italian writers
     Code common to m1writers
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-05-15 ~22h30+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\muller\m1writers;

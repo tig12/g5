@@ -9,7 +9,7 @@
 
     @todo   information about arrondissement (Paris and Lyon) is not imported
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2017-05-02 04:32:44+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\gauq\E1_E3;

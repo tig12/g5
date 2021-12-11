@@ -4,7 +4,7 @@
     Specific to E2 notice :
     PL : Place of Birth for children (HOS = Saint-Antoine Hospital ; MAT = private Maternity ; H = Home)     
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2014-01-11 00:17:29+01:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\gauq;

@@ -2,7 +2,7 @@
 /******************************************************************************
     Code common to sport
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-05-11 23:15:33+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\ertel\sport;

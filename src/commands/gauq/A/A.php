@@ -2,7 +2,7 @@
 /********************************************************************************
     Common to cura A files
                                    
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-12-26 22:32:10+01:00, Thierry Graff : creation from raw2csv
 ********************************************************************************/
 namespace g5\commands\gauq\A;

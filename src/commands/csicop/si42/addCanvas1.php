@@ -3,7 +3,7 @@
     Adds field CANVAS to data/tmp/csicop/si42/408-csicop-si42.csv
     Fills CANVAS with value "1" for 128 records, listed in si42-p41.txt
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-11-18 21:37:00+01:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\csicop\si42;

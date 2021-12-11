@@ -2,7 +2,7 @@
 /********************************************************************************
     Fixes the problem of truncated GNR in data/tmp/muller/5-medics/muller5-1083-medics.csv
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-10-15 01:24:44+02:00, Thierry Graff : Creation
     @history    2019-10-16 23:31:44+02:00, Thierry Graff : New version, using date differences instead of GNR doublons
 ********************************************************************************/

@@ -3,7 +3,7 @@
     
     Utilities related to export
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-08-15 11:10:39+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\db\export;

@@ -6,7 +6,7 @@
     NOTE: This code cannot be executed several times (won't update the records if already in database)
         To re-execute it (eg for debug purposes), you must rebuild the databse from scratch (at least A2 and E1)
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-08-20 10:46:02+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\muller\m5medics;

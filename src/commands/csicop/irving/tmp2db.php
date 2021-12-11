@@ -2,7 +2,7 @@
 /********************************************************************************
     Loads files data/tmp/csicop/irving/408-csicop-irving.csv and 408-csicop-irving-raw.csv in database.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-09-02 00:36:52+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\csicop\irving;

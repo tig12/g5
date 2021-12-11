@@ -3,7 +3,7 @@
     Imports file data/raw/gauq/lerrcp/902gdD10.html to data/tmp/gauq/lerrcp/D10.csv
     1398 Data of Successful Americans
     
-    @license    GPL                  
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.                  
     @history    2019-04-04 14:23:10+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\gauq\D10;

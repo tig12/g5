@@ -3,7 +3,7 @@
     
     Retrieves the lists of occupations subclasses of Wikidata::OCCUPATION_SEEDS
 
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-11-01 22:16:48+01:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\wd\harvest;

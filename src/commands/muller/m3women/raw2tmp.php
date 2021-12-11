@@ -3,7 +3,7 @@
     Import data/raw/muller/3-women/muller3-234-women.txt
     to data/tmp/muller/3-women/muller3-234-women.csv
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-04-11, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\muller\m3women;

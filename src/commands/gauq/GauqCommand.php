@@ -6,7 +6,7 @@
     - User can say 'E1' or 'E3', and this is handled by sub-package 'E1_E3'.
     So a translation from user's vocabulary to this package's organisation is necessary.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2017-04-27 10:41:02+02:00, Thierry Graff : Creation
     @history    2019-05-09 01:34:14+02:00, Thierry Graff : Refactor
 ********************************************************************************/

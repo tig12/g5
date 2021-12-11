@@ -2,7 +2,7 @@
 /********************************************************************************
     Loads files data/tmp/ertel/ertel-4384-athletes.csv and ertel-4384-athletes-raw.csv in database.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\ertel\sport;

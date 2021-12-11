@@ -2,7 +2,7 @@
 /********************************************************************************
     Constants that can be used by all parts of the program
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-06-07 01:00:27+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5;

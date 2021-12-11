@@ -8,7 +8,7 @@
                 (so src/commands/gauq/A/raw2tmp.php must have been executed before).
     @pre        data/tmp/ertel/ertel-4384-sportsmen.csv must exist
                 (so src/commands/ertel/sport/raw2tmp.php must have been executed before).
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-05-18 07:06:41+02:00, Thierry Graff : creation
                 2021-11-11 06:43:00+01:00, Thierry Graff : adaptation to new structure
 ********************************************************************************/

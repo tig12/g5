@@ -16,7 +16,7 @@
         - add entry in POSSIBLE_PARAMS
         - implement a method named "execute_<entry>"
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-05-26 00:33:22+02:00, Thierry Graff : addition to new structure
 ********************************************************************************/
 namespace g5\commands\g55\all;

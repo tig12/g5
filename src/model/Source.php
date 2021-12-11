@@ -3,7 +3,7 @@
     
     An object of type Source represents a source in g5 db.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-04-30 16:59:43+02:00, Thierry Graff : Creation
 ********************************************************************************/
 

@@ -5,7 +5,7 @@
     TODO This class and file 902gdN.html could be removed,
          because names are present in files 902gdA*y.html
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2017-04-27 11:16:42+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\gauq\A;

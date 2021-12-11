@@ -2,7 +2,7 @@
 /********************************************************************************
     Generates data/output/history/1993-muller3-women/muller-234-women.csv
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-08-14 20:01:49+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\muller\m3women;

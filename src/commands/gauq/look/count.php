@@ -3,7 +3,7 @@
     Counts data found on cura.free.fr
     This command is informative only - does not perform any transformation on files
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-07-26 03:32:38+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\gauq\look;

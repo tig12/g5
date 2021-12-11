@@ -4,7 +4,7 @@
     Creates all tables of db5
     WARNING : all existing tables are dropped and recreated
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-08-08 17:22:57+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\db\init;

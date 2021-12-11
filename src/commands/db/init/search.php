@@ -3,7 +3,7 @@
     
     Fills table search used by ajax
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-07-22 15:30:56+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\db\init;

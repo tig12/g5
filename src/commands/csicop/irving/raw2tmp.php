@@ -3,7 +3,7 @@
     Importation of data/raw/csicop/rawlins-ertel-irving/rawlins-ertel-irving.csv
     to  data/tmp/csicop/408-csicop-irving.csv
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-12-23 00:38:49+01:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\csicop\irving;

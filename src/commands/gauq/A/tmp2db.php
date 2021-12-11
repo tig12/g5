@@ -4,7 +4,7 @@
     Must be exectued in alphabetical order (first A1, then A2 ... A6)
     to respect the defition of Gauquelin id
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-08-19 05:23:25+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\gauq\A;

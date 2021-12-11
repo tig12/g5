@@ -2,7 +2,7 @@
 /********************************************************************************
     Contains code common to several D10 classes.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-05-09 13:54:56+02:00, Thierry Graff : creation from a split of cura2geo
 ********************************************************************************/
 namespace g5\commands\gauq\D10;

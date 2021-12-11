@@ -2,7 +2,7 @@
 /********************************************************************************
     Loads files data/tmp/muller/3-women/muller3-234-women.csv in database.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-07-31 07:27:19+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\muller\m3women;

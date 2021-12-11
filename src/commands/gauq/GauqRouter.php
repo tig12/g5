@@ -2,7 +2,7 @@
 /********************************************************************************
     Utilities to route commands in the cura package.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-05-09 01:34:14+02:00, Thierry Graff : Creation from refactoring
 ********************************************************************************/
 namespace g5\commands\gauq;

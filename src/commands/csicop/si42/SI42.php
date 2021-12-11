@@ -4,7 +4,7 @@
     List originally published in
     Skeptical Inquier VOL IV NO. 2 WINTER 1979-80, p 60 - 63.
                                    
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-11-16 03:37:58+01:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\csicop\si42;

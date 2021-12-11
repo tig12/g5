@@ -7,7 +7,7 @@
     
 NOT IMPLEMENTED
 
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-09-15 23:27:05+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\db\fill;

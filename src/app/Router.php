@@ -3,7 +3,7 @@
     Interface definition for dataset command router
     See docs/code-details.html
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-05-13 15:09:10+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\app;

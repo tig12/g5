@@ -3,7 +3,7 @@
     Generates data/output/history/1991-muller1-writers/muller-402-writers.csv
     By default, the generated file is compressed (using zip).
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-09-18 16:41:27+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\muller\m1writers;

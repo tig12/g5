@@ -1,7 +1,7 @@
 <?php
 /********************************************************************************
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-11-17 02:01:52+01:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\csicop\si42;

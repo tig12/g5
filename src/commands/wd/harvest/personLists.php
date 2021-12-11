@@ -4,7 +4,7 @@
     Retrieves lists of person ids, using the lists in 1-wd-raw/profession-lists
     Resulting lists are stored in sub-directories of 1-wd-raw/person-lists
 
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-11-02 07:47:25+01:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\wd\harvest;

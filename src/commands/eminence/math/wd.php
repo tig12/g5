@@ -25,7 +25,7 @@ deathcoords
 deathcause
 deathcauseLabel
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-05-16 12:16:35+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\eminence\math;

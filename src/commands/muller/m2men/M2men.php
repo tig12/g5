@@ -3,7 +3,7 @@
     Arno Müller's 612 famous men
     Code common to afd2
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-09-05 04:36:32+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\muller\m2men;

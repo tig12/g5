@@ -5,7 +5,7 @@
     
     Matches first list and chronological order list
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2017-04-27 22:04:25+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\gauq\D6;

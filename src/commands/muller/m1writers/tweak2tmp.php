@@ -6,7 +6,7 @@
     data/data/tmp/muller/1-writers/muller1-402-writers.csv
     Updates the csv file with the values found in the yaml file.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-09-01 05:14:37+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\muller\m1writers;

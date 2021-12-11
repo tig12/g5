@@ -4,7 +4,7 @@
     Provides a generic implementation for namespaces without Router implementation,
     but which respect the convention described in docs/code-details.html.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2017-04-27 10:41:02+02:00, Thierry Graff : creation
     @history    2019-05-10 08:22:01+02:00, Thierry Graff : new version
 ********************************************************************************/

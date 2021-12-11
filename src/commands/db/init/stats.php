@@ -3,7 +3,7 @@
     
     Fills table stats
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-07-21 21:34:39+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\db\init;

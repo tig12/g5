@@ -5,7 +5,7 @@
     Field data['members'] is an array of person ids.
     Field data['person-members'] is an array of Person objects.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-12-27 23:20:16+01:00, Thierry Graff : Creation
 ********************************************************************************/
 

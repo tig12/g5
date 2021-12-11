@@ -3,7 +3,7 @@
     
     Lists duplicate data in Cura data
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-09-03 14:01:29+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\gauq\look;

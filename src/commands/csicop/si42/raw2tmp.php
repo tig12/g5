@@ -4,7 +4,7 @@
     to  data/tmp/ciscop/si42/408-csicop-si42.csv (all records)
     and data/raw/ciscop/si42/181-csicop-si42.csv (records marked "SC")
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-11-16, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\csicop\si42;

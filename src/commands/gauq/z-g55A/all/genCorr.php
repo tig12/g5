@@ -3,7 +3,7 @@
     Generates a file in 9-g55-corrected/
     from corresponding files in 3-g55-edited/ and 5-cura-csv/
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-07-24 18:11:30+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\g55\all;

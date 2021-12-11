@@ -3,7 +3,7 @@
     Import data/raw/muller/2-men/muller2-612-men.txt
     to data/tmp/muller/2-men/muller2-612-men.csv
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-09-05 05:09:35+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\muller\m2men;

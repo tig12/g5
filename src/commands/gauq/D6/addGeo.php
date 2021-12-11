@@ -14,7 +14,7 @@
     Previous calls to geonames.org web service are stored in data/tmp/geonames/D6.csv.
     So a new call will use these results and not repeat previous calls to geonames.org web service.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2017-04-27 22:04:25+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\gauq\D6;

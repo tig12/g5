@@ -3,7 +3,7 @@
     Transfers information from data/db/init/newalch-tweak/ to data/tmp/ertel/
     Updates the file data/tmp/ertel/ertel-4384-athletes.csv with the values found in the yaml tweak file.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-12-23 18:40:13+01:00, Thierry Graff : Creation from command muller1083 tweak2csv
 ********************************************************************************/
 namespace g5\commands\ertel\sport;

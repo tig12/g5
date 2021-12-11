@@ -2,7 +2,7 @@
 /********************************************************************************
     Performs all actions to build 
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-10-18 12:01:27+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\muller\m5medics;

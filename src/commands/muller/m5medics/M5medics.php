@@ -2,7 +2,7 @@
 /******************************************************************************
     Code common to afd5
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-07-08 19:22:25+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\muller\m5medics;

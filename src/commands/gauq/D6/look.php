@@ -3,7 +3,7 @@
     Prints records without given name.
     WARNING : this step is not part of the generation process.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-06-11 17:13:53+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\gauq\D6;

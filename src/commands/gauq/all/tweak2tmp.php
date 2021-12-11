@@ -6,7 +6,7 @@
     WARNING : this step must be done just after step raw2tmp.
     For example, if a date or a time is modified, should be done before step "legalTime"
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-07-26 16:58:21+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\gauq\all;

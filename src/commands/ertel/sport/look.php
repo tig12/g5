@@ -3,7 +3,7 @@
     Code to examine data/tmp/ertel/ertel-4384-athletes.csv
     This code is not part of any build process - only informative.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-05-11 18:58:50+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\ertel\sport;

@@ -3,7 +3,7 @@
     Look at different aspects of cura.free.fr D10
     Not part of any build process - only to try to understand.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-11-11 18:02:47+01:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\gauq\D10;

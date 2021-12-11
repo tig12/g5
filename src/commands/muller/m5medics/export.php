@@ -3,7 +3,7 @@
     Generates data/output/history/1994-muller5-medics/muller-1083-medics.csv
     By default, the generated file is compressed (using zip).
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-09-12 17:27:59+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\muller\m5medics;

@@ -2,7 +2,7 @@
 /********************************************************************************
     Constants and utilities shared by several classes of this package.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-05-10 09:57:43+02:00, Thierry Graff : creation from a split
 ********************************************************************************/
 namespace g5\commands\gauq;

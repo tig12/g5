@@ -3,7 +3,7 @@
     Arno Müller's 234 famous women
     Code common to afd3
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-05-15 ~22h30+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\muller\m3women;

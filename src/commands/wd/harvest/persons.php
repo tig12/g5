@@ -3,7 +3,7 @@
     
     From person ids stored in local machine, downloads persons' full data
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-10-31 17:17:16+01:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\wd\harvest;

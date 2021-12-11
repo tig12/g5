@@ -4,7 +4,7 @@
     Converts data/raw/muller/1-writers/muller1-100-writers.txt
     to data/tmp/muller/1-writers/muller1-100-writers.csv
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-08-01 02:49:29+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\muller\m1writers;

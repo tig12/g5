@@ -4,7 +4,7 @@
     Input data are the files contained in 3-g55-edited
     Outputs files in two directories : 9-g55-original and 9-1955-corrected
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2017-05-08 23:39:19+02:00, Thierry Graff : creation
     @history    2019-04-08 15:24:04+02:00, Thierry Graff : Start generation of 2 versions : original and corrected
 ********************************************************************************/

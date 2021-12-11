@@ -4,7 +4,7 @@
     
     Config values available via Config::$data
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2017-04-27 09:49:02+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\app;

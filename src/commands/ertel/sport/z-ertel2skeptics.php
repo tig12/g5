@@ -8,7 +8,7 @@
     
     TODO command to replace by an export computed from db.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-06-05 23:25:56+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\ertel\sport;

@@ -2,7 +2,7 @@
 /******************************************************************************
     Utilities for occupations.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-07-29 07:25:29+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\model;

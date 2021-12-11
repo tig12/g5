@@ -3,7 +3,7 @@
     Import data/raw/muller/1-writers/5muller_writers.csv
     to data/data/tmp/muller/1-writers/muller1-402-writers.csv
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-05-15 22:38:58+02:00, Thierry Graff : Creation
     @history    2020-08-17 23:36:30+02:00, Thierry Graff : Conert from raw2full to raw2tmp
 ********************************************************************************/

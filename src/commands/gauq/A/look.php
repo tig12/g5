@@ -4,7 +4,7 @@
     
     Informative only - does not perform any transformation on files
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-06-07 22:29:12+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\gauq\A;

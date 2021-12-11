@@ -8,7 +8,7 @@
     WARNING: The groups corresponding to occupation codes must exits
     (db/fill/occugroup must have been executed).
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-08-07 09:05:28+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\db\export;

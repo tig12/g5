@@ -2,7 +2,7 @@
 /********************************************************************************
     Loads files data/tmp/muller/2-men/muller2-612-men.csv in database.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-09-19 18:05:53+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\muller\m2men;

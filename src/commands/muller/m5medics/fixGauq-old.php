@@ -13,7 +13,7 @@
         data/tmp/gauq/lerrcp/A2.csv
         data/tmp/gauq/lerrcp/E1.csv
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-10-19 12:28:40+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\muller\m5medics;

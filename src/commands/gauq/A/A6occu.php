@@ -9,7 +9,7 @@
     
     Based on a work exposed on https://newalchemypress.com/gauquelin/research8.php
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-08-15 16:45:27+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\gauq\A;

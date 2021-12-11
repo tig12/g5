@@ -10,7 +10,7 @@
         
         Uses the index, pp 125 - 128 of the book
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-11-28 04:20:00+01:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\eminence\math;

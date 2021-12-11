@@ -4,7 +4,7 @@
     CSICOP = Committee for the Scientific Investigation of Claims of the Paranormal
     U.S. skeptic organization.
                                    
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-07-20 07:33:13+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\csicop;

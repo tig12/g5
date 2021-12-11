@@ -4,7 +4,7 @@
     LERRCP = Laboratoire d'Étude des Relations entre Rythmes Cosmiques et Psychophysiologiques
     Class used by source management
                                    
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-07-20 07:39:16+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\gauq;

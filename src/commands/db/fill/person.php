@@ -6,7 +6,7 @@
     Each element of this array must contain the fields of a person, with a key ACTION.
     The value of key ACTION can be 'update' or 'delete'.
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-08-12 14:28:11+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\db\fill;

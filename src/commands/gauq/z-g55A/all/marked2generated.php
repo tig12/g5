@@ -12,7 +12,7 @@
     Called by : php run-g5.php g55 <filenamme> marked2generated
     <filename> can be one of G55::DATAFILES_POSSIBLES ; for example '570SPO'
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-05-26 00:51:46+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\g55\all;

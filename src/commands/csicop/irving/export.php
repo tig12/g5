@@ -3,7 +3,7 @@
     Generates data/output/history/1979-csicop/csicop-irving-408.csv
     By default, the generated file is compressed (using zip).
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-08-06 08:52:37+02:00, Thierry Graff : Creation
 ********************************************************************************/
 namespace g5\commands\csicop\irving;

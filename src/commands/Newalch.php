@@ -3,7 +3,7 @@
     Constants and utilities related to newalchemypress.org information source.
     This class is used by several subpackages (ertel, gauq, muller).
     
-    @license    GPL
+    @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-07-13 17:15:37+02:00, Thierry Graff : creation
     @history    2020-08-12 19:46:54+02:00, Thierry Graff : adaptation for g5 database
 ********************************************************************************/
