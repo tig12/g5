@@ -24,14 +24,19 @@
 <a name="topage"></a>
 <nav class="prevnext">
     <a class="topage" rel="" href="#topage">&#10148;</a>
-    <a class="next" rel="next" href="usage.html">&rarr;</a>
+    <a class="next" rel="next" href="db.html">&rarr;</a>
 </nav>
 
 <header>
 <h1>Gauquelin5<br>( g5 )</h1>
 
+<div class="warning">
+Warning: The program documented by these pages has evolved a lot.
+<br>Documentation has not been yet completely updated.
+</div>
+
 <div class="intro">
-The purpose of this program is to build data usable to perform statistical tests on astrology (with birth times and timezone offset). These tests, initiated in the 1950s by Michel Gauquelin, followed 3 directions :
+The purpose of this program is to build a database of famous persons <b>with birth times and timezone offset</b>. It uses as a departure point data used to perform statistical tests on astrology. These tests, initiated in the 1950s by Michel Gauquelin, followed 3 directions :
 <ul>
     <li>tests on professional groups,</li>
     <li>tests on heredity,</li>
@@ -44,7 +49,7 @@ This program deals with the data used to build <b>professional groups</b>.
     <li>the anomalies are more important for very eminent people ;</li>
     <li>these statistical anomalies can be observed only for natural births, the effect disappear for induced deliveries. For this reason, studies are limited to births before 1950.</li>
 </ul>
-One particular effect (the repartition of Mars in the births of sportsmen, called "mars effect") gave rise to very long polemics without any consensual conclusion.
+One particular effect (the repartition of Mars in the births of sportsmen, called "the mars effect") gave rise to very long polemics without any consensual conclusion.
 <br>
 <br>The main orientations of Gauquelin5 program are :
 <ol class="simple margin-bottom">
@@ -88,8 +93,7 @@ There are several reasons to care about the data used to perform statistical tes
     
     <li>
         <div class="bold">Political</div>
-        A domain of research was banned from universities, and skeptic tests played an important role.
-        <br>G5 program aims to answer a question : <b><i>did the skeptic cheat ?</i></b> An answer can be obtained, but this implies to reconstitute the historical data, provide new eminence ranking for athletes and reproduce the analysis done by Suitbert Ertel, to see if his accusations of fraud are valid or not.
+        G5 program aims to answer a question : <b><i>did the historical protagonists (Gauquelin and skeptic groups) cheat ?</i></b> An answer can be obtained, but this implies to reconstitute the historical data, provide new eminence ranking for athletes and reproduce the analysis done by Suitbert Ertel, to see if his accusations of fraud are valid or not.
     </li>
     
     <li>
@@ -97,7 +101,7 @@ There are several reasons to care about the data used to perform statistical tes
         Historians of science can use the data to establish the facts, as data are the main materials used to perform the astrological tests.
     <li>
         <div class="bold">Technical</div>
-        These data are interesting because they contain birth time. And birth times are generally neglected in the web. Take for example <a href="wikidata.html">wikidata</a> : birth dates are set to <code>00:00:00</code>. There is no way to make the difference between "this is a date with no time information" and "this is a date with time = 00:00:00" (maybe there is a way, but I didn't find it).
+        <b>These data are interesting because they contain birth time</b>. And birth times are generally neglected in the web. Take for example <a href="wikidata.html">wikidata</a> : birth times are set to <code>00:00:00</code>. There is no way to make the difference between "this is a date with no time information" and "this is a date with time = 00:00:00" (maybe there is a way, but I didn't find it).
         <br>Birth times of persons better the web, give it more precision and can be useful for other disciplines studying human activity. 
     </li>
 </ul>
@@ -107,20 +111,6 @@ There are several reasons to care about the data used to perform statistical tes
 <h2>Current implementation</h2>
 
 Most code already developed concerns step 1 of g5 (restoration of historical data).
-<br>G5 currently uses the following data sources :
-<ul>
-    <li>
-        Data gathered by Michel et Françoise Gauquelin (serie A, files D6, D10, E1, E3). Gauquelin5 program use data coming from version 5 of <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/17archg.html">C.U.R.A Gauquelin archives</a>.
-        <br>Note: Since november 2020, Cura data became closed data. Gauquelin5 program does not use data published after this date on this web site.
-    </li>
-    <li>
-        Suitbert Ertel and Arno Müller data, made available on <a href="https://newalchemypress.com/gauquelin/">newalchemypress.com</a> web site.
-    </li>
-    <li>Scans of Arno Müller's Astro-Forschungs-Daten sent by Nick Kollerstrom.</li>
-    <li>CSICOP data sent by Kenneth Irving, previously unpublished.</li>
-    <li>Gauquelin 1955 (paper) book "Les hommes et les astres".</li>
-</ul>
-
 <br>Data are corrected and imported in a common database, currently containing
 <ul class="simple">
     <li><b>22 083</b> persons with birth time.</li>
@@ -135,7 +125,7 @@ Most code already developed concerns step 1 of g5 (restoration of historical dat
 <!-- ********************************************************************************* -->
 <h2>About this program</h2>
 
-The name "Gauquelin5" comes from the main source of information, "Archives Gauquelin version 5", from <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/17archg.html">cura.free.fr</a>.
+The name "Gauquelin5" comes from the initial source of information, "Archives Gauquelin version 5", from <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/17archg.html">cura.free.fr</a>.
 
 <br><br>This program comes with an auxiliary repository, <a href="https://github.com/tig12/g5-aux">github.com/tig12/g5-aux</a>, containing raw data and draft material.
 
@@ -165,13 +155,13 @@ The name "Gauquelin5" comes from the main source of information, "Archives Gauqu
 <br>This software has a slow development pace because I do it on my spare time.
 <br>
 <br>Repository created by Thierry Graff in 2017.
+<!-- 
 <br>Current status : g5 development in pause, busy to work.
 
-<!-- 
 <h4>Sponsors</h4>
 <ul>
-    <li>2020 : Covid19.</li>
-    <li>2017 - 2019 : Pôle Emploi.</li>
+    <li>2020 : Covid19</li>
+    <li>2017 - 2019 : Pôle Emploi</li>
 </ul>
 -->
 
@@ -192,12 +182,13 @@ The name "Gauquelin5" comes from the main source of information, "Archives Gauqu
         <div class="padding-left2">
         <a href="db-person.html">Person</a>
         <a href="db-group.html">Group</a>
+        <br>
         <a href="db-source.html">Source</a>
         <a href="db-occu.html">Occupation</a>
         </div>
     </li>
     <li><a href="organisation.html">Organisation</a></li>
-    <li><a href="usage.html">Program usage</a></li>
+    <li><a href="install.html">Installation, usage</a></li>
     
     <li>
         <span class="big1">1 - Restore</span>                            
@@ -205,11 +196,10 @@ The name "Gauquelin5" comes from the main source of information, "Archives Gauqu
         
             <li><a href="historical-tests.html"><b>List of historical tests</b></a></li>
             
-            <li><a href="cura.html">cura.free.fr</a></li>
-            <li><a href="newalch.html">newalchemypress.com</a></li>
+            <li><a href="sources.html">Information sources</a></li>
             
             <li>
-                <div class="bold"><a href="gauquelin-A.html">Gauquelin</a></div>                            
+                <div class="bold"><a href="gauquelin.html">Gauquelin</a></div>
                 <ul>
                     <li>
                         <a href="gauquelin-A.html">A</a>
@@ -299,5 +289,3 @@ The name "Gauquelin5" comes from the main source of information, "Archives Gauqu
 
 </body>
 </html>
-<!-- ************************************* -->
-<!-- ********************************************************************************* -->
