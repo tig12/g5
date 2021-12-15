@@ -14,7 +14,7 @@ use g5\model\Group;
 use g5\model\Person;
 use g5\model\Occupation;
 use g5\commands\gauq\LERRCP;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\Cura5;
 
 class tmp2db implements Command {
                                                                                           
@@ -107,7 +107,7 @@ class tmp2db implements Command {
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
                 $p->addIdPartial($lerrcpSource->data['slug'], $gqId);
                 $new = [];
-                $new['trust'] = Cura::TRUST_LEVEL;
+                $new['trust'] = Cura5::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
                 $new['notes'] = [];
@@ -164,8 +164,8 @@ class tmp2db implements Command {
                 );
                 $p->update(); // DB
                 if($reportType == 'full'){
-                    $report .= "Duplicate "
-                    . $test->data['slug'] . " : "
+                    $report .= 'Duplicate '
+                    . $test->data['slug'] . ' : '
                     . $p->data['ids-in-sources'][LERRCP::SOURCE_SLUG]
                     . " = $gqId\n";
                 }

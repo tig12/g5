@@ -15,8 +15,10 @@ use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
 use g5\model\Occupation;
-use g5\commands\gauq\Cura;
+use g5\model\Issue;
+use g5\commands\gauq\Cura5;
 use g5\commands\gauq\LERRCP;
+use tiglib\timezone\offset_fr;
 
 class tmp2db implements Command {
     
@@ -61,9 +63,9 @@ class tmp2db implements Command {
         }
         
         // source corresponding to cura5 - insert if does not already exist
-        $curaSource = Source::getBySlug(Cura::SOURCE_SLUG); // DB
+        $curaSource = Source::getBySlug(Cura5::SOURCE_SLUG); // DB
         if(is_null($curaSource)){
-            $curaSource = new Source(Cura::SOURCE_DEFINITION_FILE);
+            $curaSource = new Source(Cura5::SOURCE_DEFINITION_FILE);
             $curaSource->insert(); // DB
             $report .= "Inserted source " . $curaSource->data['slug'] . "\n";
         }
@@ -122,11 +124,19 @@ class tmp2db implements Command {
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
                 $p->addIdPartial($lerrcpSource->data['slug'], $gqId);
                 $new = [];
-                $new['trust'] = Cura::TRUST_LEVEL;
+                $dateOrTimeIssue = '';
+                $new['trust'] = Cura5::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
                 $new['birth'] = [];
                 $new['birth']['date-ut'] = $line['DATE-UT'];
+                if($line['DATE-C'] != ''){
+                    // date restored by class legalTime
+                    $new['birth']['date'] = $line['DATE-C'];
+                }
+                if($line['NOTES-DATE'] != ''){
+                    $dateOrTimeIssue = self::buildTimeRestorationIssue($line['CY'], $line['NOTES-DATE']);
+                }
                 $new['birth']['place']['name'] = $line['PLACE'];
                 $new['birth']['place']['c2'] = $line['C2'];
                 $new['birth']['place']['c3'] = $line['C3'];
@@ -137,6 +147,9 @@ class tmp2db implements Command {
                 $p->updateFields($new);
                 $p->addOccus($newOccus);
                 $p->computeSlug();
+                if($dateOrTimeIssue != ''){
+                    $p->addIssue(Issue::CHK_DATE, $dateOrTimeIssue);
+                }
                 // repeat fields to include in $history
                 $new['sources'] = $source->data['slug'];
                 $new['ids_in_sources'] = [
@@ -146,6 +159,9 @@ class tmp2db implements Command {
                     $lerrcpSource->data['slug'] => $gqId,
                 ];
                 $new['occus'] = $newOccus;
+                if($dateOrTimeIssue != ''){
+                    $new['issues'] = [Issue::CHK_DATE => $dateOrTimeIssue];
+                }
                 $p->addHistory(
                     command: "gauq $datafile tmp2db",
                     sourceSlug: $source->data['slug'],
@@ -199,6 +215,21 @@ class tmp2db implements Command {
         $report .= "$nInsert persons inserted, $nDuplicates updated ($dt s)\n";
         return $report;
     }
-        
-}// end class    
-
+    
+    /**
+        Computes a message indicating why legal time couldn't be restored
+        @param  $country
+        @param  $case       See ofsset_* classes
+    **/
+    public static function buildTimeRestorationIssue(string $country, int $case): string {
+        $issue = "Legal time could not be restored fo the following reason:\n<br>";
+        switch($country){
+            case 'FR': 
+                $issue .= offset_fr::MESSAGES[$case];
+            break;
+        }
+        return $issue;
+    }
+    
+    
+} // end class    

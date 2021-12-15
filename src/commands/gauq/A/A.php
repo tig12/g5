@@ -7,7 +7,7 @@
 ********************************************************************************/
 namespace g5\commands\gauq\A;
 
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\Cura5;
 
 class A{
     
@@ -36,7 +36,9 @@ class A{
         'GNAME',
         'OCCU',
         'DATE-UT',
+        'DATE-C', // "date corrected"
         'PLACE',
+        'TZO',
         'CY',
         'C2',
         'C3',
@@ -44,6 +46,7 @@ class A{
         'LAT',
         'GEOID',
         'NOTES',
+        'NOTES-DATE', // indicates why DATE-C not computed
     ];
     
     /** Names of the columns of generated csv files used by default by export. **/

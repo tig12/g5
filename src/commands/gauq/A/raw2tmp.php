@@ -16,7 +16,7 @@ namespace g5\commands\gauq\A;
 use g5\G5;
 use g5\model\DB5;
 use g5\commands\gauq\LERRCP;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\Cura5;
 use g5\commands\gauq\A\ACuraNames;
 use g5\model\Names;
 use g5\model\Names_fr;
@@ -78,15 +78,15 @@ class raw2tmp implements Command {
         if(count($m) != 3){
             throw new \Exception("Unable to parse first list (without names) in " . $file_datafile);
         }
-        $fieldnames1 = explode(Cura::HTML_SEP, $m[1]); // exactly equal to A::RAW_FIELDS
+        $fieldnames1 = explode(Cura5::HTML_SEP, $m[1]); // exactly equal to A::RAW_FIELDS
         $lines1 = explode("\n", $m[2]);
         foreach($lines1 as $line1){
-            $fields = explode(Cura::HTML_SEP, $line1);
+            $fields = explode(Cura5::HTML_SEP, $line1);
             $tmp = [];
             for($i=0; $i < count($fields); $i++){
                 $tmp[$fieldnames1[$i]] = $fields[$i]; // ex: $tmp['YEA'] = '1817'
             }
-            $day = Cura::computeDay($tmp);
+            $day = Cura5::computeDay($tmp);
             if(!isset($res1[$day])){
                 $res1[$day] = [];
             }
@@ -307,8 +307,8 @@ class raw2tmp implements Command {
             $new['GNAME'] = trim($cur['GNAME']);
             $new['OCCU'] = self::computeProfession($datafile, $cur['PRO'], $new['NUM']);
             // date time
-            $day = Cura::computeDay($cur);
-            $hour = Cura::computeHHMMSS($cur);
+            $day = Cura5::computeDay($cur);
+            $hour = Cura5::computeHHMMSS($cur);
             $date = "$day $hour";
             $TZ = trim($cur['TZ']);
             if($TZ != 0 && $TZ != -1){
@@ -327,8 +327,8 @@ class raw2tmp implements Command {
             // place
             [$new['PLACE'], $new['C3']] = self::computePlace($cur['CITY']);
             [$new['CY'], $new['C2']] = self::computeCountry($cur['COU'], $cur['COD']);
-            $new['LG'] = Cura::computeLg($cur['LON']);
-            $new['LAT'] = Cura::computeLat($cur['LAT']);
+            $new['LG'] = Cura5::computeLg($cur['LON']);
+            $new['LAT'] = Cura5::computeLat($cur['LAT']);
             $new['GEOID'] = '';
             $new['NOTES'] = '';
             $csv .= implode(G5::CSV_SEP, $new) . "\n";

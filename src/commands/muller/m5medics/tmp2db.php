@@ -16,6 +16,7 @@ use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
+use g5\model\Issue;
 use g5\commands\Newalch;
 use g5\commands\gauq\LERRCP;
 use g5\commands\muller\Muller;
@@ -55,6 +56,7 @@ class tmp2db implements Command {
         
         // source corresponding to Müller's Astro-Forschungs-Daten - insert if does not already exist
         $afdSource = Source::getBySlug(Muller::SOURCE_SLUG); // DB
+//echo (is_null($afdSource) ? 'isnull' : 'not null') . "\n"; exit;
         if(is_null($afdSource)){
             $afdSource = new Source(Muller::SOURCE_DEFINITION_FILE);
             $afdSource->insert(); // DB
@@ -110,6 +112,7 @@ class tmp2db implements Command {
         for($i=0; $i < $N; $i++){
             $line = $lines[$i];                                                                        
             $lineRaw = $linesRaw[$i];
+            $mullerId = Muller::mullerId($source->data['slug'], $line['NR']);
             if($line['GNR'] == ''){
                 // Person not in Gauquelin data
                 $p = new Person();
@@ -131,7 +134,6 @@ class tmp2db implements Command {
                 $p->addOccus($newOccus);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NR']);
-                $mullerId = Muller::mullerId($source->data['slug'], $line['NR']);
                 $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
@@ -140,49 +142,63 @@ class tmp2db implements Command {
                 $new['ids_in_sources'] = [ $source->data['slug'] => $line['NR'] ];
                 $new['occus'] = $newOccus;
                 $p->addHistory(
-                    command: 'newalch muller1083 tmp2db',
+                    command: 'muller m5medics tmp2db',
                     sourceSlug: $source->data['slug'],
                     newdata: $new,
                     rawdata: $lineRaw
                 );
                 $nInsert++;
-                $p->data['id'] = $p->insert(); // Storage
+//                $p->data['id'] = $p->insert(); // DB
             }
             else{
                 // Person already in A2 or E1
                 $new = [];
-                $new['notes'] = [];
-                [$curaSourceSlug, $NUM] = M5medics::gnr2LERRCPSourceId($line['GNR']);
-                $curaFile = strtoupper($curaSourceSlug);
-                $gqId = LERRCP::gauquelinId($curaFile, $NUM);
-                $p = Person::getBySourceId($curaSourceSlug, $NUM); // DB
+                $new['issues'] = [];
+                [$gauqSourceSlug, $NUM] = M5medics::gnr2LERRCPSourceId($line['GNR']);
+                $gauqFile = strtoupper($gauqSourceSlug);
+                $gauqId = LERRCP::gauquelinId($gauqFile, $NUM);
+                $p = Person::getBySourceId($gauqSourceSlug, $NUM); // DB
                 if(is_null($p)){
-                    throw new \Exception("$gqId : try to update an unexisting person");
+                    throw new \Exception("$gauqId : try to update an unexisting person");
                 }
-                if($p->data['name']['family'] == "Gauquelin-$gqId"){
+                if($p->data['name']['family'] == "Gauquelin-$gauqId"){
                     $nRestoredNames++;
                     if($reportType == 'full'){
-                        $namesReport .= "\nCura NUM $gqId\t {$p->data['name']['family']}\n";
+                        $namesReport .= "\nCura NUM $gauqId\t {$p->data['name']['family']}\n";
                         $namesReport .= "Müller NR {$line['NR']}\t {$line['FNAME']} - {$line['GNAME']}\n";
                     }
                 }
                 // if Cura and Müller have different birth day
-                $mulday = substr($line['DATE'], 0, 10);
+                $mulDay = substr($line['DATE'], 0, 10);
                 // from A2, stored in field 'date-ut' ; from E1, stored in field 'date'
-                if(isset($p->data['ids-in-sources']['A2'])){
-                    $curaday = substr($p->data['birth']['date-ut'], 0, 10);
+                if(isset($p->data['ids-in-sources']['a2'])){
+                    $gauqDay = substr($p->data['birth']['date-ut'], 0, 10);
                 }
-                else{
-                    $curaday = substr($p->data['birth']['date'], 0, 10);
+                else{ // E1
+                    $gauqDay = substr($p->data['birth']['date'], 0, 10);
                 }
-                if($mulday != $curaday){
+                if($mulDay != $gauqDay){
                     $nDiffDates++;
-                    $new['notes'][] = "CHECK birth day : $gqId $curaday / M5medics {$line['NR']} $mulday";
-                    $new['to-check'] = true;
+                    $issue = "Check birth date because Müller and Gauquelin birth days differ\n"
+                           . "<br>Gauquelin $gauqId: $gauqDay\n<br>Müller $mullerId: $mulDay\n";
+                    $p->addIssue(Issue::CHK_DAY, $issue);
+                    $new['issues'][Issue::CHK_DAY] = $issue;
                     if($reportType == 'full'){
-                        $datesReport .= "\nCura $gqId\t $curaday {$p->data['name']['family']} - {$p->data['name']['given']}\n";
-                        $datesReport .= "Müller NR {$line['NR']}\t $mulday {$line['FNAME']} - {$line['GNAME']}\n";
+                        $datesReport .= "\nCura $gauqId\t $gauqDay {$p->data['name']['family']} - {$p->data['name']['given']}\n";
+                        $datesReport .= "Müller NR {$line['NR']}\t $mulDay {$line['FNAME']} - {$line['GNAME']}\n";
                     }
+                }
+                // E1 same day as Müller 1083 => check time
+                if(isset($p->data['ids-in-sources']['e1']) && $mulDay == $gauqDay){
+                    $gauqHour = substr($p->data['birth']['date'], 11);
+                    $mulHour = substr($line['DATE'], 11);
+                    if($gauqHour != $mulHour){
+                        $issue = "Check birth date because Müller and Gauquelin birth hours differ"
+                               . "\n<br>Gauquelin $gauqId: $gauqHour"
+                               . "\n<br>Müller $mullerId: $mulHour\n";
+//echo "$mullerId - $gauqId\n'{$p->data['birth']['date']}'\n'{$line['DATE']}'\n\n";
+                    }
+//echo "\n<pre>"; print_r($p); echo "</pre>\n"; exit;
                 }
                 // update fields that are more precise in muller1083
                 $new['birth']['date'] = $line['DATE']; // Cura contains only date-ut
@@ -200,7 +216,6 @@ class tmp2db implements Command {
                 $p->addOccus($newOccus);
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NR']);
-                $mullerId = Muller::mullerId($source->data['slug'], $line['NR']);
                 $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
@@ -209,16 +224,17 @@ class tmp2db implements Command {
                 $new['ids_in_sources'] = [ $source->data['slug'] => $line['NR'] ];
                 $new['occus'] = $newOccus;
                 $p->addHistory(
-                    command: 'cura muller1083 tmp2db',
+                    command: 'muller m5medics tmp2db',
                     sourceSlug: $source->data['slug'],
                     newdata: $new,
                     rawdata: $lineRaw
                 );
                 $nUpdate++;
-                $p->update(); // DB
+//                $p->update(); // DB
             }
             $g->addMember($p->data['id']);
         }
+exit;
         $t2 = microtime(true);
         $g->insertMembers(); // DB
         $dt = round($t2 - $t1, 5);

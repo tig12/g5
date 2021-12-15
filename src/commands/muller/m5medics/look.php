@@ -24,7 +24,7 @@ class look implements Command {
         php run-g5.php muller m5medics look gnr
     **/
     const POSSIBLE_PARAMS = [
-        'gauqdates',
+        'gauqdays',
         'gauqnames',
         'fields',
         'gnr',
@@ -263,7 +263,7 @@ class look implements Command {
     /**
         Must be executed after fixGnr
     **/
-    private static function look_gauqdates(){
+    private static function look_gauqdays(){
         $a2s = LERRCP::loadTmpFile_num('A2'); // keys = NUM
         $e1s = LERRCP::loadTmpFile_num('E1'); // keys = NUM
         $MullerCsv = M5medics::loadTmpFile_nr(); // keys = NR
@@ -330,7 +330,7 @@ class look implements Command {
         $pDiffE1 = 100 - $pEqE1;
         $pEq = round(100 * $equal / $total, 2);
         $pDiff = 100 - $pEq;
-        echo "Compare dates Müller / A2 E1\n";
+        echo "Compare Müller / A2 E1 birth days\n";
         echo "        | Equal         | Different  | Total\n";
         echo "--------------------------------------------\n";
         echo "A2      | $equalA2 ($pEqA2 %) | $diffA2 ($pDiffA2 %)| $totalA2\n";

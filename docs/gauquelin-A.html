@@ -32,15 +32,14 @@
 <header>
 <h1>Gauquelin LERRCP - serie A</h1>
 <div class="intro">
-This page describes the corrections done on files A1 to A6 while importing html pages from cura.free.fr .
-<br>The main problems with these files are :
-<ul>
-    <li>Reconstitute the names.</li>
-    <li>Restore legal birth times.</li>
-</ul>
-<a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/17archg.html">cura.free.fr</a> announces <b>15 940</b> persons in A files. G5 find <b>15 790</b> unique persons ; the difference comes from the presence of <a href="gauquelin.html#duplicates">duplicates</a> (one person listed in 2 or 3 files).
-<!-- 2087+3643+3046+2720+2410+2026+449 =  -->
-
+    This page describes the corrections done on files A1 to A6 while importing html pages from cura.free.fr .
+    <br>The main problems with these files are :
+    <ul>
+        <li>Reconstitute the names.</li>
+        <li>Restore legal birth times.</li>
+    </ul>
+    <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/17archg.html">cura.free.fr</a> announces <b>15 940</b> persons in A files. G5 find <b>15 790</b> unique persons ; the difference comes from the presence of <a href="gauquelin.html#duplicates">duplicates</a> (one person listed in 2 or 3 files).
+    <!-- 2087+3643+3046+2720+2410+2026+449 =  -->
 </div>
 </header>
 
@@ -84,16 +83,17 @@ This page describes the corrections done on files A1 to A6 while importing html 
 
 Raw files are imported in database with the following commands :
 <pre>
-php run-g5.php cura A raw2tmp small
-php run-g5.php cura A addGeo small
-php run-g5.php cura A tmp2db
+php run-g5.php gauq A raw2tmp small
+php run-g5.php gauq A addGeo small
+php run-g5.php gauq A tweak2tmp
+php run-g5.php gauq A tmp2db
 </pre>
 
 <!-- ********************************************************************************* -->
 <h2><a name="raw2tmp">raw2tmp</a></h2>
 
 This command needs a parameter to indicate what it should print :
-<pre>php run-g5.php cura A raw2tmp</pre>
+<pre>php run-g5.php gauq A raw2tmp</pre>
 <pre>
 MISSING PARAMETER : raw2tmp needs a parameter to specify which output it displays. Can be :
   small : echoes only global results
@@ -103,7 +103,7 @@ MISSING PARAMETER : raw2tmp needs a parameter to specify which output it display
 <!-- ************************************* -->
 <h3><a name="1-1-profession-codes">Profession codes</a></h3>
 In some files of serie A, the precise profession codes are not associated to the records. This is possible to fix thanks to the notices that are present on cura.free.fr pages.
-<br>These informations were included to the program (see constant <code>PROFESSIONS_DETAILS</code> of class <code>g5\commands\cura\A\A</code>) ; each record is associated to its precise profession in the resulting csv file.
+<br>These informations were included to the program (see constant <code>PROFESSIONS_DETAILS</code> of class <code>g5\commands\gauq\A\A</code>) ; each record is associated to its precise profession in the resulting csv file.
 <br>
 <br><a href="output-format.html#occupation-codes">Page "output format"</a> contains a list of profession codes used in the generated files.
 
@@ -402,10 +402,10 @@ It modifies records of <code>5-cura-csv/</code> only if there is a unique match 
                     <li>
                         <a href="g55.html">Gauquelin 1955</a>
                         <ul>
+                            <li><a href="g55-restore.html">Matching G55 - LERRCP</a></li>
+                            <li><a href="g55-curadiff.html">Differences G55 - Cura5</a></li>
                             <li><a href="g55-884-priests.html">884 priests</a></li>
                             <li><a href="g55-361-painters.html">361 minor painters</a></li>
-                            <li><a href="g55-restore.html">Other groups</a></li>
-                            <li><a href="g55-curadiff.html">Differences with Cura 5</a></li>
                         </ul>
                     </li>
                 </ul>

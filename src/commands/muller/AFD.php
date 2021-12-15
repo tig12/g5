@@ -3,7 +3,7 @@
     Constants and utilities related to AFD (Müller's Astro-Forschungs-Daten booklets).
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
-    @history    2021-12-15 03:34:46+01:00, Thierry Graff : creation
+    @history    2021-07-19 15:31:36+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\muller;
 
@@ -18,7 +18,13 @@ class Muller {
     /**
         Slug of Astro-Forschungs-Daten source.
     **/
-    const SOURCE_SLUG = 'muller';
+    const SOURCE_SLUG = 'afd';
+    
+    /**
+        Trust level for data coming from Astro-Forschungs-Daten booklets.
+        @see https://tig12.github.io/gauquelin5/check.html
+    **/
+    const TRUST_LEVEL = 4;
     
     /**
         AFD means Astro-Forschungs-Daten

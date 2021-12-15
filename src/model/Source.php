@@ -61,6 +61,7 @@ class Source {
     
     /** Creates an object of type Source from database, using its slug. **/
     public static function getBySlug($slug): ?Source {
+echo "$slug\n"; exit;
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("select * from source where slug=?");
         $stmt->execute([$slug]);

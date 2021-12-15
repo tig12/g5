@@ -13,7 +13,7 @@ use g5\model\Group;
 use tiglib\arrays\csvAssociative;
 use tiglib\strings\encode2utf8;
 use g5\commands\Newalch;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\Cura5;
 
 class M5medics {
     

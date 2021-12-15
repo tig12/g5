@@ -11,7 +11,7 @@
 namespace g5\commands\gauq\A;
 
 use g5\commands\gauq\LERRCP;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\Cura5;
 
 class ACuraNames{
     
@@ -34,7 +34,7 @@ class ACuraNames{
         if(!isset($m[2]) || count($m[2]) != 2){
             throw new \Exception("Unable to parse " . $filename);
         }
-        $fieldnames = explode(Cura::HTML_SEP, $m[1][0]);
+        $fieldnames = explode(Cura5::HTML_SEP, $m[1][0]);
         if(count($fieldnames) != 6){
             throw new \Exception("Unable to parse " . $filename . " (there should be 6 fields per line)");
         }
@@ -42,7 +42,7 @@ class ACuraNames{
         for($i=0; $i < 2; $i++){
             $lines = explode("\n", $m[2][$i]);
             foreach($lines as $line){
-                $values = explode(Cura::HTML_SEP, $line);
+                $values = explode(Cura5::HTML_SEP, $line);
                 $fields = [];
                 for($j=0; $j < 6; $j++){
                     $fields[$fieldnames[$j]] = $values[$j];
@@ -51,7 +51,7 @@ class ACuraNames{
                     $res[$fields['FILE']] = [];
                 }
                 $res[$fields['FILE']][] = [
-                    'day'   => Cura::computeDay($fields),
+                    'day'   => Cura5::computeDay($fields),
                     'pro'   => $fields['PRO'], // profession kept because sometimes useful (for ex in A4 and A5)
                     'name'  => trim($fields['NAME']),
                 ];

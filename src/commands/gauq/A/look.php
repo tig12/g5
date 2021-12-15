@@ -12,7 +12,7 @@ namespace g5\commands\gauq\A;
 use g5\app\Config;
 use tiglib\patterns\Command;
 use g5\commands\gauq\LERRCP;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\Cura5;
 use g5\commands\gauq\A\ACuraNames;
 use g5\commands\gauq\GauqRouter;
 use tiglib\arrays\csvAssociative;
@@ -183,8 +183,8 @@ class look implements Command {
         preg_match('#<pre>\s*(YEA.*?CITY)\s*(.*?)\s*</pre>#sm', $raw, $m);
         $lines1 = explode("\n", $m[2]);
         foreach($lines1 as $line1){
-            $fields = explode(Cura::HTML_SEP, $line1);
-            $day = Cura::computeDay(['YEA' => $fields[0], 'MON' => $fields[1], 'DAY' => $fields[2]]);
+            $fields = explode(Cura5::HTML_SEP, $line1);
+            $day = Cura5::computeDay(['YEA' => $fields[0], 'MON' => $fields[1], 'DAY' => $fields[2]]);
             $res1[] = $day;
         }
         //
@@ -194,8 +194,8 @@ class look implements Command {
         preg_match('#CHRONOLOGICAL ORDER \(with names\)</b></font>\s*?<div id="contenu2"><pre>\s*?YEA.*?NAME\s*(.*?)\s*</pre>#smi', $raw, $m);
         $lines2 = explode("\n", $m[1]);
         foreach($lines2 as $line2){
-            $fields = explode(Cura::HTML_SEP, $line2);
-            $day = Cura::computeDay(['YEA' => $fields[0], 'MON' => $fields[1], 'DAY' => $fields[2]]);
+            $fields = explode(Cura5::HTML_SEP, $line2);
+            $day = Cura5::computeDay(['YEA' => $fields[0], 'MON' => $fields[1], 'DAY' => $fields[2]]);
             $res2[] = $day;
         }
         //

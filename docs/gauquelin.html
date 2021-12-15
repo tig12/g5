@@ -34,41 +34,56 @@
 <header>
 <h1>Gauquelin data</h1>
 <div class="intro">
-Gauquelin5 program only uses a small subset of Gauquelin data, persons with known names (famous persons).
-<br>This gives <b>21 249</b> persons (A1 &rarr; A6, D6, D10, E1, E3).
-
-
-on <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/17archg.html">cura.free.fr</a> : 
-<br>They form the departure point of g5 database ; Gauquelin data are imported first, then Müller and skeptics and other complete the database.
-<br>
+Michel and Françoise Gauquelin were both data collectors. Gauquelin5 program only uses a small subset of the data collected by the Gauquelins, persons with known names (famous persons). Anonymous persons collected by the Gauquelins, like alcoholics, murderers, psychotics, persons gathered for heredity experiments, are not handled by g5.
+<br>These data form the departure point of g5 database ; Gauquelin data are imported first, then Müller and skeptics and other complete the database.
 </div>
 </header>
 
 <article>
-<nav class="toc">
-    <ul>
-        <li>
-            <a href="#gauquelin-data-with-names">Cura data with names</a>
-        </li>
-        <li>
-            <a href="#gauquelin-unique-id">Gauquelin unique id</a>
-        </li>
-        <li>
-            <a href="#duplicates">Duplicates</a>
-        </li>
-    </ul>
-</nav>
-
-
 
 <!-- ********************************************************************************* -->
-<h2><a name="gauquelin-data-with-names">Gauquelin data with names</a></h2>
+<h2>Origin of Gauquelin data</h2>
 
-Details on Gauquelin publications can be found on <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdG.html#a">page 902gdG.html of cura.free.fr</a>. Part of these informations were included in g5 code for documentation purpose.
+Gauquelin data used by g5 come from two distinct sources :
+
+<ul class="spaced margin-top">
+    <li>
+    <!-- itemprop="isbn" -->
+        <b itemscope itemtype="https://schema.org/Book" >L'influence des astres</b>, a book published by Michel Gauquelin in 1955.
+        <br>See page <a href="g55.html">Gauquelin 1955</a> for details.
+    </li>
+    <li>
+        <b>Publications du LERRCP</b>. The LERRCP (Laboratoire d'Étude des Relations entre Rythmes Cosmiques et Psychophysiologiques) was the structure used to publish some works of the Gauquelins. Around 30 booklets were published, and 10 contain lists of persons with their names and birth places, dates and times: A1, A2, A3, A4, A5, A6, D6, D10, E1, E3.
+        <br>Informations about these booklets can be found on different places:
+        <ul>
+            <li>
+                The <b>BNF (Bibliothèque Nationale de France)</b> contains copy of the booklets ; BNF online catalog provides informations:
+                <ul>
+                    <li><a href="https://catalogue.bnf.fr/rechercher.do?index=TOUS3&numNotice=34236450&typeNotice=C">Serie A</a></li>
+                    <li><a href="https://catalogue.bnf.fr/ark:/12148/cb342954860">Serie D</a></li>
+                </ul>
+            </li>
+            <li>
+                Web site <a href="https://www.astrolearn.com/astrology-bibliography/bibliography-of-astrology-page-69-gauquelin-michel/">astrolearn.com</a> contains a list of Gauquelin publications, including LERRCP.
+            </li>
+            <li>
+                Web site <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdG.html#a">cura.free.fr</a> also contains a list of LERRCP booklets.
+            </li>
+        </ul>
+        
+        
+        <br>This gives <span class="bold big2">21 249</span> persons.
+    </li>
+</ul>
+
+<!-- ********************************************************************************* -->
+<h2><a name="gauquelin-data-with-names">Gauquelin data coming from LERRCP</a></h2>
+
+G5 program uses data coming from <a href="https://web.archive.org/web/20150402143312/http://cura.free.fr/gauq/17archg.html">cura.free.fr</a>
 
 <br><br>The command
 <pre>php run-g5.php gauq look count</pre>
-generates a comparison between numbers claimed on Cura web site and numbers found by g5 :
+generates the following table.
 
 <table class="count-A wikitable margin">
 <tr><th>File</th><th>Date</th><th>Title</th><th>N <sub>Cura</sub></th><th>N <sub>g5</sub></th><th>&Delta;</th><th>Explanation</th></tr>
@@ -1125,10 +1140,10 @@ generates the following table containing the duplicates.
                     <li>
                         <a href="g55.html">Gauquelin 1955</a>
                         <ul>
+                            <li><a href="g55-restore.html">Matching G55 - LERRCP</a></li>
+                            <li><a href="g55-curadiff.html">Differences G55 - Cura5</a></li>
                             <li><a href="g55-884-priests.html">884 priests</a></li>
                             <li><a href="g55-361-painters.html">361 minor painters</a></li>
-                            <li><a href="g55-restore.html">Other groups</a></li>
-                            <li><a href="g55-curadiff.html">Differences with Cura 5</a></li>
                         </ul>
                     </li>
                 </ul>

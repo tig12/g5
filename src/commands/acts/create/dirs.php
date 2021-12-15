@@ -8,7 +8,7 @@ namespace g5\commands\acts\create;
 
 use g5\G5;
 use tiglib\patterns\Command;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\Cura5;
 use tiglib\arrays\csvAssociative;
 use g5\commands\acts\Acts;
 

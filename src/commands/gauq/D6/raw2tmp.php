@@ -16,7 +16,7 @@ use tiglib\patterns\Command;
 use g5\model\Names;
 use g5\model\Names_fr;
 use g5\commands\gauq\LERRCP;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\Cura5;
 
 class raw2tmp implements Command {
     
@@ -118,16 +118,16 @@ class raw2tmp implements Command {
             //
             $new['OCCU'] = 'sportsperson';
             //
-            $day = Cura::computeDay(['DAY' => $cur[1], 'MON' => $cur[2], 'YEA' => $cur[3]]);
-            $hour = Cura::computeHHMM(['H' => $cur[4], 'MN' => $cur[5]]);
+            $day = Cura5::computeDay(['DAY' => $cur[1], 'MON' => $cur[2], 'YEA' => $cur[3]]);
+            $hour = Cura5::computeHHMM(['H' => $cur[4], 'MN' => $cur[5]]);
             $new['DATE'] = "$day $hour";
             $new['PLACE'] = '';
             $new['CY'] = '';
             $new['C2'] = '';
             $new['GEOID'] = '';
-            $new['LG'] = Cura::computeLg($cur[8]);
+            $new['LG'] = Cura5::computeLg($cur[8]);
             $lat = $new['NUM'] != '356' ? $cur[7] : $lat356;
-            $new['LAT'] = Cura::computeLat($lat);
+            $new['LAT'] = Cura5::computeLat($lat);
             // $raw, to keep an exact trace of original values
             $raw = $emptyNewRaw;
             $raw['NUM'] = $cur[0];

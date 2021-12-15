@@ -10,7 +10,7 @@
 namespace g5\commands\gauq;
 
 use g5\app\Config;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\Cura5;
 
 class SerieB{
     
@@ -36,7 +36,7 @@ die("Draft code - not included in Gauquelin5 program\n");
         
         $report = '';
         // load and parse raw page
-        $raw = Cura::read_raw_file($params['file-info']);
+        $raw = Cura5::read_raw_file($params['file-info']);
         preg_match('#<pre>\s*(NUM.*?COD)\s*(.*?)</pre>#sm', $raw, $m);
         if(count($m) != 3){
             throw new Exception("Unable to parse file '{$params['file-info']}'");
@@ -47,8 +47,8 @@ die("Draft code - not included in Gauquelin5 program\n");
             //
             // prepare destination table
             //
-            $table = Cura::table_name($params['file-info']);
-            $table_absolute = Cura::table_name_absolute($params['destination-db'], $table);
+            $table = Cura5::table_name($params['file-info']);
+            $table_absolute = Cura5::table_name_absolute($params['destination-db'], $table);
 //            $this->clean_slugindex(); // done now with data of the original table
             Gauquelin5::$dblink->table_drop_if_exists($table);
             Gauquelin5::$dblink->table_create($table);
@@ -64,11 +64,11 @@ die("Draft code - not included in Gauquelin5 program\n");
             $prev_sex = false;
             $nb_stored_persons = $nb_stored_families = 0;
             $bugged_8224 = ['902gdB2', '902gdE2c', '902gdE2e']; // to fix a bug in cura.free.fr data : field 8224 has no NUM, in 3 distinct files
-            $slugbase = 'gauquelin-' . strtolower(Cura::group_name($params['file-info']));
+            $slugbase = 'gauquelin-' . strtolower(Cura5::group_name($params['file-info']));
             $nlines = count($lines);
             for($iline=0; $iline < $nlines; $iline++){
                 $line = $lines[$iline];
-                $fields = explode(Cura::HTML_SEP, trim($line));
+                $fields = explode(Cura5::HTML_SEP, trim($line));
                 $cur = [];
                 if(in_array($params['file-info'], $bugged_8224) && count($fields) == 12){
                     // executed for 3 lines only (once per bugged file)
@@ -86,8 +86,8 @@ die("Draft code - not included in Gauquelin5 program\n");
                 }
                 $new = [];
                 // t
-                $day = Cura::computeDay($cur);
-                $hour = Cura::computeHHMMSS($cur);
+                $day = Cura5::computeDay($cur);
+                $hour = Cura5::computeHHMMSS($cur);
                 $tz = trim($cur['TZ']) == 0 ? '+00:00' : '-01:00';
                 // slug, id
                 $num = trim($cur['NUM']);
@@ -99,8 +99,8 @@ die("Draft code - not included in Gauquelin5 program\n");
                     'FR',
                     trim($cur['COD']),
                     '', // geonames id => @todo link to geonames
-                    Cura::computeLg($cur['LON']),
-                    Cura::computeLat($cur['LAT']),
+                    Cura5::computeLg($cur['LON']),
+                    Cura5::computeLat($cur['LAT']),
                 ];
                 $new['s'] = $table_absolute . Storage::SEP . $slug;
                 $new['p'] = 'type';
@@ -138,7 +138,7 @@ die("Draft code - not included in Gauquelin5 program\n");
                     $nb_stored_families ++;
                     // one row for the family
                     $row = [];
-                    $id_family = Cura::$dblink->auto_increment($table);
+                    $id_family = Cura5::$dblink->auto_increment($table);
                     $row['id'] = $id_family;
                     $row['s'] = $table_absolute . Storage::SEP . $id_family;
                     $row['p'] = 'type';
@@ -188,7 +188,7 @@ die("Draft code - not included in Gauquelin5 program\n");
             }
             $report .= "\nnb stored persons: $nb_stored_persons";
             $report .= "\nnb stored families: $nb_stored_families";
-            $report .= Cura::create_group(array_merge($params, ['table' => $table, 'count' => $nb_stored_persons]));
+            $report .= Cura5::create_group(array_merge($params, ['table' => $table, 'count' => $nb_stored_persons]));
             Gauquelin5::$dblink->commit();
         }
         catch(Exception $e){

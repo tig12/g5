@@ -358,16 +358,16 @@ class Person {
     
     
     /**
-        
-        @param  $k  Key of the issue
-        @param  $v  Value of the issue
+        Adds one single issue.
+        @param  $k  string Key of the issue
+        @param  $v  string Value of the issue
     **/
     public function addIssue(string $k, string $v) {
         if(isset($this->data['issues'][$k])){
             throw new \Exception("TRYING TO ADD A ISSUE OF AN EXISTING KEY \n" . $this->data['slug'] . " - issue key = $key\n");
         }
-        if(is_null($this->data['issues'][$k])){
-            $this->data['issues'][$k] = [];
+        if(is_null($this->data['issues'])){
+            $this->data['issues'] = [];
         }
         $this->data['issues'][$k] = $v;
     }

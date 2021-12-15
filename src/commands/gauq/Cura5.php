@@ -11,7 +11,7 @@ use g5\app\Config;
 use tiglib\arrays\csvAssociative;
 use g5\commands\gauq\LERRCP;
 
-class Cura {
+class Cura5 {
     
     /**
         Path to the yaml file containing the characteristics of "cura5" source.

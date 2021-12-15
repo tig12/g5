@@ -19,7 +19,7 @@ class genCorr implements Command {
     
     /** 
         Columns of generated files
-        Same as Cura::TMP_CSV_COLUMNS
+        Same as Cura5::TMP_CSV_COLUMNS
         except column NUM is replaced by ORIG
     **/
     const GEN_FIELDS = [

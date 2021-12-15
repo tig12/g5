@@ -21,21 +21,28 @@ namespace tiglib\timezone;
 use tiglib\time\seconds2HHMMSS;
 use soniakeys\meeus\eqtime\eqtime;
 
-class offset_fr{
+class offset_fr {
     
     // return codes and messages
     const CASE_1871_1918_LORRAINE = 1;
-    const MSG_1871_1918_LORRAINE = 'Possible TZ offset error (german zone 1871 - 1918 ; dept 54, 57, 88)';
+    const MSG_1871_1918_LORRAINE = 'TZ offset computation not done to avoid error (german zone 1871 - 1918, dept 54, 57, 88)';
     
     const CASE_1871_1918_ALSACE = 2;
-    const MSG_1871_1918_ALSACE = 'Possible TZ offset error (german zone 1871 - 1918 ; dept 67, 68)';
+    const MSG_1871_1918_ALSACE = 'TZ offset computation not done to avoid error (german zone 1871 - 1918 , dept 67, 68)';
     
     const CASE_WW2 = 3;
-    const MSG_WW2 = 'Possible timezone offset error (german occupation WW2)';
+    const MSG_WW2 = 'TZ offset computation not done to avoid error (german occupation WW2)';
     
     const CASE_BEFORE_1891 = 4;
     
+    /** Used when computed by code provided by php **/
     const CASE_PHP_DEFAULT = 5;
+    
+    const MESSAGES = [
+        self::CASE_1871_1918_LORRAINE => self::MSG_1871_1918_LORRAINE,
+        self::CASE_1871_1918_ALSACE   => self::MSG_1871_1918_ALSACE,
+        self::CASE_WW2                => self::MSG_WW2,
+    ];
     
     // ******************************************************
     /**

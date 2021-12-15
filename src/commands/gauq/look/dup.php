@@ -12,7 +12,7 @@ use tiglib\patterns\Command;
 use g5\model\DB5;
 use g5\model\Person;
 use g5\commands\gauq\GauqRouter;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\Cura5;
 use g5\commands\gauq\LERRCP;
 
 class dup implements Command {
@@ -44,7 +44,7 @@ class dup implements Command {
             $tmp = [];
             foreach($p->data['ids-in-sources'] as $k => $v){
                 if(in_array($k, $filesCura)){
-                    $tmp[] = "$k-$v"; // = Gauquelin id
+                    $tmp[] = "$k-$v"; // = Gauquelin id - TODO call Gauquelin class
                 }
             }
             if(count($tmp) > 1){
@@ -65,7 +65,7 @@ class dup implements Command {
             else {
                 $N4++;
             }
-            $gqid = strtoupper($dup[0]); // $dup[0] looks like 'a1-2054' ; = Gauquelin id looks like 'A1-2054' 
+            $gqid = strtoupper($dup[0]); // $dup[0] looks like 'a1-2054' ; Gauquelin id looks like 'A1-2054' 
             $p =& $persons[$gqid];
             $res .= "    <tr>\n";
             $res .= "        <td>" . implode('<br>', $dup) . "</td>\n";

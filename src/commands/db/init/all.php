@@ -15,10 +15,12 @@ use g5\commands\gauq\GauqRouter;
 
 // for information sources
 use g5\G5;
+use g5\commands\gauq\Gauquelin;
 use g5\commands\gauq\LERRCP;
 use g5\commands\muller\Muller;
+use g5\commands\ertel\Ertel;
+use g5\commands\gauq\Cura5;
 use g5\commands\Newalch;
-use g5\commands\gauq\Cura;
 use g5\commands\wd\Wikidata;
 
 use g5\commands\db\init\dbcreate;
@@ -30,6 +32,7 @@ use g5\commands\db\fill\person                  as dbFillPerson;
 // raw2tmp
 use g5\commands\gauq\A\raw2tmp                  as Araw2tmp;
 use g5\commands\gauq\A\addGeo                   as AaddGeo;
+use g5\commands\gauq\A\legalTime                as AlegalTime;
 use g5\commands\gauq\D6\raw2tmp                 as D6raw2tmp;
 use g5\commands\gauq\D6\addGeo                  as D6addGeo;
 use g5\commands\gauq\D10\raw2tmp                as D10raw2tmp;
@@ -43,7 +46,6 @@ use g5\commands\ertel\sport\fixA1               as ErtelSportFixA1;
 use g5\commands\muller\m5medics\raw2tmp         as M5MedicsRaw2tmp;
 use g5\commands\muller\m5medics\tweak2tmp       as M5MedicsTweak2tmp;
 use g5\commands\muller\m5medics\fixGnr          as M5MedicsFixGnr;
-//use g5\commands\muller\m5medics\fixGauq         as M5MedicsFixGauq;
 
 use g5\commands\muller\m1writers\raw2tmp        as M1WritersRaw2tmp;
 use g5\commands\muller\m1writers\tweak2tmp      as M1WritersTweak2tmp;
@@ -135,6 +137,7 @@ class all implements Command {
             foreach($filesGauqA as $datafile){
                 echo Araw2tmp::execute([$datafile, 'raw2tmp', 'small']);
                 echo AaddGeo::execute([$datafile, 'addGeo', 'small']);
+                echo AlegalTime::execute([$datafile, 'legalTime']);
             }
             echo D6raw2tmp::execute(['D6', 'raw2tmp']);
             echo D6addGeo::execute(['D6', 'addGeo']); // tmp code - addGeo needs to be fixed
@@ -176,15 +179,19 @@ class all implements Command {
             echo "***********************\n";
             echo "***  Fill database  ***\n";
             echo "***********************\n";
+/* 
             echo dbcreate::execute([]);
+            echo dbFillSource::execute([Gauquelin::SOURCE_DEFINITION_FILE]);
             echo dbFillSource::execute([LERRCP::SOURCE_DEFINITION_FILE]);
             echo dbFillSource::execute([Muller::SOURCE_DEFINITION_FILE]);
-            echo dbFillSource::execute([G5::SOURCE_DEFINITION_FILE]);
-            echo dbFillSource::execute([Cura::SOURCE_DEFINITION_FILE]);
+            echo dbFillSource::execute([Ertel::SOURCE_DEFINITION_FILE]);
+            echo dbFillSource::execute([Cura5::SOURCE_DEFINITION_FILE]);
             echo dbFillSource::execute([Newalch::SOURCE_DEFINITION_FILE]);
             echo dbFillSource::execute([Wikidata::SOURCE_DEFINITION_FILE]);
+            echo dbFillSource::execute([G5::SOURCE_DEFINITION_FILE]);
             echo occus1::execute();
             
+//exit;            
             foreach($filesGauqA as $datafile){
                 echo Atmp2db::execute([$datafile, 'tmp2db', 'small']);
             }
@@ -196,7 +203,9 @@ class all implements Command {
             echo D10tmp2db::execute(['D10', 'tmp2db', 'small']);
             echo E1E3tmp2db::execute(['E1', 'tmp2db', 'small']);
             echo E1E3tmp2db::execute(['E3', 'tmp2db', 'small']);
+//exit;
             
+*/
             echo M5medicsTmp2db::execute(['small']);
             
             echo M1writersTmp2db::execute(['small']);

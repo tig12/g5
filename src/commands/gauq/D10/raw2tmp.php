@@ -11,7 +11,7 @@ namespace g5\commands\gauq\D10;
 use g5\G5;
 use tiglib\patterns\Command;
 use g5\commands\gauq\LERRCP;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\Cura5;
 
 class raw2tmp implements Command {
     
@@ -145,7 +145,7 @@ class raw2tmp implements Command {
             [$new['NUM'], $new['C_APP']] = self::compute_corr_app(trim($cur[0]));
             [$new['FNAME'], $new['GNAME']] = self::compute_name(trim($cur[1]));
             // date time
-            $day = Cura::computeDay(['DAY' => $cur[3], 'MON' => $cur[4], 'YEA' => $cur[5]]);
+            $day = Cura5::computeDay(['DAY' => $cur[3], 'MON' => $cur[4], 'YEA' => $cur[5]]);
             if($cur[6] == '-----'){
                 // Concerns one line without birth time
                 // 1098!	Rose Peter		SP	14	4	1941	-----	5h	39N6	84W31	Cincinnati, OH
@@ -165,8 +165,8 @@ class raw2tmp implements Command {
             $new['PLACE'] = trim($tmp[0]);
             $new['CY'] = self::COUNTRY;
             $new['C2'] = trim($tmp[1]);
-            $new['LG'] = Cura::computeLg($cur[9]);
-            $new['LAT'] = Cura::computeLat($cur[8]);
+            $new['LG'] = Cura5::computeLg($cur[9]);
+            $new['LAT'] = Cura5::computeLat($cur[8]);
             // @todo link to geonames
             $new['OCCU'] = self::compute_profession($cur[2]);
             $csv .= implode(G5::CSV_SEP, $new) . "\n";

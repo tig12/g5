@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Differences between Gauquelin 1955 and Cura | Gauquelin5</title>
+    <title>Differences Gauquelin 1955 and Cura5 | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
-    <meta name="description" content="">
+    <meta name="description" content="Differences between Gauquelin 1955 and LERRCP as found on cura.free.fr ">
     <meta name="robots" content="index,follow">
     <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
     <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
@@ -30,9 +30,11 @@
 </nav>
 
 <header>                                                                                                                                         
-<h1>Differences Gauquelin 1955 - Cura</h1>
+<h1>Differences Gauquelin 1955 - Cura5</h1>
 <div class="intro">
-This is done by comparing files of <code>data/build/g55-edited/</code> and files of <code>data/tmp/cura/</code>.
+Differences between "L'influence des astres" and LERRCP as found on cura.free.fr.
+<br>Permit to complete the database and identify possible date errors.
+<br>This is done by comparing files of <code>data/build/g55-edited/</code> and files of <code>data/tmp/cura/</code>.
 </div>
 </header>
 
@@ -136,7 +138,7 @@ Both Ertel and Nienhuys say that one record was suppressed from the group 570 sp
 <h3><a name="1-2-different-dates">Different dates</a></h3>
 The command (informative only)
 <pre>php run-g5.php g55 570SPO edited2cura date</pre>
-lists the differences between dates of Cura A files and Gauquelin 1955 groups.
+lists the differences between dates of Cura5 A files and Gauquelin 1955 groups.
 <br>This command doesn't consider timezone offset, only compares days and hours.
 <br>
 <br>Warning : Current execution of this command gives now different results because some corrections were included in <code>3-cura-tweaked/A1.yml</code>.
@@ -157,7 +159,7 @@ lists the differences between dates of Cura A files and Gauquelin 1955 groups.
 Bug in equation of time ?
     </li>
     <li>
-        <b>Some lines show real differences between Cura files and Gauquelin 1955 book</b> :                                               
+        <b>Some lines show real differences between Cura5 files and Gauquelin 1955 book</b> :                                               
 <pre>
 different hours :
                                  cura  | g55
@@ -175,18 +177,18 @@ different days :
     </li>
 </ul>
 
-Marcel Thil can be checked using online civil registries. Other dates are too recent (privacy act)
+One record, Marcel Thil, can be checked using online civil registries. Other dates are too recent (privacy protection laws).
 <ul class="spaced margin-top">
     <li>
         <code>688 BOX Thil Marcel 1904-05-29</code>
         <br><a href="https://en.wikipedia.org/wiki/Marcel_Thil">English Wikipedia</a> gave a different date (1904-05-25), but <a href="https://fr.wikipedia.org/wiki/Marcel_Thil">french wikipedia</a> gives the same date (1904-05-29).
         <br>Birth certificate is available online : <a href="http://archives.haute-marne.fr/viewer/series/AD52_Edepot_stdizierE01702_01/">Registres paroissiaux et d'état civil - collection communale SAINT-DIZIER</a>, p 36 / 88. It says "vingt neuf mai à dix heures du soir" ; <a href="img/birth-certificates/1904-05-29-thil-marcel.jpg">see image</a>. English wikipedia is now fixed.
-        <br>Cura is then correct, both for day and time.
+        <br>Cura5 is then correct, both for day and time.
         <br>Fix not needed
     </li>
     <li>
         <code>36 ATH El Mabrouk Mohamed</code>
-        <br>Can be found on web pages (for example <a href="https://fr.wikipedia.org/wiki/Patrick_El_Mabrouk">wikipedia</a> or <a href="http://www.racingpast.ca/bob-phillips.php?id=46">racingpast.ca</a>) as Patrick El Mabrouk, and the birthdate (1928-10-10) differs from Cura and G55.
+        <br>Can be found on web pages (for example <a href="https://fr.wikipedia.org/wiki/Patrick_El_Mabrouk">wikipedia</a> or <a href="http://www.racingpast.ca/bob-phillips.php?id=46">racingpast.ca</a>) as Patrick El Mabrouk, and the birthdate (1928-10-10) differs from Cura5 and G55.
         <br>Not present in CFEPP paper book.
         <br>Not fixed - waiting for a reliable source.
     </li>
@@ -204,7 +206,7 @@ Marcel Thil can be checked using online civil registries. Other dates are too re
     <li>
         <code>1277 FOO Cheuva André</code>
         <br>Birth certificate is available online : <a href="https://archivesdepartementales.lenord.fr/?id=recherche_etat_civil_detail&doc=accounts%2Fmnesys_ad59%2Fdatas%2Fir%2FEtat%20civil%2FFRAD059_MI_A_Z_2011_07_01%2Exml&page_ref=595959&unittitle=%20HELLEMMES-LILLE%20N%20/%20[1907-1909]&unitid=&unitdate=1907-1909">HELLEMMES-LILLE N / [1907-1909]</a>, p 115 / 237. Date is "aujourd'hui, trente mai, à quatre heures du matin".
-        <br>Cura is OK ; G55 is erroneous.
+        <br>Cura5 is OK ; G55 is erroneous.
         <br>Fix not needed
     </li>
     <li>
@@ -226,10 +228,10 @@ Marcel Thil can be checked using online civil registries. Other dates are too re
 <h3><a name="1-3-different-occupation-codes">Different occupation codes</a></h3>
 The command
 <pre>php run-g5.php g55 570SPO edited2cura occu</pre>
-generates the following table containing the differences for occupation codes between 1955 original group and Cura file A1.
+generates the following table containing the differences for occupation codes between 1955 original group and Cura5 file A1.
 
 <table class="wikitable margin">
-    <tr><th>NUM</th><th>FAMILY</th><th>GIVEN</th><th>DATE</th><th>PLACE</th><th>OCCU<br>Cura</th><th>OCCU<br>G55</th>
+    <tr><th>NUM</th><th>FAMILY</th><th>GIVEN</th><th>DATE</th><th>PLACE</th><th>OCCU<br>Cura5</th><th>OCCU<br>G55</th>
     <tr>
         <td>80</td>
         <td>Veste</td>
@@ -313,7 +315,7 @@ generates the following table containing the differences for occupation codes be
     <tr>
 </table>
 
-This shows that the persons classified in "Sports féminins" in Gauquelin 1955 were dispatched in their respective sports in Cura files.
+This shows that the persons classified in "Sports féminins" in Gauquelin 1955 were dispatched in their respective sports in Cura5 files.
 <br>
 <br>But two cases classified as NAT (natation - swimming) in cura data, and PAT (patin à roulettes - roller skate) in Gauquelin book need an explanation.
 
@@ -361,10 +363,10 @@ This shows that the persons classified in "Sports féminins" in Gauquelin 1955 w
                     <li>
                         <a href="g55.html">Gauquelin 1955</a>
                         <ul>
+                            <li><a href="g55-restore.html">Matching G55 - LERRCP</a></li>
+                            <li><a href="g55-curadiff.html">Differences G55 - Cura5</a></li>
                             <li><a href="g55-884-priests.html">884 priests</a></li>
                             <li><a href="g55-361-painters.html">361 minor painters</a></li>
-                            <li><a href="g55-restore.html">Other groups</a></li>
-                            <li><a href="g55-curadiff.html">Differences with Cura 5</a></li>
                         </ul>
                     </li>
                 </ul>

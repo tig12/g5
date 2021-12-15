@@ -10,7 +10,7 @@
 namespace g5\commands\gauq;
 
 use g5\app\Config;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\Cura5;
 use g5\model\Group;
 use g5\model\Source;
 use tiglib\arrays\csvAssociative;
@@ -140,11 +140,11 @@ class LERRCP {
         $source->data['name'] = "CURA5 file $datafile";
         $source->data['type'] = 'file';
         $source->data['authors'] = ['Patrice Guinard'];
-        $pageName = substr(Cura::CURA_URLS[$datafile], strrpos(Cura::CURA_URLS[$datafile], '/') +1);
+        $pageName = substr(Cura5::CURA_URLS[$datafile], strrpos(Cura5::CURA_URLS[$datafile], '/') +1);
         $source->data['description'] = "Web page containing part of Gauquelins' data published in LERRCP booklet $datafile."
-            . '<br>Original URL : <a href="' . Cura::CURA_URLS[$datafile] . '">' . $pageName . '</a>.';
+            . '<br>Original URL : <a href="' . Cura5::CURA_URLS[$datafile] . '">' . $pageName . '</a>.';
         $source->data['parents'][] = LERRCP::datafile2bookletSourceSlug($datafile);
-        $source->data['parents'][] = Cura::SOURCE_SLUG;
+        $source->data['parents'][] = Cura5::SOURCE_SLUG;
         return $source;
     }
     

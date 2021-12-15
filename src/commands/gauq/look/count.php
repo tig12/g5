@@ -11,7 +11,7 @@ namespace g5\commands\gauq\look;
 use g5\app\Config;
 use tiglib\patterns\Command;
 use g5\commands\gauq\LERRCP;
-use g5\commands\gauq\Cura;
+use g5\commands\gauq\Cura5;
 use g5\commands\gauq\GauqRouter;
 use tiglib\arrays\csvAssociative;
 
@@ -43,7 +43,7 @@ class count implements Command {
             foreach($rows as $row){
                 $N[$datafile]++;
             }
-            $totalCura += Cura::CURA_CLAIMS[$datafile][0];
+            $totalCura += Cura5::CURA_CLAIMS[$datafile][0];
         }
         $totalG5 = array_sum($N);
         
@@ -59,16 +59,16 @@ class count implements Command {
              . '<th>Explanation</th>'
              . "</tr>\n";
         foreach($datafiles as $datafile){
-            $delta = Cura::CURA_CLAIMS[$datafile][0] - $N[$datafile];
+            $delta = Cura5::CURA_CLAIMS[$datafile][0] - $N[$datafile];
             $res .= '<tr>';
-            $href = Cura::CURA_URLS[$datafile];
+            $href = Cura5::CURA_URLS[$datafile];
             $res .= '<td><a href="' . $href . '">' . $datafile . '</a></td>';
             $res .= '<td>' . LERRCP::LERRCP_INFOS[$datafile][0] . '</td>';
             $res .= '<td>' . LERRCP::LERRCP_INFOS[$datafile][3] . '</td>';
-            $res .= '<td class="right">' . number_format(Cura::CURA_CLAIMS[$datafile][0], 0, '.', ' ') . '</td>';
+            $res .= '<td class="right">' . number_format(Cura5::CURA_CLAIMS[$datafile][0], 0, '.', ' ') . '</td>';
             $res .= '<td class="right bold">' . number_format($N[$datafile], 0, '.', ' ') . '</td>';
             $res .= '<td>' . $delta . '</td>';
-            $res .= '<td>' . Cura::CURA_CLAIMS[$datafile][2] . '</td>';
+            $res .= '<td>' . Cura5::CURA_CLAIMS[$datafile][2] . '</td>';
             $res .= '</tr>' . "\n";
         }
         
