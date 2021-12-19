@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Implementation of Command interface for cura dataset.
+    Implementation of Command interface for gauq namespace.
     This class is needed because user's vocabulary is different from generic mechanism :
     - User can say 'A' to designate all files of serie A.
     - User can say 'E1' or 'E3', and this is handled by sub-package 'E1_E3'.

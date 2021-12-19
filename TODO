@@ -2,6 +2,9 @@
 
 - see php bug - https://bugs.php.net/bug.php?id=81002
 
+- Column TZO is useless in series A tmp fields => remove ? 
+  See coherence with other imports - could be removed everywhere if always expressed in date fields
+
 - remove useless fields from table source:
   replace title, isbn etc by 'details', kv map depending on source type.
 

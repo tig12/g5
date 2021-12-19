@@ -14,8 +14,8 @@
     (Françoise Gauquelin), 2nd edition, 1991.
 
     @license    GPL
-    @history    2017-01-03 00:09:55+01:00, Thierry Graff : Creation 
-    @history    2017-05-04 10:38:22+02:00, Thierry Graff : Adaptation for autonom use 
+    @history    2017-01-03 00:09:55+01:00, Thierry Graff : Creation
+    @history    2017-05-04 10:38:22+02:00, Thierry Graff : Adaptation for autonom use
     @history    2019-06-11 10:41:23+02:00, Thierry Graff : Integration to tiglib
     @history    2021-12-19 00:53:48+01:00, Thierry Graff : Use Françoise Gauquelin instead of "Traité de l'heure dans le monde"
 ********************************************************************************/

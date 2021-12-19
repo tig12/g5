@@ -33,62 +33,41 @@
 </header>
 
 <article>
-<nav class="toc">
-    <ul>
-        <li>
-            <a href="#association-cli-executed-code">Association CLI - executed code</a>
-        </li>
-    </ul>
-</nav>
+
 The code is namespaced ; main namespace name is <code>g5</code>.
 <br>Code is PSR-4 (namespace hierarchy corresponds to directory hierarchy, like in java).
 <br>Top-level namespace (<code>g5</code>) is located in <code>src/</code>.
+<br>Another top-level namespace is used (<code>vendor</code>) is located in <code>vendor/</code>.
 <br>
-<br>All transformations on data are done in package <code>g5\commands</code>.
+<br>All transformations on data are done in namespace <code>g5\commands</code>.
 
 <!-- ********************************************************************************* -->
 <h2><a name="association-cli-executed-code">Association CLI - executed code</a></h2>
 
-The command line interface (CLI) is handled by <code>run-g5.php</code>. To interpret the parameters typed by the user, a convention is used.
-<br>The program uses the notions of 
+The command line interface (CLI) is handled by <code>run-g5.php</code>. To interpret the parameters typed by the user, a convention is used:
 <ul>
-    <li><b>data set</b> (like <code>cura</code> for cura.free.fr, <code>newalch</code> for newalchemypress.com),</li>
-    <li><b>data file</b> within a data set (like file A2),</li>
-    <li><b>action</b> (like <code>raw2tmp</code>, which means "convert raw file to csv file").</li>
+    <li>The 3 first parameters are used to determine which class will be executed.</li>
+    <li>These parameters correspond to the namespace hierarchy containing the executed class.</li>
+    <li>The executed class must implement an interface, <code>g5\app\Command</code>, which impose to provide a method called <code>execute()</code>.</li>
+    <li>Following parameters are passed in an array to the method <code>execute()</code></li>
 </ul>
 
-<br>Each data set corresponds to a sub-package of <code>g5\commands</code>.
-<br>Each datafile corresponds to a sub-package of dataset's package.
-<br>Each action corresponds to a class located in this sub-package.
-<br>For example, code operating on file <a href="https://newalchemypress.com/gauquelin/gauquelin_docs/3a_sports.txt">3a_sports.txt</a> from newalchemypress.com is located in package <code>g5\commands\newalch\ertel4391</code>.
-<br>
-<br>When the user types a command, the CLI checks, in this order :
+<br>Example: <code>php run-g5.php ertel sport look date</code> triggers the execution of <code>g5\ertel\sport\look::execute(['date'])</code>
+
+<!-- ********************************************************************************* -->
+<h2>One exception</h2>
+
+This basic and rigid mechanism proved to be sufficient for most cases. It is convenient because it permits to add new commands which can be used directly without having to change a configuration, but couldn't fill the need to handle Gauquelin files of series A. For example, to have the ability to issue commands like
+<br><code>php run-g5.php gauq A1 tmp2db</code>
+<br><code>php run-g5.php gauq A2 tmp2db</code>
+<br>would impose namespace <code>gauq</code> to have a sub-namespace <code>A1</code> and a sub-namespace <code>A2</code> etc.
+<br>To handle this situation, a new convention was added:
 <ul>
-    <li>
-        Does this dataset have a class implementing interface <code>g5\patterns\Command</code> ? If yes, the parameters are passed to the <code>execute()</code> method of this class.
-        <br>Dataset's command takes the control and can re-interpret parameters and makes a custom dispatch to command(s) of sub-packages.
-        <br>cura and g5 datasets use this mechanism.
-    </li>
-    <li>
-        If not, CLI tries to find a class <code>g5\commands\dataset\datafile\action</code> and call its method <code>execute()</code>.
-        <br>This is the default mechanism which permits to add new datasets and new datafiles automatically handled by the system, if no class implementing <code>Command</code> is present in the dataset's namespace.
-        
-    </li>
+    <li>If namespace corresponding to parameter 1 contains a class implementing <code>Command</code> interface, the program transmits the control to this class.</li>
+    <li>Otherwise, default mechanism is used.</li>
 </ul>
 
-<br>In both cases, the CLI doesn't know anything else about the class that will execute. It only selects the right code to call and passes the parameters (a <i>Command</i> design pattern is used).
-<br>
-<br>Examples :
-<ul class="margin-bottom">
-    <li>
-        <code>php run-g5.php cura A raw2tmp</code> : the code sees that there is a class <code>g5\commands\cura\CuraCommand</code>, so this class is called.
-    </li>
-    <li>
-        <code>php run-g5.php ertel sport look profession</code> : there is no class implementing <code>Command</code> in package <code>g5\commands\newalch</code>, so class <code>g5\commands\newalch\ertel4391\look</code> will be called, and one parameter, <code>profession</code> will be passed to the method <code>execute()</code>.
-    </li>
-</ul>
-
-Implementation of this convention can be found in the package hierarchy, and in the code of class <code>g5\Run</code>
+<br>Implementation of these conventions can be found in the namespace hierarchy, and in the code of class <code>g5\Run</code>
 
 </article>
 </div><!-- end class="main" -->
@@ -197,7 +176,6 @@ Implementation of this convention can be found in the package hierarchy, and in 
         <span class="big1">Details</span>
         <ul>
             <li><a href="time.html">Time and timezone</a></li>
-            <li><a href="tweak2tmp.html">tweak2tmp</a></li>
             <li><a href="code-details.html">Code details</a></li>
         </ul>
     </li>

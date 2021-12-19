@@ -106,7 +106,7 @@ class raw2tmp implements Command {
             $res2[$day][] = $fields;
         }
         // Hack to fix error for Jean Lebris
-        // Should logically be in tweaks
+        // Should logically be in tweak files
         // put here because useful to merge the lists 
         if($datafile == 'A1'){
             $res2['1817-03-25'] = [['day' => '1817-03-25', 'pro' => 'SP', 'name' => 'Lebris Jean']];
@@ -545,5 +545,4 @@ class raw2tmp implements Command {
         }
         return $n2bis_fix;
     }
-}// end class    
-
+} // end class    

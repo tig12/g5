@@ -52,48 +52,40 @@ class legalTime implements Command {
                 continue;
             }
             
-            [$offset2, $err, $case] = offset_fr::compute($row1['DATE-UT'], $row1['LG'], $row1['C2'], 'HH:MM:SS');
+            [$offset, $err, $case] = offset_fr::compute($row1['DATE-UT'], $row1['LG'], $row1['C2'], 'HH:MM:SS');
             if($err != ''){
                 // no restoration
-                // $case (error code) is stored in tmp file, and will be used by tmp2db
+                // $case (error code) is stored in $row2['NOTES-DATE'] in tmp file, and will be used by tmp2db
                 $row2['NOTES-DATE'] = $case;
                 $res .= implode(G5::CSV_SEP, $row2) . "\n";
                 continue;
             }
-            // if  t1 = $row1['DATE-UT']
-            // and t2 = searched date = $row2['DATE-C'] :
-            // ut1 = t1 - offset1 ; ut2 = t2 - offset2
-            // ut1 = ut2
-            // => t1 - offset1 = t2 - offset2
-            // => t2 = t1 + offset2 - offset1 = t1 + delta
-            $offset1 = substr($row1['DATE-UT'], -6);
-            $offset1seconds = HHMMSS2seconds::compute($offset1);
-            $offset2seconds = HHMMSS2seconds::compute($offset2);
-            $delta = $offset2seconds - $offset1seconds;
-            $abs = abs($delta);
-            if($abs != 0){ // $offset2 != $offset1
-                // DATE = DATE with hour and offset modified
-                $t = new \DateTime($row1['DATE-UT']);
-                $interval = new \DateInterval('PT' . $abs . 'S');
-                if($delta > 0){
-                    $t->add($interval);
-                }
-                else{
-                    $t->sub($interval);
-                }
-                // if $offset2 ends with ':00', can be safely removed
-                if(substr($offset2, -3) == ':00'){
-                    $offset2 = substr($offset2, 0, -3);
-                }
-                $row2['DATE-C'] = $t->format('Y-m-d H:i') . $offset2;
+            
+            // Compute $row2['DATE-C'] (restored legal time)
+            // define ut = $row1['DATE-UT'] and t2  = $row2['DATE-C'] :
+            // ut = t2 - offset => t2 = ut + offset
+echo 'date-ut = ' . $row1['DATE-UT'] . "\n";
+//$offset = '-01:00:00';
+//$offset = '-00:02:34';
+echo "offset = $offset\n";
+            $offsetSeconds = HHMMSS2seconds::compute($offset);
+            $t = new \DateTime($row1['DATE-UT']);
+            $interval = new \DateInterval('PT' . abs($offsetSeconds) . 'S');
+            if($offsetSeconds < 0){
+                $interval->invert = 1;
+            }
+            $t->add($interval);
+            if(substr($offset, -3) == ':00'){
+                // don't include useless seconds
+                $offset = substr($offset, 0, -3);
+                $row2['DATE-C'] = $t->format('Y-m-d H:i');
             }
             else{
-                // Here $offset1 = $offset2
-                // As $offset1 is always 0h or -1h, it means that birth time does not include seconds
-                // due to longitude computation => seconds can be removed from birth time
-                // Can also be removed from offset (because it is 0h or -1h)
-                $row2['DATE-C'] = substr($row2['DATE-UT'], 0, 16) . substr($offset2, 0, -3);
+                $row2['DATE-C'] = $t->format('Y-m-d H:i:s');
             }
+            $row2['OFFSET'] = $offset;
+echo 'date-c = ' . $row2['DATE-C'] . "\n";
+exit;
             $nCorrected++;
             $res .= implode(G5::CSV_SEP, $row2) . "\n";
         }
@@ -105,4 +97,3 @@ class legalTime implements Command {
     }
     
 } // end class
-

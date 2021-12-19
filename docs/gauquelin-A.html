@@ -30,16 +30,24 @@
 </nav>
 
 <header>
-<h1>Gauquelin LERRCP - serie A</h1>
+<h1>Gauquelin LERRCP - series A</h1>
 <div class="intro">
-    This page describes the corrections done on files A1 to A6 while importing html pages from cura.free.fr .
+    LERRCP Series A are the first booklets published by Gauquelin laboratory in 1970 and 1971. Each booklet contains a list of famous persons used by the Gauquelins in their statistical experiments.
+    <br>G5 uses <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/17archg.html">Cura database version 5</a> to include these data.
+     <br>Cura announces <span class="bold big2">15 940</span> persons in A files.
+     <br>G5 finds <span class="bold big2">15 788</span> unique persons.
+     <br>The difference comes from the presence of <a href="gauquelin.html#duplicates">duplicates</a> (the same person being listed in 2 or 3 different files).
+    <!-- 2087+3643+3046+2720+2410+2026+449 = 15940 -->
+    
+    <br><br>This page describes the corrections done on files A1 to A6 while importing html pages of cura.free.fr.
+    <br>The structure of Cura web pages is such that import is not a straightforward task.
     <br>The main problems with these files are :
     <ul>
-        <li>Reconstitute the names.</li>
-        <li>Restore legal birth times.</li>
+        <li>Names and birth informations are given in two distinct lists that need to be merged.</li>
+        <li>The pages do not list legal birth times, but UTC (universal time).</li>
     </ul>
-    <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/17archg.html">cura.free.fr</a> announces <b>15 940</b> persons in A files. G5 find <b>15 790</b> unique persons ; the difference comes from the presence of <a href="gauquelin.html#duplicates">duplicates</a> (one person listed in 2 or 3 files).
-    <!-- 2087+3643+3046+2720+2410+2026+449 =  -->
+    These problems are partially handled by current g5 code, but not completely.
+    
 </div>
 </header>
 
@@ -79,21 +87,31 @@
     </ul>
 </nav>
 
-
+<!-- ********************************************************************************* -->
+<h2>G5 integration</h2>
 
 Raw files are imported in database with the following commands :
 <pre>
 php run-g5.php gauq A raw2tmp small
-php run-g5.php gauq A addGeo small
 php run-g5.php gauq A tweak2tmp
+php run-g5.php gauq A addGeo small
+php run-g5.php gauq A legalTime
+
 php run-g5.php gauq A tmp2db
 </pre>
 
+Input data are a copy of Cura html pages, located in <code>data/raw/gauq/lerrcp/</code>.
+<br>Step <code>raw2tmp</code> convert these html pages to CSV files stored in <code>data/tmp/gauq/lerrcp</code>.
+<br>Steps <code>tweak2tmp</code>, <code>addGeo</code> and <code>legalTime</code> bring corrections to these tmp files.
+<br>Step <code>tmp2db</code> finally imports the corrected tmp files in database.
+
+
 <!-- ********************************************************************************* -->
 <h2><a name="raw2tmp">raw2tmp</a></h2>
+The main task of this command is to merge the two lists (list with names and list with precise birth data).
 
-This command needs a parameter to indicate what it should print :
-<pre>php run-g5.php gauq A raw2tmp</pre>
+<br><br>This command needs a parameter to indicate what it should print :
+<pre>php run-g5.php gauq A1 raw2tmp</pre>
 <pre>
 MISSING PARAMETER : raw2tmp needs a parameter to specify which output it displays. Can be :
   small : echoes only global results
@@ -102,10 +120,8 @@ MISSING PARAMETER : raw2tmp needs a parameter to specify which output it display
 
 <!-- ************************************* -->
 <h3><a name="1-1-profession-codes">Profession codes</a></h3>
-In some files of serie A, the precise profession codes are not associated to the records. This is possible to fix thanks to the notices that are present on cura.free.fr pages.
+In some files of serie A, the precise profession codes are not associated to the records. This is possible to fix thanks to the notices that are present on Cura pages.
 <br>These informations were included to the program (see constant <code>PROFESSIONS_DETAILS</code> of class <code>g5\commands\gauq\A\A</code>) ; each record is associated to its precise profession in the resulting csv file.
-<br>
-<br><a href="output-format.html#occupation-codes">Page "output format"</a> contains a list of profession codes used in the generated files.
 
 
 <!-- ************************************* -->
@@ -124,7 +140,7 @@ Each page of serie A contain 3 lists :
 <h4>Merge lists</h4>
 The program must merge the two lists.
 <br>A check done by program 
-<pre>php run-g5.php cura A build lists</pre>
+<pre>php run-g5.php cura A look lists</pre>
 shows that list with precise birth data differ from lists with names (lists with names contain less persons), so a trivial merge is not possible.
 <br>
 <br>Unfortunately, these 2 lists don't share a common unique identifier which would permit to merge without ambiguity.
@@ -207,6 +223,17 @@ Fortunately, name restoration can be bettered because other files contain common
 
 Name modification is done when these files are imported in database.
 
+<br><br>Name fixes coming from Ertel file is done with this command :
+<pre>php run-g5.php ertel sport fixA1 update</pre>
+It permits to restore 100 % of names not identified by step <code>raw2csv</code> in A1.
+<br>See <a href="ertel-4391-sport.html#integration-to-g5">page on Ertel 4391</a>, paragraph "Fix cura A1 names".
+<br>
+<br>NB : <code>raw2csv</code> leaves 118 names unidentified and this step restores 117. This is because one name is handled by step <code>tweak2tmp</code>.
+
+<br><br>Name fixes coming from Arno Müller's file of 1083 medical doctors is used to better names and birth days in A2.
+<br>This permits to fix only 12 unidentified names in A2.
+<br>See <a href="muller5-1083-medics.html">page on Müller 1083</a>, paragraphs "Fix Gauquelin names" and "Fix Gauquelin days".
+
 <!-- ************************************* -->
 <h3><a name="1-3-small-errors">Small errors</a></h3>
 
@@ -246,51 +273,84 @@ This is not present in pages including names (for example present in <a href="ht
 <br>The explanation is given in <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/17archg.html">main Cura page</a> : they correspond to records containing errors in the original publication (LERRCP), and corrected in Françoise Gauquelin's journal <i>Astro-Psychological Problems</i>.
 <br>This information is not yet included in g5 database.
 
+<!-- ********************************************************************************* -->
+<h2>tweak2tmp</h2>
+Auxiliary files located in <code>data/db/init/lerrcp-tweak</code> permit to store corrections used to fix errors detected in steps <code>addGeo</code> and <code>legalTime</code>.
 
 <!-- ********************************************************************************* -->
 <h2><a name="addgeo">addGeo</a></h2>
 
 This step bring corrections to place names and compute geonames id for non-ambiguous cases.
 
+<br>It is useful for several purposes:
+<ul>
+    <li>Correct city names, which are approximative in Cura web pages.</li>
+    <li>Add precision to longitudes, which is useful for legal time computation.</li>
+    <li>Prepare <a href="wikidata.html">matching with wikidata</a>.</li>
+</ul>
 
-<!-- ********************************************************************************* -->
-<!-- ********************************************************************************* -->
-<div class="margin-top2">
-<div class="warning">
-    Following documentation is obsolete.
-    <br>Corresponds to an earlier stage of development, before merging all imported files in a database.
-</div>
-</div>
-<!-- ********************************************************************************* -->
-<!-- ********************************************************************************* -->
+It uses an auxiliary postgresql database where geonames informations are stored (see <a href="install.html">page install</a>).
 
+<br><br>This command needs a parameter to indicate what it should print :
+<pre>php run-g5.php gauq A1 addGeo</pre>
+<pre>
+WRONG USAGE - This command needs a parameter indicating the type of report
+- full : lists all the place names that can't be matched to geonames.
+- medium : lists the places with several matches to geonames.
+- small : only echoes global information about matching.
+</pre>
 
-<!-- ********************************************************************************* -->
-<h2><a name="better-a1-names-with-ertel4391">Better A1 names with ertel4391</a></h2>
-The command :
-<pre>php run-g5.php ertel sport fixA1 update</pre>
-permits to restore 100 % of names not identified by step <code>raw2csv</code> in A1.
-<br>See <a href="ertel-4391-sport.html#integration-to-g5">page on Ertel 4391</a>, paragraph "Fix cura A1 names".
+It modifies records of <code>data/tmp/gauq/lerrcp/</code> only if there is a unique match to geonames.
+<br>In case of match, fills column <code>GEOID</code>, and updates column <code>PLACE</code> (because place names in geonames are generally better).
 <br>
-<br>NB : <code>raw2csv</code> leaves 118 names unidentified and this step restores 117. This is because one name is handled by step <code>tweak2tmp</code>.
-
-<!-- ********************************************************************************* -->
-<h2><a name="better-a2-days-and-names-with-muller1083">Better A2 days and names with muller1083</a></h2>
-
-Arno Müller's file of 1083 medical doctors is used to better names and birth days in A2.
-<br>This permits to fix only 12 unidentified names in A2.
-<br>See <a href="muller5-1083-medics.html#integration-to-g5">page on Müller 1083</a>, paragraphs "Fix Cura names" and "Fix Cura days".
+<br>See <a href="geonames.html">page about Geonames</a>.
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="legaltime">legalTime</a></h2>
+<h2>The problem of time</a></h2>
+
+Gauquelin data available on Cura web pages are sometimes given in a format that generates a problem.
+<br>This problem occurs in all files of series A, B, F, NH, and in files D9a, D9b, D9c. Hopefully, D6, D10, E1, E3 are not concerned.
+<br>
+<br>For example, record n° 798 of file A1 is given like this in cura.free.fr :
+<pre>
+YEA	MON	DAY	PRO	NUM	COU	H	MN	SEC	TZ	LAT	LON	COD	CITY		
+(...)
+1909	3	14	C	798	F	4	50	40	0	48N 0	4W 6	29	PLEYBEN
+</pre>
+This means that birth time is <code><b>04:50:40</b></code> and that timezone offset = 0.
+<br>
+<br>This can be compared with a scan of Gauquelins' LERRCP publication provided in cura.free.fr ; it shows that the same record was given in a different form :
+<img class="margin05 border" src="img/A1-798.jpg" alt="Record A1-798 of Gauquelins' LERRCP">
+This means that birth time is <code><b>05:00:00</b></code>, and timezone offset is not provided.
+<br>
+<br>Cura's value <code>04:50:40</code> is the result of a computation : legal time - timezone offset.
+<br>This is coherent with the notice found in <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdA1y.html">Cura A1 page</a> :
+<cite class="margin05">Birthtime is converted to standard time, either for zone 0 (= GMT) or -1 (= CET)</cite>
+
+The way birth times are expressed in cura site adds information (the timezone offset). It's cool because the information can be directly used to compute birth chart. 
+<br>But <b>expressing times this way should be avoided</b> because two distinct informations are mixed in one field :
+<ul>
+    <li>The legal time, as it can be read in civil registries.</li>
+    <li>The timezone offset.</li>
+</ul>
+
+It's a problem, because if one wants to check the data, it's impossible to check legal time without worrying about timezone offset.
+<br>
+<br><b>Doing like that generates a loss of information</b>.
+<br>If the data is not correct, it is not possible to answer to the question : does it come from an error on legal time or on timezone offset computation ?
+
+
+
+<!-- ********************************************************************************* -->
+<h2><a name="legaltime">Restoring legal time</a></h2>
 
 The command :
 <pre>php run-g5.php cura A legalTime</pre>
-adds a column <code>DATE_C</code> (= date corrected) to the generated files.
+adds a column <code>DATE-C</code> (= date corrected) to the tmp files.
 <br>Example for record A2-1 (Joseph Jean Abadie), 
-<br><code>DATE = 1873-12-15 15:59:40+00:00</code> : information from cura.free.fr unchanged
-<br><code>DATE_C = 1873-12-15 16:04+00:05:03</code> : time is modified and timezone offset (+00:05:03) is added.
+<br><code>DATE-UT = 1873-12-15 15:59:40+00:00</code> : information from cura.free.fr unchanged
+<br><code>DATE-C = 1873-12-15 16:04+00:05:03</code> : time is modified and timezone offset (+00:05:03) is added.
 <br>
 <br>Here a bug appears, the legal birth time is probably 16:00, not 16:03. For dates prior to 1891-03-15, timezone offset computation involves longitude and equation of time.
 
@@ -341,22 +401,6 @@ Gauquelin 1955 place names are generally better than Cura places.
 <pre>php run-g5.php g55 570SPO edited2cura place list</pre>
 <pre>php run-g5.php g55 570SPO edited2cura place update</pre>
 
-
-<!-- ********************************************************************************* -->
-<h2><a name="addgeo">addGeo</a></h2>
-This command needs a parameter to indicate what it should print :
-<pre>php run-g5.php cura A1 addGeo</pre>
-<pre>
-WRONG USAGE - This command needs a parameter indicating the type of report
-- full : lists all the place names that can't be matched to geonames.
-- medium : lists the places with several matches to geonames.
-- small : only echoes global information about matching.
-</pre>
-
-It modifies records of <code>5-cura-csv/</code> only if there is a unique match to geonames.
-<br>In case of match, fills column <code>GEOID</code>, and updates column <code>PLACE</code> (because place names in geonames are generally better).
-<br>
-<br>See <a href="geonames.html">page about Geonames</a>.
 
 </article>
 </div><!-- end class="main" -->
@@ -465,7 +509,6 @@ It modifies records of <code>5-cura-csv/</code> only if there is a unique match 
         <span class="big1">Details</span>
         <ul>
             <li><a href="time.html">Time and timezone</a></li>
-            <li><a href="tweak2tmp.html">tweak2tmp</a></li>
             <li><a href="code-details.html">Code details</a></li>
         </ul>
     </li>
