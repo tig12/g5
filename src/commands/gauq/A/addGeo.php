@@ -73,7 +73,7 @@ class addGeo implements Command {
                 // continue;
             // }
             if($row['CY'] == 'FR'){
-                [$new['PLACE'], $new['C3']] = self::correct_place_fr($new['PLACE']);
+                $new['PLACE'] = self::correct_place_fr($new['PLACE']);
             }
             
             $slug = slugify::compute($new['PLACE']);
@@ -124,37 +124,26 @@ class addGeo implements Command {
     
     // ******************************************************
     /** 
-        Auxiliary of execute();
+        Corrects French place names
+        Auxiliary of execute().
         Not handled :
             Mouthiers-Hte-P
-        @return Array with 2 elements : place and C3 (admin level 3 = arrondissement).
-            C3 filled only for Paris and Lyon
+        @return Corrected place name
     **/
-    private static function correct_place_fr($str){
-        $place = $C3 = '';
+    private static function correct_place_fr(string $str): string {
+        $place;
         
         if(strtoupper($str) != $str){
-            // cura files contain only uppercased place names
+            // cura5 files contain only uppercased place names
             // => place name already corrected (by tweak2tmp step)
-            return [$str,$C3];
+            return $str;
         }
         
         $str = ucWords(strtolower($str), " -'/\t\r\n\f\v"); // delim = default + "-", "'" and "/"
-        
-        $parts = explode(' ', $str);
-              
-        // Paris and Lyon, sometimes arrondissement is present
-        // Would bug for Paris-l'Hôpital - not present in cura files
-        if(in_array($parts[0], ['Paris', 'Lyon'])){
-            preg_match('/(.*?) (\d+)/', $str, $m);
-            if(count($m) == 3){
-                return [$m[1], $m[2]]; // C3 found
-            }
-            return [$str, '']; // no C3
-        }
-        
+                      
         $lowers = ['Le', 'La', 'Les', 'Du', 'De', 'Des', 'Sur', 'En'];
         
+        $parts = explode(' ', $str);
         if(count($parts) != 1){
             $parts2 = [];
             for($i=0; $i < count($parts); $i++){
@@ -210,7 +199,7 @@ class addGeo implements Command {
         }
         
         $place = ucfirst($place); // for places starting for ex by "La "
-        // @todo FIX - for ex the character following "/" should be uppercased
+        // TODO FIX - for ex the character following "/" should be uppercased
         for($i=0; $i < 3; $i++){
             $place = strtr($place, [
                 'S/' => 'sur-',
@@ -222,8 +211,7 @@ class addGeo implements Command {
             ]);
             // Saint-Loup/Semouse
         }
-        return [$place, $C3];
+        return $place;
     }
     
-}// end class    
-
+} // end class    

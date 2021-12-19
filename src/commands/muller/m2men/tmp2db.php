@@ -104,7 +104,9 @@ class tmp2db implements Command {
                 // Update with M3 data (because birth place corresponds to Wikipedia) But should be checked
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['tzo'] = $line['TZO'];
-                $new['birth']['note'] = $line['TIMOD'];
+                if($line['TIMOD'] == 'LMT'){
+                    $new['birth']['lmt'] = true;
+                }
                 $new['birth']['place']['name'] = $line['PLACE'];
                 $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $muid);
@@ -139,7 +141,9 @@ class tmp2db implements Command {
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['tzo'] = $line['TZO'];
-                $new['birth']['note'] = $line['TIMOD'];
+                if($line['TIMOD'] == 'LMT'){
+                    $new['birth']['lmt'] = true;
+                }
                 $new['birth']['place']['name'] = $line['PLACE'];
 // TODO handle c1 and c2
 //                $new['birth']['place']['c1'] = $line['C1'];

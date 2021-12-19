@@ -53,7 +53,6 @@ class legalTime implements Command {
             }
             
             [$offset2, $err, $case] = offset_fr::compute($row1['DATE-UT'], $row1['LG'], $row1['C2'], 'HH:MM:SS');
-
             if($err != ''){
                 // no restoration
                 // $case (error code) is stored in tmp file, and will be used by tmp2db

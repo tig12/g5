@@ -9,3 +9,14 @@
   NUM: 568
   FNAME: Gaulle de
   GNAME: Charles
+
+-
+  NUM: 950
+  LG: 2.73222
+  LAT: 49.31111
+  DATE-UT: '1839-01-30 14:49:04'
+  build-notes: |
+    2021-12-18 22:00:09+01:00 This record is the same as A2-2886
+    Coordinates of birth place differ, both are erroneous.
+    DATE-UT also differ! Consultation of birth certificate shows that both are erroneous (Gauquelin recieved the declaration date, not the birth date) 
+    Error identified thanks to execution of tmp2db::checkDate().

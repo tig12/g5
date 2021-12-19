@@ -329,8 +329,8 @@ class raw2tmp implements Command {
             [$new['CY'], $new['C2']] = self::computeCountry($cur['COU'], $cur['COD']);
             $new['LG'] = Cura5::computeLg($cur['LON']);
             $new['LAT'] = Cura5::computeLat($cur['LAT']);
-            $new['GEOID'] = '';
-            $new['NOTES'] = '';
+//            $new['GEOID'] = '';
+//            $new['NOTES'] = '';
             $csv .= implode(G5::CSV_SEP, $new) . "\n";
             $csv_raw .= implode(G5::CSV_SEP, $raw[$new['NUM']]) . "\n";
             $nbStored ++;
@@ -388,7 +388,7 @@ class raw2tmp implements Command {
             // Paris, Lyon
             return [$m[1], $m[2]];
         }
-        // most common case case
+        // most common case
         return [$str, ''];
     }
     

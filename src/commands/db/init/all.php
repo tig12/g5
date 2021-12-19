@@ -122,7 +122,6 @@ class all implements Command {
                 . "Possible values for parameter :\n$possibleParams_str\n";
         }
         
-        $filesGauq = GauqRouter::computeDatafiles('all');
         $filesGauqA = GauqRouter::computeDatafiles('A');
         
         $t1 = microtime(true);
@@ -136,17 +135,24 @@ class all implements Command {
             echo "***********************\n";
             foreach($filesGauqA as $datafile){
                 echo Araw2tmp::execute([$datafile, 'raw2tmp', 'small']);
+                echo Gauqtweak2tmp::execute([$datafile, 'tweak2tmp']);
                 echo AaddGeo::execute([$datafile, 'addGeo', 'small']);
                 echo AlegalTime::execute([$datafile, 'legalTime']);
             }
+exit;
+            
             echo D6raw2tmp::execute(['D6', 'raw2tmp']);
+            echo Gauqtweak2tmp::execute(['D6', 'tweak2tmp']);
             echo D6addGeo::execute(['D6', 'addGeo']); // tmp code - addGeo needs to be fixed
+            
             echo D10raw2tmp::execute(['D10', 'raw2tmp']);
+            echo Gauqtweak2tmp::execute(['D10', 'tweak2tmp']);
+            
             echo E1E3raw2tmp::execute(['E1', 'raw2tmp', 'small']);
+            echo Gauqtweak2tmp::execute(['E1', 'tweak2tmp']);
+            
             echo E1E3raw2tmp::execute(['E3', 'raw2tmp', 'small']);
-            foreach($filesGauq as $datafile){
-                echo Gauqtweak2tmp::execute([$datafile, 'tweak2tmp']);
-            }
+            echo Gauqtweak2tmp::execute(['E3', 'tweak2tmp']);
             
             echo ErtelSportRaw2tmp::execute([]);
             echo ErtelSporttweak2tmp::execute([]);
@@ -179,8 +185,9 @@ class all implements Command {
             echo "***********************\n";
             echo "***  Fill database  ***\n";
             echo "***********************\n";
-/* 
             echo dbcreate::execute([]);
+            // Main sources are inserted here because they are used in various places
+            // Sources related to specific groups are inserted in the code of related tmp2db
             echo dbFillSource::execute([Gauquelin::SOURCE_DEFINITION_FILE]);
             echo dbFillSource::execute([LERRCP::SOURCE_DEFINITION_FILE]);
             echo dbFillSource::execute([Muller::SOURCE_DEFINITION_FILE]);
@@ -191,10 +198,11 @@ class all implements Command {
             echo dbFillSource::execute([G5::SOURCE_DEFINITION_FILE]);
             echo occus1::execute();
             
-//exit;            
             foreach($filesGauqA as $datafile){
                 echo Atmp2db::execute([$datafile, 'tmp2db', 'small']);
             }
+exit;            
+/* 
             echo dbFillPerson::execute(['A1.yml']);
             
             echo A6occu::execute([]);

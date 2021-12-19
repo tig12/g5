@@ -28,9 +28,6 @@ class Person {
                     Can be partial (containing only parts of the fields).
     **/
     public static function row2person($row){
-        if(isset($row['sources'])){
-            $row['sources'] = json_decode($row['sources'], true);
-        }
         if(isset($row['ids_in_sources'])){
             $row['ids-in-sources'] = json_decode($row['ids_in_sources'], true);
             unset($row['ids_in_sources']);
@@ -292,13 +289,6 @@ class Person {
         $this->data = array_replace_recursive($this->data, $replace);
     }
     
-    /** Adds one single source to field sources **/
-    public function addSource($sourceSlug){
-        if(!in_array($sourceSlug, $this->data['sources'])){
-            $this->data['sources'][] = $sourceSlug;
-        }
-    }
-    
     /** 
         Adds or updates a couple (source slug, id) in data['ids-in-sources']
     **/
@@ -434,7 +424,6 @@ class Person {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("insert into person(
             slug,
-            sources,
             ids_in_sources,
             ids_partial,
             name,
@@ -447,10 +436,9 @@ class Person {
             history,
             issues,
             notes
-            )values(?,?,?,?,?,?,?,?,?,?,?,?,?,?) returning id");
+            )values(?,?,?,?,?,?,?,?,?,?,?,?,?) returning id");
         $stmt->execute([
             $this->data['slug'],
-            json_encode($this->data['sources']),
             json_encode($this->data['ids-in-sources']),
             json_encode($this->data['ids-partial']),
             json_encode($this->data['name']),
@@ -476,7 +464,6 @@ class Person {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("update person set
             slug=?,
-            sources=?,
             ids_in_sources=?,
             ids_partial=?,
             name=?,
@@ -493,7 +480,6 @@ class Person {
             ");
         $stmt->execute([
             $this->data['slug'],
-            json_encode($this->data['sources']),
             json_encode($this->data['ids-in-sources']),
             json_encode($this->data['ids-partial']),
             json_encode($this->data['name']),

@@ -8,7 +8,6 @@ z.*
 # by default, don't version data/
 # but version some subdirs of data/
 data/*
-!data/init
 !data/db
 !data/raw
 

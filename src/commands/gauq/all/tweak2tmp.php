@@ -34,7 +34,7 @@ class tweak2tmp implements Command {
         $datafile = $params[0];
         $tweaksFile = Config::$data['dirs']['init'] . DS . 'lerrcp-tweak' . DS . $datafile . '.yml';
         
-        $report = "--- $datafile tweak2tmp ---\n";
+        $report = "--- gauq $datafile tweak2tmp ---\n";
         
         if(!is_file($tweaksFile)){
             $report .= "Missing file $tweaksFile - nothing was modified.\n";

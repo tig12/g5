@@ -9,29 +9,32 @@
     - Some parts of depts 06, 04, 26, 74, 73 were not french before 1860
     - Between 1940-02 and 1942-11, France was divided in 2 zones (occupied and free)
         => a precise computation should take into account the precise local situation
-    Computations are based on "Traité de l'heure dans le monde", 5th edition, 1990
+    Computations were based on "Traité de l'heure dans le monde", 5th edition, 1990.
+    Computations are now based on "Problèmes de l'heure résolus pour le monde entier"
+    (Françoise Gauquelin), 2nd edition, 1991.
 
     @license    GPL
     @history    2017-01-03 00:09:55+01:00, Thierry Graff : Creation 
     @history    2017-05-04 10:38:22+02:00, Thierry Graff : Adaptation for autonom use 
     @history    2019-06-11 10:41:23+02:00, Thierry Graff : Integration to tiglib
+    @history    2021-12-19 00:53:48+01:00, Thierry Graff : Use Françoise Gauquelin instead of "Traité de l'heure dans le monde"
 ********************************************************************************/
 namespace tiglib\timezone;
 
 use tiglib\time\seconds2HHMMSS;
-use soniakeys\meeus\eqtime\eqtime;
+// use soniakeys\meeus\eqtime\eqtime; // useless if using Françoise Gauquelin definition of local time.
 
 class offset_fr {
     
     // return codes and messages
     const CASE_1871_1918_LORRAINE = 1;
-    const MSG_1871_1918_LORRAINE = 'TZ offset computation not done to avoid error (german zone 1871 - 1918, dept 54, 57, 88)';
+    const MSG_1871_1918_LORRAINE = 'TZ offset computation not done to avoid error (German zone 1871 - 1918, dept 54, 57, 88)';
     
     const CASE_1871_1918_ALSACE = 2;
-    const MSG_1871_1918_ALSACE = 'TZ offset computation not done to avoid error (german zone 1871 - 1918 , dept 67, 68)';
+    const MSG_1871_1918_ALSACE = 'TZ offset computation not done to avoid error (German zone 1871 - 1918 , dept 67, 68)';
     
     const CASE_WW2 = 3;
-    const MSG_WW2 = 'TZ offset computation not done to avoid error (german occupation WW2)';
+    const MSG_WW2 = 'TZ offset computation not done to avoid error (German occupation WW2)';
     
     const CASE_BEFORE_1891 = 4;
     
@@ -101,15 +104,25 @@ class offset_fr {
         
         if($date < '1891-03-15'){
             $case = self::CASE_BEFORE_1891;
+            /* 
             // From "Traité de l'heure dans le monde" :
             // legal hour HL = HLO, local hour at real sun
             // and UT = HLO - Lg - E (E = equation of time)
-            // offset = HL - UT
+            // definition of offset = HL - UT
             //        = HLO - (HLO - Lg - E)
             //        = Lg + E
             $lg_seconds = 240 * $lg; // 240 = 24 * 3600 / 360 = nb of time seconds per longitude degree
             $eqtime_seconds = eqtime::compute(substr($date, 0, 10));
             $offset_seconds = $lg_seconds + $eqtime_seconds;
+            */
+            // From "Problèmes de l'heure résolus pour le monde entier" (F. Gauquelin) :
+            // legal hour HL
+            // and UT = HL - Lg
+            // definition of offset = HL - UT
+            //        = HL - (HL - Lg)
+            //        = Lg
+            $lg_seconds = 240 * $lg; // 240 = 24 * 3600 / 360 = nb of time seconds per longitude degree
+            $offset_seconds = $lg_seconds;
             $hhmmss = $format == 'HH:MM' ? seconds2HHMMSS::compute($offset_seconds, true) : seconds2HHMMSS::compute($offset_seconds);
             $sign = ($offset_seconds < 0 && $hhmmss != '00:00') ? '-' : '+';
             $offset = $sign . $hhmmss;

@@ -120,7 +120,6 @@ class tmp2db implements Command {
             if(is_null($p)){
                 // insert new person
                 $p = new Person();
-                $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
                 $p->addIdPartial($lerrcpSource->data['slug'], $gqId);
                 $new = [];
@@ -139,7 +138,10 @@ class tmp2db implements Command {
                 }
                 $new['birth']['place']['name'] = $line['PLACE'];
                 $new['birth']['place']['c2'] = $line['C2'];
-                $new['birth']['place']['c3'] = $line['C3'];
+                if($line['C3']){
+                    // in France, useful only for Paris and Lyon arrondissements
+                    $new['birth']['place']['c3'] = $line['C3'];
+                }
                 $new['birth']['place']['cy'] = $line['CY'];
                 $new['birth']['place']['lg'] = (float)$line['LG'];
                 $new['birth']['place']['lat'] = (float)$line['LAT'];
@@ -151,7 +153,6 @@ class tmp2db implements Command {
                     $p->addIssue(Issue::CHK_DATE, $dateOrTimeIssue);
                 }
                 // repeat fields to include in $history
-                $new['sources'] = $source->data['slug'];
                 $new['ids_in_sources'] = [
                     $source->data['slug'] => $line['NUM'],
                 ];
@@ -176,8 +177,10 @@ class tmp2db implements Command {
                 if(!isset($line['OCCU'])){
                     throw new \Exception("Missing definition for occupation - {$line['NUM']} {$line['FNAME']} {$line['GNAME']} ");
                 }
+                // check date coherence - useful for persons present in several A files
+                // Not used anymore as all errors shown by this check were fixed
+                // $testDate = self::checkDate($datafile, $p, $line);
                 $p->addOccus($newOccus);
-                $p->addSource($source->data['slug']);
                 // does not addIdPartial(lerrcp) to conform with the definition of Gauquelin id:
                 // lerrcp id takes the value of the first volume where it appears.
                 // lerrcp id already affected in a previous file for this record.
@@ -217,12 +220,12 @@ class tmp2db implements Command {
     }
     
     /**
-        Computes a message indicating why legal time couldn't be restored
+        Computes a message indicating why legal time couldn't be restored.
         @param  $country
         @param  $case       See ofsset_* classes
     **/
     public static function buildTimeRestorationIssue(string $country, int $case): string {
-        $issue = "Legal time could not be restored fo the following reason:\n<br>";
+        $issue = "Legal time could not be restored for the following reason:\n<br>";
         switch($country){
             case 'FR': 
                 $issue .= offset_fr::MESSAGES[$case];
@@ -231,5 +234,34 @@ class tmp2db implements Command {
         return $issue;
     }
     
+    /**
+        Checks if the date stored in database is coherent with date found in current datafile.
+        The purpose is to detect incoherences between 2 files of series A.
+        @param      $datafile   The datafile currently processed (eg 'A2').
+        @param      $p          Person already stored in database, compared with the current line being treated.
+        @param      $line       Line of tmp file currently stored in db
+        @return     true if the 2 dates are coherent, false otherwise.
+    **/
+    public static function checkDate(string $datafile, Person $p, array $line): string {
+        // comes from previous tmp2db execution
+        $d1utc = $p->data['birth']['date-ut'];  // DATE-UT
+        $d1    = $p->data['birth']['date'];     // DATE-C
+        // comes from line currently imported
+        $d2utc = $line['DATE-UT'];
+        $d2    = $line['DATE-C'];
+        $msg = '';
+        if($d1utc != $d2utc || $d1 != $d2){
+            $msg = 'Date difference for ' . $p->data['slug'];
+            if($d1utc != $d2utc){
+                $msg .= "\n<br>Date UTC in " . ' ' . $p->data['ids-partial'][LERRCP::SOURCE_SLUG] . ' = ' . $d1utc;
+                $msg .= "\n<br>Date UTC in " . ' ' . LERRCP::gauquelinId($datafile, $line['NUM']) . ' = ' . $d2utc;
+            }
+            if($d1 != $d2){
+                $msg .= "\n<br>Date in " . ' ' . $p->data['ids-partial'][LERRCP::SOURCE_SLUG] . ' = ' . $d1;
+                $msg .= "\n<br>Date in " . ' ' . LERRCP::gauquelinId($datafile, $line['NUM']) . ' = ' . $d2;
+            }
+        }
+        return $msg;
+    }
     
 } // end class    

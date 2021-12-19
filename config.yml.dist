@@ -8,7 +8,7 @@
 dirs:
   output: data/output
   tmp:    data/tmp
-  # Auxiliary files - versioned in an other git repository
+  # Auxiliary files - versioned in another git repository
   aux:    /path/to/g5-aux
 
 # g5 database

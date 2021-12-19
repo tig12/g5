@@ -106,7 +106,9 @@ class tmp2db implements Command {
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['tzo'] = $line['TZO'];
-                $new['birth']['note'] = $line['TIMOD'];
+                if($line['TIMOD'] == 'LMT'){
+                    $new['birth']['lmt'] = true;
+                }
                 $new['birth']['place']['name'] = $line['PLACE'];
                 $new['birth']['place']['c1'] = $line['C1'];
                 $new['birth']['place']['c2'] = $line['C2'];
@@ -229,8 +231,8 @@ echo "NOTE: $localReport_html\n";
                 if($p->data['birth']['tzo'] == '' && $line['TZO'] != ''){
                     $new['birth']['tzo'] = $line['TZO'];
                 }
-                if($p->data['birth']['note'] == '' && $line['TIMOD'] != ''){
-                    $new['birth']['note'] = $line['TIMOD'];
+                if($line['TIMOD'] == 'LMT'){
+                    $new['birth']['lmt'] = true;
                 }
                 // birth place not handled correctly in Müller
                 //$new['birth']['place']['name'] = $line['PLACE'];
