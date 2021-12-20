@@ -42,7 +42,7 @@ class addGeo implements Command {
     public static function execute($params=[]): string{
         
         if(count($params) > 2){
-            return "INVALID PARAMETER : " . $params[2] . " - addGeo doesn't need this parameter\n";
+            return "INVALID PARAMETER : " . $params[2] . " - this command doesn't need this parameter\n";
         }
         
         $datafile = 'D6';

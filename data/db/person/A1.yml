@@ -6,7 +6,8 @@
 
 # Van Den Boorn Charles
 -
-  ACTION: update
+  ADMIN: 
+    ACTION: update
   ids-in-sources:
     a1: '513'
   occus:
@@ -29,7 +30,8 @@
       Page <a href="https://earlyaviators.com/eborn1.htm">https://earlyaviators.com/eborn1.htm</a> says: "11 July 1874 (some sources say 1873)". Gauquelin gives 1873. A check in civil registry is necessary to find out.
 
 -
-  ACTION: insert
+  ADMIN: 
+    ACTION: insert
   sources:
     - a1
     - ertel-sport

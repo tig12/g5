@@ -26,13 +26,13 @@ class look implements Command {
         Called by : php run-g5.php gauq D6 build <action>
         @param $params  array with 3 strings : 
                         - "D6" (useless here)
-                        - "build" (useless here)
+                        - "look" (useless here)
                         - action, which must be one of POSSIBLE_PARAMS.
         @return Report
     **/
     public static function execute($params=[]): string{
         if(count($params) > 3){
-            return "INVALID PARAMETER : " . $params[3] . " - build doesn't need this parameter\n";
+            return "INVALID PARAMETER : " . $params[3] . " - current command doesn't need this parameter\n";
         }
         if(count($params) < 3){
             return "MISSING PARAMETER : - build needs a parameter to specify the action.\n can be :\n"
@@ -46,7 +46,7 @@ class look implements Command {
     // ******************************************************
     /**
         Lists the rows without given name.
-        It has been used to build raw2tmp::$NAMES_CORRECTIONS
+        It has been used to build D6::NAMES_CORRECTIONS
     **/
     public static function execute_emptyGiven(): string{
         $csvFile = LERRCP::tmpFilename('D6');

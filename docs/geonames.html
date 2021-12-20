@@ -58,8 +58,9 @@ Relating places to a Geonames identifier can be seen as a way to prepare the mer
 
 
 
+
 <!-- ********************************************************************************* -->
-<h2><a name="local-database">Local database</a></h2>
+<h2 id="local-database">Local database</h2>
 
 The program uses geonames data stored in a local postgres database, as done by the program located at <a href="https://github.com/tig12/geonames2postgres">github.com/tig12/geonames2postgres</a>.  
 <br>You need to :
@@ -102,7 +103,7 @@ This gives low matching rates but prevents accidental association to wrong geona
 <br>Better matching rates could be obtained using approximate string matching (like Levenstein), but this may need human validation to prevent wrong associations.
 
 <!-- ********************************************************************************* -->
-<h2><a name="geonames-web-service">Geonames web service</a></h2>
+<h2 id="geonames-web-service">Geonames web service</h2>
 This has been used for file D6, which doesn't contain place name. The question asked to the web service is "given a longitude and a latitude, give me a place name (reverse geocoding). This gives very poor results for place names, but was useful to restore the country, see <a href="gauquelin-D6.html">page on file D6</a>.
 <br>
 <br>Here also, approximate matching could be tried to get better results.
@@ -234,3 +235,4 @@ This has been used for file D6, which doesn't contain place name. The question a
 </html>
 <!-- ************************************* -->
 <!-- ********************************************************************************* -->
+************ -->

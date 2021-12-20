@@ -55,40 +55,40 @@
 <nav class="toc">
     <ul>
         <li>
+            <a href="#g5-integration">G5 integration</a>
+        </li>
+        <li>
             <a href="#raw2tmp">raw2tmp</a>
             <ul>
-                <li><a href="#1-1-profession-codes">Profession codes</a></li>
-                <li><a href="#1-2-name-restoration">Name restoration</a></li>
-                <li><a href="#1-3-small-errors">Small errors</a></li>
+                <li><a href="#2-1-profession-codes">Profession codes</a></li>
+                <li><a href="#2-2-small-errors">Small errors</a></li>
             </ul>
         </li>
         <li>
-            <a href="#addgeo">addGeo</a>
-        </li>
-        <li>
-            <a href="#better-a1-names-with-ertel4391">Better A1 names with ertel4391</a>
-        </li>
-        <li>
-            <a href="#better-a2-days-and-names-with-muller1083">Better A2 days and names with muller1083</a>
-        </li>
-        <li>
-            <a href="#legaltime">legalTime</a>
-        </li>
-        <li>
-            <a href="#better-a1-names-and-place-with-gauquelin-1955">Better A1 names and place with Gauquelin 1955</a>
+            <a href="#name-restoration">Name restoration</a>
             <ul>
-                <li><a href="#6-1-names">Names</a></li>
-                <li><a href="#6-2-places">Places</a></li>
+                <li><a href="#3-1-merge-lists">Merge lists</a></li>
+                <li><a href="#3-2-benefit-from-other-files">Benefit from other files</a></li>
             </ul>
         </li>
         <li>
+            <a href="#tweak2tmp">tweak2tmp</a>
+        </li>
+        <li>
             <a href="#addgeo">addGeo</a>
+        </li>
+        <li>
+            <a href="#the-problem-of-time">The problem of time</a>
+        </li>
+        <li>
+            <a href="#restoring-legal-time">Restoring legal time</a>
         </li>
     </ul>
 </nav>
 
+
 <!-- ********************************************************************************* -->
-<h2>G5 integration</h2>
+<h2 id="g5-integration">G5 integration</h2>
 
 Raw files are imported in database with the following commands :
 <pre>
@@ -107,7 +107,7 @@ Input data are a copy of Cura html pages, located in <code>data/raw/gauq/lerrcp/
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="raw2tmp">raw2tmp</a></h2>
+<h2 id="raw2tmp">raw2tmp</h2>
 The main task of this command is to merge the two lists (list with names and list with precise birth data) ; see next paragraph.
 
 <br><br>This command needs a parameter to indicate what it should print :
@@ -119,12 +119,12 @@ MISSING PARAMETER : raw2tmp needs a parameter to specify which output it display
 </pre>
 
 <!-- ************************************* -->
-<h3><a name="1-1-profession-codes">Profession codes</a></h3>
+<h3 id="2-1-profession-codes">Profession codes</h3>
 In some files of serie A, the precise profession codes are not associated to the records. This is possible to fix thanks to the notices that are present on Cura pages.
 <br>These informations were included to the program (see constant <code>PROFESSIONS_DETAILS</code> of class <code>g5\commands\gauq\A\A</code>) ; each record is associated to its precise profession in the resulting csv file.
 
 <!-- ************************************* -->
-<h3><a name="1-3-small-errors">Small errors</a></h3>
+<h3 id="2-2-small-errors">Small errors</h3>
 
 <!-- ****************** -->
 <h4>902gdA1y.html</h4>
@@ -164,7 +164,7 @@ This is not present in pages including names (for example present in <a href="ht
 
 
 <!-- ********************************************************************************* -->
-<h2>Name restoration</h2>
+<h2 id="name-restoration">Name restoration</h2>
 This problem is handled by step <code>raw2tmp</code>
 
 <br><br>Each page of serie A contain 3 lists :
@@ -178,7 +178,7 @@ This problem is handled by step <code>raw2tmp</code>
 <br><code>raw2tmp</code> matching could be bettered for some cases, using newalchemypress.com data. See below, paragraphs <a href="#use-ertel-4391">Use Ertel 4391</a> and <a href="#use-muller-1083">Use Müller 1083</a>.
 
 <!-- ************************************* -->
-<h3>Merge lists</h3>
+<h3 id="3-1-merge-lists">Merge lists</h3>
 The program must merge the two lists.
 <br>A check done by program 
 <pre>php run-g5.php cura A look lists</pre>
@@ -242,7 +242,7 @@ Corrections using Gauquelin 1955 were currently done only for files A1 and A2.
 </table>
 
 <!-- ************************************* -->
-<h3>Benefit from other files</h3>
+<h3 id="3-2-benefit-from-other-files">Benefit from other files</h3>
 
 Fortunately, name restoration can be bettered because other files contain common records :
 
@@ -316,11 +316,11 @@ Gauquelin 1955 place names are generally better than Cura places.
 -->
 
 <!-- ********************************************************************************* -->
-<h2>tweak2tmp</h2>
+<h2 id="tweak2tmp">tweak2tmp</h2>
 Auxiliary YAML files located in <code>data/db/init/lerrcp-tweak</code> permit to store corrections used to solve errors detected in steps <code>addGeo</code> and <code>legalTime</code>.
 
 <!-- ********************************************************************************* -->
-<h2><a name="addgeo">addGeo</a></h2>
+<h2 id="addgeo">addGeo</h2>
 
 This step brings corrections to place names and compute geonames id for non-ambiguous cases.
 
@@ -353,7 +353,7 @@ It modifies records of <code>data/tmp/gauq/lerrcp/</code> <b>only if there is a 
 
 
 <!-- ********************************************************************************* -->
-<h2>The problem of time</a></h2>
+<h2 id="the-problem-of-time">The problem of time</h2>
 
 Gauquelin data available on Cura web pages are sometimes given in a format that generates a problem.
 <br>This problem occurs in all files of series A, B, F, NH, and in files D9a, D9b, D9c. Hopefully, D6, D10, E1, E3 are not concerned.
@@ -389,7 +389,7 @@ It's a problem, because if one wants to check the data, it's impossible to check
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="legaltime">Restoring legal time</a></h2>
+<h2 id="restoring-legal-time">Restoring legal time</h2>
 
 The command :
 <pre>php run-g5.php cura A legalTime</pre>
@@ -416,7 +416,7 @@ adds two columns, <code>DATE-C</code> (= date corrected) and <code>TZO</code> (t
 <br>A probable explanation is that longitudes given in Cura files are not precise enough to permit an exact computation.
 <br>If this hypothese is correct, it means that <b>UT times given in Cura pages are not exact</b>. Fortunately, this error is small (max observed = 3 minutes of time), but it is an illustration of the problems generated when providing UT times instead of legal times.
 
-<br><br>In theory, this can be fixed by program (infer correct legal time and recompute timezone offset), but has not been implemented yet.
+<br><br>This can be fixed by program (infer correct legal time and recompute timezone offset), but has not been implemented yet.
 
 <br><br>Restoration rates are low :
 <pre>
@@ -547,6 +547,10 @@ A6 : restored 776 / 2026 dates (38.3 %)
 </aside>
 
 </div><!-- end class="container" -->
+
+</body>
+</html>
+="container" -->
 
 </body>
 </html>

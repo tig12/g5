@@ -60,7 +60,8 @@ class occus2 implements Command {
             foreach($occus as $occu){
                 $groups[$occu]->addMember($personId);
                 foreach($allAncestors[$occu] as $ancestor){
-                    $groups[$ancestor]->addMember($personId); // HERE data['n'] is incremented
+                    // HERE data['n'] is incremented - will be stored in DB in the next call to $group->update()
+                    $groups[$ancestor]->addMember($personId);
                 }
             }
         }

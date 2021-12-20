@@ -89,8 +89,9 @@ This page deals with the work done on the CSICOP test (USA 1979), using data pub
 
 
 
+
 <!-- ********************************************************************************* -->
-<h2><a name="information-sources">Information sources</a></h2>
+<h2 id="information-sources">Information sources</h2>
 Informations used to compute this group can be found in several places.
 
 <ul class="spaced margin-top">
@@ -108,12 +109,12 @@ Informations used to compute this group can be found in several places.
 </ul>
 
 <!-- ********************************************************************************* -->
-<h2><a name="preparatory-work">Preparatory work</a></h2>
+<h2 id="preparatory-work">Preparatory work</h2>
 The PDF files downloaded from skepticalinquirer.org cannot be directly exploited by program. Text files were built from the PDF ; these files are located in <code>data/raw/csicop/si42/</code>.
 <br>The README file in this directory details the way PDF files were transformed to text files.
 
 <!-- ********************************************************************************* -->
-<h2><a name="restoration-process">Restoration process</a></h2>
+<h2 id="restoration-process">Restoration process</h2>
 
 <div class="warning block">
 The import process changed but following doc has not been updated yet.
@@ -133,7 +134,7 @@ php run-g5.php csicop si42 export
 </pre>
 
 <!-- ************************************* -->
-<h3><a name="3-1-raw2tmp">raw2tmp</a></h3>
+<h3 id="3-1-raw2tmp">raw2tmp</h3>
 
 <pre>php run-g5.php csicop si42 raw2tmp</pre>
 
@@ -162,7 +163,7 @@ Generated files contain fields :
 
 
 <!-- ************************************* -->
-<h3><a name="3-2-addcanvas1">addCanvas1</a></h3>
+<h3 id="3-2-addcanvas1">addCanvas1</h3>
 <ul>
     <li>
         Adds field CANVAS to 5-csicop/408-csicop-si42.csv                      
@@ -186,7 +187,7 @@ INPUT :
 </ul>
 
 <!-- ************************************* -->
-<h3><a name="3-3-addertel">addErtel</a></h3>
+<h3 id="3-3-addertel">addErtel</h3>
 
 Adds to <code>408-csicop-si42.csv</code> informations coming from file <a href="ertel-4391-sport.html">Ertel 4391</a>.
 
@@ -287,7 +288,7 @@ The 3 last dates can be explained by a confusion on given names ; corrections we
 <br><b>This leaves 7 differences</b>, indicating an error either in Ertel file, or in SI42 list, or in file D10.
 
 <!-- ************************************* -->
-<h3><a name="3-4-addd10">addD10</a></h3>
+<h3 id="3-4-addd10">addD10</h3>
 <pre>php run-g5.php csicop si42 addD10</pre>
 
 <!--
@@ -516,3 +517,4 @@ study.
 </html>
 <!-- ************************************* -->
 <!-- ********************************************************************************* -->
+********************************************************* -->

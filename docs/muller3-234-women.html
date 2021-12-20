@@ -41,24 +41,48 @@ List self-published by Arno Müller in <b><i>Astro-Forschungs-Daten</i> (AFD) vo
 </header>
 
 <article>
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#files">Files</a>
+            <ul>
+                <li><a href="#1-1-auxiliary-files">Auxiliary files</a></li>
+                <li><a href="#1-2-raw-files">Raw files</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#g5-integration">g5 integration</a>
+            <ul>
+                <li><a href="#2-1-raw2tmp">raw2tmp</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#analyze">Analyze</a>
+            <ul>
+                <li><a href="#3-1-check-data-source">Check data source</a></li>
+                <li><a href="#3-2-match-gauquelin-data">Match Gauquelin data</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
 
 <!-- ********************************************************************************* -->
-<h2><a>Files</a></h2>
+<h2 id="files">Files</h2>
 
 <!-- ************************************* -->
-<h3>Auxiliary files</h3>
+<h3 id="1-1-auxiliary-files">Auxiliary files</h3>
 Publication of this list is possible thanks to Nick Kollerstrom, who scanned the original booklet.
 <br>These scans can be downloaded from <a href="https://github.com/tig12/g5-aux/tree/master/1993-muller3-women">github.com/tig12/g5-aux/tree/master/1993-muller3-women</a>.
 
 <!-- ************************************* -->
-<h3>Raw files</h3>
+<h3 id="1-2-raw-files">Raw files</h3>
 These scans were OCRed (transformed to text), tabulated and corrected.
 <br>The resulting list is versioned with g5, in <a href="https://github.com/tig12/gauquelin5/tree/master/data/raw/muller/3-women">data/raw/muller/3-women</a>.
 <br>This list is used as input by g5 program.
 
 
 <!-- ********************************************************************************* -->
-<h2>g5 integration</h2>
+<h2 id="g5-integration">g5 integration</h2>
 
 <div class="bold">Still incomplete</div>
 
@@ -67,15 +91,15 @@ php run-g5.php muller afd3 raw2tmp
 </pre>
 
 <!-- ************************************* -->
-<h3>raw2tmp</h3>
+<h3 id="2-1-raw2tmp">raw2tmp</h3>
 
 <!-- ********************************************************************************* -->
-<h2>Analyze</h2>
+<h2 id="analyze">Analyze</h2>
 
 The meaning of the fields can be understood thanks to explanations given by Müller in his booklet.
 
 <!-- ************************************* -->
-<h3>Check data source</h3>
+<h3 id="3-1-check-data-source">Check data source</h3>
 
 2 fields are related to the origin of the data, called <code>SOURCE</code> and <code>GQ</code> in the input file.
 <ul>
@@ -132,7 +156,7 @@ The file contains 43 persons from Gauquelin database, à priori brings <b>191 ne
 <br>6 records must be checked : Müller indicates that the "secondary source of birth record" is Gauquelin, but the record is marked as not present in Gauquelin data.
 
 <!-- ************************************* -->
-<h3>Match Gauquelin data</h3>
+<h3 id="3-2-match-gauquelin-data">Match Gauquelin data</h3>
 The command
 <pre>php run-g5.php muller afd3 look gauquelin</pre>
 is used to generate a table of correspondance between Müller and Gauquelin data.

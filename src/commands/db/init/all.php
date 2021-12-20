@@ -139,20 +139,19 @@ class all implements Command {
                 echo AaddGeo::execute([$datafile, 'addGeo', 'small']);
                 echo AlegalTime::execute([$datafile, 'legalTime']);
             }
-exit;
             
             echo D6raw2tmp::execute(['D6', 'raw2tmp']);
-            echo Gauqtweak2tmp::execute(['D6', 'tweak2tmp']);
+            //echo Gauqtweak2tmp::execute(['D6', 'tweak2tmp']);
             echo D6addGeo::execute(['D6', 'addGeo']); // tmp code - addGeo needs to be fixed
             
             echo D10raw2tmp::execute(['D10', 'raw2tmp']);
-            echo Gauqtweak2tmp::execute(['D10', 'tweak2tmp']);
+            //echo Gauqtweak2tmp::execute(['D10', 'tweak2tmp']);
             
             echo E1E3raw2tmp::execute(['E1', 'raw2tmp', 'small']);
             echo Gauqtweak2tmp::execute(['E1', 'tweak2tmp']);
             
             echo E1E3raw2tmp::execute(['E3', 'raw2tmp', 'small']);
-            echo Gauqtweak2tmp::execute(['E3', 'tweak2tmp']);
+            //echo Gauqtweak2tmp::execute(['E3', 'tweak2tmp']);
             
             echo ErtelSportRaw2tmp::execute([]);
             echo ErtelSporttweak2tmp::execute([]);
@@ -201,19 +200,19 @@ exit;
             foreach($filesGauqA as $datafile){
                 echo Atmp2db::execute([$datafile, 'tmp2db', 'small']);
             }
-exit;            
-/* 
             echo dbFillPerson::execute(['A1.yml']);
-            
             echo A6occu::execute([]);
+            
             echo D6tmp2db::execute(['D6', 'tmp2db', 'small']);
             echo dbFillPerson::execute(['D6.yml']);
-            echo D10tmp2db::execute(['D10', 'tmp2db', 'small']);
-            echo E1E3tmp2db::execute(['E1', 'tmp2db', 'small']);
-            echo E1E3tmp2db::execute(['E3', 'tmp2db', 'small']);
-//exit;
             
-*/
+exit;
+            echo D10tmp2db::execute(['D10', 'tmp2db', 'small']);
+            
+            echo E1E3tmp2db::execute(['E1', 'tmp2db', 'small']);
+            
+            echo E1E3tmp2db::execute(['E3', 'tmp2db', 'small']);
+            
             echo M5medicsTmp2db::execute(['small']);
             
             echo M1writersTmp2db::execute(['small']);

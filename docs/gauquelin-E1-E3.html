@@ -73,6 +73,7 @@ According to cura.free.fr :
 
 
 
+
 Importing raw files in database is done with following commands:
 <pre>
 php run-g5.php cura E1 raw2tmp small
@@ -83,7 +84,7 @@ php run-g5.php cura E3 tmp2db
 </pre>
 
 <!-- ********************************************************************************* -->
-<h2><a name="raw2tmp">raw2tmp</a></h2>
+<h2 id="raw2tmp">raw2tmp</h2>
 
 This command needs a parameter to indicate what it should print :
 <pre>php run-g5.php cura E1 raw2tmp</pre>
@@ -96,7 +97,7 @@ MISSING PARAMETER : raw2tmp needs a parameter to specify which output it display
 </pre>
 
 <!-- ************************************* -->
-<h3><a name="1-1-num">NUM</a></h3>
+<h3 id="1-1-num">NUM</h3>
 <b>IMPORTANT</b> : files E1 and E3 differ from other Cura files because records between 1 and 999 are prefixed with zeroes.
 <br>To obtain coherent NUM among generated  csvfiles, <b>these zeroes were removed to form the NUM of generated files</b>.
 <br>This is done in step <code>cura2csv</code>.
@@ -117,7 +118,7 @@ Concluded that birth mentioned in files E1 and E3 are expressed in civil time
 (conclusion coherent with the notice)
 -->
 <!-- ************************************* -->
-<h3><a name="1-2-place">Place</a></h3>
+<h3 id="1-2-place">Place</h3>
 The main problem of files E1 and E3 is that the timezone offset is not given. It can be computed from the place and the date, which means that the place must be identified to be linked with a timezone. This is done through geonames.org and included in the resulting file. 
 <br>
 <br>This gives partial results :
@@ -146,23 +147,23 @@ The unmatched cases come from two reasons :
 
 
 <!-- ************************************* -->
-<h3><a name="1-3-names">Names</a></h3>
+<h3 id="1-3-names">Names</h3>
 Family and given names were split for common case.
 <br>For some records, NAME column of cura files contains a mix of several information : sometimes the maiden name of a woman, or the public pseudonym of a person. More precise code needs to be written to handle this.
 
 
 <!-- ************************************* -->
-<h3><a name="1-4-notes">Notes</a></h3>
+<h3 id="1-4-notes">Notes</h3>
 Some field contain supplementary information, written before the name in Cura files : + - * or L. Their meaning is explained on Cura pages.
 <br>These informations are included in the generated files in column <code>NOTE</code>.
 
 <!-- ************************************* -->
-<h3><a name="1-5-planetary-sectors">Planetary sectors</a></h3>
+<h3 id="1-5-planetary-sectors">Planetary sectors</h3>
 Cura pages contain two lists : one with birth data and one with planetary sectors. These two lists can be merged without ambiguity, using field <code>NUM</code>.
 <br>Planetary sectors are included in the generated files.
 
 <!-- ************************************* -->
-<h3><a name="1-6-small-errors">Small errors</a></h3>
+<h3 id="1-6-small-errors">Small errors</h3>
 Cura files contain several typos.
 
 <!-- ****************** -->
@@ -253,14 +254,14 @@ Cura files contain several typos.
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="use-muller-1083">Use Müller 1083</a></h2>
+<h2 id="use-muller-1083">Use Müller 1083</h2>
 
 Arno Müller's file of 1083 medical doctors is used to better names and birth days in E1.
 <br>See <a href="muller5-1083-medics.html#fix-cura">page on Müller 1083</a>, paragraphs "Fix Cura names" and "Fix Cura days".
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="todo">TODO</a></h2>
+<h2 id="todo">TODO</h2>
 
 <ul class="spaced">
     <li>More information can be extracted from names : maiden name, nobility, nickname</li>
@@ -379,6 +380,15 @@ Arno Müller's file of 1083 medical doctors is used to better names and birth da
     <!-- <li><a href="next.html">Next</a></li> -->
     
     <!-- <li><a href="questions.html">Questions</a></li> -->
+
+</ul>
+</aside>
+
+</div><!-- end class="container" -->
+
+</body>
+</html>
+/li> -->
 
 </ul>
 </aside>

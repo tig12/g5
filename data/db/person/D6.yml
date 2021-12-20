@@ -5,7 +5,10 @@
 # 2021-12-05 06:11:16+01:00, Thierry Graff : Creation
 
 -
-  ACTION: insert
+  ADMIN: 
+    ACTION: insert
+    ADD-IN-GROUPS:
+      - d6
   sources:
     - d6
     - ertel-sport

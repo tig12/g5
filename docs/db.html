@@ -43,10 +43,33 @@ Data processed by g5 are imported in a postgresql database, named the <b>Open Ga
 </header>
 
 <article>
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#data-model">Data model</a>
+        </li>
+        <li>
+            <a href="#syntax">Syntax</a>
+        </li>
+        <li>
+            <a href="#identifiers">Identifiers</a>
+            <ul>
+                <li><a href="#3-1-slugs">Slugs</a></li>
+                <li><a href="#3-2-person-ids">Person ids</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#implementation-details">Implementation details</a>
+        </li>
+        <li>
+            <a href="#g5-integration">G5 integration</a>
+        </li>
+    </ul>
+</nav>
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="data-model">Data model</a></h2>
+<h2 id="data-model">Data model</h2>
 <div class="float-left">
     <img class="border margin padding" src="img/db5-model.svg" alt="">
 </div>
@@ -98,7 +121,7 @@ Read :
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="syntax">Syntax</a></h2>
+<h2 id="syntax">Syntax</h2>
 The structure of the entities are described in yaml files located with the source code of the model
 <pre>
 src/model/
@@ -121,12 +144,12 @@ For example, file <code>Person.yml</code> contains an empty person with all its 
 -->
 
 <!-- ********************************************************************************* -->
-<h2>Identifiers</h2>
+<h2 id="identifiers">Identifiers</h2>
 
 Unique identifiers depend on the entity type. Some entities (Person and Group) have several unique ids.
 
 <!-- ************************************* -->
-<h3>Slugs</h3>
+<h3 id="3-1-slugs">Slugs</h3>
 All entities have one unique id: its <b>slug</b>.
 <br>A slug is a string that can be used in a URL.
 <br>It contains only lower case letters without accents [a-z], digits [0-9], and hyphen (-).
@@ -152,7 +175,7 @@ All entities have one unique id: its <b>slug</b>.
 
 
 <!-- ************************************* -->
-<h3><a name="3-1-slugs">Person ids</a></h3>
+<h3 id="3-2-person-ids">Person ids</h3>
 
 Every person of the database has at least 2 unique ids:
 <ul class="spaced margin-top">
@@ -187,7 +210,7 @@ Some persons also have other ids (non-exhaustive list):
 <br><br>Group and source slug are defined by humans, in the code for groups and or in files of <code>data/model/source</code> for sources. 
 
 <!-- ********************************************************************************* -->
-<h2><a name="implementation-details">Implementation details</a></h2>
+<h2 id="implementation-details">Implementation details</h2>
 The database uses <a href="https://www.postgresql.org/">postgresql</a>.
 <br>Structured fields are stored using <a href="https://www.postgresql.org/docs/12/datatype-json.html">jsonb</a> type. 
 <br>
@@ -197,7 +220,7 @@ The database uses <a href="https://www.postgresql.org/">postgresql</a>.
 <br>SQL to create the tables are located in <code>src/model/db-create-tables</code>
 
 <!-- ********************************************************************************* -->
-<h2><a name="g5-integration">G5 integration</a></h2>
+<h2 id="g5-integration">G5 integration</h2>
 These commands create the whole database from scratch.
 <br>The code of class <code>g5\db\init\all</code> is the only reliable reference documenting the complete build process.
 

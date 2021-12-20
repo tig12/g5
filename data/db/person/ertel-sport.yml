@@ -6,7 +6,8 @@
 
 # Albani Peppino
 -
-  ACTION: update
+  ADMIN: 
+    ACTION: update
   ids-in-sources:
     3a_sports: '46'
   name:
@@ -31,7 +32,6 @@
       c2: PV
       cy: IT
       geoid: 3171366
-
   notes:
     - |
       This person is present in Ertel file gathering athletes without birth date.

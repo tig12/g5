@@ -32,9 +32,9 @@
 <header>
 <h1>Gauquelin LERRCP - file D6</h1>
 <div class="intro">
-The main problem of page <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdD6.html">902gdD6.html</a> is that it contains neither place name nor country. So it is impossible to compute timezone offset without restoration. Country restoration is done using reverse geocoding. This also permits to compute place names, but does not always give the exact birth place. This restoration needs to be bettered, birth place restoration is currently not included in the resulting file.
-<br>Accoding to cura.free.fr : <i>D6 contains 450 New famous European Sports Champions</i> but only 449 were found in the file (record nb 234 is missing).
-<br>Computation of timezone offset is also possible but hasn't been coded yet.
+D6 file was published by Gauquelin in 1979. It contains data used for a replication of 
+<br>The title of the original booklet indicates 432 European sport champions. Inclusion of these data in g5 database uses  page <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdD6.html">902gdD6.html</a> from Cura web site, anouncing 450 records (this difference has not been explained yet).
+<br>The main problem with this file is that it contains neither place name nor country. So timezone offset computation is impossible without restoration. Country restoration is done using reverse geocoding. This also permits to compute place names, but does not always give the exact birth place. This restoration needs to be bettered, birth place restoration is currently not included in the resulting file.
 
 </div>
 </header>
@@ -55,41 +55,34 @@ The main problem of page <a href="https://web.archive.org/web/20200916073026/htt
                 <li><a href="#3-2-temporary-conclusion">Temporary conclusion</a></li>
             </ul>
         </li>
-        <li>
-            <a href="#todo">TODO</a>
-        </li>
     </ul>
 </nav>
 
 
-
-
-
-
-
-
-To import raw file in database, the following commands must be issued :
+<!-- ********************************************************************************* -->
+<h2>G5 integration</h2>
+To import raw file in database, the following commands must be issued, in this order :
 <pre>
-php run-g5.php cura D6 raw2tmp
-php run-g5.php cura D6 addGeo
-php run-g5.php cura D6 tmp2db
+php run-g5.php gauq D6 raw2tmp
+php run-g5.php gauq D6 addGeo
+php run-g5.php gauq D6 tmp2db
 </pre>
 
-<!-- ********************************************************************************* -->
-<h2><a name="preparatory-code">Preparatory code</a></h2>
+<!-- ************************************* -->
+<h3>Preparatory code</h3>
 Cura file contains 32 names that can't be easily split to family / given names by program. To handle these cases, the command 
-<pre>php run-g5.php cura D6 look emptyGiven</pre>
-was used to build array <code>$NAMES_CORRECTIONS</code> of <code>raw2tmp</code>.
+<pre>php run-g5.php gauq D6 look emptyGiven</pre>
+was used to build array <code>D6::NAMES_CORRECTIONS</code>.
 <br>One case could not be fixed : <code>115 Crossalexander 1919-06-16 15:30</code>
 
 <!-- ********************************************************************************* -->
-<h2><a name="raw2tmp">raw2tmp</a></h2>
-This step copies and reformat the informations of <code>902gdD6.html</code> to a csv file in directory <code>data/tmp/cura</code>.
+<h2 id="raw2tmp">raw2tmp</h2>
+This step copies and reformat the informations of <code>902gdD6.html</code> to a csv file in directory <code>data/tmp/gauq/lerrcp</code>.
 
 <ul class="spaced margin-top">
     <li>
         Notice of page <code>902gdD6.html</code> says the file contains 450 persons, but it contains in fact 449 (NUM 234 is missing).
-        <br>So the generated file contains 449 persons.
+        <br>So the generated file contains 449 persons (record nb 234 is missing). Fortunately, this record, Léo Lacroix, is present in <a href="ertel-4391-sport.html">Ertel's file</a> (num 2318) and is added in a further step (it is also present in A1 file, num 1899).
     </li>
     
     <li>
@@ -105,33 +98,32 @@ This step copies and reformat the informations of <code>902gdD6.html</code> to a
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="addgeo">addGeo</a></h2>
+<h2 id="addgeo">addGeo</h2>
 
 <div class="warning block">
     Current code does not use anymore Geonames web service.
     <br>Result of previous calls to geonames web service was copied to
-    <br><code>data/build/geonames/D6.csv</code>
+    <br><code>data/db/init/geonames/D6.csv</code>
     <br><code>addGeo</code> contains temporary code using this file to restore country code.
-    <br>Documentation of this paragraph is obsolete.
 </div>
 
 This step computes country code and might be bettered to also compute place name.
 <br>The principle is to call geonames.org web service to perform reverse geocoding (compute place from longitude and latitude).
-<br>In practice, a new directory was added in config : <code>5-geonames</code>, located by default in <code>data/5-tmp/geonames</code>.
+<br>Results of calls to geonames.org web service are stored in <code>data/tmp/geonames</code>.
 <br>For each row of D6, <code>addGeo</code> :
 <ul>
-    <li>Checks in <code>5-geonames/D6.csv</code> if geocoding was already computed.</li>
-    <li>If not, it calls geonames.org web service, add informations to <code>5-geonames/D6.csv</code> and rewrites this updated file on disk.</li>
-    <li>Transfers the informations of <code>5-geonames/D6.csv</code> to <code>5-tmp/D6.csv</code></li>
+    <li>Checks in <code>data/tmp/geonames/D6.csv</code> if geocoding was already computed.</li>
+    <li>If not, it calls geonames.org web service, add informations to <code>data/tmp/geonames/D6.csv</code> and rewrites this updated file on disk.</li>
+    <li>Transfers the informations of <code>data/tmp/geonames/D6.csv</code> to <code>data/tmp/gauq/lerrcp/D6.csv</code></li>
 </ul>
 
-Rewriting <code>5-geonames/D6.csv</code> after each call to geonames.org permits to stop the execution and start it again without re-calling geonames.org web service for records that have already been computed.
+<br>Rewriting <code>data/tmp/geonames/D6.csv</code> after each call to geonames.org permits to stop the execution and start it again without re-calling geonames.org web service for records that have already been computed.
 <br>Reverse geocoding gave a result for all records except for <code>356 Ruiz Bernardo</code> (see correction above).
-<br>
-<br>The fix on Bernardo Ruiz shows that longitudes and latitudes are expressed by removing the seconds, and not rounded to the nearest minute, which generates a loss of precision : latitude of <code>356 Ruiz Bernardo</code> is <code>00W56</code> and the real value is <code>0°56'49''</code> - a value of <code>00W57</code> in cura file would have been more precise.
+
+<br><br>The fix on Bernardo Ruiz shows that longitudes and latitudes are expressed by removing the seconds, and not rounded to the nearest minute, which generates a loss of precision : latitude of <code>356 Ruiz Bernardo</code> is <code>00W56</code> and the real value is <code>0°56'49''</code> - a value of <code>00W57</code> in cura file would have been more precise.
 
 <!-- ************************************* -->
-<h3><a name="3-1-tests">Tests</a></h3>
+<h3 id="3-1-tests">Tests</h3>
 
 The purpose is to check the cities given by geonames.org web service.
 Some examples are given in <code>902gdD6.html</code>, which permit a first estimation.
@@ -140,22 +132,22 @@ Some examples are given in <code>902gdD6.html</code>, which permit a first estim
 <div>
 Generated records :
 <pre>
-179;Gimondi Felice;1942-09-29 18:10+02:00;Bergamo;IT;3182164;9.66667;45.7
-310;Ocana Luis;1945-06-09 21:30+02:00;Priego;ES;3112841;-2.31667;40.43333
-397;Thevenet Bernard;1948-01-10 12:00+02:00;Changy;FR;3026931;4.23333;46.43333
-403;Van Impe Lucien;1946-10-20 04:30+02:00;Cauwenberg;BE;2800617;3.96667;50.91667
-432;Zoetemelk Gerardus;1946-12-03 17:15+02:00;Bomen- en Bloemenbuurt;NL;11525080;4.26667;52.08333
+179;Gimondi Felice;1942-09-29 18:10+02:00;<b>Bergamo</b>;IT;3182164;9.66667;45.7
+310;Ocana Luis;1945-06-09 21:30+02:00;<b>Priego</b>;ES;3112841;-2.31667;40.43333
+397;Thevenet Bernard;1948-01-10 12:00+02:00;<b>Changy</b>;FR;3026931;4.23333;46.43333
+403;Van Impe Lucien;1946-10-20 04:30+02:00;<b>Cauwenberg</b>;BE;2800617;3.96667;50.91667
+432;Zoetemelk Gerardus;1946-12-03 17:15+02:00;<b>Bomen- en Bloemenbuurt</b>;NL;11525080;4.26667;52.08333
 </pre>
 </div>
 
 <div>
 Examples of <code>902gdD6.html</code> :
 <pre>
-Felice GIMONDI, born 29 SEP 1942, 18:10, in Sedrina (It)
-Luis OCAÑA, born 9 JUN 1945, 21:30, in Priego (Sp)
-Bernard THEVENET, born 10 JAN 1948, 12:00, in St Julien de Civry (Fr)
-Lucien VAN IMPE, born 20 OCT 1946, 4:30, in Mere (Bel)
-Joop (Gerardus) ZOETEMELK, born 3 DEC 1946, 17:15, in The Hague (Ne)
+Felice GIMONDI, born 29 SEP 1942, 18:10, in <b>Sedrina</b> (It)
+Luis OCAÑA, born 9 JUN 1945, 21:30, in <b>Priego</b> (Sp)
+Bernard THEVENET, born 10 JAN 1948, 12:00, in <b>St Julien de Civr</b>y (Fr)
+Lucien VAN IMPE, born 20 OCT 1946, 4:30, in <b>Mere</b> (Bel)
+Joop (Gerardus) ZOETEMELK, born 3 DEC 1946, 17:15, in <b>The Hague</b> (Ne)
 </pre>
 </div>
 
@@ -223,7 +215,7 @@ All cities but one differ !
 </table>
 
 <!-- ************************************* -->
-<h3><a name="3-2-temporary-conclusion">Temporary conclusion</a></h3>
+<h3 id="3-2-temporary-conclusion">Temporary conclusion</h3>
 From these examples, it seems that
 <ul class="simple margin-bottom">
     <li>Birth places given in Cura file correspond to wikipedia.</li>
@@ -231,15 +223,6 @@ From these examples, it seems that
 </ul>
 
 But step <code>addGeo</code> has the interest to restore the country, giving the ability to compute the timezone offset.
-
-
-<!-- ********************************************************************************* -->
-<h2><a name="todo">TODO</a></h2>
-
-<ul>
-    <li>Compute timezone offset for all records of D6</li>
-    <li>Birth place restoration</li>
-</ul>
 
 </article>
 </div><!-- end class="main" -->
@@ -360,6 +343,10 @@ But step <code>addGeo</code> has the interest to restore the country, giving the
 </aside>
 
 </div><!-- end class="container" -->
+
+</body>
+</html>
+/div><!-- end class="container" -->
 
 </body>
 </html>

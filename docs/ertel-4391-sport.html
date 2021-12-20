@@ -117,8 +117,9 @@ D6] => 450
 </nav>
 
 
+
 <!-- ********************************************************************************* -->
-<h2><a name="ertel-4391-generalities">Ertel 4391 generalities</a></h2>
+<h2 id="ertel-4391-generalities">Ertel 4391 generalities</h2>
 
 From newalchemypress.com :
 <blockquote>
@@ -142,7 +143,7 @@ I also found information about this file in these places :
 </ul>
 
 <!-- ************************************* -->
-<h3><a name="1-1-an-incomplete-and-approximate-file">An incomplete and approximate file</a></h3>
+<h3 id="1-1-an-incomplete-and-approximate-file">An incomplete and approximate file</h3>
 
 One very strange feature of this file : many records don't contain birth time. Surprising because among the missing dates (~800) are records published by Gauquelin (LERRCP series), so known by Ertel. As noted by newalchemypress.com, birth places, longitudes and latitudes are not given.
 <br>
@@ -189,7 +190,7 @@ One very strange feature of this file : many records don't contain birth time. S
  -->
 
 <!-- ********************************************************************************* -->
-<h2><a name="integration-to-g5">Integration to g5</a></h2>
+<h2 id="integration-to-g5">Integration to g5</h2>
 
 
 <!-- ********************************************************************************* -->
@@ -206,7 +207,7 @@ This paragraph is obsolete.
 The raw file is <code>data/raw/newalchemypress.com/03-ertel/3a_sports-utf8.txt"</code> (an UTF-8 version of <code>3a_sports.txt</code>).
 
 <!-- ************************************* -->
-<h3><a name="2-1-full-execution">Full execution</a></h3>
+<h3 id="2-1-full-execution">Full execution</h3>
 
 The full set of transformations can be executed with the command :
 
@@ -221,7 +222,7 @@ php run-g5.php ertel sport export dl
 </pre>
 
 <!-- ************************************* -->
-<h3><a name="2-2-raw2csv">raw2csv</a></h3>
+<h3 id="2-2-raw2csv">raw2csv</h3>
 The first step is to generate the file <b><code>5-newalch-csv/4391SPO.csv</code></b> :
 <pre>php run-g5.php ertel sport raw2csv</pre>
 This step copies the contents of <code>3a_sports-utf8.txt</code> to <code>4391SPO.csv</code> with the following modifications ;
@@ -258,7 +259,7 @@ This step copies the contents of <code>3a_sports-utf8.txt</code> to <code>4391SP
 Other columns are copied as is.
 
 <!-- ************************************* -->
-<h3><a name="2-3-fix-gauquelin-a1-names">Fix Gauquelin A1 names</a></h3>
+<h3 id="2-3-fix-gauquelin-a1-names">Fix Gauquelin A1 names</h3>
 This step is included in the restoration process of file A1, not part of Ertel 4391 process.
 <br>
 <br>Fixes 100% of the remaining unidentified names in A1.
@@ -278,7 +279,7 @@ Nb corrections : 117
 </pre>
 
 <!-- ************************************* -->
-<h3><a name="2-4-generate-skeptics-files">Generate skeptics' files</a></h3>
+<h3 id="2-4-generate-skeptics-files">Generate skeptics' files</h3>
 Draft code ; in <code>4391SPO.csv</code>, the associations between lines and skeptic ids are sometimes wrong or missing.
 <br>Can come from a problem in <code>4391SPO.csv</code>, a misunderstanding of column meanings or a bug in the code.
 
@@ -341,7 +342,7 @@ Ertel file also contains 5 wrong associations to CSICOP, fixed in step <code>twe
 <br>It brings to 191 the number of CSICOP records present in Ertel's file.
 
 <!-- ********************************************************************************* -->
-<h2><a name="looking-at-the-file">Looking at the file</a></h2>
+<h2 id="looking-at-the-file">Looking at the file</h2>
 <b>NOTE</b> : the following code was written to try to understand the content of the file.
 <br>I don't understand all the columns, so consider the informations about the file as suppositions, there are possibly mistakes.
 
@@ -356,7 +357,7 @@ php run-g5.php ertel sport look sport
 </pre>
 
 <!-- ********************************************************************************* -->
-<h2><a name="links-to-other-datasets">Links to other datasets</a></h2>
+<h2 id="links-to-other-datasets">Links to other datasets</h2>
 
 An interest of this file is the presence of columns indicating the ids of the records in other data sets.
 <br>The information is contained in the following columns :
@@ -410,7 +411,7 @@ gives the different values of <code>QUEL</code> and corresponding number of reco
 </pre>
 
 <!-- ********************************************************************************* -->
-<h2><a name="ertel-s-subsamples">Ertel's subsamples</a></h2>
+<h2 id="ertel-s-subsamples">Ertel's subsamples</h2>
 
 Combining the output of the two previous commands permits a reconstitution of Table 1 given in [Ertel 88], p 59.
 <br>This table and accompanying notes describe the samples used by Ertel to build his pool of 4391 records.
@@ -682,7 +683,7 @@ Check that numbers match :
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="data-sources">Data sources</a></h2>
+<h2 id="data-sources">Data sources</h2>
 18 distinct sources can be extracted from column <code>ZITATE</code> :
 <br>These lists associate the source code with the number of records found in this source.
 
@@ -738,7 +739,7 @@ This can be precisely matched with <b>[Ertel 88]</b> : in Table 2, he lists 18 s
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="birth-dates">Birth dates</a></h2>
+<h2 id="birth-dates">Birth dates</h2>
 <pre>php run-g5.php ertel sport look date</pre>
 <pre>
 BUG in date : 46 Albani Peppino : -  -
@@ -751,7 +752,7 @@ Among the 802 missing times coming from Gauquelin, 3 come from A1 and 799 from D
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="eminence">Eminence</a></h2>
+<h2 id="eminence">Eminence</h2>
 <pre>php run-g5.php ertel sport look eminence</pre>
 Columns <code>ZITRANG ZITSUM ZITATE ZITSUM_OD</code> deal with eminence.
 <ul>
@@ -792,7 +793,7 @@ Columns <code>ZITRANG ZITSUM ZITATE ZITSUM_OD</code> deal with eminence.
 </div><!-- end class="flex-wrap" -->
 
 <!-- ********************************************************************************* -->
-<h2><a name="sport-codes">Sport codes</a></h2>
+<h2 id="sport-codes">Sport codes</h2>
 <pre>php run-g5.php ertel sport look sport</pre>
 Two columns are related to the sport of the persons : <code>SPORTART</code> and <code>INDGRUP</code>.
 <br><code>INDGRUP</code> contains 'I' or 'G', indicating if this is an individual or collective sport.
@@ -871,7 +872,7 @@ Several codes were corrected :
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="mars-sectors">Mars sectors</a></h2>
+<h2 id="mars-sectors">Mars sectors</h2>
 Concerned columns are 
 <ul>
     <li><code>MARS</code> contains the sectors when the circle is divided in 36.</li>
@@ -1064,4 +1065,6 @@ generates the following table.
 </body>
 </html>
 <!-- ************************************* -->
+<!-- ********************************************************************************* -->
+ ************************************* -->
 <!-- ********************************************************************************* -->

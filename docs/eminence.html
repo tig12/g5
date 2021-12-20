@@ -78,8 +78,9 @@ The question is to sort the lists of professionals by eminence and build sub-gro
 </nav>
 
 
+
 <!-- ********************************************************************************* -->
-<h2><a name="eminence-indicators">Eminence indicators</a></h2>
+<h2 id="eminence-indicators">Eminence indicators</h2>
 
 Given a group of persons, the purpose is to group them by eminence rank. To build these associations, one can use many informations at disposition. An example is given by Suitbert Ertel, who counted the number of times a sportsman is cited in a predefined list of books. Other indications for sportsmen eminence could be the palmares in competitions.
 <br>Each piece of information is called an <b>eminence indicator</b>.
@@ -137,7 +138,7 @@ The process of ranking involves :
 -->
 
 <!-- ************************************* -->
-<h3><a name="1-1-global-ranking">Global ranking</a></h3>
+<h3 id="1-1-global-ranking">Global ranking</h3>
 Building a global rank consists in combining several indicators to build a synthesis (see below). This introduces arbitrary choices :
 <ul>
     <li>Choose the number of ranks (Ertel used 5).</li>
@@ -145,10 +146,10 @@ Building a global rank consists in combining several indicators to build a synth
 </ul>
 
 <!-- ********************************************************************************* -->
-<h2><a name="precautions">Precautions</a></h2>
+<h2 id="precautions">Precautions</h2>
 
 <!-- ************************************* -->
-<h3><a name="2-1-identify-human-intelligence">Identify human intelligence</a></h3>
+<h3 id="2-1-identify-human-intelligence">Identify human intelligence</h3>
 Eminence ranking is partly a mechanical process, but human arbitrary human choices are also necessary : the design of the test, number of global ranks, rules to build each indicator, rules to combine them to build global rank.
 <br>In a suspicious world, these parts of the process must be closely watched, because arbitrary choices can be used for deviant purposes. A consensus is needed to build a ranking that can be acceptable.
 
@@ -162,46 +163,46 @@ In practice, many indicator don't cover the whole range.
 -->
 
 <!-- ************************************* -->
-<h3><a name="2-2-divide-by-periods">Divide by periods</a></h3>
+<h3 id="2-2-divide-by-periods">Divide by periods</h3>
 For a given discipline, the available eminence indicators vary with time. For example, Nobel prizes are only relevant for persons active since the beginning of the 20th century. In order to compare what is comparable, the history of each discipline must be divided in coherent periods of time. Major events like world wars can probably be used as period boundaries for most of the disciplines. 
 
 <!-- ************************************* -->
-<h3><a name="2-3-national-and-other-bias">National and other bias</a></h3>
+<h3 id="2-3-national-and-other-bias">National and other bias</h3>
 When ranking persons of a given group, care must be taken to avoid national bias. For example, if citation count is based on a list of books or web sites, if a particular country is over-represented, there is a risk to over-rate persons of this country.
 
 <!-- ************************************* -->
-<h3><a name="2-4-the-problem-of-closed-data">The problem of closed data</a></h3>
+<h3 id="2-4-the-problem-of-closed-data">The problem of closed data</h3>
 Valuable informations usable for ranking are held by private companies like Google. This is a problem because using these data to rank people cannot be accepted as scientifically valid, as information can't be verified.
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="exemples-of-eminence-indicators">Exemples of eminence indicators</a></h2>
+<h2 id="exemples-of-eminence-indicators">Exemples of eminence indicators</h2>
 
 Mathematicians will be used for the example (ranking sportsmen is more complex).
 
 <!-- ************************************* -->
-<h3><a name="3-1-polls-human-opinion">Polls (human opinion)</a></h3>
+<h3 id="3-1-polls-human-opinion">Polls (human opinion)</h3>
 Ask living mathematicians, historians of science who are the important mathematicians for them.
 <br>It can also be done with mathematicians of the past, through autobiographies, interviews or other sources.
 <br>Examples : in Récoltes et semailles", Grothendieck cites Galois and Riemann ; in an interview, Jean-Pierre Serre cites André Weil as his model.
 <br>This could work like a page rank, where the opinion of eminent persons have stronger weight.
 
 <!-- ************************************* -->
-<h3><a name="3-2-citation-count-global">Citation count - global</a></h3>
+<h3 id="3-2-citation-count-global">Citation count - global</h3>
 This was done by Suitbert Ertel.
 <br>Given a list of books, established in advance, count the number of books where a person is cited, and use this to build a ranking.
 <br>Here, one indicator is built from a list of books.
 <br>Ertel's work could be for example reproduced, checked and extended to other disciplines by Google Books.
 
 <!-- ************************************* -->
-<h3><a name="3-3-citation-count-local">Citation count - local</a></h3>
+<h3 id="3-3-citation-count-local">Citation count - local</h3>
 Take a book about history of mathematics, and count the number of times mathematicians are cited.
 <br>For example, Gauss will probably appear in several chapters.
 <br>Here, one indicator is built from one book.
 <br>This could also be done by Google books.
 
 <!-- ************************************* -->
-<h3><a name="3-4-link-count">Link count</a></h3>
+<h3 id="3-4-link-count">Link count</h3>
 In web sites containing biographies of persons of given professional groups, like Wikipedia. Eminence indicators can be built counting hypertext links pointing to the pages of the different persons of a group. This is similar to citation count.
 <br>Here are two examples that permit to rank mathematicians :
 <ul>
@@ -214,17 +215,17 @@ In web sites containing biographies of persons of given professional groups, lik
 </ul>
 
 <!-- ************************************* -->                                   
-<h3><a name="3-5-search-engines">Search engines</a></h3>
+<h3 id="3-5-search-engines">Search engines</h3>
 An other variant of citation count can be done counting the number of times a given person has been searched for, and the number of clics to a page concerning this person. This could be done for example using <b>Google Trends API</b> (Application Programming Interface). Google Trends does not give the absolute numbers of queries concerning a person, but permits to compare the numbers related to two or more persons, which is sufficient to sort the persons.
 
 <!-- ************************************* -->
-<h3><a name="3-6-prizes-awards">Prizes, awards</a></h3>
+<h3 id="3-6-prizes-awards">Prizes, awards</h3>
 For example, use Nobel prize lists to associate the laureates with top-level rank (n° 1).
 <br>In this case, the associations between persons and ranks could look like this :
 <img class="border margin padding" src="img/eminence/nobel.jpg" alt="Using Nobel prize list to build eminence indicator">
 
 <!-- ************************************* -->
-<h3><a name="3-7-institutions-academies">Institutions, academies</a></h3>
+<h3 id="3-7-institutions-academies">Institutions, academies</h3>
 For example, the french Académie des sciences could generate a ranking like this :
 
 <img class="border margin padding" src="img/eminence/academie.jpg" alt="Using French Academy of sciences to build eminence indicator">
@@ -232,11 +233,11 @@ For example, the french Académie des sciences could generate a ranking like thi
 This example is obtained saying that members are rank n°1 and correspondants are rank n° 2.
 
 <!-- ************************************* -->
-<h3><a name="3-8-ranked-lists">Ranked lists</a></h3>
+<h3 id="3-8-ranked-lists">Ranked lists</h3>
 Sites like <a href="https://www.ranker.com">ranker.com</a> provide sorted lists of famous persons which could be used as indicators.
 
 <!-- ********************************************************************************* -->
-<h2><a name="building-a-globak-rank">Building a globak rank</a></h2>
+<h2 id="building-a-globak-rank">Building a globak rank</h2>
 
 The final step is to build a global rank from the different indicators concerning a professional group.
 <br>For a given professional group, the results of the various indicators can be represented as a table. For mathematicians :
@@ -403,6 +404,17 @@ g<sub>1</sub> ... g<sub>5</sub> represent groups of persons.
     </li>
     
     <!-- <li><a href="next.html">Next</a></li> -->
+    
+    <!-- <li><a href="questions.html">Questions</a></li> -->
+
+</ul>
+</aside>
+
+</div><!-- end class="container" -->
+
+</body>
+</html>
+t</a></li> -->
     
     <!-- <li><a href="questions.html">Questions</a></li> -->
 

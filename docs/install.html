@@ -67,12 +67,13 @@
 </nav>
 
 
+
 This software has been developed and tested under Linux. A priori, it should also work under Windows and Macintosh.
 <br>
 <br>It is used through the command line.
 
 <!-- ********************************************************************************* -->
-<h2><a name="installation">Installation</a></h2>
+<h2 id="installation">Installation</h2>
 
 <ol class="spaced">
     <li>
@@ -98,7 +99,7 @@ This software has been developed and tested under Linux. A priori, it should als
 </ol>
 
 <!-- ************************************* -->
-<h3><a name="1-1-optional-steps">Optional steps</a></h3>
+<h3 id="1-1-optional-steps">Optional steps</h3>
 
 <ul class="spaced">
     <li>
@@ -125,7 +126,7 @@ sudo apt install php-sqlite3
 </ul>
 
 <!-- ************************************* -->
-<h3><a name="1-2-directory-structure">Directory structure</a></h3>
+<h3 id="1-2-directory-structure">Directory structure</h3>
 The important files and directories are :
 <pre>
 gauquelin5/
@@ -152,14 +153,14 @@ In the rest of this doc, directory <code>gauquelin5/</code> is called the <b><i>
 </ul>
 
 <!-- ********************************************************************************* -->
-<h2><a name="configuration">Configuration</a></h2>
+<h2 id="configuration">Configuration</h2>
 Create a file <code>config.yml</code> by copying <code>config.yml.dist</code> :
 <pre>cp config.yml.dist config.yml</pre>
 
 Edit <code>config.yml</code> and adapt some values :
 
 <!-- ************************************* -->
-<h3><a name="2-1-dirs">dirs</a></h3>
+<h3 id="2-1-dirs">dirs</h3>
 This directive permits to specify <b>unversioned</b> directories containing data.
 <br>The values can contain either absolute paths or paths relative to root directory.
 <br>Default values are all relative to root directory :
@@ -175,12 +176,12 @@ At programm installation, <code>data/</code> directory contains 3 sub-directorie
 <br><br>Other sub-directories of <code>data/</code>, are not versioned, ignored by git.
 
 <!-- ************************************* -->
-<h3><a name="2-2-db5">db5</a></h3>
+<h3 id="2-2-db5">db5</h3>
 This concerns g5 database, used to store data imported by the program.
 <br>It contains only one section : <code>postgresql</code>. Specify here the parameters used to connect to a local postgresql database.
 
 <!-- ************************************* -->
-<h3><a name="2-3-geonames">geonames</a></h3>
+<h3 id="2-3-geonames">geonames</h3>
 G5 uses geonames.org to match place names to geonames ids. Some steps use a postgres database where geonames informations are stored ; some steps use geonames.org web service ; see <a href="geonames.html">page about geonames</a> for details.
 <br>
 <br>Section <code>postgresql</code> permits to specify the connection parameters, which can be identical or different from main g5 database.
@@ -188,7 +189,7 @@ G5 uses geonames.org to match place names to geonames ids. Some steps use a post
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="usage">Usage</a></h2>
+<h2 id="usage">Usage</h2>
 To check that the program works, type :
 <pre>php run-g5.php</pre>
 A message saying that you must provide supplementary arguments is displayed.
@@ -241,7 +242,7 @@ Example 3
 This does a real transformation (converts A3 raw html file to a csv file in data/tmp/cura).
 
 <!-- ********************************************************************************* -->
-<h2><a name="complete-generation-of-the-database">Complete generation of the database</a></h2>
+<h2 id="complete-generation-of-the-database">Complete generation of the database</h2>
 As described in <a href="organisation.html">the page about g5 organisation</a>, the program first converts raw data to temporary data, and then imports temporary files in database.
 <br><b>The different steps must be executed in a precise order</b>, because some steps need the result of previous executions to work.
 <br>
@@ -262,7 +263,7 @@ If 'db' or 'all' are choosen, it also drops existing tables and creates empty on
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="generating-output-files">Generating output files</a></h2>
+<h2 id="generating-output-files">Generating output files</h2>
 
 Output capacities are still limited.
 
@@ -408,3 +409,4 @@ A more flexible mechanism needs to be developed to specify precisely what to out
 </html>
 <!-- ************************************* -->
 <!-- ********************************************************************************* -->
+-- ********************************************************************************* -->

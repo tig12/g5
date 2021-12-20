@@ -320,6 +320,7 @@ class Person {
         - if $occuSlugs contains "dancer", and field occus already contains "artist", then "artist" is removed.
         - if $occuSlugs contains "artist", and field occus already contains "dancer", then "artist" is not added.
         Always remove the parents and keep the children, which are more specific.
+        WARNING this function doesn't add the occupations in the group in DB.
     **/
     public function addOccus($occuSlugs){
         $occus = $this->data['occus'];

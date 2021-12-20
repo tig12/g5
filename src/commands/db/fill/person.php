@@ -42,21 +42,32 @@ class person implements Command {
         $report = "--- db fill tweak " . self::$yamlFile . " ---\n";
         
         foreach($yaml as $tweak){
-            if(!isset($tweak['ACTION'])){
-                return "ERROR: every person must contain a field 'ACTION'"
+            if(!isset($tweak['ADMIN']['ACTION'])){
+                return "ERROR: every person must contain an ADMIN field 'ACTION'"
                     . " - concerned person:\n" . print_r($tweak, true) . "\n";
             }
-            if(!in_array($tweak['ACTION'], ['insert', 'update'])){
-                return "ERROR: value of field 'ACTION' can be 'insert' or 'update'"
+            if(!in_array($tweak['ADMIN']['ACTION'], ['insert', 'update'])){
+                return "ERROR: value of ADMIN field 'ACTION' can be 'insert' or 'update'"
                     . " - concerned person:\n" . print_r($tweak, true) . "\n";
             }
             
-            // HERE call inset() or update()
-            $msg = $tweak['ACTION'] == 'insert' ? self::insert($tweak) : self::update($tweak);
-            
+            // Remove ADMIN fields from tweak because tweak is used to fill the person
+            // and ADMIN fields must not be stored in person
+            $ADMIN = $tweak['ADMIN'];
+            unset($tweak['ADMIN']);
+            //
+            // HERE call insert() or update()
+            //
+            $msg = $ADMIN['ACTION'] == 'insert'
+                ? self::insert($tweak)
+                : self::update($tweak);
             if($msg != ''){
                 return $msg;
             }
+            if(isset($ADMIN['ADD-IN-GROUPS'])){
+                
+            }
+            
         }
         if(self::$nUpdate != 0){
             $report .= 'Updated ' . self::$nUpdate . " persons in DB from {$params[0]}\n";
@@ -79,9 +90,7 @@ class person implements Command {
             return "TWEAK ERROR: field 'ids-in-sources' must contain at least one element"
                 . " - concerned tweak:\n" . print_r($tweak, true) . "\n";
         }
-        
-        unset($tweak['ACTION']);
-        
+                
         // Always use the first element of ids-in-sources to find the person
         $source = array_keys($tweak['ids-in-sources'])[0];
         $id = $tweak['ids-in-sources'][$source];
@@ -132,7 +141,6 @@ class person implements Command {
         Inserts a new person in db
     **/
     private static function insert($tweak) {
-        unset($tweak['ACTION']);
         $p = new ModelPerson();
         $p->updateFields($tweak);
         $p->computeSlug();
@@ -144,7 +152,6 @@ class person implements Command {
         );
         $p->insert(); // DB
         self::$nInsert++;
-//echo "\n"; print_r($p->data); echo "\n";
         return '';
     }
     

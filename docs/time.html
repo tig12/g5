@@ -45,12 +45,13 @@
         <li>
             <a href="#timezone-offset-computation">Timezone offset computation</a>
             <ul>
-                <li><a href="#4-1-g5-integration">g5 integration</a></li>
-                <li><a href="#4-2-examples-of-contradictions">Examples of contradictions</a></li>
+                <li><a href="#3-1-g5-integration">G5 integration</a></li>
+                <li><a href="#3-2-examples-of-contradictions-between-sources">Examples of contradictions between sources</a></li>
             </ul>
         </li>
     </ul>
 </nav>
+
 
 
 
@@ -71,7 +72,7 @@ In this page, "legal time" means "the time that can be read on the birth certifi
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="format-used-in-g5">Format used in g5</a></h2>
+<h2 id="format-used-in-g5">Format used in g5</h2>
 
 In g5 database, dates are stored using 2 distinct fields :
 <ul class="spaced margin-top">
@@ -105,7 +106,7 @@ ISO 8601 also permits to express both time and timezone offset in a single strin
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="expressing-timezone-offset">Expressing timezone offset</a></h2>
+<h2 id="expressing-timezone-offset">Expressing timezone offset</h2>
 
 A surprising feature of historical data is that <b>current usage does not respect the ISO 8601 definition of timezone offset</b>.
 <br><b>The opposite value is always indicated</b>.
@@ -154,7 +155,7 @@ Example : the first record of file D10 : Aaron Harold, born 1921-06-21 07:00
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="timezone-offset-computation">Timezone offset computation</a></h2>
+<h2 id="timezone-offset-computation">Timezone offset computation</h2>
 
 This is a delicate and important problem.
 <br>Important because TZO is necessary to compute a chart, and delicate because information sources are sometimes contradictory.
@@ -176,7 +177,7 @@ This is a delicate and important problem.
 
 
 <!-- ************************************* -->
-<h3><a name="4-1-g5-integration">G5 integration</a></h3>
+<h3 id="3-1-g5-integration">G5 integration</h3>
 
 Time zone computation is a weak point of current implementation :
 <ul>
@@ -193,7 +194,7 @@ Time zone computation is a weak point of current implementation :
 <br>With (see above) : <code>date-ut + tzo = date</code>
 
 <!-- ************************************* -->
-<h3><a name="4-2-examples-of-contradictions">Examples of contradictions between sources</a></h3>
+<h3 id="3-2-examples-of-contradictions-between-sources">Examples of contradictions between sources</h3>
 <ul>
     <li>
         For Italy, both books say that offset is 1h for the whole country since 1893-11-01.

@@ -63,11 +63,13 @@ More work can be done on this file :
                 <li><a href="#2-1-full-execution">Full execution</a></li>
                 <li><a href="#2-2-generate-csv">Generate csv</a></li>
                 <li><a href="#2-3-tweak2tmp">tweak2tmp</a></li>
-                <li><a href="#2-4-fix-gnr">Fix GNR</a></li>
             </ul>
         </li>
         <li>
-            <a href="#fix-gauquelin-days">Fix Gauquelin days</a>
+            <a href="#fix-gnr">Fix GNR</a>
+        </li>
+        <li>
+            <a href="#fix-gauquelin-birth-days">Fix Gauquelin birth days</a>
         </li>
         <li>
             <a href="#fix-gauquelin-names">Fix Gauquelin names</a>
@@ -76,7 +78,7 @@ More work can be done on this file :
             <a href="#fix-paris">Fix Paris</a>
         </li>
         <li>
-            <a href="#3-4-fix-nobilities">Fix nobilities</a>
+            <a href="#fix-nobilities">Fix nobilities</a>
         </li>
         <li>
             <a href="#looking-at-the-file">Looking at the file</a>
@@ -87,17 +89,21 @@ More work can be done on this file :
         <li>
             <a href="#column-sample">Column SAMPLE</a>
             <ul>
-                <li><a href="#6-1-gauq-nur">GAUQ_NUR</a></li>
-                <li><a href="#6-2-muer-nur">MUER_NUR</a></li>
-                <li><a href="#6-3-muergauq">MUERGAUQ</a></li>
+                <li><a href="#10-1-gauq-nur">GAUQ_NUR</a></li>
+                <li><a href="#10-2-muer-nur">MUER_NUR</a></li>
+                <li><a href="#10-3-muergauq">MUERGAUQ</a></li>
             </ul>
+        </li>
+        <li>
+            <a href="#to-do">TO DO</a>
         </li>
     </ul>
 </nav>
 
 
+
 <!-- ********************************************************************************* -->
-<h2><a name="generalities">Generalities</a></h2>
+<h2 id="generalities">Generalities</h2>
 This group was built by Arno Müller and Suitbert Ertel in 1994.
 <br>Data were published by Arno Müller in "1083 members of the French Académie de Médecine", Astro-Forschungs-Daten 5, Waldmohr, 1994, 92 pp.
 <br>Data available in an electronic format on <a href="https://newalchemypress.com/gauquelin/research5.php">newalchemypress.com</a> web site, through file 
@@ -109,7 +115,7 @@ This group was built by Arno Müller and Suitbert Ertel in 1994.
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="integration-to-g5">Integration to g5</a></h2>
+<h2 id="integration-to-g5">Integration to g5</h2>
 
 <div class="warning block">
 This file is imported in g5 database but following doc has not been updated yet.
@@ -118,7 +124,7 @@ This file is imported in g5 database but following doc has not been updated yet.
 The raw file is <code>data/raw/newalchemypress.com/05-muller-medics/5a_muller-medics-utf8.txt</code>
 
 <!-- ************************************* -->
-<h3><a name="2-1-full-execution">Full execution</a></h3>
+<h3 id="2-1-full-execution">Full execution</h3>
 
 
 The full set of transformations can be executed with the command : 
@@ -132,19 +138,19 @@ php run-g5.php muller m5medics fixGnr update
 </pre>                                    
 
 <!-- ************************************* -->
-<h3><a name="2-2-generate-csv">Generate csv</a></h3>
+<h3 id="2-2-generate-csv">Generate csv</h3>
 The first step is to generate the file <b><code>data/tmp/muller/5-medics/muller5-1083-medics.csv</code></b> :
 <pre>php run-g5.php muller m5medics raw2tmp</pre>
 This step includes minor corrections in given names (some accents are missing).
 
 <!-- ************************************* -->
-<h3><a name="2-3-tweak2tmp">tweak2tmp</a></h3>
+<h3 id="2-3-tweak2tmp">tweak2tmp</h3>
 This step applies corrections from file <code>data/3-edited/newalch-tweaked/1083MED.yml</code>, see page <a href="tweak2tmp.html">tweak2tmp</a>.
 <br>Used to fix errors in the names of noble persons (<a href="#nobilities">see below</a>).
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="fix-gnr">Fix GNR</a></h2>
+<h2 id="fix-gnr">Fix GNR</h2>
 
 GNR seems to mean "Gauquelin Number Record".
 
@@ -222,7 +228,7 @@ php run-g5.php muller m5medics fixGnr update
 </div>
 
 <!-- ********************************************************************************* -->
-<h2><a name="fix-gauquelin-days">Fix Gauquelin birth days</a></h2>
+<h2 id="fix-gauquelin-birth-days">Fix Gauquelin birth days</h2>
 
 The command
 <pre>php run-g5.php muller m5medics look gauqdays</pre>
@@ -375,7 +381,7 @@ for E1 :
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="fix-gauquelin-names">Fix Gauquelin names</a></h2>
+<h2 id="fix-gauquelin-names">Fix Gauquelin names</h2>
 
 The command :
 <pre>php run-g5.php muller m5medics look gauqnames</pre>
@@ -407,7 +413,7 @@ To restore the names :
 This permits to restore (only) 12 unknown names from A2.
 
 <!-- ********************************************************************************* -->
-<h2><a name="fix-paris">Fix Paris</a></h2>
+<h2 id="fix-paris">Fix Paris</h2>
 The file contains 110 persons born in Paris, which need to be checked (see Newalchemypress indication below, sections SAMPLE and GAUQ_NUR).
 
 <h4>Fix arrondissement</h4>
@@ -484,7 +490,7 @@ C3 = arrondissement
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="fix-nobilities">Fix nobilities</a></h2>
+<h2 id="fix-nobilities">Fix nobilities</h2>
 Listing names shows small errors in columns <code>FNAME</code> and <code>GNAME</code> of noble persons.
 <ul>
     <li>Sometimes the nobility is included in the given name (it should be part of the family name).</li>
@@ -511,7 +517,7 @@ prints the same list in a YAML format.
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="looking-at-the-file">Looking at the file</a></h2>
+<h2 id="looking-at-the-file">Looking at the file</h2>
 
 <!-- ********************************************************************************* -->
 <div class="warning center">
@@ -529,7 +535,7 @@ Possible values for parameter : gauqdates, gauqnames, fields, gnr, nobilities, p
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="fields">Fields</a></h2>
+<h2 id="fields">Fields</h2>
 <pre>php run-g5.php muller m5medics look fields</pre>
 Partial comprehension so far.
 <table class="wikitable margin">
@@ -570,7 +576,7 @@ Partial comprehension so far.
 </table>
 
 <!-- ********************************************************************************* -->
-<h2><a name="column-sample">Column SAMPLE</a></h2>
+<h2 id="column-sample">Column SAMPLE</h2>
 
 This column seems to indicate the origin of the record.
 <br>There is a one to one mapping between SAMPLE and CODE.
@@ -592,7 +598,7 @@ Indications from newalchemypress.com :
 Only for those in Michel's original group born in Paris (168) was Müller unable to re-check their birth data (...) This new total of Academie members had 224 not in MG's original sample.
 </blockquote>
 
-<h3><a name="6-1-gauq-nur">GAUQ_NUR</a></h3>
+<h3 id="10-1-gauq-nur">GAUQ_NUR</h3>
 
 Newalchemypress indication about Paris could designate GAUQ_NUR, but it doesn't match :
 
@@ -604,14 +610,14 @@ Newalchemypress indication about Paris could designate GAUQ_NUR, but it doesn't 
 </table>
 
 
-<h3><a name="6-2-muer-nur">MUER_NUR</a></h3>
+<h3 id="10-2-muer-nur">MUER_NUR</h3>
 All <code>MUER_NUR</code> records have <code>GNR</code> empty, unknown in Gauquelin data => corresponds to Newalchemypress indication.
 
-<h3><a name="6-3-muergauq">MUERGAUQ</a></h3>
+<h3 id="10-3-muergauq">MUERGAUQ</h3>
 ?
 
 <!-- ********************************************************************************* -->
-<h2><a name="to-do">TO DO</a></h2>
+<h2 id="to-do">TO DO</h2>
 
 <ul class="spaced">
     <li>Use Müller data to check time restoration in Gauquelin A2 and E1</li>
@@ -734,6 +740,12 @@ All <code>MUER_NUR</code> records have <code>GNR</code> empty, unknown in Gauque
 
 </ul>
 </aside>
+
+</div><!-- end class="container" -->
+
+</body>
+</html>
+
 
 </div><!-- end class="container" -->
 

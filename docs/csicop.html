@@ -70,9 +70,10 @@ This page describes the restoration of the CSICOP test (USA 1979). This was poss
     </ul>
 </nav>
 
+
                                                                                                                                              
 <!-- ********************************************************************************* -->
-<h2><a name="information-sources">Information sources</a></h2>
+<h2 id="information-sources">Information sources</h2>
 Informations used to compute this group can be found in several places.
 
 <ul class="spaced margin-top">
@@ -99,17 +100,17 @@ Informations used to compute this group can be found in several places.
 </ul>
 
 <!-- ************************************* -->
-<h3><a name="1-1-g5-integration">g5 integration</a></h3>
+<h3 id="1-1-g5-integration">g5 integration</h3>
 
 A copy of <code>CSICOP.DOC</code> is included in g5 program as <code>data/raw/csicop/rawlins-ertel-irving/rawlins-ertel-irving.csv</code>
 
 <br><br>Transcriptions of informations found in the Skeptical Inquier PDFs are included in g5 in direcory <code>data/raw/csicop/si42</code>
 
 <!-- ********************************************************************************* -->
-<h2><a name="preparatory-work">Preparatory work</a></h2>
+<h2 id="preparatory-work">Preparatory work</h2>
 
 <!-- ************************************* -->
-<h3><a name="2-1-si42">si42</a></h3>
+<h3 id="2-1-si42">si42</h3>
 A previous attempt to restore this group was done using Skeptical Inquier vol IV NO. 2 (named here <code>si42</code>) - see <a href="csicop-si42.html">page CSICOP SI42</a>.
 <br>
 <br>The command
@@ -171,7 +172,7 @@ si42   400 1917-07-19 OR Wintermute U.
 </ul>
 
 <!-- ************************************* -->
-<h3><a name="2-2-ertel-4391">Ertel 4391</a></h3>
+<h3 id="2-2-ertel-4391">Ertel 4391</h3>
 The decision to keep Skeptical Inquier's numbers leads to bring corrections in <a href="ertel-4391-sport.html">Ertel 4391 file</a>, included in step <code>tweak2tmp</code> of this file.
 <br>Once these corrections done, a comparison on dates shows 3 differences between Ertel and Irving file.
 <pre>php run-g5.php csicop irving look ertel</pre>
@@ -195,7 +196,7 @@ Here also, the only way to be sure is to see the birth certificates. This was no
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="restoration-process">Restoration process</a></h2>
+<h2 id="restoration-process">Restoration process</h2>
 
 The conversion of raw file to database is done with these commands :
 <pre>
@@ -210,7 +211,7 @@ Generates file <code><a href="https://g5.tig12.net/output/history/1979-csicop/40
 
 
 <!-- ************************************* -->
-<h3><a name="3-1-raw2tmp">raw2tmp</a></h3>
+<h3 id="3-1-raw2tmp">raw2tmp</h3>
 
 <pre>php run-g5.php csicop irving raw2tmp</pre>
 
@@ -228,7 +229,7 @@ CSID GQID   FNAME GNAME         DATE             TZ     PLACE  LG     LAT      C
 
 
 <!-- ************************************* -->
-<h3><a name="3-2-addd10">addD10</a></h3>
+<h3 id="3-2-addd10">addD10</h3>
 <pre>php run-g5.php csicop irving addD10</pre>
 Adds field <code>PLACE</code> to 190 records.
 
@@ -459,3 +460,4 @@ study.
 </html>
 <!-- ************************************* -->
 <!-- ********************************************************************************* -->
+****************************************************************** -->

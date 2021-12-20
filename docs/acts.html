@@ -52,10 +52,10 @@ They are used to solve questions raised by g5 development, but not integrated ye
             <a href="#purpose">Purpose</a>
         </li>
         <li>
-            <a href="#retrieval-process">Retrieval process</a>
+            <a href="#act">Act</a>
             <ul>
-                <li><a href="#1-1-directory-layout">Directory layout</a></li>
-                <li><a href="#1-2-image-download">Image download</a></li>
+                <li><a href="#2-1-directory-layout">Directory layout</a></li>
+                <li><a href="#2-2-image-download">Image download</a></li>
             </ul>
         </li>
         <li>
@@ -75,8 +75,9 @@ They are used to solve questions raised by g5 development, but not integrated ye
 </nav>
 
 
+
 <!-- ********************************************************************************* -->
-<h2><a name="purpose">Purpose</a></h2>
+<h2 id="purpose">Purpose</h2>
 
 Permit the user to check the database with scans of original documents.
 
@@ -187,7 +188,7 @@ personnes:
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="retrieval-process">Act</a></h2>
+<h2 id="act">Act</h2>
 
 An act consists of 2 documents :
 <ul class="spaced padding-top">
@@ -218,7 +219,7 @@ An act consists of 2 documents :
 </ul>
 
 <!-- ************************************* -->
-<h3><a name="1-1-directory-layout">Directory layout</a></h3>
+<h3 id="2-1-directory-layout">Directory layout</h3>
 Acts are organized chronologically :
 <pre>
 acts
@@ -232,25 +233,25 @@ acts
 </pre>
 
 <!-- ************************************* -->
-<h3><a name="1-2-image-download">Image download</a></h3>
+<h3 id="2-2-image-download">Image download</h3>
 Some départements provide a link to download current page, some don't. When they don't, image retrieval is done with screen capture. This can be particularily long because sometimes several captures may be necessary to get the whole certificate with enough details. In this case, the image is reconstituted assembling the different parts.
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="acts-syntax">Acts syntax</a></h2>
+<h2 id="act">Act</h2>
 The syntax used to transcribe the acts comes from an unpublished genealogy software.
 <br>YAML files are written using french vocabulary, and are translated to a reference vocabulary (close to english) understood by the code parsing the yaml files. This permits to use other languages for the transcription.
 <br>This syntax is adapted to act transcription and contains informations currently not used for g5 development.
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="gauquelin5-integration">Gauquelin5 integration</a></h2>
+<h2 id="gauquelin5-integration">Gauquelin5 integration</h2>
 Not done yet ; code transfering information from <code>acts/</code> to g5 database needs to be written.
 <br>Currently, when an information of the database needs to be corrected (because it contradicts an act), this is done using the <a href="tweak2tmp.html">tweak2tmp</a> mechanism.
 
 
 <!-- ********************************************************************************* -->
-<h2><a name="french-archives">French archives</a></h2>
+<h2 id="french-archives">French archives</h2>
 
 In France, all acts (birth, death, mariage) since 1792 include the time of the events.
 <br>Scans of the original documents until ~1920 can be browsed on web sites of the <i>Archives départementales</i>.
@@ -265,7 +266,7 @@ Here lies potential data to test astral heredity at large scale, but not (yet ?)
 
 
 <!-- ************************************* -->
-<h3><a name="5-1-filae-com">filae.com</a></h3>
+<h3 id="5-1-filae-com">filae.com</h3>
 Page <a href="http://www.filae.com/ressources/etat-civil-numerise-dou-viennent-les-donnees/">Etat-civil numérisé : d’où viennent les données</a>
 says they have numerized the quasi-totality of french civil registries of the XIXth century, since revolution (1792).
 <br>More than 100 millions pages representing 200 millions acts.
@@ -277,7 +278,7 @@ says they have numerized the quasi-totality of french civil registries of the XI
 </ul>
 
 <!-- ************************************* -->
-<h3><a name="5-2-local-associations">Local associations</a></h3>
+<h3 id="5-2-local-associations">Local associations</h3>
 Numerous individuals and local associations have transcribed (typed in electronic format) acts. For a part, data are closed, reserved to the associations adherents.
 <br>But part of these data are open, a quite dynamic ecosystem, with free software to assist act transcription, and millions of acts available from heterogenous sources, and (in general ?) without birth time mentioned.
 
@@ -465,6 +466,17 @@ http://perigen.fr/actes/index.php
     </li>
     
     <!-- <li><a href="next.html">Next</a></li> -->
+    
+    <!-- <li><a href="questions.html">Questions</a></li> -->
+
+</ul>
+</aside>
+
+</div><!-- end class="container" -->
+
+</body>
+</html>
+
     
     <!-- <li><a href="questions.html">Questions</a></li> -->
 
