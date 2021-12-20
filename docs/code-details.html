@@ -52,7 +52,10 @@ The command line interface (CLI) is handled by <code>run-g5.php</code>. To inter
     <li>Following parameters are passed in an array to the method <code>execute()</code></li>
 </ul>
 
-<br>Example: <code>php run-g5.php ertel sport look date</code> triggers the execution of <code>g5\ertel\sport\look::execute(['date'])</code>
+<br>Example:
+<pre>php run-g5.php ertel sport look date</pre>
+triggers the execution of
+<pre>g5\commands\ertel\sport\look::execute(['date'])</pre>
 
 <!-- ********************************************************************************* -->
 <h2>One exception</h2>
@@ -66,8 +69,9 @@ This basic and rigid mechanism proved to be sufficient for most cases. It is con
     <li>If namespace corresponding to parameter 1 contains a class implementing <code>Command</code> interface, the program transmits the control to this class.</li>
     <li>Otherwise, default mechanism is used.</li>
 </ul>
+This is for example the case of <code>g5\commands\gauq\GauqCommand</code>.
 
-<br>Implementation of these conventions can be found in the namespace hierarchy, and in the code of class <code>g5\Run</code>
+<br><br>Implementation of these conventions can be found in the namespace hierarchy, and in the code of class <code>g5\Run</code>
 
 </article>
 </div><!-- end class="main" -->

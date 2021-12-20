@@ -37,8 +37,8 @@ class A{
         'OCCU',
         'DATE-UT',
         'DATE-C', // "date corrected"
-        'PLACE',
         'TZO',
+        'PLACE',
         'CY',
         'C2',
         'C3',

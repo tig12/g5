@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>A | Gauquelin5</title>
+    <title>Gauquelin series A | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="Conversion of cura.free.fr html pages to csv for files of serie A">
     <meta name="robots" content="index,follow">
@@ -108,7 +108,7 @@ Input data are a copy of Cura html pages, located in <code>data/raw/gauq/lerrcp/
 
 <!-- ********************************************************************************* -->
 <h2><a name="raw2tmp">raw2tmp</a></h2>
-The main task of this command is to merge the two lists (list with names and list with precise birth data).
+The main task of this command is to merge the two lists (list with names and list with precise birth data) ; see next paragraph.
 
 <br><br>This command needs a parameter to indicate what it should print :
 <pre>php run-g5.php gauq A1 raw2tmp</pre>
@@ -123,10 +123,51 @@ MISSING PARAMETER : raw2tmp needs a parameter to specify which output it display
 In some files of serie A, the precise profession codes are not associated to the records. This is possible to fix thanks to the notices that are present on Cura pages.
 <br>These informations were included to the program (see constant <code>PROFESSIONS_DETAILS</code> of class <code>g5\commands\gauq\A\A</code>) ; each record is associated to its precise profession in the resulting csv file.
 
-
 <!-- ************************************* -->
-<h3><a name="1-2-name-restoration">Name restoration</a></h3>
-Each page of serie A contain 3 lists :
+<h3><a name="1-3-small-errors">Small errors</a></h3>
+
+<!-- ****************** -->
+<h4>902gdA1y.html</h4>
+
+<ul class="spaced">
+    <li>
+        in page <code>902gdA1y.html</code>, there is an incoherence between the two lists for one record :
+        <pre>1817	3	25	C	185	F	5	16	24	0	48N 0	4W 6	29	CONCARNEAU</pre>
+        and
+        <pre>1817	3	5	Lebris Jean</pre>
+        <a href="img/acts/lebris-jean-1817-03-25.jpg">Birth certificate</a> permits to solve the case.
+        <br><a href="http://mnesys-portail.archives-finistere.fr/?id=recherche_etat_civil">Online civil registry</a> :
+        Registre  1 MI EC 53/10 Naissances, p 377 / 559 => "Né ce jour en cette ville à cinq heures du matin"
+        <br>=> date = <code>1817-03-25 05:00</code>
+        <br>Check if it matches UT time given by Cura :
+        <br>From "Traité de l'heure dans le monde", TU = HLO ;  4°6' = 00:16:24 => hour = 05:16:24
+        <br>OK => The first line is exact, the second line must be replaced by
+        <pre>1817	3	25	Lebris Jean</pre>
+        This fix is included in the code of <code>raw2tmp</code>.
+    </li>
+</ul>
+
+<!-- ****************** -->
+<h4>NUM with exclamation marks</h4>
+
+Some records of serie A have a ! in their NUM :
+<pre>
+A1 : 909 1876
+A2 : 2641
+A4 : 159 320 439 1350 1443 1480 2136 2312
+A5 : 1435 1557 1813 1829 2349 
+A6 : 15 139 148 225 232 265 448 574 622 668 718 727 737 738  
+</pre>
+This is not present in pages including names (for example present in <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdA1.html">902gdA1.html</a> but not in <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdA1y.html">902gdA1y.html</a>).
+<br>The explanation is given in <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/17archg.html">main Cura page</a> : they correspond to records containing errors in the original publication (LERRCP), and corrected in Françoise Gauquelin's journal <i>Astro-Psychological Problems</i>.
+<br>This information is not yet included in g5 database.
+
+
+<!-- ********************************************************************************* -->
+<h2>Name restoration</h2>
+This problem is handled by step <code>raw2tmp</code>
+
+<br><br>Each page of serie A contain 3 lists :
 <ul class="simple">
     <li>One list with precise birth data, but without names.</li>
     <li>Two lists with names, but without precise birth data ; these two lists are sorted differently. I supposed (but didn't check by program) that these two lists are equivalent.</li>
@@ -136,8 +177,8 @@ Each page of serie A contain 3 lists :
 <br>To summarize, this can be partially done by program from cura.free.fr web pages ; some cases can be fixed by human using Gauquelin 1955 book.
 <br><code>raw2tmp</code> matching could be bettered for some cases, using newalchemypress.com data. See below, paragraphs <a href="#use-ertel-4391">Use Ertel 4391</a> and <a href="#use-muller-1083">Use Müller 1083</a>.
 
-<!-- ****************** -->
-<h4>Merge lists</h4>
+<!-- ************************************* -->
+<h3>Merge lists</h3>
 The program must merge the two lists.
 <br>A check done by program 
 <pre>php run-g5.php cura A look lists</pre>
@@ -200,8 +241,8 @@ Corrections using Gauquelin 1955 were currently done only for files A1 and A2.
     </tr>
 </table>
 
-<!-- ****************** -->
-<h4>Benefit from other files</h4>
+<!-- ************************************* -->
+<h3>Benefit from other files</h3>
 
 Fortunately, name restoration can be bettered because other files contain common records :
 
@@ -219,6 +260,10 @@ Fortunately, name restoration can be bettered because other files contain common
         <td>Müller 402 writers</td>
         <td>A1, A2, A4, A6</td>
     </tr>
+    <tr>
+        <td>Gauquelin 1955</td>
+        <td>A1, A2, A3, A4, A5, A6</td>
+    </tr>
 </table>
 
 Name modification is done when these files are imported in database.
@@ -234,58 +279,59 @@ It permits to restore 100 % of names not identified by step <code>raw2csv</code>
 <br>This permits to fix only 12 unidentified names in A2.
 <br>See <a href="muller5-1083-medics.html">page on Müller 1083</a>, paragraphs "Fix Gauquelin names" and "Fix Gauquelin days".
 
+
+<!-- ********************************************************************************* -->
+<!-- 
+<h2><a name="better-a1-names-and-place-with-gauquelin-1955">Better A1 names and place with Gauquelin 1955</a></h2>
+
+The restoration of 1955 group "570 sportifs" is used to better family and given names as well as place names in file A1.
+<br>This step must be performed after <code>newalch ertel4391 fixA1</code>, as name spelling in Gauquelin 1955 book is better, and after <code>legalTime</code>.
+<br>
+<br>The corrections use the columns added for human corrections of files in <code>3-g55-edited/</code> (these column names end with <code>_55</code>). Other columns of these files are not used. The reason is that once a file located in <code>3-g55-edited/</code> is edited by a human, it is never updated by program again. So the columns generated by program may contain obsolete information (in fact they do, because the file <code>3-g55-edited/570SPO.csv</code> was generated before writing commands that add corrections).
+-->
+
 <!-- ************************************* -->
-<h3><a name="1-3-small-errors">Small errors</a></h3>
+<!-- 
+<h3><a name="6-1-names">Names</a></h3>
 
-<!-- ****************** -->
-<h4>902gdA1y.html</h4>
+The command
+<pre>php run-g5.php g55 570SPO edited2cura name list</pre>
+lists the differences between names of Cura A files and Gauquelin 1955 groups.
+<br>Random checks, comparing the names with wikipedia and other sources, show that Gauquelin names are globally better than Cura names (but Gauquelin 1955 names also contain errors).
 
-<ul class="spaced">
-    <li>
-        in page <code>902gdA1y.html</code>, there is an incoherence between the two lists for one record :
-        <pre>1817	3	25	C	185	F	5	16	24	0	48N 0	4W 6	29	CONCARNEAU</pre>
-        and
-        <pre>1817	3	5	Lebris Jean</pre>
-        <a href="img/acts/lebris-jean-1817-03-25.jpg">Birth certificate</a> permits to solve the case.
-        <br><a href="http://mnesys-portail.archives-finistere.fr/?id=recherche_etat_civil">Online civil registry</a> :
-        Registre  1 MI EC 53/10 Naissances, p 377 / 559 => "Né ce jour en cette ville à cinq heures du matin"
-        <br>=> date = <code>1817-03-25 05:00</code>
-        <br>Check if it matches UT time given by Cura :
-        <br>From "Traité de l'heure dans le monde", TU = HLO ;  4°6' = 00:16:24 => hour = 05:16:24
-        <br>OK => The first line is exact, the second line must be replaced by
-        <pre>1817	3	25	Lebris Jean</pre>
-        This fix is included in the code of <code>raw2tmp</code>.
-    </li>
-</ul>
+<pre>php run-g5.php g55 570SPO edited2cura name update</pre>
+is used to copy the contents of columns <code>GIVEN_55</code> and <code>FAMILY_55</code> to the files of <code>5-cura-csv/</code>.
+<br>
+<br>This command updates 59 names in file <code>A1</code>.
+-->
 
-<!-- ****************** -->
-<h4>NUM with exclamation marks</h4>
+<!-- ************************************* -->
+<!-- 
+<h3><a name="6-2-places">Places</a></h3>
+Gauquelin 1955 place names are generally better than Cura places.
 
-Some records of serie A have a ! in their NUM :
-<pre>
-A1 : 909 1876
-A2 : 2641
-A4 : 159 320 439 1350 1443 1480 2136 2312
-A5 : 1435 1557 1813 1829 2349 
-A6 : 15 139 148 225 232 265 448 574 622 668 718 727 737 738  
-</pre>
-This is not present in pages including names (for example present in <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdA1.html">902gdA1.html</a> but not in <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdA1y.html">902gdA1y.html</a>).
-<br>The explanation is given in <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/17archg.html">main Cura page</a> : they correspond to records containing errors in the original publication (LERRCP), and corrected in Françoise Gauquelin's journal <i>Astro-Psychological Problems</i>.
-<br>This information is not yet included in g5 database.
+<br>This works like names :
+<pre>php run-g5.php g55 570SPO edited2cura place list</pre>
+<pre>php run-g5.php g55 570SPO edited2cura place update</pre>
+-->
 
 <!-- ********************************************************************************* -->
 <h2>tweak2tmp</h2>
-Auxiliary files located in <code>data/db/init/lerrcp-tweak</code> permit to store corrections used to fix errors detected in steps <code>addGeo</code> and <code>legalTime</code>.
+Auxiliary YAML files located in <code>data/db/init/lerrcp-tweak</code> permit to store corrections used to solve errors detected in steps <code>addGeo</code> and <code>legalTime</code>.
 
 <!-- ********************************************************************************* -->
 <h2><a name="addgeo">addGeo</a></h2>
 
-This step bring corrections to place names and compute geonames id for non-ambiguous cases.
+This step brings corrections to place names and compute geonames id for non-ambiguous cases.
 
 <br>It is useful for several purposes:
 <ul>
     <li>Correct city names, which are approximative in Cura web pages.</li>
-    <li>Add precision to longitudes, which is useful for legal time computation.</li>
+    <li>
+        Add precision to longitudes, which is useful for legal time computation.
+        <br>Longitudes given in Cura web page are precise to 1 arc minute, and are sometimes erroneous.
+        <br>See for example record A1-558 Charles Farroux ; longitude given by Cura is 2°05', and geonames gives 2°59'59''
+    </li>
     <li>Prepare <a href="wikidata.html">matching with wikidata</a>.</li>
 </ul>
 
@@ -300,7 +346,7 @@ WRONG USAGE - This command needs a parameter indicating the type of report
 - small : only echoes global information about matching.
 </pre>
 
-It modifies records of <code>data/tmp/gauq/lerrcp/</code> only if there is a unique match to geonames.
+It modifies records of <code>data/tmp/gauq/lerrcp/</code> <b>only if there is a unique match to geonames</b>. This restrictive match gives low matching rates but guarantees that the command doesn't introduce errors.
 <br>In case of match, fills column <code>GEOID</code>, and updates column <code>PLACE</code> (because place names in geonames are generally better).
 <br>
 <br>See <a href="geonames.html">page about Geonames</a>.
@@ -347,15 +393,32 @@ It's a problem, because if one wants to check the data, it's impossible to check
 
 The command :
 <pre>php run-g5.php cura A legalTime</pre>
-adds a column <code>DATE-C</code> (= date corrected) to the tmp files.
-<br>Example for record A2-1 (Joseph Jean Abadie), 
-<br><code>DATE-UT = 1873-12-15 15:59:40+00:00</code> : information from cura.free.fr unchanged
-<br><code>DATE-C = 1873-12-15 16:04+00:05:03</code> : time is modified and timezone offset (+00:05:03) is added.
-<br>
-<br>Here a bug appears, the legal birth time is probably 16:00, not 16:03. For dates prior to 1891-03-15, timezone offset computation involves longitude and equation of time.
+adds two columns, <code>DATE-C</code> (= date corrected) and <code>TZO</code> (timezone offset) to the tmp files of <code>data/tmp/gauq/lerrcp</code>.
 
-<br>
-<br>Restoration rates are low :
+<br><br>Current code performs restoration only for persons born in France, excluding all cases that can't be fixed by program without ambiguity (ambiguity comes from world wars 1 and 2, for parts of France that were invaded by Germany ; precise timezone offset depend on local conditions ; see <a href="time.html">page about timezone</a>).
+
+<br><br>Example for record A1-1 Alard Pierre
+<br>Information extracted from Cura file gives
+<br><code>DATE-UT = 1937-09-17 17:00:00</code>
+<br>Command <code>legalTime</code> adds 2 columns:
+<br><code>DATE-C = 1937-09-17 18:00</code>
+<br><code>TZO = +01:00</code>
+
+<br><br>This is OK, but a problem appears in France for dates prior to 1891-03-15 because timezone offset computation involves longitude:
+<br>Example for record A1-2 André Georges
+<br>Information extracted from Cura file gives
+<br><code>DATE-UT = 1889-08-13 12:20:40</code>
+<br>Command <code>legalTime</code> adds 2 columns:
+<br><code>DATE-C = 1889-08-13 12:30:04</code>
+<br><code>TZO = +00:09:24</code>
+
+<br><br>Here birth time is obviously <code>12:30</code> and not <code>12:30:04</code>.
+<br>A probable explanation is that longitudes given in Cura files are not precise enough to permit an exact computation.
+<br>If this hypothese is correct, it means that <b>UT times given in Cura pages are not exact</b>. Fortunately, this error is small (max observed = 3 minutes of time), but it is an illustration of the problems generated when providing UT times instead of legal times.
+
+<br><br>In theory, this can be fixed by program (infer correct legal time and recompute timezone offset), but has not been implemented yet.
+
+<br><br>Restoration rates are low :
 <pre>
 A1 : restored 1029 / 2087 dates (49.31 %)
 A2 : restored 1614 / 3643 dates (44.3 %)
@@ -364,43 +427,6 @@ A4 : restored 2333 / 2720 dates (85.77 %)
 A5 : restored 882 / 2410 dates (36.6 %)
 A6 : restored 776 / 2026 dates (38.3 %)
 </pre>
-
-Current code performs restoration only for persons born in France, excluding all cases that can't be fixed by program without ambiguity (ambiguity comes from world wars 1 and 2, for parts of France that were invaded by Germany ; precise timezone offset depend on local conditions).
-
-This can be bettered by implementing non-ambiguous cases for other countries present in A files.
-
-
-<!-- ********************************************************************************* -->
-<h2><a name="better-a1-names-and-place-with-gauquelin-1955">Better A1 names and place with Gauquelin 1955</a></h2>
-
-The restoration of 1955 group "570 sportifs" is used to better family and given names as well as place names in file A1.
-<br>This step must be performed after <code>newalch ertel4391 fixA1</code>, as name spelling in Gauquelin 1955 book is better, and after <code>legalTime</code>.
-<br>
-<br>The corrections use the columns added for human corrections of files in <code>3-g55-edited/</code> (these column names end with <code>_55</code>). Other columns of these files are not used. The reason is that once a file located in <code>3-g55-edited/</code> is edited by a human, it is never updated by program again. So the columns generated by program may contain obsolete information (in fact they do, because the file <code>3-g55-edited/570SPO.csv</code> was generated before writing commands that add corrections).
-
-<!-- ************************************* -->
-<h3><a name="6-1-names">Names</a></h3>
-
-The command
-<pre>php run-g5.php g55 570SPO edited2cura name list</pre>
-lists the differences between names of Cura A files and Gauquelin 1955 groups.
-<br>Random checks, comparing the names with wikipedia and other sources, show that Gauquelin names are globally better than Cura names (but Gauquelin 1955 names also contain errors).
-<!--  - these are handled by the <code>finalize-csv</code> step of cura csv generation, see <a href="gauquelin-A.html">the page about serie A</a> -->
-
-
-<pre>php run-g5.php g55 570SPO edited2cura name update</pre>
-is used to copy the contents of columns <code>GIVEN_55</code> and <code>FAMILY_55</code> to the files of <code>5-cura-csv/</code>.
-<br>
-<br>This command updates 59 names in file <code>A1</code>.
-
-<!-- ************************************* -->
-<h3><a name="6-2-places">Places</a></h3>
-Gauquelin 1955 place names are generally better than Cura places.
-
-<br>This works like names :
-<pre>php run-g5.php g55 570SPO edited2cura place list</pre>
-<pre>php run-g5.php g55 570SPO edited2cura place update</pre>
-
 
 </article>
 </div><!-- end class="main" -->

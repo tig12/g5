@@ -64,10 +64,6 @@ class legalTime implements Command {
             // Compute $row2['DATE-C'] (restored legal time)
             // define ut = $row1['DATE-UT'] and t2  = $row2['DATE-C'] :
             // ut = t2 - offset => t2 = ut + offset
-echo 'date-ut = ' . $row1['DATE-UT'] . "\n";
-//$offset = '-01:00:00';
-//$offset = '-00:02:34';
-echo "offset = $offset\n";
             $offsetSeconds = HHMMSS2seconds::compute($offset);
             $t = new \DateTime($row1['DATE-UT']);
             $interval = new \DateInterval('PT' . abs($offsetSeconds) . 'S');
@@ -83,9 +79,15 @@ echo "offset = $offset\n";
             else{
                 $row2['DATE-C'] = $t->format('Y-m-d H:i:s');
             }
-            $row2['OFFSET'] = $offset;
-echo 'date-c = ' . $row2['DATE-C'] . "\n";
-exit;
+            $row2['TZO'] = $offset;
+            //
+            // TODO add a function fix_legalTime() to fix DATE-C when it include seconds
+            // ex: A1-2 André Georges
+            // DATE-UT = 1889-08-13 12:20:40
+            // DATE-C = 1889-08-13 12:30:04
+            // DATE-C should be converted to 1889-08-13 12:30
+            // Then TZO and DATE-UT converted again
+            //
             $nCorrected++;
             $res .= implode(G5::CSV_SEP, $row2) . "\n";
         }
