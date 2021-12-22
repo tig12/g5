@@ -65,7 +65,7 @@ class Group {
     **/
     public static function getBySlug($slug): ?Group {
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("select * from groop where slug=?");
+        $stmt = $dblink->prepare('select * from groop where slug=?');
         $stmt->execute([$slug]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         if($res === false || count($res) == 0){
@@ -85,7 +85,7 @@ class Group {
     **/
     public static function loadAllFromDB() {
         $dblink = DB5::getDbLink();
-        $query = "select * from groop";
+        $query = 'select * from groop';
         $res = [];
         foreach($dblink->query($query, \PDO::FETCH_ASSOC) as $row){
             $row['parents'] = json_decode($row['parents'], true);
@@ -109,7 +109,7 @@ class Group {
     **/
     public function insert(): int{
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("insert into groop(
+        $stmt = $dblink->prepare('insert into groop(
             slug,
             name,
             n,
@@ -119,7 +119,7 @@ class Group {
             sources,
             parents,
             children
-            ) values(?,?,?,?,?,?,?,?,?) returning id");
+            ) values(?,?,?,?,?,?,?,?,?) returning id');
         $this->data['n'] = count($this->data['members']);
         $stmt->execute([
             $this->data['slug'],
@@ -146,7 +146,7 @@ class Group {
     **/
     public function update(bool $updateMembers=true) {
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("update groop set
+        $stmt = $dblink->prepare('update groop set
             slug=?,
             name=?,
             n=?,
@@ -156,7 +156,7 @@ class Group {
             sources=?,
             parents=?,
             children=?
-            where id=?");
+            where id=?');
         if($updateMembers == true){
             $this->data['n'] = count($this->data['members']);
         }
@@ -200,7 +200,7 @@ class Group {
     **/
     public function computeMembers(){
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("select id_person from person_groop where id_groop=" . $this->data['id']);
+        $stmt = $dblink->prepare('select id_person from person_groop where id_groop=' . $this->data['id']);
         $stmt->execute([]);
         $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         $this->data['members'] = [];
@@ -219,7 +219,7 @@ class Group {
     **/
     public function insertMembers() {
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("insert into person_groop(id_person,id_groop) values(?,?)");
+        $stmt = $dblink->prepare('insert into person_groop(id_person,id_groop) values(?,?)');
         $this->data['members'] = array_unique($this->data['members']);
         foreach($this->data['members'] as $pid){
             try{
@@ -240,8 +240,8 @@ class Group {
     **/
     public function updateMembers() {
         $dblink = DB5::getDbLink();
-        $dblink->exec("delete from person_groop where id_groop=" . $this->data['id']);
-        $stmt = $dblink->prepare("insert into person_groop(id_person,id_groop) values(?,?)");
+        $dblink->exec('delete from person_groop where id_groop=' . $this->data['id']);
+        $stmt = $dblink->prepare('insert into person_groop(id_person,id_groop) values(?,?)');
         $this->data['members'] = array_unique($this->data['members']);
         foreach($this->data['members'] as $pid){
             $stmt->execute([$pid, $this->data['id']]);
@@ -257,10 +257,59 @@ class Group {
     **/
     public function deleteMembers() {
         $dblink = DB5::getDbLink();
-        $dblink->exec("delete from person_groop where id_groop=" . $this->data['id']);
+        $dblink->exec('delete from person_groop where id_groop=' . $this->data['id']);
         $this->data['members'] = [];
         $this->data['n'] = 0;
         $this->update(updateMembers:false); // for field n
+    }
+    
+    // ******************************************************
+    /**
+        Adds one person in a group in database.
+        Static function, not related to any Group object.
+        
+        If the person already belongs to parent groups of $groupSlug,
+        the associations between parent groups and person are deleted.
+        Ex storePersonInGroup('football-player') for a person already belonging to 'sportsperson':
+        the association between the person and group 'sportsperson' will be deleted
+        
+        WARNING: this function doesn't handle the case where the person already belongs to a child group.
+        Ex storePersonInGroup('sportsperson') for a person already belonging to 'football-player'.
+        
+        @param  $personId   Id of the Person to add (its primary key).
+        @param  $groupSlug  Slug of a group already stored in database.
+        @throws Exception if insertion failed.
+    **/
+    public static function storePersonInGroup(int $personId, string $groupSlug) {
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare('select id from groop where slug=?');
+        $stmt->execute([$groupSlug]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if($res === false || count($res) == 0){
+            throw new \Exception("Group '$groupSlug' not found in database");
+        }
+        $groupId = $res['id'];
+        
+        // Transaction to delete from parent groups (if any) and insert in current group
+        self::computeAllAncestors();
+        // This test is necessary because storePersonInGroup() is successively called from
+        // db/fill/person(A1.yml) and (D6.yml)
+        // With call from A1, self::$allAncestors is cached but d6 group doesn't exist yet
+        if(!isset(self::$allAncestors[$groupSlug])){
+            self::$allAncestors = null;
+            self::computeAllAncestors();
+        }
+        $ancestors = self::$allAncestors[$groupSlug];
+        $dblink->beginTransaction();
+        // delete from parent groups
+        $stmt_del = $dblink->prepare('delete from person_groop where id_groop=(select id from groop where slug=?) and id_person=?');
+        foreach($ancestors as $ancestorSlug){
+            $stmt_del->execute([$ancestorSlug, $personId]);
+        }
+        // insert in current group
+        $stmt_ins = $dblink->prepare('insert into person_groop(id_person,id_groop) values(?,?)');
+        $stmt_ins->execute([$personId, $groupId]);
+        $dblink->commit();
     }
     
     // ***********************************************************************
@@ -342,7 +391,7 @@ class Group {
             return;
         }
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("select * from person where id in(select id_person from person_groop where id_groop=?)");
+        $stmt = $dblink->prepare('select * from person where id in(select id_person from person_groop where id_groop=?)');
         $stmt->execute([$this->data['id']]);
         $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         $this->data['person-members'] = [];

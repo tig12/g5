@@ -364,6 +364,23 @@ class Person {
     }
     
     /**
+        Adds an array of issues.
+        @param  $issues Array of key / value pairs
+    **/
+    public function addIssues($issues) {
+        if(is_null($this->data['issues'])){
+            $this->data['issues'] = [];
+        }
+        foreach($issues as $k => $v){
+echo "key = '$k'\n";
+            if(isset($this->data['issues'][$k])){
+                throw new \Exception("TRYING TO ADD A ISSUE OF AN EXISTING KEY \n" . $this->data['slug'] . " - issue key = $k\n");
+            }
+            $this->data['issues'][$k] = $v;
+        }
+    }
+    
+    /**
         @param  $k  Key of the issue to remove
     **/
     public function removeIssue(string $k) {

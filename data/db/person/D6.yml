@@ -9,16 +9,12 @@
     ACTION: insert
     ADD-IN-GROUPS:
       - d6
-  sources:
-    - d6
-    - ertel-sport
-    - wd
   ids-in-sources:
     d6: '234'
     ertel-sport: '2318'
     wd: Q522782
   ids-partial:
-    lerrcp: A1-1899
+    lerrcp: D6-234
     ertel: ES-2318
     wd: Q522782
   name:

@@ -34,7 +34,7 @@
       geoid: 3171366
   notes:
     - |
-      This person is present in Ertel file gathering athletes without birth date.
+      This person is present without birth date in Ertel's file of sportsmen.
       <br>Informations come from <a href="https://it.wikipedia.org/wiki/Giuseppe_Albani_(calciatore)">https://it.wikipedia.org/wiki/Giuseppe_Albani_(calciatore)</a> and <a href="https://www.transfermarkt.com/peppino-albani/profil/spieler/538598">https://www.transfermarkt.com/peppino-albani/profil/spieler/538598</a>
   issues:
     chk-date: |

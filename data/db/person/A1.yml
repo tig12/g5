@@ -10,6 +10,7 @@
     ACTION: update
   ids-in-sources:
     a1: '513'
+  # ids-partial useless as already stored by tmp2db
   occus:
     - cyclist
     - motor-sports-competitor
@@ -22,7 +23,6 @@
       c2: 78
       cy: FR
       geoid: 2979783
-
   notes:
     - Death informations come from <a href="https://earlyaviators.com/eborn1.htm">https://earlyaviators.com/eborn1.htm</a>
   issues:
@@ -32,9 +32,8 @@
 -
   ADMIN: 
     ACTION: insert
-  sources:
-    - a1
-    - ertel-sport
+    ADD-IN-GROUPS:
+      - a1
   ids-in-sources:
     a1: '1899'
     ertel-sport: '1548'
@@ -66,6 +65,5 @@
       geoid: 2996921
   notes: 
     - |
-      This person is present in Ertel sportsmen list, but not present in cura5 A1 list.
-      <br>Birth place and death informations come from <a href="https://avis-deces.linternaute.com/nom/famille-escalante">https://avis-deces.linternaute.com/nom/famille-escalante</a> (Ertel file does not contain birth place).
-      
+      This person is present in Ertel's sportsmen list, but not present in cura5 A1 list.
+      <br>Birth place and death informations come from <a href="https://avis-deces.linternaute.com/nom/famille-escalante">https://avis-deces.linternaute.com/nom/famille-escalante</a> (Ertel's file does not contain birth place).

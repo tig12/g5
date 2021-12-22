@@ -205,8 +205,8 @@ class all implements Command {
             
             echo D6tmp2db::execute(['D6', 'tmp2db', 'small']);
             echo dbFillPerson::execute(['D6.yml']);
-            
 exit;
+            
             echo D10tmp2db::execute(['D10', 'tmp2db', 'small']);
             
             echo E1E3tmp2db::execute(['E1', 'tmp2db', 'small']);

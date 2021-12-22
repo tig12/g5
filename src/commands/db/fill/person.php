@@ -14,6 +14,7 @@ namespace g5\commands\db\fill;
 use tiglib\patterns\Command;
 use g5\app\Config;
 use g5\model\Person as ModelPerson;
+use g5\model\Group as ModelGroup;
 
 class person implements Command {
     
@@ -52,22 +53,32 @@ class person implements Command {
             }
             
             // Remove ADMIN fields from tweak because tweak is used to fill the person
-            // and ADMIN fields must not be stored in person
+            // and ADMIN fields must not be stored in person.
             $ADMIN = $tweak['ADMIN'];
             unset($tweak['ADMIN']);
             //
             // HERE call insert() or update()
             //
-            $msg = $ADMIN['ACTION'] == 'insert'
+            [$personId, $msg] = $ADMIN['ACTION'] == 'insert'
                 ? self::insert($tweak)
                 : self::update($tweak);
             if($msg != ''){
                 return $msg;
             }
+            //
+            // Add person in groups
+            // (a similar thing is already done in insert() or update() for occupations)
+            //
             if(isset($ADMIN['ADD-IN-GROUPS'])){
-                
+                foreach($ADMIN['ADD-IN-GROUPS'] as $groupSlug){
+                    try{
+                        ModelGroup::storePersonInGroup($personId, $groupSlug);
+                    }
+                    catch(\Exception $e){
+                        return $e->getMessage() . "\n";
+                    }
+                }
             }
-            
         }
         if(self::$nUpdate != 0){
             $report .= 'Updated ' . self::$nUpdate . " persons in DB from {$params[0]}\n";
@@ -78,26 +89,33 @@ class person implements Command {
         return $report;
     }
     
+    // ******************************************************
     /**
-        Updates a person already exiting in db
+        Updates a person already existing in db
+        @return Array containing 2 elements: 
+                - The id of the updated person ; -1 if update failed.
+                - An error message ; empty string if no error.
     **/
     private static function update($tweak) {
         if(!isset($tweak['ids-in-sources'])){
-            return "TWEAK ERROR: every tweak must contain a field 'ids-in-sources'"
+            $msg = "TWEAK ERROR: every tweak must contain a field 'ids-in-sources'"
                 . " - concerned tweak:\n" . print_r($tweak, true) . "\n";
+            return [-1, $msg];
         }
         if(count($tweak['ids-in-sources']) < 1){
-            return "TWEAK ERROR: field 'ids-in-sources' must contain at least one element"
+            $msg = "TWEAK ERROR: field 'ids-in-sources' must contain at least one element"
                 . " - concerned tweak:\n" . print_r($tweak, true) . "\n";
+            return [-1, $msg];
         }
                 
         // Always use the first element of ids-in-sources to find the person
         $source = array_keys($tweak['ids-in-sources'])[0];
-        $id = $tweak['ids-in-sources'][$source];
-        $p = ModelPerson::getBySourceId($source, $id); // DB
+        $sourceId = $tweak['ids-in-sources'][$source];
+        $p = ModelPerson::getBySourceId($source, $sourceId); // DB
         if(is_null($p)){
-            return "TWEAK ERROR: Person doesn't exist in database - source = $source, id = $id"
+            $msg = "TWEAK ERROR: Person doesn't exist in database - source = $source, id = $sourceId"
                 . " - concerned tweak:\n" . print_r($tweak, true) . "\n";
+            return [-1, $msg];
         }
         
         // OK, possible to update
@@ -121,24 +139,46 @@ class person implements Command {
             $p->addNotes($tweak['notes']);
             unset($new['notes']);
         }
+        if(isset($tweak['issues'])){
+            $p->addIssues($tweak['issues']);
+            unset($new['issues']);
+        }
         
         $p->updateFields($new);
-        $p->computeSlug(); // HERE recompute slug if the update changes name or birth date
+        // Recompute slug in case update changed name or birth date or name.
+        $p->computeSlug();
         
         $p->addHistory(
             command: 'db fill person ' . self::$yamlFile,
             sourceSlug: self::$yamlFile, // not a real source slug
-            newdata: $new,
-            rawdata: $tweak
+            rawdata: $tweak,
+            newdata: $tweak,
         );
         
         $p->update(); // DB
+        
+        // Occupations must be handled separately because not done by $p->update()
+        if(isset($tweak['occus'])){
+            foreach($tweak['occus'] as $groupSlug){
+                try{
+                    ModelGroup::storePersonInGroup($p->data['id'], $groupSlug);
+                }
+                catch(\Exception $e){
+                    return [$p->data['id'], $e->getMessage() . "\n"];
+                }
+            }
+        }
+        
         self::$nUpdate++;
-        return '';
+        return [$p->data['id'], ''];
     }
     
+    // ******************************************************
     /**
         Inserts a new person in db
+        @return Array containing 2 elements: 
+                - The id of the inserted person ; -1 if insert failed
+                - An error message ; empty string if no error.
     **/
     private static function insert($tweak) {
         $p = new ModelPerson();
@@ -150,9 +190,26 @@ class person implements Command {
             newdata: $tweak,
             rawdata: $tweak
         );
-        $p->insert(); // DB
-        self::$nInsert++;
-        return '';
+        try{
+            $id = $p->insert(); // DB
+            
+            // Occupations must be handled separately because not done by $p->insert()
+            if(isset($tweak['occus'])){
+                foreach($tweak['occus'] as $groupSlug){
+                    try{
+                        ModelGroup::storePersonInGroup($id, $groupSlug);
+                    }
+                    catch(\Exception $e){
+                        return [$p->data['id'], $e->getMessage() . "\n"];
+                    }
+                }
+            }
+            self::$nInsert++;
+            return [$id, ''];
+        }
+        catch(\Exception $e){
+            return [-1, $e->getMessage() . "\n"];
+        }
     }
     
 } // end class
