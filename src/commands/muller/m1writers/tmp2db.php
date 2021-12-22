@@ -117,7 +117,7 @@ class tmp2db implements Command {
                 $p->computeSlug();
                 // repeat fields to include in $history
                 $new['sources'] = $source->data['slug'];
-                $new['ids_in_sources'] = [
+                $new['ids-in-sources'] = [
                     Muller::SOURCE_SLUG => $mullerId,
                     $source->data['slug'] => $line['MUID'],
                 ];
@@ -178,7 +178,7 @@ class tmp2db implements Command {
                 $p->computeSlug();
                 // repeat fields to include in $history
                 $new['sources'] = $source->data['slug'];
-                $new['ids_in_sources'] = [
+                $new['ids-in-sources'] = [
                     Muller::SOURCE_SLUG => $mullerId,
                     $source->data['slug'] => $line['MUID'],
                 ];

@@ -33,7 +33,7 @@
 <h1>Gauquelin LERRCP - files E1 and E3</h1>
 <div class="intro">
 Pages <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdE1.html">902gdE1.html</a> and <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdE3.html">902gdE3.html</a> share the same format and can be handled by the same code.
-<br>Each page contains two lists, one with birth data and one with the position of the Moon, Venus, Mars, Jupiter and Saturn in the 36 Gauquelin Sectors. These two lists can be merged easily, and planetary positions are included in the resulting file.
+<br>Each page contains two lists, one with birth data and one with the position of the Moon, Venus, Mars, Jupiter and Saturn in the 36 Gauquelin Sectors. These two lists can be merged easily, and planetary positions are included in the generated temporary files.
 <br>
 According to cura.free.fr :
 <div class="padding-left">
@@ -48,6 +48,9 @@ According to cura.free.fr :
 <nav class="toc">
     <ul>
         <li>
+            <a href="#g5-integration">G5 integration</a>
+        </li>
+        <li>
             <a href="#raw2tmp">raw2tmp</a>
             <ul>
                 <li><a href="#1-1-num">NUM</a></li>
@@ -59,35 +62,30 @@ According to cura.free.fr :
             </ul>
         </li>
         <li>
-            <a href="#use-muller-1083">Use Müller 1083</a>
-        </li>
-        <li>
             <a href="#todo">TODO</a>
         </li>
     </ul>
 </nav>
 
 
-
-
-
-
-
-
+<!-- ********************************************************************************* -->
+<h2 id="g5-integration">G5 integration</h2>
 Importing raw files in database is done with following commands:
 <pre>
-php run-g5.php cura E1 raw2tmp small
-php run-g5.php cura E3 raw2tmp small
-php run-g5.php newalch muller1083 fixCura E1 names update   # only for E1
-php run-g5.php cura E1 tmp2db
-php run-g5.php cura E3 tmp2db
+php run-g5.php gauq E1 raw2tmp small
+php run-g5.php gauq E3 raw2tmp small
+php run-g5.php gauq E1 tmp2db
+php run-g5.php gauq E3 tmp2db
 </pre>
+
+Step <code>raw2tmp</code> performs place restoration, geonames matching, timezone offset computation.
+<br>Importation of <a href="muller5-1083-medics.html">Arno Müller's 1083 medical doctors</a> permits to restore some names in E3.
 
 <!-- ********************************************************************************* -->
 <h2 id="raw2tmp">raw2tmp</h2>
 
 This command needs a parameter to indicate what it should print :
-<pre>php run-g5.php cura E1 raw2tmp</pre>
+<pre>php run-g5.php gauq E1 raw2tmp</pre>
 <pre>
 MISSING PARAMETER : raw2tmp needs a parameter to specify which output it displays. Can be :
   small : echoes only global report
@@ -99,8 +97,8 @@ MISSING PARAMETER : raw2tmp needs a parameter to specify which output it display
 <!-- ************************************* -->
 <h3 id="1-1-num">NUM</h3>
 <b>IMPORTANT</b> : files E1 and E3 differ from other Cura files because records between 1 and 999 are prefixed with zeroes.
-<br>To obtain coherent NUM among generated  csvfiles, <b>these zeroes were removed to form the NUM of generated files</b>.
-<br>This is done in step <code>cura2csv</code>.
+<br>To obtain coherent NUM among generated csvfiles, <b>these zeroes were removed to form the NUM of generated files</b>.
+<br>This is done in step <code>raw2tmp</code>.
 
 <!-- 
 Check the meaning of birth time in file E1 and E3
@@ -111,19 +109,20 @@ archives82.fr, Verdun-sur-Garonne, naissances 1890, p 10 / 34
 Birth hour mentionned = 08:00 ; same as birth hour of file E1
 
 E3 : Checked civil registry for Abel Jean-Baptiste :
-archives.var.fr, Toulon, rgistry 7E146_260 (birth 1863), p 60 / 518
+archives.var.fr, Toulon, registry 7E146_260 (birth 1863), p 60 / 518
 Birth hour mentionned = 14:00 ; same as birth hour of file E3
 
 Concluded that birth mentioned in files E1 and E3 are expressed in civil time
 (conclusion coherent with the notice)
 -->
+
 <!-- ************************************* -->
 <h3 id="1-2-place">Place</h3>
 The main problem of files E1 and E3 is that the timezone offset is not given. It can be computed from the place and the date, which means that the place must be identified to be linked with a timezone. This is done through geonames.org and included in the resulting file. 
 <br>
 <br>This gives partial results :
 
-<pre>php run-g5.php cura E1 raw2tmp</pre>
+<pre>php run-g5.php gauq E1 raw2tmp</pre>
 <pre>
 Importing E1
 2153 lines parsed
@@ -132,7 +131,7 @@ Importing E1
 1540 persons stored precisely (71.53 %)
 </pre>
 
-<pre>php run-g5.php cura E3 raw2tmp</pre>
+<pre>php run-g5.php gauq E3 raw2tmp</pre>
 <pre>
 Importing E3
 1539 lines parsed
@@ -246,19 +245,6 @@ Cura files contain several typos.
 </pre>
     </li>
 </ul>
-
-<div class="warning block">
-    Following doc is obslolete
-    <br>E1 names are fixed during the import of Müller's 1083 physicians.
-</div>
-
-
-<!-- ********************************************************************************* -->
-<h2 id="use-muller-1083">Use Müller 1083</h2>
-
-Arno Müller's file of 1083 medical doctors is used to better names and birth days in E1.
-<br>See <a href="muller5-1083-medics.html#fix-cura">page on Müller 1083</a>, paragraphs "Fix Cura names" and "Fix Cura days".
-
 
 <!-- ********************************************************************************* -->
 <h2 id="todo">TODO</h2>

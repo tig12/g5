@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -33,7 +32,7 @@
 <h1>Gauquelin LERRCP - file D6</h1>
 <div class="intro">
 D6 file was published by Gauquelin in 1979. It contains data used for a replication of 
-<br>The title of the original booklet indicates 432 European sport champions. Inclusion of these data in g5 database uses  page <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdD6.html">902gdD6.html</a> from Cura web site, anouncing 450 records (this difference has not been explained yet).
+<br>The title of the original booklet indicates 432 European sport champions. Inclusion of these data in g5 database uses page <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdD6.html">902gdD6.html</a> from Cura web site, anouncing 450 records (this difference has not been explained yet).
 <br>The main problem with this file is that it contains neither place name nor country. So timezone offset computation is impossible without restoration. Country restoration is done using reverse geocoding. This also permits to compute place names, but does not always give the exact birth place. This restoration needs to be bettered, birth place restoration is currently not included in the resulting file.
 
 </div>
@@ -43,7 +42,10 @@ D6 file was published by Gauquelin in 1979. It contains data used for a replicat
 <nav class="toc">
     <ul>
         <li>
-            <a href="#preparatory-code">Preparatory code</a>
+            <a href="#g5-integration">G5 integration</a>
+            <ul>
+                <li><a href="#1-1-preparatory-code">Preparatory code</a></li>
+            </ul>
         </li>
         <li>
             <a href="#raw2tmp">raw2tmp</a>
@@ -58,9 +60,8 @@ D6 file was published by Gauquelin in 1979. It contains data used for a replicat
     </ul>
 </nav>
 
-
 <!-- ********************************************************************************* -->
-<h2>G5 integration</h2>
+<h2 id="g5-integration">G5 integration</h2>
 To import raw file in database, the following commands must be issued, in this order :
 <pre>
 php run-g5.php gauq D6 raw2tmp
@@ -69,7 +70,7 @@ php run-g5.php gauq D6 tmp2db
 </pre>
 
 <!-- ************************************* -->
-<h3>Preparatory code</h3>
+<h3 id="1-1-preparatory-code">Preparatory code</h3>
 Cura file contains 32 names that can't be easily split to family / given names by program. To handle these cases, the command 
 <pre>php run-g5.php gauq D6 look emptyGiven</pre>
 was used to build array <code>D6::NAMES_CORRECTIONS</code>.
@@ -344,9 +345,3 @@ But step <code>addGeo</code> has the interest to restore the country, giving the
 
 </div><!-- end class="container" -->
 
-</body>
-</html>
-/div><!-- end class="container" -->
-
-</body>
-</html>

@@ -119,7 +119,7 @@ class tmp2db implements Command {
                 //
                 $p->computeSlug();
                 // repeat fields to include in $history
-                $new['ids_in_sources'] = [
+                $new['ids-in-sources'] = [
                     $source->data['slug'] => $line['NUM'],
                     $lerrcpSource->data['slug'] => $gqId,
                 ];
@@ -142,7 +142,7 @@ class tmp2db implements Command {
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
                 // repeat fields to include in $history
                 $new = [];
-                $new['ids_in_sources'] = [
+                $new['ids-in-sources'] = [
                     $source->data['slug'] => $line['NUM'],
                 ];
                 $new['occus'] = $newOccus;

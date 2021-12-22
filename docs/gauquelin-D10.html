@@ -32,36 +32,69 @@
 <header>
 <h1>Gauquelin LERRCP - file D10</h1>
 <div class="intro">
-This file is almost perfect : it contains name, legal birth time, timezone offset, birth place, so importing it is just a matter of formatting.
-<br>For sportsmen, precise sport code is not specified and couldn't be computed.
-<br>Page <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdD10.html">902gdD10.html</a> also contains a list of character traits that is not handled by the program.
-<br>Accoding to cura.free.fr : <i>D10 contains 1398 data of successful Americans</i> but only 1397 were found in the file.
+D10 was published in 1982 by Gauquelin. It contains birth dates of successful U.S. persons. Sportsmen contained in this file were used for a replication of "mars effect".
+<br>Inclusion of these data in g5 database is done using page <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdD10.html">902gdD10.html</a> from cura.free.fr.
+<br>Cura web page is almost perfect : it contains name, legal birth time, timezone offset, birth place, so importing it is just a matter of formatting.
 </div>
 </header>
 
 <article>
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#small-errors">Small errors</a>
+        </li>
+        <li>
+            <a href="#todo">TODO</a>
+        </li>
+    </ul>
+</nav>
 
+<!-- ********************************************************************************* -->
+<h2>About D10</h2>
+
+<!-- ************************************* -->
+<h3>Number of records</h3>
+The number of records of this group could not be determined :
+
+<ul class="spaced">
+    <li>In the original LERRCP booklet, Gauquelin announces <b>1400</b> birth dates.</li>
+    <li>Accoding to cura.free.fr : <i>D10 contains <b>1398</b> data of successful Americans</i>.</li>
+    <li>
+        G5 code finds only <b>1396</b> records in Cura web page. Records nb 355 and 902 are missing.
+        <br>Record 355 (Marcel Rozier) could be restored thanks to <a href="ertel-4391-sport.html">Ertel's file</a> (num 3615).
+        <br>Record 902 could not be identified without access to the original document.
+    </li>
+</ul>
+
+<!-- ************************************* -->
+<h3>Profession codes</h3>
+For sportspersons, precise sport codes are not specified. Some codes could be computed thanks to Ertel's file.
+
+<!-- ********************************************************************************* -->
+<h2>G5 integration</h2>
 Importing raw file in database is done with following commands:
+
 <pre>
-php run-g5.php cura D10 raw2tmp
-php run-g5.php cura D10 tmp2db
+php run-g5.php gauq D10 raw2tmp
+php run-g5.php gauq D10 tmp2db
 </pre>
 
 Step <code>raw2tmp</code> contains only minor fixes.
 
 <!-- ********************************************************************************* -->
-<h2>Small errors</h2>
-There is one record without birth time that was excluded from the resulting file :
+<h2 id="small-errors">Small errors</h2>
+There is one record without birth time:
 <pre>1098!	Rose Peter		SP	14	4	1941	-----	5h	39N6	84W31	Cincinnati, OH</pre>
 
-Two lines miss longitude and latitude :
+Two lines miss longitude and latitude:
 <pre>
 493	Good Robert		AC	21	5	1922	06:00	6h			Grosby, MN
 658	Jeter Robert		SP	9	5	1937	08:00	5h			Union, SC
 </pre>
 These lines were fixed in the code of <code>raw2tmp</code> and included in the resulting file.
-<br>
-<br>13 lines had to be fixed because of bad formatting (contain white spaces instead of tabs) :
+
+<br><br>13 lines had to be fixed because of bad formatting (contain white spaces instead of tabs) :
 <pre>
 112	Blanton Leonard		PO	10	4	1930	21:30	6h	35N11   88W10	Hardin County, TN	
 192	Caldwell Philip		EX	27	1	1920	08:00	5h	39N16   83W09	Bourneville, OH	
@@ -79,12 +112,6 @@ These lines were fixed in the code of <code>raw2tmp</code> and included in the r
 </pre>
 These lines were fixed in the code of <code>raw2tmp</code> and included in the resulting file.
 
-
-<!-- ********************************************************************************* -->
-<h2>TODO</h2>
-<ul>
-    <li>Re-include Rose Peter if she can be identified without ambiguity.</li>
-</ul>
 
 </article>
 </div><!-- end class="main" -->

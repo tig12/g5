@@ -372,7 +372,6 @@ class Person {
             $this->data['issues'] = [];
         }
         foreach($issues as $k => $v){
-echo "key = '$k'\n";
             if(isset($this->data['issues'][$k])){
                 throw new \Exception("TRYING TO ADD A ISSUE OF AN EXISTING KEY \n" . $this->data['slug'] . " - issue key = $k\n");
             }

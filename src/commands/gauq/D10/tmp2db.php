@@ -103,7 +103,6 @@ class tmp2db implements Command {
             if(is_null($p)){
                 // insert new person
                 $p = new Person();
-                $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
                 $p->addIdPartial($lerrcpSource->data['slug'], $gqId);
                 $new = [];
@@ -129,7 +128,7 @@ class tmp2db implements Command {
                 $p->computeSlug();
                 // repeat fields to include in $history
                 $new['sources'] = $source->data['slug'];
-                $new['ids_in_sources'] = [
+                $new['ids-in-sources'] = [
                     $source->data['slug'] => $line['NUM'],
                     $lerrcpSource->data['slug'] => $gqId,
                 ];
@@ -146,7 +145,6 @@ class tmp2db implements Command {
             else{
                 // duplicate, person appears in more than one cura file
                 $p->addOccus($newOccus);
-                $p->addSource($source->data['slug']);
                 // does not addIdPartial(lerrcp) to respect the definition of Gauquelin id:
                 // lerrcp id takes the value of the first volume where it appears.
                 // lerrcp id already affected in a previous file for this record.
@@ -154,7 +152,7 @@ class tmp2db implements Command {
                 // repeat fields to include in $history
                 $new = [];
                 $new['sources'] = $source->data['slug'];
-                $new['ids_in_sources'] = [
+                $new['ids-in-sources'] = [
                     $source->data['slug'] => $line['NUM'],
                 ];
                 $new['occus'] = $newOccus;

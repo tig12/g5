@@ -45,7 +45,7 @@ This page deals with the file <a href="https://newalchemypress.com/gauquelin/gau
 More work can be done on this file :
 <ul>
     <li>Check legal time restoration in A2.</li>
-    <li>Better place names in A2 (which would permit better matching to geonames).</li>
+    <li>Better place names in A2 (useful to prepare matching with <a href="wikidata.html">Wikidata</a>).</li>
 </ul>
 
 </div>
@@ -60,8 +60,7 @@ More work can be done on this file :
         <li>
             <a href="#integration-to-g5">Integration to g5</a>
             <ul>
-                <li><a href="#2-1-full-execution">Full execution</a></li>
-                <li><a href="#2-2-generate-csv">Generate csv</a></li>
+                <li><a href="#2-2-generate-temporary-file">Generate temporary file</a></li>
                 <li><a href="#2-3-tweak2tmp">tweak2tmp</a></li>
             </ul>
         </li>
@@ -100,8 +99,6 @@ More work can be done on this file :
     </ul>
 </nav>
 
-
-
 <!-- ********************************************************************************* -->
 <h2 id="generalities">Generalities</h2>
 This group was built by Arno Müller and Suitbert Ertel in 1994.
@@ -117,17 +114,9 @@ This group was built by Arno Müller and Suitbert Ertel in 1994.
 <!-- ********************************************************************************* -->
 <h2 id="integration-to-g5">Integration to g5</h2>
 
-<div class="warning block">
-This file is imported in g5 database but following doc has not been updated yet.
-</div>
+The raw input file is <code>data/raw/muller/5-medics/5a_muller-medics-utf8.txt</code>
 
-The raw file is <code>data/raw/newalchemypress.com/05-muller-medics/5a_muller-medics-utf8.txt</code>
-
-<!-- ************************************* -->
-<h3 id="2-1-full-execution">Full execution</h3>
-
-
-The full set of transformations can be executed with the command : 
+<br><br>The full set of transformations can be executed with the command : 
 <pre>php run-g5.php muller m5medics all</pre>
 
 This is equivalent to :
@@ -138,14 +127,14 @@ php run-g5.php muller m5medics fixGnr update
 </pre>                                    
 
 <!-- ************************************* -->
-<h3 id="2-2-generate-csv">Generate csv</h3>
+<h3 id="2-2-generate-temporary-file">Generate temporary file</h3>
 The first step is to generate the file <b><code>data/tmp/muller/5-medics/muller5-1083-medics.csv</code></b> :
 <pre>php run-g5.php muller m5medics raw2tmp</pre>
 This step includes minor corrections in given names (some accents are missing).
 
 <!-- ************************************* -->
 <h3 id="2-3-tweak2tmp">tweak2tmp</h3>
-This step applies corrections from file <code>data/3-edited/newalch-tweaked/1083MED.yml</code>, see page <a href="tweak2tmp.html">tweak2tmp</a>.
+This step applies human corrections stored in file <code>data/db/init/newalch-tweaked/muller5-1083-medics.yml</code>.
 <br>Used to fix errors in the names of noble persons (<a href="#nobilities">see below</a>).
 
 

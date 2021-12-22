@@ -149,7 +149,7 @@ class tmp2db implements Command {
                 $p->computeSlug();
                 // repeat fields to include in $history
                 $new['sources'] = $source->data['slug'];
-                $new['ids_in_sources'] = [ $source->data['slug'] => $line['CSID'] ];
+                $new['ids-in-sources'] = [ $source->data['slug'] => $line['CSID'] ];
                 $new['occus'] = [[$line['SPORT']]];
                 $p->addHistory(
                     command: 'csicop irving tmp2db',
@@ -191,7 +191,7 @@ class tmp2db implements Command {
                 $p->computeSlug();
                 // repeat fields to include in $history
                 $new['sources'] = $source->data['slug'];
-                $new['ids_in_sources'] = [ $source->data['slug'] => $line['CSID'] ];
+                $new['ids-in-sources'] = [ $source->data['slug'] => $line['CSID'] ];
                 $new['occus'] = [[$line['SPORT']]];
                 $p->addHistory(
                     command: 'csicop irving tmp2db',

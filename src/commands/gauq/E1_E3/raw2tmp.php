@@ -368,18 +368,19 @@ class raw2tmp implements Command {
                     - given name
     **/
     public static function fix_name($fname, $gname){
+        $ucWordsSep = "- \t\r\n\f\v"; // default + '-'
         if($gname != ''){
-            return [ucWords(mb_strToLower($fname)), $gname];
+            return [ucWords(mb_strToLower($fname), $ucWordsSep), $gname];
         }
         // Use the fact that family names are uppercased to split
         // note : \p{Lu} means upper case with utf8 mode u
         $p = '/([\p{Lu}\-\' ]+) (.*)/u';
         preg_match($p, $fname, $m);
         if(count($m) == 3){
-            return [ucWords(mb_strToLower($m[1])), $m[2]];
+            return [ucWords(mb_strToLower($m[1]), $ucWordsSep), $m[2]];
         }
         // result unchanged
-        return [ucWords(mb_strToLower($fname)), $gname];
+        return [ucWords(mb_strToLower($fname), $ucWordsSep), $gname];
     }
 
 }// end class    

@@ -153,7 +153,7 @@ class tmp2db implements Command {
                     $p->addIssue(Issue::CHK_DATE, $dateOrTimeIssue);
                 }
                 // repeat fields to include in $history
-                $new['ids_in_sources'] = [
+                $new['ids-in-sources'] = [
                     $source->data['slug'] => $line['NUM'],
                 ];
                 $new['ids_partial'] = [
@@ -188,7 +188,7 @@ class tmp2db implements Command {
                 // repeat fields to include in $history
                 $new = [];
                 $new['sources'] = $source->data['slug'];
-                $new['ids_in_sources'] = [
+                $new['ids-in-sources'] = [
                     $source->data['slug'] => $line['NUM'],
                 ];
                 $new['occus'] = $newOccus;
