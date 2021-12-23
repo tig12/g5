@@ -42,18 +42,9 @@ class stats implements Command {
         $N_time = $dblink->query($query)->fetch()[0];
         $report_full .= "N_time = $N_time\n";
         
-        $query = "select count(*) from person where
-                    length(birth->>'date') = 10
-                 or length(birth->>'date-ut') = 10";
-        $N_day = $dblink->query($query)->fetch()[0];
+        $N_day = $N - $N_time;
         $report_full .= "N_day = $N_day\n";
-        
-        $sum = $N_time + $N_day;
-        $report_full .= "N_time + N_day = $sum\n";
-        if($sum != $N){
-            $report .= "*** ANOMALY *** normally, N_time + N_day = N\n" . $report_full;
-        }
-        
+                
         $countries = [];
         $query = "select birth->'place'->>'cy' as country, count(*) as count from person
             group by birth->'place'->>'cy'

@@ -139,7 +139,6 @@ class tmp2db implements Command {
                 $new['sex'] = $line['SEX'];
                 //
                 $p->addOccu(ErtelSport::computeSport($line));
-                $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NR']);
                 $p->addIdPartial(Ertel::SOURCE_SLUG, $erId);
                 $p->updateFields($new);
@@ -220,12 +219,10 @@ class tmp2db implements Command {
                     // no new information added by Ertel
                 }
                 
-                $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NR']);
                 $p->addIdPartial(Ertel::SOURCE_SLUG, $erId);
                 $p->updateFields($new);
                 // repeat fields to include in $history
-                $new['sources'] = [$source->data['slug']];
                 $new['ids-partial'] = [Ertel::SOURCE_SLUG => $erId];
                 $p->addHistory(
                     command: 'ertel sport tmp2db',

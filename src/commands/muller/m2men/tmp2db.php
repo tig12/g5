@@ -118,7 +118,7 @@ class tmp2db implements Command {
                 $p->addIssue(Issue::CHK_TIME, $issue);
                 $issue = 'This person is present as nb 457 in <a href="/group/muller-afd2-men">Müller\'s list of 612 famous men</a> - birth place = Modica' . "\n"
                        . '<br>and as nb 367 in <a href="/group/muller-afd1-writers">Müller\'s list of 402 writers</a> - birth place = Siracusa';
-                $p->addIssue(Issue::CHK_TIME, $issue);
+                $p->addIssue(Issue::CHK_BPLACE, $issue);
                 // repeat fields to include in $history
                 $new['ids-in-sources'] = [$source->data['slug'] => $muid];
                 if(M2men::OCCUS[$line['OCCU']] != 'X'){ // X => handled in data/db/person/muller-612-men.yml

@@ -222,12 +222,12 @@ class all implements Command {
             
             echo M3womenTmp2db::execute(['small']);
             echo dbFillPerson::execute(['muller-234-women.yml']);
-exit;
             
             echo M2menTmp2db::execute(['small']);
             echo dbFillPerson::execute(['muller-612-men.yml']);
             
             echo ErteSportTmp2db::execute(['small']);
+            echo dbFillPerson::execute(['ertel-sport.yml']);
             
             echo occus2::execute();
         }
