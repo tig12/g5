@@ -10,7 +10,7 @@
   ADMIN: 
     ACTION: update
   ids-in-sources:
-    afd3: '001'
+    afd3: '1'
     wd: Q270617
   name:
     family: Adam
@@ -18,7 +18,7 @@
     official:
       family: Lambert
   occus:
-    - writer
+#    - writer
     - feminist
   notes:
     - 2021-08-01 06:09:20+02:00 corrections from https://en.wikipedia.org/wiki/Juliette_Adam
@@ -27,7 +27,7 @@
   ADMIN: 
     ACTION: update
   ids-in-sources:
-    afd3: '010'
+    afd3: '10'
     wd: Q161247
   name:
     family: Schleswig-Holstein-Sonderburg-Augustenburg
@@ -40,7 +40,7 @@
   ADMIN: 
     ACTION: update
   ids-in-sources:
-    afd3: '011'
+    afd3: '11'
     wd: Q270187
   name:
     family: Douet
@@ -56,7 +56,7 @@
   ADMIN: 
     ACTION: update
   ids-in-sources:
-    afd3: '013'
+    afd3: '13'
     wd: Q815333
   name:
     official:
@@ -68,7 +68,7 @@
   ADMIN: 
     ACTION: update
   ids-in-sources:
-    afd3: '020'
+    afd3: '20'
     wd: Q97003
   name:
     fame:
@@ -87,7 +87,7 @@
   ADMIN: 
     ACTION: update
   ids-in-sources:
-    afd3: '023'
+    afd3: '23'
   birth:
     place:
       geoid: '2939828'
@@ -97,7 +97,7 @@
   ADMIN: 
     ACTION: update
   ids-in-sources:
-    afd3: '024'
+    afd3: '24'
     wd: Q55398
   occus:
     - saint
@@ -107,7 +107,7 @@
   ADMIN: 
     ACTION: update
   ids-in-sources:
-    afd3: '030'
+    afd3: '30'
     wd: Q241732
   official:
     given: Marie-Rosalie
@@ -120,7 +120,7 @@
   ADMIN: 
     ACTION: update
   ids-in-sources:
-    afd3: '040'
+    afd3: '40'
     wd: Q545965
   name:
     given: Maria
@@ -131,7 +131,7 @@
   ADMIN: 
     ACTION: update
   ids-in-sources:
-    afd3: '055'
+    afd3: '55'
     wd: Q76851
   name:
     official:
@@ -144,7 +144,7 @@
   ADMIN: 
     ACTION: update
   ids-in-sources:
-    afd3: '060'
+    afd3: '60'
     wd: Q1456321
   name:
     official:
@@ -158,7 +158,7 @@
   ADMIN: 
     ACTION: update
   ids-in-sources:
-    afd3: '087'
+    afd3: '87'
     wd: Q234697
   occus:
     - saint

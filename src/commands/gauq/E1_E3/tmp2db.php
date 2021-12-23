@@ -130,7 +130,6 @@ class tmp2db implements Command {
                 $new['sources'] = $source->data['slug'];
                 $new['ids-in-sources'] = [
                     $source->data['slug'] => $line['NUM'],
-                    $lerrcpSource->data['slug'] => $gqId,
                 ];
                 $new['occus'] = $newOccus;
                 $p->addHistory(

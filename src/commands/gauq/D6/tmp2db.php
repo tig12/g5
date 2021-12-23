@@ -121,7 +121,6 @@ class tmp2db implements Command {
                 // repeat fields to include in $history
                 $new['ids-in-sources'] = [
                     $source->data['slug'] => $line['NUM'],
-                    $lerrcpSource->data['slug'] => $gqId,
                 ];
                 $new['occus'] = $newOccus;
                 $p->addHistory(

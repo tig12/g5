@@ -10,6 +10,12 @@ namespace g5\commands\muller;
 class Muller {
     
     /**
+        Trust level for data imported from Astro-Forschungs-Daten booklets
+        @see https://tig12.github.io/gauquelin5/check.html
+    **/
+    const TRUST_LEVEL = 4;
+    
+    /**
         Path to the yaml file containing the characteristics of Arno Müller.
         Relative to directory data/db/source
     **/

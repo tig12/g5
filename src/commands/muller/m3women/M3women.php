@@ -9,17 +9,11 @@
 namespace g5\commands\muller\m3women;
 
 use g5\app\Config;
-use g5\model\DB5;
-use g5\model\{Source, Group};
+use g5\model\Source;
+use g5\model\Group;
 use tiglib\arrays\csvAssociative;
 
 class M3women {
-    
-    /**
-        Trust level for data
-        @see https://tig12.github.io/gauquelin5/check.html
-    **/
-    const TRUST_LEVEL = 4;
     
     /**
         Path to the yaml file containing the characteristics of the source describing file
@@ -113,27 +107,27 @@ class M3women {
 
     **/
     const GQ_MATCH = [
-        '001' => 'A6-6', // ADAM Juliette *LAMBER
-        '007' => 'A6-46', // AUDOUX Marguerite
-        '011' => 'A1-129', // AURIOL Jacqueline *DOUET
-        '015' => 'A5-60', // BARDOT Brigitte
-        '018' => 'A6-72', // BEAUVOIR Simone DE
-        '030' => 'A4-137', // BONHEUR Rosa
-        '031' => 'E3-189', // BOULANGER Nadia Juliette
-        '035' => 'E3-228', // BRUCHOLLERIE Monique DE LA
-        '039' => 'A5-152', // CAROL Martine
-        '043' => 'A5-165', // CHARRAT Janine
-        '046' => 'A6-210', // SIDONIE Gabrielle
-        '049' => 'E3-408', // CRESPIN Regine
-        '050' => 'A5-215', // DARRIEUX Daniele
-        '052' => 'D10-308', // DAY Doris
-        '053' => 'A6-239', // DELARUE-MARDRUS Lucie *DELARUE
-        '058' => 'A5-1084', // DORSCH Rathe
-        '062' => 'A5-879', // DUSE Eleonora
-        '071' => 'A5-327', // FEUILLERE Edwige *CUNATI
-        '082' => 'A6-1098', // GEVERS Marie
-        '088' => 'A5-390', // GRECO Juliette
-        '094' => 'A5-1114', // HAAGEN Margarete
+        '1'   => 'A6-6', // ADAM Juliette *LAMBER
+        '7'   => 'A6-46', // AUDOUX Marguerite
+        '11'  => 'A1-129', // AURIOL Jacqueline *DOUET
+        '15'  => 'A5-60', // BARDOT Brigitte
+        '18'  => 'A6-72', // BEAUVOIR Simone DE
+        '30'  => 'A4-137', // BONHEUR Rosa
+        '31'  => 'E3-189', // BOULANGER Nadia Juliette
+        '35'  => 'E3-228', // BRUCHOLLERIE Monique DE LA
+        '39'  => 'A5-152', // CAROL Martine
+        '43'  => 'A5-165', // CHARRAT Janine
+        '46'  => 'A6-210', // SIDONIE Gabrielle
+        '49'  => 'E3-408', // CRESPIN Regine
+        '50'  => 'A5-215', // DARRIEUX Daniele
+        '52'  => 'D10-308', // DAY Doris
+        '53'  => 'A6-239', // DELARUE-MARDRUS Lucie *DELARUE
+        '58'  => 'A5-1084', // DORSCH Rathe
+        '62'  => 'A5-879', // DUSE Eleonora
+        '71'  => 'A5-327', // FEUILLERE Edwige *CUNATI
+        '82'  => 'A6-1098', // GEVERS Marie
+        '88'  => 'A5-390', // GRECO Juliette
+        '94'  => 'A5-1114', // HAAGEN Margarete
         '109' => 'E3-834', // JOLIOT-CURIE Irene *CURIE
         '117' => 'A5-1157', // KNEF Hildegard
         '128' => 'A6-492', // LENERU Marie

@@ -132,13 +132,11 @@ class tmp2db implements Command {
                 $new['birth']['place']['lat'] = (float)$line['LAT'];
                 //
                 $p->addOccus($newOccus);
-                $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NR']);
                 $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
-                $new['sources'] = $source->data['slug'];
                 $new['ids-in-sources'] = [ $source->data['slug'] => $line['NR'] ];
                 $new['occus'] = $newOccus;
                 $p->addHistory(
@@ -148,7 +146,7 @@ class tmp2db implements Command {
                     rawdata: $lineRaw
                 );
                 $nInsert++;
-//                $p->data['id'] = $p->insert(); // DB
+                $p->data['id'] = $p->insert(); // DB
             }
             else{
                 // Person already in A2 or E1
@@ -196,9 +194,7 @@ class tmp2db implements Command {
                         $issue = "Check birth date because Müller and Gauquelin birth hours differ"
                                . "\n<br>Gauquelin $gauqId: $gauqHour"
                                . "\n<br>Müller $mullerId: $mulHour\n";
-//echo "$mullerId - $gauqId\n'{$p->data['birth']['date']}'\n'{$line['DATE']}'\n\n";
                     }
-//echo "\n<pre>"; print_r($p); echo "</pre>\n"; exit;
                 }
                 // update fields that are more precise in muller1083
                 $new['birth']['date'] = $line['DATE']; // Cura contains only date-ut
@@ -214,7 +210,6 @@ class tmp2db implements Command {
                 $new['name']['official']['given'] = $line['GNAME'];
                 //
                 $p->addOccus($newOccus);
-                $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['NR']);
                 $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
@@ -230,11 +225,10 @@ class tmp2db implements Command {
                     rawdata: $lineRaw
                 );
                 $nUpdate++;
-//                $p->update(); // DB
+                $p->update(); // DB
             }
             $g->addMember($p->data['id']);
         }
-exit;
         $t2 = microtime(true);
         $g->insertMembers(); // DB
         $dt = round($t2 - $t1, 5);
@@ -249,5 +243,5 @@ exit;
         return $report;
     }
         
-}// end class    
+} // end class    
 

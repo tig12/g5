@@ -5,6 +5,9 @@
     WARNING : all existing tables are dropped and recreated.
     Precise order of the executed steps must be respcted to obtain a coherent result.
     
+    Order of execution may not seem logical (ex: Müller1 should be done before Müller5),
+    but it corresponds to the order of integration in g5, as things progressed.
+    
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-08-17 20:18:47+02:00, Thierry Graff : Creation
 ********************************************************************************/
@@ -141,17 +144,14 @@ class all implements Command {
             }
             
             echo D6raw2tmp::execute(['D6', 'raw2tmp']);
-            //echo Gauqtweak2tmp::execute(['D6', 'tweak2tmp']);
             echo D6addGeo::execute(['D6', 'addGeo']); // tmp code - addGeo needs to be fixed
             
             echo D10raw2tmp::execute(['D10', 'raw2tmp']);
-            //echo Gauqtweak2tmp::execute(['D10', 'tweak2tmp']);
             
             echo E1E3raw2tmp::execute(['E1', 'raw2tmp', 'small']);
             echo Gauqtweak2tmp::execute(['E1', 'tweak2tmp']);
             
             echo E1E3raw2tmp::execute(['E3', 'raw2tmp', 'small']);
-            //echo Gauqtweak2tmp::execute(['E3', 'tweak2tmp']);
             
             echo ErtelSportRaw2tmp::execute([]);
             echo ErtelSporttweak2tmp::execute([]);
@@ -213,7 +213,6 @@ class all implements Command {
             echo E1E3tmp2db::execute(['E3', 'tmp2db', 'small']);
             
             echo M5medicsTmp2db::execute(['small']);
-exit;
             
             echo M1writersTmp2db::execute(['small']);
             
@@ -223,6 +222,7 @@ exit;
             
             echo M3womenTmp2db::execute(['small']);
             echo dbFillPerson::execute(['muller-234-women.yml']);
+exit;
             
             echo M2menTmp2db::execute(['small']);
             echo dbFillPerson::execute(['muller-612-men.yml']);

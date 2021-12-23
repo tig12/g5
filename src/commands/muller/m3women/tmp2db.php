@@ -119,16 +119,13 @@ class tmp2db implements Command {
                 if(M3women::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
                     $p->addOccus([ M3women::OCCUS[$line['OCCU']] ]);
                 }
-                $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $muid);
                 $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
-                $new['sources'] = $source->data['slug'];
                 $new['ids-in-sources'] = [
                     $source->data['slug'] => $muid,
-                    Muller::SOURCE_SLUG => $mullerId,
                 ];
                 if(M3women::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
                     $new['occus'] = [ M3women::OCCUS[$line['OCCU']] ];
@@ -201,29 +198,6 @@ class tmp2db implements Command {
                         $localReport_txt .= str_pad("Müller    $muid", 20) . "$multime {$line['FNAME']} - {$line['GNAME']}\n\n";
                         $localReport_html  = '<br>' . str_pad("Gauquelin $gqid", 20, '&nbsp;') . "$curatime\n";
                         $localReport_html .= '<br>' . str_pad("Müller    $muid", 20, '&nbsp;') . "$multime\n";
-/* 
-if($multime != $curatime){
-    // code never executed as all times are equal
-    $localReport_txt = "Gauquelin / Müller times different:\n" . $localReport_txt;
-    $localReport_html = "Gauquelin / Müller times different:\n<br>" . $localReport_html;
-    $timesReport .= $localReport_txt;
-    $todo = [
-        'object' => [
-          'date' => date('c'),
-          'author' => 'php run-g5.php muller m3women tmp2db',
-        ],
-        'key' => TODO::CHK_TIME,
-        'person' => $p->data['slug'],
-        'description' => $localReport_html, 
-    ];
-    $p->addTodo($todo);
-}
-else{
-echo "NOTE: $localReport_html\n";
-    $localReport_html = "Gauquelin and Müller have same time:\n" . $localReport_html;
-    $p->addNotes([$localReport_html]);
-}
-*/
                     }
                 }
                 // update fields that are more precise in muller234
@@ -245,7 +219,6 @@ echo "NOTE: $localReport_html\n";
                 if(M3women::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
                     $p->addOccus([ M3women::OCCUS[$line['OCCU']] ]);
                 }
-                $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $muid);
                 $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);

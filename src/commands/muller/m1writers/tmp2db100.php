@@ -100,16 +100,13 @@ class tmp2db100 implements Command {
                 // are stored in addHistory()
                 $occu = self::computeOccu($line);
                 $p->addOccus([$occu]);
-                $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['MUID']);
                 $mullerId = Muller::mullerId($source->data['slug'], $line['MUID']);
                 $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
-                $new['sources'] = $source->data['slug'];
                 $new['ids-in-sources'] = [
-                    Muller::SOURCE_SLUG => $mullerId,
                     $source->data['slug'] => $line['MUID'],
                 ];
                 $new['occus'] = [$occu];
@@ -125,7 +122,6 @@ class tmp2db100 implements Command {
             }
             else{
                 // person already in Gauquelin data
-                $test->addSource($source->data['slug']);
                 $test->addIdInSource($source->data['slug'], $line['MUID']);
                 $mullerId = Muller::mullerId($source->data['slug'], $line['MUID']);
                 $test->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
@@ -134,9 +130,7 @@ class tmp2db100 implements Command {
                 // TODO see if some fields can be updated (if Müller more precise than Gauquelin)
                 $new = [];
                 // repeat fields to include in $history
-                $new['sources'] = $source->data['slug'];
                 $new['ids-in-sources'] = [
-                    Muller::SOURCE_SLUG => $mullerId,
                     $source->data['slug'] => $line['MUID'],
                 ];
                 $new['occus'] = [$occu];

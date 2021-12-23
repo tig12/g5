@@ -12,6 +12,7 @@ use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
+use g5\model\Issue;
 use g5\commands\muller\Muller;
 use g5\commands\gauq\LERRCP;
 use g5\commands\muller\m1writers\M1writers;
@@ -97,27 +98,30 @@ class tmp2db implements Command {
             $new = [];
             $new['sex'] = 'M';
             if($muid == '457'){
-                // M1-367 - Exceptional case: same person present in 2 different Müller data sets
-                // Birth time and birth place differ
+                // Exceptional case: same person present in 2 different Müller data sets
                 // M1-367: Quasimodo Salvatore M 1901-08-20 18:00 +01:00  Siracusa IT SR 15 37 writer
-                // M3-457: Quasimodo, Salvatore 20.08.1901 04.10 -1.00 I Modica 36 N 48 014 E 58 AR 01 56 SA N
-                // Update with M3 data (because birth place corresponds to Wikipedia) But should be checked
+                // M2-457: Quasimodo, Salvatore 20.08.1901 04.10 -1.00 I Modica 36 N 48 014 E 58 AR 01 56 SA N
+                // Birth time and birth place differ
+                // Update with M2 data (because birth place corresponds to Wikipedia) But should be checked
+                $p = Person::getBySourceId(M1writers::LIST_SOURCE_SLUG, '457');
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['tzo'] = $line['TZO'];
                 if($line['TIMOD'] == 'LMT'){
                     $new['birth']['lmt'] = true;
                 }
                 $new['birth']['place']['name'] = $line['PLACE'];
-                $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $muid);
+                // do not call $p->addIdPartial to respect Müller unique id definition
                 $p->updateFields($new);
+                $issue = 'This person is present as nb 457 in <a href="/group/muller-afd2-men">Müller\'s list of 612 famous men</a> - time = 04:10' . "\n"
+                       . '<br>and as nb 367 in <a href="/group/muller-afd1-writers">Müller\'s list of 402 writers</a> - time = 18:00';
+                $p->addIssue(Issue::CHK_TIME, $issue);
+                $issue = 'This person is present as nb 457 in <a href="/group/muller-afd2-men">Müller\'s list of 612 famous men</a> - birth place = Modica' . "\n"
+                       . '<br>and as nb 367 in <a href="/group/muller-afd1-writers">Müller\'s list of 402 writers</a> - birth place = Siracusa';
+                $p->addIssue(Issue::CHK_TIME, $issue);
                 // repeat fields to include in $history
-                $new['sources'] = $source->data['slug'];
-                $new['ids-in-sources'] = [
-                    $source->data['slug'] => $muid,
-                    Muller::SOURCE_SLUG => $mullerId,
-                ];
-                if(M2men::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
+                $new['ids-in-sources'] = [$source->data['slug'] => $muid];
+                if(M2men::OCCUS[$line['OCCU']] != 'X'){ // X => handled in data/db/person/muller-612-men.yml
                     $new['occus'] = [ M2men::OCCUS[$line['OCCU']] ];
                 }
                 $p->addHistory(
@@ -128,6 +132,7 @@ class tmp2db implements Command {
                 );
                 $nUpdate++;
                 $p->update(); // DB
+                $g->addMember($p->data['id']);
                 continue;
             }
             if(!isset(M2men::MU_GQ[$muid])){
@@ -153,13 +158,11 @@ class tmp2db implements Command {
                 $new['birth']['place']['lat'] = (float)$line['LAT'];
                 //
                 $p->addOccus([ M2men::OCCUS[$line['OCCU']] ]);
-                $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $muid);
                 $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
-                $new['sources'] = $source->data['slug'];
                 $new['ids-in-sources'] = [
                     $source->data['slug'] => $muid,
                     Muller::SOURCE_SLUG => $mullerId,
@@ -222,7 +225,7 @@ class tmp2db implements Command {
                         // compare times
                         $multime = substr($line['DATE'], 11);
                         $curatime = substr($p->data['birth']['date'], 11);
-                        if($multime != $curatime){
+                        if( $reportType == 'full' && $multime != $curatime){
                             $timesReport .= "Cura\t $gqid\t $curatime {$p->data['name']['family']} - {$p->data['name']['given']}\n";
                             $timesReport .= "Müller\t {$muid}\t $multime {$line['FNAME']} - {$line['GNAME']}\n\n";
                         }
@@ -245,16 +248,13 @@ class tmp2db implements Command {
                     $new['place']['c2'] = $line['C2'];
                 }
                 $p->addOccus([ M2men::OCCUS[$line['OCCU']] ]);
-                $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $muid);
                 $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
-                $new['sources'] = $source->data['slug'];
                 $new['ids-in-sources'] = [
                     $source->data['slug'] => $muid,
-                    Muller::SOURCE_SLUG => $mullerId,
                 ];
                 $new['occus'] = [ M2men::OCCUS[$line['OCCU']] ];
                 $p->addHistory(

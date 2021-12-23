@@ -26,5 +26,8 @@ class Issue {
     
     /** Check timezone offset **/
     const CHK_TZO = 'chk-tzo';
-        
+    
+    /** Check birth place **/
+    const CHK_BPLACE = 'chk-bplace';
+    
 } // end class

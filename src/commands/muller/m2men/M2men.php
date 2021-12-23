@@ -9,18 +9,11 @@
 namespace g5\commands\muller\m2men;
 
 use g5\app\Config;
-use g5\model\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use tiglib\arrays\csvAssociative;
 
 class M2men {
-    
-    /**
-        Trust level for data
-        @see https://tig12.github.io/gauquelin5/check.html
-    **/
-    const TRUST_LEVEL = 4;
     
     /**
         Path to the yaml file containing the characteristics of the source describing file

@@ -1,25 +1,18 @@
 
 
 - see php bug - https://bugs.php.net/bug.php?id=81002
+  (to store booleans in postgres)
 
-- remove useless fields from table source:
+- In docs/, replace references to g5.tig12.net by new url
+
+  - remove useless fields from table source:
   replace title, isbn etc by 'details', kv map depending on source type.
 
 - integrate muller 1083 fix cura days and names to db/init/all
 
-- see db/fill/person
-    unset($new['occus']);
-    unset($new['name']['alter']);
-    etc.
-    => keeping all the fields in new seems more logical
-
 - add field 'lmt'       in person birth - in Muller 612 men and 234 women, put LMT info in field birth.lmt instead of birth.note.
 - add field 'notime'    in person birth
 => DONE - must be tested
-
-- Person field 'sources' seems useless - redundant with ids_in_sources
-    => remove from bd
-    => remove all instructions addSource from tmp2db
 
 - add notes and issues in tmp2db
 

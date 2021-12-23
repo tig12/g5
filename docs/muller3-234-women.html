@@ -35,8 +35,8 @@
 <div class="subtitle">(Arno Müller vol. 3)</div>
 </h1>
 <div class="intro">
-List self-published by Arno Müller in <b><i>Astro-Forschungs-Daten</i> (AFD) volume 3 (1993)</b>.
-<br>Status: under development - integration to g5 incomplete.
+This list was elaborated by Arno Müller and Edith Lührs, and self-published by Arno Müller in <b><i>Astro-Forschungs-Daten</i> (AFD) volume 3 (1993)</b>.
+<br>Importation process showed that 44 records are already present in Gauquelin data, this file then brings <span class="bold big">190 new birth times</span>.
 </div>
 </header>
 
@@ -44,11 +44,7 @@ List self-published by Arno Müller in <b><i>Astro-Forschungs-Daten</i> (AFD) vo
 <nav class="toc">
     <ul>
         <li>
-            <a href="#files">Files</a>
-            <ul>
-                <li><a href="#1-1-auxiliary-files">Auxiliary files</a></li>
-                <li><a href="#1-2-raw-files">Raw files</a></li>
-            </ul>
+            <a href="#origin">Origin</a>
         </li>
         <li>
             <a href="#g5-integration">g5 integration</a>
@@ -68,16 +64,12 @@ List self-published by Arno Müller in <b><i>Astro-Forschungs-Daten</i> (AFD) vo
 
 
 <!-- ********************************************************************************* -->
-<h2 id="files">Files</h2>
+<h2 id="origin">Origin</h2>
 
-<!-- ************************************* -->
-<h3 id="1-1-auxiliary-files">Auxiliary files</h3>
 Publication of this list is possible thanks to Nick Kollerstrom, who scanned the original booklet.
 <br>These scans can be downloaded from <a href="https://github.com/tig12/g5-aux/tree/master/1993-muller3-women">github.com/tig12/g5-aux/tree/master/1993-muller3-women</a>.
 
-<!-- ************************************* -->
-<h3 id="1-2-raw-files">Raw files</h3>
-These scans were OCRed (transformed to text), tabulated and corrected.
+<br><br>These scans were OCRed (transformed to text), tabulated and corrected.
 <br>The resulting list is versioned with g5, in <a href="https://github.com/tig12/gauquelin5/tree/master/data/raw/muller/3-women">data/raw/muller/3-women</a>.
 <br>This list is used as input by g5 program.
 
@@ -88,7 +80,7 @@ These scans were OCRed (transformed to text), tabulated and corrected.
 <div class="bold">Still incomplete</div>
 
 <pre>
-php run-g5.php muller afd3 raw2tmp
+php run-g5.php muller m3women raw2tmp
 </pre>
 
 <!-- ************************************* -->
@@ -130,7 +122,7 @@ The meaning of the fields can be understood thanks to explanations given by Mül
 </ul>
 
 <br>These 2 fields are analyzed with the command
-<pre>php run-g5.php muller afd3 look source</pre>
+<pre>php run-g5.php muller m3women look source</pre>
 
 <pre>
 Primary source:
@@ -159,15 +151,14 @@ The file contains 43 persons from Gauquelin database, à priori brings <b>191 ne
 <!-- ************************************* -->
 <h3 id="3-2-match-gauquelin-data">Match Gauquelin data</h3>
 The command
-<pre>php run-g5.php muller afd3 look gauquelin</pre>
+<pre>php run-g5.php muller m3women look gauquelin</pre>
 is used to generate a table of correspondance between Müller and Gauquelin data.
 <br>Birth day is used to match the records.
 <br>This command was issued several times to fix manually the ambiguous cases.
-<br>This verification process showed that one birth date is wrong in Müller's file (record 177, RACHILDE *EYMERY Marguerite Vallette). A verification at online civil registry showed that Gauquelin date was correct.
+<br>This verification process showed that one birth date is wrong in Müller's file (record 177, RACHILDE *EYMERY Marguerite Vallette).
+<br>A verification at online civil registry showed that <b>Gauquelin date was correct</b>.
 <br>44 records are found to match Gauquelin, so this file should bring 234 - 44 = <b>190 new records</b>.
-<br>The correspondance table is stored in constant <code>MU_CURA</code> of class <code>g5\commands\muller\afd3\AFD3</code>.
-
-
+<br>The correspondance table is stored in constant <code>GQ_MATCH</code> of class <code>g5\commands\muller\m3women\M3women</code>.
 
 
 </article>

@@ -45,6 +45,9 @@ class raw2tmp implements Command {
                 $field = trim(mb_substr($line, $offset, $length));
                 $new_raw[$rawFieldname] = $field;
                 switch($rawFieldname){
+                case 'MUID':
+                    $new['MUID'] = (int)$field; // remove leading zeroes
+                break;
                 case 'NAME':
                     [$new['FNAME'], $new['GNAME']] = self::computeName($field);
                 break;
@@ -58,7 +61,7 @@ class raw2tmp implements Command {
                     $new['TZO'] = Muller::computeTimezoneOffset($field);
                 break;
                 case 'PLACE':
-                    // by chance, CY appears before place in raw file => can be passed here
+                    // by chance, CY appears before place in the raw file => can be passed here
                     [$new['C1'], $new['C2'], $new['PLACE']] = self::computePlace($field, $new['CY']);
                 break;
                 case 'LAT':

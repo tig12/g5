@@ -96,8 +96,6 @@ class Person {
     **/
     public static function getBySourceId($sourceSlug, $idInSource): ?Person {
         $dblink = DB5::getDbLink();
-        //$stmt = $dblink->prepare("select * from person where ids_in_sources @> '{\"?\": \"?\"}'");
-        //$stmt->execute([$sourceSlug, $idInSource]);
         $stmt = $dblink->prepare("select * from person where ids_in_sources @> '{\"$sourceSlug\": \"$idInSource\"}'");
         $stmt->execute([]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);

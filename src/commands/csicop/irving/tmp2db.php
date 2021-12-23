@@ -142,13 +142,11 @@ class tmp2db implements Command {
                 $new['birth']['place']['lat'] = (float)$line['LAT'];
                 //
                 $p->addOccus([$line['SPORT']]);
-                $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['CSID']);
                 $p->addIdPartial($csicopSource->data['slug'], $line['CSID']);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
-                $new['sources'] = $source->data['slug'];
                 $new['ids-in-sources'] = [ $source->data['slug'] => $line['CSID'] ];
                 $new['occus'] = [[$line['SPORT']]];
                 $p->addHistory(
@@ -184,13 +182,11 @@ class tmp2db implements Command {
                     }
                 }
                 $p->addOccus([$line['SPORT']]);
-                $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['CSID']);
                 $p->addIdPartial($csicopSource->data['slug'], $line['CSID']);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
-                $new['sources'] = $source->data['slug'];
                 $new['ids-in-sources'] = [ $source->data['slug'] => $line['CSID'] ];
                 $new['occus'] = [[$line['SPORT']]];
                 $p->addHistory(
@@ -228,5 +224,4 @@ class tmp2db implements Command {
         return $report;
     }
         
-}// end class    
-
+} // end class    

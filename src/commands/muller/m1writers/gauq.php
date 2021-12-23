@@ -19,7 +19,6 @@ class gauq implements Command {
     const POSSIBLE_PARAMS = [
         'update' => "Updates column GQID of file tmp/muller/1-writers/muller1-402-writers.csv",
         'report' => "Echoes a html table to compare muller-402-it-writers.csv and A6.csv",
-        'check' => "Echoes a html table comparing M1writers to all Gauquelin data, not only A6",
     ];                                                                                                  
     
     /** 
@@ -364,60 +363,4 @@ class gauq implements Command {
         return $report;
     }
     
-    /**
-        Builds a HTML table with matches between all Gauquelin and Müller writers
-        @return Report
-    **/
-    private static function check(): string {
-return "TODO : IMPLEMENT THIS FUNCTION\n";
-        $report = '';
-        $report .= "<style>tr.spacer{height:2px} .diff{background:lightyellow;}</style>\n";
-        // match
-        $report .= '<table class="wikitable margin">' . "\n";
-        $report .= "    <tr>";
-        $report .= "<th></th>";
-        $report .= "<th>Id</th>";
-        $report .= "<th>Family name</th>";
-        $report .= "<th>Given name</th>";
-        $report .= "<th>Birth date</th>";
-        $report .= "<th>Birth place</th>";                                       
-        $report .= "<th>C2</th>";                                                
-        $report .= "</tr>\n";
-        $diff = ' class="diff"';
-        foreach($match as $line){
-            // clean
-            $placeA6 = ucWords(strtolower($line['A6']['PLACE']));
-            $dateA6 = substr($line['A6']['DATE-UT'], 0, 10);
-            $date402 = substr($line['M402']['DATE'], 0, 10);
-            //
-            $diff_fname = ($line['A6']['FNAME'] != $line['M402']['FNAME'] ? $diff :'');
-            $diff_gname = ($line['A6']['GNAME'] != $line['M402']['GNAME'] ? $diff :'');
-            $diff_date = ($dateA6 != $date402 ? $diff :'');
-            $diff_place = (strtolower($placeA6) != strtolower($line['M402']['PLACE']) ? $diff :'');
-            $diff_a2 = ($line['A6']['C2'] != $line['M402']['C2'] ? $diff :'');
-            $report .= '    <tr class="spacer"><td colspan="7"></td></tr>' . "\n";
-            $report .= '    <tr>'
-                . '<th>A6</th>'
-                . "<td>" . $line['A6']['NUM'] . '</td>'
-                . "<td$diff_fname>" . $line['A6']['FNAME'] . '</td>'
-                . "<td$diff_gname>" . $line['A6']['GNAME'] . '</td>'
-                . "<td$diff_date>" . $line['A6']['DATE-UT'] . '</td>'
-                . "<td$diff_place>" . $placeA6 . '</td>'
-                . "<td$diff_a2>" . $line['A6']['C2'] . '</td>'
-                . "</tr>\n";
-            $report .= '    <tr>'
-                . '<th>M402</th>'
-                . "<td>" . $line['M402']['MUID'] . '</td>'
-                . "<td$diff_fname>" . $line['M402']['FNAME'] . '</td>'
-                . "<td$diff_gname>" . $line['M402']['GNAME'] . '</td>'
-                . "<td$diff_date>" . $line['M402']['DATE'] . ' ' . $line['M402']['TZO'] . '</td>'
-                . "<td$diff_place>" . $line['M402']['PLACE'] . '</td>'
-                . "<td$diff_a2>" . $line['M402']['C2'] . '</td>'
-                . "</tr>\n";
-        }
-        $report .= "</table>\n";
-        return $report;
-    }
-    
-}// end class
-
+} // end class

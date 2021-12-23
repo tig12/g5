@@ -109,16 +109,13 @@ class tmp2db implements Command {
                 $new['birth']['place']['lat'] = (float)$line['LAT'];
                 //
                 $p->addOccus(['writer']);
-                $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['MUID']);
                 $mullerId = Muller::mullerId($source->data['slug'], $line['MUID']);
                 $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
-                $new['sources'] = $source->data['slug'];
                 $new['ids-in-sources'] = [
-                    Muller::SOURCE_SLUG => $mullerId,
                     $source->data['slug'] => $line['MUID'],
                 ];
                 $new['occus'] = ['writer'];
@@ -170,14 +167,12 @@ class tmp2db implements Command {
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
                 $p->addOccus(['writer']);
-                $p->addSource($source->data['slug']);
                 $p->addIdInSource($source->data['slug'], $line['MUID']);
                 $mullerId = Muller::mullerId($source->data['slug'], $line['MUID']);
                 $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
-                $new['sources'] = $source->data['slug'];
                 $new['ids-in-sources'] = [
                     Muller::SOURCE_SLUG => $mullerId,
                     $source->data['slug'] => $line['MUID'],

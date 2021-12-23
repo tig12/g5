@@ -58,7 +58,7 @@ class raw2tmp implements Command {
             }
             else{
                 // empty given names
-                // @todo should be verified by human and included in tweaks
+                // TODO should be verified by human and included in tweaks
                 if($mullerId == '310' || $mullerId == '387'){
                     $new['FNAME'] = $nameFields[0];
                     $new['GNAME'] = '';
@@ -168,5 +168,4 @@ class raw2tmp implements Command {
         }
     }
     
-}// end class    
-
+} // end class

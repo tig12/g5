@@ -145,7 +145,7 @@ class person implements Command {
         }
         
         $p->updateFields($new);
-        // Recompute slug in case update changed name or birth date or name.
+        // Recompute slug in case update changed name or birth date.
         $p->computeSlug();
         
         $p->addHistory(
@@ -164,7 +164,10 @@ class person implements Command {
                     ModelGroup::storePersonInGroup($p->data['id'], $groupSlug);
                 }
                 catch(\Exception $e){
-                    return [$p->data['id'], $e->getMessage() . "\n"];
+                    // silently ignored, it means that the update contains occu already associated to person in db
+                    return [$p->data['id'], ''];
+                    // $msg = $e->getMessage() . "\nPerson ids-in-sources: " . print_r($tweak['ids-in-sources'], true);
+                    // return [$p->data['id'], $msg];
                 }
             }
         }
