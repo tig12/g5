@@ -1,12 +1,13 @@
 slug: ertel-1-first-french
-name: 1 - First French
+name: Ertel's subsample 1 - First French
+type: history
 'n': 553
 sources:
   - 3a_sports
   - g55
   - a1
 description: |
-  Records coming from Michel Gauquelin "L'influence des astres", 1955.
+  Records coming from Michel Gauquelin's book "L'influence des astres", 1955.
   <br>Number according to Ertel : 568
 parents: 
   - ertel-4384-sport

@@ -1,5 +1,6 @@
 slug: ertel-8-csicop-us
-name: 8 - CSICOP-U.S.
+name: Ertel's subsample 8 - CSICOP-U.S.
+type: history
 'n': 192
 sources:
   - 3a_sports

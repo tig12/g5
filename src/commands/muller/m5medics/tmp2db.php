@@ -16,7 +16,6 @@ use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
-use g5\model\Issue;
 use g5\commands\Newalch;
 use g5\commands\gauq\LERRCP;
 use g5\commands\muller\Muller;
@@ -56,7 +55,6 @@ class tmp2db implements Command {
         
         // source corresponding to Müller's Astro-Forschungs-Daten - insert if does not already exist
         $afdSource = Source::getBySlug(Muller::SOURCE_SLUG); // DB
-//echo (is_null($afdSource) ? 'isnull' : 'not null') . "\n"; exit;
         if(is_null($afdSource)){
             $afdSource = new Source(Muller::SOURCE_DEFINITION_FILE);
             $afdSource->insert(); // DB
@@ -126,6 +124,10 @@ class tmp2db implements Command {
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['place']['name'] = $line['PLACE'];
+if($line['PLACE'] == 'Paris'){
+    $issue1 = 'Birth date needs to be checked because it was not verified by Arno Müller';
+    $p->addIssue($issue);
+}
                 $new['birth']['place']['c2'] = $line['C2'];
                 $new['birth']['place']['cy'] = 'FR';
                 $new['birth']['place']['lg'] = (float)$line['LG'];
@@ -149,6 +151,7 @@ class tmp2db implements Command {
                 $p->data['id'] = $p->insert(); // DB
             }
             else{
+continue;
                 // Person already in A2 or E1
                 $new = [];
                 $new['issues'] = [];
@@ -179,8 +182,8 @@ class tmp2db implements Command {
                     $nDiffDates++;
                     $issue = "Check birth date because Müller and Gauquelin birth days differ\n"
                            . "<br>Gauquelin $gauqId: $gauqDay\n<br>Müller $mullerId: $mulDay\n";
-                    $p->addIssue(Issue::CHK_DAY, $issue);
-                    $new['issues'][Issue::CHK_DAY] = $issue;
+                    $p->addIssue($issue);
+                    $new['issues'] = [$issue];
                     if($reportType == 'full'){
                         $datesReport .= "\nCura $gauqId\t $gauqDay {$p->data['name']['family']} - {$p->data['name']['given']}\n";
                         $datesReport .= "Müller NR {$line['NR']}\t $mulDay {$line['FNAME']} - {$line['GNAME']}\n";
@@ -229,6 +232,7 @@ class tmp2db implements Command {
             }
             $g->addMember($p->data['id']);
         }
+return;
         $t2 = microtime(true);
         $g->insertMembers(); // DB
         $dt = round($t2 - $t1, 5);

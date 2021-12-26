@@ -1,12 +1,13 @@
 <?php
 /******************************************************************************
     
-    Calls command db/fill/occu (to build the export group)
-    for all occupations of the database.
+    Generate csv files for all occupations of the database.
+    
     By default, the generated files are compressed (using zip).
+    Calls command db/export/occu for each occupation.
     
     WARNING: The groups corresponding to occupation codes must exits
-    (db/fill/occugroup must have been executed).
+    (db/fill/occus1 must have been executed).
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-08-07 09:05:28+02:00, Thierry Graff : Creation
@@ -47,7 +48,7 @@ class alloccus implements Command {
                 echo $execReport;
                 continue;
             }
-            // uses the fact that groups are named using the occupation slug (see command occugroup).
+            // uses the fact that groups are named using the occupation slug (see command db/fill/occus1).
             $g = Group::getBySlug($slug); // DB
 // HERE not correct - the group shouldn't store the export
 // suppress use g5\Config when refactoring

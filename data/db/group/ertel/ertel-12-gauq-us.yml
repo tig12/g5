@@ -1,5 +1,6 @@
 slug: ertel-12-gauq-us
-name: 12 - GAUQ-U.S.
+name: Ertel's subsample 12 - GAUQ-U.S.
+type: history
 'n': 159
 sources:
   - 3a_sports

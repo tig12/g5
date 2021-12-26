@@ -345,43 +345,12 @@ class Person {
         $this->data['occus'] = array_values(array_diff($occus, $remove));
     }
     
-    
     /**
         Adds one single issue.
-        @param  $k  string Key of the issue
-        @param  $v  string Value of the issue
+        @param  $issue  Content of the issue
     **/
-    public function addIssue(string $k, string $v) {
-        if(isset($this->data['issues'][$k])){
-            throw new \Exception("TRYING TO ADD A ISSUE OF AN EXISTING KEY \n" . $this->data['slug'] . " - issue key = $key\n");
-        }
-        if(is_null($this->data['issues'])){
-            $this->data['issues'] = [];
-        }
-        $this->data['issues'][$k] = $v;
-    }
-    
-    /**
-        Adds an array of issues.
-        @param  $issues Array of key / value pairs
-    **/
-    public function addIssues($issues) {
-        if(is_null($this->data['issues'])){
-            $this->data['issues'] = [];
-        }
-        foreach($issues as $k => $v){
-            if(isset($this->data['issues'][$k])){
-                throw new \Exception("TRYING TO ADD A ISSUE OF AN EXISTING KEY \n" . $this->data['slug'] . " - issue key = $k\n");
-            }
-            $this->data['issues'][$k] = $v;
-        }
-    }
-    
-    /**
-        @param  $k  Key of the issue to remove
-    **/
-    public function removeIssue(string $k) {
-        unset($this->data['issues'][$k]);
+    public function addIssue(string $issue) {
+        $this->data['issues'][] = $issue;
     }
     
     public function addHistory($command, $sourceSlug, $newdata, $rawdata){

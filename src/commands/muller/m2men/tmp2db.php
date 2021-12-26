@@ -12,7 +12,6 @@ use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
-use g5\model\Issue;
 use g5\commands\muller\Muller;
 use g5\commands\gauq\LERRCP;
 use g5\commands\muller\m1writers\M1writers;
@@ -113,12 +112,12 @@ class tmp2db implements Command {
                 $p->addIdInSource($source->data['slug'], $muid);
                 // do not call $p->addIdPartial to respect Müller unique id definition
                 $p->updateFields($new);
-                $issue = 'This person is present as nb 457 in <a href="/group/muller-afd2-men">Müller\'s list of 612 famous men</a> - time = 04:10' . "\n"
-                       . '<br>and as nb 367 in <a href="/group/muller-afd1-writers">Müller\'s list of 402 writers</a> - time = 18:00';
-                $p->addIssue(Issue::CHK_TIME, $issue);
-                $issue = 'This person is present as nb 457 in <a href="/group/muller-afd2-men">Müller\'s list of 612 famous men</a> - birth place = Modica' . "\n"
-                       . '<br>and as nb 367 in <a href="/group/muller-afd1-writers">Müller\'s list of 402 writers</a> - birth place = Siracusa';
-                $p->addIssue(Issue::CHK_BPLACE, $issue);
+                $issue = 'CHECK BIRTH PLACE AND TIME:'
+                    . '<br>This person is present as nb 457 in '
+                    . '<a href="/group/muller-afd2-men">Müller\'s list of 612 famous men</a> - time = 04:10 - birth place = Modica' . "\n"
+                    . '<br>and as nb 367 in '
+                    . '<a href="/group/muller-afd1-writers">Müller\'s list of 402 writers</a> - time = 18:00 - birth place = Siracusa';
+                $p->addIssue($issue);
                 // repeat fields to include in $history
                 $new['ids-in-sources'] = [$source->data['slug'] => $muid];
                 if(M2men::OCCUS[$line['OCCU']] != 'X'){ // X => handled in data/db/person/muller-612-men.yml

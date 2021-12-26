@@ -12,7 +12,6 @@ use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
-use g5\model\Issue;
 use g5\commands\muller\Muller;
 use g5\commands\gauq\LERRCP;
 

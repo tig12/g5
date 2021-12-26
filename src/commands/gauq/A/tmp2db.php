@@ -132,6 +132,7 @@ class tmp2db implements Command {
                 if($line['DATE-C'] != ''){
                     // date restored by class legalTime
                     $new['birth']['date'] = $line['DATE-C'];
+                    $new['birth']['tzo'] = $line['TZO'];
                 }
                 if($line['NOTES-DATE'] != ''){
                     $dateOrTimeIssue = self::buildTimeRestorationIssue($line['CY'], $line['NOTES-DATE']);
@@ -150,7 +151,7 @@ class tmp2db implements Command {
                 $p->addOccus($newOccus);
                 $p->computeSlug();
                 if($dateOrTimeIssue != ''){
-                    $p->addIssue(Issue::CHK_DATE, $dateOrTimeIssue);
+                    $p->addIssue($dateOrTimeIssue);
                 }
                 // repeat fields to include in $history
                 $new['ids-in-sources'] = [
@@ -161,7 +162,7 @@ class tmp2db implements Command {
                 ];
                 $new['occus'] = $newOccus;
                 if($dateOrTimeIssue != ''){
-                    $new['issues'] = [Issue::CHK_DATE => $dateOrTimeIssue];
+                    $new['issues'] = [$dateOrTimeIssue];
                 }
                 $p->addHistory(
                     command: "gauq $datafile tmp2db",
@@ -225,7 +226,7 @@ class tmp2db implements Command {
         @param  $case       See ofsset_* classes
     **/
     public static function buildTimeRestorationIssue(string $country, int $case): string {
-        $issue = "Legal time could not be restored for the following reason:\n<br>";
+        $issue = "CHECK TIME: Legal time could not be restored for the following reason:\n<br>";
         switch($country){
             case 'FR': 
                 $issue .= offset_fr::MESSAGES[$case];
@@ -237,6 +238,9 @@ class tmp2db implements Command {
     /**
         Checks if the date stored in database is coherent with date found in current datafile.
         The purpose is to detect incoherences between 2 files of series A.
+        
+        NOT USED ANYMORE, as all errors shown by this function have been fixed.
+        
         @param      $datafile   The datafile currently processed (eg 'A2').
         @param      $p          Person already stored in database, compared with the current line being treated.
         @param      $line       Line of tmp file currently stored in db

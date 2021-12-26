@@ -140,7 +140,9 @@ class person implements Command {
             unset($new['notes']);
         }
         if(isset($tweak['issues'])){
-            $p->addIssues($tweak['issues']);
+            foreach($tweak['issues'] as $issue){
+                $p->addIssue($issue);
+            }
             unset($new['issues']);
         }
         

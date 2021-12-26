@@ -5,7 +5,9 @@
 
 - In docs/, replace references to g5.tig12.net by new url
 
-  - remove useless fields from table source:
+- Write command db/export/allhistory.php
+
+- remove useless fields from table source:
   replace title, isbn etc by 'details', kv map depending on source type.
 
 - integrate muller 1083 fix cura days and names to db/init/all

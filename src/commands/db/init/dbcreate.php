@@ -44,6 +44,7 @@ class dbcreate implements Command {
         
         $views = [
             'api_persongroop',
+            'api_issue',
         ];
         foreach($views as $view){
             $sql_create = file_get_contents($dir_sql . DS . $view . '.sql');

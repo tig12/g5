@@ -3,8 +3,12 @@
 
 create or replace view api_persongroop as
 select
+    p.id                "person_id",
     p.slug              "person_slug",
+    g.id                "group_id",
     g.slug              "group_slug",
+    g.name              "group_name",
+    g.type              "group_type",
     p.ids_in_sources,
     p.ids_partial,
     p.sex,
