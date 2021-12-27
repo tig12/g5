@@ -13,6 +13,7 @@ use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
 use g5\commands\muller\Muller;
+use g5\commands\muller\AFD;
 use g5\commands\gauq\LERRCP;
 
 class tmp2db implements Command {
@@ -98,7 +99,7 @@ class tmp2db implements Command {
                 $p = new Person();
                 $new = [];
                 $new['sex'] = 'F';
-                $new['trust'] = Muller::TRUST_LEVEL;
+                $new['trust'] = AFD::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
                 // note: ONAME1, 2, 3 are not used => TODO ?
@@ -226,7 +227,6 @@ class tmp2db implements Command {
                 $new['sources'] = $source->data['slug'];
                 $new['ids-in-sources'] = [
                     $source->data['slug'] => $muid,
-                    Muller::SOURCE_SLUG => $mullerId,
                 ];
                 if(M3women::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
                     $new['occus'] = [ M3women::OCCUS[$line['OCCU']] ];

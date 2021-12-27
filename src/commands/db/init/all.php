@@ -21,6 +21,7 @@ use g5\G5;
 use g5\commands\gauq\Gauquelin;
 use g5\commands\gauq\LERRCP;
 use g5\commands\muller\Muller;
+use g5\commands\muller\AFD;
 use g5\commands\ertel\Ertel;
 use g5\commands\gauq\Cura5;
 use g5\commands\Newalch;
@@ -190,6 +191,7 @@ class all implements Command {
             echo dbFillSource::execute([Gauquelin::SOURCE_DEFINITION_FILE]);
             echo dbFillSource::execute([LERRCP::SOURCE_DEFINITION_FILE]);
             echo dbFillSource::execute([Muller::SOURCE_DEFINITION_FILE]);
+            echo dbFillSource::execute([AFD::SOURCE_DEFINITION_FILE]);
             echo dbFillSource::execute([Ertel::SOURCE_DEFINITION_FILE]);
             echo dbFillSource::execute([Cura5::SOURCE_DEFINITION_FILE]);
             echo dbFillSource::execute([Newalch::SOURCE_DEFINITION_FILE]);

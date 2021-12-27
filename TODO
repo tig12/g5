@@ -3,6 +3,13 @@
 - see php bug - https://bugs.php.net/bug.php?id=81002
   (to store booleans in postgres)
 
+- Clarify sources : maybe remove Gauquelin and Muller as sources
+
+- Modify Person->updateFields():
+    - The function should take care of addOccus(), addIdInSource(), addIdPartial(), addIssues() etc.
+    - This would permit to simplify all tmp2db commands: everything is added to $new
+      and updateFields() takes the necessary precautions to update the person
+
 - In docs/, replace references to g5.tig12.net by new url
 
 - Write command db/export/allhistory.php

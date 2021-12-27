@@ -11,7 +11,7 @@ namespace g5\commands\muller\m2men;
 use g5\G5;
 use g5\app\Config;
 use tiglib\patterns\Command;
-use g5\commands\muller\Muller;
+use g5\commands\muller\AFD;
 
 class raw2tmp implements Command {
     
@@ -52,26 +52,26 @@ class raw2tmp implements Command {
                     [$new['FNAME'], $new['GNAME'], $new['FAME'], $new['NOBL']] = self::computeName($field);
                 break;
                 case 'DATE':
-                    $day = Muller::computeDay($field);
+                    $day = AFD::computeDay($field);
                 break;
                 case 'TIME':
-                    $hour = Muller::computeHour($field);
+                    $hour = AFD::computeHour($field);
                 break;
                 case 'TZO':
-                    $new['TZO'] = Muller::computeTimezoneOffset($field);
+                    $new['TZO'] = AFD::computeTimezoneOffset($field);
                 break;
                 case 'PLACE':
                     // by chance, CY appears before place in raw file => can be passed here
                     [$new['C1'], $new['C2'], $new['PLACE']] = self::computePlace($field, $new['CY']);
                 break;
                 case 'LAT':
-                    $new['LAT'] = Muller::computeLat($field);
+                    $new['LAT'] = AFD::computeLat($field);
                 break;
                 case 'CY':
                     $new['CY'] = M2men::COUNTRIES[$field];
                 break;
                 case 'LG':
-                    $new['LG'] = Muller::computeLg($field);
+                    $new['LG'] = AFD::computeLg($field);
                 break;
                 // other fields are simply copied
                 default:

@@ -13,6 +13,7 @@ use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
 use g5\commands\muller\Muller;
+use g5\commands\muller\AFD;
 use g5\commands\gauq\LERRCP;
 use g5\commands\muller\m1writers\M1writers;
 
@@ -137,7 +138,7 @@ class tmp2db implements Command {
             if(!isset(M2men::MU_GQ[$muid])){
                 // Person not already in db (mainly in Gauquelin data)
                 $p = new Person();
-                $new['trust'] = Muller::TRUST_LEVEL;
+                $new['trust'] = AFD::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
                 $new['name']['nobl'] = $line['NOBL'];
@@ -164,7 +165,6 @@ class tmp2db implements Command {
                 // repeat fields to include in $history
                 $new['ids-in-sources'] = [
                     $source->data['slug'] => $muid,
-                    Muller::SOURCE_SLUG => $mullerId,
                 ];
                 $new['occus'] = [ M2men::OCCUS[$line['OCCU']] ];
                 $p->addHistory(

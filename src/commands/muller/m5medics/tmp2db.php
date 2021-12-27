@@ -124,10 +124,6 @@ class tmp2db implements Command {
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['place']['name'] = $line['PLACE'];
-if($line['PLACE'] == 'Paris'){
-    $issue1 = 'Birth date needs to be checked because it was not verified by Arno Müller';
-    $p->addIssue($issue);
-}
                 $new['birth']['place']['c2'] = $line['C2'];
                 $new['birth']['place']['cy'] = 'FR';
                 $new['birth']['place']['lg'] = (float)$line['LG'];
@@ -151,10 +147,10 @@ if($line['PLACE'] == 'Paris'){
                 $p->data['id'] = $p->insert(); // DB
             }
             else{
-continue;
                 // Person already in A2 or E1
                 $new = [];
                 $new['issues'] = [];
+                $issue1 = $issue2 = $issue3 = '';
                 [$gauqSourceSlug, $NUM] = M5medics::gnr2LERRCPSourceId($line['GNR']);
                 $gauqFile = strtoupper($gauqSourceSlug);
                 $gauqId = LERRCP::gauquelinId($gauqFile, $NUM);
@@ -180,23 +176,23 @@ continue;
                 }
                 if($mulDay != $gauqDay){
                     $nDiffDates++;
-                    $issue = "Check birth date because Müller and Gauquelin birth days differ\n"
+                    $issue1 = "Check birth date because Müller and Gauquelin birth days differ\n"
                            . "<br>Gauquelin $gauqId: $gauqDay\n<br>Müller $mullerId: $mulDay\n";
-                    $p->addIssue($issue);
-                    $new['issues'] = [$issue];
+                    $p->addIssue($issue1);
                     if($reportType == 'full'){
                         $datesReport .= "\nCura $gauqId\t $gauqDay {$p->data['name']['family']} - {$p->data['name']['given']}\n";
                         $datesReport .= "Müller NR {$line['NR']}\t $mulDay {$line['FNAME']} - {$line['GNAME']}\n";
                     }
                 }
                 // E1 same day as Müller 1083 => check time
-                if(isset($p->data['ids-in-sources']['e1']) && $mulDay == $gauqDay){
+                if($mulDay == $gauqDay && isset($p->data['ids-in-sources']['e1'])){
                     $gauqHour = substr($p->data['birth']['date'], 11);
                     $mulHour = substr($line['DATE'], 11);
                     if($gauqHour != $mulHour){
-                        $issue = "Check birth date because Müller and Gauquelin birth hours differ"
+                        $issue2 = "Check birth date because Müller and Gauquelin birth hours differ"
                                . "\n<br>Gauquelin $gauqId: $gauqHour"
                                . "\n<br>Müller $mullerId: $mulHour\n";
+                        $p->addIssue($issue2);
                     }
                 }
                 // update fields that are more precise in muller1083
@@ -212,6 +208,11 @@ continue;
                 // (Gauquelin name considered as current name)
                 $new['name']['official']['given'] = $line['GNAME'];
                 //
+                if($line['PLACE'] == 'Paris'){
+                    $issue3 = 'Birth date needs to be checked because Arno Müller coulndn\'t verify births in Paris';
+                    $p->addIssue($issue3);
+                }
+                //
                 $p->addOccus($newOccus);
                 $p->addIdInSource($source->data['slug'], $line['NR']);
                 $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
@@ -221,6 +222,10 @@ continue;
                 $new['sources'] = $source->data['slug'];
                 $new['ids-in-sources'] = [ $source->data['slug'] => $line['NR'] ];
                 $new['occus'] = $newOccus;
+                if($issue1 != ''){ $new['issues'][] = $issue1; }
+                if($issue2 != ''){ $new['issues'][] = $issue2; }
+                if($issue3 != ''){ $new['issues'][] = $issue3; }
+                if(count($new['issues']) == 0){ unset($new['issues']); }
                 $p->addHistory(
                     command: 'muller m5medics tmp2db',
                     sourceSlug: $source->data['slug'],
@@ -232,7 +237,6 @@ continue;
             }
             $g->addMember($p->data['id']);
         }
-return;
         $t2 = microtime(true);
         $g->insertMembers(); // DB
         $dt = round($t2 - $t1, 5);
