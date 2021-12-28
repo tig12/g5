@@ -10,6 +10,10 @@ dirs:
   tmp:    data/tmp
   # Auxiliary files - versioned in another git repository
   aux:    /path/to/g5-aux
+  # Path to local opengauquelin.org (temporary hack)
+  # Used to generate assets used by opengauquelin.org
+  # Not used to generate the database
+  opengauquelin.org: /path/to/openg
 
 # g5 database
 db5:
@@ -20,7 +24,7 @@ db5:
     dbpassword: pg_password
     dbname: pg_dbname
     schema: pg_schema
-  # used by open-gauquelin program to access the database through postgrest
+  # used by openg program (opengauquelin.org) to access the database through postgrest
   # This setting is included in current config because
   # it permits to grant read privilege on tables in command/db/build/dbcreate.php
   postgrest:

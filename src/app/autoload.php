@@ -7,9 +7,10 @@
     @history    2017-04-27 09:46:32+02:00, Thierry Graff : Creation 
 **/
 
-// autoload for vendor code
+// autoloads for vendor code
 $rootdir = dirname(dirname(__DIR__));
 require_once implode(DS, [$rootdir, 'vendor', 'tig12', 'tiglib', 'autoload.php']);
+require_once implode(DS, [$rootdir, 'vendor', 'tig12', 'tigdraw', 'autoload.php']);
 //require_once implode(DS, [$rootdir, 'vendor', 'soniakeys', 'autoload.php']);
 
 /** 

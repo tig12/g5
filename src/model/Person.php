@@ -76,7 +76,7 @@ class Person {
     **/
     public static function getBySlug($slug): ?Person{
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("select * from person where slug=?");
+        $stmt = $dblink->prepare('select * from person where slug=?');
         $stmt->execute([$slug]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         if($res === false || count($res) == 0){
@@ -132,7 +132,7 @@ class Person {
     **/
     public static function getByOccu($occus){     
         $dblink = DB5::getDbLink();
-        $query = "select * from person where ";
+        $query = 'select * from person where ';
         $parts = [];
         foreach($occus as $occu){
             $parts[] .= "'[\"$occu\"]' <@ occus";
@@ -220,7 +220,7 @@ class Person {
     **/
     public function getIdFromSlug($slug) {
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("select id from person where slug=?");
+        $stmt = $dblink->prepare('select id from person where slug=?');
         $stmt->execute([$slug]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         if($res === false || count($res) == 0){
@@ -406,7 +406,7 @@ class Person {
     **/
     public function insert(): int{
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("insert into person(
+        $stmt = $dblink->prepare('insert into person(
             slug,
             ids_in_sources,
             ids_partial,
@@ -420,7 +420,7 @@ class Person {
             history,
             issues,
             notes
-            )values(?,?,?,?,?,?,?,?,?,?,?,?,?) returning id");
+            )values(?,?,?,?,?,?,?,?,?,?,?,?,?) returning id');
         $stmt->execute([
             $this->data['slug'],
             json_encode($this->data['ids-in-sources']),
@@ -446,7 +446,7 @@ class Person {
     **/
     public function update() {
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("update person set
+        $stmt = $dblink->prepare('update person set
             slug=?,
             ids_in_sources=?,
             ids_partial=?,
@@ -461,7 +461,7 @@ class Person {
             issues=?,
             notes=?
             where id=?
-            ");
+            ');
         $stmt->execute([
             $this->data['slug'],
             json_encode($this->data['ids-in-sources']),
