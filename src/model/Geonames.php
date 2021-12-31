@@ -38,6 +38,4 @@ class Geonames {
         return self::$dblink;
     }
     
-    
-}// end class
-
+} // end class

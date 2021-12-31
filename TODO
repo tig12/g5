@@ -3,6 +3,8 @@
 - see php bug - https://bugs.php.net/bug.php?id=81002
   (to store booleans in postgres)
 
+- In all classes using TRUST_LEVEL, use the constants of class Trust
+  
 - Clarify sources : maybe remove Gauquelin and Muller as sources
 
 - Modify Person->updateFields():

@@ -11,7 +11,7 @@ namespace g5\commands\csicop\irving;
 use g5\G5;
 use g5\app\Config;
 use tiglib\arrays\csvAssociative;
-use g5\model\DB5;
+use g5\model\Trust;
 use g5\model\Source;
 
 class Irving {
@@ -20,7 +20,7 @@ class Irving {
         Default trust level associated to the persons of this group
         @see https://tig12.github.io/gauquelin5/check.html
     **/
-    const TRUST_LEVEL = DB5::TRUST_CHECK;
+    const TRUST_LEVEL = Trust::CHECK;
     
     /** Slug of source  **/
     const LIST_SOURCE_SLUG = 'rawlins-ertel-irving';

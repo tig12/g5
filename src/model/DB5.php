@@ -1,6 +1,7 @@
 <?php
 /******************************************************************************
-    Gauquelin5 database
+    Access to Gauquelin5 database.
+    
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-12-27 05:50:58+01:00, Thierry Graff : Creation
 ********************************************************************************/
@@ -9,24 +10,6 @@ namespace g5\model;
 use g5\app\Config;
 
 class DB5{
-    
-    // Trust levels, see https://tig12.github.io/gauquelin5/check.html
-    const TRUST_HC = 1;                                                                  
-    const TRUST_BC = 2;
-    const TRUST_BC_CHECK = 2.5;
-    const TRUST_BR = 3;
-    const TRUST_CHECK = 4;
-    const TRUST_REST = 5;
-    
-    /** Separator used to build uids **/
-// TODO suppress
-    const SEP = '/';
-    
-    /**
-        Pattern to check a date.
-        @todo put elsewhere ?
-    **/
-    const PDATE = '/\d{4}-\d{2}-\d{2}/';
     
     private static $dblink = null;
     
@@ -45,4 +28,4 @@ class DB5{
         return self::$dblink;
     }
     
-}// end class
+} // end class

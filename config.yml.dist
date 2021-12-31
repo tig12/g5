@@ -8,8 +8,6 @@
 dirs:
   output: data/output
   tmp:    data/tmp
-  # Auxiliary files - versioned in another git repository
-  aux:    /path/to/g5-aux
   # Path to local opengauquelin.org (temporary hack)
   # Used to generate assets used by opengauquelin.org
   # Not used to generate the database
