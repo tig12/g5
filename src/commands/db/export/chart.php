@@ -1,7 +1,8 @@
 <?php
 /******************************************************************************
     
-    Builds charts from the database
+    Builds bar charts from the database.
+    For doumentation purpose, not part of DB generation.
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-12-27 23:51:08+01:00, Thierry Graff : Creation

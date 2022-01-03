@@ -68,6 +68,11 @@ Data processed by g5 are imported in a postgresql database, named the <b>Open Ga
 </nav>
 
 
+<!-- 
+
+select distinct birth->'place'->>'cy' as country, birth->'place'->>'c2' as c2 from person order by birth->'place'->>'cy';
+-->
+
 
 <!-- ********************************************************************************* -->
 <h2 id="data-model">Data model</h2>
