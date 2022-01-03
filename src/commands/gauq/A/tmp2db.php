@@ -226,10 +226,16 @@ class tmp2db implements Command {
         @param  $case       See ofsset_* classes
     **/
     public static function buildTimeRestorationIssue(string $country, int $case): string {
-        $issue = "CHECK TIME: Legal time could not be restored for the following reason:\n<br>";
+        $issue = '';
         switch($country){
             case 'FR': 
-                $issue .= offset_fr::MESSAGES[$case];
+                switch(offset_fr::MESSAGES[$case]){
+                	case offset_fr::MSG_1871_1918_LORRAINE: 
+                	case offset_fr::MSG_WW2:
+                	case offset_fr::MSG_WW2_END:
+                        $issue = offset_fr::MESSAGES[$case];
+                	break;
+                }
             break;
         }
         return $issue;

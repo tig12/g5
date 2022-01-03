@@ -1,8 +1,9 @@
 <?php
 /********************************************************************************
     Partly restores legal time and timezone information to cura files of serie A.
+    Modifies files data/tmp/gauq/lerrcp/A*.csv (overwrites files).
     Tries to extract timezone offset from date to restore legal time as written in registries.
-    Adds a field "DATE-C" (DATE-C = date corrected) to data/tmp/gauq/lerrcp files (overwrites files).
+    Adds a field "DATE-C" (DATE-C = date corrected) to tmp csv files.
     
     @pre        raw2csv and addGeo must have been executed.
     

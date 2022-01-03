@@ -28,23 +28,34 @@ class offset_fr {
     
     // return codes and messages
     const CASE_1871_1918_LORRAINE = 1;
-    const MSG_1871_1918_LORRAINE = 'TZ offset computation not done to avoid error (German zone 1871 - 1918, dept 54, 57, 88)';
+    const MSG_1871_1918_LORRAINE = '
+        Timezone offset not computed because of potential error: French or German TZ regime ?.
+        <br>1871-05-10 - 1918-11-11: départements 54, 57, 88 partially occupied by Germany.';
     
     const CASE_1871_1918_ALSACE = 2;
-    const MSG_1871_1918_ALSACE = 'TZ offset computation not done to avoid error (German zone 1871 - 1918 , dept 67, 68)';
+    const MSG_1871_1918_ALSACE = 'Timezone offset not computed offset_de - must be done by offset_de.
+        <br>1871-05-10 - 1918-11-11: départements 67, 68 under German timezone regime.';
     
     const CASE_WW2 = 3;
-    const MSG_WW2 = 'TZ offset computation not done to avoid error (German occupation WW2)';
+    const MSG_WW2 = '
+        Timezone offset not computed because of potential error: French or German TZ regime ?
+        <br>1940-02 - 1942-11-02: WW2 - Timezone offset depends on the date of occupation of birth place by Germany.';
     
-    const CASE_BEFORE_1891 = 4;
+    const CASE_WW2_END = 4;
+    const MSG_WW2_END = '
+        Timezone offset not computed because of potential error: French or German TZ regime ?
+        <br>1944-06-06 - 1945-09-16: WW2 - Officially German time was abolished 1945-09-16 but some cities changed their time just after their liberation';
+    
+    const CASE_BEFORE_1891 = 5;
     
     /** Used when computed by code provided by php **/
-    const CASE_PHP_DEFAULT = 5;
+    const CASE_PHP_DEFAULT = 6;
     
     const MESSAGES = [
         self::CASE_1871_1918_LORRAINE => self::MSG_1871_1918_LORRAINE,
         self::CASE_1871_1918_ALSACE   => self::MSG_1871_1918_ALSACE,
         self::CASE_WW2                => self::MSG_WW2,
+        self::CASE_WW2_END            => self::MSG_WW2_END,
     ];
     
     // ******************************************************
@@ -72,8 +83,8 @@ class offset_fr {
         $err = $offset = '';
         $case = 0;
         
-        if($date > '1871-02-15' && $date < '1918-11-11'){
-            // why 1871-02-15 and not 1871-05-10 ?
+        if($date > '1871-05-10' && $date < '1918-11-11'){
+            // 1871-05-10 comes from FG p 269
             /* 
             http://abreschviller.fr/LA-GUERRE-FRANC-PRUSSIENNE-ET-L-ANNEXION
             Signé le 10 Mai 1871 à Francfort, le traité de Paix enlevait à la France
@@ -83,19 +94,26 @@ class offset_fr {
             88 : Vosges (la vallée de la Bruche, de Schirmeck à Saales).             
             */
             if(in_array($c2, [54, 57, 88])){
+                // See FG p 269
+                // This case could be computed using coordinates of the limit of occupied zone.
                 $case = self::CASE_1871_1918_LORRAINE;
                 $err = self::MSG_1871_1918_LORRAINE . " - dept $c2 - $date";
             }
             else if(in_array($c2, [67, 68])){
                 $case = self::CASE_1871_1918_ALSACE;
-                //$zone = 'Europe/Berlin';
-                // @todo Possible to compute
+                // zone = 'Europe/Berlin';
                 $err = self::MSG_1871_1918_ALSACE . " - dept $c2 - $date";
             }
-        }                                                         
-        if($date >= '1940-02' && $date <= '1942-11'){
+        }
+        if($date >= '1940-02' && $date <= '1942-11-02'){
+            // Check 1940-02 - FG says 1940-06
             $case = self::CASE_WW2;
             $err = self::MSG_WW2 . " : $date";
+        }
+        if($date >= '1944-06-06' && $date <= '1945-09-16'){
+            // See FG p 269
+            $case = self::CASE_WW2_END;
+            $err = self::MSG_WW2_END . " : $date";
         }
         
         if($err != ''){
