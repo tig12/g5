@@ -33,6 +33,8 @@ use g5\commands\db\init\occus2;
 use g5\commands\db\fill\source                  as dbFillSource;
 use g5\commands\db\fill\person                  as dbFillPerson;
 
+// order of imports corresponds to order of execution
+
 // raw2tmp
 use g5\commands\gauq\A\raw2tmp                  as Araw2tmp;
 use g5\commands\gauq\A\addGeo                   as AaddGeo;
@@ -85,9 +87,10 @@ use g5\commands\db\init\search;
 
 // export
 use g5\commands\gauq\all\export                 as curaExport;
-use g5\commands\muller\m5medics\export          as M5MedicsExport;
 use g5\commands\muller\m1writers\export         as M1WritersExport;
 use g5\commands\muller\m1writers\export100      as M1Writers100export;
+use g5\commands\muller\m3women\export           as M2Womenexport;
+use g5\commands\muller\m5medics\export          as M5MedicsExport;
 use g5\commands\csicop\irving\export            as csiIrvingExport;
 use g5\commands\db\export\alloccus              as allOccusExport;
 
@@ -256,6 +259,7 @@ class all implements Command {
             echo M5MedicsExport::execute([]);
             echo M1WritersExport::execute([]);
             echo M1Writers100export::execute([]);
+            echo M2Womenexport::execute([]);
             echo csiIrvingExport::execute([]);
             //
             echo allOccusExport::execute([]);

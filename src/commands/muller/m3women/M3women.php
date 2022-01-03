@@ -298,7 +298,7 @@ class M3women {
         $g->data['slug'] = self::GROUP_SLUG;
         $g->data['name'] = "Müller 234 famous women";
         $g->data['type'] = Group::TYPE_HISTORICAL;
-        $g->data['description'] = "234 famous women, gathered by Arno Müller";
+        $g->data['description'] = "234 famous women, gathered by Arno Müller and Edith Lührs";
         $g->data['sources'][] = self::LIST_SOURCE_SLUG;
         return $g;
     }

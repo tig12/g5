@@ -1,11 +1,11 @@
 <?php
 /********************************************************************************
-    Generates data/output/history/1993-muller3-women/muller-234-women.csv
+    Generates data/output/history/1993-muller2-men/muller-612-men.csv
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
-    @history    2021-08-14 20:01:49+02:00, Thierry Graff : Creation
+    @history    2022-01-02 16:17:28+01:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\commands\muller\m3women;
+namespace g5\commands\muller\m2men;
 
 use g5\app\Config;
 use g5\model\Group;
@@ -19,9 +19,9 @@ class export implements Command {
         Directory where the generated files are stored
         Relative to directory specified in config.yml by dirs / output
     **/
-    const OUTPUT_DIR = 'history' . DS . '1993-muller3-women';
+    const OUTPUT_DIR = 'history' . DS . '1992-muller2-men';
     
-    const OUTPUT_FILE = 'muller-234-women.csv';
+    const OUTPUT_FILE = 'muller-612-men.csv';
     
     /**  Trick to access to $sourceSlug within $sort function **/
     private static $sourceSlug;
@@ -45,9 +45,9 @@ class export implements Command {
         
         $report = '';
         
-        $g = Group::getBySlug(M3women::GROUP_SLUG); // DB
+        $g = Group::getBySlug(M2men::GROUP_SLUG); // DB
         
-        self::$sourceSlug = M3women::LIST_SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
+        self::$sourceSlug = M2men::LIST_SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
 
         $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . self::OUTPUT_FILE;
         
@@ -76,7 +76,7 @@ class export implements Command {
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
             'birth.date' => 'DATE',
-            'birth.date' => 'DATE-UT',
+            'birth.date-ut' => 'DATE-UT',
             'birth.tzo' => 'TZO',
             'birth.note' => 'TIMOD',
             'birth.place.name' => 'PLACE',
