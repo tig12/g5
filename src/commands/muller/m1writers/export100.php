@@ -76,7 +76,7 @@ class export100 implements Command {
         ];
         
         $map = [
-            'ids-in-sources.' . Muller::SOURCE_SLUG => 'MUID',
+            'ids-partials.' . Muller::SOURCE_SLUG => 'MUID',
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
             'birth.date' => 'DATE',
