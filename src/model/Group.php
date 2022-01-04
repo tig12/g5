@@ -480,6 +480,12 @@ class Group {
                 $pks = explode('.', $personKey);
                 $data = null;
                 foreach($pks as $pk){
+// if(is_null($data) && is_null($p->data[$pk])){
+// echo 'group = ' . $this->data['slug'] . "\n";
+// echo 'person = ' . $p->data['slug'] . "\n";
+// echo "\n<pre>"; print_r($p); echo "</pre>\n";
+// echo "\n<pre>"; print_r($p->data[$pk]); echo "</pre>\n";
+// throw new \Exception("");}
                     $data = is_null($data) ? $p->data[$pk] : $data[$pk];
                 }
                 $new[$csvKey] = $data;
