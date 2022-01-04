@@ -1,64 +1,35 @@
 /** 
-    Generic styles, to be imported by stylesheet specific to a given site
+    Style shortcuts
     
     @history    2017, Thierry Graff : Creation
 **/
 
-/* ================ General styles ================ */
-/* Normalization */ *{
+/* Normalization */
+*{
     margin:0;
     box-sizing:border-box;
 }
 
-body{
-    margin:0;
-    padding:0.5rem;
-    background:#eee;
-    font-family:Arial,Helvetica,sans-serif;
+.flex-wrap{
+    display:flex;
+    flex-wrap:wrap;
 }
 
-a{text-decoration:none;}
-
-img{display: block; background:white;}
-
-.pre{white-space:pre-wrap;}
-pre{
-    white-space:pre-wrap;
-    margin:1rem;
-    background:lightgrey;
-    padding:.5rem;
-    border-radius:5px;
-    border:1px solid #717a9f;
+ul.spaced,
+ol.spaced{
+    margin-top:.8rem;
 }
-pre.normal{
-    background:none;
-    border:none;
-    margin:0;
-    margin-left:1em;
-    padding:0;
+ul.spaced>li,
+ol.spaced>li{
+    padding-bottom:.8rem;
 }
-code.color{background:lightgrey;}
-
-ul.spaced>li,ol.spaced>li{padding-bottom:0.8rem;}
-ul.simple{list-style-type: '- ';}
-ul.naked>li,ol.naked>li{list-style-type:none;}
-li.naked{list-style-type:none;}
-
-table.border{border-collapse:collapse;}
-table.border td{border: 1px solid #a2a9b1;}
-
-table.alternate tr:nth-child(even) {background: #eee}
-table.alternate tr:nth-child(odd) {background: #ddd}
-table.padded2 td{padding:2px;}
-.tip{
-    margin:1rem;
-    padding:1rem;
-    background:lightblue;
-    border:2px solid yellow;
+ul.naked>li,
+ol.naked>li{
+    list-style-type:none;
 }
-
-
-/* ================ Style shortcuts ================ */
+ul.simple{
+    list-style-type: '- ';
+}
 
 .whitespace-nowrap{white-space:nowrap;}
 .whitespace-pre{white-space:pre;}
