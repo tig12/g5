@@ -9,7 +9,7 @@ dirs:
   output: data/output
   tmp:    data/tmp
   # Path to local opengauquelin.org (temporary hack)
-  # Used to generate assets used by opengauquelin.org
+  # Useful to generate assets used by opengauquelin.org
   # Not used to generate the database
   opengauquelin.org: /path/to/openg
 
@@ -28,23 +28,23 @@ db5:
   postgrest:
     user: web_anon
 
-
-# geoname.org parameters
-# only useful for the steps which call geonames.org web service
+# geonames.org parameters
+# Useful for the steps which call geonames.org web service
 # see http://www.geonames.org/login
 # and http://www.geonames.org/manageaccount
 geonames:
   # User name used to call geonames web service
   # (you must change, 'demo' doesn't work)
+  # Geonames service is currently not used anymore,
+  # this setting is not used to generate the database.
   username: demo
-
+  
   # postgresql parameters
-  # only useful for the steps which use geonames.org data stored in a local database 
+  # Useful for the steps which use geonames.org data, stored in a local database.
+  # These parameters must be identical to the parameters of postgres2geonames program.
   postgresql: 
     dbhost: localhost
     dbport: 5432
-    dbuser: pg_username
-    dbpassword: pg_password
-    dbname: pg_dbname
-    
-    
+    dbuser: pg_geo_username
+    dbpassword: pg__geo_password
+    dbname: pg_geo_dbname

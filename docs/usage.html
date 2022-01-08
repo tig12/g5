@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Occupation | Open Gauquelin database</title>
+    <title>Usage | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
-    <meta name="description" content="">
+    <meta name="description" content="Configure and start using Gauquelin5 software">
     <meta name="robots" content="index,follow">
     <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
     <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
@@ -12,11 +12,12 @@
     <meta name="dcterms.dateCopyrighted" content="2019">
     <!-- 
     tigsite:
-        history: 2021-11-27 21:07:52+01:00, Thierry Graff : Creation
+        history: 2022-01-07 19:24:01+01:00, Thierry Graff : Creation from page install
     -->
 </head>
 
 <body>
+
 <div class="container">
 
 <div class="main">
@@ -25,21 +26,85 @@
 <nav class="prevnext">
     <a class="topage" rel="" href="#topage">&#10148;</a>
     <a class="top" href="index.html">&uarr;</a>
-    <a class="prev" rel="prev" href="db-source.html">&larr;</a>
-    <a class="next" rel="next" href="historical-tests.html">&rarr;</a>
+    <a class="prev" rel="prev" href="install.html">&larr;</a>
+    <a class="next" rel="next" href="db.html">&rarr;</a>
 </nav>
 
 <header>
-<h1>Occupation</h1>
-<div class="intro">
-
-</div>
+<h1>Gauquelin5 usage</h1>
+<div class="intro">Start using Gauquelin5 software.</div>
 </header>
 
 <article>
 
+To check that the program works, type :
+<pre>php run-g5.php</pre>
+A message saying that you must provide supplementary arguments is displayed.
+<pre>
+WRONG USAGE - run-g5.php needs at least 3 arguments
+-------                                                                                               
+Usage : 
+    php run-g5.php <argument1> <argument2> <argument3> [optional arguments]
+Example :
+    php run-g5.php gauq A2 raw2tmp
+-------
+Possible values for argument1 : acts, cfepp, cpara, csicop, db, eminence, ertel, gauq, muller, wd
+</pre>
+
+<code>run-g5.php</code> is only able to execute <b>commands</b>. The 3 first arguments permit to specify the command which will be executed.
+<br>Commands are located in <code>src/commands</code>. A command is a class with a method <code>execute()</code>.
+<br>4th and following arguments, when needed, are passed to the command's <code>execute()</code> method.
+
+<br><br>Each time an incomplete list of arguments is given to the program, it prints the general error message and prints the possible values for the next missing argument.
+<br>
+<br>Example 1
+<pre>php run-g5.php gauq</pre>
+<pre>
+WRONG USAGE - need at least 3 arguments
+... (general message) ...
+
+Possible argument2 for argument1 = gauq : all, look, A, A1, A2, A3, A4, A5, A6, D6, D10, E1, E3
+</pre>
+
+Example 2
+<pre>php run-g5.php gauq A3</pre>
+<pre>
+WRONG USAGE - need at least 3 arguments
+... (general message) ...
+
+Possible argument3 for gauq / A3 : build, export, look, raw2tmp, tmp2db, tweak2tmp
+</pre>
+
+Example 3
+<pre>php run-g5.php gauq A3 raw2tmp</pre>
+This does a real transformation (converts A3 raw html file to a csv file in data/tmp/gauq/lerrcp).
+
+<!-- ********************************************************************************* -->
+<h2 id="complete-generation-of-the-database">Complete generation of the database</h2>
+As described in <a href="organisation.html">the page about g5 organisation</a>, the program first converts raw data to temporary data, and then imports temporary files in a database.
+<br><b>The different steps must be executed in a precise order</b>, because some steps need the result of previous executions to work.
+<br>
+<br>The order of execution is given by the code of class <code>g5\commands\db\init\all</code>
+
+<pre>php run-g5.php db init all</pre>
+<pre>
+PARAMETER MISSING
+Possible values for parameter :
+    tmp : Build files in data/tmp
+    db : Fill database with tmp files
+    finalize : Finalize DB (stats, groups, search)
+    export : Exports the groups in zipped csv files
+    all : Executes all steps
+</pre>
+
+If 'db' or 'all' are choosen, it also drops existing tables and creates empty ones.
+
+<br><br><b>Then the following command builds the database from scratch</b> :
+<pre class="bold">php run-g5.php db init all all</pre>
+
 </article>
 </div><!-- end class="main" -->
+
 
 <!-- ************************************* -->
 <aside class="left">                                                                                                                                              

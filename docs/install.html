@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Install Usage | Gauquelin5</title>
+    <title>Installation | Gauquelin5</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="Configure and start using Gauquelin5 software">
     <meta name="robots" content="index,follow">
@@ -27,103 +27,69 @@
     <a class="topage" rel="" href="#topage">&#10148;</a>
     <a class="top" href="index.html">&uarr;</a>
     <a class="prev" rel="prev" href="organisation.html">&larr;</a>
-    <a class="next" rel="next" href="db.html">&rarr;</a>
+    <a class="next" rel="next" href="usage.html">&rarr;</a>
 </nav>
 
 <header>
-<h1>Gauquelin5 installation and usage</h1>
-<div class="intro">Configure and start using Gauquelin5 software.</div>
+<h1>Gauquelin5 installation</h1>
+<div class="intro">
+This software has been developed and tested on Linux. It should normally also work on Windows and Macintosh, but hasn't been tested.
+<br>This installation guide has been tested on Debian 10 and Ubuntu 20.4
+</div>
+<div class="header">
+
+</div>
 </header>
 
 <article>
-<nav class="toc">
-    <ul>
-        <li>
-            <a href="#installation">Installation</a>
-            <ul>
-                <li><a href="#1-1-optional-steps">Optional steps</a></li>
-                <li><a href="#1-2-directory-structure">Directory structure</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#configuration">Configuration</a>
-            <ul>
-                <li><a href="#2-1-dirs">dirs</a></li>
-                <li><a href="#2-2-db5">db5</a></li>
-                <li><a href="#2-3-geonames">geonames</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#usage">Usage</a>
-        </li>
-        <li>
-            <a href="#complete-generation-of-the-database">Complete generation of the database</a>
-        </li>
-        <li>
-            <a href="#generating-output-files">Generating output files</a>
-        </li>
-    </ul>
-</nav>
-
-
-
-
-This software has been developed and tested under Linux. A priori, it should also work under Windows and Macintosh.
-<br>
-<br>It is used through the command line.
 
 <!-- ********************************************************************************* -->
-<h2 id="installation">Installation</h2>
-
-<ol class="spaced">
-    <li>
-        Open a terminal and clone the repository on your local machine :
-        <pre>git clone https://github.com/tig12/gauquelin5.git</pre>
-        (or <a href="https://github.com/tig12/gauquelin5/archive/master.zip">download the code</a>).
-    </li>
-    
-    <li>
-        Install php (version 8.0 or higher) on your machine.
-    </li>
-    
-    <li>
-        Install PECL extension "yaml".
-        <br>On debian-based systems :
-        <pre>sudo apt install php-yaml</pre>
-        For other systems, see <a href="https://www.php.net/manual/en/install.pecl.php">php manual</a>.
-    </li>
-    
-    <li>
-        Install postgresql on your machine (see below for configuration).
-    </li>
-</ol>
-
-<!-- ************************************* -->
-<h3 id="1-1-optional-steps">Optional steps</h3>
+<h2>Prequisites</h2>
+Before starting, you need to have installed on your machine :
 
 <ul class="spaced">
     <li>
-        Geonames.org matching uses a postgresql database filled with python code, <a href="geonames.html">see page geonames</a> (only useful for some commands).
-    </li>
-
-<!-- 
-    <li>
-        Equation of time computation uses <a href="https://github.com/soniakeys/meeus">github.com/soniakeys/meeus</a>, written in the go programming language (only useful for some commands).
-        <br>So you must have go installed on your machine and run :
-        <pre>go get github.com/soniakeys/meeus</pre>
-    </li>
--->
-
-    <li>
-        Wikidata retrieval also needs curl and sqlite3 PECL extensions :
-        <br>This is not necessary for data restoration, only to retrieve wikidata on local machine.
+        <b>PHP</b> (version 8.0 or higher)
+        <br>See for example <a href="https://www.linuxtechi.com/install-php-8-on-debian-10/">https://www.linuxtechi.com/install-php-8-on-debian-10/</a>.
+        <br>Some PHP extensions are also necessary:
         <pre>
-sudo apt install php-curl
-sudo apt install php-sqlite3
+sudo apt install php8.0-pgsql
+sudo apt install php8.0-yaml
+sudo apt install php8.0-mbstring
+sudo apt install php8.0-zip
         </pre>
     </li>
-
+    
+    <li>
+        <b>Postgresql</b>
+        <br>Version 12, from the stable Debian repository, is sufficient.
+        <pre>sudo apt install postgresql</pre>
+    </li>
+    
+    <li>
+        <b>Python3</b>, already available by default.
+    </li>
+    
+    <li>
+        <b>Git</b>
+        <pre>sudo apt install git</pre>
+    </li>
 </ul>
+
+
+<!-- ********************************************************************************* -->
+<h2>Install and configure g5</h2>
+
+Open a terminal and clone the repository on your local machine :
+
+<pre>git clone --depth=1 https://github.com/tig12/gauquelin5.git</pre>
+Note: <code>--depth=1</code> is optional, only useful to save up disk space and bandwidth. 
+
+<br><br>Instead of cloning the repository, you can <a href="https://github.com/tig12/gauquelin5/archive/master.zip">download the code</a>.
+
+In the rest of this doc, directory <code>gauquelin5/</code> is called the <b><i>root directory</i></b>.
+<br>All the commands issued to run the program are done from the root directory.
+<br>
 
 <!-- ************************************* -->
 <h3 id="1-2-directory-structure">Directory structure</h3>
@@ -131,10 +97,8 @@ The important files and directories are :
 <pre>
 gauquelin5/
     ├── data/
-    │   ├── build/
-    │   ├── output/
-    │   ├── raw/
-    │   └── tmp/
+    │   ├── db/
+    │   └── raw/
     ├── docs/
     ├── src/
     ├── vendor/
@@ -142,26 +106,22 @@ gauquelin5/
     └── run-g5.php
 </pre>
 
-In the rest of this doc, directory <code>gauquelin5/</code> is called the <b><i>root directory</i></b>.
-<br>All the commands issued to run the program are done from the root directory.
-<br>
-<br>The files you need to know about are :
+The files you need to know about are :
 <ul class="simple">
-    <li><code><b>run-g5.php</b></code> is the entry point to use the program.</li>
-    <li><code><b>data/</b></code> contains the data generated and manipulated by the program (see below).</li>
-    <li><code><b>config.yml.dist</b></code> needs to be copied (see below).</li>
+    <li><code><b>run-g5.php</b></code> is the unique entry point to use the program.</li>
+    <li><code><b>data/</b></code> contains the data generated and manipulated by the program.</li>
+    <li><code><b>config.yml.dist</b></code> contains sample configuration directives.</li>
 </ul>
 
-<!-- ********************************************************************************* -->
-<h2 id="configuration">Configuration</h2>
+<!-- ************************************* -->
+<h3 id="configuration">Configuration</h3>
 Create a file <code>config.yml</code> by copying <code>config.yml.dist</code> :
 <pre>cp config.yml.dist config.yml</pre>
 
 Edit <code>config.yml</code> and adapt some values :
 
-<!-- ************************************* -->
-<h3 id="2-1-dirs">dirs</h3>
-This directive permits to specify <b>unversioned</b> directories containing data.
+<h4>dirs</h4>
+This section permits to specify <b>unversioned</b> directories containing data.
 <br>The values can contain either absolute paths or paths relative to root directory.
 <br>Default values are all relative to root directory :
 <pre>
@@ -170,120 +130,121 @@ dirs:
   tmp:    data/tmp
 </pre>
 
-At programm installation, <code>data/</code> directory contains 3 sub-directories : <code>db/</code>, <code>init/</code> <code>raw/</code>.
+At program installation, <code>data/</code> directory contains 2 sub-directories : <code>db/</code> and <code>raw/</code>.
 <br>These directories contain data necessary to g5, <i>and are versioned with the program</i>. Their locations are imposed and not configurable.
 
 <br><br>Other sub-directories of <code>data/</code>, are not versioned, ignored by git.
 
-<!-- ************************************* -->
-<h3 id="2-2-db5">db5</h3>
+<h4>db5</h4>
 This concerns g5 database, used to store data imported by the program.
-<br>It contains only one section : <code>postgresql</code>. Specify here the parameters used to connect to a local postgresql database.
+
+<br><br>In section <code>postgresql</code>, specify here the parameters used to connect to a local postgresql database.
+
+<br><br>In section <code>postgrest</code>, specify the postgresql user which will be used by <a href="https://github.com/tig12/openg">openg software</a> to access the database via postgrest.
+<br>This setting is not necessary to generate the database, but it permits to grant read access to some tables during database creation.
+
+<h4>geonames</h4>
+G5 uses geonames.org to match place names to geonames ids and better geographical informations.
+<br>Geonames informations are stored in a local postgres database generated by <a href="https://github.com/tig12/geonames2postgres">geonames2postgres software</a>. <br>Section <code>postgresql</code> permits to specify parameters used to connect to this database MUST be identical to the parameters used by geonames2postgres (see below).
 
 <!-- ************************************* -->
-<h3 id="2-3-geonames">geonames</h3>
-G5 uses geonames.org to match place names to geonames ids. Some steps use a postgres database where geonames informations are stored ; some steps use geonames.org web service ; see <a href="geonames.html">page about geonames</a> for details.
-<br>
-<br>Section <code>postgresql</code> permits to specify the connection parameters, which can be identical or different from main g5 database.
-<br>Section <code>name</code> permits to specify the user name used to call geonames web service.
+<h3>Prepare g5 database</h3>
+You must have a database and credentials (user, password) corresponding to the values specified in config.
+<br>There are different ways to do this, for example.
 
-
-<!-- ********************************************************************************* -->
-<h2 id="usage">Usage</h2>
-To check that the program works, type :
-<pre>php run-g5.php</pre>
-A message saying that you must provide supplementary arguments is displayed.
 <pre>
-WRONG USAGE - run-g5.php needs at least 3 arguments
--------                                                                                               
-Usage : 
-    php run-g5.php <argument1> <argument2> <argument3> [optional arguments]
-Example :
-    php run-g5.php cura A2 raw2csv
--------
-Possible values for argument1 : acts, csicop, cura, db, g55, newalch, wd
+sudo -s -u postgres
+psql 
+postgres=# create user pg_username;
+postgres=# alter role pg_username with createdb;
+postgres=# ALTER USER pg_username WITH ENCRYPTED PASSWORD 'pg_password';
+postgres=# create database pg_dbname owner pg_username;
+\q
 </pre>
 
-The program uses 3 argument :
+<!-- ********************************************************************************* -->
+<h2>Generate Geonames database</h2>
+
+<!-- ************************************* -->
+<h3>Install geonames2postgres</h3>
+
+Prequisites: geonames2postgres needs two libraries to run:
+<pre>
+sudo apt install python-yaml
+sudo apt install python-psycopg2
+</pre>
+
+This software stores in a local database data copied from geonames.org, located in two directories:
 <ul>
-    <li>
-        <span class="bold">argument1</span> : represents in general an information source, like <code>cura</code> or <code>newalch</code>.
-    </li>
-    <li>
-        <span class="bold">argument2</span> : represents in general one or several files contained in a given information source.
-    </li>
-    <li>
-        <span class="bold">argument3</span> : represents in general a treatment done on a given file.
-    </li>
+    <li><a href="http://download.geonames.org/export/dump">http://download.geonames.org/export/dump</a>, containing cities and administrative areas.</li>
+    <li><a href="http://download.geonames.org/export/zip">http://download.geonames.org/export/zip</a>, containing postal codes.</li>
 </ul>
 
-<br>Each time an incomplete command is given to the program, it prints the general error message and prints the possible values for the next missing argument.
-<br>
-<br>Example 1
-<pre>php run-g5.php cura</pre>
-<pre>
-WRONG USAGE - need at least 3 arguments
-... (general message) ...
+Files of these directories are first copied on a local machine, then stored in a postgres database, which is used by g5.
 
-Possible argument2 for argument1 = cura : all, look, A, A1, A2, A3, A4, A5, A6, D6, D10, E1, E3
+<br><br>Clone the software:
+<pre>git clone https://github.com/tig12/geonames2postgres.git</pre>
+
+<h4>Configuration</h4>
+<pre>cd geonames2postgres/</pre>
+
+<pre>cp config.yml.dist config.yml</pre>
+
+In <code>config.yml</code>, you specify in <code>dir-countries</code> and <code>dir-postal</code> where the geonames.org files are stored on your machine.
+
+<br><br>You also need to indicate the postgresql parameters to the database where the data are stored.
+
+<br><br>Note: these parameters MUST be the same as parameters <code>geonames / postgres</code> of g5 config.
+
+<!-- ************************************* -->
+<h3>Download Geonames data on your local machine</h3>
+This needs to be done for all countries handled by g5, for example with this script:
+
+<pre>
+countries=( AT BE CH CL CZ DE DK DZ ES FR GB GF GP IT LU MA MC MQ NL PL RU SE TN US )
+cd /path/to/countries   # replace by the path specified in config.yml
+for i in "${countries[@]}"
+do
+    wget -c http://download.geonames.org/export/dump/$i.zip && unzip -n $i.zip
+done
+
+cd /path/to/postal      # replace by the path specified in config.yml
+for i in "${countries[@]}"
+do
+    wget -c http://download.geonames.org/export/zip/$i.zip && unzip -n $i.zip
+done
 </pre>
 
-Example 2
-<pre>php run-g5.php cura A3</pre>
-<pre>
-WRONG USAGE - need at least 3 arguments
-... (general message) ...
+<!-- ************************************* -->
+<h3>Generate Geonames database</h3>
 
-Possible argument3 for cura / A3 : build, export, look, raw2tmp, tmp2db, tweak2tmp
-</pre>
+You must prepare a database (see preparation of g5 database), then execute geonames2postgres with all available countries to fill the database:
 
-Example 3
-<pre>php run-g5.php cura A3 raw2tmp</pre>
-This does a real transformation (converts A3 raw html file to a csv file in data/tmp/cura).
-
-<!-- ********************************************************************************* -->
-<h2 id="complete-generation-of-the-database">Complete generation of the database</h2>
-As described in <a href="organisation.html">the page about g5 organisation</a>, the program first converts raw data to temporary data, and then imports temporary files in database.
-<br><b>The different steps must be executed in a precise order</b>, because some steps need the result of previous executions to work.
-<br>
-<br>The order of execution is given by the code of class <code>g5\commands\db\init\all</code>
-
-<pre>php run-g5.php db init all</pre>
-<pre>
-PARAMETER MISSING
-Possible values for parameter :
-    tmp : Build files in data/tmp
-    db : Fill database with tmp files
-    all : Build tmp files and fill db
-</pre>
-
-If 'db' or 'all' are choosen, it also drops existing tables and creates empty ones.
-<br>Then the following command builds the database from scratch :
-<pre>php run-g5.php db init all all</pre>
+<pre>python3 geonames2postgres.py ALL</pre>
 
 
-<!-- ********************************************************************************* -->
-<h2 id="generating-output-files">Generating output files</h2>
-
-Output capacities are still limited.
-
-<br><br>A specific export was written for each historical file, because some fields coming from the raw files are copied in the output.
-<br>So each file has a specific command to generate a csv file, for example :
-<pre>
-php run-g5.php cura A2 export
-
-php run-g5.php newalch muller1083 export
-</pre>
-
-Generic exports also permit to generate files from database (currently only by profession code).
-<br>Profession codes and target file must be specified, for example :
-<pre>
-php run-g5.php db export occu SP data/output/new/sport/sportsmen.csv
-
-php run-g5.php db export occu WR+JO data/output/new/letters/writers+journalists.csv
-</pre>
-
-A more flexible mechanism needs to be developed to specify precisely what to output.
+<!-- ************************************* -->
+<!-- 
+<h3 id="1-1-optional-steps">Optional steps</h3>
+<ul class="spaced">
+    <li>
+        Geonames.org matching uses a postgresql database filled with python code, <a href="geonames.html">see page geonames</a> (only useful for some commands).
+    </li>
+    <li>
+        Equation of time computation uses <a href="https://github.com/soniakeys/meeus">github.com/soniakeys/meeus</a>, written in the go programming language (only useful for some commands).
+        <br>So you must have go installed on your machine and run :
+        <pre>go get github.com/soniakeys/meeus</pre>
+    </li>
+    <li>
+        Wikidata retrieval also needs curl and sqlite3 PECL extensions :
+        <br>This is not necessary for data restoration, only to retrieve wikidata on local machine.
+        <pre>
+sudo apt install php-curl
+sudo apt install php-sqlite3
+        </pre>
+    </li>
+</ul>
+-->
 
 </article>
 </div><!-- end class="main" -->
@@ -297,7 +258,8 @@ A more flexible mechanism needs to be developed to specify precisely what to out
     <li class="bold big1"><a href="https://g5.tig12.net/output">Download results</a></li>
     
     <li><a href="organisation.html">Organisation</a></li>
-    <li><a href="install.html">Installation, usage</a></li>
+    <li><a href="install.html">Installation</a></li>
+    <li><a href="usage.html">Usage</a></li>
     <li>
         <a href="db.html">G5 database</a>
         <div class="padding-left2">
@@ -406,6 +368,3 @@ A more flexible mechanism needs to be developed to specify precisely what to out
 
 </body>
 </html>
-<!-- ************************************* -->
-<!-- ********************************************************************************* -->
--- ********************************************************************************* -->
