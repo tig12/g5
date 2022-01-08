@@ -15,6 +15,10 @@
     }
 }
 
+:root {
+    --left-bg-color:#edebc2;
+}
+
 /* ================ Site layout ================ */
 html{height:100%;}
 
@@ -41,22 +45,19 @@ body{
 /* .left and .main = direct children of .container */
 .main{
     flex:1 1 85%;
+    order:2; /* In the html code, write .left sidebar after .main area */
     padding:1rem .5rem 2rem 1rem;
 }
-
-/* In the html code, write .left sidebar after .main area */
-.container :nth-child(2) { order: 1; }
-.container :nth-child(1) { order: 2; }
-
 .left{
     flex:1 1 15%;
-}
-.left{
+    order:1; /* In the html code, write .left sidebar after .main area */
     margin-top:4rem;
+    padding-top:.5rem;
     border-left:1px solid grey;
-    background:#f2f2d7;
+    background:var(--left-bg-color);
     font-size:.9rem;
     border-right:1px solid grey;
+    box-shadow:0 1px 3px grey;
 }
 .left li{
     list-style:none;
@@ -66,6 +67,8 @@ body{
 }
 .left>ul{
     padding-left:0.5rem;
+    position:relative;
+    top:.5rem;
 }
 .left>ul>li{
     padding-bottom:0.3rem;
@@ -77,8 +80,10 @@ body{
     position:fixed; top:0; left:0;
     margin:0;
     width:15%; height:4rem;
-    background:#f2f2d7;
+    background:var(--left-bg-color);
     border-right:1px solid grey;
+    border-bottom:1px solid grey;
+    box-shadow:0 1px 3px grey;
 }
 .prevnext a{
     display:inline-block;
@@ -87,6 +92,9 @@ body{
     text-decoration:none;
     font-weight:bolder;
     font-size:2rem;
+}
+.prevnext a:hover{
+    text-decoration:none;
 }
 .prevnext a.index{top:0; left:50px; font-size:0.5rem;}
 .prevnext a.top{top:0; left:80px;}
@@ -161,6 +169,9 @@ h4{
 a{
     text-decoration:none;
 }
+a:hover{
+    text-decoration:underline;
+}
 
 img{
     display: block;
@@ -175,7 +186,7 @@ pre{
     margin:1rem;
     background:lightgrey;
     padding:.5rem;
-    border-radius:3px;
+    border-radius:2px;
     border:1px solid #717a9f;
     line-height:1.15;
 }
@@ -187,7 +198,6 @@ pre.normal{
     padding:0;
 }
 code{
-    font-size:1.1rem;
 }
 code.color{
     background:lightgrey;

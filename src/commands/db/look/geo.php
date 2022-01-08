@@ -70,19 +70,30 @@ class geo implements Command {
             $cys[] = $row['cy'];
         }
         
-        // Generate one html table per country
-        // columns: C1, C1 name, C2, C2 name
+        // Table of contents
         $geolink = Geonames::compute_dblink();
-        $res .= "<ul>\n";
+        $nSplit = floor(count($cys) / 2); // to split toc in 2 columns
+        $res .= '<div class="flex-wrap">' . "\n";
+        $res .= '    <div class="padding-left2">' . "\n";
+        $i = 0;
         foreach($cys as $cy){
             if(!isset(self::COUNTRIES[$cy])){
                 return "MISSING COUNTRY NAME FOR CODE $cy\nFix the code before executing this command\n";
             }
-            $res .= '<li><a class="padding-right2" href="#codes-' . $cy . '">' . $cy . ' ' . self::COUNTRIES[$cy] . '</a></li>' . "\n";
+            $res .= '        <div><a class="padding-right2" href="#codes-' . $cy . '"><code>' . $cy . '</code> ' . self::COUNTRIES[$cy] . '</a></div>' . "\n";
+            $i++;
+            if($i == $nSplit){
+                $res .= "    </div>\n";
+                $res .= '    <div class="padding-left2">' . "\n";
+            }
         }
-        $res .= "</ul>\n";
+        $res .= "    </div>\n";
+        $res .= '</div><!-- class="flex" -->' . "\n";
+        
+        // Generate one html table per country
+        // columns: C1, C1 name, C2, C2 name
         foreach($cys as $cy){
-            $res .= '<h3 id="codes-' . $cy . '">' . $cy . ' - ' . self::COUNTRIES[$cy] . '</h3>' . "\n";
+            $res .= "\n" . '<h3 id="codes-' . $cy . '">' . $cy . ' - ' . self::COUNTRIES[$cy] . '</h3>' . "\n";
             $res .= '<table class="wikitable">' . "\n";
             $res .= '<tr><th colspan="2">C1</th><th colspan="2">C2</th></tr>' . "\n";
             $schema = strtolower($cy);

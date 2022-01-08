@@ -39,7 +39,7 @@ Gauquelin5 program gathers data from various sources to store them in a database
 <ul>
     <li><b><a href="https://github.com/tig12/openg">github.com/tig12/openg</a></b>, a web application to browse and download data.</li>
     <li><b><a href="https://github.com/tig12/g5-aux">github.com/tig12/g5-aux</a></b>, containing data not used directly by g5.</li>
-    <li><b><a href="https://github.com/tig12/geonames2postgres">github.com/tig12/geonames2postgres</a></b>, to buiild an auxiliary database containing geonames.org data</li>
+    <li><b><a href="https://github.com/tig12/geonames2postgres">github.com/tig12/geonames2postgres</a></b>, to build an auxiliary database containing geonames.org data.</li>
 </ul>
 
 </div>
@@ -53,6 +53,8 @@ Gauquelin5 program gathers data from various sources to store them in a database
 Here is a summary of the data manipulated by the program.
 
 <div class="flex-wrap">
+
+<img class="border margin padding" src="img/g5-flow.svg" alt="Gauquelin5 data transformations">
 
 <ul class="spaced" style="flex-shrink:3;">
     <li>
@@ -71,15 +73,29 @@ Here is a summary of the data manipulated by the program.
     </li>
     <li>
         <div class="bold">Intermediate data</div>
-        Raw data are sanitized, corrected, standardized and stored in CSV files.
-        <br>These temporary CSV files are stored by default in directory <code>data/tmp</code>.
-        <div class="bold">Not versioned</div>
-        The conversion between <code>raw</code> and <code>tmp</code> uses human corrections stored in YAML files.
-        <div class="bold">Versioned with g5, in <code>data/db</code>.</div>
+        <ul>
+            <li>
+                <b>Temporary data</b>
+                <br>Raw data are sanitized, corrected, standardized and stored in temporary CSV files.
+                <br>These CSV files are stored by default in directory <code>data/tmp</code>.
+                <div class="bold">Not versioned</div>
+            </li>
+            <li>
+                <b>Human corrections and additions</b>
+                <br>The conversion between <code>raw</code> and <code>tmp</code> uses human corrections stored in YAML files.
+                <div class="bold">Versioned with g5, in <code>data/db</code>.</div>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <div class="bold">G5 database</div>
+        Temporary data are then stored and merged in a postgresql database.
+    </li>
+    <li>
+        <div class="bold">Exports</div>
+        The database can be used to generate files.
     </li>
 </ul>
-
-<img class="border margin padding" src="img/g5-flow.svg" alt="Gauquelin5 summary flow">
 
 </div><!-- end class="flex-wrap" -->
 
@@ -121,7 +137,8 @@ The definition of "good data" used in this program is :
                 <b>Relate places to a standard</b>. The program uses <a href="https://www.geonames.org/">geonames.org</a>.
             </li>
             <li>
-                <b>Use a standard list of occupation codes</b> among all data. A convenient standard list was not found. The program uses a home-made list of codes (which is not satisfactory, but at least consistent among generated files). Current list will probably change, because based on Gauquelin french codes.
+                <b>Use a standard list of occupation codes</b> among all data. A convenient standard list was not found. The program uses a home-made list of codes (which is not satisfactory, but at least operational and consistent among generated files).
+                <br>Most of g5 are occupations are related to Wikidata, but Wikidata was not used because come codes are missing (eg "conductor of military band").
             </li>
         </ul>
     </li>
@@ -156,7 +173,7 @@ The definition of "good data" used in this program is :
     
     <li>
         <div class="bold margin-bottom">Connected to other data sets.</div>
-        Persons should be related to at least one standard id. This is currently not done by the program, but preparatory code has been written to link the data to <a href="https://www.wikidata.org">wikidata.org</a>.
+        Persons should be related to at least one standard id. This is currently not done by the program, but preparatory code has been written to link the data to <a href="wikidata.html">wikidata.org</a>.
     </li>
     
     <li>                      
@@ -291,6 +308,3 @@ The definition of "good data" used in this program is :
 
 </body>
 </html>
-<!-- ************************************* -->
-<!-- ********************************************************************************* -->
-************ -->

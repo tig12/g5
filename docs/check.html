@@ -36,16 +36,11 @@ Check data
 </h1>
 
 <div class="intro">
-The big part of the job is to achieve <b>data reliability</b>. Ideally, every information stored in g5 database should be checked against an official document. This is a huge work because it involves human work of transcription and verification.
-<br>For persons born before world war 2, we don't know the exact birth time. The most precise we can hope is to have a certificate from the <b>hospital</b> (HC). In practice, we have <b>birth certificates</b> (BC) from the civil registries, which are often rounded to the hour.
-<br>BC are not ideal but usable for statistical tests.
-<br>So in g5 context, a birth time is considered reliable if :
-<ul>
-    <li>It is related to a BC <b>available and verifiable by anyone</b>.</li>
-    <li>The transcription act has been <b>approved by 2 persons or more</b>.</li>
-</ul>
+The big part of the job is to achieve <b>data reliability</b>. Ideally, every information stored in g5 database should be checked against an official document. This is a huge work because it involves a human work of verification for each birth date.
+<br>The most precise we can hope is to have a <b>certificate from the hospital</b> (HC). In practice, we have <b>birth certificates</b> (BC) from the civil registries, which are often rounded to the hour. The exact birth of time then remains unknown. BCs are not ideal but usable for statistical tests.
+<br>So in g5 context, a birth time is considered reliable if it is related to a BC <b>available and verifiable by anyone</b>.
 
-Currently very few birth times have been verified, only to resolve questions raised by g5 development.
+<br><br>Currently very few birth times have been verified, only to solve questions raised by g5 development.
 <br>See also page <a href="acts.html">Acts</a>.
 
 </div>
@@ -63,29 +58,23 @@ Currently very few birth times have been verified, only to resolve questions rai
     </ul>
 </nav>
 
-
-
-
 <!-- ********************************************************************************* -->
 <h2 id="trust-data-reliability">Trust - data reliability</h2>
 Trust = level of reliability of an information.
-<br>Five main levels of reliability are defined in g5 :
+<br>Five levels of reliability are defined in g5 :
 <ul class="spaced margin-top">
     <li>
         <div class="bold">1 - Hospital Certificate (HC)</div>
-        - Original document available and verifiable by anyone.
-        <br>- Transcription approved by 2 persons or more.
+        Original document available and verifiable by anyone.
     </li>
     <li>
         <div class="bold">2 - Birth Certificate (BC)</div>
-        - Original document available and verifiable by anyone.
-        <br>- Transcription approved by 2 persons or more.
+        Original document available and verifiable by anyone.
     </li>
     <li>
         <div class="bold">3 - Birth Record (BR)</div>
         (= copy of the BC by an officer - may contain mistakes)
-        <br>- Original document available and verifiable by anyone.
-        <br>- Transcription approved by 2 persons or more.
+        <br>Original document available and verifiable by anyone.
     </li>
     <li>
         <div class="bold">4 - to check</div>
@@ -100,11 +89,9 @@ Trust = level of reliability of an information.
 
 Precision are constants of class <code>g5\model\DB5</code>
 
-<br><br>One supplementary level was introduced : <b>2.5</b>, meaning that one person has checked the BC, but the information has not been confirmed by a second person. Not really level 2 but better than 3.
+<br><br>Most data handled by g5 are level 4, very few are level 2.
 
-<br><br>Most data handled by g5 are level 4, very few are level 2.5.
-
-<br><br><b>Note</b> : as far as France is concerned, it's possible today to check BCs online. But at Gauquelin and Müller epoch, they had 2 possibilities : go physically to the archives and consult BCs, or sent a letter and receive BRs. It means that Gauquelin and Müller data are mostly based on BRs. And a BR may differ from the original BC because the officer can make an error of copy, or copy the time of registration instead of the time of birth.
+<br><br><b>Note</b> : as far as France is concerned, it's possible today to check BCs online. But at Gauquelin and Müller epoch, they had 2 possibilities : go physically to the archives and consult BCs, or send a letter and receive BRs. It means that Gauquelin and Müller data are mostly based on BRs. And a BR may differ from the original BC because the officer can make an error of copy, or copy the time of registration instead of the time of birth.
 
 <br>Raw data used by g5 may contain errors from different origins :
 <ul>
@@ -129,7 +116,7 @@ Persons have 2 fields to express reliability :
 </ul>
 
 <br>This model permits to indicate separately the reliability of each field.
-<br>Ex : a person has <code>trust = 4</code> and <code>trust-details = {"name.fame": 2.5}</code> means that all fields are trust level 4, but one field, <code>person.data['name']['official']</code> is level 2.5.
+<br>Ex : a person has <code>trust = 4</code> and <code>trust-details = {"name.fame": 2}</code> means that all fields are trust level 4, but one field, <code>person.data['name']['fame']</code> is level 2.
 
 <br>When a person is imported in database, it takes by default the trust level of its source.
 
@@ -256,6 +243,3 @@ Persons have 2 fields to express reliability :
 
 </body>
 </html>
-<!-- ************************************* -->
-<!-- ********************************************************************************* -->
-************ -->
