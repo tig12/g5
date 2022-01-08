@@ -17,6 +17,10 @@
 
 :root {
     --left-bg-color:#edebc2;
+    --left-shadow:0 1px 3px grey;
+    --left-border:1px solid grey;
+    --left-width:15%;
+    --prevnext-height:4rem;
 }
 
 /* ================ Site layout ================ */
@@ -35,29 +39,28 @@ body{
     margin:0;
 }
 
-/* .container and .main = direct children of body */
+/* .container = direct children of body */
 .container{
    flex:1 0 auto;
    display:flex;
    flex-flow:row wrap;
 }
 
-/* .left and .main = direct children of .container */
-.main{
+/* .left and .content = direct children of .container */
+.content{
     flex:1 1 85%;
-    order:2; /* In the html code, write .left sidebar after .main area */
+    order:2; /* In the html code, write .left sidebar after .content area */
     padding:1rem .5rem 2rem 1rem;
 }
 .left{
-    flex:1 1 15%;
-    order:1; /* In the html code, write .left sidebar after .main area */
-    margin-top:4rem;
+    flex:1 1 var(--left-width);
+    order:1; /* In the html code, write .left sidebar after .content area */
+    margin-top:var(--prevnext-height);
     padding-top:.5rem;
-    border-left:1px solid grey;
-    background:var(--left-bg-color);
     font-size:.9rem;
-    border-right:1px solid grey;
-    box-shadow:0 1px 3px grey;
+    background:var(--left-bg-color);
+    border-right:var(--left-border);
+    box-shadow:var(--left-shadow);
 }
 .left li{
     list-style:none;
@@ -65,25 +68,26 @@ body{
 .left ul{
     padding-left:1rem;
 }
-.left>ul{
+.left>nav>ul{
     padding-left:0.5rem;
     position:relative;
     top:.5rem;
 }
-.left>ul>li{
+.left>nav>ul>li{
     padding-bottom:0.3rem;
 }
 
-/* Navigation */
+/* ================ Navigation ================ */
 .prevnext{
     font-family:DejaVu,serif;
     position:fixed; top:0; left:0;
     margin:0;
-    width:15%; height:4rem;
+    width:var(--left-width);
+    height:var(--prevnext-height);
     background:var(--left-bg-color);
-    border-right:1px solid grey;
-    border-bottom:1px solid grey;
-    box-shadow:0 1px 3px grey;
+    border-bottom:var(--left-border);
+    border-right:var(--left-border);
+    box-shadow:var(--left-shadow);
 }
 .prevnext a{
     display:inline-block;
@@ -105,7 +109,7 @@ body{
     transform:rotate(-90deg);
 }
 
-/* table of content */
+/* ================ Table of content ================ */
 .toc{
     font-family:Arial,Helvetica,sans-serif;
     margin-bottom:1em;
@@ -118,7 +122,6 @@ body{
     font-size:1.4rem;
     margin:1rem 0 1rem 2rem;
 }
-
 
 /* ================ Semantic ================ */
 .formula{
