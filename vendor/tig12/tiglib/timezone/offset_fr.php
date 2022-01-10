@@ -29,12 +29,12 @@ class offset_fr {
     // return codes and messages
     const CASE_1871_1918_LORRAINE = 1;
     const MSG_1871_1918_LORRAINE = '
-        Timezone offset not computed because of potential error: French or German TZ regime ?.
-        <br>1871-05-10 - 1918-11-11: départements 54, 57, 88 partially occupied by Germany.';
+        Timezone offset not computed because of potential error: French or German TZ regime ?
+        <br>1871-05-10 - 1918-11-11: départements 54, 57, 88 were partially occupied by Germany.';
     
     const CASE_1871_1918_ALSACE = 2;
-    const MSG_1871_1918_ALSACE = 'Timezone offset not computed offset_de - must be done by offset_de.
-        <br>1871-05-10 - 1918-11-11: départements 67, 68 under German timezone regime.';
+    const MSG_1871_1918_ALSACE = 'Timezone offset not computed by offset_fr - must be done by offset_de.
+        <br>1871-05-10 - 1918-11-11: départements 67, 68 were under German timezone regime.';
     
     const CASE_WW2 = 3;
     const MSG_WW2 = '

@@ -47,7 +47,7 @@ Data processed by g5 are imported in a postgresql database, named the <b>Open Ga
 <nav class="toc">
     <ul>
         <li>
-            <a href="#data-model">Data model</a>
+            <a href="#class-diagram">Class diagram</a>
         </li>
         <li>
             <a href="#syntax">Syntax</a>
@@ -68,32 +68,28 @@ Data processed by g5 are imported in a postgresql database, named the <b>Open Ga
     </ul>
 </nav>
 
-
-<!-- 
-
-select distinct birth->'place'->>'cy' as country, birth->'place'->>'c2' as c2 from person order by birth->'place'->>'cy';
--->
-
-
 <!-- ********************************************************************************* -->
-<h2 id="data-model">Data model</h2>
+<h2 id="class-diagram">Class diagram</h2>
 <div class="float-left">
-    <img class="border margin padding" src="img/db5-model.svg" alt="">
+    <img class="border margin padding" src="img/db5-model.svg" alt="G5 database class diagram">
 </div>
 
-<div class="small8 float-left margin">
-Read :
-<br>
-<ul class="naked border inline-block padding05 margin05">
-    <li>
-        1 source is related to 0 or more persons
-        <br>0 => a source can exist without being related to any person.
-    </li>
-    <li class="padding-top05">
-        1 person is related to 1 or more sources
-        <br>1 => a person cannot exist in the database without being related to a source.
-    </li>
-</ul>
+<div class="float-left margin-top05 margin-left">
+    <div class="border inline-block padding05 margin05">
+        Cardinalities use UML syntax for the directions,
+        <br>and Merise notation for the values.
+        <div class="padding-top05">
+            Example:
+        </div>
+        <div class="padding-top05">
+            1 source is related to 0 or more persons
+            <br>0 => a source can exist without being related to any person.
+        </div>
+        <div class="padding-top05">
+            1 person is related to 1 or more sources
+            <br>1 => a person cannot exist in the database without being related to a source.
+        </div>
+    </div>
 </div>
 <br class="clear-left">
 
@@ -101,10 +97,6 @@ Read :
     <li>
         <div class="bold"><a href="db-source.html">Source</a></div>
         Information sources, origin of the data manipulated by g5.
-        <br>The link between Source and Source permits to handle the notion of parent source.
-        <br>For example, the source called <code>a1</code> refers to the html web page <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdA1y.html">cura.free.fr/gauq/902gdA1y.html</a>
-        <br><code>a1</code> has a parent source called <code>cura5</code>, which refers to version 5 of database located on web site <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr">cura.free.fr</a>.
-        <br>One source can have several parents.
     </li>
     <li>
         <div class="bold"><a href="db-person.html">Person</a></div>
@@ -112,24 +104,18 @@ Read :
     </li>
     <li>
         <div class="bold"><a href="db-group.html">Group</a></div>
-        A set of persons
-        <br>The link between Group and Group permits to handle the notion of sub-group.
-        <br>One group can be sub-group of several groups.
+        A collection of persons.
     </li>
     <li>
         <div class="bold"><a href="db-occu.html">Occupation</a></div>
-        <!-- <div class="bold"><a href="db5-occu.html">Occupation</a></div> -->
-        Activity of a person, ~profession
-        <br>The link between Occupation and Occupation permits to classify occupations.
-        <br>For example, a poet is also an artist.
+        Activity of a person, &#8771; profession.
     </li>
     
 </ul>
 
-
 <!-- ********************************************************************************* -->
 <h2 id="syntax">Syntax</h2>
-The structure of the entities are described in yaml files located with the source code of the model
+The structure of the entities are described in yaml files located with the source code of the model.
 <pre>
 src/model/
     ├── Group.php
@@ -141,25 +127,15 @@ src/model/
 </pre>
 
 For example, file <code>Person.yml</code> contains an empty person with all its fields empty.
-<br>This provides to the code a precise definition of the entities, used as the description of a new type.
 
-<!-- 
-<br>
-<br>Persons are built by program from raw files.
-<br>Sources are defined in files of <code>data/model/source</code> and imported by program.
-<br>Groups are built in the code.
--->
+<br><br>This provides to the code a precise definition of the entities, used as the description of a new type.
 
 <!-- ********************************************************************************* -->
-<h2 id="identifiers">Identifiers</h2>
+<h2 id="identifiers">G5 unique id</h2>
 
-Unique identifiers depend on the entity type. Some entities (Person and Group) have several unique ids.
-
-<!-- ************************************* -->
-<h3 id="3-1-slugs">Slugs</h3>
 All entities have one unique id: its <b>slug</b>.
 <br>A slug is a string that can be used in a URL.
-<br>It contains only lower case letters without accents [a-z], digits [0-9], and hyphen (-).
+<br>It only contains lower case letters without accents [a-z], digits [0-9], and hyphen (-).
 
 <br><br>Examples
 <table class="wikitable margin">
@@ -180,77 +156,60 @@ All entities have one unique id: its <b>slug</b>.
     </tr>
 </table>
 
+Note that this id may change, for example if name or birth date of a person is corrected.
+
+<!-- 
+        <br>The link between Source and Source permits to handle the notion of parent source.
+        <br>For example, the source called <code>a1</code> refers to the html web page <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/902gdA1y.html">cura.free.fr/gauq/902gdA1y.html</a>
+        <br><code>a1</code> has a parent source called <code>cura5</code>, which refers to version 5 of database located on web site <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr">cura.free.fr</a>.
+        <br>One source can have several parents.
+        
+        <br>The link between Group and Group permits to handle the notion of sub-group.
+        <br>One group can be sub-group of several groups.
+
+        <br>The link between Occupation and Occupation permits to classify occupations.
+        <br>For example, a poet is also an artist.
+        
+        <br><br>Group and source slug are defined by humans, in the code for groups and or in files of <code>data/model/source</code> for sources. 
+-->
+
+
+<!-- ********************************************************************************* -->
+<h2 id="implementation-details">Implementation</h2>
+The database uses <a href="https://www.postgresql.org/">postgresql</a>.
+<br>SQL to create the tables are located in <code>src/model/db-create-tables</code>
+<br>G5 database uses <a href="https://www.postgresql.org/docs/12/datatype-json.html">jsonb</a> type to store structured (hierarchical) fields. 
 
 <!-- ************************************* -->
-<h3 id="3-2-person-ids">Person ids</h3>
+<h3>Example of queries</h3>
 
-Every person of the database has at least 2 unique ids:
-<ul class="spaced margin-top">
-    <li>
-        <div class="bold">Id generated by the database</div>
-        Usual integer. These are used to associate person to groups.
-    </li>
-    <li>
-        <div class="bold">Person slug</div>
-        Person slugs are built by program, from family name, given name and birth day.
-        <br>Example : <code>poincare-henri-1854-04-29</code>.
-    </li>
-</ul>
-Some persons also have other ids (non-exhaustive list):
-<ul class="margin-top">
-    <li>
-        <div class="bold">Gauquelin id</div>
-    </li>
-    <li>
-        <div class="bold">Müller id</div>
-    </li>
-    <li>
-        <div class="bold">Ertel id</div>
-    </li>
-    <li>
-        <div class="bold">Wikidata id</div>
-    </li>
-</ul>
+<div class="margin-bottom">The use of jsonb type implies to use an unusual syntax to query the database.</div>
 
+Show person with Gauquelin id = 'A1-514':
+<pre>select * from person where ids_partial->>'lerrcp'='A1-514';</pre>
 
+Show the same person using the field <code>ids-in-sources</code>:
+<pre>select * from person where ids_in_sources->>'a1'='514';</pre>
+<pre>select * from person where ids_in_sources @> '{"a1": "154"}';</pre>
 
-<br><br>Group and source slug are defined by humans, in the code for groups and or in files of <code>data/model/source</code> for sources. 
+List persons whose name has not been restored yet (family name starting by "Gauquelin-", see <a href="gauquelin-A.html">page on Gauquelin series A</a>).
+<pre>select ids_in_sources from person where name->>'family' like 'Gauquelin-%' order by ids_in_sources;</pre>
 
-<!-- ********************************************************************************* -->
-<h2 id="implementation-details">Implementation details</h2>
-The database uses <a href="https://www.postgresql.org/">postgresql</a>.
-<br>Structured fields are stored using <a href="https://www.postgresql.org/docs/12/datatype-json.html">jsonb</a> type. 
-<br>
-<br>Each entity has a field <code>id</code>, used as primary key.
-<br>Slugs are also indexed.
-<br>Links between Person and Group are expressed by a relation table. The other links (Source-Person, Source-Source...) are contained in the json values.
-<br>SQL to create the tables are located in <code>src/model/db-create-tables</code>
+List person with issues:
+<pre>select * from person where jsonb_array_length(issues) != 0 order by slug;</pre>
 
-<!-- ********************************************************************************* -->
-<h2 id="g5-integration">G5 integration</h2>
-These commands create the whole database from scratch.
-<br>The code of class <code>g5\db\init\all</code> is the only reliable reference documenting the complete build process.
+Compute the number of persons with a birth time:
+<pre>select count(*) from person where length(birth->>'date') > 10 or length(birth->>'date-ut') > 10;</pre>
 
+List different countries present in the database:
 <pre>
-# Generate tmp files from raw files
-php run-g5.php db init all tmp
+select distinct birth->'place'->>'cy' as country from person order by birth->'place'->>'cy';
 </pre>
-<pre>
-# Fill the content of tmp files in database
-php run-g5.php db init all db
-</pre>
-<pre>
-# Compute occupations and db statistics
-php run-g5.php db init all finalize
-</pre>
-<pre>
-# Generate csv files to download
-php run-g5.php db init all export
-</pre>
+
 
 </article>
 </main>
-</div><!-- end class="main" -->
+</div><!-- end class="content" -->
 
 <!-- ************************************* -->
 <aside class="left">

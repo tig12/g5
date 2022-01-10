@@ -177,7 +177,8 @@ class tmp2db implements Command {
                 if($mulDay != $gauqDay){
                     $nDiffDates++;
                     $issue1 = "Check birth date because Müller and Gauquelin birth days differ\n"
-                           . "<br>Gauquelin $gauqId: $gauqDay\n<br>Müller $mullerId: $mulDay\n";
+                           . "<br>$gauqDay for Gauquelin $gauqId\n"
+                           . "<br>$mulDay for Müller $mullerId\n";
                     $p->addIssue($issue1);
                     if($reportType == 'full'){
                         $datesReport .= "\nCura $gauqId\t $gauqDay {$p->data['name']['family']} - {$p->data['name']['given']}\n";
@@ -190,8 +191,8 @@ class tmp2db implements Command {
                     $mulHour = substr($line['DATE'], 11);
                     if($gauqHour != $mulHour){
                         $issue2 = "Check birth date because Müller and Gauquelin birth hours differ"
-                               . "\n<br>Gauquelin $gauqId: $gauqHour"
-                               . "\n<br>Müller $mullerId: $mulHour\n";
+                               . "\n<br>$gauqHour for Gauquelin $gauqId"
+                               . "\n<br>$mulHour for Müller $mullerId\n";
                         $p->addIssue($issue2);
                     }
                 }
