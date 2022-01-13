@@ -44,7 +44,11 @@ class stats implements Command {
         
         $N_day = $N - $N_time;
         $report_full .= "N_day = $N_day\n";
-                
+        
+        $query = 'select count(*) from api_issue';
+        $N_issues = $dblink->query($query)->fetch()[0];
+        $report_full .= "N_issues = $N_issues\n";
+        
         $countries = [];
         $query = "select birth->'place'->>'cy' as country, count(*) as count from person
             group by birth->'place'->>'cy'
@@ -54,7 +58,7 @@ class stats implements Command {
             $countries[$row['country']] = $row['count'];
         }
         
-        // TODO rewrite with pl/pgsql
+        // TODO rewrite with pl/pgsql ?
         $years = [];
         $query = "select substr(birth->>'date', 1, 4) as year, count(*) as count from person
             where birth->>'date-ut' is null
@@ -84,13 +88,15 @@ class stats implements Command {
             n,
             n_time,
             n_day,
+            n_issues,
             countries,
             years
-            )values(?,?,?,?,?)");
+            )values(?,?,?,?,?,?)");
         $stmt->execute([
             $N,
             $N_time,
             $N_day,
+            $N_issues,
             json_encode($countries),
             json_encode($years)
         ]);
