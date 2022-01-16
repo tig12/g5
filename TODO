@@ -5,6 +5,8 @@
 
 - Doc, install : document additions of views for postgrest api.
 
+- names['nobl'] => include space when needed ('de ', 'di '...)
+
 - Harmonize group creation => in data/db/group and remove from the code (class M5medics::getGroup() etc.)
   
 - In all classes using TRUST_LEVEL, use the constants of class Trust

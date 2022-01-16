@@ -169,8 +169,7 @@ class Person {
     
     /**
         Computes the different forms of a person name.
-        @param  $array_name  Array representing the name, as stored in database. Ex: [
-            'usual' => ''
+        @param  $arrNames  Array representing the name, as stored in database. Ex: [
             'given' => Pierre
             'family' => Alard
             'spouse' => ''
@@ -186,25 +185,55 @@ class Person {
             'alter' => []
             'nobl' => ''
         ]
+        @return A regular array of possible names
     **/
-    public static function computeNames(array $array_name) {
+    public static function computeNames(array $arrNames) {
         $res = [];
-        if($array_name['usual'] != ''){
-            $res[] = $array_name['usual'];
+        // full names
+        if($arrNames['fame']['full'] != ''){
+            $res[] = $arrNames['fame']['full'];
         }
-        if($array_name['fame'] != ''){
-            $res[] = $array_name['fame'];
-        }
-        if(!empty($array_name['alter'])){
-            foreach($array_name['alter'] as $alt){
+        if(!empty($arrNames['alter'])){
+            foreach($arrNames['alter'] as $alt){
                 $res[] = $alt;
             }
         }
-        if($array_name['given'] != '' && $array_name['family'] != ''){
-            $res[] = $array_name['given'] . ' ' . $array_name['family'];
+        // combinations of given / family names
+        $givs = [];
+        $fams = [];
+        // given
+        if($arrNames['official']['given'] != '' && $arrNames['given'] == '' && $arrNames['fame']['given'] == ''){
+            // official given name retained only if no other given names available.
+            $givs[] = $arrNames['official']['given'];
         }
-        else if($array_name['family'] != ''){
-            $res[] = $array_name['family'];
+        if($arrNames['given'] != ''){
+            $givs[] = $arrNames['given'];
+        }
+        if($arrNames['fame']['given'] != ''){
+            $givs[] = $arrNames['fame']['given'];
+        }
+        // family
+        if($arrNames['family'] != ''){
+            $tmp = $arrNames['family'];
+            if($arrNames['nobl'] != ''){
+                $tmp = $arrNames['nobl'] . $tmp;
+            }
+            $fams[] = $tmp;
+        }
+        if($arrNames['spouse'] != ''){
+            $fams[] = $arrNames['spouse'];
+        }
+        if($arrNames['fame']['family'] != ''){
+            $fams[] = $arrNames['fame']['family'];
+        }
+        if($arrNames['official']['family'] != ''){
+            $fams[] = $arrNames['official']['family'];
+        }
+        // combinations given / family
+        foreach($givs as $giv){
+            foreach($fams as $fam){
+                $res[] = $giv . ' ' . $fam;
+            }
         }
         return $res;
     }

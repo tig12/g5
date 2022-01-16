@@ -19,7 +19,6 @@ ids-in-sources: {}
 ids-partial: {}
 
 name:
-  usual:            # not used so far, maybe will be removed
   given:
   family:
   spouse:

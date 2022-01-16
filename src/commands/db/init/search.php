@@ -42,8 +42,7 @@ class search implements Command {
             $names = Person::computeNames($json_name);
             $bday = substr($slug, -10);
             foreach($names as $name){
-                $insertedName = "$name $bday";
-                $stmt_insert->execute([$slug, $bday, $insertedName]);
+                $stmt_insert->execute([$slug, $bday, $name]);
                 $N_inserted++;
             }
             $N_person++;
