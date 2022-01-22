@@ -315,6 +315,12 @@ class Group {
     // ***********************************************************************
     //                       Ancestors / descendants
     // ***********************************************************************
+    
+    /** 
+        Uses vendor/tiglib/dag, direct acyclic graph, were edges go from child to parent - "has parent" relation
+    **/
+    
+    
     /**
         Returns self::$allAncestors
     **/

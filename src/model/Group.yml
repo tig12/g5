@@ -3,18 +3,23 @@
 # Used to create an empty group
 #
 
+# database id managed by the dbms
 id: 
 
+# unique within g5 groups
 slug:
 
 name:
 
+# cardinality
 'n': 0
 
+# 'occu' or 'history'
 type: 
 
 description: |
 
+# relative path to 
 download: 
 
 # array of source slugs

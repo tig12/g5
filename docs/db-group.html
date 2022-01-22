@@ -33,12 +33,61 @@
 <header>
 <h1>G5 Group</h1>
 <div class="intro">
+<br>Structure given by <a href="https://github.com/tig12/gauquelin5/blob/master/src/model/Person.yml"><code>src/model/Person.yml</code></a>
 
 </div>
 </header>
 
 <article>
 
+<pre>
+# database id managed by the dbms
+id: 
+
+# unique within g5 groups
+slug:
+
+name:
+
+# cardinality
+'n': 0
+
+# 'occu' or 'history'
+type: 
+
+description: |
+
+# relative path to 
+download: 
+
+# array of source slugs
+sources: []
+
+# array of group slugs
+parents: []
+
+# array of group slugs
+children: []
+
+# array of person ids (neither person slugs nor person objects)
+members: []
+</pre>
+
+<!-- ********************************************************************************* -->
+<h2>Parents - children</h2>
+
+Fields <code>parents</code> and <code>children</code> permit to manage subgroups.
+<br>The relation <code>child --> parent</code> is implemented with a <b>direct acyclic graph (DAG)</b>, <a href="https://github.com/tig12/gauquelin5/tree/master/vendor/tig12/tiglib/dag">vendor/tiglib/dag</a>.
+
+<br><br>The edges of this graph are "is child of" relations.
+<br>This permits to have several children and several parents.
+
+<br><br>Parent - child relations are used to classify <a href="db-occu.html"><b>occupations</b></a>.
+
+<img class="margin border padding" src="img/occus-dag.svg" alt="Occupations example">
+
+
+<!-- 
 <pre>
     public static function getBySlug($slug): ?Group
     public static function loadAllFromDB()
@@ -60,6 +109,7 @@
     public function exportCsv($csvFile, $csvFields, $map=[], $fmap=[], $sort=false, $filters=[], $dozip=false)
 
 </pre>
+-->
 
 
 </article>
@@ -108,7 +158,7 @@
                     <li>
                         <a href="g55.html">Gauquelin 1955</a>
                         <ul>
-                            <li><a href="g55-lerrcp.html">Matching G55 - LERRCP</a></li>
+                            <li><a href="g55-lerrcp.html">Match LERRCP Series A</a></li>
                             <li><a href="g55-curadiff.html">Differences G55 - Cura5</a></li>
                             <li><a href="g55-884-priests.html">884 priests</a></li>
                             <li><a href="g55-361-painters.html">361 minor painters</a></li>

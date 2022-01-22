@@ -27,8 +27,8 @@ class occu implements Command {
         Supplementary parameters that are not handled by CLI interface
     **/
     const PARAMS = [
-        // if true, the generated file name will be prefixed by the number of records
-        'add_number_in_name' => true,
+        // if true, the generated file name will contain the number of records
+        'add_number_in_file_name' => true,
     ];
     
     /** 
@@ -167,8 +167,8 @@ class occu implements Command {
         
         $filters = [];
         
-        if(self::PARAMS['add_number_in_name']){
-            $outfile = self::add_number_in_name($outfile, count($persons));
+        if(self::PARAMS['add_number_in_file_name']){
+            $outfile = self::add_number_in_file_name($outfile, count($persons));
         }
         
         [$exportReport, $exportfile, $N] =  $g->exportCsv(
@@ -188,7 +188,12 @@ class occu implements Command {
     }
     
     // ************************* Auxiliary functions *****************************
-    private static function add_number_in_name($file, $N){
+    
+    /** 
+        Adds group cardinality in the name of the exported file.
+        Ex: change "athletics-competitor.csv" to "athletics-competitor-410.csv"
+    **/
+    private static function add_number_in_file_name($file, $N){
         $pathinfo = pathinfo($file);
         return $pathinfo['dirname'] . DS . $pathinfo['filename'] . "-$N." . $pathinfo['extension'];
     }

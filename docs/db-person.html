@@ -34,11 +34,33 @@
 <h1>G5 Person</h1>
 <div class="intro">
 This page describes how the notion of person is handled in g5 database.
-<br>The structure of a person is given by <code>src/model/Person.yml</code>
+<br>The structure of a person is given by <a href="https://github.com/tig12/gauquelin5/blob/master/src/model/Person.yml"><code>src/model/Person.yml</code></a>
 </div>
 </header>
 
 <article>
+
+Table definition in <a href="https://github.com/tig12/gauquelin5/tree/master/src/model/db-create">src/model/db-create</a>
+
+<pre>
+create table person (
+    id              serial primary key,
+    slug            varchar(255) unique not null,
+    ids_in_sources  jsonb not null,
+    ids_partial     jsonb not null,
+    name            jsonb not null,
+    gender          char(1),
+    birth           jsonb not null,
+    death           jsonb not null,
+    occus           jsonb not null,
+    trust           jsonb not null,
+    acts            jsonb not null,
+    history         jsonb not null,
+    issues          jsonb not null,
+    eminence        jsonb not null,
+    notes           jsonb not null
+);
+</pre>
 
 <!-- ********************************************************************************* -->
 <h2>Person ids</h2>
@@ -59,6 +81,7 @@ Every person of the database has at least 2 unique ids:
 
 <!-- ************************************* -->
 <h3>Ids in sources</h3>
+
 Field <code>ids_in_sources</code> is a jsonb key value map giving the local id of a person within a source.
 <br>As a person is ALWAYS related to at least one information source, this field is never empty.
 
@@ -97,6 +120,25 @@ Array of strings describing the potential problems existing on some values of th
 <!-- ********************************************************************************* -->
 <h2>Links with other entities</h2>
 
+
+<!-- ********************************************************************************* -->
+<h2>Person name</h2>
+
+<pre>
+name:
+  given:
+  family:
+  spouse:
+  official:         # As written in the birth certificate
+    family:
+    given:
+  nobl:             # nobiliary-particle: de d' di del von...
+  fame:             # stage, scene
+    full:           # ex Mistinguett or Stromae
+    family: 
+    given: 
+  alter: []         # alternative names, like nicknames, or author names
+</pre>
 
 
 </article>
@@ -145,7 +187,7 @@ Array of strings describing the potential problems existing on some values of th
                     <li>
                         <a href="g55.html">Gauquelin 1955</a>
                         <ul>
-                            <li><a href="g55-lerrcp.html">Matching G55 - LERRCP</a></li>
+                            <li><a href="g55-lerrcp.html">Match LERRCP Series A</a></li>
                             <li><a href="g55-curadiff.html">Differences G55 - Cura5</a></li>
                             <li><a href="g55-884-priests.html">884 priests</a></li>
                             <li><a href="g55-361-painters.html">361 minor painters</a></li>

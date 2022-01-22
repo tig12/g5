@@ -31,18 +31,10 @@
 
 <main>
 <header>
-<h1>Gauquelin5 Organisation</h1>
+<h1>G5 Organisation</h1>
 <div class="intro">
 Gauquelin5 program gathers data from various sources to store them in a database.
-<br>This involves numerous steps called <b>commands</b>. G5 program provides a CLI (Command Line Interface) to issue these commands.
-<br>
-<br>G5 program is related to three other repositories:
-<ul>
-    <li><b><a href="https://github.com/tig12/openg">github.com/tig12/openg</a></b>, a web application to browse and download data.</li>
-    <li><b><a href="https://github.com/tig12/g5-aux">github.com/tig12/g5-aux</a></b>, containing data not used directly by g5.</li>
-    <li><b><a href="https://github.com/tig12/geonames2postgres">github.com/tig12/geonames2postgres</a></b>, to build an auxiliary database containing geonames.org data.</li>
-</ul>
-
+<br>This involves numerous steps called <b>commands</b>. G5 provides a CLI (Command Line Interface) to issue these commands.
 </div>
 </header>
 
@@ -66,7 +58,7 @@ Here is a summary of the data manipulated by the program.
     </li>
     <li>
         <div class="bold">Raw data</div>
-        Built from auxiliary data, raw data form the input of g5.
+        Input of g5.
         <br>Contain usable version of auxiliary data, like files converted to UTF8
         <br>or scans transformed to lists through OCR and human corrections.
         <br>Conversion between auxiliary to raw data is done by humans, not by program.
@@ -90,11 +82,10 @@ Here is a summary of the data manipulated by the program.
     </li>
     <li>
         <div class="bold">G5 database</div>
-        Temporary data are then stored and merged in a postgresql database.
+        <code>data/tmp</code> are then loaded and merged in a postgresql database.
     </li>
     <li>
         <div class="bold">Exports</div>
-        The database can be used to generate files.
     </li>
 </ul>
 
@@ -105,9 +96,9 @@ Data directory thus contains:
 gauquelin5
     └── data
         ├── auxiliary   # can be absent or removed
-        ├── <b>raw</b>         # location imposed (because versioned with g5)
+        ├── <b>raw         # location imposed (because versioned with g5)</b>
         ├── tmp         # location set in config.yml
-        ├── <b>db</b>          # location imposed (because versioned with g5)
+        ├── <b>db          # location imposed (because versioned with g5)</b>
         └── output      # location set in config.yml
 </pre>
 
@@ -234,7 +225,7 @@ The definition of "good data" used in this program is :
                     <li>
                         <a href="g55.html">Gauquelin 1955</a>
                         <ul>
-                            <li><a href="g55-lerrcp.html">Matching G55 - LERRCP</a></li>
+                            <li><a href="g55-lerrcp.html">Match LERRCP Series A</a></li>
                             <li><a href="g55-curadiff.html">Differences G55 - Cura5</a></li>
                             <li><a href="g55-884-priests.html">884 priests</a></li>
                             <li><a href="g55-361-painters.html">361 minor painters</a></li>

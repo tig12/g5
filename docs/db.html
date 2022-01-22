@@ -137,6 +137,8 @@ All entities have one unique id: its <b>slug</b>.
 <br>A slug is a string that can be used in a URL.
 <br>It only contains lower case letters without accents [a-z], digits [0-9], and hyphen (-).
 
+<br><br><b>A slug is unique within a given type</b> - ex: 2 groups cannot have the same slug.
+
 <br><br>Examples
 <table class="wikitable margin">
     <tr><th>Entity type</th><th>Slug example</th></tr>
@@ -253,7 +255,7 @@ select distinct birth->'place'->>'cy' as country from person order by birth->'pl
                     <li>
                         <a href="g55.html">Gauquelin 1955</a>
                         <ul>
-                            <li><a href="g55-lerrcp.html">Matching G55 - LERRCP</a></li>
+                            <li><a href="g55-lerrcp.html">Match LERRCP Series A</a></li>
                             <li><a href="g55-curadiff.html">Differences G55 - Cura5</a></li>
                             <li><a href="g55-884-priests.html">884 priests</a></li>
                             <li><a href="g55-361-painters.html">361 minor painters</a></li>

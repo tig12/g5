@@ -3,6 +3,8 @@
 - see php bug - https://bugs.php.net/bug.php?id=81002
   (to store booleans in postgres)
 
+- in src/model/db-create, replace sex by gender + adapt the code
+
 - Doc, install : document additions of views for postgrest api.
 
 - names['nobl'] => include space when needed ('de ', 'di '...)
