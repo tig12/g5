@@ -37,7 +37,7 @@ class dbcreate implements Command {
             $dblink->exec($sql_create);
             $report .= "Create table $table\n";
             // grant privilege for use with postgrest
-            $sql_grant = "grant select on $table to " . Config::$data['db5']['postgrest']['user'];
+            $sql_grant = "grant select on $table to " . Config::$data['openg']['postgrest']['user'];
             $dblink->exec($sql_grant);
             $report .= "$sql_grant\n";
         }
@@ -52,7 +52,7 @@ class dbcreate implements Command {
             $dblink->exec($sql_create);
             $report .= "Create view $view\n";
             // grant privilege for use with postgrest
-            $sql_grant = "grant select on $view to " . Config::$data['db5']['postgrest']['user'];
+            $sql_grant = "grant select on $view to " . Config::$data['openg']['postgrest']['user'];
             $dblink->exec($sql_grant);
             $report .= "$sql_grant\n";
         }

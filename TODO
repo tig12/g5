@@ -124,14 +124,6 @@ The export says 3748, there is a difference of 3 that I can't explain, I marked 
 
 - Update Muller1083 documentation
 
-- Add schema in db config + in all sql queries, specify the schema
-
-- Refactor and unify tweak files :
-    - one common mechanism for all tweaks
-    - one general README
-- tweak2csv : code should be factorized, available to all datafiles
-              (cura, 1083MED, 4391SPO)
-
 - cura : handle all cases of unexisting raw files
 
 - Refactor g55 commands : "all" is useless
@@ -150,8 +142,6 @@ The export says 3748, there is a difference of 3 that I can't explain, I marked 
 - A : legal time restoration for other countries.
 
 - D6 D10 E1 E3 : compute timezone
-
-- put style.css in conformity with tigsite
 
 - D6 addGeo : add also C2
 

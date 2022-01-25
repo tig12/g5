@@ -69,7 +69,7 @@ class chart implements Command {
             meanLine:       true,
             meanLineStyle: 'stroke:black; stroke-dasharray:5,15;'
         )[1];
-        $outfile = implode(DS, [Config::$data['dirs']['opengauquelin.org'], 'src', 'static', 'tmp', 'years.svg']);
+        $outfile = implode(DS, [Config::$data['openg']['path'], 'src', 'static', 'tmp', 'years.svg']);
         file_put_contents($outfile, $svg);
         return "Generated $outfile\n";
     }
