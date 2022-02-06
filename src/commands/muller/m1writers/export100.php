@@ -49,7 +49,7 @@ class export100 implements Command {
         
         $report = '';
         
-        $g = Group::getBySlug(M1writers100::GROUP_SLUG); // DB
+        $g = Group::createFromSlug(M1writers100::GROUP_SLUG); // DB
         
         self::$sourceSlug = M1writers100::LIST_SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
 

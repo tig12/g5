@@ -35,7 +35,8 @@
 Acts
 </h1>
 <div class="intro">
-Acts are official documents, in particular <b>birth certificates (BC)</b> .
+Acts are official documents, in particular <b>birth certificates (BC)</b>.
+<br>To achieve g5 goals of <b>reliability</b> and <b>verifiability</b>, each person stored in the database should have his/her birth certificate visible by data users.
 <br>This page describes their integration in the database.
 <!--
 They are used to solve questions raised by g5 development, but not integrated yet to the program (informations from BCs are currently integrated through <a href="tweak2tmp.html">tweak files</a>).
@@ -46,49 +47,54 @@ They are used to solve questions raised by g5 development, but not integrated ye
 </header>
 
 <article>
-<nav class="toc">
-    <ul>
-        <li>
-            <a href="#purpose">Purpose</a>
-        </li>
-        <li>
-            <a href="#act">Act</a>
-            <ul>
-                <li><a href="#2-1-directory-layout">Directory layout</a></li>
-                <li><a href="#2-2-image-download">Image download</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#act">Act</a>
-        </li>
-        <li>
-            <a href="#gauquelin5-integration">Gauquelin5 integration</a>
-        </li>
-        <li>
-            <a href="#french-archives">French archives</a>
-            <ul>
-                <li><a href="#5-1-filae-com">filae.com</a></li>
-                <li><a href="#5-2-local-associations">Local associations</a></li>
-            </ul>
-        </li>
-    </ul>
-</nav>
 
+<!-- ********************************************************************************* -->
+<h2>Link person - act</h2>
 
+Acts are related to persons through the field <code>acts</code> of a person.
+<br>Field <code>acts</code> contains one or more <b>paths</b>.
+<br>Ex:
+<pre>
+paths: [
+    - "birth/1811/10/25/galois-evariste-1811-10-25"
+]
+</pre>
+
+These paths designate directories, relative to variable <code>paths / acts</code> of <code>config.yml</code>.
+<pre>
+paths:
+  acts: /path/to/acts
+</pre>
+
+<!-- ************************************* -->
+<h3>Directory layout</h3>
+Acts are organized chronologically :
+<pre>
+acts
+    └── birth
+        └── 1811
+            └── 10
+                └── 25
+                    └── galois-evariste-1811-10-25
+                        ├── naissance.jpg
+                        └── naissance.yml
+</pre>
+
+<br><br>Example for <b>Evariste Galois, Bourg-la-Reine, France, 1811-10-25 01:00</b>
 
 
 <!-- ********************************************************************************* -->
-<h2 id="purpose">Purpose</h2>
+<h2>Detailed transcription</h2>
 
-Permit the user to check the database with scans of original documents.
+A syntax used for a genealogy software permits a complete transcription of a BC.
+<br>This is shown as an example, but <b>this syntax is not used by g5</b>.
 
-<br><br>Example of a complete transcription of BC <b>Evariste Galois, Bourg-la-Reine, France, 1811-10-25 01:00</b>
+
 <style>
 #proto div{
     margin:0.5em;
 }
 </style>
-
 <div id="proto" class="flex-wrap margin-top">
 
 <div>
@@ -219,19 +225,6 @@ An act consists of 2 documents :
     <li>If possible, the url directly pointing to the page. Some départements provide a way to copy the "permalink" of a document, which may be different from the url of the page displayed by the web browser.</li>
 </ul>
 
-<!-- ************************************* -->
-<h3 id="2-1-directory-layout">Directory layout</h3>
-Acts are organized chronologically :
-<pre>
-acts
-    └── birth
-        └── 1811
-            └── 10
-                └── 25
-                    └── galois-evariste-1811-10-25
-                        ├── naissance.jpg
-                        └── naissance.yml
-</pre>
 
 <!-- ************************************* -->
 <h3 id="2-2-image-download">Image download</h3>

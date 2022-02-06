@@ -7,7 +7,7 @@ sources:
   - cpara
   - a1
 description: |
-  Published by Comité Para for its 1976 test.
-  <br>Number according to Ertel : 535
+  This subsample contain new data (not already present in Gauquelin 1955 and 1960) published by the Comité Para for its 1976 test.
+  <br>Number according to Ertel : 332
 parents: 
   - ertel-4384-sport

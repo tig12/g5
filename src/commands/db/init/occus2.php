@@ -43,7 +43,7 @@ class occus2 implements Command {
         //
         $groups = [];
         foreach($todos as $todo){
-            $test = Group::getBySlug($todo); // DB
+            $test = Group::createFromSlug($todo); // DB
             if($test->data['type'] != Group::TYPE_OCCU){
                 continue;
             }

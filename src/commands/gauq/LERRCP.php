@@ -195,7 +195,7 @@ class LERRCP {
         @param  $datafile : string like 'A1'
     **/
     public static function getGroupOfDatafile($datafile): Group {
-        $g = new Group(); 
+        $g = Group::createEmpty(); 
         $g->data['slug'] = LERRCP::datafile2groupSlug($datafile);
         $g->data['name'] = "Gauquelin $datafile";
         $g->data['type'] = Group::TYPE_HISTORICAL;

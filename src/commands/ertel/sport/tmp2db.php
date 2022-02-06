@@ -83,7 +83,7 @@ class tmp2db implements Command {
         }
         
         // main group
-        $g = Group::getBySlug(ErtelSport::GROUP_SLUG); // DB
+        $g = Group::createFromSlug(ErtelSport::GROUP_SLUG); // DB
         if(is_null($g)){
             $g = ErtelSport::getGroup();
         }
@@ -93,7 +93,7 @@ class tmp2db implements Command {
         // subgroups
         $subgroups = [];
         foreach(ErtelSport::SUBGROUP_SLUGS as $slug){
-            $subgroups[$slug] = Group::getBySlug($slug); // DB
+            $subgroups[$slug] = Group::createFromSlug($slug); // DB
             if(is_null($subgroups[$slug])){
                 $subgroups[$slug] = ErtelSport::getSubgroup($slug);
             }
@@ -283,6 +283,8 @@ class tmp2db implements Command {
             return 'ertel-5-french-occasionals';
         }
         if($line['QUEL'] == 'G:A01' && $line['PARA_NR'] != ''){
+            // only new persons coming from cpara
+            // part of cpara data are in 'ertel-1-first-french'
             return 'ertel-6-para-champions';
         }
         if($line['QUEL'] == 'GCPAR'){

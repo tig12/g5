@@ -433,7 +433,7 @@ class M2men {
         Returns a Group object for Muller612.
     **/
     public static function getGroup(): Group {
-        $g = new Group();
+        $g = Group::createEmpty();
         $g->data['slug'] = self::GROUP_SLUG;
         $g->data['name'] = "Müller 612 famous men";
         $g->data['type'] = Group::TYPE_HISTORICAL;

@@ -74,7 +74,7 @@ class tmp2db implements Command {
         }
         
         // groups
-        $g = Group::getBySlug(CSICOP::GROUP_SLUG); // DB
+        $g = Group::createFromSlug(CSICOP::GROUP_SLUG); // DB
         if(is_null($g)){
             $g = CSICOP::getGroup();
             $g->data['id'] = $g->insert(); // DB
@@ -84,7 +84,7 @@ class tmp2db implements Command {
             $g->deleteMembers(); // only deletes asssociations between group and members
         }
         
-        $g1 = Group::getBySlug(CSICOP::GROUP1_SLUG); // DB
+        $g1 = Group::createFromSlug(CSICOP::GROUP1_SLUG); // DB
         if(is_null($g1)){
             $g1 = CSICOP::getGroup_batch1();
             $g1->data['id'] = $g1->insert(); // DB
@@ -94,7 +94,7 @@ class tmp2db implements Command {
             $g1->deleteMembers(); // DB - only deletes asssociations between group and members
         }
         
-        $g2 = Group::getBySlug(CSICOP::GROUP2_SLUG); // DB
+        $g2 = Group::createFromSlug(CSICOP::GROUP2_SLUG); // DB
         if(is_null($g2)){
             $g2 = CSICOP::getGroup_batch2();
             $g2->data['id'] = $g2->insert();
@@ -104,7 +104,7 @@ class tmp2db implements Command {
             $g2->deleteMembers(); // DB - only deletes asssociations between group and members
         }
         
-        $g3 = Group::getBySlug(CSICOP::GROUP3_SLUG); // DB
+        $g3 = Group::createFromSlug(CSICOP::GROUP3_SLUG); // DB
         if(is_null($g3)){
             $g3 = CSICOP::getGroup_batch3();
             $g3->data['id'] = $g3->insert(); // DB

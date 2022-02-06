@@ -49,7 +49,7 @@ class A6occu implements Command {
         $pattern = '/"(\d+)"/';
         $N = 0;
         foreach(self::FILES as $file => $occu){
-            $g = Group::getBySlug($occu); // group slug = occupation slug
+            $g = Group::createFromSlug($occu); // group slug = occupation slug
             $g->computeMembers();
             $zipfile = LERRCP::rawDirname() . DS . self::DIR . DS . $file;
             $zip = new \ZipArchive;

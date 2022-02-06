@@ -153,7 +153,7 @@ class M5medics {
         Returns a Group object for M5medics.
     **/
     public static function getGroup(): Group {
-        $g = new Group();
+        $g = Group::createEmpty();
         $g->data['slug'] = self::GROUP_SLUG;
         $g->data['name'] = "Müller 1083 physicians";
         $g->data['type'] = Group::TYPE_HISTORICAL;

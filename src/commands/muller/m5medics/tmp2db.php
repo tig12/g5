@@ -86,7 +86,7 @@ class tmp2db implements Command {
         }
         
         // group
-        $g = Group::getBySlug(M5medics::GROUP_SLUG);
+        $g = Group::createFromSlug(M5medics::GROUP_SLUG);
         if(is_null($g)){
             $g = M5medics::getGroup();
             $g->data['id'] = $g->insert(); // DB

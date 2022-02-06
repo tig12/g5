@@ -49,7 +49,7 @@ class export implements Command {
         
         $report = '';
         
-        $g = Group::getBySlug(CSICOP::GROUP_SLUG); // DB
+        $g = Group::createFromSlug(CSICOP::GROUP_SLUG); // DB
         
         self::$sourceSlug = Irving::LIST_SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
 

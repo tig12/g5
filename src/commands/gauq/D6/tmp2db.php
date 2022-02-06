@@ -70,7 +70,7 @@ class tmp2db implements Command {
         }
         
         // group
-        $g = Group::getBySlug(LERRCP::datafile2groupSlug($datafile)); // DB
+        $g = Group::createFromSlug(LERRCP::datafile2groupSlug($datafile)); // DB
         if(is_null($g)){
             $g = LERRCP::getGroupOfDatafile($datafile);
             $g->data['id'] = $g->insert(); // DB

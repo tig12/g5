@@ -294,7 +294,7 @@ class M3women {
         Returns a Group object for Muller234.
     **/
     public static function getGroup(): Group {
-        $g = new Group();
+        $g = Group::createEmpty();
         $g->data['slug'] = self::GROUP_SLUG;
         $g->data['name'] = "Müller 234 famous women";
         $g->data['type'] = Group::TYPE_HISTORICAL;

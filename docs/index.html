@@ -40,9 +40,9 @@ Warning: The program documented by these pages has evolved a lot.
 
 <div class="intro">
 The purpose of this program is to build a database of famous persons <b>with birth times and timezone offset</b>. 
-<br>Departure point are data used to perform statistical tests on astrology, gathered by <b>Michel and Françoise Gauquelin</b>, <b>Arno Müller</b>, <b>Suitbert Ertel</b> and 3 groups of skeptics: <b>Comité Para</b> - Belgium 1976, <b>CSICOP</b> - U.S. 1979, <b>CFEPP</b> - France 1996.
+<br>Departure points are data used to perform statistical tests on astrology, gathered by <b>Michel and Françoise Gauquelin</b>, <b>Arno Müller</b>, <b>Suitbert Ertel</b> and 3 groups of skeptics: <b>Comité Para</b> - Belgium 1976, <b>CSICOP</b> - U.S. 1979, <b>CFEPP</b> - France 1996.
 
-<div class="margin-top05">Data are corrected and imported in a potgresql database, currently containing
+<div class="margin-top05">Data are corrected and imported in a <b>potgresql database</b>, currently containing
 <ul class="simple margin-bottom05">
     <li><b>22 515</b> persons with birth time</li>
     <li><b>1 594</b> persons without birth time, with days.</li>
@@ -56,7 +56,13 @@ The main orientations of g5 program are :
     <li>Build new eminence indicators and sort famous persons by eminence.</li>
 </ol>
 
+One of the purpose is to build data permiting a precise reconstitution of Suitbert Ertel's analysis of both Gauquelin and groups of skeptics - exposed in the book <i><b>The Tenacious Mars Effect</b></i>.
+<br>This is possible thanks to the availability of <a href="ertel-4391-sport.html#ertel-s-subsamples">Ertel's list of subsamples</a>.
+
+
+<!-- 
 Note that g5 is not concerned by data analysis (performing statistical tests), it only deals with documentation, restoration and production of data.
+-->
 <style>
 ul.prime{
     padding-top:1rem;
@@ -93,9 +99,7 @@ This program deals with the data used to build <b>professional groups</b>.
     <li>the anomalies are more important for very eminent people ;</li>
     <li>these statistical anomalies can be observed only for natural births, the effect disappear for induced deliveries. For this reason, studies are limited to births before 1950.</li>
 </ul>
-One particular effect - the repartition of Mars in the births of sportsmen, called "the mars effect" - gave rise to very long polemics without any consensual conclusion. Very few members of the academic world studied the question, most notably Suitbert Ertel and Arno Müller. Ertel introduced citation count, providing an objective measure of eminence, and analyzed Gauquelin and skeptic tests. This is explained in a book, <b>The Tenacious Mars Effect</b>.
-
-<br><br>The purpose of g5 is to build data permiting to reproduce the analysis contained in The Tenacious Mars Effect.
+One particular effect - the repartition of Mars in the births of sportsmen, called "the mars effect" - gave rise to very long polemics without any consensual conclusion. Very few members of the academic world studied the question, most notably Suitbert Ertel and Arno Müller. Ertel introduced citation count, providing an objective measure of eminence, and analyzed Gauquelin and skeptic tests.
 
 <!-- ********************************************************************************* -->
 <h2>Why Gauquelin5 ?</h2>
@@ -144,10 +148,6 @@ The name "Gauquelin5" comes from the initial source of information, "Archives Ga
     </li>
 </ul>
 
-<div class="bold">Alpha stage</div>
-The code is structured enough to be manageable but there are a lot of imprecise and unfinished points, both in code and doc.
-<br>Most code already developed concerns step 1 of g5 (restoration of historical data).
-
 <div class="bold margin-top">Related repositories</div>
 G5, <b><a href="https://github.com/tig12/gauquelin5">github.com/tig12/gauquelin5</a></b>, is related to 3 other repositories:
 <ul>
@@ -156,7 +156,11 @@ G5, <b><a href="https://github.com/tig12/gauquelin5">github.com/tig12/gauquelin5
     <li><b><a href="https://github.com/tig12/geonames2postgres">github.com/tig12/geonames2postgres</a></b>, to build an auxiliary database with geonames.org data.</li>
 </ul>
 
-<br>See pages <a href="organisation.html">Organisation</a> and <a href="install.html">Installation</a>.
+<div class="bold margin-top">Alpha stage</div>
+The code is structured enough to be manageable but there are a lot of imprecise and unfinished points, both in code and doc.
+<br>Most code already developed concerns step 1 of g5 (restoration of historical data).
+
+<br>See also pages <a href="organisation.html">Organisation</a> and <a href="install.html">Installation</a>.
 
 <br><br>This documentation is written in a globish as close as possible to english, but uses french conventions for capitalization, spaces and large numbers :
 <ul>

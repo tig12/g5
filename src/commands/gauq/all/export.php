@@ -56,7 +56,7 @@ class export implements Command {
         $datafile = $params[0];
         
         $groupSlug = LERRCP::datafile2groupSlug($datafile);
-        $g = Group::getBySlug($groupSlug); // DB
+        $g = Group::createFromSlug($groupSlug); // DB
 
         self::$sourceSlug = LERRCP::datafile2sourceSlug($datafile); // Trick to access to $sourceSlug inside $sort function
         

@@ -95,7 +95,7 @@ class M1writers {
         Returns a Group object for M1writers.
     **/
     public static function getGroup(): Group {
-        $g = new Group();
+        $g = Group::createEmpty();
         $g->data['slug'] = self::GROUP_SLUG;
         $g->data['name'] = "Müller 402 Italian writers";
         $g->data['description'] = "402 Italian writers, gathered by Arno Müller";

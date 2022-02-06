@@ -34,36 +34,45 @@ class Group {
     /** Boolean indicating if data['person-members'] have already been computed **/
     public $personMembersComputed;
     
-    /** 
-        Constructor ; builds an empty group or a group filled from its yaml file definition.
-        In all cases, members are not computed.
-        @param  $yamlFile Path to a yaml file, relative to data/db/group
-    **/
-    public function __construct($yamlFile=''){
+    // ***********************************************************************
+    //                          Constructor / factory methods
+    // ***********************************************************************
+    
+    private function __construct(){
         $this->personMembersComputed = false;
-
-        // Fill an empty source from its structure
-        $this->data = yaml_parse_file(__DIR__ . DS . 'Group.yml');
-        if($yamlFile == ''){
-            return; // ok, just build an empty group
-        }
-
-        // Load group data from data/db/group
-        $yamlFile = Config::$data['dirs']['ROOT'] . DS . Config::$data['dirs']['db'] . DS . 'group' . DS . $yamlFile;
-        $yaml = yaml_parse_file($yamlFile);
-        $this->data = array_replace_recursive($this->data, $yaml);
     }
     
-    // ***********************************************************************
-    //                                  Get
-    // ***********************************************************************
+    /** 
+        Creates an empty group, with fields initialized from Group.yml.
+        Group members are not computed.
+    **/
+    public static function createEmpty(): Group {
+        $g = new Group();
+        $g->data = yaml_parse_file(__DIR__ . DS . 'Group.yml');
+        return $g;
+    }
+    
+    /** 
+        Creates a group from its definition file.
+        Group members are not computed.
+        If $defFile does not correspond to a valid definition file, throws an exception
+        @param  $defFile    Path to a YAML definition file, relative to data/db/group.
+    **/
+    public static function createFromDefinitionFile(string $defFile): Group {
+        $g = self::createEmpty();
+        // Load group data from data/db/group
+        $defFile = Config::$data['dirs']['ROOT'] . DS . Config::$data['dirs']['db'] . DS . 'group' . DS . $defFile;
+        $yaml = yaml_parse_file($defFile);
+        $g->data = array_replace_recursive($g->data, $yaml);
+        return $g;
+    }
     
     /**
         Creates an object of type Group from storage, using its slug,
         or null if the group doesn't exist.
         Does not compute the members.
     **/
-    public static function getBySlug($slug): ?Group {
+    public static function createFromSlug($slug): ?Group {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare('select * from groop where slug=?');
         $stmt->execute([$slug]);
@@ -71,7 +80,7 @@ class Group {
         if($res === false || count($res) == 0){
             return null;
         }
-        $g = new Group();
+        $g = Group::createEmpty();
         $g->data = $res;
         $g->data['sources'] = json_decode($res['sources'], true);
         $g->data['parents'] = json_decode($res['parents'], true);
@@ -79,6 +88,18 @@ class Group {
         $g->data['members'] = [];
         return $g;
     }
+    
+    /** 
+        Creates a group from a sql query selecting members in table person.
+        Group members are not computed.
+        If the sql query does not return persons, the returned group is empty.
+    **/
+    public static function createFromPersonSQL(string $sqlPerson): ?Group {
+    }
+    
+    // ***********************************************************************
+    //                           Get several groups
+    // ***********************************************************************
     
     /**
         Returns an array of Group objects, retrieved from database.
@@ -91,90 +112,11 @@ class Group {
             $row['parents'] = json_decode($row['parents'], true);
             $row['children'] = json_decode($row['children'], true);
             $row['sources'] = json_decode($row['sources'], true);
-            $tmp = new Group();
+            $tmp = Group::createEmpty();
             $tmp->data = $row;
             $res[] = $tmp;
         }
         return $res;
-    }
-    
-    // ***********************************************************************
-    //                                  CRUD
-    // ***********************************************************************
-    
-    /**
-        Inserts a group in storage.
-        @return The id of the inserted row
-        @throws \Exception if trying to insert a duplicate slug
-    **/
-    public function insert(): int{
-        $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare('insert into groop(
-            slug,
-            name,
-            n,
-            type,
-            description,
-            download,
-            sources,
-            parents,
-            children
-            ) values(?,?,?,?,?,?,?,?,?) returning id');
-        $this->data['n'] = count($this->data['members']);
-        $stmt->execute([
-            $this->data['slug'],
-            $this->data['name'],
-            $this->data['n'],
-            $this->data['type'],
-            $this->data['description'],
-            $this->data['download'],
-            json_encode($this->data['sources']),
-            json_encode($this->data['parents']),
-            json_encode($this->data['children']),
-        ]);
-        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
-        $this->data['id'] = $res['id'];
-        // members
-        $this->insertMembers();
-        //
-        return $this->data['id'];
-    }
-    
-    /**
-        Updates a group in storage.
-        @throws \Exception if trying to update an unexisting group
-    **/
-    public function update(bool $updateMembers=true) {
-        $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare('update groop set
-            slug=?,
-            name=?,
-            n=?,
-            type=?,
-            description=?,
-            download=?,
-            sources=?,
-            parents=?,
-            children=?
-            where id=?');
-        if($updateMembers == true){
-            $this->data['n'] = count($this->data['members']);
-        }
-        $stmt->execute([
-            $this->data['slug'],
-            $this->data['name'],
-            $this->data['n'],
-            $this->data['type'],
-            $this->data['description'],
-            $this->data['download'],
-            json_encode($this->data['sources']),
-            json_encode($this->data['parents']),
-            json_encode($this->data['children']),
-            $this->data['id'],
-        ]);
-        if($updateMembers == true){
-            $this->updateMembers();
-        }
     }
     
     // ***********************************************************************
@@ -261,6 +203,28 @@ class Group {
         $this->data['members'] = [];
         $this->data['n'] = 0;
         $this->update(updateMembers:false); // for field n
+    }
+    
+    /** 
+        Fills person-members with objects of type Person
+        @param $force If true, members computation will be done even if it was already done.
+    **/
+    public function computePersonMembers(bool $force=false){
+        if($force === false && $this->personMembersComputed === true){
+            return;
+        }
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare('select * from person where id in(select id_person from person_groop where id_groop=?)');
+        $stmt->execute([$this->data['id']]);
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $this->data['person-members'] = [];
+        $this->data['members'] = [];
+        foreach($rows as $row){
+            $this->data['person-members'][] = Person::row2person($row);
+            $this->data['members'][] = $row['id'];
+        }
+        $this->data['n'] = count($this->data['person-members']);
+        $this->personMembersComputed = true;
     }
     
     // ******************************************************
@@ -389,28 +353,6 @@ class Group {
     // ***********************************************************************
     
     /** 
-        Fills person-members with objects of type Person
-        @param $force If true, members computation will be done even if it was already done.
-    **/
-    public function computePersonMembers(bool $force=false){
-        if($force === false && $this->personMembersComputed === true){
-            return;
-        }
-        $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare('select * from person where id in(select id_person from person_groop where id_groop=?)');
-        $stmt->execute([$this->data['id']]);
-        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        $this->data['person-members'] = [];
-        $this->data['members'] = [];
-        foreach($rows as $row){
-            $this->data['person-members'][] = Person::row2person($row);
-            $this->data['members'][] = $row['id'];
-        }
-        $this->data['n'] = count($this->data['person-members']);
-        $this->personMembersComputed = true;
-    }
-    
-    /** 
         Generates and stores on disk a csv file (which may be zipped) from its members (of type Person).
         Does not modify the group (in particular, fields 'dowload', 'n', 'members' are untouched).
             First line contains field names.
@@ -523,6 +465,85 @@ class Group {
         }
         $report .= "Exported group to file $filename ($N lines)\n";
         return [$report, $filename, $N];
+    }
+    
+    // ***********************************************************************
+    //                                  CRUD
+    // ***********************************************************************
+    
+    /**
+        Inserts a group in storage.
+        @return The id of the inserted row
+        @throws \Exception if trying to insert a duplicate slug
+    **/
+    public function insert(): int{
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare('insert into groop(
+            slug,
+            name,
+            n,
+            type,
+            description,
+            download,
+            sources,
+            parents,
+            children
+            ) values(?,?,?,?,?,?,?,?,?) returning id');
+        $this->data['n'] = count($this->data['members']);
+        $stmt->execute([
+            $this->data['slug'],
+            $this->data['name'],
+            $this->data['n'],
+            $this->data['type'],
+            $this->data['description'],
+            $this->data['download'],
+            json_encode($this->data['sources']),
+            json_encode($this->data['parents']),
+            json_encode($this->data['children']),
+        ]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $this->data['id'] = $res['id'];
+        // members
+        $this->insertMembers();
+        //
+        return $this->data['id'];
+    }
+    
+    /**
+        Updates a group in storage.
+        @throws \Exception if trying to update an unexisting group
+    **/
+    public function update(bool $updateMembers=true) {
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare('update groop set
+            slug=?,
+            name=?,
+            n=?,
+            type=?,
+            description=?,
+            download=?,
+            sources=?,
+            parents=?,
+            children=?
+            where id=?');
+        if($updateMembers == true){
+            $this->data['n'] = count($this->data['members']);
+        }
+        $stmt->execute([
+            $this->data['slug'],
+            $this->data['name'],
+            $this->data['n'],
+            $this->data['type'],
+            $this->data['description'],
+            $this->data['download'],
+            json_encode($this->data['sources']),
+            json_encode($this->data['parents']),
+            json_encode($this->data['children']),
+            $this->data['id'],
+        ]);
+        if($updateMembers == true){
+            $this->updateMembers();
+        }
     }
     
 } // end class

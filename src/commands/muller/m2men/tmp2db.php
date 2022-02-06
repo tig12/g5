@@ -68,7 +68,7 @@ class tmp2db implements Command {
         }
         
         // group
-        $g = Group::getBySlug(M2men::GROUP_SLUG); // DB
+        $g = Group::createFromSlug(M2men::GROUP_SLUG); // DB
         if(is_null($g)){
             $g = M2men::getGroup();
             $g->data['id'] = $g->insert(); // DB

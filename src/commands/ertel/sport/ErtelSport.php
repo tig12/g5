@@ -62,12 +62,12 @@ class ErtelSport {
     
     /** Returns a Group object for ertel-4384-sportsmen. **/
     public static function getGroup(): Group {
-        return new Group(self::GROUP_DEFINITION_FILE);
+        return Group::createFromDefinitionFile(self::GROUP_DEFINITION_FILE);
     }
     
     /** Returns a Group object for a given subgroup. **/
     public static function getSubgroup(string $slug): Group {
-        return new Group('ertel' . DS . $slug . '.yml');
+        return Group::createFromDefinitionFile('ertel' . DS . $slug . '.yml');
     }
     
     // *********************** Raw file manipulation ***********************

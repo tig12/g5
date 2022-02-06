@@ -50,7 +50,7 @@ class export implements Command {
         
         $report = '';
         
-        $g = Group::getBySlug(M5medics::GROUP_SLUG); // DB
+        $g = Group::createFromSlug(M5medics::GROUP_SLUG); // DB
         
         self::$sourceSlug = M5medics::LIST_SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
 

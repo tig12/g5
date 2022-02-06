@@ -108,8 +108,8 @@ class occu implements Command {
             
         }
         
-        // Can't do Group::getBySlug() because possibly several occus
-        $g = new Group();
+        // Can't do Group::createFromSlug() because possibly several occus
+        $g = Group::createEmpty();
         $g->data['person-members'] =& $persons;
         $g->personMembersComputed = true;
         

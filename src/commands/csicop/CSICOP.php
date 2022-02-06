@@ -53,7 +53,7 @@ class CSICOP {
         Returns a Group object for CSICOP 408 sportsmen.
     **/
     public static function getGroup(): Group {
-        $g = new Group();
+        $g = Group::createEmpty();
         $g->data['slug'] = self::GROUP_SLUG;
         $g->data['name'] = "CSICOP 408 sportsmen";
         $g->data['type'] = Group::TYPE_HISTORICAL;
@@ -66,7 +66,7 @@ class CSICOP {
         Returns a Group object for CSICOP Batch 1 (128 athletes).
     **/
     public static function getGroup_batch1(): Group {
-        $g = new Group();
+        $g = Group::createEmpty();
         $g->data['slug'] = self::GROUP1_SLUG;
         $g->data['name'] = "CSICOP Batch 1 - 128 sportsmen";
         $g->data['type'] = Group::TYPE_HISTORICAL;
@@ -80,7 +80,7 @@ class CSICOP {
         Returns a Group object for CSICOP Batch 2 (198 athletes).
     **/
     public static function getGroup_batch2(): Group {
-        $g = new Group();
+        $g = Group::createEmpty();
         $g->data['slug'] = self::GROUP2_SLUG;
         $g->data['name'] = "CSICOP Batch 2 - 198 sportsmen";
         $g->data['type'] = Group::TYPE_HISTORICAL;
@@ -94,7 +94,7 @@ class CSICOP {
         Returns a Group object for CSICOP Batch 3 (82 athletes).
     **/
     public static function getGroup_batch3(): Group {
-        $g = new Group();
+        $g = Group::createEmpty();
         $g->data['slug'] = self::GROUP3_SLUG;
         $g->data['name'] = "CSICOP Batch 3 - 82 sportsmen";
         $g->data['type'] = Group::TYPE_HISTORICAL;
