@@ -19,7 +19,7 @@ type:
 
 description: |
 
-# relative path to 
+# relative path to downloadable file
 download: 
 
 # array of source slugs

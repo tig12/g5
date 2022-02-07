@@ -3,6 +3,11 @@
 - see php bug - https://bugs.php.net/bug.php?id=81002
   (to store booleans in postgres)
 
+- Harmonize export commands:
+    - computation of name using Person->fullName() and givenName() (see commands/db/export/allpersons).
+    - idem for function to sort by name
+    - factorize some functions passed in $fmap to Group::export() ; put them in class commands/db/Export
+
 - in src/model/db-create, replace sex by gender + adapt the code
 
 - Doc, install : document additions of views for postgrest api.

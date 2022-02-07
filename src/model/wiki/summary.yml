@@ -1,0 +1,57 @@
+# 
+# Template for the transcription of a birth certificate
+# 
+# --------------- NOT USED YET ---------------
+# 
+# 
+
+document:
+  type: acte de naissance
+  source:
+    cy: FR
+    c2: 
+    city: Bourg-la-Reine
+    name: 1811 E_NUM_BRG38
+    web: 
+      url: 
+      page: 
+    notes:
+        
+  recup:
+    personne: Thierry Graff
+    date: '2019-12-21 02:29:53+01:00'
+
+act:
+  numéro: 
+  numéro-feuillet: 4
+  date: '1811-10-26 13:00'
+  lieu: Bourg-la-Reine
+
+# New born person
+person:
+  name:
+    given:
+    family:
+    official:         
+      family:
+      given:
+    nobl:             
+  
+  sex:
+  
+  birth:
+    date: ''     
+    tzo:   
+    date-ut:
+    note: 
+    lmt: 
+    notime: 
+    place: 
+      name: 
+      c1: 
+      c2: 
+      c3: 
+      cy: 
+      geoid: 
+      lg: 
+      lat: 

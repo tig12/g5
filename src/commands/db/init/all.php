@@ -93,6 +93,8 @@ use g5\commands\muller\m3women\export           as M2Womenexport;
 use g5\commands\muller\m5medics\export          as M5MedicsExport;
 use g5\commands\csicop\irving\export            as csiIrvingExport;
 use g5\commands\db\export\alloccus              as allOccusExport;
+use g5\commands\db\export\allpersons            as allPersonsExport;
+use g5\commands\db\export\pgdump                as pgdumpExport;
 
 class all implements Command {
     
@@ -249,6 +251,7 @@ class all implements Command {
             echo "***************************\n";
             echo "***    Export groups    ***\n";
             echo "***************************\n";
+/* 
             foreach($filesGauqA as $datafile){
                 echo curaExport::execute([$datafile, 'export']);
             }
@@ -263,6 +266,10 @@ class all implements Command {
             echo csiIrvingExport::execute([]);
             //
             echo allOccusExport::execute([]);
+*/
+            echo allPersonsExport::execute([]);
+            echo allPersonsExport::execute(['time']);
+            echo pgdumpExport::execute([]);
         }
         
         $t2 = microtime(true);

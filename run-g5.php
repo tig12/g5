@@ -36,7 +36,7 @@ USAGE;
 if(count($argv) < 2){
     echo "WRONG USAGE - run-g5.php needs at least 3 arguments\n";
     echo $USAGE;
-    echo "Possible values for argument1 : $args1_str\n";
+    echo "Possible values for argument 1 : $args1_str\n";
     exit;
 }
 else{
@@ -45,8 +45,8 @@ else{
     $args1_str = implode(", ", $args1);
     if(!in_array($arg1, $args1)){
         echo $USAGE;
-        echo "WRONG USAGE - INVALID DATASET : $arg1\n";
-        echo "Possible argument1 : $args1_str\n";
+        echo "WRONG USAGE - INVALID ARGUMENT 1 : $arg1\n";
+        echo "Possible values for argument 1 : $args1_str\n";
         exit;
     }
 }
@@ -59,7 +59,7 @@ if(count($argv) < 3){
     echo "WRONG USAGE - run-g5.php needs at least 3 arguments\n";
     echo $USAGE;
     echo "\n";
-    echo "Possible argument2 for argument1 = $arg1 : $arg2s_str\n";
+    echo "Possible argument 2 for argument 1 = $arg1 : $arg2s_str\n";
     echo "\n";
     exit;
 }
@@ -67,9 +67,9 @@ else{
     $arg2 = $argv[2];
     if(!in_array($arg2, $arg2s)){
         echo $USAGE;
-        echo "WRONG USAGE - INVALID DATAFILE : $arg2\n";
+        echo "WRONG USAGE - INVALID ARGUMENT 2 : $arg2\n";
         echo "\n";
-        echo "Possible argument2 for argument1 = $arg1 : $arg2s_str\n";
+        echo "Possible argument 2 for argument 1 = $arg1 : $arg2s_str\n";
         echo "\n";
         exit;
     }
@@ -83,16 +83,16 @@ if(count($argv) < 4){
     echo "WRONG USAGE - run-g5.php needs at least 3 arguments\n";
     echo $USAGE;
     echo "\n";
-    echo "Possible argument3 for $arg1 / $arg2 : $arg3s_str\n";
+    echo "Possible argument 3 for $arg1 / $arg2 : $arg3s_str\n";
     echo "\n";
     exit;
 }
 else{
     $arg3 = $argv[3];
     if(!in_array($arg3, $arg3s)){                  
-        echo "WRONG USAGE - INVALID ACTION : $arg3\n";
+        echo "WRONG USAGE - INVALID ARGUMENT 3 : $arg3\n";
         echo "\n";
-        echo "Possible argument3 for $arg1 / $arg2 : $arg3s_str\n";
+        echo "Possible argument 3 for $arg1 / $arg2 : $arg3s_str\n";
         echo "\n";
         exit;
     }

@@ -51,7 +51,7 @@ class alloccus implements Command {
             // uses the fact that groups are named using the occupation slug (see command db/fill/occus1).
             $g = Group::createFromSlug($slug); // DB
 // HERE not correct - the group shouldn't store the export
-// suppress use g5\Config when refactoring
+// suppress, use g5\Config when refactoring
             $download = str_replace(Config::$data['dirs']['output'] . DS, '', $execFile);
             $g->data['download'] = $download;
             $g->data['n'] = $execN;

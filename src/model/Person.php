@@ -289,9 +289,8 @@ class Person {
         return;
     }
     
-    
     /**
-        Computes the birth day from date or date-ut
+        Computes the birth day from date or date-ut.
         @return YYYY-MM-DD or ''
     **/
     private function birthday(): string {
@@ -301,6 +300,35 @@ class Person {
         else if(isset($this->data['birth']['date-ut'])){
             // for cura A
             return substr($this->data['birth']['date-ut'], 0, 10);
+        }
+        return '';
+    }
+    
+    /**
+        Computes the family name, trying to find a non-empty value.
+    **/
+    public function familyName(): string {
+        if($this->data['name']['family'] != ''){
+            return $this->data['name']['family'];
+        }
+        if($this->data['name']['fame']['family'] != ''){
+            return $this->data['name']['fame']['family'];
+        }
+        if($this->data['name']['fame']['full'] != ''){
+            return $this->data['name']['fame']['full'];
+        }
+        return '';
+    }
+    
+    /**
+        Computes the given name, trying to find a non-empty value.
+    **/
+    public function givenName(): string {
+        if($this->data['name']['given'] != ''){
+            return $this->data['name']['given'];
+        }
+        if($this->data['name']['fame']['given'] != ''){
+            return $this->data['name']['fame']['given'];
         }
         return '';
     }

@@ -1,9 +1,10 @@
 <?php
 /******************************************************************************
     Group of persons
-    Structure of field $data is described in Group.yml
-    Field data['members'] is an array of person ids.
-    Field data['person-members'] is an array of Person objects.
+    Structure of $this->$data is described in Group.yml
+    Fields not in Group.yml:
+    - $this->data['members'] array of person ids.
+    - $this->data['person-members'] array of Person objects.
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-12-27 23:20:16+01:00, Thierry Graff : Creation
@@ -25,7 +26,7 @@ class Group {
 
     /**
         Associative array: group slug => array of slugs of ancestors.
-        Computed by getAllAncestors().
+        Caches getAllAncestors() computation.
     **/
     private static $allAncestors = null;
     
@@ -38,8 +39,13 @@ class Group {
     //                          Constructor / factory methods
     // ***********************************************************************
     
+    /** 
+        Constructor not callable from other classes.
+    **/
     private function __construct(){
         $this->personMembersComputed = false;
+        $this->data['members'] = [];        // person ids, for table person_groop
+        $this->data['person-members'] = []; // array of objects of type Person
     }
     
     /** 
@@ -55,11 +61,11 @@ class Group {
     /** 
         Creates a group from its definition file.
         Group members are not computed.
-        If $defFile does not correspond to a valid definition file, throws an exception
         @param  $defFile    Path to a YAML definition file, relative to data/db/group.
+        @throws Exception   If $defFile does not correspond to a valid definition file.
     **/
     public static function createFromDefinitionFile(string $defFile): Group {
-        $g = self::createEmpty();
+        $g = Group::createEmpty();
         // Load group data from data/db/group
         $defFile = Config::$data['dirs']['ROOT'] . DS . Config::$data['dirs']['db'] . DS . 'group' . DS . $defFile;
         $yaml = yaml_parse_file($defFile);
@@ -70,9 +76,10 @@ class Group {
     /**
         Creates an object of type Group from storage, using its slug,
         or null if the group doesn't exist.
-        Does not compute the members.
+        Group members are not computed.
     **/
     public static function createFromSlug($slug): ?Group {
+        $g = Group::createEmpty();
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare('select * from groop where slug=?');
         $stmt->execute([$slug]);
@@ -80,21 +87,32 @@ class Group {
         if($res === false || count($res) == 0){
             return null;
         }
-        $g = Group::createEmpty();
         $g->data = $res;
         $g->data['sources'] = json_decode($res['sources'], true);
         $g->data['parents'] = json_decode($res['parents'], true);
         $g->data['children'] = json_decode($res['children'], true);
-        $g->data['members'] = [];
         return $g;
     }
     
     /** 
         Creates a group from a sql query selecting members in table person.
-        Group members are not computed.
-        If the sql query does not return persons, the returned group is empty.
+        Group members ARE computed.
+        If the sql query does not return persons, the returned group is empty, not null.
     **/
-    public static function createFromPersonSQL(string $sqlPerson): ?Group {
+    public static function createFromSQL(string $sql): Group {
+        $g = Group::createEmpty();
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare($sql);
+        $stmt->execute([]);
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        foreach($rows as $row){
+            $g->data['person-members'][] = Person::row2person($row);
+            $g->data['members'][] = $row['id'];
+            $g->data['n']++;
+        }
+        $g->personMembersComputed = true;
+//echo "\n<pre>"; print_r($g); echo "</pre>\n"; exit;
+        return $g;
     }
     
     // ***********************************************************************
@@ -145,7 +163,6 @@ class Group {
         $stmt = $dblink->prepare('select id_person from person_groop where id_groop=' . $this->data['id']);
         $stmt->execute([]);
         $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        $this->data['members'] = [];
         foreach($rows as $row){
             $this->data['members'][] = $row['id_person'];
         }
@@ -217,7 +234,6 @@ class Group {
         $stmt = $dblink->prepare('select * from person where id in(select id_person from person_groop where id_groop=?)');
         $stmt->execute([$this->data['id']]);
         $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        $this->data['person-members'] = [];
         $this->data['members'] = [];
         foreach($rows as $row){
             $this->data['person-members'][] = Person::row2person($row);
