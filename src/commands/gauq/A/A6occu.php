@@ -35,7 +35,7 @@ class A6occu implements Command {
     ];
     
     /**
-        @param  $params Array with 2 elements : 'A6' and 'occupn' (useless here - transmitted by GauqRouter)
+        @param  $params Array with 2 elements : 'A6' and 'A6occu' (useless here - transmitted by GauqRouter)
     **/
     public static function execute($params=[]): string {
         
@@ -43,7 +43,16 @@ class A6occu implements Command {
             return "USELESS PARAMETER : " . $params[0] . "\n";
         }
         
-        $report = "--- gauq A6 occupn ---\n";
+        // Normally called with php run-g5.php gauq A6 A6occu
+        // Check if it was called for example with php run-g5.php gauq A A6occu
+        // In this case, it would execute 6 times
+        if($params[0] != 'A6'){
+            throw new \Exception('INVALID PARAMETER: ' . $params[0] . "\n"
+                . "Must be called with: php run-g5.php gauq A6 A6occu");
+            ;
+        }
+        
+        $report = "--- gauq A6 A6occu ---\n";
         
         $t1 = microtime(true);        
         $pattern = '/"(\d+)"/';

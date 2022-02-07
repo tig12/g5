@@ -47,10 +47,9 @@ class allpersons implements Command {
     **/                                                                                          
     public static function execute($params=[]) {
         $report = '';
-        $msg = "USAGE:
-php run-g5.php db export all        => exports all persons, with and without birth times
-php run-g5.php db export all time   => exports only persons with birth times
-";
+        $msg = "USAGE:\n"
+             . "php run-g5.php db export all        => exports all persons, with and without birth times\n"
+             . "php run-g5.php db export all time   => exports only persons with birth times\n";
         if(count($params) > 1){
             return "USELESS PARAMETER: '{$params[1]}'\n$msg";
         }

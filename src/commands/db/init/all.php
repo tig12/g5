@@ -127,7 +127,7 @@ class all implements Command {
         }
         $param = $params[0];
         if(!in_array($param, array_keys(self::POSSIBLE_PARAMS))){
-            return "INVALID PARAMETER\n"
+            return "INVALID PARAMETER: $param\n"
                 . "Possible values for parameter :\n$possibleParams_str\n";
         }
         
@@ -208,7 +208,7 @@ class all implements Command {
                 echo Atmp2db::execute([$datafile, 'tmp2db', 'small']);
             }
             echo dbFillPerson::execute(['A1.yml']);
-            echo A6occu::execute([]);
+            echo A6occu::execute(['A6','A6occu']);
             
             echo D6tmp2db::execute(['D6', 'tmp2db', 'small']);
             echo dbFillPerson::execute(['D6.yml']);
@@ -251,7 +251,6 @@ class all implements Command {
             echo "***************************\n";
             echo "***    Export groups    ***\n";
             echo "***************************\n";
-/* 
             foreach($filesGauqA as $datafile){
                 echo curaExport::execute([$datafile, 'export']);
             }
@@ -266,7 +265,6 @@ class all implements Command {
             echo csiIrvingExport::execute([]);
             //
             echo allOccusExport::execute([]);
-*/
             echo allPersonsExport::execute([]);
             echo allPersonsExport::execute(['time']);
             echo pgdumpExport::execute([]);

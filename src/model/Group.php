@@ -87,7 +87,7 @@ class Group {
         if($res === false || count($res) == 0){
             return null;
         }
-        $g->data = $res;
+        $g->data = array_replace_recursive($g->data, $res);
         $g->data['sources'] = json_decode($res['sources'], true);
         $g->data['parents'] = json_decode($res['parents'], true);
         $g->data['children'] = json_decode($res['children'], true);
@@ -111,7 +111,6 @@ class Group {
             $g->data['n']++;
         }
         $g->personMembersComputed = true;
-//echo "\n<pre>"; print_r($g); echo "</pre>\n"; exit;
         return $g;
     }
     
@@ -153,7 +152,7 @@ class Group {
     }
     
     /** 
-        Fills field $this->members with person ids from table person_groop.
+        Fills field $this->data['members'] with person ids from table person_groop.
         Also updates field "n".
         Does not affect database.
         @see    computePersonMembers()
