@@ -23,6 +23,35 @@
     --prevnext-height:4rem;
 }
 
+/* ================ Semantic ================ */
+.formula{
+    padding:0.5em;
+    font-family:"Courier New",Courier,monospace;
+    border:1px solid grey;
+    display:inline-block;
+}
+.warning{
+    width:50%;
+    padding:.5rem;
+    margin:.5rem;
+    background:gold;
+    border:1px solid grey;
+}
+.tip{
+    margin:1rem;
+    padding:1rem;
+    background:lightblue;
+    border:2px solid yellow;
+}
+
+.todo{
+    display:inline-block;
+    margin:.5em;
+    padding:.5em;
+    border:1px solid grey;
+    background:gold;
+}
+
 /* ================ Site layout ================ */
 html{height:100%;}
 
@@ -121,27 +150,6 @@ body{
 .intro{
     font-size:1.4rem;
     margin:1rem 0 1rem 2rem;
-}
-
-/* ================ Semantic ================ */
-.formula{
-    padding:0.5em;
-    font-family:"Courier New",Courier,monospace;
-    border:1px solid grey;
-    display:inline-block;
-}
-.warning{
-    width:50%;
-    padding:.5rem;
-    margin:.5rem;
-    background:gold;
-    border:1px solid grey;
-}
-.tip{
-    margin:1rem;
-    padding:1rem;
-    background:lightblue;
-    border:2px solid yellow;
 }
 
 /* ================ Particular elements ================ */

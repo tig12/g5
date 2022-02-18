@@ -11,7 +11,7 @@ use g5\app\Config;
 use tiglib\arrays\csvAssociative;
 
 Acts::init();
-class Acts{
+class Acts {
     
     /** Directory containing birth acts **/
     public static $DIR;
@@ -23,4 +23,4 @@ class Acts{
     public static function init(){
         self::$DIR = Config::$data['dirs']['8-acts'] . DS . 'birth';
     }
-}// end class
+} // end class

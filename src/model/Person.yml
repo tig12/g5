@@ -38,7 +38,7 @@ birth:
   date:     # date of the birth certificate
   tzo:      # timezone offset
   date-ut:  # date converted to Universal Time
-  note:     # supplementary info (eg precise adress of birth place)
+  note:     # supplementary info (eg precise address of the place)
   lmt:      # boolean - true if date is expressed in LMT
   notime:   # boolean - true if birth time does not exist
   place:
@@ -55,9 +55,8 @@ death:
   date:     # date of the birth certificate
   tz:       # timezone offset
   date-ut:  # date converted to Univesal Time
-  note:     # supplementary info (eg precise adress of birth place)
+  note:     # supplementary info (eg precise address of the place)
   lmt:      # boolean - true if date is expressed in LMT
-  notime:   # boolean - true if birth time does not exist
   place:
     name:
     c1:
