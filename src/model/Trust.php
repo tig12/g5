@@ -10,11 +10,16 @@ namespace g5\model;
 
 class Trust {
     
+    /** Hospital certificate **/
     const HC = 1;
+    
+    /** Birth certificate **/
     const BC = 2;
-    const BC_CHECK = 2.5;
+    
+    /** Birth record **/
     const BR = 3;
+    
+    /** Needs to be checked **/
     const CHECK = 4;
-    const REST = 5;
     
 } // end class

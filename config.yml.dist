@@ -8,6 +8,7 @@
 dirs:
   output: data/output
   tmp:    data/tmp
+  acts:   data/acts
 
 # g5 database
 db5:

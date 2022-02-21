@@ -307,7 +307,7 @@
     afd3: '177'
     wd: Q2366473
   name:
-    family: Eymerie
+    family: Eymery
     given: Marguerite
     fame:
       given: Rachilde
@@ -318,7 +318,7 @@
   birth:
     date: '1860-02-11 06:00'
   acts:
-    - birth/1860/02/11/eymery-marguerite-1860-02-11
+    - birth
   notes:
     - |
       2021-07-10 17:20:03+01:00 Date checked on civil registry

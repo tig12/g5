@@ -75,8 +75,9 @@ occus: []
 # See docs/db-person.html for details
 trust:
 
-# regular array of paths to sub-directories of acts/
-acts: []
+# map containing act transcriptions.
+# keys of this map can be "birth", "death", "marriage"
+acts: {}
 
 history: []
 

@@ -8,52 +8,54 @@
 document:
   type: BC
   source:
+    name: 
     place: 
     cy: 
     c1: 
     c2: 
     c3: 
-    name: 
     web: 
       url: 
       page: 
     notes: |
-        
-  authors:
+  
+  act:
+    numéro: 
+    numéro-feuillet: 
+    date: ''
+    place: 
+  
+  images:
+  
+  history:
     -
       person: 
       date: ''
       action: 
-
-act:
-  numéro: 
-  numéro-feuillet: 
-  date: ''
-  place: 
-
+      
 # New born person
 person:
   name:
-    given:
-    family:
-    official:         
-      family:
-      given:
-    nobl:             
+    given: 
+    family: 
+    official: 
+      family: 
+      given: 
+    nobl: 
   
-  sex:
+  sex: 
   
   birth:
-    date: ''     
+    date: ''
     note: 
     lmt: 
     notime: 
-    place: 
+    place:
       name: 
+      cy: 
       c1: 
       c2: 
       c3: 
-      cy: 
       geoid: 
       lg: 
       lat: 

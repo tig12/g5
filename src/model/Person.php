@@ -433,13 +433,12 @@ class Person {
     }
     
     /** 
-        Adds an array of act
+        Adds an array of acts.
+        @param  $keys Regular array, can contain "birth", "death" or "marriage"
     **/
-    public function addActs($newdata){
-        foreach($newdata as $act){
-            if(!in_array($act, $this->data['acts'])){
-                $this->data['acts'][] = $act;
-            }
+    public function addActs($keys){
+        foreach($keys as $key){
+            $this->data['acts'][$key] = Acts::getAct($this, $key);
         }
     }
     
