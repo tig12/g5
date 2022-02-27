@@ -39,10 +39,12 @@ Warning: The program documented by these pages has evolved a lot.
 -->
 
 <div class="intro">
-The purpose of this program is to build a database of famous persons <b>with birth times and timezone offset</b>. 
-<br>Departure points are data used to perform statistical tests on astrology, gathered by <b>Michel and Françoise Gauquelin</b>, <b>Arno Müller</b>, <b>Suitbert Ertel</b> and 3 groups of skeptics: <b>Comité Para</b> - Belgium 1976, <b>CSICOP</b> - U.S. 1979, <b>CFEPP</b> - France 1996.
+The purpose of this program is to build a database of famous persons <b>with birth times and timezone offset</b>.
+<br>This database can be browsed and downloaded from <a href="https://opengauquelin.org/">opengauquelin.org</a>.
 
-<div class="margin-top05">Data are corrected and imported in a <b>potgresql database</b>, currently containing
+<br><br>Departure points are data used to perform statistical tests on astrology, gathered by <b>Michel and Françoise Gauquelin</b>, <b>Arno Müller</b>, <b>Suitbert Ertel</b> and 3 groups of skeptics: <b>Comité Para</b> - Belgium 1976, <b>CSICOP</b> - U.S. 1979, <b>CFEPP</b> - France 1996.
+
+<div class="margin-top05">Data are corrected and imported in a postgresql database, currently containing
 <ul class="simple margin-bottom05">
     <li><b>22 515</b> persons with birth time</li>
     <li><b>1 594</b> persons without birth time, with days.</li>
@@ -56,13 +58,8 @@ The main orientations of g5 program are :
     <li>Build new eminence indicators and sort famous persons by eminence.</li>
 </ol>
 
-One of the purpose is to build data permiting a precise reconstitution of Suitbert Ertel's analysis of both Gauquelin and groups of skeptics - exposed in the book <i><b>The Tenacious Mars Effect</b></i>.
-<br>This is possible thanks to the availability of <a href="ertel-4391-sport.html#ertel-s-subsamples">Ertel's list of subsamples</a>.
-
-
-<!-- 
 Note that g5 is not concerned by data analysis (performing statistical tests), it only deals with documentation, restoration and production of data.
--->
+
 <style>
 ul.prime{
     padding-top:1rem;
@@ -74,7 +71,7 @@ ul.prime li{
 }
 </style>
 <ul class="prime">
-    <li><a href="https://g5.tig12.net/output"><b>Download resulting data</b></a></li>
+    <li><a href="https://opengauquelin.org/downloads"><b>Download resulting data (opengauquelin.org)</b></a></li>
     <li><a href="historical-tests.html">List of historical tests</a></li>
 </ul>
 
@@ -84,7 +81,7 @@ ul.prime li{
 <article>
 
 <!-- ********************************************************************************* -->
-<h2>Short history</h2>
+<h2>Brief history</h2>
 These tests, initiated in the 1950s by Michel Gauquelin, followed 3 directions :
 <ul class="simple">
     <li>tests on professional groups,</li>
@@ -101,6 +98,10 @@ This program deals with the data used to build <b>professional groups</b>.
 </ul>
 One particular effect - the repartition of Mars in the births of sportsmen, called "the mars effect" - gave rise to very long polemics without any consensual conclusion. Very few members of the academic world studied the question, most notably Suitbert Ertel and Arno Müller. Ertel introduced citation count, providing an objective measure of eminence, and analyzed Gauquelin and skeptic tests.
 
+<br><br>One of the purpose of g5 is to build data permiting a precise reconstitution of Suitbert Ertel's analysis of both Gauquelin and groups of skeptics - exposed in the book <i><b>The Tenacious Mars Effect</b></i>.
+<br>This is possible thanks to the availability of <a href="ertel-4391-sport.html#ertel-s-subsamples">Ertel's list of subsamples</a>.
+
+
 <!-- ********************************************************************************* -->
 <h2>Why Gauquelin5 ?</h2>
 There are several reasons to care about the data used to perform statistical tests on astrology :
@@ -109,20 +110,18 @@ There are several reasons to care about the data used to perform statistical tes
     <li>
         <div class="bold">Scientific</div>
         History is so confused that the question to know if these statistical anomalies exist out of human bias is still open.
-        <br>Internet permits a re-examination of these works, with the ability to check in the archives and rank professionals by eminence.
-        <br>We today have the means to reproduce these tests with better data, and see if a consensus can emerge.
+        <br>We today have the means to reproduce these tests with better and more reliable data, and see if a consensus can emerge.
+        <br>This is possible for two reasons :
+        <ul>
+            <li>The availability of online civil registries permits to check birth times and correct historical data.</li>
+            <li>Internet provides many ways to <a href="eminence.html">rank famous persons by eminence</a>.</li>
+        </ul>
     </li>
     
     <li>
         <div class="bold">Historical</div>
         History of science is concerned, to study the attitude of the scientific community towards the claims of Gauquelin.
     </li>
-<!-- 
-    <li>
-        <div class="bold">Political</div>
-        Historians of science can use the data to establish the facts, as data are the main materials used to perform the astrological tests.
-    </li>
--->    
     <li>
         <div class="bold">Technical</div>
         <b>These data are interesting because they contain birth time</b>. And birth times are generally neglected in the web. Take for example <a href="wikidata.html">wikidata</a> : birth times are set to <code>00:00:00</code>. There is no way to make the difference between "this is a date with no time information" and "this is a date with time = 00:00:00" (maybe there is a way, but I didn't find it).

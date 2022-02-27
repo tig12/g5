@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>G5 Occupation | Open Gauquelin database</title>
+    <title>G5 Occupations | Open Gauquelin database</title>
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="">
     <meta name="robots" content="index,follow">
@@ -31,18 +31,21 @@
 
 <main>
 <header>
-<h1>G5 Occupation</h1>
+<h1>G5 Occupations</h1>
 <div class="intro">
-Initial occupations are defined in a csv file in <a href="https://github.com/tig12/gauquelin5/tree/master/data/db/occu">data/db/occu</a>
+An occupation represents the activity of a person, &#8771; the profession.
+<br>Initial occupations are defined in a csv file in <a href="https://github.com/tig12/gauquelin5/tree/master/data/db/occu">data/db/occu</a>
 </div>
 </header>
 
 <article>
-
-Organized in a direct acyclic graph, see <a href="db-group.html">page about groups</a>.
+<a href="db-group.html">Groups</a> are used to model occupations, so occupations benefit from the direct acyclic graph (DAG) structure, meaning that an occupation may have one or several parents, and one or several children.
 
 <img class="margin border padding" src="img/occus-dag.svg" alt="Occupations example">
 
+Like for any group, one person can be associated to one or several occupations.
+
+<br><br>As a convention, a person is never associated to an occupation and its parent. For example, if a person is associated to <i>artist</i> and a new association to <i>painter</i> is added, then the association with <i>artist</i> becomes useless and must be removed. This is implemented by method <code>Person::addOccus()</code>.
 
 
 </article>
