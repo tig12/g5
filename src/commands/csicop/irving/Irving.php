@@ -1,7 +1,7 @@
 <?php
 /******************************************************************************
     File containing 408 sportsmen from CSICOP test.
-    Sent by Kenneth Irving, originally coming from Dennis Rawlins
+    Sent by Kenneth Irving, originally coming from Dennis Rawlins.
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-12-23 00:38:32+01:00, Thierry Graff : Creation

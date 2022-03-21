@@ -1,0 +1,14 @@
+document:
+  history:
+    - 2022-03-19 19:34:47+01:00: Thierry Graff, creation
+
+name: CFEPP 1066 athletes
+slug: cfepp-1066
+type: history
+sources:
+  - cfepp-final3
+  - cfepp-book
+
+description: |
+  Group of athletes published by the CFEPP (Comité Français pour l'Etude des Phénomènes Paranormaux) in 1996.
+  <br>This group corresponds to the official list published in 1996.

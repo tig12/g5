@@ -1,0 +1,13 @@
+document:
+  history:
+    - 2022-03-20 17:11:20+01:00: Thierry Graff, creation
+
+name: CFEPP 1120 athletes
+slug: cfepp-1120
+type: history
+sources:
+  - cfepp-final3
+
+description: |
+  Group of athletes gathered by the CFEPP (Comité Français pour l'Etude des Phénomènes Paranormaux) in 1996.
+  <br>This group of 1120 athletes was built by Jan Willem Nienhuys. It contains the group 1066 officially published by the CFEPP + 54 supplementary persons. This addition is explained in Nienhuys's article "Ertel's ‘Mars Effect': Anatomy of a pseudo-science" (1997), in paragraph "The CFEPP memorandum of 1990".

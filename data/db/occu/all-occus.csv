@@ -2,6 +2,7 @@ slug;wd;fr;en;parents
 actor;Q33999;Acteur;Actor;artist
 aircraft-pilot;Q2095549;Aviateur;Aircraft pilot;sportsperson
 american-football-player;Q19204627;Joueur de football américain;American football player;sportsperson
+archer;Q13382355;Archer;Archer;sportsperson
 architect;Q42973;Architecte;Architect;
 artist;Q483501;Artiste;Artist;
 athletics-competitor;Q11513337;Athléte;Athletics competitor;sportsperson
@@ -23,6 +24,7 @@ conductor-of-military-band;;Chef d'orchestre militaire;Conductor of military ban
 conductor;Q158852;Chef d’orchestre;Conductor;musician
 cyclist;Q2125610;Cycliste;Cyclist;sportsperson
 dancer;Q5716684;Danseur;Dancer;artist
+diver;Q16004431;Plongeur;Diver;sportsperson
 equestrian;Q2730732;Cavalier;Equestrian;sportsperson
 executive;Q978044;Cadre dirigeant;Executive;
 factual-writer;;Ecrivain factuel;Factual writer;writer
@@ -30,6 +32,7 @@ feminist;Q34074720;Féministe;Feminist;
 fencer;Q13381863;Escrimeur;Fencer;sportsperson
 fictional-writer;;Ecrivain de fictions;Fictional writer;writer
 field-hockey-player;Q10843263;Joueur de hockey sur gazon;Field hockey player;sportsperson
+figure-skater;Q13219587;Patineur artistique;Figure skater;sportsperson
 football-player;Q937857;Joueur de football;Soccer player;sportsperson
 furniture-designer;Q11455387;Concepteur de meubles;Furniture designer;
 golfer;Q11303721;Joueur de golf;Golfer;sportsperson
@@ -38,6 +41,9 @@ gymnast;Q16947675;Gymnaste;Gymnast;sportsperson
 handball-player;Q12840545;Joueur de handball;Handball player;sportsperson
 historian-of-science;Q16063546;Historien des sciences;Historian of science;scientist
 humanities-scholar;Q16727193;Scientifique de l'esprit;Humanities scholar;researcher
+ice-hockey-player;Q11774891;Joueur de hockey sur glace;Ice hockey player;ice-sport-practitioner
+ice-skater;Q9394993;Patineur sur glace;Ice skater;ice-sport-practitioner
+ice-sport-practitioner;Q98073294;;Ice sport athlete;winter-sports-practitioner
 interior-designer;Q2133309;Designer d'intérieur;Interior designer;
 journalist;Q1930187;Journaliste;Journalist;
 judoka;Q6665249;Judoka;Judoka;sportsperson
@@ -48,6 +54,7 @@ legal-profession;Q15987302;Profession juridique;Legal profession;
 mathematician;Q170790;Mathématicien;Mathematician;scientist
 military-personnel;Q47064;Militaire;Military personnel;
 miscelaneous;;Divers;Miscelaneous;
+modern-pentathlete;Q15972912;Pentathlonien;Pentathlete;sportsperson
 monarch;Q116;Monarque;Monarch;
 motor-sports-competitor;Q30339659;Compétiteur de sport automobile;Motor sports competitor;sportsperson
 mountaineer;Q9149093;Alpiniste;Mountaineer;sportsperson
@@ -75,24 +82,30 @@ rodeo-rider;Q21517059;Cavalier de rodéo;Rodeo rider;sportsperson
 roller-skater;Q61278580;Patineur à roulettes;Roller skate;sportsperson
 romanist;Q2504617;Romaniste;Romanist;scientist
 rower;Q13382576;Avironeur;Rower;sportsperson
+rugby-league-player;Q14373094;Joueur de rugby à XIII;Rugby league player;rugby-player
 rugby-player;Q13415036;Joueur de rugby;Rugby player;sportsperson
+rugby-union-player;Q14089670;Joueur de rugby à XV;Rugby union player;rugby-player
 saint;Q43115;Saint;Saint;
 scientist;Q901;Scientifique;Scientist;researcher
 sculptor;Q1281618;Sculpteur;Sculptor;artist
+sport-shooter;Q17486376;Tireur sportif;Sport shooter;sportsperson
 singer;Q177220;Chanteur;Singer;musician
 skier;Q4270517;Skieur;Skier;winter-sports-practitioner
 social-scientist;Q15319501;Chercheur en sciences sociales;Social scientist;scientist
 social-worker;Q7019111;Travailleur social;Social worker;
+speed-skater;Q10866633;Patineur de vitesse;Speed skater;ice-skater
 sport-sailer;Q476246;Skipper;Sport sailer;sportsperson
 sport-shooter;Q17486376;Tireur sportif;Sport shooter;sportsperson
 sportsperson;Q2066131;Sportif;Sportsperson;
 suffragette;Q322170;Suffragette;Suffragette;feminist
 swimmer;Q10843402;Nageur;Swimmer;sportsperson
+table-tennis-player;Q13382519;Pongiste;Table tennis player;sportsperson
 tennis-player;Q10833314;Joueur de tennis;Tennis player;sportsperson
 textile-designer;Q18611810;Styliste;Textile designer;
 volleyball-player;Q15117302;Joueur de volley-ball;Volleyball player;sportsperson
+water-polo-player;Q17524364;Joueur de water-polo;Water polo player;sportsperson
 weightlifter;Q13381376;Haltérophile;Weightlifter;sportsperson
-winter-sports-practitioner;Q20965770;Pratiquant de sports d’hiver;Winter sports practitionner;sportsperson;
+winter-sports-practitioner;Q20965770;Pratiquant de sports d’hiver;Winter sports practitionner;sportsperson
 wrestler;Q13474373;Lutteur (catch);Wrestler;sportsperson
 writer;Q36180;Ecrivain;Writer;
 zoologist;Q350979;Zoologiste;Zoologist;scientist

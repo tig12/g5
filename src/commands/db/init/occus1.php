@@ -1,7 +1,7 @@
 <?php
 /******************************************************************************
     
-    Fills table groop from csv files located in data/db/occu
+    Fills table groop from csv file data/db/occu/all-occus.csv
     Each occu is stored in db as a groop of type Group::TYPE_OCCU.
     Creation of occupation groups is only partially done by this command,
     and must be completed by occus2.
@@ -55,7 +55,7 @@ class occus1 implements Command {
                 }
                 $parents = [];
                 // obliged to add this test to prevent a bug:
-                // if parent is empty, explode returns an array containing one empty string
+                // if field parents is empty, explode returns an array containing one empty string
                 if($line['parents'] != ''){
                     $parents = explode('+', $line['parents']);
                 }

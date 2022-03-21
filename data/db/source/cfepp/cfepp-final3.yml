@@ -1,0 +1,15 @@
+
+document:
+  history:
+    - 2022-03-20 16:12:15+01:00: Thierry Graff, creation
+
+name: List of 1120 sportspersons
+slug: cfepp-final3
+type: file
+authors: 
+description: |
+  File containing 1120 persons, built by Jan Wilhem Nienhuys.
+  <br>This file was sent by Nienhuys and is made available onine with his authotization.
+parents:
+  - cfepp
+  - nienhuys
