@@ -12,7 +12,7 @@
     <meta name="dcterms.dateCopyrighted" content="2019">
     <!-- 
     tigsite:
-        history: , Thierry Graff : Creation
+        history: 2021, Thierry Graff : Creation
     -->
 </head>
 
@@ -34,23 +34,229 @@
 <h1>
     CFEPP 1996
     <div class="subtitle">1066 sportsmen</div>
+<center><div class="todo" style="font-size:1rem;">Incomplete, work in progress</div></center>
 </h1>
 
+<!-- 
+Athlège 1949 https://www.amazon.fr/Lathl%C3%A8ge-biographies-grands-champions-fran%C3%A7ais/dp/B00NGPNRG0
+Athlège 1951 https://www.abebooks.com/LAthl%C3%A8ge-1951-Biographies-grands-champions-fran%C3%A7ais/31025863496/bd
+-->
+
 <div class="intro">
-TODO
-<br>This restoration is possible using <a href="https://newalchemypress.com/gauquelin/research4.php">newalchemypress.com</a> data.
-<br>Draft code permits to generate <a href="https://g5.tig12.net/output/history/1996-cfepp/cfepp-ertel-925.csv">a list of 925 sportsmen</a> from <a href="ertel-4391-sport.html">file Ertel 4391</a>.
+This page deals with the third and last test done by a group of skeptics, the CFEPP (Comité Français pour l'Etude des Phénomènes Paranormaux - French Commitee for the study of paranormal phenomena). Results were published in 1996 in a booklet ; the official published list contains 1066 sport champions.
+<br>Two sources were used to include this test in g5 database: the CFEPP booklet and <i><b>final3</b></i>, a file sent by Jan Willem Nienhuys, who kindly authorized its use for inclusion in g5 database.
 </div>
 
 </header>
 
 <article>
 
+A complete restoration of this group would be quite complex, because it contains several subgroups:
+<ul class="margin-bottom">
+    <li>The original selection: 1439 records.</li>
+    <li>The official list published: 1066 records.</li>
+    <li>Additional correct records found by Nienhuys but forgotten by CFEPP: 54 records (see below).</li>
+    <li>Additions suggested by Gauquelin: 79 records.</li>
+    <li>Deletions suggested by Gauquelin: 16 records.</li>
+    <li>Cases for which neither the CFEPP nor MG has been able to obtain information: 3 records.</li>
+</ul>
+
+For the moment, inclusion to g5 database is limited to 3 groups: 1439, 1066, 1120 (= 1066 + 54, see below).
+
+<!-- ********************************************************************************* -->
+<h2 id="origin">Origin</h2>
+
+<!-- ************************************* -->
+<h3 id="1-1-publication">Publication</h3>
+This test gave rise to two documents:
+<ul>
+    <li>
+        <b>Preliminary report</b>, an internal document containing a list of 1439 selected sports champions.
+    </li>
+    <li>
+        <b>The "Mars Effect", A French Test of Over 1,000 Sports Champions</b>, paper booklet (157 pages), published in 1996 by Prometheus Books.
+        <br>By Claude Benski, Dominique Caudron, Yves Galifret, Jean-Paul Krivine, Jean-Claude Pecker, Michel Rouzé, Evry Schatzman, with a commentary of Jan Willem Nienhuys.
+        <br>This book can be bought online.
+    </li>
+</ul>
+
+
+<!-- ************************************* -->
+<h3>Information sources</h3>
+<ul class="spaced">
+    <li>
+        Two files related to this test can be downloaded from <a href="https://newalchemypress.com/gauquelin/research4.php">newalchemypress.com/gauquelin/research4.php</a> : <a href="https://newalchemypress.com/gauquelin/gauquelin_docs/4b_cfp1120.csv">4b_cfp1120.csv</a> and <a href="https://newalchemypress.com/gauquelin/gauquelin_docs/4c_cepp1066z.csv">4c_cepp1066z.csv</a>
+    </li>
+    <li>
+        Another file can be obtained upon request from Jan Willem Nienhuys ; you can find his email on page "<a href="https://skepsis.nl/mars-effect">The Mars Effect in Retrospect</a>".
+        <br>This file was retained to integrate CFEPP test in g5 database because it is more complete than the files from newalchemypress.com. It contains more fields, in particular both legal time and universal time ; its format is almost identical to the official list published by CFEPP.
+    </li>
+</ul>
+
+<!-- ************************************* -->
+<h3 id="1-2-citations">Citations</h3>
+This test has been mainly analyzed by two persons : Suitbert Ertel and Jan Willem Nienhuys, and references can be found in several articles from these authors.
+
+<!-- ********************************************************************************* -->
+<h2>The input file</h2>
+
+The file sent by Nienhuys is called <code class="bold big1">final3</code> and is versioned with the program, in <a href="https://github.com/tig12/gauquelin5/blob/main/data/raw/cfepp/final3.zip">data/raw/cfepp/final3.zip</a>.
+
+<!-- ************************************* -->
+<h3>Why 1120 ?</h3>
+
+<code>final3</code> contains 1120 records. This is explained in an article by Nienhuys, <a href="https://www.skepsis.nl/blog/wp-content/uploads/anatomy.pdf">Ertel’s ‘Mars Effect’: Anatomy of a pseudo-science</a>, in paragraph "<i>The CFEPP memorandum of 1990</i>": 
+<cite>&laquo; 
+The CFEPP had also neglected to sort out a small pile of town hall answers that had been kept separate from the main bulk because of some need for follow-up actions. In this pile there were 11 more names with good data . Altogether the number of data to be added to the ones in CFEPP’s memorandum was 11 + 43 = 54, thereby raising CFEPP’s 1066 to 1120.</i>
+&raquo;</cite>
+
+JW Nienhuys sent supplementary explanations (personal communication):
+
+<cite>&laquo; 
+CFEPP had received answers from city halls that hadn't been entered into their database, for no clear reason. I have taken the position that any form received from town halls should be included, unless the protocol clearly forbade that. But the protocol said nothing about a cutoff date, and the forms weren't marked with a date of reception.
+<br>I suspect that at a certain point in time a list was prepared with all data received and afterwards, when the printouts were ready and one of them sent to Gauquelin, some more forms were received and put together in a folder that carried the inscription 'what should we do with this?' or words of similar nature, and then forgotten. By the time I did my checking there was nobody left who could provide any information.
+&raquo;</cite>
+
+<!-- ********************************************************************************* -->
+<h2>Fields of the raw file</h2>
+As Nienhuys' file roughly contains the same fields as the published list, the meanings of the fields can be easily understood because they are precisely described in CFEPP booklet.
+<br>CFEPP explanations are reproduced in the following table.
+
+<table class="wikitable margin">
+    <tr>
+        <th>CFEPP name</th>
+        <th>G5 name</th>
+        <th>Meaning</th>
+    </tr>
+    <tr>
+        <td>SPORT</td>
+        <td>OCCU</td>
+        <td>
+            
+        </td>
+    </tr>
+    <tr>
+        <td>SRC</td>
+        <td></td>
+        <td>
+            <b>Information source</b>
+            <ul>
+                <li><code class="bold">A</code>: L'athlege - <i>Biographies des plus grands champions français de tous les sports</i>, Kléber, 1951.</li>
+                <li><code class="bold">L</code>: Le Roy - <i>Dictionnaire Encyclopédique des Sports, des Sportifs et des Performances</i>, by Bernard Le Roy, Denoël, 1973.</li>
+                <li><code class="bold">G</code>: Gauquelin's study of 568 champions.</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>LV</td>
+        <td></td>
+        <td>
+            <b>Level</b>
+            <ul>
+                <li><code class="bold">M</code>: World record or championship</li>
+                <li><code class="bold">O</code>: Olympic medal</li>
+                <li><code class="bold">E</code>: European medal or championship</li>
+                <li><code class="bold">F</code>: French record or championship</li>
+                <li><code class="bold">I</code>: Selected for international competition</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>NAME</td>
+        <td>FNAME, GNAME</td>
+        <td>
+            
+        </td>
+    </tr>
+    <tr>
+        <td>LOC DATE</td>
+        <td>DATE</td>
+        <td>
+            <b>Legal day</b> = day written in the birth certificate.
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td>
+            <b>Time regime</b>
+            <br>This field is not present in the original list, and was added by Nienhuys, who sent explanations permitting to understand its meaning:
+            <br><i>Note that following the date there is a column with a letter, indicating which 'time regime' applies:
+            <ul>
+                <li><code class="bold">f</code> for France,</li>
+                <li><code class="bold">o</code> for 'occupied zone during WWI'</li>
+                <li><code class="bold">a</code> for Alsace-Lorraine between 1880 and 1918.</i></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>LT</td>
+        <td>DATE</td>
+        <td>
+            <b>Legal time</b> = time written in the birth certificate.
+        </td>
+    </tr>
+    <tr>
+        <td>BIRTH PLACE</td>
+        <td>PLACE</td>
+        <td>
+            
+        </td>
+    </tr>
+    <tr>
+        <td>POSTAL CODE</td>
+        <td>C2, C3</td>
+        <td>
+            This field is used to compute <i>département</i> (French administrative code level 2) and <i>arrondissement</i> (French administrative code level 3) for Paris and Lyon.
+        </td>
+    </tr>
+    <tr>
+        <td>LONG</td>
+        <td>LG</td>
+        <td>
+            <b>Longitude</b>, in decimal degrees.
+        </td>
+    </tr>
+    <tr>
+        <td>LAT</td>
+        <td>LAT</td>
+        <td>
+            <b>Latitude</b>, in decimal degrees.
+        </td>
+    </tr>
+    <tr>
+        <td>UNIV-DATE</td>
+        <td>DATE-UT</td>
+        <td>
+            Day of date expressed in UTC.
+        </td>
+    </tr>
+    <tr>
+        <td>UT</td>
+        <td>DATE-UT</td>
+        <td>
+            Time of date expressed in UTC.
+        </td>
+    </tr>
+    <tr>
+        <td>S</td>
+        <td></td>
+        <td>
+            <b>Mars sector</b> (from 1 to 12)
+        </td>
+    </tr>
+</table>
+
+
+<!-- ********************************************************************************* -->
+<h2>CFEPP unique id</h2>
+
+
+
 
 </article>
 </main>
 </div><!-- end class="content" -->
-
 
 <!-- ************************************* -->
 <aside class="left">

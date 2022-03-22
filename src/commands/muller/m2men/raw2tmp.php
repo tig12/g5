@@ -31,9 +31,9 @@ class raw2tmp implements Command {
         $res = implode(G5::CSV_SEP, M2men::TMP_FIELDS) . "\n";
         $res_raw = implode(G5::CSV_SEP, M2men::RAW_FIELDS) . "\n";
         
-        $nLimits = count(M2men::RAW_LIMITS);
         $N = 0;
         $day = $hour = '';
+        $nLimits = count(M2men::RAW_LIMITS);
         foreach($raw as $line){
             if(trim($line) == ''){
                 continue;

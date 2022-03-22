@@ -58,8 +58,8 @@ class Final3 {
         'Motorcycle racing' => 'motor-sports-competitor',
         'Mountain Climbing' => 'mountaineer',
         'Rowing'            => 'rower',
-        'Rugby League'      => 'rugby-league-player', // 13
-        'Rugby Union'       => 'rugby-union-player', //15
+        'Rugby League'      => 'rugby-league-player',   // 13
+        'Rugby Union'       => 'rugby-union-player',    // 15
         'Shooting'          => 'sport-shooter',
         'Skiing'            => 'skier',
         'Soccer'            => 'football-player',
@@ -75,17 +75,57 @@ class Final3 {
         'Yachting'          => 'sport-sailer',
     ];
     
+    /** 
+        Field names used in the raw file.
+        Exact names used by the CFEPP in their booklet.
+    **/
+    const RAW_FIELDS = [
+        'SPORT',
+        'SRC',          // source, see https://tig12.github.io/gauquelin5/cfepp.html
+        'LV',           // level - see https://tig12.github.io/gauquelin5/cfepp.html
+        'NAME',
+        'LOC_DATE',     // local date
+        'LT',
+        'BIRTH_PLACE',
+        'POSTAL_CODE',
+        'LONG',
+        'LAT',
+        'UNIV_DATE',
+        'UT',
+        'S',            // mars sector
+    ];
+    
     /**
         Limit of fields in the raw fields ; example for beginning of 4th line:
         Track & Field      A    FI   AITELLI Collette              1932 03 03 f 19 00   TOULON                    83056
         |                  |    |
-        0                  20   25
+        0                  19   24   etc.
     **/
     const RAW_LIMITS = [
         0,
-        20,
-        25,
+        19,
+        24,
+        29,
+        59,
     ];
+    
+    /** 
+        Field names used in the tmp file.
+    **/
+    const TMP_FIELDS = [
+        'OCCU',
+        'SRC',
+        'LV',
+        'NAME',
+        'DATE',
+        'PLACE',
+        'C2',
+        'LG',
+        'LAT',
+        'DATE-UT',
+        'M12',
+    ];
+    
     
     // *********************** Source management ***********************
     
@@ -98,7 +138,9 @@ class Final3 {
         return implode(DS, [Config::$data['dirs']['raw'], 'cfepp', 'final3.zip']);
     }
     
-    /** Loads file final3 in a regular array **/
+    /**
+        Loads file final3 in a regular array.
+    **/
     public static function loadRawFile(){
         $zipfile = self::rawFilename();
         $zip = new \ZipArchive;
@@ -107,26 +149,25 @@ class Final3 {
             throw new \Exception("Unable to open $zipfile.\nError code: $err");
         }
         $content = $zip->getFromName(str_replace('.zip', '', basename($zipfile)));
-        $lines = explode("\n", $content);
         $zip->close();
-        foreach($lines as $line){
-            
-        }
+        $lines = explode("\n", $content);
+        return $lines;
     }
     
     // *********************** Tmp files manipulation ***********************
     
-    /** Temporary file in data/tmp/csicop/irving/ **/
+    /** Temporary file in data/tmp/cfepp/ **/
     public static function tmpFilename(){
         return implode(DS, [Config::$data['dirs']['tmp'], 'cfepp', 'cfepp-1120-nienhuys.csv']);
     }
     
-    /** Loads data/tmp/csicop/irving/csicop-408-irving.csv in a regular array **/
+    /** Loads data/tmp/cfepp/cfepp-1120-nienhuys.csv in a regular array **/
     public static function loadTmpFile(){
         return csvAssociative::compute(self::tmpFilename(), G5::CSV_SEP);
     }
     
     /** Loads data/tmp/csicop/irving/csicop-408-irving.csv in an asssociative array ; keys = CSID **/
+/* 
     public static function loadTmpFile_csid(){
         $csv = self::loadTmpFile();
         $res = [];              
@@ -135,6 +176,7 @@ class Final3 {
         }
         return $res;
     }
+*/
     
     // *********************** Tmp raw file manipulation ***********************
     
