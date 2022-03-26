@@ -85,7 +85,8 @@ class Final3 {
         'LV',           // level - see https://tig12.github.io/gauquelin5/cfepp.html
         'NAME',
         'LOC_DATE',     // local date
-        'LT',
+        'TR',           // time regime, can be 'f', 'o' or 'a'
+        'LT',           // local time
         'BIRTH_PLACE',
         'POSTAL_CODE',
         'LONG',
@@ -107,22 +108,36 @@ class Final3 {
         24,
         29,
         59,
+        70,
+        72,
+        80,
+        106,
+        122,
+        131,
+        139,
+        152,
+        158,
+        160, // EOL
     ];
     
     /** 
         Field names used in the tmp file.
     **/
     const TMP_FIELDS = [
+        'CFID',
+        'GQID',
         'OCCU',
         'SRC',
         'LV',
-        'NAME',
+        'FNAME',
+        'GNAME',
         'DATE',
+        'DATE-UT',
         'PLACE',
         'C2',
+        'C3',
         'LG',
         'LAT',
-        'DATE-UT',
         'M12',
     ];
     
@@ -185,7 +200,7 @@ class Final3 {
         (file used to keep trace of the original raw values).
     **/
     public static function tmpRawFilename(){
-        return implode(DS, [Config::$data['dirs']['tmp'], 'csicop', 'irving', 'csicop-408-irving-raw.csv']);
+        return implode(DS, [Config::$data['dirs']['tmp'], 'cfepp', 'cfepp-1120-nienhuys-raw.csv']);
     }
     
     /**

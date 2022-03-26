@@ -13,7 +13,13 @@ use g5\app\Config;
 use tiglib\patterns\Command;
 
 class raw2tmp implements Command {
-
+    
+    /**
+        Pattern for NAME in raw file.
+        Ex of name: DUFRESNE Jean-Pierre
+    **/
+    const PNAME = "/([A-Z' -]+) (.*)/";
+    
     // *****************************************
     /** 
         @param  $params Empty array
@@ -33,73 +39,79 @@ class raw2tmp implements Command {
         $lines = Final3::loadRawFile();
         
         $N = 0;
-        $res = [];
-        $resRaw = []; // to keep trace of the original values
+        $res = implode(G5::CSV_SEP, Final3::TMP_FIELDS) . "\n";
+        $resRaw = implode(G5::CSV_SEP, Final3::RAW_FIELDS) . "\n"; // to keep trace of the original values
         $nLimits = count(Final3::RAW_LIMITS);
         foreach($lines as $line){
+            if($line == ''){ // last line
+                continue;
+            }
             $N++;
-            $new = array_fill_keys(Final3::TMP_FIELDS, '');
-            $new_raw = array_fill_keys(Final3::RAW_FIELDS, '');
+            $new = [];
+            $new_raw = [];
             for($i=0; $i < $nLimits-1; $i++){
                 $rawFieldname = Final3::RAW_FIELDS[$i];
                 $offset = Final3::RAW_LIMITS[$i];
                 $length   = Final3::RAW_LIMITS[$i+1] - Final3::RAW_LIMITS[$i];
-//                $field = trim(substr($line, $offset, $length));
-$field = substr($line, $offset, $length);
-echo "'$field'\n";
+                $field = trim(substr($line, $offset, $length));
+                $new_raw[$rawFieldname] = $field;
             }
-break;
+            $resRaw .= implode(G5::CSV_SEP, $new_raw) . "\n";
+            $new['CFID']    = $N;
+            $new['GQID']    = '';
+            $new['OCCU']    = Final3::RAW_OCCUS[$new_raw['SPORT']];
+            $new['SRC']     = $new_raw['SRC'];
+            $new['LV']      = $new_raw['LV'];
+            [ $new['FNAME'], $new['GNAME'] ] = self::computeName($new_raw['NAME']);
+            $new['DATE']    = self::computeDate($new_raw['LOC_DATE'], $new_raw['LT']);
+            $new['DATE-UT'] = self::computeDate($new_raw['UNIV_DATE'], $new_raw['UT']);
+            $new['PLACE']   = $new_raw['BIRTH_PLACE'];
+            [ $new['C2'], $new['C3'] ] = self::computePostal($new_raw['POSTAL_CODE']);
+            $new['LG']      = str_replace('+', '', $new_raw['LONG']);
+            $new['LAT']     = str_replace('+', '', $new_raw['LAT']);
+            $new['M12']     = $new_raw['S'];
+            $res .= implode(G5::CSV_SEP, $new) . "\n";
+//if($N == 10) break;
         }
-exit;
+//echo "$res\n";
+//exit;
         
-        $output = implode(G5::CSV_SEP, Final3::TMP_FIELDS) . "\n";
-        foreach($res as $row){
-            $output .= implode(G5::CSV_SEP, $row) . "\n";
-        }
         $dir = dirname($outfile);
         if(!is_dir($dir)){
             mkdir($dir, 0755, true);
         }
-        file_put_contents($outfile, $output);
-        $report .= "Stored $n records in $outfile\n";
+        file_put_contents($outfile, $res);
+        $report .= "Stored $N records in $outfile\n";
         
         // keep trace of the original values
-        $outputRaw = implode(G5::CSV_SEP, Final3::RAW_FIELDS) . "\n";
-        foreach(array_keys($res) as $k){
-            $outputRaw .= implode(G5::CSV_SEP, $resRaw[$k]) . "\n";
-        }
-        $dir = dirname($outfile);
-        if(!is_dir($dir)){
-            mkdir($dir, 0755, true);
-        }
-        file_put_contents($outfileRaw, $outputRaw);
-        $report .= "Stored $n records in $outfileRaw\n";
+        file_put_contents($outfileRaw, $resRaw);
+        $report .= "Stored $N records in $outfileRaw\n";
         
         return $report;
     }
     
-    /** Auxiliary of execute() **/
-/* 
-    private static function lgLat($deg, $min){
-        return $deg + round(($min / 60), 5);
-    }
-*/
-    
-    /**
-        Auxiliary of execute()
-        Computes the timezone offset
-    **/
-/* 
-    private static function tz($str){
-        if($str == '0,5'){
-            // bug for 2 records :
-            // 121 Fujii Paul Takashi 1940-07-06
-            // 295 Rocha Ephraim 1923-09-18
-            return '-10:30';
+    private static function computeName($name){
+        if($name == 'MARTIN-LEGEAY'){
+            return [$name, '']; // particular case without given name
         }
-        // all other records contain integer offsets
-        return '-' . str_pad($str , 2, '0', STR_PAD_LEFT) . ':00';
+        preg_match(self::PNAME, $name, $m);
+        return [$m[1], $m[2]];
     }
-*/
+    
+    private static function computeDate($day, $time){
+        return str_replace(' ', '-', $day) . ' ' . str_replace(' ', ':', $time);
+    }
+    
+    private static function computePostal($postal){
+        $c2 = substr($postal, 0, 2);
+        $c3 = '';
+        if($c2 == '75'){
+            $candidate = (int)substr($postal, 2, 3);
+            if($candidate >=1 && $candidate <= 20){
+                $c3 = $candidate;                
+            }
+        }
+        return [$c2, $c3];
+    }
     
 } // end class
