@@ -76,7 +76,7 @@ occus: []
 trust:
 
 # map containing act transcriptions.
-# keys of this map can be "birth", "death", "marriage"
+# keys of this map can be "birth", "death", "mariage"
 acts: {}
 
 history: []

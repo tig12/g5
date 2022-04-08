@@ -1,89 +1,22 @@
 <?php
 /********************************************************************************
-    Adds Gauquelin A6 or A4 NUM in column GQID tmp/muller/1-writers/muller1-402-writers.csv
-    using tmp/gauq/lerrcp/A6.csv
-    Must be executed before import in database.
+    Adds Gauquelin id in column GQID data/tmp/cfepp/cfepp-1120-nienhuys.csv
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
-    @history    2020-07-18 01:45:49+02:00, Thierry Graff : Creation
+    @history    2022-03-27 23:30:58+02:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\commands\muller\m1writers;
+namespace g5\commands\cfepp\final3;
 
 use g5\G5;
 use tiglib\patterns\Command;
-use g5\commands\gauq\LERRCP;
 
 class gauq implements Command {
     
     /** Possible value for parameter 1 **/
     const POSSIBLE_PARAMS = [
-        'update' => "Updates column GQID of file tmp/muller/1-writers/muller1-402-writers.csv",
-        'report' => "Echoes a html table to compare muller-402-it-writers.csv and A6.csv",
+        'update' => "Updates column GQID of file data/tmp/cfepp/cfepp-1120-nienhuys.csv",
+        'report' => "",
     ];                                                                                                  
-    
-    /** 
-        Assoc array NUM in A6 => ID in M402
-        Manual additions to handle journalists
-        WARNING - this may lead to erroneous information
-        see https://tig12.github.io/gauquelin5/muller1-402-writers.html
-    **/
-    const A6_M402_JO = [
-        1354 => 1,
-        1489 => 150,
-        1568 => 235,
-        1578 => 242,
-    ];
-    
-    /** 
-        Assoc array NUM in A6 => ID in M402
-        Array built after a first execution, using $ambiguous and $nomatch
-        Introduction of this array makes $ambiguous empty
-    **/
-    const A6_M402 = [
-        //
-        // === from $ambiguous ===
-        //
-        // Operti Piero Bra CN 1896-02-11
-        926 => 317,
-        // Tombari Fabio Fano PS 1899-12-21
-        985 => 452,
-        // Zucca Giuseppe Messina ME 1887-05-01
-        1005 => 500,
-        //
-        // === from $nomatch ===
-        //
-        // Bontempelli Massimo Como CO 1878-05-11
-        837 => 66,
-        // Cecchi Emilio Firenze FI 1884-07-04
-        852 => 107,
-        // Chini Mario BORGO SAN LOREN FI 1876-07-29
-        854 => 115,
-        // De Libero Libero Fondi LT 1906-09-11
-        868 => 158,
-        // Della Massea Angelo Baschi TR 1892-12-17
-        869 => 159,
-        // Gabrielli Aldo Ripatransone AP 1898-04-21
-        888 => 206,
-        // Gastaldi Mario BEDIZZOLE DI BR BS 1902-08-28
-        890 => 216,
-        // Giordana Tullio Crema CR 1877-07-15
-        895 => 229,
-        // Prepositi Clemente Atri TE 1886-02-08
-        941 => 362,
-        // Profeta Ottavio Aidone EN 1896-10-10
-        943 => 364,
-        // Repaci Leonida PALMI CALABRIA RC 1898-04-24
-        947 => 371,
-        // Rosso S Secondo Piermaria Caltanissetta CL 1887-11-30
-        953 => 387,
-        // Sboto Edoardo Catania CT 1888-05-30
-        962 => 407,
-        // Traxler Augusto Fauglia PI 1905-06-09
-        987 => 456,
-        // Umani Giorgio 1892-08-14 Cupramontana AN
-        989 => 461,
-    ];
-    
     
     /** 
         @param $param Array containing one element (a string)
@@ -114,7 +47,7 @@ class gauq implements Command {
                 . "Possible values for parameter :\n$possibleParams_str\n";
         }
         
-        $report =  "--- muller m1writers gauq ---\n";                                                                     
+        $report =  "--- cfepp final3 gauq ---\n";                                                                     
 
         $m402_ids = M1writers::loadTmpFile_id(); // Assoc array, keys = Müller id
         $m402_days = []; // Assoc array, keys = birth days

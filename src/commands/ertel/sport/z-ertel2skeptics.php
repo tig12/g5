@@ -65,7 +65,7 @@ class ertel2skeptics implements Command {
         $param = $params[0];
         if(!in_array($param, array_keys(self::POSSIBLE_PARAMS))){
             return "INVALID PARAMETER\n"
-                . "Possible values for parameter :\n$possibleParams_str\n";
+                 . "Possible values for parameter :\n$possibleParams_str\n";
         }
         
         // init $do* vars

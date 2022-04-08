@@ -11,7 +11,7 @@ create table person (
     birth           jsonb not null,
     death           jsonb not null,
     occus           jsonb not null,
-    trust           jsonb not null,
+    trust           char(1),
     acts            jsonb not null,
     history         jsonb not null,
     issues          jsonb not null,

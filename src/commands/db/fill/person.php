@@ -3,8 +3,11 @@
     
     Updates or inserts persons in the database from a yaml file (in data/db/person).
     Each yaml file must contain an array.
-    Each element of this array must contain the fields of a person, with a key ACTION.
-    The value of key ACTION can be 'update' or 'delete'.
+    Each element of this array must contain the fields of a person, with a key ADMIN.
+    ADMIN field must contain a key ACTION.
+    The value of ACTION can be 'update' or 'delete'.
+    ADMIN field may also contain a key ADD-IN-GROUPS
+    ADD-IN-GROUPS must contain an array of group slugs to which the person must be added.
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-08-12 14:28:11+02:00, Thierry Graff : Creation

@@ -167,6 +167,22 @@ You must have a database and credentials (user, password) corresponding to the v
 <br>Following instructions use psql, but this can be done with other postgresql clients, like pgadmin.
 <br>These instructions use the values (user name, db name etc.) given in <code>config.yml.dist</code> - of course, adapt with the values you use in your <code>config.yml</code> file.
 
+<br><br>So, if your <code>config.yml</code> contains these settings:
+<pre>
+db5:
+  postgresql: 
+    dbhost: localhost
+    dbport: 5432
+    dbuser: g5_pg_username
+    dbpassword: g5_pg_password
+    dbname: g5_pg_dbname
+    schema: g5_pg_schema
+    
+openg:
+  postgrest:
+    user: web_anon
+</pre>
+The database creation is:
 <pre>
 sudo -s -u postgres
 psql 
@@ -178,11 +194,14 @@ postgres=# alter user g5_pg_username set search_path to g5_pg_schema;
 postgres=# create database g5_pg_dbname owner g5_pg_username;
 postgres=# \c g5_pg_dbname
 g5_pg_dbname=# create schema g5_pg_schema authorization g5_pg_username;
+</pre>
+These supplementary steps permit to use g5 database from openg program:
+<pre>
 g5_pg_dbname=# create role web_anon nologin;
 g5_pg_dbname=# grant usage on schema g5_pg_schema to web_anon;
 g5_pg_dbname=# create role authenticator noinherit login password 'postgrest_password';
 g5_pg_dbname=# grant web_anon to authenticator;
-\d
+\q
 
 exit    # exit postgres user
 </pre>

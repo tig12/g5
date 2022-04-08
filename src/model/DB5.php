@@ -23,6 +23,7 @@ class DB5{
             $dbname = Config::$data['db5']['postgresql']['dbname'];
             $dsn = "pgsql:host=$host;port=$port;user=$user;password=$password;dbname=$dbname";
             self::$dblink = new \PDO($dsn);
+//self::$dblink->setAttribute(\PDO::ATTR_AUTOCOMMIT, 0);
             self::$dblink->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         }
         return self::$dblink;

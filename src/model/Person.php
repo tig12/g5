@@ -48,9 +48,6 @@ class Person {
         if(isset($row['occus'])){
             $row['occus'] = json_decode($row['occus'], true);
         }
-        if(isset($row['trust'])){
-            $row['trust'] = json_decode($row['trust'], true);
-        }
         if(isset($row['acts'])){
             $row['acts'] = json_decode($row['acts'], true);
         }
@@ -96,9 +93,16 @@ class Person {
     **/
     public static function getBySourceId($sourceSlug, $idInSource): ?Person {
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("select * from person where ids_in_sources @> '{\"$sourceSlug\": \"$idInSource\"}'");
+        $query = "select * from person where ids_in_sources @> '{\"$sourceSlug\": \"$idInSource\"}'";
+//echo "$query\n";
+        $stmt = $dblink->prepare($query);
         $stmt->execute([]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+/*
+        $stmt = $dblink->query($query);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+//echo "\n<pre>"; print_r($res); echo "</pre>\n"; exit;
+*/
         if($res === false || count($res) == 0){
             return null;
         }
@@ -434,11 +438,19 @@ class Person {
     
     /** 
         Adds an array of acts.
-        @param  $keys Regular array, can contain "birth", "death" or "marriage"
+        @param  $actSpecs   Associative array specifying the acts to add.
+                - Keys can contain "birth", "death" or "mariage"
+                - Values contain an act slug permitting to locate the act.
+                  Ex: ['birth' => 'eymery-marguerite-1860-02-11'] corresponds to an act located in
+                  data/acts/birth/1860/02/11/eymery-marguerite-1860-02-11
+                Note : the act slug used in the act specification can be different from $this->data['slug'].
+                This can happen for example if $this->data['slug'] correspond to fame name
+                and the slug in the act specification corresponds to official name.
+                Acts specifications permit to locate the act.
     **/
-    public function addActs($keys){
-        foreach($keys as $key){
-            $this->data['acts'][$key] = Acts::getAct($this, $key);
+    public function addActs($actSpecs){
+        foreach($actSpecs as $key => $actSlug){
+            $this->data['acts'][$key] = Acts::personAct($this, $key, $actSlug);
         }
     }
     
@@ -486,7 +498,7 @@ class Person {
             json_encode($this->data['birth']),
             json_encode($this->data['death']),
             json_encode($this->data['occus']),
-            json_encode($this->data['trust']),
+            $this->data['trust'],
             json_encode($this->data['acts']),
             json_encode($this->data['history']),
             json_encode($this->data['issues']),
@@ -527,7 +539,7 @@ class Person {
             json_encode($this->data['birth']),
             json_encode($this->data['death']),
             json_encode($this->data['occus']),
-            json_encode($this->data['trust']),
+            $this->data['trust'],
             json_encode($this->data['acts']),
             json_encode($this->data['history']),
             json_encode($this->data['issues']),

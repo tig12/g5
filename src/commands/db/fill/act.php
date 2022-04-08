@@ -19,13 +19,13 @@ class act implements Command {
     const POSSIBLE_ACTIONS = ['insert', 'update'];
     
     /** 
-        Inserts or updates an act in database
-        @param  $params[0]  Slug of the concerned person - required.
+        Inserts or updates an act in database.
+        @param  $params[0]  Act slug - required.
                 $params[1]  Type of act ; can be 'birth', 'death' or 'mariage' - optional.
                             Default: 'birth'
                 $params[2]  Action ; can be 'insert' or 'update' - optional.
                             Default: 'update'
-        @return Empty string, echoes the report on execution for each source processed.
+        @return Report.
         @throws Exception if unable to insert or update.
     **/
     public static function execute($params=[]): string {
@@ -33,7 +33,7 @@ class act implements Command {
             return "INVALID USAGE - This command needs one parameter :\n"
                 . "The slug of the person concerned by the birth certificate\n";
         }
-        $slug = $params[0];
+        $actSlug = $params[0];
         
         $typact = 'birth';
         if(count($params) >= 2){
@@ -60,19 +60,19 @@ class act implements Command {
             return "INVALID USAGE - useless parameter '{$params[3]}'\n";
         }
         
-        $report = "--- db fill act $typact $action $slug ---\n";
+        $report = "--- db fill act $typact $action $actSlug ---\n";
         
-        $p = Acts::personAct($slug, $typact);
+        $p = Acts::personAct(null, $actSlug, $typact);
         // TODO Add entry in person history
         
         switch($action){
         	case 'insert': 
                 $p->insert(); // can throw an exception
-                $report .= "Inserted $slug\n";
+                $report .= "Inserted $actSlug\n";
             break;
             case 'update':
                 $p->update(); // can throw an exception
-                $report .= "Updated $slug\n";
+                $report .= "Updated $actSlug\n";
         	break;
         }
         
