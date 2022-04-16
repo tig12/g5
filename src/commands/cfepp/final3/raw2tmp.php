@@ -59,6 +59,8 @@ class raw2tmp implements Command {
             $resRaw .= implode(G5::CSV_SEP, $new_raw) . "\n";
             $new['CFID']    = $N;
             $new['GQID']    = '';
+            $new['ERID']    = '';
+            $new['CPID']    = '';
             $new['OCCU']    = Final3::RAW_OCCUS[$new_raw['SPORT']];
             $new['SRC']     = $new_raw['SRC'];
             $new['LV']      = $new_raw['LV'];

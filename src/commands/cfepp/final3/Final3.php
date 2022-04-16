@@ -126,6 +126,8 @@ class Final3 {
     const TMP_FIELDS = [
         'CFID',
         'GQID',
+        'ERID',
+        'CPID',
         'OCCU',
         'SRC',
         'LV',

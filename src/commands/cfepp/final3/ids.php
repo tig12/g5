@@ -1,6 +1,7 @@
 <?php
 /********************************************************************************
-    Adds Gauquelin id in column GQID data/tmp/cfepp/cfepp-1120-nienhuys.csv
+    Adds columns GQID ERID CPID in data/tmp/cfepp/cfepp-1120-nienhuys.csv
+    Uses Ertel 4391 file.
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2022-03-27 23:30:58+02:00, Thierry Graff : Creation
@@ -10,44 +11,18 @@ namespace g5\commands\cfepp\final3;
 use g5\G5;
 use tiglib\patterns\Command;
 
-class gauq implements Command {
-    
-    /** Possible value for parameter 1 **/
-    const POSSIBLE_PARAMS = [
-        'update' => "Updates column GQID of file data/tmp/cfepp/cfepp-1120-nienhuys.csv",
-        'report' => "",
-    ];                                                                                                  
+class ids implements Command {
     
     /** 
-        @param $param Array containing one element (a string)
-                      Must be one of self::POSSIBLE_PARAMS
+        @param $param Empty array
         @return Report
     **/
     public static function execute($params=[]): string{
-        
-        $possibleParams_str = '';
-        foreach(self::POSSIBLE_PARAMS as $k => $v){
-            $possibleParams_str .= "  '$k' : $v\n";
-        }
-        if(count($params) == 0){
-            return "PARAMETER MISSING\n"
-                . "Possible values for parameter :\n$possibleParams_str\n";
-        }
-        if(count($params) > 1){
+        if(count($params) > 0){
             return "USELESS PARAMETER : {$params[1]}\n";
         }
-        //
-        if($params[0] == 'check'){
-            return self::check();
-        }
-        //
-        $reportType = $params[0];
-        if(!in_array($reportType, array_keys(self::POSSIBLE_PARAMS))){
-            return "INVALID PARAMETER\n"
-                . "Possible values for parameter :\n$possibleParams_str\n";
-        }
         
-        $report =  "--- cfepp final3 gauq ---\n";                                                                     
+        $report =  "--- cfepp final3 ids ---\n";                                                                     
 
         $m402_ids = M1writers::loadTmpFile_id(); // Assoc array, keys = Müller id
         $m402_days = []; // Assoc array, keys = birth days

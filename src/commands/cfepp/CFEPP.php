@@ -19,7 +19,7 @@ class CFEPP {
         @param  $num        Unique id within CFEPP file
     **/
     public static function cfeppId($num){
-        return 'CF-' . $num;
+        return $num;
     }
     
     // *********************** Source management ***********************

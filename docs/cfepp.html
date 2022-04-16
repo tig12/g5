@@ -125,7 +125,7 @@ As Nienhuys' file roughly contains the same fields as the published list, the me
 <table class="wikitable margin">
     <tr>
         <th>CFEPP name</th>
-        <th>G5 name</th>
+        <th>G5 name<br>(in tmp csv file)</th>
         <th>Meaning</th>
     </tr>
     <tr>
@@ -137,7 +137,7 @@ As Nienhuys' file roughly contains the same fields as the published list, the me
     </tr>
     <tr>
         <td>SRC</td>
-        <td></td>
+        <td>SRC</td>
         <td>
             <b>Information source</b>
             <ul>
@@ -149,7 +149,7 @@ As Nienhuys' file roughly contains the same fields as the published list, the me
     </tr>
     <tr>
         <td>LV</td>
-        <td></td>
+        <td>LV</td>
         <td>
             <b>Level</b>
             <ul>
@@ -239,7 +239,7 @@ As Nienhuys' file roughly contains the same fields as the published list, the me
     </tr>
     <tr>
         <td>S</td>
-        <td></td>
+        <td>M12</td>
         <td>
             <b>Mars sector</b> (from 1 to 12)
         </td>
@@ -249,7 +249,10 @@ As Nienhuys' file roughly contains the same fields as the published list, the me
 
 <!-- ********************************************************************************* -->
 <h2>CFEPP unique id</h2>
-
+An id, stored in column <code>CFID</code> of tmp files, is assigned to each record of the file.
+<br>Equals to the position of a record in file <code>final3</code>.
+<br>Goes from 1 to 1120.
+<br>Records 1 to 1066 correspond to the list published in CFEPP booklet.
 
 <!-- ********************************************************************************* -->
 <h2></h2>
@@ -265,8 +268,6 @@ COLAS Paul
 1 person without given name:
 MARTIN-LEGEAY
 -->
-
-
 
 </article>
 </main>
