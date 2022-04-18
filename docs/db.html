@@ -175,7 +175,7 @@ Note that this id may change, for example if name or birth date of a person is c
 
 
 <!-- ********************************************************************************* -->
-<h2 id="implementation-details">Implementation</h2>
+<h2 id="implementation-details">DB queries</h2>
 The database uses <a href="https://www.postgresql.org/">postgresql</a>.
 <br>SQL to create the tables are located in <code>src/model/db-create-tables</code>
 <br>G5 database uses <a href="https://www.postgresql.org/docs/12/datatype-json.html">jsonb</a> type to store structured (hierarchical) fields. 
@@ -186,7 +186,17 @@ The database uses <a href="https://www.postgresql.org/">postgresql</a>.
 <div class="margin-bottom">The use of jsonb type implies to use an unusual syntax to query the database.</div>
 
 Show person with Gauquelin id = 'A1-514':
-<pre>select * from person where ids_partial->>'lerrcp'='A1-514';</pre>
+<pre>
+select * from person where ids_partial->>'lerrcp'='A1-514';
+
+# jsonb values of a person ids_partial field:
+{"ertel": "ES-4137", "lerrcp": "A1-514"}
+</pre>
+
+Select all persons related to info source A1:
+<pre>
+select * from person where ids_partial->>'lerrcp'::text != 'null';
+</pre>
 
 Show the same person using the field <code>ids-in-sources</code>:
 <pre>select * from person where ids_in_sources->>'a1'='514';</pre>

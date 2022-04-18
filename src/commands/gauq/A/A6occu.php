@@ -70,7 +70,7 @@ class A6occu implements Command {
                     continue;
                 }
                 preg_match($pattern, $line, $m);
-                $p = Person::getBySourceId('a6', $m[1]);
+                $p = Person::sourceId2person('a6', $m[1]);
                 $p->addOccus([$occu]);
                 $new = ['occus' => $occu];
                 $p->addHistory(

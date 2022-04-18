@@ -162,8 +162,8 @@ class tmp2db implements Command {
                 // Missing names in A1 are not handled here (done by class fixA1)
                 $new = [];
                 $tmp = LERRCP::explodeGauquelinId($line['GQID']);
-                // $tmp != 2 for thoma-georg-1937-08-20 (the only record coming from Müller)
                 if(count($tmp) == 2){
+                    // $tmp != 2 for thoma-georg-1937-08-20 (the only record coming from Müller)
                     $NUM = $tmp[1];
                 }
                 switch($subgroupSlug){
@@ -173,7 +173,7 @@ class tmp2db implements Command {
                     case 'ertel-1-first-french':
                     case 'ertel-2-first-european':
                     case 'ertel-6-para-champions':
-                        $p = Person::getBySourceId('a1', $NUM);
+                        $p = Person::sourceId2person('a1', $NUM);
                         $new['birth']['date'] = $line['DATE']; // A1 contains only date UT
                         $new['sex'] = $line['SEX'];
                         $nRestoredSex++;
@@ -182,7 +182,7 @@ class tmp2db implements Command {
                 	// Already in D6
                     //
                     case 'ertel-9-second-european':
-                        $p = Person::getBySourceId('d6', $NUM);
+                        $p = Person::sourceId2person('d6', $NUM);
                         $new['sex'] = $line['SEX'];
                         $nRestoredSex++;
                         // replace occu by Ertel value as Gauquelin file contains only 'sportsperson'
@@ -195,7 +195,7 @@ class tmp2db implements Command {
                     //
                     case 'ertel-8-csicop-us':
                     case 'ertel-12-gauq-us':
-                        $p = Person::getBySourceId('d10', $NUM);
+                        $p = Person::sourceId2person('d10', $NUM);
                         $new['sex'] = $line['SEX'];
                         $nRestoredSex++;
                         // replace occu by Ertel value as Gauquelin file contains only 'sportsperson'
@@ -209,13 +209,13 @@ class tmp2db implements Command {
                 //
                 // Beltoise Jean Pierre 1937-04-26 ; in file E3, not mentioned by Ertel
                 if($line['GQID'] == 'E3-95'){
-                    $p = Person::getBySourceId('e3', 95);
+                    $p = Person::sourceId2person('e3', 95);
                     $p->addOccu(ErtelSport::computeSport($line));
                     $new['occus'] = [ErtelSport::computeSport($line)];
                 }
                 // thoma-georg-1937-08-20 ; in file Müller 2 (612 famous men)
                 else if($line['NR'] == 4011){
-                    $p = Person::getBySourceId('afd2', 558);
+                    $p = Person::sourceId2person('afd2', 558);
                     // no new information added by Ertel
                 }
                 

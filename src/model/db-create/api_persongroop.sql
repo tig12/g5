@@ -10,7 +10,7 @@ select
     g.name              "group_name",
     g.type              "group_type",
     p.ids_in_sources,
-    p.ids_partial,
+    p.partial_ids,
     p.sex,
     p.name,
     p.occus,

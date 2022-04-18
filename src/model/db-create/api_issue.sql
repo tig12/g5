@@ -6,7 +6,7 @@ create or replace view api_issue as
         slug,
         name,
         birth,
-        ids_partial,
+        partial_ids,
         issues,
         occus
     from person

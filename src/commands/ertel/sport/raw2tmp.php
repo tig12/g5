@@ -90,7 +90,9 @@ class raw2tmp implements Command {
             $new['EXTEND']      = trim(mb_substr($line, 251, 3));
             $new['NIENHUYS']    = trim(mb_substr($line, 260, 6));
             // Column 'L' dropped because contains nothing for all lines in newalch file
-            $new['GQID'] = self::compute_GQID($new);
+            //
+            $new['GQID'] = ErtelSport::GQIDfrom3a_sports($new);
+            //
             // one particular case: Beltoise Jean Pierre 1937-04-26
             if($new['NR'] == 332){
                 $new['GQID'] = 'E3-95';
@@ -157,29 +159,6 @@ class raw2tmp implements Command {
         return $report;
     }
     
-    
-    // ******************************************************
-    /**
-        Auxiliary of execute()
-        Computes field GQID, string like "A1-123"
-    **/
-    private static function compute_GQID(&$new){
-        if(substr($new['QUEL'], 0, 2) != 'G:'){
-            return '';
-        }
-        $GQID = '';
-        $rest = substr($new['QUEL'], 2);
-        switch($rest){
-        	case 'A01': $GQID = 'A1'; break;
-        	case 'D06': $GQID = 'D6'; break;
-        	case 'D10': $GQID = 'D10'; break;
-        }
-        $GQID .= '-' . $new['G_NR'];
-        return $GQID;
-    }
-    
-    
-    // ******************************************************
     /**
         Auxiliary of execute()
     **/

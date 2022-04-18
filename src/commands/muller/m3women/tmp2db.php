@@ -148,7 +148,7 @@ class tmp2db implements Command {
                 $tmp = explode('-', $gqid);
                 $curaSourceSlug = LERRCP::datafile2sourceSlug($tmp[0]);
                 $NUM = $tmp[1];
-                $p = Person::getBySourceId($curaSourceSlug, $NUM);
+                $p = Person::sourceId2person($curaSourceSlug, $NUM);
                 if(is_null($p)){
                     throw new \Exception("$gqid : try to update an unexisting person");
                 }

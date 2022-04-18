@@ -32,9 +32,9 @@ class Person {
             $row['ids-in-sources'] = json_decode($row['ids_in_sources'], true);
             unset($row['ids_in_sources']);
         }
-        if(isset($row['ids_partial'])){
-            $row['ids-partial'] = json_decode($row['ids_partial'], true);
-            unset($row['ids_partial']);
+        if(isset($row['partial_ids'])){
+            $row['ids-partial'] = json_decode($row['partial_ids'], true);
+            unset($row['partial_ids']);
         }
         if(isset($row['name'])){
             $row['name'] = json_decode($row['name'], true);                             
@@ -82,6 +82,10 @@ class Person {
         return self::row2person($res);
     }
     
+    //
+    // ids_in_sources   related to raw input sources: 3a_sports (for ertel-sport), final3 (for cfepp)
+    //
+    
     /**
         Returns an object of type Person from storage,
         using its id for a given source,
@@ -91,7 +95,7 @@ class Person {
         @param  $source     Slug of the source
         @param  $idInSource Local id of the person within this source 
     **/
-    public static function getBySourceId($sourceSlug, $idInSource): ?Person {
+    public static function sourceId2person($sourceSlug, $idInSource): ?Person {
         $dblink = DB5::getDbLink();
         $query = "select * from person where ids_in_sources @> '{\"$sourceSlug\": \"$idInSource\"}'";
 //echo "$query\n";
@@ -109,8 +113,14 @@ class Person {
         return self::row2person($res);
     }
     
+    
+    //
+    // partial_ids  related to parent sources: lerrcp, muller, ertel
+    //
+    
     /**
-        Returns an object of type Person from storage,
+        Returns one object of type Person from storage,
+        
         using its id for a given source,
         or null if doesn't exist.
         Ex : to get a person whose id in source a1 is 254, call
@@ -119,9 +129,25 @@ class Person {
         @param  $partialId partial id of the person within this source 
     **/
 // WARNING - this function is not used anymore => remove ?
-    public static function getByPartialId($sourceSlug, $partialId): ?Person {
+    public static function partialId2person($sourceSlug, $partialId): ?Person {
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("select * from person where ids_partial @> '{\"$sourceSlug\": \"$partialId\"}'");
+        $stmt = $dblink->prepare("select * from person where partial_ids @> '{\"$sourceSlug\": \"$partialId\"}'");
+        $stmt->execute([]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if($res === false || count($res) == 0){
+            return null;
+        }
+        return self::row2person($res);
+    }
+    
+    /** 
+        Returns an array of objects of type Person.
+        Persons associated to some sources used to identify partial ids of a person.
+        g55, lerrcp, ertel, cfepp, 
+    **/
+    public static function partialId2persons($sourceSlug): ?Person {
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare("select * from person where partial_ids->>'$sourceSlug'::text != 'null'");
         $stmt->execute([]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         if($res === false || count($res) == 0){
@@ -337,6 +363,18 @@ class Person {
         return '';
     }
     
+    /**
+       Returns the history entry corresponding to a given source.
+    **/
+    public function historyFromSource($sourceSlug) {
+        foreach($this->data['history'] as $hist){
+            if($hist['source'] == $sourceSlug){
+                return $hist;
+            }
+        }
+        return null;
+    }
+    
     // *********************** update fields *******************************
     
     /** 
@@ -477,7 +515,7 @@ class Person {
         $stmt = $dblink->prepare('insert into person(
             slug,
             ids_in_sources,
-            ids_partial,
+            partial_ids,
             name,
             sex,
             birth,
@@ -517,7 +555,7 @@ class Person {
         $stmt = $dblink->prepare('update person set
             slug=?,
             ids_in_sources=?,
-            ids_partial=?,
+            partial_ids=?,
             name=?,
             sex=?,
             birth=?,

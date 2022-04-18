@@ -154,7 +154,7 @@ class tmp2db implements Command {
                 [$gauqSourceSlug, $NUM] = M5medics::gnr2LERRCPSourceId($line['GNR']);
                 $gauqFile = strtoupper($gauqSourceSlug);
                 $gauqId = LERRCP::gauquelinId($gauqFile, $NUM);
-                $p = Person::getBySourceId($gauqSourceSlug, $NUM); // DB
+                $p = Person::sourceId2person($gauqSourceSlug, $NUM); // DB
                 if(is_null($p)){
                     throw new \Exception("$gauqId : try to update an unexisting person");
                 }

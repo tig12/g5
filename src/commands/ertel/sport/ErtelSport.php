@@ -21,6 +21,27 @@ class ErtelSport {
     **/
     const TRUST_LEVEL = 4;
     
+    
+    // ******************************************************
+    /**
+        Computes field GQID, string like "A1-123" from one line of file 3a_sports 
+        @param  $rawLine    Associative array, keys = field names: NR, G_NR ...
+    **/
+    public static function GQIDfrom3a_sports(&$rawLine){
+        if(substr($rawLine['QUEL'], 0, 2) != 'G:'){
+            return '';
+        }
+        $GQID = '';
+        $rest = substr($rawLine['QUEL'], 2);
+        switch($rest){
+        	case 'A01': $GQID = 'A1'; break;
+        	case 'D06': $GQID = 'D6'; break;
+        	case 'D10': $GQID = 'D10'; break;
+        }
+        $GQID .= '-' . $rawLine['G_NR'];
+        return $GQID;
+    }
+    
     // *********************** Source management ***********************
     
     /**
@@ -60,7 +81,7 @@ class ErtelSport {
         'ertel-13-plus-special',
     ];
     
-    /** Returns a Group object for ertel-4384-sportsmen. **/
+    /** Returns an empty Group object for ertel-4384-sportsmen. **/
     public static function getGroup(): Group {
         return Group::createFromDefinitionFile(self::GROUP_DEFINITION_FILE);
     }

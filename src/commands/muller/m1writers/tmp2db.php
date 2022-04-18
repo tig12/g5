@@ -135,7 +135,7 @@ class tmp2db implements Command {
                 [$curaSourceSlug, $NUM] = M1writers::gqid2curaSourceId($line['GQID']);
                 $curaFile = strtoupper($curaSourceSlug);
                 $gqId = LERRCP::gauquelinId($curaFile, $NUM);
-                $p = Person::getBySourceId($curaSourceSlug, $NUM);
+                $p = Person::sourceId2person($curaSourceSlug, $NUM);
                 if(is_null($p)){
                     throw new \Exception("$gqId : try to update an unexisting person");
                 }

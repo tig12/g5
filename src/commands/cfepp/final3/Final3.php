@@ -173,7 +173,7 @@ class Final3 {
     
     // *********************** Tmp files manipulation ***********************
     
-    /** Temporary file in data/tmp/cfepp/ **/
+    /** Temporary file in data/tmp/cfepp/cfepp-1120-nienhuys.csv **/
     public static function tmpFilename(){
         return implode(DS, [Config::$data['dirs']['tmp'], 'cfepp', 'cfepp-1120-nienhuys.csv']);
     }
@@ -183,22 +183,22 @@ class Final3 {
         return csvAssociative::compute(self::tmpFilename(), G5::CSV_SEP);
     }
     
-    /** Loads data/tmp/csicop/irving/csicop-408-irving.csv in an asssociative array ; keys = CSID **/
-/* 
-    public static function loadTmpFile_csid(){
+    /** Loads data/tmp/cfepp/cfepp-1120-nienhuys.csv in an asssociative array ; keys = CFID **/
+ 
+    public static function loadTmpFile_cfid(){
         $csv = self::loadTmpFile();
         $res = [];              
         foreach($csv as $row){
-            $res[$row['CSID']] = $row;
+            $res[$row['CFID']] = $row;
         }
         return $res;
     }
-*/
+
     
     // *********************** Tmp raw file manipulation ***********************
     
     /**
-        Returns the name of a "tmp raw file", data/tmp/csicop/irving/csicop-408-irving-raw.csv
+        Returns the name of a "tmp raw file", data/tmp/cfepp/cfepp-1120-nienhuys-raw.csv
         (file used to keep trace of the original raw values).
     **/
     public static function tmpRawFilename(){
@@ -213,4 +213,4 @@ class Final3 {
         return csvAssociative::compute(self::tmpRawFilename());
     }                                           
 
-}// end class
+} // end class

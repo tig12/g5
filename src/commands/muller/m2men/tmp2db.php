@@ -103,7 +103,7 @@ class tmp2db implements Command {
                 // M2-457: Quasimodo, Salvatore 20.08.1901 04.10 -1.00 I Modica 36 N 48 014 E 58 AR 01 56 SA N
                 // Birth time and birth place differ
                 // Update with M2 data (because birth place corresponds to Wikipedia) But should be checked
-                $p = Person::getBySourceId(M1writers::LIST_SOURCE_SLUG, '457');
+                $p = Person::sourceId2person(M1writers::LIST_SOURCE_SLUG, '457');
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['tzo'] = $line['TZO'];
                 if($line['TIMOD'] == 'LMT'){
@@ -187,7 +187,7 @@ class tmp2db implements Command {
                 $tmp = explode('-', $gqid);
                 $curaSourceSlug = LERRCP::datafile2sourceSlug($tmp[0]);
                 $NUM = $tmp[1];
-                $p = Person::getBySourceId($curaSourceSlug, $NUM);
+                $p = Person::sourceId2person($curaSourceSlug, $NUM);
                 if(is_null($p)){
                     throw new \Exception("$gqid : try to update an unexisting person");
                 }

@@ -5,7 +5,7 @@ create table person (
     id              serial primary key,
     slug            varchar(255) unique not null,
     ids_in_sources  jsonb not null,
-    ids_partial     jsonb not null,
+    partial_ids     jsonb not null,
     name            jsonb not null,
     sex             char(1),
     birth           jsonb not null,
