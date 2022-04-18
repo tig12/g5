@@ -73,10 +73,7 @@ class raw2tmp implements Command {
             $new['LAT']     = str_replace('+', '', $new_raw['LAT']);
             $new['M12']     = $new_raw['S'];
             $res .= implode(G5::CSV_SEP, $new) . "\n";
-//if($N == 10) break;
         }
-//echo "$res\n";
-//exit;
         
         $dir = dirname($outfile);
         if(!is_dir($dir)){

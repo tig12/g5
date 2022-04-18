@@ -188,13 +188,12 @@ class Final3 {
     public static function loadTmpFile_cfid(){
         $csv = self::loadTmpFile();
         $res = [];              
-        foreach($csv as $row){
-            $res[$row['CFID']] = $row;
+        foreach($csv as $cur){
+            $res[$cur['CFID']] = $cur;
         }
         return $res;
     }
 
-    
     // *********************** Tmp raw file manipulation ***********************
     
     /**
