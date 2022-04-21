@@ -9,7 +9,7 @@
 namespace tiglib\arrays;
 
 
-class csvAssociative{
+class csvAssociative {
     
     /**
         Fills a csv file to an array of associative arrays.
@@ -40,4 +40,4 @@ class csvAssociative{
         return $res;
     }
     
-}// end class
+} // end class

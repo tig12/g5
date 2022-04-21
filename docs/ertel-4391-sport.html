@@ -86,7 +86,7 @@ D6] => 450
             <a href="#integration-to-g5">Integration to g5</a>
             <ul>
                 <li><a href="#2-1-full-execution">Full execution</a></li>
-                <li><a href="#2-2-raw2csv">raw2csv</a></li>
+                <li><a href="#2-2-raw2tmp">raw2tmp</a></li>
                 <li><a href="#2-3-fix-gauquelin-a1-names">Fix Gauquelin A1 names</a></li>
                 <li><a href="#2-4-generate-skeptics-files">Generate skeptics' files</a></li>
             </ul>
@@ -118,9 +118,6 @@ D6] => 450
     </ul>
 </nav>
 
-
-
-
 <!-- ********************************************************************************* -->
 <h2 id="ertel-4391-generalities">Ertel 4391 generalities</h2>
 
@@ -136,7 +133,7 @@ I also found information about this file in these places :
         <br>Reffered as <b>[Ertel 88]</b> in this page.
     </li>
     <li>
-        "The Tenacious Mars Effect" by Suitbert Ertel and Kenneth Irving, 1996.
+        "The Tenacious Mars Effect", a book by Suitbert Ertel and Kenneth Irving, 1996.
         <br>Reffered as <b>[TME 96]</b> in this page.
     </li>
     <li>
@@ -195,43 +192,30 @@ One very strange feature of this file : many records don't contain birth time. S
 <!-- ********************************************************************************* -->
 <h2 id="integration-to-g5">Integration to g5</h2>
 
-
-<!-- ********************************************************************************* -->
-<!-- ********************************************************************************* -->
-<div class="warning block">
-This paragraph is obsolete.
-<br>Current code extracts information from the input file
-<br>and generates a corrected file.
-<br>But data are not yet imported in g5 database.
-</div>
-<!-- ********************************************************************************* -->
-<!-- ********************************************************************************* -->
-
-The raw file is <code>data/raw/newalchemypress.com/03-ertel/3a_sports-utf8.txt"</code> (an UTF-8 version of <code>3a_sports.txt</code>).
+The input file used by g5 is <a href="https://github.com/tig12/gauquelin5/blob/main/data/raw/ertel/3a_sports-utf8.txt">data/raw/ertel/3a_sports-utf8.txt</a> ; it is an exact copy of file <code>3a_sports.txt</code> retrieved from newalchemypress.com, converted to UTF-8.
 
 <!-- ************************************* -->
 <h3 id="2-1-full-execution">Full execution</h3>
 
 The full set of transformations can be executed with the command :
 
-<pre>php run-g5.php ertel sport all</pre>
-
-This is equivalent to :
-
 <pre>
-php run-g5.php ertel sport raw2csv
+php run-g5.php ertel sport raw2tmp
 php run-g5.php ertel sport tweak2tmp
-php run-g5.php ertel sport export dl
+php run-g5.php ertel sport fixA1 update
+php run-g5.php ertel sport tmp2db
 </pre>
 
+These commands must be executed AFTER having imported LERRCP (Gauquelin) files.
+
 <!-- ************************************* -->
-<h3 id="2-2-raw2csv">raw2csv</h3>
-The first step is to generate the file <b><code>5-newalch-csv/4391SPO.csv</code></b> :
-<pre>php run-g5.php ertel sport raw2csv</pre>
-This step copies the contents of <code>3a_sports-utf8.txt</code> to <code>4391SPO.csv</code> with the following modifications ;
+<h3 id="2-2-raw2tmp">raw2tmp</h3>
+The first step is to generate the file <b><code>data/tmp/ertel/ertel-4384-sport.csv</code></b> :
+<pre>php run-g5.php ertel sport raw2tmp</pre>
+This step copies the contents of <code>3a_sports-utf8.txt</code> to <code>ertel-4384-sport.csv</code> with the following modifications ;
 <ul>
     <li>
-        Column <code>GNUM</code> is created, containing a <a href="gauquelin.html">Gauquelin id</a> (a string like "A1-123") from columns <code>QUEL</code> and <code>G_NR</code> for records originating from A1, D6 and D10.
+        Column <code>GQID</code> is created, containing a <a href="gauquelin.html">Gauquelin id</a> (a string like "A1-123") from columns <code>QUEL</code> and <code>G_NR</code> for records originating from A1, D6 and D10.
         <br>Left empty for records of other origin.
     </li>
     <li>
@@ -247,10 +231,10 @@ This step copies the contents of <code>3a_sports-utf8.txt</code> to <code>4391SP
         Column <code>NATION</code> produces column <code>CY</code>, ISO 3166.
     </li>
     <li>
-        Column <code>MF</code> produces column <code>G</code> (gender), containing "M" or "F" (column is empty for males in <code>3a_sports-utf8.txt</code>).
+        Column <code>MF</code> produces column <code>SEX</code>, containing "M" or "F" (column is empty for males in <code>3a_sports-utf8.txt</code>).
     </li>
     <li>
-        Column <code>SPORTART</code> is renamed <code>SPORT</code> and is converted to.
+        Column <code>SPORTART</code> is renamed <code>SPORT</code>.
     </li>
     <li>
         Column <code>INDGRUP</code> is renamed <code>IG</code> (individual or collective sport) ; contains the same value as in <code>3a_sports-utf8.txt</code>.
@@ -260,6 +244,11 @@ This step copies the contents of <code>3a_sports-utf8.txt</code> to <code>4391SP
     </li>
 </ul>
 Other columns are copied as is.
+
+<!-- ************************************* -->
+<h3>tweak2tmp</h3>
+Human corrections are stored in file <a href="https://github.com/tig12/gauquelin5/blob/main/data/db/init/newalch-tweak/ertel-4384-sport.yml">data/db/init/newalch-tweak/ertel-4384-sport.yml</a>.
+<br>They are used to modify tmp file.
 
 <!-- ************************************* -->
 <h3 id="2-3-fix-gauquelin-a1-names">Fix Gauquelin A1 names</h3>
@@ -283,8 +272,13 @@ Nb corrections : 117
 
 <!-- ************************************* -->
 <h3 id="2-4-generate-skeptics-files">Generate skeptics' files</h3>
-Draft code ; in <code>4391SPO.csv</code>, the associations between lines and skeptic ids are sometimes wrong or missing.
-<br>Can come from a problem in <code>4391SPO.csv</code>, a misunderstanding of column meanings or a bug in the code.
+
+<div class="warning block">
+This paragraph is obsolete, it describes a previous version of the code, not re-integrated yet.
+</div>
+
+Draft code ; in <code>ertel-4384-sport.csv</code>, the associations between lines and skeptic ids are sometimes wrong or missing.
+<br>Can come from a problem in <code>ertel-4384-sport.csv</code>, a misunderstanding of column meanings or a bug in the code.
 
 <pre>
 php run-g5.php ertel sport ertel2skeptics 
@@ -313,7 +307,7 @@ CFEPPP : 925 records saved - stored in data/5-tmp/cfepp/925-cfepp.csv
 
 <!-- ******************** -->
 <h4>Comité Para</h4>
-In <code>4391SPO.csv</code>, 611 records have a <code>PARA_NR</code> value.
+In <code>ertel-4384-sport.csv</code>, 611 records have a <code>PARA_NR</code> value.
 <br>
 <br><b>In [TME 96]</b> p SE-18, Ertel talks about 611 records :
 <ul>
@@ -322,7 +316,7 @@ In <code>4391SPO.csv</code>, 611 records have a <code>PARA_NR</code> value.
 </li>
 </ul>
 
-<br>It corresponds with <code>4391SPO.csv</code> : out of the 611 <code>PARA_NR</code>, 
+<br>It corresponds with <code>ertel-4384-sport.csv</code> : out of the 611 <code>PARA_NR</code>, 
 <ul>
     <li>535 records have column <code>QUEL</code> = <code>G:A01</code> (come from file A1) ; they have birth date and time</li>
     <li>76 records have column <code>QUEL</code> = <code>GCPAR</code> ; they have birth day but not birth time.</li>
@@ -338,7 +332,7 @@ Date comparisons done to <a href="csicop.html">build CSICOP test</a> showed erro
     <tr><td>2873</td><td>D10-894</td><td>Miller John L. 1947-04-29</td></tr>
 </table>
 
-Ertel file also contains 5 wrong associations to CSICOP, fixed in step <code>tweak2tmp</code> (see file <code>3-edited/newalch-tweaked/4391SPO.yml</code> for   details).
+Ertel file also contains 5 wrong associations to CSICOP, fixed in step <code>tweak2tmp</code>.
 <br>
 <br>One record without <code>CSINR</code> could be identified during <a href="csicop.html">CSICOP merge</a> :
 <br>Miller Freddie 1911-04-03 ; NR = 2872 ; CSID = 254

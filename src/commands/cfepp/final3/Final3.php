@@ -134,6 +134,7 @@ class Final3 {
         'FNAME',
         'GNAME',
         'DATE',
+// TODO         'TR',
         'DATE-UT',
         'PLACE',
         'C2',
