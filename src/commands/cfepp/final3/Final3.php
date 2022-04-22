@@ -22,16 +22,41 @@ class Final3 {
     **/
     const TRUST_LEVEL = Trust::CHECK;
     
-    /** Slug of source  **/
-    const LIST_SOURCE_SLUG = 'cfepp-final3';
+    // *********************** Source management ***********************
+    
+    /** Slug of final3 source **/
+    const SOURCE_SLUG = 'cfepp-final3';
     
     /**
         Path to the yaml file containing the characteristics of the source.
         Relative to directory data/db/source
     **/
-    const LIST_SOURCE_DEFINITION_FILE = 'cfepp' . DS . self::LIST_SOURCE_SLUG . '.yml';
+    const SOURCE_DEFINITION_FILE = 'cfepp' . DS . self::SOURCE_SLUG . '.yml';
     
-    // group definitions are located in data/db/group/cfepp
+    // *********************** Group management ***********************
+
+    /** Slug of groups related to final3 **/
+    const GROUP_1120_SLUG = 'cfepp-1120';
+    const GROUP_1066_SLUG = 'cfepp-1066';
+    
+    /**
+        Paths to the yaml file containing the characteristics of the groups related to final3.
+        Relative to directory data/db/group
+    **/
+    const GROUP_1120_DEFINITION_FILE = 'cfepp' . DS. self::GROUP_1120_SLUG . '.yml';
+    const GROUP_1066_DEFINITION_FILE = 'cfepp' . DS. self::GROUP_1066_SLUG . '.yml';
+    
+    /** Returns a Group object for 1120 sportsmen. **/
+    public static function getGroup1120(): Group {
+        return Group::createFromDefinitionFile(self::GROUP_1120_DEFINITION_FILE);
+    }
+    
+    /** Returns a Group object for 1066 sportsmen. **/
+    public static function getGroup1066(): Group {
+        return Group::createFromDefinitionFile(self::GROUP_1066_DEFINITION_FILE);
+    }
+    
+    // *********************** Fields ***********************
     
     /**
         Map between sport labels in final3 and g5 occupation slugs.
@@ -143,11 +168,6 @@ class Final3 {
         'LAT',
         'M12',
     ];
-    
-    
-    // *********************** Source management ***********************
-    
-    // *********************** Group management ***********************
     
     // *********************** Raw files manipulation ***********************
     

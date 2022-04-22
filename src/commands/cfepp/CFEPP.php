@@ -28,10 +28,28 @@ class CFEPP {
     const SOURCE_SLUG = 'cfepp';
     
     /**
-        Path to the yaml file containing the characteristics of the source describing CFEPP
+        Path to the yaml file containing the characteristics of the source describing CFEPP.
         Relative to directory data/db/source
     **/
     const SOURCE_DEFINITION_FILE = 'cfepp' . DS . self::SOURCE_SLUG .'.yml';
+    
+    /** Slug of source corresponding to the CFEPP booklet (publication containing CFEPP test). **/
+    const BOOKLET_SOURCE_SLUG = 'cfepp-booklet';
+    
+    /**
+        Path to the yaml file containing the characteristics of the source describing CFEPP booklet.
+        Relative to directory data/db/source
+    **/
+    const BOOKLET_SOURCE_DEFINITION_FILE = 'cfepp' . DS . self::BOOKLET_SOURCE_SLUG .'.yml';
+    
+    /** Slug of source corresponding to Jan Willem Nienhuys. **/
+    const NIENHUYS_SOURCE_SLUG = 'nienhuys';
+    
+    /**
+        Path to the yaml file containing the characteristics of the source describing Nienhuys.
+        Relative to directory data/db/source
+    **/
+    const NIENHUYS_SOURCE_DEFINITION_FILE = 'cfepp' . DS . self::NIENHUYS_SOURCE_SLUG .'.yml';
     
     // *********************** Output files manipulation ***********************
     

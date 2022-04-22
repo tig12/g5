@@ -1,141 +1,133 @@
 <?php
 /********************************************************************************
-    Loads files data/tmp/muller/5-medics/muller5-1083-medics.csv and muller5-1083-medics-raw.csv in database.
-    Affects records imported in A2 and E1
+    Loads files data/tmp/cfepp/cfepp-1120-nienhuys.csv and data/tmp/cfepp/cfepp-1120-nienhuys-raw.csv in database.
 
     NOTE: This code cannot be executed several times (won't update the records if already in database)
-        To re-execute it (eg for debug purposes), you must rebuild the database from scratch (at least A2 and E1)
+        To re-execute it (eg for debug purposes), you must rebuild the databse from scratch (at least A2 and E1)
+    
+    @pre This command must be executed after tmp2db of LERRCP A1 and Ertel Sport.
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
-    @history    2020-08-20 10:46:02+02:00, Thierry Graff : creation
+    @history    2022-04-22 17:12:58+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace g5\commands\muller\m5medics;
+namespace g5\commands\cfepp\final3;
 
 use tiglib\patterns\Command;
 use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
-use g5\commands\Newalch;
+use g5\commands\cfepp\final3\Final3;
 use g5\commands\gauq\LERRCP;
-use g5\commands\muller\Muller;
+use g5\commands\cfepp\CFEPP;
+use g5\commands\cpara\CPara;
 
 class tmp2db implements Command {
     
-    const REPORT_TYPE = [
-        'small' => 'Echoes the number of inserted / updated rows',
-        'full'  => 'Lists details of names and dates restoration on A2 or E1',
-    ];
-    
     /**
-        @param  $params Array containing 1 element : the type of report ; see REPORT_TYPE
+        @param  $params Empty array
     **/
     public static function execute($params=[]): string {
-        if(count($params) > 1){
-            return "USELESS PARAMETER : " . $params[1] . "\n";
-        }
-        $msg = '';
-        foreach(self::REPORT_TYPE as $k => $v){
-            $msg .= "  '$k' : $v\n";
-        }
-        if(count($params) != 1){
-            return "WRONG USAGE - This command needs a parameter to specify which output it displays. Can be :\n" . $msg;
-        }
-        $reportType = $params[0];
-        if(!in_array($reportType, array_keys(self::REPORT_TYPE))){
-            return "INVALID PARAMETER : $reportType - Possible values :\n" . $msg;
+        if(count($params) > 0){
+            return "USELESS PARAMETER : " . $params[0] . "\n";
         }
         
-        $report = "--- muller m5medics tmp2db ---\n";
+        $report = "--- cfepp final3 tmp2db ---\n";
         
-        if($reportType == 'full'){
-            $namesReport = '';
-            $datesReport = '';
+        // sources corresponding to this test - insert if does not already exist
+        
+        // sources 'cfepp' and 'cpara' already exist, created in Ertel Sport tmp2db
+        
+        $final3Source = Source::getBySlug(Final3::SOURCE_SLUG); // DB
+        if(is_null($final3Source)){
+            $final3Source = new Source(Final3::SOURCE_DEFINITION_FILE);
+            $final3Source->insert(); // DB
+            $report .= "Inserted source " . $final3Source->data['slug'] . "\n";
         }
         
-        // source corresponding to Müller's Astro-Forschungs-Daten - insert if does not already exist
-        $afdSource = Source::getBySlug(Muller::SOURCE_SLUG); // DB
-        if(is_null($afdSource)){
-            $afdSource = new Source(Muller::SOURCE_DEFINITION_FILE);
-            $afdSource->insert(); // DB
-            $report .= "Inserted source " . $afdSource->data['slug'] . "\n";
+        $cfeppBookletSource = Source::getBySlug(CFEPP::BOOKLET_SOURCE_SLUG); // DB
+        if(is_null($cfeppBookletSource)){
+            $cfeppBookletSource = new Source(CFEPP::BOOKLET_SOURCE_DEFINITION_FILE);
+            $cfeppBookletSource->insert(); // DB
+            $report .= "Inserted source " . $cfeppBookletSource->data['slug'] . "\n";
         }
         
-        // source corresponding to newalchemypress - insert if does not already exist
-        $newalchSource = Source::getBySlug(Newalch::SOURCE_SLUG); // DB
-        if(is_null($newalchSource)){
-            $newalchSource = new Source(Newalch::SOURCE_DEFINITION_FILE);
-            $newalchSource->insert(); // DB
-            $report .= "Inserted source " . $newalchSource->data['slug'] . "\n";
+        $nienhuysSource = Source::getBySlug(CFEPP::NIENHUYS_SOURCE_SLUG); // DB
+        if(is_null($nienhuysSource)){
+            $nienhuysSource = new Source(CFEPP::NIENHUYS_SOURCE_DEFINITION_FILE);
+            $nienhuysSource->insert(); // DB
+            $report .= "Inserted source " . $nienhuysSource->data['slug'] . "\n";
         }
         
-        // source of Müller's booklet 5 physicians - insert if does not already exist
-        $bookletSource = Source::getBySlug(M5medics::BOOKLET_SOURCE_SLUG); // DB
-        if(is_null($bookletSource)){
-            $bookletSource = new Source(M5medics::BOOKLET_SOURCE_DEFINITION_FILE);
-            $bookletSource->insert(); // DB
-            $report .= "Inserted source " . $bookletSource->data['slug'] . "\n";
-        }
+        $cfeppSource = Source::getBySlug(CFEPP::SOURCE_SLUG); // DB
         
-        // source of 5a_muller_medics.txt - insert if does not already exist
-        $source = Source::getBySlug(M5medics::LIST_SOURCE_SLUG); // DB
-        if(is_null($source)){
-            $source = new Source(M5medics::LIST_SOURCE_DEFINITION_FILE);
-            $source->insert(); // DB
-            $report .= "Inserted source " . $source->data['slug'] . "\n";
-        }
+        $cparaSource = Source::getBySlug(CPara::SOURCE_SLUG); // DB
         
-        // group
-        $g = Group::createFromSlug(M5medics::GROUP_SLUG);
+        // groups
+        
+        $g1120 = Group::createFromSlug(Final3::GROUP_1120_SLUG);
         if(is_null($g)){
-            $g = M5medics::getGroup();
-            $g->data['id'] = $g->insert(); // DB
-            $report .= "Inserted group " . $g->data['slug'] . "\n";
+            $g1120 = Final3::getGroup1120();
+            $g1120->data['id'] = $g1120->insert(); // DB
+            $report .= "Inserted group " . $g1120->data['slug'] . "\n";
         }
         else{
-            $g->deleteMembers(); // DB - only deletes asssociations between group and members
+            $g1120->deleteMembers(); // DB - only deletes asssociations between group and members
+        }
+        
+        $g1066 = Group::createFromSlug(Final3::GROUP_1120_SLUG);
+        if(is_null($g)){
+            $g1066 = Final3::getGroup1120();
+            $g1066->data['id'] = $g1066->insert(); // DB
+            $report .= "Inserted group " . $g1066->data['slug'] . "\n";
+        }
+        else{
+            $g1066->deleteMembers(); // DB - only deletes asssociations between group and members
         }
         
         $nInsert = 0;
         $nUpdate = 0;
-        $nRestoredNames = 0;
-        $nDiffDates = 0;
+//        $nRestoredNames = 0;
+//        $nDiffDates = 0;
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
-        $lines = M5medics::loadTmpFile();
-        $linesRaw = M5medics::loadTmpRawFile();
+        $lines = Final3::loadTmpFile();
+        $linesRaw = Final3::loadTmpRawFile();
         $N = count($lines);
         $t1 = microtime(true);
-        $newOccus = ['physician'];
         for($i=0; $i < $N; $i++){
             $line = $lines[$i];                                                                        
             $lineRaw = $linesRaw[$i];
-            $mullerId = Muller::mullerId($source->data['slug'], $line['NR']);
-            if($line['GNR'] == ''){
+            $cfid = CFEPP::cfeppId($line['CFID']);
+            $gqid = $line['GQID'];
+            $erid = $line['ERID'];
+            $cpid = $line['CPID'];
+die("\n<br>die here " . __FILE__ . ' - line ' . __LINE__ . "\n");
+            if($gqid == ''){
                 // Person not in Gauquelin data
                 $p = new Person();
                 $new = [];
-                $new['trust'] = Newalch::TRUST_LEVEL;
+                $new['trust'] = Final3::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
-                $new['name']['nobl'] = $line['NOB'];
-                // Müller name considered as = to full name copied from birth certificate
-                $new['name']['official']['given'] = $line['GNAME'];
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['place']['name'] = $line['PLACE'];
                 $new['birth']['place']['c2'] = $line['C2'];
+                $new['birth']['place']['c2'] = $line['C3'];
                 $new['birth']['place']['cy'] = 'FR';
                 $new['birth']['place']['lg'] = (float)$line['LG'];
                 $new['birth']['place']['lat'] = (float)$line['LAT'];
                 //
-                $p->addOccus($newOccus);
+                $p->addOccus([$line['OCCU']]);
                 $p->addIdInSource($source->data['slug'], $line['NR']);
                 $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
-                $new['ids-in-sources'] = [ $source->data['slug'] => $line['NR'] ];
+                $new['ids-in-sources'] = [
+                    $source->data['slug'] => $line['NR']
+                ];
                 $new['occus'] = $newOccus;
                 $p->addHistory(
                     command: 'muller m5medics tmp2db',

@@ -161,71 +161,7 @@ Each person in g5 database has a unique id formed by its "slug", and several loc
 </table>
 The Gauquelin unique id of this person is <code>A1-2054</code>.
 
-<br><br>Similarily a <a href="muller.html#muller-unique-id">Müller unique id</a> and a <a href="ertel.html#ertel-unique-id">Ertel unique id</a> were defined.
-
-
-<!-- 
-<h2><a name="working-on-cura-data">Working on cura data</a></h2>
-
-If you type :
-<pre>php run-g5.php cura</pre>
-the program tells you the possible values of datafiles for cura dataset : 
-<pre>Possible datafiles for dataset cura : all, A, A1, A2, A3, A4, A5, A6, D6, D10, E1, E3</pre>
-
-<ul>
-    <li><code>all</code> will operate on all cura files.</li>
-    <li><code>A</code> will operate on all files of serie A.</li>
-    <li>Other values will operate on a single file.</li>
-</ul>
-
-<br>The precise list of transformations depends on the concerned file, but for all files, 
-<br>- the first transformation is <code>raw2tmp</code>,
-<br>- the second transformation is <code>tweak2tmp</code>
-<br>- the last transformation is <code>tmp2db</code>.
-
-<h3><a name="3-1-raw2tmp">raw2tmp</a></h3>
-For all cura datafiles, the first transformation is <code>raw2tmp</code>
-<br>It extracts data from html files located in <code>data/raw/cura.free.fr</code> and produces csv files located by default in <code>data/tmp/cura</code> (tmp dir can be modified in <code>config.yml</code>).
-<br>
-<br>This is done for example with the command :
-<pre>php run-g5.php cura D6 raw2tmp</pre>
-
-During this step, some corrections are applied to the data.
-<br>Some corrections are common to all files : 
-<ul>
-    <li>
-        Country codes are converted to ISO 3166.                                                                                                
-    </li>
-    <li>
-        Dates and times are merged to be stored in ISO 8601 format <code>YYYY-MM-DD HH:MM:SS</code>.
-        <br>In this step, dates are not modified ; if needed, legal time restoration (for A files) is done in a separate step.
-    </li>
-    <li>
-        Longitudes and latitudes are expressed in decimal degrees.
-    </li>
-    <li>
-        Occupation codes are computed.
-    </li>
-    <li>
-        Family and given names are computed when possible.
-    </li>
-</ul>
-
-<h3><a name="3-2-tweak2tmp">tweak2tmp</a></h3>
-This is done after <code>raw2tmp</code>, see <a href="tweak2tmp.html">page tweak2tmp</a>.
-
-<h3><a name="3-3-other-transformations">Other transformations</a></h3>
-
-Other transformations (between <code>tweak2tmp</code> and <code>tmp2db</code>) may modify the files located in <code>data/tmp/cura</code>.
-<br>
-<br>Precise transformations are described in the following pages :
-<ul class="spaced naked margin-top big2">
-    <li><a href="gauquelin-A.html">Serie A</a></li>
-    <li><a href="gauquelin-D6.html">File D6</a></li>
-    <li><a href="gauquelin-D10.html">File D10</a></li>
-    <li><a href="gauquelin-E1-E3.html">Files E1 and E3</a></li>
-</ul>
--->
+<br><br>Gauquelin unique id is one of the <i>partial ids</i> defined in g5 database. See <a href="db-person.html#1-3-partial-ids">complete list of partial ids</a>.
 
 <!-- ********************************************************************************* -->
 <h2 id="duplicates">Duplicates</h2>
