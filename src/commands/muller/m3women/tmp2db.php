@@ -51,7 +51,7 @@ class tmp2db implements Command {
         }
         
         // source of Müller's booklet 3 famous women - insert if does not already exist
-        $bookletSource = Source::getBySlug(M3women::BOOKLET_SOURCE_SLUG); // DB
+        $bookletSource = Source::createFromSlug(M3women::BOOKLET_SOURCE_SLUG); // DB
         if(is_null($bookletSource)){
             $bookletSource = new Source(M3women::BOOKLET_SOURCE_DEFINITION_FILE);
             $bookletSource->insert(); // DB
@@ -59,7 +59,7 @@ class tmp2db implements Command {
         }
         
         // source of muller3-234-women.txt - insert if does not already exist
-        $source = Source::getBySlug(M3women::LIST_SOURCE_SLUG); // DB
+        $source = Source::createFromSlug(M3women::LIST_SOURCE_SLUG); // DB
         if(is_null($source)){
             $source = new Source(M3women::LIST_SOURCE_DEFINITION_FILE);
             $source->insert(); // DB
@@ -120,7 +120,7 @@ class tmp2db implements Command {
                     $p->addOccus([ M3women::OCCUS[$line['OCCU']] ]);
                 }
                 $p->addIdInSource($source->data['slug'], $muid);
-                $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
+                $p->addPartialId(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
@@ -148,7 +148,7 @@ class tmp2db implements Command {
                 $tmp = explode('-', $gqid);
                 $curaSourceSlug = LERRCP::datafile2sourceSlug($tmp[0]);
                 $NUM = $tmp[1];
-                $p = Person::sourceId2person($curaSourceSlug, $NUM);
+                $p = Person::createFromSourceId($curaSourceSlug, $NUM);
                 if(is_null($p)){
                     throw new \Exception("$gqid : try to update an unexisting person");
                 }
@@ -220,7 +220,7 @@ class tmp2db implements Command {
                     $p->addOccus([ M3women::OCCUS[$line['OCCU']] ]);
                 }
                 $p->addIdInSource($source->data['slug'], $muid);
-                $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
+                $p->addPartialId(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history

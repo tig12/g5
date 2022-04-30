@@ -50,7 +50,7 @@ class tmp2db implements Command {
         }
         
         // source related to CSICOP - insert if does not already exist
-        $csicopSource = Source::getBySlug(CSICOP::SOURCE_SLUG); // DB
+        $csicopSource = Source::createFromSlug(CSICOP::SOURCE_SLUG); // DB
         if(is_null($csicopSource)){
             $csicopSource = new Source(CSICOP::SOURCE_DEFINITION_FILE);
             $csicopSource->insert(); // DB
@@ -58,7 +58,7 @@ class tmp2db implements Command {
         }
         
         // source related to si42 - insert if does not already exist
-        $si42Source = Source::getBySlug(SI42::SOURCE_SLUG); // DB
+        $si42Source = Source::createFromSlug(SI42::SOURCE_SLUG); // DB
         if(is_null($si42Source)){
             $si42Source = new Source(SI42::SOURCE_DEFINITION_FILE);
             $si42Source->insert(); // DB
@@ -66,7 +66,7 @@ class tmp2db implements Command {
         }
         
         // source of rawlins-ertel-irving.csv - insert if does not already exist
-        $source = Source::getBySlug(Irving::LIST_SOURCE_SLUG); // DB
+        $source = Source::createFromSlug(Irving::LIST_SOURCE_SLUG); // DB
         if(is_null($source)){
             $source = new Source(Irving::LIST_SOURCE_DEFINITION_FILE);
             $source->insert(); // DB
@@ -143,7 +143,7 @@ class tmp2db implements Command {
                 //
                 $p->addOccus([$line['SPORT']]);
                 $p->addIdInSource($source->data['slug'], $line['CSID']);
-                $p->addIdPartial($csicopSource->data['slug'], $line['CSID']);
+                $p->addPartialId($csicopSource->data['slug'], $line['CSID']);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
@@ -165,7 +165,7 @@ class tmp2db implements Command {
                 [$curaSourceSlug, $NUM] = Irving::gqid2curaSourceId($line['GQID']);
                 $curaFile = strtoupper($curaSourceSlug);
                 $gqId = LERRCP::gauquelinId($curaFile, $NUM);
-                $p = Person::sourceId2person($curaSourceSlug, $NUM); // DB
+                $p = Person::createFromSourceId($curaSourceSlug, $NUM); // DB
                 if(is_null($p)){
                     throw new \Exception("$gqId : try to update an unexisting person");
                 }
@@ -183,7 +183,7 @@ class tmp2db implements Command {
                 }
                 $p->addOccus([$line['SPORT']]);
                 $p->addIdInSource($source->data['slug'], $line['CSID']);
-                $p->addIdPartial($csicopSource->data['slug'], $line['CSID']);
+                $p->addPartialId($csicopSource->data['slug'], $line['CSID']);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history

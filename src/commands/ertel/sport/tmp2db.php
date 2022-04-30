@@ -47,35 +47,35 @@ class tmp2db implements Command {
         $report = "--- ErtelSport tmp2db ---\n";
         
         // source corresponding to 3a_sports - insert if does not already exist
-        $source = Source::getBySlug(ErtelSport::SOURCE_SLUG); // DB
+        $source = Source::createFromSlug(ErtelSport::SOURCE_SLUG); // DB
         if(is_null($source)){
             $source = new Source(ErtelSport::SOURCE_DEFINITION_FILE);
             $source->insert(); // DB
             $report .= "Inserted source " . $source->data['slug'] . "\n";
         }
         // source corresponding to Ertel (for partial ids) - insert if does not already exist
-        $sourceErtel = Source::getBySlug(Ertel::SOURCE_SLUG); // DB
+        $sourceErtel = Source::createFromSlug(Ertel::SOURCE_SLUG); // DB
         if(is_null($sourceErtel)){
             $sourceErtel = new Source(Ertel::SOURCE_DEFINITION_FILE);
             $sourceErtel->insert(); // DB
             $report .= "Inserted source " . $sourceErtel->data['slug'] . "\n";
         }
         // source corresponding to Comité Para
-        $sourceCPara = Source::getBySlug(CPara::SOURCE_SLUG); // DB
+        $sourceCPara = Source::createFromSlug(CPara::SOURCE_SLUG); // DB
         if(is_null($sourceCPara)){
             $sourceCPara = new Source(CPara::SOURCE_DEFINITION_FILE);
             $sourceCPara->insert(); // DB
             $report .= "Inserted source " . $sourceCPara->data['slug'] . "\n";
         }
         // source corresponding to CSICOP
-        $sourceCSICOP = Source::getBySlug(CSICOP::SOURCE_SLUG); // DB
+        $sourceCSICOP = Source::createFromSlug(CSICOP::SOURCE_SLUG); // DB
         if(is_null($sourceCSICOP)){
             $sourceCSICOP = new Source(CSICOP::SOURCE_DEFINITION_FILE);
             $sourceCSICOP>insert(); // DB
             $report .= "Inserted source " . $sourceCSICOP->data['slug'] . "\n";
         }
         // source corresponding to CFEPP
-        $sourceCFEPP = Source::getBySlug(CFEPP::SOURCE_SLUG); // DB
+        $sourceCFEPP = Source::createFromSlug(CFEPP::SOURCE_SLUG); // DB
         if(is_null($sourceCFEPP)){
             $sourceCFEPP = new Source(CFEPP::SOURCE_DEFINITION_FILE);
             $sourceCFEPP->insert(); // DB
@@ -140,7 +140,7 @@ class tmp2db implements Command {
                 //
                 $p->addOccu(ErtelSport::computeSport($line));
                 $p->addIdInSource($source->data['slug'], $line['NR']);
-                $p->addIdPartial(Ertel::SOURCE_SLUG, $erId);
+                $p->addPartialId(Ertel::SOURCE_SLUG, $erId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 $p->addHistory(
@@ -173,7 +173,7 @@ class tmp2db implements Command {
                     case 'ertel-1-first-french':
                     case 'ertel-2-first-european':
                     case 'ertel-6-para-champions':
-                        $p = Person::sourceId2person('a1', $NUM);
+                        $p = Person::createFromSourceId('a1', $NUM);
                         $new['birth']['date'] = $line['DATE']; // A1 contains only date UT
                         $new['sex'] = $line['SEX'];
                         $nRestoredSex++;
@@ -182,7 +182,7 @@ class tmp2db implements Command {
                 	// Already in D6
                     //
                     case 'ertel-9-second-european':
-                        $p = Person::sourceId2person('d6', $NUM);
+                        $p = Person::createFromSourceId('d6', $NUM);
                         $new['sex'] = $line['SEX'];
                         $nRestoredSex++;
                         // replace occu by Ertel value as Gauquelin file contains only 'sportsperson'
@@ -195,7 +195,7 @@ class tmp2db implements Command {
                     //
                     case 'ertel-8-csicop-us':
                     case 'ertel-12-gauq-us':
-                        $p = Person::sourceId2person('d10', $NUM);
+                        $p = Person::createFromSourceId('d10', $NUM);
                         $new['sex'] = $line['SEX'];
                         $nRestoredSex++;
                         // replace occu by Ertel value as Gauquelin file contains only 'sportsperson'
@@ -209,21 +209,21 @@ class tmp2db implements Command {
                 //
                 // Beltoise Jean Pierre 1937-04-26 ; in file E3, not mentioned by Ertel
                 if($line['GQID'] == 'E3-95'){
-                    $p = Person::sourceId2person('e3', 95);
+                    $p = Person::createFromSourceId('e3', 95);
                     $p->addOccu(ErtelSport::computeSport($line));
                     $new['occus'] = [ErtelSport::computeSport($line)];
                 }
                 // thoma-georg-1937-08-20 ; in file Müller 2 (612 famous men)
                 else if($line['NR'] == 4011){
-                    $p = Person::sourceId2person('afd2', 558);
+                    $p = Person::createFromSourceId('afd2', 558);
                     // no new information added by Ertel
                 }
                 
                 $p->addIdInSource($source->data['slug'], $line['NR']);
-                $p->addIdPartial(Ertel::SOURCE_SLUG, $erId);
+                $p->addPartialId(Ertel::SOURCE_SLUG, $erId);
                 $p->updateFields($new);
                 // repeat fields to include in $history
-                $new['ids-partial'] = [Ertel::SOURCE_SLUG => $erId];
+                $new['partial-ids'] = [Ertel::SOURCE_SLUG => $erId];
                 $p->addHistory(
                     command: 'ertel sport tmp2db',
                     sourceSlug: $source->data['slug'],

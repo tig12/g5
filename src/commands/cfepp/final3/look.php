@@ -29,13 +29,13 @@ class look implements Command {
 echo "\n<pre>"; print_r($line); echo "</pre>\n"; exit;            
         }
         
-        $dbpersons = Person::partialId2persons(Ertel::SOURCE_SLUG);
+        $dbpersons = Person::createArrayFromPartialId(Ertel::SOURCE_SLUG);
         foreach($dbpersons as $dbperson){
 //echo "\n<pre>"; print_r($dbperson); echo "</pre>\n"; exit;
             $p = new Person();
             $p->data = $dbperson;
 // echo "\n"; print_r($p->data['ids-in-sources']); echo "\n";
-// echo "\n"; print_r($p->data['ids-partial']); echo "\n";
+// echo "\n"; print_r($p->data['partial-ids']); echo "\n";
             $hist = $p->historyFromSource(ErtelSport::SOURCE_SLUG);
             $final3[]['ERID'] = $hist['raw']['NR'];
             $final3['GQID'] = ErtelSport::compute_GQID($hist);

@@ -118,10 +118,10 @@ class allpersons implements Command {
                 return implode('+', $p->data['occus']);
             },
             'GQID' => function($p){
-                return ($p->data['ids-partial'][LERRCP::SOURCE_SLUG] ?? '');
+                return ($p->data['partial-ids'][LERRCP::SOURCE_SLUG] ?? '');
             },
             'MUID' => function($p){
-                return ($p->data['ids-partial'][Muller::SOURCE_SLUG] ?? '');
+                return ($p->data['partial-ids'][Muller::SOURCE_SLUG] ?? '');
             },
         ];
         

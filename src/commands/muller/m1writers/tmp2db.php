@@ -51,7 +51,7 @@ class tmp2db implements Command {
         }
         
         // source of Müller's booklet AFD1 - insert if does not already exist
-        $bookletSource = Source::getBySlug(M1writers::BOOKLET_SOURCE_SLUG); // DB
+        $bookletSource = Source::createFromSlug(M1writers::BOOKLET_SOURCE_SLUG); // DB
         if(is_null($bookletSource)){
             $bookletSource = new Source(M1writers::BOOKLET_SOURCE_DEFINITION_FILE);
             $bookletSource->insert(); // DB
@@ -59,7 +59,7 @@ class tmp2db implements Command {
         }
         
         // source of 5muller_writers.csv - insert if does not already exist
-        $source = Source::getBySlug(M1writers::LIST_SOURCE_SLUG); // DB
+        $source = Source::createFromSlug(M1writers::LIST_SOURCE_SLUG); // DB
         if(is_null($source)){
             $source = new Source(M1writers::LIST_SOURCE_DEFINITION_FILE);
             $source->insert(); // DB
@@ -111,7 +111,7 @@ class tmp2db implements Command {
                 $p->addOccus(['writer']);
                 $p->addIdInSource($source->data['slug'], $line['MUID']);
                 $mullerId = Muller::mullerId($source->data['slug'], $line['MUID']);
-                $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
+                $p->addPartialId(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
@@ -135,7 +135,7 @@ class tmp2db implements Command {
                 [$curaSourceSlug, $NUM] = M1writers::gqid2curaSourceId($line['GQID']);
                 $curaFile = strtoupper($curaSourceSlug);
                 $gqId = LERRCP::gauquelinId($curaFile, $NUM);
-                $p = Person::sourceId2person($curaSourceSlug, $NUM);
+                $p = Person::createFromSourceId($curaSourceSlug, $NUM);
                 if(is_null($p)){
                     throw new \Exception("$gqId : try to update an unexisting person");
                 }
@@ -169,7 +169,7 @@ class tmp2db implements Command {
                 $p->addOccus(['writer']);
                 $p->addIdInSource($source->data['slug'], $line['MUID']);
                 $mullerId = Muller::mullerId($source->data['slug'], $line['MUID']);
-                $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
+                $p->addPartialId(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history

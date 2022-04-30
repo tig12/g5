@@ -99,6 +99,8 @@ class LERRCP {
         ],
     ];
     
+    // *********************** Gauquelin unique id ***********************
+    
     /**
         Returns a unique Gauquelin id, like "A1-654"
         Unique id of a record among birth dates published by Gauquelin's LERRCP.
@@ -113,7 +115,7 @@ class LERRCP {
     /**
         Converts Gauquelin id to an array containing 2 elements: the datafile and the num within this datafile.
         Ex: "A1-654" returns ["A1", 654]
-        @param $datafile    String like 'A1-654'
+        @param $gqId    String like "A1-654"
     **/
     public static function explodeGauquelinId($gqId){
         return explode('-', $gqId);

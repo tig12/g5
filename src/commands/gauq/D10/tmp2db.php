@@ -54,7 +54,7 @@ class tmp2db implements Command {
         $lerrcpSource = new Source(LERRCP::SOURCE_DEFINITION_FILE);
         
         // source corresponding LERRCP booklet of D6 file
-        $source = Source::getBySlug(LERRCP::datafile2bookletSourceSlug($datafile)); // DB
+        $source = Source::createFromSlug(LERRCP::datafile2bookletSourceSlug($datafile)); // DB
         if(is_null($source)){
             $source = LERRCP::getBookletSourceOfDatafile($datafile);
             $source->insert(); // DB
@@ -62,7 +62,7 @@ class tmp2db implements Command {
         }
         
         // source corresponding to D6 file
-        $source = Source::getBySlug(strtolower($datafile)); // DB
+        $source = Source::createFromSlug(strtolower($datafile)); // DB
         if(is_null($source)){
             $source = LERRCP::getSourceOfDatafile($datafile);
             $source->insert(); // DB
@@ -99,12 +99,12 @@ class tmp2db implements Command {
             $test->computeSlug();
             $gqId = LERRCP::gauquelinId($datafile, $line['NUM']);
             $newOccus = explode('+', $line['OCCU']);
-            $p = Person::getBySlug($test->data['slug']); // DB
+            $p = Person::createFromSlug($test->data['slug']); // DB
             if(is_null($p)){
                 // insert new person
                 $p = new Person();
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
-                $p->addIdPartial($lerrcpSource->data['slug'], $gqId);
+                $p->addPartialId($lerrcpSource->data['slug'], $gqId);
                 $new = [];
                 $new['trust'] = Cura5::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
@@ -144,7 +144,7 @@ class tmp2db implements Command {
             else{
                 // duplicate, person appears in more than one cura file
                 $p->addOccus($newOccus);
-                // does not addIdPartial(lerrcp) to respect the definition of Gauquelin id:
+                // does not addPartialId(lerrcp) to respect the definition of Gauquelin id:
                 // lerrcp id takes the value of the first volume where it appears.
                 // lerrcp id already affected in a previous file for this record.
                 $p->addIdInSource($source->data['slug'], $line['NUM']);

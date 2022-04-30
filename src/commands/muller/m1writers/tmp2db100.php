@@ -46,7 +46,7 @@ class tmp2db100 implements Command {
         $report = "--- muller m1writers tmp2db100 ---\n";
         
         // source of muller1-100-writers.txt - insert if does not already exist
-        $source = Source::getBySlug(M1writers100::LIST_SOURCE_SLUG); // DB
+        $source = Source::createFromSlug(M1writers100::LIST_SOURCE_SLUG); // DB
         if(is_null($source)){
             $source = new Source(M1writers100::LIST_SOURCE_DEFINITION_FILE);
             $source->insert(); // DB
@@ -78,7 +78,7 @@ class tmp2db100 implements Command {
             $line = $lines[$i];
             $lineRaw = $linesRaw[$i];
             $slug = Person::doComputeSlug($line['FNAME'], $line['GNAME'], $line['DATE']);
-            $test = Person::getBySlug($slug); // DB
+            $test = Person::createFromSlug($slug); // DB
             if(is_null($test)){
                 // new person
                 $p = new Person();
@@ -102,7 +102,7 @@ class tmp2db100 implements Command {
                 $p->addOccus([$occu]);
                 $p->addIdInSource($source->data['slug'], $line['MUID']);
                 $mullerId = Muller::mullerId($source->data['slug'], $line['MUID']);
-                $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
+                $p->addPartialId(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
@@ -124,7 +124,7 @@ class tmp2db100 implements Command {
                 // person already in Gauquelin data
                 $test->addIdInSource($source->data['slug'], $line['MUID']);
                 $mullerId = Muller::mullerId($source->data['slug'], $line['MUID']);
-                $test->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
+                $test->addPartialId(Muller::SOURCE_SLUG, $mullerId);
                 $occu = self::computeOccu($line);
                 $p->addOccus([$occu]);
                 // TODO see if some fields can be updated (if Müller more precise than Gauquelin)

@@ -47,7 +47,7 @@ class Acts {
         }
         $newPerson = false;
         if(is_null($p)){
-            $p = Person::getBySlug($actSlug);
+            $p = Person::createFromSlug($actSlug);
             if(is_null($p)){
                 $p = new Person();
                 $p->data['slug'] = $actSlug; // here person slug initialized by default with act slug.

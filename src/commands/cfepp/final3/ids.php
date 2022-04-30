@@ -97,7 +97,7 @@ class ids implements Command {
     }
     
     /** 
-        Creates
+        Computes intersections.
         @return Report
     **/
     public static function group(): string {

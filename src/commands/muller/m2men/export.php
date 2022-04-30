@@ -72,7 +72,7 @@ class export implements Command {
         ];
         
         $map = [
-            'ids-partial.' . Muller::SOURCE_SLUG => 'MUID',
+            'partial-ids.' . Muller::SOURCE_SLUG => 'MUID',
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
             'birth.date' => 'DATE',
@@ -90,7 +90,7 @@ class export implements Command {
         
         $fmap = [
             'GQID' => function($p){
-                return $p->data['ids-partial'][LERRCP::SOURCE_SLUG] ?? '';
+                return $p->data['partial-ids'][LERRCP::SOURCE_SLUG] ?? '';
             },
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);

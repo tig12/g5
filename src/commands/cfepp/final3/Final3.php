@@ -13,6 +13,7 @@ use g5\app\Config;
 use tiglib\arrays\csvAssociative;
 use g5\model\Trust;
 use g5\model\Source;
+use g5\model\Group;
 
 class Final3 {
     
@@ -159,7 +160,7 @@ class Final3 {
         'FNAME',
         'GNAME',
         'DATE',
-// TODO         'TR',
+        'TR',
         'DATE-UT',
         'PLACE',
         'C2',

@@ -52,7 +52,7 @@ class tmp2db implements Command {
         }
         
         // source of Müller's booklet M2men - insert if does not already exist
-        $bookletSource = Source::getBySlug(M2men::BOOKLET_SOURCE_SLUG); // DB
+        $bookletSource = Source::createFromSlug(M2men::BOOKLET_SOURCE_SLUG); // DB
         if(is_null($bookletSource)){
             $bookletSource = new Source(M2men::BOOKLET_SOURCE_DEFINITION_FILE);
             $bookletSource->insert(); // DB
@@ -60,7 +60,7 @@ class tmp2db implements Command {
         }
         
         // source of muller2-612-men.txt - insert if does not already exist
-        $source = Source::getBySlug(M2men::LIST_SOURCE_SLUG); // DB
+        $source = Source::createFromSlug(M2men::LIST_SOURCE_SLUG); // DB
         if(is_null($source)){
             $source = new Source(M2men::LIST_SOURCE_DEFINITION_FILE);
             $source->insert(); // DB
@@ -103,7 +103,7 @@ class tmp2db implements Command {
                 // M2-457: Quasimodo, Salvatore 20.08.1901 04.10 -1.00 I Modica 36 N 48 014 E 58 AR 01 56 SA N
                 // Birth time and birth place differ
                 // Update with M2 data (because birth place corresponds to Wikipedia) But should be checked
-                $p = Person::sourceId2person(M1writers::LIST_SOURCE_SLUG, '457');
+                $p = Person::createFromSourceId(M1writers::LIST_SOURCE_SLUG, '457');
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['tzo'] = $line['TZO'];
                 if($line['TIMOD'] == 'LMT'){
@@ -111,7 +111,7 @@ class tmp2db implements Command {
                 }
                 $new['birth']['place']['name'] = $line['PLACE'];
                 $p->addIdInSource($source->data['slug'], $muid);
-                // do not call $p->addIdPartial to respect Müller unique id definition
+                // do not call $p->addPartialId to respect Müller unique id definition
                 $p->updateFields($new);
                 $issue = 'CHECK BIRTH PLACE AND TIME:'
                     . '<br>This person is present as nb 457 in '
@@ -159,7 +159,7 @@ class tmp2db implements Command {
                 //
                 $p->addOccus([ M2men::OCCUS[$line['OCCU']] ]);
                 $p->addIdInSource($source->data['slug'], $muid);
-                $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
+                $p->addPartialId(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
@@ -187,7 +187,7 @@ class tmp2db implements Command {
                 $tmp = explode('-', $gqid);
                 $curaSourceSlug = LERRCP::datafile2sourceSlug($tmp[0]);
                 $NUM = $tmp[1];
-                $p = Person::sourceId2person($curaSourceSlug, $NUM);
+                $p = Person::createFromSourceId($curaSourceSlug, $NUM);
                 if(is_null($p)){
                     throw new \Exception("$gqid : try to update an unexisting person");
                 }
@@ -248,7 +248,7 @@ class tmp2db implements Command {
                 }
                 $p->addOccus([ M2men::OCCUS[$line['OCCU']] ]);
                 $p->addIdInSource($source->data['slug'], $muid);
-                $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
+                $p->addPartialId(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history

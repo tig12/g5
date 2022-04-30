@@ -89,21 +89,57 @@ This test gave rise to two documents:
     </li>
     <li>
         Another file can be obtained upon request from Jan Willem Nienhuys ; you can find his email on page "<a href="https://skepsis.nl/mars-effect">The Mars Effect in Retrospect</a>".
-        <br>This file was retained to integrate CFEPP test in g5 database because it is more complete than the files from newalchemypress.com. It contains more fields, in particular both legal time and universal time ; its format is almost identical to the official list published by CFEPP.
+        <br><b>This file was retained to integrate CFEPP test in g5 database</b> because it is more complete than the files from newalchemypress.com. It contains more fields, in particular both legal time and universal time ; its format is almost identical to the official list published by CFEPP.
     </li>
 </ul>
 
 <!-- ************************************* -->
 <h3 id="1-2-citations">Citations</h3>
 This test has been mainly analyzed by two persons : Suitbert Ertel and Jan Willem Nienhuys, and references can be found in several articles from these authors.
+<br><div class="todo">TODO List the precise articles</div>
 
 <!-- ********************************************************************************* -->
 <h2>The input file</h2>
 
-The file sent by Nienhuys is called <code class="bold big1">final3</code> and is versioned with the program, in <a href="https://github.com/tig12/gauquelin5/blob/main/data/raw/cfepp/final3.zip">data/raw/cfepp/final3.zip</a>.
+The file sent by Nienhuys is called <code class="bold big1">final3</code> and is versioned with the program, in <a href="https://github.com/tig12/gauquelin5/blob/main/data/raw/cfepp/final3.zip">data/raw/cfepp/final3.zip</a> ; it contains 1120 persons.
+
+<!-- ********************************************************************************* -->
+<h2>Different groups related to this test</h2>
+
+Several groups are related to this test, listed in their order of publication.
 
 <!-- ************************************* -->
-<h3>Why 1120 ?</h3>
+<h3>1439, by CFEPP</h3>
+This list was publihed in 1990 CFEPP's preliminary report. It corresponds to the raw selection done by CFEPP members, extracted from the books they used as sources:
+<ul>
+    <li>L'athlege - Biographies des plus grands champions français de tous les sports, Kléber, 1951.</li>
+    <li>Le Roy - Dictionnaire Encyclopédique des Sports, des Sportifs et des Performances, by Bernard Le Roy, Denoël, 1973.</li>
+</ul>
+Among all the athletes listed in these books, the CFEPP kept only the sportspersons corresponding to their selection criteria.
+
+<br><br>Personal communication from Nienhuys permits to have more information about this group:
+<ul>
+    <li>Jan Willem Nienhuys thinks that the selection ended in 1987.</li>
+    <li>The original list contained 1442 persons, and 3 were removed because they didn't fit the criteria.</li>
+</ul>
+
+<!-- ************************************* -->
+<h3>1066, by CFEPP</h3>
+This is the official list published in CFEPP booklet, which is a subset of the 1439 list.
+<cite>Finally, after eliminating athletes for whom complete bith data could not be found, 1 066 athletes were compiled.</cite>
+(CFEPP booklet, p 14)
+
+<!-- ************************************* -->
+<h3>1076, from Ertel</h3>
+A group of 1076 persons is used by Suitbert Ertel in the analysis exposed in the book "The Tenacious Mars Effect". This number of 1076 is given p SE-13 of this book:
+<cite>CFEPP's irth data were scanned from an appendix of the French Commitee's report (Benski 1990, N = 1,439, complete information for N = 1,076).</cite>
+<!--
+<br>Suitbert Ertel mentions this group in an article "Mars effect uncovered in French sceptics' data" (Correlation 33.2, winter 1994-1995):
+<cite>&laquo; An account of the French athletes' investigation without results was mimeographed in 1990 with birth dates and times appended (N = 1,071). &raquo;</cite>
+-->
+
+<!-- ************************************* -->
+<h3>1120, by Nienhuys</h3>
 
 <code>final3</code> contains 1120 records. This is explained in an article by Nienhuys, <a href="https://www.skepsis.nl/blog/wp-content/uploads/anatomy.pdf">Ertel’s ‘Mars Effect’: Anatomy of a pseudo-science</a>, in paragraph "<i>The CFEPP memorandum of 1990</i>": 
 <cite>&laquo; 
@@ -132,7 +168,6 @@ As Nienhuys' file roughly contains the same fields as the published list, the me
         <td>SPORT</td>
         <td>OCCU</td>
         <td>
-            
         </td>
     </tr>
     <tr>
@@ -165,7 +200,6 @@ As Nienhuys' file roughly contains the same fields as the published list, the me
         <td>NAME</td>
         <td>FNAME, GNAME</td>
         <td>
-            
         </td>
     </tr>
     <tr>
@@ -245,6 +279,16 @@ As Nienhuys' file roughly contains the same fields as the published list, the me
         </td>
     </tr>
 </table>
+
+<!-- ********************************************************************************* -->
+<h2>G5 integration</h2>
+Inclusion of this file in g5 is done using <a href="ertel-4391-sport.html">Ertel's file of 4384 sportsmen</a>, which contains the CFEPP ids.
+
+<pre>
+php run-g5.php cfepp final3 raw2tmp
+php run-g5.php cfepp final3 ids add
+php run-g5.php cfepp final3 tmp2db small
+</pre>
 
 
 <!-- ********************************************************************************* -->

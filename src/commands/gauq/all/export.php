@@ -83,7 +83,7 @@ class export implements Command {
         
         $map = [
             'ids-in-sources.' . self::$sourceSlug => 'NUM',
-            'ids-partial.' . LERRCP::SOURCE_SLUG => 'GQID',
+            'partial-ids.' . LERRCP::SOURCE_SLUG => 'GQID',
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
             'birth.date' => 'DATE',

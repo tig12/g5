@@ -21,7 +21,7 @@ class CSICOP {
         @param  $num        Unique id within csicop file
     **/
     public static function csicopId($num){
-        return 'CSI-' . $num;
+        return 'CS-' . $num;
     }
     
     // *********************** Source management ***********************

@@ -52,7 +52,7 @@ class source implements Command {
                 return $e->getMessage() . "\n";
             }
             $slug = $source->data['slug'];
-            $test = ModelSource::getBySlug($slug);
+            $test = ModelSource::createFromSlug($slug);
             if(is_null($test)){
                 $source->insert();
                 echo "Inserted source '$slug' in database from $relativePath\n";

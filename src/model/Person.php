@@ -33,7 +33,7 @@ class Person {
             unset($row['ids_in_sources']);
         }
         if(isset($row['partial_ids'])){
-            $row['ids-partial'] = json_decode($row['partial_ids'], true);
+            $row['partial-ids'] = json_decode($row['partial_ids'], true);
             unset($row['partial_ids']);
         }
         if(isset($row['name'])){
@@ -65,13 +65,13 @@ class Person {
         return $p;
     }
     
-    // *********************** Get *******************************
+    // *********************** Create objetcs of type Person *******************************
     
     /**
         Returns an object of type Person from storage, using its slug,
         or null if doesn't exist.
     **/
-    public static function getBySlug($slug): ?Person{
+    public static function createFromSlug($slug): ?Person{
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare('select * from person where slug=?');
         $stmt->execute([$slug]);
@@ -91,31 +91,26 @@ class Person {
         using its id for a given source,
         or null if doesn't exist.
         Ex : to get a person whose id in source a1 is 254, call
-        getBySourceId('a1', '254')
+        createFromSourceId
+        
+        ('a1', '254')
         @param  $source     Slug of the source
         @param  $idInSource Local id of the person within this source 
     **/
-    public static function sourceId2person($sourceSlug, $idInSource): ?Person {
+    public static function createFromSourceId($sourceSlug, $idInSource): ?Person {
         $dblink = DB5::getDbLink();
         $query = "select * from person where ids_in_sources @> '{\"$sourceSlug\": \"$idInSource\"}'";
-//echo "$query\n";
         $stmt = $dblink->prepare($query);
         $stmt->execute([]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
-/*
-        $stmt = $dblink->query($query);
-        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
-//echo "\n<pre>"; print_r($res); echo "</pre>\n"; exit;
-*/
         if($res === false || count($res) == 0){
             return null;
         }
         return self::row2person($res);
     }
     
-    
     //
-    // partial_ids  related to parent sources: lerrcp, muller, ertel
+    // partial_ids  related to higher level (parent) sources: lerrcp, muller, ertel
     //
     
     /**
@@ -129,7 +124,7 @@ class Person {
         @param  $partialId partial id of the person within this source 
     **/
 // WARNING - this function is not used anymore => remove ?
-    public static function partialId2person($sourceSlug, $partialId): ?Person {
+    public static function createFromPartialId($sourceSlug, $partialId): ?Person {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("select * from person where partial_ids @> '{\"$sourceSlug\": \"$partialId\"}'");
         $stmt->execute([]);
@@ -145,7 +140,7 @@ class Person {
         Persons associated to some sources used to identify partial ids of a person.
         g55, lerrcp, ertel, cfepp, 
     **/
-    public static function partialId2persons($sourceSlug): ?Person {
+    public static function createArrayFromPartialId($sourceSlug): ?Person {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare("select * from person where partial_ids->>'$sourceSlug'::text != 'null'");
         $stmt->execute([]);
@@ -160,7 +155,7 @@ class Person {
         Returns an array of Persons with given occupation codes.
         @param $occus Array of occupation codes
     **/
-    public static function getByOccu($occus){     
+    public static function createArrayFromOccus($occus){     
         $dblink = DB5::getDbLink();
         $query = 'select * from person where ';
         $parts = [];
@@ -174,6 +169,8 @@ class Person {
         }
         return $res;
     }
+    
+    // *********************** Compute fields (static) *******************************
     
     /** 
         Static computation of slug.
@@ -272,7 +269,7 @@ class Person {
     //                                  INSTANCE
     // ***********************************************************************
     
-    // *********************** compute fields *******************************
+    // *********************** Compute fields (instance) *******************************
     
     /**
         @throws \Exception if the person id computation impossible (the person has no family name).
@@ -394,10 +391,10 @@ class Person {
     }
     
     /** 
-        Adds or updates a couple (source slug, id) in data['ids-partial']
+        Adds or updates a couple (source slug, id) in data['partial-ids']
     **/
-    public function addIdPartial($sourceSlug, $id){
-        $this->data['ids-partial'][$sourceSlug] = $id;
+    public function addPartialId($sourceSlug, $id){
+        $this->data['partial-ids'][$sourceSlug] = $id;
     }
     
     /**
@@ -530,7 +527,7 @@ class Person {
         $stmt->execute([
             $this->data['slug'],
             json_encode($this->data['ids-in-sources']),
-            json_encode($this->data['ids-partial']),
+            json_encode($this->data['partial-ids']),
             json_encode($this->data['name']),
             $this->data['sex'],
             json_encode($this->data['birth']),
@@ -571,7 +568,7 @@ class Person {
         $stmt->execute([
             $this->data['slug'],
             json_encode($this->data['ids-in-sources']),
-            json_encode($this->data['ids-partial']),
+            json_encode($this->data['partial-ids']),
             json_encode($this->data['name']),
             $this->data['sex'],
             json_encode($this->data['birth']),

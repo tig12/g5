@@ -22,6 +22,7 @@ class Ertel {
     **/
     const SOURCE_DEFINITION_FILE = 'ertel' . DS . self::SOURCE_SLUG .'.yml';
     
+    
     // *********************** Ertel unique id ***********************
     /** 
         Computes Ertel ID
@@ -33,6 +34,17 @@ class Ertel {
         return 'E' . $fileCode . '-' . $num;
     }
     
+    /**
+        Converts an Ertel id to an array containing 2 elements: a "file code", identifying the file and the num within this file.
+        Ex: "ES-654" returns ["ES", 654]
+        @param $erId    String like 'ES-654'
+    **/
+    public static function explodeErtelId($erId){
+        return explode('-', $erId);
+    }
+        
+    
+    
     // *********************** Raw files manipulation ***********************
     
     /** 
@@ -43,7 +55,7 @@ class Ertel {
     }
     
     // *********************** Tmp files manipulation ***********************
-    
+        
     /** 
         Computes the name of the directory where tmp Ertel files are stored
     **/

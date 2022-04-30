@@ -55,7 +55,7 @@ class tmp2db implements Command {
         $report = "--- gauq $datafile tmp2db ---\n";
         
         // source corresponding to LERRCP - insert if does not already exist
-        $lerrcpSource = Source::getBySlug(LERRCP::SOURCE_SLUG); // DB
+        $lerrcpSource = Source::createFromSlug(LERRCP::SOURCE_SLUG); // DB
         if(is_null($lerrcpSource)){
             $lerrcpSource = new Source(LERRCP::SOURCE_DEFINITION_FILE);
             $lerrcpSource->insert(); // DB
@@ -63,7 +63,7 @@ class tmp2db implements Command {
         }
         
         // source corresponding to cura5 - insert if does not already exist
-        $curaSource = Source::getBySlug(Cura5::SOURCE_SLUG); // DB
+        $curaSource = Source::createFromSlug(Cura5::SOURCE_SLUG); // DB
         if(is_null($curaSource)){
             $curaSource = new Source(Cura5::SOURCE_DEFINITION_FILE);
             $curaSource->insert(); // DB
@@ -71,7 +71,7 @@ class tmp2db implements Command {
         }
         
         // source corresponding LERRCP booklet of current A file
-        $bookletSource = Source::getBySlug(LERRCP::datafile2bookletSourceSlug($datafile)); // DB
+        $bookletSource = Source::createFromSlug(LERRCP::datafile2bookletSourceSlug($datafile)); // DB
         if(is_null($bookletSource)){
             $bookletSource = LERRCP::getBookletSourceOfDatafile($datafile);
             $bookletSource->insert(); // DB
@@ -79,7 +79,7 @@ class tmp2db implements Command {
         }
         
         // source corresponding to current A file
-        $source = Source::getBySlug(LERRCP::datafile2sourceSlug($datafile)); // DB
+        $source = Source::createFromSlug(LERRCP::datafile2sourceSlug($datafile)); // DB
         if(is_null($source)){
             $source = LERRCP::getSourceOfDatafile($datafile);
             $source->insert(); // DB
@@ -116,12 +116,12 @@ class tmp2db implements Command {
             $test->computeSlug();
             $gqId = LERRCP::gauquelinId($datafile, $line['NUM']);
             $newOccus = explode('+', $line['OCCU']);
-            $p = Person::getBySlug($test->data['slug']); // DB
+            $p = Person::createFromSlug($test->data['slug']); // DB
             if(is_null($p)){
                 // insert new person
                 $p = new Person();
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
-                $p->addIdPartial($lerrcpSource->data['slug'], $gqId);
+                $p->addPartialId($lerrcpSource->data['slug'], $gqId);
                 $new = [];
                 $dateOrTimeIssue = '';
                 $new['trust'] = Cura5::TRUST_LEVEL;
@@ -182,7 +182,7 @@ class tmp2db implements Command {
                 // Not used anymore as all errors shown by this check were fixed
                 // $testDate = self::checkDate($datafile, $p, $line);
                 $p->addOccus($newOccus);
-                // does not addIdPartial(lerrcp) to conform with the definition of Gauquelin id:
+                // does not addPartialId(lerrcp) to conform with the definition of Gauquelin id:
                 // lerrcp id takes the value of the first volume where it appears.
                 // lerrcp id already affected in a previous file for this record.
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
@@ -263,11 +263,11 @@ class tmp2db implements Command {
         if($d1utc != $d2utc || $d1 != $d2){
             $msg = 'Date difference for ' . $p->data['slug'];
             if($d1utc != $d2utc){
-                $msg .= "\n<br>Date UTC in " . ' ' . $p->data['ids-partial'][LERRCP::SOURCE_SLUG] . ' = ' . $d1utc;
+                $msg .= "\n<br>Date UTC in " . ' ' . $p->data['partial-ids'][LERRCP::SOURCE_SLUG] . ' = ' . $d1utc;
                 $msg .= "\n<br>Date UTC in " . ' ' . LERRCP::gauquelinId($datafile, $line['NUM']) . ' = ' . $d2utc;
             }
             if($d1 != $d2){
-                $msg .= "\n<br>Date in " . ' ' . $p->data['ids-partial'][LERRCP::SOURCE_SLUG] . ' = ' . $d1;
+                $msg .= "\n<br>Date in " . ' ' . $p->data['partial-ids'][LERRCP::SOURCE_SLUG] . ' = ' . $d1;
                 $msg .= "\n<br>Date in " . ' ' . LERRCP::gauquelinId($datafile, $line['NUM']) . ' = ' . $d2;
             }
         }

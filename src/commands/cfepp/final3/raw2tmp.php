@@ -66,6 +66,7 @@ class raw2tmp implements Command {
             $new['LV']      = $new_raw['LV'];
             [ $new['FNAME'], $new['GNAME'] ] = self::computeName($new_raw['NAME']);
             $new['DATE']    = self::computeDate($new_raw['LOC_DATE'], $new_raw['LT']);
+            $new['TR']      = $new_raw['TR'];
             $new['DATE-UT'] = self::computeDate($new_raw['UNIV_DATE'], $new_raw['UT']);
             $new['PLACE']   = $new_raw['BIRTH_PLACE'];
             [ $new['C2'], $new['C3'] ] = self::computePostal($new_raw['POSTAL_CODE']);

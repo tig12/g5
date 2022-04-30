@@ -18,7 +18,7 @@ class CPara {
         @param  $num        Unique id within Comité Para file
     **/
     public static function cparaId($num){
-        return $num;
+        return 'CP-' . $num;
     }
     
     // *********************** Source management ***********************

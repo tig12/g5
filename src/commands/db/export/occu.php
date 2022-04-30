@@ -98,7 +98,7 @@ class occu implements Command {
         
         $report = '';
         
-        $persons = Person::getByOccu($occus); // DB
+        $persons = Person::createArrayFromOccus($occus); // DB
         if(count($persons) == 0){
             $report .= "GROUP NOT EXPORTED - '{$params[0]}' corresponds to 0 persons\n";
             if($returnType == 'report'){

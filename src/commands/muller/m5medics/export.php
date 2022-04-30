@@ -98,7 +98,7 @@ class export implements Command {
         ];
         
         $map = [
-            'ids-partial.' . Muller::SOURCE_SLUG => 'MUID',
+            'partial-ids.' . Muller::SOURCE_SLUG => 'MUID',
             'name.given' => 'GNAME',
             'birth.date' => 'DATE',
             'birth.tzo' => 'TZO',

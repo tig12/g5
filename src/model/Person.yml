@@ -16,7 +16,7 @@ ids-in-sources: {}
 # key / value pairs
 # key = id name - necessarily a source slug ?
 # value = local id
-ids-partial: {}
+partial-ids: {}
 
 name:
   given:

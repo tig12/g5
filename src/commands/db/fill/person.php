@@ -114,7 +114,7 @@ class person implements Command {
         // Always use the first element of ids-in-sources to find the person
         $source = array_keys($tweak['ids-in-sources'])[0];
         $sourceId = $tweak['ids-in-sources'][$source];
-        $p = ModelPerson::sourceId2person($source, $sourceId); // DB
+        $p = ModelPerson::createFromSourceId($source, $sourceId); // DB
         if(is_null($p)){
             $msg = "TWEAK ERROR: Person doesn't exist in database - source = $source, id = $sourceId"
                 . " - concerned tweak:\n" . print_r($tweak, true) . "\n";

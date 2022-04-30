@@ -5,7 +5,10 @@
     NOTE: This code cannot be executed several times (won't update the records if already in database)
         To re-execute it (eg for debug purposes), you must rebuild the databse from scratch (at least A2 and E1)
     
-    @pre This command must be executed after tmp2db of LERRCP A1 and Ertel Sport.
+    @pre This command must be executed after tmp2db step of
+         - LERRCP A1
+         - LERRCP D6
+         - Ertel Sport
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2022-04-22 17:12:58+02:00, Thierry Graff : creation
@@ -18,55 +21,74 @@ use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
 use g5\commands\cfepp\final3\Final3;
-use g5\commands\gauq\LERRCP;
 use g5\commands\cfepp\CFEPP;
+use g5\commands\gauq\LERRCP;
+use g5\commands\ertel\Ertel;
 use g5\commands\cpara\CPara;
 
 class tmp2db implements Command {
     
+    const REPORT_TYPE = [
+        'small' => 'Echoes the number of inserted / updated rows',
+        'full'  => 'Lists the different dates between CFEPP and Gauquelin',
+    ];
     /**
         @param  $params Empty array
     **/
     public static function execute($params=[]): string {
-        if(count($params) > 0){
-            return "USELESS PARAMETER : " . $params[0] . "\n";
+        if(count($params) > 1){
+            return "USELESS PARAMETER : " . $params[1] . "\n";
+        }
+        $msg = '';
+        foreach(self::REPORT_TYPE as $k => $v){
+            $msg .= "  '$k' : $v\n";
+        }
+        if(count($params) != 1){
+            return "WRONG USAGE - This command needs a parameter to specify which output it displays. Can be :\n" . $msg;
+        }
+        $reportType = $params[0];
+        if(!in_array($reportType, array_keys(self::REPORT_TYPE))){
+            return "INVALID PARAMETER : $reportType - Possible values :\n" . $msg;
         }
         
-        $report = "--- cfepp final3 tmp2db ---\n";
+        $cmdSignature = 'cfepp final3 tmp2db';
+        $report = "--- $cmdSignature ---\n";
+        $dateReport = '';
+        $occuReport  = '';
         
         // sources corresponding to this test - insert if does not already exist
         
         // sources 'cfepp' and 'cpara' already exist, created in Ertel Sport tmp2db
         
-        $final3Source = Source::getBySlug(Final3::SOURCE_SLUG); // DB
+        $final3Source = Source::createFromSlug(Final3::SOURCE_SLUG); // DB
         if(is_null($final3Source)){
             $final3Source = new Source(Final3::SOURCE_DEFINITION_FILE);
             $final3Source->insert(); // DB
             $report .= "Inserted source " . $final3Source->data['slug'] . "\n";
         }
         
-        $cfeppBookletSource = Source::getBySlug(CFEPP::BOOKLET_SOURCE_SLUG); // DB
+        $cfeppBookletSource = Source::createFromSlug(CFEPP::BOOKLET_SOURCE_SLUG); // DB
         if(is_null($cfeppBookletSource)){
             $cfeppBookletSource = new Source(CFEPP::BOOKLET_SOURCE_DEFINITION_FILE);
             $cfeppBookletSource->insert(); // DB
             $report .= "Inserted source " . $cfeppBookletSource->data['slug'] . "\n";
         }
         
-        $nienhuysSource = Source::getBySlug(CFEPP::NIENHUYS_SOURCE_SLUG); // DB
+        $nienhuysSource = Source::createFromSlug(CFEPP::NIENHUYS_SOURCE_SLUG); // DB
         if(is_null($nienhuysSource)){
             $nienhuysSource = new Source(CFEPP::NIENHUYS_SOURCE_DEFINITION_FILE);
             $nienhuysSource->insert(); // DB
             $report .= "Inserted source " . $nienhuysSource->data['slug'] . "\n";
         }
         
-        $cfeppSource = Source::getBySlug(CFEPP::SOURCE_SLUG); // DB
+        $cfeppSource = Source::createFromSlug(CFEPP::SOURCE_SLUG); // DB
         
-        $cparaSource = Source::getBySlug(CPara::SOURCE_SLUG); // DB
+        $cparaSource = Source::createFromSlug(CPara::SOURCE_SLUG); // DB
         
         // groups
         
         $g1120 = Group::createFromSlug(Final3::GROUP_1120_SLUG);
-        if(is_null($g)){
+        if(is_null($g1120)){
             $g1120 = Final3::getGroup1120();
             $g1120->data['id'] = $g1120->insert(); // DB
             $report .= "Inserted group " . $g1120->data['slug'] . "\n";
@@ -75,9 +97,9 @@ class tmp2db implements Command {
             $g1120->deleteMembers(); // DB - only deletes asssociations between group and members
         }
         
-        $g1066 = Group::createFromSlug(Final3::GROUP_1120_SLUG);
-        if(is_null($g)){
-            $g1066 = Final3::getGroup1120();
+        $g1066 = Group::createFromSlug(Final3::GROUP_1066_SLUG);
+        if(is_null($g1066)){
+            $g1066 = Final3::getGroup1066();
             $g1066->data['id'] = $g1066->insert(); // DB
             $report .= "Inserted group " . $g1066->data['slug'] . "\n";
         }
@@ -87,8 +109,10 @@ class tmp2db implements Command {
         
         $nInsert = 0;
         $nUpdate = 0;
-//        $nRestoredNames = 0;
-//        $nDiffDates = 0;
+        
+        $nDiffDates = 0;
+        $nDiffDatesUT = 0;
+        
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
         $lines = Final3::loadTmpFile();
@@ -96,153 +120,275 @@ class tmp2db implements Command {
         $N = count($lines);
         $t1 = microtime(true);
         for($i=0; $i < $N; $i++){
-            $line = $lines[$i];                                                                        
+            $line = $lines[$i];
             $lineRaw = $linesRaw[$i];
-            $cfid = CFEPP::cfeppId($line['CFID']);
-            $gqid = $line['GQID'];
-            $erid = $line['ERID'];
-            $cpid = $line['CPID'];
-die("\n<br>die here " . __FILE__ . ' - line ' . __LINE__ . "\n");
-            if($gqid == ''){
-                // Person not in Gauquelin data
+            $ERID = $line['ERID'];
+            $CFID = $line['CFID'];
+            $newOccus = [$line['OCCU']];
+            $fname = ucwords($line['FNAME']);
+            $gname = ucwords($line['GNAME']);
+            if($ERID == ''){;
+                // Person not already in g5 db
+                // (true because commands\cfepp\final3\ids uses Ertel file)
                 $p = new Person();
                 $new = [];
                 $new['trust'] = Final3::TRUST_LEVEL;
-                $new['name']['family'] = $line['FNAME'];
-                $new['name']['given'] = $line['GNAME'];
+                $new['name']['family'] = $fname;
+                $new['name']['given'] = $gname;
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
+                $new['birth']['date-ut'] = $line['DATE-UT'];
                 $new['birth']['place']['name'] = $line['PLACE'];
                 $new['birth']['place']['c2'] = $line['C2'];
-                $new['birth']['place']['c2'] = $line['C3'];
+                $new['birth']['place']['c3'] = $line['C3'];
                 $new['birth']['place']['cy'] = 'FR';
                 $new['birth']['place']['lg'] = (float)$line['LG'];
                 $new['birth']['place']['lat'] = (float)$line['LAT'];
                 //
-                $p->addOccus([$line['OCCU']]);
-                $p->addIdInSource($source->data['slug'], $line['NR']);
-                $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
+                $p->addOccus($newOccus);
+                $p->addIdInSource(Final3::SOURCE_SLUG, $CFID);
+                $p->addPartialId(CFEPP::SOURCE_SLUG, CFEPP::cfeppId($CFID));
                 $p->updateFields($new);
                 $p->computeSlug();
-                // repeat fields to include in $history
-                $new['ids-in-sources'] = [
-                    $source->data['slug'] => $line['NR']
-                ];
+                // repeat some fields to include in $history
+                $new['ids-in-sources'] = [Final3::SOURCE_SLUG => $CFID];
+                $new['partial-ids'] = [CFEPP::SOURCE_SLUG => CFEPP::cfeppId($CFID)];
                 $new['occus'] = $newOccus;
                 $p->addHistory(
-                    command: 'muller m5medics tmp2db',
-                    sourceSlug: $source->data['slug'],
+                    command: $cmdSignature,
+                    sourceSlug: Final3::SOURCE_SLUG,
                     newdata: $new,
                     rawdata: $lineRaw
                 );
                 $nInsert++;
-                $p->data['id'] = $p->insert(); // DB
+//                $p->data['id'] = $p->insert(); // DB
             }
             else{
-                // Person already in A2 or E1
+                // Person already in Gauquelin
+                // As fields of CFEPP were checked by Nienhuys, considered as more reliable
+                // than Gauquelin data coming from cura.free.fr
+                // But mark with an issue when a difference is found
+                //
+                // Note : we do not consider here name restoration (names like "Gauquelin-A1-234"
+                // because this is completely handled by import of Ertel's file, which must have been executed before.
                 $new = [];
                 $new['issues'] = [];
-                $issue1 = $issue2 = $issue3 = '';
-                [$gauqSourceSlug, $NUM] = M5medics::gnr2LERRCPSourceId($line['GNR']);
-                $gauqFile = strtoupper($gauqSourceSlug);
-                $gauqId = LERRCP::gauquelinId($gauqFile, $NUM);
-                $p = Person::sourceId2person($gauqSourceSlug, $NUM); // DB
+                $p = Person::createFromPartialId(Ertel::SOURCE_SLUG, $ERID); // DB
                 if(is_null($p)){
-                    throw new \Exception("$gauqId : try to update an unexisting person");
+                    throw new \Exception("$ERID : try to update an unexisting person");
                 }
-                if($p->data['name']['family'] == "Gauquelin-$gauqId"){
-                    $nRestoredNames++;
-                    if($reportType == 'full'){
-                        $namesReport .= "\nCura NUM $gauqId\t {$p->data['name']['family']}\n";
-                        $namesReport .= "Müller NR {$line['NR']}\t {$line['FNAME']} - {$line['GNAME']}\n";
-                    }
+                // Compare g5 value and CFEPP: both date and date-ut
+                // Records from A1 always have date-ut, and sometimes date
+                // Records from D6 always have date and sometimes date-ut
+                // Records from Ertel only have date, never date-ut ; sometimes only birth day, no time
+                $cfeppDate = $line['DATE'];
+                $cfeppDateUT = $line['DATE-UT'];
+                $g5Date = $p->data['birth']['date'];
+                $g5DateUT = $p->data['birth']['date-ut'];
+                $issue1 = $issue2 = '';
+                //
+                // test date
+                //
+                if(strlen($g5Date) > 10){
+                    // g5 has birth time
+                    // Compare only 16 first chars: YYYY-MM-DD HH:MM
+                    // to avoid difference between hours like "07:30" and "07:30:00"
+                    $compareG5 = substr($g5Date, 0, 16);
+                    $compareCFEPP = substr($cfeppDate, 0, 16);
                 }
-                // if Cura and Müller have different birth day
-                $mulDay = substr($line['DATE'], 0, 10);
-                // from A2, stored in field 'date-ut' ; from E1, stored in field 'date'
-                if(isset($p->data['ids-in-sources']['a2'])){
-                    $gauqDay = substr($p->data['birth']['date-ut'], 0, 10);
+                else{
+                    // g5 has only birth day
+                    $compareG5 = $g5Date;
+                    $compareCFEPP = substr($cfeppDate, 0, 10);
                 }
-                else{ // E1
-                    $gauqDay = substr($p->data['birth']['date'], 0, 10);
-                }
-                if($mulDay != $gauqDay){
+                if($compareG5 != $compareCFEPP){
                     $nDiffDates++;
-                    $issue1 = "Check birth date because Müller and Gauquelin birth days differ\n"
-                           . "<br>$gauqDay for Gauquelin $gauqId\n"
-                           . "<br>$mulDay for Müller $mullerId\n";
+                    $issue1 = "Check birth date because CFEPP and g5 birth dates differ\n"
+                           . "Date\n"
+                           . "<br>$g5Date for g5 $ERID\n"
+                           . "<br>$cfeppDate for CFEPP $CFID\n";
                     $p->addIssue($issue1);
                     if($reportType == 'full'){
-                        $datesReport .= "\nCura $gauqId\t $gauqDay {$p->data['name']['family']} - {$p->data['name']['given']}\n";
-                        $datesReport .= "Müller NR {$line['NR']}\t $mulDay {$line['FNAME']} - {$line['GNAME']}\n";
+                        $dateReport .= "\nDATE    g5 $ERID\t $g5Date {$p->data['name']['family']} - {$p->data['name']['given']}\n";
+                        $dateReport .= "DATE CFEPP $CFID\t $cfeppDate $fname - $gname\n";
                     }
                 }
-                // E1 same day as Müller 1083 => check time
-                if($mulDay == $gauqDay && isset($p->data['ids-in-sources']['e1'])){
-                    $gauqHour = substr($p->data['birth']['date'], 11);
-                    $mulHour = substr($line['DATE'], 11);
-                    if($gauqHour != $mulHour){
-                        $issue2 = "Check birth date because Müller and Gauquelin birth hours differ"
-                               . "\n<br>$gauqHour for Gauquelin $gauqId"
-                               . "\n<br>$mulHour for Müller $mullerId\n";
-                        $p->addIssue($issue2);
+                //
+                // test date-ut
+                //
+                if(strlen($g5DateUT) == 0){
+                    $compareG5 = $compareCFEPP = true; // don't compare
+                }
+                else if(strlen($g5DateUT) > 10){
+                    $compareG5 = substr($g5DateUT, 0, 16);
+                    $compareCFEPP = substr($cfeppDateUT, 0, 16);
+                }
+                else{
+                    $compareG5 = $g5DateUT;
+                    $compareCFEPP = substr($cfeppDateUT, 0, 10);
+                }
+                if($compareG5 != $compareCFEPP){
+                    $nDiffDatesUT++;
+                    $issue2 = "Check birth date because CFEPP and g5 birth dates UT differ\n"
+                           . "<br>Date UT\n"
+                           . "<br>$g5DateUT for g5 $ERID\n"
+                           . "<br>$cfeppDateUT for CFEPP $CFID\n";
+                    $p->addIssue($issue2);
+                    if($reportType == 'full'){
+                        $dateReport .= "\nDATE UT g5    $ERID\t $g5DateUT {$p->data['name']['family']} - {$p->data['name']['given']}\n";
+                        $dateReport .= "DATE UT CFEPP $CFID\t $cfeppDateUT $fname - $gname\n";
                     }
                 }
-                // update fields that are more precise in muller1083
-                $new['birth']['date'] = $line['DATE']; // Cura contains only date-ut
-                $new['birth']['place']['name'] = $line['PLACE'];
-                $new['name']['nobl'] = $line['NOB'];
-                $new['name']['family'] = $line['FNAME'];
-                if($p->data['name']['given'] == ''){
-                    // happens with names like Gauquelin-A1-258
-                    $new['name']['given'] = $line['GNAME'];
-                }
-                // Müller name considered as = to full name copied from birth certificate
-                // (Gauquelin name considered as current name)
-                $new['name']['official']['given'] = $line['GNAME'];
+                // Compute occupations
+                // $p->data is passed by reference, so $p->data['occus'] modified inside the function
+                self::computeOccu($p->data, $line);
+                // update fields that are supposed to be more precise in CFEPP
+                $new['birth']['date'] = $line['DATE'];
+                $new['birth']['date-ut'] = $line['DATE-UT'];
+                $new['birth']['place']['c3'] = $line['C3'];
                 //
-                if($line['PLACE'] == 'Paris'){
-                    $issue3 = 'Birth date needs to be checked because Arno Müller coulndn\'t verify births in Paris';
-                    $p->addIssue($issue3);
-                }
-                //
-                $p->addOccus($newOccus);
-                $p->addIdInSource($source->data['slug'], $line['NR']);
-                $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
+                $p->addIdInSource(Final3::SOURCE_SLUG, $CFID);
                 $p->updateFields($new);
-                $p->computeSlug();
+                $p->computeSlug(); // recompute in case of date modification
                 // repeat fields to include in $history
-                $new['sources'] = $source->data['slug'];
-                $new['ids-in-sources'] = [ $source->data['slug'] => $line['NR'] ];
+                $new['ids-in-sources'] = [Final3::SOURCE_SLUG => $CFID];
+                $new['partial-ids'] = [CFEPP::SOURCE_SLUG => CFEPP::cfeppId($CFID)];
                 $new['occus'] = $newOccus;
                 if($issue1 != ''){ $new['issues'][] = $issue1; }
                 if($issue2 != ''){ $new['issues'][] = $issue2; }
-                if($issue3 != ''){ $new['issues'][] = $issue3; }
                 if(count($new['issues']) == 0){ unset($new['issues']); }
                 $p->addHistory(
-                    command: 'muller m5medics tmp2db',
-                    sourceSlug: $source->data['slug'],
+                    command: $cmdSignature,
+                    sourceSlug: Final3::SOURCE_SLUG,
                     newdata: $new,
-                    rawdata: $lineRaw
+                    rawdata: $lineRaw,
                 );
                 $nUpdate++;
-                $p->update(); // DB
+//                $p->update(); // DB
             }
-            $g->addMember($p->data['id']);
+            if($CFID <= 1066){
+//                $g1066->addMember($p->data['id']);
+            }
+//            $g1120->addMember($p->data['id']);
         }
         $t2 = microtime(true);
-        $g->insertMembers(); // DB
+//        $g1066->insertMembers(); // DB
+//        $g1120->insertMembers(); // DB
         $dt = round($t2 - $t1, 5);
         if($reportType == 'full'){
-            $report .= "=== Names fixed ===\n" . $namesReport;
-            $report .= "\n=== Dates fixed ===\n" . $datesReport;
+            $report .= "=== Different dates ===\n" . $dateReport;
             $report .= "============\n";
+            $report .= "$nDiffDates different DATE\n";
+            $report .= "$nDiffDatesUT different DATE-UT\n";
         }
         $report .= "$nInsert persons inserted, $nUpdate updated ($dt s)\n";
-        $report .= "$nDiffDates dates differ from A2 and E1";
-        $report .= " - $nRestoredNames names restored in A2\n";
         return $report;
     }
-        
-} // end class    
-
+    
+    /**
+        Modifies if needed a person's occupation code.
+        @param  $data       Date of the person to be modified
+        @param  $line       Represents one person in CFEPP file
+    **/
+    private static function computeOccu(&$data, &$line) {
+        // in CFEPP file, only one occupation, so check can be done on $newOccus[0]
+        $newOccu = $line['OCCU'];
+        if($newOccu == 'athletics-competitor'){
+            // CFEPP less precise that Gauquelin and Ertel => do nothing
+            return;
+        }
+        if($line['CFID'] == 156){
+            // CFEPP 156 Jean-Luc SALOMON 1944-02-27
+            // Looks like both Ertel and CFEPP are right
+            $data['occus'] = ['motor-sports-competitor', 'athletics-competitor'];
+            return;
+        }
+        if($line['CFID'] == 417){
+            // CFEPP 417 D6-339 Daniel REVENU 1942-12-05
+            // Checked on wikipedia, error in Ertel file
+            $data['occus'] = ['fencer'];
+            return;
+        }
+        if($line['CFID'] == 513){
+            // CFEPP 513 A1-1933 Roland LEFEVRE 1914-10-28
+            // Checked on wikipedia, error in Ertel file
+            $data['occus'] = ['football-player'];
+            return;
+        }
+        if(in_array($line['CFID'], [
+            706, // CFEPP 706  Jacqueline DUBIEF 1930-12-04
+            708, // CFEPP 708 A1-2038 Alain GILETTI 1939-09-11
+            709, // CFEPP 709 D6-200 Nicole HASSLER 1941-01-06
+            710, // CFEPP 710  Philippe PELISSIER 1947-11-30 17:40
+            711, // CFEPP 711 D6-321 Patrick PERA 1949-01-17
+        ])){
+            // Checked on wikipedia, CFEPP more precise than Ertel
+            $data['occus'] = ['figure-skater'];
+            return;
+        }
+        if($line['CFID'] == 712){
+            // CFEPP 712 A1-2039 Albert HASSLER 1903-11-03
+            // Checked on wikipedia, CFEPP more precise than Ertel
+            // but CFEPP doesn't mention ice-hockey-player
+            $data['occus'] = ['ice-hockey-player', 'speed-skater'];
+            return;
+        }
+        if(in_array($line['CFID'], [
+            714, // CFEPP 714  Jean Pierre GIUDICELLI 1943-02-20
+            715, // CFEPP 715  Raoul GUEGUEN 1947-06-20
+        ])){
+            // Checked on wikipedia, CFEPP more precise than Ertel
+            $data['occus'] = ['modern-pentathlete'];
+            return;
+        }
+        if($line['CFID'] == 717){
+            // CFEPP 717 A1-1766 Roger HEINKELE 1913-01-06
+            // Checked on wikipedia, error in Ertel file
+            $data['occus'] = ['diver'];
+            return;
+        }
+        if($data['occus'] == ['rugby-player']){
+            // Here, CFEPP (rugby-union-player or rugby-league-player) is more precise than Ertel (rugby-player)
+            // Trust CFEPP, but didn't check
+            $data['occus'] = [$newOccu];
+            return;
+        }
+        if($line['CFID'] == 929){
+            // CFEPP 929 A1-1970 Michel POMATHIOS 1924-03-18
+            // Adopted a mix of CFEPP (rugby-union-player) and Gauquelin (executive)
+            $data['occus'] = ['rugby-union-player', 'executive'];
+            return;
+        }
+        if($line['CFID'] == 1031){
+            // CFEPP 1031 A1-2086 Alain GERBAULT 1893-11-17
+            $data['occus'] = ['tennis-player', 'sport-sailer', 'writer'];
+            return;
+        }
+        if($line['CFID'] == 1047){
+            // CFEPP 1047  Eugene MANCHISKA 1919-09-21
+            $data['occus'] = ['table-tennis-player'];
+            return;
+        }
+        if($line['CFID'] == 1057){
+            // CFEPP 1057 A1-2079 Pierre FELBACQ 1904-01-23
+            // Checked on wikipedia, error in Ertel file
+            $data['occus'] = ['archer'];
+            return;
+        }
+        if($line['CFID'] == 1061){
+            // CFEPP 1061 A1-1764 Paul DUJARDIN 1894-05-10
+            // Checked on wikipedia, error in Ertel file
+            $data['occus'] = ['water-polo-player'];
+            return;
+        }
+        // debug trace used to develop
+        // became useless after corrections
+        if(!in_array($newOccu, $data['occus'])){
+            echo "\nDIFFERENT OCCUS ";
+            echo "CFEPP {$line['CFID']} {$line['GQID']} {$line['GNAME']} {$line['FNAME']} {$line['DATE']}\n";
+            echo "newOccu = $newOccu\n";
+            echo "p->data['occus'] = " .implode(' + ', $data['occus']) . "\n";
+        }
+    }
+    
+} // end class

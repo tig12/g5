@@ -54,7 +54,7 @@ class tmp2db implements Command {
         }
         
         // source corresponding to Müller's Astro-Forschungs-Daten - insert if does not already exist
-        $afdSource = Source::getBySlug(Muller::SOURCE_SLUG); // DB
+        $afdSource = Source::createFromSlug(Muller::SOURCE_SLUG); // DB
         if(is_null($afdSource)){
             $afdSource = new Source(Muller::SOURCE_DEFINITION_FILE);
             $afdSource->insert(); // DB
@@ -62,7 +62,7 @@ class tmp2db implements Command {
         }
         
         // source corresponding to newalchemypress - insert if does not already exist
-        $newalchSource = Source::getBySlug(Newalch::SOURCE_SLUG); // DB
+        $newalchSource = Source::createFromSlug(Newalch::SOURCE_SLUG); // DB
         if(is_null($newalchSource)){
             $newalchSource = new Source(Newalch::SOURCE_DEFINITION_FILE);
             $newalchSource->insert(); // DB
@@ -70,7 +70,7 @@ class tmp2db implements Command {
         }
         
         // source of Müller's booklet 5 physicians - insert if does not already exist
-        $bookletSource = Source::getBySlug(M5medics::BOOKLET_SOURCE_SLUG); // DB
+        $bookletSource = Source::createFromSlug(M5medics::BOOKLET_SOURCE_SLUG); // DB
         if(is_null($bookletSource)){
             $bookletSource = new Source(M5medics::BOOKLET_SOURCE_DEFINITION_FILE);
             $bookletSource->insert(); // DB
@@ -78,7 +78,7 @@ class tmp2db implements Command {
         }
         
         // source of 5a_muller_medics.txt - insert if does not already exist
-        $source = Source::getBySlug(M5medics::LIST_SOURCE_SLUG); // DB
+        $source = Source::createFromSlug(M5medics::LIST_SOURCE_SLUG); // DB
         if(is_null($source)){
             $source = new Source(M5medics::LIST_SOURCE_DEFINITION_FILE);
             $source->insert(); // DB
@@ -131,7 +131,7 @@ class tmp2db implements Command {
                 //
                 $p->addOccus($newOccus);
                 $p->addIdInSource($source->data['slug'], $line['NR']);
-                $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
+                $p->addPartialId(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
@@ -154,7 +154,7 @@ class tmp2db implements Command {
                 [$gauqSourceSlug, $NUM] = M5medics::gnr2LERRCPSourceId($line['GNR']);
                 $gauqFile = strtoupper($gauqSourceSlug);
                 $gauqId = LERRCP::gauquelinId($gauqFile, $NUM);
-                $p = Person::sourceId2person($gauqSourceSlug, $NUM); // DB
+                $p = Person::createFromSourceId($gauqSourceSlug, $NUM); // DB
                 if(is_null($p)){
                     throw new \Exception("$gauqId : try to update an unexisting person");
                 }
@@ -216,7 +216,7 @@ class tmp2db implements Command {
                 //
                 $p->addOccus($newOccus);
                 $p->addIdInSource($source->data['slug'], $line['NR']);
-                $p->addIdPartial(Muller::SOURCE_SLUG, $mullerId);
+                $p->addPartialId(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
