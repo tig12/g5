@@ -223,4 +223,146 @@ class ErtelSport {
         return 'football-player';
     }
     
+    /**
+        Associations Ertel id (column NR) => CFEPP id (column CFEPNR).
+        Permits to fix the wrong associations contained in Ertel file.
+        Array built from succesive executions of command
+        php run-g5.php cfepp final3 look ertel
+    **/
+    const ERTEL_CFEPP = [
+        2 => 790, // Alain Abadie
+        4 => 791, // Lucien Abadie
+        42 => 792, // Pierre Albaladejo
+        70 => 793, // André Alvarez
+        74 => 794, // Henri Amand
+        80 => 795, // Jean-Baptiste Amestoy
+        123 => 796, // Roger Arcalis
+        138 => 798, // Michel Arnaudet
+        153 => 799, // Richard Astre
+        172 => 800, // Louis Azarette
+        196 => 801, // Marcel Bailette
+        271 => 802, // Guy Basquet
+        274 => 803, // Jean Pierre Bastiat
+        285 => 804, // Noel Baudry
+        288 => 805, // Robert Baulon
+        293 => 806, // Jacques Bayardon
+        314 => 807, // Louis Beguet
+        316 => 808, // André Behoteguy
+        317 => 809, // Henri Behoteguy
+        343 => 810, // René Benesis
+        354 => 811, // André Beraud
+        356 => 812, // Jean Claude Berejnoi
+        382 => 813, // Jean Louis Berot
+        437 => 814, // Paul Biemouret
+        444 => 816, // Eugene Billac
+        512 => 1021, // Henri Bollelli
+        532 => 817, // André Boniface
+        533 => 818, // Guy Boniface
+        559 => 820, // Dominique Bontemps
+        567 => 821, // Francois Borde
+        572 => 822, // Léon Bornenave
+        599 => 823, //  Christian Boujet
+        604 => 824, // Jacques Bouquet
+        610 => 825, // Roger Bourdeu
+        611 => 826, // Roger Bourgarel
+        663 => 827, // René Brejassou
+        693 => 828, // Georges Brun
+        724 => 829, // Yvan Buonomo
+        761 => 831, // Eugene Buzy
+        763 => 832, // Jean Michel Cabanier
+        791 => 833, // Guy Camberabero
+        792 => 834, // Lilian Camberabero
+        798 => 835, // Fernand Camicas
+        800 => 836, // André Campaes
+        813 => 837, // Jack Cantoni
+        853 => 838, // Lucien Caron
+        864 => 839, // Christian Carrere
+        865 => 840, // Jean Carrere
+        909 => 841, // Jean Caujolle
+        926 => 842, // Albert Cazenave
+        927 => 843, // Fernand Cazenave
+        933 => 844, // Michel Celaya
+        1074 => 846, // Marcel Communeau
+        1122 => 38, // Jean Pierre Corval
+        1151 => 847, // René Crabos
+        1154 => 848, // Jacques Crampagne
+        1155 => 849, // Roland Crancee
+        1156 => 850, // Michel Crauste
+        1222 => 851, // Christian Darrouy
+        1223 => 852, // Benoit Dauga
+        1245 => 854, // Nicolas De Gregorio
+        1294 => 855, // Louis Dedet
+        1313 => 856, // Jean Louis Dehez
+        1370 => 857, // Francis Desclaux
+        1422 => 858, // Pierre Dizabo
+        1430 => 859, // Henri Domec
+        1431 => 860, // Amédée Domenech
+        1453 => 861, // Claude Dourthe
+        1478 => 862, // Gérard Dufau
+        1479 => 863, // Jacques Dufourcq
+        1496 => 864, // Clément Dupont
+        1498 => 865, // Louis Dupont 
+        1499 => 866, // Bernard Duprat
+        1504 => 867, // Jean Dupuy
+        1514 => 868, // Bernard Dutin
+        1553 => 870, // Alain Esteve
+        1558 => 871, // Marc Etcheverry
+        1647 => 873, // Roger Fite
+        1698 => 874, // Jacques Fouroux
+        1706 => 875, // André Franquenelle
+        1744 => 876, // Jean Gachassin 
+        1821 => 877, // Roger Gensane
+        1827 => 878, // Geo Gerald
+        1838 => 879, // Francois Gesta-Lavit
+        1954 => 853, // Jean de Gregorio
+        1899 => 880, // Charles Gonnet
+        1907 => 881, // Raoul Got
+        1941 => 882, // Vincent Graule
+        1950 => 883, // Michel Greffe
+        2046 => 884, // Raymond Halcaren
+        2076 => 885, // Michel Hauser
+        2116 => 886, // André Herrero
+        2117 => 887, // Daniel Herrero
+        2176 => 888, // Henri Iharassary
+        2183 => 889, // Jean Iracabal
+        2207 => 890, // Adolphe Jauréguy
+        2223 => 891, // Marcel Jol
+        2239 => 892, // Louis Junquas
+        2301 => 893, // Paul Labadie
+        2304 => 894, // Antoine Labazuy
+        2305 => 895, // Claude Laborde
+        2309 => 896, // Claude Lacaze
+        2320 => 897, // Pierre Lacroix
+        2373 => 899, // Jean Lassegue
+        2383 => 901, // Marcel Laurent
+        2425 => 765, // Jean-Pierre Lecompte
+        2469 => 766, // Odé Lespes
+        2644 => 767, // Claude Mantoulan
+        2693 => 768, // Serge Marsolan
+        2722 => 769, // Francis Mas
+        2770 => 771, // Hervé Mazard
+        2772 => 772, // Louis Mazon
+        2905 => 773, // Michel Mollinier
+        3410 => 775, // Aldo Quaglio
+        3456 => 776, // Raymond Rebujent
+        3485 => 777, // Roger Rey
+        3602 => 778, // Max Rousié
+        // Possible confusion between Francis and Antoine Rudler
+        // Seems that 2 distinct basket-ball players have existed :
+        // https://www.wikiwand.com/en/Foyer_alsacien_Mulhouse
+        // 3619 => 218, // Antoine Rudler
+        3637 => 779, // Christian Sabatie
+        3696 => 780, // Jean Pierre Sauret
+        3704 => 781, // André Savonne
+        3835 => 782, // Michel Sitjar
+        3960 => 783, // Pierre Taillantou
+        4053 => 784, // Raymond Toujas
+        4061 => 785, // Frédéric Trescases
+        4088 => 786, // Amboise Ulma
+        4100 => 787, // André Vadon
+        4200 => 788, // Louis Verge
+        4282 => 789, // Maurice Voron
+    ];
+    
+    
 } // end class

@@ -17,38 +17,16 @@ use tiglib\patterns\Command;
 
 class ids implements Command {
     
-   /** Possible value for parameter 1 **/
-    const POSSIBLE_PARAMS = [
-        'add' => "Add values ERID GQID CPID",
-        'group' => "Compute unique and intersections",
-    ];
-    
     /** 
         @param $param Empty array
         @return Report
     **/
     public static function execute($params=[]): string {
-        $possibleParams_str = '';
-        foreach(self::POSSIBLE_PARAMS as $k => $v){
-            $possibleParams_str .= "  '$k' : $v\n";
+        if(count($params) > 0){
+            return "USELESS PARAMETER : {$params[0]}\n";
         }
-        if(count($params) == 0){
-            return "PARAMETER MISSING\n"
-                . "Possible values for parameter :\n$possibleParams_str\n";
-        }
-        if(count($params) > 1){
-            return "USELESS PARAMETER : {$params[1]}\n";
-        }
-        //
-        $action = $params[0];
-        return self::{$action}();
-    }
-    
-    /** 
-    
-    **/
-    public static function add(): string {
-        $report =  "--- cfepp final3 ids add ---\n";
+            
+        $report =  "--- cfepp final3 ids ---\n";
         
         // Array to complete: add values in columns ERID GQID CPID
         $final3 = Final3::loadTmpFile_cfid();
@@ -96,66 +74,4 @@ class ids implements Command {
         return $report;
     }
     
-    /** 
-        Computes intersections.
-        @return Report
-    **/
-    public static function group(): string {
-        $report =  "--- cfepp final3 ids group ---\n";
-        
-        $ids = ['CFID', 'ERID', 'GQID', 'CPID'];
-        
-        // base : sets containing all with CFID, ERID, GQID, CPID
-        $base = [];
-        foreach($ids as $id){
-            $base[$id] = [];
-        }
-        // interesting intersections
-        $inter = [
-            'CF-only' => [],
-            'GQ-inter-CF' => [],
-            'GQ-inter-CP' => [],
-            'CF-inter-CP' => [],
-            'GQ-inter-CF-inter-CP' => [],
-        ];
-        
-        $final3 = Final3::loadTmpFile();
-        $fieldnames = Final3::TMP_FIELDS;
-        
-        foreach($final3 as $cur){
-            foreach($ids as $id){
-                if($cur[$id] != ''){
-                   $base[$id][] = $cur;
-                }
-            }
-            if($cur['GQID'] != '' && $cur['CFID'] != ''){
-                $inter['GQ-inter-CF'][] = $cur;
-            }
-            if($cur['GQID'] != '' && $cur['CPID'] != ''){
-                $inter['GQ-inter-CP'][] = $cur;
-            }
-            if($cur['CFID'] != '' && $cur['CPID'] != ''){
-                $inter['CF-inter-CP'][] = $cur;
-            }
-            if($cur['GQID'] != '' && $cur['CFID'] != '' && $cur['CPID'] != ''){
-                $inter['GQ-inter-CF-inter-CP'][] = $cur;
-            }
-            if($cur['GQID'] == '' && $cur['ERID'] == '' && $cur['CPID'] == ''){
-                $inter['CF-only'][] = $cur;
-            }
-        }
-        
-        if(true){
-            $report .= "=== base ===\n";
-            foreach($base as $id => $set){
-                $report .= "$id : " . count($set) . "\n";
-            }
-            $report .= "=== inter ===\n";
-            foreach($inter as $k => $set){
-                $report .= "$k : " . count($set) . "\n";
-            }
-        }
-        return $report;
-    }
-        
 } // end class
