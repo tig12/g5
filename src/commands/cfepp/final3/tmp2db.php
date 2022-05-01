@@ -161,7 +161,7 @@ class tmp2db implements Command {
                     rawdata: $lineRaw
                 );
                 $nInsert++;
-//                $p->data['id'] = $p->insert(); // DB
+                $p->data['id'] = $p->insert(); // DB
             }
             else{
                 // Person already in Gauquelin
@@ -264,16 +264,16 @@ class tmp2db implements Command {
                     rawdata: $lineRaw,
                 );
                 $nUpdate++;
-//                $p->update(); // DB
+                $p->update(); // DB
             }
             if($CFID <= 1066){
-//                $g1066->addMember($p->data['id']);
+                $g1066->addMember($p->data['id']);
             }
-//            $g1120->addMember($p->data['id']);
+            $g1120->addMember($p->data['id']);
         }
         $t2 = microtime(true);
-//        $g1066->insertMembers(); // DB
-//        $g1120->insertMembers(); // DB
+        $g1066->insertMembers(); // DB
+        $g1120->insertMembers(); // DB
         $dt = round($t2 - $t1, 5);
         if($reportType == 'full'){
             $report .= "=== Different dates ===\n" . $dateReport;

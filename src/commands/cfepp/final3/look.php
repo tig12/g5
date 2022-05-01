@@ -55,17 +55,14 @@ class look implements Command {
         $final3 = Final3::loadTmpFile_cfid();
         $ertelfile = ErtelSport::loadTmpFile();
         $fixed = array_keys(ErtelSport::ERTEL_CFEPP);
-$i = 0;
         foreach($ertelfile as $ert){
             $CFID = $ert['CFEPNR'];
             if($CFID == ''){
                 continue;
             }
             $ERID = $ert['NR'];
-//echo "ERID = $ERID\n";
             if(in_array($ERID, $fixed)){
                 $CFID = ErtelSport::ERTEL_CFEPP[$ERID];
-//echo "CFID = $CFID\n";
             }
             if(!isset($final3[$CFID])){
                 echo "\n=====\n";
@@ -80,7 +77,6 @@ $i = 0;
             echo "\n=====\n";
             echo "Ertel $ERID {$ert['GNAME']} {$ert['FNAME']} {$ert['DATE']} => $CFID\n";
             echo "CFEPP $CFID {$cfe['GNAME']} {$cfe['FNAME']} {$cfe['DATE']}\n";
-//$i++; if($i == 10) break;
         }
         return '';
     }

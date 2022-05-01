@@ -32,32 +32,19 @@ class ids implements Command {
         $final3 = Final3::loadTmpFile_cfid();
         // data/tmp/ertel/ertel-4384-sport.csv : 4384 rows
         $ertelfile = ErtelSport::loadTmpFile();
-        $NCFEPP = $NnotCFEPP = 0;
+        
+        $NCFEPP = 0;
         foreach($ertelfile as $cur){
             $CFID = $cur['CFEPNR'];
-            if($CFID == ''){
-                $NnotCFEPP++;
+            $ERID = $cur['NR'];
+            if(isset(ErtelSport::ERTEL_CFEPP[$ERID])){
+                $CFID = ErtelSport::ERTEL_CFEPP[$ERID]; // take correction into account
+            }
+            if($CFID == '' || $CFID == 0){
                 continue;
             }
-            if(!isset($final3[$CFID])){
-                // Happens for 4 records - errors in Ertel file
-                // echo "CFID = '$CFID' - NR = {$cur['NR']} - {$cur['FNAME']} {$cur['GNAME']}\n";
-                // CFID = '1921' - NR = 512 - Bollelli Henri
-                // CFID = '0' - NR = 1990 - Gruppi Raymond
-                // CFID = '0' - NR = 2001 - Guerin Henri
-                // CFID = '0' - NR = 3181 - Pecqueux Michel
-                // Fix one case after manual check (compare Ertel - Final3)
-                if($cur['NR'] == 512){
-                    $CFID = 1021;
-                }
-                else{
-                    // 3 other cases not present in final3 (error in Ertel file)
-                    $NnotCFEPP++;
-                    continue;
-                }
-            }
             $NCFEPP++;
-            $final3[$CFID]['ERID'] = Ertel::ertelId('S', $cur['NR']);
+            $final3[$CFID]['ERID'] = Ertel::ertelId('S', $ERID);
             $final3[$CFID]['GQID'] = ErtelSport::GQIDfrom3a_sports($cur);
             $final3[$CFID]['CPID'] = $cur['PARA_NR'];
         }
