@@ -37,6 +37,12 @@ class ids implements Command {
         foreach($ertelfile as $cur){
             $CFID = $cur['CFEPNR'];
             $ERID = $cur['NR'];
+            if($CFID == 1119){
+                // particular case - CFEPP related to Gauquelin and not present in Ertel
+                $final3[$CFID]['GQID'] = 'A1-2089';
+                $NCFEPP++;
+                continue;
+            }
             if(isset(ErtelSport::ERTEL_CFEPP[$ERID])){
                 $CFID = ErtelSport::ERTEL_CFEPP[$ERID]; // take correction into account
             }

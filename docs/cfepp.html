@@ -45,6 +45,9 @@ Athlège 1951 https://www.abebooks.com/LAthl%C3%A8ge-1951-Biographies-grands-cha
 <div class="intro">
 This page deals with the third and last test done by a group of skeptics, the CFEPP (Comité Français pour l'Etude des Phénomènes Paranormaux - French Commitee for the study of paranormal phenomena). Results were published in 1996 in a booklet ; the official published list contains 1066 sport champions.
 <br>Two sources were used to include this test in g5 database: the CFEPP booklet and <i><b>final3</b></i>, a file sent by Jan Willem Nienhuys, who kindly authorized its use for inclusion in g5 database.
+<br>Among the 1120 records contained in file <code>final3</code>, 974 are already in Gauquelin or Ertel data. This file then brings <b>129 new records</b>.
+
+
 </div>
 
 </header>
@@ -61,7 +64,7 @@ A complete restoration of this group would be quite complex, because it contains
     <li>Cases for which neither the CFEPP nor MG has been able to obtain information: 3 records.</li>
 </ul>
 
-For the moment, inclusion to g5 database is limited to 3 groups: 1439, 1066, 1120 (= 1066 + 54, see below).
+For the moment, inclusion to g5 database is limited to 2 groups: 1066, 1120 (= 1066 + 54, see below).
 
 <!-- ********************************************************************************* -->
 <h2 id="origin">Origin</h2>
@@ -283,13 +286,22 @@ As Nienhuys' file roughly contains the same fields as the published list, the me
 <!-- ********************************************************************************* -->
 <h2>G5 integration</h2>
 Inclusion of this file in g5 is done using <a href="ertel-4391-sport.html">Ertel's file of 4384 sportsmen</a>, which contains the CFEPP ids.
-
+<br>Import is done issuing the following commands:
 <pre>
 php run-g5.php cfepp final3 raw2tmp
 php run-g5.php cfepp final3 ids
 php run-g5.php cfepp final3 tmp2db small
 </pre>
 
+Step <code>raw2tmp</code> converts file <code>final3</code> to <code>data/tmp/cfepp/cfepp-1120-nienhuys.csv</code>.
+<br>Step <code>ids</code> adds Ertel, Gauquelin and Comité Para ids to this tmp file. The code permits to identify 129 wrong CFEPP ids in Ertel file, and 54 missing associations. One record (Marcel Domergue, A1-2089) is not present in Ertel file but already in Gauquelin data.
+
+<br><br>Other commands permit to display additional informations :
+<pre>php run-g5.php cfepp final3 look ertel</pre>
+<pre>
+N invalid = 3           # aberrant values in Ertel file
+N different dates = 62  # different birth days, between Ertel's file and final3
+</pre>
 
 <!-- ********************************************************************************* -->
 <h2>CFEPP unique id</h2>

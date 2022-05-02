@@ -230,6 +230,7 @@ class ErtelSport {
         php run-g5.php cfepp final3 look ertel
     **/
     const ERTEL_CFEPP = [
+        // A1-2089 => 1119, // domergue-marcel - association with a Gauquelin record not present in Ertel file
         2 => 790, // Alain Abadie
         4 => 791, // Lucien Abadie
         42 => 792, // Pierre Albaladejo
@@ -241,8 +242,10 @@ class ErtelSport {
         153 => 799, // Richard Astre
         172 => 800, // Louis Azarette
         196 => 801, // Marcel Bailette
+        255 => 1106, // Raoul Barriere - association not present in Ertel file
         271 => 802, // Guy Basquet
         274 => 803, // Jean Pierre Bastiat
+        283 => 1117, //  Jean-Jacques Baud- association not present in Ertel file
         285 => 804, // Noel Baudry
         288 => 805, // Robert Baulon
         293 => 806, // Jacques Bayardon
@@ -260,6 +263,7 @@ class ErtelSport {
         512 => 1021, // Henri Bollelli
         532 => 817, // André Boniface
         533 => 818, // Guy Boniface
+        544 => 1111, // François Bonlieu - association not present in Ertel file
         559 => 820, // Dominique Bontemps
         567 => 821, // Francois Borde
         572 => 822, // Léon Bornenave
@@ -267,17 +271,23 @@ class ErtelSport {
         604 => 824, // Jacques Bouquet
         610 => 825, // Roger Bourdeu
         611 => 826, // Roger Bourgarel
+        653 => 1097, // Yvonne Brassart - association not present in Ertel file
         663 => 827, // René Brejassou
+        683 => 1101, // Elie Brousse - association not present in Ertel file
         693 => 828, // Georges Brun
+        694 => 1098, // André Brunaud - association not present in Ertel file
         708 => 1069, // Gerard Buchheit - association not present in Ertel file
         724 => 829, // Yvan Buonomo
         761 => 831, // Eugene Buzy
         763 => 832, // Jean Michel Cabanier
+        764 => 1102, // Jacques Cabero - association not present in Ertel file
+        771 => 1107, // Jules Cadenat - association not present in Ertel file
         791 => 833, // Guy Camberabero
         792 => 834, // Lilian Camberabero
         798 => 835, // Fernand Camicas
         800 => 836, // André Campaes
         813 => 837, // Jack Cantoni
+        814 => 1103, // Vincent Cantoni - association not present in Ertel file
         853 => 838, // Lucien Caron
         864 => 839, // Christian Carrere
         865 => 840, // Jean Carrere
@@ -285,7 +295,9 @@ class ErtelSport {
         926 => 842, // Albert Cazenave
         927 => 843, // Fernand Cazenave
         933 => 844, // Michel Celaya
+        988 => 1099, // René Chesnau - association not present in Ertel file
         1052 => 1071, // Anne-Marie Colchen - association not present in Ertel file
+        1070 => 1104, // Gaston Comes - association not present in Ertel file
         1074 => 846, // Marcel Communeau
         1122 => 38, // Jean Pierre Corval
         1151 => 847, // René Crabos
@@ -301,6 +313,7 @@ class ErtelSport {
         1294 => 855, // Louis Dedet
         1313 => 856, // Jean Louis Dehez
         1370 => 857, // Francis Desclaux
+        1375 => 1114, // Suzanne Desloge - association not present in Ertel file
         1422 => 858, // Pierre Dizabo
         1430 => 859, // Henri Domec
         1431 => 860, // Amédée Domenech
@@ -315,6 +328,7 @@ class ErtelSport {
         1514 => 868, // Bernard Dutin
         1553 => 870, // Alain Esteve
         1558 => 871, // Marc Etcheverry
+        1593 => 1096, // Suzanne Faure-Beaulieu - association not present in Ertel file
         1601 => 1073, // René Feger - association not present in Ertel file
         1647 => 873, // Roger Fite
         1698 => 874, // Jacques Fouroux
@@ -336,6 +350,7 @@ class ErtelSport {
         2046 => 884, // Raymond Halcaren
         2076 => 885, // Michel Hauser
         2088 => 1075, // Ignace Heinrich - association not present in Ertel file
+        2112 => 1120, // Virginie Heriot - association not present in Ertel file
         2116 => 886, // André Herrero
         2117 => 887, // Daniel Herrero
         2164 => 1085, // Valentin Huot - association not present in Ertel file
@@ -352,19 +367,27 @@ class ErtelSport {
         2320 => 897, // Pierre Lacroix
         2373 => 899, // Jean Lassegue
         2383 => 901, // Marcel Laurent
+        2405 => 1093, // André Le Guillerm - association not present in Ertel file
         2409 => 330, // Ange Le Strat - association not present in Ertel file
         2415 => 1079, // Roger Lebranchu - association not present in Ertel file
         2425 => 765, // Jean-Pierre Lecompte
         2469 => 766, // Odé Lespes
         2524 => 1081, // Armand Loreau - association not present in Ertel file
+        2567 => 1100, // Francis Luyce - association not present in Ertel file
         2644 => 767, // Claude Mantoulan
         2693 => 768, // Serge Marsolan
         2703 => 913, // Jean-Louis Martin - association not present in Ertel file
+        2718 => 1105, // Jean-Claude Marty - association not present in Ertel file
         2722 => 769, // Francis Mas
+        2746 => 1115, // Suzanne Mathieu - association not present in Ertel file
         2770 => 771, // Hervé Mazard
         2772 => 772, // Louis Mazon
+        2978 => 1094, // Henri Moulins - association not present in Ertel file
         2311 => 1067, // Louis Lachenal - association not present in Ertel file
         2905 => 773, // Michel Mollinier
+        3208 => 1112, // Alain Penz - association not present in Ertel file
+        3220 => 1113, // Guy Perillat - association not present in Ertel file
+        3385 => 1116, // Patrick Proisy - association not present in Ertel file
         3410 => 775, // Aldo Quaglio
         3456 => 776, // Raymond Rebujent
         3485 => 777, // Roger Rey
@@ -380,8 +403,12 @@ class ErtelSport {
         3696 => 780, // Jean Pierre Sauret
         3704 => 781, // André Savonne
         3835 => 782, // Michel Sitjar
+        3854 => 1092, // SOLBACH Armand - association not present in Ertel file
+        3906 => 1091, // Michel Stievenard - association not present in Ertel file
         3960 => 783, // Pierre Taillantou
         3974 => 1088, // Eloi Tassin - association not present in Ertel file
+        4001 => 1095, // Marcel Thévenet - association not present in Ertel file
+        4052 => 1118, // Roger Touchard - association not present in Ertel file
         4053 => 784, // Raymond Toujas
         4061 => 785, // Frédéric Trescases
         4088 => 786, // Amboise Ulma

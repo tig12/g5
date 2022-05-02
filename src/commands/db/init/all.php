@@ -67,6 +67,9 @@ use g5\commands\muller\m3women\raw2tmp          as M3WomenRaw2tmp;
 
 use g5\commands\muller\m2men\raw2tmp            as M2MenRaw2tmp;
 
+use g5\commands\cfepp\final3\raw2tmp            as CFEPPRaw2tmp;
+use g5\commands\cfepp\final3\ids                as CFEPPIds;
+
 // tmp2db
 use g5\commands\gauq\A\tmp2db                   as Atmp2db;
 use g5\commands\gauq\A\A6occu                   as A6occu;
@@ -80,6 +83,7 @@ use g5\commands\muller\m3women\tmp2db           as M3womenTmp2db;
 use g5\commands\muller\m5medics\tmp2db          as M5medicsTmp2db;
 use g5\commands\csicop\irving\tmp2db            as csiIrvingTmp2db;
 use g5\commands\ertel\sport\tmp2db              as ErteSportTmp2db;
+use g5\commands\cfepp\final3\tmp2db             as CFEPPTmp2db;
 
 // finalize
 use g5\commands\db\init\stats;
@@ -180,6 +184,9 @@ class all implements Command {
             echo M3WomenRaw2tmp::execute([]);
             
             echo M2MenRaw2tmp::execute([]);
+            
+            echo CFEPPRaw2tmp::execute([]);
+            echo CFEPPIds::execute([]);
         }
         
         //
@@ -235,6 +242,8 @@ class all implements Command {
             
             echo ErteSportTmp2db::execute(['small']);
             echo dbFillPerson::execute(['ertel-sport.yml']);
+            
+            echo CFEPPTmp2db::execute(['small']);
             
             echo occus2::execute();
         }

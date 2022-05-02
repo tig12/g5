@@ -55,6 +55,7 @@ class look implements Command {
         $final3 = Final3::loadTmpFile_cfid();
         $ertelfile = ErtelSport::loadTmpFile();
         $fixed = array_keys(ErtelSport::ERTEL_CFEPP);
+        $nInvalid = $nDiffdate = 0;
         foreach($ertelfile as $ert){
             $CFID = $ert['CFEPNR'];
             if($CFID == ''){
@@ -65,6 +66,7 @@ class look implements Command {
                 $CFID = ErtelSport::ERTEL_CFEPP[$ERID];
             }
             if(!isset($final3[$CFID])){
+                $nInvalid++;
                 echo "\n=====\n";
                 echo "=== INVALID CFEPP ID IN ERTEL FILE ===\n";
                 echo "Ertel $ERID {$ert['GNAME']} {$ert['FNAME']} {$ert['DATE']} => $CFID\n";
@@ -74,10 +76,14 @@ class look implements Command {
             if(substr($ert['DATE'], 0, 10) == substr($cfe['DATE'], 0, 10)){
                 continue;
             }
+            $nDiffdate++;
             echo "\n=====\n";
             echo "Ertel $ERID {$ert['GNAME']} {$ert['FNAME']} {$ert['DATE']} => $CFID\n";
             echo "CFEPP $CFID {$cfe['GNAME']} {$cfe['FNAME']} {$cfe['DATE']}\n";
         }
+        echo "============\n";
+        echo "N invalid = $nInvalid\n";
+        echo "N different dates = $nDiffdate\n";
         return '';
     }
     

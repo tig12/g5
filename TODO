@@ -3,6 +3,12 @@
 - see php bug - https://bugs.php.net/bug.php?id=81002
   (to store booleans in postgres)
 
+- CFEPP
+    - match tmp file to geonames
+    - problem of issues
+    - recompute look inter
+  
+  
 - Harmonize export commands:
     - computation of name using Person->fullName() and givenName() (see commands/db/export/allpersons).
     - idem for function to sort by name

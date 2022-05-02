@@ -127,7 +127,7 @@ class tmp2db implements Command {
             $newOccus = [$line['OCCU']];
             $fname = ucwords($line['FNAME']);
             $gname = ucwords($line['GNAME']);
-            if($ERID == ''){;
+            if($ERID == '' && $CFID != 1119){;
                 // Person not already in g5 db
                 // (true because commands\cfepp\final3\ids uses Ertel file)
                 $p = new Person();
@@ -152,7 +152,6 @@ class tmp2db implements Command {
                 $p->computeSlug();
                 // repeat some fields to include in $history
                 $new['ids-in-sources'] = [Final3::SOURCE_SLUG => $CFID];
-                $new['partial-ids'] = [CFEPP::SOURCE_SLUG => CFEPP::cfeppId($CFID)];
                 $new['occus'] = $newOccus;
                 $p->addHistory(
                     command: $cmdSignature,
@@ -173,7 +172,13 @@ class tmp2db implements Command {
                 // because this is completely handled by import of Ertel's file, which must have been executed before.
                 $new = [];
                 $new['issues'] = [];
-                $p = Person::createFromPartialId(Ertel::SOURCE_SLUG, $ERID); // DB
+                if($CFID != 1119){
+                    $p = Person::createFromPartialId(Ertel::SOURCE_SLUG, $ERID); // DB
+                }
+                else{
+                    // one particular case
+                    $p = Person::createFromPartialId(LERRCP::SOURCE_SLUG, 'A1-2089'); // DB
+                }
                 if(is_null($p)){
                     throw new \Exception("$ERID : try to update an unexisting person");
                 }
@@ -246,13 +251,23 @@ class tmp2db implements Command {
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['date-ut'] = $line['DATE-UT'];
                 $new['birth']['place']['c3'] = $line['C3'];
+                // place information, for records in Ertel and not in Gauquelin LERRCP
+                if($p->data['birth']['place']['name'] == ''){
+                    $new['birth']['place']['name'] = $line['PLACE'];
+                    $new['birth']['place']['c2'] = $line['C2'];
+                    $new['birth']['place']['c3'] = $line['C3'];
+                    $new['birth']['place']['cy'] = 'FR';
+                    $new['birth']['place']['lg'] = (float)$line['LG'];
+                    $new['birth']['place']['lat'] = (float)$line['LAT'];
+                }
                 //
+                $p->addOccus($newOccus);
                 $p->addIdInSource(Final3::SOURCE_SLUG, $CFID);
+                $p->addPartialId(CFEPP::SOURCE_SLUG, CFEPP::cfeppId($CFID));
                 $p->updateFields($new);
                 $p->computeSlug(); // recompute in case of date modification
                 // repeat fields to include in $history
                 $new['ids-in-sources'] = [Final3::SOURCE_SLUG => $CFID];
-                $new['partial-ids'] = [CFEPP::SOURCE_SLUG => CFEPP::cfeppId($CFID)];
                 $new['occus'] = $newOccus;
                 if($issue1 != ''){ $new['issues'][] = $issue1; }
                 if($issue2 != ''){ $new['issues'][] = $issue2; }
@@ -281,7 +296,7 @@ class tmp2db implements Command {
             $report .= "$nDiffDates different DATE\n";
             $report .= "$nDiffDatesUT different DATE-UT\n";
         }
-        $report .= "$nInsert persons inserted, $nUpdate updated ($dt s)\n";
+        $report .= "$nInsert persons inserted, $nUpdate updated - $nDiffDates different dates ($dt s)\n";
         return $report;
     }
     
