@@ -87,9 +87,9 @@ class tmp2db implements Command {
         
         // groups
         
-        $g1120 = Group::createFromSlug(Final3::GROUP_1120_SLUG);
+        $g1120 = Group::createFromSlug(CFEPP::GROUP_1120_SLUG);
         if(is_null($g1120)){
-            $g1120 = Final3::getGroup1120();
+            $g1120 = CFEPP::getGroup1120();
             $g1120->data['id'] = $g1120->insert(); // DB
             $report .= "Inserted group " . $g1120->data['slug'] . "\n";
         }
@@ -97,9 +97,9 @@ class tmp2db implements Command {
             $g1120->deleteMembers(); // DB - only deletes asssociations between group and members
         }
         
-        $g1066 = Group::createFromSlug(Final3::GROUP_1066_SLUG);
+        $g1066 = Group::createFromSlug(CFEPP::GROUP_1066_SLUG);
         if(is_null($g1066)){
-            $g1066 = Final3::getGroup1066();
+            $g1066 = CFEPP::getGroup1066();
             $g1066->data['id'] = $g1066->insert(); // DB
             $report .= "Inserted group " . $g1066->data['slug'] . "\n";
         }
@@ -140,7 +140,9 @@ class tmp2db implements Command {
                 $new['birth']['date-ut'] = $line['DATE-UT'];
                 $new['birth']['place']['name'] = $line['PLACE'];
                 $new['birth']['place']['c2'] = $line['C2'];
-                $new['birth']['place']['c3'] = $line['C3'];
+                if($line['C3'] != ''){
+                    $new['birth']['place']['c3'] = $line['C3'];
+                }
                 $new['birth']['place']['cy'] = 'FR';
                 $new['birth']['place']['lg'] = (float)$line['LG'];
                 $new['birth']['place']['lat'] = (float)$line['LAT'];
@@ -255,7 +257,9 @@ class tmp2db implements Command {
                 if($p->data['birth']['place']['name'] == ''){
                     $new['birth']['place']['name'] = $line['PLACE'];
                     $new['birth']['place']['c2'] = $line['C2'];
-                    $new['birth']['place']['c3'] = $line['C3'];
+                    if($line['C3'] != ''){
+                        $new['birth']['place']['c3'] = $line['C3'];
+                    }
                     $new['birth']['place']['cy'] = 'FR';
                     $new['birth']['place']['lg'] = (float)$line['LG'];
                     $new['birth']['place']['lat'] = (float)$line['LAT'];

@@ -280,9 +280,10 @@ class all implements Command {
         }
         
         $t2 = microtime(true);
-        $dt = round($t2 - $t1, 3);
+        $dt = round($t2 - $t1, 2);
+        $dt_min = round($dt / 60, 2);
         
-        echo "====== Execution of all commands in $dt s ======\n";
+        echo "====== Execution of all commands in $dt s ($dt_min min) ======\n";
         return '';
     }
     

@@ -34,29 +34,6 @@ class Final3 {
     **/
     const SOURCE_DEFINITION_FILE = 'cfepp' . DS . self::SOURCE_SLUG . '.yml';
     
-    // *********************** Group management ***********************
-
-    /** Slug of groups related to final3 **/
-    const GROUP_1120_SLUG = 'cfepp-1120';
-    const GROUP_1066_SLUG = 'cfepp-1066';
-    
-    /**
-        Paths to the yaml file containing the characteristics of the groups related to final3.
-        Relative to directory data/db/group
-    **/
-    const GROUP_1120_DEFINITION_FILE = 'cfepp' . DS. self::GROUP_1120_SLUG . '.yml';
-    const GROUP_1066_DEFINITION_FILE = 'cfepp' . DS. self::GROUP_1066_SLUG . '.yml';
-    
-    /** Returns a Group object for 1120 sportsmen. **/
-    public static function getGroup1120(): Group {
-        return Group::createFromDefinitionFile(self::GROUP_1120_DEFINITION_FILE);
-    }
-    
-    /** Returns a Group object for 1066 sportsmen. **/
-    public static function getGroup1066(): Group {
-        return Group::createFromDefinitionFile(self::GROUP_1066_DEFINITION_FILE);
-    }
-    
     // *********************** Fields ***********************
     
     /**
