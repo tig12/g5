@@ -91,9 +91,7 @@ class Person {
         using its id for a given source,
         or null if doesn't exist.
         Ex : to get a person whose id in source a1 is 254, call
-        createFromSourceId
-        
-        ('a1', '254')
+        createFromSourceId('a1', '254')
         @param  $source     Slug of the source
         @param  $idInSource Local id of the person within this source 
     **/
@@ -136,19 +134,18 @@ class Person {
     }
     
     /** 
-        Returns an array of objects of type Person.
-        Persons associated to some sources used to identify partial ids of a person.
+        Returns an array of objects of type Person, related to a partial id.
+        = Persons associated to a source slug used for partial id.
         g55, lerrcp, ertel, cfepp, 
     **/
-    public static function createArrayFromPartialId($sourceSlug): ?Person {
+    public static function createArrayFromPartialId($sourceSlug) {
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare("select * from person where partial_ids->>'$sourceSlug'::text != 'null'");
-        $stmt->execute([]);
-        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
-        if($res === false || count($res) == 0){
-            return null;
+        $query = "select * from person where partial_ids->>'$sourceSlug'::text != 'null'";
+        $res = [];
+        foreach($dblink->query($query, \PDO::FETCH_ASSOC) as $row){
+            $res[] = self::row2person($row);
         }
-        return self::row2person($res);
+        return $res;
     }
     
     /**

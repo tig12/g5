@@ -1,0 +1,13 @@
+document:
+  history:
+    - 2022-05-11 23:46:28+02:00: Thierry Graff, creation
+
+name: Comité Para 535 athletes
+slug: cpara
+type: history
+sources:
+  - cpara
+  - 3a_sports
+
+description: |
+  Official group published by the Comité Para in 1976. 

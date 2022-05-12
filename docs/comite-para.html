@@ -37,27 +37,45 @@
     <div class="subtitle">535 Sportsmen</div>
 </h1>
 <div class="intro">
-Draft code permits to generate 3 files from <a href="ertel-4391-sport.html">file Ertel 4391</a> :
-<ul>
-    <li><a href="https://g5.tig12.net/output/history/1976-cpara/535-cpara-ertel.csv">535 sportsmen</a>, the list published by Comité Para.</li>
-    <li><a href="https://g5.tig12.net/output/history/1976-cpara/cpara-ertel-535.csv">76 sportsmen</a>, called "Para-lowers" by Ertel ; unpublished by Gauquelin, manually copied by Suitbert Ertel.</li>
-    <li><a href="https://g5.tig12.net/output/history/1976-cpara/cpara-ertel-611-full.csv">611 sportsmen</a> = 535 + 76</li>
-</ul>
-
-<br>TODO : Clean restoration + write doc.
+This is the first test done by a Belgian group of skeptics, the "Comité belge pour l'Analyse Critique des parasciences", abreviated "Comité Para". It concerns a group of 535 athletes, published in 1976.
+<br>This test could be included in g5 thanks to <a href="ertel-4391-sport.html">Ertel's file of 4391 athletes</a>, which contains the id.
 </div>
 </header>
 
 <article>
 
 <!-- ********************************************************************************* -->
-<h2>Comité Para unique id</h2>
-An id, stored in column <code>CPID</code> of tmp files, is assigned to each Comité Para record.
-<br>Equals to the value of column <code>PARA_NR</code> in <a href="ertel-4391-sport.html">Ertel's file of 4391 athletes</a>.
-<br>- Records from 1 to 535 correspond to the list published in the official Comité Para test.
-<br>- Records from "* 1" to "* 76" correspond to records unpublished by Gauquelin.
+<h2>Information sources</h2>
+This test does not correspond to any know official list published.
 
-<br><br>Comité Para unique id is one of the <i>partial ids</i> defined in g5 database. See <a href="db-person.html#1-3-partial-ids">complete list of partial ids</a>.
+
+The results of this test was published in the review of the comitee, "Nouvelles Brèves" nb 43 (septembre 1976), in an article called "<i>Considérations critiques sur une recherche faite par M.M. GAUQUELIN, dans le domaine des influences planétaires</i>". An electronic copy of this article can be obtained by contacting the comitee from their web site <a href="https://comitepara.be">comitepara.be</a>.
+
+<br><br>This article does not contain the list of athletes retained for the test. 
+
+
+<!-- ********************************************************************************* -->
+<h2>Comité Para unique id</h2>
+An id, stored in column <code>CPID</code> of generated files, is assigned to each Comité Para record.
+<br>This id is composed by 
+<ul>
+    <li>The string <code>CP-</code></li>
+    <li>
+        followed by the value of column <code>PARA_NR</code> in <a href="ertel-4391-sport.html">Ertel's file of 4391 athletes</a>.
+        <ul>
+            <li>
+                Records from 1 to 535 correspond to the list published in the official Comité Para test.
+                <br>Example: <code>CP-13</code>
+            </li>
+            <li>
+                Records from "* 1" to "* 76" correspond to records unpublished by Gauquelin.
+                <br>Example: <code>CP-*23</code>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+Comité Para unique id is one of the <i>partial ids</i> defined in g5 database. See <a href="db-person.html#1-3-partial-ids">complete list of partial ids</a>.
 
 </article>
 </main>

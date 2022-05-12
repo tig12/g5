@@ -43,8 +43,10 @@ class person implements Command {
             return 'FILE DOES NOT EXIST OR IS NOT CORRECTLY FORMATTED: ' . self::$yamlFile . "\n";
         }
         
-        $report = "--- db fill tweak " . self::$yamlFile . " ---\n";
+        $report = "--- db fill person " . self::$yamlFile . " ---\n";
         
+        self::$nUpdate = 0;
+        self::$nInsert = 0;
         foreach($yaml as $tweak){
             if(!isset($tweak['ADMIN']['ACTION'])){
                 return "ERROR: every person must contain an ADMIN field 'ACTION'"

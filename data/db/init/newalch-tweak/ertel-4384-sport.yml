@@ -43,6 +43,11 @@
   build-notes: seen while comparing with CSICOP dates
 
 -
+  NR: 299
+  GQID: A1-573
+  build-notes: identified by function look_checkgqid()
+  
+-
   NR: 353
   GQID: D10-92
   build-notes: seen while comparing with CSICOP dates
@@ -78,6 +83,11 @@
   build-notes: seen while comparing with CSICOP dates
 
 -
+  NR: 1349
+  GQID: D10-324
+  build-notes: identified by function look_checkgqid()
+
+-
   NR: 1350
   GQID: D10-325
   build-notes: seen while comparing with CSICOP dates
@@ -87,6 +97,11 @@
   IG: G
   build-notes: see php run-g5.php newalch ertel4391 look sport
 
+-
+  NR: 2049
+  GQID: D10-539
+  build-notes: identified by function look_checkgqid()
+  
 -
   NR: 2050
   GQID: D10-542
@@ -120,6 +135,11 @@
     Fix typo in Ertel file (TRAV instead of TRAC)
     Error identified while building g5 occupation codes
 
+-
+  NR: 2408
+  GQID: A1-1696
+  build-notes: identified by function look_checkgqid()
+  
 -
   NR: 2410
   GQID: D10-753
@@ -170,6 +190,11 @@
   GQID: D10-858
   build-notes: seen while comparing with CSICOP dates
 
+-
+  NR: 2785
+  GQID: D10-861
+  build-notes: identified by function look_checkgqid()
+  
 -
   NR: 3086
   GQID: D10-972
@@ -246,3 +271,8 @@
   SPORT: FOOT
   IG: G
   build-notes: see php run-g5.php newalch ertel4391 look sport
+
+-
+  NR: 4356
+  GQID: A1-989
+  build-notes: identified by function look_checkgqid()

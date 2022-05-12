@@ -9,6 +9,7 @@
 namespace g5\commands\cpara;
 
 use g5\app\Config;
+use g5\model\Group;
 
 class CPara {
     
@@ -18,7 +19,7 @@ class CPara {
         @param  $num        Unique id within Comité Para file
     **/
     public static function cparaId($num){
-        return 'CP-' . $num;
+        return 'CP-' . str_replace(' ', '', $num);
     }
     
     // *********************** Source management ***********************
@@ -32,6 +33,21 @@ class CPara {
     **/
     const SOURCE_DEFINITION_FILE = 'cpara' . DS . self::SOURCE_SLUG .'.yml';
     
+    // *********************** Group management ***********************
+
+    /** Slug of groups related to Comité Para test **/
+    const GROUP_SLUG = 'cpara';
+    
+    /**
+        Paths to the yaml file containing the characteristics of comité Para group.
+        Relative to directory data/db/group
+    **/
+    const GROUP_DEFINITION_FILE = 'cpara' . DS. self::GROUP_SLUG . '.yml';
+    
+    /** Returns a Group object for 1120 sportsmen. **/
+    public static function getGroup(): Group {
+        return Group::createFromDefinitionFile(self::GROUP_DEFINITION_FILE);
+    }
     // *********************** Output files manipulation ***********************
     
     /** 

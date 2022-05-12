@@ -10,6 +10,7 @@
 namespace g5\commands\cfepp;
 
 use g5\app\Config;
+use g5\model\Group;
 
 class CFEPP {
     

@@ -27,6 +27,7 @@ class look implements Command {
         'mars',
         'cp',
         'checkoccu',
+        'checkgqid',
     ];
     
     // *****************************************
@@ -337,13 +338,56 @@ class look implements Command {
                 if($a1Sport != $erSport){
                     $reportA1 .= "ertel $erId: $erSport / A1 $num: $a1Sport\n";
                 }
-//echo "$num - $erSport - $a1Sport\n";
-//exit;
 // https://www.sudouest.fr/2013/09/03/le-bts-peut-compter-sur-les-anciens-1157295-3566.php?nic
             }
             
         }
         $reportA1 = "========= A1 differences: =========\n";
+        return $report;
+    }
+    
+    // ******************************************************
+    /**
+        Looks for doublons in Gauquelin codes.
+        Written after identifying an error while computing Comite Para group.
+        Found that Ertel 2408 Le Quellec Yann had a wrong G_NR (A1-1697 instead of A1-1696)
+        A1-1697 corresponds to Ertel 2738 Massy Arnaud
+        Permitted to identify 6 errors:
+            php run-g5.php ertel sport look checkgqid
+            === N with GQID: 2883
+            A1-574 => 299 (Beaumais Marcel) --- 340 (Benedetto Valere)
+            A1-999 => 471 (Blomme Maurice) --- 4356 (Zampini Donato)
+            D10-323 => 1348 (Demarco Robert A.) --- 1349 (Demont Richard)
+            D10-538 => 2049 (Hamill Dorothy) --- 2051 (Hanburger Christian)
+            A1-1697 => 2408 (LeQuellec Yan) --- 2738 (Massy Arnaud)
+            D10-822 => 2685 (Maris Roger) --- 2785 (McCullough Earl)
+        Doublons found here are fixed in tweak2tmp.
+        After the fix, no more doublons are left:
+            php run-g5.php ertel sport look checkgqid
+            === N with GQID: 2889
+    **/
+    private static function look_checkgqid(){
+        $report = '';
+        $rows = ErtelSport::loadTmpFile();
+        $gq = []; // assoc array ; key = GQID ; value = NR (Ertel id)
+        foreach($rows as $row){
+            $GQID = $row['GQID'];
+            if($GQID == ''){
+                continue;
+            }
+            $ERID = $row['NR'];
+            if(!isset($gq[$GQID])){
+                $gq[$GQID] = [];
+            }
+            $gq[$GQID][] = $ERID . ' (' . $row['FNAME'] . ' ' . $row['GNAME'] . ')';
+        }
+        echo '=== N with GQID: ' . count($gq) . "\n";
+        foreach($gq as $GQID => $values){
+            if(count($values) == 1){
+                continue;
+            }
+            $report .= "$GQID => " . implode(' --- ', $values) . "\n";
+        }
         return $report;
     }
     
