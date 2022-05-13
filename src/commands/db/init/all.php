@@ -84,6 +84,7 @@ use g5\commands\muller\m5medics\tmp2db          as M5medicsTmp2db;
 use g5\commands\csicop\irving\tmp2db            as csiIrvingTmp2db;
 use g5\commands\ertel\sport\tmp2db              as ErteSportTmp2db;
 use g5\commands\cfepp\final3\tmp2db             as CFEPPTmp2db;
+use g5\commands\cpara\ertel\group               as CParaGroup;
 
 // finalize
 use g5\commands\db\init\stats;
@@ -244,6 +245,8 @@ class all implements Command {
             echo dbFillPerson::execute(['ertel-sport.yml']);
             
             echo CFEPPTmp2db::execute(['small']);
+            
+            echo CParaGroup::execute([]);
             
             echo occus2::execute();
         }
