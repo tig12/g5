@@ -362,7 +362,7 @@ class look implements Command {
             A1-1697 => 2408 (LeQuellec Yan) --- 2738 (Massy Arnaud)
             D10-822 => 2685 (Maris Roger) --- 2785 (McCullough Earl)
         Doublons found here are fixed in tweak2tmp.
-        After the fix, no more doublons are left:
+        After the fixes, no more doublons are left:
             php run-g5.php ertel sport look checkgqid
             === N with GQID: 2889
     **/

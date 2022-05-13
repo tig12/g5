@@ -52,25 +52,27 @@ class group implements Command {
         // Select in db persons containing an Ertel id
         $persons = Person::createArrayFromPartialId(Ertel::SOURCE_SLUG);
         $N = 0;
+        $Nupdate = 0;
         foreach($persons as $p){
             $his = $p->historyFromSource(ErtelSport::SOURCE_SLUG);
             if($his['raw']['PARA_NR'] == ''){
                 continue;
             }
-            $N++;
             $CPID = CPara::cparaId($his['raw']['PARA_NR']);
             $p->addPartialId(CPara::SOURCE_SLUG, $CPID);
-            $p-> update();
-//echo $his['raw']['PARA_NR'] . "\n";
-//echo "\n<pre>"; print_r($his); echo "</pre>\n"; exit;
-//echo "\n<pre>"; print_r($p); echo "</pre>\n"; exit;
+            // Add only the 535 members
+            // The group of 76 has already been included in Ertel
+            if(strpos($CPID, '*') === false){
+                $g->addMember($p->data['id']);
+                $N++;
+            }
+            $p-> update(); // DB
+            $Nupdate++;
         }
-//exit;
-//        $g->insertMembers(); // DB
+        $g->insertMembers(); // DB
         $t2 = microtime(true);
         $dt = round($t2 - $t1, 5);
-        $report .= "Added $N person to group " . CPara::GROUP_SLUG . " ($dt s)\n";
-        
+        $report .= "Added $N person to group " . CPara::GROUP_SLUG . " and computed $Nupdate Comite Para ids ($dt s)\n";
         return $report;
     }
     
