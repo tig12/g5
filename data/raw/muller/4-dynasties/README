@@ -1,0 +1,10 @@
+
+This file is an UTF-8 version of an original file located at
+https://github.com/tig12/g5-aux/tree/main/1993-muller4-dynasties
+
+Transformation process between the original file to its UTF-8 version:
+
+- Tests on Libre Office Calc showed that the encoding of thr original file is "Europe Occidentale(DOS/OS2-865/Nordique)"
+
+- The file was converted to UTF-8 with:
+iconv -f 865 -t utf-8 'Muller 1145 ORIGINAL.TXT' > muller-1145-utf8.txt
