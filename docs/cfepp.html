@@ -34,7 +34,6 @@
 <h1>
     CFEPP 1996
     <div class="subtitle">1066 sportsmen</div>
-<center><div class="todo" style="font-size:1rem;">Incomplete, work in progress</div></center>
 </h1>
 
 <!-- 
@@ -45,7 +44,7 @@ Athlège 1951 https://www.abebooks.com/LAthl%C3%A8ge-1951-Biographies-grands-cha
 <div class="intro">
 This page deals with the third and last test done by a group of skeptics, the CFEPP (Comité Français pour l'Etude des Phénomènes Paranormaux - French Commitee for the study of paranormal phenomena). Results were published in 1996 in a booklet ; the official published list contains 1066 sport champions.
 <br>Two sources were used to include this test in g5 database: the CFEPP booklet and <i><b>final3</b></i>, a file sent by Jan Willem Nienhuys, who kindly authorized its use for inclusion in g5 database.
-<br>Among the 1120 records contained in file <code>final3</code>, 974 are already in Gauquelin or Ertel data. This file then brings <b>129 new records</b>.
+<br>Among the 1120 records contained in file <code>final3</code>, 975 are already in Gauquelin or Ertel data. This file then brings <b>128 new records</b>.
 
 
 </div>
@@ -135,7 +134,7 @@ This is the official list published in CFEPP booklet, which is a subset of the 1
 <!-- ************************************* -->
 <h3>1076, from Ertel</h3>
 A group of 1076 persons is used by Suitbert Ertel in the analysis exposed in the book "The Tenacious Mars Effect". This number of 1076 is given p SE-13 of this book:
-<cite>CFEPP's irth data were scanned from an appendix of the French Commitee's report (Benski 1990, N = 1,439, complete information for N = 1,076).</cite>
+<cite>CFEPP's birth data were scanned from an appendix of the French Commitee's report (Benski 1990, N = 1,439, complete information for N = 1,076).</cite>
 <!--
 <br>Suitbert Ertel mentions this group in an article "Mars effect uncovered in French sceptics' data" (Correlation 33.2, winter 1994-1995):
 <cite>&laquo; An account of the French athletes' investigation without results was mimeographed in 1990 with birth dates and times appended (N = 1,071). &raquo;</cite>
@@ -293,6 +292,10 @@ php run-g5.php cfepp final3 ids
 php run-g5.php cfepp final3 tmp2db small
 </pre>
 
+
+<!-- ********************************************************************************* -->
+<h2>Looking at data</h2>
+
 Step <code>raw2tmp</code> converts file <code>final3</code> to <code>data/tmp/cfepp/cfepp-1120-nienhuys.csv</code>.
 <br>Step <code>ids</code> adds Ertel, Gauquelin and Comité Para ids to this tmp file. The code permits to identify 129 wrong CFEPP ids in Ertel file, and 54 missing associations. One record (Marcel Domergue, A1-2089) is not present in Ertel file but already in Gauquelin data.
 
@@ -303,29 +306,52 @@ N invalid = 3           # aberrant values in Ertel file
 N different dates = 62  # different birth days, between Ertel's file and final3
 </pre>
 
+Once included in database, some queries permit to provide more informations:
+<ul class="spaced">
+    <li>
+        Number of persons in CFEPP group (of 1120) already present in Gauquelin data:
+        <pre>select count(*) from person where partial_ids->>'cfepp'::text != 'null' and partial_ids->>'lerrcp'::text != 'null';</pre>
+        => <b>710</b>
+    </li>
+    <li>
+        Number of persons in CFEPP group (of 1120) already present in <a href="ertel-4391-sport.html">Ertel's file</a>:
+        <pre>select count(*) from person where partial_ids->>'cfepp'::text != 'null' and partial_ids->>'ertel'::text != 'null';</pre>
+        => <b>975</b>
+    </li>
+    <li>
+        Number of persons in CFEPP group (of 1120) already present in <a href="cpara.html">Comité Para test</a>:
+        <pre>select count(*) from person where partial_ids->>'cfepp'::text != 'null' and partial_ids->>'cpara'::text != 'null';</pre>
+        => <b>361</b>
+    </li>
+</ul>
+
+<!-- ************************************* -->
+<h3>Miscalaneous remarks</h3>
+
+<h4>Paris arrondissement</h4>
+One of the interesting feature of Nienhuys file is that most births in Paris come with the <i>arrondissement</i> (administrative code level 3).
+<br>This information is missing for 6 persons:
+<pre>
+126  SCHOEBEL Pierre 1942-12-24
+215  PERRIER Jacques 1924-11-22
+231  BRETONNEL Fred 1905-06-11
+638  DUBESSAY Jean-Francois 1921-04-01
+645  MANOUKIAN Diran 1919-03-22
+1048 COLAS Paul 1880-05-06
+</pre>
+
+1 personin the file has no given name:
+MARTIN-LEGEAY
+
+
 <!-- ********************************************************************************* -->
 <h2>CFEPP unique id</h2>
 An id, stored in column <code>CFID</code> of tmp files, is assigned to each record of the file.
-<br>Equals to the position of a record in file <code>final3</code>.
-<br>Goes from 1 to 1120.
-<br>Records 1 to 1066 correspond to the list published in CFEPP booklet.
+<br>Equals to the string "<code>CF-</code>" followed by the position of a record in file <code>final3</code>.
+<br>Goes from CF-1 to CF-1120.
+<br>Records CF-1 to CF-1066 correspond to the list published in CFEPP booklet.
 
 <br><br>CFEPP unique id is one of the <i>partial ids</i> defined in g5 database. See <a href="db-person.html#1-3-partial-ids">complete list of partial ids</a>.
-
-<!-- ********************************************************************************* -->
-<h2></h2>
-<!-- 
-6 persons born in Paris without <i>arrondissement</i> (admin code level 3). :
-SCHOEBEL Pierre
-PERRIER Jacques
-BRETONNEL Fred
-DUBESSAY Jean-Francois
-MANOUKIAN Diran
-COLAS Paul
-
-1 person without given name:
-MARTIN-LEGEAY
--->
 
 </article>
 </main>

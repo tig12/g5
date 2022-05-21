@@ -188,9 +188,9 @@ The database uses <a href="https://www.postgresql.org/">postgresql</a>.
 
 Show person with Gauquelin id = 'A1-514':
 <pre>
-select * from person where ids_partial->>'lerrcp'='A1-514';
+select * from person where partial_ids->>'lerrcp'='A1-514';
 
-# jsonb values of a person ids_partial field:
+# jsonb values of a person partial_ids field:
 {"ertel": "ES-4137", "lerrcp": "A1-514"}
 </pre>
 
@@ -198,9 +198,9 @@ Show the same person using the field <code>ids-in-sources</code>:
 <pre>select * from person where ids_in_sources->>'a1'='514';</pre>
 <pre>select * from person where ids_in_sources @> '{"a1": "154"}';</pre>
 
-Select all persons related to info source A1:
+Select all persons related to info source LERRCP (present in Gauquelin publications):
 <pre>
-select * from person where ids_partial->>'lerrcp'::text != 'null';
+select * from person where partial_ids->>'lerrcp'::text != 'null';
 </pre>
 
 List persons whose name has not been restored yet (family name starting by "Gauquelin-", see <a href="gauquelin-A.html">page on Gauquelin series A</a>).
