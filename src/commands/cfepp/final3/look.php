@@ -14,8 +14,6 @@ use g5\commands\ertel\sport\ErtelSport;
 
 class look implements Command {
     
-    
-    
    /** Possible value for parameter 1 **/
     const POSSIBLE_PARAMS = [
         'inter' => "Computes intersections of different groups",

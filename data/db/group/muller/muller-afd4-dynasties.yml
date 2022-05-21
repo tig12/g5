@@ -1,0 +1,16 @@
+document:
+  history:
+    - 2022-05-17 22:13:33+02:00: Thierry Graff, creation
+
+name: Müller 1145 members of German dynasties
+slug: muller-afd4-dynasties
+type: history
+sources:
+  - afd4
+  - afd4-booklet
+
+description: |
+  Group containing 1145 members of German dynasties, gathered by Arno Müller and Günther Menzer.
+  <br>Self-published by Arno Müller: <i>1145 Angehörige deutscher Dynastien, Astro-Forschungs-Daten 4</i>, Waldmohr, 1993, 98 pages.
+  <br>Data come from "<i>L’Allemagne Dynastique</i>" (6 volumes), published by the French historians Huberty, Giraud & Magdelaine (1976-1991).
+  <br>See <a href="https://tig12.github.io/gauquelin5/muller4-1145-dynasties.html">tig12.github.io/gauquelin5/muller4-1145-dynasties.html</a> for details on the construction of this group.

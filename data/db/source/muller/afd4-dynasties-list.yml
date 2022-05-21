@@ -1,0 +1,13 @@
+
+document:
+  history:
+    - 2022-05-17 22:39:52+02:00: Thierry Graff, creation
+
+name: muller-1145-utf8.txt
+slug: afd4
+type: file
+author: Arno Müller
+description: |
+  Text file containing a list of 1145 members of German dynasties, coming from the booklet Astro-Forschungs-Daten 4.
+parents:
+  - afd4-booklet
