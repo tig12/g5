@@ -47,8 +47,8 @@ class raw2tmp implements Command {
             return "INVALID GROUP: Group $groupKey does not have raw file.\n$msg";
         }
         
-        $outfile = G5::tmpFilename($datafile);
-        $outfile_raw = G5::tmpRawFilename($datafile);
+        $outfile = G55::tmpFilename($groupKey);
+        $outfile_raw = G55::tmpRawFilename($groupKey);
         
         $N = 0;
         $raw = G55::loadRawFile($groupKey);
@@ -58,9 +58,12 @@ class raw2tmp implements Command {
         $trimField = function(&$val, $idx){ $val = trim($val); };
         foreach($raw as $line){
             $N++;
+//echo "$N\n";
             $fields = explode(G55::RAW_SEP, trim($line));
             if(count($fields) != 4){
-                throw new \Exception("Incorrect format in file $groupKey for line $N:\n$line");
+                //throw new \Exception("Incorrect format in file $groupKey for line $N:\n$line");
+                echo "Incorrect format in file $groupKey for line $N: $line";
+                continue;
             }
             array_walk($fields, $trimField);
             $new = $newEmpty;
@@ -89,14 +92,15 @@ exit;
     // ******************************************************
     const PATTERN_NAME = '/([A-Z ]+) (.*)/';
     /**
-        @return     Array [family name, given name]
+        @return     Array with 3 elements: family name, given name, nobility
     **/
-    private static function computeName($str) {
-        $res = ['', ''];
+    private static function computeName(string $str): array {
+        $res = ['', '', ''];
         preg_match(self::PATTERN_NAME, $str, $m);
         if(count($m) != 3){
             //throw new \Exception("Unable to parse G55 name: $str");
-            print("Unable to parse G55 name: $str\n");
+            echo "   Unable to parse G55 name: $str\n";
+            return $res;
         }
         $res[0] = ucWords(strtolower($m[1]));
         $res[1] = $m[2];
@@ -105,10 +109,18 @@ exit;
     
     // ******************************************************
     /**
-        @return     Date formt YYYY-MM-DD HH:MM
+        @return     Date format YYYY-MM-DD HH:MM
     **/
-    private static function computeDateTime($strDay, $strHour) {
+    const PATTERN_DAY = '/(\d+)-(\d+)-(\d+)/';
+    const PATTERN_HOUR = '/(\d+) h.( \d+)?/';
+    private static function computeDateTime(string $strDay, string $strHour): string {
         $res = '';
+        preg_match(self::PATTERN_DAY, $strDay, $m);
+        if(count($m) != 4){
+            echo "   Unable to parse G55 day: $strDay\n";
+exit;
+        }
+//        str_pad($h , 2, '0', STR_PAD_LEFT);
         return $res;
     }
     
@@ -116,7 +128,7 @@ exit;
     /**
         @return     Array [place name, admin code level 2, country iso 3166]
     **/
-    private static function computePlace($str) {
+    private static function computePlace(string $str): array {
         $res = ['', '', ''];
         return $res;
     }

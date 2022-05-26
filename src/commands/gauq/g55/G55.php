@@ -11,7 +11,7 @@ namespace g5\commands\gauq\g55;
 
 use g5\app\Config;
 // use g5\commands\gauq\LERRCP;
-// use tiglib\arrays\csvAssociative;
+use tiglib\arrays\csvAssociative;
 
 class G55 {
     
@@ -93,7 +93,7 @@ class G55 {
     
     /**
         Path to a raw file.
-        @param  $groupKey a key of G55::GROUPS
+        @param  $groupKey a key of G55::GROUPS, like '570SPO'
         throws  Exception if raw file not defined for this group
     **/
     public static function rawFilename(string $groupKey): string {
@@ -105,6 +105,7 @@ class G55 {
     
     /**
         Loads a raw file in a regular array, each element contining one line.
+        @param  $groupKey a key of G55::GROUPS, like '570SPO'
     **/
     public static function loadRawFile(string $groupKey): array {
         return file(self::rawFilename($groupKey));
@@ -125,7 +126,10 @@ class G55 {
         'CY',
     ];
     
-    /** Temporary file in data/tmp/gauq/g55/ **/
+    /**
+        Temporary file in data/tmp/gauq/g55/
+        @param  $groupKey a key of G55::GROUPS, like '570SPO'
+    **/
     public static function tmpFilename($groupKey){
         return implode(DS, [Config::$data['dirs']['tmp'], 'gauq', 'g55', $groupKey . '.csv']);
     }
@@ -144,7 +148,7 @@ class G55 {
         Returns the name of a "tmp raw file", in data/tmp/gauq/g55/
         (file used to keep trace of the original raw values).
     **/
-    public static function tmpRawFilename(){
+    public static function tmpRawFilename($groupKey){
         return implode(DS, [Config::$data['dirs']['tmp'], 'gauq', 'g55', $groupKey . '-raw.csv']);
     }
     
@@ -152,8 +156,8 @@ class G55 {
         Loads a "tmp raw file" in a regular array.
         Each element contains the person fields in an assoc. array.
     **/
-    public static function loadTmpRawFile(){
-        return csvAssociative::compute(self::tmpRawFilename());
+    public static function loadTmpRawFile($groupKey){
+        return csvAssociative::compute(self::tmpRawFilename($groupKey));
     }
 
 } // end class    

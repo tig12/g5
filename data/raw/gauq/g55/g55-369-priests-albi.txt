@@ -11,7 +11,7 @@ AMALVY Marie, 7-2-1881, 11 h., Aussillon (Tarn).
 AMEN Denis, 21-4-1919, 3 h., Le Rialet (Tarn).
 AMEN Paul, 6-7-1883, 11 h., Albi (Tarn).
 AMIEL Henri, 4-4-1913, 15 h., Villefranche d’Albigeois (Tarn).
-ANDRIEU Albert, 24-3-1870. 1 h., Castres (Tarn).
+ANDRIEU Albert, 24-3-1870, 1 h., Castres (Tarn).
 ANGLADE Gérard, 21-5-1920, 15 h., Villereglan (Tarn).
 ANGLES Pierre, 26-2-1874, 10 h., Saint-Grégoire (Tarn).
 ARBERET Joseph, 26-1-1897, 15 h., Juillan (Hautes-Pyrénées).
@@ -24,7 +24,7 @@ ASSIE Jean, 17-5-1908, 2 h., Mazamet (Tarn).
 ASSIE Léon, 4-2-1873, 19 h., Bellegarde (Tarn).
 ASSIE Marcellin, 10-10-1913, 5 h., Moularés (Tarn).
 ASSIE Pierre, 6-3-1912, 3 h., Mazamet (Tarn).
-ASSIE Yvon, 3-8-1915. 22 h., Frejairrolles (Tarn).
+ASSIE Yvon, 3-8-1915, 22 h., Frejairrolles (Tarn).
 ASSIER Pierre, 22-1-1902, 3 h., Villefranche (Tarn).
 ASSEMAT Elie, 14-5-1882, 1 h., Labruguiére (Tarn).
 AT Justin, 22-11-1874, 4 h., Saint-Michel-Labadié (Tarn).
@@ -34,7 +34,7 @@ AUQUE Louis, 13-9-1879, 1 h., Villefranche (Tarn).
 AUREL Marcelin, 15-9-1879, 20 h., Villeneuve-sur-Vére (Tarn).
 AURIOL Gaston, 1-2-1892, 10 h., Saint-Paul-Cap de Joux (Tarn).
 AUSSENAC Jean, 5-4-1902, 3 h., Rieux-Minervois (Aude).
-AVEROUS Philippe, 21-11-1877. 6 h., Brousse (Tarn).
+AVEROUS Philippe, 21-11-1877, 6 h., Brousse (Tarn).
 AYMES Henri, 9-4-1878, 2 h., Aussillon (Tarn).
 AZAIS Jean, 20-2-1880, 1 h., Cambounes (Tarn).
 AZEMA Henri, 2-9-1877, 12 h., Gijounet (Tarn).
@@ -78,13 +78,13 @@ BIRBES Hugue, 15-12-1881, 19 h. 45, Saint-Saëns (Seine-Inférieure).
 BIRBES Paul, 30-3-1873, 8 h., Saint-Sulpice (Tarn)
 BLANC Jules, 5-10-1881, 5 h., Languet (Tarn).
 BLANQUET Philippe, 25-6-1866, 3 h., Jouqueviel (Tarn).
-BONHOURE Jean-P., 27-6-1876, 15 h.. Puylaurens (Tarn).
+BONHOURE Jean-P., 27-6-1876, 15 h., Puylaurens (Tarn).
 BONNAFE Germain, 14-6-1873, 4 h., Massals (Tarn).
 BONNEVIALLE Louis, 18-4-1880, 7 h., Saint-Sernin (Aveyron).
 BORDES Jean, 15-10-1912, 13 h., Tauriac (Tarn).
 BORDES Paul, 12-1-1872, 8 h., Aiguefonde (Tarn).
 BORIES Marcel, 8-12-1913, 2 h., Montagnac (Hérault).
-BOSC Louis 22-12-1872, 10h., Lacaune (Tarn).
+BOSC Louis, 22-12-1872, 10h., Lacaune (Tarn).
 BOSSE Félix, 15-12-1891, 20 h., Saint-Chély d’Apcher (Lozère).
 BOUDON Pierre, 21-7-1885, 8 h., Saint-Chély d’Apcher (Lozère).
 BOURLANGES Fernand, 18-2-1910, 13 h., Castres (Tarn).
@@ -94,7 +94,7 @@ BOUSQUET Victor, 7-10-1879, 19 h., Mazamet (Tarn).
 BOUSQUIE Claude, 14-5-1897, 15 h., Cordes (Tarn).
 BOUTES Louis, 18-6-1870, 15 h., Cug-les-Vielmur (Tarn).
 BOUTIBONNES Victor, 2-10-1870, 16 h., Saint-Paul-Cap de Joux (Tarn).
-BOYER Germain, 18-7-1875, 2 h.. Tanus (Tarn).
+BOYER Germain, 18-7-1875, 2 h., Tanus (Tarn).
 BRIOLS François, 22-12-1898, 12 h., Guitalens (Tarn).
 BRU Gaston, 23-9-1877, 1 h., Saint-Michel-de-Vax (Tarn).
 BRU Henri, 16-4-1907, 3 h., Espérausses (Tarn).
@@ -141,7 +141,7 @@ COMBES François, 3-10-1877, 14 h., Escoussens (Tarn).
 COMBES Léon, 7-10-1887, 4 h., Le Masnau (Tarn).
 COMBES René, 22-5-1908, 23 h., Montroc (Tarn).
 CORNUS Léon, 23-5-1876, 21 h., Labastide-Lévis (Tarn).
-C€OULON André, 22-6-1883, 4 h., Viane (Tarn).
+COULON André, 22-6-1883, 4 h., Viane (Tarn).
 COUSTET Jacques, 16-11-1898, 13 h., Lautrec (Tarn).
 COUTHOULY Pierre, 17-4-1882, 23 h., Padiés (Tarn).
 CRAYOL Joseph, 9-3-1871, 20 h., Lavaur (Tarn).
@@ -155,7 +155,7 @@ DELICHERE Paul, 1-11-1865, 11 h., Gaillac (Tarn).
 DELMAS Joseph, 13-3-1884, 10 h., Puylaurens (Tarn).
 DELPON Jean, 22-11-1874, 11 h., Cambounés (Tarn).
 DELPOUX Auguste, 16-9-1914, 19 h., Saint-Cirgue (Tarn).
-DECROZAILLES. Gabriel, 15-8-1903, 2 h., Mende (Lozère).
+DECROZAILLES Gabriel, 15-8-1903, 2 h., Mende (Lozère).
 DEVEZE Marius, 25-12-1889, 22 h., Nant (Aveyron).
 DOUZALS Gustave, 5-10-1905, 9 h., Sainte-Gemme (Tarn).
 DULAU Pierre, 29-6-1889, 3 h., Tartas (Landes).
@@ -166,7 +166,7 @@ DURAND Prosper, 29-8-1872, 19 h., Réalmont (Tarn).
 ENJALBAL Gaston, 19-6-1908, 21 h., Albi (Tarn).
 ETCHEPARE Félix, 18-5-1905, 11 h., Ossés (Basses-Pyrénées).
 FABRE André, 1-11-1900, 9 h., Brens (Tarn).
-FABRE Jules, 29-12-1871, 12 h.. Marsal (Tarn).
+FABRE Jules, 29-12-1871, 12 h., Marsal (Tarn).
 FABRE Henri, 8-4-1899, 13 h., Saint-Grégoire (Tarn).
 FABRE Hippolyte, 9-4-1866, 6 h., Courris (Tarn).
 FABRE Pierre, 1-8-1904, 5 h., Perpignan (Pyrénées-Orientales).
@@ -183,12 +183,12 @@ FONTVIEILLE Alphonse, 17-2-1873, 4 h., Albi (Tarn).
 FONVIEILLE Léon, 22-2-1882, 23 h 30., Brousse (Tarn).
 FOULCHER Pierre, 8-9-1879, 12 h., Teillet (Tarn).
 FOURNIE Angély, 24-9-1907, 18 h., Energues (Tarn).
-FOURNIE Marius, 22-12-1884, 2 h,, Energues (Tarn).
+FOURNIE Marius, 22-12-1884, 2 h., Energues (Tarn).
 FRESSAC Jean, 29-1-1911, 12 h., Wendargues (Hérault).
 FREYSSINET Emmanuel, 7-4-1880, 6 h., Estivaux (Corréze).
 FREZOULS Edmond, 23-7-1907, 9 h., Montdragon (Tarn).
 FREZOULS Maurice, 24-7-1901, 6 h., Lombers (Tarn).
-GABEN Lucien, 13-12-1911, 12 h.. Albi (Tarn).
+GABEN Lucien, 13-12-1911, 12 h., Albi (Tarn).
 GAIRARD Firmin, 21-2-1878, 18 h., Almayrac (Tarn).
 GALAU Henri, 10-3-1892, 14 h., Cadoul (Tarn).
 GALINIER Joseph, 2-3-1900, 3 h., Notre-Dame-de-Guyer (Tarn).
@@ -202,7 +202,7 @@ GISCLARD Emile, 16-4-1876, 3 h., Curvalle (Tarn).
 GOFFRE Aimé, 19-8-1909, 11 h., Montdragon (Tarn).
 GOMBAUD Louis, 25-8-1879, 21 h., Rabastens (Tarn).
 GONTIER Alphonse, 1-9-1894, 8 h., Saint-Martin-de-Damiatte (Tarn).
-GRANIER Florian, 13-4-1869, 1 h.. Andillac (Tarn).
+GRANIER Florian, 13-4-1869, 1 h., Andillac (Tarn).
 GRANIER Louis, 23-4-1869, 16 h., Valence (Drôme).
 GROS Jean, 2-6-1870, 9 h. 30, Vabre (Tarn).
 HERAL Auguste, 18-11-1882, 16 h., Saint-Jean-de-Marcel (Tarn).
@@ -216,7 +216,7 @@ JARLAN Théodore, 2-5-1884, 9 h., Puylaurens (Tarn).
 JOUGLA Pierre, 22-8-1880, 15 h., Anglés (Tarn).
 JOURDE François, 4-7-1875, 4h., Bellegarde (Tarn).
 JULIEN Hippolyte, 3-12-1875, 24 h., Cambounés (Tarn).
-LACAM Germain, 26-10-1872, 4 h.. Saint-Martin-de-Laguépie (Tarn).
+LACAM Germain, 26-10-1872, 4 h., Saint-Martin-de-Laguépie (Tarn).
 LACLAU Pierre, 13-6-1913, 18 h., Villefranche (Tarn).
 LADGER François, 30-11-1875, 13 h., Villeneuve-las-Lavaur (Tarn).
 LACROUX Jules, 3-3-1871, 5 h., Valdériés (Tarn).
@@ -281,7 +281,7 @@ PLANTADE Jean, 3-3-1917, 15 h., Puylaurens (Tarn).
 POMIER Emilien, 6-1-1909, 14 h., Bellegarde (Tarn).
 PORTES Fortuné, 29-5-1884, 12 h., Mouzieys-Panens (Tarn).
 PRADELLES Roger, 26-7-1903, 23 h., Saint-Germain-des-Prés (Tarn).
-PRAT François, 28-3-1878, 16 h., Mouziers-Panens (Tarn), SLMS AY.
+PRAT François, 28-3-1878, 16 h., Mouziers-Panens (Tarn).
 PRAT Jean, 19-12-1913, 5 h. 30, Réalmont (Tarn).
 PRAT J. F. H., 24-11-1863, 13 h., Cazelles (Tarn).
 PRIOU Elie, 4-6-1881, 9 h., Sémalens (Tarn).
@@ -292,9 +292,9 @@ RAMADE Pierre, 19-3-1899, 19 h., Labessonnié (Tarn).
 RAUCOULES Antoine, 13-4-1899, 17 h., Revel (Haute-Garonne).
 RAUCOULES Louis, 5-6-1909, 11 h., Albi (Tarn).
 RAVAILLE Elie, 16-1-1909, 17 h., Tels (Tarn).
-RAVAILLE Jean, 24-3-1880, 16 h,, Padiés (Tarn).
+RAVAILLE Jean, 24-3-1880, 16 h., Padiés (Tarn).
 RAYNAL Jean, 19-2-1876, 5 h., Ligot (Tarn).
-RAYSSEGUIER André, 23-9-1914, 23 h.. Saint-Jean de Prémiac (Tarn).
+RAYSSEGUIER André, 23-9-1914, 23 h., Saint-Jean de Prémiac (Tarn).
 RECH Louis, 4-8-1912, 7 h., Carmaux (Tarn).
 REGY Ernest, 7-10-1873, 12 h., Teillet (Tarn).
 UREGY Joseph, 12-3-1867, 11 h., Saint-Paul de Barbetogne (Tarn).
@@ -303,11 +303,11 @@ REVIAL François, 11-8-1920, 1'h., Tignes (Savoie).
 RIEUNAUD Pierre, 11-11-1873, 9 h., Tels (Tarn).
 RIEUNAUD René, 25-2-1896, 17 h., Valdérias (Tarn).
 RIGOBERT Marius, 5-2-1908, 6 h., Montroc (Tarn).
-RIVAYRAN Albert, 25-11-1891, 17 h., Saint-Affrique (Tarn),
+RIVAYRAN Albert, 25-11-1891, 17 h., Saint-Affrique (Tarn).
 RIVES Exupére, 22-6-1880, 2 h., Lavaur (Tarn).
 RIVIERE André, 15-4-1905, 18 h., Blaye-les-Mines (Tarn).
-RIVIERE Joseph 12-11-1878 9 h., Carcassonne (Aude).
-RIVIERES (de) François, 24-8-1909, 21 h.. Riviares (Tarn).
+RIVIERE Joseph, 12-11-1878, 9 h., Carcassonne (Aude).
+RIVIERES (de) François, 24-8-1909, 21 h., Riviares (Tarn).
 ROBERT Louis, 4-11-1882, 20 h., Florentin (Tarn).
 ROLLAND Léopold, 9-7-1887, 7 h., Labessiere-Candeil (Tarn).
 ROLLAND Louis, 25-4-1911, 16 h., Saint-Salvi de Carcavé (Tarn).
@@ -351,17 +351,17 @@ TERRAL Gabriel, 3-9-1910, 12 .h., Roquecourbe (Tarn).
 TESTAS Prosper, 31-7-1878, 17 h., Arzac (Tarn).
 TESTE Benjamin, 16-1-1863, 22 h., Soual (Tarn).
 THOMIERES Barthélemy, 2-5-1870, 14 h., Rabastens (Tarn).
-TIBURCE Armand, 22-12-1879, 19 h.. Lautrec (Tarn).
-TILLOT François, .22-2-1911, 9 h. 30, Pineuilh (Gironde).
+TIBURCE Armand, 22-12-1879, 19 h., Lautrec (Tarn).
+TILLOT François, 22-2-1911, 9 h. 30, Pineuilh (Gironde).
 TOURRET Henri, 22-9-1872, 22 h., Lavaur (Tarn).
 TRESSIERES Emile, 29-10-1883, 18 h., Trévien (Tarn).
 TROUCHE Jean, 18-2-1872, 9 h., Padiés (Tarn).
 VAISSIERE Louis, 15-1-1902, 11 b., Soréze (Tarn).
 VEDEL Angély, 12-6-1908, 13 h., Les Fournials de Tanus (Tarn).
 VERDEIL Joseph, 22-7-1901, 17 h., Fraissé (Tarn).
-VERDEIL Paul, 13-4-1911, 10 h.. Fraissé (Tarn).
+VERDEIL Paul, 13-4-1911, 10 h., Fraissé (Tarn).
 VERDIER Louis, 14-11-1872, 1 h., Venés (Tarn).
-VIALAS Romain, 1-11-1872, 17 h.. Dourgne (Tarn).
+VIALAS Romain, 1-11-1872, 17 h., Dourgne (Tarn).
 VIALELLE Edouvard, 14-1-1874, 5 h., Lacroisille (Tarn).
 VIDAL Casimir, 18-10-1872, 18 h., Montgey (Tarn).
 VIDAL Jean, 20-10-1874, 8 h., Aussillon (Tarn).
