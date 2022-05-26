@@ -8,7 +8,7 @@
 ********************************************************************************/
 namespace g5\app;
 
-interface Router{
+interface Router {
     
     /**
         Returns an array containing the possible datafiles processed by the dataset.
@@ -21,4 +21,4 @@ interface Router{
     **/
     public static function getArgs3($datafile): array;
     
-}// end interface
+} // end interface

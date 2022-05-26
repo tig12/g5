@@ -7,8 +7,13 @@
     - match tmp file to geonames
     - problem of issues
     - recompute look inter
-  
-  
+    
+- See $cmdSignature in cfepp/final3/tmp2db and genralize it to all commands
+
+- BUG
+php run-g5.php db init all export
+PHP Warning:  Undefined array key "lerrcp" in /home/thierry/var/www/opengauquelin.org/gauquelin5/src/model/Group.php on line 451
+
 - Harmonize export commands:
     - computation of name using Person->fullName() and givenName() (see commands/db/export/allpersons).
     - idem for function to sort by name

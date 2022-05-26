@@ -30,7 +30,6 @@ class raw2tmp implements Command {
             return "USELESS PARAMETER : " . $params[0] . "\n";
         }
         
-        $infile = Final3::rawFilename();
         $outfile = Final3::tmpFilename();
         $outfileRaw = Final3::tmpRawFilename();
         

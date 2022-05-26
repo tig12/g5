@@ -265,7 +265,9 @@ class all implements Command {
             echo "***************************\n";
             foreach($filesGauqA as $datafile){
                 echo curaExport::execute([$datafile, 'export']);
+break;
             }
+exit;
             echo curaExport::execute(['D6', 'export']);
             echo curaExport::execute(['D10', 'export']);
             echo curaExport::execute(['E1', 'export']);

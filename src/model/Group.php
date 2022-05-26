@@ -448,6 +448,20 @@ class Group {
                              . " while importing group '{$this->data['slug']}'";
                         throw new \Exception($msg);
                     }
+if(
+    (is_null($data) && !isset($p->data[$pk]))
+    || 
+    (!is_null($data) && !isset($data[$pk]))
+){
+    if($pk == 'lerrcp'){
+        echo "\np = "; print_r($p); echo "\n";
+        echo "\ndata = "; print_r($data); echo "\n";
+        exit;
+    }
+    //echo "pk = $pk\n";
+    //throw new \Exception($csvFile);
+}
+    
                     $data = is_null($data) ? $p->data[$pk] : $data[$pk];
                 }
                 $new[$csvKey] = $data;

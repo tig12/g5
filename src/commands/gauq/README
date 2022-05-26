@@ -1,0 +1,8 @@
+
+To add a new command in a subpackage of g5\gauq,
+
+- Add a new entry in GauqRouter::DATAFILES_SUBNAMESPACE
+
+- Complete GauqRouter::getArgs2()
+
+- If needed, complete GauqRouter::computeDatafiles() and GauqRouter::getArgs3()

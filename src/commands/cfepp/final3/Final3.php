@@ -177,7 +177,10 @@ class Final3 {
         return implode(DS, [Config::$data['dirs']['tmp'], 'cfepp', 'cfepp-1120-nienhuys.csv']);
     }
     
-    /** Loads data/tmp/cfepp/cfepp-1120-nienhuys.csv in a regular array **/
+    /**
+        Loads data/tmp/cfepp/cfepp-1120-nienhuys.csv in a regular array.
+        Each element contains the person fields in an assoc. array.
+    **/
     public static function loadTmpFile(){
         return csvAssociative::compute(self::tmpFilename(), G5::CSV_SEP);
     }
@@ -209,6 +212,6 @@ class Final3 {
     **/
     public static function loadTmpRawFile(){
         return csvAssociative::compute(self::tmpRawFilename());
-    }                                           
+    }
 
 } // end class

@@ -29,6 +29,7 @@ class GauqRouter implements Router {
         'D10' => 'D10',
         'E1' => 'E1_E3',
         'E3' => 'E1_E3',
+        'g55' => 'g55',
     ];
     
     // ******************************************************
@@ -77,6 +78,7 @@ class GauqRouter implements Router {
             // 'B', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6',
             'D6', 'D10',
             'E1', 'E3',
+            'g55',
         ];
     }
     
