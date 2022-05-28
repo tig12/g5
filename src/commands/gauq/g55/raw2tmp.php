@@ -58,6 +58,7 @@ class raw2tmp implements Command {
         $trimField = function(&$val, $idx){ $val = trim($val); };
         foreach($raw as $line){
             $N++;
+//echo "$line";
 //echo "$N\n";
             $fields = explode(G55::RAW_SEP, trim($line));
             if(count($fields) != 4){
@@ -74,8 +75,6 @@ class raw2tmp implements Command {
             $res .= implode(G5::CSV_SEP, $new) . "\n";
             $res_raw .= implode(G5::CSV_SEP, $fields) . "\n";
         }
-        
-        
 exit;
         
         file_put_contents($outfile, $csv);
@@ -88,8 +87,6 @@ exit;
     }
     
     
-    
-    // ******************************************************
     const PATTERN_NAME = '/([A-Z ]+) (.*)/';
     /**
         @return     Array with 3 elements: family name, given name, nobility
@@ -107,31 +104,206 @@ exit;
         return $res;
     }
     
-    // ******************************************************
+    const PATTERN_DAY = '/(\d+)-(\d+)-(\d+)/';
+    const PATTERN_HOUR = '/(\d+) h.( \d+)?/';
     /**
         @return     Date format YYYY-MM-DD HH:MM
     **/
-    const PATTERN_DAY = '/(\d+)-(\d+)-(\d+)/';
-    const PATTERN_HOUR = '/(\d+) h.( \d+)?/';
     private static function computeDateTime(string $strDay, string $strHour): string {
         $res = '';
         preg_match(self::PATTERN_DAY, $strDay, $m);
         if(count($m) != 4){
             echo "   Unable to parse G55 day: $strDay\n";
-exit;
+            return $res;
         }
 //        str_pad($h , 2, '0', STR_PAD_LEFT);
         return $res;
     }
     
-    // ******************************************************
+    const PATTERN_PLACE =  '/(.*?) \((.*?)\)\./';
     /**
-        @return     Array [place name, admin code level 2, country iso 3166]
+        @return     Array with 4 elements
+                        - 0: place name
+                        - 1: admin code level 1
+                        - 2: admin code level 2
+                        - 3: country iso 3166
     **/
     private static function computePlace(string $str): array {
-        $res = ['', '', ''];
+        $res = ['', '', '', ''];
+        preg_match(self::PATTERN_PLACE, $str, $m);
+        if(count($m) != 3){
+            echo "   Unable to parse G55 place: $str\n";
+            return $res;
+        }
+        $placeName = $m[1];
+        if($placeName == 'Saarelouis'){
+            return ['Saarlouis', '09', '', 'DE'];
+        }
+        $res[0] = $placeName;
+        $C2 = $m[2];
+        if($C2 == 'Algérie'){
+            $res[3] = 'DZ';
+            return $res;
+        }
+        $res[3] = 'FR';
+        if(!isset(self::DEPTS[$C2])){
+            echo "C2 code not handled: $C2\n";
+        }
+        $res[2] = self::DEPTS[$C2];
         return $res;
     }
     
     
-}// end class    
+    const DEPTS = [
+        'Ain'                   => '01',
+        'Aisne'                 => '02',
+//        'Algérie'               => '',
+        'Allier'                => '03',
+        'Alpes-M.'              => '06',
+        'Alpes-Marit.'          => '06',
+        'Alpes-Maritimes'       => '06',
+        'Alsace'                => '',
+        'Ardèche'               => '07',
+        'Ardennes'              => '08',
+        'Ariège'                => '09',
+        'Aube'                  => '10',
+        'Aude'                  => '11',
+        'Aveyr.'                => '12',
+        'Aveyron'               => '12',
+        'Bas-Rhin'              => '67',
+        'Basses-Alpes'          => '04',
+        'Basses-Pyrénées'       => '66',
+        'B.-du-Rh.'             => '13',
+        'Bouches-du-R.'         => '13',
+        'Bouches-du-Rh.'        => '13',
+        'Bouches-du-Rhône'      => '13',
+        'Bretagne'              => '',
+        'Calvad.'               => '14',
+        'Calvados'              => '14',
+        'Cantal'                => '15',
+        'Ch.'                   => '',
+        'Char.'                 => '16',
+        'Charente'              => '16',
+        'Charente-Mar.'         => '17',
+        'Charente-Maritime'     => '17',
+        'Cher'                  => '18',
+        'Ch.-Marit.'            => '17',
+        'Corrèze'               => '19',
+        'Corse'                 => '20',
+        'Cote-d’Or'             => '21',
+        'Côte-d’Or'             => '21',
+        'Côtes-du-N.'           => '22',
+        'Côtes-du-Nord'         => '22',
+        'Creuse'                => '23',
+        'Deux-Sévres'           => '79',
+        'Dordogne'              => '24',
+        'Doubs'                 => '25',
+        'Drôme'                 => '26',
+        'E.-et-L.'              => '28',
+        'Eure'                  => '27',
+        'Eure-et-Loire'         => '28',
+        'Finistère'             => '29',
+        'Gard'                  => '30',
+        'Gers'                  => '32',
+        'Gir.'                  => '33',
+        'Gironde'               => '33',
+        'Haute-Garonne'         => '31',
+        'Haute-Loire'           => '43',
+        'Haute-M.'              => '52',
+        'Haute-Marne'           => '52',
+        'Haute-Saône'           => '72',
+        'Haute-Savoie'          => '74',
+        'Hautes-Pyrénées'       => '65',
+        'Haute-Vienne'          => '89',
+        'Haut-Rhin'             => '68',
+        'Hérault'               => '34',
+        'Hte-L.'                => '43',
+        'Hte-M.'                => '52',
+        'Hte-Marne'             => '52',
+        'Hte-Saône'             => '70',
+        'Hte-V.'                => '87',
+        'Ht-Rh.'                => '68',
+        'I.-et-L.'              => '37',
+        'I.-et-V.'              => '',
+        'Ille-et-V.'            => '',
+        'Ille-et-Vil.'          => '',
+        'Ille-et-Vilaine'       => '',
+        'Indre'                 => '36',
+        'Indre-et-Loire'        => '37',
+        'Isere'                 => '38',
+        'Isére'                 => '38',
+        'J.'                    => '',
+        'Jura'                  => '39',
+        'Landes'                => '40',
+        'L.-et-C.'              => '',
+        'Loi'                   => '',
+        'Loire'                 => '',
+        'Loire-Inf.'            => '',
+        'Loire-Infér.'          => '',
+        'Loire-Inférieure'      => '',
+        'Loiret'                => '45',
+        'Loir-et-Cher'          => '',
+        'Lot'                   => '46',
+        'Lot-et-Garonne'        => '47',
+        'Loz.'                  => '48',
+        'Lozère'                => '48',
+        'Maine-et-Loire'        => '',
+        'Manche'                => '50',
+        'Marne'                 => '51',
+        'Mayenne'               => '53',
+        'M.-et-M.'              => '54',
+        'Meurthe'               => '',
+        'Meurthe-et-Mos.'       => '54',
+        'Meurthe-et-Moselle'    => '54',
+        'Meuse'                 => '55',
+        'Morbihan'              => '56',
+        'Moselle'               => '57',
+        'Nièvre'                => '58',
+        'Nord'                  => '59',
+        'Oise'                  => '60',
+        'Orne'                  => '61',
+        'Pas-de-C.'             => '62',
+        'Pas-de-Calais'         => '62',
+        'P.-de-D.'              => '63',
+        'Pr. Mon.'              => '',
+        'Puy-de-Dôme'           => '63',
+        'Pyrénées-Or.'          => '64',
+        'Pyrénées-Orientales'   => '64',
+        'Rhône'                 => '69',
+        'S.'                    => '',
+        'Saône-et-L.'           => '71',
+        'Saône-et-Loire'        => '71',
+        //'Sarre'                 => '',
+        'Sarthe'                => '72',
+        'Savoie'                => '73',
+        'Seine'                 => '',
+        'Seine-et-M.'           => '77',
+        'Seine-et-Marne'        => '77',
+        'Seine-et-O.'           => '',
+        'Seine-et-Oise'         => '',
+        'Seine-Infér.'          => '76',
+        'Seine-Inférieure'      => '76',
+        'S.-et-M.'              => '77',
+        'S.-et-O.'              => '',
+        'S.-I.'                 => '76',
+        'S.-Infér.'             => '76',
+        'S.-L.'                 => '71',
+        'S.-O.'                 => '',
+        'Somme'                 => '80',
+        'T.'                    => '',
+        'Tarbes'                => '65',
+        'Tarn'                  => '81',
+        'Tarn-et-Gar.'          => '82',
+        'Tarn-et-Garonne'       => '82',
+        'Territoire de Belfort' => '90',
+        'V.'                    => '',
+        'Var'                   => '83',
+        'Vaucluse'              => '84',
+        'Vend.'                 => '85',
+        'Vendée'                => '85',
+        'Vienne'                => '86',
+        'Vosges'                => '88',
+        'Yonne'                 => '89',
+    ];
+    
+} // end class    

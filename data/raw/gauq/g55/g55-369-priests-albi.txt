@@ -75,7 +75,7 @@ BEZARD Louis, 26-11-1903, 7 h., Puylaurens (Tarn).
 BEZIAT Auguste, 4-2-1912, 7 h., Anglés (Tarn).
 BEZIAT Emile, 31-1-1879, 14 h., Boissezon (Tarn).
 BIRBES Hugue, 15-12-1881, 19 h. 45, Saint-Saëns (Seine-Inférieure).
-BIRBES Paul, 30-3-1873, 8 h., Saint-Sulpice (Tarn)
+BIRBES Paul, 30-3-1873, 8 h., Saint-Sulpice (Tarn).
 BLANC Jules, 5-10-1881, 5 h., Languet (Tarn).
 BLANQUET Philippe, 25-6-1866, 3 h., Jouqueviel (Tarn).
 BONHOURE Jean-P., 27-6-1876, 15 h., Puylaurens (Tarn).
@@ -150,7 +150,7 @@ CUGNASSE Gilbert, 19-6-1913, 15 h., Saint-Pierre-des-Plots (Tarn).
 DARDIER Joseph, 29-7-1870, 11 h., Carmaux (Tarn).
 DARLES Marius, 11-11-1878, 23 h., Lavaur (Tarn).
 DARNAL Jean, 9-5-1878, 14 h. 30, Angouléme (Charente-Maritime).
-DEJEAN Justin, 29-6-1909, 8 h., Sérénac (Tarn.
+DEJEAN Justin, 29-6-1909, 8 h., Sérénac (Tarn).
 DELICHERE Paul, 1-11-1865, 11 h., Gaillac (Tarn).
 DELMAS Joseph, 13-3-1884, 10 h., Puylaurens (Tarn).
 DELPON Jean, 22-11-1874, 11 h., Cambounés (Tarn).
@@ -185,7 +185,7 @@ FOULCHER Pierre, 8-9-1879, 12 h., Teillet (Tarn).
 FOURNIE Angély, 24-9-1907, 18 h., Energues (Tarn).
 FOURNIE Marius, 22-12-1884, 2 h., Energues (Tarn).
 FRESSAC Jean, 29-1-1911, 12 h., Wendargues (Hérault).
-FREYSSINET Emmanuel, 7-4-1880, 6 h., Estivaux (Corréze).
+FREYSSINET Emmanuel, 7-4-1880, 6 h., Estivaux (Corrèze).
 FREZOULS Edmond, 23-7-1907, 9 h., Montdragon (Tarn).
 FREZOULS Maurice, 24-7-1901, 6 h., Lombers (Tarn).
 GABEN Lucien, 13-12-1911, 12 h., Albi (Tarn).
@@ -287,7 +287,7 @@ PRAT J. F. H., 24-11-1863, 13 h., Cazelles (Tarn).
 PRIOU Elie, 4-6-1881, 9 h., Sémalens (Tarn).
 PUEL Célestin, 10-10-1882, 7 h., Carmaux (Tarn).
 PUJOL Auguste, 15-3-1886, 16 h., Lacaune (Tarn).
-RAFFEL Louis, 7-4-1872, 17 h., Monestiés ((Tarn).
+RAFFEL Louis, 7-4-1872, 17 h., Monestiés (Tarn).
 RAMADE Pierre, 19-3-1899, 19 h., Labessonnié (Tarn).
 RAUCOULES Antoine, 13-4-1899, 17 h., Revel (Haute-Garonne).
 RAUCOULES Louis, 5-6-1909, 11 h., Albi (Tarn).
@@ -317,7 +317,7 @@ ROQUES Henri, 10-11-1882, 22 h., Lacaune (Tarn).
 ROUANET Léon, 2-9-1877, 20 h., Boissezon (Tarn).
 ROUQUIER Marie, 27-2-1881, 2 h., Castelnau de Brassac (Tarn).
 RUFFEL Gaston, 18-2-1906, 5 h., Saint-Pierre des Plots (Tarn).
-SABLE Abel, 6-1-1915, 3 h., Liers (Ariége).
+SABLE Abel, 6-1-1915, 3 h., Liers (Ariège).
 SABRIE Louis, 16-5-1885, 20 h., Faussergues (Tarn).
 SAINT-HILAIRE P. L., 31-8-1870, 15 h., Laparrouquial (Tarn).
 SALLE Jean-Baptiste, 26-2-1878, 23 h., Buisson (Lozère).
@@ -341,7 +341,7 @@ SOLAGES Bernard, 7-2-1900, 6 h., Mézens (Tarn).
 SOLAGES Bruno, 8-8-1895, 21 h., Mézens (Tarn).
 SOLAGES François, 27-7-1898, 23 h., Mézens (Tarn).
 SOMPAYRAC Louis, 17-9-1880, 3 h., Rayssac (Tarn).
-SOUQUIERES Firmin, 1-12-1913, 1 h., Jugeols (Corréze).
+SOUQUIERES Firmin, 1-12-1913, 1 h., Jugeols (Corrèze).
 SUC Dominique, 12-7-1868, 8 h., Villefranche (Tarn).
 SUDRE Albert, 29-4-1872, 0 h., Grayssac (Tarn).
 TAILHADE Paul, 28-11-1902, 8 h., Anglés (Tarn).

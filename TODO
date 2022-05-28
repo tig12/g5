@@ -3,6 +3,8 @@
 - see php bug - https://bugs.php.net/bug.php?id=81002
   (to store booleans in postgres)
 
+- Check if admin level 1, 2, 3 should use codes like ISO 3166-2
+
 - CFEPP
     - match tmp file to geonames
     - problem of issues
