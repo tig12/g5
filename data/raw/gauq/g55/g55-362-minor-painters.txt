@@ -227,7 +227,7 @@ JUGLAR Victor Henri, 25-7-1826, 17 h., Chalon-sur-Marne (Marne).
 KALAS Ernest, 10-2-1861, 16 h., Reims (Marne).
 KOENIG Jules Raymond, 2-8-1872, 11 h., Ste-Marie-aux-Mines (Ht-Rh.).
 KUDER A. René, 23-9-1882, 18 h., Villé (Bas-Rhin).
-LABITTE Eugéne Léon, 7-10-1858, 21 h 30, Clermont (Oise).
+LABITTE Eugéne Léon, 7-10-1858, 21 h. 30, Clermont (Oise).
 LA BRELY Auguste, 27-2-1838, 20 h., Fuissé (Saône-et-Loire).
 LA HIRE (de) Marie, 20-3-1878, 3 h., Rouillé (Vienne).
 LALANDE Louise, 8-2-1834, 3 h., Le Mans (Sarthe).
@@ -262,7 +262,7 @@ LEPIPPRE Emeric Marie-S., 13-2-1833, 12 h., Montfort-l’Amaury (S.-O.).
 LEROY Adolphe, 25-2-1810, 18 h., Abbeville (Somme).
 LEROY Jules, 20-3-1833, 4 h., Le Mans (Sarthe).
 LESTRILLE Jacques Luc H., 26-8-1904, 5 h., Ault (Somme).
-LIEVRE Edouard, 22-9-1828, 3 h., Blamon (Meurthe).
+LIEVRE Edouard, 22-9-1828, 3 h., Blamont (Meurthe).
 LIONNET Félix, 15-12-1832, 21 h., La Chataigneraie (Vendée).
 LIZAL Alex, 23-1-1878, 12 h., Dax (Landes).
 LOMBARD Emile Félicien, 11-3-1883, 8 h., Aubignosc (Basses-Alpes).
@@ -340,7 +340,7 @@ RICHARD-CAVARO Charles Adolphe, 20-4-1819, 9 h., Vernon (Eure).
 RIMBAUD Arthur, 20-10-1854, 6 h., Charleville (Ardennes).
 RISLER Auguste Charles, 29-8-1819, 0 h., Cernay (Haut-Rhin).
 RIVOULON Antoine, 16-2-1810, 9 h., Cusset (Allier).
-ROBERT Alphonse, 19-3-1807, 12 h., Savres (Seine-et-Oise).
+ROBERT Alphonse, 19-3-1807, 12 h., Sèvres (Seine-et-Oise).
 ROBERT Thérése, 8-6-1895, 20 h., Belle-Isle (Morbihan).
 ROBIN Louis, 18-10-1845, 1 h., Villefranche (Rhône).
 RONIJAT Etienne Antoine, 19-4-1822, 9 h., Vienne (Isére).
@@ -353,7 +353,7 @@ SEBILLOT Paul-Marie, 6-2-1843, 16 h., Matignon (Côtes-du-Nord).
 SENECHAL Adrien, 5-7-1895, 19 h., Reims (Marne).
 SENEZCOURT (de) Jules, 19-4-1818, 10 h., Saint-Omer (Pas-de-Calais).
 SALKIN Fernand, 27-6-1862, 2 h., Montélimar (Drôme).
-SALLES Robert Léon, 17-5-1871, 23 hi, Lisieux (Calvados).
+SALLES Robert Léon, 17-5-1871, 23 h., Lisieux (Calvados).
 SALTZMANN Auguste, 14-4-1824, 15 h., Ribeauvillé (Haut-Rhin).
 SALVAIRE Edouard Jules, 5-12-1831, 3 h., Alger (Algérie).
 SARTHOU Maurice Elie, 15-1-1911, 10 h., Bayonne (Basses-Pyrénées).

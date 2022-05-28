@@ -122,6 +122,7 @@ class G55 {
         'GNAME',
         'DATE',
         'PLACE',
+        'C1',
         'C2',
         'CY',
     ];

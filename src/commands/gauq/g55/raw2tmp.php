@@ -15,6 +15,29 @@ use tiglib\patterns\Command;
 
 class raw2tmp implements Command {
     
+    // to fix ambiguities
+    const TWEAKS = [
+        '361PEI' => [
+            // BRUNARD Joseph Brice, 13-1-1812, 14 h., Saint-Brice (Seine-et-Oise).
+            // see https://www.saintbrice95.fr/ma-mairie/histoire-de-saint-brice/les-personnalites/ils-ont-habite-ou-sejourne-a-saint-brice/arts-plastiques/joseph-brice-brunard-peintre-miniaturiste-et-imprimeur-864.html
+            '76' => [
+                'PLACE' => 'Saint-Brice-sous-Forêt',
+                'C2' => '95',
+            ],
+            // FERRET Pierre César, 8-10-1800, 24 h. 15, Saint-Germain (Seine-et-O.).
+            '165' => [
+                'PLACE' => 'Saint-Germain-en-Laye',
+                'C2' => '92',
+            ],
+            // HAAKMAN Léon André, 24-12-1859, 17 h. 45, Saint-Germain (S.-et-O.).
+            '204' => [
+                'PLACE' => 'Saint-Germain-en-Laye',
+                'C2' => '92',
+            ],
+        ],
+    ];
+    
+    
     // ******************************************************
     /** 
         Parses one file E1 or E3 and stores it in a csv file
@@ -58,8 +81,6 @@ class raw2tmp implements Command {
         $trimField = function(&$val, $idx){ $val = trim($val); };
         foreach($raw as $line){
             $N++;
-//echo "$line";
-//echo "$N\n";
             $fields = explode(G55::RAW_SEP, trim($line));
             if(count($fields) != 4){
                 //throw new \Exception("Incorrect format in file $groupKey for line $N:\n$line");
@@ -71,17 +92,29 @@ class raw2tmp implements Command {
             $new['NUM'] = $N;
             [$new['FNAME'], $new['GNAME']] = self::computeName($fields[0]);
             $new['DATE'] = self::computeDateTime($fields[1], $fields[2]);
-            [$new['PLACE'], $new['C2'], $new['CY']] = self::computePlace($fields[3]);
+            [$new['PLACE'], $new['C1'], $new['C2'], $new['CY']] = self::computePlace($fields[3]);
+            if(isset(self::TWEAKS[$groupKey][$N])){
+                $new = array_replace($new, self::TWEAKS[$groupKey][$N]);
+            }
+            // check useful if fr_place2admin2() returned '' for ambiguous cases
+            // and case not handled bt self::TWEAKS
+            if($new['CY'] == 'FR' && $new['C2'] == ''){
+                echo "C2 not handled for $groupKey $N: $line\n";
+            }
             $res .= implode(G5::CSV_SEP, $new) . "\n";
             $res_raw .= implode(G5::CSV_SEP, $fields) . "\n";
         }
-exit;
         
-        file_put_contents($outfile, $csv);
-        $report .= "Stored " . self::$n_total . " lines in $outfile\n";
+        $dir = dirname($outfile);
+        if(!is_dir($dir)){
+            mkdir($dir, 0755, true);
+        }
         
-        file_put_contents($outfile, $csvRaw);
-        $report .= "Stored " . self::$N . " lines in $outfile\n";
+        file_put_contents($outfile, $res);
+        $report .= "Stored " . $N . " lines in $outfile\n";
+        
+        file_put_contents($outfile_raw, $res_raw);
+        $report .= "Stored " . $N . " lines in $outfile_raw\n";
         
         return $report;
     }
@@ -96,7 +129,8 @@ exit;
         preg_match(self::PATTERN_NAME, $str, $m);
         if(count($m) != 3){
             //throw new \Exception("Unable to parse G55 name: $str");
-            echo "   Unable to parse G55 name: $str\n";
+            //echo "   Unable to parse G55 name: $str\n";
+            $res[0] = $str;
             return $res;
         }
         $res[0] = ucWords(strtolower($m[1]));
@@ -105,18 +139,25 @@ exit;
     }
     
     const PATTERN_DAY = '/(\d+)-(\d+)-(\d+)/';
-    const PATTERN_HOUR = '/(\d+) h.( \d+)?/';
     /**
         @return     Date format YYYY-MM-DD HH:MM
     **/
     private static function computeDateTime(string $strDay, string $strHour): string {
         $res = '';
+        //
         preg_match(self::PATTERN_DAY, $strDay, $m);
         if(count($m) != 4){
             echo "   Unable to parse G55 day: $strDay\n";
             return $res;
         }
-//        str_pad($h , 2, '0', STR_PAD_LEFT);
+        $res = $m[3] . '-' . str_pad($m[2], 2, '0', STR_PAD_LEFT) . '-' . str_pad($m[1], 2, '0', STR_PAD_LEFT);
+        //
+        $tmp = explode('h.', $strHour);
+        if(count($tmp) != 2){
+            echo "   Unable to parse G55 hour: $strHour\n";
+            return $res;
+        }
+        $res .= ' ' . str_pad(trim($tmp[0]), 2, '0', STR_PAD_LEFT) . ':' . str_pad(trim($tmp[1]), 2, '0', STR_PAD_LEFT);
         return $res;
     }
     
@@ -135,25 +176,54 @@ exit;
             echo "   Unable to parse G55 place: $str\n";
             return $res;
         }
+        
         $placeName = $m[1];
         if($placeName == 'Saarelouis'){
             return ['Saarlouis', '09', '', 'DE'];
         }
         $res[0] = $placeName;
+        
         $C2 = $m[2];
         if($C2 == 'Algérie'){
             $res[3] = 'DZ';
+            $res[1] = self::dz_place2admin1($placeName);
             return $res;
         }
+        if($C2 == 'Pr. Mon.'){
+            $res[3] = 'MC';
+            return $res;
+        }
+        
         $res[3] = 'FR';
         if(!isset(self::DEPTS[$C2])){
             echo "C2 code not handled: $C2\n";
         }
         $res[2] = self::DEPTS[$C2];
+        if($res[2] == ''){
+            $res[2] = self::fr_place2admin2($placeName);
+        }
         return $res;
     }
     
+    /**
+        Auxiliary of computePlace().
+        Computes admin1 code for Algeria.
+    **/
+    private static function dz_place2admin1(string $place): string {
+        switch($place){
+        	case 'Alger': return '01'; break;
+        	case 'Blidah': return '20'; break;
+        	case 'Constantine': return '04'; break;
+            default:
+                echo "Unable to compute DZ admin1 code for $place\n";
+                return '';
+            break;
+        }
+    }
     
+    /** 
+        Association name of département as written in Gauquelin book => code
+    **/
     const DEPTS = [
         'Ain'                   => '01',
         'Aisne'                 => '02',
@@ -224,10 +294,10 @@ exit;
         'Hte-V.'                => '87',
         'Ht-Rh.'                => '68',
         'I.-et-L.'              => '37',
-        'I.-et-V.'              => '',
-        'Ille-et-V.'            => '',
-        'Ille-et-Vil.'          => '',
-        'Ille-et-Vilaine'       => '',
+        'I.-et-V.'              => '37',
+        'Ille-et-V.'            => '35',
+        'Ille-et-Vil.'          => '35',
+        'Ille-et-Vilaine'       => '35',
         'Indre'                 => '36',
         'Indre-et-Loire'        => '37',
         'Isere'                 => '38',
@@ -235,19 +305,18 @@ exit;
         'J.'                    => '',
         'Jura'                  => '39',
         'Landes'                => '40',
-        'L.-et-C.'              => '',
-        'Loi'                   => '',
-        'Loire'                 => '',
-        'Loire-Inf.'            => '',
-        'Loire-Infér.'          => '',
-        'Loire-Inférieure'      => '',
+        'L.-et-C.'              => '41',
+        'Loire'                 => '42',
+        'Loire-Inf.'            => '44',
+        'Loire-Infér.'          => '44',
+        'Loire-Inférieure'      => '44',
         'Loiret'                => '45',
-        'Loir-et-Cher'          => '',
+        'Loir-et-Cher'          => '41',
         'Lot'                   => '46',
         'Lot-et-Garonne'        => '47',
         'Loz.'                  => '48',
         'Lozère'                => '48',
-        'Maine-et-Loire'        => '',
+        'Maine-et-Loire'        => '49',
         'Manche'                => '50',
         'Marne'                 => '51',
         'Mayenne'               => '53',
@@ -265,7 +334,7 @@ exit;
         'Pas-de-C.'             => '62',
         'Pas-de-Calais'         => '62',
         'P.-de-D.'              => '63',
-        'Pr. Mon.'              => '',
+        //'Pr. Mon.'              => '',
         'Puy-de-Dôme'           => '63',
         'Pyrénées-Or.'          => '64',
         'Pyrénées-Orientales'   => '64',
@@ -305,5 +374,75 @@ exit;
         'Vosges'                => '88',
         'Yonne'                 => '89',
     ];
+    
+    /**
+        Auxiliary of computePlace().
+        Computes admin2 code (département) for France for ambiguous cases.
+    **/
+    private static function fr_place2admin2(string $place): string {
+        switch($place){
+        // Ambiguous cases, handled by self::TWEAKS
+        case 'Saint-Germain': return ''; break;
+        case 'Saint-Brice': return ''; break;
+        //
+        case 'Schlestadt': return '67'; break;
+        case 'Montcontour': return '22'; break;
+        case 'Saint-Christophe-de-Chalais': return '16'; break;
+        case 'Lons-le-Saunier': return '39'; break;
+        case 'Saint-Quirin': return '57'; break;
+        case 'Blamont': return '54'; break;
+        case 'Salonnes': return '57'; break;
+        case 'Saint-Benoît de Carmaux': return '81'; break;
+        case 'Saint-Didier-les-Bains': return '84'; break;
+        // Seine
+        case 'Chatillon-sous-Bagneux': return '92'; break;
+        case 'Boulogne-sur-Seine': return '92'; break;
+        case 'Courbevoie': return '92'; break;
+        case 'Créteil': return '94'; break;
+        case 'Fontenay-aux-Roses': return '92'; break;
+        case 'Gennevilliers': return '92'; break;
+        case 'Gentilly': return '94'; break;
+        case 'Joinville-le-Pont': return '94'; break;
+        case 'Montrouge': return '92'; break;
+        case 'Neuilly-sur-Seine': return '92'; break;
+        case 'Nogent-sur-Marne': return '94'; break;
+        case 'Pantin': return '93'; break;
+        case 'Puteaux': return '92'; break;
+        case 'Saint-Mandé': return '94'; break;
+        case 'Saint-Ouen': return '93'; break;
+        case 'Vitry-sur-Seine': return '94'; break;
+        case 'Yvry-sur-Seine': return '94'; break;
+        // Seine-et-Oise
+        case 'Montgeron': return '91'; break;
+        case 'Saint-Cyr-l’Ecole': return '78'; break;
+        case 'Saint-Cloud': return '92'; break;
+        case 'Andilly': return '95'; break;
+        case 'Coudray-Montceau': return '91'; break;
+        case 'Le Vésinet': return '78'; break;
+        case 'Limay': return '78'; break;
+        case 'Magny-en-Vexin': return '91'; break;
+        case 'Meudon': return '92'; break;
+        case 'Montesson': return '78'; break;
+        case 'Montfort-l’Amaury': return '78'; break;
+        case 'Mureaux': return '78'; break;
+        case 'Pontoise': return '95'; break;
+        case 'Saint-Leu': return '95'; break;
+        case 'Sèvres': return '92'; break;
+        case 'Taverny': return '95'; break;
+        case 'Verneuil': return '78'; break;
+        case 'Versailles': return '78'; break;
+        case 'Villepreux': return '78'; break;
+        case 'Mantes-la-Jolie': return '78'; break;
+        case 'Argenteuil': return '95'; break;
+        case 'Thiverval-Grignon': return '78'; break;
+        case 'Maisons-Laffitte': return '78'; break;
+        case 'Saint-Germain-les-Corbeil': return '91'; break;
+        case 'Saint-Germain-en-Laye': return '78'; break;
+        default:
+            echo "Unable to compute FR admin2 code for $place\n";
+            return '';
+        break;
+        }
+    }
     
 } // end class    
