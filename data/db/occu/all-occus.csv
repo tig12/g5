@@ -17,6 +17,7 @@ bowler;Q4951095;Joueur de bowling;Bowling player;sportsperson
 boxer;Q11338576;Boxeur;Boxer;sportsperson
 canoeist;Q13382566;Canoëiste;Canoeist;sportsperson
 cartoonist;Q1114448;Réalisateur de dessins animés;Cartoonist;artist
+catholic-priest;Q250867;Prêtre catholique;Catholic priest;religious-occupation
 chemist;Q593644;Chimiste;Chemist;scientist
 comedy-writer;Q11914886;Auteur de comédies;Comedy writer;writer
 composer;Q36834;Compositeur;Composer;musician
@@ -74,8 +75,8 @@ political-economist;Q105572010;Economiste politique;Political economist;
 politician;Q82955;Politicien;Politician;
 printmaker;Q11569986;Graveur;Printmaker;graphic-artist
 race-walker;Q17405793;Marcheur athlétique;Race walker;sportsperson
-religious-leader;Q15995642;Leader religieux;Religious leader;
-religious;Q2566598;Religieux;Religious;
+religious-leader;Q15995642;Leader religieux;Religious leader;religious-occupation
+religious-occupation;Q63187345;Occupation religieuse;Religious occupation;
 researcher;Q1650915;Chercheur;Researcher;
 revolutionary;Q3242115;Révolutionnaire;Revolutionary;
 rodeo-rider;Q21517059;Cavalier de rodéo;Rodeo rider;sportsperson
@@ -85,7 +86,7 @@ rower;Q13382576;Avironeur;Rower;sportsperson
 rugby-league-player;Q14373094;Joueur de rugby à XIII;Rugby league player;rugby-player
 rugby-player;Q13415036;Joueur de rugby;Rugby player;sportsperson
 rugby-union-player;Q14089670;Joueur de rugby à XV;Rugby union player;rugby-player
-saint;Q43115;Saint;Saint;
+saint;Q43115;Saint;Saint;religious-occupation
 scientist;Q901;Scientifique;Scientist;researcher
 sculptor;Q1281618;Sculpteur;Sculptor;artist
 singer;Q177220;Chanteur;Singer;musician

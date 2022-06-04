@@ -25,55 +25,76 @@ class G55 {
         '576MED' => [
             'title' => "576 membres associés et correspondants de l'académie de médecine",
             'lerrcp' => 'A2',
+            'occupation' => 'physicist',
         ],
         '508MED' => [
             'title' => '508 autres médecins notables',
             'lerrcp' => 'A2',
+            'occupation' => 'physicist',
         ],
         '570SPO' => [
             'title' => '570 sportifs',
             'lerrcp' => 'A1',
+            'occupation' => 'sportsperson',
         ],
         '676MIL' => [
             'title' => '676 militaires',
             'lerrcp' => 'A3',
+            'occupation' => 'military-personnel',
         ],
         '906PEI' => [
             'title' => '906 peintres',
             'lerrcp' => 'A4',
+            'occupation' => 'paintor',
         ],
         '361PEI' => [
             'title' => '361 peintres mineurs',
             //no lerrcp
+            'occupation' => 'paintor',
             'raw-file' => 'g55-362-minor-painters.txt',
         ],
         '500ACT' => [
             'title' => '500 acteurs',
             'lerrcp' => 'A5',
+            'occupation' => 'actor',
         ],
         '494DEP' => [
             'title' => '494 députés',
             'lerrcp' => 'A5',
+            'occupation' => 'politician',
         ],
         '349SCI' => [
             'title' => "349 membres associés et correspondants de l'académie des sciences",
-            'lerrcp' => 'A2'
+            'lerrcp' => 'A2',
+            'occupation' => 'scientist',
         ],
         '884PRE' => [
             'title' => '884 prêtres',
             //no lerrcp
+            'occupation' => 'catholic-priest',
         ],
         '369PRE' => [
             'title' => '369 prêtres du diocèse de Paris',
             //no lerrcp
+            'occupation' => 'catholic-priest',
             'raw-file' => 'g55-369-priests-albi.txt',
         ],
         '513PRE' => [
             'title' => "513 prêtres du diocède d'Albi",
             //no lerrcp
+            'occupation' => 'catholic-priest',
             'raw-file' => 'g55-513-priests-paris.txt',
         ],
     ];
+    
+    /**
+        Returns the possible group keys that can be used to invoke commands raw2tmp and tmp2db
+    **/
+    public static function getPossibleGroupKeys() {
+        $tmp = G55::GROUPS;
+        unset($tmp['884PRE']);
+        return array_keys($tmp);
+    }
     
     
     // *********************** Raw files manipulation ***********************

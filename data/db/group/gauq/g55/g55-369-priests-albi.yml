@@ -1,0 +1,16 @@
+
+# document:
+#   history:
+#     - 2022-06-03 23:38:47+02:00: Thierry Graff, creation
+
+slug: g55-369-priests-albi
+name: Gauquelin 1955 - 369 priests, Albi
+type: history
+'n': 369
+sources:
+  - g55
+description: |
+  List of catholic priests published in Gauquelin 1955 book, "Prêtres du diocèse d'Albi".
+  
+parents:
+  - g55-882-priests

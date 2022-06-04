@@ -1,66 +1,52 @@
 <?php
 /********************************************************************************
-    Loads files data/tmp/cfepp/cfepp-1120-nienhuys.csv and data/tmp/cfepp/cfepp-1120-nienhuys-raw.csv in database.
+    Loads files from data/tmp/gauq/g55 in database.
 
-    NOTE: This code cannot be executed several times (won't update the records if already in database)
-        To re-execute it (eg for debug purposes), you must rebuild the databse from scratch (at least A2 and E1)
-    
-    @pre This command must be executed after tmp2db step of
-         - LERRCP A1
-         - LERRCP D6
-         - Ertel Sport
-    
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
-    @history    2022-04-22 17:12:58+02:00, Thierry Graff : creation
+    @history    2022-06-03 23:52:31+02:00, Thierry Graff : creation
 ********************************************************************************/
-namespace g5\commands\cfepp\final3;
+namespace g5\commands\gauq\g55;
 
 use tiglib\patterns\Command;
 use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
-use g5\commands\cfepp\final3\Final3;
-use g5\commands\cfepp\CFEPP;
-use g5\commands\gauq\LERRCP;
-use g5\commands\ertel\Ertel;
-use g5\commands\cpara\CPara;
 
 class tmp2db implements Command {
     
-    const REPORT_TYPE = [
-        'small' => 'Echoes the number of inserted / updated rows',
-        'full'  => 'Lists the different dates between CFEPP and Gauquelin',
-    ];
-    
     /**
-        @param  $params Array containing one element, the type of report.
+        @param  $params Array containing 3 elements :
+                        - the string "g55" (useless here, used by GauqCommand).
+                        - the string "raw2tmp" (useless here, used by GauqCommand).
+                        - a string identifying what is processed (ex : '570SPO').
+                          Corresponds to a key of G55::GROUPS array
     **/
     public static function execute($params=[]): string {
-        if(count($params) > 1){
-            return "USELESS PARAMETER : " . $params[1] . "\n";
-        }
-        $msg = '';
-        foreach(self::REPORT_TYPE as $k => $v){
-            $msg .= "  '$k' : $v\n";
-        }
-        if(count($params) != 1){
-            return "WRONG USAGE - This command needs a parameter to specify which output it displays. Can be :\n" . $msg;
-        }
-        $reportType = $params[0];
-        if(!in_array($reportType, array_keys(self::REPORT_TYPE))){
-            return "INVALID PARAMETER : $reportType - Possible values :\n" . $msg;
-        }
         
-        $cmdSignature = 'cfepp final3 tmp2db';
+        $cmdSignature = 'gauq g55 tmp2db';
         $report = "--- $cmdSignature ---\n";
-        $dateReport = '';
-        $occuReport  = '';
         
-        // sources corresponding to this test - insert if does not already exist
+        $possibleParams = G55::getPossibleGroupKeys();
+        $msg = "Usage : php run-g5.php $cmdSignature <group>\nPossible values for <group>: \n  - " . implode("\n  - ", $possibleParams) . "\n";
         
-        // sources 'cfepp' and 'cpara' already exist, created in Ertel Sport tmp2db
+        if(count($params) != 3){
+            return "INVALID CALL: - this command needs exactly one parameter.\n$msg";
+        }
+        $groupKey = $params[2];
+        if(!in_array($groupKey, $possibleParams)){
+            return "INVALID PARAMETER: $groupKey\n$msg";
+        }
         
+        $tmpfile = G55::tmpFilename($groupKey);
+        if(!is_file($tmpfile)){
+            return "INVALID CALL: missing file $tmpfile\n";
+        }
+        
+        
+exit;
+        // sources corresponding to this group - insert if does not already exist
+                
         $final3Source = Source::createFromSlug(Final3::SOURCE_SLUG); // DB
         if(is_null($final3Source)){
             $final3Source = new Source(Final3::SOURCE_DEFINITION_FILE);

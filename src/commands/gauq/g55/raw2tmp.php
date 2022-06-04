@@ -40,11 +40,10 @@ class raw2tmp implements Command {
     
     // ******************************************************
     /** 
-        Parses one file E1 or E3 and stores it in a csv file
-        The resulting csv file contains informations of the 2 lists
+        Parses one g55 file and stores it in a csv file
         @param  $params Array containing 3 elements :
-                        - the string "g55" (useless here)
-                        - the string "raw2tmp" (useless here)
+                        - the string "g55" (useless here, used by GauqCommand).
+                        - the string "raw2tmp" (useless here, used by GauqCommand).
                         - a string identifying what is processed (ex : '570SPO').
                           Corresponds to a key of G55::GROUPS array
         @return report
@@ -54,9 +53,7 @@ class raw2tmp implements Command {
         $cmdSignature = 'gauq g55 raw2tmp';
         $report = "--- $cmdSignature ---\n";
         
-        $tmp = G55::GROUPS;
-        unset($tmp['884PRE']);
-        $possibleParams = array_keys($tmp);
+        $possibleParams = G55::getPossibleGroupKeys();
         $msg = "Usage : php run-g5.php $cmdSignature <group>\nPossible values for <group>: \n  - " . implode("\n  - ", $possibleParams) . "\n";
         
         if(count($params) != 3){
