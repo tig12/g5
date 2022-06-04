@@ -13,7 +13,7 @@ class Gauquelin {
         Path to the yaml file containing the characteristics of Arno Müller.
         Relative to directory data/db/source
     **/
-    const SOURCE_DEFINITION_FILE = 'gauquelin/gauquelin.yml';
+    const SOURCE_DEFINITION_FILE = 'gauq' . DS . 'gauquelin.yml';
     
     /**
         Slug of this source.

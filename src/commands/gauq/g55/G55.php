@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Code related to Gauquelin 1955 book "L'influence des astres"
+    Code related to the inclusion of data contained in Gauquelin 1955 book "L'influence des astres"
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2017-05-08 23:39:19+02:00, Thierry Graff : creation
@@ -14,6 +14,20 @@ use g5\app\Config;
 use tiglib\arrays\csvAssociative;
 
 class G55 {
+    
+    // *********************** Source management ***********************
+    // When Gauquelin 1955 book is considered as an information source.
+    
+    /**
+        Path to the yaml file containing the characteristics of the source.
+        Relative to directory data/db/source
+    **/
+    const SOURCE_DEFINITION_FILE = 'gauq' . DS . 'g55.yml';
+    
+    /** Slug of source  **/
+    const SOURCE_SLUG = 'g55';
+    
+    // *********************** Group management ***********************
     
     /**
         List and characteristics of 1955 groups
