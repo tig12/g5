@@ -15,6 +15,20 @@ use tiglib\arrays\csvAssociative;
 
 class G55 {
     
+    // *********************** G55 unique id ***********************
+    
+    /**
+        Returns a unique Gauquelin 1955 id, like "570SPO-123"
+        Unique id of a record among birth dates published in Gauquelin's 1955 book.
+        See https://tig12.github.io/gauquelin5/g55.html for precise definition.
+        @param $groupKey    String like '570SPO', one of the key of G55:GROUPS
+        @param $N           Value of field NUM of a record within the group
+    **/
+    public static function g55Id($groupKey, $N){
+        return "$groupKey-$N";
+    }
+    
+    
     // *********************** Source management ***********************
     // When Gauquelin 1955 book is considered as an information source.
     
@@ -22,7 +36,7 @@ class G55 {
         Path to the yaml file containing the characteristics of the source.
         Relative to directory data/db/source
     **/
-    const SOURCE_DEFINITION_FILE = 'gauq' . DS . 'g55.yml';
+    const SOURCE_DEFINITION_FILE = 'gauq' . DS . 'g55' . DS . 'g55.yml';
     
     /** Slug of source  **/
     const SOURCE_SLUG = 'g55';
@@ -31,69 +45,82 @@ class G55 {
     
     /**
         List and characteristics of 1955 groups
-            title: corresponds to the original title, effective number of records in the group may differ.
-            lerrcp: LERRCP volume where memebers of a given group has been included ;
-            rawfile: relative to data/raw/gauq/g55
+            slug:       slug of the group in g5 database.
+            title:      corresponds to the original title, effective number of records in the group may differ.
+            lerrcp:     LERRCP volume where memebers of a given group has been included ;
+            rawfile:    relative to data/raw/gauq/g55
     **/
     const GROUPS = [
         '576MED' => [
+            'slug' => 'g55-576-medics',
             'title' => "576 membres associés et correspondants de l'académie de médecine",
             'lerrcp' => 'A2',
             'occupation' => 'physicist',
         ],
         '508MED' => [
+            'slug' => 'g55-508-medics',
             'title' => '508 autres médecins notables',
             'lerrcp' => 'A2',
             'occupation' => 'physicist',
         ],
         '570SPO' => [
+            'slug' => 'g55-570-sportsmen',
             'title' => '570 sportifs',
             'lerrcp' => 'A1',
             'occupation' => 'sportsperson',
         ],
         '676MIL' => [
+            'slug' => 'g55-676-military',
             'title' => '676 militaires',
             'lerrcp' => 'A3',
             'occupation' => 'military-personnel',
         ],
         '906PEI' => [
+            'slug' => 'g55-906-paintors',
             'title' => '906 peintres',
             'lerrcp' => 'A4',
             'occupation' => 'paintor',
         ],
         '361PEI' => [
+            'slug' => 'g55-361-minor-paintors',
             'title' => '361 peintres mineurs',
             //no lerrcp
             'occupation' => 'paintor',
-            'raw-file' => 'g55-362-minor-painters.txt',
+            'raw-file' => 'g55-362-minor-paintors.txt',
         ],
         '500ACT' => [
+            'slug' => 'g55-500-actors',
             'title' => '500 acteurs',
             'lerrcp' => 'A5',
             'occupation' => 'actor',
         ],
         '494DEP' => [
+            'slug' => 'g55-494-politicians',
             'title' => '494 députés',
             'lerrcp' => 'A5',
             'occupation' => 'politician',
         ],
         '349SCI' => [
+            'slug' => 'g55-349-scientists',
             'title' => "349 membres associés et correspondants de l'académie des sciences",
             'lerrcp' => 'A2',
             'occupation' => 'scientist',
         ],
         '884PRE' => [
+            'slug' => 'g55-884-priests',
             'title' => '884 prêtres',
             //no lerrcp
             'occupation' => 'catholic-priest',
         ],
         '369PRE' => [
+            'slug' => 'g55-369-priests-paris',
             'title' => '369 prêtres du diocèse de Paris',
             //no lerrcp
             'occupation' => 'catholic-priest',
             'raw-file' => 'g55-369-priests-albi.txt',
         ],
         '513PRE' => [
+            'slug' => 'g55-513-priests-albi',
             'title' => "513 prêtres du diocède d'Albi",
             //no lerrcp
             'occupation' => 'catholic-priest',
@@ -153,6 +180,7 @@ class G55 {
     **/
     const TMP_FIELDS = [
         'NUM',
+        'GQID',
         'FNAME',
         'GNAME',
         'DATE',
@@ -160,6 +188,7 @@ class G55 {
         'C1',
         'C2',
         'CY',
+        'OCCU',
     ];
     
     /**

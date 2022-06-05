@@ -94,10 +94,11 @@ class raw2tmp implements Command {
                 $new = array_replace($new, self::TWEAKS[$groupKey][$N]);
             }
             // check useful if fr_place2admin2() returned '' for ambiguous cases
-            // and case not handled bt self::TWEAKS
+            // and case not handled by self::TWEAKS
             if($new['CY'] == 'FR' && $new['C2'] == ''){
                 echo "C2 not handled for $groupKey $N: $line\n";
             }
+            $new['OCCU'] = G55::GROUPS[$groupKey]['occupation'];
             $res .= implode(G5::CSV_SEP, $new) . "\n";
             $res_raw .= implode(G5::CSV_SEP, $fields) . "\n";
         }

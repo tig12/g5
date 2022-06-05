@@ -1,0 +1,15 @@
+  
+# document:
+#   history:
+#     - 2022-06-05 22:20:01+02:00: Thierry Graff, creation
+
+name: Gauquelin 1955 - 361 minor paintors
+slug: g55-362-minor-paintors
+'n': 362
+type: history
+sources:
+  - g55-362-minor-paintors
+
+description: |
+  List of paintors published in Gauquelin 1955 book.
+  <br>The title of the original list is "361 peintres mineurs".

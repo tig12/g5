@@ -8,7 +8,8 @@ slug: g55-882-priests
 'n': 882
 type: history
 sources:
-  - g55
+  - g55-513-priests-paris
+  - g55-369-priests-albi
 
 description: |
   List of catholic priests published in Gauquelin 1955 book.
