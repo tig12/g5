@@ -230,8 +230,8 @@ To connect to the database:
 
 Prequisites: geonames2postgres needs two libraries to run:
 <pre>
-sudo apt install python-yaml
-sudo apt install python-psycopg2
+sudo apt install python3-yaml
+sudo apt install python3-psycopg2
 </pre>
 
 This software stores in a local database data copied from geonames.org, located in two directories:
@@ -278,9 +278,14 @@ done
 <!-- ************************************* -->
 <h3>Generate Geonames database</h3>
 
-You must prepare a database (see preparation of g5 database), then execute geonames2postgres with all available countries to fill the database:
+<ol class="spaced">
+    <li>Prepare a database - see creation of g5 database (<code>sudo -s -u postgres</code> etc.) with the credentials stored in geonames2postgres config.yml.</li>
+    <li>
+        Execute geonames2postgres with all available countries to fill the database:
+        <pre>python3 geonames2postgres.py ALL</pre>
+    </li>
+</ol>
 
-<pre>python3 geonames2postgres.py ALL</pre>
 
 
 <!-- ************************************* -->
@@ -305,8 +310,6 @@ sudo apt install php-sqlite3
     </li>
 </ul>
 -->
-
-<br><div class="todo"><b>TODO</b> finish doc</div>
 
 
 </article>

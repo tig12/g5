@@ -87,7 +87,7 @@ class raw2tmp implements Command {
             array_walk($fields, $trimField);
             $new = $newEmpty;
             $new['NUM'] = $N;
-            [$new['FNAME'], $new['GNAME']] = self::computeName($fields[0]);
+            [$new['FNAME'], $new['GNAME'], $new['NOB']] = self::computeName($fields[0]);
             $new['DATE'] = self::computeDateTime($fields[1], $fields[2]);
             [$new['PLACE'], $new['C1'], $new['C2'], $new['CY']] = self::computePlace($fields[3]);
             if(isset(self::TWEAKS[$groupKey][$N])){
@@ -132,7 +132,24 @@ class raw2tmp implements Command {
             return $res;
         }
         $res[0] = ucWords(strtolower($m[1]));
-        $res[1] = $m[2];
+        // nobility
+        $nob = '';
+        $pos1 = strpos($m[2], '(d');
+        if($pos1 !== false){
+            $pos2 = strpos($m[2], ')');
+            $nob = substr($m[2], $pos1+1, $pos2-$pos1-1);
+            if($pos1 == 0){
+                $gname = trim(substr($m[2], $pos2+1));
+            }
+            else{
+                $gname = trim(substr($m[2], 0, $pos1-1));
+            }
+        }
+        else{
+            $gname = $m[2];
+        }
+        $res[1] = $gname;
+        $res[2] = $nob;
         return $res;
     }
     

@@ -44,29 +44,30 @@ class tmp2db implements Command {
             return "UNABLE TO PROCESS GROUP: missing temporary file $tmpfile\n";
         }
         
-        
-        // sources corresponding to this group - insert if does not already exist
-        
-        // TODO
-        // Normally, one source definition file should exist in data/db/source/gauq/g55 for each raw file.
-        // temporary : groups are related to g55 instead of being related to a precise source.
-        
+        // Sources related to this group - insert if does not already exist
         $g55Source = Source::createFromSlug(G55::SOURCE_SLUG); // DB
         if(is_null($g55Source)){
             $g55Source = new Source(G55::SOURCE_DEFINITION_FILE);
             $g55Source->insert(); // DB
             $report .= "Inserted source " . $g55Source->data['slug'] . "\n";
         }
+        // Precise source of the group
+        // Convention: source slug = group slug
+        $source = Source::createFromSlug(G55::GROUPS[$groupKey]['slug']); // DB
+        if(is_null($source)){
+            // source definition file name is built from its slug
+            $defFile = 'gauq' . DS . 'g55' . DS . G55::GROUPS[$groupKey]['slug'] . '.yml';
+            $source = new Source($defFile);
+            $source->insert(); // DB
+            $report .= "Inserted source " . $source->data['slug'] . "\n";
+        }
         
-        // groups
+        // group
         $groupSlug = G55::GROUPS[$groupKey]['slug'];
-        $g = Group::createFromSlug($slug);
+        $g = Group::createFromSlug($groupSlug);
         if(is_null($g)){
             // group definition file name is built from its slug
-            $defFile = 'gauq' . DS . 'g55' . G55::GROUPS[$groupKey]['slug'] . '.yml';
-            if(!is_file($defFile)){
-                throw new \Exception("Unable to read group definition file: $defFile");
-            }
+            $defFile = 'gauq' . DS . 'g55' . DS . G55::GROUPS[$groupKey]['slug'] . '.yml';
             $g = Group::createFromDefinitionFile($defFile);
             $g->data['id'] = $g->insert(); // DB
             $report .= "Inserted group " . $g->data['slug'] . "\n";
@@ -77,7 +78,6 @@ class tmp2db implements Command {
         
         $nInsert = 0;
         $nUpdate = 0;
-exit;
         
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
@@ -87,6 +87,7 @@ exit;
         $t1 = microtime(true);
         for($i=0; $i < $N; $i++){
             $line = $lines[$i];
+            $NUM = $i + 1;
             $lineRaw = $linesRaw[$i];
             $G55ID = G55::g55Id($groupKey, $i);
             $GQID = $line['GQID']; // eventually computed by command addGqid
@@ -105,29 +106,32 @@ exit;
                 $new['birth']['place']['cy'] = 'FR';
                 $new['occus'] = [ $line['OCCU'] ];
                 //
-//                $p->addIdInSource(TODO group source slug, $NUM);
+                $p->addIdInSource($source->data['slug'], $NUM);
                 $p->addPartialId(G55::SOURCE_SLUG, $G55ID);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat some fields to include in $history
-                $new['ids-in-sources'] = [Final3::SOURCE_SLUG => $CFID];
+                $new['ids-in-sources'] = [$source->data['slug'] => $NUM];
                 $p->addHistory(
-                    command: $cmdSignature,
-                    sourceSlug: Final3::SOURCE_SLUG,
+                    command: $cmdSignature . ' ' . $groupKey,
+                    sourceSlug: $source->data['slug'],
                     newdata: $new,
                     rawdata: $lineRaw
                 );
                 $nInsert++;
+//echo "\n<pre>"; print_r($p); echo "</pre>\n"; exit;
                 $p->data['id'] = $p->insert(); // DB
             }
             else{
                 // Person already in Gauquelin
+                // TODO 
             }
+            $g->addMember($p->data['id']);
         }
         $t2 = microtime(true);
         $g->insertMembers(); // DB
         $dt = round($t2 - $t1, 5);
-        $report .= "$nInsert persons inserted, $nUpdate updated - $nDiffDates different dates ($dt s)\n";
+        $report .= "$nInsert persons inserted, $nUpdate updated ($dt s)\n";
         return $report;
     }
     

@@ -9,6 +9,7 @@
 ********************************************************************************/
 namespace g5\commands\gauq\g55;
 
+use g5\G5;
 use g5\app\Config;
 // use g5\commands\gauq\LERRCP;
 use tiglib\arrays\csvAssociative;
@@ -46,6 +47,7 @@ class G55 {
     /**
         List and characteristics of 1955 groups
             slug:       slug of the group in g5 database.
+                        Convention: source slug = group slug
             title:      corresponds to the original title, effective number of records in the group may differ.
             lerrcp:     LERRCP volume where memebers of a given group has been included ;
             rawfile:    relative to data/raw/gauq/g55
@@ -76,17 +78,17 @@ class G55 {
             'occupation' => 'military-personnel',
         ],
         '906PEI' => [
-            'slug' => 'g55-906-paintors',
+            'slug' => 'g55-906-painters',
             'title' => '906 peintres',
             'lerrcp' => 'A4',
-            'occupation' => 'paintor',
+            'occupation' => 'painter',
         ],
         '361PEI' => [
-            'slug' => 'g55-361-minor-paintors',
+            'slug' => 'g55-362-minor-painters',
             'title' => '361 peintres mineurs',
             //no lerrcp
-            'occupation' => 'paintor',
-            'raw-file' => 'g55-362-minor-paintors.txt',
+            'occupation' => 'painter',
+            'raw-file' => 'g55-362-minor-painters.txt',
         ],
         '500ACT' => [
             'slug' => 'g55-500-actors',
@@ -183,6 +185,7 @@ class G55 {
         'GQID',
         'FNAME',
         'GNAME',
+        'NOB',
         'DATE',
         'PLACE',
         'C1',
@@ -200,11 +203,11 @@ class G55 {
     }
     
     /**
-        Loads data/tmp/cfepp/cfepp-1120-nienhuys.csv in a regular array.
+        Returns the name of a tmp file in data/tmp/gauq/g55/
         Each element contains the person fields in an assoc. array.
     **/
-    public static function loadTmpFile(){
-        return csvAssociative::compute(self::tmpFilename(), G5::CSV_SEP);
+    public static function loadTmpFile($groupKey){
+        return csvAssociative::compute(self::tmpFilename($groupKey), G5::CSV_SEP);
     }
     
     // *********************** Tmp raw file manipulation ***********************
