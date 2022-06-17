@@ -135,8 +135,7 @@ class Person {
     
     /** 
         Returns an array of objects of type Person, related to a partial id.
-        = Persons associated to a source slug used for partial id.
-        g55, lerrcp, ertel, cfepp, 
+        @param  $sourceSlug source slug used for partial id, like  g55, lerrcp, ertel, cfepp, 
     **/
     public static function createArrayFromPartialId($sourceSlug) {
         $dblink = DB5::getDbLink();

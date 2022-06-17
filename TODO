@@ -1,5 +1,10 @@
 
 
+Handle duplicate
+2 d-aragona-ludovico (A5-1640) 1876-05-23 02:10:04 CERNUSCO SUL NA
+2 gauquelin-a6-1496 (A6-1496) 1876-05-23 02:10:04 CERNUSCO SUL NA
+
+
 - see php bug - https://bugs.php.net/bug.php?id=81002
   (to store booleans in postgres)
 

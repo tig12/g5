@@ -90,7 +90,7 @@ class tmp2db implements Command {
             $NUM = $i + 1;
             $lineRaw = $linesRaw[$i];
             $G55ID = G55::g55Id($groupKey, $i);
-            $GQID = $line['GQID']; // eventually computed by command addGqid
+            $GQID = $line['GQID']; // eventually computed by command gqid
             if($GQID == ''){;
                 // Person not already in g5 db
                 $p = new Person();
@@ -119,12 +119,24 @@ class tmp2db implements Command {
                     rawdata: $lineRaw
                 );
                 $nInsert++;
-//echo "\n<pre>"; print_r($p); echo "</pre>\n"; exit;
                 $p->data['id'] = $p->insert(); // DB
             }
             else{
                 // Person already in Gauquelin
-                // TODO 
+die("not finished\n");
+                $p = Person::createFromPartialId(LERRCP::SOURCE_SLUG, $GQID); // DB
+                $p->addOccus([ $line['OCCU'] ]);
+                $p->addIdInSource($source->data['slug'], $NUM);
+                $p->addPartialId(G55::SOURCE_SLUG, $G55ID);
+                // add an issue if G55 and LERRCP dates differ
+                $p->addHistory(
+                    command: $cmdSignature,
+                    sourceSlug: Final3::SOURCE_SLUG,
+                    newdata: $new,
+                    rawdata: $lineRaw,
+                );
+                $nUpdate++;
+                $p->update(); // DB
             }
             $g->addMember($p->data['id']);
         }

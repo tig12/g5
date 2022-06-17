@@ -227,6 +227,19 @@ class G55 {
     public static function loadTmpRawFile($groupKey){
         return csvAssociative::compute(self::tmpRawFilename($groupKey));
     }
+    
+    /** 
+        Matching between G55 records and LERRCP.
+        Format, for each G55 file: NUM in G55 file => GQID (LERRCP id).
+        Array built from results of command gqid check.
+    **/
+    const MATCH_LERRCP = [
+        '361PEI' => [
+            '181' => 'A6-355', // gautier-theophile
+            '258' => 'E3-936', // le-molt-philippe
+            '340' => 'A6-689', // raimbaud-arthur
+        ],
+    ];
 
 } // end class    
 
