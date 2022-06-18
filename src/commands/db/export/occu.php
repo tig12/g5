@@ -151,7 +151,7 @@ class occu implements Command {
                 return implode('+', $p->data['occus']);
             },
             'GQID' => function($p){
-                return ($p->data['ids-in-sources'][LERRCP::SOURCE_SLUG] ?? '');
+                return ($p->data['partial-ids'][LERRCP::SOURCE_SLUG] ?? '');
             },
             'MUID' => function($p){
                 return Muller::ids_in_sources2mullerId($p->data['ids-in-sources']);

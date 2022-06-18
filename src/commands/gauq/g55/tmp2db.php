@@ -13,6 +13,7 @@ use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
 use g5\commands\gauq\Gauquelin;
+use g5\commands\gauq\LERRCP;
 
 class tmp2db implements Command {
     
@@ -44,6 +45,9 @@ class tmp2db implements Command {
             return "UNABLE TO PROCESS GROUP: missing temporary file $tmpfile\n";
         }
         
+        // particular case
+        $isPriests = ($groupKey == '513PRE' || $groupKey == '369PRE');
+        
         // Sources related to this group - insert if does not already exist
         $g55Source = Source::createFromSlug(G55::SOURCE_SLUG); // DB
         if(is_null($g55Source)){
@@ -67,13 +71,28 @@ class tmp2db implements Command {
         $g = Group::createFromSlug($groupSlug);
         if(is_null($g)){
             // group definition file name is built from its slug
-            $defFile = 'gauq' . DS . 'g55' . DS . G55::GROUPS[$groupKey]['slug'] . '.yml';
+            $defFile = 'gauq' . DS . 'g55' . DS . $groupSlug . '.yml';
             $g = Group::createFromDefinitionFile($defFile);
             $g->data['id'] = $g->insert(); // DB
             $report .= "Inserted group " . $g->data['slug'] . "\n";
         }
         else{
             $g->deleteMembers(); // DB - only deletes asssociations between group and members
+        }
+        
+        // particular case for priests
+        // can be executed once for 369PRE and once for 513PRE
+        // several executions will give incoherent results (deleteMembers() not done)
+        if($isPriests){
+            $groupSlug2 = 'g55-882-priests';
+            $g2 = Group::createFromSlug($groupSlug2);
+            if(is_null($g2)){
+                // group definition file name is built from its slug
+                $defFile = 'gauq' . DS . 'g55' . DS . $groupSlug2 . '.yml';
+                $g2 = Group::createFromDefinitionFile($defFile);
+                $g2->data['id'] = $g2->insert(); // DB
+                $report .= "Inserted group " . $g2->data['slug'] . "\n";
+            }
         }
         
         $nInsert = 0;
@@ -106,7 +125,7 @@ class tmp2db implements Command {
                 $new['birth']['place']['cy'] = 'FR';
                 $new['occus'] = [ $line['OCCU'] ];
                 //
-                $p->addIdInSource($source->data['slug'], $NUM);
+                $p->addIdInSource($source->data['slug'], (string)$NUM);
                 $p->addPartialId(G55::SOURCE_SLUG, $G55ID);
                 $p->updateFields($new);
                 $p->computeSlug();
@@ -123,15 +142,25 @@ class tmp2db implements Command {
             }
             else{
                 // Person already in Gauquelin
-die("not finished\n");
                 $p = Person::createFromPartialId(LERRCP::SOURCE_SLUG, $GQID); // DB
                 $p->addOccus([ $line['OCCU'] ]);
-                $p->addIdInSource($source->data['slug'], $NUM);
+                $p->addIdInSource($source->data['slug'], (string)$NUM);
                 $p->addPartialId(G55::SOURCE_SLUG, $G55ID);
                 // add an issue if G55 and LERRCP dates differ
+                // note: as matching is done by date (see cmomand gqid check),
+                // current check concerns birth hours
+                if($p->data['birth']['date'] != ''){
+                    if($line['DATE'] != substr($p->data['birth']['date'], 0, 16)){
+                        $issue = "Check birth date because CFEPP and g55 birth dates differ\n"
+                               . "<br>G55: {$line['DATE']}\n"
+                               . "<br>CFEPP: {$p->data['birth']['date']}\n";
+//echo "$issue\n";
+                        $p->addIssue($issue);
+                    }
+                }
                 $p->addHistory(
                     command: $cmdSignature,
-                    sourceSlug: Final3::SOURCE_SLUG,
+                    sourceSlug: $source->data['slug'],
                     newdata: $new,
                     rawdata: $lineRaw,
                 );
@@ -139,9 +168,15 @@ die("not finished\n");
                 $p->update(); // DB
             }
             $g->addMember($p->data['id']);
+            if($isPriests){
+                $g2->addMember($p->data['id']);
+            }
+        }
+        $g->insertMembers(); // DB
+        if($isPriests){
+            $g2->insertMembers(); // DB
         }
         $t2 = microtime(true);
-        $g->insertMembers(); // DB
         $dt = round($t2 - $t1, 5);
         $report .= "$nInsert persons inserted, $nUpdate updated ($dt s)\n";
         return $report;

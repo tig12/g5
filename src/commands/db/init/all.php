@@ -70,6 +70,9 @@ use g5\commands\muller\m2men\raw2tmp            as M2MenRaw2tmp;
 use g5\commands\cfepp\final3\raw2tmp            as CFEPPRaw2tmp;
 use g5\commands\cfepp\final3\ids                as CFEPPIds;
 
+use g5\commands\gauq\g55\raw2tmp                as g55Raw2tmp;
+use g5\commands\gauq\g55\gqid                   as g55Gqid;
+
 // tmp2db
 use g5\commands\gauq\A\tmp2db                   as Atmp2db;
 use g5\commands\gauq\A\A6occu                   as A6occu;
@@ -85,6 +88,7 @@ use g5\commands\csicop\irving\tmp2db            as csiIrvingTmp2db;
 use g5\commands\ertel\sport\tmp2db              as ErteSportTmp2db;
 use g5\commands\cfepp\final3\tmp2db             as CFEPPTmp2db;
 use g5\commands\cpara\ertel\group               as CParaGroup;
+use g5\commands\gauq\g55\tmp2db                 as g55Tmp2db;
 
 // finalize
 use g5\commands\db\init\stats;
@@ -188,6 +192,12 @@ class all implements Command {
             
             echo CFEPPRaw2tmp::execute([]);
             echo CFEPPIds::execute([]);
+            
+            echo g55Raw2tmp::execute(['g55', 'raw2tmp', '361PEI']);
+            echo g55Gqid::execute(['g55', 'gqid', '361PEI', 'update']);
+            echo g55Raw2tmp::execute(['g55', 'raw2tmp', '513PRE']);
+            echo g55Gqid::execute(['g55', 'gqid', '513PRE', 'update']);
+            echo g55Raw2tmp::execute(['g55', 'raw2tmp', '369PRE']);
         }
         
         //
@@ -247,6 +257,10 @@ class all implements Command {
             echo CFEPPTmp2db::execute(['small']);
             
             echo CParaGroup::execute([]);
+            
+            echo g55Raw2tmp::execute(['g55', 'tmp2db', '361PEI']);
+            echo g55Raw2tmp::execute(['g55', 'tmp2db', '513PRE']);
+            echo g55Raw2tmp::execute(['g55', 'tmp2db', '369PRE']);
             
             echo occus2::execute();
         }

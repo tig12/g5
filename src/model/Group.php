@@ -330,7 +330,7 @@ class Group {
             $slug = $group->data['slug'];
             foreach($group->data['parents'] as $parent){ // $parent is a slug
                 if(!isset($nodes[$parent])){
-                    $msg = "INCORRECT GROUP DEFINITION - group = '$slug' ; parent = '$parent'";
+                    $msg = "INCORRECT GROUP DEFINITION - UNEXISTING PARENT\ngroup = '$slug' ; parent = '$parent'";
                     throw new \Exception($msg);
                 }
                 $nodes[$slug]->addEdge($nodes[$parent]);

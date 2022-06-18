@@ -108,25 +108,25 @@ class G55 {
             'lerrcp' => 'A2',
             'occupation' => 'scientist',
         ],
-        '884PRE' => [
-            'slug' => 'g55-884-priests',
-            'title' => '884 prêtres',
+        '882PRE' => [
+            'slug' => 'g55-882-priests',
+            'title' => '882 prêtres',
             //no lerrcp
             'occupation' => 'catholic-priest',
-        ],
-        '369PRE' => [
-            'slug' => 'g55-369-priests-paris',
-            'title' => '369 prêtres du diocèse de Paris',
-            //no lerrcp
-            'occupation' => 'catholic-priest',
-            'raw-file' => 'g55-369-priests-albi.txt',
         ],
         '513PRE' => [
-            'slug' => 'g55-513-priests-albi',
-            'title' => "513 prêtres du diocède d'Albi",
+            'slug' => 'g55-513-priests-paris',
+            'title' => '513 prêtres du diocèse de Paris',
             //no lerrcp
             'occupation' => 'catholic-priest',
             'raw-file' => 'g55-513-priests-paris.txt',
+        ],
+        '369PRE' => [
+            'slug' => 'g55-369-priests-albi',
+            'title' => "369 prêtres du diocède d'Albi",
+            //no lerrcp
+            'occupation' => 'catholic-priest',
+            'raw-file' => 'g55-369-priests-albi.txt',
         ],
     ];
     
@@ -238,6 +238,9 @@ class G55 {
             '181' => 'A6-355', // gautier-theophile
             '258' => 'E3-936', // le-molt-philippe
             '340' => 'A6-689', // raimbaud-arthur
+        ],
+        '513PRE' => [
+            '124' => 'A2-2628', // colin-henri-1880-11-01
         ],
     ];
 
