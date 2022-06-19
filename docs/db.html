@@ -217,6 +217,10 @@ List different countries present in the database:
 select distinct birth->'place'->>'cy' as country from person order by birth->'place'->>'cy';
 </pre>
 
+List birth years
+<pre>
+select distinct substring(birth->>'date', 1, 4) from person order by substring(birth->>'date', 1, 4);
+</pre>
 
 </article>
 </main>

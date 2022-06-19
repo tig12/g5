@@ -258,9 +258,9 @@ class all implements Command {
             
             echo CParaGroup::execute([]);
             
-            echo g55Raw2tmp::execute(['g55', 'tmp2db', '361PEI']);
-            echo g55Raw2tmp::execute(['g55', 'tmp2db', '513PRE']);
-            echo g55Raw2tmp::execute(['g55', 'tmp2db', '369PRE']);
+            echo g55Tmp2db::execute(['g55', 'tmp2db', '361PEI']);
+            echo g55Tmp2db::execute(['g55', 'tmp2db', '513PRE']);
+            echo g55Tmp2db::execute(['g55', 'tmp2db', '369PRE']);
             
             echo occus2::execute();
         }

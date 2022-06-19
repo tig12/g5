@@ -51,7 +51,6 @@ class raw2tmp implements Command {
     public static function execute($params=[]): string{
         
         $cmdSignature = 'gauq g55 raw2tmp';
-        $report = "--- $cmdSignature ---\n";
         
         $possibleParams = G55::getPossibleGroupKeys();
         $msg = "Usage : php run-g5.php $cmdSignature <group>\nPossible values for <group>: \n  - " . implode("\n  - ", $possibleParams) . "\n";
@@ -66,6 +65,8 @@ class raw2tmp implements Command {
         if(!isset(G55::GROUPS[$groupKey]['raw-file'])){
             return "INVALID GROUP: Group $groupKey does not have raw file.\n$msg";
         }
+        
+        $report = "--- $cmdSignature $groupKey ---\n";
         
         $outfile = G55::tmpFilename($groupKey);
         $outfile_raw = G55::tmpRawFilename($groupKey);

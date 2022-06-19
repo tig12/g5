@@ -108,7 +108,7 @@ class tmp2db implements Command {
             $line = $lines[$i];
             $NUM = $i + 1;
             $lineRaw = $linesRaw[$i];
-            $G55ID = G55::g55Id($groupKey, $i);
+            $G55ID = G55::g55Id($groupKey, $i+1);
             $GQID = $line['GQID']; // eventually computed by command gqid
             if($GQID == ''){;
                 // Person not already in g5 db
