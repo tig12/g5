@@ -52,10 +52,10 @@ class occu implements Command {
             . "    - the file name where the csv was stored (can be a .zip file).\n"
             . "    - the number of elements of the stored group.\n"
             . "Examples :\n"
-            . "  php run-g5.php db export skier path/to/output.csv\n"
-            . "  php run-g5.php db export skier path/to/output.csv nozip\n"
-            . "  php run-g5.php db export skier path/to/output.csv nozip full\n"
-            . "  php run-g5.php db export skier+writer path/to/output.csv\n"
+            . "  php run-g5.php db export occu skier path/to/output.csv\n"
+            . "  php run-g5.php db export occu skier path/to/output.csv nozip\n"
+            . "  php run-g5.php db export occu skier path/to/output.csv nozip full\n"
+            . "  php run-g5.php db export occu skier+writer path/to/output.csv\n"
             ;
         $possibles = ['nozip', 'full'];
         if(count($params) > 4){

@@ -448,6 +448,7 @@ class Group {
                              . " while importing group '{$this->data['slug']}'";
                         throw new \Exception($msg);
                     }
+/* 
 if(
     (is_null($data) && !isset($p->data[$pk]))
     || 
@@ -461,7 +462,7 @@ if(
     //echo "pk = $pk\n";
     //throw new \Exception($csvFile);
 }
-    
+*/
                     $data = is_null($data) ? $p->data[$pk] : $data[$pk];
                 }
                 $new[$csvKey] = $data;
