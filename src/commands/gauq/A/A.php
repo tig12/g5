@@ -124,7 +124,7 @@ class A{
         ],
         // nothing for A3
         'A4' => [
-            ['artist',                      1, 1473],
+            ['painter',                     1, 1473],
             ['musician',                    1474, 2339],
             ['conductor-of-military-band',  2340, 2722] 
         ],

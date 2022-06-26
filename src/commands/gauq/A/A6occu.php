@@ -3,8 +3,9 @@
 
     php run-g5.php gauq A6 A6occu
 
-    Updates 885 occupations in file A6 (11.366 s)
+    Updates 885 occupations in persons coming from file A6 (11.366 s)
     Occupations are set to "poet" or "novelist"
+    Occupation codes are updated on persons stored in database.
     A6 records must have been imported in database before executing this command.
     
     Based on a work exposed on https://newalchemypress.com/gauquelin/research8.php

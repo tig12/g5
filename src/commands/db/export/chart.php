@@ -22,7 +22,7 @@ class chart implements Command {
     
     /** 
         @param $param Array containing one element (a string)
-                      Must be one of self::POSSIBLE_PARAMS
+                      Must be a key of self::POSSIBLE_PARAMS
         @return Report.
     **/
     public static function execute($params=[]): string {
@@ -49,9 +49,6 @@ class chart implements Command {
     }
     
     // ******************************************************
-    /**
-        @param  $
-    **/
     private static function exec_year() {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->query('select years from stats');
