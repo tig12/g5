@@ -222,6 +222,12 @@ List birth years
 select distinct substring(birth->>'date', 1, 4) from person order by substring(birth->>'date', 1, 4);
 </pre>
 
+How many persons have missing birth time in Ertel group ?
+<pre>
+select count(*) from person where partial_ids->>'ertel'::text != 'null' and length(birth->>'date') &lt;= 10 and birth->>'date-ut' is null;
+</pre>
+
+
 </article>
 </main>
 </div><!-- end class="content" -->
