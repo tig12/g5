@@ -169,7 +169,7 @@ CARON Leslie, 1-7-1931, 23 h., Boulogne (Seine).
 CATELAIN Jacques, 9-2-1897, 16 h., Saint-Germain-en-Laye (S.-et-O.).
 CATTAND Gabriel, 29-11-1923, 6 h., Bonneville (Haute-Savoie).
 CERTES André, 29-11-1909, 2 h., Bagnolet (Seine).
-CHARRAT Janine, 24-7-1924, 14 h., Grenoble (Isére).
+CHARRAT Janine, 24-7-1924, 14 h., Grenoble (Isère).
 CHARRETT Henry, 22-8-1901, 10 h., Nexon (Haute-Vienne).
 CHEVALIER Maurice Auguste, 12-9-1888, 2 h.. Paris (20°) (Seine).
 CLARIOND Aime, 10-5-1894, 16 h., Périgueux (Dordogne).
@@ -293,7 +293,7 @@ OUDART Felix, 8-6-1881, 10 h. 30, Lille (Nord).
 PAQUET Felix, 23-4-1906, 3 h. 30, Lille (Nord).
 PAQUI Jean, 15-4-1921, 23 h. 15, Cap d’Ail (Alpes-Maritimes).
 PASCAL Gisele, 17-9-1921, 8 h., Cannes (Alpes-Maritimes).
-PAREDES Jean, 7-10-1914, 2 h., Pusignan (Isére).
+PAREDES Jean, 7-10-1914, 2 h., Pusignan (Isère).
 PAUMIER Raoul, 24-1-1866, 12 h. 30, Chouzy-sur-Cise (Lot-et-Garonne).
 PELLEGRIN Raymond, 1-1-1925, 3 h., Nice (Alpes-Maritimes).
 PERDRIERE Héléne, 17-4-1910, 3h: Asniéres (Seine).
@@ -323,7 +323,7 @@ ROMANCE Viviane, 4-7-1912, 19 h. 15, Roubaix (Nord).
 ROSSI Tino, 29-4-1907, 7 h., Ajaccio (Corse).
 ROUSSIN André, 22-1-1911, 9 h., Marseille (Bouches-du-Rhône).
 SABLON Jean, 25-3-1906, 4 h., Nogent-sur-Marne (Seine).
-SEIGNER Louis, 23-6-1903, 1 h., Saint-Chef (Isére).
+SEIGNER Louis, 23-6-1903, 1 h., Saint-Chef (Isère).
 SIBLOT Charles Louis, 29-5-1871, 14 h., Vincennes (Seine).
 SIGNORET Gabriel, 15-11-1878, 13 h., Marseille (Bouches-du-Rhône).
 SIGNORET Jean, 13-12-1886, 3 h., Marseille (Bouches-du-Rh6ne).
@@ -499,6 +499,6 @@ MVERNILLAT) Francette, 16-4-1937, 23 h., Strasbourg, (Bas-Rhin).
 VIDDALIN Jean-Marie, 5-3-1903, 9 h. 30, Saint-Amant-Tallende (P.-D.).
 VIEUILLE Roger, 11-2-1883, 8 h., Baigues (Charente).
 VINA Victor, 29-8-1885, 8 h., Parc-Saint-Maur (Seine).
-VITAL Geymond, 24-1-1897, 20 h., Claix (Isére).
+VITAL Geymond, 24-1-1897, 20 h., Claix (Isère).
 WASLEY André, 25-5-1899, 44)h) Laon (Aisne).
 ZWINGEL Georges, 6-10-1904, 6 h. 30, Bellac (Haute-Vienne).

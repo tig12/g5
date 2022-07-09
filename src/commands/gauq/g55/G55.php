@@ -114,20 +114,6 @@ class G55 {
             //no lerrcp
             'occupation' => 'catholic-priest',
         ],
-        '513PRE' => [
-            'slug' => 'g55-513-priests-paris',
-            'title' => '513 prêtres du diocèse de Paris',
-            //no lerrcp
-            'occupation' => 'catholic-priest',
-            'raw-file' => 'g55-513-priests-paris.txt',
-        ],
-        '369PRE' => [
-            'slug' => 'g55-369-priests-albi',
-            'title' => "369 prêtres du diocède d'Albi",
-            //no lerrcp
-            'occupation' => 'catholic-priest',
-            'raw-file' => 'g55-369-priests-albi.txt',
-        ],
     ];
     
     /**
