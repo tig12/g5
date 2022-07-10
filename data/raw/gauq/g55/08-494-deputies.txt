@@ -51,8 +51,8 @@ GARET Pierre, 7-9-1905, 6 h., Montdidier (Somme).
 GAU Albert, 10-7-1910, 24 h., Conques-sur-Orbiel (Aude).
 GAVINI Jacques, 25-12-1889, 1. h. 20, Bastia (Corse).
 GAZIER Aibert, 16-5-1508, 14 nh. 05, ‘aienciennes (Nerd).
-GODIN Anare jean, 11-7-1500, 14 h. 75, Alger (Atgérie),
-GOUIN Félix, 4-10-1884, 5 h., Peypin (Bouches-du-Rh6ne). .
+GODIN Anare jean, 11-7-1500, 14 h. 75, Alger (Algérie),
+GOUIN Félix, 4-10-1884, 5 h., Peypin (Bouches-du-Rhône). .
 GUISLAIN Marcel, 14-6-1899, 22 h., Nomain (Nord).
 HERRIOT Edouard, 5-7-1872, 20 h., Troyes (Aube).
 HETTIER de BOISLAMBERT Claude, 26-7-1906, 12 h., Heérouvillette (Calvados).
@@ -290,7 +290,7 @@ GALICIER Emilienne, 11-6-1911, 20 h., Villeneuve (Yonne).
 GARAVEL Joseph, 4-3-1892, 19 h., Morette (Isére).
 GARDEY Abel, 21-11-1882, 20 h. 30, Margouet-Meymes (Gers).
 GARNIER André, 25-3-1910, 15 h. 30, Viviers-le-Gras (Vosges).
-GAUBERT André, 5-12-1911, 17 h., Marseille (Bouches-du-Rh6ne).
+GAUBERT André, 5-12-1911, 17 h., Marseille (Bouches-du-Rhône).
 GAUTIER André, 26-4-1908, 22 h., Breloux (Deux-Sévres).
 GENTON Jacques, 22-9-1918, 1 h.,. Bourges (Cher).
 GEORGES Maurice, 15-9-1899, 6 h., Giromagny (Belfort).
@@ -398,7 +398,7 @@ MONTILLOT Robert, 3-7-1882, 7 h., Le Raincy (Seine-et-Oise).
 MONTJOU (de) Gérard, 5-2-1903, 13 h., Poitiers (Vienne).
 MORA Albert, 4-4-1896, 15.h., Bayonne (Basses-Pyrénées).
 MOREVE Roger, 7-6-1897, 14 h. 30, Méziéres-en-Brenne (Indre).
-MOUCHET Pierre, 26-3-1916, 15 h., Saint-André-sur-Bo&ége (Hte-Saône).
+MOUCHET Pierre, 26-3-1916, 15 h., Saint-André-sur-Boëge (Hte-Saône).
 MULLER Pierre, 4-3-1901, 7 h. 30, Dalem (Moselle).
 MUSMEAUX Arthur, 24-6-1888, 9 h., Anor (Nord).
 NENON Jean, 25-4-1906, 14 h., Thierville (Meuse).

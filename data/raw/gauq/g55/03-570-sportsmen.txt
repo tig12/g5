@@ -1,7 +1,3 @@
-
-Sportifs tirés de l’ « Athlége » 1949 et 1950
-
-Athlétisme :
 BALLY Etienne, 17-4-1923, 1 h., Vénissieux (Rhône).
 BAZENNERYE René, 11-12-1913, 41 h., Cosne (Nievre).
 BERNARD Henri, 24-7-1900, 2 h., Boulogne-Billancourt (Seine).
@@ -34,15 +30,11 @@ VALMY René, 24-12-1920, 13 h., Tarbes (Hautes-Pyrénées).
 VERNIER Jacques, 21-7-1923, 7 h. 30, Grand-Chamont (Doubs).
 VERNIER Jean, 21-7-1923, 7 h., Grand-Chamont (Doubs).
 WINTER Paul, 6-2-1906, 14 h., Ribeauvillé (Haut-Rhin).
-
-Auto et Moto :
 BEHRA Jean, 16-2-1921, 1 h., Nice (Alpes-Maritimes).
 CHIRON Louis, 3-8-1899, 18 h., Monte-Carlo (Alpes-Maritimes).
 HOUEL Georges, 5-7-1913, 4 h., Herbeville (Seine-et-Oise).
 LESURQUE Marcel, 2-4-1908, 21 h., Puteaux (Seine).
 MONNERET Georges, 4-10-1908, 13 h. 20, Lille (Nord).
-
-Aviation :
 ARNOUX Maurice, 7-9-1895, 22 h., Montrouge (Seine).
 ASSOLANT Jean, 26-9-1905, 22 h, 45, Versailles (Seine-et-Oise).
 BELLONTE Maurice, 25-10-1896, 7 h., Méru (Oise).
@@ -52,16 +44,12 @@ GUILLAUMET Henri, 29-5-1902, 12 h., Bony (Marne).
 MERMOZ Jean, 9-12-1901, 2 h., Aubenton (Aisne).
 NESSLER Eric, 20-5-1898, 21 h. 30, Lunéville (Meurthe-et-Moselle).
 PEGOUD Adolphe, 13-6-1889, 6 h., Montferrat (Isére).
-
-Aviron :
 CONSTANT Eugéne, 8-1-1901, 16 h. 30, Boulogne-sur-Mer (P.-de-C.).
 LEBRANCHU Roger, 22-7-1922, 22 h. 45, Neuilly-sur-Seine (Seine).
 MAILLET Jacques, 7-9-1926, 9 h., Asniéres (Seine).
 NOSBAUM Guy, 10-5-1930, 2 h. 30, Corbeil-Essonnes (Seine-et-Oise).
 VANDERNOTTE Fernand, 12-7-1902, 20 h. 30, Tilliers (Maine-et-Loire).
 VANDERNOTTE Marcel, 29-7-1909, 19 h., Nantes (Loire-Inférieure).
-
-Basket-Ball :
 BARRAIS André, 22-2-1920, 11 h. 30, Levallois-Perret (Seine).
 BOEL Pierre, 4-7-1911, 18 h., Croix (Nord).
 BOUTIN-DESVIGNES Abel, 4-12-1922, 12 h. 30, Brest (Finistere).
@@ -83,16 +71,12 @@ SALIGNON Jean, 1-1-1928, 11 h. 30, Laferriere (Algérie).
 SZWIDZINKI Jean, 14-3-1925, 4 h., Saint-Pierre-des-Corps (Indre-et-L.).
 RUDLER Antoine, 21-5-1905, 3 h., Vieux-Thann (Haut-Rhin).
 VACHERESSE André, 12-10-1927, 19 h., Roanne (Loire).
-
-Billard :
 CHASSEREAU Louis, 17-8-1901, 11. h., Ste-Foix-de-Peyroliéres (H.-G.).
 CONTI Roger, 8-2-1901, 2 h., Pards (Basses-Pyrénées).
 FOUQUET Léon, 21-1-1869, 3 h., Clairvaux (Aube).
 GRANGE Felix, 20-10-1893, 16 h., Saint-Martin-de-Lestra (Loire).
 LAGACHE Alfred, 10-8-1890, 17 h., Pantin (Seine).
 MARTY Jean, 1-12-1925, 4 h., Perpignan (Pyrénées-Orientales).
-
-Boxe :
 ANGELMANN Valentin, 7-3-1910, 19 h. 45, Colmar (Haut-Rhin).
 BAOUR Roger, 7-4-1926, 3 h., Pantin (Seine).
 BATAILLE Jacques, 20-9-1929, 19 h., Amiens (Somme).
@@ -121,11 +105,7 @@ STOCK Jean, 12-2-1923, 11 h., Saint-Martin-du-Tertre (Yonne).
 THIL Marcel, 29-5-1904, 7 h., Saint-Dizier (Haute-Marne). )
 WALZACK Jean, 21-10-1924, 15 h., Noeux-les-Mines (Pas-de-Calais).
 YVEL Albert, 27-2-1927, 20 h., Alger (Algérie).
-
-Canoé :
 BOUTIGNY Robert, 24-7-1927, 10 h., Villeneuve-le-Roi (Seine-et-Oise).
-
-Cyclisme :
 BALDASSARI Jean, 18-12-1925, 23 h. 30, Rueil (Seine-et-Oise).
 BARATIN Pierre, 7-9-1920, 20 h. 15, Saint-Etienne-la-Varenne (Rhone).
 BELLANGER Jacques, 21-12-1927, 7 h. 30, Amiens (Somme).
@@ -216,14 +196,12 @@ SERES Arthur, 28-12-1913, 19 h., Levallois-Perret (Seine).
 SERES Georges, 7-4-1884, 21 h., Condom’ (Gers).
 TASSIN Eloi, 6-6-1912, 13 h., Vay (Loire-Inférieure).
 TEISSEIRE Lucien, 11-12-1919, 16 h., Saint-Laurent-du-Var (Alpes-M.).
-TERREAU Ernest, 31-5-1908, 20 h., Auxy (Saéne-et-Loire).
+TERREAU Ernest, 31-5-1908, 20 h., Auxy (Saône-et-Loire).
 THIETARD Louis, 30-5-1910, 10 h., Anzin (Nord).
 VAAST Charles, 20-5-1907, 4 h., Avion (Pas-de-Calais).
 VARNAJO Robert, 1-5-1929, 23 h., Curzon (Vendée).
 VIETTO René, 17-2-1914, 6 h., Rocheville (Alpes-Maritimes).
 WAMBST Georges, 21-7-1902, 22 h.. Lunéville (Meurthe-et- Moselle).
-
-Escrime $
 BOUGNOL René, 7-1-1911, 16 h., Montpellier (Herault).
 BUCHARD Georges, 21-12-1893, 6 h., Honfleur (Calvados).
 BUHAN Jean, 5-4-1912, 4 h., Bordeaux (Gironde).
@@ -235,8 +213,6 @@ LATASTE Jacques, 7-6-1922, 11 h., La Grand’Combe (Gard).
 ORIOLA (d’) Christian, 3-10-1928, 21 h., Perpignan (Pyrénées-Orient.).
 PECHEUX Michel, 24-5-1911, 16 h. 30, Saint-Brieuc (Cétes-du-Nord).
 SCHMETZ Bernard, 21-3-1904, 22 h., Orléans (Loiret).
-
-Football :
 ABDERRHAMANE Bonnedienne, 26-11-1920, 2 h., Mostaganem (Algérie).
 ACCARD Robert, 26-11-1897, 22 h., Lisieux (Calvados).
 ALPSTEG René, 3-12-1920, 10 h., Bonneville (Haute-Savoie).
@@ -317,8 +293,6 @@ VEINANTE Emile, 12-6-1907, 2 h. 30, Sablon (Moselle).
 VERRIEST Georges, 15-7-1909, 5 h. 45, Roubaix (Nord).
 VIGNAL René, 12-8-1926, 20 h. 30, Béziers (Hérault).
 ZATELLI Mario, 21-12-1912, 13.h., Sétif (Algérie).
-
-Golf :
 BOULART Philippe, 29-8-1918, 20 h., Bordeaux (Gironde).
 BOURIN Jean, 21-12-1903, 2 h., Tours (Indre-et-Loire).
 DALLEMAGNE Marcel, 11-12-1898, 5 h., Port-Marly (Seine-et-Oise).
@@ -327,8 +301,6 @@ DE LAMAZE Henri, 2-8-1918, 5 h., Trélissac (Dordogne).
 LE QUELLEC Yan, 3-5-1902, 41 h., Caudéran (Gironde).
 MASSY Arnaud, 6-7-1877, 12 h., Biarritz (Basses-Pyrénées).
 MOURGUIART Henri, 12-7-1905, 7 h., Anglet (Basses-Pyrénées).
-
-Gymnastique :
 DOT Raymond, 20-12-1926, 8 h., Puteaux (Seine).
 GOUNOT Jean, 9-5-1894, 17 h. 30, Nevers (Niévre).
 KRAUSS Alfred, 2-2-1908, 15 h., Osthein (Haut-Rhin).
@@ -337,12 +309,8 @@ ROUSSEAU Maurice, 28-9-1906, 20 h., La Machine (Niévre).
 SANDRAS Gustave, 24-2-1872, 3 h., Croix (Nord).
 SCHLINDWEIN Antoine, 10-8-1911, 1 h., Sarreguemines (Moselle).
 SOLBACH Armand, 10-5-1904, 21 h., Neuilly-sur-Seine (Seine).
-
-Hand-Ball :
 FLEURY Joél, 19-5-1919, 5 h. 30, Belle-Isle (Morbihan).
 SPECKER Justy, 18-8-1919, 6 h., Ferrette (Haut-Rhin).
-
-Hockey :
 BUTIN Jean, 20-9-1925, 8 h., Pontoise (Seine-et-Oise).
 CHEVALIER Guy, 5-12-1910, 11 h., Sens (Yonne).
 GRIMONPREZ Félix, 30-6-1910, 3 h., Lille (Nord).
@@ -351,8 +319,6 @@ PERON Jean-R., 15-6-1918, 5 h., Boulogne-sur-Mer (Pas-de-Calais).
 SALARNIER Robert, 20-7-1890, 1 h. 30, Saint-Mandé (Seine).
 THIEFFRY Jacques, 10-5-1924, 20 h., Lille (Nord).
 VANDAME Pierre, 17-6-1913, 11 h., Lille (Nord).
-
-Lutte :
 AURINE Rémy, 20-1-1916, 4 h., Molonpize (Cantal).
 BRUNAUD André, 9-2-1915, 8 h., Saint-Marcel (Indre).
 CHESNAU René, 17-9-1919, 22 h., Neuilly-sur-Seine (Seine).
@@ -362,22 +328,14 @@ JOURLIN Jean, 25-6-1909, 17 h. 15, Tarare (Rhône).
 LECLERE Jean, 10-3-1920, 20 h., Eloyes (Vosges).
 PACOME Charles, 5-11-1902, 3 h. 30, Bergues (Nord).
 POILVE Emile, 22-9-1903, 22 h., Megrit (Cétes-du-Nord).
-
-Marche :
 CORNET Florimond, 21-7-1912, 9 h. 30, Desvres (Pas-de-Calais).
 COURRON Louis, 9-4-1914, 21 h., Vaudenesse (Niévre).
 HUBERT Claude, 16-3-1914, 12 h. 45, Chartres (Eure-et-Loire).
-
-Natation :
 DRIGNY Emile G., 3-7-1883, 21 h. 30, Melun (Seine-et-Marne).
 LAURENT Robert, 29-3-1928, 22 h., Neuilly-Plaisance (Seine-et-Oise).
 NAKACHE Alfred, 18-11-1915, 7 h., Constantine (Algérie).
-
-Patin a roulette :
 LEGENDRE René, 21-10-1899, 23 h.;. Bordeaux (Gironde).
 ROBERT Raoul, 6-1-1912, 3 h., Pessac (Gironde).
-
-Pelote basque :
 ARCE Emile, 17-3-1922, 1 h., Saint-Etienne-de-Baigorry (B.-Pyrénées).
 BICHENDARITZ Pierre, 27-9-1922, 14 h., Guéthary (Basses-Pyrénées).
 BOUDON Felix, 25-9-1913, 7 h., Cambo (Basses-Pyrénées).
@@ -394,8 +352,6 @@ LEMOINE Jean, 23-7-1913, 18 h., Sare (Basses-Pyrénées).
 LEONIS Auguste, 31-71-1894, 22 h., Ainhoa (Pyrénées-Orientales).
 SALEZA Joé, 18-12-1905, 8 h. 45, Biarritz (Basses-Pyrénées).
 URRUTY Jean, 22-10-1912, 2 h. 30, Saint-Palais (Basses-Pyrénées).
-
-Poids et haltéres : is
 BARIL Marcel A., 13-11-1905, 13 h., Laval (Mayenne).
 CADINE Ernest, 12-7-1893, 6 h.. Saint-Denis (Seine).
 FERRARI Henri, 23-9-1912, 7 h., Frontignan (Hérault).
@@ -406,8 +362,6 @@ HOSTIN Louis, 21-4-1908, 10 h., Saint-Etienne (Loire).
 MOULINS Henri, 4-6-1923, 6 h., Sete (Herault).
 RIGOULOT Charles, 3-11-1903, 17 h., Le Vésinet (Seine-et-Oise).
 THEVENET Marcel, 9-7-1915, 2 h,, Poitiers (Vienne).
-
-Rugby :
 AINCIART Edouard, 21-12-1908, 11 h., Bayonne (Basses-Pyrénées).
 BALADIE Georges, 20-5-1917, 7 h. 30, Ville-d’Avray (Seine-et-Oise).
 BAILLETTE Marcel, 12-10-1904, 10 h., Perpignan (Pyrénées-Orientales).
@@ -450,7 +404,7 @@ LESPES Odé, 11-3-1924, 2 h., Agen (Lot-et-Garonne).
 MANOIR (du) Yves, 11-8-1904, 3 h. 15, Vaucresson (Seine-et-Oise).
 MARTIN Lucien, 28-9-1920, 13 h. 30, Pau (Basses-Pyrénées).
 MATHEU Jean, 23-6-1920, 5 h., Gelos (Basses-Pyrénées).
-MAURIAT Paul, 27-5-1887, 23 h. 30, Neuville-sur-Saéne (Rhone).
+MAURIAT Paul, 27-5-1887, 23 h. 30, Neuville-sur-Saône (Rhone).
 MAZON, 7-7-1921. 7 h. 15, Montluel (Ain).
 MOGA Alban, 1-5-1923, 9 h. 30, Bordeaux (Gironde).
 PRAT Jean, 1-8-1923, 9 h., Lourdes (Hautes-Pyrénées).
@@ -464,14 +418,10 @@ TERREAU Maurice, 30-1-1923, 2 h., Bourg-en-Bresse (Ain).
 THIERS Pierre, 16-4-1914, 23 h., Thiers (Puy-de-Déme).
 TRESCASES Frédéric, 20-11-1921, 6 h.. Argelés (Pyrénées-Orientales).
 VELLAT Edmond, 14-2-1897, 2 h. 40, Chambéry (Savoie).
-
-Ski :
 CHARLET Régis, 4-5-1920, 5 h., Chamonix (Heute-Savoie).
 COUTTET James, 6-7-1921, 23 h. 30, Chamonix (Haute-Savoie).
 PAZZI Jean, 7-8-1920, 10 h., Guillaumes (Alpes-Maritimes).
 PENZ Claude, 23-7-1924, 21 h. 30, Gaillard (Haute-Savoie).
-
-Sports Equestres : ,
 BIZARD Xavier, 1-1-1899, 20 h. 30, Lille (Nord).
 BURET Maurice, 21-5-1909, 16 h.. Sevres (Seine-et-Oise).
 BUSNEL (de) Amador, 19-12-1904, 16 h. 30, Saumur (Maine-et-Loire).
@@ -481,8 +431,6 @@ JOUSSEAUME André, 27-7-1894, 8 h. 10, Yvré-l’Evéque (Sarthe).
 LESAGE Xavier, 25-10-1885, 8 h. 30, Moret (Seine-et-Marne),
 MAUPEOU d’ABLEIGES (de) Pierre, 7-6-1910, 19 h. 45, Gray (H.-S.).
 ROYER (de), Henri Cl., 9-9-1876, 15 h. 30, Chartres (Eure-et-Loire).
-
-Sports Féminins :
 BRASSART Yvonne, 1-3-1904, 6 h.,50, Neuilly-sur-Seine (Seine).
 CASTEUR Odette, 11-11-1927, 23 h. 53, Tourcoing (Nord).
 FAURE-BEAULIEU Suzanne, 29-8-1905, 15 h., Dammarie-les-Lys (S.-M.).
@@ -491,8 +439,6 @@ MERLE Geneviéve, 21-2-1927, 4 h., Saint-Georges-d’Orgues (Hérault).
 VALLEREY Giséle, 22-1-1930, 8 h., Amiens (Somme).
 VESTE Paulette, 24-2-1928, 20 h., Lespesse (Pas-de-Calais.)
 VOGELBACHER Jeannette, 2-2-1922, 3 h. 30, Belfort (Territoire de B.).
-
-Tennis :
 BERNARD Alain, 25-8-1902, 9 h., Val-André (Pléneuf) (Cétes-du-Nord).
 BERNARD Marcel, 18-5-1914, 20 h., La Madeleine (Nord).
 BLANCHY Francois, 12-12-1886, 9 h., Bordeaux (Gironde).
@@ -512,8 +458,6 @@ PLAA Martin, 12-3-1901, 11 h., Bidart (Basses-Pyrénées).
 RAMILLON Robert, 24-2-1909, 16 h., Cannes (Alpes-Maritimes),
 RODEL Raymond, 5-5-1895, 6 h., Bordeaux (Gironde).
 THOMAS Jacques, 13-4-1922, 6 h., Antibes (Alpes-Maritimes).
-
-Tir
 BONNIN Marcel, 10-11-1904, 18 h.. Tours (Indre-et-Loire).
 COQUELIN de LISLE Pierre, 19-7-1900, 23 (h., Lille (Nord).
 DURAND Raymond, 28-1-1894, 13 h., Langres (Haute-Marne).
@@ -524,16 +468,12 @@ MARTINEZ de HOZ Gaston, 12-12-1899, 7 h. 30, Haux (Gironde).
 PARMENTIER André, 29-5-1876, 4 h., Sauveterre-de-Guyenne (Gironde).
 ROULAND Edouard, 27-4-1903, 17 h., Orry-la-Ville (Oise).
 TOUCHARD Roger, 21-3-1909, 15 h. 30, Saint-Cyr-de-Saléne (Eure).
-
-Voile :
 GERBAULT Alain, 17-11-1893, 11 h., Laval (Mayenne).
 TIRIAU Roger, 22-10-1928, 9 h. 30, Nantes (Loire-Inférieure).
-
-Boxeurs tirés de l’« Annuaire du Ring » 1953-1954 :
 ARCHAMBAULT Jean, 20-9-1926, 16 h., Sancergues (Cher).
 ASSIRE Marcel, 5-10-1929, 11 h., Saint-Georges-du-Viévre (Eure).
 AUCLAIR Marcel, *14-10-1927, 7 h. 30, Roanne (Loire).
-AUTHIER Henri, 11-4-1929, 22 h., Macon (Saéne-et-Loire).
+AUTHIER Henri, 11-4-1929, 22 h., Macon (Saône-et-Loire).
 BEAUMAIS Marcel, 20-1-1929, 8 h., Equemanville (Calvados).
 BENEDETTO Valére, 26-11-1926, 16 h., Aix-en-Provence (B.-du-Rh.).
 BINI| Dante, 23-7-1927, 10 h., Bezons (Seine).
@@ -581,7 +521,7 @@ LAPOURIELLE Claude, 13-6-1931, 1 h., Ville-d’Ay (Marne).
 LAPOURIELLE Michel, 26-8-1927, 12.h., Epernay (Marne).
 LAURENT. Roland, 17-2-1924, 5 h., Montlucon (Allier).
 LAVOINE Gilbert, 3-2-1921, 7 h., Laon (Aisne).
-LAWNICZAK César, 27-5-1928, 7 h. 30, Saint-Vallier (Saéne-et-Loire).
+LAWNICZAK César, 27-5-1928, 7 h. 30, Saint-Vallier (Saône-et-Loire).
 LEBORGNE Yves, 8-1-1929, 21 h., Guingamp (Cétes-du-Nord).
 LEFIN André, 28-3-1927, 8 h., Hirson (Aisne).
 LOIT. Jacques, 29-12-1929, 20 h., Lisieux (Calvados).
@@ -621,8 +561,8 @@ TARMOUL Mohamed, TSI 9SO. 4 ho. TizteOuzon (Alger).
 TEDJINI Mohamed, 276-1932, 42h.) 80. Oran (Algérie).
 THIEULIN William, 13-2-1927, 42 . 30, Elbeuf (Seine-Inférieure).
 THOMANN Eugéne, 23-3-1929, 5 h. 45, Schiltigheim (Bas-Rhin).
-VANGI Salvator, 13-1-1927, 23 kh. 30, Dijon (Céte-d’Or).
+VANGI Salvator, 13-1-1927, 23 h. 30, Dijon (Céte-d’Or).
 VERCOUTTER Andre, 29-6-1923, 2.h., Rosendaal (Nord).
 WARUSFEL Ildefonse, 3-4-1934. 0 h,, Monchecourt (Nord).
-WEISSMANN. René, 2-1-1930, 19 h. 25, Strasbourg (Bas-Rhin).
-ZAMBUJO. Tiodmir, Ie te ASOT Tank! Teale (Saéne-et-Loire).
+WEISSMANN René, 2-1-1930, 19 h. 25, Strasbourg (Bas-Rhin).
+ZAMBUJO Tiodmir, 12-12-1930, 17 h. Tournus (Saône-et-Loire).
