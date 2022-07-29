@@ -25,7 +25,7 @@ class gqid implements Command {
         @param  $params Array containing 4 elements :
                         - the string "g55" (useless here, used by GauqCommand).
                         - the string "gqid" (useless here, used by GauqCommand).
-                        - a string identifying what is processed (ex : '570SPO').
+                        - a string identifying what is processed (ex : '01-576-physicians').
                           Corresponds to a key of G55::GROUPS array
                         - string 'check' or 'update'
     **/

@@ -1,0 +1,17 @@
+  
+# document:
+#   history:
+#     - 2022-07-23 23:49:30+02:00: Thierry Graff, creation
+
+name: Gauquelin 1955 - 508 physicians
+slug: 02-508-physicians
+'n': 508
+type: history
+sources:
+  - g55-book
+
+description: |
+  508 AUTRES MEDECINS NOTABLES
+  <br>p 255 - 263 of the original book
+
+children:

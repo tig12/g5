@@ -1,5 +1,5 @@
 BALLY Etienne, 17-4-1923, 1 h., Vénissieux (Rhône).
-BAZENNERYE René, 11-12-1913, 41 h., Cosne (Nievre).
+BAZENNERYE René, 11-12-1913, 41 h., Cosne (Nièvre).
 BERNARD Henri, 24-7-1900, 2 h., Boulogne-Billancourt (Seine).
 BOECKEL Paul, 14-3-1916, 5 h., Crest (Drome).
 BOUIN Jean, 21-12-1888, 1 h., Marseille (Bouches-du-Rhône).
@@ -9,7 +9,7 @@ DAMITO Georges, 20-5-1924, 6 h., Toulouse (Haute-Garonne).
 EL MABROUK Mohamed, 17-10-1928, 9 h. 45, Alger (Algérie).
 AILLOT Georges, 27-4-1917, 15 h. 30, Chatellerault (Vienne).
 GUILLEMOT Joseph, 1-10-1899, 2 h., Le Dorat (Haute-Vienne).
-HERICE Daniel, 7-9-1921, 1 h., Saint-Emilion (Corréze).
+HERICE Daniel, 7-9-1921, 1 h., Saint-Emilion (Corrèze).
 JOANBLANC Robert, 21-2-1917, 15 h., Aldudes (Basses-Pyrénées).
 JOYE Prudent, 15-12-1913, 21 h. 45, Roubaix (Nord).
 LADOUMEGUE Jules, 10-12-1906, 5 h., Bordeaux (Gironde).
@@ -155,7 +155,7 @@ HOURLIER Léon, 16-9-1885, 18 h., Reims (Marne).
 IACOPONELLI Pierre, 8-7-1924, 9 h. 45, Rueil (Seine-et-Oise).
 IDEE Emile, 19-7-1920, 2 h., Nouvion-le-Comte (Aisne).
 JACQUELIN Edmond, 31-3-1875, 10 h., Santenay (Céte-d’Or).
-LAMBOLEY Jean-Jacques, 10-9-1920, 23 h., Heéricourt (Haute-Sadne).
+LAMBOLEY Jean-Jacques, 10-9-1920, 23 h., Heéricourt (Haute-Saône).
 LAPEBIE Guy, 28-11-1916, 9 h., Saint-Geours-en-Marenne (Landes).
 LAPEBIE Roger, 16-1-1911, 21 h., Bayonne (Basses-Pyrénées).
 LAURENT Marcel, 6-6-1913, 15 h. 45, Lapoutroie (Haut-Rhin).
@@ -270,7 +270,7 @@ MARCHE Roger, 5-3-1924, 13 h., Villers-Meuse (Ardennes).
 MOREEL Georges, 22-7-1924, 11 h., Gennevilliers (Seine).
 MATTLER Etienne, 24-12-1905, 11 h. 30, Belfort (Territoire de Belfort).
 OURDOUILLIE Marcel, 18-12-1913, 15 h., Isberques (Pas-de-Calais).
-PAVILLARD Henri, 15-8-1905, 2 h., Héricourt (Haute-Sadne).
+PAVILLARD Henri, 15-8-1905, 2 h., Héricourt (Haute-Saône).
 PETIT René, 8-10-1899, 9 h. 30, Dax (Landes).
 PETITFILS André, 10-2-1920, 21 h. 40, Orléans (Loiret).
 PIRONTI Félix, 5-4-1921, 5 h., Marseille (Bouches-du-Rhône).

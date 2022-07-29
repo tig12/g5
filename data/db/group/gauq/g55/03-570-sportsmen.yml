@@ -1,0 +1,50 @@
+  
+# document:
+#   history:
+#     - 2022-07-23 23:59:54+02:00: Thierry Graff, creation
+
+name: Gauquelin 1955 - 570 sportsmen
+slug: 03-570-sportsmen
+'n': 568
+type: history
+sources:
+  - g55-book
+
+description: |
+  570 SPORTIFS
+  <br>p 263 - 273 of the original book
+
+children:
+
+details: |
+  Sportifs tirés de l’ « Athlége » 1949 et 1950
+  Athlétisme : 1 - 32
+  Auto et Moto : 33 - 37
+  Aviation : 38 - 46
+  Aviron : 47 - 52
+  Basket-Ball : 53 - 73
+  Billard : 77 - 79
+  Boxe : 80 - 107
+  Canoé : 108
+  Cyclisme : 109 - 204
+  Escrime : 205 - 215
+  Football : 216 - 295
+  Golf : 296 - 303
+  Gymnastique : 304 - 311
+  Hand-Ball : 312 - 313
+  Hockey : 314 - 321
+  Lutte : 322 - 330
+  Marche : 331 - 333
+  Natation : 334 - 336
+  Patin a roulette : 337 - 338
+  Pelote basque : 339 - 354
+  Poids et haltéres : 355 - 364
+  Rugby : 365 - 420
+  Ski : 422 - 424
+  Sports Equestres : 425 - 433
+  Sports Féminins : 434 - 441
+  Tennis : 442 - 460
+  Tir : 461 - 470
+  Voile : 471 - 472
+  Boxeurs tirés de l’« Annuaire du Ring » 1953-1954 : 473 - 568
+

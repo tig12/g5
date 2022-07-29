@@ -1,4 +1,3 @@
-Généraux, Amiraux et Officiers supérieurs :
 ABAUT Michel Arthur, 13-10-1849, 22 h., Letourne (Gironde).
 ABONNEAU Pierre Charles, 10-1-1854, 19 h., Poitiers (Vienne).
 ABOVILLE (de) Albert Henri, 26-38-1848, 4 h., Malesherbes (Loiret).
@@ -193,7 +192,7 @@ BIESSE Camille Charles, 21-38-1872, 3 h., Baume-les-Dames (Doubs).
 BIGNON Adrien Charles, 1-12-1827, 22 h., Libourne (Gironde).
 BIGOT Louis Emile, 23-3-1853, 5 h., Etampes (Seine-et- Oise).
 BIGREL Théophile Hyac., 29-4-1828, 17 h., Loudéac (Cétes-du-Nord).
-BILLOT Jean-Baptiste, 15-8-1828, 20 h., Chaumeil (Corréze).
+BILLOT Jean-Baptiste, 15-8-1828, 20 h., Chaumeil (Corrèze).
 BILLOTTE Gaston Henri, 10-2-1875, 8 h., Sommeval (Aube).
 BINGER Louis Gustave, 14-10-1856, 1 h., Strasbourg (Bas-Rhin).
 BIRCHLER Emile Guillaume, 22-10-1870, 5 h., Amiens (Somme).
@@ -327,7 +326,7 @@ CONDE Charles, 25-2-1876, 2 h. 380, Saint-Omer (Pas-de-Calais).
 CORAP André, 15-1-1878, 2 h., Poni-Audemer (Eure).
 CORDONNIER Emilien Louis, 23-3-1858, 17 h., Surey (Niévre),
 CORN (de). Alfred, TI e1BBS) ah Oran (Algérie).
-COTTENET Joseph, ‘30-12-1875, 14h. 30, Tanay (Cdte-d’Or).
+COTTENET Joseph, ‘30-12-1875, 14h. 30, Tanay (Côte-d’Or).
 COURBEBAISSE Pierre Alphonse, 27-11-1849, 7 4b. 15, Cahors (Loi).
 COURBET André Anatole, 26-6-1827, 14 h., Abbeville (Somme).
 COURCIER Maurice, 22-1-1879, 4 h., Reims (Marne).
@@ -434,7 +433,7 @@ LANGLOIS. Hippolyte, 3-8-1839, 15 h., Besancon (Doubs).
 LARRAS Nestor, 18-7-1868, 1 h., Mustapha (Algérie).
 LATTRE de TASSIGNY Jean-Marie (de), 2-2-1889, 12 h., Mouilleron-en-Pareds (Vendée).
 LAUSSEDAT Aimé, 15-4-1819, 8 h., Moulins (Allier).
-LAURENT Victor Simon, 21-9-1862, 12 h., Serrigny (Cdte-d’Or).
+LAURENT Victor Simon, 21-9-1862, 12 h., Serrigny (Côte-d’Or).
 LEBOUC Georges Pierre, 3-10-1865, 1 h., Issoudun (Indre).
 LEBRUN Léonce Marie, 11-5-1861, 11 h., Méziéres (Ardennes).
 LECLERC Philippe de Hautecloque (dit), 22-11-1902, 20 h., Belloy-Saint-Léonard (Somme).
@@ -499,7 +498,7 @@ NANSOUTY Charles Marie, 20-2-1815, 10 h.. Dijon (Céote-d'Or).
 NAULIN Stanislas, 17-4-1870, 3 h., Saint-Loup-sur-Thovet (Deux-Sévres).
 NEGRIER (de) Francois Oscar, 2-10-1839, 9 h., Belfort (Terr. de Belfort).
 NIOX Gustave Léon, 2-8-1840, 15 h., Provins (Seine-et-Marne).
-NIVELLE Robert Georges, 15-10-1856, 12 h., Tulle (Corréze).
+NIVELLE Robert Georges, 15-10-1856, 12 h., Tulle (Corrèze).
 NOLLET Charles-Marie, 28-1-1865, 4 h., Marseille (Bouches-du-Rhône).
 OLRY René Henri, 28-6-1880, 8 h., Lille (Nord).
 PACAULT Pierre, 19-9-1871, 16 h., Dijon (Céte-d’Or).
@@ -559,7 +558,7 @@ TARGE Antoine Louis, 2-8-1865, 2 h., Saint-Chamond (Loire).
 TAUFFLIEB Emile Adolphe, 22-5-1857, 11 h., Strasbourg: (Bas-Rhin).
 TAVERNOST (de) Abel, 13-8-1860, 19 h., Cesseins (Ain).
 THOMAS Francois Emile, 30-8-1869, 10 h., Barbezieux (Charente).
-THOMAS Louis, 10-6-1860, 4 h., Donzy (Nievre).
+THOMAS Louis, 10-6-1860, 4 h., Donzy (Nièvre).
 THOMASSON (de) Emile Raoul, 19-11-1862, 19 h. 40, Angouléme (Ch.).
 THOUMA Charles Antoine, 19-7-1820, 17 h., Lauriére (Haute-Vienne).
 TILHO Jean Auguste, 1-5-1875, 2 h., Domme (Dordogne).
@@ -595,8 +594,6 @@ WIRBEL Henri, 31-5-1861, 9 h., Reims (Marne).
 ZAIGUE Gabriel, 12-2-1872, 1 h. 30, Chaource (Aube).
 ZELLER Léon Paul Louis, 29-10-1868, 12 h., Oberbruck (Haut-Rhin).
 ZURLINDEN Emile Auguste, 3-11-1837, 18 h., Colmar (Haut-Rhin).
-
-Saint-Cyriens morts a la guerre
 AMOS Paul Geoffroy, 25-10-1918, 23 h. 45, Dettwiller (Bas-Rhin).
 ARBELLOT du REPAIRE Jacques, 11-5-1918, 16 h., Toulouse (Hte-G.).
 BAHIER Victor, 5-8-1916, 1 h., Saint-Brieuc (Cdtes-du-Nord).
@@ -663,7 +660,7 @@ PREVOST Fernand Edouard, 27-1-1918, 21 h., Etaples-sur-Mer (P.-de-C.).
 PRUNETA Noél Ignace, 30-6-1919, 10 h., Montlouis (Pyrénées-Orient.).
 PRUNGET Yves, /20-9-1918, 17 h., Chateaubriant (Loire-Inférieure).
 REEB Eugéne, 17-8-1917, 16 h., Saverne (Bas-Rhin).
-RENAUDIE Jean, 20-10-1916, 1 h., Ségur-le-Chateau (Corréze).
+RENAUDIE Jean, 20-10-1916, 1 h., Ségur-le-Chateau (Corrèze).
 RENAUX Albert, 1-8-1917, 22 h., Boulogne-sur-Mer (Pas-de-Calais).
 ROUAST Philippe, 20-6-1917, 11 h.. Grenoble’ (Isére).
 RUHIER Pierre Auguste, 26-1-1916, 20 h., Besancon (Doubs).

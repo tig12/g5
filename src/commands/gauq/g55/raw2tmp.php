@@ -17,7 +17,7 @@ class raw2tmp implements Command {
     
     // to fix ambiguities
     const TWEAKS = [
-        '361PEI' => [
+        '06-361-minor-painters' => [
             // BRUNARD Joseph Brice, 13-1-1812, 14 h., Saint-Brice (Seine-et-Oise).
             // see https://www.saintbrice95.fr/ma-mairie/histoire-de-saint-brice/les-personnalites/ils-ont-habite-ou-sejourne-a-saint-brice/arts-plastiques/joseph-brice-brunard-peintre-miniaturiste-et-imprimeur-864.html
             '76' => [
@@ -62,9 +62,6 @@ class raw2tmp implements Command {
         if(!in_array($groupKey, $possibleParams)){
             return "INVALID PARAMETER: $groupKey\n$msg";
         }
-        if(!isset(G55::GROUPS[$groupKey]['raw-file'])){
-            return "INVALID GROUP: Group $groupKey does not have raw file.\n$msg";
-        }
         
         $report = "--- $cmdSignature $groupKey ---\n";
         
@@ -89,6 +86,11 @@ class raw2tmp implements Command {
             $new = $newEmpty;
             $new['NUM'] = $N;
             [$new['FNAME'], $new['GNAME'], $new['NOB']] = self::computeName($fields[0]);
+            if(substr($new['FNAME'], 0, 2) == '* '){
+                // particular case for 01-576-physicians (means that the person is also member of the academy of science)
+                $new['OTHER'] = '*';
+                $new['FNAME'] = substr($new['FNAME'], 2);
+            }
             $new['DATE'] = self::computeDateTime($fields[1], $fields[2]);
             [$new['PLACE'], $new['C1'], $new['C2'], $new['CY']] = self::computePlace($fields[3]);
             if(isset(self::TWEAKS[$groupKey][$N])){
@@ -119,7 +121,7 @@ class raw2tmp implements Command {
     }
     
     
-    const PATTERN_NAME = '/([A-Z ]+) (.*)/';
+    const PATTERN_NAME = '/(\*? ?\p{Lu}+) (.*)/u';
     /**
         @return     Array with 3 elements: family name, given name, nobility
     **/
@@ -132,7 +134,7 @@ class raw2tmp implements Command {
             $res[0] = $str;
             return $res;
         }
-        $res[0] = ucWords(strtolower($m[1]));
+        $res[0] = ucWords(mb_strtolower($m[1]));
         // nobility
         $nob = '';
         $pos1 = strpos($m[2], '(d');
@@ -209,10 +211,15 @@ class raw2tmp implements Command {
             $res[3] = 'MC';
             return $res;
         }
+        if($C2 == 'Ile Maurice'){
+            $res[3] = 'MU';
+            return $res;
+        }
         
         $res[3] = 'FR';
         if(!isset(self::DEPTS[$C2])){
             echo "C2 code not handled: $C2\n";
+exit;
         }
         $res[2] = self::DEPTS[$C2];
         if($res[2] == ''){
@@ -227,9 +234,12 @@ class raw2tmp implements Command {
     **/
     private static function dz_place2admin1(string $place): string {
         switch($place){
-        	case 'Alger': return '01'; break;
-        	case 'Blidah': return '20'; break;
-        	case 'Constantine': return '04'; break;
+        	case 'Alger':          return '01'; break;
+        	case 'Douera':         return '01'; break;
+        	case 'Blidah':         return '20'; break;
+        	case 'Bône':           return '18'; break;
+        	case 'Constantine':    return '04'; break;
+        	case 'Oran':           return '09'; break;
             default:
                 echo "Unable to compute DZ admin1 code for $place\n";
                 return '';
@@ -248,6 +258,7 @@ class raw2tmp implements Command {
         'Alpes-M.'              => '06',
         'Alpes-Marit.'          => '06',
         'Alpes-Maritimes'       => '06',
+        'A.-M.'                 => '06',
         'Alsace'                => '',
         'Ardèche'               => '07',
         'Ardennes'              => '08',
@@ -256,6 +267,8 @@ class raw2tmp implements Command {
         'Aude'                  => '11',
         'Aveyr.'                => '12',
         'Aveyron'               => '12',
+        'Belfort'               => '90',
+        'B.-Rhin'               => '67',
         'Bas-Rhin'              => '67',
         'Basses-Alpes'          => '04',
         'Basses-Pyrénées'       => '66',
@@ -270,20 +283,28 @@ class raw2tmp implements Command {
         'Ch.'                   => '',
         'Char.'                 => '16',
         'Charente'              => '16',
+        'Charente-M.'           => '17',
+        'Ch.-Maritime'          => '17',
         'Charente-Mar.'         => '17',
         'Charente-Maritime'     => '17',
+        'Ch.-M.'                => '17',
         'Cher'                  => '18',
         'Ch.-Marit.'            => '17',
         'Corrèze'               => '19',
         'Corse'                 => '20',
+        'C.-O.'                 => '21',
+        'C.-d’Or'               => '21',
+        "Côte-d'Or"             => '21',
         'Cote-d’Or'             => '21',
         'Côte-d’Or'             => '21',
         'Côtes-du-N.'           => '22',
         'Côtes-du-Nord'         => '22',
         'Creuse'                => '23',
         'Deux-Sévres'           => '79',
+        'Deux-Sèvres'           => '79',
         'Dordogne'              => '24',
         'Doubs'                 => '25',
+        'Dr.'                   => '26',
         'Drôme'                 => '26',
         'E.-et-L.'              => '28',
         'Eure'                  => '27',
@@ -294,6 +315,7 @@ class raw2tmp implements Command {
         'Gir.'                  => '33',
         'Gironde'               => '33',
         'Haute-Garonne'         => '31',
+        'Hte-Garonne'           => '31',
         'Haute-Loire'           => '43',
         'Haute-M.'              => '52',
         'Haute-Marne'           => '52',
@@ -302,22 +324,27 @@ class raw2tmp implements Command {
         'Hautes-Pyrénées'       => '65',
         'Haute-Vienne'          => '89',
         'Haut-Rhin'             => '68',
+        'Hautes-Alpes'          => '05',
         'Hérault'               => '34',
         'Hte-L.'                => '43',
         'Hte-M.'                => '52',
         'Hte-Marne'             => '52',
         'Hte-Saône'             => '70',
         'Hte-V.'                => '87',
+        'Hte-Vienne'            => '87',
         'Ht-Rh.'                => '68',
         'I.-et-L.'              => '37',
         'I.-et-V.'              => '37',
+//        'Ile Maurice'           => '',
         'Ille-et-V.'            => '35',
         'Ille-et-Vil.'          => '35',
         'Ille-et-Vilaine'       => '35',
         'Indre'                 => '36',
         'Indre-et-Loire'        => '37',
+        'Indre-et-L.'           => '37',
         'Isere'                 => '38',
         'Isére'                 => '38',
+        'Isère'                 => '38',
         'J.'                    => '',
         'Jura'                  => '39',
         'Landes'                => '40',
@@ -330,14 +357,17 @@ class raw2tmp implements Command {
         'Loir-et-Cher'          => '41',
         'Lot'                   => '46',
         'Lot-et-Garonne'        => '47',
+        'Lot-et-Gar.'           => '47',
         'Loz.'                  => '48',
         'Lozère'                => '48',
         'Maine-et-Loire'        => '49',
+        'M.-et-L.'              => '49',
         'Manche'                => '50',
         'Marne'                 => '51',
         'Mayenne'               => '53',
         'M.-et-M.'              => '54',
         'Meurthe'               => '',
+        'Meurthe-et-M.'         => '54',
         'Meurthe-et-Mos.'       => '54',
         'Meurthe-et-Moselle'    => '54',
         'Meuse'                 => '55',
@@ -352,8 +382,9 @@ class raw2tmp implements Command {
         'P.-de-D.'              => '63',
         //'Pr. Mon.'              => '',
         'Puy-de-Dôme'           => '63',
-        'Pyrénées-Or.'          => '64',
-        'Pyrénées-Orientales'   => '64',
+        'Pyr.-Or.'              => '66',
+        'Pyrénées-Or.'          => '66',
+        'Pyrénées-Orientales'   => '66',
         'Rhône'                 => '69',
         'S.'                    => '',
         'Saône-et-L.'           => '71',
@@ -371,6 +402,7 @@ class raw2tmp implements Command {
         'S.-et-M.'              => '77',
         'S.-et-O.'              => '',
         'S.-I.'                 => '76',
+        'S.-Inf.'               => '76',
         'S.-Infér.'             => '76',
         'S.-L.'                 => '71',
         'S.-O.'                 => '',
@@ -389,6 +421,7 @@ class raw2tmp implements Command {
         'Vienne'                => '86',
         'Vosges'                => '88',
         'Yonne'                 => '89',
+        'Yon.'                  => '89',
     ];
     
     /**
@@ -400,19 +433,24 @@ class raw2tmp implements Command {
         // Ambiguous cases, handled by self::TWEAKS
         case 'Saint-Germain': return ''; break;
         case 'Saint-Brice': return ''; break;
-        //
-        case 'Schlestadt': return '67'; break;
-        case 'Montcontour': return '22'; break;
-        case 'Saint-Christophe-de-Chalais': return '16'; break;
-        case 'Lons-le-Saunier': return '39'; break;
-        case 'Saint-Quirin': return '57'; break;
+        // Miscelaneous
+        case 'Bassing': return '57'; break;
         case 'Blamont': return '54'; break;
+        case 'Conflans-Ste-Honorine': return '78'; break;
+        case 'Lons-le-Saunier': return '39'; break;
+        case 'Mouilleron-en-Pareds': return '85'; break;
+        case 'Montcontour': return '22'; break;
+        case 'Pont-à-Mousson': return '54'; break;
         case 'Salonnes': return '57'; break;
         case 'Saint-Benoît de Carmaux': return '81'; break;
+        case 'Saint-Christophe-de-Chalais': return '16'; break;
         case 'Saint-Didier-les-Bains': return '84'; break;
+        case 'Saint-Quirin': return '57'; break;
+        case 'Schlestadt': return '67'; break;
         // Seine
         case 'Chatillon-sous-Bagneux': return '92'; break;
         case 'Boulogne-sur-Seine': return '92'; break;
+        case 'Clichy': return '92'; break;
         case 'Courbevoie': return '92'; break;
         case 'Créteil': return '94'; break;
         case 'Fontenay-aux-Roses': return '92'; break;
@@ -423,25 +461,29 @@ class raw2tmp implements Command {
         case 'Neuilly-sur-Seine': return '92'; break;
         case 'Nogent-sur-Marne': return '94'; break;
         case 'Pantin': return '93'; break;
+        case 'Paris': return '75'; break;
         case 'Puteaux': return '92'; break;
         case 'Saint-Mandé': return '94'; break;
         case 'Saint-Ouen': return '93'; break;
+        case 'Saint-Denis': return '93'; break;
+        case 'Vincennes': return '94'; break;
         case 'Vitry-sur-Seine': return '94'; break;
         case 'Yvry-sur-Seine': return '94'; break;
         // Seine-et-Oise
-        case 'Montgeron': return '91'; break;
-        case 'Saint-Cyr-l’Ecole': return '78'; break;
-        case 'Saint-Cloud': return '92'; break;
         case 'Andilly': return '95'; break;
         case 'Coudray-Montceau': return '91'; break;
+        case 'Fourqueux': return '78'; break;
         case 'Le Vésinet': return '78'; break;
         case 'Limay': return '78'; break;
         case 'Magny-en-Vexin': return '91'; break;
         case 'Meudon': return '92'; break;
         case 'Montesson': return '78'; break;
         case 'Montfort-l’Amaury': return '78'; break;
+        case 'Montgeron': return '91'; break;
         case 'Mureaux': return '78'; break;
         case 'Pontoise': return '95'; break;
+        case 'Saint-Cloud': return '92'; break;
+        case 'Saint-Cyr-l’Ecole': return '78'; break;
         case 'Saint-Leu': return '95'; break;
         case 'Sèvres': return '92'; break;
         case 'Taverny': return '95'; break;
@@ -454,6 +496,7 @@ class raw2tmp implements Command {
         case 'Maisons-Laffitte': return '78'; break;
         case 'Saint-Germain-les-Corbeil': return '91'; break;
         case 'Saint-Germain-en-Laye': return '78'; break;
+        case 'Saint-Ouen-l’Aumone': return '95'; break;
         default:
             echo "Unable to compute FR admin2 code for $place\n";
             return '';

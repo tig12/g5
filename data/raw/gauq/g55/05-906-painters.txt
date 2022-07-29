@@ -1,5 +1,3 @@
-Peintres célébres :
-
 ABBEMA Louise, 30-10-1853, 16 h., Etampes (Seine-et-Oise).
 ADLER Jules, 8-7-1865, 5 h. 30, Luxeuil (Haute-Saédne).
 AGACHE Alfred-Pierre, 29-8-1848, 8 h., Lille (Nord).
@@ -237,8 +235,6 @@ SAUNIER Noél, 28-9-1847, 11 h. 30, Vienne (Isère).
 SAVIN Maurice Louis, 17-10-1894, 11 h., Moras (Drôme).
 SAVREUX Maurice, 27-5-1884, 15 h., Lille (Nord).
 SEYSSAUD René, 15-6-1867, 21 h., Marseille (Bouches-du-Rhône).
-
-Peintres notables :
 ABEILLE Jack, 28-5-1873, 10 h., La Varenne-Saint-Hilaire (Seine).
 ABONNEL Michel’: 5-124881) 8 thie" Clermont barca (Puy-de-Dôme.
 ACHARD Jean Alexis, 17-4-1807, 11 h., Voreppe (Isère).
@@ -478,7 +474,7 @@ DUSOUCHET Pierre Léon, 25-4-1876, 17 h., Versailles (Seine-et-Oise).
 DUVENT Charles Jules, 26-6-1867, 1 h., Langres (Haute-Marne).
 DYONNET Edmund, 25-6-1859, 5 h., Crest (Drôme).
 ENJOLRAS Delphin, 13-5-1865, 23 h., Coucouron (Ardéche).
-ENTRAYGUES Charles (d’), 14-7-1850, 10 h., Brive (Corréze).
+ENTRAYGUES Charles (d’), 14-7-1850, 10 h., Brive (Corrèze).
 ERLANGER Rodolphe, 7-6-1872, 3 h., Boulogne-sur-Seine (Seine).
 ESCOT Charles, 16-4-1834, 1 h. 30, Gaillac (Tarn).
 ESTEVE Maurice, 2-5-1904, 21 h., Culan (Cher).
@@ -611,7 +607,7 @@ LAMBERT Antoine Eugéne; 26-4-1824, 12 h., Dijon (Côte-d’Or).
 LAMBERT Jacques Henri, 2-3-1877, 21 h. 30, Sévres (Seine-et-Oise).
 LANFANT Francois Louis, 23-8-1814, 13 h., Sierck (Moselle).
 LANOUE Félix Hippolyte. 14-10-1812, 6 h., Versailles (Seine-et-Oise).
-LANSAC Francois E. (de), 2-10-1803, 14 h., Tulle (Corréze).
+LANSAC Francois E. (de), 2-10-1803, 14 h., Tulle (Corrèze).
 LANSIER Emmanuel Maur., 19-2-1835, 8 h., Bouin (Vendée).
 LAPICQUE Charles, 6-10-1898, 14 h., Theizé (Rhône).
 LAPITOT Louis Auguste, 18-8-1803, 4 h., Joinville-le-Pont (Seine).

@@ -125,7 +125,7 @@ CHAPERON Robert, 21-6-1895, 2”h., Vire (Calvados).
 CHAPOY René, 5-11-1878, 20 h., Besancon (Doubs).
 CHARBONNEL Maurice, 17-12-1884, 1 h., Bordeaux (Gironde).
 CHARPENTIER Roger, 16-3-1903, 19 h., Clermoni-Ferrand (P.-de-D.).
-CHARRIER Jean, 21-7-1888, 4 h., Brive (Corréze).
+CHARRIER Jean, 21-7-1888, 4 h., Brive (Corrèze).
 CHASSAGNARD Jean-Bapt., 23-11-1882, 5 h., St-Yrieix-le-Déjalat (Cor.).
 CHATON Marcel, 18-7-1881,-19 h. 30, Bracon (Jura).
 CHAUVIN Emile, 4-9-1886, 3 h., Apt (Vaucluse).
@@ -283,7 +283,7 @@ KUHN Robert, 11-5-1886, 22 h., Rupt (Vosges).
 LACOMME Maurice, 14-9-1897, 4 h., Bar-le-Régulier (Cédte-d’Or).
 LACRONIQUE Gaston, 18-9-1887, 9 h. 30, Oran (Algérie).
 LAENNEC Théophile, 9-9-1901, 3 h., Neuilly-sur-Seine (Seine).
-LA FARGE (de) Georges, 5-7-1900, 4 h.. Tulle (Corréze).
+LA FARGE (de) Georges, 5-7-1900, 4 h.. Tulle (Corrèze).
 LAFONT Alexandre, 11-9-1869, 14 h. 20, Neris (Allier):
 LAGRANGE Henri, 23-12-1890, 20 h., Bordeaux (Gironde).
 LAMARQUE Henri, 27-2-1863, 12 h., Bazas (Gironde).
@@ -437,7 +437,7 @@ ROLLAND. Joseph, 10-7-1871, 22 h., Lambruisse (Basses-Alpes).
 ROME Alfred, 23-4-1869, 10 h., Voreppe (Isére).
 ROSSET Marc, 15-7-1888, 16 h., Vienne (Isére)..
 ROUFFIAC ‘Pierre, 27-4-1888, 17 h., Moret-sur-Loing (Seine-et-Marne).
-ROUFFIAT Paul, 25-8-1890, 3 h., Rilhac-en-Xaintrie (Corréze).
+ROUFFIAT Paul, 25-8-1890, 3 h., Rilhac-en-Xaintrie (Corrèze).
 ROUGY Mathieu, 24-5-1890, 21 h., Oullins (Rhône).
 ROUSSEAU-DECELLE, 2-5-1875, 21 h. 30, La Roche-sur-Yon (Vendée).
 ROUSSEL Georges, 3-11-1867, 8 h., Villars-Saint-Marcellin (Hte-Marne).
@@ -456,7 +456,7 @@ SCHWARTZ-WACKER Alfred, 4-5-1886, 10 h. 15, Mulhouse (Haut-Rhin).
 SERBOURCE Marcel, 22-3-1882, 20 h., Chatillon-sur-Seine (Céte-d’Or).
 SESINI Marcel, 15-3-1902, 11 h., Alger (Algérie).
 SEZARY Albert, 26-12-1880, 8 h., Alger (Algérie).
-SIKORA Pierre, 24-8-1874, 0 h., Chamboulive (Corréze).
+SIKORA Pierre, 24-8-1874, 0 h., Chamboulive (Corrèze).
 SIMONIN Louis, 17-8-1881, 5 h. 15, Dédle (Jura).
 SIMON Francis, 13-5-1895, 5 h., Saint-Hilaire-de-Harcouét (Manche).
 SIMON Clément, 9-7-1878, 8 h., Labruguiére (Tarn).
@@ -487,11 +487,11 @@ VANIER Jean, 22-5-1903, 8 h. 20, Le Havre (Seine-Inférieure).
 VELUET Maurice, 28-3-1884, 20 h., Blanc (Indre).
 VERDIER Pierre, 11-4-1877,. 23 h., Nantes (Loire-Inférieure).
 VERMELIN Henri, 31-7-1891, 2 h. 30, Beaucourt (Belfort).
-VIALLE Fernand, 5-1-1873, 20 h., Brive (Corréze),
+VIALLE Fernand, 5-1-1873, 20 h., Brive (Corrèze),
 VIALLE Pierre, 16-12-1903, 21 h., Tours (Indre-et-Loire).
 VIARD Marcel, 9-7-1884, 10 h., Saulx (Haute-Saédne).
 VIAU Louis, 11-1-1887, 5 h., Fréjus (Var). )
-VIDALIN Gustave, 6-8-1876, 13 h., Naves, (Corréze).
+VIDALIN Gustave, 6-8-1876, 13 h., Naves, (Corrèze).
 VIDAL-REVEL Jean, 19-1-1886, 19 h., Golfe-Juan (Alpes-Maritimes).
 VIETTE Roger, 30-3-1899, 20 h. 30, Montbazon (indre-et-Loire).
 VIGNE Paul, 27-9-1891, 9 h., Ales (Gard).
