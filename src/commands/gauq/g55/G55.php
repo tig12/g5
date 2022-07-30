@@ -180,7 +180,7 @@ class G55 {
     ];
     
     /**
-        Path to a raw file.
+        Path to a g55 raw file.
         @param  $groupKey a key of G55::GROUPS, like '09-349-scientists'
         throws  Exception if raw file not defined for this group
     **/

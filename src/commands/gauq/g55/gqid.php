@@ -14,14 +14,17 @@ use g5\model\DB5;
 use g5\model\Person;
 use g5\commands\gauq\LERRCP;
 use tiglib\strings\slugify;
+use tiglib\arrays\csvAssociative;
 
 class gqid implements Command {
     
     const POSSIBLE_ACTIONS = [
-        'cache'     => 'Computes slug => GQID associations from db and stores it on disk',
         'check'     => 'Displays the possible matches between g55 and LERRCP',
         'update'    => 'Adds field GQID to tmp file',
     ];
+    
+    /** Separator used in cache file **/
+    const CACHE_SEP = ';';
     
     /**
         Usage of this command:
@@ -40,8 +43,11 @@ class gqid implements Command {
         $cmdSignature = 'gauq g55 gqid';
         
         $possibleParams = G55::getPossibleGroupKeys();
-        $msg = "Usage : php run-g5.php $cmdSignature <group> <action>\nPossible values for <group>: \n  - " . implode("\n  - ", $possibleParams) . "\n";
-        $msg .= "Possible values for <action>:\n";
+        $msg = "Usage : \n"
+            . "php run-g5.php $cmdSignature cache\nComputes slug => GQID associations from db and stores it on disk\n"
+            . "or:\n"
+            . "php run-g5.php $cmdSignature <group> <action>\nPossible values for <group>: \n  - " . implode("\n  - ", $possibleParams) . "\n"
+            . "Possible values for <action>:\n";
         foreach(self::POSSIBLE_ACTIONS as $k => $v){
             $msg .= "  - $k:\t$v\n";
         }
@@ -64,7 +70,7 @@ class gqid implements Command {
         //
         $file = self::cacheFile();
         if(!is_file($file)){
-            return "Missing file $file\nExecute first command: php run-g5.php gauq g55 gqid cache\n";
+            return "Missing file $file\nExecute first command: php run-g5.php $cmdSignature cache\n";
         }
         //
         switch($action){
@@ -79,51 +85,148 @@ class gqid implements Command {
         Must be executed before update() and check().
     **/
     private static function cache() {
-        $res = '';
+        $res = "SLUG;GQID;DATE;PLACE\n";
         $dblink = DB5::getDbLink();
-        $query = "select slug,partial_ids from person where partial_ids->>'" . LERRCP::SOURCE_SLUG . "'::text != 'null'";
+        $query = "select slug,birth,partial_ids from person where partial_ids->>'" . LERRCP::SOURCE_SLUG . "'::text != 'null' order by slug";
         foreach($dblink->query($query, \PDO::FETCH_ASSOC) as $row){
             $ids = json_decode($row['partial_ids'], true);
+            $birth = json_decode($row['birth'], true);
             $GQID = $ids[LERRCP::SOURCE_SLUG];
-            $res .= $row['slug'] . ';' . $GQID . "\n";
+            $res .= implode(self::CACHE_SEP, [ $row['slug'], $GQID, ($birth['date'] != '' ? $birth['date'] : $birth['date-ut']), $birth['place']['name'] ]) . "\n";
         }
         $file = self::cacheFile();
         file_put_contents($file, $res);
-        return "Associations slug - GQID stored in $file\n";
+        return "Generated $file\n";
     }
     
     // ******************************************************
     /** 
-        Computes the name of the file where cache is stored
+        Computes the name of the file where db gauq-cache associations are stored.
     **/
     private static function cacheFile() {
-        return implode(DS, [Config::$data['dirs']['tmp'], 'gauq', 'slug-gqid.csv']);
+        return implode(DS, [Config::$data['dirs']['tmp'], 'gauq', 'gauq-cache.csv']);
     }
     
     // ******************************************************
     /** 
-        Computes the name of the file where cache is stored
+        Loads file gauq-cache.csv in an associative array date => person data
     **/
-    private static function loadCache() {
-        $tmp = file(self::cacheFile());
+    private static function loadCacheByDate() {
         $res = [];
-        foreach($tmp as $line){
-            $tmp2 = explode(';', trim($line));
-            $res[$tmp2[0]] = $tmp2[1];
+        $tmp = csvAssociative::compute(self::cacheFile(), self::CACHE_SEP);
+        foreach($tmp as $row){
+            $day = substr($row['SLUG'], -10);
+            if(!isset($res[$day])){
+                $res[$day] = [];
+            }
+            $res[$day][] = $row;
         }
         return $res;
     }
     
     // ******************************************************
     /** 
-        The report is used to build (manually) G55::MATCH_LERRCP
+        Computes associations slug => NUM for a given g55 group.
+    **/
+    private static function loadG55ByDate($groupKey) {
+        $res = [];
+        $tmpfile = G55::tmpFilename($groupKey);
+        if(!is_file($tmpfile)){
+            die("UNABLE TO PROCESS GROUP: missing temporary file $tmpfile\n");
+        }
+        foreach(G55::loadTmpFile($groupKey) as $row){
+            $day = substr($row['DATE'], 0, 10);
+            $slug = slugify::compute($row['FNAME'] . ' ' . $row['GNAME'] . ' ' . $day);
+            $row['SLUG'] = $slug; // info not present in tmp file
+            if(!isset($res[$day])){
+                $res[$day] = [];
+            }
+            $res[$day][] = $row;
+        }
+        return $res;
+    }
+    
+    // ******************************************************
+    /** 
+        The report is used to check that the proposed associations are correct,
+        and fix the problematic cases with G55::MATCH_LERRCP
+        Auxiliary function of check() and update()
     **/
     private static function check($groupKey) {
         $report = '';
-        $dbSlugs = self::loadCache();
-        $g55Slugs = self::computeSlugs($groupKey);
-        
+        [$match, $nomatch] = self::match($groupKey);
+        $report .= "=== MATCH ===\n";
+        foreach($match as $element){
+            $report .= "{$element['g55']['SLUG']} = g55 {$element['g55']['NUM']}\n";
+            $report .= "{$element['lerrcp']['SLUG']} = lerrcp {$element['lerrcp']['GQID']}\n\n";
+        }
+        $report .= "=== NO MATCH ===\n";
+        foreach($nomatch as $element){
+            $report .= "{$element['NUM']} {$element['SLUG']}\n";
+        }
+        $report .= "=== " . count($match) . " MATCH ===\n"
+           . "=== " . count($nomatch) . " NO MATCH ===\n";
         return $report;
+    }
+    
+    // ******************************************************
+    /** 
+        Tries to match g55 to LERRCP.
+        Strategy :
+        - Looks if there is one match by birth day.
+        - If one g55 birth day matches several LERRCP, a match is tried using slug.
+        @return Array with 2 elements : 'match' and 'nomatch'.
+                'match' and 'nomatch' are regular arrays
+                Each element of 'match' contains 2 elements: the g55 row and the LERRCP row.
+                Each element of 'nomatch' contains one element: the g55 row
+    **/
+    private static function match($groupKey) {
+        $dbPersons = self::loadCacheByDate();
+        $g55Persons = self::loadG55ByDate($groupKey);
+        $match = [];
+        $nomatch = [];
+        foreach($g55Persons as $g55Day => $g55PersonsForThisDay){
+            foreach($g55PersonsForThisDay as $g55Person){
+//echo "\n<pre>"; print_r($g55Person); echo "</pre>\n"; exit;
+                if(isset($dbPersons[$g55Day])){
+                    if(count($dbPersons[$g55Day]) == 1){
+                        // direct match, only one LERRCP with the g55 date
+                        $match[] = [
+                            'g55' => $g55Person,
+                            'lerrcp' => $dbPersons[$g55Day][0],
+                        ];
+                    }
+                    else {
+                        // several possible matches, try to match by slug
+                        $min_leven = PHP_INT_MAX;
+                        $bestCandidate = null;
+                        foreach($dbPersons[$g55Day] as $dbPerson){
+                            $dbSlug = $dbPerson['SLUG'];
+                            $g55Slug = $g55Person['SLUG']; 
+                            $leven = levenshtein($dbSlug, $g55Slug);
+                            if($leven < $min_leven){
+                                $min_leven = $leven;
+                                $bestCandidate = $dbPerson;
+                            }
+                        }
+                        if($min_leven > 2){
+                            $nomatch[] = $g55Person;
+                        }
+                        else {
+                            $match[] = [
+                                'g55' => $g55Person,
+                                'lerrcp' => $bestCandidate,
+                            ];
+                        }
+                    }
+                }
+                else {
+                    // no LERRCP with g55 day
+                    $nomatch[] = $g55Person;
+                }
+            }
+        }
+        return [$match, $nomatch];
     }
     
     // ******************************************************
@@ -152,24 +255,6 @@ class gqid implements Command {
         }
         file_put_contents($tmpfile, $res);
         return "$N lines modified in $tmpfile\n";
-    }
-    
-    // ******************************************************
-    /** 
-        Computes associations slug => NUM for a given g55 group.
-        Auxiliary of update() and check().
-    **/
-    private static function computeSlugs($groupKey) {
-        $res = []; // assoc $slug => $NUM
-        $tmpfile = G55::tmpFilename($groupKey);
-        if(!is_file($tmpfile)){
-            die("UNABLE TO PROCESS GROUP: missing temporary file $tmpfile\n");
-        }
-        foreach(G55::loadTmpFile($groupKey) as $line){
-            $slug = slugify::compute(substr($line['DATE'], 0, 10) . ' ' . $line['FNAME'] . ' ' . $line['GNAME']);
-            $res[] = [$line['NUM'], $slug];
-        }
-        return $res;
     }
     
 } // end class
