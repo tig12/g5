@@ -9,9 +9,7 @@
 namespace g5\commands\gauq\g55;
 
 use g5\G5;
-use g5\app\Config;
 use tiglib\patterns\Command;
-// use g5\commands\gauq\LERRCP;
 
 class raw2tmp implements Command {
     
