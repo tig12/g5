@@ -382,7 +382,7 @@ MERCIER Raoul, 4-1-1871, 18 h., Vernoille-Fourrier (Maine-et-Loire).
 MERGET Antoine, 16-8-1828, 8 h., Bordeaux (Gironde). :
 MERKLEN Prosper, 25-4-1874, 19 h., Guebwiller (Haut-Rhin).
 MERY Charles, 17-10-1862, 17 h. 30, Chartres (Eure-et-Loire).
-MESNET Urbain, 26-83-1825, 22 h., Saumur (Maine-et-Loire).
+MESNET Urbain, 26-03-1825, 22 h., Saumur (Maine-et-Loire).
 * MESNIL Félix, 12-12-1868, 23 h., Omonville-la-Petite (Manche).
 MESUREUR Gustave, 2-4-1847, 4 h., Marcg-en-Barceu! (Nord).
 MEUNIER Henri, 16-10-1865, 1 h., Avesnes (Nord).
@@ -403,7 +403,7 @@ MOUCHET Alphonse, 26-8-1842, 11 h., Gracay (Cher).
 MOURE Jean, 8-1-1855, 20 h., Bordeaux (Gironde).
 * MOUREU Charles, 19-4-1863, 3 h., Mourenx (Basses-Pyrénées).
 MOURIER Louis, 8-10-1873, 13 h., Vézénobres (Gard).
-MOURIQUAND Georges, 48-6-1880, 1 h., Beaufort-sur-Gervanne (Dr.).
+MOURIQUAND Georges, 18-6-1880, 1 h., Beaufort-sur-Gervanne (Dr.).
 NAPIAS Henri, 7-3-1842, 2 h., Sézanne (Marne).
 NETTER Arnold, 20-9-1855, 18 h., Strasbourg (Bas-Rhin).
 NICAISE Jules, 10-5-1838, 18 h., Mareuil-le-Port (Marne).
@@ -474,7 +474,7 @@ REGIS Emmanuel, 29-4-1855, 12 h., Auterive (Haute-Garonne).
 REGNARD Paul, 7-11-1850, 12 h., Chatillon-sur-Seine (Côte-d’Or).
 REMLINGER Paul, 29-12-1871, 19 h., Bertrange (Moselle).
 RENAULT Jules, 2-8-1864, 5 h., Préméry (Nièvre).
-* RENAULT Thomas, 41-2-1805, 18h., Saint-Ouen-l’Aumone (S.-et-O.).
+* RENAULT Thomas, 11-2-1805, 18h., Saint-Ouen-l’Aumone (S.-et-O.).
 * RENAUT Joseph, 7-12-1844, 1 h., La Haye-Descartes (Indre-et-Loire).
 RENOU Joseph, 28-8-1846, 12 h., La Fleche (Sarthe).
 REQUIN Achille, 15-8-1803, 9 h., Lyon (Rhône).
@@ -484,14 +484,14 @@ RICHER Paul, 17-1-1849, 1 h., Chartres (Eure-et-Loire).
 * RICHET Alfred, 16-3-1816, 3 h., Dijon (Côte-d’Or).
 * RICHET Charles, 26-8-1850, 21 h. 30, Paris (Seine).
 RIEMBAULT Alfred, 25-11-1827, 21 h. 45, Chatillon-sur-Seine (C.-d’Or).
-RIST Edouard, 46-3-1871, 15 h., Strasbourg (Bas-Rhin).
+RIST Edouard, 16-3-1871, 15 h., Strasbourg (Bas-Rhin).
 ROBERT César, 17-11-1801, 7 h., Marseille (Bouches-du-Rhône).
 ROBIN Albert, 19-9-1847, 5 h., Dijon (Côte-d'Or).
 * ROBIN Charles, 4-6-1821, 18 h., Jasseron (Ain).
 ROCHARD Eugéne, 29-10-1853, 42 h., Brest (Finistère).
 ROCHARD Jules, 30-10-1819, 3 h., Saint-Brieuc (Côtes-du-Nord).
-* ROLLET Joseph, 42-11-1824, 19 h., Lagnieu (Ain).
-ROUGET Charles, 49-8-1824, 22 h., Gisors (Eure).
+* ROLLET Joseph, 12-11-1824, 19 h., Lagnieu (Ain).
+ROUGET Charles, 19-8-1824, 22 h., Gisors (Eure).
 ROUSSEL Théophile, 28-7-1816, 2 h., Orfeuillettes (Lozère).
 ROUTIER Edmond, 10-10-1873, 6 h., Astaffort (Lot-et-Garonne).
 ROUVIERE Henri, 23-12-1875, 5 h., Bleymard (Lozère).

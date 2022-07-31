@@ -183,9 +183,17 @@ class G55 {
             '337'   => 'A2-438',    // levieux-jean-1818-11-23
             '357'   => 'A2-469',    // manquat-alexandre-1858-12-02
             '372'   => 'A2-486',    // mathis-constant-jean-1871-09-19
+            '373'   => 'A2-488',    // maunoury-victor-gabriel-1850-10-05
             '379'   => 'none',      // melier-francois
             '382'   => 'none',      // merget-antoine
+            '383'   => 'A2-499',    // merklen-prosper-1874-04-25
+            '401'   => 'A2-521',    // motet-auguste-1832-09-06
             '414'   => 'A2-540',    // notta-alphonse-1824-02-27
+            '416'   => 'A2-542',    // ollier-leopold-1830-12-03
+            '436'   => 'A2-569',    // perrin-maurice-1826-04-14
+            '496'   => 'A2-651',    // routier-edmond-1873-10-10
+            '500'   => 'A2-433',    // roy-des-barres-adrien-1872-12-16
+            '512'   => 'A2-666',    // see-marc-1827-02-18
         ],
         '06-361-minor-painters' => [
             '181'   => 'A6-355',    // gautier-theophile
