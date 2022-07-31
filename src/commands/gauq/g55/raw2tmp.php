@@ -238,6 +238,7 @@ exit;
         	case 'Bône':           return '18'; break;
         	case 'Constantine':    return '04'; break;
         	case 'Oran':           return '09'; break;
+        	case 'Setif':          return '39'; break;
             default:
                 echo "Unable to compute DZ admin1 code for $place\n";
                 return '';
@@ -284,10 +285,12 @@ exit;
         'Charente-M.'           => '17',
         'Ch.-Maritime'          => '17',
         'Charente-Mar.'         => '17',
+        'Charente-Marit.'       => '17',
         'Charente-Maritime'     => '17',
         'Ch.-M.'                => '17',
         'Cher'                  => '18',
         'Ch.-Marit.'            => '17',
+        'Cor.'                  => '19',
         'Corrèze'               => '19',
         'Corse'                 => '20',
         'C.-O.'                 => '21',
@@ -375,6 +378,7 @@ exit;
         'Nord'                  => '59',
         'Oise'                  => '60',
         'Orne'                  => '61',
+        'P.-de-C.'              => '62',
         'Pas-de-C.'             => '62',
         'Pas-de-Calais'         => '62',
         'P.-de-D.'              => '63',

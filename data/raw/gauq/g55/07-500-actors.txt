@@ -159,7 +159,7 @@ BOYER Charles, 28-8-1899, 17 h. 15, Figeac (Lot).
 BRASSEUR Pierre, 22-12-1905, 9 h. 30, Paris (17°) (Seine).
 BRETTY Béatrice, 26-10-1893, 17 h., La Fere (Aisne).
 BROCHARD Jean-Louis, 12-3-1893, 10 h., Nantes (Loire-Inférieure).
-BRUNOT André Gilbert, 3-10-1879, 18 h., Préméry (Niévre).
+BRUNOT André Gilbert, 3-10-1879, 18 h., Préméry (Nièvre).
 BUSSIERES Raymond, 3-11-1907, 21 h.,  Ivry-la-Bataille (Eure).
 CAMBO Paul, 2-7-1908, 16 h., Sort-les-Orgues (Correze).
 CARRIER Suzy, 13-11-1922, 1 h., Moulins (Allier).
@@ -245,7 +245,7 @@ JACQUES (frére) 22-8-1919, 10 h. 30, Dieulefit (Dréme).
 JACQUES (frére). 12-2-1914, 7 h., Saint-Nazaire (Loire-Inférieure).
 JACQUES (frére) 18-3-1918, 8 h. 15, Saint-Nazaire (Loire-Inférieure).
 JACQUIN Abel, 14-7-1893, 7 h. 30, Colombes (Seine).
-JOUVET Louis, 24-12-1887, 5 h., Crozon (Finistére).
+JOUVET Louis, 24-12-1887, 5 h., Crozon (Finistère).
 LAAGE Barbara, 30-7-1920, 13 h., Menton-Saint-Bernard (Hte-Savoie).
 LAJARRIGE Bernard, 25-2-1912, 22 h., Saint-Mandé (Seine).
 LANCRET Bernard, 4-9-1912, 9 h., Gonesse (Seine-et- Oise).
@@ -375,7 +375,7 @@ CARTIER ‘Maurice, 15-1-1925, 21 h. 45, Asniéres (Seine).
 CASTAING Claude, 20-1-1922, 1 h., Gujan-Mestras (Gironde).
 CERDAN Simone, 28-11-1897, 7 h., Fontainebleau (Seine-et-Marne).
 CHARCO Louis, 26-4-1893, 20 h., Agen (Loi-et-Garonne).
-CHOCHILLON Henri, 18-3-1913, 2 h. 30, Romans-sur-lsére (Dréme).
+CHOCHILLON Henri, 18-3-1913, 2 h. 30, Romans-sur-Isére (Dréme).
 CORNE Léonce, 19-3-1894, 21 h. 15, Beauvais (Oise).
 COUTET Henri, 28-6-1909, 11 h., Vaujours (Seine-et-Oise).
 DALBAN Robert, 19-7-1903, 9 h. 30, Cellés-sur-Belles (Deux-Sevres).
@@ -430,7 +430,7 @@ LAMBRUN Jacques, 22-7-1919, O h. 15, Rouessé-Vassé (Sarthe).
 LAMOTHE Elisa, 5-11-1919, 18 h. 10, Briey (Meurthe-et-Moselle).
 LAUBY Francoise, 28-3-1929, 9 h., Bordeaux (Gironde).
 LE BRUN René, 28-12-1923, 8 h. 15, Montdidier (Somme).
-LECLAIR Sophie, 20-8-1925, 21 h., Tannay (Niévre).
+LECLAIR Sophie, 20-8-1925, 21 h., Tannay (Nièvre).
 LEFEVRE-BEL Rene, 31-5-1909, 14 h., Les Mureaux (Seine-et-Oise).
 LEMOINE Michel, 30-9-1922, 17 h., Pantin (Seine).
 MAG-AVRIL, 9-3-1899, 10 h., Marseille (Bouches-du-Rh6ne).
@@ -489,7 +489,7 @@ TORRENS Jacques, 25-7-1923, 20 h. 25, Sartrouville (Seine-et-Oise).
 VADET Michel, 1-7-1918, 5 h. 30, Rouen (Seine-Inférieure).
 VALMAIN Frédéric, 30-1-1931, 23 h. 30, Alger (Algérie).
 VERDIER Julien, 13-1-1910, 10 h., Vanves (Seine).
-VERDY Violette, 1-12-1933, 9 h. 30, Pont-l’Abbé (Finistére).
+VERDY Violette, 1-12-1933, 9 h. 30, Pont-l’Abbé (Finistère).
 MVERNILLAT) Francette, 16-4-1937, 23 h., Strasbourg, (Bas-Rhin).
 VERTAN Jacques, 20-3-1923, 4 h, 15, Clamart (Seine).
 VIDDALIN Jean-Marie, 5-3-1903, 9 h. 30, Saint-Amant-Tallende (P.-D.).
