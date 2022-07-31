@@ -44,38 +44,65 @@ class gqid implements Command {
         
         $possibleParams = G55::getPossibleGroupKeys();
         $msg = "Usage : \n"
-            . "php run-g5.php $cmdSignature cache\nComputes slug => GQID associations from db and stores it on disk\n"
+            . "php run-g5.php $cmdSignature cache\n"
+            . "  Computes LERRCP lines from db and stores it in file data/tmp/gauq/g5/gauq-cache.csv\n"
             . "or:\n"
-            . "php run-g5.php $cmdSignature <group> <action>\nPossible values for <group>: \n  - " . implode("\n  - ", $possibleParams) . "\n"
-            . "Possible values for <action>:\n";
-        foreach(self::POSSIBLE_ACTIONS as $k => $v){
-            $msg .= "  - $k:\t$v\n";
+            . "php run-g5.php $cmdSignature check <group> <what>\n"
+            . "  Displays matching / not matching records between g55 and LERRCP\n"
+            . "  <what> can be (case unsensitive):\n"
+            . "  - M (display matching rows) \n"
+            . "  - N (display not matching rows) \n"
+            . "  - M+N or N+M (display both matching and not matching rows) \n"
+            . "or:\n"
+            . "php run-g5.php $cmdSignature update <group>\n"
+            . "  Fills column GQID of tmp file corresponding to <group>\n"
+            . "Possible values for <group>: \n  - " . implode("\n  - ", $possibleParams) . "\n";
+        if(count($params) < 3){
+            return "INVALID CALL - this command needs at least one other parameter.\n" . $msg;
         }
         //
-        if(count($params) == 3 && $params[2] == 'cache'){
+        // ===== cache =====
+        //
+        if($params[2] == 'cache'){
+            if(count($params) != 3){
+                return "USELESS PARAMETER";
+            }
             return self::cache();
         }
         //
-        if(count($params) != 4){
-            return "INVALID CALL: - this command needs exactly 2 parameters.\n$msg";
-        }
-        $groupKey = $params[2];
-        if(!in_array($groupKey, $possibleParams)){
-            return "INVALID PARAMETER: $groupKey\n$msg";
-        }
-        $action = $params[3];
-        if(!in_array($action, array_keys(self::POSSIBLE_ACTIONS))){
-            return "INVALID PARAMETER: $action\nPossible actions :\n$msg";
+        // ===== check =====
+        //
+        if($params[2] == 'check'){
+            if(count($params) != 5){
+                return "INVALID CALL: - this command needs exactly 2 parameters, <group> and <what>.\n$msg";
+            }
+            $groupKey = $params[3];
+            if(!in_array($groupKey, $possibleParams)){
+                return "INVALID PARAMETER <group>: $groupKey\n$msg";
+            }
+            $what = $params[4];
+            $whatLow = strtolower($what);
+            $possibles = ['m', 'n', 'm+n', 'n+m'];
+            if(!in_array($whatLow, $possibles)){
+                return "INVALID PARAMETER <what>: $what\n$msg";
+            }
+            return self::check($groupKey, $what);
         }
         //
-        $file = self::cacheFile();
-        if(!is_file($file)){
-            return "Missing file $file\nExecute first command: php run-g5.php $cmdSignature cache\n";
-        }
+        // ===== update =====
         //
-        switch($action){
-        	case 'check': return self::check($groupKey); break;
-        	case 'update': return "--- $cmdSignature $groupKey $action ---\n" . self::update($groupKey); break;
+        if($params[2] == 'update'){
+            if(count($params) != 4){
+                return "INVALID CALL: - this command needs exactly 1 parameter, <group>.\n$msg";
+            }
+            $groupKey = $params[3];
+            if(!in_array($groupKey, $possibleParams)){
+                return "INVALID PARAMETER <group>: $groupKey\n$msg";
+            }
+            return self::update($groupKey);
+        }
+        else{
+            return "INVALID ACTION {$params[2]}\n$msg";
         }
     }
     
@@ -99,7 +126,6 @@ class gqid implements Command {
         return "Generated $file\n";
     }
     
-    // ******************************************************
     /** 
         Computes the name of the file where db gauq-cache associations are stored.
     **/
@@ -107,7 +133,6 @@ class gqid implements Command {
         return implode(DS, [Config::$data['dirs']['tmp'], 'gauq', 'gauq-cache.csv']);
     }
     
-    // ******************************************************
     /** 
         Loads file gauq-cache.csv in an associative array date => person data
     **/
@@ -122,6 +147,17 @@ class gqid implements Command {
             $res[$day][] = $row;
         }
         return $res;
+    }
+    
+    /** Finds a person in gauq-cache.csv' **/
+    private static function findPersonFromCacheByGqid($GQID) {
+        $tmp = csvAssociative::compute(self::cacheFile(), self::CACHE_SEP);
+        foreach($tmp as $row){
+            if($row['GQID'] == $GQID){
+                return $row;
+            }
+        }
+        throw new \Exception("Unable to findPersonFromCacheByGqid($GQID)");
     }
     
     // ******************************************************
@@ -152,20 +188,35 @@ class gqid implements Command {
         and fix the problematic cases with G55::MATCH_LERRCP
         Auxiliary function of check() and update()
     **/
-    private static function check($groupKey) {
+    private static function check($groupKey, $paramWhat) {
+        $paramWhat = strtolower($paramWhat); // $paramWhat is supposed to be valid
+        if($paramWhat == 'm'){
+            $what = ['M'];
+        }
+        else if($paramWhat == 'n'){
+            $what = ['N'];
+        }
+        else if($paramWhat == 'n+m' || $paramWhat == 'm+n'){
+            $what = ['N', 'M'];
+        }
+        //
         $report = '';
         [$match, $nomatch] = self::match($groupKey);
-        $report .= "=== MATCH ===\n";
-        foreach($match as $element){
-            $report .= "{$element['g55']['SLUG']} = g55 {$element['g55']['NUM']}\n";
-            $report .= "{$element['lerrcp']['SLUG']} = lerrcp {$element['lerrcp']['GQID']}\n\n";
+        //
+        if(in_array('M', $what)){
+            $report .= "=== MATCH ===\n";
+            foreach($match as $element){
+                $report .= "{$element['g55']['SLUG']} = g55 {$element['g55']['NUM']}\n";
+                $report .= "{$element['lerrcp']['SLUG']} = lerrcp {$element['lerrcp']['GQID']}\n\n";
+            }
         }
-        $report .= "=== NO MATCH ===\n";
-        foreach($nomatch as $element){
-            $report .= "{$element['NUM']} {$element['SLUG']}\n";
+        if(in_array('N', $what)){
+            $report .= "=== NO MATCH ===\n";
+            foreach($nomatch as $element){
+                $report .= "{$element['NUM']} {$element['SLUG']}\n";
+            }
         }
-        $report .= "=== " . count($match) . " MATCH ===\n"
-           . "=== " . count($nomatch) . " NO MATCH ===\n";
+        $report .= "=== " . count($match) . " MATCH ===\n=== " . count($nomatch) . " NO MATCH ===\n";
         return $report;
     }
     
@@ -187,7 +238,21 @@ class gqid implements Command {
         $nomatch = [];
         foreach($g55Persons as $g55Day => $g55PersonsForThisDay){
             foreach($g55PersonsForThisDay as $g55Person){
-//echo "\n<pre>"; print_r($g55Person); echo "</pre>\n"; exit;
+                // person handled in a previous run and stored in G55::MATCH_LERRCP
+                $NUM = $g55Person['NUM'];
+                if(isset(G55::MATCH_LERRCP[$groupKey][$NUM])){
+                    if(G55::MATCH_LERRCP[$groupKey][$NUM] == 'none'){
+                        $nomatch[] = $g55Person;
+                    }
+                    else{
+                        $GQID = G55::MATCH_LERRCP[$groupKey][$NUM];
+                        $match[] = [
+                            'g55' => $g55Person,
+                            'lerrcp' => self::findPersonFromCacheByGqid($GQID),
+                        ];
+                    }
+                    continue;
+                }
                 if(isset($dbPersons[$g55Day])){
                     if(count($dbPersons[$g55Day]) == 1){
                         // direct match, only one LERRCP with the g55 date

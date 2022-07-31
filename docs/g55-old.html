@@ -14,7 +14,6 @@
     <!-- 
     tigsite:
         history: 2019-10-23 11:53:12+02:00, Thierry Graff : Creation
-        history: 2022-07-31 08:19:53+02:00, Thierry Graff : Start documentation of new version
     -->
 </head>
 
@@ -39,8 +38,8 @@
 <!-- ********************************************************************************* -->
 <div class="margin-top2">
 <div class="warning">
-    Gauquelin 1955 restoration is a work in progress.
-    <br>Documentation of a previous attempt (now obsolete) <a href="g55-old.html">is documented here</a>.
+    Following documentation corresponds to an earlier stage of development, before merging all imported files in a database.
+    <br>Gauquelin 1955 groups are not yet included in g5 database.
 </div>
 </div>
 <!-- ********************************************************************************* -->
@@ -49,8 +48,15 @@
 <div class="intro">
     This page deals with data listed in Michel Gauquelin's book "Les hommes et les astres", published in 1955.
     <br>Gauquelin announces <span class="bold big3">5 756</span> persons (p 244 of the book).
-    <br>Most data of the 1955 book (but not all) were included in <a href="gauquelin-A.html">the booklets of serie A</a>, published in 1970-71 by the LERRCP.
-    <br>Integration of these groups was done from scan and OCR of the original paper book.
+    
+    <br><br>For each groups, the purpose is to generate two lists :
+    <ul>
+        <li>One original list, conform with the list published by Gauquelin.</li>
+        <li>One corrected list.</li>
+    </ul>
+    Related files are located in <code><a href="https://github.com/tig12/gauquelin5/tree/main/data/db/init/lerrcp-marked">data/db/init/lerrcp-marked</a></code> and <code><a href="https://github.com/tig12/gauquelin5/tree/main/data/db/init/g55-edited">data/db/init/g55-edited</a></code>.
+    
+    <br><br><a class="bold" href="https://g5.tig12.net/output/history/1955-gauquelin/">Downloadable results</a>.
 </div>
 </header>
 
@@ -59,43 +65,54 @@
 
 <!-- ********************************************************************************* -->
 <h2>Original groups</h2>
-Here are the groups, listed in the order they appear in the book.
+Here are the groups, listed in the order they appear in the paper edition of the book.
 
 <ul>
-    <li><b>G5 code</b> code used in Gauquelin5 program.</li>
+    <li><b>Code</b> used in Gauquelin5 program ; based on the original title.</li>
     <li>
-        <b>N<sub>G5</sub></b> : Number of records found by g5 program ; may be different from the number appearing in the title.
+        <b>N<sub>55</sub></b> : Number of records found in 1955 paper book ; may be different from the number appearing in the title.
+        <br><b>N<sub>55</sub> = N<sub>g5</sub></b> : Number couted by g5 program.
+    </li>
+    <li>
+        <b>N Cura5</b> : Number of records found in Cura files (serie A).
+        <br>The only reliable value is 564 for 570SPO, other are bound to be corrected.
     </li>
     <li><b>Title</b> : Original name by Gauquelin.</li>
 </ul>
 
 <table class="wikitable margin">
     <tr>
-        <th>LERRCP<br>booklet</th><th>G5 code</th><th>N<sub>G5</sub></th><th>Title</th><th>Comments</th>
+        <th>Origin</th><th>Code</th><th>N<sub>55</sub></th><th>N<sub>Cura5</sub></th><th>Title</th><th>g5 integration</th><th>Comments</th>
     </tr>
     <tr>
         <td>A2</td>
-        <td>01-576-physicians</td>
+        <td>576MED</td>
         <td></td>
+        <td>570</td>
         <td>
             576 membres associés
             <br>et correspondants
             <br>de l'académie de médecine
         </td>
+        <td>marked</td>
         <td>Other restoration done by <a href="https://newalchemypress.com/gauquelin/research13.php">newalchemypress.com</a></td>
     </tr>
     <tr>
         <td>A2</td>                                                         
-        <td>02-508-physicians</td>
+        <td>508MED</td>
         <td></td>
+        <td>505</td>
         <td>508 autres médecins notables</td>
+        <td>marked</td>
         <td></td>
     </tr>
     <tr>
         <td>A1</td>
-        <td>03-570-sportsmen</td>
+        <td>570SPO</td>
         <td>568</td>
+        <td>564</td>
         <td>570 sportifs</td>
+        <td>OK <br>tests needed</td>
         <td>
             Contains 568 records
             <br>4 records not present in A1
@@ -106,69 +123,93 @@ Here are the groups, listed in the order they appear in the book.
     </tr>
     <tr>
         <td>A3</td>
-        <td>04-676-military</td>
+        <td>676MIL</td>
+        <td></td>
         <td></td>
         <td>676 militaires</td>
+        <td></td>
         <td></td>
     </tr>
     <tr>
         <td>A4</td>
-        <td>05-906-painters</td>
+        <td>906PEI</td>
+        <td></td>
         <td></td>
         <td>906 peintres</td>
         <td></td>
+        <td></td>
     </tr>
     <tr>
-        <td>None</td>
-        <td>06-361-minor-painters</td>
+        <td></td>
+        <td>361PEI</td>
         <td>362</td>
+        <td>0</td>
         <td>361 peintres mineurs</td>
+        <td></td>
         <td>See page <a href="g55-361-painters.html">361 minor painters</a></td>
     </tr>
     <tr>
         <td>A5</td>
-        <td>07-500-actors</td>
+        <td>500ACT</td>
+        <td></td>
         <td></td>
         <td>500 acteurs</td>
+        <td></td>
         <td></td>
     </tr>
     <tr>
         <td>A5</td>
-        <td>08-494-deputies</td>
+        <td>494DEP</td>
+        <td></td>
         <td></td>
         <td>494 députés</td>
+        <td></td>
         <td></td>
     </tr>
     <tr>
         <td>A2</td>
-        <td>09-349-scientists</td>
+        <td>349SCI</td>
         <td></td>
+        <td>277</td>
         <td>
             349 membres, associés
             <br>et correspondants
             <br>de l'académie des sciences
         </td>
+        <td>marked</td>
         <td></td>
     </tr>
     <tr>
-        <td>None</td>
-        <td>10-884-priests</td>
+        <td></td>
+        <td>884PRE</td>
         <td>882</td>
+        <td>0</td>
         <td>884 prêtres</td>
+        <td></td>
         <td>See page <a href="g55-884-priests.html">884 priests</a>.</td>
     </tr>
 </table>
 
-<!-- 
 <div class="bold big1 margin">576 + 508 + 570 + 676 + 906 + 361 + 500 + 494 + 349 + 884 = 5824</div>
--->
-
-<!-- ********************************************************************************* -->
-<h2>Restoration steps</h2>
 
 </article>
 </main>
 </div><!-- end class="content" -->
+
+<!-- 
+php run-g5.php g55 570SPO marked2generated
+Generating data/5-tmp/g55-generated/570SPO.csv
+  564 persons stored
+
+php run-g5.php g55 508MED marked2generated
+Generating data/5-tmp/g55-generated/508MED.csv
+  505 persons stored
+
+php run-g5.php g55 349SCI marked2generated
+Generating data/5-tmp/g55-generated/349SCI.csv
+  277 persons stored
+-->
+
 
 <!-- ************************************* -->
 <aside class="left">

@@ -144,16 +144,56 @@ class G55 {
     /** 
         Matching between G55 records and LERRCP.
         Format, for each G55 file: NUM in G55 file => GQID (LERRCP id).
+        'none' means that there is no corresponding person in LERRCP
         Array built from results of command gqid check.
     **/
     const MATCH_LERRCP = [
+        '01-576-physicians' => [
+            '6'     => 'A2-9',      // ambart-leon-1876-12-16
+            '22'    => 'A2-27',     // baillet-louis-rene-1834-09-07
+            '28'    => 'A2-35',     // barbary-jean-baptiste-1867-06-16
+            '47'    => 'A2-58',     // berard-leon-eugene-1870-02-17
+            '50'    => 'A2-61',     // bergonie-jean-alban-1857-10-07
+            '88'    => 'none',      // brown-sequard-edouard-1817-04-17
+            '90'    => 'A2-116',    // bucquoy-marie-jules-1829-08-14
+            '91'    => 'A2-117',    // buignet-henri-1815-03-02
+            '112'   => 'A2-144',    // charcellay-laplace-jules-1809-10-31
+            '113'   => 'A2-145',    // charcot-jean-baptiste-1867-07-15
+            '137'   => 'A2-175',    // coste-jean-1807-05-10
+            '143'   => 'A2-186',    // cuneo-bernard-1873-10-28
+            '182'   => 'A2-237',    // duclos-michel-1822-12-16
+            '183'   => 'A2-238',    // duguet-jean-baptiste-1837-05-12
+            '188'   => 'A2-245',    // dupuy-pierre-1844-04-12
+            '199'   => 'A2-262',    // favre-pierre-1813-03-20
+            '207'   => 'A2-271',    // florence-albert-1851-04-23
+            '213'   => 'A2-278',    // fontan-jules-1849-10-22
+            '224'   => 'A2-292',    // gaudier-henri-1866-08-06
+            '229'   => 'A2-297',    // gerdy-joseph-vulf-1809-03-20
+            '232'   => 'A2-300',    // gilis-jean-louis-1857-01-25
+            '239'   => 'A2-311',    // gosset-antonin-1872-01-21
+            '250'   => 'A2-322',    // guerin-alphonse-1816-04-09
+            '267'   => 'A2-345',    // hervieux-jacques-1818-09-04
+            '270'   => 'A2-349',    // huchard-henri-1844-04-05
+            '272'   => 'A2-351',    // huguier-pierre-1804-09-04
+            '277'   => 'A2-357',    // jacquemin-eugene-1828-01-23
+            '278'   => 'A2-356',    // jacquemier-jean-marie-1806-01-16
+            '285'   => 'A2-366',    // jolyet-felix-1841-01-10
+            '294'   => 'A2-377',    // laboulbene-alexandre-1825-08-24
+            '306'   => 'A2-395',    // lannois-maurice-1856-11-08
+            '337'   => 'A2-438',    // levieux-jean-1818-11-23
+            '357'   => 'A2-469',    // manquat-alexandre-1858-12-02
+            '372'   => 'A2-486',    // mathis-constant-jean-1871-09-19
+            '379'   => 'none',      // melier-francois
+            '382'   => 'none',      // merget-antoine
+            '414'   => 'A2-540',    // notta-alphonse-1824-02-27
+        ],
         '06-361-minor-painters' => [
-            '181' => 'A6-355', // gautier-theophile
-            '258' => 'E3-936', // le-molt-philippe
-            '340' => 'A6-689', // raimbaud-arthur
+            '181'   => 'A6-355',    // gautier-theophile
+            '258'   => 'E3-936',    // le-molt-philippe
+            '340'   => 'A6-689',    // raimbaud-arthur
         ],
         '10-884-priests' => [
-            '493' => 'A2-2628', // colin-henri-1880-11-01
+            '493'   => 'A2-2628',   // colin-henri-1880-11-01
         ],
     ];
 
