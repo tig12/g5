@@ -13,7 +13,7 @@ BILLOUX Francois, 21-5-1908, 19 h., Saint-Romain-la-Motte (Loire).
 BONTE Florimond, 22-1-1890, 15 h., Tourcoing (Nord).
 BOURGES-MAUNOURY Maurice, 19-8-1914, 4 h,, Luisant (Eure-et-L.).
 BOUXOM Fernand, 9-10-1909, 13 h., Wambrechies (Nord).
-CACHIN Marcel, 20-9-1869, 4 h., Paimpol (Cétes-du-Nord).
+CACHIN Marcel, 20-9-1869, 4 h., Paimpol (Côtes-du-Nord).
 CAILLAVET Henri, 13-2-1914, 6 h., Agen (Lot-et-Garonne).
 CASANOVA Laurent, 9-10-1906, 23 h., Souk-Ahras (Algérie).
 CHEVIGNE (de) Pierre, 16-6-1909, 13 h. 30, Toulon (Var).
@@ -176,8 +176,8 @@ BINOT Jean, 2-8-1911, 5 h., Fleury-sur-Andelle (Eure).
 BLACHETTE Georges, 27-9-1900, 23 h., Alger (Algérie).
 BOSCARY-MONSSERVIN: Roland, 12-5-1904, 19 h., Rodez (Aveyron).
 BOUHEY Jean, 23-10-1898, 2 h., Villers-la-Faye (Côte-d’Or).
-BOURDELLES Pierre, 23-4-1908, 2 h., Louannec (Cétes-du-Nord).
-BOURET Henri, 14-5-1916, 15 h., Lanvollon (Cétes-du-Nord).
+BOURDELLES Pierre, 23-4-1908, 2 h., Louannec (Côtes-du-Nord).
+BOURET Henri, 14-5-1916, 15 h., Lanvollon (Côtes-du-Nord).
 BOURGEOIS Georges; 20-4-1913, 11 h. 45, Mulhouse (Haut-Rhin).
 BOUTAVANT Rémy, 26-2-1911, 11 h., Saint-Vallier (Sadne-et-Loire).
 BOUVIER-O’COTTEREAU Jean-Mar., 7-12-1896, 20 h. 30, Laval (May.).
@@ -187,7 +187,7 @@ BRIFFOD Henri, 20-12-1913, 10 h., Bonneville (Haute-Savoie).
 BRIOT Louis, 15-2-1905, 8 h. 30, Thury (Yonne).
 BRUSSET Max, 25-11-1909, 0 h. 40, Neufchateau (Vosges).
 BRUYNEEL Robert, 25-6-1905, 0 h. 30, Lille (Nord).
-BURLOT André, 6-8-1897, 9 h., Saint-Brieuc (Cétes-du-Nord).
+BURLOT André, 6-8-1897, 9 h., Saint-Brieuc (Côtes-du-Nord).
 CAGNE Jean, 24-8-1907,:17 h., Beaune (Côte-d’Or).
 CAILLET Francis, 5-5-1910, 21 h., Franchesse (Allier).
 CALLIOT Olivier, 21-2-1894, 7 h., Soustons (Landes).
@@ -346,7 +346,7 @@ LA NOE (Bidard de) R., 23-12-1887, 18 h., Rennes (Ille-et-Vilaine).
 LAPLACE Adrien, 18-9-1909, 2 h., Montauban (Tarn-et-Garonue).
 LE BAIL Jean, 26-2-1904, 8 h. 30, Redon (Ille-et-Vilaine).
 LE COUTALLER. Jean, 11-7-1905, 17 h., Neuillac (Morbihan).
-LE COZANNET Yves, 28-1-1898, 13 h., Penvénan (Cétes-du-Nord).
+LE COZANNET Yves, 28-1-1898, 13 h., Penvénan (Côtes-du-Nord).
 LEENHARDT Francis, 24-4-1908, 11 h., Marseille (Bouches-du-Rhdne).
 LEFEVRE Raymond, 2-4-1894, 17 h., La Sabotterie (Ardennes).
 LEFRANC Jean, 21-3-1898, 20 h., Saint-Pol-sur-Terrenoise (Pas-de-Cal.).
@@ -372,7 +372,7 @@ MANCEAU Robert, 12-2-1913, 2 h., Saint-Jamme-sur-Sarthe (Sarthe).
 MARCELLIN Raymond, 19-8-1914, 14 h., Sézanne (Marne).
 MANCEY André, 17-6-1913, 17 h., Camblain-Chatelain (Pas-de-Calais).
 MARTEL Henri, 3-8-1898, 3 h., Bruay-sur-Escaut (Nord).
-MARZIN Madeleine, 21-7-1908, 3 h., Loudéac (Cétes-du-Nord).
+MARZIN Madeleine, 21-7-1908, 3 h., Loudéac (Côtes-du-Nord).
 MASSON Jean, 8-9-1907, 14 h., Bayon (Meurthe-et-Moselle).
 MASSOT Marcel, *7-4-1899, 4 h., La Motte-du-Caire (Basses-Alpes).
 MATON Albert, 3-1-1916, 7 h. 30, Fréneuse (Seine-et-Oise).
@@ -471,7 +471,7 @@ TAILLADE Clément, 11-4-1909, 8 h., Blaye-les-Mines (Tarn).
 THAMIER Henri, 10-2-1916, 4 h., Montpellier (Hérault).
 THIBAULT Edouard, 27-9-1912, 19 h. 35, Sable (Sarthe).
 THIRIET Jules, 30-3-1906, 0 h. 30, Obreck (Moselle).
-THOMAS Alexandre, 2-1-1913, 10 h., Louargat (Cétes-du-Nord).
+THOMAS Alexandre, 2-1-1913, 10 h., Louargat (Côtes-du-Nord).
 THOMAS Eugéne, 23-7-1903, 20 h., Vieux-Condé (Nord).
 TITEUX Camille, 5-3-1910, 8 h., Gespunsart (Ardennes).
 TOUBLANC Etienne, 9-12-1897, 10 h., Le Cellier (Loire-Inférieure).
