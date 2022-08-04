@@ -24,12 +24,12 @@ BABONNEIX Léon, 29-6-1876, 18 h., Aubusson (Creuse).
 BADOLLE Albert, 13-11-1886, 19 h., Thizy (Rhône).
 BALEDENT Maurice, 3-7-1900, 3 h., Amiens (Somme).
 BALLAND Henri, 5-2-1900, 8 h., Saint-Porchaire (Charente-Maritime).
-BALL. Victor, 8-6-1873, 1 h., Bayonne (Basses-Pyrénées).
+BALL Victor, 8-6-1873, 1 h., Bayonne (Basses-Pyrénées).
 BALOUX Paul, 5-9-1883, 9 h., Antibes (Alpes-Maritimes).
 BARBIER Jean, 13-3-1894, 5 h., Vienne. (Isére).
 BARBIER Gaston, 8-3-1884, 9 h., Valence (Drôme).
 BARBIER Henri, 5-12-1859, 2 h. 30, Bruyère (Vosges).
-BARRAUD. Jean, 10-12-1895, 7 h. 30, Saint-Dizier (Haute-Marne).
+BARRAUD Jean, 10-12-1895, 7 h. 30, Saint-Dizier (Haute-Marne).
 BARRAULT Louis, 18-5-1905, 0 h., Sallaumines (Pas-de-Calais).
 BARRET Francisque, 23-6-1892, 13 h., Sury-le-Comtal (Loire).
 BATIER Gabriel, 16-8-1882, 2 h. 30, Belfort (Haut-Rhin).
@@ -46,7 +46,7 @@ BELIN Marcel, 27-8-1885, 1 h. 30, Pithiviers (Loiret).
 BELOT Joseph, 15-4-1876, 16 h., Yzeure (Allier).
 BENECH Jean, 28-5-1888, 14 h., Tarbes (Hautes-Pyrénées).
 BENOIT Jacques, 26-2-1896, 1 h., Nancy (Meurthe-et-Moselle).
-BERAUD. Armand, 21-8-1887, 19 h., Fontenay-le- Comte (Vendée).
+BERAUD Armand, 21-8-1887, 19 h., Fontenay-le- Comte (Vendée).
 BERGER Jean, 18-11-1883, 18 h. 30, Mulhouse (Haut-Rhin).
 BERGERET André, 10-11-1884, 18 h. 30, Marcilly-Ogny (Côte-d’Or).
 BERRANGER Paul-Aug., 14-10-1884, 5 h., Toulouse (Haute-Garonne).
@@ -104,7 +104,7 @@ CANTONNET Paul, 15-9-1879, 2 h., Fontainebleau (Seine-et-Marne).
 CAPMAS Albert, 21-5-1873, 3 h., Touffailles (Tarn-et-Garonne).
 CARCASSONNE Fernand, 5-6-1901, 11 h., Aix-en-Provence (B.-du-Rh.).
 CARLE Marius, 27-3-1873, 9 h., Montélimar (Drôme).
-CARLIER> Pau! René, 24-9-1894, 7 h. 30, Générac (Gard).
+CARLIER Paul René, 24-9-1894, 7 h. 30, Générac (Gard).
 CARLERRE Ernest, 28-6-1887, 12 h., Brest (Finistère).
 CARLOTTO Charles, 5-4-1896, 7 h., Nice (Alpes-Maritimes).
 CARPENTIER William, 1-1-1887, 7 h., Le Havre (Seine-Inférieure).
@@ -188,7 +188,7 @@ DOLLINGER Ferdinand, 5-10-1862, 4 h., Wasselonne (Bas-Rhin).
 DORBES Maurice, 22-9-1899, 16 h., Parlebosq (Landes).
 DOURNAY Jean, 27-10-1882, 0 h. 30, Brienne-le-Chateau (Aube).
 DRESCH Pierre, 2-7-1890, 23 h., Pont-Faverger (Marne).
-DUCAMP. Louis, 28-12-1869, 8 h., Eones (Nord).
+DUCAMP Louis, 28-12-1869, 8 h., Eones (Nord).
 DUCO Alexandre, 9-3-1860, 2 h., Lescurry (Hautes-Pyrénées).
 DULAC Jean, 8-6-1899, 9 h., Toulouse (Haute-Garonne).
 DUMAS Antoine, 24-2-1882, 1 h., Saint-Etienne (Loire).
@@ -205,7 +205,7 @@ EMPERAIRE Roger, 9-3-1904, 1 h., Barcelonnette (Basses-Alpes).
 ESCAT Etienne, 8-6-1865, 10 h., Toulouse (Haute-Garonne).
 ESTRADERE Jean Etien., 49-2-1900, 9 h., Talence (Gironde).
 ETIENNE-MARTIN, 16-6-1871, 41 h., Nantua (Ain).
-FABRE« Jean-Roger, 26-7-1894, 23 h. 30, Sainte-Bazeille (Lot-et-Gar.).
+FABRE Jean-Roger, 26-7-1894, 23 h. 30, Sainte-Bazeille (Lot-et-Gar.).
 FAILLIE Robert, 20-3-1895, 3 h. 30, Saint-Omer (Pas-de-Calais).
 FAYOLLE Henri Jos., 6-3-1880, 9 h., Chateaudun (Eure-et-Loir).
 FERRY Pierre, 5-2-1871, 20 h., Le Puy (Haute-Loire).
@@ -222,7 +222,7 @@ FRANCAIS Henri, 2-9-1873, 6 h., Vienne (Isére).
 FREYSZ Maurice, 8-1-1869, 4 h., Strasbourg (Bas-Rhin).
 FUMEAU Pierre, 6-5-1895, 18 h., Nieulle-Virouil (Charente-Maritime).
 GALIMARD Joseph, 24-5-1878, 12 h., Dijon (Côte-d’Or).
-GALLAIS. Pierre, 25-6-1900, 15. h., Rouillac (Charente).
+GALLAIS Pierre, 25-6-1900, 15. h., Rouillac (Charente).
 GAND Charles, 4-11-1861, 11 h., Seboncourt (Aisne).
 GARCIN Joseph, 30-7-1875, 1 h., Puget-sur-Argent (Var).
 GAUCHERAND Jules, 3-8-1888, 45 h., Valence (Drôme).
@@ -433,7 +433,7 @@ RICHE Vincent, 9-9-1876, 2 h., Cessenon (Hérault).
 RICHIER Jacques, 13-5-1901, 6 h., Villiers-sur-Marne (Seine-et-Oise).
 ROCCASERRA (de), 7-9-1872, 6 h., Sarténe (Corse).
 ROHMER Paul, 1-11-1876, 10 h., Huttenheim (Bas-Rhin).
-ROLLAND. Joseph, 10-7-1871, 22 h., Lambruisse (Basses-Alpes).
+ROLLAND Joseph, 10-7-1871, 22 h., Lambruisse (Basses-Alpes).
 ROME Alfred, 23-4-1869, 10 h., Voreppe (Isére).
 ROSSET Marc, 15-7-1888, 16 h., Vienne (Isére).
 ROUFFIAC ‘Pierre, 27-4-1888, 17 h., Moret-sur-Loing (Seine-et-Marne).
@@ -445,7 +445,7 @@ ROUSSY Alfred, 14-1-1866, 1 h., Saint-Affrique (Aveyron).
 RUAUD Ludovic, 16-3-1884, 13 h., Cussac (Hte-Vienne).
 RUIN Georges, 4-4-1880, 8 h., Varennes-en-Amienois (Somme).
 SACKENREITER G., 16-6-1886, 20 h. 30, Ottwiller (Bas-Rhin).
-SAINTIN. Henri, 30-1-1887, 17 h., Besancon (Doubs).
+SAINTIN Henri, 30-1-1887, 17 h., Besancon (Doubs).
 SAMBUC Edouard, 28-10-1876, 6 h., Chabeuil (Drôme).
 SAUVE Louis de Gonzague, 26-4-1881, 21 h., Mayenne (Mayenne).
 SAVOIRE Camille, 6-7-1869, 10 h., Marchenoir (Loir-et-Cher).

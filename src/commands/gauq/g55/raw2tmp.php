@@ -130,7 +130,7 @@ class raw2tmp implements Command {
     }
     
     
-    const PATTERN_NAME = '/(\*? ?[\p{Lu}\-]+) (.*)/u';
+    const PATTERN_NAME = '/(\*? ?[\p{Lu} \-]+) (.*)/u';
     /**
         @return     Array with 3 elements: family name, given name, nobility
     **/
