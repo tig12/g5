@@ -23,6 +23,10 @@ Fixed with https://catalogue.bnf.fr/ark:/12148/cb130265344.public
 508 AUTRES MEDECINS NOTABLES
 p 255 - 263
 
+Warning, one dubious record
+MITZER, 1-9-1905, 12 h. 15, Algrange (Moselle).
+Couldn't find it on internet
+
 
 03-570-sportsmen.txt
 ---------------------------------------------------------------------------------------------------

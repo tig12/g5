@@ -1,9 +1,9 @@
 ABEL Emile, 5-6-1885, 1 h., Bourbonne-les-Bains (Haute-Marne).
 ABRAM Paul, 14-8-1883, 16 h., Aix-en-Provence (Bouches-du-Rhône).
-ACQUAVIVA Eugène, 93-41-1897, 19 h., Marseille (Bouches-du-Rhône).
+ACQUAVIVA Eugène, 23-1-1897, 19 h., Marseille (Bouches-du-Rhône).
 AGASSE-LAFONT Jean, 2-7-1877, 8 h., Albi (Tarn).
 AIMARD Jean, 3-1-1886, 3 h. 30, Setif (Algérie).
-ALAJOUANINE Th., 42-6-1890, 10 h. 30, Verneix (Allier).
+ALAJOUANINE Th., 12-6-1890, 10 h. 30, Verneix (Allier).
 ALARY Emile, 24-9-1885, 2 h., Saint-Simon (Cantal).
 ALLARD Marcel, 30-11-1894, 6 h., Sablé (Sarthe).
 ALQUIER Augustin, 6-10-1862, 8 h., Cazouls-les-Béziers (Hérault).
@@ -144,7 +144,7 @@ CORDIER Pierre, 13-12-1891, 2 h. 30, Valenciennes (Nord).
 CORNET Albert, 30-6-1890, 11 h., Le Mans (Sarthe).
 CORNET Pierre, 26-2-1875, 1 h., Amiens (Somme).
 CORRET Pierre, 19-3-1896, 4 h., Nancy (Meurthe-et-Moselle).
-COSSE Francis, 10-41-1871, 1 h., Bourges (Cher).
+COSSE Francis, 10-11-1871, 1 h., Bourges (Cher).
 COSTE Jules, 12-7-1877, 5 h., Albi (Tarn).
 COSTE (de) Jean, 8-11-1886, 15 h., Azas (Haute-Garonne).
 COTTENOT Paul, 19-10-1882, 3 h., Doulaincourt (Haute-Marne).
@@ -302,7 +302,7 @@ LEBAILLY Charles, 24-9-1880, 6 h., Flers-de-l’Orne (Orne).
 LEBLEU Albert, 14-12-1901, 12 h., Saint-Michel-en-l’Herm (Vendée).
 LE BRANCHU René, 20-8-1891, 9 h., Médréac (Ille-et-Vilaine).
 LE CORRE Joseph, 19-1-1910, 14 h., Baden (Morbihan).
-LEFEVRE Raymond, 45-6-1897, 3. h., Crouy (Aisne).
+LEFEVRE Raymond, 15-6-1897, 3. h., Crouy (Aisne).
 LEFORT Edmond, 18-8-1900, 23 h., Loches (Indre-et-Loire).
 LEGAC Paul, 23-4-1900, 17 h., Bégard (Côte-du-Nord).
 LE GORGEU Victor, 5-5-1881, 10 h., Quimper (Finistère).
@@ -390,7 +390,7 @@ PASTEUR Felix, 23-9-1876, 3 h., Vuillafaus (Doubs).
 PATURET Georges, 26-12-1889, 19 h., Saint-Germain-de-Salles (Allier).
 PECHIN Charles, 21-6-1871, 18 h., Dompierre-les-Bois (Meuse).
 PELLE Abel, 19-1-1898, 22 h., Meillac (Ille-et-Vilaine).
-PERDOUWX Joseph, 12-11-1882, 8 h. 30, Poitiers (Vienne).
+PERDOUX Joseph, 12-11-1882, 8 h. 30, Poitiers (Vienne).
 PERRET Albert, 10-7-1879, 22 h., Philippeville (Algérie).
 PERRIN Maurice, 21-5-1875, 4 h., Rambervillers (Vosges).
 PERRIN Paul, 19-9-1895, 18 h., Malo-les-Bains (Nord).
@@ -491,7 +491,7 @@ VIALLE Fernand, 5-1-1873, 20 h., Brive (Corrèze).
 VIALLE Pierre, 16-12-1903, 21 h., Tours (Indre-et-Loire).
 VIARD Marcel, 9-7-1884, 10 h., Saulx (Haute-Saône).
 VIAU Louis, 11-1-1887, 5 h., Fréjus (Var).
-VIDALIN Gustave, 6-8-1876, 13 h., Naves, (Corrèze).
+VIDALIN Gustave, 6-8-1876, 13 h., Naves (Corrèze).
 VIDAL-REVEL Jean, 19-1-1886, 19 h., Golfe-Juan (Alpes-Maritimes).
 VIETTE Roger, 30-3-1899, 20 h. 30, Montbazon (Indre-et-Loire).
 VIGNE Paul, 27-9-1891, 9 h., Ales (Gard).

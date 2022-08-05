@@ -195,6 +195,31 @@ class G55 {
             '500'   => 'A2-433',    // roy-des-barres-adrien-1872-12-16
             '512'   => 'A2-666',    // see-marc-1827-02-18
         ],
+        '02-508-physicians' => [
+            '6'     => 'A2-5',      // alajouanine-th-1890-06-42
+            '73'    => 'A2-830',    // boucomont-roger-1902-10-19
+            '74'    => 'A2-831',    // bouffe-de-saint-blaise-gabr-1862-10-02
+            '100'   => 'A2-859',    // cambon-emile-m-l-1888-01-18
+            '107'   => 'A2-867',    // carlier-paul-rene-1894-09-24
+            '110'   => 'A2-869',    // carpentier-william-1887-01-01
+            '155'   => 'A2-915',    // cournet-jean-fr-1863-01-24
+            '158'   => 'A2-918',    // crehange-jean-louis-1899-12-12
+            '194'   => 'A2-964',    // dumas-antoine-1882-02-24
+            '206'   => 'A2-977',    // estradere-jean-etien-1900-02-49
+            '208'   => 'A2-980',    // fabre-jean-roger-1894-07-26
+            '211'   => 'A2-983',    // ferry-pierre-1871-02-05
+            '249'   => 'A2-1027',   // grenier-de-cardenal-henri-1875-02-10
+            '266'   => 'A2-1047',   // henry-jean-robert-1893-05-27
+            '273'   => 'A2-1057',   // jaulin-du-seutre-m-auguste-1882-12-29
+            '295'   => 'A2-1083',   // la-roche-de-brisson-rene-1883-11-21
+            '342'   => 'A2-1132',   // martel-de-janville-thierry-1875-03-07
+            '360'   => 'none',      // mitzer-1905-09-01 -- WARNING DUBIOUS RECORD
+            '379'   => 'A2-1168',   // negre-leopold-1872-06-15
+            '437'   => 'none',      // rome-alfred-1869-04-23
+            '450'   => 'A2-1246',   // sauve-louis-de-gonzague-1881-04-26
+            '459'   => 'A2-1261',   // sikora-pierre-1874-08-24
+            '508'   => 'A2-1320',   // woringer-frederic-1890-08-26
+        ],
         '06-361-minor-painters' => [
             '181'   => 'A6-355',    // gautier-theophile
             '258'   => 'E3-936',    // le-molt-philippe

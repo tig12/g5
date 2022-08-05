@@ -44,17 +44,18 @@ class gqid implements Command {
         
         $possibleParams = G55::getPossibleGroupKeys();
         $msg = "Usage : \n"
-            . "php run-g5.php $cmdSignature cache\n"
+            . "1 - php run-g5.php $cmdSignature cache\n"
             . "  Computes LERRCP lines from db and stores it in file data/tmp/gauq/g5/gauq-cache.csv\n"
+            . "  Needs to be done only once for all files."
             . "or:\n"
-            . "php run-g5.php $cmdSignature check <group> <what>\n"
+            . "2 - php run-g5.php $cmdSignature check <group> <what>\n"
             . "  Displays matching / not matching records between g55 and LERRCP\n"
             . "  <what> can be (case unsensitive):\n"
             . "  - M (display matching rows) \n"
             . "  - N (display not matching rows) \n"
             . "  - M+N or N+M (display both matching and not matching rows) \n"
             . "or:\n"
-            . "php run-g5.php $cmdSignature update <group>\n"
+            . "3 - php run-g5.php $cmdSignature update <group>\n"
             . "  Fills column GQID of tmp file corresponding to <group>\n"
             . "Possible values for <group>: \n  - " . implode("\n  - ", $possibleParams) . "\n";
         if(count($params) < 3){
