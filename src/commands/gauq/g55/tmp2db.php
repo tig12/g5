@@ -21,7 +21,7 @@ class tmp2db implements Command {
         @param  $params Array containing 3 elements :
                         - the string "g55" (useless here, used by GauqCommand).
                         - the string "raw2tmp" (useless here, used by GauqCommand).
-                        - a string identifying what is processed (ex : '570SPO').
+                        - a string identifying what is processed (ex : '01-576-physicians').
                           Corresponds to a key of G55::GROUPS array
     **/
     public static function execute($params=[]): string {
@@ -45,54 +45,25 @@ class tmp2db implements Command {
             return "UNABLE TO PROCESS GROUP: missing temporary file $tmpfile\n";
         }
         
-        // particular case
-        $isPriests = ($groupKey == '513PRE' || $groupKey == '369PRE');
-        
-        // Sources related to this group - insert if does not already exist
+        // Source related to this group - insert if does not already exist
         $g55Source = Source::createFromSlug(G55::SOURCE_SLUG); // DB
         if(is_null($g55Source)){
             $g55Source = new Source(G55::SOURCE_DEFINITION_FILE);
             $g55Source->insert(); // DB
             $report .= "Inserted source " . $g55Source->data['slug'] . "\n";
         }
-        // Precise source of the group
-        // Convention: source slug = group slug
-        $source = Source::createFromSlug(G55::GROUPS[$groupKey]['slug']); // DB
-        if(is_null($source)){
-            // source definition file name is built from its slug
-            $defFile = 'gauq' . DS . 'g55' . DS . G55::GROUPS[$groupKey]['slug'] . '.yml';
-            $source = new Source($defFile);
-            $source->insert(); // DB
-            $report .= "Inserted source " . $source->data['slug'] . "\n";
-        }
         
         // group
-        $groupSlug = G55::GROUPS[$groupKey]['slug'];
+        $groupSlug = G55::groupKey2slug($groupKey);
         $g = Group::createFromSlug($groupSlug);
         if(is_null($g)){
-            // group definition file name is built from its slug
-            $defFile = 'gauq' . DS . 'g55' . DS . $groupSlug . '.yml';
+            $defFile = 'gauq' . DS . 'g55' . DS . $groupKey . '.yml';
             $g = Group::createFromDefinitionFile($defFile);
             $g->data['id'] = $g->insert(); // DB
             $report .= "Inserted group " . $g->data['slug'] . "\n";
         }
         else{
             $g->deleteMembers(); // DB - only deletes asssociations between group and members
-        }
-        
-        // particular case for priests
-        // can be executed once for 369PRE and once for 513PRE
-        // several executions will give incoherent results (deleteMembers() not done)
-        if($isPriests){
-            $groupSlug2 = 'g55-882-priests';
-            $g2 = Group::createFromSlug($groupSlug2);
-            if(is_null($g2)){
-                // group definition file name is built from its slug
-                $defFile = 'gauq' . DS . 'g55' . DS . $groupSlug2 . '.yml';
-                $g2 = Group::createFromDefinitionFile($defFile);
-                $g2->data['id'] = $g2->insert(); // DB
-                $report .= "Inserted group " . $g2->data['slug'] . "\n";
-            }
         }
         
         $nInsert = 0;
@@ -111,7 +82,7 @@ class tmp2db implements Command {
             $G55ID = G55::g55Id($groupKey, $i+1);
             $GQID = $line['GQID']; // eventually computed by command gqid
             if($GQID == ''){;
-                // Person not already in g5 db
+                // Person not already in g5 db - insert
                 $p = new Person();
                 $new = [];
                 $new['trust'] = Gauquelin::TRUST_LEVEL;
@@ -125,29 +96,29 @@ class tmp2db implements Command {
                 $new['birth']['place']['cy'] = 'FR';
                 $new['occus'] = [ $line['OCCU'] ];
                 //
-                $p->addIdInSource($source->data['slug'], (string)$NUM);
+                $p->addIdInSource($g55Source->data['slug'], (string)$NUM);
                 $p->addPartialId(G55::SOURCE_SLUG, $G55ID);
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat some fields to include in $history
-                $new['ids-in-sources'] = [$source->data['slug'] => $NUM];
+                $new['ids-in-sources'] = [G55::SOURCE_SLUG => $NUM];
                 $p->addHistory(
-                    command: $cmdSignature . ' ' . $groupKey,
-                    sourceSlug: $source->data['slug'],
-                    newdata: $new,
-                    rawdata: $lineRaw
+                    command:    $cmdSignature . ' ' . $groupKey,
+                    sourceSlug: $g55Source->data['slug'],
+                    newdata:    $new,
+                    rawdata:    $lineRaw
                 );
                 $nInsert++;
                 $p->data['id'] = $p->insert(); // DB
             }
             else{
-                // Person already in Gauquelin
+                // Person already in Gauquelin - update
                 $p = Person::createFromPartialId(LERRCP::SOURCE_SLUG, $GQID); // DB
                 $p->addOccus([ $line['OCCU'] ]);
-                $p->addIdInSource($source->data['slug'], (string)$NUM);
+                $p->addIdInSource(G55::SOURCE_SLUG, (string)$NUM);
                 $p->addPartialId(G55::SOURCE_SLUG, $G55ID);
                 // add an issue if G55 and LERRCP dates differ
-                // note: as matching is done by date (see cmomand gqid check),
+                // note: as matching is done by date (see command gqid check),
                 // current check concerns birth hours
                 if($p->data['birth']['date'] != ''){
                     if($line['DATE'] != substr($p->data['birth']['date'], 0, 16)){
@@ -158,24 +129,22 @@ class tmp2db implements Command {
                         $p->addIssue($issue);
                     }
                 }
+                $new = [
+                    'ids-in-source' => [G55::SOURCE_SLUG => (string)$NUM],
+                    'partial-ids' => [G55::SOURCE_SLUG => $G55ID],
+                ];
                 $p->addHistory(
-                    command: $cmdSignature,
-                    sourceSlug: $source->data['slug'],
-                    newdata: $new,
-                    rawdata: $lineRaw,
+                    command:    $cmdSignature . ' ' . $groupKey,
+                    sourceSlug: $g55Source->data['slug'],
+                    newdata:    $new,
+                    rawdata:    $lineRaw,
                 );
                 $nUpdate++;
                 $p->update(); // DB
             }
             $g->addMember($p->data['id']);
-            if($isPriests){
-                $g2->addMember($p->data['id']);
-            }
         }
         $g->insertMembers(); // DB
-        if($isPriests){
-            $g2->insertMembers(); // DB
-        }
         $t2 = microtime(true);
         $dt = round($t2 - $t1, 5);
         $report .= "$nInsert persons inserted, $nUpdate updated ($dt s)\n";

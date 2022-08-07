@@ -144,6 +144,19 @@ class all implements Command {
         
         $t1 = microtime(true);
         
+        $g55Groups = [
+            '01-576-physicians',
+            // '02-508-physicians',
+            // '03-570-sportsmen',
+            // '04-676-military',
+            // '05-906-painters',
+            // '06-361-minor-painters',
+            // '07-500-actors',
+            // '08-494-deputies',
+            // '09-349-scientists',
+            // '10-884-priests',
+        ];
+        
         //
         //  1 - Create tmp files from raw data
         //
@@ -193,11 +206,11 @@ class all implements Command {
             echo CFEPPRaw2tmp::execute([]);
             echo CFEPPIds::execute([]);
             
-            echo g55Raw2tmp::execute(['g55', 'raw2tmp', '361PEI']);
-            echo g55Gqid::execute(['g55', 'gqid', '361PEI', 'update']);
-            echo g55Raw2tmp::execute(['g55', 'raw2tmp', '513PRE']);
-            echo g55Gqid::execute(['g55', 'gqid', '513PRE', 'update']);
-            echo g55Raw2tmp::execute(['g55', 'raw2tmp', '369PRE']);
+            echo g55Gqid::execute(['g55', 'gqid', 'cache']);
+            foreach($g55Groups as $groupKey){
+                echo g55Raw2tmp::execute(['g55', 'raw2tmp', $groupKey]);
+                echo g55Gqid::execute(['g55', 'gqid', 'update', $groupKey]);
+            }
         }
         
         //
@@ -258,9 +271,9 @@ class all implements Command {
             
             echo CParaGroup::execute([]);
             
-            echo g55Tmp2db::execute(['g55', 'tmp2db', '361PEI']);
-            echo g55Tmp2db::execute(['g55', 'tmp2db', '513PRE']);
-            echo g55Tmp2db::execute(['g55', 'tmp2db', '369PRE']);
+            foreach($g55Groups as $groupKey){
+                echo g55Tmp2db::execute(['g55', 'tmp2db', $groupKey]);
+            }
             
             echo occus2::execute();
         }

@@ -31,12 +31,10 @@ class gqid implements Command {
             php run-g5.php gauq g55 gqid cache
             php run-g5.php gauq g55 gqid 01-576-physicians check
     
-        @param  $params Array containing 4 elements :
+        @param  $params Array containing :
                         - the string "g55" (useless here, used by GauqCommand).
                         - the string "gqid" (useless here, used by GauqCommand).
-                        - a string identifying what is processed (ex : '01-576-physicians').
-                          Corresponds to a key of G55::GROUPS array
-                        - string 'check' or 'update'
+                        - For other params, see $msg below
     **/
     public static function execute($params=[]): string {
         
@@ -124,7 +122,9 @@ class gqid implements Command {
         }
         $file = self::cacheFile();
         file_put_contents($file, $res);
-        return "Generated $file\n";
+        $report = "--- gauq g55 cache ---\n";
+        $report .= "Generated $file\n";
+        return $report;
     }
     
     /** 
@@ -163,7 +163,7 @@ class gqid implements Command {
     
     // ******************************************************
     /** 
-        Computes associations slug => NUM for a given g55 group.
+        Computes associations day => g55 records, for a given g55 group.
     **/
     private static function loadG55ByDate($groupKey) {
         $res = [];
@@ -174,6 +174,7 @@ class gqid implements Command {
         foreach(G55::loadTmpFile($groupKey) as $row){
             $day = substr($row['DATE'], 0, 10);
             $slug = slugify::compute($row['FNAME'] . ' ' . $row['GNAME'] . ' ' . $day);
+//echo "{$row['NUM']} $slug\n";
             $row['SLUG'] = $slug; // info not present in tmp file
             if(!isset($res[$day])){
                 $res[$day] = [];
@@ -201,7 +202,7 @@ class gqid implements Command {
             $what = ['N', 'M'];
         }
         //
-        $report = '';
+        $report = "--- gauq g55 gqid check $groupKey $paramWhat ---\n";
         [$match, $nomatch] = self::match($groupKey);
         //
         if(in_array('M', $what)){
@@ -239,8 +240,8 @@ class gqid implements Command {
         $nomatch = [];
         foreach($g55Persons as $g55Day => $g55PersonsForThisDay){
             foreach($g55PersonsForThisDay as $g55Person){
-                // person handled in a previous run and stored in G55::MATCH_LERRCP
                 $NUM = $g55Person['NUM'];
+                // person handled in a previous run and stored in G55::MATCH_LERRCP
                 if(isset(G55::MATCH_LERRCP[$groupKey][$NUM])){
                     if(G55::MATCH_LERRCP[$groupKey][$NUM] == 'none'){
                         $nomatch[] = $g55Person;
@@ -254,6 +255,7 @@ class gqid implements Command {
                     }
                     continue;
                 }
+                // Person not in G55::MATCH_LERRCP
                 if(isset($dbPersons[$g55Day])){
                     if(count($dbPersons[$g55Day]) == 1){
                         // direct match, only one LERRCP with the g55 date
@@ -302,25 +304,37 @@ class gqid implements Command {
     private static function update($groupKey) {
         
         $tmpfile = G55::tmpFilename($groupKey);
-        if(!isset(G55::MATCH_LERRCP[$groupKey])){
-            return "0 lines modified in $tmpfile\n";
-        }
         if(!is_file($tmpfile)){
             return "UNABLE TO PROCESS GROUP: missing temporary file $tmpfile\n";
         }
         
+        $report = "--- gauq g55 gqid update $groupKey\n";
+        
         $N = 0;
+        [$match, $nomatch] = self::match($groupKey);
         $res = implode(G5::CSV_SEP, G55::TMP_FIELDS) . "\n";
         foreach(G55::loadTmpFile($groupKey) as $line){
             $NUM = $line['NUM'];
-            if(isset(G55::MATCH_LERRCP[$groupKey][$NUM])){
-                $line['GQID'] = G55::MATCH_LERRCP[$groupKey][$NUM];
+            // find in $match the element with $NUM
+            $found = false;
+            foreach($match as $matchElement){
+                if($matchElement['g55']['NUM'] == $NUM){
+                    $found = true;
+                    break;
+                }
+            }
+            if($found){
+                $line['GQID'] = $matchElement['lerrcp']['GQID'];
                 $N++;
+            }
+            else{
+                $line['GQID'] = '';
             }
             $res .= implode(G5::CSV_SEP, $line) . "\n";
         }
         file_put_contents($tmpfile, $res);
-        return "$N lines modified in $tmpfile\n";
+        $report .= "$N lines modified in $tmpfile\n";
+        return $report;
     }
     
 } // end class
