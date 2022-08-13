@@ -1,1 +1,28 @@
   
+# document:
+#   history:
+#     - 2022-08-12 22:16:06+02:00: Thierry Graff, creation
+
+name: Gauquelin 1955 - 906 painters
+slug: g55-05-906-painters
+'n': 677
+type: history
+sources:
+  - g55-book
+
+description: |
+  906 PEINTRES
+  <br>p 285 - 301 of the original book
+
+children:
+  - g55-05a-237-famous-painters
+  - g55-05b-668-notable-painters
+  
+details: |
+  237 Peintres célébres
+  ABBEMA - SEYSSAUD
+  lines 1 - 237
+  
+  668 Peintres notables
+  ABEILLE - SINET
+  lines 238 - 905

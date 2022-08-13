@@ -8,13 +8,14 @@ slug: g55-10-884-priests
 'n': 882
 type: history
 sources:
-  - g55-513-priests-paris
-  - g55-369-priests-albi
+  - g55-book
 
 description: |
   List of catholic priests published in Gauquelin 1955 book.
   <br>The title of the original list is "884 prêtres".
+  <br>Unlike most 1955 data, this list was not published in later LERRCP publications.
+  <br>p p 329 - 343 of the original book
 
 children:
-  - g55-10-513-priests-paris
-  - g55-10-369-priests-albi
+  - g55-10a-513-priests-paris
+  - g55-10b-369-priests-albi

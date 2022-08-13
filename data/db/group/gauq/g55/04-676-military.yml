@@ -4,7 +4,7 @@
 #     - 2022-07-23 23:49:30+02:00: Thierry Graff, creation
 
 name: Gauquelin 1955 - 676 military
-slug: 04-676-military
+slug: g55-04-676-military
 'n': 677
 type: history
 sources:
@@ -15,12 +15,10 @@ description: |
   <br>p 273 - 285 of the original book
 
 children:
-  - 04-596-officers
-  - 04-81-saint-cyriens
+  - g55-04a-596-officers
+  - g55-04b-81-saint-cyriens
   
-details: |
-  p 273 - 285
-  
+details: |  
   596 Généraux, Amiraux et Officiers supérieurs
   ABAUT - ZURLINDEN
   lines 1 - 596

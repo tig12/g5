@@ -210,6 +210,8 @@ class gqid implements Command {
             foreach($match as $element){
                 $report .= "{$element['g55']['SLUG']} = g55 {$element['g55']['NUM']}\n";
                 $report .= "{$element['lerrcp']['SLUG']} = lerrcp {$element['lerrcp']['GQID']}\n\n";
+                // next line was used to generate G55::MATCH_LERRCP['10-884-priests']
+                //$report .= "            '{$element['g55']['NUM']}'   => 'none',\n";
             }
         }
         if(in_array('N', $what)){
