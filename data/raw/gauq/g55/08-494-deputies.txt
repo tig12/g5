@@ -115,7 +115,7 @@ RAMARONY Jules, 3-9-1901, 1 h., Bordeaux (Gironde).
 REEB Henri, 18-3-1907, 12 h., Liedrezing (Moselle).
 REYNAUD Paul, 15-10-1878; 18 h., Barcelonnette (Basses-Aipes).
 RIBEYRE Paul, 11-12-1906, 22 h. 30, Aubagne (Bouches-du-Rhône).
-ROCHET) Waldeck, 5-4-1905, 1 h.,) Sainte-Croix (Sadne-et-Loire).
+ROCHET) Waldeck, 5-4-1905, 1 h.,) Sainte-Croix (Saône-et-Loire).
 ROSENBLATT Marcel, 17-12-1908, 20 h., Mulhouse (Haut-Rhin).
 SAMSON Francis, 12-2-1899, 3 h. 30, Saint-Méloir-des-Ondes (I.-et-V.).
 SCHMITTLEIN Raymond, 19-6-1904, 5 h., Roubaix (Nord).
@@ -179,7 +179,7 @@ BOUHEY Jean, 23-10-1898, 2 h., Villers-la-Faye (Côte-d’Or).
 BOURDELLES Pierre, 23-4-1908, 2 h., Louannec (Côtes-du-Nord).
 BOURET Henri, 14-5-1916, 15 h., Lanvollon (Côtes-du-Nord).
 BOURGEOIS Georges; 20-4-1913, 11 h. 45, Mulhouse (Haut-Rhin).
-BOUTAVANT Rémy, 26-2-1911, 11 h., Saint-Vallier (Sadne-et-Loire).
+BOUTAVANT Rémy, 26-2-1911, 11 h., Saint-Vallier (Saône-et-Loire).
 BOUVIER-O’COTTEREAU Jean-Mar., 7-12-1896, 20 h. 30, Laval (May.).
 BRAULT Amand, 25-10-1888, 2 h., Hermes (Oise).
 BRICOUT Edmond, 8-10-1904, 15 h., Walincourt (Nord).
@@ -204,7 +204,7 @@ CAVELIER André, 19-2-1894, 23 h.. La Chapelle-Bayvel (Eure).
 CAYEUX Jean, 7-4-1910, 22 h. 35, Abbeville (Somme).
 CERMOLACCE Paul, 2-7-1912, 3 h., Marseille (Bouches-du-Rhône).
 CHABENAT. André, 8-8-1887, 18 h., La Chatre (Indre).
-CHAMANT Jean, 23-11-1913, 15 h., Chagny (Sadne-et-Loire).
+CHAMANT Jean, 23-11-1913, 15 h., Chagny (Saône-et-Loire).
 CHARLOT Jean, 26-1-1901, 13 h., Mantes (Seine-et-Oise).
 CHARRET Edouard, 12-7-1905, 4 h. 15, Tarare (Rhône).
 CHASSAING Eugéne, 7-7-1876, 11 h., Brousse (Puy-de-Dôme).
@@ -241,7 +241,7 @@ DELBEZ Louis, 18-12-1895, 4 h., Montpellier (Hérault).
 DELCOS Francois, 25-3-1881, 11 h., Perpignan (Pyrénées-Orientales).
 DELIAUNE Gérard, 138-8-1906, 14 h., Caudéran (Gironde).
 DELMOTTE Paul, 29-4-1903, 2 h., Linselles (Nord).
-DEMUSOIS Antoine, 4-8-1895, 5 h., Creusot (Sadne-et-Loire).
+DEMUSOIS Antoine, 4-8-1895, 5 h., Creusot (Saône-et-Loire).
 DENIS Alphonse, 5-3-1906, 8 h., Limoges (Haute-Vienne).
 DESGRANGES Pierre, 13-1-1898, 11 h., Lyon (Rhône).
 DESHORS Jean, 26-10-1901, 9 h., Blanzac (Haute-Loire).
@@ -351,7 +351,7 @@ LEENHARDT Francis, 24-4-1908, 11 h., Marseille (Bouches-du-Rhdne).
 LEFEVRE Raymond, 2-4-1894, 17 h., La Sabotterie (Ardennes).
 LEFRANC Jean, 21-3-1898, 20 h., Saint-Pol-sur-Terrenoise (Pas-de-Cal.).
 LENORMAND André, 1-9-1913, 11 h., Cabourg (Calvados).
-LENORMAND Maurice, 15-1-1913, 2 h., Macon (Sadne-et-Loire).
+LENORMAND Maurice, 15-1-1913, 2 h., Macon (Saône-et-Loire).
 LEOTARD (de) Pierre, 6-7-1909, 6 h., Bordeaux (Gironde).
 LE SCIELLOUR Joseph, 13-10-1907, 5 h., Trélazé (Maine-et-Loire).
 LE SENECHAL Louis, 2-10-1910, 13 h., Berck-sur-Mer (Pas-de-Calais).

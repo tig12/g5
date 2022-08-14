@@ -78,6 +78,12 @@ lines 1 - 596
 AMOS - WISDORFF
 lines 597 - 677
 
+Modified manually
+- line 86 - added département.
+- line 228 - modified city and département.
+- line 346 - modified city and département.
+- line 356 - modified city and country. 
+
 
 05-906-painters.txt
 ---------------------------------------------------------------------------------------------------

@@ -124,7 +124,7 @@ ADAM Alfred, 4-4-1908, 16 h., Asniéres (Seine).
 ALBERT-LAMBERT Raphaél, 31-12-1865, 7 h., Rouen (Seine-Inférieure).
 ALCOVER Pierre, 14-3-1893, 14 h. 30, Chatellerault (Vienne).
 ALEXANDRE René, 22-12-1885, 8 h., Reims (Marne).
-ANDREX, 23-1-1907, 21 h., Marseille (Bouches-du-Rh6ne).
+ANDREX, 23-1-1907, 21 h., Marseille (Bouches-du-Rhône).
 ANGELVIN Jacques, 5-8-1914, 6 h., Marseille (Bouches-du-Rhône).
 ANTOINE André Léonard, 31-1-1858, 23 h., Limoges (Haute-Vienne).
 AQUISTAPACE Jean, 22-8-1882, 10 h., Nice (Alpes-Maritimes).
@@ -223,7 +223,7 @@ FONTANES Henri, 23-8-1861, 11 h., Cherbourg (Manche).
 “FRANCOIS Jacqueline, 30-1-1922, 19 h. 30, Neuilly-sur-Seine. (Seine).
 FRESNAY Pierre, 4-4-1897, 1 h., Paris (5°) (Seine).
 FUNES (de) Louis, 31-7-1914, 1 h., Courbevoie (Seine).
-GAILLARD Roger, 17-4-1893,: 23 h., Salon (Bouches-du-Rh6ne).
+GAILLARD Roger, 17-4-1893,: 23 h., Salon (Bouches-du-Rhône).
 GELIN Daniel, 19-5-1921, 13 h., Angers (Maine-et-Loire).
 GENIN: René, 25-1-1890, 12 h., Aix-en-Provence (Bouches-du-Rhône).
 GEORGIUS, 3-6-1891, 7 h. 30, Mantes-la-Ville (Seine-et-Oise).
@@ -241,7 +241,7 @@ HERRAND Marcel, 8-10-1897, 3 h. 30, Paris (8°) (Seine).
 HERSENT Philippe, 26-7-1908, 2 h., Ecommoy (Sarthe).
 HIRIGOYEN Rudy, 29-8-1919, 1 h., Mendionde (Basses-Pyrénées).
 HUSSENOT Olivier, 10-8-1913, 5 h., Paris (19°) (Seine).
-JACQUES (frére) 22-8-1919, 10 h. 30, Dieulefit (Dréme).
+JACQUES (frére) 22-8-1919, 10 h. 30, Dieulefit (Drôme).
 JACQUES (frére). 12-2-1914, 7 h., Saint-Nazaire (Loire-Inférieure).
 JACQUES (frére) 18-3-1918, 8 h. 15, Saint-Nazaire (Loire-Inférieure).
 JACQUIN Abel, 14-7-1893, 7 h. 30, Colombes (Seine).
@@ -324,7 +324,7 @@ SABLON Jean, 25-3-1906, 4 h., Nogent-sur-Marne (Seine).
 SEIGNER Louis, 23-6-1903, 1 h., Saint-Chef (Isère).
 SIBLOT Charles Louis, 29-5-1871, 14 h., Vincennes (Seine).
 SIGNORET Gabriel, 15-11-1878, 13 h., Marseille (Bouches-du-Rhône).
-SIGNORET Jean, 13-12-1886, 3 h., Marseille (Bouches-du-Rh6ne).
+SIGNORET Jean, 13-12-1886, 3 h., Marseille (Bouches-du-Rhône).
 SILVAIN. Eugéne Charles, 17-1-1851, 13 h., Bourg’ (Ain).
 SOLOGNE Madeleine, 27-10-1912, 7 h., La Ferté-Imbault (Loir-et-Cher).
 SOLIDOR Suzy, 18-12-1900, 6 h., Saint-Servan-sur-Mer (Ille-et-Vilaine).
@@ -375,7 +375,7 @@ CARTIER ‘Maurice, 15-1-1925, 21 h. 45, Asniéres (Seine).
 CASTAING Claude, 20-1-1922, 1 h., Gujan-Mestras (Gironde).
 CERDAN Simone, 28-11-1897, 7 h., Fontainebleau (Seine-et-Marne).
 CHARCO Louis, 26-4-1893, 20 h., Agen (Loi-et-Garonne).
-CHOCHILLON Henri, 18-3-1913, 2 h. 30, Romans-sur-Isére (Dréme).
+CHOCHILLON Henri, 18-3-1913, 2 h. 30, Romans-sur-Isére (Drôme).
 CORNE Léonce, 19-3-1894, 21 h. 15, Beauvais (Oise).
 COUTET Henri, 28-6-1909, 11 h., Vaujours (Seine-et-Oise).
 DALBAN Robert, 19-7-1903, 9 h. 30, Cellés-sur-Belles (Deux-Sevres).
@@ -433,7 +433,7 @@ LE BRUN René, 28-12-1923, 8 h. 15, Montdidier (Somme).
 LECLAIR Sophie, 20-8-1925, 21 h., Tannay (Nièvre).
 LEFEVRE-BEL Rene, 31-5-1909, 14 h., Les Mureaux (Seine-et-Oise).
 LEMOINE Michel, 30-9-1922, 17 h., Pantin (Seine).
-MAG-AVRIL, 9-3-1899, 10 h., Marseille (Bouches-du-Rh6ne).
+MAG-AVRIL, 9-3-1899, 10 h., Marseille (Bouches-du-Rhône).
 MAILLOT Maurice, 18-9-1906, 5 h. 30, Rethel (Ardennes).
 MAIRESSE Guy Philippe, 14-6-1924. 2 h. 30, Saint-Maur-des-Fossés (S.).
 MALET (de) Hubert, 1-4-1916, 9 h., Leblanc (Indre). a
@@ -450,7 +450,7 @@ MONTY Michele, 20-6-1931, 15 h. 45, Vittel (Vosges).
 MOREL Genevieve, 19-3-1916, 2 h. 30, Les Andelys (Eure).
 MORICE Annik, 19-5-1933, 7 h. 45, Vanves (Seine).
 MORISS, 3-5-1874, 11 h. 30, Nimes (Gard).
-MOULIN Charles, 11-12-1909, 21 h., Montélimar (Dréme).
+MOULIN Charles, 11-12-1909, 21 h., Montélimar (Drôme).
 MOULINOT Jean-Paul, 30-6-1912, 19 h., Nice (Alpes-Maritimes).
 MURRAY Henri, 30-1-1907, 22 h. 30, Compiégne (Oise).
 NANCEY Michele, 10-7-1934, 0 h. 15, Ivry-sur-Seine (Seine).

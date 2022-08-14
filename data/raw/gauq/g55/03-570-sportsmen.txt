@@ -115,7 +115,7 @@ BEYAERT José, 1-10-1925, 23 h., Lens (Pas-de-Calais).
 BLANCHET André, 22-83-1918, 18 h., Paulmy (Indre-et-Loire).
 BLANCHONNET Armand, 23-12-1903, 12 h., Gripey (Allier).
 BOBET. Louis, 12-3-1925, 23 h., Saint-Meen-le-Grand (Ille-et-Vilaine).
-BONNAVENTURE Robert, 8-8-1920, 16 h. 45, Arc-les-Gray (Hte-Sadne).
+BONNAVENTURE Robert, 8-8-1920, 16 h. 45, Arc-les-Gray (Hte-Saône).
 BOUCHERON Onésime, 10-2-1904, 17 h., Meung-sur-Loire (Loiret).
 BOURILLON Paul, 14-1-1877. 4 h., Marmande (Lot-et-Garonne).
 BROCCO Maurice, 19-1-1883, 4 h., Reims (Marne).
@@ -142,8 +142,8 @@ FONTAN Victor, 18-6-1892, 22 h. 30, Pau (Basses-Pyrénées).
 FOURNIER Amédée, 3-2-1912, 21 h., Armentiéres (Nord).
 GALATEAU Fabien, 23-7-1913, 13 h., Nanteuil-la-Fosse (Marne).
 GANAY Gustave, 28-3-1892, 1 h., Marseille (Bouches-du-Rhône).
-GAUTHIER Bernard, 22-9-1924, 18 h., Beaumoni-Monteux (Dréme).
-GAUTHIER Louis, 12-4-1916, 13 h., Blanzy (Sadne-et-Loire).
+GAUTHIER Bernard, 22-9-1924, 18 h., Beaumoni-Monteux (Drôme).
+GAUTHIER Louis, 12-4-1916, 13 h., Blanzy (Saône-et-Loire).
 GEMINIANI Raphael, 12-6-1925, 2 h. 30, Clermont-Ferrand (P.-de-D.).
 GEORGET Emile, 21-11-1881, 6 h., Bossay-sur-Claise (Indre-et-Loire).
 GERARDIN Louis, 12-8-1912, 22 h., Boulogne-Billancourt (Seine).
@@ -252,7 +252,7 @@ GABRILLARGUES Louis, 16-6-1914, 15 h., Montpellier (Hérault).
 GALEY Marcel, 2-9-1905, 23 h.'30, Clichy (Seine).
 GAMBLIN Lucien, 22-7-1890, 2 h., Ivry-sur-Seine (Seine).
 GRAVIER Ernest, 26-8-1892, 4 h., Montbeugny (Allier).
-GREGOIRE Jean, 20-7-1922, 16 h. 30, Valence (Dréme).
+GREGOIRE Jean, 20-7-1922, 16 h. 30, Valence (Drôme).
 GRUMELLON Jean, 1-6-1923, 18 h. 30, Saint-Servan-sur-Mer (Ille-et-V.).
 HEISSERER Oscar, 18-7-1914, 20 h., Schirrhen (Bas-Rhin).
 HUGUET Guy, 3-8-1923, 6 h., Gannat (Allier).
@@ -279,7 +279,7 @@ PREVOST Jean-M., 30-9-1918, 23 h. 30, Le Teillei! (Manche).
 PROUFF Jean, 12-9-1919, 16 h., Le Peillac (Morbihan).
 RIGAL Jean, 12-12-1890, 5 h., Boulogne-Billancourt (Seine).
 RIO Roger, 13-2-1913, 9 h., Dunkerque (Nord).
-ROBIN Jean, 25-7-1921, 2 h., Marseille (Bouches-du-Rh6ne).
+ROBIN Jean, 25-7-1921, 2 h., Marseille (Bouches-du-Rhône).
 RODRIGUEZ Sauveur, 17-10-1920, 1 h., Sidi-Bel-Abbés (Algérie).
 ROSE Georges, 30-4-1910, 16 h., Maisons-Alfort (Seine).
 SCHCALBAR Auguste, 7-11-1889, 11 h. 30, Levallois-Perret (Seine).
@@ -550,7 +550,7 @@ PRIGENT Jacques, 26-9-1927, 6 h. 25, Gennevilliers (Seine).
 PTAK Edouard, 7-11-1930, 9h. 35, Barlin (Pas-de-Calais).
 RANVIAL Marcel, 24-12-1929, 1 h: 30, Resendaél (Nord).
 RICHAUD Pierre, S12 4927) 7 0h Oran (Algérie).
-ROUSTAN René, 11-6-1928. 8 h., Valence (Dréme).
+ROUSTAN René, 11-6-1928. 8 h., Valence (Drôme).
 SANTANBIEN Jean, 12-12-1929, 5 b., Epernay (Marne).
 SNEYERS Jean, 11-8-1927, 3 h. 15, Mulhouse (Haut-Rhin).
 SOBOLACK Stanislas, 8-8-1929 °'.48 bh.) Satht-Dents (Seine).
