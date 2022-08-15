@@ -217,7 +217,10 @@ class gqid implements Command {
         if(in_array('N', $what)){
             $report .= "=== NO MATCH ===\n";
             foreach($nomatch as $element){
-                $report .= "{$element['NUM']} {$element['SLUG']}\n";
+                $hour = substr($element['DATE'], 11);
+                $report .= "{$element['NUM']} {$element['SLUG']}, {$element['SLUG']} {$hour}, {$element['PLACE']}, {$element['C2']}\n";
+                //$report .= "            '{$element['NUM']}' => '', // {$element['SLUG']} {$hour}, {$element['PLACE']}, {$element['C2']}\n";
+                
             }
         }
         $report .= "=== " . count($match) . " MATCH ===\n=== " . count($nomatch) . " NO MATCH ===\n";

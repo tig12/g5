@@ -1,8 +1,12 @@
 
 
-Handle duplicate
+Handle duplicates
 2 d-aragona-ludovico (A5-1640) 1876-05-23 02:10:04 CERNUSCO SUL NA
 2 gauquelin-a6-1496 (A6-1496) 1876-05-23 02:10:04 CERNUSCO SUL NA
+
+4649 | bassot-jean-1841-04-06 | {"lerrcp": "A2-2563"} | 1841-04-06 21:01:29 | Renève
+5860 | bassot-leon-1841-04-06 | {"lerrcp": "A3-132"}  | 1841-04-06 21:01:29 | Renève
+
 
 
 - see php bug - https://bugs.php.net/bug.php?id=81002
