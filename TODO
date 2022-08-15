@@ -19,7 +19,7 @@ Handle duplicates
     - problem of issues
     - recompute look inter
     
-- See $cmdSignature in cfepp/final3/tmp2db and genralize it to all commands
+- See $cmdSignature in cfepp/final3/tmp2db and generalize it to all commands
 
 - BUG
 php run-g5.php db init all export

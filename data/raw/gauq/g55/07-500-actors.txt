@@ -32,7 +32,7 @@ DANCERAY Charles Antoine, 7-1-1801, 2 h., Brie-Comte-Robert (S.-M).
 DANTIGNY, 9-5-1840, 13 h., Martizay (Indre).
 DAUBRAY Michel, 7-5-1837, 7 h., Nantes (Loire-Inférieure).
 DECHILLY Charles-Marie, 2-12-1804, 15 h., Stenay (Meuse).
-DELAFERRIERE Louis Fortuné, 12-4-1806, 3 h., Alencon (Orne).
+DELAFERRIERE Louis Fortuné, 12-4-1806, 3 h., Alençon (Orne).
 DEJAZET Virginie, 30-8-1798, 4 h., Paris (Seine).
 DELAISTRE Jean Alexandre, 6-1-1801, 4 h., Paris (Seine).
 DELANNOY, Léopold, 6-2-1817, 20 h., Arras (Pas-de-Calais).
@@ -61,7 +61,7 @@ FLEURY Emma Marguerite, 10-5-1836, 3 h., Paris (Seine).
 FRANCES Emile Palémon F., 28-4-1835, 22 h., Cahors (Lot).
 FRANCISQUE Ainé, 25-11-1796, 19 h., Paris (Seine).
 FRANCISQUE Jeune, 20-7-1808, 18 h., Paris (Seine).
-GARRAUD Louis Eugéne, 6-1-1829, 21 h., Besancon (Doubs).
+GARRAUD Louis Eugéne, 6-1-1829, 21 h., Besançon (Doubs).
 GEFFROY Edmond, 30-7-1804, 4 h., Maignelay (Oise).
 GENAT Fanny, 28-3-1831, 10 h., Lyon (Rhône).
 GENIEZ Jacques Alphonse, 20-2-1800, 8 h., Paris (Seine).
@@ -122,7 +122,7 @@ VALNAY Jacques Francois, 5-2-1817, 7.h., Paris (Seine).
 WORMS Gustave, 26-11-1836, 2 h., Paris (Seine).
 ADAM Alfred, 4-4-1908, 16 h., Asniéres (Seine).
 ALBERT-LAMBERT Raphaél, 31-12-1865, 7 h., Rouen (Seine-Inférieure).
-ALCOVER Pierre, 14-3-1893, 14 h. 30, Chatellerault (Vienne).
+ALCOVER Pierre, 14-3-1893, 14 h. 30, Châtellerault (Vienne).
 ALEXANDRE René, 22-12-1885, 8 h., Reims (Marne).
 ANDREX, 23-1-1907, 21 h., Marseille (Bouches-du-Rhône).
 ANGELVIN Jacques, 5-8-1914, 6 h., Marseille (Bouches-du-Rhône).
@@ -201,7 +201,7 @@ DERRIEN Marcelle, 20-7-1923, 20 h., Saint-Leu-la-Forét (Seine-et-Oise).
 DESJARDINS Maxime Julien, 17-9-1863, 17 h., Auxerre (Yonne).
 DHELIA France, 9-11-1894, 4 h., Saint-Lubin (Loir-et-Cher).
 DONNEAUD Maurice, 8-9-1904, 22 h., Collonges-au-Mont-d’Or (Rhône).
-DUCAUX Annie, 10-9-1908, 23 h., Besancon (Doubs).
+DUCAUX Annie, 10-9-1908, 23 h., Besançon (Doubs).
 DUCHESNE Roger, 26-7-1906, 15 h., Luxeuil (Haute-Saône).
 DUFILHO Jacques, 19-2-1914, 14 h. 30, Begles (Gironde).
 DUFLOS Huguette, 24-8-4887, 10 h., Limoges (Haute-Vienne).
@@ -270,7 +270,7 @@ MARCHAND Henri, 28-8-1898, 4 h. 30, Mainvilliers (Eure-et-Loire).
 MAREUIL Philippe, 19-10-1926, 15h. 20, Dreux (Eure-et-Loire).
 MEURISSE Paul, 21-12-1912, 23 h., Dunkerque (Nord).
 MILTON Georges, 20-9-1886, 15 h:, Puteaux (Seine).
-MINGAND Pierre, 2-6-1900, 4 h., Besancon (Doubs).
+MINGAND Pierre, 2-6-1900, 4 h., Besançon (Doubs).
 MOCKY Jean-Pierre, 6-7-1929, 12 h., Nice (Alpes-Maritimes).
 MONTEAUX Roger, 18-7-1879, 15h. 30, Boulogne-sur-Seine (Seine).
 MORGAN Michéle, Pee en 9 h. 20, Neuilly-sur-Seine (Seine).
@@ -350,7 +350,7 @@ ANDRES Louise, 14-8-1932, 16 h. 40, Levallois-Perret (Seine).
 ANDRIEUX Luc, 12-2-1917, 1 h. 30, Coutainville (Manche).
 ARDEN Martine, 22-11-1928, 2 h. 30, Lorient (Morbihan).
 ARGENTIN Christian, 11-10-1893, 7 h., Elbeuf (Seine-Inférieure).
-ARNO Josette, 10-3-1933, 5 h. 30, Besancon (Doubs).
+ARNO Josette, 10-3-1933, 5 h. 30, Besançon (Doubs).
 ARNOLD. Marcelle, 4-5-1917, 13 h. 30, Thornon-les-Bains (Hte-Savoie).
 ARNOUX Paulette, 19-1-1925, 12 h. 30, Avignon (Vaucluse).
 ARTUR José, 20-5-1927, 3 h., Saint-Germain-en-Laye (Seine-et-Oise).

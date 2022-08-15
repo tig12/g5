@@ -74,6 +74,7 @@ class tmp2db implements Command {
         $lines = G55::loadTmpFile($groupKey);
         $linesRaw = G55::loadTmpRawFile($groupKey);
         $N = count($lines);
+        $NFixedNames = 0; // number of names like 'Gauquelin-A2-217' replaced by real name
         $t1 = microtime(true);
         for($i=0; $i < $N; $i++){
             $line = $lines[$i];
@@ -125,7 +126,6 @@ class tmp2db implements Command {
                         $issue = "Check birth date because CFEPP and g55 birth dates differ\n"
                                . "<br>G55: {$line['DATE']}\n"
                                . "<br>CFEPP: {$p->data['birth']['date']}\n";
-//echo "$issue\n";
                         $p->addIssue($issue);
                     }
                 }
@@ -133,6 +133,16 @@ class tmp2db implements Command {
                     'ids-in-source' => [G55::SOURCE_SLUG => (string)$NUM],
                     'partial-ids' => [G55::SOURCE_SLUG => $G55ID],
                 ];
+                if(!$p->data['birth']['place']['geoid']){
+                    // g55 place names are generally better than cura
+                    $new['birth']['place']['name'] = $line['PLACE'];
+                }
+                if(strpos($p->data['slug'], 'gauquelin-') === 0){
+                    $new['name']['family'] = $line['FNAME'];
+                    $new['name']['given'] = $line['GNAME'];
+                    $new['name']['nobility'] = $line['NOB'];
+                    $NFixedNames++;
+                }
                 $p->addHistory(
                     command:    $cmdSignature . ' ' . $groupKey,
                     sourceSlug: $g55Source->data['slug'],
@@ -140,6 +150,7 @@ class tmp2db implements Command {
                     rawdata:    $lineRaw,
                 );
                 $nUpdate++;
+                $p->updateFields($new);
                 $p->update(); // DB
             }
             $g->addMember($p->data['id']);
@@ -147,6 +158,10 @@ class tmp2db implements Command {
         $g->insertMembers(); // DB
         $t2 = microtime(true);
         $dt = round($t2 - $t1, 5);
+        $strFixed = '';
+        if($NFixedNames != 0){
+            $strFixed = ", fixed $NFixedNames names";
+        }
         $report .= "$nInsert persons inserted, $nUpdate updated ($dt s)\n";
         return $report;
     }

@@ -149,7 +149,7 @@ CROS Jules, 11-11-1873, 17 h., Labruguiére (Tarn).
 CUGNASSE Gilbert, 19-6-1913, 15 h., Saint-Pierre-des-Plots (Tarn).
 DARDIER Joseph, 29-7-1870, 11 h., Carmaux (Tarn).
 DARLES Marius, 11-11-1878, 23 h., Lavaur (Tarn).
-DARNAL Jean, 9-5-1878, 14 h. 30, Angouléme (Charente-Maritime).
+DARNAL Jean, 9-5-1878, 14 h. 30, Angoulême (Charente-Maritime).
 DEJEAN Justin, 29-6-1909, 8 h., Sérénac (Tarn).
 DELICHERE Paul, 1-11-1865, 11 h., Gaillac (Tarn).
 DELMAS Joseph, 13-3-1884, 10 h., Puylaurens (Tarn).
@@ -613,9 +613,9 @@ GRANIER Marius, 17-3-1856, 2 h., Tavel (Gard).
 GRAPPIN Emile, 15-9-1882, 12 h., Saint-Ouen (Seine).
 GREGOIRE Gaston, 2-12-1860, 17 h. 30., Vaucouleurs (Meuse).
 GRESSIN François, 1-2-1844, 23 h., Ménétou-Couture (Cher).
-GROS Marie, 1-1-1878, 2 h., Besancon (Doubs).
+GROS Marie, 1-1-1878, 2 h., Besançon (Doubs).
 GUENARD Théophile, 9-5-1860, 9 h., Saint-Georges-de-Chesne (I.-et-V.).
-GUERIN Louis, 20-1-1874, 10 h., Chatellerault (Vienne).
+GUERIN Louis, 20-1-1874, 10 h., Châtellerault (Vienne).
 GUILBEAULT Paul, 238-8-1908, 14. h., Vandermont (Maine-et-Loire).
 GUILLON Georges, 5-5-1849, 5 h., Saint-Germain-en-Laye (S.-et-O.).
 HALOT Arsène, 29-7-1877, 12 h., Nantes (Loire-Inférieure).
@@ -624,7 +624,7 @@ HERBERT Théodore, 9-11-1859, O h., Haguenau (Haut-Rhin).
 HERMELINE Charles, 27-3-1867, 2 h., Dancy (Eure-et-Loire).
 HERSCHER Sébastien, 29-10-1853, 22 h., Hettenschlag (Haut-Rhin).
 HOUDARD Maurice, 4-10-1896, 4 h., Crépy-en-Léonnois (Aisne).
-HUSSON Henri,’ 17-8-1890, 9 h. 30, Besancon (Doubs).
+HUSSON Henri,’ 17-8-1890, 9 h. 30, Besançon (Doubs).
 IMBERT Marie-L., 9-7-1854, 13 h., Clermont-Ferrand (Puy-de-Dôme).
 JACQUEMOT Ernest, 7-6-1859, 5 h., Mouilly (Meuse).
 JACQUES Gustave, 4-7-1852, 17 h. 30, Carignan (Ardennes).
@@ -719,7 +719,7 @@ MILLET Ernest, 27-9-1861, 6 h., Vailly (Cher).
 MILLIARD Charles, 6-1-1831, 10 h., Alisay (Eure).
 MITTELHEISSER Antoine, 27-10-1840, 16 h., Truchtersheim (Bas-Rhin).
 MONMARCHE René, 5-6-1868, 17 h., Onzain (Loir-et-Cher).
-MONNIER Louis, 28-8-1869, 6 h., Besancon (Doubs).
+MONNIER Louis, 28-8-1869, 6 h., Besançon (Doubs).
 MONSCHE Georges, 22-10-1882, 3 h. 30, Munster (Haut-Rhin).
 MONTAGNE Jean-Baptiste, 13-2-1864, 22 h., Carcassonne (Aube).
 MONTAGUY Barthélemy, 14-8-1841, 0 h., Saint-Etienne (Loire).

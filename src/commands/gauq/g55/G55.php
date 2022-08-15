@@ -303,7 +303,6 @@ class G55 {
             '508'   => 'A2-1320',   // woringer-frederic-1890-08-26
         ],
         '04-676-military' => [
-            
             '9'   => 'A3-10', // adhemar-jean-pierre-1868-07-20
             '10'  => 'A3-11', // adorno-de-tscharner-anioine-1829-09-29
             '16'  => 'A3-17', // allehaut-emile-1872-05-03 07:30, La Rochelle, 17
@@ -356,7 +355,7 @@ class G55 {
             '208' => 'A3-247', // blanche-ferdinand-marie-1848-09-27 18:00, Redon, 35
             '216' => 'A3-256', // blois-etienne-gabriel-1801-10-14 04:00, Ploujean, 29
             '223' => 'A3-265', // boell-marie-joseph-1849-01-17 17:00, Villé, 67
-            '224' => 'A3-267', // boelle-victor-rene-1850-05-10 12:00, Brest, 29
+            '224' => 'A3-266', // boelle-victor-rene-1850-05-10 12:00, Brest, 29
             '227' => 'A3-269', // boigues-paul-marie-1864-05-27 03:30, Le Havre, 76
             '228' => 'A3-270', // boileve-charles-emile-1837-12-06 16:00, Le Château-d'Oléron, 17
             '235' => 'A3-277', // boissau-robert-marie-1886-07-09 07:00, Montlignon, 95
@@ -369,7 +368,7 @@ class G55 {
             '256' => 'A3-302', // bonnet-bruneau-ferdin-1864-03-14 01:00, Siran, 34
             '259' => 'A3-305', // bonneval-abriat-de-laforest-1829-06-07 01:00, Limoges, 89
             '262' => 'A3-309', // bonviolle-charles-henry-1867-09-06 16:00, Metz, 57
-'265' => 'none', // bordas-antoine-emmanuel-1809-10-23 11:00, Orléans, 45
+            '265' => 'none', // bordas-antoine-emmanuel-1809-10-23 11:00, Orléans, 45
             '268' => 'A3-315', // borel-jean-louis-1819-04-03 13:00, Fangeaux, 11
             '270' => 'A3-317', // borgnis-desbordes-charles-ern-1843-05-17 23:00, Provins, 77
             '272' => 'A3-319', // borius-leon-charles-1835-06-23 18:00, Rochefort-sur-Mer, 17
@@ -439,6 +438,7 @@ class G55 {
             '547' => 'A3-948', // schlumberger-charles-robert-1859-05-28 22:30, Nancy, 54
             '548' => 'A2-2886', // sebert-hippolyte-1839-01-31 12:00, Verberie, 60
             '550' => 'A3-954', // serot-almeras-latour-augustin-1868-05-12 16:30, Rethel, 08
+            '568' => 'A3-986', // toutee-georges-joseph-1855-02-20 11:00 Saint-Fargeau
             '573' => 'A3-997', // valagregue-georges-1852-09-20 16:00, Carpentras, 84
             '575' => 'A3-1000', // vasselot-de-regne-1888-09-15 14:00, La Guillotiére, 79
             '576' => 'A3-1001', // vaulgrenant-albert-1872-04-08 13 13:00, Versailles, 78
@@ -463,10 +463,9 @@ class G55 {
             '642' => 'A3-723', // leoutre-marcel-louis-1917-06-15 08:00, Thomery, 77
             '654' => 'A3-858', // penfentenyo-de-kervereguen-fran-1915-05-08 21:35, Brest, 29
             '657' => 'A3-875', // pietri-alex-1918-05-04 09:00, Sétif, 
-'670' => 'none', // sicard-andre-1916-07-28 04:00, Marseille, 13
+            '670' => 'none', // sicard-andre-1916-07-28 04:00, Marseille, 13
             '675' => 'A3-1010', // vidalin-maurice-1918-10-20 18:00, Oran, 
             '677' => 'A3-1031', // wisdorff-bernard-1917-10-10 08:15, Neuilly-sur-Seine, 92
-
         ],
         // groups not published in LERRCP booklets
         // need to avoid false matching (same birth day)

@@ -54,7 +54,7 @@ BERRET Henri, 8-12-1877, 17 h., Thoissey (Ain).
 BERTHIER Germain, 25-8-1895, 3 h. 30, Rémuzat (Drôme).
 BETTINGER Lucien, 17-1-1884, 18 h., Reims (Marne).
 BEYNES Edmond, 6-6-1894, 15 h., Vigeois (Corrèze).
-BIENVENU Georges, 27-5-1893, 16 h. 15, Besancon (Doubs).
+BIENVENU Georges, 27-5-1893, 16 h. 15, Besançon (Doubs).
 BILLARD Jean-Jacques, 24-2-1893, 7 h., Malesherbes (Loiret).
 BILLET Henry, 3-2-1882, 20 h., Chateauroux (Indre).
 BLANCHIER Denise, 5-5-1887, 15 h. 45, Chasseneuil (Charente).
@@ -122,7 +122,7 @@ CHABROL Etienne, 13-6-1883, 16 h., Condat-en-Féniers (Cantal).
 CHAIX Achille, 28-12-1875, 18 h., Montambert (Nièvre).
 CHALIER André, 1-1-1882, 20 h. 30, Mende (Lozère).
 CHAPERON Robert, 21-6-1895, 2”h., Vire (Calvados).
-CHAPOY René, 5-11-1878, 20 h., Besancon (Doubs).
+CHAPOY René, 5-11-1878, 20 h., Besançon (Doubs).
 CHARBONNEL Maurice, 17-12-1884, 1 h., Bordeaux (Gironde).
 CHARPENTIER Roger, 16-3-1903, 19 h., Clermoni-Ferrand (P.-de-D.).
 CHARRIER Jean, 21-7-1888, 4 h., Brive (Corrèze).
@@ -445,7 +445,7 @@ ROUSSY Alfred, 14-1-1866, 1 h., Saint-Affrique (Aveyron).
 RUAUD Ludovic, 16-3-1884, 13 h., Cussac (Hte-Vienne).
 RUIN Georges, 4-4-1880, 8 h., Varennes-en-Amienois (Somme).
 SACKENREITER G., 16-6-1886, 20 h. 30, Ottwiller (Bas-Rhin).
-SAINTIN Henri, 30-1-1887, 17 h., Besancon (Doubs).
+SAINTIN Henri, 30-1-1887, 17 h., Besançon (Doubs).
 SAMBUC Edouard, 28-10-1876, 6 h., Chabeuil (Drôme).
 SAUVE Louis de Gonzague, 26-4-1881, 21 h., Mayenne (Mayenne).
 SAVOIRE Camille, 6-7-1869, 10 h., Marchenoir (Loir-et-Cher).
