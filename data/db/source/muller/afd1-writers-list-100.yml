@@ -13,8 +13,8 @@ description: |
   List of 100 Italian writers without birth time, coming from Astro-Forschungs-Daten 1, pp 25 - 27
   <br>Text file built by Nick Kollerstrom (scan) and Thierry Graff (OCR and corrections)
   <br>Integration to Open Gauquelin database : <a href="https://github.com/tig12/gauquelin5/blob/master/data/raw/newalchemypress.com/05-muller-writers/muller-afd1-100-writers.txt">muller-afd1-100-writers.txt</a>
-  <br>Scans of original document can be downloaded from <a href="https://g5.tig12.net/auxiliary/1991-muller-writers/">g5.tig12.net</a>
-  <br>More information about this file : <a href="https://newalchemypress.com/gauquelin/research5.php">newalchemypress.com</a> and <a href="https://tig12.github.io/gauquelin5/muller-402-writers.html">tig12.github.io</a>.
+  <br>Scans of original document can be downloaded from repository <a href="https://github.com/tig12/g5-aux/tree/main/1991-muller1-writers/muller1-100-writers/">github.com/tig12/g5-aux</a>
+  <br>More information about this file : <a href="https://newalchemypress.com/gauquelin/research5.php">newalchemypress.com</a> and <a href="https://tig12.github.io/gauquelin5/muller1-402-writers.html">tig12.github.io</a>.
 parents:
   - afd1-booklet
   - g5

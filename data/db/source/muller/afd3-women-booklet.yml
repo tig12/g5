@@ -13,6 +13,6 @@ description: |
   Booklet Astro-Forschungs-Daten 3, Arno Müller, Waldmohr, 1993
   <br>76 pages, self-edited by Arno Müller.
   <br>Contains a list of 234 famous women.
-  <br>Scans of the original document can be downloaded from <a href="https://g5.tig12.net/auxiliary/1993-muller-women/">g5.tig12.net</a>.
+  <br>Scans of the original document can be downloaded from repository <a href="https://github.com/tig12/g5-aux/tree/main/1993-muller3-women">github.com/tig12/g5-aux</a>.
 parents: 
   - afd

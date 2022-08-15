@@ -16,6 +16,6 @@ description: |
         <li>a list of 100 Italian writers with birth date and without birth time</li>
         <li>a list of 22 Italian writers where Müller's data differ from Gauquelins'</li>
     </ul>
-  Scans of the original document can be downloaded from <a href="https://g5.tig12.net/auxiliary/1991-muller-writers/">g5.tig12.net</a>.
+  Scans of the original document can be downloaded from repository <a href="https://github.com/tig12/g5-aux/tree/main/1991-muller1-writers/muller1-100-writers/">github.com/tig12/g5-aux</a>.
 parents:
   - afd

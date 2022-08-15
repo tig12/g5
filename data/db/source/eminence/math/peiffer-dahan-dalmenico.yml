@@ -19,9 +19,9 @@ isbn:
 
 description: |
   This book was used to count the number of times each mathematician is cited in the book index
-  "Index des noms propres", p 307-309 of the book
+  <br>"Index des noms propres", p 307-309 of the book
   
-  See https://tig12.github.io/gauquelin5/eminence-math.html
+  <br><br>See <a href="https://tig12.github.io/gauquelin5/eminence-math.html">https://tig12.github.io/gauquelin5/eminence-math.html</a>
   See https://g5.tig12.net/auxiliary/eminence/math/peiffer-dahan-dalmenico
 
 parents: []

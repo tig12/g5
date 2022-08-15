@@ -12,6 +12,6 @@ description: |
   Booklet Astro-Forschungs-Daten 2, Arno Müller, Waldmohr, 1992
   <br>Self-edited by Arno Müller.
   <br>Contains a list of 612 famous men.
-  <br>Scans of the original document can be downloaded from <a href="https://g5.tig12.net/auxiliary/1992-muller-men/">g5.tig12.net</a>.
+  <br>Scans of the original document can be downloaded from repository <a href="https://github.com/tig12/g5-aux/tree/main/1992-muller2-men">github.com/tig12/g5-aux</a>.
 parents: 
   - afd
