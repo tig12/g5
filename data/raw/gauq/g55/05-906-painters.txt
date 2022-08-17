@@ -2,7 +2,7 @@ ABBEMA Louise, 30-10-1853, 16 h., Etampes (Seine-et-Oise).
 ADLER Jules, 8-7-1865, 5 h. 30, Luxeuil (Haute-Saône).
 AGACHE Alfred-Pierre, 29-8-1848, 8 h., Lille (Nord).
 ALIX Yves, 19-8-1890, 21 h., Fontainebleau (Seine-et-Marne).
-ALLEAUME Ludovic, 24-3-1859, 6 h., Angers (Mainezet-Loire).
+ALLEAUME Ludovic, 24-3-1859, 6 h., Angers (Maine-et-Loire).
 ANQUETIN Louis, 26-1-1861, 9 h. 30, Etrépagny (Eure).
 ANTIGNA Alexandre Jean, 7-3-1817, 4 h., Orléans (Loire).
 ANTRAL Louis Robert, 13-7-1895, 1 h., Chalons-sur-Marne (Marne).
@@ -26,11 +26,11 @@ BISSIERE Jean Roger, 22-9-1886, 17 h. 30, Villeréal (Lot-et-Garonne).
 BOMBOIS Camille, 3-2-1883, 14 h., Vénarey-les-Laumes (Côte-d’Or).
 BOMPARD Maurice, 11-2-1857, 19 h., Rodez (Aveyron).
 BONHEUR Marie Rosalie, 16-3-1822, 20 h., Bordeaux (Gironde).
-BONIROTE Pierre, 6-4-1811, 3 h.. Lyon (Rhône).
+BONIROTE Pierre, 6-4-1811, 3 h., Lyon (Rhône).
 BONNARD Pierre, 3-10-1867, 10 h., Fontenay-aux-Roses (Seine).
 BONNAT Joseph, 20-6-1833, 14 h. 30, Bayonne (Basses-Pyrénées).
 BOREL Paul, 12-2-1828, 16 h., Lyon (Rhône).
-BOUDIN Eugéne, 12-7-1824, 5 h., Honfleur (Calvados).
+BOUDIN Eugène, 12-7-1824, 5 h., Honfleur (Calvados).
 BOUGUEREAU William Adolphe, 30-11-1825, 16 h., La Rochelle (Charente-Maritime).
 BRACASSAT Jacques Raymond, 30-8-1804, 21 h., Bordeaux (Gironde).
 BRAQUE Georges, 9-5-1882, 2 h. 30, Argenteuil (Seine-et-Oise).
@@ -45,10 +45,10 @@ BUSSON Charles, 15-7-1822, 15 h., Montoire (Loir-et-Cher).
 BUTIN Ulysse Louis, 16-5-1838, 11 h., Saint-Quentin (Aisne).
 CABANEL Alexandre, 28-9-1824, 0 h., Montpellier (Hérault).
 CABIE Louis Alexandre, 15-11-1853, 11 h. 30, Dol (Ille-et-Vilaine).
-CACHOUD Francois Charl., 27-10-1866, 17 h., Chambéry (Savoie),
+CACHOUD Francois Charl., 27-10-1866, 17 h., Chambéry (Savoie).
 CALBET Antonin, 16-8-1860, 1 h., Engayrac (Lot-et-Garonne).
 CAROLUS-DURAN Charles Durand), 4-7-1837, 5 h., Lille (Nord).
-CAZIN Jean Charles, 25-5-1841, 18 h:, Samer (Pas-de-Calais).
+CAZIN Jean Charles, 25-5-1841, 18 h., Samer (Pas-de-Calais).
 CERIA Edmond, 26-1-1884, 8 h. 30, Evian (Haute-Savoie).
 CEZANNE Paul, 19-1-1839, 1 h., Aix-en-Provence (Bouches-du-Rhône).
 CHAPLIN Charles, 8-6-1825, 3 h., Andelys (Eure).
@@ -58,19 +58,19 @@ CHARRETON Victor, 2-3-1864, 13 h., Bourgoin (Isère).
 CHARTRAN Théobald, 20-7-1849, 8 h., Besançon (Doubs).
 CHAVET Victor Joseph, 21-7-1822, 4 h., Pourcieux (Var).
 CHIFFLART Nicolas Frang., 21-3-1825, 7 h., Saint-Omer (Pas-de-Calais).
-CHIGOT Eugéne Henri, 22-11-1860, 18 h., Valenciennes (Nord).
+CHIGOT Eugène Henri, 22-11-1860, 18 h., Valenciennes (Nord).
 CHINTREUIL Antoine, 15-5-1815, 8 h., Pont-de-Vaux (Ain).
 CHRETIEN René Louis, 2-10-1867, 23 h., Choisy-le-Roi (Seine).
 COIGNARD Louis, 4-9-1812, 14 h., Mayenne (Mayenne).
 COLIN Gustave Henri, 11-7-1828,/411 h. 10, Arras (Pas-de-Calais).
-COMERRE Léon Francois, 10-10-1850, 3 h.. Trélon (Nord).
+COMERRE Léon Francois, 10-10-1850, 3 h., Trélon (Nord).
 COMPTE-CALIX Francois Claude, 27-8-1813, 23 h., Lyon (Rhône).
 COTTET Jacques Charles, 12-7-1863, 9 h., Le Puy (Haute-Loire).
 COURBET Gustave, 10-6-1819, 3 h., Ornans (Doubs).
-COUTURE Thomas, 21-12-1815, 23 h.. Senlis (Oise).
+COUTURE Thomas, 21-12-1815, 23 h., Senlis (Oise).
 COUTURIER Philibert Léon, 26-5-1823, 23 h., Chalon-sur-Saône (S.-L.).
 CROSS (Henry Edmond Delacroix), 20-5-1856, 5 h. 30, Douai (Nord).
-DAUMIER Honoré, 26-2-1808, 15 h:, Marseille (Bouches-du-Rhône).
+DAUMIER Honoré, 26-2-1808, 15 h., Marseille (Bouches-du-Rhône).
 DAUZATS | Adrien, 16-7-1804, 3 h. 30, Bordeaux (Gironde).
 DEBAT-PONSAN Edouard, 25-4-1847, 10 h., Toulouse (Haute-Garonne).
 DEGAS Edgar, 19-7-1834, 20 h. 30, Paris (Seine).
@@ -78,15 +78,15 @@ DELACROIX Auguste, 26-1-1809, 20 h. 30, Boulogne-sur-Mer (P.-de-C.).
 DELAUNAY Jules Elie, 13-6-1828, 8 h., Nantes (Loire-Inférieure).
 DELORT Charles Edouard, 4-2-1841, 17 h., Nimes (Gard).
 DELPY Hyppolyte Cam., 16-4-1842, 12 h., Joigny (Yonne).
-DENIS Maurice, 25-11-1870, 16 h.. Granville (Manche).
+DENIS Maurice, 25-11-1870, 16 h., Granville (Manche).
 DERAIN André, 17-6-1880, 14 h., Chatou (Seine-et-Oise).
 DIAZ de La PENA Narcisse Virg., 20-8-1807, 8 h., Bordeaux (Gironde).
 DIDIER-POUGET William, 14-11-1864, 3 h., Toulouse (Haute-Garonne).
-DOMERGUE Jean Gabriel, 4-3-1889, 9 h.: Bordeaux (Gironde).
-DORE Gustave Paul, 6-1-1832, 6 h.. Strasbourg (Bas-Rhin).
+DOMERGUE Jean Gabriel, 4-3-1889, 9 h., Bordeaux (Gironde).
+DORE Gustave Paul, 6-1-1832, 6 h., Strasbourg (Bas-Rhin).
 DORIGNAC Georges, 8-11-1879, 10 h., Bordeaux (Gironde).
 DOUROUZE Daniel. Urbain, 21-3-1874, 8 h., Grenoble (Isère).
-DUFEU Edouard Jacques, 27-3-1836, 1 h.. Marseille (Bouches-du-Rh.).
+DUFEU Edouard Jacques, 27-3-1836, 1 h., Marseille (Bouches-du-Rh.).
 DUFRENOY Georges Léon, 20-6-1870, 23 h., Thiais (Seine).
 DUFRESNE Georges Charles, 23-11-1876, 21 h. 30, Millemont (S.-O.).
 DUFY Jean-Jacques, 12-3-1888, 14 h., Le Havre (Seine-Inférieure).
@@ -100,12 +100,12 @@ DUTILLEUX Henri Joseph, 5-10-1807, 5 h., Douai (Nord).
 D'ESPAGNAT Georges, 14-8-1870, 23 h., Melun (Seine-et-Marne).
 FAIVRE Jules Abel, 30-3-1867, 16 h., Lyon (Rhône).
 FALLER Louis Clément, 1-6-1819, 20 h., Habsheim (Haut-Rhin).
-FANTIN-LATOUR Théodore, 14-1-1836, 15 h., Grenoble (Isére).
+FANTIN-LATOUR Théodore, 14-1-1836, 15 h., Grenoble (Isère).
 FERRIER Gabriel, 29-9-1847, 3 h., Nimes (Gard). ;
 FEYEN-PERRIN Francois Nic., 12-4-1826, 114 h., Bey-sur-Seille (Meurthe-et-Moselle).
-FILLIARD Ernest, 15-12-1868, 9 hi, Chambéry (Savoie).
+FILLIARD Ernest, 15-12-1868, 9 h., Chambéry (Savoie).
 FLANDRIN Hippolyte, 23-3-1809, 15 h., Lyon (Rhône).
-FLANDRIN. Jules, 9-7-1871, 6 h. 30, Corenc (Is@re),
+FLANDRIN Jules, 9-7-1871, 6 h. 30, Corenc (Isère).
 FLANDRIN Paul Jean, 28-5-1811, 7 h., Lyon (Rhône).
 FOUACE Guillaume Rom., 22-5-1827, 7 h., Réville (Manche).
 FRANCAIS Francois Louis, 17-11-1814, 2 h., Plombiares (Vosges).
@@ -113,13 +113,13 @@ FRAYE André, 18-10-1887, 11 h. 15, Nantes (Loire-Inférieure).
 FRESNAYE (de La)/Roger, 11-7-1885, 15 h. 45, Le Mans (Sarthe).
 FRIANT Emile, 16-4-1863, 6 h., Dieuze (Moselle).
 FRIESZ Othon, 6-2-1879, 13 h., Le Havre (Seine-Inférieure).
-FROMENTIN Eugéne, 24-10-1820, 11 h., La Rochelle (Charente-Mar.).
+FROMENTIN Eugène, 24-10-1820, 11 h., La Rochelle (Charente-Mar.).
 GAGLIARDINI. Julien Gustave, 1-3-1846, 2 h. 30, Mulhouse (Ht-Rhin).
 GENIN Lucien, 9-11-1894, 1 h., Rouen (Seine-Inférieure).
 GEROME Jean Léon, 11-5-1824, 3 h., Vesoul (Haute-Saône).
 GIRARD Francois, 30-5-1838, 22-h., Poncin (Ain).
 GISCHIA Léon, 8-6-1903, 15 h. 30, Dax (Landes).
-GOETHALS Raymond Eugene, 12-9-1804, 3 h.. Bordeaux (Gironde).
+GOETHALS Raymond Eugene, 12-9-1804, 3 h., Bordeaux (Gironde).
 GRANDVILLE (de) Jean Gérard, .15-9-1803, 23 h., Nancy (Mthe-et-M.).
 GRISON Francois Ad., 17-6-1845, 9 h., Bordeaux (Gironde).
 GROBON Francois Fréd., 10-7-1815, 5 h., Lyon (Rhône).
@@ -154,8 +154,8 @@ LAZERGES. Jean Raymond, 5-7-1817, 9 h., Narbonne (Aude).
 LEANDRE Charles Lucien, 23-7-1862, 7 h., Champsecret (Orne).
 LEBASQUE Henri, 25-9-1865, ‘17 h., Champigné (Maine-et-Loire).
 LEBOURG Albert, 1-2-1849, 18 h., Montfort-sur-Risle (Eure).
-LEBRETON Constant; 11-3-1895, 8 h., Saint-Germain (Maine-et-Loire).
-LEFAUCONNIER Henri-Victor, 5-7-1881, 17 h., Hesdin’ (P,-de-Calais).
+LEBRETON Constant, 11-3-1895, 8 h., Saint-Germain (Maine-et-Loire).
+LEFAUCONNIER Henri-Victor, 5-7-1881, 17 h., Hesdin (P.-de-Calais).
 LEGER Fernand, 4-2-1881, 13 h., Argentan (Orne).
 LEGRAND Louis, 28-9-1863, 23 h. 45, Dijon (Cote-d’Or).
 LEGROS Alphonse, 8-5-1837, 11 h., Dijon (Côte-d’Or).
@@ -166,24 +166,24 @@ LEVY Henri Léopold, 23-9-1840, 2.h., Nancy (Meurthe-et-Moselle).
 LHERMITTE Léon Auguste, 31-7-1844, 7 h., Mont-Saint-Peére (Aisne).
 LHOTE André, 5-7-1885, 22 h., Bordeaux (Gironde).
 LORJOU Bernard, 9-9-1908, 5 h., Blois (Eure-et-Loire).
-LOUTREUIL Maurice Albert, 16-3-1885, 23 h., 45, Montmirail (Sarthe).
+LOUTREUIL Maurice Albert, 16-3-1885, 23 h. 45, Montmirail (Sarthe).
 LUMINAIS Evariste Vital, 13-10-1821, 20 h., Nantes (Loire-Inférieure).
-LURCAT Jean, 1-7-1892,°11.h., Bruyeéres (Vosges).
+LURCAT Jean, 1-7-1892, 11 h., Bruyères (Vosges).
 MAIGNAN Albert Pierre, 14-10-1845, 18 h., Beaumont-sur-Sarthe (Sthe).
-MAILLAUD Fernand, 12-12-1862, 11 h.. Mouhet (Indre).
+MAILLAUD Fernand, 12-12-1862, 11 h., Mouhet (Indre).
 MAINSSIEUX Lucien, 4-8-4885, 16 h., Voiron (Isère).
 MANESSIER Alfred, 5-12-1911, 13 h., Saint-Ouen (Somme).
 MARCHAND André, 10-2-1907, 6h. 45, Aix-en-Provence (B.-du-Rh.).
-MARCKE de LUMMEN Emile (van), 20-8-1827, 9 h., Sevres (S.-et-O.).
+MARCKE de LUMMEN Emile (van), 20-8-1827, 9 h., Sèvres (S.-et-O.).
 MARILHAT Prosper Georg., 22-2-1811, 6 h., Vertaizon (Puy-de-Dôme).
 MARQUET Pierre Albert, 27-3-1875, 8 h., Bordeaux (Gironde).
 MARTIN. Henri, 5-8-1860, 9 h., Toulouse (Haute-Garonne).
 MASSON André, 4-1-1896, 2 h., Baligny (Oise).
-MATISSE Henri.) 34-72-1869, 20 hi ‘Gate Gambresis (Nord).
+MATISSE Henri, 31-12-1869, 20 h., Cateau-Cambresis (Nord).
 MAUFRA Maxime Emile, 17-5-1861, 6 h., Nantes (Loire-Inférieure).
 MAYER Auguste Etienne, 8-7-1805, 19 h., Brest (Finistère).
 MEISSONIER Jean Louis E., 21-2-1815, 5 h., Lyon (Rhône).
-METZINGER Jean, 24-6-1883, 0 ‘h: 30, Nantes (Loire-Inférieure).
+METZINGER Jean, 24-6-1883, 0 h. 30, Nantes (Loire-Inférieure).
 MILCENDEAU Edmond Charles, 18-7-1872, 15 h., Soullans (Vendée).
 MILLET Jean Francois, 4-10-1814, 20 h., Gruchy (Manche).
 MONTICELLI Adolphe Joseph, 14-10-1824, 14 h., Marseille (B.-du-Rh.).
@@ -191,44 +191,44 @@ MOREAU Adrien, 18-4-1843, 22 h., Troyes (Aube).
 MOREL-FATIO Antoine Léon, 17-1-1810, 3 h., Rouen (Seine-Inférieure).
 MORISOT Berthe, 14-1-1841, 15 h., Bourges (Cher).
 MOROT Aimé Nicolas, 16-6-1850, 16 h., Nancy (Meurthe-et-Moselle).
-NAKACHE Armand Henri, 11-1-1894, 5 h., Bone (Algérie).
-NAUDIN Bernard, 11-11-1876, 14 h., Ch&teauroux (Indre).
+NAKACHE Armand Henri, 11-1-1894, 5 h., Bône (Algérie).
+NAUDIN Bernard, 11-11-1876, 14 h., Châteauroux (Indre).
 NEUVILLE (de) Alphonse, 31-5-1835, 4 h. 30, Saint-Omer (P.-de-C.).
 NOEL Jules Achille, 29-9-1815, 22 h., Quimper (Finistère).
 NOIROT Emile Benoit, 5-6-1853, 21 h., Roanne (Loire).
 OLIVE Jean-Baptiste, 30-7-1848, 3 h., Marseille (Bouches-du-Rhône).
-OTTMANN Henry, 10-4-1877, 13 h., Ancenis: (Loire-Inférieure).
+OTTMANN Henry, 10-4-1877, 13 h., Ancenis (Loire-Inférieure).
 OZENFANT Amédée, 15-4-1886, 17 h., Saint-Quentin (Aisne).
 PALLUT Pierre, 30-6-1918, 10 h., Gommerville (Eure-et-Loire).
 PARTURIER Marcel, 7-4-1901, 15 h., Le Havre (Seine-Inférieure).
 PATRIX Michel, 25-5-1917, 20 h., Cabourg (Calvados).
 PECRUS Charles Francois, 9-2-1826, 11 h., Limoges (Haute-Vienne).
 PELOUSE Léon Germain, 1-10-1838, 19 h., Pierrelaye (Seine-et-Oise).
-PIGNON Edouard, 12-2-1905, 7 his Marles-les-Mines (Pas-de-Calais).
+PIGNON Edouard, 12-2-1905, 7 h., Marles-les-Mines (Pas-de-Calais).
 PLANSON André, 10-4-1898, 22 h. 30, La Ferté-sous-Jouarre (S.-et-M.).
 PLASSAN Antoine Emile, 29-7-1817, 5 h., Bordeaux (Gironde).
 POINTELIN Auguste Emman., 23-6-1839, 6 h., Arbois (Jura).
-POULBOT Francisque, 6-2-1879, 9 h., Saint-Denis (Seine) .
+POULBOT Francisque, 6-2-1879, 9 h., Saint-Denis (Seine).
 PRINET René Francois, 31-12-1861, 13 h. 30, Vitry-le-Francois (Marne).
 PUVIS de CHAVANNES Pierre, 14-12-1824, 10 h., Lyon (Rhône).
-PUY Jean, 7-11-1876, 12 ‘h., Roanne (Loire).
-QUELVEE Francois, 13-10-1884, 16 h., Evreux (Eure),
+PUY Jean, 7-11-1876, 12 h., Roanne (Loire).
+QUELVEE Francois, 13-10-1884, 16 h., Evreux (Eure).
 RAVEL Daniel, 3-3-1915, 14 h., Aix-en-Provence (Bouches-du-Rhône).
-RAVIER Auguste Francois, 4-5-1814, 12 h., Lyon (Rhône),
+RAVIER Auguste Francois, 4-5-1814, 12 h., Lyon (Rhône).
 REDON Odilon Bertrand, 20-4-1840, 10 h., Bordeaux (Gironde).
 RENOIR Pierre Auguste, 25-2-1841, 6 h., Limoges (Haute-Vienne).
-RENOUART Charles Paul, 5-1 1-1845, 2 h., Cour-Cheverny (Loir-et-Cher).
+RENOUART Charles Paul, 5-11-1845, 2 h., Cour-Cheverny (Loir-et-Cher).
 RIBOT Théodule Auguste, 5-8-1823, 16 h., SaintNicolas d’Attez (Eure).
 RICARD Louis Gustave, 1-9-1823, 19 h., Marseille (Bouches-du-Rhône).
-ROCHEGROSSE Georges Antoine, 2-8-1859, 4 h. 30, Versailles (S:-Q:):
+ROCHEGROSSE Georges Antoine, 2-8-1859, 4 h. 30, Versailles (S.-O.).
 ROQUEPLAN Camille Joseph, 18-2-1800, 4 h., Mallemort (B.-du-Rh.).
-ROTIG Georges Frédérie, 14-9021 873/98) (hoi Letayre (Seine-Inférieure).
+ROTIG Georges Frédérie, 1-10-1873, 8 h., Le Havre (Seine-Inférieure).
 ROULLET Gaston Marie-A., 15-11-1847, 2 h., Ars (Charente-Maritime).
 ROUSSEAU Henri (le Douanier), 21-5-1844, 1 h., Laval (Mayenne).
 ROUSSEL Ker Xavier, 10-12-1867, 20 h., Lorry-les-Metz (Moselle).
 ROY Pierre, 10-8-1880, 19 h., Nantes (Loire-Inférieure).
-ROYBET Ferdinand, 12-4-1840, 3 h., Uzés (Gard),
-SAIN. Edouard Alexandre, 13-5-1830, 19 h., Cluny (Sa6ne-et-Loire).
+ROYBET Ferdinand, 12-4-1840, 3 h., Uzés (Gard).
+SAIN. Edouard Alexandre, 13-5-1830, 19 h., Cluny (Saône-et-Loire).
 SAIN Paul Jean-Marie, 6-12-1853, 0 h., Avignon (Vaucluse).
 SAINT-JEAN Simon, 14-10-1808, 22 h., Lyon (Rhône).
 SAUNIER Noél, 28-9-1847, 11 h. 30, Vienne (Isère).
@@ -236,23 +236,23 @@ SAVIN Maurice Louis, 17-10-1894, 11 h., Moras (Drôme).
 SAVREUX Maurice, 27-5-1884, 15 h., Lille (Nord).
 SEYSSAUD René, 15-6-1867, 21 h., Marseille (Bouches-du-Rhône).
 ABEILLE Jack, 28-5-1873, 10 h., La Varenne-Saint-Hilaire (Seine).
-ABONNEL Michel’: 5-124881) 8 thie" Clermont barca (Puy-de-Dôme.
+ABONNEL Michel, 15-1-1881, 8 h., Clermont-Ferrand (Puy-de-Dôme).
 ACHARD Jean Alexis, 17-4-1807, 11 h., Voreppe (Isère).
-ACHILLE-FOULD Georges (Mlle), 24-8-1865, 19 h., Asniéres (Seine).
+ACHILLE-FOULD Georges (Mlle), 24-8-1865, 19 h., Asnières (Seine).
 AILLET Edgar Adrien, 5-3-1883, 5 h., Eauze (Gers).
 ALAUX Marie-Francois, 11-10-1878, 3 h., Bordeaux (Gironde).
-ALAUX Gustave, 21-8-1887. 10 h., Bordeaux (Gironde).
+ALAUX Gustave, 21-8-1887, 10 h., Bordeaux (Gironde).
 ALIZARD Joseph Paul, 12-8-1867, 22 h., Langres (Haute-Marne).
 ALLARD René, 17-6-1878, 0 h..30, Ch&teauneuf-sur-Sarthe (Sarthe).
-AMBROGIANI Pierre. 16-1-1907, 20 h., Ajaccio (Corse).
+AMBROGIANI Pierre, 16-1-1907, 20 h., Ajaccio (Corse).
 AMIEL Louis Félix, 12-3-1802, 2 h., Castelnaudary (Aude).
 AMORETTI Gabriel, 27-1-1861, 13 h., Toulon (Var).
 ANGRAND Charles, 19-4-1854, 11 h., Criquetot-sur-Ouville (Seine-Inf.).
-APPERT Eugéne, 29-12-1814, 1 h., Angers (Maine-et-Loire).
-ARMBRUSTIER Jean Francois, 21-11-1835, 17 h., Lons-!e-Saunier (J.).
-ARUS Jean-Marie Jo., 6-11-1846, 22 h.. Nimes (Gard).
+APPERT Eugène, 29-12-1814, 1 h., Angers (Maine-et-Loire).
+ARMBRUSTIER Jean Francois, 21-11-1835, 17 h., Lons-le-Saunier (J.).
+ARUS Jean-Marie Jo., 6-11-1846, 22 h., Nimes (Gard).
 ASTE Jean-Louis, 30-8-1864, 18 h., L'Isle-Jourdain (Gers).
-ASTRUC Zacharie, 20-2-1833, 2 h.. Angers (Maine-et-Loire).
+ASTRUC Zacharie, 20-2-1833, 2 h., Angers (Maine-et-Loire).
 AUBRY Emile, 18-4-1880, 13 h., Sétif (Algérie).
 AUFFRAY Alexandre, 14-5-1869, 18 h., Saint-Nazaire (Loire-Inférieure).
 AUJAME Jean-Claude, 12-5-1905, 7 h. 30, Aubusson (Creuse).
@@ -260,7 +260,7 @@ BACHELET Emile Just, 2-1-1892, 1 h., Nancy (Meurthe-et-Moselle).
 BADIN Pierre Adolphe, 28-7-1805, 6 h., Auxerre (Yonne).
 BAGGE Eric, 10-9-1890, 21 h. 45, Anthony (Seine).
 BAILLE Hervé, 21-1-1896, 17 h., Sete (Hérault).
-BAIL Antoine, 8-5-1830, 14 h., Chasselay (Rhone).
+BAIL Antoine, 8-5-1830, 14 h., Chasselay (Rhône).
 BALAY Charles, 27-9-1861, 8 h.. 30, Saint-Etienne (Loire).
 BALFOURIER Adolphe Paul, 12-8-1816, 10 h., Montmorency (S.-et-O.).
 Oot Adrienne Elodie, 16-3-1888, 14 h. 15, Montgeron (Seine-et-Oise).
@@ -274,10 +274,10 @@ BALANDE Gaston, 31-5-1880, 2 h., Madrid (par Saujon).
 BALLUE Pierre Ernest, 27-2-1855, 13 h., La Haye-Descartes (Indre-et-L.).
 BARBIER Antoine, 8-5-1859, 2 h., Saint-Symphorien-de-Lay (Loire).
 BASCHET Marcel André, 5-8-1862, 19 h. 30, Gagny (Seine-et-Oise).
-BASCOULES Jean Désiré, 19-8-1886, 6 h. 30, Perpignan (Pyr.-Orient.
-BASTET Tancréde Jean, 16-4-1858,. 13 h., Doméne (Isére).
+BASCOULES Jean Désiré, 19-8-1886, 6 h. 30, Perpignan (Pyr.-Orient).
+BASTET Tancréde Jean, 16-4-1858,. 13 h., Doméne (Isère).
 BASTIDE Alice Claire, 18-5-1868, 8 h., Saint-Mandé (Seine).
-BASTIEN-LEPAGE Emile, 20-1-1854, 18 h.. Damvillers (Meuse).
+BASTIEN-LEPAGE Emile, 20-1-1854, 18 h., Damvillers (Meuse).
 BATTAILLE Eugene Antonin, 18-4-1817, 6 h., Granville (Manche).
 BAUCHANT André, 24-4-1873, 23 h. 30, Châtellerault (Indre-et-Loire).
 BAUDE Francois Charles, 10-1-1880, 21 h., Houplines (Nord).
@@ -285,12 +285,12 @@ BAUDERON Alexandre Adol., 13-11-1822, 6 h., Aubusson (Creuse).
 BAUDOIN Paul Albert, 24-10-1844, 10 h. 30, Rouen (Seine-Inférieure).
 BEAUFRERE Adolphe-Marie, 24-3-1876, 20 h. 45, Quimperlé (Finistère).
 BEAUME Emile, 28-4-1888, 22 h., Pézenas (Hérault).
-BEAUMONT (de) Hugues; 26-10-1874. 3 h., Chouzy (Loir-et-Cher).
+BEAUMONT (de) Hugues, 26-10-1874, 3 h., Chouzy (Loir-et-Cher).
 BEAUMONT Jean Georges, 1-10-1895, 13 h., Elbeuf (Seine-Inférieure).
-BEAUSSIER Emile, 30-12-1874, 6 h.. Avignon (Vaucluse).
-BEAUVAIS Armand, 30-11-1840, 8 h.. Bar-sur-Aube (Aube).
+BEAUSSIER Emile, 30-12-1874, 6 h., Avignon (Vaucluse).
+BEAUVAIS Armand, 30-11-1840, 8 h., Bar-sur-Aube (Aube).
 BECHILLON (de) Marc, 17-12-1916, 1 h., Périgueux (Dordogne).
-BEGULE Lucien-Marie, 10-5-1848, 9 h. 30, Saint-Genis-Laval (Rhone).
+BEGULE Lucien-Marie, 10-5-1848, 9 h. 30, Saint-Genis-Laval (Rhône).
 BELLE Narcisse, 9-9-1900, 11 h., Saint-Silvain (Creuse).
 BELLEE (Le Goasbe de) Léon, 7-7-1844, 5 h., Ploérmel (Morbihan).
 BELLY Léon Adolphe, 23-3-1827, 11 h., Saint-Omer (Pas-de-Calais).
@@ -298,12 +298,12 @@ BENARD Henry Jean E., 23-6-1844, 3 h., Goderville (Seine-Inférieure).
 BENNER Emmanuel, 28-3-1836, 19 h. 30, Mulhouse (Haut-Rhin).
 BENNER Jean, 28-3-1836, 19 h., Mulhouse (Haut-Rhin).
 BENVIGNAT Charles César, 24-12-1805, 0 h., Boulogne-sur-Mer (Pas-de-Calais).
-BERANGER Charles, 21-11-1816, 10 h.. Savres (Seine-et-Oise).
-BERANGER Jean-Baptiste, 21-8-1814, 3 h., Savres (Seine-et-Oise).
-BERJONNEAU Jules, 26-12-1890, 1 h.- Montmorillon (Vienne).
+BERANGER Charles, 21-11-1816, 10 h., Sèvres (Seine-et-Oise).
+BERANGER Jean-Baptiste, 21-8-1814, 3 h., Sèvres (Seine-et-Oise).
+BERJONNEAU Jules, 26-12-1890, 1 h., Montmorillon (Vienne).
 BERNARD Emile, 28-4-1868, 3 h. 30, Lille (Nord).
 BERNARD Jean Fleury, 17-12-1908, 10 h., Argenteuil (Seine-et-Oise).
-BERNARD Jean Francois, 20-2-1829, 23 h., Cormatin (Sa6ne-et-Loire).
+BERNARD Jean Francois, 20-2-1829, 23 h., Cormatin (Saône-et-Loire).
 BERNARDEAU Henri-Marie, 6-1-1867, 10 h. 30, Orléans (Loiret).
 BERNE-BELLECOUR Jean Jacques, 14-8-1874, 4 h., Saint-Germain-en-Laye (Seine-et-Oise).
 BERTEAUX Hippolyte Dom., 28-3-1843, 10 h., Saint-Quentin (Aisne).
@@ -314,8 +314,8 @@ BERTHOMME-SAINT-ANDRE Louis A., 4-2-1905, 9 h., Barbery (Oise).
 BERTIER Charles Alexan., 1-10-1860, 6 h., Grenoble (Isère).
 BERTIN Emile, 29-1-1878, 11 h., Suresnes (Seine).
 BERTRAND Paulin André, 4-2-1852, 15 h., Toulon (Var).
-BESSE Albert Georges. 1-5-1871, 23 h., Blois (Loir-et-Cher).
-BESSE Raymond James, 27-12-1899. 214 h., Niort (Deux-Sevres).
+BESSE Albert Georges, 1-5-1871, 23 h., Blois (Loir-et-Cher).
+BESSE Raymond James, 27-12-1899, 214 h., Niort (Deux-Sèvres).
 BIDAULT Henri, 20-2-1839, 23 h., Sainte-Colombe-les-Bois (Nièvre).
 BIENNOURRY Victor Francois, 10-1-1823, 12 h., Bar-sur-Aube (Aube).
 BIESSY Marie-Gabriel, 25-3-1854, 7 h., Saint-Pierre-du-Mont (Landes).
@@ -324,23 +324,23 @@ BIGOT Raymond, 17-5-1872, 15 h., Orbec (Calvados).
 BILLIARD Victor-Marie, 12-5-1864, 14 h., Caen (Calvados).
 BILLARDET Léon Marie-J., 17-5-1818, 18 h., Gray (Haute-Saône).
 BILLET Pierre, 2-11-1836, 16 h., Cantin (Nord).
-BILLOTTE Léon Joseph, 28-9-1815, 22 h.. Dijon (Côte-d’Or).
-BINET Adolphe Gustave, 2-2-1854, 10 -h., La Riviére-Saint-Sauveur (Cal.).
+BILLOTTE Léon Joseph, 28-9-1815, 22 h., Dijon (Côte-d’Or).
+BINET Adolphe Gustave, 2-2-1854, 10 h., La Riviére-Saint-Sauveur (Cal.).
 BINET Georges Jules, 30-4-1865, 3 h., Le Havre (Seine-Inférieure).
-BINET Victor Jean-B., 17-3-1849, 11 h.. Rouen (Seine-Inférieure).
+BINET Victor Jean-B., 17-3-1849, 11 h., Rouen (Seine-Inférieure).
 BIZARD Charles-Henry, 13-11-1887, 0 h., Roubaix (Nord).
 BLANC Benoit, 21-3-1812, 18 h., Gémenos (Bouches-du-Rhône).
 BLANC Celestin Joseph, 22-11-1817, 10 h., Clelles (Isère).
 BLANC Charles, 21-12-1895, 11 h., Limoges (Haute-Vienne).
 BLANCHARD Charles Octave, 12-8-1814, 22 h., Brest (Finistère).
-BLERY Eugéne Stanisl., 4-3-1805, 14 h., Fontainebleau (Seine-et-Marne).
+BLERY Eugène Stanisl., 4-3-1805, 14 h., Fontainebleau (Seine-et-Marne).
 BLIN Francois, 10-9-1827, 5 h. 30, Rennes (Ille-et-Vilaine).
 BOILVIN Emile, 7-5-1845, 6 h., Metz (Moselle).
 BONNARDEL Alexandre Fr., 6-9-1867, 2 h., Pajay (Isère).
 BONNEFOY Henri Arthur, 4-4-1839, 4 h., Boulogne-sur-Mer (Pas-de-C.).
 BONNEGRACE Charles Adolphe, 17-4-1808, 0 h., Toulouse (Hte-Gar.).
 BONNET Felix Alfred, 8-5-1847, 16 h. 30, Grenoble (Isère).
-BONNETON Germain Eugéne, 18-9-1874, 1 h., Tournon-sur-Rhône, (Ard.).
+BONNETON Germain Eugène, 18-9-1874, 1 h., Tournon-sur-Rhône (Ard.).
 BORNET Paul, 11-9-1878, 15 h., Ranchot (Jura).
 BOUCHE Louis Alexandre, 10-1-1838, 7 h., Luzancy (Seine-et-Marne).
 BOUCOIRAN Numa, 24-5-1805, 2 h., Nimes (Gard).
@@ -360,7 +360,7 @@ CAMI Robert, 1-1-1900, 13 h., Bordeaux (Gironde).
 CAPGRAS Georges, 16-5-1866, 5 h., Joinville-le-Pont (Seine).
 CARRIER Alain, 14-10-1924, 5 h., Sarlat (Dordogne).
 CARRE Georges Henri, 31-5-1878, 23 h., Marchais-Beton (Yonne).
-CARREY Louis Jacques, 21-8-1822, 12 h,, Rouen (Seine-Inférieure).
+CARREY Louis Jacques, 21-8-1822, 12 h., Rouen (Seine-Inférieure).
 CARON Henri Paul Edmond, 9-5-1860, 6 h. 15, Abbeville (Somme).
 CARO-DELVAILLE Henry, 9-7-1876, 4 h., Bayonne (Basses-Pyrénées).
 CARL-ROSA Mario-Raoul, 29-10-1853, 17 h., Loudun (Vienne).
@@ -374,7 +374,7 @@ CAVAILLES Jean Jules L., 20-6-1901, 15 .h., Carmaux (Tarn).
 CAZIN Marie, 19-9-1844, 9 h., Paimbeuf (Loire-Inférieure).
 CERISIER Simone-Marie, 29-4-1903, 22 h. 15, Ancenis (Loire-Inférieure).
 CHABAUD Auguste Elisée, 3-10-1882, 6 h., Nimes (Gard).
-CHADEL Jules, 10-6-1870, 21 h. 30, Clermont-Ferrand (Puy-de-Dôme.
+CHADEL Jules, 10-6-1870, 21 h. 30, Clermont-Ferrand (Puy-de-Dôme).
 CHAIX Auguste Hippol., 3-11-1860, 17 h., Vienne (Isère).
 CHANDELIER Jules Michel, 30-10-1813, 1 h., La Rochelle (Charente-M.).
 CHANUT Marie-Claude, 2-2-1851, 19 h. 30, Bourg (Ain).
@@ -385,7 +385,7 @@ CHARNAY Armand, 7-1-1844, 9 h., Charlieu (Loire).
 CHARPENTIER-BOSIO André, 9-2-1822, 12 h., Chartres (Eure-et-Loire).
 CHARTIER Henri Georges, 23-2-1859, 4 h., Chateau-Chinon (Nièvre).
 CHAUTARD Joseph Thomas, 5-8-1821, 4 h., Avignon (Vaucluse).
-CHEREAU Claude Eugéne, 31-12-1883, 22 h., Villejuif (Seine).
+CHEREAU Claude Eugène, 31-12-1883, 22 h., Villejuif (Seine).
 CHEVRIER Jules, 4-2-1816, 2 h., Chalon-sur-Saône (Saône-et-Loire).
 CHOCARNE-MOREAU Charles Paul, 31-10-1855, 5 h., Dijon (C.-d’Or).
 CHUDANT Jean Adolphe, 5-1-1860, 1 h., Besançon (Doubs).
@@ -400,7 +400,7 @@ COLAS Alphonse, 25-9-1818, 2 h., Lille (Nord).
 COLIN Paul, 27-6-1892, 5 h., Nancy (Meurthe-et-Moselle).
 COMAIRAS Philippe, 24-10-1803, 9 h., Saint-Germain-en-Laye (S.O.).
 CORABCEUF Jean Alexandre, 6-11-1870, 16 h. 30, Pouillé (Loire-Inf.).
-CORNEAU Eugéne, 18-6-1894, 16 h., Vouzeron (Cher).
+CORNEAU Eugène, 18-6-1894, 16 h., Vouzeron (Cher).
 COT Pierre Auguste, 17-2-1837, 12 h., Bédatieux (Hérault).
 COUTAUD Lucien, 13-12-1904, 16 h., Meynes (Gard).
 COUVERCHEL Alfred, 27-1-1834, 14 h., Marseille-en-Beauvaisis (Oise).
@@ -414,15 +414,15 @@ DANGUIN Jean-Baptiste, 3-5-1823, 10 h., Frontenas (Rhône).
 DARGENT Edouard Jan, 15-10-1824, 6 h., Saint-Servais (Finistère).
 DAUMONT Emile Florentin, 19-2-1834, 21 h., Montereau (Seine-et-M.).
 DAUVERGNE Anatole, 28-9-1812, 21 h., Coulommiers (Seine-et-Marne).
-DEBAR Alexandre Pierre, 14-7-1821, 2 h, 15, Montreuil-sur-Mer (P.C.).
+DEBAR Alexandre Pierre, 14-7-1821, 2 h. 15, Montreuil-sur-Mer (P.C.).
 DEBELLE Alexandre Joseph, 21-12-1805, 7 h., Voreppe (Isère).
 DECAMPS Albert, 10-9-1861, 14 h., Allery (Somme).
 DECHENAUD Adolphe, 21-6-1868, 15 h., Saint-Ambreuil (Saône-et-L.).
-DECISY Eugéne, 6-2-1866, 19 h., Metz (Moselle).
+DECISY Eugène, 6-2-1866, 19 h., Metz (Moselle).
 DECORCHEMONT Francois Emile, 26-5-1880, 6 h. 30, Conches (Eure).
-DECREUSE Jean-Pierre, 28-8-1806, 6 h.. Montrond (Doubs).
+DECREUSE Jean-Pierre, 28-8-1806, 6 h., Montrond (Doubs).
 DELABORDE Henri, 2-5-1811, 23 h., Rennes (Ille-et-Vilaine).
-DELACROIX Henry Eugéne, 16-1-1845, 3 h., Solesmes (Nord):
+DELACROIX Henry Eugène, 16-1-1845, 3 h., Solesmes (Nord).
 DELAHOGUE Alexis Auguste, 6-7-1867, 18 h. 45, Soissons (Aisne).
 DELATOUSCHE Germain, 27-8-1898, 5 h., Chatillon-en-Dunois (E.-L.).
 DELAUNAY Claude, 16-7-1915, 4 h., La Ferriére (Vendée).
@@ -435,7 +435,7 @@ DEPAQUIT Jules, 14-11-1872, 22 h. 30, Sedan (Ardennes).
 DESAVARY Charles Paul, 6-2-1837, 10 h., Arras (Pas-de-Calais).
 DESBROSSES Léopold, 22-7-1821, 4 h., Bouchain (Nord).
 DESCELLES Paul, 22-3-1851, 3 h., Raon-l’Etape (Vosges).
-DESGRANGES) Guillaume Jac., 10-2-1886, 18 h., Avranches (Manche).
+DESGRANGES Guillaume Jac., 10-2-1886, 18 h., Avranches (Manche).
 DESJOBERT Louis Remy, 16-4-1817, 4 h., Chateauroux (Indre).
 DESLIGNERES André, 25-9-1880, 22 h. 30, Nevers (Nièvre).
 DEMORY Charles Théoph., 6-10-1833, 1 h., Arras (Pas-de-Calais).
@@ -444,8 +444,8 @@ DESPIERRE Jacques (Ceria), 7-3-1912, 17 h., Saint-Etienne (Loire).
 DESPUJOLS Jean, 19-3-1886, 18 h., Salles (Gironde).
 DETURCK Julien Jules, 23-2-1862, 2 h., Bailleul (Nord).
 DETHOMAS Maxime, 13-10-1867, 22 h. 45, Garges-les-Gonesse (S.-O.).
-DEVE Eugéne, 22-9-1826, 24 h., Rouen (Seine-Inférieure).
-DEVEDEUX Louis, 8-7-1820, 17 h., Clermont-Ferrand (Puy-de-Dôme.
+DEVE Eugène, 22-9-1826, 24 h., Rouen (Seine-Inférieure).
+DEVEDEUX Louis, 8-7-1820, 17 h., Clermont-Ferrand (Puy-de-Dôme).
 DEVILLEY Louis Théodore, 28-10-1818, 15 h., Metz (Moselle).
 DEYRIEUX Georges, 27-12-1820, 4 h., Millery (Rhône).
 DEZIRE Henri, 6-2-1878, '6)h., Libourne (Gironde).
@@ -459,16 +459,16 @@ DROUYN Francois Joss., 12-7-1816, 23 h., Izon (Gironde).
 DRUET Antoine, 12-8-1857, 7 h., Essertenne (Haute-Saône).
 DUBOIS Henri Pierre, 27-2-1837, 12 h., Rezé (Loire-Inférieure).
 DUBOIS Paul Elie, 29-10-1886, 23 h. 30, Colombier-Chatelot (Doubs).
-DUBOUCHET Henri Joseph, 28-3-1833, 24h,, Calvire (Rhône).
+DUBOUCHET Henri Joseph, 28-3-1833, 21h., Caluire (Rhône).
 DUBOURG Louis Alexand., 26-2-1821, 22 h., Honfleur (Calvados).
-DUBREUIL Pierre, 8-9-1891, 7 h.. Quimper (Finistère).
-DUCARUGE Léon Pierre, 14-2-1843, 10 h., Lavodte-Chilhac (Hte-Loire).
-DUCHENE Etienne, 12-4-1813, 15 h., St-Georges-de-Reneins (Rhdne).
+DUBREUIL Pierre, 8-9-1891, 7 h., Quimper (Finistère).
+DUCARUGE Léon Pierre, 14-2-1843, 10 h., Lavoûte-Chilhac (Hte-Loire).
+DUCHENE Etienne, 12-4-1813, 15 h., St-Georges-de-Reneins (Rhône).
 DUCORNET Louis Joseph, 11-1-1806, 24 h., Lille (Nord).
 DUHEM Henri Aime, 7-4-1860, 3 h. 20, Douai (Nord).
 DUPUIS Daniel Jean, 15-2-1849, 12 h., Blois (Loir-et-Cher).
 DUPUIS Pierre, 9-7-1833, 7 h., Orléans (Loiret).
-DUPUY Paul Michel, 24-3-1869. 3 h., Pau (Basses-Pyrénées).
+DUPUY Paul Michel, 24-3-1869, 3 h., Pau (Basses-Pyrénées).
 DURAND-ROY René Emile, 29-10-1894, 12 h. 30, Saintes (Ch.-Mar.).
 DUSOUCHET Pierre Léon, 25-4-1876, 17 h., Versailles (Seine-et-Oise).
 DUVENT Charles Jules, 26-6-1867, 1 h., Langres (Haute-Marne).
@@ -480,22 +480,22 @@ ESCOT Charles, 16-4-1834, 1 h. 30, Gaillac (Tarn).
 ESTEVE Maurice, 2-5-1904, 21 h., Culan (Cher).
 ETCHEVERRY Denis, 21-9-1867, 5 h., Bayonne (Basses-Pyrénées).
 EVE Jean, 6-10-1900, 0 h. 03, Somain (Nord).
-EVENEPOEL Henri Jacques, 3-10-1872, 11 h. 30, Nice (Alpes-Marii.).
+EVENEPOEL Henri Jacques, 3-10-1872, 11 h. 30, Nice (Alpes-Marit.).
 FALIZE André, 21-5-1872, 18 h., Montereau (Seine-et-Marne).
 FAIVRE Antoine Jean, 24-5-1830, 23 h. 30, Besançon (Doubs).
 FAIVRE Louis Stanislas, 17-4-1818, 12 h., Nancy (Meurthe-et-Moselle).
 FANART Clément Alphon., 17-1-1831, 20 h., Besançon (Doubs).
-FAURE Eugéne, 23-8-1822, 1 h., Seyssinet (prés Grenoble) [Isère].
-FERNAUD-TROCHAIN Jean, 21-2-1879, 18 h. 30, Ruell (Seine-et-Oise).
-FERAGU. Auguste Franc., 24-5-1816, 12 h. 30, Lille (Nord).
-FERON Julien Hippol., 14-9-1864, 7 h. 30, Saint-Jean-du-Cardonnay (Seine-tnférieure).
+FAURE Eugène, 23-8-1822, 1 h., Seyssinet (Isère).
+FERNAUD-TROCHAIN Jean, 21-2-1879, 18 h. 30, Rueil (Seine-et-Oise).
+FERAGU Auguste Franc., 24-5-1816, 12 h. 30, Lille (Nord).
+FERON Julien Hippol., 14-9-1864, 7 h. 30, Saint-Jean-du-Cardonnay (Seine-Inférieure).
 FEYEN Jacques Eugene, 13-11-1815, 1 h., Bey-sur-Seille (Meurthe-et-M.).
 FILLON Arthur, 27-10-1900, 13 h., Lorris (Loiret).
-FILLYON Jules, 11-4-1824, 412 h., Compiégne (Oise).
+FILLYON Jules, 11-4-1824, 12 h., Compiègne (Oise).
 FLAMENG Marie-Auguste, 17-7-1843, 18 h., Jouy-aux-Arches (Moselle).
 FLEURY Pierre, 6-7-1900, 18 h. 30, Boulogne-sur-Seine (Seine).
 FONT Constantin, 11-1-1890, 5 h., Auch (Gers).
-FONTAINE Edme Adolphe, 8-5-1814, 4 h., Noisy-le-Grand (Seine-ei-O.).
+FONTAINE Edme Adolphe, 8-5-1814, 4 h., Noisy-le-Grand (Seine-et-O.).
 FONTAN Léon Victor, 23-9-1884, 2 h., Donchery (Ardennes).
 FONVILLE Nicolas Victor, 30-11-1805, 10 h., Thoissey (Ain).
 FOUGERAT Emmanuel, 25-12-1869, 0 h. 30, Rennes (Ille-et-Vilaine).
@@ -509,13 +509,13 @@ GALAND Léon Laurent, 18-4-1872, 9 h. 30, Montpellier (Hérault).
 GALLARD-LEPINAY Paul Charles, 23-5-1842, 18 h., Aulnay-de-Saintonge (Charente-Maritime).
 GALLIER Achille Gratien, 6-6-1814, 0 h., Bayonne (Basses-Pyrénées).
 GANDON Adolphe, 28-7-1828, 7 h., Nimes (Gard).
-GANDON Fierre, 20-7-1899, 18 h.. L’Hay-les-Roses (Seine).
+GANDON Fierre, 20-7-1899, 18 h., L’Hay-les-Roses (Seine).
 GARCIN Louis Marius, 25-8-1821, 22 h., Hyéres (Var).
-GAUDIN Auguste Jean, 29-7-1914, 12 h., 15, Argentré-du-Plessis (I.-V.).
+GAUDIN Auguste Jean, 29-7-1914, 12 h. 15, Argentré-du-Plessis (I.-V.).
 GAUSSON Léo, 16-2-1860, 15 h., Lagny (Seine-et-Marne).
 GAUTIER Armand Désiré, 19-6-1825, 1 h., Lille (Nord).
 GEFFROY Edmond Aimé Fl., 30-7-1804, 4 h., Maignelay (Oise).
-GELIBERT Jules Bertrand, 28-11-1834, 14 h., Bagnéres-de-Bigorre (Hautes- Pyrénées).
+GELIBERT Jules Bertrand, 28-11-1834, 14 h., Bagnères-de-Bigorre (Hautes-Pyrénées).
 GENISSON Jules Victor, 7-3-1805, 12 h., Saint-Omer (Pas-de-Calais).
 GEOFFROY Henry Jules J., 1-3-1853, 2 h., Marennes (Charente-Marit.).
 GERARDIN Auguste, 30-6-1849, 8 h. 30, Mulhouse (Haut-Rhin).
@@ -523,7 +523,7 @@ GERBAULT Henry, 24-6-1863, 21 h., Chatenay (Seine).
 GERVAIS Paul Jean, 7-9-1859, 20 h., Toulouse (Haute-Garonne).
 GIACOMOTTI Félix Henri, 19-11-1828, 3 h., Quingey (Doubs).
 GIGOUX Jean Francois, 6-1-1806, 7 h. 15, Besançon (Doubs).
-GIMEL Georges, 8-3-1898, 14 h. 30, Doméne (Isére).
+GIMEL Georges, 8-3-1898, 14 h. 30, Doméne (Isère).
 GIR Charles Félix, 1-11-1883, 22 h. 15, Tours (Indre-et-Loire).
 GIRARDOT Louis Auguste, 27-11-1856, 22 h., Loulans-les-Forges (H.-S.).
 GIRAUD Henri Emile, 7-11-1825, 22 h., Le Puy-en-Velay (Hte-Loire).
@@ -532,7 +532,7 @@ GLAIZE Auguste Barth., 14-12-1807, 8 h., Montpellier (Hérault).
 GLUCK Louis Théodore, 3-4-1820, 9 h. 30, Altkirch (Haut-Rhin).
 GODEBY Charlies Léon, 26-1-1866, 16 h. 30, Rennes (ilie-et-Vilaine).
 GONDOUIN G, Emmanuel, 29-1-1883, 9 h., Versailles (Seine-et-Oise).
-GOULINAT: Jean Gabriel, 9-2-1883, 0 h. 30, Tours (Indre-et-Loire).
+GOULINAT Jean Gabriel, 9-2-1883, 0 h. 30, Tours (Indre-et-Loire).
 GRANDSIRE Pierre Eugene, 18-83-1825, 16 h., Orléans (Loiret).
 GRELLET Alexandre, 3-10-1835, 18 h., Vienne (Isère).
 GRELLET Francois, 19-10-1838, 23 h., Vienne (Isère).
@@ -543,24 +543,24 @@ GRILLON Roger Maurice, 28-9-1881, 10 h., Poitiers (Vienne).
 GRIVOLAS ‘Pierre, 2-9-1823, 0 h., Avignon (Vaucluse).
 GROS Lucien Alphonse, 19-5-1845, 7 h. 30, Wesserling (Haut-Rhin).
 GROSJEAN Henry, 2-7-1864, 3 h., Gondrecourt (Meuse).
-GUERARD A." Amédée, 24-2-1824, 3 h.. Sens (Yonne).
-GUET Chariemagne Osc., 5-2-1801, 20 hi, Meaux (Seine-et-Marne).
+GUERARD A. Amédée, 24-2-1824, 3 h., Sens (Yonne).
+GUET Chariemagne Osc., 5-2-1801, 20 h., Meaux (Seine-et-Marne).
 GUIGNET Jean Adrien, 21-41-1816, 2 h., Annecy (Haute-Savoie).
 GUIGNET Jean Baptiste, 23-4-1810, 10-h., Autun (Saône-et-Loire).
 GUIGUET Francois Jules, 8-1-1860, 2 h., Corbelin (Isère).
 GUILLEMER Ernest, 5-4-1839, 14 h.. Senlis (Oise).
 HAFFNER. Félix, 30-5-1818, 17 h., Strasbourg. (Bas-Rhin).
 HAMELIN Jacques Gustave, 4-8-1809, 15 h., Honfleur (Calvados).
-HANOTEAU Hector Charles, 26-5-1823, 214 h., Decize (Nièvre).
-HANICOTTE Augustin, 22-7-1870, 16 h.. Béthune (Pas-de-Calais).
+HANOTEAU Hector Charles, 26-5-1823, 21 h., Decize (Nièvre).
+HANICOTTE Augustin, 22-7-1870, 16 h., Béthune (Pas-de-Calais).
 HANS! (Waltz Jean-J.), 23-2-1873, 13 h., Colmar (Haut-Rhin).
-HELION Jean, 21-4-1904, 8 h..) Couternes (Orne).
+HELION Jean, 21-4-1904, 8 h., Couternes (Orne).
 HELLOUIN Xénophon, 20-2-1820, 8 h., Aunay-sur-Odon (Calvados).
 HERBELIN Jeanne Mathilde, 24-8-1818, 23 h. 30, Brunoy (S.-et-O.).
 HERPIN Léon Pierre, 12-10-1841, 2 h., Granville (Manche).
 HERVE Jules, 14-4-1887, 14 h., Langres (Haute-Marne).
 HERVIER Aubin, 11-1-1851, 10 h:, SeinteChamond (Loire).
-HIS. René .Charles, 15-2-1877, 22 h., Colombes (Seine).
+HIS René Charles, 15-2-1877, 22 h., Colombes (Seine).
 HOCHARD Gaston, 27-7-1862, 15 h., Orléans (Loiret).
 HOSTEIN Edouard Jean, 30-9-1804, 8 h., Pléhedel (Côtes-du-Nord).
 HOUSEZ Charles Gustave, 17-12-1822, 2 h., Condé (Nord).
@@ -603,7 +603,7 @@ LACLAU Armand, 4-5-1892, 10 h., Toulouse (Haute-Garonne).
 LADUREAU Pierre, 28-8-1882, 21 h. 30, Dunkerque (Nord).
 LAFOND Jacques, 26-1-1817, 16 h., Périgueux (Dordogne).
 LA LYRE Adolphe (Lalire), 1-10-1848, 12 h., 30, Rouvres (Meuse).
-LAMBERT Antoine Eugéne; 26-4-1824, 12 h., Dijon (Côte-d’Or).
+LAMBERT Antoine Eugène; 26-4-1824, 12 h., Dijon (Côte-d’Or).
 LAMBERT Jacques Henri, 2-3-1877, 21 h. 30, Sévres (Seine-et-Oise).
 LANFANT Francois Louis, 23-8-1814, 13 h., Sierck (Moselle).
 LANOUE Félix Hippolyte. 14-10-1812, 6 h., Versailles (Seine-et-Oise).
@@ -632,7 +632,7 @@ LEBEL Edmond, 5-2-1834, 10 h., Amiens (Somme).
 LEBLANC Cl. Théodore, 3-10-1800, 5 h. 30, Strasbourg (Bas-Rhin).
 LECURIEUX Jacques Joseph, 13-8-1801, 7 h., Dijon (Côte-d’Or).
 LEENHARDT Michel Maximilien, 2-4-1853, 23 h. 30, Montpellier (Her.).
-LEFORTIER Henri Jean, 2-10-1819, 3 h., Savres (Seine-et-Oise).
+LEFORTIER Henri Jean, 2-10-1819, 3 h., Sèvres (Seine-et-Oise).
 LEHEUTRE Gustave, 26-7-1861, 1 h. 45, Troyes (Aube).
 LEHMANN Léon, 5-1-1873, 23 h., Altkirch (Haut-Rhin).
 LELEUX Alexandre Félix, 9-3-1871, 6 h., Raisnes (Nord).
@@ -742,16 +742,16 @@ MOYSE Salluste, 10-11-1827, 2 h., Nancy (Meurthe-et-Moselle).
 MURAT Jean Gilbert, 16-9-1807, 7 h., Felletin (Creuse).
 MURATON Euphémie, 11-4-1836, 12 h., Beaugency (Loiret).
 MURATON Frédéric, 16-4-1824, 2 h., Tours (Indre-et-Loire).
-MYR Louis Marcel, 10-11-1893, 1 h., Buxy (Sa6ne-et-Loire).
+MYR Louis Marcel, 10-11-1893, 1 h., Buxy (Saône-et-Loire).
 NAMUR Paul Franz, 12-1-1877, 14 h., Valenciennes (Nord).
-NARBONNE Eugéne, 7-6-1885, 20 h., Touillon (Côte-d’Or).
+NARBONNE Eugène, 7-6-1885, 20 h., Touillon (Côte-d’Or).
 NARDI Francois, 7-12-1861, 17 h., Nice (Alpes-Maritimes).
 NAVLET Joseph, 11-2-1821, 15 h., Chélons-sur-Marne (Marne).
 NAVLET Victor, 8-11-1819, 7 h., Ch&lons-sur-Marne (Marne).
 NEGRE Charles, 9-5-1820, 21 h., Grasse (Alpes-Maritimes).
 NEILLOT Louis, 10-2-1898, 16 h., Vichy (Allier).
 NELCK Annelies, 26-7-1925, 9 h., Nice (Alpes-Maritimes).
-NESLE Eugéne Claude, 12-2-1822, 16 h., Verrey-sous-Salmaise (C.-d’Or).
+NESLE Eugène Claude, 12-2-1822, 16 h., Verrey-sous-Salmaise (C.-d’Or).
 NODE Joseph Charles, 28-1-1811, 11 h., Montpellier (Hérault).
 NONCLERCQ Elie, 23-6-1847, 3 h. 30, Valenciennes (Nord).
 NOURY Pierre, 25-7-1894, 17 h., Besançon (Doubs).
@@ -761,7 +761,7 @@ ORANGE Maurice Henri, 9-3-1867, 21 h., Granville (Manche).
 ORANT Marthe, 3-6-1874, 18 h., Poissy (Seine-et-Oise).
 OSTERLIND Anders, 19-6-1887, 4 h.. Lépaud (Creuse).
 OUDINOT Achille Franc., 17-4-1820, 14 h., Damigny (Orne).
-OUDINOT Eugéne Stanis!., 3-4-1827, 1 h., Alençon (Orne).
+OUDINOT Eugène Stanis!., 3-4-1827, 1 h., Alençon (Orne).
 OUTIN Jean-Pierre, 26-1-1840, 4 h., Moulins (Allier).
 PABST Camille Alfred, 18-6-1828, 2 h., Heiteren (Haut-Rhin).
 PAIL Edouard (Peil), 17-10-1851, 10 h., Corbiany (Nièvre).
@@ -769,15 +769,15 @@ PAIL Edouard (Peil), 17-10-1851, 10 h., Corbiany (Nièvre).
 PANCHET Louis Frédéric, 5-10-1812, 11 h., Bayeux (Calvados).
 PAPE Jean Constant, 13-3-1865, 17 h., Meudon (Seine-et-Oise).
 PARROT Philippe, 13-3-1831, 2 h., Saint-Martin-d’Excideuil (Dordogne).
-PASCAL Léopold-Eugéne, 8-7-1900, 22 h., Morlaix (Finistère).
-PASCAU J. P. P. Eugéne, 15-4-1875, 2 h,, Bayonne (Basses-Pyrénées).
+PASCAL Léopold-Eugène, 8-7-1900, 22 h., Morlaix (Finistère).
+PASCAU J. P. P. Eugène, 15-4-1875, 2 h,, Bayonne (Basses-Pyrénées).
 PASTELOT Jean Amable A., 2-11-1818, 10 h., Moulins (Allier).
 PASTOUR Louis, 26-6-1876, 2 h., Cannes (Alpes-Maritimes).
 PATROIS Isidore, 2-2-1815, 16 h., Noyers (Yonne).
 PAUL Louis Auguste, 5-6-1854, 9 h., Béziers (Hérault).
 PAVOT Pierre, 30-6-1822, 5 h., Vertain (Nord).
 PEARON Jules Barthél., 26-7-1836, 20 h., La Chatre (Indre).
-PECHAUBES Eugéne, 24-6-1890, 15 h. 30, Pantin (Seine).
+PECHAUBES Eugène, 24-6-1890, 15 h. 30, Pantin (Seine).
 PELLET Joseph, 29-4-1817, 20 h., Béziers (Hérault).
 PELLETIER Joseph Laurent, 30-12-1813, 16 h., Eclaron (Haute-Marne).
 PELLETIER Pierre Jacques, 11-11-1867, 0 h. 30, Clermont-Ferrand (Puy-de-Dôme).
@@ -817,7 +817,7 @@ POTERLET Pierre, 28-10-1804, 18 h., Epernay (Marne).
 POUGET Marcel, 15-8-1923, 6 h., Oran (Algérie).
 POULAIN Michel, 5-12-1906, 3 h., Nogent-sur-Marne (Seine).
 PRAT Uoys,"'5-104879."6 hi.'Dancere (Drôme).
-PRAX Valentine, 23-7-1897, 14 h., Bone (Algérie).
+PRAX Valentine, 23-7-1897, 14 h., Bône (Algérie).
 PREVOT-VALERY Auguste, 21-1-1857, 11 h., Villeneuve (Yonne).
 PRIEUR Romain, 21-8-1806, 23 h., La Ferté-Gaucher (Seine-et-Marne).
 PRON Louis, 19-12-1817, 17 h., Sézanne (Marne).
@@ -838,7 +838,7 @@ REBEYROLLE Paul, 3-11-1926, 16 h., Eymoutiers (Haute-Vienne).
 REBOUL Jean-Baptiste, 4-4-1810, 20 h., Chateauneuf-du-Pape (Vaucl.).
 REBOUSSIN Roger, 11-10-1881, 10 h., Sargé (Loir-et-Cher).
 REGNER Alfred, 22-2-1902, 19 h., Amiens (Somme).
-RENARD Emile, 5-10-1850, 4 h., Sevres (Seine-et-Oise).
+RENARD Emile, 5-10-1850, 4 h., Sèvres (Seine-et-Oise).
 RENAUDIN Alfred, 3-6-1866, 9 h., Le Neuveville-les-Raon (Vosges).
 RENEFER Jean, 2-6-1879, 12 h. 30, Bétheny (Marne).
 REOL Marie Marg., 15-1-1880, 23 h. 30, Massiac (Cantal).
@@ -848,12 +848,12 @@ RICHEBE Charles, 23-11-1871, 20 h., Alger (Algérie).
 RIDEL Louis, 12-2-1866, 9 h. 30, Vannes (Morbihan).
 RIOU Edouard, 2-12-1833, 2 h., Saint-Servan (Ille-et-Vilaine).
 RIXENS Jean, 30-11-1846. 2 h., Saint-Gaudens (Haute-Garonne).
-ROBIDA Albert, 14-5-1848, 15 h., Compiégne (Oise).
+ROBIDA Albert, 14-5-1848, 15 h., Compiègne (Oise).
 ROBINET Gustave, 11-4-1845, 5 h., Magny-Vernois (Haute-Saône).
 ROBINET Gustave, 21-11-1877, 18 h. 20, Poissy (Seine-et-Oise).
 ROCHEBRUNE (de) Octave, 1-4-1824, 2 h., Fontenay-le-Comte (Vend.).
 ROGER Adolphe, 16-3-1800, 1 h., Palaiseau (Seine-et-Oise).
-ROGER Eugéne, 26-5-1807, 21 h.. Sens (Yonne).
+ROGER Eugène, 26-5-1807, 21 h.. Sens (Yonne).
 RONDEL Henri, 2-2-1857, 1 h., Avignon (Vaucluse).
 RONOT Charles, 28-5-1820, 1 h., Belan-sur-Ource (Côte-d’Or).
 RONSIN Jean, 8-11-1905, 10 h., Rennes (Ille-et-Vilaine).
@@ -889,14 +889,14 @@ SAUVAIGE Louis, 5-4-1827, 12 h., Lille (Nord).
 SCALBERT jules, 9-8-1851, 16 h., Douai (Nord).
 SCHAAL Solange, 29-7-1899, 10 h., Saint-Germain-en-Laye (S.-et-O.).
 SCHIFF Mathias, 15-1-1862, 19 h., Rethel-lés-Sierck (Moselle).
-SCHLUMBERGER Eugéne, 9-3-1875, 4 h., Mulhouse (Haut-Rhin).
+SCHLUMBERGER Eugène, 9-3-1875, 4 h., Mulhouse (Haut-Rhin).
 SCHUFFENECKER Claude, 8-12-1851, 20 h., Fresne-Saint-Mamés (H.-S.).
 SCHULER Jules, 18-6-1821, 12 h., Strasbourg (Bas-Rhin).
 SCHUTZENBERGER Louis, 8-9-1825-, 9 h., Strasbourg (Bas-Rhin).
 SCHUTZENBERGER Paul, 29-7-1860, 2 h., Mulhouse (Haut-Rhin).
 SEEVAGEN Lucien, 29-1-1887, 12 h., Chaumont (Haute-Marne).
 SELLIER Charles, 23-12-1830, 18 h., Nancy (Meurthe-et-Moselle).
-SELMY Eugéne, 7-5-1874, 7 h., Clermont-|’Hérault (Hérault).
+SELMY Eugène, 7-5-1874, 7 h., Clermont-|’Hérault (Hérault).
 SEM Joseph (Goursat),, 22-11-1863, 21 h., Périgueux (Dordogne).
 SERGENT Lucien, 8-6-1849, 6 h., Massy (Seine-et-Oise).
 SERRET Charles, 5-7-1824, 7 h., Aubenas (Ardèche).

@@ -43,10 +43,10 @@ CODOS Paul, 1-5-1896, 18 h., Iviers (Aisne).
 GUILLAUMET Henri, 29-5-1902, 12 h., Bony (Marne).
 MERMOZ Jean, 9-12-1901, 2 h., Aubenton (Aisne).
 NESSLER Eric, 20-5-1898, 21 h. 30, Lunéville (Meurthe-et-Moselle).
-PEGOUD Adolphe, 13-6-1889, 6 h., Montferrat (Isére).
-CONSTANT Eugéne, 8-1-1901, 16 h. 30, Boulogne-sur-Mer (P.-de-C.).
+PEGOUD Adolphe, 13-6-1889, 6 h., Montferrat (Isère).
+CONSTANT Eugène, 8-1-1901, 16 h. 30, Boulogne-sur-Mer (P.-de-C.).
 LEBRANCHU Roger, 22-7-1922, 22 h. 45, Neuilly-sur-Seine (Seine).
-MAILLET Jacques, 7-9-1926, 9 h., Asniéres (Seine).
+MAILLET Jacques, 7-9-1926, 9 h., Asnières (Seine).
 NOSBAUM Guy, 10-5-1930, 2 h. 30, Corbeil-Essonnes (Seine-et-Oise).
 VANDERNOTTE Fernand, 12-7-1902, 20 h. 30, Tilliers (Maine-et-Loire).
 VANDERNOTTE Marcel, 29-7-1909, 19 h., Nantes (Loire-Inférieure).
@@ -56,7 +56,7 @@ BOUTIN-DESVIGNES Abel, 4-12-1922, 12 h. 30, Brest (Finistère).
 CHOCAT René, 28,11-1920, 8 h., Sautranges (Cher).
 DERENCY René, 27-5-1925, 17 h., Sochaux (Doubs).
 DESSEMME ‘Jacques, 16-9-1925, 8 h., Bellegarde (Ain).
-DUPERRAY Jean, 4-9-1921, 2 h., Grenoble (Isére),
+DUPERRAY Jean, 4-9-1921, 2 h., Grenoble (Isère),
 ETIENNE Roland, 31-8-1912, 14 h., Rue (Somme).
 FAUCHERE Jacques, 18-6-1920, 4 h., Montpellier (Hérault).
 FLOURET Jacques, 8-9-1907, 1 h, 30, Saint-Maur-des-Fossés (Seine).
@@ -91,7 +91,7 @@ FAMECHON Emile, 11-1-1920, 1 h., Maubeuge (Nord).
 FAMECHON Raymond, 8-11-1924, 18 h. 30, Maubeuge (Nord).
 GYDE Praxille, 5-9-1907, 11 h., Roubaix (Nord).
 HOLZER Maurice, 21-1-1906, 17 h. 30, Troyes (Aube).
-HUAT Eugéne, 8-2-1907, 21 h., Reims ~(Marne).
+HUAT Eugène, 8-2-1907, 21 h., Reims ~(Marne).
 HUMERY Gustave, 17-12-1908, 17 h., Valenciennes (Nord).
 LEDOUX Charles, 27-10-1892, 3 h., Pougues-les-Eaux (Nièvre).
 LOUIS Pierre, 26-1-1911, 11 h., Saint-Etienne (Loire).
@@ -107,7 +107,7 @@ WALZACK Jean, 21-10-1924, 15 h., Noeux-les-Mines (Pas-de-Calais).
 YVEL Albert, 27-2-1927, 20 h., Alger (Algérie).
 BOUTIGNY Robert, 24-7-1927, 10 h., Villeneuve-le-Roi (Seine-et-Oise).
 BALDASSARI Jean, 18-12-1925, 23 h. 30, Rueil (Seine-et-Oise).
-BARATIN Pierre, 7-9-1920, 20 h. 15, Saint-Etienne-la-Varenne (Rhone).
+BARATIN Pierre, 7-9-1920, 20 h. 15, Saint-Etienne-la-Varenne (Rhône).
 BELLANGER Jacques, 21-12-1927, 7 h. 30, Amiens (Somme).
 BERTHET Marcel, 4-3-1887, 5 h., Neuilly-sur-Seine (Seine).
 BERTON René, 14-10-1924, 13 h., Mérignac (Gironde).
@@ -185,7 +185,7 @@ PIEL Roger, 28-6-1921, 10 h., Paris (20°).
 POTTIER René, 5-6-1879, 23 h. 30, Moret-sur-Loing (Seine-et-Marne).
 RAYNAUD André, 10-11-1904, 1 h., Cieux-(Haute-Vienne).
 RIOLAND Roger, 20-10-1924, 8 h. 30, Vitry-sur-Seine (Seine).
-RIVIERRE Gaston, 3-6-1862, 7 h., Asniéres (Seine).
+RIVIERRE Gaston, 3-6-1862, 7 h., Asnières (Seine).
 REMY Raoul, 25-10-1919, 19 h., Marseille (Bouches-du-Rhône).
 REY Jeon, 29-5-1925, 18 h., Toulouse (Haute-Garonne).
 ROBIC Jean, 10-6-1921, 2 h., Condé-sur-Vouziers (Ardennes).
@@ -404,7 +404,7 @@ LESPES Odé, 11-3-1924, 2 h., Agen (Lot-et-Garonne).
 MANOIR (du) Yves, 11-8-1904, 3 h. 15, Vaucresson (Seine-et-Oise).
 MARTIN Lucien, 28-9-1920, 13 h. 30, Pau (Basses-Pyrénées).
 MATHEU Jean, 23-6-1920, 5 h., Gelos (Basses-Pyrénées).
-MAURIAT Paul, 27-5-1887, 23 h. 30, Neuville-sur-Saône (Rhone).
+MAURIAT Paul, 27-5-1887, 23 h. 30, Neuville-sur-Saône (Rhône).
 MAZON, 7-7-1921. 7 h. 15, Montluel (Ain).
 MOGA Alban, 1-5-1923, 9 h. 30, Bordeaux (Gironde).
 PRAT Jean, 1-8-1923, 9 h., Lourdes (Hautes-Pyrénées).
@@ -423,7 +423,7 @@ COUTTET James, 6-7-1921, 23 h. 30, Chamonix (Haute-Savoie).
 PAZZI Jean, 7-8-1920, 10 h., Guillaumes (Alpes-Maritimes).
 PENZ Claude, 23-7-1924, 21 h. 30, Gaillard (Haute-Savoie).
 BIZARD Xavier, 1-1-1899, 20 h. 30, Lille (Nord).
-BURET Maurice, 21-5-1909, 16 h.. Sevres (Seine-et-Oise).
+BURET Maurice, 21-5-1909, 16 h.. Sèvres (Seine-et-Oise).
 BUSNEL (de) Amador, 19-12-1904, 16 h. 30, Saumur (Maine-et-Loire).
 CLAVE Pierre, 12-7-1887, 6 h., Sainte-Colombe (Landes).
 GUDIN de VALLERIN Maurice, 15-3-1897, 15 h. 30, Montherlant (O.).
@@ -560,7 +560,7 @@ SZYJKA Joseph, 8-12-1929, 22 h. Chambon-Feugerolles (Loire).
 TARMOUL Mohamed, TSI 9SO. 4 ho. TizteOuzon (Alger).
 TEDJINI Mohamed, 276-1932, 42h.) 80. Oran (Algérie).
 THIEULIN William, 13-2-1927, 42 . 30, Elbeuf (Seine-Inférieure).
-THOMANN Eugéne, 23-3-1929, 5 h. 45, Schiltigheim (Bas-Rhin).
+THOMANN Eugène, 23-3-1929, 5 h. 45, Schiltigheim (Bas-Rhin).
 VANGI Salvator, 13-1-1927, 23 h. 30, Dijon (Côte-d’Or).
 VERCOUTTER Andre, 29-6-1923, 2.h., Rosendaal (Nord).
 WARUSFEL Ildefonse, 3-4-1934. 0 h,, Monchecourt (Nord).

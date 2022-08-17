@@ -31,7 +31,7 @@ BOURGEOIS Joseph, 21-2-1857, 23 hi, Ste-Marie-aux-Mines (Ht-Rhin).
 BOUVIER Louis, 9-4-1856, 6 h., Saint-Laurent-Granvaux (Jura).
 BRANLY Edouard, 23-10-1844,:10 h., Amiens (Somme).
 BRAVAIS Auguste, 23-8-1811, 13 h., Annonay (Ardèche).
-BRESSE Jacques, 9-10-1822, 22 h., Vienne (Isére).
+BRESSE Jacques, 9-10-1822, 22 h., Vienne (Isère).
 BRETON Jules, 1-4-1872, 1 h., Courrleres (Pas-de-Calais),
 BRILLOUIN Louis, 19-12-1854, 3 h., Saint-Martin-les-Melle (Deux-Sev.).
 BROGLIE (de) Louis, 15-8-1892, 1 h., Dieppe (Seine-Inférieure).
@@ -49,21 +49,21 @@ CHARPY Augustin, 1-9-1865, 18 h., Oullins (Rhône).
 CHAZALLON Antoine, 7-1-1802, 1 h., Desaignes (Ardèche).
 CHAZY Jean, 15-8-1882, 20 h., Villefranche (Rhône).
 CHEVALIER Auguste, 23-6-1873, 13 h., Domfront (Orne).
-CHEVANDIER (de) V. Eugéne, 15-8-1810, 23 h., Saint-Quirin (Moselle).
+CHEVANDIER (de) V. Eugène, 15-8-1810, 23 h., Saint-Quirin (Moselle).
 CLOS Dominique, 25-5-1821, 18 h., Soréze (Tarn).
 COLIN Edouard, 28-11-1852, 4 h., Graulhet (Tarn).
 COLIN Henri, 1-11-1880, 7 h., Bains-les-Bains (Vosges).
 COMBES Charles, 26-12-1802, 22 h., Cahors (Lot).
 CONSIDERE Armand, 8-6-1841, 22 h., Port-sur-Saône (Haute-Saône).
 CORNU. Marie-A., 7-3-1841, 9 h., Orléans (Loiret).
-COSSERAT Eugéne, 4-3-1866, 7 h. 30, Amiens (Somme).
+COSSERAT Eugène, 4-3-1866, 7 h. 30, Amiens (Somme).
 COTTON Aime, 9-10-1869, 9 h. 17, Bourg (Ain).
 COTTON Emile, 5-2-1872, 4 h., Bourg (Ain).
 CROVA André, 3-12-1833, 16 h., Perpignan (Pyrénées-Orientales).
 DANIEL Lucien, 1-11-1856, 4 h., La Dorée (Mayenne).
 DARBOUX Gaston, 15-8-1842, 1 h., Nimes (Gard).
 DAUBREE Gabriel, 25-6-1814, 9 h., Metz (Moselle).
-DAUSSE M.-Francois, 8-1-1801, 16 h., Grenoble (Isére).
+DAUSSE M.-Francois, 8-1-1801, 16 h., Grenoble (Isère).
 DAVID Armand, 7-9-1826, 3 h., Espelette (Basses-Pyrénées).
 DEBRAY Henri, 26-7-1827, 15 h., Amiens (Somme).
 DELAGE Yves, 13-5-1854, 4 h., Avignon (Vaucluse).
@@ -84,7 +84,7 @@ DURAND-VIEIL Georges, 11-3-1875, 20 h. 30, Le Havre (Seine-Infér.).
 DUVAL-JOUVE Joseph, 7-8-1810, 12 h., Boissy-Lamberville (Eure).
 ESCLANGON Ernest, 17-3-1876, 20 h., Mison (Basses-Alpes).
 FABRE Henri, 21-1221823). 162.) Saint-Léons (Aveyron).
-FABRY Eugéne, 16-10-1854, 21 h., Marseille (Bouches-du-Rhône).
+FABRY Eugène, 16-10-1854, 21 h., Marseille (Bouches-du-Rhône).
 FABRY Louis, 20-4-1862, 22 h., Marseille (Bouches-du-Rhône).
 FABRY Charles, 11-6-1867, 1 h., Marseille (Bouches-du-Rhône).
 FAVE Ildephonse, 28-2-1812, 12 h., Dreux (Eure-et-Loir).
@@ -132,7 +132,7 @@ HATT Philippe, 17-7-1840, 19 h., Strasbourg. (Bas-Rhin).
 HAUG Emile, 19-6-1861, 12 h., Drusenheim (Bas-Rhin).
 HAUTEFEUILLE Paul, 2-12-1836, 18 h., Etampes (Seine-et-Oise).
 HEBERT Edouard, 12-6-1812, 13 h., Villefargeau (Yonne).
-HELBRONNER Paul, 24-4-1871, 21 h. 40, Compiégne (Oise).
+HELBRONNER Paul, 24-4-1871, 21 h. 40, Compiègne (Oise).
 HIRN Gustave, 21-8-1815, 5 h., Logelbach (Haut-Rhin).
 HOUARD Clodomir, 22-1-1873, 11. h., Ste-Colombes-sur-Loing (Yonne).
 HOUZEAU Auguste, 23-3-1829, 4 h., Elbeuf (Seine-Inférieure).
@@ -224,7 +224,7 @@ PORCHER Charles, 20-1-1872, 7 h., Nantes (Loire-Inférieure).
 POUCHET felix, 29-8-1800, 23\h., Rouen (Seine-Inférieure).
 PUISEUX Victor, 16-4-1820, 11 h., Argenteuil (Seine-et-Oise).
 RAOULT Francois, 10-5-1830, 9 h., Fournes (Nord).
-RAVAZ Louis, 10-5-1863, 10 h., Saint-Romain-de-Jalionas (Isére).
+RAVAZ Louis, 10-5-1863, 10 h., Saint-Romain-de-Jalionas (Isère).
 RAYET Georges, 12-12-1839, 8 h., Bordeaux (Gironde).
 REBOUL Edmond, 13-2-1829, 16 h., Montpellier (Hérault).
 RECOURA Albert, 30-1-1862, 23 h., Grenoble (lIsére).
@@ -233,8 +233,8 @@ RICHARD Jules, 18-11-1863, 2 h., Yssingeaux (Haute-Loire).
 RIGGENBACH Nicolas, 21-5-1817, 17 h. 30, Guebwiller (Haut-Rhin).
 RIQUIER Charles, 19-11-1853, 7 h. 30, Amiens (Somme).
 ROCHE Edouard, 17-10-1820, 15 h., Montpellier (Hérault).
-ROLLAND Eugéne, 10-8-1812, 21 h., Metz (Moselle).
-ROUCHE Eugéne, 18-8-1832, 1 h., Sommieres (Gard).
+ROLLAND Eugène, 10-8-1812, 21 h., Metz (Moselle).
+ROUCHE Eugène, 18-8-1832, 1 h., Sommieres (Gard).
 ROY Maurice, 7-11-1899, 18 h. 15, Bourges (Cher).
 SABATIER Armand, 14-1-1834, 13 h., Ganges (Hérault).
 SABATIER Paul, 5-11-1854, 17 h., Carcassonne (Aude).
@@ -256,7 +256,7 @@ TERMIER Pierre, 3-7-1859, 17 h., Lyon (Rhône).
 TERQUEM Alfred, 30-1-1831, 9 h., Metz (Moselle).
 THIRY René, 26-6-1886, 14 h., Langres (Haute-Marne).
 TILHO Jean, 1-5-1875, 2 h., Domme (Dordogne).
-TISSERAND Eugéne, 26-5-1830, 14 h., Flavigny-sur-Moselle (Meurthe).
+TISSERAND Eugène, 26-5-1830, 14 h., Flavigny-sur-Moselle (Meurthe).
 TISSERAND Félix, 13-1-1845, 5 h., Nuits (Côte-d’Or).
 TRABUT Louis, 12-7-1853, 1 h., Chambéry (Savoie).
 TRECUL Auguste, 8-1-1818, 14 h., Montdoubleau (Loir-et-Cher).
@@ -267,7 +267,7 @@ VAN TIEGHEM Philippe, 19-4-1839, 8 h., Bailleuil (Nord).
 VAYSSIERE Albert, 8-7-1854, 7 h.. Avignon (Vaucluse).
 VERGNETTE-L. (de) Alfred, 5-7-1806, 9 h., Beaune (Côte-d’Or).
 VIALA Pierre, 24-9-1859, 9 h., Laverune (Heérault).
-VIGUIER Camille, 16-3-1850, 9 h., Vienne (Isére).
+VIGUIER Camille, 16-3-1850, 9 h., Vienne (Isère).
 VIOLLE Jules, 16-11-1841, 1 h.. Langres (Haute-Marne).
 VUILLEMIN Paul, 13-2-1861, 1 h., Docelles (Vosges).
 WALLERANT Frédéric, 25-7-1858, 17 h., Trith-Saint-Léger (Nord).

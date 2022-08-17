@@ -93,6 +93,7 @@ class tmp2db implements Command {
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['place']['name'] = $line['PLACE'];
+                $new['birth']['place']['c1'] = $line['C1'];
                 $new['birth']['place']['c2'] = $line['C2'];
                 $new['birth']['place']['cy'] = 'FR';
                 $new['occus'] = [ $line['OCCU'] ];

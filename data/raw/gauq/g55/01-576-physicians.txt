@@ -35,7 +35,7 @@ BARTHE Joseph Paul, 4-12-1857, 18 h., Couhé-Vérac (Vienne).
 BARTHEZ Antoine (de), 6-8-1811, 7 h., Narbonne (Aude).
 BARNSBY Robert, 17-1-1832, 22 h., Blois (Loir-et-Cher).
 BAUDOIN Alphonse, 13-9-1876, 6 h., Bône (Algérie).
-BAUDRIMONT Alexandre, 7-5-1806, 21 h., Compiégne (Oise).
+BAUDRIMONT Alexandre, 7-5-1806, 21 h., Compiègne (Oise).
 BAUMEL Léopold, 23-6-1854, 1 h., Lodaeve (Hérault).
 * BAZY Pierre, 28-3-1853,. 2h., Sainte-Croix (Ariège).
 BEAU Joseph Honoré, 8-5-1806, 10 h., Collonges (Ain).
@@ -44,7 +44,7 @@ BEGOUIN Paul, 23-6-1867, 6 h., Réaux (Charente-Maritime).
 * BEHAL Auguste, 30-3-1859, 13 h., Lens. (Pas-de-Calais).
 BENJAMIN Henri, 4-2-1850, 9 h., Nogent-sur-Seine (Aube).
 BERANGER-FERRAUD Laurent, 9-5-1832, 20 h., St-Paul-de-Var (A.-M.).
-BERARD Léon Eugéne, 17-2-1870, 19 h., Morez (Jura).
+BERARD Léon Eugène, 17-2-1870, 19 h., Morez (Jura).
 BERGER Paul, 6-1-1845, 15 h., Beaucourt (Belfort).
 BERGERON Jules, 27-8-1817, 19 h., Moret (Seine-et-Marne).
 * BERGONIE Jean Alban, 7-10-1857, 1 h., Casseneuil (Lot-et-Gar.).
@@ -74,7 +74,7 @@ BOUGAULT Joseph, 4-1-1870, 16 h., Ligné (Loire-Inférieure).
 BOUIS Jules, 2-4-1822, 3 h. 30, Perpignan (Pyrénées-Orientales).
 BOURDON Alexis, 25-5-1814, 15 h., Pont-à-Mousson (Meurthe).
 BOURGOIN Alfred, 26-5-1836, 7 h., Saint-Cyr-les-Colons (Yonne).
-BOURGUET Eugéne, 8-12-1816, 5 h., Brusque (Aveyron).
+BOURGUET Eugène, 8-12-1816, 5 h., Brusque (Aveyron).
 * BOURQUELOT Emile, 21-6-1851, 8 h., Jandun (Ardennes).
 BOUSQUET Jean-Marie, 13-3-1852, 12 h., Issoire (Puy-de-Dôme).
 BOUTET Antoine, 20-5-1819, 14 h., Neuvy-sur-Loire (Nièvre).
@@ -189,7 +189,7 @@ DUPUY Pierre, 12-4-1844,. 16 h., Verat (Dordogne).
 DURET Henri, 7-7-1849, 23 h. 30, Vire (Calvados).
 DUVAL Mathias, 7-2-1844, 18 h., Grasse (Alpes-Maritimes).
 EHRMANN Jules, 6-1-1836, 12 h., Rixheim (Haut-Rhin).
-ESTOR Eugéne, 6-6-1861, 12 h., Montpellier (Hérault).
+ESTOR Eugène, 6-6-1861, 12 h., Montpellier (Hérault).
 ETOC-DEMAZY Gustave, 30-7-1806, 11 h., Le Mans: (Sarthe).
 EUZIERE Jules, 27-4-1882, 21° h., Montpellier (Hérault).
 FABRE Paul, 8-8-1845, 23 h., Limoux (Aude).
@@ -261,7 +261,7 @@ HANRIOT Maurice, 29-3-1854, 15 h. 30, Conflans-Ste-Honorine (S.-O.).
 HEDON Edouard, 30-4-1863, 17 h., Burie (Charente-Maritime).
 HENROT Henri Alfr., 22-5-1838, 6 h., Reims (Marne).
 HERARD Hippolyte, 1-10-1819, 14 h., Sens (Yonne).
-HERISSEY Eugéne H., 13-5-1873, 20 h., Evreux (Eure).
+HERISSEY Eugène H., 13-5-1873, 20 h., Evreux (Eure).
 * HERGOTT François, 12-9-1814, 15 h. 30, Guebwiller (Haut-Rhin).
 HERRGOTT Louis, 22-4-1849, 7 h., Belfort (Territoire de Belfort).
 HERVIEUX Jacques, 4-9-1818, 20 h., Louviers (Eure).
@@ -274,7 +274,7 @@ HUTINEL Victor, 15-4-1849, 16 h., Chatillon-sur-Seine (Côte-d’Or).
 IMBERT Jacques, 8-8-1868, 15 h. 30, Orange (Vaucluse).
 IMBERT Jean, 11-9-1850, 12 h., Seyne-les-Alpes (Basses-Alpes).
 JACOULET Claude, 30-4-1850, 3 h., lany (Haute-Savoie).
-JACQUEMIN Eugéne, 23-1-1828, 9 h., Schirmeck (Bas-Rhin).
+JACQUEMIN Eugène, 23-1-1828, 9 h., Schirmeck (Bas-Rhin).
 JACQUEMIER Jean-Marie, 16-1-1806, 13 h., Cessy (Ain).
 JALAGUIER Adolphe, 24-3-1853, 1 h., Montauban (Tarn-et-Garonne).
 JEAMBRAU Emile, 1-10-1873, 23 h., Alés (Gard).
@@ -299,7 +299,7 @@ LAENNEC Théophile, 12-3-1830, 12 h., Nantes (Loire-Inférieure).
 LAGUESSE: Edouard, 23-4-1861, 5 h., Dijon (Côte-d’Or).
 LAIGNEL-LAVASTINE Paul, 12-9-1875, 23 h., Evreux (Eure).
 LALESQUE Fernand, 30-3-1853, 19 h., La Teste de Buch (Gironde).
-LAMBLING Eugéne, 10-11-1857, 19 h., Bischwiller (Bas-Rhin).
+LAMBLING Eugène, 10-11-1857, 19 h., Bischwiller (Bas-Rhin).
 LAMBRET Oscar, 20-7-1872, 9 h., Avesnes (Nord).
 LANELONGUE Jean-Baptiste, 1-8-1839, 12 h., Cassevil (Gironde).
 * LANNELONGUE Odilon, 4-12-1840, 6 h., Castera-Verduzan (Gers).
@@ -355,7 +355,7 @@ MALLAT Antonin, 1-1-1857, 12 h. 30, Vichy (Allier).
 MALLE Pierre, 12-2-1805, 9 h. 30, Calais (Pas-de-Calais).
 MANOUVRIEZ Anatole, 5-6-1848, 23 h. 45, Valenciennes (Nord).
 MANQUAT Alexandre, 2-12-1858, 1.h., Grenoble (Isère).
-MARCHAND  Eugéne, 26-8-1816, 10 h., Fécamp (Seine-Inférieure).
+MARCHAND  Eugène, 26-8-1816, 10 h., Fécamp (Seine-Inférieure).
 MARCHOUX François, 24-3-1862, 19 h., Saint-Amant de Boixe (Char.).
 * MAREY Etienne, 5-3-1830, 20 h., Beaune (Côte-d’Or).
 MARFAN Jean, 23-6-1858, 2 h., Castelnaudary (Aude).
@@ -442,7 +442,7 @@ PHILIPPE Adrien, 4-3-1801, 8 h., Marfaux (Marne).
 PIC Adrien, 3-10-1863, 9 h., Douera (Algérie).
 PICOT Jean, 29-10-1839, 17 h., Saint-Nicolas-du-Port (Meurthe-et-M.).
 PIDOUX Hermann, 2-10-1808,.14 h., Orgelet (Jura).
-PILAT Eugéne, 28-1-1816, 17 h. 30, Brébiéres (Pas-de-Calais).
+PILAT Eugène, 28-1-1816, 17 h. 30, Brébiéres (Pas-de-Calais).
 PINARD Adolphe, 4-2-1844, 18 h., Méry-sur-Seine (Aube).
 PIOT Jean, 7-12-1857, 3 h., Charcennes (Haute-Saône).
 PITRES Albert, 26-8-1848, 6 h., Bordeaux (Gironde).
@@ -453,7 +453,7 @@ POIRIER Paul, 9-2-1853, 4 h., Granville (Manche).
 POLAILLON Joseph, 17-2-1836, 5 h., Lyon (Rhône).
 PONCET Antonin, 28-3-1849, 9 h., Saint-Trivier-sur-Moignans (Ain).
 * PORTIER Paul, 22-5-1866, 11 h. 30, Bar-sur-Seine (Aube).
-POUSSON Eugéne, 8-6-1853, 10 h., Saintes (Charente-Maritime).
+POUSSON Eugène, 8-6-1853, 10 h., Saintes (Charente-Maritime).
 POZZI Samuel, 3-10-1841, 14 h., Bergerac (Dordogne).
 PRENANT Louis, 5-11-1861, 6 h., Lyon (Rhône).
 PROUST Adrien, 18-3-1834, 23 h., Illiers (Eure-et-Loire).
@@ -488,7 +488,7 @@ RIST Edouard, 16-3-1871, 15 h., Strasbourg (Bas-Rhin).
 ROBERT César, 17-11-1801, 7 h., Marseille (Bouches-du-Rhône).
 ROBIN Albert, 19-9-1847, 5 h., Dijon (Côte-d'Or).
 * ROBIN Charles, 4-6-1821, 18 h., Jasseron (Ain).
-ROCHARD Eugéne, 29-10-1853, 42 h., Brest (Finistère).
+ROCHARD Eugène, 29-10-1853, 42 h., Brest (Finistère).
 ROCHARD Jules, 30-10-1819, 3 h., Saint-Brieuc (Côtes-du-Nord).
 * ROLLET Joseph, 12-11-1824, 19 h., Lagnieu (Ain).
 ROUGET Charles, 19-8-1824, 22 h., Gisors (Eure).
@@ -527,7 +527,7 @@ STOLTZ Joseph, 14-12-1803, 10 h., Andlau-au-Val (Bas-Rhin).
 STRAUSS Isidore, 24-3-1845, 13 h., Dambach (Bas-Rhin).
 STRAUSS Paul, 23-9-1852, 20 h., Ronchamp (Haute-Saône).
 STROHL André, 20-3-1887, 6 h., Poitiers (Vienne).
-SOULIER Henri, 12-5-1834, 11 h., Vienne (Isére).
+SOULIER Henri, 12-5-1834, 11 h., Vienne (Isère).
 SOUQUES Alexandre, 6-2-1860, 2 h., Peyre (Aveyron).
 SURMAY Charles, 8-8-1826, 9 h., Béthancourt (Aisne).
 TARNIER Etienne, 29-4-1828, 6 h., Aizeray (Côte-d’Or).
@@ -570,6 +570,6 @@ WEILL Edmond, 8-2-1858, 6 h., Hagueneau (Bas-Rhin).
 WEISS Georges, 26-4-1859, 11 h., Bischwiller (Bas-Rhin).
 WERTHEIMER Emile, 24-7-1852, 11 h., Rosheim (Bas-Rhin).
 WIDAL Henri, 25-9-1826, 23 h., Wintzenheim (Haut-Rhin).
-WOILLEZ Eugéne, 19-1-1811, 18 h., Montreuvil-sur-Mer (Pas-de-Calais).
+WOILLEZ Eugène, 19-1-1811, 18 h., Montreuvil-sur-Mer (Pas-de-Calais).
 * WURTZ Adolphe, 26-11-1817, 3 h., Strasbourg (Bas-Rhin).
 YVON Paul, 18-1-1848, 3 h., Selommes (Loir-et-Cher).

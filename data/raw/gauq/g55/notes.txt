@@ -99,6 +99,15 @@ lines 1 - 237
 ABEILLE - SINET
 lines 238 - 905
 
+Changed line 273
+BALANDE Gaston, 31-5-1880, 2 h., Madrid (par Saujon).
+to
+BALANDE Gaston, 31-5-1880, 2 h., Madrid (Espagne).
+
+Changed line 488
+FAURE Eugène, 23-8-1822, 1 h., Seyssinet (près Grenoble) [Isère].
+to
+FAURE Eugène, 23-8-1822, 1 h., Seyssinet (Isère).
 
 06-361-minor-painters.txt
 ---------------------------------------------------------------------------------------------------
