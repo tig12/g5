@@ -514,7 +514,7 @@ CROSNIER Paul, 14-11-1892, 2 h., Créteil (Seine).
 DADON Romain, 6-8-1852, 1 h., Bourges (Cher).
 DARDANS Julien, 6-5-1862, 22 h., Ustaritz (Basses-Pyrénées).
 DASTARAC Louis, 6-9-1849, 13 h., Cadours (Haute-Garonne).
-DATIN François, 20-1-1880, 12 h., Fougéres (Ille-et-Vilaine).
+DATIN François, 20-1-1880, 12 h., Fougères (Ille-et-Vilaine).
 DAUBY Gustave, 9-11-1847, 21 h., Castillon (Nord).
 DEBOUT Henri, 22-8-1857, 9 h., Arras (Pas-de-Calais).
 DECLOMESNIL Léon, 30-5-1866, 5 h., Caen (Calvados).
@@ -734,7 +734,7 @@ MUGNIER Arthur, 27-11-1853, 20 h., Lubersac (Corrèze).
 MULLER Louis, 6-12-1848, 10 h., Guesting (Moselle).
 MULLER Henri, 10-2-1884, 1 h., Pantin (Seine).
 NAU François, 13-5-1864, 22 h., Thil (Meurthe-et-Moselle).
-NAVIEL Henri, 4-4-1889, 7 h., Fougéres (Ille-et-Vilaine).
+NAVIEL Henri, 4-4-1889, 7 h., Fougères (Ille-et-Vilaine).
 NETZER Henri, 28-11-1878, 23 h., Gorze (Moselle).
 NICOLLE Louis, 30-11-1851, 9 h., Rouen (Seine-Inférieure).
 NOEL Louis, 18-4-1856, 23 h., Tendon (Vosges).
@@ -836,7 +836,7 @@ SEXER Jean, 27-8-1868, 15 h., Flexbourg (Bas-Rhin).
 SIBASSIE Pierre, 12-6-1838, 11 h., Blanquefort (Gironde).
 SIBILLE Justin, 5-9-1853, 5 h., Sarreguemines (Moselle).
 SIMON Jean-Baptiste, 23-1-1864, 3 h., Remoiville (Meuse).
-SIMONNET Léon, 9-4-1863, 17 h., Fougéres (Ille-et-Vilaine).
+SIMONNET Léon, 9-4-1863, 17 h., Fougères (Ille-et-Vilaine).
 SIVET Adolphe, 12-11-1862, 14-h., Avignon (Vaucluse).
 SOMMERHALTER Jean, 16-11-1886, 7 h., Mulhouse (Haut-Rhin).
 SOUCHON Jean, 26-10-1840, 23 h., Javols (Lozère).

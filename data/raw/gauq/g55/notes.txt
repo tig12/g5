@@ -109,6 +109,12 @@ FAURE Eugène, 23-8-1822, 1 h., Seyssinet (près Grenoble) [Isère].
 to
 FAURE Eugène, 23-8-1822, 1 h., Seyssinet (Isère).
 
+Changed line 904
+SIMON-LEVY (Simon LEVY), 29-5-1886, 11 h., Strasbourg (Bas-Rhin).
+to
+LEVY Simon, 29-5-1886, 11 h., Strasbourg (Bas-Rhin).
+
+
 06-361-minor-painters.txt
 ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------

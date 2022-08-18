@@ -223,7 +223,7 @@ class raw2tmp implements Command {
             $res[1] = self::dz_place2admin1($placeName, $line, $N);
             return $res;
         }
-        if($C2 == 'Pr. Mon.'){
+        if(in_array($C2, ['Pr. Mon.', 'Principauté de Monaco'])){
             $res[3] = 'MC';
             return $res;
         }
@@ -265,6 +265,7 @@ exit;
         	case 'Philippeville':  return '31'; break; // Skikda
         	case 'Sétif':          return '12'; break;
         	case 'Sidi-Bel-Abbès': return '30'; break;
+        	case 'Tlemcen':        return '15'; break;
             default:
                 echo "Unable to compute DZ admin1 code for $place -- line $N = $line\n";
                 return '';
@@ -279,6 +280,7 @@ exit;
         'Ain'                   => '01',
         'Aisne'                 => '02',
 //        'Algérie'               => '',
+        'Al.'                   => '03',
         'All.'                  => '03',
         'Allier'                => '03',
         'Alpes-M.'              => '06',
@@ -335,6 +337,7 @@ exit;
         'Corrèze'               => '19',
         'Corse'                 => '20',
         'C.-O.'                 => '21',
+        'C.-d’O.'               => '21',
         'C.-d’Or'               => '21',
         "Côte-d'Or"             => '21',
         'Cote-d’Or'             => '21',
@@ -355,21 +358,22 @@ exit;
         'Doubs'                 => '25',
         'Dr.'                   => '26',
         'Drôme'                 => '26',
+        'Eure'                  => '27',
         'E.-L.'                 => '28',
         'E.-et-L.'              => '28',
-        'Eure'                  => '27',
+        'Eure-et-L.'            => '28',
         'Eure-et-Loire'         => '28',
         'Eure-et-Loir'          => '28',
         'Finist.'               => '29',
         'Finistère'             => '29',
         'Gard'                  => '30',
-        'Gers'                  => '32',
-        'Gir.'                  => '33',
-        'Gironde'               => '33',
         'Hte-G.'                => '31',
         'Hte-Gar.'              => '31',
         'Hte-Garonne'           => '31',
         'Haute-Garonne'         => '31',
+        'Gers'                  => '32',
+        'Gir.'                  => '33',
+        'Gironde'               => '33',
         'Haute-Loire'           => '43',
         'Hte-Loire'             => '43',
         'Haute-M.'              => '52',
@@ -381,9 +385,11 @@ exit;
         'Haut-Rhin'             => '68',
         'Ht-Rhin'               => '68',
         'Hautes-Alpes'          => '05',
+        'Her.'                  => '34',
         'Hér.'                  => '34',
         'Hérault'               => '34',
         'Hte-L.'                => '43',
+        'H.-Marne'              => '52',
         'Hte-M.'                => '52',
         'Hte-Marne'             => '52',
         'Htes-Pyrénées'         => '65',
@@ -393,8 +399,9 @@ exit;
         'Hte-Vienne'            => '87',
         'Ht-Rh.'                => '68',
         'I.-et-L.'              => '37',
-        'I.-et-V.'              => '37',
 //        'Ile Maurice'           => '',
+        'I.-V.'                 => '35',
+        'I.-et-V.'              => '35',
         'Ille-et-V.'            => '35',
         'Ille-et-Vil.'          => '35',
         'Ille-et-Vilaine'       => '35',
@@ -425,6 +432,7 @@ exit;
         'Lot-G.'                => '47',
         'Loz.'                  => '48',
         'Lozère'                => '48',
+        'M.-L.'                 => '49',
         'M.-et-L.'              => '49',
         'Maine-et-L.'           => '49',
         'Maine-et-Loire'        => '49',
@@ -505,12 +513,15 @@ exit;
         'Tarn'                  => '81',
         'Tarn-et-Gar.'          => '82',
         'Tarn-et-Garonne'       => '82',
+        'Terr. de Belf.'        => '90',
         'Terr. de Belfort'      => '90',
         'Territoire de Belfort' => '90',
         'V.'                    => '', // see fr_place2admin2()
         'Var'                   => '83',
         'Vau.'                  => '84',
+        'Vaucl.'                => '84',
         'Vaucluse'              => '84',
+        'Ven.'                  => '85',
         'Vend.'                 => '85',
         'Vendée'                => '85',
         'Vienne'                => '86',
@@ -541,42 +552,53 @@ exit;
         case 'Blamont': return '54'; break;
         case 'Boulogne-sur-Seine': return '92'; break;
         case 'Boussy-Saint-Antoine': return '91'; break;
+        case 'Brunoy': return '91'; break;
         case 'Champlon': return '91'; break; // in fact Champlan
+        case 'Chatenay': return '77'; break; // Châtenay-sur-Seine
         case 'Chatillon-sous-Bagneux': return '92'; break;
         case 'Chatou': return '78'; break;
         case 'Choisy-le-Roi': return '94'; break;
         case 'Clichy': return '92'; break;
+        case 'Colombes': return '92'; break;
         case 'Conflans-Ste-Honorine': return '78'; break;
         case 'Coudray-Montceau': return '91'; break;
         case 'Courbevoie': return '92'; break;
         case 'Créteil': return '94'; break;
+        case 'Draveil': return '91'; break;
         case 'Etampes': return '91'; break;
         case 'Fontenay-aux-Roses': return '92'; break;
+        case 'Fontenay-sous-Bois': return '94'; break;
         case 'Fourqueux': return '78'; break;
         case 'Gagny': return '93'; break;
         case 'Garges-les-Gonesse': return '95'; break;
         case 'Gazeran': return '78'; break;
         case 'Gennevilliers': return '92'; break;
         case 'Gentilly': return '94'; break;
+        case 'Ivry-sur-Seine': return '94'; break;
         case 'Joinville-le-Pont': return '94'; break;
         case 'Jouy-en-Josas': return '78'; break;
         case 'La Varenne-Saint-Hilaire': return '94'; break;
         case 'Le Vésinet': return '78'; break;
+        case 'L’Hay-les-Roses': return '78'; break;
         case 'Limay': return '78'; break;
+        case 'Limours': return '91'; break;
         case 'Lons-le-Saunier': return '39'; break;
         case 'Luzelburg': return '57'; break;
         case 'Magny-en-Vexin': return '91'; break;
+        case 'Massy': return '91'; break;
         case 'Maisons-Alfort': return '94'; break;
         case 'Maisons-Laffitte': return '78'; break;
         case 'Maisons-Laffite': return '78'; break;
         case 'Mantes-la-Jolie': return '78'; break;
         case 'Meudon': return '92'; break;
+        case 'Meulan': return '92'; break;
         case 'Millemont': return '78'; break;
         case 'Milly': return '91'; break;
         case 'Montcontour': return '22'; break;
         case 'Montesson': return '78'; break;
         case 'Montfort-l’Amaury': return '78'; break;
         case 'Montgeron': return '91'; break;
+        case 'Montlhéry': return '91'; break;
         case 'Montlignon': return '95'; break;
         case 'Montmorency': return '95'; break;
         case 'Montrouge': return '92'; break;
@@ -586,12 +608,15 @@ exit;
         case 'Neuilly-sur-Seine': return '92'; break;
         case 'Nogent-sur-Marne': return '94'; break;
         case 'Noisy-le-Grand': return '93'; break;
+        case 'Palaiseau': return '93'; break;
         case 'Pantin': return '93'; break;
         case 'Paris': return '75'; break;
         case 'Pierrefitte': return '93'; break;
         case 'Pierrelaye': return '95'; break;
+        case 'Poissy': return '78'; break;
         case 'Pont-à-Mousson': return '54'; break;
         case 'Pontoise': return '95'; break;
+        case 'Pussay': return '91'; break;
         case 'Puteaux': return '92'; break;
         case 'Rambouillet': return '78'; break;
         case 'Rueil': return '92'; break;
@@ -620,6 +645,7 @@ exit;
         case 'Verneuil': return '78'; break;
         case 'Versailles': return '78'; break;
         case 'Villejuif': return '94'; break;
+        case 'Villennes-sur-Seine': return '78'; break;
         case 'Villepreux': return '78'; break;
         case 'Villiers-sur-Marne': return '94'; break;
         case 'Vincennes': return '94'; break;
