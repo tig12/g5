@@ -241,7 +241,7 @@ MASSOUTIE Paul, 23-6-1907, 15 h., Ambres (Tarn).
 MATHIEU Albert, 9-2-1883, 18 h., Cunac (Tarn).
 MATHIEU Alphonse, 7-9-1872, 17 h., Sérénac (Tarn).
 MAURAN Henri, 22-10-1902, 8 h., Fauche (Tarn).
-MAURAND Albert, 20-4-1883, 2.h., Courris (Tarn).
+MAURAND Albert, 20-4-1883, 2 h., Courris (Tarn).
 MAURAND Célestin, 24-10-1876, 11 h., Courris (Tarn).
 MAURAND Jean, 29-1-1868, 10 h., Courris (Tarn).
 MAURAND Louis, 7-7-1885, 7 h., Courris (Tarn).
@@ -299,7 +299,7 @@ RECH Louis, 4-8-1912, 7 h., Carmaux (Tarn).
 REGY Ernest, 7-10-1873, 12 h., Teillet (Tarn).
 UREGY Joseph, 12-3-1867, 11 h., Saint-Paul de Barbetogne (Tarn).
 RESPLANDY Joseph, 2-9-1865, 18 h., Assac (Tarn).
-REVIAL François, 11-8-1920, 1'h., Tignes (Savoie).
+REVIAL François, 11-8-1920, 1 h., Tignes (Savoie).
 RIEUNAUD Pierre, 11-11-1873, 9 h., Tels (Tarn).
 RIEUNAUD René, 25-2-1896, 17 h., Valdérias (Tarn).
 RIGOBERT Marius, 5-2-1908, 6 h., Montroc (Tarn).
@@ -346,8 +346,8 @@ SUC Dominique, 12-7-1868, 8 h., Villefranche (Tarn).
 SUDRE Albert, 29-4-1872, 0 h., Grayssac (Tarn).
 TAILHADE Paul, 28-11-1902, 8 h., Anglés (Tarn).
 TAURINES Auguste, 19-6-1861, 2 h., Valence (Tarn).
-TAURINES Camille, 1-2-1873, 3. h., Valence (Tarn).
-TERRAL Gabriel, 3-9-1910, 12 .h., Roquecourbe (Tarn).
+TAURINES Camille, 1-2-1873, 3 h., Valence (Tarn).
+TERRAL Gabriel, 3-9-1910, 12 h., Roquecourbe (Tarn).
 TESTAS Prosper, 31-7-1878, 17 h., Arzac (Tarn).
 TESTE Benjamin, 16-1-1863, 22 h., Soual (Tarn).
 THOMIERES Barthélemy, 2-5-1870, 14 h., Rabastens (Tarn).
@@ -524,7 +524,7 @@ DELABAR Charles, 6-4-1867, 4 h., Ornes (Meuse).
 DELBOS Charles, 16-7-1871, 7 h., Saint-Germain-les-Corbeil (S.-et-O.).
 DELERUE Félix, 28-4-1871, 20 h., Roubaix (Nord).
 DELEUZE Jean, 18-1-1857, 7 h., Bordeaux (Gironde).
-DELTEIL Pierre, 11-38-1846, 12 h., Moussages (Cantal).
+DELTEIL Pierre, 11-3-1846, 12 h., Moussages (Cantal).
 DEMARGNE Jean-M., 24-2-1904, 23 h., Aix-en-Provence (B.-du-Rh.).
 DEMAY Jules, 6-6-1861, 23 h., Tessé-Fronlay (Orne).
 DENAUT Oscar, 15-5-1845, 18 h., Lanenville (Somme).
@@ -616,11 +616,11 @@ GRESSIN François, 1-2-1844, 23 h., Ménétou-Couture (Cher).
 GROS Marie, 1-1-1878, 2 h., Besançon (Doubs).
 GUENARD Théophile, 9-5-1860, 9 h., Saint-Georges-de-Chesne (I.-et-V.).
 GUERIN Louis, 20-1-1874, 10 h., Châtellerault (Vienne).
-GUILBEAULT Paul, 238-8-1908, 14. h., Vandermont (Maine-et-Loire).
+GUILBEAULT Paul, 23-8-1908, 14 h., Vandermont (Maine-et-Loire).
 GUILLON Georges, 5-5-1849, 5 h., Saint-Germain-en-Laye (S.-et-O.).
 HALOT Arsène, 29-7-1877, 12 h., Nantes (Loire-Inférieure).
-HAUBOIS Marie-J.,. 21-11-1866, 19 h. 30, Soissons (Aisne).
-HERBERT Théodore, 9-11-1859, O h., Haguenau (Haut-Rhin).
+HAUBOIS Marie-J., 21-11-1866, 19 h. 30, Soissons (Aisne).
+HERBERT Théodore, 9-11-1859, 0 h., Haguenau (Haut-Rhin).
 HERMELINE Charles, 27-3-1867, 2 h., Dancy (Eure-et-Loire).
 HERSCHER Sébastien, 29-10-1853, 22 h., Hettenschlag (Haut-Rhin).
 HOUDARD Maurice, 4-10-1896, 4 h., Crépy-en-Léonnois (Aisne).
@@ -644,7 +644,7 @@ JUNG Henri, 25-12-1846, 15 h., Grosblidestroff (Moselle).
 KIEFFER Joseph, 7-2-1888, 20 h., Limersheim (Bas-Rhin).
 KRIEGER Antoine, 17-11-1874, 17 h. 30, Blois (Loir-et-Cher).
 LA BARRE (de) André, 25-8-1855, 13 h., Temple (Loir-et-Cher).
-LACAS Albert, 25-38-1879, 4 h., Banassac (Lozère).
+LACAS Albert, 25-3-1879, 4 h., Banassac (Lozère).
 LACHAPELLE Marcel, 14-6-1867, 5 h., Chateauroux (Indre).
 LAGUENS Emile, 14-9-1857, 5 h., Campuzan (Hautes-Pyrénées).
 LAGUENS François, 2-12-1847, 22 h., Campuzan (Hautes-Pyrénées).
@@ -837,7 +837,7 @@ SIBASSIE Pierre, 12-6-1838, 11 h., Blanquefort (Gironde).
 SIBILLE Justin, 5-9-1853, 5 h., Sarreguemines (Moselle).
 SIMON Jean-Baptiste, 23-1-1864, 3 h., Remoiville (Meuse).
 SIMONNET Léon, 9-4-1863, 17 h., Fougères (Ille-et-Vilaine).
-SIVET Adolphe, 12-11-1862, 14-h., Avignon (Vaucluse).
+SIVET Adolphe, 12-11-1862, 14 h., Avignon (Vaucluse).
 SOMMERHALTER Jean, 16-11-1886, 7 h., Mulhouse (Haut-Rhin).
 SOUCHON Jean, 26-10-1840, 23 h., Javols (Lozère).
 STEPHANE Emile, 29-11-1875, 9 h., Margerie-Haucourt (Marne).

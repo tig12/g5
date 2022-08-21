@@ -149,7 +149,7 @@ class all implements Command {
             '02-508-physicians',
             // '03-570-sportsmen',
             // '04-676-military',
-            // '05-906-painters',
+            '05-906-painters',
             '06-361-minor-painters',
             // '07-500-actors',
             // '08-494-deputies',
