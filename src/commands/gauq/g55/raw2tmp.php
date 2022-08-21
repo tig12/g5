@@ -101,6 +101,13 @@ class raw2tmp implements Command {
                 $new['FNAME'] = substr($new['FNAME'], 2);
             }
             $new['DATE'] = self::computeDateTime($fields[1], $fields[2], $line, $N);
+            // check date format
+            try{
+                $dt = new \DateTime($new['DATE']);
+            }
+            catch(\Exception $e){
+                echo "Invalid date format: {$new['DATE']} - line $N   $line\n";
+            }
             [$new['PLACE'], $new['C1'], $new['C2'], $new['CY']] = self::computePlace($fields[3], $line, $N);
             if(isset(self::TWEAKS[$groupKey][$N])){
                 $new = array_replace($new, self::TWEAKS[$groupKey][$N]);

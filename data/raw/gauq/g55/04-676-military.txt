@@ -14,7 +14,7 @@ ALET Pierre, 13-2-1815, 4 h., La Bastide-l’Evéque (Aveyron).
 ALLAVENE Charles Francois, 10-3-1816, 19 h., Metz (Moselle).
 ALLEAU Joseph, 13-2-1876, 11 h., Saint-Mathurin (Maine-et-Loire).
 ALLEHAUT Emile, 3-5-1872, 7 h. 30, La Rochelle (Charente-Maritime).
-ALLEYRON Eugene, 10-11-1825, 20 h., Grenoble (Isère).
+ALLEYRON Eugène, 10-11-1825, 20 h., Grenoble (Isère).
 ALTHOFFER Jean Richard, 15-11-1864, 17 h., Guebwiller (Haut-Rhin).
 ALTMAYER Robert, 30-7-1875, 21 h., Bordeaux (Gironde).
 ALTMAYER Victor Joseph, 14-6-1844, 21 h., Saint-Avold (Moselle).
@@ -42,7 +42,7 @@ ARMENGAUD Paul, 28-9-1879, 6 h., Comyne (Aube).
 ARNAUDEAU Eugène Jean, 8-9-1821, 5 h., Laon (Aisne).
 ARNOUX Georges André, 18-12-1856, 14 h., La Rochelle (Charente-M.).
 ARNOUX Paul Edouard, 19-2-1822, 8 h., Poitiers (Vienne).
-ARRICAU (de) Eugene, 30-8-1810, 13 h., Maubourguet (Htes-Pyrénées).
+ARRICAU (de) Eugène, 30-8-1810, 13 h., Maubourguet (Htes-Pyrénées).
 ARROINAUX Albert Jean, 28-4-1849, 20.h., Metz (Moselle).
 ARVERS Paul, 6-9-1837, 7 h. 30, Thionville (Moselle).
 ATTEL (de) Eugène, 30-6-1857, 4 h., Hestroff (Moselle).
@@ -94,7 +94,7 @@ BARD Francois-Marie, 1-12-1889, 12 h. 15, Saint-Etienne (Loire).
 BARDIN Eugène, 11-7-1822, 17 h., Ile Bréhat (Côtes-du-Nord).
 BARESCUT (de) Maurice, 24-6-1865, 1 h., Perpignan (Pyrénées-Orient.).
 BARET Joseph Louis, 10-7-1852, 19 h. 15, Doméne (Isère).
-BARET de ROUVRAY Charles Eugene, 27-9-1800, 23 h., Preuilly (I.-L.).
+BARET de ROUVRAY Charles Eugène, 27-9-1800, 23 h., Preuilly (I.-L.).
 BARIL Eugène Guillaume, 7-11-1850, 20 h., Nimes (Gard).
 BARRABE Michel Joseph, 16-4-1821, 4 h., Gorron (Mayenne).
 BARRAL Eugène, 15-5-1808, 23 h., Claix (Isère).
@@ -281,7 +281,7 @@ BOUCABEILLE Bernard Paul, 18-2-1872, 20 h., Lille (Nord).
 BOUCHACOURT Louis, 19-9-1884, 14 h., Pierrefitte (Seine).
 BOUCHARD Raoul Paul, 9-8-1851, 9 h., Metz (Moselle).
 BOUCHEMAN (de) Louis Henri, 30-6-1827, 17 h., Versailles (S.-et-O.).
-BOUCHER Eugene Arthur, 19-85-1847, 16 h., Sully-sur-Loire (Loiret).
+BOUCHER Eugène Arthur, 19-85-1847, 16 h., Sully-sur-Loire (Loiret).
 BOUCHER Henri Louis, 2-5-1864, 20 h., Fontainebleau (Seine-et-Marne).
 BOUCHER de MORLAINCOURT Edouard, 28-8-1841, 3 h., Montpellier (Hérault).
 BOUCHER de MORLAINCOURT Francois, 7-1-1853, 16 h., L’Etanche (Vosges).
@@ -361,7 +361,7 @@ DUPONT Charles Joseph, 30-10-1863, 12 h., Nancy (Meurthe-et-Mos.).
 DUPORT Georges Pierre, 4-2-1864, 8 h., Haguenau (Bas-Rhin).
 DUPRE Marie-Jules, 25-11-1813, 17 h., Albi (Tarn).
 ESPITALIER Georges, 25-5-1849, 3 h., Sables-d’Olonne (Vendée).
-ESTIENNE Jean Eugene, 7-11-1860, 9 h., Condé-en-Barrois (Meuse).
+ESTIENNE Jean Eugène, 7-11-1860, 9 h., Condé-en-Barrois (Meuse).
 EUDES Emile, 12-9-1843, 2 h., Roncey (Manche).
 EXELMANS. Charles-Marie, 20-7-1854, 4 h., Lyon (Rhône).
 FAIDHERBE Louis, 3-6-1818, 0 h., Lille (Nord).
@@ -458,7 +458,7 @@ MARCHAND Armand Prosper, 10-10-1837, 6 h. 30, Rennes (I.-et-V.).
 MARCHAND Jean-Baptiste, 22-11-1863, 20 h., Thoissey (Ain).
 MARGOT Eugène, 24-6-1863, 3 h., Valence (Drôme).
 MARGUERITTE Jean Auguste, 15-1-1823, 21 h., Manheulles (Meuse).
-MARIAUX Augustin Eugene, 5-1-1864, 15 h., Limoges (Haute-Vienne).
+MARIAUX Augustin Eugène, 5-1-1864, 15 h., Limoges (Haute-Vienne).
 MAROIX Jean, 4-3-1867, 18 h., Céret (Pyrénées-Orientales).
 MARTIN Maurice, 31-12-1864, 20 h., Blaye (Gironde).
 MARSAC (de) Pierre, 31-10-1880, 4 h., Crolles (Isère).

@@ -208,10 +208,25 @@ class gqid implements Command {
         if(in_array('M', $what)){
             $report .= "=== MATCH ===\n";
             foreach($match as $element){
-                $hour = substr($element['g55']['DATE'], 11);
-                $report .= "g55 {$element['g55']['NUM']} = {$element['g55']['SLUG']} $hour {$element['g55']['PLACE']}\n";
-                $hour = substr($element['lerrcp']['DATE'], 11);
-                $report .= "ler {$element['lerrcp']['GQID']} = {$element['lerrcp']['SLUG']} $hour {$element['lerrcp']['PLACE']}\n\n";
+                $len1 = strlen($element['g55']['NUM']);
+                $len2 = strlen($element['lerrcp']['GQID']);
+                $name1 = substr($element['g55']['SLUG'], 0, -11);
+                $name2 = substr($element['lerrcp']['SLUG'], 0, -11);
+                $date1 = substr($element['g55']['SLUG'], -10);
+                $date2 = substr($element['lerrcp']['SLUG'], -10);
+                $hour1 = substr($element['g55']['DATE'], 11);
+                $hour2 = substr($element['lerrcp']['DATE'], 11);
+                $spacesA = str_repeat(' ', $len2 - $len1);
+                $spacesB1 = $spacesB2 = '';
+                $len3 = max(strlen($name1) - strlen($name2), 0);
+                if($len3 > 0){
+                    $spacesB2 = str_repeat(' ', $len3);
+                }
+                else{
+                    $spacesB1 = str_repeat(' ', $len3);
+                }
+                $report .= "g55 {$element['g55']['NUM']} $spacesA $name1 $spacesB1 $date1 $hour1 {$element['g55']['PLACE']}\n";
+                $report .= "db  {$element['lerrcp']['GQID']}  $name2 $spacesB2 $date2 $hour2 {$element['lerrcp']['PLACE']}\n\n";
                 // next line was used to generate G55::MATCH_LERRCP['10-884-priests']
                 //$report .= "            '{$element['g55']['NUM']}'   => 'none',\n";
             }
@@ -220,9 +235,9 @@ class gqid implements Command {
             $report .= "=== NO MATCH ===\n";
             foreach($nomatch as $element){
                 $hour = substr($element['DATE'], 11);
-                $report .= "{$element['NUM']} {$element['SLUG']}, {$element['SLUG']} {$hour}, {$element['PLACE']}, {$element['C2']}\n";
-                //$report .= "            '{$element['NUM']}' => '', // {$element['SLUG']} {$hour}, {$element['PLACE']}, {$element['C2']}\n";
-                
+//                $report .= "{$element['NUM']} {$element['SLUG']} {$hour}, {$element['PLACE']}, {$element['C2']}\n";
+                // next line was used to prepare various entries of G55::MATCH_LERRCP
+                $report .= "            '{$element['NUM']}' => 'A4-', // {$element['SLUG']} {$hour}, {$element['PLACE']}, {$element['C2']}\n";
             }
         }
         $report .= "=== " . count($match) . " MATCH ===\n=== " . count($nomatch) . " NO MATCH ===\n";
@@ -266,12 +281,26 @@ class gqid implements Command {
                 if(isset($dbPersons[$g55Day])){
                     if(count($dbPersons[$g55Day]) == 1){
                         // direct match, only one LERRCP with the g55 date
+                        // WARNING, this may lead to an error,
+                        // records must be checked one by one at the end.
                         $match[] = [
                             'g55' => $g55Person,
                             'lerrcp' => $dbPersons[$g55Day][0],
                         ];
                     }
                     else {
+                        // several possible matches, try to match by slug
+                        $test = self::doSlugMatch($g55Person, $dbPersons[$g55Day]);
+                        if($test === false){
+                            $nomatch[] = $g55Person;
+                        }
+                        else {
+                            $match[] = [
+                                'g55' => $g55Person,
+                                'lerrcp' => $test,
+                            ];
+                        }
+                        /* 
                         // several possible matches, try to match by slug
                         $min_leven = PHP_INT_MAX;
                         $bestCandidate = null;
@@ -293,6 +322,7 @@ class gqid implements Command {
                                 'lerrcp' => $bestCandidate,
                             ];
                         }
+                        */
                     }
                 }
                 else {
@@ -303,6 +333,31 @@ class gqid implements Command {
         }
         return [$match, $nomatch];
     }
+    
+    /**
+        Auxiliary of match(), indicates if a given g55 person's slug matches one of lerrcp persons coming from database.
+        Example of positive match:
+            antigna-alexandre-jean-1817-03-07
+            antigna-alexandre-1817-03-07
+        @param  $g55Person      Associative array representing one person.
+        @param  $dbCandidates   Array of associative arrays representing one person.
+        @return - false if no match
+                - the db person matching if found 
+    **/
+    private static function doSlugMatch($g55Person, $dbCandidates) {
+        $g55Name = substr($g55Person['SLUG'], 0, -11);
+        $g55Len = strlen($g55Name);
+        foreach($dbCandidates as $dbPerson){
+            $dbName = substr($dbPerson['SLUG'], 0, -11);
+            $dbLen = strlen($dbName);
+            $minLen = min($g55Len, $dbLen);
+            if(substr($g55Name, 0, $minLen) == substr($dbName, 0, $minLen)){
+                return $dbPerson;
+            }
+        }
+        return false;
+    }
+    
     
     // ******************************************************
     /** 

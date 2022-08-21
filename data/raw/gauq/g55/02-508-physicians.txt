@@ -213,7 +213,7 @@ FEVRE Marcel, 9-10-1897, 21 h. 30, Arras (Pas-de-Calais).
 FILACHET René, 27-3-1898, 12 h. 30, Farguiers (Aisne).
 FOMBEURE Georges, 24-7-1890, 13 h. 30, La Tremouille (Vienne).
 FONTAINE René, 5-6-1899, 4 h., Pistorf (Bas-Rhin).
-FONTANILLES Eugene, 5-11-1877, 8 h., Saint-Etienne (Loire).
+FONTANILLES Eugène, 5-11-1877, 8 h., Saint-Etienne (Loire).
 FORSTER André, 1-9-1878, 14 h. 30, Masevaux (Haut-Rhin).
 FOUCAULT Paul, 21-7-1893, 4 h. 30, Fontainebleau (Seine-et-Marne).
 FOUQUE Charles, 21-1-1889, 12 h. 15, Cherbourg (Manche).
@@ -457,7 +457,7 @@ SERBOURCE Marcel, 22-3-1882, 20 h., Chatillon-sur-Seine (Côte-d’Or).
 SESINI Marcel, 15-3-1902, 11 h., Alger (Algérie).
 SEZARY Albert, 26-12-1880, 8 h., Alger (Algérie).
 SIKORA Pierre, 24-8-1874, 0 h., Chamboulive (Corrèze).
-SIMONIN Louis, 17-8-1881, 5 h. 15, Dédle (Jura).
+SIMONIN Louis, 17-8-1881, 5 h. 15, Dôle (Jura).
 SIMON Francis, 13-5-1895, 5 h., Saint-Hilaire-de-Harcouét (Manche).
 SIMON Clément, 9-7-1878, 8 h., Labruguiére (Tarn).
 SOREL Francois, 6-7-1876, 11 h., Pont-de-l’Arche (Eure).
@@ -501,7 +501,7 @@ VINCENT Clovis, 26-9-1879, 5 h. 45, Ingré (Loiret).
 VINCENTI Charles, 31-7-1896, 20 h. 30, Avignon (Vaucluse).
 VIOLLET Pierre, 16-8-1891, 5 h., Orléans (Loiret).
 VULPIAN (de) Paul,! 19-12-1905, 18 h., Lamballe (Côtes-du-Nord).
-WALTRIGNY Hubert, 15-12-1903, 10 h., Chélons-sur-Marne (Marne).
+WALTRIGNY Hubert, 15-12-1903, 10 h., Châlons-sur-Marne (Marne).
 WEILL-HALLE, 14-3-1875, 12 h., Versailles (Seine-et-Oise).
 WIEHELIN Théodore, 17-4-1888, 11h. 30, Petite-Rosselle (Moselle).
 WOLGENSINGER Lucien, 29-11-1903, 8 h., Sarralbe (Moselle).
