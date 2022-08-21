@@ -95,6 +95,7 @@ class tmp2db implements Command {
                 $new['birth']['place']['name'] = $line['PLACE'];
                 $new['birth']['place']['c1'] = $line['C1'];
                 $new['birth']['place']['c2'] = $line['C2'];
+                $new['birth']['place']['c3'] = $line['C3'];
                 $new['birth']['place']['cy'] = 'FR';
                 $new['occus'] = [ $line['OCCU'] ];
                 //
@@ -137,6 +138,9 @@ class tmp2db implements Command {
                 if(!$p->data['birth']['place']['geoid']){
                     // g55 place names are generally better than cura
                     $new['birth']['place']['name'] = $line['PLACE'];
+                    if($line['C3'] != ''){
+                        $new['birth']['place']['c3'] = $line['C3'];
+                    }
                 }
                 if(strpos($p->data['slug'], 'gauquelin-') === 0){
                     $new['name']['family'] = $line['FNAME'];

@@ -108,7 +108,7 @@ class raw2tmp implements Command {
             catch(\Exception $e){
                 echo "Invalid date format: {$new['DATE']} - line $N   $line\n";
             }
-            [$new['PLACE'], $new['C1'], $new['C2'], $new['CY']] = self::computePlace($fields[3], $line, $N);
+            [$new['PLACE'], $new['C1'], $new['C2'], $new['C3'], $new['CY']] = self::computePlace($fields[3], $line, $N);
             if(isset(self::TWEAKS[$groupKey][$N])){
                 $new = array_replace($new, self::TWEAKS[$groupKey][$N]);
             }
@@ -200,14 +200,15 @@ class raw2tmp implements Command {
     /**
         @param      $line Only useful to log errors
         @param      $num  Only useful to log errors
-        @return     Array with 4 elements
+        @return     Array with 5 elements
                         - 0: place name
                         - 1: admin code level 1
                         - 2: admin code level 2
-                        - 3: country iso 3166
+                        - 3: admin code level 3
+                        - 4: country iso 3166
     **/
     private static function computePlace(string $str, string $line, int $N): array {
-        $res = ['', '', '', ''];
+        $res = ['', '', '', '', ''];
         preg_match(self::PATTERN_PLACE, $str, $m);
         if(count($m) != 3){
             echo "   Unable to parse G55 place: $str -- line $N = $line\n";
@@ -216,31 +217,40 @@ class raw2tmp implements Command {
         
         $placeName = $m[1];
         if($placeName == 'Saarelouis'){
-            return ['Saarlouis', '09', '', 'DE'];
+            return ['Saarlouis', '09', '', '', 'DE'];
         }
         if($placeName == 'Madrid'){
-            return ['Madrid', '29', 'M', 'ES'];
+            return ['Madrid', '29', 'M', '', 'ES'];
+        }
+        if($placeName == 'Genève'){
+            return ['Genève', 'GE', '2500', '', 'CH'];
+        }
+        if($placeName == 'La Haye'){
+            return ['La Haye', '05', '0984', '', 'NL'];
         }
         
         $res[0] = $placeName;
         
         $C2 = $m[2];
         if(in_array($C2, ['Algérie', 'Algér.', 'Alg.'])){
-            $res[3] = 'DZ';
+            $res[4] = 'DZ';
             $res[1] = self::dz_place2admin1($placeName, $line, $N);
             return $res;
         }
-        if(in_array($C2, ['Pr. Mon.', 'Principauté de Monaco'])){
-            $res[3] = 'MC';
+        if(in_array($C2, ['Pr. Mon.', 'Principauté de Monaco', 'Monaco'])){
+            $res[4] = 'MC';
             return $res;
         }
         if($C2 == 'Ile Maurice'){
-            $res[3] = 'MU';
+            $res[4] = 'MU';
             return $res;
         }
         
-        $res[3] = 'FR';
+        $res[4] = 'FR';
         if(!isset(self::DEPTS[$C2])){
+            if(preg_match('/Paris \((\d{1,2})°\) \(Seine\)\./', $str, $m2)){
+                return ['Paris', '', '75', $m2[1], 'FR'];
+            }
             echo "C2 code not handled: $C2 -- line $N = $line\n";
 exit;
         }
@@ -308,6 +318,7 @@ exit;
         'B.-Rhin'               => '67',
         'Bas-Rhin'              => '67',
         'B.-P.'                 => '64',
+        'B.-Pyr.'               => '64',
         'Basses-Pyr.'           => '64',
         'Basses-Pyrénées'       => '64',
         'Belfort'               => '90',
@@ -402,8 +413,10 @@ exit;
         'Htes-Pyrénées'         => '65',
         'H.-S.'                 => '70',
         'Hte-Saône'             => '70',
+        'Hte-Savoie'            => '74',
         'Hte-V.'                => '87',
         'Hte-Vienne'            => '87',
+        'Haute-V.'              => '87',
         'Ht-Rh.'                => '68',
         'I.-et-L.'              => '37',
 //        'Ile Maurice'           => '',
@@ -555,11 +568,15 @@ exit;
         case 'Anthony': return '92'; break;
         case 'Argenteuil': return '95'; break;
         case 'Asnières': return '92'; break;
+        case 'Aulnay-sous-Bois': return '93'; break;
+        case 'Bagnolet': return '93'; break;
         case 'Bassing': return '57'; break;
         case 'Blamont': return '54'; break;
+        case 'Boulogne': return '92'; break;
         case 'Boulogne-sur-Seine': return '92'; break;
         case 'Boussy-Saint-Antoine': return '91'; break;
         case 'Brunoy': return '91'; break;
+        case 'Champigny': return '94'; break; // Champigny-sur-Marne
         case 'Champlon': return '91'; break; // in fact Champlan
         case 'Chatenay': return '77'; break; // Châtenay-sur-Seine
         case 'Chatillon-sous-Bagneux': return '92'; break;
@@ -568,10 +585,12 @@ exit;
         case 'Clichy': return '92'; break;
         case 'Colombes': return '92'; break;
         case 'Conflans-Ste-Honorine': return '78'; break;
+        case 'Corbeil': return '91'; break;
         case 'Coudray-Montceau': return '91'; break;
         case 'Courbevoie': return '92'; break;
         case 'Créteil': return '94'; break;
         case 'Draveil': return '91'; break;
+        case 'Enghien': return '95'; break;
         case 'Etampes': return '91'; break;
         case 'Fontenay-aux-Roses': return '92'; break;
         case 'Fontenay-sous-Bois': return '94'; break;
@@ -581,9 +600,12 @@ exit;
         case 'Gazeran': return '78'; break;
         case 'Gennevilliers': return '92'; break;
         case 'Gentilly': return '94'; break;
+        case 'Goussainville': return '95'; break;
         case 'Ivry-sur-Seine': return '94'; break;
         case 'Joinville-le-Pont': return '94'; break;
         case 'Jouy-en-Josas': return '78'; break;
+        case 'Kremlin-Bicêtre': return '94'; break;
+        case 'Levallois-Perret': return '92'; break;
         case 'La Varenne-Saint-Hilaire': return '94'; break;
         case 'Le Vésinet': return '78'; break;
         case 'L’Hay-les-Roses': return '78'; break;
@@ -592,6 +614,7 @@ exit;
         case 'Lons-le-Saunier': return '39'; break;
         case 'Luzelburg': return '57'; break;
         case 'Magny-en-Vexin': return '91'; break;
+        case 'Mantes-la-Ville': return '78'; break;
         case 'Massy': return '91'; break;
         case 'Maisons-Alfort': return '94'; break;
         case 'Maisons-Laffitte': return '78'; break;
@@ -637,11 +660,13 @@ exit;
         case 'Saint-Germain-en-Laye': return '78'; break;
         case 'Saint-Germain-les-Corbeil': return '91'; break;
         case 'Saint-Leu': return '95'; break;
+        case 'Saint-Leu-la-Forét': return '95'; break;
         case 'Saint-Mandé': return '94'; break;
         case 'Saint-Ouen-l’Aumone': return '95'; break;
         case 'Saint-Ouen': return '93'; break;
         case 'Saint-Quirin': return '57'; break;
         case 'Salonnes': return '57'; break;
+        case 'Sannois': return '95'; break;
         case 'Sarreguemines': return '57'; break;
         case 'Schlestadt': return '67'; break;
         case 'Sèvres': return '92'; break;

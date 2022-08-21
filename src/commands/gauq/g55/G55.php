@@ -184,6 +184,7 @@ class G55 {
         'PLACE',
         'C1',
         'C2',
+        'C3',
         'CY',
         'OCCU',
         'OTHER',
