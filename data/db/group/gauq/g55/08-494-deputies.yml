@@ -1,0 +1,28 @@
+  
+# document:
+#   history:
+#     - 2022-08-22 17:31:32+02:00: Thierry Graff, creation
+
+name: Gauquelin 1955 - 494 deputies
+slug: g55-08-494-deputies
+'n': 500
+type: history
+sources:
+  - g55-book
+
+description: |
+  494 DEPUTES
+  <br>p 316 - 324 of the original book
+
+children:
+  - g55-08a-135-deputes-connus
+  - g55-08b-359-deputes-moins-connus
+  
+details: |
+  135 Députés connus
+  ANTIER - WASMER
+  lines 1 - 135
+  
+  359 Députés moins connus
+  ABELIN - ZUNINO
+  lines 136 - 494

@@ -667,7 +667,6 @@ class G55 {
             '348'   => 'none',
             '359'   => 'none',
         ],
-        
         '07-500-actors' => [
             '39' => 'A5-240',  // delaporte-marie-1838-09-27 22:00, Paris, 75
             '42' => 'A5-251',  // desclee-aimee-1836-11-16 02:00, Paris, 75
@@ -710,7 +709,10 @@ class G55 {
             '488' => 'A5-738', // torrens-jacques-1923-07-25 20:25, Sartrouville, 78
             '498' => 'A5-773', // vital-geymond-1897-01-24 20:00, Claix, 38
         ],
-        
+        '08-494-deputies' => [
+            
+        ],
+
         '10-884-priests' => [
             '4'     => 'none',
             '5'     => 'none',

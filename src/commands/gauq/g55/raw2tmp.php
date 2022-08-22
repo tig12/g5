@@ -232,7 +232,14 @@ class raw2tmp implements Command {
         $res[0] = $placeName;
         
         $C2 = $m[2];
-        if(in_array($C2, ['Algérie', 'Algér.', 'Alg.'])){
+        if(in_array($C2, [
+                'Algérie',
+                'Algér.',
+                'Alger',
+                'Alg.',
+                'Oran',
+                'Constantine',
+        ])){
             $res[4] = 'DZ';
             $res[1] = self::dz_place2admin1($placeName, $line, $N);
             return $res;
@@ -270,19 +277,28 @@ exit;
         switch($place){
         	case 'Alger':          return '01'; break;
         	case 'Douera':         return '01'; break;
+        	case 'Batna':          return '03'; break;
+        	case 'Biskra':         return '19'; break;
         	case 'Blidah':         return '20'; break;
         	case 'Blida':          return '20'; break;
         	case 'Bône':           return '18'; break;
         	case 'Constantine':    return '04'; break;
+        	case 'Lavarande':      return '35'; break;
             case 'Mascara':        return '26'; break;
             case 'Médéa':          return '06'; break;
+            case 'Mila':           return '48'; break;
+            case 'Mirabeau':       return '14'; break;
             case 'Mostaganem':     return '26'; break;
             case 'Mustapha':       return '40'; break; // wilaya de Boumerdès
         	case 'Oran':           return '09'; break;
+        	case 'Nemours':        return '15'; break;
         	case 'Philippeville':  return '31'; break; // Skikda
+        	case 'Saida':          return '10'; break;
         	case 'Sétif':          return '12'; break;
+        	case 'Souk-Ahras':     return '52'; break;
         	case 'Sidi-Bel-Abbès': return '30'; break;
         	case 'Tlemcen':        return '15'; break;
+        	case 'Tizi-Ouzou':     return '14'; break;
             default:
                 echo "Unable to compute DZ admin1 code for $place -- line $N = $line\n";
                 return '';
@@ -300,7 +316,11 @@ exit;
         'Al.'                   => '03',
         'All.'                  => '03',
         'Allier'                => '03',
+        'B.-Alpes'              => '04',
+        'Basses-Alpes'          => '04',
+        'Hautes-Alpes'          => '05',
         'Alpes-M.'              => '06',
+        'Alpes-Mar.'            => '06',
         'Alpes-Marit.'          => '06',
         'Alpes-Maritimes'       => '06',
         'A.-M.'                 => '06',
@@ -313,15 +333,6 @@ exit;
         'Aude'                  => '11',
         'Aveyr.'                => '12',
         'Aveyron'               => '12',
-        'B.-Alpes'              => '04',
-        'Basses-Alpes'          => '04',
-        'B.-Rhin'               => '67',
-        'Bas-Rhin'              => '67',
-        'B.-P.'                 => '64',
-        'B.-Pyr.'               => '64',
-        'Basses-Pyr.'           => '64',
-        'Basses-Pyrénées'       => '64',
-        'Belfort'               => '90',
         'B.-du-Rh.'             => '13',
         'B.-du-Rhône'           => '13',
         'Bouches-du-R.'         => '13',
@@ -368,9 +379,6 @@ exit;
         'Côtes-du-Nord'         => '22',
         'Cr.'                   => '23',
         'Creuse'                => '23',
-        'D.-Sev.'               => '79',
-        'Deux-Sévres'           => '79',
-        'Deux-Sèvres'           => '79',
         'Dord.'                 => '24',
         'Dordogne'              => '24',
         'Doubs'                 => '25',
@@ -382,6 +390,7 @@ exit;
         'Eure-et-L.'            => '28',
         'Eure-et-Loire'         => '28',
         'Eure-et-Loir'          => '28',
+        'Fin.'                  => '29',
         'Finist.'               => '29',
         'Finistère'             => '29',
         'Gard'                  => '30',
@@ -392,33 +401,9 @@ exit;
         'Gers'                  => '32',
         'Gir.'                  => '33',
         'Gironde'               => '33',
-        'Haute-Loire'           => '43',
-        'Hte-Loire'             => '43',
-        'Haute-M.'              => '52',
-        'Haute-Marne'           => '52',
-        'Haute-Saône'           => '72',
-        'Haute-Savoie'          => '74',
-        'Hautes-Pyrénées'       => '65',
-        'Haute-Vienne'          => '89',
-        'Haut-Rhin'             => '68',
-        'Ht-Rhin'               => '68',
-        'Hautes-Alpes'          => '05',
         'Her.'                  => '34',
         'Hér.'                  => '34',
         'Hérault'               => '34',
-        'Hte-L.'                => '43',
-        'H.-Marne'              => '52',
-        'Hte-M.'                => '52',
-        'Hte-Marne'             => '52',
-        'Htes-Pyrénées'         => '65',
-        'H.-S.'                 => '70',
-        'Hte-Saône'             => '70',
-        'Hte-Savoie'            => '74',
-        'Hte-V.'                => '87',
-        'Hte-Vienne'            => '87',
-        'Haute-V.'              => '87',
-        'Ht-Rh.'                => '68',
-        'I.-et-L.'              => '37',
 //        'Ile Maurice'           => '',
         'I.-V.'                 => '35',
         'I.-et-V.'              => '35',
@@ -427,6 +412,7 @@ exit;
         'Ille-et-Vilaine'       => '35',
         'Indre'                 => '36',
         'I.-L.'                 => '37',
+        'I.-et-L.'              => '37',
         'Indre-et-Loire'        => '37',
         'Indre-et-L.'           => '37',
         'Isere'                 => '38',
@@ -436,20 +422,24 @@ exit;
         'Jura'                  => '39',
         'Landes'                => '40',
         'L.-et-C.'              => '41',
+        'Loir-et-Cher'          => '41',
         'Lre'                   => '42',
         'Loire'                 => '42',
+        'Hte-L.'                => '43',
+        'Haute-Loire'           => '43',
+        'Hte-Loire'             => '43',
         'L.-Inf.'               => '44',
         'Loire-Inf.'            => '44',
         'Loire-Infér.'          => '44',
         'Loire-Inférieure'      => '44',
         'Lt'                    => '45',
         'Loiret'                => '45',
-        'Loir-et-Cher'          => '41',
         'Lot'                   => '46',
-        'Lot-et-Garonne'        => '47',
-        'Lot-et-Gar.'           => '47',
         'L.-et-G.'              => '47',
         'Lot-G.'                => '47',
+        'Lot-et-G.'             => '47',
+        'Lot-et-Gar.'           => '47',
+        'Lot-et-Garonne'        => '47',
         'Loz.'                  => '48',
         'Lozère'                => '48',
         'M.-L.'                 => '49',
@@ -460,6 +450,13 @@ exit;
         'M.'                    => '', // see fr_place2admin2()
         'Mar.'                  => '51',
         'Marne'                 => '51',
+        'H.-Marne'              => '52',
+        'Hte-M.'                => '52',
+        'Hte-Marne'             => '52',
+        'Haute-M.'              => '52',
+        'Haute-Marne'           => '52',
+        'Haute-Saône'           => '72',
+        'May.'                  => '53',
         'Mayenne'               => '53',
         'M.-M.'                 => '54',
         'M.-et-M.'              => '54',
@@ -483,12 +480,23 @@ exit;
         'P.-de-C.'              => '62',
         'P.-de-Calais'          => '62',
         'Pas-de-C.'             => '62',
+        'Pas-de-Cal.'           => '62',
         'Pas-de-Calais'         => '62',
         'P.-de-D.'              => '63',
         //'Pr. Mon.'              => '',
         'P.-D.'                 => '63',
         'Puy-de-D.'             => '63',
         'Puy-de-Dôme'           => '63',
+        'B.-P.'                 => '64',
+        'B.-Pyr.'               => '64',
+        'Basses-Pyr.'           => '64',
+        'Basses-Pyrénées'       => '64',
+        'T.'                    => '', // see fr_place2admin2()
+        'Tarbes'                => '65',
+        'Htes-Pyrénées'         => '65',
+        'Hautes-Pyrénées'       => '65',
+        'Hautes-Pyr.'           => '65',
+        'Haut-Rhin'             => '68',
         'Pyr.-Or.'              => '66',
         'Pyr.-Orient'           => '66',
         'Pyrénées-Orient.'      => '66',
@@ -496,10 +504,18 @@ exit;
         'Pyrénées-O.'           => '66',
         'Pyrénées-Or.'          => '66',
         'Pyrénées-Orientales'   => '66',
+        'B.-Rh.'                => '67',
+        'B.-Rhin'               => '67',
+        'Bas-Rhin'              => '67',
+        'Ht-Rhin'               => '68',
+        'Ht-Rh.'                => '68',
         'Rh.'                   => '69',
         'Rhône'                 => '69',
         'S.'                    => '', // see fr_place2admin2()
+        'H.-S.'                 => '70',
+        'Hte-Saône'             => '70',
         'S.L.'                  => '71',
+        'S.-L.'                 => '71',
         'S.-et-L.'              => '71',
         'Saône-et-L.'           => '71',
         'Saône-et-Loire'        => '71',
@@ -507,35 +523,34 @@ exit;
         'Sthe'                  => '72',
         'Sarthe'                => '72',
         'Savoie'                => '73',
+        'Hte-Savoie'            => '74',
+        'Haute-Savoie'          => '74',
         'Seine'                 => '', // see fr_place2admin2()
-        'Seine-et-M.'           => '77',
-        'Seine-et-Marne'        => '77',
         'Seine-et-O.'           => '', // see fr_place2admin2()
         'Seine-et-Oise'         => '', // see fr_place2admin2()
-        'Seine-Inf.'            => '76',
-        'Seine-Infér.'          => '76',
-        'Seine-Inférieure'      => '76',
-        'S.-M.'                 => '77',
-        'S.-et-M.'              => '77',
-        'S.-et-O.'              => '', // see fr_place2admin2()
-        'S.-et-Oise'            => '', // see fr_place2admin2()
         'S.-I.'                 => '76',
         'S.I.'                  => '76',
         'S.-Inf.'               => '76',
         'S.-Infér.'             => '76',
-        'S.-L.'                 => '71',
+        'Seine-Inf.'            => '76',
+        'Seine-Infér.'          => '76',
+        'Seine-Inférieure'      => '76',
+        'Seine-et-M.'           => '77',
+        'Seine-et-Marne'        => '77',
+        'S.-M.'                 => '77',
+        'S.-et-M.'              => '77',
+        'S.-et-O.'              => '', // see fr_place2admin2()
+        'S.-et-Oise'            => '', // see fr_place2admin2()
         'S.O.'                  => '', // see fr_place2admin2()
         'S.-O.'                 => '', // see fr_place2admin2()
+        'D.-Sev.'               => '79',
+        'Deux-Sévres'           => '79',
+        'Deux-Sèvres'           => '79',
         'Som.'                  => '80',
         'Somme'                 => '80',
-        'T.'                    => '', // see fr_place2admin2()
-        'Tarbes'                => '65',
         'Tarn'                  => '81',
         'Tarn-et-Gar.'          => '82',
         'Tarn-et-Garonne'       => '82',
-        'Terr. de Belf.'        => '90',
-        'Terr. de Belfort'      => '90',
-        'Territoire de Belfort' => '90',
         'V.'                    => '', // see fr_place2admin2()
         'Var'                   => '83',
         'Vau.'                  => '84',
@@ -546,9 +561,17 @@ exit;
         'Vendée'                => '85',
         'Vienne'                => '86',
         'H.-V.'                 => '87',
+        'Hte-V.'                => '87',
+        'Hte-Vienne'            => '87',
+        'Haute-V.'              => '87',
         'Vosges'                => '88',
         'Yonne'                 => '89',
         'Yon.'                  => '89',
+        'Haute-Vienne'          => '89',
+        'Terr. de Belf.'        => '90',
+        'Belfort'               => '90',
+        'Terr. de Belfort'      => '90',
+        'Territoire de Belfort' => '90',
     ];
     
     /**
@@ -563,6 +586,7 @@ exit;
         case 'Saint-Brice': return ''; break;
         case 'Saint-Geeil-de-Saintonge': return ''; break;
         //
+        case 'Arcueil-Cachan': return '94'; break;
         case 'Andilly': return '95'; break;
         case 'Angoulême': return '16'; break;
         case 'Anthony': return '92'; break;
@@ -591,16 +615,19 @@ exit;
         case 'Conflans-Ste-Honorine': return '78'; break;
         case 'Corbeil': return '91'; break;
         case 'Coudray-Montceau': return '91'; break;
+        case 'Coudray-Montceaux': return '91'; break;
         case 'Courbevoie': return '92'; break;
         case 'Créteil': return '94'; break;
         case 'Draveil': return '91'; break;
         case 'Enghien': return '95'; break;
+        case 'Enghien-les-Bains': return '95'; break;
         case 'Ermont': return '95'; break;
         case 'Etampes': return '91'; break;
         case 'Fontainebleau': return '77'; break;
         case 'Fontenay-aux-Roses': return '92'; break;
         case 'Fontenay-sous-Bois': return '94'; break;
         case 'Fourqueux': return '78'; break;
+        case 'Freneuse': return '78'; break;
         case 'Gagny': return '93'; break;
         case 'Garches': return '92'; break;
         case 'Garges-les-Gonesse': return '95'; break;
@@ -609,11 +636,13 @@ exit;
         case 'Gentilly': return '94'; break;
         case 'Gonesse': return '95'; break;
         case 'Goussainville': return '95'; break;
+        case 'Issou': return '78'; break;
         case 'Ivry-sur-Seine': return '94'; break;
         case 'Joinville-le-Pont': return '94'; break;
         case 'Jouy-en-Josas': return '78'; break;
         case 'Kremlin-Bicêtre': return '94'; break;
         case 'Le Pecq': return '78'; break;
+        case 'Le Raincy': return '93'; break;
         case 'La Varenne-Saint-Hilaire': return '94'; break;
         case 'Les Mureaux': return '78'; break;
         case 'Levallois-Perret': return '92'; break;
@@ -626,10 +655,12 @@ exit;
         case 'Luzelburg': return '57'; break;
         case 'Magny-en-Vexin': return '91'; break;
         case 'Mantes-la-Ville': return '78'; break;
+        case 'Mantes': return '78'; break;
         case 'Massy': return '91'; break;
         case 'Maisons-Alfort': return '94'; break;
         case 'Maisons-Laffitte': return '78'; break;
         case 'Maisons-Laffite': return '78'; break;
+        case 'Malakoff': return '92'; break;
         case 'Mantes-la-Jolie': return '78'; break;
         case 'Meudon': return '92'; break;
         case 'Meulan': return '92'; break;
@@ -671,6 +702,7 @@ exit;
         case 'Saint-Denis': return '93'; break;
         case 'Saint-Didier-les-Bains': return '84'; break;
         case 'Saint-Germain-en-Laye': return '78'; break;
+        case 'St-Germain-en-Laye': return '78'; break;
         case 'Saint-Germain-les-Corbeil': return '91'; break;
         case 'Saint-Leu': return '95'; break;
         case 'Saint-Leu-la-Forét': return '95'; break;
@@ -693,10 +725,12 @@ exit;
         case 'Vaucresson': return '92'; break;
         case 'Vaujours': return '93'; break;
         case 'Verneuil': return '78'; break;
+        case 'Vernouillet': return '78'; break;
         case 'Versailles': return '78'; break;
         case 'Vésinet': return '78'; break;
         case 'Villejuif': return '94'; break;
         case 'Villeneuve-St-Georges': return '94'; break;
+        case 'Villeneuve-Saint-Georges': return '94'; break;
         case 'Villemomble': return '93'; break;
         case 'Villennes-sur-Seine': return '78'; break;
         case 'Villepreux': return '78'; break;
