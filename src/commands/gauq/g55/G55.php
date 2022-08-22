@@ -667,6 +667,50 @@ class G55 {
             '348'   => 'none',
             '359'   => 'none',
         ],
+        
+        '07-500-actors' => [
+            '39' => 'A5-240',  // delaporte-marie-1838-09-27 22:00, Paris, 75
+            '42' => 'A5-251',  // desclee-aimee-1836-11-16 02:00, Paris, 75
+            '43' => 'A5-253',  // devoyod-paulette-louise-1838-07-10 18:00, Lyon, 69
+            '90' => 'none',    // leroux-adele-louise-p-1809-08-19 02:00, Paris, 75
+            '113' => 'A5-702', // saint-germain-victor-arthur-1832-01-12 15:00, Paris, 75
+            '117' => 'none',   // thenard-ferdinand-1823-04-18 24:00, Paris, 75
+            '127' => 'A5-20',  // andrex-1907-01-23 21:00, Marseille, 13
+            '140' => 'A5-61',  // barelli-aime-1917-05-01 08:00, Lantosques, 06
+            '144' => 'A5-66',  // barroux-lucien-1888-09-21 04:00, Toulouse, 31
+            '151' => 'A5-93',  // bertheau-julien-1910-06-19 06:00, Alger, 
+            '168' => 'A5-161', // cattand-gabriel-1923-11-29 06:00, Bonneville, 74
+            '171' => 'A5-166', // charrett-henry-1901-08-22 10:00, Nexon, 89
+            '174' => 'A5-178', // claudio-jean-cl-1927-03-28 01:00, Neuilly-sur-Seine, 92
+            '177' => 'A5-186', // comte-louise-1923-07-25 02:30, Enghien, 95
+            '186' => 'A5-204', // dalmores-charles-1871-12-31 06:00, Nancy, 54
+            '205' => 'A5-277', // duchesne-roger-1906-07-26 15:00, Luxeuil, 72
+            '209' => 'A5-284', // dullin-charles-1885-05-02 01:30, Yenne, 73
+            '211' => 'A5-292', // duval-jacques-henri-1919-10-04 20:00, Courbevoie, 92
+            '212' => 'A5-293', // dux-emilienne-1874-11-28 10:00, La Ricamarie, 42
+            '220' => 'A5-328', // Field Alice 1903-09-06 02:10:40 ALGER
+            '228' => 'A5-367', // genin-rene-1890-01-25 12:00, Aix-en-Provence, 13
+            '232' => 'A5-388', // granier-lucienne-1923-11-29 01:00, Béziers, 34
+            '237' => 'A5-402', // guisol-henri-1904-10-12 14:00, Aix-en-Provence, 13
+            '267' => 'A5-526', // marchat-jean-1903-06-08 20:00, Grigny, 69
+            '294' => 'A5-607', // paredes-jean-1914-10-07 02:00, Pusignan, 38
+            '306' => 'A5-649', // raimu-jules-1883-12-18 03:00, Toulon, 83
+            '343' => 'A5-766', // vilbert-henri-1904-04-06 01:00, Marseille, 13
+            '350' => 'A5-22', // andrieux-luc-1917-02-12 01:30, Coutainville, 50
+            '367' => 'A5-112', // bontemps-roger-1914-09-15 20:30, Sables d’Olonne, 85
+            '387' => 'A5-225', // debar-andree-1920-05-05 00:30, Maisons-Laffitte, 78
+            '391' => 'A5-260', // dor-jacqueline-1929-07-19 20:25, Boulogne-sur-Mer, 62
+            '410' => 'A5-365', // genevois-emile-1918-01-01 13:00, Barlin, 62
+            '428' => 'A5-448', // joux-francois-1912-07-11 13:00, Levallois-Perret, 92
+            '442' => 'A5-529', // marcyl-cecyl-1890-07-06 21:00, Argentré, 53
+            '459' => 'A5-600', // orbal-gaston-1898-11-22 15:00, Montpellier, 34
+            '466' => 'A5-641', // precheur-denise-1917-02-12 11:00, Pantin, 93
+            '468' => 'A5-648', // raimbourg-lucien-1903-09-14 04:00, Villeneuve-St-Georges, 94
+            '469' => 'A5-651', // raymonde-1896-08-11 06:00, Gardane, 13
+            '488' => 'A5-738', // torrens-jacques-1923-07-25 20:25, Sartrouville, 78
+            '498' => 'A5-773', // vital-geymond-1897-01-24 20:00, Claix, 38
+        ],
+        
         '10-884-priests' => [
             '4'     => 'none',
             '5'     => 'none',

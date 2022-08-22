@@ -237,7 +237,7 @@ class gqid implements Command {
                 $hour = substr($element['DATE'], 11);
 //                $report .= "{$element['NUM']} {$element['SLUG']} {$hour}, {$element['PLACE']}, {$element['C2']}\n";
                 // next line was used to prepare various entries of G55::MATCH_LERRCP
-                $report .= "            '{$element['NUM']}' => 'A4-', // {$element['SLUG']} {$hour}, {$element['PLACE']}, {$element['C2']}\n";
+                $report .= "            '{$element['NUM']}' => 'A5-', // {$element['SLUG']} {$hour}, {$element['PLACE']}, {$element['C2']}\n";
             }
         }
         $report .= "=== " . count($match) . " MATCH ===\n=== " . count($nomatch) . " NO MATCH ===\n";

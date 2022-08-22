@@ -1,0 +1,33 @@
+  
+# document:
+#   history:
+#     - 2022-08-22 06:02:42+02:00: Thierry Graff, creation
+
+name: Gauquelin 1955 - 500 actors
+slug: g55-07-500-actors
+'n': 500
+type: history
+sources:
+  - g55-book
+
+description: |
+  500 ACTEURS
+  <br>p 307 - 316 of the original book
+
+children:
+  - g55-07a-122-acteurs-celebres-du-siecle-dernier
+  - g55-07b-225-acteurs-contemporains-celebres
+  - g55-07c-153-acteurs-contemporains-moins-connus
+  
+details: |
+  122 Acteurs célèbres du siècle dernier
+  ACHARD Léon - WORMS
+  lines 1 - 122
+  
+  225 Acteurs contemporains célébres
+  ADAM - YVERNES
+  lines 123 - 347
+  
+  153 Acteurs contemporains moins connus
+  ALADIN - ZWINGEL
+  lines 348 - 500
