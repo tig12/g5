@@ -146,6 +146,7 @@ class tmp2db implements Command {
                     $new['name']['family'] = $line['FNAME'];
                     $new['name']['given'] = $line['GNAME'];
                     $new['name']['nobility'] = $line['NOB'];
+                    $new['slug'] = Person::doComputeSlug($new['name']['family'], $new['name']['given'], $new['birth']['date']);
                     $NFixedNames++;
                 }
                 $p->addHistory(

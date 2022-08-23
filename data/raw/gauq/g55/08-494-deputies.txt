@@ -57,7 +57,7 @@ HERRIOT Edouard, 5-7-1872, 20 h., Troyes (Aube).
 HETTIER de BOISLAMBERT Claude, 26-7-1906, 12 h., Heérouvillette (Calvados).
 HUGUES André, 9-8-1905, 2 h., Divonne-les-Bains (Ain).
 JACQUET Marc, 17-2-1913, 23 h., Mercy-le-Bas (Meurthe-et-Moselle).
-JACQUINOT Louis, 16-9-1595, 5 h., Gonarecourt (Meuse).
+JACQUINOT Louis, 16-9-1898, 5 h., Gonarecourt (Meuse).
 JULES-JULIEN Alfred, 29-9-1882, 14 h., Avignon (Vaucluse).
 JULY Pierre, 9-9-1906, 12 h., Vitry-le-Francois (Marne).
 KIR Félix, 23-1-1876, 23 h., Alise-Sainte-Reine (Côte-d’Or).
@@ -115,7 +115,7 @@ RAMARONY Jules, 3-9-1901, 1 h., Bordeaux (Gironde).
 REEB Henri, 18-3-1907, 12 h., Liedrezing (Moselle).
 REYNAUD Paul, 15-10-1878, 18 h., Barcelonnette (Basses-Alpes).
 RIBEYRE Paul, 11-12-1906, 22 h. 30, Aubagne (Bouches-du-Rhône).
-ROCHET Waldeck, 5-4-1905, 1 h.,) Sainte-Croix (Saône-et-Loire).
+ROCHET Waldeck, 5-4-1905, 1 h., Sainte-Croix (Saône-et-Loire).
 ROSENBLATT Marcel, 17-12-1908, 20 h., Mulhouse (Haut-Rhin).
 SAMSON Francis, 12-2-1899, 3 h. 30, Saint-Méloir-des-Ondes (I.-et-V.).
 SCHMITTLEIN Raymond, 19-6-1904, 5 h., Roubaix (Nord).
@@ -149,7 +149,7 @@ BARBIER André, 3-3-1885, 20 h., Darney (Vosges).
 BARDON André, 10-1-1901, 22 h., Arnac-la-Poste (Haute-Vienne).
 BARRES Philippe, 8-7-1896, 11 h. 30, Neuilly-sur-Seine (Seine).
 BARRIER Robert, 29-12-1907, 4 h., Bellegarde (Ain).
-BARTHELEMY André, 17-6-1897, 8 h. 30, Déle (Jura).
+BARTHELEMY André, 17-6-1897, 8 h. 30, Dôle (Jura).
 BARTOLINI Jean, 10-1-1899, 7 h., Toulon (Var).
 BASTIDE Denise, 23-12-1916, 8 h., Aurillac (Cantal).
 BAURENS Alexandre, 20-2-1900, 2 h., Valence-sur-Baise (Gers).
