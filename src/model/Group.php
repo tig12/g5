@@ -417,7 +417,9 @@ class Group {
     **/
     public function exportCsv($csvFile, $csvFields, $map=[], $fmap=[], $sort=false, $filters=[], $dozip=false) {
         
-        $csv = implode(G5::CSV_SEP, $csvFields) . "\n";
+        $SEP = Config::$data['export']['csv-separator'];
+        
+        $csv = implode($SEP, $csvFields) . "\n";
         
         $emptyNew = array_fill_keys($csvFields, '');
         
@@ -471,7 +473,7 @@ if(
             foreach($fmap as $csvKey => $function){
                 $new[$csvKey] = $function($p);
             }
-            $csv .= implode(G5::CSV_SEP, $new) . "\n";
+            $csv .= implode($SEP, $new) . "\n";
             $N++;
         }
         

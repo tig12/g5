@@ -55,3 +55,8 @@ openg:
   # it permits to grant read privilege on tables in command/db/build/dbcreate.php
   postgrest:
     user: web_anon
+
+#
+export:
+  # Character used to separate csv columns
+  csv-separator: ','
