@@ -709,7 +709,6 @@ class G55 {
             '488' => 'A5-738', // torrens-jacques-1923-07-25 20:25, Sartrouville, 78
             '498' => 'A5-773', // vital-geymond-1897-01-24 20:00, Claix, 38
         ],
-        
         '08-494-deputies' => [
             '12'  => 'A5-1420', // billoux-francois-1908-05-21 19:00, Saint-Romain-la-Motte, 42
             '14'  => 'E1-216',  // bourges-maunoury-maurice-1914-08-19 04:00, Luisant, 28
@@ -1049,6 +1048,22 @@ class G55 {
             '492' => 'none', // wagner-jean-1894-03-06 07:30, Colmar, 68
             '493' => 'none', // wolff-camille-charles-1908-01-31 02:30, Schiltigheim, 67
             '494' => 'none', // zunino-michel-jean  1889-06-12 10:00 Toulon
+        ],
+        
+        '09-349-scientists' => [
+            '3' => 'none', // bailland-edouard-1848-02-14 22:00, Chalon-sur-Sadne, 71
+            '27' => 'none', // boulignand-georges-1889-10-13 11:30, Lorient, 56
+            '38' => 'A2-2606', // bussy-m-louis-1822-03-22 22:00, Nantes, 44
+            '47' => 'A2-2618', // chardonnet-b-1839-05-01 10:00, Besançon, 25
+            '70' => 'none', // delaunay-charles-1816-04-10 23:00, Lusigny, 10
+            '73' => 'A2-2656', // deprez-marcel-1843-12-31 15:00, Aillant-sur-Mouilleron, 45
+            '82' => 'A2-2671', // dupuy-de-lome-henry-1816-10-15 05:00, Ploemeur, 56
+            '87' => 'A2-2678', // fabry-eugene-1854-10-16 21:00, Marseille, 13
+            '117' => 'none', // eury-cyrille-1839-03-09 00:00, Oudreville, 54
+            '147' => 'A2-2751', // jumelle-henri  1866-11-25 00:15 Dreux
+            '156' => 'A2-2763', // lapparent-cochon-de-albert-1839-12-30 06:00, Bourges, 18
+            '219' => 'A2-2852', // pissis-aime  1872-05-17 14:00 Brioude
+            '245' => 'A2-2886', // sebert-hippolyte-1839-01-31 12:00, Verberie, 60
         ],
 
         '10-884-priests' => [

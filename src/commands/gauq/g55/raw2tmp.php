@@ -122,6 +122,10 @@ class raw2tmp implements Command {
             $res_raw .= implode(G5::CSV_SEP, $fields) . "\n";
         }
         
+        if($groupKey == '09-349-scientists'){
+            self::handle09_349_scientists($res, $res_raw);
+        }
+        
         $dir = dirname($outfile);
         if(!is_dir($dir)){
             mkdir($dir, 0755, true);
@@ -135,6 +139,16 @@ class raw2tmp implements Command {
         
         return $report;
     }
+    
+    /**
+        Adds to $res et $res_raw lines coming from 01-576-physicians.csv and 01-576-physicians-raw.csv
+        for lines marked with * (members of academy of medecine and academy of sciences).
+        @param  $
+    **/
+    private static function handle09_349_scientists(&$res, &$res_raw){
+        
+    }
+    
     
     
     const PATTERN_NAME = '/(\*? ?[\p{Lu} \'\-]+) (.*)/u';
@@ -413,6 +427,7 @@ exit;
         'Indre'                 => '36',
         'I.-L.'                 => '37',
         'I.-et-L.'              => '37',
+        'Ind.-et-L.'            => '37',
         'Indre-et-Loire'        => '37',
         'Indre-et-L.'           => '37',
         'Isere'                 => '38',
@@ -544,6 +559,7 @@ exit;
         'S.O.'                  => '', // see fr_place2admin2()
         'S.-O.'                 => '', // see fr_place2admin2()
         'D.-Sev.'               => '79',
+        'Deux-Sev.'             => '79',
         'Deux-Sévres'           => '79',
         'Deux-Sèvres'           => '79',
         'Som.'                  => '80',
@@ -623,6 +639,7 @@ exit;
         case 'Enghien-les-Bains': return '95'; break;
         case 'Ermont': return '95'; break;
         case 'Etampes': return '91'; break;
+        case 'Flavigny-sur-Moselle': return '54'; break;
         case 'Fontainebleau': return '77'; break;
         case 'Fontenay-aux-Roses': return '92'; break;
         case 'Fontenay-sous-Bois': return '94'; break;
@@ -662,6 +679,7 @@ exit;
         case 'Maisons-Laffite': return '78'; break;
         case 'Malakoff': return '92'; break;
         case 'Mantes-la-Jolie': return '78'; break;
+        case 'Mantes-sur-Seine': return '78'; break;
         case 'Meudon': return '92'; break;
         case 'Meulan': return '92'; break;
         case 'Millemont': return '78'; break;
@@ -681,6 +699,7 @@ exit;
         case 'Neuilly-sur-Seine': return '92'; break;
         case 'Nogent-sur-Marne': return '94'; break;
         case 'Noisy-le-Grand': return '93'; break;
+        case 'Oudreville': return '54'; break;
         case 'Palaiseau': return '93'; break;
         case 'Parc-Saint-Maur': return '94'; break;
         case 'Pantin': return '93'; break;
@@ -721,6 +740,7 @@ exit;
         case 'Taverny': return '95'; break;
         case 'Thiais': return '94'; break;
         case 'Thiverval-Grignon': return '78'; break;
+        case 'Toul': return '54'; break;
         case 'Vanves': return '92'; break;
         case 'Vaucresson': return '92'; break;
         case 'Vaujours': return '93'; break;
