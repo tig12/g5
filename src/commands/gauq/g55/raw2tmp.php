@@ -123,7 +123,8 @@ class raw2tmp implements Command {
         }
         
         if($groupKey == '09-349-scientists'){
-            self::handle09_349_scientists($res, $res_raw);
+            $N_added = self::handle_09_349_scientists($res, $res_raw);
+            $N += $N_added;
         }
         
         $dir = dirname($outfile);
@@ -143,10 +144,24 @@ class raw2tmp implements Command {
     /**
         Adds to $res et $res_raw lines coming from 01-576-physicians.csv and 01-576-physicians-raw.csv
         for lines marked with * (members of academy of medecine and academy of sciences).
-        @param  $
+        $res and $res_raw are passed by reference, so variables of the calling function are modified.
     **/
-    private static function handle09_349_scientists(&$res, &$res_raw){
-        
+    private static function handle_09_349_scientists(&$res, &$res_raw){
+        $lines = G55::loadTmpFile('01-576-physicians');
+        $lines_raw = G55::loadTmpRawFile('01-576-physicians');
+        $N = count($lines);
+        $N_added = 0;
+        for($i=0; $i < $N; $i++){
+            $line =& $lines[$i];
+            if($line['OTHER'] == ''){
+                continue;
+            }
+            $N_added++;
+            $line_raw =& $lines_raw[$i];
+            $res .= implode(G5::CSV_SEP, $line) . "\n";
+            $res_raw .= implode(G5::CSV_SEP, $line_raw) . "\n";
+        }
+        return $N_added;
     }
     
     

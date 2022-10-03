@@ -188,7 +188,6 @@ class gqid implements Command {
     /** 
         The report is used to check that the proposed associations are correct,
         and fix the problematic cases with G55::MATCH_LERRCP
-        Auxiliary function of check() and update()
     **/
     private static function check($groupKey, $paramWhat) {
         $paramWhat = strtolower($paramWhat); // $paramWhat is supposed to be valid
