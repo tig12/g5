@@ -1,0 +1,17 @@
+  
+# document:
+#   history:
+#     - 2022-10-06 23:37:32+02:00: Thierry Graff, creation
+
+name: Gauquelin 1955 - 349 scientists
+slug: g55-349-scientists
+'n': 347
+type: history
+sources:
+  - g55-book
+
+description: |
+  349 scientists
+  <br>p 324 - 329 of the original book
+  <br>68 records come from the list "576 membres associés et correspondants de l'académie de médecine"
+

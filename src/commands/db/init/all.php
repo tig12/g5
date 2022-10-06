@@ -72,6 +72,7 @@ use g5\commands\cfepp\final3\ids                as CFEPPIds;
 
 use g5\commands\gauq\g55\raw2tmp                as g55Raw2tmp;
 use g5\commands\gauq\g55\gqid                   as g55Gqid;
+use g5\commands\gauq\g55\special                as g55Special;
 
 // tmp2db
 use g5\commands\gauq\A\tmp2db                   as Atmp2db;
@@ -152,8 +153,8 @@ class all implements Command {
             '05-906-painters',
             '06-361-minor-painters',
             '07-500-actors',
-            // '08-494-deputies',
-            // '09-349-scientists',
+            '08-494-deputies',
+            '09-349-scientists',
             '10-884-priests',
         ];
         
@@ -164,6 +165,8 @@ class all implements Command {
             echo "***********************\n";
             echo "*** Build tmp files ***\n";
             echo "***********************\n";
+            
+/* 
             foreach($filesGauqA as $datafile){
                 echo Araw2tmp::execute([$datafile, 'raw2tmp', 'small']);
                 echo Gauqtweak2tmp::execute([$datafile, 'tweak2tmp']);
@@ -206,10 +209,14 @@ class all implements Command {
             echo CFEPPRaw2tmp::execute([]);
             echo CFEPPIds::execute([]);
             
+*/
             echo g55Gqid::execute(['g55', 'gqid', 'cache']);
             foreach($g55Groups as $groupKey){
                 echo g55Raw2tmp::execute(['g55', 'raw2tmp', $groupKey]);
                 echo g55Gqid::execute(['g55', 'gqid', 'update', $groupKey]);
+                if($groupKey == '09-349-scientists'){
+                    echo g55Special::execute(['g55', 'special', 'complete09']);
+                }
             }
         }
         
