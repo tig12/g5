@@ -166,7 +166,6 @@ class all implements Command {
             echo "*** Build tmp files ***\n";
             echo "***********************\n";
             
-/* 
             foreach($filesGauqA as $datafile){
                 echo Araw2tmp::execute([$datafile, 'raw2tmp', 'small']);
                 echo Gauqtweak2tmp::execute([$datafile, 'tweak2tmp']);
@@ -209,7 +208,6 @@ class all implements Command {
             echo CFEPPRaw2tmp::execute([]);
             echo CFEPPIds::execute([]);
             
-*/
             echo g55Gqid::execute(['g55', 'gqid', 'cache']);
             foreach($g55Groups as $groupKey){
                 echo g55Raw2tmp::execute(['g55', 'raw2tmp', $groupKey]);

@@ -363,6 +363,7 @@ class G55 {
             '236' => 'A3-278', // boisse-emile-jean-1848-01-14 10:30, Blaye, 81
             '238' => 'A3-281', // boissin-mathieu-rene-1872-05-03 13:00, Montlucon, 03
             '240' => 'A3-283', // boistertre-jean-anatole-1810-09-20 08:00, Notre-Dame du Hamel, 27
+            '247' => 'A3-292', // bonfait-henry-1857-05-19, Reims
             '248' => 'A3-293', // bongarcon-alphonse-camille-1834-02-07 02:00, Sisteron, 04
             '251' => 'A3-297', // bonnal-guillaume-1844-03-27 06:00, Toulouse, 31
             '255' => 'A3-301', // bonnet-aristide-michel-1839-08-09 10:00, Besancon, 25

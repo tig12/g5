@@ -27,7 +27,6 @@ class tmp2db implements Command {
     public static function execute($params=[]): string {
         
         $cmdSignature = 'gauq g55 tmp2db';
-        $report = "--- $cmdSignature ---\n";
         
         $possibleParams = G55::getPossibleGroupKeys();
         $msg = "Usage : php run-g5.php $cmdSignature <group>\nPossible values for <group>: \n  - " . implode("\n  - ", $possibleParams) . "\n";
@@ -45,6 +44,8 @@ class tmp2db implements Command {
             return "UNABLE TO PROCESS GROUP: missing temporary file $tmpfile\n";
         }
         
+        $report = "--- $cmdSignature $groupKey ---\n";
+        
         // Source related to this group - insert if does not already exist
         $g55Source = Source::createFromSlug(G55::SOURCE_SLUG); // DB
         if(is_null($g55Source)){
@@ -55,7 +56,7 @@ class tmp2db implements Command {
         
         // group
         $groupSlug = G55::groupKey2slug($groupKey);
-        $g = Group::createFromSlug($groupSlug);
+        $g = Group::createFromSlug($groupSlug); // DB
         if(is_null($g)){
             $defFile = 'gauq' . DS . 'g55' . DS . $groupKey . '.yml';
             $g = Group::createFromDefinitionFile($defFile);
@@ -80,84 +81,101 @@ class tmp2db implements Command {
             $line = $lines[$i];
             $NUM = $i + 1;
             $lineRaw = $linesRaw[$i];
-            $G55ID = G55::g55Id($groupKey, $i+1);
-            $GQID = $line['GQID']; // eventually computed by command gqid
-            if($GQID == ''){;
-                // Person not already in g5 db - insert
-                $p = new Person();
-                $new = [];
-                $new['trust'] = Gauquelin::TRUST_LEVEL;
-                $new['name']['family'] = $line['FNAME'];
-                $new['name']['given'] = $line['GNAME'];
-                $new['name']['nobility'] = $line['NOB'];
-                $new['birth'] = [];
-                $new['birth']['date'] = $line['DATE'];
-                $new['birth']['place']['name'] = $line['PLACE'];
-                $new['birth']['place']['c1'] = $line['C1'];
-                $new['birth']['place']['c2'] = $line['C2'];
-                $new['birth']['place']['c3'] = $line['C3'];
-                $new['birth']['place']['cy'] = 'FR';
-                $new['occus'] = [ $line['OCCU'] ];
-                //
-                $p->addIdInSource($g55Source->data['slug'], (string)$NUM);
-                $p->addPartialId(G55::SOURCE_SLUG, $G55ID);
-                $p->updateFields($new);
-                $p->computeSlug();
-                // repeat some fields to include in $history
-                $new['ids-in-sources'] = [G55::SOURCE_SLUG => $NUM];
-                $p->addHistory(
-                    command:    $cmdSignature . ' ' . $groupKey,
-                    sourceSlug: $g55Source->data['slug'],
-                    newdata:    $new,
-                    rawdata:    $lineRaw
-                );
-                $nInsert++;
-                $p->data['id'] = $p->insert(); // DB
+            // $special09 : lines of 09-349-scientists coming from 01-576-physicians
+            $special09 = ($groupKey == '09-349-scientists' && $NUM > 279);
+            if($special09){
+                $G55ID = G55::g55Id('01-576-physicians', $line['NUM']);
             }
-            else{
-                // Person already in Gauquelin - update
-                $p = Person::createFromPartialId(LERRCP::SOURCE_SLUG, $GQID); // DB
-                $p->addOccus([ $line['OCCU'] ]);
-                $p->addIdInSource(G55::SOURCE_SLUG, (string)$NUM);
-                $p->addPartialId(G55::SOURCE_SLUG, $G55ID);
-                // add an issue if G55 and LERRCP dates differ
-                // note: as matching is done by date (see command gqid check),
-                // current check concerns birth hours
-                if($p->data['birth']['date'] != ''){
-                    if($line['DATE'] != substr($p->data['birth']['date'], 0, 16)){
-                        $issue = "Check birth date because CFEPP and g55 birth dates differ\n"
-                               . "<br>G55: {$line['DATE']}\n"
-                               . "<br>CFEPP: {$p->data['birth']['date']}\n";
-                        $p->addIssue($issue);
-                    }
-                }
-                $new = [
-                    'ids-in-source' => [G55::SOURCE_SLUG => (string)$NUM],
-                    'partial-ids' => [G55::SOURCE_SLUG => $G55ID],
-                ];
-                if(!$p->data['birth']['place']['geoid']){
-                    // g55 place names are generally better than cura
-                    $new['birth']['place']['name'] = $line['PLACE'];
-                    if($line['C3'] != ''){
-                        $new['birth']['place']['c3'] = $line['C3'];
-                    }
-                }
-                if(strpos($p->data['slug'], 'gauquelin-') === 0){
+            else {
+                $G55ID = G55::g55Id($groupKey, $NUM);
+            }
+            $GQID = $line['GQID']; // eventually computed by command gqid
+            if(!$special09){
+                if($GQID == ''){
+                    // Person not already in g5 db - insert
+                    $p = new Person();
+                    $new = [];
+                    $new['trust'] = Gauquelin::TRUST_LEVEL;
                     $new['name']['family'] = $line['FNAME'];
                     $new['name']['given'] = $line['GNAME'];
                     $new['name']['nobility'] = $line['NOB'];
-                    $new['slug'] = Person::doComputeSlug($new['name']['family'], $new['name']['given'], $new['birth']['date']);
-                    $NFixedNames++;
+                    $new['birth'] = [];
+                    $new['birth']['date'] = $line['DATE'];
+                    $new['birth']['place']['name'] = $line['PLACE'];
+                    $new['birth']['place']['c1'] = $line['C1'];
+                    $new['birth']['place']['c2'] = $line['C2'];
+                    $new['birth']['place']['c3'] = $line['C3'];
+                    $new['birth']['place']['cy'] = 'FR';
+                    $new['occus'] = [ $line['OCCU'] ];
+                    //
+                    $p->addIdInSource($g55Source->data['slug'], (string)$NUM);
+                    $p->addPartialId(G55::SOURCE_SLUG, $G55ID);
+                    $p->updateFields($new);
+                    $p->computeSlug();
+                    // repeat some fields to include in $history
+                    $new['ids-in-sources'] = [G55::SOURCE_SLUG => $NUM];
+                    $p->addHistory(
+                        command:    $cmdSignature . ' ' . $groupKey,
+                        sourceSlug: $g55Source->data['slug'],
+                        newdata:    $new,
+                        rawdata:    $lineRaw
+                    );
+                    $nInsert++;
+                    $p->data['id'] = $p->insert(); // DB
                 }
-                $p->addHistory(
-                    command:    $cmdSignature . ' ' . $groupKey,
-                    sourceSlug: $g55Source->data['slug'],
-                    newdata:    $new,
-                    rawdata:    $lineRaw,
-                );
-                $nUpdate++;
-                $p->updateFields($new);
-                $p->update(); // DB
+                else{
+                    // update a person already in db
+                    $p = Person::createFromPartialId(LERRCP::SOURCE_SLUG, $GQID); // DB (read)
+                    $p->addOccus([ $line['OCCU'] ]);
+                    $p->addIdInSource(G55::SOURCE_SLUG, (string)$NUM);
+                    $p->addPartialId(G55::SOURCE_SLUG, $G55ID);
+                    // add an issue if G55 and LERRCP dates differ
+                    // note: as matching is done by date (see command gqid check),
+                    // days are identical, so current check concerns birth hours
+                    if($p->data['birth']['date'] != ''){
+                        if($line['DATE'] != substr($p->data['birth']['date'], 0, 16)){
+                            $issue = "Check birth date because CFEPP and g55 birth dates differ\n"
+                                   . "<br>G55: {$line['DATE']}\n"
+                                   . "<br>CFEPP: {$p->data['birth']['date']}\n";
+                            $p->addIssue($issue);
+                        }
+                    }
+                    $new = [
+                        'ids-in-source' => [G55::SOURCE_SLUG => (string)$NUM],
+                        'partial-ids' => [G55::SOURCE_SLUG => $G55ID],
+                    ];
+                    if(!$p->data['birth']['place']['geoid']){
+                        // g55 place names are generally better than cura
+                        $new['birth']['place']['name'] = $line['PLACE'];
+                        if($line['C3'] != ''){
+                            $new['birth']['place']['c3'] = $line['C3'];
+                        }
+                    }
+                    if(strpos($p->data['slug'], 'gauquelin-') === 0){
+                        $new['name']['family'] = $line['FNAME'];
+                        $new['name']['given'] = $line['GNAME'];
+                        $new['name']['nobility'] = $line['NOB'];
+                        $new['slug'] = Person::doComputeSlug($new['name']['family'], $new['name']['given'], substr($p->data['birth']['date'], 0, 10));
+                        $NFixedNames++;
+                    }
+                    $p->addHistory(
+                        command:    $cmdSignature . ' ' . $groupKey,
+                        sourceSlug: $g55Source->data['slug'],
+                        newdata:    $new,
+                        rawdata:    $lineRaw,
+                    );
+                    $nUpdate++;
+                    $p->updateFields($new);
+                    $p->update(); // DB
+                }
+            }
+            else{ // $special09
+                if($GQID == ''){
+                    $p = Person::createFromPartialId(G55::SOURCE_SLUG, $G55ID); // DB (read)
+                }
+                else{
+                    $p = Person::createFromPartialId(LERRCP::SOURCE_SLUG, $GQID); // DB (read)
+                }
             }
             $g->addMember($p->data['id']);
         }
