@@ -281,7 +281,9 @@ exit;
         	case 'Blidah':         return '20'; break;
         	case 'Blida':          return '20'; break;
         	case 'Bône':           return '18'; break;
+        	case 'Clauzel':        return '23'; break; // Houari Boumédiène, wilaya de Guelma
         	case 'Constantine':    return '04'; break;
+        	case 'Laferrière':     return '36'; break; // Chaabat El Leham
         	case 'Lavarande':      return '35'; break;
             case 'Mascara':        return '26'; break;
             case 'Médéa':          return '06'; break;
@@ -393,6 +395,7 @@ exit;
         'Finist.'               => '29',
         'Finistère'             => '29',
         'Gard'                  => '30',
+        'H.-G.'                 => '31',
         'Hte-G.'                => '31',
         'Hte-Gar.'              => '31',
         'Hte-Garonne'           => '31',
@@ -489,6 +492,7 @@ exit;
         'Puy-de-Dôme'           => '63',
         'B.-P.'                 => '64',
         'B.-Pyr.'               => '64',
+        'B.-Pyrénées'           => '64',
         'Basses-Pyr.'           => '64',
         'Basses-Pyrénées'       => '64',
         'T.'                    => '', // see fr_place2admin2()
@@ -587,6 +591,7 @@ exit;
         case 'Saint-Brice': return ''; break;
         case 'Saint-Geeil-de-Saintonge': return ''; break;
         //
+        case 'Arcueil': return '94'; break;
         case 'Arcueil-Cachan': return '94'; break;
         case 'Andilly': return '95'; break;
         case 'Angoulême': return '16'; break;
@@ -601,6 +606,7 @@ exit;
         case 'Blamont': return '54'; break;
         case 'Boulogne': return '92'; break;
         case 'Boulogne-sur-Seine': return '92'; break;
+        case 'Boulogne-Billancourt': return '92'; break;
         case 'Bourg-la-Reine': return '92'; break;
         case 'Boussy-Saint-Antoine': return '91'; break;
         case 'Brunoy': return '91'; break;
@@ -615,6 +621,7 @@ exit;
         case 'Colombes': return '92'; break;
         case 'Conflans-Ste-Honorine': return '78'; break;
         case 'Corbeil': return '91'; break;
+        case 'Corbeil-Essonnes': return '91'; break;
         case 'Coudray-Montceau': return '91'; break;
         case 'Coudray-Montceaux': return '91'; break;
         case 'Courbevoie': return '92'; break;
@@ -622,6 +629,7 @@ exit;
         case 'Draveil': return '91'; break;
         case 'Enghien': return '95'; break;
         case 'Enghien-les-Bains': return '95'; break;
+        case 'Epinay-sur-Seine': return '93'; break;
         case 'Ermont': return '95'; break;
         case 'Etampes': return '91'; break;
         case 'Flavigny-sur-Moselle': return '54'; break;
@@ -629,6 +637,7 @@ exit;
         case 'Fontenay-aux-Roses': return '92'; break;
         case 'Fontenay-sous-Bois': return '94'; break;
         case 'Fourqueux': return '78'; break;
+        case 'Franconville-la-Garenne': return '95'; break;
         case 'Freneuse': return '78'; break;
         case 'Gagny': return '93'; break;
         case 'Garches': return '92'; break;
@@ -638,6 +647,7 @@ exit;
         case 'Gentilly': return '94'; break;
         case 'Gonesse': return '95'; break;
         case 'Goussainville': return '95'; break;
+        case 'Herbeville': return '95'; break;
         case 'Issou': return '78'; break;
         case 'Ivry-sur-Seine': return '94'; break;
         case 'Joinville-le-Pont': return '94'; break;
@@ -665,6 +675,8 @@ exit;
         case 'Malakoff': return '92'; break;
         case 'Mantes-la-Jolie': return '78'; break;
         case 'Mantes-sur-Seine': return '78'; break;
+        case 'Massy-Palaiseau': return '91'; break;
+        case 'Maule': return '78'; break;
         case 'Meudon': return '92'; break;
         case 'Meulan': return '92'; break;
         case 'Millemont': return '78'; break;
@@ -681,9 +693,12 @@ exit;
         case 'Mouilleron-en-Pareds': return '85'; break;
         case 'Mouthiers': return '16'; break;
         case 'Mureaux': return '78'; break;
+        case 'Nesles-la-Vallée': return '95'; break;
+        case 'Neuilly-Plaisance': return '93'; break;
         case 'Neuilly-sur-Seine': return '92'; break;
         case 'Nogent-sur-Marne': return '94'; break;
         case 'Noisy-le-Grand': return '93'; break;
+        case 'Orgeval': return '78'; break;
         case 'Oudreville': return '54'; break;
         case 'Palaiseau': return '93'; break;
         case 'Parc-Saint-Maur': return '94'; break;
@@ -694,9 +709,11 @@ exit;
         case 'Poissy': return '78'; break;
         case 'Pont-à-Mousson': return '54'; break;
         case 'Pontoise': return '95'; break;
+        case 'Port-Marly': return '78'; break;
         case 'Pussay': return '91'; break;
         case 'Puteaux': return '92'; break;
         case 'Rambouillet': return '78'; break;
+        case 'Ris-Orangis': return '91'; break;
         case 'Rueil': return '92'; break;
         case 'Saint-Benoît de Carmaux': return '81'; break;
         case 'Saint-Christophe-de-Chalais': return '16'; break;
@@ -715,8 +732,11 @@ exit;
         case 'Saint-Ouen-l’Aumone': return '95'; break;
         case 'Saint-Ouen': return '93'; break;
         case 'Saint-Quirin': return '57'; break;
+        case 'St-Rémy-les-Chevr': return '78'; break;
+        case 'St-Rémy-les-Chevr.': return '78'; break;
         case 'Salonnes': return '57'; break;
         case 'Sannois': return '95'; break;
+        case 'Sarcelles': return '95'; break;
         case 'Sarreguemines': return '57'; break;
         case 'Sartrouville': return '78'; break;
         case 'Schlestadt': return '67'; break;
@@ -729,11 +749,13 @@ exit;
         case 'Vanves': return '92'; break;
         case 'Vaucresson': return '92'; break;
         case 'Vaujours': return '93'; break;
+        case 'Velizy': return '78'; break;
         case 'Verneuil': return '78'; break;
         case 'Vernouillet': return '78'; break;
         case 'Versailles': return '78'; break;
         case 'Vésinet': return '78'; break;
         case 'Villejuif': return '94'; break;
+        case 'Villeneuve-le-Roi': return '94'; break;
         case 'Villeneuve-St-Georges': return '94'; break;
         case 'Villeneuve-Saint-Georges': return '94'; break;
         case 'Villemomble': return '93'; break;
