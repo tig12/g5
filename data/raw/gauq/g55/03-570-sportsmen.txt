@@ -365,9 +365,9 @@ THEVENET Marcel, 9-7-1915, 2 h., Poitiers (Vienne).
 AINCIART Edouard, 21-12-1908, 11 h., Bayonne (Basses-Pyrénées).
 BALADIE Georges, 20-5-1917, 7 h. 30, Ville-d’Avray (Seine-et-Oise).
 BAILLETTE Marcel, 12-10-1904, 10 h., Perpignan (Pyrénées-Orientales).
-BEGUET Louis, 7-12-1894, 9 h.. Neuf-Mesnil (Nord).
+BEGUET Louis, 7-12-1894, 9 h., Neuf-Mesnil (Nord).
 BERAUD André, 11-11-1922, 5 h., Bidart (Basses-Pyrénées).
-BERGES Felix, 11-1-1914, 40 h., Boucau (Basses-Pyrénées).
+BERGES Felix, 11-1-1914, 10 h., Boucau (Basses-Pyrénées).
 BERGOUGNAN Yves, 8-5-1924, 13 h., Toulouse (Haute-Garonne).
 BERTHOMIEU Gabriel, 15-2-1924, 4 h., Graulhet (Tarn).
 BIOUSSA Alexandre, 17-3-1901, 11 h., Toulouse (Haute-Garonne).
@@ -375,12 +375,12 @@ BORDENAVE Léon, 11-5-1922, 18 h., Odos (Hautes-Pyrénées).
 BRUNETAUD Maurice, 12-10-1912, 1 h., Vanves (Seine).
 CADENAT Jules, 18-9-1885, 22 h., Béziers (Hérault).
 CAILLOU Robert, 29-4-1918, 22 h., Bayonne (Basses-Pyrénées).
-CALIXTE Gaston, 7-6-1923. 21 h., Nissan (Hérault).
+CALIXTE Gaston, 7-6-1923, 21 h., Nissan (Hérault).
 CAMEL André, 9-2-1905, 4 h., Toulouse (Haute-Garonne).
 CANTONI Vincent, 10-3-1927, 23 h., Montpey (Aveyron).
 CRABOS René, 7-2-1899, 15 h., Saint-Sever (Landes).
 COMBES Gaston, 29-2-1920, 16 h., Toulouse (Haute-Garonne).
-COMMUNEAU Marcel, 11-9-1885,, 7 h. 30, Beauvais (Oise).
+COMMUNEAU Marcel, 11-9-1885, 7 h. 30, Beauvais (Oise).
 CRESPO Joseph, 1-1-1925, 7 h., Elne (Pyrénées-Orientales).
 DESCLAUX Francis, 9-2-1926, 7 h., Perpignan (Pyrénées-Orientales).
 DIZABO Pierre, 4-10-1929, 1 h. 20, Saint-Vincent-de-Tyrosse (Landes).
@@ -393,7 +393,7 @@ FRANQUENELLE André, 15-8-1889, 8 h., Rochefort-sur-Mer (Ch.-M.).
 GALIA Jean, 20-3-1905, 8 h., Ille-sur-Tet (Pyrénées-Orientales).
 GOT Raoul, 11-10-1900, 6 h., Perpignan (Pyrénées-Orientales).
 GRAULE Vincent, 22-1-1904, 10 h., Perpignan (Pyrénées-Orientales).
-HATCHONDO André, 8-7-1923, 7 h., Ascain (Basses- Pyrénées).
+HATCHONDO André, 8-7-1923, 7 h., Ascain (Basses-Pyrénées).
 JAUREGUY Adolphe, 18-2-1898, 15 h., Ostabat (Basses-Pyrénées).
 JUNCAS Louis, 11-9-1920, 4 h., Saint-Vincent-de-Tyrosse (Landes).
 LARRIBAU Léon, 2-3-1889, 2 h., Anglet (Basses-Pyrénées).
@@ -405,61 +405,61 @@ MANOIR (du) Yves, 11-8-1904, 3 h. 15, Vaucresson (Seine-et-Oise).
 MARTIN Lucien, 28-9-1920, 13 h. 30, Pau (Basses-Pyrénées).
 MATHEU Jean, 23-6-1920, 5 h., Gelos (Basses-Pyrénées).
 MAURIAT Paul, 27-5-1887, 23 h. 30, Neuville-sur-Saône (Rhône).
-MAZON, 7-7-1921. 7 h. 15, Montluel (Ain).
+MAZON, 7-7-1921, 7 h. 15, Montluel (Ain).
 MOGA Alban, 1-5-1923, 9 h. 30, Bordeaux (Gironde).
 PRAT Jean, 1-8-1923, 9 h., Lourdes (Hautes-Pyrénées).
-PUECH Louis, 4-12-1894, 21 h.. Gorse (Lot).
-PUIG-AUBERT Henri, 24-3-1925, 1 h. 30, Andernach (Allemagne), par Arles-sur-Tech (Pyrénées-Orientales).
+PUECH Louis, 4-12-1894, 21 h., Gorse (Lot).
+PUIG-AUBERT Henri, 24-3-1925, 1 h. 30, Andernach (Allemagne).
 RAMIS Roger, 29-3-1902, 17 h., Perpignan (Pyrénées-Orientales).
 SORO Robert, 28-11-1922, 16 h., Odos (Hautes-Pyrénées).
 STRUXIANO Philippe, 11-3-1891, 4 h., Toulouse (Haute-Garonne).
 TAILLANTOU Pierre, 7-8-1920, 5 h., Bizanos (Basses-Pyrénées).
 TERREAU Maurice, 30-1-1923, 2 h., Bourg-en-Bresse (Ain).
 THIERS Pierre, 16-4-1914, 23 h., Thiers (Puy-de-Dôme).
-TRESCASES Frédéric, 20-11-1921, 6 h.. Argelés (Pyrénées-Orientales).
+TRESCASES Frédéric, 20-11-1921, 6 h., Argelès (Pyrénées-Orientales).
 VELLAT Edmond, 14-2-1897, 2 h. 40, Chambéry (Savoie).
-CHARLET Régis, 4-5-1920, 5 h., Chamonix (Heute-Savoie).
+CHARLET Régis, 4-5-1920, 5 h., Chamonix (Haute-Savoie).
 COUTTET James, 6-7-1921, 23 h. 30, Chamonix (Haute-Savoie).
 PAZZI Jean, 7-8-1920, 10 h., Guillaumes (Alpes-Maritimes).
 PENZ Claude, 23-7-1924, 21 h. 30, Gaillard (Haute-Savoie).
 BIZARD Xavier, 1-1-1899, 20 h. 30, Lille (Nord).
-BURET Maurice, 21-5-1909, 16 h.. Sèvres (Seine-et-Oise).
+BURET Maurice, 21-5-1909, 16 h., Sèvres (Seine-et-Oise).
 BUSNEL (de) Amador, 19-12-1904, 16 h. 30, Saumur (Maine-et-Loire).
 CLAVE Pierre, 12-7-1887, 6 h., Sainte-Colombe (Landes).
 GUDIN de VALLERIN Maurice, 15-3-1897, 15 h. 30, Montherlant (O.).
 JOUSSEAUME André, 27-7-1894, 8 h. 10, Yvré-l’Evéque (Sarthe).
-LESAGE Xavier, 25-10-1885, 8 h. 30, Moret (Seine-et-Marne),
+LESAGE Xavier, 25-10-1885, 8 h. 30, Moret (Seine-et-Marne).
 MAUPEOU d’ABLEIGES (de) Pierre, 7-6-1910, 19 h. 45, Gray (H.-S.).
-ROYER (de), Henri Cl., 9-9-1876, 15 h. 30, Chartres (Eure-et-Loire).
-BRASSART Yvonne, 1-3-1904, 6 h.,50, Neuilly-sur-Seine (Seine).
+ROYER (de) Henri Cl., 9-9-1876, 15 h. 30, Chartres (Eure-et-Loire).
+BRASSART Yvonne, 1-3-1904, 6 h. 50, Neuilly-sur-Seine (Seine).
 CASTEUR Odette, 11-11-1927, 23 h. 53, Tourcoing (Nord).
 FAURE-BEAULIEU Suzanne, 29-8-1905, 15 h., Dammarie-les-Lys (S.-M.).
 JEANNE Yvonne, 14-7-1910, 1 h., Paris (18°) (Seine).
 MERLE Geneviéve, 21-2-1927, 4 h., Saint-Georges-d’Orgues (Hérault).
 VALLEREY Giséle, 22-1-1930, 8 h., Amiens (Somme).
-VESTE Paulette, 24-2-1928, 20 h., Lespesse (Pas-de-Calais.)
+VESTE Paulette, 24-2-1928, 20 h., Lespesse (Pas-de-Calais).
 VOGELBACHER Jeannette, 2-2-1922, 3 h. 30, Belfort (Territoire de B.).
-BERNARD Alain, 25-8-1902, 9 h., Val-André (Pléneuf) (Côtes-du-Nord).
+BERNARD Alain, 25-8-1902, 9 h., Pléneuf-Val-André (Côtes-du-Nord).
 BERNARD Marcel, 18-5-1914, 20 h., La Madeleine (Nord).
 BLANCHY Francois, 12-12-1886, 9 h., Bordeaux (Gironde).
-BOLLELL! Henri, 27-2-1912, 18 h. 30, Talence (Gironde).
+BOLLELLI Henri, 27-2-1912, 18 h. 30, Talence (Gironde).
 BOROTRA Jean, 13-8-1898, 17 h., Biarritz (Basses-Pyrénées).
 BOUSSUS Christian, 5-3-1908, 5 h., Hyéres (Var). Ase
 CHATRIER Philippe, 2-2-1928, 10 h. 15, Créteil (Seine).
-COCHET Henri, 14-12-1901, 11. h., Villeurbanne (Rhône).
+COCHET Henri, 14-12-1901, 11 h., Villeurbanne (Rhône).
 DUCOS de la HAILLE Jean, 29-11-1926, 20 h. 10, Nancy (M.-et-M.).
-GERAUD Louis, 6-7-1902, 11 h. Toulouse (Haute-Garonne).
+GERAUD Louis, 6-7-1902, 11 h., Toulouse (Haute-Garonne).
 GREMILLET Georges, 2-5-1921, 18 h. 30, Sainte-Foy (Rhône).
 JALABERT Paul, 2-4-1928, 23 h. 50, Alger (Algérie).
 JOURNU Roland, 6-8-1906, 1 h. 30, Bordeaux (Gironde).
 LESUEUR Jean, 24-6-1910, 5 h. 40, Dieppe (Seine-Inférieure).
 PELLIZZA Pierre, 10-7-1917, 20 h., Lourdes (Hautes-Pyrénées).
 PLAA Martin, 12-3-1901, 11 h., Bidart (Basses-Pyrénées).
-RAMILLON Robert, 24-2-1909, 16 h., Cannes (Alpes-Maritimes),
+RAMILLON Robert, 24-2-1909, 16 h., Cannes (Alpes-Maritimes).
 RODEL Raymond, 5-5-1895, 6 h., Bordeaux (Gironde).
 THOMAS Jacques, 13-4-1922, 6 h., Antibes (Alpes-Maritimes).
-BONNIN Marcel, 10-11-1904, 18 h.. Tours (Indre-et-Loire).
-COQUELIN de LISLE Pierre, 19-7-1900, 23 (h., Lille (Nord).
+BONNIN Marcel, 10-11-1904, 18 h., Tours (Indre-et-Loire).
+COQUELIN de LISLE Pierre, 19-7-1900, 23 h., Lille (Nord).
 DURAND Raymond, 28-1-1894, 13 h., Langres (Haute-Marne).
 FELBACQ Pierre, 23-1-1906, 3 h. 30, Claye-Souilly (Seine-et-Marne).
 FOURNIER Jean, 4-5-1914, 16 h., Saint-Geniés-de-Malgoisis (Gard).
@@ -476,20 +476,20 @@ AUCLAIR Marcel, *14-10-1927, 7 h. 30, Roanne (Loire).
 AUTHIER Henri, 11-4-1929, 22 h., Macon (Saône-et-Loire).
 BEAUMAIS Marcel, 20-1-1929, 8 h., Equemanville (Calvados).
 BENEDETTO Valére, 26-11-1926, 16 h., Aix-en-Provence (B.-du-Rh.).
-BINI| Dante, 23-7-1927, 10 h., Bezons (Seine).
+BINI Dante, 23-7-1927, 10 h., Bezons (Seine).
 BONNARDEL Francis, 24-1-1928, 16 h., Bagnolet (Seine).
 BOUQUET Jules, 5-3-1929, 19 h., Heénin-Liétard (Pas-de-Calais).
 BRIEND André, 2-5-1930, 1 h. 30, Vannes (Morbihan).
 BRO Jacques, 13-11-1926, 6 h., Limoges (Haute-Vienne).
 BUSATA Roger, 22-11-1930, 11 h., Cherbourg (Manche).
 CAULET Auguste, 15-10-1926, 3 h., Montpellier (Hérault).
-CELESTINI Bernard, 22-2-1925, 20 h., Gap-~(Hautes-Alpes).
+CELESTINI Bernard, 22-2-1925, 20 h., Gap (Hautes-Alpes).
 CEUSTERMANS Serge, .17-1-1928, 5 h. 30, Saint-Germain-Village (E.).
-CHEMAMA Emile, 4-3-1926, 16 h. 10, Béne (Algérie).
-CICCARELLI Mario, 27-5-1932, 20 h.,.Audun-le-Tiche (Moselle).
+CHEMAMA Emile, 4-3-1926, 16 h. 10, Bône (Algérie).
+CICCARELLI Mario, 27-5-1932, 20 h., Audun-le-Tiche (Moselle).
 CLAVEL Michel, 12-3-1931, 0 h., Aubervilliers (Seine).
 CCEURET Francis, 12-2-1931, 17 h. 15, Plougenast (Côtes-du-Nord).
-COHEN Robert, 15-11-1930, 21 h., Bone’ (Algérie).
+COHEN Robert, 15-11-1930, 21 h., Bône (Algérie).
 COLIN Charles, 7-1-1929, 23 h., Saint-Joachim (Loire-Inférieure).
 COUET André, 18-1-1931, 9 h. 30, Le Havre (Seine-Inférieure).
 CUILLIERES René, 12-7-1929, 17 h., Lambesc (Bouches-du-Rhône).
@@ -499,15 +499,15 @@ DUPRE Marcel, 16-9-1930, 12 h., Antony (Seine).
 ENTRINGER Henri, 23-1-1929, 10 h., Bagnolet (Seine).
 GADE Roger, 2-3-1927, 13 h., Alger (Algérie).
 GARCIA Robert, 13-1-1929, 19 h. 30, Tiaret (Oranie).
-GHEERARDYN Jean, 5-3-1931, 2 h. 30; Rosendaé! (Nord).
-GODIH Lahouari, 27-4-1929, 4 h., Oran’ (Algérie).
+GHEERARDYN Jean, 5-3-1931, 2 h. 30, Rosendaël (Nord).
+GODIH Lahouari, 27-4-1929, 4 h., Oran (Algérie).
 GRACIA Guy, 10-4-1929, 8 h., Tarbes (Hautes-Pyrénées).
 GRANGER Francois, 29-11-1930, 13 h., Chalagnac (Dordogne).
 GRASSI Raymond, 4-5-1930, 5 h., Marseille (Bouches-du-Rhône).
 GRESS Pierre, 26-12-1928, 1 h., Roubaix (Nord).
 GUERNALEC Jean, 5-1-1930, 22 h. 30, Lisieux (Calvados).
 GUIVARCH Robert, 7-3-1928, 18 h. 20, Evreux (Eure).
-HAIRABEDIAN Jacques (Agop), 7-11-1926, 20 h. 30, Fumel (Lot-ei-G.).
+HAIRABEDIAN Jacques (Agop), 7-11-1926, 20 h. 30, Fumel (Lot-et-G.).
 HERBILLON Jacques, 18-6-1928, 10 h. 30, Romain (Marne).
 HERMAL Franck, 5-8-1923, 8 h., Fresnes-sur-Escaut (Nord).
 HUMEZ Charles, 18-5-1927, 2 h., Méricourt (Pas-de-Calais).
@@ -518,51 +518,51 @@ LALAOUNIS Jean, 16-3-1926, 14 h. 30, Pau (Basses-Pyrénées).
 LAMOTTE Roland, 23-6-1930, 16 h., Fourmies (Nord).
 LANGLOIS Pierre, 31-3-1925, 14 h., Pont-Audemer (Eure).
 LAPOURIELLE Claude, 13-6-1931, 1 h., Ville-d’Ay (Marne).
-LAPOURIELLE Michel, 26-8-1927, 12.h., Epernay (Marne).
+LAPOURIELLE Michel, 26-8-1927, 12 h., Epernay (Marne).
 LAURENT. Roland, 17-2-1924, 5 h., Montlucon (Allier).
 LAVOINE Gilbert, 3-2-1921, 7 h., Laon (Aisne).
 LAWNICZAK César, 27-5-1928, 7 h. 30, Saint-Vallier (Saône-et-Loire).
 LEBORGNE Yves, 8-1-1929, 21 h., Guingamp (Côtes-du-Nord).
 LEFIN André, 28-3-1927, 8 h., Hirson (Aisne).
-LOIT. Jacques, 29-12-1929, 20 h., Lisieux (Calvados).
+LOIT Jacques, 29-12-1929, 20 h., Lisieux (Calvados).
 LOUNI Jacques, 23-10-1927, 17 h. 45, Laigle (Orne).
 MADDI Yayia, 7-11-1928, 16 h., Alger (Algérie).
 MAROSTEGAN Bruno, 3-8-1926, 17 h., Besançon (Doubs).
 MASSON Michel, 15-6-1930, 4 h. 40, Boulogne-sur-Mer (Pas-de-Calais).
 MATHIEU Marcel, 3-4-1926, 9 h., Petite-Raon (Vosges).
-MAUGUIN André, 15-3-1928, 1 h., Mont (pres de Chambord). (L.-et-C.).
+MAUGUIN André, 15-3-1928, 1 h., Mont-près-Chambord (L.-et-C.).
 MAURY Maurice, 18-4-1926, 5 h., Périgueux (Dordogne).
-MERAINT. Lucien, 8-5-1928, 7 h., Reims (Marne).
-MEULENBROUCQ Gaston, OT I9OT 40 ha Sallaumines (Pas-de-C.).
+MERAINT Lucien, 8-5-1928, 7 h., Reims (Marne).
+MEULENBROUCQ Gaston, 19-11-1927, 1 h., Sallaumines (Pas-de-C.).
 MEUNIER Robert, 8-6-1929, 10 h. 30, Epernay (Marne).
 MICHEL Bernard, 22-12-1929, 21 h., Nancy (Meurthe-et-Moselle).
 MILCENT Robert, 27-5-1929, 18 h., Haramont (Aisne).
-NAVARRE. Jacques, 10-5-1930, 2 h:, Le Havre (Seine-Inférieure).
+NAVARRE. Jacques, 10-5-1930, 2 h., Le Havre (Seine-Inférieure).
 OMARI Mohamed, 4-3-1931, 19 h., Alger (Algérie).
-PASEK Stanislas, 20-6-1924, 16:h., Dury (Aisne).
-PERILLAT Simon: 9-12-1930, 3 h., La Clusaz (Haute-Savoie).
+PASEK Stanislas, 20-6-1924, 16 h., Dury (Aisne).
+PERILLAT Simon, 9-12-1930, 3 h., La Clusaz (Haute-Savoie).
 PERRIGAULT Louis, 25-8-1928, 10 h., Saint-Brieuc (Côtes-du-Nord).
 PETRE. Gabriel, 4-4-1929, 4 h. 30, Pay (Basses-Pyrénées).
 PIERLUIGI Célestin, 16-10-1926, 15 h. 40, Pontarlier (Doubs).
-PRATESI Hilaire, 28-3-19314, 3 h., Marseille (Bouches-du-Rhône).
+PRATESI Hilaire, 28-3-1931, 3 h., Marseille (Bouches-du-Rhône).
 PRIGENT Guy, 31-5-1929, 14 h. 25, Gennevilliers (Seine).
 PRIGENT Jacques, 26-9-1927, 6 h. 25, Gennevilliers (Seine).
 PTAK Edouard, 7-11-1930, 9h. 35, Barlin (Pas-de-Calais).
-RANVIAL Marcel, 24-12-1929, 1 h: 30, Resendaél (Nord).
-RICHAUD Pierre, S12 4927) 7 0h Oran (Algérie).
-ROUSTAN René, 11-6-1928. 8 h., Valence (Drôme).
-SANTANBIEN Jean, 12-12-1929, 5 b., Epernay (Marne).
+RANVIAL Marcel, 24-12-1929, 1 h. 30, Resendaél (Nord).
+RICHAUD Pierre, 9-12-1927, 10 h., Oran (Algérie).
+ROUSTAN René, 11-6-192,. 8 h., Valence (Drôme).
+SANTANBIEN Jean, 12-12-1929, 5 h., Epernay (Marne).
 SNEYERS Jean, 11-8-1927, 3 h. 15, Mulhouse (Haut-Rhin).
-SOBOLACK Stanislas, 8-8-1929 °'.48 bh.) Satht-Dents (Seine).
-STOCK Gilbert, 27-7T-1925, 10 h., Saint-Martin-du-Tertre (Yonne).
+SOBOLACK Stanislas, 8-8-1929, 18 h., Saint-Denis (Seine).
+STOCK Gilbert, 27-7-1925, 10 h., Saint-Martin-du-Tertre (Yonne).
 STROCCHIO Alfred, 15-6-1929, 16 h., Nice (Alpes-Maritimes).
-SZYJKA Joseph, 8-12-1929, 22 h. Chambon-Feugerolles (Loire).
-TARMOUL Mohamed, TSI 9SO. 4 ho. TizteOuzon (Alger).
-TEDJINI Mohamed, 276-1932, 42h.) 80. Oran (Algérie).
-THIEULIN William, 13-2-1927, 42 . 30, Elbeuf (Seine-Inférieure).
+SZYJKA Joseph, 8-12-1929, 22 h., Chambon-Feugerolles (Loire).
+TARMOUL Mohamed, 13-7-1930, 4 h., Tizi-Ouzou (Alger).
+TEDJINI Mohamed, 2-6-1932, 12 h. 30, Oran (Algérie).
+THIEULIN William, 13-2-1927, 12 h. 30, Elbeuf (Seine-Inférieure).
 THOMANN Eugène, 23-3-1929, 5 h. 45, Schiltigheim (Bas-Rhin).
 VANGI Salvator, 13-1-1927, 23 h. 30, Dijon (Côte-d’Or).
-VERCOUTTER Andre, 29-6-1923, 2.h., Rosendaal (Nord).
-WARUSFEL Ildefonse, 3-4-1934. 0 h,, Monchecourt (Nord).
+VERCOUTTER Andre, 29-6-1923, 2 h., Rosendaal (Nord).
+WARUSFEL Ildefonse, 3-4-1934, 0 h., Monchecourt (Nord).
 WEISSMANN René, 2-1-1930, 19 h. 25, Strasbourg (Bas-Rhin).
-ZAMBUJO Tiodmir, 12-12-1930, 17 h. Tournus (Saône-et-Loire).
+ZAMBUJO Tiodmir, 12-12-1930, 17 h., Tournus (Saône-et-Loire).

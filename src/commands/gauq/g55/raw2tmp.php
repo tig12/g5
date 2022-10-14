@@ -237,6 +237,7 @@ class raw2tmp implements Command {
                 'Alger',
                 'Alg.',
                 'Oran',
+                'Oranie',
                 'Constantine',
         ])){
             $res[4] = 'DZ';
@@ -249,6 +250,12 @@ class raw2tmp implements Command {
         }
         if($C2 == 'Ile Maurice'){
             $res[4] = 'MU';
+            return $res;
+        }
+        if($C2 == 'Allemagne'){ // Andernach 03-570-sportsmen line 412
+            $res[1] = '08';
+            $res[1] = '00';
+            $res[4] = 'DE';
             return $res;
         }
         
@@ -298,6 +305,7 @@ exit;
         	case 'Sétif':          return '12'; break;
         	case 'Souk-Ahras':     return '52'; break;
         	case 'Sidi-Bel-Abbès': return '30'; break;
+        	case 'Tiaret':         return '14'; break;
         	case 'Tlemcen':        return '15'; break;
         	case 'Tizi-Ouzou':     return '14'; break;
             default:
@@ -385,6 +393,7 @@ exit;
         'Doubs'                 => '25',
         'Dr.'                   => '26',
         'Drôme'                 => '26',
+        'E.'                    => '27',
         'Eure'                  => '27',
         'E.-L.'                 => '28',
         'E.-et-L.'              => '28',
@@ -476,6 +485,7 @@ exit;
         'Moselle'               => '57',
         'Nièvre'                => '58',
         'Nord'                  => '59',
+        'O.'                    => '60',
         'Oise'                  => '60',
         'Orne'                  => '61',
         'P.C.'                  => '62',
@@ -576,6 +586,7 @@ exit;
         'Terr. de Belf.'        => '90',
         'Belfort'               => '90',
         'Terr. de Belfort'      => '90',
+        'Territoire de B.'      => '90',
         'Territoire de Belfort' => '90',
     ];
     
@@ -596,6 +607,7 @@ exit;
         case 'Andilly': return '95'; break;
         case 'Angoulême': return '16'; break;
         case 'Anthony': return '92'; break;
+        case 'Antony': return '92'; break;
         case 'Argenteuil': return '95'; break;
         case 'Asnières': return '92'; break;
         case 'Athis-Mons': return '91'; break;
@@ -603,6 +615,7 @@ exit;
         case 'Aubervilliers': return '93'; break;
         case 'Bagnolet': return '93'; break;
         case 'Bassing': return '57'; break;
+        case 'Bezons': return '95'; break;
         case 'Blamont': return '54'; break;
         case 'Boulogne': return '92'; break;
         case 'Boulogne-sur-Seine': return '92'; break;
@@ -754,6 +767,7 @@ exit;
         case 'Vernouillet': return '78'; break;
         case 'Versailles': return '78'; break;
         case 'Vésinet': return '78'; break;
+        case 'Ville-d’Avray': return '92'; break;
         case 'Villejuif': return '94'; break;
         case 'Villeneuve-le-Roi': return '94'; break;
         case 'Villeneuve-St-Georges': return '94'; break;

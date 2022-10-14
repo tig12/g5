@@ -303,6 +303,61 @@ class G55 {
             '459'   => 'A2-1261',   // sikora-pierre-1874-08-24
             '508'   => 'A2-1320',   // woringer-frederic-1890-08-26
         ],
+        
+        
+        /* 
+            '10' => 'A1-', // aillot-georges-1917-04-27 15:30, Châtellerault, 86
+            '23' => 'A1-', // paul-robert-1910-04-22 10:00, Facture-Biganos, 33
+            '61' => 'A1-', // fauchere-jacques-1920-06-18 04:00, Montpellier, 34
+            '68' => 'A1-', // perrier-jacques-1924-10-12 07:00, Bagnolet, 93
+            '72' => 'A1-', // rudler-antoine-1905-05-21 03:00, Vieux-Thann, 68
+            '74' => 'A1-', // chassereau-louis-1901-08-17 11:00, Ste-Foix-de-Peyroliéres, 31
+            '104' => 'A1-', // stock-jean-1923-02-12 11:00, Saint-Martin-du-Tertre, 89
+            '111' => 'A1-', // bellanger-jacques-1927-12-21 07:30, Amiens, 80
+            '136' => 'A1-', // dupre-victor-1884-03-11 01:00, Roanne, 42
+            '155' => 'A1-', // iacoponelli-pierre-1924-07-08 09:45, Rueil, 92
+            '174' => 'A1-', // maye-paul-1913-08-20 09:00, Bayonne, 64
+            '461' => 'A1-', // bonnin-marcel-1904-11-10 18:00, Tours, 37
+            '199' => 'A1-', // terreau-ernest-1908-05-31 20:00, Auxy, 71
+            '210' => 'A1-', // gardere-edmond-1909-02-25 08:30, Gérardmer, 88
+            '232' => 'A1-', // boyer-jean-1901-02-13 11:00, Vitry-sur-Seine, 94
+            '262' => 'A1-', // lamy-roger-1926-01-13 21:00, Paris, 75
+            '271' => 'A1-', // mattler-etienne-1905-12-24 11:30, Belfort, 90
+            '272' => 'A1-', // ourdouillie-marcel-1913-12-18 15:00, Isberques, 62
+            '299' => 'A1-', // debagneux-faudoas-franc-1903-01-16 16:00, Parigné, 35
+            '305' => 'A1-', // gounot-jean-1894-05-09 17:30, Nevers, 58
+            '367' => 'A1-', // baillette-marcel-1904-10-12 10:00, Perpignan, 66
+            '412' => 'A1-', // puig-aubert-henri-1925-03-24 01:30, Andernach, 
+            '433' => 'A1-', // royer-henri-cl-1876-09-09 15:30, Chartres, 28
+            '462' => 'A1-', // coquelin-de-lisle-pierre-1900-07-19 23:00, Lille, 59
+            '464' => 'A1-', // felbacq-pierre-1906-01-23 03:30, Claye-Souilly, 77
+            '467' => 'A1-', // martinez-de-hoz-gaston-1899-12-12 07:30, Haux, 33
+            '495' => 'A1-', // cuillieres-rene-1929-07-12 17:00, Lambesc, 13
+            '517' => 'A1-', // lalaounis-jean-1926-03-16 14:30, Pau, 64
+            '543' => 'A1-', // perillat-simon-1930-12-09 03:00, La Clusaz, 74
+            '553' => 'A1-', // roustan-rene-192-06-11  8:00, Valence, 26
+            '554' => 'A1-', // santanbien-jean-1929-12-12 05:00, Epernay, 51
+            '566' => 'A1-', // warusfel-ildefonse-1934-04-03 00:00, Monchecourt, 59
+
+g55 9       el-mabrouk-mohamed  1928-10-17 09:45 Alger
+db  A1-753  elandon-eli         1928-10-17 23:00 MONT-SUR-MARCHI
+
+g55 178      mithouard-fernand  1909-05-22 22:30 St-Rémy-les-Chevr.
+db  A1-1865  cognet-lucien      1909-05-22 19:00 Vichy
+
+g55 228     bigot-jules  1915-10-22 07:00 Bully
+db  A1-599  despaux-jean  1915-10-22 01:00 Paris
+
+g55 236     cheuva-andre  1908-05-10 04:00 Hellemmes-Lille
+db  A6-984  tofanelli-arturo  1908-05-10 21:00 Cerreto Guidi
+
+g55 331     cornet-florimond  1912-07-21 09:30 Desvres
+db  E1-753  fitzenkam-alice   1912-07-21 15:30 Colmar
+
+g55 374     bordenave-leon  1922-05-11 18:00 Odos
+db  A6-469  laude-jean      1922-05-11 14:00 Dunkerque
+        */
+        
         '04-676-military' => [
             '9'   => 'A3-10', // adhemar-jean-pierre-1868-07-20
             '10'  => 'A3-11', // adorno-de-tscharner-anioine-1829-09-29
