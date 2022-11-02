@@ -303,11 +303,12 @@ class G55 {
             '459'   => 'A2-1261',   // sikora-pierre-1874-08-24
             '508'   => 'A2-1320',   // woringer-frederic-1890-08-26
         ],
-        
+        '03-570-sportsmen' => [
         
         /* 
-            '10' => 'A1-', // aillot-georges-1917-04-27 15:30, Châtellerault, 86
-            '23' => 'A1-', // paul-robert-1910-04-22 10:00, Facture-Biganos, 33
+            '9' => 'A1-36',         // el-mabrouk-mohamed-1928-10-17 09:45 Alger
+            '10' => 'A1-38',        // gaillot-georges-1917-04-27 15:30, Châtellerault, 86
+            '23' => 'A1-65',        // paul-robert-1910-04-22 10:00, Facture-Biganos, 33
             '61' => 'A1-', // fauchere-jacques-1920-06-18 04:00, Montpellier, 34
             '68' => 'A1-', // perrier-jacques-1924-10-12 07:00, Bagnolet, 93
             '72' => 'A1-', // rudler-antoine-1905-05-21 03:00, Vieux-Thann, 68
@@ -317,6 +318,11 @@ class G55 {
             '136' => 'A1-', // dupre-victor-1884-03-11 01:00, Roanne, 42
             '155' => 'A1-', // iacoponelli-pierre-1924-07-08 09:45, Rueil, 92
             '174' => 'A1-', // maye-paul-1913-08-20 09:00, Bayonne, 64
+            '178' => 'A1-859',      // mithouard-fernand  1909-05-22 22:30 St-Rémy-les-Chevr.
+            '228' => 'A1-1261',     // bigot-jules 1915-10-22 07:00 Bully
+            '236' => 'A1-1277',     // cheuva-andre 1908-05-10 04:00 Hellemmes-Lille
+            '331' => 'A1-1753',     // cornet-florimond 1912-07-21 09:30 Desvres
+            '374' => 'A1-1837',     // bordenave-leon 1922-05-11 18:00 Odos
             '461' => 'A1-', // bonnin-marcel-1904-11-10 18:00, Tours, 37
             '199' => 'A1-', // terreau-ernest-1908-05-31 20:00, Auxy, 71
             '210' => 'A1-', // gardere-edmond-1909-02-25 08:30, Gérardmer, 88
@@ -338,25 +344,8 @@ class G55 {
             '553' => 'A1-', // roustan-rene-192-06-11  8:00, Valence, 26
             '554' => 'A1-', // santanbien-jean-1929-12-12 05:00, Epernay, 51
             '566' => 'A1-', // warusfel-ildefonse-1934-04-03 00:00, Monchecourt, 59
-
-g55 9       el-mabrouk-mohamed  1928-10-17 09:45 Alger
-db  A1-753  elandon-eli         1928-10-17 23:00 MONT-SUR-MARCHI
-
-g55 178      mithouard-fernand  1909-05-22 22:30 St-Rémy-les-Chevr.
-db  A1-1865  cognet-lucien      1909-05-22 19:00 Vichy
-
-g55 228     bigot-jules  1915-10-22 07:00 Bully
-db  A1-599  despaux-jean  1915-10-22 01:00 Paris
-
-g55 236     cheuva-andre  1908-05-10 04:00 Hellemmes-Lille
-db  A6-984  tofanelli-arturo  1908-05-10 21:00 Cerreto Guidi
-
-g55 331     cornet-florimond  1912-07-21 09:30 Desvres
-db  E1-753  fitzenkam-alice   1912-07-21 15:30 Colmar
-
-g55 374     bordenave-leon  1922-05-11 18:00 Odos
-db  A6-469  laude-jean      1922-05-11 14:00 Dunkerque
         */
+        ],
         
         '04-676-military' => [
             '9'   => 'A3-10', // adhemar-jean-pierre-1868-07-20
