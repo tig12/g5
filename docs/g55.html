@@ -62,7 +62,7 @@
 Here are the groups, listed in the order they appear in the book.
 
 <ul>
-    <li><b>G5 code</b> code used in Gauquelin5 program.</li>
+    <li><b>G5 code</b> : Code used in Gauquelin5 program.</li>
     <li>
         <b>N<sub>G5</sub></b> : Number of records found by g5 program ; may be different from the number appearing in the title.
     </li>
@@ -165,6 +165,29 @@ Here are the groups, listed in the order they appear in the book.
 
 <!-- ********************************************************************************* -->
 <h2>Restoration steps</h2>
+For each group of the original book, the raw file is formatted and converted to a temporary csv file:
+<pre>php run-g5.php gauq g55 raw2tmp 03-570-sportsmen</pre>
+The file is then matched to the persons already stored in database. This adds column <code>GQID</code> to the csv file. Constant <code>MATCH_LERRCP</code> of class <code>G55</code> is used to fix the ambiguous cases.
+<pre>php run-g5.php gauq g55 gqid update 03-570-sportsmen</pre>
+This modified version of the csv file is then used to update the database:
+<pre>php run-g5.php gauq g55 tmp2db 03-570-sportsmen</pre>
+
+<br>This must be done for all Gauquelin 1955 groups :
+<pre>
+01-576-physicians
+02-508-physicians
+03-570-sportsmen
+04-676-military
+05-906-painters
+06-361-minor-painters
+07-500-actors
+08-494-deputies
+09-349-scientists
+10-884-priests
+</pre>
+
+Other commands can be issued to help the build process (<code>gqid cache</code> and <code>gqid check</code>). For details, type :
+<pre>php run-g5.php gauq g55 gqid</pre>
 
 </article>
 </main>

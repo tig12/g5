@@ -38,6 +38,14 @@ class M4dynasties {
     /** Names of the columns of data/tmp/muller/4-dynasties/muller4-1145-dynasties.csv **/
     const TMP_FIELDS = [
         'MUID',
+        FNAME
+        GNAME
+        DATE
+        TZO
+        TIMOD
+        PLACE
+        CY;C1;C2;LAT;LG;OCCU;BOOKS;SOURCE;GQ
+
     ];
     
     // *********************** Group management ***********************

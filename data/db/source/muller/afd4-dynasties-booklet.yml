@@ -12,6 +12,6 @@ authors:
 description: |
   Booklet Astro-Forschungs-Daten 4, Waldmohr, 1994
   <br>Contains a list of 1145 members of German dynasties.
-  <br>Data collection coming from "L’Allemagne Dynastique" (6 volumes), published by the French historians Huberty, Giraud & Magdelaine (1976-1991). 
+  <br>Data collection coming from "L’Allemagne Dynastique" (6 volumes), published by the French historians Huberty, Giraud &amp; Magdelaine (1976-1991). 
 parents: 
   - afd

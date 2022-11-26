@@ -303,7 +303,6 @@ class G55 {
             '459'   => 'A2-1261',   // sikora-pierre-1874-08-24
             '508'   => 'A2-1320',   // woringer-frederic-1890-08-26
         ],
-        
         '03-570-sportsmen' => [
             '9' => 'A1-36',     // el-mabrouk-mohamed-1928-10-17 09:45 Alger
             '10' => 'A1-38',    // gaillot-georges-1917-04-27 15:30, Châtellerault, 86
@@ -344,7 +343,6 @@ class G55 {
             '554' => 'A1-677',  // santanbien-jean-1929-12-12 05:00, Epernay, 51
             '566' => 'A1-693',  // warusfel-ildefonse-1934-04-03 00:00, Monchecourt, 59
         ],
-        
         '04-676-military' => [
             '9'   => 'A3-10', // adhemar-jean-pierre-1868-07-20
             '10'  => 'A3-11', // adorno-de-tscharner-anioine-1829-09-29
