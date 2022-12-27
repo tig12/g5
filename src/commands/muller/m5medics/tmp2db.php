@@ -108,7 +108,7 @@ class tmp2db implements Command {
         $t1 = microtime(true);
         $newOccus = ['physician'];
         for($i=0; $i < $N; $i++){
-            $line = $lines[$i];                                                                        
+            $line = $lines[$i];
             $lineRaw = $linesRaw[$i];
             $mullerId = Muller::mullerId($source->data['slug'], $line['NR']);
             if($line['GNR'] == ''){

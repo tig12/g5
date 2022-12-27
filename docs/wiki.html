@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Check data | Gauquelin5</title>
+    <title>Wiki | Gauquelin5</title>
     <link rel="icon" type="image/png" href="img/g5.png">
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="">
@@ -10,10 +10,10 @@
     <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
     <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
     <meta name="dcterms.rightsHolder" content="Thierry Graff">
-    <meta name="dcterms.dateCopyrighted" content="2019">
+    <meta name="dcterms.dateCopyrighted" content="2022">
     <!-- 
     tigsite:
-        history: 2020-04-29 01:50:25+02:00, Thierry Graff : Creation
+        history: 2022-12-05 19:02:58+01:00, Thierry Graff : Creation
     -->
 </head>
 
@@ -26,102 +26,28 @@
 <nav class="prevnext">
     <a class="topage" rel="" href="#topage">&#10148;</a>
     <a class="top" href="index.html">&uarr;</a>
-    <a class="prev" rel="prev" href="cfepp.html">&larr;</a>
-    <a class="next" rel="next" href="acts.html">&rarr;</a>
+    <a class="prev" rel="prev" href=".html">&larr;</a>
+    <a class="next" rel="next" href=".html">&rarr;</a>
 </nav>
 
 <main>
 <header>
-<h1>
-Check data
-<div class="subtitle">Precision, reliability</div>
-</h1>
-
+<h1>Wiki</h1>
 <div class="intro">
-The big part of the job is to achieve <b>data reliability</b>. Every information stored in g5 database should be checked against an official document. This is currently not the case for most data ; achieving this is a huge work because it involves a human work of verification for each birth date.
-<br>The most precise we can hope is to have a <b>certificate from the hospital</b> (HC). In practice, we have <b>birth certificates</b> (BC) from the civil registries, which are often rounded to the hour. The exact birth of time then remains unknown. BCs are not ideal but usable for statistical tests.
-<br>So in g5 context, a birth time is considered reliable if it is related to a BC <b>available and verifiable by anyone</b>.
-
-<br><br>Currently very few birth times have been verified, only to solve questions raised by g5 development.
-<br>See also page <a href="acts.html">Acts</a>.
+In order to permit a collective check, correction and expansion of the database, a wiki functionality was added. Users consult the online civil registries and feed the database with a transcription of the original acts.
+<br>This page describes how this functionality is integrated. For a user's point of view, see page <a href="https://opengauquelin.org/wiki">opengauquelin.org/wiki</a>.
 </div>
 </header>
 
 <article>
-<nav class="toc">
-    <ul>
-        <li>
-            <a href="#trust-data-reliability">Trust - data reliability</a>
-        </li>
-        <li>
-            <a href="#g5-integration">G5 integration</a>
-        </li>
-    </ul>
-</nav>
 
 <!-- ********************************************************************************* -->
-<h2 id="trust-data-reliability">Trust - data reliability</h2>
-Trust = level of reliability of an information.
-<br>Four levels of reliability are defined in g5 :
-<ul class="spaced margin-top">
-    <li>
-        <div class="bold">1 - Hospital Certificate (HC)</div>
-        Original document available and verifiable by anyone.
-    </li>
-    <li>
-        <div class="bold">2 - Birth Certificate (BC)</div>
-        Original document available and verifiable by anyone.
-    </li>
-    <li>
-        <div class="bold">3 - Birth Record (BR)</div>
-        (= copy of the BC by an officer - may contain mistakes)
-        <br>Original document available and verifiable by anyone.
-    </li>
-    <li>
-        <div class="bold">4 - to check</div>
-        Data not related to an official document, like Gauquelin or Müller data.
-        <br>Need to be matched against a BC.
-    </li>
-</ul>
-
-Precision are constants of class <code>g5\model\Trust</code>
-
-<br><br>Most data handled by g5 are level 4, very few are level 2.
-
-<br><br><b>Note</b> : as far as France is concerned, it's possible today to check BCs online. But at Gauquelin and Müller epoch, they had 2 possibilities : go physically to the archives and consult BCs, or send a letter and receive BRs. It means that Gauquelin and Müller data are mostly based on BRs. And a BR may differ from the original BC because the officer can make an error of copy, or copy the time of registration instead of the time of birth.
-
-<br>Raw data used by g5 may contain errors from different origins :
-<ul>
-    <li>Copy error from the officer who established a BR.</li>
-    <li>Gauquelin or Müller error when integrating the BR in their files.</li>
-    <li>Error when original paper files where put in an electronic form (for example the error on GNR in <a href="muller5-1083-medics.html">Müller 1083 physicians</a>).</li>
-    <li>Bugs in g5 program should be added to this list...</li>
-</ul>
-
-
-<!-- ********************************************************************************* -->
-<h2 id="g5-integration">G5 integration</h2>
-
-Persons have 2 fields to express reliability :
-<ul>
-    <li>
-        <code><b>trust</b></code> permits to specify the default trust level of the person.
-    </li>
-    <li>
-        <code><b>trust-details</b></code> is an array associating specific fields and trust level.
-    </li>
-</ul>
-
-<br>This model permits to indicate separately the reliability of each field.
-<br>Ex : a person has <code>trust = 4</code> and <code>trust-details = {"name.fame": 2}</code> means that all fields are trust level 4, but one field, <code>person.data['name']['fame']</code> is level 2.
-
-<br>When a person is imported in database, it takes by default the trust level of its source.
-
+<h2>Organization</h2>
+For each birth date verified, a document named <code>BC.yml</code> is filled by the user. This document and optional scans of the original document are stored in a directory, located by default in <code>data/wiki</code>. The content of this directory is versioned in a distinct repository: <a href="https://github.com/tig12/ogdb-wiki">github.com/tig12/ogdb-wiki</a>.
 
 </article>
 </main>
 </div><!-- end class="content" -->
-
 
 <!-- ************************************* -->
 <aside class="left">

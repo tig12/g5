@@ -5,7 +5,7 @@ document:
 
 name: Gauquelin5
 slug: g5
-type: computer program
+type: computer-program
 author: Thierry Graff
 description: |
   Computer program developped to build the Open Gauquelin Database (current site).
