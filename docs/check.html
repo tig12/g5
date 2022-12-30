@@ -38,8 +38,8 @@ Check data
 </h1>
 
 <div class="intro">
-The big part of the job is to achieve <b>data reliability</b>. Every information stored in g5 database should be checked against an official document. This is currently not the case for most data ; achieving this is a huge work because it involves a human work of verification for each birth date.
-<br>The most precise we can hope is to have a <b>certificate from the hospital</b> (HC). In practice, we have <b>birth certificates</b> (BC) from the civil registries, which are often rounded to the hour. The exact birth of time then remains unknown. BCs are not ideal but usable for statistical tests.
+The big part of the job is to achieve <b>data reliability</b> for birth times. Every information stored in g5 database should be checked against an official document. This is currently not the case for most data ; achieving this is a big work because it involves a human verification for each birth date.
+<br>The most precise we can hope is to have a <b>certificate from the hospital</b> (HC). In practice, for persons born before World War 2, we only have <b>birth certificates</b> (BC) from the civil registries, which are often rounded to the hour. The exact birth of time then remains unknown. BCs are not ideal but usable for statistical tests.
 <br>So in g5 context, a birth time is considered reliable if it is related to a BC <b>available and verifiable by anyone</b>.
 
 <br><br>Currently very few birth times have been verified, only to solve questions raised by g5 development.
@@ -78,15 +78,21 @@ Trust = level of reliability of an information.
         <br>Original document available and verifiable by anyone.
     </li>
     <li>
-        <div class="bold">4 - to check</div>
-        Data not related to an official document, like Gauquelin or Müller data.
+        <div class="bold">4 - Reputed true</div>
+        For persons born before the apparition of birth certificates.
+        <br>BC is not available, but this birth time is attested by a document, and birth time is consensual (which is an ambiguous definition).
+        <br>This level is mainly used for members of royal families.
+    </li>
+    <li>
+        <div class="bold">5 - To check</div>
+        Data not related to an official document, like Gauquelin, Müller data.
         <br>Need to be matched against a BC.
     </li>
 </ul>
 
 Precision are constants of class <code>g5\model\Trust</code>
 
-<br><br>Most data handled by g5 are level 4, very few are level 2.
+<br><br>Most data handled by g5 are level 5, very few are level 2.
 
 <br><br><b>Note</b> : as far as France is concerned, it's possible today to check BCs online. But at Gauquelin and Müller epoch, they had 2 possibilities : go physically to the archives and consult BCs, or send a letter and receive BRs. It means that Gauquelin and Müller data are mostly based on BRs. And a BR may differ from the original BC because the officer can make an error of copy, or copy the time of registration instead of the time of birth.
 
@@ -102,21 +108,8 @@ Precision are constants of class <code>g5\model\Trust</code>
 <!-- ********************************************************************************* -->
 <h2 id="g5-integration">G5 integration</h2>
 
-Persons have 2 fields to express reliability :
-<ul>
-    <li>
-        <code><b>trust</b></code> permits to specify the default trust level of the person.
-    </li>
-    <li>
-        <code><b>trust-details</b></code> is an array associating specific fields and trust level.
-    </li>
-</ul>
-
-<br>This model permits to indicate separately the reliability of each field.
-<br>Ex : a person has <code>trust = 4</code> and <code>trust-details = {"name.fame": 2}</code> means that all fields are trust level 4, but one field, <code>person.data['name']['fame']</code> is level 2.
-
+Persons have a field to express reliability, <b>trust</b></code>.
 <br>When a person is imported in database, it takes by default the trust level of its source.
-
 
 </article>
 </main>

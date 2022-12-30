@@ -6,6 +6,7 @@
     @history    2021-07-19 15:31:36+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\muller;
+use g5\model\Trust;
 
 class AFD {
     
@@ -13,7 +14,7 @@ class AFD {
         Trust level for data coming from Astro-Forschungs-Daten booklets.
         @see https://tig12.github.io/gauquelin5/check.html
     **/
-    const TRUST_LEVEL = 4;
+    const TRUST_LEVEL = TRUST::CHECK;
     
     /**
         Path to the yaml file containing the characteristics of Arno Müller.

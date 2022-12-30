@@ -11,6 +11,7 @@ namespace g5\commands;
 
 use g5\app\Config;
 use g5\model\Source;
+use g5\model\Trust;
 use g5\commands\muller\Muller;
 
 class Newalch {
@@ -30,7 +31,7 @@ class Newalch {
         Trust level for data coming from newalchemypress.com
         @see https://tig12.github.io/gauquelin5/check.html
     **/
-    const TRUST_LEVEL = 4;
+    const TRUST_LEVEL = TRUST::CHECK;
     
     // *********************** Source management ***********************
     

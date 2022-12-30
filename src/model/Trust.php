@@ -19,7 +19,10 @@ class Trust {
     /** Birth record **/
     const BR = 3;
     
+    /** Mainly for royal families ; births without birth certificate, but with hour commonly admitted. **/
+    const REPUTATION = 4;
+    
     /** Needs to be checked **/
-    const CHECK = 4;
+    const CHECK = 5;
     
 } // end class

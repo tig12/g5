@@ -11,12 +11,11 @@ type:
 # for a book, means title
 name: 
 
-# specific to sources of type book
-authors: 
-edition: 
-isbn: 
+authors:        # array
 
 description: |
 
 # list of source slugs
 parents: []
+
+details:        # optional structured field

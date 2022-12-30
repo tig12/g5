@@ -9,7 +9,10 @@
 namespace g5\commands\wiki\bc;
 
 use g5\commands\wiki\Wiki;
+use g5\model\BC;
 use g5\model\Person;
+use g5\model\Source;
+use g5\model\Trust;
 use tiglib\patterns\Command;
 
 class add implements Command {
@@ -28,7 +31,7 @@ class add implements Command {
         $slug = $params[0];
         
         try{
-            $bcFile = Wiki::bcFile($slug);
+            $bcFile = BC::filePath($slug);
         }
         catch(\Exception $e){
             return "INVALID SLUG: $slug - nothing was modified in the database\n";
@@ -39,24 +42,40 @@ class add implements Command {
         
         $yaml = yaml_parse_file($bcFile);
         
-        $validation = Wiki::validateBC($yaml);
+        $validation = BC::validate($yaml);
         if($validation != ''){
             return "INVALID YAML FILE: $bcFile"
                 . "\n$validation"
                 . "Information not included in the database\n";
         }
         
-        $source = $yaml['source'];
-        
+        $source = new Source();
+        $source->data['type'] = BC::SOURCE_TYPE;
+        $source->data['name'] = BC::SOURCE_LABEL;
+        $source->data['details'] = $yaml['source'];
+//echo "\n"; print_r($source); echo "\n";        
+//exit;
         $p = Person::createFromSlug($slug);
         if(is_null($p)){
             $p = new Person();
-            $p->updateFields($yaml['person']);
-echo "\n"; print_r($p); echo "\n";
         }
+        // The informations coming from a BC are considered as superior to all other sources.
+        // updateFields() is the also called for a person already in database
+        $p->updateFields($yaml['person']);
+        $p->data['trust'] = Trust::BC;
+        if(isset($yaml['extras']['occupations'])){
+            $p->addOccus($yaml['extras']['occupations']);
+        }
+        $p->data['slug'] = $slug;
+        $p->addHistory(
+            command: 'wiki bc add ' . $p->data['slug'],
+            sourceSlug: BC::SOURCE_SLUG,
+            newdata: $yaml['person'],
+            rawdata: $yaml['person']
+        );
+echo "\n"; print_r($p); echo "\n";
 //echo "$bcFile\n";
 //echo "\n"; print_r($yaml); echo "\n";
-exit;
         
         $report =  "--- wiki add one ---\n";
         

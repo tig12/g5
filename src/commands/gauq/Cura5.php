@@ -10,6 +10,7 @@
 namespace g5\commands\gauq;
 
 use g5\app\Config;
+use g5\model\Trust;
 use tiglib\arrays\csvAssociative;
 use g5\commands\gauq\LERRCP;
 
@@ -30,7 +31,7 @@ class Cura5 {
         Default trust level for data coming from Cura
         @see https://tig12.github.io/gauquelin5/check.html
     **/
-    const TRUST_LEVEL = 4;
+    const TRUST_LEVEL = TRUST::CHECK;
     
     /** Separator used in raw (html) files **/
     const HTML_SEP = "\t";

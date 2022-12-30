@@ -10,6 +10,7 @@ namespace g5\commands\ertel\sport;
 use g5\app\Config;
 use g5\model\Source;
 use g5\model\Group;
+use g5\model\Trust;
 use tiglib\arrays\csvAssociative;
 use g5\commands\ertel\Ertel;
 
@@ -19,7 +20,7 @@ class ErtelSport {
         Trust level for data coming from Ertel file
         @see https://tig12.github.io/gauquelin5/check.html
     **/
-    const TRUST_LEVEL = 4;
+    const TRUST_LEVEL = TRUST::CHECK;
     
     
     // ******************************************************

@@ -6,6 +6,7 @@
     @history    2021-07-19 15:31:36+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\gauq;
+use g5\model\Trust;
 
 class Gauquelin {
     
@@ -24,7 +25,7 @@ class Gauquelin {
         Trust level for data coming from this source
         @see https://tig12.github.io/gauquelin5/check.html
     **/
-    const TRUST_LEVEL = 4;
+    const TRUST_LEVEL = TRUST::CHECK;
     
     
     

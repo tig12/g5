@@ -86,20 +86,18 @@ class Source {
                 name,
                 type,
                 authors,
-                edition,
-                isbn,
                 description,
-                parents
-            ) values(?,?,?,?,?,?,?,?)");
+                parents,
+                details
+            ) values(?,?,?,?,?,?,?)");
         $stmt->execute([
             $this->data['slug'],
             $this->data['name'],
             $this->data['type'],
             json_encode($this->data['authors']),
-            $this->data['edition'],
-            $this->data['isbn'],
             $this->data['description'],
             json_encode($this->data['parents']),
+            json_encode($this->data['details']),
         ]);
     }
     
@@ -113,19 +111,17 @@ class Source {
             name=?,
             type=?,
             authors=?,
-            edition=?,
-            isbn=?,
             description=?,
-            parents=?
+            parents=?,
+            details=?
             where slug=?");
         $stmt->execute([
             $this->data['name'],
             $this->data['type'],
             json_encode($this->data['authors']),
-            $this->data['edition'],
-            $this->data['isbn'],
             $this->data['description'],
             json_encode($this->data['parents']),
+            json_encode($this->data['details']),
             $this->data['slug'],
         ]);
     }

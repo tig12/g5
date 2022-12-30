@@ -6,8 +6,7 @@ create table source (
     name            varchar(255) unique not null,
     type            varchar(255) not null,
     authors         jsonb,
-    edition         varchar(255),
-    isbn            varchar(13),
     description     text,
-    parents         jsonb
+    parents         jsonb,
+    details         jsonb
 );
