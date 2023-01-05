@@ -1,7 +1,7 @@
 <?php
 /******************************************************************************
     
-    Updates or inserts persons in the database from a yaml file (in data/db/person).
+    Updates or inserts persons in the database from a yaml file (in data/init/tweaks).
     Each yaml file must contain an array.
     Each element of this array must contain the fields of a person, with a key ADMIN.
     ADMIN field must contain a key ACTION.
@@ -12,14 +12,14 @@
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-08-12 14:28:11+02:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\commands\db\fill;
+namespace g5\commands\db\init;
 
 use tiglib\patterns\Command;
 use g5\app\Config;
 use g5\model\Person as ModelPerson;
 use g5\model\Group as ModelGroup;
 
-class person implements Command {
+class tweaks implements Command {
     
     private static $yamlFile = '';
     private static $nUpdate = 0;
@@ -27,7 +27,7 @@ class person implements Command {
     
     /** 
         @param  $params Array containing one element:
-                    path to the yaml file containing the tweaks, relative to data/db/tweak.
+                    path to the yaml file containing the tweaks, relative to data/init/tweaks.
         @return report.
     **/
     public static function execute($params=[]): string {
@@ -35,15 +35,15 @@ class person implements Command {
             return "USELESS PARAMETER {$params[1]}\n";
         }
         if(count($params) != 1){
-            return "MISSING PARAMETER: this command needs the path to the file containing the tweaks, relative to data/db/person.\n";
+            return "MISSING PARAMETER: this command needs the path to the file containing the tweaks, relative to data/init/tweaks.\n";
         }
         self::$yamlFile = $params[0];
-        $yaml = @yaml_parse_file(Config::$data['dirs']['db'] . DS . 'person' . DS . self::$yamlFile);
+        $yaml = @yaml_parse_file(Config::$data['dirs']['init'] . DS . 'tweaks' . DS . self::$yamlFile);
         if($yaml === false){
             return 'FILE DOES NOT EXIST OR IS NOT CORRECTLY FORMATTED: ' . self::$yamlFile . "\n";
         }
         
-        $report = "--- db fill person " . self::$yamlFile . " ---\n";
+        $report = "--- db init tweaks " . self::$yamlFile . " ---\n";
         
         self::$nUpdate = 0;
         self::$nInsert = 0;

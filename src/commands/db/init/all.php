@@ -31,7 +31,7 @@ use g5\commands\db\init\dbcreate;
 use g5\commands\db\init\occus1;
 use g5\commands\db\init\occus2;
 use g5\commands\db\fill\source                  as dbFillSource;
-use g5\commands\db\fill\person                  as dbFillPerson;
+use g5\commands\db\init\tweaks                  as dbInitTweaks;
 
 // order of imports corresponds to order of execution
 
@@ -148,7 +148,7 @@ class all implements Command {
         $g55Groups = [
             '01-576-physicians',
             '02-508-physicians',
-            // '03-570-sportsmen',
+            '03-570-sportsmen',
             '04-676-military',
             '05-906-painters',
             '06-361-minor-painters',
@@ -243,11 +243,11 @@ class all implements Command {
             foreach($filesGauqA as $datafile){
                 echo Atmp2db::execute([$datafile, 'tmp2db', 'small']);
             }
-            echo dbFillPerson::execute(['A1.yml']);
+            echo dbInitTweaks::execute(['A1.yml']);
             echo A6occu::execute(['A6','A6occu']);
             
             echo D6tmp2db::execute(['D6', 'tmp2db', 'small']);
-            echo dbFillPerson::execute(['D6.yml']);
+            echo dbInitTweaks::execute(['D6.yml']);
             
             echo D10tmp2db::execute(['D10', 'tmp2db', 'small']);
             
@@ -264,13 +264,13 @@ class all implements Command {
             echo csiIrvingTmp2db::execute(['small']);
             
             echo M3womenTmp2db::execute(['small']);
-            echo dbFillPerson::execute(['muller-234-women.yml']);
+            echo dbInitTweaks::execute(['muller-234-women.yml']);
             
             echo M2menTmp2db::execute(['small']);
-            echo dbFillPerson::execute(['muller-612-men.yml']);
+            echo dbInitTweaks::execute(['muller-612-men.yml']);
             
             echo ErteSportTmp2db::execute(['small']);
-            echo dbFillPerson::execute(['ertel-sport.yml']);
+            echo dbInitTweaks::execute(['ertel-sport.yml']);
             
             echo CFEPPTmp2db::execute(['small']);
             

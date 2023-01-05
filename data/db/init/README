@@ -1,6 +1,11 @@
 
 This diretory contains data used by initial building of the database.
 
-Format of tweak files is different from data/db/tweaks: 
-Correspond to early stages of development.
-Used to modify tmp files, not database.
+Directories containing tweak files are not completely coherent, they reflect the different stages of development.
+
+- lerrcp-tweak/ and newalch-tweak/ contain corrections applied to raw files while building tmp files.
+The vocabulary of the tweaks use tmp files vocabulary
+
+- tweaks/ contains corrections applied to the database and use its vocabulary.
+
+- g55-edited/ and lerrcp-marked/ contain data related to obsolete code and are not used anymore.
