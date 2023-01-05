@@ -7,7 +7,7 @@
     @history    2022-12-27 04:00:11+01:00, Thierry Graff : Creation
 ********************************************************************************/
 
-namespace g5\model;
+namespace g5\model\acts;
 
 use g5\model\DB5;
 use g5\model\Wiki;

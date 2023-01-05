@@ -316,7 +316,7 @@ class Person {
         Computes the birth day from date or date-ut.
         @return YYYY-MM-DD or ''
     **/
-    private function birthday(): string {
+    public function birthday(): string {
         if(isset($this->data['birth']['date'])){
             return substr($this->data['birth']['date'], 0, 10);
         }

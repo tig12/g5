@@ -9,10 +9,11 @@
 namespace g5\commands\wiki\bc;
 
 use g5\commands\wiki\Wiki;
-use g5\model\BC;
+use g5\model\acts\BC;
 use g5\model\Person;
 use g5\model\Source;
 use g5\model\Trust;
+use g5\model\Stats;
 use tiglib\patterns\Command;
 
 class add implements Command {
@@ -49,19 +50,24 @@ class add implements Command {
                 . "Information not included in the database\n";
         }
         
+        $report =  "--- wiki add one $slug ---\n";
+        
         $source = new Source();
         $source->data['type'] = BC::SOURCE_TYPE;
         $source->data['name'] = BC::SOURCE_LABEL;
         $source->data['details'] = $yaml['source'];
-//echo "\n"; print_r($source); echo "\n";        
-//exit;
+        
         $p = Person::createFromSlug($slug);
+        
+        $action = 'update';
         if(is_null($p)){
             $p = new Person();
+            $action = 'insert';
         }
         // The informations coming from a BC are considered as superior to all other sources.
         // updateFields() is the also called for a person already in database
         $p->updateFields($yaml['person']);
+echo "\n<pre>"; print_r($p); echo "</pre>\n"; exit;
         $p->data['trust'] = Trust::BC;
         if(isset($yaml['extras']['occupations'])){
             $p->addOccus($yaml['extras']['occupations']);
@@ -73,11 +79,25 @@ class add implements Command {
             newdata: $yaml['person'],
             rawdata: $yaml['person']
         );
-echo "\n"; print_r($p); echo "\n";
+        
+        switch($action){
+        	case 'insert': 
+                $p->insert(); // can throw an exception
+        	    Stats::addPerson($p);
+        	    // Search::addPerson($p);          // TODO implement
+                $report .= "Inserted $slug\n";
+            break;
+            case 'update':
+                $p->update(); // can throw an exception
+        	    // Stats::updatePerson($p);        // TODO implement (check if notime has changed from true to false)
+        	    // Search::updatePerson($p);       // TODO implement
+                $report .= "Updated $slug\n";
+        	break;
+        }
+        
+//echo "\n"; print_r($p); echo "\n";
 //echo "$bcFile\n";
 //echo "\n"; print_r($yaml); echo "\n";
-        
-        $report =  "--- wiki add one ---\n";
         
         return $report;
     }
