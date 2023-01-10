@@ -7,6 +7,7 @@
 
 namespace g5\model;
 
+use g5\model\Act;
 use tiglib\strings\slugify;
 use tiglib\arrays\flattenAssociative;
 
@@ -470,7 +471,7 @@ class Person {
     /** 
         Adds an array of acts.
         @param  $actSpecs   Associative array specifying the acts to add.
-                - Keys can contain "birth", "death" or "mariage"
+                - Keys can contain "birth", "death" or "mariage" = Act::BIRTH ActDEATH OR ActMARIAGE
                 - Values contain an act slug permitting to locate the act.
                   Ex: ['birth' => 'eymery-marguerite-1860-02-11'] corresponds to an act located in
                   data/acts/birth/1860/02/11/eymery-marguerite-1860-02-11
@@ -480,9 +481,16 @@ class Person {
                 Acts specifications permit to locate the act.
     **/
     public function addActs($actSpecs){
-        foreach($actSpecs as $key => $actSlug){
-            $this->data['acts'][$key] = Acts::personAct($this, $key, $actSlug);
+        foreach($actSpecs as $actKey => $actSlug){
+            Act::personAct($this, $actKey, $actSlug);
         }
+    }
+    
+    /** 
+        @param  $actKey "birth", "death" or "mariage" = Act::BIRTH ActDEATH OR ActMARIAGE
+    **/
+    public function addAct($actKey, $actSlug){
+        Act::personAct($this, $actKey, $actSlug);
     }
     
     /** 
@@ -500,6 +508,7 @@ class Person {
     
     /**
         Inserts a new person in storage.
+        Fills $this->data['id']
         @return The id of the inserted row
         @throws \Exception if trying to insert a duplicate slug
     **/
@@ -536,6 +545,9 @@ class Person {
             json_encode($this->data['notes']),
         ]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        //
+        $this->data['id'] = $res['id'];
+        //
         return $res['id'];
     }
 

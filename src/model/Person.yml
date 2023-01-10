@@ -77,7 +77,8 @@ trust:
 
 # map containing act transcriptions.
 # keys of this map can be "birth", "death", "mariage"
-acts: {}
+acts:
+  birth: {}
 
 history: []
 

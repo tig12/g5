@@ -5,8 +5,7 @@
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2022-12-24 15:54:45+01:00, Thierry Graff : creation
 ********************************************************************************/
-namespace g5\model
-;
+namespace g5\model\wiki;
 use g5\app\Config;
 
 class Wiki {
@@ -21,8 +20,8 @@ class Wiki {
     /**
         @return Path to the directory containing informations related to persons.
     **/
-    public static function personsRootDir(){
-        return implode(DS, [Config::$data['dirs']['wiki'], 'persons']);
+    public static function rootDir(){
+        return Config::$data['dirs']['wiki'];
     }
     
     /**
@@ -38,7 +37,6 @@ class Wiki {
             throw new \Exception("Invalid slug: " . $slug);
         }
         $path = [
-            self::personsRootDir(),
             $m[2],
             $m[3],
             $m[4],

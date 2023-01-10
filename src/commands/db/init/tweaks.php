@@ -35,7 +35,7 @@ class tweaks implements Command {
             return "USELESS PARAMETER {$params[1]}\n";
         }
         if(count($params) != 1){
-            return "MISSING PARAMETER: this command needs the path to the file containing the tweaks, relative to data/init/tweaks.\n";
+            return "MISSING PARAMETER: this command needs the path to the file containing the tweaks, relative to data/init/tweaks/\n";
         }
         self::$yamlFile = $params[0];
         $yaml = @yaml_parse_file(Config::$data['dirs']['init'] . DS . 'tweaks' . DS . self::$yamlFile);

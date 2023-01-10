@@ -45,8 +45,8 @@ source:
       page: # 5 / 7
   
   # Date and place of registration, when the act was established.
-  # WARNING : this date is distinct from the birth date
-  document:
+  # WARNING : this date is generally distinct from the birth date
+  document-creation:
     date: 
     place: 
 
@@ -109,6 +109,7 @@ person:
 #
 # If some fields are useless, you can delete them
 extras:
-  occupations:
-    - mathematician
+  # occupations or professions
+  occus:
+    # - mathematician
   

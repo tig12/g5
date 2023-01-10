@@ -8,8 +8,11 @@
 dirs:
   output: data/output
   tmp:    data/tmp
-  acts:   data/acts
   wiki:   data/wiki
+  # Versioned dirs, hard coded in app/Config.php
+  # raw:    data/raw 
+  # init:   data/db/init
+  # db:     data/db
 
 # g5 database
 db5:

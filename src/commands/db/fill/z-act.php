@@ -62,7 +62,7 @@ class act implements Command {
         
         $report = "--- db fill act $typact $action $actSlug ---\n";
         
-        $p = Acts::personAct(null, $actSlug, $typact);
+        $p = ActpersonAct(null, $actSlug, $typact);
         // TODO Add entry in person history
         
         switch($action){

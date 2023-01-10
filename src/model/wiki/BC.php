@@ -7,10 +7,11 @@
     @history    2022-12-27 04:00:11+01:00, Thierry Graff : Creation
 ********************************************************************************/
 
-namespace g5\model\acts;
+namespace g5\model\wiki;
 
 use g5\model\DB5;
-use g5\model\Wiki;
+use g5\model\wiki\Wiki;
+use g5\app\Config;
 
 class BC {
     
@@ -31,12 +32,13 @@ class BC {
         @param  $slug The slug of the person to add ; ex: galois-evariste-1811-10-25
     **/
     public static function filePath(string $slug) {
-        return Wiki::slug2dir($slug) . DS . self::FILENAME;
+        return Config::$data['dirs']['wiki']  . DS . 'birth' . DS . Wiki::slug2dir($slug) . DS . self::FILENAME;
     }
 
     /**
         Checks if a BC.yml file contains valid informations
         @param  $yaml   Array containing information stored in a file BC.yml
+        @return         Empty string if ok, error message if problems.
         TODO 
         https://github.com/rjbs/Rx
         https://rjbs.manxome.org/rx/

@@ -505,6 +505,7 @@ if(
     
     /**
         Inserts a group in storage.
+        Fills $this->data['id']
         @return The id of the inserted row
         @throws \Exception if trying to insert a duplicate slug
     **/
@@ -534,7 +535,9 @@ if(
             json_encode($this->data['children']),
         ]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        //
         $this->data['id'] = $res['id'];
+        //
         // members
         $this->insertMembers();
         //

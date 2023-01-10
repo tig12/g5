@@ -9,8 +9,10 @@
 namespace g5\commands\wiki\bc;
 
 use g5\commands\wiki\Wiki;
-use g5\model\acts\BC;
+use g5\model\wiki\BC;
+use g5\model\Act;
 use g5\model\Person;
+use g5\model\Group;
 use g5\model\Source;
 use g5\model\Trust;
 use g5\model\Stats;
@@ -61,36 +63,35 @@ class add implements Command {
         
         $action = 'update';
         if(is_null($p)){
-            $p = new Person();
             $action = 'insert';
+            $p = new Person();
+            $p->data['slug'] =  $slug;
         }
-        // The informations coming from a BC are considered as superior to all other sources.
-        // updateFields() is the also called for a person already in database
-        $p->updateFields($yaml['person']);
-echo "\n<pre>"; print_r($p); echo "</pre>\n"; exit;
-        $p->data['trust'] = Trust::BC;
-        if(isset($yaml['extras']['occupations'])){
-            $p->addOccus($yaml['extras']['occupations']);
-        }
-        $p->data['slug'] = $slug;
-        $p->addHistory(
-            command: 'wiki bc add ' . $p->data['slug'],
-            sourceSlug: BC::SOURCE_SLUG,
-            newdata: $yaml['person'],
-            rawdata: $yaml['person']
-        );
+        
+        Act::personAct($p, Act::BIRTH, $slug);
         
         switch($action){
         	case 'insert': 
+//echo "\n<pre>"; print_r($p->data['occus']); echo "</pre>\n"; exit;
                 $p->insert(); // can throw an exception
-        	    Stats::addPerson($p);
-        	    // Search::addPerson($p);          // TODO implement
+                
+//        	    Stats::addPerson($p);
+        	    
+//        	    Search::addPerson($p);          // TODO implement
+        	    
+                if(count($p->data['occus']) != 0){
+                    foreach($p->data['occus'] as $occu){
+                        $g = Group::createFromSlug($occu);
+                        Group::storePersonInGroup($p->data['id'], $g->data['slug']);
+                    }
+                }
                 $report .= "Inserted $slug\n";
             break;
             case 'update':
                 $p->update(); // can throw an exception
         	    // Stats::updatePerson($p);        // TODO implement (check if notime has changed from true to false)
         	    // Search::updatePerson($p);       // TODO implement
+        	    // update occus
                 $report .= "Updated $slug\n";
         	break;
         }

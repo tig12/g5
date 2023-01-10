@@ -211,10 +211,10 @@ class tmp2db implements Command {
                 }
                 if($compareG5 != $compareCFEPP){
                     $nDiffDates++;
-                    $issue1 = "Check birth date because CFEPP and g5 birth dates differ\n"
-                           . "Date\n"
-                           . "<br>$g5Date for g5 $ERID\n"
-                           . "<br>$cfeppDate for CFEPP $CFID\n";
+                    $issue1 = "Check birth date because CFEPP and g5 birth dates differ"
+                           . "Date"
+                           . "<br>$g5Date for g5 $ERID"
+                           . "<br>$cfeppDate for CFEPP $CFID";
                     $p->addIssue($issue1);
                     if($reportType == 'full'){
                         $dateReport .= "\nDATE    g5 $ERID\t $g5Date {$p->data['name']['family']} - {$p->data['name']['given']}\n";
@@ -237,10 +237,10 @@ class tmp2db implements Command {
                 }
                 if($compareG5 != $compareCFEPP){
                     $nDiffDatesUT++;
-                    $issue2 = "Check birth date because CFEPP and g5 birth dates UT differ\n"
-                           . "<br>Date UT\n"
-                           . "<br>$g5DateUT for g5 $ERID\n"
-                           . "<br>$cfeppDateUT for CFEPP $CFID\n";
+                    $issue2 = "Check birth date because CFEPP and g5 birth dates UT differ"
+                           . "<br>Date UT"
+                           . "<br>$g5DateUT for g5 $ERID"
+                           . "<br>$cfeppDateUT for CFEPP $CFID";
                     $p->addIssue($issue2);
                     if($reportType == 'full'){
                         $dateReport .= "\nDATE UT g5    $ERID\t $g5DateUT {$p->data['name']['family']} - {$p->data['name']['given']}\n";
