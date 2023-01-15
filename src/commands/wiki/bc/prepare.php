@@ -8,7 +8,9 @@
 namespace g5\commands\wiki\bc;
 
 use tiglib\patterns\Command;
-use g5\commands\wiki\Wiki;
+use g5\model\wiki\Wiki;
+use g5\model\wiki\BC;
+use g5\G5;
 
 class prepare implements Command {
     
@@ -25,17 +27,28 @@ class prepare implements Command {
         
         $slug = $params[0];
         
+        $report = '';
+        
         try{
-            $dir = Wiki::slug2dir($slug);
+            $dir = BC::dirPath($slug);
         }
         catch(\Exception $e){
-            return "INVALID SLUG: $slug - the directory was not created\n";
+            return "INVALID SLUG: $slug - the directory was not created\n"
+                . "Slug format: slug-name-yyyy-mm-dd";
         }
         if(!is_dir($dir)){
             mkdir($dir, 0755, true);
+            $report .= "Created directory $dir\n";
         }
         
-        $report =  "Created directory $dir\n";
+        $destFile = BC::filePath($slug);;
+        # if BC.yml already exists, don't replace it
+        if(!is_file($destFile)){
+            $sourceFile = implode(DS, [G5::ROOT_DIR, 'model', 'wiki', BC::FILENAME]);
+            copy($sourceFile, $destFile);
+            $report .= "Created file $destFile\n";
+        }
+        
         return $report;
     }
     

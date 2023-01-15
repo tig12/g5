@@ -25,12 +25,12 @@ class Wiki {
     }
     
     /**
-        Computes the directory where person informations are stored.
+        Computes the directory where person informations are stored, relative to Wiki root dir.
         @param  $slug The slug of the person to add ; ex: galois-evariste-1811-10-25
-        @return The directory path
+        @return The relative directory path ; 1811/10/25/galois-evariste-1811-10-25
         @throws Exception if the slug is incoherent.
     **/
-    public static function slug2dir(string $slug) {
+    public static function slug2dir(string $slug): string {
         $p = '/(.*?)\-(\d+)\-(\d{2})\-(\d{2})/';
         preg_match($p, $slug, $m);
         if(count($m) != 5){
@@ -44,5 +44,16 @@ class Wiki {
         ];
         return implode(DS, $path);
     }
+    
+    // ******************************************************
+    /**
+        Computes the directory where person informations are stored, relative to Wiki root dir.
+        @param  $slug The slug of the person to add ; ex: galois-evariste-1811-10-25
+        @return The absolute directory path
+        @throws Exception if the slug is incoherent.
+    **/
+    // public static function slug2Fulldir($slug): string {
+        // return self::rootDir() . DS . self::slug2dir($slug);
+    // }
     
 } // end class

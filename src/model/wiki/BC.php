@@ -26,13 +26,31 @@ class BC {
     /** **/
     const SOURCE_SLUG = 'bc';
     
+    
+    /**
+        @return Path to the directory containing birth certificates.
+    **/
+    public static function rootDir(){
+        return Wiki::rootDir() . DS . 'birth';
+    }
+
+    
+    /**
+        Returns the path of the directory corresponding to a slug.
+        Ex: data/wiki/birth/1811/10/25/galois-evariste-1811-10-25
+        @param  $slug The slug of the person to add ; ex: galois-evariste-1811-10-25
+    **/
+    public static function dirPath(string $slug) {
+        return self::rootDir() . DS . Wiki::slug2dir($slug);
+    }
+
     /**
         Returns the path of a BC.yml file corresponding to a slug.
-        Ex: data/wiki/persons/1811/10/25/galois-evariste-1811-10-25/BC.yml
+        Ex: data/wiki/birth/1811/10/25/galois-evariste-1811-10-25/BC.yml
         @param  $slug The slug of the person to add ; ex: galois-evariste-1811-10-25
     **/
     public static function filePath(string $slug) {
-        return Config::$data['dirs']['wiki']  . DS . 'birth' . DS . Wiki::slug2dir($slug) . DS . self::FILENAME;
+        return self::dirPath($slug) . DS . self::FILENAME;
     }
 
     /**

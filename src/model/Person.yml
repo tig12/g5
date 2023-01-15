@@ -70,15 +70,12 @@ death:
 # occupation slugs
 occus: []
 
-# Reliability of the information
-# Can be a number or a key-value map
-# See docs/db-person.html for details
+# Reliability of birth time
 trust:
 
 # map containing act transcriptions.
 # keys of this map can be "birth", "death", "mariage"
 acts:
-  birth: {}
 
 history: []
 

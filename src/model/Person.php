@@ -529,17 +529,18 @@ class Person {
             issues,
             notes
             )values(?,?,?,?,?,?,?,?,?,?,?,?,?) returning id');
+        // JSON_FORCE_OBJECT => empty values are stored {} and not []
         $stmt->execute([
             $this->data['slug'],
-            json_encode($this->data['ids-in-sources']),
-            json_encode($this->data['partial-ids']),
-            json_encode($this->data['name']),
+            json_encode($this->data['ids-in-sources'], JSON_FORCE_OBJECT),
+            json_encode($this->data['partial-ids'], JSON_FORCE_OBJECT),
+            json_encode($this->data['name']), // not JSON_FORCE_OBJECT because of field alter, which is an array
             $this->data['sex'],
-            json_encode($this->data['birth']),
-            json_encode($this->data['death']),
+            json_encode($this->data['birth'], JSON_FORCE_OBJECT),
+            json_encode($this->data['death'], JSON_FORCE_OBJECT),
             json_encode($this->data['occus']),
             $this->data['trust'],
-            json_encode($this->data['acts']),
+            json_encode($this->data['acts'], JSON_FORCE_OBJECT),
             json_encode($this->data['history']),
             json_encode($this->data['issues']),
             json_encode($this->data['notes']),

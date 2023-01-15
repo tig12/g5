@@ -27,5 +27,6 @@ class G5{
     **/
     const TWEAK_BUILD_NOTES = 'build-notes';
     
+    const ROOT_DIR = __DIR__;
     
 }// end class

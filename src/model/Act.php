@@ -46,7 +46,6 @@ class Act {
         @param      $actKey Can be 'birth', 'death' or 'mariage'
         @return     Person passed in parameter or new person (if $p is null).
     **/
-//    public static function personAct(Person|null $p, string $actKey, $actSlug): Person {
     public static function personAct(Person|null $p, string $actKey, $actSlug): void {
         if($actKey != Act::BIRTH){
             throw new \Exception("'$actKey' not yet handled");
@@ -64,8 +63,8 @@ class Act {
         $l = count($parts);
         $yamlFileName = match($actKey){     // php 8.0+
             Act::BIRTH => 'BC.yml',
-            ActDEATH => 'DC.yml',
-            ActMARIAGE => 'MC.yml',
+            Act::DEATH => 'DC.yml',
+            Act::MARIAGE => 'MC.yml',
         };
         // ex: $file = /path/to/acts/birth/1897/11/26/accard-robert-1897-11-26/BC.yml
         $file = self::computeFile($actKey, $actSlug);
@@ -76,6 +75,7 @@ class Act {
         
         // transfer in $p->data the informations present in the act
         // act is considered more reliable than other sources, so replace existing data.
+////////// here, do not do that, leave client code choose what to do
         $p->data = array_replace_recursive($p->data, $act['person']);
         $p->data = array_replace_recursive($p->data, $act['extras']);
         
@@ -109,7 +109,6 @@ class Act {
             newdata: $act['person'],    // because person was updated
             rawdata: $act['person'],
         );
-//        return $p;
     }
     
 } // end class
