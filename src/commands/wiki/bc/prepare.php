@@ -27,7 +27,7 @@ class prepare implements Command {
         
         $slug = $params[0];
         
-        $report = '';
+        $report =  "--- wiki bc prepare $slug ---\n";
         
         try{
             $dir = BC::dirPath($slug);

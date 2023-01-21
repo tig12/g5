@@ -1,7 +1,8 @@
 <?php
 /******************************************************************************
     
-    Creates all tables of db5
+    - Creates all tables of db5
+    - Creates views accessible via postgrest
     WARNING : all existing tables are dropped and recreated
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
@@ -30,6 +31,9 @@ class dbcreate implements Command {
             'person_groop',
             'stats',
             'search',
+            'wikiproject',
+            'wikiproject_person',
+            'wikirecent',
         ];
         foreach($tables as $table){
             $sql_create = file_get_contents($dir_sql . DS . $table . '.sql');
@@ -45,6 +49,9 @@ class dbcreate implements Command {
         $views = [
             'api_persongroop',
             'api_issue',
+            'api_wikiproject',
+            'api_wikiproject_person',
+            'api_wikirecent',
         ];
         foreach($views as $view){
             $sql_create = file_get_contents($dir_sql . DS . $view . '.sql');

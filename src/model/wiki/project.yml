@@ -1,0 +1,25 @@
+#
+# Description of a wiki project
+# This document is released under the terms of licence
+# Creative Commons CC BY-SA 4.0 (Attribution-ShareAlike 4.0) 
+# https://creativecommons.org/licenses/by-sa/4.0/
+#
+
+#
+# 1 - Informations related to current file
+#
+header:
+  # History of modifications of the current file
+  history:
+    -
+      actor: # here, your name or pseudo
+      date: # '2019-12-21'
+      action: Creation
+      
+#
+# 2 - Description of the project
+#
+name: # French mathematicians
+description: |
+  # Here description of the project (text or HTML if formatting is necessary)
+

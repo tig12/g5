@@ -14,7 +14,8 @@ select
     p.sex,
     p.name,
     p.occus,
-    p.birth
+    p.birth,
+    p.trust
 from
     person p,
     groop g,

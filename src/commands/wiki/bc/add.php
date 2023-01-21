@@ -52,7 +52,7 @@ class add implements Command {
                 . "Information not included in the database\n";
         }
         
-        $report =  "--- wiki add one $slug ---\n";
+        $report =  "--- wiki bc add $slug ---\n";
         
         $source = new Source();
         $source->data['type'] = BC::SOURCE_TYPE;
@@ -88,10 +88,10 @@ class add implements Command {
                 $report .= "Inserted $slug\n";
             break;
             case 'update':
+//        	    $p->addOccus();         ////////////////////// EN COURS
                 $p->update(); // can throw an exception
         	    // Stats::updatePerson($p);        // TODO implement (check if notime has changed from true to false)
         	    // Search::updatePerson($p);       // TODO implement
-        	    // update occus
                 $report .= "Updated $slug\n";
         	break;
         }

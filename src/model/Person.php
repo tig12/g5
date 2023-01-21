@@ -471,7 +471,7 @@ class Person {
     /** 
         Adds an array of acts.
         @param  $actSpecs   Associative array specifying the acts to add.
-                - Keys can contain "birth", "death" or "mariage" = Act::BIRTH ActDEATH OR ActMARIAGE
+                - Keys can contain "birth", "death" or "mariage" = Act::BIRTH Act::DEATH OR Act::MARIAGE
                 - Values contain an act slug permitting to locate the act.
                   Ex: ['birth' => 'eymery-marguerite-1860-02-11'] corresponds to an act located in
                   data/acts/birth/1860/02/11/eymery-marguerite-1860-02-11
@@ -487,7 +487,7 @@ class Person {
     }
     
     /** 
-        @param  $actKey "birth", "death" or "mariage" = Act::BIRTH ActDEATH OR ActMARIAGE
+        @param  $actKey "birth", "death" or "mariage" = Act::BIRTH, Act::DEATH or Act::MARIAGE
     **/
     public function addAct($actKey, $actSlug){
         Act::personAct($this, $actKey, $actSlug);

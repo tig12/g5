@@ -14,7 +14,7 @@ header:
     -
       actor: # here, your name or pseudo
       date: # '2019-12-21 02:29:53+01:00'
-      action: Creation
+      action: Addition to the Open Gauquelin Database
       
 #
 # 2 - Optional information related to opengauquelin database integration
@@ -22,7 +22,7 @@ header:
 opengauquelin:
  # If this act is part of a specific opengauquelin project
  # See page https://opengauquelin.org/wiki/projects
- projects: # muller-paris-medics
+ projects: [] # [muller-paris-medics]
    
 #
 # 3 - Informations about the act
