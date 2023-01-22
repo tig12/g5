@@ -6,7 +6,7 @@
 #
 
 #
-# 1 - Informations related to current file
+# 1 - Informations related to the current file
 #
 header:
   # History of modifications of the current file
@@ -15,11 +15,14 @@ header:
       actor: # here, your name or pseudo
       date: # '2019-12-21'
       action: Creation
+
+# Can be 'active' or 'archived'
+status: active
       
 #
 # 2 - Description of the project
 #
 name: # French mathematicians
+
 description: |
   # Here description of the project (text or HTML if formatting is necessary)
-

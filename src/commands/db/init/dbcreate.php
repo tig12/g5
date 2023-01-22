@@ -23,6 +23,9 @@ class dbcreate implements Command {
         $report = "--- db init dbcreate ---\n";
         $dir_sql = implode(DS, [Config::$data['dirs']['ROOT'], 'src', 'model', 'db-create']);
         $dblink = DB5::getDblink();
+        $sql_grant = "grant usage on schema " . Config::$data['db5']['postgresql']['schema'] . " to " . Config::$data['openg']['postgrest']['user'];
+        $dblink->exec($sql_grant);
+        $report .= "$sql_grant\n";
         
         $tables = [
             'person',
@@ -40,7 +43,7 @@ class dbcreate implements Command {
             $dblink->exec("drop table if exists $table cascade");
             $dblink->exec($sql_create);
             $report .= "Create table $table\n";
-            // grant privilege for use with postgrest
+            // grant privilege to use with postgrest
             $sql_grant = "grant select on $table to " . Config::$data['openg']['postgrest']['user'];
             $dblink->exec($sql_grant);
             $report .= "$sql_grant\n";
@@ -49,16 +52,13 @@ class dbcreate implements Command {
         $views = [
             'api_persongroop',
             'api_issue',
-            'api_wikiproject',
-            'api_wikiproject_person',
-            'api_wikirecent',
         ];
         foreach($views as $view){
             $sql_create = file_get_contents($dir_sql . DS . $view . '.sql');
             $dblink->exec("drop view if exists $view cascade");
             $dblink->exec($sql_create);
             $report .= "Create view $view\n";
-            // grant privilege for use with postgrest
+            // grant privilege to use with postgrest
             $sql_grant = "grant select on $view to " . Config::$data['openg']['postgrest']['user'];
             $dblink->exec($sql_grant);
             $report .= "$sql_grant\n";

@@ -482,7 +482,7 @@ class Person {
     **/
     public function addActs($actSpecs){
         foreach($actSpecs as $actKey => $actSlug){
-            Act::personAct($this, $actKey, $actSlug);
+            Act::addActToPerson($this, $actKey, $actSlug);
         }
     }
     
@@ -490,7 +490,7 @@ class Person {
         @param  $actKey "birth", "death" or "mariage" = Act::BIRTH, Act::DEATH or Act::MARIAGE
     **/
     public function addAct($actKey, $actSlug){
-        Act::personAct($this, $actKey, $actSlug);
+        Act::addActToPerson($this, $actKey, $actSlug);
     }
     
     /** 

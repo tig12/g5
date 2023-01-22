@@ -46,7 +46,7 @@ class Act {
         @param      $actKey Can be 'birth', 'death' or 'mariage'
         @return     Person passed in parameter or new person (if $p is null).
     **/
-    public static function personAct(Person|null $p, string $actKey, $actSlug): void {
+    public static function addActToPerson(Person|null $p, string $actKey, $actSlug): void {
         if($actKey != Act::BIRTH){
             throw new \Exception("'$actKey' not yet handled");
         }
@@ -105,7 +105,7 @@ class Act {
         
         $p->addHistory(
             command: "wiki bc add $actSlug",
-            sourceSlug: Act::SOURCE_SLUG,
+            sourceSlug: BC::SOURCE_SLUG,
             newdata: $act['person'],    // because person was updated
             rawdata: $act['person'],
         );

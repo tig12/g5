@@ -42,8 +42,8 @@ class stats implements Command {
         $N_time = $dblink->query($query)->fetch()[0];
         $report_full .= "N_time = $N_time\n";
         
-        $N_day = $N - $N_time;
-        $report_full .= "N_day = $N_day\n";
+        $N_notime = $N - $N_time;
+        $report_full .= "N_notime = $N_notime\n";
         
         $query = 'select count(*) from api_issue';
         $N_issues = $dblink->query($query)->fetch()[0];
@@ -87,7 +87,7 @@ class stats implements Command {
         $stmt = $dblink->prepare("insert into stats(
             n,
             n_time,
-            n_day,
+            n_notime,
             n_issues,
             countries,
             years
@@ -95,7 +95,7 @@ class stats implements Command {
         $stmt->execute([
             $N,
             $N_time,
-            $N_day,
+            $N_notime,
             $N_issues,
             json_encode($countries),
             json_encode($years)

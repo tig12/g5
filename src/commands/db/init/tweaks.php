@@ -1,7 +1,7 @@
 <?php
 /******************************************************************************
     
-    Updates or inserts persons in the database from a yaml file (in data/init/tweaks).
+    Updates or inserts persons in the database from a yaml file (in data/db/init/tweaks).
     Each yaml file must contain an array.
     Each element of this array must contain the fields of a person, with a key ADMIN.
     ADMIN field must contain a key ACTION.

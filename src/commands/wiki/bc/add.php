@@ -10,6 +10,7 @@ namespace g5\commands\wiki\bc;
 
 use g5\commands\wiki\Wiki;
 use g5\model\wiki\BC;
+use g5\model\wiki\Project;
 use g5\model\Act;
 use g5\model\Person;
 use g5\model\Group;
@@ -31,74 +32,77 @@ class add implements Command {
             return "INVALID USAGE This commands needs one parameter\n";
         }
         
-        $slug = $params[0];
+        $personSlug = $params[0];
         
         try{
-            $bcFile = BC::filePath($slug);
+            $bcFile = BC::filePath($personSlug);
         }
         catch(\Exception $e){
-            return "INVALID SLUG: $slug - nothing was modified in the database\n";
+            return "INVALID SLUG: $personSlug - nothing was modified in the database\n";
         }
         if(!is_file($bcFile)){
             return "Impossible to add wiki information because file '$bcFile' is missing\n";
         }
         
-        $yaml = yaml_parse_file($bcFile);
+        $BC = yaml_parse_file($bcFile);
+echo "\n<pre>"; print_r($BC); echo "</pre>\n"; exit;
         
-        $validation = BC::validate($yaml);
+        $validation = BC::validate($BC);
         if($validation != ''){
             return "INVALID YAML FILE: $bcFile"
                 . "\n$validation"
                 . "Information not included in the database\n";
         }
         
-        $report =  "--- wiki bc add $slug ---\n";
+        $report =  "--- wiki bc add $personSlug ---\n";
         
         $source = new Source();
         $source->data['type'] = BC::SOURCE_TYPE;
         $source->data['name'] = BC::SOURCE_LABEL;
-        $source->data['details'] = $yaml['source'];
+        $source->data['details'] = $BC['source'];
         
-        $p = Person::createFromSlug($slug);
+        $p = Person::createFromSlug($personSlug);
         
         $action = 'update';
         if(is_null($p)){
             $action = 'insert';
             $p = new Person();
-            $p->data['slug'] =  $slug;
+            $p->data['slug'] =  $personSlug;
         }
         
-        Act::personAct($p, Act::BIRTH, $slug);
+        Act::addActToPerson($p, Act::BIRTH, $personSlug);
         
         switch($action){
         	case 'insert': 
 //echo "\n<pre>"; print_r($p->data['occus']); echo "</pre>\n"; exit;
                 $p->insert(); // can throw an exception
                 
-//        	    Stats::addPerson($p);
-        	    
+        	    Stats::addPerson($p);
+//        	    Stats::addChecked();
 //        	    Search::addPerson($p);          // TODO implement
-        	    
+        	    Project::addPersonToProject($projectSlug, $p);
+        	    if(isset($BC['addPersonToProject']['projects'])){
+        	        foreach($BC['addPersonToProject']['projects'] as $projectSlug){
+                        Project::addPersonToProject($projectSlug, $p);
+                    }
+                }
+                // TODO This code should be moved to wiki/fix/add
                 if(count($p->data['occus']) != 0){
                     foreach($p->data['occus'] as $occu){
                         $g = Group::createFromSlug($occu);
                         Group::storePersonInGroup($p->data['id'], $g->data['slug']);
                     }
                 }
-                $report .= "Inserted $slug\n";
+                $report .= "Inserted $personSlug\n";
             break;
             case 'update':
 //        	    $p->addOccus();         ////////////////////// EN COURS
                 $p->update(); // can throw an exception
         	    // Stats::updatePerson($p);        // TODO implement (check if notime has changed from true to false)
         	    // Search::updatePerson($p);       // TODO implement
-                $report .= "Updated $slug\n";
+                $report .= "Updated $personSlug\n";
         	break;
         }
-        
-//echo "\n"; print_r($p); echo "\n";
-//echo "$bcFile\n";
-//echo "\n"; print_r($yaml); echo "\n";
         
         return $report;
     }

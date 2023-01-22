@@ -21,8 +21,10 @@ class DB5{
             $user = Config::$data['db5']['postgresql']['dbuser'];
             $password = Config::$data['db5']['postgresql']['dbpassword'];
             $dbname = Config::$data['db5']['postgresql']['dbname'];
+            $schema = Config::$data['db5']['postgresql']['schema'];
             $dsn = "pgsql:host=$host;port=$port;user=$user;password=$password;dbname=$dbname";
             self::$dblink = new \PDO($dsn);
+            self::$dblink->exec("SET search_path TO $schema");
 //self::$dblink->setAttribute(\PDO::ATTR_AUTOCOMMIT, 0);
             self::$dblink->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         }

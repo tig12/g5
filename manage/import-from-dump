@@ -1,7 +1,8 @@
 #!/usr/bin/bash
 
 #
-# Command to import a postgresql dump to dbdump/ (or directory specified in config.env)
+# Command to import a postgresql dump to dbdump/ (or a directory specified in config.env)
+# Must be executed from g5 root directory.
 # This directory is not versioned, you mut create it.
 #
 

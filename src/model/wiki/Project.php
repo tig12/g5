@@ -49,10 +49,49 @@ class Project {
             $yaml['name'],
             $yaml['description'],
             json_encode($yaml['header'], JSON_FORCE_OBJECT),
-            self::STATUS_ACTIVE,
+            $yaml['status'],
         ]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         return $res['id'];
+    }
+    
+    /**
+        Associates a person to a wiki project.
+        @param  $projectSlug    Concerned project
+        @param  $p              Person to add to the project
+        @pre    Person $p must be present in database (then have a field id).
+        @throws Exception if something goes wrong
+    **/
+    public static function addPersonToProject(string $projectSlug, Person $p): void {
+        if(!isset($p->data['id'])){
+            throw new \Exception("addPersonToProject() cannot add a person without id");
+        }
+        $dblink = DB5::getDbLink();
+        
+        // Compute project id
+        $query = "select id from person where slug='$projectSlug'";
+        $stmt = $dblink->prepare($query);
+        $stmt->execute([]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if($res === false || count($res) == 0){
+            throw new \Exception("Project '$projectSlug' does not exist");
+        }
+        $projectId = $res['id'];
+        
+        $personId = $p->data['id'];
+        
+        $stmt = $dblink->prepare('insert into wikiproject_person(
+            id_project,
+            id_person)
+            values(?,?)');
+        $stmt->execute([
+            $projectId,
+            $personId,
+        ]);
+        $stmt->fetch(\PDO::FETCH_ASSOC);
+        
+        // Add to wikirecent
+        
     }
     
 } // end class

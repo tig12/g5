@@ -28,11 +28,11 @@ class Stats{
         //
         if($p->data['birth']['notime'] === true){
             $n_time = $row['n_time'];
-            $n_day = $row['n_day'] + 1;
+            $n_notime = $row['n_notime'] + 1;
         }
         else {
             $n_time = $row['n_time'] + 1;
-            $n_day = $row['n_day'];
+            $n_notime = $row['n_notime'];
         }
         //
         $n_issues = $row['n_issues'] + count($p->data['issues']);
@@ -60,7 +60,7 @@ class Stats{
         $stmt = $dblink->prepare("update stats set(
             n,
             n_time,
-            n_day,
+            n_notime,
             n_issues,
             countries,
             years
@@ -68,7 +68,7 @@ class Stats{
         $stmt->execute([
             $n,
             $n_time,
-            $n_day,
+            $n_notime,
             $n_issues,
             json_encode($countries),
             json_encode($years)
