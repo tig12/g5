@@ -1,6 +1,8 @@
 
 config.yml
+config.env
 1.local
+dbdump
 
 # files marked for deletion
 z.*
