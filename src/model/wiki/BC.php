@@ -31,7 +31,7 @@ class BC {
         @return Path to the directory containing birth certificates.
     **/
     public static function rootDir(){
-        return Wiki::rootDir() . DS . 'birth';
+        return Wiki::rootDir() . DS . 'person';
     }
 
     

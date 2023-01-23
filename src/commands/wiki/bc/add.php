@@ -11,6 +11,7 @@ namespace g5\commands\wiki\bc;
 use g5\commands\wiki\Wiki;
 use g5\model\wiki\BC;
 use g5\model\wiki\Project;
+use g5\model\wiki\Recent;
 use g5\model\Act;
 use g5\model\Person;
 use g5\model\Group;
@@ -45,7 +46,6 @@ class add implements Command {
         }
         
         $BC = yaml_parse_file($bcFile);
-echo "\n<pre>"; print_r($BC); echo "</pre>\n"; exit;
         
         $validation = BC::validate($BC);
         if($validation != ''){
@@ -73,19 +73,32 @@ echo "\n<pre>"; print_r($BC); echo "</pre>\n"; exit;
         Act::addActToPerson($p, Act::BIRTH, $personSlug);
         
         switch($action){
-        	case 'insert': 
-//echo "\n<pre>"; print_r($p->data['occus']); echo "</pre>\n"; exit;
-                $p->insert(); // can throw an exception
-                
-        	    Stats::addPerson($p);
-//        	    Stats::addChecked();
+        	case 'insert':
+        	    //
+                $p->insert(); // DB - can throw an exception
+        	    //
+                Stats::addPerson($p);
+                //
 //        	    Search::addPerson($p);          // TODO implement
-        	    Project::addPersonToProject($projectSlug, $p);
-        	    if(isset($BC['addPersonToProject']['projects'])){
-        	        foreach($BC['addPersonToProject']['projects'] as $projectSlug){
+        	    //
+                if(isset($BC['opengauquelin']['projects'])){
+        	        foreach($BC['opengauquelin']['projects'] as $projectSlug){
                         Project::addPersonToProject($projectSlug, $p);
                     }
                 }
+                //
+                if(isset($BC['header']['history']) && count($BC['header']['history']) != 0){
+                    $dateRecent = substr(end($BC['header']['history'])['date'], 0, 19);
+                }
+                else {
+                    $dateRecent = '';
+                }
+                Recent::add(
+                    $p->data['id'],
+                    $dateRecent,
+                    "Addition of birth certificate",
+                );
+                //
                 // TODO This code should be moved to wiki/fix/add
                 if(count($p->data['occus']) != 0){
                     foreach($p->data['occus'] as $occu){
@@ -97,7 +110,7 @@ echo "\n<pre>"; print_r($BC); echo "</pre>\n"; exit;
             break;
             case 'update':
 //        	    $p->addOccus();         ////////////////////// EN COURS
-                $p->update(); // can throw an exception
+                $p->update(); // DB - can throw an exception
         	    // Stats::updatePerson($p);        // TODO implement (check if notime has changed from true to false)
         	    // Search::updatePerson($p);       // TODO implement
                 $report .= "Updated $personSlug\n";

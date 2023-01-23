@@ -91,6 +91,9 @@ use g5\commands\cfepp\final3\tmp2db             as CFEPPTmp2db;
 use g5\commands\cpara\ertel\group               as CParaGroup;
 use g5\commands\gauq\g55\tmp2db                 as g55Tmp2db;
 
+// wiki
+use g5\commands\db\init\wiki;
+
 // finalize
 use g5\commands\db\init\stats;
 use g5\commands\db\init\search;
@@ -112,8 +115,9 @@ class all implements Command {
         Possible values of the command
     **/
     const POSSIBLE_PARAMS = [
-        'tmp'       => 'Build files in data/tmp',
+        'tmp'       => 'Build tmp files in data/tmp',
         'db'        => 'Fill database with tmp files',
+        'wiki'      => 'Adds with wiki data to the database',
         'finalize'  => 'Finalize DB (stats, groups, search)',
         'export'    => 'Exports the groups in zipped csv files',
         'all'       => 'Executes all steps',
@@ -281,6 +285,13 @@ class all implements Command {
             }
             
             echo occus2::execute();
+        }
+        
+        if($param == 'wiki' || $param == 'all'){
+            echo "***************************\n";
+            echo "***    Add wiki data    ***\n";
+            echo "***************************\n";
+            echo wiki::execute([]);
         }
         
         if($param == 'finalize' || $param == 'all'){

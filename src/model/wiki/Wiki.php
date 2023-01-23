@@ -18,7 +18,7 @@ class Wiki {
     // *********************** File manipulation ***********************
     
     /**
-        @return Path to the directory containing informations related to persons.
+        @return Path to the directory containing wiki data.
     **/
     public static function rootDir(){
         return Config::$data['dirs']['wiki'];
@@ -44,16 +44,5 @@ class Wiki {
         ];
         return implode(DS, $path);
     }
-    
-    // ******************************************************
-    /**
-        Computes the directory where person informations are stored, relative to Wiki root dir.
-        @param  $slug The slug of the person to add ; ex: galois-evariste-1811-10-25
-        @return The absolute directory path
-        @throws Exception if the slug is incoherent.
-    **/
-    // public static function slug2Fulldir($slug): string {
-        // return self::rootDir() . DS . self::slug2dir($slug);
-    // }
     
 } // end class

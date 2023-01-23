@@ -15,7 +15,7 @@ class stats implements Command {
     
     
     /** 
-        @param  $params array with one element 'full' or 'small'
+        @param  $params array with one element: 'full' or 'small', indicating the kind of report returned by this command.
         @return report.
     **/
     public static function execute($params=[]): string {

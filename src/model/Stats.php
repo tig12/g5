@@ -10,6 +10,7 @@
 namespace g5\model;
 
 use g5\model\DB5;
+use g5\model\Trust;
 
 class Stats{
     
@@ -37,6 +38,13 @@ class Stats{
         //
         $n_issues = $row['n_issues'] + count($p->data['issues']);
         //
+        $n_checked = $row['n_checked'];
+        // TODO this is ok as long as there are only trust level 2 and 5 in db
+        // But more detailed stats will be needed if other trust levels appear
+        if($p->data['trust'] != Trust::CHECK){
+            $n_checked++;
+        }
+        //
         $country = $p->data['birth']['place']['cy'];
         $countries = json_decode($row['countries'], true);
         if(!isset($countries[$country])){
@@ -62,14 +70,16 @@ class Stats{
             n_time,
             n_notime,
             n_issues,
+            n_checked,
             countries,
             years
-            )=(?,?,?,?,?,?)");
+            )=(?,?,?,?,?,?,?)");
         $stmt->execute([
             $n,
             $n_time,
             $n_notime,
             $n_issues,
+            $n_checked,
             json_encode($countries),
             json_encode($years)
         ]);

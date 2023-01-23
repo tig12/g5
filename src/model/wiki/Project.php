@@ -8,6 +8,7 @@
 namespace g5\model\wiki;
 use g5\app\Config;
 use g5\model\DB5;
+use g5\model\Person;
 
 class Project {
     
@@ -56,7 +57,7 @@ class Project {
     }
     
     /**
-        Associates a person to a wiki project.
+        Adds in database a link between a person and a wiki project.
         @param  $projectSlug    Concerned project
         @param  $p              Person to add to the project
         @pre    Person $p must be present in database (then have a field id).
@@ -69,7 +70,7 @@ class Project {
         $dblink = DB5::getDbLink();
         
         // Compute project id
-        $query = "select id from person where slug='$projectSlug'";
+        $query = "select id from wikiproject where slug='$projectSlug'";
         $stmt = $dblink->prepare($query);
         $stmt->execute([]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -89,9 +90,6 @@ class Project {
             $personId,
         ]);
         $stmt->fetch(\PDO::FETCH_ASSOC);
-        
-        // Add to wikirecent
-        
     }
     
 } // end class
