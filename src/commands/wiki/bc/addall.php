@@ -1,14 +1,15 @@
 <?php
 /********************************************************************************
-    Adds all wiki projects in database
+    Adds all wiki birth certificates in database
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2023-01-22 17:20:13+01:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\commands\wiki\project;
+namespace g5\commands\wiki\bc;
 
-use g5\model\wiki\Project;
+use g5\model\wiki\BC;
 use tiglib\patterns\Command;
+use tiglib\filesystem\globRecursive;
 
 class addall implements Command {
     
@@ -25,29 +26,26 @@ class addall implements Command {
                 . "  - full : echoes a detailed report\n";
         }
         $reportType = $params[0];
-        $report =  "--- wiki project addall $reportType ---\n";
+        $report =  "--- wiki bc addall $reportType ---\n";
         
-        $files = glob(Project::rootDir() . DS . '*.yml');
+        $files = globRecursive::execute(BC::rootDir() . DS . '*BC.yml');
+        
         $N = 0;
         foreach($files as $file){
-            // project filename must be called from project slug
-            $basename = basename($file);
-            $slug = str_replace('.yml', '', $basename);
-            try{
-                $id = Project::addOne($slug);
-            }
-            catch(\Exception $e){
-                return $e->getMessage() . "\n";
-            }
+            // Command wiki bc add must be called with project slug
+            $tmp = explode(DS, $file);
+            $slug = $tmp[count($tmp)-2];
+            $report_add = add::execute([$slug]);
             if($reportType == 'full'){
-                $report .= "Added project $slug in database - id = $id\n";
+                $tmp = explode("\n", $report_add);
+                $report .= $tmp[1] . "\n";
             }
             $N++;
         }
         if($reportType == 'full'){
             $report .= "---------\n";
         }
-        $report .= "Inserted $N wiki projects in database\n";
+        $report .= "Inserted $N birth certificates in database\n";
         return $report;
     }
     

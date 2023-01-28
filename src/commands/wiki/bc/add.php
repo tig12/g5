@@ -23,8 +23,8 @@ use tiglib\patterns\Command;
 class add implements Command {
     
     /** 
-        @param  $params Array containing one element:
-                    the slug of the person to add ; ex: galois-evariste-1811-10-25
+        @param  $params Array containing one element: the slug of the person to add
+                        ex: wiki bc add galois-evariste-1811-10-25
         @return String report
     **/
     public static function execute($params=[]): string{
@@ -109,10 +109,18 @@ class add implements Command {
                 $report .= "Inserted $personSlug\n";
             break;
             case 'update':
-//        	    $p->addOccus();         ////////////////////// EN COURS
+                if(isset($BC['extras']['occus'])){
+                    $p->addOccus($BC['extras']['occus']);
+                }
                 $p->update(); // DB - can throw an exception
         	    // Stats::updatePerson($p);        // TODO implement (check if notime has changed from true to false)
         	    // Search::updatePerson($p);       // TODO implement
+                if(isset($BC['opengauquelin']['projects'])){
+        	        foreach($BC['opengauquelin']['projects'] as $projectSlug){
+        	            // Project::addPersonToProject() adds to the project only if the person is not already associated 
+                        Project::addPersonToProject($projectSlug, $p);
+                    }
+                }
                 $report .= "Updated $personSlug\n";
         	break;
         }

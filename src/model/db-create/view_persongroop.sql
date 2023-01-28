@@ -1,7 +1,7 @@
 
 -- View used by postgrest api
 
-create or replace view api_persongroop as
+create or replace view view_persongroop as
 select
     p.id                "person_id",
     p.slug              "person_slug",

@@ -77,19 +77,26 @@ class Project {
         if($res === false || count($res) == 0){
             throw new \Exception("Project '$projectSlug' does not exist");
         }
-        $projectId = $res['id'];
         
+        $projectId = $res['id'];
         $personId = $p->data['id'];
         
-        $stmt = $dblink->prepare('insert into wikiproject_person(
-            id_project,
-            id_person)
-            values(?,?)');
-        $stmt->execute([
-            $projectId,
-            $personId,
-        ]);
-        $stmt->fetch(\PDO::FETCH_ASSOC);
+        // check if person is already associated to the project
+        $query = "select * from wikiproject_person where id_person=$personId and id_project=$projectId";
+        $stmt = $dblink->prepare($query);
+        $stmt->execute([]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if($res === false || count($res) == 0){
+            $stmt = $dblink->prepare('insert into wikiproject_person(
+                id_project,
+                id_person)
+                values(?,?)');
+            $stmt->execute([
+                $projectId,
+                $personId,
+            ]);
+            $stmt->fetch(\PDO::FETCH_ASSOC);
+        }
     }
     
 } // end class

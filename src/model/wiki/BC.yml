@@ -9,107 +9,74 @@
 # 1 - Informations related to current BC.yml file
 #
 header:
-  # History of modifications of the current file
   history:
     -
-      actor: # here, your name or pseudo
-      date: # '2019-12-21 02:29:53+01:00'
-      action: Addition to the Open Gauquelin Database
+      actor: 
+      date: 
+      action: 
       
 #
 # 2 - Optional information related to opengauquelin database integration
 #
 opengauquelin:
- # If this act is part of a specific opengauquelin project
- # See page https://opengauquelin.org/wiki/projects
- projects: [] # [muller-paris-medics]
+ projects:
    
 #
 # 3 - Informations about the act
-# Important for the ability to check that the transcription is correct.
 #
 source:
-  # name, place, c1, c2, c3 concern the civil registry where the original act can be found
   civil-registry:
-    name: # '1811 E_NUM_BRG38'
-    place: # Bourg-la-Reine
-    cy:  # FR
+    name: 
+    place: 
+    cy: 
     c1: 
-    c2: # 92
+    c2: 
     c3: 
-    # web indicates where the act is stored on the web
     web: 
       url: 
-      # Page is an important indication to easily find
-      # the BC on the online civil registry  
-      page: # 5 / 7
+      page:
   
-  # Date and place of registration, when the act was established.
-  # WARNING : this date is generally distinct from the birth date
   document-creation:
     date: 
     place: 
 
-  # Free notes
   notes:
   
-  # Names of the files containing images
-  # Useless if there is only one file named BC.jpg
   images: []
   
 #
 # 4 - Transcription of the act
 #
-# If some fields are useless, you can delete them
 person:
-  # Name commonly used
   name:
-    given: # Jimi
-    family: # Hendrix
-      
-    # Name as written in the birth certificate
-    official:         
-      family: # Hendrix
-      given: # Johnny Allen
-    # Nobiliary particle: de d' di del von...
+    official:
+      given:
+      family: 
     nobl: 
-    # stage or scene name
-    fame:
-      full: # Mistinguett or Stromae
-      family: # Hendrix
-      given: # Jimi
-    # alternative names, like nicknames, or author names
-    alter: []         
-  
-  # in general F or M - or empty if unknown
   sex: 
-  
   birth:
-    date: # '1811-10-25 01:00'
-    # Field notime is used to indicate that the act does not contain time information
-    # Can be true or false
-    # if left empty, considered as false (which means that the time is specified)
+    date: 
     notime:
     place:
-      name: # Bourg-la-Reine
-      # Country ISO 3166 2-letter code
-      cy: # FR
-      # Administrative division level 1 of birth place
-      # Means "province" in Italy, or "state" in the USA.
-      # Corresponds to ADM1 in geonames.org ("first-order administrative division"). 
-      c1: # AL
-      # Administrative division level 2 of birth place
-      # Means "département" in France.
-      # Corresponds to ADM2 in geonames.org ("second-order administrative division")
-      c2: # 92
+      name: 
+      cy: 
+      c1: 
+      c2: 
+      c3: 
       
 #
 # 5 - Supplementary informations concerning the new born person,
 #     but not present in the birth certificate
 #
-# If some fields are useless, you can delete them
 extras:
-  # occupations or professions
+  name:
+    given: 
+    family: 
+    fame:
+      full: 
+      family: 
+      given: 
+    alter: 
+  
   occus:
-    # - mathematician
   

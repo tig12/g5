@@ -1,7 +1,7 @@
 
 -- View used by postgrest api
 
-create or replace view api_issue as
+create or replace view view_issue as
     select
         slug,
         name,

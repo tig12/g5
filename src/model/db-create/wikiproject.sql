@@ -6,6 +6,7 @@ create table wikiproject (
     slug            varchar(255) unique not null,
     name            varchar(255) unique not null,
     description     text,
+    details         text,
     header          jsonb,
     status          varchar(255) not null
 );

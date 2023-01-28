@@ -50,8 +50,9 @@ class dbcreate implements Command {
         }
         
         $views = [
-            'api_persongroop',
-            'api_issue',
+            'view_persongroop',
+            'view_issue',
+            'view_wikiproject_person',
         ];
         foreach($views as $view){
             $sql_create = file_get_contents($dir_sql . DS . $view . '.sql');
