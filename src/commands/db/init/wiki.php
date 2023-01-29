@@ -11,7 +11,8 @@ namespace g5\commands\db\init;
 use tiglib\patterns\Command;
 use g5\model\DB5;
 
-use g5\commands\wiki\project\addall      as projectAddAll;
+use g5\commands\wiki\project\addall     as projectAddAll;
+use g5\commands\wiki\bc\addall          as bcAddAll;
 
 class wiki implements Command {
     
@@ -29,12 +30,11 @@ class wiki implements Command {
         
         $dblink = DB5::getDbLink();
         
-        // insert all wiki projects
+        // insert all wiki projects - must be done before BCs
         $report .= projectAddAll::execute(['small']);
         
         // insert all BCs
-        
-        // insert all fixes
+        $report .= bcAddAll::execute(['small']);
         
         return $report;
     }
