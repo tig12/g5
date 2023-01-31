@@ -19,7 +19,11 @@ header:
 # 2 - Optional information related to opengauquelin database integration
 #
 opengauquelin:
- projects:
+  projects:
+    - 
+  fix-issues:
+    - 
+  old-slug: 
    
 #
 # 3 - Informations about the act
@@ -27,20 +31,22 @@ opengauquelin:
 source:
   civil-registry:
     name: 
-    place: 
-    cy: 
-    c1: 
-    c2: 
-    c3: 
-    web: 
+    place:
+      name: 
+      cy: 
+      c1: 
+      c2: 
+      c3: 
+    web:
       url: 
-      page:
+      page: 
   
   document-creation:
     date: 
     place: 
 
-  notes:
+  notes: |
+    
   
   images: []
   

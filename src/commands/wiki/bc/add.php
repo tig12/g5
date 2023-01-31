@@ -30,7 +30,8 @@ class add implements Command {
     public static function execute($params=[]): string{
         
         if(count($params) != 1){
-            return "INVALID USAGE This commands needs one parameter\n";
+            return "INVALID USAGE This commands needs one parameter: the slug of the person to add\n"
+                . "ex: wiki bc add galois-evariste-1811-10-25\n";
         }
         
         $personSlug = $params[0];
@@ -42,7 +43,7 @@ class add implements Command {
             return "INVALID SLUG: $personSlug - nothing was modified in the database\n";
         }
         if(!is_file($bcFile)){
-            return "Impossible to add wiki information because file '$bcFile' is missing\n";
+            return "ERROR: Impossible to add wiki information because file '$bcFile' is missing\n";
         }
         
         $BC = yaml_parse_file($bcFile);
