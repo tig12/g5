@@ -76,23 +76,23 @@ class Act {
         // transfer in $p->data the informations present in the act
         // act is considered more reliable than other sources, so replace existing data.
 ////////// here, do not do that, leave client code choose what to do
-        $p->data = array_replace_recursive($p->data, $act['person']);
+        $p->data = array_replace_recursive($p->data, $act['transcription']);
         $p->data = array_replace_recursive($p->data, $act['extras']);
         
         $p->data['acts'][$actKey] = $act;
         
         if($newPerson){
             if(
-                isset($act['person']['name']['official']['family'])
-                && !isset($act['person']['name']['family'])
+                isset($act['transcription']['name']['official']['family'])
+                && !isset($act['transcription']['name']['family'])
             ){
-                $p->data['name']['family'] = $act['person']['name']['official']['family'];
+                $p->data['name']['family'] = $act['transcription']['name']['official']['family'];
             }
             if(
-                isset($act['person']['name']['official']['given'])
-                && !isset($act['person']['name']['given'])
+                isset($act['transcription']['name']['official']['given'])
+                && !isset($act['transcription']['name']['given'])
             ){
-                $p->data['name']['given'] = $act['person']['name']['official']['given'];
+                $p->data['name']['given'] = $act['transcription']['name']['official']['given'];
             }
             if($actKey != Act::BIRTH){
                 $p->data['trust'] = TRUST::CHECK;
@@ -106,8 +106,8 @@ class Act {
         $p->addHistory(
             command: "wiki bc add $actSlug",
             sourceSlug: BC::SOURCE_SLUG,
-            newdata: $act['person'],    // because person was updated
-            rawdata: $act['person'],
+            newdata: $act['transcription'],    // because person was updated
+            rawdata: $act['transcription'],
         );
     }
     

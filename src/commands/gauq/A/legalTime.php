@@ -73,22 +73,18 @@ class legalTime implements Command {
             }
             $t->add($interval);
             if(substr($offset, -3) == ':00'){
-                // don't include useless seconds
+                // Eliminate obviously useless seconds in offset
                 $offset = substr($offset, 0, -3);
                 $row2['DATE-C'] = $t->format('Y-m-d H:i');
             }
+            // Eliminate obviously useless seconds in legal date
+            if($t->format('s') == '00' || $t->format('s') == '01'){
+                $row2['DATE-C'] = $t->format('Y-m-d H:i');
+            }
             else{
-                $row2['DATE-C'] = $t->format('Y-m-d H:i:s');
+                $row2['DATE-C'] = self::fixLegalTime($t);
             }
             $row2['TZO'] = $offset;
-            //
-            // TODO add a function fix_legalTime() to fix DATE-C when it include seconds
-            // ex: A1-2 André Georges
-            // DATE-UT = 1889-08-13 12:20:40
-            // DATE-C = 1889-08-13 12:30:04
-            // DATE-C should be converted to 1889-08-13 12:30
-            // Then TZO and DATE-UT converted again
-            //
             $nCorrected++;
             $res .= implode(G5::CSV_SEP, $row2) . "\n";
         }
@@ -98,5 +94,25 @@ class legalTime implements Command {
         $report .= "$datafile : restored $nCorrected / $N dates ($p %) - miss $miss\n";
         return $report;
     }
+    
+    /** 
+        Rounds the legal time.
+        @return     a YYYY-MM-DD HH:MM string expressing the legal time, rounded to the nearest round time.
+    **/
+    private static function fixLegalTime(\DateTime $t){
+        $YMD = $t->format('Y-m-d');
+        $min = $t->format('i');
+        $hour = $t->format('H');
+        $remainder = $min % 10;
+        if(in_array($remainder, [7, 8, 9, 0, 1, 2])){
+            $min = round($min/10)*10;
+        }
+        else{
+            return $t->format('Y-m-d H:i:s'); // do nothing
+        }
+        $t->setTime($hour, $min);
+        return $t->format('Y-m-d H:i');
+    }
+    
     
 } // end class

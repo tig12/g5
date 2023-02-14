@@ -47,13 +47,12 @@ source:
 
   notes: |
     
-  
   images: []
   
 #
 # 4 - Transcription of the act
 #
-person:
+transcription:
   name:
     official:
       given:

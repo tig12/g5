@@ -20,8 +20,9 @@ class G55 {
     // *********************** G55 unique id ***********************
     
     /**
-        Returns a unique Gauquelin 1955 id, like "01-123"
+        Returns a unique Gauquelin 1955 id, like "01-576-physicians"
         Unique id of a record among birth dates published in Gauquelin's 1955 book.
+        Looks like "O1-23" (record nb 23 of group 01-576-physicians)
         See https://tig12.github.io/gauquelin5/g55.html for precise definition.
         @param $groupKey    String like '570SPO', one of the key of G55:GROUPS
         @param $N           Value of field NUM of a record within the group ( = record number, starting from 1).

@@ -134,9 +134,10 @@ class tmp2db implements Command {
                     // days are identical, so current check concerns birth hours
                     if($p->data['birth']['date'] != ''){
                         if($line['DATE'] != substr($p->data['birth']['date'], 0, 16)){
-                            $issue = "Check birth date because CFEPP and g55 birth dates differ"
-                                   . "<br>G55: {$line['DATE']}"
-                                   . "<br>CFEPP: {$p->data['birth']['date']}";
+                            $datafile = LERRCP::getDatafileFromGauquelinId($GQID);
+                            $issue = "Check birth date because LERRCP $datafile and Gauquelin 1955 birth dates differ"
+                                   . "<br>G 1955: {$line['DATE']}"
+                                   . "<br>$datafile: {$p->data['birth']['date']}";
                             $p->addIssue($issue);
                         }
                     }

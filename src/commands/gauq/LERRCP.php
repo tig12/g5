@@ -120,6 +120,16 @@ class LERRCP {
     public static function explodeGauquelinId($gqId){
         return explode('-', $gqId);
     }
+    
+    /**
+        Computes the datafile of an Ga  uquelin unique id.
+        @param  $gqid       Gauquelin unique id ; string like "A3-532"
+        @return             A string identifying a LERRCP datafile, like "A3"
+    **/
+    public static function getDatafileFromGauquelinId($gqid) {
+        $tmp = self::explodeGauquelinId($gqid);
+        return $tmp[0]; // no check
+    }
         
     // *********************** Source management - data files ***********************
     
