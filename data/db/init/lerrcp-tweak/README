@@ -20,7 +20,7 @@ Each element must contain at least a key NUM
 If field NUM is not present, the record is not processed.
 If field NUM is empty, the record is not processed.
 Other keys must use the vocabulary described in
-https://tig12.github.io/gauquelin5/output-format.html
+https://tig12.github.io/g5/output-format.html
 One exception : key "build-notes" (lowercase) is ignored while processing.
 
 WARNING : a limited subset of this vocabulary is implemented.
