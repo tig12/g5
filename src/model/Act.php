@@ -47,6 +47,7 @@ class Act {
         @return     Person passed in parameter or new person (if $p is null).
     **/
     public static function addActToPerson(Person|null $p, string $actKey, $actSlug): void {
+
         if($actKey != Act::BIRTH){
             throw new \Exception("'$actKey' not yet handled");
         }
@@ -75,9 +76,13 @@ class Act {
         
         // transfer in $p->data the informations present in the act
         // act is considered more reliable than other sources, so replace existing data.
-////////// here, do not do that, leave client code choose what to do
+//echo "\noccus = "; print_r($p->data['occus']); echo "\n";
         $p->data = array_replace_recursive($p->data, $act['transcription']);
         $p->data = array_replace_recursive($p->data, $act['extras']);
+//echo "\nextras = <pre>"; print_r($act['extras']); echo "</pre>\n";
+//echo "\noccus = "; print_r($p->data['occus']); echo "\n";
+//echo "\n"; print_r($p->data); echo "\n";
+//exit;
         
         $p->data['acts'][$actKey] = $act;
         

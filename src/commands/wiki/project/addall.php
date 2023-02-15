@@ -40,7 +40,7 @@ class addall implements Command {
                 return $e->getMessage() . "\n";
             }
             if($reportType == 'full'){
-                $report .= "Added project $slug in database - id = $id\n";
+                $report .= "Added in db project id = $id - $slug";
             }
             $N++;
         }

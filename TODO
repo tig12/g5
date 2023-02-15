@@ -11,6 +11,9 @@ Handle duplicates
 5860 | bassot-leon-1841-04-06 | {"lerrcp": "A3-132"}  | 1841-04-06 21:01:29 | Renève
 
 
+php run-g5.php gauq all export sep=true
+PHP Warning:  Undefined array key "lerrcp" in /home/thierry/dev/astrostats/gauquelin5/src/model/Group.php on line 470
+
 
 - see php bug - https://bugs.php.net/bug.php?id=81002
   (to store booleans in postgres)

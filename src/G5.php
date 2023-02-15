@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Constants that can be used by all parts of the program
+    Constants and utilities that can be used by all parts of the program
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-06-07 01:00:27+02:00, Thierry Graff : creation
@@ -28,5 +28,26 @@ class G5{
     const TWEAK_BUILD_NOTES = 'build-notes';
     
     const ROOT_DIR = __DIR__;
+    
+    // ******************************************************
+    /**
+        Command helper which permits to express a set of parameter names and their values.
+        Ex: dozip=true,export=toto
+        Parameters are separated by a comma.
+        Parameter name and parameter value are separated by = sign.
+        @param  $str String to parse, containing the parameters and their values.
+    **/
+    public static function parseOptionalParameters($str) {
+        $res = [];
+        $tmp1 = explode(',', $str);
+        foreach($tmp1 as $tmp2){
+            $tmp3 = explode('=', $tmp2);
+            if(count($tmp3) != 2){
+                throw new \Exception("INVALID PARAMETER STRING: $str");
+            }
+            $res[$tmp3[0]] = $tmp3[1];
+        }
+        return $res;
+    }
     
 }// end class

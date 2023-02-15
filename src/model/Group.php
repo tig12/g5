@@ -369,7 +369,7 @@ class Group {
     
     /** 
         Generates and stores on disk a csv file (which may be zipped) from its members (of type Person).
-        Does not modify the group (in particular, fields 'dowload', 'n', 'members' are untouched).
+        Does not modify the group (in particular, fields 'download', 'n', 'members' are untouched).
             First line contains field names.
             Other lines contain data.
         @param $csvFile
@@ -409,15 +409,14 @@ class Group {
                         If one of these functions returns false on a group member,
                         export() skips the record.
         @param $dozip   Boolean indicating if the output should be zipped
+        @param  $SEP    Separator used in the csv file.
         @return An array with 3 elements :
                 - A report.
                 - The name of the file where the export is stored, relative to data/output (see config.yml).
                 - The number of elements in the group
         
     **/
-    public function exportCsv($csvFile, $csvFields, $map=[], $fmap=[], $sort=false, $filters=[], $dozip=false) {
-        
-        $SEP = Config::$data['export']['csv-separator'];
+    public function exportCsv($csvFile, $csvFields, $map=[], $fmap=[], $sort=false, $filters=[], $dozip=false, $SEP=';') {
         
         $csv = implode($SEP, $csvFields) . "\n";
         
@@ -451,6 +450,9 @@ class Group {
                         throw new \Exception($msg);
                     }
 /* 
+// bug for escalante-edouard-1934-12-03
+// marked as A1-1899 in Ertel's file
+// but not present in cura files
 if(
     (is_null($data) && !isset($p->data[$pk]))
     || 
