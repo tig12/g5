@@ -35,6 +35,7 @@ class G5{
         Ex: dozip=true,export=toto
         Parameters are separated by a comma.
         Parameter name and parameter value are separated by = sign.
+        NOTE: this generic mechanism is used only for exports, see g5\commands\db\export\Export
         @param  $str String to parse, containing the parameters and their values.
     **/
     public static function parseOptionalParameters($str) {

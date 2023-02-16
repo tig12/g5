@@ -35,10 +35,11 @@ class export implements Command {
     /** 
         Called by : php run-g5.php gauq <datafile> export [nozip]
         If called without third parameter, the output is compressed (using zip)
+        For optional parameters, see comment of class commands/db/export/Export
         @param $params array containing 2 or 3 strings :
                        - the datafile to process (like "A1").
                        - The name of this command (useless here).
-                       - Optional export parameters - see comment of class commands/db/export/Export
+                       - Optional export parameters "zip" or "sep"
         @return Report
     **/
     public static function execute($params=[]): string{

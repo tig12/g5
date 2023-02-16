@@ -102,7 +102,8 @@ use g5\commands\db\init\search;
 use g5\commands\gauq\all\export                 as curaExport;
 use g5\commands\muller\m1writers\export         as M1WritersExport;
 use g5\commands\muller\m1writers\export100      as M1Writers100export;
-use g5\commands\muller\m3women\export           as M3Womenexport;
+use g5\commands\muller\m2men\export             as M2MenExport;
+use g5\commands\muller\m3women\export           as M3WomenExport;
 use g5\commands\muller\m5medics\export          as M5MedicsExport;
 use g5\commands\csicop\irving\export            as csiIrvingExport;
 use g5\commands\db\export\alloccus              as allOccusExport;
@@ -307,16 +308,17 @@ class all implements Command {
             echo "***    Export groups    ***\n";
             echo "***************************\n";
             foreach($filesGauqA as $datafile){
-                echo curaExport::execute([$datafile, 'export']);
+                echo curaExport::execute([$datafile, 'export', 'sep=true']);
             }
-            echo curaExport::execute(['D6', 'export']);
-            echo curaExport::execute(['D10', 'export']);
-            echo curaExport::execute(['E1', 'export']);
-            echo curaExport::execute(['E3', 'export']);
-            echo M5MedicsExport::execute([]);
-            echo M1WritersExport::execute([]);
-            echo M1Writers100export::execute([]);
-            echo M3Womenexport::execute([]);
+            echo curaExport::execute(['D6', 'export', 'sep=true']);
+            echo curaExport::execute(['D10', 'export', 'sep=true']);
+            echo curaExport::execute(['E1', 'export', 'sep=true']);
+            echo curaExport::execute(['E3', 'export', 'sep=true']);
+            echo M1WritersExport::execute(['sep=true']);
+            echo M1Writers100export::execute(['sep=true']);
+            echo M2MenExport::execute(['sep=true']);
+            echo M3WomenExport::execute(['sep=true']);
+            echo M5MedicsExport::execute(['sep=true']);
             echo csiIrvingExport::execute([]);
             //
             echo allOccusExport::execute([]);
