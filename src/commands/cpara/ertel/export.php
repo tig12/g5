@@ -1,39 +1,40 @@
 <?php
 /********************************************************************************
-    Generates data/output/history/1979-csicop/csicop-irving-408.csv
+    Generates data/output/history/.csv
     By default, the generated file is compressed (using zip).
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
-    @history    2021-08-06 08:52:37+02:00, Thierry Graff : Creation
+    @history    2023-02-16 20:22:43+01:00, Thierry Graff : creation
 ********************************************************************************/
-namespace g5\commands\csicop\irving;
+namespace g5\commands\cpara\ertel;
 
+use g5\G5;
 use g5\app\Config;
 use g5\model\DB5;
 use g5\model\Group;
-use tiglib\patterns\Command;
-use g5\commands\csicop\CSICOP;
+use g5\commands\cpara\CPara;
 use g5\commands\gauq\LERRCP;
 use g5\commands\db\export\Export as ExportService;
+use tiglib\patterns\Command;
 
 class export implements Command {
-    
+                                                                                              
     /**
         Directory where the generated files are stored
         Relative to directory specified in config.yml by dirs / output
     **/
-    const OUTPUT_DIR = 'history' . DS . '1979-csicop';
+    const OUTPUT_DIR = 'history' . DS . '1976-cpara';
     
-    const OUTPUT_FILE = 'csicop-irving-408.csv';
+    const OUTPUT_FILE = 'cpara-535-athletes.csv';
     
-    /**  Trick to access to $sourceSlug within $sort function **/
+    /**  Trick to access to $sourceSlug inside $sort function **/
     private static $sourceSlug;
     
     /** 
-        Called by : php run-g5.php csicop irving export [optional parameters]
+        Called by : php run-g5.php cfepp final3 export [optional parameters]
         If called without parameter, the output is compressed (using zip)
         For optional parameters, see comment of class commands/db/export/Export
-        @param $params array containing 0 or 1 element :
+        @param $params array containing 0 or 1 element : or 
                        - Optional export parameters "zip" or "sep"
         @return Report
     **/
@@ -43,28 +44,29 @@ class export implements Command {
         }
         $dozip = true;
         $generateSep = false;
+        $whichGroup='1120';
         if(count($params) == 1){
             [$dozip, $generateSep] = ExportService::computeOptionalParameters($params[0]);
         }
         
         $report = '';
         
-        $g = Group::createFromSlug(CSICOP::GROUP_SLUG); // DB
+        $g = Group::createFromSlug(CPara::GROUP_SLUG); // DB
         
-        self::$sourceSlug = Irving::LIST_SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
+        self::$sourceSlug = CPara::SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
 
         $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . self::OUTPUT_FILE;
         
         $csvFields = [
-            'CSID',
+            'CPID',
             'GQID',
-            'BATCH',
             'FNAME',
             'GNAME',
             'DATE',
-            'TZO',
+            'DATE-UT',
             'PLACE',
             'C2',
+            'C3',
             'CY',
             'LG',
             'LAT',
@@ -73,13 +75,14 @@ class export implements Command {
         ];
         
         $map = [
-            'ids-in-sources.' . Irving::LIST_SOURCE_SLUG => 'CSID',
+            'partial-ids.' . CPara::SOURCE_SLUG => 'CPID',
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
             'birth.date' => 'DATE',
-            'birth.tzo' => 'TZO',
+            'birth.date-ut' => 'DATE-UT',
             'birth.place.name' => 'PLACE',
             'birth.place.c2' => 'C2',
+            'birth.place.c3' => 'C3',
             'birth.place.cy' => 'CY',
             'birth.place.lg' => 'LG',
             'birth.place.lat' => 'LAT',
@@ -93,19 +96,11 @@ class export implements Command {
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);
             },
-            'BATCH' => function($p){
-                foreach($p->data['history'] as $history){
-                    if(isset($history['raw']['BATCH'])){
-                        return $history['raw']['BATCH'];
-                    }
-                }
-                return '';
-            },
         ];
         
-        // sorts by Müller id
+        // sorts by CPara id
         $sort = function($a, $b){
-             return $a->data['ids-in-sources'][self::$sourceSlug] <=> $b->data['ids-in-sources'][self::$sourceSlug];
+             return $a->data['partial-ids'][self::$sourceSlug] <=> $b->data['partial-ids'][self::$sourceSlug];
         };
         
         $filters = [];
@@ -141,9 +136,8 @@ class export implements Command {
         $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . str_replace('.csv', '-sep.csv', self::OUTPUT_FILE);
         
         $csvFields = [
-            'CSID',
+            'CPID',
             'GQID',
-            'BATCH',
             'FNAME',
             'GNAME',
             'Y',
@@ -151,9 +145,14 @@ class export implements Command {
             'D',
             'H',
             'MIN',
-            'TZO',
+            'Y-UT',
+            'MON-UT',
+            'D-UT',
+            'H-UT',
+            'MIN-UT',
             'PLACE',
             'C2',
+            'C3',
             'CY',
             'LG',
             'LAT',
@@ -162,12 +161,12 @@ class export implements Command {
         ];
         
         $map = [
-            'ids-in-sources.' . Irving::LIST_SOURCE_SLUG => 'CSID',
+            'partial-ids.' . CPara::SOURCE_SLUG => 'CPID',
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
-            'birth.tzo' => 'TZO',
             'birth.place.name' => 'PLACE',
             'birth.place.c2' => 'C2',
+            'birth.place.c3' => 'C3',
             'birth.place.cy' => 'CY',
             'birth.place.lg' => 'LG',
             'birth.place.lat' => 'LAT',
@@ -180,14 +179,6 @@ class export implements Command {
             },
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);
-            },
-            'BATCH' => function($p){
-                foreach($p->data['history'] as $history){
-                    if(isset($history['raw']['BATCH'])){
-                        return $history['raw']['BATCH'];
-                    }
-                }
-                return '';
             },
             'Y' => function($p){
                 return substr($p->data['birth']['date'], 0, 4);
@@ -204,11 +195,26 @@ class export implements Command {
             'MIN' => function($p){
                 return substr($p->data['birth']['date'], 14, 2);
             },
+            'Y-UT' => function($p){
+                return substr($p->data['birth']['date-ut'], 0, 4);
+            },
+            'MON-UT' => function($p){
+                return substr($p->data['birth']['date-ut'], 5, 2);
+            },
+            'D-UT' => function($p){
+                return substr($p->data['birth']['date-ut'], 8, 2);
+            },
+            'H-UT' => function($p){
+                return substr($p->data['birth']['date-ut'], 11, 2);
+            },
+            'MIN-UT' => function($p){
+                return substr($p->data['birth']['date-ut'], 14, 2);
+            },
         ];
         
-        // sorts by Müller id
+        // sorts by CFEPP id
         $sort = function($a, $b){
-             return $a->data['ids-in-sources'][self::$sourceSlug] <=> $b->data['ids-in-sources'][self::$sourceSlug];
+             return $a->data['partial-ids'][self::$sourceSlug] <=> $b->data['partial-ids'][self::$sourceSlug];
         };
         
         $filters = [];
@@ -228,4 +234,4 @@ class export implements Command {
         return $report;
     }
     
-} // end class    
+} // end class

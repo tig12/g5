@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Generates data/output/history/1994-muller5-medics/muller-1083-medics.csv
+    Generates files in data/output/history/1996-cfepp
     By default, the generated file is compressed (using zip).
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
@@ -8,11 +8,15 @@
 ********************************************************************************/
 namespace g5\commands\cfepp\final3;
 
+use g5\G5;
 use g5\app\Config;
 use g5\model\DB5;
 use g5\model\Group;
 use g5\model\Names_fr;
 use g5\commands\cfepp\CFEPP;
+use g5\commands\gauq\LERRCP;
+use g5\commands\ertel\Ertel;
+use g5\commands\db\export\Export as ExportService;
 use tiglib\patterns\Command;
 
 class export implements Command {
@@ -23,38 +27,57 @@ class export implements Command {
     **/
     const OUTPUT_DIR = 'history' . DS . '1996-cfepp';
     
-    const OUTPUT_FILE = 'cfepp-1120-athletes.csv';
+    const OUTPUT_FILE_1120 = 'cfepp-1120-athletes.csv';
+    const OUTPUT_FILE_1066 = 'cfepp-1066-athletes.csv';
     
     /**  Trick to access to $sourceSlug inside $sort function **/
     private static $sourceSlug;
     
     /** 
-        Called by : php run-g5.php cfepp final3 export [nozip]
+        Called by : php run-g5.php cfepp final3 export [optional parameters]
         If called without parameter, the output is compressed (using zip)
-        @param $params array containing 0 or 1 element :
-                       - An optional string "nozip"
+        For optional parameters
+            - see comment of class commands/db/export/Export
+            - another parameter is possible with this command : "group" ; can be "1120" or "1066" ; dafault "1120"
+            Example of optional parameters: "group=1066" ; "zip=false,sep=true,group=1120"
+        @param $params array containing 0 or 1 element : or 
+                       - Optional export parameters "zip" or "sep"
         @return Report
     **/
     public static function execute($params=[]): string{
         if(count($params) > 1){
             return "WRONG USAGE : useless parameter : '{$params[1]}'\n";
         }
-        if(count($params) == 1 && $params[0] != 'nozip'){
-            return "WRONG USAGE : invalid parameter : '{$params[0]}' - possible value : 'nozip'\n";
-        }
         $dozip = true;
+        $generateSep = false;
+        $whichGroup='1120';
         if(count($params) == 1){
-            $dozip = false;
+            [$dozip, $generateSep] = ExportService::computeOptionalParameters($params[0]);
+            // handle $whichGroup
+            $optional = G5::parseOptionalParameters($params[0]);
+            if(isset($optional['group'])){
+                if($optional['group'] == '1120' || $optional['group'] == '1066'){
+                    $whichGroup = $optional['group'];
+                }
+                else{
+                    return "INVALID OPTIONAL PARAMETER group={$optional['group']} - Can '1120' or '1066'\n";
+                }
+            }
         }
         
         $report = '';
-die('UNFINISHED');
         
-        $g = Group::createFromSlug(CFEPP::GROUP_SLUG); // DB
+        if($whichGroup == '1120'){
+            $g = Group::createFromSlug(CFEPP::GROUP_1120_SLUG); // DB
+            $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . self::OUTPUT_FILE_1120;
+        }
+        else {
+            $g = Group::createFromSlug(CFEPP::GROUP_1066_SLUG); // DB
+            $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . self::OUTPUT_FILE_1066;
+        }
         
         self::$sourceSlug = Final3::SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
 
-        $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . self::OUTPUT_FILE;
         
         $csvFields = [
             'CFID',
@@ -73,14 +96,14 @@ die('UNFINISHED');
             'GEOID',
             'OCCU',
             // specific to this group, coming from original raw file
-            'SRC',
-            'LV',
-            'TR',
-            'M12'
+            // 'SRC',
+            // 'LV',
+            // 'TR',
+            // 'M12'
         ];
         
         $map = [
-            'partial-ids.' . Muller::SOURCE_SLUG => 'CFID',
+            'partial-ids.' . CFEPP::SOURCE_SLUG => 'CFID',
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
             'birth.date' => 'DATE',
@@ -128,7 +151,10 @@ die('UNFINISHED');
                 return Names_fr::computeFamilyName($p->data['name']['family'], $p->data['name']['nobl']);
             },
             'GQID' => function($p){
-                return $p->data['ids-in-sources'][LERRCP::SOURCE_SLUG] ?? '';
+                return $p->data['partial-ids'][LERRCP::SOURCE_SLUG] ?? '';
+            },
+            'ERID' => function($p){
+                return $p->data['partial-ids'][Ertel::SOURCE_SLUG] ?? '';
             },
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);
@@ -154,6 +180,127 @@ die('UNFINISHED');
         );
         $g->data['download'] = str_replace(Config::$data['dirs']['output'] . DS, '', $exportFile);
         $g->update(updateMembers:false);
+        $report .= $exportReport;
+        
+        if($generateSep){
+            $report .= self::generateSep($g, $dozip, $outfile);
+        }
+        
+        return $report;
+    }
+    
+    /**
+        Generates a second export of the same group, with dates expressed in separate columns
+        @param  $g is an object, passed by reference
+    **/
+    private static function generateSep($g, $dozip, $outfile) {
+        $report = '';
+        
+        $outfile = str_replace('.csv', '-sep.csv', $outfile);
+        
+        $csvFields = [
+            'CFID',
+            'ERID',
+            'GQID',
+            'FNAME',
+            'GNAME',
+            'Y',
+            'MON',
+            'D',
+            'H',
+            'MIN',
+            'Y-UT',
+            'MON-UT',
+            'D-UT',
+            'H-UT',
+            'MIN-UT',
+            'PLACE',
+            'C2',
+            'C3',
+            'CY',
+            'LG',
+            'LAT',
+            'GEOID',
+            'OCCU',
+        ];
+        
+        $map = [
+            'partial-ids.' . CFEPP::SOURCE_SLUG => 'CFID',
+            'name.family' => 'FNAME',
+            'name.given' => 'GNAME',
+            'birth.place.name' => 'PLACE',
+            'birth.place.c2' => 'C2',
+            'birth.place.c3' => 'C3',
+            'birth.place.cy' => 'CY',
+            'birth.place.lg' => 'LG',
+            'birth.place.lat' => 'LAT',
+            'birth.place.geoid' => 'GEOID',
+        ];
+        
+        $fmap = [
+            'FNAME' => function($p){
+                // ok because all members are french
+                return Names_fr::computeFamilyName($p->data['name']['family'], $p->data['name']['nobl']);
+            },
+            'GQID' => function($p){
+                return $p->data['partial-ids'][LERRCP::SOURCE_SLUG] ?? '';
+            },
+            'ERID' => function($p){
+                return $p->data['partial-ids'][Ertel::SOURCE_SLUG] ?? '';
+            },
+            'OCCU' => function($p){
+                return implode('+', $p->data['occus']);
+            },
+            'Y' => function($p){
+                return substr($p->data['birth']['date'], 0, 4);
+            },
+            'MON' => function($p){
+                return substr($p->data['birth']['date'], 5, 2);
+            },
+            'D' => function($p){
+                return substr($p->data['birth']['date'], 8, 2);
+            },
+            'H' => function($p){
+                return substr($p->data['birth']['date'], 11, 2);
+            },
+            'MIN' => function($p){
+                return substr($p->data['birth']['date'], 14, 2);
+            },
+            'Y-UT' => function($p){
+                return substr($p->data['birth']['date-ut'], 0, 4);
+            },
+            'MON-UT' => function($p){
+                return substr($p->data['birth']['date-ut'], 5, 2);
+            },
+            'D-UT' => function($p){
+                return substr($p->data['birth']['date-ut'], 8, 2);
+            },
+            'H-UT' => function($p){
+                return substr($p->data['birth']['date-ut'], 11, 2);
+            },
+            'MIN-UT' => function($p){
+                return substr($p->data['birth']['date-ut'], 14, 2);
+            },
+        ];
+        
+        // sorts by CFEPP id
+        $sort = function($a, $b){
+             return $a->data['ids-in-sources'][self::$sourceSlug] <=> $b->data['ids-in-sources'][self::$sourceSlug];
+        };
+        
+        $filters = [];
+        
+        [$exportReport, $exportFile, $N] = 
+        $g->exportCsv(
+            csvFile:    $outfile,
+            csvFields:  $csvFields,
+            map:        $map,
+            fmap:       $fmap,
+            sort:       $sort,
+            filters:    $filters,
+            dozip:      $dozip,
+        );
+        
         $report .= $exportReport;
         return $report;
     }

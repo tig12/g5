@@ -4,7 +4,7 @@
     
     Comité Para data are included in g5 using Ertel file.
     This test has no raw2tmp or tmp2db step.
-    The only specific thing is the creation of the group
+    The only specific thing is the creation of the group.
     
     @pre This command must be executed after tmp2db step of Ertel Sport
     

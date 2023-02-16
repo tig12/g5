@@ -104,6 +104,7 @@ use g5\commands\muller\m1writers\export         as M1WritersExport;
 use g5\commands\muller\m1writers\export100      as M1Writers100export;
 use g5\commands\muller\m2men\export             as M2MenExport;
 use g5\commands\muller\m3women\export           as M3WomenExport;
+use g5\commands\cfepp\final3\export             as CFEPPExport;
 use g5\commands\muller\m5medics\export          as M5MedicsExport;
 use g5\commands\csicop\irving\export            as csiIrvingExport;
 use g5\commands\db\export\alloccus              as allOccusExport;
@@ -319,7 +320,9 @@ class all implements Command {
             echo M2MenExport::execute(['sep=true']);
             echo M3WomenExport::execute(['sep=true']);
             echo M5MedicsExport::execute(['sep=true']);
-            echo csiIrvingExport::execute([]);
+            echo csiIrvingExport::execute(['sep=true']);
+            echo CFEPPExport::execute(['sep=true;group=1120']);
+            echo CFEPPExport::execute(['sep=true;group=1066']);
             //
             echo allOccusExport::execute([]);
             echo allPersonsExport::execute([]);
