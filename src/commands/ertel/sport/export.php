@@ -1,19 +1,22 @@
 <?php
 /********************************************************************************
-    Generates data/output/history/1976-cpara/cpara-535-athletes.csv
+    Generates data/output/history/.csv
     By default, the generated file is compressed (using zip).
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2023-02-16 20:22:43+01:00, Thierry Graff : creation
 ********************************************************************************/
-namespace g5\commands\cpara\ertel;
+namespace g5\commands\ertel\sport;
 
 use g5\G5;
 use g5\app\Config;
 use g5\model\DB5;
 use g5\model\Group;
-use g5\commands\cpara\CPara;
+use g5\commands\ertel\Ertel;
 use g5\commands\gauq\LERRCP;
+use g5\commands\cpara\CPara;
+use g5\commands\csicop\CSICOP;
+use g5\commands\cfepp\CFEPP;
 use g5\commands\db\export\Export as ExportService;
 use tiglib\patterns\Command;
 
@@ -23,9 +26,9 @@ class export implements Command {
         Directory where the generated files are stored
         Relative to directory specified in config.yml by dirs / output
     **/
-    const OUTPUT_DIR = 'history' . DS . '1976-cpara';
+    const OUTPUT_DIR = 'history' . DS . '1988-ertel-athletes';
     
-    const OUTPUT_FILE = 'cpara-535-athletes.csv';
+    const OUTPUT_FILE = 'ertel-4384-athletes.csv';
     
     /**  Trick to access to $sourceSlug inside $sort function **/
     private static $sourceSlug;
@@ -51,15 +54,19 @@ class export implements Command {
         
         $report = '';
         
-        $g = Group::createFromSlug(CPara::GROUP_SLUG); // DB
+        $g = Group::createFromSlug(ErtelSport::GROUP_SLUG); // DB
         
-        self::$sourceSlug = CPara::SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
+        self::$sourceSlug = Ertel::SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
 
         $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . self::OUTPUT_FILE;
         
         $csvFields = [
-            'CPID',
+            'ERID',
             'GQID',
+            'CPID',
+            'CSID',
+            'CFID',
+            'EM',
             'FNAME',
             'GNAME',
             'DATE',
@@ -75,7 +82,7 @@ class export implements Command {
         ];
         
         $map = [
-            'partial-ids.' . CPara::SOURCE_SLUG => 'CPID',
+            'partial-ids.' . Ertel::SOURCE_SLUG => 'ERID',
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
             'birth.date' => 'DATE',
@@ -93,12 +100,29 @@ class export implements Command {
             'GQID' => function($p){
                 return $p->data['partial-ids'][LERRCP::SOURCE_SLUG] ?? '';
             },
+            'CPID' => function($p){
+                return $p->data['partial-ids'][CPara::SOURCE_SLUG] ?? '';
+            },
+            'CSID' => function($p){
+                return $p->data['partial-ids'][CSICOP::SOURCE_SLUG] ?? '';
+            },
+            'CFID' => function($p){
+                return $p->data['partial-ids'][CFEPP::SOURCE_SLUG] ?? '';
+            },
+            'EM' => function($p){ // eminence
+                foreach($p->data['history'] as $history){
+                    if(isset($history['raw']['ZITRANG'])){
+                        return $history['raw']['ZITRANG'];
+                    }
+                }
+                return ''; // should not happen
+            },
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);
             },
         ];
         
-        // sorts by CPara id
+        // sorts by Ertel id
         $sort = function($a, $b){
              return $a->data['partial-ids'][self::$sourceSlug] <=> $b->data['partial-ids'][self::$sourceSlug];
         };
@@ -136,8 +160,12 @@ class export implements Command {
         $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . str_replace('.csv', '-sep.csv', self::OUTPUT_FILE);
         
         $csvFields = [
-            'CPID',
+            'ERID',
             'GQID',
+            'CPID',
+            'CSID',
+            'CFID',
+            'EM',
             'FNAME',
             'GNAME',
             'Y',
@@ -161,7 +189,7 @@ class export implements Command {
         ];
         
         $map = [
-            'partial-ids.' . CPara::SOURCE_SLUG => 'CPID',
+            'partial-ids.' . Ertel::SOURCE_SLUG => 'ERID',
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
             'birth.place.name' => 'PLACE',
@@ -176,6 +204,23 @@ class export implements Command {
         $fmap = [
             'GQID' => function($p){
                 return $p->data['partial-ids'][LERRCP::SOURCE_SLUG] ?? '';
+            },
+            'CPID' => function($p){
+                return $p->data['partial-ids'][CPara::SOURCE_SLUG] ?? '';
+            },
+            'CSID' => function($p){
+                return $p->data['partial-ids'][CSICOP::SOURCE_SLUG] ?? '';
+            },
+            'CFID' => function($p){
+                return $p->data['partial-ids'][CFEPP::SOURCE_SLUG] ?? '';
+            },
+            'EM' => function($p){ // eminence
+                foreach($p->data['history'] as $history){
+                    if(isset($history['raw']['ZITRANG'])){
+                        return $history['raw']['ZITRANG'];
+                    }
+                }
+                return ''; // should not happen
             },
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);

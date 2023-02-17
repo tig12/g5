@@ -323,6 +323,7 @@ class all implements Command {
             echo csiIrvingExport::execute(['sep=true']);
             echo CFEPPExport::execute(['sep=true;group=1120']);
             echo CFEPPExport::execute(['sep=true;group=1066']);
+            echo ErtelExport::execute(['sep=true']);
             //
             echo allOccusExport::execute([]);
             echo allPersonsExport::execute([]);

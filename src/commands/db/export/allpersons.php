@@ -73,7 +73,7 @@ class allpersons implements Command {
         $g = Group::createFromSQL($sql);
         
         $csvFields = [
-            'OGDBID',
+            'OGID',
             'OCCU',
             'GQID',
             'MUID',
@@ -93,7 +93,7 @@ class allpersons implements Command {
         ];
         
         $map = [
-            'slug' => 'OGDBID',
+            'slug' => 'OGID',
             'birth.date' => 'DATE',
             'birth.date-ut' => 'DATE-UT',
             'birth.tzo' => 'TZO',

@@ -183,7 +183,7 @@ class tmp2db implements Command {
                 }
                 $p->addOccus([$line['SPORT']]);
                 $p->addIdInSource($source->data['slug'], $line['CSID']);
-                $p->addPartialId($csicopSource->data['slug'], $line['CSID']);
+                $p->addPartialId($csicopSource->data['slug'], CSICOP::csicopId($line['CSID']));
                 $p->updateFields($new);
                 $p->computeSlug();
                 // repeat fields to include in $history
