@@ -174,7 +174,6 @@ class gqid implements Command {
         foreach(G55::loadTmpFile($groupKey) as $row){
             $day = substr($row['DATE'], 0, 10);
             $slug = slugify::compute($row['FNAME'] . ' ' . $row['GNAME'] . ' ' . $day);
-//echo "{$row['NUM']} $slug\n";
             $row['SLUG'] = $slug; // info not present in tmp file
             if(!isset($res[$day])){
                 $res[$day] = [];

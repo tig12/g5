@@ -214,14 +214,8 @@ class all implements Command {
             echo CFEPPRaw2tmp::execute([]);
             echo CFEPPIds::execute([]);
             
-            echo g55Gqid::execute(['g55', 'gqid', 'cache']);
-            foreach($g55Groups as $groupKey){
-                echo g55Raw2tmp::execute(['g55', 'raw2tmp', $groupKey]);
-                echo g55Gqid::execute(['g55', 'gqid', 'update', $groupKey]);
-                if($groupKey == '09-349-scientists'){
-                    echo g55Special::execute(['g55', 'special', 'complete09']);
-                }
-            }
+            // note g55 raw2tmp is not done here because the cache needs the database
+            // = done just before g55 tmp2db
         }
         
         //
@@ -282,6 +276,16 @@ class all implements Command {
             
             echo CParaGroup::execute([]);
             
+            // g55 done here because it needs db to compute cache
+            echo g55Gqid::execute(['g55', 'gqid', 'cache']);
+            foreach($g55Groups as $groupKey){
+                echo g55Raw2tmp::execute(['g55', 'raw2tmp', $groupKey]);
+                echo g55Gqid::execute(['g55', 'gqid', 'update', $groupKey]);
+                if($groupKey == '09-349-scientists'){
+                    echo g55Special::execute(['g55', 'special', 'complete09']);
+                }
+            }
+            //
             foreach($g55Groups as $groupKey){
                 echo g55Tmp2db::execute(['g55', 'tmp2db', $groupKey]);
             }
@@ -326,8 +330,9 @@ class all implements Command {
             echo ErtelExport::execute(['sep=true']);
             //
             echo allOccusExport::execute([]);
-            echo allPersonsExport::execute([]);
-            echo allPersonsExport::execute(['time']);
+            echo allPersonsExport::execute(['sep=true']);
+            echo allPersonsExport::execute(['sep=true;what=time']);
+            //echo allPersonsExport::execute(['sep=true;what=notime']);
             echo pgdumpExport::execute([]);
         }
         

@@ -311,6 +311,7 @@ class export implements Command {
             sort:       $sort,
             filters:    $filters,
             dozip:      $dozip,
+            SEP:        ',',
         );
         
         $report .= $exportReport;

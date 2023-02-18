@@ -227,6 +227,7 @@ class export implements Command {
         
         [$exportReport, $exportFile, $N] = 
         $g->exportCsv(
+            SEP:        ',',
             csvFile:    $outfile,
             csvFields:  $csvFields,
             map:        $map,

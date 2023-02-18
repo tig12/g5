@@ -37,11 +37,11 @@ class export implements Command {
         Called by : php run-g5.php cfepp final3 export [optional parameters]
         If called without parameter, the output is compressed (using zip)
         For optional parameters
-            - see comment of class commands/db/export/Export
+            - "zip" and "sep": see comment of class commands/db/export/Export
             - another parameter is possible with this command : "group" ; can be "1120" or "1066" ; dafault "1120"
             Example of optional parameters: "group=1066" ; "zip=false,sep=true,group=1120"
-        @param $params array containing 0 or 1 element : or 
-                       - Optional export parameters "zip" or "sep"
+        @param $params array containing 0 or 1 element:
+                       - Optional export parameters "zip" or "sep" or "group"
         @return Report
     **/
     public static function execute($params=[]): string{
@@ -299,6 +299,7 @@ class export implements Command {
             sort:       $sort,
             filters:    $filters,
             dozip:      $dozip,
+            SEP:        ',',
         );
         
         $report .= $exportReport;

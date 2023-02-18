@@ -34,7 +34,7 @@ class export implements Command {
     private static $sourceSlug;
     
     /** 
-        Called by : php run-g5.php cfepp final3 export [optional parameters]
+        Called by : php run-g5.php ertel sport export [optional parameters]
         If called without parameter, the output is compressed (using zip)
         For optional parameters, see comment of class commands/db/export/Export
         @param $params array containing 0 or 1 element : or 
@@ -273,6 +273,7 @@ class export implements Command {
             sort:       $sort,
             filters:    $filters,
             dozip:      $dozip,
+            SEP:        ',',
         );
         
         $report .= $exportReport;

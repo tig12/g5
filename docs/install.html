@@ -192,34 +192,33 @@ postgres=# alter role g5_pg_username with createdb;
 postgres=# alter user g5_pg_username with encrypted password 'g5_pg_password';
 postgres=# alter user g5_pg_username set search_path to g5_pg_schema;
 postgres=# create database g5_pg_dbname owner g5_pg_username;
+</pre>
+
+If <code>schema</code> defined in <code>config.yml</code> is different from <code>public</code>:
+<pre>
 postgres=# \c g5_pg_dbname
 g5_pg_dbname=# create schema g5_pg_schema authorization g5_pg_username;
+g5_pg_dbname=# alter user g5_pg_username set search_path to g5_pg_schema;
 </pre>
+
 These supplementary steps permit to use g5 database from openg program:
 <pre>
-g5_pg_dbname=# create role web_anon nologin;
-g5_pg_dbname=# grant usage on schema g5_pg_schema to web_anon;
+g5_pg_dbname=# create role postgrest_anonymous_user nologin;
+g5_pg_dbname=# grant usage on schema g5_pg_schema to postgrest_anonymous_user;
 g5_pg_dbname=# create role authenticator noinherit login password 'postgrest_password';
-g5_pg_dbname=# grant web_anon to authenticator;
+g5_pg_dbname=# grant postgrest_anonymous_user to authenticator;
 \q
 
 exit    # exit postgres user
 </pre>
 
-<ul class="spaced">
+<ul>
     <li>
-        <b>Note 1</b>: if the value of <code>g5_pg_schema</code> is <code>public</code> (postgresql default schema), then the instructions:
-        <pre>alter user g5_pg_username set search_path to g5_pg_schema;</pre>
-        and
-        <pre>create schema g5_pg_schema authorization g5_pg_username;</pre>
-        are useless.
-    </li>
-    <li>
-        <b>Note 2</b>: <code>postgrest_password</code> is not present in g5 <code>config.yml</code>, but is present in file <code>postgrest.conf</code> of openg.
+        <b>Note</b>: <code>postgrest_anonymous_user</code> (<i>web_anon</i> in postgrest doc) and <code>postgrest_password</code> is not present in g5 <code>config.yml</code>, but is present in file <code>postgrest.conf</code> of openg.
     </li>
 </ul>
 
-To connect to the database:
+<br>To connect to the database:
 <pre>psql -d g5_pg_dbname -U g5_pg_username -W -h localhost</pre>
 
 <!-- ********************************************************************************* -->
