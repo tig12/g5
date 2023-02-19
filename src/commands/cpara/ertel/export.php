@@ -44,7 +44,6 @@ class export implements Command {
         }
         $dozip = true;
         $generateSep = false;
-        $whichGroup='1120';
         if(count($params) == 1){
             [$dozip, $generateSep] = ExportService::computeOptionalParameters($params[0]);
         }

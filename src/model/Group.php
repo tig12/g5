@@ -102,6 +102,10 @@ class Group {
     public static function createFromSQL(string $sql): Group {
         $g = Group::createEmpty();
         $dblink = DB5::getDbLink();
+        // ATTR_EMULATE_PREPARES was added for commands\db\export\skeptics
+        // select * from person where partial_ids::JSONB ? 'cpara' ...
+        // Without ATTR_EMULATE_PREPARES, the jsonb ? operator is understood as a prepared variable
+        $dblink->setAttribute(\PDO::ATTR_EMULATE_PREPARES, true);
         $stmt = $dblink->prepare($sql);
         $stmt->execute([]);
         $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
