@@ -108,6 +108,7 @@ use g5\commands\cfepp\final3\export             as CFEPPExport;
 use g5\commands\muller\m5medics\export          as M5MedicsExport;
 use g5\commands\csicop\irving\export            as csiIrvingExport;
 use g5\commands\db\export\skeptics              as skepticsExport;
+use g5\commands\ertel\sport\export              as ertelExport;
 use g5\commands\db\export\alloccus              as allOccusExport;
 use g5\commands\db\export\allpersons            as allPersonsExport;
 use g5\commands\db\export\pgdump                as pgdumpExport;
