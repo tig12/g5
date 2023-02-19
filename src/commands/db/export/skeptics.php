@@ -26,7 +26,7 @@ class skeptics implements Command {
     /** 
         Paths of the generated files, relative to Config::$data['dirs']['output']
     **/
-    const OUT_FILE_ALL = 'ogdb-skeptics.csv';
+    const OUT_FILE = 'history' . DS . 'ogdb-skeptics.csv';
     
     /** 
         Called by : php run-g5.php db export skeptics [optional parameters]
@@ -53,7 +53,7 @@ class skeptics implements Command {
         
         $report = '';
         
-        $outfile = Config::$data['dirs']['output'] . DS . self::OUT_FILE_ALL;
+        $outfile = Config::$data['dirs']['output'] . DS . self::OUT_FILE;
         $sql = "select * from person where partial_ids::JSONB ? 'cpara' or partial_ids::JSONB ? 'csicop' or partial_ids::JSONB ? 'cfepp' order by slug";
         
         // Create a group, not stored in db, to use exportCSV

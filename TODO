@@ -1,7 +1,10 @@
 
-
-
 - Harmonize voc Group::createFromSlug() and Person:getFromSlug()
+
+
+Fix addOccu to avoid duplicates:
+beltoise-jean-pierre-1937-04-26	E3-95		ES-332			CF-144	3	motor-sports-competitor+motor-sports-competitor
+
 
 Handle duplicates
 2 d-aragona-ludovico (A5-1640) 1876-05-23 02:10:04 CERNUSCO SUL NA

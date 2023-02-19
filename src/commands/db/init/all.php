@@ -107,6 +107,7 @@ use g5\commands\muller\m3women\export           as M3WomenExport;
 use g5\commands\cfepp\final3\export             as CFEPPExport;
 use g5\commands\muller\m5medics\export          as M5MedicsExport;
 use g5\commands\csicop\irving\export            as csiIrvingExport;
+use g5\commands\db\export\skeptics              as skepticsExport;
 use g5\commands\db\export\alloccus              as allOccusExport;
 use g5\commands\db\export\allpersons            as allPersonsExport;
 use g5\commands\db\export\pgdump                as pgdumpExport;
@@ -328,7 +329,7 @@ class all implements Command {
             echo CFEPPExport::execute(['sep=true;group=1120']);
             echo CFEPPExport::execute(['sep=true;group=1066']);
             echo ErtelExport::execute(['sep=true']);
-            //
+            echo skepticsExport::execute(['sep=true']);
             echo allOccusExport::execute([]);
             echo allPersonsExport::execute(['sep=true']);
             echo allPersonsExport::execute(['sep=true;what=time']);
