@@ -326,13 +326,13 @@ class all implements Command {
             echo M3WomenExport::execute(['sep=true']);
             echo M5MedicsExport::execute(['sep=true']);
             echo csiIrvingExport::execute(['sep=true']);
-            echo CFEPPExport::execute(['sep=true;group=1120']);
-            echo CFEPPExport::execute(['sep=true;group=1066']);
+            echo CFEPPExport::execute(['sep=true,group=1120']);
+            echo CFEPPExport::execute(['sep=true,group=1066']);
             echo ErtelExport::execute(['sep=true']);
             echo skepticsExport::execute(['sep=true']);
             echo allOccusExport::execute([]);
             echo allPersonsExport::execute(['sep=true']);
-            echo allPersonsExport::execute(['sep=true;what=time']);
+            echo allPersonsExport::execute(['sep=true,what=time']);
             //echo allPersonsExport::execute(['sep=true;what=notime']);
             echo pgdumpExport::execute([]);
         }
