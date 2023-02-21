@@ -183,9 +183,17 @@ class skeptics implements Command {
             'OCCU',
             'FNAME',
             'GNAME',
-            'DATE',
+            'Y',
+            'MON',
+            'D',
+            'H',
+            'MIN',
             'TZO',
-            'DATE-UT',
+            'Y-UT',
+            'MON-UT',
+            'D-UT',
+            'H-UT',
+            'MIN-UT',
             'PLACE',
             'C1',
             'C2',
@@ -198,8 +206,6 @@ class skeptics implements Command {
         
         $map = [
             'slug' => 'OGID',
-            'birth.date' => 'DATE',
-            'birth.date-ut' => 'DATE-UT',
             'birth.tzo' => 'TZO',
             'birth.place.name' => 'PLACE',
             'birth.place.c1' => 'C1',
@@ -246,6 +252,36 @@ class skeptics implements Command {
                     }
                 }
                 return ''; // should not happen
+            },
+            'Y' => function($p){
+                return substr($p->data['birth']['date'], 0, 4);
+            },
+            'MON' => function($p){
+                return substr($p->data['birth']['date'], 5, 2);
+            },
+            'D' => function($p){
+                return substr($p->data['birth']['date'], 8, 2);
+            },
+            'H' => function($p){
+                return substr($p->data['birth']['date'], 11, 2);
+            },
+            'MIN' => function($p){
+                return substr($p->data['birth']['date'], 14, 2);
+            },
+            'Y-UT' => function($p){
+                return substr($p->data['birth']['date-ut'], 0, 4);
+            },
+            'MON-UT' => function($p){
+                return substr($p->data['birth']['date-ut'], 5, 2);
+            },
+            'D-UT' => function($p){
+                return substr($p->data['birth']['date-ut'], 8, 2);
+            },
+            'H-UT' => function($p){
+                return substr($p->data['birth']['date-ut'], 11, 2);
+            },
+            'MIN-UT' => function($p){
+                return substr($p->data['birth']['date-ut'], 14, 2);
             },
         ];
         
