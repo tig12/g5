@@ -1,4 +1,5 @@
 
 This is the first version of g55 treatment. This was an attempt to generate the 1955 groups from cura.free.fr.data.
 This approach worked but was quite complex, so it was abandoned, replaced by a new version, based on scans and OCR of the original book.
+
 Some results of this first work are still used in current version of the code, in particular the constant CORRECTIONS_1955 of class commands/gauq/A/A.php.

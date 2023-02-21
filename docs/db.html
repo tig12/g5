@@ -227,9 +227,14 @@ How many persons have missing birth time in Ertel group ?
 select count(*) from person where partial_ids->>'ertel'::text != 'null' and length(birth->>'date') &lt;= 10 and birth->>'date-ut' is null;
 </pre>
 
-How many persons are in the part of one skeptic group ?
+How many persons are in of one the skeptic groups ?
 <pre>
 select count(*) from person where partial_ids::JSONB ? 'cpara' or partial_ids::JSONB ? 'csicop' or partial_ids::JSONB ? 'cfepp';
+</pre>
+
+How many persons are in of one the skeptic groups but not in Ertel file ?
+<pre>
+select count(*) from person where (partial_ids::JSONB ? 'cpara' or partial_ids::JSONB ? 'csicop' or partial_ids::JSONB ? 'cfepp') and not partial_ids::JSONB ? 'ertel';
 </pre>
 
 </article>

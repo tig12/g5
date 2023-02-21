@@ -453,7 +453,7 @@ class Group {
                              . " while importing group '{$this->data['slug']}'";
                         throw new \Exception($msg);
                     }
-/* 
+
 // bug for escalante-edouard-1934-12-03
 // marked as A1-1899 in Ertel's file
 // but not present in cura files
@@ -465,12 +465,12 @@ if(
     if($pk == 'lerrcp'){
         echo "\np = "; print_r($p); echo "\n";
         echo "\ndata = "; print_r($data); echo "\n";
-        exit;
+        die("\n<br>die here " . __FILE__ . ' - line ' . __LINE__ . "\n");
     }
     //echo "pk = $pk\n";
     //throw new \Exception($csvFile);
 }
-*/
+
                     $data = is_null($data) ? $p->data[$pk] : $data[$pk];
                 }
                 $new[$csvKey] = $data;

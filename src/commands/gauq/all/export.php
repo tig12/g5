@@ -174,7 +174,6 @@ class export implements Command {
         
         $map = [
             'ids-in-sources.' . self::$sourceSlug => 'NUM',
-            'partial-ids.' . LERRCP::SOURCE_SLUG => 'GQID',
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
             'birth.tzo' => 'TZO',
@@ -188,6 +187,9 @@ class export implements Command {
         ];
         
         $fmap = [
+            'GQID' => function($p){
+                return $p->data['partial-ids'][LERRCP::SOURCE_SLUG] ?? '';
+            },
             'MUID' => function($p){
                 return Muller::ids_in_sources2mullerId($p->data['ids-in-sources']);
             },

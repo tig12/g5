@@ -54,7 +54,12 @@ class skeptics implements Command {
         $report = '';
         
         $outfile = Config::$data['dirs']['output'] . DS . self::OUT_FILE;
-        $sql = "select * from person where partial_ids::JSONB ? 'cpara' or partial_ids::JSONB ? 'csicop' or partial_ids::JSONB ? 'cfepp' order by slug";
+        //$sql = "select * from person where partial_ids::JSONB ? 'cpara' or partial_ids::JSONB ? 'csicop' or partial_ids::JSONB ? 'cfepp' order by slug";
+        $sql = "select * from person where
+                    (partial_ids::JSONB ? 'cpara' and partial_ids->>'cpara' not like 'CP-*%')
+                or  partial_ids::JSONB ? 'csicop'
+                or  partial_ids::JSONB ? 'cfepp'
+            order by slug";
         
         // Create a group, not stored in db, to use exportCSV
         $g = Group::createFromSQL($sql);                                       
