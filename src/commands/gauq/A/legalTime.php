@@ -84,6 +84,11 @@ class legalTime implements Command {
             else{
                 $row2['DATE-C'] = self::fixLegalTime($t);
             }
+            // Eliminate obviously useless seconds in DATE-UT
+// TODO This is a quick fix, should be done in step raw2tmp
+            if(substr($row2['DATE-UT'], -3) == ':00'){
+                $row2['DATE-UT'] = substr($row2['DATE-UT'], 0, -3);
+            }
             $row2['TZO'] = $offset;
             $nCorrected++;
             $res .= implode(G5::CSV_SEP, $row2) . "\n";

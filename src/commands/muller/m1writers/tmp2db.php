@@ -100,6 +100,7 @@ class tmp2db implements Command {
                 $new['sex'] = $line['SEX'];
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
+                $new['birth']['date-ut'] = $line['DATE-UT'];
                 $new['birth']['tzo'] = $line['TZO'];
                 $new['birth']['note'] = $line['LMT'];
                 $new['birth']['place']['name'] = $line['PLACE'];

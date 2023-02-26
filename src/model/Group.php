@@ -457,6 +457,7 @@ class Group {
 // bug for escalante-edouard-1934-12-03
 // marked as A1-1899 in Ertel's file
 // but not present in cura files
+/* 
 if(
     (is_null($data) && !isset($p->data[$pk]))
     || 
@@ -470,6 +471,7 @@ if(
     //echo "pk = $pk\n";
     //throw new \Exception($csvFile);
 }
+*/
 
                     $data = is_null($data) ? $p->data[$pk] : $data[$pk];
                 }

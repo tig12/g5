@@ -11,9 +11,10 @@ namespace g5\commands\muller\m1writers;
 
 use g5\G5;
 use g5\app\Config;
-use tiglib\patterns\Command;
 use g5\commands\Newalch;
 use tiglib\arrays\sortByKey;
+use tiglib\time\sub;
+use tiglib\patterns\Command;
 
 class raw2tmp implements Command {
     
@@ -72,7 +73,6 @@ class raw2tmp implements Command {
             if($fields[4] != '' && $fields[5] != ''){
                 $new['DATE'] .= ' '.$fields[4].':'.$fields[5];
             }
-            
             //
             // keep only records with complete birth time (at least YYYY-MM-DD HH:MM)
             // These are handled by M1writers100
@@ -99,6 +99,11 @@ class raw2tmp implements Command {
             $new['LG'] = self::lglat(-(int)$fields[9]); // minus sign, correction from raw here
             $new['LAT'] = self::lglat($fields[8]);
             $new['TZO'] = M1writers::compute_offset($fields[6], $new['LG']);
+            // Eliminate obviously useless seconds in TZO
+            if(strlen($new['TZO']) == 9 && substr($new['TZO'], -3) == ':00'){
+                $new['TZO'] = substr($new['TZO'], 0, -3);
+            }
+            $new['DATE-UT'] = sub::execute($new['DATE'], $new['TZO']);
             if($fields[6] == 'LMT'){
                 $new['LMT'] = 'LMT';
             }

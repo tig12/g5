@@ -4,6 +4,9 @@
 Fix addOccu to avoid duplicates:
 beltoise-jean-pierre-1937-04-26	E3-95		ES-332			CF-144	3	motor-sports-competitor+motor-sports-competitor
 
+Some TZO are missing
+ex: beltoise-jean-pierre-1937-04-26
+
 baumer-gertrud-1873-09-12 => ü is uppercased
 
 Handle duplicates
@@ -38,8 +41,6 @@ PHP Warning:  Undefined array key "lerrcp" in /home/thierry/var/www/opengauqueli
     - computation of name using Person->fullName() and givenName() (see commands/db/export/allpersons).
     - idem for function to sort by name
     - factorize some functions passed in $fmap to Group::export() ; put them in class commands/db/Export
-
-- in src/model/db-create, replace sex by gender + adapt the code
 
 - Doc, install : document additions of views for postgrest api.
 

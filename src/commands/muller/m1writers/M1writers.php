@@ -68,6 +68,7 @@ class M1writers {
         'DATE',
         'TZO',
         'LMT',
+        'DATE-UT',
         'PLACE',
         'CY',
         'C2',

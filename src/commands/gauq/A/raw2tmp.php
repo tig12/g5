@@ -323,6 +323,10 @@ class raw2tmp implements Command {
                 $interval = new \DateInterval('PT1H'); // 1 hour
                 $dt->sub($interval);
                 $new['DATE-UT'] = $dt->format('Y-m-d H:i:s');
+                if(substr($new['DATE-UT'], -3) == ':00'){
+                    // Eliminate obviously useless seconds in DATE-UT
+                    $new['DATE-UT'] = substr($new['DATE-UT'], 0, -3);
+                }
             }
             // place
             [$new['PLACE'], $new['C3']] = self::computePlace($cur['CITY']);
