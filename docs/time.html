@@ -110,8 +110,10 @@ ISO 8601 also permits to express both time and timezone offset in a single strin
 
 <!-- ********************************************************************************* -->
 <h2 id="expressing-timezone-offset">Expressing timezone offset</h2>
+Using the vocabulary of CSV files generated from the database,
+<div class="bold big2 margin05">DATE-UT + TZO = DATE</div>
 
-A surprising feature of historical data is that <b>current usage does not respect the ISO 8601 definition of timezone offset</b>.
+A surprising feature of historical data is that <b>historical notation does not respect the ISO 8601 definition of timezone offset</b>.
 <br><b>The opposite value is always indicated</b>.
 <br>This can be observed in Arno Müller files, in Cura web site and in both books FG and THM.
 
@@ -122,7 +124,7 @@ A surprising feature of historical data is that <b>current usage does not respec
 
 <table class="wikitable margin">
     <tr>
-        <th>Meaning for observed usage</th>
+        <th>Meaning for historical usage</th>
     </tr>
     <tr>
         <td>
@@ -155,7 +157,6 @@ Example : the first record of file D10 : Aaron Harold, born 1921-06-21 07:00
 <br>
 <br>The results are equivalent. 
 <br>This is not a blocking problem as it's finally just a matter of convention.
-
 
 <!-- ********************************************************************************* -->
 <h2 id="timezone-offset-computation">Timezone offset computation</h2>

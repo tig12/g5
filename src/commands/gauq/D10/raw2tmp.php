@@ -9,9 +9,10 @@
 namespace g5\commands\gauq\D10;
 
 use g5\G5;
-use tiglib\patterns\Command;
 use g5\commands\gauq\LERRCP;
 use g5\commands\gauq\Cura5;
+use tiglib\time\sub;
+use tiglib\patterns\Command;
 
 class raw2tmp implements Command {
     
@@ -160,6 +161,7 @@ class raw2tmp implements Command {
             $h =  str_pad($tmp[0], 2, '0', STR_PAD_LEFT);
             $m =  str_pad ($tmp[1], 2, '0');
             $new['TZO'] = '-' . $h . ':' . $m;
+            $new['DATE-UT'] = sub::execute($new['DATE'], $new['TZO']);
             // place
             $tmp = explode(',', $cur[10]);
             $new['PLACE'] = trim($tmp[0]);

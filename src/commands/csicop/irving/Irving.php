@@ -62,6 +62,7 @@ class Irving {
         'GNAME',
         'DATE',
         'TZO',
+        'DATE-UT',
         'LG',
         'LAT',
         'C2',

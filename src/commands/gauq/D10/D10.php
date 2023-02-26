@@ -33,6 +33,7 @@ class D10{
         'GNAME',
         'DATE',
         'TZO',
+        'DATE-UT',
         'PLACE',
         'CY',
         'C2',

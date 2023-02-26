@@ -10,6 +10,7 @@ namespace g5\commands\csicop\irving;
 
 use g5\G5;
 use g5\app\Config;
+use tiglib\time\sub;
 use tiglib\patterns\Command;
 
 class raw2tmp implements Command {
@@ -63,6 +64,7 @@ class raw2tmp implements Command {
             $min = str_pad($fields[7] , 2, '0', STR_PAD_LEFT);
             $new['DATE'] = "$day $h:$min";
             $new['TZO'] = self::tz($fields[9]);
+            $new['DATE-UT'] = sub::execute($new['DATE'], $new['TZO']);
             $new['LG'] = -self::lgLat($fields[11], $fields[12]);
             $new['LAT'] = self::lgLat($fields[13], $fields[14]);
             $new['C2'] = $fields[10];
