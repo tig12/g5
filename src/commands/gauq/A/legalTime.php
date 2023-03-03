@@ -71,7 +71,7 @@ class legalTime implements Command {
             if($offsetSeconds < 0){
                 $interval->invert = 1;
             }
-            $t->add($interval);
+            $t->add($interval); // $t now represents DATE-UT
             if(substr($offset, -3) == ':00'){
                 // Eliminate obviously useless seconds in offset
                 $offset = substr($offset, 0, -3);

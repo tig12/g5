@@ -22,6 +22,7 @@ use g5\model\Geonames;
 use g5\commands\gauq\LERRCP;
 use tiglib\arrays\sortByKey;
 use tiglib\strings\slugify;
+use tiglib\time\sub;
 use tiglib\timezone\offset_fr;
 use tiglib\geonames\database\matchFromSlug;
 
@@ -129,6 +130,9 @@ class raw2tmp implements Command {
             }
             else{
                 self::$n_missing_timezone++;
+            }
+            if($new['TZO'] != ''){
+                $new['DATE-UT'] = sub::execute($new['DATE'], $new['TZO']);
             }
             // fill res
             $new['PLACE'] = $place_name;

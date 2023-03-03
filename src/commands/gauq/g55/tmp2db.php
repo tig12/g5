@@ -127,7 +127,7 @@ class tmp2db implements Command {
                     // update a person already in db
                     $p = Person::createFromPartialId(LERRCP::SOURCE_SLUG, $GQID); // DB (read)
                     $p->addOccus([ $line['OCCU'] ]);
-                    $p->addIdInSource(G55::SOURCE_SLUG, (string)$NUM);
+                    $p->addIdInSource(G55::SOURCE_SLUG, $G55ID);
                     $p->addPartialId(G55::SOURCE_SLUG, $G55ID);
                     // add an issue if G55 and LERRCP dates differ
                     // note: as matching is done by date (see command gqid check),

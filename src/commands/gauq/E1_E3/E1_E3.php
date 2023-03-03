@@ -34,6 +34,7 @@ class E1_E3{
         'GNAME',
         'DATE',
         'TZO',
+        'DATE-UT',
         'PLACE',
         'CY',
         'C2',

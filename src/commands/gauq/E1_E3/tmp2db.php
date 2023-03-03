@@ -7,7 +7,6 @@
 ********************************************************************************/
 namespace g5\commands\gauq\E1_E3;
 
-use tiglib\patterns\Command;
 use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
@@ -15,6 +14,7 @@ use g5\model\Person;
 use g5\model\Occupation;
 use g5\commands\gauq\LERRCP;
 use g5\commands\gauq\Cura5;
+use tiglib\patterns\Command;
 
 class tmp2db implements Command {
                                                                                           
@@ -116,6 +116,7 @@ class tmp2db implements Command {
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['tzo'] = $line['TZO'];
+                $new['birth']['date-ut'] = $line['DATE-UT'];
                 $new['birth']['place']['name'] = $line['PLACE'];
                 $new['birth']['place']['c2'] = $line['C2'];
                 $new['birth']['place']['c3'] = $line['C3'];
@@ -149,6 +150,7 @@ class tmp2db implements Command {
                 // lerrcp id takes the value of the first volume where it appears.
                 // lerrcp id already affected in a previous file for this record.
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
+// TODO - check DATE and add an issue if different
                 $new = [];
                 $new['ids-in-sources'] = [
                     $source->data['slug'] => $line['NUM'],
