@@ -7,7 +7,7 @@
 ********************************************************************************/
 namespace g5\commands\wiki\project;
 
-use g5\model\wiki\Project;
+use g5\model\wiki\Wikiproject;
 use tiglib\patterns\Command;
 
 class add implements Command {
@@ -25,7 +25,7 @@ class add implements Command {
         }
         $slug = $params[0];
         try{
-            Project::addOne($slug);
+            Wikiproject::insertFromSlug($slug);
         }
         catch(\Exception $e){
             return $e->getMessage() . "\n";

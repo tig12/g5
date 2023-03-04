@@ -138,7 +138,7 @@ class tmp2db implements Command {
                             $issue = "Check birth date because LERRCP $datafile and Gauquelin 1955 birth dates differ"
                                    . "<br>G 1955: {$line['DATE']}"
                                    . "<br>$datafile: {$p->data['birth']['date']}";
-                            $p->addIssue($issue);
+                            $p->addIssue_old($issue);
                         }
                     }
                     $new = [

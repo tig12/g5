@@ -15,7 +15,8 @@ use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
 use g5\model\Occupation;
-use g5\model\Issue;
+use g5\model\wiki\Issue;
+use g5\model\wiki\Wikiproject;
 use g5\commands\gauq\Cura5;
 use g5\commands\gauq\LERRCP;
 use tiglib\timezone\offset_fr;
@@ -70,7 +71,7 @@ class tmp2db implements Command {
             $report .= "Inserted source " . $curaSource->data['slug'] . "\n";
         }
         
-        // source corresponding LERRCP booklet of current A file
+        // source corresponding LERRCP booklet of current A file - ex: 'a1-booklet'
         $bookletSource = Source::createFromSlug(LERRCP::datafile2bookletSourceSlug($datafile)); // DB
         if(is_null($bookletSource)){
             $bookletSource = LERRCP::getBookletSourceOfDatafile($datafile);
@@ -78,7 +79,7 @@ class tmp2db implements Command {
             $report .= "Inserted source " . $bookletSource->data['slug'] . "\n";
         }
         
-        // source corresponding to current A file
+        // source corresponding to current A file - ex: 'a1'
         $source = Source::createFromSlug(LERRCP::datafile2sourceSlug($datafile)); // DB
         if(is_null($source)){
             $source = LERRCP::getSourceOfDatafile($datafile);
@@ -96,6 +97,9 @@ class tmp2db implements Command {
         else{
             $g->deleteMembers(); // DB - only deletes asssociations between group and members
         }
+        
+        // Wiki project associated to the issues raised by this import
+        $wp = Wikiproject::createFromSlug('fix-gauquelin');
         
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
@@ -123,7 +127,7 @@ class tmp2db implements Command {
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
                 $p->addPartialId($lerrcpSource->data['slug'], $gqId);
                 $new = [];
-                $dateOrTimeIssue = '';
+                $issue = null;
                 $new['trust'] = Cura5::TRUST_LEVEL;
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
@@ -134,8 +138,13 @@ class tmp2db implements Command {
                     $new['birth']['date'] = $line['DATE-C'];
                     $new['birth']['tzo'] = $line['TZO'];
                 }
-                if($line['NOTES-DATE'] != ''){
-                    $dateOrTimeIssue = self::buildTimeRestorationIssue($line['CY'], $line['NOTES-DATE']);
+                if($line['NOTES-DATE'] != ''){ // NOTES-DATE filled in tmp file by legalTime.php
+                    $issue = new Issue(
+                        $p,
+                        Issue::TYPE_TZO,
+//                        Issue::TYPE_TZO . '-' . $source->data['slug'], // ex: 'tzo-a1'
+                        self::timezoneIssueMessage($line['CY'], $line['NOTES-DATE'])
+                    );
                 }
                 $new['birth']['place']['name'] = $line['PLACE'];
                 $new['birth']['place']['c2'] = $line['C2'];
@@ -150,9 +159,6 @@ class tmp2db implements Command {
                 $p->updateFields($new);
                 $p->addOccus($newOccus);
                 $p->computeSlug();
-                if($dateOrTimeIssue != ''){
-                    $p->addIssue($dateOrTimeIssue);
-                }
                 // repeat fields to include in $history
                 $new['ids-in-sources'] = [
                     $source->data['slug'] => $line['NUM'],
@@ -161,9 +167,6 @@ class tmp2db implements Command {
                     $lerrcpSource->data['slug'] => $gqId,
                 ];
                 $new['occus'] = $newOccus;
-                if($dateOrTimeIssue != ''){
-                    $new['issues'] = [$dateOrTimeIssue];
-                }
                 $p->addHistory(
                     command: "gauq $datafile tmp2db",
                     sourceSlug: $source->data['slug'],
@@ -171,6 +174,12 @@ class tmp2db implements Command {
                     rawdata: $lineRaw
                 );
                 $p->data['id'] = $p->insert(); // DB
+                // insert issue after person because person id is needed
+                if($issue != null){
+                    $issue->insert();
+                    $issue->linkToWikiproject($wp);
+                }
+                
                 $nInsert++;
             }
             else{
@@ -225,12 +234,13 @@ class tmp2db implements Command {
         @param  $country
         @param  $case       See ofsset_* classes
     **/
-    public static function buildTimeRestorationIssue(string $country, int $case): string {
+    public static function timezoneIssueMessage(string $country, int $case): string {
         $issue = '';
         switch($country){
             case 'FR': 
                 switch(offset_fr::MESSAGES[$case]){
                 	case offset_fr::MSG_1871_1918_LORRAINE: 
+                	case offset_fr::CASE_1871_1918_ALSACE:
                 	case offset_fr::MSG_WW2:
                 	case offset_fr::MSG_WW2_END:
                         $issue = offset_fr::MESSAGES[$case];

@@ -179,7 +179,7 @@ class tmp2db implements Command {
                     $issue1 = "Check birth date because Müller and Gauquelin birth days differ\n"
                            . "<br>$gauqDay for Gauquelin $gauqId\n"
                            . "<br>$mulDay for Müller $mullerId\n";
-                    $p->addIssue($issue1);
+                    $p->addIssue_old($issue1);
                     if($reportType == 'full'){
                         $datesReport .= "\nCura $gauqId\t $gauqDay {$p->data['name']['family']} - {$p->data['name']['given']}\n";
                         $datesReport .= "Müller NR {$line['NR']}\t $mulDay {$line['FNAME']} - {$line['GNAME']}\n";
@@ -193,7 +193,7 @@ class tmp2db implements Command {
                         $issue2 = "Check birth date because Müller and Gauquelin birth hours differ"
                                . "\n<br>$gauqHour for Gauquelin $gauqId"
                                . "\n<br>$mulHour for Müller $mullerId\n";
-                        $p->addIssue($issue2);
+                        $p->addIssue_old($issue2);
                     }
                 }
                 // update fields that are more precise in muller1083
@@ -211,7 +211,7 @@ class tmp2db implements Command {
                 //
                 if($line['PLACE'] == 'Paris'){
                     $issue3 = 'Birth date needs to be checked because Arno Müller coulndn\'t verify births in Paris';
-                    $p->addIssue($issue3);
+                    $p->addIssue_old($issue3);
                 }
                 //
                 $p->addOccus($newOccus);

@@ -442,7 +442,7 @@ class Person {
         Adds one single issue.
         @param  $issue  Content of the issue
     **/
-    public function addIssue(string $issue) {
+    public function addIssue_old(string $issue) {
         $this->data['issues'][] = $issue;
     }
     

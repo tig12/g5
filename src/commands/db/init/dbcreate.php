@@ -37,6 +37,9 @@ class dbcreate implements Command {
             'wikiproject',
             'wikiproject_person',
             'wikirecent',
+            'issue',
+            'issue_person',
+            'issue_wikiproject',
         ];
         foreach($tables as $table){
             $sql_create = file_get_contents($dir_sql . DS . $table . '.sql');

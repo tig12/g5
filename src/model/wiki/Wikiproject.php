@@ -10,10 +10,13 @@ use g5\app\Config;
 use g5\model\DB5;
 use g5\model\Person;
 
-class Project {
+class Wikiproject {
     
     const STATUS_ACTIVE = 'active';
     const STATUS_ARCHIVED = 'archived';
+    
+    /** Array holding the instance variables of the wiki project **/
+    public $data = [];
     
     /**
         @return Path to the directory containing the yaml files defining the projects.
@@ -23,12 +26,31 @@ class Project {
     }
     
     /**
+        Creates an object of type Wikiproject from storage, using its slug,
+        or null if the wiki project doesn't exist.
+    **/
+    public static function createFromSlug($slug): ?Wikiproject {
+        $wp = new Wikiproject();
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare('select * from wikiproject where slug=?');
+        $stmt->execute([$slug]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if($res === false || count($res) == 0){
+            return null;
+        }
+        $wp->data = array_replace_recursive($wp->data, $res);
+        $wp->data['header'] = json_decode($res['header'], true);
+        return $wp;
+    }
+    
+    /**
         Adds one wiki project in database.
+        The slug is used to find the definition file in data/wiki/project (= self::rootDir())
         @param  $slug The slug of the project to add ; ex: french-math
         @return The id in database of the inserted project
         @throws Exception if the yaml file defining the project is not present in self::rootDir().
     **/
-    public static function addOne(string $slug): int {
+    public static function insertFromSlug(string $slug): int {
         $yamlfile = self::rootDir() . DS . $slug . '.yml';
         if(!is_file($yamlfile)){
             throw new \Exception("WIKI PROJECT DEFINITION FILE IS MISSING: $yamlfile");

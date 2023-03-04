@@ -7,7 +7,7 @@
 ********************************************************************************/
 namespace g5\commands\wiki\project;
 
-use g5\model\wiki\Project;
+use g5\model\wiki\Wikiproject;
 use tiglib\patterns\Command;
 
 class addall implements Command {
@@ -27,14 +27,14 @@ class addall implements Command {
         $reportType = $params[0];
         $report =  "--- wiki project addall $reportType ---\n";
         
-        $files = glob(Project::rootDir() . DS . '*.yml');
+        $files = glob(Wikiproject::rootDir() . DS . '*.yml');
         $N = 0;
         foreach($files as $file){
             // project filename must be called from project slug
             $basename = basename($file);
             $slug = str_replace('.yml', '', $basename);
             try{
-                $id = Project::addOne($slug);
+                $id = Wikiproject::insertFromSlug($slug);
             }
             catch(\Exception $e){
                 return $e->getMessage() . "\n";

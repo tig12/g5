@@ -10,7 +10,7 @@ namespace g5\commands\wiki\bc;
 
 use g5\commands\wiki\Wiki;
 use g5\model\wiki\BC;
-use g5\model\wiki\Project;
+use g5\model\wiki\Wikiproject;
 use g5\model\wiki\Recent;
 use g5\model\Act;
 use g5\model\Person;
@@ -84,7 +84,7 @@ class add implements Command {
         	    //
                 if(isset($BC['opengauquelin']['projects'])){
         	        foreach($BC['opengauquelin']['projects'] as $projectSlug){
-                        Project::addPersonToProject($projectSlug, $p);
+                        Wikiproject::addPersonToProject($projectSlug, $p);
                     }
                 }
                 //
@@ -118,8 +118,8 @@ class add implements Command {
         	    // Search::updatePerson($p);       // TODO implement
                 if(isset($BC['opengauquelin']['projects'])){
         	        foreach($BC['opengauquelin']['projects'] as $projectSlug){
-        	            // Project::addPersonToProject() adds to the project only if the person is not already associated 
-                        Project::addPersonToProject($projectSlug, $p);
+        	            // Wikiproject::addPersonToProject() adds to the project only if the person is not already associated 
+                        Wikiproject::addPersonToProject($projectSlug, $p);
                     }
                 }
                 $report .= "Updated $personSlug\n";

@@ -10,7 +10,8 @@
     ACTION: update
   ids-in-sources:
     a1: '513'
-  # ids-partial useless as already stored by tmp2db
+  partial-ids:
+    lerrcp: A1-513
   occus:
     - cyclist
     - motor-sports-competitor
@@ -36,8 +37,7 @@
       - a1
   ids-in-sources:
     a1: '1899'
-    ertel-sport: '1548'
-  ids-partial:
+  partial-ids:
     lerrcp: A1-1899
     ertel: ES-1548
   name:

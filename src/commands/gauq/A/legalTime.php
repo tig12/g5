@@ -56,7 +56,8 @@ class legalTime implements Command {
             [$offset, $err, $case] = offset_fr::compute($row1['DATE-UT'], $row1['LG'], $row1['C2'], 'HH:MM:SS');
             if($err != ''){
                 // no restoration
-                // $case (error code) is stored in $row2['NOTES-DATE'] in tmp file, and will be used by tmp2db
+                // $case (= error code) is stored in $row2['NOTES-DATE'] in tmp file,
+                // and will be used by tmp2db to build an issue
                 $row2['NOTES-DATE'] = $case;
                 $res .= implode(G5::CSV_SEP, $row2) . "\n";
                 continue;

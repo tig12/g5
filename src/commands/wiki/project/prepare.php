@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Copies src/model/wiki/project.yml to data/wiki/project
+    Copies src/model/wiki/Wikiproject.yml to data/wiki/project
     and renames the destination file from the slug of the project to prepare.
 
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
@@ -9,7 +9,7 @@
 namespace g5\commands\wiki\project;
 
 use g5\G5;
-use g5\model\wiki\Project;
+use g5\model\wiki\Wikiproject;
 use tiglib\patterns\Command;
 
 class prepare implements Command {
@@ -29,10 +29,10 @@ class prepare implements Command {
         
         $report =  "--- wiki project prepare $slug ---\n";
                 
-        $destFile = Project::rootDir() . DS . $slug . '.yml';
+        $destFile = Wikiproject::rootDir() . DS . $slug . '.yml';
         // if $destFile already exists, don't replace it
         if(!is_file($destFile)){
-            $sourceFile = implode(DS, [G5::ROOT_DIR, 'model', 'wiki', 'project.yml']);
+            $sourceFile = implode(DS, [G5::ROOT_DIR, 'model', 'wiki', 'Wikiproject.yml']);
             copy($sourceFile, $destFile);
             $report .= "Created file $destFile\n";
         }

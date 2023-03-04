@@ -92,7 +92,8 @@ use g5\commands\cpara\ertel\group               as CParaGroup;
 use g5\commands\gauq\g55\tmp2db                 as g55Tmp2db;
 
 // wiki
-use g5\commands\db\init\wiki;
+use g5\commands\wiki\project\addall             as wikiAddAllProjects;
+use g5\commands\wiki\bc\addall                  as wikiAddAllBCs;
 
 // finalize
 use g5\commands\db\init\stats;
@@ -242,9 +243,14 @@ class all implements Command {
             echo dbFillSource::execute([G5::SOURCE_DEFINITION_FILE]);
             echo occus1::execute();
             
+            // Done here to build associations between issues and wiki projects.
+            wikiAddAllProjects::execute(['small']);
+            
             foreach($filesGauqA as $datafile){
                 echo Atmp2db::execute([$datafile, 'tmp2db', 'small']);
+break;
             }
+exit;
             echo dbInitTweaks::execute(['A1.yml']);
             echo A6occu::execute(['A6','A6occu']);
             
@@ -299,7 +305,7 @@ class all implements Command {
             echo "***************************\n";
             echo "***    Add wiki data    ***\n";
             echo "***************************\n";
-            echo wiki::execute([]);
+            echo wikiAddAllBCs::execute([]);
         }
         
         if($param == 'finalize' || $param == 'all'){
