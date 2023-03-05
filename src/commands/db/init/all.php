@@ -252,10 +252,8 @@ class all implements Command {
             }
             echo dbInitTweaks::execute(['A1.yml']);
             echo A6occu::execute(['A6','A6occu']);
-*/
             
             echo D6tmp2db::execute(['D6', 'tmp2db', 'small']);
-exit;
             echo dbInitTweaks::execute(['D6.yml']);
             
             echo D10tmp2db::execute(['D10', 'tmp2db', 'small']);
@@ -263,8 +261,10 @@ exit;
             echo E1E3tmp2db::execute(['E1', 'tmp2db', 'small']);
             
             echo E1E3tmp2db::execute(['E3', 'tmp2db', 'small']);
+*/
             
             echo M5medicsTmp2db::execute(['small']);
+exit;
             
             echo M1writersTmp2db::execute(['small']);
             

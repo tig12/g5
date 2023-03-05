@@ -47,7 +47,7 @@ class D6{
         Notes :
             - corrections marked with // ??? are suppositions that may introduce errors.
             - corrections on names starting by 'Mc' and 'Van' were done without checking on the web (may also introduce errors).
-        Logically, these corrections should be located in a yaml tweak file.
+        Logically, these corrections should be located in a yaml file in data/db/init/tweaks.
     **/
     const NAMES_CORRECTIONS = [
         '1'   => ['Adamczyk', 'Marcel'],

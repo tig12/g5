@@ -11,14 +11,16 @@
 ********************************************************************************/
 namespace g5\commands\muller\m5medics;
 
-use tiglib\patterns\Command;
 use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
+use g5\model\wiki\Issue;
+use g5\model\wiki\Wikiproject;
 use g5\commands\Newalch;
 use g5\commands\gauq\LERRCP;
 use g5\commands\muller\Muller;
+use tiglib\patterns\Command;
 
 class tmp2db implements Command {
     

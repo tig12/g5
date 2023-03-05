@@ -12,6 +12,8 @@ use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
 use g5\model\Occupation;
+use g5\model\wiki\Issue;
+use g5\model\wiki\Wikiproject;
 use g5\commands\gauq\LERRCP;
 use g5\commands\gauq\Cura5;
 use tiglib\patterns\Command;
@@ -79,6 +81,9 @@ class tmp2db implements Command {
         else{
             $g->deleteMembers(); // DB - only deletes asssociations between group and members
         }
+        
+        // Wiki project associated to the issues raised by this import
+        $wp = Wikiproject::createFromSlug('fix-gauquelin');
         
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
@@ -150,7 +155,15 @@ class tmp2db implements Command {
                 // lerrcp id takes the value of the first volume where it appears.
                 // lerrcp id already affected in a previous file for this record.
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
-// TODO - check DATE and add an issue if different
+                if($line['DATE'] != $p->data['birth']['date']){
+                    // Concerns 4 rows in E1 - only hour problems
+                    $msg = "Check birth date because $datafile and other Gauquelin file differ\n"
+                           . "<br>{$line['DATE']} for Gauquelin $datafile\n"
+                           . "<br>{$p->data['birth']['date']} for other Gauquelin file\n";
+                    $issue = new Issue( $p, Issue::TYPE_TIME, $msg );
+                    $issue->insert();
+                    $issue->linkToWikiproject($wp);
+                }
                 $new = [];
                 $new['ids-in-sources'] = [
                     $source->data['slug'] => $line['NUM'],

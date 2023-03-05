@@ -118,7 +118,6 @@ class tmp2db implements Command {
             $test->data['name']['given'] = $line['GNAME'];
             $test->data['birth']['date-ut'] = $line['DATE-UT'];
             $test->computeSlug();
-//echo $test->data['slug'] . "\n";
             $gqId = LERRCP::gauquelinId($datafile, $line['NUM']);
             $newOccus = explode('+', $line['OCCU']);
             $p = Person::createFromSlug($test->data['slug']); // DB
@@ -143,7 +142,7 @@ class tmp2db implements Command {
                     $issue = new Issue(
                         $p,
                         Issue::TYPE_TZO,
-//                        Issue::TYPE_TZO . '-' . $source->data['slug'], // ex: 'tzo-a1'
+                        //Issue::TYPE_TZO . '-' . $source->data['slug'], // ex: 'tzo-a1'
                         self::timezoneIssueMessage($line['CY'], $line['NOTES-DATE'])
                     );
                 }
