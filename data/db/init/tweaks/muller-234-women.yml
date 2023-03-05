@@ -5,6 +5,9 @@
 # 
 # 2021-07-10 17:19:55+01:00, Thierry Graff : Creation
 # 2021-08-12 14:25:06+02:00, Thierry Graff : Converted to db/fill/tweak format.
+# 
+# See comments of class src/commands/db/init/tweaks for explanations about the format.
+#
 
 -
   ADMIN: 

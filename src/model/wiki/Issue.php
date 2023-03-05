@@ -14,6 +14,14 @@ use g5\model\Person;
 
 class Issue {
     
+    /** The structure of an issue is defined by this array **/
+    public $data = [
+        'id' => 0,
+        'person' => null,
+        'mark' => '',
+        'description' => '',
+    ];
+    
     /** Check one of the component of the name **/
     const TYPE_NAME = 'chk-name';
     
@@ -30,15 +38,7 @@ class Issue {
     const TYPE_TZO = 'tzo';
     
     /** Check birth place **/
-    const TYPE_BPLACE = 'chk-bplace';
-    
-    /** The structure of an issue is defined by this array **/
-    public $data = [
-        'id' => 0,
-        'person' => null,
-        'mark' => '',
-        'description' => '',
-    ];
+    const TYPE_BPLACE = 'bplace';
     
     /** 
         @param  $p              Person concerned by this issue.

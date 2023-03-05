@@ -229,6 +229,7 @@ class all implements Command {
             echo "***********************\n";
             echo "***  Fill database  ***\n";
             echo "***********************\n";
+/* 
             echo dbcreate::execute([]);
             // Main sources are inserted here because they are used in various places
             // Sources related to specific groups are inserted in the code of related tmp2db
@@ -248,13 +249,13 @@ class all implements Command {
             
             foreach($filesGauqA as $datafile){
                 echo Atmp2db::execute([$datafile, 'tmp2db', 'small']);
-break;
             }
-exit;
             echo dbInitTweaks::execute(['A1.yml']);
             echo A6occu::execute(['A6','A6occu']);
+*/
             
             echo D6tmp2db::execute(['D6', 'tmp2db', 'small']);
+exit;
             echo dbInitTweaks::execute(['D6.yml']);
             
             echo D10tmp2db::execute(['D10', 'tmp2db', 'small']);

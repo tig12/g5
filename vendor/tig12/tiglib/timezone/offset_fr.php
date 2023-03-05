@@ -82,14 +82,12 @@ class offset_fr {
         
         if($date > '1871-05-10' && $date < '1918-11-11'){
             // 1871-05-10 comes from FG p 269
-            /* 
-            http://abreschviller.fr/LA-GUERRE-FRANC-PRUSSIENNE-ET-L-ANNEXION
-            Signé le 10 Mai 1871 à Francfort, le traité de Paix enlevait à la France
-            67, 68 : Alsace,
-            57 : Moselle (l’ensemble du département, exception faite de l’arrondissement de Briey),
-            54 et 57 : un tiers de la Meurthe (les arrondissements de Sarrebourg et Château-Salins)
-            88 : Vosges (la vallée de la Bruche, de Schirmeck à Saales).             
-            */
+            // http://abreschviller.fr/LA-GUERRE-FRANC-PRUSSIENNE-ET-L-ANNEXION
+            // Signé le 10 Mai 1871 à Francfort, le traité de Paix enlevait à la France
+            // 67, 68 : Alsace,
+            // 57 : Moselle (l’ensemble du département, exception faite de l’arrondissement de Briey),
+            // 54 et 57 : un tiers de la Meurthe (les arrondissements de Sarrebourg et Château-Salins)
+            // 88 : Vosges (la vallée de la Bruche, de Schirmeck à Saales).             
             if(in_array($c2, [54, 57, 88])){
                 // See FG p 269
                 // This case could be computed using coordinates of the limit of occupied zone.
@@ -97,8 +95,8 @@ class offset_fr {
                 $err = self::MSG_1871_1918_LORRAINE . " - dept $c2 - $date";
             }
             else if(in_array($c2, [67, 68])){
-                $case = self::CASE_1871_1918_ALSACE;
                 // zone = 'Europe/Berlin';
+                $case = self::CASE_1871_1918_ALSACE;
                 $err = self::MSG_1871_1918_ALSACE . " - dept $c2 - $date";
             }
         }

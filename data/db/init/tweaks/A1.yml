@@ -3,11 +3,20 @@
 # records are sorted by NUM within the file A1
 # 
 # 2021-11-18 16:16:30+01:00, Thierry Graff : Creation
+# 
+# See comments of class src/commands/db/init/tweaks for explanations about the format.
+#
 
 # Van Den Boorn Charles
 -
   ADMIN: 
     ACTION: update
+    ISSUES:
+      -
+        wikiproject: fix-gauquelin
+        mark: date
+        description: |
+          Page <a href="https://earlyaviators.com/eborn1.htm">https://earlyaviators.com/eborn1.htm</a> says: "11 July 1874 (some sources say 1873)". Gauquelin gives 1873. A check in civil registry is necessary to find out.
   ids-in-sources:
     a1: '513'
   partial-ids:
@@ -26,9 +35,6 @@
       geoid: 2979783
   notes:
     - Death informations come from <a href="https://earlyaviators.com/eborn1.htm">https://earlyaviators.com/eborn1.htm</a>
-  issues:
-    chk-date: |
-      Page <a href="https://earlyaviators.com/eborn1.htm">https://earlyaviators.com/eborn1.htm</a> says: "11 July 1874 (some sources say 1873)". Gauquelin gives 1873. A check in civil registry is necessary to find out.
 
 -
   ADMIN: 

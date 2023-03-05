@@ -3,6 +3,9 @@
 # records are sorted by NUM within the file D6
 # 
 # 2021-12-05 06:11:16+01:00, Thierry Graff : Creation
+# 
+# See comments of class src/commands/db/init/tweaks for explanations about the format.
+#
 
 -
   ADMIN: 

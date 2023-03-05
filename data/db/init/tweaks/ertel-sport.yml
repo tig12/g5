@@ -3,11 +3,20 @@
 # records are sorted by NUM within the file ertel-4384-sport.csv
 # 
 # 2021-12-05 18:25:13+01:00, Thierry Graff : Creation
+# 
+# See comments of class src/commands/db/init/tweaks for explanations about the format.
+#
 
 # Albani Peppino
 -
   ADMIN: 
     ACTION: update
+    ISSUES:
+      -
+        wikiproject: fix-gauquelin
+        mark: date
+        description: |
+          Birth date comes from the internet, and must be checked.
   ids-in-sources:
     3a_sports: '46'
   name:
@@ -36,6 +45,3 @@
     - |
       This person is present without birth date in Ertel's file of sportsmen.
       <br>Informations come from <a href="https://it.wikipedia.org/wiki/Giuseppe_Albani_(calciatore)">https://it.wikipedia.org/wiki/Giuseppe_Albani_(calciatore)</a> and <a href="https://www.transfermarkt.com/peppino-albani/profil/spieler/538598">https://www.transfermarkt.com/peppino-albani/profil/spieler/538598</a>
-  issues:
-    chk-date: |
-      Birth date comes from the internet, and must be checked.

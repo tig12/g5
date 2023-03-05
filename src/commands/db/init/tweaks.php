@@ -4,10 +4,17 @@
     Updates or inserts persons in the database from a yaml file (in data/db/init/tweaks).
     Each yaml file must contain an array.
     Each element of this array must contain the fields of a person, with a key ADMIN.
-    ADMIN field must contain a key ACTION.
-    The value of ACTION can be 'update' or 'delete'.
-    ADMIN field may also contain a key ADD-IN-GROUPS
+    
+    ADMIN field MUST contain a key ACTION.
+    The value of ACTION can be 'insert' or 'update'.
+    
+    ADMIN field MAY also contain a key ADD-IN-GROUPS
     ADD-IN-GROUPS must contain an array of group slugs to which the person must be added.
+    
+    ADMIN field MAY also contain a key ISSUES
+    ISSUES must contain an array of issues
+    Each issue is an associative array which must contain keys "mark" and "description"
+    An issue can also contain a field "wikiproject"
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-08-12 14:28:11+02:00, Thierry Graff : Creation
@@ -18,12 +25,15 @@ use tiglib\patterns\Command;
 use g5\app\Config;
 use g5\model\Person as ModelPerson;
 use g5\model\Group as ModelGroup;
+use g5\model\wiki\Issue;
+use g5\model\wiki\Wikiproject;
 
 class tweaks implements Command {
     
     private static $yamlFile = '';
     private static $nUpdate = 0;
     private static $nInsert = 0;
+    private static $nIssues = 0;
     
     /** 
         @param  $params Array containing one element:
@@ -64,7 +74,7 @@ class tweaks implements Command {
             //
             // HERE call insert() or update()
             //
-            [$personId, $msg] = $ADMIN['ACTION'] == 'insert'
+            [$person, $msg] = $ADMIN['ACTION'] == 'insert'
                 ? self::insert($tweak)
                 : self::update($tweak);
             if($msg != ''){
@@ -77,19 +87,41 @@ class tweaks implements Command {
             if(isset($ADMIN['ADD-IN-GROUPS'])){
                 foreach($ADMIN['ADD-IN-GROUPS'] as $groupSlug){
                     try{
-                        ModelGroup::storePersonInGroup($personId, $groupSlug);
+                        ModelGroup::storePersonInGroup($person->data['id'], $groupSlug);
                     }
                     catch(\Exception $e){
                         return $e->getMessage() . "\n";
                     }
                 }
             }
+            //
+            // Issues
+            //
+            if(isset($ADMIN['ISSUES'])){
+                foreach($ADMIN['ISSUES'] as $yamlIssue){
+                    self::$nIssues++;
+                    $issue = new Issue(
+                        $person,
+                        $yamlIssue['mark'],
+                        $yamlIssue['description'],
+                    );
+                    $issue->insert();
+                    if(isset($yamlIssue['wikiproject'])){
+                        $wp = Wikiproject::createFromSlug($yamlIssue['wikiproject']);
+                        $issue->linkToWikiproject($wp);
+                    }
+                }
+            }
         }
+        
         if(self::$nUpdate != 0){
             $report .= 'Updated ' . self::$nUpdate . " persons in DB from {$params[0]}\n";
         }
         if(self::$nInsert != 0){
             $report .= 'Inserted ' . self::$nInsert . " persons in DB from {$params[0]}\n";
+        }
+        if(self::$nIssues != 0){
+            $report .= 'Added ' . self::$nIssues . " issues in DB from {$params[0]}\n";
         }
         return $report;
     }
@@ -98,19 +130,19 @@ class tweaks implements Command {
     /**
         Updates a person already existing in db
         @return Array containing 2 elements: 
-                - The id of the updated person ; -1 if update failed.
+                - The updated Person object ; null if update failed.
                 - An error message ; empty string if no error.
     **/
     private static function update($tweak) {
         if(!isset($tweak['ids-in-sources'])){
             $msg = "TWEAK ERROR: every tweak must contain a field 'ids-in-sources'"
                 . " - concerned tweak:\n" . print_r($tweak, true) . "\n";
-            return [-1, $msg];
+            return [null, $msg];
         }
         if(count($tweak['ids-in-sources']) < 1){
             $msg = "TWEAK ERROR: field 'ids-in-sources' must contain at least one element"
                 . " - concerned tweak:\n" . print_r($tweak, true) . "\n";
-            return [-1, $msg];
+            return [null, $msg];
         }
                 
         // Always use the first element of ids-in-sources to find the person
@@ -120,7 +152,7 @@ class tweaks implements Command {
         if(is_null($p)){
             $msg = "TWEAK ERROR: Person doesn't exist in database - source = $source, id = $idInSource"
                 . " - concerned tweak:\n" . print_r($tweak, true) . "\n";
-            return [-1, $msg];
+            return [null, $msg];
         }
         
         // OK, possible to update
@@ -144,12 +176,6 @@ class tweaks implements Command {
             $p->addNotes($tweak['notes']);
             unset($new['notes']);
         }
-        if(isset($tweak['issues'])){
-            foreach($tweak['issues'] as $issue){
-                $p->addIssue_old($issue);
-            }
-            unset($new['issues']);
-        }
         
         $p->updateFields($new);
         // Recompute slug in case update changed name or birth date.
@@ -172,22 +198,22 @@ class tweaks implements Command {
                 }
                 catch(\Exception $e){
                     // silently ignored, it means that the update contains occu already associated to person in db
-                    return [$p->data['id'], ''];
+                    return [$p, ''];
                     // $msg = $e->getMessage() . "\nPerson ids-in-sources: " . print_r($tweak['ids-in-sources'], true);
-                    // return [$p->data['id'], $msg];
+                    // return [$p, $msg];
                 }
             }
         }
         
         self::$nUpdate++;
-        return [$p->data['id'], ''];
+        return [$p, ''];
     }
     
     // ******************************************************
     /**
         Inserts a new person in db
         @return Array containing 2 elements: 
-                - The id of the inserted person ; -1 if insert failed
+                - The inserted person ; null if insert failed
                 - An error message ; empty string if no error.
     **/
     private static function insert($tweak) {
@@ -201,8 +227,9 @@ class tweaks implements Command {
             rawdata: $tweak
         );
         try{
+            //
             $id = $p->insert(); // DB
-            
+            //
             // Occupations must be handled separately because not done by $p->insert()
             if(isset($tweak['occus'])){
                 foreach($tweak['occus'] as $groupSlug){
@@ -210,15 +237,15 @@ class tweaks implements Command {
                         ModelGroup::storePersonInGroup($id, $groupSlug);
                     }
                     catch(\Exception $e){
-                        return [$p->data['id'], $e->getMessage() . "\n"];
+                        return [$p, $e->getMessage() . "\n"];
                     }
                 }
             }
             self::$nInsert++;
-            return [$id, ''];
+            return [$p, ''];
         }
         catch(\Exception $e){
-            return [-1, $e->getMessage() . "\n"];
+            return [null, $e->getMessage() . "\n"];
         }
     }
     

@@ -118,6 +118,7 @@ class tmp2db implements Command {
             $test->data['name']['given'] = $line['GNAME'];
             $test->data['birth']['date-ut'] = $line['DATE-UT'];
             $test->computeSlug();
+//echo $test->data['slug'] . "\n";
             $gqId = LERRCP::gauquelinId($datafile, $line['NUM']);
             $newOccus = explode('+', $line['OCCU']);
             $p = Person::createFromSlug($test->data['slug']); // DB
@@ -232,23 +233,23 @@ class tmp2db implements Command {
     /**
         Computes a message indicating why legal time couldn't be restored.
         @param  $country
-        @param  $case       See ofsset_* classes
+        @param  $case       See tiglib\timezone\offset_* classes
     **/
     public static function timezoneIssueMessage(string $country, int $case): string {
-        $issue = '';
+        $msg = '';
         switch($country){
             case 'FR': 
-                switch(offset_fr::MESSAGES[$case]){
-                	case offset_fr::MSG_1871_1918_LORRAINE: 
+                switch($case){
+                	case offset_fr::CASE_1871_1918_LORRAINE: 
                 	case offset_fr::CASE_1871_1918_ALSACE:
-                	case offset_fr::MSG_WW2:
-                	case offset_fr::MSG_WW2_END:
-                        $issue = offset_fr::MESSAGES[$case];
+                	case offset_fr::CASE_WW2:
+                	case offset_fr::CASE_WW2_END:
+                        $msg = offset_fr::MESSAGES[$case];
                 	break;
                 }
             break;
         }
-        return $issue;
+        return $msg;
     }
     
     /**

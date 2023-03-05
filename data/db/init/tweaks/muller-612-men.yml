@@ -4,6 +4,9 @@
 # WD base url = https://www.wikidata.org/wiki/Special:EntityPage/
 # 
 # 2021-09-05 03:27:53+02:00, Thierry Graff : Creation
+# 
+# See comments of class src/commands/db/init/tweaks for explanations about the format.
+#
 
 -
   ADMIN: 
