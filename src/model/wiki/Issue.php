@@ -23,16 +23,16 @@ class Issue {
     ];
     
     /** Check one of the component of the name **/
-    const TYPE_NAME = 'chk-name';
+    const TYPE_NAME = 'name';
+    
+    /** Check nobiliary particle **/
+    const TYPE_NOB = 'nob';
     
     /** Check birth day or birth time or both **/
     const TYPE_DATE = 'date';
     
-    /** Check birth day**/
-    const TYPE_DAY = 'day';
-    
-    /** Check birth time **/
-    const TYPE_TIME = 'time';
+    /** Check birth day or birth time or both **/
+    const TYPE_DATE_UT = 'date-ut';
     
     /** Check timezone offset **/
     const TYPE_TZO = 'tzo';
@@ -90,6 +90,9 @@ class Issue {
         @param  $wp A Wikiproject object.
     **/
     public function linkToWikiproject($wp){
+        if($wp->data['id'] == null || $wp->data['id'] == 0){
+            throw new \Exception('Trying to insert a null wiki project $wp = ' . print_r($wp, true));
+        }
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare('insert into issue_wikiproject(id_issue,id_wikiproject) values(?,?)');
         $stmt->execute([$this->data['id'], $wp->data['id']]);

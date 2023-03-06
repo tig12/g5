@@ -83,7 +83,8 @@ class tmp2db implements Command {
         }
         
         // Wiki project associated to the issues raised by this import
-        $wp = Wikiproject::createFromSlug('fix-gauquelin');
+        $wp_fix_date = Wikiproject::createFromSlug('fix-date');
+        $NIssues_date = 0;
         
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
@@ -160,9 +161,10 @@ class tmp2db implements Command {
                     $msg = "Check birth date because $datafile and other Gauquelin file differ\n"
                            . "<br>{$line['DATE']} for Gauquelin $datafile\n"
                            . "<br>{$p->data['birth']['date']} for other Gauquelin file\n";
-                    $issue = new Issue( $p, Issue::TYPE_TIME, $msg );
+                    $issue = new Issue( $p, Issue::TYPE_DATE    , $msg );
                     $issue->insert();
-                    $issue->linkToWikiproject($wp);
+                    $NIssues_date++;
+                    $issue->linkToWikiproject($wp_fix_date);
                 }
                 $new = [];
                 $new['ids-in-sources'] = [
@@ -191,6 +193,9 @@ class tmp2db implements Command {
         $dt = round($t2 - $t1, 5);
         if($reportType == 'full' && $nDuplicates != 0){
             $report .= "-------\n";
+        }
+        if($NIssues_date != 0){
+            $report .= "Added $NIssues_date date issues\n";
         }
         $report .= "$nInsert persons inserted, $nDuplicates updated ($dt s)\n";
         return $report;

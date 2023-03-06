@@ -91,12 +91,19 @@ class tmp2db implements Command {
         $g = Group::createFromSlug(M5medics::GROUP_SLUG);
         if(is_null($g)){
             $g = M5medics::getGroup();
-            $g->data['id'] = $g->insert(); // DB
+//            $g->data['id'] = $g->insert(); // DB
             $report .= "Inserted group " . $g->data['slug'] . "\n";
         }
         else{
-            $g->deleteMembers(); // DB - only deletes asssociations between group and members
+//            $g->deleteMembers(); // DB - only deletes asssociations between group and members
         }
+        
+        // Wiki projects associated to the issues raised by this import
+        $wp_fix_date = Wikiproject::createFromSlug('fix-date');
+        $NIssues_date = 0;
+        //
+        $wp_muller_paris_medics = Wikiproject::createFromSlug('muller-paris-medics');
+        $NIssues_paris_medics = 0;
         
         $nInsert = 0;
         $nUpdate = 0;
@@ -146,13 +153,11 @@ class tmp2db implements Command {
                     rawdata: $lineRaw
                 );
                 $nInsert++;
-                $p->data['id'] = $p->insert(); // DB
+//                $p->data['id'] = $p->insert(); // DB
             }
             else{
                 // Person already in A2 or E1
                 $new = [];
-                $new['issues'] = [];
-                $issue1 = $issue2 = $issue3 = '';
                 [$gauqSourceSlug, $NUM] = M5medics::gnr2LERRCPSourceId($line['GNR']);
                 $gauqFile = strtoupper($gauqSourceSlug);
                 $gauqId = LERRCP::gauquelinId($gauqFile, $NUM);
@@ -178,10 +183,14 @@ class tmp2db implements Command {
                 }
                 if($mulDay != $gauqDay){
                     $nDiffDates++;
-                    $issue1 = "Check birth date because Müller and Gauquelin birth days differ\n"
+                    $msg = "Check birth date because Müller and Gauquelin birth days differ\n"
                            . "<br>$gauqDay for Gauquelin $gauqId\n"
                            . "<br>$mulDay for Müller $mullerId\n";
-                    $p->addIssue_old($issue1);
+                    $issue = new Issue($p, Issue::TYPE_DATE, $msg);
+                    $issue->insert();
+                    $NIssues_date++;
+                    $issue->linkToWikiproject($wp_fix_date);
+                    
                     if($reportType == 'full'){
                         $datesReport .= "\nCura $gauqId\t $gauqDay {$p->data['name']['family']} - {$p->data['name']['given']}\n";
                         $datesReport .= "Müller NR {$line['NR']}\t $mulDay {$line['FNAME']} - {$line['GNAME']}\n";
@@ -192,10 +201,13 @@ class tmp2db implements Command {
                     $gauqHour = substr($p->data['birth']['date'], 11);
                     $mulHour = substr($line['DATE'], 11);
                     if($gauqHour != $mulHour){
-                        $issue2 = "Check birth date because Müller and Gauquelin birth hours differ"
-                               . "\n<br>$gauqHour for Gauquelin $gauqId"
-                               . "\n<br>$mulHour for Müller $mullerId\n";
-                        $p->addIssue_old($issue2);
+                    $msg = "Check birth date because Müller and Gauquelin birth hours differ"
+                           . "\n<br>$gauqHour for Gauquelin $gauqId"
+                           . "\n<br>$mulHour for Müller $mullerId\n";
+                    $issue = new Issue($p, Issue::TYPE_DATE, $msg);
+                    $issue->insert();
+                    $NIssues_date++;
+                    $issue->linkToWikiproject($wp_fix_date);
                     }
                 }
                 // update fields that are more precise in muller1083
@@ -212,8 +224,13 @@ class tmp2db implements Command {
                 $new['name']['official']['given'] = $line['GNAME'];
                 //
                 if($line['PLACE'] == 'Paris'){
-                    $issue3 = 'Birth date needs to be checked because Arno Müller coulndn\'t verify births in Paris';
-                    $p->addIssue_old($issue3);
+                    $msg = 'Birth date needs to be checked because Arno Müller coulndn\'t verify births in Paris';
+                    $issue = new Issue($p, Issue::TYPE_DATE, $msg);
+                    $issue->insert();
+                    $NIssues_paris_medics++;
+                    $NIssues_date++;
+                    $issue->linkToWikiproject($wp_muller_paris_medics);
+                    $issue->linkToWikiproject($wp_fix_date);
                 }
                 //
                 $p->addOccus($newOccus);
@@ -225,10 +242,6 @@ class tmp2db implements Command {
                 $new['sources'] = $source->data['slug'];
                 $new['ids-in-sources'] = [ $source->data['slug'] => $line['NR'] ];
                 $new['occus'] = $newOccus;
-                if($issue1 != ''){ $new['issues'][] = $issue1; }
-                if($issue2 != ''){ $new['issues'][] = $issue2; }
-                if($issue3 != ''){ $new['issues'][] = $issue3; }
-                if(count($new['issues']) == 0){ unset($new['issues']); }
                 $p->addHistory(
                     command: 'muller m5medics tmp2db',
                     sourceSlug: $source->data['slug'],
@@ -236,17 +249,23 @@ class tmp2db implements Command {
                     rawdata: $lineRaw
                 );
                 $nUpdate++;
-                $p->update(); // DB
+//                $p->update(); // DB
             }
             $g->addMember($p->data['id']);
         }
         $t2 = microtime(true);
-        $g->insertMembers(); // DB
+//        $g->insertMembers(); // DB
         $dt = round($t2 - $t1, 5);
         if($reportType == 'full'){
             $report .= "=== Names fixed ===\n" . $namesReport;
             $report .= "\n=== Dates fixed ===\n" . $datesReport;
             $report .= "============\n";
+        }
+        if($NIssues_date != 0){
+            $report .= "Added $NIssues_date date issues\n";
+        }
+        if($NIssues_paris_medics != 0){
+            $report .= "Added $NIssues_paris_medics Müller Paris medics issues\n";
         }
         $report .= "$nInsert persons inserted, $nUpdate updated ($dt s)\n";
         $report .= "$nDiffDates dates differ from A2 and E1";

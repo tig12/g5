@@ -261,8 +261,8 @@ class all implements Command {
             echo E1E3tmp2db::execute(['E1', 'tmp2db', 'small']);
             
             echo E1E3tmp2db::execute(['E3', 'tmp2db', 'small']);
-*/
             
+*/
             echo M5medicsTmp2db::execute(['small']);
 exit;
             

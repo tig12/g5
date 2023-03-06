@@ -99,7 +99,11 @@ class tmp2db implements Command {
         }
         
         // Wiki project associated to the issues raised by this import
-        $wp = Wikiproject::createFromSlug('fix-gauquelin');
+        $wp_fix_tzo = Wikiproject::createFromSlug('fix-tzo');
+        $NIssues_tzo = 0;
+        //
+        $wp_fix_name = Wikiproject::createFromSlug('fix-name');
+        $NIssues_name = 0;
         
         // both arrays share the same order of elements,
         // so they can be iterated in a single loop
@@ -120,15 +124,22 @@ class tmp2db implements Command {
             $test->computeSlug();
             $gqId = LERRCP::gauquelinId($datafile, $line['NUM']);
             $newOccus = explode('+', $line['OCCU']);
-            $p = Person::createFromSlug($test->data['slug']); // DB
+            $p = Person::createFromSlug($test->data['slug']); // DB read only
             if(is_null($p)){
                 // insert new person
                 $p = new Person();
                 $p->addIdInSource($source->data['slug'], $line['NUM']);
                 $p->addPartialId($lerrcpSource->data['slug'], $gqId);
                 $new = [];
-                $issue = null;
+                $issue_tzo = null;
+                $issue_name = null;
                 $new['trust'] = Cura5::TRUST_LEVEL;
+                // $issue_name
+                if(strpos($line['FNAME'], 'Gauquelin-') === 0){
+                    $msg = "Missing Name in Gauquelin file $datafile";
+                    $issue_name = new Issue($p, Issue::TYPE_NAME, $msg);
+                    $NIssues_name++;
+                }
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
                 $new['birth'] = [];
@@ -138,13 +149,14 @@ class tmp2db implements Command {
                     $new['birth']['date'] = $line['DATE-C'];
                     $new['birth']['tzo'] = $line['TZO'];
                 }
+                // $issue_tzo
                 if($line['NOTES-DATE'] != ''){ // NOTES-DATE filled in tmp file by legalTime.php
-                    $issue = new Issue(
+                    $issue_tzo = new Issue(
                         $p,
                         Issue::TYPE_TZO,
-                        //Issue::TYPE_TZO . '-' . $source->data['slug'], // ex: 'tzo-a1'
                         self::timezoneIssueMessage($line['CY'], $line['NOTES-DATE'])
                     );
+                    $NIssues_tzo++;
                 }
                 $new['birth']['place']['name'] = $line['PLACE'];
                 $new['birth']['place']['c2'] = $line['C2'];
@@ -175,9 +187,13 @@ class tmp2db implements Command {
                 );
                 $p->data['id'] = $p->insert(); // DB
                 // insert issue after person because person id is needed
-                if($issue != null){
-                    $issue->insert();
-                    $issue->linkToWikiproject($wp);
+                if($issue_tzo != null){
+                    $issue_tzo->insert();
+                    $issue_tzo->linkToWikiproject($wp_fix_tzo);
+                }
+                if($issue_name != null){
+                    $issue_name->insert();
+                    $issue_name->linkToWikiproject($wp_fix_name);
                 }
                 
                 $nInsert++;
@@ -221,9 +237,16 @@ class tmp2db implements Command {
         }
         $t2 = microtime(true);
         $g->insertMembers(); // DB
+        
         $dt = round($t2 - $t1, 5);
         if($reportType == 'full' && $nDuplicates != 0){
             $report .= "-------\n";
+        }
+        if($NIssues_tzo != 0){
+            $report .= "Added $NIssues_tzo issues TZO\n";
+        }
+        if($NIssues_name != 0){
+            $report .= "Added $NIssues_name issues name\n";
         }
         $report .= "$nInsert persons inserted, $nDuplicates updated ($dt s)\n";
         return $report;
