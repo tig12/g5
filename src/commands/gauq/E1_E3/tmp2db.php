@@ -161,7 +161,7 @@ class tmp2db implements Command {
                     $msg = "Check birth date because $datafile and other Gauquelin file differ\n"
                            . "<br>{$line['DATE']} for Gauquelin $datafile\n"
                            . "<br>{$p->data['birth']['date']} for other Gauquelin file\n";
-                    $issue = new Issue( $p, Issue::TYPE_DATE    , $msg );
+                    $issue = new Issue( $p, Issue::TYPE_DATE, Issue::TYPE_DATE, $msg );
                     $issue->insert();
                     $NIssues_date++;
                     $issue->linkToWikiproject($wp_fix_date);

@@ -7,15 +7,17 @@
 ********************************************************************************/
 namespace g5\commands\muller\m2men;
 
-use tiglib\patterns\Command;
 use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
+use g5\model\wiki\Issue;
+use g5\model\wiki\Wikiproject;
 use g5\commands\muller\Muller;
 use g5\commands\muller\AFD;
 use g5\commands\gauq\LERRCP;
 use g5\commands\muller\m1writers\M1writers;
+use tiglib\patterns\Command;
 
 class tmp2db implements Command {
     
@@ -78,6 +80,9 @@ class tmp2db implements Command {
             $g->deleteMembers(); // DB - only deletes asssociations between group and members
         }
         
+        // Wiki projects associated to the issues raised by this import
+        $wp_fix_date = Wikiproject::createFromSlug('fix-date');
+        
         $nInsert = 0;
         $nUpdate = 0;
         $nRestoredNames = 0;
@@ -113,12 +118,14 @@ class tmp2db implements Command {
                 $p->addIdInSource($source->data['slug'], $muid);
                 // do not call $p->addPartialId to respect Müller unique id definition
                 $p->updateFields($new);
-                $issue = 'CHECK BIRTH PLACE AND TIME:'
+                $msg = 'CHECK BIRTH PLACE AND TIME:'
                     . '<br>This person is present as nb 457 in '
                     . '<a href="/group/muller-afd2-men">Müller\'s list of 612 famous men</a> - time = 04:10 - birth place = Modica' . "\n"
                     . '<br>and as nb 367 in '
                     . '<a href="/group/muller-afd1-writers">Müller\'s list of 402 writers</a> - time = 18:00 - birth place = Siracusa';
-                $p->addIssue_old($issue);
+                $issue = new Issue($p, Issue::TYPE_DATE, Issue::TYPE_DATE, $msg);
+                $issue->insert();
+                $issue->linkToWikiproject($wp_fix_date);
                 // repeat fields to include in $history
                 $new['ids-in-sources'] = [$source->data['slug'] => $muid];
                 if(M2men::OCCUS[$line['OCCU']] != 'X'){ // X => handled in data/db/person/muller-612-men.yml

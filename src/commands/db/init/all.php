@@ -229,7 +229,6 @@ class all implements Command {
             echo "***********************\n";
             echo "***  Fill database  ***\n";
             echo "***********************\n";
-/* 
             echo dbcreate::execute([]);
             // Main sources are inserted here because they are used in various places
             // Sources related to specific groups are inserted in the code of related tmp2db
@@ -262,9 +261,7 @@ class all implements Command {
             
             echo E1E3tmp2db::execute(['E3', 'tmp2db', 'small']);
             
-*/
             echo M5medicsTmp2db::execute(['small']);
-exit;
             
             echo M1writersTmp2db::execute(['small']);
             
@@ -285,7 +282,7 @@ exit;
             
             echo CParaGroup::execute([]);
             
-            // g55 done here because it needs db to compute cache
+            // g55 raw2tmp done here because it needs db to compute cache
             echo g55Gqid::execute(['g55', 'gqid', 'cache']);
             foreach($g55Groups as $groupKey){
                 echo g55Raw2tmp::execute(['g55', 'raw2tmp', $groupKey]);

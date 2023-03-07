@@ -15,16 +15,18 @@
 ********************************************************************************/
 namespace g5\commands\cfepp\final3;
 
-use tiglib\patterns\Command;
 use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
+use g5\model\wiki\Issue;
+use g5\model\wiki\Wikiproject;
 use g5\commands\cfepp\final3\Final3;
 use g5\commands\cfepp\CFEPP;
 use g5\commands\gauq\LERRCP;
 use g5\commands\ertel\Ertel;
 use g5\commands\cpara\CPara;
+use tiglib\patterns\Command;
 
 class tmp2db implements Command {
     
@@ -107,6 +109,9 @@ class tmp2db implements Command {
         else{
             $g1066->deleteMembers(); // DB - only deletes asssociations between group and members
         }
+        
+        // Wiki projects associated to the issues raised by this import
+        $wp_fix_date = Wikiproject::createFromSlug('fix-date');
         
         $nInsert = 0;
         $nUpdate = 0;
@@ -193,7 +198,6 @@ class tmp2db implements Command {
                 $cfeppDateUT = $line['DATE-UT'];
                 $g5Date = $p->data['birth']['date'];
                 $g5DateUT = $p->data['birth']['date-ut'];
-                $issue1 = $issue2 = '';
                 //
                 // test date
                 //
@@ -211,11 +215,13 @@ class tmp2db implements Command {
                 }
                 if($compareG5 != $compareCFEPP){
                     $nDiffDates++;
-                    $issue1 = "Check birth date because CFEPP and g5 birth dates differ"
+                    $msg = "Check birth date because CFEPP and g5 birth dates differ"
                            . "Date"
                            . "<br>$g5Date for g5 $ERID"
                            . "<br>$cfeppDate for CFEPP $CFID";
-                    $p->addIssue_old($issue1);
+                    $issue = new Issue($p, Issue::TYPE_DATE, Issue::TYPE_DATE, $msg);
+                    $issue->insert();
+                    $issue->linkToWikiproject($wp_fix_date);
                     if($reportType == 'full'){
                         $dateReport .= "\nDATE    g5 $ERID\t $g5Date {$p->data['name']['family']} - {$p->data['name']['given']}\n";
                         $dateReport .= "DATE CFEPP $CFID\t $cfeppDate $fname - $gname\n";
@@ -237,11 +243,13 @@ class tmp2db implements Command {
                 }
                 if($compareG5 != $compareCFEPP){
                     $nDiffDatesUT++;
-                    $issue2 = "Check birth date because CFEPP and g5 birth dates UT differ"
+                    $msg = "Check birth date because CFEPP and g5 birth dates UT differ"
                            . "<br>Date UT"
                            . "<br>$g5DateUT for g5 $ERID"
                            . "<br>$cfeppDateUT for CFEPP $CFID";
-                    $p->addIssue_old($issue2);
+                    $issue = new Issue($p, Issue::TYPE_DATE, Issue::TYPE_DATE, $msg);
+                    $issue->insert();
+                    $issue->linkToWikiproject($wp_fix_date);
                     if($reportType == 'full'){
                         $dateReport .= "\nDATE UT g5    $ERID\t $g5DateUT {$p->data['name']['family']} - {$p->data['name']['given']}\n";
                         $dateReport .= "DATE UT CFEPP $CFID\t $cfeppDateUT $fname - $gname\n";
@@ -274,9 +282,6 @@ class tmp2db implements Command {
                 // repeat fields to include in $history
                 $new['ids-in-sources'] = [Final3::SOURCE_SLUG => $CFID];
                 $new['occus'] = $newOccus;
-                if($issue1 != ''){ $new['issues'][] = $issue1; }
-                if($issue2 != ''){ $new['issues'][] = $issue2; }
-                if(count($new['issues']) == 0){ unset($new['issues']); }
                 $p->addHistory(
                     command: $cmdSignature,
                     sourceSlug: Final3::SOURCE_SLUG,
@@ -295,13 +300,14 @@ class tmp2db implements Command {
         $g1066->insertMembers(); // DB
         $g1120->insertMembers(); // DB
         $dt = round($t2 - $t1, 5);
+        $nIssues = $nDiffDates + $nDiffDatesUT;
         if($reportType == 'full'){
             $report .= "=== Different dates ===\n" . $dateReport;
             $report .= "============\n";
             $report .= "$nDiffDates different DATE\n";
             $report .= "$nDiffDatesUT different DATE-UT\n";
         }
-        $report .= "$nInsert persons inserted, $nUpdate updated - $nDiffDates different dates ($dt s)\n";
+        $report .= "$nInsert persons inserted, $nUpdate updated - $nIssues date issues inserted ($dt s)\n";
         return $report;
     }
     

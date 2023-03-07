@@ -137,7 +137,7 @@ class tmp2db implements Command {
                 // $issue_name
                 if(strpos($line['FNAME'], 'Gauquelin-') === 0){
                     $msg = "Missing Name in Gauquelin file $datafile";
-                    $issue_name = new Issue($p, Issue::TYPE_NAME, $msg);
+                    $issue_name = new Issue($p, Issue::TYPE_NAME, Issue::TYPE_NAME, $msg);
                     $NIssues_name++;
                 }
                 $new['name']['family'] = $line['FNAME'];
@@ -153,6 +153,7 @@ class tmp2db implements Command {
                 if($line['NOTES-DATE'] != ''){ // NOTES-DATE filled in tmp file by legalTime.php
                     $issue_tzo = new Issue(
                         $p,
+                        Issue::TYPE_TZO,
                         Issue::TYPE_TZO,
                         self::timezoneIssueMessage($line['CY'], $line['NOTES-DATE'])
                     );

@@ -7,13 +7,15 @@
 ********************************************************************************/
 namespace g5\commands\gauq\g55;
 
-use tiglib\patterns\Command;
 use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
+use g5\model\wiki\Issue;
+use g5\model\wiki\Wikiproject;
 use g5\commands\gauq\Gauquelin;
 use g5\commands\gauq\LERRCP;
+use tiglib\patterns\Command;
 
 class tmp2db implements Command {
     
@@ -66,6 +68,9 @@ class tmp2db implements Command {
         else{
             $g->deleteMembers(); // DB - only deletes asssociations between group and members
         }
+        
+        // Wiki projects associated to the issues raised by this import
+        $wp_fix_date = Wikiproject::createFromSlug('fix-date');
         
         $nInsert = 0;
         $nUpdate = 0;
@@ -135,10 +140,15 @@ class tmp2db implements Command {
                     if($p->data['birth']['date'] != ''){
                         if($line['DATE'] != substr($p->data['birth']['date'], 0, 16)){
                             $datafile = LERRCP::getDatafileFromGauquelinId($GQID);
-                            $issue = "Check birth date because LERRCP $datafile and Gauquelin 1955 birth dates differ"
-                                   . "<br>G 1955: {$line['DATE']}"
-                                   . "<br>$datafile: {$p->data['birth']['date']}";
-                            $p->addIssue_old($issue);
+                            $msg = "Check birth date because LERRCP $datafile and Gauquelin 1955 birth dates differ"
+                                   . "<br>\nG 1955: {$line['DATE']}"
+                                   . "<br>\n$datafile: {$p->data['birth']['date']}";
+                            // here $mark different from type because some records may have been already associated
+                            // to a date issue in a previous (difference between LERRCP and Müller)
+                            $mark = Issue::TYPE_DATE . '-g55';
+                            $issue = new Issue($p, Issue::TYPE_DATE, $mark, $msg);
+                            $issue->insert();
+                            $issue->linkToWikiproject($wp_fix_date);
                         }
                     }
                     $new = [

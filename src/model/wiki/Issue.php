@@ -17,6 +17,7 @@ class Issue {
     /** The structure of an issue is defined by this array **/
     public $data = [
         'id' => 0,
+        'type' => '',       // one of the TYPE_* constants
         'person' => null,
         'mark' => '',
         'description' => '',
@@ -31,7 +32,7 @@ class Issue {
     /** Check birth day or birth time or both **/
     const TYPE_DATE = 'date';
     
-    /** Check birth day or birth time or both **/
+    /** Check field DATE-UT **/
     const TYPE_DATE_UT = 'date-ut';
     
     /** Check timezone offset **/
@@ -48,9 +49,10 @@ class Issue {
                                 Free string, in general constants Issue::TYPE_* are used as mark.
         @param  $description    Description of the issue.
     **/
-    public function __construct(Person $p, string $mark, string $description){
+    public function __construct(Person $p, string $type, string $mark, string $description){
         $this->data['person'] = $p;
         $this->data['mark'] = $mark;
+        $this->data['type'] = $type;
         $this->data['description'] = $description;
     }
     
@@ -71,10 +73,12 @@ class Issue {
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare('insert into issue(
             slug,
+            type,
             description
-        )values(?,?) returning id');
+        )values(?,?,?) returning id');
         $stmt->execute([
             $this->computeSlug(),
+            $this->data['type'],
             $this->data['description'],
         ]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);

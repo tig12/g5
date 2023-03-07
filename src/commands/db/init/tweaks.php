@@ -103,6 +103,7 @@ class tweaks implements Command {
                     $issue = new Issue(
                         $person,
                         $yamlIssue['mark'],
+                        $yamlIssue['type'],
                         $yamlIssue['description'],
                     );
                     $issue->insert();

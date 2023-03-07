@@ -91,11 +91,11 @@ class tmp2db implements Command {
         $g = Group::createFromSlug(M5medics::GROUP_SLUG);
         if(is_null($g)){
             $g = M5medics::getGroup();
-//            $g->data['id'] = $g->insert(); // DB
+            $g->data['id'] = $g->insert(); // DB
             $report .= "Inserted group " . $g->data['slug'] . "\n";
         }
         else{
-//            $g->deleteMembers(); // DB - only deletes asssociations between group and members
+            $g->deleteMembers(); // DB - only deletes asssociations between group and members
         }
         
         // Wiki projects associated to the issues raised by this import
@@ -153,7 +153,7 @@ class tmp2db implements Command {
                     rawdata: $lineRaw
                 );
                 $nInsert++;
-//                $p->data['id'] = $p->insert(); // DB
+                $p->data['id'] = $p->insert(); // DB
             }
             else{
                 // Person already in A2 or E1
@@ -185,8 +185,8 @@ class tmp2db implements Command {
                     $nDiffDates++;
                     $msg = "Check birth date because Müller and Gauquelin birth days differ\n"
                            . "<br>$gauqDay for Gauquelin $gauqId\n"
-                           . "<br>$mulDay for Müller $mullerId\n";
-                    $issue = new Issue($p, Issue::TYPE_DATE, $msg);
+                           . "<br>$mulDay for Müller $mullerId";
+                    $issue = new Issue($p, Issue::TYPE_DATE, Issue::TYPE_DATE, $msg);
                     $issue->insert();
                     $NIssues_date++;
                     $issue->linkToWikiproject($wp_fix_date);
@@ -203,8 +203,8 @@ class tmp2db implements Command {
                     if($gauqHour != $mulHour){
                     $msg = "Check birth date because Müller and Gauquelin birth hours differ"
                            . "\n<br>$gauqHour for Gauquelin $gauqId"
-                           . "\n<br>$mulHour for Müller $mullerId\n";
-                    $issue = new Issue($p, Issue::TYPE_DATE, $msg);
+                           . "\n<br>$mulHour for Müller $mullerId";
+                    $issue = new Issue($p, Issue::TYPE_DATE, Issue::TYPE_DATE, $msg);
                     $issue->insert();
                     $NIssues_date++;
                     $issue->linkToWikiproject($wp_fix_date);
@@ -225,7 +225,7 @@ class tmp2db implements Command {
                 //
                 if($line['PLACE'] == 'Paris'){
                     $msg = 'Birth date needs to be checked because Arno Müller coulndn\'t verify births in Paris';
-                    $issue = new Issue($p, Issue::TYPE_DATE, $msg);
+                    $issue = new Issue($p, Issue::TYPE_DATE, Issue::TYPE_DATE, $msg);
                     $issue->insert();
                     $NIssues_paris_medics++;
                     $NIssues_date++;
@@ -249,12 +249,12 @@ class tmp2db implements Command {
                     rawdata: $lineRaw
                 );
                 $nUpdate++;
-//                $p->update(); // DB
+                $p->update(); // DB
             }
             $g->addMember($p->data['id']);
         }
         $t2 = microtime(true);
-//        $g->insertMembers(); // DB
+        $g->insertMembers(); // DB
         $dt = round($t2 - $t1, 5);
         if($reportType == 'full'){
             $report .= "=== Names fixed ===\n" . $namesReport;

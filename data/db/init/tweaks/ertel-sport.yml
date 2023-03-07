@@ -13,8 +13,9 @@
     ACTION: update
     ISSUES:
       -
-        wikiproject: fix-gauquelin
+        wikiproject: fix-date
         mark: date
+        type: date
         description: |
           Birth date comes from the internet, and must be checked.
   ids-in-sources:
