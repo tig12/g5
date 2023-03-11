@@ -438,17 +438,22 @@ Combining the output of the two previous commands permits a reconstitution of Ta
     <li>
         <b>Ertel subsample</b> : name of the subsample in Ertel article.
     </li>
+    <li>
+        <b>g5 match</b> : Link to the other groups present in database that could be matched with Ertel's file.
+        <br>An empty cell means that these records are only found in Ertel's file.
+        <br>(links directly point to <a href="https://opengauquelin.org">opengauquelin.org</a> groups)
+    </li>
 </ul>
 <br>
 
 <style>
-    #table1 td:nth-child(5), td:nth-child(7){white-space:pre;}
+    #table1 td:nth-child(5), td:nth-child(8){white-space:pre;}
 </style>
 <table id="table1" class="wikitable margin">
     <tr>
         <th title="">New</th>
         <th title="">P</th>
-        <th>QUEL</th><th>N<sub>QUEL</sub></th><th>Id</th><th>N<sub>Id</sub></th><th>Ertel subsample</th><th>Comments</th>
+        <th>QUEL</th><th>N<sub>QUEL</sub></th><th>Id</th><th>N<sub>Id</sub></th><th>Ertel subsample</th><th>g5 match</th><th>Comments</th>
     </tr>
     
     <tr>
@@ -457,6 +462,7 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <td rowspan="4">G:A01</td>
         <td rowspan="4">2087</td>
         <td colspan="3"></td>
+        <td rowspan="4"><a href="https://opengauquelin.org/group/a1">A1</a></td>
         <td>
             <div class="pre padding-bottom05">N<sub>er</sub> = 2087     N<sub>g5</sub> = 2087</div>
             QUEL = G:A01 => records come from <a href="gauquelin-A.html"><b>Gauquelin file A1</b></a>.
@@ -519,6 +525,7 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <td>PARA_NR</td>
         <td>76</td>
         <td>7 - Para lowers</td>
+        <td></td>
         <td>
             <div class="pre padding-bottom05">N<sub>er</sub> = 76     N<sub>g5</sub> = 76</div>
             Records with QUEL = GCPAR and PARA_NR = string from *1 to *76
@@ -535,19 +542,25 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <td rowspan="3">G:D10<br>*G:D10</td>
         <td rowspan="3">351</td>
         <td colspan="3"></td>
+        <td><a href="https://opengauquelin.org/group/d10">D10</a></td>
         <td>
-            <div class="pre padding-bottom05">N<sub>er</sub> = 351     N<sub>g5</sub> = 351</div>
+            <div class="padding-bottom05">N<sub>er</sub> = 351     N<sub>g5</sub> = 351</div>
             G:D10 records come from <a href="gauquelin-D10.html"><b>Gauquelin file D10</b></a>
             <br>Gauquelin file contains 352 sportsmen, not 351.
             <br>(Code <code>*G:D10</code> is a typo concerning 2 records, present in D10 Gauquelin file)
         </td>
     </tr>
+    
     <tr>
         <td>0</td>
         <td>P</td>
         <td>CSINR</td>
         <td>192</td>
         <td>8 - CSICOP-U.S.</td>
+        <td>
+            <a href="https://opengauquelin.org/group/d10">D10</a>
+            <br><a href="https://opengauquelin.org/group/csicop">CSICOP</a>
+        </td>
         <td>
             <div class="pre padding-bottom05">N<sub>er</sub> = 192     N<sub>g5</sub> = 192</div>
             Related to the <a href="csicop.html"><b>1979 CSICOP test (US skeptics)</b></a>
@@ -557,12 +570,14 @@ Combining the output of the two previous commands permits a reconstitution of Ta
             <br>TODO CHECK if these 2 records are new data.
         </td>
     </tr>
+    
     <tr>
         <td>0</td>
         <td>P</td>
         <td></td>
         <td>159</td>
         <td>12 - GAUQ-U.S.</td>
+        <td><a href="https://opengauquelin.org/group/d10">D10</a></td>
         <td>
             <div class="pre padding-bottom05">N<sub>er</sub> = 158     N<sub>g5</sub> = 159</div>
             Remaining sportsmen of D10, not already included in CSICOP test.
@@ -576,9 +591,10 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <td>GMINI</td>
         <td colspan="3">599</td>
         <td>3 - Italian football</td>
+        <td></td>
         <td>
             <div class="pre padding-bottom05">N<sub>er</sub> = 600     N<sub>g5</sub> = 599</div>
-            Unpublished by Gauquelin (not famous enough), copied manually by Ertel.
+            Unpublished by Gauquelin (not famous enough), copied manually by Ertel in Gauquelin's laboratory.
             <div class="bold padding05">No birth time - only birth day</div>
             In file Ertel 4391, all records marked GMINI are marked sport = FOOT and country = IT.
             <br>Possible meaning : Gauquelin MINor Italian
@@ -591,9 +607,11 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <td>GMING</td>
         <td colspan="3">115</td>
         <td>4 - German various</td>
+        <td></td>
         <td>
             <div class="pre padding-bottom05">N<sub>er</sub> = 117     N<sub>g5</sub> = 115</div>
-            Possible meaning : Gauquelin MINor German
+            Unpublished by Gauquelin (not famous enough), copied manually by Ertel.
+            <br>Possible meaning : Gauquelin MINor German
             <div class="bold padding05">No birth time - only birth day</div>
             In file Ertel 4391, all records marked GMING have country = DE.
         </td>
@@ -605,9 +623,10 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <td>G_ADD</td>
         <td colspan="3">202</td>
         <td>5 - French occasionals</td>
+        <td></td>
         <td>
             <div class="pre padding-bottom05">N<sub>er</sub> = 204     N<sub>g5</sub> = 202</div>
-            Copied manually by Ertel in Gauquelin's laboratory.
+            Unpublished by Gauquelin (not famous enough), copied manually by Ertel in Gauquelin's laboratory.
             <div class="bold padding05">No birth time - only birth day</div>
             Considered as "low-low-ranking" by Gauquelin.
         </td>
@@ -619,6 +638,7 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <td>G:D06</td>
         <td colspan="3">450</td>
         <td>9 - Second European</td>
+        <td><a href="https://opengauquelin.org/group/d6">D6</a></td>
         <td>
             <div class="pre padding-bottom05">N<sub>er</sub> = 450     N<sub>g5</sub> = 450</div>
             G:D06 records come from <a href="gauquelin-D6.html"><b>Gauquelin file D6</b></a>.
@@ -634,9 +654,10 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <td>GMINV</td>
         <td colspan="3">24</td>
         <td>10 - Italian cyclists</td>
+        <td></td>
         <td>
             <div class="pre padding-bottom05">N<sub>er</sub> = 24     N<sub>g5</sub> = 24</div>
-            Copied manually by Ertel in Gauquelin's laboratory.
+            Unpublished by Gauquelin (not famous enough), copied manually by Ertel in Gauquelin's laboratory.
             <br>Supposition from [KNS 97] p 25 : <code>GMINV</code> could mean Gauquelin MINor Vélo
             <div class="bold padding05">No birth time - only birth day</div>
             In file Ertel 4391, all records marked GMINV are marked sport = CYCL and country = IT.
@@ -649,9 +670,10 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <td>GMIND</td>
         <td colspan="3">453</td>
         <td>11 - Lower French</td>
+        <td></td>
         <td>
             <div class="pre padding-bottom05">N<sub>er</sub> = 455     N<sub>g5</sub> = 453</div>
-            Copied manually by Ertel in Gauquelin's laboratory.
+            Unpublished by Gauquelin (not famous enough), copied manually by Ertel in Gauquelin's laboratory.
             <br>Supposition from [KNS 97] p 25 : <code>GMIND</code> could mean Gauquelin MINor Dictionary
             <div class="bold padding05">No birth time - only birth day</div>
         </td>
@@ -663,6 +685,7 @@ Combining the output of the two previous commands permits a reconstitution of Ta
         <td>G_79F</td>
         <td colspan="3">27</td>
         <td>13 - Plus special</td>
+        <td></td>
         <td>
             <div class="pre padding-bottom05">N<sub>er</sub> = 27     N<sub>g5</sub> = 27</div>
             Supplementary data sent by Gauquelin to Ertel after his visit in Paris.
