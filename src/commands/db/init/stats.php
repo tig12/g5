@@ -45,7 +45,7 @@ class stats implements Command {
         $N_notime = $N - $N_time;
         $report_full .= "N_notime = $N_notime\n";
         
-        $query = 'select count(*) from view_issue';
+        $query = 'select count(*) from issue';
         $N_issues = $dblink->query($query)->fetch()[0];
         $report_full .= "N_issues = $N_issues\n";
         

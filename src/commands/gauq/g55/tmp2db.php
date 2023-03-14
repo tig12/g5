@@ -168,6 +168,8 @@ class tmp2db implements Command {
                         $new['name']['nobility'] = $line['NOB'];
                         $new['slug'] = Person::doComputeSlug($new['name']['family'], $new['name']['given'], substr($p->data['birth']['date'], 0, 10));
                         $NFixedNames++;
+                        // Resolve the name issue
+                        Issue::resolveIssue($p->data['slug']);
                     }
                     $p->addHistory(
                         command:    $cmdSignature . ' ' . $groupKey,

@@ -1,5 +1,8 @@
 
-This directory contains csv files that were copied from directory 2-cura-csv/
 
+This directory is obsolete, could be safely deleted.
+Corresponding code is located in src/commands/gauq/z-g55A/
+
+Corresponds to a first attempt to restore Gauquelin 1955 groups, before merging all imported files in a database.
+Contains csv files that were copied from directory data/tmp/gauq/lerrcp
 Files were then edited by humans to add and fill column "1955".
-

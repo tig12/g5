@@ -41,7 +41,10 @@ class Issue {
     /** Check birth place **/
     const TYPE_BPLACE = 'bplace';
     
+    // *********************** Instance methods *******************************
+    
     /** 
+        Creates a new issue, not already stored in database. 
         @param  $p              Person concerned by this issue.
                                 $p may not already be stored in database (with id = 0).
         @param  $mark           String identifying the issue for a given person.
@@ -56,12 +59,40 @@ class Issue {
         $this->data['description'] = $description;
     }
     
-    // ******************************************************
     /**
         Computes the slug of an issue, a string like "abadie-joseph-1873-12-15--chk-date".
     **/
     private function computeSlug(): string {
         return $this->data['person']->data['slug'] . '--' . $this->data['mark'];
+    }
+    
+    // *********************** Static methods *******************************
+    
+    /**
+        Returns an object of type Issue from storage, using its slug,
+        or null if doesn't exist.
+        The Person object of the issue is not computed.
+    **/
+    public static function createFromSlug($slug): ?Issue{
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare('select * from issue where slug=?');
+        $stmt->execute([$slug]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if($res === false || count($res) == 0){
+            return null;
+        }
+        $issue = new Issue(null, $res['type'], $res['mark'], $res['description']);
+        $issue->data['id'] = $res['id'];
+        return $issue;
+    }
+    
+    
+    /**
+        Resolution of an issue is currently done through its deletion.
+    **/
+    public static function resolveIssue($slug) {
+        $issue = self::createFromSlug($slug);
+        $issue->delete();
     }
     
     // *********************** CRUD *******************************
@@ -101,5 +132,23 @@ class Issue {
         $stmt = $dblink->prepare('insert into issue_wikiproject(id_issue,id_wikiproject) values(?,?)');
         $stmt->execute([$this->data['id'], $wp->data['id']]);
     }        
+    
+    /**
+        @param  $
+    **/
+    public function delete() {
+        $dblink = DB5::getDbLink();
+        //
+        $stmt = $dblink->prepare('delete from issue_person where id_issue=?');
+        $stmt->execute([$this->data['id']]);
+        //
+        $stmt = $dblink->prepare('delete from issue_wikiproject where id_issue=?');
+        $stmt->execute([$this->data['id']]);
+        //
+        $stmt = $dblink->prepare('delete from issue where id=?');
+        $stmt->execute([$this->data['id']]);
+    }
+    
+    
     
 } // end class
