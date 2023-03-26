@@ -189,14 +189,13 @@ class tmp2db implements Command {
                 $p->data['id'] = $p->insert(); // DB
                 // insert issue after person because person id is needed
                 if($issue_tzo != null){
-                    $issue_tzo->insert();
-                    $issue_tzo->linkToWikiproject($wp_fix_tzo);
+                    $issue_tzo->insert(); // DB
+                    $issue_tzo->linkToWikiproject($wp_fix_tzo); // DB
                 }
                 if($issue_name != null){
                     $issue_name->insert();
-                    $issue_name->linkToWikiproject($wp_fix_name);
+                    $issue_name->linkToWikiproject($wp_fix_name); // DB
                 }
-                
                 $nInsert++;
             }
             else{

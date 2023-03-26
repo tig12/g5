@@ -84,7 +84,7 @@ class add implements Command {
         	    //
                 if(isset($BC['opengauquelin']['projects'])){
         	        foreach($BC['opengauquelin']['projects'] as $projectSlug){
-                        Wikiproject::addPersonToProject($projectSlug, $p);
+                        Wikiproject::addActToProject($projectSlug, $p);
                     }
                 }
                 //
@@ -118,8 +118,8 @@ class add implements Command {
         	    // Search::updatePerson($p);       // TODO implement
                 if(isset($BC['opengauquelin']['projects'])){
         	        foreach($BC['opengauquelin']['projects'] as $projectSlug){
-        	            // Wikiproject::addPersonToProject() adds to the project only if the person is not already associated 
-                        Wikiproject::addPersonToProject($projectSlug, $p);
+        	            // Wikiproject::addActToProject() adds to the project only if the person is not already associated 
+                        Wikiproject::addActToProject($projectSlug, $p);
                     }
                 }
                 $report .= "Updated $personSlug\n";

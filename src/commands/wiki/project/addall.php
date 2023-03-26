@@ -18,7 +18,6 @@ class addall implements Command {
         @return String report
     **/
     public static function execute($params=[]): string{
-        
         if(count($params) != 1){
             return "INVALID USAGE - This command needs one parameter:\n"
                 . "  - small : echoes a minimal report\n"
@@ -28,11 +27,16 @@ class addall implements Command {
         $report =  "--- wiki project addall $reportType ---\n";
         
         $files = glob(Wikiproject::rootDir() . DS . '*.yml');
+        
         $N = 0;
         foreach($files as $file){
             // project filename must be called from project slug
             $basename = basename($file);
             $slug = str_replace('.yml', '', $basename);
+            if(strpos($slug, 'z.') === 0){
+                // file statring by 'z.' are not versioned (correspond to drafts or files to delete)
+                continue;
+            }
             try{
                 $id = Wikiproject::insertFromSlug($slug);
             }

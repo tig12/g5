@@ -244,11 +244,13 @@ class all implements Command {
             echo occus1::execute();
             
             // Done here to build associations between issues and wiki projects.
-            wikiAddAllProjects::execute(['small']);
+            echo wikiAddAllProjects::execute(['small']);
             
             foreach($filesGauqA as $datafile){
                 echo Atmp2db::execute([$datafile, 'tmp2db', 'small']);
+//break;
             }
+//exit;
             echo dbInitTweaks::execute(['A1.yml']);
             echo A6occu::execute(['A6','A6occu']);
             

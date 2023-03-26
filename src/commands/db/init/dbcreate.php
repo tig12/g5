@@ -28,18 +28,18 @@ class dbcreate implements Command {
         $report .= "$sql_grant\n";
         
         $tables = [
-            'person',
             'groop',
-            'source',
-            'person_groop',
-            'stats',
-            'search',
-            'wikiproject',
-            'wikiproject_person',
-            'wikirecent',
             'issue',
             'issue_person',
-            'issue_wikiproject',
+            'person',
+            'person_groop',
+            'search',
+            'source',
+            'stats',
+            'wikiproject',
+            'wikiproject_act',
+            'wikiproject_issue',
+            'wikirecent',
         ];
         foreach($tables as $table){
             $sql_create = file_get_contents($dir_sql . DS . $table . '.sql');
@@ -53,9 +53,11 @@ class dbcreate implements Command {
         }
         
         $views = [
-            'view_persongroop',
             'view_issue',
+            'view_person_groop',
+            'view_person_issue',
             'view_wikiproject_person',
+            'view_wikiproject_issue',
         ];
         foreach($views as $view){
             $sql_create = file_get_contents($dir_sql . DS . $view . '.sql');

@@ -79,15 +79,16 @@ class Wikiproject {
     }
     
     /**
-        Adds in database a link between a person and a wiki project.
+        Adds in database a link between an act and a wiki project.
+        As the acts are stored in table person, the link is between tables wikiproject and person.
         @param  $projectSlug    Concerned project
         @param  $p              Person to add to the project
         @pre    Person $p must be present in database (then have a field id).
         @throws Exception if something goes wrong
     **/
-    public static function addPersonToProject(string $projectSlug, Person $p): void {
+    public static function addActToProject(string $projectSlug, Person $p): void {
         if(!isset($p->data['id'])){
-            throw new \Exception("addPersonToProject() cannot add a person without id");
+            throw new \Exception("addActToProject() cannot add a person without id");
         }
         $dblink = DB5::getDbLink();
         
@@ -109,7 +110,7 @@ class Wikiproject {
         $stmt->execute([]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         if($res === false || count($res) == 0){
-            $stmt = $dblink->prepare('insert into wikiproject_person(
+            $stmt = $dblink->prepare('insert into wikiproject_act(
                 id_project,
                 id_person)
                 values(?,?)');

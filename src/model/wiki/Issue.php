@@ -129,7 +129,7 @@ class Issue {
             throw new \Exception('Trying to insert a null wiki project $wp = ' . print_r($wp, true));
         }
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare('insert into issue_wikiproject(id_issue,id_wikiproject) values(?,?)');
+        $stmt = $dblink->prepare('insert into wikiproject_issue(id_issue,id_project) values(?,?)');
         $stmt->execute([$this->data['id'], $wp->data['id']]);
     }        
     
@@ -142,7 +142,7 @@ class Issue {
         $stmt = $dblink->prepare('delete from issue_person where id_issue=?');
         $stmt->execute([$this->data['id']]);
         //
-        $stmt = $dblink->prepare('delete from issue_wikiproject where id_issue=?');
+        $stmt = $dblink->prepare('delete from wikiproject_issue where id_issue=?');
         $stmt->execute([$this->data['id']]);
         //
         $stmt = $dblink->prepare('delete from issue where id=?');
