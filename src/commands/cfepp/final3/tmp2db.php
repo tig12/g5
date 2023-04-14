@@ -179,7 +179,6 @@ class tmp2db implements Command {
                 // Note : we do not consider here name restoration (names like "Gauquelin-A1-234"
                 // because this is completely handled by import of Ertel's file, which must have been executed before.
                 $new = [];
-                $new['issues'] = [];
                 if($CFID != 1119){
                     $p = Person::createFromPartialId(Ertel::SOURCE_SLUG, $ERID); // DB
                 }
@@ -226,6 +225,11 @@ class tmp2db implements Command {
                         $dateReport .= "\nDATE    g5 $ERID\t $g5Date {$p->data['name']['family']} - {$p->data['name']['given']}\n";
                         $dateReport .= "DATE CFEPP $CFID\t $cfeppDate $fname - $gname\n";
                     }
+                    // As CFEPP dates are considered more reliable, the new value uses CFEPP date
+                    // => the person slug changes and must be updated
+                    // Just updates the day part of the slug
+                    $cfeppDay = substr($cfeppDate, 0, 10);
+                    $new['slug'] = substr($p->data['slug'], 0, -10) . $cfeppDay;
                 }
                 //
                 // test date-ut
@@ -247,7 +251,7 @@ class tmp2db implements Command {
                            . "<br>Date UT"
                            . "<br>$g5DateUT for g5 $ERID"
                            . "<br>$cfeppDateUT for CFEPP $CFID";
-                    $issue = new Issue($p, Issue::TYPE_DATE, Issue::TYPE_DATE, $msg);
+                    $issue = new Issue($p, Issue::TYPE_TZO, Issue::TYPE_TZO, $msg);
                     $issue->insert();
                     $issue->linkToWikiproject($wp_fix_date);
                     if($reportType == 'full'){

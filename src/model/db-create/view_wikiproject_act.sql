@@ -1,6 +1,7 @@
 
 -- View used by postgrest api
-create or replace view view_wikiproject_person as
+-- Expresses the links between a wikiproject and the acts handled within this project
+create or replace view view_wikiproject_act as
 select
     p.id        "person_id",
     p.slug      "person_slug",

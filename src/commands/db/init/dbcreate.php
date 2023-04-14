@@ -29,10 +29,9 @@ class dbcreate implements Command {
         
         $tables = [
             'groop',
-            'issue',
-            'issue_person',
             'person',
             'person_groop',
+            'issue',
             'search',
             'source',
             'stats',
@@ -42,8 +41,8 @@ class dbcreate implements Command {
             'wikirecent',
         ];
         foreach($tables as $table){
-            $sql_create = file_get_contents($dir_sql . DS . $table . '.sql');
             $dblink->exec("drop table if exists $table cascade");
+            $sql_create = file_get_contents($dir_sql . DS . $table . '.sql');
             $dblink->exec($sql_create);
             $report .= "Create table $table\n";
             // grant privilege to use with postgrest
@@ -55,8 +54,7 @@ class dbcreate implements Command {
         $views = [
             'view_issue',
             'view_person_groop',
-            'view_person_issue',
-            'view_wikiproject_person',
+            'view_wikiproject_act',
             'view_wikiproject_issue',
         ];
         foreach($views as $view){

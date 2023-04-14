@@ -47,6 +47,7 @@ class Issue {
         Creates a new issue, not already stored in database. 
         @param  $p              Person concerned by this issue.
                                 $p may not already be stored in database (with id = 0).
+        @param  $type           Type of the issue ; must be a constant Issue::TYPE_*.
         @param  $mark           String identifying the issue for a given person.
                                 Must be unique for a given person.
                                 Free string, in general constants Issue::TYPE_* are used as mark.
@@ -58,15 +59,6 @@ class Issue {
         $this->data['type'] = $type;
         $this->data['description'] = $description;
     }
-    
-    /**
-        Computes the slug of an issue, a string like "abadie-joseph-1873-12-15--chk-date".
-    **/
-    private function computeSlug(): string {
-        return $this->data['person']->data['slug'] . '--' . $this->data['mark'];
-    }
-    
-    // *********************** Static methods *******************************
     
     /**
         Returns an object of type Issue from storage, using its slug,
@@ -81,43 +73,59 @@ class Issue {
         if($res === false || count($res) == 0){
             return null;
         }
-        $issue = new Issue(null, $res['type'], $res['mark'], $res['description']);
+        $issue = new Issue(null, $res['type'], $res['type'], $res['description']);
         $issue->data['id'] = $res['id'];
         return $issue;
     }
     
-    
     /**
         Resolution of an issue is currently done through its deletion.
     **/
-    public static function resolveIssue($slug) {
+    public static function resolveIssue(string $slug) {
         $issue = self::createFromSlug($slug);
+        if(is_null($issue)){
+            return;
+        }
         $issue->delete();
+    }
+    
+    // *********************** Slug manipulation *******************************
+    
+    /**
+        Computes the slug of an issue, a string like "abadie-joseph-1873-12-15--date".
+    **/
+    private function computeSlug(): string {
+        return $this->data['person']->data['slug'] . '--' . $this->data['mark'];
+    }
+    
+    /**
+        Computes an issue slug from the person slug and the issue type
+    **/
+    public static function computeSlugFromPersonAndType(string $personSlug, string $issueType): string {
+        return $personSlug . '--' . $issueType;
     }
     
     // *********************** CRUD *******************************
     
-    public function insert(): int{
+    public function insert(): int {
         if($this->data['person']->data['id'] == 0){
             throw new \Exception("You can't insert an issue related to a person not stored in database (with id = 0)");
         }
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare('insert into issue(
+            id_person,
             slug,
             type,
             description
-        )values(?,?,?) returning id');
+        )values(?,?,?,?) returning id');
         $stmt->execute([
+            ($this->data['person'])->data['id'],
             $this->computeSlug(),
             $this->data['type'],
             $this->data['description'],
         ]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         $this->data['id'] = $res['id'];
-        //
-        $stmt = $dblink->prepare('insert into issue_person(id_issue,id_person) values(?,?)');
-        $stmt->execute([$this->data['id'], $this->data['person']->data['id']]);
-        //
         return $this->data['id'];
     }
 
@@ -139,16 +147,11 @@ class Issue {
     public function delete() {
         $dblink = DB5::getDbLink();
         //
-        $stmt = $dblink->prepare('delete from issue_person where id_issue=?');
-        $stmt->execute([$this->data['id']]);
-        //
         $stmt = $dblink->prepare('delete from wikiproject_issue where id_issue=?');
         $stmt->execute([$this->data['id']]);
         //
         $stmt = $dblink->prepare('delete from issue where id=?');
         $stmt->execute([$this->data['id']]);
     }
-    
-    
     
 } // end class

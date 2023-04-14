@@ -144,7 +144,7 @@ class tmp2db implements Command {
                                    . "<br>\nG 1955: {$line['DATE']}"
                                    . "<br>\n$datafile: {$p->data['birth']['date']}";
                             // here $mark different from type because some records may have been already associated
-                            // to a date issue in a previous (difference between LERRCP and Müller)
+                            // to a date issue in a previous tmp2db (difference between LERRCP and Müller)
                             $mark = Issue::TYPE_DATE . '-g55';
                             $issue = new Issue($p, Issue::TYPE_DATE, $mark, $msg);
                             $issue->insert();
@@ -169,7 +169,8 @@ class tmp2db implements Command {
                         $new['slug'] = Person::doComputeSlug($new['name']['family'], $new['name']['given'], substr($p->data['birth']['date'], 0, 10));
                         $NFixedNames++;
                         // Resolve the name issue
-//                        Issue::resolveIssue($p->data['slug']);
+//                        $issueSlug = Issue::computeSlugFromPersonAndType($p->data['slug'], Issue::TYPE_NAME);
+//                        Issue::resolveIssue($issueSlug);
                     }
                     $p->addHistory(
                         command:    $cmdSignature . ' ' . $groupKey,

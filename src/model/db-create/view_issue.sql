@@ -15,11 +15,9 @@ create or replace view view_issue as
         w.name         as wp_name
     from person "p",
          issue "i",
-         issue_person "ip",
          wikiproject "w",
          wikiproject_issue "iw"
-    where p.id = ip.id_person
-      and i.id = ip.id_issue
+    where p.id = i.id_person
       and w.id = iw.id_project
       and i.id = iw.id_issue
     order by p.slug;
