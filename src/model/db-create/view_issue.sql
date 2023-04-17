@@ -6,6 +6,7 @@ create or replace view view_issue as
         i.slug          as issue_slug,
         i.type          as issue_type,
         i.description   as issue_description,
+        p.id            as person_id,
         p.slug          as person_slug,
         p.name          as person_name,
         p.birth         as person_birth,

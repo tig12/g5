@@ -50,7 +50,7 @@ class Issue {
         @param  $type           Type of the issue ; must be a constant Issue::TYPE_*.
         @param  $mark           String identifying the issue for a given person.
                                 Must be unique for a given person.
-                                Free string, in general constants Issue::TYPE_* are used as mark.
+                                Free string, in general, the type of the issue is used as mark.
         @param  $description    Description of the issue.
     **/
     public function __construct(Person $p, string $type, string $mark, string $description){
@@ -99,7 +99,7 @@ class Issue {
     }
     
     /**
-        Computes an issue slug from the person slug and the issue type
+        Computes an issue slug from the person slug and the issue type.
     **/
     public static function computeSlugFromPersonAndType(string $personSlug, string $issueType): string {
         return $personSlug . '--' . $issueType;

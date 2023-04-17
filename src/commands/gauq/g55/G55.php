@@ -39,10 +39,10 @@ class G55 {
         Path to the yaml file containing the characteristics of the source.
         Relative to directory data/db/source
     **/
-    const SOURCE_DEFINITION_FILE = 'gauq' . DS . 'g55-book.yml';
+    const SOURCE_DEFINITION_FILE = 'gauq' . DS . 'g55.yml';
     
     /** Slug of source  **/
-    const SOURCE_SLUG = 'g55-book';
+    const SOURCE_SLUG = 'g55';
     
     
     // *********************** Group management ***********************

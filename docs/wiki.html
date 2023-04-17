@@ -42,8 +42,27 @@ In order to permit a collective check, correction and expansion of the database,
 <article>
 
 <!-- ********************************************************************************* -->
-<h2>Organization</h2>
-For each birth date verified, a document named <code>BC.yml</code> is filled by the user. This document and optional scans of the original document are stored in a directory, located by default in <code>data/wiki</code>. The content of this directory is versioned in a distinct repository: <a href="https://github.com/tig12/ogdb-wiki">github.com/tig12/ogdb-wiki</a>.
+<h2>Database organization</h2>
+
+<img src="img/db5-model-wiki.svg" class="margin padding border" alt="G5 database schema including wiki entities">
+
+<!-- ************************************* -->
+<h3>Act</h3>
+Act is the main entity of the wiki system. An act represents an official document, like a birth certificate.
+<br>An act is necessarily related to 1 person (current model doesn't handle mariage certificates).
+<br>A person can be related to 0 (data not verified), 1, or several acts (like birth and death certificates).
+<br>An act is considered as a information source.
+
+<!-- ************************************* -->
+<h3>Issue</h3>
+An issue represents a problem identified on a person's data.
+<br>An issue is related to 1 person.
+
+<!-- ************************************* -->
+<h3>Wikiproject</h3>
+A wikiproject represents a specific aspect of the database to better.
+<br>A wikiproject can be related to issues that need to be fixed within this project, and to acts that have been related to persons.
+
 
 </article>
 </main>

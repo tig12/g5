@@ -305,7 +305,7 @@ class all implements Command {
             echo "***************************\n";
             echo "***    Add wiki data    ***\n";
             echo "***************************\n";
-            echo wikiAddAllBCs::execute([]);
+            echo wikiAddAllBCs::execute(['small']);
         }
         
         if($param == 'finalize' || $param == 'all'){
