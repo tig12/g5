@@ -57,7 +57,7 @@ class Wikiproject {
         }
         $yaml = @yaml_parse_file($yamlfile);
         if($yaml === false){
-            return "FILE DOES NOT EXIST OR IS NOT CORRECTLY FORMATTED: $yamlFile\n";
+            throw new \Exception("WIKI PROJECT DEFINITION FILE IS NOT CORRECTLY FORMATTED: $yamlFile\n");
         }
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare('insert into wikiproject(
@@ -76,6 +76,48 @@ class Wikiproject {
         ]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         return $res['id'];
+    }
+    
+    /**
+        Updates awiki project already present in database.
+        The slug is used to find the definition file in data/wiki/project (= self::rootDir())
+        @param  $slug The slug of the project to add ; ex: french-math
+        @throws Exception if the yaml file defining the project is not present in self::rootDir()
+                          or if the project is not already present in database.
+    **/
+    public static function updateFromSlug(string $slug){
+        $yamlfile = self::rootDir() . DS . $slug . '.yml';
+        if(!is_file($yamlfile)){
+            throw new \Exception("WIKI PROJECT DEFINITION FILE IS MISSING: $yamlfile");
+        }
+        $yaml = @yaml_parse_file($yamlfile);
+        if($yaml === false){
+            throw new \Exception("WIKI PROJECT DEFINITION FILE IS NOT CORRECTLY FORMATTED: $yamlFile\n");
+        }
+        $dblink = DB5::getDbLink();
+        //
+        $stmt = $dblink->prepare('select id from wikiproject where slug=?');
+        $stmt->execute([$slug]);
+        $tmp = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if($tmp === false){
+            throw new \Exception("YOU TRY TO UPDATE A WIKI PROJECT NOT PRESENT IN DATABASE: $slug\n");
+        }
+        $id = $tmp['id'];
+        $stmt = $dblink->prepare('update wikiproject set
+            slug=?,
+            name=?,
+            description=?,
+            header=?,
+            status=?
+            where id=?');
+        $stmt->execute([
+            $slug,
+            $yaml['name'],
+            $yaml['description'],
+            json_encode($yaml['header'], JSON_FORCE_OBJECT),
+            $yaml['status'],
+            $id,
+        ]);
     }
     
     /**
