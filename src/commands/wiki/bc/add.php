@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Adds the information contained in a file BC.yml in the database.
+    Adds or updates the information contained in a file BC.yml in the database.
     Can concern a person already present in database (update) or a person not present in the database (insert).
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
