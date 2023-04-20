@@ -11,7 +11,7 @@ namespace g5\commands\db\fill;
 use tiglib\patterns\Command;
 use g5\app\Config;
 //use tiglib\filesystem\globRecursive;
-use g5\model\Acts;
+use g5\model\wiki\Acts;
 
 class act implements Command {
     

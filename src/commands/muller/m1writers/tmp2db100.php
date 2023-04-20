@@ -13,6 +13,8 @@ use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
+use g5\model\wiki\Issue;
+use g5\model\wiki\Wikiproject;
 use g5\commands\muller\Muller;
 use g5\commands\Newalch;
 use g5\commands\gauq\LERRCP;
@@ -64,6 +66,9 @@ class tmp2db100 implements Command {
             $g->deleteMembers(); // DB - only deletes asssociations between group and members
         }
         
+        // Wiki projects associated to the issues raised by this import
+        $wp = Wikiproject::createFromSlug('italian-writers');
+        
         $nInsert = 0;
         $nUpdate = 0;
         $nRestoredNames = 0;
@@ -110,6 +115,7 @@ class tmp2db100 implements Command {
                     $source->data['slug'] => $line['MUID'],
                 ];
                 $new['occus'] = [$occu];
+                //
                 $p->addHistory(
                     command: 'muller m1writers tmp2db100',
                     sourceSlug: $source->data['slug'],
@@ -119,6 +125,10 @@ class tmp2db100 implements Command {
                 $nInsert++;
                 $p->data['id'] = $p->insert(); // DB
                 $g->addMember($p->data['id']);
+                // Issue
+                $issue = new Issue($p, Issue::TYPE_DATE, Issue::TYPE_DATE, $msg);
+                $issue->insert(); // DB
+                $issue->linkToWikiproject($wp);
             }
             else{
                 // person already in Gauquelin data

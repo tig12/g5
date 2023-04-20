@@ -187,7 +187,7 @@ class tmp2db implements Command {
                            . "<br>$gauqDay for Gauquelin $gauqId\n"
                            . "<br>$mulDay for Müller $mullerId";
                     $issue = new Issue($p, Issue::TYPE_DATE, Issue::TYPE_DATE, $msg);
-                    $issue->insert();
+                    $issue->insert(); // DB
                     $NIssues_date++;
                     $issue->linkToWikiproject($wp_fix_date);
                     
@@ -205,7 +205,7 @@ class tmp2db implements Command {
                            . "\n<br>$gauqHour for Gauquelin $gauqId"
                            . "\n<br>$mulHour for Müller $mullerId";
                     $issue = new Issue($p, Issue::TYPE_DATE, Issue::TYPE_DATE, $msg);
-                    $issue->insert();
+                    $issue->insert(); // DB
                     $NIssues_date++;
                     $issue->linkToWikiproject($wp_fix_date);
                     }
@@ -222,15 +222,15 @@ class tmp2db implements Command {
                 // Müller name considered as = to full name copied from birth certificate
                 // (Gauquelin name considered as current name)
                 $new['name']['official']['given'] = $line['GNAME'];
-                //
+                // An issue is created only in the update case because it deals with records already present in Gauquelin files
+                // Müller's file contains only one person born in Paris and not in Gauquelin database : budin-pierre-constant-1846-11-09
                 if($line['PLACE'] == 'Paris'){
                     $msg = 'Birth date needs to be checked because Arno Müller coulndn\'t verify births in Paris';
                     $issue = new Issue($p, Issue::TYPE_DATE, Issue::TYPE_DATE, $msg);
-                    $issue->insert();
+                    $issue->insert(); // DB
                     $NIssues_paris_medics++;
                     $NIssues_date++;
                     $issue->linkToWikiproject($wp_muller_paris_medics);
-                    $issue->linkToWikiproject($wp_fix_date);
                 }
                 //
                 $p->addOccus($newOccus);

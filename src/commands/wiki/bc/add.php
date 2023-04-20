@@ -12,7 +12,7 @@ use g5\commands\wiki\Wiki;
 use g5\model\wiki\BC;
 use g5\model\wiki\Wikiproject;
 use g5\model\wiki\Recent;
-use g5\model\Act;
+use g5\model\wiki\Act;
 use g5\model\Person;
 use g5\model\Group;
 use g5\model\Source;

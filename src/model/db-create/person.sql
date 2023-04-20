@@ -14,7 +14,6 @@ create table person (
     trust           char(1),
     acts            jsonb not null,
     history         jsonb not null,
-    issues          jsonb not null,
     notes           jsonb not null
 );
 create index person_slug_idx on person(slug);

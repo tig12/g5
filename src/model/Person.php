@@ -7,7 +7,7 @@
 
 namespace g5\model;
 
-use g5\model\Act;
+use g5\model\wiki\Act;
 use tiglib\strings\slugify;
 use tiglib\arrays\flattenAssociative;
 
@@ -54,9 +54,6 @@ class Person {
         }
         if(isset($row['history'])){
             $row['history'] = json_decode($row['history'], true);
-        }
-        if(isset($row['issues'])){
-            $row['issues'] = json_decode($row['issues'], true);
         }
         if(isset($row['notes'])){
             $row['notes'] = json_decode($row['notes'], true);
@@ -438,14 +435,6 @@ class Person {
         $this->data['occus'] = array_values(array_diff($occus, $remove));
     }
     
-    /**
-        Adds one single issue.
-        @param  $issue  Content of the issue
-    **/
-    public function addIssue_old(string $issue) {
-        $this->data['issues'][] = $issue;
-    }
-    
     public function addHistory($command, $sourceSlug, $newdata, $rawdata){
         $this->data['history'][] = [
             'date'      => date('c'),
@@ -474,7 +463,7 @@ class Person {
                 - Keys can contain "birth", "death" or "mariage" = Act::BIRTH Act::DEATH OR Act::MARIAGE
                 - Values contain an act slug permitting to locate the act.
                   Ex: ['birth' => 'eymery-marguerite-1860-02-11'] corresponds to an act located in
-                  data/acts/birth/1860/02/11/eymery-marguerite-1860-02-11
+                  data/wiki/person/1860/02/11/eymery-marguerite-1860-02-11/BC.yml
                 Note : the act slug used in the act specification can be different from $this->data['slug'].
                 This can happen for example if $this->data['slug'] correspond to fame name
                 and the slug in the act specification corresponds to official name.
@@ -526,9 +515,8 @@ class Person {
             trust,
             acts,
             history,
-            issues,
             notes
-            )values(?,?,?,?,?,?,?,?,?,?,?,?,?) returning id');
+            )values(?,?,?,?,?,?,?,?,?,?,?,?) returning id');
         // JSON_FORCE_OBJECT => empty values are stored {} and not []
         $stmt->execute([
             $this->data['slug'],
@@ -542,7 +530,6 @@ class Person {
             $this->data['trust'],
             json_encode($this->data['acts'], JSON_FORCE_OBJECT),
             json_encode($this->data['history']),
-            json_encode($this->data['issues']),
             json_encode($this->data['notes']),
         ]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -570,7 +557,6 @@ class Person {
             trust=?,
             acts=?,
             history=?,
-            issues=?,
             notes=?
             where id=?
             ');
@@ -586,7 +572,6 @@ class Person {
             $this->data['trust'],
             json_encode($this->data['acts'], JSON_FORCE_OBJECT),
             json_encode($this->data['history']),
-            json_encode($this->data['issues']),
             json_encode($this->data['notes']),
             $this->data['id'],
         ]);

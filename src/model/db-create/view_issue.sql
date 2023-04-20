@@ -12,8 +12,8 @@ create or replace view view_issue as
         p.birth         as person_birth,
         p.partial_ids   as person_partial_ids,
         p.occus         as person_occus,
-        w.slug         as wp_slug,
-        w.name         as wp_name
+        w.slug          as wp_slug,
+        w.name          as wp_name
     from person "p",
          issue "i",
          wikiproject "w",

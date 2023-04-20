@@ -6,7 +6,7 @@
     @history    2020-03-22 21:09:32+01:00, Thierry Graff : Creation
     @history    2023-01-01 20:23:00+01:00, Thierry Graff : Refactor, limit to mimimum
 ********************************************************************************/
-namespace g5\model;
+namespace g5\model\wiki;
 
 use g5\app\Config;
 use g5\model\Person;
@@ -99,13 +99,16 @@ class Act {
             ){
                 $p->data['name']['given'] = $act['transcription']['name']['official']['given'];
             }
-            if($actKey != Act::BIRTH){
-                $p->data['trust'] = TRUST::CHECK;
-            }
         }
         
+        // For BCs, set trust to BC unless specified in extras
         if($actKey == Act::BIRTH){
-            $p->data['trust'] = TRUST::BC;
+            if(isset($act['extras']) && $act['extras'] >= Trust::HC && $act['extras'] <= Trust::CHECK ){
+                $p->data['trust'] = $act['extras'];
+            }
+            else {
+                $p->data['trust'] = Trust::BC;
+            }
         }
         
         $p->addHistory(

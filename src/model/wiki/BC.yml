@@ -19,6 +19,7 @@ header:
 # 2 - Optional information related to opengauquelin database integration
 #
 opengauquelin:
+  trust: 
   projects:
     - 
   fix-issues:
