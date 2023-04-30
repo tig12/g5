@@ -15,6 +15,20 @@ class Wiki {
     **/
     const SOURCE_SLUG = 'wiki';
     
+    /** Actions for data/wiki/manage/actions.csv **/
+    const   ACTION_ADD    = 'add';
+    const   ACTION_UPDATE = 'upd';
+    const   ACTION_DELETE = 'del';
+    
+    /** Separator used in actions.csv **/
+    const ACTION_SEP = ';';
+    
+    /**
+        Hack to put something in field "raw" of history.
+        Because go web application needs something (empty map is considered as empty array).        
+    **/
+    const BASE_URL = 'https://github.com/tig12/ogdb-wiki/tree/main/person';
+    
     // *********************** File manipulation ***********************
     
     /**
@@ -47,11 +61,19 @@ class Wiki {
     
     
     // *********************** Management of data/wiki/manage/actions.csv ***********************
+    
+    /**
+        Returns the path to data/wiki/manage/actions.csv
+    **/
+    public static function getActionFilePath() {
+        return self::rootDir() . DS . 'manage' . DS . 'actions.csv';
+    }
+    
     /**
         Computes actions from file actions.csv
     **/
     public static function computeActions() {
-        $file = self::rootDir() . DS . 'manage' . DS . 'actions.csv';
+        $file = self::getActionFilePath();
         if(!is_file($file)){
             throw new \Exception("File does not exist: $file");
         }
@@ -70,20 +92,57 @@ class Wiki {
     
     /**
         Adds a line in file actions.csv
-        @param  $ation Associative array containing 3 fields: what, action, slug
+        @param  $what   Possible values: 'bc'
+        @param  $action Possible values: 'add', 'upd', 'del' ; default value: 'add'.
+        @param  $slug   Slug of the thing to add
+        @throws Exception if invalid parameter or if file actions.csv does not exist.
     **/
-    public static function addAction($action) {
-        
+    public static function addAction(string $what, string $action, string $slug): void {
+        $msg = self::check_what($what);
+        if($msg != ''){
+            throw new \Exception($msg);
+        }
+        $msg = self::check_action($action);
+        if($msg != ''){
+            throw new \Exception($msg);
+        }
+        $file = self::getActionFilePath();
+        if(!is_file($file)){
+            throw new \Exception("Unexisting file: $file");
+        }
+        $newContent = implode(self::ACTION_SEP, [$what, $action, $slug]) . "\n";
+        file_put_contents($file, $newContent, FILE_APPEND);
     }
     
     /**
         Executes an action
-        @param  $ation Associative array containing 3 fields: what, action, slug
+        @param  $what   Possible values: 'bc'
+        @param  $action Possible values: 'add', 'upd', 'del' ; default value: 'add'.
+        @param  $slug   Slug of the thing to add
     **/
-    public static function executeAction($action) {
-        
+    public static function executeAction(string $what, string $action, string $slug): void  {
     }
     
+    /**
+        Auxiliary of public methods concerning actions.csv
+        @return Error message or empty string if valid.
+    **/
+    private static function check_what(string $what): string {
+        if(!in_array($what, ['bc'])){
+            return "Invalid parameter what: '$what'";
+        }
+        return '';
+    }
     
+    /**
+        Auxiliary of public methods concerning actions.csv
+        @return Error message or empty string if valid.
+    **/
+    private static function check_action(string $action): string {
+        if(!in_array($action, [self::ACTION_ADD, self::ACTION_UPDATE, self::ACTION_DELETE])){
+            return "Invalid parameter action: '$action'";
+        }
+        return '';
+    }
     
 } // end class

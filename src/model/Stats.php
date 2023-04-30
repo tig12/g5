@@ -128,7 +128,6 @@ class Stats{
         $country_orig = $p_orig->data['birth']['place']['cy'];
         $country_new = $p_new->data['birth']['place']['cy'];
         if($country_new != $country_orig){
-echo "country changed $country_orig $country_new\n";
             // new
             if(!isset($countries[$country_new])){
                 $countries[$country_new] = 1;
@@ -141,7 +140,7 @@ echo "country changed $country_orig $country_new\n";
                 unset($countries[$country_orig]);
             }
             else {
-                $countries[$country_orig]++;
+                $countries[$country_orig]--;
             }
         }
         //
@@ -163,7 +162,7 @@ echo "country changed $country_orig $country_new\n";
                 unset($countries[$year_orig]);
             }
             else {
-                $years[$year_orig]++;
+                $years[$year_orig]--;
             }
         }
         //

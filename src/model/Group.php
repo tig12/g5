@@ -296,6 +296,26 @@ class Group {
         $dblink->commit();
     }
     
+    /**
+        Removes one person from a group in database.
+        Does not care about ancestors
+        @param  $personId   Id of the Person to add (its primary key).
+        @param  $groupSlug  Slug of a group already stored in database.
+        @throws Exception if insertion failed.
+    **/
+    public static function removePersonFromGroup(int $personId, string $groupSlug) {
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->prepare('select id from groop where slug=?');
+        $stmt->execute([$groupSlug]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if($res === false || count($res) == 0){
+            throw new \Exception("Group '$groupSlug' not found in database");
+        }
+        $groupId = $res['id'];
+        $stmt_del = $dblink->prepare('delete from person_groop where id_groop=(select id from groop where slug=?) and id_person=?');
+        $stmt_del->execute([$groupSlug, $personId]);
+    }
+    
     // ***********************************************************************
     //                       Ancestors / descendants
     // ***********************************************************************

@@ -9,7 +9,7 @@
 ********************************************************************************/
 namespace g5\commands\wiki\bc;
 
-use g5\commands\wiki\Wiki;
+use g5\model\wiki\Wiki;
 use g5\model\wiki\BC;
 use g5\model\wiki\Wikiproject;
 use g5\model\wiki\Recent;
@@ -24,56 +24,27 @@ use tiglib\patterns\Command;
 class add implements Command {
     
     /** 
-        Ex: php run-g5.php wiki bc add galois-evariste-1811-10-25
-        Ex: php run-g5.php wiki bc add galois-evariste-1811-10-25 action=add
-        Ex: php run-g5.php wiki bc add galois-evariste-1811-10-25 action=add,rw=read
         @param  $params Array containing 1 or 2 elements:
-                        - the slug of the person to add (required)
-                        - optional parameters, which can be:
-                            - 'action' - possible values: 'add', 'upd', 'del' ; default value: 'add'.
-                            - 'rw' - possible values: 'read', 'write' ; default value: 'write'.
+                        - the slug of the person to add (required)\n"
+                        - an optional parameter, which can be 'add', 'upd' ; default value: 'add'
+                        This parameter indicates if the act should be updated or deleted
         @return String report
     **/
     public static function execute($params=[]): string{
         $msg = "This commands needs 1 or 2 parameter:\n"
                 . "- the slug of the person to add (required)\n"
-                . "- optional parameters, which can be:\n"
-                . "    - 'action' - possible values: 'add', 'upd', 'del' ; default value: 'add'.\n"
-                . "    - 'rw' - possible values: 'read', 'write' ; default value: 'write'.\n"
-                . "Examples:\n"
-                . "    php run-g5.php wiki bc add galois-evariste-1811-10-25\n"
-                . "    php run-g5.php wiki bc add galois-evariste-1811-10-25 action=add\n"
-                . "    php run-g5.php wiki bc add galois-evariste-1811-10-25 action=add,rw=read\n";
+                . "- an optional parameter, which can be 'add', 'upd' ; default value: 'add'.\n"
+                . "This parameter indicates if the act should be updated or deleted\n";
         if(count($params) != 1 && count($params) != 2){
             return "INVALID USAGE\n$msg";
         }
         //
         $actSlug = $params[0];
-        $ACTION = 'add';
-        $RW = 'write';
-        if(isset($params[1])){
-            $options = G5::parseOptionalParameters($params[1]);
-            $possibles = ['action', 'rw'];
-            foreach($options as $k => $v){
-                if(!in_array($k, $possibles)){
-                    return "INVALID OPTIONAL PARAMETER: '$k'\n$msg";
-                }
-                switch($k){
-                	case 'action': 
-                	    $possibles2 = ['add', 'upd', 'del'];
-                	    if(!in_array($v, $possibles2)){
-                            return "INVALID OPTIONAL PARAMETER 'action': '$v'\n$msg";
-                	    }
-                	    $ACTION = $v;
-                	break;
-                	case 'rw': 
-                	    $possibles2 = ['read', 'write'];
-                	    if(!in_array($v, $possibles2)){
-                            return "INVALID OPTIONAL PARAMETER 'rw': '$v'\n$msg";
-                	    }
-                	    $RW = $v;
-                	break;
-                }
+        $param_action = 'add';
+        if(count($params) == 2){
+            $param_action = $params[1];
+            if(!in_array($param_action, [Wiki::ACTION_ADD, Wiki::ACTION_UPDATE])){
+                return "INVALID OPTIONAL PARAMETER 'action': '$v'\n$msg";
             }
         }
         //
@@ -115,6 +86,17 @@ class add implements Command {
             $p->data['slug'] = $personSlug;
         }
         //
+        if($param_action == Wiki::ACTION_ADD && isset($p->data['acts']['birth'])){
+            return "ERROR: you try to add a birth certificate already associated to a person\n"
+                . "Use instead: php run-g5.php wiki bc update $actSlug\n";
+        }
+        if($param_action == Wiki::ACTION_UPDATE && !isset($p->data['acts']['birth'])){
+            return "ERROR: you try to update a birth certificate not already associated to a person\n"
+                . "Use instead: php run-g5.php wiki bc add $actSlug\n";
+        }
+         
+        $url = Wiki::BASE_URL . '/' . str_replace(DS, '/', Wiki::slug2dir($actSlug));
+
         switch($action){
         	case 'insert':
         	    $p->addBC($BC);
@@ -169,10 +151,9 @@ class add implements Command {
                     command: $commandName,
                     sourceSlug: 'Birth certificate',
                     newdata: array_merge_recursive($BC['transcription'], $BC['extras']),
-                    rawdata: [],
+                    rawdata: ['url' => $url],
                 );
-        	    // update() needed for occus and history
-                $p->update(); // DB
+                $p->update(); // DB - update() needed for occus and history
                 $report .= "Inserted $actSlug\n";
             break;
             
@@ -184,7 +165,6 @@ class add implements Command {
         	    // stats
         	    //
         	    Stats::updatePerson($p_orig, $p);
-exit;
                 //
                 // search
                 //
@@ -192,6 +172,23 @@ exit;
                 //
                 if(isset($BC['extras']['occus'])){
                     $p->addOccus($BC['extras']['occus']);
+                    $occus_orig = $p_orig->data['occus'];
+                    $occus_new = $p->data['occus'];
+                    // sort to be sure that array comparison works
+                    sort($occus_orig);
+                    sort($occus_new);
+                    if($occus_new != $occus_orig){
+                        $added = array_diff($occus_new, $occus_orig);
+                        $removed = array_diff($occus_orig, $occus_new);
+                        foreach($added as $occu){
+                            $g = Group::createFromSlug($occu);
+                            Group::storePersonInGroup($p->data['id'], $g->data['slug']); // DB
+                        }
+                        foreach($removed as $occu){
+                            $g = Group::createFromSlug($occu);
+                            Group::removePersonFromGroup($p->data['id'], $g->data['slug']); // DB
+                        }
+                    }
                 }
                 //
                 // wiki projects
@@ -206,12 +203,13 @@ exit;
                     command: $commandName,
                     sourceSlug: 'Birth certificate',
                     newdata: array_merge_recursive($BC['transcription'], $BC['extras']),
-                    rawdata: [],
+                    rawdata: ['url' => $url],
                 );
                 $p->update(); // DB
                 $report .= "Updated $actSlug\n";
         	break;
         }
+        Wiki::addAction('bc', $param_action, $actSlug);
         return $report;
     }
     

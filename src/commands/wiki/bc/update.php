@@ -13,10 +13,11 @@ class update implements Command {
     
     /** 
         @param  $params Array containing one element: the slug of the person to add
-                        ex: wiki bc add galois-evariste-1811-10-25
+                        ex: php run-g5.php wiki bc update galois-evariste-1811-10-25
         @return String report
     **/
     public static function execute($params=[]): string{
+        $params[] = 'upd';
         return add::execute($params);
     }
     

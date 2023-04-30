@@ -508,6 +508,7 @@ class Person {
         // act is considered more reliable than other sources, so replace existing data.
         $this->data = array_replace_recursive($this->data, $BC['transcription']);
         $this->data = array_replace_recursive($this->data, $BC['extras']);
+        $this->data['slug'] = $BC['slug'];
         //
         $this->data['acts'][BC::PERSON_ACT_KEY] = $BC;
         // 
