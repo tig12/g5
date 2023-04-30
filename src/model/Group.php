@@ -272,8 +272,9 @@ class Group {
             throw new \Exception("Group '$groupSlug' not found in database");
         }
         $groupId = $res['id'];
-        
-        // Transaction to delete from parent groups (if any) and insert in current group
+        //
+        // Transaction to delete association with parent groups (if any) and insert in current group
+        //
         self::computeAllAncestors();
         // This test is necessary because storePersonInGroup() is successively called from
         // db/fill/person(A1.yml) and (D6.yml)

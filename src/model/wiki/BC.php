@@ -18,14 +18,8 @@ class BC {
     /** Name of a file containing the description of a birth certificate **/
     const FILENAME = 'BC.yml';
     
-    const SOURCE_LABEL = 'Birth certificate';
-    
-    /** **/
-    const SOURCE_TYPE = 'birth-certificate';
-    
-    /** **/
-    const SOURCE_SLUG = 'bc';
-    
+    /** Key used in person's field $data['acts'] to store a BC **/
+    const PERSON_ACT_KEY = 'birth';
     
     /**
         @return Path to the directory containing birth certificates.
@@ -34,10 +28,9 @@ class BC {
         return Wiki::rootDir() . DS . 'person';
     }
 
-    
     /**
         Returns the path of the directory corresponding to a slug.
-        Ex: data/wiki/birth/1811/10/25/galois-evariste-1811-10-25
+        Ex: data/wiki/person/1811/10/25/galois-evariste-1811-10-25
         @param  $slug The slug of the person to add ; ex: galois-evariste-1811-10-25
     **/
     public static function dirPath(string $slug) {
@@ -46,25 +39,34 @@ class BC {
 
     /**
         Returns the path of a BC.yml file corresponding to a slug.
-        Ex: data/wiki/birth/1811/10/25/galois-evariste-1811-10-25/BC.yml
+        Ex: data/wiki/person/1811/10/25/galois-evariste-1811-10-25/BC.yml
         @param  $slug The slug of the person to add ; ex: galois-evariste-1811-10-25
     **/
     public static function filePath(string $slug) {
         return self::dirPath($slug) . DS . self::FILENAME;
     }
+    
+    /**
+        Creates a BC from a file BC.yml
+    **/
+    public static function createFromYamlFile($yamlFile) {
+        $BC = yaml_parse_file($yamlFile);
+        $BC['slug'] = basename(dirname($yamlFile));
+        return $BC;
+    }
 
     /**
         Checks if a BC.yml file contains valid informations
+        TODO implement
         @param  $yaml   Array containing information stored in a file BC.yml
         @return         Empty string if ok, error message if problems.
-        TODO 
         https://github.com/rjbs/Rx
         https://rjbs.manxome.org/rx/
         https://github.com/romaricdrigon/MetaYaml
     **/
     public static function validate(array $yaml): string {
+        // TODO implement
         return '';
     }
     
-
 } // end class

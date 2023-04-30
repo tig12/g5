@@ -125,7 +125,7 @@ class tmp2db implements Command {
                     ];
                 }
                 $p->updateFields($new);
-                $p->addOccus($newOccus);
+                $p->addOccus($newOccus); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 $p->computeSlug();
                 // repeat fields to include in $history
                 $new['sources'] = $source->data['slug'];
@@ -144,7 +144,7 @@ class tmp2db implements Command {
             }
             else{
                 // duplicate, person appears in more than one cura file
-                $p->addOccus($newOccus);
+                $p->addOccus($newOccus); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 // does not addPartialId(lerrcp) to respect the definition of Gauquelin id:
                 // lerrcp id takes the value of the first volume where it appears.
                 // lerrcp id already affected in a previous file for this record.

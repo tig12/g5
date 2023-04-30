@@ -142,7 +142,7 @@ class tmp2db implements Command {
                 $new['birth']['place']['lg'] = (float)$line['LG'];
                 $new['birth']['place']['lat'] = (float)$line['LAT'];
                 //
-                $p->addOccus([$line['SPORT']]);
+                $p->addOccus([$line['SPORT']]); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 $p->addIdInSource($source->data['slug'], $line['CSID']);
                 $p->addPartialId($csicopSource->data['slug'], CSICOP::csicopId($line['CSID']));
                 $p->updateFields($new);
@@ -182,7 +182,7 @@ class tmp2db implements Command {
                         $datesReport .= "Irving CSID {$line['CSID']}\t $csiday {$line['FNAME']} - {$line['GNAME']}\n";
                     }
                 }
-                $p->addOccus([$line['SPORT']]);
+                $p->addOccus([$line['SPORT']]); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 $p->addIdInSource($source->data['slug'], $line['CSID']);
                 $p->addPartialId($csicopSource->data['slug'], CSICOP::csicopId($line['CSID']));
                 $p->updateFields($new);

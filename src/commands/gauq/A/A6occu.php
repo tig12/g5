@@ -72,7 +72,7 @@ class A6occu implements Command {
                 }
                 preg_match($pattern, $line, $m);
                 $p = Person::createFromSourceId('a6', $m[1]);
-                $p->addOccus([$occu]);
+                $p->addOccus([$occu]); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 $new = ['occus' => $occu];
                 $p->addHistory(
                     command: 'gauq A6 occupn',

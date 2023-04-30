@@ -117,7 +117,7 @@ class tmp2db implements Command {
                 $new['birth']['place']['lat'] = (float)$line['LAT'];
                 //
                 if(M3women::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
-                    $p->addOccus([ M3women::OCCUS[$line['OCCU']] ]);
+                    $p->addOccus([ M3women::OCCUS[$line['OCCU']] ]); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 }
                 $p->addIdInSource($source->data['slug'], $muid);
                 $p->addPartialId(Muller::SOURCE_SLUG, $mullerId);
@@ -217,7 +217,7 @@ class tmp2db implements Command {
                     $new['place']['c2'] = $line['C2'];
                 }
                 if(M3women::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
-                    $p->addOccus([ M3women::OCCUS[$line['OCCU']] ]);
+                    $p->addOccus([ M3women::OCCUS[$line['OCCU']] ]); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 }
                 $p->addIdInSource($source->data['slug'], $muid);
                 $p->addPartialId(Muller::SOURCE_SLUG, $mullerId);

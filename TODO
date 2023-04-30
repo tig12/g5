@@ -1,4 +1,6 @@
 
+- crespin-regine-1927-02-23 : occus is both opera singer and singer - should be only opera singer
+
 - case of Boccardo Jean 1942-03-06 : date updated to 1942-03-16 and slug not updated
 => check ALL tmp2db and change slugs when not done
 
@@ -21,10 +23,11 @@ Handle duplicates
 4649 | bassot-jean-1841-04-06 | {"lerrcp": "A2-2563"} | 1841-04-06 21:01:29 | Renève
 5860 | bassot-leon-1841-04-06 | {"lerrcp": "A3-132"}  | 1841-04-06 21:01:29 | Renève
 
+GQ: A2-1462  Gayda Tullio                            1882-10-19 05:55:04 ROMA
+GQ: A3-1697  Gauquelin-A3-1697                       1882-10-19 20:10:04 ROMA
 
-php run-g5.php gauq all export sep=true
-PHP Warning:  Undefined array key "lerrcp" in /home/thierry/dev/astrostats/gauquelin5/src/model/Group.php on line 470
-
+A2-3203 Becker
+A2-3204 Friedrich	Becker
 
 - see php bug - https://bugs.php.net/bug.php?id=81002
   (to store booleans in postgres)
@@ -38,10 +41,6 @@ PHP Warning:  Undefined array key "lerrcp" in /home/thierry/dev/astrostats/gauqu
     
 - See $cmdSignature in cfepp/final3/tmp2db and generalize it to all commands
 
-- BUG
-php run-g5.php db init all export
-PHP Warning:  Undefined array key "lerrcp" in /home/thierry/var/www/opengauquelin.org/gauquelin5/src/model/Group.php on line 451
-
 - Harmonize export commands:
     - computation of name using Person->fullName() and givenName() (see commands/db/export/allpersons).
     - idem for function to sort by name
@@ -52,8 +51,6 @@ PHP Warning:  Undefined array key "lerrcp" in /home/thierry/var/www/opengauqueli
 - names['nobl'] => include space when needed ('de ', 'di '...)
 
 - Harmonize group creation => in data/db/group and remove from the code (class M5medics::getGroup() etc.)
-  
-- In all classes using TRUST_LEVEL, use the constants of class Trust
   
 - Clarify sources : maybe remove Gauquelin and Muller as sources
 
@@ -129,13 +126,6 @@ history        | [{"new": {"sex": "M", "name": {"given": "Salvatore", "family": 
     - simplify name (remove name2 and 3)
 
 - E1 E3 / 'L' => compagnon de la libération
-
-- Check :
-    GQ: A2-1462  Gayda Tullio                            1882-10-19 05:55:04 ROMA
-    GQ: A3-1697  Gauquelin-A3-1697                       1882-10-19 20:10:04 ROMA
-- Check :
-    A2-3203 Becker
-    A2-3204 Friedrich	Becker
 
 - in all tmp2db, when $p->addHistory is done,
     $p->addSource and $p->addIdInSource are not taken into account

@@ -7,7 +7,7 @@
 
 namespace g5\model;
 
-use g5\model\wiki\Act;
+use g5\model\wiki\BC;
 use tiglib\strings\slugify;
 use tiglib\arrays\flattenAssociative;
 
@@ -63,7 +63,7 @@ class Person {
         return $p;
     }
     
-    // *********************** Create objetcs of type Person *******************************
+    // *********************** Create object of type Person *******************************
     
     /**
         Returns an object of type Person from storage, using its slug,
@@ -172,7 +172,6 @@ class Person {
         other informations, like fame name.
         @param  $name1 Generally family name
         @param  $name2 Generally given name 
-        
         @see    instance method computeSlug()
     **/
     public static function doComputeSlug($name1, $name2, $date): string {
@@ -193,7 +192,6 @@ class Person {
         @param  $arrNames  Array representing the name, as stored in database. Ex: [
             'given' => Pierre
             'family' => Alard
-            'spouse' => ''
             'official' => [
                 'given' => ''
                 'family' => ''
@@ -241,9 +239,6 @@ class Person {
             }
             $fams[] = $tmp;
         }
-        if($arrNames['spouse'] != ''){
-            $fams[] = $arrNames['spouse'];
-        }
         if($arrNames['fame']['family'] != ''){
             $fams[] = $arrNames['fame']['family'];
         }
@@ -263,7 +258,32 @@ class Person {
     //                                  INSTANCE
     // ***********************************************************************
     
-    // *********************** Compute fields (instance) *******************************
+    /** 
+        Replaces $this->data with fields present in $replace.
+        Fields of $this->data not present in $replace are not modified.
+        @param $replace Assoc. array with the same structure as $this->data
+    **/
+    public function updateFields($replace){
+        $this->data = array_replace_recursive($this->data, $replace);
+    }
+    
+    // *********************** Ids (instance) *******************************
+    
+    /** 
+        Adds or updates a couple (source slug, id) in data['ids-in-sources']
+    **/
+    public function addIdInSource($sourceSlug, $id){
+        $this->data['ids-in-sources'][$sourceSlug] = $id;
+    }
+    
+    /** 
+        Adds or updates a couple (source slug, id) in data['partial-ids']
+    **/
+    public function addPartialId($sourceSlug, $id){
+        $this->data['partial-ids'][$sourceSlug] = $id;
+    }
+    
+    // *********************** Slug (instance) *******************************
     
     /**
         @throws \Exception if the person id computation impossible (the person has no family name).
@@ -310,20 +330,7 @@ class Person {
         return;
     }
     
-    /**
-        Computes the birth day from date or date-ut.
-        @return YYYY-MM-DD or ''
-    **/
-    public function birthday(): string {
-        if(isset($this->data['birth']['date'])){
-            return substr($this->data['birth']['date'], 0, 10);
-        }
-        else if(isset($this->data['birth']['date-ut'])){
-            // for cura A
-            return substr($this->data['birth']['date-ut'], 0, 10);
-        }
-        return '';
-    }
+    // *********************** Names (instance) *******************************
     
     /**
         Computes the family name, trying to find a non-empty value.
@@ -355,41 +362,39 @@ class Person {
     }
     
     /**
-       Returns the history entry corresponding to a given source.
+        Computes $this->data['name']['family'] and $this->data['name']['given'].
     **/
-    public function historyFromSource($sourceSlug) {
-        foreach($this->data['history'] as $hist){
-            if($hist['source'] == $sourceSlug){
-                return $hist;
+    public function computeCommonName(): void {
+        // 1 - try with fame name.
+        if($this->data['name']['fame']['full'] != ''){
+            $this->data['name']['family'] = $this->data['name']['fame']['full'];
+            return;
+        }
+        if($this->data['name']['fame']['family'] != '' || $this->data['name']['fame']['given'] != ''){
+            $this->data['name']['family'] = $this->data['name']['fame']['family'];
+            $this->data['name']['given'] = $this->data['name']['fame']['given'];
+            return;
+        }
+        // 2 - try with official name 
+        if($this->data['name']['official']['family'] != '' || $this->data['name']['official']['given'] != ''){
+            $this->data['name']['family'] = $this->data['name']['official']['family'];
+            $this->data['name']['given'] = $this->data['name']['official']['given'];
+            return;
+        }
+    }
+    
+    /** 
+        Adds an array of alternative names.
+    **/
+    public function addAlternativeNames($newdata){
+        foreach($newdata as $alter){
+            if(!in_array($alter, $this->data['name']['alter'])){
+                $this->data['name']['alter'][] = $alter;
             }
         }
-        return null;
     }
     
-    // *********************** update fields *******************************
-    
-    /** 
-        Replaces $this->data with fields present in $replace.
-        Fields of $this->data not present in $replace are not modified.
-        @param $replace Assoc. array with the same structure as $this->data
-    **/
-    public function updateFields($replace){
-        $this->data = array_replace_recursive($this->data, $replace);
-    }
-    
-    /** 
-        Adds or updates a couple (source slug, id) in data['ids-in-sources']
-    **/
-    public function addIdInSource($sourceSlug, $id){
-        $this->data['ids-in-sources'][$sourceSlug] = $id;
-    }
-    
-    /** 
-        Adds or updates a couple (source slug, id) in data['partial-ids']
-    **/
-    public function addPartialId($sourceSlug, $id){
-        $this->data['partial-ids'][$sourceSlug] = $id;
-    }
+    // *********************** Occupations (instance) *******************************
     
     /**
         Adds one single occupation to field occus.
@@ -408,7 +413,8 @@ class Person {
         - if $occuSlugs contains "dancer", and field occus already contains "artist", then "artist" is removed.
         - if $occuSlugs contains "artist", and field occus already contains "dancer", then "artist" is not added.
         Always remove the parents and keep the children, which are more specific.
-        WARNING this function doesn't add the occupations in the group in DB.
+        WARNING this function doesn't modify table person_groop.
+                This must be done with Group::storePersonInGroup().
     **/
     public function addOccus($occuSlugs){
         $occus = $this->data['occus'];
@@ -429,10 +435,39 @@ class Person {
                 }
             }
         }
-        // note:
+        // notes:
         // - array_values() permits to reindex
         // - if array_values() not used, jsonb is not stored as a regular array, but as an associative array.
         $this->data['occus'] = array_values(array_diff($occus, $remove));
+    }
+        
+    // *********************** Other fields (instance) *******************************
+    
+    /**
+        Computes the birth day from date or date-ut.
+        @return YYYY-MM-DD or ''
+    **/
+    public function birthday(): string {
+        if(isset($this->data['birth']['date'])){
+            return substr($this->data['birth']['date'], 0, 10);
+        }
+        else if(isset($this->data['birth']['date-ut'])){
+            // for cura A
+            return substr($this->data['birth']['date-ut'], 0, 10);
+        }
+        return '';
+    }
+    
+    /**
+       Returns the history entry corresponding to a given source.
+    **/
+    public function historyFromSource($sourceSlug) {
+        foreach($this->data['history'] as $hist){
+            if($hist['source'] == $sourceSlug){
+                return $hist;
+            }
+        }
+        return null;
     }
     
     public function addHistory($command, $sourceSlug, $newdata, $rawdata){
@@ -447,42 +482,6 @@ class Person {
     }
     
     /** 
-        Adds an array of alternative names.
-    **/
-    public function addAlternativeNames($newdata){
-        foreach($newdata as $alter){
-            if(!in_array($alter, $this->data['name']['alter'])){
-                $this->data['name']['alter'][] = $alter;
-            }
-        }
-    }
-    
-    /** 
-        Adds an array of acts.
-        @param  $actSpecs   Associative array specifying the acts to add.
-                - Keys can contain "birth", "death" or "mariage" = Act::BIRTH Act::DEATH OR Act::MARIAGE
-                - Values contain an act slug permitting to locate the act.
-                  Ex: ['birth' => 'eymery-marguerite-1860-02-11'] corresponds to an act located in
-                  data/wiki/person/1860/02/11/eymery-marguerite-1860-02-11/BC.yml
-                Note : the act slug used in the act specification can be different from $this->data['slug'].
-                This can happen for example if $this->data['slug'] correspond to fame name
-                and the slug in the act specification corresponds to official name.
-                Acts specifications permit to locate the act.
-    **/
-    public function addActs($actSpecs){
-        foreach($actSpecs as $actKey => $actSlug){
-            Act::addActToPerson($this, $actKey, $actSlug);
-        }
-    }
-    
-    /** 
-        @param  $actKey "birth", "death" or "mariage" = Act::BIRTH, Act::DEATH or Act::MARIAGE
-    **/
-    public function addAct($actKey, $actSlug){
-        Act::addActToPerson($this, $actKey, $actSlug);
-    }
-    
-    /** 
         Adds an array of notes
     **/
     public function addNotes($notes){
@@ -490,6 +489,41 @@ class Person {
             if(!in_array($note, $this->data['notes'])){
                 $this->data['notes'][] = $note;
             }
+        }
+    }
+    
+    /**
+        Adds information coming from a file BC.yml to a person.
+        Modifies a person, but does not modify anything in database.
+        - Fills a person's field $data['acts']['birth'] with the content of a file BC.yml
+        - Fills other person's fields from the fields 'transcription' and 'extras' of the act.
+        - If, after adding act information, the person doesn't contain $data['name']['given'] and/or $data['name']['family'],
+          default values are computed from official name.
+        - If BC field 'extras' doesn't contain a field 'trust', field trust of the person is set to Trust::BC
+        @param  $BC     Associative array containing the information of a file BC.yml
+    **/
+    public function addBC(array $BC): void {
+        //
+        // Transfer in $p->data the informations present in the act
+        // act is considered more reliable than other sources, so replace existing data.
+        $this->data = array_replace_recursive($this->data, $BC['transcription']);
+        $this->data = array_replace_recursive($this->data, $BC['extras']);
+        //
+        $this->data['acts'][BC::PERSON_ACT_KEY] = $BC;
+        // 
+        //
+        // Useful for new person, if extras.name.family and extras.name.given are not filled.
+        // Official name is filled from transcription.
+        //
+        if($this->data['name']['family'] == '' && $this->data['name']['given'] == ''){
+            $this->computeCommonName();
+        }
+        // For BCs, set trust to BC unless specified in extras
+        if(isset($BC['extras']['trust']) && $BC['extras']['trust'] != ''){
+            $this->data['trust'] = $BC['extras']['trust'];
+        }
+        else {
+            $this->data['trust'] = Trust::BC;
         }
     }
     

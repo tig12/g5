@@ -170,7 +170,7 @@ class tmp2db implements Command {
                 $new['birth']['place']['lat'] = (float)$line['LAT'];
                 $new['birth']['place']['geoid'] = (int)$line['GEOID'];
                 $p->updateFields($new);
-                $p->addOccus($newOccus);
+                $p->addOccus($newOccus); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 $p->computeSlug();
                 // repeat fields to include in $history
                 $new['ids-in-sources'] = [
@@ -206,7 +206,7 @@ class tmp2db implements Command {
                 // check date coherence - useful for persons present in several A files
                 // Not used anymore as all errors shown by this check were fixed
                 // $testDate = self::checkDate($datafile, $p, $line);
-                $p->addOccus($newOccus);
+                $p->addOccus($newOccus); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 // does not addPartialId(lerrcp) to conform with the definition of Gauquelin id:
                 // lerrcp id takes the value of the first volume where it appears.
                 // lerrcp id already affected in a previous file for this record.

@@ -138,7 +138,7 @@ class tmp2db implements Command {
                 $new['birth']['place']['lg'] = (float)$line['LG'];
                 $new['birth']['place']['lat'] = (float)$line['LAT'];
                 //
-                $p->addOccus($newOccus);
+                $p->addOccus($newOccus); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 $p->addIdInSource($source->data['slug'], $line['NR']);
                 $p->addPartialId(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
@@ -233,7 +233,7 @@ class tmp2db implements Command {
                     $issue->linkToWikiproject($wp_muller_paris_medics);
                 }
                 //
-                $p->addOccus($newOccus);
+                $p->addOccus($newOccus); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 $p->addIdInSource($source->data['slug'], $line['NR']);
                 $p->addPartialId(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);

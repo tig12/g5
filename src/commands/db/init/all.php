@@ -27,11 +27,13 @@ use g5\commands\gauq\Cura5;
 use g5\commands\Newalch;
 use g5\commands\wd\Wikidata;
 
-use g5\commands\db\init\dbcreate;
-use g5\commands\db\init\occus1;
-use g5\commands\db\init\occus2;
+use g5\commands\db\init\dbcreate                as dbInitDBCreate;
+use g5\commands\db\init\occus1                  as dbInitOccu1;
+use g5\commands\db\init\occus2                  as dbInitOccu2;
 use g5\commands\db\fill\source                  as dbFillSource;
 use g5\commands\db\init\tweaks                  as dbInitTweaks;
+use g5\commands\db\init\stats                   as DBInitStats;
+use g5\commands\db\init\wiki                    as dbInitWiki;
 
 // order of imports corresponds to order of execution
 
@@ -229,7 +231,7 @@ class all implements Command {
             echo "***********************\n";
             echo "***  Fill database  ***\n";
             echo "***********************\n";
-            echo dbcreate::execute([]);
+            echo dbInitDBCreate::execute([]);
             // Main sources are inserted here because they are used in various places
             // Sources related to specific groups are inserted in the code of related tmp2db
             echo dbFillSource::execute([Gauquelin::SOURCE_DEFINITION_FILE]);
@@ -241,7 +243,7 @@ class all implements Command {
             echo dbFillSource::execute([Newalch::SOURCE_DEFINITION_FILE]);
             echo dbFillSource::execute([Wikidata::SOURCE_DEFINITION_FILE]);
             echo dbFillSource::execute([G5::SOURCE_DEFINITION_FILE]);
-            echo occus1::execute();
+            echo dbInitOccu1::execute();
             
             // Done here to build associations between issues and wiki projects.
             echo wikiAddAllProjects::execute(['small']);
@@ -298,7 +300,7 @@ class all implements Command {
                 echo g55Tmp2db::execute(['g55', 'tmp2db', $groupKey]);
             }
             
-            echo occus2::execute();
+            echo dbInitOccu2::execute();
         }
         
         if($param == 'wiki' || $param == 'all'){
@@ -312,7 +314,7 @@ class all implements Command {
             echo "***************************\n";
             echo "***  Finalize database  ***\n";
             echo "***************************\n";
-            echo stats::execute(['small']);
+            echo DBInitStats::execute(['small']);
 //            echo search::execute();
         }
         
@@ -348,7 +350,7 @@ class all implements Command {
         $dt = round($t2 - $t1, 2);
         $dt_min = round($dt / 60, 2);
         
-        echo "====== Execution of all commands in $dt s ($dt_min min) ======\n";
+        echo "====== " . date('c') . " - Execution of all commands in $dt s ($dt_min min) ======\n";
         return '';
     }
     

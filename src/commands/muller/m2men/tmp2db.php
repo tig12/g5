@@ -164,7 +164,7 @@ class tmp2db implements Command {
                 $new['birth']['place']['lg'] = (float)$line['LG'];
                 $new['birth']['place']['lat'] = (float)$line['LAT'];
                 //
-                $p->addOccus([ M2men::OCCUS[$line['OCCU']] ]);
+                $p->addOccus([ M2men::OCCUS[$line['OCCU']] ]); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 $p->addIdInSource($source->data['slug'], $muid);
                 $p->addPartialId(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);
@@ -253,7 +253,7 @@ class tmp2db implements Command {
                 if($p->data['birth']['place']['c2'] == '' && $line['C2'] != ''){
                     $new['place']['c2'] = $line['C2'];
                 }
-                $p->addOccus([ M2men::OCCUS[$line['OCCU']] ]);
+                $p->addOccus([ M2men::OCCUS[$line['OCCU']] ]); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 $p->addIdInSource($source->data['slug'], $muid);
                 $p->addPartialId(Muller::SOURCE_SLUG, $mullerId);
                 $p->updateFields($new);

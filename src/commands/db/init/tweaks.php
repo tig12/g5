@@ -162,16 +162,12 @@ class tweaks implements Command {
         // fields that need precautions (arrays)
         // for these fields, the content of tweak is considered as a complement, not a replacement
         if(isset($tweak['occus'])){
-            $p->addOccus($tweak['occus']);
+            $p->addOccus($tweak['occus']); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
             unset($new['occus']);
         }
         if(isset($tweak['name']['alter'])){
             $p->addAlternativeNames($tweak['name']['alter']);
             unset($new['name']['alter']);
-        }
-        if(isset($tweak['acts'])){
-            $p->addActs($tweak['acts']);
-            unset($new['acts']);
         }
         if(isset($tweak['notes'])){
             $p->addNotes($tweak['notes']);

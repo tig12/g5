@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Shortcut to add command, which handles add and update
+    Shortcut to add command, which handles BC add and update.
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2023-04-20 08:58:12+02:00, Thierry Graff : Creation

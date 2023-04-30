@@ -104,7 +104,7 @@ class tmp2db100 implements Command {
                 // OPUS, LEN not part of standard person fields
                 // are stored in addHistory()
                 $occu = self::computeOccu($line);
-                $p->addOccus([$occu]);
+                $p->addOccus([$occu]); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 $p->addIdInSource($source->data['slug'], $line['MUID']);
                 $mullerId = Muller::mullerId($source->data['slug'], $line['MUID']);
                 $p->addPartialId(Muller::SOURCE_SLUG, $mullerId);
@@ -136,7 +136,7 @@ class tmp2db100 implements Command {
                 $mullerId = Muller::mullerId($source->data['slug'], $line['MUID']);
                 $test->addPartialId(Muller::SOURCE_SLUG, $mullerId);
                 $occu = self::computeOccu($line);
-                $p->addOccus([$occu]);
+                $p->addOccus([$occu]); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 // TODO see if some fields can be updated (if Müller more precise than Gauquelin)
                 $new = [];
                 // repeat fields to include in $history

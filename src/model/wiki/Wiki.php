@@ -45,4 +45,45 @@ class Wiki {
         return implode(DS, $path);
     }
     
+    
+    // *********************** Management of data/wiki/manage/actions.csv ***********************
+    /**
+        Computes actions from file actions.csv
+    **/
+    public static function computeActions() {
+        $file = self::rootDir() . DS . 'manage' . DS . 'actions.csv';
+        if(!is_file($file)){
+            throw new \Exception("File does not exist: $file");
+        }
+        $lines = file($file, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
+        $res = [];
+        foreach($lines as $line){
+            $fields = explode(';', $line);
+            $res[] = [
+                'what' => $fields[0],
+                'action' => $fields[1],
+                'slug' => $fields[2],
+            ];
+        }
+        return $res;
+    }
+    
+    /**
+        Adds a line in file actions.csv
+        @param  $ation Associative array containing 3 fields: what, action, slug
+    **/
+    public static function addAction($action) {
+        
+    }
+    
+    /**
+        Executes an action
+        @param  $ation Associative array containing 3 fields: what, action, slug
+    **/
+    public static function executeAction($action) {
+        
+    }
+    
+    
+    
 } // end class

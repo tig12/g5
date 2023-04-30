@@ -21,7 +21,6 @@ partial-ids: {}
 name:
   given:
   family:
-  spouse:
   official:         # As written in the birth certificate
     family:
     given:

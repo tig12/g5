@@ -153,7 +153,7 @@ class tmp2db implements Command {
                 $new['birth']['place']['lg'] = (float)$line['LG'];
                 $new['birth']['place']['lat'] = (float)$line['LAT'];
                 //
-                $p->addOccus($newOccus);
+                $p->addOccus($newOccus); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 $p->addIdInSource(Final3::SOURCE_SLUG, $CFID);
                 $p->addPartialId(CFEPP::SOURCE_SLUG, CFEPP::cfeppId($CFID));
                 $p->updateFields($new);
@@ -278,7 +278,7 @@ class tmp2db implements Command {
                     $new['birth']['place']['lat'] = (float)$line['LAT'];
                 }
                 //
-                $p->addOccus($newOccus);
+                $p->addOccus($newOccus); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 $p->addIdInSource(Final3::SOURCE_SLUG, $CFID);
                 $p->addPartialId(CFEPP::SOURCE_SLUG, CFEPP::cfeppId($CFID));
                 $p->updateFields($new);

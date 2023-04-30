@@ -138,7 +138,7 @@ class tmp2db implements Command {
                 }
                 $new['sex'] = $line['SEX'];
                 //
-                $p->addOccu(ErtelSport::computeSport($line));
+                $p->addOccu(ErtelSport::computeSport($line)); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 $p->addIdInSource($source->data['slug'], $line['NR']);
                 $p->addPartialId(Ertel::SOURCE_SLUG, $erId);
                 $p->updateFields($new);
@@ -210,7 +210,7 @@ class tmp2db implements Command {
                 // Beltoise Jean Pierre 1937-04-26 ; in file E3, not mentioned by Ertel
                 if($line['GQID'] == 'E3-95'){
                     $p = Person::createFromSourceId('e3', 95);
-                    $p->addOccu(ErtelSport::computeSport($line));
+                    $p->addOccu(ErtelSport::computeSport($line)); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                     $new['occus'] = [ErtelSport::computeSport($line)];
                 }
                 // thoma-georg-1937-08-20 ; in file Müller 2 (612 famous men)

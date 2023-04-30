@@ -19,12 +19,11 @@ header:
 # 2 - Optional information related to opengauquelin database integration
 #
 opengauquelin:
-  trust: 
+  old-slug:
   projects:
     - 
   fix-issues:
     - 
-  old-slug: 
    
 #
 # 3 - Informations about the act
@@ -41,14 +40,12 @@ source:
     web:
       url: 
       page: 
-  
   document-creation:
     date: 
     place: 
-
   notes: |
-    
-  images: []
+  images: 
+    - 
   
 #
 # 4 - Transcription of the act
@@ -56,7 +53,7 @@ source:
 transcription:
   name:
     official:
-      given:
+      given: 
       family: 
     nobl: 
   sex: 
@@ -75,6 +72,7 @@ transcription:
 #     but not present in the birth certificate
 #
 extras:
+  trust: 
   name:
     given: 
     family: 
@@ -83,6 +81,7 @@ extras:
       family: 
       given: 
     alter: 
-  
-  occus:
+      - 
+  occus: 
+    -
   

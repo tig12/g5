@@ -131,7 +131,7 @@ class tmp2db implements Command {
                 else{
                     // update a person already in db
                     $p = Person::createFromPartialId(LERRCP::SOURCE_SLUG, $GQID); // DB (read)
-                    $p->addOccus([ $line['OCCU'] ]);
+                    $p->addOccus([ $line['OCCU'] ]); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                     $p->addIdInSource(G55::SOURCE_SLUG, $G55ID);
                     $p->addPartialId(G55::SOURCE_SLUG, $G55ID);
                     // add an issue if G55 and LERRCP dates differ

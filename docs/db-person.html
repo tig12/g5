@@ -54,9 +54,6 @@ This page describes how the notion of person is handled in g5 database.
             <a href="#history">History</a>
         </li>
         <li>
-            <a href="#issues">Issues</a>
-        </li>
-        <li>
             <a href="#links-with-other-entities">Links with other entities</a>
         </li>
         <li>
@@ -84,7 +81,6 @@ create table person (
     trust           char(1),
     acts            jsonb not null,
     history         jsonb not null,
-    issues          jsonb not null,
     notes           jsonb not null
 );
 </pre>
@@ -150,12 +146,6 @@ This field permits to keep a trace of the transformations done on a person.
 
 
 <!-- ********************************************************************************* -->
-<h2 id="issues">Issues</h2>
-Array of strings describing the potential problems existing on some values of the field.
-<div class="todo">A basic implementation permit to store an array of issue within a person, but this mechanism needs to be bettered (introduce issue types and store the issues in a separate table).</div>
-
-
-<!-- ********************************************************************************* -->
 <h2 id="links-with-other-entities">Links with other entities</h2>
 <div class="todo">TODO</div>
 
@@ -166,19 +156,38 @@ Array of strings describing the potential problems existing on some values of th
 name:
   given:
   family:
-  spouse:
-  official:         # As written in the birth certificate
+  official:
     family:
     given:
-  nobl:             # nobiliary-particle: de d' di del von...
-  fame:             # stage, scene
-    full:           # ex Mistinguett or Stromae
-    family: 
-    given: 
-  alter: []         # alternative names, like nicknames, or author names
+  nobl:
+  fame:
+    full:
+    family:
+    given:
+  alter: []
 </pre>
 
-<div class="todo">TODO Write explanations</div>
+The different components of a person's name permits a precise description.
+<ul class="spaced">
+    <li>
+        <b><code>name.given</code></b> and <b><code>name.family</code></b> represent the name commonly used to designate a person.
+        <br>If these fields are empty, the common name is taken from <code>name.fame</code>.
+        <br>If <code>name.fame</code> is empty, the common name is taken from <code>name.official</code>.
+    </li>
+    <li>
+        <code><b>name.official</b></code> represent the <i>exact</i> spelling of the name, as written in the birth certificate.
+    </li>
+    <li>
+        <code><b>name.nobl</b></code> : nobiliary-particle: de d' di del von...
+    </li>
+    <li>
+        <code><b>name.fame</b></code>: stage or scene name.
+        <br>Can be full (ex: "Mistinguett" or "Stromae") or composed, like "Edith" (name.fame.given) "Piaf" (name.fame.family).
+    </li>
+    <li>
+        <code><b>name.alter</b></code>: Array of alternative names. For example Boris Vian (a french writer) wrote a book using the name of Vernon Sullivan.
+    </li>
+</ul>
 
 <!-- ********************************************************************************* -->
 <h2 id="birth-and-death-dates">Birth and death dates</h2>

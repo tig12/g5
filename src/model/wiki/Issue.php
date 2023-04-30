@@ -84,7 +84,7 @@ class Issue {
     public static function resolveIssue(string $slug) {
         $issue = self::createFromSlug($slug);
         if(is_null($issue)){
-            return;
+            return; // throw exception ?
         }
         $issue->delete();
     }
