@@ -19,14 +19,18 @@ class stats implements Command {
         @return report.
     **/
     public static function execute($params=[]): string {
+        $msg = "INVALID USAGE - This command doesn't needs one parameter:\n"
+            . "  - small : echoes a minimal report\n"
+            . "  - full : echoes a detailed report\n";
         if(count($params) != 1){
-            return "INVALID USAGE - This command doesn't needs one parameter:\n"
-                . "  - small : echoes a minimal report\n"
-                . "  - full : echoes a detailed report\n";
+            return $msg;
+        }
+        if(!in_array($params[0], ['small', 'full'])){
+            return "INVALID PARAMETER: {$params[0]}\n$msg";
         }
         
         $report = "--- db init stats ---\n";
-        $report_full = '';
+        $report_full = $report;
         
         $dblink = DB5::getDbLink();
         

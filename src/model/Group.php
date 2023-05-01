@@ -259,6 +259,8 @@ class Group {
         WARNING: this function doesn't handle the case where the person already belongs to a child group.
         Ex storePersonInGroup('sportsperson') for a person already belonging to 'football-player'.
         
+        ==== TODO ===== Update group's field 'n'
+        
         @param  $personId   Id of the Person to add (its primary key).
         @param  $groupSlug  Slug of a group already stored in database.
         @throws Exception if insertion failed.
@@ -298,7 +300,8 @@ class Group {
     
     /**
         Removes one person from a group in database.
-        Does not care about ancestors
+        Does not care about ancestors(useless because if a person is in a group, it is not in the group's encestors)
+        ==== TODO ===== Update group's field 'n'
         @param  $personId   Id of the Person to add (its primary key).
         @param  $groupSlug  Slug of a group already stored in database.
         @throws Exception if insertion failed.

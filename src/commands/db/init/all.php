@@ -95,7 +95,6 @@ use g5\commands\gauq\g55\tmp2db                 as g55Tmp2db;
 
 // wiki
 use g5\commands\wiki\project\addall             as wikiAddAllProjects;
-use g5\commands\wiki\bc\addall                  as wikiAddAllBCs;
 
 // finalize
 use g5\commands\db\init\stats;
@@ -122,12 +121,15 @@ class all implements Command {
         Possible values of the command
     **/
     const POSSIBLE_PARAMS = [
+        // individual steps
         'tmp'       => 'Build tmp files in data/tmp',
         'db'        => 'Fill database with tmp files',
         'wiki'      => 'Adds with wiki data to the database',
         'finalize'  => 'Finalize DB (stats, groups, search)',
         'export'    => 'Exports the groups in zipped csv files',
+        // several steps
         'all'       => 'Executes all steps',
+        'dev'       => 'Executes steps db, wiki,finalize',
     ];
     
     /** 
@@ -226,7 +228,7 @@ class all implements Command {
         //
         //  2 - Import tmp files to db
         //
-        if($param == 'db' || $param == 'all'){
+        if($param == 'db' || $param == 'all' || $param == 'dev'){
             
             echo "***********************\n";
             echo "***  Fill database  ***\n";
@@ -303,14 +305,14 @@ class all implements Command {
             echo dbInitOccu2::execute();
         }
         
-        if($param == 'wiki' || $param == 'all'){
+        if($param == 'wiki' || $param == 'all' || $param == 'dev'){
             echo "***************************\n";
             echo "***    Add wiki data    ***\n";
             echo "***************************\n";
-            echo wikiAddAllBCs::execute(['small']);
+            echo dbInitWiki::execute(['small']);
         }
         
-        if($param == 'finalize' || $param == 'all'){
+        if($param == 'finalize' || $param == 'all' || $param == 'dev'){
             echo "***************************\n";
             echo "***  Finalize database  ***\n";
             echo "***************************\n";
@@ -338,6 +340,7 @@ class all implements Command {
             echo CFEPPExport::execute(['sep=true,group=1120']);
             echo CFEPPExport::execute(['sep=true,group=1066']);
             echo ErtelExport::execute(['sep=true']);
+            //
             echo skepticsExport::execute(['sep=true']);
             echo allOccusExport::execute([]);
             echo allPersonsExport::execute(['sep=true']);

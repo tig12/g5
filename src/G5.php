@@ -33,13 +33,16 @@ class G5{
     /**
         Command helper which permits to express a set of parameter names and their values.
         Useful when a command has optional parameters.
-        Ex: dozip=true,export=toto
+        Ex:
+            dozip=true,export=toto
+        is converted to
+            ['dozip' => true, 'export' => 'toto']
         Parameters are separated by a comma.
         Parameter name and parameter value are separated by = sign.
         NOTE: this generic mechanism is used for exports, see g5\commands\db\export\Export
         @param  $str String to parse, containing the parameters and their values.
     **/
-    public static function parseOptionalParameters($str) {
+    public static function parseOptionalParameters(string $str): array {
         $res = [];
         $tmp1 = explode(',', $str);
         foreach($tmp1 as $tmp2){
@@ -51,5 +54,21 @@ class G5{
         }
         return $res;
     }
+    
+    /**
+        Does the opposite of parseOptionalParameters() : converts an array of optional parameters to a string expressing these parameters
+        Ex:
+            ['dozip' => true, 'export' => 'toto']
+        is converted to
+            dozip=true,export=toto
+    **/
+    public static function computeOptionalParametersString(array $options): string {
+        $tmp = [];
+        foreach($options as $k => $v){
+            $tmp[] = "$k=$v";
+        }
+        return implode(',', $tmp);
+    }
+    
     
 }// end class

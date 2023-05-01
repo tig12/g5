@@ -72,7 +72,7 @@ class Wiki {
     /**
         Computes actions from file actions.csv
     **/
-    public static function computeActions() {
+    public static function computeAllActions() {
         $file = self::getActionFilePath();
         if(!is_file($file)){
             throw new \Exception("File does not exist: $file");
@@ -92,17 +92,18 @@ class Wiki {
     
     /**
         Adds a line in file actions.csv
-        @param  $what   Possible values: 'bc'
-        @param  $action Possible values: 'add', 'upd', 'del' ; default value: 'add'.
-        @param  $slug   Slug of the thing to add
+        @param  $action Associative array containing 3 fields: what, action, slug
+                    what   Possible values: 'bc'
+                    action Possible values: 'add', 'upd', 'del'.
+                    slug   Slug of the thing to add
         @throws Exception if invalid parameter or if file actions.csv does not exist.
     **/
-    public static function addAction(string $what, string $action, string $slug): void {
-        $msg = self::check_what($what);
+    public static function addAction(array $action): void {
+        $msg = self::check_what($action['what']);
         if($msg != ''){
             throw new \Exception($msg);
         }
-        $msg = self::check_action($action);
+        $msg = self::check_action($action['action']);
         if($msg != ''){
             throw new \Exception($msg);
         }
@@ -110,24 +111,15 @@ class Wiki {
         if(!is_file($file)){
             throw new \Exception("Unexisting file: $file");
         }
-        $newContent = implode(self::ACTION_SEP, [$what, $action, $slug]) . "\n";
+        $newContent = implode(self::ACTION_SEP, $action) . "\n";
         file_put_contents($file, $newContent, FILE_APPEND);
     }
     
     /**
-        Executes an action
-        @param  $what   Possible values: 'bc'
-        @param  $action Possible values: 'add', 'upd', 'del' ; default value: 'add'.
-        @param  $slug   Slug of the thing to add
-    **/
-    public static function executeAction(string $what, string $action, string $slug): void  {
-    }
-    
-    /**
-        Auxiliary of public methods concerning actions.csv
+        Auxiliary of methods concerning actions.csv
         @return Error message or empty string if valid.
     **/
-    private static function check_what(string $what): string {
+    public static function check_what(string $what): string {
         if(!in_array($what, ['bc'])){
             return "Invalid parameter what: '$what'";
         }
@@ -135,10 +127,10 @@ class Wiki {
     }
     
     /**
-        Auxiliary of public methods concerning actions.csv
+        Auxiliary of methods concerning actions.csv
         @return Error message or empty string if valid.
     **/
-    private static function check_action(string $action): string {
+    public static function check_action(string $action): string {
         if(!in_array($action, [self::ACTION_ADD, self::ACTION_UPDATE, self::ACTION_DELETE])){
             return "Invalid parameter action: '$action'";
         }
