@@ -8,6 +8,8 @@
 
 - D6 => reintegrate correctly addGeo + add DATE-UT computation + write corresponding issues
 
+- create group definition files in db/group/csicop, and use them for group creation in class commands/csicop/CSICOP - use class ErtelSport as an example.
+
 Fix addOccu to avoid duplicates:
 beltoise-jean-pierre-1937-04-26	E3-95		ES-332			CF-144	3	motor-sports-competitor+motor-sports-competitor
 

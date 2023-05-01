@@ -31,14 +31,14 @@ class Stats{
         // n_time
         // n_notime
         //
-        $birthday = $p->birthday();
-        if(strlen($birthday) == 10){
-            $n_time = $row['n_time'] + 1;
-            $n_notime = $row['n_notime'];
-        }
-        else {
+        $birthdate = $p->birthdate();
+        if(strlen($birthdate) == 10){
             $n_time = $row['n_time'];
             $n_notime = $row['n_notime'] + 1;
+        }
+        else {
+            $n_time = $row['n_time'] + 1;
+            $n_notime = $row['n_notime'];
         }
         //
         // n_checked
@@ -46,7 +46,7 @@ class Stats{
         // here problem : n_checked is computed from trust
         // but notime persons may have been checked and have a trust != from BC
         $n_checked = $row['n_checked'];
-        if($p->data['trust'] <= Trust::BC){
+        if($p->data['trust'] <= Trust::BC){ // BC or HC
             $n_checked++;
         }
         //
@@ -64,7 +64,7 @@ class Stats{
         // years
         //
         $years = json_decode($row['years'], true);
-        $year = substr($birthday, 0, 4);
+        $year = substr($birthdate, 0, 4);
         if(!isset($years[$year])){
             $years[$year] = 1;
         }
@@ -102,11 +102,11 @@ class Stats{
         // n_time
         // n_notime
         //
-        $birthday_orig = $p_orig->birthday();
-        $birthday_new = $p_new->birthday();
+        $birthdate_orig = $p_orig->birthdate();
+        $birthdate_new = $p_new->birthdate();
         $n_time = $row['n_time'];
         $n_notime = $row['n_notime'];
-        if(strlen($birthday_orig) == 10 && strlen($birthday_new) > 10){
+        if(strlen($birthdate_orig) == 10 && strlen($birthdate_new) > 10){
             $n_time++;
             $n_notime--;
         } // different case should not happen
@@ -147,8 +147,8 @@ class Stats{
         // years
         //
         $years = json_decode($row['years'], true); // create anyway to update table stats
-        $year_orig = substr($birthday_orig, 0, 4);
-        $year_new = substr($birthday_new, 0, 4);
+        $year_orig = substr($birthdate_orig, 0, 4);
+        $year_new = substr($birthdate_new, 0, 4);
         if($year_new != $year_orig){
             // new
             if(!isset($years[$year_new])){

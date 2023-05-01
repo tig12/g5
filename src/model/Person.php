@@ -444,8 +444,8 @@ class Person {
     // *********************** Other fields (instance) *******************************
     
     /**
-        Computes the birth day from date or date-ut.
-        @return YYYY-MM-DD or ''
+        Computes the birth day from field birth.date or birth.date-ut.
+        @return format 'YYYY-MM-DD' or ''
     **/
     public function birthday(): string {
         if(isset($this->data['birth']['date'])){
@@ -454,6 +454,21 @@ class Person {
         else if(isset($this->data['birth']['date-ut'])){
             // for cura A
             return substr($this->data['birth']['date-ut'], 0, 10);
+        }
+        return '';
+    }
+    
+    /**
+        Computes the birth date (date = day + hour if any) from field birth.date or birth.date-ut.
+        @return format f    'YYYY-MM-DD HH:MM' or 'YYYY-MM-DD' or ''
+    **/
+    public function birthdate(): string {
+        if(isset($this->data['birth']['date'])){
+            return $this->data['birth']['date'];
+        }
+        else if(isset($this->data['birth']['date-ut'])){
+            // for cura A
+            return $this->data['birth']['date-ut'];
         }
         return '';
     }
@@ -506,9 +521,24 @@ class Person {
         //
         // Transfer in $p->data the informations present in the act
         // act is considered more reliable than other sources, so replace existing data.
+        // With one exception: if the person has a birth time and the BC has no birth time.
+        // In this case, the bith time is not overriden by the BC
+        // This exception comes from birth in Paris prior to 1860 : BCs were destroyed and the original acts were lost.
+        // but Gauquelin still gives birth hour (the way he obtained them is not known).
+        $bdate_orig = $this->data['birth']['date'];
+        $bdate_new = '';
+        if(isset($BC['transcription']['birth']['date'])){
+            $bdate_new = $BC['transcription']['birth']['date'];
+        }
+        else if(isset($BC['extras']['birth']['date'])){
+            $bdate_new = $BC['extras']['birth']['date'];
+        }
         $this->data = array_replace_recursive($this->data, $BC['transcription']);
         $this->data = array_replace_recursive($this->data, $BC['extras']);
         $this->data['slug'] = $BC['slug'];
+        if(strlen($bdate_new) == 10 && strlen($bdate_orig) > 10){
+            $this->data['birth']['date'] = $bdate_orig;
+        }
         //
         $this->data['acts'][BC::PERSON_ACT_KEY] = $BC;
         // 
