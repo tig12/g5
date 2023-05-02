@@ -295,6 +295,8 @@ class Group {
         // insert in current group
         $stmt_ins = $dblink->prepare('insert into person_groop(id_person,id_groop) values(?,?)');
         $stmt_ins->execute([$personId, $groupId]);
+        // update field 'n'
+        self::update_n($dblink, $groupId);
         $dblink->commit();
     }
     
@@ -315,8 +317,23 @@ class Group {
             throw new \Exception("Group '$groupSlug' not found in database");
         }
         $groupId = $res['id'];
-        $stmt_del = $dblink->prepare('delete from person_groop where id_groop=(select id from groop where slug=?) and id_person=?');
-        $stmt_del->execute([$groupSlug, $personId]);
+        $stmt_del = $dblink->prepare('delete from person_groop where id_groop=? and id_person=?');
+        $stmt_del->execute([$groupId, $personId]);
+        // update field 'n'
+        self::update_n($dblink, $groupId);
+    }
+    
+    // ******************************************************
+    /**
+        Fills field 'n of a group with its count(*).
+    **/
+    private static function update_n($dblink, $groupId) {
+        $stmt = $dblink->prepare('select count(*) from person_groop where id_groop=?');
+        $stmt->execute([$groupId]);
+        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $count = $res['count'];
+        $stmt = $dblink->prepare('update groop set n=? where id=?');
+        $stmt->execute([$count,$groupId]);
     }
     
     // ***********************************************************************

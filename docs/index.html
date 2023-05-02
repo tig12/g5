@@ -31,27 +31,51 @@
 
 <main>
 <header>
+<style>
+#related-repos{
+    float:right;
+    padding:1rem;
+    border-left:1px solid grey;
+    border-bottom:1px solid grey;
+    border-radius:5px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+#related-repos>div{
+    font-weight:bold;
+}
+</style>
+<div id="related-repos">
+<u>Related repos</u>
+<div><a href="https://github.com/tig12/openg">openg</a></div>
+<div><a href="https://github.com/tig12/g5-aux">g5-aux</a></div>
+<div><a href="https://github.com/tig12/ogdb-wiki">ogdb-wiki</a></div>
+<div><a href="https://github.com/tig12/geonames2postgres">geonames2postgres</a></div>
+</div>
+
 <h1>Gauquelin5<br>( g5 )</h1>
 
 <div class="intro">
-This program builds <a class="bold" href="https://opengauquelin.org/">opengauquelin.org</a>, the open Gauquelin database. It contains famous persons <b>with birth times and timezone offsets</b>.
-
-<br><br>Departure points are data used to perform statistical tests on astrology, gathered by <b>Michel and Françoise Gauquelin</b>, <b>Arno Müller</b>, <b>Suitbert Ertel</b> and 3 groups of skeptics: <b>Comité Para</b> - Belgium 1976, <b>CSICOP</b> - U.S. 1979, <b>CFEPP</b> - France 1996.
-
-<div class="margin-top05">Data are corrected and imported in a postgresql database, currently containing
-<ul class="simple margin-bottom05">
-    <li><b>24 514</b> persons with birth time</li>
-    <li><b>1 328</b> persons without birth time, with days.</li>
-</ul>
+    This program builds <a class="bold" href="https://opengauquelin.org/">opengauquelin.org</a>, the open Gauquelin database. It contains famous persons <b>with birth times and timezone offsets</b>.
+    
+    <br><br>Departure points are data used to perform statistical tests on astrology, gathered by <b>Michel and Françoise Gauquelin</b>, <b>Arno Müller</b>, <b>Suitbert Ertel</b> and 3 groups of skeptics: <b>Comité Para</b> - Belgium 1976, <b>CSICOP</b> - U.S. 1979, <b>CFEPP</b> - France 1996.
+    
+    <br>Historical data represent:
+    <ul class="simple margin-bottom05">
+        <li><b>24 514</b> persons with birth time</li>
+        <li><b>1 328</b> persons without birth time, with days.</li>
+    </ul>
+    <div class="margin-top05">Data are corrected and imported in a postgresql database.
 </div>
 
-The main orientations of g5 program are :
-<ol class="simple margin-bottom">
-    <li>Gather the <a href="historical-tests.html">historical data</a> and merge them in a single database.</li>
-    <li>Check and correct them.</li>
-    <li>Connect the historical data to standard datasets like Wikidata and complete birth times to build larger groups.</li>
-    <li>Build new eminence indicators and sort famous persons by eminence.</li>
-</ol>
+<div class="padding-top">
+    The main orientations of g5 program are :
+    <ol class="simple margin-bottom">
+        <li>Gather the <a href="historical-tests.html">historical data</a> and merge them in a single database.</li>
+        <li>Check and correct them.</li>
+        <li>Connect the historical data to standard datasets like Wikidata and complete birth times to build larger groups.</li>
+        <li>Build new eminence indicators and sort famous persons by eminence.</li>
+    </ol>
+</div>
 
 One of the purpose of g5 is to permit a precise reconstitution of Suitbert Ertel's analysis of both Gauquelin and groups of skeptics - exposed in the book <i><b>The Tenacious Mars Effect</b></i>. This is possible thanks to the availability of <a href="ertel-4391-sport.html#ertel-s-subsamples">Ertel's list of subsamples</a>.
 

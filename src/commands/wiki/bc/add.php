@@ -28,7 +28,6 @@ class add implements Command {
         return "This commands needs 1 or 2 parameter:\n"
                 . "- the slug of the person to add (required)\n"
                 . "- optional parameters, which can be:\n"
-             // . "    - 'action' - possible values: 'add', 'upd', 'del' ; default value: 'add'.\n"
                 . "    - 'action' - possible values: 'add', 'upd' ; default value: 'add'.\n"
                 . "    - 'rw' - possible values: 'read', 'write' ; default value: 'write'.\n"
                 . "Examples:\n"
@@ -40,12 +39,13 @@ class add implements Command {
     /**
         Adds or updates in database birth certificate information contained in a BC.yml file.
         (deletion of BC currently not handled)
-        When optional parameter rw = 'write', a new line is added in actions.csv.
-            This is used for the addition of a new act.
-            Current command directly used with php run-g5.php wiki bc add <act slug>
-        When optional parameter rw = 'read', actions.csv is not modified.
-            This is used when re-executing the actions, when the database is re-generated from scratch.
-            Current command indirectly used with php run-g5.php db init wiki
+        - Parameter 'rw'
+            When optional parameter rw = 'write', a new line is added in actions.csv.
+                This is used for the addition of a new act.
+                Current command directly used with php run-g5.php wiki bc add <act slug>
+            When optional parameter rw = 'read', actions.csv is not modified.
+                This is used when re-executing the actions, when the database is re-generated from scratch.
+                Current command indirectly used with php run-g5.php db init wiki
         See $msg for parameters documentation.
         @return String report
     **/
@@ -66,6 +66,7 @@ class add implements Command {
         $actSlug = $params[0];
         $PARAM_ACTION = 'add';
         $PARAM_RW = 'write';
+        $PARAM_REPORT = 'normal';
         if(isset($params[1])){
             $options = G5::parseOptionalParameters($params[1]);
             $possibles = ['action', 'rw'];
@@ -192,7 +193,7 @@ class add implements Command {
                     rawdata: ['url' => $url],
                 );
                 $p->update(); // DB - update() needed for occus and history
-                $report .= "Inserted $actSlug\n";
+                $report .= "Inserted person $actSlug\n";
             break;
             
             // Existing person updated
@@ -209,22 +210,9 @@ class add implements Command {
                 //
 //        	    Search::updatePerson($p_orig, $p);          // TODO implement
                 //
-                //
                 // recent acts - table wikirecent
                 //
-                if(isset($BC['header']['history']) && count($BC['header']['history']) != 0){
-                    $dateRecent = substr(end($BC['header']['history'])['date'], 0, 19);
-                    $descriptionRecent = end($BC['header']['history'])['action'];
-                }
-                else {
-                    $dateRecent = '';
-                    $descriptionRecent = '';
-                }
-                Recent::add(
-                    $p->data['id'],
-                    $dateRecent,
-                    "Addition of birth certificate",
-                ); // DB
+                self::addRecent($p->data['id'], $BC, $PARAM_ACTION); // DB
                 //
                 // Occupations
                 //
@@ -264,7 +252,7 @@ class add implements Command {
                     rawdata: ['url' => $url],
                 );
                 $p->update(); // DB
-                $report .= "Updated $actSlug\n";
+                $report .= "Updated person $actSlug\n";
         	break;
         }
         if($PARAM_RW == 'write'){

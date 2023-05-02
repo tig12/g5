@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Handles particular cases of g import
+    Handles particular cases of g55 import
 
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2022-10-03 23:14:42+02:00, Thierry Graff : creation
