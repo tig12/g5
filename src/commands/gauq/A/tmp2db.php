@@ -102,7 +102,6 @@ class tmp2db implements Command {
         $wp_fix_tzo = Wikiproject::createFromSlug('fix-tzo');
         $NIssues_tzo = 0;
         //
-        $wp_fix_name = Wikiproject::createFromSlug('fix-name');
         $NIssues_name = 0;
         
         // both arrays share the same order of elements,
@@ -135,6 +134,9 @@ class tmp2db implements Command {
                 $issue_name = null;
                 $new['trust'] = Cura5::TRUST_LEVEL;
                 // issue for missing name handled by command db/init/nameIssues - not done here
+                if(strpos($line['FNAME'], 'Gauquelin-') === 0){
+                    $NIssues_name++;
+                }                
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
                 $new['birth'] = [];
@@ -239,7 +241,7 @@ class tmp2db implements Command {
             $report .= "Added $NIssues_tzo issues TZO\n";
         }
         if($NIssues_name != 0){
-            $report .= "Added $NIssues_name issues name\n";
+            $report .= "$NIssues_name missing names\n";
         }
         $report .= "$nInsert persons inserted, $nDuplicates updated ($dt s)\n";
         return $report;

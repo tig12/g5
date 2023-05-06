@@ -9,9 +9,11 @@
 ********************************************************************************/
 namespace g5\commands\db\init;
 
-use tiglib\patterns\Command;
+use g5\model\wiki\Issue;
+use g5\model\wiki\Wikiproject;
+use g5\model\Person;
 use g5\model\DB5;
-use g5\model\wiki\issue;
+use tiglib\patterns\Command;
 
 class nameIssues implements Command {
     
@@ -24,20 +26,25 @@ class nameIssues implements Command {
             return "USELESS PARAMETER {$params[0]}\n";
         }
         $report = "--- db init nameIssues ---\n";
+        $t1 = microtime(true);
         $dblink = DB5::getDbLink();
         $N_inserted = 0;
-        $stmt_insert = $dblink->prepare("insert into issue(id_person,slug,type,description)values(?,?,?,?)");
-        $baseDescription = 'Missing Name in Gauquelin file ';
-        $t1 = microtime(true);
-        $stmt = $dblink->query("select id,slug,partial_ids->>'lerrcp' as \"lerrcp\" from person where slug like 'gauquelin-%'");
+        $baseDescription = 'Missing name in Gauquelin file ';
+        $wp = Wikiproject::createFromSlug('fix-name');
+        $stmt = $dblink->query("select slug from person where slug like 'gauquelin-%'");
         foreach($stmt->fetchAll(\PDO::FETCH_ASSOC) as $row){
-            $id_person = $row['id'];
-            $issue_slug = Issue::computeSlugFromPersonSlugAndType($row['slug'], Issue::TYPE_NAME);
-            $tmp = explode('-', $row['lerrcp']); // $row['lerrcp'] = string like 'A2-217'
+            $p = Person::createFromSlug($row['slug']);
+            $tmp = explode('-', $p->data['partial-ids']['lerrcp']); // $tmp = string like 'A2-217'
             $file = $tmp[0]; // $file = string like 'A2'
             $description = $baseDescription . $file;
-            $stmt_insert->execute([$id_person, $issue_slug, Issue::TYPE_NAME, $description]);
+            $issue = new Issue($p, Issue::TYPE_NAME, $description);
+            $id_issue = $issue->insert();
+            if($id_issue == -1){
+                echo "PROBLEM - could not insert issue {$issue->data['slug']}\n";
+                exit;
+            }
             $N_inserted++;
+            $issue->linkToWikiproject($wp);
         }
         $t2 = microtime(true);
         $dt = round($t2 - $t1, 3);

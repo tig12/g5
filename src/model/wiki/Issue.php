@@ -16,10 +16,8 @@ class Issue {
     
     /**
         The structure of an issue is defined by this array
-        Note that Issue is the only object of model to have its data private.
-        Choice made to ensure the coherence between its slug and its person.
     **/
-    private $data = [
+    public $data = [
         'id' => 0,
         'slug' => '',       // string like "abadie-joseph-1873-12-15--date"
         'type' => '',       // in general, one of the TYPE_* constants
