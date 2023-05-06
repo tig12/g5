@@ -126,9 +126,11 @@ class tmp2db100 implements Command {
                 $p->data['id'] = $p->insert(); // DB
                 $g->addMember($p->data['id']);
                 // Issue
-                $issue = new Issue($p, Issue::TYPE_DATE, Issue::TYPE_DATE, $msg);
-                $issue->insert(); // DB
-                $issue->linkToWikiproject($wp);
+                $issue = new Issue($p, Issue::TYPE_DATE, $msg);
+                $test = $issue->insert(); // DB
+                if($test != -1){
+                    $issue->linkToWikiproject($wp);
+                }
             }
             else{
                 // person already in Gauquelin data

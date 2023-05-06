@@ -134,12 +134,7 @@ class tmp2db implements Command {
                 $issue_tzo = null;
                 $issue_name = null;
                 $new['trust'] = Cura5::TRUST_LEVEL;
-                // $issue_name
-                if(strpos($line['FNAME'], 'Gauquelin-') === 0){
-                    $msg = "Missing Name in Gauquelin file $datafile";
-                    $issue_name = new Issue($p, Issue::TYPE_NAME, Issue::TYPE_NAME, $msg);
-                    $NIssues_name++;
-                }
+                // issue for missing name handled by command db/init/nameIssues - not done here
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
                 $new['birth'] = [];
@@ -153,7 +148,6 @@ class tmp2db implements Command {
                 if($line['NOTES-DATE'] != ''){ // NOTES-DATE filled in tmp file by legalTime.php
                     $issue_tzo = new Issue(
                         $p,
-                        Issue::TYPE_TZO,
                         Issue::TYPE_TZO,
                         self::timezoneIssueMessage($line['CY'], $line['NOTES-DATE'])
                     );
@@ -189,13 +183,12 @@ class tmp2db implements Command {
                 $p->data['id'] = $p->insert(); // DB
                 // insert issue after person because person id is needed
                 if($issue_tzo != null){
-                    $issue_tzo->insert(); // DB
-                    $issue_tzo->linkToWikiproject($wp_fix_tzo); // DB
+                    $test = $issue_tzo->insert(); // DB
+                    if($test != -1){
+                        $issue_tzo->linkToWikiproject($wp_fix_tzo); // DB
+                    }
                 }
-                if($issue_name != null){
-                    $issue_name->insert();
-                    $issue_name->linkToWikiproject($wp_fix_name); // DB
-                }
+                // issue for missing name handled by command db/init/nameIssues - not done here
                 $nInsert++;
             }
             else{

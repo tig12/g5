@@ -102,14 +102,15 @@ class tweaks implements Command {
                     self::$nIssues++;
                     $issue = new Issue(
                         $person,
-                        $yamlIssue['mark'],
                         $yamlIssue['type'],
                         $yamlIssue['description'],
                     );
-                    $issue->insert();
-                    if(isset($yamlIssue['wikiproject'])){
-                        $wp = Wikiproject::createFromSlug($yamlIssue['wikiproject']);
-                        $issue->linkToWikiproject($wp);
+                    $test = $issue->insert();
+                    if($test != -1){
+                        if(isset($yamlIssue['wikiproject'])){
+                            $wp = Wikiproject::createFromSlug($yamlIssue['wikiproject']);
+                            $issue->linkToWikiproject($wp);
+                        }
                     }
                 }
             }

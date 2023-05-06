@@ -123,9 +123,11 @@ class tmp2db implements Command {
                     . '<a href="/group/muller-afd2-men">Müller\'s list of 612 famous men</a> - time = 04:10 - birth place = Modica' . "\n"
                     . '<br>and as nb 367 in '
                     . '<a href="/group/muller-afd1-writers">Müller\'s list of 402 writers</a> - time = 18:00 - birth place = Siracusa';
-                $issue = new Issue($p, Issue::TYPE_DATE, Issue::TYPE_DATE, $msg);
-                $issue->insert();
-                $issue->linkToWikiproject($wp_fix_date);
+                $issue = new Issue($p, Issue::TYPE_DATE, $msg);
+                $test = $issue->insert();
+                if($test != -1){
+                    $issue->linkToWikiproject($wp_fix_date);
+                }
                 // repeat fields to include in $history
                 $new['ids-in-sources'] = [$source->data['slug'] => $muid];
                 if(M2men::OCCUS[$line['OCCU']] != 'X'){ // X => handled in data/db/person/muller-612-men.yml

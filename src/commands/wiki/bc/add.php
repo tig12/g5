@@ -14,6 +14,7 @@ use g5\model\wiki\Wiki;
 use g5\model\wiki\BC;
 use g5\model\wiki\Wikiproject;
 use g5\model\wiki\Recent;
+use g5\model\wiki\Issue;
 use g5\model\Person;
 use g5\model\Group;
 use g5\model\Source;
@@ -146,6 +147,33 @@ class add implements Command {
         //
         $url = Wiki::BASE_URL . '/' . str_replace(DS, '/', Wiki::slug2dir($actSlug));
         $url = "See <a href=\"$url\">Birth certificate transcription</a>";
+        //
+        // Resolve issues
+        // Done only for $PARAM_ACTION = 'add'
+        // (updating a BC is not the way used to solve an issue)
+        // 
+        if($PARAM_ACTION == Wiki::ACTION_ADD && isset($BC['opengauquelin']['fix-issues']) && !empty($BC['opengauquelin']['fix-issues'])){
+            // check that the issues exist
+            // modify database only if all the issues exist.
+            $issues = [];
+            foreach($BC['opengauquelin']['fix-issues'] as $fix){
+                $issue = Issue::createFromSlug($fix);
+echo "issue $fix\n";
+                if(is_null($issue)){
+                    return "ERROR IN FILE BC.yml: unexisting issue: $fix\n"
+                        . "Check entry opengauquelin / fix-issues\n"
+                        . "Nothing was modified in database\n";
+                }
+echo "\n"; print_r($issue); echo "\n";
+                $issues[] = $issue;
+            }
+exit;
+            // resolve issues
+            foreach($issues as $issue){
+                $issue->resolve();
+            }
+        }
+exit;
         
         // New person created
         switch($action){
@@ -185,7 +213,6 @@ class add implements Command {
         	    //
         	    // TODO modify exports
         	    //
-                //
                 $p->addHistory(
                     command: $commandName,
                     sourceSlug: 'Birth certificate',
@@ -245,6 +272,9 @@ class add implements Command {
                         Wikiproject::addActToProject($projectSlug, $p);
                     }
                 }
+        	    //
+        	    // TODO modify exports
+        	    //
                 $p->addHistory(
                     command: $commandName,
                     sourceSlug: 'Birth certificate',

@@ -218,9 +218,11 @@ class tmp2db implements Command {
                            . "Date"
                            . "<br>$g5Date for g5 $ERID"
                            . "<br>$cfeppDate for CFEPP $CFID";
-                    $issue = new Issue($p, Issue::TYPE_DATE, Issue::TYPE_DATE, $msg);
-                    $issue->insert();
-                    $issue->linkToWikiproject($wp_fix_date);
+                    $issue = new Issue($p, Issue::TYPE_DATE, $msg);
+                    $test = $issue->insert();
+                    if($test != -1){
+                        $issue->linkToWikiproject($wp_fix_date);
+                    }
                     if($reportType == 'full'){
                         $dateReport .= "\nDATE    g5 $ERID\t $g5Date {$p->data['name']['family']} - {$p->data['name']['given']}\n";
                         $dateReport .= "DATE CFEPP $CFID\t $cfeppDate $fname - $gname\n";
@@ -251,9 +253,11 @@ class tmp2db implements Command {
                            . "<br>Date UT"
                            . "<br>$g5DateUT for g5 $ERID"
                            . "<br>$cfeppDateUT for CFEPP $CFID";
-                    $issue = new Issue($p, Issue::TYPE_TZO, Issue::TYPE_TZO, $msg);
-                    $issue->insert();
-                    $issue->linkToWikiproject($wp_fix_date);
+                    $issue = new Issue($p, Issue::TYPE_TZO, $msg);
+                    $test = $issue->insert();
+                    if($test != -1){
+                        $issue->linkToWikiproject($wp_fix_date);
+                    }
                     if($reportType == 'full'){
                         $dateReport .= "\nDATE UT g5    $ERID\t $g5DateUT {$p->data['name']['family']} - {$p->data['name']['given']}\n";
                         $dateReport .= "DATE UT CFEPP $CFID\t $cfeppDateUT $fname - $gname\n";

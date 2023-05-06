@@ -143,12 +143,14 @@ class tmp2db implements Command {
                             $msg = "Check birth date because LERRCP $datafile and Gauquelin 1955 birth dates differ"
                                    . "<br>\nG 1955: {$line['DATE']}"
                                    . "<br>\n$datafile: {$p->data['birth']['date']}";
-                            // here $mark different from type because some records may have been already associated
+                            // here $issueType different from standard TYPE_DATE type because some records may have been already associated
                             // to a date issue in a previous tmp2db (difference between LERRCP and Müller)
-                            $mark = Issue::TYPE_DATE . '-g55';
-                            $issue = new Issue($p, Issue::TYPE_DATE, $mark, $msg);
-                            $issue->insert();
-                            $issue->linkToWikiproject($wp_fix_date);
+                            $issueType = Issue::TYPE_DATE . '-g55';
+                            $issue = new Issue($p, $issueType, $msg);
+                            $test = $issue->insert(); // DB
+                            if($test != -1){
+                                $issue->linkToWikiproject($wp_fix_date);
+                            }
                         }
                     }
                     $new = [
@@ -169,8 +171,7 @@ class tmp2db implements Command {
                         $new['slug'] = Person::doComputeSlug($new['name']['family'], $new['name']['given'], substr($p->data['birth']['date'], 0, 10));
                         $NFixedNames++;
                         // Resolve the name issue
-//                        $issueSlug = Issue::computeSlugFromPersonAndType($p->data['slug'], Issue::TYPE_NAME);
-//                        Issue::resolveIssue($issueSlug);
+                        Issue::resolvePersonIssue($p, Issue::TYPE_NAME);
                     }
                     $p->addHistory(
                         command:    $cmdSignature . ' ' . $groupKey,

@@ -186,11 +186,12 @@ class tmp2db implements Command {
                     $msg = "Check birth date because Müller and Gauquelin birth days differ\n"
                            . "<br>$gauqDay for Gauquelin $gauqId\n"
                            . "<br>$mulDay for Müller $mullerId";
-                    $issue = new Issue($p, Issue::TYPE_DATE, Issue::TYPE_DATE, $msg);
-                    $issue->insert(); // DB
-                    $NIssues_date++;
-                    $issue->linkToWikiproject($wp_fix_date);
-                    
+                    $issue = new Issue($p, Issue::TYPE_DATE, $msg);
+                    $test = $issue->insert(); // DB
+                    if($test != -1){
+                        $NIssues_date++;
+                        $issue->linkToWikiproject($wp_fix_date);
+                    }
                     if($reportType == 'full'){
                         $datesReport .= "\nCura $gauqId\t $gauqDay {$p->data['name']['family']} - {$p->data['name']['given']}\n";
                         $datesReport .= "Müller NR {$line['NR']}\t $mulDay {$line['FNAME']} - {$line['GNAME']}\n";
@@ -201,13 +202,15 @@ class tmp2db implements Command {
                     $gauqHour = substr($p->data['birth']['date'], 11);
                     $mulHour = substr($line['DATE'], 11);
                     if($gauqHour != $mulHour){
-                    $msg = "Check birth date because Müller and Gauquelin birth hours differ"
-                           . "\n<br>$gauqHour for Gauquelin $gauqId"
-                           . "\n<br>$mulHour for Müller $mullerId";
-                    $issue = new Issue($p, Issue::TYPE_DATE, Issue::TYPE_DATE, $msg);
-                    $issue->insert(); // DB
-                    $NIssues_date++;
-                    $issue->linkToWikiproject($wp_fix_date);
+                        $msg = "Check birth date because Müller and Gauquelin birth hours differ"
+                               . "\n<br>$gauqHour for Gauquelin $gauqId"
+                               . "\n<br>$mulHour for Müller $mullerId";
+                        $issue = new Issue($p, Issue::TYPE_DATE, $msg);
+                        $test = $issue->insert(); // DB
+                        if($test != -1){
+                            $NIssues_date++;
+                            $issue->linkToWikiproject($wp_fix_date);
+                        }
                     }
                 }
                 // update fields that are more precise in muller1083
@@ -226,11 +229,13 @@ class tmp2db implements Command {
                 // Müller's file contains only one person born in Paris and not in Gauquelin database : budin-pierre-constant-1846-11-09
                 if($line['PLACE'] == 'Paris'){
                     $msg = 'Birth date needs to be checked because Arno Müller coulndn\'t verify births in Paris';
-                    $issue = new Issue($p, Issue::TYPE_DATE, Issue::TYPE_DATE, $msg);
-                    $issue->insert(); // DB
-                    $NIssues_paris_medics++;
-                    $NIssues_date++;
-                    $issue->linkToWikiproject($wp_muller_paris_medics);
+                    $issue = new Issue($p, Issue::TYPE_DATE, $msg);
+                    $test = $issue->insert(); // DB
+                    if($test != -1){
+                        $NIssues_paris_medics++;
+                        $NIssues_date++;
+                        $issue->linkToWikiproject($wp_muller_paris_medics);
+                    }
                 }
                 //
                 $p->addOccus($newOccus); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here

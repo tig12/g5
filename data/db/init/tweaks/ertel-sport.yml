@@ -14,7 +14,6 @@
     ISSUES:
       -
         wikiproject: fix-date
-        mark: date
         type: date
         description: |
           Birth date comes from the internet, and must be checked.

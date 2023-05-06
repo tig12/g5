@@ -14,12 +14,16 @@ use g5\model\Person;
 
 class Issue {
     
-    /** The structure of an issue is defined by this array **/
-    public $data = [
+    /**
+        The structure of an issue is defined by this array
+        Note that Issue is the only object of model to have its data private.
+        Choice made to ensure the coherence between its slug and its person.
+    **/
+    private $data = [
         'id' => 0,
-        'type' => '',       // one of the TYPE_* constants
+        'slug' => '',       // string like "abadie-joseph-1873-12-15--date"
+        'type' => '',       // in general, one of the TYPE_* constants
         'person' => null,
-        'mark' => '',
         'description' => '',
     ];
     
@@ -47,66 +51,71 @@ class Issue {
         Creates a new issue, not already stored in database. 
         @param  $p              Person concerned by this issue.
                                 $p may not already be stored in database (with id = 0).
-        @param  $type           Type of the issue ; must be a constant Issue::TYPE_*.
-        @param  $mark           String identifying the issue for a given person.
-                                Must be unique for a given person.
-                                Free string, in general, the type of the issue is used as mark.
+        @param  $type           Type of the issue
+                                In general, $type is a constant Issue::TYPE_*.
+                                But can be a free string if needed.
         @param  $description    Description of the issue.
     **/
-    public function __construct(Person $p, string $type, string $mark, string $description){
+    public function __construct(Person $p, string $type, string $description=''){
         $this->data['person'] = $p;
-        $this->data['mark'] = $mark;
         $this->data['type'] = $type;
         $this->data['description'] = $description;
+        if(isset($p->data['slug'])){
+            $this->data['slug'] = Issue::computeSlugFromPersonSlugAndType($p->data['slug'], $type);
+        }
     }
     
     /**
-        Returns an object of type Issue from storage, using its slug,
-        or null if doesn't exist.
-        The Person object of the issue is not computed.
+        Returns an object of type Issue from database, using its slug, or null if doesn't exist.
+        WARNING: The Person object of the issue is an empty person.
     **/
-    public static function createFromSlug($slug): ?Issue{
+    public static function createFromSlug(string $issueSlug): ?Issue{
         $dblink = DB5::getDbLink();
         $stmt = $dblink->prepare('select * from issue where slug=?');
-        $stmt->execute([$slug]);
+        $stmt->execute([$issueSlug]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         if($res === false || count($res) == 0){
             return null;
         }
-        $issue = new Issue(null, $res['type'], $res['type'], $res['description']);
+        $p = new Person();
+        $issue = new Issue($p, $res['type'], $res['description']);
         $issue->data['id'] = $res['id'];
+        $issue->data['slug'] = $issueSlug;
         return $issue;
     }
     
     /**
-        Resolution of an issue is currently done through its deletion.
+        Resolves an issue stored in database.
     **/
-    public static function resolveIssue(string $slug) {
-        $issue = self::createFromSlug($slug);
-        if(is_null($issue)){
-            return; // throw exception ?
-        }
-        $issue->delete();
-    }
-    
-    // *********************** Slug manipulation *******************************
-    
-    /**
-        Computes the slug of an issue, a string like "abadie-joseph-1873-12-15--date".
-    **/
-    private function computeSlug(): string {
-        return $this->data['person']->data['slug'] . '--' . $this->data['mark'];
+    public static function resolvePersonIssue(Person $p, string $issueType): void {
+        $issueSlug = Issue::computeSlugFromPersonSlugAndType($p-data['slug'], $issueType);
+        $issue = Issue::createFromSlug($issueSlug);
+        $issue->resolve();
     }
     
     /**
         Computes an issue slug from the person slug and the issue type.
     **/
-    public static function computeSlugFromPersonAndType(string $personSlug, string $issueType): string {
+    private static function computeSlugFromPersonSlugAndType(string $personSlug, string $issueType): string {
         return $personSlug . '--' . $issueType;
+    }
+    
+    // ***********************************************************************
+    //                                  INSTANCE
+    // ***********************************************************************
+    
+    /**
+        Resolution of an issue is currently done through its deletion.
+    **/
+    public function resolve() {
+        $this->delete();
     }
     
     // *********************** CRUD *******************************
     
+    /** 
+        Returns the id of the inserted person or -1 if the insertion couldn't be done.
+    **/
     public function insert(): int {
         if($this->data['person']->data['id'] == 0){
             throw new \Exception("You can't insert an issue related to a person not stored in database (with id = 0)");
@@ -118,15 +127,23 @@ class Issue {
             type,
             description
         )values(?,?,?,?) returning id');
-        $stmt->execute([
-            ($this->data['person'])->data['id'],
-            $this->computeSlug(),
-            $this->data['type'],
-            $this->data['description'],
-        ]);
-        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
-        $this->data['id'] = $res['id'];
-        return $this->data['id'];
+        // Here, try / catch to handle issues on persons belonging to several groups during the construction of the initial database.
+        // Their issue would be inserted twice with the same slug, violating the unique constraint on table issue.
+        // ex: sebert-hippolyte-1839-01-30 belongs to two G55 groups
+        try{
+            $stmt->execute([
+                ($this->data['person'])->data['id'],
+                $this->data['slug'],
+                $this->data['type'],
+                $this->data['description'],
+            ]);
+            $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $this->data['id'] = $res['id'];
+            return $this->data['id'];
+        }
+        catch(\Exception $e){
+            return -1;
+        }
     }
 
     /** 
@@ -142,7 +159,6 @@ class Issue {
     }        
     
     /**
-        @param  $
     **/
     public function delete() {
         $dblink = DB5::getDbLink();

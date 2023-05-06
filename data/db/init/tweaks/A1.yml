@@ -14,7 +14,6 @@
     ISSUES:
       -
         wikiproject: fix-date
-        mark: date
         type: date
         description: |
           Page <a href="https://earlyaviators.com/eborn1.htm">https://earlyaviators.com/eborn1.htm</a> says: "11 July 1874 (some sources say 1873)". Gauquelin gives 1873. A check in civil registry is necessary to find out.

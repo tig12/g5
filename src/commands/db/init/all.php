@@ -302,6 +302,8 @@ class all implements Command {
                 echo g55Tmp2db::execute(['g55', 'tmp2db', $groupKey]);
             }
             
+//            echo GauquelinNameIssues::execute();
+            
             echo dbInitOccu2::execute();
         }
         
