@@ -1,6 +1,6 @@
 #
 # Describes the structure of a Person
-# Used to create an empty person
+# Used to create an empty person (object of class src/model/Person)
 #
 
 # int - id managed by dbms

@@ -9,41 +9,49 @@
 
 namespace g5\model\wiki;
 
-use g5\model\DB5;
 use g5\model\wiki\Wiki;
-use g5\app\Config;
+use g5\model\wiki\WikiPerson;
+use g5\model\DB5;
+use g5\G5;
 
 class BC {
     
     /** Name of a file containing the description of a birth certificate **/
-    const FILENAME = 'BC.yml';
+    const TEMPLATE_FILENAME = 'BC.yml';
     
     /** Key used in person's field $data['acts'] to store a BC **/
     const PERSON_ACT_KEY = 'birth';
     
     /**
-        @return Path to the directory containing birth certificates.
+        @return Path to the template file BC.yml - src/model/wiki/templates/BC.yml.
+    **/
+    public static function templateFilePath(){
+        return G5::ROOT_DIR . DS . implode(DS, ['model', 'wiki', 'templates', BC::TEMPLATE_FILENAME]);
+    }
+
+    /**
+        @return Path to the directory containing birth certificates - by default data/wiki/person.
     **/
     public static function rootDir(){
-        return Wiki::rootDir() . DS . 'person';
+        return WikiPerson::rootDir();
     }
 
     /**
         Returns the path of the directory corresponding to a slug.
         Ex: data/wiki/person/1811/10/25/galois-evariste-1811-10-25
-        @param  $slug The slug of the person to add ; ex: galois-evariste-1811-10-25
+        @param  $personSlug The slug of the person to add ; ex: galois-evariste-1811-10-25
     **/
-    public static function dirPath(string $slug) {
-        return self::rootDir() . DS . Wiki::slug2dir($slug);
+    public static function dirPath(string $personSlug) {
+        return BC::rootDir() . DS . Wiki::slug2dir($personSlug);
     }
 
     /**
         Returns the path of a BC.yml file corresponding to a slug.
         Ex: data/wiki/person/1811/10/25/galois-evariste-1811-10-25/BC.yml
-        @param  $slug The slug of the person to add ; ex: galois-evariste-1811-10-25
+        @param  $personSlug The slug of the person to add ; ex: galois-evariste-1811-10-25
     **/
-    public static function filePath(string $slug) {
-        return self::dirPath($slug) . DS . self::FILENAME;
+    public static function filePath(string $personSlug) {
+        return BC::dirPath($personSlug) . DS . BC::TEMPLATE_FILENAME;
     }
     
     /**

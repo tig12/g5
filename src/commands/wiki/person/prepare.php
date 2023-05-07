@@ -1,21 +1,21 @@
 <?php
 /********************************************************************************
-    - Creates a subdirectory of data/wiki/persons where a file BC.yml should be stored.
-    - Creates an empty BC.yml file
+    - Creates a subdirectory of data/wiki/persons where a file person.yml should be stored.
+    - Creates an empty person.yml file
 
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
-    @history    2022-12-24 18:21:04+01:00, Thierry Graff : Creation
+    @history    2023-05-07 10:45:29+02:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\commands\wiki\bc;
+namespace g5\commands\wiki\person;
 
 use tiglib\patterns\Command;
-use g5\model\wiki\BC;
+use g5\model\wiki\WikiPerson;
 
 class prepare implements Command {
     
     /** 
         @param  $params Array containing one element:
-                    the slug of the person to add ; ex: galois-evariste-1811-10-25
+                    the slug of the person to add ; ex: grothendieck-alexandre-1928-03-28
         @return String report
     **/
     public static function execute($params=[]): string{
@@ -29,7 +29,7 @@ class prepare implements Command {
         $report =  "--- wiki bc prepare $slug ---\n";
         
         try{
-            $dir = BC::dirPath($slug);
+            $dir = WikiPerson::dirPath($slug);
         }
         catch(\Exception $e){
             return "INVALID SLUG: $slug - the directory was not created\n"
@@ -40,10 +40,10 @@ class prepare implements Command {
             $report .= "Created directory $dir\n";
         }
         
-        $destFile = BC::filePath($slug);;
+        $destFile = WikiPerson::filePath($slug);;
         # if BC.yml already exists, don't replace it
         if(!is_file($destFile)){
-            copy(BC::templateFilePath(), $destFile);
+            copy(WikiPerson::templateFilePath(), $destFile);
             $report .= "Created file $destFile\n";
         }
         
