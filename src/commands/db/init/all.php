@@ -27,13 +27,15 @@ use g5\commands\gauq\Cura5;
 use g5\commands\Newalch;
 use g5\commands\wd\Wikidata;
 
-use g5\commands\db\init\dbcreate                as dbInitDBCreate;
-use g5\commands\db\init\occus1                  as dbInitOccu1;
-use g5\commands\db\init\occus2                  as dbInitOccu2;
-use g5\commands\db\fill\source                  as dbFillSource;
-use g5\commands\db\init\tweaks                  as dbInitTweaks;
+// commands of this package
+use g5\commands\db\init\dbcreate                as DBInitDBCreate;
+use g5\commands\db\init\occus1                  as DBInitOccu1;
+use g5\commands\db\init\occus2                  as DBInitOccu2;
+use g5\commands\db\fill\source                  as DBFillSource;
+use g5\commands\db\init\tweaks                  as DBInitTweaks;
 use g5\commands\db\init\stats                   as DBInitStats;
-use g5\commands\db\init\wiki                    as dbInitWiki;
+use g5\commands\db\init\wiki                    as DBInitWiki;
+use g5\commands\db\init\nameIssues              as DBInitNameIssues;
 
 // order of imports corresponds to order of execution
 
@@ -233,19 +235,19 @@ class all implements Command {
             echo "***********************\n";
             echo "***  Fill database  ***\n";
             echo "***********************\n";
-            echo dbInitDBCreate::execute([]);
+            echo DBInitDBCreate::execute([]);
             // Main sources are inserted here because they are used in various places
             // Sources related to specific groups are inserted in the code of related tmp2db
-            echo dbFillSource::execute([Gauquelin::SOURCE_DEFINITION_FILE]);
-            echo dbFillSource::execute([LERRCP::SOURCE_DEFINITION_FILE]);
-            echo dbFillSource::execute([Muller::SOURCE_DEFINITION_FILE]);
-            echo dbFillSource::execute([AFD::SOURCE_DEFINITION_FILE]);
-            echo dbFillSource::execute([Ertel::SOURCE_DEFINITION_FILE]);
-            echo dbFillSource::execute([Cura5::SOURCE_DEFINITION_FILE]);
-            echo dbFillSource::execute([Newalch::SOURCE_DEFINITION_FILE]);
-            echo dbFillSource::execute([Wikidata::SOURCE_DEFINITION_FILE]);
-            echo dbFillSource::execute([G5::SOURCE_DEFINITION_FILE]);
-            echo dbInitOccu1::execute();
+            echo DBFillSource::execute([Gauquelin::SOURCE_DEFINITION_FILE]);
+            echo DBFillSource::execute([LERRCP::SOURCE_DEFINITION_FILE]);
+            echo DBFillSource::execute([Muller::SOURCE_DEFINITION_FILE]);
+            echo DBFillSource::execute([AFD::SOURCE_DEFINITION_FILE]);
+            echo DBFillSource::execute([Ertel::SOURCE_DEFINITION_FILE]);
+            echo DBFillSource::execute([Cura5::SOURCE_DEFINITION_FILE]);
+            echo DBFillSource::execute([Newalch::SOURCE_DEFINITION_FILE]);
+            echo DBFillSource::execute([Wikidata::SOURCE_DEFINITION_FILE]);
+            echo DBFillSource::execute([G5::SOURCE_DEFINITION_FILE]);
+            echo DBInitOccu1::execute();
             
             // Done here to build associations between issues and wiki projects.
             echo wikiAddAllProjects::execute(['small']);
@@ -255,11 +257,11 @@ class all implements Command {
 //break;
             }
 //exit;
-            echo dbInitTweaks::execute(['A1.yml']);
+            echo DBInitTweaks::execute(['A1.yml']);
             echo A6occu::execute(['A6','A6occu']);
             
             echo D6tmp2db::execute(['D6', 'tmp2db', 'small']);
-            echo dbInitTweaks::execute(['D6.yml']);
+            echo DBInitTweaks::execute(['D6.yml']);
             
             echo D10tmp2db::execute(['D10', 'tmp2db', 'small']);
             
@@ -276,13 +278,13 @@ class all implements Command {
             echo csiIrvingTmp2db::execute(['small']);
             
             echo M3womenTmp2db::execute(['small']);
-            echo dbInitTweaks::execute(['muller-234-women.yml']);
+            echo DBInitTweaks::execute(['muller-234-women.yml']);
             
             echo M2menTmp2db::execute(['small']);
-            echo dbInitTweaks::execute(['muller-612-men.yml']);
+            echo DBInitTweaks::execute(['muller-612-men.yml']);
             
             echo ErteSportTmp2db::execute(['small']);
-            echo dbInitTweaks::execute(['ertel-sport.yml']);
+            echo DBInitTweaks::execute(['ertel-sport.yml']);
             
             echo CFEPPTmp2db::execute(['small']);
             
@@ -302,16 +304,16 @@ class all implements Command {
                 echo g55Tmp2db::execute(['g55', 'tmp2db', $groupKey]);
             }
             
-//            echo GauquelinNameIssues::execute();
+            echo DBInitNameIssues::execute();
             
-            echo dbInitOccu2::execute();
+            echo DBInitOccu2::execute();
         }
         
         if($param == 'wiki' || $param == 'all' || $param == 'dev'){
             echo "***************************\n";
             echo "***    Add wiki data    ***\n";
             echo "***************************\n";
-            echo dbInitWiki::execute(['small']);
+            echo DBInitWiki::execute(['small']);
         }
         
         if($param == 'finalize' || $param == 'all' || $param == 'dev'){

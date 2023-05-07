@@ -12,9 +12,9 @@
 namespace g5\commands\db\init;
 
 use g5\model\DB5;
-use g5\model\wiki\Wiki as ModelWiki;
-use g5\commands\wiki\bc\add as CommandBCAdd;
-use g5\commands\wiki\bc\update as CommandBCUpdate;
+use g5\model\wiki\Wiki          as ModelWiki;
+use g5\commands\wiki\bc\add     as CommandBCAdd;
+use g5\commands\wiki\bc\update  as CommandBCUpdate;
 use tiglib\patterns\Command;
 
 class wiki implements Command {
@@ -32,7 +32,7 @@ class wiki implements Command {
         @return report.
     **/
     public static function execute($params=[]): string {
-        $msg = "INVALID USAGE - This command doesn't needs one parameter:\n"
+        $msg = "INVALID USAGE - This command needs one parameter:\n"
             . "  - small : echoes a minimal report\n"
             . "  - full : echoes a detailed report\n";
         if(count($params) != 1){

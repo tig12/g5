@@ -150,7 +150,7 @@ class add implements Command {
         //
         // Resolve issues
         // Done only for $PARAM_ACTION = 'add'
-        // (updating a BC is not the way used to solve an issue)
+        // (updating a BC is not the way used to solve an issue - use command wiki issue resolve)
         // 
         if($PARAM_ACTION == Wiki::ACTION_ADD && isset($BC['opengauquelin']['fix-issues']) && !empty($BC['opengauquelin']['fix-issues'])){
             // check that the issues exist
@@ -158,22 +158,19 @@ class add implements Command {
             $issues = [];
             foreach($BC['opengauquelin']['fix-issues'] as $fix){
                 $issue = Issue::createFromSlug($fix);
-echo "issue $fix\n";
                 if(is_null($issue)){
                     return "ERROR IN FILE BC.yml: unexisting issue: $fix\n"
                         . "Check entry opengauquelin / fix-issues\n"
                         . "Nothing was modified in database\n";
                 }
-echo "\n"; print_r($issue); echo "\n";
                 $issues[] = $issue;
             }
-exit;
             // resolve issues
             foreach($issues as $issue){
                 $issue->resolve();
+                Stats::removeIssue();
             }
         }
-exit;
         
         // New person created
         switch($action){
@@ -275,10 +272,17 @@ exit;
         	    //
         	    // TODO modify exports
         	    //
+        	    $newData = [];
+                if(isset($BC['transcription'])){
+                    $newData = array_replace_recursive($newData, $BC['transcription']);
+                }
+                if(isset($BC['extras'])){
+                    $newData = array_replace_recursive($newData, $BC['extras']);
+                }
                 $p->addHistory(
                     command: $commandName,
                     sourceSlug: 'Birth certificate',
-                    newdata: array_merge_recursive($BC['transcription'], $BC['extras']),
+                    newdata: $newData,
                     rawdata: ['url' => $url],
                 );
                 $p->update(); // DB

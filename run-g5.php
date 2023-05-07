@@ -20,7 +20,7 @@ use g5\app\Run;
 // parameter checking
 //
 $args1 = Run::getArgs1();
-$args1_str = implode(", ", $args1);
+$args1_str = implode("\n    ", $args1);
 
 $USAGE = <<<USAGE
 -------                                                                                               
@@ -36,17 +36,17 @@ USAGE;
 if(count($argv) < 2){
     echo "WRONG USAGE - run-g5.php needs at least 3 arguments\n";
     echo $USAGE;
-    echo "Possible values for argument 1 : $args1_str\n";
+    echo "Possible values for argument 1 :\n    - $args1_str\n";
     exit;
 }
 else{
     $arg1 = $argv[1];
     $args1 = Run::getArgs1();
-    $args1_str = implode(", ", $args1);
+    $args1_str = implode("\n    - ", $args1);
     if(!in_array($arg1, $args1)){
         echo $USAGE;
         echo "WRONG USAGE - INVALID ARGUMENT 1 : $arg1\n";
-        echo "Possible values for argument 1 : $args1_str\n";
+        echo "Possible values for argument 1 :\n    - $args1_str\n";
         exit;
     }
 }
@@ -54,12 +54,12 @@ else{
 
 // check arg2
 $arg2s = Run::getArgs2($arg1);
-$arg2s_str = implode(", ", $arg2s);
+$arg2s_str = implode("\n    - ", $arg2s);
 if(count($argv) < 3){
     echo "WRONG USAGE - run-g5.php needs at least 3 arguments\n";
     echo $USAGE;
     echo "\n";
-    echo "Possible argument 2 for argument 1 = $arg1 : $arg2s_str\n";
+    echo "Possible argument 2 for argument 1 = $arg1 :\n    - $arg2s_str\n";
     echo "\n";
     exit;
 }
@@ -69,7 +69,7 @@ else{
         echo $USAGE;
         echo "WRONG USAGE - INVALID ARGUMENT 2 : $arg2\n";
         echo "\n";
-        echo "Possible argument 2 for argument 1 = $arg1 : $arg2s_str\n";
+        echo "Possible argument 2 for argument 1 = $arg1 :\n    - $arg2s_str\n";
         echo "\n";
         exit;
     }
@@ -78,12 +78,12 @@ else{
 
 // check arg3
 $arg3s = Run::getArgs3($arg1, $arg2);
-$arg3s_str = implode(", ", $arg3s);
+$arg3s_str = implode("\n    - ", $arg3s);
 if(count($argv) < 4){
     echo "WRONG USAGE - run-g5.php needs at least 3 arguments\n";
     echo $USAGE;
     echo "\n";
-    echo "Possible argument 3 for $arg1 / $arg2 : $arg3s_str\n";
+    echo "Possible argument 3 for $arg1 / $arg2 :\n    - $arg3s_str\n";
     echo "\n";
     exit;
 }
@@ -92,7 +92,7 @@ else{
     if(!in_array($arg3, $arg3s)){                  
         echo "WRONG USAGE - INVALID ARGUMENT 3 : $arg3\n";
         echo "\n";
-        echo "Possible argument 3 for $arg1 / $arg2 : $arg3s_str\n";
+        echo "Possible argument 3 for $arg1 / $arg2 :\n    - $arg3s_str\n";
         echo "\n";
         exit;
     }

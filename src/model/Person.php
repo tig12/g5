@@ -525,6 +525,7 @@ class Person {
         // In this case, the bith time is not overriden by the BC
         // This exception comes from birth in Paris prior to 1860 : BCs were destroyed and the original acts were lost.
         // but Gauquelin still gives birth hour (the way he obtained them is not known).
+        //
         $bdate_orig = $this->data['birth']['date'];
         $bdate_new = '';
         if(isset($BC['transcription']['birth']['date'])){
@@ -533,8 +534,13 @@ class Person {
         else if(isset($BC['extras']['birth']['date'])){
             $bdate_new = $BC['extras']['birth']['date'];
         }
-        $this->data = array_replace_recursive($this->data, $BC['transcription']);
-        $this->data = array_replace_recursive($this->data, $BC['extras']);
+        //
+        if(isset($this->data, $BC['transcription'])){
+            $this->data = array_replace_recursive($this->data, $BC['transcription']);
+        }
+        if(isset($BC['extras'])){
+            $this->data = array_replace_recursive($this->data, $BC['extras']);
+        }
         $this->data['slug'] = $BC['slug'];
         if(strlen($bdate_new) == 10 && strlen($bdate_orig) > 10){
             $this->data['birth']['date'] = $bdate_orig;

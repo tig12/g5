@@ -184,4 +184,28 @@ class Stats{
         ]);
     }
     
+    /**
+        n_issues++ in table stats
+    **/
+    public static function addIssue() {
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->query("select n_issues from stats");
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $n_issues = $row['n_issues'] + 1;
+        $stmt = $dblink->prepare("update stats set n_issues=?");
+        $stmt->execute([$n_issues]);
+    }
+    /**
+        n_issues-- in table stats
+    **/
+    public static function removeIssue() {
+        $dblink = DB5::getDbLink();
+        $stmt = $dblink->query("select n_issues from stats");
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $n_issues = $row['n_issues'] - 1;
+        $stmt = $dblink->prepare("update stats set n_issues=?");
+        $stmt->execute([$n_issues]);
+    }
+    
+    
 } // end class

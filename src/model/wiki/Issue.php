@@ -149,9 +149,10 @@ class Issue {
     **/
     public function linkToWikiproject($wp){
         if($wp->data['id'] == null || $wp->data['id'] == 0){
-            throw new \Exception('Trying to insert a null wiki project $wp = ' . print_r($wp, true));
+            throw new \Exception('Trying to link an issue to a null wiki project $wp = ' . print_r($wp, true));
         }
         $dblink = DB5::getDbLink();
+        // when an issue is solved, it is removed from all its projects
         $stmt = $dblink->prepare('insert into wikiproject_issue(id_issue,id_project) values(?,?)');
         $stmt->execute([$this->data['id'], $wp->data['id']]);
     }        
