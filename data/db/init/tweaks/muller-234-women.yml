@@ -303,28 +303,6 @@
   occus:
     - sculptor
 
--  
-  ADMIN: 
-    ACTION: update
-  ids-in-sources:
-    afd3: '177'
-    wd: Q2366473
-  name:
-    family: Eymery
-    given: Marguerite
-    fame:
-      given: Rachilde
-    alter:
-      - Jean de Childra
-      - Jean de Chibra
-    spouse: Valette
-  birth:
-    date: '1860-02-11 06:00'
-  notes:
-    - |
-      2021-07-10 17:20:03+01:00 Date checked on civil registry
-      because Müller and Gauquelin differ - Gauquelin was right
-
 # Milly Steger
 -
   ADMIN: 

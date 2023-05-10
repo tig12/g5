@@ -187,73 +187,6 @@ class Person {
         return $slug;
     }
     
-    /**
-        Computes the different forms of a person name.
-        @param  $arrNames  Array representing the name, as stored in database. Ex: [
-            'given' => Pierre
-            'family' => Alard
-            'official' => [
-                'given' => ''
-                'family' => ''
-            ]
-            'fame' => [
-                'full' => ''
-                'given' => ''
-                'family' => ''
-            ]
-            'alter' => []
-            'nobl' => ''
-        ]
-        @return A regular array of possible names
-    **/
-    public static function computeNames(array $arrNames) {
-        $res = [];
-        // full names
-        if($arrNames['fame']['full'] != ''){
-            $res[] = $arrNames['fame']['full'];
-        }
-        if(!empty($arrNames['alter'])){
-            foreach($arrNames['alter'] as $alt){
-                $res[] = $alt;
-            }
-        }
-        // combinations of given / family names
-        $givs = [];
-        $fams = [];
-        // given
-        if($arrNames['official']['given'] != '' && $arrNames['given'] == '' && $arrNames['fame']['given'] == ''){
-            // official given name retained only if no other given names available.
-            $givs[] = $arrNames['official']['given'];
-        }
-        if($arrNames['given'] != ''){
-            $givs[] = $arrNames['given'];
-        }
-        if($arrNames['fame']['given'] != ''){
-            $givs[] = $arrNames['fame']['given'];
-        }
-        // family
-        if($arrNames['family'] != ''){
-            $tmp = $arrNames['family'];
-            if($arrNames['nobl'] != ''){
-                $tmp = $arrNames['nobl'] . $tmp;
-            }
-            $fams[] = $tmp;
-        }
-        if($arrNames['fame']['family'] != ''){
-            $fams[] = $arrNames['fame']['family'];
-        }
-        if($arrNames['official']['family'] != ''){
-            $fams[] = $arrNames['official']['family'];
-        }
-        // combinations given / family
-        foreach($givs as $giv){
-            foreach($fams as $fam){
-                $res[] = $giv . ' ' . $fam;
-            }
-        }
-        return $res;
-    }
-    
     // ***********************************************************************
     //                                  INSTANCE
     // ***********************************************************************
@@ -301,6 +234,7 @@ class Person {
     
     /**
         Computes the slug of a person.
+        Fame name has priority on regular name.
         ex :
             - galois-evariste-1811-10-25 for a person with a known birth time.
             - galois-evariste for a person without a known birth time.
@@ -309,16 +243,16 @@ class Person {
     **/
     public function computeSlug() {
         $name1 = $name2 = '';
-        if($this->data['name']['family']){
-            $name1 = $this->data['name']['family'];
-            $name2 = $this->data['name']['given'];
-        }
-        else if($this->data['name']['fame']['full']){
+        if($this->data['name']['fame']['full']){
             $name1 = $this->data['name']['fame']['full'];
         }
         else if($this->data['name']['fame']['family']){
             $name1 = $this->data['name']['fame']['family'];
             $name2 = $this->data['name']['fame']['given'];
+        }
+        else if($this->data['name']['family']){
+            $name1 = $this->data['name']['family'];
+            $name2 = $this->data['name']['given'];
         }
         else{
             throw new \Exception(
@@ -359,28 +293,6 @@ class Person {
             return $this->data['name']['fame']['given'];
         }
         return '';
-    }
-    
-    /**
-        Computes $this->data['name']['family'] and $this->data['name']['given'].
-    **/
-    public function computeCommonName(): void {
-        // 1 - try with fame name.
-        if($this->data['name']['fame']['full'] != ''){
-            $this->data['name']['family'] = $this->data['name']['fame']['full'];
-            return;
-        }
-        if($this->data['name']['fame']['family'] != '' || $this->data['name']['fame']['given'] != ''){
-            $this->data['name']['family'] = $this->data['name']['fame']['family'];
-            $this->data['name']['given'] = $this->data['name']['fame']['given'];
-            return;
-        }
-        // 2 - try with official name 
-        if($this->data['name']['official']['family'] != '' || $this->data['name']['official']['given'] != ''){
-            $this->data['name']['family'] = $this->data['name']['official']['family'];
-            $this->data['name']['given'] = $this->data['name']['official']['given'];
-            return;
-        }
     }
     
     /** 
@@ -504,63 +416,6 @@ class Person {
             if(!in_array($note, $this->data['notes'])){
                 $this->data['notes'][] = $note;
             }
-        }
-    }
-    
-    /**
-        Adds information coming from a file BC.yml to a person.
-        Modifies a person, but does not modify anything in database.
-        - Fills a person's field $data['acts']['birth'] with the content of a file BC.yml
-        - Fills other person's fields from the fields 'transcription' and 'extras' of the act.
-        - If, after adding act information, the person doesn't contain $data['name']['given'] and/or $data['name']['family'],
-          default values are computed from official name.
-        - If BC field 'extras' doesn't contain a field 'trust', field trust of the person is set to Trust::BC
-        @param  $BC     Associative array containing the information of a file BC.yml
-    **/
-    public function addBC(array $BC): void {
-        //
-        // Transfer in $p->data the informations present in the act
-        // act is considered more reliable than other sources, so replace existing data.
-        // With one exception: if the person has a birth time and the BC has no birth time.
-        // In this case, the bith time is not overriden by the BC
-        // This exception comes from birth in Paris prior to 1860 : BCs were destroyed and the original acts were lost.
-        // but Gauquelin still gives birth hour (the way he obtained them is not known).
-        //
-        $bdate_orig = $this->data['birth']['date'];
-        $bdate_new = '';
-        if(isset($BC['transcription']['birth']['date'])){
-            $bdate_new = $BC['transcription']['birth']['date'];
-        }
-        else if(isset($BC['extras']['birth']['date'])){
-            $bdate_new = $BC['extras']['birth']['date'];
-        }
-        //
-        if(isset($this->data, $BC['transcription'])){
-            $this->data = array_replace_recursive($this->data, $BC['transcription']);
-        }
-        if(isset($BC['extras'])){
-            $this->data = array_replace_recursive($this->data, $BC['extras']);
-        }
-        $this->data['slug'] = $BC['slug'];
-        if(strlen($bdate_new) == 10 && strlen($bdate_orig) > 10){
-            $this->data['birth']['date'] = $bdate_orig;
-        }
-        //
-        $this->data['acts'][BC::PERSON_ACT_KEY] = $BC;
-        // 
-        //
-        // Useful for new person, if extras.name.family and extras.name.given are not filled.
-        // Official name is filled from transcription.
-        //
-        if($this->data['name']['family'] == '' && $this->data['name']['given'] == ''){
-            $this->computeCommonName();
-        }
-        // For BCs, set trust to BC unless specified in extras
-        if(isset($BC['extras']['trust']) && $BC['extras']['trust'] != ''){
-            $this->data['trust'] = $BC['extras']['trust'];
-        }
-        else {
-            $this->data['trust'] = Trust::BC;
         }
     }
     

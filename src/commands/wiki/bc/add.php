@@ -175,7 +175,7 @@ class add implements Command {
         // New person created
         switch($action){
         	case 'insert':
-        	    $p->addBC($BC);
+        	    BC::addToPerson($p, $BC);
         	    // insert() needed now to have the person id
                 $p->insert(); // DB
         	    //
@@ -224,7 +224,7 @@ class add implements Command {
             case 'update':
                 $p_orig = clone $p;
                 //
-        	    $p->addBC($BC);
+        	    BC::addToPerson($p, $BC);
         	    //
         	    // stats
         	    //

@@ -10,7 +10,7 @@ namespace g5\commands\db\init;
 
 use tiglib\patterns\Command;
 use g5\model\DB5;
-use g5\model\Person;
+use g5\model\Search as ModelSearch;
 
 class search implements Command {
     
@@ -39,7 +39,7 @@ class search implements Command {
         foreach($stmt->fetchAll(\PDO::FETCH_ASSOC) as $row){
             $slug = $row['slug'];
             $json_name = json_decode($row['name'], true);
-            $names = Person::computeNames($json_name);
+            $names = ModelSearch::computePersonNames($json_name);
             $bday = substr($slug, -10);
             foreach($names as $name){
                 $stmt_insert->execute([$slug, $bday, $name]);
