@@ -150,7 +150,6 @@ class tweaks implements Command {
         // Always use the first element of ids-in-sources to find the person
         $source = array_keys($tweak['ids-in-sources'])[0];
         $idInSource = $tweak['ids-in-sources'][$source];
-echo "$source, $idInSource\n";
         $p = ModelPerson::createFromSourceId($source, $idInSource); // DB
         if(is_null($p)){
             $msg = "TWEAK ERROR: Person doesn't exist in database - source = $source, id = $idInSource"

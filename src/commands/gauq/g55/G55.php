@@ -126,7 +126,7 @@ class G55 {
     /**
         Returns the possible group keys that can be used to invoke commands raw2tmp and tmp2db
     **/
-    public static function getPossibleGroupKeys() {
+    public static function getPossibleGroupKeys(): array {
         return array_keys(self::GROUPS);
     }
     

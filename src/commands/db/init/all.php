@@ -103,7 +103,7 @@ use g5\commands\db\init\stats;
 use g5\commands\db\init\search;
 
 // export
-use g5\commands\gauq\all\export                 as curaExport;
+use g5\commands\gauq\all\export                 as GauquelinExport;
 use g5\commands\muller\m1writers\export         as M1WritersExport;
 use g5\commands\muller\m1writers\export100      as M1Writers100export;
 use g5\commands\muller\m2men\export             as M2MenExport;
@@ -254,9 +254,7 @@ class all implements Command {
             
             foreach($filesGauqA as $datafile){
                 echo Atmp2db::execute([$datafile, 'tmp2db', 'small']);
-//break;
             }
-//exit;
             echo DBInitTweaks::execute(['A1.yml']);
             echo A6occu::execute(['A6','A6occu']);
             
@@ -328,13 +326,14 @@ class all implements Command {
             echo "***************************\n";
             echo "***    Export groups    ***\n";
             echo "***************************\n";
+            // exports of individual historical groups
             foreach($filesGauqA as $datafile){
-                echo curaExport::execute([$datafile, 'export', 'sep=true']);
+                echo GauquelinExport::execute([$datafile, 'export', 'sep=true']);
             }
-            echo curaExport::execute(['D6', 'export', 'sep=true']);
-            echo curaExport::execute(['D10', 'export', 'sep=true']);
-            echo curaExport::execute(['E1', 'export', 'sep=true']);
-            echo curaExport::execute(['E3', 'export', 'sep=true']);
+            echo GauquelinExport::execute(['D6', 'export', 'sep=true']);
+            echo GauquelinExport::execute(['D10', 'export', 'sep=true']);
+            echo GauquelinExport::execute(['E1', 'export', 'sep=true']);
+            echo GauquelinExport::execute(['E3', 'export', 'sep=true']);
             echo M1WritersExport::execute(['sep=true']);
             echo M1Writers100export::execute(['sep=true']);
             echo M2MenExport::execute(['sep=true']);
@@ -344,7 +343,10 @@ class all implements Command {
             echo CFEPPExport::execute(['sep=true,group=1120']);
             echo CFEPPExport::execute(['sep=true,group=1066']);
             echo ErtelExport::execute(['sep=true']);
-            //
+            foreach($g55Groups as $groupKey){
+                echo GauquelinExport::execute(['g55', 'export', $groupKey, 'sep=true,zip=false']);
+            }
+            // other exports
             echo skepticsExport::execute(['sep=true']);
             echo allOccusExport::execute([]);
             echo allPersonsExport::execute(['sep=true']);

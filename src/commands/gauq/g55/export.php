@@ -1,80 +1,78 @@
 <?php
 /********************************************************************************
-    Generates csv files in data/output/1970-1984-gauquelin
-    By default, the generated files are compressed (using zip).
+    Generates data/output/history/1955-gauquelin/*.csv
+    By default, the generated file is compressed (using zip).
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
-    @history    2019-07-05 13:48:39+02:00, Thierry Graff : creation
-    @history    2019-12-28,                Thierry Graff : export using 7-full instead of 5-tmp
-    @history    2020-08-12 08:58:19+02:00, Thierry Graff : export using g5 db instead of 7-full
-    @history    2021,                      Thierry Graff : export from database
+    @history    2023-02-19 18:35:37+01:00, Thierry Graff : creation
 ********************************************************************************/
-namespace g5\commands\gauq\all;
+namespace g5\commands\gauq\g55;
 
 use g5\app\Config;
-use tiglib\patterns\Command;
-use g5\commands\db\export\Export as ExportService;
-use g5\commands\gauq\LERRCP;
-use g5\commands\muller\Muller;
-use g5\commands\gauq\g55\export as G55Export;
 use g5\model\DB5;
-use g5\model\Full;
 use g5\model\Group;
-use g5\model\Person;
+use g5\commands\gauq\LERRCP;
+use g5\commands\db\export\Export as ExportService;
+use tiglib\patterns\Command;
 
 class export implements Command {
-    
+                                            
     /**
         Directory where the generated files are stored
         Relative to directory specified in config.yml by dirs / output
     **/
-    const OUTPUT_DIR = 'history' . DS . '1970-1984-gauquelin';
+    const OUTPUT_DIR = 'history' . DS . '1955-gauquelin';
     
-    /**  Trick to access to $sourceSlug from $sort function **/
+    /**  Trick to access to $sourceSlug inside $sort function **/
     private static $sourceSlug;
     
     /** 
-        Called by : php run-g5.php gauq <datafile> export [nozip]
-        If called without third parameter, the output is compressed (using zip)
+        Called by : php run-g5.php gauq g55 export <g55 group> [optional parameters]
+        If called without optional parameter, the output is compressed (using zip)
         For optional parameters, see comment of class commands/db/export/Export
-        @param $params array containing 2 or 3 strings :
-                       - the datafile to process (like "A1").
-                       - The name of this command (useless here).
+        The command is redirected from gauq/all/export and handled by GauqRouter, so contains useless parameters.
+        @param $params array containing  or 3 or 4 elements :
+                       - 'g55' (useless)
+                       - 'export' (useless)
+                       - key of the group to export
                        - Optional export parameters "zip" or "sep"
         @return Report
     **/
     public static function execute($params=[]): string{
-        // GauqRouter routes all export commands here,
-        // but G55 exports need to be coded apart
-        if(isset($params[0]) && $params[0] == 'g55'){
-            return G55Export::execute($params);
+        $msg = "Example of calls:\n"
+        . "php run-g5.php gauq g55 export 01-576-physicians\n"
+        . "php run-g5.php gauq g55 export 01-576-physicians zip=false\n"
+        . "php run-g5.php gauq g55 export 01-576-physicians zip=false,sep=true\n";
+        if(count($params) > 4){
+            return "WRONG USAGE : useless parameter : '{$params[4]}'\n$msg";
+        }
+        if(count($params) < 3){
+            return "WRONG USAGE : missing parameter(s)'\n$msg";
         }
         
-        if(count($params) > 3){
-            return "WRONG USAGE : useless parameter : '{$params[3]}'\n";
+        $groupKey = $params[2];
+        if(!in_array($groupKey, G55::getPossibleGroupKeys())){
+                return "INVALID GROUP: '$groupKey'\nPossible groups:\n    "
+                    . implode("\n    ", G55::getPossibleGroupKeys()) . "\n";
         }
+        $groupSlug = G55::groupKey2slug($groupKey);
         $dozip = true;
         $generateSep = false;
-        if(count($params) == 3){
-            [$dozip, $generateSep] = ExportService::computeOptionalParameters($params[2]);
+        if(count($params) == 4){
+            [$dozip, $generateSep] = ExportService::computeOptionalParameters($params[3]);
         }
         
         $report = '';
         
-        $datafile = $params[0];
-        
-        $groupSlug = LERRCP::datafile2groupSlug($datafile);
-        
         $g = Group::createFromSlug($groupSlug); // DB
-
-        self::$sourceSlug = LERRCP::datafile2sourceSlug($datafile); // Trick to access to $sourceSlug inside $sort function
         
-        $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . $datafile . '.csv';
+        self::$sourceSlug = G55::SOURCE_SLUG; // Trick to access to $sourceSlug inside $sort function
+
+        $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . $groupSlug . '.csv';
         
         $csvFields = [
+            'G55ID',
             'GQID',
-            'MUID',
-            'NUM',
             'FNAME',
             'GNAME',
             'DATE',
@@ -91,8 +89,7 @@ class export implements Command {
         ];
         
         $map = [
-            'ids-in-sources.' . self::$sourceSlug => 'NUM',
-            'partial-ids.' . LERRCP::SOURCE_SLUG => 'GQID',
+            'partial-ids.' . G55::SOURCE_SLUG => 'G55ID',
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
             'birth.date' => 'DATE',
@@ -106,18 +103,19 @@ class export implements Command {
             'birth.place.lat' => 'LAT',
             'birth.place.geoid' => 'GEOID',
         ];
-                
+        
         $fmap = [
-            'MUID' => function($p){
-                return Muller::ids_in_sources2mullerId($p->data['ids-in-sources']);
-            },          
+            'GQID' => function($p){
+                return $p->data['partial-ids'][LERRCP::SOURCE_SLUG] ?? '';
+            },
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);
             },
         ];
         
+        // sorts by G55 id
         $sort = function($a, $b){
-            return (int)$a->data['ids-in-sources'][self::$sourceSlug] <=> (int)$b->data['ids-in-sources'][self::$sourceSlug];
+             return strnatcmp($a->data['ids-in-sources'][G55::SOURCE_SLUG], $b->data['ids-in-sources'][G55::SOURCE_SLUG]);
         };
         
         $filters = [];
@@ -131,16 +129,15 @@ class export implements Command {
             sort:       $sort,
             filters:    $filters,
             dozip:      $dozip,
-            SEP:        Config::$data['export']['csv-separator'],
         );
         $g->data['download'] = str_replace(Config::$data['dirs']['output'] . DS, '', $exportFile);
         $g->update(updateMembers:false);
         $report .= $exportReport;
         
         if($generateSep){
-            $report .= self::generateSep($g, $dozip, $datafile);
+            $report .= self::generateSep($g, $dozip, $outfile);
         }
-
+        
         return $report;
     }
     
@@ -148,15 +145,14 @@ class export implements Command {
         Generates a second export of the same group, with dates expressed in separate columns
         @param  $g is an object, passed by reference
     **/
-    private static function generateSep($g, $dozip, $datafile) {
+    private static function generateSep($g, $dozip, $outfile) {
         $report = '';
         
-        $outfile = Config::$data['dirs']['output'] . DS . self::OUTPUT_DIR . DS . $datafile . '-sep.csv';
+        $outfile = str_replace('.csv', '-sep.csv', $outfile);
         
         $csvFields = [
+            'G55ID',
             'GQID',
-            'MUID',
-            'NUM',
             'FNAME',
             'GNAME',
             'Y',
@@ -181,7 +177,7 @@ class export implements Command {
         ];
         
         $map = [
-            'ids-in-sources.' . self::$sourceSlug => 'NUM',
+            'partial-ids.' . G55::SOURCE_SLUG => 'G55ID',
             'name.family' => 'FNAME',
             'name.given' => 'GNAME',
             'birth.tzo' => 'TZO',
@@ -197,9 +193,6 @@ class export implements Command {
         $fmap = [
             'GQID' => function($p){
                 return $p->data['partial-ids'][LERRCP::SOURCE_SLUG] ?? '';
-            },
-            'MUID' => function($p){
-                return Muller::ids_in_sources2mullerId($p->data['ids-in-sources']);
             },
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);
@@ -236,8 +229,9 @@ class export implements Command {
             },
         ];
         
+        // sorts by G55 id
         $sort = function($a, $b){
-            return (int)$a->data['ids-in-sources'][self::$sourceSlug] <=> (int)$b->data['ids-in-sources'][self::$sourceSlug];
+             return strnatcmp($a->data['ids-in-sources'][G55::SOURCE_SLUG], $b->data['ids-in-sources'][G55::SOURCE_SLUG]);
         };
         
         $filters = [];
@@ -253,8 +247,7 @@ class export implements Command {
             dozip:      $dozip,
             SEP:        ',',
         );
-        $g->data['download'] = str_replace(Config::$data['dirs']['output'] . DS, '', $exportFile);
-        $g->update(updateMembers:false);
+        
         $report .= $exportReport;
         return $report;
     }

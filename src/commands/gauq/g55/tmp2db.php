@@ -48,7 +48,7 @@ class tmp2db implements Command {
         
         $report = "--- $cmdSignature $groupKey ---\n";
         
-        // Source related to this group - insert if does not already exist
+        // Source related to Gauquelin 55 - insert if does not already exist
         $g55Source = Source::createFromSlug(G55::SOURCE_SLUG); // DB
         if(is_null($g55Source)){
             $g55Source = new Source(G55::SOURCE_DEFINITION_FILE);
@@ -88,17 +88,36 @@ class tmp2db implements Command {
             $lineRaw = $linesRaw[$i];
             // $special09 : lines of 09-349-scientists coming from 01-576-physicians
             $special09 = ($groupKey == '09-349-scientists' && $NUM > 279);
-            if($special09){
-                $G55ID = G55::g55Id('01-576-physicians', $line['NUM']);
+            //
+            $G55ID = G55::g55Id($groupKey, $NUM);
+            $GQID = $line['GQID']; // previously computed by command gqid, excecpt for new persons
+            //
+            
+            if($GQID == ''){
+                // A priori new person - but G55 contains duplicates
+                // To handle the case of G55 duplicates not in LERRCP
+                $slug = Person::doComputeSlug($line['FNAME'], $line['GNAME'], substr($line['DATE'], 0, 10));
+                $p = Person::createFromSlug($slug); // DB (read)
+                if(is_null($p)){
+                    $p = new Person();
+                    $action = 'create';
+                    $isG55duplicate = false;
+                }
+                else{
+                    $action = 'update';
+                    $isG55duplicate = true;
+                }
             }
             else {
-                $G55ID = G55::g55Id($groupKey, $NUM);
+                $p = Person::createFromPartialId(LERRCP::SOURCE_SLUG, $GQID); // DB (read)
+                $action = 'update';
+                $isG55duplicate = isset($p->data['ids-in-sources'][G55::SOURCE_SLUG]);
             }
-            $GQID = $line['GQID']; // eventually computed by command gqid
+            
             if(!$special09){
-                if($GQID == ''){
+                if($action == 'create'){
                     // Person not already in g5 db - insert
-                    $p = new Person();
+//                    $p = new Person();
                     $new = [];
                     $new['trust'] = Gauquelin::TRUST_LEVEL;
                     $new['name']['family'] = $line['FNAME'];
@@ -110,15 +129,15 @@ class tmp2db implements Command {
                     $new['birth']['place']['c1'] = $line['C1'];
                     $new['birth']['place']['c2'] = $line['C2'];
                     $new['birth']['place']['c3'] = $line['C3'];
-                    $new['birth']['place']['cy'] = 'FR';
+                    $new['birth']['place']['cy'] = $line['CY'];
                     $new['occus'] = [ $line['OCCU'] ];
                     //
-                    $p->addIdInSource($g55Source->data['slug'], (string)$NUM);
+                    $p->addIdInSource($g55Source->data['slug'], $G55ID);
                     $p->addPartialId(G55::SOURCE_SLUG, $G55ID);
                     $p->updateFields($new);
                     $p->computeSlug();
                     // repeat some fields to include in $history
-                    $new['ids-in-sources'] = [G55::SOURCE_SLUG => $NUM];
+                    $new['ids-in-sources'] = [G55::SOURCE_SLUG => $G55ID];
                     $p->addHistory(
                         command:    $cmdSignature . ' ' . $groupKey,
                         sourceSlug: $g55Source->data['slug'],
@@ -130,10 +149,13 @@ class tmp2db implements Command {
                 }
                 else{
                     // update a person already in db
-                    $p = Person::createFromPartialId(LERRCP::SOURCE_SLUG, $GQID); // DB (read)
+//                    $p = Person::createFromPartialId(LERRCP::SOURCE_SLUG, $GQID); // DB (read)
                     $p->addOccus([ $line['OCCU'] ]); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
-                    $p->addIdInSource(G55::SOURCE_SLUG, $G55ID);
-                    $p->addPartialId(G55::SOURCE_SLUG, $G55ID);
+                    // test to avoid overriding the G55 id_in_source and partial_id for duplicates
+                    if(!$isG55duplicate){
+                        $p->addIdInSource(G55::SOURCE_SLUG, $G55ID);
+                        $p->addPartialId(G55::SOURCE_SLUG, $G55ID);
+                    }
                     // add an issue if G55 and LERRCP dates differ
                     // note: as matching is done by date (see command gqid check),
                     // days are identical, so current check concerns birth hours
@@ -153,10 +175,15 @@ class tmp2db implements Command {
                             }
                         }
                     }
-                    $new = [
-                        'ids-in-source' => [G55::SOURCE_SLUG => (string)$NUM],
-                        'partial-ids' => [G55::SOURCE_SLUG => $G55ID],
-                    ];
+                    if(!$isG55duplicate){
+                        $new = [
+                            'ids-in-source' => [G55::SOURCE_SLUG => $G55ID],
+                            'partial-ids' => [G55::SOURCE_SLUG => $G55ID],
+                        ];
+                    }
+                    else {
+                        $new = [];
+                    }
                     if(!$p->data['birth']['place']['geoid']){
                         // g55 place names are generally better than cura
                         $new['birth']['place']['name'] = $line['PLACE'];
@@ -185,7 +212,12 @@ class tmp2db implements Command {
             }
             else{ // $special09
                 if($GQID == ''){
-                    $p = Person::createFromPartialId(G55::SOURCE_SLUG, $G55ID); // DB (read)
+                    // Particular case: person already in group 01-576-physicians but not in LERRCP
+                    // only one case: brown-sequard-edouard-1817-04-17
+                    // Can't be accessed via partial_id because $G55ID is built from current file, then "09-something" (09-293)
+                    // and the real $G55ID is 01-something (01-88)
+                    // => cheat and compute the person by slug
+                    $p = Person::createFromSlug('brown-sequard-edouard-1817-04-17'); // DB (read)
                 }
                 else{
                     $p = Person::createFromPartialId(LERRCP::SOURCE_SLUG, $GQID); // DB (read)
