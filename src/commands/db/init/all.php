@@ -344,7 +344,7 @@ class all implements Command {
             echo CFEPPExport::execute(['sep=true,group=1066']);
             echo ErtelExport::execute(['sep=true']);
             foreach($g55Groups as $groupKey){
-                echo GauquelinExport::execute(['g55', 'export', $groupKey, 'sep=true,zip=false']);
+                echo GauquelinExport::execute(['g55', 'export', $groupKey, 'sep=true']);
             }
             // other exports
             echo skepticsExport::execute(['sep=true']);
