@@ -13,6 +13,7 @@
     ACTION: update
   ids-in-sources:
     afd2: '6'
+  partial-ids:
     wd: Q152245
   name:
     nobl: von
@@ -40,6 +41,7 @@
     ACTION: update
   ids-in-sources:
     afd2: '119'
+  partial-ids:
     wd: Q366355
   name:
     fame:
@@ -53,6 +55,7 @@
     ACTION: update
   ids-in-sources:
     afd2: '160'
+  partial-ids:
     wd: Q38337
   name:
     family: Dumas
@@ -65,6 +68,7 @@
     ACTION: update
   ids-in-sources:
     afd2: '186'
+  partial-ids:
     wd: Q129092
   name:
     family: Contandin
@@ -77,18 +81,19 @@
     ACTION: update
   ids-in-sources:
     afd2: '193'
+  partial-ids:
     wd: Q37064
   name:
     nobl: Sir
     family: Fleming
     given: Alexander
 
-
 -
   ADMIN: 
     ACTION: update
   ids-in-sources:
     afd2: '238'
+  partial-ids:
     wd: Q302873
   name:
     family: Wettach
@@ -101,6 +106,7 @@
     ACTION: update
   ids-in-sources:
     afd2: '329'
+  partial-ids:
     wd: Q4724
   name:
     given: Charles-Édouard
@@ -111,6 +117,7 @@
     ACTION: update
   ids-in-sources:
     afd2: '416'
+  partial-ids:
     wd: Q60684
   name:
     given: Georg Philipp Friedrich
@@ -122,6 +129,7 @@
     ACTION: update
   ids-in-sources:
     afd2: '429'
+  partial-ids:
     wd: Q16975
   name:
     fame:
@@ -136,6 +144,7 @@
     ACTION: update
   ids-in-sources:
     afd2: '550'
+  partial-ids:
     wd: Q42247
   name:
     official:

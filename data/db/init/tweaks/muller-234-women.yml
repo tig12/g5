@@ -15,6 +15,8 @@
   ids-in-sources:
     afd3: '1'
     wd: Q270617
+  partial-ids:
+    wd: Q270617
   name:
     family: Adam
     given: Juliette
@@ -32,6 +34,8 @@
   ids-in-sources:
     afd3: '10'
     wd: Q161247
+  partial-ids:
+    wd: Q161247
   name:
     family: Schleswig-Holstein-Sonderburg-Augustenburg
     given: Auguste Viktoria
@@ -44,6 +48,8 @@
     ACTION: update
   ids-in-sources:
     afd3: '11'
+    wd: Q270187
+  partial-ids:
     wd: Q270187
   name:
     family: Douet
@@ -61,6 +67,8 @@
   ids-in-sources:
     afd3: '13'
     wd: Q815333
+  partial-ids:
+    wd: Q815333
   name:
     official:
       given: Renate Gabriele
@@ -72,6 +80,8 @@
     ACTION: update
   ids-in-sources:
     afd3: '20'
+    wd: Q97003
+  partial-ids:
     wd: Q97003
   name:
     fame:
@@ -102,6 +112,8 @@
   ids-in-sources:
     afd3: '24'
     wd: Q55398
+  partial-ids:
+    wd: Q55398
   occus:
     - saint
   
@@ -111,6 +123,8 @@
     ACTION: update
   ids-in-sources:
     afd3: '30'
+    wd: Q241732
+  partial-ids:
     wd: Q241732
   official:
     given: Marie-Rosalie
@@ -125,6 +139,8 @@
   ids-in-sources:
     afd3: '40'
     wd: Q545965
+  partial-ids:
+    wd: Q545965
   name:
     given: Maria
   occus: 
@@ -135,6 +151,8 @@
     ACTION: update
   ids-in-sources:
     afd3: '55'
+    wd: Q76851
+  partial-ids:
     wd: Q76851
   name:
     official:
@@ -148,6 +166,8 @@
     ACTION: update
   ids-in-sources:
     afd3: '60'
+    wd: Q1456321
+  partial-ids:
     wd: Q1456321
   name:
     official:
@@ -163,6 +183,8 @@
   ids-in-sources:
     afd3: '87'
     wd: Q234697
+  partial-ids:
+    wd: Q234697
   occus:
     - saint
   
@@ -171,6 +193,8 @@
     ACTION: update
   ids-in-sources:
     afd3: '109'
+    wd: Q7504
+  partial-ids:
     wd: Q7504
   name:
     family: Joliot-Curie
@@ -189,6 +213,8 @@
   ids-in-sources:
     afd3: '111'
     wd: Q167433
+  partial-ids:
+    wd: Q167433
   name:
     given: Caroline Amalie Elisabeth
     nobl: von
@@ -204,6 +230,8 @@
   ids-in-sources:
     afd3: '124'
     wd: Q233088
+  partial-ids:
+    wd: Q233088
   occus:
     - painter
     - printmaker
@@ -213,6 +241,8 @@
     ACTION: update
   ids-in-sources:
     afd3: '135'
+    wd: Q1896519
+  partial-ids:
     wd: Q1896519
   name:
     family: Linden
@@ -226,6 +256,8 @@
   ids-in-sources:
     afd3: '154'
     wd: Q76158
+  partial-ids:
+    wd: Q76158
   name:
     family: Michaëlis de Vasconcelos
     given: Carolina
@@ -238,6 +270,8 @@
     ACTION: update
   ids-in-sources:
     afd3: '155'
+    wd: Q235507
+  partial-ids:
     wd: Q235507
   name:
     usual: Mistinguett
@@ -255,6 +289,8 @@
   ids-in-sources:
     afd3: '156'
     wd: Q234370
+  partial-ids:
+    wd: Q234370
   occus:
     - painter
 
@@ -264,6 +300,8 @@
     ACTION: update
   ids-in-sources:
     afd3: '162'
+    wd: Q105320
+  partial-ids:
     wd: Q105320
   occus:
     - painter
@@ -275,6 +313,8 @@
   ids-in-sources:
     afd3: '164'
     wd: Q1575726
+  partial-ids:
+    wd: Q1575726
   occus:
     - graphic-artist
 
@@ -284,6 +324,8 @@
     ACTION: update
   ids-in-sources:
     afd3: '166'
+    wd: Q76551
+  partial-ids:
     wd: Q76551
   name:
     given: Neumann
@@ -296,6 +338,8 @@
     ACTION: update
   ids-in-sources:
     afd3: '167'
+    wd: Q99869
+  partial-ids:
     wd: Q99869
   name:
     official:
@@ -310,6 +354,8 @@
   ids-in-sources:
     afd3: '207'
     wd: Q1246805
+  partial-ids:
+    wd: Q1246805
   name:
     official:
       given: Emilie Sibilla Elisabeth Johanna
@@ -322,6 +368,8 @@
     ACTION: update
   ids-in-sources:
     afd3: '211'
+    wd: Q254395
+  partial-ids:
     wd: Q254395
   name:
     official:
@@ -342,6 +390,8 @@
     ACTION: update
   ids-in-sources:
     afd3: '217'
+    wd: Q156889
+  partial-ids:
     wd: Q156889
   name:
     official:
