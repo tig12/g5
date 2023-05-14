@@ -261,8 +261,8 @@ class Group {
         
         ==== TODO ===== Update group's field 'n'
         
-        @param  $personId   Id of the Person to add (its primary key).
-        @param  $groupSlug  Slug of a group already stored in database.
+        @param  $personId       Id of the Person to add (its primary key).
+        @param  $groupSlug      Slug of a group already stored in database.
         @throws Exception if insertion failed.
     **/
     public static function storePersonInGroup(int $personId, string $groupSlug) {

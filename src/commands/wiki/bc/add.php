@@ -176,6 +176,10 @@ class add implements Command {
         switch($action){
         	case 'insert':
         	    BC::addToPerson($p, $BC);
+        	    // see comment in class BC to understand why this must be done here
+                if(isset($BC['extras']['occus'])){
+                    $p->data['occus'] = $BC['extras']['occus'];
+                }
         	    // insert() needed now to have the person id
                 $p->insert(); // DB
         	    //
@@ -241,7 +245,7 @@ class add implements Command {
                 // Occupations
                 //
                 if(isset($BC['extras']['occus'])){
-                    $p->addOccus($BC['extras']['occus']);
+                    $p->addOccus($BC['extras']['occus']); // handle duplicates and subgroups
                     $occus_orig = $p_orig->data['occus'];
                     $occus_new = $p->data['occus'];
                     // sort to be sure that array comparison works

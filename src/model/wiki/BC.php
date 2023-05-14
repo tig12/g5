@@ -90,6 +90,7 @@ class BC {
         - If, after adding act information, the person doesn't contain $data['name']['given'] and/or $data['name']['family'],
           default values are computed from official name.
         - If BC field 'extras' doesn't contain a field 'trust', field trust of the person is set to Trust::BC
+        - field $BC['extras']['occus'] is not handled, must be done by the calling code
         @param  $BC     Associative array containing the information of a file BC.yml
     **/
     public static function addToPerson(Person $p, array $BC): void {
@@ -110,6 +111,10 @@ class BC {
             // normally, this should never execute as birth date should be in $BC['transcription']
             $bdate_new = $BC['extras']['birth']['date'];
         }
+        // occus not handled here because command wiki bc add needs to handle it when updating a person:
+        // - to take care of addition of the person in professional groups.
+        // - Person::addOccus() must be called instead of array_replace_recursive() to handle duplicates and subgroups.
+        unset($BC['extras']['occus']);
         //
         if(isset($p->data, $BC['transcription'])){
             $p->data = array_replace_recursive($p->data, $BC['transcription']);
