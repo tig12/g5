@@ -109,6 +109,7 @@ use g5\commands\muller\m1writers\export100      as M1Writers100export;
 use g5\commands\muller\m2men\export             as M2MenExport;
 use g5\commands\muller\m3women\export           as M3WomenExport;
 use g5\commands\cfepp\final3\export             as CFEPPExport;
+use g5\commands\cpara\ertel\export              as CParaExport;
 use g5\commands\muller\m5medics\export          as M5MedicsExport;
 use g5\commands\csicop\irving\export            as csiIrvingExport;
 use g5\commands\db\export\skeptics              as skepticsExport;
@@ -342,6 +343,7 @@ class all implements Command {
             echo csiIrvingExport::execute(['sep=true']);
             echo CFEPPExport::execute(['sep=true,group=1120']);
             echo CFEPPExport::execute(['sep=true,group=1066']);
+            echo CParaExport::execute(['sep=true']);
             echo ErtelExport::execute(['sep=true']);
             foreach($g55Groups as $groupKey){
                 echo GauquelinExport::execute(['g55', 'export', $groupKey, 'sep=true']);

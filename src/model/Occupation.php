@@ -34,7 +34,7 @@ class Occupation {
     // ***********************************************************************
     
     /** 
-        Returns the directory where sources are defined, in csv files.
+        Returns the directory where occupations are defined, in csv files.
     **/
     public static function getDefinitionDir(): string {
         return Config::$data['dirs']['db'] . DS . 'occu';

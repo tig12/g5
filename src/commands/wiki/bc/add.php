@@ -101,7 +101,7 @@ class add implements Command {
         if($validation != ''){
             return "INVALID YAML FILE: $bcFile"
                 . "\n$validation"
-                . "Information not included in the database\n";
+                . "Nothing was modified in the database\n";
         }
         //
         $commandName = "wiki bc add $actSlug";
