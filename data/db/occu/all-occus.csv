@@ -27,6 +27,7 @@ conductor;Q158852;Chef d’orchestre;Conductor;musician
 cyclist;Q2125610;Cycliste;Cyclist;sportsperson
 dancer;Q5716684;Danseur;Dancer;artist
 diver;Q16004431;Plongeur;Diver;sportsperson
+engineer;Q81096;Ingénieur;Engineer;
 equestrian;Q2730732;Cavalier;Equestrian;sportsperson
 executive;Q978044;Cadre dirigeant;Executive;
 factual-writer;;Ecrivain factuel;Factual writer;writer
@@ -53,6 +54,7 @@ jurist;Q185351;Juriste;Jurist;legal-profession
 kayaker;Q16004471;Kayakeur;Kayaker;sportsperson
 lawyer;Q40348;Avocat;Lawyer;legal-profession
 legal-profession;Q15987302;Profession juridique;Legal profession;
+logician;Q14565331;Logicien;Logician;mathematician+philosopher
 mathematician;Q170790;Mathématicien;Mathematician;scientist
 military-personnel;Q47064;Militaire;Military personnel;
 miscelaneous;;Divers;Miscelaneous;
@@ -67,6 +69,8 @@ novelist;Q6625963;Romancier;Novelist;writer
 opera-singer;Q2865819;Chanteur d'opéra;Opera singer;singer
 painter;Q1028181;Peintre;Painter;graphic-artist
 partner-of-celebrity;;Partenaire de célebrité;Partner of celebrity;
+philosopher;Q4964182;Philosophe;Philosopher;
+philosopher-of-science;Q16389557;Philosophe des sciences;Philosopher of science;
 photographer;Q33231;Photographe;Photographer;artist
 physician;Q39631;Médecin;Physician;
 physicist;Q169470;Physicien;Physicist;scientist

@@ -47,28 +47,13 @@ class occus1 implements Command {
         );
         
         $N = 0;
-        foreach(Occupation::DEFINITION_FILES as $file){
-            $lines = csvAssociative::compute(Occupation::getDefinitionDir() . DS . $file);
-            foreach($lines as $line){
-                if($line['slug'] == ''){
-                    continue; // skip blank lines
-                }
-                $parents = [];
-                // obliged to add this test to prevent a bug:
-                // if field parents is empty, explode returns an array containing one empty string
-                if($line['parents'] != ''){
-                    $parents = explode('+', $line['parents']);
-                }
-                $stmt_insert->execute([
-                    $line['slug'],
-                    $line['wd'],
-                    $line['en'],
-                    'Persons whose occupation is ' . $line['en'] . '.',
-                    Group::TYPE_OCCU,
-                    json_encode($parents),
-                ]);
-                $N++;
+        $lines = csvAssociative::compute(Occupation::getDefinitionFile());
+        foreach($lines as $line){
+            if($line['slug'] == ''){
+                continue; // skip blank lines
             }
+            Occupation::insert($line);
+            $N++;
         }
         $report .= "Inserted $N occupation groups\n";
         return $report;

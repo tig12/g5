@@ -11,6 +11,7 @@ namespace g5\model\wiki;
 
 use g5\model\Person;
 use g5\model\Trust;
+use g5\model\Occupation;
 use g5\model\wiki\Wiki;
 use g5\model\wiki\WikiPerson;
 use g5\model\DB5;
@@ -23,6 +24,12 @@ class BC {
     
     /** Key used in person's field $data['acts'] to store a BC **/
     const PERSON_ACT_KEY = 'birth';
+    
+    /**
+        Variable to cache call to Occupation::getAllSlugNames()
+        (useful in command db init wiki)
+    **/
+    private static $occupationSlugs = null;
     
     /**
         @return Path to the template file BC.yml - src/model/wiki/templates/BC.yml.
@@ -68,6 +75,12 @@ class BC {
         return $BC;
     }
 
+    private static function computeOccupationSlugs(){
+        if(is_null(self::$occupationSlugs)){
+            self::$occupationSlugs = array_keys(Occupation::getAllSlugNames());
+        }
+    }
+    
     /**
         Checks if a BC.yml file contains valid informations
         TODO implement
@@ -77,9 +90,18 @@ class BC {
         https://rjbs.manxome.org/rx/
         https://github.com/romaricdrigon/MetaYaml
     **/
-    public static function validate(array $yaml): string {
-        // TODO implement
-        return '';
+    public static function validate(array $BC): string {
+        $msg = '';
+        if(isset($BC['extras']['occus'])){
+            self::computeOccupationSlugs();
+            foreach($BC['extras']['occus'] as $occu){
+                if(!in_array($occu, self::$occupationSlugs)){
+                    $msg .= "- Occupation '$occu' is not present in database\n";
+                }
+            }
+        }
+        // TODO implement the rest...
+        return $msg;
     }
     
     /**
@@ -92,6 +114,7 @@ class BC {
         - If BC field 'extras' doesn't contain a field 'trust', field trust of the person is set to Trust::BC
         - field $BC['extras']['occus'] is not handled, must be done by the calling code
         @param  $BC     Associative array containing the information of a file BC.yml
+                        $BC is passed by value ; modified inside the function but not modified in the calling code
     **/
     public static function addToPerson(Person $p, array $BC): void {
         //
