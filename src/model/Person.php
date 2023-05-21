@@ -310,7 +310,7 @@ class Person {
     
     /**
         Adds one single occupation to field occus.
-        Does not check if an added slug represents a child or parent of current occupations.
+        Does not check if an added slug represents a child or parent of current occupations, like addOccus() does.
     **/
     public function addOccu($occuSlug){
         if(!in_array($occuSlug, $this->data['occus'])){
@@ -325,8 +325,9 @@ class Person {
         - if $occuSlugs contains "dancer", and field occus already contains "artist", then "artist" is removed.
         - if $occuSlugs contains "artist", and field occus already contains "dancer", then "artist" is not added.
         Always remove the parents and keep the children, which are more specific.
-        WARNING this function doesn't modify table person_groop.
-                This must be done with Group::storePersonInGroup().
+        WARNING
+            - This function doesnt modify table person, it only modifies the field of a Person object.
+            - This function doesn't modify table person_groop. This must be done with Group::storePersonInGroup().
     **/
     public function addOccus($occuSlugs){
         $occus = $this->data['occus'];

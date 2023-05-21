@@ -246,36 +246,23 @@ class Group {
         $this->personMembersComputed = true;
     }
     
-    // ******************************************************
     /**
         Adds one person in a group in database.
-        Static function, not related to any Group object.
-        
-        If the person already belongs to parent groups of $groupSlug,
-        the associations between parent groups and person are deleted.
-        Ex storePersonInGroup('football-player') for a person already belonging to 'sportsperson':
-        the association between the person and group 'sportsperson' will be deleted
-        
-        WARNING: this function doesn't handle the case where the person already belongs to a child group.
-        Ex storePersonInGroup('sportsperson') for a person already belonging to 'football-player'.
-        
-        ==== TODO ===== Update group's field 'n'
-        
+        Implements the rule described on https://tig12.github.io/g5/db-group.html :
+        "When a person belongs to a group, it also belongs to all the ancestors of this group"
         @param  $personId       Id of the Person to add (its primary key).
         @param  $groupSlug      Slug of a group already stored in database.
         @throws Exception if insertion failed.
     **/
     public static function storePersonInGroup(int $personId, string $groupSlug) {
         $dblink = DB5::getDbLink();
-        $stmt = $dblink->prepare('select id from groop where slug=?');
-        $stmt->execute([$groupSlug]);
-        $res = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $stmt_select = $dblink->prepare('select id from groop where slug=?');
+        $stmt_select->execute([$groupSlug]);
+        $res = $stmt_select->fetch(\PDO::FETCH_ASSOC);
         if($res === false || count($res) == 0){
             throw new \Exception("Group '$groupSlug' not found in database");
         }
         $groupId = $res['id'];
-        //
-        // Transaction to delete association with parent groups (if any) and insert in current group
         //
         self::computeAllAncestors();
         // This test is necessary because storePersonInGroup() is successively called from
@@ -286,24 +273,46 @@ class Group {
             self::computeAllAncestors();
         }
         $ancestors = self::$allAncestors[$groupSlug];
-        $dblink->beginTransaction();
-        // delete from parent groups
-        $stmt_del = $dblink->prepare('delete from person_groop where id_groop=(select id from groop where slug=?) and id_person=?');
-        foreach($ancestors as $ancestorSlug){
-            $stmt_del->execute([$ancestorSlug, $personId]);
-        }
+        //
         // insert in current group
-        $stmt_ins = $dblink->prepare('insert into person_groop(id_person,id_groop) values(?,?)');
-        $stmt_ins->execute([$personId, $groupId]);
-        // update field 'n'
-        self::update_n($dblink, $groupId);
-        $dblink->commit();
+        //
+        $stmt_insert = $dblink->prepare('insert into person_groop(id_person,id_groop) values(?,?)');
+        try{
+            $stmt_insert->execute([$personId, $groupId]);
+            self::update_n($dblink, $groupId); // update field 'n' only if insertion took place
+        }
+        catch(\Exception $e){
+            // Foreign key violation « person_groop_id_groop_fkey »
+            // person already associated with group, silently ignore
+        }
+        //
+        // insert in ancestors
+        //
+        // here, use 2 queries instead of a subquery like "where id_groop=(select id from groop where slug=?)"
+        // because id group is needed to update its field n.
+        foreach($ancestors as $ancestorSlug){
+            $stmt_select->execute([$ancestorSlug]);
+            $ancestorId = $stmt_select->fetchColumn();
+            try{
+                $stmt_insert->execute([$personId, $ancestorId]);
+                self::update_n($dblink, $ancestorId); // update field 'n' only if insertion took place
+            }
+            catch(\Exception $e){
+                // Foreign key violation « person_groop_id_groop_fkey »
+                // person already associated with group, silently ignore
+            }
+        }
     }
     
     /**
         Removes one person from a group in database.
-        Does not care about ancestors(useless because if a person is in a group, it is not in the group's encestors)
-        ==== TODO ===== Update group's field 'n'
+        Removes the person from ancestor groups, but keeps the ancestors of the remaining groups.
+        Ex: a person is associated to 'mathematician' and 'astronomer',
+            both having as ancestors 'scientist' and 'researcher'.
+            => removePersonFromGroup('mathematician') WILL NOT REMOVE these ancestors because of astronomer
+        Ex: a person is associated to 'mathematician' and 'writer'
+            'writer' has no common ancestor with 'mathematician'
+            => removePersonFromGroup('mathematician') WILL REMOVE 'scientist' and 'researcher'
         @param  $personId   Id of the Person to add (its primary key).
         @param  $groupSlug  Slug of a group already stored in database.
         @throws Exception if insertion failed.
@@ -317,10 +326,46 @@ class Group {
             throw new \Exception("Group '$groupSlug' not found in database");
         }
         $groupId = $res['id'];
-        $stmt_del = $dblink->prepare('delete from person_groop where id_groop=? and id_person=?');
-        $stmt_del->execute([$groupId, $personId]);
+        //
+        self::computeAllAncestors();
+        // 1 - ancestors to remove
+        $to_a_priori_remove = self::$allAncestors[$groupSlug];
+        array_push($to_a_priori_remove, $groupSlug);
+        // 2 - ancestors to keep
+        $to_keep = [];
+        // 2.1 - other groups of the person
+        $others = [];
+        $stmt_select = $dblink->prepare('select slug from groop where id in(select id_groop from person_groop where id_person=?)');
+        $stmt_select->execute([$personId]);
+        $rst = $stmt_select->fetchAll(\PDO::FETCH_ASSOC);
+        foreach($rst as $row){
+            if($row['slug'] != $groupSlug && !in_array($row['slug'], $to_a_priori_remove)){
+                $others[] = $row['slug'];
+            }
+        }
+        // 2.2 - ancestors of others;
+        foreach($others as $other){
+            //$to_keep = $to_keep + self::$allAncestors[$other];
+            $to_keep = array_merge($to_keep, self::$allAncestors[$other]);
+        }
+        $to_keep = array_unique($to_keep);
+        // 3 - associations to really remove
+        $to_remove = array_diff($to_a_priori_remove, $to_keep);
+        $ids_to_remove = [];
+        $stmt_select = $dblink->prepare("select id from groop where slug in('" . implode("','", $to_remove) . "')");
+        $stmt_select->execute([]);
+        $rst = $stmt_select->fetchAll(\PDO::FETCH_ASSOC);
+        foreach($rst as $row){
+            $ids_to_remove[] = $row['id'];
+        }
+        //
+        $query = "delete from person_groop where id_person=? and id_groop in(" . implode(",", $ids_to_remove) . ")";
+        $stmt_delete = $dblink->prepare($query);
+        $stmt_delete->execute([$personId]);
         // update field 'n'
-        self::update_n($dblink, $groupId);
+        foreach($ids_to_remove as $id_to_remove){
+            self::update_n($dblink, $id_to_remove);
+        }
     }
     
     // ******************************************************

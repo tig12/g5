@@ -46,8 +46,16 @@ An occupation represents the activity of a person, &#8771; the profession.
 
 Like for any group, one person can be associated to one or several occupations.
 
-<br><br>As a convention, a person is never associated to an occupation and its parent. For example, if a person is associated to <i>artist</i> and a new association to <i>painter</i> is added, then the association with <i>artist</i> becomes useless and must be removed. This is implemented by method <code>Person::addOccus()</code>.
+<br><br>The associations between a person and its occupations are sored using table <code>person_groop</code>. Groups' property apply ("<b>When a person belongs to a group, it also belongs to all the ancestors of this group</b>").
+<br>For example, a musician also belongs to the group of artists.
 
+<!-- ************************************* -->
+<h3>Field occus</h3>
+In the database, occupations are also stored in a person's field, <code>occus</code>.
+<br>The rule applied for this field is: <b>Field <code>occus</code> contains only the most specific occupations</b>.
+<br>This rule is implemented by <code>Person::addOccus()</code>.
+
+<br><br>Logic of field <code>occus</code> is different from the logic of table <code>person_groop</code>.
 
 </article>
 </main>

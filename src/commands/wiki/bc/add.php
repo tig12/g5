@@ -178,7 +178,10 @@ class add implements Command {
         	    BC::addToPerson($p, $BC);
         	    // see comment in class BC to understand why this must be done here
                 if(isset($BC['extras']['occus'])){
-                    $p->data['occus'] = $BC['extras']['occus'];
+                    // here, could simply do:
+                    // $p->data['occus'] = $BC['extras']['occus'];
+                    // but it supposes that $BC['extras']['occus'] doesn't contain an occupation and its ancestor 
+                    $p->addOccus($BC['extras']['occus']); // handles field occus - handle duplicates and subgroups
                 }
         	    // insert() needed now to have the person id
                 $p->insert(); // DB
@@ -205,11 +208,10 @@ class add implements Command {
                 //
                 // Occupations
                 //
-                if(count($p->data['occus']) != 0){
-                    foreach($p->data['occus'] as $occu){
-                        $g = Group::createFromSlug($occu);
-                        Group::storePersonInGroup($p->data['id'], $g->data['slug']); // DB
-                    }
+                // handles table person_groop - must be done after $p->insert()
+                foreach($p->data['occus'] as $occu){
+                    $g = Group::createFromSlug($occu);
+                    Group::storePersonInGroup($p->data['id'], $g->data['slug']); // DB
                 }
         	    //
         	    // TODO modify exports
@@ -245,23 +247,10 @@ class add implements Command {
                 // Occupations
                 //
                 if(isset($BC['extras']['occus'])){
-                    $p->addOccus($BC['extras']['occus']); // handle duplicates and subgroups
-                    $occus_orig = $p_orig->data['occus'];
-                    $occus_new = $p->data['occus'];
-                    // sort to be sure that array comparison works
-                    sort($occus_orig);
-                    sort($occus_new);
-                    if($occus_new != $occus_orig){
-                        $added = array_diff($occus_new, $occus_orig);
-                        $removed = array_diff($occus_orig, $occus_new);
-                        foreach($added as $occu){
-                            $g = Group::createFromSlug($occu);
-                            Group::storePersonInGroup($p->data['id'], $g->data['slug']); // DB
-                        }
-                        foreach($removed as $occu){
-                            $g = Group::createFromSlug($occu);
-                            Group::removePersonFromGroup($p->data['id'], $g->data['slug']); // DB
-                        }
+                    $p->addOccus($BC['extras']['occus']); // handles field occus - handle duplicates and subgroups
+                    // handles table person_groop
+                    foreach($BC['extras']['occus'] as $occu){
+                        Group::storePersonInGroup($p->data['id'], $occu); // DB
                     }
                 }
                 //

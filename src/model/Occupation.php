@@ -120,7 +120,6 @@ class Occupation {
             Group::TYPE_OCCU,
             json_encode($parents),
         ]);
-        
     }
     
 } // end class
