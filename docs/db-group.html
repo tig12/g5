@@ -36,7 +36,7 @@
 <div class="intro">
 A group contains persons, and can be empty.
 <br>Group membership is stored in database using table <code>person_groop</code>.
-<br>The structure of a group is given by <a href="https://github.com/tig12/gauquelin5/blob/main/src/model/Person.yml"><code>src/model/Person.yml</code></a>
+<br>The structure of a group is given by <a href="https://github.com/tig12/gauquelin5/blob/main/src/model/templates/Group.yml"><code>src/model/templates/Group.yml</code></a>
 </div>
 </header>
 
@@ -89,7 +89,9 @@ Fields <code>parents</code> and <code>children</code> permit to manage subgroups
 <img class="margin border padding" src="img/occus-dag.svg" alt="Occupations example">
 
 The database has the following property: <b>When a person belongs to a group, it also belongs to all the ancestors of this group.</b>
-<br>In the code, this is implemented in <code>Group::storePersonInGroup()</code> and <code>Group::removePersonFromGroup()</code>.
+<br>For example a member of <code>conductor-of-military-band</code> is also member of <code>military-personel</code>, <code>conductor</code>, <code>musician</code> and <code>artist</code> (ie these associations are stored in table <code>person_groop</code>).
+
+<br><br>In the code, this is implemented in <code>Group::storePersonInGroup()</code> and <code>Group::removePersonFromGroup()</code>.
 
 
 </article>

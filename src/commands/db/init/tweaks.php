@@ -180,7 +180,7 @@ class tweaks implements Command {
         $p->computeSlug();
         
         $p->addHistory(
-            command: 'db fill person ' . self::$yamlFile,
+            command: 'db init tweaks ' . self::$yamlFile,
             sourceSlug: self::$yamlFile, // not a real source slug
             rawdata: $tweak,
             newdata: $tweak,
@@ -219,7 +219,7 @@ class tweaks implements Command {
         $p->updateFields($tweak);
         $p->computeSlug();
         $p->addHistory(
-            command: 'db fill person ' . self::$yamlFile,
+            command: 'db init tweaks ' . self::$yamlFile,
             sourceSlug: self::$yamlFile, // not a real source slug
             newdata: $tweak,
             rawdata: $tweak

@@ -114,12 +114,13 @@ Data processed by g5 are imported in a postgresql database, named the <b>Open Ga
 The structure of the entities are described in yaml files located with the source code of the model.
 <pre>
 src/model/
+    ├── templates
+    │   ├── Person.yml
+    │   ├── Group.yml
+    │   └── Source.yml
     ├── Group.php
-    ├── Group.yml
     ├── Person.php
-    ├── Person.yml
-    ├── Source.php
-    └── Source.yml
+    └── Source.php
 </pre>
 
 For example, file <code>Person.yml</code> contains an empty person with all its fields empty.

@@ -1,5 +1,5 @@
 
--- The structure of json fields is given by src/model/Person.yml
+-- The structure of json fields is given by src/model/templates/Person.yml
 
 create table person (
     id              serial primary key,

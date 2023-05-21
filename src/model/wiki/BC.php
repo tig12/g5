@@ -67,10 +67,13 @@ class BC {
     
     /**
         Creates a BC from a file BC.yml
-        @throws Transmits exception thrown by yaml_parse_file()
+        @throws Exception if $yamlFile doesn't exist.
     **/
     public static function createFromYamlFile($yamlFile) {
         $BC = yaml_parse_file($yamlFile);
+        if($BC === false){
+            throw new \Exception("ERROR: unexisting YAML file: $yamlFile");
+        }
         $BC['slug'] = basename(dirname($yamlFile));
         return $BC;
     }

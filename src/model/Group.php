@@ -54,7 +54,7 @@ class Group {
     **/
     public static function createEmpty(): Group {
         $g = new Group();
-        $g->data = yaml_parse_file(__DIR__ . DS . 'Group.yml');
+        $g->data = yaml_parse_file(__DIR__ . DS . 'templates' . DS . 'Group.yml');
         return $g;
     }
     

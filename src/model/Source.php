@@ -16,7 +16,7 @@ Source::init();
 class Source {
     
     /**
-        Structure of a source object, contained in src/model/Source.yml
+        Structure of a source object, contained in src/model/templates/Source.yml
     **/
     public $data = [];
     
@@ -38,7 +38,7 @@ class Source {
     public function __construct($yamlFile=''){
         
         // Fill an empty source from its structure
-        $this->data = yaml_parse_file(__DIR__ . DS . 'Source.yml');
+        $this->data = yaml_parse_file(__DIR__ . DS . 'templates' . DS . 'Source.yml');
         if($yamlFile == ''){
             return; // ok, just build an empty source
         }

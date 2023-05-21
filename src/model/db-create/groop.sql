@@ -1,5 +1,5 @@
 
--- The structure of json fields is given by src/model/Group.yml
+-- The structure of json fields is given by src/model/templates/Group.yml
 -- Named groop instead of group because group is a sql keyword
 
 create table groop (

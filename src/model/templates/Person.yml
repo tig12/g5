@@ -21,10 +21,10 @@ partial-ids: {}
 name:
   family:
   given:
-  spouse:           # For married women, added when this is important for the designation of the person
   official:         # As written in the birth certificate
     family:
     given:
+  spouse: []        # For married women
   nobl:             # nobiliary-particle: de d' di del von...
   fame:             # stage, scene - when the person is known using a name different from family / given 
     full:           # ex Mistinguett or Stromae

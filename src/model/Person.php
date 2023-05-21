@@ -16,7 +16,7 @@ class Person {
     public $data = [];
     
     public function __construct(){
-        $this->data = yaml_parse(file_get_contents(__DIR__ . DS . 'Person.yml'));
+        $this->data = yaml_parse(file_get_contents(__DIR__ . DS . 'templates' . DS . 'Person.yml'));
     }
     
     // ***********************************************************************
@@ -238,6 +238,9 @@ class Person {
         ex :
             - galois-evariste-1811-10-25 for a person with a known birth time.
             - galois-evariste for a person without a known birth time.
+            
+// TODO change ; use only name.given and name.family, and delegate the logic of fame, official
+            
         @throws \Exception if the person id computation impossible (the person has no family name).
         @see    static method doComputeSlug()
     **/
@@ -266,10 +269,22 @@ class Person {
     
     // *********************** Names (instance) *******************************
     
+    /** 
+        Computes $this->data['name']['given'] and $this->data['name']['family']
+        Follows the rules described on https://tig12.github.io/g5/db-person.html#person-name
+        @param  $nameArray Associative array with a structure corresponding to person's name,
+                           as defined is src/model/templates/Person.yml
+    **/
+    public function computeCommonName(array $nameArray){
+    }
+    
+    
     /**
         Computes the family name, trying to find a non-empty value.
     **/
     public function familyName(): string {
+// TODO delegate the logic of fame to computeCommonName()
+// here, handle only nobl
         if($this->data['name']['family'] != ''){
             return $this->data['name']['family'];
         }
@@ -286,6 +301,7 @@ class Person {
         Computes the given name, trying to find a non-empty value.
     **/
     public function givenName(): string {
+// TODO will become useless when computeCommonName() is implemented
         if($this->data['name']['given'] != ''){
             return $this->data['name']['given'];
         }
@@ -298,7 +314,7 @@ class Person {
     /** 
         Adds an array of alternative names.
     **/
-    public function addAlternativeNames($newdata){
+    public function addAlternativeNames(array $newdata){
         foreach($newdata as $alter){
             if(!in_array($alter, $this->data['name']['alter'])){
                 $this->data['name']['alter'][] = $alter;
