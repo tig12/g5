@@ -57,11 +57,9 @@ class add implements Command {
         }
         //
         $personSlug = $params[0];
-        try{
-            $bcFile = BC::filePath($personSlug);
-        }
-        catch(\Exception $e){
-            return "INVALID SLUG: $personSlug - nothing was modified in the database\n";
+        $bcFile = BC::filePath($personSlug);
+        if(!is_file($bcFile)){
+            return "UNEXITSING FILE: $bcFile - nothing was modified in the database\n";
         }
         //
         $actSlug = $params[0];

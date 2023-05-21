@@ -272,12 +272,47 @@ class Person {
     /** 
         Computes $this->data['name']['given'] and $this->data['name']['family']
         Follows the rules described on https://tig12.github.io/g5/db-person.html#person-name
+        Other fields (different from $this->data['name']['given'] and $this->data['name']['family'])
+        already present in current person are not modified.
+        WARNING: empty values are considered as values. The absence of value must be expressed by the absence of field.
         @param  $nameArray Associative array with a structure corresponding to person's name,
                            as defined is src/model/templates/Person.yml
     **/
     public function computeCommonName(array $nameArray){
+//echo "=== \$nameArray === "; print_r($nameArray); echo "\n";
+//echo "==== before==== \n"; print_r($this->data['name']); echo "\n";
+        if(isset($nameArray['given'])){
+            $this->data['name']['given'] = $nameArray['given'];
+        }
+        if(isset($nameArray['family'])){
+            $this->data['name']['family'] = $nameArray['family'];
+        }
+        if(isset($nameArray['given']) && isset($nameArray['family'])){
+            return;
+        }
+        //
+        if(isset($nameArray['fame']['full'])){
+            $this->data['name']['family'] = $nameArray['fame']['full'];
+            $this->data['name']['given'] = '';
+            return;
+        }
+        if(isset($nameArray['fame']['given'])){
+            $this->data['name']['given'] = $nameArray['fame']['given'];
+        }
+        if(isset($nameArray['fame']['family'])){
+            $this->data['name']['family'] = $nameArray['fame']['family'];
+        }
+        if(isset($nameArray['fame']['given']) && isset($nameArray['fame']['family'])){
+            return;
+        }
+        //
+        if(isset($nameArray['official']['given'])){
+            $this->data['name']['given'] = $nameArray['official']['given'];
+        }
+        if(isset($nameArray['official']['family'])){
+            $this->data['name']['family'] = $nameArray['official']['family'];
+        }
     }
-    
     
     /**
         Computes the family name, trying to find a non-empty value.

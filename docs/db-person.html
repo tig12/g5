@@ -177,17 +177,25 @@ The different components of a person's name permit a precise description.
         <br>When a new person is inserted or updated in database, the following rules are used, in this order, to fill these 2 fields:
         <ol>
             <li>
-                If fields <code>name.given</code> and <code>name.family</code> are provided, these fields are used - other rules are not applied.
-                <br>If <code>name.nobl</code> is present, it is not used to build <code>name.family</code> (but can be used to build person's slug and to display person's name).
+                If field <code>name.given</code> is provided, it is used to build <code>name.given</code>.
             </li>
             <li>
-                if field <code>name.fame.full</code> is provided, it is used to fill <code>name.family</code>, and <code>name.given</code> is left empty - other rules are not applied.
+                If field <code>name.family</code> is provided, it is used to build <code>name.family</code>.
+            </li>
+            <li>
+                If both fields <code>name.given</code> and <code>name.family</code> are provided, other rules are not applied.
+            </li>
+            <li>
+                if field <code>name.fame.full</code> is provided, it is used to fill <code>name.family</code>, and <code>name.given</code> is left empty - other rules are not applied (may override rules 1 or 2).
             </li>
             <li>
                 if field <code>name.fame.family</code> is provided, it is used to fill <code>name.family</code> (can override <code>name.family</code>).
             </li>
             <li>
                 if field <code>name.fame.given</code> is provided, it is used to fill <code>name.given</code> (can override <code>name.given</code>).
+            </li>
+            <li>
+                If both fields <code>name.fame.given</code> and <code>name.fame.family</code> are provided, other rules are not applied.
             </li>
             <li>
                 if field <code>name.official.family</code> is provided and <code>name.family</code> is empty, it is used to fill <code>name.family</code>.
@@ -201,10 +209,11 @@ The different components of a person's name permit a precise description.
         <code><b>name.official</b></code> represent the <i>exact</i> spelling of the name, as written in the birth certificate.
     </li>
     <li>
-        <code><b>name.spouse</b></code> : array of spouse names (in general, used for married women). This field is informative only ; if the person is known using her spouse name, the information must be repeated in field <code>name.fame.family</code>.
+        <code><b>name.spouse</b></code> : array of spouse names (in general, used for married women). This field is informative only ; if the person is known using her spouse name, this information must be repeated in field <code>name.fame.family</code>.
     </li>
     <li>
         <code><b>name.nobl</b></code> : nobiliary-particle: de d' di del von...
+        <br><code>name.nobl</code> is not used to build <code>name.family</code> (but can be used to build person's slug and to display person's name).
     </li>
     <li>
         <code><b>name.fame</b></code>: stage or scene name.

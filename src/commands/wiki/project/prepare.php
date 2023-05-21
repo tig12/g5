@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Copies src/model/wiki/Wikiproject.yml to data/wiki/project
+    Copies src/model/wiki/templates/Wikiproject.yml to data/wiki/project
     and renames the destination file from the slug of the project to prepare.
 
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
@@ -32,7 +32,7 @@ class prepare implements Command {
         $destFile = Wikiproject::rootDir() . DS . $slug . '.yml';
         // if $destFile already exists, don't replace it
         if(!is_file($destFile)){
-            $sourceFile = implode(DS, [G5::ROOT_DIR, 'model', 'wiki', 'Wikiproject.yml']);
+            $sourceFile = implode(DS, [G5::ROOT_DIR, 'model', 'wiki', 'templates', 'Wikiproject.yml']);
             copy($sourceFile, $destFile);
             $report .= "Created file $destFile\n";
         }

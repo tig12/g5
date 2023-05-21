@@ -156,6 +156,19 @@ class BC {
         //
         $p->data['acts'][BC::PERSON_ACT_KEY] = $BC;
         //
+        $nameArray = [];
+        if(isset($BC['transcription']['name'])){
+            $nameArray = $BC['transcription']['name'];
+        }
+        if(isset($BC['extras']['name'])){
+            $nameArray = array_merge_recursive($nameArray, $BC['extras']['name']);
+        }
+/* 
+        $p->computeCommonName($nameArray);
+echo "=== after ===\n"; print_r($p->data['name']); echo "\n";
+exit;
+*/
+        //
         // Useful for new person, if extras.name.family or extras.name.given are not filled.
         // Official name is filled from transcription.
         //
