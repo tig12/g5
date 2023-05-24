@@ -173,6 +173,7 @@ The different components of a person's name permit a precise description.
 <ul class="spaced">
     <li>
         <b><code>name.given</code></b> and <b><code>name.family</code></b> represent the name commonly used to designate a person.
+        <!-- 
         <br>It can be either the "real" name of the person, or a pseudonym.
         <br>When a new person is inserted or updated in database, the following rules are used, in this order, to fill these 2 fields:
         <ol>
@@ -204,6 +205,7 @@ The different components of a person's name permit a precise description.
                 if field <code>name.official.given</code> is provided and <code>name.given</code> is empty, it is used to fill <code>name.given</code>.
             </li>
         </ol>
+        -->
     </li>
     <li>
         <code><b>name.official</b></code> represent the <i>exact</i> spelling of the name, as written in the birth certificate.
@@ -216,7 +218,7 @@ The different components of a person's name permit a precise description.
         <br><code>name.nobl</code> is not used to build <code>name.family</code> (but can be used to build person's slug and to display person's name).
     </li>
     <li>
-        <code><b>name.fame</b></code>: stage or scene name.
+        <code><b>name.fame</b></code>: public name, like stage or scene name.
         <br>Can be full (ex: "Mistinguett" or "Stromae") or composed, like "Edith" (name.fame.given) "Piaf" (name.fame.family).
     </li>
     <li>
