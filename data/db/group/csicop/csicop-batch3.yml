@@ -1,0 +1,17 @@
+document:
+  history:
+    - 2023-05-26 16:39:57+02:00: Thierry Graff, creation
+
+name: CSICOP Batch 3 - 82 sportsmen
+slug: csicop-batch3
+type: history
+sources:
+  - rawlins-ertel-irving
+
+description: |
+  This "batch 3" corresponds to the third step of data collection supervised by Paul Kurtz, CSICOP's director.
+  <br>Data were gathered on spring / summer 1978, and sent by Kurtz to Dennis Rawlins for computation.
+  <br>The computations were sent to Kurtz on 1978-09-18.
+  
+parents:
+  - csicop

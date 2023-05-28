@@ -1,0 +1,16 @@
+document:
+  history:
+    - 2023-05-26 16:39:47+02:00: Thierry Graff, creation
+
+name: CSICOP Batch 2 - 198 sportsmen
+slug: csicop-batch2
+type: history
+sources:
+  - rawlins-ertel-irving
+
+description: |
+  This "batch 2" corresponds to the second step of data collection supervised by Paul Kurtz, CSICOP's director.
+  <br>They were assembled by Paul Kurtz in spring 1978 and sent to Dennis Rawlins to perform the computations. The computations were sent to Kurtz on 1978-06-25.
+  
+parents:
+  - csicop

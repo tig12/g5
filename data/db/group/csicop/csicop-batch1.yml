@@ -1,0 +1,15 @@
+document:
+  history:
+    - 2023-05-26 00:19:19+02:00: Thierry Graff, creation
+
+name: CSICOP Batch 1 - 128 sportsmen
+slug: csicop-batch1
+type: history
+sources:
+  - rawlins-ertel-irving
+
+description: |
+  This "batch 1" corresponds to the first step of data collection supervised by Paul Kurtz, CSICOP's director.
+  <br>Paul Kurtz started to receive data of this group in september 1977. A first group of 72 birth dates were sent for computation to Dennis Rawlins on 1977-10-25. The rest of the data were sent by Kurtz to Rawlins in the following weeks.
+parents:
+  - csicop

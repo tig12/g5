@@ -10,11 +10,14 @@ sources:
   - 3a_sports
 
 description: |
-  4384 sportsmen compiled by Suitbert Ertel, coming from Gauquelin A1, D6, D10 and the 3 skeptic tests: Comité Para (Belgium 1976), CSICOP (USA 1979), CFEPP (France 1996).
+  4384 sportsmen compiled by Suitbert Ertel, coming from Gauquelin <a href="/group/a1">A1</a>, <a href="/group/d6">D6</a>, <a href="/group/d10">D10</a> and the 3 skeptic tests: <a href="/group/cpara">Comité Para</a> (Belgium 1976), <a href="/group/csicop">CSICOP</a> (USA 1979), <a href="/group/cfepp">CFEPP</a> (France 1996).
+  <!-- 
   <br>N with birth time : <b>2086</b> (47.58 %)
   <br>N without birth time : <b>2297</b> (52.4 %)
+  -->
   <br>Published by Suitbert Ertel in 1988 - original article available online: <a href="https://www.scientificexploration.org/docs/2/jse_02_1_ertel.pdf">"Raising the Hurdle for the Athletes' Mars Effect: Association Co-Varies With Eminence" on scientificexploration.org</a>. Details about data are given p 58 of the article.
   <br>In the article, Ertel announces 4391 sportsmen.
+  <br>See more information about the building of this group on <a href="https://tig12.github.io/g5/ertel-4391-sport.html">tig12.github.io</a>.
 
 children:
   - ertel-1-first-french

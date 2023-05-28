@@ -1,0 +1,23 @@
+document:
+  history:
+    - 2022-05-11 23:46:28+02:00: Thierry Graff, creation
+
+name: CSICOP 408 sportsmen
+slug: csicop
+type: history
+sources:
+  - rawlins-ertel-irving
+  - si42
+
+description: |
+  This group contains 408 US athletes, gathered between 1977 and 1978 by the <b>CSICOP</b>, an American comitee of skeptics.
+  <br>This list was published in the review "The Skeptical Inquier", VOL IV NO. 2 WINTER 1979-80.
+  <br>Integration of this list in opengauquelin database was possible thanks to a file sent by <b>Kenneth Irving</b>.
+  <br>See <a href="https://tig12.github.io/g5/csicop.html">tig12.github.io/g5/csicop.html</a> for details about this file.
+  <br>Data collection by the CSICOP was done in 3 distinct steps, corresponding to the 3 sub-groups.
+  <br>Data of this group come from <i>The Lincoln Library of Sport Champions 1974</i>, <i>Who's who in Football 1974</i>, <i>Who's who in Basketball 1973</i>, <i>Who's who in Track and Field 1973</i>, and <i>Who's who in Boxing 1974</i>.
+
+children:
+  - csicop-batch1
+  - csicop-batch2
+  - csicop-batch3

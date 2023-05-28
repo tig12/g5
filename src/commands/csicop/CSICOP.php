@@ -50,58 +50,32 @@ class CSICOP {
     const GROUP3_SLUG = 'csicop-batch3';
     
     /**
-        Returns a Group object for CSICOP 408 sportsmen.
+        Computes the path to the yaml file containing the characteristics of the groups involved in CSICOP test.
+        Relative to directory data/db/group
+        @param  $slug   Slug of the considered group ; one of GROUP*_SLUG of this class
     **/
+    public static function groupDefinitionFile($slug): string {
+        return 'csicop' . DS . $slug . '.yml';
+    }
+    
+    /** Returns a Group object for CSICOP 408 sportsmen. **/
     public static function getGroup(): Group {
-        $g = Group::createEmpty();
-        $g->data['slug'] = self::GROUP_SLUG;
-        $g->data['name'] = "CSICOP 408 sportsmen";
-        $g->data['type'] = Group::TYPE_HISTORICAL;
-        $g->data['description'] = "408 American athletes, gathered by CSICOP";
-        $g->data['sources'] = [CSICOP::SOURCE_SLUG, SI42::SOURCE_SLUG, Irving::LIST_SOURCE_SLUG];
-        return $g;
+        return Group::createFromDefinitionFile(self::groupDefinitionFile(self::GROUP_SLUG));
     }
     
-    /**
-        Returns a Group object for CSICOP Batch 1 (128 athletes).
-    **/
+    /** Returns a Group object for CSICOP Batch 1 (128 athletes). **/
     public static function getGroup_batch1(): Group {
-        $g = Group::createEmpty();
-        $g->data['slug'] = self::GROUP1_SLUG;
-        $g->data['name'] = "CSICOP Batch 1 - 128 sportsmen";
-        $g->data['type'] = Group::TYPE_HISTORICAL;
-        $g->data['description'] = "128 American athletes, first batch of data gathered by CSICOP";
-        $g->data['sources'] = [CSICOP::SOURCE_SLUG, SI42::SOURCE_SLUG, Irving::LIST_SOURCE_SLUG];
-        $g->data['parents'] = [CSICOP::GROUP_SLUG];
-        return $g;
+        return Group::createFromDefinitionFile(self::groupDefinitionFile(self::GROUP1_SLUG));
     }
     
-    /**
-        Returns a Group object for CSICOP Batch 2 (198 athletes).
-    **/
+    /** Returns a Group object for CSICOP Batch 2 (198 athletes). **/
     public static function getGroup_batch2(): Group {
-        $g = Group::createEmpty();
-        $g->data['slug'] = self::GROUP2_SLUG;
-        $g->data['name'] = "CSICOP Batch 2 - 198 sportsmen";
-        $g->data['type'] = Group::TYPE_HISTORICAL;
-        $g->data['description'] = "198 American athletes, second batch of data gathered by CSICOP";
-        $g->data['sources'] = [CSICOP::SOURCE_SLUG, SI42::SOURCE_SLUG, Irving::LIST_SOURCE_SLUG];
-        $g->data['parents'] = [CSICOP::GROUP_SLUG];
-        return $g;
+        return Group::createFromDefinitionFile(self::groupDefinitionFile(self::GROUP2_SLUG));
     }
     
-    /**
-        Returns a Group object for CSICOP Batch 3 (82 athletes).
-    **/
+    /** Returns a Group object for CSICOP Batch 3 (82 athletes). **/
     public static function getGroup_batch3(): Group {
-        $g = Group::createEmpty();
-        $g->data['slug'] = self::GROUP3_SLUG;
-        $g->data['name'] = "CSICOP Batch 3 - 82 sportsmen";
-        $g->data['type'] = Group::TYPE_HISTORICAL;
-        $g->data['description'] = "82 American athletes, third batch of data gathered by CSICOP";
-        $g->data['sources'] = [CSICOP::SOURCE_SLUG, SI42::SOURCE_SLUG, Irving::LIST_SOURCE_SLUG];
-        $g->data['parents'] = [CSICOP::GROUP_SLUG];
-        return $g;
+        return Group::createFromDefinitionFile(self::groupDefinitionFile(self::GROUP3_SLUG));
     }
     
     // *********************** Output files manipulation ***********************
