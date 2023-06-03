@@ -15,7 +15,14 @@ description: |
   <br>Integration of this list in opengauquelin database was possible thanks to a file sent by <b>Kenneth Irving</b>.
   <br>See <a href="https://tig12.github.io/g5/csicop.html">tig12.github.io/g5/csicop.html</a> for details about this file.
   <br>Data collection by the CSICOP was done in 3 distinct steps, corresponding to the 3 sub-groups.
-  <br>Data of this group come from <i>The Lincoln Library of Sport Champions 1974</i>, <i>Who's who in Football 1974</i>, <i>Who's who in Basketball 1973</i>, <i>Who's who in Track and Field 1973</i>, and <i>Who's who in Boxing 1974</i>.
+  <br>Data of this group come from :
+  <ul class="naked">
+      <li><i>The Lincoln Library of Sport Champions 1974</i></li>
+      <li><i>Who's who in Football 1974</i></li>
+      <li><i>Who's who in Basketball 1973</i></li>
+      <li><i>Who's who in Track and Field 1973</i></li>
+      <li><i>Who's who in Boxing 1974</i></li>
+  </ul>
 
 children:
   - csicop-batch1

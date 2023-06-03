@@ -31,7 +31,7 @@ use g5\commands\wd\Wikidata;
 use g5\commands\db\init\dbcreate                as DBInitDBCreate;
 use g5\commands\db\init\occus1                  as DBInitOccu1;
 use g5\commands\db\init\occus2                  as DBInitOccu2;
-use g5\commands\db\fill\source                  as DBFillSource;
+use g5\commands\db\import\source                as DBImportSource;
 use g5\commands\db\init\tweaks                  as DBInitTweaks;
 use g5\commands\db\init\stats                   as DBInitStats;
 use g5\commands\db\init\wiki                    as DBInitWiki;
@@ -239,15 +239,15 @@ class all implements Command {
             echo DBInitDBCreate::execute([]);
             // Main sources are inserted here because they are used in various places
             // Sources related to specific groups are inserted in the code of related tmp2db
-            echo DBFillSource::execute([Gauquelin::SOURCE_DEFINITION_FILE]);
-            echo DBFillSource::execute([LERRCP::SOURCE_DEFINITION_FILE]);
-            echo DBFillSource::execute([Muller::SOURCE_DEFINITION_FILE]);
-            echo DBFillSource::execute([AFD::SOURCE_DEFINITION_FILE]);
-            echo DBFillSource::execute([Ertel::SOURCE_DEFINITION_FILE]);
-            echo DBFillSource::execute([Cura5::SOURCE_DEFINITION_FILE]);
-            echo DBFillSource::execute([Newalch::SOURCE_DEFINITION_FILE]);
-            echo DBFillSource::execute([Wikidata::SOURCE_DEFINITION_FILE]);
-            echo DBFillSource::execute([G5::SOURCE_DEFINITION_FILE]);
+            echo DBImportSource::execute([Gauquelin::SOURCE_DEFINITION_FILE]);
+            echo DBImportSource::execute([LERRCP::SOURCE_DEFINITION_FILE]);
+            echo DBImportSource::execute([Muller::SOURCE_DEFINITION_FILE]);
+            echo DBImportSource::execute([AFD::SOURCE_DEFINITION_FILE]);
+            echo DBImportSource::execute([Ertel::SOURCE_DEFINITION_FILE]);
+            echo DBImportSource::execute([Cura5::SOURCE_DEFINITION_FILE]);
+            echo DBImportSource::execute([Newalch::SOURCE_DEFINITION_FILE]);
+            echo DBImportSource::execute([Wikidata::SOURCE_DEFINITION_FILE]);
+            echo DBImportSource::execute([G5::SOURCE_DEFINITION_FILE]);
             echo DBInitOccu1::execute();
             
             // Done here to build associations between issues and wiki projects.

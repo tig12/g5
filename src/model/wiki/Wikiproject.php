@@ -147,12 +147,12 @@ class Wikiproject {
         $personId = $p->data['id'];
         
         // check if person is already associated to the project
-        $query = "select * from wikiproject_act where id_person=$personId and id_project=$projectId";
+        $query = "select * from wikiproject_person where id_person=$personId and id_project=$projectId";
         $stmt = $dblink->prepare($query);
         $stmt->execute([]);
         $res = $stmt->fetch(\PDO::FETCH_ASSOC);
         if($res === false || count($res) == 0){
-            $stmt = $dblink->prepare('insert into wikiproject_act(
+            $stmt = $dblink->prepare('insert into wikiproject_person(
                 id_project,
                 id_person)
                 values(?,?)');

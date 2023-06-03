@@ -6,7 +6,7 @@
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-07-18 16:45:40+02:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\commands\db\fill;
+namespace g5\commands\db\import;
 
 use tiglib\patterns\Command;
 use g5\app\Config;

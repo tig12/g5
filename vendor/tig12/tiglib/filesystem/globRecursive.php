@@ -21,7 +21,7 @@ class globRecursive{
    public static function execute(string $pattern, int $flags = 0){
      $files = glob($pattern, $flags);
      foreach (glob(dirname($pattern).DS.'*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir){
-        $files = array_merge($files, self::execute($dir . DS . basename($pattern), $flags));
+        $files = array_merge($files, self::execute($dir . DS . basename($pattern), $flags)); // recursive here
      }
      return $files;
    }    

@@ -36,7 +36,7 @@ class dbcreate implements Command {
             'source',
             'stats',
             'wikiproject',
-            'wikiproject_act',
+            'wikiproject_person',
             'wikiproject_issue',
             'wikirecent',
         ];
@@ -54,7 +54,7 @@ class dbcreate implements Command {
         $views = [
             'view_issue',
             'view_person_groop',
-            'view_wikiproject_act',
+            'view_wikiproject_person',
             'view_wikiproject_issue',
         ];
         foreach($views as $view){

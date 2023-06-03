@@ -6,8 +6,12 @@
     NOTE: This code cannot be executed several times (won't update the records if already in database)
         To re-execute it (eg for debug purposes), you must rebuild the database from scratch (at least A2 and E1)
     
+    // Find Paris medics
+    select id from person where birth->'place'->>'name'='Paris' and ids_in_sources ? 'afd5';
+    
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2020-08-20 10:46:02+02:00, Thierry Graff : creation
+    
 ********************************************************************************/
 namespace g5\commands\muller\m5medics;
 
