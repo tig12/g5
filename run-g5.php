@@ -16,92 +16,28 @@ require_once __DIR__ . DS . 'src' . DS . 'app' . DS . 'init.php';
 
 use g5\app\Run;
 
-//
-// parameter checking
-//
-$args1 = Run::getArgs1();
-$args1_str = implode("\n    ", $args1);
+[$command, $params, $msg] = Run::computeCommandAndParams($argv);
 
-$USAGE = <<<USAGE
--------                                                                                               
-Usage : 
-    php {$argv[0]} <argument1> <argument2> <argument3> [optional arguments]
-Example :
-    php {$argv[0]} gauq A2 raw2tmp
--------
-
-USAGE;
-
-// check arg1
-if(count($argv) < 2){
-    echo "WRONG USAGE - run-g5.php needs at least 3 arguments\n";
-    echo $USAGE;
-    echo "Possible values for argument 1 :\n    - $args1_str\n";
-    exit;
+if($command === false){
+    die($msg);
 }
-else{
-    $arg1 = $argv[1];
-    $args1 = Run::getArgs1();
-    $args1_str = implode("\n    - ", $args1);
-    if(!in_array($arg1, $args1)){
-        echo $USAGE;
-        echo "WRONG USAGE - INVALID ARGUMENT 1 : $arg1\n";
-        echo "Possible values for argument 1 :\n    - $args1_str\n";
-        exit;
-    }
-}
-// here, arg1 is valid
-
-// check arg2
-$arg2s = Run::getArgs2($arg1);
-$arg2s_str = implode("\n    - ", $arg2s);
-if(count($argv) < 3){
-    echo "WRONG USAGE - run-g5.php needs at least 3 arguments\n";
-    echo $USAGE;
-    echo "\n";
-    echo "Possible argument 2 for argument 1 = $arg1 :\n    - $arg2s_str\n";
-    echo "\n";
-    exit;
-}
-else{
-    $arg2 = $argv[2];
-    if(!in_array($arg2, $arg2s)){
-        echo $USAGE;
-        echo "WRONG USAGE - INVALID ARGUMENT 2 : $arg2\n";
-        echo "\n";
-        echo "Possible argument 2 for argument 1 = $arg1 :\n    - $arg2s_str\n";
-        echo "\n";
-        exit;
-    }
-}
-// here, arg2 is valid
-
-// check arg3
-$arg3s = Run::getArgs3($arg1, $arg2);
-$arg3s_str = implode("\n    - ", $arg3s);
-if(count($argv) < 4){
-    echo "WRONG USAGE - run-g5.php needs at least 3 arguments\n";
-    echo $USAGE;
-    echo "\n";
-    echo "Possible argument 3 for $arg1 / $arg2 :\n    - $arg3s_str\n";
-    echo "\n";
-    exit;
-}
-else{
-    $arg3 = $argv[3];
-    if(!in_array($arg3, $arg3s)){                  
-        echo "WRONG USAGE - INVALID ARGUMENT 3 : $arg3\n";
-        echo "\n";
-        echo "Possible argument 3 for $arg1 / $arg2 :\n    - $arg3s_str\n";
-        echo "\n";
-        exit;
-    }
-}
-// here, arg3 is valid
 
 //
 // run
 //
+try{
+    $report = $command::execute($params);
+    echo "$report";
+}
+catch(Exception $e){
+    echo 'Exception : ' . $e->getMessage() . "\n";
+    echo $e->getFile() . ' - line ' . $e->getLine() . "\n";
+    echo $e->getTraceAsString() . "\n";
+}
+
+exit;
+
+
 try{
     $params = array_slice($argv, 4);
     [$isRouter, $class] = Run::getCommandClass($arg1, $arg2, $arg3);

@@ -10,13 +10,140 @@
 ********************************************************************************/
 namespace g5\app;
 
-class Run{
+use tiglib\filesystem\globRecursive;
+
+Run::init();
+
+class Run {
+    
+    private static $COMMAND_ROOT_DIR;
+    
+    public static function init(){
+        self::$COMMAND_ROOT_DIR = dirname(__DIR__) . DS . 'commands';
+    }
+    
+    /**
+        Computes the command to call and its arguments
+        Tries to find the most specific command.
+        Ex: a call "php run-g5.php wiki import math bourbaki rank toto titi"
+        corresponds to $components = ['wiki', 'import', 'math', 'bourbaki', 'rank', 'toto', 'titi']
+        It will succesively try to build the commands
+        g5\commands\wiki\import\math\bourbaki\rank\titi\toto
+        g5\commands\wiki\import\math\bourbaki\rank\titi
+        g5\commands\wiki\import\math\bourbaki\rank
+        Here a command is found, and the arguments are ['titi', 'toto']
+        @param  $argv, global variable provided by PHP CLI.
+        @return array with 3 elements:
+            - A php class implementing interface Command, or false if it can't be computed.
+            - An array of arguments to use when calling $command.
+            - An error message if $command couldn't be computed.
+    **/
+    public static function computeCommandAndParams($argv) {
+        array_shift($argv);
+        if(isset($argv[0]) && $argv[0] == 'gauq'){
+            $params = array_slice($argv, 1);
+            return ['g5\\commands\\gauq\\GauqCommand', $params, ''];
+        }
+        $args = [];
+        $msg = '';
+        $command = false;
+        for($i=count($argv)-1; $i >= 0 ; $i--){
+            $components = array_slice($argv, 0, $i+1);
+            $file = self::$COMMAND_ROOT_DIR . DS . implode(DS, $components) . '.php';
+            if(is_file($file)){
+                $command = self::getCommandClass($components);
+                if($command != false){
+                    return [$command, array_reverse($args), $msg];
+                }
+            }
+            $args[] = $argv[$i];
+        }
+        //
+        [$invalidArg, $possibles, $lastOK] = self::computePossibles($argv);
+        if(empty($possibles)){
+            $msg = "No correspondance\n";
+        }
+        else{
+            $possibles2 = implode("\n    - ", $possibles);
+            $lastOK2 = str_replace(self::$COMMAND_ROOT_DIR, '', $lastOK);
+            $lastOK2 = trim(str_replace('/', ' ', $lastOK2));
+            if($invalidArg != ''){
+                $msg .= "INVALID ARGUMENT: '$invalidArg'\n";
+            }
+            else {
+                $msg .= "MISSING ARGUMENT\n";
+            }
+            $msg .= "Possible values for argument '$lastOK2':\n    - $possibles2\n";
+        }
+        //
+        return [false, [], $msg];
+    }
+
+    /**
+        Returns the fully qualified name of a class implementing Command,
+        or false if $components don't correspond to such a class.
+    **/
+    private static function getCommandClass($components){
+        array_unshift($components, 'commands');
+        array_unshift($components, 'g5');
+        $classname = implode('\\', $components);
+        try{
+            $class = new \ReflectionClass($classname);
+            if($class->implementsInterface("tiglib\\patterns\\Command")){
+                return $classname;
+            }
+        }
+        catch(\Exception $e){
+            // silently ignore php files present in the directory, but containing errors
+            // echo "ERR new \\ReflectionClass($classname) \n" . $e->getMessage() . "\n";
+        }
+        return false;
+    }
+    
+    /**
+        Proposes a list of possible following arguments.
+        Computes the longest path corresponding to a directory from $components.
+        Ex: if $components = ['wiki', 'import', 'toto', 'titi']
+            The longest path corresponds to src/commands/wiki/import
+            It will return all possible following arguments :
+            - the php files implementing Command in src/commands/wiki/import
+            - the subdirectories contained in src/commands/wiki/import
+        @return Array containing 3 elements:
+                - $invalidArg : the first argument not corresponding to a valid dir, or '' if $lastOK corresponds to a directory.
+                    Ex: if $components = ['wiki', 'import', 'toto', 'titi'] => $invalidArg = 'toto'
+                    Ex: if $components = ['wiki', 'import']                 => $invalidArg = ''
+                - $possibles: the list of possible following arguments.
+                - $lastOK: the longest path corresponding to a directory from $components.
+    **/
+    private static function computePossibles($components) {
+        $lastOK = false;
+        $idxLastOK = -1;
+        $invalidArg = '';
+        for($i=0; $i < count($components); $i++){
+            $cur = array_slice($components, 0, $i+1);
+            $dir = self::$COMMAND_ROOT_DIR . DS . implode(DS, $cur);
+            if(is_dir($dir)){
+                $lastOK = $dir;
+                $idxLastOK = $i;
+            }
+        }
+        if($lastOK == ''){
+            // particular case, the first argument is not valid.
+            $lastOK = self::$COMMAND_ROOT_DIR;
+        }
+        if(isset($components[$idxLastOK + 1])){
+            $invalidArg = $components[$idxLastOK + 1];
+        }
+        $possibles = self::computeSubdirs($lastOK);
+        $possibles = array_merge($possibles, self::computeCommandsOfDir($lastOK));
+        return [$invalidArg, $possibles, $lastOK];
+    }    
     
     /** 
         Returns the sub-directories that can be used to map a parameter in g5 CLI interface.
-        Ex : if $dir = src/commands, returns all subdirs that don't start with 'z.'
+        Ex : if $dir = src/commands, returns all subdirs of src/commands that don't start with 'z.'
     **/
-    private static function getSubdirs($dir){
+    private static function computeSubdirs($dir){
         $res = [];
         $subdirs = array_map('basename', glob($dir . DS . '*', GLOB_ONLYDIR));
         foreach($subdirs as $subdir){
@@ -27,136 +154,38 @@ class Run{
         }
         return $res;
     }
-    
+
     // ******************************************************
     /**
-        Returns a list of data sets known by the program
-        = list of sub-directories of commands/
+        Returns an array of names of classes implementing Command, defined in .php files located in $dir.
+        @param  $
     **/
-    public static function getArgs1(){
-        return self::getSubdirs(dirname(__DIR__) . DS . 'commands');
-    }
-    
-    
-    // ******************************************************
-    // Simulates implementation of Router 
-    /**
-        Returns the possible arg2 for a given arg1.
-        @todo maybe use reflection if some sub-directories of arg1s do not correspond to a arg2 sub-package.
-    **/
-    public static function getArgs2($arg1){
-        // if the arg1 has an implementation of interface Router, delegate
-        $file = self::arg1RouterFilename($arg1);
-        if(file_exists($file)){
-            $class = self::arg1RouterClassname($arg1);
-            return $class::getArgs2();
-        }
-        // else return the directories located in the arg1's class directory
-        // as the code is psr4, possible to list php files without using reflection.
-        $dir = implode(DS, [dirname(__DIR__), 'commands', $arg1]);
-        return self::getSubdirs($dir);
-    }
-    
-    
-    // ******************************************************
-    // Simulates implementation of Router 
-    /**
-        Returns the possible commands for the arg2 of a arg1.
-        @return Array of strings containing the possible args3.
-    **/
-    public static function getArgs3($arg1, $arg2){
-        // if the arg1 has an implementation of interface Router, delegate
-        $file = self::arg1RouterFilename($arg1);
-        if(file_exists($file)){
-            $class = self::arg1RouterClassname($arg1);
-            return $class::getArgs3($arg2);
-        }
-        // else return the classes located in the arg2's class directory
-        // as the code is psr4, possible to list php files without using reflection.
-        $dir = implode(DS, [dirname(__DIR__), 'commands', $arg1, $arg2]);
-        $tmp = glob($dir . DS . '*.php');
+    private static function computeCommandsOfDir(string $dir): array {
+        $files = glob($dir . DS . '*.php');
+        //
+        $baseClasspath = str_replace(self::$COMMAND_ROOT_DIR, '', $dir);
+        $baseClasspath = 'g5\\commands' . str_replace(DS, '\\', $baseClasspath);
+        //
         $res = [];
-        foreach($tmp as $file){
+        foreach($files as $file){
             $basename = basename($file, '.php');
+            // files / directories starting by z. are not versioned (draft or obsolete)
+            if(strpos($basename, 'z.') === 0){
+                continue;
+            }
             try{
-                $class = new \ReflectionClass("g5\\commands\\$arg1\\$arg2\\$basename");
+                $classpath = $baseClasspath . '\\' . $basename;
+                $class = @new \ReflectionClass($classpath); // @ to avoid warning when autoload fails
                 if($class->implementsInterface("tiglib\\patterns\\Command")){
                     $res[] = $basename;
                 }
             }
             catch(\Exception $e){
                 // silently ignore php files present in the directory, but containing errors
-                // echo "ERR new \\ReflectionClass(\\"g5\\commands\\$arg1\\$arg2\\$basename\\") \n" . $e->getMessage() . "\n";
+                // echo "ERR new \\ReflectionClass($baseClasspath) \n" . $e->getMessage() . "\n";
             }
         }
         return $res;
-    }
-    
-    // ******************************************************
-    /**
-        Returns the fully qualified name of a class that will be called for a given triple (arg1, arg2, arg3).
-        Implementation of convention described in docs/code-details.html
-        @return Array with 2 elements :
-                    - Boolean Indicates if the returned class implements Router or Command
-                    - String The class name.
-        @throws Exception if the convention is not correctly coded.
-        @todo check that the class implements interface Command.
-    **/
-    public static function getCommandClass($arg1, $arg2, $arg3){
-        // look if class implementing Command exists for the arg1
-        $file = self::arg1CommandFilename($arg1);
-        if(file_exists($file)){
-            $class = self::arg1CommandClassname($arg1);
-            return [true, $class];
-        }
-        // Class for arg1 doesn't exist, use default 
-        // look if a class corresponding to this arg3 exists
-        $class = "g5\\commands\\$arg1\\$arg2\\$arg3";
-        if(class_exists($class)){
-            return [false, $class];
-        }
-        // class not found
-        $msg = "BUG : incorrect implementation of command.\n"
-            . "  Dataset : $arg1\n"
-            . "  Datafile : $arg2\n"
-            . "  Action : $arg3\n";
-        throw new \Exception($msg);
-    }
-    
-    
-    // ******************************************************
-    /** 
-        Returns the class name of a arg1's class implementing Router interface.
-        Auxiliary of self::getArgs2() and self::getActionClass().
-    **/
-    private static function arg1RouterClassname($arg1){
-        return implode("\\", ['g5', 'commands', $arg1, ucFirst($arg1) . 'Router']);
-    }
-
-    /** 
-        Returns the absolute filename of a arg1's class implementing Router interface.
-        Auxiliary of self::getArgs2() and self::getActionClass().
-    **/
-    private static function arg1RouterFilename($arg1){
-        return implode(DS, [dirname(__DIR__), 'commands', $arg1, ucFirst($arg1) . 'Router.php']);
-    }
-    
-    
-    // ******************************************************
-    /** 
-        Returns the class name of a arg1's class implementing Command interface.
-        Auxiliary of self::getCommandClass().
-    **/
-    private static function arg1CommandClassname($arg1){
-        return implode("\\", ['g5', 'commands', $arg1, ucFirst($arg1) . 'Command']);
-    }
-    
-    /** 
-        Returns the absolute path of a arg1's class implementing Command interface.
-        Auxiliary of self::getCommandClass().
-    **/
-    private static function arg1CommandFilename($arg1){
-        return implode(DS, [dirname(__DIR__), 'commands', $arg1, ucFirst($arg1) . 'Command.php']);
     }
     
 } // end class

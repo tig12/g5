@@ -112,7 +112,8 @@ class Issue {
     // *********************** CRUD *******************************
     
     /** 
-        Returns the id of the inserted person or -1 if the insertion couldn't be done.
+        Returns the id of the inserted person,
+        or -1 if the insertion couldn't be done.
     **/
     public function insert(): int {
         if($this->data['person']->data['id'] == 0){

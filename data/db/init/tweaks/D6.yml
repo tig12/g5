@@ -12,6 +12,7 @@
     ACTION: insert
     ADD-IN-GROUPS:
       - d6
+  trust: 5
   ids-in-sources:
     d6: '234'
     ertel-sport: '2318'

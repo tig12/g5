@@ -23,7 +23,7 @@ class tmp2db100 implements Command {
     
     const REPORT_TYPE = [
         'small' => 'Echoes the number of inserted / updated rows',
-        'full'  => 'Lists details of perons already in Gauquelin data',
+        'full'  => 'Lists details of persons already in Gauquelin data',
     ];
     
     /**
@@ -68,6 +68,7 @@ class tmp2db100 implements Command {
         
         // Wiki projects associated to the issues raised by this import
         $wp = Wikiproject::createFromSlug('italian-writers');
+        $issue_msg = "Arno Müller couldn't obtain birth time. Check if birth certificate with birth time can be found.";
         
         $nInsert = 0;
         $nUpdate = 0;
@@ -126,7 +127,7 @@ class tmp2db100 implements Command {
                 $p->data['id'] = $p->insert(); // DB
                 $g->addMember($p->data['id']);
                 // Issue
-                $issue = new Issue($p, Issue::TYPE_DATE, $msg);
+                $issue = new Issue($p, Issue::TYPE_DATE, $issue_msg);
                 $test = $issue->insert(); // DB
                 if($test != -1){
                     $issue->linkToWikiproject($wp);

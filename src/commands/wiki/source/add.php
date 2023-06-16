@@ -6,14 +6,14 @@
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2021-07-18 16:45:40+02:00, Thierry Graff : Creation
 ********************************************************************************/
-namespace g5\commands\db\import;
+namespace g5\commands\wiki\source;
 
 use tiglib\patterns\Command;
 use g5\app\Config;
 use tiglib\filesystem\globRecursive;
 use g5\model\Source as ModelSource;
 
-class source implements Command {
+class add implements Command {
     
     /** 
         Inserts or updates a source in database
