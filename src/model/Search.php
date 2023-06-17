@@ -52,12 +52,12 @@ class Search {
             }
         }
         // spouse
-        if($arrNames['spouse'] != ''){
+        foreach($arrNames['spouse'] as $spouse){
             if($arrNames['given'] != ''){
-                $res[] = $arrNames['spouse'] . ' ' . $arrNames['given'];
+                $res[] = $spouse . ' ' . $arrNames['given'];
             }
             else {
-                $res[] = $arrNames['spouse'];
+                $res[] = $spouse;
             }
         }
         // fame 

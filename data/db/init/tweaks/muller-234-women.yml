@@ -54,7 +54,8 @@
   name:
     family: Douet
     given: Jacqueline
-    spouse: Auriol
+    spouse:
+      - Auriol
     fame:
       family: Auriol
   notes:
@@ -199,7 +200,8 @@
   name:
     family: Joliot-Curie
     given: Irène
-    spouse: Joliot
+    spouse:
+      - Joliot
     official:
       family: Curie
   occus:

@@ -422,7 +422,7 @@ class Person {
     }
     
     /**
-       Returns the history entry corresponding to a given source.
+       Returns the history entry corresponding to a given source, or null if not found.
     **/
     public function historyFromSource($sourceSlug) {
         foreach($this->data['history'] as $hist){
