@@ -27,7 +27,7 @@ conductor;Q158852;Chef d’orchestre;Conductor;musician
 cyclist;Q2125610;Cycliste;Cyclist;sportsperson
 dancer;Q5716684;Danseur;Dancer;artist
 diver;Q16004431;Plongeur;Diver;sportsperson
-engineer;Q81096;Ingénieur;Engineer;
+engineer;Q81096;Ingénieur;Engineer;scientist
 equestrian;Q2730732;Cavalier;Equestrian;sportsperson
 executive;Q978044;Cadre dirigeant;Executive;
 factual-writer;;Ecrivain factuel;Factual writer;writer
@@ -38,6 +38,7 @@ field-hockey-player;Q10843263;Joueur de hockey sur gazon;Field hockey player;spo
 figure-skater;Q13219587;Patineur artistique;Figure skater;ice-skater
 football-player;Q937857;Joueur de football;Soccer player;sportsperson
 furniture-designer;Q11455387;Concepteur de meubles;Furniture designer;
+geophysicist;Q12094958;Géophysicien;Geopysicist;physicist
 golfer;Q11303721;Joueur de golf;Golfer;sportsperson
 graphic-artist;Q1925963;Artiste graphique;Graphic artist;artist
 gymnast;Q16947675;Gymnaste;Gymnast;sportsperson

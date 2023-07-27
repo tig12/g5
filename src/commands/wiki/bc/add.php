@@ -102,7 +102,10 @@ class add implements Command {
                 . "Nothing was modified in the database\n";
         }
         //
-        $commandName = "wiki bc add $actSlug";
+        $commandName = match($PARAM_ACTION){
+            'add' => "wiki bc add $actSlug",
+            'upd' => "wiki bc update $actSlug",
+        };
         $report =  "--- $commandName ---\n";
         //
         // Person slug

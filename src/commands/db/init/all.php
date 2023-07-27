@@ -125,14 +125,15 @@ class all implements Command {
     **/
     const POSSIBLE_PARAMS = [
         // individual steps
-        'tmp'       => 'Build tmp files in data/tmp',
-        'db'        => 'Fill database with tmp files',
+        'tmp'       => 'Builds tmp files in data/tmp',
+        'db'        => 'Fills database with tmp files',
+        'stats'     => 'Computes DB statistics',
         'wiki'      => 'Adds with wiki data to the database',
-        'finalize'  => 'Finalize DB (stats, groups, search)',
+        'search'    => 'Fills table for search',
         'export'    => 'Exports the groups in zipped csv files',
         // several steps
         'all'       => 'Executes all steps',
-        'dev'       => 'Executes steps db, wiki,finalize',
+        'dev'       => 'Executes steps db, stats, wiki, search',
     ];
     
     /** 
@@ -308,6 +309,13 @@ class all implements Command {
             echo DBInitOccu2::execute();
         }
         
+        if($param == 'stats' || $param == 'all' || $param == 'dev'){
+            echo "**************************************\n";
+            echo "***  Computes database statistics  ***\n";
+            echo "**************************************\n";
+            echo DBInitStats::execute(['small']);
+        }
+        
         if($param == 'wiki' || $param == 'all' || $param == 'dev'){
             echo "***************************\n";
             echo "***    Add wiki data    ***\n";
@@ -315,12 +323,11 @@ class all implements Command {
             echo DBInitWiki::execute(['small']);
         }
         
-        if($param == 'finalize' || $param == 'all' || $param == 'dev'){
-            echo "***************************\n";
-            echo "***  Finalize database  ***\n";
-            echo "***************************\n";
-            echo DBInitStats::execute(['small']);
-//            echo search::execute();
+        if($param == 'search' || $param == 'all' || $param == 'dev'){
+            echo "********************************\n";
+            echo "***  Fills table for search  ***\n";
+            echo "********************************\n";
+            echo search::execute();
         }
         
         if($param == 'export' || $param == 'all'){
