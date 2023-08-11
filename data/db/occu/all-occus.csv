@@ -22,6 +22,7 @@ catholic-priest;Q250867;Prêtre catholique;Catholic priest;religious-occupation
 chemist;Q593644;Chimiste;Chemist;scientist
 comedy-writer;Q11914886;Auteur de comédies;Comedy writer;writer
 composer;Q36834;Compositeur;Composer;musician
+computer-scientist;Q82594;Informaticien;Computer scientist;scientist
 conductor-of-military-band;;Chef d'orchestre militaire;Conductor of military band;conductor+military-personnel
 conductor;Q158852;Chef d’orchestre;Conductor;musician
 cyclist;Q2125610;Cycliste;Cyclist;sportsperson
@@ -104,6 +105,7 @@ speed-skater;Q10866633;Patineur de vitesse;Speed skater;ice-skater
 sport-sailer;Q476246;Skipper;Sport sailer;sportsperson
 sport-shooter;Q17486376;Tireur sportif;Sport shooter;sportsperson
 sportsperson;Q2066131;Sportif;Sportsperson;
+statistician;Q2732142;Statisticien;Statistician;mathematician
 suffragette;Q322170;Suffragette;Suffragette;feminist
 swimmer;Q10843402;Nageur;Swimmer;sportsperson
 table-tennis-player;Q13382519;Pongiste;Table tennis player;sportsperson
