@@ -39,8 +39,8 @@ class Run {
             - An error message if $command couldn't be computed.
     **/
     public static function computeCommandAndParams($argv) {
-        array_shift($argv);
-        if(isset($argv[0]) && $argv[0] == 'gauq'){
+        array_shift($argv); // $argv[0] contains "run-g5.php"
+        if(isset($argv[0]) && $argv[0] == 'gauq'){ // gauq is the only exception to standard behaviour (see docs/code-details.html)
             $params = array_slice($argv, 1);
             return ['g5\\commands\\gauq\\GauqCommand', $params, ''];
         }
@@ -155,10 +155,8 @@ class Run {
         return $res;
     }
 
-    // ******************************************************
     /**
         Returns an array of names of classes implementing Command, defined in .php files located in $dir.
-        @param  $
     **/
     private static function computeCommandsOfDir(string $dir): array {
         $files = glob($dir . DS . '*.php');

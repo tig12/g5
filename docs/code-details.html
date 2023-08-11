@@ -47,14 +47,10 @@ The code is namespaced ; main namespace name is <code>g5</code>.
 <!-- ********************************************************************************* -->
 <h2><a name="association-cli-executed-code">Association CLI - executed code</a></h2>
 
-The command line interface (CLI) is handled by <code>run-g5.php</code>. To interpret the parameters typed by the user, a convention is used:
-<ul>
-    <li>The 3 first parameters are used to determine which class will be executed.</li>
-    <li>These parameters correspond to the namespace hierarchy containing the executed class.</li>
-    <li>The executed class must implement an interface, <code>g5\app\Command</code>, which impose to provide a method called <code>execute()</code>.</li>
-    <li>Following parameters are passed in an array to the method <code>execute()</code></li>
-</ul>
-
+The command line interface (CLI) is handled by <code>run-g5.php</code>.
+<br>The code uses the parameters given to the CLI to find a class of namespace <code>g5\commands</code> implementing the <code>Command</code> interface.
+<br>For details about this mechanism, see comments of class <a href="https://github.com/tig12/g5/blob/main/src/app/Run.php">g5\app\Run</a>.
+<br>
 <br>Example:
 <pre>php run-g5.php ertel sport look date</pre>
 triggers the execution of
@@ -63,18 +59,12 @@ triggers the execution of
 <!-- ********************************************************************************* -->
 <h2>One exception</h2>
 
-This basic and rigid mechanism proved to be sufficient for most cases. It is convenient because it permits to add new commands which can be used directly without having to change a configuration, but couldn't fill the need to handle Gauquelin files of series A. For example, to have the ability to issue commands like
+This mechanism proved to be sufficient for most cases. It is convenient because it permits to add new commands which can be used directly without having to change a configuration, but couldn't fill the need to handle Gauquelin files of series A. For example, to have the ability to issue commands like
 <br><code>php run-g5.php gauq A1 tmp2db</code>
 <br><code>php run-g5.php gauq A2 tmp2db</code>
 <br>would impose namespace <code>gauq</code> to have a sub-namespace <code>A1</code> and a sub-namespace <code>A2</code> etc.
-<br>To handle this situation, a new convention was added:
-<ul>
-    <li>If namespace corresponding to parameter 1 contains a class implementing the <code>Command</code> interface, the program transmits the control to this class.</li>
-    <li>Otherwise, default mechanism is used.</li>
-</ul>
-This is for example the case of <code>g5\commands\gauq\GauqCommand</code>.
-
-<br><br>Implementation of these conventions can be found in the namespace hierarchy, and in the code of class <code>g5\app\Run</code>
+<br>
+<br>So if the first parameter is <code>gauq</code>, the association between the parameters given to the CLI and the command to execute is handled by <code>g5\commands\gauq\GauqCommand</code>.
 
 </article>
 </main>
