@@ -2,7 +2,7 @@
 /******************************************************************************
     
     Fills database with information contained in data/wiki
-    Executes the actions listed in data/wiki/manage/actions.csv
+    Executes the actions listed in data/wiki/manage/actions.txt
     Handles addition of acts and issues, addition of wiki project is not done here.
     This is done after tmp2db steps.
     
@@ -49,11 +49,11 @@ class wiki implements Command {
         foreach($actions as $action){
             $msg = ModelWiki::check_what($action['what']);
             if($msg != ''){
-                throw new \Exception("$msg in actions.csv, line " . implode(ModelWiki::ACTION_SEP, $action));
+                throw new \Exception("$msg in actions.txt, line " . implode(ModelWiki::ACTION_SEP, $action));
             }
             $msg = ModelWiki::check_action($action['action']);
             if($msg != ''){
-                throw new \Exception("$msg in actions.csv, line " . implode(ModelWiki::ACTION_SEP, $action));
+                throw new \Exception("$msg in actions.txt, line " . implode(ModelWiki::ACTION_SEP, $action));
             }
             switch($action['what']){
             	case 'bc': 

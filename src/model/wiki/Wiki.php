@@ -15,12 +15,12 @@ class Wiki {
     **/
     const SOURCE_SLUG = 'wiki';
     
-    /** Actions for data/wiki/manage/actions.csv **/
+    /** Actions for data/wiki/manage/actions.txt **/
     const   ACTION_ADD    = 'add';
     const   ACTION_UPDATE = 'upd';
     const   ACTION_DELETE = 'del';
     
-    /** Separator used in actions.csv **/
+    /** Separator used in actions.txt **/
     const ACTION_SEP = ';';
     
     /**
@@ -60,17 +60,18 @@ class Wiki {
     }
     
     
-    // *********************** Management of data/wiki/manage/actions.csv ***********************
+    // *********************** Management of data/wiki/manage/actions.txt ***********************
     
     /**
-        Returns the path to data/wiki/manage/actions.csv
+        Returns the path to data/wiki/manage/actions.txt
+        See data/wiki/manage/README
     **/
     public static function getActionFilePath() {
-        return self::rootDir() . DS . 'manage' . DS . 'actions.csv';
+        return self::rootDir() . DS . 'manage' . DS . 'actions.txt';
     }
     
     /**
-        Computes actions from file actions.csv
+        Computes actions from file actions.txt
     **/
     public static function computeAllActions() {
         $file = self::getActionFilePath();
@@ -80,6 +81,9 @@ class Wiki {
         $lines = file($file, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
         $res = [];
         foreach($lines as $line){
+            if(substr($line, 0, 1) === '#'){
+                continue; // line commented
+            }
             $fields = explode(';', $line);
             $res[] = [
                 'what' => $fields[0],
@@ -91,12 +95,12 @@ class Wiki {
     }
     
     /**
-        Adds a line in file actions.csv
+        Adds a line in file actions.txt
         @param  $action Associative array containing 3 fields: what, action, slug
                     what   Possible values: 'bc'
                     action Possible values: 'add', 'upd', 'del'.
                     slug   Slug of the thing to add
-        @throws Exception if invalid parameter or if file actions.csv does not exist.
+        @throws Exception if invalid parameter or if file actions.txt does not exist.
     **/
     public static function addAction(array $action): void {
         $msg = self::check_what($action['what']);
@@ -116,7 +120,7 @@ class Wiki {
     }
     
     /**
-        Auxiliary of methods concerning actions.csv
+        Auxiliary of methods concerning actions.txt
         @return Error message or empty string if valid.
     **/
     public static function check_what(string $what): string {
@@ -127,7 +131,7 @@ class Wiki {
     }
     
     /**
-        Auxiliary of methods concerning actions.csv
+        Auxiliary of methods concerning actions.txt
         @return Error message or empty string if valid.
     **/
     public static function check_action(string $action): string {

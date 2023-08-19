@@ -26,7 +26,7 @@ class Wikiproject {
     }
     
     /**
-        Creates an object of type Wikiproject from storage, using its slug,
+        Creates an object of type Wikiproject from database, using its slug,
         or null if the wiki project doesn't exist.
     **/
     public static function createFromSlug($slug): ?Wikiproject {
@@ -44,8 +44,8 @@ class Wikiproject {
     }
     
     /**
-        Adds one wiki project in database.
-        The slug is used to find the definition file in data/wiki/project (= self::rootDir())
+        Adds one wiki project in database from a file located in data/wiki/project (= self::rootDir()).
+        The name of the file is $slug.yml 
         @param  $slug The slug of the project to add ; ex: french-math
         @return The id in database of the inserted project
         @throws Exception if the yaml file defining the project is not present in self::rootDir().

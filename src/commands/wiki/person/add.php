@@ -43,10 +43,10 @@ class add implements Command {
         Adds or updates in database birth certificate information contained in a person.yml file.
         (deletion of BC currently not handled)
         - Parameter 'rw'
-            When optional parameter rw = 'write', a new line is added in actions.csv.
+            When optional parameter rw = 'write', a new line is added in actions.txt.
                 This is used for the addition of a new act.
                 Current command directly used with php run-g5.php wiki bc add <act slug>
-            When optional parameter rw = 'read', actions.csv is not modified.
+            When optional parameter rw = 'read', actions.txt is not modified.
                 This is used when re-executing the actions, when the database is re-generated from scratch.
                 Current command indirectly used with php run-g5.php db init wiki
         See $msg for parameters documentation.

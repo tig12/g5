@@ -7,6 +7,7 @@
 ********************************************************************************/
 namespace g5\commands\wiki\project;
 
+use g5\G5;
 use g5\model\wiki\Wikiproject;
 use tiglib\patterns\Command;
 
@@ -33,8 +34,8 @@ class addall implements Command {
             // project filename must be called from project slug
             $basename = basename($file);
             $slug = str_replace('.yml', '', $basename);
-            if(strpos($slug, 'z.') === 0){
-                // file statring by 'z.' are not versioned (correspond to drafts or files to delete)
+            
+            if(!G5::isVersioned($slug)){
                 continue;
             }
             try{
