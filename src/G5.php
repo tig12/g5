@@ -29,7 +29,23 @@ class G5{
     
     const ROOT_DIR = __DIR__;
     
+    
     // ******************************************************
+    
+    /**
+        in g5 code, files or directories starting by z. are not versioned (draft or obsolete).
+        @param  $filename The basename of a file or directory (ex /path/to/my/file.txt => $filename = file.txt).
+    **/
+    public static function isVersioned($filename){
+        if(strpos($filename, 'z.') === 0){
+            return false;
+        }
+        return true;
+    }
+    
+    
+    // ************************* Optional parameters *****************************
+    
     /**
         Command helper which permits to express a set of parameter names and their values.
         Useful when a command has optional parameters.

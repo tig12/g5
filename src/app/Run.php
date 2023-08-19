@@ -10,6 +10,7 @@
 ********************************************************************************/
 namespace g5\app;
 
+use g5\G5;
 use tiglib\filesystem\globRecursive;
 
 Run::init();
@@ -147,8 +148,7 @@ class Run {
         $res = [];
         $subdirs = array_map('basename', glob($dir . DS . '*', GLOB_ONLYDIR));
         foreach($subdirs as $subdir){
-            // files / directories starting by z. are not versioned (draft or obsolete)
-            if(strpos($subdir, 'z.') !== 0){
+            if(G5::isVersioned($subdir)){
                 $res[] = $subdir;
             }
         }
@@ -167,8 +167,7 @@ class Run {
         $res = [];
         foreach($files as $file){
             $basename = basename($file, '.php');
-            // files / directories starting by z. are not versioned (draft or obsolete)
-            if(strpos($basename, 'z.') === 0){
+            if(!G5::isVersioned($basename)){
                 continue;
             }
             try{
