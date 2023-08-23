@@ -2,6 +2,7 @@ slug;wd;fr;en;parents
 actor;Q33999;Acteur;Actor;artist
 aircraft-pilot;Q2095549;Aviateur;Aircraft pilot;sportsperson
 american-football-player;Q19204627;Joueur de football américain;American football player;sportsperson
+anthropologist;Q4773904;Anthropologue;Anthropologist;researcher
 archer;Q13382355;Archer;Archer;sportsperson
 architect;Q42973;Architecte;Architect;
 artist;Q483501;Artiste;Artist;
@@ -13,6 +14,7 @@ baseball-player;Q10871364;Joueur de baseball;Baseball player;sportsperson
 basketball-player;Q3665646;Joueur de basket-ball;Basketball player;sportsperson
 basque-pelota-player;Q19746576;Joueur de pelote basque;Basque pelota player;sportsperson
 billard-player;Q18544928;Joueur de billard;Billard player;sportsperson
+biologist;Q864503;Biologiste;Biologist;scientist
 bobsledder;Q177275;Pilote de bobsleigh;Bobsleigh pilot;winter-sports-practitioner
 bowler;Q4951095;Joueur de bowling;Bowling player;sportsperson
 boxer;Q11338576;Boxeur;Boxer;sportsperson
@@ -77,6 +79,7 @@ philosopher-of-science;Q16389557;Philosophe des sciences;Philosopher of science;
 photographer;Q33231;Photographe;Photographer;artist
 physician;Q39631;Médecin;Physician;
 physicist;Q169470;Physicien;Physicist;scientist
+physiologist;Q2055046;Physiologiste;Physiologist;biologist
 pianist;Q486748;Pianiste;Pianist;musician
 poet;Q49757;Poète;Poet;writer+artist
 political-economist;Q105572010;Economiste politique;Political economist;
