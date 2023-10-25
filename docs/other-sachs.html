@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Organisation | Gauquelin5</title>
+    <title>Gunter Sachs data | Gauquelin5</title>
     <link rel="icon" type="image/png" href="img/g5.png">
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="">
@@ -10,10 +10,10 @@
     <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
     <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
     <meta name="dcterms.rightsHolder" content="Thierry Graff">
-    <meta name="dcterms.dateCopyrighted" content="2019">
+    <meta name="dcterms.dateCopyrighted" content="2022">
     <!-- 
     tigsite:
-        history: 2019-07-07 01:37:53+02:00, Thierry Graff : Creation
+        history: , Thierry Graff 2023-10-25 20:41:26+02:00: Creation
     -->
 </head>
 
@@ -26,90 +26,191 @@
 <nav class="prevnext">
     <a class="topage" rel="" href="#topage">&#10148;</a>
     <a class="top" href="index.html">&uarr;</a>
-    <a class="prev" rel="prev" href="index.html">&larr;</a>
-    <a class="next" rel="next" href="install.html">&rarr;</a>
+    <a class="prev" rel="prev" href=".html">&larr;</a>
+    <a class="next" rel="next" href=".html">&rarr;</a>
 </nav>
 
 <main>
 <header>
-<h1>G5 Organisation</h1>
+<h1>Gunter Sachs data</h1>
 <div class="intro">
-Gauquelin5 program gathers data from various sources to store them in a database.
-<br>This involves numerous steps called <b>commands</b>. G5 provides a CLI (Command Line Interface) to issue these commands.
+This page documents some contents of the book "<b>Le dossier astrologie</b>", where Gunter Sachs describes the research he made.
+<br>Original title: <b>Die Akte Astrologie</b>, 1997
 </div>
 </header>
 
 <article>
 
+
 <!-- ********************************************************************************* -->
-<h2 id="data-transformations">Data transformations</h2>
+<h2>Significance</h2>
+Sachs' qualification of statistical significance is above usual requirements.
+<br>The significance is given by chi2 test, giving the percentage of chance a given distribution can be observed assuming random chance.
 
-Here is a summary of the data manipulated by the program.
+<table class="wikitable margin">
+    <tr>
+        <th>Significance</th>
+        <th>Standard qualification</th>
+        <th>Gunter Sachs</th>
+    </tr>
+    <tr>
+        <td>0.1 %</td>
+        <td></td>
+        <td>Very significant</td>
+    </tr>
+    <tr>
+        <td>1 %</td>
+        <td>Very significant</td>
+        <td>Significant</td>
+    </tr>
+    <tr>
+        <td>5 %</td>
+        <td>Significant</td>
+        <td>Not very significant</td>
+    </tr>
+</table>
 
-<div class="flex-wrap">
 
-<img class="border margin padding" src="img/g5-flow.svg" alt="Gauquelin5 data transformations">
 
-<ul class="spaced" style="flex-shrink:3;">
-    <li>
-        <div class="bold">Auxiliary data</div>
-        Not directly used by the program - Useful as a reference, to check if g5 has not introduced errors.
-        <br>Contain copies of original documents, like scans or files.
-        <div class="bold">Versioned in another repository: <a href="https://github.com/tig12/g5-aux">github.com/tig12/g5-aux</a></div>
-    </li>
-    <li>
-        <div class="bold">Raw data</div>
-        Input of g5.
-        <br>Contain usable version of auxiliary data, like files converted to UTF8
-        <br>or scans transformed to lists through OCR and human corrections.
-        <br>Conversion between auxiliary to raw data is done by humans, not by program.
-        <div class="bold">Versioned with g5 code, in <code>data/raw</code></div>
-    </li>
-    <li>
-        <div class="bold">Intermediate data</div>
-        <ul>
-            <li>
-                <b>Temporary data</b>
-                <br>Raw data are sanitized, corrected, standardized and stored in temporary CSV files.
-                <br>These CSV files are stored by default in directory <code>data/tmp</code>.
-                <div class="bold">Not versioned</div>
-            </li>
-            <li>
-                <b>Human corrections and additions</b>
-                <br>The conversion between <code>raw</code> and <code>tmp</code> uses human corrections stored in YAML files.
-                <div class="bold">Versioned with g5, in <code>data/db</code>.</div>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <div class="bold">G5 database</div>
-        <code>data/tmp</code> are then loaded and merged in a postgresql database.
-    </li>
-    <li>
-        <div class="bold">Exports</div>
-    </li>
-</ul>
 
-</div><!-- end class="flex-wrap" -->
+<!-- ********************************************************************************* -->
+<h2>Data summary</h2>
 
-Data directory thus contains:
-<pre>
-gauquelin5
-    └── data
-        ├── auxiliary   # can be absent or removed
-        ├── <b>raw         # location imposed (because versioned with g5)</b>
-        ├── tmp         # location set in config.yml
-        ├── <b>db          # location imposed (because versioned with g5)</b>
-        └── output      # location set in config.yml
-</pre>
-
-<b>Note</b>: The fact that raw data are versioned with the program has an interesting consequence: 
-<br><b>Cloning g5 repository permits to build the database from scratch</b>.
+<table class="wikitable margin">
+    <thead>
+        <tr>
+            <th>Page</th>
+            <th>N</th>
+            <th>Data source</th>
+            <th>Description</th>
+            <th>Claims</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>52 - 54</td>
+            <td>
+                <b>313 368</b> book sales
+                <br><b>23 879 258</b> persons
+            </td>
+            <td>Edition Heyne</td>
+            <td>
+                Compares the sales of 12 astrology books, each book dealing with a sign, from aries to pisces - and the sign of persons buying those books.
+                <br>Astrology books sold, 1991 - 1994
+                <br>Persons born in West Germany, 1950 - 1979
+                
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>57</td>
+            <td><b>717 526</b> weddings</td>
+            <td>
+                
+            </td>
+            <td>
+                Weddings in Swtzerland, 1987 - 1994
+                <br>358 763 couples
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>90</td>
+            <td>6 498 320</td>
+            <td>Didier Castille</td>
+            <td>
+                Weddings in France
+                <br>Does this mean ~13 M birth dates and 4.5 M mariage dates ?
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>100</td>
+            <td>109 030</td>
+            <td></td>
+            <td>
+                Divorces in Swtzerland, 1987 - 1994
+                <br>109 030 couples
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>118</td>
+            <td></td>
+            <td></td>
+            <td>
+                Singles (not married) in Swtzerland aged 18 - 30
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>127</td>
+            <td></td>
+            <td></td>
+            <td>
+                Inscriptions in Dortmund University
+                <br>Winter 1994 - 1995 : 100 082 registration requests
+                <br>Summer 1995 : 31 337 registration requests
+                <br>Winter 1995 - 1996 : 96 617 registration requests
+                <br>231 036 candidates in 10 areas
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>139</td>
+            <td>4 045 170 persons</td>
+            <td></td>
+            <td>
+                Persons spread in 4 socio-profesional categories
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>155</td>
+            <td>1 538 005</td>
+            <td></td>
+            <td>
+                Men deceased between 1969 and 1994
+                <br>32 causes of death
+                <br>20 causes of death for 657 492 persons
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>165</td>
+            <td>30 358</td>
+            <td></td>
+            <td>
+                Suicides
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>173</td>
+            <td>325 866</td>
+            <td></td>
+            <td>
+                Penal sentences
+                <br>25 different penal offences
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>183</td>
+            <td>Around 25 000</td>
+            <td></td>
+            <td>
+                Car accidents
+                <br>Accident dates + birth dates of drivers
+            </td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
 
 </article>
 </main>
 </div><!-- end class="content" -->
-
 
 <!-- ************************************* -->
 <aside class="left">

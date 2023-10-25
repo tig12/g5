@@ -153,15 +153,17 @@ This field permits to keep a trace of the transformations done on a person.
 <!-- ********************************************************************************* -->
 <h2 id="person-name">Person name</h2>
 
+The name of a person is modeled by this structure:
 <pre>
 name:
   given:
   family:
+  nobl:
   official:
     family:
     given:
+    nobl:
   spouse: []
-  nobl:
   fame:
     full:
     family:
@@ -169,53 +171,22 @@ name:
   alter: []
 </pre>
 
-The different components of a person's name permit a precise description.
 <ul class="spaced">
     <li>
-        <b><code>name.given</code></b> and <b><code>name.family</code></b> represent the name commonly used to designate a person.
-        <!-- 
+        <b><code>name.given</code></b>, <b><code>name.family</code></b> and <b><code>name.nobl</code></b> represent the name commonly used to designate a person.
         <br>It can be either the "real" name of the person, or a pseudonym.
-        <br>When a new person is inserted or updated in database, the following rules are used, in this order, to fill these 2 fields:
-        <ol>
-            <li>
-                If field <code>name.given</code> is provided, it is used to build <code>name.given</code>.
-            </li>
-            <li>
-                If field <code>name.family</code> is provided, it is used to build <code>name.family</code>.
-            </li>
-            <li>
-                If both fields <code>name.given</code> and <code>name.family</code> are provided, other rules are not applied.
-            </li>
-            <li>
-                if field <code>name.fame.full</code> is provided, it is used to fill <code>name.family</code>, and <code>name.given</code> is left empty - other rules are not applied (may override rules 1 or 2).
-            </li>
-            <li>
-                if field <code>name.fame.family</code> is provided, it is used to fill <code>name.family</code> (can override <code>name.family</code>).
-            </li>
-            <li>
-                if field <code>name.fame.given</code> is provided, it is used to fill <code>name.given</code> (can override <code>name.given</code>).
-            </li>
-            <li>
-                If both fields <code>name.fame.given</code> and <code>name.fame.family</code> are provided, other rules are not applied.
-            </li>
-            <li>
-                if field <code>name.official.family</code> is provided and <code>name.family</code> is empty, it is used to fill <code>name.family</code>.
-            </li>
-            <li>
-                if field <code>name.official.given</code> is provided and <code>name.given</code> is empty, it is used to fill <code>name.given</code>.
-            </li>
-        </ol>
-        -->
-    </li>
-    <li>
-        <code><b>name.official</b></code> represent the <i>exact</i> spelling of the name, as written in the birth certificate.
-    </li>
-    <li>
-        <code><b>name.spouse</b></code> : array of spouse names (in general, used for married women). This field is informative only ; if the person is known using her spouse name, this information must be repeated in field <code>name.fame.family</code>.
     </li>
     <li>
         <code><b>name.nobl</b></code> : nobiliary-particle: de d' di del von...
-        <br><code>name.nobl</code> is not used to build <code>name.family</code> (but can be used to build person's slug and to display person's name).
+        <br><code>name.nobl</code> is not part of <code>name.family</code>.
+    </li>
+    <li>
+        <code><b>name.official</b></code> represent the <i>exact</i> spelling of the name, as written in the birth certificate.
+        <br>For noble persons, <code><b>name.official.family</b></code> contains both the "normal" part and the noble part of the name.
+        <br>If the person has several given names, <code><b>name.official.given</b></code> contains them all.
+    </li>
+    <li>
+        <code><b>name.spouse</b></code> : array of spouse names (in general, used for married women). This field is informative only ; if the person is known using her spouse name, this information must be repeated in field <code>name.fame.family</code>.
     </li>
     <li>
         <code><b>name.fame</b></code>: public name, like stage or scene name.
@@ -322,6 +293,13 @@ The different components of a person's name permit a precise description.
                 <a href="geonames.html">Geonames.org</a>
                 <ul>
                     <li><a href="geonames-codes.html">C1 and C2 codes</a></li>
+                </ul>
+            </li>
+            <li>
+                Other data
+                <ul>
+                    <li><a href="other-sachs.html">Gunter Sachs</a></li>
+                    <li>Didier Castille</li>
                 </ul>
             </li>
         </ul>
