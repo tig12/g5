@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>G5 Group | Open Gauquelin database</title>
+    <title>David Voas data | Gauquelin5</title>
     <link rel="icon" type="image/png" href="img/g5.png">
     <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="">
@@ -10,10 +10,10 @@
     <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
     <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
     <meta name="dcterms.rightsHolder" content="Thierry Graff">
-    <meta name="dcterms.dateCopyrighted" content="2019">
+    <meta name="dcterms.dateCopyrighted" content="2022">
     <!-- 
     tigsite:
-        history: 2021-09-16 22:12:44+02:00, Thierry Graff : Creation
+        history: , Thierry Graff 2023-11-04 03:05:27+02:00: Creation
     -->
 </head>
 
@@ -26,73 +26,33 @@
 <nav class="prevnext">
     <a class="topage" rel="" href="#topage">&#10148;</a>
     <a class="top" href="index.html">&uarr;</a>
-    <a class="prev" rel="prev" href="db-person.html">&larr;</a>
-    <a class="next" rel="next" href="db-source.html">&rarr;</a>
+    <a class="prev" rel="prev" href="anon-castille.html">&larr;</a>
+    <a class="next" rel="next" href="eminence.html">&rarr;</a>
 </nav>
 
 <main>
 <header>
-<h1>G5 Group</h1>
+<h1>David Voas data</h1>
 <div class="intro">
-A group contains persons, and can be empty.
-<br>Group membership is stored in database using table <code>person_groop</code>.
-<br>The structure of a group is given by <a href="https://github.com/tig12/gauquelin5/blob/main/src/model/templates/Group.yml"><code>src/model/templates/Group.yml</code></a>
 </div>
 </header>
 
 <article>
 
-<pre>
-# database id managed by the dbms
-id: 
+<center class="margin2"><div class="warning center big2 bold">Work in progress, draft page</div></center>
 
-# unique within g5 groups
-slug:
-
-name:
-
-# cardinality
-'n': 0
-
-# 'occu' or 'history'
-type: 
-
-description: |
-
-# relative path to 
-download: 
-
-# array of source slugs
-sources: []
-
-# array of group slugs
-parents: []
-
-# array of group slugs
-children: []
-
-# array of person ids (neither person slugs nor person objects)
-members: []
-</pre>
-
-<!-- ********************************************************************************* -->
-<h2>Parents - children</h2>
-
-Fields <code>parents</code> and <code>children</code> permit to manage subgroups.
-<br>The relation <code>child --> parent</code> is implemented with a <b>direct acyclic graph (DAG)</b>, <a href="https://github.com/tig12/gauquelin5/tree/main/vendor/tig12/tiglib/dag">vendor/tiglib/dag</a>.
-
-<br><br>The edges of this graph are "is child of" relations.
-<br>This permits to have several children and several parents.
-
-<br><br>Parent - child relations are used to classify <a href="db-occu.html"><b>occupations</b></a>.
-
-<img class="margin border padding" src="img/occus-dag.svg" alt="Occupations example">
-
-The database has the following property: <b>When a person belongs to a group, it also belongs to all the ancestors of this group.</b>
-<br>For example a member of <code>conductor-of-military-band</code> is also member of <code>military-personel</code>, <code>conductor</code>, <code>musician</code> and <code>artist</code> (ie these associations are stored in table <code>person_groop</code>).
-
-<br><br>In the code, this is implemented in <code>Group::storePersonInGroup()</code> and <code>Group::removePersonFromGroup()</code>.
-
+<style>
+    #voas-data td:nth-child(1),
+    #voas-data td:nth-child(2){
+        white-space:nowrap;
+    }
+</style>
+<table id="voas-data"class="wikitable margin">
+    <thead>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
 
 </article>
 </main>
