@@ -30,6 +30,8 @@ GQ: A3-1697  Gauquelin-A3-1697                       1882-10-19 20:10:04 ROMA
 A2-3203 Becker
 A2-3204 Friedrich	Becker
 
+cf duplicate Saint-Exupéry
+
 - see php bug - https://bugs.php.net/bug.php?id=81002
   (to store booleans in postgres)
 
