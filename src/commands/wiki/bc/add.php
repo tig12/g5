@@ -15,11 +15,12 @@ use g5\model\wiki\BC;
 use g5\model\wiki\Wikiproject;
 use g5\model\wiki\Recent;
 use g5\model\wiki\Issue;
-use g5\model\Person;
 use g5\model\Group;
+use g5\model\Person;
+use g5\model\Search;
 use g5\model\Source;
-use g5\model\Trust;
 use g5\model\Stats;
+use g5\model\Trust;
 use tiglib\patterns\Command;
 
 class add implements Command {
@@ -59,7 +60,9 @@ class add implements Command {
         $personSlug = $params[0];
         $bcFile = BC::filePath($personSlug);
         if(!is_file($bcFile)){
-            return "UNEXITSING FILE: $bcFile - nothing was modified in the database\n";
+            return "UNEXITSING FILE: $bcFile - nothing was modified in the database\n"
+                . "You possibly mean prepare (to create the directory and the BC.yml file):\n"
+                . "    php run-g5.php wiki bc prepare $personSlug\n";
         }
         //
         $actSlug = $params[0];
@@ -124,7 +127,7 @@ class add implements Command {
         //
         // $action and $PARAM_ACTION have 2 different meanings:
         // - $action indicates if a person should be added or updated
-        // - $PARAM_ACTION indicates if a BC should be added or updated or deleted
+        // - $PARAM_ACTION indicates if a BC should be added or updated
         //
         $action = 'update';
         if(is_null($p)){
