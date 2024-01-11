@@ -172,23 +172,24 @@ class Person {
         other informations, like fame name.
         @param  $name1 Generally family name
         @param  $name2 Generally given name 
+        @param  $date  Format YYYY-MM-DD
         @see    instance method computeSlug()
     **/
-    public static function doComputeSlug($name1, $name2, $date): string {
+    public static function doComputeSlug(string $name1, string $name2, string $date): string {
         $name = $name1 . ($name2 != '' ? ' ' . $name2 : '');
         if($date != ''){
-            // galois-evariste-1811-10-25
+            // ex: galois-evariste-1811-10-25
             $slug = slugify::compute($name . '-' . $date);
         }
         else{
-            // galois-evariste
+            // ex: galois-evariste
             $slug = slugify::compute($name);
         }
         return $slug;
     }
     
     // ***********************************************************************
-    //                                  INSTANCE
+    //                              INSTANCE
     // ***********************************************************************
     
     /** 
@@ -238,30 +239,18 @@ class Person {
         ex :
             - galois-evariste-1811-10-25 for a person with a known birth time.
             - galois-evariste for a person without a known birth time.
-            
-// TODO change ; use only name.given and name.family, and delegate the logic of fame, official
-            
         @throws \Exception if the person id computation impossible (the person has no family name).
         @see    static method doComputeSlug()
     **/
-    public function computeSlug() {
+    public function computeSlug(): void {
         $name1 = $name2 = '';
         if($this->data['name']['fame']['full']){
             $name1 = $this->data['name']['fame']['full'];
         }
-        else if($this->data['name']['fame']['family']){
-            $name1 = $this->data['name']['fame']['family'];
-            $name2 = $this->data['name']['fame']['given'];
-        }
-        else if($this->data['name']['family']){
+        else{
+            $this->computeCommonName($this->data['name']);
             $name1 = $this->data['name']['family'];
             $name2 = $this->data['name']['given'];
-        }
-        else{
-            throw new \Exception(
-                "Person->computeSlug() impossible - information missing\n"
-                . "Available info = " . print_r($this->data['name'], true) . "\n"
-            );
         }
         $this->data['slug'] = self::doComputeSlug($name1, $name2, $this->birthday());
         return;
@@ -269,22 +258,35 @@ class Person {
     
     // *********************** Names (instance) *******************************
     
+    /** Used to avoid multiple computations of common name **/
+    private $isCommonNameComputed = false;
     /** 
-        Computes $this->data['name']['given'] and $this->data['name']['family']
+        Computes the fields 
+            $this->data['name']['given']
+        and $this->data['name']['family']
         Follows the rules described on https://tig12.github.io/g5/db-person.html#person-name
         Other fields (different from $this->data['name']['given'] and $this->data['name']['family'])
         already present in current person are not modified.
         WARNING: empty values are considered as values. The absence of value must be expressed by the absence of field.
         @param  $nameArray Associative array with a structure corresponding to person's name,
                            as defined is src/model/templates/Person.yml
+        @param  $force  
     **/
-    public function computeCommonName(array $nameArray){
+    public function computeCommonName(array $nameArray, bool $force=false): void {
+        if(!$force && $this->isCommonNameComputed){
+            return;
+        }
         if(isset($nameArray['given'])){
             $this->data['name']['given'] = $nameArray['given'];
         }
         else {
-            if(isset($nameArray['official']['given'])){
-                $this->data['name']['given'] = $nameArray['official']['given'];
+            if(isset($nameArray['fame']['given'])){
+                $this->data['name']['given'] = $nameArray['fame']['given'];
+            }
+            else {
+                if(isset($nameArray['official']['given'])){
+                    $this->data['name']['given'] = $nameArray['official']['given'];
+                }
             }
         }
         //
@@ -292,42 +294,54 @@ class Person {
             $this->data['name']['family'] = $nameArray['family'];
         }
         else {
-            if(isset($nameArray['official']['family'])){
-                $this->data['name']['family'] = $nameArray['official']['family'];
+            if(isset($nameArray['fame']['family'])){
+                $this->data['name']['family'] = $nameArray['fame']['family'];
+            }
+            else {
+                if(isset($nameArray['official']['family'])){
+                    $this->data['name']['family'] = $nameArray['official']['family'];
+                }
             }
         }
+        $this->isCommonNameComputed = true;
     }
     
     /**
-        Computes the family name, trying to find a non-empty value.
+        @param  $givenFirst if true, the returned string contains the given name before the family name.
     **/
-    public function familyName(): string {
-// TODO delegate the logic of fame to computeCommonName()
-// here, handle only nobl
-        if($this->data['name']['family'] != ''){
-            return $this->data['name']['family'];
-        }
-        if($this->data['name']['fame']['family'] != ''){
-            return $this->data['name']['fame']['family'];
-        }
-        if($this->data['name']['fame']['full'] != ''){
+    public function getCommonName(bool $givenFirst=false): string {
+        if($this->data['name']['fame']['full'] == ''){
             return $this->data['name']['fame']['full'];
         }
-        return '';
+        $this->computeCommonName();
+        $fam = $this->getFamilyName();
+        if($givenFirst){
+            return $this->data['name']['given'] . ' ' . $fam;
+        }
+        else{
+            return $fam . ' ' . $this->data['name']['given'];
+        }
+    }
+    
+    
+    /**
+        Returns the family name, including nobiliary part.
+    **/
+    public function getFamilyName(): string {
+        $this->computeCommonName();
+        $nobl = '';
+        if($this->data['name']['nobl'] != ''){
+            $nobl = $this->data['name']['nobl'] . (substr($this->data['name']['nobl'], -1) == "'" ? '' : ' ');
+        }
+        return $nobl . $this->data['name']['family'];
     }
     
     /**
-        Computes the given name, trying to find a non-empty value.
+        Returns the given name.
     **/
-    public function givenName(): string {
-// TODO will become useless when computeCommonName() is implemented
-        if($this->data['name']['given'] != ''){
-            return $this->data['name']['given'];
-        }
-        if($this->data['name']['fame']['given'] != ''){
-            return $this->data['name']['fame']['given'];
-        }
-        return '';
+    public function getGivenName(): string {
+        $this->computeCommonName();
+        return $this->data['name']['given'];
     }
     
     /** 

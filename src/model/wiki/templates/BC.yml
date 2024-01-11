@@ -43,7 +43,6 @@ source:
       page: 
   document-creation:
     date: 
-    place: 
   notes: |
   images: 
     - 
@@ -77,6 +76,8 @@ extras:
   name:
     family: 
     given: 
+    spouse:
+      -
     fame:
       full: 
       family: 
@@ -88,5 +89,5 @@ extras:
   partial-ids:
     wd: 
   occus: 
-    -
+    - 
   

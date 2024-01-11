@@ -150,9 +150,7 @@ class allpersons implements Command {
         
         // sorts persons by name
         $sort = function(Person $a, Person $b){
-            $nameA = trim($a->familyName() . ' ' . $a->givenName());
-            $nameB = trim($b->familyName() . ' ' . $b->givenName());
-            return $nameA <=> $nameB;
+            return $a->getCommonName() <=> $b->getCommonName();
         };
         
         $filters = [];
@@ -279,9 +277,7 @@ class allpersons implements Command {
         
         // sorts persons by name
         $sort = function(Person $a, Person $b){
-            $nameA = trim($a->familyName() . ' ' . $a->givenName());
-            $nameB = trim($b->familyName() . ' ' . $b->givenName());
-            return $nameA <=> $nameB;
+            return $a->getCommonName() <=> $b->getCommonName();
         };
         
         $filters = [];
