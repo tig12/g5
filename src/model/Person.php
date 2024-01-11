@@ -248,7 +248,7 @@ class Person {
             $name1 = $this->data['name']['fame']['full'];
         }
         else{
-            $this->computeCommonName($this->data['name']);
+            $this->computeCommonName();
             $name1 = $this->data['name']['family'];
             $name2 = $this->data['name']['given'];
         }
@@ -272,7 +272,10 @@ class Person {
                            as defined is src/model/templates/Person.yml
         @param  $force  
     **/
-    public function computeCommonName(array $nameArray, bool $force=false): void {
+    public function computeCommonName(array $nameArray=[], bool $force=false): void {
+        if(empty($nameArray)){
+            $nameArray =& $this->data['name'];
+        }
         if(!$force && $this->isCommonNameComputed){
             return;
         }
@@ -310,7 +313,7 @@ class Person {
         @param  $givenFirst if true, the returned string contains the given name before the family name.
     **/
     public function getCommonName(bool $givenFirst=false): string {
-        if($this->data['name']['fame']['full'] == ''){
+        if($this->data['name']['fame']['full'] != ''){
             return $this->data['name']['fame']['full'];
         }
         $this->computeCommonName();

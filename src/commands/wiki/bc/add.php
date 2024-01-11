@@ -302,6 +302,7 @@ class add implements Command {
     **/
     private static function addRecent(int $personId, array &$BC, string $PARAM_ACTION): void {
         if(isset($BC['header']['history']) && count($BC['header']['history']) != 0){
+            // date = date of the last element of history
             $date = substr(end($BC['header']['history'])['date'], 0, 19);
             //$description = end($BC['header']['history'])['action'];
         }
