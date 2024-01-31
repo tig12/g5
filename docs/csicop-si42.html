@@ -60,7 +60,11 @@ This page deals with the work done on the CSICOP test (USA 1979), using data pub
     <li>It permitted to identify differences in dates that need explanation.</li>
 </ul>
 
-<br>Once again, see <a href="csicop2.html">main CSICOP page</a> for a more precise restoration.
+<div class="warning block">
+Once again, see <a href="csicop.html">main CSICOP page</a> for restoration finally used.
+</div>                                                                                                                                                
+
+
 </div>
 </header>
 
@@ -84,12 +88,6 @@ This page deals with the work done on the CSICOP test (USA 1979), using data pub
         </li>
     </ul>
 </nav>
-
-
-
-
-
-
 
 
 
@@ -120,21 +118,8 @@ The PDF files downloaded from skepticalinquirer.org cannot be directly exploited
 <h2 id="restoration-process">Restoration process</h2>
 
 <div class="warning block">
-The import process changed but following doc has not been updated yet.
+The import process changed and the following doc is obsolete.
 </div>                                                                                                                                                
-
-The command :
-<pre>php run-g5.php csicop si42 all</pre>
-generates file <a href="https://g5.tig12.net/output/history/1979-csicop/csicop-si42-408.csv">output/history/1979-csicop/csicop-si42-408.csv</a>
-<br>
-<br>This is equivalent to 
-<pre>
-php run-g5.php csicop si42 raw2tmp
-php run-g5.php csicop si42 addCanvas1
-php run-g5.php csicop si42 addErtel
-php run-g5.php csicop si42 addD10
-php run-g5.php csicop si42 export
-</pre>
 
 <!-- ************************************* -->
 <h3 id="3-1-raw2tmp">raw2tmp</h3>
@@ -152,11 +137,11 @@ INPUT :
 OUTPUT :
 <ul>
     <li>
-        data/5-tmp/csicop/408-csicop-si42.csv
+        data/tmp/csicop/408-csicop-si42.csv
         <br>(all records)
     </li>
     <li>
-        data/5-tmp/csicop/181-csicop-si42.csv
+        data/tmp/csicop/181-csicop-si42.csv
         <br>(records marked "SC" = Sport Champion, cf KZA article)
     </li>
 </ul>
@@ -203,7 +188,7 @@ INPUT :
         data/tmp/csicop/408-csicop-si42.csv
     </li>
     <li>
-        <a href="https://g5.tig12.net/output/history/1979-csicop/csicop-ertel-192.csv">data//output/history/1979-csicop/csicop-ertel-192.csv</a>
+        data/output/history/1979-csicop/csicop-ertel-192.csv
         <br>(from Ertel4391, 192 common records between 408 CSICOP and Gauquelin D10)
     </li>
 </ul>
@@ -302,7 +287,7 @@ Response to the Gauquelins
 Paul Kurtz, Marvin Zelen, and George Abell
 https://skepticalinquirer.org/1980/01/response_to_the_gauquelins/
 
-Looking file data/5-tmp/csicop/408-csicop-si42.csv
+Looking file data/tmp/csicop/408-csicop-si42.csv
 --- States ---
   AL : 20
   AZ : 2
@@ -406,7 +391,7 @@ study.
 <nav>
 <ul>
     <li class="bold big1"><a href="index.html">Home</a></li>
-    <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">Code repository</a></li>
+    <li class="bold big1"><a href="https://github.com/tig12/g5">Code repository</a></li>
     <li class="bold big1"><a href="https://opengauquelin.org/downloads">Download results</a></li>
     
     <li><a href="organisation.html">Organisation</a></li>
@@ -442,9 +427,6 @@ study.
                     </li>
                     <li>
                         <a href="g55.html">Gauquelin 1955</a>
-                        <ul>
-                            <li><a href="g55-curadiff.html">Differences G55 - LERRCP</a></li>
-                        </ul>
                     </li>
                 </ul>
             </li>

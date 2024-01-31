@@ -36,7 +36,7 @@
 <div class="intro">
 A group contains persons, and can be empty.
 <br>Group membership is stored in database using table <code>person_groop</code>.
-<br>The structure of a group is given by <a href="https://github.com/tig12/gauquelin5/blob/main/src/model/templates/Group.yml"><code>src/model/templates/Group.yml</code></a>
+<br>The structure of a group is given by <a href="https://github.com/tig12/g5/blob/main/src/model/templates/Group.yml"><code>src/model/templates/Group.yml</code></a>
 </div>
 </header>
 
@@ -79,7 +79,7 @@ members: []
 <h2>Parents - children</h2>
 
 Fields <code>parents</code> and <code>children</code> permit to manage subgroups.
-<br>The relation <code>child --> parent</code> is implemented with a <b>direct acyclic graph (DAG)</b>, <a href="https://github.com/tig12/gauquelin5/tree/main/vendor/tig12/tiglib/dag">vendor/tiglib/dag</a>.
+<br>The relation <code>child --> parent</code> is implemented with a <b>direct acyclic graph (DAG)</b>, <a href="https://github.com/tig12/g5/tree/main/vendor/tig12/tiglib/dag">vendor/tiglib/dag</a>.
 
 <br><br>The edges of this graph are "is child of" relations.
 <br>This permits to have several children and several parents.
@@ -103,7 +103,7 @@ The database has the following property: <b>When a person belongs to a group, it
 <nav>
 <ul>
     <li class="bold big1"><a href="index.html">Home</a></li>
-    <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">Code repository</a></li>
+    <li class="bold big1"><a href="https://github.com/tig12/g5">Code repository</a></li>
     <li class="bold big1"><a href="https://opengauquelin.org/downloads">Download results</a></li>
     
     <li><a href="organisation.html">Organisation</a></li>
@@ -139,9 +139,6 @@ The database has the following property: <b>When a person belongs to a group, it
                     </li>
                     <li>
                         <a href="g55.html">Gauquelin 1955</a>
-                        <ul>
-                            <li><a href="g55-curadiff.html">Differences G55 - LERRCP</a></li>
-                        </ul>
                     </li>
                 </ul>
             </li>

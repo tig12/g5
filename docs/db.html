@@ -179,7 +179,7 @@ Slugs can be used as a unique identifier for an entity, but <b>they are not stab
 <!-- ********************************************************************************* -->
 <h2 id="db-implementation">DB implementation</h2>
 The database uses <a href="https://www.postgresql.org/">postgresql</a>.
-<br>SQL to create the tables are located in <code><a href="https://github.com/tig12/gauquelin5/tree/main/src/model/db-create">src/model/db-create</a></code>
+<br>SQL to create the tables are located in <code><a href="https://github.com/tig12/g5/tree/main/src/model/db-create">src/model/db-create</a></code>
 <br>G5 database uses <a href="https://www.postgresql.org/docs/12/datatype-json.html">jsonb</a> type to store structured (hierarchical) fields. 
 
 <!-- ************************************* -->
@@ -251,7 +251,7 @@ select count(*) from person where (partial_ids::JSONB ? 'cpara' or partial_ids::
 <nav>
 <ul>
     <li class="bold big1"><a href="index.html">Home</a></li>
-    <li class="bold big1"><a href="https://github.com/tig12/gauquelin5">Code repository</a></li>
+    <li class="bold big1"><a href="https://github.com/tig12/g5">Code repository</a></li>
     <li class="bold big1"><a href="https://opengauquelin.org/downloads">Download results</a></li>
     
     <li><a href="organisation.html">Organisation</a></li>
@@ -287,9 +287,6 @@ select count(*) from person where (partial_ids::JSONB ? 'cpara' or partial_ids::
                     </li>
                     <li>
                         <a href="g55.html">Gauquelin 1955</a>
-                        <ul>
-                            <li><a href="g55-curadiff.html">Differences G55 - LERRCP</a></li>
-                        </ul>
                     </li>
                 </ul>
             </li>
