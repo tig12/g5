@@ -2,7 +2,7 @@
 /********************************************************************************
     Auxiliary code for run-g5.php, Gauquelin5 CLI frontend.
     Provides a generic implementation for namespaces without Router implementation,
-    but which respect the convention described in docs/code-details.html.
+    but which respects the convention described in docs/code-details.html.
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2017-04-27 10:41:02+02:00, Thierry Graff : creation
@@ -41,7 +41,8 @@ class Run {
     **/
     public static function computeCommandAndParams($argv) {
         array_shift($argv); // $argv[0] contains "run-g5.php"
-        if(isset($argv[0]) && $argv[0] == 'gauq'){ // gauq is the only exception to standard behaviour (see docs/code-details.html)
+        // gauq is the only exception to standard behaviour (see docs/code-details.html)
+        if(isset($argv[0]) && $argv[0] == 'gauq'){
             $params = array_slice($argv, 1);
             return ['g5\\commands\\gauq\\GauqCommand', $params, ''];
         }

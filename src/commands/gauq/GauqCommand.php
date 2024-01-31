@@ -29,7 +29,36 @@ class GauqCommand implements Command {
         
         $report = '';
         
+        $possibles = '';
+        foreach(array_keys(GauqRouter::DATAFILES_SUBNAMESPACE) as $possible){
+            $possibles .= "  - $possible\n";
+        }
+        
+        if(count($params) == 0){
+            return "MISSING PARAMETER FOR COMMAND 'gauq'\n"
+                . "Possible values for parameter :\n"
+                . $possibles;
+        }
+        
         $datafile = $params[0];
+        
+        if(!isset(GauqRouter::DATAFILES_SUBNAMESPACE[$datafile])){
+            return "MISSING PARAMETER FOR COMMAND 'gauq'\n"
+                . "Possible values for parameter :\n"
+                . $possibles;
+        }
+        
+        if(count($params) == 1){
+            $args3 = GauqRouter::getArgs3($datafile);
+            $possibles3 = '';
+            foreach($args3 as $possible){
+                $possibles3 .= "  - $possible\n";
+            }
+            return "MISSING PARAMETER FOR COMMAND 'gauq $datafile'\n"
+                . "Possible values for parameter :\n"
+                . $possibles3;
+        }
+        
         $command = $params[1];
         
         $datafiles = GauqRouter::computeDatafiles($datafile);
