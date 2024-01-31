@@ -1,0 +1,92 @@
+#
+# Transcription of a birth certificate
+# This document is released under the terms of licence
+# Creative Commons CC BY-SA 4.0 (Attribution-ShareAlike 4.0) 
+# https://creativecommons.org/licenses/by-sa/4.0/
+#
+
+################ file not used yet ################
+# Contains the template to use in the future
+# Waits for new code to be written
+###################################################
+
+#
+# 1 - Informations related to current BC.yml file
+#
+header:
+  history:
+    -
+      actor: 
+      date: 
+      action: 
+    
+#
+# 2 - Optional information related to opengauquelin database integration
+#
+opengauquelin:
+  old-slug:
+  projects:
+    - 
+  fix-issues:
+    - 
+   
+#
+# 3 - Informations about the act
+#
+act:
+  type:
+  licence: 
+  organism:
+    name: 
+    url: 
+  registry:
+    name: 
+    web:
+      url: 
+      page: 
+  creation-date: 
+  notes: |
+  images:
+    - 
+  
+#
+# 4 - Transcription of the act
+#
+transcription:
+  name:
+    official:
+      family: 
+      given: 
+    nobl: 
+  sex: 
+  birth:
+    date: 
+    notime:
+    place:
+      name: 
+      cy: 
+      c1: 
+      c2: 
+      c3: 
+      
+#
+# 5 - Supplementary informations concerning the new born person,
+#     but not present in the birth certificate
+#
+extras:
+  trust: 
+  name:
+    family: 
+    given: 
+    fame:
+      full: 
+      family: 
+      given: 
+    alter: 
+      - 
+  ids-in-sources:
+    wd: 
+  partial-ids:
+    wd: 
+  occus: 
+    -
