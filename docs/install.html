@@ -190,7 +190,6 @@ psql
 postgres=# create user g5_pg_username;
 postgres=# alter role g5_pg_username with createdb;
 postgres=# alter user g5_pg_username with encrypted password 'g5_pg_password';
-postgres=# alter user g5_pg_username set search_path to g5_pg_schema;
 postgres=# create database g5_pg_dbname owner g5_pg_username;
 </pre>
 

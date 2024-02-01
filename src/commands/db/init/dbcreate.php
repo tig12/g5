@@ -29,9 +29,9 @@ class dbcreate implements Command {
         
         $tables = [
             'groop',
-            'issue',
             'person',
             'person_groop',
+            'issue', // place not in alphabetic order because issue references person
             'search',
             'source',
             'stats',
