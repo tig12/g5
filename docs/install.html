@@ -64,7 +64,7 @@ sudo apt install php8.0-zip
     
     <li>
         <b>Postgresql</b>
-        <br>Version 12, from the stable Debian repository, is sufficient.
+        <br>Current code is using version 16 (but version 11 and above should be ok too).
         <pre>sudo apt install postgresql</pre>
     </li>
     
@@ -200,7 +200,10 @@ g5_pg_dbname=# create schema g5_pg_schema authorization g5_pg_username;
 g5_pg_dbname=# alter user g5_pg_username set search_path to g5_pg_schema;
 </pre>
 
-These supplementary steps permit to use g5 database from openg program:
+<!-- ************************************* -->
+<h3>Postgrest</h3>
+Previous steps permit to have the database ready to use with g5.
+<br>Postgrest is needed to be used by <a href="https://github.com/tig12/openg">openg</a> program (a web application to browse the database, used to build <a href="https://opengauquelin.org">opengauquelin.org</a>):
 <pre>
 g5_pg_dbname=# create role postgrest_anonymous_user nologin;
 g5_pg_dbname=# grant usage on schema g5_pg_schema to postgrest_anonymous_user;
