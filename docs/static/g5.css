@@ -193,6 +193,7 @@ img{
     white-space:pre-wrap;
 }
 pre{
+    display:table;
     white-space:pre-wrap;
     margin:1rem;
     background:lightgrey;

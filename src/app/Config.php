@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Holds config.yml information
+    Holds config.yml informations.
     
     Config values available via Config::$data
     
@@ -11,13 +11,9 @@ namespace g5\app;
 
 class Config {
     
-    /**
-        Associative array containing config.yml
-    **/
+    /** Associative array containing config.yml **/
     public static $data = null;
     
-    
-    // ******************************************************
     public static function init(){
         $filename = dirname(dirname(__DIR__)) . DS . 'config.yml';
         if(!is_file($filename)){

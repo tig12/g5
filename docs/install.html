@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Installation | Gauquelin5</title>
     <link rel="icon" type="image/png" href="img/g5.png">
-    <link href="static/gauquelin5.css" rel="stylesheet" type="text/css">
+    <link href="static/g5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="Configure and start using Gauquelin5 software">
     <meta name="robots" content="index,follow">
     <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
@@ -36,7 +36,7 @@
 <h1>Gauquelin5 installation</h1>
 <div class="intro">
 This software has been developed and tested on Linux. It should normally also work on Windows and Macintosh, but hasn't been tested.
-<br>This installation guide has been tested on Debian 10 and Ubuntu 20.4
+<br>This installation guide has been tested on Debian 12.
 </div>
 <div class="header">
 
@@ -51,20 +51,14 @@ Before starting, you need to have installed on your machine :
 
 <ul class="spaced">
     <li>
-        <b>PHP</b> (version 8.0 or higher)
-        <br>See for example <a href="https://www.linuxtechi.com/install-php-8-on-debian-10/">https://www.linuxtechi.com/install-php-8-on-debian-10/</a>.
-        <br>Some PHP extensions are also necessary:
-        <pre>
-sudo apt install php8.0-pgsql
-sudo apt install php8.0-yaml
-sudo apt install php8.0-mbstring
-sudo apt install php8.0-zip
-        </pre>
+        <b>PHP</b> ; current code uses php 8.3 - See <a href="https://packages.sury.org/php/README.txt">https://packages.sury.org/php/README.txt</a>
+        <pre>sudo apt install php8.3</pre>
+        Some PHP extensions are also necessary:
+        <pre>sudo apt install php8.3-{pgsql,yaml,mbstring,zip}</pre>
     </li>
     
     <li>
-        <b>Postgresql</b>
-        <br>Current code is using version 16 (but version 11 and above should be ok too).
+        <b>Postgresql</b> ; current code is using version 16.
         <pre>sudo apt install postgresql</pre>
     </li>
     
@@ -88,7 +82,7 @@ Open a terminal and clone the repository on your local machine :
 Note: <code>--depth=1</code> is optional, only useful to save up disk space and bandwidth. 
 
 <br><br>Instead of cloning the repository, you can <a href="https://github.com/tig12/g5/archive/master.zip">download the code</a>.
-<br>In the rest of this doc, directory <code>gauquelin5/</code> is called the <b><i>root directory</i></b>.
+<br>In the rest of this doc, directory <code>g5/</code> is called the <b><i>root directory</i></b>.
 <br>All the commands  to run the program are issued from the root directory.
 <br>
 
@@ -96,7 +90,7 @@ Note: <code>--depth=1</code> is optional, only useful to save up disk space and 
 <h3 id="1-2-directory-structure">Directory structure</h3>
 The important files and directories are :
 <pre>
-gauquelin5/
+g5/
     ├── data/
     │   ├── db/
     │   └── raw/
