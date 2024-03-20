@@ -4,7 +4,7 @@
 # Command to export the local database in a postgresql dump
 # Must be executed from g5 root directory.
 # Environment variables are taken from config.env
-# DB dumps are generated in dbdump (or in a directory specified in config.env)
+# DB dumps are generated in dbdump/ (or in a directory specified in config.env)
 # This directory is not versioned, you mut create it
 #
 

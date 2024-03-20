@@ -1,4 +1,6 @@
 
-See https://tig12.github.io/g5
+Command line tool used to build the database exposed on https://opengauquelin.org/
+
+Documentation : see https://tig12.github.io/g5
 
 or clone the repository on your local machine and browse docs/index.html

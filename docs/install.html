@@ -194,18 +194,24 @@ g5_pg_dbname=# create schema g5_pg_schema authorization g5_pg_username;
 g5_pg_dbname=# alter user g5_pg_username set search_path to g5_pg_schema;
 </pre>
 
+The database is now ready to use with g5. To connect to the database:
+<pre class="bold">psql -d g5_pg_dbname -U g5_pg_username -W -h localhost</pre>
+(to exit <code>psql</code>, type <code>\q</code> or <code>ctrl d</code>)
+
 <!-- ************************************* -->
-<h3>Postgrest</h3>
-Previous steps permit to have the database ready to use with g5.
-<br>Postgrest is needed to be used by <a href="https://github.com/tig12/openg">openg</a> program (a web application to browse the database, used to build <a href="https://opengauquelin.org">opengauquelin.org</a>):
+<h3>Postgrest (optional)</h3>
+<code>Postgrest</code> permits to access to g5 database through a REST API. 
+<br>This is used by <a href="https://github.com/tig12/openg">openg</a> program (a web application to browse the database, used to run <a href="https://opengauquelin.org">opengauquelin.org</a>).
 <pre>
+sudo -s -u postgres
+psql 
+
+postgres=# \c g5_pg_dbname
+
 g5_pg_dbname=# create role postgrest_anonymous_user nologin;
 g5_pg_dbname=# grant usage on schema g5_pg_schema to postgrest_anonymous_user;
 g5_pg_dbname=# create role authenticator noinherit login password 'postgrest_password';
 g5_pg_dbname=# grant postgrest_anonymous_user to authenticator;
-\q
-
-exit    # exit postgres user
 </pre>
 
 <ul>
@@ -214,20 +220,16 @@ exit    # exit postgres user
     </li>
 </ul>
 
-<br>To connect to the database:
-<pre>psql -d g5_pg_dbname -U g5_pg_username -W -h localhost</pre>
-
 <!-- ********************************************************************************* -->
 <h2>Generate Geonames database</h2>
+Here, "Geonames database" designates an auxiliary database used to associate places to <a href="http://geonames.org">geonames.org</a>.
+<br>This is required because some steps of g5 database creation need it.
 
 <!-- ************************************* -->
 <h3>Install geonames2postgres</h3>
 
 Prequisites: geonames2postgres needs two libraries to run:
-<pre>
-sudo apt install python3-yaml
-sudo apt install python3-psycopg2
-</pre>
+<pre>sudo apt install python3-{yaml,psycopg2}</pre>
 
 This software stores in a local database data copied from geonames.org, located in two directories:
 <ul>
@@ -249,7 +251,7 @@ In <code>config.yml</code>, you specify in <code>dir-countries</code> and <code>
 
 <br><br>You also need to indicate the postgresql parameters to the database where the data are stored.
 
-<br><br>Note: these parameters MUST be the same as parameters <code>geonames / postgres</code> of g5 config.
+<br><br>Note: these parameters MUST be the same as parameters <code>geonames/postgres</code> of g5 config.
 
 <!-- ************************************* -->
 <h3>Download Geonames data on your local machine</h3>
@@ -274,38 +276,12 @@ done
 <h3>Generate Geonames database</h3>
 
 <ol class="spaced">
-    <li>Prepare a database - see creation of g5 database (<code>sudo -s -u postgres</code> etc.) with the credentials stored in geonames2postgres config.yml.</li>
+    <li>Prepare a database - similar to the creation of g5 database (<code>sudo -s -u postgres</code> etc.) with the credentials stored in file <code>config.yml</code> of <code>geonames2postgres</code>.</li>
     <li>
         Execute geonames2postgres with all available countries to fill the database:
         <pre>python3 geonames2postgres.py ALL</pre>
     </li>
 </ol>
-
-
-
-<!-- ************************************* -->
-<!-- 
-<h3 id="1-1-optional-steps">Optional steps</h3>
-<ul class="spaced">
-    <li>
-        Geonames.org matching uses a postgresql database filled with python code, <a href="geonames.html">see page geonames</a> (only useful for some commands).
-    </li>
-    <li>
-        Equation of time computation uses <a href="https://github.com/soniakeys/meeus">github.com/soniakeys/meeus</a>, written in the go programming language (only useful for some commands).
-        <br>So you must have go installed on your machine and run :
-        <pre>go get github.com/soniakeys/meeus</pre>
-    </li>
-    <li>
-        Wikidata retrieval also needs curl and sqlite3 PECL extensions :
-        <br>This is not necessary for data restoration, only to retrieve wikidata on local machine.
-        <pre>
-sudo apt install php-curl
-sudo apt install php-sqlite3
-        </pre>
-    </li>
-</ul>
--->
-
 
 </article>
 </main>

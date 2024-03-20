@@ -196,7 +196,7 @@ pre{
     display:table;
     white-space:pre-wrap;
     margin:1rem;
-    background:lightgrey;
+    background:#c9d3e0;
     padding:.5rem;
     border-radius:2px;
     border:1px solid #717a9f;
@@ -210,6 +210,7 @@ pre.normal{
     padding:0;
 }
 code{
+    background:lightgrey;
 }
 code.color{
     background:lightgrey;

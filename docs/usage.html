@@ -53,9 +53,9 @@ Example :
 Possible values for argument1 : acts, cfepp, cpara, csicop, db, eminence, ertel, gauq, muller, wd
 </pre>
 
-<code>run-g5.php</code> is only able to execute <b>commands</b>. The 3 first arguments permit to specify the command which will be executed.
+<code>run-g5.php</code> is only able to execute <b>commands</b>. The first arguments (minimum 3) permit to specify the command which will be executed.
 <br>Commands are located in <code>src/commands</code>. A command is a class with a method <code>execute()</code>.
-<br>4th and following arguments are passed when needed to the command's <code>execute()</code> method.
+<br>Remaining arguments are passed when needed to the command's <code>execute()</code> method.
 
 <br><br>Each time an incomplete list of arguments is given to the program, it prints the general error message and prints the possible values for the next missing argument.
 <br>
@@ -94,11 +94,14 @@ As described in <a href="organisation.html">the page about g5 organisation</a>, 
 <pre>
 PARAMETER MISSING
 Possible values for parameter :
-    tmp : Build files in data/tmp
-    db : Fill database with tmp files
-    finalize : Finalize DB (stats, groups, search)
+    tmp : Builds tmp files in data/tmp
+    db : Fills database with tmp files
+    stats : Computes DB statistics
+    wiki : Adds with wiki data to the database
+    search : Fills table for search
     export : Exports the groups in zipped csv files
     all : Executes all steps
+    dev : Executes steps db, stats, wiki, search
 </pre>
 
 If 'db' or 'all' are choosen, it also drops existing tables and creates empty ones.
