@@ -31,25 +31,36 @@
 
 <main>
 <header>
+
 <style>
 #related-repos{
-    float:right;
+    z-index:100; /*  */
+    position:fixed;
+    top:4rem;
+    right:2rem;
+    display:table; /*  */
     padding:1rem;
     border-left:1px solid grey;
     border-bottom:1px solid grey;
     border-radius:5px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    opacity:1;
+    background:radial-gradient(gold, gold, lightgreen);;
 }
 #related-repos>div{
     font-weight:bold;
 }
+#related-repos a{
+    text-decoration:none;
+}
 </style>
 <div id="related-repos">
-<u>Related repos</u>
-<div><a href="https://github.com/tig12/openg">openg</a></div>
-<div><a href="https://github.com/tig12/ogdb-wiki">ogdb-wiki</a></div>
+<div class="bold big2" title="Code related to g5">Related repos</div>
+<div><a href="https://github.com/tig12/g5">g5</a></div>
 <div><a href="https://github.com/tig12/g5-aux">g5-aux</a></div>
 <div><a href="https://github.com/tig12/g5-other">g5-other</a></div>
+<div><a href="https://github.com/tig12/openg">openg</a></div>
+<div><a href="https://github.com/tig12/ogdb-wiki">ogdb-wiki</a></div>
 <div><a href="https://github.com/tig12/geonames2postgres">geonames2postgres</a></div>
 </div>
 
@@ -122,7 +133,7 @@ This program deals with the data used to build <b>professional groups</b>.
 <ul class="simple margin-bottom">
     <li>we can observe anomalies in the distributions of some planets in the births of famous people ;</li>
     <li>the anomalies are more important for very eminent people ;</li>
-    <li>these statistical anomalies can be observed only for natural births, the effect disappear for induced deliveries. For this reason, studies are limited to births before 1950.</li>
+    <li>these statistical anomalies can be observed only for natural births, the effect disappear for induced deliveries. For this reason, studies were limited to births before 1950.</li>
 </ul>
 One particular effect - the repartition of Mars in the births of sportsmen, called "the mars effect" - gave rise to very long polemics without any consensual conclusion. Very few members of the academic world studied the question, most notably Suitbert Ertel and Arno Müller. Ertel introduced citation count, providing an objective measure of eminence, and analyzed Gauquelin and skeptic tests.
 
@@ -132,11 +143,17 @@ One particular effect - the repartition of Mars in the births of sportsmen, call
         <b>The "Mars Effect", A French Test of Over 1,000 Sports Champions</b>, by CFEPP, describes the test conducted by the 3rd group of skeptics. It concludes to an abscence of statistical anomaly.
     </li>
     <li>
-        <b>The Tenacious Mars Effect</b>, by Suitbert Ertel, concludes that statistical anomalies can be observed and that the negative results of skeptic groups are due to data manipulation.
+        <b>The Tenacious Mars Effect</b>, by Suitbert Ertel, who analyzed all mars effect data, Gauquelin + skeptics, concludes that statistical anomalies can be observed and that the negative results of skeptic groups are due to data manipulation.
     </li>
 </ul>
 
-<br>Following debates between Suitbert Ertel and skeptics (mainly Jan Wilhem Nienhuys) lead to a disagreement, no consensus was found.
+Following debates between Suitbert Ertel and skeptics (mainly Jan Wilhem Nienhuys) lead to a disagreement, no consensus was found.
+
+<br><br>This story leaves at least two opened questions :
+<ul class="bold">
+    <li>Can we observe statistical anomalies related to astrology ?</li>
+    <li>Did the skeptic groups cheat ?</li>
+</ul>
 
 <!-- ********************************************************************************* -->
 <h2>Why Gauquelin5 ?</h2>
