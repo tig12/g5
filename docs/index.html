@@ -67,34 +67,45 @@
 <h1>Gauquelin5<br>( g5 )</h1>
 
 <div class="intro">
-    This program builds <a class="bold" href="https://opengauquelin.org/">opengauquelin.org</a>, a database of famous persons <b>with their birth times</b>.
-    <br>The purpose is to build a <b>reliable</b>, <b>verifiable</b>, <b>ranked by eminence</b> and as <b>complete</b> as possible database.
-    <div class="margin-top05">
-        Departure points are data used to perform statistical tests on astrology, gathered by <b>Michel and Françoise Gauquelin</b>, <b>Arno Müller</b>, <b>Suitbert Ertel</b> and 3 groups of skeptics: <b>Comité Para</b> - Belgium 1976, <b>CSICOP</b> - U.S. 1979, <b>CFEPP</b> - France 1996.
+
+    This program is a PHP CLI (Command Line Interface) tool used to build <a class="bold" href="https://opengauquelin.org/">opengauquelin.org</a>, a database of famous persons <b>with their birth times</b>.
+    <div class="margin-top05 margin-bottom05">
+         It provides a reconstitution of the data used in the statistical tests of astrology between 1955 ad 1996, by <b>Michel and Françoise Gauquelin</b>, <b>Arno Müller</b>, <b>Suitbert Ertel</b> and 3 groups of skeptics: <b>Comité Para</b> (Belgium 1976), <b>CSICOP</b> (U.S. 1979), <b>CFEPP</b> (France 1996).
+         <br>This gives birth informations of famous persons grouped by occupation (profession). 
     </div>
     Historical data represent:
     <ul class="simple margin-bottom05">
         <li><b>24 516</b> persons with birth time</li>
         <li><b>1 328</b> persons without birth time, with days.</li>
     </ul>
-    <div class="margin-top05">
-        Data are corrected and imported in a postgresql database.
-        <br>A wiki system permits to add or update persons and relate them to their birth certificates.
+
+     <div class="padding05 padding-left0">
+        This was possible with the help of <b>Nick Kollerstrom</b>, <b>Kenneth Irving</b>, <b>Graham Douglas</b> and <b>Jan Willem Nienhuys</b>, who sent unpublished data.
+        See <a class="bold" href="https://opengauquelin.org/#credits">Credits</a>.
+     </div>
+     
+    The purpose is to build a <b>reliable</b>, <b>verifiable</b>, <b>ranked by eminence</b> and as <b>complete</b> as possible database.
+    
+    <div class="padding-top">
+        The main orientations of g5 program are :
+        <ol class="simple margin-bottom">
+            <li>Gather the <a href="historical-tests.html">historical data</a> and merge them in a single database.</li>
+            <li>Check and correct them.</li>
+            <li>Connect the historical data to standard datasets like Wikidata and complete birth times to build larger groups.</li>
+            <li>Build new eminence indicators and sort famous persons by eminence.</li>
+        </ol>
     </div>
 
-<div class="padding-top">
-    The main orientations of g5 program are :
-    <ol class="simple margin-bottom">
-        <li>Gather the <a href="historical-tests.html">historical data</a> and merge them in a single database.</li>
-        <li>Check and correct them.</li>
-        <li>Connect the historical data to standard datasets like Wikidata and complete birth times to build larger groups.</li>
-        <li>Build new eminence indicators and sort famous persons by eminence.</li>
-    </ol>
-</div>
+    <div class="margin-top05">
+        Step 1 is done but needs to be finalized (eg. timezone computation for all countries)
+        <br>Step 2 is traduced by <b>associating the persons of the database to their birth certificates</b>.
+        A draft mechanism was coded and used to complete the list of mathematicians: <a href="https://opengauquelin.org/group/mathematician">opengauquelin.org/group/mathematician</a>
+        <br>An easy-to-use interface hasn't been coded yet.
+        <br>Step 3 <a href="wikidata.html">A premilinary study</a> found in wikidata 2 647 452 persons associated to 6000 profession codes.
+        <br>Step 4 <a href="eminence.html">was analyzed</a> and <a href="eminence-math.html">ranked lists of mathematicians</a> were built.
+    </div>
 
-The program itself is a CLI (Command Line Interface) tool which permits to issue commands to analyze the original data and build the database.
-
-<br><br>One of the purpose of g5 is to permit a precise reconstitution of Suitbert Ertel's analysis of both Gauquelin and groups of skeptics - exposed in the book <i><b>The Tenacious Mars Effect</b></i>. This is possible thanks to the availability of <a href="ertel-4391-sport.html#ertel-s-subsamples">Ertel's list of subsamples</a>.
+<br>One of the purpose of g5 is to permit a precise reconstitution of Suitbert Ertel's analysis of both Gauquelin and groups of skeptics - exposed in the book <i><b>The Tenacious Mars Effect</b></i>. This is possible thanks to the availability of <a href="ertel-4391-sport.html#ertel-s-subsamples">Ertel's list of subsamples</a>.
 
 <br><br>Note that g5 is not concerned by data analysis (performing statistical tests), it deals with data documentation and restoration.
 
@@ -110,7 +121,7 @@ ul.prime li{
 }
 </style>
 <ul class="prime">
-    <li><a href="https://opengauquelin.org/downloads"><b>Download resulting data (opengauquelin.org)</b></a></li>
+    <li><a href="https://opengauquelin.org/downloads"><b>Download resulting data from opengauquelin.org</b></a></li>
     <li><a href="historical-tests.html">List of historical tests</a></li>
 </ul>
 
@@ -129,31 +140,40 @@ These tests, initiated in the 1950s by Michel Gauquelin, followed 3 directions :
 </ul>
 This program deals with the data used to build <b>professional groups</b>.
 
-<br><br>The assertions of Gauquelin and followers are :
+<div class="margin-top05">
+The assertions of Gauquelin and followers are :
 <ul class="simple margin-bottom">
     <li>we can observe anomalies in the distributions of some planets in the births of famous people ;</li>
     <li>the anomalies are more important for very eminent people ;</li>
     <li>these statistical anomalies can be observed only for natural births, the effect disappear for induced deliveries. For this reason, studies were limited to births before 1950.</li>
 </ul>
 One particular effect - the repartition of Mars in the births of sportsmen, called "the mars effect" - gave rise to very long polemics without any consensual conclusion. Very few members of the academic world studied the question, most notably Suitbert Ertel and Arno Müller. Ertel introduced citation count, providing an objective measure of eminence, and analyzed Gauquelin and skeptic tests.
+</div>
 
-<br><br>The story ended in 1996 with two publications:
+<div class="margin-top05">
+The story ended in 1996 with two publications:
 <ul class="margin-top0">
     <li>
-        <b>The "Mars Effect", A French Test of Over 1,000 Sports Champions</b>, by CFEPP, describes the test conducted by the 3rd group of skeptics. It concludes to an abscence of statistical anomaly.
+        <b>The "Mars Effect", A French Test of Over 1,000 Sports Champions</b>, by CFEPP, describes the test conducted by the 3rd group of skeptics.
+        <br>It concludes to an abscence of statistical anomaly.
     </li>
     <li>
-        <b>The Tenacious Mars Effect</b>, by Suitbert Ertel, who analyzed all mars effect data, Gauquelin + skeptics, concludes that statistical anomalies can be observed and that the negative results of skeptic groups are due to data manipulation.
+        <b>The Tenacious Mars Effect</b>, by Suitbert Ertel, who analyzed all mars effect data, Gauquelin + skeptics, concludes
+        <br>- that statistical anomalies can be observed ;
+        <br>- that the negative results of skeptic groups are due to data manipulation.
     </li>
 </ul>
 
 Following debates between Suitbert Ertel and skeptics (mainly Jan Wilhem Nienhuys) lead to a disagreement, no consensus was found.
+</div>
 
-<br><br>This story leaves at least two opened questions :
+<div class="margin-top05">
+This story leaves at least two opened questions :
 <ul class="bold">
     <li>Can we observe statistical anomalies related to astrology ?</li>
-    <li>Did the skeptic groups cheat ?</li>
+    <li>Did Gauquelin or some skeptic groups cheat ?</li>
 </ul>
+</div>
 
 <!-- ********************************************************************************* -->
 <h2>Why Gauquelin5 ?</h2>
@@ -187,7 +207,8 @@ There are several reasons to care about the data used to perform statistical tes
 
 The name "Gauquelin5" comes from the initial source of information, "Archives Gauquelin version 5", from <a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/17archg.html">cura.free.fr</a>.
 
-<br><br>The software, current documentation and all files containing corrections or informations are released under the following licences :
+<div class="margin-top05">
+The software, current documentation and all files containing corrections or informations are released under the following licences :
 <ul class = "simple margin-bottom">
     <li>
         GPL : <a href="https://www.gnu.org/licenses/gpl.html">General Public Licence</a>
@@ -199,6 +220,7 @@ The name "Gauquelin5" comes from the initial source of information, "Archives Ga
         CC-BY-SA-4 : <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution -  Share Alike</a>.
     </li>
 </ul>
+</div>
 
 <div class="bold margin-top">Related repositories</div>
 Current repository, <b><a href="https://github.com/tig12/g5">github.com/tig12/g5</a></b>, is related to 5 other repositories:
@@ -210,19 +232,20 @@ Current repository, <b><a href="https://github.com/tig12/g5">github.com/tig12/g5
     <li><b><a href="https://github.com/tig12/geonames2postgres">github.com/tig12/geonames2postgres</a></b>, to build an auxiliary database containing geonames.org data.</li>
 </ul>
 
-<br>See also pages <a href="organisation.html">Organisation</a> and <a href="install.html">Installation</a>.
+See also pages <a href="organisation.html">Organisation</a> and <a href="install.html">Installation</a>.
 
-<br><br>This documentation is written in a globish as close as possible to english, but uses french conventions for capitalization, spaces and large numbers :
+<div class="margin-top05">
+This documentation is written in a globish as close as possible to english, but uses french conventions for capitalization, spaces and large numbers :
 <ul>
     <li>Names of months, weekdays, languages etc. are not capitalized.</li>
     <li>The characters ; ? ! are preceeded and followed by a white space.</li>
     <li>White space is used as separator for large numbers (for example one million is written <i>1 000 000</i>).</li>
     <li>Marriage is written mariage, address is written adress.</li>
 </ul>
+</div>
 
-<br>This software has a slow development pace because I do it on my spare time.
-<br>
-<br>Repository created by Thierry Graff, 2017-04-28.
+<h4 id="credits">Credits</h4>
+See <a href="https://opengauquelin.org/#credits">opengauquelin.org</a>
 
 <h4>Sponsors</h4>
 <ul>
@@ -231,6 +254,10 @@ Current repository, <b><a href="https://github.com/tig12/g5">github.com/tig12/g5
     <li>2017 - 2019 : Pôle Emploi</li>
 </ul>
 <!-- <br>Current status : g5 development in pause, busy to work. -->
+
+<br>This software has a slow development pace because I do it on my spare time.
+<br>
+<br>Repository created by Thierry Graff, 2017-04-28.
 
 </article>
 </main>

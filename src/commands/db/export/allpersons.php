@@ -71,7 +71,7 @@ class allpersons implements Command {
                     $what = $optional['what'];
                 }
                 else{
-                    return "INVALID OPTIONAL PARAMETER what={$optional['what']} - Can 'time' or 'notime'\n";
+                    return "INVALID OPTIONAL PARAMETER what={$optional['what']} - Can be 'time' or 'notime'\n";
                 }
             }
         }
