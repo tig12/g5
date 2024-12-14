@@ -2,7 +2,7 @@
     Style for Gauquelin5 documentation.
     
     @license    GPL
-    @history    2017, Thierry Graff : Creation
+    @history    2017, Thierry Graff, Creation
 ********************************************************************************/
 
 @import "normalize.css";
@@ -10,6 +10,7 @@
 
 @media print{
     .left,
+    .right,
     .prevnext{
         display:none;
     }
@@ -52,6 +53,16 @@
     background:gold;
 }
 
+.yes{
+background: rgb(171,247,19);
+background: radial-gradient(circle, rgba(171,247,19,0.9121849423363095) 0%, rgba(140,255,0,0.8645658947172619) 100%);
+}
+.no{
+background: rgb(255,100,0);
+background: radial-gradient(circle, rgba(255,100,0,0.9121849423363095) 0%, rgba(212,113,34,0.783333401720063) 35%, rgba(255,100,0,0.8645658947172619) 100%);
+}
+
+
 /* ================ Site layout ================ */
 html{height:100%;}
 
@@ -69,13 +80,13 @@ body{
 }
 
 /* .container = direct children of body */
-.container{
+.container{ 
    flex:1 0 auto;
    display:flex;
    flex-flow:row wrap;
 }
 
-/* .left and .content = direct children of .container */
+/* .right, .left and .content = direct children of .container */
 .content{
     flex:1 1 85%;
     order:2; /* In the html code, write .left sidebar after .content area */
@@ -106,7 +117,42 @@ body{
     padding-bottom:0.3rem;
 }
 
+.right-block{
+    z-index:100; /*  */
+    position:fixed;
+    top:4rem;
+    right:2rem;
+    display:table; /*  */
+    padding:1rem;
+    border-left:1px solid grey;
+    border-bottom:1px solid grey;
+    border-radius:5px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    opacity:1;
+    background:radial-gradient(gold, gold, lightgreen);;
+}
+.right-block>div{
+    font-weight:bold;
+}
+.right-block a{
+    text-decoration:none;
+}
+.right-block li{
+    list-style:none;
+}
+.right-block ul{
+    padding-left:0.2rem;
+}
+
 /* ================ Navigation ================ */
+.zzzzzzzzzzzz-nav-right{
+    position:fixed;
+    top:2rem;
+    right:1rem;
+    background:#eee;
+    opacity:1;
+}
+
 .prevnext{
     font-family:DejaVu,serif;
     position:fixed; top:0; left:0;
@@ -160,7 +206,7 @@ article{
 
 .intro{
     font-size:1.2rem;
-    margin:1rem 15rem 1rem 2rem;
+    margin:1rem 15rem 3rem 2rem;
 }
 
 /* ================ Particular elements ================ */
