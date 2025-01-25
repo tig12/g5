@@ -54,12 +54,12 @@
 }
 
 .yes{
-background: rgb(171,247,19);
-background: radial-gradient(circle, rgba(171,247,19,0.9121849423363095) 0%, rgba(140,255,0,0.8645658947172619) 100%);
+background: rgb(146,207,22);
+background: radial-gradient(circle, rgba(146,207,22,0.9) 0%, rgba(121,171,20,0.9) 100%);
 }
 .no{
-background: rgb(255,100,0);
-background: radial-gradient(circle, rgba(255,100,0,0.9121849423363095) 0%, rgba(212,113,34,0.783333401720063) 35%, rgba(255,100,0,0.8645658947172619) 100%);
+background: rgb(231,61,10);
+background: radial-gradient(circle, rgba(231,61,10,0.9) 0%, rgba(156,49,18,0.9) 100%);
 }
 
 
@@ -72,7 +72,6 @@ body{
     font-family:Arial,Helvetica,sans-serif;
     height:100%;
     line-height:1.4;
-    background:#eee;
     padding-top:0;
     padding-left:0;
     padding-bottom:1rem;
