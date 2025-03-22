@@ -15,12 +15,11 @@ use g5\G5;
 use g5\model\wiki\Wiki;
 use g5\model\wiki\WikiPerson;
 use g5\model\wiki\Wikiproject;
+use g5\model\wiki\BC;
 use g5\model\wiki\Recent;
 use g5\model\wiki\Issue;
 use g5\model\Person;
 use g5\model\Group;
-use g5\model\Source;
-use g5\model\Trust;
 use g5\model\Stats;
 use tiglib\patterns\Command;
 
@@ -99,7 +98,7 @@ class add implements Command {
         //
         $BC = WikiPerson::createFromYamlFile($yamlFile);
         //
-        $validation = WikiPerson::validate($BC);
+        $validation = BC::validate($BC);
         if($validation != ''){
             return "INVALID YAML FILE: $yamlFile"
                 . "\n$validation"
@@ -177,7 +176,7 @@ class add implements Command {
         // New person created
         switch($action){
         	case 'insert':
-        	    $p->addBC($BC);
+        	    BC::addToPerson($p, $BC);
         	    // insert() needed now to have the person id
                 $p->insert(); // DB
         	    //
@@ -226,7 +225,7 @@ class add implements Command {
             case 'update':
                 $p_orig = clone $p;
                 //
-        	    $p->addBC($BC);
+        	    BC::addToPerson($p, $BC);
         	    //
         	    // stats
         	    //

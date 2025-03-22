@@ -17,7 +17,7 @@ use g5\model\wiki\Wiki;
 class WikiPerson {
     
     /** Name of a file containing the description of a person **/
-    const TEMPLATE_FILENAME = 'person.yml';
+    const TEMPLATE_FILENAME = 'BC.yml';
     
     /**
         @return Path to the template file BC.yml - src/model/wiki/templates/person.yml.
