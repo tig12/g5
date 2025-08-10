@@ -39,6 +39,5 @@ class Config {
         self::$data['dirs']['db'] = 'data/db';
     }
     
-    
 } // end class
 

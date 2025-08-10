@@ -13,7 +13,7 @@ use g5\app\Config;
 class Wikidata{
     
     /**
-        Path to the yaml file containing the characteristics of Newalchemypress source.
+        Path to the yaml file containing the characteristics of Wikidata information source.
         Relative to directory data/db/source
     **/
     const SOURCE_DEFINITION_FILE = 'wikidata.yml';

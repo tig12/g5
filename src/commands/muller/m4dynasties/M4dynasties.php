@@ -58,6 +58,7 @@ class M4dynasties {
         Relative to directory data/db/group
     **/
     const GROUP_DEFINITION_FILE = 'muller' . DS. self::GROUP_SLUG . '.yml';
+    
     /**
         Returns a Group object for M5medics.
     **/
@@ -102,7 +103,8 @@ class M4dynasties {
     // *********************** Tmp raw files manipulation ***********************
     
     /**
-        Returns the name of the "tmp raw file", data/tmp/muller/4-dynasties/muller5-1083-medics-raw.csv
+        Returns the name of the "tmp raw file":
+        data/tmp/muller/4-dynasties/muller4-1145-dynasties-raw.csv
         (file used to keep trace of the original raw values).
     **/
     public static function tmpRawFilename(){

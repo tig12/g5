@@ -26,6 +26,7 @@ class Run {
     /**
         Computes the command to call and its arguments
         Tries to find the most specific command.
+        
         Ex: a call "php run-g5.php wiki import math bourbaki rank toto titi"
         corresponds to $components = ['wiki', 'import', 'math', 'bourbaki', 'rank', 'toto', 'titi']
         It will succesively try to build the commands
@@ -33,6 +34,7 @@ class Run {
         g5\commands\wiki\import\math\bourbaki\rank\titi
         g5\commands\wiki\import\math\bourbaki\rank
         Here a command is found, and the arguments are ['titi', 'toto']
+        
         @param  $argv, global variable provided by PHP CLI.
         @return array with 3 elements:
             - A php class implementing interface Command, or false if it can't be computed.
