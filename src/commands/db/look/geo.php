@@ -116,10 +116,8 @@ class geo implements Command {
                     . "<td>{$row['admin2_code']}</td>"
                     . "<td>{$row['admin2_name']}</td>"
                 . "</tr>\n";
-//echo "\n<pre>"; print_r($row); echo "</pre>\n"; exit;
             }
             $res .= "</table>\n";
-//break;
         }
         return $res;
     }

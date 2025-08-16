@@ -46,7 +46,7 @@ class A{
         'LAT',
         'GEOID',
         'NOTES',
-        'NOTES-DATE', // indicates why DATE-C not computed
+        'NOTES-DATE', // indicates why DATE-C is not computed
     ];
     
     /** Names of the columns of generated csv files used by default by export. **/
