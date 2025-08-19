@@ -145,7 +145,7 @@ class offset_fr {
         }
         else{
             $case = self::CASE_PHP_DEFAULT;
-            $offset = offset::compute($date, 'Europe/Paris', $format);
+            $offset = offset::computeOlson($date, 'Europe/Paris', $format);
         }
         
         return [$offset, $err, $case];

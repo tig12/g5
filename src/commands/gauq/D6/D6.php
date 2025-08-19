@@ -11,6 +11,9 @@ class D6{
     
     // TRUST_LEVEL not defined, using value of class Cura
     
+    /** File containing the result of prepareGeo, used in step addGeo **/
+    const GEONAMES_FILE = 'data/db/init/geonames/D6.csv';
+    
     /** Fields of data/raw/gauq/lerrcp/D6.csv **/
     const RAW_FIELDS = [
         'NUM',
@@ -32,13 +35,37 @@ class D6{
         'GNAME',
         'OCCU',
         'DATE',
+        'DATE-UT',
+        'TZO',
         'PLACE',
         'CY',
         'C2',
         'GEOID',
         'LG',
         'LAT',
+        'NOTES-DATE', // indicates why DATE-UT is not computed
     ];
+    
+    /** 
+        Indexes of fields of data/tmp/gauq/lerrcp/D6.csv
+        Used by prepareGeo.php
+    **/
+    // fields of data/db/init/geonames/D6.csv
+    const TMP_FIELD_NUM         = 0;
+    const TMP_FIELD_FNAME       = 1;
+    const TMP_FIELD_GNAME       = 2;
+    const TMP_FIELD_OCCU        = 3;
+    const TMP_FIELD_DATE        = 4;
+    const TMP_FIELD_DATE_UT     = 5;
+    const TMP_FIELD_TZO         = 6;
+    const TMP_FIELD_PLACE       = 7;
+    const TMP_FIELD_CY          = 8;
+    const TMP_FIELD_C2          = 9;
+    const TMP_FIELD_GEOID       = 10;
+    const TMP_FIELD_LG          = 11;
+    const TMP_FIELD_LAT         = 12;
+    const TMP_FIELD_NOTES_DATE  = 13;
+    
     
     /**
         Human corrections for given names.

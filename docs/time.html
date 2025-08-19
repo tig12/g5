@@ -163,9 +163,7 @@ Example : the first record of file D10 : Aaron Harold, born 1921-06-21 07:00
 
 This is a delicate and important problem.
 <br>Important because TZO is necessary to compute a chart, and delicate because information sources are sometimes contradictory.
-<br>
 <br>The reference is the "Olson database", used by operating systems and programming languages (<a href="https://www.iana.org/time-zones">https://www.iana.org/time-zones</a>).
-<br>
 <br>This handles simple cases when the offset is defined for a whole time zone at a given time.
 <br>For these cases, it's possible to compute the offset without ambiguity :
 <br><code>(date, time zone identifier) --> offset</code>.
@@ -189,8 +187,7 @@ Time zone computation is a weak point of current implementation :
     <li>When 2 sources contradict, each case should be solved in a documented way.</li>
 </ul>
 
-<br>As a consequence, offset computation in g5 is partial and should be a priori distrusted.
-<br>
+As a consequence, offset computation in g5 is partial and should be a priori distrusted.
 <br>Persons have 3 fields to express a date and its timezone :
 <br>- <code>birth.date</code> : the legal time
 <br>- <code>birth.tzo</code> : the timezone offset

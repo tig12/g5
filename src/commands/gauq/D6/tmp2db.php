@@ -27,7 +27,7 @@ class tmp2db implements Command {
         @param  $params Array containing 3 elements :
                         - "D6"
                         - "tmp2db" (useless here)
-                        - the type of report ; see REPORT_TYPE
+                        - the type of report ; see const REPORT_TYPE
     **/
     public static function execute($params=[]): string {
         if(count($params) > 3){
@@ -111,6 +111,10 @@ class tmp2db implements Command {
                 $new['name']['given'] = $line['GNAME'];
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
+                if($line['DATE-UT'] != ''){
+                    $new['birth']['date-ut'] = $line['DATE-UT'];
+                }
+                $new['birth']['tzo'] = $line['TZO'];
                 $new['birth']['place']['cy'] = $line['CY'];
                 $new['birth']['place']['lg'] = (float)$line['LG'];
                 $new['birth']['place']['lat'] = (float)$line['LAT'];

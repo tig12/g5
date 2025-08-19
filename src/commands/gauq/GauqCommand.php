@@ -71,13 +71,12 @@ class GauqCommand implements Command {
         }
         
         foreach($datafiles as $dtfile){
-            // export is available for all datafiles, and implemented in subpackage all.
-            if($command == 'export'){
-                $class = "g5\\commands\\gauq\\all\\export";
-            }
-            // tweak2tmp is available for all datafiles, and implemented in subpackage all.
-            else if($command == 'tweak2tmp'){
-                $class = "g5\\commands\\gauq\\all\\tweak2tmp";
+            if(in_array($command, [
+                // Particular cases, commands implemented in the package g5\commands\gauq\all
+                'export',
+                'tweak2tmp',
+            ])){
+                $class = "g5\\commands\\gauq\\all\\" . $command;
             }
             else{
                 $class = "g5\\commands\\gauq\\" . GauqRouter::DATAFILES_SUBNAMESPACE[$datafile] . '\\' . $command;

@@ -1,10 +1,9 @@
 <?php
 /********************************************************************************
-    Add missing geographic informations to data/tmp/gauq/lerrcp/D6.csv from data/db/init/geonames/D6.csv
-    This means that step prepareGeo must have been completed before, to build file data/db/init/geonames/D6.csv
+    Add fields TZO, DATE-UT an NOTES-DATE to data/tmp/gauq/lerrcp/D6.csv
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
-    @history    2017-04-27 22:04:25+02:00, Thierry Graff : creation
+    @history    2025-08-16 20:21:27+02:00, Thierry Graff : creation
 ********************************************************************************/
 namespace g5\commands\gauq\D6;
 
@@ -13,8 +12,10 @@ use g5\app\Config;
 use tiglib\patterns\Command;
 use g5\commands\gauq\LERRCP;
 use tiglib\arrays\csvAssociative;
+use tiglib\timezone\offset;
+use tiglib\time\sub;
 
-class addGeo implements Command {
+class addTzo implements Command {
     
     public static function execute($params=[]): string{
         
@@ -23,7 +24,7 @@ class addGeo implements Command {
         }
         
         $datafile = 'D6';
-        $report =  "--- gauq $datafile addGeo ---\n";
+        $report =  "--- gauq $datafile addTzo ---\n";
         
         $rows = LERRCP::loadTmpFile_num($datafile);
         $rowsGeo = csvAssociative::compute(D6::GEONAMES_FILE);
@@ -31,13 +32,21 @@ class addGeo implements Command {
         foreach($rowsGeo as $rowGeo){
             $NUM = $rowGeo['NUM'];
             $new = $rows[$NUM];
-            $new['CY'] = $rowGeo['CY'];
-            $new['C2'] = $rowGeo['C2'];
+            if(offset::isCountryImplemented($new['CY'])){
+                [$offset, $err, $code] = offset::computeTiglib($new['CY'], $new['DATE'], $new['LG'], $new['C2']);
+                if($err == ''){
+                    $new['TZO'] = $offset;
+                    $new['DATE-UT'] = sub::execute($new['DATE'], $offset);
+                }
+                else{
+                    $new['NOTES-DATE'] = $code;
+                }
+            }
             $res .= implode(G5::CSV_SEP, $new) . "\n";
         }
         $outfile = LERRCP::tmpFilename($datafile);
         file_put_contents($outfile, $res);
-        $report .= "Added CY and C2 to $outfile\n";
+        $report .= "Added TZO, DATE-UT and NOTES-DATE to $outfile\n";
         return $report;
     }
     

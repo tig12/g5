@@ -10,19 +10,10 @@ namespace g5\model;
 
 use g5\app\Config;
 
-Geonames::init();
-
 class Geonames {
     
     /** Variable to cache the link to database. **/
     private static $dblink = null;
-    
-    /**  Directory where calls to geonames web service are cached **/
-    public static $TMP_SERVICE_DIR;
-    
-    public static function init(){
-        self::$TMP_SERVICE_DIR = Config::$data['dirs']['tmp'] . DS . 'geonames';
-    }
     
     public static function compute_dblink(){
         if(is_null(self::$dblink)){

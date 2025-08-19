@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Utilities to route commands in the cura package.
+    Utilities to route commands in the g5\command\gauq package.
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2019-05-09 01:34:14+02:00, Thierry Graff : Creation from refactoring
@@ -110,6 +110,7 @@ class GauqRouter implements Router {
         if($datafile != 'all' && $datafile != 'look'){
             $res[] = 'export';
             $res[] = 'tweak2tmp';
+            $res[] = 'legalTime';
             sort($res);
         }
         return $res;

@@ -45,6 +45,7 @@ use g5\commands\gauq\A\addGeo                   as AaddGeo;
 use g5\commands\gauq\A\legalTime                as AlegalTime;
 use g5\commands\gauq\D6\raw2tmp                 as D6raw2tmp;
 use g5\commands\gauq\D6\addGeo                  as D6addGeo;
+use g5\commands\gauq\D6\addTzo                  as D6addTzo;
 use g5\commands\gauq\D10\raw2tmp                as D10raw2tmp;
 use g5\commands\gauq\E1_E3\raw2tmp              as E1E3raw2tmp;
 use g5\commands\gauq\all\tweak2tmp              as Gauqtweak2tmp;
@@ -191,7 +192,8 @@ class all implements Command {
             }
             
             echo D6raw2tmp::execute(['D6', 'raw2tmp']);
-            echo D6addGeo::execute(['D6', 'addGeo']); // tmp code - addGeo needs to be fixed
+            echo D6addGeo::execute(['D6', 'addGeo']);
+            echo D6addTzo::execute(['D6', 'addTzo']);
             
             echo D10raw2tmp::execute(['D10', 'raw2tmp']);
             
