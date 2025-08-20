@@ -13,6 +13,7 @@ use tiglib\time\seconds2HHMMSS;
 class offset{
     
     /**
+        Indicates if timezone computation of a country is implemented by tiglib.
         @param  $country ISO 3166 2-letter code, like 'FR'.
     **/
     public static function isCountryImplemented(string $country): bool {
@@ -22,7 +23,17 @@ class offset{
     /**
         Offset computation using tig12\tiglib implementations.
         @param  $country    ISO 3166 2-letter code, like 'FR'
-        For other params and return, see the country implementations.
+        @param  $date   Legal time, ISO 8601 formatted "YYYY-MM-DD HH:MM" or "YYYY-MM-DD HH:MM:SS"
+        @param  $lg     longitude in decimal degrees
+        @param  $c2     Province ("AG" for Agrigento etc.)
+        @param  $format Format of the returned offset
+                        Can be 'HH:MM' or 'HH:MM:SS'
+        
+        @return array with 3 elements : 
+                - the timezone offset, format sHH:MM (ex : '-01:00' ; '+00:23') 
+                  or empty string if unable to compute.
+                - an integer indicating the kind of computation involved (see class constants).
+                - an error message, or empty string if offset could be computed without ambiguity.
         
         TODO This implementation may need to change if {$lg, $c2} is not pertinent for some countries.
     **/
@@ -31,7 +42,7 @@ class offset{
         string $date,
         float $lg,
         string $c2,
-        string $format='HH:MM'
+        string $format='HH:MM',
     ): array {
         switch($country){
         	case 'FR': return offset_fr::compute($date, $lg, $c2, $format); break;
@@ -72,8 +83,8 @@ class offset{
     }
     
     /**
-        Converts an offset expressed in seconds to sHH:MM or sHH:MM:SS (s = sign, + or -).
-        @param $seconds Offset expressed in seconds ; can be < 0
+        Converts an offset expressed in time seconds to sHH:MM or sHH:MM:SS (s = sign, + or -).
+        @param $seconds Offset expressed in time seconds ; can be < 0
         @param $format  'HH:MM' or 'HH:MM:SS'
     **/
     public static function format(int $seconds, string $format): string {

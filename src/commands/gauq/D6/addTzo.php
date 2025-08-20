@@ -33,7 +33,12 @@ class addTzo implements Command {
             $NUM = $rowGeo['NUM'];
             $new = $rows[$NUM];
             if(offset::isCountryImplemented($new['CY'])){
-                [$offset, $err, $code] = offset::computeTiglib($new['CY'], $new['DATE'], $new['LG'], $new['C2']);
+                [$offset, $code, $err] = offset::computeTiglib(
+                        $new['CY'],
+                        $new['DATE'],
+                        $new['LG'],
+                        $new['C2']
+                );
                 if($err == ''){
                     $new['TZO'] = $offset;
                     $new['DATE-UT'] = sub::execute($new['DATE'], $offset);

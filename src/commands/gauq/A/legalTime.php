@@ -16,7 +16,7 @@ use g5\G5;
 use tiglib\patterns\Command;
 use g5\commands\gauq\LERRCP;
 use tiglib\time\HHMMSS2seconds;
-use tiglib\timezone\offset_fr;
+use tiglib\timezone\offset;
 
 class legalTime implements Command {
     
@@ -47,14 +47,20 @@ class legalTime implements Command {
             $N++;
             $row2 = $row1;
             
-            if($row1['CY'] != 'FR'){
-                // no restoration for other countries - TODO implement
+            if(!offset::isCountryImplemented($row1['CY'])){
+                // no timezone restoration, just copy the line
                 $res .= implode(G5::CSV_SEP, $row2) . "\n";
                 continue;
             }
             
-            [$offset, $err, $case] = offset_fr::compute($row1['DATE-UT'], $row1['LG'], $row1['C2'], 'HH:MM:SS');
-            if($err != ''){
+            [$offset, $case, $err] = offset::computeTiglib(
+                $row1['CY'],
+                $row1['DATE-UT'],
+                $row1['LG'],
+                $row1['C2'],
+                'HH:MM:SS'
+            );
+            if($offset == ''){
                 // no restoration
                 // $case (= error code) is stored in $row2['NOTES-DATE'] in tmp file,
                 // and will be used by tmp2db to build an issue
@@ -84,11 +90,6 @@ class legalTime implements Command {
             }
             else{
                 $row2['DATE-C'] = self::fixLegalTime($t);
-            }
-            // Eliminate obviously useless seconds in DATE-UT
-// TODO This is a quick fix, should be done in step raw2tmp
-            if(substr($row2['DATE-UT'], -3) == ':00'){
-                $row2['DATE-UT'] = substr($row2['DATE-UT'], 0, -3);
             }
             $row2['TZO'] = $offset;
             $nCorrected++;

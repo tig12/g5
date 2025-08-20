@@ -68,7 +68,7 @@ class timezone implements Command {
         $return .= "------------------------------------\n";
         $return .= "Total null     = $total_null\n";
         $return .= "Total not null = $total_not_null\n";
-        $return .= "% null         = $percent %\n";
+        $return .= '% null         = ' . round($percent, 2). " %\n";
         
         return $return;
     }

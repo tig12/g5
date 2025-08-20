@@ -1,6 +1,9 @@
 <?php
 /******************************************************************************
     Computation of timezone offset for France.
+    
+    Sources : Olson, THM p 104 and FG p 265 (see README).
+    
     - Takes into account the fact that Alsace and a part of Lorraine were german between 1870 and 1918
     - Takes into account the fact that before 1891-03-15, local hour was used
     BUT NOT EXACT :
@@ -26,57 +29,43 @@ use tiglib\time\seconds2HHMMSS;
 
 class offset_fr {
     
-    // return codes and messages
-    const CASE_1871_1918_LORRAINE = 1;
-    const MSG_1871_1918_LORRAINE = 'Timezone offset not computed because of potential error: French or German TZ regime ?
-<br>1871-05-10 - 1918-11-11: départements 54, 57, 88 were partially occupied by Germany.';
-    
-    const CASE_1871_1918_ALSACE = 2;
-    const MSG_1871_1918_ALSACE = 'Timezone offset not computed by offset_fr - must be done by offset_de.
-<br>1871-05-10 - 1918-11-11: départements 67, 68 were under German timezone regime.';
-    
-    const CASE_WW2 = 3;
-    const MSG_WW2 = 'Timezone offset not computed because of potential error: French or German TZ regime ?
-<br>1940-02 - 1942-11-02: WW2 - Timezone offset depends on the date of occupation of birth place by Germany.';
-    
-    const CASE_WW2_END = 4;
-    const MSG_WW2_END = 'Timezone offset not computed because of potential error: French or German TZ regime ?
-<br>1944-06-06 - 1945-09-16: WW2 - Officially German time was abolished 1945-09-16 but some cities changed their time just after their liberation';
-    
-    const CASE_BEFORE_1891 = 5;
-    
-    /** Used when computed by code provided by php **/
-    const CASE_PHP_DEFAULT = 6;
+    // return codes
+    const CASE_OLSON                = 1;
+    const CASE_1871_1918_LORRAINE   = 2;
+    const CASE_1871_1918_ALSACE     = 3;
+    const CASE_WW2                  = 4;
+    const CASE_WW2_END              = 5;
+    const CASE_BEFORE_1891          = 6;
     
     const MESSAGES = [
-        self::CASE_1871_1918_LORRAINE => self::MSG_1871_1918_LORRAINE,
-        self::CASE_1871_1918_ALSACE   => self::MSG_1871_1918_ALSACE,
-        self::CASE_WW2                => self::MSG_WW2,
-        self::CASE_WW2_END            => self::MSG_WW2_END,
+        self::CASE_1871_1918_LORRAINE =>
+            'Timezone offset not computed because of potential error: French or German TZ regime ?'
+          . '<br>1871-05-10 - 1918-11-11: départements 54, 57, 88 were partially occupied by Germany.',
+        self::CASE_1871_1918_ALSACE   =>
+            'Timezone offset not computed by offset_fr - must be done by offset_de.'
+          . '<br>1871-05-10 - 1918-11-11: départements 67, 68 were under German timezone regime.',
+        self::CASE_WW2                =>
+            'Timezone offset not computed because of potential error: French or German TZ regime ?'
+          . '<br>1940-02 - 1942-11-02: WW2 - Timezone offset depends on the date of occupation of birth place by Germany.',
+        self::CASE_WW2_END            =>
+            'Timezone offset not computed because of potential error: French or German TZ regime ?'
+          . '<br>1944-06-06 - 1945-09-16: WW2 - Officially German time was abolished 1945-09-16 but some cities changed their time just after their liberation',
     ];
     
-    // ******************************************************
     /**
         Computation of timezone offset for France.
-        @param  $date   ISO 8601 HH:MM or HH:MM:SS
-        @param  $lg     longitude in decimal degrees
-        @param  $c2     Département ("75" for Paris, "01" for Ain etc.)
-        @param  $format Format of the returned offset - Can be 'HH:MM' or 'HH:MM:SS'
-        
-        @return array with 3 elements : 
-                - the timezone offset, format sHH:MM (ex : '-01:00' ; '+00:23') 
-                  or empty string if unable to compute.
-                - an error message ; empty string if offset could be computed without ambiguity.
-                - an integer indicating the kind of computation involved (see code, variable $case).
-                
-        @todo   Implementation of computation taking into account the precise local situations
-                would need also a latitude parameter
-        @todo   Consider equation of time for dates < 1891-03-15
+        See comment of offset::computeTiglib() for parameters and return.
     **/
-    public static function compute($date, $lg, $c2, $format='HH:MM'){
+    public static function compute(
+        string $date,
+        float $lg,
+        string $c2,
+        string $format='HH:MM',
+    ): array {
         if($format != 'HH:MM' && $format != 'HH:MM:SS'){
             throw new \Exception("Invalid \$format parameter : $format - Must be 'HH:MM' or 'HH:MM:SS'");
         }
+        
         $err = $offset = '';
         $case = 0;
         
@@ -92,27 +81,27 @@ class offset_fr {
                 // See FG p 269
                 // This case could be computed using coordinates of the limit of occupied zone.
                 $case = self::CASE_1871_1918_LORRAINE;
-                $err = self::MSG_1871_1918_LORRAINE . " - dept $c2 - $date";
+                $err = self::MESSAGES[$case] . " - dept $c2 - $date";
             }
             else if(in_array($c2, [67, 68])){
                 // zone = 'Europe/Berlin';
                 $case = self::CASE_1871_1918_ALSACE;
-                $err = self::MSG_1871_1918_ALSACE . " - dept $c2 - $date";
+                $err = self::MESSAGES[$case] . " - dept $c2 - $date";
             }
         }
         if($date >= '1940-02' && $date <= '1942-11-02'){
             // Check 1940-02 - FG says 1940-06
             $case = self::CASE_WW2;
-            $err = self::MSG_WW2 . " : $date";
+            $err = self::MESSAGES[$case] . " : $date";
         }
         if($date >= '1944-06-06' && $date <= '1945-09-16'){
             // See FG p 269
             $case = self::CASE_WW2_END;
-            $err = self::MSG_WW2_END . " : $date";
+            $err = self::MESSAGES[$case] . " : $date";
         }
         
         if($err != ''){
-            return [$offset, $err, $case];
+            return [$offset, $case, $err];
         }
         
         if($date < '1891-03-15'){
@@ -137,18 +126,15 @@ class offset_fr {
             // definition of offset = HL - UT
             //        = HL - (HL - Lg)
             //        = Lg
-            $lg_seconds = 240 * $lg; // 240 = 24 * 3600 / 360 = nb of time seconds per longitude degree
-            $offset_seconds = $lg_seconds;
-            $hhmmss = $format == 'HH:MM' ? seconds2HHMMSS::compute($offset_seconds, true) : seconds2HHMMSS::compute($offset_seconds);
-            $sign = ($offset_seconds < 0 && $hhmmss != '00:00') ? '-' : '+';
-            $offset = $sign . $hhmmss;
+            $offset_seconds = offset::lg2offset($lg);
+            $offset = offset::format($offset_seconds, $format);
         }
         else{
-            $case = self::CASE_PHP_DEFAULT;
+            $case = self::CASE_OLSON;
             $offset = offset::computeOlson($date, 'Europe/Paris', $format);
         }
         
-        return [$offset, $err, $case];
+        return [$offset, $case, $err];
     }
 
     

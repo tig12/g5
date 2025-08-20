@@ -114,7 +114,7 @@ class raw2tmp implements Command {
             if($lg == '' && $do_report_geo){
                 $report .= 'Geonames not matched for ' . $new['NUM'] . ' ' . $new['FNAME'] . ' ' . $new['GNAME'] . ' : ' . $CITY . ' ' . $COD . "\n";
             }
-            // compute timezone
+            // compute timezone - E1 and E3 contain only French data
             $new['TZO'] = '';
             if($lg != ''){
                 [$offset, $err] = offset_fr::compute($date, $lg, $COD);
