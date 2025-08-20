@@ -44,9 +44,15 @@ class offset{
         string $c2,
         string $format='HH:MM',
     ): array {
+    
+        if($format != 'HH:MM' && $format != 'HH:MM:SS'){
+            throw new \Exception("Invalid \$format parameter : $format - Must be 'HH:MM' or 'HH:MM:SS'");
+        }
+        
         switch($country){
         	case 'FR': return offset_fr::compute($date, $lg, $c2, $format); break;
         	case 'IT': return offset_it::compute($date, $lg, $c2, $format); break;
+        	//case 'BE': return offset_be::compute($date, $lg, $c2, $format); break;
             default: throw new \Exception("$country not handled by offset::compute()");
         }
     }

@@ -40,9 +40,6 @@ class offset_it{
         string $c2,
         string $format='HH:MM',
     ): array {
-        if($format != 'HH:MM' && $format != 'HH:MM:SS'){
-            throw new \Exception("Invalid \$format parameter : $format - Must be 'HH:MM' or 'HH:MM:SS'");
-        }
         
         $err = $offset = '';
         $case = 0;

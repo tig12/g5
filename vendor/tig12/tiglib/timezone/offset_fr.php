@@ -4,17 +4,14 @@
     
     Sources : Olson, THM p 104 and FG p 265 (see README).
     
-    - Takes into account the fact that Alsace and a part of Lorraine were german between 1870 and 1918
+    - Takes into account the fact that Alsace and a part of Lorraine were German between 1870 and 1918
     - Takes into account the fact that before 1891-03-15, local hour was used
     BUT NOT EXACT :
     - some part of dept 54 was also german between 1871 and 1918
         => a precise computation should take into account the precise local situation
     - Some parts of depts 06, 04, 26, 74, 73 were not french before 1860
     - Between 1940-02 and 1942-11, France was divided in 2 zones (occupied and free)
-        => a precise computation should take into account the precise local situation
-    Computations were based on "Traité de l'heure dans le monde", 5th edition, 1990.
-    Computations are now based on "Problèmes de l'heure résolus pour le monde entier"
-    (Françoise Gauquelin), 2nd edition, 1991.
+      => a precise computation should take into account the precise local situation
 
     @license    GPL
     @history    2017-01-03 00:09:55+01:00, Thierry Graff : Creation
@@ -62,9 +59,6 @@ class offset_fr {
         string $c2,
         string $format='HH:MM',
     ): array {
-        if($format != 'HH:MM' && $format != 'HH:MM:SS'){
-            throw new \Exception("Invalid \$format parameter : $format - Must be 'HH:MM' or 'HH:MM:SS'");
-        }
         
         $err = $offset = '';
         $case = 0;

@@ -23,3 +23,6 @@ Computations return offsets conform to ISO 8601 and Olson database :
 UT = LT - offset
 or LT = UT + offset
 This is the opposite of offsets given in both books (called DTU in THM).
+
+Note that when using Olson database with $timezone->getOffset(), the field 'time' of an entry is given in UT.
+As this package uses legal time as input, the limits are expressed in local time.
