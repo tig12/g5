@@ -36,9 +36,6 @@ class offset_be{
         $err = $offset = '';
         $case = 0;
         
-        // One rule is not implemented: FG p 288 says that the adoption of Roma local time
-        // has been adopted in Roma only on 1885-11-15
-        
         // LMT before 1880
         // sources diverge for the limit date
         // - Olson: 1880-01-01 00:00
