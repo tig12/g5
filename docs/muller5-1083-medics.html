@@ -54,52 +54,63 @@ More work can be done on this file :
 </header>
 
 <article>
+
 <nav class="toc">
     <ul>
         <li>
-            <a href="#generalities">Generalities</a>
+            <a href="#1-generalities">Generalities</a>
         </li>
         <li>
-            <a href="#integration-to-g5">Integration to g5</a>
+            <a href="#2-integration-to-g5">Integration to g5</a>
             <ul>
-                <li><a href="#2-2-generate-temporary-file">Generate temporary file</a></li>
-                <li><a href="#2-3-tweak2tmp">tweak2tmp</a></li>
+                <li>
+                    <a href="#2-1-generate-temporary-file">Generate temporary file</a>
+                </li>
+                <li>
+                    <a href="#2-2-tweak2tmp">tweak2tmp</a>
+                </li>
             </ul>
         </li>
         <li>
-            <a href="#fix-gnr">Fix GNR</a>
+            <a href="#3-fix-gnr">Fix GNR</a>
         </li>
         <li>
-            <a href="#fix-gauquelin-birth-days">Fix Gauquelin birth days</a>
+            <a href="#4-fix-gauquelin-birth-days">Fix Gauquelin birth days</a>
         </li>
         <li>
-            <a href="#fix-gauquelin-names">Fix Gauquelin names</a>
+            <a href="#5-fix-gauquelin-names">Fix Gauquelin names</a>
         </li>
         <li>
-            <a href="#fix-paris">Fix Paris</a>
+            <a href="#6-fix-paris">Fix Paris</a>
         </li>
         <li>
-            <a href="#fix-nobilities">Fix nobilities</a>
+            <a href="#7-fix-nobilities">Fix nobilities</a>
         </li>
         <li>
-            <a href="#looking-at-the-file">Looking at the file</a>
+            <a href="#8-looking-at-the-file">Looking at the file</a>
         </li>
         <li>
-            <a href="#fields">Fields</a>
+            <a href="#9-fields">Fields</a>
         </li>
         <li>
-            <a href="#column-sample">Column SAMPLE</a>
+            <a href="#10-column-sample">Column SAMPLE</a>
             <ul>
-                <li><a href="#10-1-gauq-nur">GAUQ_NUR</a></li>
-                <li><a href="#10-2-muer-nur">MUER_NUR</a></li>
-                <li><a href="#10-3-muergauq">MUERGAUQ</a></li>
+                <li>
+                    <a href="#10-1-gauq-nur">GAUQ_NUR</a>
+                </li>
+                <li>
+                    <a href="#10-2-muer-nur">MUER_NUR</a>
+                </li>
+                <li>
+                    <a href="#10-3-muergauq">MUERGAUQ</a>
+                </li>
             </ul>
         </li>
     </ul>
 </nav>
 
 <!-- ********************************************************************************* -->
-<h2 id="generalities">Generalities</h2>
+<h2 id="1-generalities">Generalities</h2>
 This group was built by Arno Müller and Suitbert Ertel in 1994.
 <br>Data were published by Arno Müller in "1083 members of the French Académie de Médecine", Astro-Forschungs-Daten 5, Waldmohr, 1994, 92 pp.
 <br>Data available in an electronic format on <a href="https://newalchemypress.com/gauquelin/research5.php">newalchemypress.com</a> web site, through file 
@@ -111,7 +122,7 @@ This group was built by Arno Müller and Suitbert Ertel in 1994.
 
 
 <!-- ********************************************************************************* -->
-<h2 id="integration-to-g5">Integration to g5</h2>
+<h2 id="2-integration-to-g5">Integration to g5</h2>
 
 The raw input file, versioned with g5, is <code>data/raw/muller/5-medics/5a_muller-medics-utf8.txt</code>
 
@@ -126,19 +137,19 @@ php run-g5.php muller m5medics fixGnr update
 </pre>                                    
 
 <!-- ************************************* -->
-<h3 id="2-2-generate-temporary-file">Generate temporary file</h3>
+<h3 id="2-1-generate-temporary-file">Generate temporary file</h3>
 The first step is to generate the file <b><code>data/tmp/muller/5-medics/muller5-1083-medics.csv</code></b> :
 <pre>php run-g5.php muller m5medics raw2tmp</pre>
 This step includes minor corrections in given names (some accents are missing).
 
 <!-- ************************************* -->
-<h3 id="2-3-tweak2tmp">tweak2tmp</h3>
+<h3 id="2-2-tweak2tmp">tweak2tmp</h3>
 This step applies human corrections stored in file <code>data/db/init/newalch-tweaked/muller5-1083-medics.yml</code>.
 <br>Used to fix errors in the names of noble persons (<a href="#nobilities">see below</a>).
 
 
 <!-- ********************************************************************************* -->
-<h2 id="fix-gnr">Fix GNR</h2>
+<h2 id="3-fix-gnr">Fix GNR</h2>
 
 GNR seems to mean "Gauquelin Number Record".
 
@@ -216,7 +227,7 @@ php run-g5.php muller m5medics fixGnr update
 </div>
 
 <!-- ********************************************************************************* -->
-<h2 id="fix-gauquelin-birth-days">Fix Gauquelin birth days</h2>
+<h2 id="4-fix-gauquelin-birth-days">Fix Gauquelin birth days</h2>
 
 The command
 <pre>php run-g5.php muller m5medics look gauqdays</pre>
@@ -369,7 +380,7 @@ for E1 :
 
 
 <!-- ********************************************************************************* -->
-<h2 id="fix-gauquelin-names">Fix Gauquelin names</h2>
+<h2 id="5-fix-gauquelin-names">Fix Gauquelin names</h2>
 
 The command :
 <pre>php run-g5.php muller m5medics look gauqnames</pre>
@@ -401,7 +412,7 @@ To restore the names :
 This permits to restore (only) 12 unknown names from A2.
 
 <!-- ********************************************************************************* -->
-<h2 id="fix-paris">Fix Paris</h2>
+<h2 id="6-fix-paris">Fix Paris</h2>
 The file contains 110 persons born in Paris, which need to be checked (see Newalchemypress indication below, sections SAMPLE and GAUQ_NUR).
 
 <h4>Fix arrondissement</h4>
@@ -478,7 +489,7 @@ C3 = arrondissement
 
 
 <!-- ********************************************************************************* -->
-<h2 id="fix-nobilities">Fix nobilities</h2>
+<h2 id="7-fix-nobilities">Fix nobilities</h2>
 Listing names shows small errors in columns <code>FNAME</code> and <code>GNAME</code> of noble persons.
 <ul>
     <li>Sometimes the nobility is included in the given name (it should be part of the family name).</li>
@@ -505,7 +516,7 @@ prints the same list in a YAML format.
 
 
 <!-- ********************************************************************************* -->
-<h2 id="looking-at-the-file">Looking at the file</h2>
+<h2 id="8-looking-at-the-file">Looking at the file</h2>
 
 <!-- ********************************************************************************* -->
 <div class="warning center">
@@ -523,7 +534,7 @@ Possible values for parameter : gauqdates, gauqnames, fields, gnr, nobilities, p
 
 
 <!-- ********************************************************************************* -->
-<h2 id="fields">Fields</h2>
+<h2 id="9-fields">Fields</h2>
 <pre>php run-g5.php muller m5medics look fields</pre>
 Partial comprehension so far.
 <table class="wikitable margin">
@@ -564,7 +575,7 @@ Partial comprehension so far.
 </table>
 
 <!-- ********************************************************************************* -->
-<h2 id="column-sample">Column SAMPLE</h2>
+<h2 id="10-column-sample">Column SAMPLE</h2>
 
 This column seems to indicate the origin of the record.
 <br>There is a one to one mapping between SAMPLE and CODE.
@@ -719,10 +730,14 @@ All <code>MUER_NUR</code> records have <code>GNR</code> empty, unknown in Gauque
     <li>
         <span class="big1">Details</span>
         <ul>
-            <li><a href="time.html">Time and timezone</a></li>
+            <li><a href="timezone.html">Timezone</a></li>
             <li><a href="code-details.html">Code details</a></li>
         </ul>
     </li>
+    
+    <!-- <li>
+        <span class="big1"><a href="2025-g5.html">g5 2025</a></span>
+    </li> -->
     
 </ul>
 </nav>

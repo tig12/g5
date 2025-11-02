@@ -17,6 +17,7 @@ class offset{
         @param  $country ISO 3166 2-letter code, like 'FR'.
     **/
     public static function isCountryImplemented(string $country): bool {
+        //return in_array($country, ['FR', 'BE']);
         return in_array($country, ['FR']);
     }
     
@@ -37,6 +38,7 @@ class offset{
         
         TODO This implementation may need to change if {$lg, $c2} is not pertinent for some countries.
     **/
+    //public static function computeTiglib(
     public static function computeTiglib(
         string $country,
         string $date,
@@ -51,8 +53,9 @@ class offset{
         
         switch($country){
         	case 'FR': return offset_fr::compute($date, $lg, $c2, $format); break;
-        	case 'IT': return offset_it::compute($date, $lg, $c2, $format); break;
+        	//case 'IT': return offset_it::compute($date, $lg, $c2, $format); break;
         	//case 'BE': return offset_be::compute($date, $lg, $c2, $format); break;
+        	//case 'DE': return offset_de::compute($date, $lg, $c2, $format); break;
             default: throw new \Exception("$country not handled by offset::compute()");
         }
     }
@@ -65,7 +68,7 @@ class offset{
         or            offset = LT - UT
         Example : offset::compute('2019-06-20', 'Europe/Paris') = '+02:00'
         
-        @param  $date   ISO 8601 date, like '2018-04-22' or '2018-04-22 12:00:00'
+        @param  $date   Legal time, format ISO 8601, like '2018-04-22' or '2018-04-22 12:00:00'
                         In fact, this parameter can be any string accepted by php class DateTime constructor.
         @param  $zone   A zone identifier, like 'Europe/Paris'
         @param  $format Format of the returned offset

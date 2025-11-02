@@ -35,8 +35,7 @@
 <header>
 <h1>Gauquelin5 installation</h1>
 <div class="intro">
-This software has been developed and tested on Linux. It should normally also work on Windows and Macintosh, but hasn't been tested.
-<br>This installation guide has been tested on Debian 12.
+<b>Installation guide for Debian 12</b> but should normally also work on Windows and Macintosh.
 </div>
 <div class="header">
 
@@ -45,16 +44,55 @@ This software has been developed and tested on Linux. It should normally also wo
 
 <article>
 
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#1-prequisites">Prequisites</a>
+        </li>
+        <li>
+            <a href="#2-install-and-configure-g5">Install and configure g5</a>
+            <ul>
+                <li>
+                    <a href="#2-1-directory-structure">Directory structure</a>
+                </li>
+                <li>
+                    <a href="#2-2-configuration">Configuration</a>
+                </li>
+                <li>
+                    <a href="#2-3-prepare-g5-database">Prepare g5 database</a>
+                </li>
+                <li>
+                    <a href="#2-4-postgrest-optional">Postgrest (optional)</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#3-generate-geonames-database">Generate Geonames database</a>
+            <ul>
+                <li>
+                    <a href="#3-1-install-geonames2postgres">Install geonames2postgres</a>
+                </li>
+                <li>
+                    <a href="#3-2-download-geonames-data-on-your-local-machine">Download Geonames data on your local machine</a>
+                </li>
+                <li>
+                    <a href="#3-3-generate-geonames-database">Generate Geonames database</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
 <!-- ********************************************************************************* -->
-<h2>Prequisites</h2>
+<h2 id="1-prequisites">Prequisites</h2>
 Before starting, you need to have installed on your machine :
 
 <ul class="spaced">
     <li>
-        <b>PHP</b> ; current code uses php 8.3 - See <a href="https://packages.sury.org/php/README.txt">https://packages.sury.org/php/README.txt</a>
-        <pre>sudo apt install php8.3</pre>
+        <b>PHP</b> ; current code uses php 8.4 - See <a href="https://packages.sury.org/php/README.txt">https://packages.sury.org/php/README.txt</a>
+        <pre>sudo apt install php8.4</pre>
         Some PHP extensions are also necessary:
-        <pre>sudo apt install php8.3-{pgsql,yaml,mbstring,zip}</pre>
+        <pre>sudo apt install php8.4-{pgsql,yaml,mbstring,zip}</pre>
     </li>
     
     <li>
@@ -74,7 +112,7 @@ Before starting, you need to have installed on your machine :
 
 
 <!-- ********************************************************************************* -->
-<h2>Install and configure g5</h2>
+<h2 id="2-install-and-configure-g5">Install and configure g5</h2>
 
 Open a terminal and clone the repository on your local machine :
 
@@ -87,7 +125,7 @@ Note: <code>--depth=1</code> is optional, only useful to save up disk space and 
 <br>
 
 <!-- ************************************* -->
-<h3 id="1-2-directory-structure">Directory structure</h3>
+<h3 id="2-1-directory-structure">Directory structure</h3>
 The important files and directories are :
 <pre>
 g5/
@@ -108,8 +146,25 @@ The files you need to know about are :
     <li><code><b>config.yml.dist</b></code> contains sample configuration directives.</li>
 </ul>
 
+<h4>data/ directory</h4>
+
+
+<pre>
+Versioned data, db/ and raw/ are versioned because necessary to build the database.
+<br>Other data are used to work on the database:
+data/
+    ├── auxiliary   # brut material used to build data/raw/, like scans
+    ├── db          # 
+    ├── other
+    ├── output
+    ├── raw
+    ├── tmp
+    └── wiki
+</pre>
+
+
 <!-- ************************************* -->
-<h3 id="configuration">Configuration</h3>
+<h3 id="2-2-configuration">Configuration</h3>
 Create a file <code>config.yml</code> by copying <code>config.yml.dist</code> :
 <pre>cp config.yml.dist config.yml</pre>
 
@@ -156,7 +211,7 @@ G5 generates a database used by <a href="https://github.com/tig12/openg">openg s
 
 
 <!-- ************************************* -->
-<h3>Prepare g5 database</h3>
+<h3 id="2-3-prepare-g5-database">Prepare g5 database</h3>
 You must have a database and credentials (user, password) corresponding to the values specified in config.
 <br>Following instructions use psql, but this can be done with other postgresql clients, like pgadmin.
 <br>These instructions use the values (user name, db name etc.) given in <code>config.yml.dist</code> - of course, adapt with the values you use in your <code>config.yml</code> file.
@@ -199,7 +254,7 @@ The database is now ready to use with g5. To connect to the database:
 (to exit <code>psql</code>, type <code>\q</code> or <code>ctrl d</code>)
 
 <!-- ************************************* -->
-<h3>Postgrest (optional)</h3>
+<h3 id="2-4-postgrest-optional">Postgrest (optional)</h3>
 <code>Postgrest</code> permits to access to g5 database through a REST API. 
 <br>This is used by <a href="https://github.com/tig12/openg">openg</a> program (a web application to browse the database, used to run <a href="https://opengauquelin.org">opengauquelin.org</a>).
 <pre>
@@ -221,20 +276,20 @@ g5_pg_dbname=# grant postgrest_anonymous_role to authenticator;
 </ul>
 
 <!-- ********************************************************************************* -->
-<h2>Generate Geonames database</h2>
-Here, "Geonames database" designates an auxiliary database used to associate places to <a href="http://geonames.org">geonames.org</a>.
+<h2 id="3-generate-geonames-database">Generate Geonames database</h2>
+Here, "Geonames database" designates an auxiliary database used to associate places to <a href="https://geonames.org">geonames.org</a>.
 <br>This is required because some steps of g5 database creation need it.
 
 <!-- ************************************* -->
-<h3>Install geonames2postgres</h3>
+<h3 id="3-1-install-geonames2postgres">Install geonames2postgres</h3>
 
 Prequisites: geonames2postgres needs two libraries to run:
 <pre>sudo apt install python3-{yaml,psycopg2}</pre>
 
 This software stores in a local database data copied from geonames.org, located in two directories:
 <ul>
-    <li><a href="http://download.geonames.org/export/dump">http://download.geonames.org/export/dump</a>, containing cities and administrative areas.</li>
-    <li><a href="http://download.geonames.org/export/zip">http://download.geonames.org/export/zip</a>, containing postal codes.</li>
+    <li><a href="https://download.geonames.org/export/dump">https://download.geonames.org/export/dump</a>, containing cities and administrative areas.</li>
+    <li><a href="https://download.geonames.org/export/zip">https://download.geonames.org/export/zip</a>, containing postal codes.</li>
 </ul>
 
 Files of these directories are first copied on a local machine, then stored in a postgres database, which is used by g5.
@@ -249,12 +304,12 @@ Files of these directories are first copied on a local machine, then stored in a
 
 In <code>config.yml</code>, you specify in <code>dir-countries</code> and <code>dir-postal</code> where the geonames.org files are stored on your machine.
 
-<br><br>You also need to indicate the postgresql parameters to the database where the data are stored.
+<br><br>You also need to indicate the postgresql parameters of the database where the data are stored.
 
 <br><br>Note: these parameters MUST be the same as parameters <code>geonames/postgres</code> of g5 config.
 
 <!-- ************************************* -->
-<h3>Download Geonames data on your local machine</h3>
+<h3 id="3-2-download-geonames-data-on-your-local-machine">Download Geonames data on your local machine</h3>
 This needs to be done for all countries handled by g5, for example with this script:
 
 <pre>
@@ -262,18 +317,18 @@ countries=( AT BE CH CL CZ DE DK DZ ES FR GB GF GP IT LU MA MC MQ MU NL PL RU SE
 cd /path/to/countries   # replace by the path specified in config.yml
 for i in "${countries[@]}"
 do
-    wget -c http://download.geonames.org/export/dump/$i.zip && unzip -n $i.zip
+    wget -c https://download.geonames.org/export/dump/$i.zip && unzip -n $i.zip
 done
 
 cd /path/to/postal      # replace by the path specified in config.yml
 for i in "${countries[@]}"
 do
-    wget -c http://download.geonames.org/export/zip/$i.zip && unzip -n $i.zip
+    wget -c https://download.geonames.org/export/zip/$i.zip && unzip -n $i.zip
 done
 </pre>
 
 <!-- ************************************* -->
-<h3>Generate Geonames database</h3>
+<h3 id="3-3-generate-geonames-database">Generate Geonames database</h3>
 
 <ol class="spaced">
     <li>Prepare a database - similar to the creation of g5 database (<code>sudo -s -u postgres</code> etc.) with the credentials stored in file <code>config.yml</code> of <code>geonames2postgres</code>.</li>
@@ -398,10 +453,14 @@ done
     <li>
         <span class="big1">Details</span>
         <ul>
-            <li><a href="time.html">Time and timezone</a></li>
+            <li><a href="timezone.html">Timezone</a></li>
             <li><a href="code-details.html">Code details</a></li>
         </ul>
     </li>
+    
+    <!-- <li>
+        <span class="big1"><a href="2025-g5.html">g5 2025</a></span>
+    </li> -->
     
 </ul>
 </nav>

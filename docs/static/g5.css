@@ -69,7 +69,7 @@ html{height:100%;}
 body{
     display:flex;
     flex-direction:column;
-    font-family:Arial,Helvetica,sans-serif;
+    font-family:"roboto flex",sans-serif;
     height:100%;
     line-height:1.4;
     padding-top:0;
@@ -94,6 +94,7 @@ body{
 .left{
     flex:1 1 var(--left-width);
     order:1; /* In the html code, write .left sidebar after .content area */
+    font-family:Arial,Helvetica,sans-serif;
     margin-top:var(--prevnext-height);
     padding-top:.5rem;
     font-size:.9rem;
@@ -267,6 +268,7 @@ pre.normal{
 }
 code{
     background:lightgrey;
+    padding:0 2px;
 }
 code.color{
     background:lightgrey;

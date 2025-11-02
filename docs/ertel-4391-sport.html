@@ -74,52 +74,66 @@ D6] => 450
 </header>
 
 <article>
+
 <nav class="toc">
     <ul>
         <li>
-            <a href="#ertel-4391-generalities">Ertel 4391 generalities</a>
+            <a href="#1-ertel-4391-generalities">Ertel 4391 generalities</a>
             <ul>
-                <li><a href="#1-1-an-incomplete-and-approximate-file">An incomplete and approximate file</a></li>
+                <li>
+                    <a href="#1-1-an-incomplete-and-approximate-file">An incomplete and approximate file</a>
+                </li>
             </ul>
         </li>
         <li>
-            <a href="#integration-to-g5">Integration to g5</a>
+            <a href="#2-integration-to-g5">Integration to g5</a>
             <ul>
-                <li><a href="#2-1-full-execution">Full execution</a></li>
-                <li><a href="#2-2-raw2tmp">raw2tmp</a></li>
-                <li><a href="#2-3-fix-gauquelin-a1-names">Fix Gauquelin A1 names</a></li>
-                <li><a href="#2-4-generate-skeptics-files">Generate skeptics' files</a></li>
+                <li>
+                    <a href="#2-1-full-execution">Full execution</a>
+                </li>
+                <li>
+                    <a href="#2-2-raw2tmp">raw2tmp</a>
+                </li>
+                <li>
+                    <a href="#2-3-tweak2tmp">tweak2tmp</a>
+                </li>
+                <li>
+                    <a href="#2-4-fix-gauquelin-a1-names">Fix Gauquelin A1 names</a>
+                </li>
+                <li>
+                    <a href="#2-5-generate-skeptics-files">Generate skeptics' files</a>
+                </li>
             </ul>
         </li>
         <li>
-            <a href="#looking-at-the-file">Looking at the file</a>
+            <a href="#3-looking-at-the-file">Looking at the file</a>
         </li>
         <li>
-            <a href="#links-to-other-datasets">Links to other datasets</a>
+            <a href="#4-links-to-other-datasets">Links to other datasets</a>
         </li>
         <li>
-            <a href="#ertel-s-subsamples">Ertel's subsamples</a>
+            <a href="#5-ertel-s-subsamples">Ertel's subsamples</a>
         </li>
         <li>
-            <a href="#data-sources">Data sources</a>
+            <a href="#6-data-sources">Data sources</a>
         </li>
         <li>
-            <a href="#birth-dates">Birth dates</a>
+            <a href="#7-birth-dates">Birth dates</a>
         </li>
         <li>
-            <a href="#eminence">Eminence</a>
+            <a href="#8-eminence">Eminence</a>
         </li>
         <li>
-            <a href="#sport-codes">Sport codes</a>
+            <a href="#9-sport-codes">Sport codes</a>
         </li>
         <li>
-            <a href="#mars-sectors">Mars sectors</a>
+            <a href="#10-mars-sectors">Mars sectors</a>
         </li>
     </ul>
 </nav>
 
 <!-- ********************************************************************************* -->
-<h2 id="ertel-4391-generalities">Ertel 4391 generalities</h2>
+<h2 id="1-ertel-4391-generalities">Ertel 4391 generalities</h2>
 
 From newalchemypress.com :
 <blockquote>
@@ -193,7 +207,7 @@ One very strange feature of this file : many records don't contain birth time. S
  -->
 
 <!-- ********************************************************************************* -->
-<h2 id="integration-to-g5">Integration to g5</h2>
+<h2 id="2-integration-to-g5">Integration to g5</h2>
 
 The input file used by g5 is <a href="https://github.com/tig12/g5/blob/main/data/raw/ertel/3a_sports-utf8.txt">data/raw/ertel/3a_sports-utf8.txt</a> ; it is an exact copy of file <code>3a_sports.txt</code> retrieved from newalchemypress.com, converted to UTF-8.
 
@@ -249,12 +263,12 @@ This step copies the contents of <code>3a_sports-utf8.txt</code> to <code>ertel-
 Other columns are copied as is.
 
 <!-- ************************************* -->
-<h3>tweak2tmp</h3>
+<h3 id="2-3-tweak2tmp">tweak2tmp</h3>
 Human corrections are stored in file <a href="https://github.com/tig12/g5/blob/main/data/db/init/newalch-tweak/ertel-4384-sport.yml">data/db/init/newalch-tweak/ertel-4384-sport.yml</a>.
 <br>They are used to modify tmp file.
 
 <!-- ************************************* -->
-<h3 id="2-3-fix-gauquelin-a1-names">Fix Gauquelin A1 names</h3>
+<h3 id="2-4-fix-gauquelin-a1-names">Fix Gauquelin A1 names</h3>
 This step is included in the restoration process of file A1, not part of Ertel 4391 process.
 <br>
 <br>Fixes 100% of the remaining unidentified names in A1.
@@ -274,7 +288,7 @@ Nb corrections : 117
 </pre>
 
 <!-- ************************************* -->
-<h3 id="2-4-generate-skeptics-files">Generate skeptics' files</h3>
+<h3 id="2-5-generate-skeptics-files">Generate skeptics' files</h3>
 
 <div class="warning block">
 This paragraph is obsolete, it describes a previous version of the code, not re-integrated yet.
@@ -342,7 +356,7 @@ Ertel file also contains 5 wrong associations to CSICOP, fixed in step <code>twe
 <br>It brings to 191 the number of CSICOP records present in Ertel's file.
 
 <!-- ********************************************************************************* -->
-<h2 id="looking-at-the-file">Looking at the file</h2>
+<h2 id="3-looking-at-the-file">Looking at the file</h2>
 <b>NOTE</b> : the following code was written to try to understand the content of the file.
 <br>I don't understand all the columns, so consider the informations about the file as suppositions, there are possibly mistakes.
 
@@ -357,7 +371,7 @@ php run-g5.php ertel sport look sport
 </pre>
 
 <!-- ********************************************************************************* -->
-<h2 id="links-to-other-datasets">Links to other datasets</h2>
+<h2 id="4-links-to-other-datasets">Links to other datasets</h2>
 
 An interest of this file is the presence of columns indicating the ids of the records in other data sets.
 <br>The information is contained in the following columns :
@@ -411,7 +425,7 @@ gives the different values of <code>QUEL</code> and corresponding number of reco
 </pre>
 
 <!-- ********************************************************************************* -->
-<h2 id="ertel-s-subsamples">Ertel's subsamples</h2>
+<h2 id="5-ertel-s-subsamples">Ertel's subsamples</h2>
 
 Combining the output of the two previous commands permits a reconstitution of Table 1 given in [Ertel 88], p 59.
 <br>This table and accompanying notes describe the samples used by Ertel to build his pool of 4391 records.
@@ -710,7 +724,7 @@ Check that numbers match :
 
 
 <!-- ********************************************************************************* -->
-<h2 id="data-sources">Data sources</h2>
+<h2 id="6-data-sources">Data sources</h2>
 18 distinct sources can be extracted from column <code>ZITATE</code> :
 <br>These lists associate the source code with the number of records found in this source.
 
@@ -766,7 +780,7 @@ This can be precisely matched with <b>[Ertel 88]</b> : in Table 2, he lists 18 s
 
 
 <!-- ********************************************************************************* -->
-<h2 id="birth-dates">Birth dates</h2>
+<h2 id="7-birth-dates">Birth dates</h2>
 <pre>php run-g5.php ertel sport look date</pre>
 <pre>
 BUG in date : 46 Albani Peppino : -  -
@@ -779,7 +793,7 @@ Among the 802 missing times coming from Gauquelin, 3 come from A1 and 799 from D
 
 
 <!-- ********************************************************************************* -->
-<h2 id="eminence">Eminence</h2>
+<h2 id="8-eminence">Eminence</h2>
 <pre>php run-g5.php ertel sport look eminence</pre>
 Columns <code>ZITRANG ZITSUM ZITATE ZITSUM_OD</code> deal with eminence.
 <ul>
@@ -820,7 +834,7 @@ Columns <code>ZITRANG ZITSUM ZITATE ZITSUM_OD</code> deal with eminence.
 </div><!-- end class="flex-wrap" -->
 
 <!-- ********************************************************************************* -->
-<h2 id="sport-codes">Sport codes</h2>
+<h2 id="9-sport-codes">Sport codes</h2>
 <pre>php run-g5.php ertel sport look sport</pre>
 Two columns are related to the sport of the persons : <code>SPORTART</code> and <code>INDGRUP</code>.
 <br><code>INDGRUP</code> contains 'I' or 'G', indicating if this is an individual or collective sport.
@@ -899,7 +913,7 @@ Several codes were corrected :
 
 
 <!-- ********************************************************************************* -->
-<h2 id="mars-sectors">Mars sectors</h2>
+<h2 id="10-mars-sectors">Mars sectors</h2>
 Concerned columns are 
 <ul>
     <li><code>MARS</code> contains the sectors when the circle is divided in 36.</li>
@@ -1084,10 +1098,14 @@ generates the following table.
     <li>
         <span class="big1">Details</span>
         <ul>
-            <li><a href="time.html">Time and timezone</a></li>
+            <li><a href="timezone.html">Timezone</a></li>
             <li><a href="code-details.html">Code details</a></li>
         </ul>
     </li>
+    
+    <!-- <li>
+        <span class="big1"><a href="2025-g5.html">g5 2025</a></span>
+    </li> -->
     
 </ul>
 </nav>

@@ -37,31 +37,39 @@ D6 file was published by Gauquelin in 1979. It contains data used for a replicat
 </header>
 
 <article>
+
 <nav class="toc">
     <ul>
         <li>
-            <a href="#g5-integration">G5 integration</a>
+            <a href="#1-g5-integration">G5 integration</a>
             <ul>
-                <li><a href="#1-1-preparatory-code">Preparatory code</a></li>
+                <li>
+                    <a href="#1-1-preparatory-code">Preparatory code</a>
+                </li>
             </ul>
         </li>
         <li>
-            <a href="#raw2tmp">raw2tmp</a>
+            <a href="#2-raw2tmp">raw2tmp</a>
         </li>
         <li>
-            <a href="#preparegeo">prepareGeo</a>
+            <a href="#3-preparegeo">prepareGeo</a>
         </li>
         <li>
-            <a href="#addgeo">addGeo</a>
+            <a href="#4-addgeo">addGeo</a>
         </li>
         <li>
-            <a href="#addtzo">addTzo</a>
+            <a href="#5-addtzo">addTzo</a>
+            <ul>
+                <li>
+                    <a href="#5-1-temporary-conclusion">Temporary conclusion</a>
+                </li>
+            </ul>
         </li>
     </ul>
 </nav>
 
 <!-- ********************************************************************************* -->
-<h2 id="g5-integration">G5 integration</h2>
+<h2 id="1-g5-integration">G5 integration</h2>
 To import raw file in database, the following commands must be issued, in this order :
 <pre>
 php run-g5.php gauq D6 raw2tmp
@@ -78,7 +86,7 @@ was used to build the array <code>D6::NAMES_CORRECTIONS</code>.
 <br>One case could not be fixed : <code>115 Crossalexander 1919-06-16 15:30</code>
 
 <!-- ********************************************************************************* -->
-<h2 id="raw2tmp">raw2tmp</h2>
+<h2 id="2-raw2tmp">raw2tmp</h2>
 This step extracts and reformats the informations of <code>902gdD6.html</code> to a csv file in directory <code>data/tmp/gauq/lerrcp</code>.
 
 <ul class="spaced margin-top">
@@ -99,7 +107,7 @@ This step extracts and reformats the informations of <code>902gdD6.html</code> t
 
 
 <!-- ********************************************************************************* -->
-<h2 id="preparegeo">prepareGeo</h2>
+<h2 id="3-preparegeo">prepareGeo</h2>
 
 This step calls geonames.org web service to build a file, <code>data/db/init/geonames/D6.csv</code>.
 <br>This file is versioned with the program, so it does not need to be executed at each generation of the database.
@@ -109,13 +117,13 @@ This step calls geonames.org web service to build a file, <code>data/db/init/geo
 
 
 <!-- ********************************************************************************* -->
-<h2 id="addgeo">addGeo</h2>
+<h2 id="4-addgeo">addGeo</h2>
 The initial purpose of <code>prepareGeo</code> was to find birth place, but tests showed that the longitude and latitude given by Cura web site (one arc minute) are not precise enough to spot the exact place.
 <br>This step finally copies only the fields <code>CY</code> (country) and <code>C2</code> (admin code level 2) from <code>data/db/init/geonames/D6.csv</code> to <code>data/tmp/gauq/lerrcp/D6.csv</code>.
 
 
 <!-- ********************************************************************************* -->
-<h2 id="addtzo">addTzo</h2>
+<h2 id="5-addtzo">addTzo</h2>
 The addition of fields fields <code>CY</code> and <code>C2</code> permits to compute timezone offset and universal time.
 <br>Fields <code>DATE-UT</code>, <code>TZO</code> and <code>NOTES-DATE</code> are computed in this step.
 
@@ -215,7 +223,7 @@ All cities but one differ !
     </tr>
 </table>
 
-<h3 id="3-2-temporary-conclusion">Temporary conclusion</h3>
+<h3 id="5-1-temporary-conclusion">Temporary conclusion</h3>
 From these examples, it seems that
 <ul class="simple margin-bottom">
     <li>Birth places given in Cura file correspond to wikipedia.</li>
@@ -340,10 +348,14 @@ But step <code>addGeo</code> has the interest to restore the country, giving the
     <li>
         <span class="big1">Details</span>
         <ul>
-            <li><a href="time.html">Time and timezone</a></li>
+            <li><a href="timezone.html">Timezone</a></li>
             <li><a href="code-details.html">Code details</a></li>
         </ul>
     </li>
+    
+    <!-- <li>
+        <span class="big1"><a href="2025-g5.html">g5 2025</a></span>
+    </li> -->
     
 </ul>
 </nav>

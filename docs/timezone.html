@@ -26,56 +26,91 @@
 <nav class="prevnext">
     <a class="topage" rel="" href="#topage">&#10148;</a>
     <a class="top" href="index.html">&uarr;</a>
+    <a class="prev" rel="prev" href="eminence-math.html">&larr;</a>
+    <a class="next" rel="next" href="code-details.html">&rarr;</a>
 </nav>
 
 <main>
 <header>
-<h1>Time and timezone</h1>
+<h1>Timezone</h1>
 <div class="intro">
 </div>
 </header>
 
 <article>
+
 <nav class="toc">
     <ul>
         <li>
-            <a href="#format-used-in-g5">Format used in g5</a>
-        </li>
-        <li>
-            <a href="#expressing-timezone-offset">Expressing timezone offset</a>
-        </li>
-        <li>
-            <a href="#timezone-offset-computation">Timezone offset computation</a>
+            <a href="#1-timezone-computation">Timezone computation</a>
             <ul>
-                <li><a href="#3-1-g5-integration">G5 integration</a></li>
-                <li><a href="#3-2-examples-of-contradictions-between-sources">Examples of contradictions between sources</a></li>
+                <li>
+                    <a href="#1-1-olson-database">Olson database</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#2-format-used-in-g5">Format used in g5</a>
+        </li>
+        <li>
+            <a href="#3-expressing-timezone-offset">Expressing timezone offset</a>
+        </li>
+        <li>
+            <a href="#4-timezone-offset-computation">Timezone offset computation</a>
+            <ul>
+                <li>
+                    <a href="#4-1-g5-integration">G5 integration</a>
+                </li>
+                <li>
+                    <a href="#4-2-examples-of-contradictions-between-sources">Examples of contradictions between sources</a>
+                </li>
             </ul>
         </li>
     </ul>
 </nav>
 
+<br>In g5 database, "legal time" means "the time that can be read on the birth certificate".
 
-
-
-
-In this page, "legal time" means "the time that can be read on the birth certificate".
-
-<br><br>Abbreviations used in this page:
+<br>Abbreviations used in this page:
 <ul>
     <li><b>LT</b> = legal time</li>
     <li><b>TZO</b> = timezone offset</li>
     <li><b>UT</b> = universal time</li>
 </ul>
 
-<br>Books about timezone computations:
-<ul>
-    <li><b>FG</b> = "<b>Problèmes de l'heure résolus pour le monde entier</b>" (Françoise Gauquelin, Guy Trédaniel éditeur), 1991</li>
-    <li><b>THM</b> "<b>Traité de l'heure dans le monde</b>", (Gabriel, Guy Trédaniel éditeur), 5th edition, 1990</li>
-</ul>
+<!-- ********************************************************************************* -->
+<h2 id="1-timezone-computation">Timezone computation</h2>
+The purpose is to identify persons born during wars for example, cases needing humans to find the correct timezone offet. 
+<br>Current problem is to build rules from 3 sources:  
+
+<table>
+    <tr>
+        <td><b>OL</b></td>
+        <td><b>Olson database</b></td>
+    </tr>
+    <tr>
+        <td><b>FG</b></td>
+        <td>"<b>Problèmes de l'heure résolus pour le monde entier</b>" (Françoise Gauquelin, Guy Trédaniel éditeur), 1991</td>
+    </tr>
+    <tr>
+        <td><b>THM</b></td>
+        <td>"<b>Traité de l'heure dans le monde</b>", (Gabriel, Guy Trédaniel éditeur), 5th edition, 1990</td>
+    </tr>
+</table>
+There are contradiction between FG and THM.
+
+<!-- ************************************* -->
+<h3 id="1-1-olson-database">Olson database</h3>
+<a href="https://www.iana.org/time-zones">IANA Time Zone Database</a> aka Olson database is the reference timezone data used by most programming languages.
+<br>For each country, it provides timezones = list of couples (date, timezone offset).
+<br>At a given date, there is one offset for the whole country, this doesn't handle war periods when one country is split in different timezone regimes.
+
+<br>In g5 code, <b>limit dates given by Olson</b> are used as departure values for the code, then conflicts between FG and THM are attached to a Olson date.
+
 
 
 <!-- ********************************************************************************* -->
-<h2 id="format-used-in-g5">Format used in g5</h2>
+<h2 id="2-format-used-in-g5">Format used in g5</h2>
 
 In g5 database, dates are stored using 2 distinct fields :
 <ul class="spaced margin-top">
@@ -109,7 +144,7 @@ ISO 8601 also permits to express both time and timezone offset in a single strin
 
 
 <!-- ********************************************************************************* -->
-<h2 id="expressing-timezone-offset">Expressing timezone offset</h2>
+<h2 id="3-expressing-timezone-offset">Expressing timezone offset</h2>
 Using the vocabulary of CSV files generated from the database,
 <div class="bold big2 margin05">DATE-UT + TZO = DATE</div>
 
@@ -159,7 +194,7 @@ Example : the first record of file D10 : Aaron Harold, born 1921-06-21 07:00
 <br>This is not a blocking problem as it's finally just a matter of convention.
 
 <!-- ********************************************************************************* -->
-<h2 id="timezone-offset-computation">Timezone offset computation</h2>
+<h2 id="4-timezone-offset-computation">Timezone offset computation</h2>
 
 This is a delicate and important problem.
 <br>Important because TZO is necessary to compute a chart, and delicate because information sources are sometimes contradictory.
@@ -179,7 +214,7 @@ This is a delicate and important problem.
 
 
 <!-- ************************************* -->
-<h3 id="3-1-g5-integration">G5 integration</h3>
+<h3 id="4-1-g5-integration">G5 integration</h3>
 
 Time zone computation is a weak point of current implementation :
 <ul>
@@ -195,7 +230,7 @@ As a consequence, offset computation in g5 is partial and should be a priori dis
 <br>With (see above) : <code>date-ut + tzo = date</code>
 
 <!-- ************************************* -->
-<h3 id="3-2-examples-of-contradictions-between-sources">Examples of contradictions between sources</h3>
+<h3 id="4-2-examples-of-contradictions-between-sources">Examples of contradictions between sources</h3>
 <ul>
     <li>
         For Italy, both books say that offset is 1h for the whole country since 1893-11-01.
@@ -324,10 +359,14 @@ For such differences, the choice was made to use FG book.
     <li>
         <span class="big1">Details</span>
         <ul>
-            <li><a href="time.html">Time and timezone</a></li>
+            <li><a href="timezone.html">Timezone</a></li>
             <li><a href="code-details.html">Code details</a></li>
         </ul>
     </li>
+    
+    <!-- <li>
+        <span class="big1"><a href="2025-g5.html">g5 2025</a></span>
+    </li> -->
     
 </ul>
 </nav>

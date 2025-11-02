@@ -41,22 +41,34 @@ D10 was published in 1982 by Gauquelin. It contains birth dates of successful U.
 </header>
 
 <article>
+
 <nav class="toc">
     <ul>
         <li>
-            <a href="#small-errors">Small errors</a>
+            <a href="#1-about-d10">About D10</a>
+            <ul>
+                <li>
+                    <a href="#1-1-number-of-records">Number of records</a>
+                </li>
+                <li>
+                    <a href="#1-2-profession-codes">Profession codes</a>
+                </li>
+            </ul>
         </li>
         <li>
-            <a href="#todo">TODO</a>
+            <a href="#2-g5-integration">G5 integration</a>
+        </li>
+        <li>
+            <a href="#3-small-errors">Small errors</a>
         </li>
     </ul>
 </nav>
 
 <!-- ********************************************************************************* -->
-<h2>About D10</h2>
+<h2 id="1-about-d10">About D10</h2>
 
 <!-- ************************************* -->
-<h3>Number of records</h3>
+<h3 id="1-1-number-of-records">Number of records</h3>
 The number of records of this group could not be determined :
 
 <ul class="spaced">
@@ -70,11 +82,11 @@ The number of records of this group could not be determined :
 </ul>
 
 <!-- ************************************* -->
-<h3>Profession codes</h3>
+<h3 id="1-2-profession-codes">Profession codes</h3>
 For sportspersons, precise sport codes are not specified. Some codes could be computed thanks to Ertel's file.
 
 <!-- ********************************************************************************* -->
-<h2>G5 integration</h2>
+<h2 id="2-g5-integration">G5 integration</h2>
 Importing raw file in database is done with following commands:
 
 <pre>
@@ -85,7 +97,7 @@ php run-g5.php gauq D10 tmp2db
 Step <code>raw2tmp</code> contains only minor fixes.
 
 <!-- ********************************************************************************* -->
-<h2 id="small-errors">Small errors</h2>
+<h2 id="3-small-errors">Small errors</h2>
 There is one record without birth time:
 <pre>1098!	Rose Peter		SP	14	4	1941	-----	5h	39N6	84W31	Cincinnati, OH</pre>
 
@@ -229,10 +241,14 @@ These lines were fixed in the code of <code>raw2tmp</code> and included in the r
     <li>
         <span class="big1">Details</span>
         <ul>
-            <li><a href="time.html">Time and timezone</a></li>
+            <li><a href="timezone.html">Timezone</a></li>
             <li><a href="code-details.html">Code details</a></li>
         </ul>
     </li>
+    
+    <!-- <li>
+        <span class="big1"><a href="2025-g5.html">g5 2025</a></span>
+    </li> -->
     
 </ul>
 </nav>

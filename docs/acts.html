@@ -51,8 +51,49 @@ They are used to solve questions raised by g5 development, but not integrated ye
 
 <article>
 
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#1-link-person-act">Link person - act</a>
+            <ul>
+                <li>
+                    <a href="#1-1-directory-layout">Directory layout</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#2-detailed-transcription">Detailed transcription</a>
+        </li>
+        <li>
+            <a href="#3-act">Act</a>
+            <ul>
+                <li>
+                    <a href="#3-1-image-download">Image download</a>
+                </li>
+                <li>
+                    <a href="#3-2-syntax">Syntax</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#4-gauquelin5-integration">Gauquelin5 integration</a>
+        </li>
+        <li>
+            <a href="#5-french-archives">French archives</a>
+            <ul>
+                <li>
+                    <a href="#5-1-filae-com">filae.com</a>
+                </li>
+                <li>
+                    <a href="#5-2-local-associations">Local associations</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
 <!-- ********************************************************************************* -->
-<h2>Link person - act</h2>
+<h2 id="1-link-person-act">Link person - act</h2>
 
 Acts are related to persons through the field <code>acts</code> of a person.
 <br>Field <code>acts</code> contains one or more <b>paths</b>.
@@ -70,7 +111,7 @@ paths:
 </pre>
 
 <!-- ************************************* -->
-<h3>Directory layout</h3>
+<h3 id="1-1-directory-layout">Directory layout</h3>
 Acts are organized chronologically :
 <pre>
 acts
@@ -87,7 +128,7 @@ acts
 
 
 <!-- ********************************************************************************* -->
-<h2>Detailed transcription</h2>
+<h2 id="2-detailed-transcription">Detailed transcription</h2>
 
 A syntax used for a genealogy software permits a complete transcription of a BC.
 <br>This is shown as an example, but <b>this syntax is not used by g5</b>.
@@ -198,7 +239,7 @@ personnes:
 
 
 <!-- ********************************************************************************* -->
-<h2 id="act">Act</h2>
+<h2 id="3-act">Act</h2>
 
 An act consists of 2 documents :
 <ul class="spaced padding-top">
@@ -230,25 +271,24 @@ An act consists of 2 documents :
 
 
 <!-- ************************************* -->
-<h3 id="2-2-image-download">Image download</h3>
+<h3 id="3-1-image-download">Image download</h3>
 Some départements provide a link to download current page, some don't. When they don't, image retrieval is done with screen capture. This can be particularily long because sometimes several captures may be necessary to get the whole certificate with enough details. In this case, the image is reconstituted assembling the different parts.
 
-
-<!-- ********************************************************************************* -->
-<h2 id="act">Act</h2>
+<!-- ************************************* -->
+<h3 id="3-2-syntax">Syntax</h3>
 The syntax used to transcribe the acts comes from an unpublished genealogy software.
 <br>YAML files are written using french vocabulary, and are translated to a reference vocabulary (close to english) understood by the code parsing the yaml files. This permits to use other languages for the transcription.
 <br>This syntax is adapted to act transcription and contains informations currently not used for g5 development.
 
 
 <!-- ********************************************************************************* -->
-<h2 id="gauquelin5-integration">Gauquelin5 integration</h2>
+<h2 id="4-gauquelin5-integration">Gauquelin5 integration</h2>
 Not done yet ; code transfering information from <code>acts/</code> to g5 database needs to be written.
 <br>Currently, when an information of the database needs to be corrected (because it contradicts an act), this is done using the <a href="tweak2tmp.html">tweak2tmp</a> mechanism.
 
 
 <!-- ********************************************************************************* -->
-<h2 id="french-archives">French archives</h2>
+<h2 id="5-french-archives">French archives</h2>
 
 In France, all acts (birth, death, mariage) since 1792 include the time of the events.
 <br>Scans of the original documents until ~1920 can be browsed on web sites of the <i>Archives départementales</i>.
@@ -466,10 +506,14 @@ http://perigen.fr/actes/index.php
     <li>
         <span class="big1">Details</span>
         <ul>
-            <li><a href="time.html">Time and timezone</a></li>
+            <li><a href="timezone.html">Timezone</a></li>
             <li><a href="code-details.html">Code details</a></li>
         </ul>
     </li>
+    
+    <!-- <li>
+        <span class="big1"><a href="2025-g5.html">g5 2025</a></span>
+    </li> -->
     
 </ul>
 </nav>

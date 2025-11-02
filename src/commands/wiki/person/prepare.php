@@ -1,7 +1,7 @@
 <?php
 /********************************************************************************
-    - Creates a subdirectory of data/wiki/persons where a file person.yml should be stored.
-    - Creates an empty person.yml file
+    - Creates a subdirectory of data/wiki/persons where a file BC.yml should be stored.
+    - Creates an empty BC.yml file
 
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2023-05-07 10:45:29+02:00, Thierry Graff : Creation
@@ -21,7 +21,8 @@ class prepare implements Command {
     public static function execute($params=[]): string{
         
         if(count($params) != 1){
-            return "INVALID USAGE This commands needs one parameter\n";
+            return "INVALID USAGE This commands needs one parameter: the slug of the person to prepare\n"
+                . "    Ex: php run-g5.php wiki person prepare grothendieck-alexandre-1928-03-28\n";
         }
         
         $slug = $params[0];

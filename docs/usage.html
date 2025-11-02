@@ -39,6 +39,14 @@
 
 <article>
 
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#1-complete-generation-of-the-database">Complete generation of the database</a>
+        </li>
+    </ul>
+</nav>
+
 To check that the program works, type :
 <pre>php run-g5.php</pre>
 A message saying that you must provide supplementary arguments is displayed.
@@ -82,7 +90,7 @@ Example 3
 This does a real transformation (converts A3 raw html file to a csv file in data/tmp/gauq/lerrcp).
 
 <!-- ********************************************************************************* -->
-<h2 id="complete-generation-of-the-database">Complete generation of the database</h2>
+<h2 id="1-complete-generation-of-the-database">Complete generation of the database</h2>
 As described in <a href="organisation.html">the page about g5 organisation</a>, the program first converts raw data to temporary data, and then imports temporary files in a database.
 <br><b>The different steps must be executed in a precise order</b>, because some steps need the result of previous executions to work.
 <br>
@@ -224,10 +232,14 @@ If 'db' or 'all' are choosen, it also drops existing tables and creates empty on
     <li>
         <span class="big1">Details</span>
         <ul>
-            <li><a href="time.html">Time and timezone</a></li>
+            <li><a href="timezone.html">Timezone</a></li>
             <li><a href="code-details.html">Code details</a></li>
         </ul>
     </li>
+    
+    <!-- <li>
+        <span class="big1"><a href="2025-g5.html">g5 2025</a></span>
+    </li> -->
     
 </ul>
 </nav>

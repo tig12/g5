@@ -40,17 +40,24 @@ This page describes the format of generated csv files, <a href="https://opengauq
 </header>
 
 <article>
+
 <nav class="toc">
     <ul>
         <li>
-            <a href="#common-fields">Common fields</a>
+            <a href="#1-common-fields">Common fields</a>
         </li>
         <li>
-            <a href="#occupation-codes">Occupation codes</a>
+            <a href="#2-occupation-codes">Occupation codes</a>
             <ul>
-                <li><a href="#2-1-general-codes">General codes</a></li>
-                <li><a href="#2-2-artists">Artists</a></li>
-                <li><a href="#2-3-sports">Sports</a></li>
+                <li>
+                    <a href="#2-1-general-codes">General codes</a>
+                </li>
+                <li>
+                    <a href="#2-2-artists">Artists</a>
+                </li>
+                <li>
+                    <a href="#2-3-sports">Sports</a>
+                </li>
             </ul>
         </li>
     </ul>
@@ -62,7 +69,7 @@ In the csv files, the first line contains field names ; other lines contain data
 <br>Character encoding is UTF-8.
 
 <!-- ********************************************************************************* -->
-<h2 id="common-fields">Common fields</h2>
+<h2 id="1-common-fields">Common fields</h2>
 
 Some csv files contain fields that are not listed here
 <br>In this case, these fields are documented in the README files accompanying the generated files.
@@ -172,7 +179,7 @@ Some csv files contain fields that are not listed here
             <br>legal time = UTC + offset
             <br>or
             <br>UTC = legal time - offset
-            <br>More details on page <a href="time.html">Time and timezone</a>.
+            <br>More details on page <a href="timezone.html">Timezone</a>.
         </td>
     </tr>
     
@@ -181,7 +188,7 @@ Some csv files contain fields that are not listed here
         <td>
             Date and time converted to universal time.
             <br>This field is in theory useless, as it can be computed from <code>DATE</code> and <code>TZ</code>.
-            <br>Its presence is necessary because Cura files are sometimes expressed in UT. This problem is detailed in page <a href="time.html">Time and timezone</a>.
+            <br>Its presence is necessary because Cura files are sometimes expressed in UT. This problem is detailed in page <a href="timezone.html">Timezone</a>.
         </td>
     </tr>
     
@@ -277,7 +284,7 @@ Some csv files contain fields that are not listed here
 </table>
 
 <!-- ********************************************************************************* -->
-<h2 id="occupation-codes">Occupation codes</h2>
+<h2 id="2-occupation-codes">Occupation codes</h2>
 I didn't find a convenient standard for occupation codes, so I built arbitrary codes.
 <br>Here is a complete list of occupations codes, used in all generated files.
 <br>
@@ -469,10 +476,14 @@ Note : code <code>FEM</code> was introduced to restore Gauquelin 1955 original l
     <li>
         <span class="big1">Details</span>
         <ul>
-            <li><a href="time.html">Time and timezone</a></li>
+            <li><a href="timezone.html">Timezone</a></li>
             <li><a href="code-details.html">Code details</a></li>
         </ul>
     </li>
+    
+    <!-- <li>
+        <span class="big1"><a href="2025-g5.html">g5 2025</a></span>
+    </li> -->
     
 </ul>
 </nav>

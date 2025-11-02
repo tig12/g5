@@ -61,36 +61,56 @@ BTW the Sceptics Kurtz et al (JSE 1997 2,1 p.20) reckon they asked MG about wher
 </header>
 
 <article>
+
 <nav class="toc">
     <ul>
         <li>
-            <a href="#g5-integration">G5 integration</a>
+            <a href="#1-g5-integration">G5 integration</a>
         </li>
         <li>
-            <a href="#raw2tmp">raw2tmp</a>
+            <a href="#2-raw2tmp">raw2tmp</a>
             <ul>
-                <li><a href="#2-1-profession-codes">Profession codes</a></li>
-                <li><a href="#2-2-small-errors">Small errors</a></li>
+                <li>
+                    <a href="#2-1-profession-codes">Profession codes</a>
+                </li>
+                <li>
+                    <a href="#2-2-small-errors">Small errors</a>
+                </li>
             </ul>
         </li>
         <li>
-            <a href="#name-restoration">Name restoration</a>
+            <a href="#3-name-restoration">Name restoration</a>
             <ul>
-                <li><a href="#3-1-merge-lists">Merge lists</a></li>
-                <li><a href="#3-2-benefit-from-other-files">Benefit from other files</a></li>
+                <li>
+                    <a href="#3-1-merge-lists">Merge lists</a>
+                </li>
+                <li>
+                    <a href="#3-2-benefit-from-other-files">Benefit from other files</a>
+                </li>
             </ul>
         </li>
         <li>
-            <a href="#tweak2tmp">tweak2tmp</a>
+            <a href="#4-better-a1-names-and-place-with-gauquelin-1955"><a name="better-a1-names-and-place-with-gauquelin-1955">Better A1 names and place with Gauquelin 1955</a></a>
+            <ul>
+                <li>
+                    <a href="#4-1-names"><a name="6-1-names">Names</a></a>
+                </li>
+                <li>
+                    <a href="#4-2-places"><a name="6-2-places">Places</a></a>
+                </li>
+            </ul>
         </li>
         <li>
-            <a href="#addgeo">addGeo</a>
+            <a href="#5-tweak2tmp">tweak2tmp</a>
         </li>
         <li>
-            <a href="#the-problem-of-time">The problem of time</a>
+            <a href="#6-addgeo">addGeo</a>
         </li>
         <li>
-            <a href="#restoring-legal-time">Restoring legal time</a>
+            <a href="#7-the-problem-of-time">The problem of time</a>
+        </li>
+        <li>
+            <a href="#8-restoring-legal-time">Restoring legal time</a>
         </li>
     </ul>
 </nav>
@@ -98,7 +118,7 @@ BTW the Sceptics Kurtz et al (JSE 1997 2,1 p.20) reckon they asked MG about wher
 
 
 <!-- ********************************************************************************* -->
-<h2 id="g5-integration">G5 integration</h2>
+<h2 id="1-g5-integration">G5 integration</h2>
 
 Raw files are imported in database with the following commands :
 <pre>
@@ -117,7 +137,7 @@ Input data are a copy of Cura html pages, located in <code>data/raw/gauq/lerrcp/
 
 
 <!-- ********************************************************************************* -->
-<h2 id="raw2tmp">raw2tmp</h2>
+<h2 id="2-raw2tmp">raw2tmp</h2>
 The main task of this command is to merge the two lists (list with names and list with precise birth data) ; see next paragraph.
 
 <br><br>This command needs a parameter to indicate what it should print :
@@ -174,7 +194,7 @@ This is not present in pages including names (for example present in <a href="ht
 
 
 <!-- ********************************************************************************* -->
-<h2 id="name-restoration">Name restoration</h2>
+<h2 id="3-name-restoration">Name restoration</h2>
 This problem is handled by step <code>raw2tmp</code>
 
 <br><br>Each page of serie A contain 3 lists :
@@ -292,7 +312,7 @@ It permits to restore 100 % of names not identified by step <code>raw2csv</code>
 
 <!-- ********************************************************************************* -->
 <!-- 
-<h2><a name="better-a1-names-and-place-with-gauquelin-1955">Better A1 names and place with Gauquelin 1955</a></h2>
+<h2 id="4-better-a1-names-and-place-with-gauquelin-1955">Better A1 names and place with Gauquelin 1955</h2>
 
 The restoration of 1955 group "570 sportifs" is used to better family and given names as well as place names in file A1.
 <br>This step must be performed after <code>newalch ertel4391 fixA1</code>, as name spelling in Gauquelin 1955 book is better, and after <code>legalTime</code>.
@@ -302,7 +322,7 @@ The restoration of 1955 group "570 sportifs" is used to better family and given 
 
 <!-- ************************************* -->
 <!-- 
-<h3><a name="6-1-names">Names</a></h3>
+<h3 id="4-1-names">Names</h3>
 
 The command
 <pre>php run-g5.php g55 570SPO edited2cura name list</pre>
@@ -317,7 +337,7 @@ is used to copy the contents of columns <code>GIVEN_55</code> and <code>FAMILY_5
 
 <!-- ************************************* -->
 <!-- 
-<h3><a name="6-2-places">Places</a></h3>
+<h3 id="4-2-places">Places</h3>
 Gauquelin 1955 place names are generally better than Cura places.
 
 <br>This works like names :
@@ -326,11 +346,11 @@ Gauquelin 1955 place names are generally better than Cura places.
 -->
 
 <!-- ********************************************************************************* -->
-<h2 id="tweak2tmp">tweak2tmp</h2>
+<h2 id="5-tweak2tmp">tweak2tmp</h2>
 Auxiliary YAML files located in <code>data/db/init/lerrcp-tweak</code> permit to store corrections used to solve errors detected in steps <code>addGeo</code> and <code>legalTime</code>.
 
 <!-- ********************************************************************************* -->
-<h2 id="addgeo">addGeo</h2>
+<h2 id="6-addgeo">addGeo</h2>
 
 This step brings corrections to place names and compute geonames id for non-ambiguous cases.
 
@@ -363,7 +383,7 @@ It modifies records of <code>data/tmp/gauq/lerrcp/</code> <b>only if there is a 
 
 
 <!-- ********************************************************************************* -->
-<h2 id="the-problem-of-time">The problem of time</h2>
+<h2 id="7-the-problem-of-time">The problem of time</h2>
 
 Gauquelin data available on Cura web pages are sometimes given in a format that generates a problem.
 <br>This problem occurs in all files of series A, B, F, NH, and in files D9a, D9b, D9c. Hopefully, D6, D10, E1, E3 are not concerned.
@@ -399,13 +419,13 @@ It's a problem, because if one wants to check the data, it's impossible to check
 
 
 <!-- ********************************************************************************* -->
-<h2 id="restoring-legal-time">Restoring legal time</h2>
+<h2 id="8-restoring-legal-time">Restoring legal time</h2>
 
 The command :
 <pre>php run-g5.php cura A legalTime</pre>
 adds two columns, <code>DATE-C</code> (= date corrected) and <code>TZO</code> (timezone offset) to the tmp files of <code>data/tmp/gauq/lerrcp</code>.
 
-<br><br>Current code performs restoration only for persons born in France, excluding all cases that can't be fixed by program without ambiguity (ambiguity comes from world wars 1 and 2, for parts of France that were invaded by Germany ; precise timezone offset depend on local conditions ; see <a href="time.html">page about timezone</a>).
+<br><br>Current code performs restoration only for persons born in France, excluding all cases that can't be fixed by program without ambiguity (ambiguity comes from world wars 1 and 2, for parts of France that were invaded by Germany ; precise timezone offset depend on local conditions ; see <a href="timezone.html">page about timezone</a>).
 
 <br><br>Example for record A1-1 Alard Pierre
 <br>Information extracted from Cura file gives
@@ -553,10 +573,14 @@ A6 : restored 776 / 2026 dates (38.3 %)
     <li>
         <span class="big1">Details</span>
         <ul>
-            <li><a href="time.html">Time and timezone</a></li>
+            <li><a href="timezone.html">Timezone</a></li>
             <li><a href="code-details.html">Code details</a></li>
         </ul>
     </li>
+    
+    <!-- <li>
+        <span class="big1"><a href="2025-g5.html">g5 2025</a></span>
+    </li> -->
     
 </ul>
 </nav>

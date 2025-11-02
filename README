@@ -1,22 +1,27 @@
 
-Command line CLI tool used to build the database exposed on https://opengauquelin.org/
-
 See https://tig12.github.io/g5
 or clone the repository on your local machine and browse docs/index.html
 
-This database is the result of A RECONSTITUTION OF THE DATA USED TO PERFORM STATISTICAL TEST ON ASTROLOGY,
-in practice published between 1955 and 1996.
+Command line CLI tool used to build the database of
+https://opengauquelin.org/
 
-It contains 25 000 birth dates of famous persons grouped by profession, with one particularity: BIRTH DATES CONTAIN THE TIME OF BIRTH.
-
-A first part of the job has been done, but the database is still draft:
-- Birth times need to be checked against civil registries.
-- Timezone computation: implement for foreign countries (not FR) + fix by human dubious cases (wars).
+This database is the result of a reconstitution of the data
+used to perform the statistical tests on astrology published between 1955 and 1996.
 
 The purpose of this database is to reproduct and extend the historical tests with more complete and reliable data,
 to ask once again the questions:
 - Can we observe statistical anomalies related to astrology ? 
 - Did some protagonists of the historical tests cheat ?
+
+It contains 25 000 birth dates of famous persons grouped by profession, with one particularity:
+BIRTH DATES CONTAIN THE TIME OF BIRTH.
+
+
+
+
+A first part of the job has been done, but the database is still draft:
+- Birth times need to be checked against civil registries.
+- Timezone computation: implement for foreign countries (not FR) + fix by human dubious cases (wars).
 
 Next developments:
 - implement eminence computation for the different professional groups

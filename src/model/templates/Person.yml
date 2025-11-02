@@ -6,6 +6,7 @@
 # int - id managed by dbms
 id: 
 
+# string like 
 slug:
 
 # key / value pairs
@@ -19,28 +20,34 @@ ids-in-sources: {}
 partial-ids: {}
 
 name:
-  family:
-  given:
-  official:         # As written in the birth certificate
-    family:
-    given:
-  spouse: []        # For married women
-  nobl:             # nobiliary-particle: de d' di del von...
-  fame:             # stage, scene - when the person is known using a name different from family / given 
-    full:           # ex Mistinguett or Stromae
-    family: 
-    given: 
-  alter: []         # alternative names, like nicknames, or author names
+  # The name commonly used to designate a person is represented by
+  #   name.full, name.given, name.family and name.nobl
+  # These can be different from the official name.
+  # It can be either the "real" name of the person, or a pseudonym.
+  # Can be full (ex: "Mistinguett" or "Stromae") or composed, like "Edith" (name.given) "Piaf" (name.family).
+  full:             # string  Ex Mistinguett or Stromae
+  family:           # string  Does not contain nobiliary-particle
+  given:            # string  In general one currently used
+  nobl:             # string  nobiliary-particle: de d' di del von...
+  # official name = exact spelling of the name, as written in the birth certificate or official document
+  official:
+    family:         # string  Contains nobiliary-particle
+    given:          # string  Usually several names given at birth
+    full:           # string  Used when reading the act is too difficult to separate name.official.family and given  
+  # spouse => for married women
+  spouse: []        # array of maps { full family given }
+  alter: []         # []string  Alternative names, like nicknames, or author names
 
-sex:
+sex:                # string?   In general M or F for ancient data
 
+# Dates are expressed in iso 8601 YYYY-MM-DD HH:MM:SSsHH:MM
 birth:
-  date:     # date of the birth certificate
+  date:             # date of the birth certificate
   tzo:      # timezone offset
   date-ut:  # date converted to Universal Time
-  note:     # supplementary info (eg precise address of the place)
-  lmt:      # boolean - true if date is expressed in LMT
-  notime:   # boolean - true if birth time does not exist
+  note:     # string    supplementary info (eg precise address of the place)
+  lmt:      # boolean?  true if date is expressed in LMT
+  notime:   # boolean?  true if birth time does not exist
   place:
     name:
     c1:

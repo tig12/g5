@@ -41,25 +41,44 @@ In order to permit a collective check, correction and expansion of the database,
 
 <article>
 
+<nav class="toc">
+    <ul>
+        <li>
+            <a href="#1-database-organization">Database organization</a>
+            <ul>
+                <li>
+                    <a href="#1-1-act">Act</a>
+                </li>
+                <li>
+                    <a href="#1-2-issue">Issue</a>
+                </li>
+                <li>
+                    <a href="#1-3-wikiproject">Wikiproject</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
 <!-- ********************************************************************************* -->
-<h2>Database organization</h2>
+<h2 id="1-database-organization">Database organization</h2>
 
 <img src="img/db5-model-wiki.svg" class="margin padding border" alt="G5 database schema including wiki entities">
 
 <!-- ************************************* -->
-<h3>Act</h3>
+<h3 id="1-1-act">Act</h3>
 Act is the main entity of the wiki system. An act represents an official document, like a birth certificate.
 <br>An act is necessarily related to 1 person (current model doesn't handle mariage certificates).
 <br>A person can be related to 0 (data not verified), 1, or several acts (like birth and death certificates).
 <br>An act is considered as a information source.
 
 <!-- ************************************* -->
-<h3>Issue</h3>
+<h3 id="1-2-issue">Issue</h3>
 An issue represents a problem identified on a person's data.
 <br>An issue is related to 1 person.
 
 <!-- ************************************* -->
-<h3>Wikiproject</h3>
+<h3 id="1-3-wikiproject">Wikiproject</h3>
 A wikiproject represents a specific aspect of the database to better.
 <br>A wikiproject can be related to issues that need to be fixed within this project, and to acts that have been related to persons.
 
@@ -178,10 +197,14 @@ A wikiproject represents a specific aspect of the database to better.
     <li>
         <span class="big1">Details</span>
         <ul>
-            <li><a href="time.html">Time and timezone</a></li>
+            <li><a href="timezone.html">Timezone</a></li>
             <li><a href="code-details.html">Code details</a></li>
         </ul>
     </li>
+    
+    <!-- <li>
+        <span class="big1"><a href="2025-g5.html">g5 2025</a></span>
+    </li> -->
     
 </ul>
 </nav>

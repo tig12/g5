@@ -2,7 +2,7 @@
 /********************************************************************************
     Utilities to use geonames.org.
     
-    @license    GPL - conforms to file LICENCE located in root directory of current repository.
+    @license    GPL - conforms to file LICENCE located in the root directory of current repository.
     @copyright  Thierry Graff
     @history    2019-06-11 11:36:20+02:00, Thierry Graff : Creation from existing code.
 ********************************************************************************/
