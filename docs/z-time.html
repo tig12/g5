@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>David Voas data | Gauquelin5</title>
+    <title>Time | Gauquelin5</title>
     <link rel="icon" type="image/png" href="img/g5.png">
     <link href="static/g5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="">
@@ -10,11 +10,10 @@
     <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
     <meta name="dcterms.rights" content="Creative commons by-sa 4.0">
     <meta name="dcterms.rightsHolder" content="Thierry Graff">
-    <meta name="dcterms.dateCopyrighted" content="2023">
+    <meta name="dcterms.dateCopyrighted" content="2019">
     <!-- 
     tigsite:
-        history: Thierry Graff 2023-11-04 03:05:27+02:00, Creation
-        sidebar-right: anon-sidebar-right.html
+        history: 2025-11-05 23:30:17+01:00, Thierry Graff, Creation
     -->
 </head>
 
@@ -27,123 +26,76 @@
 <nav class="prevnext">
     <a class="topage" rel="" href="#topage">&#10148;</a>
     <a class="top" href="index.html">&uarr;</a>
-    <a class="prev" rel="prev" href="anon-castille.html">&larr;</a>
-    <a class="next" rel="next" href="eminence.html">&rarr;</a>
+    <a class="prev" rel="prev" href="eminence-math.html">&larr;</a>
+    <a class="next" rel="next" href="code-details.html">&rarr;</a>
 </nav>
-
-<!-- ************************************* -->
-<aside class="right-block">
-<nav>
-<ul class="big1 spaced">
-    <li class="bold">
-        <a href="anon-data.html">Anonymous data</a>
-    </li>
-    <li class="padding-left bold">
-        <a href="anon-gauq.html">Gauquelin</a>
-    </li>
-    <li class="padding-left bold">
-        <a href="anon-sachs.html">Sachs</a>
-    </li>
-    <li class="padding-left bold">
-        <a href="anon-castille.html">Castille</a>
-    </li>
-    <li class="padding-left bold">
-        <a href="anon-voas.html">Voas</a>
-    </li>
-</ul>
-</nav>
-</aside>
 
 <main>
 <header>
-<h1>David Voas data</h1>
+<h1>Time</h1>
 <div class="intro">
-This page deals with a study of 2007 conducted by David Voas using data from the UK Office for National Statistics (ONS) for the 2001 census in England and Wales.
-<br>He studied sun - sun relationships between wife and husband, for around 10 millions of couples.
 </div>
 </header>
 
 <article>
 
-<!-- ********************************************************************************* -->
-<h2>References</h2>
-<ul>
-    <li>
-        <a href="https://astrologiaexperimental.files.wordpress.com/2014/05/voasastrology.pdf">voasastrology.pdf: Ten million marriages: A test of astrological ‘love signs’</a>, a presentation of this study by David Voas, 2007.
-    </li>
-    <li>
-    <a href="https://www.manchester.ac.uk/discover/news/love-not-in-the-stars">Love not in the stars</a>, a presentation of the study on Manchester University web site.
-    </li>
-</ul>
+In g5 database, "legal time" means "the time that can be read on the birth certificate".
 
-<!-- ********************************************************************************* -->
-<h2>Data</h2>
-
-<div class="margin">
-Information about data can be found in <i>voasastrology.pdf</i>
-</div>
-<img class="margin border padding05" src="img/anon-data/voas-table-C0694.png" alt="David Voas - Table C0694">
-
-<div class="margin">
-Other tables are shown:
-</div>
-
-<table class="wikitable">
+<br>Abbreviations used in this page:
+<table>
     <tr>
-        <th>Voas table</th>
-        <th>Census table</th>
-        <th>Description</th>
-        <th>Total claimed</th>
+        <td><b>LT</b></td>
+        <td> = legal time</td>
     </tr>
     <tr>
-        <td>1</td>
-        <td>C0694</td>
-        <td>
-            Married couples in England and Wales, 2001
-            <br>Sun signs of wives by sun signs of husbands
-        </td>
-        <td>10,317,649</td>
+        <td><b>TZO</b></td>
+        <td> = timezone offset</td>
     </tr>
     <tr>
-        <td>3</td>
-        <td>C0792</td>
-        <td>
-            Married couples in England and Wales, 2001
-            <br>Month of birth of wives by month of birth of husbands
-        </td>
-        <td>10,317,673</td>
-    </tr>
-    <tr>
-        <td>6</td>
-        <td>C0792</td>
-        <td>Married couples in England and Wales, 2001 (excluding those with day of birth for one spouse or both recorded as the 1st)
-            <br>Sun signs of wives by sun signs of husbands
-        </td>
-        <td>9,518,979</td>
-    </tr>
-    <tr>
-        <td>7</td>
-        <td>C0792</td>
-        <td>
-            Married couples in England and Wales, 2001 (excluding those with day of birth for one spouse or both recorded as the 1st and deducting same-sign excess)        
-            <br>Sun signs of wives by sun signs of husbands
-        </td>
-        <td>9,500,773</td>
+        <td><b>UT</b></td>
+        <td> = universal time</td>
     </tr>
 </table>
 
+<!-- ********************************************************************************* -->
+<h2 id="2-format-used-in-g5">Format used in g5</h2>
+
+In g5 database, dates are stored using 2 distinct fields :
+<ul class="spaced margin-top">
+    <li>
+        One field to store date and time if present.
+        <br>It respects ISO 8601 format and can be one of :
+        <ul>
+            <li>
+                <code>YYYY-MM-DD HH:MM:SS</code> if time is known with precision of a second - ex: <code>1982-08-23 23:31:20</code>
+            </li>
+            <li>
+                <code>YYYY-MM-DD HH:MM</code> if time is known with precision of a minute - ex: <code>1928-11-13 22:15</code>
+            </li>
+            <li>
+                <code>YYYY-MM-DD</code> if time is not known - ex: <code>1928-03-28</code>
+            </li>
+        </ul>
+    </li>
+    <li>
+        One field to store timezone offset.
+        <br>The format can be :
+        <ul>
+            <li><code>sHH:MM</code> when precision of a minute is sufficient - ex: <code>+01:00</code> or <code>-01:00</code></li>
+            <li><code>sHH:MM:SS</code> when precision of a second is needed - ex: <code>+00:23:15</code> or <code>-08:12:44</code></li>
+        </ul>
+        (<code>s</code> stands for "sign", plus or minus)
+    </li>
+</ul>
 
 <!-- 
-<div class="warning">TODO</div>
-(Scotland and Northern Ireland, which have their own statistical agencies, are not included).
-the first (C0694) cross-tabulates the sun signs of married
-partners, while the second (C0792) provides the full distribution of couples by day
-and month of birth, with a further breakdown into broad age group (of the husband).
+ISO 8601 also permits to express both time and timezone offset in a single string, for example <code>1928-11-13 22:15+01:00</code>
 -->
 
 </article>
 </main>
 </div><!-- end class="content" -->
+
 
 <!-- ************************************* -->
 <aside class="left">

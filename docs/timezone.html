@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Time and timezone | Gauquelin5</title>
+    <title>Timezone | Gauquelin5</title>
     <link rel="icon" type="image/png" href="img/g5.png">
     <link href="static/g5.css" rel="stylesheet" type="text/css">
     <meta name="description" content="">
@@ -34,6 +34,8 @@
 <header>
 <h1>Timezone</h1>
 <div class="intro">
+    Timezone computation is one of the most sensible point to achieve reliability and verifiability. To summarize, obtaining verifiable information is not possible because available sources of timezone data do not publish their own information sources.
+    <br>This page describes how this problem was handled to integrate timezone computation in g5.
 </div>
 </header>
 
@@ -42,7 +44,7 @@
 <nav class="toc">
     <ul>
         <li>
-            <a href="#1-timezone-computation">Timezone computation</a>
+            <a href="#1-sources-of-information">Sources of information</a>
             <ul>
                 <li>
                     <a href="#1-1-olson-database">Olson database</a>
@@ -72,17 +74,24 @@
 <br>In g5 database, "legal time" means "the time that can be read on the birth certificate".
 
 <br>Abbreviations used in this page:
-<ul>
-    <li><b>LT</b> = legal time</li>
-    <li><b>TZO</b> = timezone offset</li>
-    <li><b>UT</b> = universal time</li>
-</ul>
+<table>
+    <tr>
+        <td><b>LT</b></td>
+        <td> = legal time</td>
+    </tr>
+    <tr>
+        <td><b>TZO</b></td>
+        <td> = timezone offset</td>
+    </tr>
+    <tr>
+        <td><b>UT</b></td>
+        <td> = universal time</td>
+    </tr>
+</table>
 
 <!-- ********************************************************************************* -->
-<h2 id="1-timezone-computation">Timezone computation</h2>
-The purpose is to identify persons born during wars for example, cases needing humans to find the correct timezone offet. 
-<br>Current problem is to build rules from 3 sources:  
-
+<h2 id="1-sources-of-information">Sources of information</h2>
+Abbreviations for information sources:
 <table>
     <tr>
         <td><b>OL</b></td>
@@ -90,22 +99,27 @@ The purpose is to identify persons born during wars for example, cases needing h
     </tr>
     <tr>
         <td><b>FG</b></td>
-        <td>"<b>Problèmes de l'heure résolus pour le monde entier</b>" (Françoise Gauquelin, Guy Trédaniel éditeur), 1991</td>
+        <td>"<b>Problèmes de l'heure résolus pour le monde entier</b>" (by Françoise Gauquelin, Guy Trédaniel éditeur), 1991</td>
     </tr>
+    <tr>
+        <td><b>IA</b></td>
+        <td>"<b>The International Atlas: World Longitudes &amp; Latitudes Time Changes and Time Zones</b>" (by Thomas G Shanks, ACS Editions), 5th edition, 1999</td>
+    </tr>
+    <!-- 
     <tr>
         <td><b>THM</b></td>
         <td>"<b>Traité de l'heure dans le monde</b>", (Gabriel, Guy Trédaniel éditeur), 5th edition, 1990</td>
     </tr>
+    -->
 </table>
-There are contradiction between FG and THM.
+
 
 <!-- ************************************* -->
 <h3 id="1-1-olson-database">Olson database</h3>
-<a href="https://www.iana.org/time-zones">IANA Time Zone Database</a> aka Olson database is the reference timezone data used by most programming languages.
-<br>For each country, it provides timezones = list of couples (date, timezone offset).
-<br>At a given date, there is one offset for the whole country, this doesn't handle war periods when one country is split in different timezone regimes.
+The IANA Time Zone Database, also called the Olson database, is the reference timezone data used by most programming languages.
+<br>It can be downloaded from <a href="https://www.iana.org/time-zones">www.iana.org/time-zones</a> ; the last version of the code can also be downloaded from Paul Eggert's github on <a href="https://github.com/eggert/tz">github.com/eggert/tz</a>.
+<br>In the complete distribution, a file called <i>theory.html</i> permits to know that the Olson database is designed to provide precise information for dates after the POSIX Epoch (1970-01-01 00:00:00 UTC). It also provide timezone information for previous dates, but doesn't handle particular cases, for example war periods when one country is split in different timezone regimes.
 
-<br>In g5 code, <b>limit dates given by Olson</b> are used as departure values for the code, then conflicts between FG and THM are attached to a Olson date.
 
 
 
@@ -140,8 +154,9 @@ In g5 database, dates are stored using 2 distinct fields :
     </li>
 </ul>
 
+<!-- 
 ISO 8601 also permits to express both time and timezone offset in a single string, for example <code>1928-11-13 22:15+01:00</code>
-
+-->
 
 <!-- ********************************************************************************* -->
 <h2 id="3-expressing-timezone-offset">Expressing timezone offset</h2>
@@ -190,18 +205,17 @@ Example : the first record of file D10 : Aaron Harold, born 1921-06-21 07:00
 <br>From Cura value : UT = 07:00 + 6h = 13:00
 <br>From g5 value : UT = 07:00 - (-6h) = 13:00
 <br>
-<br>The results are equivalent. 
+<br>OK, the results are equivalent. 
 <br>This is not a blocking problem as it's finally just a matter of convention.
 
 <!-- ********************************************************************************* -->
+<!-- 
 <h2 id="4-timezone-offset-computation">Timezone offset computation</h2>
 
-This is a delicate and important problem.
-<br>Important because TZO is necessary to compute a chart, and delicate because information sources are sometimes contradictory.
-<br>The reference is the "Olson database", used by operating systems and programming languages (<a href="https://www.iana.org/time-zones">https://www.iana.org/time-zones</a>).
+The reference for most programming languages is the "Olson database", used by operating systems and programming languages (<a href="https://www.iana.org/time-zones">https://www.iana.org/time-zones</a>).
 <br>This handles simple cases when the offset is defined for a whole time zone at a given time.
 <br>For these cases, it's possible to compute the offset without ambiguity :
-<br><code>(date, time zone identifier) --> offset</code>.
+<br><code>(date, time zone identifier) --&gt; offset</code>.
 <br>
 <br>But things are sometimes more complex :
 <ul>
@@ -211,6 +225,7 @@ This is a delicate and important problem.
         <br>This happens for example in France or Italy at the end of world war 2, where the change of offset in a given city depends on the liberation date of the city.
     </li>
 </ul>
+-->
 
 
 <!-- ************************************* -->
