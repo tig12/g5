@@ -21,7 +21,8 @@ class prepare implements Command {
     public static function execute($params=[]): string{
         
         if(count($params) != 1){
-            return "INVALID USAGE This commands needs one parameter\n";
+            return "INVALID USAGE This commands needs one parameter, the slug of the person.\n"
+                . "Ex: php run-g5.php wiki bc prepare baillaud-benjamin-1848-02-14\n";
         }
         
         $slug = $params[0];

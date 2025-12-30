@@ -5,6 +5,10 @@
 # https://creativecommons.org/licenses/by-sa/4.0/
 #
 
+# Note : This structure is used to add a new person AND associate a BC through a g5 command.
+# It is different from the structure used in opengauquelin web application,
+# where the addition of a BC is distinct from the addition of a person
+
 #
 # 1 - Informations related to current BC.yml file
 #
