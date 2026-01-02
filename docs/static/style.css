@@ -49,6 +49,7 @@ ul.simple{
 
 .bold{font-weight:bold;}
 .normal{font-weight:normal;}
+.italic{font-style:italic;}
 .word-spacing{word-spacing:1em;}
 
 .center{text-align:center;}
