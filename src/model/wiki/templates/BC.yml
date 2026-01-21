@@ -59,6 +59,7 @@ transcription:
     official:
       family: 
       given: 
+      full: 
     nobl: 
   sex: 
   birth:
@@ -80,12 +81,9 @@ extras:
   name:
     family: 
     given: 
+    full: 
     spouse:
       -
-    fame:
-      full: 
-      family: 
-      given: 
     alter: 
       - 
   ids-in-sources:

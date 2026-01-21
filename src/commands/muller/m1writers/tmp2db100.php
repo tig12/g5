@@ -90,8 +90,13 @@ class tmp2db100 implements Command {
                 $p = new Person();
                 $new = [];
                 $new['trust'] = Newalch::TRUST_LEVEL;
-                $new['name']['family'] = $line['FNAME'];
-                $new['name']['given'] = $line['GNAME'];
+                if($line['GNAME'] != ''){
+                    $new['name']['family'] = $line['FNAME'];
+                    $new['name']['given'] = $line['GNAME'];
+                }
+                else{
+                    $new['name']['full'] = $line['FNAME'];
+                }
                 $new['sex'] = $line['SEX'];
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];

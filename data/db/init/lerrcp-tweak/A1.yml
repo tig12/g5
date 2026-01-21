@@ -128,11 +128,12 @@
   DATE-UT: '1931-03-12 00:00:00'
   build-notes: |
     Warning, fix of birth day not based on birth certificate.
-    Only modified the day, kept cura hour
+    Only modified the day, kept cura.free.fr hour
     Birth day conform with
     https://boxrec.com/en/proboxer/110650
     https://fightstat.com/boxer/michel-clavel-19530207.html
     https://www.astro.com/astro-databank/Clavel,_Michel
+
 -
   NUM: 1152            
   FNAME: Van Den Berghe

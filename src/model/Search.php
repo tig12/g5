@@ -19,22 +19,18 @@ class Search {
         Computes the different forms of a person name.
         Names used to search a person.
         Family name always before given name.
-        @param  $arrNames  Array representing the name, as stored in database. Ex: [
-            'given' => Pierre
-            'family' => Alard
-            'nobl' => ''
-            'spouse' => [],
-            'official' => [
-                'given' => ''
-                'family' => ''
-            ]
-            'fame' => [
-                'full' => ''
-                'given' => ''
-                'family' => ''
-            ]
-            'alter' => []
-        ]
+        @param  $arrNames  Array representing the name, as stored in database.
+                Ex: [
+                    'given' => Pierre
+                    'family' => Alard
+                    'full' => ''
+                    'spouse' => [],
+                    'official' => [
+                        'given' => ''
+                        'family' => ''
+                    ]
+                    'alter' => []
+                ]
         @return A regular array of possible names
     **/
     public static function computePersonNames(array $arrNames) {
@@ -69,12 +65,9 @@ class Search {
                 $res[] = $spouse;
             }
         }
-        // fame 
-        if($arrNames['fame']['full'] != ''){
-            $res[] = $arrNames['fame']['full'];
-        }
-        if($arrNames['fame']['family'] != '' && $arrNames['fame']['given'] != ''){
-            $res[] = $arrNames['fame']['family'] . ' ' . $arrNames['fame']['given'];
+        // full
+        if($arrNames['full'] != ''){
+            $res[] = $arrNames['full'];
         }
         // maybe do not keep alternative names
         if(!empty($arrNames['alter'])){

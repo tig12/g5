@@ -132,10 +132,10 @@ class allpersons implements Command {
         
         $fmap = [
             'FNAME' => function($p){
-                return $p->data['name']['family'] ?? $p->data['name']['fame']['family'] ?? $p->data['name']['fame']['full'] ?? '';
+                return $p->data['name']['family'] ?? $p->data['name']['full'] ?? '';
             },
             'GNAME' => function($p){
-                return $p->data['name']['given'] ?? $p->data['name']['fame']['given'] ?? '';
+                return $p->data['name']['given'] ?? '';
             },
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);
@@ -229,10 +229,10 @@ class allpersons implements Command {
         
         $fmap = [
             'FNAME' => function($p){
-                return $p->data['name']['family'] ?? $p->data['name']['fame']['family'] ?? $p->data['name']['fame']['full'] ?? '';
+                return $p->data['name']['family'] ?? $p->data['name']['full'] ?? '';
             },
             'GNAME' => function($p){
-                return $p->data['name']['given'] ?? $p->data['name']['fame']['given'] ?? '';
+                return $p->data['name']['given'] ?? '';
             },
             'OCCU' => function($p){
                 return implode('+', $p->data['occus']);

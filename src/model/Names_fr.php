@@ -60,7 +60,6 @@ class Names_fr{
         return $str;
     }
     
-    
     /** Used by fixJean() **/
     private static $fixJean = [
         'claude'    => 'Claude',
@@ -74,6 +73,7 @@ class Names_fr{
         'paul'      => 'Paul',
         'pierre'    => 'Pierre',
     ];
+    
     // ******************************************************
     /**
         @param $str A string that may contain a name with composed given name starting by Jean
@@ -99,7 +99,7 @@ class Names_fr{
             ];
         }
         else{
-            echo "Possible candidate for Names_fr.fixJean() : $str - NOT FIXED - modify \$fixJean to fix it.\n";
+            echo "Possible candidate for Names_fr::fixJean() : $str - NOT FIXED - modify \$fixJean to fix it.\n";
         }
         return [$str, ''];
     }

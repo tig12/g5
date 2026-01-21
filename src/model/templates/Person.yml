@@ -21,7 +21,7 @@ partial-ids: {}
 
 name:
   # The name commonly used to designate a person is represented by
-  #   name.full, name.given, name.family and name.nobl
+  # name.full, name.given, name.family and name.nobl
   # These can be different from the official name.
   # It can be either the "real" name of the person, or a pseudonym.
   # Can be full (ex: "Mistinguett" or "Stromae") or composed, like "Edith" (name.given) "Piaf" (name.family).
@@ -33,12 +33,11 @@ name:
   official:
     family:         # string  Contains nobiliary-particle
     given:          # string  Usually several names given at birth
-    full:           # string  Used when reading the act is too difficult to separate name.official.family and given  
   # spouse => for married women
-  spouse: []        # array of maps { full family given }
-  alter: []         # []string  Alternative names, like nicknames, or author names
+  spouse: []        # array of strings  Contain the family names of the spouses
+  alter: []         # array of strings  Alternative names, like nicknames, or author names
 
-sex:                # string?   In general M or F for ancient data
+sex:                # string  In general M or F
 
 # Dates are expressed in iso 8601 YYYY-MM-DD HH:MM:SSsHH:MM
 birth:

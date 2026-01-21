@@ -107,8 +107,13 @@ class tmp2db implements Command {
                 $p->addPartialId($lerrcpSource->data['slug'], $gqId);
                 $new = [];
                 $new['trust'] = Cura5::TRUST_LEVEL;
-                $new['name']['family'] = $line['FNAME'];
-                $new['name']['given'] = $line['GNAME'];
+                if($line['GNAME'] != ''){
+                    $new['name']['family'] = $line['FNAME'];
+                    $new['name']['given'] = $line['GNAME'];
+                }
+                else{
+                    $new['name']['full'] = $line['FNAME'];
+                }
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['tzo'] = $line['TZO'];

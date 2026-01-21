@@ -148,10 +148,15 @@ class tmp2db implements Command {
                 // Person not already in db (mainly in Gauquelin data)
                 $p = new Person();
                 $new['trust'] = AFD::TRUST_LEVEL;
-                $new['name']['family'] = $line['FNAME'];
-                $new['name']['given'] = $line['GNAME'];
+                if($line['GNAME'] != ''){
+                    $new['name']['family'] = $line['FNAME'];
+                    $new['name']['given'] = $line['GNAME'];
+                }
+                else{
+                    $new['name']['full'] = $line['FNAME'];
+                }
                 $new['name']['nobl'] = $line['NOBL'];
-                $new['name']['fame']['full'] = $line['FAME'];
+                $new['name']['full'] = $line['FAME'];
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['tzo'] = $line['TZO'];
@@ -187,7 +192,7 @@ class tmp2db implements Command {
                     $p->data['id'] = $p->insert(); // DB
                 }
                 catch(\Exception $e){
-                    throw new \Exception("Unable to insert Müller id $muid\n" . $e->getMessage());
+                    throw new \Exception("Unable to insert Müller2 (famous men) id $muid\n" . $e->getMessage());
                 }
             }
             else{
@@ -203,6 +208,7 @@ class tmp2db implements Command {
                 if($p->data['name']['family'] == "Gauquelin-$gqid"){
                     $new['name']['family'] = $line['FNAME'];
                     $new['name']['given'] = $line['GNAME'];
+                    $new['name']['full'] = $line['FAME'];
                     $nRestoredNames++;
                     if($reportType == 'full'){
                         $namesReport .= "Cura\t $gqid\t {$p->data['name']['family']}\n";

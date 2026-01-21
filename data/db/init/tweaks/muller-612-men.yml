@@ -44,9 +44,14 @@
   partial-ids:
     wd: Q366355
   name:
-    fame:
-      full: Van Cliburn
-    given: Harvey Lavan
+    given: Harvey
+    official:
+      given: Harvey Lavan
+    alter:
+      - Harvey Lavan Cliburn, Jr.
+      - Harvey Cliburn Jr.
+      - Harvey Cliburn
+      - Harvey Lavan
   occus:
     - pianist
 
@@ -71,10 +76,10 @@
   partial-ids:
     wd: Q129092
   name:
-    family: Contandin
-    given: Fernand
-    fame:
-      full: Fernandel
+    full: Fernandel
+    official:
+      family: Contandin
+      given: Fernand Joseph Désiré
 
 -
   ADMIN: 
@@ -88,7 +93,7 @@
     family: Fleming
     given: Alexander
 
--
+-                                                                        
   ADMIN: 
     ACTION: update
   ids-in-sources:
@@ -96,10 +101,10 @@
   partial-ids:
     wd: Q302873
   name:
-    family: Wettach
-    given: Adrian
-    fame:
-      full: Grock
+    full: Grock
+    official:
+      family: Wettach
+      given: Charles Adrien
 
 -
   ADMIN: 
@@ -132,11 +137,9 @@
   partial-ids:
     wd: Q16975
   name:
-    fame:
-      full: Paul VI
-    given: Giovanni Battista
-    family: Montini
+    full: Paul VI
     official:
+      family: Montini
       given: Giovanni Battista Enrico Antonio Maria
 
 -
@@ -147,8 +150,7 @@
   partial-ids:
     wd: Q42247
   name:
+    full: Sully-Prudhomme
     official:
       given: René Armand François
       family: Prudhomme
-    fame:
-      full: Sully-Prudhomme

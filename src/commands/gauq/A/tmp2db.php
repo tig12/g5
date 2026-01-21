@@ -117,8 +117,13 @@ class tmp2db implements Command {
             $lineRaw = $linesRaw[$i];
             // try to get this person from database
             $test = new Person();
-            $test->data['name']['family'] = $line['FNAME'];
-            $test->data['name']['given'] = $line['GNAME'];
+            if($line['GNAME'] != ''){
+                $test->data['name']['family'] = $line['FNAME'];
+                $test->data['name']['given'] = $line['GNAME'];
+            }
+            else{
+                $test->data['name']['full'] = $line['FNAME'];
+            }
             $test->data['birth']['date-ut'] = $line['DATE-UT'];
             $test->computeSlug();
             $gqId = LERRCP::gauquelinId($datafile, $line['NUM']);
@@ -136,9 +141,14 @@ class tmp2db implements Command {
                 // issue for missing name handled by command db/init/nameIssues - not done here
                 if(strpos($line['FNAME'], 'Gauquelin-') === 0){
                     $NIssues_name++;
-                }                
-                $new['name']['family'] = $line['FNAME'];
-                $new['name']['given'] = $line['GNAME'];
+                }
+                if($line['GNAME'] != ''){
+                    $new['name']['family'] = $line['FNAME'];
+                    $new['name']['given'] = $line['GNAME'];
+                }
+                else{
+                    $new['name']['full'] = $line['FNAME'];
+                }
                 $new['birth'] = [];
                 $new['birth']['date-ut'] = $line['DATE-UT'];
                 if($line['DATE-C'] != ''){

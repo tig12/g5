@@ -4,6 +4,7 @@
 # 
 # 2020-09-01 04:51:17+02:00, Thierry Graff : Creation
 #
+-
   # Bacci Baccio Maria 1888-01-08
   MUID: 27
   GQID: A4-1142
@@ -12,6 +13,10 @@
   # Beonio Brocchieri Vittorio 1902-05-04
   MUID: 42
   GQID: A1-268
+
+-
+  MUID: 310
+  GNAME: Giovanni
 
 -
   MUID: 387

@@ -139,8 +139,13 @@ class tmp2db implements Command {
                 $p = new Person();
                 $new = [];
                 $new['trust'] = Final3::TRUST_LEVEL;
-                $new['name']['family'] = $fname;
-                $new['name']['given'] = $gname;
+                if($line['GNAME'] != ''){
+                    $new['name']['family'] = $fname;
+                    $new['name']['given'] = $gname;
+                }
+                else{
+                    $new['name']['full'] = $line['FNAME'];
+                }
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['date-ut'] = $line['DATE-UT'];

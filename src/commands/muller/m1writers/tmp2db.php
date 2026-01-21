@@ -95,8 +95,13 @@ class tmp2db implements Command {
                 $p = new Person();
                 $new = [];
                 $new['trust'] = Newalch::TRUST_LEVEL;
-                $new['name']['family'] = $line['FNAME'];
-                $new['name']['given'] = $line['GNAME'];
+                if($line['GNAME'] != ''){
+                    $new['name']['family'] = $line['FNAME'];
+                    $new['name']['given'] = $line['GNAME'];
+                }
+                else{
+                    $new['name']['full'] = $line['FNAME'];
+                }
                 $new['sex'] = $line['SEX'];
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
@@ -167,6 +172,7 @@ class tmp2db implements Command {
                 $new['birth']['place']['name'] = $line['PLACE'];
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
+                $new['name']['full'] = ''; // always done because all muller1 records have both FNAME and GNAME
                 $p->addOccus(['writer']); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 $p->addIdInSource($source->data['slug'], $line['MUID']);
                 $mullerId = Muller::mullerId($source->data['slug'], $line['MUID']);

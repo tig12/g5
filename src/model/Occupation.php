@@ -48,10 +48,6 @@ class Occupation {
     
     private static $stmt_insert = null;
     
-    // ***********************************************************************
-    //                                  STATIC
-    // ***********************************************************************
-    
     /** 
         Returns the directory where occupations are defined, in csv files.
     **/
@@ -65,17 +61,9 @@ class Occupation {
     public static function getDefinitionFile(): string {
         return self::getDefinitionDir() . DS . self::DEFINITION_FILE;
     }
-    
-    private static function getDBLink(){
-        if(self::$dblink == null){
-            self::$dblink = DB5::getDbLink();
-        }
-        return self::$dblink;
-    }
-    
-    
+        
     /**
-        Returns an associative array slug => name for all occupations in database.
+        Returns an associative array slug => name for all occupations stored in database.
     **/
     public static function getAllSlugNames() {
         $query = "select slug,name from groop where type='" . Group::TYPE_OCCU . "'";
@@ -86,8 +74,48 @@ class Occupation {
         return $res;
     }
     
+    /**
+        Returns an array containing all occupations stored in database.
+        @param  $slugKey    if true, the returned array is an associative (keys are group slug)
+                            if false, a regular array is returned;
+    **/
+    public static function getAll($slugKey=false) {
+        $query = "select * from groop where type='" . Group::TYPE_OCCU . "'";
+        $res = [];
+        foreach(self::getDBLink()->query($query, \PDO::FETCH_ASSOC) as $row){
+            $new = $row;
+            $new['sources'] = json_decode($row['sources'], true);
+            $new['parents'] = json_decode($row['parents'], true);
+            $new['children'] = json_decode($row['children'], true);
+            if($slugKey) {
+                $res[$row['slug']] = $new;
+            }
+            else {
+                $res[] = $new;
+            }
+        }
+        return $res;
+    }
     
-    // ********************************* insert **************************************
+    
+    // ********************************* Database **************************************
+    
+    public static function insert($line){
+        $parents = [];
+        // obliged to add this test to prevent a bug:
+        // if field parents is empty, explode returns an array containing one empty string
+        if($line['parents'] != ''){
+            $parents = explode('+', $line['parents']);
+        }
+        self::getStmt_insert()->execute([
+            $line['slug'],
+            $line['wd'],
+            $line['en'],
+            'Persons whose occupation is ' . $line['en'] . '.',
+            Group::TYPE_OCCU,
+            json_encode($parents),
+        ]);
+    }
     
     private static function getStmt_insert(){
         if(self::$stmt_insert == null){
@@ -105,21 +133,11 @@ class Occupation {
         return self::$stmt_insert;
     }
     
-    public static function insert($line){
-        $parents = [];
-        // obliged to add this test to prevent a bug:
-        // if field parents is empty, explode returns an array containing one empty string
-        if($line['parents'] != ''){
-            $parents = explode('+', $line['parents']);
+    private static function getDBLink(){
+        if(self::$dblink == null){
+            self::$dblink = DB5::getDbLink();
         }
-        self::getStmt_insert()->execute([
-            $line['slug'],
-            $line['wd'],
-            $line['en'],
-            'Persons whose occupation is ' . $line['en'] . '.',
-            Group::TYPE_OCCU,
-            json_encode($parents),
-        ]);
+        return self::$dblink;
     }
     
 } // end class

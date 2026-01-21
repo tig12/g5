@@ -7,7 +7,7 @@
 
 -
   NUM: 568
-  FNAME: Gaulle de
+  FNAME: de Gaulle
   GNAME: Charles
 
 -
@@ -20,3 +20,9 @@
     Coordinates of birth place differ, both are erroneous.
     DATE-UT also differ! Consultation of birth certificate shows that both are erroneous (Gauquelin recieved the declaration date, not the birth date) 
     Error identified thanks to execution of tmp2db::checkDate().
+
+-
+  NUM: 994
+  FNAME: Uhrich
+  GNAME: Jean
+    

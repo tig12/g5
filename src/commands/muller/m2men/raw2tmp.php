@@ -115,7 +115,7 @@ class raw2tmp implements Command {
         //
         $tmp = explode(',', $str1);
         if(count($tmp) == 1){
-            // only one component in the name => fame name
+            // only one component in the name => full name
             return ['', '', $tmp[0], ''];
         }
         // here count($tmp) = 2

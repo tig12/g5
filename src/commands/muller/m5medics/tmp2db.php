@@ -129,8 +129,13 @@ class tmp2db implements Command {
                 $p = new Person();
                 $new = [];
                 $new['trust'] = Newalch::TRUST_LEVEL;
-                $new['name']['family'] = $line['FNAME'];
-                $new['name']['given'] = $line['GNAME'];
+                if($line['GNAME'] != ''){
+                    $new['name']['family'] = $line['FNAME'];
+                    $new['name']['given'] = $line['GNAME'];
+                }
+                else{
+                    $new['name']['full'] = $line['FNAME'];
+                }
                 $new['name']['nobl'] = $line['NOB'];
                 // Müller name considered as = to full name copied from birth certificate
                 $new['name']['official']['given'] = $line['GNAME'];
@@ -225,6 +230,7 @@ class tmp2db implements Command {
                 if($p->data['name']['given'] == ''){
                     // happens with names like Gauquelin-A1-258
                     $new['name']['given'] = $line['GNAME'];
+                    $new['name']['full'] = '';
                 }
                 // Müller name considered as = to full name copied from birth certificate
                 // (Gauquelin name considered as current name)

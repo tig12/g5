@@ -120,8 +120,13 @@ class tmp2db implements Command {
 //                    $p = new Person();
                     $new = [];
                     $new['trust'] = Gauquelin::TRUST_LEVEL;
-                    $new['name']['family'] = $line['FNAME'];
-                    $new['name']['given'] = $line['GNAME'];
+                    if($line['GNAME'] != ''){
+                        $new['name']['family'] = $line['FNAME'];
+                        $new['name']['given'] = $line['GNAME'];
+                    }
+                    else{
+                        $new['name']['full'] = $line['FNAME'];
+                    }
                     $new['name']['nobility'] = $line['NOB'];
                     $new['birth'] = [];
                     $new['birth']['date'] = $line['DATE'];
@@ -194,11 +199,13 @@ class tmp2db implements Command {
                     if(strpos($p->data['slug'], 'gauquelin-') === 0){
                         $new['name']['family'] = $line['FNAME'];
                         $new['name']['given'] = $line['GNAME'];
+                        $new['name']['full'] = ''; // delete full to respect rules of https://tig12.github.io/g5/db-person.html
                         $new['name']['nobility'] = $line['NOB'];
                         $new['slug'] = Person::doComputeSlug($new['name']['family'], $new['name']['given'], substr($p->data['birth']['date'], 0, 10));
                         $NFixedNames++;
                         // Resolve the name issue handled by command db/init/nameIssues - not done here
                     }
+                    // else the name already in db is kept
                     $p->addHistory(
                         command:    $cmdSignature . ' ' . $groupKey,
                         sourceSlug: $g55Source->data['slug'],

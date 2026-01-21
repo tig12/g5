@@ -100,8 +100,13 @@ class tmp2db implements Command {
                 $new = [];
                 $new['sex'] = 'F';
                 $new['trust'] = AFD::TRUST_LEVEL;
-                $new['name']['family'] = $line['FNAME'];
-                $new['name']['given'] = $line['GNAME'];
+                if($line['GNAME'] != ''){
+                    $new['name']['family'] = $line['FNAME'];
+                    $new['name']['given'] = $line['GNAME'];
+                }
+                else{
+                    $new['name']['full'] = $line['FNAME'];
+                }
                 // note: ONAME1, 2, 3 are not used => TODO ?
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
@@ -155,11 +160,15 @@ class tmp2db implements Command {
                 if($p->data['name']['family'] == "Gauquelin-$gqid"){
                     $new['name']['family'] = $line['FNAME'];
                     $new['name']['given'] = $line['GNAME'];
+                    $new['name']['full'] = '';
                     $nRestoredNames++;
                     if($reportType == 'full'){
                         $namesReport .= "Cura\t $gqid\t {$p->data['name']['family']}\n";
                         $namesReport .= "Müller\t {$muid}\t {$line['FNAME']} - {$line['GNAME']}\n\n";
                     }
+                }
+                if($line['GNAME'] == ''){
+                    $new['name']['full'] = '';
                 }
                 // if Cura and Müller have different birth day
                 $mulday = substr($line['DATE'], 0, 10);
