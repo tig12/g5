@@ -2,7 +2,9 @@
 config.yml
 config.env
 1.local
+2.build
 dbdump
+var
 
 # files marked for deletion
 z.*

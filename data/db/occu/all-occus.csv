@@ -58,7 +58,7 @@ jurist;Q185351;Juriste;Jurist;legal-profession
 kayaker;Q16004471;Kayakeur;Kayaker;sportsperson
 lawyer;Q40348;Avocat;Lawyer;legal-profession
 legal-profession;Q15987302;Profession juridique;Legal profession;
-logician;Q14565331;Logicien;Logician;mathematician+philosopher
+logician;Q14565331;Logicien;Logician;mathematician
 literary-critic;Q4263842;Critique littéraire;Literary-critic;writer
 mathematician;Q170790;Mathématicien;Mathematician;scientist
 military-personnel;Q47064;Militaire;Military personnel;
@@ -76,7 +76,7 @@ painter;Q1028181;Peintre;Painter;graphic-artist
 partner-of-celebrity;;Partenaire de célebrité;Partner of celebrity;
 pedagogue;Q1231865;Pédagogue;Pedagogue;
 philosopher;Q4964182;Philosophe;Philosopher;
-philosopher-of-science;Q16389557;Philosophe des sciences;Philosopher of science;
+philosopher-of-science;Q16389557;Philosophe des sciences;Philosopher of science;philosopher
 photographer;Q33231;Photographe;Photographer;artist
 physician;Q39631;Médecin;Physician;
 physicist;Q169470;Physicien;Physicist;scientist

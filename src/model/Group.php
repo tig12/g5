@@ -26,6 +26,7 @@ class Group {
 
     /**
         Associative array: group slug => array of slugs of ancestors.
+        All ancestors means parents + grand-parents etc.
         Caches getAllAncestors() computation.
     **/
     private static $allAncestors = null;
@@ -399,7 +400,7 @@ class Group {
     }
     
     /**
-        Computes self::$allAncestors
+        Computes self::$allAncestors (= parents, grandparents etc.)
     **/
     private static function computeAllAncestors() {
         if(self::$allAncestors != null){
@@ -435,6 +436,7 @@ class Group {
     
     /**
         Returns an array of slugs of all the descendants of an occupation.
+        Descendants = children, granchildren etc.
         @param  $groupSlug      Group slug for which descendants need to be computed
         @param  $includeSeed    Boolean indicating if $groupSlug should be also returned
     **/

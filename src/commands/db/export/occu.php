@@ -17,7 +17,6 @@ use tiglib\patterns\Command;
 use g5\app\Config;
 use g5\model\Person;
 use g5\model\Group;
-use g5\model\Occupation;
 use g5\commands\gauq\LERRCP;
 use g5\commands\muller\Muller;
 

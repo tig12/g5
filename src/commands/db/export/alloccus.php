@@ -48,7 +48,7 @@ class alloccus implements Command {
                 echo $execReport;
                 continue;
             }
-            // uses the fact that groups are named using the occupation slug (see command db/fill/occus1).
+            // uses the fact that groups are named using the occupation slug (see command db/init/occus1).
             $g = Group::createFromSlug($slug); // DB
             $download = str_replace(Config::$data['dirs']['output'] . DS, '', $execFile);
             $g->data['download'] = $download;
