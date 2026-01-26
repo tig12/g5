@@ -1,0 +1,7 @@
+
+This directories contains files indicating the match between g5 and wikidata.
+
+It contains csv files which must contain 2 columns : 
+G5 : g5 slug
+WD : wikidata id
+

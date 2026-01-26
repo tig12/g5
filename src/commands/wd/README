@@ -1,0 +1,24 @@
+
+This directory contains code to add wikidata to g5 database.
+
+Input files are located in data/db/wikidata.
+
+Intermediate generated files are locate din data/tmp/wikidata
+
+The process for persons and places is :
+
+1 - Retrieve persons
+php run-g5.php wd harvest person
+From versioned data located in data/db/wikidata/person
+retrieve locally json files containing the wikidata persons in data/tmp/wikidata/person
+
+2 - Build place list
+php run-g5.php wd harvest place list
+From person in data/tmp/wikidata/person
+build list of places to retrieve in
+data/tmp/wikidata/places.csv
+
+3 - Retrieve place information (mainly geonames id) in
+data/tmp/wikidata/places/
+
+
