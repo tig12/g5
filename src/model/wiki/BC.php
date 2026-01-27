@@ -147,6 +147,14 @@ class BC {
         }
         if(isset($BC['extras'])){
             $p->data = array_replace_recursive($p->data, $BC['extras']);
+            // array_replace_recursive is not enough:
+            // name.official is always filled, and extras.name is often partially filled.
+            // then missing fields of name need to be filled with values coming from official name.
+            foreach(['full', 'family', 'given'] as $key){
+                if($p->data['name'][$key] == '' && isset($p->data['name']['official'][$key])){
+                    $p->data['name'][$key] = $p->data['name']['official'][$key];
+                }
+            }
         }
         //
         $p->data['slug'] = $BC['slug'];

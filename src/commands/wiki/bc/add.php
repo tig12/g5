@@ -184,7 +184,7 @@ class add implements Command {
                 if(isset($BC['extras']['occus'])){
                     // here, could simply do:
                     // $p->data['occus'] = $BC['extras']['occus'];
-                    // but it supposes that $BC['extras']['occus'] doesn't contain an occupation and its ancestor 
+                    // but not possible because $BC['extras']['occus'] may already contain ancestors of new occupations 
                     $p->addOccus($BC['extras']['occus']); // handles field occus - handle duplicates and subgroups
                 }
         	    // insert() needed now to have the person id

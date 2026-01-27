@@ -5,20 +5,42 @@ Input files are located in data/db/wikidata.
 
 Intermediate generated files are locate din data/tmp/wikidata
 
-The process for persons and places is :
+The process for persons is:
+
+0 - Query wikiata to identify the matches.
+This is done in an external project, wd-g5.
+The result of this process is a versioned file data/db/wikidata/person/wd-g5-1.csv.zip
 
 1 - Retrieve persons
 php run-g5.php wd harvest person
-From versioned data located in data/db/wikidata/person
-retrieve locally json files containing the wikidata persons in data/tmp/wikidata/person
+From versioned file data/db/wikidata/person/wd-g5-1.csv.zip
+retrieve locally json files containing the wikidata persons in data/tmp/wikidata/person/
+
+2 - Import wd data in g5 database
+php run-g5.php wd merge person
+From wikidata persons in data/tmp/wikidata/person/
+add wikidata information in g5 database
+
+
+The process for places is:
+
+1 - Retrieve persons locally (step 1 of person process)
 
 2 - Build place list
 php run-g5.php wd harvest place list
-From person in data/tmp/wikidata/person
+From person in data/tmp/wikidata/person/
 build list of places to retrieve in
-data/tmp/wikidata/places.csv
+data/tmp/wikidata/places1.csv
 
-3 - Retrieve place information (mainly geonames id) in
+3 - Retrieve place information (mainly geonames id)
+php run-g5.php wd harvest place harvest
+From places in data/tmp/wikidata/places1.csv, fill
 data/tmp/wikidata/places/
 
+4 - Prepare merge
+From data/tmp/wikidata/places/
+build data/tmp/wikidata/places2.csv
 
+5 - Import wd data in g5 database
+From data/tmp/wikidata/places2.csv
+add wikidata information in g5 database
