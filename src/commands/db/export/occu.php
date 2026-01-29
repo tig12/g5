@@ -33,8 +33,10 @@ class occu implements Command {
     /** 
         @param  $params array containing 2 or 3 elements :
                         - a list of occupation slugs separated by +
-                        - The path to the output file, relative to directory specified in config.yml by dirs / output
+                        - The path to the output file.
+                          Path relative to directory specified in config.yml by dirs / output (defaults to data/output)
                         - An optional string "nozip"
+                        - An optional string "sep", indicating that a file with separated columns for dates must be also generated 
                         - An optional string "full", indicating that the function must
                           return an associative array with 3 elements :
                             - A report.
@@ -43,9 +45,11 @@ class occu implements Command {
                           If "full" is not present, the function returns a report as usual.
     **/                                                                                          
     public static function execute($params=[]) {
-        $msg = "USAGE : php run-g5.php db export occu <profession codes> <path to output file> [nozip] [full]\n"
+        
+        $msg = "USAGE : php run-g5.php db export occu <profession codes> <path to output file> [nozip] [full] [sep]\n"
             . "  To export several professions, separate the codes by \"+\"\n"
             . "  Use 'nozip' to export a csv instead of a zipped csv.\n"
+            . "  Use 'sep' to also export a csv file where date are expressed in separate comumns (one column for the year, one for the month etc.).\n"
             . "  Use 'full' to indicate that the function must return an array with 3 elements :\n"
             . "    - the report.\n"
             . "    - the file name where the csv was stored (can be a .zip file).\n"
@@ -54,35 +58,24 @@ class occu implements Command {
             . "  php run-g5.php db export occu skier path/to/output.csv\n"
             . "  php run-g5.php db export occu skier path/to/output.csv nozip\n"
             . "  php run-g5.php db export occu skier path/to/output.csv nozip full\n"
+            . "  php run-g5.php db export occu skier path/to/output.csv nozip sep\n"
+            . "  php run-g5.php db export occu skier path/to/output.csv nozip sep full\n"
             . "  php run-g5.php db export occu skier+writer path/to/output.csv\n"
             ;
-        $possibles = ['nozip', 'full'];
-        if(count($params) > 4){
-            return "USELESS PARAMETER : '{$params[4]}'\n" . $msg;
-        }
-        if(count($params) == 4 && !in_array($params[3], $possibles)){
-            return "INVALID PARAMETER : '{$params[3]}'\n" . $msg;
-        }
-        if(count($params) == 3 && !in_array($params[2], $possibles)){
-            return "INVALID PARAMETER : '{$params[2]}'\n" . $msg;
-        }
         if(count($params) < 2){
             return "MISSING PARAMETER'\n" . $msg;
         }
-        $dozip = true;
-        $returnType = 'report';
-        if(count($params) == 4 && ($params[2] == 'nozip' || $params[3] == 'nozip')){
-            $dozip = false;
+        // optional parameters
+        $possibles = ['nozip', 'full', 'sep'];
+        $optionals = array_slice($params, 2);
+        $diff = array_diff($optionals, $possibles);
+        if(count($diff) != 0){
+            return 'INVALID PARAMETER' . (count($diff) > 1 ? 'S: ' : ': ') . implode(', ', $diff) . "\n" . $msg;
+        
         }
-        if(count($params) == 4 && ($params[2] == 'full' || $params[3] == 'full')){
-            $returnType = 'full';
-        }
-        if(count($params) == 3 && $params[2] == 'nozip'){
-            $dozip = false;
-        }
-        if(count($params) == 3 && $params[2] == 'full'){
-            $returnType = 'full';
-        }
+        $dozip = !in_array('nozip', $optionals);
+        $returnType = in_array('full', $optionals) ? 'full' : 'report';
+        $generateSep = in_array('sep', $optionals);
         
         $occus1 = explode('+', $params[0]);
         $occus = [];
@@ -180,10 +173,125 @@ class occu implements Command {
             dozip:      $dozip,
         );
         $report .= $exportReport;
+        
+        if($generateSep){
+            $report .= self::generateSep($g, $dozip, $outfile);
+        }
+        
         if($returnType == 'report'){
             return $report;
         }
         return [$report, $exportfile, $N];
+    }
+    
+    /**
+        Generates a second export of the same group, with dates expressed in separate columns
+        @param  $g is an object, passed by reference
+    **/
+    private static function generateSep($g, $dozip, $outfile) {
+        $report = '';
+        
+        $outfile = str_replace('.csv', '-sep.csv', $outfile);
+        
+        $csvFields = [
+            'GQID',
+            'MUID',
+            'FNAME',
+            'GNAME',
+            'OCCU',
+            'Y',
+            'MON',
+            'D',
+            'H',
+            'MIN',
+            'TZO',
+            'UT_Y',
+            'UT_MON',
+            'UT_D',
+            'UT_H',
+            'UT_MIN',
+            'PLACE',
+            'C2',
+            'C3',
+            'CY',
+            'LG',
+            'LAT',
+            'GEOID'
+        ];
+        
+        $map = [
+            'name.family' => 'FNAME',
+            'name.given' => 'GNAME',
+            'birth.tzo' => 'TZO',
+            'birth.place.name' => 'PLACE',
+            'birth.place.c2' => 'C2',
+            'birth.place.c3' => 'C3',
+            'birth.place.cy' => 'CY',
+            'birth.place.lg' => 'LG',
+            'birth.place.lat' => 'LAT',
+            'birth.place.geoid' => 'GEOID',
+        ];
+        
+        $fmap = [
+            'GQID' => function($p){
+                return $p->data['partial-ids'][LERRCP::SOURCE_SLUG] ?? '';
+            },
+            'OCCU' => function($p){
+                return implode('+', $p->data['occus']);
+            },
+            'Y' => function($p){
+                return substr($p->data['birth']['date'], 0, 4);
+            },
+            'MON' => function($p){
+                return substr($p->data['birth']['date'], 5, 2);
+            },
+            'D' => function($p){
+                return substr($p->data['birth']['date'], 8, 2);
+            },
+            'H' => function($p){
+                return substr($p->data['birth']['date'], 11, 2);
+            },
+            'MIN' => function($p){
+                return substr($p->data['birth']['date'], 14, 2);
+            },
+            'UT_Y' => function($p){
+                return substr($p->data['birth']['date-ut'], 0, 4);
+            },
+            'UT_MON' => function($p){
+                return substr($p->data['birth']['date-ut'], 5, 2);
+            },
+            'UT_D' => function($p){
+                return substr($p->data['birth']['date-ut'], 8, 2);
+            },
+            'UT_H' => function($p){
+                return substr($p->data['birth']['date-ut'], 11, 2);
+            },
+            'UT_MIN' => function($p){
+                return substr($p->data['birth']['date-ut'], 14, 2);
+            },
+        ];
+        
+        // sort by name
+        $sort = function($a, $b){
+             return $a->data['name']['family'] <=> $b->data['name']['family'];
+        };
+        
+        $filters = [];
+        
+        [$exportReport, $exportFile, $N] = 
+        $g->exportCsv(
+            csvFile:    $outfile,
+            csvFields:  $csvFields,
+            map:        $map,
+            fmap:       $fmap,
+            sort:       $sort,
+            filters:    $filters,
+            dozip:      $dozip,
+            SEP:        ',',
+        );
+        
+        $report .= $exportReport;
+        return $report;
     }
     
 } // end class

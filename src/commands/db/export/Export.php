@@ -18,6 +18,9 @@ class Export {
     **/
     public static function add_number_in_file_name($file, $N){
         $pathinfo = pathinfo($file);
+        if(!isset($pathinfo['extension'])){
+            throw new \Exception("ERROR: names of exported file must have an extension.\nInvalid filename (missing extension): $file");
+        }
         return $pathinfo['dirname'] . DS . $pathinfo['filename'] . "-$N." . $pathinfo['extension'];
     }
     

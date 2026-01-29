@@ -1,9 +1,12 @@
 
 
+
+- in all exports, check that the destination file has an extension (to be able to use Export::add_number_in_file_name())
+
 - case of Boccardo Jean 1942-03-06 : date updated to 1942-03-16 and slug not updated
 => check ALL tmp2db and change slugs when not done
 
-- Harmonize voc Group::createFromSlug() and Person:getFromSlug()
+- Harmonize vocabulary Group::createFromSlug() and Person:getFromSlug()
 
 - D6 => reintegrate correctly addGeo + add DATE-UT computation + write corresponding issues
 
