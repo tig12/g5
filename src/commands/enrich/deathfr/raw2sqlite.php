@@ -15,10 +15,33 @@ use tiglib\filesystem\yieldFile;
 class raw2sqlite implements Command {
     
     const string QUERY_INSERT = <<<SQL
-insert into person values(
-
+insert into person(
+    fname,
+    gname,
+    sex,
+    bday,
+    bcode,
+    bname,
+    bcountry,
+    dday,
+    dcode,
+    dact
+)
+values(
+    :fname,
+    :gname,
+    :sex,
+    :bday,
+    :bcode,
+    :bname,
+    :bcountry,
+    :dday,
+    :dcode,
+    :dact
 )
 SQL;
+    
+    private static \PDOStatement $insert_stmt;
     
     /** 
         @param $params Array containing one element: a string indicating a date or a date range
@@ -63,28 +86,44 @@ SQL;
         //
         // main loop
         //
+        $sqlite = Deathfr::sqliteConnection();
+        self::$insert_stmt = $sqlite->prepare(self::QUERY_INSERT);
+        
         foreach($years as $y){
-            echo "======= Processing year $y =======\n";
             self::processYear($y);
         }
     }
     
     private static function processYear(string $y): void {
+        echo "======= Processing year $y =======\n";
+        $N = 0;
+        $t1 = microtime(true);
         $sqlite = Deathfr::sqliteConnection();
+        $sqlite->beginTransaction();
         $file = 'compress.bzip2://' . Config::$data['dirs']['ROOT'] . DS . Deathfr::tmpDir() . DS . 'raw' . DS . "deces-$y.txt.bz2";
-        foreach(yieldFile::loop($file) as $line){
-            $fields = self::parseLine($line);
+        try{
+            foreach(yieldFile::loop($file) as $line){
+                $fields = self::parseLine($line);
+                self::$insert_stmt->execute($fields);
+                $N++;
+            }
         }
-exit;
+        catch(\Exception $e){
+            $sqlite->rollback();
+            throw $e;
+        }
+        $sqlite->commit();
+        $t2 = microtime(true);
+        $dt = round($t2 - $t1, 4);
+        echo "$N lines - $dt s\n";
     }
     
     // patterns to parse a line
     const string P_NAME = '#(.*?)\*(.*)/#';
     /** 
-DUCRET*MARIE ANTOINETTE/                                                        21922010901004AMBERIEU-EN-BUGEY                                           19701210014216                              
+        See file README for line format and example.
     **/
     public static function parseLine(string $line): array {
-echo "$line\n";
         $res = [];
         $report = '';
         // name
@@ -95,45 +134,33 @@ echo "$line\n";
             $res['gname'] = $m[2];
         }
         else {
-            $report .= "Unable to parse name\n";
+            $report .= "Unable to parse name";
             $res['fname'] = '';
             $res['gname'] = '';
         }
         // sex
-        $res['sex'] = substr($line, 80, 1);
+        $sex = substr($line, 80, 1);
+        $res['sex'] = $sex == '1' ? 'M' : ($sex == '2' ? 'F' : '?');
         // birth date
         $tmp = substr($line, 81, 8);
-        $res['bdate'] = substr($tmp, 0, 4) . '-' . substr($tmp, 4, 2) . '-' . substr($tmp, 6);
-        // birth code
+        $res['bday'] = substr($tmp, 0, 4) . '-' . substr($tmp, 4, 2) . '-' . substr($tmp, 6);
+        // birth place code
         $res['bcode'] = substr($line, 89, 5);
-        // birth place
-        $res['bplace'] = trim(substr($line, 94, 30));
+        // birth place name
+        $res['bname'] = trim(substr($line, 94, 30));
         // birth country
         $res['bcountry'] = trim(substr($line, 124, 30));
         // death date
         $tmp = substr($line, 154, 8);
-        $res['ddate'] = substr($tmp, 0, 4) . '-' . substr($tmp, 4, 2) . '-' . substr($tmp, 6);
+        $res['dday'] = substr($tmp, 0, 4) . '-' . substr($tmp, 4, 2) . '-' . substr($tmp, 6);
         // death code
         $res['dcode'] = substr($line, 162, 5);
         // death act number
         $res['dact'] = trim(substr($line, 167, 9));
+        if($report != ''){
+            echo "$line$report\n";
+        }
         return $res;
     }
     
-/* 
-Numéro d'acte de décès - Longueur : 9 - Position : 168-176 - Type : Alphanumérique
-NOTA : Certains enregistrements peuvent contenir en toute fin des caractères non significatifs. Il est donc important, pour lire correctement ce champ, de bien respecter sa longueur ou sa borne de fin.
-*/
-    /* private static function possibleYears(): array {
-        $years = [];
-        $files = glob(Deathfr::tmpDir() . DS . 'raw' . DS . 'deces*.bz2');
-        $p = '/.*(\d{4})\.txt\.bz2/';
-        foreach($files as $file){
-            preg_match($p, $file, $m);
-            $years[] = $m[1];
-        }
-        return $years;
-    } */ 
-    
-
 }// end class    

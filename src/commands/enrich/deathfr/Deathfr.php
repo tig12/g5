@@ -34,7 +34,7 @@ class Deathfr {
     private static ?\PDO $sqlite = null;
     
     /** 
-        Directory containing the intermediate sqite database.
+        Directory containing the intermediate sqlite database.
         Relative to Config::$data['dirs']['tmp']
     **/
     public static function sqlitePath(): string {

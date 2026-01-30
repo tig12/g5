@@ -1,13 +1,16 @@
 
-This directory contains commands that integrate data coming from 
-
+This directory contains commands to integrate data coming from
 https://www.data.gouv.fr/datasets/fichier-des-personnes-decedees
 
 This permits to add death dates of French persons who died since 1970.
 
 Raw data are stored in .bz2 files in data/tmp/enrich/death-fr/raw
 
-=== copy of the raw file format ===
+From 1970 to 2025: contains 28 755 067 persons.
+
+Raw file format, from
+https://www.data.gouv.fr/datasets/fichier-des-personnes-decedees/reuses_and_dataservices
+--------------------------------------------------------------------------------------------------
 
 Nom et Prénom - Longueur : 80 - Position : 1-80 - Type : Alphanumérique
 La forme générale est NOM*PRENOMS
@@ -34,3 +37,205 @@ Code Officiel Géographique en vigueur au moment de la prise en compte du décè
 Numéro d'acte de décès - Longueur : 9 - Position : 168-176 - Type : Alphanumérique
 NOTA : Certains enregistrements peuvent contenir en toute fin des caractères non significatifs. Il est donc important, pour lire correctement ce champ, de bien respecter sa longueur ou sa borne de fin.
 
+
+Example of line
+--------------------------------------------------------------------------------------------------
+DUCRET*MARIE ANTOINETTE/                                                        21922010901004AMBERIEU-EN-BUGEY                                           19701210014216                              
+
+
+Execution 2026-01-30 with data retrieved around 2026-01-25:
+--------------------------------------------------------------------------------------------------
+======= Processing year 1970 =======
+27006 lines - 0.5003 s
+======= Processing year 1971 =======
+161019 lines - 3.3247 s
+======= Processing year 1972 =======
+336008 lines - 10.6375 s
+======= Processing year 1973 =======
+366040 lines - 12.5706 s
+======= Processing year 1974 =======
+380602 lines - 13.4443 s
+======= Processing year 1975 =======
+399309 lines - 14.5021 s
+======= Processing year 1976 =======
+408883 lines - 15.0028 s
+======= Processing year 1977 =======
+DELOUCHE DE PEMORET DE CHEVESTE DES CHAPELLES*BLANCHE SUZANNE HENRIETTE PAUL MAR21898122236009ARTHON                                                      19770803361549                              
+404774 lines - 15.1758 s
+======= Processing year 1978 =======
+421032 lines - 15.8833 s
+======= Processing year 1979 =======
+424986 lines - 16.3243 s
+======= Processing year 1980 =======
+437856 lines - 16.8791 s
+======= Processing year 1981 =======
+454544 lines - 17.9073 s
+======= Processing year 1982 =======
+453262 lines - 18.012 s
+======= Processing year 1983 =======
+473522 lines - 19.1433 s
+======= Processing year 1984 =======
+464103 lines - 18.8882 s
+======= Processing year 1985 =======
+474631 lines - 19.6344 s
+======= Processing year 1986 =======
+DE CHAMPEAUX-RICHARD DE SOULTRAIT D ORCET*MARTHE MICHELINE VICTORINE ESTHER MARI21895123075108PARIS 8E  ARRONDISSEMENT                                    1986030475115650      N                     
+476863 lines - 20.1453 s
+======= Processing year 1987 =======
+LE MAUFF DE KERGAL DE LA CHATAIGNERAIE*ERWAN MARIE HELEN HENRI RADU CAROL JOCELY11969041775113PARIS 13E  ARRONDISSEMENT                                   1987081364102920      N                     
+DE GUIGNARD DE GERMOND PREVOST DE SANSAC DE LA VAUZELLE*JACQUES GEORGES MARIE JO11933030475116PARIS 16E  ARRONDISSEMENT                                   1987051099140         N                     
+461801 lines - 19.7514 s
+======= Processing year 1988 =======
+457904 lines - 19.4315 s
+======= Processing year 1989 =======
+463081 lines - 19.8649 s
+======= Processing year 1990 =======
+DE PECHPEYROU COMMINGES DE GUITAUT*HERVE MARIE NICOLAS GEORGES ALBER            11914081675107PARIS 7                                                     1989121575107839      N             00000000
+LE MAIRE DE WARZEE D HERMALLE*REGINE NOEMIE ALICE MARIE DOROTHEE VAL            21903030199422LIMA                                                        198912309201210       N             00000000
+DEGEOUFFRE DE LA PRADELLE DE LEYRAT*MARGUERITE MARIE RAYMONDE MATHIL            21909020975115PARIS 15                                                    19900104872051        N             00000000
+BELLIER DE VILLENTROY*YVONNE MELANIE MARIE JOSEPHE ANTONIE AUGUSTINE            21894081897411SAINT DENIS                                                 1990021906029290      N             00000000
+CARPOZEN*CYPRIENNE EVA YVONNE JEANNE D ARC MARIE LEOZENSKA NOELLE MA            21898022199352ORAN                                                        1990022666136451      N             00000000
+GUILLAUME DE SAUVILLE DE LA PRESSE*JACQUES ANNE JOSEPH MARIE THIBAUT            11918030650152LES CRESNAYS                                                1990030783137483      N             00000000
+PANON DES BASSYNS DE RICHEMONT*JOSEPH MARIE LOUIS SAMUEL EUGENE PIER            11903013075116PARIS 16                                                    1990032975116454      N             00000000
+DABERTRAND*MARGUERITE GABRIELLE CHARLOTTE MARIE MARTHE EUGENIE NATHA            21913100315165ROUFFIAC                                                    19900519151651        N             00000000
+GOUVERNEUR*SYLVAIN AUGUSTIN JULIEN GHISLAIN CYPRIEN DESIRE DIEUDONNE            11908071299131FLOSTOY                                                     19900623026261        N             00000000
+LE COMPASSEUR CREQUY MONTFORT COMTE DE COURTIVRON*CHARLES-MICHEL MAR            11902030358287TAZILLY                                                     199005227511700465    N             00000000
+COMTE DE LA ROCHEFOUCAULD DE MONTBEL COMTE EN BAVIERE*GUY EMMANUEL J            11944060575116PARIS 16                                                    199007197510800162    N             00000000
+VALLETEAU DE MOUILLAC D HUST ET DU SAINT EMPIRE*CHARLES-ANTOINE ANDR            11990080975114PARIS 14                                                    199009087511402242    N             00000000
+DE CROY*DOROTHEE ELEONORE LOUISE SOPHIE LEOPOLDINE AMELIE MARIE ANTO            21897091999131HEVERLE                                                     1990102060141199      N             00000000
+MERLE DE LABRUGIERE DE LAVEAUCOUPET*FRANCOIS MARIE CLEMENT GUSTAVE E            11913060640268SAINT-LAURENT-DE-GOSSE                                      19901106641021217     N             00000000
+DE FAUCIGNY LUCINGE ET COLIGNY*BEATRIX MARIE NADINE FRANCOISE JULIET            21902100375116PARIS 16                                                    199008027511401944    N             00000000
+546887 lines - 24.0776 s
+======= Processing year 1991 =======
+THIBAULT DE LA CARTE DE LA FERTE SENECTERE*XAVIER FRANCOIS YVES MARI            11961022153062CHATEAU-GONTIER                                             19901210490775        N             00000000
+PANON DESBASSAYNS DE RICHEMONT*AGNES MARIE ATHENAIS MATHILDE SALSA J            21900042075116PARIS 16                                                    199010027511402461    N             00000000
+TEVI-DJIDJOGBE LACLE*ADJETE DANIEL BRADLEY JEFF ALBERT STEVE JACK MA            11990110775114PARIS 14                                                    199012237511403229    N             00000000
+DE VILLELUME*ANNE MARIE FERNANDE LOUISE NATHALIE OCTAVIE BLANCHE CLO            11909091762193CALAIS                                                      1990121759043282      N             00000000
+DE HILLERIN DE LATOUCHE DE BOISTISSANDEAU*BEATRICE ELISABETH JACQUEL            21940030249007ANGERS                                                      1990120392019386      N             00000000
+DE GAZEAU ROBIOU DE LAVRIGNAIS*LEONIE ELISABETH MARIE JOSEPHE JULIA             21915030985152LA MOTHE-ACHARD                                             1991012835238241      N             00000000
+REMY*CELESTIN MAURICE GEORGES CHARLES JULES EUGENE LEON PAUL JOSEPH             11927071999131HAINAUT                                                     199103097425654       N             00000000
+DU CHEYRON DE BEAUMONT D ABZAC DE LADOUZE*GENEVIEVE MARIE ANTOINETTE            21921100865440TARBES                                                      1991031103190174      N             00000000
+DE SENIGON DE ROUSSET DE ROUMEFORT DU CLUZEAU*FRANCOISE MARIE CLAIRE            21928031499401A MONTREAL                                                  199103257510600080    N             00000000
+HAUSSEGUY*ANDREE MARIE LOUISE CECILE EMILIENNE THEODORA HELENE HENRI            21912010499352ORAN                                                        1991052134032598      N             00000000
+GOULET DE RUGY DE VAISSIERE*MARIE-FRANCOISE AMELIE ANTOINETTE LAUREN            21899041072255ROUESSE-VASSE                                               199105187233429       N             00000000
+DE ROCHECHOUART DE MORTEMART*MARGUERITE MARIE HELENEARMANDE VOCTURNI            21931121875116PARIS 16                                                    19900501991400        N             00000000
+DE LUSIGNY DU BREUIL-HELION DE LA GUERONNIERE*MARGUERITE MARIE JEANN            21922052572109CRISSE                                                      199107059521062       N             00000000
+DE PLACE DE BOUCHARD D AUBETERRE DE BISSERET*BERTRAND MARIE JOSEPH H            11896091303185MONTLUCON                                                   1991072311262506      N             00000000
+DU BOIS JAGU DE LA VILLERABEL*FRANCOISE CHRISTIANE SOPHIE COLETTE EU            21908010339182CRISSEY                                                     199106197510700442    N             00000000
+RINALDO*FLEUR AIMEE SOPHIE ADRIENNE EN RELIGION SOEUR AIMEE DE JESUS            21909092097120POINTE A PITRE                                              1990070297209519      N             00000000
+DE POLIGNAC*HENRI MELCHIOR JEAN GUY MICHEL MARIE ARMAND APPOLLINAIRE            11950020375116PARIS 16                                                    19911011334716        N             00000000
+DE LOMENIE BONNET LAMONERIE*CHRISTIANE MARIE-THERESE MICHELLE SOLANG            21904122033506SAUVETERRE-DE-GUYENNE                                       199110272406818/1     N             00000000
+DE NERVAUX DE MEZIERES DE LOIYS*MARIE ETIENNETTE HELENE DELPHINE VIO            21910030524322PERIGUEUX                                                   1991102132013500      N             00000000
+BONNIN DE LA BONNINIERE DE BEAUMONT*MARIE ANTOINETTE RADEGONDE ALICE            21911052486190PERSAC                                                      199111223715930       N             00000000
+531675 lines - 23.9131 s
+======= Processing year 1992 =======
+LE PAS DE SECHEVAL*FRANCOIS HELMAN JEAN PHILIPPE MARIE CLAUDE JOSEPH            11991082175104PARIS 4                                                     199111267511502859    N             00000000
+FREYBURGER*LOUISE VICTOIRE MARIE GERTRUDE JEANNE ISABELLE ALEXANDRIN            21899111268066COLMAR                                                      19911215340321342     N             00000000
+DE ROCHECHOUART DUC DE MORTEMART PRINCE DE TONNAY - CHARENTE*FRANCOI            11930032458109ENTRAINS-SUR-NOHAIN                                         199201033523833       N             00000000
+DE POLIGNAC*MARIE YOLANDE ELISABETH LAURENCE AMELIE ODETTE NOEMI JEA            21903022375107PARIS 7                                                     199112167511601630    N             00000000
+DE FARCY DE BEAUMONT*ANTOINETTE MARIE MARGUERITE CHARLOTTE LOUISE GH            21897071935196MORDELLES                                                   199201223523800189    N             00000000
+LE GRAND DU RAQUET DE LA VIEILLE LOYE*LOUIS LARIE PAUL MAURICE CHARL            11921042444146ROUGE                                                       1992013092023109      N             00000000
+DE GUIGNARD DE GERMOND PREVOST DE SANSAC DE LA VAUZELLE*JEAN-HIPPOLY            11928022475116PARIS 16                                                    1992021022278180      N             00000000
+DESROUSSEAUX*MARIE ANNE EULALIE FREDERIQUE GUILLEMETTE IDA PHILIPPIN            21904061651592VANDIERES                                                   199204044528435       N             00000000
+DE GRAMMONT*MONIQUE MARIE THEODULINE AYMARDINE EMMA ANTOINETTE JEANN            21905041675108PARIS 8                                                     199204306015111       N             00000000
+DE LA HUPPE DE LARTURIERE*CLOTILDE MARIE JOSEPHE STEPHANIE GHUILAINE            21914061650359MORTAIN                                                     1992051380021516      N             00000000
+PRINCESSE DE CROY-SOLRE*CATHERINE HELENE THERESE ISABELLE MARIE LEOP            21929040158232SAINT-BENIN-D'AZY                                           1992051092051376      N             00000000
+DE FAUCIGNY LUCINGE ET COLIGNY*LE PRINCE JEAN-LOUIS CHARLES GUY MARI            11904021075108PARIS 8                                                     199205137510800111    N             00000000
+FELICE BADOGLIO*PIETRO FRANCESCO MARIO GIUSEPPE FERDINANDO ANTONIO L            11939071099208A ISTAMBOUL                                                 199206047510900204    N             00000000
+RIVIERE*FRANCOISE MARGUERITE MATHILDE MARIE MARTHE EMMA LUCILIA LUCI            21893061297416SAINT PIERRE DE LA REUNION                                  1991080297416344      N             00000000
+VAN HOVELL VAN WESTERVLIER EN WEEZEVELD*CECILIA JACOBA FRANCISCA MAR            21916031399135BOIS LE DUC                                                 19920905786460751     N             00000000
+DE BIDERAN DE BERAUD DE CANTERANNE*CHRISTOPHE MARIE JOSEPH FELIX FRA            11920102547063CAVARC                                                      19760218994150        N             00000000
+540832 lines - 24.4462 s
+======= Processing year 1993 =======
+DU CHEYRON DE BEAUMONT D ABZAC DE LA DOUZE*MARIE THIBAUD ANTOINE ALA            11922021484019BOLLENE                                                     19921210641021361     N             00000000
+DE CASSAGNES DE BEAUFORT DE MIRAMONFARGUE*MARIE EMMA CLOTILDE ODETTE            21895060775107PARIS 7                                                     19921224543951837     N             00000000
+DE PECHPEYROU DE COMMINGES DE GUITAUT*COLUMBAN GHISLAIN MARIE JOSEPH            11920062575116PARIS 16                                                    199212252124712       N             00000000
+THIBAULT DE LA CARTE DE LA FERTE SENECTERE*MICHEL MARIE JOSEPH JACQU            11917062775108PARIS 8                                                     199301227701410       N             00000000
+DE LIEDEKERKE DE PAILHE*ELISABETH ANTOINETTE JEANNE MARIE GHISLAINE             21897052499131A SOHEIT-TINLOT                                             199302167511600225    N             00000000
+RICAUD*MARIE JULIA EUGENIE CELINA VICTORINE MATHILDE AUGUSTINE LOUIS            21895070584099ROBION                                                      19930530840863        N             00000000
+BEGIN*CHRISTOPHE STEPHANE MICHEL FRANCOIS-EDOUARD STANISLAS MARC-ANT            11992111392035LA GARENNE-COLOMBES                                         1993090592009146      N             00000000
+520434 lines - 23.725 s
+======= Processing year 1994 =======
+MANIERE*BERNARD LUCIEN                                                          11919102461501VERRIERES                                                   1994011961501    1/   N             00000000
+DE LA FONTAINE DE FONTENAY LE LIEVRE DE LA GRANGE*GENEVIEVE LOUISE MARIE MATHILD21916011375116PARIS 16                                                    19931212751101964     N             00000000
+561326 lines - 25.4656 s
+======= Processing year 1995 =======
+522051 lines - 23.6305 s
+======= Processing year 1996 =======
+579007 lines - 26.452 s
+======= Processing year 1997 =======
+567668 lines - 26.3072 s
+======= Processing year 1998 =======
+461460 lines - 21.2757 s
+======= Processing year 1999 =======
+697192 lines - 30.4773 s
+======= Processing year 2000 =======
+570494 lines - 26.3699 s
+======= Processing year 2001 =======
+567111 lines - 26.6108 s
+======= Processing year 2002 =======
+549493 lines - 25.9704 s
+======= Processing year 2003 =======
+573622 lines - 27.5178 s
+======= Processing year 2004 =======
+DE VIEL DE LUNAS D EPEUILLES DE CAULAINCOURT DE VICENCE*ADRIENNE ALBERIQUE MARIE21901101775107PARIS 7                                                     20040319021442        N             00000000
+537816 lines - 25.5708 s
+======= Processing year 2005 =======
+DE PILLOT COMTE DE COLIGNY COMTE DU SAINT EMPIRE ROMAIN*MARIE GASPARD JEAN HUGUE11934081669244TASSIN-LA-DEMI-LUNE                                         20041219751181768/10  N             00000000
+557035 lines - 26.0627 s
+======= Processing year 2006 =======
+535113 lines - 25.0906 s
+======= Processing year 2007 =======
+536332 lines - 25.2802 s
+======= Processing year 2008 =======
+553112 lines - 26.5563 s
+======= Processing year 2009 =======
+557241 lines - 26.7488 s
+======= Processing year 2010 =======
+551015 lines - 25.6538 s
+======= Processing year 2011 =======
+549115 lines - 25.9376 s
+======= Processing year 2012 =======
+MARIE ANTOINE JOSEPH DIT MARIE ANTOINE JOSEPH ALIAS SOOSAIRAJ DIT AUSSI MARIE J/11927033099223PERUMPANNAIYUR                INDE                          2012052199223624                            
+579982 lines - 26.7231 s
+======= Processing year 2013 =======
+582618 lines - 27.2445 s
+======= Processing year 2014 =======
+569445 lines - 26.0828 s
+======= Processing year 2015 =======
+609627 lines - 27.7388 s
+======= Processing year 2016 =======
+603319 lines - 27.745 s
+======= Processing year 2017 =======
+612926 lines - 28.3061 s
+======= Processing year 2018 =======
+620123 lines - 28.1183 s
+======= Processing year 2019 =======
+625372 lines - 29.0943 s
+======= Processing year 2020 =======
+679924 lines - 30.8228 s
+======= Processing year 2021 =======
+671469 lines - 30.6784 s
+======= Processing year 2022 =======
+683870 lines - 31.0966 s
+======= Processing year 2023 =======
+649513 lines - 30.1138 s
+======= Processing year 2024 =======
+656286 lines - 30.4395 s
+======= Processing year 2025 =======
+659780 lines - 30.6283 s
+
+--------------------------------------------------------------------------------------------------
+sqlite> select count(*) from person;
++----------+
+| count(*) |
++----------+
+| 28917511 |
++----------+
+
+sqlite> select count(*) from person where bcountry <> '';
++----------+
+| count(*) |
++----------+
+| 2653454  |
++----------+

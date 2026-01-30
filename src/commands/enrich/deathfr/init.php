@@ -55,7 +55,7 @@ create table person(
     dact character(9)
 )
 SQL;
-        $sql2 = 'create unique index idx_bday ON person(bday)';
+        $sql2 = 'create index idx_bday ON person(bday)';
         $sqlite->exec($sql1);
         $sqlite->exec($sql2);
         echo "Initialized local sqlite database $path_sqlite\n";

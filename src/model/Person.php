@@ -409,7 +409,7 @@ class Person {
     
     /**
         Computes the birth day from field birth.date or birth.date-ut.
-        @return format 'YYYY-MM-DD' or ''
+        @return Date formatted 'YYYY-MM-DD' or ''
     **/
     public function birthday(): string {
         if(isset($this->data['birth']['date'])){
@@ -424,7 +424,7 @@ class Person {
     
     /**
         Computes the birth date (date = day + hour if any) from field birth.date or birth.date-ut.
-        @return format f    'YYYY-MM-DD HH:MM' or 'YYYY-MM-DD' or ''
+        @return Date formatted 'YYYY-MM-DD HH:MM' or 'YYYY-MM-DD' or ''
     **/
     public function birthdate(): string {
         if(isset($this->data['birth']['date'])){
