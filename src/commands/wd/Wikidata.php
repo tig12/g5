@@ -25,6 +25,17 @@ class Wikidata{
     /** Base url to query WDQS **/
     const QUERY_URL = 'https://query.wikidata.org/sparql?format=json&query=';
         
+    /**
+        Path to the yaml file containing the characteristics of Wikidata information source.
+        Relative to directory data/db/source
+    **/
+    const SOURCE_DEFINITION_FILE = 'wikidata.yml';
+    
+    /**
+        Slug of Wikidata information source.
+    **/
+    const SOURCE_SLUG = 'wd';
+    
     // ******************************************************
     /**
         Queries WDQS

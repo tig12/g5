@@ -335,7 +335,10 @@ class Person {
     **/
     public function getFamilyName(): string {
         $this->computeCommonName();
-        return $nobl . $this->data['name']['family'];
+        // WARNING TODO nobility not included in family name
+// TODO quick fix not correct
+if(!isset($this->data['name']['family'])) return '';
+        return $this->data['name']['family'];
     }
     
     /**
@@ -343,6 +346,8 @@ class Person {
     **/
     public function getGivenName(): string {
         $this->computeCommonName();
+// TODO quick fix not correct
+if(!isset($this->data['name']['given'])) return '';
         return $this->data['name']['given'];
     }
     
