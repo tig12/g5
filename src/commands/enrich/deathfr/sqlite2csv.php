@@ -23,7 +23,7 @@ class sqlite2csv implements Command {
     /** 
         @param $params  Array containing zero or one element.
                         One element: the slug of a g5 person to match to sqlite
-                        Zero elements: match all g5 persons
+                        Zero element: match all g5 persons
         @return Empty string, echoes its output
     **/
     public static function execute($params=[]) {
@@ -31,8 +31,8 @@ class sqlite2csv implements Command {
         // check params
         //
         $msg = "this command needs one parameter, indicating a date or a date range\n"
-                . "Ex: php run-g5.php enrich deathfr sqlite2db\n"
-                . "    php run-g5.php enrich deathfr sqlite2db bachelier-louis-1870-03-11\n";
+                . "Ex: php run-g5.php enrich deathfr sqlite2csv\n"
+                . "    php run-g5.php enrich deathfr sqlite2csv bachelier-louis-1870-03-11\n";
         if(count($params) > 1){
             return "INVALID CALL: $msg";
         }
@@ -136,7 +136,7 @@ class sqlite2csv implements Command {
         if($slug != ''){
             $query .= " where slug='$slug'";
         }
-//$query .= ' limit 200';
+        //$query .= ' limit 200';
         
         $stmt = self::$db5->query($query);
         foreach($stmt->fetchAll(\PDO::FETCH_ASSOC) as $row){
@@ -203,4 +203,4 @@ class sqlite2csv implements Command {
         return true;
     }
     
-}// end class    
+}// end class

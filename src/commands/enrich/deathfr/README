@@ -8,6 +8,14 @@ Raw data are stored in .bz2 files in data/tmp/enrich/death-fr/raw
 
 From 1970 to 2025: contains 28 755 067 persons.
 
+Process:
+- retrieve data from data.gouv.fr site and compress them
+- execute php run-g5.php enrich deathfr raw2sqlite to generate the local sqlite database
+- execute php run-g5.php enrich deathfr sqlite2csv to build csv files containing a list of matches in data/tmp/enrich/deathfr/check
+- edit death-fr-check.csv to mark the files that don't match
+- copy the csv files to 
+- execute php run-g5.php enrich deathfr csv2db
+
 Raw file format, from
 https://www.data.gouv.fr/datasets/fichier-des-personnes-decedees/reuses_and_dataservices
 --------------------------------------------------------------------------------------------------
