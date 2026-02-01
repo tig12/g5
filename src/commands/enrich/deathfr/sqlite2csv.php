@@ -12,6 +12,7 @@ use g5\app\Config;
 use g5\model\DB5;
 use g5\model\Person;
 use tiglib\patterns\Command;
+use tiglib\strings\slugify;
 
 class sqlite2csv implements Command {
     
@@ -37,7 +38,8 @@ class sqlite2csv implements Command {
         }
         $slug = count($params) == 1 ? $params[0] : '';
         
-        $outfile = Deathfr::tmpDir() . DS . 'check' . DS . 'death-fr-check1.csv';
+        $outfile_ok    = Deathfr::tmpDir() . DS . 'check' . DS . 'death-fr-ok.csv';
+        $outfile_check = Deathfr::tmpDir() . DS . 'check' . DS . 'death-fr-check.csv';
         
         self::$sqlite = Deathfr::sqliteConnection();                                              
         self::$db5 = DB5::getDblink();
@@ -45,9 +47,9 @@ class sqlite2csv implements Command {
         $sqlite_stmt = self::$sqlite->prepare("select rowid,* from person where bday=:bday");
         $g5_persons = self::getG5Persons($slug);
         
-        $res = "ID;V;FNAME;GNAME;BDAY;BPLACE;DDAY;DCODE\n";
+        $res_ok = $res_check = "ID;V;FNAME;GNAME;BPLACE;BDAY;DDAY;DCODE\n";
+        $N_ok = $N_check = 0;
         
-        $N = 0;
         $t1 = microtime(true);
         foreach($g5_persons as $bday => $g5_persons){
             $sqlite_stmt->execute([':bday' => $bday]);
@@ -58,44 +60,74 @@ class sqlite2csv implements Command {
             }
             foreach($g5_persons as $g5_person){
                 foreach($sqlite_persons as $sqlite_person){
-                    if(!self::match($sqlite_person, $g5_person)){
+                    //
+                    // compare g5 / sqlite
+                    //
+                    $d1 = self::stringDistance($sqlite_person['fname'], $g5_person->getFamilyName());
+                    if($d1 > 2){
                         continue;
                     }
-                    $N++;
-                    $res .= $g5_person->data['slug']
+                    $d2 = self::stringDistance($sqlite_person['gname'], $g5_person->getGivenName());
+                    if($d2 > 2){
+                        continue;
+                    }
+                    $d3 = self::stringDistance($sqlite_person['bname'], $g5_person->data['birth']['place']['name']);
+                    if($d3 > 2){
+                        continue;
+                    }
+                    if(!self::matchBirthCountry($sqlite_person, $g5_person)){
+                        continue;
+                    }
+                    if(!self::matchBirthC2($sqlite_person, $g5_person)){
+                        continue;
+                    }
+                    //
+                    // build result
+                    //
+                    $new = $g5_person->data['slug']
                     . ';' // valid
                     . ';' . $g5_person->data['name']['family']
                     . ';' . $g5_person->data['name']['given']
-                    . ';' . $bday
                     . ';' . $g5_person->data['birth']['place']['name']
+                    . ';' . $bday
                     . ';' // dday
                     . ';' // dcode
                     . "\n";
-                    $res .= $sqlite_person['rowid']
+                    $new .= $sqlite_person['rowid']
                     . ';' // valid
                     . ';' . $sqlite_person['fname']
                     . ';' . $sqlite_person['gname']
-                    . ';' . $bday
                     . ';' . $sqlite_person['bname']
+                    . ';' . $bday
                     . ';' . $sqlite_person['dday']
                     . ';' . $sqlite_person['dcode']
                     . "\n";
-                    $res .= ";;;\n";
+                    $new .= ";;;\n";
+                    // choose between ok / to check
+                    if($d1 == 0 && $d2 == 0 && $d3 == 0){
+                        $N_ok++;
+                        $res_ok .= $new;
+                    }
+                    else{
+                        $N_check++;
+                        $res_check .= $new;
+                    }
                 } // end loop on sqlite person
             } // end loop on g5 person
         } // end loop on bday
-        file_put_contents($outfile, $res);
+        file_put_contents($outfile_ok, $res_ok);
+        file_put_contents($outfile_check, $res_check);
         $t2 = microtime(true);
         $dt = round($t2 - $t1, 4);
-        echo "Generated $outfile in $dt s\n";
-        echo "$N matching candidates\n";
+        echo "Execution took $dt s\n";
+        echo "Generated $outfile_ok    --- $N_ok matches ok\n";
+        echo "Generated $outfile_check --- $N_check matches to check\n";
     }
     
     /**
-        Returns an associative array of g5 persons grouped by birth day.
-        Keys = birth days
-        Values = array of g5 persons born this day (objects of type Person).
-        
+        @return Associative array of g5 persons grouped by birth day.
+                Keys = birth days
+                Values = array of g5 persons born this day (objects of type Person).
     **/
     public static function getG5Persons(string $slug=''): array {
         $res = [];
@@ -104,7 +136,7 @@ class sqlite2csv implements Command {
         if($slug != ''){
             $query .= " where slug='$slug'";
         }
-//$query .= ' limit 500';
+//$query .= ' limit 200';
         
         $stmt = self::$db5->query($query);
         foreach($stmt->fetchAll(\PDO::FETCH_ASSOC) as $row){
@@ -118,56 +150,20 @@ class sqlite2csv implements Command {
         }
         return $res;
     }
-    
-    private static function match(array &$sqlite, Person $g5): bool {
-        $d1 = self::stringDistance($sqlite['fname'], $g5->getFamilyName());
-        if($d1 > 2){
-            return false;
-        }
-        $d2 = self::stringDistance($sqlite['gname'], $g5->getGivenName());
-        if($d2 > 2){
-            return false;
-        }
-        if(!self::matchBirthplace($sqlite, $g5)){
-            return false;
-        }
-//echo $sqlite['fname'] . ' / ' . $sqlite['gname'] . ' ----- ' . $g5->getFamilyName() . ' / ' . $g5->getGivenName() . "\n";
-//echo "d1 = $d1, d2 = $d2\n";
-        return true;
-    }
-    
-    /**
-        Returns a boolean indicating that the birth places are not incompatible.
-        Does not compare the place names, only country and c2.
-    **/
-    private static function matchBirthplace(array &$sqlite, Person $g5): bool {
-        $cy_sqlite = $sqlite['bcountry'];
-        if($cy_sqlite == ''){
-            $cy_sqlite = 'FR';
-        }
-        $cy_g5 = $g5->data['birth']['place']['cy'];
-        if($cy_sqlite != $cy_g5){ // $cy_g5 is never empty
-            return false; // in practice, false for persons born out of metropolitan France
-        }
-        // c2
-        $c2_g5 = $g5->data['birth']['place']['c2'];
-        $c2_sqlite = substr($sqlite['bcode'], 0, 2);
-        if($c2_sqlite != '' && $c2_g5 != '' && $c2_sqlite != $c2_g5){
-            return false;
-        }
-        return true;
-    }
-
+        
     /**
         Returns the minimal distance between 2 strings.
+        The use of slugify permits to remove all accents and to have the computation case-insensitive.
         As the strings can be composed (ex: "Jean-Claude", or "Jean Claude"),
         the comparison is done between each components of the two strings.
     **/
     private static function stringDistance($str1, $str2): int {
+        $str1 = slugify::compute($str1);
+        $str2 = slugify::compute($str2);
         $min = 10;
         $tests = [];
-        $parts1 = preg_split('/\W/', strtolower($str1));
-        $parts2 = preg_split('/\W/', strtolower($str2));
+        $parts1 = explode('-', $str1);
+        $parts2 = explode('-', $str2);
         foreach($parts1 as $p1){
             foreach($parts2 as $p2){
                 $l = levenshtein($p1, $p2);
@@ -176,11 +172,35 @@ class sqlite2csv implements Command {
                 }
             }
         }
-// echo "===================\n$str1\n";
-// echo "$str2\n";
-// echo "\n"; print_r($parts1); echo "\n";    
-// echo "\n"; print_r($parts2); echo "\n";
         return $min;
+    }
+    
+    /**
+        Returns a boolean indicating if the birth countries are identical.
+    **/
+    private static function matchBirthCountry(array &$sqlite, Person $g5): bool {
+        $cy_sqlite = $sqlite['bcountry'];
+        if($cy_sqlite == ''){
+            $cy_sqlite = 'FR';
+        }
+        $cy_g5 = $g5->data['birth']['place']['cy'];
+        if($cy_sqlite != $cy_g5){ // $cy_g5 is never empty
+            return false; // in practice, false for persons born out of metropolitan France
+        }
+        return true;
+    }
+    
+    /**
+        Returns a boolean indicating if the birth c2 are identical.
+        (c2 = admin code level 2 = département for France)
+    **/
+    private static function matchBirthC2(array &$sqlite, Person $g5): bool {
+        $c2_g5 = $g5->data['birth']['place']['c2'];
+        $c2_sqlite = substr($sqlite['bcode'], 0, 2);
+        if($c2_sqlite != '' && $c2_g5 != '' && $c2_sqlite != $c2_g5){
+            return false;
+        }
+        return true;
     }
     
 }// end class    
