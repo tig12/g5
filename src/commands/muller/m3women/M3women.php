@@ -284,9 +284,10 @@ class M3women {
     // *********************** Source management ***********************
     
     /** Returns a Source object for raw file. **/
-    public static function getSource(): Source {
-        return Source::getSource(Config::$data['dirs']['db'] . DS . self::SOURCE_DEFINITION);
-    }
+// not used - remove after testing a full build of the database
+    // public static function getSource(): Source {
+        // return Source::getSource(Config::$data['dirs']['db'] . DS . self::SOURCE_DEFINITION);
+    // }
     
     // *********************** Group management ***********************
     

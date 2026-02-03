@@ -409,7 +409,7 @@ MAZON, 7-7-1921, 7 h. 15, Montluel (Ain).
 MOGA Alban, 1-5-1923, 9 h. 30, Bordeaux (Gironde).
 PRAT Jean, 1-8-1923, 9 h., Lourdes (Hautes-Pyrénées).
 PUECH Louis, 4-12-1894, 21 h., Gorse (Lot).
-PUIG-AUBERT Henri, 24-3-1925, 1 h. 30, Andernach (Allemagne).
+PUIG-AUBERT Henri, 24-3-1925, 1 h. 30, Andernach (Allemagne).
 RAMIS Roger, 29-3-1902, 17 h., Perpignan (Pyrénées-Orientales).
 SORO Robert, 28-11-1922, 16 h., Odos (Hautes-Pyrénées).
 STRUXIANO Philippe, 11-3-1891, 4 h., Toulouse (Haute-Garonne).
@@ -518,7 +518,7 @@ LALAOUNIS Jean, 16-3-1926, 14 h. 30, Pau (Basses-Pyrénées).
 LAMOTTE Roland, 23-6-1930, 16 h., Fourmies (Nord).
 LANGLOIS Pierre, 31-3-1925, 14 h., Pont-Audemer (Eure).
 LAPOURIELLE Claude, 13-6-1931, 1 h., Ville-d’Ay (Marne).
-LAPOURIELLE Michel, 26-8-1927, 12 h., Epernay (Marne).
+LAPOURIELLE Michel, 26-8-1927, 12 h., Epernay (Marne).
 LAURENT. Roland, 17-2-1924, 5 h., Montlucon (Allier).
 LAVOINE Gilbert, 3-2-1921, 7 h., Laon (Aisne).
 LAWNICZAK César, 27-5-1928, 7 h. 30, Saint-Vallier (Saône-et-Loire).
@@ -550,7 +550,7 @@ PRIGENT Jacques, 26-9-1927, 6 h. 25, Gennevilliers (Seine).
 PTAK Edouard, 7-11-1930, 9h. 35, Barlin (Pas-de-Calais).
 RANVIAL Marcel, 24-12-1929, 1 h. 30, Resendaél (Nord).
 RICHAUD Pierre, 9-12-1927, 10 h., Oran (Algérie).
-ROUSTAN René, 11-6-1928,. 8 h., Valence (Drôme).
+ROUSTAN René, 11-6-1928, 8 h., Valence (Drôme).
 SANTANBIEN Jean, 12-12-1929, 5 h., Epernay (Marne).
 SNEYERS Jean, 11-8-1927, 3 h. 15, Mulhouse (Haut-Rhin).
 SOBOLACK Stanislas, 8-8-1929, 18 h., Saint-Denis (Seine).

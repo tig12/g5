@@ -12,7 +12,6 @@ namespace g5\commands\gauq\g55;
 
 use g5\G5;
 use g5\app\Config;
-// use g5\commands\gauq\LERRCP;
 use tiglib\arrays\csvAssociative;
 
 class G55 {

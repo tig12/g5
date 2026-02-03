@@ -204,7 +204,8 @@ name:
                 <code>name.given</code> and <code>name.family</code> are either both filled or both empty.
             </li>
             <li>
-                The rule to build the name of a person is : if <code>name.full</code> is not empty, it is used. Else the concatenation of <code>name.given</code> and <code>name.family</code> is used.
+                The rule to build the name of a person is : if <code>name.full</code> is not empty, it is used.
+                <br>Else the concatenation of <code>name.given</code> and <code>name.family</code> is used.
             </li>
             <li>For noble persons, the nobiliary particle is contained in <code>name.family</code>.</li>
         </ul>
@@ -214,6 +215,7 @@ name:
         <code><b>name.official</b></code> represent the <i>exact</i> spelling of the name, as written in the birth certificate.
         <br>An important rule is: these fields are filled only if they differ from the common fields.
         <br>If the person has several given names, <code>name.official.given</code> contains them all.
+        <br>Field <code>name.official.full</code> is used to transcribe acts where the distinction between family and given names is to difficult.
     </li>
     <li>
         <code><b>name.spouse</b></code> : array of spouse names (in general, used for married women). This field is informative only ; if the person is known using her spouse name, this information must be repeated in field <code>name.family</code>.
@@ -252,7 +254,7 @@ name:
     family: Calvet
     given: Rosa Noémie Emma
 </pre>
-        This person is known as "Emma Calve".
+        This person is known as "Emma Calvé".
         <br>Here, both given and family names are different from the birth certificate, so both are filled.
     </li>
     

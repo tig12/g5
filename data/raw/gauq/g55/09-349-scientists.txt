@@ -27,7 +27,7 @@ BOSLER Jean, 24-3-1878, 23 h. 30, Angers (Maine-et-Loire).
 BOULIGNAND Georges, 13-10-1889, 11 h. 30, Lorient (Morbihan).
 BOUQUET de La GRYE Anat., 29-5-1827, 5 h., Thiers (Puy-de-Dôme).
 BOURGEOIS Joseph, 21-2-1857, 23 h., Ste-Marie-aux-Mines (Ht-Rhin).
-BOUTY Edmond, 12-1-1846, 17 h., Nant (Aveyron).
+BOUTY Edmond, 12-1-1846, 17 h., Nant (Aveyron).
 BOUVIER Louis, 9-4-1856, 6 h., Saint-Laurent-Granvaux (Jura).
 BRANLY Edouard, 23-10-1844, 10 h., Amiens (Somme).
 BRAVAIS Auguste, 23-8-1811, 13 h., Annonay (Ardèche).
@@ -87,7 +87,7 @@ FABRE Henri, 21-12-1823, 16 h., Saint-Léons (Aveyron).
 FABRY Eugène, 16-10-1854, 21 h., Marseille (Bouches-du-Rhône).
 FABRY Louis, 20-4-1862, 22 h., Marseille (Bouches-du-Rhône).
 FABRY Charles, 11-6-1867, 1 h., Marseille (Bouches-du-Rhône).
-FAVE Ildephonse, 28-2-1812, 12 h., Dreux (Eure-et-Loir).
+FAVE Ildephonse, 28-2-1812, 12 h., Dreux (Eure-et-Loir).
 FAVRE Pierre, 20-2-1813, 7 h., Lyon (Rhône).
 FAYE Hervé, 1-10-1814, 2 h., Saint-Benoist-du-Sault (Indre).
 FERRIE Gustave, 19-11-1868, 8 h., Saint-Michel-de-Maurienne (Savoie).
@@ -207,7 +207,7 @@ PASCAL Paul, 4-7-1880, 18 h. 15, Saint-Pol (Pas-de-Calais).
 PELOUZE Jules, 26-2-1807, 5 h., Valognes (Manche).
 PEREZ Jean, 6-12-1833, 13 h., Tarbes (Hautes-Pyrénées).
 PEREZ Charles, 19-5-1873, 1 h., Bordeaux (Gironde).
-PERON Alphonse, 29-11-1834, 7 h., Saint-Fargeau (Yonne).
+PERON Alphonse, 29-11-1834, 7 h., Saint-Fargeau (Yonne).
 PERRIER Francois, 18-4-1833, 10 h., Valleraugue (Gard).
 PERRIER-DELON Georges, 28-10-1872, 5 h., Montpellier (Hérault).
 PERRIER de La BATHIE Hen., 11-8-1873, 2 h., Chambéry (Savoie).

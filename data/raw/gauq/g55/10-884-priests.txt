@@ -42,10 +42,10 @@ AZEMA Pierre, 19-6-1877, 11 h., Roquecourbe (Tarn).
 AZEMA Roger, 20-5-1898, 4 h., Castres (Tarn).
 AZEMAR Antonin, 15-11-1871, 23 h., Le Verdier (Tarn).
 BAISSE Ernest, 3-1-1878, 12 h., Nézignan-L’Evaque (Hérault).
-BALSSA Emile, 10-6-1870, 4 h., Monestier (Tarn).
+BALSSA Emile, 10-6-1870, 4 h., Monestier (Tarn).
 BALSSA Yves, 11-4-1913, 13 h., Cagnac (Tarn).
 BARAILLE Jean, 30-10-1889, 21 h., Rovairoux (Tarn).
-BARDOU Pierre, 9-1-1871, 23 h.,. Tastavi (Tarn).
+BARDOU Pierre, 9-1-1871, 23 h., Tastavi (Tarn).
 BARDI Henri, 12-7-1875, 2 h., Le Masnav (Tarn).
 BARDY Pierre, 29-12-1878, 1 h., Ambialet (Tarn).
 BARRAU Arthur, 7-11-1880, 6 h., Sémalens (Tarn).
@@ -101,7 +101,7 @@ BRU Henri, 16-4-1907, 3 h., Espérausses (Tarn).
 BRUNIQUEL Joseph, 9-6-1915, 12 h., Rayssac (Tarn).
 CABAL Henri, 28-5-1880, 4 h., Saint-Antonin-de-Lacalm (Tarn).
 CABROL Albert, 8-9-1909, 4 h., Moularés (Tarn).
-CABROL Jean, 8-7-1904, 11 h., Labruguiére (Tarn).
+CABROL Jean, 8-7-1904, 11 h., Labruguiére (Tarn).
 CABROL Louis, 3-12-1889, 7 h., Carmaux (Tarn).
 CABROL Maurice, 2-1-1914, 7 h., Labruguiére (Tarn).
 CALMETTES Adrien, 7-4-1861, 8 h., Graulhet (Tarn).
@@ -161,7 +161,7 @@ DOUZALS Gustave, 5-10-1905, 9 h., Sainte-Gemme (Tarn).
 DULAU Pierre, 29-6-1889, 3 h., Tartas (Landes).
 DURAND Henri, 21-9-1864, 12 h., Bourgnounac (Tarn).
 DURAND Jacques, 23-7-1870, 21 h., Lasgraisses (Tarn).
-DURAND Louis, 16-9-1899, 13 h. 30, Lavaur (Tarn).
+DURAND Louis, 16-9-1899, 13 h. 30, Lavaur (Tarn).
 DURAND Prosper, 29-8-1872, 19 h., Réalmont (Tarn).
 ENJALBAL Gaston, 19-6-1908, 21 h., Albi (Tarn).
 ETCHEPARE Félix, 18-5-1905, 11 h., Ossés (Basses-Pyrénées).
@@ -180,7 +180,7 @@ FIGUIERES René, 24-3-1914, 4 h., Albi (Tarn).
 FLOUTARD Aimé, 18-5-1884, 16 h., Assac (Tarn).
 FLOUTARD Elie, 21-2-1879, 7 h., Courris (Tarn).
 FONTVIEILLE Alphonse, 17-2-1873, 4 h., Albi (Tarn).
-FONVIEILLE Léon, 22-2-1882, 23 h. 30., Brousse (Tarn).
+FONVIEILLE Léon, 22-2-1882, 23 h. 30, Brousse (Tarn).
 FOULCHER Pierre, 8-9-1879, 12 h., Teillet (Tarn).
 FOURNIE Angély, 24-9-1907, 18 h., Energues (Tarn).
 FOURNIE Marius, 22-12-1884, 2 h., Energues (Tarn).
@@ -221,7 +221,7 @@ LACLAU Pierre, 13-6-1913, 18 h., Villefranche (Tarn).
 LADGER François, 30-11-1875, 13 h., Villeneuve-las-Lavaur (Tarn).
 LACROUX Jules, 3-3-1871, 5 h., Valdériés (Tarn).
 LAGREZE Marcel, 26-11-1920, 13 h., Cordes (Tarn).
-LAPORTE Jean, 28-1-1888, 4 h., Pierre-d’Agenais (Lot-et-Garonne).
+LAPORTE Jean, 28-1-1888, 4 h., Pierre-d’Agenais (Lot-et-Garonne).
 LAROQUE Elie, 18-3-1867, 2 h., Alos (Tarn).
 LATGER Sylvain, 23-3-1886, 9 h., Roquecourbe (Tarn).
 LIFFRAUD Gabriel, 7-5-1902, 7 h., Lacrouzette (Tarn).
@@ -281,7 +281,7 @@ PLANTADE Jean, 3-3-1917, 15 h., Puylaurens (Tarn).
 POMIER Emilien, 6-1-1909, 14 h., Bellegarde (Tarn).
 PORTES Fortuné, 29-5-1884, 12 h., Mouzieys-Panens (Tarn).
 PRADELLES Roger, 26-7-1903, 23 h., Saint-Germain-des-Prés (Tarn).
-PRAT François, 28-3-1878, 16 h., Mouziers-Panens (Tarn).
+PRAT François, 28-3-1878, 16 h., Mouziers-Panens (Tarn).
 PRAT Jean, 19-12-1913, 5 h. 30, Réalmont (Tarn).
 PRAT J. F. H., 24-11-1863, 13 h., Cazelles (Tarn).
 PRIOU Elie, 4-6-1881, 9 h., Sémalens (Tarn).
@@ -341,7 +341,7 @@ SOLAGES Bernard, 7-2-1900, 6 h., Mézens (Tarn).
 SOLAGES Bruno, 8-8-1895, 21 h., Mézens (Tarn).
 SOLAGES François, 27-7-1898, 23 h., Mézens (Tarn).
 SOMPAYRAC Louis, 17-9-1880, 3 h., Rayssac (Tarn).
-SOUQUIERES Firmin, 1-12-1913, 1 h., Jugeols (Corrèze).
+SOUQUIERES Firmin, 1-12-1913, 1 h., Jugeols (Corrèze).
 SUC Dominique, 12-7-1868, 8 h., Villefranche (Tarn).
 SUDRE Albert, 29-4-1872, 0 h., Grayssac (Tarn).
 TAILHADE Paul, 28-11-1902, 8 h., Anglés (Tarn).
@@ -400,7 +400,7 @@ BATIFFOL Pierre, 27-1-1861, 2 h., Toulouse (Haute-Garonne).
 BATISSE Emile, 9-2-1873, 10 h., Saint-Vallier (Saône-et-Loire).
 BATISSIER Léon, 13-8-1860, 4 h. 30, Bourbon-L’Archambault (Allier).
 BAUDAN Maurice, 21-7-1860, 15 h., Saint-Christophe-de-Chalais (Ch.).
-BAYOL Adrien, 28-12-1878, 4 h., Castanet (Aveyron).
+BAYOL Adrien, 28-12-1878, 4 h., Castanet (Aveyron).
 BAZIERE Alfred, 1-12-1865, 21 h., Condé-sur-Noireau (Calvados).
 BEAUDEMON Etienne, 23-11-1840, 11 h., Tulle (Corrèze).
 BEAUREGARD Emile, 29-12-1880, 10 h. 30, Saint-Braic (Ille-et-Vilaine).
@@ -460,7 +460,7 @@ BROSSARD Emile, 27-3-1880, 5 h., Lantenay (Côte-d’Or).
 BROUSSOLLE Jacques, 31-12-1861, 6 h., Dijon (Côte-d’Or).
 BRUN François, 12-1-1878, 20 h., Combronde (Puy-de-Dôme).
 BRUNEAU Benjamin, 9-2-1871, 2 h., Mareuil-sur-Arnon (Cher).
-BRUNET Pierre, 20-9-1867, 1 h., Marcillac (Aveyron).
+BRUNET Pierre, 20-9-1867, 1 h., Marcillac (Aveyron).
 BUFFIERE François, 12-9-1861, 1 h., Commentry (Allier).
 BUTET Henri, 19-10-1865, 10 h., Rouvres (Loiret).
 CABANEL Firmin, 8-1-1877, 16 h., Salviac (Lot).
@@ -520,7 +520,7 @@ DEBOUT Henri, 22-8-1857, 9 h., Arras (Pas-de-Calais).
 DECLOMESNIL Léon, 30-5-1866, 5 h., Caen (Calvados).
 DEFFIEUX Jean, 6-5-1863, 15 h., Gondrin (Gers).
 DELABAR Charles, 6-4-1867, 4 h., Ornes (Meuse).
-DELAUNAY Jules, 30-1-1847, 3 h. 30, Avranches (Manche).
+DELAUNAY Jules, 30-1-1847, 3 h. 30, Avranches (Manche).
 DELBOS Charles, 16-7-1871, 7 h., Saint-Germain-les-Corbeil (S.-et-O.).
 DELERUE Félix, 28-4-1871, 20 h., Roubaix (Nord).
 DELEUZE Jean, 18-1-1857, 7 h., Bordeaux (Gironde).
@@ -580,7 +580,7 @@ FROMENTIN Jean, 13-7-1883, 1 h., Saint-Brieuc (Côtes-du-Nord).
 GAILHOUSTE Jean, 10-5-1886, 3 h., Bordeaux (Gironde).
 LE GALL Hyacinthe, 7-2-1863, 17 h., Brest (Finistère).
 GARILHE Ulysse, 23-10-1856, 6 h., Gravieres (Manche).
-GARRIGUET Louis, 13-11-1859, 4 h., Neyrac (Aveyron).
+GARRIGUET Louis, 13-11-1859, 4 h., Neyrac (Aveyron).
 GASSION Joseph, 24-7-1887, 16 h., Isigny-sur-Mer (Calvados).
 GASTON Jean, 11-9-1875, 3 h., Aurillac (Cantal).
 GAUTIER Félix , 26-3-1861, 23 h., Villedieu (Manche).
@@ -611,7 +611,7 @@ GRAFFAIN René, 22-3-1858, 3 h. 30, Pontvallain (Sarthe).
 GRANGENEUVE Jean-Baptiste, 27-7-1881, 3 h., Cestas (Gironde).
 GRANIER Marius, 17-3-1856, 2 h., Tavel (Gard).
 GRAPPIN Emile, 15-9-1882, 12 h., Saint-Ouen (Seine).
-GREGOIRE Gaston, 2-12-1860, 17 h. 30., Vaucouleurs (Meuse).
+GREGOIRE Gaston, 2-12-1860, 17 h. 30, Vaucouleurs (Meuse).
 GRESSIN François, 1-2-1844, 23 h., Ménétou-Couture (Cher).
 GROS Marie, 1-1-1878, 2 h., Besançon (Doubs).
 GUENARD Théophile, 9-5-1860, 9 h., Saint-Georges-de-Chesne (I.-et-V.).
@@ -640,7 +640,7 @@ JOUFFRET Jean, 19-6-1860, 4 h., Avignon (Vaucluse).
 JOUIN Ernest, 20-12-1844, 7 h., Angers (Maine-et-Loire).
 JUBAULT Louis, 27-4-1870, 4 h., Chateaudun (Eure-et-Loire).
 JUNG Henri, 25-12-1846, 15 h., Grosblidestroff (Moselle).
-KARPEN Albert, 6-2-1891, 2 h., Neuilly-sur-Seine (Seine).
+KARPEN Albert, 6-2-1891, 2 h., Neuilly-sur-Seine (Seine).
 KIEFFER Joseph, 7-2-1888, 20 h., Limersheim (Bas-Rhin).
 KRIEGER Antoine, 17-11-1874, 17 h. 30, Blois (Loir-et-Cher).
 LA BARRE (de) André, 25-8-1855, 13 h., Temple (Loir-et-Cher).
@@ -700,7 +700,7 @@ MATHE Jean, 24-2-1856, 18 h., Vigoux (Indre).
 MATHIEU Joseph, 20-6-1859, 1 h. 30, Macon (Saône-et-Loire).
 MARTIN Benoist, 18-8-1842, 6 h., Saint-Etienne (Loire).
 MARTIN François, 19-1-1873, 13 h., Dracy-sur-Loup (Saône-et-Loire).
-MARTIN Louis, 10-8-1861, 13 h., Cénomes (Aveyron).
+MARTIN Louis, 10-8-1861, 13 h., Cénomes (Aveyron).
 MARTIN Victor, 27-5-1872, 4 h., Présaille (Haute-Loire).
 MATHIS François, 26-11-1860, 14 h., Bidestroff (Moselle).
 MAUGARS Charles, 3-2-1879, 20 h., Tillay-le-Perreux (Eure-et-Loire).
@@ -728,7 +728,7 @@ MOREAU de MONT. Yves, 30-1-1900, 6 h., Paimpol (Côtes-du-Nord).
 MORTIER Robert, 4-7-1877, 22 h., Thorigné (Sarthe).
 MOUNET Jacques, 23-1-1844, 20 h., Saint-Germain (Savoie).
 MOUROT Henri, 13-8-1877, 11 h. 30, Eureville (Haute-Marne).
-MOUROT Joseph, 1-3-1880,.4 h. 30, Eureville (Haute-Marne).
+MOUROT Joseph, 1-3-1880, 4 h. 30, Eureville (Haute-Marne).
 MOYSEN Auguste, 23-12-1840, 5 h., Coupiac (Aveyron).
 MUGNIER Arthur, 27-11-1853, 20 h., Lubersac (Corrèze).
 MULLER Louis, 6-12-1848, 10 h., Guesting (Moselle).
@@ -760,7 +760,7 @@ PEAUCELLIER Constant, 18-6-1862, 2 h., Saint-Just-en-Chaussée (Oise).
 PEILLAUBE Emile, 8-7-1864, 1 h., Calonges (Lot-et-Garonne).
 PELLERIN Julien, 18-3-1892, 16 h., La Chapelle (Morbihan).
 PELLET Charles, 11-11-1883, 10 h. 30, Besseges (Gard).
-PERICHON Jean, 20-3-1849, 9 h., Roanne (Loire).
+PERICHON Jean, 20-3-1849, 9 h., Roanne (Loire).
 PERISSE Adrien, 6-4-1860, 3 h., Saint-Martin-d’Ertreaux (Loire).
 PERISSE Benjamin, 29-3-1846, 4 h., Montgaillard (Landes).
 PERREL-BEAUFIN Paul, 18-9-1886, 20 h. 45, Saint-Cloud (Seine-et-O.).
@@ -820,7 +820,7 @@ SABATIER Claude, 14-5-1847, 21 h., Rodez (Aveyron).
 SAGNES Léon, 5-1-1861, 1 h., Béduer (Lot).
 SAINT-JEAN Victor, 1-11-1859, 1 h., Chateauneuf-de-Randon (Lozère).
 SALAT Antoine, 14-10-1855, 14 h., Brézons (Cantal).
-SALIVET de FOUCHECOURT Fr., 11-4-1870, 21 h. 30, Mende (Lozère).
+SALIVET de FOUCHECOURT Fr., 11-4-1870, 21 h. 30, Mende (Lozère).
 SALMON François, 18-6-1846, 16 h., Dieu (Meuse).
 SAUVEPLANE Jules, 22-2-1862, 11 h., Nant (Aveyron).
 SCHAUFFLER Aimé, 2-11-1863, 13 h., Sarrebourg (Moselle).

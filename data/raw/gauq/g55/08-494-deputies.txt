@@ -165,7 +165,7 @@ BENDJELLOUL Mohamed, 8-12-1893, 13 h., Constantine (Algérie).
 BENE Maurice, 24-8-1884, 19 h., Sèvres (Seine-et-Oise).
 BENGANA Mohamed, 21-12-1914, 8 h., Biskra (Constantine).
 BENOIT Alcide, 15-6-1899, 1 h., Verzenay (Marne).
-BERNARD Michel, 23-7-1921, 9 h., Evreux (Eure).
+BERNARD Michel, 23-7-1921, 9 h., Evreux (Eure).
 BERTHET Alix, 15-8-1907, 15 h., Villard-Reculas (Isère).
 BESSAC Abel, 26-1-1911, 21 h., Saint-Martin-Labouval (Lot).
 BESSET Pierre, 18-2-1907, 18 h., La Ricamarie (Loire).
@@ -225,7 +225,7 @@ COSTES Alfred, 24-2-1888, 3 h., Saint-Juéry (Tarn).
 COUDERT Lucien, 28-7-1887, 22 h., Castres (Tarn).
 COUINAUD Pierre, 28-10-1891, 7 h., Nevers (Nièvre).
 COUSTON Paul, 12-10-1903, 17 h., Avignon (Vaucluse).
-COUTANT Robert, 14-1-1908, 3 h., Ivry-sur-Seine (Seine).
+COUTANT Robert, 14-1-1908, 3 h., Ivry-sur-Seine (Seine).
 CROUZIER Jean, 2-11-1899, 21 h., Raon-l'Etape (Vosges).
 DAGAIN Léon, 11-7-1896, 23 h., Saint-Loup de la Salle (Saône-et-L.).
 DAMETTE Auguste, 8-9-1903, 7 h. 30, Hazebrouck (Nord).
@@ -285,11 +285,11 @@ GABORIT Roger, 12-12-1903, 8 h., Lucon (Vendée).
 GAILLEMIN Georges, 9-12-1919, 2 h. 30, Cornimont (Vosges).
 GALICIER Emilienne, 11-6-1911, 20 h., Villeneuve (Yonne).
 GARAVEL Joseph, 4-3-1892, 19 h., Morette (Isère).
-GARDEY Abel, 21-11-1882, 20 h. 30, Margouet-Meymes (Gers).
+GARDEY Abel, 21-11-1882, 20 h. 30, Margouet-Meymes (Gers).
 GARNIER André, 25-3-1910, 15 h. 30, Viviers-le-Gras (Vosges).
 GAUBERT André, 5-12-1911, 17 h., Marseille (Bouches-du-Rhône).
 GAUTIER André, 26-4-1908, 22 h., Breloux (Deux-Sévres).
-GENTON Jacques, 22-9-1918, 1 h.,. Bourges (Cher).
+GENTON Jacques, 22-9-1918, 1 h., Bourges (Cher).
 GEORGES Maurice, 15-9-1899, 6 h., Giromagny (Belfort).
 GERNEZ Raymond, 27-11-1906, 11 h., Avesnes (Nord).
 GILLIOT Jean, 6-6-1890, 5 h., Hagetmau (Landes).

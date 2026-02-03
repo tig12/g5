@@ -148,7 +148,6 @@ class tmp2db implements Command {
                 }
                 else{
                     $new['name']['full'] = $line['FNAME'];
-                    $new['name']['given'] = '';
                 }
                 $new['birth'] = [];
                 $new['birth']['date-ut'] = $line['DATE-UT'];

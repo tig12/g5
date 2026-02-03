@@ -125,7 +125,7 @@ class tmp2db implements Command {
             $lineRaw = $linesRaw[$i];
             $mullerId = Muller::mullerId($source->data['slug'], $line['NR']);
             if($line['GNR'] == ''){
-                // Person not in Gauquelin data
+                // Person not in LERRCP Gauquelin data
                 $p = new Person();
                 $new = [];
                 $new['trust'] = Newalch::TRUST_LEVEL;
@@ -136,16 +136,20 @@ class tmp2db implements Command {
                 else{
                     $new['name']['full'] = $line['FNAME'];
                 }
-                $new['name']['nobl'] = $line['NOB'];
-                // Müller name considered as = to full name copied from birth certificate
-                $new['name']['official']['given'] = $line['GNAME'];
+                if($line['NOB'] != ''){
+                    $new['name']['nobl'] = $line['NOB'];
+                }
                 $new['birth'] = [];
+                // the following fields are never empty
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['place']['name'] = $line['PLACE'];
                 $new['birth']['place']['c2'] = $line['C2'];
                 $new['birth']['place']['cy'] = 'FR';
                 $new['birth']['place']['lg'] = (float)$line['LG'];
                 $new['birth']['place']['lat'] = (float)$line['LAT'];
+                if($line['MOD'] == 'LMT'){
+                    $new['birth']['lmt'] = true;
+                }
                 //
                 $p->addOccus($newOccus); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 $p->addIdInSource($source->data['slug'], $line['NR']);
@@ -225,12 +229,14 @@ class tmp2db implements Command {
                 // update fields that are more precise in muller1083
                 $new['birth']['date'] = $line['DATE']; // Cura contains only date-ut
                 $new['birth']['place']['name'] = $line['PLACE'];
-                $new['name']['nobl'] = $line['NOB'];
+                if($line['NOB'] != ''){
+                    $new['name']['nobl'] = $line['NOB'];
+                }
                 $new['name']['family'] = $line['FNAME'];
                 if($p->data['name']['given'] == ''){
                     // happens with names like Gauquelin-A1-258
                     $new['name']['given'] = $line['GNAME'];
-                    $new['name']['full'] = '';
+                    $new['name']['full'] = null;
                 }
                 // Müller name considered as = to full name copied from birth certificate
                 // (Gauquelin name considered as current name)

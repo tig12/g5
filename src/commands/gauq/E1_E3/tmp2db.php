@@ -126,15 +126,33 @@ class tmp2db implements Command {
                 }
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
-                $new['birth']['tzo'] = $line['TZO'];
-                $new['birth']['date-ut'] = $line['DATE-UT'];
-                $new['birth']['place']['name'] = $line['PLACE'];
-                $new['birth']['place']['c2'] = $line['C2'];
-                $new['birth']['place']['c3'] = $line['C3'];
-                $new['birth']['place']['cy'] = $line['CY'];
-                $new['birth']['place']['lg'] = (float)$line['LG'];
-                $new['birth']['place']['lat'] = (float)$line['LAT'];
-                $new['birth']['place']['geoid'] = (int)$line['GEOID'];
+                if($line['TZO'] != ''){
+                    $new['birth']['tzo'] = $line['TZO'];
+                }
+                if($line['DATE-UT'] != ''){
+                    $new['birth']['date-ut'] = $line['DATE-UT'];
+                }
+                if($line['PLACE'] != ''){
+                    $new['birth']['place']['name'] = $line['PLACE'];
+                }
+                if($line['C2'] != ''){
+                    $new['birth']['place']['c2'] = $line['C2'];
+                }
+                if($line['C3'] != ''){
+                    $new['birth']['place']['c3'] = $line['C3'];
+                }
+                if($line['CY'] != ''){
+                    $new['birth']['place']['cy'] = $line['CY'];
+                }
+                if($line['LG'] != ''){
+                    $new['birth']['place']['lg'] = (float)$line['LG'];
+                }
+                if($line['LAT'] != ''){
+                    $new['birth']['place']['lat'] = (float)$line['LAT'];
+                }
+                if($line['GEOID'] != ''){
+                    $new['birth']['place']['geoid'] = (int)$line['GEOID'];
+                }
                 $p->updateFields($new);
                 $p->addOccus($newOccus); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 $p->computeSlug();

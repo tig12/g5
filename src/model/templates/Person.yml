@@ -1,22 +1,23 @@
 #
 # Describes the structure of a Person
 # Used to create an empty person (object of class src/model/Person)
-#
+# php vocabulary is used to describe the types (ex: ?string = string or null)
+# See more details at https://tig12.github.io/g5/db-person.html
 
 # int - id managed by dbms
-id: 
+id:     # ?int
 
 # string like 
-slug:
+slug:   # string
 
 # key / value pairs
-# key = source slug
-# value = local id within the given source
+# key = string    source slug
+# value = string  local id within the given source
 ids-in-sources: {}
 
 # key / value pairs
-# key = id name - necessarily a source slug ?
-# value = local id
+# key = string    source slug
+# value = string  local id within the given source
 partial-ids: {}
 
 name:
@@ -25,44 +26,45 @@ name:
   # These can be different from the official name.
   # It can be either the "real" name of the person, or a pseudonym.
   # Can be full (ex: "Mistinguett" or "Stromae") or composed, like "Edith" (name.given) "Piaf" (name.family).
-  full:             # string  Ex Mistinguett or Stromae
-  family:           # string  Does not contain nobiliary-particle
-  given:            # string  In general one currently used
-  nobl:             # string  nobiliary-particle: de d' di del von...
+  full:             # ?string  Ex Mistinguett or Stromae
+  family:           # ?string  Does not contain nobiliary-particle
+  given:            # ?string  In general one currently used
+  nobl:             # ?string  nobiliary-particle: de d' di del von...
   # official name = exact spelling of the name, as written in the birth certificate or official document
   official:
-    family:         # string  Contains nobiliary-particle
-    given:          # string  Usually several names given at birth
+    family:         # ?string  Contains nobiliary-particle
+    given:          # ?string  Usually several names given at birth
   # spouse => for married women
   spouse: []        # array of strings  Contain the family names of the spouses
   alter: []         # array of strings  Alternative names, like nicknames, or author names
 
-sex:                # string  In general M or F
+sex:                # ?string  In general M or F
 
-# Dates are expressed in iso 8601 YYYY-MM-DD HH:MM:SSsHH:MM
+# Dates are expressed in iso 8601 YYYY-MM-DD HH:MM:SS
 birth:
-  date:             # date of the birth certificate
-  tzo:      # timezone offset
-  date-ut:  # date converted to Universal Time
-  note:     # string    supplementary info (eg precise address of the place)
-  lmt:      # boolean?  true if date is expressed in LMT
-  notime:   # boolean?  true if birth time does not exist
+  date:             # ?string   date of the birth certificate
+  tzo:              # ?string   timezone offset
+  date-ut:          # ?string   date converted to Universal Time
+  note:             # ?string   supplementary info (eg precise address of the place)
+  lmt:              # ?boolean  true if date is expressed in LMT (local mean time)
+  notime:           # ?boolean  true if birth time does not exist
   place:
     name:
-    c1:
-    c2:
-    c3:
-    cy:
-    geoid:
-    lg:
-    lat:
-      
+    c1:             # ?string   admin code level 1
+    c2:             # ?string   admin code level 2
+    c3:             # ?string   admin code level 3
+    cy:             # ?string   country
+    geoid:          # ?int      id of geonames.org
+    lg:             # ?float    longitude, decimal degrees
+    lat:            # ?float    latitude, decimal degrees
+
+# same structure as birth
 death:
-  date:     # date of the birth certificate
-  tz:       # timezone offset
-  date-ut:  # date converted to Univesal Time
-  note:     # supplementary info (eg precise address of the place)
-  lmt:      # boolean - true if date is expressed in LMT
+  date:
+  tz:
+  date-ut:
+  note:
+  lmt:
   place:
     name:
     c1:
@@ -73,15 +75,15 @@ death:
     lg:
     lat:
 
-# occupation slugs
+# array of strings  Occupation slugs
 occus: []
 
-# Reliability of birth time
+# int Reliability of birth time
 trust:
 
 # map containing act transcriptions.
 # keys of this map can be "birth", "death", "mariage"
-acts:
+acts: {}
 
 history: []
 

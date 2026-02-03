@@ -155,18 +155,22 @@ class tmp2db implements Command {
                 else{
                     $new['name']['full'] = $line['FNAME'];
                 }
-                $new['name']['nobl'] = $line['NOBL'];
-                $new['name']['full'] = $line['FAME'];
+                if($line['NOBL'] != ''){
+                    $new['name']['nobl'] = $line['NOBL'];
+                }
+                if($line['FAME'] != ''){
+                    $new['name']['full'] = $line['FAME'];
+                }
                 $new['birth'] = [];
-                $new['birth']['date'] = $line['DATE'];
-                $new['birth']['tzo'] = $line['TZO'];
+                $new['birth']['date'] = $line['DATE']; // $line['DATE'] never empty
+                if($line['TZO'] != ''){
+                    $new['birth']['tzo'] = $line['TZO'];
+                }
                 if($line['TIMOD'] == 'LMT'){
                     $new['birth']['lmt'] = true;
                 }
+                // The following fields of $line are never empty => fill without test
                 $new['birth']['place']['name'] = $line['PLACE'];
-// TODO handle c1 and c2
-//                $new['birth']['place']['c1'] = $line['C1'];
-//                $new['birth']['place']['c2'] = $line['C2'];
                 $new['birth']['place']['cy'] = $line['CY'];
                 $new['birth']['place']['lg'] = (float)$line['LG'];
                 $new['birth']['place']['lat'] = (float)$line['LAT'];

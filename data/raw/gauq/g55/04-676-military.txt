@@ -237,7 +237,7 @@ BOISSE Emile Jean, 14-1-1848, 10 h. 30, Blaye (Tarn).
 BOISSELIER Marie Justin, 28-7-1837, 4 h., Toulouse (Haute-Garonne).
 BOISSIN Mathieu René, 3-5-1872, 13 h., Montlucon (Allier).
 BOISSOUDY (de) Antoine Philippe, 12-10-1864, 20 h. 30, Cherbourg (Manche).
-BOISTERTRE (de) Jean Anatole, 20-9-1810, 8 h., Notre-Dame du Hamel (Eure). 
+BOISTERTRE (de) Jean Anatole, 20-9-1810, 8 h., Notre-Dame du Hamel (Eure). 
 BOLGERT Edouard, 3-6-1851, 2 h., Bovuxwiller (Bas-Rhin).
 BOLLE Salomon Marcell., 24-4-1804, 3 h., Angoulême (Charente).
 BON Gabriel-Sainte, 14-6-1853, 7 h., Trévoux (Ain).
@@ -461,7 +461,7 @@ MARGUERITTE Jean Auguste, 15-1-1823, 21 h., Manheulles (Meuse).
 MARIAUX Augustin Eugène, 5-1-1864, 15 h., Limoges (Haute-Vienne).
 MAROIX Jean, 4-3-1867, 18 h., Céret (Pyrénées-Orientales).
 MARTIN Maurice, 31-12-1864, 20 h., Blaye (Gironde).
-MARSAC (de) Pierre, 31-10-1880, 4 h., Crolles (Isère).
+MARSAC (de) Pierre, 31-10-1880, 4 h., Crolles (Isère).
 MARTIN-DECAEN, 12-6-1867, 11 h., Ermenonville (Oise).
 MASSENET André Joseph, 25-12-1864, 4 h., Saint-Légal (Finistère).
 MAUD’HUY (de) Louis Ernest, 17-2-1857, 4 h., Metz (Moselle).
@@ -520,7 +520,7 @@ PERRIER Georges, 28-10-1872, 5 h., Montpellier (Hérault).
 PERRINELLE-DUMAY (de) André, 11-2-1864, 2 h., Versailles (S.-et-O.).
 PETAIN Henri Philippe, 24-4-1856, 22 h. 30, Cauchy-la-Tour (P.-de-C.).
 PHILIPOT Edme Felix, 23-11-1865, 17 h., Chatel-Gérard (Yonne).
-PHILIPPE Albert-Marie, 13-2-1863, 19 h., Delouze (Meuse).
+PHILIPPE Albert-Marie, 13-2-1863, 19 h., Delouze (Meuse).
 PICHON Jules, 31-10-1877, 9h. 45, Vannes (Morbihan).
 PIERRON Edouard, 3-10-1835, 15 h., Moyenvic (Moselle).
 PONT Ferdinand Augus., 25-1-1865, 3 h., Grenoble (Isere).
@@ -576,7 +576,7 @@ VASSELOT de REGNE (de) Maurice, 15-9-1888, 14 h., La Guillotiére (Deux-Sévres)
 VAULGRENANT (de) Albert, 8-4-1872, 13 h., Versailles (Seine-et-Oise).
 VEDEL Adolphe, 6-9-1870, 11 h., Lunel (Hérault).
 VEDRINES Jules, 29-12-1881, 10 h., Saint-Denis (Seine).
-VERDIER Pierre Bernard, 20-11-1875, 17 h., Loures (Hautes-Pyrénées).
+VERDIER Pierre Bernard, 20-11-1875, 17 h., Loures (Hautes-Pyrénées).
 VERGNETTE de LAMOTTE (de), 17-9-1877, 5 h., Montpellier (Hérault).
 VIDAL Paul, 6-2-1855, 4 h., Toulouse (Haute-Garonne).
 VILLARET (de) Etienne Godefroy, 17-2-1854, 20 h., Saint-Laurent (Lot).
@@ -632,7 +632,7 @@ LACOURT Jacques Georges, 9-8-1917, 10 h., Fére-en-Tardenois (Aisne).
 LAFARGUE Jean, 19-11-1917, 10 h., Navarrenx (Basses-Pyrénées).
 LANGLOIS Pierre, 5-5-1918, 0 h. 30, Brest (Finistère).
 LANSAC Emile, 8-11-1917, 12 h., Bordeaux (Gironde).
-LACOMBE de LAROUSILHE Serge, 25-11-1915, 16 h. 30, Drugeac (Cantal).
+LACOMBE de LAROUSILHE Serge, 25-11-1915, 16 h. 30, Drugeac (Cantal).
 LE BARBIER Robert Paul, 14-12-1915, 6 h. 40, Ecourt-Saint-Quentin (Pas-de-Calais).
 LE BERRE Yves Louis, 28-4-1915, 23 h., Quimper (Finistère).
 LE CABELLEC Yves, 17-11-1917, 6 h., Toulon (Var).

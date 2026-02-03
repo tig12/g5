@@ -119,7 +119,10 @@ class tmp2db implements Command {
                 if($line['DATE-UT'] != ''){
                     $new['birth']['date-ut'] = $line['DATE-UT'];
                 }
-                $new['birth']['tzo'] = $line['TZO'];
+                if($line['TZO'] != ''){
+                    $new['birth']['tzo'] = $line['TZO'];
+                }
+                // the following fields are never empty => no test for empty string
                 $new['birth']['place']['cy'] = $line['CY'];
                 $new['birth']['place']['lg'] = (float)$line['LG'];
                 $new['birth']['place']['lat'] = (float)$line['LAT'];

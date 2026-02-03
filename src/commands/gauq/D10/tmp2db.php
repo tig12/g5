@@ -116,6 +116,7 @@ class tmp2db implements Command {
                 }
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
+                // the following fields are never empty => no test for empty string
                 $new['birth']['tzo'] = $line['TZO'];
                 $new['birth']['date-ut'] = $line['DATE-UT'];
                 $new['birth']['place']['name'] = $line['PLACE'];

@@ -127,14 +127,24 @@ class tmp2db implements Command {
                     else{
                         $new['name']['full'] = $line['FNAME'];
                     }
-                    $new['name']['nobility'] = $line['NOB'];
+                    if($line['NOB'] != ''){
+                        $new['name']['nobility'] = $line['NOB'];
+                    }
                     $new['birth'] = [];
                     $new['birth']['date'] = $line['DATE'];
                     $new['birth']['place']['name'] = $line['PLACE'];
-                    $new['birth']['place']['c1'] = $line['C1'];
-                    $new['birth']['place']['c2'] = $line['C2'];
-                    $new['birth']['place']['c3'] = $line['C3'];
-                    $new['birth']['place']['cy'] = $line['CY'];
+                    if($line['C1'] != ''){
+                        $new['birth']['place']['c1'] = $line['C1'];
+                    }
+                    if($line['C2'] != ''){
+                        $new['birth']['place']['c2'] = $line['C2'];
+                    }
+                    if($line['C3'] != ''){
+                        $new['birth']['place']['c3'] = $line['C3'];
+                    }
+                    if($line['CY'] != ''){
+                        $new['birth']['place']['cy'] = $line['CY'];
+                    }
                     $new['occus'] = [ $line['OCCU'] ];
                     //
                     $p->addIdInSource($g55Source->data['slug'], $G55ID);

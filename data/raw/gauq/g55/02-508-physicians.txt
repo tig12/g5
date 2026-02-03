@@ -109,7 +109,7 @@ CARLERRE Ernest, 28-6-1887, 12 h., Brest (Finistère).
 CARLOTTO Charles, 5-4-1896, 7 h., Nice (Alpes-Maritimes).
 CARPENTIER William, 1-1-1887, 7 h., Le Havre (Seine-Inférieure).
 CARRIEU Marcel, 3-1-1887, 18 h., Montpellier (Hérault).
-CASABIANCA Jéréme, 30-10-1889, 6 h., Ajaccio (Corse).
+CASABIANCA Jéréme, 30-10-1889, 6 h., Ajaccio (Corse).
 CASSOUTE Emile, 5-7-1868, 7 h., Marseille (Bouches-du-Rhône).
 CASTAING Louis, 29-3-1890, 9 h., Pau (Basses-Pyrénées).
 CASTERA Hector, 25-5-1885, 8 h., Saint-Sever-sur-Adour (Landes).
@@ -127,7 +127,7 @@ CHARBONNEL Maurice, 17-12-1884, 1 h., Bordeaux (Gironde).
 CHARPENTIER Roger, 16-3-1903, 19 h., Clermoni-Ferrand (P.-de-D.).
 CHARRIER Jean, 21-7-1888, 4 h., Brive (Corrèze).
 CHASSAGNARD Jean-Bapt., 23-11-1882, 5 h., St-Yrieix-le-Déjalat (Cor.).
-CHATON Marcel, 18-7-1881,-19 h. 30, Bracon (Jura).
+CHATON Marcel, 18-7-1881, 19 h. 30, Bracon (Jura).
 CHAUVIN Emile, 4-9-1886, 3 h., Apt (Vaucluse).
 CHAVANY Jean, 3-4-1892, 17 h., Condat (Cantal).
 CHENILLEAU André, 10-4-1895, 9 h., Champdeniers (Deux-Sévres).
@@ -409,7 +409,7 @@ PLAIOUST Yves, 7-8-1891, 9 h., Amiens (Somme).
 POISSONNIER Max, 2-12-1881, 18 h., Compiègne (Oise).
 POLONOWSKY Michel, 25-5-1889, 16 h. 30, Mulhouse (Haut-Rhin).
 POLU Raymond, 18-7-1904, 23 h. 30, Viay (Moselle).
-PONS Henri, 21-3-1877, 21 h., Pau (Basses-Pyrénées).
+PONS Henri, 21-3-1877, 21 h., Pau (Basses-Pyrénées).
 PORCHERON Louis, 14-3-1873, 2 h., Pennes-Mirabeau (B.-du-Rhône).
 POREE Francis, 1-10-1883, 7 h. 30, Cancale (Ille-et-Vilaine).
 POREE Prudent, 4-3-1908, 6 h., Chateaubourg (Ille-et-Vilaine).
@@ -469,7 +469,7 @@ SUREAU Maurice, 18-7-1894, 2 h., Nice (Alpes-Maritimes).
 SURMONT Jean, 19-7-1895, 3h. 20, Lille (Nord).
 TAILLARD Fulbert, 5-7-1896, 2 h., Maiche (Doubs).
 TESSONNIERE Maurice, 14-1-1874, 9 h., St-Hippolyte-du-Fort (Gard).
-THIOLAT Pierre, 3-3-1897, 5 h., Villenauxe-la-Grande (Aube).
+THIOLAT Pierre, 3-3-1897, 5 h., Villenauxe-la-Grande (Aube).
 TIOLLAIS René, 20-3-1905, 19 h., Lanhélin (Ille-et-Vilaine).
 TIXIER Félix, 31-8-1872, 2 h. 15, Clermont-Ferrand (Puy-de-Dôme).
 TOURNAY Auguste, 6-12-1878, 9 h., Dolluet (Loir-et-Cher).
@@ -485,7 +485,7 @@ VALLERIX André, 28-4-1884, 15 h. 15, Vichy (Allier).
 VANDEVELDE Gaston, 28-6-1903, 12 h., Armentiéres (Nord).
 VANIER Jean, 22-5-1903, 8 h. 20, Le Havre (Seine-Inférieure).
 VELUET Maurice, 28-3-1884, 20 h., Blanc (Indre).
-VERDIER Pierre, 11-4-1877,. 23 h., Nantes (Loire-Inférieure).
+VERDIER Pierre, 11-4-1877, 23 h., Nantes (Loire-Inférieure).
 VERMELIN Henri, 31-7-1891, 2 h. 30, Beaucourt (Belfort).
 VIALLE Fernand, 5-1-1873, 20 h., Brive (Corrèze).
 VIALLE Pierre, 16-12-1903, 21 h., Tours (Indre-et-Loire).

@@ -107,7 +107,9 @@ class tmp2db implements Command {
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['date-ut'] = $line['DATE-UT'];
                 $new['birth']['tzo'] = $line['TZO'];
-                $new['birth']['note'] = $line['LMT'];
+                if($line['LMT'] == 'LMT'){
+                    $new['birth']['lmt'] = true;
+                }
                 $new['birth']['place']['name'] = $line['PLACE'];
                 $new['birth']['place']['c2'] = $line['C2'];
                 $new['birth']['place']['cy'] = $line['CY'];
@@ -166,13 +168,15 @@ class tmp2db implements Command {
                     }
                 }
                 // update fields that are more precise in muller402
+                // The following fields of $line are never empty => fill without test
                 $new['birth']['date'] = $line['DATE']; // Cura contains only date-ut
                 $new['birth']['tzo'] = $line['TZO'];
-                $new['birth']['note'] = $line['LMT'];
                 $new['birth']['place']['name'] = $line['PLACE'];
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
-                $new['name']['full'] = ''; // always done because all muller1 records have both FNAME and GNAME
+                if($line['LMT'] == 'LMT'){
+                    $new['birth']['lmt'] = true;
+                }
                 $p->addOccus(['writer']); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 $p->addIdInSource($source->data['slug'], $line['MUID']);
                 $mullerId = Muller::mullerId($source->data['slug'], $line['MUID']);
