@@ -26,6 +26,7 @@ use g5\commands\ertel\Ertel;
 use g5\commands\gauq\Cura5;
 use g5\commands\Newalch;
 use g5\commands\wd\Wikidata;
+use g5\commands\enrich\deathfr\Deathfr;
 use g5\commands\wiki\source\add                 as WikiAddSource;
 
 // commands of this package
@@ -249,8 +250,9 @@ class all implements Command {
             echo WikiAddSource::execute([Ertel::SOURCE_DEFINITION_FILE]);
             echo WikiAddSource::execute([Cura5::SOURCE_DEFINITION_FILE]);
             echo WikiAddSource::execute([Newalch::SOURCE_DEFINITION_FILE]);
-            echo WikiAddSource::execute([Wikidata::SOURCE_DEFINITION_FILE]);
             echo WikiAddSource::execute([G5::SOURCE_DEFINITION_FILE]);
+            echo WikiAddSource::execute([Wikidata::SOURCE_DEFINITION_FILE]);
+            echo WikiAddSource::execute([Deathfr::SOURCE_DEFINITION_FILE]);
             echo DBInitOccu1::execute();
             
             // Done here to build associations between issues and wiki projects.

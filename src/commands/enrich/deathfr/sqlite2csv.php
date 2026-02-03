@@ -102,7 +102,7 @@ class sqlite2csv implements Command {
                     . ';' . $sqlite_person['dday']
                     . ';' . $sqlite_person['dcode']
                     . "\n";
-                    $new .= ";;;\n";
+                    $new .= ";;;;;;;\n";
                     // choose between ok / to check
                     if($d1 == 0 && $d2 == 0 && $d3 == 0){
                         $N_ok++;

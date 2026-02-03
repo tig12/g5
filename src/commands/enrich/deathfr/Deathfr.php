@@ -27,7 +27,12 @@ class Deathfr {
         Path to the yaml file containing the characteristics of the source describing CFEPP.
         Relative to directory data/db/source
     **/
-    const string SOURCE_DEFINITION_FILE = 'enrich' . DS . self::SOURCE_SLUG .'.yml';
+    const string SOURCE_DEFINITION_FILE = 'enrich' . DS . self::SOURCE_SLUG . '.yml';
+    
+    /** Returns a Source object for raw file. **/
+    public static function getSource(): Source {
+        return Source::getSource(Config::$data['dirs']['db'] . DS . self::SOURCE_DEFINITION);
+    }
     
     // *********************** Sqlite ***********************
     

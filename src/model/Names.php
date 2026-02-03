@@ -10,7 +10,6 @@ namespace g5\model;
 class Names{
     
     
-    // ******************************************************
     /**
         Separates family name from given name in a string in certain cases :
         - If the string contains two words separated by a space,

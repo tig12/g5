@@ -1,0 +1,12 @@
+
+document:
+  history:
+    - 2026-02-02 01:00:38+01:00: Thierry Graff, creation
+
+name: Deaths in France
+slug: death-fr
+type: files
+description: |
+  Files containing deceases which occured in France since 1970, published by the French government.
+  <br>Original files come from <a href="https://www.data.gouv.fr/datasets/fichier-des-personnes-decedees">https://www.data.gouv.fr/datasets/fichier-des-personnes-decedees</a>.
+  <br>Used to add around 4300 death dates to the Open Gauquelin database.

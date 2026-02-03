@@ -11,13 +11,13 @@ From 1970 to 2025: contains 28 755 067 persons.
 Process:
 - retrieve data from data.gouv.fr site and compress them
 - execute php run-g5.php enrich deathfr raw2sqlite to generate the local sqlite database
-- execute php run-g5.php enrich deathfr sqlite2csv to build csv files containing a list of matches in data/tmp/enrich/deathfr/check
+- execute php run-g5.php enrich deathfr sqlite2csv to build csv files containing a list of matches in data/tmp/enrich/death-fr/check
 - edit death-fr-check.csv to mark the files that don't match
-- copy the csv files to 
+- compress and copy the csv files to data/db/enrich/death-fr
 - execute php run-g5.php enrich deathfr csv2db
 
 Raw file format, from
-https://www.data.gouv.fr/datasets/fichier-des-personnes-decedees/reuses_and_dataservices
+https://www.data.gouv.fr/datasets/fichier-des-personnes-decedees
 --------------------------------------------------------------------------------------------------
 
 Nom et Prénom - Longueur : 80 - Position : 1-80 - Type : Alphanumérique
@@ -53,6 +53,16 @@ DUCRET*MARIE ANTOINETTE/                                                        
 
 Execution 2026-01-30 with data retrieved around 2026-01-25:
 --------------------------------------------------------------------------------------------------
+3855 matches ok
+455 matches to check
+Human check permitted to eliminate 24 wrong matches
+So this permits to get 3855 + 455 - 24 = 4286 death dates in the database.
+
+
+Execution output (the lines correspond to names not formatted correctly):
+--------------------------------------------------------------------------------------------------
+php run-g5.php enrich deathfr raw2sqlite
+
 ======= Processing year 1970 =======
 27006 lines - 0.5003 s
 ======= Processing year 1971 =======
@@ -235,15 +245,17 @@ MARIE ANTOINE JOSEPH DIT MARIE ANTOINE JOSEPH ALIAS SOOSAIRAJ DIT AUSSI MARIE J/
 
 --------------------------------------------------------------------------------------------------
 sqlite> select count(*) from person;
-+----------+
-| count(*) |
-+----------+
 | 28917511 |
-+----------+
 
 sqlite> select count(*) from person where bcountry <> '';
-+----------+
-| count(*) |
-+----------+
 | 2653454  |
-+----------+
+
+--------------------------------------------------------------------------------------------------
+php run-g5.php enrich deathfr csv2db 
+
+======= Processing compress.bzip2:///home/thierry/dev/astrostats/g5/data/db/enrich/death-fr/death-fr-check.csv.bz2 =======
+Updated 424 persons
+======= Processing compress.bzip2:///home/thierry/dev/astrostats/g5/data/db/enrich/death-fr/death-fr-ok.csv.bz2 =======
+Updated 3855 persons
+
+424 + 3855 = 4279 persons updated in database
