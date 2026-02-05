@@ -143,7 +143,7 @@ class tmp2db implements Command {
                 $p->update(); // DB
                 $g->addMember($p->data['id']);
                 continue;
-            }
+            } // end if($muid == '457')
             if(!isset(M2men::MU_GQ[$muid])){
                 // Person not already in db (mainly in Gauquelin data)
                 $p = new Person();
@@ -153,13 +153,11 @@ class tmp2db implements Command {
                     $new['name']['given'] = $line['GNAME'];
                 }
                 else{
-                    $new['name']['full'] = $line['FNAME'];
+                    // $line['GNAME'] = '' only when $line['FAME'] != '' => use $line['FAME'], not $line['FNAME']
+                    $new['name']['full'] = $line['FAME'];
                 }
                 if($line['NOBL'] != ''){
                     $new['name']['nobl'] = $line['NOBL'];
-                }
-                if($line['FAME'] != ''){
-                    $new['name']['full'] = $line['FAME'];
                 }
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE']; // $line['DATE'] never empty
@@ -210,9 +208,18 @@ class tmp2db implements Command {
                     throw new \Exception("$gqid : try to update an unexisting person");
                 }
                 if($p->data['name']['family'] == "Gauquelin-$gqid"){
-                    $new['name']['family'] = $line['FNAME'];
-                    $new['name']['given'] = $line['GNAME'];
-                    $new['name']['full'] = $line['FAME'];
+                    if($line['GNAME'] != ''){
+                        $new['name']['family'] = $line['FNAME'];
+                        $new['name']['given'] = $line['GNAME'];
+                        $new['name']['full'] = null;
+                    }
+                    else{
+                        // in the tmp file, $line['GNAME'] = '' only when $line['FAME'] != ''
+                        // => use $line['FAME'], not $line['FNAME']
+                        $new['name']['full'] = $line['FAME'];
+                        $new['name']['family'] = null;
+                        // in this case, $new['name']['given'] always empty
+                    }
                     $nRestoredNames++;
                     if($reportType == 'full'){
                         $namesReport .= "Cura\t $gqid\t {$p->data['name']['family']}\n";

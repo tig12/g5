@@ -147,6 +147,7 @@ class tmp2db implements Command {
                     $new['name']['full'] = $line['FNAME'];
                 }
                 $new['birth'] = [];
+                // Appart from C3 the fields are never empty in tmp file
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['date-ut'] = $line['DATE-UT'];
                 $new['birth']['place']['name'] = $line['PLACE'];
@@ -274,14 +275,13 @@ class tmp2db implements Command {
                 // update fields that are supposed to be more precise in CFEPP
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['date-ut'] = $line['DATE-UT'];
-                $new['birth']['place']['c3'] = $line['C3'];
+                if($line['C3'] != ''){
+                    $new['birth']['place']['c3'] = $line['C3'];
+                }
                 // place information, for records in Ertel and not in Gauquelin LERRCP
                 if($p->data['birth']['place']['name'] == ''){
                     $new['birth']['place']['name'] = $line['PLACE'];
                     $new['birth']['place']['c2'] = $line['C2'];
-                    if($line['C3'] != ''){
-                        $new['birth']['place']['c3'] = $line['C3'];
-                    }
                     $new['birth']['place']['cy'] = 'FR';
                     $new['birth']['place']['lg'] = (float)$line['LG'];
                     $new['birth']['place']['lat'] = (float)$line['LAT'];

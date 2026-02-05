@@ -95,13 +95,9 @@ class tmp2db implements Command {
                 $p = new Person();
                 $new = [];
                 $new['trust'] = Newalch::TRUST_LEVEL;
-                if($line['GNAME'] != ''){
-                    $new['name']['family'] = $line['FNAME'];
-                    $new['name']['given'] = $line['GNAME'];
-                }
-                else{
-                    $new['name']['full'] = $line['FNAME'];
-                }
+                // In the tmp file, all fields are filled => no use to test if = ''
+                $new['name']['family'] = $line['FNAME'];
+                $new['name']['given'] = $line['GNAME'];
                 $new['sex'] = $line['SEX'];
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
@@ -174,6 +170,7 @@ class tmp2db implements Command {
                 $new['birth']['place']['name'] = $line['PLACE'];
                 $new['name']['family'] = $line['FNAME'];
                 $new['name']['given'] = $line['GNAME'];
+                $new['name']['full'] = null; // for records like Gauquelin-A2-445
                 if($line['LMT'] == 'LMT'){
                     $new['birth']['lmt'] = true;
                 }

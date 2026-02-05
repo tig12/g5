@@ -1,6 +1,6 @@
 <?php
 /********************************************************************************
-    Adds Gauquelin A6 or A4 NUM in column GQID tmp/muller/1-writers/muller1-402-writers.csv
+    Adds Gauquelin A6 or A4 NUM in column GQID data/tmp/muller/1-writers/muller1-402-writers.csv
     using tmp/gauq/lerrcp/A6.csv
     Must be executed before import in database.
     

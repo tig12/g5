@@ -166,15 +166,19 @@ class tmp2db implements Command {
                     $NIssues_tzo++;
                 }
                 $new['birth']['place']['name'] = $line['PLACE'];
-                $new['birth']['place']['c2'] = $line['C2'];
-                if($line['C3']){
-                    // in France, useful only for Paris and Lyon arrondissements
+                if($line['C2'] != ''){
+                    $new['birth']['place']['c2'] = $line['C2'];
+                }
+                if($line['C3'] != ''){
+                    // in France, useful only for Paris, Marseille and Lyon arrondissements
                     $new['birth']['place']['c3'] = $line['C3'];
                 }
                 $new['birth']['place']['cy'] = $line['CY'];
                 $new['birth']['place']['lg'] = (float)$line['LG'];
                 $new['birth']['place']['lat'] = (float)$line['LAT'];
-                $new['birth']['place']['geoid'] = (int)$line['GEOID'];
+                if($line['GEOID'] != ''){
+                    $new['birth']['place']['geoid'] = (int)$line['GEOID'];
+                }
                 $p->updateFields($new);
                 $p->addOccus($newOccus); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 $p->computeSlug();

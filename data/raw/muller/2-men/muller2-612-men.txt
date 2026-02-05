@@ -508,7 +508,7 @@
 508 Schmeling, Max                      28.09.1905 12.00 -1.00      DOP Klein Luckow            53 N 33 013 E 51 MA 13 57    SA N
 509 Schmid, Carlo                       03.12.1896 18.00 -0.16      F   Perpignan               42 N 42 002 E 50 MA 04 56    SG G
 510 Schmidt-Rottluff, Karl              01.12.1884 05.00        LMT D   Rottluff                50 N 50 012 E 55 AR 08 567   SE N
-5i1 Schmollexr, Gustav von              24.06.1838 20.45        LMT D   Heilbronn               49 N 09 009 E 13 SC 09 57    SE N
+511 Schmollexr, Gustav von              24.06.1838 20.45        LMT D   Heilbronn               49 N 09 009 E 13 SC 09 57    SE N
 512 Schock, Rudolf                      04.09.1915 01.00 -1.00      D   Duisburg                51 N 26 006 E 46 AR 06 57    SE N
 513 Scholl, Hans                        22.09.1918 22.45 -1.00      D   Ingersheini             49 N 08 010 E 05 MA 08 56    SE N
 514 Scholz, Gustav                      42.04.1930 08.15 -1.00      D   Berlin-Moabit           52 N 30 013 E 30 MA 13 57    SE N

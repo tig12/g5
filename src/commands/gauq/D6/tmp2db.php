@@ -122,10 +122,18 @@ class tmp2db implements Command {
                 if($line['TZO'] != ''){
                     $new['birth']['tzo'] = $line['TZO'];
                 }
-                // the following fields are never empty => no test for empty string
-                $new['birth']['place']['cy'] = $line['CY'];
-                $new['birth']['place']['lg'] = (float)$line['LG'];
-                $new['birth']['place']['lat'] = (float)$line['LAT'];
+                if($line['CY'] != ''){
+                    $new['birth']['place']['cy'] = $line['CY'];
+                }
+                if($line['C2'] != ''){
+                    $new['birth']['place']['c2'] = $line['C2'];
+                }
+                if($line['LG'] != ''){
+                    $new['birth']['place']['lg'] = (float)$line['LG'];
+                }
+                if($line['LAT'] != ''){
+                    $new['birth']['place']['lat'] = (float)$line['LAT'];
+                }
                 $p->updateFields($new);
                 $p->addOccus($newOccus); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
                 //

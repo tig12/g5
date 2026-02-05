@@ -45,7 +45,6 @@ class Names_fr{
         'Theo'      => 'Théo',
         'Valere'    => 'Valère',
     ];
-    // ******************************************************
     /**
         Fix accents in common given names; 
         @return     Corrected string
@@ -74,7 +73,6 @@ class Names_fr{
         'pierre'    => 'Pierre',
     ];
     
-    // ******************************************************
     /**
         @param $str A string that may contain a name with composed given name starting by Jean
                     Ex : "Augert Jean Noel"
@@ -104,7 +102,6 @@ class Names_fr{
         return [$str, ''];
     }
     
-    // ******************************************************
     /**
         Computes a family name taking the nobiliary particle into account.
     **/
@@ -116,6 +113,15 @@ class Names_fr{
             return $nob . $fname;
         }
         return $nob . ' ' . $fname;
+    }
+    
+    /**
+        Extract the first component of a given name.
+        For a given string like "Fernand Jean Jacques", will return "Fernand"
+        May return the whole string if $str contains only one component.
+    **/
+    public static function computeCurrentGivenName(string $str): string {
+        return explode(' ', $str)[0];
     }
     
 } // end class

@@ -130,14 +130,11 @@ class tmp2db implements Command {
                 // Person not in Gauquelin data
                 $p = new Person();
                 $new = [];
+                // all fields of the tmp file are filled => no use to test ''
                 $new['trust'] = Irving::TRUST_LEVEL;
-                if($line['GNAME'] != ''){
-                    $new['name']['family'] = $line['FNAME'];
-                    $new['name']['given'] = $line['GNAME'];
-                }
-                else{
-                    $new['name']['full'] = $line['FNAME'];
-                }
+                $new['name']['family'] = $line['FNAME'];
+                $new['name']['given'] = $line['GNAME'];
+                $new['name']['full'] = null; // for records like Gauquelin-A2-445
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
                 $new['birth']['tzo'] = $line['TZO'];

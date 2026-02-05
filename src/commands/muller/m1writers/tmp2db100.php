@@ -89,14 +89,10 @@ class tmp2db100 implements Command {
                 // new person
                 $p = new Person();
                 $new = [];
+                // all fields of the tmp file are filled => no use to test ''
                 $new['trust'] = Newalch::TRUST_LEVEL;
-                if($line['GNAME'] != ''){
-                    $new['name']['family'] = $line['FNAME'];
-                    $new['name']['given'] = $line['GNAME'];
-                }
-                else{
-                    $new['name']['full'] = $line['FNAME'];
-                }
+                $new['name']['family'] = $line['FNAME'];
+                $new['name']['given'] = $line['GNAME'];
                 $new['sex'] = $line['SEX'];
                 $new['birth'] = [];
                 $new['birth']['date'] = $line['DATE'];
@@ -139,27 +135,32 @@ class tmp2db100 implements Command {
                 }
             }
             else{
-                // person already in Gauquelin data
+                // person already in Gauquelin data (in variable $test)
+                // Happens only for one person: cannavo-letterio-1903-02-22 A2-1369
                 $test->addIdInSource($source->data['slug'], $line['MUID']);
                 $mullerId = Muller::mullerId($source->data['slug'], $line['MUID']);
                 $test->addPartialId(Muller::SOURCE_SLUG, $mullerId);
                 $occu = self::computeOccu($line);
-                $p->addOccus([$occu]); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
-                // TODO see if some fields can be updated (if Müller more precise than Gauquelin)
-                $new = [];
+                $test->addOccus([$occu]); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
+                // Add only pertinent fields for cannavo-letterio-1903-02-22
+                $test->data['birth']['place']['name'] = $line['PLACE'];
+                $test->data['birth']['place']['c2'] = $line['C2'];
                 // repeat fields to include in $history
+                $new = [];
                 $new['ids-in-sources'] = [
                     $source->data['slug'] => $line['MUID'],
                 ];
                 $new['occus'] = [$occu];
-                $p->addHistory(
+                $new['birth']['place']['name'] = $line['PLACE'];
+                $new['birth']['place']['c2'] = $line['C2'];
+                $test->addHistory(
                     command: 'muller m1writers tmp2db100',
                     sourceSlug: $source->data['slug'],
                     newdata: $new,
                     rawdata: $lineRaw
                 );
                 if($reportType == 'full'){
-                    $gqid = $test->data['ids-in-sources'][LERRCP::SOURCE_SLUG];
+                    $gqid = $test->data['ids-in-sources'][M1writers100::LIST_SOURCE_SLUG];
                     $report .= "Müller {$line['MUID']} = $gqid - $slug\n";
                 }
                 $nUpdate++;

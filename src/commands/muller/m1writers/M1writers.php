@@ -186,7 +186,14 @@ class M1writers {
             // happens for 5 records
             // convert longitude to HH:MM:SS
             $sec = $lg * 240; // 240 = 24 * 3600 / 360
-            return '+' . seconds2HHMMSS::compute($sec);
+            $offset = seconds2HHMMSS::compute($sec);
+//echo "offset = $offset\n";
+            // Eliminate obviously useless seconds in TZO
+            if(strlen($offset) == 8 && substr($offset, -3) == ':00'){
+                $offset = substr($offset, 0, -3);
+            }
+//echo "offset = $offset\n";
+            return '+' . $offset;
         }
         switch($offset){
         	case '-1':

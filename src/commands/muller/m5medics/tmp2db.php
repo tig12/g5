@@ -19,6 +19,7 @@ use g5\DB5;
 use g5\model\Source;
 use g5\model\Group;
 use g5\model\Person;
+use g5\model\Names_fr;
 use g5\model\wiki\Issue;
 use g5\model\wiki\Wikiproject;
 use g5\commands\Newalch;
@@ -129,12 +130,16 @@ class tmp2db implements Command {
                 $p = new Person();
                 $new = [];
                 $new['trust'] = Newalch::TRUST_LEVEL;
-                if($line['GNAME'] != ''){
-                    $new['name']['family'] = $line['FNAME'];
+                // Muller file contains official given name
+                // Current name is considered as being the first given name of the official name
+                $new['name']['family'] = $line['FNAME'];
+                $currentGivenName = Names_fr::computeCurrentGivenName($line['GNAME']);
+                if($line['GNAME'] == $currentGivenName){
                     $new['name']['given'] = $line['GNAME'];
                 }
                 else{
-                    $new['name']['full'] = $line['FNAME'];
+                    $new['name']['given'] = $currentGivenName;
+                    $new['name']['official']['given'] = $line['GNAME'];
                 }
                 if($line['NOB'] != ''){
                     $new['name']['nobl'] = $line['NOB'];
@@ -147,7 +152,7 @@ class tmp2db implements Command {
                 $new['birth']['place']['cy'] = 'FR';
                 $new['birth']['place']['lg'] = (float)$line['LG'];
                 $new['birth']['place']['lat'] = (float)$line['LAT'];
-                if($line['MOD'] == 'LMT'){
+                if($line['MODE'] == 'LMT'){
                     $new['birth']['lmt'] = true;
                 }
                 //
@@ -233,14 +238,15 @@ class tmp2db implements Command {
                     $new['name']['nobl'] = $line['NOB'];
                 }
                 $new['name']['family'] = $line['FNAME'];
-                if($p->data['name']['given'] == ''){
-                    // happens with names like Gauquelin-A1-258
+                $currentGivenName = Names_fr::computeCurrentGivenName($line['GNAME']);
+                if($line['GNAME'] == $currentGivenName){
                     $new['name']['given'] = $line['GNAME'];
-                    $new['name']['full'] = null;
                 }
-                // Müller name considered as = to full name copied from birth certificate
-                // (Gauquelin name considered as current name)
-                $new['name']['official']['given'] = $line['GNAME'];
+                else{
+                    $new['name']['given'] = $currentGivenName;
+                    $new['name']['official']['given'] = $line['GNAME'];
+                    $new['name']['full'] = null; // for records like Gauquelin-A2-445
+                }
                 // An issue is created only in the update case because it deals with records already present in Gauquelin files
                 // Müller's file contains only one person born in Paris and not in Gauquelin database : budin-pierre-constant-1846-11-09
                 if($line['PLACE'] == 'Paris'){

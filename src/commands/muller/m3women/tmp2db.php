@@ -114,12 +114,24 @@ class tmp2db implements Command {
                 if($line['TIMOD'] == 'LMT'){
                     $new['birth']['lmt'] = true;
                 }
-                $new['birth']['place']['name'] = $line['PLACE'];
-                $new['birth']['place']['c1'] = $line['C1'];
-                $new['birth']['place']['c2'] = $line['C2'];
-                $new['birth']['place']['cy'] = $line['CY'];
-                $new['birth']['place']['lg'] = (float)$line['LG'];
-                $new['birth']['place']['lat'] = (float)$line['LAT'];
+                if($line['PLACE'] != ''){
+                    $new['birth']['place']['name'] = $line['PLACE'];
+                }
+                if($line['C1'] != ''){
+                    $new['birth']['place']['c1'] = $line['C1'];
+                }
+                if($line['C2'] != ''){
+                    $new['birth']['place']['c2'] = $line['C2'];
+                }
+                if($line['CY'] != ''){
+                    $new['birth']['place']['cy'] = $line['CY'];
+                }
+                if($line['LG'] != ''){
+                    $new['birth']['place']['lg'] = (float)$line['LG'];
+                }
+                if($line['LAT'] != ''){
+                    $new['birth']['place']['lat'] = (float)$line['LAT'];
+                }
                 //
                 if(M3women::OCCUS[$line['OCCU']] != 'X'){ // X => handled in tweak2db
                     $p->addOccus([ M3women::OCCUS[$line['OCCU']] ]); // table person_groop handled by command db/init/occu2 - Group::storePersonInGroup() not called here
@@ -146,7 +158,7 @@ class tmp2db implements Command {
             }
             else{
                 // Person already in other Gauquelin data sets
-                // common lines come from A1 A2 A4 A5 A6 D10 E3
+                // Common lines come from A1 A2 A4 A5 A6 D10 E3
                 $new = [];
                 $new['sex'] = 'F';
                 $gqid = M3women::GQ_MATCH[$muid];
@@ -160,7 +172,7 @@ class tmp2db implements Command {
                 if($p->data['name']['family'] == "Gauquelin-$gqid"){
                     $new['name']['family'] = $line['FNAME'];
                     $new['name']['given'] = $line['GNAME'];
-                    $new['name']['full'] = '';
+                    $new['name']['full'] = null;
                     $nRestoredNames++;
                     if($reportType == 'full'){
                         $namesReport .= "Cura\t $gqid\t {$p->data['name']['family']}\n";
@@ -168,7 +180,7 @@ class tmp2db implements Command {
                     }
                 }
                 if($line['GNAME'] == ''){
-                    $new['name']['full'] = '';
+                    $new['name']['full'] = null;
                 }
                 // if Cura and Müller have different birth day
                 $mulday = substr($line['DATE'], 0, 10);

@@ -79,6 +79,9 @@ class fixGnr implements Command {
             '366' => 'SA2271',
             '374' => 'SA2278',
             '387' => 'SA2287',
+            // 407 is not in the original file, but was added here to fix a unresolved bug:
+            // database generation started to break for this line
+            '407' => 'ND1859',
             '429' => 'SA2311',
             '482' => 'SA2345',
             '484' => 'SA21051', // Differs from SA2105
