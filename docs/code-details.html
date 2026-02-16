@@ -22,7 +22,6 @@
 
 <div class="content">
 
-<a name="topage"></a>
 <nav class="prevnext">
     <a class="topage" rel="" href="#topage">&#10148;</a>
     <a class="top" href="index.html">&uarr;</a>
@@ -30,10 +29,21 @@
 </nav>
 
 <main>
-<header>
+<header id="topage">
 <h1>Code details</h1>
 <div class="intro"></div>                                                                         
 </header>
+
+<nav class="pagetoc" aria-label="Table of contents">
+    <ul>
+        <li>
+            <a href="#1-association-cli-executed-code">Association CLI - executed code</a>
+        </li>
+        <li>
+            <a href="#2-one-exception">One exception</a>
+        </li>
+    </ul>
+</nav>
 
 <article>
 
@@ -46,7 +56,7 @@ The code is namespaced ; main namespace name is <code>g5</code>.
 <br>All transformations on data are done in namespace <code>g5\commands</code>.
 
 <!-- ********************************************************************************* -->
-<h2><a name="association-cli-executed-code">Association CLI - executed code</a></h2>
+<h2 id="1-association-cli-executed-code">Association CLI - executed code</h2>
 
 The command line interface (CLI) is handled by <code>run-g5.php</code>.
 <br>The code uses the parameters given to the CLI to find a class of namespace <code>g5\commands</code> implementing the <code>Command</code> interface.
@@ -58,7 +68,7 @@ triggers the execution of
 <pre>g5\commands\ertel\sport\look::execute(['date'])</pre>
 
 <!-- ********************************************************************************* -->
-<h2>One exception</h2>
+<h2 id="2-one-exception">One exception</h2>
 
 This mechanism proved to be sufficient for most cases. It is convenient because it permits to add new commands which can be used directly without having to change a configuration, but couldn't fill the need to handle Gauquelin files of series A. For example, to have the ability to issue commands like
 <br><code>php run-g5.php gauq A1 tmp2db</code>
