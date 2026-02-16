@@ -41,7 +41,7 @@ This page describes how the notion of person is handled in g5 database.
 
 <article>
 
-<nav class="toc">
+<nav class="pagetoc" aria-label="Table of contents">
     <ul>
         <li>
             <a href="#1-person-ids">Person ids</a>
@@ -197,13 +197,10 @@ name:
         <br>Rules:
         <ul class="margin-top0">
             <li>
-                All persons in the database either have <code>name.given</code> and <code>name.family</code> filled, or <code>name.full</code> filled.
+                <code>name.given</code> and <code>name.family</code> are either both filled or both null.
             </li>
             <li>
-                If <code>name.full</code> is filled, then both <code>name.given</code> and <code>name.family</code> are empty.
-            </li>
-            <li>
-                <code>name.given</code> and <code>name.family</code> are either both filled or both empty.
+                If <code>name.full</code> is filled, then both <code>name.given</code> and <code>name.family</code> are null.
             </li>
             <li>
                 The rule to build the name of a person is : if <code>name.full</code> is not empty, it is used.

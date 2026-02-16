@@ -11,7 +11,8 @@
 @media print{
     .left,
     .right,
-    .prevnext{
+    .prevnext,
+    aside.right-block{
         display:none;
     }
 }
@@ -90,6 +91,7 @@ body{
     flex:1 1 85%;
     order:2; /* In the html code, write .left sidebar after .content area */
     padding:1rem .5rem 2rem 1rem;
+    overflow-y: auto;            /* independent vertical scroll */
 }
 .left{
     flex:1 1 var(--left-width);
@@ -101,6 +103,7 @@ body{
     background:var(--left-bg-color);
     border-right:var(--left-border);
     box-shadow:var(--left-shadow);
+    overflow-y: auto;            /* independent vertical scroll */
 }
 .left li{
     list-style:none;
@@ -189,7 +192,7 @@ article{
     line-height:2;
 }
 
-.toc{
+.pagetoc{
     display:inline-block;
     background: rgb(207,236,23);
     background: radial-gradient(circle, rgba(207,236,23,0.0578) 17%, rgba(193,236,245,0.3827) 40%, rgba(213,235,204,0.4415) 47%); 
@@ -200,9 +203,16 @@ article{
     font-family:Arial,Helvetica,sans-serif;
     line-height:1.6;
 }
-.toc ul{list-style-type:none;margin:0;}
-.toc ul>li{}
-.toc>ul>li>a{font-weight:bold;}
+.pagetoc ul{
+    list-style-type:none;
+    padding-left:1rem;
+    margin:0;
+}
+.pagetoc ul>li{}
+.pagetoc>ul>li>a{
+    font-weight:bold;
+}
+
 
 .intro{
     font-size:1.2rem;
