@@ -54,7 +54,8 @@ class Deathfr {
             $path = self::sqlitePath();
             if(!is_file($path)){
                 echo "ERROR: sqlite database '$path' does not exist\n"
-                    . "Call first Deathfr::initializeSqlite() to create it\n";
+                    . "You need to run the command:\n"
+                    . "php run-g5.php enrich deathfr init\n";
                 return null;
             }
             self::$sqlite = new \PDO('sqlite:' . $path);

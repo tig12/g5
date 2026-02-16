@@ -1,7 +1,10 @@
 <?php
 /********************************************************************************
+    Matches the death-fr sqlite database with g5 database to build 2 csv files in dat/tmp/enrich/death-fr:
+    - death-fr-ok.csv       contains matches that can be included in g5 without human checks.
+    - death-fr-check.csv    contains matches that need to be checked by a human.
     
-    Matches the sqlite database with g5 database to build a csv with matching candidates.
+    Once death-fr-check.csv is checked, these files can be copied in data/raw/enrich/death-fr to be versioned by the program.
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2026-01-30 10:08:15+01:00, Thierry Graff : creation
@@ -63,11 +66,11 @@ class sqlite2csv implements Command {
                     //
                     // compare g5 / sqlite
                     //
-                    $d1 = self::stringDistance($sqlite_person['fname'], $g5_person->getFamilyName());
+                    $d1 = self::stringDistance($sqlite_person['fname'], $g5_person->data['name']['family']);
                     if($d1 > 2){
                         continue;
                     }
-                    $d2 = self::stringDistance($sqlite_person['gname'], $g5_person->getGivenName());
+                    $d2 = self::stringDistance($sqlite_person['gname'], $g5_person->data['name']['given']);
                     if($d2 > 2){
                         continue;
                     }
