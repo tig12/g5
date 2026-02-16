@@ -65,13 +65,15 @@ background: radial-gradient(circle, rgba(231,61,10,0.9) 0%, rgba(156,49,18,0.9) 
 
 
 /* ================ Site layout ================ */
-html{height:100%;}
+html{
+    height:100%;
+}
 
 body{
+    height:100%;
     display:flex;
     flex-direction:column;
     font-family:"roboto flex",sans-serif;
-    height:100%;
     line-height:1.4;
     padding-top:0;
     padding-left:0;
@@ -81,9 +83,9 @@ body{
 
 /* .container = direct children of body */
 .container{ 
-   flex:1 0 auto;
-   display:flex;
-   flex-flow:row wrap;
+    display: flex;
+    flex: 1 1 auto;
+    min-height: 0;
 }
 
 /* .right, .left and .content = direct children of .container */
@@ -91,7 +93,8 @@ body{
     flex:1 1 85%;
     order:2; /* In the html code, write .left sidebar after .content area */
     padding:1rem .5rem 2rem 1rem;
-    overflow-y: auto;            /* independent vertical scroll */
+    overflow-y:auto;            /* independent vertical scroll */
+    min-height:0;               /* needed for vertical scrolling */
 }
 .left{
     flex:1 1 var(--left-width);
@@ -103,7 +106,8 @@ body{
     background:var(--left-bg-color);
     border-right:var(--left-border);
     box-shadow:var(--left-shadow);
-    overflow-y: auto;            /* independent vertical scroll */
+    overflow-y:auto;            /* independent vertical scroll */
+    min-height:0;               /* needed for vertical scrolling */
 }
 .left li{
     list-style:none;

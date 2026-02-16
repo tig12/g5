@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Test overflow</title>
+    <style>
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0;
+}
+
+.container {
+    flex: 1 1 auto;
+    display: flex;
+    min-height: 0;
+}
+
+.content {
+    flex: 1 1 85%;
+    order: 2;
+    padding: 1rem .5rem 2rem 1rem;
+    overflow-y: auto;
+    min-height: 0;
+    background:lightgreen;
+}
+
+.left {
+    flex: 0 0 250px; /* example fixed width */
+    order: 1;
+    overflow-y: auto;
+    min-height: 0;
+    background:lightyellow;
+}
+    </style>
+</head>
+<body>
+<div class="container">
+<div class="content">
+<nav class="prevnext">
+    <a class="topage" rel="" href="#topage">&#10148;</a>
+    <a class="top" href="index.html">&uarr;</a>
+    <a class="prev" rel="prev" href=".html">&larr;</a>
+    <a class="next" rel="next" href=".html">&rarr;</a>
+</nav>
+<main>
+<header id="topage">
+<h1>TEST</h1>
+<div class="intro">intro</div>
+</header>
+<article>
+
+I have this html :
+
+And this css:
+
+html{height:100%;}
+body{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+}
+/* .container = direct children of body */
+.container{ 
+   flex:1 0 auto;
+   display:flex;
+   flex-flow:row wrap;
+}
+
+/* .right, .left and .content = direct children of .container */
+.content{
+    flex:1 1 85%;
+    order:2; /* In the html code, write .left sidebar after .content area */
+    padding:1rem .5rem 2rem 1rem;
+    overflow-y:auto;            /* independent vertical scroll */
+}
+.left{
+    flex:1 1 var(--left-width);
+    order:1; /* In the html code, write .left sidebar after .content area */
+    overflow-y:auto;            /* independent vertical scroll */
+}
+
+Why do the overflow-y:auto; does not make .content and .left elements scroll indepndantly ?</nav>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
+End of article
+</article>
+</main>
+</div><!-- end class="content" -->
+<aside class="left">
+<nav>
+Begin nav
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
+</aside>
+</div><!-- end class="container" -->
+</body>
+</html>
+
