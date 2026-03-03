@@ -16,6 +16,17 @@ use tiglib\filesystem\yieldFile;
 
 class raw2sqlite implements Command {
     
+    /** 
+        Dates smaller or equal than this string are considered as invalid.
+    **/
+    const OVERMIN_YEAR = '1800';
+    
+    /** 
+        Dates greater or equal than this string are considered as invalid.
+        WARNING - this must be changed if the program is executed with death dates after 2025.
+    **/
+    const OVERMAX_YEAR = '2026';
+    
     const string QUERY_INSERT = <<<SQL
 insert into person(
     fname,
@@ -199,6 +210,11 @@ SQL;
                 self::report($line, self::ERR_BDAY);
                 return [[], false];
             }
+            if($y <= self::OVERMIN_YEAR){
+                self::$nErrors[self::ERR_BDAY]++;
+                self::report($line, self::ERR_BDAY);
+                return [[], false];
+            }
             $fields['bday'] = "$y-$m-$d";
             // birth place code
             $fields['bcode'] = substr($line, 89, 5);
@@ -212,6 +228,11 @@ SQL;
             $m = substr($tmp, 4, 2);
             $d = substr($tmp, 6);
             if(checkdate($m, $d, $y) === false){
+                self::$nErrors[self::ERR_DDAY]++;
+                self::report($line, self::ERR_DDAY);
+                return [[], false];
+            }
+            if($y >= self::OVERMAX_YEAR){
                 self::$nErrors[self::ERR_DDAY]++;
                 self::report($line, self::ERR_DDAY);
                 return [[], false];

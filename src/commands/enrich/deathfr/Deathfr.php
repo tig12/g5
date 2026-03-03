@@ -1,7 +1,8 @@
 <?php
 /******************************************************************************
 
-    Contains code relate to more than one command
+    Contains code related to more than one command of this namespace.
+    
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2026-01-27 12:14:34+01:00, Thierry Graff : Creation
 ********************************************************************************/

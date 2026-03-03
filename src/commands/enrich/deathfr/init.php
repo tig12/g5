@@ -1,7 +1,7 @@
 <?php
 /********************************************************************************
     
-    Initializes the local sqlite database.
+    Initializes the local sqlite database containing data from https://www.data.gouv.fr/datasets/fichier-des-personnes-decedees.
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2026-01-28 22:36:11+01:00, Thierry Graff : creation

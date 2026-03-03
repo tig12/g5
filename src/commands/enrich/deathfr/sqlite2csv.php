@@ -33,9 +33,11 @@ class sqlite2csv implements Command {
         //
         // check params
         //
-        $msg = "this command needs one parameter, indicating a date or a date range\n"
+        $msg = "this command needs zero or one parameter\n"
                 . "Ex: php run-g5.php enrich deathfr sqlite2csv\n"
-                . "    php run-g5.php enrich deathfr sqlite2csv bachelier-louis-1870-03-11\n";
+                . "    (0 parameter => match all g5 persons)\n"
+                . "    php run-g5.php enrich deathfr sqlite2csv bachelier-louis-1870-03-11\n"
+                . "    (1 parameter => match only one g5 person)\n";
         if(count($params) > 1){
             return "INVALID CALL: $msg";
         }
@@ -134,7 +136,6 @@ class sqlite2csv implements Command {
     **/
     public static function getG5Persons(string $slug=''): array {
         $res = [];
-        //$query = 'select id,slug,name,birth,death from person';
         $query = 'select slug from person';
         if($slug != ''){
             $query .= " where slug='$slug'";

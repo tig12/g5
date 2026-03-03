@@ -7,6 +7,11 @@
     @history    2017-04-27 09:46:32+02:00, Thierry Graff : Creation 
 **/
 
+if(!defined('DS')){
+    // to use outside a call from run-g5.php (for ex phpunit)
+    define('DS', DIRECTORY_SEPARATOR);
+}
+
 // autoloads for vendor code
 $rootdir = dirname(dirname(__DIR__));
 require_once implode(DS, [$rootdir, 'vendor', 'tig12', 'tiglib', 'autoload.php']);

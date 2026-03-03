@@ -26,4 +26,4 @@ GNAME       Given name
 BDAY        Birth day
 BPLACE      Birth place
 DDAY        Death date
-DCode       Death code
+DCODE       Death code

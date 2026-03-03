@@ -1,7 +1,7 @@
 <?php
 /********************************************************************************
     
-    Updates opengauquelin database from files located in data/db/enrich/death
+    Updates opengauquelin database from files located in data/db/enrich/death-fr
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2026-02-01 16:45:07+01:00, Thierry Graff : creation
