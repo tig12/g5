@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
-
+#
 # Helper script to download data from data.gouv.fr to local machine
+# It downloads the data.gouv.fr txt files listed in urls.txt
+#
 # usage: ./download.sh /path/to/data/tmp/enrich/death-fr/raw
+#
 
 if [ $# -eq 0 ]; then
     echo "This script must be called with an argument (the directory where the data will be stored)"

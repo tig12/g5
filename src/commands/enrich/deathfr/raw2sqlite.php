@@ -3,7 +3,7 @@
     
     Fills the sqlite database with the contents of the files retrieved from data.gouv.fr
     
-    php run-g5.php enrich deathfr raw2sqlite 1970-2025 > data/tmp/enrich/death-fr/sqlite-build-report-2026-02-22.log
+    php run-g5.php enrich deathfr raw2sqlite 1970-2025 full > data/tmp/enrich/death-fr/sqlite-build-report-2026-02-22.log
     
     @license    GPL - conforms to file LICENCE located in root directory of current repository.
     @history    2026-01-28 22:36:21+01:00, Thierry Graff : creation
@@ -13,6 +13,7 @@ namespace g5\commands\enrich\deathfr;
 use g5\app\Config;
 use tiglib\patterns\Command;
 use tiglib\filesystem\yieldFile;
+use tiglib\time\diff;
 
 class raw2sqlite implements Command {
     
@@ -84,25 +85,38 @@ SQL;
         self::ERR_EXCEPTION =>  "exception",
     ];
     
+    const array PARAM_POSSIBLE_VARIANTS = [
+        'full',
+        'test',
+        '1y',
+    ];
+    
     /** 
-        @param $params Array containing one element: a string indicating a date or a date range
+        @param $params  Array containing two elements:
+                        - a string indicating a date or a date range, ex 1970-1986
+                        - a string indicating the variant of the database to generate
         @return Empty string, echoes its output
     **/
     public static function execute($params=[]) {
         //
         // check params
         //
-        $msg = "this command needs one parameter, indicating a date or a date range\n"
-                . "Ex: php run-g5.php enrich deathfr raw2sqlite 1970\n"
-                . "    php run-g5.php enrich deathfr raw2sqlite 1970-1980\n";
-        if(count($params) != 1){
-            return "INVALID CALL: $msg";
+        $usage = "this command needs two parameters:\n"
+                . "- First parameter indicates a date or a date range, like \"1970\" or \"1970-2025\"\n"
+                . "- Second parameter indicates the variant of the database to generate.\n"
+                . "  Supported parameters are:\n"
+                . "  \"full\": generates the complete database\n"
+                . "  \"test\": generates a database containing only the 10 first lines in the date range\n"
+                . "  \"1y\": generates a database containing eliminating the persons deceased before their first birthday\n"
+                . "Ex: php run-g5.php enrich deathfr raw2sqlite 1970 full\n"
+                . "    php run-g5.php enrich deathfr raw2sqlite 1970-1980 1y\n";
+        if(count($params) != 2){
+            return "INVALID CALL: $usage";
         }
-        
+        // years
         $years = [];
         $p_year = '/^\d{4}$/';
         $p_range = '/^\d{4}-\d{4}$/';
-        
         preg_match($p_year, $params[0], $m);
         if(count($m) == 1){
             $years[] = $m[0];
@@ -115,18 +129,30 @@ SQL;
                 $years = range($from, $to); // if $to > $from, range() returns years from $to to $from
             }
             else {
-                return "INVALID PARAMETER: {$params[0]}\n$msg";
+                return "INVALID PARAMETER: {$params[0]}\n$usage";
             }
+        }
+        // variant
+        $variant = $params[1];
+        if(!in_array($variant, self::PARAM_POSSIBLE_VARIANTS)){
+            return "INVALID PARAMETER: \"{$params[1]}\"\n$usage";
         }
         //
         // main loop
         //
         $sqlite = Deathfr::sqliteConnection();
+        if(is_null($sqlite)){
+            return "ERROR: Impossible to connect to sqlite database " . Deathfr::sqlitePath() . "\n"
+                . "First execute:\nphp run-g5.php enrich deathfr init\n";
+        }
         self::$insert_stmt = $sqlite->prepare(self::QUERY_INSERT);
         
         $t1 = microtime(true);
         foreach($years as $y){
-            self::processYear($y);
+            self::processYear($y, $variant);
+            if($variant == 'test'){
+                break;
+            }
         }
         $t2 = microtime(true);
         $dt = round($t2 - $t1, 2);
@@ -146,19 +172,25 @@ SQL;
         echo "=> skipped $nDateSkipped lines because of date problem\n";
     }
     
-    private static function processYear(string $y): void {
+    private static function processYear(string $y, string $variant): void {
         echo "======= Processing year $y =======\n";
         $t1 = microtime(true);
         $sqlite = Deathfr::sqliteConnection();
         $sqlite->beginTransaction();
         $file = 'compress.bzip2://' . Config::$data['dirs']['ROOT'] . DS . Deathfr::tmpDir() . DS . 'raw' . DS . "deces-$y.txt.bz2";
         try{
+            $i = 0;
             foreach(yieldFile::loop($file) as $line){
                 self::$n++;
-                [$fields, $ok] = self::parseLine($line);
+                [$fields, $ok] = self::parseLine($line, $variant);
                 if($ok) {
                     self::$insert_stmt->execute($fields);
                     self::$nInserted++;
+                }
+                $i++;
+                if($variant == 'test' && $i == 10){
+                    echo "========\nTEST RUN: BREAK LOOP AT $i\n=======\n";
+                    break;
                 }
             }
         }
@@ -181,7 +213,7 @@ SQL;
             - $ok:      boolean, true if the dates are valid and coherent.
         See file README for line format and example.
     **/
-    public static function parseLine(string $line): array {
+    public static function parseLine(string $line, string $variant): array {
         try{
             $fields = [];
             // name
@@ -243,6 +275,13 @@ SQL;
                 self::$nErrors[self::ERR_POSTERIOR]++;
                 self::report($line, self::ERR_POSTERIOR);
                 return [[], false];
+            }
+            // filter
+            if($variant == '1y'){
+                $diff = diff::compute(new \DateTime($fields['bday']), new \DateTime($fields['dday']), 'D', 1);
+                if($diff < 365.25){
+                    return [[], false];
+                }
             }
             // death code
             $fields['dcode'] = substr($line, 162, 5);

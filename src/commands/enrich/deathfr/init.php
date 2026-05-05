@@ -46,11 +46,11 @@ create table person(
     fname varchar(80),
     gname varchar(80),
     sex character(1),
-    bday character(8),
+    bday character(10),
     bcode character(5),
     bname character(30),
     bcountry varchar(80),
-    dday character(8),
+    dday character(10),
     dcode character(5),
     dact character(9)
 )

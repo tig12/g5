@@ -8,10 +8,9 @@ From 1970 to 2025: contains 28 755 067 persons.
 
 Process
 --------------------------------------------------------------------------------------------------
-- Download data from data.gouv.fr site and compress them in bz2.
+- Download data from data.gouv.fr site and compress them in bz2 (you can use the script download-raw/download.sh).
 Raw data files must be stored in .bz2 files in data/tmp/enrich/death-fr/raw (or a symlink must exist)
 Each file must contain data of one year and be named deces-YYYY.txt.bz2 (ex: deces-1970.txt.bz2)
-You can use script download-raw/download.sh
 
 - Generate the local sqlite database:
 php run-g5.php enrich deathfr raw2sqlite
